@@ -33,20 +33,20 @@ module Network.Google.Resource.Reports.Activities.Watch
     , awQuotaUser
     , awPrettyPrint
     , awStartTime
-    , awUserIp
+    , awUserIP
     , awFilters
+    , awChannel
     , awCustomerId
-    , awActorIpAddress
+    , awActorIPAddress
     , awKey
     , awEndTime
     , awApplicationName
     , awPageToken
-    , awOauthToken
+    , awOAuthToken
     , awEventName
     , awUserKey
     , awMaxResults
     , awFields
-    , awAlt
     ) where
 
 import           Network.Google.AdminReports.Types
@@ -68,15 +68,16 @@ type ActivitiesWatchResource =
                          QueryParam "filters" Text :>
                            QueryParam "customerId" Text :>
                              QueryParam "actorIpAddress" Text :>
-                               QueryParam "key" Text :>
+                               QueryParam "key" Key :>
                                  QueryParam "endTime" Text :>
                                    QueryParam "pageToken" Text :>
-                                     QueryParam "oauth_token" Text :>
+                                     QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "eventName" Text :>
                                          QueryParam "maxResults" Int32 :>
                                            QueryParam "fields" Text :>
-                                             QueryParam "alt" Alt :>
-                                               Post '[JSON] Channel
+                                             QueryParam "alt" AltJSON :>
+                                               ReqBody '[JSON] Channel :>
+                                                 Post '[JSON] Channel
 
 -- | Push changes to activities
 --
@@ -85,20 +86,20 @@ data ActivitiesWatch' = ActivitiesWatch'
     { _awQuotaUser       :: !(Maybe Text)
     , _awPrettyPrint     :: !Bool
     , _awStartTime       :: !(Maybe Text)
-    , _awUserIp          :: !(Maybe Text)
+    , _awUserIP          :: !(Maybe Text)
     , _awFilters         :: !(Maybe Text)
+    , _awChannel         :: !Channel
     , _awCustomerId      :: !(Maybe Text)
-    , _awActorIpAddress  :: !(Maybe Text)
-    , _awKey             :: !(Maybe Text)
+    , _awActorIPAddress  :: !(Maybe Text)
+    , _awKey             :: !(Maybe Key)
     , _awEndTime         :: !(Maybe Text)
     , _awApplicationName :: !Text
     , _awPageToken       :: !(Maybe Text)
-    , _awOauthToken      :: !(Maybe Text)
+    , _awOAuthToken      :: !(Maybe OAuthToken)
     , _awEventName       :: !(Maybe Text)
     , _awUserKey         :: !Text
     , _awMaxResults      :: !(Maybe Int32)
     , _awFields          :: !(Maybe Text)
-    , _awAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivitiesWatch'' with the minimum fields required to make a request.
@@ -111,13 +112,15 @@ data ActivitiesWatch' = ActivitiesWatch'
 --
 -- * 'awStartTime'
 --
--- * 'awUserIp'
+-- * 'awUserIP'
 --
 -- * 'awFilters'
 --
+-- * 'awChannel'
+--
 -- * 'awCustomerId'
 --
--- * 'awActorIpAddress'
+-- * 'awActorIPAddress'
 --
 -- * 'awKey'
 --
@@ -127,7 +130,7 @@ data ActivitiesWatch' = ActivitiesWatch'
 --
 -- * 'awPageToken'
 --
--- * 'awOauthToken'
+-- * 'awOAuthToken'
 --
 -- * 'awEventName'
 --
@@ -136,31 +139,30 @@ data ActivitiesWatch' = ActivitiesWatch'
 -- * 'awMaxResults'
 --
 -- * 'awFields'
---
--- * 'awAlt'
 activitiesWatch'
-    :: Text -- ^ 'applicationName'
+    :: Channel -- ^ 'Channel'
+    -> Text -- ^ 'applicationName'
     -> Text -- ^ 'userKey'
     -> ActivitiesWatch'
-activitiesWatch' pAwApplicationName_ pAwUserKey_ =
+activitiesWatch' pAwChannel_ pAwApplicationName_ pAwUserKey_ =
     ActivitiesWatch'
     { _awQuotaUser = Nothing
     , _awPrettyPrint = True
     , _awStartTime = Nothing
-    , _awUserIp = Nothing
+    , _awUserIP = Nothing
     , _awFilters = Nothing
+    , _awChannel = pAwChannel_
     , _awCustomerId = Nothing
-    , _awActorIpAddress = Nothing
+    , _awActorIPAddress = Nothing
     , _awKey = Nothing
     , _awEndTime = Nothing
     , _awApplicationName = pAwApplicationName_
     , _awPageToken = Nothing
-    , _awOauthToken = Nothing
+    , _awOAuthToken = Nothing
     , _awEventName = Nothing
     , _awUserKey = pAwUserKey_
     , _awMaxResults = Nothing
     , _awFields = Nothing
-    , _awAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -183,14 +185,19 @@ awStartTime
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-awUserIp :: Lens' ActivitiesWatch' (Maybe Text)
-awUserIp = lens _awUserIp (\ s a -> s{_awUserIp = a})
+awUserIP :: Lens' ActivitiesWatch' (Maybe Text)
+awUserIP = lens _awUserIP (\ s a -> s{_awUserIP = a})
 
 -- | Event parameters in the form [parameter1 name][operator][parameter1
 -- value],[parameter2 name][operator][parameter2 value],...
 awFilters :: Lens' ActivitiesWatch' (Maybe Text)
 awFilters
   = lens _awFilters (\ s a -> s{_awFilters = a})
+
+-- | Multipart request metadata.
+awChannel :: Lens' ActivitiesWatch' Channel
+awChannel
+  = lens _awChannel (\ s a -> s{_awChannel = a})
 
 -- | Represents the customer for which the data is to be fetched.
 awCustomerId :: Lens' ActivitiesWatch' (Maybe Text)
@@ -199,15 +206,15 @@ awCustomerId
 
 -- | IP Address of host where the event was performed. Supports both IPv4 and
 -- IPv6 addresses.
-awActorIpAddress :: Lens' ActivitiesWatch' (Maybe Text)
-awActorIpAddress
-  = lens _awActorIpAddress
-      (\ s a -> s{_awActorIpAddress = a})
+awActorIPAddress :: Lens' ActivitiesWatch' (Maybe Text)
+awActorIPAddress
+  = lens _awActorIPAddress
+      (\ s a -> s{_awActorIPAddress = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-awKey :: Lens' ActivitiesWatch' (Maybe Text)
+awKey :: Lens' ActivitiesWatch' (Maybe Key)
 awKey = lens _awKey (\ s a -> s{_awKey = a})
 
 -- | Return events which occured at or before this time.
@@ -227,9 +234,9 @@ awPageToken
   = lens _awPageToken (\ s a -> s{_awPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-awOauthToken :: Lens' ActivitiesWatch' (Maybe Text)
-awOauthToken
-  = lens _awOauthToken (\ s a -> s{_awOauthToken = a})
+awOAuthToken :: Lens' ActivitiesWatch' (Maybe OAuthToken)
+awOAuthToken
+  = lens _awOAuthToken (\ s a -> s{_awOAuthToken = a})
 
 -- | Name of the event being queried.
 awEventName :: Lens' ActivitiesWatch' (Maybe Text)
@@ -252,29 +259,30 @@ awMaxResults
 awFields :: Lens' ActivitiesWatch' (Maybe Text)
 awFields = lens _awFields (\ s a -> s{_awFields = a})
 
--- | Data format for the response.
-awAlt :: Lens' ActivitiesWatch' Alt
-awAlt = lens _awAlt (\ s a -> s{_awAlt = a})
+instance GoogleAuth ActivitiesWatch' where
+        authKey = awKey . _Just
+        authToken = awOAuthToken . _Just
 
 instance GoogleRequest ActivitiesWatch' where
         type Rs ActivitiesWatch' = Channel
         request = requestWithRoute defReq adminReportsURL
         requestWithRoute r u ActivitiesWatch'{..}
           = go _awQuotaUser (Just _awPrettyPrint) _awStartTime
-              _awUserIp
+              _awUserIP
               _awFilters
               _awCustomerId
-              _awActorIpAddress
+              _awActorIPAddress
               _awKey
               _awEndTime
               _awApplicationName
               _awPageToken
-              _awOauthToken
+              _awOAuthToken
               _awEventName
               _awUserKey
               _awMaxResults
               _awFields
-              (Just _awAlt)
+              (Just AltJSON)
+              _awChannel
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ActivitiesWatchResource)

@@ -32,14 +32,13 @@ module Network.Google.Resource.Gmail.Users.Drafts.List
     -- * Request Lenses
     , udlQuotaUser
     , udlPrettyPrint
-    , udlUserIp
+    , udlUserIP
     , udlUserId
     , udlKey
     , udlPageToken
-    , udlOauthToken
+    , udlOAuthToken
     , udlMaxResults
     , udlFields
-    , udlAlt
     ) where
 
 import           Network.Google.Gmail.Types
@@ -53,12 +52,12 @@ type UsersDraftsListResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
+               QueryParam "key" Key :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "oauth_token" Text :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "maxResults" Word32 :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :>
+                         QueryParam "alt" AltJSON :>
                            Get '[JSON] ListDraftsResponse
 
 -- | Lists the drafts in the user\'s mailbox.
@@ -67,14 +66,13 @@ type UsersDraftsListResource =
 data UsersDraftsList' = UsersDraftsList'
     { _udlQuotaUser   :: !(Maybe Text)
     , _udlPrettyPrint :: !Bool
-    , _udlUserIp      :: !(Maybe Text)
+    , _udlUserIP      :: !(Maybe Text)
     , _udlUserId      :: !Text
-    , _udlKey         :: !(Maybe Text)
+    , _udlKey         :: !(Maybe Key)
     , _udlPageToken   :: !(Maybe Text)
-    , _udlOauthToken  :: !(Maybe Text)
+    , _udlOAuthToken  :: !(Maybe OAuthToken)
     , _udlMaxResults  :: !Word32
     , _udlFields      :: !(Maybe Text)
-    , _udlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDraftsList'' with the minimum fields required to make a request.
@@ -85,7 +83,7 @@ data UsersDraftsList' = UsersDraftsList'
 --
 -- * 'udlPrettyPrint'
 --
--- * 'udlUserIp'
+-- * 'udlUserIP'
 --
 -- * 'udlUserId'
 --
@@ -93,13 +91,11 @@ data UsersDraftsList' = UsersDraftsList'
 --
 -- * 'udlPageToken'
 --
--- * 'udlOauthToken'
+-- * 'udlOAuthToken'
 --
 -- * 'udlMaxResults'
 --
 -- * 'udlFields'
---
--- * 'udlAlt'
 usersDraftsList'
     :: Text
     -> UsersDraftsList'
@@ -107,14 +103,13 @@ usersDraftsList' pUdlUserId_ =
     UsersDraftsList'
     { _udlQuotaUser = Nothing
     , _udlPrettyPrint = True
-    , _udlUserIp = Nothing
+    , _udlUserIP = Nothing
     , _udlUserId = pUdlUserId_
     , _udlKey = Nothing
     , _udlPageToken = Nothing
-    , _udlOauthToken = Nothing
+    , _udlOAuthToken = Nothing
     , _udlMaxResults = 100
     , _udlFields = Nothing
-    , _udlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -132,9 +127,9 @@ udlPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-udlUserIp :: Lens' UsersDraftsList' (Maybe Text)
-udlUserIp
-  = lens _udlUserIp (\ s a -> s{_udlUserIp = a})
+udlUserIP :: Lens' UsersDraftsList' (Maybe Text)
+udlUserIP
+  = lens _udlUserIP (\ s a -> s{_udlUserIP = a})
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
@@ -145,7 +140,7 @@ udlUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-udlKey :: Lens' UsersDraftsList' (Maybe Text)
+udlKey :: Lens' UsersDraftsList' (Maybe Key)
 udlKey = lens _udlKey (\ s a -> s{_udlKey = a})
 
 -- | Page token to retrieve a specific page of results in the list.
@@ -154,10 +149,10 @@ udlPageToken
   = lens _udlPageToken (\ s a -> s{_udlPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-udlOauthToken :: Lens' UsersDraftsList' (Maybe Text)
-udlOauthToken
-  = lens _udlOauthToken
-      (\ s a -> s{_udlOauthToken = a})
+udlOAuthToken :: Lens' UsersDraftsList' (Maybe OAuthToken)
+udlOAuthToken
+  = lens _udlOAuthToken
+      (\ s a -> s{_udlOAuthToken = a})
 
 -- | Maximum number of drafts to return.
 udlMaxResults :: Lens' UsersDraftsList' Word32
@@ -170,22 +165,22 @@ udlFields :: Lens' UsersDraftsList' (Maybe Text)
 udlFields
   = lens _udlFields (\ s a -> s{_udlFields = a})
 
--- | Data format for the response.
-udlAlt :: Lens' UsersDraftsList' Alt
-udlAlt = lens _udlAlt (\ s a -> s{_udlAlt = a})
+instance GoogleAuth UsersDraftsList' where
+        authKey = udlKey . _Just
+        authToken = udlOAuthToken . _Just
 
 instance GoogleRequest UsersDraftsList' where
         type Rs UsersDraftsList' = ListDraftsResponse
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersDraftsList'{..}
-          = go _udlQuotaUser (Just _udlPrettyPrint) _udlUserIp
+          = go _udlQuotaUser (Just _udlPrettyPrint) _udlUserIP
               _udlUserId
               _udlKey
               _udlPageToken
-              _udlOauthToken
+              _udlOAuthToken
               (Just _udlMaxResults)
               _udlFields
-              (Just _udlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersDraftsListResource)

@@ -33,7 +33,7 @@ module Network.Google.Resource.Games.Scores.ListWindow
     -- * Request Lenses
     , slwQuotaUser
     , slwPrettyPrint
-    , slwUserIp
+    , slwUserIP
     , slwCollection
     , slwTimeSpan
     , slwReturnTopIfAbsent
@@ -42,10 +42,9 @@ module Network.Google.Resource.Games.Scores.ListWindow
     , slwLanguage
     , slwResultsAbove
     , slwPageToken
-    , slwOauthToken
+    , slwOAuthToken
     , slwMaxResults
     , slwFields
-    , slwAlt
     ) where
 
 import           Network.Google.Games.Types
@@ -65,14 +64,14 @@ type ScoresListWindowResource =
                    QueryParam "timeSpan" GamesScoresListWindowTimeSpan
                      :>
                      QueryParam "returnTopIfAbsent" Bool :>
-                       QueryParam "key" Text :>
+                       QueryParam "key" Key :>
                          QueryParam "language" Text :>
                            QueryParam "resultsAbove" Int32 :>
                              QueryParam "pageToken" Text :>
-                               QueryParam "oauth_token" Text :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "maxResults" Int32 :>
                                    QueryParam "fields" Text :>
-                                     QueryParam "alt" Alt :>
+                                     QueryParam "alt" AltJSON :>
                                        Get '[JSON] LeaderboardScores
 
 -- | Lists the scores in a leaderboard around (and including) a player\'s
@@ -82,19 +81,18 @@ type ScoresListWindowResource =
 data ScoresListWindow' = ScoresListWindow'
     { _slwQuotaUser         :: !(Maybe Text)
     , _slwPrettyPrint       :: !Bool
-    , _slwUserIp            :: !(Maybe Text)
+    , _slwUserIP            :: !(Maybe Text)
     , _slwCollection        :: !GamesScoresListWindowCollection
     , _slwTimeSpan          :: !GamesScoresListWindowTimeSpan
     , _slwReturnTopIfAbsent :: !(Maybe Bool)
     , _slwLeaderboardId     :: !Text
-    , _slwKey               :: !(Maybe Text)
+    , _slwKey               :: !(Maybe Key)
     , _slwLanguage          :: !(Maybe Text)
     , _slwResultsAbove      :: !(Maybe Int32)
     , _slwPageToken         :: !(Maybe Text)
-    , _slwOauthToken        :: !(Maybe Text)
+    , _slwOAuthToken        :: !(Maybe OAuthToken)
     , _slwMaxResults        :: !(Maybe Int32)
     , _slwFields            :: !(Maybe Text)
-    , _slwAlt               :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ScoresListWindow'' with the minimum fields required to make a request.
@@ -105,7 +103,7 @@ data ScoresListWindow' = ScoresListWindow'
 --
 -- * 'slwPrettyPrint'
 --
--- * 'slwUserIp'
+-- * 'slwUserIP'
 --
 -- * 'slwCollection'
 --
@@ -123,13 +121,11 @@ data ScoresListWindow' = ScoresListWindow'
 --
 -- * 'slwPageToken'
 --
--- * 'slwOauthToken'
+-- * 'slwOAuthToken'
 --
 -- * 'slwMaxResults'
 --
 -- * 'slwFields'
---
--- * 'slwAlt'
 scoresListWindow'
     :: GamesScoresListWindowCollection -- ^ 'collection'
     -> GamesScoresListWindowTimeSpan -- ^ 'timeSpan'
@@ -139,7 +135,7 @@ scoresListWindow' pSlwCollection_ pSlwTimeSpan_ pSlwLeaderboardId_ =
     ScoresListWindow'
     { _slwQuotaUser = Nothing
     , _slwPrettyPrint = True
-    , _slwUserIp = Nothing
+    , _slwUserIP = Nothing
     , _slwCollection = pSlwCollection_
     , _slwTimeSpan = pSlwTimeSpan_
     , _slwReturnTopIfAbsent = Nothing
@@ -148,10 +144,9 @@ scoresListWindow' pSlwCollection_ pSlwTimeSpan_ pSlwLeaderboardId_ =
     , _slwLanguage = Nothing
     , _slwResultsAbove = Nothing
     , _slwPageToken = Nothing
-    , _slwOauthToken = Nothing
+    , _slwOAuthToken = Nothing
     , _slwMaxResults = Nothing
     , _slwFields = Nothing
-    , _slwAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -169,9 +164,9 @@ slwPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-slwUserIp :: Lens' ScoresListWindow' (Maybe Text)
-slwUserIp
-  = lens _slwUserIp (\ s a -> s{_slwUserIp = a})
+slwUserIP :: Lens' ScoresListWindow' (Maybe Text)
+slwUserIP
+  = lens _slwUserIP (\ s a -> s{_slwUserIP = a})
 
 -- | The collection of scores you\'re requesting.
 slwCollection :: Lens' ScoresListWindow' GamesScoresListWindowCollection
@@ -200,7 +195,7 @@ slwLeaderboardId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-slwKey :: Lens' ScoresListWindow' (Maybe Text)
+slwKey :: Lens' ScoresListWindow' (Maybe Key)
 slwKey = lens _slwKey (\ s a -> s{_slwKey = a})
 
 -- | The preferred language to use for strings returned by this method.
@@ -223,10 +218,10 @@ slwPageToken
   = lens _slwPageToken (\ s a -> s{_slwPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-slwOauthToken :: Lens' ScoresListWindow' (Maybe Text)
-slwOauthToken
-  = lens _slwOauthToken
-      (\ s a -> s{_slwOauthToken = a})
+slwOAuthToken :: Lens' ScoresListWindow' (Maybe OAuthToken)
+slwOAuthToken
+  = lens _slwOAuthToken
+      (\ s a -> s{_slwOAuthToken = a})
 
 -- | The maximum number of leaderboard scores to return in the response. For
 -- any response, the actual number of leaderboard scores returned may be
@@ -241,15 +236,15 @@ slwFields :: Lens' ScoresListWindow' (Maybe Text)
 slwFields
   = lens _slwFields (\ s a -> s{_slwFields = a})
 
--- | Data format for the response.
-slwAlt :: Lens' ScoresListWindow' Alt
-slwAlt = lens _slwAlt (\ s a -> s{_slwAlt = a})
+instance GoogleAuth ScoresListWindow' where
+        authKey = slwKey . _Just
+        authToken = slwOAuthToken . _Just
 
 instance GoogleRequest ScoresListWindow' where
         type Rs ScoresListWindow' = LeaderboardScores
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u ScoresListWindow'{..}
-          = go _slwQuotaUser (Just _slwPrettyPrint) _slwUserIp
+          = go _slwQuotaUser (Just _slwPrettyPrint) _slwUserIP
               _slwCollection
               (Just _slwTimeSpan)
               _slwReturnTopIfAbsent
@@ -258,10 +253,10 @@ instance GoogleRequest ScoresListWindow' where
               _slwLanguage
               _slwResultsAbove
               _slwPageToken
-              _slwOauthToken
+              _slwOAuthToken
               _slwMaxResults
               _slwFields
-              (Just _slwAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ScoresListWindowResource)

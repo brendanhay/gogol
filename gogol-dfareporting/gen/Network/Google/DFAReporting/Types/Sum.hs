@@ -453,9 +453,9 @@ data UserRolePermissionAvailability
       -- ^ @ACCOUNT_BY_DEFAULT@
     | NotAvailableByDefault
       -- ^ @NOT_AVAILABLE_BY_DEFAULT@
-    | SubaccountAndAccountAlways
+    | SubAccountAndAccountAlways
       -- ^ @SUBACCOUNT_AND_ACCOUNT_ALWAYS@
-    | SubaccountAndAccountByDefault
+    | SubAccountAndAccountByDefault
       -- ^ @SUBACCOUNT_AND_ACCOUNT_BY_DEFAULT@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -466,8 +466,8 @@ instance FromText UserRolePermissionAvailability where
         "ACCOUNT_ALWAYS" -> Just AccountAlways
         "ACCOUNT_BY_DEFAULT" -> Just AccountByDefault
         "NOT_AVAILABLE_BY_DEFAULT" -> Just NotAvailableByDefault
-        "SUBACCOUNT_AND_ACCOUNT_ALWAYS" -> Just SubaccountAndAccountAlways
-        "SUBACCOUNT_AND_ACCOUNT_BY_DEFAULT" -> Just SubaccountAndAccountByDefault
+        "SUBACCOUNT_AND_ACCOUNT_ALWAYS" -> Just SubAccountAndAccountAlways
+        "SUBACCOUNT_AND_ACCOUNT_BY_DEFAULT" -> Just SubAccountAndAccountByDefault
         _ -> Nothing
 
 instance ToText UserRolePermissionAvailability where
@@ -475,8 +475,8 @@ instance ToText UserRolePermissionAvailability where
         AccountAlways -> "ACCOUNT_ALWAYS"
         AccountByDefault -> "ACCOUNT_BY_DEFAULT"
         NotAvailableByDefault -> "NOT_AVAILABLE_BY_DEFAULT"
-        SubaccountAndAccountAlways -> "SUBACCOUNT_AND_ACCOUNT_ALWAYS"
-        SubaccountAndAccountByDefault -> "SUBACCOUNT_AND_ACCOUNT_BY_DEFAULT"
+        SubAccountAndAccountAlways -> "SUBACCOUNT_AND_ACCOUNT_ALWAYS"
+        SubAccountAndAccountByDefault -> "SUBACCOUNT_AND_ACCOUNT_BY_DEFAULT"
 
 instance FromJSON UserRolePermissionAvailability where
     parseJSON = parseJSONText "UserRolePermissionAvailability"
@@ -1242,11 +1242,11 @@ data CreativeAssetDetectedFeatures
       -- ^ @CANVAS_TEXT@
     | CssAnimations
       -- ^ @CSS_ANIMATIONS@
-    | CssBackgroundSize
+    | CssBackgRoundSize
       -- ^ @CSS_BACKGROUND_SIZE@
-    | CssBorderImage
+    | CssBOrderImage
       -- ^ @CSS_BORDER_IMAGE@
-    | CssBorderRadius
+    | CssBOrderRadius
       -- ^ @CSS_BORDER_RADIUS@
     | CssBoxShadow
       -- ^ @CSS_BOX_SHADOW@
@@ -1360,7 +1360,7 @@ data CreativeAssetDetectedFeatures
       -- ^ @WEBGL@
     | WebSockets
       -- ^ @WEB_SOCKETS@
-    | WebSqlDatabase
+    | WebSQLDatabase
       -- ^ @WEB_SQL_DATABASE@
     | WebWorkers
       -- ^ @WEB_WORKERS@
@@ -1375,9 +1375,9 @@ instance FromText CreativeAssetDetectedFeatures where
         "CANVAS" -> Just Canvas
         "CANVAS_TEXT" -> Just CanvasText
         "CSS_ANIMATIONS" -> Just CssAnimations
-        "CSS_BACKGROUND_SIZE" -> Just CssBackgroundSize
-        "CSS_BORDER_IMAGE" -> Just CssBorderImage
-        "CSS_BORDER_RADIUS" -> Just CssBorderRadius
+        "CSS_BACKGROUND_SIZE" -> Just CssBackgRoundSize
+        "CSS_BORDER_IMAGE" -> Just CssBOrderImage
+        "CSS_BORDER_RADIUS" -> Just CssBOrderRadius
         "CSS_BOX_SHADOW" -> Just CssBoxShadow
         "CSS_COLUMNS" -> Just CssColumns
         "CSS_FLEX_BOX" -> Just CssFlexBox
@@ -1434,7 +1434,7 @@ instance FromText CreativeAssetDetectedFeatures where
         "VIDEO" -> Just Video
         "WEBGL" -> Just Webgl
         "WEB_SOCKETS" -> Just WebSockets
-        "WEB_SQL_DATABASE" -> Just WebSqlDatabase
+        "WEB_SQL_DATABASE" -> Just WebSQLDatabase
         "WEB_WORKERS" -> Just WebWorkers
         _ -> Nothing
 
@@ -1445,9 +1445,9 @@ instance ToText CreativeAssetDetectedFeatures where
         Canvas -> "CANVAS"
         CanvasText -> "CANVAS_TEXT"
         CssAnimations -> "CSS_ANIMATIONS"
-        CssBackgroundSize -> "CSS_BACKGROUND_SIZE"
-        CssBorderImage -> "CSS_BORDER_IMAGE"
-        CssBorderRadius -> "CSS_BORDER_RADIUS"
+        CssBackgRoundSize -> "CSS_BACKGROUND_SIZE"
+        CssBOrderImage -> "CSS_BORDER_IMAGE"
+        CssBOrderRadius -> "CSS_BORDER_RADIUS"
         CssBoxShadow -> "CSS_BOX_SHADOW"
         CssColumns -> "CSS_COLUMNS"
         CssFlexBox -> "CSS_FLEX_BOX"
@@ -1504,7 +1504,7 @@ instance ToText CreativeAssetDetectedFeatures where
         Video -> "VIDEO"
         Webgl -> "WEBGL"
         WebSockets -> "WEB_SOCKETS"
-        WebSqlDatabase -> "WEB_SQL_DATABASE"
+        WebSQLDatabase -> "WEB_SQL_DATABASE"
         WebWorkers -> "WEB_WORKERS"
 
 instance FromJSON CreativeAssetDetectedFeatures where
@@ -1846,30 +1846,30 @@ instance ToJSON DfareportingOrderDocumentsListSortField where
     toJSON = toJSONText
 
 -- | Order of sorted results, default is ASCENDING.
-data DfareportingSubaccountsListSortOrder
-    = DSLSOAscending
+data DfareportingSubAccountsListSortOrder
+    = DSALSOAscending
       -- ^ @ASCENDING@
-    | DSLSODescending
+    | DSALSODescending
       -- ^ @DESCENDING@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable DfareportingSubaccountsListSortOrder
+instance Hashable DfareportingSubAccountsListSortOrder
 
-instance FromText DfareportingSubaccountsListSortOrder where
+instance FromText DfareportingSubAccountsListSortOrder where
     fromText = \case
-        "ASCENDING" -> Just DSLSOAscending
-        "DESCENDING" -> Just DSLSODescending
+        "ASCENDING" -> Just DSALSOAscending
+        "DESCENDING" -> Just DSALSODescending
         _ -> Nothing
 
-instance ToText DfareportingSubaccountsListSortOrder where
+instance ToText DfareportingSubAccountsListSortOrder where
     toText = \case
-        DSLSOAscending -> "ASCENDING"
-        DSLSODescending -> "DESCENDING"
+        DSALSOAscending -> "ASCENDING"
+        DSALSODescending -> "DESCENDING"
 
-instance FromJSON DfareportingSubaccountsListSortOrder where
-    parseJSON = parseJSONText "DfareportingSubaccountsListSortOrder"
+instance FromJSON DfareportingSubAccountsListSortOrder where
+    parseJSON = parseJSONText "DfareportingSubAccountsListSortOrder"
 
-instance ToJSON DfareportingSubaccountsListSortOrder where
+instance ToJSON DfareportingSubAccountsListSortOrder where
     toJSON = toJSONText
 
 data ReportScheduleRepeatsOnWeekDays
@@ -3551,30 +3551,30 @@ instance ToJSON AccountActiveAdSummaryActiveAdsLimitTier where
     toJSON = toJSONText
 
 -- | Field by which to sort the list.
-data DfareportingSubaccountsListSortField
-    = DSLSFID
+data DfareportingSubAccountsListSortField
+    = DSALSFID
       -- ^ @ID@
-    | DSLSFName
+    | DSALSFName
       -- ^ @NAME@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable DfareportingSubaccountsListSortField
+instance Hashable DfareportingSubAccountsListSortField
 
-instance FromText DfareportingSubaccountsListSortField where
+instance FromText DfareportingSubAccountsListSortField where
     fromText = \case
-        "ID" -> Just DSLSFID
-        "NAME" -> Just DSLSFName
+        "ID" -> Just DSALSFID
+        "NAME" -> Just DSALSFName
         _ -> Nothing
 
-instance ToText DfareportingSubaccountsListSortField where
+instance ToText DfareportingSubAccountsListSortField where
     toText = \case
-        DSLSFID -> "ID"
-        DSLSFName -> "NAME"
+        DSALSFID -> "ID"
+        DSALSFName -> "NAME"
 
-instance FromJSON DfareportingSubaccountsListSortField where
-    parseJSON = parseJSONText "DfareportingSubaccountsListSortField"
+instance FromJSON DfareportingSubAccountsListSortField where
+    parseJSON = parseJSONText "DfareportingSubAccountsListSortField"
 
-instance ToJSON DfareportingSubaccountsListSortField where
+instance ToJSON DfareportingSubAccountsListSortField where
     toJSON = toJSONText
 
 -- | Rich media child asset type. This is a read-only field. Applicable to
@@ -4230,9 +4230,9 @@ instance ToJSON FloodlightActivityFloodlightActivityGroupType where
 
 -- | Field by which to sort the list.
 data DfareportingSitesListSortField
-    = DID
+    = DSLSFID
       -- ^ @ID@
-    | DName
+    | DSLSFName
       -- ^ @NAME@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -4240,14 +4240,14 @@ instance Hashable DfareportingSitesListSortField
 
 instance FromText DfareportingSitesListSortField where
     fromText = \case
-        "ID" -> Just DID
-        "NAME" -> Just DName
+        "ID" -> Just DSLSFID
+        "NAME" -> Just DSLSFName
         _ -> Nothing
 
 instance ToText DfareportingSitesListSortField where
     toText = \case
-        DID -> "ID"
-        DName -> "NAME"
+        DSLSFID -> "ID"
+        DSLSFName -> "NAME"
 
 instance FromJSON DfareportingSitesListSortField where
     parseJSON = parseJSONText "DfareportingSitesListSortField"
@@ -4371,11 +4371,11 @@ data CreativeAssetMetadataDetectedFeatures
       -- ^ @CANVAS_TEXT@
     | CAMDFCssAnimations
       -- ^ @CSS_ANIMATIONS@
-    | CAMDFCssBackgroundSize
+    | CAMDFCssBackgRoundSize
       -- ^ @CSS_BACKGROUND_SIZE@
-    | CAMDFCssBorderImage
+    | CAMDFCssBOrderImage
       -- ^ @CSS_BORDER_IMAGE@
-    | CAMDFCssBorderRadius
+    | CAMDFCssBOrderRadius
       -- ^ @CSS_BORDER_RADIUS@
     | CAMDFCssBoxShadow
       -- ^ @CSS_BOX_SHADOW@
@@ -4489,7 +4489,7 @@ data CreativeAssetMetadataDetectedFeatures
       -- ^ @WEBGL@
     | CAMDFWebSockets
       -- ^ @WEB_SOCKETS@
-    | CAMDFWebSqlDatabase
+    | CAMDFWebSQLDatabase
       -- ^ @WEB_SQL_DATABASE@
     | CAMDFWebWorkers
       -- ^ @WEB_WORKERS@
@@ -4504,9 +4504,9 @@ instance FromText CreativeAssetMetadataDetectedFeatures where
         "CANVAS" -> Just CAMDFCanvas
         "CANVAS_TEXT" -> Just CAMDFCanvasText
         "CSS_ANIMATIONS" -> Just CAMDFCssAnimations
-        "CSS_BACKGROUND_SIZE" -> Just CAMDFCssBackgroundSize
-        "CSS_BORDER_IMAGE" -> Just CAMDFCssBorderImage
-        "CSS_BORDER_RADIUS" -> Just CAMDFCssBorderRadius
+        "CSS_BACKGROUND_SIZE" -> Just CAMDFCssBackgRoundSize
+        "CSS_BORDER_IMAGE" -> Just CAMDFCssBOrderImage
+        "CSS_BORDER_RADIUS" -> Just CAMDFCssBOrderRadius
         "CSS_BOX_SHADOW" -> Just CAMDFCssBoxShadow
         "CSS_COLUMNS" -> Just CAMDFCssColumns
         "CSS_FLEX_BOX" -> Just CAMDFCssFlexBox
@@ -4563,7 +4563,7 @@ instance FromText CreativeAssetMetadataDetectedFeatures where
         "VIDEO" -> Just CAMDFVideo
         "WEBGL" -> Just CAMDFWebgl
         "WEB_SOCKETS" -> Just CAMDFWebSockets
-        "WEB_SQL_DATABASE" -> Just CAMDFWebSqlDatabase
+        "WEB_SQL_DATABASE" -> Just CAMDFWebSQLDatabase
         "WEB_WORKERS" -> Just CAMDFWebWorkers
         _ -> Nothing
 
@@ -4574,9 +4574,9 @@ instance ToText CreativeAssetMetadataDetectedFeatures where
         CAMDFCanvas -> "CANVAS"
         CAMDFCanvasText -> "CANVAS_TEXT"
         CAMDFCssAnimations -> "CSS_ANIMATIONS"
-        CAMDFCssBackgroundSize -> "CSS_BACKGROUND_SIZE"
-        CAMDFCssBorderImage -> "CSS_BORDER_IMAGE"
-        CAMDFCssBorderRadius -> "CSS_BORDER_RADIUS"
+        CAMDFCssBackgRoundSize -> "CSS_BACKGROUND_SIZE"
+        CAMDFCssBOrderImage -> "CSS_BORDER_IMAGE"
+        CAMDFCssBOrderRadius -> "CSS_BORDER_RADIUS"
         CAMDFCssBoxShadow -> "CSS_BOX_SHADOW"
         CAMDFCssColumns -> "CSS_COLUMNS"
         CAMDFCssFlexBox -> "CSS_FLEX_BOX"
@@ -4633,7 +4633,7 @@ instance ToText CreativeAssetMetadataDetectedFeatures where
         CAMDFVideo -> "VIDEO"
         CAMDFWebgl -> "WEBGL"
         CAMDFWebSockets -> "WEB_SOCKETS"
-        CAMDFWebSqlDatabase -> "WEB_SQL_DATABASE"
+        CAMDFWebSQLDatabase -> "WEB_SQL_DATABASE"
         CAMDFWebWorkers -> "WEB_WORKERS"
 
 instance FromJSON CreativeAssetMetadataDetectedFeatures where
@@ -4677,9 +4677,9 @@ instance ToJSON CreativeAssetPositionTopUnit where
 
 -- | Field by which to sort the list.
 data DfareportingCampaignsListSortField
-    = DFAID
+    = DID
       -- ^ @ID@
-    | DFAName
+    | DName
       -- ^ @NAME@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -4687,14 +4687,14 @@ instance Hashable DfareportingCampaignsListSortField
 
 instance FromText DfareportingCampaignsListSortField where
     fromText = \case
-        "ID" -> Just DFAID
-        "NAME" -> Just DFAName
+        "ID" -> Just DID
+        "NAME" -> Just DName
         _ -> Nothing
 
 instance ToText DfareportingCampaignsListSortField where
     toText = \case
-        DFAID -> "ID"
-        DFAName -> "NAME"
+        DID -> "ID"
+        DName -> "NAME"
 
 instance FromJSON DfareportingCampaignsListSortField where
     parseJSON = parseJSONText "DfareportingCampaignsListSortField"
@@ -5068,9 +5068,9 @@ instance ToJSON PlacementStatus where
 -- | Site filter type for this event tag. If no type is specified then the
 -- event tag will be applied to all sites.
 data EventTagSiteFilterType
-    = Blacklist
+    = BlackList
       -- ^ @BLACKLIST@
-    | Whitelist
+    | WhiteList
       -- ^ @WHITELIST@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -5078,14 +5078,14 @@ instance Hashable EventTagSiteFilterType
 
 instance FromText EventTagSiteFilterType where
     fromText = \case
-        "BLACKLIST" -> Just Blacklist
-        "WHITELIST" -> Just Whitelist
+        "BLACKLIST" -> Just BlackList
+        "WHITELIST" -> Just WhiteList
         _ -> Nothing
 
 instance ToText EventTagSiteFilterType where
     toText = \case
-        Blacklist -> "BLACKLIST"
-        Whitelist -> "WHITELIST"
+        BlackList -> "BLACKLIST"
+        WhiteList -> "WHITELIST"
 
 instance FromJSON EventTagSiteFilterType where
     parseJSON = parseJSONText "EventTagSiteFilterType"
@@ -5095,9 +5095,9 @@ instance ToJSON EventTagSiteFilterType where
 
 -- | Field by which to sort the list.
 data DfareportingAccountsListSortField
-    = DALSFAID
+    = DFAID
       -- ^ @ID@
-    | DALSFAName
+    | DFAName
       -- ^ @NAME@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -5105,14 +5105,14 @@ instance Hashable DfareportingAccountsListSortField
 
 instance FromText DfareportingAccountsListSortField where
     fromText = \case
-        "ID" -> Just DALSFAID
-        "NAME" -> Just DALSFAName
+        "ID" -> Just DFAID
+        "NAME" -> Just DFAName
         _ -> Nothing
 
 instance ToText DfareportingAccountsListSortField where
     toText = \case
-        DALSFAID -> "ID"
-        DALSFAName -> "NAME"
+        DFAID -> "ID"
+        DFAName -> "NAME"
 
 instance FromJSON DfareportingAccountsListSortField where
     parseJSON = parseJSONText "DfareportingAccountsListSortField"
@@ -5446,11 +5446,11 @@ data CreativeBackupImageFeatures
       -- ^ @CANVAS_TEXT@
     | CBIFCssAnimations
       -- ^ @CSS_ANIMATIONS@
-    | CBIFCssBackgroundSize
+    | CBIFCssBackgRoundSize
       -- ^ @CSS_BACKGROUND_SIZE@
-    | CBIFCssBorderImage
+    | CBIFCssBOrderImage
       -- ^ @CSS_BORDER_IMAGE@
-    | CBIFCssBorderRadius
+    | CBIFCssBOrderRadius
       -- ^ @CSS_BORDER_RADIUS@
     | CBIFCssBoxShadow
       -- ^ @CSS_BOX_SHADOW@
@@ -5564,7 +5564,7 @@ data CreativeBackupImageFeatures
       -- ^ @WEBGL@
     | CBIFWebSockets
       -- ^ @WEB_SOCKETS@
-    | CBIFWebSqlDatabase
+    | CBIFWebSQLDatabase
       -- ^ @WEB_SQL_DATABASE@
     | CBIFWebWorkers
       -- ^ @WEB_WORKERS@
@@ -5579,9 +5579,9 @@ instance FromText CreativeBackupImageFeatures where
         "CANVAS" -> Just CBIFCanvas
         "CANVAS_TEXT" -> Just CBIFCanvasText
         "CSS_ANIMATIONS" -> Just CBIFCssAnimations
-        "CSS_BACKGROUND_SIZE" -> Just CBIFCssBackgroundSize
-        "CSS_BORDER_IMAGE" -> Just CBIFCssBorderImage
-        "CSS_BORDER_RADIUS" -> Just CBIFCssBorderRadius
+        "CSS_BACKGROUND_SIZE" -> Just CBIFCssBackgRoundSize
+        "CSS_BORDER_IMAGE" -> Just CBIFCssBOrderImage
+        "CSS_BORDER_RADIUS" -> Just CBIFCssBOrderRadius
         "CSS_BOX_SHADOW" -> Just CBIFCssBoxShadow
         "CSS_COLUMNS" -> Just CBIFCssColumns
         "CSS_FLEX_BOX" -> Just CBIFCssFlexBox
@@ -5638,7 +5638,7 @@ instance FromText CreativeBackupImageFeatures where
         "VIDEO" -> Just CBIFVideo
         "WEBGL" -> Just CBIFWebgl
         "WEB_SOCKETS" -> Just CBIFWebSockets
-        "WEB_SQL_DATABASE" -> Just CBIFWebSqlDatabase
+        "WEB_SQL_DATABASE" -> Just CBIFWebSQLDatabase
         "WEB_WORKERS" -> Just CBIFWebWorkers
         _ -> Nothing
 
@@ -5649,9 +5649,9 @@ instance ToText CreativeBackupImageFeatures where
         CBIFCanvas -> "CANVAS"
         CBIFCanvasText -> "CANVAS_TEXT"
         CBIFCssAnimations -> "CSS_ANIMATIONS"
-        CBIFCssBackgroundSize -> "CSS_BACKGROUND_SIZE"
-        CBIFCssBorderImage -> "CSS_BORDER_IMAGE"
-        CBIFCssBorderRadius -> "CSS_BORDER_RADIUS"
+        CBIFCssBackgRoundSize -> "CSS_BACKGROUND_SIZE"
+        CBIFCssBOrderImage -> "CSS_BORDER_IMAGE"
+        CBIFCssBOrderRadius -> "CSS_BORDER_RADIUS"
         CBIFCssBoxShadow -> "CSS_BOX_SHADOW"
         CBIFCssColumns -> "CSS_COLUMNS"
         CBIFCssFlexBox -> "CSS_FLEX_BOX"
@@ -5708,7 +5708,7 @@ instance ToText CreativeBackupImageFeatures where
         CBIFVideo -> "VIDEO"
         CBIFWebgl -> "WEBGL"
         CBIFWebSockets -> "WEB_SOCKETS"
-        CBIFWebSqlDatabase -> "WEB_SQL_DATABASE"
+        CBIFWebSQLDatabase -> "WEB_SQL_DATABASE"
         CBIFWebWorkers -> "WEB_WORKERS"
 
 instance FromJSON CreativeBackupImageFeatures where
@@ -6495,7 +6495,7 @@ data DfareportingChangeLogsListObjectType
       -- ^ @OBJECT_SD_SITE@
     | ObjectSize
       -- ^ @OBJECT_SIZE@
-    | ObjectSubaccount
+    | ObjectSubAccount
       -- ^ @OBJECT_SUBACCOUNT@
     | ObjectUserProfile
       -- ^ @OBJECT_USER_PROFILE@
@@ -6541,7 +6541,7 @@ instance FromText DfareportingChangeLogsListObjectType where
         "OBJECT_RICHMEDIA_CREATIVE" -> Just ObjectRichmediaCreative
         "OBJECT_SD_SITE" -> Just ObjectSdSite
         "OBJECT_SIZE" -> Just ObjectSize
-        "OBJECT_SUBACCOUNT" -> Just ObjectSubaccount
+        "OBJECT_SUBACCOUNT" -> Just ObjectSubAccount
         "OBJECT_USER_PROFILE" -> Just ObjectUserProfile
         "OBJECT_USER_PROFILE_FILTER" -> Just ObjectUserProfileFilter
         "OBJECT_USER_ROLE" -> Just ObjectUserRole
@@ -6581,7 +6581,7 @@ instance ToText DfareportingChangeLogsListObjectType where
         ObjectRichmediaCreative -> "OBJECT_RICHMEDIA_CREATIVE"
         ObjectSdSite -> "OBJECT_SD_SITE"
         ObjectSize -> "OBJECT_SIZE"
-        ObjectSubaccount -> "OBJECT_SUBACCOUNT"
+        ObjectSubAccount -> "OBJECT_SUBACCOUNT"
         ObjectUserProfile -> "OBJECT_USER_PROFILE"
         ObjectUserProfileFilter -> "OBJECT_USER_PROFILE_FILTER"
         ObjectUserRole -> "OBJECT_USER_ROLE"
@@ -6594,9 +6594,9 @@ instance ToJSON DfareportingChangeLogsListObjectType where
 
 -- | Order of sorted results, default is ASCENDING.
 data DfareportingSitesListSortOrder
-    = DSLSOSAscending
+    = DSLSOAscending
       -- ^ @ASCENDING@
-    | DSLSOSDescending
+    | DSLSODescending
       -- ^ @DESCENDING@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -6604,14 +6604,14 @@ instance Hashable DfareportingSitesListSortOrder
 
 instance FromText DfareportingSitesListSortOrder where
     fromText = \case
-        "ASCENDING" -> Just DSLSOSAscending
-        "DESCENDING" -> Just DSLSOSDescending
+        "ASCENDING" -> Just DSLSOAscending
+        "DESCENDING" -> Just DSLSODescending
         _ -> Nothing
 
 instance ToText DfareportingSitesListSortOrder where
     toText = \case
-        DSLSOSAscending -> "ASCENDING"
-        DSLSOSDescending -> "DESCENDING"
+        DSLSOAscending -> "ASCENDING"
+        DSLSODescending -> "DESCENDING"
 
 instance FromJSON DfareportingSitesListSortOrder where
     parseJSON = parseJSONText "DfareportingSitesListSortOrder"
@@ -7044,9 +7044,9 @@ instance ToJSON PricingCapCostType where
 
 -- | Field by which to sort the list.
 data DfareportingAdvertisersListSortField
-    = DDID
+    = DALSFAID
       -- ^ @ID@
-    | DDName
+    | DALSFAName
       -- ^ @NAME@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -7054,14 +7054,14 @@ instance Hashable DfareportingAdvertisersListSortField
 
 instance FromText DfareportingAdvertisersListSortField where
     fromText = \case
-        "ID" -> Just DDID
-        "NAME" -> Just DDName
+        "ID" -> Just DALSFAID
+        "NAME" -> Just DALSFAName
         _ -> Nothing
 
 instance ToText DfareportingAdvertisersListSortField where
     toText = \case
-        DDID -> "ID"
-        DDName -> "NAME"
+        DALSFAID -> "ID"
+        DALSFAName -> "NAME"
 
 instance FromJSON DfareportingAdvertisersListSortField where
     parseJSON = parseJSONText "DfareportingAdvertisersListSortField"
@@ -7345,30 +7345,6 @@ instance FromJSON DfareportingPlacementGroupsListPricingTypes where
     parseJSON = parseJSONText "DfareportingPlacementGroupsListPricingTypes"
 
 instance ToJSON DfareportingPlacementGroupsListPricingTypes where
-    toJSON = toJSONText
-
--- | Data format for the response.
-data Alt
-    = JSON
-      -- ^ @json@
-      -- Responses with Content-Type of application\/json
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable Alt
-
-instance FromText Alt where
-    fromText = \case
-        "json" -> Just JSON
-        _ -> Nothing
-
-instance ToText Alt where
-    toText = \case
-        JSON -> "json"
-
-instance FromJSON Alt where
-    parseJSON = parseJSONText "Alt"
-
-instance ToJSON Alt where
     toJSON = toJSONText
 
 -- | Field by which to sort the list.

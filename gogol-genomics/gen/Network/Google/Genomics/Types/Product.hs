@@ -332,8 +332,8 @@ instance ToJSON ListBasesResponse where
 --
 -- /See:/ 'interleavedFastqSource' smart constructor.
 data InterleavedFastqSource = InterleavedFastqSource
-    { _ifsMetadata   :: !(Maybe (Maybe FastqMetadata))
-    , _ifsSourceUris :: !(Maybe [Text])
+    { _ifsMetadata   :: !(Maybe FastqMetadata)
+    , _ifsSourceURIs :: !(Maybe [Text])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InterleavedFastqSource' with the minimum fields required to make a request.
@@ -342,28 +342,28 @@ data InterleavedFastqSource = InterleavedFastqSource
 --
 -- * 'ifsMetadata'
 --
--- * 'ifsSourceUris'
+-- * 'ifsSourceURIs'
 interleavedFastqSource
     :: InterleavedFastqSource
 interleavedFastqSource =
     InterleavedFastqSource
     { _ifsMetadata = Nothing
-    , _ifsSourceUris = Nothing
+    , _ifsSourceURIs = Nothing
     }
 
 -- | Optionally specifies the metadata to be associated with the final
 -- aligned read group set.
-ifsMetadata :: Lens' InterleavedFastqSource (Maybe (Maybe FastqMetadata))
+ifsMetadata :: Lens' InterleavedFastqSource (Maybe FastqMetadata)
 ifsMetadata
   = lens _ifsMetadata (\ s a -> s{_ifsMetadata = a})
 
 -- | A list of URIs pointing at interleaved FASTQ files in Google Cloud
 -- Storage which will be aligned. The caller must have READ permissions for
 -- these files.
-ifsSourceUris :: Lens' InterleavedFastqSource [Text]
-ifsSourceUris
-  = lens _ifsSourceUris
-      (\ s a -> s{_ifsSourceUris = a})
+ifsSourceURIs :: Lens' InterleavedFastqSource [Text]
+ifsSourceURIs
+  = lens _ifsSourceURIs
+      (\ s a -> s{_ifsSourceURIs = a})
       . _Default
       . _Coerce
 
@@ -380,7 +380,7 @@ instance ToJSON InterleavedFastqSource where
           = object
               (catMaybes
                  [("metadata" .=) <$> _ifsMetadata,
-                  ("sourceUris" .=) <$> _ifsSourceUris])
+                  ("sourceUris" .=) <$> _ifsSourceURIs])
 
 -- | An annotation describes a region of reference genome. The value of an
 -- annotation may be one of several canonical types, supplemented by
@@ -392,14 +392,14 @@ instance ToJSON InterleavedFastqSource where
 --
 -- /See:/ 'annotation' smart constructor.
 data Annotation = Annotation
-    { _aVariant         :: !(Maybe (Maybe VariantAnnotation))
+    { _aVariant         :: !(Maybe VariantAnnotation)
     , _aAnnotationSetId :: !(Maybe Text)
     , _aName            :: !(Maybe Text)
     , _aId              :: !(Maybe Text)
     , _aType            :: !(Maybe AnnotationType)
-    , _aTranscript      :: !(Maybe (Maybe Transcript))
+    , _aTranscript      :: !(Maybe Transcript)
     , _aInfo            :: !(Maybe AnnotationInfo)
-    , _aPosition        :: !(Maybe (Maybe RangePosition))
+    , _aPosition        :: !(Maybe RangePosition)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Annotation' with the minimum fields required to make a request.
@@ -439,7 +439,7 @@ annotation =
 -- genome, the coding sequence, and\/or higher level consequences at the
 -- organism level e.g. pathogenicity. This field is only set for
 -- annotations of type VARIANT.
-aVariant :: Lens' Annotation (Maybe (Maybe VariantAnnotation))
+aVariant :: Lens' Annotation (Maybe VariantAnnotation)
 aVariant = lens _aVariant (\ s a -> s{_aVariant = a})
 
 -- | The ID of the containing annotation set.
@@ -465,7 +465,7 @@ aType = lens _aType (\ s a -> s{_aType = a})
 -- the reference genome may be transcribed as RNA. An alternative splicing
 -- pattern would be represented as a separate transcript object. This field
 -- is only set for annotations of type TRANSCRIPT.
-aTranscript :: Lens' Annotation (Maybe (Maybe Transcript))
+aTranscript :: Lens' Annotation (Maybe Transcript)
 aTranscript
   = lens _aTranscript (\ s a -> s{_aTranscript = a})
 
@@ -474,7 +474,7 @@ aInfo :: Lens' Annotation (Maybe AnnotationInfo)
 aInfo = lens _aInfo (\ s a -> s{_aInfo = a})
 
 -- | The position of this annotation on the reference sequence.
-aPosition :: Lens' Annotation (Maybe (Maybe RangePosition))
+aPosition :: Lens' Annotation (Maybe RangePosition)
 aPosition
   = lens _aPosition (\ s a -> s{_aPosition = a})
 
@@ -506,8 +506,8 @@ instance ToJSON Annotation where
 --
 -- /See:/ 'batchAnnotationsResponseEntry' smart constructor.
 data BatchAnnotationsResponseEntry = BatchAnnotationsResponseEntry
-    { _bareStatus     :: !(Maybe (Maybe BatchAnnotationsResponseEntryStatus))
-    , _bareAnnotation :: !(Maybe (Maybe Annotation))
+    { _bareStatus     :: !(Maybe BatchAnnotationsResponseEntryStatus)
+    , _bareAnnotation :: !(Maybe Annotation)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BatchAnnotationsResponseEntry' with the minimum fields required to make a request.
@@ -526,12 +526,12 @@ batchAnnotationsResponseEntry =
     }
 
 -- | The resulting status for this annotation operation.
-bareStatus :: Lens' BatchAnnotationsResponseEntry (Maybe (Maybe BatchAnnotationsResponseEntryStatus))
+bareStatus :: Lens' BatchAnnotationsResponseEntry (Maybe BatchAnnotationsResponseEntryStatus)
 bareStatus
   = lens _bareStatus (\ s a -> s{_bareStatus = a})
 
 -- | The annotation, if any.
-bareAnnotation :: Lens' BatchAnnotationsResponseEntry (Maybe (Maybe Annotation))
+bareAnnotation :: Lens' BatchAnnotationsResponseEntry (Maybe Annotation)
 bareAnnotation
   = lens _bareAnnotation
       (\ s a -> s{_bareAnnotation = a})
@@ -572,7 +572,7 @@ data Variant = Variant
     , _vQuality        :: !(Maybe Double)
     , _vFilter         :: !(Maybe [Text])
     , _vInfo           :: !(Maybe VariantInfo)
-    , _vCalls          :: !(Maybe [Maybe Call])
+    , _vCalls          :: !(Maybe [Call])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Variant' with the minimum fields required to make a request.
@@ -694,7 +694,7 @@ vInfo = lens _vInfo (\ s a -> s{_vInfo = a})
 
 -- | The variant calls for this particular variant. Each one represents the
 -- determination of genotype with respect to this variant.
-vCalls :: Lens' Variant [Maybe Call]
+vCalls :: Lens' Variant [Call]
 vCalls
   = lens _vCalls (\ s a -> s{_vCalls = a}) . _Default .
       _Coerce
@@ -738,7 +738,7 @@ instance ToJSON Variant where
 data CallReadGroupSetsRequest = CallReadGroupSetsRequest
     { _crgsrReadGroupSetId :: !(Maybe Text)
     , _crgsrDatasetId      :: !(Maybe Text)
-    , _crgsrSourceUris     :: !(Maybe [Text])
+    , _crgsrSourceURIs     :: !(Maybe [Text])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CallReadGroupSetsRequest' with the minimum fields required to make a request.
@@ -749,14 +749,14 @@ data CallReadGroupSetsRequest = CallReadGroupSetsRequest
 --
 -- * 'crgsrDatasetId'
 --
--- * 'crgsrSourceUris'
+-- * 'crgsrSourceURIs'
 callReadGroupSetsRequest
     :: CallReadGroupSetsRequest
 callReadGroupSetsRequest =
     CallReadGroupSetsRequest
     { _crgsrReadGroupSetId = Nothing
     , _crgsrDatasetId = Nothing
-    , _crgsrSourceUris = Nothing
+    , _crgsrSourceURIs = Nothing
     }
 
 -- | The IDs of the read group sets which will be called. The caller must
@@ -778,10 +778,10 @@ crgsrDatasetId
 -- be called. FASTQ files are not allowed. The caller must have READ
 -- permissions for these files. One of readGroupSetId or sourceUris must be
 -- provided.
-crgsrSourceUris :: Lens' CallReadGroupSetsRequest [Text]
-crgsrSourceUris
-  = lens _crgsrSourceUris
-      (\ s a -> s{_crgsrSourceUris = a})
+crgsrSourceURIs :: Lens' CallReadGroupSetsRequest [Text]
+crgsrSourceURIs
+  = lens _crgsrSourceURIs
+      (\ s a -> s{_crgsrSourceURIs = a})
       . _Default
       . _Coerce
 
@@ -799,7 +799,7 @@ instance ToJSON CallReadGroupSetsRequest where
               (catMaybes
                  [("readGroupSetId" .=) <$> _crgsrReadGroupSetId,
                   ("datasetId" .=) <$> _crgsrDatasetId,
-                  ("sourceUris" .=) <$> _crgsrSourceUris])
+                  ("sourceUris" .=) <$> _crgsrSourceURIs])
 
 -- | A read alignment describes a linear alignment of a string of DNA to a
 -- reference sequence, in addition to metadata about the fragment (the
@@ -832,9 +832,9 @@ data Read = Read
     { _rFragmentLength            :: !(Maybe Int32)
     , _rDuplicateFragment         :: !(Maybe Bool)
     , _rReadGroupSetId            :: !(Maybe Text)
-    , _rNextMatePosition          :: !(Maybe (Maybe Position))
+    , _rNextMatePosition          :: !(Maybe Position)
     , _rFailedVendorQualityChecks :: !(Maybe Bool)
-    , _rAlignment                 :: !(Maybe (Maybe LinearAlignment))
+    , _rAlignment                 :: !(Maybe LinearAlignment)
     , _rFragmentName              :: !(Maybe Text)
     , _rNumberReads               :: !(Maybe Int32)
     , _rId                        :: !(Maybe Text)
@@ -931,7 +931,7 @@ rReadGroupSetId
 -- read in the fragment. It replaces mate position and mate strand in SAM.
 -- This field will be unset if that read is unmapped or if the fragment
 -- only has a single read.
-rNextMatePosition :: Lens' Read (Maybe (Maybe Position))
+rNextMatePosition :: Lens' Read (Maybe Position)
 rNextMatePosition
   = lens _rNextMatePosition
       (\ s a -> s{_rNextMatePosition = a})
@@ -944,7 +944,7 @@ rFailedVendorQualityChecks
 
 -- | The linear alignment for this alignment record. This field will be unset
 -- if the read is unmapped.
-rAlignment :: Lens' Read (Maybe (Maybe LinearAlignment))
+rAlignment :: Lens' Read (Maybe LinearAlignment)
 rAlignment
   = lens _rAlignment (\ s a -> s{_rAlignment = a})
 
@@ -1288,7 +1288,7 @@ instance ToJSON Dataset where
 data TranscriptExon = TranscriptExon
     { _teStart :: !(Maybe Int64)
     , _teEnd   :: !(Maybe Int64)
-    , _teFrame :: !(Maybe (Maybe Int32Value))
+    , _teFrame :: !(Maybe Int32Value)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TranscriptExon' with the minimum fields required to make a request.
@@ -1330,7 +1330,7 @@ teEnd = lens _teEnd (\ s a -> s{_teEnd = a})
 -- the exon.end-1. Unset if this exon does not intersect the coding
 -- sequence. Upon creation of a transcript, the frame must be populated for
 -- all or none of the coding exons.
-teFrame :: Lens' TranscriptExon (Maybe (Maybe Int32Value))
+teFrame :: Lens' TranscriptExon (Maybe Int32Value)
 teFrame = lens _teFrame (\ s a -> s{_teFrame = a})
 
 instance FromJSON TranscriptExon where
@@ -1430,8 +1430,8 @@ instance ToJSON QueryRange where
 -- /See:/ 'readGroup' smart constructor.
 data ReadGroup = ReadGroup
     { _rgReferenceSetId      :: !(Maybe Text)
-    , _rgPrograms            :: !(Maybe [Maybe ReadGroupProgram])
-    , _rgExperiment          :: !(Maybe (Maybe ReadGroupExperiment))
+    , _rgPrograms            :: !(Maybe [ReadGroupProgram])
+    , _rgExperiment          :: !(Maybe ReadGroupExperiment)
     , _rgName                :: !(Maybe Text)
     , _rgDatasetId           :: !(Maybe Text)
     , _rgId                  :: !(Maybe Text)
@@ -1491,14 +1491,14 @@ rgReferenceSetId
 -- identical for all read groups within a read group set. For this reason,
 -- only the first read group in a returned set will have this field
 -- populated.
-rgPrograms :: Lens' ReadGroup [Maybe ReadGroupProgram]
+rgPrograms :: Lens' ReadGroup [ReadGroupProgram]
 rgPrograms
   = lens _rgPrograms (\ s a -> s{_rgPrograms = a}) .
       _Default
       . _Coerce
 
 -- | The experiment used to generate this read group.
-rgExperiment :: Lens' ReadGroup (Maybe (Maybe ReadGroupExperiment))
+rgExperiment :: Lens' ReadGroup (Maybe ReadGroupExperiment)
 rgExperiment
   = lens _rgExperiment (\ s a -> s{_rgExperiment = a})
 
@@ -1577,7 +1577,7 @@ instance ToJSON ReadGroup where
 -- /See:/ 'searchReferencesResponse' smart constructor.
 data SearchReferencesResponse = SearchReferencesResponse
     { _srrNextPageToken :: !(Maybe Text)
-    , _srrReferences    :: !(Maybe [Maybe Reference])
+    , _srrReferences    :: !(Maybe [Reference])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SearchReferencesResponse' with the minimum fields required to make a request.
@@ -1605,7 +1605,7 @@ srrNextPageToken
       (\ s a -> s{_srrNextPageToken = a})
 
 -- | The matching references.
-srrReferences :: Lens' SearchReferencesResponse [Maybe Reference]
+srrReferences :: Lens' SearchReferencesResponse [Reference]
 srrReferences
   = lens _srrReferences
       (\ s a -> s{_srrReferences = a})
@@ -1630,7 +1630,7 @@ instance ToJSON SearchReferencesResponse where
 --
 -- /See:/ 'mergeVariantsRequest' smart constructor.
 newtype MergeVariantsRequest = MergeVariantsRequest
-    { _mvrVariants :: Maybe [Maybe Variant]
+    { _mvrVariants :: Maybe [Variant]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MergeVariantsRequest' with the minimum fields required to make a request.
@@ -1646,7 +1646,7 @@ mergeVariantsRequest =
     }
 
 -- | The variants to be merged with existing variants.
-mvrVariants :: Lens' MergeVariantsRequest [Maybe Variant]
+mvrVariants :: Lens' MergeVariantsRequest [Variant]
 mvrVariants
   = lens _mvrVariants (\ s a -> s{_mvrVariants = a}) .
       _Default
@@ -1668,7 +1668,7 @@ instance ToJSON MergeVariantsRequest where
 --
 -- /See:/ 'searchReferenceSetsRequest' smart constructor.
 data SearchReferenceSetsRequest = SearchReferenceSetsRequest
-    { _srsrMd5checksums :: !(Maybe [Text])
+    { _srsrMD5checksums :: !(Maybe [Text])
     , _srsrAccessions   :: !(Maybe [Text])
     , _srsrPageToken    :: !(Maybe Text)
     , _srsrAssemblyId   :: !(Maybe Text)
@@ -1679,7 +1679,7 @@ data SearchReferenceSetsRequest = SearchReferenceSetsRequest
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'srsrMd5checksums'
+-- * 'srsrMD5checksums'
 --
 -- * 'srsrAccessions'
 --
@@ -1692,7 +1692,7 @@ searchReferenceSetsRequest
     :: SearchReferenceSetsRequest
 searchReferenceSetsRequest =
     SearchReferenceSetsRequest
-    { _srsrMd5checksums = Nothing
+    { _srsrMD5checksums = Nothing
     , _srsrAccessions = Nothing
     , _srsrPageToken = Nothing
     , _srsrAssemblyId = Nothing
@@ -1701,10 +1701,10 @@ searchReferenceSetsRequest =
 
 -- | If present, return references for which the md5checksum matches. See
 -- ReferenceSet.md5checksum for details.
-srsrMd5checksums :: Lens' SearchReferenceSetsRequest [Text]
-srsrMd5checksums
-  = lens _srsrMd5checksums
-      (\ s a -> s{_srsrMd5checksums = a})
+srsrMD5checksums :: Lens' SearchReferenceSetsRequest [Text]
+srsrMD5checksums
+  = lens _srsrMD5checksums
+      (\ s a -> s{_srsrMD5checksums = a})
       . _Default
       . _Coerce
 
@@ -1755,7 +1755,7 @@ instance ToJSON SearchReferenceSetsRequest where
         toJSON SearchReferenceSetsRequest{..}
           = object
               (catMaybes
-                 [("md5checksums" .=) <$> _srsrMd5checksums,
+                 [("md5checksums" .=) <$> _srsrMD5checksums,
                   ("accessions" .=) <$> _srsrAccessions,
                   ("pageToken" .=) <$> _srsrPageToken,
                   ("assemblyId" .=) <$> _srsrAssemblyId,
@@ -1764,7 +1764,7 @@ instance ToJSON SearchReferenceSetsRequest where
 --
 -- /See:/ 'batchCreateAnnotationsRequest' smart constructor.
 newtype BatchCreateAnnotationsRequest = BatchCreateAnnotationsRequest
-    { _bcarAnnotations :: Maybe [Maybe Annotation]
+    { _bcarAnnotations :: Maybe [Annotation]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BatchCreateAnnotationsRequest' with the minimum fields required to make a request.
@@ -1781,7 +1781,7 @@ batchCreateAnnotationsRequest =
 
 -- | The annotations to be created. At most 4096 can be specified in a single
 -- request.
-bcarAnnotations :: Lens' BatchCreateAnnotationsRequest [Maybe Annotation]
+bcarAnnotations :: Lens' BatchCreateAnnotationsRequest [Annotation]
 bcarAnnotations
   = lens _bcarAnnotations
       (\ s a -> s{_bcarAnnotations = a})
@@ -1895,7 +1895,7 @@ instance ToJSON CallSet where
 --
 -- /See:/ 'coverageBucket' smart constructor.
 data CoverageBucket = CoverageBucket
-    { _cbRange        :: !(Maybe (Maybe Range))
+    { _cbRange        :: !(Maybe Range)
     , _cbMeanCoverage :: !(Maybe Float)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1915,7 +1915,7 @@ coverageBucket =
     }
 
 -- | The genomic coordinate range spanned by this bucket.
-cbRange :: Lens' CoverageBucket (Maybe (Maybe Range))
+cbRange :: Lens' CoverageBucket (Maybe Range)
 cbRange = lens _cbRange (\ s a -> s{_cbRange = a})
 
 -- | The average number of reads which are aligned to each individual
@@ -1947,7 +1947,7 @@ data VariantAnnotation = VariantAnnotation
     , _vaClinicalSignificance :: !(Maybe VariantAnnotationClinicalSignificance)
     , _vaAlternateBases       :: !(Maybe Text)
     , _vaGeneId               :: !(Maybe Text)
-    , _vaConditions           :: !(Maybe [Maybe VariantAnnotationCondition])
+    , _vaConditions           :: !(Maybe [VariantAnnotationCondition])
     , _vaType                 :: !(Maybe VariantAnnotationType)
     , _vaTranscriptIds        :: !(Maybe [Text])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -2009,7 +2009,7 @@ vaGeneId = lens _vaGeneId (\ s a -> s{_vaGeneId = a})
 
 -- | The set of conditions associated with this variant. A condition
 -- describes the way a variant influences human health.
-vaConditions :: Lens' VariantAnnotation [Maybe VariantAnnotationCondition]
+vaConditions :: Lens' VariantAnnotation [VariantAnnotationCondition]
 vaConditions
   = lens _vaConditions (\ s a -> s{_vaConditions = a})
       . _Default
@@ -2105,7 +2105,7 @@ instance ToJSON BatchAnnotationsResponseEntryStatus
 --
 -- /See:/ 'batchAnnotationsResponse' smart constructor.
 newtype BatchAnnotationsResponse = BatchAnnotationsResponse
-    { _barEntries :: Maybe [Maybe BatchAnnotationsResponseEntry]
+    { _barEntries :: Maybe [BatchAnnotationsResponseEntry]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BatchAnnotationsResponse' with the minimum fields required to make a request.
@@ -2122,7 +2122,7 @@ batchAnnotationsResponse =
 
 -- | The resulting per-annotation entries, ordered consistently with the
 -- original request.
-barEntries :: Lens' BatchAnnotationsResponse [Maybe BatchAnnotationsResponseEntry]
+barEntries :: Lens' BatchAnnotationsResponse [BatchAnnotationsResponseEntry]
 barEntries
   = lens _barEntries (\ s a -> s{_barEntries = a}) .
       _Default
@@ -2169,7 +2169,7 @@ instance ToJSON ReadGroupInfo where
 data Reference = Reference
     { _refLength           :: !(Maybe Int64)
     , _refSourceAccessions :: !(Maybe [Text])
-    , _refMd5checksum      :: !(Maybe Text)
+    , _refMD5checksum      :: !(Maybe Text)
     , _refName             :: !(Maybe Text)
     , _refNcbiTaxonId      :: !(Maybe Int32)
     , _refId               :: !(Maybe Text)
@@ -2184,7 +2184,7 @@ data Reference = Reference
 --
 -- * 'refSourceAccessions'
 --
--- * 'refMd5checksum'
+-- * 'refMD5checksum'
 --
 -- * 'refName'
 --
@@ -2199,7 +2199,7 @@ reference =
     Reference
     { _refLength = Nothing
     , _refSourceAccessions = Nothing
-    , _refMd5checksum = Nothing
+    , _refMD5checksum = Nothing
     , _refName = Nothing
     , _refNcbiTaxonId = Nothing
     , _refId = Nothing
@@ -2223,10 +2223,10 @@ refSourceAccessions
 -- | MD5 of the upper-case sequence excluding all whitespace characters (this
 -- is equivalent to SQ:M5 in SAM). This value is represented in lower case
 -- hexadecimal format.
-refMd5checksum :: Lens' Reference (Maybe Text)
-refMd5checksum
-  = lens _refMd5checksum
-      (\ s a -> s{_refMd5checksum = a})
+refMD5checksum :: Lens' Reference (Maybe Text)
+refMD5checksum
+  = lens _refMD5checksum
+      (\ s a -> s{_refMD5checksum = a})
 
 -- | The name of this reference, for example 22.
 refName :: Lens' Reference (Maybe Text)
@@ -2268,7 +2268,7 @@ instance ToJSON Reference where
               (catMaybes
                  [("length" .=) <$> _refLength,
                   ("sourceAccessions" .=) <$> _refSourceAccessions,
-                  ("md5checksum" .=) <$> _refMd5checksum,
+                  ("md5checksum" .=) <$> _refMD5checksum,
                   ("name" .=) <$> _refName,
                   ("ncbiTaxonId" .=) <$> _refNcbiTaxonId,
                   ("id" .=) <$> _refId,
@@ -2579,7 +2579,7 @@ instance ToJSON SearchReadsRequest where
 -- /See:/ 'searchCallSetsResponse' smart constructor.
 data SearchCallSetsResponse = SearchCallSetsResponse
     { _scsrNextPageToken :: !(Maybe Text)
-    , _scsrCallSets      :: !(Maybe [Maybe CallSet])
+    , _scsrCallSets      :: !(Maybe [CallSet])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SearchCallSetsResponse' with the minimum fields required to make a request.
@@ -2607,7 +2607,7 @@ scsrNextPageToken
       (\ s a -> s{_scsrNextPageToken = a})
 
 -- | The list of matching call sets.
-scsrCallSets :: Lens' SearchCallSetsResponse [Maybe CallSet]
+scsrCallSets :: Lens' SearchCallSetsResponse [CallSet]
 scsrCallSets
   = lens _scsrCallSets (\ s a -> s{_scsrCallSets = a})
       . _Default
@@ -2700,8 +2700,8 @@ data ExperimentalCreateJobRequest = ExperimentalCreateJobRequest
     { _ecjrGcsOutputPath    :: !(Maybe Text)
     , _ecjrProjectNumber    :: !(Maybe Int64)
     , _ecjrAlign            :: !(Maybe Bool)
-    , _ecjrSourceUris       :: !(Maybe [Text])
-    , _ecjrPairedSourceUris :: !(Maybe [Text])
+    , _ecjrSourceURIs       :: !(Maybe [Text])
+    , _ecjrPairedSourceURIs :: !(Maybe [Text])
     , _ecjrCallVariants     :: !(Maybe Bool)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -2715,9 +2715,9 @@ data ExperimentalCreateJobRequest = ExperimentalCreateJobRequest
 --
 -- * 'ecjrAlign'
 --
--- * 'ecjrSourceUris'
+-- * 'ecjrSourceURIs'
 --
--- * 'ecjrPairedSourceUris'
+-- * 'ecjrPairedSourceURIs'
 --
 -- * 'ecjrCallVariants'
 experimentalCreateJobRequest
@@ -2727,8 +2727,8 @@ experimentalCreateJobRequest =
     { _ecjrGcsOutputPath = Nothing
     , _ecjrProjectNumber = Nothing
     , _ecjrAlign = Nothing
-    , _ecjrSourceUris = Nothing
-    , _ecjrPairedSourceUris = Nothing
+    , _ecjrSourceURIs = Nothing
+    , _ecjrPairedSourceURIs = Nothing
     , _ecjrCallVariants = Nothing
     }
 
@@ -2756,10 +2756,10 @@ ecjrAlign
 -- can be .bam, interleaved .fastq, or paired .fastq. If specifying paired
 -- .fastq files, the first of each pair of files should be listed here, and
 -- the second of each pair should be listed in pairedSourceUris.
-ecjrSourceUris :: Lens' ExperimentalCreateJobRequest [Text]
-ecjrSourceUris
-  = lens _ecjrSourceUris
-      (\ s a -> s{_ecjrSourceUris = a})
+ecjrSourceURIs :: Lens' ExperimentalCreateJobRequest [Text]
+ecjrSourceURIs
+  = lens _ecjrSourceURIs
+      (\ s a -> s{_ecjrSourceURIs = a})
       . _Default
       . _Coerce
 
@@ -2767,10 +2767,10 @@ ecjrSourceUris
 -- operate upon. If specified, this represents the second file of each
 -- paired .fastq file. The first file of each pair should be specified in
 -- sourceUris.
-ecjrPairedSourceUris :: Lens' ExperimentalCreateJobRequest [Text]
-ecjrPairedSourceUris
-  = lens _ecjrPairedSourceUris
-      (\ s a -> s{_ecjrPairedSourceUris = a})
+ecjrPairedSourceURIs :: Lens' ExperimentalCreateJobRequest [Text]
+ecjrPairedSourceURIs
+  = lens _ecjrPairedSourceURIs
+      (\ s a -> s{_ecjrPairedSourceURIs = a})
       . _Default
       . _Coerce
 
@@ -2799,8 +2799,8 @@ instance ToJSON ExperimentalCreateJobRequest where
                  [("gcsOutputPath" .=) <$> _ecjrGcsOutputPath,
                   ("projectNumber" .=) <$> _ecjrProjectNumber,
                   ("align" .=) <$> _ecjrAlign,
-                  ("sourceUris" .=) <$> _ecjrSourceUris,
-                  ("pairedSourceUris" .=) <$> _ecjrPairedSourceUris,
+                  ("sourceUris" .=) <$> _ecjrSourceURIs,
+                  ("pairedSourceUris" .=) <$> _ecjrPairedSourceURIs,
                   ("callVariants" .=) <$> _ecjrCallVariants])
 
 --
@@ -2906,7 +2906,7 @@ instance ToJSON AnnotationInfo where
 --
 -- /See:/ 'searchAnnotationsResponse' smart constructor.
 data SearchAnnotationsResponse = SearchAnnotationsResponse
-    { _sarAnnotations   :: !(Maybe [Maybe Annotation])
+    { _sarAnnotations   :: !(Maybe [Annotation])
     , _sarNextPageToken :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -2926,7 +2926,7 @@ searchAnnotationsResponse =
     }
 
 -- | The matching annotations.
-sarAnnotations :: Lens' SearchAnnotationsResponse [Maybe Annotation]
+sarAnnotations :: Lens' SearchAnnotationsResponse [Annotation]
 sarAnnotations
   = lens _sarAnnotations
       (\ s a -> s{_sarAnnotations = a})
@@ -3151,7 +3151,7 @@ instance ToJSON SearchAnnotationSetsRequest where
 --
 -- /See:/ 'searchVariantsResponse' smart constructor.
 data SearchVariantsResponse = SearchVariantsResponse
-    { _svrVariants      :: !(Maybe [Maybe Variant])
+    { _svrVariants      :: !(Maybe [Variant])
     , _svrNextPageToken :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -3171,7 +3171,7 @@ searchVariantsResponse =
     }
 
 -- | The list of matching Variants.
-svrVariants :: Lens' SearchVariantsResponse [Maybe Variant]
+svrVariants :: Lens' SearchVariantsResponse [Variant]
 svrVariants
   = lens _svrVariants (\ s a -> s{_svrVariants = a}) .
       _Default
@@ -3207,7 +3207,7 @@ instance ToJSON SearchVariantsResponse where
 data ExportReadGroupSetsRequest = ExportReadGroupSetsRequest
     { _ergsrReferenceNames  :: !(Maybe [Text])
     , _ergsrProjectNumber   :: !(Maybe Int64)
-    , _ergsrExportUri       :: !(Maybe Text)
+    , _ergsrExportURI       :: !(Maybe Text)
     , _ergsrReadGroupSetIds :: !(Maybe [Text])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -3219,7 +3219,7 @@ data ExportReadGroupSetsRequest = ExportReadGroupSetsRequest
 --
 -- * 'ergsrProjectNumber'
 --
--- * 'ergsrExportUri'
+-- * 'ergsrExportURI'
 --
 -- * 'ergsrReadGroupSetIds'
 exportReadGroupSetsRequest
@@ -3228,7 +3228,7 @@ exportReadGroupSetsRequest =
     ExportReadGroupSetsRequest
     { _ergsrReferenceNames = Nothing
     , _ergsrProjectNumber = Nothing
-    , _ergsrExportUri = Nothing
+    , _ergsrExportURI = Nothing
     , _ergsrReadGroupSetIds = Nothing
     }
 
@@ -3252,10 +3252,10 @@ ergsrProjectNumber
 -- | Required. A Google Cloud Storage URI for the exported BAM file. The
 -- currently authenticated user must have write access to the new file. An
 -- error will be returned if the URI already contains data.
-ergsrExportUri :: Lens' ExportReadGroupSetsRequest (Maybe Text)
-ergsrExportUri
-  = lens _ergsrExportUri
-      (\ s a -> s{_ergsrExportUri = a})
+ergsrExportURI :: Lens' ExportReadGroupSetsRequest (Maybe Text)
+ergsrExportURI
+  = lens _ergsrExportURI
+      (\ s a -> s{_ergsrExportURI = a})
 
 -- | Required. The IDs of the read group sets to export.
 ergsrReadGroupSetIds :: Lens' ExportReadGroupSetsRequest [Text]
@@ -3281,7 +3281,7 @@ instance ToJSON ExportReadGroupSetsRequest where
               (catMaybes
                  [("referenceNames" .=) <$> _ergsrReferenceNames,
                   ("projectNumber" .=) <$> _ergsrProjectNumber,
-                  ("exportUri" .=) <$> _ergsrExportUri,
+                  ("exportUri" .=) <$> _ergsrExportURI,
                   ("readGroupSetIds" .=) <$> _ergsrReadGroupSetIds])
 
 -- | Wrapper message for \`int32\`. The JSON representation for
@@ -3322,7 +3322,7 @@ instance ToJSON Int32Value where
 -- /See:/ 'searchReadsResponse' smart constructor.
 data SearchReadsResponse = SearchReadsResponse
     { _sNextPageToken :: !(Maybe Text)
-    , _sAlignments    :: !(Maybe [Maybe Read])
+    , _sAlignments    :: !(Maybe [Read])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SearchReadsResponse' with the minimum fields required to make a request.
@@ -3353,7 +3353,7 @@ sNextPageToken
 -- any, ascending in position within the same reference. Unmapped reads,
 -- which have no position, are returned contiguously and are sorted in
 -- ascending lexicographic order by fragment name.
-sAlignments :: Lens' SearchReadsResponse [Maybe Read]
+sAlignments :: Lens' SearchReadsResponse [Read]
 sAlignments
   = lens _sAlignments (\ s a -> s{_sAlignments = a}) .
       _Default
@@ -3557,7 +3557,7 @@ data Job = Job
     , _jobImportedIds    :: !(Maybe [Text])
     , _jobId             :: !(Maybe Text)
     , _jobErrors         :: !(Maybe [Text])
-    , _jobRequest        :: !(Maybe (Maybe JobRequest))
+    , _jobRequest        :: !(Maybe JobRequest)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Job' with the minimum fields required to make a request.
@@ -3646,7 +3646,7 @@ jobErrors
       . _Coerce
 
 -- | A summarized representation of the original service request.
-jobRequest :: Lens' Job (Maybe (Maybe JobRequest))
+jobRequest :: Lens' Job (Maybe JobRequest)
 jobRequest
   = lens _jobRequest (\ s a -> s{_jobRequest = a})
 
@@ -3681,7 +3681,7 @@ instance ToJSON Job where
 -- /See:/ 'searchReferenceSetsResponse' smart constructor.
 data SearchReferenceSetsResponse = SearchReferenceSetsResponse
     { _srsrNextPageToken :: !(Maybe Text)
-    , _srsrReferenceSets :: !(Maybe [Maybe ReferenceSet])
+    , _srsrReferenceSets :: !(Maybe [ReferenceSet])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SearchReferenceSetsResponse' with the minimum fields required to make a request.
@@ -3709,7 +3709,7 @@ srsrNextPageToken
       (\ s a -> s{_srsrNextPageToken = a})
 
 -- | The matching references sets.
-srsrReferenceSets :: Lens' SearchReferenceSetsResponse [Maybe ReferenceSet]
+srsrReferenceSets :: Lens' SearchReferenceSetsResponse [ReferenceSet]
 srsrReferenceSets
   = lens _srsrReferenceSets
       (\ s a -> s{_srsrReferenceSets = a})
@@ -3744,7 +3744,7 @@ data ReadGroupSet = ReadGroupSet
     , _rgsDatasetId      :: !(Maybe Text)
     , _rgsId             :: !(Maybe Text)
     , _rgsInfo           :: !(Maybe ReadGroupSetInfo)
-    , _rgsReadGroups     :: !(Maybe [Maybe ReadGroup])
+    , _rgsReadGroups     :: !(Maybe [ReadGroup])
     , _rgsFilename       :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -3804,7 +3804,7 @@ rgsInfo = lens _rgsInfo (\ s a -> s{_rgsInfo = a})
 
 -- | The read groups in this set. There are typically 1-10 read groups in a
 -- read group set.
-rgsReadGroups :: Lens' ReadGroupSet [Maybe ReadGroup]
+rgsReadGroups :: Lens' ReadGroupSet [ReadGroup]
 rgsReadGroups
   = lens _rgsReadGroups
       (\ s a -> s{_rgsReadGroups = a})
@@ -3844,27 +3844,27 @@ instance ToJSON ReadGroupSet where
 --
 -- /See:/ 'pairedFastqSource' smart constructor.
 data PairedFastqSource = PairedFastqSource
-    { _pfsFirstSourceUris  :: !(Maybe [Text])
-    , _pfsMetadata         :: !(Maybe (Maybe FastqMetadata))
-    , _pfsSecondSourceUris :: !(Maybe [Text])
+    { _pfsFirstSourceURIs  :: !(Maybe [Text])
+    , _pfsMetadata         :: !(Maybe FastqMetadata)
+    , _pfsSecondSourceURIs :: !(Maybe [Text])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PairedFastqSource' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pfsFirstSourceUris'
+-- * 'pfsFirstSourceURIs'
 --
 -- * 'pfsMetadata'
 --
--- * 'pfsSecondSourceUris'
+-- * 'pfsSecondSourceURIs'
 pairedFastqSource
     :: PairedFastqSource
 pairedFastqSource =
     PairedFastqSource
-    { _pfsFirstSourceUris = Nothing
+    { _pfsFirstSourceURIs = Nothing
     , _pfsMetadata = Nothing
-    , _pfsSecondSourceUris = Nothing
+    , _pfsSecondSourceURIs = Nothing
     }
 
 -- | A list of URIs pointing at paired end FASTQ files in Google Cloud
@@ -3873,16 +3873,16 @@ pairedFastqSource =
 -- specified in secondSourceUris. For example: firstSourceUris:
 -- [file1_1.fq, file2_1.fq], secondSourceUris: [file1_2.fq, file2_2.fq].
 -- The caller must have READ permissions for these files.
-pfsFirstSourceUris :: Lens' PairedFastqSource [Text]
-pfsFirstSourceUris
-  = lens _pfsFirstSourceUris
-      (\ s a -> s{_pfsFirstSourceUris = a})
+pfsFirstSourceURIs :: Lens' PairedFastqSource [Text]
+pfsFirstSourceURIs
+  = lens _pfsFirstSourceURIs
+      (\ s a -> s{_pfsFirstSourceURIs = a})
       . _Default
       . _Coerce
 
 -- | Optionally specifies the metadata to be associated with the final
 -- aligned read group set.
-pfsMetadata :: Lens' PairedFastqSource (Maybe (Maybe FastqMetadata))
+pfsMetadata :: Lens' PairedFastqSource (Maybe FastqMetadata)
 pfsMetadata
   = lens _pfsMetadata (\ s a -> s{_pfsMetadata = a})
 
@@ -3892,10 +3892,10 @@ pfsMetadata
 -- specified in firstSourceUris. For example: firstSourceUris: [file1_1.fq,
 -- file2_1.fq], secondSourceUris: [file1_2.fq, file2_2.fq]. The caller must
 -- have READ permissions for these files.
-pfsSecondSourceUris :: Lens' PairedFastqSource [Text]
-pfsSecondSourceUris
-  = lens _pfsSecondSourceUris
-      (\ s a -> s{_pfsSecondSourceUris = a})
+pfsSecondSourceURIs :: Lens' PairedFastqSource [Text]
+pfsSecondSourceURIs
+  = lens _pfsSecondSourceURIs
+      (\ s a -> s{_pfsSecondSourceURIs = a})
       . _Default
       . _Coerce
 
@@ -3912,16 +3912,16 @@ instance ToJSON PairedFastqSource where
         toJSON PairedFastqSource{..}
           = object
               (catMaybes
-                 [("firstSourceUris" .=) <$> _pfsFirstSourceUris,
+                 [("firstSourceUris" .=) <$> _pfsFirstSourceURIs,
                   ("metadata" .=) <$> _pfsMetadata,
-                  ("secondSourceUris" .=) <$> _pfsSecondSourceUris])
+                  ("secondSourceUris" .=) <$> _pfsSecondSourceURIs])
 
 -- |
 --
 -- /See:/ 'searchReferencesRequest' smart constructor.
 data SearchReferencesRequest = SearchReferencesRequest
     { _sReferenceSetId :: !(Maybe Text)
-    , _sMd5checksums   :: !(Maybe [Text])
+    , _sMD5checksums   :: !(Maybe [Text])
     , _sAccessions     :: !(Maybe [Text])
     , _sPageToken      :: !(Maybe Text)
     , _sPageSize       :: !(Maybe Int32)
@@ -3933,7 +3933,7 @@ data SearchReferencesRequest = SearchReferencesRequest
 --
 -- * 'sReferenceSetId'
 --
--- * 'sMd5checksums'
+-- * 'sMD5checksums'
 --
 -- * 'sAccessions'
 --
@@ -3945,7 +3945,7 @@ searchReferencesRequest
 searchReferencesRequest =
     SearchReferencesRequest
     { _sReferenceSetId = Nothing
-    , _sMd5checksums = Nothing
+    , _sMD5checksums = Nothing
     , _sAccessions = Nothing
     , _sPageToken = Nothing
     , _sPageSize = Nothing
@@ -3959,10 +3959,10 @@ sReferenceSetId
 
 -- | If present, return references for which the md5checksum matches. See
 -- Reference.md5checksum for construction details.
-sMd5checksums :: Lens' SearchReferencesRequest [Text]
-sMd5checksums
-  = lens _sMd5checksums
-      (\ s a -> s{_sMd5checksums = a})
+sMD5checksums :: Lens' SearchReferencesRequest [Text]
+sMD5checksums
+  = lens _sMD5checksums
+      (\ s a -> s{_sMD5checksums = a})
       . _Default
       . _Coerce
 
@@ -4005,7 +4005,7 @@ instance ToJSON SearchReferencesRequest where
           = object
               (catMaybes
                  [("referenceSetId" .=) <$> _sReferenceSetId,
-                  ("md5checksums" .=) <$> _sMd5checksums,
+                  ("md5checksums" .=) <$> _sMD5checksums,
                   ("accessions" .=) <$> _sAccessions,
                   ("pageToken" .=) <$> _sPageToken,
                   ("pageSize" .=) <$> _sPageSize])
@@ -4114,9 +4114,9 @@ instance ToJSON ImportVariantsResponse where
 --
 -- /See:/ 'linearAlignment' smart constructor.
 data LinearAlignment = LinearAlignment
-    { _laCigar          :: !(Maybe [Maybe CigarUnit])
+    { _laCigar          :: !(Maybe [CigarUnit])
     , _laMappingQuality :: !(Maybe Int32)
-    , _laPosition       :: !(Maybe (Maybe Position))
+    , _laPosition       :: !(Maybe Position)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LinearAlignment' with the minimum fields required to make a request.
@@ -4139,7 +4139,7 @@ linearAlignment =
 
 -- | Represents the local alignment of this sequence (alignment matches,
 -- indels, etc) against the reference.
-laCigar :: Lens' LinearAlignment [Maybe CigarUnit]
+laCigar :: Lens' LinearAlignment [CigarUnit]
 laCigar
   = lens _laCigar (\ s a -> s{_laCigar = a}) . _Default
       . _Coerce
@@ -4152,7 +4152,7 @@ laMappingQuality
       (\ s a -> s{_laMappingQuality = a})
 
 -- | The position of this alignment.
-laPosition :: Lens' LinearAlignment (Maybe (Maybe Position))
+laPosition :: Lens' LinearAlignment (Maybe Position)
 laPosition
   = lens _laPosition (\ s a -> s{_laPosition = a})
 
@@ -4212,7 +4212,7 @@ instance ToJSON AlignReadGroupSetsResponse where
 data ListCoverageBucketsResponse = ListCoverageBucketsResponse
     { _lcbrNextPageToken   :: !(Maybe Text)
     , _lcbrBucketWidth     :: !(Maybe Int64)
-    , _lcbrCoverageBuckets :: !(Maybe [Maybe CoverageBucket])
+    , _lcbrCoverageBuckets :: !(Maybe [CoverageBucket])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListCoverageBucketsResponse' with the minimum fields required to make a request.
@@ -4255,7 +4255,7 @@ lcbrBucketWidth
 -- overlapping reads is not returned. A bucket never crosses more than one
 -- reference sequence. Each bucket has width bucketWidth, unless its end is
 -- the end of the reference sequence.
-lcbrCoverageBuckets :: Lens' ListCoverageBucketsResponse [Maybe CoverageBucket]
+lcbrCoverageBuckets :: Lens' ListCoverageBucketsResponse [CoverageBucket]
 lcbrCoverageBuckets
   = lens _lcbrCoverageBuckets
       (\ s a -> s{_lcbrCoverageBuckets = a})
@@ -4324,7 +4324,7 @@ data AnnotationSet = AnnotationSet
     , _asDatasetId      :: !(Maybe Text)
     , _asId             :: !(Maybe Text)
     , _asType           :: !(Maybe AnnotationSetType)
-    , _asSourceUri      :: !(Maybe Text)
+    , _asSourceURI      :: !(Maybe Text)
     , _asInfo           :: !(Maybe AnnotationSetInfo)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -4342,7 +4342,7 @@ data AnnotationSet = AnnotationSet
 --
 -- * 'asType'
 --
--- * 'asSourceUri'
+-- * 'asSourceURI'
 --
 -- * 'asInfo'
 annotationSet
@@ -4354,7 +4354,7 @@ annotationSet =
     , _asDatasetId = Nothing
     , _asId = Nothing
     , _asType = Nothing
-    , _asSourceUri = Nothing
+    , _asSourceURI = Nothing
     , _asInfo = Nothing
     }
 
@@ -4384,9 +4384,9 @@ asType = lens _asType (\ s a -> s{_asType = a})
 
 -- | The source URI describing the file from which this annotation set was
 -- generated, if any.
-asSourceUri :: Lens' AnnotationSet (Maybe Text)
-asSourceUri
-  = lens _asSourceUri (\ s a -> s{_asSourceUri = a})
+asSourceURI :: Lens' AnnotationSet (Maybe Text)
+asSourceURI
+  = lens _asSourceURI (\ s a -> s{_asSourceURI = a})
 
 -- | A string which maps to an array of values.
 asInfo :: Lens' AnnotationSet (Maybe AnnotationSetInfo)
@@ -4412,7 +4412,7 @@ instance ToJSON AnnotationSet where
                   ("name" .=) <$> _asName,
                   ("datasetId" .=) <$> _asDatasetId,
                   ("id" .=) <$> _asId, ("type" .=) <$> _asType,
-                  ("sourceUri" .=) <$> _asSourceUri,
+                  ("sourceUri" .=) <$> _asSourceURI,
                   ("info" .=) <$> _asInfo])
 
 -- | Metadata describes a single piece of variant call metadata. These data
@@ -4521,8 +4521,8 @@ instance ToJSON Metadata where
 -- /See:/ 'variantSet' smart constructor.
 data VariantSet = VariantSet
     { _vsDatasetId       :: !(Maybe Text)
-    , _vsReferenceBounds :: !(Maybe [Maybe ReferenceBound])
-    , _vsMetadata        :: !(Maybe [Maybe Metadata])
+    , _vsReferenceBounds :: !(Maybe [ReferenceBound])
+    , _vsMetadata        :: !(Maybe [Metadata])
     , _vsId              :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -4554,7 +4554,7 @@ vsDatasetId
 
 -- | A list of all references used by the variants in a variant set with
 -- associated coordinate upper bounds for each one.
-vsReferenceBounds :: Lens' VariantSet [Maybe ReferenceBound]
+vsReferenceBounds :: Lens' VariantSet [ReferenceBound]
 vsReferenceBounds
   = lens _vsReferenceBounds
       (\ s a -> s{_vsReferenceBounds = a})
@@ -4562,7 +4562,7 @@ vsReferenceBounds
       . _Coerce
 
 -- | The metadata associated with this variant set.
-vsMetadata :: Lens' VariantSet [Maybe Metadata]
+vsMetadata :: Lens' VariantSet [Metadata]
 vsMetadata
   = lens _vsMetadata (\ s a -> s{_vsMetadata = a}) .
       _Default
@@ -4656,10 +4656,10 @@ instance ToJSON CigarUnit where
 --
 -- /See:/ 'alignReadGroupSetsRequest' smart constructor.
 data AlignReadGroupSetsRequest = AlignReadGroupSetsRequest
-    { _argsrInterleavedFastqSource :: !(Maybe (Maybe InterleavedFastqSource))
+    { _argsrInterleavedFastqSource :: !(Maybe InterleavedFastqSource)
     , _argsrReadGroupSetId         :: !(Maybe Text)
-    , _argsrBamSourceUris          :: !(Maybe [Text])
-    , _argsrPairedFastqSource      :: !(Maybe (Maybe PairedFastqSource))
+    , _argsrBamSourceURIs          :: !(Maybe [Text])
+    , _argsrPairedFastqSource      :: !(Maybe PairedFastqSource)
     , _argsrDatasetId              :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -4671,7 +4671,7 @@ data AlignReadGroupSetsRequest = AlignReadGroupSetsRequest
 --
 -- * 'argsrReadGroupSetId'
 --
--- * 'argsrBamSourceUris'
+-- * 'argsrBamSourceURIs'
 --
 -- * 'argsrPairedFastqSource'
 --
@@ -4682,7 +4682,7 @@ alignReadGroupSetsRequest =
     AlignReadGroupSetsRequest
     { _argsrInterleavedFastqSource = Nothing
     , _argsrReadGroupSetId = Nothing
-    , _argsrBamSourceUris = Nothing
+    , _argsrBamSourceURIs = Nothing
     , _argsrPairedFastqSource = Nothing
     , _argsrDatasetId = Nothing
     }
@@ -4691,7 +4691,7 @@ alignReadGroupSetsRequest =
 -- each pair of reads are found on consecutive records within the same
 -- FASTQ file. Exactly one of readGroupSetId, bamSourceUris,
 -- interleavedFastqSource or pairedFastqSource must be provided.
-argsrInterleavedFastqSource :: Lens' AlignReadGroupSetsRequest (Maybe (Maybe InterleavedFastqSource))
+argsrInterleavedFastqSource :: Lens' AlignReadGroupSetsRequest (Maybe InterleavedFastqSource)
 argsrInterleavedFastqSource
   = lens _argsrInterleavedFastqSource
       (\ s a -> s{_argsrInterleavedFastqSource = a})
@@ -4709,10 +4709,10 @@ argsrReadGroupSetId
 -- | The BAM source files for alignment. Exactly one of readGroupSetId,
 -- bamSourceUris, interleavedFastqSource or pairedFastqSource must be
 -- provided. The caller must have READ permissions for these files.
-argsrBamSourceUris :: Lens' AlignReadGroupSetsRequest [Text]
-argsrBamSourceUris
-  = lens _argsrBamSourceUris
-      (\ s a -> s{_argsrBamSourceUris = a})
+argsrBamSourceURIs :: Lens' AlignReadGroupSetsRequest [Text]
+argsrBamSourceURIs
+  = lens _argsrBamSourceURIs
+      (\ s a -> s{_argsrBamSourceURIs = a})
       . _Default
       . _Coerce
 
@@ -4720,7 +4720,7 @@ argsrBamSourceUris
 -- pair of reads are found in separate files. Exactly one of
 -- readGroupSetId, bamSourceUris, interleavedFastqSource or
 -- pairedFastqSource must be provided.
-argsrPairedFastqSource :: Lens' AlignReadGroupSetsRequest (Maybe (Maybe PairedFastqSource))
+argsrPairedFastqSource :: Lens' AlignReadGroupSetsRequest (Maybe PairedFastqSource)
 argsrPairedFastqSource
   = lens _argsrPairedFastqSource
       (\ s a -> s{_argsrPairedFastqSource = a})
@@ -4750,7 +4750,7 @@ instance ToJSON AlignReadGroupSetsRequest where
                  [("interleavedFastqSource" .=) <$>
                     _argsrInterleavedFastqSource,
                   ("readGroupSetId" .=) <$> _argsrReadGroupSetId,
-                  ("bamSourceUris" .=) <$> _argsrBamSourceUris,
+                  ("bamSourceUris" .=) <$> _argsrBamSourceURIs,
                   ("pairedFastqSource" .=) <$> _argsrPairedFastqSource,
                   ("datasetId" .=) <$> _argsrDatasetId])
 
@@ -4852,7 +4852,7 @@ instance ToJSON ExportVariantSetRequest where
 data ImportVariantsRequest = ImportVariantsRequest
     { _ivrFormat                  :: !(Maybe ImportVariantsRequestFormat)
     , _ivrNormalizeReferenceNames :: !(Maybe Bool)
-    , _ivrSourceUris              :: !(Maybe [Text])
+    , _ivrSourceURIs              :: !(Maybe [Text])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ImportVariantsRequest' with the minimum fields required to make a request.
@@ -4863,14 +4863,14 @@ data ImportVariantsRequest = ImportVariantsRequest
 --
 -- * 'ivrNormalizeReferenceNames'
 --
--- * 'ivrSourceUris'
+-- * 'ivrSourceURIs'
 importVariantsRequest
     :: ImportVariantsRequest
 importVariantsRequest =
     ImportVariantsRequest
     { _ivrFormat = Nothing
     , _ivrNormalizeReferenceNames = Nothing
-    , _ivrSourceUris = Nothing
+    , _ivrSourceURIs = Nothing
     }
 
 -- | The format of the variant data being imported. If unspecified, defaults
@@ -4894,10 +4894,10 @@ ivrNormalizeReferenceNames
 -- | A list of URIs referencing variant files in Google Cloud Storage. URIs
 -- can include wildcards as described here. Note that recursive wildcards
 -- (\'**\') are not supported.
-ivrSourceUris :: Lens' ImportVariantsRequest [Text]
-ivrSourceUris
-  = lens _ivrSourceUris
-      (\ s a -> s{_ivrSourceUris = a})
+ivrSourceURIs :: Lens' ImportVariantsRequest [Text]
+ivrSourceURIs
+  = lens _ivrSourceURIs
+      (\ s a -> s{_ivrSourceURIs = a})
       . _Default
       . _Coerce
 
@@ -4917,7 +4917,7 @@ instance ToJSON ImportVariantsRequest where
                  [("format" .=) <$> _ivrFormat,
                   ("normalizeReferenceNames" .=) <$>
                     _ivrNormalizeReferenceNames,
-                  ("sourceUris" .=) <$> _ivrSourceUris])
+                  ("sourceUris" .=) <$> _ivrSourceURIs])
 
 -- |
 --
@@ -4970,7 +4970,7 @@ instance ToJSON ExternalId where
 data ImportReadGroupSetsRequest = ImportReadGroupSetsRequest
     { _irgsrReferenceSetId    :: !(Maybe Text)
     , _irgsrDatasetId         :: !(Maybe Text)
-    , _irgsrSourceUris        :: !(Maybe [Text])
+    , _irgsrSourceURIs        :: !(Maybe [Text])
     , _irgsrPartitionStrategy :: !(Maybe ImportReadGroupSetsRequestPartitionStrategy)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -4982,7 +4982,7 @@ data ImportReadGroupSetsRequest = ImportReadGroupSetsRequest
 --
 -- * 'irgsrDatasetId'
 --
--- * 'irgsrSourceUris'
+-- * 'irgsrSourceURIs'
 --
 -- * 'irgsrPartitionStrategy'
 importReadGroupSetsRequest
@@ -4991,7 +4991,7 @@ importReadGroupSetsRequest =
     ImportReadGroupSetsRequest
     { _irgsrReferenceSetId = Nothing
     , _irgsrDatasetId = Nothing
-    , _irgsrSourceUris = Nothing
+    , _irgsrSourceURIs = Nothing
     , _irgsrPartitionStrategy = Nothing
     }
 
@@ -5013,10 +5013,10 @@ irgsrDatasetId
       (\ s a -> s{_irgsrDatasetId = a})
 
 -- | A list of URIs pointing at BAM files in Google Cloud Storage.
-irgsrSourceUris :: Lens' ImportReadGroupSetsRequest [Text]
-irgsrSourceUris
-  = lens _irgsrSourceUris
-      (\ s a -> s{_irgsrSourceUris = a})
+irgsrSourceURIs :: Lens' ImportReadGroupSetsRequest [Text]
+irgsrSourceURIs
+  = lens _irgsrSourceURIs
+      (\ s a -> s{_irgsrSourceURIs = a})
       . _Default
       . _Coerce
 
@@ -5042,7 +5042,7 @@ instance ToJSON ImportReadGroupSetsRequest where
               (catMaybes
                  [("referenceSetId" .=) <$> _irgsrReferenceSetId,
                   ("datasetId" .=) <$> _irgsrDatasetId,
-                  ("sourceUris" .=) <$> _irgsrSourceUris,
+                  ("sourceUris" .=) <$> _irgsrSourceURIs,
                   ("partitionStrategy" .=) <$>
                     _irgsrPartitionStrategy])
 
@@ -5051,7 +5051,7 @@ instance ToJSON ImportReadGroupSetsRequest where
 -- /See:/ 'listDatasetsResponse' smart constructor.
 data ListDatasetsResponse = ListDatasetsResponse
     { _ldrNextPageToken :: !(Maybe Text)
-    , _ldrDatasets      :: !(Maybe [Maybe Dataset])
+    , _ldrDatasets      :: !(Maybe [Dataset])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListDatasetsResponse' with the minimum fields required to make a request.
@@ -5079,7 +5079,7 @@ ldrNextPageToken
       (\ s a -> s{_ldrNextPageToken = a})
 
 -- | The list of matching Datasets.
-ldrDatasets :: Lens' ListDatasetsResponse [Maybe Dataset]
+ldrDatasets :: Lens' ListDatasetsResponse [Dataset]
 ldrDatasets
   = lens _ldrDatasets (\ s a -> s{_ldrDatasets = a}) .
       _Default
@@ -5104,7 +5104,7 @@ instance ToJSON ListDatasetsResponse where
 --
 -- /See:/ 'variantAnnotationCondition' smart constructor.
 data VariantAnnotationCondition = VariantAnnotationCondition
-    { _vacExternalIds :: !(Maybe [Maybe ExternalId])
+    { _vacExternalIds :: !(Maybe [ExternalId])
     , _vacNames       :: !(Maybe [Text])
     , _vacConceptId   :: !(Maybe Text)
     , _vacOmimId      :: !(Maybe Text)
@@ -5132,7 +5132,7 @@ variantAnnotationCondition =
     }
 
 -- | The set of external IDs for this condition.
-vacExternalIds :: Lens' VariantAnnotationCondition [Maybe ExternalId]
+vacExternalIds :: Lens' VariantAnnotationCondition [ExternalId]
 vacExternalIds
   = lens _vacExternalIds
       (\ s a -> s{_vacExternalIds = a})
@@ -5203,7 +5203,7 @@ instance ToJSON AnnotationSetInfo where
 -- /See:/ 'searchVariantSetsResponse' smart constructor.
 data SearchVariantSetsResponse = SearchVariantSetsResponse
     { _svsrNextPageToken :: !(Maybe Text)
-    , _svsrVariantSets   :: !(Maybe [Maybe VariantSet])
+    , _svsrVariantSets   :: !(Maybe [VariantSet])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SearchVariantSetsResponse' with the minimum fields required to make a request.
@@ -5231,7 +5231,7 @@ svsrNextPageToken
       (\ s a -> s{_svsrNextPageToken = a})
 
 -- | The variant sets belonging to the requested dataset.
-svsrVariantSets :: Lens' SearchVariantSetsResponse [Maybe VariantSet]
+svsrVariantSets :: Lens' SearchVariantSetsResponse [VariantSet]
 svsrVariantSets
   = lens _svsrVariantSets
       (\ s a -> s{_svsrVariantSets = a})
@@ -5420,7 +5420,7 @@ instance ToJSON MetadataInfo where
 --
 -- /See:/ 'searchAnnotationsRequest' smart constructor.
 data SearchAnnotationsRequest = SearchAnnotationsRequest
-    { _sarRange            :: !(Maybe (Maybe QueryRange))
+    { _sarRange            :: !(Maybe QueryRange)
     , _sarPageToken        :: !(Maybe Text)
     , _sarAnnotationSetIds :: !(Maybe [Text])
     , _sarPageSize         :: !(Maybe Int32)
@@ -5449,7 +5449,7 @@ searchAnnotationsRequest =
 
 -- | If specified, this query matches only annotations that overlap this
 -- range.
-sarRange :: Lens' SearchAnnotationsRequest (Maybe (Maybe QueryRange))
+sarRange :: Lens' SearchAnnotationsRequest (Maybe QueryRange)
 sarRange = lens _sarRange (\ s a -> s{_sarRange = a})
 
 -- | The continuation token, which is used to page through large result sets.
@@ -5531,7 +5531,7 @@ instance ToJSON ExportReadGroupSetsResponse where
 -- /See:/ 'searchAnnotationSetsResponse' smart constructor.
 data SearchAnnotationSetsResponse = SearchAnnotationSetsResponse
     { _sasrNextPageToken  :: !(Maybe Text)
-    , _sasrAnnotationSets :: !(Maybe [Maybe AnnotationSet])
+    , _sasrAnnotationSets :: !(Maybe [AnnotationSet])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SearchAnnotationSetsResponse' with the minimum fields required to make a request.
@@ -5559,7 +5559,7 @@ sasrNextPageToken
       (\ s a -> s{_sasrNextPageToken = a})
 
 -- | The matching annotation sets.
-sasrAnnotationSets :: Lens' SearchAnnotationSetsResponse [Maybe AnnotationSet]
+sasrAnnotationSets :: Lens' SearchAnnotationSetsResponse [AnnotationSet]
 sasrAnnotationSets
   = lens _sasrAnnotationSets
       (\ s a -> s{_sasrAnnotationSets = a})
@@ -5692,8 +5692,8 @@ instance ToJSON RangePosition where
 -- /See:/ 'transcript' smart constructor.
 data Transcript = Transcript
     { _tGeneId         :: !(Maybe Text)
-    , _tCodingSequence :: !(Maybe (Maybe TranscriptCodingSequence))
-    , _tExons          :: !(Maybe [Maybe TranscriptExon])
+    , _tCodingSequence :: !(Maybe TranscriptCodingSequence)
+    , _tExons          :: !(Maybe [TranscriptExon])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Transcript' with the minimum fields required to make a request.
@@ -5727,7 +5727,7 @@ tGeneId = lens _tGeneId (\ s a -> s{_tGeneId = a})
 -- will not necessarily match the expected reference reading frame and
 -- coding exon reference bases cannot necessarily be concatenated to
 -- produce the original transcript mRNA.
-tCodingSequence :: Lens' Transcript (Maybe (Maybe TranscriptCodingSequence))
+tCodingSequence :: Lens' Transcript (Maybe TranscriptCodingSequence)
 tCodingSequence
   = lens _tCodingSequence
       (\ s a -> s{_tCodingSequence = a})
@@ -5741,7 +5741,7 @@ tCodingSequence
 -- translational product (amino acids). Only the regions of exons bounded
 -- by the codingSequence correspond to coding DNA sequence. Exons are
 -- ordered by start position and may not overlap.
-tExons :: Lens' Transcript [Maybe TranscriptExon]
+tExons :: Lens' Transcript [TranscriptExon]
 tExons
   = lens _tExons (\ s a -> s{_tExons = a}) . _Default .
       _Coerce
@@ -5767,7 +5767,7 @@ instance ToJSON Transcript where
 -- /See:/ 'searchReadGroupSetsResponse' smart constructor.
 data SearchReadGroupSetsResponse = SearchReadGroupSetsResponse
     { _srgsrNextPageToken :: !(Maybe Text)
-    , _srgsrReadGroupSets :: !(Maybe [Maybe ReadGroupSet])
+    , _srgsrReadGroupSets :: !(Maybe [ReadGroupSet])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SearchReadGroupSetsResponse' with the minimum fields required to make a request.
@@ -5795,7 +5795,7 @@ srgsrNextPageToken
       (\ s a -> s{_srgsrNextPageToken = a})
 
 -- | The list of matching read group sets.
-srgsrReadGroupSets :: Lens' SearchReadGroupSetsResponse [Maybe ReadGroupSet]
+srgsrReadGroupSets :: Lens' SearchReadGroupSetsResponse [ReadGroupSet]
 srgsrReadGroupSets
   = lens _srgsrReadGroupSets
       (\ s a -> s{_srgsrReadGroupSets = a})
@@ -5822,7 +5822,7 @@ instance ToJSON SearchReadGroupSetsResponse where
 -- /See:/ 'searchJobsResponse' smart constructor.
 data SearchJobsResponse = SearchJobsResponse
     { _sjrNextPageToken :: !(Maybe Text)
-    , _sjrJobs          :: !(Maybe [Maybe Job])
+    , _sjrJobs          :: !(Maybe [Job])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SearchJobsResponse' with the minimum fields required to make a request.
@@ -5849,7 +5849,7 @@ sjrNextPageToken
       (\ s a -> s{_sjrNextPageToken = a})
 
 -- | The list of jobs results, ordered newest to oldest.
-sjrJobs :: Lens' SearchJobsResponse [Maybe Job]
+sjrJobs :: Lens' SearchJobsResponse [Job]
 sjrJobs
   = lens _sjrJobs (\ s a -> s{_sjrJobs = a}) . _Default
       . _Coerce
@@ -6062,7 +6062,7 @@ instance ToJSON ReadGroupSetInfo where
 data ReferenceSet = ReferenceSet
     { _rsSourceAccessions :: !(Maybe [Text])
     , _rsReferenceIds     :: !(Maybe [Text])
-    , _rsMd5checksum      :: !(Maybe Text)
+    , _rsMD5checksum      :: !(Maybe Text)
     , _rsNcbiTaxonId      :: !(Maybe Int32)
     , _rsId               :: !(Maybe Text)
     , _rsAssemblyId       :: !(Maybe Text)
@@ -6078,7 +6078,7 @@ data ReferenceSet = ReferenceSet
 --
 -- * 'rsReferenceIds'
 --
--- * 'rsMd5checksum'
+-- * 'rsMD5checksum'
 --
 -- * 'rsNcbiTaxonId'
 --
@@ -6095,7 +6095,7 @@ referenceSet =
     ReferenceSet
     { _rsSourceAccessions = Nothing
     , _rsReferenceIds = Nothing
-    , _rsMd5checksum = Nothing
+    , _rsMD5checksum = Nothing
     , _rsNcbiTaxonId = Nothing
     , _rsId = Nothing
     , _rsAssemblyId = Nothing
@@ -6126,10 +6126,10 @@ rsReferenceIds
 -- reference.md5checksum (for all reference in this set) in ascending
 -- lexicographic order, concatenating, and taking the MD5 of that value.
 -- The resulting value is represented in lower case hexadecimal format.
-rsMd5checksum :: Lens' ReferenceSet (Maybe Text)
-rsMd5checksum
-  = lens _rsMd5checksum
-      (\ s a -> s{_rsMd5checksum = a})
+rsMD5checksum :: Lens' ReferenceSet (Maybe Text)
+rsMD5checksum
+  = lens _rsMD5checksum
+      (\ s a -> s{_rsMD5checksum = a})
 
 -- | ID from http:\/\/www.ncbi.nlm.nih.gov\/taxonomy (e.g. 9606->human)
 -- indicating the species which this assembly is intended to model. Note
@@ -6181,7 +6181,7 @@ instance ToJSON ReferenceSet where
               (catMaybes
                  [("sourceAccessions" .=) <$> _rsSourceAccessions,
                   ("referenceIds" .=) <$> _rsReferenceIds,
-                  ("md5checksum" .=) <$> _rsMd5checksum,
+                  ("md5checksum" .=) <$> _rsMD5checksum,
                   ("ncbiTaxonId" .=) <$> _rsNcbiTaxonId,
                   ("id" .=) <$> _rsId,
                   ("assemblyId" .=) <$> _rsAssemblyId,

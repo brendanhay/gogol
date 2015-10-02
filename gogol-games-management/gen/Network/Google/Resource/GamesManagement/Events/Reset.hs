@@ -35,12 +35,11 @@ module Network.Google.Resource.GamesManagement.Events.Reset
     -- * Request Lenses
     , erQuotaUser
     , erPrettyPrint
-    , erUserIp
+    , erUserIP
     , erKey
-    , erOauthToken
+    , erOAuthToken
     , erEventId
     , erFields
-    , erAlt
     ) where
 
 import           Network.Google.GamesManagement.Types
@@ -55,10 +54,10 @@ type EventsResetResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] ()
+                       QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Resets all player progress on the event with the given ID for the
 -- currently authenticated player. This method is only accessible to
@@ -69,12 +68,11 @@ type EventsResetResource =
 data EventsReset' = EventsReset'
     { _erQuotaUser   :: !(Maybe Text)
     , _erPrettyPrint :: !Bool
-    , _erUserIp      :: !(Maybe Text)
-    , _erKey         :: !(Maybe Text)
-    , _erOauthToken  :: !(Maybe Text)
+    , _erUserIP      :: !(Maybe Text)
+    , _erKey         :: !(Maybe Key)
+    , _erOAuthToken  :: !(Maybe OAuthToken)
     , _erEventId     :: !Text
     , _erFields      :: !(Maybe Text)
-    , _erAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsReset'' with the minimum fields required to make a request.
@@ -85,17 +83,15 @@ data EventsReset' = EventsReset'
 --
 -- * 'erPrettyPrint'
 --
--- * 'erUserIp'
+-- * 'erUserIP'
 --
 -- * 'erKey'
 --
--- * 'erOauthToken'
+-- * 'erOAuthToken'
 --
 -- * 'erEventId'
 --
 -- * 'erFields'
---
--- * 'erAlt'
 eventsReset'
     :: Text -- ^ 'eventId'
     -> EventsReset'
@@ -103,12 +99,11 @@ eventsReset' pErEventId_ =
     EventsReset'
     { _erQuotaUser = Nothing
     , _erPrettyPrint = True
-    , _erUserIp = Nothing
+    , _erUserIP = Nothing
     , _erKey = Nothing
-    , _erOauthToken = Nothing
+    , _erOAuthToken = Nothing
     , _erEventId = pErEventId_
     , _erFields = Nothing
-    , _erAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -126,19 +121,19 @@ erPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-erUserIp :: Lens' EventsReset' (Maybe Text)
-erUserIp = lens _erUserIp (\ s a -> s{_erUserIp = a})
+erUserIP :: Lens' EventsReset' (Maybe Text)
+erUserIP = lens _erUserIP (\ s a -> s{_erUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-erKey :: Lens' EventsReset' (Maybe Text)
+erKey :: Lens' EventsReset' (Maybe Key)
 erKey = lens _erKey (\ s a -> s{_erKey = a})
 
 -- | OAuth 2.0 token for the current user.
-erOauthToken :: Lens' EventsReset' (Maybe Text)
-erOauthToken
-  = lens _erOauthToken (\ s a -> s{_erOauthToken = a})
+erOAuthToken :: Lens' EventsReset' (Maybe OAuthToken)
+erOAuthToken
+  = lens _erOAuthToken (\ s a -> s{_erOAuthToken = a})
 
 -- | The ID of the event.
 erEventId :: Lens' EventsReset' Text
@@ -149,20 +144,20 @@ erEventId
 erFields :: Lens' EventsReset' (Maybe Text)
 erFields = lens _erFields (\ s a -> s{_erFields = a})
 
--- | Data format for the response.
-erAlt :: Lens' EventsReset' Alt
-erAlt = lens _erAlt (\ s a -> s{_erAlt = a})
+instance GoogleAuth EventsReset' where
+        authKey = erKey . _Just
+        authToken = erOAuthToken . _Just
 
 instance GoogleRequest EventsReset' where
         type Rs EventsReset' = ()
         request = requestWithRoute defReq gamesManagementURL
         requestWithRoute r u EventsReset'{..}
-          = go _erQuotaUser (Just _erPrettyPrint) _erUserIp
+          = go _erQuotaUser (Just _erPrettyPrint) _erUserIP
               _erKey
-              _erOauthToken
+              _erOAuthToken
               _erEventId
               _erFields
-              (Just _erAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy EventsResetResource)

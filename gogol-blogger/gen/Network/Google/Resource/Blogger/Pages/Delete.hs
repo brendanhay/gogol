@@ -32,13 +32,12 @@ module Network.Google.Resource.Blogger.Pages.Delete
     -- * Request Lenses
     , pddQuotaUser
     , pddPrettyPrint
-    , pddUserIp
+    , pddUserIP
     , pddBlogId
     , pddPageId
     , pddKey
-    , pddOauthToken
+    , pddOAuthToken
     , pddFields
-    , pddAlt
     ) where
 
 import           Network.Google.Blogger.Types
@@ -54,10 +53,10 @@ type PagesDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Delete '[JSON] ()
+                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete a page by ID.
 --
@@ -65,13 +64,12 @@ type PagesDeleteResource =
 data PagesDelete' = PagesDelete'
     { _pddQuotaUser   :: !(Maybe Text)
     , _pddPrettyPrint :: !Bool
-    , _pddUserIp      :: !(Maybe Text)
+    , _pddUserIP      :: !(Maybe Text)
     , _pddBlogId      :: !Text
     , _pddPageId      :: !Text
-    , _pddKey         :: !(Maybe Text)
-    , _pddOauthToken  :: !(Maybe Text)
+    , _pddKey         :: !(Maybe Key)
+    , _pddOAuthToken  :: !(Maybe OAuthToken)
     , _pddFields      :: !(Maybe Text)
-    , _pddAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PagesDelete'' with the minimum fields required to make a request.
@@ -82,7 +80,7 @@ data PagesDelete' = PagesDelete'
 --
 -- * 'pddPrettyPrint'
 --
--- * 'pddUserIp'
+-- * 'pddUserIP'
 --
 -- * 'pddBlogId'
 --
@@ -90,11 +88,9 @@ data PagesDelete' = PagesDelete'
 --
 -- * 'pddKey'
 --
--- * 'pddOauthToken'
+-- * 'pddOAuthToken'
 --
 -- * 'pddFields'
---
--- * 'pddAlt'
 pagesDelete'
     :: Text -- ^ 'blogId'
     -> Text -- ^ 'pageId'
@@ -103,13 +99,12 @@ pagesDelete' pPddBlogId_ pPddPageId_ =
     PagesDelete'
     { _pddQuotaUser = Nothing
     , _pddPrettyPrint = True
-    , _pddUserIp = Nothing
+    , _pddUserIP = Nothing
     , _pddBlogId = pPddBlogId_
     , _pddPageId = pPddPageId_
     , _pddKey = Nothing
-    , _pddOauthToken = Nothing
+    , _pddOAuthToken = Nothing
     , _pddFields = Nothing
-    , _pddAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,9 +122,9 @@ pddPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-pddUserIp :: Lens' PagesDelete' (Maybe Text)
-pddUserIp
-  = lens _pddUserIp (\ s a -> s{_pddUserIp = a})
+pddUserIP :: Lens' PagesDelete' (Maybe Text)
+pddUserIP
+  = lens _pddUserIP (\ s a -> s{_pddUserIP = a})
 
 -- | The ID of the Blog.
 pddBlogId :: Lens' PagesDelete' Text
@@ -144,35 +139,35 @@ pddPageId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pddKey :: Lens' PagesDelete' (Maybe Text)
+pddKey :: Lens' PagesDelete' (Maybe Key)
 pddKey = lens _pddKey (\ s a -> s{_pddKey = a})
 
 -- | OAuth 2.0 token for the current user.
-pddOauthToken :: Lens' PagesDelete' (Maybe Text)
-pddOauthToken
-  = lens _pddOauthToken
-      (\ s a -> s{_pddOauthToken = a})
+pddOAuthToken :: Lens' PagesDelete' (Maybe OAuthToken)
+pddOAuthToken
+  = lens _pddOAuthToken
+      (\ s a -> s{_pddOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 pddFields :: Lens' PagesDelete' (Maybe Text)
 pddFields
   = lens _pddFields (\ s a -> s{_pddFields = a})
 
--- | Data format for the response.
-pddAlt :: Lens' PagesDelete' Alt
-pddAlt = lens _pddAlt (\ s a -> s{_pddAlt = a})
+instance GoogleAuth PagesDelete' where
+        authKey = pddKey . _Just
+        authToken = pddOAuthToken . _Just
 
 instance GoogleRequest PagesDelete' where
         type Rs PagesDelete' = ()
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PagesDelete'{..}
-          = go _pddQuotaUser (Just _pddPrettyPrint) _pddUserIp
+          = go _pddQuotaUser (Just _pddPrettyPrint) _pddUserIP
               _pddBlogId
               _pddPageId
               _pddKey
-              _pddOauthToken
+              _pddOAuthToken
               _pddFields
-              (Just _pddAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PagesDeleteResource)

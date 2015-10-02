@@ -32,13 +32,13 @@ module Network.Google.Resource.YouTube.Thumbnails.Set
     -- * Request Lenses
     , tsQuotaUser
     , tsPrettyPrint
-    , tsUserIp
+    , tsUserIP
+    , tsMedia
     , tsOnBehalfOfContentOwner
     , tsVideoId
     , tsKey
-    , tsOauthToken
+    , tsOAuthToken
     , tsFields
-    , tsAlt
     ) where
 
 import           Network.Google.Prelude
@@ -54,10 +54,10 @@ type ThumbnailsSetResource =
              QueryParam "userIp" Text :>
                QueryParam "onBehalfOfContentOwner" Text :>
                  QueryParam "videoId" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :>
+                         QueryParam "alt" AltJSON :>
                            Post '[JSON] ThumbnailSetResponse
 
 -- | Uploads a custom video thumbnail to YouTube and sets it for a video.
@@ -66,13 +66,13 @@ type ThumbnailsSetResource =
 data ThumbnailsSet' = ThumbnailsSet'
     { _tsQuotaUser              :: !(Maybe Text)
     , _tsPrettyPrint            :: !Bool
-    , _tsUserIp                 :: !(Maybe Text)
+    , _tsUserIP                 :: !(Maybe Text)
+    , _tsMedia                  :: !Body
     , _tsOnBehalfOfContentOwner :: !(Maybe Text)
     , _tsVideoId                :: !Text
-    , _tsKey                    :: !(Maybe Text)
-    , _tsOauthToken             :: !(Maybe Text)
+    , _tsKey                    :: !(Maybe Key)
+    , _tsOAuthToken             :: !(Maybe OAuthToken)
     , _tsFields                 :: !(Maybe Text)
-    , _tsAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ThumbnailsSet'' with the minimum fields required to make a request.
@@ -83,7 +83,9 @@ data ThumbnailsSet' = ThumbnailsSet'
 --
 -- * 'tsPrettyPrint'
 --
--- * 'tsUserIp'
+-- * 'tsUserIP'
+--
+-- * 'tsMedia'
 --
 -- * 'tsOnBehalfOfContentOwner'
 --
@@ -91,25 +93,24 @@ data ThumbnailsSet' = ThumbnailsSet'
 --
 -- * 'tsKey'
 --
--- * 'tsOauthToken'
+-- * 'tsOAuthToken'
 --
 -- * 'tsFields'
---
--- * 'tsAlt'
 thumbnailsSet'
-    :: Text -- ^ 'videoId'
+    :: Body -- ^ 'media'
+    -> Text -- ^ 'videoId'
     -> ThumbnailsSet'
-thumbnailsSet' pTsVideoId_ =
+thumbnailsSet' pTsMedia_ pTsVideoId_ =
     ThumbnailsSet'
     { _tsQuotaUser = Nothing
     , _tsPrettyPrint = True
-    , _tsUserIp = Nothing
+    , _tsUserIP = Nothing
+    , _tsMedia = pTsMedia_
     , _tsOnBehalfOfContentOwner = Nothing
     , _tsVideoId = pTsVideoId_
     , _tsKey = Nothing
-    , _tsOauthToken = Nothing
+    , _tsOAuthToken = Nothing
     , _tsFields = Nothing
-    , _tsAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,8 +128,11 @@ tsPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tsUserIp :: Lens' ThumbnailsSet' (Maybe Text)
-tsUserIp = lens _tsUserIp (\ s a -> s{_tsUserIp = a})
+tsUserIP :: Lens' ThumbnailsSet' (Maybe Text)
+tsUserIP = lens _tsUserIP (\ s a -> s{_tsUserIP = a})
+
+tsMedia :: Lens' ThumbnailsSet' Body
+tsMedia = lens _tsMedia (\ s a -> s{_tsMedia = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
@@ -154,33 +158,34 @@ tsVideoId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tsKey :: Lens' ThumbnailsSet' (Maybe Text)
+tsKey :: Lens' ThumbnailsSet' (Maybe Key)
 tsKey = lens _tsKey (\ s a -> s{_tsKey = a})
 
 -- | OAuth 2.0 token for the current user.
-tsOauthToken :: Lens' ThumbnailsSet' (Maybe Text)
-tsOauthToken
-  = lens _tsOauthToken (\ s a -> s{_tsOauthToken = a})
+tsOAuthToken :: Lens' ThumbnailsSet' (Maybe OAuthToken)
+tsOAuthToken
+  = lens _tsOAuthToken (\ s a -> s{_tsOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 tsFields :: Lens' ThumbnailsSet' (Maybe Text)
 tsFields = lens _tsFields (\ s a -> s{_tsFields = a})
 
--- | Data format for the response.
-tsAlt :: Lens' ThumbnailsSet' Alt
-tsAlt = lens _tsAlt (\ s a -> s{_tsAlt = a})
+instance GoogleAuth ThumbnailsSet' where
+        authKey = tsKey . _Just
+        authToken = tsOAuthToken . _Just
 
 instance GoogleRequest ThumbnailsSet' where
         type Rs ThumbnailsSet' = ThumbnailSetResponse
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u ThumbnailsSet'{..}
-          = go _tsQuotaUser (Just _tsPrettyPrint) _tsUserIp
+          = go _tsQuotaUser (Just _tsPrettyPrint) _tsUserIP
+              _tsMedia
               _tsOnBehalfOfContentOwner
               (Just _tsVideoId)
               _tsKey
-              _tsOauthToken
+              _tsOAuthToken
               _tsFields
-              (Just _tsAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ThumbnailsSetResource)

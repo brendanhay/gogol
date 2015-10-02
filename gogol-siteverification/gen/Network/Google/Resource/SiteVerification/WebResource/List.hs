@@ -32,11 +32,10 @@ module Network.Google.Resource.SiteVerification.WebResource.List
     -- * Request Lenses
     , wrlQuotaUser
     , wrlPrettyPrint
-    , wrlUserIp
+    , wrlUserIP
     , wrlKey
-    , wrlOauthToken
+    , wrlOAuthToken
     , wrlFields
-    , wrlAlt
     ) where
 
 import           Network.Google.Prelude
@@ -49,10 +48,10 @@ type WebResourceListResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
-               QueryParam "oauth_token" Text :>
+             QueryParam "key" Key :>
+               QueryParam "oauth_token" OAuthToken :>
                  QueryParam "fields" Text :>
-                   QueryParam "alt" Alt :>
+                   QueryParam "alt" AltJSON :>
                      Get '[JSON] SiteVerificationWebResourceListResponse
 
 -- | Get the list of your verified websites and domains.
@@ -61,11 +60,10 @@ type WebResourceListResource =
 data WebResourceList' = WebResourceList'
     { _wrlQuotaUser   :: !(Maybe Text)
     , _wrlPrettyPrint :: !Bool
-    , _wrlUserIp      :: !(Maybe Text)
-    , _wrlKey         :: !(Maybe Text)
-    , _wrlOauthToken  :: !(Maybe Text)
+    , _wrlUserIP      :: !(Maybe Text)
+    , _wrlKey         :: !(Maybe Key)
+    , _wrlOAuthToken  :: !(Maybe OAuthToken)
     , _wrlFields      :: !(Maybe Text)
-    , _wrlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WebResourceList'' with the minimum fields required to make a request.
@@ -76,26 +74,23 @@ data WebResourceList' = WebResourceList'
 --
 -- * 'wrlPrettyPrint'
 --
--- * 'wrlUserIp'
+-- * 'wrlUserIP'
 --
 -- * 'wrlKey'
 --
--- * 'wrlOauthToken'
+-- * 'wrlOAuthToken'
 --
 -- * 'wrlFields'
---
--- * 'wrlAlt'
 webResourceList'
     :: WebResourceList'
 webResourceList' =
     WebResourceList'
     { _wrlQuotaUser = Nothing
     , _wrlPrettyPrint = False
-    , _wrlUserIp = Nothing
+    , _wrlUserIP = Nothing
     , _wrlKey = Nothing
-    , _wrlOauthToken = Nothing
+    , _wrlOAuthToken = Nothing
     , _wrlFields = Nothing
-    , _wrlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -113,41 +108,41 @@ wrlPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-wrlUserIp :: Lens' WebResourceList' (Maybe Text)
-wrlUserIp
-  = lens _wrlUserIp (\ s a -> s{_wrlUserIp = a})
+wrlUserIP :: Lens' WebResourceList' (Maybe Text)
+wrlUserIP
+  = lens _wrlUserIP (\ s a -> s{_wrlUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-wrlKey :: Lens' WebResourceList' (Maybe Text)
+wrlKey :: Lens' WebResourceList' (Maybe Key)
 wrlKey = lens _wrlKey (\ s a -> s{_wrlKey = a})
 
 -- | OAuth 2.0 token for the current user.
-wrlOauthToken :: Lens' WebResourceList' (Maybe Text)
-wrlOauthToken
-  = lens _wrlOauthToken
-      (\ s a -> s{_wrlOauthToken = a})
+wrlOAuthToken :: Lens' WebResourceList' (Maybe OAuthToken)
+wrlOAuthToken
+  = lens _wrlOAuthToken
+      (\ s a -> s{_wrlOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 wrlFields :: Lens' WebResourceList' (Maybe Text)
 wrlFields
   = lens _wrlFields (\ s a -> s{_wrlFields = a})
 
--- | Data format for the response.
-wrlAlt :: Lens' WebResourceList' Alt
-wrlAlt = lens _wrlAlt (\ s a -> s{_wrlAlt = a})
+instance GoogleAuth WebResourceList' where
+        authKey = wrlKey . _Just
+        authToken = wrlOAuthToken . _Just
 
 instance GoogleRequest WebResourceList' where
         type Rs WebResourceList' =
              SiteVerificationWebResourceListResponse
         request = requestWithRoute defReq siteVerificationURL
         requestWithRoute r u WebResourceList'{..}
-          = go _wrlQuotaUser (Just _wrlPrettyPrint) _wrlUserIp
+          = go _wrlQuotaUser (Just _wrlPrettyPrint) _wrlUserIP
               _wrlKey
-              _wrlOauthToken
+              _wrlOAuthToken
               _wrlFields
-              (Just _wrlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy WebResourceListResource)

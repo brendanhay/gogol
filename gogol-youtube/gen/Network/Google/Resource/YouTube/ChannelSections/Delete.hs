@@ -32,13 +32,12 @@ module Network.Google.Resource.YouTube.ChannelSections.Delete
     -- * Request Lenses
     , csdQuotaUser
     , csdPrettyPrint
-    , csdUserIp
+    , csdUserIP
     , csdOnBehalfOfContentOwner
     , csdKey
     , csdId
-    , csdOauthToken
+    , csdOAuthToken
     , csdFields
-    , csdAlt
     ) where
 
 import           Network.Google.Prelude
@@ -52,11 +51,11 @@ type ChannelSectionsDeleteResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
              QueryParam "onBehalfOfContentOwner" Text :>
-               QueryParam "key" Text :>
+               QueryParam "key" Key :>
                  QueryParam "id" Text :>
-                   QueryParam "oauth_token" Text :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Delete '[JSON] ()
+                       QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a channelSection.
 --
@@ -64,13 +63,12 @@ type ChannelSectionsDeleteResource =
 data ChannelSectionsDelete' = ChannelSectionsDelete'
     { _csdQuotaUser              :: !(Maybe Text)
     , _csdPrettyPrint            :: !Bool
-    , _csdUserIp                 :: !(Maybe Text)
+    , _csdUserIP                 :: !(Maybe Text)
     , _csdOnBehalfOfContentOwner :: !(Maybe Text)
-    , _csdKey                    :: !(Maybe Text)
+    , _csdKey                    :: !(Maybe Key)
     , _csdId                     :: !Text
-    , _csdOauthToken             :: !(Maybe Text)
+    , _csdOAuthToken             :: !(Maybe OAuthToken)
     , _csdFields                 :: !(Maybe Text)
-    , _csdAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChannelSectionsDelete'' with the minimum fields required to make a request.
@@ -81,7 +79,7 @@ data ChannelSectionsDelete' = ChannelSectionsDelete'
 --
 -- * 'csdPrettyPrint'
 --
--- * 'csdUserIp'
+-- * 'csdUserIP'
 --
 -- * 'csdOnBehalfOfContentOwner'
 --
@@ -89,11 +87,9 @@ data ChannelSectionsDelete' = ChannelSectionsDelete'
 --
 -- * 'csdId'
 --
--- * 'csdOauthToken'
+-- * 'csdOAuthToken'
 --
 -- * 'csdFields'
---
--- * 'csdAlt'
 channelSectionsDelete'
     :: Text -- ^ 'id'
     -> ChannelSectionsDelete'
@@ -101,13 +97,12 @@ channelSectionsDelete' pCsdId_ =
     ChannelSectionsDelete'
     { _csdQuotaUser = Nothing
     , _csdPrettyPrint = True
-    , _csdUserIp = Nothing
+    , _csdUserIP = Nothing
     , _csdOnBehalfOfContentOwner = Nothing
     , _csdKey = Nothing
     , _csdId = pCsdId_
-    , _csdOauthToken = Nothing
+    , _csdOAuthToken = Nothing
     , _csdFields = Nothing
-    , _csdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -125,9 +120,9 @@ csdPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-csdUserIp :: Lens' ChannelSectionsDelete' (Maybe Text)
-csdUserIp
-  = lens _csdUserIp (\ s a -> s{_csdUserIp = a})
+csdUserIP :: Lens' ChannelSectionsDelete' (Maybe Text)
+csdUserIP
+  = lens _csdUserIP (\ s a -> s{_csdUserIP = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
@@ -147,7 +142,7 @@ csdOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-csdKey :: Lens' ChannelSectionsDelete' (Maybe Text)
+csdKey :: Lens' ChannelSectionsDelete' (Maybe Key)
 csdKey = lens _csdKey (\ s a -> s{_csdKey = a})
 
 -- | The id parameter specifies the YouTube channelSection ID for the
@@ -157,31 +152,31 @@ csdId :: Lens' ChannelSectionsDelete' Text
 csdId = lens _csdId (\ s a -> s{_csdId = a})
 
 -- | OAuth 2.0 token for the current user.
-csdOauthToken :: Lens' ChannelSectionsDelete' (Maybe Text)
-csdOauthToken
-  = lens _csdOauthToken
-      (\ s a -> s{_csdOauthToken = a})
+csdOAuthToken :: Lens' ChannelSectionsDelete' (Maybe OAuthToken)
+csdOAuthToken
+  = lens _csdOAuthToken
+      (\ s a -> s{_csdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 csdFields :: Lens' ChannelSectionsDelete' (Maybe Text)
 csdFields
   = lens _csdFields (\ s a -> s{_csdFields = a})
 
--- | Data format for the response.
-csdAlt :: Lens' ChannelSectionsDelete' Alt
-csdAlt = lens _csdAlt (\ s a -> s{_csdAlt = a})
+instance GoogleAuth ChannelSectionsDelete' where
+        authKey = csdKey . _Just
+        authToken = csdOAuthToken . _Just
 
 instance GoogleRequest ChannelSectionsDelete' where
         type Rs ChannelSectionsDelete' = ()
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u ChannelSectionsDelete'{..}
-          = go _csdQuotaUser (Just _csdPrettyPrint) _csdUserIp
+          = go _csdQuotaUser (Just _csdPrettyPrint) _csdUserIP
               _csdOnBehalfOfContentOwner
               _csdKey
               (Just _csdId)
-              _csdOauthToken
+              _csdOAuthToken
               _csdFields
-              (Just _csdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ChannelSectionsDeleteResource)

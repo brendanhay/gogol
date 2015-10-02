@@ -32,13 +32,12 @@ module Network.Google.Resource.DFAReporting.OperatingSystems.Get
     -- * Request Lenses
     , osgQuotaUser
     , osgPrettyPrint
-    , osgUserIp
+    , osgUserIP
     , osgProfileId
     , osgKey
-    , osgOauthToken
+    , osgOAuthToken
     , osgDartId
     , osgFields
-    , osgAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,10 +53,11 @@ type OperatingSystemsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] OperatingSystem
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] OperatingSystem
 
 -- | Gets one operating system by DART ID.
 --
@@ -65,13 +65,12 @@ type OperatingSystemsGetResource =
 data OperatingSystemsGet' = OperatingSystemsGet'
     { _osgQuotaUser   :: !(Maybe Text)
     , _osgPrettyPrint :: !Bool
-    , _osgUserIp      :: !(Maybe Text)
+    , _osgUserIP      :: !(Maybe Text)
     , _osgProfileId   :: !Int64
-    , _osgKey         :: !(Maybe Text)
-    , _osgOauthToken  :: !(Maybe Text)
+    , _osgKey         :: !(Maybe Key)
+    , _osgOAuthToken  :: !(Maybe OAuthToken)
     , _osgDartId      :: !Int64
     , _osgFields      :: !(Maybe Text)
-    , _osgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperatingSystemsGet'' with the minimum fields required to make a request.
@@ -82,19 +81,17 @@ data OperatingSystemsGet' = OperatingSystemsGet'
 --
 -- * 'osgPrettyPrint'
 --
--- * 'osgUserIp'
+-- * 'osgUserIP'
 --
 -- * 'osgProfileId'
 --
 -- * 'osgKey'
 --
--- * 'osgOauthToken'
+-- * 'osgOAuthToken'
 --
 -- * 'osgDartId'
 --
 -- * 'osgFields'
---
--- * 'osgAlt'
 operatingSystemsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'dartId'
@@ -103,13 +100,12 @@ operatingSystemsGet' pOsgProfileId_ pOsgDartId_ =
     OperatingSystemsGet'
     { _osgQuotaUser = Nothing
     , _osgPrettyPrint = True
-    , _osgUserIp = Nothing
+    , _osgUserIP = Nothing
     , _osgProfileId = pOsgProfileId_
     , _osgKey = Nothing
-    , _osgOauthToken = Nothing
+    , _osgOAuthToken = Nothing
     , _osgDartId = pOsgDartId_
     , _osgFields = Nothing
-    , _osgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,9 +123,9 @@ osgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-osgUserIp :: Lens' OperatingSystemsGet' (Maybe Text)
-osgUserIp
-  = lens _osgUserIp (\ s a -> s{_osgUserIp = a})
+osgUserIP :: Lens' OperatingSystemsGet' (Maybe Text)
+osgUserIP
+  = lens _osgUserIP (\ s a -> s{_osgUserIP = a})
 
 -- | User profile ID associated with this request.
 osgProfileId :: Lens' OperatingSystemsGet' Int64
@@ -139,14 +135,14 @@ osgProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-osgKey :: Lens' OperatingSystemsGet' (Maybe Text)
+osgKey :: Lens' OperatingSystemsGet' (Maybe Key)
 osgKey = lens _osgKey (\ s a -> s{_osgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-osgOauthToken :: Lens' OperatingSystemsGet' (Maybe Text)
-osgOauthToken
-  = lens _osgOauthToken
-      (\ s a -> s{_osgOauthToken = a})
+osgOAuthToken :: Lens' OperatingSystemsGet' (Maybe OAuthToken)
+osgOAuthToken
+  = lens _osgOAuthToken
+      (\ s a -> s{_osgOAuthToken = a})
 
 -- | Operating system DART ID.
 osgDartId :: Lens' OperatingSystemsGet' Int64
@@ -158,21 +154,21 @@ osgFields :: Lens' OperatingSystemsGet' (Maybe Text)
 osgFields
   = lens _osgFields (\ s a -> s{_osgFields = a})
 
--- | Data format for the response.
-osgAlt :: Lens' OperatingSystemsGet' Alt
-osgAlt = lens _osgAlt (\ s a -> s{_osgAlt = a})
+instance GoogleAuth OperatingSystemsGet' where
+        authKey = osgKey . _Just
+        authToken = osgOAuthToken . _Just
 
 instance GoogleRequest OperatingSystemsGet' where
         type Rs OperatingSystemsGet' = OperatingSystem
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u OperatingSystemsGet'{..}
-          = go _osgQuotaUser (Just _osgPrettyPrint) _osgUserIp
+          = go _osgQuotaUser (Just _osgPrettyPrint) _osgUserIP
               _osgProfileId
               _osgKey
-              _osgOauthToken
+              _osgOAuthToken
               _osgDartId
               _osgFields
-              (Just _osgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy OperatingSystemsGetResource)

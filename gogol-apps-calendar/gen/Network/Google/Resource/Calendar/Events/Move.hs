@@ -34,13 +34,12 @@ module Network.Google.Resource.Calendar.Events.Move
     , emQuotaUser
     , emCalendarId
     , emPrettyPrint
-    , emUserIp
+    , emUserIP
     , emKey
     , emSendNotifications
-    , emOauthToken
+    , emOAuthToken
     , emEventId
     , emFields
-    , emAlt
     ) where
 
 import           Network.Google.AppsCalendar.Types
@@ -58,11 +57,11 @@ type EventsMoveResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
+                       QueryParam "key" Key :>
                          QueryParam "sendNotifications" Bool :>
-                           QueryParam "oauth_token" Text :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :> Post '[JSON] Event
+                               QueryParam "alt" AltJSON :> Post '[JSON] Event
 
 -- | Moves an event to another calendar, i.e. changes an event\'s organizer.
 --
@@ -72,13 +71,12 @@ data EventsMove' = EventsMove'
     , _emQuotaUser         :: !(Maybe Text)
     , _emCalendarId        :: !Text
     , _emPrettyPrint       :: !Bool
-    , _emUserIp            :: !(Maybe Text)
-    , _emKey               :: !(Maybe Text)
+    , _emUserIP            :: !(Maybe Text)
+    , _emKey               :: !(Maybe Key)
     , _emSendNotifications :: !(Maybe Bool)
-    , _emOauthToken        :: !(Maybe Text)
+    , _emOAuthToken        :: !(Maybe OAuthToken)
     , _emEventId           :: !Text
     , _emFields            :: !(Maybe Text)
-    , _emAlt               :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsMove'' with the minimum fields required to make a request.
@@ -93,19 +91,17 @@ data EventsMove' = EventsMove'
 --
 -- * 'emPrettyPrint'
 --
--- * 'emUserIp'
+-- * 'emUserIP'
 --
 -- * 'emKey'
 --
 -- * 'emSendNotifications'
 --
--- * 'emOauthToken'
+-- * 'emOAuthToken'
 --
 -- * 'emEventId'
 --
 -- * 'emFields'
---
--- * 'emAlt'
 eventsMove'
     :: Text -- ^ 'destination'
     -> Text -- ^ 'calendarId'
@@ -117,13 +113,12 @@ eventsMove' pEmDestination_ pEmCalendarId_ pEmEventId_ =
     , _emQuotaUser = Nothing
     , _emCalendarId = pEmCalendarId_
     , _emPrettyPrint = True
-    , _emUserIp = Nothing
+    , _emUserIP = Nothing
     , _emKey = Nothing
     , _emSendNotifications = Nothing
-    , _emOauthToken = Nothing
+    , _emOAuthToken = Nothing
     , _emEventId = pEmEventId_
     , _emFields = Nothing
-    , _emAlt = JSON
     }
 
 -- | Calendar identifier of the target calendar where the event is to be
@@ -154,13 +149,13 @@ emPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-emUserIp :: Lens' EventsMove' (Maybe Text)
-emUserIp = lens _emUserIp (\ s a -> s{_emUserIp = a})
+emUserIP :: Lens' EventsMove' (Maybe Text)
+emUserIP = lens _emUserIP (\ s a -> s{_emUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-emKey :: Lens' EventsMove' (Maybe Text)
+emKey :: Lens' EventsMove' (Maybe Key)
 emKey = lens _emKey (\ s a -> s{_emKey = a})
 
 -- | Whether to send notifications about the change of the event\'s
@@ -171,9 +166,9 @@ emSendNotifications
       (\ s a -> s{_emSendNotifications = a})
 
 -- | OAuth 2.0 token for the current user.
-emOauthToken :: Lens' EventsMove' (Maybe Text)
-emOauthToken
-  = lens _emOauthToken (\ s a -> s{_emOauthToken = a})
+emOAuthToken :: Lens' EventsMove' (Maybe OAuthToken)
+emOAuthToken
+  = lens _emOAuthToken (\ s a -> s{_emOAuthToken = a})
 
 -- | Event identifier.
 emEventId :: Lens' EventsMove' Text
@@ -184,9 +179,9 @@ emEventId
 emFields :: Lens' EventsMove' (Maybe Text)
 emFields = lens _emFields (\ s a -> s{_emFields = a})
 
--- | Data format for the response.
-emAlt :: Lens' EventsMove' Alt
-emAlt = lens _emAlt (\ s a -> s{_emAlt = a})
+instance GoogleAuth EventsMove' where
+        authKey = emKey . _Just
+        authToken = emOAuthToken . _Just
 
 instance GoogleRequest EventsMove' where
         type Rs EventsMove' = Event
@@ -194,13 +189,13 @@ instance GoogleRequest EventsMove' where
         requestWithRoute r u EventsMove'{..}
           = go (Just _emDestination) _emQuotaUser _emCalendarId
               (Just _emPrettyPrint)
-              _emUserIp
+              _emUserIP
               _emKey
               _emSendNotifications
-              _emOauthToken
+              _emOAuthToken
               _emEventId
               _emFields
-              (Just _emAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy EventsMoveResource)
                       r

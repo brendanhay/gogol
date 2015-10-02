@@ -30,14 +30,14 @@ module Network.Google.Resource.Directory.Users.MakeAdmin
     , UsersMakeAdmin'
 
     -- * Request Lenses
+    , umaUserMakeAdmin
     , umaQuotaUser
     , umaPrettyPrint
-    , umaUserIp
+    , umaUserIP
     , umaKey
-    , umaOauthToken
+    , umaOAuthToken
     , umaUserKey
     , umaFields
-    , umaAlt
     ) where
 
 import           Network.Google.AdminDirectory.Types
@@ -52,58 +52,66 @@ type UsersMakeAdminResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] ()
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] UserMakeAdmin :> Post '[JSON] ()
 
 -- | change admin status of a user
 --
 -- /See:/ 'usersMakeAdmin'' smart constructor.
 data UsersMakeAdmin' = UsersMakeAdmin'
-    { _umaQuotaUser   :: !(Maybe Text)
-    , _umaPrettyPrint :: !Bool
-    , _umaUserIp      :: !(Maybe Text)
-    , _umaKey         :: !(Maybe Text)
-    , _umaOauthToken  :: !(Maybe Text)
-    , _umaUserKey     :: !Text
-    , _umaFields      :: !(Maybe Text)
-    , _umaAlt         :: !Alt
+    { _umaUserMakeAdmin :: !UserMakeAdmin
+    , _umaQuotaUser     :: !(Maybe Text)
+    , _umaPrettyPrint   :: !Bool
+    , _umaUserIP        :: !(Maybe Text)
+    , _umaKey           :: !(Maybe Key)
+    , _umaOAuthToken    :: !(Maybe OAuthToken)
+    , _umaUserKey       :: !Text
+    , _umaFields        :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersMakeAdmin'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'umaUserMakeAdmin'
+--
 -- * 'umaQuotaUser'
 --
 -- * 'umaPrettyPrint'
 --
--- * 'umaUserIp'
+-- * 'umaUserIP'
 --
 -- * 'umaKey'
 --
--- * 'umaOauthToken'
+-- * 'umaOAuthToken'
 --
 -- * 'umaUserKey'
 --
 -- * 'umaFields'
---
--- * 'umaAlt'
 usersMakeAdmin'
-    :: Text -- ^ 'userKey'
+    :: UserMakeAdmin -- ^ 'UserMakeAdmin'
+    -> Text -- ^ 'userKey'
     -> UsersMakeAdmin'
-usersMakeAdmin' pUmaUserKey_ =
+usersMakeAdmin' pUmaUserMakeAdmin_ pUmaUserKey_ =
     UsersMakeAdmin'
-    { _umaQuotaUser = Nothing
+    { _umaUserMakeAdmin = pUmaUserMakeAdmin_
+    , _umaQuotaUser = Nothing
     , _umaPrettyPrint = True
-    , _umaUserIp = Nothing
+    , _umaUserIP = Nothing
     , _umaKey = Nothing
-    , _umaOauthToken = Nothing
+    , _umaOAuthToken = Nothing
     , _umaUserKey = pUmaUserKey_
     , _umaFields = Nothing
-    , _umaAlt = JSON
     }
+
+-- | Multipart request metadata.
+umaUserMakeAdmin :: Lens' UsersMakeAdmin' UserMakeAdmin
+umaUserMakeAdmin
+  = lens _umaUserMakeAdmin
+      (\ s a -> s{_umaUserMakeAdmin = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -120,21 +128,21 @@ umaPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-umaUserIp :: Lens' UsersMakeAdmin' (Maybe Text)
-umaUserIp
-  = lens _umaUserIp (\ s a -> s{_umaUserIp = a})
+umaUserIP :: Lens' UsersMakeAdmin' (Maybe Text)
+umaUserIP
+  = lens _umaUserIP (\ s a -> s{_umaUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-umaKey :: Lens' UsersMakeAdmin' (Maybe Text)
+umaKey :: Lens' UsersMakeAdmin' (Maybe Key)
 umaKey = lens _umaKey (\ s a -> s{_umaKey = a})
 
 -- | OAuth 2.0 token for the current user.
-umaOauthToken :: Lens' UsersMakeAdmin' (Maybe Text)
-umaOauthToken
-  = lens _umaOauthToken
-      (\ s a -> s{_umaOauthToken = a})
+umaOAuthToken :: Lens' UsersMakeAdmin' (Maybe OAuthToken)
+umaOAuthToken
+  = lens _umaOAuthToken
+      (\ s a -> s{_umaOAuthToken = a})
 
 -- | Email or immutable Id of the user as admin
 umaUserKey :: Lens' UsersMakeAdmin' Text
@@ -146,20 +154,21 @@ umaFields :: Lens' UsersMakeAdmin' (Maybe Text)
 umaFields
   = lens _umaFields (\ s a -> s{_umaFields = a})
 
--- | Data format for the response.
-umaAlt :: Lens' UsersMakeAdmin' Alt
-umaAlt = lens _umaAlt (\ s a -> s{_umaAlt = a})
+instance GoogleAuth UsersMakeAdmin' where
+        authKey = umaKey . _Just
+        authToken = umaOAuthToken . _Just
 
 instance GoogleRequest UsersMakeAdmin' where
         type Rs UsersMakeAdmin' = ()
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u UsersMakeAdmin'{..}
-          = go _umaQuotaUser (Just _umaPrettyPrint) _umaUserIp
+          = go _umaQuotaUser (Just _umaPrettyPrint) _umaUserIP
               _umaKey
-              _umaOauthToken
+              _umaOAuthToken
               _umaUserKey
               _umaFields
-              (Just _umaAlt)
+              (Just AltJSON)
+              _umaUserMakeAdmin
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersMakeAdminResource)

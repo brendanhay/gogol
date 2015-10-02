@@ -32,12 +32,11 @@ module Network.Google.Resource.Webmasters.Sites.Get
     -- * Request Lenses
     , sQuotaUser
     , sPrettyPrint
-    , sUserIp
-    , sSiteUrl
+    , sUserIP
+    , sSiteURL
     , sKey
-    , sOauthToken
+    , sOAuthToken
     , sFields
-    , sAlt
     ) where
 
 import           Network.Google.Prelude
@@ -51,10 +50,10 @@ type SitesGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Get '[JSON] WmxSite
+                     QueryParam "alt" AltJSON :> Get '[JSON] WmxSite
 
 -- | Retrieves information about specific site.
 --
@@ -62,12 +61,11 @@ type SitesGetResource =
 data SitesGet' = SitesGet'
     { _sQuotaUser   :: !(Maybe Text)
     , _sPrettyPrint :: !Bool
-    , _sUserIp      :: !(Maybe Text)
-    , _sSiteUrl     :: !Text
-    , _sKey         :: !(Maybe Text)
-    , _sOauthToken  :: !(Maybe Text)
+    , _sUserIP      :: !(Maybe Text)
+    , _sSiteURL     :: !Text
+    , _sKey         :: !(Maybe Key)
+    , _sOAuthToken  :: !(Maybe OAuthToken)
     , _sFields      :: !(Maybe Text)
-    , _sAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SitesGet'' with the minimum fields required to make a request.
@@ -78,30 +76,27 @@ data SitesGet' = SitesGet'
 --
 -- * 'sPrettyPrint'
 --
--- * 'sUserIp'
+-- * 'sUserIP'
 --
--- * 'sSiteUrl'
+-- * 'sSiteURL'
 --
 -- * 'sKey'
 --
--- * 'sOauthToken'
+-- * 'sOAuthToken'
 --
 -- * 'sFields'
---
--- * 'sAlt'
 sitesGet'
     :: Text -- ^ 'siteUrl'
     -> SitesGet'
-sitesGet' pSSiteUrl_ =
+sitesGet' pSSiteURL_ =
     SitesGet'
     { _sQuotaUser = Nothing
     , _sPrettyPrint = True
-    , _sUserIp = Nothing
-    , _sSiteUrl = pSSiteUrl_
+    , _sUserIP = Nothing
+    , _sSiteURL = pSSiteURL_
     , _sKey = Nothing
-    , _sOauthToken = Nothing
+    , _sOAuthToken = Nothing
     , _sFields = Nothing
-    , _sAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -118,43 +113,43 @@ sPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-sUserIp :: Lens' SitesGet' (Maybe Text)
-sUserIp = lens _sUserIp (\ s a -> s{_sUserIp = a})
+sUserIP :: Lens' SitesGet' (Maybe Text)
+sUserIP = lens _sUserIP (\ s a -> s{_sUserIP = a})
 
 -- | The URI of the property as defined in Search Console. Examples:
 -- http:\/\/www.example.com\/ or android-app:\/\/com.example\/
-sSiteUrl :: Lens' SitesGet' Text
-sSiteUrl = lens _sSiteUrl (\ s a -> s{_sSiteUrl = a})
+sSiteURL :: Lens' SitesGet' Text
+sSiteURL = lens _sSiteURL (\ s a -> s{_sSiteURL = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-sKey :: Lens' SitesGet' (Maybe Text)
+sKey :: Lens' SitesGet' (Maybe Key)
 sKey = lens _sKey (\ s a -> s{_sKey = a})
 
 -- | OAuth 2.0 token for the current user.
-sOauthToken :: Lens' SitesGet' (Maybe Text)
-sOauthToken
-  = lens _sOauthToken (\ s a -> s{_sOauthToken = a})
+sOAuthToken :: Lens' SitesGet' (Maybe OAuthToken)
+sOAuthToken
+  = lens _sOAuthToken (\ s a -> s{_sOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 sFields :: Lens' SitesGet' (Maybe Text)
 sFields = lens _sFields (\ s a -> s{_sFields = a})
 
--- | Data format for the response.
-sAlt :: Lens' SitesGet' Alt
-sAlt = lens _sAlt (\ s a -> s{_sAlt = a})
+instance GoogleAuth SitesGet' where
+        authKey = sKey . _Just
+        authToken = sOAuthToken . _Just
 
 instance GoogleRequest SitesGet' where
         type Rs SitesGet' = WmxSite
         request = requestWithRoute defReq webmasterToolsURL
         requestWithRoute r u SitesGet'{..}
-          = go _sQuotaUser (Just _sPrettyPrint) _sUserIp
-              _sSiteUrl
+          = go _sQuotaUser (Just _sPrettyPrint) _sUserIP
+              _sSiteURL
               _sKey
-              _sOauthToken
+              _sOAuthToken
               _sFields
-              (Just _sAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy SitesGetResource) r
                       u

@@ -32,12 +32,12 @@ module Network.Google.Resource.DFAReporting.Ads.Update
     -- * Request Lenses
     , aQuotaUser
     , aPrettyPrint
-    , aUserIp
+    , aAd
+    , aUserIP
     , aProfileId
     , aKey
-    , aOauthToken
+    , aOAuthToken
     , aFields
-    , aAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,10 +52,11 @@ type AdsUpdateResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Put '[JSON] Ad
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Ad :> Put '[JSON] Ad
 
 -- | Updates an existing ad.
 --
@@ -63,12 +64,12 @@ type AdsUpdateResource =
 data AdsUpdate' = AdsUpdate'
     { _aQuotaUser   :: !(Maybe Text)
     , _aPrettyPrint :: !Bool
-    , _aUserIp      :: !(Maybe Text)
+    , _aAd          :: !Ad
+    , _aUserIP      :: !(Maybe Text)
     , _aProfileId   :: !Int64
-    , _aKey         :: !(Maybe Text)
-    , _aOauthToken  :: !(Maybe Text)
+    , _aKey         :: !(Maybe Key)
+    , _aOAuthToken  :: !(Maybe OAuthToken)
     , _aFields      :: !(Maybe Text)
-    , _aAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdsUpdate'' with the minimum fields required to make a request.
@@ -79,30 +80,31 @@ data AdsUpdate' = AdsUpdate'
 --
 -- * 'aPrettyPrint'
 --
--- * 'aUserIp'
+-- * 'aAd'
+--
+-- * 'aUserIP'
 --
 -- * 'aProfileId'
 --
 -- * 'aKey'
 --
--- * 'aOauthToken'
+-- * 'aOAuthToken'
 --
 -- * 'aFields'
---
--- * 'aAlt'
 adsUpdate'
-    :: Int64 -- ^ 'profileId'
+    :: Ad -- ^ 'Ad'
+    -> Int64 -- ^ 'profileId'
     -> AdsUpdate'
-adsUpdate' pAProfileId_ =
+adsUpdate' pAAd_ pAProfileId_ =
     AdsUpdate'
     { _aQuotaUser = Nothing
     , _aPrettyPrint = True
-    , _aUserIp = Nothing
+    , _aAd = pAAd_
+    , _aUserIP = Nothing
     , _aProfileId = pAProfileId_
     , _aKey = Nothing
-    , _aOauthToken = Nothing
+    , _aOAuthToken = Nothing
     , _aFields = Nothing
-    , _aAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -117,10 +119,14 @@ aPrettyPrint :: Lens' AdsUpdate' Bool
 aPrettyPrint
   = lens _aPrettyPrint (\ s a -> s{_aPrettyPrint = a})
 
+-- | Multipart request metadata.
+aAd :: Lens' AdsUpdate' Ad
+aAd = lens _aAd (\ s a -> s{_aAd = a})
+
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-aUserIp :: Lens' AdsUpdate' (Maybe Text)
-aUserIp = lens _aUserIp (\ s a -> s{_aUserIp = a})
+aUserIP :: Lens' AdsUpdate' (Maybe Text)
+aUserIP = lens _aUserIP (\ s a -> s{_aUserIP = a})
 
 -- | User profile ID associated with this request.
 aProfileId :: Lens' AdsUpdate' Int64
@@ -130,32 +136,33 @@ aProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aKey :: Lens' AdsUpdate' (Maybe Text)
+aKey :: Lens' AdsUpdate' (Maybe Key)
 aKey = lens _aKey (\ s a -> s{_aKey = a})
 
 -- | OAuth 2.0 token for the current user.
-aOauthToken :: Lens' AdsUpdate' (Maybe Text)
-aOauthToken
-  = lens _aOauthToken (\ s a -> s{_aOauthToken = a})
+aOAuthToken :: Lens' AdsUpdate' (Maybe OAuthToken)
+aOAuthToken
+  = lens _aOAuthToken (\ s a -> s{_aOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 aFields :: Lens' AdsUpdate' (Maybe Text)
 aFields = lens _aFields (\ s a -> s{_aFields = a})
 
--- | Data format for the response.
-aAlt :: Lens' AdsUpdate' Alt
-aAlt = lens _aAlt (\ s a -> s{_aAlt = a})
+instance GoogleAuth AdsUpdate' where
+        authKey = aKey . _Just
+        authToken = aOAuthToken . _Just
 
 instance GoogleRequest AdsUpdate' where
         type Rs AdsUpdate' = Ad
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AdsUpdate'{..}
-          = go _aQuotaUser (Just _aPrettyPrint) _aUserIp
+          = go _aQuotaUser (Just _aPrettyPrint) _aUserIP
               _aProfileId
               _aKey
-              _aOauthToken
+              _aOAuthToken
               _aFields
-              (Just _aAlt)
+              (Just AltJSON)
+              _aAd
           where go
                   = clientWithRoute (Proxy :: Proxy AdsUpdateResource)
                       r

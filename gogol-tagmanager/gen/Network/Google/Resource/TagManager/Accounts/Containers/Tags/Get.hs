@@ -19,7 +19,7 @@
 --
 -- | Gets a GTM Tag.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersTagsGet@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersTagsGet@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Tags.Get
     (
     -- * REST Resource
@@ -33,19 +33,18 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Tags.Get
     , actgcQuotaUser
     , actgcPrettyPrint
     , actgcContainerId
-    , actgcUserIp
+    , actgcUserIP
     , actgcAccountId
     , actgcTagId
     , actgcKey
-    , actgcOauthToken
+    , actgcOAuthToken
     , actgcFields
-    , actgcAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagmanagerAccountsContainersTagsGet@ which the
+-- | A resource alias for @TagManagerAccountsContainersTagsGet@ which the
 -- 'AccountsContainersTagsGet'' request conforms to.
 type AccountsContainersTagsGetResource =
      "accounts" :>
@@ -57,10 +56,10 @@ type AccountsContainersTagsGetResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Get '[JSON] Tag
+                             QueryParam "alt" AltJSON :> Get '[JSON] Tag
 
 -- | Gets a GTM Tag.
 --
@@ -69,13 +68,12 @@ data AccountsContainersTagsGet' = AccountsContainersTagsGet'
     { _actgcQuotaUser   :: !(Maybe Text)
     , _actgcPrettyPrint :: !Bool
     , _actgcContainerId :: !Text
-    , _actgcUserIp      :: !(Maybe Text)
+    , _actgcUserIP      :: !(Maybe Text)
     , _actgcAccountId   :: !Text
     , _actgcTagId       :: !Text
-    , _actgcKey         :: !(Maybe Text)
-    , _actgcOauthToken  :: !(Maybe Text)
+    , _actgcKey         :: !(Maybe Key)
+    , _actgcOAuthToken  :: !(Maybe OAuthToken)
     , _actgcFields      :: !(Maybe Text)
-    , _actgcAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersTagsGet'' with the minimum fields required to make a request.
@@ -88,7 +86,7 @@ data AccountsContainersTagsGet' = AccountsContainersTagsGet'
 --
 -- * 'actgcContainerId'
 --
--- * 'actgcUserIp'
+-- * 'actgcUserIP'
 --
 -- * 'actgcAccountId'
 --
@@ -96,11 +94,9 @@ data AccountsContainersTagsGet' = AccountsContainersTagsGet'
 --
 -- * 'actgcKey'
 --
--- * 'actgcOauthToken'
+-- * 'actgcOAuthToken'
 --
 -- * 'actgcFields'
---
--- * 'actgcAlt'
 accountsContainersTagsGet'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'accountId'
@@ -111,13 +107,12 @@ accountsContainersTagsGet' pActgcContainerId_ pActgcAccountId_ pActgcTagId_ =
     { _actgcQuotaUser = Nothing
     , _actgcPrettyPrint = True
     , _actgcContainerId = pActgcContainerId_
-    , _actgcUserIp = Nothing
+    , _actgcUserIP = Nothing
     , _actgcAccountId = pActgcAccountId_
     , _actgcTagId = pActgcTagId_
     , _actgcKey = Nothing
-    , _actgcOauthToken = Nothing
+    , _actgcOAuthToken = Nothing
     , _actgcFields = Nothing
-    , _actgcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -142,9 +137,9 @@ actgcContainerId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-actgcUserIp :: Lens' AccountsContainersTagsGet' (Maybe Text)
-actgcUserIp
-  = lens _actgcUserIp (\ s a -> s{_actgcUserIp = a})
+actgcUserIP :: Lens' AccountsContainersTagsGet' (Maybe Text)
+actgcUserIP
+  = lens _actgcUserIP (\ s a -> s{_actgcUserIP = a})
 
 -- | The GTM Account ID.
 actgcAccountId :: Lens' AccountsContainersTagsGet' Text
@@ -160,23 +155,23 @@ actgcTagId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-actgcKey :: Lens' AccountsContainersTagsGet' (Maybe Text)
+actgcKey :: Lens' AccountsContainersTagsGet' (Maybe Key)
 actgcKey = lens _actgcKey (\ s a -> s{_actgcKey = a})
 
 -- | OAuth 2.0 token for the current user.
-actgcOauthToken :: Lens' AccountsContainersTagsGet' (Maybe Text)
-actgcOauthToken
-  = lens _actgcOauthToken
-      (\ s a -> s{_actgcOauthToken = a})
+actgcOAuthToken :: Lens' AccountsContainersTagsGet' (Maybe OAuthToken)
+actgcOAuthToken
+  = lens _actgcOAuthToken
+      (\ s a -> s{_actgcOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 actgcFields :: Lens' AccountsContainersTagsGet' (Maybe Text)
 actgcFields
   = lens _actgcFields (\ s a -> s{_actgcFields = a})
 
--- | Data format for the response.
-actgcAlt :: Lens' AccountsContainersTagsGet' Alt
-actgcAlt = lens _actgcAlt (\ s a -> s{_actgcAlt = a})
+instance GoogleAuth AccountsContainersTagsGet' where
+        authKey = actgcKey . _Just
+        authToken = actgcOAuthToken . _Just
 
 instance GoogleRequest AccountsContainersTagsGet'
          where
@@ -185,13 +180,13 @@ instance GoogleRequest AccountsContainersTagsGet'
         requestWithRoute r u AccountsContainersTagsGet'{..}
           = go _actgcQuotaUser (Just _actgcPrettyPrint)
               _actgcContainerId
-              _actgcUserIp
+              _actgcUserIP
               _actgcAccountId
               _actgcTagId
               _actgcKey
-              _actgcOauthToken
+              _actgcOAuthToken
               _actgcFields
-              (Just _actgcAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountsContainersTagsGetResource)

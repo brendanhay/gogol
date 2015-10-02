@@ -32,12 +32,12 @@ module Network.Google.Resource.Genomics.Callsets.Update
     -- * Request Lenses
     , cuQuotaUser
     , cuPrettyPrint
-    , cuUserIp
+    , cuCallSet
+    , cuUserIP
     , cuKey
     , cuCallSetId
-    , cuOauthToken
+    , cuOAuthToken
     , cuFields
-    , cuAlt
     ) where
 
 import           Network.Google.Genomics.Types
@@ -51,10 +51,11 @@ type CallsetsUpdateResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Put '[JSON] CallSet
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] CallSet :> Put '[JSON] CallSet
 
 -- | Updates a call set.
 --
@@ -62,12 +63,12 @@ type CallsetsUpdateResource =
 data CallsetsUpdate' = CallsetsUpdate'
     { _cuQuotaUser   :: !(Maybe Text)
     , _cuPrettyPrint :: !Bool
-    , _cuUserIp      :: !(Maybe Text)
-    , _cuKey         :: !(Maybe Text)
+    , _cuCallSet     :: !CallSet
+    , _cuUserIP      :: !(Maybe Text)
+    , _cuKey         :: !(Maybe Key)
     , _cuCallSetId   :: !Text
-    , _cuOauthToken  :: !(Maybe Text)
+    , _cuOAuthToken  :: !(Maybe OAuthToken)
     , _cuFields      :: !(Maybe Text)
-    , _cuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CallsetsUpdate'' with the minimum fields required to make a request.
@@ -78,30 +79,31 @@ data CallsetsUpdate' = CallsetsUpdate'
 --
 -- * 'cuPrettyPrint'
 --
--- * 'cuUserIp'
+-- * 'cuCallSet'
+--
+-- * 'cuUserIP'
 --
 -- * 'cuKey'
 --
 -- * 'cuCallSetId'
 --
--- * 'cuOauthToken'
+-- * 'cuOAuthToken'
 --
 -- * 'cuFields'
---
--- * 'cuAlt'
 callsetsUpdate'
-    :: Text -- ^ 'callSetId'
+    :: CallSet -- ^ 'CallSet'
+    -> Text -- ^ 'callSetId'
     -> CallsetsUpdate'
-callsetsUpdate' pCuCallSetId_ =
+callsetsUpdate' pCuCallSet_ pCuCallSetId_ =
     CallsetsUpdate'
     { _cuQuotaUser = Nothing
     , _cuPrettyPrint = True
-    , _cuUserIp = Nothing
+    , _cuCallSet = pCuCallSet_
+    , _cuUserIP = Nothing
     , _cuKey = Nothing
     , _cuCallSetId = pCuCallSetId_
-    , _cuOauthToken = Nothing
+    , _cuOAuthToken = Nothing
     , _cuFields = Nothing
-    , _cuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -117,15 +119,20 @@ cuPrettyPrint
   = lens _cuPrettyPrint
       (\ s a -> s{_cuPrettyPrint = a})
 
+-- | Multipart request metadata.
+cuCallSet :: Lens' CallsetsUpdate' CallSet
+cuCallSet
+  = lens _cuCallSet (\ s a -> s{_cuCallSet = a})
+
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cuUserIp :: Lens' CallsetsUpdate' (Maybe Text)
-cuUserIp = lens _cuUserIp (\ s a -> s{_cuUserIp = a})
+cuUserIP :: Lens' CallsetsUpdate' (Maybe Text)
+cuUserIP = lens _cuUserIP (\ s a -> s{_cuUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cuKey :: Lens' CallsetsUpdate' (Maybe Text)
+cuKey :: Lens' CallsetsUpdate' (Maybe Key)
 cuKey = lens _cuKey (\ s a -> s{_cuKey = a})
 
 -- | The ID of the call set to be updated.
@@ -134,28 +141,29 @@ cuCallSetId
   = lens _cuCallSetId (\ s a -> s{_cuCallSetId = a})
 
 -- | OAuth 2.0 token for the current user.
-cuOauthToken :: Lens' CallsetsUpdate' (Maybe Text)
-cuOauthToken
-  = lens _cuOauthToken (\ s a -> s{_cuOauthToken = a})
+cuOAuthToken :: Lens' CallsetsUpdate' (Maybe OAuthToken)
+cuOAuthToken
+  = lens _cuOAuthToken (\ s a -> s{_cuOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cuFields :: Lens' CallsetsUpdate' (Maybe Text)
 cuFields = lens _cuFields (\ s a -> s{_cuFields = a})
 
--- | Data format for the response.
-cuAlt :: Lens' CallsetsUpdate' Alt
-cuAlt = lens _cuAlt (\ s a -> s{_cuAlt = a})
+instance GoogleAuth CallsetsUpdate' where
+        authKey = cuKey . _Just
+        authToken = cuOAuthToken . _Just
 
 instance GoogleRequest CallsetsUpdate' where
         type Rs CallsetsUpdate' = CallSet
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u CallsetsUpdate'{..}
-          = go _cuQuotaUser (Just _cuPrettyPrint) _cuUserIp
+          = go _cuQuotaUser (Just _cuPrettyPrint) _cuUserIP
               _cuKey
               _cuCallSetId
-              _cuOauthToken
+              _cuOAuthToken
               _cuFields
-              (Just _cuAlt)
+              (Just AltJSON)
+              _cuCallSet
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CallsetsUpdateResource)

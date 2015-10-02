@@ -32,13 +32,12 @@ module Network.Google.Resource.DFAReporting.PlatformTypes.Get
     -- * Request Lenses
     , ptgQuotaUser
     , ptgPrettyPrint
-    , ptgUserIp
+    , ptgUserIP
     , ptgProfileId
     , ptgKey
     , ptgId
-    , ptgOauthToken
+    , ptgOAuthToken
     , ptgFields
-    , ptgAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,10 +53,10 @@ type PlatformTypesGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] PlatformType
+                         QueryParam "alt" AltJSON :> Get '[JSON] PlatformType
 
 -- | Gets one platform type by ID.
 --
@@ -65,13 +64,12 @@ type PlatformTypesGetResource =
 data PlatformTypesGet' = PlatformTypesGet'
     { _ptgQuotaUser   :: !(Maybe Text)
     , _ptgPrettyPrint :: !Bool
-    , _ptgUserIp      :: !(Maybe Text)
+    , _ptgUserIP      :: !(Maybe Text)
     , _ptgProfileId   :: !Int64
-    , _ptgKey         :: !(Maybe Text)
+    , _ptgKey         :: !(Maybe Key)
     , _ptgId          :: !Int64
-    , _ptgOauthToken  :: !(Maybe Text)
+    , _ptgOAuthToken  :: !(Maybe OAuthToken)
     , _ptgFields      :: !(Maybe Text)
-    , _ptgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlatformTypesGet'' with the minimum fields required to make a request.
@@ -82,7 +80,7 @@ data PlatformTypesGet' = PlatformTypesGet'
 --
 -- * 'ptgPrettyPrint'
 --
--- * 'ptgUserIp'
+-- * 'ptgUserIP'
 --
 -- * 'ptgProfileId'
 --
@@ -90,11 +88,9 @@ data PlatformTypesGet' = PlatformTypesGet'
 --
 -- * 'ptgId'
 --
--- * 'ptgOauthToken'
+-- * 'ptgOAuthToken'
 --
 -- * 'ptgFields'
---
--- * 'ptgAlt'
 platformTypesGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
@@ -103,13 +99,12 @@ platformTypesGet' pPtgProfileId_ pPtgId_ =
     PlatformTypesGet'
     { _ptgQuotaUser = Nothing
     , _ptgPrettyPrint = True
-    , _ptgUserIp = Nothing
+    , _ptgUserIP = Nothing
     , _ptgProfileId = pPtgProfileId_
     , _ptgKey = Nothing
     , _ptgId = pPtgId_
-    , _ptgOauthToken = Nothing
+    , _ptgOAuthToken = Nothing
     , _ptgFields = Nothing
-    , _ptgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,9 +122,9 @@ ptgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ptgUserIp :: Lens' PlatformTypesGet' (Maybe Text)
-ptgUserIp
-  = lens _ptgUserIp (\ s a -> s{_ptgUserIp = a})
+ptgUserIP :: Lens' PlatformTypesGet' (Maybe Text)
+ptgUserIP
+  = lens _ptgUserIP (\ s a -> s{_ptgUserIP = a})
 
 -- | User profile ID associated with this request.
 ptgProfileId :: Lens' PlatformTypesGet' Int64
@@ -139,7 +134,7 @@ ptgProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ptgKey :: Lens' PlatformTypesGet' (Maybe Text)
+ptgKey :: Lens' PlatformTypesGet' (Maybe Key)
 ptgKey = lens _ptgKey (\ s a -> s{_ptgKey = a})
 
 -- | Platform type ID.
@@ -147,31 +142,31 @@ ptgId :: Lens' PlatformTypesGet' Int64
 ptgId = lens _ptgId (\ s a -> s{_ptgId = a})
 
 -- | OAuth 2.0 token for the current user.
-ptgOauthToken :: Lens' PlatformTypesGet' (Maybe Text)
-ptgOauthToken
-  = lens _ptgOauthToken
-      (\ s a -> s{_ptgOauthToken = a})
+ptgOAuthToken :: Lens' PlatformTypesGet' (Maybe OAuthToken)
+ptgOAuthToken
+  = lens _ptgOAuthToken
+      (\ s a -> s{_ptgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ptgFields :: Lens' PlatformTypesGet' (Maybe Text)
 ptgFields
   = lens _ptgFields (\ s a -> s{_ptgFields = a})
 
--- | Data format for the response.
-ptgAlt :: Lens' PlatformTypesGet' Alt
-ptgAlt = lens _ptgAlt (\ s a -> s{_ptgAlt = a})
+instance GoogleAuth PlatformTypesGet' where
+        authKey = ptgKey . _Just
+        authToken = ptgOAuthToken . _Just
 
 instance GoogleRequest PlatformTypesGet' where
         type Rs PlatformTypesGet' = PlatformType
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlatformTypesGet'{..}
-          = go _ptgQuotaUser (Just _ptgPrettyPrint) _ptgUserIp
+          = go _ptgQuotaUser (Just _ptgPrettyPrint) _ptgUserIP
               _ptgProfileId
               _ptgKey
               _ptgId
-              _ptgOauthToken
+              _ptgOAuthToken
               _ptgFields
-              (Just _ptgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PlatformTypesGetResource)

@@ -19,7 +19,7 @@
 --
 -- | Lists transfer jobs.
 --
--- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @StoragetransferTransferJobsList@.
+-- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @StorageTransferTransferJobsList@.
 module Network.Google.Resource.StorageTransfer.TransferJobs.List
     (
     -- * REST Resource
@@ -41,17 +41,16 @@ module Network.Google.Resource.StorageTransfer.TransferJobs.List
     , tjlKey
     , tjlFilter
     , tjlPageToken
-    , tjlOauthToken
+    , tjlOAuthToken
     , tjlPageSize
     , tjlFields
     , tjlCallback
-    , tjlAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.StorageTransfer.Types
 
--- | A resource alias for @StoragetransferTransferJobsList@ which the
+-- | A resource alias for @StorageTransferTransferJobsList@ which the
 -- 'TransferJobsList'' request conforms to.
 type TransferJobsListResource =
      "v1" :>
@@ -64,14 +63,14 @@ type TransferJobsListResource =
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
                        QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
+                         QueryParam "key" Key :>
                            QueryParam "filter" Text :>
                              QueryParam "pageToken" Text :>
-                               QueryParam "oauth_token" Text :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "pageSize" Int32 :>
                                    QueryParam "fields" Text :>
                                      QueryParam "callback" Text :>
-                                       QueryParam "alt" Text :>
+                                       QueryParam "alt" AltJSON :>
                                          Get '[JSON] ListTransferJobsResponse
 
 -- | Lists transfer jobs.
@@ -86,14 +85,13 @@ data TransferJobsList' = TransferJobsList'
     , _tjlAccessToken    :: !(Maybe Text)
     , _tjlUploadType     :: !(Maybe Text)
     , _tjlBearerToken    :: !(Maybe Text)
-    , _tjlKey            :: !(Maybe Text)
+    , _tjlKey            :: !(Maybe Key)
     , _tjlFilter         :: !(Maybe Text)
     , _tjlPageToken      :: !(Maybe Text)
-    , _tjlOauthToken     :: !(Maybe Text)
+    , _tjlOAuthToken     :: !(Maybe OAuthToken)
     , _tjlPageSize       :: !(Maybe Int32)
     , _tjlFields         :: !(Maybe Text)
     , _tjlCallback       :: !(Maybe Text)
-    , _tjlAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TransferJobsList'' with the minimum fields required to make a request.
@@ -122,15 +120,13 @@ data TransferJobsList' = TransferJobsList'
 --
 -- * 'tjlPageToken'
 --
--- * 'tjlOauthToken'
+-- * 'tjlOAuthToken'
 --
 -- * 'tjlPageSize'
 --
 -- * 'tjlFields'
 --
 -- * 'tjlCallback'
---
--- * 'tjlAlt'
 transferJobsList'
     :: TransferJobsList'
 transferJobsList' =
@@ -146,11 +142,10 @@ transferJobsList' =
     , _tjlKey = Nothing
     , _tjlFilter = Nothing
     , _tjlPageToken = Nothing
-    , _tjlOauthToken = Nothing
+    , _tjlOAuthToken = Nothing
     , _tjlPageSize = Nothing
     , _tjlFields = Nothing
     , _tjlCallback = Nothing
-    , _tjlAlt = "json"
     }
 
 -- | V1 error format.
@@ -201,7 +196,7 @@ tjlBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tjlKey :: Lens' TransferJobsList' (Maybe Text)
+tjlKey :: Lens' TransferJobsList' (Maybe Key)
 tjlKey = lens _tjlKey (\ s a -> s{_tjlKey = a})
 
 -- | A list of query parameters specified as JSON text in the form of
@@ -222,10 +217,10 @@ tjlPageToken
   = lens _tjlPageToken (\ s a -> s{_tjlPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-tjlOauthToken :: Lens' TransferJobsList' (Maybe Text)
-tjlOauthToken
-  = lens _tjlOauthToken
-      (\ s a -> s{_tjlOauthToken = a})
+tjlOAuthToken :: Lens' TransferJobsList' (Maybe OAuthToken)
+tjlOAuthToken
+  = lens _tjlOAuthToken
+      (\ s a -> s{_tjlOAuthToken = a})
 
 -- | The list page size. The max allowed value is 256.
 tjlPageSize :: Lens' TransferJobsList' (Maybe Int32)
@@ -242,9 +237,9 @@ tjlCallback :: Lens' TransferJobsList' (Maybe Text)
 tjlCallback
   = lens _tjlCallback (\ s a -> s{_tjlCallback = a})
 
--- | Data format for response.
-tjlAlt :: Lens' TransferJobsList' Text
-tjlAlt = lens _tjlAlt (\ s a -> s{_tjlAlt = a})
+instance GoogleAuth TransferJobsList' where
+        authKey = tjlKey . _Just
+        authToken = tjlOAuthToken . _Just
 
 instance GoogleRequest TransferJobsList' where
         type Rs TransferJobsList' = ListTransferJobsResponse
@@ -259,11 +254,11 @@ instance GoogleRequest TransferJobsList' where
               _tjlKey
               _tjlFilter
               _tjlPageToken
-              _tjlOauthToken
+              _tjlOAuthToken
               _tjlPageSize
               _tjlFields
               _tjlCallback
-              (Just _tjlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TransferJobsListResource)

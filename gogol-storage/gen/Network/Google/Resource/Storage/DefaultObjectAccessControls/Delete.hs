@@ -33,13 +33,12 @@ module Network.Google.Resource.Storage.DefaultObjectAccessControls.Delete
     -- * Request Lenses
     , doacdQuotaUser
     , doacdPrettyPrint
-    , doacdUserIp
+    , doacdUserIP
     , doacdBucket
     , doacdKey
-    , doacdOauthToken
+    , doacdOAuthToken
     , doacdEntity
     , doacdFields
-    , doacdAlt
     ) where
 
 import           Network.Google.Prelude
@@ -55,10 +54,10 @@ type DefaultObjectAccessControlsDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Delete '[JSON] ()
+                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Permanently deletes the default object ACL entry for the specified
 -- entity on the specified bucket.
@@ -67,13 +66,12 @@ type DefaultObjectAccessControlsDeleteResource =
 data DefaultObjectAccessControlsDelete' = DefaultObjectAccessControlsDelete'
     { _doacdQuotaUser   :: !(Maybe Text)
     , _doacdPrettyPrint :: !Bool
-    , _doacdUserIp      :: !(Maybe Text)
+    , _doacdUserIP      :: !(Maybe Text)
     , _doacdBucket      :: !Text
-    , _doacdKey         :: !(Maybe Text)
-    , _doacdOauthToken  :: !(Maybe Text)
+    , _doacdKey         :: !(Maybe Key)
+    , _doacdOAuthToken  :: !(Maybe OAuthToken)
     , _doacdEntity      :: !Text
     , _doacdFields      :: !(Maybe Text)
-    , _doacdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DefaultObjectAccessControlsDelete'' with the minimum fields required to make a request.
@@ -84,19 +82,17 @@ data DefaultObjectAccessControlsDelete' = DefaultObjectAccessControlsDelete'
 --
 -- * 'doacdPrettyPrint'
 --
--- * 'doacdUserIp'
+-- * 'doacdUserIP'
 --
 -- * 'doacdBucket'
 --
 -- * 'doacdKey'
 --
--- * 'doacdOauthToken'
+-- * 'doacdOAuthToken'
 --
 -- * 'doacdEntity'
 --
 -- * 'doacdFields'
---
--- * 'doacdAlt'
 defaultObjectAccessControlsDelete'
     :: Text -- ^ 'bucket'
     -> Text -- ^ 'entity'
@@ -105,13 +101,12 @@ defaultObjectAccessControlsDelete' pDoacdBucket_ pDoacdEntity_ =
     DefaultObjectAccessControlsDelete'
     { _doacdQuotaUser = Nothing
     , _doacdPrettyPrint = True
-    , _doacdUserIp = Nothing
+    , _doacdUserIP = Nothing
     , _doacdBucket = pDoacdBucket_
     , _doacdKey = Nothing
-    , _doacdOauthToken = Nothing
+    , _doacdOAuthToken = Nothing
     , _doacdEntity = pDoacdEntity_
     , _doacdFields = Nothing
-    , _doacdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -130,9 +125,9 @@ doacdPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-doacdUserIp :: Lens' DefaultObjectAccessControlsDelete' (Maybe Text)
-doacdUserIp
-  = lens _doacdUserIp (\ s a -> s{_doacdUserIp = a})
+doacdUserIP :: Lens' DefaultObjectAccessControlsDelete' (Maybe Text)
+doacdUserIP
+  = lens _doacdUserIP (\ s a -> s{_doacdUserIP = a})
 
 -- | Name of a bucket.
 doacdBucket :: Lens' DefaultObjectAccessControlsDelete' Text
@@ -142,14 +137,14 @@ doacdBucket
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-doacdKey :: Lens' DefaultObjectAccessControlsDelete' (Maybe Text)
+doacdKey :: Lens' DefaultObjectAccessControlsDelete' (Maybe Key)
 doacdKey = lens _doacdKey (\ s a -> s{_doacdKey = a})
 
 -- | OAuth 2.0 token for the current user.
-doacdOauthToken :: Lens' DefaultObjectAccessControlsDelete' (Maybe Text)
-doacdOauthToken
-  = lens _doacdOauthToken
-      (\ s a -> s{_doacdOauthToken = a})
+doacdOAuthToken :: Lens' DefaultObjectAccessControlsDelete' (Maybe OAuthToken)
+doacdOAuthToken
+  = lens _doacdOAuthToken
+      (\ s a -> s{_doacdOAuthToken = a})
 
 -- | The entity holding the permission. Can be user-userId,
 -- user-emailAddress, group-groupId, group-emailAddress, allUsers, or
@@ -163,9 +158,10 @@ doacdFields :: Lens' DefaultObjectAccessControlsDelete' (Maybe Text)
 doacdFields
   = lens _doacdFields (\ s a -> s{_doacdFields = a})
 
--- | Data format for the response.
-doacdAlt :: Lens' DefaultObjectAccessControlsDelete' Alt
-doacdAlt = lens _doacdAlt (\ s a -> s{_doacdAlt = a})
+instance GoogleAuth
+         DefaultObjectAccessControlsDelete' where
+        authKey = doacdKey . _Just
+        authToken = doacdOAuthToken . _Just
 
 instance GoogleRequest
          DefaultObjectAccessControlsDelete' where
@@ -174,13 +170,13 @@ instance GoogleRequest
         requestWithRoute r u
           DefaultObjectAccessControlsDelete'{..}
           = go _doacdQuotaUser (Just _doacdPrettyPrint)
-              _doacdUserIp
+              _doacdUserIP
               _doacdBucket
               _doacdKey
-              _doacdOauthToken
+              _doacdOAuthToken
               _doacdEntity
               _doacdFields
-              (Just _doacdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

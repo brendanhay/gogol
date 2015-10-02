@@ -41,10 +41,9 @@ module Network.Google.Resource.ProximityBeacon.Namespaces.List
     , nlUploadType
     , nlBearerToken
     , nlKey
-    , nlOauthToken
+    , nlOAuthToken
     , nlFields
     , nlCallback
-    , nlAlt
     ) where
 
 import           Network.Google.Prelude
@@ -63,11 +62,11 @@ type NamespacesListResource =
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
                        QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
                                QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :>
+                                 QueryParam "alt" AltJSON :>
                                    Get '[JSON] ListNamespacesResponse
 
 -- | Lists all attachment namespaces owned by your Google Developers Console
@@ -84,11 +83,10 @@ data NamespacesList' = NamespacesList'
     , _nlAccessToken    :: !(Maybe Text)
     , _nlUploadType     :: !(Maybe Text)
     , _nlBearerToken    :: !(Maybe Text)
-    , _nlKey            :: !(Maybe Text)
-    , _nlOauthToken     :: !(Maybe Text)
+    , _nlKey            :: !(Maybe Key)
+    , _nlOAuthToken     :: !(Maybe OAuthToken)
     , _nlFields         :: !(Maybe Text)
     , _nlCallback       :: !(Maybe Text)
-    , _nlAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NamespacesList'' with the minimum fields required to make a request.
@@ -113,13 +111,11 @@ data NamespacesList' = NamespacesList'
 --
 -- * 'nlKey'
 --
--- * 'nlOauthToken'
+-- * 'nlOAuthToken'
 --
 -- * 'nlFields'
 --
 -- * 'nlCallback'
---
--- * 'nlAlt'
 namespacesList'
     :: NamespacesList'
 namespacesList' =
@@ -133,10 +129,9 @@ namespacesList' =
     , _nlUploadType = Nothing
     , _nlBearerToken = Nothing
     , _nlKey = Nothing
-    , _nlOauthToken = Nothing
+    , _nlOAuthToken = Nothing
     , _nlFields = Nothing
     , _nlCallback = Nothing
-    , _nlAlt = "json"
     }
 
 -- | V1 error format.
@@ -186,13 +181,13 @@ nlBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-nlKey :: Lens' NamespacesList' (Maybe Text)
+nlKey :: Lens' NamespacesList' (Maybe Key)
 nlKey = lens _nlKey (\ s a -> s{_nlKey = a})
 
 -- | OAuth 2.0 token for the current user.
-nlOauthToken :: Lens' NamespacesList' (Maybe Text)
-nlOauthToken
-  = lens _nlOauthToken (\ s a -> s{_nlOauthToken = a})
+nlOAuthToken :: Lens' NamespacesList' (Maybe OAuthToken)
+nlOAuthToken
+  = lens _nlOAuthToken (\ s a -> s{_nlOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 nlFields :: Lens' NamespacesList' (Maybe Text)
@@ -203,9 +198,9 @@ nlCallback :: Lens' NamespacesList' (Maybe Text)
 nlCallback
   = lens _nlCallback (\ s a -> s{_nlCallback = a})
 
--- | Data format for response.
-nlAlt :: Lens' NamespacesList' Text
-nlAlt = lens _nlAlt (\ s a -> s{_nlAlt = a})
+instance GoogleAuth NamespacesList' where
+        authKey = nlKey . _Just
+        authToken = nlOAuthToken . _Just
 
 instance GoogleRequest NamespacesList' where
         type Rs NamespacesList' = ListNamespacesResponse
@@ -218,10 +213,10 @@ instance GoogleRequest NamespacesList' where
               _nlUploadType
               _nlBearerToken
               _nlKey
-              _nlOauthToken
+              _nlOAuthToken
               _nlFields
               _nlCallback
-              (Just _nlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy NamespacesListResource)

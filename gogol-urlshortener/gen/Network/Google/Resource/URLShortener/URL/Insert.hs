@@ -32,11 +32,11 @@ module Network.Google.Resource.URLShortener.URL.Insert
     -- * Request Lenses
     , uiQuotaUser
     , uiPrettyPrint
-    , uiUserIp
+    , uiUserIP
+    , uiURL
     , uiKey
-    , uiOauthToken
+    , uiOAuthToken
     , uiFields
-    , uiAlt
     ) where
 
 import           Network.Google.Prelude
@@ -49,10 +49,11 @@ type UrlInsertResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
-               QueryParam "oauth_token" Text :>
+             QueryParam "key" Key :>
+               QueryParam "oauth_token" OAuthToken :>
                  QueryParam "fields" Text :>
-                   QueryParam "alt" Alt :> Post '[JSON] URL
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] URL :> Post '[JSON] URL
 
 -- | Creates a new short URL.
 --
@@ -60,11 +61,11 @@ type UrlInsertResource =
 data URLInsert' = URLInsert'
     { _uiQuotaUser   :: !(Maybe Text)
     , _uiPrettyPrint :: !Bool
-    , _uiUserIp      :: !(Maybe Text)
-    , _uiKey         :: !(Maybe Text)
-    , _uiOauthToken  :: !(Maybe Text)
+    , _uiUserIP      :: !(Maybe Text)
+    , _uiURL         :: !URL
+    , _uiKey         :: !(Maybe Key)
+    , _uiOAuthToken  :: !(Maybe OAuthToken)
     , _uiFields      :: !(Maybe Text)
-    , _uiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLInsert'' with the minimum fields required to make a request.
@@ -75,26 +76,27 @@ data URLInsert' = URLInsert'
 --
 -- * 'uiPrettyPrint'
 --
--- * 'uiUserIp'
+-- * 'uiUserIP'
+--
+-- * 'uiURL'
 --
 -- * 'uiKey'
 --
--- * 'uiOauthToken'
+-- * 'uiOAuthToken'
 --
 -- * 'uiFields'
---
--- * 'uiAlt'
 uRLInsert'
-    :: URLInsert'
-uRLInsert' =
+    :: URL -- ^ 'URL'
+    -> URLInsert'
+uRLInsert' pUiURL_ =
     URLInsert'
     { _uiQuotaUser = Nothing
     , _uiPrettyPrint = True
-    , _uiUserIp = Nothing
+    , _uiUserIP = Nothing
+    , _uiURL = pUiURL_
     , _uiKey = Nothing
-    , _uiOauthToken = Nothing
+    , _uiOAuthToken = Nothing
     , _uiFields = Nothing
-    , _uiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -112,37 +114,42 @@ uiPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-uiUserIp :: Lens' URLInsert' (Maybe Text)
-uiUserIp = lens _uiUserIp (\ s a -> s{_uiUserIp = a})
+uiUserIP :: Lens' URLInsert' (Maybe Text)
+uiUserIP = lens _uiUserIP (\ s a -> s{_uiUserIP = a})
+
+-- | Multipart request metadata.
+uiURL :: Lens' URLInsert' URL
+uiURL = lens _uiURL (\ s a -> s{_uiURL = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-uiKey :: Lens' URLInsert' (Maybe Text)
+uiKey :: Lens' URLInsert' (Maybe Key)
 uiKey = lens _uiKey (\ s a -> s{_uiKey = a})
 
 -- | OAuth 2.0 token for the current user.
-uiOauthToken :: Lens' URLInsert' (Maybe Text)
-uiOauthToken
-  = lens _uiOauthToken (\ s a -> s{_uiOauthToken = a})
+uiOAuthToken :: Lens' URLInsert' (Maybe OAuthToken)
+uiOAuthToken
+  = lens _uiOAuthToken (\ s a -> s{_uiOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 uiFields :: Lens' URLInsert' (Maybe Text)
 uiFields = lens _uiFields (\ s a -> s{_uiFields = a})
 
--- | Data format for the response.
-uiAlt :: Lens' URLInsert' Alt
-uiAlt = lens _uiAlt (\ s a -> s{_uiAlt = a})
+instance GoogleAuth URLInsert' where
+        authKey = uiKey . _Just
+        authToken = uiOAuthToken . _Just
 
 instance GoogleRequest URLInsert' where
         type Rs URLInsert' = URL
         request = requestWithRoute defReq uRLShortenerURL
         requestWithRoute r u URLInsert'{..}
-          = go _uiQuotaUser (Just _uiPrettyPrint) _uiUserIp
+          = go _uiQuotaUser (Just _uiPrettyPrint) _uiUserIP
               _uiKey
-              _uiOauthToken
+              _uiOAuthToken
               _uiFields
-              (Just _uiAlt)
+              (Just AltJSON)
+              _uiURL
           where go
                   = clientWithRoute (Proxy :: Proxy UrlInsertResource)
                       r

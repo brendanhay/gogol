@@ -35,14 +35,14 @@ module Network.Google.Resource.BigQuery.Tables.Patch
     -- * Request Lenses
     , tpQuotaUser
     , tpPrettyPrint
-    , tpUserIp
+    , tpUserIP
     , tpKey
     , tpDatasetId
     , tpProjectId
-    , tpOauthToken
+    , tpOAuthToken
     , tpTableId
+    , tpTable
     , tpFields
-    , tpAlt
     ) where
 
 import           Network.Google.BigQuery.Types
@@ -60,10 +60,11 @@ type TablesPatchResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Patch '[JSON] Table
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] Table :> Patch '[JSON] Table
 
 -- | Updates information in an existing table. The update method replaces the
 -- entire table resource, whereas the patch method only replaces fields
@@ -74,14 +75,14 @@ type TablesPatchResource =
 data TablesPatch' = TablesPatch'
     { _tpQuotaUser   :: !(Maybe Text)
     , _tpPrettyPrint :: !Bool
-    , _tpUserIp      :: !(Maybe Text)
-    , _tpKey         :: !(Maybe Text)
+    , _tpUserIP      :: !(Maybe Text)
+    , _tpKey         :: !(Maybe Key)
     , _tpDatasetId   :: !Text
     , _tpProjectId   :: !Text
-    , _tpOauthToken  :: !(Maybe Text)
+    , _tpOAuthToken  :: !(Maybe OAuthToken)
     , _tpTableId     :: !Text
+    , _tpTable       :: !Table
     , _tpFields      :: !(Maybe Text)
-    , _tpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesPatch'' with the minimum fields required to make a request.
@@ -92,7 +93,7 @@ data TablesPatch' = TablesPatch'
 --
 -- * 'tpPrettyPrint'
 --
--- * 'tpUserIp'
+-- * 'tpUserIP'
 --
 -- * 'tpKey'
 --
@@ -100,30 +101,31 @@ data TablesPatch' = TablesPatch'
 --
 -- * 'tpProjectId'
 --
--- * 'tpOauthToken'
+-- * 'tpOAuthToken'
 --
 -- * 'tpTableId'
 --
--- * 'tpFields'
+-- * 'tpTable'
 --
--- * 'tpAlt'
+-- * 'tpFields'
 tablesPatch'
     :: Text -- ^ 'datasetId'
     -> Text -- ^ 'projectId'
     -> Text -- ^ 'tableId'
+    -> Table -- ^ 'Table'
     -> TablesPatch'
-tablesPatch' pTpDatasetId_ pTpProjectId_ pTpTableId_ =
+tablesPatch' pTpDatasetId_ pTpProjectId_ pTpTableId_ pTpTable_ =
     TablesPatch'
     { _tpQuotaUser = Nothing
     , _tpPrettyPrint = True
-    , _tpUserIp = Nothing
+    , _tpUserIP = Nothing
     , _tpKey = Nothing
     , _tpDatasetId = pTpDatasetId_
     , _tpProjectId = pTpProjectId_
-    , _tpOauthToken = Nothing
+    , _tpOAuthToken = Nothing
     , _tpTableId = pTpTableId_
+    , _tpTable = pTpTable_
     , _tpFields = Nothing
-    , _tpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -141,13 +143,13 @@ tpPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tpUserIp :: Lens' TablesPatch' (Maybe Text)
-tpUserIp = lens _tpUserIp (\ s a -> s{_tpUserIp = a})
+tpUserIP :: Lens' TablesPatch' (Maybe Text)
+tpUserIP = lens _tpUserIP (\ s a -> s{_tpUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tpKey :: Lens' TablesPatch' (Maybe Text)
+tpKey :: Lens' TablesPatch' (Maybe Key)
 tpKey = lens _tpKey (\ s a -> s{_tpKey = a})
 
 -- | Dataset ID of the table to update
@@ -161,35 +163,40 @@ tpProjectId
   = lens _tpProjectId (\ s a -> s{_tpProjectId = a})
 
 -- | OAuth 2.0 token for the current user.
-tpOauthToken :: Lens' TablesPatch' (Maybe Text)
-tpOauthToken
-  = lens _tpOauthToken (\ s a -> s{_tpOauthToken = a})
+tpOAuthToken :: Lens' TablesPatch' (Maybe OAuthToken)
+tpOAuthToken
+  = lens _tpOAuthToken (\ s a -> s{_tpOAuthToken = a})
 
 -- | Table ID of the table to update
 tpTableId :: Lens' TablesPatch' Text
 tpTableId
   = lens _tpTableId (\ s a -> s{_tpTableId = a})
 
+-- | Multipart request metadata.
+tpTable :: Lens' TablesPatch' Table
+tpTable = lens _tpTable (\ s a -> s{_tpTable = a})
+
 -- | Selector specifying which fields to include in a partial response.
 tpFields :: Lens' TablesPatch' (Maybe Text)
 tpFields = lens _tpFields (\ s a -> s{_tpFields = a})
 
--- | Data format for the response.
-tpAlt :: Lens' TablesPatch' Alt
-tpAlt = lens _tpAlt (\ s a -> s{_tpAlt = a})
+instance GoogleAuth TablesPatch' where
+        authKey = tpKey . _Just
+        authToken = tpOAuthToken . _Just
 
 instance GoogleRequest TablesPatch' where
         type Rs TablesPatch' = Table
         request = requestWithRoute defReq bigQueryURL
         requestWithRoute r u TablesPatch'{..}
-          = go _tpQuotaUser (Just _tpPrettyPrint) _tpUserIp
+          = go _tpQuotaUser (Just _tpPrettyPrint) _tpUserIP
               _tpKey
               _tpDatasetId
               _tpProjectId
-              _tpOauthToken
+              _tpOAuthToken
               _tpTableId
               _tpFields
-              (Just _tpAlt)
+              (Just AltJSON)
+              _tpTable
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TablesPatchResource)

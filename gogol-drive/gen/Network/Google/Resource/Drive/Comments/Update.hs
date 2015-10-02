@@ -32,13 +32,13 @@ module Network.Google.Resource.Drive.Comments.Update
     -- * Request Lenses
     , cuQuotaUser
     , cuPrettyPrint
-    , cuUserIp
+    , cuUserIP
     , cuKey
     , cuFileId
-    , cuOauthToken
+    , cuOAuthToken
+    , cuComment
     , cuCommentId
     , cuFields
-    , cuAlt
     ) where
 
 import           Network.Google.Drive.Types
@@ -54,10 +54,11 @@ type CommentsUpdateResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Put '[JSON] Comment
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Comment :> Put '[JSON] Comment
 
 -- | Updates an existing comment.
 --
@@ -65,13 +66,13 @@ type CommentsUpdateResource =
 data CommentsUpdate' = CommentsUpdate'
     { _cuQuotaUser   :: !(Maybe Text)
     , _cuPrettyPrint :: !Bool
-    , _cuUserIp      :: !(Maybe Text)
-    , _cuKey         :: !(Maybe Text)
+    , _cuUserIP      :: !(Maybe Text)
+    , _cuKey         :: !(Maybe Key)
     , _cuFileId      :: !Text
-    , _cuOauthToken  :: !(Maybe Text)
+    , _cuOAuthToken  :: !(Maybe OAuthToken)
+    , _cuComment     :: !Comment
     , _cuCommentId   :: !Text
     , _cuFields      :: !(Maybe Text)
-    , _cuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsUpdate'' with the minimum fields required to make a request.
@@ -82,34 +83,35 @@ data CommentsUpdate' = CommentsUpdate'
 --
 -- * 'cuPrettyPrint'
 --
--- * 'cuUserIp'
+-- * 'cuUserIP'
 --
 -- * 'cuKey'
 --
 -- * 'cuFileId'
 --
--- * 'cuOauthToken'
+-- * 'cuOAuthToken'
+--
+-- * 'cuComment'
 --
 -- * 'cuCommentId'
 --
 -- * 'cuFields'
---
--- * 'cuAlt'
 commentsUpdate'
     :: Text -- ^ 'fileId'
+    -> Comment -- ^ 'Comment'
     -> Text -- ^ 'commentId'
     -> CommentsUpdate'
-commentsUpdate' pCuFileId_ pCuCommentId_ =
+commentsUpdate' pCuFileId_ pCuComment_ pCuCommentId_ =
     CommentsUpdate'
     { _cuQuotaUser = Nothing
     , _cuPrettyPrint = True
-    , _cuUserIp = Nothing
+    , _cuUserIP = Nothing
     , _cuKey = Nothing
     , _cuFileId = pCuFileId_
-    , _cuOauthToken = Nothing
+    , _cuOAuthToken = Nothing
+    , _cuComment = pCuComment_
     , _cuCommentId = pCuCommentId_
     , _cuFields = Nothing
-    , _cuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,13 +129,13 @@ cuPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cuUserIp :: Lens' CommentsUpdate' (Maybe Text)
-cuUserIp = lens _cuUserIp (\ s a -> s{_cuUserIp = a})
+cuUserIP :: Lens' CommentsUpdate' (Maybe Text)
+cuUserIP = lens _cuUserIP (\ s a -> s{_cuUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cuKey :: Lens' CommentsUpdate' (Maybe Text)
+cuKey :: Lens' CommentsUpdate' (Maybe Key)
 cuKey = lens _cuKey (\ s a -> s{_cuKey = a})
 
 -- | The ID of the file.
@@ -141,9 +143,14 @@ cuFileId :: Lens' CommentsUpdate' Text
 cuFileId = lens _cuFileId (\ s a -> s{_cuFileId = a})
 
 -- | OAuth 2.0 token for the current user.
-cuOauthToken :: Lens' CommentsUpdate' (Maybe Text)
-cuOauthToken
-  = lens _cuOauthToken (\ s a -> s{_cuOauthToken = a})
+cuOAuthToken :: Lens' CommentsUpdate' (Maybe OAuthToken)
+cuOAuthToken
+  = lens _cuOAuthToken (\ s a -> s{_cuOAuthToken = a})
+
+-- | Multipart request metadata.
+cuComment :: Lens' CommentsUpdate' Comment
+cuComment
+  = lens _cuComment (\ s a -> s{_cuComment = a})
 
 -- | The ID of the comment.
 cuCommentId :: Lens' CommentsUpdate' Text
@@ -154,21 +161,22 @@ cuCommentId
 cuFields :: Lens' CommentsUpdate' (Maybe Text)
 cuFields = lens _cuFields (\ s a -> s{_cuFields = a})
 
--- | Data format for the response.
-cuAlt :: Lens' CommentsUpdate' Alt
-cuAlt = lens _cuAlt (\ s a -> s{_cuAlt = a})
+instance GoogleAuth CommentsUpdate' where
+        authKey = cuKey . _Just
+        authToken = cuOAuthToken . _Just
 
 instance GoogleRequest CommentsUpdate' where
         type Rs CommentsUpdate' = Comment
         request = requestWithRoute defReq driveURL
         requestWithRoute r u CommentsUpdate'{..}
-          = go _cuQuotaUser (Just _cuPrettyPrint) _cuUserIp
+          = go _cuQuotaUser (Just _cuPrettyPrint) _cuUserIP
               _cuKey
               _cuFileId
-              _cuOauthToken
+              _cuOAuthToken
               _cuCommentId
               _cuFields
-              (Just _cuAlt)
+              (Just AltJSON)
+              _cuComment
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CommentsUpdateResource)

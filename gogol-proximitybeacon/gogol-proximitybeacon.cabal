@@ -33,7 +33,7 @@ library
     exposed-modules:
           Network.Google.ProximityBeacon
         , Network.Google.ProximityBeacon.Types
-        , Network.Google.Resource.ProximityBeacon.Beaconinfo.Getforobserved
+        , Network.Google.Resource.ProximityBeacon.BeaconInfo.GetforObserved
         , Network.Google.Resource.ProximityBeacon.Beacons.Activate
         , Network.Google.Resource.ProximityBeacon.Beacons.Attachments.BatchDelete
         , Network.Google.Resource.ProximityBeacon.Beacons.Attachments.Create

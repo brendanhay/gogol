@@ -32,12 +32,11 @@ module Network.Google.Resource.Drive.Files.Untrash
     -- * Request Lenses
     , fQuotaUser
     , fPrettyPrint
-    , fUserIp
+    , fUserIP
     , fKey
     , fFileId
-    , fOauthToken
+    , fOAuthToken
     , fFields
-    , fAlt
     ) where
 
 import           Network.Google.Drive.Types
@@ -52,10 +51,10 @@ type FilesUntrashResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] File
+                       QueryParam "alt" AltJSON :> Post '[JSON] File
 
 -- | Restores a file from the trash.
 --
@@ -63,12 +62,11 @@ type FilesUntrashResource =
 data FilesUntrash' = FilesUntrash'
     { _fQuotaUser   :: !(Maybe Text)
     , _fPrettyPrint :: !Bool
-    , _fUserIp      :: !(Maybe Text)
-    , _fKey         :: !(Maybe Text)
+    , _fUserIP      :: !(Maybe Text)
+    , _fKey         :: !(Maybe Key)
     , _fFileId      :: !Text
-    , _fOauthToken  :: !(Maybe Text)
+    , _fOAuthToken  :: !(Maybe OAuthToken)
     , _fFields      :: !(Maybe Text)
-    , _fAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FilesUntrash'' with the minimum fields required to make a request.
@@ -79,17 +77,15 @@ data FilesUntrash' = FilesUntrash'
 --
 -- * 'fPrettyPrint'
 --
--- * 'fUserIp'
+-- * 'fUserIP'
 --
 -- * 'fKey'
 --
 -- * 'fFileId'
 --
--- * 'fOauthToken'
+-- * 'fOAuthToken'
 --
 -- * 'fFields'
---
--- * 'fAlt'
 filesUntrash'
     :: Text -- ^ 'fileId'
     -> FilesUntrash'
@@ -97,12 +93,11 @@ filesUntrash' pFFileId_ =
     FilesUntrash'
     { _fQuotaUser = Nothing
     , _fPrettyPrint = True
-    , _fUserIp = Nothing
+    , _fUserIP = Nothing
     , _fKey = Nothing
     , _fFileId = pFFileId_
-    , _fOauthToken = Nothing
+    , _fOAuthToken = Nothing
     , _fFields = Nothing
-    , _fAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -119,13 +114,13 @@ fPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-fUserIp :: Lens' FilesUntrash' (Maybe Text)
-fUserIp = lens _fUserIp (\ s a -> s{_fUserIp = a})
+fUserIP :: Lens' FilesUntrash' (Maybe Text)
+fUserIP = lens _fUserIP (\ s a -> s{_fUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fKey :: Lens' FilesUntrash' (Maybe Text)
+fKey :: Lens' FilesUntrash' (Maybe Key)
 fKey = lens _fKey (\ s a -> s{_fKey = a})
 
 -- | The ID of the file to untrash.
@@ -133,27 +128,27 @@ fFileId :: Lens' FilesUntrash' Text
 fFileId = lens _fFileId (\ s a -> s{_fFileId = a})
 
 -- | OAuth 2.0 token for the current user.
-fOauthToken :: Lens' FilesUntrash' (Maybe Text)
-fOauthToken
-  = lens _fOauthToken (\ s a -> s{_fOauthToken = a})
+fOAuthToken :: Lens' FilesUntrash' (Maybe OAuthToken)
+fOAuthToken
+  = lens _fOAuthToken (\ s a -> s{_fOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 fFields :: Lens' FilesUntrash' (Maybe Text)
 fFields = lens _fFields (\ s a -> s{_fFields = a})
 
--- | Data format for the response.
-fAlt :: Lens' FilesUntrash' Alt
-fAlt = lens _fAlt (\ s a -> s{_fAlt = a})
+instance GoogleAuth FilesUntrash' where
+        authKey = fKey . _Just
+        authToken = fOAuthToken . _Just
 
 instance GoogleRequest FilesUntrash' where
         type Rs FilesUntrash' = File
         request = requestWithRoute defReq driveURL
         requestWithRoute r u FilesUntrash'{..}
-          = go _fQuotaUser (Just _fPrettyPrint) _fUserIp _fKey
+          = go _fQuotaUser (Just _fPrettyPrint) _fUserIP _fKey
               _fFileId
-              _fOauthToken
+              _fOAuthToken
               _fFields
-              (Just _fAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy FilesUntrashResource)

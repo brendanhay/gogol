@@ -33,11 +33,11 @@ module Network.Google.Resource.Spectrum.Paws.GetSpectrumBatch
     -- * Request Lenses
     , pgsbQuotaUser
     , pgsbPrettyPrint
-    , pgsbUserIp
+    , pgsbPawsGetSpectrumBatchRequest
+    , pgsbUserIP
     , pgsbKey
-    , pgsbOauthToken
+    , pgsbOAuthToken
     , pgsbFields
-    , pgsbAlt
     ) where
 
 import           Network.Google.Prelude
@@ -50,24 +50,25 @@ type PawsGetSpectrumBatchResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
-               QueryParam "oauth_token" Text :>
+             QueryParam "key" Key :>
+               QueryParam "oauth_token" OAuthToken :>
                  QueryParam "fields" Text :>
-                   QueryParam "alt" Alt :>
-                     Post '[JSON] PawsGetSpectrumBatchResponse
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] PawsGetSpectrumBatchRequest :>
+                       Post '[JSON] PawsGetSpectrumBatchResponse
 
 -- | The Google Spectrum Database does not support batch requests, so this
 -- method always yields an UNIMPLEMENTED error.
 --
 -- /See:/ 'pawsGetSpectrumBatch'' smart constructor.
 data PawsGetSpectrumBatch' = PawsGetSpectrumBatch'
-    { _pgsbQuotaUser   :: !(Maybe Text)
-    , _pgsbPrettyPrint :: !Bool
-    , _pgsbUserIp      :: !(Maybe Text)
-    , _pgsbKey         :: !(Maybe Text)
-    , _pgsbOauthToken  :: !(Maybe Text)
-    , _pgsbFields      :: !(Maybe Text)
-    , _pgsbAlt         :: !Alt
+    { _pgsbQuotaUser                   :: !(Maybe Text)
+    , _pgsbPrettyPrint                 :: !Bool
+    , _pgsbPawsGetSpectrumBatchRequest :: !PawsGetSpectrumBatchRequest
+    , _pgsbUserIP                      :: !(Maybe Text)
+    , _pgsbKey                         :: !(Maybe Key)
+    , _pgsbOAuthToken                  :: !(Maybe OAuthToken)
+    , _pgsbFields                      :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PawsGetSpectrumBatch'' with the minimum fields required to make a request.
@@ -78,26 +79,27 @@ data PawsGetSpectrumBatch' = PawsGetSpectrumBatch'
 --
 -- * 'pgsbPrettyPrint'
 --
--- * 'pgsbUserIp'
+-- * 'pgsbPawsGetSpectrumBatchRequest'
+--
+-- * 'pgsbUserIP'
 --
 -- * 'pgsbKey'
 --
--- * 'pgsbOauthToken'
+-- * 'pgsbOAuthToken'
 --
 -- * 'pgsbFields'
---
--- * 'pgsbAlt'
 pawsGetSpectrumBatch'
-    :: PawsGetSpectrumBatch'
-pawsGetSpectrumBatch' =
+    :: PawsGetSpectrumBatchRequest -- ^ 'PawsGetSpectrumBatchRequest'
+    -> PawsGetSpectrumBatch'
+pawsGetSpectrumBatch' pPgsbPawsGetSpectrumBatchRequest_ =
     PawsGetSpectrumBatch'
     { _pgsbQuotaUser = Nothing
     , _pgsbPrettyPrint = True
-    , _pgsbUserIp = Nothing
+    , _pgsbPawsGetSpectrumBatchRequest = pPgsbPawsGetSpectrumBatchRequest_
+    , _pgsbUserIP = Nothing
     , _pgsbKey = Nothing
-    , _pgsbOauthToken = Nothing
+    , _pgsbOAuthToken = Nothing
     , _pgsbFields = Nothing
-    , _pgsbAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -114,32 +116,38 @@ pgsbPrettyPrint
   = lens _pgsbPrettyPrint
       (\ s a -> s{_pgsbPrettyPrint = a})
 
+-- | Multipart request metadata.
+pgsbPawsGetSpectrumBatchRequest :: Lens' PawsGetSpectrumBatch' PawsGetSpectrumBatchRequest
+pgsbPawsGetSpectrumBatchRequest
+  = lens _pgsbPawsGetSpectrumBatchRequest
+      (\ s a -> s{_pgsbPawsGetSpectrumBatchRequest = a})
+
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-pgsbUserIp :: Lens' PawsGetSpectrumBatch' (Maybe Text)
-pgsbUserIp
-  = lens _pgsbUserIp (\ s a -> s{_pgsbUserIp = a})
+pgsbUserIP :: Lens' PawsGetSpectrumBatch' (Maybe Text)
+pgsbUserIP
+  = lens _pgsbUserIP (\ s a -> s{_pgsbUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pgsbKey :: Lens' PawsGetSpectrumBatch' (Maybe Text)
+pgsbKey :: Lens' PawsGetSpectrumBatch' (Maybe Key)
 pgsbKey = lens _pgsbKey (\ s a -> s{_pgsbKey = a})
 
 -- | OAuth 2.0 token for the current user.
-pgsbOauthToken :: Lens' PawsGetSpectrumBatch' (Maybe Text)
-pgsbOauthToken
-  = lens _pgsbOauthToken
-      (\ s a -> s{_pgsbOauthToken = a})
+pgsbOAuthToken :: Lens' PawsGetSpectrumBatch' (Maybe OAuthToken)
+pgsbOAuthToken
+  = lens _pgsbOAuthToken
+      (\ s a -> s{_pgsbOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 pgsbFields :: Lens' PawsGetSpectrumBatch' (Maybe Text)
 pgsbFields
   = lens _pgsbFields (\ s a -> s{_pgsbFields = a})
 
--- | Data format for the response.
-pgsbAlt :: Lens' PawsGetSpectrumBatch' Alt
-pgsbAlt = lens _pgsbAlt (\ s a -> s{_pgsbAlt = a})
+instance GoogleAuth PawsGetSpectrumBatch' where
+        authKey = pgsbKey . _Just
+        authToken = pgsbOAuthToken . _Just
 
 instance GoogleRequest PawsGetSpectrumBatch' where
         type Rs PawsGetSpectrumBatch' =
@@ -147,11 +155,12 @@ instance GoogleRequest PawsGetSpectrumBatch' where
         request = requestWithRoute defReq spectrumURL
         requestWithRoute r u PawsGetSpectrumBatch'{..}
           = go _pgsbQuotaUser (Just _pgsbPrettyPrint)
-              _pgsbUserIp
+              _pgsbUserIP
               _pgsbKey
-              _pgsbOauthToken
+              _pgsbOAuthToken
               _pgsbFields
-              (Just _pgsbAlt)
+              (Just AltJSON)
+              _pgsbPawsGetSpectrumBatchRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PawsGetSpectrumBatchResource)

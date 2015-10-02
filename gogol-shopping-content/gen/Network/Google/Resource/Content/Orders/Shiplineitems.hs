@@ -33,12 +33,12 @@ module Network.Google.Resource.Content.Orders.Shiplineitems
     , osQuotaUser
     , osMerchantId
     , osPrettyPrint
-    , osUserIp
+    , osUserIP
+    , osOrdersShipLineItemsRequest
     , osKey
-    , osOauthToken
+    , osOAuthToken
     , osOrderId
     , osFields
-    , osAlt
     ) where
 
 import           Network.Google.Prelude
@@ -54,25 +54,26 @@ type OrdersShiplineitemsResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :>
-                           Post '[JSON] OrdersShipLineItemsResponse
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] OrdersShipLineItemsRequest :>
+                             Post '[JSON] OrdersShipLineItemsResponse
 
 -- | Marks line item(s) as shipped.
 --
 -- /See:/ 'ordersShiplineitems'' smart constructor.
 data OrdersShiplineitems' = OrdersShiplineitems'
-    { _osQuotaUser   :: !(Maybe Text)
-    , _osMerchantId  :: !Word64
-    , _osPrettyPrint :: !Bool
-    , _osUserIp      :: !(Maybe Text)
-    , _osKey         :: !(Maybe Text)
-    , _osOauthToken  :: !(Maybe Text)
-    , _osOrderId     :: !Text
-    , _osFields      :: !(Maybe Text)
-    , _osAlt         :: !Alt
+    { _osQuotaUser                  :: !(Maybe Text)
+    , _osMerchantId                 :: !Word64
+    , _osPrettyPrint                :: !Bool
+    , _osUserIP                     :: !(Maybe Text)
+    , _osOrdersShipLineItemsRequest :: !OrdersShipLineItemsRequest
+    , _osKey                        :: !(Maybe Key)
+    , _osOAuthToken                 :: !(Maybe OAuthToken)
+    , _osOrderId                    :: !Text
+    , _osFields                     :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersShiplineitems'' with the minimum fields required to make a request.
@@ -85,32 +86,33 @@ data OrdersShiplineitems' = OrdersShiplineitems'
 --
 -- * 'osPrettyPrint'
 --
--- * 'osUserIp'
+-- * 'osUserIP'
+--
+-- * 'osOrdersShipLineItemsRequest'
 --
 -- * 'osKey'
 --
--- * 'osOauthToken'
+-- * 'osOAuthToken'
 --
 -- * 'osOrderId'
 --
 -- * 'osFields'
---
--- * 'osAlt'
 ordersShiplineitems'
     :: Word64 -- ^ 'merchantId'
+    -> OrdersShipLineItemsRequest -- ^ 'OrdersShipLineItemsRequest'
     -> Text -- ^ 'orderId'
     -> OrdersShiplineitems'
-ordersShiplineitems' pOsMerchantId_ pOsOrderId_ =
+ordersShiplineitems' pOsMerchantId_ pOsOrdersShipLineItemsRequest_ pOsOrderId_ =
     OrdersShiplineitems'
     { _osQuotaUser = Nothing
     , _osMerchantId = pOsMerchantId_
     , _osPrettyPrint = True
-    , _osUserIp = Nothing
+    , _osUserIP = Nothing
+    , _osOrdersShipLineItemsRequest = pOsOrdersShipLineItemsRequest_
     , _osKey = Nothing
-    , _osOauthToken = Nothing
+    , _osOAuthToken = Nothing
     , _osOrderId = pOsOrderId_
     , _osFields = Nothing
-    , _osAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -133,19 +135,25 @@ osPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-osUserIp :: Lens' OrdersShiplineitems' (Maybe Text)
-osUserIp = lens _osUserIp (\ s a -> s{_osUserIp = a})
+osUserIP :: Lens' OrdersShiplineitems' (Maybe Text)
+osUserIP = lens _osUserIP (\ s a -> s{_osUserIP = a})
+
+-- | Multipart request metadata.
+osOrdersShipLineItemsRequest :: Lens' OrdersShiplineitems' OrdersShipLineItemsRequest
+osOrdersShipLineItemsRequest
+  = lens _osOrdersShipLineItemsRequest
+      (\ s a -> s{_osOrdersShipLineItemsRequest = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-osKey :: Lens' OrdersShiplineitems' (Maybe Text)
+osKey :: Lens' OrdersShiplineitems' (Maybe Key)
 osKey = lens _osKey (\ s a -> s{_osKey = a})
 
 -- | OAuth 2.0 token for the current user.
-osOauthToken :: Lens' OrdersShiplineitems' (Maybe Text)
-osOauthToken
-  = lens _osOauthToken (\ s a -> s{_osOauthToken = a})
+osOAuthToken :: Lens' OrdersShiplineitems' (Maybe OAuthToken)
+osOAuthToken
+  = lens _osOAuthToken (\ s a -> s{_osOAuthToken = a})
 
 -- | The ID of the order.
 osOrderId :: Lens' OrdersShiplineitems' Text
@@ -156,9 +164,9 @@ osOrderId
 osFields :: Lens' OrdersShiplineitems' (Maybe Text)
 osFields = lens _osFields (\ s a -> s{_osFields = a})
 
--- | Data format for the response.
-osAlt :: Lens' OrdersShiplineitems' Alt
-osAlt = lens _osAlt (\ s a -> s{_osAlt = a})
+instance GoogleAuth OrdersShiplineitems' where
+        authKey = osKey . _Just
+        authToken = osOAuthToken . _Just
 
 instance GoogleRequest OrdersShiplineitems' where
         type Rs OrdersShiplineitems' =
@@ -166,12 +174,13 @@ instance GoogleRequest OrdersShiplineitems' where
         request = requestWithRoute defReq shoppingContentURL
         requestWithRoute r u OrdersShiplineitems'{..}
           = go _osQuotaUser _osMerchantId (Just _osPrettyPrint)
-              _osUserIp
+              _osUserIP
               _osKey
-              _osOauthToken
+              _osOAuthToken
               _osOrderId
               _osFields
-              (Just _osAlt)
+              (Just AltJSON)
+              _osOrdersShipLineItemsRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy OrdersShiplineitemsResource)

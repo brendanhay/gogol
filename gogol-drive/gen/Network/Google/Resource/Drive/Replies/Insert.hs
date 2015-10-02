@@ -32,13 +32,13 @@ module Network.Google.Resource.Drive.Replies.Insert
     -- * Request Lenses
     , riQuotaUser
     , riPrettyPrint
-    , riUserIp
+    , riUserIP
+    , riCommentReply
     , riKey
     , riFileId
-    , riOauthToken
+    , riOAuthToken
     , riCommentId
     , riFields
-    , riAlt
     ) where
 
 import           Network.Google.Drive.Types
@@ -55,24 +55,26 @@ type RepliesInsertResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Post '[JSON] CommentReply
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] CommentReply :>
+                               Post '[JSON] CommentReply
 
 -- | Creates a new reply to the given comment.
 --
 -- /See:/ 'repliesInsert'' smart constructor.
 data RepliesInsert' = RepliesInsert'
-    { _riQuotaUser   :: !(Maybe Text)
-    , _riPrettyPrint :: !Bool
-    , _riUserIp      :: !(Maybe Text)
-    , _riKey         :: !(Maybe Text)
-    , _riFileId      :: !Text
-    , _riOauthToken  :: !(Maybe Text)
-    , _riCommentId   :: !Text
-    , _riFields      :: !(Maybe Text)
-    , _riAlt         :: !Alt
+    { _riQuotaUser    :: !(Maybe Text)
+    , _riPrettyPrint  :: !Bool
+    , _riUserIP       :: !(Maybe Text)
+    , _riCommentReply :: !CommentReply
+    , _riKey          :: !(Maybe Key)
+    , _riFileId       :: !Text
+    , _riOAuthToken   :: !(Maybe OAuthToken)
+    , _riCommentId    :: !Text
+    , _riFields       :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RepliesInsert'' with the minimum fields required to make a request.
@@ -83,34 +85,35 @@ data RepliesInsert' = RepliesInsert'
 --
 -- * 'riPrettyPrint'
 --
--- * 'riUserIp'
+-- * 'riUserIP'
+--
+-- * 'riCommentReply'
 --
 -- * 'riKey'
 --
 -- * 'riFileId'
 --
--- * 'riOauthToken'
+-- * 'riOAuthToken'
 --
 -- * 'riCommentId'
 --
 -- * 'riFields'
---
--- * 'riAlt'
 repliesInsert'
-    :: Text -- ^ 'fileId'
+    :: CommentReply -- ^ 'CommentReply'
+    -> Text -- ^ 'fileId'
     -> Text -- ^ 'commentId'
     -> RepliesInsert'
-repliesInsert' pRiFileId_ pRiCommentId_ =
+repliesInsert' pRiCommentReply_ pRiFileId_ pRiCommentId_ =
     RepliesInsert'
     { _riQuotaUser = Nothing
     , _riPrettyPrint = True
-    , _riUserIp = Nothing
+    , _riUserIP = Nothing
+    , _riCommentReply = pRiCommentReply_
     , _riKey = Nothing
     , _riFileId = pRiFileId_
-    , _riOauthToken = Nothing
+    , _riOAuthToken = Nothing
     , _riCommentId = pRiCommentId_
     , _riFields = Nothing
-    , _riAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -128,13 +131,19 @@ riPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-riUserIp :: Lens' RepliesInsert' (Maybe Text)
-riUserIp = lens _riUserIp (\ s a -> s{_riUserIp = a})
+riUserIP :: Lens' RepliesInsert' (Maybe Text)
+riUserIP = lens _riUserIP (\ s a -> s{_riUserIP = a})
+
+-- | Multipart request metadata.
+riCommentReply :: Lens' RepliesInsert' CommentReply
+riCommentReply
+  = lens _riCommentReply
+      (\ s a -> s{_riCommentReply = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-riKey :: Lens' RepliesInsert' (Maybe Text)
+riKey :: Lens' RepliesInsert' (Maybe Key)
 riKey = lens _riKey (\ s a -> s{_riKey = a})
 
 -- | The ID of the file.
@@ -142,9 +151,9 @@ riFileId :: Lens' RepliesInsert' Text
 riFileId = lens _riFileId (\ s a -> s{_riFileId = a})
 
 -- | OAuth 2.0 token for the current user.
-riOauthToken :: Lens' RepliesInsert' (Maybe Text)
-riOauthToken
-  = lens _riOauthToken (\ s a -> s{_riOauthToken = a})
+riOAuthToken :: Lens' RepliesInsert' (Maybe OAuthToken)
+riOAuthToken
+  = lens _riOAuthToken (\ s a -> s{_riOAuthToken = a})
 
 -- | The ID of the comment.
 riCommentId :: Lens' RepliesInsert' Text
@@ -155,21 +164,22 @@ riCommentId
 riFields :: Lens' RepliesInsert' (Maybe Text)
 riFields = lens _riFields (\ s a -> s{_riFields = a})
 
--- | Data format for the response.
-riAlt :: Lens' RepliesInsert' Alt
-riAlt = lens _riAlt (\ s a -> s{_riAlt = a})
+instance GoogleAuth RepliesInsert' where
+        authKey = riKey . _Just
+        authToken = riOAuthToken . _Just
 
 instance GoogleRequest RepliesInsert' where
         type Rs RepliesInsert' = CommentReply
         request = requestWithRoute defReq driveURL
         requestWithRoute r u RepliesInsert'{..}
-          = go _riQuotaUser (Just _riPrettyPrint) _riUserIp
+          = go _riQuotaUser (Just _riPrettyPrint) _riUserIP
               _riKey
               _riFileId
-              _riOauthToken
+              _riOAuthToken
               _riCommentId
               _riFields
-              (Just _riAlt)
+              (Just AltJSON)
+              _riCommentReply
           where go
                   = clientWithRoute
                       (Proxy :: Proxy RepliesInsertResource)

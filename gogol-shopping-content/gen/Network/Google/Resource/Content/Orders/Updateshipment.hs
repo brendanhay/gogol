@@ -30,15 +30,15 @@ module Network.Google.Resource.Content.Orders.Updateshipment
     , OrdersUpdateshipment'
 
     -- * Request Lenses
-    , ouuQuotaUser
-    , ouuMerchantId
-    , ouuPrettyPrint
-    , ouuUserIp
-    , ouuKey
-    , ouuOauthToken
-    , ouuOrderId
-    , ouuFields
-    , ouuAlt
+    , ouQuotaUser
+    , ouMerchantId
+    , ouPrettyPrint
+    , ouOrdersUpdateShipmentRequest
+    , ouUserIP
+    , ouKey
+    , ouOAuthToken
+    , ouOrderId
+    , ouFields
     ) where
 
 import           Network.Google.Prelude
@@ -54,129 +54,133 @@ type OrdersUpdateshipmentResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :>
-                           Post '[JSON] OrdersUpdateShipmentResponse
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] OrdersUpdateShipmentRequest :>
+                             Post '[JSON] OrdersUpdateShipmentResponse
 
 -- | Updates a shipment\'s status, carrier, and\/or tracking ID.
 --
 -- /See:/ 'ordersUpdateshipment'' smart constructor.
 data OrdersUpdateshipment' = OrdersUpdateshipment'
-    { _ouuQuotaUser   :: !(Maybe Text)
-    , _ouuMerchantId  :: !Word64
-    , _ouuPrettyPrint :: !Bool
-    , _ouuUserIp      :: !(Maybe Text)
-    , _ouuKey         :: !(Maybe Text)
-    , _ouuOauthToken  :: !(Maybe Text)
-    , _ouuOrderId     :: !Text
-    , _ouuFields      :: !(Maybe Text)
-    , _ouuAlt         :: !Alt
+    { _ouQuotaUser                   :: !(Maybe Text)
+    , _ouMerchantId                  :: !Word64
+    , _ouPrettyPrint                 :: !Bool
+    , _ouOrdersUpdateShipmentRequest :: !OrdersUpdateShipmentRequest
+    , _ouUserIP                      :: !(Maybe Text)
+    , _ouKey                         :: !(Maybe Key)
+    , _ouOAuthToken                  :: !(Maybe OAuthToken)
+    , _ouOrderId                     :: !Text
+    , _ouFields                      :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersUpdateshipment'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ouuQuotaUser'
+-- * 'ouQuotaUser'
 --
--- * 'ouuMerchantId'
+-- * 'ouMerchantId'
 --
--- * 'ouuPrettyPrint'
+-- * 'ouPrettyPrint'
 --
--- * 'ouuUserIp'
+-- * 'ouOrdersUpdateShipmentRequest'
 --
--- * 'ouuKey'
+-- * 'ouUserIP'
 --
--- * 'ouuOauthToken'
+-- * 'ouKey'
 --
--- * 'ouuOrderId'
+-- * 'ouOAuthToken'
 --
--- * 'ouuFields'
+-- * 'ouOrderId'
 --
--- * 'ouuAlt'
+-- * 'ouFields'
 ordersUpdateshipment'
     :: Word64 -- ^ 'merchantId'
+    -> OrdersUpdateShipmentRequest -- ^ 'OrdersUpdateShipmentRequest'
     -> Text -- ^ 'orderId'
     -> OrdersUpdateshipment'
-ordersUpdateshipment' pOuuMerchantId_ pOuuOrderId_ =
+ordersUpdateshipment' pOuMerchantId_ pOuOrdersUpdateShipmentRequest_ pOuOrderId_ =
     OrdersUpdateshipment'
-    { _ouuQuotaUser = Nothing
-    , _ouuMerchantId = pOuuMerchantId_
-    , _ouuPrettyPrint = True
-    , _ouuUserIp = Nothing
-    , _ouuKey = Nothing
-    , _ouuOauthToken = Nothing
-    , _ouuOrderId = pOuuOrderId_
-    , _ouuFields = Nothing
-    , _ouuAlt = JSON
+    { _ouQuotaUser = Nothing
+    , _ouMerchantId = pOuMerchantId_
+    , _ouPrettyPrint = True
+    , _ouOrdersUpdateShipmentRequest = pOuOrdersUpdateShipmentRequest_
+    , _ouUserIP = Nothing
+    , _ouKey = Nothing
+    , _ouOAuthToken = Nothing
+    , _ouOrderId = pOuOrderId_
+    , _ouFields = Nothing
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-ouuQuotaUser :: Lens' OrdersUpdateshipment' (Maybe Text)
-ouuQuotaUser
-  = lens _ouuQuotaUser (\ s a -> s{_ouuQuotaUser = a})
+ouQuotaUser :: Lens' OrdersUpdateshipment' (Maybe Text)
+ouQuotaUser
+  = lens _ouQuotaUser (\ s a -> s{_ouQuotaUser = a})
 
 -- | The ID of the managing account.
-ouuMerchantId :: Lens' OrdersUpdateshipment' Word64
-ouuMerchantId
-  = lens _ouuMerchantId
-      (\ s a -> s{_ouuMerchantId = a})
+ouMerchantId :: Lens' OrdersUpdateshipment' Word64
+ouMerchantId
+  = lens _ouMerchantId (\ s a -> s{_ouMerchantId = a})
 
 -- | Returns response with indentations and line breaks.
-ouuPrettyPrint :: Lens' OrdersUpdateshipment' Bool
-ouuPrettyPrint
-  = lens _ouuPrettyPrint
-      (\ s a -> s{_ouuPrettyPrint = a})
+ouPrettyPrint :: Lens' OrdersUpdateshipment' Bool
+ouPrettyPrint
+  = lens _ouPrettyPrint
+      (\ s a -> s{_ouPrettyPrint = a})
+
+-- | Multipart request metadata.
+ouOrdersUpdateShipmentRequest :: Lens' OrdersUpdateshipment' OrdersUpdateShipmentRequest
+ouOrdersUpdateShipmentRequest
+  = lens _ouOrdersUpdateShipmentRequest
+      (\ s a -> s{_ouOrdersUpdateShipmentRequest = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ouuUserIp :: Lens' OrdersUpdateshipment' (Maybe Text)
-ouuUserIp
-  = lens _ouuUserIp (\ s a -> s{_ouuUserIp = a})
+ouUserIP :: Lens' OrdersUpdateshipment' (Maybe Text)
+ouUserIP = lens _ouUserIP (\ s a -> s{_ouUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ouuKey :: Lens' OrdersUpdateshipment' (Maybe Text)
-ouuKey = lens _ouuKey (\ s a -> s{_ouuKey = a})
+ouKey :: Lens' OrdersUpdateshipment' (Maybe Key)
+ouKey = lens _ouKey (\ s a -> s{_ouKey = a})
 
 -- | OAuth 2.0 token for the current user.
-ouuOauthToken :: Lens' OrdersUpdateshipment' (Maybe Text)
-ouuOauthToken
-  = lens _ouuOauthToken
-      (\ s a -> s{_ouuOauthToken = a})
+ouOAuthToken :: Lens' OrdersUpdateshipment' (Maybe OAuthToken)
+ouOAuthToken
+  = lens _ouOAuthToken (\ s a -> s{_ouOAuthToken = a})
 
 -- | The ID of the order.
-ouuOrderId :: Lens' OrdersUpdateshipment' Text
-ouuOrderId
-  = lens _ouuOrderId (\ s a -> s{_ouuOrderId = a})
+ouOrderId :: Lens' OrdersUpdateshipment' Text
+ouOrderId
+  = lens _ouOrderId (\ s a -> s{_ouOrderId = a})
 
 -- | Selector specifying which fields to include in a partial response.
-ouuFields :: Lens' OrdersUpdateshipment' (Maybe Text)
-ouuFields
-  = lens _ouuFields (\ s a -> s{_ouuFields = a})
+ouFields :: Lens' OrdersUpdateshipment' (Maybe Text)
+ouFields = lens _ouFields (\ s a -> s{_ouFields = a})
 
--- | Data format for the response.
-ouuAlt :: Lens' OrdersUpdateshipment' Alt
-ouuAlt = lens _ouuAlt (\ s a -> s{_ouuAlt = a})
+instance GoogleAuth OrdersUpdateshipment' where
+        authKey = ouKey . _Just
+        authToken = ouOAuthToken . _Just
 
 instance GoogleRequest OrdersUpdateshipment' where
         type Rs OrdersUpdateshipment' =
              OrdersUpdateShipmentResponse
         request = requestWithRoute defReq shoppingContentURL
         requestWithRoute r u OrdersUpdateshipment'{..}
-          = go _ouuQuotaUser _ouuMerchantId
-              (Just _ouuPrettyPrint)
-              _ouuUserIp
-              _ouuKey
-              _ouuOauthToken
-              _ouuOrderId
-              _ouuFields
-              (Just _ouuAlt)
+          = go _ouQuotaUser _ouMerchantId (Just _ouPrettyPrint)
+              _ouUserIP
+              _ouKey
+              _ouOAuthToken
+              _ouOrderId
+              _ouFields
+              (Just AltJSON)
+              _ouOrdersUpdateShipmentRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy OrdersUpdateshipmentResource)

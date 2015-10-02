@@ -131,7 +131,7 @@ instance ToJSON
 --
 -- /See:/ 'siteVerificationWebResourceListResponse' smart constructor.
 newtype SiteVerificationWebResourceListResponse = SiteVerificationWebResourceListResponse
-    { _svwrlrItems :: Maybe [Maybe SiteVerificationWebResourceResource]
+    { _svwrlrItems :: Maybe [SiteVerificationWebResourceResource]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SiteVerificationWebResourceListResponse' with the minimum fields required to make a request.
@@ -147,7 +147,7 @@ siteVerificationWebResourceListResponse =
     }
 
 -- | The list of sites that are owned by the authenticated user.
-svwrlrItems :: Lens' SiteVerificationWebResourceListResponse [Maybe SiteVerificationWebResourceResource]
+svwrlrItems :: Lens' SiteVerificationWebResourceListResponse [SiteVerificationWebResourceResource]
 svwrlrItems
   = lens _svwrlrItems (\ s a -> s{_svwrlrItems = a}) .
       _Default

@@ -32,17 +32,16 @@ module Network.Google.Resource.Gmail.Users.Threads.List
     -- * Request Lenses
     , utlQuotaUser
     , utlPrettyPrint
-    , utlUserIp
+    , utlUserIP
     , utlQ
     , utlUserId
     , utlKey
     , utlIncludeSpamTrash
     , utlLabelIds
     , utlPageToken
-    , utlOauthToken
+    , utlOAuthToken
     , utlMaxResults
     , utlFields
-    , utlAlt
     ) where
 
 import           Network.Google.Gmail.Types
@@ -57,14 +56,14 @@ type UsersThreadsListResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "q" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "includeSpamTrash" Bool :>
                      QueryParams "labelIds" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "maxResults" Word32 :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :>
+                               QueryParam "alt" AltJSON :>
                                  Get '[JSON] ListThreadsResponse
 
 -- | Lists the threads in the user\'s mailbox.
@@ -73,17 +72,16 @@ type UsersThreadsListResource =
 data UsersThreadsList' = UsersThreadsList'
     { _utlQuotaUser        :: !(Maybe Text)
     , _utlPrettyPrint      :: !Bool
-    , _utlUserIp           :: !(Maybe Text)
+    , _utlUserIP           :: !(Maybe Text)
     , _utlQ                :: !(Maybe Text)
     , _utlUserId           :: !Text
-    , _utlKey              :: !(Maybe Text)
+    , _utlKey              :: !(Maybe Key)
     , _utlIncludeSpamTrash :: !Bool
     , _utlLabelIds         :: !(Maybe Text)
     , _utlPageToken        :: !(Maybe Text)
-    , _utlOauthToken       :: !(Maybe Text)
+    , _utlOAuthToken       :: !(Maybe OAuthToken)
     , _utlMaxResults       :: !Word32
     , _utlFields           :: !(Maybe Text)
-    , _utlAlt              :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersThreadsList'' with the minimum fields required to make a request.
@@ -94,7 +92,7 @@ data UsersThreadsList' = UsersThreadsList'
 --
 -- * 'utlPrettyPrint'
 --
--- * 'utlUserIp'
+-- * 'utlUserIP'
 --
 -- * 'utlQ'
 --
@@ -108,13 +106,11 @@ data UsersThreadsList' = UsersThreadsList'
 --
 -- * 'utlPageToken'
 --
--- * 'utlOauthToken'
+-- * 'utlOAuthToken'
 --
 -- * 'utlMaxResults'
 --
 -- * 'utlFields'
---
--- * 'utlAlt'
 usersThreadsList'
     :: Text
     -> UsersThreadsList'
@@ -122,17 +118,16 @@ usersThreadsList' pUtlUserId_ =
     UsersThreadsList'
     { _utlQuotaUser = Nothing
     , _utlPrettyPrint = True
-    , _utlUserIp = Nothing
+    , _utlUserIP = Nothing
     , _utlQ = Nothing
     , _utlUserId = pUtlUserId_
     , _utlKey = Nothing
     , _utlIncludeSpamTrash = False
     , _utlLabelIds = Nothing
     , _utlPageToken = Nothing
-    , _utlOauthToken = Nothing
+    , _utlOAuthToken = Nothing
     , _utlMaxResults = 100
     , _utlFields = Nothing
-    , _utlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,9 +145,9 @@ utlPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-utlUserIp :: Lens' UsersThreadsList' (Maybe Text)
-utlUserIp
-  = lens _utlUserIp (\ s a -> s{_utlUserIp = a})
+utlUserIP :: Lens' UsersThreadsList' (Maybe Text)
+utlUserIP
+  = lens _utlUserIP (\ s a -> s{_utlUserIP = a})
 
 -- | Only return threads matching the specified query. Supports the same
 -- query format as the Gmail search box. For example,
@@ -169,7 +164,7 @@ utlUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-utlKey :: Lens' UsersThreadsList' (Maybe Text)
+utlKey :: Lens' UsersThreadsList' (Maybe Key)
 utlKey = lens _utlKey (\ s a -> s{_utlKey = a})
 
 -- | Include threads from SPAM and TRASH in the results.
@@ -190,10 +185,10 @@ utlPageToken
   = lens _utlPageToken (\ s a -> s{_utlPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-utlOauthToken :: Lens' UsersThreadsList' (Maybe Text)
-utlOauthToken
-  = lens _utlOauthToken
-      (\ s a -> s{_utlOauthToken = a})
+utlOAuthToken :: Lens' UsersThreadsList' (Maybe OAuthToken)
+utlOAuthToken
+  = lens _utlOAuthToken
+      (\ s a -> s{_utlOAuthToken = a})
 
 -- | Maximum number of threads to return.
 utlMaxResults :: Lens' UsersThreadsList' Word32
@@ -206,25 +201,25 @@ utlFields :: Lens' UsersThreadsList' (Maybe Text)
 utlFields
   = lens _utlFields (\ s a -> s{_utlFields = a})
 
--- | Data format for the response.
-utlAlt :: Lens' UsersThreadsList' Alt
-utlAlt = lens _utlAlt (\ s a -> s{_utlAlt = a})
+instance GoogleAuth UsersThreadsList' where
+        authKey = utlKey . _Just
+        authToken = utlOAuthToken . _Just
 
 instance GoogleRequest UsersThreadsList' where
         type Rs UsersThreadsList' = ListThreadsResponse
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersThreadsList'{..}
-          = go _utlQuotaUser (Just _utlPrettyPrint) _utlUserIp
+          = go _utlQuotaUser (Just _utlPrettyPrint) _utlUserIP
               _utlQ
               _utlUserId
               _utlKey
               (Just _utlIncludeSpamTrash)
               _utlLabelIds
               _utlPageToken
-              _utlOauthToken
+              _utlOAuthToken
               (Just _utlMaxResults)
               _utlFields
-              (Just _utlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersThreadsListResource)

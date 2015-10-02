@@ -32,13 +32,12 @@ module Network.Google.Resource.Drive.Children.Delete
     -- * Request Lenses
     , cddQuotaUser
     , cddPrettyPrint
-    , cddUserIp
+    , cddUserIP
     , cddFolderId
     , cddKey
     , cddChildId
-    , cddOauthToken
+    , cddOAuthToken
     , cddFields
-    , cddAlt
     ) where
 
 import           Network.Google.Drive.Types
@@ -54,10 +53,10 @@ type ChildrenDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Delete '[JSON] ()
+                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Removes a child from a folder.
 --
@@ -65,13 +64,12 @@ type ChildrenDeleteResource =
 data ChildrenDelete' = ChildrenDelete'
     { _cddQuotaUser   :: !(Maybe Text)
     , _cddPrettyPrint :: !Bool
-    , _cddUserIp      :: !(Maybe Text)
+    , _cddUserIP      :: !(Maybe Text)
     , _cddFolderId    :: !Text
-    , _cddKey         :: !(Maybe Text)
+    , _cddKey         :: !(Maybe Key)
     , _cddChildId     :: !Text
-    , _cddOauthToken  :: !(Maybe Text)
+    , _cddOAuthToken  :: !(Maybe OAuthToken)
     , _cddFields      :: !(Maybe Text)
-    , _cddAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChildrenDelete'' with the minimum fields required to make a request.
@@ -82,7 +80,7 @@ data ChildrenDelete' = ChildrenDelete'
 --
 -- * 'cddPrettyPrint'
 --
--- * 'cddUserIp'
+-- * 'cddUserIP'
 --
 -- * 'cddFolderId'
 --
@@ -90,11 +88,9 @@ data ChildrenDelete' = ChildrenDelete'
 --
 -- * 'cddChildId'
 --
--- * 'cddOauthToken'
+-- * 'cddOAuthToken'
 --
 -- * 'cddFields'
---
--- * 'cddAlt'
 childrenDelete'
     :: Text -- ^ 'folderId'
     -> Text -- ^ 'childId'
@@ -103,13 +99,12 @@ childrenDelete' pCddFolderId_ pCddChildId_ =
     ChildrenDelete'
     { _cddQuotaUser = Nothing
     , _cddPrettyPrint = True
-    , _cddUserIp = Nothing
+    , _cddUserIP = Nothing
     , _cddFolderId = pCddFolderId_
     , _cddKey = Nothing
     , _cddChildId = pCddChildId_
-    , _cddOauthToken = Nothing
+    , _cddOAuthToken = Nothing
     , _cddFields = Nothing
-    , _cddAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,9 +122,9 @@ cddPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cddUserIp :: Lens' ChildrenDelete' (Maybe Text)
-cddUserIp
-  = lens _cddUserIp (\ s a -> s{_cddUserIp = a})
+cddUserIP :: Lens' ChildrenDelete' (Maybe Text)
+cddUserIP
+  = lens _cddUserIP (\ s a -> s{_cddUserIP = a})
 
 -- | The ID of the folder.
 cddFolderId :: Lens' ChildrenDelete' Text
@@ -139,7 +134,7 @@ cddFolderId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cddKey :: Lens' ChildrenDelete' (Maybe Text)
+cddKey :: Lens' ChildrenDelete' (Maybe Key)
 cddKey = lens _cddKey (\ s a -> s{_cddKey = a})
 
 -- | The ID of the child.
@@ -148,31 +143,31 @@ cddChildId
   = lens _cddChildId (\ s a -> s{_cddChildId = a})
 
 -- | OAuth 2.0 token for the current user.
-cddOauthToken :: Lens' ChildrenDelete' (Maybe Text)
-cddOauthToken
-  = lens _cddOauthToken
-      (\ s a -> s{_cddOauthToken = a})
+cddOAuthToken :: Lens' ChildrenDelete' (Maybe OAuthToken)
+cddOAuthToken
+  = lens _cddOAuthToken
+      (\ s a -> s{_cddOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cddFields :: Lens' ChildrenDelete' (Maybe Text)
 cddFields
   = lens _cddFields (\ s a -> s{_cddFields = a})
 
--- | Data format for the response.
-cddAlt :: Lens' ChildrenDelete' Alt
-cddAlt = lens _cddAlt (\ s a -> s{_cddAlt = a})
+instance GoogleAuth ChildrenDelete' where
+        authKey = cddKey . _Just
+        authToken = cddOAuthToken . _Just
 
 instance GoogleRequest ChildrenDelete' where
         type Rs ChildrenDelete' = ()
         request = requestWithRoute defReq driveURL
         requestWithRoute r u ChildrenDelete'{..}
-          = go _cddQuotaUser (Just _cddPrettyPrint) _cddUserIp
+          = go _cddQuotaUser (Just _cddPrettyPrint) _cddUserIP
               _cddFolderId
               _cddKey
               _cddChildId
-              _cddOauthToken
+              _cddOAuthToken
               _cddFields
-              (Just _cddAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ChildrenDeleteResource)

@@ -19,7 +19,7 @@
 --
 -- | Creates a transfer job that runs periodically.
 --
--- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @StoragetransferTransferJobsCreate@.
+-- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @StorageTransferTransferJobsCreate@.
 module Network.Google.Resource.StorageTransfer.TransferJobs.Create
     (
     -- * REST Resource
@@ -37,18 +37,18 @@ module Network.Google.Resource.StorageTransfer.TransferJobs.Create
     , tjcPp
     , tjcAccessToken
     , tjcUploadType
+    , tjcTransferJob
     , tjcBearerToken
     , tjcKey
-    , tjcOauthToken
+    , tjcOAuthToken
     , tjcFields
     , tjcCallback
-    , tjcAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.StorageTransfer.Types
 
--- | A resource alias for @StoragetransferTransferJobsCreate@ which the
+-- | A resource alias for @StorageTransferTransferJobsCreate@ which the
 -- 'TransferJobsCreate'' request conforms to.
 type TransferJobsCreateResource =
      "v1" :>
@@ -61,12 +61,13 @@ type TransferJobsCreateResource =
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
                        QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
                                QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :>
-                                   Post '[JSON] TransferJob
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON] TransferJob :>
+                                     Post '[JSON] TransferJob
 
 -- | Creates a transfer job that runs periodically.
 --
@@ -79,12 +80,12 @@ data TransferJobsCreate' = TransferJobsCreate'
     , _tjcPp             :: !Bool
     , _tjcAccessToken    :: !(Maybe Text)
     , _tjcUploadType     :: !(Maybe Text)
+    , _tjcTransferJob    :: !TransferJob
     , _tjcBearerToken    :: !(Maybe Text)
-    , _tjcKey            :: !(Maybe Text)
-    , _tjcOauthToken     :: !(Maybe Text)
+    , _tjcKey            :: !(Maybe Key)
+    , _tjcOAuthToken     :: !(Maybe OAuthToken)
     , _tjcFields         :: !(Maybe Text)
     , _tjcCallback       :: !(Maybe Text)
-    , _tjcAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TransferJobsCreate'' with the minimum fields required to make a request.
@@ -105,20 +106,21 @@ data TransferJobsCreate' = TransferJobsCreate'
 --
 -- * 'tjcUploadType'
 --
+-- * 'tjcTransferJob'
+--
 -- * 'tjcBearerToken'
 --
 -- * 'tjcKey'
 --
--- * 'tjcOauthToken'
+-- * 'tjcOAuthToken'
 --
 -- * 'tjcFields'
 --
 -- * 'tjcCallback'
---
--- * 'tjcAlt'
 transferJobsCreate'
-    :: TransferJobsCreate'
-transferJobsCreate' =
+    :: TransferJob -- ^ 'TransferJob'
+    -> TransferJobsCreate'
+transferJobsCreate' pTjcTransferJob_ =
     TransferJobsCreate'
     { _tjcXgafv = Nothing
     , _tjcQuotaUser = Nothing
@@ -127,12 +129,12 @@ transferJobsCreate' =
     , _tjcPp = True
     , _tjcAccessToken = Nothing
     , _tjcUploadType = Nothing
+    , _tjcTransferJob = pTjcTransferJob_
     , _tjcBearerToken = Nothing
     , _tjcKey = Nothing
-    , _tjcOauthToken = Nothing
+    , _tjcOAuthToken = Nothing
     , _tjcFields = Nothing
     , _tjcCallback = Nothing
-    , _tjcAlt = "json"
     }
 
 -- | V1 error format.
@@ -174,6 +176,12 @@ tjcUploadType
   = lens _tjcUploadType
       (\ s a -> s{_tjcUploadType = a})
 
+-- | Multipart request metadata.
+tjcTransferJob :: Lens' TransferJobsCreate' TransferJob
+tjcTransferJob
+  = lens _tjcTransferJob
+      (\ s a -> s{_tjcTransferJob = a})
+
 -- | OAuth bearer token.
 tjcBearerToken :: Lens' TransferJobsCreate' (Maybe Text)
 tjcBearerToken
@@ -183,14 +191,14 @@ tjcBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tjcKey :: Lens' TransferJobsCreate' (Maybe Text)
+tjcKey :: Lens' TransferJobsCreate' (Maybe Key)
 tjcKey = lens _tjcKey (\ s a -> s{_tjcKey = a})
 
 -- | OAuth 2.0 token for the current user.
-tjcOauthToken :: Lens' TransferJobsCreate' (Maybe Text)
-tjcOauthToken
-  = lens _tjcOauthToken
-      (\ s a -> s{_tjcOauthToken = a})
+tjcOAuthToken :: Lens' TransferJobsCreate' (Maybe OAuthToken)
+tjcOAuthToken
+  = lens _tjcOAuthToken
+      (\ s a -> s{_tjcOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 tjcFields :: Lens' TransferJobsCreate' (Maybe Text)
@@ -202,9 +210,9 @@ tjcCallback :: Lens' TransferJobsCreate' (Maybe Text)
 tjcCallback
   = lens _tjcCallback (\ s a -> s{_tjcCallback = a})
 
--- | Data format for response.
-tjcAlt :: Lens' TransferJobsCreate' Text
-tjcAlt = lens _tjcAlt (\ s a -> s{_tjcAlt = a})
+instance GoogleAuth TransferJobsCreate' where
+        authKey = tjcKey . _Just
+        authToken = tjcOAuthToken . _Just
 
 instance GoogleRequest TransferJobsCreate' where
         type Rs TransferJobsCreate' = TransferJob
@@ -217,10 +225,11 @@ instance GoogleRequest TransferJobsCreate' where
               _tjcUploadType
               _tjcBearerToken
               _tjcKey
-              _tjcOauthToken
+              _tjcOAuthToken
               _tjcFields
               _tjcCallback
-              (Just _tjcAlt)
+              (Just AltJSON)
+              _tjcTransferJob
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TransferJobsCreateResource)

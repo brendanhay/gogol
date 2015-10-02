@@ -34,14 +34,13 @@ module Network.Google.Resource.Compute.Firewalls.List
     , flQuotaUser
     , flPrettyPrint
     , flProject
-    , flUserIp
+    , flUserIP
     , flKey
     , flFilter
     , flPageToken
-    , flOauthToken
+    , flOAuthToken
     , flMaxResults
     , flFields
-    , flAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -56,13 +55,14 @@ type FirewallsListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "filter" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "maxResults" Word32 :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Get '[JSON] FirewallList
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] FirewallList
 
 -- | Retrieves the list of firewall resources available to the specified
 -- project.
@@ -72,14 +72,13 @@ data FirewallsList' = FirewallsList'
     { _flQuotaUser   :: !(Maybe Text)
     , _flPrettyPrint :: !Bool
     , _flProject     :: !Text
-    , _flUserIp      :: !(Maybe Text)
-    , _flKey         :: !(Maybe Text)
+    , _flUserIP      :: !(Maybe Text)
+    , _flKey         :: !(Maybe Key)
     , _flFilter      :: !(Maybe Text)
     , _flPageToken   :: !(Maybe Text)
-    , _flOauthToken  :: !(Maybe Text)
+    , _flOAuthToken  :: !(Maybe OAuthToken)
     , _flMaxResults  :: !Word32
     , _flFields      :: !(Maybe Text)
-    , _flAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FirewallsList'' with the minimum fields required to make a request.
@@ -92,7 +91,7 @@ data FirewallsList' = FirewallsList'
 --
 -- * 'flProject'
 --
--- * 'flUserIp'
+-- * 'flUserIP'
 --
 -- * 'flKey'
 --
@@ -100,13 +99,11 @@ data FirewallsList' = FirewallsList'
 --
 -- * 'flPageToken'
 --
--- * 'flOauthToken'
+-- * 'flOAuthToken'
 --
 -- * 'flMaxResults'
 --
 -- * 'flFields'
---
--- * 'flAlt'
 firewallsList'
     :: Text -- ^ 'project'
     -> FirewallsList'
@@ -115,14 +112,13 @@ firewallsList' pFlProject_ =
     { _flQuotaUser = Nothing
     , _flPrettyPrint = True
     , _flProject = pFlProject_
-    , _flUserIp = Nothing
+    , _flUserIP = Nothing
     , _flKey = Nothing
     , _flFilter = Nothing
     , _flPageToken = Nothing
-    , _flOauthToken = Nothing
+    , _flOAuthToken = Nothing
     , _flMaxResults = 500
     , _flFields = Nothing
-    , _flAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -145,13 +141,13 @@ flProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-flUserIp :: Lens' FirewallsList' (Maybe Text)
-flUserIp = lens _flUserIp (\ s a -> s{_flUserIp = a})
+flUserIP :: Lens' FirewallsList' (Maybe Text)
+flUserIP = lens _flUserIP (\ s a -> s{_flUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-flKey :: Lens' FirewallsList' (Maybe Text)
+flKey :: Lens' FirewallsList' (Maybe Key)
 flKey = lens _flKey (\ s a -> s{_flKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
@@ -176,9 +172,9 @@ flPageToken
   = lens _flPageToken (\ s a -> s{_flPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-flOauthToken :: Lens' FirewallsList' (Maybe Text)
-flOauthToken
-  = lens _flOauthToken (\ s a -> s{_flOauthToken = a})
+flOAuthToken :: Lens' FirewallsList' (Maybe OAuthToken)
+flOAuthToken
+  = lens _flOAuthToken (\ s a -> s{_flOAuthToken = a})
 
 -- | Maximum count of results to be returned.
 flMaxResults :: Lens' FirewallsList' Word32
@@ -189,23 +185,23 @@ flMaxResults
 flFields :: Lens' FirewallsList' (Maybe Text)
 flFields = lens _flFields (\ s a -> s{_flFields = a})
 
--- | Data format for the response.
-flAlt :: Lens' FirewallsList' Alt
-flAlt = lens _flAlt (\ s a -> s{_flAlt = a})
+instance GoogleAuth FirewallsList' where
+        authKey = flKey . _Just
+        authToken = flOAuthToken . _Just
 
 instance GoogleRequest FirewallsList' where
         type Rs FirewallsList' = FirewallList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u FirewallsList'{..}
           = go _flQuotaUser (Just _flPrettyPrint) _flProject
-              _flUserIp
+              _flUserIP
               _flKey
               _flFilter
               _flPageToken
-              _flOauthToken
+              _flOAuthToken
               (Just _flMaxResults)
               _flFields
-              (Just _flAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy FirewallsListResource)

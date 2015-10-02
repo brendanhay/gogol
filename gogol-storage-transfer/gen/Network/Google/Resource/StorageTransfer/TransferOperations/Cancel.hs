@@ -20,7 +20,7 @@
 -- | Cancels a transfer. Use the get method to check whether the cancellation
 -- succeeded or whether the operation completed despite cancellation.
 --
--- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @StoragetransferTransferOperationsCancel@.
+-- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @StorageTransferTransferOperationsCancel@.
 module Network.Google.Resource.StorageTransfer.TransferOperations.Cancel
     (
     -- * REST Resource
@@ -41,16 +41,15 @@ module Network.Google.Resource.StorageTransfer.TransferOperations.Cancel
     , tocBearerToken
     , tocKey
     , tocName
-    , tocOauthToken
+    , tocOAuthToken
     , tocFields
     , tocCallback
-    , tocAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.StorageTransfer.Types
 
--- | A resource alias for @StoragetransferTransferOperationsCancel@ which the
+-- | A resource alias for @StorageTransferTransferOperationsCancel@ which the
 -- 'TransferOperationsCancel'' request conforms to.
 type TransferOperationsCancelResource =
      "v1" :>
@@ -63,11 +62,11 @@ type TransferOperationsCancelResource =
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
                        QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
                                QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :> Post '[JSON] Empty
+                                 QueryParam "alt" AltJSON :> Post '[JSON] Empty
 
 -- | Cancels a transfer. Use the get method to check whether the cancellation
 -- succeeded or whether the operation completed despite cancellation.
@@ -82,12 +81,11 @@ data TransferOperationsCancel' = TransferOperationsCancel'
     , _tocAccessToken    :: !(Maybe Text)
     , _tocUploadType     :: !(Maybe Text)
     , _tocBearerToken    :: !(Maybe Text)
-    , _tocKey            :: !(Maybe Text)
+    , _tocKey            :: !(Maybe Key)
     , _tocName           :: !Text
-    , _tocOauthToken     :: !(Maybe Text)
+    , _tocOAuthToken     :: !(Maybe OAuthToken)
     , _tocFields         :: !(Maybe Text)
     , _tocCallback       :: !(Maybe Text)
-    , _tocAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TransferOperationsCancel'' with the minimum fields required to make a request.
@@ -114,13 +112,11 @@ data TransferOperationsCancel' = TransferOperationsCancel'
 --
 -- * 'tocName'
 --
--- * 'tocOauthToken'
+-- * 'tocOAuthToken'
 --
 -- * 'tocFields'
 --
 -- * 'tocCallback'
---
--- * 'tocAlt'
 transferOperationsCancel'
     :: Text -- ^ 'name'
     -> TransferOperationsCancel'
@@ -136,10 +132,9 @@ transferOperationsCancel' pTocName_ =
     , _tocBearerToken = Nothing
     , _tocKey = Nothing
     , _tocName = pTocName_
-    , _tocOauthToken = Nothing
+    , _tocOAuthToken = Nothing
     , _tocFields = Nothing
     , _tocCallback = Nothing
-    , _tocAlt = "json"
     }
 
 -- | V1 error format.
@@ -190,7 +185,7 @@ tocBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tocKey :: Lens' TransferOperationsCancel' (Maybe Text)
+tocKey :: Lens' TransferOperationsCancel' (Maybe Key)
 tocKey = lens _tocKey (\ s a -> s{_tocKey = a})
 
 -- | The name of the operation resource to be cancelled.
@@ -198,10 +193,10 @@ tocName :: Lens' TransferOperationsCancel' Text
 tocName = lens _tocName (\ s a -> s{_tocName = a})
 
 -- | OAuth 2.0 token for the current user.
-tocOauthToken :: Lens' TransferOperationsCancel' (Maybe Text)
-tocOauthToken
-  = lens _tocOauthToken
-      (\ s a -> s{_tocOauthToken = a})
+tocOAuthToken :: Lens' TransferOperationsCancel' (Maybe OAuthToken)
+tocOAuthToken
+  = lens _tocOAuthToken
+      (\ s a -> s{_tocOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 tocFields :: Lens' TransferOperationsCancel' (Maybe Text)
@@ -213,9 +208,9 @@ tocCallback :: Lens' TransferOperationsCancel' (Maybe Text)
 tocCallback
   = lens _tocCallback (\ s a -> s{_tocCallback = a})
 
--- | Data format for response.
-tocAlt :: Lens' TransferOperationsCancel' Text
-tocAlt = lens _tocAlt (\ s a -> s{_tocAlt = a})
+instance GoogleAuth TransferOperationsCancel' where
+        authKey = tocKey . _Just
+        authToken = tocOAuthToken . _Just
 
 instance GoogleRequest TransferOperationsCancel'
          where
@@ -230,10 +225,10 @@ instance GoogleRequest TransferOperationsCancel'
               _tocBearerToken
               _tocKey
               _tocName
-              _tocOauthToken
+              _tocOAuthToken
               _tocFields
               _tocCallback
-              (Just _tocAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TransferOperationsCancelResource)

@@ -32,13 +32,12 @@ module Network.Google.Resource.Gmail.Users.Threads.Trash
     -- * Request Lenses
     , uttQuotaUser
     , uttPrettyPrint
-    , uttUserIp
+    , uttUserIP
     , uttUserId
     , uttKey
     , uttId
-    , uttOauthToken
+    , uttOAuthToken
     , uttFields
-    , uttAlt
     ) where
 
 import           Network.Google.Gmail.Types
@@ -54,10 +53,10 @@ type UsersThreadsTrashResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Post '[JSON] Thread
+                         QueryParam "alt" AltJSON :> Post '[JSON] Thread
 
 -- | Moves the specified thread to the trash.
 --
@@ -65,13 +64,12 @@ type UsersThreadsTrashResource =
 data UsersThreadsTrash' = UsersThreadsTrash'
     { _uttQuotaUser   :: !(Maybe Text)
     , _uttPrettyPrint :: !Bool
-    , _uttUserIp      :: !(Maybe Text)
+    , _uttUserIP      :: !(Maybe Text)
     , _uttUserId      :: !Text
-    , _uttKey         :: !(Maybe Text)
+    , _uttKey         :: !(Maybe Key)
     , _uttId          :: !Text
-    , _uttOauthToken  :: !(Maybe Text)
+    , _uttOAuthToken  :: !(Maybe OAuthToken)
     , _uttFields      :: !(Maybe Text)
-    , _uttAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersThreadsTrash'' with the minimum fields required to make a request.
@@ -82,7 +80,7 @@ data UsersThreadsTrash' = UsersThreadsTrash'
 --
 -- * 'uttPrettyPrint'
 --
--- * 'uttUserIp'
+-- * 'uttUserIP'
 --
 -- * 'uttUserId'
 --
@@ -90,11 +88,9 @@ data UsersThreadsTrash' = UsersThreadsTrash'
 --
 -- * 'uttId'
 --
--- * 'uttOauthToken'
+-- * 'uttOAuthToken'
 --
 -- * 'uttFields'
---
--- * 'uttAlt'
 usersThreadsTrash'
     :: Text -- ^ 'id'
     -> Text
@@ -103,13 +99,12 @@ usersThreadsTrash' pUttUserId_ pUttId_ =
     UsersThreadsTrash'
     { _uttQuotaUser = Nothing
     , _uttPrettyPrint = True
-    , _uttUserIp = Nothing
+    , _uttUserIP = Nothing
     , _uttUserId = pUttUserId_
     , _uttKey = Nothing
     , _uttId = pUttId_
-    , _uttOauthToken = Nothing
+    , _uttOAuthToken = Nothing
     , _uttFields = Nothing
-    , _uttAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,9 +122,9 @@ uttPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-uttUserIp :: Lens' UsersThreadsTrash' (Maybe Text)
-uttUserIp
-  = lens _uttUserIp (\ s a -> s{_uttUserIp = a})
+uttUserIP :: Lens' UsersThreadsTrash' (Maybe Text)
+uttUserIP
+  = lens _uttUserIP (\ s a -> s{_uttUserIP = a})
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
@@ -140,7 +135,7 @@ uttUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-uttKey :: Lens' UsersThreadsTrash' (Maybe Text)
+uttKey :: Lens' UsersThreadsTrash' (Maybe Key)
 uttKey = lens _uttKey (\ s a -> s{_uttKey = a})
 
 -- | The ID of the thread to Trash.
@@ -148,31 +143,31 @@ uttId :: Lens' UsersThreadsTrash' Text
 uttId = lens _uttId (\ s a -> s{_uttId = a})
 
 -- | OAuth 2.0 token for the current user.
-uttOauthToken :: Lens' UsersThreadsTrash' (Maybe Text)
-uttOauthToken
-  = lens _uttOauthToken
-      (\ s a -> s{_uttOauthToken = a})
+uttOAuthToken :: Lens' UsersThreadsTrash' (Maybe OAuthToken)
+uttOAuthToken
+  = lens _uttOAuthToken
+      (\ s a -> s{_uttOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 uttFields :: Lens' UsersThreadsTrash' (Maybe Text)
 uttFields
   = lens _uttFields (\ s a -> s{_uttFields = a})
 
--- | Data format for the response.
-uttAlt :: Lens' UsersThreadsTrash' Alt
-uttAlt = lens _uttAlt (\ s a -> s{_uttAlt = a})
+instance GoogleAuth UsersThreadsTrash' where
+        authKey = uttKey . _Just
+        authToken = uttOAuthToken . _Just
 
 instance GoogleRequest UsersThreadsTrash' where
         type Rs UsersThreadsTrash' = Thread
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersThreadsTrash'{..}
-          = go _uttQuotaUser (Just _uttPrettyPrint) _uttUserIp
+          = go _uttQuotaUser (Just _uttPrettyPrint) _uttUserIP
               _uttUserId
               _uttKey
               _uttId
-              _uttOauthToken
+              _uttOAuthToken
               _uttFields
-              (Just _uttAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersThreadsTrashResource)

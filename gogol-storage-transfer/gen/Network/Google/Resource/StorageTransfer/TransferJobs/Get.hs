@@ -19,7 +19,7 @@
 --
 -- | Gets a transfer job.
 --
--- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @StoragetransferTransferJobsGet@.
+-- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @StorageTransferTransferJobsGet@.
 module Network.Google.Resource.StorageTransfer.TransferJobs.Get
     (
     -- * REST Resource
@@ -41,16 +41,15 @@ module Network.Google.Resource.StorageTransfer.TransferJobs.Get
     , tjgBearerToken
     , tjgKey
     , tjgProjectId
-    , tjgOauthToken
+    , tjgOAuthToken
     , tjgFields
     , tjgCallback
-    , tjgAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.StorageTransfer.Types
 
--- | A resource alias for @StoragetransferTransferJobsGet@ which the
+-- | A resource alias for @StorageTransferTransferJobsGet@ which the
 -- 'TransferJobsGet'' request conforms to.
 type TransferJobsGetResource =
      "v1" :>
@@ -63,12 +62,12 @@ type TransferJobsGetResource =
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
                        QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
+                         QueryParam "key" Key :>
                            QueryParam "projectId" Text :>
-                             QueryParam "oauth_token" Text :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "fields" Text :>
                                  QueryParam "callback" Text :>
-                                   QueryParam "alt" Text :>
+                                   QueryParam "alt" AltJSON :>
                                      Get '[JSON] TransferJob
 
 -- | Gets a transfer job.
@@ -84,12 +83,11 @@ data TransferJobsGet' = TransferJobsGet'
     , _tjgJobName        :: !Text
     , _tjgUploadType     :: !(Maybe Text)
     , _tjgBearerToken    :: !(Maybe Text)
-    , _tjgKey            :: !(Maybe Text)
+    , _tjgKey            :: !(Maybe Key)
     , _tjgProjectId      :: !(Maybe Text)
-    , _tjgOauthToken     :: !(Maybe Text)
+    , _tjgOAuthToken     :: !(Maybe OAuthToken)
     , _tjgFields         :: !(Maybe Text)
     , _tjgCallback       :: !(Maybe Text)
-    , _tjgAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TransferJobsGet'' with the minimum fields required to make a request.
@@ -118,13 +116,11 @@ data TransferJobsGet' = TransferJobsGet'
 --
 -- * 'tjgProjectId'
 --
--- * 'tjgOauthToken'
+-- * 'tjgOAuthToken'
 --
 -- * 'tjgFields'
 --
 -- * 'tjgCallback'
---
--- * 'tjgAlt'
 transferJobsGet'
     :: Text -- ^ 'jobName'
     -> TransferJobsGet'
@@ -141,10 +137,9 @@ transferJobsGet' pTjgJobName_ =
     , _tjgBearerToken = Nothing
     , _tjgKey = Nothing
     , _tjgProjectId = Nothing
-    , _tjgOauthToken = Nothing
+    , _tjgOAuthToken = Nothing
     , _tjgFields = Nothing
     , _tjgCallback = Nothing
-    , _tjgAlt = "json"
     }
 
 -- | V1 error format.
@@ -200,7 +195,7 @@ tjgBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tjgKey :: Lens' TransferJobsGet' (Maybe Text)
+tjgKey :: Lens' TransferJobsGet' (Maybe Key)
 tjgKey = lens _tjgKey (\ s a -> s{_tjgKey = a})
 
 -- | The ID of the Google Developers Console project that owns the job.
@@ -210,10 +205,10 @@ tjgProjectId
   = lens _tjgProjectId (\ s a -> s{_tjgProjectId = a})
 
 -- | OAuth 2.0 token for the current user.
-tjgOauthToken :: Lens' TransferJobsGet' (Maybe Text)
-tjgOauthToken
-  = lens _tjgOauthToken
-      (\ s a -> s{_tjgOauthToken = a})
+tjgOAuthToken :: Lens' TransferJobsGet' (Maybe OAuthToken)
+tjgOAuthToken
+  = lens _tjgOAuthToken
+      (\ s a -> s{_tjgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 tjgFields :: Lens' TransferJobsGet' (Maybe Text)
@@ -225,9 +220,9 @@ tjgCallback :: Lens' TransferJobsGet' (Maybe Text)
 tjgCallback
   = lens _tjgCallback (\ s a -> s{_tjgCallback = a})
 
--- | Data format for response.
-tjgAlt :: Lens' TransferJobsGet' Text
-tjgAlt = lens _tjgAlt (\ s a -> s{_tjgAlt = a})
+instance GoogleAuth TransferJobsGet' where
+        authKey = tjgKey . _Just
+        authToken = tjgOAuthToken . _Just
 
 instance GoogleRequest TransferJobsGet' where
         type Rs TransferJobsGet' = TransferJob
@@ -242,10 +237,10 @@ instance GoogleRequest TransferJobsGet' where
               _tjgBearerToken
               _tjgKey
               _tjgProjectId
-              _tjgOauthToken
+              _tjgOAuthToken
               _tjgFields
               _tjgCallback
-              (Just _tjgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TransferJobsGetResource)

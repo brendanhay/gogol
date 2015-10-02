@@ -33,16 +33,16 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.AbandonInstances
     , InstanceGroupManagersAbandonInstances'
 
     -- * Request Lenses
+    , igmaiInstanceGroupManagersAbandonInstancesRequest
     , igmaiQuotaUser
     , igmaiPrettyPrint
     , igmaiProject
     , igmaiInstanceGroupManager
-    , igmaiUserIp
+    , igmaiUserIP
     , igmaiZone
     , igmaiKey
-    , igmaiOauthToken
+    , igmaiOAuthToken
     , igmaiFields
-    , igmaiAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -60,10 +60,13 @@ type InstanceGroupManagersAbandonInstancesResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Post '[JSON] Operation
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON]
+                                 InstanceGroupManagersAbandonInstancesRequest
+                                 :> Post '[JSON] Operation
 
 -- | Removes the specified instances from the managed instance group, and
 -- from any target pools where they are a member. The instances are not
@@ -72,21 +75,23 @@ type InstanceGroupManagersAbandonInstancesResource =
 --
 -- /See:/ 'instanceGroupManagersAbandonInstances'' smart constructor.
 data InstanceGroupManagersAbandonInstances' = InstanceGroupManagersAbandonInstances'
-    { _igmaiQuotaUser            :: !(Maybe Text)
-    , _igmaiPrettyPrint          :: !Bool
-    , _igmaiProject              :: !Text
-    , _igmaiInstanceGroupManager :: !Text
-    , _igmaiUserIp               :: !(Maybe Text)
-    , _igmaiZone                 :: !Text
-    , _igmaiKey                  :: !(Maybe Text)
-    , _igmaiOauthToken           :: !(Maybe Text)
-    , _igmaiFields               :: !(Maybe Text)
-    , _igmaiAlt                  :: !Alt
+    { _igmaiInstanceGroupManagersAbandonInstancesRequest :: !InstanceGroupManagersAbandonInstancesRequest
+    , _igmaiQuotaUser                                    :: !(Maybe Text)
+    , _igmaiPrettyPrint                                  :: !Bool
+    , _igmaiProject                                      :: !Text
+    , _igmaiInstanceGroupManager                         :: !Text
+    , _igmaiUserIP                                       :: !(Maybe Text)
+    , _igmaiZone                                         :: !Text
+    , _igmaiKey                                          :: !(Maybe Key)
+    , _igmaiOAuthToken                                   :: !(Maybe OAuthToken)
+    , _igmaiFields                                       :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagersAbandonInstances'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'igmaiInstanceGroupManagersAbandonInstancesRequest'
 --
 -- * 'igmaiQuotaUser'
 --
@@ -96,35 +101,43 @@ data InstanceGroupManagersAbandonInstances' = InstanceGroupManagersAbandonInstan
 --
 -- * 'igmaiInstanceGroupManager'
 --
--- * 'igmaiUserIp'
+-- * 'igmaiUserIP'
 --
 -- * 'igmaiZone'
 --
 -- * 'igmaiKey'
 --
--- * 'igmaiOauthToken'
+-- * 'igmaiOAuthToken'
 --
 -- * 'igmaiFields'
---
--- * 'igmaiAlt'
 instanceGroupManagersAbandonInstances'
-    :: Text -- ^ 'project'
+    :: InstanceGroupManagersAbandonInstancesRequest -- ^ 'InstanceGroupManagersAbandonInstancesRequest'
+    -> Text -- ^ 'project'
     -> Text -- ^ 'instanceGroupManager'
     -> Text -- ^ 'zone'
     -> InstanceGroupManagersAbandonInstances'
-instanceGroupManagersAbandonInstances' pIgmaiProject_ pIgmaiInstanceGroupManager_ pIgmaiZone_ =
+instanceGroupManagersAbandonInstances' pIgmaiInstanceGroupManagersAbandonInstancesRequest_ pIgmaiProject_ pIgmaiInstanceGroupManager_ pIgmaiZone_ =
     InstanceGroupManagersAbandonInstances'
-    { _igmaiQuotaUser = Nothing
+    { _igmaiInstanceGroupManagersAbandonInstancesRequest = pIgmaiInstanceGroupManagersAbandonInstancesRequest_
+    , _igmaiQuotaUser = Nothing
     , _igmaiPrettyPrint = True
     , _igmaiProject = pIgmaiProject_
     , _igmaiInstanceGroupManager = pIgmaiInstanceGroupManager_
-    , _igmaiUserIp = Nothing
+    , _igmaiUserIP = Nothing
     , _igmaiZone = pIgmaiZone_
     , _igmaiKey = Nothing
-    , _igmaiOauthToken = Nothing
+    , _igmaiOAuthToken = Nothing
     , _igmaiFields = Nothing
-    , _igmaiAlt = JSON
     }
+
+-- | Multipart request metadata.
+igmaiInstanceGroupManagersAbandonInstancesRequest :: Lens' InstanceGroupManagersAbandonInstances' InstanceGroupManagersAbandonInstancesRequest
+igmaiInstanceGroupManagersAbandonInstancesRequest
+  = lens
+      _igmaiInstanceGroupManagersAbandonInstancesRequest
+      (\ s a ->
+         s{_igmaiInstanceGroupManagersAbandonInstancesRequest
+             = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -153,9 +166,9 @@ igmaiInstanceGroupManager
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-igmaiUserIp :: Lens' InstanceGroupManagersAbandonInstances' (Maybe Text)
-igmaiUserIp
-  = lens _igmaiUserIp (\ s a -> s{_igmaiUserIp = a})
+igmaiUserIP :: Lens' InstanceGroupManagersAbandonInstances' (Maybe Text)
+igmaiUserIP
+  = lens _igmaiUserIP (\ s a -> s{_igmaiUserIP = a})
 
 -- | The URL of the zone where the managed instance group is located.
 igmaiZone :: Lens' InstanceGroupManagersAbandonInstances' Text
@@ -165,23 +178,24 @@ igmaiZone
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-igmaiKey :: Lens' InstanceGroupManagersAbandonInstances' (Maybe Text)
+igmaiKey :: Lens' InstanceGroupManagersAbandonInstances' (Maybe Key)
 igmaiKey = lens _igmaiKey (\ s a -> s{_igmaiKey = a})
 
 -- | OAuth 2.0 token for the current user.
-igmaiOauthToken :: Lens' InstanceGroupManagersAbandonInstances' (Maybe Text)
-igmaiOauthToken
-  = lens _igmaiOauthToken
-      (\ s a -> s{_igmaiOauthToken = a})
+igmaiOAuthToken :: Lens' InstanceGroupManagersAbandonInstances' (Maybe OAuthToken)
+igmaiOAuthToken
+  = lens _igmaiOAuthToken
+      (\ s a -> s{_igmaiOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 igmaiFields :: Lens' InstanceGroupManagersAbandonInstances' (Maybe Text)
 igmaiFields
   = lens _igmaiFields (\ s a -> s{_igmaiFields = a})
 
--- | Data format for the response.
-igmaiAlt :: Lens' InstanceGroupManagersAbandonInstances' Alt
-igmaiAlt = lens _igmaiAlt (\ s a -> s{_igmaiAlt = a})
+instance GoogleAuth
+         InstanceGroupManagersAbandonInstances' where
+        authKey = igmaiKey . _Just
+        authToken = igmaiOAuthToken . _Just
 
 instance GoogleRequest
          InstanceGroupManagersAbandonInstances' where
@@ -193,12 +207,13 @@ instance GoogleRequest
           = go _igmaiQuotaUser (Just _igmaiPrettyPrint)
               _igmaiProject
               _igmaiInstanceGroupManager
-              _igmaiUserIp
+              _igmaiUserIP
               _igmaiZone
               _igmaiKey
-              _igmaiOauthToken
+              _igmaiOAuthToken
               _igmaiFields
-              (Just _igmaiAlt)
+              (Just AltJSON)
+              _igmaiInstanceGroupManagersAbandonInstancesRequest
           where go
                   = clientWithRoute
                       (Proxy ::

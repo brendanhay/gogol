@@ -33,13 +33,12 @@ module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Get
     , mwpawlgQuotaUser
     , mwpawlgPrettyPrint
     , mwpawlgWebPropertyId
-    , mwpawlgUserIp
+    , mwpawlgUserIP
     , mwpawlgAccountId
     , mwpawlgKey
     , mwpawlgWebPropertyAdWordsLinkId
-    , mwpawlgOauthToken
+    , mwpawlgOAuthToken
     , mwpawlgFields
-    , mwpawlgAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -58,10 +57,10 @@ type ManagementWebPropertyAdWordsLinksGetResource =
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :>
+                               QueryParam "alt" AltJSON :>
                                  Get '[JSON] EntityAdWordsLink
 
 -- | Returns a web property-AdWords link to which the user has access.
@@ -71,13 +70,12 @@ data ManagementWebPropertyAdWordsLinksGet' = ManagementWebPropertyAdWordsLinksGe
     { _mwpawlgQuotaUser                :: !(Maybe Text)
     , _mwpawlgPrettyPrint              :: !Bool
     , _mwpawlgWebPropertyId            :: !Text
-    , _mwpawlgUserIp                   :: !(Maybe Text)
+    , _mwpawlgUserIP                   :: !(Maybe Text)
     , _mwpawlgAccountId                :: !Text
-    , _mwpawlgKey                      :: !(Maybe Text)
+    , _mwpawlgKey                      :: !(Maybe Key)
     , _mwpawlgWebPropertyAdWordsLinkId :: !Text
-    , _mwpawlgOauthToken               :: !(Maybe Text)
+    , _mwpawlgOAuthToken               :: !(Maybe OAuthToken)
     , _mwpawlgFields                   :: !(Maybe Text)
-    , _mwpawlgAlt                      :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementWebPropertyAdWordsLinksGet'' with the minimum fields required to make a request.
@@ -90,7 +88,7 @@ data ManagementWebPropertyAdWordsLinksGet' = ManagementWebPropertyAdWordsLinksGe
 --
 -- * 'mwpawlgWebPropertyId'
 --
--- * 'mwpawlgUserIp'
+-- * 'mwpawlgUserIP'
 --
 -- * 'mwpawlgAccountId'
 --
@@ -98,11 +96,9 @@ data ManagementWebPropertyAdWordsLinksGet' = ManagementWebPropertyAdWordsLinksGe
 --
 -- * 'mwpawlgWebPropertyAdWordsLinkId'
 --
--- * 'mwpawlgOauthToken'
+-- * 'mwpawlgOAuthToken'
 --
 -- * 'mwpawlgFields'
---
--- * 'mwpawlgAlt'
 managementWebPropertyAdWordsLinksGet'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'accountId'
@@ -113,13 +109,12 @@ managementWebPropertyAdWordsLinksGet' pMwpawlgWebPropertyId_ pMwpawlgAccountId_ 
     { _mwpawlgQuotaUser = Nothing
     , _mwpawlgPrettyPrint = False
     , _mwpawlgWebPropertyId = pMwpawlgWebPropertyId_
-    , _mwpawlgUserIp = Nothing
+    , _mwpawlgUserIP = Nothing
     , _mwpawlgAccountId = pMwpawlgAccountId_
     , _mwpawlgKey = Nothing
     , _mwpawlgWebPropertyAdWordsLinkId = pMwpawlgWebPropertyAdWordsLinkId_
-    , _mwpawlgOauthToken = Nothing
+    , _mwpawlgOAuthToken = Nothing
     , _mwpawlgFields = Nothing
-    , _mwpawlgAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -144,10 +139,10 @@ mwpawlgWebPropertyId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mwpawlgUserIp :: Lens' ManagementWebPropertyAdWordsLinksGet' (Maybe Text)
-mwpawlgUserIp
-  = lens _mwpawlgUserIp
-      (\ s a -> s{_mwpawlgUserIp = a})
+mwpawlgUserIP :: Lens' ManagementWebPropertyAdWordsLinksGet' (Maybe Text)
+mwpawlgUserIP
+  = lens _mwpawlgUserIP
+      (\ s a -> s{_mwpawlgUserIP = a})
 
 -- | ID of the account which the given web property belongs to.
 mwpawlgAccountId :: Lens' ManagementWebPropertyAdWordsLinksGet' Text
@@ -158,7 +153,7 @@ mwpawlgAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mwpawlgKey :: Lens' ManagementWebPropertyAdWordsLinksGet' (Maybe Text)
+mwpawlgKey :: Lens' ManagementWebPropertyAdWordsLinksGet' (Maybe Key)
 mwpawlgKey
   = lens _mwpawlgKey (\ s a -> s{_mwpawlgKey = a})
 
@@ -169,10 +164,10 @@ mwpawlgWebPropertyAdWordsLinkId
       (\ s a -> s{_mwpawlgWebPropertyAdWordsLinkId = a})
 
 -- | OAuth 2.0 token for the current user.
-mwpawlgOauthToken :: Lens' ManagementWebPropertyAdWordsLinksGet' (Maybe Text)
-mwpawlgOauthToken
-  = lens _mwpawlgOauthToken
-      (\ s a -> s{_mwpawlgOauthToken = a})
+mwpawlgOAuthToken :: Lens' ManagementWebPropertyAdWordsLinksGet' (Maybe OAuthToken)
+mwpawlgOAuthToken
+  = lens _mwpawlgOAuthToken
+      (\ s a -> s{_mwpawlgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 mwpawlgFields :: Lens' ManagementWebPropertyAdWordsLinksGet' (Maybe Text)
@@ -180,10 +175,10 @@ mwpawlgFields
   = lens _mwpawlgFields
       (\ s a -> s{_mwpawlgFields = a})
 
--- | Data format for the response.
-mwpawlgAlt :: Lens' ManagementWebPropertyAdWordsLinksGet' Alt
-mwpawlgAlt
-  = lens _mwpawlgAlt (\ s a -> s{_mwpawlgAlt = a})
+instance GoogleAuth
+         ManagementWebPropertyAdWordsLinksGet' where
+        authKey = mwpawlgKey . _Just
+        authToken = mwpawlgOAuthToken . _Just
 
 instance GoogleRequest
          ManagementWebPropertyAdWordsLinksGet' where
@@ -194,13 +189,13 @@ instance GoogleRequest
           ManagementWebPropertyAdWordsLinksGet'{..}
           = go _mwpawlgQuotaUser (Just _mwpawlgPrettyPrint)
               _mwpawlgWebPropertyId
-              _mwpawlgUserIp
+              _mwpawlgUserIP
               _mwpawlgAccountId
               _mwpawlgKey
               _mwpawlgWebPropertyAdWordsLinkId
-              _mwpawlgOauthToken
+              _mwpawlgOAuthToken
               _mwpawlgFields
-              (Just _mwpawlgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

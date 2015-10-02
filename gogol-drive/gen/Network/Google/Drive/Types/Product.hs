@@ -26,7 +26,7 @@ data FileList = FileList
     , _flNextPageToken :: !(Maybe Text)
     , _flNextLink      :: !(Maybe Text)
     , _flKind          :: !Text
-    , _flItems         :: !(Maybe [Maybe File])
+    , _flItems         :: !(Maybe [File])
     , _flSelfLink      :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -77,7 +77,7 @@ flKind :: Lens' FileList Text
 flKind = lens _flKind (\ s a -> s{_flKind = a})
 
 -- | The actual list of files.
-flItems :: Lens' FileList [Maybe File]
+flItems :: Lens' FileList [File]
 flItems
   = lens _flItems (\ s a -> s{_flItems = a}) . _Default
       . _Coerce
@@ -422,24 +422,24 @@ instance ToJSON FileThumbnail where
 --
 -- /See:/ 'userPicture' smart constructor.
 newtype UserPicture = UserPicture
-    { _upUrl :: Maybe Text
+    { _upURL :: Maybe Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserPicture' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'upUrl'
+-- * 'upURL'
 userPicture
     :: UserPicture
 userPicture =
     UserPicture
-    { _upUrl = Nothing
+    { _upURL = Nothing
     }
 
 -- | A URL that points to a profile picture of this user.
-upUrl :: Lens' UserPicture (Maybe Text)
-upUrl = lens _upUrl (\ s a -> s{_upUrl = a})
+upURL :: Lens' UserPicture (Maybe Text)
+upURL = lens _upURL (\ s a -> s{_upURL = a})
 
 instance FromJSON UserPicture where
         parseJSON
@@ -448,7 +448,7 @@ instance FromJSON UserPicture where
 
 instance ToJSON UserPicture where
         toJSON UserPicture{..}
-          = object (catMaybes [("url" .=) <$> _upUrl])
+          = object (catMaybes [("url" .=) <$> _upURL])
 
 -- | A collection of properties, key-value pairs that are either public or
 -- private to an application.
@@ -457,7 +457,7 @@ instance ToJSON UserPicture where
 data PropertyList = PropertyList
     { _plEtag     :: !(Maybe Text)
     , _plKind     :: !Text
-    , _plItems    :: !(Maybe [Maybe Property])
+    , _plItems    :: !(Maybe [Property])
     , _plSelfLink :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -491,7 +491,7 @@ plKind :: Lens' PropertyList Text
 plKind = lens _plKind (\ s a -> s{_plKind = a})
 
 -- | The list of properties.
-plItems :: Lens' PropertyList [Maybe Property]
+plItems :: Lens' PropertyList [Property]
 plItems
   = lens _plItems (\ s a -> s{_plItems = a}) . _Default
       . _Coerce
@@ -575,7 +575,7 @@ data ChildList = ChildList
     , _clNextPageToken :: !(Maybe Text)
     , _clNextLink      :: !(Maybe Text)
     , _clKind          :: !Text
-    , _clItems         :: !(Maybe [Maybe ChildReference])
+    , _clItems         :: !(Maybe [ChildReference])
     , _clSelfLink      :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -626,7 +626,7 @@ clKind :: Lens' ChildList Text
 clKind = lens _clKind (\ s a -> s{_clKind = a})
 
 -- | The actual list of children.
-clItems :: Lens' ChildList [Maybe ChildReference]
+clItems :: Lens' ChildList [ChildReference]
 clItems
   = lens _clItems (\ s a -> s{_clItems = a}) . _Default
       . _Coerce
@@ -717,7 +717,7 @@ data CommentReplyList = CommentReplyList
     { _crlNextPageToken :: !(Maybe Text)
     , _crlNextLink      :: !(Maybe Text)
     , _crlKind          :: !Text
-    , _crlItems         :: !(Maybe [Maybe CommentReply])
+    , _crlItems         :: !(Maybe [CommentReply])
     , _crlSelfLink      :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -761,7 +761,7 @@ crlKind :: Lens' CommentReplyList Text
 crlKind = lens _crlKind (\ s a -> s{_crlKind = a})
 
 -- | List of reply.
-crlItems :: Lens' CommentReplyList [Maybe CommentReply]
+crlItems :: Lens' CommentReplyList [CommentReply]
 crlItems
   = lens _crlItems (\ s a -> s{_crlItems = a}) .
       _Default
@@ -819,13 +819,13 @@ instance ToJSON FileOpenWithLinks where
 --
 -- /See:/ 'channel' smart constructor.
 data Channel = Channel
-    { _cResourceUri :: !(Maybe Text)
+    { _cResourceURI :: !(Maybe Text)
     , _cResourceId  :: !(Maybe Text)
     , _cKind        :: !Text
     , _cExpiration  :: !(Maybe Int64)
     , _cToken       :: !(Maybe Text)
     , _cAddress     :: !(Maybe Text)
-    , _cPayload     :: !(Maybe Bool)
+    , _cPayLoad     :: !(Maybe Bool)
     , _cParams      :: !(Maybe ChannelParams)
     , _cId          :: !(Maybe Text)
     , _cType        :: !(Maybe Text)
@@ -835,7 +835,7 @@ data Channel = Channel
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cResourceUri'
+-- * 'cResourceURI'
 --
 -- * 'cResourceId'
 --
@@ -847,7 +847,7 @@ data Channel = Channel
 --
 -- * 'cAddress'
 --
--- * 'cPayload'
+-- * 'cPayLoad'
 --
 -- * 'cParams'
 --
@@ -858,22 +858,22 @@ channel
     :: Channel
 channel =
     Channel
-    { _cResourceUri = Nothing
+    { _cResourceURI = Nothing
     , _cResourceId = Nothing
     , _cKind = "api#channel"
     , _cExpiration = Nothing
     , _cToken = Nothing
     , _cAddress = Nothing
-    , _cPayload = Nothing
+    , _cPayLoad = Nothing
     , _cParams = Nothing
     , _cId = Nothing
     , _cType = Nothing
     }
 
 -- | A version-specific identifier for the watched resource.
-cResourceUri :: Lens' Channel (Maybe Text)
-cResourceUri
-  = lens _cResourceUri (\ s a -> s{_cResourceUri = a})
+cResourceURI :: Lens' Channel (Maybe Text)
+cResourceURI
+  = lens _cResourceURI (\ s a -> s{_cResourceURI = a})
 
 -- | An opaque ID that identifies the resource being watched on this channel.
 -- Stable across different API versions.
@@ -902,8 +902,8 @@ cAddress :: Lens' Channel (Maybe Text)
 cAddress = lens _cAddress (\ s a -> s{_cAddress = a})
 
 -- | A Boolean value to indicate whether payload is wanted. Optional.
-cPayload :: Lens' Channel (Maybe Bool)
-cPayload = lens _cPayload (\ s a -> s{_cPayload = a})
+cPayLoad :: Lens' Channel (Maybe Bool)
+cPayLoad = lens _cPayLoad (\ s a -> s{_cPayLoad = a})
 
 -- | Additional parameters controlling delivery channel behavior. Optional.
 cParams :: Lens' Channel (Maybe ChannelParams)
@@ -936,13 +936,13 @@ instance ToJSON Channel where
         toJSON Channel{..}
           = object
               (catMaybes
-                 [("resourceUri" .=) <$> _cResourceUri,
+                 [("resourceUri" .=) <$> _cResourceURI,
                   ("resourceId" .=) <$> _cResourceId,
                   Just ("kind" .= _cKind),
                   ("expiration" .=) <$> _cExpiration,
                   ("token" .=) <$> _cToken,
                   ("address" .=) <$> _cAddress,
-                  ("payload" .=) <$> _cPayload,
+                  ("payload" .=) <$> _cPayLoad,
                   ("params" .=) <$> _cParams, ("id" .=) <$> _cId,
                   ("type" .=) <$> _cType])
 
@@ -954,7 +954,7 @@ data AppList = AppList
     { _alDefaultAppIds :: !(Maybe [Text])
     , _alEtag          :: !(Maybe Text)
     , _alKind          :: !Text
-    , _alItems         :: !(Maybe [Maybe App])
+    , _alItems         :: !(Maybe [App])
     , _alSelfLink      :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1000,7 +1000,7 @@ alKind :: Lens' AppList Text
 alKind = lens _alKind (\ s a -> s{_alKind = a})
 
 -- | The actual list of apps.
-alItems :: Lens' AppList [Maybe App]
+alItems :: Lens' AppList [App]
 alItems
   = lens _alItems (\ s a -> s{_alItems = a}) . _Default
       . _Coerce
@@ -1098,7 +1098,7 @@ data Change = Change
     , _chaId               :: !(Maybe Int64)
     , _chaDeleted          :: !(Maybe Bool)
     , _chaFileId           :: !(Maybe Text)
-    , _chaFile             :: !(Maybe (Maybe File))
+    , _chaFile             :: !(Maybe File)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Change' with the minimum fields required to make a request.
@@ -1161,7 +1161,7 @@ chaFileId
   = lens _chaFileId (\ s a -> s{_chaFileId = a})
 
 -- | The updated state of the file. Present if the file has not been deleted.
-chaFile :: Lens' Change (Maybe (Maybe File))
+chaFile :: Lens' Change (Maybe File)
 chaFile = lens _chaFile (\ s a -> s{_chaFile = a})
 
 instance FromJSON Change where
@@ -1263,18 +1263,18 @@ instance ToJSON ChildReference where
 -- /See:/ 'app' smart constructor.
 data App = App
     { _appLongDescription         :: !(Maybe Text)
-    , _appOpenUrlTemplate         :: !(Maybe Text)
+    , _appOpenURLTemplate         :: !(Maybe Text)
     , _appAuthorized              :: !(Maybe Bool)
     , _appObjectType              :: !(Maybe Text)
     , _appSecondaryMimeTypes      :: !(Maybe [Text])
     , _appCreateInFolderTemplate  :: !(Maybe Text)
     , _appKind                    :: !Text
     , _appIcons                   :: !(Maybe [AppIcons])
-    , _appProductUrl              :: !(Maybe Text)
+    , _appProductURL              :: !(Maybe Text)
     , _appUseByDefault            :: !(Maybe Bool)
     , _appShortDescription        :: !(Maybe Text)
     , _appName                    :: !(Maybe Text)
-    , _appCreateUrl               :: !(Maybe Text)
+    , _appCreateURL               :: !(Maybe Text)
     , _appId                      :: !(Maybe Text)
     , _appPrimaryFileExtensions   :: !(Maybe [Text])
     , _appInstalled               :: !(Maybe Bool)
@@ -1294,7 +1294,7 @@ data App = App
 --
 -- * 'appLongDescription'
 --
--- * 'appOpenUrlTemplate'
+-- * 'appOpenURLTemplate'
 --
 -- * 'appAuthorized'
 --
@@ -1308,7 +1308,7 @@ data App = App
 --
 -- * 'appIcons'
 --
--- * 'appProductUrl'
+-- * 'appProductURL'
 --
 -- * 'appUseByDefault'
 --
@@ -1316,7 +1316,7 @@ data App = App
 --
 -- * 'appName'
 --
--- * 'appCreateUrl'
+-- * 'appCreateURL'
 --
 -- * 'appId'
 --
@@ -1344,18 +1344,18 @@ app
 app =
     App
     { _appLongDescription = Nothing
-    , _appOpenUrlTemplate = Nothing
+    , _appOpenURLTemplate = Nothing
     , _appAuthorized = Nothing
     , _appObjectType = Nothing
     , _appSecondaryMimeTypes = Nothing
     , _appCreateInFolderTemplate = Nothing
     , _appKind = "drive#app"
     , _appIcons = Nothing
-    , _appProductUrl = Nothing
+    , _appProductURL = Nothing
     , _appUseByDefault = Nothing
     , _appShortDescription = Nothing
     , _appName = Nothing
-    , _appCreateUrl = Nothing
+    , _appCreateURL = Nothing
     , _appId = Nothing
     , _appPrimaryFileExtensions = Nothing
     , _appInstalled = Nothing
@@ -1378,10 +1378,10 @@ appLongDescription
 -- | The template url for opening files with this app. The template will
 -- contain {ids} and\/or {exportIds} to be replaced by the actual file ids.
 -- See Open Files for the full documentation.
-appOpenUrlTemplate :: Lens' App (Maybe Text)
-appOpenUrlTemplate
-  = lens _appOpenUrlTemplate
-      (\ s a -> s{_appOpenUrlTemplate = a})
+appOpenURLTemplate :: Lens' App (Maybe Text)
+appOpenURLTemplate
+  = lens _appOpenURLTemplate
+      (\ s a -> s{_appOpenURLTemplate = a})
 
 -- | Whether the app is authorized to access data on the user\'s Drive.
 appAuthorized :: Lens' App (Maybe Bool)
@@ -1424,10 +1424,10 @@ appIcons
       . _Coerce
 
 -- | A link to the product listing for this app.
-appProductUrl :: Lens' App (Maybe Text)
-appProductUrl
-  = lens _appProductUrl
-      (\ s a -> s{_appProductUrl = a})
+appProductURL :: Lens' App (Maybe Text)
+appProductURL
+  = lens _appProductURL
+      (\ s a -> s{_appProductURL = a})
 
 -- | Whether the app is selected as the default handler for the types it
 -- supports.
@@ -1447,9 +1447,9 @@ appName :: Lens' App (Maybe Text)
 appName = lens _appName (\ s a -> s{_appName = a})
 
 -- | The url to create a new file with this app.
-appCreateUrl :: Lens' App (Maybe Text)
-appCreateUrl
-  = lens _appCreateUrl (\ s a -> s{_appCreateUrl = a})
+appCreateURL :: Lens' App (Maybe Text)
+appCreateURL
+  = lens _appCreateURL (\ s a -> s{_appCreateURL = a})
 
 -- | The ID of the app.
 appId :: Lens' App (Maybe Text)
@@ -1555,7 +1555,7 @@ instance ToJSON App where
           = object
               (catMaybes
                  [("longDescription" .=) <$> _appLongDescription,
-                  ("openUrlTemplate" .=) <$> _appOpenUrlTemplate,
+                  ("openUrlTemplate" .=) <$> _appOpenURLTemplate,
                   ("authorized" .=) <$> _appAuthorized,
                   ("objectType" .=) <$> _appObjectType,
                   ("secondaryMimeTypes" .=) <$> _appSecondaryMimeTypes,
@@ -1563,11 +1563,11 @@ instance ToJSON App where
                     _appCreateInFolderTemplate,
                   Just ("kind" .= _appKind),
                   ("icons" .=) <$> _appIcons,
-                  ("productUrl" .=) <$> _appProductUrl,
+                  ("productUrl" .=) <$> _appProductURL,
                   ("useByDefault" .=) <$> _appUseByDefault,
                   ("shortDescription" .=) <$> _appShortDescription,
                   ("name" .=) <$> _appName,
-                  ("createUrl" .=) <$> _appCreateUrl,
+                  ("createUrl" .=) <$> _appCreateURL,
                   ("id" .=) <$> _appId,
                   ("primaryFileExtensions" .=) <$>
                     _appPrimaryFileExtensions,
@@ -1730,12 +1730,12 @@ instance ToJSON AboutExportFormats where
 --
 -- /See:/ 'commentReply' smart constructor.
 data CommentReply = CommentReply
-    { _comHtmlContent  :: !(Maybe Text)
+    { _comHTMLContent  :: !(Maybe Text)
     , _comKind         :: !Text
     , _comContent      :: !(Maybe Text)
     , _comCreatedDate  :: !(Maybe UTCTime)
     , _comReplyId      :: !(Maybe Text)
-    , _comAuthor       :: !(Maybe (Maybe User))
+    , _comAuthor       :: !(Maybe User)
     , _comModifiedDate :: !(Maybe UTCTime)
     , _comDeleted      :: !(Maybe Bool)
     , _comVerb         :: !(Maybe Text)
@@ -1745,7 +1745,7 @@ data CommentReply = CommentReply
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'comHtmlContent'
+-- * 'comHTMLContent'
 --
 -- * 'comKind'
 --
@@ -1766,7 +1766,7 @@ commentReply
     :: CommentReply
 commentReply =
     CommentReply
-    { _comHtmlContent = Nothing
+    { _comHTMLContent = Nothing
     , _comKind = "drive#commentReply"
     , _comContent = Nothing
     , _comCreatedDate = Nothing
@@ -1778,10 +1778,10 @@ commentReply =
     }
 
 -- | HTML formatted content for this reply.
-comHtmlContent :: Lens' CommentReply (Maybe Text)
-comHtmlContent
-  = lens _comHtmlContent
-      (\ s a -> s{_comHtmlContent = a})
+comHTMLContent :: Lens' CommentReply (Maybe Text)
+comHTMLContent
+  = lens _comHTMLContent
+      (\ s a -> s{_comHTMLContent = a})
 
 -- | This is always drive#commentReply.
 comKind :: Lens' CommentReply Text
@@ -1807,7 +1807,7 @@ comReplyId
   = lens _comReplyId (\ s a -> s{_comReplyId = a})
 
 -- | The user who wrote this reply.
-comAuthor :: Lens' CommentReply (Maybe (Maybe User))
+comAuthor :: Lens' CommentReply (Maybe User)
 comAuthor
   = lens _comAuthor (\ s a -> s{_comAuthor = a})
 
@@ -1850,7 +1850,7 @@ instance ToJSON CommentReply where
         toJSON CommentReply{..}
           = object
               (catMaybes
-                 [("htmlContent" .=) <$> _comHtmlContent,
+                 [("htmlContent" .=) <$> _comHTMLContent,
                   Just ("kind" .= _comKind),
                   ("content" .=) <$> _comContent,
                   ("createdDate" .=) <$> _comCreatedDate,
@@ -1960,7 +1960,7 @@ data ChangeList = ChangeList
     , _cllNextPageToken   :: !(Maybe Text)
     , _cllNextLink        :: !(Maybe Text)
     , _cllKind            :: !Text
-    , _cllItems           :: !(Maybe [Maybe Change])
+    , _cllItems           :: !(Maybe [Change])
     , _cllSelfLink        :: !(Maybe Text)
     , _cllLargestChangeId :: !(Maybe Int64)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -2015,7 +2015,7 @@ cllKind :: Lens' ChangeList Text
 cllKind = lens _cllKind (\ s a -> s{_cllKind = a})
 
 -- | The actual list of changes.
-cllItems :: Lens' ChangeList [Maybe Change]
+cllItems :: Lens' ChangeList [Change]
 cllItems
   = lens _cllItems (\ s a -> s{_cllItems = a}) .
       _Default
@@ -2144,7 +2144,7 @@ data About = About
     , _aQuotaBytesUsedInTrash   :: !(Maybe Int64)
     , _aQuotaType               :: !(Maybe Text)
     , _aMaxUploadSizes          :: !(Maybe [AboutMaxUploadSizes])
-    , _aUser                    :: !(Maybe (Maybe User))
+    , _aUser                    :: !(Maybe User)
     , _aSelfLink                :: !(Maybe Text)
     , _aName                    :: !(Maybe Text)
     , _aFeatures                :: !(Maybe [AboutFeatures])
@@ -2308,7 +2308,7 @@ aMaxUploadSizes
       . _Coerce
 
 -- | The authenticated user.
-aUser :: Lens' About (Maybe (Maybe User))
+aUser :: Lens' About (Maybe User)
 aUser = lens _aUser (\ s a -> s{_aUser = a})
 
 -- | A link back to this item.
@@ -2879,14 +2879,14 @@ data Revision = Revision
     , _rPublishedLink          :: !(Maybe Text)
     , _rPinned                 :: !(Maybe Bool)
     , _rPublished              :: !(Maybe Bool)
-    , _rLastModifyingUser      :: !(Maybe (Maybe User))
+    , _rLastModifyingUser      :: !(Maybe User)
     , _rFileSize               :: !(Maybe Int64)
     , _rPublishAuto            :: !(Maybe Bool)
-    , _rMd5Checksum            :: !(Maybe Text)
+    , _rMD5Checksum            :: !(Maybe Text)
     , _rMimeType               :: !(Maybe Text)
     , _rSelfLink               :: !(Maybe Text)
     , _rLastModifyingUserName  :: !(Maybe Text)
-    , _rDownloadUrl            :: !(Maybe Text)
+    , _rDownloadURL            :: !(Maybe Text)
     , _rExportLinks            :: !(Maybe RevisionExportLinks)
     , _rPublishedOutsideDomain :: !(Maybe Bool)
     , _rId                     :: !(Maybe Text)
@@ -2915,7 +2915,7 @@ data Revision = Revision
 --
 -- * 'rPublishAuto'
 --
--- * 'rMd5Checksum'
+-- * 'rMD5Checksum'
 --
 -- * 'rMimeType'
 --
@@ -2923,7 +2923,7 @@ data Revision = Revision
 --
 -- * 'rLastModifyingUserName'
 --
--- * 'rDownloadUrl'
+-- * 'rDownloadURL'
 --
 -- * 'rExportLinks'
 --
@@ -2945,11 +2945,11 @@ revision =
     , _rLastModifyingUser = Nothing
     , _rFileSize = Nothing
     , _rPublishAuto = Nothing
-    , _rMd5Checksum = Nothing
+    , _rMD5Checksum = Nothing
     , _rMimeType = Nothing
     , _rSelfLink = Nothing
     , _rLastModifyingUserName = Nothing
-    , _rDownloadUrl = Nothing
+    , _rDownloadURL = Nothing
     , _rExportLinks = Nothing
     , _rPublishedOutsideDomain = Nothing
     , _rId = Nothing
@@ -2992,7 +2992,7 @@ rPublished
   = lens _rPublished (\ s a -> s{_rPublished = a})
 
 -- | The last user to modify this revision.
-rLastModifyingUser :: Lens' Revision (Maybe (Maybe User))
+rLastModifyingUser :: Lens' Revision (Maybe User)
 rLastModifyingUser
   = lens _rLastModifyingUser
       (\ s a -> s{_rLastModifyingUser = a})
@@ -3011,9 +3011,9 @@ rPublishAuto
 
 -- | An MD5 checksum for the content of this revision. This will only be
 -- populated on files with content stored in Drive.
-rMd5Checksum :: Lens' Revision (Maybe Text)
-rMd5Checksum
-  = lens _rMd5Checksum (\ s a -> s{_rMd5Checksum = a})
+rMD5Checksum :: Lens' Revision (Maybe Text)
+rMD5Checksum
+  = lens _rMD5Checksum (\ s a -> s{_rMD5Checksum = a})
 
 -- | The MIME type of the revision.
 rMimeType :: Lens' Revision (Maybe Text)
@@ -3033,9 +3033,9 @@ rLastModifyingUserName
 
 -- | Short term download URL for the file. This will only be populated on
 -- files with content stored in Drive.
-rDownloadUrl :: Lens' Revision (Maybe Text)
-rDownloadUrl
-  = lens _rDownloadUrl (\ s a -> s{_rDownloadUrl = a})
+rDownloadURL :: Lens' Revision (Maybe Text)
+rDownloadURL
+  = lens _rDownloadURL (\ s a -> s{_rDownloadURL = a})
 
 -- | Links for exporting Google Docs to specific formats.
 rExportLinks :: Lens' Revision (Maybe RevisionExportLinks)
@@ -3095,12 +3095,12 @@ instance ToJSON Revision where
                   ("lastModifyingUser" .=) <$> _rLastModifyingUser,
                   ("fileSize" .=) <$> _rFileSize,
                   ("publishAuto" .=) <$> _rPublishAuto,
-                  ("md5Checksum" .=) <$> _rMd5Checksum,
+                  ("md5Checksum" .=) <$> _rMD5Checksum,
                   ("mimeType" .=) <$> _rMimeType,
                   ("selfLink" .=) <$> _rSelfLink,
                   ("lastModifyingUserName" .=) <$>
                     _rLastModifyingUserName,
-                  ("downloadUrl" .=) <$> _rDownloadUrl,
+                  ("downloadUrl" .=) <$> _rDownloadURL,
                   ("exportLinks" .=) <$> _rExportLinks,
                   ("publishedOutsideDomain" .=) <$>
                     _rPublishedOutsideDomain,
@@ -3298,16 +3298,16 @@ instance ToJSON Permission where
 -- /See:/ 'comment' smart constructor.
 data Comment = Comment
     { _ccStatus       :: !(Maybe Text)
-    , _ccHtmlContent  :: !(Maybe Text)
+    , _ccHTMLContent  :: !(Maybe Text)
     , _ccContext      :: !(Maybe CommentContext)
     , _ccKind         :: !Text
     , _ccFileTitle    :: !(Maybe Text)
     , _ccAnchor       :: !(Maybe Text)
     , _ccContent      :: !(Maybe Text)
-    , _ccReplies      :: !(Maybe [Maybe CommentReply])
+    , _ccReplies      :: !(Maybe [CommentReply])
     , _ccCreatedDate  :: !(Maybe UTCTime)
     , _ccSelfLink     :: !(Maybe Text)
-    , _ccAuthor       :: !(Maybe (Maybe User))
+    , _ccAuthor       :: !(Maybe User)
     , _ccModifiedDate :: !(Maybe UTCTime)
     , _ccDeleted      :: !(Maybe Bool)
     , _ccFileId       :: !(Maybe Text)
@@ -3320,7 +3320,7 @@ data Comment = Comment
 --
 -- * 'ccStatus'
 --
--- * 'ccHtmlContent'
+-- * 'ccHTMLContent'
 --
 -- * 'ccContext'
 --
@@ -3352,7 +3352,7 @@ comment
 comment =
     Comment
     { _ccStatus = Nothing
-    , _ccHtmlContent = Nothing
+    , _ccHTMLContent = Nothing
     , _ccContext = Nothing
     , _ccKind = "drive#comment"
     , _ccFileTitle = Nothing
@@ -3376,10 +3376,10 @@ ccStatus :: Lens' Comment (Maybe Text)
 ccStatus = lens _ccStatus (\ s a -> s{_ccStatus = a})
 
 -- | HTML formatted content for this comment.
-ccHtmlContent :: Lens' Comment (Maybe Text)
-ccHtmlContent
-  = lens _ccHtmlContent
-      (\ s a -> s{_ccHtmlContent = a})
+ccHTMLContent :: Lens' Comment (Maybe Text)
+ccHTMLContent
+  = lens _ccHTMLContent
+      (\ s a -> s{_ccHTMLContent = a})
 
 -- | The context of the file which is being commented on.
 ccContext :: Lens' Comment (Maybe CommentContext)
@@ -3409,7 +3409,7 @@ ccContent
   = lens _ccContent (\ s a -> s{_ccContent = a})
 
 -- | Replies to this post.
-ccReplies :: Lens' Comment [Maybe CommentReply]
+ccReplies :: Lens' Comment [CommentReply]
 ccReplies
   = lens _ccReplies (\ s a -> s{_ccReplies = a}) .
       _Default
@@ -3427,7 +3427,7 @@ ccSelfLink
   = lens _ccSelfLink (\ s a -> s{_ccSelfLink = a})
 
 -- | The user who wrote this comment.
-ccAuthor :: Lens' Comment (Maybe (Maybe User))
+ccAuthor :: Lens' Comment (Maybe User)
 ccAuthor = lens _ccAuthor (\ s a -> s{_ccAuthor = a})
 
 -- | The date when this comment or any of its replies were last modified.
@@ -3477,7 +3477,7 @@ instance ToJSON Comment where
           = object
               (catMaybes
                  [("status" .=) <$> _ccStatus,
-                  ("htmlContent" .=) <$> _ccHtmlContent,
+                  ("htmlContent" .=) <$> _ccHTMLContent,
                   ("context" .=) <$> _ccContext,
                   Just ("kind" .= _ccKind),
                   ("fileTitle" .=) <$> _ccFileTitle,
@@ -3549,13 +3549,13 @@ data File = File
     , _fEtag                  :: !(Maybe Text)
     , _fFileExtension         :: !(Maybe Text)
     , _fCanComment            :: !(Maybe Bool)
-    , _fOwners                :: !(Maybe [Maybe User])
+    , _fOwners                :: !(Maybe [User])
     , _fOwnerNames            :: !(Maybe [Text])
     , _fOpenWithLinks         :: !(Maybe FileOpenWithLinks)
     , _fWebViewLink           :: !(Maybe Text)
     , _fOriginalFilename      :: !(Maybe Text)
     , _fKind                  :: !Text
-    , _fLastModifyingUser     :: !(Maybe (Maybe User))
+    , _fLastModifyingUser     :: !(Maybe User)
     , _fIconLink              :: !(Maybe Text)
     , _fEmbedLink             :: !(Maybe Text)
     , _fFileSize              :: !(Maybe Int64)
@@ -3566,36 +3566,36 @@ data File = File
     , _fModifiedByMeDate      :: !(Maybe UTCTime)
     , _fLastViewedByMeDate    :: !(Maybe UTCTime)
     , _fShared                :: !(Maybe Bool)
-    , _fMd5Checksum           :: !(Maybe Text)
+    , _fMD5Checksum           :: !(Maybe Text)
     , _fFolderColorRgb        :: !(Maybe Text)
     , _fMimeType              :: !(Maybe Text)
     , _fCreatedDate           :: !(Maybe UTCTime)
     , _fSelfLink              :: !(Maybe Text)
     , _fLastModifyingUserName :: !(Maybe Text)
     , _fShareable             :: !(Maybe Bool)
-    , _fDownloadUrl           :: !(Maybe Text)
+    , _fDownloadURL           :: !(Maybe Text)
     , _fExportLinks           :: !(Maybe FileExportLinks)
     , _fCopyable              :: !(Maybe Bool)
-    , _fParents               :: !(Maybe [Maybe ParentReference])
+    , _fParents               :: !(Maybe [ParentReference])
     , _fSharedWithMeDate      :: !(Maybe UTCTime)
     , _fSpaces                :: !(Maybe [Text])
     , _fVersion               :: !(Maybe Int64)
-    , _fUserPermission        :: !(Maybe (Maybe Permission))
+    , _fUserPermission        :: !(Maybe Permission)
     , _fWritersCanShare       :: !(Maybe Bool)
     , _fDefaultOpenWithLink   :: !(Maybe Text)
     , _fId                    :: !(Maybe Text)
     , _fLabels                :: !(Maybe FileLabels)
     , _fModifiedDate          :: !(Maybe UTCTime)
-    , _fPermissions           :: !(Maybe [Maybe Permission])
+    , _fPermissions           :: !(Maybe [Permission])
     , _fQuotaBytesUsed        :: !(Maybe Int64)
     , _fTitle                 :: !(Maybe Text)
     , _fAlternateLink         :: !(Maybe Text)
     , _fVideoMediaMetadata    :: !(Maybe FileVideoMediaMetadata)
     , _fHeadRevisionId        :: !(Maybe Text)
     , _fDescription           :: !(Maybe Text)
-    , _fSharingUser           :: !(Maybe (Maybe User))
+    , _fSharingUser           :: !(Maybe User)
     , _fWebContentLink        :: !(Maybe Text)
-    , _fProperties            :: !(Maybe [Maybe Property])
+    , _fProperties            :: !(Maybe [Property])
     , _fIndexableText         :: !(Maybe FileIndexableText)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -3653,7 +3653,7 @@ data File = File
 --
 -- * 'fShared'
 --
--- * 'fMd5Checksum'
+-- * 'fMD5Checksum'
 --
 -- * 'fFolderColorRgb'
 --
@@ -3667,7 +3667,7 @@ data File = File
 --
 -- * 'fShareable'
 --
--- * 'fDownloadUrl'
+-- * 'fDownloadURL'
 --
 -- * 'fExportLinks'
 --
@@ -3743,14 +3743,14 @@ file =
     , _fModifiedByMeDate = Nothing
     , _fLastViewedByMeDate = Nothing
     , _fShared = Nothing
-    , _fMd5Checksum = Nothing
+    , _fMD5Checksum = Nothing
     , _fFolderColorRgb = Nothing
     , _fMimeType = Nothing
     , _fCreatedDate = Nothing
     , _fSelfLink = Nothing
     , _fLastModifyingUserName = Nothing
     , _fShareable = Nothing
-    , _fDownloadUrl = Nothing
+    , _fDownloadURL = Nothing
     , _fExportLinks = Nothing
     , _fCopyable = Nothing
     , _fParents = Nothing
@@ -3831,7 +3831,7 @@ fCanComment
   = lens _fCanComment (\ s a -> s{_fCanComment = a})
 
 -- | The owner(s) of this file.
-fOwners :: Lens' File [Maybe User]
+fOwners :: Lens' File [User]
 fOwners
   = lens _fOwners (\ s a -> s{_fOwners = a}) . _Default
       . _Coerce
@@ -3872,7 +3872,7 @@ fKind :: Lens' File Text
 fKind = lens _fKind (\ s a -> s{_fKind = a})
 
 -- | The last user to modify this file.
-fLastModifyingUser :: Lens' File (Maybe (Maybe User))
+fLastModifyingUser :: Lens' File (Maybe User)
 fLastModifyingUser
   = lens _fLastModifyingUser
       (\ s a -> s{_fLastModifyingUser = a})
@@ -3942,9 +3942,9 @@ fShared = lens _fShared (\ s a -> s{_fShared = a})
 -- | An MD5 checksum for the content of this file. This field is only
 -- populated for files with content stored in Drive; it is not populated
 -- for Google Docs or shortcut files.
-fMd5Checksum :: Lens' File (Maybe Text)
-fMd5Checksum
-  = lens _fMd5Checksum (\ s a -> s{_fMd5Checksum = a})
+fMD5Checksum :: Lens' File (Maybe Text)
+fMD5Checksum
+  = lens _fMD5Checksum (\ s a -> s{_fMD5Checksum = a})
 
 -- | Folder color as an RGB hex string if the file is a folder. The list of
 -- supported colors is available in the folderColorPalette field of the
@@ -3984,9 +3984,9 @@ fShareable :: Lens' File (Maybe Bool)
 fShareable
   = lens _fShareable (\ s a -> s{_fShareable = a})
 
-fDownloadUrl :: Lens' File (Maybe Text)
-fDownloadUrl
-  = lens _fDownloadUrl (\ s a -> s{_fDownloadUrl = a})
+fDownloadURL :: Lens' File (Maybe Text)
+fDownloadURL
+  = lens _fDownloadURL (\ s a -> s{_fDownloadURL = a})
 
 -- | Links for exporting Google Docs to specific formats.
 fExportLinks :: Lens' File (Maybe FileExportLinks)
@@ -4002,7 +4002,7 @@ fCopyable
 -- will put the file in all of the provided folders. On insert, if no
 -- folders are provided, the file will be placed in the default root
 -- folder.
-fParents :: Lens' File [Maybe ParentReference]
+fParents :: Lens' File [ParentReference]
 fParents
   = lens _fParents (\ s a -> s{_fParents = a}) .
       _Default
@@ -4029,7 +4029,7 @@ fVersion :: Lens' File (Maybe Int64)
 fVersion = lens _fVersion (\ s a -> s{_fVersion = a})
 
 -- | The permissions for the authenticated user on this file.
-fUserPermission :: Lens' File (Maybe (Maybe Permission))
+fUserPermission :: Lens' File (Maybe Permission)
 fUserPermission
   = lens _fUserPermission
       (\ s a -> s{_fUserPermission = a})
@@ -4064,7 +4064,7 @@ fModifiedDate
       (\ s a -> s{_fModifiedDate = a})
 
 -- | The list of permissions for users with access to this file.
-fPermissions :: Lens' File [Maybe Permission]
+fPermissions :: Lens' File [Permission]
 fPermissions
   = lens _fPermissions (\ s a -> s{_fPermissions = a})
       . _Default
@@ -4106,7 +4106,7 @@ fDescription
   = lens _fDescription (\ s a -> s{_fDescription = a})
 
 -- | User that shared the item with the current user, if available.
-fSharingUser :: Lens' File (Maybe (Maybe User))
+fSharingUser :: Lens' File (Maybe User)
 fSharingUser
   = lens _fSharingUser (\ s a -> s{_fSharingUser = a})
 
@@ -4119,7 +4119,7 @@ fWebContentLink
       (\ s a -> s{_fWebContentLink = a})
 
 -- | The list of properties.
-fProperties :: Lens' File [Maybe Property]
+fProperties :: Lens' File [Property]
 fProperties
   = lens _fProperties (\ s a -> s{_fProperties = a}) .
       _Default
@@ -4222,7 +4222,7 @@ instance ToJSON File where
                   ("modifiedByMeDate" .=) <$> _fModifiedByMeDate,
                   ("lastViewedByMeDate" .=) <$> _fLastViewedByMeDate,
                   ("shared" .=) <$> _fShared,
-                  ("md5Checksum" .=) <$> _fMd5Checksum,
+                  ("md5Checksum" .=) <$> _fMD5Checksum,
                   ("folderColorRgb" .=) <$> _fFolderColorRgb,
                   ("mimeType" .=) <$> _fMimeType,
                   ("createdDate" .=) <$> _fCreatedDate,
@@ -4230,7 +4230,7 @@ instance ToJSON File where
                   ("lastModifyingUserName" .=) <$>
                     _fLastModifyingUserName,
                   ("shareable" .=) <$> _fShareable,
-                  ("downloadUrl" .=) <$> _fDownloadUrl,
+                  ("downloadUrl" .=) <$> _fDownloadURL,
                   ("exportLinks" .=) <$> _fExportLinks,
                   ("copyable" .=) <$> _fCopyable,
                   ("parents" .=) <$> _fParents,
@@ -4260,7 +4260,7 @@ instance ToJSON File where
 data ParentList = ParentList
     { _parEtag     :: !(Maybe Text)
     , _parKind     :: !Text
-    , _parItems    :: !(Maybe [Maybe ParentReference])
+    , _parItems    :: !(Maybe [ParentReference])
     , _parSelfLink :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -4294,7 +4294,7 @@ parKind :: Lens' ParentList Text
 parKind = lens _parKind (\ s a -> s{_parKind = a})
 
 -- | The actual list of parents.
-parItems :: Lens' ParentList [Maybe ParentReference]
+parItems :: Lens' ParentList [ParentReference]
 parItems
   = lens _parItems (\ s a -> s{_parItems = a}) .
       _Default
@@ -4376,7 +4376,7 @@ instance ToJSON AboutAdditionalRoleInfo where
 data RevisionList = RevisionList
     { _rlEtag     :: !(Maybe Text)
     , _rlKind     :: !Text
-    , _rlItems    :: !(Maybe [Maybe Revision])
+    , _rlItems    :: !(Maybe [Revision])
     , _rlSelfLink :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -4410,7 +4410,7 @@ rlKind :: Lens' RevisionList Text
 rlKind = lens _rlKind (\ s a -> s{_rlKind = a})
 
 -- | The actual list of revisions.
-rlItems :: Lens' RevisionList [Maybe Revision]
+rlItems :: Lens' RevisionList [Revision]
 rlItems
   = lens _rlItems (\ s a -> s{_rlItems = a}) . _Default
       . _Coerce
@@ -4444,7 +4444,7 @@ instance ToJSON RevisionList where
 data PermissionList = PermissionList
     { _pllEtag     :: !(Maybe Text)
     , _pllKind     :: !Text
-    , _pllItems    :: !(Maybe [Maybe Permission])
+    , _pllItems    :: !(Maybe [Permission])
     , _pllSelfLink :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -4478,7 +4478,7 @@ pllKind :: Lens' PermissionList Text
 pllKind = lens _pllKind (\ s a -> s{_pllKind = a})
 
 -- | The actual list of permissions.
-pllItems :: Lens' PermissionList [Maybe Permission]
+pllItems :: Lens' PermissionList [Permission]
 pllItems
   = lens _pllItems (\ s a -> s{_pllItems = a}) .
       _Default
@@ -4590,7 +4590,7 @@ instance ToJSON GeneratedIds where
 data AppIcons = AppIcons
     { _aiSize     :: !(Maybe Int32)
     , _aiCategory :: !(Maybe Text)
-    , _aiIconUrl  :: !(Maybe Text)
+    , _aiIconURL  :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AppIcons' with the minimum fields required to make a request.
@@ -4601,14 +4601,14 @@ data AppIcons = AppIcons
 --
 -- * 'aiCategory'
 --
--- * 'aiIconUrl'
+-- * 'aiIconURL'
 appIcons
     :: AppIcons
 appIcons =
     AppIcons
     { _aiSize = Nothing
     , _aiCategory = Nothing
-    , _aiIconUrl = Nothing
+    , _aiIconURL = Nothing
     }
 
 -- | Size of the icon. Represented as the maximum of the width and height.
@@ -4623,9 +4623,9 @@ aiCategory
   = lens _aiCategory (\ s a -> s{_aiCategory = a})
 
 -- | URL for the icon.
-aiIconUrl :: Lens' AppIcons (Maybe Text)
-aiIconUrl
-  = lens _aiIconUrl (\ s a -> s{_aiIconUrl = a})
+aiIconURL :: Lens' AppIcons (Maybe Text)
+aiIconURL
+  = lens _aiIconURL (\ s a -> s{_aiIconURL = a})
 
 instance FromJSON AppIcons where
         parseJSON
@@ -4641,7 +4641,7 @@ instance ToJSON AppIcons where
               (catMaybes
                  [("size" .=) <$> _aiSize,
                   ("category" .=) <$> _aiCategory,
-                  ("iconUrl" .=) <$> _aiIconUrl])
+                  ("iconUrl" .=) <$> _aiIconURL])
 
 -- | A JSON representation of a list of comments on a file in Google Drive.
 --
@@ -4650,7 +4650,7 @@ data CommentList = CommentList
     { _comoNextPageToken :: !(Maybe Text)
     , _comoNextLink      :: !(Maybe Text)
     , _comoKind          :: !Text
-    , _comoItems         :: !(Maybe [Maybe Comment])
+    , _comoItems         :: !(Maybe [Comment])
     , _comoSelfLink      :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -4694,7 +4694,7 @@ comoKind :: Lens' CommentList Text
 comoKind = lens _comoKind (\ s a -> s{_comoKind = a})
 
 -- | List of comments.
-comoItems :: Lens' CommentList [Maybe Comment]
+comoItems :: Lens' CommentList [Comment]
 comoItems
   = lens _comoItems (\ s a -> s{_comoItems = a}) .
       _Default

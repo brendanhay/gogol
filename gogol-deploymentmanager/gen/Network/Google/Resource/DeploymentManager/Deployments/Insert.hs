@@ -20,7 +20,7 @@
 -- | Creates a deployment and all of the resources described by the
 -- deployment manifest.
 --
--- /See:/ <https://developers.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentmanagerDeploymentsInsert@.
+-- /See:/ <https://developers.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerDeploymentsInsert@.
 module Network.Google.Resource.DeploymentManager.Deployments.Insert
     (
     -- * REST Resource
@@ -34,17 +34,17 @@ module Network.Google.Resource.DeploymentManager.Deployments.Insert
     , diQuotaUser
     , diPrettyPrint
     , diProject
-    , diUserIp
+    , diUserIP
     , diKey
-    , diOauthToken
+    , diOAuthToken
+    , diDeployment
     , diFields
-    , diAlt
     ) where
 
 import           Network.Google.DeploymentManager.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DeploymentmanagerDeploymentsInsert@ which the
+-- | A resource alias for @DeploymentManagerDeploymentsInsert@ which the
 -- 'DeploymentsInsert'' request conforms to.
 type DeploymentsInsertResource =
      Capture "project" Text :>
@@ -53,10 +53,11 @@ type DeploymentsInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] Operation
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Deployment :> Post '[JSON] Operation
 
 -- | Creates a deployment and all of the resources described by the
 -- deployment manifest.
@@ -66,11 +67,11 @@ data DeploymentsInsert' = DeploymentsInsert'
     { _diQuotaUser   :: !(Maybe Text)
     , _diPrettyPrint :: !Bool
     , _diProject     :: !Text
-    , _diUserIp      :: !(Maybe Text)
-    , _diKey         :: !(Maybe Text)
-    , _diOauthToken  :: !(Maybe Text)
+    , _diUserIP      :: !(Maybe Text)
+    , _diKey         :: !(Maybe Key)
+    , _diOAuthToken  :: !(Maybe OAuthToken)
+    , _diDeployment  :: !Deployment
     , _diFields      :: !(Maybe Text)
-    , _diAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeploymentsInsert'' with the minimum fields required to make a request.
@@ -83,28 +84,29 @@ data DeploymentsInsert' = DeploymentsInsert'
 --
 -- * 'diProject'
 --
--- * 'diUserIp'
+-- * 'diUserIP'
 --
 -- * 'diKey'
 --
--- * 'diOauthToken'
+-- * 'diOAuthToken'
+--
+-- * 'diDeployment'
 --
 -- * 'diFields'
---
--- * 'diAlt'
 deploymentsInsert'
     :: Text -- ^ 'project'
+    -> Deployment -- ^ 'Deployment'
     -> DeploymentsInsert'
-deploymentsInsert' pDiProject_ =
+deploymentsInsert' pDiProject_ pDiDeployment_ =
     DeploymentsInsert'
     { _diQuotaUser = Nothing
     , _diPrettyPrint = True
     , _diProject = pDiProject_
-    , _diUserIp = Nothing
+    , _diUserIP = Nothing
     , _diKey = Nothing
-    , _diOauthToken = Nothing
+    , _diOAuthToken = Nothing
+    , _diDeployment = pDiDeployment_
     , _diFields = Nothing
-    , _diAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,27 +129,32 @@ diProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-diUserIp :: Lens' DeploymentsInsert' (Maybe Text)
-diUserIp = lens _diUserIp (\ s a -> s{_diUserIp = a})
+diUserIP :: Lens' DeploymentsInsert' (Maybe Text)
+diUserIP = lens _diUserIP (\ s a -> s{_diUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-diKey :: Lens' DeploymentsInsert' (Maybe Text)
+diKey :: Lens' DeploymentsInsert' (Maybe Key)
 diKey = lens _diKey (\ s a -> s{_diKey = a})
 
 -- | OAuth 2.0 token for the current user.
-diOauthToken :: Lens' DeploymentsInsert' (Maybe Text)
-diOauthToken
-  = lens _diOauthToken (\ s a -> s{_diOauthToken = a})
+diOAuthToken :: Lens' DeploymentsInsert' (Maybe OAuthToken)
+diOAuthToken
+  = lens _diOAuthToken (\ s a -> s{_diOAuthToken = a})
+
+-- | Multipart request metadata.
+diDeployment :: Lens' DeploymentsInsert' Deployment
+diDeployment
+  = lens _diDeployment (\ s a -> s{_diDeployment = a})
 
 -- | Selector specifying which fields to include in a partial response.
 diFields :: Lens' DeploymentsInsert' (Maybe Text)
 diFields = lens _diFields (\ s a -> s{_diFields = a})
 
--- | Data format for the response.
-diAlt :: Lens' DeploymentsInsert' Alt
-diAlt = lens _diAlt (\ s a -> s{_diAlt = a})
+instance GoogleAuth DeploymentsInsert' where
+        authKey = diKey . _Just
+        authToken = diOAuthToken . _Just
 
 instance GoogleRequest DeploymentsInsert' where
         type Rs DeploymentsInsert' = Operation
@@ -155,11 +162,12 @@ instance GoogleRequest DeploymentsInsert' where
           = requestWithRoute defReq deploymentManagerURL
         requestWithRoute r u DeploymentsInsert'{..}
           = go _diQuotaUser (Just _diPrettyPrint) _diProject
-              _diUserIp
+              _diUserIP
               _diKey
-              _diOauthToken
+              _diOAuthToken
               _diFields
-              (Just _diAlt)
+              (Just AltJSON)
+              _diDeployment
           where go
                   = clientWithRoute
                       (Proxy :: Proxy DeploymentsInsertResource)

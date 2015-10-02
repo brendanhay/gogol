@@ -200,9 +200,6 @@ module Network.Google.DoubleClickBids.Types
     -- * DownloadLineItemsRequestFormat
     , DownloadLineItemsRequestFormat (..)
 
-    -- * Alt
-    , Alt (..)
-
     -- * ReportStatusFormat
     , ReportStatusFormat (..)
     ) where

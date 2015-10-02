@@ -41,11 +41,10 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.List
     , pslBearerToken
     , pslKey
     , pslPageToken
-    , pslOauthToken
+    , pslOAuthToken
     , pslPageSize
     , pslFields
     , pslCallback
-    , pslAlt
     ) where
 
 import           Network.Google.Prelude
@@ -65,13 +64,13 @@ type ProjectsSubscriptionsListResource =
                      QueryParam "access_token" Text :>
                        QueryParam "uploadType" Text :>
                          QueryParam "bearer_token" Text :>
-                           QueryParam "key" Text :>
+                           QueryParam "key" Key :>
                              QueryParam "pageToken" Text :>
-                               QueryParam "oauth_token" Text :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "pageSize" Int32 :>
                                    QueryParam "fields" Text :>
                                      QueryParam "callback" Text :>
-                                       QueryParam "alt" Text :>
+                                       QueryParam "alt" AltJSON :>
                                          Get '[JSON] ListSubscriptionsResponse
 
 -- | Lists matching subscriptions.
@@ -87,13 +86,12 @@ data ProjectsSubscriptionsList' = ProjectsSubscriptionsList'
     , _pslAccessToken    :: !(Maybe Text)
     , _pslUploadType     :: !(Maybe Text)
     , _pslBearerToken    :: !(Maybe Text)
-    , _pslKey            :: !(Maybe Text)
+    , _pslKey            :: !(Maybe Key)
     , _pslPageToken      :: !(Maybe Text)
-    , _pslOauthToken     :: !(Maybe Text)
+    , _pslOAuthToken     :: !(Maybe OAuthToken)
     , _pslPageSize       :: !(Maybe Int32)
     , _pslFields         :: !(Maybe Text)
     , _pslCallback       :: !(Maybe Text)
-    , _pslAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsSubscriptionsList'' with the minimum fields required to make a request.
@@ -122,15 +120,13 @@ data ProjectsSubscriptionsList' = ProjectsSubscriptionsList'
 --
 -- * 'pslPageToken'
 --
--- * 'pslOauthToken'
+-- * 'pslOAuthToken'
 --
 -- * 'pslPageSize'
 --
 -- * 'pslFields'
 --
 -- * 'pslCallback'
---
--- * 'pslAlt'
 projectsSubscriptionsList'
     :: Text -- ^ 'project'
     -> ProjectsSubscriptionsList'
@@ -147,11 +143,10 @@ projectsSubscriptionsList' pPslProject_ =
     , _pslBearerToken = Nothing
     , _pslKey = Nothing
     , _pslPageToken = Nothing
-    , _pslOauthToken = Nothing
+    , _pslOAuthToken = Nothing
     , _pslPageSize = Nothing
     , _pslFields = Nothing
     , _pslCallback = Nothing
-    , _pslAlt = "json"
     }
 
 -- | V1 error format.
@@ -207,7 +202,7 @@ pslBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pslKey :: Lens' ProjectsSubscriptionsList' (Maybe Text)
+pslKey :: Lens' ProjectsSubscriptionsList' (Maybe Key)
 pslKey = lens _pslKey (\ s a -> s{_pslKey = a})
 
 -- | The value returned by the last ListSubscriptionsResponse; indicates that
@@ -218,10 +213,10 @@ pslPageToken
   = lens _pslPageToken (\ s a -> s{_pslPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-pslOauthToken :: Lens' ProjectsSubscriptionsList' (Maybe Text)
-pslOauthToken
-  = lens _pslOauthToken
-      (\ s a -> s{_pslOauthToken = a})
+pslOAuthToken :: Lens' ProjectsSubscriptionsList' (Maybe OAuthToken)
+pslOAuthToken
+  = lens _pslOAuthToken
+      (\ s a -> s{_pslOAuthToken = a})
 
 -- | Maximum number of subscriptions to return.
 pslPageSize :: Lens' ProjectsSubscriptionsList' (Maybe Int32)
@@ -238,9 +233,9 @@ pslCallback :: Lens' ProjectsSubscriptionsList' (Maybe Text)
 pslCallback
   = lens _pslCallback (\ s a -> s{_pslCallback = a})
 
--- | Data format for response.
-pslAlt :: Lens' ProjectsSubscriptionsList' Text
-pslAlt = lens _pslAlt (\ s a -> s{_pslAlt = a})
+instance GoogleAuth ProjectsSubscriptionsList' where
+        authKey = pslKey . _Just
+        authToken = pslOAuthToken . _Just
 
 instance GoogleRequest ProjectsSubscriptionsList'
          where
@@ -257,11 +252,11 @@ instance GoogleRequest ProjectsSubscriptionsList'
               _pslBearerToken
               _pslKey
               _pslPageToken
-              _pslOauthToken
+              _pslOAuthToken
               _pslPageSize
               _pslFields
               _pslCallback
-              (Just _pslAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsSubscriptionsListResource)

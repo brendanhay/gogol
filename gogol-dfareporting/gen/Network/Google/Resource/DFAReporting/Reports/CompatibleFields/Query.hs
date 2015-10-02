@@ -34,12 +34,12 @@ module Network.Google.Resource.DFAReporting.Reports.CompatibleFields.Query
     -- * Request Lenses
     , rcfqQuotaUser
     , rcfqPrettyPrint
-    , rcfqUserIp
+    , rcfqUserIP
     , rcfqProfileId
+    , rcfqReport
     , rcfqKey
-    , rcfqOauthToken
+    , rcfqOAuthToken
     , rcfqFields
-    , rcfqAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -56,10 +56,12 @@ type ReportsCompatibleFieldsQueryResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Post '[JSON] CompatibleFields
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] Report :>
+                               Post '[JSON] CompatibleFields
 
 -- | Returns the fields that are compatible to be selected in the respective
 -- sections of a report criteria, given the fields already selected in the
@@ -69,12 +71,12 @@ type ReportsCompatibleFieldsQueryResource =
 data ReportsCompatibleFieldsQuery' = ReportsCompatibleFieldsQuery'
     { _rcfqQuotaUser   :: !(Maybe Text)
     , _rcfqPrettyPrint :: !Bool
-    , _rcfqUserIp      :: !(Maybe Text)
+    , _rcfqUserIP      :: !(Maybe Text)
     , _rcfqProfileId   :: !Int64
-    , _rcfqKey         :: !(Maybe Text)
-    , _rcfqOauthToken  :: !(Maybe Text)
+    , _rcfqReport      :: !Report
+    , _rcfqKey         :: !(Maybe Key)
+    , _rcfqOAuthToken  :: !(Maybe OAuthToken)
     , _rcfqFields      :: !(Maybe Text)
-    , _rcfqAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsCompatibleFieldsQuery'' with the minimum fields required to make a request.
@@ -85,30 +87,31 @@ data ReportsCompatibleFieldsQuery' = ReportsCompatibleFieldsQuery'
 --
 -- * 'rcfqPrettyPrint'
 --
--- * 'rcfqUserIp'
+-- * 'rcfqUserIP'
 --
 -- * 'rcfqProfileId'
 --
+-- * 'rcfqReport'
+--
 -- * 'rcfqKey'
 --
--- * 'rcfqOauthToken'
+-- * 'rcfqOAuthToken'
 --
 -- * 'rcfqFields'
---
--- * 'rcfqAlt'
 reportsCompatibleFieldsQuery'
     :: Int64 -- ^ 'profileId'
+    -> Report -- ^ 'Report'
     -> ReportsCompatibleFieldsQuery'
-reportsCompatibleFieldsQuery' pRcfqProfileId_ =
+reportsCompatibleFieldsQuery' pRcfqProfileId_ pRcfqReport_ =
     ReportsCompatibleFieldsQuery'
     { _rcfqQuotaUser = Nothing
     , _rcfqPrettyPrint = True
-    , _rcfqUserIp = Nothing
+    , _rcfqUserIP = Nothing
     , _rcfqProfileId = pRcfqProfileId_
+    , _rcfqReport = pRcfqReport_
     , _rcfqKey = Nothing
-    , _rcfqOauthToken = Nothing
+    , _rcfqOAuthToken = Nothing
     , _rcfqFields = Nothing
-    , _rcfqAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,9 +130,9 @@ rcfqPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rcfqUserIp :: Lens' ReportsCompatibleFieldsQuery' (Maybe Text)
-rcfqUserIp
-  = lens _rcfqUserIp (\ s a -> s{_rcfqUserIp = a})
+rcfqUserIP :: Lens' ReportsCompatibleFieldsQuery' (Maybe Text)
+rcfqUserIP
+  = lens _rcfqUserIP (\ s a -> s{_rcfqUserIP = a})
 
 -- | The DFA user profile ID.
 rcfqProfileId :: Lens' ReportsCompatibleFieldsQuery' Int64
@@ -137,26 +140,32 @@ rcfqProfileId
   = lens _rcfqProfileId
       (\ s a -> s{_rcfqProfileId = a})
 
+-- | Multipart request metadata.
+rcfqReport :: Lens' ReportsCompatibleFieldsQuery' Report
+rcfqReport
+  = lens _rcfqReport (\ s a -> s{_rcfqReport = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rcfqKey :: Lens' ReportsCompatibleFieldsQuery' (Maybe Text)
+rcfqKey :: Lens' ReportsCompatibleFieldsQuery' (Maybe Key)
 rcfqKey = lens _rcfqKey (\ s a -> s{_rcfqKey = a})
 
 -- | OAuth 2.0 token for the current user.
-rcfqOauthToken :: Lens' ReportsCompatibleFieldsQuery' (Maybe Text)
-rcfqOauthToken
-  = lens _rcfqOauthToken
-      (\ s a -> s{_rcfqOauthToken = a})
+rcfqOAuthToken :: Lens' ReportsCompatibleFieldsQuery' (Maybe OAuthToken)
+rcfqOAuthToken
+  = lens _rcfqOAuthToken
+      (\ s a -> s{_rcfqOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 rcfqFields :: Lens' ReportsCompatibleFieldsQuery' (Maybe Text)
 rcfqFields
   = lens _rcfqFields (\ s a -> s{_rcfqFields = a})
 
--- | Data format for the response.
-rcfqAlt :: Lens' ReportsCompatibleFieldsQuery' Alt
-rcfqAlt = lens _rcfqAlt (\ s a -> s{_rcfqAlt = a})
+instance GoogleAuth ReportsCompatibleFieldsQuery'
+         where
+        authKey = rcfqKey . _Just
+        authToken = rcfqOAuthToken . _Just
 
 instance GoogleRequest ReportsCompatibleFieldsQuery'
          where
@@ -166,12 +175,13 @@ instance GoogleRequest ReportsCompatibleFieldsQuery'
         requestWithRoute r u
           ReportsCompatibleFieldsQuery'{..}
           = go _rcfqQuotaUser (Just _rcfqPrettyPrint)
-              _rcfqUserIp
+              _rcfqUserIP
               _rcfqProfileId
               _rcfqKey
-              _rcfqOauthToken
+              _rcfqOAuthToken
               _rcfqFields
-              (Just _rcfqAlt)
+              (Just AltJSON)
+              _rcfqReport
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ReportsCompatibleFieldsQueryResource)

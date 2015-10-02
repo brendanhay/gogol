@@ -32,12 +32,12 @@ module Network.Google.Resource.Directory.Users.Patch
     -- * Request Lenses
     , upQuotaUser
     , upPrettyPrint
-    , upUserIp
+    , upUserIP
+    , upUser
     , upKey
-    , upOauthToken
+    , upOAuthToken
     , upUserKey
     , upFields
-    , upAlt
     ) where
 
 import           Network.Google.AdminDirectory.Types
@@ -51,10 +51,11 @@ type UsersPatchResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Patch '[JSON] User
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] User :> Patch '[JSON] User
 
 -- | update user. This method supports patch semantics.
 --
@@ -62,12 +63,12 @@ type UsersPatchResource =
 data UsersPatch' = UsersPatch'
     { _upQuotaUser   :: !(Maybe Text)
     , _upPrettyPrint :: !Bool
-    , _upUserIp      :: !(Maybe Text)
-    , _upKey         :: !(Maybe Text)
-    , _upOauthToken  :: !(Maybe Text)
+    , _upUserIP      :: !(Maybe Text)
+    , _upUser        :: !User
+    , _upKey         :: !(Maybe Key)
+    , _upOAuthToken  :: !(Maybe OAuthToken)
     , _upUserKey     :: !Text
     , _upFields      :: !(Maybe Text)
-    , _upAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersPatch'' with the minimum fields required to make a request.
@@ -78,30 +79,31 @@ data UsersPatch' = UsersPatch'
 --
 -- * 'upPrettyPrint'
 --
--- * 'upUserIp'
+-- * 'upUserIP'
+--
+-- * 'upUser'
 --
 -- * 'upKey'
 --
--- * 'upOauthToken'
+-- * 'upOAuthToken'
 --
 -- * 'upUserKey'
 --
 -- * 'upFields'
---
--- * 'upAlt'
 usersPatch'
-    :: Text -- ^ 'userKey'
+    :: User -- ^ 'User'
+    -> Text -- ^ 'userKey'
     -> UsersPatch'
-usersPatch' pUpUserKey_ =
+usersPatch' pUpUser_ pUpUserKey_ =
     UsersPatch'
     { _upQuotaUser = Nothing
     , _upPrettyPrint = True
-    , _upUserIp = Nothing
+    , _upUserIP = Nothing
+    , _upUser = pUpUser_
     , _upKey = Nothing
-    , _upOauthToken = Nothing
+    , _upOAuthToken = Nothing
     , _upUserKey = pUpUserKey_
     , _upFields = Nothing
-    , _upAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -119,19 +121,23 @@ upPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-upUserIp :: Lens' UsersPatch' (Maybe Text)
-upUserIp = lens _upUserIp (\ s a -> s{_upUserIp = a})
+upUserIP :: Lens' UsersPatch' (Maybe Text)
+upUserIP = lens _upUserIP (\ s a -> s{_upUserIP = a})
+
+-- | Multipart request metadata.
+upUser :: Lens' UsersPatch' User
+upUser = lens _upUser (\ s a -> s{_upUser = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-upKey :: Lens' UsersPatch' (Maybe Text)
+upKey :: Lens' UsersPatch' (Maybe Key)
 upKey = lens _upKey (\ s a -> s{_upKey = a})
 
 -- | OAuth 2.0 token for the current user.
-upOauthToken :: Lens' UsersPatch' (Maybe Text)
-upOauthToken
-  = lens _upOauthToken (\ s a -> s{_upOauthToken = a})
+upOAuthToken :: Lens' UsersPatch' (Maybe OAuthToken)
+upOAuthToken
+  = lens _upOAuthToken (\ s a -> s{_upOAuthToken = a})
 
 -- | Email or immutable Id of the user. If Id, it should match with id of
 -- user object
@@ -143,20 +149,21 @@ upUserKey
 upFields :: Lens' UsersPatch' (Maybe Text)
 upFields = lens _upFields (\ s a -> s{_upFields = a})
 
--- | Data format for the response.
-upAlt :: Lens' UsersPatch' Alt
-upAlt = lens _upAlt (\ s a -> s{_upAlt = a})
+instance GoogleAuth UsersPatch' where
+        authKey = upKey . _Just
+        authToken = upOAuthToken . _Just
 
 instance GoogleRequest UsersPatch' where
         type Rs UsersPatch' = User
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u UsersPatch'{..}
-          = go _upQuotaUser (Just _upPrettyPrint) _upUserIp
+          = go _upQuotaUser (Just _upPrettyPrint) _upUserIP
               _upKey
-              _upOauthToken
+              _upOAuthToken
               _upUserKey
               _upFields
-              (Just _upAlt)
+              (Just AltJSON)
+              _upUser
           where go
                   = clientWithRoute (Proxy :: Proxy UsersPatchResource)
                       r

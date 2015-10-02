@@ -20,7 +20,7 @@
 -- | Get an Order given its id. See _Authentication and Authorization rules_
 -- and _Get methods rules_ for more information about this method.
 --
--- /See:/ <https://developers.google.com/playmoviespartner/ Google Play Movies Partner API Reference> for @PlaymoviespartnerAccountsOrdersGet@.
+-- /See:/ <https://developers.google.com/playmoviespartner/ Google Play Movies Partner API Reference> for @PlaymoviesPartynerAccountsOrdersGet@.
 module Network.Google.Resource.PlayMoviesPartner.Accounts.Orders.Get
     (
     -- * REST Resource
@@ -41,17 +41,16 @@ module Network.Google.Resource.PlayMoviesPartner.Accounts.Orders.Get
     , aogAccountId
     , aogBearerToken
     , aogKey
-    , aogOauthToken
+    , aogOAuthToken
     , aogOrderId
     , aogFields
     , aogCallback
-    , aogAlt
     ) where
 
 import           Network.Google.PlayMoviesPartner.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlaymoviespartnerAccountsOrdersGet@ which the
+-- | A resource alias for @PlaymoviesPartynerAccountsOrdersGet@ which the
 -- 'AccountsOrdersGet'' request conforms to.
 type AccountsOrdersGetResource =
      "v1" :>
@@ -67,11 +66,11 @@ type AccountsOrdersGetResource =
                          QueryParam "access_token" Text :>
                            QueryParam "uploadType" Text :>
                              QueryParam "bearer_token" Text :>
-                               QueryParam "key" Text :>
-                                 QueryParam "oauth_token" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "fields" Text :>
                                      QueryParam "callback" Text :>
-                                       QueryParam "alt" Text :>
+                                       QueryParam "alt" AltJSON :>
                                          Get '[JSON] Order
 
 -- | Get an Order given its id. See _Authentication and Authorization rules_
@@ -88,12 +87,11 @@ data AccountsOrdersGet' = AccountsOrdersGet'
     , _aogUploadType     :: !(Maybe Text)
     , _aogAccountId      :: !Text
     , _aogBearerToken    :: !(Maybe Text)
-    , _aogKey            :: !(Maybe Text)
-    , _aogOauthToken     :: !(Maybe Text)
+    , _aogKey            :: !(Maybe Key)
+    , _aogOAuthToken     :: !(Maybe OAuthToken)
     , _aogOrderId        :: !Text
     , _aogFields         :: !(Maybe Text)
     , _aogCallback       :: !(Maybe Text)
-    , _aogAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsOrdersGet'' with the minimum fields required to make a request.
@@ -120,15 +118,13 @@ data AccountsOrdersGet' = AccountsOrdersGet'
 --
 -- * 'aogKey'
 --
--- * 'aogOauthToken'
+-- * 'aogOAuthToken'
 --
 -- * 'aogOrderId'
 --
 -- * 'aogFields'
 --
 -- * 'aogCallback'
---
--- * 'aogAlt'
 accountsOrdersGet'
     :: Text -- ^ 'accountId'
     -> Text -- ^ 'orderId'
@@ -145,11 +141,10 @@ accountsOrdersGet' pAogAccountId_ pAogOrderId_ =
     , _aogAccountId = pAogAccountId_
     , _aogBearerToken = Nothing
     , _aogKey = Nothing
-    , _aogOauthToken = Nothing
+    , _aogOAuthToken = Nothing
     , _aogOrderId = pAogOrderId_
     , _aogFields = Nothing
     , _aogCallback = Nothing
-    , _aogAlt = "json"
     }
 
 -- | V1 error format.
@@ -205,14 +200,14 @@ aogBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aogKey :: Lens' AccountsOrdersGet' (Maybe Text)
+aogKey :: Lens' AccountsOrdersGet' (Maybe Key)
 aogKey = lens _aogKey (\ s a -> s{_aogKey = a})
 
 -- | OAuth 2.0 token for the current user.
-aogOauthToken :: Lens' AccountsOrdersGet' (Maybe Text)
-aogOauthToken
-  = lens _aogOauthToken
-      (\ s a -> s{_aogOauthToken = a})
+aogOAuthToken :: Lens' AccountsOrdersGet' (Maybe OAuthToken)
+aogOAuthToken
+  = lens _aogOAuthToken
+      (\ s a -> s{_aogOAuthToken = a})
 
 -- | REQUIRED. Order ID.
 aogOrderId :: Lens' AccountsOrdersGet' Text
@@ -229,9 +224,9 @@ aogCallback :: Lens' AccountsOrdersGet' (Maybe Text)
 aogCallback
   = lens _aogCallback (\ s a -> s{_aogCallback = a})
 
--- | Data format for response.
-aogAlt :: Lens' AccountsOrdersGet' Text
-aogAlt = lens _aogAlt (\ s a -> s{_aogAlt = a})
+instance GoogleAuth AccountsOrdersGet' where
+        authKey = aogKey . _Just
+        authToken = aogOAuthToken . _Just
 
 instance GoogleRequest AccountsOrdersGet' where
         type Rs AccountsOrdersGet' = Order
@@ -246,11 +241,11 @@ instance GoogleRequest AccountsOrdersGet' where
               _aogAccountId
               _aogBearerToken
               _aogKey
-              _aogOauthToken
+              _aogOAuthToken
               _aogOrderId
               _aogFields
               _aogCallback
-              (Just _aogAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountsOrdersGetResource)

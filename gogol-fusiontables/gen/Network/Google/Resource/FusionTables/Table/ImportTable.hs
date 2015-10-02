@@ -32,14 +32,14 @@ module Network.Google.Resource.FusionTables.Table.ImportTable
     -- * Request Lenses
     , titQuotaUser
     , titPrettyPrint
-    , titUserIp
+    , titUserIP
+    , titMedia
     , titKey
     , titName
-    , titOauthToken
+    , titOAuthToken
     , titDelimiter
     , titEncoding
     , titFields
-    , titAlt
     ) where
 
 import           Network.Google.FusionTables.Types
@@ -53,13 +53,13 @@ type TableImportTableResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
+               QueryParam "key" Key :>
                  QueryParam "name" Text :>
-                   QueryParam "oauth_token" Text :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "delimiter" Text :>
                        QueryParam "encoding" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Post '[JSON] Table
+                           QueryParam "alt" AltJSON :> Post '[JSON] Table
 
 -- | Imports a new table.
 --
@@ -67,14 +67,14 @@ type TableImportTableResource =
 data TableImportTable' = TableImportTable'
     { _titQuotaUser   :: !(Maybe Text)
     , _titPrettyPrint :: !Bool
-    , _titUserIp      :: !(Maybe Text)
-    , _titKey         :: !(Maybe Text)
+    , _titUserIP      :: !(Maybe Text)
+    , _titMedia       :: !Body
+    , _titKey         :: !(Maybe Key)
     , _titName        :: !Text
-    , _titOauthToken  :: !(Maybe Text)
+    , _titOAuthToken  :: !(Maybe OAuthToken)
     , _titDelimiter   :: !(Maybe Text)
     , _titEncoding    :: !(Maybe Text)
     , _titFields      :: !(Maybe Text)
-    , _titAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableImportTable'' with the minimum fields required to make a request.
@@ -85,36 +85,37 @@ data TableImportTable' = TableImportTable'
 --
 -- * 'titPrettyPrint'
 --
--- * 'titUserIp'
+-- * 'titUserIP'
+--
+-- * 'titMedia'
 --
 -- * 'titKey'
 --
 -- * 'titName'
 --
--- * 'titOauthToken'
+-- * 'titOAuthToken'
 --
 -- * 'titDelimiter'
 --
 -- * 'titEncoding'
 --
 -- * 'titFields'
---
--- * 'titAlt'
 tableImportTable'
-    :: Text -- ^ 'name'
+    :: Body -- ^ 'media'
+    -> Text -- ^ 'name'
     -> TableImportTable'
-tableImportTable' pTitName_ =
+tableImportTable' pTitMedia_ pTitName_ =
     TableImportTable'
     { _titQuotaUser = Nothing
     , _titPrettyPrint = True
-    , _titUserIp = Nothing
+    , _titUserIP = Nothing
+    , _titMedia = pTitMedia_
     , _titKey = Nothing
     , _titName = pTitName_
-    , _titOauthToken = Nothing
+    , _titOAuthToken = Nothing
     , _titDelimiter = Nothing
     , _titEncoding = Nothing
     , _titFields = Nothing
-    , _titAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -132,14 +133,17 @@ titPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-titUserIp :: Lens' TableImportTable' (Maybe Text)
-titUserIp
-  = lens _titUserIp (\ s a -> s{_titUserIp = a})
+titUserIP :: Lens' TableImportTable' (Maybe Text)
+titUserIP
+  = lens _titUserIP (\ s a -> s{_titUserIP = a})
+
+titMedia :: Lens' TableImportTable' Body
+titMedia = lens _titMedia (\ s a -> s{_titMedia = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-titKey :: Lens' TableImportTable' (Maybe Text)
+titKey :: Lens' TableImportTable' (Maybe Key)
 titKey = lens _titKey (\ s a -> s{_titKey = a})
 
 -- | The name to be assigned to the new table.
@@ -147,10 +151,10 @@ titName :: Lens' TableImportTable' Text
 titName = lens _titName (\ s a -> s{_titName = a})
 
 -- | OAuth 2.0 token for the current user.
-titOauthToken :: Lens' TableImportTable' (Maybe Text)
-titOauthToken
-  = lens _titOauthToken
-      (\ s a -> s{_titOauthToken = a})
+titOAuthToken :: Lens' TableImportTable' (Maybe OAuthToken)
+titOAuthToken
+  = lens _titOAuthToken
+      (\ s a -> s{_titOAuthToken = a})
 
 -- | The delimiter used to separate cell values. This can only consist of a
 -- single character. Default is ,.
@@ -169,22 +173,23 @@ titFields :: Lens' TableImportTable' (Maybe Text)
 titFields
   = lens _titFields (\ s a -> s{_titFields = a})
 
--- | Data format for the response.
-titAlt :: Lens' TableImportTable' Alt
-titAlt = lens _titAlt (\ s a -> s{_titAlt = a})
+instance GoogleAuth TableImportTable' where
+        authKey = titKey . _Just
+        authToken = titOAuthToken . _Just
 
 instance GoogleRequest TableImportTable' where
         type Rs TableImportTable' = Table
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u TableImportTable'{..}
-          = go _titQuotaUser (Just _titPrettyPrint) _titUserIp
+          = go _titQuotaUser (Just _titPrettyPrint) _titUserIP
+              _titMedia
               _titKey
               (Just _titName)
-              _titOauthToken
+              _titOAuthToken
               _titDelimiter
               _titEncoding
               _titFields
-              (Just _titAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TableImportTableResource)

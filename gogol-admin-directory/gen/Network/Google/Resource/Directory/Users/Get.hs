@@ -34,13 +34,12 @@ module Network.Google.Resource.Directory.Users.Get
     , ugPrettyPrint
     , ugViewType
     , ugCustomFieldMask
-    , ugUserIp
+    , ugUserIP
     , ugKey
     , ugProjection
-    , ugOauthToken
+    , ugOAuthToken
     , ugUserKey
     , ugFields
-    , ugAlt
     ) where
 
 import           Network.Google.AdminDirectory.Types
@@ -56,12 +55,12 @@ type UsersGetResource =
              QueryParam "viewType" DirectoryUsersGetViewType :>
                QueryParam "customFieldMask" Text :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "projection" DirectoryUsersGetProjection
                        :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Get '[JSON] User
+                           QueryParam "alt" AltJSON :> Get '[JSON] User
 
 -- | retrieve user
 --
@@ -71,13 +70,12 @@ data UsersGet' = UsersGet'
     , _ugPrettyPrint     :: !Bool
     , _ugViewType        :: !DirectoryUsersGetViewType
     , _ugCustomFieldMask :: !(Maybe Text)
-    , _ugUserIp          :: !(Maybe Text)
-    , _ugKey             :: !(Maybe Text)
+    , _ugUserIP          :: !(Maybe Text)
+    , _ugKey             :: !(Maybe Key)
     , _ugProjection      :: !DirectoryUsersGetProjection
-    , _ugOauthToken      :: !(Maybe Text)
+    , _ugOAuthToken      :: !(Maybe OAuthToken)
     , _ugUserKey         :: !Text
     , _ugFields          :: !(Maybe Text)
-    , _ugAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersGet'' with the minimum fields required to make a request.
@@ -92,19 +90,17 @@ data UsersGet' = UsersGet'
 --
 -- * 'ugCustomFieldMask'
 --
--- * 'ugUserIp'
+-- * 'ugUserIP'
 --
 -- * 'ugKey'
 --
 -- * 'ugProjection'
 --
--- * 'ugOauthToken'
+-- * 'ugOAuthToken'
 --
 -- * 'ugUserKey'
 --
 -- * 'ugFields'
---
--- * 'ugAlt'
 usersGet'
     :: Text -- ^ 'userKey'
     -> UsersGet'
@@ -114,13 +110,12 @@ usersGet' pUgUserKey_ =
     , _ugPrettyPrint = True
     , _ugViewType = DUGVTAdminView
     , _ugCustomFieldMask = Nothing
-    , _ugUserIp = Nothing
+    , _ugUserIP = Nothing
     , _ugKey = Nothing
     , _ugProjection = DUGPBasic
-    , _ugOauthToken = Nothing
+    , _ugOAuthToken = Nothing
     , _ugUserKey = pUgUserKey_
     , _ugFields = Nothing
-    , _ugAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,13 +145,13 @@ ugCustomFieldMask
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ugUserIp :: Lens' UsersGet' (Maybe Text)
-ugUserIp = lens _ugUserIp (\ s a -> s{_ugUserIp = a})
+ugUserIP :: Lens' UsersGet' (Maybe Text)
+ugUserIP = lens _ugUserIP (\ s a -> s{_ugUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ugKey :: Lens' UsersGet' (Maybe Text)
+ugKey :: Lens' UsersGet' (Maybe Key)
 ugKey = lens _ugKey (\ s a -> s{_ugKey = a})
 
 -- | What subset of fields to fetch for this user.
@@ -165,9 +160,9 @@ ugProjection
   = lens _ugProjection (\ s a -> s{_ugProjection = a})
 
 -- | OAuth 2.0 token for the current user.
-ugOauthToken :: Lens' UsersGet' (Maybe Text)
-ugOauthToken
-  = lens _ugOauthToken (\ s a -> s{_ugOauthToken = a})
+ugOAuthToken :: Lens' UsersGet' (Maybe OAuthToken)
+ugOAuthToken
+  = lens _ugOAuthToken (\ s a -> s{_ugOAuthToken = a})
 
 -- | Email or immutable Id of the user
 ugUserKey :: Lens' UsersGet' Text
@@ -178,9 +173,9 @@ ugUserKey
 ugFields :: Lens' UsersGet' (Maybe Text)
 ugFields = lens _ugFields (\ s a -> s{_ugFields = a})
 
--- | Data format for the response.
-ugAlt :: Lens' UsersGet' Alt
-ugAlt = lens _ugAlt (\ s a -> s{_ugAlt = a})
+instance GoogleAuth UsersGet' where
+        authKey = ugKey . _Just
+        authToken = ugOAuthToken . _Just
 
 instance GoogleRequest UsersGet' where
         type Rs UsersGet' = User
@@ -189,13 +184,13 @@ instance GoogleRequest UsersGet' where
           = go _ugQuotaUser (Just _ugPrettyPrint)
               (Just _ugViewType)
               _ugCustomFieldMask
-              _ugUserIp
+              _ugUserIP
               _ugKey
               (Just _ugProjection)
-              _ugOauthToken
+              _ugOAuthToken
               _ugUserKey
               _ugFields
-              (Just _ugAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy UsersGetResource) r
                       u

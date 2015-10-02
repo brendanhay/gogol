@@ -32,7 +32,7 @@ module Network.Google.Resource.DFAReporting.ContentCategories.List
     -- * Request Lenses
     , cclQuotaUser
     , cclPrettyPrint
-    , cclUserIp
+    , cclUserIP
     , cclSearchString
     , cclIds
     , cclProfileId
@@ -40,10 +40,9 @@ module Network.Google.Resource.DFAReporting.ContentCategories.List
     , cclKey
     , cclPageToken
     , cclSortField
-    , cclOauthToken
+    , cclOAuthToken
     , cclMaxResults
     , cclFields
-    , cclAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -63,15 +62,15 @@ type ContentCategoriesListResource =
                      QueryParam "sortOrder"
                        DfareportingContentCategoriesListSortOrder
                        :>
-                       QueryParam "key" Text :>
+                       QueryParam "key" Key :>
                          QueryParam "pageToken" Text :>
                            QueryParam "sortField"
                              DfareportingContentCategoriesListSortField
                              :>
-                             QueryParam "oauth_token" Text :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "maxResults" Int32 :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "alt" Alt :>
+                                   QueryParam "alt" AltJSON :>
                                      Get '[JSON] ContentCategoriesListResponse
 
 -- | Retrieves a list of content categories, possibly filtered.
@@ -80,18 +79,17 @@ type ContentCategoriesListResource =
 data ContentCategoriesList' = ContentCategoriesList'
     { _cclQuotaUser    :: !(Maybe Text)
     , _cclPrettyPrint  :: !Bool
-    , _cclUserIp       :: !(Maybe Text)
+    , _cclUserIP       :: !(Maybe Text)
     , _cclSearchString :: !(Maybe Text)
     , _cclIds          :: !(Maybe Int64)
     , _cclProfileId    :: !Int64
     , _cclSortOrder    :: !(Maybe DfareportingContentCategoriesListSortOrder)
-    , _cclKey          :: !(Maybe Text)
+    , _cclKey          :: !(Maybe Key)
     , _cclPageToken    :: !(Maybe Text)
     , _cclSortField    :: !(Maybe DfareportingContentCategoriesListSortField)
-    , _cclOauthToken   :: !(Maybe Text)
+    , _cclOAuthToken   :: !(Maybe OAuthToken)
     , _cclMaxResults   :: !(Maybe Int32)
     , _cclFields       :: !(Maybe Text)
-    , _cclAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContentCategoriesList'' with the minimum fields required to make a request.
@@ -102,7 +100,7 @@ data ContentCategoriesList' = ContentCategoriesList'
 --
 -- * 'cclPrettyPrint'
 --
--- * 'cclUserIp'
+-- * 'cclUserIP'
 --
 -- * 'cclSearchString'
 --
@@ -118,13 +116,11 @@ data ContentCategoriesList' = ContentCategoriesList'
 --
 -- * 'cclSortField'
 --
--- * 'cclOauthToken'
+-- * 'cclOAuthToken'
 --
 -- * 'cclMaxResults'
 --
 -- * 'cclFields'
---
--- * 'cclAlt'
 contentCategoriesList'
     :: Int64 -- ^ 'profileId'
     -> ContentCategoriesList'
@@ -132,7 +128,7 @@ contentCategoriesList' pCclProfileId_ =
     ContentCategoriesList'
     { _cclQuotaUser = Nothing
     , _cclPrettyPrint = True
-    , _cclUserIp = Nothing
+    , _cclUserIP = Nothing
     , _cclSearchString = Nothing
     , _cclIds = Nothing
     , _cclProfileId = pCclProfileId_
@@ -140,10 +136,9 @@ contentCategoriesList' pCclProfileId_ =
     , _cclKey = Nothing
     , _cclPageToken = Nothing
     , _cclSortField = Nothing
-    , _cclOauthToken = Nothing
+    , _cclOAuthToken = Nothing
     , _cclMaxResults = Nothing
     , _cclFields = Nothing
-    , _cclAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -161,9 +156,9 @@ cclPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cclUserIp :: Lens' ContentCategoriesList' (Maybe Text)
-cclUserIp
-  = lens _cclUserIp (\ s a -> s{_cclUserIp = a})
+cclUserIP :: Lens' ContentCategoriesList' (Maybe Text)
+cclUserIP
+  = lens _cclUserIP (\ s a -> s{_cclUserIP = a})
 
 -- | Allows searching for objects by name or ID. Wildcards (*) are allowed.
 -- For example, \"contentcategory*2015\" will return objects with names
@@ -195,7 +190,7 @@ cclSortOrder
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cclKey :: Lens' ContentCategoriesList' (Maybe Text)
+cclKey :: Lens' ContentCategoriesList' (Maybe Key)
 cclKey = lens _cclKey (\ s a -> s{_cclKey = a})
 
 -- | Value of the nextPageToken from the previous result page.
@@ -209,10 +204,10 @@ cclSortField
   = lens _cclSortField (\ s a -> s{_cclSortField = a})
 
 -- | OAuth 2.0 token for the current user.
-cclOauthToken :: Lens' ContentCategoriesList' (Maybe Text)
-cclOauthToken
-  = lens _cclOauthToken
-      (\ s a -> s{_cclOauthToken = a})
+cclOAuthToken :: Lens' ContentCategoriesList' (Maybe OAuthToken)
+cclOAuthToken
+  = lens _cclOAuthToken
+      (\ s a -> s{_cclOAuthToken = a})
 
 -- | Maximum number of results to return.
 cclMaxResults :: Lens' ContentCategoriesList' (Maybe Int32)
@@ -225,16 +220,16 @@ cclFields :: Lens' ContentCategoriesList' (Maybe Text)
 cclFields
   = lens _cclFields (\ s a -> s{_cclFields = a})
 
--- | Data format for the response.
-cclAlt :: Lens' ContentCategoriesList' Alt
-cclAlt = lens _cclAlt (\ s a -> s{_cclAlt = a})
+instance GoogleAuth ContentCategoriesList' where
+        authKey = cclKey . _Just
+        authToken = cclOAuthToken . _Just
 
 instance GoogleRequest ContentCategoriesList' where
         type Rs ContentCategoriesList' =
              ContentCategoriesListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ContentCategoriesList'{..}
-          = go _cclQuotaUser (Just _cclPrettyPrint) _cclUserIp
+          = go _cclQuotaUser (Just _cclPrettyPrint) _cclUserIP
               _cclSearchString
               _cclIds
               _cclProfileId
@@ -242,10 +237,10 @@ instance GoogleRequest ContentCategoriesList' where
               _cclKey
               _cclPageToken
               _cclSortField
-              _cclOauthToken
+              _cclOAuthToken
               _cclMaxResults
               _cclFields
-              (Just _cclAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ContentCategoriesListResource)

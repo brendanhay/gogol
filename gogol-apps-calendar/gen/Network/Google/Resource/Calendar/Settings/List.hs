@@ -33,13 +33,12 @@ module Network.Google.Resource.Calendar.Settings.List
     , slSyncToken
     , slQuotaUser
     , slPrettyPrint
-    , slUserIp
+    , slUserIP
     , slKey
     , slPageToken
-    , slOauthToken
+    , slOAuthToken
     , slMaxResults
     , slFields
-    , slAlt
     ) where
 
 import           Network.Google.AppsCalendar.Types
@@ -55,12 +54,12 @@ type SettingsListResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "maxResults" Int32 :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Get '[JSON] Settings
+                             QueryParam "alt" AltJSON :> Get '[JSON] Settings
 
 -- | Returns all user settings for the authenticated user.
 --
@@ -69,13 +68,12 @@ data SettingsList' = SettingsList'
     { _slSyncToken   :: !(Maybe Text)
     , _slQuotaUser   :: !(Maybe Text)
     , _slPrettyPrint :: !Bool
-    , _slUserIp      :: !(Maybe Text)
-    , _slKey         :: !(Maybe Text)
+    , _slUserIP      :: !(Maybe Text)
+    , _slKey         :: !(Maybe Key)
     , _slPageToken   :: !(Maybe Text)
-    , _slOauthToken  :: !(Maybe Text)
+    , _slOAuthToken  :: !(Maybe OAuthToken)
     , _slMaxResults  :: !(Maybe Int32)
     , _slFields      :: !(Maybe Text)
-    , _slAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SettingsList'' with the minimum fields required to make a request.
@@ -88,19 +86,17 @@ data SettingsList' = SettingsList'
 --
 -- * 'slPrettyPrint'
 --
--- * 'slUserIp'
+-- * 'slUserIP'
 --
 -- * 'slKey'
 --
 -- * 'slPageToken'
 --
--- * 'slOauthToken'
+-- * 'slOAuthToken'
 --
 -- * 'slMaxResults'
 --
 -- * 'slFields'
---
--- * 'slAlt'
 settingsList'
     :: SettingsList'
 settingsList' =
@@ -108,13 +104,12 @@ settingsList' =
     { _slSyncToken = Nothing
     , _slQuotaUser = Nothing
     , _slPrettyPrint = True
-    , _slUserIp = Nothing
+    , _slUserIP = Nothing
     , _slKey = Nothing
     , _slPageToken = Nothing
-    , _slOauthToken = Nothing
+    , _slOAuthToken = Nothing
     , _slMaxResults = Nothing
     , _slFields = Nothing
-    , _slAlt = JSON
     }
 
 -- | Token obtained from the nextSyncToken field returned on the last page of
@@ -143,13 +138,13 @@ slPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-slUserIp :: Lens' SettingsList' (Maybe Text)
-slUserIp = lens _slUserIp (\ s a -> s{_slUserIp = a})
+slUserIP :: Lens' SettingsList' (Maybe Text)
+slUserIP = lens _slUserIP (\ s a -> s{_slUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-slKey :: Lens' SettingsList' (Maybe Text)
+slKey :: Lens' SettingsList' (Maybe Key)
 slKey = lens _slKey (\ s a -> s{_slKey = a})
 
 -- | Token specifying which result page to return. Optional.
@@ -158,9 +153,9 @@ slPageToken
   = lens _slPageToken (\ s a -> s{_slPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-slOauthToken :: Lens' SettingsList' (Maybe Text)
-slOauthToken
-  = lens _slOauthToken (\ s a -> s{_slOauthToken = a})
+slOAuthToken :: Lens' SettingsList' (Maybe OAuthToken)
+slOAuthToken
+  = lens _slOAuthToken (\ s a -> s{_slOAuthToken = a})
 
 -- | Maximum number of entries returned on one result page. By default the
 -- value is 100 entries. The page size can never be larger than 250
@@ -173,22 +168,22 @@ slMaxResults
 slFields :: Lens' SettingsList' (Maybe Text)
 slFields = lens _slFields (\ s a -> s{_slFields = a})
 
--- | Data format for the response.
-slAlt :: Lens' SettingsList' Alt
-slAlt = lens _slAlt (\ s a -> s{_slAlt = a})
+instance GoogleAuth SettingsList' where
+        authKey = slKey . _Just
+        authToken = slOAuthToken . _Just
 
 instance GoogleRequest SettingsList' where
         type Rs SettingsList' = Settings
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u SettingsList'{..}
           = go _slSyncToken _slQuotaUser (Just _slPrettyPrint)
-              _slUserIp
+              _slUserIP
               _slKey
               _slPageToken
-              _slOauthToken
+              _slOAuthToken
               _slMaxResults
               _slFields
-              (Just _slAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy SettingsListResource)

@@ -39,13 +39,13 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.Create
     , pjcUploadType
     , pjcBearerToken
     , pjcKey
+    , pjcJob
     , pjcView
     , pjcProjectId
-    , pjcOauthToken
+    , pjcOAuthToken
     , pjcReplaceJobId
     , pjcFields
     , pjcCallback
-    , pjcAlt
     ) where
 
 import           Network.Google.Dataflow.Types
@@ -66,14 +66,15 @@ type ProjectsJobsCreateResource =
                        QueryParam "access_token" Text :>
                          QueryParam "uploadType" Text :>
                            QueryParam "bearer_token" Text :>
-                             QueryParam "key" Text :>
+                             QueryParam "key" Key :>
                                QueryParam "view" Text :>
-                                 QueryParam "oauth_token" Text :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "replaceJobId" Text :>
                                      QueryParam "fields" Text :>
                                        QueryParam "callback" Text :>
-                                         QueryParam "alt" Text :>
-                                           Post '[JSON] Job
+                                         QueryParam "alt" AltJSON :>
+                                           ReqBody '[JSON] Job :>
+                                             Post '[JSON] Job
 
 -- | Creates a dataflow job.
 --
@@ -87,14 +88,14 @@ data ProjectsJobsCreate' = ProjectsJobsCreate'
     , _pjcAccessToken    :: !(Maybe Text)
     , _pjcUploadType     :: !(Maybe Text)
     , _pjcBearerToken    :: !(Maybe Text)
-    , _pjcKey            :: !(Maybe Text)
+    , _pjcKey            :: !(Maybe Key)
+    , _pjcJob            :: !Job
     , _pjcView           :: !(Maybe Text)
     , _pjcProjectId      :: !Text
-    , _pjcOauthToken     :: !(Maybe Text)
+    , _pjcOAuthToken     :: !(Maybe OAuthToken)
     , _pjcReplaceJobId   :: !(Maybe Text)
     , _pjcFields         :: !(Maybe Text)
     , _pjcCallback       :: !(Maybe Text)
-    , _pjcAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsJobsCreate'' with the minimum fields required to make a request.
@@ -119,23 +120,24 @@ data ProjectsJobsCreate' = ProjectsJobsCreate'
 --
 -- * 'pjcKey'
 --
+-- * 'pjcJob'
+--
 -- * 'pjcView'
 --
 -- * 'pjcProjectId'
 --
--- * 'pjcOauthToken'
+-- * 'pjcOAuthToken'
 --
 -- * 'pjcReplaceJobId'
 --
 -- * 'pjcFields'
 --
 -- * 'pjcCallback'
---
--- * 'pjcAlt'
 projectsJobsCreate'
-    :: Text -- ^ 'projectId'
+    :: Job -- ^ 'Job'
+    -> Text -- ^ 'projectId'
     -> ProjectsJobsCreate'
-projectsJobsCreate' pPjcProjectId_ =
+projectsJobsCreate' pPjcJob_ pPjcProjectId_ =
     ProjectsJobsCreate'
     { _pjcXgafv = Nothing
     , _pjcQuotaUser = Nothing
@@ -146,13 +148,13 @@ projectsJobsCreate' pPjcProjectId_ =
     , _pjcUploadType = Nothing
     , _pjcBearerToken = Nothing
     , _pjcKey = Nothing
+    , _pjcJob = pPjcJob_
     , _pjcView = Nothing
     , _pjcProjectId = pPjcProjectId_
-    , _pjcOauthToken = Nothing
+    , _pjcOAuthToken = Nothing
     , _pjcReplaceJobId = Nothing
     , _pjcFields = Nothing
     , _pjcCallback = Nothing
-    , _pjcAlt = "json"
     }
 
 -- | V1 error format.
@@ -203,8 +205,12 @@ pjcBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pjcKey :: Lens' ProjectsJobsCreate' (Maybe Text)
+pjcKey :: Lens' ProjectsJobsCreate' (Maybe Key)
 pjcKey = lens _pjcKey (\ s a -> s{_pjcKey = a})
+
+-- | Multipart request metadata.
+pjcJob :: Lens' ProjectsJobsCreate' Job
+pjcJob = lens _pjcJob (\ s a -> s{_pjcJob = a})
 
 -- | Level of information requested in response.
 pjcView :: Lens' ProjectsJobsCreate' (Maybe Text)
@@ -216,10 +222,10 @@ pjcProjectId
   = lens _pjcProjectId (\ s a -> s{_pjcProjectId = a})
 
 -- | OAuth 2.0 token for the current user.
-pjcOauthToken :: Lens' ProjectsJobsCreate' (Maybe Text)
-pjcOauthToken
-  = lens _pjcOauthToken
-      (\ s a -> s{_pjcOauthToken = a})
+pjcOAuthToken :: Lens' ProjectsJobsCreate' (Maybe OAuthToken)
+pjcOAuthToken
+  = lens _pjcOAuthToken
+      (\ s a -> s{_pjcOAuthToken = a})
 
 -- | DEPRECATED. This field is now on the Job message.
 pjcReplaceJobId :: Lens' ProjectsJobsCreate' (Maybe Text)
@@ -237,9 +243,9 @@ pjcCallback :: Lens' ProjectsJobsCreate' (Maybe Text)
 pjcCallback
   = lens _pjcCallback (\ s a -> s{_pjcCallback = a})
 
--- | Data format for response.
-pjcAlt :: Lens' ProjectsJobsCreate' Text
-pjcAlt = lens _pjcAlt (\ s a -> s{_pjcAlt = a})
+instance GoogleAuth ProjectsJobsCreate' where
+        authKey = pjcKey . _Just
+        authToken = pjcOAuthToken . _Just
 
 instance GoogleRequest ProjectsJobsCreate' where
         type Rs ProjectsJobsCreate' = Job
@@ -254,11 +260,12 @@ instance GoogleRequest ProjectsJobsCreate' where
               _pjcKey
               _pjcView
               _pjcProjectId
-              _pjcOauthToken
+              _pjcOAuthToken
               _pjcReplaceJobId
               _pjcFields
               _pjcCallback
-              (Just _pjcAlt)
+              (Just AltJSON)
+              _pjcJob
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsJobsCreateResource)

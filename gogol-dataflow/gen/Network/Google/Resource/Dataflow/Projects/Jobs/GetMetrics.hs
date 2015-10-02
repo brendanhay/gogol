@@ -42,10 +42,9 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.GetMetrics
     , pjgmBearerToken
     , pjgmKey
     , pjgmProjectId
-    , pjgmOauthToken
+    , pjgmOAuthToken
     , pjgmFields
     , pjgmCallback
-    , pjgmAlt
     ) where
 
 import           Network.Google.Dataflow.Types
@@ -69,11 +68,11 @@ type ProjectsJobsGetMetricsResource =
                              QueryParam "access_token" Text :>
                                QueryParam "uploadType" Text :>
                                  QueryParam "bearer_token" Text :>
-                                   QueryParam "key" Text :>
-                                     QueryParam "oauth_token" Text :>
+                                   QueryParam "key" Key :>
+                                     QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "fields" Text :>
                                          QueryParam "callback" Text :>
-                                           QueryParam "alt" Text :>
+                                           QueryParam "alt" AltJSON :>
                                              Get '[JSON] JobMetrics
 
 -- | Request the job status.
@@ -90,12 +89,11 @@ data ProjectsJobsGetMetrics' = ProjectsJobsGetMetrics'
     , _pjgmAccessToken    :: !(Maybe Text)
     , _pjgmUploadType     :: !(Maybe Text)
     , _pjgmBearerToken    :: !(Maybe Text)
-    , _pjgmKey            :: !(Maybe Text)
+    , _pjgmKey            :: !(Maybe Key)
     , _pjgmProjectId      :: !Text
-    , _pjgmOauthToken     :: !(Maybe Text)
+    , _pjgmOAuthToken     :: !(Maybe OAuthToken)
     , _pjgmFields         :: !(Maybe Text)
     , _pjgmCallback       :: !(Maybe Text)
-    , _pjgmAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsJobsGetMetrics'' with the minimum fields required to make a request.
@@ -126,13 +124,11 @@ data ProjectsJobsGetMetrics' = ProjectsJobsGetMetrics'
 --
 -- * 'pjgmProjectId'
 --
--- * 'pjgmOauthToken'
+-- * 'pjgmOAuthToken'
 --
 -- * 'pjgmFields'
 --
 -- * 'pjgmCallback'
---
--- * 'pjgmAlt'
 projectsJobsGetMetrics'
     :: Text -- ^ 'jobId'
     -> Text -- ^ 'projectId'
@@ -151,10 +147,9 @@ projectsJobsGetMetrics' pPjgmJobId_ pPjgmProjectId_ =
     , _pjgmBearerToken = Nothing
     , _pjgmKey = Nothing
     , _pjgmProjectId = pPjgmProjectId_
-    , _pjgmOauthToken = Nothing
+    , _pjgmOAuthToken = Nothing
     , _pjgmFields = Nothing
     , _pjgmCallback = Nothing
-    , _pjgmAlt = "json"
     }
 
 -- | V1 error format.
@@ -219,7 +214,7 @@ pjgmBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pjgmKey :: Lens' ProjectsJobsGetMetrics' (Maybe Text)
+pjgmKey :: Lens' ProjectsJobsGetMetrics' (Maybe Key)
 pjgmKey = lens _pjgmKey (\ s a -> s{_pjgmKey = a})
 
 -- | A project id.
@@ -229,10 +224,10 @@ pjgmProjectId
       (\ s a -> s{_pjgmProjectId = a})
 
 -- | OAuth 2.0 token for the current user.
-pjgmOauthToken :: Lens' ProjectsJobsGetMetrics' (Maybe Text)
-pjgmOauthToken
-  = lens _pjgmOauthToken
-      (\ s a -> s{_pjgmOauthToken = a})
+pjgmOAuthToken :: Lens' ProjectsJobsGetMetrics' (Maybe OAuthToken)
+pjgmOAuthToken
+  = lens _pjgmOAuthToken
+      (\ s a -> s{_pjgmOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 pjgmFields :: Lens' ProjectsJobsGetMetrics' (Maybe Text)
@@ -244,9 +239,9 @@ pjgmCallback :: Lens' ProjectsJobsGetMetrics' (Maybe Text)
 pjgmCallback
   = lens _pjgmCallback (\ s a -> s{_pjgmCallback = a})
 
--- | Data format for response.
-pjgmAlt :: Lens' ProjectsJobsGetMetrics' Text
-pjgmAlt = lens _pjgmAlt (\ s a -> s{_pjgmAlt = a})
+instance GoogleAuth ProjectsJobsGetMetrics' where
+        authKey = pjgmKey . _Just
+        authToken = pjgmOAuthToken . _Just
 
 instance GoogleRequest ProjectsJobsGetMetrics' where
         type Rs ProjectsJobsGetMetrics' = JobMetrics
@@ -263,10 +258,10 @@ instance GoogleRequest ProjectsJobsGetMetrics' where
               _pjgmBearerToken
               _pjgmKey
               _pjgmProjectId
-              _pjgmOauthToken
+              _pjgmOAuthToken
               _pjgmFields
               _pjgmCallback
-              (Just _pjgmAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsJobsGetMetricsResource)

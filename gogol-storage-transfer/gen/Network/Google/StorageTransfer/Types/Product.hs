@@ -25,7 +25,7 @@ import           Network.Google.StorageTransfer.Types.Sum
 data ErrorSummary = ErrorSummary
     { _esErrorCount      :: !(Maybe Int64)
     , _esErrorCode       :: !(Maybe Text)
-    , _esErrorLogEntries :: !(Maybe [Maybe ErrorLogEntry])
+    , _esErrorLogEntries :: !(Maybe [ErrorLogEntry])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ErrorSummary' with the minimum fields required to make a request.
@@ -57,7 +57,7 @@ esErrorCode
   = lens _esErrorCode (\ s a -> s{_esErrorCode = a})
 
 -- | Error samples.
-esErrorLogEntries :: Lens' ErrorSummary [Maybe ErrorLogEntry]
+esErrorLogEntries :: Lens' ErrorSummary [ErrorLogEntry]
 esErrorLogEntries
   = lens _esErrorLogEntries
       (\ s a -> s{_esErrorLogEntries = a})
@@ -184,7 +184,7 @@ instance ToJSON Status where
 -- /See:/ 'listOperationsResponse' smart constructor.
 data ListOperationsResponse = ListOperationsResponse
     { _lorNextPageToken :: !(Maybe Text)
-    , _lorOperations    :: !(Maybe [Maybe Operation])
+    , _lorOperations    :: !(Maybe [Operation])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListOperationsResponse' with the minimum fields required to make a request.
@@ -209,7 +209,7 @@ lorNextPageToken
       (\ s a -> s{_lorNextPageToken = a})
 
 -- | A list of operations that matches the specified filter in the request.
-lorOperations :: Lens' ListOperationsResponse [Maybe Operation]
+lorOperations :: Lens' ListOperationsResponse [Operation]
 lorOperations
   = lens _lorOperations
       (\ s a -> s{_lorOperations = a})
@@ -402,7 +402,7 @@ instance ToJSON ObjectConditions where
 -- /See:/ 'operation' smart constructor.
 data Operation = Operation
     { _oDone     :: !(Maybe Bool)
-    , _oError    :: !(Maybe (Maybe Status))
+    , _oError    :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
     , _oName     :: !(Maybe Text)
     , _oMetadata :: !(Maybe OperationMetadata)
@@ -438,7 +438,7 @@ oDone :: Lens' Operation (Maybe Bool)
 oDone = lens _oDone (\ s a -> s{_oDone = a})
 
 -- | The error result of the operation in case of failure.
-oError :: Lens' Operation (Maybe (Maybe Status))
+oError :: Lens' Operation (Maybe Status)
 oError = lens _oError (\ s a -> s{_oError = a})
 
 -- | The normal response of the operation in case of success. If the original
@@ -488,9 +488,9 @@ instance ToJSON Operation where
 --
 -- /See:/ 'schedule' smart constructor.
 data Schedule = Schedule
-    { _sScheduleEndDate   :: !(Maybe (Maybe Date))
-    , _sScheduleStartDate :: !(Maybe (Maybe Date))
-    , _sStartTimeOfDay    :: !(Maybe (Maybe TimeOfDay))
+    { _sScheduleEndDate   :: !(Maybe Date)
+    , _sScheduleStartDate :: !(Maybe Date)
+    , _sStartTimeOfDay    :: !(Maybe TimeOfDay)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Schedule' with the minimum fields required to make a request.
@@ -514,13 +514,13 @@ schedule =
 -- | The last day the recurring transfer will be run. If \`scheduleEndDate\`
 -- is the same as \`scheduleStartDate\`, the transfer will be executed only
 -- once.
-sScheduleEndDate :: Lens' Schedule (Maybe (Maybe Date))
+sScheduleEndDate :: Lens' Schedule (Maybe Date)
 sScheduleEndDate
   = lens _sScheduleEndDate
       (\ s a -> s{_sScheduleEndDate = a})
 
 -- | The first day the recurring transfer is scheduled to run. Required.
-sScheduleStartDate :: Lens' Schedule (Maybe (Maybe Date))
+sScheduleStartDate :: Lens' Schedule (Maybe Date)
 sScheduleStartDate
   = lens _sScheduleStartDate
       (\ s a -> s{_sScheduleStartDate = a})
@@ -528,7 +528,7 @@ sScheduleStartDate
 -- | The time in UTC at which the transfer will be scheduled to start in a
 -- day. Transfers may start later than this time. If not specified,
 -- transfers are scheduled to start at midnight UTC.
-sStartTimeOfDay :: Lens' Schedule (Maybe (Maybe TimeOfDay))
+sStartTimeOfDay :: Lens' Schedule (Maybe TimeOfDay)
 sStartTimeOfDay
   = lens _sStartTimeOfDay
       (\ s a -> s{_sStartTimeOfDay = a})
@@ -659,7 +659,7 @@ instance ToJSON Date where
 --
 -- /See:/ 'updateTransferJobRequest' smart constructor.
 data UpdateTransferJobRequest = UpdateTransferJobRequest
-    { _utjrTransferJob                :: !(Maybe (Maybe TransferJob))
+    { _utjrTransferJob                :: !(Maybe TransferJob)
     , _utjrProjectId                  :: !(Maybe Text)
     , _utjrUpdateTransferJobFieldMask :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -683,7 +683,7 @@ updateTransferJobRequest =
     }
 
 -- | The job to update. Required.
-utjrTransferJob :: Lens' UpdateTransferJobRequest (Maybe (Maybe TransferJob))
+utjrTransferJob :: Lens' UpdateTransferJobRequest (Maybe TransferJob)
 utjrTransferJob
   = lens _utjrTransferJob
       (\ s a -> s{_utjrTransferJob = a})
@@ -970,11 +970,11 @@ instance ToJSON TransferCounters where
 data TransferJob = TransferJob
     { _tjCreationTime         :: !(Maybe Text)
     , _tjStatus               :: !(Maybe Text)
-    , _tjSchedule             :: !(Maybe (Maybe Schedule))
+    , _tjSchedule             :: !(Maybe Schedule)
     , _tjDeletionTime         :: !(Maybe Text)
     , _tjName                 :: !(Maybe Text)
     , _tjProjectId            :: !(Maybe Text)
-    , _tjTransferSpec         :: !(Maybe (Maybe TransferSpec))
+    , _tjTransferSpec         :: !(Maybe TransferSpec)
     , _tjDescription          :: !(Maybe Text)
     , _tjLastModificationTime :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -1031,7 +1031,7 @@ tjStatus :: Lens' TransferJob (Maybe Text)
 tjStatus = lens _tjStatus (\ s a -> s{_tjStatus = a})
 
 -- | Schedule specification. Required.
-tjSchedule :: Lens' TransferJob (Maybe (Maybe Schedule))
+tjSchedule :: Lens' TransferJob (Maybe Schedule)
 tjSchedule
   = lens _tjSchedule (\ s a -> s{_tjSchedule = a})
 
@@ -1055,7 +1055,7 @@ tjProjectId
   = lens _tjProjectId (\ s a -> s{_tjProjectId = a})
 
 -- | Transfer specification. Required.
-tjTransferSpec :: Lens' TransferJob (Maybe (Maybe TransferSpec))
+tjTransferSpec :: Lens' TransferJob (Maybe TransferSpec)
 tjTransferSpec
   = lens _tjTransferSpec
       (\ s a -> s{_tjTransferSpec = a})
@@ -1147,7 +1147,7 @@ instance ToJSON GcsData where
 -- /See:/ 'awsS3Data' smart constructor.
 data AwsS3Data = AwsS3Data
     { _asdBucketName   :: !(Maybe Text)
-    , _asdAwsAccessKey :: !(Maybe (Maybe AwsAccessKey))
+    , _asdAwsAccessKey :: !(Maybe AwsAccessKey)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AwsS3Data' with the minimum fields required to make a request.
@@ -1176,7 +1176,7 @@ asdBucketName
 -- | AWS access key used to sign the API requests to the AWS S3 bucket.
 -- Permissions on the bucket must be granted to the access ID of the AWS
 -- access key. Required.
-asdAwsAccessKey :: Lens' AwsS3Data (Maybe (Maybe AwsAccessKey))
+asdAwsAccessKey :: Lens' AwsS3Data (Maybe AwsAccessKey)
 asdAwsAccessKey
   = lens _asdAwsAccessKey
       (\ s a -> s{_asdAwsAccessKey = a})
@@ -1239,27 +1239,27 @@ instance ToJSON OperationMetadata where
 --
 -- /See:/ 'hTTPData' smart constructor.
 newtype HTTPData = HTTPData
-    { _httpdListUrl :: Maybe Text
+    { _httpdListURL :: Maybe Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'HTTPData' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'httpdListUrl'
+-- * 'httpdListURL'
 hTTPData
     :: HTTPData
 hTTPData =
     HTTPData
-    { _httpdListUrl = Nothing
+    { _httpdListURL = Nothing
     }
 
 -- | The URL that points to the file that stores the object list entries.
 -- This file must allow public access. Currently, only URLs with HTTP and
 -- HTTPS schemes are supported. Required.
-httpdListUrl :: Lens' HTTPData (Maybe Text)
-httpdListUrl
-  = lens _httpdListUrl (\ s a -> s{_httpdListUrl = a})
+httpdListURL :: Lens' HTTPData (Maybe Text)
+httpdListURL
+  = lens _httpdListURL (\ s a -> s{_httpdListURL = a})
 
 instance FromJSON HTTPData where
         parseJSON
@@ -1269,13 +1269,13 @@ instance FromJSON HTTPData where
 instance ToJSON HTTPData where
         toJSON HTTPData{..}
           = object
-              (catMaybes [("listUrl" .=) <$> _httpdListUrl])
+              (catMaybes [("listUrl" .=) <$> _httpdListURL])
 
 -- | An entry describing an error that has occurred.
 --
 -- /See:/ 'errorLogEntry' smart constructor.
 data ErrorLogEntry = ErrorLogEntry
-    { _eleUrl          :: !(Maybe Text)
+    { _eleURL          :: !(Maybe Text)
     , _eleErrorDetails :: !(Maybe [Text])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1283,21 +1283,21 @@ data ErrorLogEntry = ErrorLogEntry
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'eleUrl'
+-- * 'eleURL'
 --
 -- * 'eleErrorDetails'
 errorLogEntry
     :: ErrorLogEntry
 errorLogEntry =
     ErrorLogEntry
-    { _eleUrl = Nothing
+    { _eleURL = Nothing
     , _eleErrorDetails = Nothing
     }
 
 -- | A URL that refers to the target (a data source, a data sink, or an
 -- object) with which the error is associated. Required.
-eleUrl :: Lens' ErrorLogEntry (Maybe Text)
-eleUrl = lens _eleUrl (\ s a -> s{_eleUrl = a})
+eleURL :: Lens' ErrorLogEntry (Maybe Text)
+eleURL = lens _eleURL (\ s a -> s{_eleURL = a})
 
 -- | A list of messages that carry the error details.
 eleErrorDetails :: Lens' ErrorLogEntry [Text]
@@ -1318,7 +1318,7 @@ instance ToJSON ErrorLogEntry where
         toJSON ErrorLogEntry{..}
           = object
               (catMaybes
-                 [("url" .=) <$> _eleUrl,
+                 [("url" .=) <$> _eleURL,
                   ("errorDetails" .=) <$> _eleErrorDetails])
 
 -- | Represents a time of day. The date and time zone are either not
@@ -1468,14 +1468,14 @@ instance ToJSON TransferOptions where
 -- /See:/ 'transferOperation' smart constructor.
 data TransferOperation = TransferOperation
     { _toStatus          :: !(Maybe Text)
-    , _toCounters        :: !(Maybe (Maybe TransferCounters))
+    , _toCounters        :: !(Maybe TransferCounters)
     , _toStartTime       :: !(Maybe Text)
     , _toTransferJobName :: !(Maybe Text)
     , _toName            :: !(Maybe Text)
     , _toEndTime         :: !(Maybe Text)
     , _toProjectId       :: !(Maybe Text)
-    , _toTransferSpec    :: !(Maybe (Maybe TransferSpec))
-    , _toErrorBreakdowns :: !(Maybe [Maybe ErrorSummary])
+    , _toTransferSpec    :: !(Maybe TransferSpec)
+    , _toErrorBreakdowns :: !(Maybe [ErrorSummary])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TransferOperation' with the minimum fields required to make a request.
@@ -1519,7 +1519,7 @@ toStatus :: Lens' TransferOperation (Maybe Text)
 toStatus = lens _toStatus (\ s a -> s{_toStatus = a})
 
 -- | Information about the progress of the transfer operation.
-toCounters :: Lens' TransferOperation (Maybe (Maybe TransferCounters))
+toCounters :: Lens' TransferOperation (Maybe TransferCounters)
 toCounters
   = lens _toCounters (\ s a -> s{_toCounters = a})
 
@@ -1550,13 +1550,13 @@ toProjectId
   = lens _toProjectId (\ s a -> s{_toProjectId = a})
 
 -- | Transfer specification. Required.
-toTransferSpec :: Lens' TransferOperation (Maybe (Maybe TransferSpec))
+toTransferSpec :: Lens' TransferOperation (Maybe TransferSpec)
 toTransferSpec
   = lens _toTransferSpec
       (\ s a -> s{_toTransferSpec = a})
 
 -- | Summarizes errors encountered with sample error log entries.
-toErrorBreakdowns :: Lens' TransferOperation [Maybe ErrorSummary]
+toErrorBreakdowns :: Lens' TransferOperation [ErrorSummary]
 toErrorBreakdowns
   = lens _toErrorBreakdowns
       (\ s a -> s{_toErrorBreakdowns = a})
@@ -1595,12 +1595,12 @@ instance ToJSON TransferOperation where
 --
 -- /See:/ 'transferSpec' smart constructor.
 data TransferSpec = TransferSpec
-    { _tsGcsDataSource    :: !(Maybe (Maybe GcsData))
-    , _tsObjectConditions :: !(Maybe (Maybe ObjectConditions))
-    , _tsHttpDataSource   :: !(Maybe (Maybe HTTPData))
-    , _tsAwsS3DataSource  :: !(Maybe (Maybe AwsS3Data))
-    , _tsGcsDataSink      :: !(Maybe (Maybe GcsData))
-    , _tsTransferOptions  :: !(Maybe (Maybe TransferOptions))
+    { _tsGcsDataSource    :: !(Maybe GcsData)
+    , _tsObjectConditions :: !(Maybe ObjectConditions)
+    , _tsHTTPDataSource   :: !(Maybe HTTPData)
+    , _tsAwsS3DataSource  :: !(Maybe AwsS3Data)
+    , _tsGcsDataSink      :: !(Maybe GcsData)
+    , _tsTransferOptions  :: !(Maybe TransferOptions)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TransferSpec' with the minimum fields required to make a request.
@@ -1611,7 +1611,7 @@ data TransferSpec = TransferSpec
 --
 -- * 'tsObjectConditions'
 --
--- * 'tsHttpDataSource'
+-- * 'tsHTTPDataSource'
 --
 -- * 'tsAwsS3DataSource'
 --
@@ -1624,14 +1624,14 @@ transferSpec =
     TransferSpec
     { _tsGcsDataSource = Nothing
     , _tsObjectConditions = Nothing
-    , _tsHttpDataSource = Nothing
+    , _tsHTTPDataSource = Nothing
     , _tsAwsS3DataSource = Nothing
     , _tsGcsDataSink = Nothing
     , _tsTransferOptions = Nothing
     }
 
 -- | A Google Cloud Storage data source.
-tsGcsDataSource :: Lens' TransferSpec (Maybe (Maybe GcsData))
+tsGcsDataSource :: Lens' TransferSpec (Maybe GcsData)
 tsGcsDataSource
   = lens _tsGcsDataSource
       (\ s a -> s{_tsGcsDataSource = a})
@@ -1640,25 +1640,25 @@ tsGcsDataSource
 -- set of data source and data sink objects. Object conditions based on
 -- objects\' \`lastModificationTime\` do not exclude objects in a data
 -- sink.
-tsObjectConditions :: Lens' TransferSpec (Maybe (Maybe ObjectConditions))
+tsObjectConditions :: Lens' TransferSpec (Maybe ObjectConditions)
 tsObjectConditions
   = lens _tsObjectConditions
       (\ s a -> s{_tsObjectConditions = a})
 
 -- | An HTTP URL data source.
-tsHttpDataSource :: Lens' TransferSpec (Maybe (Maybe HTTPData))
-tsHttpDataSource
-  = lens _tsHttpDataSource
-      (\ s a -> s{_tsHttpDataSource = a})
+tsHTTPDataSource :: Lens' TransferSpec (Maybe HTTPData)
+tsHTTPDataSource
+  = lens _tsHTTPDataSource
+      (\ s a -> s{_tsHTTPDataSource = a})
 
 -- | An AWS S3 data source.
-tsAwsS3DataSource :: Lens' TransferSpec (Maybe (Maybe AwsS3Data))
+tsAwsS3DataSource :: Lens' TransferSpec (Maybe AwsS3Data)
 tsAwsS3DataSource
   = lens _tsAwsS3DataSource
       (\ s a -> s{_tsAwsS3DataSource = a})
 
 -- | A Google Cloud Storage data sink.
-tsGcsDataSink :: Lens' TransferSpec (Maybe (Maybe GcsData))
+tsGcsDataSink :: Lens' TransferSpec (Maybe GcsData)
 tsGcsDataSink
   = lens _tsGcsDataSink
       (\ s a -> s{_tsGcsDataSink = a})
@@ -1666,7 +1666,7 @@ tsGcsDataSink
 -- | If the option \`deleteObjectsUniqueInSink\` is \`true\`, object
 -- conditions based on objects\' \`lastModificationTime\` are ignored and
 -- do not exclude objects in a data source or a data sink.
-tsTransferOptions :: Lens' TransferSpec (Maybe (Maybe TransferOptions))
+tsTransferOptions :: Lens' TransferSpec (Maybe TransferOptions)
 tsTransferOptions
   = lens _tsTransferOptions
       (\ s a -> s{_tsTransferOptions = a})
@@ -1689,7 +1689,7 @@ instance ToJSON TransferSpec where
               (catMaybes
                  [("gcsDataSource" .=) <$> _tsGcsDataSource,
                   ("objectConditions" .=) <$> _tsObjectConditions,
-                  ("httpDataSource" .=) <$> _tsHttpDataSource,
+                  ("httpDataSource" .=) <$> _tsHTTPDataSource,
                   ("awsS3DataSource" .=) <$> _tsAwsS3DataSource,
                   ("gcsDataSink" .=) <$> _tsGcsDataSink,
                   ("transferOptions" .=) <$> _tsTransferOptions])
@@ -1699,7 +1699,7 @@ instance ToJSON TransferSpec where
 -- /See:/ 'listTransferJobsResponse' smart constructor.
 data ListTransferJobsResponse = ListTransferJobsResponse
     { _ltjrNextPageToken :: !(Maybe Text)
-    , _ltjrTransferJobs  :: !(Maybe [Maybe TransferJob])
+    , _ltjrTransferJobs  :: !(Maybe [TransferJob])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListTransferJobsResponse' with the minimum fields required to make a request.
@@ -1724,7 +1724,7 @@ ltjrNextPageToken
       (\ s a -> s{_ltjrNextPageToken = a})
 
 -- | A list of transfer jobs.
-ltjrTransferJobs :: Lens' ListTransferJobsResponse [Maybe TransferJob]
+ltjrTransferJobs :: Lens' ListTransferJobsResponse [TransferJob]
 ltjrTransferJobs
   = lens _ltjrTransferJobs
       (\ s a -> s{_ltjrTransferJobs = a})

@@ -33,12 +33,12 @@ module Network.Google.Resource.Reseller.Customers.Patch
     -- * Request Lenses
     , cpQuotaUser
     , cpPrettyPrint
-    , cpUserIp
+    , cpUserIP
     , cpCustomerId
+    , cpCustomer
     , cpKey
-    , cpOauthToken
+    , cpOAuthToken
     , cpFields
-    , cpAlt
     ) where
 
 import           Network.Google.AppsReseller.Types
@@ -52,10 +52,11 @@ type CustomersPatchResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Patch '[JSON] Customer
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Customer :> Patch '[JSON] Customer
 
 -- | Update a customer resource if one it exists and is owned by the
 -- reseller. This method supports patch semantics.
@@ -64,12 +65,12 @@ type CustomersPatchResource =
 data CustomersPatch' = CustomersPatch'
     { _cpQuotaUser   :: !(Maybe Text)
     , _cpPrettyPrint :: !Bool
-    , _cpUserIp      :: !(Maybe Text)
+    , _cpUserIP      :: !(Maybe Text)
     , _cpCustomerId  :: !Text
-    , _cpKey         :: !(Maybe Text)
-    , _cpOauthToken  :: !(Maybe Text)
+    , _cpCustomer    :: !Customer
+    , _cpKey         :: !(Maybe Key)
+    , _cpOAuthToken  :: !(Maybe OAuthToken)
     , _cpFields      :: !(Maybe Text)
-    , _cpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CustomersPatch'' with the minimum fields required to make a request.
@@ -80,30 +81,31 @@ data CustomersPatch' = CustomersPatch'
 --
 -- * 'cpPrettyPrint'
 --
--- * 'cpUserIp'
+-- * 'cpUserIP'
 --
 -- * 'cpCustomerId'
 --
+-- * 'cpCustomer'
+--
 -- * 'cpKey'
 --
--- * 'cpOauthToken'
+-- * 'cpOAuthToken'
 --
 -- * 'cpFields'
---
--- * 'cpAlt'
 customersPatch'
     :: Text -- ^ 'customerId'
+    -> Customer -- ^ 'Customer'
     -> CustomersPatch'
-customersPatch' pCpCustomerId_ =
+customersPatch' pCpCustomerId_ pCpCustomer_ =
     CustomersPatch'
     { _cpQuotaUser = Nothing
     , _cpPrettyPrint = True
-    , _cpUserIp = Nothing
+    , _cpUserIP = Nothing
     , _cpCustomerId = pCpCustomerId_
+    , _cpCustomer = pCpCustomer_
     , _cpKey = Nothing
-    , _cpOauthToken = Nothing
+    , _cpOAuthToken = Nothing
     , _cpFields = Nothing
-    , _cpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -121,43 +123,49 @@ cpPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cpUserIp :: Lens' CustomersPatch' (Maybe Text)
-cpUserIp = lens _cpUserIp (\ s a -> s{_cpUserIp = a})
+cpUserIP :: Lens' CustomersPatch' (Maybe Text)
+cpUserIP = lens _cpUserIP (\ s a -> s{_cpUserIP = a})
 
 -- | Id of the Customer
 cpCustomerId :: Lens' CustomersPatch' Text
 cpCustomerId
   = lens _cpCustomerId (\ s a -> s{_cpCustomerId = a})
 
+-- | Multipart request metadata.
+cpCustomer :: Lens' CustomersPatch' Customer
+cpCustomer
+  = lens _cpCustomer (\ s a -> s{_cpCustomer = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cpKey :: Lens' CustomersPatch' (Maybe Text)
+cpKey :: Lens' CustomersPatch' (Maybe Key)
 cpKey = lens _cpKey (\ s a -> s{_cpKey = a})
 
 -- | OAuth 2.0 token for the current user.
-cpOauthToken :: Lens' CustomersPatch' (Maybe Text)
-cpOauthToken
-  = lens _cpOauthToken (\ s a -> s{_cpOauthToken = a})
+cpOAuthToken :: Lens' CustomersPatch' (Maybe OAuthToken)
+cpOAuthToken
+  = lens _cpOAuthToken (\ s a -> s{_cpOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cpFields :: Lens' CustomersPatch' (Maybe Text)
 cpFields = lens _cpFields (\ s a -> s{_cpFields = a})
 
--- | Data format for the response.
-cpAlt :: Lens' CustomersPatch' Alt
-cpAlt = lens _cpAlt (\ s a -> s{_cpAlt = a})
+instance GoogleAuth CustomersPatch' where
+        authKey = cpKey . _Just
+        authToken = cpOAuthToken . _Just
 
 instance GoogleRequest CustomersPatch' where
         type Rs CustomersPatch' = Customer
         request = requestWithRoute defReq appsResellerURL
         requestWithRoute r u CustomersPatch'{..}
-          = go _cpQuotaUser (Just _cpPrettyPrint) _cpUserIp
+          = go _cpQuotaUser (Just _cpPrettyPrint) _cpUserIP
               _cpCustomerId
               _cpKey
-              _cpOauthToken
+              _cpOAuthToken
               _cpFields
-              (Just _cpAlt)
+              (Just AltJSON)
+              _cpCustomer
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CustomersPatchResource)

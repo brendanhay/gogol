@@ -32,12 +32,12 @@ module Network.Google.Resource.DFAReporting.RemarketingListShares.Update
     -- * Request Lenses
     , rlsuQuotaUser
     , rlsuPrettyPrint
-    , rlsuUserIp
+    , rlsuUserIP
     , rlsuProfileId
+    , rlsuRemarketingListShare
     , rlsuKey
-    , rlsuOauthToken
+    , rlsuOAuthToken
     , rlsuFields
-    , rlsuAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,24 +52,25 @@ type RemarketingListSharesUpdateResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :>
-                         Put '[JSON] RemarketingListShare
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] RemarketingListShare :>
+                           Put '[JSON] RemarketingListShare
 
 -- | Updates an existing remarketing list share.
 --
 -- /See:/ 'remarketingListSharesUpdate'' smart constructor.
 data RemarketingListSharesUpdate' = RemarketingListSharesUpdate'
-    { _rlsuQuotaUser   :: !(Maybe Text)
-    , _rlsuPrettyPrint :: !Bool
-    , _rlsuUserIp      :: !(Maybe Text)
-    , _rlsuProfileId   :: !Int64
-    , _rlsuKey         :: !(Maybe Text)
-    , _rlsuOauthToken  :: !(Maybe Text)
-    , _rlsuFields      :: !(Maybe Text)
-    , _rlsuAlt         :: !Alt
+    { _rlsuQuotaUser            :: !(Maybe Text)
+    , _rlsuPrettyPrint          :: !Bool
+    , _rlsuUserIP               :: !(Maybe Text)
+    , _rlsuProfileId            :: !Int64
+    , _rlsuRemarketingListShare :: !RemarketingListShare
+    , _rlsuKey                  :: !(Maybe Key)
+    , _rlsuOAuthToken           :: !(Maybe OAuthToken)
+    , _rlsuFields               :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RemarketingListSharesUpdate'' with the minimum fields required to make a request.
@@ -80,30 +81,31 @@ data RemarketingListSharesUpdate' = RemarketingListSharesUpdate'
 --
 -- * 'rlsuPrettyPrint'
 --
--- * 'rlsuUserIp'
+-- * 'rlsuUserIP'
 --
 -- * 'rlsuProfileId'
 --
+-- * 'rlsuRemarketingListShare'
+--
 -- * 'rlsuKey'
 --
--- * 'rlsuOauthToken'
+-- * 'rlsuOAuthToken'
 --
 -- * 'rlsuFields'
---
--- * 'rlsuAlt'
 remarketingListSharesUpdate'
     :: Int64 -- ^ 'profileId'
+    -> RemarketingListShare -- ^ 'RemarketingListShare'
     -> RemarketingListSharesUpdate'
-remarketingListSharesUpdate' pRlsuProfileId_ =
+remarketingListSharesUpdate' pRlsuProfileId_ pRlsuRemarketingListShare_ =
     RemarketingListSharesUpdate'
     { _rlsuQuotaUser = Nothing
     , _rlsuPrettyPrint = True
-    , _rlsuUserIp = Nothing
+    , _rlsuUserIP = Nothing
     , _rlsuProfileId = pRlsuProfileId_
+    , _rlsuRemarketingListShare = pRlsuRemarketingListShare_
     , _rlsuKey = Nothing
-    , _rlsuOauthToken = Nothing
+    , _rlsuOAuthToken = Nothing
     , _rlsuFields = Nothing
-    , _rlsuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -122,9 +124,9 @@ rlsuPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rlsuUserIp :: Lens' RemarketingListSharesUpdate' (Maybe Text)
-rlsuUserIp
-  = lens _rlsuUserIp (\ s a -> s{_rlsuUserIp = a})
+rlsuUserIP :: Lens' RemarketingListSharesUpdate' (Maybe Text)
+rlsuUserIP
+  = lens _rlsuUserIP (\ s a -> s{_rlsuUserIP = a})
 
 -- | User profile ID associated with this request.
 rlsuProfileId :: Lens' RemarketingListSharesUpdate' Int64
@@ -132,26 +134,33 @@ rlsuProfileId
   = lens _rlsuProfileId
       (\ s a -> s{_rlsuProfileId = a})
 
+-- | Multipart request metadata.
+rlsuRemarketingListShare :: Lens' RemarketingListSharesUpdate' RemarketingListShare
+rlsuRemarketingListShare
+  = lens _rlsuRemarketingListShare
+      (\ s a -> s{_rlsuRemarketingListShare = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rlsuKey :: Lens' RemarketingListSharesUpdate' (Maybe Text)
+rlsuKey :: Lens' RemarketingListSharesUpdate' (Maybe Key)
 rlsuKey = lens _rlsuKey (\ s a -> s{_rlsuKey = a})
 
 -- | OAuth 2.0 token for the current user.
-rlsuOauthToken :: Lens' RemarketingListSharesUpdate' (Maybe Text)
-rlsuOauthToken
-  = lens _rlsuOauthToken
-      (\ s a -> s{_rlsuOauthToken = a})
+rlsuOAuthToken :: Lens' RemarketingListSharesUpdate' (Maybe OAuthToken)
+rlsuOAuthToken
+  = lens _rlsuOAuthToken
+      (\ s a -> s{_rlsuOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 rlsuFields :: Lens' RemarketingListSharesUpdate' (Maybe Text)
 rlsuFields
   = lens _rlsuFields (\ s a -> s{_rlsuFields = a})
 
--- | Data format for the response.
-rlsuAlt :: Lens' RemarketingListSharesUpdate' Alt
-rlsuAlt = lens _rlsuAlt (\ s a -> s{_rlsuAlt = a})
+instance GoogleAuth RemarketingListSharesUpdate'
+         where
+        authKey = rlsuKey . _Just
+        authToken = rlsuOAuthToken . _Just
 
 instance GoogleRequest RemarketingListSharesUpdate'
          where
@@ -160,12 +169,13 @@ instance GoogleRequest RemarketingListSharesUpdate'
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u RemarketingListSharesUpdate'{..}
           = go _rlsuQuotaUser (Just _rlsuPrettyPrint)
-              _rlsuUserIp
+              _rlsuUserIP
               _rlsuProfileId
               _rlsuKey
-              _rlsuOauthToken
+              _rlsuOAuthToken
               _rlsuFields
-              (Just _rlsuAlt)
+              (Just AltJSON)
+              _rlsuRemarketingListShare
           where go
                   = clientWithRoute
                       (Proxy :: Proxy RemarketingListSharesUpdateResource)

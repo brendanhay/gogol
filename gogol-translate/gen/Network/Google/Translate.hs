@@ -73,9 +73,6 @@ module Network.Google.Translate
     , TranslationsListResponse
     , translationsListResponse
     , tlrTranslations
-
-    -- ** Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.Prelude

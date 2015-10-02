@@ -34,11 +34,10 @@ module Network.Google.Resource.GamesManagement.TurnBasedMatches.ResetForAllPlaye
     -- * Request Lenses
     , tbmrfapQuotaUser
     , tbmrfapPrettyPrint
-    , tbmrfapUserIp
+    , tbmrfapUserIP
     , tbmrfapKey
-    , tbmrfapOauthToken
+    , tbmrfapOAuthToken
     , tbmrfapFields
-    , tbmrfapAlt
     ) where
 
 import           Network.Google.GamesManagement.Types
@@ -52,10 +51,10 @@ type TurnBasedMatchesResetForAllPlayersResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Post '[JSON] ()
+                     QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Deletes turn-based matches where the only match participants are from
 -- whitelisted tester accounts for your application. This method is only
@@ -65,11 +64,10 @@ type TurnBasedMatchesResetForAllPlayersResource =
 data TurnBasedMatchesResetForAllPlayers' = TurnBasedMatchesResetForAllPlayers'
     { _tbmrfapQuotaUser   :: !(Maybe Text)
     , _tbmrfapPrettyPrint :: !Bool
-    , _tbmrfapUserIp      :: !(Maybe Text)
-    , _tbmrfapKey         :: !(Maybe Text)
-    , _tbmrfapOauthToken  :: !(Maybe Text)
+    , _tbmrfapUserIP      :: !(Maybe Text)
+    , _tbmrfapKey         :: !(Maybe Key)
+    , _tbmrfapOAuthToken  :: !(Maybe OAuthToken)
     , _tbmrfapFields      :: !(Maybe Text)
-    , _tbmrfapAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchesResetForAllPlayers'' with the minimum fields required to make a request.
@@ -80,26 +78,23 @@ data TurnBasedMatchesResetForAllPlayers' = TurnBasedMatchesResetForAllPlayers'
 --
 -- * 'tbmrfapPrettyPrint'
 --
--- * 'tbmrfapUserIp'
+-- * 'tbmrfapUserIP'
 --
 -- * 'tbmrfapKey'
 --
--- * 'tbmrfapOauthToken'
+-- * 'tbmrfapOAuthToken'
 --
 -- * 'tbmrfapFields'
---
--- * 'tbmrfapAlt'
 turnBasedMatchesResetForAllPlayers'
     :: TurnBasedMatchesResetForAllPlayers'
 turnBasedMatchesResetForAllPlayers' =
     TurnBasedMatchesResetForAllPlayers'
     { _tbmrfapQuotaUser = Nothing
     , _tbmrfapPrettyPrint = True
-    , _tbmrfapUserIp = Nothing
+    , _tbmrfapUserIP = Nothing
     , _tbmrfapKey = Nothing
-    , _tbmrfapOauthToken = Nothing
+    , _tbmrfapOAuthToken = Nothing
     , _tbmrfapFields = Nothing
-    , _tbmrfapAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -118,23 +113,23 @@ tbmrfapPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tbmrfapUserIp :: Lens' TurnBasedMatchesResetForAllPlayers' (Maybe Text)
-tbmrfapUserIp
-  = lens _tbmrfapUserIp
-      (\ s a -> s{_tbmrfapUserIp = a})
+tbmrfapUserIP :: Lens' TurnBasedMatchesResetForAllPlayers' (Maybe Text)
+tbmrfapUserIP
+  = lens _tbmrfapUserIP
+      (\ s a -> s{_tbmrfapUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tbmrfapKey :: Lens' TurnBasedMatchesResetForAllPlayers' (Maybe Text)
+tbmrfapKey :: Lens' TurnBasedMatchesResetForAllPlayers' (Maybe Key)
 tbmrfapKey
   = lens _tbmrfapKey (\ s a -> s{_tbmrfapKey = a})
 
 -- | OAuth 2.0 token for the current user.
-tbmrfapOauthToken :: Lens' TurnBasedMatchesResetForAllPlayers' (Maybe Text)
-tbmrfapOauthToken
-  = lens _tbmrfapOauthToken
-      (\ s a -> s{_tbmrfapOauthToken = a})
+tbmrfapOAuthToken :: Lens' TurnBasedMatchesResetForAllPlayers' (Maybe OAuthToken)
+tbmrfapOAuthToken
+  = lens _tbmrfapOAuthToken
+      (\ s a -> s{_tbmrfapOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 tbmrfapFields :: Lens' TurnBasedMatchesResetForAllPlayers' (Maybe Text)
@@ -142,10 +137,10 @@ tbmrfapFields
   = lens _tbmrfapFields
       (\ s a -> s{_tbmrfapFields = a})
 
--- | Data format for the response.
-tbmrfapAlt :: Lens' TurnBasedMatchesResetForAllPlayers' Alt
-tbmrfapAlt
-  = lens _tbmrfapAlt (\ s a -> s{_tbmrfapAlt = a})
+instance GoogleAuth
+         TurnBasedMatchesResetForAllPlayers' where
+        authKey = tbmrfapKey . _Just
+        authToken = tbmrfapOAuthToken . _Just
 
 instance GoogleRequest
          TurnBasedMatchesResetForAllPlayers' where
@@ -154,11 +149,11 @@ instance GoogleRequest
         requestWithRoute r u
           TurnBasedMatchesResetForAllPlayers'{..}
           = go _tbmrfapQuotaUser (Just _tbmrfapPrettyPrint)
-              _tbmrfapUserIp
+              _tbmrfapUserIP
               _tbmrfapKey
-              _tbmrfapOauthToken
+              _tbmrfapOAuthToken
               _tbmrfapFields
-              (Just _tbmrfapAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

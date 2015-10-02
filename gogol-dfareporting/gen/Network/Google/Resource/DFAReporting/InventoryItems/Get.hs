@@ -32,14 +32,13 @@ module Network.Google.Resource.DFAReporting.InventoryItems.Get
     -- * Request Lenses
     , iigQuotaUser
     , iigPrettyPrint
-    , iigUserIp
+    , iigUserIP
     , iigProfileId
     , iigKey
     , iigId
     , iigProjectId
-    , iigOauthToken
+    , iigOAuthToken
     , iigFields
-    , iigAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -57,10 +56,11 @@ type InventoryItemsGetResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Get '[JSON] InventoryItem
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] InventoryItem
 
 -- | Gets one inventory item by ID.
 --
@@ -68,14 +68,13 @@ type InventoryItemsGetResource =
 data InventoryItemsGet' = InventoryItemsGet'
     { _iigQuotaUser   :: !(Maybe Text)
     , _iigPrettyPrint :: !Bool
-    , _iigUserIp      :: !(Maybe Text)
+    , _iigUserIP      :: !(Maybe Text)
     , _iigProfileId   :: !Int64
-    , _iigKey         :: !(Maybe Text)
+    , _iigKey         :: !(Maybe Key)
     , _iigId          :: !Int64
     , _iigProjectId   :: !Int64
-    , _iigOauthToken  :: !(Maybe Text)
+    , _iigOAuthToken  :: !(Maybe OAuthToken)
     , _iigFields      :: !(Maybe Text)
-    , _iigAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InventoryItemsGet'' with the minimum fields required to make a request.
@@ -86,7 +85,7 @@ data InventoryItemsGet' = InventoryItemsGet'
 --
 -- * 'iigPrettyPrint'
 --
--- * 'iigUserIp'
+-- * 'iigUserIP'
 --
 -- * 'iigProfileId'
 --
@@ -96,11 +95,9 @@ data InventoryItemsGet' = InventoryItemsGet'
 --
 -- * 'iigProjectId'
 --
--- * 'iigOauthToken'
+-- * 'iigOAuthToken'
 --
 -- * 'iigFields'
---
--- * 'iigAlt'
 inventoryItemsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
@@ -110,14 +107,13 @@ inventoryItemsGet' pIigProfileId_ pIigId_ pIigProjectId_ =
     InventoryItemsGet'
     { _iigQuotaUser = Nothing
     , _iigPrettyPrint = True
-    , _iigUserIp = Nothing
+    , _iigUserIP = Nothing
     , _iigProfileId = pIigProfileId_
     , _iigKey = Nothing
     , _iigId = pIigId_
     , _iigProjectId = pIigProjectId_
-    , _iigOauthToken = Nothing
+    , _iigOAuthToken = Nothing
     , _iigFields = Nothing
-    , _iigAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,9 +131,9 @@ iigPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-iigUserIp :: Lens' InventoryItemsGet' (Maybe Text)
-iigUserIp
-  = lens _iigUserIp (\ s a -> s{_iigUserIp = a})
+iigUserIP :: Lens' InventoryItemsGet' (Maybe Text)
+iigUserIP
+  = lens _iigUserIP (\ s a -> s{_iigUserIP = a})
 
 -- | User profile ID associated with this request.
 iigProfileId :: Lens' InventoryItemsGet' Int64
@@ -147,7 +143,7 @@ iigProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-iigKey :: Lens' InventoryItemsGet' (Maybe Text)
+iigKey :: Lens' InventoryItemsGet' (Maybe Key)
 iigKey = lens _iigKey (\ s a -> s{_iigKey = a})
 
 -- | Inventory item ID.
@@ -160,32 +156,32 @@ iigProjectId
   = lens _iigProjectId (\ s a -> s{_iigProjectId = a})
 
 -- | OAuth 2.0 token for the current user.
-iigOauthToken :: Lens' InventoryItemsGet' (Maybe Text)
-iigOauthToken
-  = lens _iigOauthToken
-      (\ s a -> s{_iigOauthToken = a})
+iigOAuthToken :: Lens' InventoryItemsGet' (Maybe OAuthToken)
+iigOAuthToken
+  = lens _iigOAuthToken
+      (\ s a -> s{_iigOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 iigFields :: Lens' InventoryItemsGet' (Maybe Text)
 iigFields
   = lens _iigFields (\ s a -> s{_iigFields = a})
 
--- | Data format for the response.
-iigAlt :: Lens' InventoryItemsGet' Alt
-iigAlt = lens _iigAlt (\ s a -> s{_iigAlt = a})
+instance GoogleAuth InventoryItemsGet' where
+        authKey = iigKey . _Just
+        authToken = iigOAuthToken . _Just
 
 instance GoogleRequest InventoryItemsGet' where
         type Rs InventoryItemsGet' = InventoryItem
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u InventoryItemsGet'{..}
-          = go _iigQuotaUser (Just _iigPrettyPrint) _iigUserIp
+          = go _iigQuotaUser (Just _iigPrettyPrint) _iigUserIP
               _iigProfileId
               _iigKey
               _iigId
               _iigProjectId
-              _iigOauthToken
+              _iigOAuthToken
               _iigFields
-              (Just _iigAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InventoryItemsGetResource)

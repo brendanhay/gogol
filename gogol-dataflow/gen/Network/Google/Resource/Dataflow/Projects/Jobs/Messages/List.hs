@@ -45,11 +45,10 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.Messages.List
     , pjmlMinimumImportance
     , pjmlPageToken
     , pjmlProjectId
-    , pjmlOauthToken
+    , pjmlOAuthToken
     , pjmlPageSize
     , pjmlFields
     , pjmlCallback
-    , pjmlAlt
     ) where
 
 import           Network.Google.Dataflow.Types
@@ -73,15 +72,16 @@ type ProjectsJobsMessagesListResource =
                              QueryParam "access_token" Text :>
                                QueryParam "uploadType" Text :>
                                  QueryParam "bearer_token" Text :>
-                                   QueryParam "key" Text :>
+                                   QueryParam "key" Key :>
                                      QueryParam "endTime" Text :>
                                        QueryParam "minimumImportance" Text :>
                                          QueryParam "pageToken" Text :>
-                                           QueryParam "oauth_token" Text :>
+                                           QueryParam "oauth_token" OAuthToken
+                                             :>
                                              QueryParam "pageSize" Int32 :>
                                                QueryParam "fields" Text :>
                                                  QueryParam "callback" Text :>
-                                                   QueryParam "alt" Text :>
+                                                   QueryParam "alt" AltJSON :>
                                                      Get '[JSON]
                                                        ListJobMessagesResponse
 
@@ -99,16 +99,15 @@ data ProjectsJobsMessagesList' = ProjectsJobsMessagesList'
     , _pjmlAccessToken       :: !(Maybe Text)
     , _pjmlUploadType        :: !(Maybe Text)
     , _pjmlBearerToken       :: !(Maybe Text)
-    , _pjmlKey               :: !(Maybe Text)
+    , _pjmlKey               :: !(Maybe Key)
     , _pjmlEndTime           :: !(Maybe Text)
     , _pjmlMinimumImportance :: !(Maybe Text)
     , _pjmlPageToken         :: !(Maybe Text)
     , _pjmlProjectId         :: !Text
-    , _pjmlOauthToken        :: !(Maybe Text)
+    , _pjmlOAuthToken        :: !(Maybe OAuthToken)
     , _pjmlPageSize          :: !(Maybe Int32)
     , _pjmlFields            :: !(Maybe Text)
     , _pjmlCallback          :: !(Maybe Text)
-    , _pjmlAlt               :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsJobsMessagesList'' with the minimum fields required to make a request.
@@ -145,15 +144,13 @@ data ProjectsJobsMessagesList' = ProjectsJobsMessagesList'
 --
 -- * 'pjmlProjectId'
 --
--- * 'pjmlOauthToken'
+-- * 'pjmlOAuthToken'
 --
 -- * 'pjmlPageSize'
 --
 -- * 'pjmlFields'
 --
 -- * 'pjmlCallback'
---
--- * 'pjmlAlt'
 projectsJobsMessagesList'
     :: Text -- ^ 'jobId'
     -> Text -- ^ 'projectId'
@@ -175,11 +172,10 @@ projectsJobsMessagesList' pPjmlJobId_ pPjmlProjectId_ =
     , _pjmlMinimumImportance = Nothing
     , _pjmlPageToken = Nothing
     , _pjmlProjectId = pPjmlProjectId_
-    , _pjmlOauthToken = Nothing
+    , _pjmlOAuthToken = Nothing
     , _pjmlPageSize = Nothing
     , _pjmlFields = Nothing
     , _pjmlCallback = Nothing
-    , _pjmlAlt = "json"
     }
 
 -- | V1 error format.
@@ -244,7 +240,7 @@ pjmlBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pjmlKey :: Lens' ProjectsJobsMessagesList' (Maybe Text)
+pjmlKey :: Lens' ProjectsJobsMessagesList' (Maybe Key)
 pjmlKey = lens _pjmlKey (\ s a -> s{_pjmlKey = a})
 
 -- | Return only messages with timestamps \< end_time. The default is now
@@ -273,10 +269,10 @@ pjmlProjectId
       (\ s a -> s{_pjmlProjectId = a})
 
 -- | OAuth 2.0 token for the current user.
-pjmlOauthToken :: Lens' ProjectsJobsMessagesList' (Maybe Text)
-pjmlOauthToken
-  = lens _pjmlOauthToken
-      (\ s a -> s{_pjmlOauthToken = a})
+pjmlOAuthToken :: Lens' ProjectsJobsMessagesList' (Maybe OAuthToken)
+pjmlOAuthToken
+  = lens _pjmlOAuthToken
+      (\ s a -> s{_pjmlOAuthToken = a})
 
 -- | If specified, determines the maximum number of messages to return. If
 -- unspecified, the service may choose an appropriate default, or may
@@ -295,9 +291,9 @@ pjmlCallback :: Lens' ProjectsJobsMessagesList' (Maybe Text)
 pjmlCallback
   = lens _pjmlCallback (\ s a -> s{_pjmlCallback = a})
 
--- | Data format for response.
-pjmlAlt :: Lens' ProjectsJobsMessagesList' Text
-pjmlAlt = lens _pjmlAlt (\ s a -> s{_pjmlAlt = a})
+instance GoogleAuth ProjectsJobsMessagesList' where
+        authKey = pjmlKey . _Just
+        authToken = pjmlOAuthToken . _Just
 
 instance GoogleRequest ProjectsJobsMessagesList'
          where
@@ -319,11 +315,11 @@ instance GoogleRequest ProjectsJobsMessagesList'
               _pjmlMinimumImportance
               _pjmlPageToken
               _pjmlProjectId
-              _pjmlOauthToken
+              _pjmlOAuthToken
               _pjmlPageSize
               _pjmlFields
               _pjmlCallback
-              (Just _pjmlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsJobsMessagesListResource)

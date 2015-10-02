@@ -38,10 +38,10 @@ library
         , Network.Google.Resource.Directory.Asps.Delete
         , Network.Google.Resource.Directory.Asps.Get
         , Network.Google.Resource.Directory.Asps.List
-        , Network.Google.Resource.Directory.Chromeosdevices.Get
-        , Network.Google.Resource.Directory.Chromeosdevices.List
-        , Network.Google.Resource.Directory.Chromeosdevices.Patch
-        , Network.Google.Resource.Directory.Chromeosdevices.Update
+        , Network.Google.Resource.Directory.ChromeosDevices.Get
+        , Network.Google.Resource.Directory.ChromeosDevices.List
+        , Network.Google.Resource.Directory.ChromeosDevices.Patch
+        , Network.Google.Resource.Directory.ChromeosDevices.Update
         , Network.Google.Resource.Directory.Groups.Aliases.Delete
         , Network.Google.Resource.Directory.Groups.Aliases.Insert
         , Network.Google.Resource.Directory.Groups.Aliases.List
@@ -57,21 +57,21 @@ library
         , Network.Google.Resource.Directory.Members.List
         , Network.Google.Resource.Directory.Members.Patch
         , Network.Google.Resource.Directory.Members.Update
-        , Network.Google.Resource.Directory.Mobiledevices.Action
-        , Network.Google.Resource.Directory.Mobiledevices.Delete
-        , Network.Google.Resource.Directory.Mobiledevices.Get
-        , Network.Google.Resource.Directory.Mobiledevices.List
+        , Network.Google.Resource.Directory.MobileDevices.Action
+        , Network.Google.Resource.Directory.MobileDevices.Delete
+        , Network.Google.Resource.Directory.MobileDevices.Get
+        , Network.Google.Resource.Directory.MobileDevices.List
         , Network.Google.Resource.Directory.Notifications.Delete
         , Network.Google.Resource.Directory.Notifications.Get
         , Network.Google.Resource.Directory.Notifications.List
         , Network.Google.Resource.Directory.Notifications.Patch
         , Network.Google.Resource.Directory.Notifications.Update
-        , Network.Google.Resource.Directory.Orgunits.Delete
-        , Network.Google.Resource.Directory.Orgunits.Get
-        , Network.Google.Resource.Directory.Orgunits.Insert
-        , Network.Google.Resource.Directory.Orgunits.List
-        , Network.Google.Resource.Directory.Orgunits.Patch
-        , Network.Google.Resource.Directory.Orgunits.Update
+        , Network.Google.Resource.Directory.OrgUnits.Delete
+        , Network.Google.Resource.Directory.OrgUnits.Get
+        , Network.Google.Resource.Directory.OrgUnits.Insert
+        , Network.Google.Resource.Directory.OrgUnits.List
+        , Network.Google.Resource.Directory.OrgUnits.Patch
+        , Network.Google.Resource.Directory.OrgUnits.Update
         , Network.Google.Resource.Directory.Schemas.Delete
         , Network.Google.Resource.Directory.Schemas.Get
         , Network.Google.Resource.Directory.Schemas.Insert

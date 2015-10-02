@@ -157,7 +157,7 @@ instance ToJSON ResultVersion where
 --
 -- /See:/ 'resultPageStats' smart constructor.
 data ResultPageStats = ResultPageStats
-    { _rpsHtmlResponseBytes       :: !(Maybe Int64)
+    { _rpsHTMLResponseBytes       :: !(Maybe Int64)
     , _rpsTotalRequestBytes       :: !(Maybe Int64)
     , _rpsNumberResources         :: !(Maybe Int32)
     , _rpsNumberStaticResources   :: !(Maybe Int32)
@@ -176,7 +176,7 @@ data ResultPageStats = ResultPageStats
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rpsHtmlResponseBytes'
+-- * 'rpsHTMLResponseBytes'
 --
 -- * 'rpsTotalRequestBytes'
 --
@@ -205,7 +205,7 @@ resultPageStats
     :: ResultPageStats
 resultPageStats =
     ResultPageStats
-    { _rpsHtmlResponseBytes = Nothing
+    { _rpsHTMLResponseBytes = Nothing
     , _rpsTotalRequestBytes = Nothing
     , _rpsNumberResources = Nothing
     , _rpsNumberStaticResources = Nothing
@@ -222,10 +222,10 @@ resultPageStats =
 
 -- | Number of uncompressed response bytes for the main HTML document and all
 -- iframes on the page.
-rpsHtmlResponseBytes :: Lens' ResultPageStats (Maybe Int64)
-rpsHtmlResponseBytes
-  = lens _rpsHtmlResponseBytes
-      (\ s a -> s{_rpsHtmlResponseBytes = a})
+rpsHTMLResponseBytes :: Lens' ResultPageStats (Maybe Int64)
+rpsHTMLResponseBytes
+  = lens _rpsHTMLResponseBytes
+      (\ s a -> s{_rpsHTMLResponseBytes = a})
 
 -- | Total size of all request bytes sent by the page.
 rpsTotalRequestBytes :: Lens' ResultPageStats (Maybe Int64)
@@ -324,7 +324,7 @@ instance ToJSON ResultPageStats where
         toJSON ResultPageStats{..}
           = object
               (catMaybes
-                 [("htmlResponseBytes" .=) <$> _rpsHtmlResponseBytes,
+                 [("htmlResponseBytes" .=) <$> _rpsHTMLResponseBytes,
                   ("totalRequestBytes" .=) <$> _rpsTotalRequestBytes,
                   ("numberResources" .=) <$> _rpsNumberResources,
                   ("numberStaticResources" .=) <$>
@@ -502,7 +502,7 @@ instance ToJSON PagespeedAPIFormatStringV2Args where
 --
 -- /See:/ 'result' smart constructor.
 data Result = Result
-    { _rScreenshot       :: !(Maybe (Maybe PagespeedAPIImageV2))
+    { _rScreenshot       :: !(Maybe PagespeedAPIImageV2)
     , _rKind             :: !Text
     , _rResponseCode     :: !(Maybe Int32)
     , _rInvalidRules     :: !(Maybe [Text])
@@ -554,7 +554,7 @@ result =
     }
 
 -- | Base64-encoded screenshot of the page that was analyzed.
-rScreenshot :: Lens' Result (Maybe (Maybe PagespeedAPIImageV2))
+rScreenshot :: Lens' Result (Maybe PagespeedAPIImageV2)
 rScreenshot
   = lens _rScreenshot (\ s a -> s{_rScreenshot = a})
 

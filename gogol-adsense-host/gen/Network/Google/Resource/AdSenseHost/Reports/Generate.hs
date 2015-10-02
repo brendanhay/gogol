@@ -34,7 +34,7 @@ module Network.Google.Resource.AdSenseHost.Reports.Generate
     -- * Request Lenses
     , rgQuotaUser
     , rgPrettyPrint
-    , rgUserIp
+    , rgUserIP
     , rgDimension
     , rgLocale
     , rgEndDate
@@ -43,11 +43,10 @@ module Network.Google.Resource.AdSenseHost.Reports.Generate
     , rgKey
     , rgSort
     , rgFilter
-    , rgOauthToken
+    , rgOAuthToken
     , rgStartIndex
     , rgMaxResults
     , rgFields
-    , rgAlt
     ) where
 
 import           Network.Google.AdSenseHost.Types
@@ -65,14 +64,15 @@ type ReportsGenerateResource =
                  QueryParam "endDate" Text :>
                    QueryParam "startDate" Text :>
                      QueryParams "metric" Text :>
-                       QueryParam "key" Text :>
+                       QueryParam "key" Key :>
                          QueryParams "sort" Text :>
                            QueryParams "filter" Text :>
-                             QueryParam "oauth_token" Text :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "startIndex" Word32 :>
                                  QueryParam "maxResults" Word32 :>
                                    QueryParam "fields" Text :>
-                                     QueryParam "alt" Alt :> Get '[JSON] Report
+                                     QueryParam "alt" AltJSON :>
+                                       Get '[JSON] Report
 
 -- | Generate an AdSense report based on the report request sent in the query
 -- parameters. Returns the result as JSON; to retrieve output in CSV format
@@ -82,20 +82,19 @@ type ReportsGenerateResource =
 data ReportsGenerate' = ReportsGenerate'
     { _rgQuotaUser   :: !(Maybe Text)
     , _rgPrettyPrint :: !Bool
-    , _rgUserIp      :: !(Maybe Text)
+    , _rgUserIP      :: !(Maybe Text)
     , _rgDimension   :: !(Maybe Text)
     , _rgLocale      :: !(Maybe Text)
     , _rgEndDate     :: !Text
     , _rgStartDate   :: !Text
     , _rgMetric      :: !(Maybe Text)
-    , _rgKey         :: !(Maybe Text)
+    , _rgKey         :: !(Maybe Key)
     , _rgSort        :: !(Maybe Text)
     , _rgFilter      :: !(Maybe Text)
-    , _rgOauthToken  :: !(Maybe Text)
+    , _rgOAuthToken  :: !(Maybe OAuthToken)
     , _rgStartIndex  :: !(Maybe Word32)
     , _rgMaxResults  :: !(Maybe Word32)
     , _rgFields      :: !(Maybe Text)
-    , _rgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsGenerate'' with the minimum fields required to make a request.
@@ -106,7 +105,7 @@ data ReportsGenerate' = ReportsGenerate'
 --
 -- * 'rgPrettyPrint'
 --
--- * 'rgUserIp'
+-- * 'rgUserIP'
 --
 -- * 'rgDimension'
 --
@@ -124,15 +123,13 @@ data ReportsGenerate' = ReportsGenerate'
 --
 -- * 'rgFilter'
 --
--- * 'rgOauthToken'
+-- * 'rgOAuthToken'
 --
 -- * 'rgStartIndex'
 --
 -- * 'rgMaxResults'
 --
 -- * 'rgFields'
---
--- * 'rgAlt'
 reportsGenerate'
     :: Text -- ^ 'endDate'
     -> Text -- ^ 'startDate'
@@ -141,7 +138,7 @@ reportsGenerate' pRgEndDate_ pRgStartDate_ =
     ReportsGenerate'
     { _rgQuotaUser = Nothing
     , _rgPrettyPrint = True
-    , _rgUserIp = Nothing
+    , _rgUserIP = Nothing
     , _rgDimension = Nothing
     , _rgLocale = Nothing
     , _rgEndDate = pRgEndDate_
@@ -150,11 +147,10 @@ reportsGenerate' pRgEndDate_ pRgStartDate_ =
     , _rgKey = Nothing
     , _rgSort = Nothing
     , _rgFilter = Nothing
-    , _rgOauthToken = Nothing
+    , _rgOAuthToken = Nothing
     , _rgStartIndex = Nothing
     , _rgMaxResults = Nothing
     , _rgFields = Nothing
-    , _rgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -172,8 +168,8 @@ rgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rgUserIp :: Lens' ReportsGenerate' (Maybe Text)
-rgUserIp = lens _rgUserIp (\ s a -> s{_rgUserIp = a})
+rgUserIP :: Lens' ReportsGenerate' (Maybe Text)
+rgUserIP = lens _rgUserIP (\ s a -> s{_rgUserIP = a})
 
 -- | Dimensions to base the report on.
 rgDimension :: Lens' ReportsGenerate' (Maybe Text)
@@ -203,7 +199,7 @@ rgMetric = lens _rgMetric (\ s a -> s{_rgMetric = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rgKey :: Lens' ReportsGenerate' (Maybe Text)
+rgKey :: Lens' ReportsGenerate' (Maybe Key)
 rgKey = lens _rgKey (\ s a -> s{_rgKey = a})
 
 -- | The name of a dimension or metric to sort the resulting report on,
@@ -217,9 +213,9 @@ rgFilter :: Lens' ReportsGenerate' (Maybe Text)
 rgFilter = lens _rgFilter (\ s a -> s{_rgFilter = a})
 
 -- | OAuth 2.0 token for the current user.
-rgOauthToken :: Lens' ReportsGenerate' (Maybe Text)
-rgOauthToken
-  = lens _rgOauthToken (\ s a -> s{_rgOauthToken = a})
+rgOAuthToken :: Lens' ReportsGenerate' (Maybe OAuthToken)
+rgOAuthToken
+  = lens _rgOAuthToken (\ s a -> s{_rgOAuthToken = a})
 
 -- | Index of the first row of report data to return.
 rgStartIndex :: Lens' ReportsGenerate' (Maybe Word32)
@@ -235,15 +231,15 @@ rgMaxResults
 rgFields :: Lens' ReportsGenerate' (Maybe Text)
 rgFields = lens _rgFields (\ s a -> s{_rgFields = a})
 
--- | Data format for the response.
-rgAlt :: Lens' ReportsGenerate' Alt
-rgAlt = lens _rgAlt (\ s a -> s{_rgAlt = a})
+instance GoogleAuth ReportsGenerate' where
+        authKey = rgKey . _Just
+        authToken = rgOAuthToken . _Just
 
 instance GoogleRequest ReportsGenerate' where
         type Rs ReportsGenerate' = Report
         request = requestWithRoute defReq adSenseHostURL
         requestWithRoute r u ReportsGenerate'{..}
-          = go _rgQuotaUser (Just _rgPrettyPrint) _rgUserIp
+          = go _rgQuotaUser (Just _rgPrettyPrint) _rgUserIP
               _rgDimension
               _rgLocale
               (Just _rgEndDate)
@@ -252,11 +248,11 @@ instance GoogleRequest ReportsGenerate' where
               _rgKey
               _rgSort
               _rgFilter
-              _rgOauthToken
+              _rgOAuthToken
               _rgStartIndex
               _rgMaxResults
               _rgFields
-              (Just _rgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ReportsGenerateResource)

@@ -33,12 +33,12 @@ module Network.Google.Resource.DFAReporting.CreativeFieldValues.Update
     , cfvuCreativeFieldId
     , cfvuQuotaUser
     , cfvuPrettyPrint
-    , cfvuUserIp
+    , cfvuCreativeFieldValue
+    , cfvuUserIP
     , cfvuProfileId
     , cfvuKey
-    , cfvuOauthToken
+    , cfvuOAuthToken
     , cfvuFields
-    , cfvuAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -55,25 +55,26 @@ type CreativeFieldValuesUpdateResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :>
-                             Put '[JSON] CreativeFieldValue
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] CreativeFieldValue :>
+                               Put '[JSON] CreativeFieldValue
 
 -- | Updates an existing creative field value.
 --
 -- /See:/ 'creativeFieldValuesUpdate'' smart constructor.
 data CreativeFieldValuesUpdate' = CreativeFieldValuesUpdate'
-    { _cfvuCreativeFieldId :: !Int64
-    , _cfvuQuotaUser       :: !(Maybe Text)
-    , _cfvuPrettyPrint     :: !Bool
-    , _cfvuUserIp          :: !(Maybe Text)
-    , _cfvuProfileId       :: !Int64
-    , _cfvuKey             :: !(Maybe Text)
-    , _cfvuOauthToken      :: !(Maybe Text)
-    , _cfvuFields          :: !(Maybe Text)
-    , _cfvuAlt             :: !Alt
+    { _cfvuCreativeFieldId    :: !Int64
+    , _cfvuQuotaUser          :: !(Maybe Text)
+    , _cfvuPrettyPrint        :: !Bool
+    , _cfvuCreativeFieldValue :: !CreativeFieldValue
+    , _cfvuUserIP             :: !(Maybe Text)
+    , _cfvuProfileId          :: !Int64
+    , _cfvuKey                :: !(Maybe Key)
+    , _cfvuOAuthToken         :: !(Maybe OAuthToken)
+    , _cfvuFields             :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeFieldValuesUpdate'' with the minimum fields required to make a request.
@@ -86,32 +87,33 @@ data CreativeFieldValuesUpdate' = CreativeFieldValuesUpdate'
 --
 -- * 'cfvuPrettyPrint'
 --
--- * 'cfvuUserIp'
+-- * 'cfvuCreativeFieldValue'
+--
+-- * 'cfvuUserIP'
 --
 -- * 'cfvuProfileId'
 --
 -- * 'cfvuKey'
 --
--- * 'cfvuOauthToken'
+-- * 'cfvuOAuthToken'
 --
 -- * 'cfvuFields'
---
--- * 'cfvuAlt'
 creativeFieldValuesUpdate'
     :: Int64 -- ^ 'creativeFieldId'
+    -> CreativeFieldValue -- ^ 'CreativeFieldValue'
     -> Int64 -- ^ 'profileId'
     -> CreativeFieldValuesUpdate'
-creativeFieldValuesUpdate' pCfvuCreativeFieldId_ pCfvuProfileId_ =
+creativeFieldValuesUpdate' pCfvuCreativeFieldId_ pCfvuCreativeFieldValue_ pCfvuProfileId_ =
     CreativeFieldValuesUpdate'
     { _cfvuCreativeFieldId = pCfvuCreativeFieldId_
     , _cfvuQuotaUser = Nothing
     , _cfvuPrettyPrint = True
-    , _cfvuUserIp = Nothing
+    , _cfvuCreativeFieldValue = pCfvuCreativeFieldValue_
+    , _cfvuUserIP = Nothing
     , _cfvuProfileId = pCfvuProfileId_
     , _cfvuKey = Nothing
-    , _cfvuOauthToken = Nothing
+    , _cfvuOAuthToken = Nothing
     , _cfvuFields = Nothing
-    , _cfvuAlt = JSON
     }
 
 -- | Creative field ID for this creative field value.
@@ -134,11 +136,17 @@ cfvuPrettyPrint
   = lens _cfvuPrettyPrint
       (\ s a -> s{_cfvuPrettyPrint = a})
 
+-- | Multipart request metadata.
+cfvuCreativeFieldValue :: Lens' CreativeFieldValuesUpdate' CreativeFieldValue
+cfvuCreativeFieldValue
+  = lens _cfvuCreativeFieldValue
+      (\ s a -> s{_cfvuCreativeFieldValue = a})
+
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cfvuUserIp :: Lens' CreativeFieldValuesUpdate' (Maybe Text)
-cfvuUserIp
-  = lens _cfvuUserIp (\ s a -> s{_cfvuUserIp = a})
+cfvuUserIP :: Lens' CreativeFieldValuesUpdate' (Maybe Text)
+cfvuUserIP
+  = lens _cfvuUserIP (\ s a -> s{_cfvuUserIP = a})
 
 -- | User profile ID associated with this request.
 cfvuProfileId :: Lens' CreativeFieldValuesUpdate' Int64
@@ -149,23 +157,23 @@ cfvuProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cfvuKey :: Lens' CreativeFieldValuesUpdate' (Maybe Text)
+cfvuKey :: Lens' CreativeFieldValuesUpdate' (Maybe Key)
 cfvuKey = lens _cfvuKey (\ s a -> s{_cfvuKey = a})
 
 -- | OAuth 2.0 token for the current user.
-cfvuOauthToken :: Lens' CreativeFieldValuesUpdate' (Maybe Text)
-cfvuOauthToken
-  = lens _cfvuOauthToken
-      (\ s a -> s{_cfvuOauthToken = a})
+cfvuOAuthToken :: Lens' CreativeFieldValuesUpdate' (Maybe OAuthToken)
+cfvuOAuthToken
+  = lens _cfvuOAuthToken
+      (\ s a -> s{_cfvuOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cfvuFields :: Lens' CreativeFieldValuesUpdate' (Maybe Text)
 cfvuFields
   = lens _cfvuFields (\ s a -> s{_cfvuFields = a})
 
--- | Data format for the response.
-cfvuAlt :: Lens' CreativeFieldValuesUpdate' Alt
-cfvuAlt = lens _cfvuAlt (\ s a -> s{_cfvuAlt = a})
+instance GoogleAuth CreativeFieldValuesUpdate' where
+        authKey = cfvuKey . _Just
+        authToken = cfvuOAuthToken . _Just
 
 instance GoogleRequest CreativeFieldValuesUpdate'
          where
@@ -175,12 +183,13 @@ instance GoogleRequest CreativeFieldValuesUpdate'
         requestWithRoute r u CreativeFieldValuesUpdate'{..}
           = go _cfvuCreativeFieldId _cfvuQuotaUser
               (Just _cfvuPrettyPrint)
-              _cfvuUserIp
+              _cfvuUserIP
               _cfvuProfileId
               _cfvuKey
-              _cfvuOauthToken
+              _cfvuOAuthToken
               _cfvuFields
-              (Just _cfvuAlt)
+              (Just AltJSON)
+              _cfvuCreativeFieldValue
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CreativeFieldValuesUpdateResource)

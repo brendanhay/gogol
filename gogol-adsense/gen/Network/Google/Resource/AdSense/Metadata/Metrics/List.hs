@@ -32,11 +32,10 @@ module Network.Google.Resource.AdSense.Metadata.Metrics.List
     -- * Request Lenses
     , mmlQuotaUser
     , mmlPrettyPrint
-    , mmlUserIp
+    , mmlUserIP
     , mmlKey
-    , mmlOauthToken
+    , mmlOAuthToken
     , mmlFields
-    , mmlAlt
     ) where
 
 import           Network.Google.AdSense.Types
@@ -50,10 +49,10 @@ type MetadataMetricsListResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Get '[JSON] Metadata
+                     QueryParam "alt" AltJSON :> Get '[JSON] Metadata
 
 -- | List the metadata for the metrics available to this AdSense account.
 --
@@ -61,11 +60,10 @@ type MetadataMetricsListResource =
 data MetadataMetricsList' = MetadataMetricsList'
     { _mmlQuotaUser   :: !(Maybe Text)
     , _mmlPrettyPrint :: !Bool
-    , _mmlUserIp      :: !(Maybe Text)
-    , _mmlKey         :: !(Maybe Text)
-    , _mmlOauthToken  :: !(Maybe Text)
+    , _mmlUserIP      :: !(Maybe Text)
+    , _mmlKey         :: !(Maybe Key)
+    , _mmlOAuthToken  :: !(Maybe OAuthToken)
     , _mmlFields      :: !(Maybe Text)
-    , _mmlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MetadataMetricsList'' with the minimum fields required to make a request.
@@ -76,26 +74,23 @@ data MetadataMetricsList' = MetadataMetricsList'
 --
 -- * 'mmlPrettyPrint'
 --
--- * 'mmlUserIp'
+-- * 'mmlUserIP'
 --
 -- * 'mmlKey'
 --
--- * 'mmlOauthToken'
+-- * 'mmlOAuthToken'
 --
 -- * 'mmlFields'
---
--- * 'mmlAlt'
 metadataMetricsList'
     :: MetadataMetricsList'
 metadataMetricsList' =
     MetadataMetricsList'
     { _mmlQuotaUser = Nothing
     , _mmlPrettyPrint = True
-    , _mmlUserIp = Nothing
+    , _mmlUserIP = Nothing
     , _mmlKey = Nothing
-    , _mmlOauthToken = Nothing
+    , _mmlOAuthToken = Nothing
     , _mmlFields = Nothing
-    , _mmlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -113,40 +108,40 @@ mmlPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mmlUserIp :: Lens' MetadataMetricsList' (Maybe Text)
-mmlUserIp
-  = lens _mmlUserIp (\ s a -> s{_mmlUserIp = a})
+mmlUserIP :: Lens' MetadataMetricsList' (Maybe Text)
+mmlUserIP
+  = lens _mmlUserIP (\ s a -> s{_mmlUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mmlKey :: Lens' MetadataMetricsList' (Maybe Text)
+mmlKey :: Lens' MetadataMetricsList' (Maybe Key)
 mmlKey = lens _mmlKey (\ s a -> s{_mmlKey = a})
 
 -- | OAuth 2.0 token for the current user.
-mmlOauthToken :: Lens' MetadataMetricsList' (Maybe Text)
-mmlOauthToken
-  = lens _mmlOauthToken
-      (\ s a -> s{_mmlOauthToken = a})
+mmlOAuthToken :: Lens' MetadataMetricsList' (Maybe OAuthToken)
+mmlOAuthToken
+  = lens _mmlOAuthToken
+      (\ s a -> s{_mmlOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 mmlFields :: Lens' MetadataMetricsList' (Maybe Text)
 mmlFields
   = lens _mmlFields (\ s a -> s{_mmlFields = a})
 
--- | Data format for the response.
-mmlAlt :: Lens' MetadataMetricsList' Alt
-mmlAlt = lens _mmlAlt (\ s a -> s{_mmlAlt = a})
+instance GoogleAuth MetadataMetricsList' where
+        authKey = mmlKey . _Just
+        authToken = mmlOAuthToken . _Just
 
 instance GoogleRequest MetadataMetricsList' where
         type Rs MetadataMetricsList' = Metadata
         request = requestWithRoute defReq adSenseURL
         requestWithRoute r u MetadataMetricsList'{..}
-          = go _mmlQuotaUser (Just _mmlPrettyPrint) _mmlUserIp
+          = go _mmlQuotaUser (Just _mmlPrettyPrint) _mmlUserIP
               _mmlKey
-              _mmlOauthToken
+              _mmlOAuthToken
               _mmlFields
-              (Just _mmlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy MetadataMetricsListResource)

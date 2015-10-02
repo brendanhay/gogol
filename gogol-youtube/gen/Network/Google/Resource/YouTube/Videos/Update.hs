@@ -33,12 +33,12 @@ module Network.Google.Resource.YouTube.Videos.Update
     , vuQuotaUser
     , vuPart
     , vuPrettyPrint
-    , vuUserIp
+    , vuUserIP
+    , vuVideo
     , vuOnBehalfOfContentOwner
     , vuKey
-    , vuOauthToken
+    , vuOAuthToken
     , vuFields
-    , vuAlt
     ) where
 
 import           Network.Google.Prelude
@@ -53,10 +53,11 @@ type VideosUpdateResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "onBehalfOfContentOwner" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Put '[JSON] Video
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Video :> Put '[JSON] Video
 
 -- | Updates a video\'s metadata.
 --
@@ -65,12 +66,12 @@ data VideosUpdate' = VideosUpdate'
     { _vuQuotaUser              :: !(Maybe Text)
     , _vuPart                   :: !Text
     , _vuPrettyPrint            :: !Bool
-    , _vuUserIp                 :: !(Maybe Text)
+    , _vuUserIP                 :: !(Maybe Text)
+    , _vuVideo                  :: !Video
     , _vuOnBehalfOfContentOwner :: !(Maybe Text)
-    , _vuKey                    :: !(Maybe Text)
-    , _vuOauthToken             :: !(Maybe Text)
+    , _vuKey                    :: !(Maybe Key)
+    , _vuOAuthToken             :: !(Maybe OAuthToken)
     , _vuFields                 :: !(Maybe Text)
-    , _vuAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideosUpdate'' with the minimum fields required to make a request.
@@ -83,31 +84,32 @@ data VideosUpdate' = VideosUpdate'
 --
 -- * 'vuPrettyPrint'
 --
--- * 'vuUserIp'
+-- * 'vuUserIP'
+--
+-- * 'vuVideo'
 --
 -- * 'vuOnBehalfOfContentOwner'
 --
 -- * 'vuKey'
 --
--- * 'vuOauthToken'
+-- * 'vuOAuthToken'
 --
 -- * 'vuFields'
---
--- * 'vuAlt'
 videosUpdate'
     :: Text -- ^ 'part'
+    -> Video -- ^ 'Video'
     -> VideosUpdate'
-videosUpdate' pVuPart_ =
+videosUpdate' pVuPart_ pVuVideo_ =
     VideosUpdate'
     { _vuQuotaUser = Nothing
     , _vuPart = pVuPart_
     , _vuPrettyPrint = True
-    , _vuUserIp = Nothing
+    , _vuUserIP = Nothing
+    , _vuVideo = pVuVideo_
     , _vuOnBehalfOfContentOwner = Nothing
     , _vuKey = Nothing
-    , _vuOauthToken = Nothing
+    , _vuOAuthToken = Nothing
     , _vuFields = Nothing
-    , _vuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -145,8 +147,12 @@ vuPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-vuUserIp :: Lens' VideosUpdate' (Maybe Text)
-vuUserIp = lens _vuUserIp (\ s a -> s{_vuUserIp = a})
+vuUserIP :: Lens' VideosUpdate' (Maybe Text)
+vuUserIP = lens _vuUserIP (\ s a -> s{_vuUserIP = a})
+
+-- | Multipart request metadata.
+vuVideo :: Lens' VideosUpdate' Video
+vuVideo = lens _vuVideo (\ s a -> s{_vuVideo = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
@@ -166,21 +172,21 @@ vuOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vuKey :: Lens' VideosUpdate' (Maybe Text)
+vuKey :: Lens' VideosUpdate' (Maybe Key)
 vuKey = lens _vuKey (\ s a -> s{_vuKey = a})
 
 -- | OAuth 2.0 token for the current user.
-vuOauthToken :: Lens' VideosUpdate' (Maybe Text)
-vuOauthToken
-  = lens _vuOauthToken (\ s a -> s{_vuOauthToken = a})
+vuOAuthToken :: Lens' VideosUpdate' (Maybe OAuthToken)
+vuOAuthToken
+  = lens _vuOAuthToken (\ s a -> s{_vuOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 vuFields :: Lens' VideosUpdate' (Maybe Text)
 vuFields = lens _vuFields (\ s a -> s{_vuFields = a})
 
--- | Data format for the response.
-vuAlt :: Lens' VideosUpdate' Alt
-vuAlt = lens _vuAlt (\ s a -> s{_vuAlt = a})
+instance GoogleAuth VideosUpdate' where
+        authKey = vuKey . _Just
+        authToken = vuOAuthToken . _Just
 
 instance GoogleRequest VideosUpdate' where
         type Rs VideosUpdate' = Video
@@ -188,12 +194,13 @@ instance GoogleRequest VideosUpdate' where
         requestWithRoute r u VideosUpdate'{..}
           = go _vuQuotaUser (Just _vuPart)
               (Just _vuPrettyPrint)
-              _vuUserIp
+              _vuUserIP
               _vuOnBehalfOfContentOwner
               _vuKey
-              _vuOauthToken
+              _vuOAuthToken
               _vuFields
-              (Just _vuAlt)
+              (Just AltJSON)
+              _vuVideo
           where go
                   = clientWithRoute
                       (Proxy :: Proxy VideosUpdateResource)

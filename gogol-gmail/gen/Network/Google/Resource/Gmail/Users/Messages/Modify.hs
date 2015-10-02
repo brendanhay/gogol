@@ -32,13 +32,13 @@ module Network.Google.Resource.Gmail.Users.Messages.Modify
     -- * Request Lenses
     , ummQuotaUser
     , ummPrettyPrint
-    , ummUserIp
+    , ummModifyMessageRequest
+    , ummUserIP
     , ummUserId
     , ummKey
     , ummId
-    , ummOauthToken
+    , ummOAuthToken
     , ummFields
-    , ummAlt
     ) where
 
 import           Network.Google.Gmail.Types
@@ -54,24 +54,26 @@ type UsersMessagesModifyResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Post '[JSON] Message
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] ModifyMessageRequest :>
+                             Post '[JSON] Message
 
 -- | Modifies the labels on the specified message.
 --
 -- /See:/ 'usersMessagesModify'' smart constructor.
 data UsersMessagesModify' = UsersMessagesModify'
-    { _ummQuotaUser   :: !(Maybe Text)
-    , _ummPrettyPrint :: !Bool
-    , _ummUserIp      :: !(Maybe Text)
-    , _ummUserId      :: !Text
-    , _ummKey         :: !(Maybe Text)
-    , _ummId          :: !Text
-    , _ummOauthToken  :: !(Maybe Text)
-    , _ummFields      :: !(Maybe Text)
-    , _ummAlt         :: !Alt
+    { _ummQuotaUser            :: !(Maybe Text)
+    , _ummPrettyPrint          :: !Bool
+    , _ummModifyMessageRequest :: !ModifyMessageRequest
+    , _ummUserIP               :: !(Maybe Text)
+    , _ummUserId               :: !Text
+    , _ummKey                  :: !(Maybe Key)
+    , _ummId                   :: !Text
+    , _ummOAuthToken           :: !(Maybe OAuthToken)
+    , _ummFields               :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersMessagesModify'' with the minimum fields required to make a request.
@@ -82,7 +84,9 @@ data UsersMessagesModify' = UsersMessagesModify'
 --
 -- * 'ummPrettyPrint'
 --
--- * 'ummUserIp'
+-- * 'ummModifyMessageRequest'
+--
+-- * 'ummUserIP'
 --
 -- * 'ummUserId'
 --
@@ -90,26 +94,25 @@ data UsersMessagesModify' = UsersMessagesModify'
 --
 -- * 'ummId'
 --
--- * 'ummOauthToken'
+-- * 'ummOAuthToken'
 --
 -- * 'ummFields'
---
--- * 'ummAlt'
 usersMessagesModify'
-    :: Text -- ^ 'id'
+    :: ModifyMessageRequest -- ^ 'ModifyMessageRequest'
+    -> Text -- ^ 'id'
     -> Text
     -> UsersMessagesModify'
-usersMessagesModify' pUmmUserId_ pUmmId_ =
+usersMessagesModify' pUmmModifyMessageRequest_ pUmmUserId_ pUmmId_ =
     UsersMessagesModify'
     { _ummQuotaUser = Nothing
     , _ummPrettyPrint = True
-    , _ummUserIp = Nothing
+    , _ummModifyMessageRequest = pUmmModifyMessageRequest_
+    , _ummUserIP = Nothing
     , _ummUserId = pUmmUserId_
     , _ummKey = Nothing
     , _ummId = pUmmId_
-    , _ummOauthToken = Nothing
+    , _ummOAuthToken = Nothing
     , _ummFields = Nothing
-    , _ummAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -125,11 +128,17 @@ ummPrettyPrint
   = lens _ummPrettyPrint
       (\ s a -> s{_ummPrettyPrint = a})
 
+-- | Multipart request metadata.
+ummModifyMessageRequest :: Lens' UsersMessagesModify' ModifyMessageRequest
+ummModifyMessageRequest
+  = lens _ummModifyMessageRequest
+      (\ s a -> s{_ummModifyMessageRequest = a})
+
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ummUserIp :: Lens' UsersMessagesModify' (Maybe Text)
-ummUserIp
-  = lens _ummUserIp (\ s a -> s{_ummUserIp = a})
+ummUserIP :: Lens' UsersMessagesModify' (Maybe Text)
+ummUserIP
+  = lens _ummUserIP (\ s a -> s{_ummUserIP = a})
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
@@ -140,7 +149,7 @@ ummUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ummKey :: Lens' UsersMessagesModify' (Maybe Text)
+ummKey :: Lens' UsersMessagesModify' (Maybe Key)
 ummKey = lens _ummKey (\ s a -> s{_ummKey = a})
 
 -- | The ID of the message to modify.
@@ -148,31 +157,32 @@ ummId :: Lens' UsersMessagesModify' Text
 ummId = lens _ummId (\ s a -> s{_ummId = a})
 
 -- | OAuth 2.0 token for the current user.
-ummOauthToken :: Lens' UsersMessagesModify' (Maybe Text)
-ummOauthToken
-  = lens _ummOauthToken
-      (\ s a -> s{_ummOauthToken = a})
+ummOAuthToken :: Lens' UsersMessagesModify' (Maybe OAuthToken)
+ummOAuthToken
+  = lens _ummOAuthToken
+      (\ s a -> s{_ummOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ummFields :: Lens' UsersMessagesModify' (Maybe Text)
 ummFields
   = lens _ummFields (\ s a -> s{_ummFields = a})
 
--- | Data format for the response.
-ummAlt :: Lens' UsersMessagesModify' Alt
-ummAlt = lens _ummAlt (\ s a -> s{_ummAlt = a})
+instance GoogleAuth UsersMessagesModify' where
+        authKey = ummKey . _Just
+        authToken = ummOAuthToken . _Just
 
 instance GoogleRequest UsersMessagesModify' where
         type Rs UsersMessagesModify' = Message
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersMessagesModify'{..}
-          = go _ummQuotaUser (Just _ummPrettyPrint) _ummUserIp
+          = go _ummQuotaUser (Just _ummPrettyPrint) _ummUserIP
               _ummUserId
               _ummKey
               _ummId
-              _ummOauthToken
+              _ummOAuthToken
               _ummFields
-              (Just _ummAlt)
+              (Just AltJSON)
+              _ummModifyMessageRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersMessagesModifyResource)

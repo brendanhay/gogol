@@ -33,14 +33,13 @@ module Network.Google.Resource.Webmasters.URLcrawlerrorssamples.Get
     , ugQuotaUser
     , ugPrettyPrint
     , ugPlatform
-    , ugUserIp
+    , ugUserIP
     , ugCategory
-    , ugSiteUrl
-    , ugUrl
+    , ugSiteURL
+    , ugURL
     , ugKey
-    , ugOauthToken
+    , ugOAuthToken
     , ugFields
-    , ugAlt
     ) where
 
 import           Network.Google.Prelude
@@ -62,10 +61,10 @@ type UrlcrawlerrorssamplesGetResource =
                      QueryParam "category"
                        WebmastersURLcrawlerrorssamplesGetCategory
                        :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :>
+                             QueryParam "alt" AltJSON :>
                                Get '[JSON] URLCrawlErrorsSample
 
 -- | Retrieves details about crawl errors for a site\'s sample URL.
@@ -75,14 +74,13 @@ data URLcrawlerrorssamplesGet' = URLcrawlerrorssamplesGet'
     { _ugQuotaUser   :: !(Maybe Text)
     , _ugPrettyPrint :: !Bool
     , _ugPlatform    :: !WebmastersURLcrawlerrorssamplesGetPlatform
-    , _ugUserIp      :: !(Maybe Text)
+    , _ugUserIP      :: !(Maybe Text)
     , _ugCategory    :: !WebmastersURLcrawlerrorssamplesGetCategory
-    , _ugSiteUrl     :: !Text
-    , _ugUrl         :: !Text
-    , _ugKey         :: !(Maybe Text)
-    , _ugOauthToken  :: !(Maybe Text)
+    , _ugSiteURL     :: !Text
+    , _ugURL         :: !Text
+    , _ugKey         :: !(Maybe Key)
+    , _ugOAuthToken  :: !(Maybe OAuthToken)
     , _ugFields      :: !(Maybe Text)
-    , _ugAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLcrawlerrorssamplesGet'' with the minimum fields required to make a request.
@@ -95,40 +93,37 @@ data URLcrawlerrorssamplesGet' = URLcrawlerrorssamplesGet'
 --
 -- * 'ugPlatform'
 --
--- * 'ugUserIp'
+-- * 'ugUserIP'
 --
 -- * 'ugCategory'
 --
--- * 'ugSiteUrl'
+-- * 'ugSiteURL'
 --
--- * 'ugUrl'
+-- * 'ugURL'
 --
 -- * 'ugKey'
 --
--- * 'ugOauthToken'
+-- * 'ugOAuthToken'
 --
 -- * 'ugFields'
---
--- * 'ugAlt'
 uRLcrawlerrorssamplesGet'
     :: WebmastersURLcrawlerrorssamplesGetPlatform -- ^ 'platform'
     -> WebmastersURLcrawlerrorssamplesGetCategory -- ^ 'category'
     -> Text -- ^ 'siteUrl'
     -> Text -- ^ 'url'
     -> URLcrawlerrorssamplesGet'
-uRLcrawlerrorssamplesGet' pUgPlatform_ pUgCategory_ pUgSiteUrl_ pUgUrl_ =
+uRLcrawlerrorssamplesGet' pUgPlatform_ pUgCategory_ pUgSiteURL_ pUgURL_ =
     URLcrawlerrorssamplesGet'
     { _ugQuotaUser = Nothing
     , _ugPrettyPrint = True
     , _ugPlatform = pUgPlatform_
-    , _ugUserIp = Nothing
+    , _ugUserIP = Nothing
     , _ugCategory = pUgCategory_
-    , _ugSiteUrl = pUgSiteUrl_
-    , _ugUrl = pUgUrl_
+    , _ugSiteURL = pUgSiteURL_
+    , _ugURL = pUgURL_
     , _ugKey = Nothing
-    , _ugOauthToken = Nothing
+    , _ugOAuthToken = Nothing
     , _ugFields = Nothing
-    , _ugAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -151,8 +146,8 @@ ugPlatform
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ugUserIp :: Lens' URLcrawlerrorssamplesGet' (Maybe Text)
-ugUserIp = lens _ugUserIp (\ s a -> s{_ugUserIp = a})
+ugUserIP :: Lens' URLcrawlerrorssamplesGet' (Maybe Text)
+ugUserIP = lens _ugUserIP (\ s a -> s{_ugUserIP = a})
 
 -- | The crawl error category. For example: authPermissions
 ugCategory :: Lens' URLcrawlerrorssamplesGet' WebmastersURLcrawlerrorssamplesGetCategory
@@ -161,35 +156,35 @@ ugCategory
 
 -- | The site\'s URL, including protocol. For example:
 -- http:\/\/www.example.com\/
-ugSiteUrl :: Lens' URLcrawlerrorssamplesGet' Text
-ugSiteUrl
-  = lens _ugSiteUrl (\ s a -> s{_ugSiteUrl = a})
+ugSiteURL :: Lens' URLcrawlerrorssamplesGet' Text
+ugSiteURL
+  = lens _ugSiteURL (\ s a -> s{_ugSiteURL = a})
 
 -- | The relative path (without the site) of the sample URL. It must be one
 -- of the URLs returned by list(). For example, for the URL
 -- https:\/\/www.example.com\/pagename on the site
 -- https:\/\/www.example.com\/, the url value is pagename
-ugUrl :: Lens' URLcrawlerrorssamplesGet' Text
-ugUrl = lens _ugUrl (\ s a -> s{_ugUrl = a})
+ugURL :: Lens' URLcrawlerrorssamplesGet' Text
+ugURL = lens _ugURL (\ s a -> s{_ugURL = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ugKey :: Lens' URLcrawlerrorssamplesGet' (Maybe Text)
+ugKey :: Lens' URLcrawlerrorssamplesGet' (Maybe Key)
 ugKey = lens _ugKey (\ s a -> s{_ugKey = a})
 
 -- | OAuth 2.0 token for the current user.
-ugOauthToken :: Lens' URLcrawlerrorssamplesGet' (Maybe Text)
-ugOauthToken
-  = lens _ugOauthToken (\ s a -> s{_ugOauthToken = a})
+ugOAuthToken :: Lens' URLcrawlerrorssamplesGet' (Maybe OAuthToken)
+ugOAuthToken
+  = lens _ugOAuthToken (\ s a -> s{_ugOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ugFields :: Lens' URLcrawlerrorssamplesGet' (Maybe Text)
 ugFields = lens _ugFields (\ s a -> s{_ugFields = a})
 
--- | Data format for the response.
-ugAlt :: Lens' URLcrawlerrorssamplesGet' Alt
-ugAlt = lens _ugAlt (\ s a -> s{_ugAlt = a})
+instance GoogleAuth URLcrawlerrorssamplesGet' where
+        authKey = ugKey . _Just
+        authToken = ugOAuthToken . _Just
 
 instance GoogleRequest URLcrawlerrorssamplesGet'
          where
@@ -199,14 +194,14 @@ instance GoogleRequest URLcrawlerrorssamplesGet'
         requestWithRoute r u URLcrawlerrorssamplesGet'{..}
           = go _ugQuotaUser (Just _ugPrettyPrint)
               (Just _ugPlatform)
-              _ugUserIp
+              _ugUserIP
               (Just _ugCategory)
-              _ugSiteUrl
-              _ugUrl
+              _ugSiteURL
+              _ugURL
               _ugKey
-              _ugOauthToken
+              _ugOAuthToken
               _ugFields
-              (Just _ugAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UrlcrawlerrorssamplesGetResource)

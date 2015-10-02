@@ -32,15 +32,14 @@ module Network.Google.Resource.Storage.ObjectAccessControls.Get
     -- * Request Lenses
     , oacgQuotaUser
     , oacgPrettyPrint
-    , oacgUserIp
+    , oacgUserIP
     , oacgBucket
     , oacgKey
     , oacgObject
-    , oacgOauthToken
+    , oacgOAuthToken
     , oacgEntity
     , oacgGeneration
     , oacgFields
-    , oacgAlt
     ) where
 
 import           Network.Google.Prelude
@@ -58,11 +57,11 @@ type ObjectAccessControlsGetResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "generation" Word64 :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :>
+                               QueryParam "alt" AltJSON :>
                                  Get '[JSON] ObjectAccessControl
 
 -- | Returns the ACL entry for the specified entity on the specified object.
@@ -71,15 +70,14 @@ type ObjectAccessControlsGetResource =
 data ObjectAccessControlsGet' = ObjectAccessControlsGet'
     { _oacgQuotaUser   :: !(Maybe Text)
     , _oacgPrettyPrint :: !Bool
-    , _oacgUserIp      :: !(Maybe Text)
+    , _oacgUserIP      :: !(Maybe Text)
     , _oacgBucket      :: !Text
-    , _oacgKey         :: !(Maybe Text)
+    , _oacgKey         :: !(Maybe Key)
     , _oacgObject      :: !Text
-    , _oacgOauthToken  :: !(Maybe Text)
+    , _oacgOAuthToken  :: !(Maybe OAuthToken)
     , _oacgEntity      :: !Text
     , _oacgGeneration  :: !(Maybe Word64)
     , _oacgFields      :: !(Maybe Text)
-    , _oacgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectAccessControlsGet'' with the minimum fields required to make a request.
@@ -90,7 +88,7 @@ data ObjectAccessControlsGet' = ObjectAccessControlsGet'
 --
 -- * 'oacgPrettyPrint'
 --
--- * 'oacgUserIp'
+-- * 'oacgUserIP'
 --
 -- * 'oacgBucket'
 --
@@ -98,15 +96,13 @@ data ObjectAccessControlsGet' = ObjectAccessControlsGet'
 --
 -- * 'oacgObject'
 --
--- * 'oacgOauthToken'
+-- * 'oacgOAuthToken'
 --
 -- * 'oacgEntity'
 --
 -- * 'oacgGeneration'
 --
 -- * 'oacgFields'
---
--- * 'oacgAlt'
 objectAccessControlsGet'
     :: Text -- ^ 'bucket'
     -> Text -- ^ 'object'
@@ -116,15 +112,14 @@ objectAccessControlsGet' pOacgBucket_ pOacgObject_ pOacgEntity_ =
     ObjectAccessControlsGet'
     { _oacgQuotaUser = Nothing
     , _oacgPrettyPrint = True
-    , _oacgUserIp = Nothing
+    , _oacgUserIP = Nothing
     , _oacgBucket = pOacgBucket_
     , _oacgKey = Nothing
     , _oacgObject = pOacgObject_
-    , _oacgOauthToken = Nothing
+    , _oacgOAuthToken = Nothing
     , _oacgEntity = pOacgEntity_
     , _oacgGeneration = Nothing
     , _oacgFields = Nothing
-    , _oacgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -143,9 +138,9 @@ oacgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-oacgUserIp :: Lens' ObjectAccessControlsGet' (Maybe Text)
-oacgUserIp
-  = lens _oacgUserIp (\ s a -> s{_oacgUserIp = a})
+oacgUserIP :: Lens' ObjectAccessControlsGet' (Maybe Text)
+oacgUserIP
+  = lens _oacgUserIP (\ s a -> s{_oacgUserIP = a})
 
 -- | Name of a bucket.
 oacgBucket :: Lens' ObjectAccessControlsGet' Text
@@ -155,7 +150,7 @@ oacgBucket
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-oacgKey :: Lens' ObjectAccessControlsGet' (Maybe Text)
+oacgKey :: Lens' ObjectAccessControlsGet' (Maybe Key)
 oacgKey = lens _oacgKey (\ s a -> s{_oacgKey = a})
 
 -- | Name of the object.
@@ -164,10 +159,10 @@ oacgObject
   = lens _oacgObject (\ s a -> s{_oacgObject = a})
 
 -- | OAuth 2.0 token for the current user.
-oacgOauthToken :: Lens' ObjectAccessControlsGet' (Maybe Text)
-oacgOauthToken
-  = lens _oacgOauthToken
-      (\ s a -> s{_oacgOauthToken = a})
+oacgOAuthToken :: Lens' ObjectAccessControlsGet' (Maybe OAuthToken)
+oacgOAuthToken
+  = lens _oacgOAuthToken
+      (\ s a -> s{_oacgOAuthToken = a})
 
 -- | The entity holding the permission. Can be user-userId,
 -- user-emailAddress, group-groupId, group-emailAddress, allUsers, or
@@ -188,9 +183,9 @@ oacgFields :: Lens' ObjectAccessControlsGet' (Maybe Text)
 oacgFields
   = lens _oacgFields (\ s a -> s{_oacgFields = a})
 
--- | Data format for the response.
-oacgAlt :: Lens' ObjectAccessControlsGet' Alt
-oacgAlt = lens _oacgAlt (\ s a -> s{_oacgAlt = a})
+instance GoogleAuth ObjectAccessControlsGet' where
+        authKey = oacgKey . _Just
+        authToken = oacgOAuthToken . _Just
 
 instance GoogleRequest ObjectAccessControlsGet' where
         type Rs ObjectAccessControlsGet' =
@@ -198,15 +193,15 @@ instance GoogleRequest ObjectAccessControlsGet' where
         request = requestWithRoute defReq storageURL
         requestWithRoute r u ObjectAccessControlsGet'{..}
           = go _oacgQuotaUser (Just _oacgPrettyPrint)
-              _oacgUserIp
+              _oacgUserIP
               _oacgBucket
               _oacgKey
               _oacgObject
-              _oacgOauthToken
+              _oacgOAuthToken
               _oacgEntity
               _oacgGeneration
               _oacgFields
-              (Just _oacgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ObjectAccessControlsGetResource)

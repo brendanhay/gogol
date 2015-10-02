@@ -32,13 +32,12 @@ module Network.Google.Resource.Analytics.Management.AccountUserLinks.Delete
     -- * Request Lenses
     , mauldQuotaUser
     , mauldPrettyPrint
-    , mauldUserIp
+    , mauldUserIP
     , mauldAccountId
     , mauldKey
     , mauldLinkId
-    , mauldOauthToken
+    , mauldOAuthToken
     , mauldFields
-    , mauldAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -55,10 +54,10 @@ type ManagementAccountUserLinksDeleteResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Delete '[JSON] ()
+                           QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Removes a user from the given account.
 --
@@ -66,13 +65,12 @@ type ManagementAccountUserLinksDeleteResource =
 data ManagementAccountUserLinksDelete' = ManagementAccountUserLinksDelete'
     { _mauldQuotaUser   :: !(Maybe Text)
     , _mauldPrettyPrint :: !Bool
-    , _mauldUserIp      :: !(Maybe Text)
+    , _mauldUserIP      :: !(Maybe Text)
     , _mauldAccountId   :: !Text
-    , _mauldKey         :: !(Maybe Text)
+    , _mauldKey         :: !(Maybe Key)
     , _mauldLinkId      :: !Text
-    , _mauldOauthToken  :: !(Maybe Text)
+    , _mauldOAuthToken  :: !(Maybe OAuthToken)
     , _mauldFields      :: !(Maybe Text)
-    , _mauldAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementAccountUserLinksDelete'' with the minimum fields required to make a request.
@@ -83,7 +81,7 @@ data ManagementAccountUserLinksDelete' = ManagementAccountUserLinksDelete'
 --
 -- * 'mauldPrettyPrint'
 --
--- * 'mauldUserIp'
+-- * 'mauldUserIP'
 --
 -- * 'mauldAccountId'
 --
@@ -91,11 +89,9 @@ data ManagementAccountUserLinksDelete' = ManagementAccountUserLinksDelete'
 --
 -- * 'mauldLinkId'
 --
--- * 'mauldOauthToken'
+-- * 'mauldOAuthToken'
 --
 -- * 'mauldFields'
---
--- * 'mauldAlt'
 managementAccountUserLinksDelete'
     :: Text -- ^ 'accountId'
     -> Text -- ^ 'linkId'
@@ -104,13 +100,12 @@ managementAccountUserLinksDelete' pMauldAccountId_ pMauldLinkId_ =
     ManagementAccountUserLinksDelete'
     { _mauldQuotaUser = Nothing
     , _mauldPrettyPrint = False
-    , _mauldUserIp = Nothing
+    , _mauldUserIP = Nothing
     , _mauldAccountId = pMauldAccountId_
     , _mauldKey = Nothing
     , _mauldLinkId = pMauldLinkId_
-    , _mauldOauthToken = Nothing
+    , _mauldOAuthToken = Nothing
     , _mauldFields = Nothing
-    , _mauldAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -129,9 +124,9 @@ mauldPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mauldUserIp :: Lens' ManagementAccountUserLinksDelete' (Maybe Text)
-mauldUserIp
-  = lens _mauldUserIp (\ s a -> s{_mauldUserIp = a})
+mauldUserIP :: Lens' ManagementAccountUserLinksDelete' (Maybe Text)
+mauldUserIP
+  = lens _mauldUserIP (\ s a -> s{_mauldUserIP = a})
 
 -- | Account ID to delete the user link for.
 mauldAccountId :: Lens' ManagementAccountUserLinksDelete' Text
@@ -142,7 +137,7 @@ mauldAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mauldKey :: Lens' ManagementAccountUserLinksDelete' (Maybe Text)
+mauldKey :: Lens' ManagementAccountUserLinksDelete' (Maybe Key)
 mauldKey = lens _mauldKey (\ s a -> s{_mauldKey = a})
 
 -- | Link ID to delete the user link for.
@@ -151,19 +146,20 @@ mauldLinkId
   = lens _mauldLinkId (\ s a -> s{_mauldLinkId = a})
 
 -- | OAuth 2.0 token for the current user.
-mauldOauthToken :: Lens' ManagementAccountUserLinksDelete' (Maybe Text)
-mauldOauthToken
-  = lens _mauldOauthToken
-      (\ s a -> s{_mauldOauthToken = a})
+mauldOAuthToken :: Lens' ManagementAccountUserLinksDelete' (Maybe OAuthToken)
+mauldOAuthToken
+  = lens _mauldOAuthToken
+      (\ s a -> s{_mauldOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 mauldFields :: Lens' ManagementAccountUserLinksDelete' (Maybe Text)
 mauldFields
   = lens _mauldFields (\ s a -> s{_mauldFields = a})
 
--- | Data format for the response.
-mauldAlt :: Lens' ManagementAccountUserLinksDelete' Alt
-mauldAlt = lens _mauldAlt (\ s a -> s{_mauldAlt = a})
+instance GoogleAuth ManagementAccountUserLinksDelete'
+         where
+        authKey = mauldKey . _Just
+        authToken = mauldOAuthToken . _Just
 
 instance GoogleRequest
          ManagementAccountUserLinksDelete' where
@@ -172,13 +168,13 @@ instance GoogleRequest
         requestWithRoute r u
           ManagementAccountUserLinksDelete'{..}
           = go _mauldQuotaUser (Just _mauldPrettyPrint)
-              _mauldUserIp
+              _mauldUserIP
               _mauldAccountId
               _mauldKey
               _mauldLinkId
-              _mauldOauthToken
+              _mauldOAuthToken
               _mauldFields
-              (Just _mauldAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

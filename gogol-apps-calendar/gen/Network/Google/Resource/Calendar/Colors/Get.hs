@@ -32,11 +32,10 @@ module Network.Google.Resource.Calendar.Colors.Get
     -- * Request Lenses
     , cgQuotaUser
     , cgPrettyPrint
-    , cgUserIp
+    , cgUserIP
     , cgKey
-    , cgOauthToken
+    , cgOAuthToken
     , cgFields
-    , cgAlt
     ) where
 
 import           Network.Google.AppsCalendar.Types
@@ -49,10 +48,10 @@ type ColorsGetResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
-               QueryParam "oauth_token" Text :>
+             QueryParam "key" Key :>
+               QueryParam "oauth_token" OAuthToken :>
                  QueryParam "fields" Text :>
-                   QueryParam "alt" Alt :> Get '[JSON] Colors
+                   QueryParam "alt" AltJSON :> Get '[JSON] Colors
 
 -- | Returns the color definitions for calendars and events.
 --
@@ -60,11 +59,10 @@ type ColorsGetResource =
 data ColorsGet' = ColorsGet'
     { _cgQuotaUser   :: !(Maybe Text)
     , _cgPrettyPrint :: !Bool
-    , _cgUserIp      :: !(Maybe Text)
-    , _cgKey         :: !(Maybe Text)
-    , _cgOauthToken  :: !(Maybe Text)
+    , _cgUserIP      :: !(Maybe Text)
+    , _cgKey         :: !(Maybe Key)
+    , _cgOAuthToken  :: !(Maybe OAuthToken)
     , _cgFields      :: !(Maybe Text)
-    , _cgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ColorsGet'' with the minimum fields required to make a request.
@@ -75,26 +73,23 @@ data ColorsGet' = ColorsGet'
 --
 -- * 'cgPrettyPrint'
 --
--- * 'cgUserIp'
+-- * 'cgUserIP'
 --
 -- * 'cgKey'
 --
--- * 'cgOauthToken'
+-- * 'cgOAuthToken'
 --
 -- * 'cgFields'
---
--- * 'cgAlt'
 colorsGet'
     :: ColorsGet'
 colorsGet' =
     ColorsGet'
     { _cgQuotaUser = Nothing
     , _cgPrettyPrint = True
-    , _cgUserIp = Nothing
+    , _cgUserIP = Nothing
     , _cgKey = Nothing
-    , _cgOauthToken = Nothing
+    , _cgOAuthToken = Nothing
     , _cgFields = Nothing
-    , _cgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -112,37 +107,37 @@ cgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cgUserIp :: Lens' ColorsGet' (Maybe Text)
-cgUserIp = lens _cgUserIp (\ s a -> s{_cgUserIp = a})
+cgUserIP :: Lens' ColorsGet' (Maybe Text)
+cgUserIP = lens _cgUserIP (\ s a -> s{_cgUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cgKey :: Lens' ColorsGet' (Maybe Text)
+cgKey :: Lens' ColorsGet' (Maybe Key)
 cgKey = lens _cgKey (\ s a -> s{_cgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-cgOauthToken :: Lens' ColorsGet' (Maybe Text)
-cgOauthToken
-  = lens _cgOauthToken (\ s a -> s{_cgOauthToken = a})
+cgOAuthToken :: Lens' ColorsGet' (Maybe OAuthToken)
+cgOAuthToken
+  = lens _cgOAuthToken (\ s a -> s{_cgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cgFields :: Lens' ColorsGet' (Maybe Text)
 cgFields = lens _cgFields (\ s a -> s{_cgFields = a})
 
--- | Data format for the response.
-cgAlt :: Lens' ColorsGet' Alt
-cgAlt = lens _cgAlt (\ s a -> s{_cgAlt = a})
+instance GoogleAuth ColorsGet' where
+        authKey = cgKey . _Just
+        authToken = cgOAuthToken . _Just
 
 instance GoogleRequest ColorsGet' where
         type Rs ColorsGet' = Colors
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u ColorsGet'{..}
-          = go _cgQuotaUser (Just _cgPrettyPrint) _cgUserIp
+          = go _cgQuotaUser (Just _cgPrettyPrint) _cgUserIP
               _cgKey
-              _cgOauthToken
+              _cgOAuthToken
               _cgFields
-              (Just _cgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy ColorsGetResource)
                       r

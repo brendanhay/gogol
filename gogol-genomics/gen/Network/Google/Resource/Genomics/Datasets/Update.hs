@@ -32,12 +32,12 @@ module Network.Google.Resource.Genomics.Datasets.Update
     -- * Request Lenses
     , dQuotaUser
     , dPrettyPrint
-    , dUserIp
+    , dDataset
+    , dUserIP
     , dKey
     , dDatasetId
-    , dOauthToken
+    , dOAuthToken
     , dFields
-    , dAlt
     ) where
 
 import           Network.Google.Genomics.Types
@@ -51,10 +51,11 @@ type DatasetsUpdateResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Put '[JSON] Dataset
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Dataset :> Put '[JSON] Dataset
 
 -- | Updates a dataset.
 --
@@ -62,12 +63,12 @@ type DatasetsUpdateResource =
 data DatasetsUpdate' = DatasetsUpdate'
     { _dQuotaUser   :: !(Maybe Text)
     , _dPrettyPrint :: !Bool
-    , _dUserIp      :: !(Maybe Text)
-    , _dKey         :: !(Maybe Text)
+    , _dDataset     :: !Dataset
+    , _dUserIP      :: !(Maybe Text)
+    , _dKey         :: !(Maybe Key)
     , _dDatasetId   :: !Text
-    , _dOauthToken  :: !(Maybe Text)
+    , _dOAuthToken  :: !(Maybe OAuthToken)
     , _dFields      :: !(Maybe Text)
-    , _dAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetsUpdate'' with the minimum fields required to make a request.
@@ -78,30 +79,31 @@ data DatasetsUpdate' = DatasetsUpdate'
 --
 -- * 'dPrettyPrint'
 --
--- * 'dUserIp'
+-- * 'dDataset'
+--
+-- * 'dUserIP'
 --
 -- * 'dKey'
 --
 -- * 'dDatasetId'
 --
--- * 'dOauthToken'
+-- * 'dOAuthToken'
 --
 -- * 'dFields'
---
--- * 'dAlt'
 datasetsUpdate'
-    :: Text -- ^ 'datasetId'
+    :: Dataset -- ^ 'Dataset'
+    -> Text -- ^ 'datasetId'
     -> DatasetsUpdate'
-datasetsUpdate' pDDatasetId_ =
+datasetsUpdate' pDDataset_ pDDatasetId_ =
     DatasetsUpdate'
     { _dQuotaUser = Nothing
     , _dPrettyPrint = True
-    , _dUserIp = Nothing
+    , _dDataset = pDDataset_
+    , _dUserIP = Nothing
     , _dKey = Nothing
     , _dDatasetId = pDDatasetId_
-    , _dOauthToken = Nothing
+    , _dOAuthToken = Nothing
     , _dFields = Nothing
-    , _dAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -116,15 +118,19 @@ dPrettyPrint :: Lens' DatasetsUpdate' Bool
 dPrettyPrint
   = lens _dPrettyPrint (\ s a -> s{_dPrettyPrint = a})
 
+-- | Multipart request metadata.
+dDataset :: Lens' DatasetsUpdate' Dataset
+dDataset = lens _dDataset (\ s a -> s{_dDataset = a})
+
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-dUserIp :: Lens' DatasetsUpdate' (Maybe Text)
-dUserIp = lens _dUserIp (\ s a -> s{_dUserIp = a})
+dUserIP :: Lens' DatasetsUpdate' (Maybe Text)
+dUserIP = lens _dUserIP (\ s a -> s{_dUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dKey :: Lens' DatasetsUpdate' (Maybe Text)
+dKey :: Lens' DatasetsUpdate' (Maybe Key)
 dKey = lens _dKey (\ s a -> s{_dKey = a})
 
 -- | The ID of the dataset to be updated.
@@ -133,27 +139,28 @@ dDatasetId
   = lens _dDatasetId (\ s a -> s{_dDatasetId = a})
 
 -- | OAuth 2.0 token for the current user.
-dOauthToken :: Lens' DatasetsUpdate' (Maybe Text)
-dOauthToken
-  = lens _dOauthToken (\ s a -> s{_dOauthToken = a})
+dOAuthToken :: Lens' DatasetsUpdate' (Maybe OAuthToken)
+dOAuthToken
+  = lens _dOAuthToken (\ s a -> s{_dOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 dFields :: Lens' DatasetsUpdate' (Maybe Text)
 dFields = lens _dFields (\ s a -> s{_dFields = a})
 
--- | Data format for the response.
-dAlt :: Lens' DatasetsUpdate' Alt
-dAlt = lens _dAlt (\ s a -> s{_dAlt = a})
+instance GoogleAuth DatasetsUpdate' where
+        authKey = dKey . _Just
+        authToken = dOAuthToken . _Just
 
 instance GoogleRequest DatasetsUpdate' where
         type Rs DatasetsUpdate' = Dataset
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u DatasetsUpdate'{..}
-          = go _dQuotaUser (Just _dPrettyPrint) _dUserIp _dKey
+          = go _dQuotaUser (Just _dPrettyPrint) _dUserIP _dKey
               _dDatasetId
-              _dOauthToken
+              _dOAuthToken
               _dFields
-              (Just _dAlt)
+              (Just AltJSON)
+              _dDataset
           where go
                   = clientWithRoute
                       (Proxy :: Proxy DatasetsUpdateResource)

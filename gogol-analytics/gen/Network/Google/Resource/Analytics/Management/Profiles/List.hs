@@ -33,14 +33,13 @@ module Network.Google.Resource.Analytics.Management.Profiles.List
     , mplQuotaUser
     , mplPrettyPrint
     , mplWebPropertyId
-    , mplUserIp
+    , mplUserIP
     , mplAccountId
     , mplKey
-    , mplOauthToken
+    , mplOAuthToken
     , mplStartIndex
     , mplMaxResults
     , mplFields
-    , mplAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -58,12 +57,13 @@ type ManagementProfilesListResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "start-index" Int32 :>
                              QueryParam "max-results" Int32 :>
                                QueryParam "fields" Text :>
-                                 QueryParam "alt" Alt :> Get '[JSON] Profiles
+                                 QueryParam "alt" AltJSON :>
+                                   Get '[JSON] Profiles
 
 -- | Lists views (profiles) to which the user has access.
 --
@@ -72,14 +72,13 @@ data ManagementProfilesList' = ManagementProfilesList'
     { _mplQuotaUser     :: !(Maybe Text)
     , _mplPrettyPrint   :: !Bool
     , _mplWebPropertyId :: !Text
-    , _mplUserIp        :: !(Maybe Text)
+    , _mplUserIP        :: !(Maybe Text)
     , _mplAccountId     :: !Text
-    , _mplKey           :: !(Maybe Text)
-    , _mplOauthToken    :: !(Maybe Text)
+    , _mplKey           :: !(Maybe Key)
+    , _mplOAuthToken    :: !(Maybe OAuthToken)
     , _mplStartIndex    :: !(Maybe Int32)
     , _mplMaxResults    :: !(Maybe Int32)
     , _mplFields        :: !(Maybe Text)
-    , _mplAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProfilesList'' with the minimum fields required to make a request.
@@ -92,21 +91,19 @@ data ManagementProfilesList' = ManagementProfilesList'
 --
 -- * 'mplWebPropertyId'
 --
--- * 'mplUserIp'
+-- * 'mplUserIP'
 --
 -- * 'mplAccountId'
 --
 -- * 'mplKey'
 --
--- * 'mplOauthToken'
+-- * 'mplOAuthToken'
 --
 -- * 'mplStartIndex'
 --
 -- * 'mplMaxResults'
 --
 -- * 'mplFields'
---
--- * 'mplAlt'
 managementProfilesList'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'accountId'
@@ -116,14 +113,13 @@ managementProfilesList' pMplWebPropertyId_ pMplAccountId_ =
     { _mplQuotaUser = Nothing
     , _mplPrettyPrint = False
     , _mplWebPropertyId = pMplWebPropertyId_
-    , _mplUserIp = Nothing
+    , _mplUserIP = Nothing
     , _mplAccountId = pMplAccountId_
     , _mplKey = Nothing
-    , _mplOauthToken = Nothing
+    , _mplOAuthToken = Nothing
     , _mplStartIndex = Nothing
     , _mplMaxResults = Nothing
     , _mplFields = Nothing
-    , _mplAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -149,9 +145,9 @@ mplWebPropertyId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mplUserIp :: Lens' ManagementProfilesList' (Maybe Text)
-mplUserIp
-  = lens _mplUserIp (\ s a -> s{_mplUserIp = a})
+mplUserIP :: Lens' ManagementProfilesList' (Maybe Text)
+mplUserIP
+  = lens _mplUserIP (\ s a -> s{_mplUserIP = a})
 
 -- | Account ID for the view (profiles) to retrieve. Can either be a specific
 -- account ID or \'~all\', which refers to all the accounts to which the
@@ -163,14 +159,14 @@ mplAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mplKey :: Lens' ManagementProfilesList' (Maybe Text)
+mplKey :: Lens' ManagementProfilesList' (Maybe Key)
 mplKey = lens _mplKey (\ s a -> s{_mplKey = a})
 
 -- | OAuth 2.0 token for the current user.
-mplOauthToken :: Lens' ManagementProfilesList' (Maybe Text)
-mplOauthToken
-  = lens _mplOauthToken
-      (\ s a -> s{_mplOauthToken = a})
+mplOAuthToken :: Lens' ManagementProfilesList' (Maybe OAuthToken)
+mplOAuthToken
+  = lens _mplOAuthToken
+      (\ s a -> s{_mplOAuthToken = a})
 
 -- | An index of the first entity to retrieve. Use this parameter as a
 -- pagination mechanism along with the max-results parameter.
@@ -190,9 +186,9 @@ mplFields :: Lens' ManagementProfilesList' (Maybe Text)
 mplFields
   = lens _mplFields (\ s a -> s{_mplFields = a})
 
--- | Data format for the response.
-mplAlt :: Lens' ManagementProfilesList' Alt
-mplAlt = lens _mplAlt (\ s a -> s{_mplAlt = a})
+instance GoogleAuth ManagementProfilesList' where
+        authKey = mplKey . _Just
+        authToken = mplOAuthToken . _Just
 
 instance GoogleRequest ManagementProfilesList' where
         type Rs ManagementProfilesList' = Profiles
@@ -200,14 +196,14 @@ instance GoogleRequest ManagementProfilesList' where
         requestWithRoute r u ManagementProfilesList'{..}
           = go _mplQuotaUser (Just _mplPrettyPrint)
               _mplWebPropertyId
-              _mplUserIp
+              _mplUserIP
               _mplAccountId
               _mplKey
-              _mplOauthToken
+              _mplOAuthToken
               _mplStartIndex
               _mplMaxResults
               _mplFields
-              (Just _mplAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ManagementProfilesListResource)

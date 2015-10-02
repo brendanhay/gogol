@@ -34,15 +34,14 @@ module Network.Google.Resource.Compute.Instances.List
     , insQuotaUser
     , insPrettyPrint
     , insProject
-    , insUserIp
+    , insUserIP
     , insZone
     , insKey
     , insFilter
     , insPageToken
-    , insOauthToken
+    , insOAuthToken
     , insMaxResults
     , insFields
-    , insAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -58,13 +57,14 @@ type InstancesListResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "filter" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "maxResults" Word32 :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :> Get '[JSON] InstanceList
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] InstanceList
 
 -- | Retrieves the list of instance resources contained within the specified
 -- zone.
@@ -74,15 +74,14 @@ data InstancesList' = InstancesList'
     { _insQuotaUser   :: !(Maybe Text)
     , _insPrettyPrint :: !Bool
     , _insProject     :: !Text
-    , _insUserIp      :: !(Maybe Text)
+    , _insUserIP      :: !(Maybe Text)
     , _insZone        :: !Text
-    , _insKey         :: !(Maybe Text)
+    , _insKey         :: !(Maybe Key)
     , _insFilter      :: !(Maybe Text)
     , _insPageToken   :: !(Maybe Text)
-    , _insOauthToken  :: !(Maybe Text)
+    , _insOAuthToken  :: !(Maybe OAuthToken)
     , _insMaxResults  :: !Word32
     , _insFields      :: !(Maybe Text)
-    , _insAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesList'' with the minimum fields required to make a request.
@@ -95,7 +94,7 @@ data InstancesList' = InstancesList'
 --
 -- * 'insProject'
 --
--- * 'insUserIp'
+-- * 'insUserIP'
 --
 -- * 'insZone'
 --
@@ -105,13 +104,11 @@ data InstancesList' = InstancesList'
 --
 -- * 'insPageToken'
 --
--- * 'insOauthToken'
+-- * 'insOAuthToken'
 --
 -- * 'insMaxResults'
 --
 -- * 'insFields'
---
--- * 'insAlt'
 instancesList'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
@@ -121,15 +118,14 @@ instancesList' pInsProject_ pInsZone_ =
     { _insQuotaUser = Nothing
     , _insPrettyPrint = True
     , _insProject = pInsProject_
-    , _insUserIp = Nothing
+    , _insUserIP = Nothing
     , _insZone = pInsZone_
     , _insKey = Nothing
     , _insFilter = Nothing
     , _insPageToken = Nothing
-    , _insOauthToken = Nothing
+    , _insOAuthToken = Nothing
     , _insMaxResults = 500
     , _insFields = Nothing
-    , _insAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,9 +148,9 @@ insProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-insUserIp :: Lens' InstancesList' (Maybe Text)
-insUserIp
-  = lens _insUserIp (\ s a -> s{_insUserIp = a})
+insUserIP :: Lens' InstancesList' (Maybe Text)
+insUserIP
+  = lens _insUserIP (\ s a -> s{_insUserIP = a})
 
 -- | The name of the zone for this request.
 insZone :: Lens' InstancesList' Text
@@ -163,7 +159,7 @@ insZone = lens _insZone (\ s a -> s{_insZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-insKey :: Lens' InstancesList' (Maybe Text)
+insKey :: Lens' InstancesList' (Maybe Key)
 insKey = lens _insKey (\ s a -> s{_insKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
@@ -189,10 +185,10 @@ insPageToken
   = lens _insPageToken (\ s a -> s{_insPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-insOauthToken :: Lens' InstancesList' (Maybe Text)
-insOauthToken
-  = lens _insOauthToken
-      (\ s a -> s{_insOauthToken = a})
+insOAuthToken :: Lens' InstancesList' (Maybe OAuthToken)
+insOAuthToken
+  = lens _insOAuthToken
+      (\ s a -> s{_insOAuthToken = a})
 
 -- | Maximum count of results to be returned.
 insMaxResults :: Lens' InstancesList' Word32
@@ -205,24 +201,24 @@ insFields :: Lens' InstancesList' (Maybe Text)
 insFields
   = lens _insFields (\ s a -> s{_insFields = a})
 
--- | Data format for the response.
-insAlt :: Lens' InstancesList' Alt
-insAlt = lens _insAlt (\ s a -> s{_insAlt = a})
+instance GoogleAuth InstancesList' where
+        authKey = insKey . _Just
+        authToken = insOAuthToken . _Just
 
 instance GoogleRequest InstancesList' where
         type Rs InstancesList' = InstanceList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstancesList'{..}
           = go _insQuotaUser (Just _insPrettyPrint) _insProject
-              _insUserIp
+              _insUserIP
               _insZone
               _insKey
               _insFilter
               _insPageToken
-              _insOauthToken
+              _insOAuthToken
               (Just _insMaxResults)
               _insFields
-              (Just _insAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InstancesListResource)

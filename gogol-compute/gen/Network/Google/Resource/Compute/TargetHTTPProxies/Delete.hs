@@ -33,12 +33,11 @@ module Network.Google.Resource.Compute.TargetHTTPProxies.Delete
     , thttppdQuotaUser
     , thttppdPrettyPrint
     , thttppdProject
-    , thttppdUserIp
+    , thttppdUserIP
     , thttppdKey
-    , thttppdTargetHttpProxy
-    , thttppdOauthToken
+    , thttppdTargetHTTPProxy
+    , thttppdOAuthToken
     , thttppdFields
-    , thttppdAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -54,10 +53,10 @@ type TargetHTTPProxiesDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Delete '[JSON] Operation
+                         QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified TargetHttpProxy resource.
 --
@@ -66,12 +65,11 @@ data TargetHTTPProxiesDelete' = TargetHTTPProxiesDelete'
     { _thttppdQuotaUser       :: !(Maybe Text)
     , _thttppdPrettyPrint     :: !Bool
     , _thttppdProject         :: !Text
-    , _thttppdUserIp          :: !(Maybe Text)
-    , _thttppdKey             :: !(Maybe Text)
-    , _thttppdTargetHttpProxy :: !Text
-    , _thttppdOauthToken      :: !(Maybe Text)
+    , _thttppdUserIP          :: !(Maybe Text)
+    , _thttppdKey             :: !(Maybe Key)
+    , _thttppdTargetHTTPProxy :: !Text
+    , _thttppdOAuthToken      :: !(Maybe OAuthToken)
     , _thttppdFields          :: !(Maybe Text)
-    , _thttppdAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetHTTPProxiesDelete'' with the minimum fields required to make a request.
@@ -84,32 +82,29 @@ data TargetHTTPProxiesDelete' = TargetHTTPProxiesDelete'
 --
 -- * 'thttppdProject'
 --
--- * 'thttppdUserIp'
+-- * 'thttppdUserIP'
 --
 -- * 'thttppdKey'
 --
--- * 'thttppdTargetHttpProxy'
+-- * 'thttppdTargetHTTPProxy'
 --
--- * 'thttppdOauthToken'
+-- * 'thttppdOAuthToken'
 --
 -- * 'thttppdFields'
---
--- * 'thttppdAlt'
 targetHTTPProxiesDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'targetHttpProxy'
     -> TargetHTTPProxiesDelete'
-targetHTTPProxiesDelete' pThttppdProject_ pThttppdTargetHttpProxy_ =
+targetHTTPProxiesDelete' pThttppdProject_ pThttppdTargetHTTPProxy_ =
     TargetHTTPProxiesDelete'
     { _thttppdQuotaUser = Nothing
     , _thttppdPrettyPrint = True
     , _thttppdProject = pThttppdProject_
-    , _thttppdUserIp = Nothing
+    , _thttppdUserIP = Nothing
     , _thttppdKey = Nothing
-    , _thttppdTargetHttpProxy = pThttppdTargetHttpProxy_
-    , _thttppdOauthToken = Nothing
+    , _thttppdTargetHTTPProxy = pThttppdTargetHTTPProxy_
+    , _thttppdOAuthToken = Nothing
     , _thttppdFields = Nothing
-    , _thttppdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -134,29 +129,29 @@ thttppdProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-thttppdUserIp :: Lens' TargetHTTPProxiesDelete' (Maybe Text)
-thttppdUserIp
-  = lens _thttppdUserIp
-      (\ s a -> s{_thttppdUserIp = a})
+thttppdUserIP :: Lens' TargetHTTPProxiesDelete' (Maybe Text)
+thttppdUserIP
+  = lens _thttppdUserIP
+      (\ s a -> s{_thttppdUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-thttppdKey :: Lens' TargetHTTPProxiesDelete' (Maybe Text)
+thttppdKey :: Lens' TargetHTTPProxiesDelete' (Maybe Key)
 thttppdKey
   = lens _thttppdKey (\ s a -> s{_thttppdKey = a})
 
 -- | Name of the TargetHttpProxy resource to delete.
-thttppdTargetHttpProxy :: Lens' TargetHTTPProxiesDelete' Text
-thttppdTargetHttpProxy
-  = lens _thttppdTargetHttpProxy
-      (\ s a -> s{_thttppdTargetHttpProxy = a})
+thttppdTargetHTTPProxy :: Lens' TargetHTTPProxiesDelete' Text
+thttppdTargetHTTPProxy
+  = lens _thttppdTargetHTTPProxy
+      (\ s a -> s{_thttppdTargetHTTPProxy = a})
 
 -- | OAuth 2.0 token for the current user.
-thttppdOauthToken :: Lens' TargetHTTPProxiesDelete' (Maybe Text)
-thttppdOauthToken
-  = lens _thttppdOauthToken
-      (\ s a -> s{_thttppdOauthToken = a})
+thttppdOAuthToken :: Lens' TargetHTTPProxiesDelete' (Maybe OAuthToken)
+thttppdOAuthToken
+  = lens _thttppdOAuthToken
+      (\ s a -> s{_thttppdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 thttppdFields :: Lens' TargetHTTPProxiesDelete' (Maybe Text)
@@ -164,10 +159,9 @@ thttppdFields
   = lens _thttppdFields
       (\ s a -> s{_thttppdFields = a})
 
--- | Data format for the response.
-thttppdAlt :: Lens' TargetHTTPProxiesDelete' Alt
-thttppdAlt
-  = lens _thttppdAlt (\ s a -> s{_thttppdAlt = a})
+instance GoogleAuth TargetHTTPProxiesDelete' where
+        authKey = thttppdKey . _Just
+        authToken = thttppdOAuthToken . _Just
 
 instance GoogleRequest TargetHTTPProxiesDelete' where
         type Rs TargetHTTPProxiesDelete' = Operation
@@ -175,12 +169,12 @@ instance GoogleRequest TargetHTTPProxiesDelete' where
         requestWithRoute r u TargetHTTPProxiesDelete'{..}
           = go _thttppdQuotaUser (Just _thttppdPrettyPrint)
               _thttppdProject
-              _thttppdUserIp
+              _thttppdUserIP
               _thttppdKey
-              _thttppdTargetHttpProxy
-              _thttppdOauthToken
+              _thttppdTargetHTTPProxy
+              _thttppdOAuthToken
               _thttppdFields
-              (Just _thttppdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TargetHTTPProxiesDeleteResource)

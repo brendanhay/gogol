@@ -19,7 +19,7 @@
 --
 -- | Gets the current configuration of the module.
 --
--- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @AppengineAppsModulesGet@.
+-- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @AppEngineAppsModulesGet@.
 module Network.Google.Resource.AppEngine.Apps.Modules.Get
     (
     -- * REST Resource
@@ -41,16 +41,15 @@ module Network.Google.Resource.AppEngine.Apps.Modules.Get
     , amgBearerToken
     , amgKey
     , amgAppsId
-    , amgOauthToken
+    , amgOAuthToken
     , amgFields
     , amgCallback
-    , amgAlt
     ) where
 
 import           Network.Google.AppEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AppengineAppsModulesGet@ which the
+-- | A resource alias for @AppEngineAppsModulesGet@ which the
 -- 'AppsModulesGet'' request conforms to.
 type AppsModulesGetResource =
      "v1beta4" :>
@@ -66,11 +65,11 @@ type AppsModulesGetResource =
                          QueryParam "access_token" Text :>
                            QueryParam "uploadType" Text :>
                              QueryParam "bearer_token" Text :>
-                               QueryParam "key" Text :>
-                                 QueryParam "oauth_token" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "fields" Text :>
                                      QueryParam "callback" Text :>
-                                       QueryParam "alt" Text :>
+                                       QueryParam "alt" AltJSON :>
                                          Get '[JSON] Module
 
 -- | Gets the current configuration of the module.
@@ -86,12 +85,11 @@ data AppsModulesGet' = AppsModulesGet'
     , _amgUploadType     :: !(Maybe Text)
     , _amgModulesId      :: !Text
     , _amgBearerToken    :: !(Maybe Text)
-    , _amgKey            :: !(Maybe Text)
+    , _amgKey            :: !(Maybe Key)
     , _amgAppsId         :: !Text
-    , _amgOauthToken     :: !(Maybe Text)
+    , _amgOAuthToken     :: !(Maybe OAuthToken)
     , _amgFields         :: !(Maybe Text)
     , _amgCallback       :: !(Maybe Text)
-    , _amgAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AppsModulesGet'' with the minimum fields required to make a request.
@@ -120,13 +118,11 @@ data AppsModulesGet' = AppsModulesGet'
 --
 -- * 'amgAppsId'
 --
--- * 'amgOauthToken'
+-- * 'amgOAuthToken'
 --
 -- * 'amgFields'
 --
 -- * 'amgCallback'
---
--- * 'amgAlt'
 appsModulesGet'
     :: Text -- ^ 'modulesId'
     -> Text -- ^ 'appsId'
@@ -144,10 +140,9 @@ appsModulesGet' pAmgModulesId_ pAmgAppsId_ =
     , _amgBearerToken = Nothing
     , _amgKey = Nothing
     , _amgAppsId = pAmgAppsId_
-    , _amgOauthToken = Nothing
+    , _amgOAuthToken = Nothing
     , _amgFields = Nothing
     , _amgCallback = Nothing
-    , _amgAlt = "json"
     }
 
 -- | V1 error format.
@@ -203,7 +198,7 @@ amgBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-amgKey :: Lens' AppsModulesGet' (Maybe Text)
+amgKey :: Lens' AppsModulesGet' (Maybe Key)
 amgKey = lens _amgKey (\ s a -> s{_amgKey = a})
 
 -- | Part of \`name\`. Name of the resource requested. For example:
@@ -213,10 +208,10 @@ amgAppsId
   = lens _amgAppsId (\ s a -> s{_amgAppsId = a})
 
 -- | OAuth 2.0 token for the current user.
-amgOauthToken :: Lens' AppsModulesGet' (Maybe Text)
-amgOauthToken
-  = lens _amgOauthToken
-      (\ s a -> s{_amgOauthToken = a})
+amgOAuthToken :: Lens' AppsModulesGet' (Maybe OAuthToken)
+amgOAuthToken
+  = lens _amgOAuthToken
+      (\ s a -> s{_amgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 amgFields :: Lens' AppsModulesGet' (Maybe Text)
@@ -228,9 +223,9 @@ amgCallback :: Lens' AppsModulesGet' (Maybe Text)
 amgCallback
   = lens _amgCallback (\ s a -> s{_amgCallback = a})
 
--- | Data format for response.
-amgAlt :: Lens' AppsModulesGet' Text
-amgAlt = lens _amgAlt (\ s a -> s{_amgAlt = a})
+instance GoogleAuth AppsModulesGet' where
+        authKey = amgKey . _Just
+        authToken = amgOAuthToken . _Just
 
 instance GoogleRequest AppsModulesGet' where
         type Rs AppsModulesGet' = Module
@@ -245,10 +240,10 @@ instance GoogleRequest AppsModulesGet' where
               _amgBearerToken
               _amgKey
               _amgAppsId
-              _amgOauthToken
+              _amgOAuthToken
               _amgFields
               _amgCallback
-              (Just _amgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AppsModulesGetResource)

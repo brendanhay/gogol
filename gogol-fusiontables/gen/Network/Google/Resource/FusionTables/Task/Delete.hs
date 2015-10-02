@@ -34,12 +34,11 @@ module Network.Google.Resource.FusionTables.Task.Delete
     , tQuotaUser
     , tPrettyPrint
     , tTaskId
-    , tUserIp
+    , tUserIP
     , tKey
-    , tOauthToken
+    , tOAuthToken
     , tTableId
     , tFields
-    , tAlt
     ) where
 
 import           Network.Google.FusionTables.Types
@@ -55,10 +54,10 @@ type TaskDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Delete '[JSON] ()
+                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a specific task by its ID, unless that task has already started
 -- running.
@@ -68,12 +67,11 @@ data TaskDelete' = TaskDelete'
     { _tQuotaUser   :: !(Maybe Text)
     , _tPrettyPrint :: !Bool
     , _tTaskId      :: !Text
-    , _tUserIp      :: !(Maybe Text)
-    , _tKey         :: !(Maybe Text)
-    , _tOauthToken  :: !(Maybe Text)
+    , _tUserIP      :: !(Maybe Text)
+    , _tKey         :: !(Maybe Key)
+    , _tOAuthToken  :: !(Maybe OAuthToken)
     , _tTableId     :: !Text
     , _tFields      :: !(Maybe Text)
-    , _tAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TaskDelete'' with the minimum fields required to make a request.
@@ -86,17 +84,15 @@ data TaskDelete' = TaskDelete'
 --
 -- * 'tTaskId'
 --
--- * 'tUserIp'
+-- * 'tUserIP'
 --
 -- * 'tKey'
 --
--- * 'tOauthToken'
+-- * 'tOAuthToken'
 --
 -- * 'tTableId'
 --
 -- * 'tFields'
---
--- * 'tAlt'
 taskDelete'
     :: Text -- ^ 'taskId'
     -> Text -- ^ 'tableId'
@@ -106,12 +102,11 @@ taskDelete' pTTaskId_ pTTableId_ =
     { _tQuotaUser = Nothing
     , _tPrettyPrint = True
     , _tTaskId = pTTaskId_
-    , _tUserIp = Nothing
+    , _tUserIP = Nothing
     , _tKey = Nothing
-    , _tOauthToken = Nothing
+    , _tOAuthToken = Nothing
     , _tTableId = pTTableId_
     , _tFields = Nothing
-    , _tAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -132,19 +127,19 @@ tTaskId = lens _tTaskId (\ s a -> s{_tTaskId = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tUserIp :: Lens' TaskDelete' (Maybe Text)
-tUserIp = lens _tUserIp (\ s a -> s{_tUserIp = a})
+tUserIP :: Lens' TaskDelete' (Maybe Text)
+tUserIP = lens _tUserIP (\ s a -> s{_tUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tKey :: Lens' TaskDelete' (Maybe Text)
+tKey :: Lens' TaskDelete' (Maybe Key)
 tKey = lens _tKey (\ s a -> s{_tKey = a})
 
 -- | OAuth 2.0 token for the current user.
-tOauthToken :: Lens' TaskDelete' (Maybe Text)
-tOauthToken
-  = lens _tOauthToken (\ s a -> s{_tOauthToken = a})
+tOAuthToken :: Lens' TaskDelete' (Maybe OAuthToken)
+tOAuthToken
+  = lens _tOAuthToken (\ s a -> s{_tOAuthToken = a})
 
 -- | Table from which the task is being deleted.
 tTableId :: Lens' TaskDelete' Text
@@ -154,21 +149,21 @@ tTableId = lens _tTableId (\ s a -> s{_tTableId = a})
 tFields :: Lens' TaskDelete' (Maybe Text)
 tFields = lens _tFields (\ s a -> s{_tFields = a})
 
--- | Data format for the response.
-tAlt :: Lens' TaskDelete' Alt
-tAlt = lens _tAlt (\ s a -> s{_tAlt = a})
+instance GoogleAuth TaskDelete' where
+        authKey = tKey . _Just
+        authToken = tOAuthToken . _Just
 
 instance GoogleRequest TaskDelete' where
         type Rs TaskDelete' = ()
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u TaskDelete'{..}
           = go _tQuotaUser (Just _tPrettyPrint) _tTaskId
-              _tUserIp
+              _tUserIP
               _tKey
-              _tOauthToken
+              _tOAuthToken
               _tTableId
               _tFields
-              (Just _tAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy TaskDeleteResource)
                       r

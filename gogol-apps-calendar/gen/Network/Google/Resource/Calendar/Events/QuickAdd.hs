@@ -34,12 +34,11 @@ module Network.Google.Resource.Calendar.Events.QuickAdd
     , eqaCalendarId
     , eqaPrettyPrint
     , eqaText
-    , eqaUserIp
+    , eqaUserIP
     , eqaKey
     , eqaSendNotifications
-    , eqaOauthToken
+    , eqaOAuthToken
     , eqaFields
-    , eqaAlt
     ) where
 
 import           Network.Google.AppsCalendar.Types
@@ -56,11 +55,11 @@ type EventsQuickAddResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "text" Text :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
+                     QueryParam "key" Key :>
                        QueryParam "sendNotifications" Bool :>
-                         QueryParam "oauth_token" Text :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Post '[JSON] Event
+                             QueryParam "alt" AltJSON :> Post '[JSON] Event
 
 -- | Creates an event based on a simple text string.
 --
@@ -70,12 +69,11 @@ data EventsQuickAdd' = EventsQuickAdd'
     , _eqaCalendarId        :: !Text
     , _eqaPrettyPrint       :: !Bool
     , _eqaText              :: !Text
-    , _eqaUserIp            :: !(Maybe Text)
-    , _eqaKey               :: !(Maybe Text)
+    , _eqaUserIP            :: !(Maybe Text)
+    , _eqaKey               :: !(Maybe Key)
     , _eqaSendNotifications :: !(Maybe Bool)
-    , _eqaOauthToken        :: !(Maybe Text)
+    , _eqaOAuthToken        :: !(Maybe OAuthToken)
     , _eqaFields            :: !(Maybe Text)
-    , _eqaAlt               :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsQuickAdd'' with the minimum fields required to make a request.
@@ -90,17 +88,15 @@ data EventsQuickAdd' = EventsQuickAdd'
 --
 -- * 'eqaText'
 --
--- * 'eqaUserIp'
+-- * 'eqaUserIP'
 --
 -- * 'eqaKey'
 --
 -- * 'eqaSendNotifications'
 --
--- * 'eqaOauthToken'
+-- * 'eqaOAuthToken'
 --
 -- * 'eqaFields'
---
--- * 'eqaAlt'
 eventsQuickAdd'
     :: Text -- ^ 'calendarId'
     -> Text -- ^ 'text'
@@ -111,12 +107,11 @@ eventsQuickAdd' pEqaCalendarId_ pEqaText_ =
     , _eqaCalendarId = pEqaCalendarId_
     , _eqaPrettyPrint = True
     , _eqaText = pEqaText_
-    , _eqaUserIp = Nothing
+    , _eqaUserIP = Nothing
     , _eqaKey = Nothing
     , _eqaSendNotifications = Nothing
-    , _eqaOauthToken = Nothing
+    , _eqaOAuthToken = Nothing
     , _eqaFields = Nothing
-    , _eqaAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -146,14 +141,14 @@ eqaText = lens _eqaText (\ s a -> s{_eqaText = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-eqaUserIp :: Lens' EventsQuickAdd' (Maybe Text)
-eqaUserIp
-  = lens _eqaUserIp (\ s a -> s{_eqaUserIp = a})
+eqaUserIP :: Lens' EventsQuickAdd' (Maybe Text)
+eqaUserIP
+  = lens _eqaUserIP (\ s a -> s{_eqaUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-eqaKey :: Lens' EventsQuickAdd' (Maybe Text)
+eqaKey :: Lens' EventsQuickAdd' (Maybe Key)
 eqaKey = lens _eqaKey (\ s a -> s{_eqaKey = a})
 
 -- | Whether to send notifications about the creation of the event. Optional.
@@ -164,19 +159,19 @@ eqaSendNotifications
       (\ s a -> s{_eqaSendNotifications = a})
 
 -- | OAuth 2.0 token for the current user.
-eqaOauthToken :: Lens' EventsQuickAdd' (Maybe Text)
-eqaOauthToken
-  = lens _eqaOauthToken
-      (\ s a -> s{_eqaOauthToken = a})
+eqaOAuthToken :: Lens' EventsQuickAdd' (Maybe OAuthToken)
+eqaOAuthToken
+  = lens _eqaOAuthToken
+      (\ s a -> s{_eqaOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 eqaFields :: Lens' EventsQuickAdd' (Maybe Text)
 eqaFields
   = lens _eqaFields (\ s a -> s{_eqaFields = a})
 
--- | Data format for the response.
-eqaAlt :: Lens' EventsQuickAdd' Alt
-eqaAlt = lens _eqaAlt (\ s a -> s{_eqaAlt = a})
+instance GoogleAuth EventsQuickAdd' where
+        authKey = eqaKey . _Just
+        authToken = eqaOAuthToken . _Just
 
 instance GoogleRequest EventsQuickAdd' where
         type Rs EventsQuickAdd' = Event
@@ -185,12 +180,12 @@ instance GoogleRequest EventsQuickAdd' where
           = go _eqaQuotaUser _eqaCalendarId
               (Just _eqaPrettyPrint)
               (Just _eqaText)
-              _eqaUserIp
+              _eqaUserIP
               _eqaKey
               _eqaSendNotifications
-              _eqaOauthToken
+              _eqaOAuthToken
               _eqaFields
-              (Just _eqaAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy EventsQuickAddResource)

@@ -34,12 +34,11 @@ module Network.Google.Resource.Taskqueue.Tasks.Get
     , tgQuotaUser
     , tgPrettyPrint
     , tgProject
-    , tgUserIp
+    , tgUserIP
     , tgKey
     , tgTask
-    , tgOauthToken
+    , tgOAuthToken
     , tgFields
-    , tgAlt
     ) where
 
 import           Network.Google.AppEngineTaskQueue.Types
@@ -56,10 +55,10 @@ type TasksGetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Get '[JSON] Task
+                           QueryParam "alt" AltJSON :> Get '[JSON] Task
 
 -- | Get a particular task from a TaskQueue.
 --
@@ -69,12 +68,11 @@ data TasksGet' = TasksGet'
     , _tgQuotaUser   :: !(Maybe Text)
     , _tgPrettyPrint :: !Bool
     , _tgProject     :: !Text
-    , _tgUserIp      :: !(Maybe Text)
-    , _tgKey         :: !(Maybe Text)
+    , _tgUserIP      :: !(Maybe Text)
+    , _tgKey         :: !(Maybe Key)
     , _tgTask        :: !Text
-    , _tgOauthToken  :: !(Maybe Text)
+    , _tgOAuthToken  :: !(Maybe OAuthToken)
     , _tgFields      :: !(Maybe Text)
-    , _tgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TasksGet'' with the minimum fields required to make a request.
@@ -89,17 +87,15 @@ data TasksGet' = TasksGet'
 --
 -- * 'tgProject'
 --
--- * 'tgUserIp'
+-- * 'tgUserIP'
 --
 -- * 'tgKey'
 --
 -- * 'tgTask'
 --
--- * 'tgOauthToken'
+-- * 'tgOAuthToken'
 --
 -- * 'tgFields'
---
--- * 'tgAlt'
 tasksGet'
     :: Text -- ^ 'taskqueue'
     -> Text -- ^ 'project'
@@ -111,12 +107,11 @@ tasksGet' pTgTaskqueue_ pTgProject_ pTgTask_ =
     , _tgQuotaUser = Nothing
     , _tgPrettyPrint = True
     , _tgProject = pTgProject_
-    , _tgUserIp = Nothing
+    , _tgUserIP = Nothing
     , _tgKey = Nothing
     , _tgTask = pTgTask_
-    , _tgOauthToken = Nothing
+    , _tgOAuthToken = Nothing
     , _tgFields = Nothing
-    , _tgAlt = JSON
     }
 
 -- | The taskqueue in which the task belongs.
@@ -144,13 +139,13 @@ tgProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tgUserIp :: Lens' TasksGet' (Maybe Text)
-tgUserIp = lens _tgUserIp (\ s a -> s{_tgUserIp = a})
+tgUserIP :: Lens' TasksGet' (Maybe Text)
+tgUserIP = lens _tgUserIP (\ s a -> s{_tgUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tgKey :: Lens' TasksGet' (Maybe Text)
+tgKey :: Lens' TasksGet' (Maybe Key)
 tgKey = lens _tgKey (\ s a -> s{_tgKey = a})
 
 -- | The task to get properties of.
@@ -158,17 +153,17 @@ tgTask :: Lens' TasksGet' Text
 tgTask = lens _tgTask (\ s a -> s{_tgTask = a})
 
 -- | OAuth 2.0 token for the current user.
-tgOauthToken :: Lens' TasksGet' (Maybe Text)
-tgOauthToken
-  = lens _tgOauthToken (\ s a -> s{_tgOauthToken = a})
+tgOAuthToken :: Lens' TasksGet' (Maybe OAuthToken)
+tgOAuthToken
+  = lens _tgOAuthToken (\ s a -> s{_tgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 tgFields :: Lens' TasksGet' (Maybe Text)
 tgFields = lens _tgFields (\ s a -> s{_tgFields = a})
 
--- | Data format for the response.
-tgAlt :: Lens' TasksGet' Alt
-tgAlt = lens _tgAlt (\ s a -> s{_tgAlt = a})
+instance GoogleAuth TasksGet' where
+        authKey = tgKey . _Just
+        authToken = tgOAuthToken . _Just
 
 instance GoogleRequest TasksGet' where
         type Rs TasksGet' = Task
@@ -177,12 +172,12 @@ instance GoogleRequest TasksGet' where
         requestWithRoute r u TasksGet'{..}
           = go _tgTaskqueue _tgQuotaUser (Just _tgPrettyPrint)
               _tgProject
-              _tgUserIp
+              _tgUserIP
               _tgKey
               _tgTask
-              _tgOauthToken
+              _tgOAuthToken
               _tgFields
-              (Just _tgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy TasksGetResource) r
                       u

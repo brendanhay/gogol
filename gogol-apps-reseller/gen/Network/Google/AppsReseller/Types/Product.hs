@@ -211,20 +211,20 @@ instance ToJSON Address where
 --
 -- /See:/ 'customer' smart constructor.
 data Customer = Customer
-    { _cResourceUiUrl  :: !(Maybe Text)
+    { _cResourceUiURL  :: !(Maybe Text)
     , _cKind           :: !Text
     , _cCustomerId     :: !(Maybe Text)
     , _cAlternateEmail :: !(Maybe Text)
     , _cCustomerDomain :: !(Maybe Text)
     , _cPhoneNumber    :: !(Maybe Text)
-    , _cPostalAddress  :: !(Maybe (Maybe Address))
+    , _cPostalAddress  :: !(Maybe Address)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Customer' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cResourceUiUrl'
+-- * 'cResourceUiURL'
 --
 -- * 'cKind'
 --
@@ -241,7 +241,7 @@ customer
     :: Customer
 customer =
     Customer
-    { _cResourceUiUrl = Nothing
+    { _cResourceUiURL = Nothing
     , _cKind = "reseller#customer"
     , _cCustomerId = Nothing
     , _cAlternateEmail = Nothing
@@ -251,10 +251,10 @@ customer =
     }
 
 -- | Ui url for customer resource.
-cResourceUiUrl :: Lens' Customer (Maybe Text)
-cResourceUiUrl
-  = lens _cResourceUiUrl
-      (\ s a -> s{_cResourceUiUrl = a})
+cResourceUiURL :: Lens' Customer (Maybe Text)
+cResourceUiURL
+  = lens _cResourceUiURL
+      (\ s a -> s{_cResourceUiURL = a})
 
 -- | Identifies the resource as a customer.
 cKind :: Lens' Customer Text
@@ -283,7 +283,7 @@ cPhoneNumber
   = lens _cPhoneNumber (\ s a -> s{_cPhoneNumber = a})
 
 -- | The postal address of the customer.
-cPostalAddress :: Lens' Customer (Maybe (Maybe Address))
+cPostalAddress :: Lens' Customer (Maybe Address)
 cPostalAddress
   = lens _cPostalAddress
       (\ s a -> s{_cPostalAddress = a})
@@ -305,7 +305,7 @@ instance ToJSON Customer where
         toJSON Customer{..}
           = object
               (catMaybes
-                 [("resourceUiUrl" .=) <$> _cResourceUiUrl,
+                 [("resourceUiUrl" .=) <$> _cResourceUiURL,
                   Just ("kind" .= _cKind),
                   ("customerId" .=) <$> _cCustomerId,
                   ("alternateEmail" .=) <$> _cAlternateEmail,
@@ -370,7 +370,7 @@ data ChangePlanRequest = ChangePlanRequest
     { _cprKind            :: !Text
     , _cprPlanName        :: !(Maybe Text)
     , _cprPurchaseOrderId :: !(Maybe Text)
-    , _cprSeats           :: !(Maybe (Maybe Seats))
+    , _cprSeats           :: !(Maybe Seats)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChangePlanRequest' with the minimum fields required to make a request.
@@ -410,7 +410,7 @@ cprPurchaseOrderId
       (\ s a -> s{_cprPurchaseOrderId = a})
 
 -- | Number\/Limit of seats in the new plan.
-cprSeats :: Lens' ChangePlanRequest (Maybe (Maybe Seats))
+cprSeats :: Lens' ChangePlanRequest (Maybe Seats)
 cprSeats = lens _cprSeats (\ s a -> s{_cprSeats = a})
 
 instance FromJSON ChangePlanRequest where
@@ -517,7 +517,7 @@ instance ToJSON Seats where
 data Subscriptions = Subscriptions
     { _subNextPageToken :: !(Maybe Text)
     , _subKind          :: !Text
-    , _subSubscriptions :: !(Maybe [Maybe Subscription])
+    , _subSubscriptions :: !(Maybe [Subscription])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Subscriptions' with the minimum fields required to make a request.
@@ -550,7 +550,7 @@ subKind :: Lens' Subscriptions Text
 subKind = lens _subKind (\ s a -> s{_subKind = a})
 
 -- | The subscriptions in this page of results.
-subSubscriptions :: Lens' Subscriptions [Maybe Subscription]
+subSubscriptions :: Lens' Subscriptions [Subscription]
 subSubscriptions
   = lens _subSubscriptions
       (\ s a -> s{_subSubscriptions = a})
@@ -643,7 +643,7 @@ data Subscription = Subscription
     , _subuBillingMethod     :: !(Maybe Text)
     , _subuStatus            :: !(Maybe Text)
     , _subuTrialSettings     :: !(Maybe SubscriptionTrialSettings)
-    , _subuResourceUiUrl     :: !(Maybe Text)
+    , _subuResourceUiURL     :: !(Maybe Text)
     , _subuKind              :: !Text
     , _subuSkuId             :: !(Maybe Text)
     , _subuPlan              :: !(Maybe SubscriptionPlan)
@@ -651,8 +651,8 @@ data Subscription = Subscription
     , _subuSuspensionReasons :: !(Maybe [Text])
     , _subuTransferInfo      :: !(Maybe SubscriptionTransferInfo)
     , _subuPurchaseOrderId   :: !(Maybe Text)
-    , _subuSeats             :: !(Maybe (Maybe Seats))
-    , _subuRenewalSettings   :: !(Maybe (Maybe RenewalSettings))
+    , _subuSeats             :: !(Maybe Seats)
+    , _subuRenewalSettings   :: !(Maybe RenewalSettings)
     , _subuSubscriptionId    :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -668,7 +668,7 @@ data Subscription = Subscription
 --
 -- * 'subuTrialSettings'
 --
--- * 'subuResourceUiUrl'
+-- * 'subuResourceUiURL'
 --
 -- * 'subuKind'
 --
@@ -697,7 +697,7 @@ subscription =
     , _subuBillingMethod = Nothing
     , _subuStatus = Nothing
     , _subuTrialSettings = Nothing
-    , _subuResourceUiUrl = Nothing
+    , _subuResourceUiURL = Nothing
     , _subuKind = "reseller#subscription"
     , _subuSkuId = Nothing
     , _subuPlan = Nothing
@@ -734,10 +734,10 @@ subuTrialSettings
       (\ s a -> s{_subuTrialSettings = a})
 
 -- | Ui url for subscription resource.
-subuResourceUiUrl :: Lens' Subscription (Maybe Text)
-subuResourceUiUrl
-  = lens _subuResourceUiUrl
-      (\ s a -> s{_subuResourceUiUrl = a})
+subuResourceUiURL :: Lens' Subscription (Maybe Text)
+subuResourceUiURL
+  = lens _subuResourceUiURL
+      (\ s a -> s{_subuResourceUiURL = a})
 
 -- | Identifies the resource as a Subscription.
 subuKind :: Lens' Subscription Text
@@ -779,12 +779,12 @@ subuPurchaseOrderId
       (\ s a -> s{_subuPurchaseOrderId = a})
 
 -- | Number\/Limit of seats in the new plan.
-subuSeats :: Lens' Subscription (Maybe (Maybe Seats))
+subuSeats :: Lens' Subscription (Maybe Seats)
 subuSeats
   = lens _subuSeats (\ s a -> s{_subuSeats = a})
 
 -- | Renewal settings of the subscription.
-subuRenewalSettings :: Lens' Subscription (Maybe (Maybe RenewalSettings))
+subuRenewalSettings :: Lens' Subscription (Maybe RenewalSettings)
 subuRenewalSettings
   = lens _subuRenewalSettings
       (\ s a -> s{_subuRenewalSettings = a})
@@ -823,7 +823,7 @@ instance ToJSON Subscription where
                   ("billingMethod" .=) <$> _subuBillingMethod,
                   ("status" .=) <$> _subuStatus,
                   ("trialSettings" .=) <$> _subuTrialSettings,
-                  ("resourceUiUrl" .=) <$> _subuResourceUiUrl,
+                  ("resourceUiUrl" .=) <$> _subuResourceUiURL,
                   Just ("kind" .= _subuKind),
                   ("skuId" .=) <$> _subuSkuId,
                   ("plan" .=) <$> _subuPlan,

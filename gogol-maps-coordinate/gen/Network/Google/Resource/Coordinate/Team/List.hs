@@ -34,12 +34,11 @@ module Network.Google.Resource.Coordinate.Team.List
     , tlDispatcher
     , tlPrettyPrint
     , tlAdmin
-    , tlUserIp
+    , tlUserIP
     , tlKey
-    , tlOauthToken
+    , tlOAuthToken
     , tlWorker
     , tlFields
-    , tlAlt
     ) where
 
 import           Network.Google.MapsCoordinate.Types
@@ -54,11 +53,12 @@ type TeamListResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "admin" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "worker" Bool :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] TeamListResponse
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] TeamListResponse
 
 -- | Retrieves a list of teams for a user.
 --
@@ -68,12 +68,11 @@ data TeamList' = TeamList'
     , _tlDispatcher  :: !(Maybe Bool)
     , _tlPrettyPrint :: !Bool
     , _tlAdmin       :: !(Maybe Bool)
-    , _tlUserIp      :: !(Maybe Text)
-    , _tlKey         :: !(Maybe Text)
-    , _tlOauthToken  :: !(Maybe Text)
+    , _tlUserIP      :: !(Maybe Text)
+    , _tlKey         :: !(Maybe Key)
+    , _tlOAuthToken  :: !(Maybe OAuthToken)
     , _tlWorker      :: !(Maybe Bool)
     , _tlFields      :: !(Maybe Text)
-    , _tlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TeamList'' with the minimum fields required to make a request.
@@ -88,17 +87,15 @@ data TeamList' = TeamList'
 --
 -- * 'tlAdmin'
 --
--- * 'tlUserIp'
+-- * 'tlUserIP'
 --
 -- * 'tlKey'
 --
--- * 'tlOauthToken'
+-- * 'tlOAuthToken'
 --
 -- * 'tlWorker'
 --
 -- * 'tlFields'
---
--- * 'tlAlt'
 teamList'
     :: TeamList'
 teamList' =
@@ -107,12 +104,11 @@ teamList' =
     , _tlDispatcher = Nothing
     , _tlPrettyPrint = True
     , _tlAdmin = Nothing
-    , _tlUserIp = Nothing
+    , _tlUserIP = Nothing
     , _tlKey = Nothing
-    , _tlOauthToken = Nothing
+    , _tlOAuthToken = Nothing
     , _tlWorker = Nothing
     , _tlFields = Nothing
-    , _tlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,19 +135,19 @@ tlAdmin = lens _tlAdmin (\ s a -> s{_tlAdmin = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tlUserIp :: Lens' TeamList' (Maybe Text)
-tlUserIp = lens _tlUserIp (\ s a -> s{_tlUserIp = a})
+tlUserIP :: Lens' TeamList' (Maybe Text)
+tlUserIP = lens _tlUserIP (\ s a -> s{_tlUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tlKey :: Lens' TeamList' (Maybe Text)
+tlKey :: Lens' TeamList' (Maybe Key)
 tlKey = lens _tlKey (\ s a -> s{_tlKey = a})
 
 -- | OAuth 2.0 token for the current user.
-tlOauthToken :: Lens' TeamList' (Maybe Text)
-tlOauthToken
-  = lens _tlOauthToken (\ s a -> s{_tlOauthToken = a})
+tlOAuthToken :: Lens' TeamList' (Maybe OAuthToken)
+tlOAuthToken
+  = lens _tlOAuthToken (\ s a -> s{_tlOAuthToken = a})
 
 -- | Whether to include teams for which the user has the Worker role.
 tlWorker :: Lens' TeamList' (Maybe Bool)
@@ -161,9 +157,9 @@ tlWorker = lens _tlWorker (\ s a -> s{_tlWorker = a})
 tlFields :: Lens' TeamList' (Maybe Text)
 tlFields = lens _tlFields (\ s a -> s{_tlFields = a})
 
--- | Data format for the response.
-tlAlt :: Lens' TeamList' Alt
-tlAlt = lens _tlAlt (\ s a -> s{_tlAlt = a})
+instance GoogleAuth TeamList' where
+        authKey = tlKey . _Just
+        authToken = tlOAuthToken . _Just
 
 instance GoogleRequest TeamList' where
         type Rs TeamList' = TeamListResponse
@@ -171,12 +167,12 @@ instance GoogleRequest TeamList' where
         requestWithRoute r u TeamList'{..}
           = go _tlQuotaUser _tlDispatcher (Just _tlPrettyPrint)
               _tlAdmin
-              _tlUserIp
+              _tlUserIP
               _tlKey
-              _tlOauthToken
+              _tlOAuthToken
               _tlWorker
               _tlFields
-              (Just _tlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy TeamListResource) r
                       u

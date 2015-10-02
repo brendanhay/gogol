@@ -145,7 +145,7 @@ module Network.Google.Compute.Types
     -- * VPNTunnelsScopedList
     , VPNTunnelsScopedList
     , vPNTunnelsScopedList
-    , vtslVpnTunnels
+    , vtslVPNTunnels
     , vtslWarning
 
     -- * InstanceGroupsAddInstancesRequest
@@ -493,10 +493,10 @@ module Network.Google.Compute.Types
     , oStartTime
     , oKind
     , oError
-    , oHttpErrorMessage
+    , oHTTPErrorMessage
     , oZone
     , oWarnings
-    , oHttpErrorStatusCode
+    , oHTTPErrorStatusCode
     , oUser
     , oSelfLink
     , oName
@@ -556,7 +556,7 @@ module Network.Google.Compute.Types
     , ipMetadata
     , ipScheduling
     , ipDisks
-    , ipCanIpForward
+    , ipCanIPForward
     , ipDescription
     , ipTags
 
@@ -614,7 +614,7 @@ module Network.Google.Compute.Types
     , TargetInstance
     , targetInstance
     , tiKind
-    , tiNatPolicy
+    , tiNATPolicy
     , tiZone
     , tiSelfLink
     , tiName
@@ -663,10 +663,10 @@ module Network.Google.Compute.Types
     -- * NetworkInterface
     , NetworkInterface
     , networkInterface
-    , niNetwork
-    , niName
-    , niNetworkIP
-    , niAccessConfigs
+    , nNetwork
+    , nName
+    , nNetworkIP
+    , nAccessConfigs
 
     -- * TargetInstanceNATPolicy
     , TargetInstanceNATPolicy (..)
@@ -785,14 +785,14 @@ module Network.Google.Compute.Types
     -- * Network
     , Network
     , network
-    , nKind
-    , nIPv4Range
-    , nSelfLink
-    , nName
-    , nCreationTimestamp
-    , nId
-    , nGatewayIPv4
-    , nDescription
+    , netKind
+    , netIPv4Range
+    , netSelfLink
+    , netName
+    , netCreationTimestamp
+    , netId
+    , netGatewayIPv4
+    , netDescription
 
     -- * FirewallAllowed
     , FirewallAllowed
@@ -829,13 +829,13 @@ module Network.Google.Compute.Types
     , rNextHopNetwork
     , rNetwork
     , rWarnings
-    , rNextHopIp
+    , rNextHopIP
     , rDestRange
     , rSelfLink
     , rName
     , rCreationTimestamp
     , rId
-    , rNextHopVpnTunnel
+    , rNextHopVPNTunnel
     , rDescription
     , rTags
     , rNextHopInstance
@@ -966,7 +966,7 @@ module Network.Google.Compute.Types
     -- * URLMapReference
     , URLMapReference
     , uRLMapReference
-    , umrUrlMap
+    , umrURLMap
 
     -- * VPNTunnelStatus
     , VPNTunnelStatus (..)
@@ -1165,7 +1165,7 @@ module Network.Google.Compute.Types
     , autoscalingPolicy
     , apCustomMetricUtilizations
     , apMaxNumReplicas
-    , apCpuUtilization
+    , apCPUUtilization
     , apLoadBalancingUtilization
     , apMinNumReplicas
     , apCoolDownPeriodSec
@@ -1234,7 +1234,7 @@ module Network.Google.Compute.Types
     , mtCreationTimestamp
     , mtScratchDisks
     , mtId
-    , mtGuestCpus
+    , mtGuestCPUs
     , mtMaximumPersistentDisksSizeGb
     , mtMaximumPersistentDisks
     , mtMemoryMb
@@ -1320,7 +1320,7 @@ module Network.Google.Compute.Types
     -- * TargetHTTPProxy
     , TargetHTTPProxy
     , targetHTTPProxy
-    , thttppUrlMap
+    , thttppURLMap
     , thttppKind
     , thttppSelfLink
     , thttppName
@@ -1367,8 +1367,8 @@ module Network.Google.Compute.Types
     , vtDetailedStatus
     , vtStatus
     , vtKind
-    , vtPeerIp
-    , vtTargetVpnGateway
+    , vtPeerIP
+    , vtTargetVPNGateway
     , vtSelfLink
     , vtSharedSecret
     , vtName
@@ -1424,7 +1424,7 @@ module Network.Google.Compute.Types
     -- * HealthStatus
     , HealthStatus
     , healthStatus
-    , hsIpAddress
+    , hsIPAddress
     , hsHealthState
     , hsPort
     , hsInstance
@@ -1589,7 +1589,7 @@ module Network.Google.Compute.Types
     -- * TargetVPNGatewaysScopedList
     , TargetVPNGatewaysScopedList
     , targetVPNGatewaysScopedList
-    , tvgslTargetVpnGateways
+    , tvgslTargetVPNGateways
     , tvgslWarning
 
     -- * InstanceGroupsScopedListWarningCode
@@ -1621,7 +1621,7 @@ module Network.Google.Compute.Types
     , accessConfig
     , acKind
     , acName
-    , acNatIP
+    , acNATIP
     , acType
 
     -- * ResourceGroupReference
@@ -1704,7 +1704,7 @@ module Network.Google.Compute.Types
     , i1NetworkInterfaces
     , i1Kind
     , i1Zone
-    , i1CpuPlatform
+    , i1CPUPlatform
     , i1SelfLink
     , i1Name
     , i1StatusMessage
@@ -1714,15 +1714,12 @@ module Network.Google.Compute.Types
     , i1Id
     , i1Scheduling
     , i1Disks
-    , i1CanIpForward
+    , i1CanIPForward
     , i1Description
     , i1Tags
 
     -- * InstancesScopedListWarningCode
     , InstancesScopedListWarningCode (..)
-
-    -- * Alt
-    , Alt (..)
 
     -- * VPNTunnelAggregatedListItems
     , VPNTunnelAggregatedListItems

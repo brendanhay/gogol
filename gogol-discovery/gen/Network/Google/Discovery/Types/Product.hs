@@ -77,7 +77,7 @@ data RestMethod = RestMethod
     { _rmSupportsMediaDownload   :: !(Maybe Bool)
     , _rmParameterOrder          :: !(Maybe [Text])
     , _rmMediaUpload             :: !(Maybe RestMethodMediaUpload)
-    , _rmHttpMethod              :: !(Maybe Text)
+    , _rmHTTPMethod              :: !(Maybe Text)
     , _rmPath                    :: !(Maybe Text)
     , _rmResponse                :: !(Maybe RestMethodResponse)
     , _rmSupportsMediaUpload     :: !(Maybe Bool)
@@ -101,7 +101,7 @@ data RestMethod = RestMethod
 --
 -- * 'rmMediaUpload'
 --
--- * 'rmHttpMethod'
+-- * 'rmHTTPMethod'
 --
 -- * 'rmPath'
 --
@@ -131,7 +131,7 @@ restMethod =
     { _rmSupportsMediaDownload = Nothing
     , _rmParameterOrder = Nothing
     , _rmMediaUpload = Nothing
-    , _rmHttpMethod = Nothing
+    , _rmHTTPMethod = Nothing
     , _rmPath = Nothing
     , _rmResponse = Nothing
     , _rmSupportsMediaUpload = Nothing
@@ -168,9 +168,9 @@ rmMediaUpload
       (\ s a -> s{_rmMediaUpload = a})
 
 -- | HTTP method used by this method.
-rmHttpMethod :: Lens' RestMethod (Maybe Text)
-rmHttpMethod
-  = lens _rmHttpMethod (\ s a -> s{_rmHttpMethod = a})
+rmHTTPMethod :: Lens' RestMethod (Maybe Text)
+rmHTTPMethod
+  = lens _rmHTTPMethod (\ s a -> s{_rmHTTPMethod = a})
 
 -- | The URI path of this REST method. Should be used in conjunction with the
 -- basePath property at the api-level.
@@ -266,7 +266,7 @@ instance ToJSON RestMethod where
                     _rmSupportsMediaDownload,
                   ("parameterOrder" .=) <$> _rmParameterOrder,
                   ("mediaUpload" .=) <$> _rmMediaUpload,
-                  ("httpMethod" .=) <$> _rmHttpMethod,
+                  ("httpMethod" .=) <$> _rmHTTPMethod,
                   ("path" .=) <$> _rmPath,
                   ("response" .=) <$> _rmResponse,
                   ("supportsMediaUpload" .=) <$>
@@ -395,24 +395,24 @@ instance ToJSON RestResource where
 
 -- | Available OAuth 2.0 scopes.
 --
--- /See:/ 'restDescriptionAuthOauth2Scopes' smart constructor.
-data RestDescriptionAuthOauth2Scopes =
-    RestDescriptionAuthOauth2Scopes
+-- /See:/ 'restDescriptionAuthOAuth2Scopes' smart constructor.
+data RestDescriptionAuthOAuth2Scopes =
+    RestDescriptionAuthOAuth2Scopes
     deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RestDescriptionAuthOauth2Scopes' with the minimum fields required to make a request.
+-- | Creates a value of 'RestDescriptionAuthOAuth2Scopes' with the minimum fields required to make a request.
 --
-restDescriptionAuthOauth2Scopes
-    :: RestDescriptionAuthOauth2Scopes
-restDescriptionAuthOauth2Scopes = RestDescriptionAuthOauth2Scopes
+restDescriptionAuthOAuth2Scopes
+    :: RestDescriptionAuthOAuth2Scopes
+restDescriptionAuthOAuth2Scopes = RestDescriptionAuthOAuth2Scopes
 
-instance FromJSON RestDescriptionAuthOauth2Scopes
+instance FromJSON RestDescriptionAuthOAuth2Scopes
          where
         parseJSON
-          = withObject "RestDescriptionAuthOauth2Scopes"
-              (\ o -> pure RestDescriptionAuthOauth2Scopes)
+          = withObject "RestDescriptionAuthOAuth2Scopes"
+              (\ o -> pure RestDescriptionAuthOAuth2Scopes)
 
-instance ToJSON RestDescriptionAuthOauth2Scopes where
+instance ToJSON RestDescriptionAuthOAuth2Scopes where
         toJSON = const (Object mempty)
 
 -- | Links to 16x16 and 32x32 icons representing the API.
@@ -484,8 +484,8 @@ instance ToJSON RestResourceResources where
 --
 -- /See:/ 'restMethodMediaUploadProtocolsSimple' smart constructor.
 data RestMethodMediaUploadProtocolsSimple = RestMethodMediaUploadProtocolsSimple
-    { _rmmupsPath      :: !(Maybe Text)
-    , _rmmupsMultipart :: !Bool
+    { _rmmupsPath       :: !(Maybe Text)
+    , _rmmupsMultiParty :: !Bool
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RestMethodMediaUploadProtocolsSimple' with the minimum fields required to make a request.
@@ -494,13 +494,13 @@ data RestMethodMediaUploadProtocolsSimple = RestMethodMediaUploadProtocolsSimple
 --
 -- * 'rmmupsPath'
 --
--- * 'rmmupsMultipart'
+-- * 'rmmupsMultiParty'
 restMethodMediaUploadProtocolsSimple
     :: RestMethodMediaUploadProtocolsSimple
 restMethodMediaUploadProtocolsSimple =
     RestMethodMediaUploadProtocolsSimple
     { _rmmupsPath = Nothing
-    , _rmmupsMultipart = True
+    , _rmmupsMultiParty = True
     }
 
 -- | The URI path to be used for upload. Should be used in conjunction with
@@ -510,10 +510,10 @@ rmmupsPath
   = lens _rmmupsPath (\ s a -> s{_rmmupsPath = a})
 
 -- | True if this endpoint supports upload multipart media.
-rmmupsMultipart :: Lens' RestMethodMediaUploadProtocolsSimple Bool
-rmmupsMultipart
-  = lens _rmmupsMultipart
-      (\ s a -> s{_rmmupsMultipart = a})
+rmmupsMultiParty :: Lens' RestMethodMediaUploadProtocolsSimple Bool
+rmmupsMultiParty
+  = lens _rmmupsMultiParty
+      (\ s a -> s{_rmmupsMultiParty = a})
 
 instance FromJSON
          RestMethodMediaUploadProtocolsSimple where
@@ -529,41 +529,41 @@ instance ToJSON RestMethodMediaUploadProtocolsSimple
           = object
               (catMaybes
                  [("path" .=) <$> _rmmupsPath,
-                  Just ("multipart" .= _rmmupsMultipart)])
+                  Just ("multipart" .= _rmmupsMultiParty)])
 
 -- | OAuth 2.0 authentication information.
 --
--- /See:/ 'restDescriptionAuthOauth2' smart constructor.
-newtype RestDescriptionAuthOauth2 = RestDescriptionAuthOauth2
-    { _rdaoScopes :: Maybe RestDescriptionAuthOauth2Scopes
+-- /See:/ 'restDescriptionAuthOAuth2' smart constructor.
+newtype RestDescriptionAuthOAuth2 = RestDescriptionAuthOAuth2
+    { _rdaoaScopes :: Maybe RestDescriptionAuthOAuth2Scopes
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'RestDescriptionAuthOauth2' with the minimum fields required to make a request.
+-- | Creates a value of 'RestDescriptionAuthOAuth2' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rdaoScopes'
-restDescriptionAuthOauth2
-    :: RestDescriptionAuthOauth2
-restDescriptionAuthOauth2 =
-    RestDescriptionAuthOauth2
-    { _rdaoScopes = Nothing
+-- * 'rdaoaScopes'
+restDescriptionAuthOAuth2
+    :: RestDescriptionAuthOAuth2
+restDescriptionAuthOAuth2 =
+    RestDescriptionAuthOAuth2
+    { _rdaoaScopes = Nothing
     }
 
 -- | Available OAuth 2.0 scopes.
-rdaoScopes :: Lens' RestDescriptionAuthOauth2 (Maybe RestDescriptionAuthOauth2Scopes)
-rdaoScopes
-  = lens _rdaoScopes (\ s a -> s{_rdaoScopes = a})
+rdaoaScopes :: Lens' RestDescriptionAuthOAuth2 (Maybe RestDescriptionAuthOAuth2Scopes)
+rdaoaScopes
+  = lens _rdaoaScopes (\ s a -> s{_rdaoaScopes = a})
 
-instance FromJSON RestDescriptionAuthOauth2 where
+instance FromJSON RestDescriptionAuthOAuth2 where
         parseJSON
-          = withObject "RestDescriptionAuthOauth2"
+          = withObject "RestDescriptionAuthOAuth2"
               (\ o ->
-                 RestDescriptionAuthOauth2 <$> (o .:? "scopes"))
+                 RestDescriptionAuthOAuth2 <$> (o .:? "scopes"))
 
-instance ToJSON RestDescriptionAuthOauth2 where
-        toJSON RestDescriptionAuthOauth2{..}
-          = object (catMaybes [("scopes" .=) <$> _rdaoScopes])
+instance ToJSON RestDescriptionAuthOAuth2 where
+        toJSON RestDescriptionAuthOAuth2{..}
+          = object (catMaybes [("scopes" .=) <$> _rdaoaScopes])
 
 -- | Methods on this resource.
 --
@@ -641,25 +641,25 @@ instance ToJSON JSONSchemaVariant where
 --
 -- /See:/ 'restDescriptionAuth' smart constructor.
 newtype RestDescriptionAuth = RestDescriptionAuth
-    { _rdaOauth2 :: Maybe RestDescriptionAuthOauth2
+    { _rdaOAuth2 :: Maybe RestDescriptionAuthOAuth2
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RestDescriptionAuth' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rdaOauth2'
+-- * 'rdaOAuth2'
 restDescriptionAuth
     :: RestDescriptionAuth
 restDescriptionAuth =
     RestDescriptionAuth
-    { _rdaOauth2 = Nothing
+    { _rdaOAuth2 = Nothing
     }
 
 -- | OAuth 2.0 authentication information.
-rdaOauth2 :: Lens' RestDescriptionAuth (Maybe RestDescriptionAuthOauth2)
-rdaOauth2
-  = lens _rdaOauth2 (\ s a -> s{_rdaOauth2 = a})
+rdaOAuth2 :: Lens' RestDescriptionAuth (Maybe RestDescriptionAuthOAuth2)
+rdaOAuth2
+  = lens _rdaOAuth2 (\ s a -> s{_rdaOAuth2 = a})
 
 instance FromJSON RestDescriptionAuth where
         parseJSON
@@ -668,7 +668,7 @@ instance FromJSON RestDescriptionAuth where
 
 instance ToJSON RestDescriptionAuth where
         toJSON RestDescriptionAuth{..}
-          = object (catMaybes [("oauth2" .=) <$> _rdaOauth2])
+          = object (catMaybes [("oauth2" .=) <$> _rdaOAuth2])
 
 -- | Links to 16x16 and 32x32 icons representing the API.
 --
@@ -725,7 +725,7 @@ data RestDescription = RestDescription
     , _rdExponentialBackoffDefault :: !(Maybe Bool)
     , _rdAuth                      :: !(Maybe RestDescriptionAuth)
     , _rdIcons                     :: !(Maybe RestDescriptionIcons)
-    , _rdBaseUrl                   :: !(Maybe Text)
+    , _rdBaseURL                   :: !(Maybe Text)
     , _rdProtocol                  :: !Text
     , _rdOwnerName                 :: !(Maybe Text)
     , _rdResources                 :: !(Maybe RestDescriptionResources)
@@ -738,7 +738,7 @@ data RestDescription = RestDescription
     , _rdVersion                   :: !(Maybe Text)
     , _rdParameters                :: !(Maybe RestDescriptionParameters)
     , _rdDocumentationLink         :: !(Maybe Text)
-    , _rdRootUrl                   :: !(Maybe Text)
+    , _rdRootURL                   :: !(Maybe Text)
     , _rdId                        :: !(Maybe Text)
     , _rdCanonicalName             :: !(Maybe Text)
     , _rdLabels                    :: !(Maybe [Text])
@@ -768,7 +768,7 @@ data RestDescription = RestDescription
 --
 -- * 'rdIcons'
 --
--- * 'rdBaseUrl'
+-- * 'rdBaseURL'
 --
 -- * 'rdProtocol'
 --
@@ -794,7 +794,7 @@ data RestDescription = RestDescription
 --
 -- * 'rdDocumentationLink'
 --
--- * 'rdRootUrl'
+-- * 'rdRootURL'
 --
 -- * 'rdId'
 --
@@ -821,7 +821,7 @@ restDescription =
     , _rdExponentialBackoffDefault = Nothing
     , _rdAuth = Nothing
     , _rdIcons = Nothing
-    , _rdBaseUrl = Nothing
+    , _rdBaseURL = Nothing
     , _rdProtocol = "rest"
     , _rdOwnerName = Nothing
     , _rdResources = Nothing
@@ -834,7 +834,7 @@ restDescription =
     , _rdVersion = Nothing
     , _rdParameters = Nothing
     , _rdDocumentationLink = Nothing
-    , _rdRootUrl = Nothing
+    , _rdRootURL = Nothing
     , _rdId = Nothing
     , _rdCanonicalName = Nothing
     , _rdLabels = Nothing
@@ -884,9 +884,9 @@ rdIcons :: Lens' RestDescription (Maybe RestDescriptionIcons)
 rdIcons = lens _rdIcons (\ s a -> s{_rdIcons = a})
 
 -- | [DEPRECATED] The base URL for REST requests.
-rdBaseUrl :: Lens' RestDescription (Maybe Text)
-rdBaseUrl
-  = lens _rdBaseUrl (\ s a -> s{_rdBaseUrl = a})
+rdBaseURL :: Lens' RestDescription (Maybe Text)
+rdBaseURL
+  = lens _rdBaseURL (\ s a -> s{_rdBaseURL = a})
 
 -- | The protocol described by this document.
 rdProtocol :: Lens' RestDescription Text
@@ -955,9 +955,9 @@ rdDocumentationLink
       (\ s a -> s{_rdDocumentationLink = a})
 
 -- | The root URL under which all API services live.
-rdRootUrl :: Lens' RestDescription (Maybe Text)
-rdRootUrl
-  = lens _rdRootUrl (\ s a -> s{_rdRootUrl = a})
+rdRootURL :: Lens' RestDescription (Maybe Text)
+rdRootURL
+  = lens _rdRootURL (\ s a -> s{_rdRootURL = a})
 
 -- | The ID of this API.
 rdId :: Lens' RestDescription (Maybe Text)
@@ -1044,7 +1044,7 @@ instance ToJSON RestDescription where
                   ("exponentialBackoffDefault" .=) <$>
                     _rdExponentialBackoffDefault,
                   ("auth" .=) <$> _rdAuth, ("icons" .=) <$> _rdIcons,
-                  ("baseUrl" .=) <$> _rdBaseUrl,
+                  ("baseUrl" .=) <$> _rdBaseURL,
                   Just ("protocol" .= _rdProtocol),
                   ("ownerName" .=) <$> _rdOwnerName,
                   ("resources" .=) <$> _rdResources,
@@ -1057,7 +1057,7 @@ instance ToJSON RestDescription where
                   ("version" .=) <$> _rdVersion,
                   ("parameters" .=) <$> _rdParameters,
                   ("documentationLink" .=) <$> _rdDocumentationLink,
-                  ("rootUrl" .=) <$> _rdRootUrl, ("id" .=) <$> _rdId,
+                  ("rootUrl" .=) <$> _rdRootURL, ("id" .=) <$> _rdId,
                   ("canonicalName" .=) <$> _rdCanonicalName,
                   ("labels" .=) <$> _rdLabels,
                   Just ("discoveryVersion" .= _rdDiscoveryVersion),
@@ -1076,11 +1076,11 @@ data JSONSchema = JSONSchema
     , _jsMaximum              :: !(Maybe Text)
     , _jsDefault              :: !(Maybe Text)
     , _jsFormat               :: !(Maybe Text)
-    , _jsItems                :: !(Maybe (Maybe JSONSchema))
+    , _jsItems                :: !(Maybe JSONSchema)
     , _jsMinimum              :: !(Maybe Text)
     , _jsRequired             :: !(Maybe Bool)
     , _jsId                   :: !(Maybe Text)
-    , _jsAdditionalProperties :: !(Maybe (Maybe JSONSchema))
+    , _jsAdditionalProperties :: !(Maybe JSONSchema)
     , _jsType                 :: !(Maybe Text)
     , _jsEnum                 :: !(Maybe [Text])
     , _jsRepeated             :: !(Maybe Bool)
@@ -1207,7 +1207,7 @@ jsFormat = lens _jsFormat (\ s a -> s{_jsFormat = a})
 
 -- | If this is a schema for an array, this property is the schema for each
 -- element in the array.
-jsItems :: Lens' JSONSchema (Maybe (Maybe JSONSchema))
+jsItems :: Lens' JSONSchema (Maybe JSONSchema)
 jsItems = lens _jsItems (\ s a -> s{_jsItems = a})
 
 -- | The minimum value of this parameter.
@@ -1226,7 +1226,7 @@ jsId = lens _jsId (\ s a -> s{_jsId = a})
 
 -- | If this is a schema for an object, this property is the schema for any
 -- additional properties with dynamic keys on this object.
-jsAdditionalProperties :: Lens' JSONSchema (Maybe (Maybe JSONSchema))
+jsAdditionalProperties :: Lens' JSONSchema (Maybe JSONSchema)
 jsAdditionalProperties
   = lens _jsAdditionalProperties
       (\ s a -> s{_jsAdditionalProperties = a})
@@ -1450,7 +1450,7 @@ data DirectoryListItems = DirectoryListItems
     , _dliLabels            :: !(Maybe [Text])
     , _dliTitle             :: !(Maybe Text)
     , _dliDescription       :: !(Maybe Text)
-    , _dliDiscoveryRestUrl  :: !(Maybe Text)
+    , _dliDiscoveryRestURL  :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DirectoryListItems' with the minimum fields required to make a request.
@@ -1479,7 +1479,7 @@ data DirectoryListItems = DirectoryListItems
 --
 -- * 'dliDescription'
 --
--- * 'dliDiscoveryRestUrl'
+-- * 'dliDiscoveryRestURL'
 directoryListItems
     :: DirectoryListItems
 directoryListItems =
@@ -1495,7 +1495,7 @@ directoryListItems =
     , _dliLabels = Nothing
     , _dliTitle = Nothing
     , _dliDescription = Nothing
-    , _dliDiscoveryRestUrl = Nothing
+    , _dliDiscoveryRestURL = Nothing
     }
 
 -- | A link to the discovery document.
@@ -1554,10 +1554,10 @@ dliDescription
       (\ s a -> s{_dliDescription = a})
 
 -- | The URL for the discovery REST document.
-dliDiscoveryRestUrl :: Lens' DirectoryListItems (Maybe Text)
-dliDiscoveryRestUrl
-  = lens _dliDiscoveryRestUrl
-      (\ s a -> s{_dliDiscoveryRestUrl = a})
+dliDiscoveryRestURL :: Lens' DirectoryListItems (Maybe Text)
+dliDiscoveryRestURL
+  = lens _dliDiscoveryRestURL
+      (\ s a -> s{_dliDiscoveryRestURL = a})
 
 instance FromJSON DirectoryListItems where
         parseJSON
@@ -1589,7 +1589,7 @@ instance ToJSON DirectoryListItems where
                   ("id" .=) <$> _dliId, ("labels" .=) <$> _dliLabels,
                   ("title" .=) <$> _dliTitle,
                   ("description" .=) <$> _dliDescription,
-                  ("discoveryRestUrl" .=) <$> _dliDiscoveryRestUrl])
+                  ("discoveryRestUrl" .=) <$> _dliDiscoveryRestURL])
 
 -- | Additional information about this property.
 --
@@ -1774,8 +1774,8 @@ instance ToJSON DirectoryList where
 --
 -- /See:/ 'restMethodMediaUploadProtocolsResumable' smart constructor.
 data RestMethodMediaUploadProtocolsResumable = RestMethodMediaUploadProtocolsResumable
-    { _rmmuprPath      :: !(Maybe Text)
-    , _rmmuprMultipart :: !Bool
+    { _rmmuprPath       :: !(Maybe Text)
+    , _rmmuprMultiParty :: !Bool
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RestMethodMediaUploadProtocolsResumable' with the minimum fields required to make a request.
@@ -1784,13 +1784,13 @@ data RestMethodMediaUploadProtocolsResumable = RestMethodMediaUploadProtocolsRes
 --
 -- * 'rmmuprPath'
 --
--- * 'rmmuprMultipart'
+-- * 'rmmuprMultiParty'
 restMethodMediaUploadProtocolsResumable
     :: RestMethodMediaUploadProtocolsResumable
 restMethodMediaUploadProtocolsResumable =
     RestMethodMediaUploadProtocolsResumable
     { _rmmuprPath = Nothing
-    , _rmmuprMultipart = True
+    , _rmmuprMultiParty = True
     }
 
 -- | The URI path to be used for upload. Should be used in conjunction with
@@ -1800,10 +1800,10 @@ rmmuprPath
   = lens _rmmuprPath (\ s a -> s{_rmmuprPath = a})
 
 -- | True if this endpoint supports uploading multipart media.
-rmmuprMultipart :: Lens' RestMethodMediaUploadProtocolsResumable Bool
-rmmuprMultipart
-  = lens _rmmuprMultipart
-      (\ s a -> s{_rmmuprMultipart = a})
+rmmuprMultiParty :: Lens' RestMethodMediaUploadProtocolsResumable Bool
+rmmuprMultiParty
+  = lens _rmmuprMultiParty
+      (\ s a -> s{_rmmuprMultiParty = a})
 
 instance FromJSON
          RestMethodMediaUploadProtocolsResumable where
@@ -1820,7 +1820,7 @@ instance ToJSON
           = object
               (catMaybes
                  [("path" .=) <$> _rmmuprPath,
-                  Just ("multipart" .= _rmmuprMultipart)])
+                  Just ("multipart" .= _rmmuprMultiParty)])
 
 -- | The schema for the request.
 --

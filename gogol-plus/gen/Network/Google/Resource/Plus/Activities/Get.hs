@@ -32,12 +32,11 @@ module Network.Google.Resource.Plus.Activities.Get
     -- * Request Lenses
     , agQuotaUser
     , agPrettyPrint
-    , agUserIp
+    , agUserIP
     , agActivityId
     , agKey
-    , agOauthToken
+    , agOAuthToken
     , agFields
-    , agAlt
     ) where
 
 import           Network.Google.Plus.Types
@@ -51,10 +50,10 @@ type ActivitiesGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Get '[JSON] Activity
+                     QueryParam "alt" AltJSON :> Get '[JSON] Activity
 
 -- | Get an activity.
 --
@@ -62,12 +61,11 @@ type ActivitiesGetResource =
 data ActivitiesGet' = ActivitiesGet'
     { _agQuotaUser   :: !(Maybe Text)
     , _agPrettyPrint :: !Bool
-    , _agUserIp      :: !(Maybe Text)
+    , _agUserIP      :: !(Maybe Text)
     , _agActivityId  :: !Text
-    , _agKey         :: !(Maybe Text)
-    , _agOauthToken  :: !(Maybe Text)
+    , _agKey         :: !(Maybe Key)
+    , _agOAuthToken  :: !(Maybe OAuthToken)
     , _agFields      :: !(Maybe Text)
-    , _agAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivitiesGet'' with the minimum fields required to make a request.
@@ -78,17 +76,15 @@ data ActivitiesGet' = ActivitiesGet'
 --
 -- * 'agPrettyPrint'
 --
--- * 'agUserIp'
+-- * 'agUserIP'
 --
 -- * 'agActivityId'
 --
 -- * 'agKey'
 --
--- * 'agOauthToken'
+-- * 'agOAuthToken'
 --
 -- * 'agFields'
---
--- * 'agAlt'
 activitiesGet'
     :: Text -- ^ 'activityId'
     -> ActivitiesGet'
@@ -96,12 +92,11 @@ activitiesGet' pAgActivityId_ =
     ActivitiesGet'
     { _agQuotaUser = Nothing
     , _agPrettyPrint = True
-    , _agUserIp = Nothing
+    , _agUserIP = Nothing
     , _agActivityId = pAgActivityId_
     , _agKey = Nothing
-    , _agOauthToken = Nothing
+    , _agOAuthToken = Nothing
     , _agFields = Nothing
-    , _agAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -119,8 +114,8 @@ agPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-agUserIp :: Lens' ActivitiesGet' (Maybe Text)
-agUserIp = lens _agUserIp (\ s a -> s{_agUserIp = a})
+agUserIP :: Lens' ActivitiesGet' (Maybe Text)
+agUserIP = lens _agUserIP (\ s a -> s{_agUserIP = a})
 
 -- | The ID of the activity to get.
 agActivityId :: Lens' ActivitiesGet' Text
@@ -130,32 +125,32 @@ agActivityId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-agKey :: Lens' ActivitiesGet' (Maybe Text)
+agKey :: Lens' ActivitiesGet' (Maybe Key)
 agKey = lens _agKey (\ s a -> s{_agKey = a})
 
 -- | OAuth 2.0 token for the current user.
-agOauthToken :: Lens' ActivitiesGet' (Maybe Text)
-agOauthToken
-  = lens _agOauthToken (\ s a -> s{_agOauthToken = a})
+agOAuthToken :: Lens' ActivitiesGet' (Maybe OAuthToken)
+agOAuthToken
+  = lens _agOAuthToken (\ s a -> s{_agOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 agFields :: Lens' ActivitiesGet' (Maybe Text)
 agFields = lens _agFields (\ s a -> s{_agFields = a})
 
--- | Data format for the response.
-agAlt :: Lens' ActivitiesGet' Alt
-agAlt = lens _agAlt (\ s a -> s{_agAlt = a})
+instance GoogleAuth ActivitiesGet' where
+        authKey = agKey . _Just
+        authToken = agOAuthToken . _Just
 
 instance GoogleRequest ActivitiesGet' where
         type Rs ActivitiesGet' = Activity
         request = requestWithRoute defReq plusURL
         requestWithRoute r u ActivitiesGet'{..}
-          = go _agQuotaUser (Just _agPrettyPrint) _agUserIp
+          = go _agQuotaUser (Just _agPrettyPrint) _agUserIP
               _agActivityId
               _agKey
-              _agOauthToken
+              _agOAuthToken
               _agFields
-              (Just _agAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ActivitiesGetResource)

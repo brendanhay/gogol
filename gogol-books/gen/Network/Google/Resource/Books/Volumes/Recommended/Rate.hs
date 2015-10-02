@@ -33,14 +33,13 @@ module Network.Google.Resource.Books.Volumes.Recommended.Rate
     , vrrQuotaUser
     , vrrRating
     , vrrPrettyPrint
-    , vrrUserIp
+    , vrrUserIP
     , vrrLocale
     , vrrKey
     , vrrVolumeId
     , vrrSource
-    , vrrOauthToken
+    , vrrOAuthToken
     , vrrFields
-    , vrrAlt
     ) where
 
 import           Network.Google.Books.Types
@@ -58,12 +57,12 @@ type VolumesRecommendedRateResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "locale" Text :>
-                     QueryParam "key" Text :>
+                     QueryParam "key" Key :>
                        QueryParam "volumeId" Text :>
                          QueryParam "source" Text :>
-                           QueryParam "oauth_token" Text :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :>
+                               QueryParam "alt" AltJSON :>
                                  Post '[JSON]
                                    BooksVolumesRecommendedRateResponse
 
@@ -74,14 +73,13 @@ data VolumesRecommendedRate' = VolumesRecommendedRate'
     { _vrrQuotaUser   :: !(Maybe Text)
     , _vrrRating      :: !BooksVolumesRecommendedRateRating
     , _vrrPrettyPrint :: !Bool
-    , _vrrUserIp      :: !(Maybe Text)
+    , _vrrUserIP      :: !(Maybe Text)
     , _vrrLocale      :: !(Maybe Text)
-    , _vrrKey         :: !(Maybe Text)
+    , _vrrKey         :: !(Maybe Key)
     , _vrrVolumeId    :: !Text
     , _vrrSource      :: !(Maybe Text)
-    , _vrrOauthToken  :: !(Maybe Text)
+    , _vrrOAuthToken  :: !(Maybe OAuthToken)
     , _vrrFields      :: !(Maybe Text)
-    , _vrrAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VolumesRecommendedRate'' with the minimum fields required to make a request.
@@ -94,7 +92,7 @@ data VolumesRecommendedRate' = VolumesRecommendedRate'
 --
 -- * 'vrrPrettyPrint'
 --
--- * 'vrrUserIp'
+-- * 'vrrUserIP'
 --
 -- * 'vrrLocale'
 --
@@ -104,11 +102,9 @@ data VolumesRecommendedRate' = VolumesRecommendedRate'
 --
 -- * 'vrrSource'
 --
--- * 'vrrOauthToken'
+-- * 'vrrOAuthToken'
 --
 -- * 'vrrFields'
---
--- * 'vrrAlt'
 volumesRecommendedRate'
     :: BooksVolumesRecommendedRateRating -- ^ 'rating'
     -> Text -- ^ 'volumeId'
@@ -118,14 +114,13 @@ volumesRecommendedRate' pVrrRating_ pVrrVolumeId_ =
     { _vrrQuotaUser = Nothing
     , _vrrRating = pVrrRating_
     , _vrrPrettyPrint = True
-    , _vrrUserIp = Nothing
+    , _vrrUserIP = Nothing
     , _vrrLocale = Nothing
     , _vrrKey = Nothing
     , _vrrVolumeId = pVrrVolumeId_
     , _vrrSource = Nothing
-    , _vrrOauthToken = Nothing
+    , _vrrOAuthToken = Nothing
     , _vrrFields = Nothing
-    , _vrrAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,9 +143,9 @@ vrrPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-vrrUserIp :: Lens' VolumesRecommendedRate' (Maybe Text)
-vrrUserIp
-  = lens _vrrUserIp (\ s a -> s{_vrrUserIp = a})
+vrrUserIP :: Lens' VolumesRecommendedRate' (Maybe Text)
+vrrUserIP
+  = lens _vrrUserIP (\ s a -> s{_vrrUserIP = a})
 
 -- | ISO-639-1 language and ISO-3166-1 country code. Ex: \'en_US\'. Used for
 -- generating recommendations.
@@ -161,7 +156,7 @@ vrrLocale
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vrrKey :: Lens' VolumesRecommendedRate' (Maybe Text)
+vrrKey :: Lens' VolumesRecommendedRate' (Maybe Key)
 vrrKey = lens _vrrKey (\ s a -> s{_vrrKey = a})
 
 -- | ID of the source volume.
@@ -175,19 +170,19 @@ vrrSource
   = lens _vrrSource (\ s a -> s{_vrrSource = a})
 
 -- | OAuth 2.0 token for the current user.
-vrrOauthToken :: Lens' VolumesRecommendedRate' (Maybe Text)
-vrrOauthToken
-  = lens _vrrOauthToken
-      (\ s a -> s{_vrrOauthToken = a})
+vrrOAuthToken :: Lens' VolumesRecommendedRate' (Maybe OAuthToken)
+vrrOAuthToken
+  = lens _vrrOAuthToken
+      (\ s a -> s{_vrrOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 vrrFields :: Lens' VolumesRecommendedRate' (Maybe Text)
 vrrFields
   = lens _vrrFields (\ s a -> s{_vrrFields = a})
 
--- | Data format for the response.
-vrrAlt :: Lens' VolumesRecommendedRate' Alt
-vrrAlt = lens _vrrAlt (\ s a -> s{_vrrAlt = a})
+instance GoogleAuth VolumesRecommendedRate' where
+        authKey = vrrKey . _Just
+        authToken = vrrOAuthToken . _Just
 
 instance GoogleRequest VolumesRecommendedRate' where
         type Rs VolumesRecommendedRate' =
@@ -196,14 +191,14 @@ instance GoogleRequest VolumesRecommendedRate' where
         requestWithRoute r u VolumesRecommendedRate'{..}
           = go _vrrQuotaUser (Just _vrrRating)
               (Just _vrrPrettyPrint)
-              _vrrUserIp
+              _vrrUserIP
               _vrrLocale
               _vrrKey
               (Just _vrrVolumeId)
               _vrrSource
-              _vrrOauthToken
+              _vrrOAuthToken
               _vrrFields
-              (Just _vrrAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy VolumesRecommendedRateResource)

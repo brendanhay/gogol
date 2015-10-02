@@ -34,13 +34,14 @@ module Network.Google.Resource.YouTube.Captions.Insert
     , ciQuotaUser
     , ciPart
     , ciPrettyPrint
-    , ciUserIp
+    , ciUserIP
+    , ciCaption
+    , ciMedia
     , ciOnBehalfOfContentOwner
     , ciKey
     , ciSync
-    , ciOauthToken
+    , ciOAuthToken
     , ciFields
-    , ciAlt
     ) where
 
 import           Network.Google.Prelude
@@ -56,11 +57,13 @@ type CaptionsInsertResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "onBehalfOfContentOwner" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "sync" Bool :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Post '[JSON] Caption
+                           QueryParam "alt" AltJSON :>
+                             MultipartRelated '[JSON] Caption Body :>
+                               Post '[JSON] Caption
 
 -- | Uploads a caption track.
 --
@@ -70,13 +73,14 @@ data CaptionsInsert' = CaptionsInsert'
     , _ciQuotaUser              :: !(Maybe Text)
     , _ciPart                   :: !Text
     , _ciPrettyPrint            :: !Bool
-    , _ciUserIp                 :: !(Maybe Text)
+    , _ciUserIP                 :: !(Maybe Text)
+    , _ciCaption                :: !Caption
+    , _ciMedia                  :: !Body
     , _ciOnBehalfOfContentOwner :: !(Maybe Text)
-    , _ciKey                    :: !(Maybe Text)
+    , _ciKey                    :: !(Maybe Key)
     , _ciSync                   :: !(Maybe Bool)
-    , _ciOauthToken             :: !(Maybe Text)
+    , _ciOAuthToken             :: !(Maybe OAuthToken)
     , _ciFields                 :: !(Maybe Text)
-    , _ciAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CaptionsInsert'' with the minimum fields required to make a request.
@@ -91,7 +95,11 @@ data CaptionsInsert' = CaptionsInsert'
 --
 -- * 'ciPrettyPrint'
 --
--- * 'ciUserIp'
+-- * 'ciUserIP'
+--
+-- * 'ciCaption'
+--
+-- * 'ciMedia'
 --
 -- * 'ciOnBehalfOfContentOwner'
 --
@@ -99,27 +107,28 @@ data CaptionsInsert' = CaptionsInsert'
 --
 -- * 'ciSync'
 --
--- * 'ciOauthToken'
+-- * 'ciOAuthToken'
 --
 -- * 'ciFields'
---
--- * 'ciAlt'
 captionsInsert'
     :: Text -- ^ 'part'
+    -> Caption -- ^ 'Caption'
+    -> Body -- ^ 'media'
     -> CaptionsInsert'
-captionsInsert' pCiPart_ =
+captionsInsert' pCiPart_ pCiCaption_ pCiMedia_ =
     CaptionsInsert'
     { _ciOnBehalfOf = Nothing
     , _ciQuotaUser = Nothing
     , _ciPart = pCiPart_
     , _ciPrettyPrint = True
-    , _ciUserIp = Nothing
+    , _ciUserIP = Nothing
+    , _ciCaption = pCiCaption_
+    , _ciMedia = pCiMedia_
     , _ciOnBehalfOfContentOwner = Nothing
     , _ciKey = Nothing
     , _ciSync = Nothing
-    , _ciOauthToken = Nothing
+    , _ciOAuthToken = Nothing
     , _ciFields = Nothing
-    , _ciAlt = JSON
     }
 
 -- | ID of the Google+ Page for the channel that the request is be on behalf
@@ -148,8 +157,16 @@ ciPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ciUserIp :: Lens' CaptionsInsert' (Maybe Text)
-ciUserIp = lens _ciUserIp (\ s a -> s{_ciUserIp = a})
+ciUserIP :: Lens' CaptionsInsert' (Maybe Text)
+ciUserIP = lens _ciUserIP (\ s a -> s{_ciUserIP = a})
+
+-- | Multipart request metadata.
+ciCaption :: Lens' CaptionsInsert' Caption
+ciCaption
+  = lens _ciCaption (\ s a -> s{_ciCaption = a})
+
+ciMedia :: Lens' CaptionsInsert' Body
+ciMedia = lens _ciMedia (\ s a -> s{_ciMedia = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
@@ -169,7 +186,7 @@ ciOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ciKey :: Lens' CaptionsInsert' (Maybe Text)
+ciKey :: Lens' CaptionsInsert' (Maybe Key)
 ciKey = lens _ciKey (\ s a -> s{_ciKey = a})
 
 -- | The sync parameter indicates whether YouTube should automatically
@@ -183,17 +200,17 @@ ciSync :: Lens' CaptionsInsert' (Maybe Bool)
 ciSync = lens _ciSync (\ s a -> s{_ciSync = a})
 
 -- | OAuth 2.0 token for the current user.
-ciOauthToken :: Lens' CaptionsInsert' (Maybe Text)
-ciOauthToken
-  = lens _ciOauthToken (\ s a -> s{_ciOauthToken = a})
+ciOAuthToken :: Lens' CaptionsInsert' (Maybe OAuthToken)
+ciOAuthToken
+  = lens _ciOAuthToken (\ s a -> s{_ciOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ciFields :: Lens' CaptionsInsert' (Maybe Text)
 ciFields = lens _ciFields (\ s a -> s{_ciFields = a})
 
--- | Data format for the response.
-ciAlt :: Lens' CaptionsInsert' Alt
-ciAlt = lens _ciAlt (\ s a -> s{_ciAlt = a})
+instance GoogleAuth CaptionsInsert' where
+        authKey = ciKey . _Just
+        authToken = ciOAuthToken . _Just
 
 instance GoogleRequest CaptionsInsert' where
         type Rs CaptionsInsert' = Caption
@@ -201,13 +218,15 @@ instance GoogleRequest CaptionsInsert' where
         requestWithRoute r u CaptionsInsert'{..}
           = go _ciOnBehalfOf _ciQuotaUser (Just _ciPart)
               (Just _ciPrettyPrint)
-              _ciUserIp
+              _ciUserIP
+              _ciMedia
               _ciOnBehalfOfContentOwner
               _ciKey
               _ciSync
-              _ciOauthToken
+              _ciOAuthToken
               _ciFields
-              (Just _ciAlt)
+              (Just AltJSON)
+              _ciCaption
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CaptionsInsertResource)

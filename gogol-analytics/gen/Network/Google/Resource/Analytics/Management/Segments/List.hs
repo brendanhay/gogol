@@ -32,13 +32,12 @@ module Network.Google.Resource.Analytics.Management.Segments.List
     -- * Request Lenses
     , mslQuotaUser
     , mslPrettyPrint
-    , mslUserIp
+    , mslUserIP
     , mslKey
-    , mslOauthToken
+    , mslOAuthToken
     , mslStartIndex
     , mslMaxResults
     , mslFields
-    , mslAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -52,12 +51,12 @@ type ManagementSegmentsListResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "start-index" Int32 :>
                      QueryParam "max-results" Int32 :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] Segments
+                         QueryParam "alt" AltJSON :> Get '[JSON] Segments
 
 -- | Lists segments to which the user has access.
 --
@@ -65,13 +64,12 @@ type ManagementSegmentsListResource =
 data ManagementSegmentsList' = ManagementSegmentsList'
     { _mslQuotaUser   :: !(Maybe Text)
     , _mslPrettyPrint :: !Bool
-    , _mslUserIp      :: !(Maybe Text)
-    , _mslKey         :: !(Maybe Text)
-    , _mslOauthToken  :: !(Maybe Text)
+    , _mslUserIP      :: !(Maybe Text)
+    , _mslKey         :: !(Maybe Key)
+    , _mslOAuthToken  :: !(Maybe OAuthToken)
     , _mslStartIndex  :: !(Maybe Int32)
     , _mslMaxResults  :: !(Maybe Int32)
     , _mslFields      :: !(Maybe Text)
-    , _mslAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementSegmentsList'' with the minimum fields required to make a request.
@@ -82,32 +80,29 @@ data ManagementSegmentsList' = ManagementSegmentsList'
 --
 -- * 'mslPrettyPrint'
 --
--- * 'mslUserIp'
+-- * 'mslUserIP'
 --
 -- * 'mslKey'
 --
--- * 'mslOauthToken'
+-- * 'mslOAuthToken'
 --
 -- * 'mslStartIndex'
 --
 -- * 'mslMaxResults'
 --
 -- * 'mslFields'
---
--- * 'mslAlt'
 managementSegmentsList'
     :: ManagementSegmentsList'
 managementSegmentsList' =
     ManagementSegmentsList'
     { _mslQuotaUser = Nothing
     , _mslPrettyPrint = False
-    , _mslUserIp = Nothing
+    , _mslUserIP = Nothing
     , _mslKey = Nothing
-    , _mslOauthToken = Nothing
+    , _mslOAuthToken = Nothing
     , _mslStartIndex = Nothing
     , _mslMaxResults = Nothing
     , _mslFields = Nothing
-    , _mslAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -125,21 +120,21 @@ mslPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mslUserIp :: Lens' ManagementSegmentsList' (Maybe Text)
-mslUserIp
-  = lens _mslUserIp (\ s a -> s{_mslUserIp = a})
+mslUserIP :: Lens' ManagementSegmentsList' (Maybe Text)
+mslUserIP
+  = lens _mslUserIP (\ s a -> s{_mslUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mslKey :: Lens' ManagementSegmentsList' (Maybe Text)
+mslKey :: Lens' ManagementSegmentsList' (Maybe Key)
 mslKey = lens _mslKey (\ s a -> s{_mslKey = a})
 
 -- | OAuth 2.0 token for the current user.
-mslOauthToken :: Lens' ManagementSegmentsList' (Maybe Text)
-mslOauthToken
-  = lens _mslOauthToken
-      (\ s a -> s{_mslOauthToken = a})
+mslOAuthToken :: Lens' ManagementSegmentsList' (Maybe OAuthToken)
+mslOAuthToken
+  = lens _mslOAuthToken
+      (\ s a -> s{_mslOAuthToken = a})
 
 -- | An index of the first segment to retrieve. Use this parameter as a
 -- pagination mechanism along with the max-results parameter.
@@ -159,21 +154,21 @@ mslFields :: Lens' ManagementSegmentsList' (Maybe Text)
 mslFields
   = lens _mslFields (\ s a -> s{_mslFields = a})
 
--- | Data format for the response.
-mslAlt :: Lens' ManagementSegmentsList' Alt
-mslAlt = lens _mslAlt (\ s a -> s{_mslAlt = a})
+instance GoogleAuth ManagementSegmentsList' where
+        authKey = mslKey . _Just
+        authToken = mslOAuthToken . _Just
 
 instance GoogleRequest ManagementSegmentsList' where
         type Rs ManagementSegmentsList' = Segments
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementSegmentsList'{..}
-          = go _mslQuotaUser (Just _mslPrettyPrint) _mslUserIp
+          = go _mslQuotaUser (Just _mslPrettyPrint) _mslUserIP
               _mslKey
-              _mslOauthToken
+              _mslOAuthToken
               _mslStartIndex
               _mslMaxResults
               _mslFields
-              (Just _mslAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ManagementSegmentsListResource)

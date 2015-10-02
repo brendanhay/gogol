@@ -32,13 +32,12 @@ module Network.Google.Resource.Drive.Children.Get
     -- * Request Lenses
     , chiQuotaUser
     , chiPrettyPrint
-    , chiUserIp
+    , chiUserIP
     , chiFolderId
     , chiKey
     , chiChildId
-    , chiOauthToken
+    , chiOAuthToken
     , chiFields
-    , chiAlt
     ) where
 
 import           Network.Google.Drive.Types
@@ -54,10 +53,11 @@ type ChildrenGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] ChildReference
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] ChildReference
 
 -- | Gets a specific child reference.
 --
@@ -65,13 +65,12 @@ type ChildrenGetResource =
 data ChildrenGet' = ChildrenGet'
     { _chiQuotaUser   :: !(Maybe Text)
     , _chiPrettyPrint :: !Bool
-    , _chiUserIp      :: !(Maybe Text)
+    , _chiUserIP      :: !(Maybe Text)
     , _chiFolderId    :: !Text
-    , _chiKey         :: !(Maybe Text)
+    , _chiKey         :: !(Maybe Key)
     , _chiChildId     :: !Text
-    , _chiOauthToken  :: !(Maybe Text)
+    , _chiOAuthToken  :: !(Maybe OAuthToken)
     , _chiFields      :: !(Maybe Text)
-    , _chiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChildrenGet'' with the minimum fields required to make a request.
@@ -82,7 +81,7 @@ data ChildrenGet' = ChildrenGet'
 --
 -- * 'chiPrettyPrint'
 --
--- * 'chiUserIp'
+-- * 'chiUserIP'
 --
 -- * 'chiFolderId'
 --
@@ -90,11 +89,9 @@ data ChildrenGet' = ChildrenGet'
 --
 -- * 'chiChildId'
 --
--- * 'chiOauthToken'
+-- * 'chiOAuthToken'
 --
 -- * 'chiFields'
---
--- * 'chiAlt'
 childrenGet'
     :: Text -- ^ 'folderId'
     -> Text -- ^ 'childId'
@@ -103,13 +100,12 @@ childrenGet' pChiFolderId_ pChiChildId_ =
     ChildrenGet'
     { _chiQuotaUser = Nothing
     , _chiPrettyPrint = True
-    , _chiUserIp = Nothing
+    , _chiUserIP = Nothing
     , _chiFolderId = pChiFolderId_
     , _chiKey = Nothing
     , _chiChildId = pChiChildId_
-    , _chiOauthToken = Nothing
+    , _chiOAuthToken = Nothing
     , _chiFields = Nothing
-    , _chiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,9 +123,9 @@ chiPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-chiUserIp :: Lens' ChildrenGet' (Maybe Text)
-chiUserIp
-  = lens _chiUserIp (\ s a -> s{_chiUserIp = a})
+chiUserIP :: Lens' ChildrenGet' (Maybe Text)
+chiUserIP
+  = lens _chiUserIP (\ s a -> s{_chiUserIP = a})
 
 -- | The ID of the folder.
 chiFolderId :: Lens' ChildrenGet' Text
@@ -139,7 +135,7 @@ chiFolderId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-chiKey :: Lens' ChildrenGet' (Maybe Text)
+chiKey :: Lens' ChildrenGet' (Maybe Key)
 chiKey = lens _chiKey (\ s a -> s{_chiKey = a})
 
 -- | The ID of the child.
@@ -148,31 +144,31 @@ chiChildId
   = lens _chiChildId (\ s a -> s{_chiChildId = a})
 
 -- | OAuth 2.0 token for the current user.
-chiOauthToken :: Lens' ChildrenGet' (Maybe Text)
-chiOauthToken
-  = lens _chiOauthToken
-      (\ s a -> s{_chiOauthToken = a})
+chiOAuthToken :: Lens' ChildrenGet' (Maybe OAuthToken)
+chiOAuthToken
+  = lens _chiOAuthToken
+      (\ s a -> s{_chiOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 chiFields :: Lens' ChildrenGet' (Maybe Text)
 chiFields
   = lens _chiFields (\ s a -> s{_chiFields = a})
 
--- | Data format for the response.
-chiAlt :: Lens' ChildrenGet' Alt
-chiAlt = lens _chiAlt (\ s a -> s{_chiAlt = a})
+instance GoogleAuth ChildrenGet' where
+        authKey = chiKey . _Just
+        authToken = chiOAuthToken . _Just
 
 instance GoogleRequest ChildrenGet' where
         type Rs ChildrenGet' = ChildReference
         request = requestWithRoute defReq driveURL
         requestWithRoute r u ChildrenGet'{..}
-          = go _chiQuotaUser (Just _chiPrettyPrint) _chiUserIp
+          = go _chiQuotaUser (Just _chiPrettyPrint) _chiUserIP
               _chiFolderId
               _chiKey
               _chiChildId
-              _chiOauthToken
+              _chiOAuthToken
               _chiFields
-              (Just _chiAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ChildrenGetResource)

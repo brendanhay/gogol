@@ -35,16 +35,15 @@ module Network.Google.Resource.Storage.Objects.Get
     , ogIfGenerationNotMatch
     , ogPrettyPrint
     , ogIfGenerationMatch
-    , ogUserIp
+    , ogUserIP
     , ogBucket
     , ogKey
     , ogIfMetagenerationNotMatch
     , ogObject
     , ogProjection
-    , ogOauthToken
+    , ogOAuthToken
     , ogGeneration
     , ogFields
-    , ogAlt
     ) where
 
 import           Network.Google.Prelude
@@ -63,14 +62,36 @@ type ObjectsGetResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "ifGenerationMatch" Word64 :>
                        QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
+                         QueryParam "key" Key :>
                            QueryParam "ifMetagenerationNotMatch" Word64 :>
                              QueryParam "projection" StorageObjectsGetProjection
                                :>
-                               QueryParam "oauth_token" Text :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "generation" Word64 :>
                                    QueryParam "fields" Text :>
-                                     QueryParam "alt" Alt :> Get '[JSON] Object
+                                     QueryParam "alt" AltJSON :>
+                                       Get '[JSON] Object
+       :<|>
+       "b" :>
+         Capture "bucket" Text :>
+           "o" :>
+             Capture "object" Text :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "ifMetagenerationMatch" Word64 :>
+                   QueryParam "ifGenerationNotMatch" Word64 :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "ifGenerationMatch" Word64 :>
+                         QueryParam "userIp" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "ifMetagenerationNotMatch" Word64 :>
+                               QueryParam "projection"
+                                 StorageObjectsGetProjection
+                                 :>
+                                 QueryParam "oauth_token" OAuthToken :>
+                                   QueryParam "generation" Word64 :>
+                                     QueryParam "fields" Text :>
+                                       QueryParam "alt" Media :>
+                                         Get '[OctetStream] Stream
 
 -- | Retrieves objects or their associated metadata.
 --
@@ -81,16 +102,15 @@ data ObjectsGet' = ObjectsGet'
     , _ogIfGenerationNotMatch     :: !(Maybe Word64)
     , _ogPrettyPrint              :: !Bool
     , _ogIfGenerationMatch        :: !(Maybe Word64)
-    , _ogUserIp                   :: !(Maybe Text)
+    , _ogUserIP                   :: !(Maybe Text)
     , _ogBucket                   :: !Text
-    , _ogKey                      :: !(Maybe Text)
+    , _ogKey                      :: !(Maybe Key)
     , _ogIfMetagenerationNotMatch :: !(Maybe Word64)
     , _ogObject                   :: !Text
     , _ogProjection               :: !(Maybe StorageObjectsGetProjection)
-    , _ogOauthToken               :: !(Maybe Text)
+    , _ogOAuthToken               :: !(Maybe OAuthToken)
     , _ogGeneration               :: !(Maybe Word64)
     , _ogFields                   :: !(Maybe Text)
-    , _ogAlt                      :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectsGet'' with the minimum fields required to make a request.
@@ -107,7 +127,7 @@ data ObjectsGet' = ObjectsGet'
 --
 -- * 'ogIfGenerationMatch'
 --
--- * 'ogUserIp'
+-- * 'ogUserIP'
 --
 -- * 'ogBucket'
 --
@@ -119,13 +139,11 @@ data ObjectsGet' = ObjectsGet'
 --
 -- * 'ogProjection'
 --
--- * 'ogOauthToken'
+-- * 'ogOAuthToken'
 --
 -- * 'ogGeneration'
 --
 -- * 'ogFields'
---
--- * 'ogAlt'
 objectsGet'
     :: Text -- ^ 'bucket'
     -> Text -- ^ 'object'
@@ -137,16 +155,15 @@ objectsGet' pOgBucket_ pOgObject_ =
     , _ogIfGenerationNotMatch = Nothing
     , _ogPrettyPrint = True
     , _ogIfGenerationMatch = Nothing
-    , _ogUserIp = Nothing
+    , _ogUserIP = Nothing
     , _ogBucket = pOgBucket_
     , _ogKey = Nothing
     , _ogIfMetagenerationNotMatch = Nothing
     , _ogObject = pOgObject_
     , _ogProjection = Nothing
-    , _ogOauthToken = Nothing
+    , _ogOAuthToken = Nothing
     , _ogGeneration = Nothing
     , _ogFields = Nothing
-    , _ogAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -185,8 +202,8 @@ ogIfGenerationMatch
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ogUserIp :: Lens' ObjectsGet' (Maybe Text)
-ogUserIp = lens _ogUserIp (\ s a -> s{_ogUserIp = a})
+ogUserIP :: Lens' ObjectsGet' (Maybe Text)
+ogUserIP = lens _ogUserIP (\ s a -> s{_ogUserIP = a})
 
 -- | Name of the bucket in which the object resides.
 ogBucket :: Lens' ObjectsGet' Text
@@ -195,7 +212,7 @@ ogBucket = lens _ogBucket (\ s a -> s{_ogBucket = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ogKey :: Lens' ObjectsGet' (Maybe Text)
+ogKey :: Lens' ObjectsGet' (Maybe Key)
 ogKey = lens _ogKey (\ s a -> s{_ogKey = a})
 
 -- | Makes the operation conditional on whether the object\'s current
@@ -215,9 +232,9 @@ ogProjection
   = lens _ogProjection (\ s a -> s{_ogProjection = a})
 
 -- | OAuth 2.0 token for the current user.
-ogOauthToken :: Lens' ObjectsGet' (Maybe Text)
-ogOauthToken
-  = lens _ogOauthToken (\ s a -> s{_ogOauthToken = a})
+ogOAuthToken :: Lens' ObjectsGet' (Maybe OAuthToken)
+ogOAuthToken
+  = lens _ogOAuthToken (\ s a -> s{_ogOAuthToken = a})
 
 -- | If present, selects a specific revision of this object (as opposed to
 -- the latest version, the default).
@@ -229,9 +246,9 @@ ogGeneration
 ogFields :: Lens' ObjectsGet' (Maybe Text)
 ogFields = lens _ogFields (\ s a -> s{_ogFields = a})
 
--- | Data format for the response.
-ogAlt :: Lens' ObjectsGet' Alt
-ogAlt = lens _ogAlt (\ s a -> s{_ogAlt = a})
+instance GoogleAuth ObjectsGet' where
+        authKey = ogKey . _Just
+        authToken = ogOAuthToken . _Just
 
 instance GoogleRequest ObjectsGet' where
         type Rs ObjectsGet' = Object
@@ -241,17 +258,40 @@ instance GoogleRequest ObjectsGet' where
               _ogIfGenerationNotMatch
               (Just _ogPrettyPrint)
               _ogIfGenerationMatch
-              _ogUserIp
+              _ogUserIP
               _ogBucket
               _ogKey
               _ogIfMetagenerationNotMatch
               _ogObject
               _ogProjection
-              _ogOauthToken
+              _ogOAuthToken
               _ogGeneration
               _ogFields
-              (Just _ogAlt)
-          where go
+              (Just AltJSON)
+          where go :<|> _
+                  = clientWithRoute (Proxy :: Proxy ObjectsGetResource)
+                      r
+                      u
+
+instance GoogleRequest ObjectsGet' where
+        type Rs (Download ObjectsGet') = Stream
+        request = requestWithRoute defReq storageURL
+        requestWithRoute r u ObjectsGet'{..}
+          = go _ogQuotaUser _ogIfMetagenerationMatch
+              _ogIfGenerationNotMatch
+              (Just _ogPrettyPrint)
+              _ogIfGenerationMatch
+              _ogUserIP
+              _ogBucket
+              _ogKey
+              _ogIfMetagenerationNotMatch
+              _ogObject
+              _ogProjection
+              _ogOAuthToken
+              _ogGeneration
+              _ogFields
+              (Just Media)
+          where go :<|> _
                   = clientWithRoute (Proxy :: Proxy ObjectsGetResource)
                       r
                       u

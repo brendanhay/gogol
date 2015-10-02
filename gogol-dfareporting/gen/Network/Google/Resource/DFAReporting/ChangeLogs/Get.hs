@@ -32,13 +32,12 @@ module Network.Google.Resource.DFAReporting.ChangeLogs.Get
     -- * Request Lenses
     , clgQuotaUser
     , clgPrettyPrint
-    , clgUserIp
+    , clgUserIP
     , clgProfileId
     , clgKey
     , clgId
-    , clgOauthToken
+    , clgOAuthToken
     , clgFields
-    , clgAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,10 +53,10 @@ type ChangeLogsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] ChangeLog
+                         QueryParam "alt" AltJSON :> Get '[JSON] ChangeLog
 
 -- | Gets one change log by ID.
 --
@@ -65,13 +64,12 @@ type ChangeLogsGetResource =
 data ChangeLogsGet' = ChangeLogsGet'
     { _clgQuotaUser   :: !(Maybe Text)
     , _clgPrettyPrint :: !Bool
-    , _clgUserIp      :: !(Maybe Text)
+    , _clgUserIP      :: !(Maybe Text)
     , _clgProfileId   :: !Int64
-    , _clgKey         :: !(Maybe Text)
+    , _clgKey         :: !(Maybe Key)
     , _clgId          :: !Int64
-    , _clgOauthToken  :: !(Maybe Text)
+    , _clgOAuthToken  :: !(Maybe OAuthToken)
     , _clgFields      :: !(Maybe Text)
-    , _clgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChangeLogsGet'' with the minimum fields required to make a request.
@@ -82,7 +80,7 @@ data ChangeLogsGet' = ChangeLogsGet'
 --
 -- * 'clgPrettyPrint'
 --
--- * 'clgUserIp'
+-- * 'clgUserIP'
 --
 -- * 'clgProfileId'
 --
@@ -90,11 +88,9 @@ data ChangeLogsGet' = ChangeLogsGet'
 --
 -- * 'clgId'
 --
--- * 'clgOauthToken'
+-- * 'clgOAuthToken'
 --
 -- * 'clgFields'
---
--- * 'clgAlt'
 changeLogsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
@@ -103,13 +99,12 @@ changeLogsGet' pClgProfileId_ pClgId_ =
     ChangeLogsGet'
     { _clgQuotaUser = Nothing
     , _clgPrettyPrint = True
-    , _clgUserIp = Nothing
+    , _clgUserIP = Nothing
     , _clgProfileId = pClgProfileId_
     , _clgKey = Nothing
     , _clgId = pClgId_
-    , _clgOauthToken = Nothing
+    , _clgOAuthToken = Nothing
     , _clgFields = Nothing
-    , _clgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,9 +122,9 @@ clgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-clgUserIp :: Lens' ChangeLogsGet' (Maybe Text)
-clgUserIp
-  = lens _clgUserIp (\ s a -> s{_clgUserIp = a})
+clgUserIP :: Lens' ChangeLogsGet' (Maybe Text)
+clgUserIP
+  = lens _clgUserIP (\ s a -> s{_clgUserIP = a})
 
 -- | User profile ID associated with this request.
 clgProfileId :: Lens' ChangeLogsGet' Int64
@@ -139,7 +134,7 @@ clgProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-clgKey :: Lens' ChangeLogsGet' (Maybe Text)
+clgKey :: Lens' ChangeLogsGet' (Maybe Key)
 clgKey = lens _clgKey (\ s a -> s{_clgKey = a})
 
 -- | Change log ID.
@@ -147,31 +142,31 @@ clgId :: Lens' ChangeLogsGet' Int64
 clgId = lens _clgId (\ s a -> s{_clgId = a})
 
 -- | OAuth 2.0 token for the current user.
-clgOauthToken :: Lens' ChangeLogsGet' (Maybe Text)
-clgOauthToken
-  = lens _clgOauthToken
-      (\ s a -> s{_clgOauthToken = a})
+clgOAuthToken :: Lens' ChangeLogsGet' (Maybe OAuthToken)
+clgOAuthToken
+  = lens _clgOAuthToken
+      (\ s a -> s{_clgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 clgFields :: Lens' ChangeLogsGet' (Maybe Text)
 clgFields
   = lens _clgFields (\ s a -> s{_clgFields = a})
 
--- | Data format for the response.
-clgAlt :: Lens' ChangeLogsGet' Alt
-clgAlt = lens _clgAlt (\ s a -> s{_clgAlt = a})
+instance GoogleAuth ChangeLogsGet' where
+        authKey = clgKey . _Just
+        authToken = clgOAuthToken . _Just
 
 instance GoogleRequest ChangeLogsGet' where
         type Rs ChangeLogsGet' = ChangeLog
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ChangeLogsGet'{..}
-          = go _clgQuotaUser (Just _clgPrettyPrint) _clgUserIp
+          = go _clgQuotaUser (Just _clgPrettyPrint) _clgUserIP
               _clgProfileId
               _clgKey
               _clgId
-              _clgOauthToken
+              _clgOAuthToken
               _clgFields
-              (Just _clgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ChangeLogsGetResource)

@@ -34,11 +34,11 @@ module Network.Google.Resource.Compute.Projects.SetCommonInstanceMetadata
     , pscimQuotaUser
     , pscimPrettyPrint
     , pscimProject
-    , pscimUserIp
+    , pscimUserIP
     , pscimKey
-    , pscimOauthToken
+    , pscimMetadata
+    , pscimOAuthToken
     , pscimFields
-    , pscimAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -52,10 +52,11 @@ type ProjectsSetCommonInstanceMetadataResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Post '[JSON] Operation
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Metadata :> Post '[JSON] Operation
 
 -- | Sets metadata common to all instances within the specified project using
 -- the data included in the request.
@@ -65,11 +66,11 @@ data ProjectsSetCommonInstanceMetadata' = ProjectsSetCommonInstanceMetadata'
     { _pscimQuotaUser   :: !(Maybe Text)
     , _pscimPrettyPrint :: !Bool
     , _pscimProject     :: !Text
-    , _pscimUserIp      :: !(Maybe Text)
-    , _pscimKey         :: !(Maybe Text)
-    , _pscimOauthToken  :: !(Maybe Text)
+    , _pscimUserIP      :: !(Maybe Text)
+    , _pscimKey         :: !(Maybe Key)
+    , _pscimMetadata    :: !Metadata
+    , _pscimOAuthToken  :: !(Maybe OAuthToken)
     , _pscimFields      :: !(Maybe Text)
-    , _pscimAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsSetCommonInstanceMetadata'' with the minimum fields required to make a request.
@@ -82,28 +83,29 @@ data ProjectsSetCommonInstanceMetadata' = ProjectsSetCommonInstanceMetadata'
 --
 -- * 'pscimProject'
 --
--- * 'pscimUserIp'
+-- * 'pscimUserIP'
 --
 -- * 'pscimKey'
 --
--- * 'pscimOauthToken'
+-- * 'pscimMetadata'
+--
+-- * 'pscimOAuthToken'
 --
 -- * 'pscimFields'
---
--- * 'pscimAlt'
 projectsSetCommonInstanceMetadata'
     :: Text -- ^ 'project'
+    -> Metadata -- ^ 'Metadata'
     -> ProjectsSetCommonInstanceMetadata'
-projectsSetCommonInstanceMetadata' pPscimProject_ =
+projectsSetCommonInstanceMetadata' pPscimProject_ pPscimMetadata_ =
     ProjectsSetCommonInstanceMetadata'
     { _pscimQuotaUser = Nothing
     , _pscimPrettyPrint = True
     , _pscimProject = pPscimProject_
-    , _pscimUserIp = Nothing
+    , _pscimUserIP = Nothing
     , _pscimKey = Nothing
-    , _pscimOauthToken = Nothing
+    , _pscimMetadata = pPscimMetadata_
+    , _pscimOAuthToken = Nothing
     , _pscimFields = Nothing
-    , _pscimAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,30 +129,37 @@ pscimProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-pscimUserIp :: Lens' ProjectsSetCommonInstanceMetadata' (Maybe Text)
-pscimUserIp
-  = lens _pscimUserIp (\ s a -> s{_pscimUserIp = a})
+pscimUserIP :: Lens' ProjectsSetCommonInstanceMetadata' (Maybe Text)
+pscimUserIP
+  = lens _pscimUserIP (\ s a -> s{_pscimUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pscimKey :: Lens' ProjectsSetCommonInstanceMetadata' (Maybe Text)
+pscimKey :: Lens' ProjectsSetCommonInstanceMetadata' (Maybe Key)
 pscimKey = lens _pscimKey (\ s a -> s{_pscimKey = a})
 
+-- | Multipart request metadata.
+pscimMetadata :: Lens' ProjectsSetCommonInstanceMetadata' Metadata
+pscimMetadata
+  = lens _pscimMetadata
+      (\ s a -> s{_pscimMetadata = a})
+
 -- | OAuth 2.0 token for the current user.
-pscimOauthToken :: Lens' ProjectsSetCommonInstanceMetadata' (Maybe Text)
-pscimOauthToken
-  = lens _pscimOauthToken
-      (\ s a -> s{_pscimOauthToken = a})
+pscimOAuthToken :: Lens' ProjectsSetCommonInstanceMetadata' (Maybe OAuthToken)
+pscimOAuthToken
+  = lens _pscimOAuthToken
+      (\ s a -> s{_pscimOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 pscimFields :: Lens' ProjectsSetCommonInstanceMetadata' (Maybe Text)
 pscimFields
   = lens _pscimFields (\ s a -> s{_pscimFields = a})
 
--- | Data format for the response.
-pscimAlt :: Lens' ProjectsSetCommonInstanceMetadata' Alt
-pscimAlt = lens _pscimAlt (\ s a -> s{_pscimAlt = a})
+instance GoogleAuth
+         ProjectsSetCommonInstanceMetadata' where
+        authKey = pscimKey . _Just
+        authToken = pscimOAuthToken . _Just
 
 instance GoogleRequest
          ProjectsSetCommonInstanceMetadata' where
@@ -161,11 +170,12 @@ instance GoogleRequest
           ProjectsSetCommonInstanceMetadata'{..}
           = go _pscimQuotaUser (Just _pscimPrettyPrint)
               _pscimProject
-              _pscimUserIp
+              _pscimUserIP
               _pscimKey
-              _pscimOauthToken
+              _pscimOAuthToken
               _pscimFields
-              (Just _pscimAlt)
+              (Just AltJSON)
+              _pscimMetadata
           where go
                   = clientWithRoute
                       (Proxy ::

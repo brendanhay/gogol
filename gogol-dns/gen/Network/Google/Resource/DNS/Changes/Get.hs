@@ -33,13 +33,12 @@ module Network.Google.Resource.DNS.Changes.Get
     , cgQuotaUser
     , cgPrettyPrint
     , cgProject
-    , cgUserIp
+    , cgUserIP
     , cgChangeId
     , cgKey
-    , cgOauthToken
+    , cgOAuthToken
     , cgManagedZone
     , cgFields
-    , cgAlt
     ) where
 
 import           Network.Google.DNS.Types
@@ -56,10 +55,10 @@ type ChangesGetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Get '[JSON] Change
+                           QueryParam "alt" AltJSON :> Get '[JSON] Change
 
 -- | Fetch the representation of an existing Change.
 --
@@ -68,13 +67,12 @@ data ChangesGet' = ChangesGet'
     { _cgQuotaUser   :: !(Maybe Text)
     , _cgPrettyPrint :: !Bool
     , _cgProject     :: !Text
-    , _cgUserIp      :: !(Maybe Text)
+    , _cgUserIP      :: !(Maybe Text)
     , _cgChangeId    :: !Text
-    , _cgKey         :: !(Maybe Text)
-    , _cgOauthToken  :: !(Maybe Text)
+    , _cgKey         :: !(Maybe Key)
+    , _cgOAuthToken  :: !(Maybe OAuthToken)
     , _cgManagedZone :: !Text
     , _cgFields      :: !(Maybe Text)
-    , _cgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChangesGet'' with the minimum fields required to make a request.
@@ -87,19 +85,17 @@ data ChangesGet' = ChangesGet'
 --
 -- * 'cgProject'
 --
--- * 'cgUserIp'
+-- * 'cgUserIP'
 --
 -- * 'cgChangeId'
 --
 -- * 'cgKey'
 --
--- * 'cgOauthToken'
+-- * 'cgOAuthToken'
 --
 -- * 'cgManagedZone'
 --
 -- * 'cgFields'
---
--- * 'cgAlt'
 changesGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'changeId'
@@ -110,13 +106,12 @@ changesGet' pCgProject_ pCgChangeId_ pCgManagedZone_ =
     { _cgQuotaUser = Nothing
     , _cgPrettyPrint = True
     , _cgProject = pCgProject_
-    , _cgUserIp = Nothing
+    , _cgUserIP = Nothing
     , _cgChangeId = pCgChangeId_
     , _cgKey = Nothing
-    , _cgOauthToken = Nothing
+    , _cgOAuthToken = Nothing
     , _cgManagedZone = pCgManagedZone_
     , _cgFields = Nothing
-    , _cgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,8 +134,8 @@ cgProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cgUserIp :: Lens' ChangesGet' (Maybe Text)
-cgUserIp = lens _cgUserIp (\ s a -> s{_cgUserIp = a})
+cgUserIP :: Lens' ChangesGet' (Maybe Text)
+cgUserIP = lens _cgUserIP (\ s a -> s{_cgUserIP = a})
 
 -- | The identifier of the requested change, from a previous
 -- ResourceRecordSetsChangeResponse.
@@ -151,13 +146,13 @@ cgChangeId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cgKey :: Lens' ChangesGet' (Maybe Text)
+cgKey :: Lens' ChangesGet' (Maybe Key)
 cgKey = lens _cgKey (\ s a -> s{_cgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-cgOauthToken :: Lens' ChangesGet' (Maybe Text)
-cgOauthToken
-  = lens _cgOauthToken (\ s a -> s{_cgOauthToken = a})
+cgOAuthToken :: Lens' ChangesGet' (Maybe OAuthToken)
+cgOAuthToken
+  = lens _cgOAuthToken (\ s a -> s{_cgOAuthToken = a})
 
 -- | Identifies the managed zone addressed by this request. Can be the
 -- managed zone name or id.
@@ -170,22 +165,22 @@ cgManagedZone
 cgFields :: Lens' ChangesGet' (Maybe Text)
 cgFields = lens _cgFields (\ s a -> s{_cgFields = a})
 
--- | Data format for the response.
-cgAlt :: Lens' ChangesGet' Alt
-cgAlt = lens _cgAlt (\ s a -> s{_cgAlt = a})
+instance GoogleAuth ChangesGet' where
+        authKey = cgKey . _Just
+        authToken = cgOAuthToken . _Just
 
 instance GoogleRequest ChangesGet' where
         type Rs ChangesGet' = Change
         request = requestWithRoute defReq dNSURL
         requestWithRoute r u ChangesGet'{..}
           = go _cgQuotaUser (Just _cgPrettyPrint) _cgProject
-              _cgUserIp
+              _cgUserIP
               _cgChangeId
               _cgKey
-              _cgOauthToken
+              _cgOAuthToken
               _cgManagedZone
               _cgFields
-              (Just _cgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy ChangesGetResource)
                       r

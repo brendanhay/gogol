@@ -33,14 +33,13 @@ module Network.Google.Resource.Analytics.Management.CustomDimensions.List
     , mcdlQuotaUser
     , mcdlPrettyPrint
     , mcdlWebPropertyId
-    , mcdlUserIp
+    , mcdlUserIP
     , mcdlAccountId
     , mcdlKey
-    , mcdlOauthToken
+    , mcdlOAuthToken
     , mcdlStartIndex
     , mcdlMaxResults
     , mcdlFields
-    , mcdlAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -58,12 +57,12 @@ type ManagementCustomDimensionsListResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "start-index" Int32 :>
                              QueryParam "max-results" Int32 :>
                                QueryParam "fields" Text :>
-                                 QueryParam "alt" Alt :>
+                                 QueryParam "alt" AltJSON :>
                                    Get '[JSON] CustomDimensions
 
 -- | Lists custom dimensions to which the user has access.
@@ -73,14 +72,13 @@ data ManagementCustomDimensionsList' = ManagementCustomDimensionsList'
     { _mcdlQuotaUser     :: !(Maybe Text)
     , _mcdlPrettyPrint   :: !Bool
     , _mcdlWebPropertyId :: !Text
-    , _mcdlUserIp        :: !(Maybe Text)
+    , _mcdlUserIP        :: !(Maybe Text)
     , _mcdlAccountId     :: !Text
-    , _mcdlKey           :: !(Maybe Text)
-    , _mcdlOauthToken    :: !(Maybe Text)
+    , _mcdlKey           :: !(Maybe Key)
+    , _mcdlOAuthToken    :: !(Maybe OAuthToken)
     , _mcdlStartIndex    :: !(Maybe Int32)
     , _mcdlMaxResults    :: !(Maybe Int32)
     , _mcdlFields        :: !(Maybe Text)
-    , _mcdlAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementCustomDimensionsList'' with the minimum fields required to make a request.
@@ -93,21 +91,19 @@ data ManagementCustomDimensionsList' = ManagementCustomDimensionsList'
 --
 -- * 'mcdlWebPropertyId'
 --
--- * 'mcdlUserIp'
+-- * 'mcdlUserIP'
 --
 -- * 'mcdlAccountId'
 --
 -- * 'mcdlKey'
 --
--- * 'mcdlOauthToken'
+-- * 'mcdlOAuthToken'
 --
 -- * 'mcdlStartIndex'
 --
 -- * 'mcdlMaxResults'
 --
 -- * 'mcdlFields'
---
--- * 'mcdlAlt'
 managementCustomDimensionsList'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'accountId'
@@ -117,14 +113,13 @@ managementCustomDimensionsList' pMcdlWebPropertyId_ pMcdlAccountId_ =
     { _mcdlQuotaUser = Nothing
     , _mcdlPrettyPrint = False
     , _mcdlWebPropertyId = pMcdlWebPropertyId_
-    , _mcdlUserIp = Nothing
+    , _mcdlUserIP = Nothing
     , _mcdlAccountId = pMcdlAccountId_
     , _mcdlKey = Nothing
-    , _mcdlOauthToken = Nothing
+    , _mcdlOAuthToken = Nothing
     , _mcdlStartIndex = Nothing
     , _mcdlMaxResults = Nothing
     , _mcdlFields = Nothing
-    , _mcdlAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -149,9 +144,9 @@ mcdlWebPropertyId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mcdlUserIp :: Lens' ManagementCustomDimensionsList' (Maybe Text)
-mcdlUserIp
-  = lens _mcdlUserIp (\ s a -> s{_mcdlUserIp = a})
+mcdlUserIP :: Lens' ManagementCustomDimensionsList' (Maybe Text)
+mcdlUserIP
+  = lens _mcdlUserIP (\ s a -> s{_mcdlUserIP = a})
 
 -- | Account ID for the custom dimensions to retrieve.
 mcdlAccountId :: Lens' ManagementCustomDimensionsList' Text
@@ -162,14 +157,14 @@ mcdlAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mcdlKey :: Lens' ManagementCustomDimensionsList' (Maybe Text)
+mcdlKey :: Lens' ManagementCustomDimensionsList' (Maybe Key)
 mcdlKey = lens _mcdlKey (\ s a -> s{_mcdlKey = a})
 
 -- | OAuth 2.0 token for the current user.
-mcdlOauthToken :: Lens' ManagementCustomDimensionsList' (Maybe Text)
-mcdlOauthToken
-  = lens _mcdlOauthToken
-      (\ s a -> s{_mcdlOauthToken = a})
+mcdlOAuthToken :: Lens' ManagementCustomDimensionsList' (Maybe OAuthToken)
+mcdlOAuthToken
+  = lens _mcdlOAuthToken
+      (\ s a -> s{_mcdlOAuthToken = a})
 
 -- | An index of the first entity to retrieve. Use this parameter as a
 -- pagination mechanism along with the max-results parameter.
@@ -189,9 +184,10 @@ mcdlFields :: Lens' ManagementCustomDimensionsList' (Maybe Text)
 mcdlFields
   = lens _mcdlFields (\ s a -> s{_mcdlFields = a})
 
--- | Data format for the response.
-mcdlAlt :: Lens' ManagementCustomDimensionsList' Alt
-mcdlAlt = lens _mcdlAlt (\ s a -> s{_mcdlAlt = a})
+instance GoogleAuth ManagementCustomDimensionsList'
+         where
+        authKey = mcdlKey . _Just
+        authToken = mcdlOAuthToken . _Just
 
 instance GoogleRequest
          ManagementCustomDimensionsList' where
@@ -202,14 +198,14 @@ instance GoogleRequest
           ManagementCustomDimensionsList'{..}
           = go _mcdlQuotaUser (Just _mcdlPrettyPrint)
               _mcdlWebPropertyId
-              _mcdlUserIp
+              _mcdlUserIP
               _mcdlAccountId
               _mcdlKey
-              _mcdlOauthToken
+              _mcdlOAuthToken
               _mcdlStartIndex
               _mcdlMaxResults
               _mcdlFields
-              (Just _mcdlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

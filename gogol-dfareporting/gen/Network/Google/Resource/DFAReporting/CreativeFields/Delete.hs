@@ -32,13 +32,12 @@ module Network.Google.Resource.DFAReporting.CreativeFields.Delete
     -- * Request Lenses
     , cfdQuotaUser
     , cfdPrettyPrint
-    , cfdUserIp
+    , cfdUserIP
     , cfdProfileId
     , cfdKey
     , cfdId
-    , cfdOauthToken
+    , cfdOAuthToken
     , cfdFields
-    , cfdAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,10 +53,10 @@ type CreativeFieldsDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Delete '[JSON] ()
+                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an existing creative field.
 --
@@ -65,13 +64,12 @@ type CreativeFieldsDeleteResource =
 data CreativeFieldsDelete' = CreativeFieldsDelete'
     { _cfdQuotaUser   :: !(Maybe Text)
     , _cfdPrettyPrint :: !Bool
-    , _cfdUserIp      :: !(Maybe Text)
+    , _cfdUserIP      :: !(Maybe Text)
     , _cfdProfileId   :: !Int64
-    , _cfdKey         :: !(Maybe Text)
+    , _cfdKey         :: !(Maybe Key)
     , _cfdId          :: !Int64
-    , _cfdOauthToken  :: !(Maybe Text)
+    , _cfdOAuthToken  :: !(Maybe OAuthToken)
     , _cfdFields      :: !(Maybe Text)
-    , _cfdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeFieldsDelete'' with the minimum fields required to make a request.
@@ -82,7 +80,7 @@ data CreativeFieldsDelete' = CreativeFieldsDelete'
 --
 -- * 'cfdPrettyPrint'
 --
--- * 'cfdUserIp'
+-- * 'cfdUserIP'
 --
 -- * 'cfdProfileId'
 --
@@ -90,11 +88,9 @@ data CreativeFieldsDelete' = CreativeFieldsDelete'
 --
 -- * 'cfdId'
 --
--- * 'cfdOauthToken'
+-- * 'cfdOAuthToken'
 --
 -- * 'cfdFields'
---
--- * 'cfdAlt'
 creativeFieldsDelete'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
@@ -103,13 +99,12 @@ creativeFieldsDelete' pCfdProfileId_ pCfdId_ =
     CreativeFieldsDelete'
     { _cfdQuotaUser = Nothing
     , _cfdPrettyPrint = True
-    , _cfdUserIp = Nothing
+    , _cfdUserIP = Nothing
     , _cfdProfileId = pCfdProfileId_
     , _cfdKey = Nothing
     , _cfdId = pCfdId_
-    , _cfdOauthToken = Nothing
+    , _cfdOAuthToken = Nothing
     , _cfdFields = Nothing
-    , _cfdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,9 +122,9 @@ cfdPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cfdUserIp :: Lens' CreativeFieldsDelete' (Maybe Text)
-cfdUserIp
-  = lens _cfdUserIp (\ s a -> s{_cfdUserIp = a})
+cfdUserIP :: Lens' CreativeFieldsDelete' (Maybe Text)
+cfdUserIP
+  = lens _cfdUserIP (\ s a -> s{_cfdUserIP = a})
 
 -- | User profile ID associated with this request.
 cfdProfileId :: Lens' CreativeFieldsDelete' Int64
@@ -139,7 +134,7 @@ cfdProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cfdKey :: Lens' CreativeFieldsDelete' (Maybe Text)
+cfdKey :: Lens' CreativeFieldsDelete' (Maybe Key)
 cfdKey = lens _cfdKey (\ s a -> s{_cfdKey = a})
 
 -- | Creative Field ID
@@ -147,31 +142,31 @@ cfdId :: Lens' CreativeFieldsDelete' Int64
 cfdId = lens _cfdId (\ s a -> s{_cfdId = a})
 
 -- | OAuth 2.0 token for the current user.
-cfdOauthToken :: Lens' CreativeFieldsDelete' (Maybe Text)
-cfdOauthToken
-  = lens _cfdOauthToken
-      (\ s a -> s{_cfdOauthToken = a})
+cfdOAuthToken :: Lens' CreativeFieldsDelete' (Maybe OAuthToken)
+cfdOAuthToken
+  = lens _cfdOAuthToken
+      (\ s a -> s{_cfdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cfdFields :: Lens' CreativeFieldsDelete' (Maybe Text)
 cfdFields
   = lens _cfdFields (\ s a -> s{_cfdFields = a})
 
--- | Data format for the response.
-cfdAlt :: Lens' CreativeFieldsDelete' Alt
-cfdAlt = lens _cfdAlt (\ s a -> s{_cfdAlt = a})
+instance GoogleAuth CreativeFieldsDelete' where
+        authKey = cfdKey . _Just
+        authToken = cfdOAuthToken . _Just
 
 instance GoogleRequest CreativeFieldsDelete' where
         type Rs CreativeFieldsDelete' = ()
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativeFieldsDelete'{..}
-          = go _cfdQuotaUser (Just _cfdPrettyPrint) _cfdUserIp
+          = go _cfdQuotaUser (Just _cfdPrettyPrint) _cfdUserIP
               _cfdProfileId
               _cfdKey
               _cfdId
-              _cfdOauthToken
+              _cfdOAuthToken
               _cfdFields
-              (Just _cfdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CreativeFieldsDeleteResource)

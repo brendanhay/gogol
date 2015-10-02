@@ -30,15 +30,14 @@ module Network.Google.Resource.AdSense.Accounts.Alerts.List
     , AccountsAlertsList'
 
     -- * Request Lenses
-    , aalaQuotaUser
-    , aalaPrettyPrint
-    , aalaUserIp
-    , aalaLocale
-    , aalaAccountId
-    , aalaKey
-    , aalaOauthToken
-    , aalaFields
-    , aalaAlt
+    , aalQuotaUser
+    , aalPrettyPrint
+    , aalUserIP
+    , aalLocale
+    , aalAccountId
+    , aalKey
+    , aalOAuthToken
+    , aalFields
     ) where
 
 import           Network.Google.AdSense.Types
@@ -54,129 +53,122 @@ type AccountsAlertsListResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "locale" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] Alerts
+                         QueryParam "alt" AltJSON :> Get '[JSON] Alerts
 
 -- | List the alerts for the specified AdSense account.
 --
 -- /See:/ 'accountsAlertsList'' smart constructor.
 data AccountsAlertsList' = AccountsAlertsList'
-    { _aalaQuotaUser   :: !(Maybe Text)
-    , _aalaPrettyPrint :: !Bool
-    , _aalaUserIp      :: !(Maybe Text)
-    , _aalaLocale      :: !(Maybe Text)
-    , _aalaAccountId   :: !Text
-    , _aalaKey         :: !(Maybe Text)
-    , _aalaOauthToken  :: !(Maybe Text)
-    , _aalaFields      :: !(Maybe Text)
-    , _aalaAlt         :: !Alt
+    { _aalQuotaUser   :: !(Maybe Text)
+    , _aalPrettyPrint :: !Bool
+    , _aalUserIP      :: !(Maybe Text)
+    , _aalLocale      :: !(Maybe Text)
+    , _aalAccountId   :: !Text
+    , _aalKey         :: !(Maybe Key)
+    , _aalOAuthToken  :: !(Maybe OAuthToken)
+    , _aalFields      :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsAlertsList'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aalaQuotaUser'
+-- * 'aalQuotaUser'
 --
--- * 'aalaPrettyPrint'
+-- * 'aalPrettyPrint'
 --
--- * 'aalaUserIp'
+-- * 'aalUserIP'
 --
--- * 'aalaLocale'
+-- * 'aalLocale'
 --
--- * 'aalaAccountId'
+-- * 'aalAccountId'
 --
--- * 'aalaKey'
+-- * 'aalKey'
 --
--- * 'aalaOauthToken'
+-- * 'aalOAuthToken'
 --
--- * 'aalaFields'
---
--- * 'aalaAlt'
+-- * 'aalFields'
 accountsAlertsList'
     :: Text -- ^ 'accountId'
     -> AccountsAlertsList'
-accountsAlertsList' pAalaAccountId_ =
+accountsAlertsList' pAalAccountId_ =
     AccountsAlertsList'
-    { _aalaQuotaUser = Nothing
-    , _aalaPrettyPrint = True
-    , _aalaUserIp = Nothing
-    , _aalaLocale = Nothing
-    , _aalaAccountId = pAalaAccountId_
-    , _aalaKey = Nothing
-    , _aalaOauthToken = Nothing
-    , _aalaFields = Nothing
-    , _aalaAlt = JSON
+    { _aalQuotaUser = Nothing
+    , _aalPrettyPrint = True
+    , _aalUserIP = Nothing
+    , _aalLocale = Nothing
+    , _aalAccountId = pAalAccountId_
+    , _aalKey = Nothing
+    , _aalOAuthToken = Nothing
+    , _aalFields = Nothing
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-aalaQuotaUser :: Lens' AccountsAlertsList' (Maybe Text)
-aalaQuotaUser
-  = lens _aalaQuotaUser
-      (\ s a -> s{_aalaQuotaUser = a})
+aalQuotaUser :: Lens' AccountsAlertsList' (Maybe Text)
+aalQuotaUser
+  = lens _aalQuotaUser (\ s a -> s{_aalQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-aalaPrettyPrint :: Lens' AccountsAlertsList' Bool
-aalaPrettyPrint
-  = lens _aalaPrettyPrint
-      (\ s a -> s{_aalaPrettyPrint = a})
+aalPrettyPrint :: Lens' AccountsAlertsList' Bool
+aalPrettyPrint
+  = lens _aalPrettyPrint
+      (\ s a -> s{_aalPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-aalaUserIp :: Lens' AccountsAlertsList' (Maybe Text)
-aalaUserIp
-  = lens _aalaUserIp (\ s a -> s{_aalaUserIp = a})
+aalUserIP :: Lens' AccountsAlertsList' (Maybe Text)
+aalUserIP
+  = lens _aalUserIP (\ s a -> s{_aalUserIP = a})
 
 -- | The locale to use for translating alert messages. The account locale
 -- will be used if this is not supplied. The AdSense default (English) will
 -- be used if the supplied locale is invalid or unsupported.
-aalaLocale :: Lens' AccountsAlertsList' (Maybe Text)
-aalaLocale
-  = lens _aalaLocale (\ s a -> s{_aalaLocale = a})
+aalLocale :: Lens' AccountsAlertsList' (Maybe Text)
+aalLocale
+  = lens _aalLocale (\ s a -> s{_aalLocale = a})
 
 -- | Account for which to retrieve the alerts.
-aalaAccountId :: Lens' AccountsAlertsList' Text
-aalaAccountId
-  = lens _aalaAccountId
-      (\ s a -> s{_aalaAccountId = a})
+aalAccountId :: Lens' AccountsAlertsList' Text
+aalAccountId
+  = lens _aalAccountId (\ s a -> s{_aalAccountId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aalaKey :: Lens' AccountsAlertsList' (Maybe Text)
-aalaKey = lens _aalaKey (\ s a -> s{_aalaKey = a})
+aalKey :: Lens' AccountsAlertsList' (Maybe Key)
+aalKey = lens _aalKey (\ s a -> s{_aalKey = a})
 
 -- | OAuth 2.0 token for the current user.
-aalaOauthToken :: Lens' AccountsAlertsList' (Maybe Text)
-aalaOauthToken
-  = lens _aalaOauthToken
-      (\ s a -> s{_aalaOauthToken = a})
+aalOAuthToken :: Lens' AccountsAlertsList' (Maybe OAuthToken)
+aalOAuthToken
+  = lens _aalOAuthToken
+      (\ s a -> s{_aalOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-aalaFields :: Lens' AccountsAlertsList' (Maybe Text)
-aalaFields
-  = lens _aalaFields (\ s a -> s{_aalaFields = a})
+aalFields :: Lens' AccountsAlertsList' (Maybe Text)
+aalFields
+  = lens _aalFields (\ s a -> s{_aalFields = a})
 
--- | Data format for the response.
-aalaAlt :: Lens' AccountsAlertsList' Alt
-aalaAlt = lens _aalaAlt (\ s a -> s{_aalaAlt = a})
+instance GoogleAuth AccountsAlertsList' where
+        authKey = aalKey . _Just
+        authToken = aalOAuthToken . _Just
 
 instance GoogleRequest AccountsAlertsList' where
         type Rs AccountsAlertsList' = Alerts
         request = requestWithRoute defReq adSenseURL
         requestWithRoute r u AccountsAlertsList'{..}
-          = go _aalaQuotaUser (Just _aalaPrettyPrint)
-              _aalaUserIp
-              _aalaLocale
-              _aalaAccountId
-              _aalaKey
-              _aalaOauthToken
-              _aalaFields
-              (Just _aalaAlt)
+          = go _aalQuotaUser (Just _aalPrettyPrint) _aalUserIP
+              _aalLocale
+              _aalAccountId
+              _aalKey
+              _aalOAuthToken
+              _aalFields
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountsAlertsListResource)

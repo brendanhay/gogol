@@ -33,17 +33,16 @@ module Network.Google.Resource.Drive.Files.List
     , flQuotaUser
     , flPrettyPrint
     , flOrderBy
-    , flUserIp
+    , flUserIP
     , flQ
     , flKey
     , flSpaces
     , flProjection
     , flCorpus
     , flPageToken
-    , flOauthToken
+    , flOAuthToken
     , flMaxResults
     , flFields
-    , flAlt
     ) where
 
 import           Network.Google.Drive.Types
@@ -58,15 +57,16 @@ type FilesListResource =
            QueryParam "orderBy" Text :>
              QueryParam "userIp" Text :>
                QueryParam "q" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "spaces" Text :>
                      QueryParam "projection" DriveFilesListProjection :>
                        QueryParam "corpus" DriveFilesListCorpus :>
                          QueryParam "pageToken" Text :>
-                           QueryParam "oauth_token" Text :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "maxResults" Int32 :>
                                QueryParam "fields" Text :>
-                                 QueryParam "alt" Alt :> Get '[JSON] FileList
+                                 QueryParam "alt" AltJSON :>
+                                   Get '[JSON] FileList
 
 -- | Lists the user\'s files.
 --
@@ -75,17 +75,16 @@ data FilesList' = FilesList'
     { _flQuotaUser   :: !(Maybe Text)
     , _flPrettyPrint :: !Bool
     , _flOrderBy     :: !(Maybe Text)
-    , _flUserIp      :: !(Maybe Text)
+    , _flUserIP      :: !(Maybe Text)
     , _flQ           :: !(Maybe Text)
-    , _flKey         :: !(Maybe Text)
+    , _flKey         :: !(Maybe Key)
     , _flSpaces      :: !(Maybe Text)
     , _flProjection  :: !(Maybe DriveFilesListProjection)
     , _flCorpus      :: !(Maybe DriveFilesListCorpus)
     , _flPageToken   :: !(Maybe Text)
-    , _flOauthToken  :: !(Maybe Text)
+    , _flOAuthToken  :: !(Maybe OAuthToken)
     , _flMaxResults  :: !Int32
     , _flFields      :: !(Maybe Text)
-    , _flAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FilesList'' with the minimum fields required to make a request.
@@ -98,7 +97,7 @@ data FilesList' = FilesList'
 --
 -- * 'flOrderBy'
 --
--- * 'flUserIp'
+-- * 'flUserIP'
 --
 -- * 'flQ'
 --
@@ -112,13 +111,11 @@ data FilesList' = FilesList'
 --
 -- * 'flPageToken'
 --
--- * 'flOauthToken'
+-- * 'flOAuthToken'
 --
 -- * 'flMaxResults'
 --
 -- * 'flFields'
---
--- * 'flAlt'
 filesList'
     :: FilesList'
 filesList' =
@@ -126,17 +123,16 @@ filesList' =
     { _flQuotaUser = Nothing
     , _flPrettyPrint = True
     , _flOrderBy = Nothing
-    , _flUserIp = Nothing
+    , _flUserIP = Nothing
     , _flQ = Nothing
     , _flKey = Nothing
     , _flSpaces = Nothing
     , _flProjection = Nothing
     , _flCorpus = Nothing
     , _flPageToken = Nothing
-    , _flOauthToken = Nothing
+    , _flOAuthToken = Nothing
     , _flMaxResults = 100
     , _flFields = Nothing
-    , _flAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -166,8 +162,8 @@ flOrderBy
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-flUserIp :: Lens' FilesList' (Maybe Text)
-flUserIp = lens _flUserIp (\ s a -> s{_flUserIp = a})
+flUserIP :: Lens' FilesList' (Maybe Text)
+flUserIP = lens _flUserIP (\ s a -> s{_flUserIP = a})
 
 -- | Query string for searching files.
 flQ :: Lens' FilesList' (Maybe Text)
@@ -176,7 +172,7 @@ flQ = lens _flQ (\ s a -> s{_flQ = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-flKey :: Lens' FilesList' (Maybe Text)
+flKey :: Lens' FilesList' (Maybe Key)
 flKey = lens _flKey (\ s a -> s{_flKey = a})
 
 -- | A comma-separated list of spaces to query. Supported values are
@@ -199,9 +195,9 @@ flPageToken
   = lens _flPageToken (\ s a -> s{_flPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-flOauthToken :: Lens' FilesList' (Maybe Text)
-flOauthToken
-  = lens _flOauthToken (\ s a -> s{_flOauthToken = a})
+flOAuthToken :: Lens' FilesList' (Maybe OAuthToken)
+flOAuthToken
+  = lens _flOAuthToken (\ s a -> s{_flOAuthToken = a})
 
 -- | Maximum number of files to return.
 flMaxResults :: Lens' FilesList' Int32
@@ -212,26 +208,26 @@ flMaxResults
 flFields :: Lens' FilesList' (Maybe Text)
 flFields = lens _flFields (\ s a -> s{_flFields = a})
 
--- | Data format for the response.
-flAlt :: Lens' FilesList' Alt
-flAlt = lens _flAlt (\ s a -> s{_flAlt = a})
+instance GoogleAuth FilesList' where
+        authKey = flKey . _Just
+        authToken = flOAuthToken . _Just
 
 instance GoogleRequest FilesList' where
         type Rs FilesList' = FileList
         request = requestWithRoute defReq driveURL
         requestWithRoute r u FilesList'{..}
           = go _flQuotaUser (Just _flPrettyPrint) _flOrderBy
-              _flUserIp
+              _flUserIP
               _flQ
               _flKey
               _flSpaces
               _flProjection
               _flCorpus
               _flPageToken
-              _flOauthToken
+              _flOAuthToken
               (Just _flMaxResults)
               _flFields
-              (Just _flAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy FilesListResource)
                       r

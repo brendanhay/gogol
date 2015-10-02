@@ -34,11 +34,10 @@ module Network.Google.Resource.Genomics.Jobs.Cancel
     , jcQuotaUser
     , jcPrettyPrint
     , jcJobId
-    , jcUserIp
+    , jcUserIP
     , jcKey
-    , jcOauthToken
+    , jcOAuthToken
     , jcFields
-    , jcAlt
     ) where
 
 import           Network.Google.Genomics.Types
@@ -53,10 +52,10 @@ type JobsCancelResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] ()
+                       QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Cancels a job by ID. Note that it is possible for partial results to be
 -- generated and stored for cancelled jobs.
@@ -66,11 +65,10 @@ data JobsCancel' = JobsCancel'
     { _jcQuotaUser   :: !(Maybe Text)
     , _jcPrettyPrint :: !Bool
     , _jcJobId       :: !Text
-    , _jcUserIp      :: !(Maybe Text)
-    , _jcKey         :: !(Maybe Text)
-    , _jcOauthToken  :: !(Maybe Text)
+    , _jcUserIP      :: !(Maybe Text)
+    , _jcKey         :: !(Maybe Key)
+    , _jcOAuthToken  :: !(Maybe OAuthToken)
     , _jcFields      :: !(Maybe Text)
-    , _jcAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobsCancel'' with the minimum fields required to make a request.
@@ -83,15 +81,13 @@ data JobsCancel' = JobsCancel'
 --
 -- * 'jcJobId'
 --
--- * 'jcUserIp'
+-- * 'jcUserIP'
 --
 -- * 'jcKey'
 --
--- * 'jcOauthToken'
+-- * 'jcOAuthToken'
 --
 -- * 'jcFields'
---
--- * 'jcAlt'
 jobsCancel'
     :: Text -- ^ 'jobId'
     -> JobsCancel'
@@ -100,11 +96,10 @@ jobsCancel' pJcJobId_ =
     { _jcQuotaUser = Nothing
     , _jcPrettyPrint = True
     , _jcJobId = pJcJobId_
-    , _jcUserIp = Nothing
+    , _jcUserIP = Nothing
     , _jcKey = Nothing
-    , _jcOauthToken = Nothing
+    , _jcOAuthToken = Nothing
     , _jcFields = Nothing
-    , _jcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -126,38 +121,38 @@ jcJobId = lens _jcJobId (\ s a -> s{_jcJobId = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-jcUserIp :: Lens' JobsCancel' (Maybe Text)
-jcUserIp = lens _jcUserIp (\ s a -> s{_jcUserIp = a})
+jcUserIP :: Lens' JobsCancel' (Maybe Text)
+jcUserIP = lens _jcUserIP (\ s a -> s{_jcUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-jcKey :: Lens' JobsCancel' (Maybe Text)
+jcKey :: Lens' JobsCancel' (Maybe Key)
 jcKey = lens _jcKey (\ s a -> s{_jcKey = a})
 
 -- | OAuth 2.0 token for the current user.
-jcOauthToken :: Lens' JobsCancel' (Maybe Text)
-jcOauthToken
-  = lens _jcOauthToken (\ s a -> s{_jcOauthToken = a})
+jcOAuthToken :: Lens' JobsCancel' (Maybe OAuthToken)
+jcOAuthToken
+  = lens _jcOAuthToken (\ s a -> s{_jcOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 jcFields :: Lens' JobsCancel' (Maybe Text)
 jcFields = lens _jcFields (\ s a -> s{_jcFields = a})
 
--- | Data format for the response.
-jcAlt :: Lens' JobsCancel' Alt
-jcAlt = lens _jcAlt (\ s a -> s{_jcAlt = a})
+instance GoogleAuth JobsCancel' where
+        authKey = jcKey . _Just
+        authToken = jcOAuthToken . _Just
 
 instance GoogleRequest JobsCancel' where
         type Rs JobsCancel' = ()
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u JobsCancel'{..}
           = go _jcQuotaUser (Just _jcPrettyPrint) _jcJobId
-              _jcUserIp
+              _jcUserIP
               _jcKey
-              _jcOauthToken
+              _jcOAuthToken
               _jcFields
-              (Just _jcAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy JobsCancelResource)
                       r

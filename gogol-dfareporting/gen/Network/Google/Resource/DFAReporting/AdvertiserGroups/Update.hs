@@ -32,12 +32,12 @@ module Network.Google.Resource.DFAReporting.AdvertiserGroups.Update
     -- * Request Lenses
     , aguQuotaUser
     , aguPrettyPrint
-    , aguUserIp
+    , aguAdvertiserGroup
+    , aguUserIP
     , aguProfileId
     , aguKey
-    , aguOauthToken
+    , aguOAuthToken
     , aguFields
-    , aguAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,23 +52,25 @@ type AdvertiserGroupsUpdateResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Put '[JSON] AdvertiserGroup
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] AdvertiserGroup :>
+                           Put '[JSON] AdvertiserGroup
 
 -- | Updates an existing advertiser group.
 --
 -- /See:/ 'advertiserGroupsUpdate'' smart constructor.
 data AdvertiserGroupsUpdate' = AdvertiserGroupsUpdate'
-    { _aguQuotaUser   :: !(Maybe Text)
-    , _aguPrettyPrint :: !Bool
-    , _aguUserIp      :: !(Maybe Text)
-    , _aguProfileId   :: !Int64
-    , _aguKey         :: !(Maybe Text)
-    , _aguOauthToken  :: !(Maybe Text)
-    , _aguFields      :: !(Maybe Text)
-    , _aguAlt         :: !Alt
+    { _aguQuotaUser       :: !(Maybe Text)
+    , _aguPrettyPrint     :: !Bool
+    , _aguAdvertiserGroup :: !AdvertiserGroup
+    , _aguUserIP          :: !(Maybe Text)
+    , _aguProfileId       :: !Int64
+    , _aguKey             :: !(Maybe Key)
+    , _aguOAuthToken      :: !(Maybe OAuthToken)
+    , _aguFields          :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertiserGroupsUpdate'' with the minimum fields required to make a request.
@@ -79,30 +81,31 @@ data AdvertiserGroupsUpdate' = AdvertiserGroupsUpdate'
 --
 -- * 'aguPrettyPrint'
 --
--- * 'aguUserIp'
+-- * 'aguAdvertiserGroup'
+--
+-- * 'aguUserIP'
 --
 -- * 'aguProfileId'
 --
 -- * 'aguKey'
 --
--- * 'aguOauthToken'
+-- * 'aguOAuthToken'
 --
 -- * 'aguFields'
---
--- * 'aguAlt'
 advertiserGroupsUpdate'
-    :: Int64 -- ^ 'profileId'
+    :: AdvertiserGroup -- ^ 'AdvertiserGroup'
+    -> Int64 -- ^ 'profileId'
     -> AdvertiserGroupsUpdate'
-advertiserGroupsUpdate' pAguProfileId_ =
+advertiserGroupsUpdate' pAguAdvertiserGroup_ pAguProfileId_ =
     AdvertiserGroupsUpdate'
     { _aguQuotaUser = Nothing
     , _aguPrettyPrint = True
-    , _aguUserIp = Nothing
+    , _aguAdvertiserGroup = pAguAdvertiserGroup_
+    , _aguUserIP = Nothing
     , _aguProfileId = pAguProfileId_
     , _aguKey = Nothing
-    , _aguOauthToken = Nothing
+    , _aguOAuthToken = Nothing
     , _aguFields = Nothing
-    , _aguAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -118,11 +121,17 @@ aguPrettyPrint
   = lens _aguPrettyPrint
       (\ s a -> s{_aguPrettyPrint = a})
 
+-- | Multipart request metadata.
+aguAdvertiserGroup :: Lens' AdvertiserGroupsUpdate' AdvertiserGroup
+aguAdvertiserGroup
+  = lens _aguAdvertiserGroup
+      (\ s a -> s{_aguAdvertiserGroup = a})
+
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-aguUserIp :: Lens' AdvertiserGroupsUpdate' (Maybe Text)
-aguUserIp
-  = lens _aguUserIp (\ s a -> s{_aguUserIp = a})
+aguUserIP :: Lens' AdvertiserGroupsUpdate' (Maybe Text)
+aguUserIP
+  = lens _aguUserIP (\ s a -> s{_aguUserIP = a})
 
 -- | User profile ID associated with this request.
 aguProfileId :: Lens' AdvertiserGroupsUpdate' Int64
@@ -132,34 +141,35 @@ aguProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aguKey :: Lens' AdvertiserGroupsUpdate' (Maybe Text)
+aguKey :: Lens' AdvertiserGroupsUpdate' (Maybe Key)
 aguKey = lens _aguKey (\ s a -> s{_aguKey = a})
 
 -- | OAuth 2.0 token for the current user.
-aguOauthToken :: Lens' AdvertiserGroupsUpdate' (Maybe Text)
-aguOauthToken
-  = lens _aguOauthToken
-      (\ s a -> s{_aguOauthToken = a})
+aguOAuthToken :: Lens' AdvertiserGroupsUpdate' (Maybe OAuthToken)
+aguOAuthToken
+  = lens _aguOAuthToken
+      (\ s a -> s{_aguOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 aguFields :: Lens' AdvertiserGroupsUpdate' (Maybe Text)
 aguFields
   = lens _aguFields (\ s a -> s{_aguFields = a})
 
--- | Data format for the response.
-aguAlt :: Lens' AdvertiserGroupsUpdate' Alt
-aguAlt = lens _aguAlt (\ s a -> s{_aguAlt = a})
+instance GoogleAuth AdvertiserGroupsUpdate' where
+        authKey = aguKey . _Just
+        authToken = aguOAuthToken . _Just
 
 instance GoogleRequest AdvertiserGroupsUpdate' where
         type Rs AdvertiserGroupsUpdate' = AdvertiserGroup
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AdvertiserGroupsUpdate'{..}
-          = go _aguQuotaUser (Just _aguPrettyPrint) _aguUserIp
+          = go _aguQuotaUser (Just _aguPrettyPrint) _aguUserIP
               _aguProfileId
               _aguKey
-              _aguOauthToken
+              _aguOAuthToken
               _aguFields
-              (Just _aguAlt)
+              (Just AltJSON)
+              _aguAdvertiserGroup
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AdvertiserGroupsUpdateResource)

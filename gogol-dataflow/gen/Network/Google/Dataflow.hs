@@ -170,7 +170,7 @@ module Network.Google.Dataflow
     , eDataset
     , eExperiments
     , eWorkerPools
-    , eClusterManagerApiService
+    , eClusterManagerAPIService
     , eVersion
     , eInternalExperiments
     , eTempStoragePrefix
@@ -232,12 +232,12 @@ module Network.Google.Dataflow
     , trsWorkflowFileName
     , trsTaskGroup
     , trsAlsologtostderr
-    , trsDataflowApiVersion
+    , trsDataflowAPIVersion
     , trsLogDir
     , trsCommandlinesFileName
-    , trsVmId
-    , trsBaseUrl
-    , trsOauthScopes
+    , trsVMId
+    , trsBaseURL
+    , trsOAuthScopes
     , trsTaskUser
     , trsStreamingWorkerMainClass
     , trsBaseTaskDir
@@ -328,7 +328,7 @@ module Network.Google.Dataflow
     , WorkerSettings
     , workerSettings
     , wsServicePath
-    , wsBaseUrl
+    , wsBaseURL
     , wsShuffleServicePath
     , wsTempStoragePrefix
     , wsReportingEnabled
@@ -359,7 +359,7 @@ module Network.Google.Dataflow
     -- ** DataDiskAssignment
     , DataDiskAssignment
     , dataDiskAssignment
-    , ddaVmInstance
+    , ddaVMInstance
     , ddaDataDisks
 
     -- ** StreamingSetupTask

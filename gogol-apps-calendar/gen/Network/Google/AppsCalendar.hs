@@ -125,8 +125,8 @@ module Network.Google.AppsCalendar
     -- ** CalendarEventsWatch
     , module Network.Google.Resource.Calendar.Events.Watch
 
-    -- ** CalendarFreebusyQuery
-    , module Network.Google.Resource.Calendar.Freebusy.Query
+    -- ** CalendarFreeBusyQuery
+    , module Network.Google.Resource.Calendar.FreeBusy.Query
 
     -- ** CalendarSettingsGet
     , module Network.Google.Resource.Calendar.Settings.Get
@@ -147,8 +147,8 @@ module Network.Google.AppsCalendar
     , cleLocation
     , cleKind
     , cleNotificationSettings
-    , cleBackgroundColor
-    , cleForegroundColor
+    , cleBackgRoundColor
+    , cleForegRoundColor
     , cleDefaultReminders
     , cleSelected
     , clePrimary
@@ -193,12 +193,12 @@ module Network.Google.AppsCalendar
     , eRecurrence
     , eGadget
     , eSequence
-    , eICalUID
+    , eICalUId
     , eEnd
     , eAttendeesOmitted
     , eSource
     , eId
-    , eHtmlLink
+    , eHTMLLink
     , eUpdated
     , eColorId
     , eAnyoneCanAddSelf
@@ -237,7 +237,7 @@ module Network.Google.AppsCalendar
     -- ** EventAttachment
     , EventAttachment
     , eventAttachment
-    , eaFileUrl
+    , eaFileURL
     , eaIconLink
     , eaMimeType
     , eaTitle
@@ -260,8 +260,8 @@ module Network.Google.AppsCalendar
     -- ** ColorDefinition
     , ColorDefinition
     , colorDefinition
-    , cdForeground
-    , cdBackground
+    , cdForegRound
+    , cdBackgRound
 
     -- ** Error
     , Error
@@ -278,13 +278,13 @@ module Network.Google.AppsCalendar
     -- ** Channel
     , Channel
     , channel
-    , cResourceUri
+    , cResourceURI
     , cResourceId
     , cKind
     , cExpiration
     , cToken
     , cAddress
-    , cPayload
+    , cPayLoad
     , cParams
     , cId
     , cType
@@ -488,11 +488,8 @@ module Network.Google.AppsCalendar
     -- ** EventSource
     , EventSource
     , eventSource
-    , esUrl
+    , esURL
     , esTitle
-
-    -- ** Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.AppsCalendar.Types
@@ -530,7 +527,7 @@ import           Network.Google.Resource.Calendar.Events.Patch
 import           Network.Google.Resource.Calendar.Events.QuickAdd
 import           Network.Google.Resource.Calendar.Events.Update
 import           Network.Google.Resource.Calendar.Events.Watch
-import           Network.Google.Resource.Calendar.Freebusy.Query
+import           Network.Google.Resource.Calendar.FreeBusy.Query
 import           Network.Google.Resource.Calendar.Settings.Get
 import           Network.Google.Resource.Calendar.Settings.List
 import           Network.Google.Resource.Calendar.Settings.Watch
@@ -575,7 +572,7 @@ type AppsCalendarAPI =
        :<|> AclUpdateResource
        :<|> AclWatchResource
        :<|> ColorsGetResource
-       :<|> FreebusyQueryResource
+       :<|> FreeBusyQueryResource
 
 appsCalendarAPI :: Proxy AppsCalendarAPI
 appsCalendarAPI = Proxy

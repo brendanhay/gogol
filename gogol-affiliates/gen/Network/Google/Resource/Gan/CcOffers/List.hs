@@ -32,14 +32,13 @@ module Network.Google.Resource.Gan.CcOffers.List
     -- * Request Lenses
     , colQuotaUser
     , colPrettyPrint
-    , colUserIp
+    , colUserIP
     , colKey
     , colAdvertiser
     , colProjection
-    , colOauthToken
+    , colOAuthToken
     , colPublisher
     , colFields
-    , colAlt
     ) where
 
 import           Network.Google.Affiliates.Types
@@ -54,12 +53,12 @@ type CcOffersListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParams "advertiser" Text :>
                      QueryParam "projection" GanCcOffersListProjection :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Get '[JSON] CcOffers
+                           QueryParam "alt" AltJSON :> Get '[JSON] CcOffers
 
 -- | Retrieves credit card offers for the given publisher.
 --
@@ -67,14 +66,13 @@ type CcOffersListResource =
 data CcOffersList' = CcOffersList'
     { _colQuotaUser   :: !(Maybe Text)
     , _colPrettyPrint :: !Bool
-    , _colUserIp      :: !(Maybe Text)
-    , _colKey         :: !(Maybe Text)
+    , _colUserIP      :: !(Maybe Text)
+    , _colKey         :: !(Maybe Key)
     , _colAdvertiser  :: !(Maybe Text)
     , _colProjection  :: !(Maybe GanCcOffersListProjection)
-    , _colOauthToken  :: !(Maybe Text)
+    , _colOAuthToken  :: !(Maybe OAuthToken)
     , _colPublisher   :: !Text
     , _colFields      :: !(Maybe Text)
-    , _colAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CcOffersList'' with the minimum fields required to make a request.
@@ -85,7 +83,7 @@ data CcOffersList' = CcOffersList'
 --
 -- * 'colPrettyPrint'
 --
--- * 'colUserIp'
+-- * 'colUserIP'
 --
 -- * 'colKey'
 --
@@ -93,13 +91,11 @@ data CcOffersList' = CcOffersList'
 --
 -- * 'colProjection'
 --
--- * 'colOauthToken'
+-- * 'colOAuthToken'
 --
 -- * 'colPublisher'
 --
 -- * 'colFields'
---
--- * 'colAlt'
 ccOffersList'
     :: Text -- ^ 'publisher'
     -> CcOffersList'
@@ -107,14 +103,13 @@ ccOffersList' pColPublisher_ =
     CcOffersList'
     { _colQuotaUser = Nothing
     , _colPrettyPrint = True
-    , _colUserIp = Nothing
+    , _colUserIP = Nothing
     , _colKey = Nothing
     , _colAdvertiser = Nothing
     , _colProjection = Nothing
-    , _colOauthToken = Nothing
+    , _colOAuthToken = Nothing
     , _colPublisher = pColPublisher_
     , _colFields = Nothing
-    , _colAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -132,14 +127,14 @@ colPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-colUserIp :: Lens' CcOffersList' (Maybe Text)
-colUserIp
-  = lens _colUserIp (\ s a -> s{_colUserIp = a})
+colUserIP :: Lens' CcOffersList' (Maybe Text)
+colUserIP
+  = lens _colUserIP (\ s a -> s{_colUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-colKey :: Lens' CcOffersList' (Maybe Text)
+colKey :: Lens' CcOffersList' (Maybe Key)
 colKey = lens _colKey (\ s a -> s{_colKey = a})
 
 -- | The advertiser ID of a card issuer whose offers to include. Optional,
@@ -156,10 +151,10 @@ colProjection
       (\ s a -> s{_colProjection = a})
 
 -- | OAuth 2.0 token for the current user.
-colOauthToken :: Lens' CcOffersList' (Maybe Text)
-colOauthToken
-  = lens _colOauthToken
-      (\ s a -> s{_colOauthToken = a})
+colOAuthToken :: Lens' CcOffersList' (Maybe OAuthToken)
+colOAuthToken
+  = lens _colOAuthToken
+      (\ s a -> s{_colOAuthToken = a})
 
 -- | The ID of the publisher in question.
 colPublisher :: Lens' CcOffersList' Text
@@ -171,22 +166,22 @@ colFields :: Lens' CcOffersList' (Maybe Text)
 colFields
   = lens _colFields (\ s a -> s{_colFields = a})
 
--- | Data format for the response.
-colAlt :: Lens' CcOffersList' Alt
-colAlt = lens _colAlt (\ s a -> s{_colAlt = a})
+instance GoogleAuth CcOffersList' where
+        authKey = colKey . _Just
+        authToken = colOAuthToken . _Just
 
 instance GoogleRequest CcOffersList' where
         type Rs CcOffersList' = CcOffers
         request = requestWithRoute defReq affiliatesURL
         requestWithRoute r u CcOffersList'{..}
-          = go _colQuotaUser (Just _colPrettyPrint) _colUserIp
+          = go _colQuotaUser (Just _colPrettyPrint) _colUserIP
               _colKey
               _colAdvertiser
               _colProjection
-              _colOauthToken
+              _colOAuthToken
               _colPublisher
               _colFields
-              (Just _colAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CcOffersListResource)

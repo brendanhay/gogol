@@ -33,13 +33,12 @@ module Network.Google.Resource.Drive.Properties.Get
     , pgQuotaUser
     , pgPrettyPrint
     , pgPropertyKey
-    , pgUserIp
+    , pgUserIP
     , pgVisibility
     , pgKey
     , pgFileId
-    , pgOauthToken
+    , pgOAuthToken
     , pgFields
-    , pgAlt
     ) where
 
 import           Network.Google.Drive.Types
@@ -56,10 +55,10 @@ type PropertiesGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "visibility" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Get '[JSON] Property
+                           QueryParam "alt" AltJSON :> Get '[JSON] Property
 
 -- | Gets a property by its key.
 --
@@ -68,13 +67,12 @@ data PropertiesGet' = PropertiesGet'
     { _pgQuotaUser   :: !(Maybe Text)
     , _pgPrettyPrint :: !Bool
     , _pgPropertyKey :: !Text
-    , _pgUserIp      :: !(Maybe Text)
+    , _pgUserIP      :: !(Maybe Text)
     , _pgVisibility  :: !Text
-    , _pgKey         :: !(Maybe Text)
+    , _pgKey         :: !(Maybe Key)
     , _pgFileId      :: !Text
-    , _pgOauthToken  :: !(Maybe Text)
+    , _pgOAuthToken  :: !(Maybe OAuthToken)
     , _pgFields      :: !(Maybe Text)
-    , _pgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PropertiesGet'' with the minimum fields required to make a request.
@@ -87,7 +85,7 @@ data PropertiesGet' = PropertiesGet'
 --
 -- * 'pgPropertyKey'
 --
--- * 'pgUserIp'
+-- * 'pgUserIP'
 --
 -- * 'pgVisibility'
 --
@@ -95,11 +93,9 @@ data PropertiesGet' = PropertiesGet'
 --
 -- * 'pgFileId'
 --
--- * 'pgOauthToken'
+-- * 'pgOAuthToken'
 --
 -- * 'pgFields'
---
--- * 'pgAlt'
 propertiesGet'
     :: Text -- ^ 'propertyKey'
     -> Text -- ^ 'fileId'
@@ -109,13 +105,12 @@ propertiesGet' pPgPropertyKey_ pPgFileId_ =
     { _pgQuotaUser = Nothing
     , _pgPrettyPrint = True
     , _pgPropertyKey = pPgPropertyKey_
-    , _pgUserIp = Nothing
+    , _pgUserIP = Nothing
     , _pgVisibility = "private"
     , _pgKey = Nothing
     , _pgFileId = pPgFileId_
-    , _pgOauthToken = Nothing
+    , _pgOAuthToken = Nothing
     , _pgFields = Nothing
-    , _pgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,8 +134,8 @@ pgPropertyKey
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-pgUserIp :: Lens' PropertiesGet' (Maybe Text)
-pgUserIp = lens _pgUserIp (\ s a -> s{_pgUserIp = a})
+pgUserIP :: Lens' PropertiesGet' (Maybe Text)
+pgUserIP = lens _pgUserIP (\ s a -> s{_pgUserIP = a})
 
 -- | The visibility of the property.
 pgVisibility :: Lens' PropertiesGet' Text
@@ -150,7 +145,7 @@ pgVisibility
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pgKey :: Lens' PropertiesGet' (Maybe Text)
+pgKey :: Lens' PropertiesGet' (Maybe Key)
 pgKey = lens _pgKey (\ s a -> s{_pgKey = a})
 
 -- | The ID of the file.
@@ -158,17 +153,17 @@ pgFileId :: Lens' PropertiesGet' Text
 pgFileId = lens _pgFileId (\ s a -> s{_pgFileId = a})
 
 -- | OAuth 2.0 token for the current user.
-pgOauthToken :: Lens' PropertiesGet' (Maybe Text)
-pgOauthToken
-  = lens _pgOauthToken (\ s a -> s{_pgOauthToken = a})
+pgOAuthToken :: Lens' PropertiesGet' (Maybe OAuthToken)
+pgOAuthToken
+  = lens _pgOAuthToken (\ s a -> s{_pgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 pgFields :: Lens' PropertiesGet' (Maybe Text)
 pgFields = lens _pgFields (\ s a -> s{_pgFields = a})
 
--- | Data format for the response.
-pgAlt :: Lens' PropertiesGet' Alt
-pgAlt = lens _pgAlt (\ s a -> s{_pgAlt = a})
+instance GoogleAuth PropertiesGet' where
+        authKey = pgKey . _Just
+        authToken = pgOAuthToken . _Just
 
 instance GoogleRequest PropertiesGet' where
         type Rs PropertiesGet' = Property
@@ -176,13 +171,13 @@ instance GoogleRequest PropertiesGet' where
         requestWithRoute r u PropertiesGet'{..}
           = go _pgQuotaUser (Just _pgPrettyPrint)
               _pgPropertyKey
-              _pgUserIp
+              _pgUserIP
               (Just _pgVisibility)
               _pgKey
               _pgFileId
-              _pgOauthToken
+              _pgOAuthToken
               _pgFields
-              (Just _pgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PropertiesGetResource)

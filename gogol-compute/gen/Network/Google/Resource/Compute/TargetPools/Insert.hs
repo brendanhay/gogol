@@ -33,13 +33,13 @@ module Network.Google.Resource.Compute.TargetPools.Insert
     -- * Request Lenses
     , tpiQuotaUser
     , tpiPrettyPrint
+    , tpiTargetPool
     , tpiProject
-    , tpiUserIp
+    , tpiUserIP
     , tpiKey
     , tpiRegion
-    , tpiOauthToken
+    , tpiOAuthToken
     , tpiFields
-    , tpiAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -55,10 +55,11 @@ type TargetPoolsInsertResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Post '[JSON] Operation
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] TargetPool :> Post '[JSON] Operation
 
 -- | Creates a TargetPool resource in the specified project and region using
 -- the data included in the request.
@@ -67,13 +68,13 @@ type TargetPoolsInsertResource =
 data TargetPoolsInsert' = TargetPoolsInsert'
     { _tpiQuotaUser   :: !(Maybe Text)
     , _tpiPrettyPrint :: !Bool
+    , _tpiTargetPool  :: !TargetPool
     , _tpiProject     :: !Text
-    , _tpiUserIp      :: !(Maybe Text)
-    , _tpiKey         :: !(Maybe Text)
+    , _tpiUserIP      :: !(Maybe Text)
+    , _tpiKey         :: !(Maybe Key)
     , _tpiRegion      :: !Text
-    , _tpiOauthToken  :: !(Maybe Text)
+    , _tpiOAuthToken  :: !(Maybe OAuthToken)
     , _tpiFields      :: !(Maybe Text)
-    , _tpiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetPoolsInsert'' with the minimum fields required to make a request.
@@ -84,34 +85,35 @@ data TargetPoolsInsert' = TargetPoolsInsert'
 --
 -- * 'tpiPrettyPrint'
 --
+-- * 'tpiTargetPool'
+--
 -- * 'tpiProject'
 --
--- * 'tpiUserIp'
+-- * 'tpiUserIP'
 --
 -- * 'tpiKey'
 --
 -- * 'tpiRegion'
 --
--- * 'tpiOauthToken'
+-- * 'tpiOAuthToken'
 --
 -- * 'tpiFields'
---
--- * 'tpiAlt'
 targetPoolsInsert'
-    :: Text -- ^ 'project'
+    :: TargetPool -- ^ 'TargetPool'
+    -> Text -- ^ 'project'
     -> Text -- ^ 'region'
     -> TargetPoolsInsert'
-targetPoolsInsert' pTpiProject_ pTpiRegion_ =
+targetPoolsInsert' pTpiTargetPool_ pTpiProject_ pTpiRegion_ =
     TargetPoolsInsert'
     { _tpiQuotaUser = Nothing
     , _tpiPrettyPrint = True
+    , _tpiTargetPool = pTpiTargetPool_
     , _tpiProject = pTpiProject_
-    , _tpiUserIp = Nothing
+    , _tpiUserIP = Nothing
     , _tpiKey = Nothing
     , _tpiRegion = pTpiRegion_
-    , _tpiOauthToken = Nothing
+    , _tpiOAuthToken = Nothing
     , _tpiFields = Nothing
-    , _tpiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,6 +129,12 @@ tpiPrettyPrint
   = lens _tpiPrettyPrint
       (\ s a -> s{_tpiPrettyPrint = a})
 
+-- | Multipart request metadata.
+tpiTargetPool :: Lens' TargetPoolsInsert' TargetPool
+tpiTargetPool
+  = lens _tpiTargetPool
+      (\ s a -> s{_tpiTargetPool = a})
+
 -- | Name of the project scoping this request.
 tpiProject :: Lens' TargetPoolsInsert' Text
 tpiProject
@@ -134,14 +142,14 @@ tpiProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tpiUserIp :: Lens' TargetPoolsInsert' (Maybe Text)
-tpiUserIp
-  = lens _tpiUserIp (\ s a -> s{_tpiUserIp = a})
+tpiUserIP :: Lens' TargetPoolsInsert' (Maybe Text)
+tpiUserIP
+  = lens _tpiUserIP (\ s a -> s{_tpiUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tpiKey :: Lens' TargetPoolsInsert' (Maybe Text)
+tpiKey :: Lens' TargetPoolsInsert' (Maybe Key)
 tpiKey = lens _tpiKey (\ s a -> s{_tpiKey = a})
 
 -- | Name of the region scoping this request.
@@ -150,31 +158,32 @@ tpiRegion
   = lens _tpiRegion (\ s a -> s{_tpiRegion = a})
 
 -- | OAuth 2.0 token for the current user.
-tpiOauthToken :: Lens' TargetPoolsInsert' (Maybe Text)
-tpiOauthToken
-  = lens _tpiOauthToken
-      (\ s a -> s{_tpiOauthToken = a})
+tpiOAuthToken :: Lens' TargetPoolsInsert' (Maybe OAuthToken)
+tpiOAuthToken
+  = lens _tpiOAuthToken
+      (\ s a -> s{_tpiOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 tpiFields :: Lens' TargetPoolsInsert' (Maybe Text)
 tpiFields
   = lens _tpiFields (\ s a -> s{_tpiFields = a})
 
--- | Data format for the response.
-tpiAlt :: Lens' TargetPoolsInsert' Alt
-tpiAlt = lens _tpiAlt (\ s a -> s{_tpiAlt = a})
+instance GoogleAuth TargetPoolsInsert' where
+        authKey = tpiKey . _Just
+        authToken = tpiOAuthToken . _Just
 
 instance GoogleRequest TargetPoolsInsert' where
         type Rs TargetPoolsInsert' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u TargetPoolsInsert'{..}
           = go _tpiQuotaUser (Just _tpiPrettyPrint) _tpiProject
-              _tpiUserIp
+              _tpiUserIP
               _tpiKey
               _tpiRegion
-              _tpiOauthToken
+              _tpiOAuthToken
               _tpiFields
-              (Just _tpiAlt)
+              (Just AltJSON)
+              _tpiTargetPool
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TargetPoolsInsertResource)

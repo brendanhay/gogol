@@ -34,11 +34,11 @@ module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Patc
     , acpQuotaUser
     , acpPrettyPrint
     , acpAchievementId
-    , acpUserIp
+    , acpUserIP
     , acpKey
-    , acpOauthToken
+    , acpAchievementConfiguration
+    , acpOAuthToken
     , acpFields
-    , acpAlt
     ) where
 
 import           Network.Google.GamesConfiguration.Types
@@ -52,25 +52,26 @@ type AchievementConfigurationsPatchResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :>
-                       Patch '[JSON] AchievementConfiguration
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] AchievementConfiguration :>
+                         Patch '[JSON] AchievementConfiguration
 
 -- | Update the metadata of the achievement configuration with the given ID.
 -- This method supports patch semantics.
 --
 -- /See:/ 'achievementConfigurationsPatch'' smart constructor.
 data AchievementConfigurationsPatch' = AchievementConfigurationsPatch'
-    { _acpQuotaUser     :: !(Maybe Text)
-    , _acpPrettyPrint   :: !Bool
-    , _acpAchievementId :: !Text
-    , _acpUserIp        :: !(Maybe Text)
-    , _acpKey           :: !(Maybe Text)
-    , _acpOauthToken    :: !(Maybe Text)
-    , _acpFields        :: !(Maybe Text)
-    , _acpAlt           :: !Alt
+    { _acpQuotaUser                :: !(Maybe Text)
+    , _acpPrettyPrint              :: !Bool
+    , _acpAchievementId            :: !Text
+    , _acpUserIP                   :: !(Maybe Text)
+    , _acpKey                      :: !(Maybe Key)
+    , _acpAchievementConfiguration :: !AchievementConfiguration
+    , _acpOAuthToken               :: !(Maybe OAuthToken)
+    , _acpFields                   :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementConfigurationsPatch'' with the minimum fields required to make a request.
@@ -83,28 +84,29 @@ data AchievementConfigurationsPatch' = AchievementConfigurationsPatch'
 --
 -- * 'acpAchievementId'
 --
--- * 'acpUserIp'
+-- * 'acpUserIP'
 --
 -- * 'acpKey'
 --
--- * 'acpOauthToken'
+-- * 'acpAchievementConfiguration'
+--
+-- * 'acpOAuthToken'
 --
 -- * 'acpFields'
---
--- * 'acpAlt'
 achievementConfigurationsPatch'
     :: Text -- ^ 'achievementId'
+    -> AchievementConfiguration -- ^ 'AchievementConfiguration'
     -> AchievementConfigurationsPatch'
-achievementConfigurationsPatch' pAcpAchievementId_ =
+achievementConfigurationsPatch' pAcpAchievementId_ pAcpAchievementConfiguration_ =
     AchievementConfigurationsPatch'
     { _acpQuotaUser = Nothing
     , _acpPrettyPrint = True
     , _acpAchievementId = pAcpAchievementId_
-    , _acpUserIp = Nothing
+    , _acpUserIP = Nothing
     , _acpKey = Nothing
-    , _acpOauthToken = Nothing
+    , _acpAchievementConfiguration = pAcpAchievementConfiguration_
+    , _acpOAuthToken = Nothing
     , _acpFields = Nothing
-    , _acpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -128,30 +130,37 @@ acpAchievementId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-acpUserIp :: Lens' AchievementConfigurationsPatch' (Maybe Text)
-acpUserIp
-  = lens _acpUserIp (\ s a -> s{_acpUserIp = a})
+acpUserIP :: Lens' AchievementConfigurationsPatch' (Maybe Text)
+acpUserIP
+  = lens _acpUserIP (\ s a -> s{_acpUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-acpKey :: Lens' AchievementConfigurationsPatch' (Maybe Text)
+acpKey :: Lens' AchievementConfigurationsPatch' (Maybe Key)
 acpKey = lens _acpKey (\ s a -> s{_acpKey = a})
 
+-- | Multipart request metadata.
+acpAchievementConfiguration :: Lens' AchievementConfigurationsPatch' AchievementConfiguration
+acpAchievementConfiguration
+  = lens _acpAchievementConfiguration
+      (\ s a -> s{_acpAchievementConfiguration = a})
+
 -- | OAuth 2.0 token for the current user.
-acpOauthToken :: Lens' AchievementConfigurationsPatch' (Maybe Text)
-acpOauthToken
-  = lens _acpOauthToken
-      (\ s a -> s{_acpOauthToken = a})
+acpOAuthToken :: Lens' AchievementConfigurationsPatch' (Maybe OAuthToken)
+acpOAuthToken
+  = lens _acpOAuthToken
+      (\ s a -> s{_acpOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 acpFields :: Lens' AchievementConfigurationsPatch' (Maybe Text)
 acpFields
   = lens _acpFields (\ s a -> s{_acpFields = a})
 
--- | Data format for the response.
-acpAlt :: Lens' AchievementConfigurationsPatch' Alt
-acpAlt = lens _acpAlt (\ s a -> s{_acpAlt = a})
+instance GoogleAuth AchievementConfigurationsPatch'
+         where
+        authKey = acpKey . _Just
+        authToken = acpOAuthToken . _Just
 
 instance GoogleRequest
          AchievementConfigurationsPatch' where
@@ -163,11 +172,12 @@ instance GoogleRequest
           AchievementConfigurationsPatch'{..}
           = go _acpQuotaUser (Just _acpPrettyPrint)
               _acpAchievementId
-              _acpUserIp
+              _acpUserIP
               _acpKey
-              _acpOauthToken
+              _acpOAuthToken
               _acpFields
-              (Just _acpAlt)
+              (Just AltJSON)
+              _acpAchievementConfiguration
           where go
                   = clientWithRoute
                       (Proxy ::

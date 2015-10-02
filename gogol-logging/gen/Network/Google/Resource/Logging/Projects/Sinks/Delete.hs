@@ -40,12 +40,11 @@ module Network.Google.Resource.Logging.Projects.Sinks.Delete
     , psdUploadType
     , psdBearerToken
     , psdKey
-    , psdOauthToken
+    , psdOAuthToken
     , psdProjectsId
     , psdSinksId
     , psdFields
     , psdCallback
-    , psdAlt
     ) where
 
 import           Network.Google.Logging.Types
@@ -67,11 +66,11 @@ type ProjectsSinksDeleteResource =
                          QueryParam "access_token" Text :>
                            QueryParam "uploadType" Text :>
                              QueryParam "bearer_token" Text :>
-                               QueryParam "key" Text :>
-                                 QueryParam "oauth_token" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "fields" Text :>
                                      QueryParam "callback" Text :>
-                                       QueryParam "alt" Text :>
+                                       QueryParam "alt" AltJSON :>
                                          Delete '[JSON] Empty
 
 -- | Deletes a project sink. After deletion, no new log entries are written
@@ -87,13 +86,12 @@ data ProjectsSinksDelete' = ProjectsSinksDelete'
     , _psdAccessToken    :: !(Maybe Text)
     , _psdUploadType     :: !(Maybe Text)
     , _psdBearerToken    :: !(Maybe Text)
-    , _psdKey            :: !(Maybe Text)
-    , _psdOauthToken     :: !(Maybe Text)
+    , _psdKey            :: !(Maybe Key)
+    , _psdOAuthToken     :: !(Maybe OAuthToken)
     , _psdProjectsId     :: !Text
     , _psdSinksId        :: !Text
     , _psdFields         :: !(Maybe Text)
     , _psdCallback       :: !(Maybe Text)
-    , _psdAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsSinksDelete'' with the minimum fields required to make a request.
@@ -118,7 +116,7 @@ data ProjectsSinksDelete' = ProjectsSinksDelete'
 --
 -- * 'psdKey'
 --
--- * 'psdOauthToken'
+-- * 'psdOAuthToken'
 --
 -- * 'psdProjectsId'
 --
@@ -127,8 +125,6 @@ data ProjectsSinksDelete' = ProjectsSinksDelete'
 -- * 'psdFields'
 --
 -- * 'psdCallback'
---
--- * 'psdAlt'
 projectsSinksDelete'
     :: Text -- ^ 'projectsId'
     -> Text -- ^ 'sinksId'
@@ -144,12 +140,11 @@ projectsSinksDelete' pPsdProjectsId_ pPsdSinksId_ =
     , _psdUploadType = Nothing
     , _psdBearerToken = Nothing
     , _psdKey = Nothing
-    , _psdOauthToken = Nothing
+    , _psdOAuthToken = Nothing
     , _psdProjectsId = pPsdProjectsId_
     , _psdSinksId = pPsdSinksId_
     , _psdFields = Nothing
     , _psdCallback = Nothing
-    , _psdAlt = "json"
     }
 
 -- | V1 error format.
@@ -200,14 +195,14 @@ psdBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-psdKey :: Lens' ProjectsSinksDelete' (Maybe Text)
+psdKey :: Lens' ProjectsSinksDelete' (Maybe Key)
 psdKey = lens _psdKey (\ s a -> s{_psdKey = a})
 
 -- | OAuth 2.0 token for the current user.
-psdOauthToken :: Lens' ProjectsSinksDelete' (Maybe Text)
-psdOauthToken
-  = lens _psdOauthToken
-      (\ s a -> s{_psdOauthToken = a})
+psdOAuthToken :: Lens' ProjectsSinksDelete' (Maybe OAuthToken)
+psdOAuthToken
+  = lens _psdOAuthToken
+      (\ s a -> s{_psdOAuthToken = a})
 
 -- | Part of \`sinkName\`. The resource name of the project sink to delete.
 psdProjectsId :: Lens' ProjectsSinksDelete' Text
@@ -230,9 +225,9 @@ psdCallback :: Lens' ProjectsSinksDelete' (Maybe Text)
 psdCallback
   = lens _psdCallback (\ s a -> s{_psdCallback = a})
 
--- | Data format for response.
-psdAlt :: Lens' ProjectsSinksDelete' Text
-psdAlt = lens _psdAlt (\ s a -> s{_psdAlt = a})
+instance GoogleAuth ProjectsSinksDelete' where
+        authKey = psdKey . _Just
+        authToken = psdOAuthToken . _Just
 
 instance GoogleRequest ProjectsSinksDelete' where
         type Rs ProjectsSinksDelete' = Empty
@@ -245,12 +240,12 @@ instance GoogleRequest ProjectsSinksDelete' where
               _psdUploadType
               _psdBearerToken
               _psdKey
-              _psdOauthToken
+              _psdOAuthToken
               _psdProjectsId
               _psdSinksId
               _psdFields
               _psdCallback
-              (Just _psdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsSinksDeleteResource)

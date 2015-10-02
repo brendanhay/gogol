@@ -19,7 +19,7 @@
 --
 -- | Generates and returns a report immediately.
 --
--- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @DoubleclicksearchReportsGenerate@.
+-- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @DoubleClicksearchReportsGenerate@.
 module Network.Google.Resource.DoubleClickSearch.Reports.Generate
     (
     -- * REST Resource
@@ -31,18 +31,18 @@ module Network.Google.Resource.DoubleClickSearch.Reports.Generate
 
     -- * Request Lenses
     , rQuotaUser
+    , rReportRequest
     , rPrettyPrint
-    , rUserIp
+    , rUserIP
     , rKey
-    , rOauthToken
+    , rOAuthToken
     , rFields
-    , rAlt
     ) where
 
 import           Network.Google.DoubleClickSearch.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DoubleclicksearchReportsGenerate@ which the
+-- | A resource alias for @DoubleClicksearchReportsGenerate@ which the
 -- 'ReportsGenerate'' request conforms to.
 type ReportsGenerateResource =
      "reports" :>
@@ -50,22 +50,23 @@ type ReportsGenerateResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Post '[JSON] Report
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] ReportRequest :> Post '[JSON] Report
 
 -- | Generates and returns a report immediately.
 --
 -- /See:/ 'reportsGenerate'' smart constructor.
 data ReportsGenerate' = ReportsGenerate'
-    { _rQuotaUser   :: !(Maybe Text)
-    , _rPrettyPrint :: !Bool
-    , _rUserIp      :: !(Maybe Text)
-    , _rKey         :: !(Maybe Text)
-    , _rOauthToken  :: !(Maybe Text)
-    , _rFields      :: !(Maybe Text)
-    , _rAlt         :: !Alt
+    { _rQuotaUser     :: !(Maybe Text)
+    , _rReportRequest :: !ReportRequest
+    , _rPrettyPrint   :: !Bool
+    , _rUserIP        :: !(Maybe Text)
+    , _rKey           :: !(Maybe Key)
+    , _rOAuthToken    :: !(Maybe OAuthToken)
+    , _rFields        :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsGenerate'' with the minimum fields required to make a request.
@@ -74,28 +75,29 @@ data ReportsGenerate' = ReportsGenerate'
 --
 -- * 'rQuotaUser'
 --
+-- * 'rReportRequest'
+--
 -- * 'rPrettyPrint'
 --
--- * 'rUserIp'
+-- * 'rUserIP'
 --
 -- * 'rKey'
 --
--- * 'rOauthToken'
+-- * 'rOAuthToken'
 --
 -- * 'rFields'
---
--- * 'rAlt'
 reportsGenerate'
-    :: ReportsGenerate'
-reportsGenerate' =
+    :: ReportRequest -- ^ 'ReportRequest'
+    -> ReportsGenerate'
+reportsGenerate' pRReportRequest_ =
     ReportsGenerate'
     { _rQuotaUser = Nothing
+    , _rReportRequest = pRReportRequest_
     , _rPrettyPrint = True
-    , _rUserIp = Nothing
+    , _rUserIP = Nothing
     , _rKey = Nothing
-    , _rOauthToken = Nothing
+    , _rOAuthToken = Nothing
     , _rFields = Nothing
-    , _rAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -105,6 +107,12 @@ rQuotaUser :: Lens' ReportsGenerate' (Maybe Text)
 rQuotaUser
   = lens _rQuotaUser (\ s a -> s{_rQuotaUser = a})
 
+-- | Multipart request metadata.
+rReportRequest :: Lens' ReportsGenerate' ReportRequest
+rReportRequest
+  = lens _rReportRequest
+      (\ s a -> s{_rReportRequest = a})
+
 -- | Returns response with indentations and line breaks.
 rPrettyPrint :: Lens' ReportsGenerate' Bool
 rPrettyPrint
@@ -112,37 +120,38 @@ rPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rUserIp :: Lens' ReportsGenerate' (Maybe Text)
-rUserIp = lens _rUserIp (\ s a -> s{_rUserIp = a})
+rUserIP :: Lens' ReportsGenerate' (Maybe Text)
+rUserIP = lens _rUserIP (\ s a -> s{_rUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rKey :: Lens' ReportsGenerate' (Maybe Text)
+rKey :: Lens' ReportsGenerate' (Maybe Key)
 rKey = lens _rKey (\ s a -> s{_rKey = a})
 
 -- | OAuth 2.0 token for the current user.
-rOauthToken :: Lens' ReportsGenerate' (Maybe Text)
-rOauthToken
-  = lens _rOauthToken (\ s a -> s{_rOauthToken = a})
+rOAuthToken :: Lens' ReportsGenerate' (Maybe OAuthToken)
+rOAuthToken
+  = lens _rOAuthToken (\ s a -> s{_rOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 rFields :: Lens' ReportsGenerate' (Maybe Text)
 rFields = lens _rFields (\ s a -> s{_rFields = a})
 
--- | Data format for the response.
-rAlt :: Lens' ReportsGenerate' Alt
-rAlt = lens _rAlt (\ s a -> s{_rAlt = a})
+instance GoogleAuth ReportsGenerate' where
+        authKey = rKey . _Just
+        authToken = rOAuthToken . _Just
 
 instance GoogleRequest ReportsGenerate' where
         type Rs ReportsGenerate' = Report
         request
           = requestWithRoute defReq doubleClickSearchURL
         requestWithRoute r u ReportsGenerate'{..}
-          = go _rQuotaUser (Just _rPrettyPrint) _rUserIp _rKey
-              _rOauthToken
+          = go _rQuotaUser (Just _rPrettyPrint) _rUserIP _rKey
+              _rOAuthToken
               _rFields
-              (Just _rAlt)
+              (Just AltJSON)
+              _rReportRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ReportsGenerateResource)

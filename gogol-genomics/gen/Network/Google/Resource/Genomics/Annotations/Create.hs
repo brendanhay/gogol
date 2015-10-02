@@ -32,12 +32,12 @@ module Network.Google.Resource.Genomics.Annotations.Create
 
     -- * Request Lenses
     , acQuotaUser
+    , acAnnotation
     , acPrettyPrint
-    , acUserIp
+    , acUserIP
     , acKey
-    , acOauthToken
+    , acOAuthToken
     , acFields
-    , acAlt
     ) where
 
 import           Network.Google.Genomics.Types
@@ -50,10 +50,11 @@ type AnnotationsCreateResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
-               QueryParam "oauth_token" Text :>
+             QueryParam "key" Key :>
+               QueryParam "oauth_token" OAuthToken :>
                  QueryParam "fields" Text :>
-                   QueryParam "alt" Alt :> Post '[JSON] Annotation
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Annotation :> Post '[JSON] Annotation
 
 -- | Creates a new annotation. Caller must have WRITE permission for the
 -- associated annotation set.
@@ -61,12 +62,12 @@ type AnnotationsCreateResource =
 -- /See:/ 'annotationsCreate'' smart constructor.
 data AnnotationsCreate' = AnnotationsCreate'
     { _acQuotaUser   :: !(Maybe Text)
+    , _acAnnotation  :: !Annotation
     , _acPrettyPrint :: !Bool
-    , _acUserIp      :: !(Maybe Text)
-    , _acKey         :: !(Maybe Text)
-    , _acOauthToken  :: !(Maybe Text)
+    , _acUserIP      :: !(Maybe Text)
+    , _acKey         :: !(Maybe Key)
+    , _acOAuthToken  :: !(Maybe OAuthToken)
     , _acFields      :: !(Maybe Text)
-    , _acAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnnotationsCreate'' with the minimum fields required to make a request.
@@ -75,28 +76,29 @@ data AnnotationsCreate' = AnnotationsCreate'
 --
 -- * 'acQuotaUser'
 --
+-- * 'acAnnotation'
+--
 -- * 'acPrettyPrint'
 --
--- * 'acUserIp'
+-- * 'acUserIP'
 --
 -- * 'acKey'
 --
--- * 'acOauthToken'
+-- * 'acOAuthToken'
 --
 -- * 'acFields'
---
--- * 'acAlt'
 annotationsCreate'
-    :: AnnotationsCreate'
-annotationsCreate' =
+    :: Annotation -- ^ 'Annotation'
+    -> AnnotationsCreate'
+annotationsCreate' pAcAnnotation_ =
     AnnotationsCreate'
     { _acQuotaUser = Nothing
+    , _acAnnotation = pAcAnnotation_
     , _acPrettyPrint = True
-    , _acUserIp = Nothing
+    , _acUserIP = Nothing
     , _acKey = Nothing
-    , _acOauthToken = Nothing
+    , _acOAuthToken = Nothing
     , _acFields = Nothing
-    , _acAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -106,6 +108,11 @@ acQuotaUser :: Lens' AnnotationsCreate' (Maybe Text)
 acQuotaUser
   = lens _acQuotaUser (\ s a -> s{_acQuotaUser = a})
 
+-- | Multipart request metadata.
+acAnnotation :: Lens' AnnotationsCreate' Annotation
+acAnnotation
+  = lens _acAnnotation (\ s a -> s{_acAnnotation = a})
+
 -- | Returns response with indentations and line breaks.
 acPrettyPrint :: Lens' AnnotationsCreate' Bool
 acPrettyPrint
@@ -114,37 +121,38 @@ acPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-acUserIp :: Lens' AnnotationsCreate' (Maybe Text)
-acUserIp = lens _acUserIp (\ s a -> s{_acUserIp = a})
+acUserIP :: Lens' AnnotationsCreate' (Maybe Text)
+acUserIP = lens _acUserIP (\ s a -> s{_acUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-acKey :: Lens' AnnotationsCreate' (Maybe Text)
+acKey :: Lens' AnnotationsCreate' (Maybe Key)
 acKey = lens _acKey (\ s a -> s{_acKey = a})
 
 -- | OAuth 2.0 token for the current user.
-acOauthToken :: Lens' AnnotationsCreate' (Maybe Text)
-acOauthToken
-  = lens _acOauthToken (\ s a -> s{_acOauthToken = a})
+acOAuthToken :: Lens' AnnotationsCreate' (Maybe OAuthToken)
+acOAuthToken
+  = lens _acOAuthToken (\ s a -> s{_acOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 acFields :: Lens' AnnotationsCreate' (Maybe Text)
 acFields = lens _acFields (\ s a -> s{_acFields = a})
 
--- | Data format for the response.
-acAlt :: Lens' AnnotationsCreate' Alt
-acAlt = lens _acAlt (\ s a -> s{_acAlt = a})
+instance GoogleAuth AnnotationsCreate' where
+        authKey = acKey . _Just
+        authToken = acOAuthToken . _Just
 
 instance GoogleRequest AnnotationsCreate' where
         type Rs AnnotationsCreate' = Annotation
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u AnnotationsCreate'{..}
-          = go _acQuotaUser (Just _acPrettyPrint) _acUserIp
+          = go _acQuotaUser (Just _acPrettyPrint) _acUserIP
               _acKey
-              _acOauthToken
+              _acOAuthToken
               _acFields
-              (Just _acAlt)
+              (Just AltJSON)
+              _acAnnotation
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AnnotationsCreateResource)

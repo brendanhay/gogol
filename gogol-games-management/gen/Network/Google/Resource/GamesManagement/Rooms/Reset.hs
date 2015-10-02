@@ -34,11 +34,10 @@ module Network.Google.Resource.GamesManagement.Rooms.Reset
     -- * Request Lenses
     , rrQuotaUser
     , rrPrettyPrint
-    , rrUserIp
+    , rrUserIP
     , rrKey
-    , rrOauthToken
+    , rrOAuthToken
     , rrFields
-    , rrAlt
     ) where
 
 import           Network.Google.GamesManagement.Types
@@ -52,10 +51,10 @@ type RoomsResetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Post '[JSON] ()
+                     QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Reset all rooms for the currently authenticated player for your
 -- application. This method is only accessible to whitelisted tester
@@ -65,11 +64,10 @@ type RoomsResetResource =
 data RoomsReset' = RoomsReset'
     { _rrQuotaUser   :: !(Maybe Text)
     , _rrPrettyPrint :: !Bool
-    , _rrUserIp      :: !(Maybe Text)
-    , _rrKey         :: !(Maybe Text)
-    , _rrOauthToken  :: !(Maybe Text)
+    , _rrUserIP      :: !(Maybe Text)
+    , _rrKey         :: !(Maybe Key)
+    , _rrOAuthToken  :: !(Maybe OAuthToken)
     , _rrFields      :: !(Maybe Text)
-    , _rrAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomsReset'' with the minimum fields required to make a request.
@@ -80,26 +78,23 @@ data RoomsReset' = RoomsReset'
 --
 -- * 'rrPrettyPrint'
 --
--- * 'rrUserIp'
+-- * 'rrUserIP'
 --
 -- * 'rrKey'
 --
--- * 'rrOauthToken'
+-- * 'rrOAuthToken'
 --
 -- * 'rrFields'
---
--- * 'rrAlt'
 roomsReset'
     :: RoomsReset'
 roomsReset' =
     RoomsReset'
     { _rrQuotaUser = Nothing
     , _rrPrettyPrint = True
-    , _rrUserIp = Nothing
+    , _rrUserIP = Nothing
     , _rrKey = Nothing
-    , _rrOauthToken = Nothing
+    , _rrOAuthToken = Nothing
     , _rrFields = Nothing
-    , _rrAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -117,37 +112,37 @@ rrPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rrUserIp :: Lens' RoomsReset' (Maybe Text)
-rrUserIp = lens _rrUserIp (\ s a -> s{_rrUserIp = a})
+rrUserIP :: Lens' RoomsReset' (Maybe Text)
+rrUserIP = lens _rrUserIP (\ s a -> s{_rrUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rrKey :: Lens' RoomsReset' (Maybe Text)
+rrKey :: Lens' RoomsReset' (Maybe Key)
 rrKey = lens _rrKey (\ s a -> s{_rrKey = a})
 
 -- | OAuth 2.0 token for the current user.
-rrOauthToken :: Lens' RoomsReset' (Maybe Text)
-rrOauthToken
-  = lens _rrOauthToken (\ s a -> s{_rrOauthToken = a})
+rrOAuthToken :: Lens' RoomsReset' (Maybe OAuthToken)
+rrOAuthToken
+  = lens _rrOAuthToken (\ s a -> s{_rrOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 rrFields :: Lens' RoomsReset' (Maybe Text)
 rrFields = lens _rrFields (\ s a -> s{_rrFields = a})
 
--- | Data format for the response.
-rrAlt :: Lens' RoomsReset' Alt
-rrAlt = lens _rrAlt (\ s a -> s{_rrAlt = a})
+instance GoogleAuth RoomsReset' where
+        authKey = rrKey . _Just
+        authToken = rrOAuthToken . _Just
 
 instance GoogleRequest RoomsReset' where
         type Rs RoomsReset' = ()
         request = requestWithRoute defReq gamesManagementURL
         requestWithRoute r u RoomsReset'{..}
-          = go _rrQuotaUser (Just _rrPrettyPrint) _rrUserIp
+          = go _rrQuotaUser (Just _rrPrettyPrint) _rrUserIP
               _rrKey
-              _rrOauthToken
+              _rrOAuthToken
               _rrFields
-              (Just _rrAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy RoomsResetResource)
                       r

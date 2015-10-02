@@ -33,13 +33,13 @@ module Network.Google.Resource.Analytics.Management.Uploads.UploadData
     , muudQuotaUser
     , muudPrettyPrint
     , muudWebPropertyId
-    , muudUserIp
+    , muudUserIP
     , muudCustomDataSourceId
+    , muudMedia
     , muudAccountId
     , muudKey
-    , muudOauthToken
+    , muudOAuthToken
     , muudFields
-    , muudAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -59,10 +59,10 @@ type ManagementUploadsUploadDataResource =
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "fields" Text :>
-                                 QueryParam "alt" Alt :> Post '[JSON] Upload
+                                 QueryParam "alt" AltJSON :> Post '[JSON] Upload
 
 -- | Upload data for a custom data source.
 --
@@ -71,13 +71,13 @@ data ManagementUploadsUploadData' = ManagementUploadsUploadData'
     { _muudQuotaUser          :: !(Maybe Text)
     , _muudPrettyPrint        :: !Bool
     , _muudWebPropertyId      :: !Text
-    , _muudUserIp             :: !(Maybe Text)
+    , _muudUserIP             :: !(Maybe Text)
     , _muudCustomDataSourceId :: !Text
+    , _muudMedia              :: !Body
     , _muudAccountId          :: !Text
-    , _muudKey                :: !(Maybe Text)
-    , _muudOauthToken         :: !(Maybe Text)
+    , _muudKey                :: !(Maybe Key)
+    , _muudOAuthToken         :: !(Maybe OAuthToken)
     , _muudFields             :: !(Maybe Text)
-    , _muudAlt                :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementUploadsUploadData'' with the minimum fields required to make a request.
@@ -90,36 +90,37 @@ data ManagementUploadsUploadData' = ManagementUploadsUploadData'
 --
 -- * 'muudWebPropertyId'
 --
--- * 'muudUserIp'
+-- * 'muudUserIP'
 --
 -- * 'muudCustomDataSourceId'
+--
+-- * 'muudMedia'
 --
 -- * 'muudAccountId'
 --
 -- * 'muudKey'
 --
--- * 'muudOauthToken'
+-- * 'muudOAuthToken'
 --
 -- * 'muudFields'
---
--- * 'muudAlt'
 managementUploadsUploadData'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'customDataSourceId'
+    -> Body -- ^ 'media'
     -> Text -- ^ 'accountId'
     -> ManagementUploadsUploadData'
-managementUploadsUploadData' pMuudWebPropertyId_ pMuudCustomDataSourceId_ pMuudAccountId_ =
+managementUploadsUploadData' pMuudWebPropertyId_ pMuudCustomDataSourceId_ pMuudMedia_ pMuudAccountId_ =
     ManagementUploadsUploadData'
     { _muudQuotaUser = Nothing
     , _muudPrettyPrint = False
     , _muudWebPropertyId = pMuudWebPropertyId_
-    , _muudUserIp = Nothing
+    , _muudUserIP = Nothing
     , _muudCustomDataSourceId = pMuudCustomDataSourceId_
+    , _muudMedia = pMuudMedia_
     , _muudAccountId = pMuudAccountId_
     , _muudKey = Nothing
-    , _muudOauthToken = Nothing
+    , _muudOAuthToken = Nothing
     , _muudFields = Nothing
-    , _muudAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -144,15 +145,19 @@ muudWebPropertyId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-muudUserIp :: Lens' ManagementUploadsUploadData' (Maybe Text)
-muudUserIp
-  = lens _muudUserIp (\ s a -> s{_muudUserIp = a})
+muudUserIP :: Lens' ManagementUploadsUploadData' (Maybe Text)
+muudUserIP
+  = lens _muudUserIP (\ s a -> s{_muudUserIP = a})
 
 -- | Custom data source Id to which the data being uploaded belongs.
 muudCustomDataSourceId :: Lens' ManagementUploadsUploadData' Text
 muudCustomDataSourceId
   = lens _muudCustomDataSourceId
       (\ s a -> s{_muudCustomDataSourceId = a})
+
+muudMedia :: Lens' ManagementUploadsUploadData' Body
+muudMedia
+  = lens _muudMedia (\ s a -> s{_muudMedia = a})
 
 -- | Account Id associated with the upload.
 muudAccountId :: Lens' ManagementUploadsUploadData' Text
@@ -163,23 +168,24 @@ muudAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-muudKey :: Lens' ManagementUploadsUploadData' (Maybe Text)
+muudKey :: Lens' ManagementUploadsUploadData' (Maybe Key)
 muudKey = lens _muudKey (\ s a -> s{_muudKey = a})
 
 -- | OAuth 2.0 token for the current user.
-muudOauthToken :: Lens' ManagementUploadsUploadData' (Maybe Text)
-muudOauthToken
-  = lens _muudOauthToken
-      (\ s a -> s{_muudOauthToken = a})
+muudOAuthToken :: Lens' ManagementUploadsUploadData' (Maybe OAuthToken)
+muudOAuthToken
+  = lens _muudOAuthToken
+      (\ s a -> s{_muudOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 muudFields :: Lens' ManagementUploadsUploadData' (Maybe Text)
 muudFields
   = lens _muudFields (\ s a -> s{_muudFields = a})
 
--- | Data format for the response.
-muudAlt :: Lens' ManagementUploadsUploadData' Alt
-muudAlt = lens _muudAlt (\ s a -> s{_muudAlt = a})
+instance GoogleAuth ManagementUploadsUploadData'
+         where
+        authKey = muudKey . _Just
+        authToken = muudOAuthToken . _Just
 
 instance GoogleRequest ManagementUploadsUploadData'
          where
@@ -188,13 +194,14 @@ instance GoogleRequest ManagementUploadsUploadData'
         requestWithRoute r u ManagementUploadsUploadData'{..}
           = go _muudQuotaUser (Just _muudPrettyPrint)
               _muudWebPropertyId
-              _muudUserIp
+              _muudUserIP
               _muudCustomDataSourceId
+              _muudMedia
               _muudAccountId
               _muudKey
-              _muudOauthToken
+              _muudOAuthToken
               _muudFields
-              (Just _muudAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ManagementUploadsUploadDataResource)

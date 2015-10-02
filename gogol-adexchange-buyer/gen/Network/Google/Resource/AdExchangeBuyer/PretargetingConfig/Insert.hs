@@ -32,12 +32,12 @@ module Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Insert
     -- * Request Lenses
     , pciQuotaUser
     , pciPrettyPrint
-    , pciUserIp
+    , pciUserIP
+    , pciPretargetingConfig
     , pciAccountId
     , pciKey
-    , pciOauthToken
+    , pciOAuthToken
     , pciFields
-    , pciAlt
     ) where
 
 import           Network.Google.AdExchangeBuyer.Types
@@ -51,24 +51,25 @@ type PretargetingConfigInsertResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :>
-                       Post '[JSON] PretargetingConfig
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] PretargetingConfig :>
+                         Post '[JSON] PretargetingConfig
 
 -- | Inserts a new pretargeting configuration.
 --
 -- /See:/ 'pretargetingConfigInsert'' smart constructor.
 data PretargetingConfigInsert' = PretargetingConfigInsert'
-    { _pciQuotaUser   :: !(Maybe Text)
-    , _pciPrettyPrint :: !Bool
-    , _pciUserIp      :: !(Maybe Text)
-    , _pciAccountId   :: !Int64
-    , _pciKey         :: !(Maybe Text)
-    , _pciOauthToken  :: !(Maybe Text)
-    , _pciFields      :: !(Maybe Text)
-    , _pciAlt         :: !Alt
+    { _pciQuotaUser          :: !(Maybe Text)
+    , _pciPrettyPrint        :: !Bool
+    , _pciUserIP             :: !(Maybe Text)
+    , _pciPretargetingConfig :: !PretargetingConfig
+    , _pciAccountId          :: !Int64
+    , _pciKey                :: !(Maybe Key)
+    , _pciOAuthToken         :: !(Maybe OAuthToken)
+    , _pciFields             :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PretargetingConfigInsert'' with the minimum fields required to make a request.
@@ -79,30 +80,31 @@ data PretargetingConfigInsert' = PretargetingConfigInsert'
 --
 -- * 'pciPrettyPrint'
 --
--- * 'pciUserIp'
+-- * 'pciUserIP'
+--
+-- * 'pciPretargetingConfig'
 --
 -- * 'pciAccountId'
 --
 -- * 'pciKey'
 --
--- * 'pciOauthToken'
+-- * 'pciOAuthToken'
 --
 -- * 'pciFields'
---
--- * 'pciAlt'
 pretargetingConfigInsert'
-    :: Int64 -- ^ 'accountId'
+    :: PretargetingConfig -- ^ 'PretargetingConfig'
+    -> Int64 -- ^ 'accountId'
     -> PretargetingConfigInsert'
-pretargetingConfigInsert' pPciAccountId_ =
+pretargetingConfigInsert' pPciPretargetingConfig_ pPciAccountId_ =
     PretargetingConfigInsert'
     { _pciQuotaUser = Nothing
     , _pciPrettyPrint = True
-    , _pciUserIp = Nothing
+    , _pciUserIP = Nothing
+    , _pciPretargetingConfig = pPciPretargetingConfig_
     , _pciAccountId = pPciAccountId_
     , _pciKey = Nothing
-    , _pciOauthToken = Nothing
+    , _pciOAuthToken = Nothing
     , _pciFields = Nothing
-    , _pciAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,9 +122,15 @@ pciPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-pciUserIp :: Lens' PretargetingConfigInsert' (Maybe Text)
-pciUserIp
-  = lens _pciUserIp (\ s a -> s{_pciUserIp = a})
+pciUserIP :: Lens' PretargetingConfigInsert' (Maybe Text)
+pciUserIP
+  = lens _pciUserIP (\ s a -> s{_pciUserIP = a})
+
+-- | Multipart request metadata.
+pciPretargetingConfig :: Lens' PretargetingConfigInsert' PretargetingConfig
+pciPretargetingConfig
+  = lens _pciPretargetingConfig
+      (\ s a -> s{_pciPretargetingConfig = a})
 
 -- | The account id to insert the pretargeting config for.
 pciAccountId :: Lens' PretargetingConfigInsert' Int64
@@ -132,23 +140,23 @@ pciAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pciKey :: Lens' PretargetingConfigInsert' (Maybe Text)
+pciKey :: Lens' PretargetingConfigInsert' (Maybe Key)
 pciKey = lens _pciKey (\ s a -> s{_pciKey = a})
 
 -- | OAuth 2.0 token for the current user.
-pciOauthToken :: Lens' PretargetingConfigInsert' (Maybe Text)
-pciOauthToken
-  = lens _pciOauthToken
-      (\ s a -> s{_pciOauthToken = a})
+pciOAuthToken :: Lens' PretargetingConfigInsert' (Maybe OAuthToken)
+pciOAuthToken
+  = lens _pciOAuthToken
+      (\ s a -> s{_pciOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 pciFields :: Lens' PretargetingConfigInsert' (Maybe Text)
 pciFields
   = lens _pciFields (\ s a -> s{_pciFields = a})
 
--- | Data format for the response.
-pciAlt :: Lens' PretargetingConfigInsert' Alt
-pciAlt = lens _pciAlt (\ s a -> s{_pciAlt = a})
+instance GoogleAuth PretargetingConfigInsert' where
+        authKey = pciKey . _Just
+        authToken = pciOAuthToken . _Just
 
 instance GoogleRequest PretargetingConfigInsert'
          where
@@ -156,12 +164,13 @@ instance GoogleRequest PretargetingConfigInsert'
              PretargetingConfig
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u PretargetingConfigInsert'{..}
-          = go _pciQuotaUser (Just _pciPrettyPrint) _pciUserIp
+          = go _pciQuotaUser (Just _pciPrettyPrint) _pciUserIP
               _pciAccountId
               _pciKey
-              _pciOauthToken
+              _pciOAuthToken
               _pciFields
-              (Just _pciAlt)
+              (Just AltJSON)
+              _pciPretargetingConfig
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PretargetingConfigInsertResource)

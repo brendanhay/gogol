@@ -34,11 +34,11 @@ module Network.Google.Resource.Compute.TargetHTTPProxies.Insert
     , thttppiQuotaUser
     , thttppiPrettyPrint
     , thttppiProject
-    , thttppiUserIp
+    , thttppiUserIP
     , thttppiKey
-    , thttppiOauthToken
+    , thttppiTargetHTTPProxy
+    , thttppiOAuthToken
     , thttppiFields
-    , thttppiAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -53,24 +53,26 @@ type TargetHTTPProxiesInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] Operation
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] TargetHTTPProxy :>
+                           Post '[JSON] Operation
 
 -- | Creates a TargetHttpProxy resource in the specified project using the
 -- data included in the request.
 --
 -- /See:/ 'targetHTTPProxiesInsert'' smart constructor.
 data TargetHTTPProxiesInsert' = TargetHTTPProxiesInsert'
-    { _thttppiQuotaUser   :: !(Maybe Text)
-    , _thttppiPrettyPrint :: !Bool
-    , _thttppiProject     :: !Text
-    , _thttppiUserIp      :: !(Maybe Text)
-    , _thttppiKey         :: !(Maybe Text)
-    , _thttppiOauthToken  :: !(Maybe Text)
-    , _thttppiFields      :: !(Maybe Text)
-    , _thttppiAlt         :: !Alt
+    { _thttppiQuotaUser       :: !(Maybe Text)
+    , _thttppiPrettyPrint     :: !Bool
+    , _thttppiProject         :: !Text
+    , _thttppiUserIP          :: !(Maybe Text)
+    , _thttppiKey             :: !(Maybe Key)
+    , _thttppiTargetHTTPProxy :: !TargetHTTPProxy
+    , _thttppiOAuthToken      :: !(Maybe OAuthToken)
+    , _thttppiFields          :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetHTTPProxiesInsert'' with the minimum fields required to make a request.
@@ -83,28 +85,29 @@ data TargetHTTPProxiesInsert' = TargetHTTPProxiesInsert'
 --
 -- * 'thttppiProject'
 --
--- * 'thttppiUserIp'
+-- * 'thttppiUserIP'
 --
 -- * 'thttppiKey'
 --
--- * 'thttppiOauthToken'
+-- * 'thttppiTargetHTTPProxy'
+--
+-- * 'thttppiOAuthToken'
 --
 -- * 'thttppiFields'
---
--- * 'thttppiAlt'
 targetHTTPProxiesInsert'
     :: Text -- ^ 'project'
+    -> TargetHTTPProxy -- ^ 'TargetHTTPProxy'
     -> TargetHTTPProxiesInsert'
-targetHTTPProxiesInsert' pThttppiProject_ =
+targetHTTPProxiesInsert' pThttppiProject_ pThttppiTargetHTTPProxy_ =
     TargetHTTPProxiesInsert'
     { _thttppiQuotaUser = Nothing
     , _thttppiPrettyPrint = True
     , _thttppiProject = pThttppiProject_
-    , _thttppiUserIp = Nothing
+    , _thttppiUserIP = Nothing
     , _thttppiKey = Nothing
-    , _thttppiOauthToken = Nothing
+    , _thttppiTargetHTTPProxy = pThttppiTargetHTTPProxy_
+    , _thttppiOAuthToken = Nothing
     , _thttppiFields = Nothing
-    , _thttppiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -129,23 +132,29 @@ thttppiProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-thttppiUserIp :: Lens' TargetHTTPProxiesInsert' (Maybe Text)
-thttppiUserIp
-  = lens _thttppiUserIp
-      (\ s a -> s{_thttppiUserIp = a})
+thttppiUserIP :: Lens' TargetHTTPProxiesInsert' (Maybe Text)
+thttppiUserIP
+  = lens _thttppiUserIP
+      (\ s a -> s{_thttppiUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-thttppiKey :: Lens' TargetHTTPProxiesInsert' (Maybe Text)
+thttppiKey :: Lens' TargetHTTPProxiesInsert' (Maybe Key)
 thttppiKey
   = lens _thttppiKey (\ s a -> s{_thttppiKey = a})
 
+-- | Multipart request metadata.
+thttppiTargetHTTPProxy :: Lens' TargetHTTPProxiesInsert' TargetHTTPProxy
+thttppiTargetHTTPProxy
+  = lens _thttppiTargetHTTPProxy
+      (\ s a -> s{_thttppiTargetHTTPProxy = a})
+
 -- | OAuth 2.0 token for the current user.
-thttppiOauthToken :: Lens' TargetHTTPProxiesInsert' (Maybe Text)
-thttppiOauthToken
-  = lens _thttppiOauthToken
-      (\ s a -> s{_thttppiOauthToken = a})
+thttppiOAuthToken :: Lens' TargetHTTPProxiesInsert' (Maybe OAuthToken)
+thttppiOAuthToken
+  = lens _thttppiOAuthToken
+      (\ s a -> s{_thttppiOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 thttppiFields :: Lens' TargetHTTPProxiesInsert' (Maybe Text)
@@ -153,10 +162,9 @@ thttppiFields
   = lens _thttppiFields
       (\ s a -> s{_thttppiFields = a})
 
--- | Data format for the response.
-thttppiAlt :: Lens' TargetHTTPProxiesInsert' Alt
-thttppiAlt
-  = lens _thttppiAlt (\ s a -> s{_thttppiAlt = a})
+instance GoogleAuth TargetHTTPProxiesInsert' where
+        authKey = thttppiKey . _Just
+        authToken = thttppiOAuthToken . _Just
 
 instance GoogleRequest TargetHTTPProxiesInsert' where
         type Rs TargetHTTPProxiesInsert' = Operation
@@ -164,11 +172,12 @@ instance GoogleRequest TargetHTTPProxiesInsert' where
         requestWithRoute r u TargetHTTPProxiesInsert'{..}
           = go _thttppiQuotaUser (Just _thttppiPrettyPrint)
               _thttppiProject
-              _thttppiUserIp
+              _thttppiUserIP
               _thttppiKey
-              _thttppiOauthToken
+              _thttppiOAuthToken
               _thttppiFields
-              (Just _thttppiAlt)
+              (Just AltJSON)
+              _thttppiTargetHTTPProxy
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TargetHTTPProxiesInsertResource)

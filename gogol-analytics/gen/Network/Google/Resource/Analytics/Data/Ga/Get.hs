@@ -34,7 +34,7 @@ module Network.Google.Resource.Analytics.Data.Ga.Get
     , dggMetrics
     , dggPrettyPrint
     , dggSamplingLevel
-    , dggUserIp
+    , dggUserIP
     , dggFilters
     , dggIds
     , dggEndDate
@@ -42,13 +42,12 @@ module Network.Google.Resource.Analytics.Data.Ga.Get
     , dggOutput
     , dggSort
     , dggDimensions
-    , dggOauthToken
+    , dggOAuthToken
     , dggStartIndex
     , dggMaxResults
     , dggSegment
     , dggStartDate
     , dggFields
-    , dggAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -69,17 +68,17 @@ type DataGaGetResource =
                    QueryParam "filters" Text :>
                      QueryParam "ids" Text :>
                        QueryParam "end-date" Text :>
-                         QueryParam "key" Text :>
+                         QueryParam "key" Key :>
                            QueryParam "output" AnalyticsDataGaGetOutput :>
                              QueryParam "sort" Text :>
                                QueryParam "dimensions" Text :>
-                                 QueryParam "oauth_token" Text :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "start-index" Int32 :>
                                      QueryParam "max-results" Int32 :>
                                        QueryParam "segment" Text :>
                                          QueryParam "start-date" Text :>
                                            QueryParam "fields" Text :>
-                                             QueryParam "alt" Alt :>
+                                             QueryParam "alt" AltJSON :>
                                                Get '[JSON] GaData
 
 -- | Returns Analytics data for a view (profile).
@@ -90,21 +89,20 @@ data DataGaGet' = DataGaGet'
     , _dggMetrics       :: !Text
     , _dggPrettyPrint   :: !Bool
     , _dggSamplingLevel :: !(Maybe AnalyticsDataGaGetSamplingLevel)
-    , _dggUserIp        :: !(Maybe Text)
+    , _dggUserIP        :: !(Maybe Text)
     , _dggFilters       :: !(Maybe Text)
     , _dggIds           :: !Text
     , _dggEndDate       :: !Text
-    , _dggKey           :: !(Maybe Text)
+    , _dggKey           :: !(Maybe Key)
     , _dggOutput        :: !(Maybe AnalyticsDataGaGetOutput)
     , _dggSort          :: !(Maybe Text)
     , _dggDimensions    :: !(Maybe Text)
-    , _dggOauthToken    :: !(Maybe Text)
+    , _dggOAuthToken    :: !(Maybe OAuthToken)
     , _dggStartIndex    :: !(Maybe Int32)
     , _dggMaxResults    :: !(Maybe Int32)
     , _dggSegment       :: !(Maybe Text)
     , _dggStartDate     :: !Text
     , _dggFields        :: !(Maybe Text)
-    , _dggAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DataGaGet'' with the minimum fields required to make a request.
@@ -119,7 +117,7 @@ data DataGaGet' = DataGaGet'
 --
 -- * 'dggSamplingLevel'
 --
--- * 'dggUserIp'
+-- * 'dggUserIP'
 --
 -- * 'dggFilters'
 --
@@ -135,7 +133,7 @@ data DataGaGet' = DataGaGet'
 --
 -- * 'dggDimensions'
 --
--- * 'dggOauthToken'
+-- * 'dggOAuthToken'
 --
 -- * 'dggStartIndex'
 --
@@ -146,8 +144,6 @@ data DataGaGet' = DataGaGet'
 -- * 'dggStartDate'
 --
 -- * 'dggFields'
---
--- * 'dggAlt'
 dataGaGet'
     :: Text -- ^ 'metrics'
     -> Text -- ^ 'ids'
@@ -160,7 +156,7 @@ dataGaGet' pDggMetrics_ pDggIds_ pDggEndDate_ pDggStartDate_ =
     , _dggMetrics = pDggMetrics_
     , _dggPrettyPrint = False
     , _dggSamplingLevel = Nothing
-    , _dggUserIp = Nothing
+    , _dggUserIP = Nothing
     , _dggFilters = Nothing
     , _dggIds = pDggIds_
     , _dggEndDate = pDggEndDate_
@@ -168,13 +164,12 @@ dataGaGet' pDggMetrics_ pDggIds_ pDggEndDate_ pDggStartDate_ =
     , _dggOutput = Nothing
     , _dggSort = Nothing
     , _dggDimensions = Nothing
-    , _dggOauthToken = Nothing
+    , _dggOAuthToken = Nothing
     , _dggStartIndex = Nothing
     , _dggMaxResults = Nothing
     , _dggSegment = Nothing
     , _dggStartDate = pDggStartDate_
     , _dggFields = Nothing
-    , _dggAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -204,9 +199,9 @@ dggSamplingLevel
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-dggUserIp :: Lens' DataGaGet' (Maybe Text)
-dggUserIp
-  = lens _dggUserIp (\ s a -> s{_dggUserIp = a})
+dggUserIP :: Lens' DataGaGet' (Maybe Text)
+dggUserIP
+  = lens _dggUserIP (\ s a -> s{_dggUserIP = a})
 
 -- | A comma-separated list of dimension or metric filters to be applied to
 -- Analytics data.
@@ -229,7 +224,7 @@ dggEndDate
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dggKey :: Lens' DataGaGet' (Maybe Text)
+dggKey :: Lens' DataGaGet' (Maybe Key)
 dggKey = lens _dggKey (\ s a -> s{_dggKey = a})
 
 -- | The selected format for the response. Default format is JSON.
@@ -250,10 +245,10 @@ dggDimensions
       (\ s a -> s{_dggDimensions = a})
 
 -- | OAuth 2.0 token for the current user.
-dggOauthToken :: Lens' DataGaGet' (Maybe Text)
-dggOauthToken
-  = lens _dggOauthToken
-      (\ s a -> s{_dggOauthToken = a})
+dggOAuthToken :: Lens' DataGaGet' (Maybe OAuthToken)
+dggOAuthToken
+  = lens _dggOAuthToken
+      (\ s a -> s{_dggOAuthToken = a})
 
 -- | An index of the first entity to retrieve. Use this parameter as a
 -- pagination mechanism along with the max-results parameter.
@@ -285,9 +280,9 @@ dggFields :: Lens' DataGaGet' (Maybe Text)
 dggFields
   = lens _dggFields (\ s a -> s{_dggFields = a})
 
--- | Data format for the response.
-dggAlt :: Lens' DataGaGet' Alt
-dggAlt = lens _dggAlt (\ s a -> s{_dggAlt = a})
+instance GoogleAuth DataGaGet' where
+        authKey = dggKey . _Just
+        authToken = dggOAuthToken . _Just
 
 instance GoogleRequest DataGaGet' where
         type Rs DataGaGet' = GaData
@@ -296,7 +291,7 @@ instance GoogleRequest DataGaGet' where
           = go _dggQuotaUser (Just _dggMetrics)
               (Just _dggPrettyPrint)
               _dggSamplingLevel
-              _dggUserIp
+              _dggUserIP
               _dggFilters
               (Just _dggIds)
               (Just _dggEndDate)
@@ -304,13 +299,13 @@ instance GoogleRequest DataGaGet' where
               _dggOutput
               _dggSort
               _dggDimensions
-              _dggOauthToken
+              _dggOAuthToken
               _dggStartIndex
               _dggMaxResults
               _dggSegment
               (Just _dggStartDate)
               _dggFields
-              (Just _dggAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy DataGaGetResource)
                       r

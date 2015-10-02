@@ -44,10 +44,9 @@ module Network.Google.Resource.Classroom.Courses.Delete
     , cdBearerToken
     , cdKey
     , cdId
-    , cdOauthToken
+    , cdOAuthToken
     , cdFields
     , cdCallback
-    , cdAlt
     ) where
 
 import           Network.Google.Classroom.Types
@@ -67,11 +66,12 @@ type CoursesDeleteResource =
                      QueryParam "access_token" Text :>
                        QueryParam "uploadType" Text :>
                          QueryParam "bearer_token" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "fields" Text :>
                                  QueryParam "callback" Text :>
-                                   QueryParam "alt" Text :> Delete '[JSON] Empty
+                                   QueryParam "alt" AltJSON :>
+                                     Delete '[JSON] Empty
 
 -- | Deletes a course. This method returns the following error codes: *
 -- \`PERMISSION_DENIED\` if the requesting user is not permitted to delete
@@ -89,12 +89,11 @@ data CoursesDelete' = CoursesDelete'
     , _cdAccessToken    :: !(Maybe Text)
     , _cdUploadType     :: !(Maybe Text)
     , _cdBearerToken    :: !(Maybe Text)
-    , _cdKey            :: !(Maybe Text)
+    , _cdKey            :: !(Maybe Key)
     , _cdId             :: !Text
-    , _cdOauthToken     :: !(Maybe Text)
+    , _cdOAuthToken     :: !(Maybe OAuthToken)
     , _cdFields         :: !(Maybe Text)
     , _cdCallback       :: !(Maybe Text)
-    , _cdAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CoursesDelete'' with the minimum fields required to make a request.
@@ -121,13 +120,11 @@ data CoursesDelete' = CoursesDelete'
 --
 -- * 'cdId'
 --
--- * 'cdOauthToken'
+-- * 'cdOAuthToken'
 --
 -- * 'cdFields'
 --
 -- * 'cdCallback'
---
--- * 'cdAlt'
 coursesDelete'
     :: Text -- ^ 'id'
     -> CoursesDelete'
@@ -143,10 +140,9 @@ coursesDelete' pCdId_ =
     , _cdBearerToken = Nothing
     , _cdKey = Nothing
     , _cdId = pCdId_
-    , _cdOauthToken = Nothing
+    , _cdOAuthToken = Nothing
     , _cdFields = Nothing
     , _cdCallback = Nothing
-    , _cdAlt = "json"
     }
 
 -- | V1 error format.
@@ -196,7 +192,7 @@ cdBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cdKey :: Lens' CoursesDelete' (Maybe Text)
+cdKey :: Lens' CoursesDelete' (Maybe Key)
 cdKey = lens _cdKey (\ s a -> s{_cdKey = a})
 
 -- | Identifier of the course to delete. This identifier can be either the
@@ -206,9 +202,9 @@ cdId :: Lens' CoursesDelete' Text
 cdId = lens _cdId (\ s a -> s{_cdId = a})
 
 -- | OAuth 2.0 token for the current user.
-cdOauthToken :: Lens' CoursesDelete' (Maybe Text)
-cdOauthToken
-  = lens _cdOauthToken (\ s a -> s{_cdOauthToken = a})
+cdOAuthToken :: Lens' CoursesDelete' (Maybe OAuthToken)
+cdOAuthToken
+  = lens _cdOAuthToken (\ s a -> s{_cdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cdFields :: Lens' CoursesDelete' (Maybe Text)
@@ -219,9 +215,9 @@ cdCallback :: Lens' CoursesDelete' (Maybe Text)
 cdCallback
   = lens _cdCallback (\ s a -> s{_cdCallback = a})
 
--- | Data format for response.
-cdAlt :: Lens' CoursesDelete' Text
-cdAlt = lens _cdAlt (\ s a -> s{_cdAlt = a})
+instance GoogleAuth CoursesDelete' where
+        authKey = cdKey . _Just
+        authToken = cdOAuthToken . _Just
 
 instance GoogleRequest CoursesDelete' where
         type Rs CoursesDelete' = Empty
@@ -235,10 +231,10 @@ instance GoogleRequest CoursesDelete' where
               _cdBearerToken
               _cdKey
               _cdId
-              _cdOauthToken
+              _cdOAuthToken
               _cdFields
               _cdCallback
-              (Just _cdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CoursesDeleteResource)

@@ -32,12 +32,12 @@ module Network.Google.Resource.SiteVerification.WebResource.Insert
     -- * Request Lenses
     , wriQuotaUser
     , wriPrettyPrint
-    , wriUserIp
+    , wriUserIP
     , wriKey
-    , wriOauthToken
+    , wriSiteVerificationWebResourceResource
+    , wriOAuthToken
     , wriVerificationMethod
     , wriFields
-    , wriAlt
     ) where
 
 import           Network.Google.Prelude
@@ -50,25 +50,26 @@ type WebResourceInsertResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
-               QueryParam "oauth_token" Text :>
+             QueryParam "key" Key :>
+               QueryParam "oauth_token" OAuthToken :>
                  QueryParam "verificationMethod" Text :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :>
-                       Post '[JSON] SiteVerificationWebResourceResource
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] SiteVerificationWebResourceResource
+                         :> Post '[JSON] SiteVerificationWebResourceResource
 
 -- | Attempt verification of a website or domain.
 --
 -- /See:/ 'webResourceInsert'' smart constructor.
 data WebResourceInsert' = WebResourceInsert'
-    { _wriQuotaUser          :: !(Maybe Text)
-    , _wriPrettyPrint        :: !Bool
-    , _wriUserIp             :: !(Maybe Text)
-    , _wriKey                :: !(Maybe Text)
-    , _wriOauthToken         :: !(Maybe Text)
-    , _wriVerificationMethod :: !Text
-    , _wriFields             :: !(Maybe Text)
-    , _wriAlt                :: !Alt
+    { _wriQuotaUser                           :: !(Maybe Text)
+    , _wriPrettyPrint                         :: !Bool
+    , _wriUserIP                              :: !(Maybe Text)
+    , _wriKey                                 :: !(Maybe Key)
+    , _wriSiteVerificationWebResourceResource :: !SiteVerificationWebResourceResource
+    , _wriOAuthToken                          :: !(Maybe OAuthToken)
+    , _wriVerificationMethod                  :: !Text
+    , _wriFields                              :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WebResourceInsert'' with the minimum fields required to make a request.
@@ -79,30 +80,31 @@ data WebResourceInsert' = WebResourceInsert'
 --
 -- * 'wriPrettyPrint'
 --
--- * 'wriUserIp'
+-- * 'wriUserIP'
 --
 -- * 'wriKey'
 --
--- * 'wriOauthToken'
+-- * 'wriSiteVerificationWebResourceResource'
+--
+-- * 'wriOAuthToken'
 --
 -- * 'wriVerificationMethod'
 --
 -- * 'wriFields'
---
--- * 'wriAlt'
 webResourceInsert'
-    :: Text -- ^ 'verificationMethod'
+    :: SiteVerificationWebResourceResource -- ^ 'SiteVerificationWebResourceResource'
+    -> Text -- ^ 'verificationMethod'
     -> WebResourceInsert'
-webResourceInsert' pWriVerificationMethod_ =
+webResourceInsert' pWriSiteVerificationWebResourceResource_ pWriVerificationMethod_ =
     WebResourceInsert'
     { _wriQuotaUser = Nothing
     , _wriPrettyPrint = False
-    , _wriUserIp = Nothing
+    , _wriUserIP = Nothing
     , _wriKey = Nothing
-    , _wriOauthToken = Nothing
+    , _wriSiteVerificationWebResourceResource = pWriSiteVerificationWebResourceResource_
+    , _wriOAuthToken = Nothing
     , _wriVerificationMethod = pWriVerificationMethod_
     , _wriFields = Nothing
-    , _wriAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,21 +122,28 @@ wriPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-wriUserIp :: Lens' WebResourceInsert' (Maybe Text)
-wriUserIp
-  = lens _wriUserIp (\ s a -> s{_wriUserIp = a})
+wriUserIP :: Lens' WebResourceInsert' (Maybe Text)
+wriUserIP
+  = lens _wriUserIP (\ s a -> s{_wriUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-wriKey :: Lens' WebResourceInsert' (Maybe Text)
+wriKey :: Lens' WebResourceInsert' (Maybe Key)
 wriKey = lens _wriKey (\ s a -> s{_wriKey = a})
 
+-- | Multipart request metadata.
+wriSiteVerificationWebResourceResource :: Lens' WebResourceInsert' SiteVerificationWebResourceResource
+wriSiteVerificationWebResourceResource
+  = lens _wriSiteVerificationWebResourceResource
+      (\ s a ->
+         s{_wriSiteVerificationWebResourceResource = a})
+
 -- | OAuth 2.0 token for the current user.
-wriOauthToken :: Lens' WebResourceInsert' (Maybe Text)
-wriOauthToken
-  = lens _wriOauthToken
-      (\ s a -> s{_wriOauthToken = a})
+wriOAuthToken :: Lens' WebResourceInsert' (Maybe OAuthToken)
+wriOAuthToken
+  = lens _wriOAuthToken
+      (\ s a -> s{_wriOAuthToken = a})
 
 -- | The method to use for verifying a site or domain.
 wriVerificationMethod :: Lens' WebResourceInsert' Text
@@ -147,21 +156,22 @@ wriFields :: Lens' WebResourceInsert' (Maybe Text)
 wriFields
   = lens _wriFields (\ s a -> s{_wriFields = a})
 
--- | Data format for the response.
-wriAlt :: Lens' WebResourceInsert' Alt
-wriAlt = lens _wriAlt (\ s a -> s{_wriAlt = a})
+instance GoogleAuth WebResourceInsert' where
+        authKey = wriKey . _Just
+        authToken = wriOAuthToken . _Just
 
 instance GoogleRequest WebResourceInsert' where
         type Rs WebResourceInsert' =
              SiteVerificationWebResourceResource
         request = requestWithRoute defReq siteVerificationURL
         requestWithRoute r u WebResourceInsert'{..}
-          = go _wriQuotaUser (Just _wriPrettyPrint) _wriUserIp
+          = go _wriQuotaUser (Just _wriPrettyPrint) _wriUserIP
               _wriKey
-              _wriOauthToken
+              _wriOAuthToken
               (Just _wriVerificationMethod)
               _wriFields
-              (Just _wriAlt)
+              (Just AltJSON)
+              _wriSiteVerificationWebResourceResource
           where go
                   = clientWithRoute
                       (Proxy :: Proxy WebResourceInsertResource)

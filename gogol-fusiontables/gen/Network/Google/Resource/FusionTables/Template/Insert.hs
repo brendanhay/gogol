@@ -32,12 +32,12 @@ module Network.Google.Resource.FusionTables.Template.Insert
     -- * Request Lenses
     , tiQuotaUser
     , tiPrettyPrint
-    , tiUserIp
+    , tiUserIP
     , tiKey
-    , tiOauthToken
+    , tiTemplate
+    , tiOAuthToken
     , tiTableId
     , tiFields
-    , tiAlt
     ) where
 
 import           Network.Google.FusionTables.Types
@@ -52,10 +52,11 @@ type TemplateInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] Template
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Template :> Post '[JSON] Template
 
 -- | Creates a new template for the table.
 --
@@ -63,12 +64,12 @@ type TemplateInsertResource =
 data TemplateInsert' = TemplateInsert'
     { _tiQuotaUser   :: !(Maybe Text)
     , _tiPrettyPrint :: !Bool
-    , _tiUserIp      :: !(Maybe Text)
-    , _tiKey         :: !(Maybe Text)
-    , _tiOauthToken  :: !(Maybe Text)
+    , _tiUserIP      :: !(Maybe Text)
+    , _tiKey         :: !(Maybe Key)
+    , _tiTemplate    :: !Template
+    , _tiOAuthToken  :: !(Maybe OAuthToken)
     , _tiTableId     :: !Text
     , _tiFields      :: !(Maybe Text)
-    , _tiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TemplateInsert'' with the minimum fields required to make a request.
@@ -79,30 +80,31 @@ data TemplateInsert' = TemplateInsert'
 --
 -- * 'tiPrettyPrint'
 --
--- * 'tiUserIp'
+-- * 'tiUserIP'
 --
 -- * 'tiKey'
 --
--- * 'tiOauthToken'
+-- * 'tiTemplate'
+--
+-- * 'tiOAuthToken'
 --
 -- * 'tiTableId'
 --
 -- * 'tiFields'
---
--- * 'tiAlt'
 templateInsert'
-    :: Text -- ^ 'tableId'
+    :: Template -- ^ 'Template'
+    -> Text -- ^ 'tableId'
     -> TemplateInsert'
-templateInsert' pTiTableId_ =
+templateInsert' pTiTemplate_ pTiTableId_ =
     TemplateInsert'
     { _tiQuotaUser = Nothing
     , _tiPrettyPrint = True
-    , _tiUserIp = Nothing
+    , _tiUserIP = Nothing
     , _tiKey = Nothing
-    , _tiOauthToken = Nothing
+    , _tiTemplate = pTiTemplate_
+    , _tiOAuthToken = Nothing
     , _tiTableId = pTiTableId_
     , _tiFields = Nothing
-    , _tiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,19 +122,24 @@ tiPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tiUserIp :: Lens' TemplateInsert' (Maybe Text)
-tiUserIp = lens _tiUserIp (\ s a -> s{_tiUserIp = a})
+tiUserIP :: Lens' TemplateInsert' (Maybe Text)
+tiUserIP = lens _tiUserIP (\ s a -> s{_tiUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tiKey :: Lens' TemplateInsert' (Maybe Text)
+tiKey :: Lens' TemplateInsert' (Maybe Key)
 tiKey = lens _tiKey (\ s a -> s{_tiKey = a})
 
+-- | Multipart request metadata.
+tiTemplate :: Lens' TemplateInsert' Template
+tiTemplate
+  = lens _tiTemplate (\ s a -> s{_tiTemplate = a})
+
 -- | OAuth 2.0 token for the current user.
-tiOauthToken :: Lens' TemplateInsert' (Maybe Text)
-tiOauthToken
-  = lens _tiOauthToken (\ s a -> s{_tiOauthToken = a})
+tiOAuthToken :: Lens' TemplateInsert' (Maybe OAuthToken)
+tiOAuthToken
+  = lens _tiOAuthToken (\ s a -> s{_tiOAuthToken = a})
 
 -- | Table for which a new template is being created
 tiTableId :: Lens' TemplateInsert' Text
@@ -143,20 +150,21 @@ tiTableId
 tiFields :: Lens' TemplateInsert' (Maybe Text)
 tiFields = lens _tiFields (\ s a -> s{_tiFields = a})
 
--- | Data format for the response.
-tiAlt :: Lens' TemplateInsert' Alt
-tiAlt = lens _tiAlt (\ s a -> s{_tiAlt = a})
+instance GoogleAuth TemplateInsert' where
+        authKey = tiKey . _Just
+        authToken = tiOAuthToken . _Just
 
 instance GoogleRequest TemplateInsert' where
         type Rs TemplateInsert' = Template
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u TemplateInsert'{..}
-          = go _tiQuotaUser (Just _tiPrettyPrint) _tiUserIp
+          = go _tiQuotaUser (Just _tiPrettyPrint) _tiUserIP
               _tiKey
-              _tiOauthToken
+              _tiOAuthToken
               _tiTableId
               _tiFields
-              (Just _tiAlt)
+              (Just AltJSON)
+              _tiTemplate
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TemplateInsertResource)

@@ -65,13 +65,13 @@ module Network.Google.AdminReports.Types
     -- * Channel
     , Channel
     , channel
-    , cResourceUri
+    , cResourceURI
     , cResourceId
     , cKind
     , cExpiration
     , cToken
     , cAddress
-    , cPayload
+    , cPayLoad
     , cParams
     , cId
     , cType
@@ -97,7 +97,7 @@ module Network.Google.AdminReports.Types
     , Activity
     , activity
     , actEtag
-    , actIpAddress
+    , actIPAddress
     , actKind
     , actActor
     , actOwnerDomain
@@ -139,9 +139,6 @@ module Network.Google.AdminReports.Types
     , urpStringValue
     , urpName
     , urpMsgValue
-
-    -- * Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.AdminReports.Types.Product

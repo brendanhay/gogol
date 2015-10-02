@@ -22,11 +22,11 @@ import           Network.Google.Prelude
 --
 -- /See:/ 'computationTopology' smart constructor.
 data ComputationTopology = ComputationTopology
-    { _ctStateFamilies   :: !(Maybe [Maybe StateFamilyConfig])
+    { _ctStateFamilies   :: !(Maybe [StateFamilyConfig])
     , _ctUserStageName   :: !(Maybe Text)
-    , _ctInputs          :: !(Maybe [Maybe StreamLocation])
-    , _ctKeyRanges       :: !(Maybe [Maybe KeyRangeLocation])
-    , _ctOutputs         :: !(Maybe [Maybe StreamLocation])
+    , _ctInputs          :: !(Maybe [StreamLocation])
+    , _ctKeyRanges       :: !(Maybe [KeyRangeLocation])
+    , _ctOutputs         :: !(Maybe [StreamLocation])
     , _ctComputationId   :: !(Maybe Text)
     , _ctSystemStageName :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -62,7 +62,7 @@ computationTopology =
     }
 
 -- | The state family values.
-ctStateFamilies :: Lens' ComputationTopology [Maybe StateFamilyConfig]
+ctStateFamilies :: Lens' ComputationTopology [StateFamilyConfig]
 ctStateFamilies
   = lens _ctStateFamilies
       (\ s a -> s{_ctStateFamilies = a})
@@ -76,21 +76,21 @@ ctUserStageName
       (\ s a -> s{_ctUserStageName = a})
 
 -- | The inputs to the computation.
-ctInputs :: Lens' ComputationTopology [Maybe StreamLocation]
+ctInputs :: Lens' ComputationTopology [StreamLocation]
 ctInputs
   = lens _ctInputs (\ s a -> s{_ctInputs = a}) .
       _Default
       . _Coerce
 
 -- | The key ranges processed by the computation.
-ctKeyRanges :: Lens' ComputationTopology [Maybe KeyRangeLocation]
+ctKeyRanges :: Lens' ComputationTopology [KeyRangeLocation]
 ctKeyRanges
   = lens _ctKeyRanges (\ s a -> s{_ctKeyRanges = a}) .
       _Default
       . _Coerce
 
 -- | The outputs from the computation.
-ctOutputs :: Lens' ComputationTopology [Maybe StreamLocation]
+ctOutputs :: Lens' ComputationTopology [StreamLocation]
 ctOutputs
   = lens _ctOutputs (\ s a -> s{_ctOutputs = a}) .
       _Default
@@ -236,18 +236,18 @@ instance ToJSON Status where
 data WorkItem = WorkItem
     { _wiJobId                    :: !(Maybe Text)
     , _wiReportStatusInterval     :: !(Maybe Text)
-    , _wiShellTask                :: !(Maybe (Maybe ShellTask))
-    , _wiStreamingSetupTask       :: !(Maybe (Maybe StreamingSetupTask))
+    , _wiShellTask                :: !(Maybe ShellTask)
+    , _wiStreamingSetupTask       :: !(Maybe StreamingSetupTask)
     , _wiInitialReportIndex       :: !(Maybe Int64)
-    , _wiMapTask                  :: !(Maybe (Maybe MapTask))
-    , _wiPackages                 :: !(Maybe [Maybe Package])
-    , _wiStreamingComputationTask :: !(Maybe (Maybe StreamingComputationTask))
-    , _wiSourceOperationTask      :: !(Maybe (Maybe SourceOperationRequest))
+    , _wiMapTask                  :: !(Maybe MapTask)
+    , _wiPackages                 :: !(Maybe [Package])
+    , _wiStreamingComputationTask :: !(Maybe StreamingComputationTask)
+    , _wiSourceOperationTask      :: !(Maybe SourceOperationRequest)
     , _wiId                       :: !(Maybe Int64)
     , _wiProjectId                :: !(Maybe Text)
     , _wiLeaseExpireTime          :: !(Maybe Text)
     , _wiConfiguration            :: !(Maybe Text)
-    , _wiSeqMapTask               :: !(Maybe (Maybe SeqMapTask))
+    , _wiSeqMapTask               :: !(Maybe SeqMapTask)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WorkItem' with the minimum fields required to make a request.
@@ -312,12 +312,12 @@ wiReportStatusInterval
       (\ s a -> s{_wiReportStatusInterval = a})
 
 -- | Additional information for ShellTask WorkItems.
-wiShellTask :: Lens' WorkItem (Maybe (Maybe ShellTask))
+wiShellTask :: Lens' WorkItem (Maybe ShellTask)
 wiShellTask
   = lens _wiShellTask (\ s a -> s{_wiShellTask = a})
 
 -- | Additional information for StreamingSetupTask WorkItems.
-wiStreamingSetupTask :: Lens' WorkItem (Maybe (Maybe StreamingSetupTask))
+wiStreamingSetupTask :: Lens' WorkItem (Maybe StreamingSetupTask)
 wiStreamingSetupTask
   = lens _wiStreamingSetupTask
       (\ s a -> s{_wiStreamingSetupTask = a})
@@ -329,26 +329,26 @@ wiInitialReportIndex
       (\ s a -> s{_wiInitialReportIndex = a})
 
 -- | Additional information for MapTask WorkItems.
-wiMapTask :: Lens' WorkItem (Maybe (Maybe MapTask))
+wiMapTask :: Lens' WorkItem (Maybe MapTask)
 wiMapTask
   = lens _wiMapTask (\ s a -> s{_wiMapTask = a})
 
 -- | Any required packages that need to be fetched in order to execute this
 -- WorkItem.
-wiPackages :: Lens' WorkItem [Maybe Package]
+wiPackages :: Lens' WorkItem [Package]
 wiPackages
   = lens _wiPackages (\ s a -> s{_wiPackages = a}) .
       _Default
       . _Coerce
 
 -- | Additional information for StreamingComputationTask WorkItems.
-wiStreamingComputationTask :: Lens' WorkItem (Maybe (Maybe StreamingComputationTask))
+wiStreamingComputationTask :: Lens' WorkItem (Maybe StreamingComputationTask)
 wiStreamingComputationTask
   = lens _wiStreamingComputationTask
       (\ s a -> s{_wiStreamingComputationTask = a})
 
 -- | Additional information for source operation WorkItems.
-wiSourceOperationTask :: Lens' WorkItem (Maybe (Maybe SourceOperationRequest))
+wiSourceOperationTask :: Lens' WorkItem (Maybe SourceOperationRequest)
 wiSourceOperationTask
   = lens _wiSourceOperationTask
       (\ s a -> s{_wiSourceOperationTask = a})
@@ -375,7 +375,7 @@ wiConfiguration
       (\ s a -> s{_wiConfiguration = a})
 
 -- | Additional information for SeqMapTask WorkItems.
-wiSeqMapTask :: Lens' WorkItem (Maybe (Maybe SeqMapTask))
+wiSeqMapTask :: Lens' WorkItem (Maybe SeqMapTask)
 wiSeqMapTask
   = lens _wiSeqMapTask (\ s a -> s{_wiSeqMapTask = a})
 
@@ -445,8 +445,8 @@ instance ToJSON JobExecutionInfoStages where
 --
 -- /See:/ 'sourceSplitResponse' smart constructor.
 data SourceSplitResponse = SourceSplitResponse
-    { _ssrBundles :: !(Maybe [Maybe DerivedSource])
-    , _ssrShards  :: !(Maybe [Maybe SourceSplitShard])
+    { _ssrBundles :: !(Maybe [DerivedSource])
+    , _ssrShards  :: !(Maybe [SourceSplitShard])
     , _ssrOutcome :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -471,14 +471,14 @@ sourceSplitResponse =
 -- | If outcome is SPLITTING_HAPPENED, then this is a list of bundles into
 -- which the source was split. Otherwise this field is ignored. This list
 -- can be empty, which means the source represents an empty input.
-ssrBundles :: Lens' SourceSplitResponse [Maybe DerivedSource]
+ssrBundles :: Lens' SourceSplitResponse [DerivedSource]
 ssrBundles
   = lens _ssrBundles (\ s a -> s{_ssrBundles = a}) .
       _Default
       . _Coerce
 
 -- | DEPRECATED in favor of bundles.
-ssrShards :: Lens' SourceSplitResponse [Maybe SourceSplitShard]
+ssrShards :: Lens' SourceSplitResponse [SourceSplitShard]
 ssrShards
   = lens _ssrShards (\ s a -> s{_ssrShards = a}) .
       _Default
@@ -799,7 +799,7 @@ instance ToJSON SourceSplitOptions where
 -- /See:/ 'reportWorkItemStatusRequest' smart constructor.
 data ReportWorkItemStatusRequest = ReportWorkItemStatusRequest
     { _rwisrCurrentWorkerTime :: !(Maybe Text)
-    , _rwisrWorkItemStatuses  :: !(Maybe [Maybe WorkItemStatus])
+    , _rwisrWorkItemStatuses  :: !(Maybe [WorkItemStatus])
     , _rwisrWorkerId          :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -830,7 +830,7 @@ rwisrCurrentWorkerTime
 -- | The order is unimportant, except that the order of the
 -- WorkItemServiceState messages in the ReportWorkItemStatusResponse
 -- corresponds to the order of WorkItemStatus messages here.
-rwisrWorkItemStatuses :: Lens' ReportWorkItemStatusRequest [Maybe WorkItemStatus]
+rwisrWorkItemStatuses :: Lens' ReportWorkItemStatusRequest [WorkItemStatus]
 rwisrWorkItemStatuses
   = lens _rwisrWorkItemStatuses
       (\ s a -> s{_rwisrWorkItemStatuses = a})
@@ -1004,7 +1004,7 @@ instance ToJSON Disk where
 -- /See:/ 'concatPosition' smart constructor.
 data ConcatPosition = ConcatPosition
     { _cpIndex    :: !(Maybe Int32)
-    , _cpPosition :: !(Maybe (Maybe Position))
+    , _cpPosition :: !(Maybe Position)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ConcatPosition' with the minimum fields required to make a request.
@@ -1027,7 +1027,7 @@ cpIndex :: Lens' ConcatPosition (Maybe Int32)
 cpIndex = lens _cpIndex (\ s a -> s{_cpIndex = a})
 
 -- | Position within the inner source.
-cpPosition :: Lens' ConcatPosition (Maybe (Maybe Position))
+cpPosition :: Lens' ConcatPosition (Maybe Position)
 cpPosition
   = lens _cpPosition (\ s a -> s{_cpPosition = a})
 
@@ -1051,8 +1051,8 @@ instance ToJSON ConcatPosition where
 data Environment = Environment
     { _eDataset                  :: !(Maybe Text)
     , _eExperiments              :: !(Maybe [Text])
-    , _eWorkerPools              :: !(Maybe [Maybe WorkerPool])
-    , _eClusterManagerApiService :: !(Maybe Text)
+    , _eWorkerPools              :: !(Maybe [WorkerPool])
+    , _eClusterManagerAPIService :: !(Maybe Text)
     , _eVersion                  :: !(Maybe EnvironmentVersion)
     , _eInternalExperiments      :: !(Maybe EnvironmentInternalExperiments)
     , _eTempStoragePrefix        :: !(Maybe Text)
@@ -1070,7 +1070,7 @@ data Environment = Environment
 --
 -- * 'eWorkerPools'
 --
--- * 'eClusterManagerApiService'
+-- * 'eClusterManagerAPIService'
 --
 -- * 'eVersion'
 --
@@ -1088,7 +1088,7 @@ environment =
     { _eDataset = Nothing
     , _eExperiments = Nothing
     , _eWorkerPools = Nothing
-    , _eClusterManagerApiService = Nothing
+    , _eClusterManagerAPIService = Nothing
     , _eVersion = Nothing
     , _eInternalExperiments = Nothing
     , _eTempStoragePrefix = Nothing
@@ -1111,7 +1111,7 @@ eExperiments
 
 -- | Worker pools. At least one \"harness\" worker pool must be specified in
 -- order for the job to have workers.
-eWorkerPools :: Lens' Environment [Maybe WorkerPool]
+eWorkerPools :: Lens' Environment [WorkerPool]
 eWorkerPools
   = lens _eWorkerPools (\ s a -> s{_eWorkerPools = a})
       . _Default
@@ -1120,10 +1120,10 @@ eWorkerPools
 -- | The type of cluster manager API to use. If unknown or unspecified, the
 -- service will attempt to choose a reasonable default. This should be in
 -- the form of the API service name, e.g. \"compute.googleapis.com\".
-eClusterManagerApiService :: Lens' Environment (Maybe Text)
-eClusterManagerApiService
-  = lens _eClusterManagerApiService
-      (\ s a -> s{_eClusterManagerApiService = a})
+eClusterManagerAPIService :: Lens' Environment (Maybe Text)
+eClusterManagerAPIService
+  = lens _eClusterManagerAPIService
+      (\ s a -> s{_eClusterManagerAPIService = a})
 
 -- | A structure describing which components and their versions of the
 -- service are required in order to run the job.
@@ -1187,7 +1187,7 @@ instance ToJSON Environment where
                   ("experiments" .=) <$> _eExperiments,
                   ("workerPools" .=) <$> _eWorkerPools,
                   ("clusterManagerApiService" .=) <$>
-                    _eClusterManagerApiService,
+                    _eClusterManagerAPIService,
                   ("version" .=) <$> _eVersion,
                   ("internalExperiments" .=) <$> _eInternalExperiments,
                   ("tempStoragePrefix" .=) <$> _eTempStoragePrefix,
@@ -1199,8 +1199,8 @@ instance ToJSON Environment where
 --
 -- /See:/ 'writeInstruction' smart constructor.
 data WriteInstruction = WriteInstruction
-    { _wiSink  :: !(Maybe (Maybe Sink))
-    , _wiInput :: !(Maybe (Maybe InstructionInput))
+    { _wiSink  :: !(Maybe Sink)
+    , _wiInput :: !(Maybe InstructionInput)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WriteInstruction' with the minimum fields required to make a request.
@@ -1219,11 +1219,11 @@ writeInstruction =
     }
 
 -- | The sink to write to.
-wiSink :: Lens' WriteInstruction (Maybe (Maybe Sink))
+wiSink :: Lens' WriteInstruction (Maybe Sink)
 wiSink = lens _wiSink (\ s a -> s{_wiSink = a})
 
 -- | The input.
-wiInput :: Lens' WriteInstruction (Maybe (Maybe InstructionInput))
+wiInput :: Lens' WriteInstruction (Maybe InstructionInput)
 wiInput = lens _wiInput (\ s a -> s{_wiInput = a})
 
 instance FromJSON WriteInstruction where
@@ -1243,7 +1243,7 @@ instance ToJSON WriteInstruction where
 --
 -- /See:/ 'sourceGetMetadataResponse' smart constructor.
 newtype SourceGetMetadataResponse = SourceGetMetadataResponse
-    { _sgmrMetadata :: Maybe (Maybe SourceMetadata)
+    { _sgmrMetadata :: Maybe SourceMetadata
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SourceGetMetadataResponse' with the minimum fields required to make a request.
@@ -1259,7 +1259,7 @@ sourceGetMetadataResponse =
     }
 
 -- | The computed metadata.
-sgmrMetadata :: Lens' SourceGetMetadataResponse (Maybe (Maybe SourceMetadata))
+sgmrMetadata :: Lens' SourceGetMetadataResponse (Maybe SourceMetadata)
 sgmrMetadata
   = lens _sgmrMetadata (\ s a -> s{_sgmrMetadata = a})
 
@@ -1331,7 +1331,7 @@ data MetricUpdate = MetricUpdate
     , _muKind       :: !(Maybe Text)
     , _muUpdateTime :: !(Maybe Text)
     , _muMeanCount  :: !(Maybe JSONValue)
-    , _muName       :: !(Maybe (Maybe MetricStructuredName))
+    , _muName       :: !(Maybe MetricStructuredName)
     , _muScalar     :: !(Maybe JSONValue)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1423,7 +1423,7 @@ muMeanCount
   = lens _muMeanCount (\ s a -> s{_muMeanCount = a})
 
 -- | Name of the metric.
-muName :: Lens' MetricUpdate (Maybe (Maybe MetricStructuredName))
+muName :: Lens' MetricUpdate (Maybe MetricStructuredName)
 muName = lens _muName (\ s a -> s{_muName = a})
 
 -- | Worker-computed aggregate value for aggregation kinds \"Sum\", \"Max\",
@@ -1504,7 +1504,7 @@ instance ToJSON StreamingStageLocation where
 -- /See:/ 'derivedSource' smart constructor.
 data DerivedSource = DerivedSource
     { _dsDerivationMode :: !(Maybe Text)
-    , _dsSource         :: !(Maybe (Maybe Source))
+    , _dsSource         :: !(Maybe Source)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DerivedSource' with the minimum fields required to make a request.
@@ -1529,7 +1529,7 @@ dsDerivationMode
       (\ s a -> s{_dsDerivationMode = a})
 
 -- | Specification of the source.
-dsSource :: Lens' DerivedSource (Maybe (Maybe Source))
+dsSource :: Lens' DerivedSource (Maybe Source)
 dsSource = lens _dsSource (\ s a -> s{_dsSource = a})
 
 instance FromJSON DerivedSource where
@@ -1575,19 +1575,19 @@ data TaskRunnerSettings = TaskRunnerSettings
     , _trsWorkflowFileName         :: !(Maybe Text)
     , _trsTaskGroup                :: !(Maybe Text)
     , _trsAlsologtostderr          :: !(Maybe Bool)
-    , _trsDataflowApiVersion       :: !(Maybe Text)
+    , _trsDataflowAPIVersion       :: !(Maybe Text)
     , _trsLogDir                   :: !(Maybe Text)
     , _trsCommandlinesFileName     :: !(Maybe Text)
-    , _trsVmId                     :: !(Maybe Text)
-    , _trsBaseUrl                  :: !(Maybe Text)
-    , _trsOauthScopes              :: !(Maybe [Text])
+    , _trsVMId                     :: !(Maybe Text)
+    , _trsBaseURL                  :: !(Maybe Text)
+    , _trsOAuthScopes              :: !(Maybe [Text])
     , _trsTaskUser                 :: !(Maybe Text)
     , _trsStreamingWorkerMainClass :: !(Maybe Text)
     , _trsBaseTaskDir              :: !(Maybe Text)
     , _trsLogUploadLocation        :: !(Maybe Text)
     , _trsTempStoragePrefix        :: !(Maybe Text)
     , _trsLogToSerialconsole       :: !(Maybe Bool)
-    , _trsParallelWorkerSettings   :: !(Maybe (Maybe WorkerSettings))
+    , _trsParallelWorkerSettings   :: !(Maybe WorkerSettings)
     , _trsLanguageHint             :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1605,17 +1605,17 @@ data TaskRunnerSettings = TaskRunnerSettings
 --
 -- * 'trsAlsologtostderr'
 --
--- * 'trsDataflowApiVersion'
+-- * 'trsDataflowAPIVersion'
 --
 -- * 'trsLogDir'
 --
 -- * 'trsCommandlinesFileName'
 --
--- * 'trsVmId'
+-- * 'trsVMId'
 --
--- * 'trsBaseUrl'
+-- * 'trsBaseURL'
 --
--- * 'trsOauthScopes'
+-- * 'trsOAuthScopes'
 --
 -- * 'trsTaskUser'
 --
@@ -1641,12 +1641,12 @@ taskRunnerSettings =
     , _trsWorkflowFileName = Nothing
     , _trsTaskGroup = Nothing
     , _trsAlsologtostderr = Nothing
-    , _trsDataflowApiVersion = Nothing
+    , _trsDataflowAPIVersion = Nothing
     , _trsLogDir = Nothing
     , _trsCommandlinesFileName = Nothing
-    , _trsVmId = Nothing
-    , _trsBaseUrl = Nothing
-    , _trsOauthScopes = Nothing
+    , _trsVMId = Nothing
+    , _trsBaseURL = Nothing
+    , _trsOAuthScopes = Nothing
     , _trsTaskUser = Nothing
     , _trsStreamingWorkerMainClass = Nothing
     , _trsBaseTaskDir = Nothing
@@ -1688,10 +1688,10 @@ trsAlsologtostderr
       (\ s a -> s{_trsAlsologtostderr = a})
 
 -- | API version of endpoint, e.g. \"v1b3\"
-trsDataflowApiVersion :: Lens' TaskRunnerSettings (Maybe Text)
-trsDataflowApiVersion
-  = lens _trsDataflowApiVersion
-      (\ s a -> s{_trsDataflowApiVersion = a})
+trsDataflowAPIVersion :: Lens' TaskRunnerSettings (Maybe Text)
+trsDataflowAPIVersion
+  = lens _trsDataflowAPIVersion
+      (\ s a -> s{_trsDataflowAPIVersion = a})
 
 -- | Directory on the VM to store logs.
 trsLogDir :: Lens' TaskRunnerSettings (Maybe Text)
@@ -1705,8 +1705,8 @@ trsCommandlinesFileName
       (\ s a -> s{_trsCommandlinesFileName = a})
 
 -- | ID string of VM.
-trsVmId :: Lens' TaskRunnerSettings (Maybe Text)
-trsVmId = lens _trsVmId (\ s a -> s{_trsVmId = a})
+trsVMId :: Lens' TaskRunnerSettings (Maybe Text)
+trsVMId = lens _trsVMId (\ s a -> s{_trsVMId = a})
 
 -- | The base URL for the taskrunner to use when accessing Google Cloud APIs.
 -- When workers access Google Cloud APIs, they logically do so via relative
@@ -1714,16 +1714,16 @@ trsVmId = lens _trsVmId (\ s a -> s{_trsVmId = a})
 -- resolving these relative URLs. The normative algorithm used is defined
 -- by RFC 1808, \"Relative Uniform Resource Locators\". If not specified,
 -- the default value is \"http:\/\/www.googleapis.com\/\"
-trsBaseUrl :: Lens' TaskRunnerSettings (Maybe Text)
-trsBaseUrl
-  = lens _trsBaseUrl (\ s a -> s{_trsBaseUrl = a})
+trsBaseURL :: Lens' TaskRunnerSettings (Maybe Text)
+trsBaseURL
+  = lens _trsBaseURL (\ s a -> s{_trsBaseURL = a})
 
 -- | OAuth2 scopes to be requested by the taskrunner in order to access the
 -- dataflow API.
-trsOauthScopes :: Lens' TaskRunnerSettings [Text]
-trsOauthScopes
-  = lens _trsOauthScopes
-      (\ s a -> s{_trsOauthScopes = a})
+trsOAuthScopes :: Lens' TaskRunnerSettings [Text]
+trsOAuthScopes
+  = lens _trsOAuthScopes
+      (\ s a -> s{_trsOAuthScopes = a})
       . _Default
       . _Coerce
 
@@ -1770,7 +1770,7 @@ trsLogToSerialconsole
       (\ s a -> s{_trsLogToSerialconsole = a})
 
 -- | Settings to pass to the parallel worker harness.
-trsParallelWorkerSettings :: Lens' TaskRunnerSettings (Maybe (Maybe WorkerSettings))
+trsParallelWorkerSettings :: Lens' TaskRunnerSettings (Maybe WorkerSettings)
 trsParallelWorkerSettings
   = lens _trsParallelWorkerSettings
       (\ s a -> s{_trsParallelWorkerSettings = a})
@@ -1816,13 +1816,13 @@ instance ToJSON TaskRunnerSettings where
                   ("workflowFileName" .=) <$> _trsWorkflowFileName,
                   ("taskGroup" .=) <$> _trsTaskGroup,
                   ("alsologtostderr" .=) <$> _trsAlsologtostderr,
-                  ("dataflowApiVersion" .=) <$> _trsDataflowApiVersion,
+                  ("dataflowApiVersion" .=) <$> _trsDataflowAPIVersion,
                   ("logDir" .=) <$> _trsLogDir,
                   ("commandlinesFileName" .=) <$>
                     _trsCommandlinesFileName,
-                  ("vmId" .=) <$> _trsVmId,
-                  ("baseUrl" .=) <$> _trsBaseUrl,
-                  ("oauthScopes" .=) <$> _trsOauthScopes,
+                  ("vmId" .=) <$> _trsVMId,
+                  ("baseUrl" .=) <$> _trsBaseURL,
+                  ("oauthScopes" .=) <$> _trsOAuthScopes,
                   ("taskUser" .=) <$> _trsTaskUser,
                   ("streamingWorkerMainClass" .=) <$>
                     _trsStreamingWorkerMainClass,
@@ -1864,7 +1864,7 @@ instance ToJSON JobTransformNameMapping where
 --
 -- /See:/ 'jobMetrics' smart constructor.
 data JobMetrics = JobMetrics
-    { _jmMetrics    :: !(Maybe [Maybe MetricUpdate])
+    { _jmMetrics    :: !(Maybe [MetricUpdate])
     , _jmMetricTime :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1884,7 +1884,7 @@ jobMetrics =
     }
 
 -- | All metrics for this job.
-jmMetrics :: Lens' JobMetrics [Maybe MetricUpdate]
+jmMetrics :: Lens' JobMetrics [MetricUpdate]
 jmMetrics
   = lens _jmMetrics (\ s a -> s{_jmMetrics = a}) .
       _Default
@@ -1915,7 +1915,7 @@ instance ToJSON JobMetrics where
 --
 -- /See:/ 'flattenInstruction' smart constructor.
 newtype FlattenInstruction = FlattenInstruction
-    { _fiInputs :: Maybe [Maybe InstructionInput]
+    { _fiInputs :: Maybe [InstructionInput]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FlattenInstruction' with the minimum fields required to make a request.
@@ -1931,7 +1931,7 @@ flattenInstruction =
     }
 
 -- | Describes the inputs to the flatten instruction.
-fiInputs :: Lens' FlattenInstruction [Maybe InstructionInput]
+fiInputs :: Lens' FlattenInstruction [InstructionInput]
 fiInputs
   = lens _fiInputs (\ s a -> s{_fiInputs = a}) .
       _Default
@@ -2039,16 +2039,16 @@ instance ToJSON SourceMetadata where
 --
 -- /See:/ 'workItemStatus' smart constructor.
 data WorkItemStatus = WorkItemStatus
-    { _wisProgress                :: !(Maybe (Maybe ApproximateProgress))
-    , _wisSourceOperationResponse :: !(Maybe (Maybe SourceOperationResponse))
-    , _wisStopPosition            :: !(Maybe (Maybe Position))
-    , _wisDynamicSourceSplit      :: !(Maybe (Maybe DynamicSourceSplit))
+    { _wisProgress                :: !(Maybe ApproximateProgress)
+    , _wisSourceOperationResponse :: !(Maybe SourceOperationResponse)
+    , _wisStopPosition            :: !(Maybe Position)
+    , _wisDynamicSourceSplit      :: !(Maybe DynamicSourceSplit)
     , _wisCompleted               :: !(Maybe Bool)
-    , _wisSourceFork              :: !(Maybe (Maybe SourceFork))
+    , _wisSourceFork              :: !(Maybe SourceFork)
     , _wisReportIndex             :: !(Maybe Int64)
     , _wisRequestedLeaseDuration  :: !(Maybe Text)
-    , _wisErrors                  :: !(Maybe [Maybe Status])
-    , _wisMetricUpdates           :: !(Maybe [Maybe MetricUpdate])
+    , _wisErrors                  :: !(Maybe [Status])
+    , _wisMetricUpdates           :: !(Maybe [MetricUpdate])
     , _wisWorkItemId              :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -2095,13 +2095,13 @@ workItemStatus =
     }
 
 -- | The WorkItem\'s approximate progress.
-wisProgress :: Lens' WorkItemStatus (Maybe (Maybe ApproximateProgress))
+wisProgress :: Lens' WorkItemStatus (Maybe ApproximateProgress)
 wisProgress
   = lens _wisProgress (\ s a -> s{_wisProgress = a})
 
 -- | If the work item represented a SourceOperationRequest, and the work is
 -- completed, contains the result of the operation.
-wisSourceOperationResponse :: Lens' WorkItemStatus (Maybe (Maybe SourceOperationResponse))
+wisSourceOperationResponse :: Lens' WorkItemStatus (Maybe SourceOperationResponse)
 wisSourceOperationResponse
   = lens _wisSourceOperationResponse
       (\ s a -> s{_wisSourceOperationResponse = a})
@@ -2130,13 +2130,13 @@ wisSourceOperationResponse
 -- progress and proposed_stop_position should be interpreted relative to P,
 -- and in a potential subsequent dynamic_source_split into {P\', R\'}, P\'
 -- and R\' must be together equivalent to P, etc.
-wisStopPosition :: Lens' WorkItemStatus (Maybe (Maybe Position))
+wisStopPosition :: Lens' WorkItemStatus (Maybe Position)
 wisStopPosition
   = lens _wisStopPosition
       (\ s a -> s{_wisStopPosition = a})
 
 -- | See documentation of stop_position.
-wisDynamicSourceSplit :: Lens' WorkItemStatus (Maybe (Maybe DynamicSourceSplit))
+wisDynamicSourceSplit :: Lens' WorkItemStatus (Maybe DynamicSourceSplit)
 wisDynamicSourceSplit
   = lens _wisDynamicSourceSplit
       (\ s a -> s{_wisDynamicSourceSplit = a})
@@ -2147,7 +2147,7 @@ wisCompleted
   = lens _wisCompleted (\ s a -> s{_wisCompleted = a})
 
 -- | DEPRECATED in favor of dynamic_source_split.
-wisSourceFork :: Lens' WorkItemStatus (Maybe (Maybe SourceFork))
+wisSourceFork :: Lens' WorkItemStatus (Maybe SourceFork)
 wisSourceFork
   = lens _wisSourceFork
       (\ s a -> s{_wisSourceFork = a})
@@ -2176,14 +2176,14 @@ wisRequestedLeaseDuration
 -- | Specifies errors which occurred during processing. If errors are
 -- provided, and completed = true, then the WorkItem is considered to have
 -- failed.
-wisErrors :: Lens' WorkItemStatus [Maybe Status]
+wisErrors :: Lens' WorkItemStatus [Status]
 wisErrors
   = lens _wisErrors (\ s a -> s{_wisErrors = a}) .
       _Default
       . _Coerce
 
 -- | Worker output metrics (counters) for this WorkItem.
-wisMetricUpdates :: Lens' WorkItemStatus [Maybe MetricUpdate]
+wisMetricUpdates :: Lens' WorkItemStatus [MetricUpdate]
 wisMetricUpdates
   = lens _wisMetricUpdates
       (\ s a -> s{_wisMetricUpdates = a})
@@ -2423,8 +2423,8 @@ instance ToJSON LeaseWorkItemRequest where
 --
 -- /See:/ 'sourceOperationResponse' smart constructor.
 data SourceOperationResponse = SourceOperationResponse
-    { _sorSplit       :: !(Maybe (Maybe SourceSplitResponse))
-    , _sorGetMetadata :: !(Maybe (Maybe SourceGetMetadataResponse))
+    { _sorSplit       :: !(Maybe SourceSplitResponse)
+    , _sorGetMetadata :: !(Maybe SourceGetMetadataResponse)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SourceOperationResponse' with the minimum fields required to make a request.
@@ -2443,11 +2443,11 @@ sourceOperationResponse =
     }
 
 -- | A response to a request to split a source.
-sorSplit :: Lens' SourceOperationResponse (Maybe (Maybe SourceSplitResponse))
+sorSplit :: Lens' SourceOperationResponse (Maybe SourceSplitResponse)
 sorSplit = lens _sorSplit (\ s a -> s{_sorSplit = a})
 
 -- | A response to a request to get metadata about a source.
-sorGetMetadata :: Lens' SourceOperationResponse (Maybe (Maybe SourceGetMetadataResponse))
+sorGetMetadata :: Lens' SourceOperationResponse (Maybe SourceGetMetadataResponse)
 sorGetMetadata
   = lens _sorGetMetadata
       (\ s a -> s{_sorGetMetadata = a})
@@ -2471,9 +2471,9 @@ instance ToJSON SourceOperationResponse where
 --
 -- /See:/ 'topologyConfig' smart constructor.
 data TopologyConfig = TopologyConfig
-    { _tcDataDiskAssignments           :: !(Maybe [Maybe DataDiskAssignment])
+    { _tcDataDiskAssignments           :: !(Maybe [DataDiskAssignment])
     , _tcUserStageToComputationNameMap :: !(Maybe TopologyConfigUserStageToComputationNameMap)
-    , _tcComputations                  :: !(Maybe [Maybe ComputationTopology])
+    , _tcComputations                  :: !(Maybe [ComputationTopology])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TopologyConfig' with the minimum fields required to make a request.
@@ -2495,7 +2495,7 @@ topologyConfig =
     }
 
 -- | The disks assigned to a streaming Dataflow job.
-tcDataDiskAssignments :: Lens' TopologyConfig [Maybe DataDiskAssignment]
+tcDataDiskAssignments :: Lens' TopologyConfig [DataDiskAssignment]
 tcDataDiskAssignments
   = lens _tcDataDiskAssignments
       (\ s a -> s{_tcDataDiskAssignments = a})
@@ -2509,7 +2509,7 @@ tcUserStageToComputationNameMap
       (\ s a -> s{_tcUserStageToComputationNameMap = a})
 
 -- | The computations associated with a streaming Dataflow job.
-tcComputations :: Lens' TopologyConfig [Maybe ComputationTopology]
+tcComputations :: Lens' TopologyConfig [ComputationTopology]
 tcComputations
   = lens _tcComputations
       (\ s a -> s{_tcComputations = a})
@@ -2540,7 +2540,7 @@ instance ToJSON TopologyConfig where
 -- /See:/ 'workerSettings' smart constructor.
 data WorkerSettings = WorkerSettings
     { _wsServicePath        :: !(Maybe Text)
-    , _wsBaseUrl            :: !(Maybe Text)
+    , _wsBaseURL            :: !(Maybe Text)
     , _wsShuffleServicePath :: !(Maybe Text)
     , _wsTempStoragePrefix  :: !(Maybe Text)
     , _wsReportingEnabled   :: !(Maybe Bool)
@@ -2553,7 +2553,7 @@ data WorkerSettings = WorkerSettings
 --
 -- * 'wsServicePath'
 --
--- * 'wsBaseUrl'
+-- * 'wsBaseURL'
 --
 -- * 'wsShuffleServicePath'
 --
@@ -2567,7 +2567,7 @@ workerSettings
 workerSettings =
     WorkerSettings
     { _wsServicePath = Nothing
-    , _wsBaseUrl = Nothing
+    , _wsBaseURL = Nothing
     , _wsShuffleServicePath = Nothing
     , _wsTempStoragePrefix = Nothing
     , _wsReportingEnabled = Nothing
@@ -2587,9 +2587,9 @@ wsServicePath
 -- URLs. The normative algorithm used is defined by RFC 1808, \"Relative
 -- Uniform Resource Locators\". If not specified, the default value is
 -- \"http:\/\/www.googleapis.com\/\"
-wsBaseUrl :: Lens' WorkerSettings (Maybe Text)
-wsBaseUrl
-  = lens _wsBaseUrl (\ s a -> s{_wsBaseUrl = a})
+wsBaseURL :: Lens' WorkerSettings (Maybe Text)
+wsBaseURL
+  = lens _wsBaseURL (\ s a -> s{_wsBaseURL = a})
 
 -- | The Shuffle service path relative to the root URL, for example,
 -- \"shuffle\/v1beta1\".
@@ -2634,7 +2634,7 @@ instance ToJSON WorkerSettings where
           = object
               (catMaybes
                  [("servicePath" .=) <$> _wsServicePath,
-                  ("baseUrl" .=) <$> _wsBaseUrl,
+                  ("baseUrl" .=) <$> _wsBaseURL,
                   ("shuffleServicePath" .=) <$> _wsShuffleServicePath,
                   ("tempStoragePrefix" .=) <$> _wsTempStoragePrefix,
                   ("reportingEnabled" .=) <$> _wsReportingEnabled,
@@ -2717,8 +2717,8 @@ data WorkItemServiceState = WorkItemServiceState
     { _wissNextReportIndex       :: !(Maybe Int64)
     , _wissReportStatusInterval  :: !(Maybe Text)
     , _wissHarnessData           :: !(Maybe WorkItemServiceStateHarnessData)
-    , _wissSuggestedStopPoint    :: !(Maybe (Maybe ApproximateProgress))
-    , _wissSuggestedStopPosition :: !(Maybe (Maybe Position))
+    , _wissSuggestedStopPoint    :: !(Maybe ApproximateProgress)
+    , _wissSuggestedStopPosition :: !(Maybe Position)
     , _wissLeaseExpireTime       :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -2772,13 +2772,13 @@ wissHarnessData
 
 -- | The progress point in the WorkItem where the Dataflow service suggests
 -- that the worker truncate the task.
-wissSuggestedStopPoint :: Lens' WorkItemServiceState (Maybe (Maybe ApproximateProgress))
+wissSuggestedStopPoint :: Lens' WorkItemServiceState (Maybe ApproximateProgress)
 wissSuggestedStopPoint
   = lens _wissSuggestedStopPoint
       (\ s a -> s{_wissSuggestedStopPoint = a})
 
 -- | Obsolete, always empty.
-wissSuggestedStopPosition :: Lens' WorkItemServiceState (Maybe (Maybe Position))
+wissSuggestedStopPosition :: Lens' WorkItemServiceState (Maybe Position)
 wissSuggestedStopPosition
   = lens _wissSuggestedStopPosition
       (\ s a -> s{_wissSuggestedStopPosition = a})
@@ -2819,7 +2819,7 @@ instance ToJSON WorkItemServiceState where
 --
 -- /See:/ 'dataDiskAssignment' smart constructor.
 data DataDiskAssignment = DataDiskAssignment
-    { _ddaVmInstance :: !(Maybe Text)
+    { _ddaVMInstance :: !(Maybe Text)
     , _ddaDataDisks  :: !(Maybe [Text])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -2827,23 +2827,23 @@ data DataDiskAssignment = DataDiskAssignment
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ddaVmInstance'
+-- * 'ddaVMInstance'
 --
 -- * 'ddaDataDisks'
 dataDiskAssignment
     :: DataDiskAssignment
 dataDiskAssignment =
     DataDiskAssignment
-    { _ddaVmInstance = Nothing
+    { _ddaVMInstance = Nothing
     , _ddaDataDisks = Nothing
     }
 
 -- | VM instance name the data disks mounted to, for example
 -- \"myproject-1014-104817-4c2-harness-0\".
-ddaVmInstance :: Lens' DataDiskAssignment (Maybe Text)
-ddaVmInstance
-  = lens _ddaVmInstance
-      (\ s a -> s{_ddaVmInstance = a})
+ddaVMInstance :: Lens' DataDiskAssignment (Maybe Text)
+ddaVMInstance
+  = lens _ddaVMInstance
+      (\ s a -> s{_ddaVMInstance = a})
 
 -- | Mounted data disks. The order is important a data disk\'s 0-based index
 -- in this list defines which persistent directory the disk is mounted to,
@@ -2867,14 +2867,14 @@ instance ToJSON DataDiskAssignment where
         toJSON DataDiskAssignment{..}
           = object
               (catMaybes
-                 [("vmInstance" .=) <$> _ddaVmInstance,
+                 [("vmInstance" .=) <$> _ddaVMInstance,
                   ("dataDisks" .=) <$> _ddaDataDisks])
 
 -- | A task which initializes part of a streaming Dataflow job.
 --
 -- /See:/ 'streamingSetupTask' smart constructor.
 data StreamingSetupTask = StreamingSetupTask
-    { _sstStreamingComputationTopology :: !(Maybe (Maybe TopologyConfig))
+    { _sstStreamingComputationTopology :: !(Maybe TopologyConfig)
     , _sstReceiveWorkPort              :: !(Maybe Int32)
     , _sstWorkerHarnessPort            :: !(Maybe Int32)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -2898,7 +2898,7 @@ streamingSetupTask =
     }
 
 -- | The global topology of the streaming Dataflow job.
-sstStreamingComputationTopology :: Lens' StreamingSetupTask (Maybe (Maybe TopologyConfig))
+sstStreamingComputationTopology :: Lens' StreamingSetupTask (Maybe TopologyConfig)
 sstStreamingComputationTopology
   = lens _sstStreamingComputationTopology
       (\ s a -> s{_sstStreamingComputationTopology = a})
@@ -3007,10 +3007,10 @@ instance ToJSON SinkCodec where
 --
 -- /See:/ 'streamLocation' smart constructor.
 data StreamLocation = StreamLocation
-    { _slStreamingStageLocation :: !(Maybe (Maybe StreamingStageLocation))
-    , _slSideInputLocation      :: !(Maybe (Maybe StreamingSideInputLocation))
-    , _slCustomSourceLocation   :: !(Maybe (Maybe CustomSourceLocation))
-    , _slPubsubLocation         :: !(Maybe (Maybe PubsubLocation))
+    { _slStreamingStageLocation :: !(Maybe StreamingStageLocation)
+    , _slSideInputLocation      :: !(Maybe StreamingSideInputLocation)
+    , _slCustomSourceLocation   :: !(Maybe CustomSourceLocation)
+    , _slPubsubLocation         :: !(Maybe PubsubLocation)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StreamLocation' with the minimum fields required to make a request.
@@ -3036,25 +3036,25 @@ streamLocation =
 
 -- | The stream is part of another computation within the current streaming
 -- Dataflow job.
-slStreamingStageLocation :: Lens' StreamLocation (Maybe (Maybe StreamingStageLocation))
+slStreamingStageLocation :: Lens' StreamLocation (Maybe StreamingStageLocation)
 slStreamingStageLocation
   = lens _slStreamingStageLocation
       (\ s a -> s{_slStreamingStageLocation = a})
 
 -- | The stream is a streaming side input.
-slSideInputLocation :: Lens' StreamLocation (Maybe (Maybe StreamingSideInputLocation))
+slSideInputLocation :: Lens' StreamLocation (Maybe StreamingSideInputLocation)
 slSideInputLocation
   = lens _slSideInputLocation
       (\ s a -> s{_slSideInputLocation = a})
 
 -- | The stream is a custom source.
-slCustomSourceLocation :: Lens' StreamLocation (Maybe (Maybe CustomSourceLocation))
+slCustomSourceLocation :: Lens' StreamLocation (Maybe CustomSourceLocation)
 slCustomSourceLocation
   = lens _slCustomSourceLocation
       (\ s a -> s{_slCustomSourceLocation = a})
 
 -- | The stream is a pubsub stream.
-slPubsubLocation :: Lens' StreamLocation (Maybe (Maybe PubsubLocation))
+slPubsubLocation :: Lens' StreamLocation (Maybe PubsubLocation)
 slPubsubLocation
   = lens _slPubsubLocation
       (\ s a -> s{_slPubsubLocation = a})
@@ -3144,7 +3144,7 @@ instance ToJSON InstructionOutputCodec where
 --
 -- /See:/ 'mapTask' smart constructor.
 data MapTask = MapTask
-    { _mtInstructions :: !(Maybe [Maybe ParallelInstruction])
+    { _mtInstructions :: !(Maybe [ParallelInstruction])
     , _mtSystemName   :: !(Maybe Text)
     , _mtStageName    :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -3168,7 +3168,7 @@ mapTask =
     }
 
 -- | The instructions in the MapTask.
-mtInstructions :: Lens' MapTask [Maybe ParallelInstruction]
+mtInstructions :: Lens' MapTask [ParallelInstruction]
 mtInstructions
   = lens _mtInstructions
       (\ s a -> s{_mtInstructions = a})
@@ -3230,8 +3230,8 @@ instance ToJSON ParDoInstructionUserFn where
 -- /See:/ 'streamingComputationTask' smart constructor.
 data StreamingComputationTask = StreamingComputationTask
     { _sctTaskType          :: !(Maybe Text)
-    , _sctDataDisks         :: !(Maybe [Maybe MountedDataDisk])
-    , _sctComputationRanges :: !(Maybe [Maybe StreamingComputationRanges])
+    , _sctDataDisks         :: !(Maybe [MountedDataDisk])
+    , _sctComputationRanges :: !(Maybe [StreamingComputationRanges])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StreamingComputationTask' with the minimum fields required to make a request.
@@ -3258,14 +3258,14 @@ sctTaskType
   = lens _sctTaskType (\ s a -> s{_sctTaskType = a})
 
 -- | Describes the set of data disks this task should apply to.
-sctDataDisks :: Lens' StreamingComputationTask [Maybe MountedDataDisk]
+sctDataDisks :: Lens' StreamingComputationTask [MountedDataDisk]
 sctDataDisks
   = lens _sctDataDisks (\ s a -> s{_sctDataDisks = a})
       . _Default
       . _Coerce
 
 -- | Contains ranges of a streaming computation this task should apply to.
-sctComputationRanges :: Lens' StreamingComputationTask [Maybe StreamingComputationRanges]
+sctComputationRanges :: Lens' StreamingComputationTask [StreamingComputationRanges]
 sctComputationRanges
   = lens _sctComputationRanges
       (\ s a -> s{_sctComputationRanges = a})
@@ -3410,12 +3410,12 @@ instance ToJSON JobMessage where
 -- /See:/ 'job' smart constructor.
 data Job = Job
     { _jobRequestedState       :: !(Maybe Text)
-    , _jobEnvironment          :: !(Maybe (Maybe Environment))
+    , _jobEnvironment          :: !(Maybe Environment)
     , _jobClientRequestId      :: !(Maybe Text)
     , _jobCurrentState         :: !(Maybe Text)
     , _jobReplacedByJobId      :: !(Maybe Text)
-    , _jobSteps                :: !(Maybe [Maybe Step])
-    , _jobExecutionInfo        :: !(Maybe (Maybe JobExecutionInfo))
+    , _jobSteps                :: !(Maybe [Step])
+    , _jobExecutionInfo        :: !(Maybe JobExecutionInfo)
     , _jobName                 :: !(Maybe Text)
     , _jobTransformNameMapping :: !(Maybe JobTransformNameMapping)
     , _jobId                   :: !(Maybe Text)
@@ -3491,7 +3491,7 @@ jobRequestedState
       (\ s a -> s{_jobRequestedState = a})
 
 -- | Environment for the job.
-jobEnvironment :: Lens' Job (Maybe (Maybe Environment))
+jobEnvironment :: Lens' Job (Maybe Environment)
 jobEnvironment
   = lens _jobEnvironment
       (\ s a -> s{_jobEnvironment = a})
@@ -3526,14 +3526,14 @@ jobReplacedByJobId
       (\ s a -> s{_jobReplacedByJobId = a})
 
 -- | The top-level steps that constitute the entire job.
-jobSteps :: Lens' Job [Maybe Step]
+jobSteps :: Lens' Job [Step]
 jobSteps
   = lens _jobSteps (\ s a -> s{_jobSteps = a}) .
       _Default
       . _Coerce
 
 -- | Information about how the Dataflow service will actually run the job.
-jobExecutionInfo :: Lens' Job (Maybe (Maybe JobExecutionInfo))
+jobExecutionInfo :: Lens' Job (Maybe JobExecutionInfo)
 jobExecutionInfo
   = lens _jobExecutionInfo
       (\ s a -> s{_jobExecutionInfo = a})
@@ -3655,7 +3655,7 @@ instance ToJSON SeqMapTaskUserFn where
 --
 -- /See:/ 'seqMapTaskOutputInfo' smart constructor.
 data SeqMapTaskOutputInfo = SeqMapTaskOutputInfo
-    { _smtoiSink :: !(Maybe (Maybe Sink))
+    { _smtoiSink :: !(Maybe Sink)
     , _smtoiTag  :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -3675,7 +3675,7 @@ seqMapTaskOutputInfo =
     }
 
 -- | The sink to write the output value to.
-smtoiSink :: Lens' SeqMapTaskOutputInfo (Maybe (Maybe Sink))
+smtoiSink :: Lens' SeqMapTaskOutputInfo (Maybe Sink)
 smtoiSink
   = lens _smtoiSink (\ s a -> s{_smtoiSink = a})
 
@@ -3727,7 +3727,7 @@ instance ToJSON
 --
 -- /See:/ 'sourceGetMetadataRequest' smart constructor.
 newtype SourceGetMetadataRequest = SourceGetMetadataRequest
-    { _sgmrSource :: Maybe (Maybe Source)
+    { _sgmrSource :: Maybe Source
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SourceGetMetadataRequest' with the minimum fields required to make a request.
@@ -3743,7 +3743,7 @@ sourceGetMetadataRequest =
     }
 
 -- | Specification of the source whose metadata should be computed.
-sgmrSource :: Lens' SourceGetMetadataRequest (Maybe (Maybe Source))
+sgmrSource :: Lens' SourceGetMetadataRequest (Maybe Source)
 sgmrSource
   = lens _sgmrSource (\ s a -> s{_sgmrSource = a})
 
@@ -3763,8 +3763,8 @@ instance ToJSON SourceGetMetadataRequest where
 --
 -- /See:/ 'dynamicSourceSplit' smart constructor.
 data DynamicSourceSplit = DynamicSourceSplit
-    { _dssResidual :: !(Maybe (Maybe DerivedSource))
-    , _dssPrimary  :: !(Maybe (Maybe DerivedSource))
+    { _dssResidual :: !(Maybe DerivedSource)
+    , _dssPrimary  :: !(Maybe DerivedSource)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DynamicSourceSplit' with the minimum fields required to make a request.
@@ -3784,13 +3784,13 @@ dynamicSourceSplit =
 
 -- | Residual part (returned to the pool of work). Specified relative to the
 -- previously-current source.
-dssResidual :: Lens' DynamicSourceSplit (Maybe (Maybe DerivedSource))
+dssResidual :: Lens' DynamicSourceSplit (Maybe DerivedSource)
 dssResidual
   = lens _dssResidual (\ s a -> s{_dssResidual = a})
 
 -- | Primary part (continued to be processed by worker). Specified relative
 -- to the previously-current source. Becomes current.
-dssPrimary :: Lens' DynamicSourceSplit (Maybe (Maybe DerivedSource))
+dssPrimary :: Lens' DynamicSourceSplit (Maybe DerivedSource)
 dssPrimary
   = lens _dssPrimary (\ s a -> s{_dssPrimary = a})
 
@@ -3812,7 +3812,7 @@ instance ToJSON DynamicSourceSplit where
 --
 -- /See:/ 'readInstruction' smart constructor.
 newtype ReadInstruction = ReadInstruction
-    { _riSource :: Maybe (Maybe Source)
+    { _riSource :: Maybe Source
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReadInstruction' with the minimum fields required to make a request.
@@ -3828,7 +3828,7 @@ readInstruction =
     }
 
 -- | The source to read from.
-riSource :: Lens' ReadInstruction (Maybe (Maybe Source))
+riSource :: Lens' ReadInstruction (Maybe Source)
 riSource = lens _riSource (\ s a -> s{_riSource = a})
 
 instance FromJSON ReadInstruction where
@@ -3847,14 +3847,14 @@ instance ToJSON ReadInstruction where
 --
 -- /See:/ 'workerPool' smart constructor.
 data WorkerPool = WorkerPool
-    { _wpAutoscalingSettings :: !(Maybe (Maybe AutoscalingSettings))
+    { _wpAutoscalingSettings :: !(Maybe AutoscalingSettings)
     , _wpDiskSizeGb          :: !(Maybe Int32)
     , _wpKind                :: !(Maybe Text)
-    , _wpTaskrunnerSettings  :: !(Maybe (Maybe TaskRunnerSettings))
+    , _wpTaskrunnerSettings  :: !(Maybe TaskRunnerSettings)
     , _wpNumWorkers          :: !(Maybe Int32)
     , _wpNetwork             :: !(Maybe Text)
     , _wpZone                :: !(Maybe Text)
-    , _wpPackages            :: !(Maybe [Maybe Package])
+    , _wpPackages            :: !(Maybe [Package])
     , _wpOnHostMaintenance   :: !(Maybe Text)
     , _wpDiskSourceImage     :: !(Maybe Text)
     , _wpMachineType         :: !(Maybe Text)
@@ -3863,7 +3863,7 @@ data WorkerPool = WorkerPool
     , _wpTeardownPolicy      :: !(Maybe Text)
     , _wpDefaultPackageSet   :: !(Maybe Text)
     , _wpPoolArgs            :: !(Maybe WorkerPoolPoolArgs)
-    , _wpDataDisks           :: !(Maybe [Maybe Disk])
+    , _wpDataDisks           :: !(Maybe [Disk])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WorkerPool' with the minimum fields required to make a request.
@@ -3927,7 +3927,7 @@ workerPool =
     }
 
 -- | Settings for autoscaling of this WorkerPool.
-wpAutoscalingSettings :: Lens' WorkerPool (Maybe (Maybe AutoscalingSettings))
+wpAutoscalingSettings :: Lens' WorkerPool (Maybe AutoscalingSettings)
 wpAutoscalingSettings
   = lens _wpAutoscalingSettings
       (\ s a -> s{_wpAutoscalingSettings = a})
@@ -3945,7 +3945,7 @@ wpKind = lens _wpKind (\ s a -> s{_wpKind = a})
 
 -- | Settings passed through to Google Compute Engine workers when using the
 -- standard Dataflow task runner. Users should ignore this field.
-wpTaskrunnerSettings :: Lens' WorkerPool (Maybe (Maybe TaskRunnerSettings))
+wpTaskrunnerSettings :: Lens' WorkerPool (Maybe TaskRunnerSettings)
 wpTaskrunnerSettings
   = lens _wpTaskrunnerSettings
       (\ s a -> s{_wpTaskrunnerSettings = a})
@@ -3969,7 +3969,7 @@ wpZone :: Lens' WorkerPool (Maybe Text)
 wpZone = lens _wpZone (\ s a -> s{_wpZone = a})
 
 -- | Packages to be installed on workers.
-wpPackages :: Lens' WorkerPool [Maybe Package]
+wpPackages :: Lens' WorkerPool [Package]
 wpPackages
   = lens _wpPackages (\ s a -> s{_wpPackages = a}) .
       _Default
@@ -4036,7 +4036,7 @@ wpPoolArgs
   = lens _wpPoolArgs (\ s a -> s{_wpPoolArgs = a})
 
 -- | Data disks that are used by a VM in this workflow.
-wpDataDisks :: Lens' WorkerPool [Maybe Disk]
+wpDataDisks :: Lens' WorkerPool [Disk]
 wpDataDisks
   = lens _wpDataDisks (\ s a -> s{_wpDataDisks = a}) .
       _Default
@@ -4236,7 +4236,7 @@ data Source = Source
     , _souBaseSpecs            :: !(Maybe [SourceBaseSpecs])
     , _souCodec                :: !(Maybe SourceCodec)
     , _souSpec                 :: !(Maybe SourceSpec)
-    , _souMetadata             :: !(Maybe (Maybe SourceMetadata))
+    , _souMetadata             :: !(Maybe SourceMetadata)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Source' with the minimum fields required to make a request.
@@ -4307,7 +4307,7 @@ souSpec = lens _souSpec (\ s a -> s{_souSpec = a})
 -- objects populated by the user (e.g. when filling in a DerivedSource).
 -- Source objects supplied by the framework to the user don\'t have this
 -- field populated.
-souMetadata :: Lens' Source (Maybe (Maybe SourceMetadata))
+souMetadata :: Lens' Source (Maybe SourceMetadata)
 souMetadata
   = lens _souMetadata (\ s a -> s{_souMetadata = a})
 
@@ -4336,10 +4336,10 @@ instance ToJSON Source where
 --
 -- /See:/ 'sourceFork' smart constructor.
 data SourceFork = SourceFork
-    { _sfResidual       :: !(Maybe (Maybe SourceSplitShard))
-    , _sfPrimarySource  :: !(Maybe (Maybe DerivedSource))
-    , _sfPrimary        :: !(Maybe (Maybe SourceSplitShard))
-    , _sfResidualSource :: !(Maybe (Maybe DerivedSource))
+    { _sfResidual       :: !(Maybe SourceSplitShard)
+    , _sfPrimarySource  :: !(Maybe DerivedSource)
+    , _sfPrimary        :: !(Maybe SourceSplitShard)
+    , _sfResidualSource :: !(Maybe DerivedSource)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SourceFork' with the minimum fields required to make a request.
@@ -4364,23 +4364,23 @@ sourceFork =
     }
 
 -- | DEPRECATED
-sfResidual :: Lens' SourceFork (Maybe (Maybe SourceSplitShard))
+sfResidual :: Lens' SourceFork (Maybe SourceSplitShard)
 sfResidual
   = lens _sfResidual (\ s a -> s{_sfResidual = a})
 
 -- | DEPRECATED
-sfPrimarySource :: Lens' SourceFork (Maybe (Maybe DerivedSource))
+sfPrimarySource :: Lens' SourceFork (Maybe DerivedSource)
 sfPrimarySource
   = lens _sfPrimarySource
       (\ s a -> s{_sfPrimarySource = a})
 
 -- | DEPRECATED
-sfPrimary :: Lens' SourceFork (Maybe (Maybe SourceSplitShard))
+sfPrimary :: Lens' SourceFork (Maybe SourceSplitShard)
 sfPrimary
   = lens _sfPrimary (\ s a -> s{_sfPrimary = a})
 
 -- | DEPRECATED
-sfResidualSource :: Lens' SourceFork (Maybe (Maybe DerivedSource))
+sfResidualSource :: Lens' SourceFork (Maybe DerivedSource)
 sfResidualSource
   = lens _sfResidualSource
       (\ s a -> s{_sfResidualSource = a})
@@ -4495,7 +4495,7 @@ instance ToJSON KeyRangeLocation where
 --
 -- /See:/ 'reportWorkItemStatusResponse' smart constructor.
 newtype ReportWorkItemStatusResponse = ReportWorkItemStatusResponse
-    { _rwisrWorkItemServiceStates :: Maybe [Maybe WorkItemServiceState]
+    { _rwisrWorkItemServiceStates :: Maybe [WorkItemServiceState]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportWorkItemStatusResponse' with the minimum fields required to make a request.
@@ -4514,7 +4514,7 @@ reportWorkItemStatusResponse =
 -- whose status was reported, in the same order as the WorkItemStatus
 -- messages in the ReportWorkItemStatusRequest which resulting in this
 -- response.
-rwisrWorkItemServiceStates :: Lens' ReportWorkItemStatusResponse [Maybe WorkItemServiceState]
+rwisrWorkItemServiceStates :: Lens' ReportWorkItemStatusResponse [WorkItemServiceState]
 rwisrWorkItemServiceStates
   = lens _rwisrWorkItemServiceStates
       (\ s a -> s{_rwisrWorkItemServiceStates = a})
@@ -4541,7 +4541,7 @@ instance ToJSON ReportWorkItemStatusResponse where
 data ApproximateProgress = ApproximateProgress
     { _apRemainingTime   :: !(Maybe Text)
     , _apPercentComplete :: !(Maybe Float)
-    , _apPosition        :: !(Maybe (Maybe Position))
+    , _apPosition        :: !(Maybe Position)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ApproximateProgress' with the minimum fields required to make a request.
@@ -4576,7 +4576,7 @@ apPercentComplete
       (\ s a -> s{_apPercentComplete = a})
 
 -- | A Position within the work to represent a progress.
-apPosition :: Lens' ApproximateProgress (Maybe (Maybe Position))
+apPosition :: Lens' ApproximateProgress (Maybe Position)
 apPosition
   = lens _apPosition (\ s a -> s{_apPosition = a})
 
@@ -4601,7 +4601,7 @@ instance ToJSON ApproximateProgress where
 --
 -- /See:/ 'streamingComputationRanges' smart constructor.
 data StreamingComputationRanges = StreamingComputationRanges
-    { _scrRangeAssignments :: !(Maybe [Maybe KeyRangeDataDiskAssignment])
+    { _scrRangeAssignments :: !(Maybe [KeyRangeDataDiskAssignment])
     , _scrComputationId    :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -4621,7 +4621,7 @@ streamingComputationRanges =
     }
 
 -- | Data disk assignments for ranges from this computation.
-scrRangeAssignments :: Lens' StreamingComputationRanges [Maybe KeyRangeDataDiskAssignment]
+scrRangeAssignments :: Lens' StreamingComputationRanges [KeyRangeDataDiskAssignment]
 scrRangeAssignments
   = lens _scrRangeAssignments
       (\ s a -> s{_scrRangeAssignments = a})
@@ -4655,7 +4655,7 @@ instance ToJSON StreamingComputationRanges where
 -- /See:/ 'listJobsResponse' smart constructor.
 data ListJobsResponse = ListJobsResponse
     { _ljrNextPageToken :: !(Maybe Text)
-    , _ljrJobs          :: !(Maybe [Maybe Job])
+    , _ljrJobs          :: !(Maybe [Job])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListJobsResponse' with the minimum fields required to make a request.
@@ -4680,7 +4680,7 @@ ljrNextPageToken
       (\ s a -> s{_ljrNextPageToken = a})
 
 -- | A subset of the requested job information.
-ljrJobs :: Lens' ListJobsResponse [Maybe Job]
+ljrJobs :: Lens' ListJobsResponse [Job]
 ljrJobs
   = lens _ljrJobs (\ s a -> s{_ljrJobs = a}) . _Default
       . _Coerce
@@ -4739,7 +4739,7 @@ instance ToJSON MultiOutputInfo where
 -- /See:/ 'partialGroupByKeyInstruction' smart constructor.
 data PartialGroupByKeyInstruction = PartialGroupByKeyInstruction
     { _pgbkiValueCombiningFn  :: !(Maybe PartialGroupByKeyInstructionValueCombiningFn)
-    , _pgbkiInput             :: !(Maybe (Maybe InstructionInput))
+    , _pgbkiInput             :: !(Maybe InstructionInput)
     , _pgbkiInputElementCodec :: !(Maybe PartialGroupByKeyInstructionInputElementCodec)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -4768,7 +4768,7 @@ pgbkiValueCombiningFn
       (\ s a -> s{_pgbkiValueCombiningFn = a})
 
 -- | Describes the input to the partial group-by-key instruction.
-pgbkiInput :: Lens' PartialGroupByKeyInstruction (Maybe (Maybe InstructionInput))
+pgbkiInput :: Lens' PartialGroupByKeyInstruction (Maybe InstructionInput)
 pgbkiInput
   = lens _pgbkiInput (\ s a -> s{_pgbkiInput = a})
 
@@ -4802,9 +4802,9 @@ instance ToJSON PartialGroupByKeyInstruction where
 -- /See:/ 'parDoInstruction' smart constructor.
 data ParDoInstruction = ParDoInstruction
     { _pdiNumOutputs       :: !(Maybe Int32)
-    , _pdiMultiOutputInfos :: !(Maybe [Maybe MultiOutputInfo])
-    , _pdiSideInputs       :: !(Maybe [Maybe SideInputInfo])
-    , _pdiInput            :: !(Maybe (Maybe InstructionInput))
+    , _pdiMultiOutputInfos :: !(Maybe [MultiOutputInfo])
+    , _pdiSideInputs       :: !(Maybe [SideInputInfo])
+    , _pdiInput            :: !(Maybe InstructionInput)
     , _pdiUserFn           :: !(Maybe ParDoInstructionUserFn)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -4839,7 +4839,7 @@ pdiNumOutputs
       (\ s a -> s{_pdiNumOutputs = a})
 
 -- | Information about each of the outputs, if user_fn is a MultiDoFn.
-pdiMultiOutputInfos :: Lens' ParDoInstruction [Maybe MultiOutputInfo]
+pdiMultiOutputInfos :: Lens' ParDoInstruction [MultiOutputInfo]
 pdiMultiOutputInfos
   = lens _pdiMultiOutputInfos
       (\ s a -> s{_pdiMultiOutputInfos = a})
@@ -4847,7 +4847,7 @@ pdiMultiOutputInfos
       . _Coerce
 
 -- | Zero or more side inputs.
-pdiSideInputs :: Lens' ParDoInstruction [Maybe SideInputInfo]
+pdiSideInputs :: Lens' ParDoInstruction [SideInputInfo]
 pdiSideInputs
   = lens _pdiSideInputs
       (\ s a -> s{_pdiSideInputs = a})
@@ -4855,7 +4855,7 @@ pdiSideInputs
       . _Coerce
 
 -- | The input.
-pdiInput :: Lens' ParDoInstruction (Maybe (Maybe InstructionInput))
+pdiInput :: Lens' ParDoInstruction (Maybe InstructionInput)
 pdiInput = lens _pdiInput (\ s a -> s{_pdiInput = a})
 
 -- | The user function to invoke.
@@ -4890,7 +4890,7 @@ instance ToJSON ParDoInstruction where
 data SideInputInfo = SideInputInfo
     { _siiTag     :: !(Maybe Text)
     , _siiKind    :: !(Maybe SideInputInfoKind)
-    , _siiSources :: !(Maybe [Maybe Source])
+    , _siiSources :: !(Maybe [Source])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SideInputInfo' with the minimum fields required to make a request.
@@ -4924,7 +4924,7 @@ siiKind = lens _siiKind (\ s a -> s{_siiKind = a})
 -- input. If more than one source, then the elements are taken from the
 -- sources, in the specified order if order matters. At least one source is
 -- required.
-siiSources :: Lens' SideInputInfo [Maybe Source]
+siiSources :: Lens' SideInputInfo [Source]
 siiSources
   = lens _siiSources (\ s a -> s{_siiSources = a}) .
       _Default
@@ -4997,14 +4997,14 @@ instance ToJSON StateFamilyConfig where
 --
 -- /See:/ 'parallelInstruction' smart constructor.
 data ParallelInstruction = ParallelInstruction
-    { _piRead              :: !(Maybe (Maybe ReadInstruction))
-    , _piWrite             :: !(Maybe (Maybe WriteInstruction))
-    , _piParDo             :: !(Maybe (Maybe ParDoInstruction))
-    , _piPartialGroupByKey :: !(Maybe (Maybe PartialGroupByKeyInstruction))
-    , _piOutputs           :: !(Maybe [Maybe InstructionOutput])
+    { _piRead              :: !(Maybe ReadInstruction)
+    , _piWrite             :: !(Maybe WriteInstruction)
+    , _piParDo             :: !(Maybe ParDoInstruction)
+    , _piPartialGroupByKey :: !(Maybe PartialGroupByKeyInstruction)
+    , _piOutputs           :: !(Maybe [InstructionOutput])
     , _piName              :: !(Maybe Text)
     , _piSystemName        :: !(Maybe Text)
-    , _piFlatten           :: !(Maybe (Maybe FlattenInstruction))
+    , _piFlatten           :: !(Maybe FlattenInstruction)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ParallelInstruction' with the minimum fields required to make a request.
@@ -5041,25 +5041,25 @@ parallelInstruction =
     }
 
 -- | Additional information for Read instructions.
-piRead :: Lens' ParallelInstruction (Maybe (Maybe ReadInstruction))
+piRead :: Lens' ParallelInstruction (Maybe ReadInstruction)
 piRead = lens _piRead (\ s a -> s{_piRead = a})
 
 -- | Additional information for Write instructions.
-piWrite :: Lens' ParallelInstruction (Maybe (Maybe WriteInstruction))
+piWrite :: Lens' ParallelInstruction (Maybe WriteInstruction)
 piWrite = lens _piWrite (\ s a -> s{_piWrite = a})
 
 -- | Additional information for ParDo instructions.
-piParDo :: Lens' ParallelInstruction (Maybe (Maybe ParDoInstruction))
+piParDo :: Lens' ParallelInstruction (Maybe ParDoInstruction)
 piParDo = lens _piParDo (\ s a -> s{_piParDo = a})
 
 -- | Additional information for PartialGroupByKey instructions.
-piPartialGroupByKey :: Lens' ParallelInstruction (Maybe (Maybe PartialGroupByKeyInstruction))
+piPartialGroupByKey :: Lens' ParallelInstruction (Maybe PartialGroupByKeyInstruction)
 piPartialGroupByKey
   = lens _piPartialGroupByKey
       (\ s a -> s{_piPartialGroupByKey = a})
 
 -- | Describes the outputs of the instruction.
-piOutputs :: Lens' ParallelInstruction [Maybe InstructionOutput]
+piOutputs :: Lens' ParallelInstruction [InstructionOutput]
 piOutputs
   = lens _piOutputs (\ s a -> s{_piOutputs = a}) .
       _Default
@@ -5075,7 +5075,7 @@ piSystemName
   = lens _piSystemName (\ s a -> s{_piSystemName = a})
 
 -- | Additional information for Flatten instructions.
-piFlatten :: Lens' ParallelInstruction (Maybe (Maybe FlattenInstruction))
+piFlatten :: Lens' ParallelInstruction (Maybe FlattenInstruction)
 piFlatten
   = lens _piFlatten (\ s a -> s{_piFlatten = a})
 
@@ -5109,7 +5109,7 @@ instance ToJSON ParallelInstruction where
 -- /See:/ 'sourceSplitShard' smart constructor.
 data SourceSplitShard = SourceSplitShard
     { _sssDerivationMode :: !(Maybe Text)
-    , _sssSource         :: !(Maybe (Maybe Source))
+    , _sssSource         :: !(Maybe Source)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SourceSplitShard' with the minimum fields required to make a request.
@@ -5134,7 +5134,7 @@ sssDerivationMode
       (\ s a -> s{_sssDerivationMode = a})
 
 -- | DEPRECATED
-sssSource :: Lens' SourceSplitShard (Maybe (Maybe Source))
+sssSource :: Lens' SourceSplitShard (Maybe Source)
 sssSource
   = lens _sssSource (\ s a -> s{_sssSource = a})
 
@@ -5265,9 +5265,9 @@ instance ToJSON SideInputInfoKind where
 --
 -- /See:/ 'seqMapTask' smart constructor.
 data SeqMapTask = SeqMapTask
-    { _smtInputs      :: !(Maybe [Maybe SideInputInfo])
+    { _smtInputs      :: !(Maybe [SideInputInfo])
     , _smtName        :: !(Maybe Text)
-    , _smtOutputInfos :: !(Maybe [Maybe SeqMapTaskOutputInfo])
+    , _smtOutputInfos :: !(Maybe [SeqMapTaskOutputInfo])
     , _smtSystemName  :: !(Maybe Text)
     , _smtStageName   :: !(Maybe Text)
     , _smtUserFn      :: !(Maybe SeqMapTaskUserFn)
@@ -5301,7 +5301,7 @@ seqMapTask =
     }
 
 -- | Information about each of the inputs.
-smtInputs :: Lens' SeqMapTask [Maybe SideInputInfo]
+smtInputs :: Lens' SeqMapTask [SideInputInfo]
 smtInputs
   = lens _smtInputs (\ s a -> s{_smtInputs = a}) .
       _Default
@@ -5312,7 +5312,7 @@ smtName :: Lens' SeqMapTask (Maybe Text)
 smtName = lens _smtName (\ s a -> s{_smtName = a})
 
 -- | Information about each of the outputs.
-smtOutputInfos :: Lens' SeqMapTask [Maybe SeqMapTaskOutputInfo]
+smtOutputInfos :: Lens' SeqMapTask [SeqMapTaskOutputInfo]
 smtOutputInfos
   = lens _smtOutputInfos
       (\ s a -> s{_smtOutputInfos = a})
@@ -5362,7 +5362,7 @@ instance ToJSON SeqMapTask where
 --
 -- /See:/ 'listJobMessagesResponse' smart constructor.
 data ListJobMessagesResponse = ListJobMessagesResponse
-    { _ljmrJobMessages   :: !(Maybe [Maybe JobMessage])
+    { _ljmrJobMessages   :: !(Maybe [JobMessage])
     , _ljmrNextPageToken :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -5382,7 +5382,7 @@ listJobMessagesResponse =
     }
 
 -- | Messages in ascending timestamp order.
-ljmrJobMessages :: Lens' ListJobMessagesResponse [Maybe JobMessage]
+ljmrJobMessages :: Lens' ListJobMessagesResponse [JobMessage]
 ljmrJobMessages
   = lens _ljmrJobMessages
       (\ s a -> s{_ljmrJobMessages = a})
@@ -5661,8 +5661,8 @@ instance ToJSON InstructionInput where
 --
 -- /See:/ 'sourceSplitRequest' smart constructor.
 data SourceSplitRequest = SourceSplitRequest
-    { _ssrSource  :: !(Maybe (Maybe Source))
-    , _ssrOptions :: !(Maybe (Maybe SourceSplitOptions))
+    { _ssrSource  :: !(Maybe Source)
+    , _ssrOptions :: !(Maybe SourceSplitOptions)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SourceSplitRequest' with the minimum fields required to make a request.
@@ -5681,12 +5681,12 @@ sourceSplitRequest =
     }
 
 -- | Specification of the source to be split.
-ssrSource :: Lens' SourceSplitRequest (Maybe (Maybe Source))
+ssrSource :: Lens' SourceSplitRequest (Maybe Source)
 ssrSource
   = lens _ssrSource (\ s a -> s{_ssrSource = a})
 
 -- | Hints for tuning the splitting process.
-ssrOptions :: Lens' SourceSplitRequest (Maybe (Maybe SourceSplitOptions))
+ssrOptions :: Lens' SourceSplitRequest (Maybe SourceSplitOptions)
 ssrOptions
   = lens _ssrOptions (\ s a -> s{_ssrOptions = a})
 
@@ -5709,8 +5709,8 @@ instance ToJSON SourceSplitRequest where
 --
 -- /See:/ 'sourceOperationRequest' smart constructor.
 data SourceOperationRequest = SourceOperationRequest
-    { _sSplit       :: !(Maybe (Maybe SourceSplitRequest))
-    , _sGetMetadata :: !(Maybe (Maybe SourceGetMetadataRequest))
+    { _sSplit       :: !(Maybe SourceSplitRequest)
+    , _sGetMetadata :: !(Maybe SourceGetMetadataRequest)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SourceOperationRequest' with the minimum fields required to make a request.
@@ -5729,11 +5729,11 @@ sourceOperationRequest =
     }
 
 -- | Information about a request to split a source.
-sSplit :: Lens' SourceOperationRequest (Maybe (Maybe SourceSplitRequest))
+sSplit :: Lens' SourceOperationRequest (Maybe SourceSplitRequest)
 sSplit = lens _sSplit (\ s a -> s{_sSplit = a})
 
 -- | Information about a request to get metadata about a source.
-sGetMetadata :: Lens' SourceOperationRequest (Maybe (Maybe SourceGetMetadataRequest))
+sGetMetadata :: Lens' SourceOperationRequest (Maybe SourceGetMetadataRequest)
 sGetMetadata
   = lens _sGetMetadata (\ s a -> s{_sGetMetadata = a})
 
@@ -5755,7 +5755,7 @@ instance ToJSON SourceOperationRequest where
 --
 -- /See:/ 'leaseWorkItemResponse' smart constructor.
 newtype LeaseWorkItemResponse = LeaseWorkItemResponse
-    { _lwirWorkItems :: Maybe [Maybe WorkItem]
+    { _lwirWorkItems :: Maybe [WorkItem]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LeaseWorkItemResponse' with the minimum fields required to make a request.
@@ -5771,7 +5771,7 @@ leaseWorkItemResponse =
     }
 
 -- | A list of the leased WorkItems.
-lwirWorkItems :: Lens' LeaseWorkItemResponse [Maybe WorkItem]
+lwirWorkItems :: Lens' LeaseWorkItemResponse [WorkItem]
 lwirWorkItems
   = lens _lwirWorkItems
       (\ s a -> s{_lwirWorkItems = a})
@@ -5797,7 +5797,7 @@ instance ToJSON LeaseWorkItemResponse where
 -- /See:/ 'position' smart constructor.
 data Position = Position
     { _pByteOffset      :: !(Maybe Int64)
-    , _pConcatPosition  :: !(Maybe (Maybe ConcatPosition))
+    , _pConcatPosition  :: !(Maybe ConcatPosition)
     , _pRecordIndex     :: !(Maybe Int64)
     , _pShufflePosition :: !(Maybe Text)
     , _pKey             :: !(Maybe Text)
@@ -5837,7 +5837,7 @@ pByteOffset
   = lens _pByteOffset (\ s a -> s{_pByteOffset = a})
 
 -- | CloudPosition is a concat position.
-pConcatPosition :: Lens' Position (Maybe (Maybe ConcatPosition))
+pConcatPosition :: Lens' Position (Maybe ConcatPosition)
 pConcatPosition
   = lens _pConcatPosition
       (\ s a -> s{_pConcatPosition = a})

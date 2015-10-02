@@ -32,13 +32,12 @@ module Network.Google.Resource.Blogger.Pages.Publish
     -- * Request Lenses
     , pppQuotaUser
     , pppPrettyPrint
-    , pppUserIp
+    , pppUserIP
     , pppBlogId
     , pppPageId
     , pppKey
-    , pppOauthToken
+    , pppOAuthToken
     , pppFields
-    , pppAlt
     ) where
 
 import           Network.Google.Blogger.Types
@@ -55,10 +54,10 @@ type PagesPublishResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Post '[JSON] Page
+                           QueryParam "alt" AltJSON :> Post '[JSON] Page
 
 -- | Publishes a draft page.
 --
@@ -66,13 +65,12 @@ type PagesPublishResource =
 data PagesPublish' = PagesPublish'
     { _pppQuotaUser   :: !(Maybe Text)
     , _pppPrettyPrint :: !Bool
-    , _pppUserIp      :: !(Maybe Text)
+    , _pppUserIP      :: !(Maybe Text)
     , _pppBlogId      :: !Text
     , _pppPageId      :: !Text
-    , _pppKey         :: !(Maybe Text)
-    , _pppOauthToken  :: !(Maybe Text)
+    , _pppKey         :: !(Maybe Key)
+    , _pppOAuthToken  :: !(Maybe OAuthToken)
     , _pppFields      :: !(Maybe Text)
-    , _pppAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PagesPublish'' with the minimum fields required to make a request.
@@ -83,7 +81,7 @@ data PagesPublish' = PagesPublish'
 --
 -- * 'pppPrettyPrint'
 --
--- * 'pppUserIp'
+-- * 'pppUserIP'
 --
 -- * 'pppBlogId'
 --
@@ -91,11 +89,9 @@ data PagesPublish' = PagesPublish'
 --
 -- * 'pppKey'
 --
--- * 'pppOauthToken'
+-- * 'pppOAuthToken'
 --
 -- * 'pppFields'
---
--- * 'pppAlt'
 pagesPublish'
     :: Text -- ^ 'blogId'
     -> Text -- ^ 'pageId'
@@ -104,13 +100,12 @@ pagesPublish' pPppBlogId_ pPppPageId_ =
     PagesPublish'
     { _pppQuotaUser = Nothing
     , _pppPrettyPrint = True
-    , _pppUserIp = Nothing
+    , _pppUserIP = Nothing
     , _pppBlogId = pPppBlogId_
     , _pppPageId = pPppPageId_
     , _pppKey = Nothing
-    , _pppOauthToken = Nothing
+    , _pppOAuthToken = Nothing
     , _pppFields = Nothing
-    , _pppAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -128,9 +123,9 @@ pppPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-pppUserIp :: Lens' PagesPublish' (Maybe Text)
-pppUserIp
-  = lens _pppUserIp (\ s a -> s{_pppUserIp = a})
+pppUserIP :: Lens' PagesPublish' (Maybe Text)
+pppUserIP
+  = lens _pppUserIP (\ s a -> s{_pppUserIP = a})
 
 -- | The ID of the blog.
 pppBlogId :: Lens' PagesPublish' Text
@@ -145,35 +140,35 @@ pppPageId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pppKey :: Lens' PagesPublish' (Maybe Text)
+pppKey :: Lens' PagesPublish' (Maybe Key)
 pppKey = lens _pppKey (\ s a -> s{_pppKey = a})
 
 -- | OAuth 2.0 token for the current user.
-pppOauthToken :: Lens' PagesPublish' (Maybe Text)
-pppOauthToken
-  = lens _pppOauthToken
-      (\ s a -> s{_pppOauthToken = a})
+pppOAuthToken :: Lens' PagesPublish' (Maybe OAuthToken)
+pppOAuthToken
+  = lens _pppOAuthToken
+      (\ s a -> s{_pppOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 pppFields :: Lens' PagesPublish' (Maybe Text)
 pppFields
   = lens _pppFields (\ s a -> s{_pppFields = a})
 
--- | Data format for the response.
-pppAlt :: Lens' PagesPublish' Alt
-pppAlt = lens _pppAlt (\ s a -> s{_pppAlt = a})
+instance GoogleAuth PagesPublish' where
+        authKey = pppKey . _Just
+        authToken = pppOAuthToken . _Just
 
 instance GoogleRequest PagesPublish' where
         type Rs PagesPublish' = Page
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PagesPublish'{..}
-          = go _pppQuotaUser (Just _pppPrettyPrint) _pppUserIp
+          = go _pppQuotaUser (Just _pppPrettyPrint) _pppUserIP
               _pppBlogId
               _pppPageId
               _pppKey
-              _pppOauthToken
+              _pppOAuthToken
               _pppFields
-              (Just _pppAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PagesPublishResource)

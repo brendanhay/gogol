@@ -34,15 +34,14 @@ module Network.Google.Resource.Games.Achievements.List
     , alQuotaUser
     , alPrettyPrint
     , alState
-    , alUserIp
+    , alUserIP
     , alKey
     , alLanguage
     , alPageToken
-    , alOauthToken
+    , alOAuthToken
     , alPlayerId
     , alMaxResults
     , alFields
-    , alAlt
     ) where
 
 import           Network.Google.Games.Types
@@ -58,13 +57,13 @@ type AchievementsListResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "state" GamesAchievementsListState :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "language" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "maxResults" Int32 :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :>
+                               QueryParam "alt" AltJSON :>
                                  Get '[JSON] PlayerAchievementListResponse
 
 -- | Lists the progress for all your application\'s achievements for the
@@ -75,15 +74,14 @@ data AchievementsList' = AchievementsList'
     { _alQuotaUser   :: !(Maybe Text)
     , _alPrettyPrint :: !Bool
     , _alState       :: !(Maybe GamesAchievementsListState)
-    , _alUserIp      :: !(Maybe Text)
-    , _alKey         :: !(Maybe Text)
+    , _alUserIP      :: !(Maybe Text)
+    , _alKey         :: !(Maybe Key)
     , _alLanguage    :: !(Maybe Text)
     , _alPageToken   :: !(Maybe Text)
-    , _alOauthToken  :: !(Maybe Text)
+    , _alOAuthToken  :: !(Maybe OAuthToken)
     , _alPlayerId    :: !Text
     , _alMaxResults  :: !(Maybe Int32)
     , _alFields      :: !(Maybe Text)
-    , _alAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementsList'' with the minimum fields required to make a request.
@@ -96,7 +94,7 @@ data AchievementsList' = AchievementsList'
 --
 -- * 'alState'
 --
--- * 'alUserIp'
+-- * 'alUserIP'
 --
 -- * 'alKey'
 --
@@ -104,15 +102,13 @@ data AchievementsList' = AchievementsList'
 --
 -- * 'alPageToken'
 --
--- * 'alOauthToken'
+-- * 'alOAuthToken'
 --
 -- * 'alPlayerId'
 --
 -- * 'alMaxResults'
 --
 -- * 'alFields'
---
--- * 'alAlt'
 achievementsList'
     :: Text -- ^ 'playerId'
     -> AchievementsList'
@@ -121,15 +117,14 @@ achievementsList' pAlPlayerId_ =
     { _alQuotaUser = Nothing
     , _alPrettyPrint = True
     , _alState = Nothing
-    , _alUserIp = Nothing
+    , _alUserIP = Nothing
     , _alKey = Nothing
     , _alLanguage = Nothing
     , _alPageToken = Nothing
-    , _alOauthToken = Nothing
+    , _alOAuthToken = Nothing
     , _alPlayerId = pAlPlayerId_
     , _alMaxResults = Nothing
     , _alFields = Nothing
-    , _alAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,13 +147,13 @@ alState = lens _alState (\ s a -> s{_alState = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-alUserIp :: Lens' AchievementsList' (Maybe Text)
-alUserIp = lens _alUserIp (\ s a -> s{_alUserIp = a})
+alUserIP :: Lens' AchievementsList' (Maybe Text)
+alUserIP = lens _alUserIP (\ s a -> s{_alUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-alKey :: Lens' AchievementsList' (Maybe Text)
+alKey :: Lens' AchievementsList' (Maybe Key)
 alKey = lens _alKey (\ s a -> s{_alKey = a})
 
 -- | The preferred language to use for strings returned by this method.
@@ -172,9 +167,9 @@ alPageToken
   = lens _alPageToken (\ s a -> s{_alPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-alOauthToken :: Lens' AchievementsList' (Maybe Text)
-alOauthToken
-  = lens _alOauthToken (\ s a -> s{_alOauthToken = a})
+alOAuthToken :: Lens' AchievementsList' (Maybe OAuthToken)
+alOAuthToken
+  = lens _alOAuthToken (\ s a -> s{_alOAuthToken = a})
 
 -- | A player ID. A value of me may be used in place of the authenticated
 -- player\'s ID.
@@ -193,9 +188,9 @@ alMaxResults
 alFields :: Lens' AchievementsList' (Maybe Text)
 alFields = lens _alFields (\ s a -> s{_alFields = a})
 
--- | Data format for the response.
-alAlt :: Lens' AchievementsList' Alt
-alAlt = lens _alAlt (\ s a -> s{_alAlt = a})
+instance GoogleAuth AchievementsList' where
+        authKey = alKey . _Just
+        authToken = alOAuthToken . _Just
 
 instance GoogleRequest AchievementsList' where
         type Rs AchievementsList' =
@@ -203,15 +198,15 @@ instance GoogleRequest AchievementsList' where
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u AchievementsList'{..}
           = go _alQuotaUser (Just _alPrettyPrint) _alState
-              _alUserIp
+              _alUserIP
               _alKey
               _alLanguage
               _alPageToken
-              _alOauthToken
+              _alOAuthToken
               _alPlayerId
               _alMaxResults
               _alFields
-              (Just _alAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AchievementsListResource)

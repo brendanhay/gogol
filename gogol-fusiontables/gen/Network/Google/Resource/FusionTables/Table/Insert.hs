@@ -32,11 +32,11 @@ module Network.Google.Resource.FusionTables.Table.Insert
     -- * Request Lenses
     , tiiQuotaUser
     , tiiPrettyPrint
-    , tiiUserIp
+    , tiiUserIP
     , tiiKey
-    , tiiOauthToken
+    , tiiOAuthToken
+    , tiiTable
     , tiiFields
-    , tiiAlt
     ) where
 
 import           Network.Google.FusionTables.Types
@@ -49,10 +49,11 @@ type TableInsertResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
-               QueryParam "oauth_token" Text :>
+             QueryParam "key" Key :>
+               QueryParam "oauth_token" OAuthToken :>
                  QueryParam "fields" Text :>
-                   QueryParam "alt" Alt :> Post '[JSON] Table
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Table :> Post '[JSON] Table
 
 -- | Creates a new table.
 --
@@ -60,11 +61,11 @@ type TableInsertResource =
 data TableInsert' = TableInsert'
     { _tiiQuotaUser   :: !(Maybe Text)
     , _tiiPrettyPrint :: !Bool
-    , _tiiUserIp      :: !(Maybe Text)
-    , _tiiKey         :: !(Maybe Text)
-    , _tiiOauthToken  :: !(Maybe Text)
+    , _tiiUserIP      :: !(Maybe Text)
+    , _tiiKey         :: !(Maybe Key)
+    , _tiiOAuthToken  :: !(Maybe OAuthToken)
+    , _tiiTable       :: !Table
     , _tiiFields      :: !(Maybe Text)
-    , _tiiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableInsert'' with the minimum fields required to make a request.
@@ -75,26 +76,27 @@ data TableInsert' = TableInsert'
 --
 -- * 'tiiPrettyPrint'
 --
--- * 'tiiUserIp'
+-- * 'tiiUserIP'
 --
 -- * 'tiiKey'
 --
--- * 'tiiOauthToken'
+-- * 'tiiOAuthToken'
+--
+-- * 'tiiTable'
 --
 -- * 'tiiFields'
---
--- * 'tiiAlt'
 tableInsert'
-    :: TableInsert'
-tableInsert' =
+    :: Table -- ^ 'Table'
+    -> TableInsert'
+tableInsert' pTiiTable_ =
     TableInsert'
     { _tiiQuotaUser = Nothing
     , _tiiPrettyPrint = True
-    , _tiiUserIp = Nothing
+    , _tiiUserIP = Nothing
     , _tiiKey = Nothing
-    , _tiiOauthToken = Nothing
+    , _tiiOAuthToken = Nothing
+    , _tiiTable = pTiiTable_
     , _tiiFields = Nothing
-    , _tiiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -112,40 +114,45 @@ tiiPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tiiUserIp :: Lens' TableInsert' (Maybe Text)
-tiiUserIp
-  = lens _tiiUserIp (\ s a -> s{_tiiUserIp = a})
+tiiUserIP :: Lens' TableInsert' (Maybe Text)
+tiiUserIP
+  = lens _tiiUserIP (\ s a -> s{_tiiUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tiiKey :: Lens' TableInsert' (Maybe Text)
+tiiKey :: Lens' TableInsert' (Maybe Key)
 tiiKey = lens _tiiKey (\ s a -> s{_tiiKey = a})
 
 -- | OAuth 2.0 token for the current user.
-tiiOauthToken :: Lens' TableInsert' (Maybe Text)
-tiiOauthToken
-  = lens _tiiOauthToken
-      (\ s a -> s{_tiiOauthToken = a})
+tiiOAuthToken :: Lens' TableInsert' (Maybe OAuthToken)
+tiiOAuthToken
+  = lens _tiiOAuthToken
+      (\ s a -> s{_tiiOAuthToken = a})
+
+-- | Multipart request metadata.
+tiiTable :: Lens' TableInsert' Table
+tiiTable = lens _tiiTable (\ s a -> s{_tiiTable = a})
 
 -- | Selector specifying which fields to include in a partial response.
 tiiFields :: Lens' TableInsert' (Maybe Text)
 tiiFields
   = lens _tiiFields (\ s a -> s{_tiiFields = a})
 
--- | Data format for the response.
-tiiAlt :: Lens' TableInsert' Alt
-tiiAlt = lens _tiiAlt (\ s a -> s{_tiiAlt = a})
+instance GoogleAuth TableInsert' where
+        authKey = tiiKey . _Just
+        authToken = tiiOAuthToken . _Just
 
 instance GoogleRequest TableInsert' where
         type Rs TableInsert' = Table
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u TableInsert'{..}
-          = go _tiiQuotaUser (Just _tiiPrettyPrint) _tiiUserIp
+          = go _tiiQuotaUser (Just _tiiPrettyPrint) _tiiUserIP
               _tiiKey
-              _tiiOauthToken
+              _tiiOAuthToken
               _tiiFields
-              (Just _tiiAlt)
+              (Just AltJSON)
+              _tiiTable
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TableInsertResource)

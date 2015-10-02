@@ -33,12 +33,11 @@ module Network.Google.Resource.Calendar.ACL.Get
     , agQuotaUser
     , agCalendarId
     , agPrettyPrint
-    , agUserIp
+    , agUserIP
     , agRuleId
     , agKey
-    , agOauthToken
+    , agOAuthToken
     , agFields
-    , agAlt
     ) where
 
 import           Network.Google.AppsCalendar.Types
@@ -54,10 +53,10 @@ type AclGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] ACLRule
+                         QueryParam "alt" AltJSON :> Get '[JSON] ACLRule
 
 -- | Returns an access control rule.
 --
@@ -66,12 +65,11 @@ data ACLGet' = ACLGet'
     { _agQuotaUser   :: !(Maybe Text)
     , _agCalendarId  :: !Text
     , _agPrettyPrint :: !Bool
-    , _agUserIp      :: !(Maybe Text)
+    , _agUserIP      :: !(Maybe Text)
     , _agRuleId      :: !Text
-    , _agKey         :: !(Maybe Text)
-    , _agOauthToken  :: !(Maybe Text)
+    , _agKey         :: !(Maybe Key)
+    , _agOAuthToken  :: !(Maybe OAuthToken)
     , _agFields      :: !(Maybe Text)
-    , _agAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ACLGet'' with the minimum fields required to make a request.
@@ -84,17 +82,15 @@ data ACLGet' = ACLGet'
 --
 -- * 'agPrettyPrint'
 --
--- * 'agUserIp'
+-- * 'agUserIP'
 --
 -- * 'agRuleId'
 --
 -- * 'agKey'
 --
--- * 'agOauthToken'
+-- * 'agOAuthToken'
 --
 -- * 'agFields'
---
--- * 'agAlt'
 aCLGet'
     :: Text -- ^ 'calendarId'
     -> Text -- ^ 'ruleId'
@@ -104,12 +100,11 @@ aCLGet' pAgCalendarId_ pAgRuleId_ =
     { _agQuotaUser = Nothing
     , _agCalendarId = pAgCalendarId_
     , _agPrettyPrint = True
-    , _agUserIp = Nothing
+    , _agUserIP = Nothing
     , _agRuleId = pAgRuleId_
     , _agKey = Nothing
-    , _agOauthToken = Nothing
+    , _agOAuthToken = Nothing
     , _agFields = Nothing
-    , _agAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -134,8 +129,8 @@ agPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-agUserIp :: Lens' ACLGet' (Maybe Text)
-agUserIp = lens _agUserIp (\ s a -> s{_agUserIp = a})
+agUserIP :: Lens' ACLGet' (Maybe Text)
+agUserIP = lens _agUserIP (\ s a -> s{_agUserIP = a})
 
 -- | ACL rule identifier.
 agRuleId :: Lens' ACLGet' Text
@@ -144,32 +139,32 @@ agRuleId = lens _agRuleId (\ s a -> s{_agRuleId = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-agKey :: Lens' ACLGet' (Maybe Text)
+agKey :: Lens' ACLGet' (Maybe Key)
 agKey = lens _agKey (\ s a -> s{_agKey = a})
 
 -- | OAuth 2.0 token for the current user.
-agOauthToken :: Lens' ACLGet' (Maybe Text)
-agOauthToken
-  = lens _agOauthToken (\ s a -> s{_agOauthToken = a})
+agOAuthToken :: Lens' ACLGet' (Maybe OAuthToken)
+agOAuthToken
+  = lens _agOAuthToken (\ s a -> s{_agOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 agFields :: Lens' ACLGet' (Maybe Text)
 agFields = lens _agFields (\ s a -> s{_agFields = a})
 
--- | Data format for the response.
-agAlt :: Lens' ACLGet' Alt
-agAlt = lens _agAlt (\ s a -> s{_agAlt = a})
+instance GoogleAuth ACLGet' where
+        authKey = agKey . _Just
+        authToken = agOAuthToken . _Just
 
 instance GoogleRequest ACLGet' where
         type Rs ACLGet' = ACLRule
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u ACLGet'{..}
           = go _agQuotaUser _agCalendarId (Just _agPrettyPrint)
-              _agUserIp
+              _agUserIP
               _agRuleId
               _agKey
-              _agOauthToken
+              _agOAuthToken
               _agFields
-              (Just _agAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy AclGetResource) r u

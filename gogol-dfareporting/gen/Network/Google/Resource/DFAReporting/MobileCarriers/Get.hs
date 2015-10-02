@@ -32,13 +32,12 @@ module Network.Google.Resource.DFAReporting.MobileCarriers.Get
     -- * Request Lenses
     , mcgQuotaUser
     , mcgPrettyPrint
-    , mcgUserIp
+    , mcgUserIP
     , mcgProfileId
     , mcgKey
     , mcgId
-    , mcgOauthToken
+    , mcgOAuthToken
     , mcgFields
-    , mcgAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,10 +53,10 @@ type MobileCarriersGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] MobileCarrier
+                         QueryParam "alt" AltJSON :> Get '[JSON] MobileCarrier
 
 -- | Gets one mobile carrier by ID.
 --
@@ -65,13 +64,12 @@ type MobileCarriersGetResource =
 data MobileCarriersGet' = MobileCarriersGet'
     { _mcgQuotaUser   :: !(Maybe Text)
     , _mcgPrettyPrint :: !Bool
-    , _mcgUserIp      :: !(Maybe Text)
+    , _mcgUserIP      :: !(Maybe Text)
     , _mcgProfileId   :: !Int64
-    , _mcgKey         :: !(Maybe Text)
+    , _mcgKey         :: !(Maybe Key)
     , _mcgId          :: !Int64
-    , _mcgOauthToken  :: !(Maybe Text)
+    , _mcgOAuthToken  :: !(Maybe OAuthToken)
     , _mcgFields      :: !(Maybe Text)
-    , _mcgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MobileCarriersGet'' with the minimum fields required to make a request.
@@ -82,7 +80,7 @@ data MobileCarriersGet' = MobileCarriersGet'
 --
 -- * 'mcgPrettyPrint'
 --
--- * 'mcgUserIp'
+-- * 'mcgUserIP'
 --
 -- * 'mcgProfileId'
 --
@@ -90,11 +88,9 @@ data MobileCarriersGet' = MobileCarriersGet'
 --
 -- * 'mcgId'
 --
--- * 'mcgOauthToken'
+-- * 'mcgOAuthToken'
 --
 -- * 'mcgFields'
---
--- * 'mcgAlt'
 mobileCarriersGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
@@ -103,13 +99,12 @@ mobileCarriersGet' pMcgProfileId_ pMcgId_ =
     MobileCarriersGet'
     { _mcgQuotaUser = Nothing
     , _mcgPrettyPrint = True
-    , _mcgUserIp = Nothing
+    , _mcgUserIP = Nothing
     , _mcgProfileId = pMcgProfileId_
     , _mcgKey = Nothing
     , _mcgId = pMcgId_
-    , _mcgOauthToken = Nothing
+    , _mcgOAuthToken = Nothing
     , _mcgFields = Nothing
-    , _mcgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,9 +122,9 @@ mcgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mcgUserIp :: Lens' MobileCarriersGet' (Maybe Text)
-mcgUserIp
-  = lens _mcgUserIp (\ s a -> s{_mcgUserIp = a})
+mcgUserIP :: Lens' MobileCarriersGet' (Maybe Text)
+mcgUserIP
+  = lens _mcgUserIP (\ s a -> s{_mcgUserIP = a})
 
 -- | User profile ID associated with this request.
 mcgProfileId :: Lens' MobileCarriersGet' Int64
@@ -139,7 +134,7 @@ mcgProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mcgKey :: Lens' MobileCarriersGet' (Maybe Text)
+mcgKey :: Lens' MobileCarriersGet' (Maybe Key)
 mcgKey = lens _mcgKey (\ s a -> s{_mcgKey = a})
 
 -- | Mobile carrier ID.
@@ -147,31 +142,31 @@ mcgId :: Lens' MobileCarriersGet' Int64
 mcgId = lens _mcgId (\ s a -> s{_mcgId = a})
 
 -- | OAuth 2.0 token for the current user.
-mcgOauthToken :: Lens' MobileCarriersGet' (Maybe Text)
-mcgOauthToken
-  = lens _mcgOauthToken
-      (\ s a -> s{_mcgOauthToken = a})
+mcgOAuthToken :: Lens' MobileCarriersGet' (Maybe OAuthToken)
+mcgOAuthToken
+  = lens _mcgOAuthToken
+      (\ s a -> s{_mcgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 mcgFields :: Lens' MobileCarriersGet' (Maybe Text)
 mcgFields
   = lens _mcgFields (\ s a -> s{_mcgFields = a})
 
--- | Data format for the response.
-mcgAlt :: Lens' MobileCarriersGet' Alt
-mcgAlt = lens _mcgAlt (\ s a -> s{_mcgAlt = a})
+instance GoogleAuth MobileCarriersGet' where
+        authKey = mcgKey . _Just
+        authToken = mcgOAuthToken . _Just
 
 instance GoogleRequest MobileCarriersGet' where
         type Rs MobileCarriersGet' = MobileCarrier
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u MobileCarriersGet'{..}
-          = go _mcgQuotaUser (Just _mcgPrettyPrint) _mcgUserIp
+          = go _mcgQuotaUser (Just _mcgPrettyPrint) _mcgUserIP
               _mcgProfileId
               _mcgKey
               _mcgId
-              _mcgOauthToken
+              _mcgOAuthToken
               _mcgFields
-              (Just _mcgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy MobileCarriersGetResource)

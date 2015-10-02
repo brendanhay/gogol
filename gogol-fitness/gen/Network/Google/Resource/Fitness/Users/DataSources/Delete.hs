@@ -32,13 +32,12 @@ module Network.Google.Resource.Fitness.Users.DataSources.Delete
     -- * Request Lenses
     , udsdQuotaUser
     , udsdPrettyPrint
-    , udsdUserIp
+    , udsdUserIP
     , udsdDataSourceId
     , udsdUserId
     , udsdKey
-    , udsdOauthToken
+    , udsdOAuthToken
     , udsdFields
-    , udsdAlt
     ) where
 
 import           Network.Google.Fitness.Types
@@ -53,10 +52,10 @@ type UsersDataSourcesDeleteResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Delete '[JSON] DataSource
+                       QueryParam "alt" AltJSON :> Delete '[JSON] DataSource
 
 -- | Delete the data source if there are no datapoints associated with it
 --
@@ -64,13 +63,12 @@ type UsersDataSourcesDeleteResource =
 data UsersDataSourcesDelete' = UsersDataSourcesDelete'
     { _udsdQuotaUser    :: !(Maybe Text)
     , _udsdPrettyPrint  :: !Bool
-    , _udsdUserIp       :: !(Maybe Text)
+    , _udsdUserIP       :: !(Maybe Text)
     , _udsdDataSourceId :: !Text
     , _udsdUserId       :: !Text
-    , _udsdKey          :: !(Maybe Text)
-    , _udsdOauthToken   :: !(Maybe Text)
+    , _udsdKey          :: !(Maybe Key)
+    , _udsdOAuthToken   :: !(Maybe OAuthToken)
     , _udsdFields       :: !(Maybe Text)
-    , _udsdAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDataSourcesDelete'' with the minimum fields required to make a request.
@@ -81,7 +79,7 @@ data UsersDataSourcesDelete' = UsersDataSourcesDelete'
 --
 -- * 'udsdPrettyPrint'
 --
--- * 'udsdUserIp'
+-- * 'udsdUserIP'
 --
 -- * 'udsdDataSourceId'
 --
@@ -89,11 +87,9 @@ data UsersDataSourcesDelete' = UsersDataSourcesDelete'
 --
 -- * 'udsdKey'
 --
--- * 'udsdOauthToken'
+-- * 'udsdOAuthToken'
 --
 -- * 'udsdFields'
---
--- * 'udsdAlt'
 usersDataSourcesDelete'
     :: Text -- ^ 'dataSourceId'
     -> Text -- ^ 'userId'
@@ -102,13 +98,12 @@ usersDataSourcesDelete' pUdsdDataSourceId_ pUdsdUserId_ =
     UsersDataSourcesDelete'
     { _udsdQuotaUser = Nothing
     , _udsdPrettyPrint = True
-    , _udsdUserIp = Nothing
+    , _udsdUserIP = Nothing
     , _udsdDataSourceId = pUdsdDataSourceId_
     , _udsdUserId = pUdsdUserId_
     , _udsdKey = Nothing
-    , _udsdOauthToken = Nothing
+    , _udsdOAuthToken = Nothing
     , _udsdFields = Nothing
-    , _udsdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,9 +122,9 @@ udsdPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-udsdUserIp :: Lens' UsersDataSourcesDelete' (Maybe Text)
-udsdUserIp
-  = lens _udsdUserIp (\ s a -> s{_udsdUserIp = a})
+udsdUserIP :: Lens' UsersDataSourcesDelete' (Maybe Text)
+udsdUserIP
+  = lens _udsdUserIP (\ s a -> s{_udsdUserIP = a})
 
 -- | The data stream ID of the data source to delete.
 udsdDataSourceId :: Lens' UsersDataSourcesDelete' Text
@@ -146,36 +141,36 @@ udsdUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-udsdKey :: Lens' UsersDataSourcesDelete' (Maybe Text)
+udsdKey :: Lens' UsersDataSourcesDelete' (Maybe Key)
 udsdKey = lens _udsdKey (\ s a -> s{_udsdKey = a})
 
 -- | OAuth 2.0 token for the current user.
-udsdOauthToken :: Lens' UsersDataSourcesDelete' (Maybe Text)
-udsdOauthToken
-  = lens _udsdOauthToken
-      (\ s a -> s{_udsdOauthToken = a})
+udsdOAuthToken :: Lens' UsersDataSourcesDelete' (Maybe OAuthToken)
+udsdOAuthToken
+  = lens _udsdOAuthToken
+      (\ s a -> s{_udsdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 udsdFields :: Lens' UsersDataSourcesDelete' (Maybe Text)
 udsdFields
   = lens _udsdFields (\ s a -> s{_udsdFields = a})
 
--- | Data format for the response.
-udsdAlt :: Lens' UsersDataSourcesDelete' Alt
-udsdAlt = lens _udsdAlt (\ s a -> s{_udsdAlt = a})
+instance GoogleAuth UsersDataSourcesDelete' where
+        authKey = udsdKey . _Just
+        authToken = udsdOAuthToken . _Just
 
 instance GoogleRequest UsersDataSourcesDelete' where
         type Rs UsersDataSourcesDelete' = DataSource
         request = requestWithRoute defReq fitnessURL
         requestWithRoute r u UsersDataSourcesDelete'{..}
           = go _udsdQuotaUser (Just _udsdPrettyPrint)
-              _udsdUserIp
+              _udsdUserIP
               _udsdDataSourceId
               _udsdUserId
               _udsdKey
-              _udsdOauthToken
+              _udsdOAuthToken
               _udsdFields
-              (Just _udsdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersDataSourcesDeleteResource)

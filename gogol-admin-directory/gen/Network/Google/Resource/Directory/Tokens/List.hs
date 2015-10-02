@@ -33,12 +33,11 @@ module Network.Google.Resource.Directory.Tokens.List
     -- * Request Lenses
     , tlQuotaUser
     , tlPrettyPrint
-    , tlUserIp
+    , tlUserIP
     , tlKey
-    , tlOauthToken
+    , tlOAuthToken
     , tlUserKey
     , tlFields
-    , tlAlt
     ) where
 
 import           Network.Google.AdminDirectory.Types
@@ -53,10 +52,10 @@ type TokensListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Get '[JSON] Tokens
+                       QueryParam "alt" AltJSON :> Get '[JSON] Tokens
 
 -- | Returns the set of tokens specified user has issued to 3rd party
 -- applications.
@@ -65,12 +64,11 @@ type TokensListResource =
 data TokensList' = TokensList'
     { _tlQuotaUser   :: !(Maybe Text)
     , _tlPrettyPrint :: !Bool
-    , _tlUserIp      :: !(Maybe Text)
-    , _tlKey         :: !(Maybe Text)
-    , _tlOauthToken  :: !(Maybe Text)
+    , _tlUserIP      :: !(Maybe Text)
+    , _tlKey         :: !(Maybe Key)
+    , _tlOAuthToken  :: !(Maybe OAuthToken)
     , _tlUserKey     :: !Text
     , _tlFields      :: !(Maybe Text)
-    , _tlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TokensList'' with the minimum fields required to make a request.
@@ -81,17 +79,15 @@ data TokensList' = TokensList'
 --
 -- * 'tlPrettyPrint'
 --
--- * 'tlUserIp'
+-- * 'tlUserIP'
 --
 -- * 'tlKey'
 --
--- * 'tlOauthToken'
+-- * 'tlOAuthToken'
 --
 -- * 'tlUserKey'
 --
 -- * 'tlFields'
---
--- * 'tlAlt'
 tokensList'
     :: Text -- ^ 'userKey'
     -> TokensList'
@@ -99,12 +95,11 @@ tokensList' pTlUserKey_ =
     TokensList'
     { _tlQuotaUser = Nothing
     , _tlPrettyPrint = True
-    , _tlUserIp = Nothing
+    , _tlUserIP = Nothing
     , _tlKey = Nothing
-    , _tlOauthToken = Nothing
+    , _tlOAuthToken = Nothing
     , _tlUserKey = pTlUserKey_
     , _tlFields = Nothing
-    , _tlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -122,19 +117,19 @@ tlPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tlUserIp :: Lens' TokensList' (Maybe Text)
-tlUserIp = lens _tlUserIp (\ s a -> s{_tlUserIp = a})
+tlUserIP :: Lens' TokensList' (Maybe Text)
+tlUserIP = lens _tlUserIP (\ s a -> s{_tlUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tlKey :: Lens' TokensList' (Maybe Text)
+tlKey :: Lens' TokensList' (Maybe Key)
 tlKey = lens _tlKey (\ s a -> s{_tlKey = a})
 
 -- | OAuth 2.0 token for the current user.
-tlOauthToken :: Lens' TokensList' (Maybe Text)
-tlOauthToken
-  = lens _tlOauthToken (\ s a -> s{_tlOauthToken = a})
+tlOAuthToken :: Lens' TokensList' (Maybe OAuthToken)
+tlOAuthToken
+  = lens _tlOAuthToken (\ s a -> s{_tlOAuthToken = a})
 
 -- | Identifies the user in the API request. The value can be the user\'s
 -- primary email address, alias email address, or unique user ID.
@@ -146,20 +141,20 @@ tlUserKey
 tlFields :: Lens' TokensList' (Maybe Text)
 tlFields = lens _tlFields (\ s a -> s{_tlFields = a})
 
--- | Data format for the response.
-tlAlt :: Lens' TokensList' Alt
-tlAlt = lens _tlAlt (\ s a -> s{_tlAlt = a})
+instance GoogleAuth TokensList' where
+        authKey = tlKey . _Just
+        authToken = tlOAuthToken . _Just
 
 instance GoogleRequest TokensList' where
         type Rs TokensList' = Tokens
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u TokensList'{..}
-          = go _tlQuotaUser (Just _tlPrettyPrint) _tlUserIp
+          = go _tlQuotaUser (Just _tlPrettyPrint) _tlUserIP
               _tlKey
-              _tlOauthToken
+              _tlOAuthToken
               _tlUserKey
               _tlFields
-              (Just _tlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy TokensListResource)
                       r

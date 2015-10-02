@@ -32,13 +32,12 @@ module Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Delete
     -- * Request Lenses
     , pcdQuotaUser
     , pcdPrettyPrint
-    , pcdUserIp
+    , pcdUserIP
     , pcdAccountId
     , pcdKey
     , pcdConfigId
-    , pcdOauthToken
+    , pcdOAuthToken
     , pcdFields
-    , pcdAlt
     ) where
 
 import           Network.Google.AdExchangeBuyer.Types
@@ -53,10 +52,10 @@ type PretargetingConfigDeleteResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Delete '[JSON] ()
+                       QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an existing pretargeting config.
 --
@@ -64,13 +63,12 @@ type PretargetingConfigDeleteResource =
 data PretargetingConfigDelete' = PretargetingConfigDelete'
     { _pcdQuotaUser   :: !(Maybe Text)
     , _pcdPrettyPrint :: !Bool
-    , _pcdUserIp      :: !(Maybe Text)
+    , _pcdUserIP      :: !(Maybe Text)
     , _pcdAccountId   :: !Int64
-    , _pcdKey         :: !(Maybe Text)
+    , _pcdKey         :: !(Maybe Key)
     , _pcdConfigId    :: !Int64
-    , _pcdOauthToken  :: !(Maybe Text)
+    , _pcdOAuthToken  :: !(Maybe OAuthToken)
     , _pcdFields      :: !(Maybe Text)
-    , _pcdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PretargetingConfigDelete'' with the minimum fields required to make a request.
@@ -81,7 +79,7 @@ data PretargetingConfigDelete' = PretargetingConfigDelete'
 --
 -- * 'pcdPrettyPrint'
 --
--- * 'pcdUserIp'
+-- * 'pcdUserIP'
 --
 -- * 'pcdAccountId'
 --
@@ -89,11 +87,9 @@ data PretargetingConfigDelete' = PretargetingConfigDelete'
 --
 -- * 'pcdConfigId'
 --
--- * 'pcdOauthToken'
+-- * 'pcdOAuthToken'
 --
 -- * 'pcdFields'
---
--- * 'pcdAlt'
 pretargetingConfigDelete'
     :: Int64 -- ^ 'accountId'
     -> Int64 -- ^ 'configId'
@@ -102,13 +98,12 @@ pretargetingConfigDelete' pPcdAccountId_ pPcdConfigId_ =
     PretargetingConfigDelete'
     { _pcdQuotaUser = Nothing
     , _pcdPrettyPrint = True
-    , _pcdUserIp = Nothing
+    , _pcdUserIP = Nothing
     , _pcdAccountId = pPcdAccountId_
     , _pcdKey = Nothing
     , _pcdConfigId = pPcdConfigId_
-    , _pcdOauthToken = Nothing
+    , _pcdOAuthToken = Nothing
     , _pcdFields = Nothing
-    , _pcdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -126,9 +121,9 @@ pcdPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-pcdUserIp :: Lens' PretargetingConfigDelete' (Maybe Text)
-pcdUserIp
-  = lens _pcdUserIp (\ s a -> s{_pcdUserIp = a})
+pcdUserIP :: Lens' PretargetingConfigDelete' (Maybe Text)
+pcdUserIP
+  = lens _pcdUserIP (\ s a -> s{_pcdUserIP = a})
 
 -- | The account id to delete the pretargeting config for.
 pcdAccountId :: Lens' PretargetingConfigDelete' Int64
@@ -138,7 +133,7 @@ pcdAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pcdKey :: Lens' PretargetingConfigDelete' (Maybe Text)
+pcdKey :: Lens' PretargetingConfigDelete' (Maybe Key)
 pcdKey = lens _pcdKey (\ s a -> s{_pcdKey = a})
 
 -- | The specific id of the configuration to delete.
@@ -147,32 +142,32 @@ pcdConfigId
   = lens _pcdConfigId (\ s a -> s{_pcdConfigId = a})
 
 -- | OAuth 2.0 token for the current user.
-pcdOauthToken :: Lens' PretargetingConfigDelete' (Maybe Text)
-pcdOauthToken
-  = lens _pcdOauthToken
-      (\ s a -> s{_pcdOauthToken = a})
+pcdOAuthToken :: Lens' PretargetingConfigDelete' (Maybe OAuthToken)
+pcdOAuthToken
+  = lens _pcdOAuthToken
+      (\ s a -> s{_pcdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 pcdFields :: Lens' PretargetingConfigDelete' (Maybe Text)
 pcdFields
   = lens _pcdFields (\ s a -> s{_pcdFields = a})
 
--- | Data format for the response.
-pcdAlt :: Lens' PretargetingConfigDelete' Alt
-pcdAlt = lens _pcdAlt (\ s a -> s{_pcdAlt = a})
+instance GoogleAuth PretargetingConfigDelete' where
+        authKey = pcdKey . _Just
+        authToken = pcdOAuthToken . _Just
 
 instance GoogleRequest PretargetingConfigDelete'
          where
         type Rs PretargetingConfigDelete' = ()
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u PretargetingConfigDelete'{..}
-          = go _pcdQuotaUser (Just _pcdPrettyPrint) _pcdUserIp
+          = go _pcdQuotaUser (Just _pcdPrettyPrint) _pcdUserIP
               _pcdAccountId
               _pcdKey
               _pcdConfigId
-              _pcdOauthToken
+              _pcdOAuthToken
               _pcdFields
-              (Just _pcdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PretargetingConfigDeleteResource)

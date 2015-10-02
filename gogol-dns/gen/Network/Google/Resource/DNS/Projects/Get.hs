@@ -33,11 +33,10 @@ module Network.Google.Resource.DNS.Projects.Get
     , pgQuotaUser
     , pgPrettyPrint
     , pgProject
-    , pgUserIp
+    , pgUserIP
     , pgKey
-    , pgOauthToken
+    , pgOAuthToken
     , pgFields
-    , pgAlt
     ) where
 
 import           Network.Google.DNS.Types
@@ -50,10 +49,10 @@ type ProjectsGetResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
-               QueryParam "oauth_token" Text :>
+             QueryParam "key" Key :>
+               QueryParam "oauth_token" OAuthToken :>
                  QueryParam "fields" Text :>
-                   QueryParam "alt" Alt :> Get '[JSON] Project
+                   QueryParam "alt" AltJSON :> Get '[JSON] Project
 
 -- | Fetch the representation of an existing Project.
 --
@@ -62,11 +61,10 @@ data ProjectsGet' = ProjectsGet'
     { _pgQuotaUser   :: !(Maybe Text)
     , _pgPrettyPrint :: !Bool
     , _pgProject     :: !Text
-    , _pgUserIp      :: !(Maybe Text)
-    , _pgKey         :: !(Maybe Text)
-    , _pgOauthToken  :: !(Maybe Text)
+    , _pgUserIP      :: !(Maybe Text)
+    , _pgKey         :: !(Maybe Key)
+    , _pgOAuthToken  :: !(Maybe OAuthToken)
     , _pgFields      :: !(Maybe Text)
-    , _pgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsGet'' with the minimum fields required to make a request.
@@ -79,15 +77,13 @@ data ProjectsGet' = ProjectsGet'
 --
 -- * 'pgProject'
 --
--- * 'pgUserIp'
+-- * 'pgUserIP'
 --
 -- * 'pgKey'
 --
--- * 'pgOauthToken'
+-- * 'pgOAuthToken'
 --
 -- * 'pgFields'
---
--- * 'pgAlt'
 projectsGet'
     :: Text -- ^ 'project'
     -> ProjectsGet'
@@ -96,11 +92,10 @@ projectsGet' pPgProject_ =
     { _pgQuotaUser = Nothing
     , _pgPrettyPrint = True
     , _pgProject = pPgProject_
-    , _pgUserIp = Nothing
+    , _pgUserIP = Nothing
     , _pgKey = Nothing
-    , _pgOauthToken = Nothing
+    , _pgOAuthToken = Nothing
     , _pgFields = Nothing
-    , _pgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -123,38 +118,38 @@ pgProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-pgUserIp :: Lens' ProjectsGet' (Maybe Text)
-pgUserIp = lens _pgUserIp (\ s a -> s{_pgUserIp = a})
+pgUserIP :: Lens' ProjectsGet' (Maybe Text)
+pgUserIP = lens _pgUserIP (\ s a -> s{_pgUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pgKey :: Lens' ProjectsGet' (Maybe Text)
+pgKey :: Lens' ProjectsGet' (Maybe Key)
 pgKey = lens _pgKey (\ s a -> s{_pgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-pgOauthToken :: Lens' ProjectsGet' (Maybe Text)
-pgOauthToken
-  = lens _pgOauthToken (\ s a -> s{_pgOauthToken = a})
+pgOAuthToken :: Lens' ProjectsGet' (Maybe OAuthToken)
+pgOAuthToken
+  = lens _pgOAuthToken (\ s a -> s{_pgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 pgFields :: Lens' ProjectsGet' (Maybe Text)
 pgFields = lens _pgFields (\ s a -> s{_pgFields = a})
 
--- | Data format for the response.
-pgAlt :: Lens' ProjectsGet' Alt
-pgAlt = lens _pgAlt (\ s a -> s{_pgAlt = a})
+instance GoogleAuth ProjectsGet' where
+        authKey = pgKey . _Just
+        authToken = pgOAuthToken . _Just
 
 instance GoogleRequest ProjectsGet' where
         type Rs ProjectsGet' = Project
         request = requestWithRoute defReq dNSURL
         requestWithRoute r u ProjectsGet'{..}
           = go _pgQuotaUser (Just _pgPrettyPrint) _pgProject
-              _pgUserIp
+              _pgUserIP
               _pgKey
-              _pgOauthToken
+              _pgOAuthToken
               _pgFields
-              (Just _pgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsGetResource)

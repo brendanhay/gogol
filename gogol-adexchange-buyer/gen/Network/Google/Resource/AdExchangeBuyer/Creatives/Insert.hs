@@ -30,13 +30,13 @@ module Network.Google.Resource.AdExchangeBuyer.Creatives.Insert
     , CreativesInsert'
 
     -- * Request Lenses
-    , creQuotaUser
-    , crePrettyPrint
-    , creUserIp
-    , creKey
-    , creOauthToken
-    , creFields
-    , creAlt
+    , ciQuotaUser
+    , ciPrettyPrint
+    , ciUserIP
+    , ciCreative
+    , ciKey
+    , ciOAuthToken
+    , ciFields
     ) where
 
 import           Network.Google.AdExchangeBuyer.Types
@@ -49,103 +49,108 @@ type CreativesInsertResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
-               QueryParam "oauth_token" Text :>
+             QueryParam "key" Key :>
+               QueryParam "oauth_token" OAuthToken :>
                  QueryParam "fields" Text :>
-                   QueryParam "alt" Alt :> Post '[JSON] Creative
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Creative :> Post '[JSON] Creative
 
 -- | Submit a new creative.
 --
 -- /See:/ 'creativesInsert'' smart constructor.
 data CreativesInsert' = CreativesInsert'
-    { _creQuotaUser   :: !(Maybe Text)
-    , _crePrettyPrint :: !Bool
-    , _creUserIp      :: !(Maybe Text)
-    , _creKey         :: !(Maybe Text)
-    , _creOauthToken  :: !(Maybe Text)
-    , _creFields      :: !(Maybe Text)
-    , _creAlt         :: !Alt
+    { _ciQuotaUser   :: !(Maybe Text)
+    , _ciPrettyPrint :: !Bool
+    , _ciUserIP      :: !(Maybe Text)
+    , _ciCreative    :: !Creative
+    , _ciKey         :: !(Maybe Key)
+    , _ciOAuthToken  :: !(Maybe OAuthToken)
+    , _ciFields      :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativesInsert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'creQuotaUser'
+-- * 'ciQuotaUser'
 --
--- * 'crePrettyPrint'
+-- * 'ciPrettyPrint'
 --
--- * 'creUserIp'
+-- * 'ciUserIP'
 --
--- * 'creKey'
+-- * 'ciCreative'
 --
--- * 'creOauthToken'
+-- * 'ciKey'
 --
--- * 'creFields'
+-- * 'ciOAuthToken'
 --
--- * 'creAlt'
+-- * 'ciFields'
 creativesInsert'
-    :: CreativesInsert'
-creativesInsert' =
+    :: Creative -- ^ 'Creative'
+    -> CreativesInsert'
+creativesInsert' pCiCreative_ =
     CreativesInsert'
-    { _creQuotaUser = Nothing
-    , _crePrettyPrint = True
-    , _creUserIp = Nothing
-    , _creKey = Nothing
-    , _creOauthToken = Nothing
-    , _creFields = Nothing
-    , _creAlt = JSON
+    { _ciQuotaUser = Nothing
+    , _ciPrettyPrint = True
+    , _ciUserIP = Nothing
+    , _ciCreative = pCiCreative_
+    , _ciKey = Nothing
+    , _ciOAuthToken = Nothing
+    , _ciFields = Nothing
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-creQuotaUser :: Lens' CreativesInsert' (Maybe Text)
-creQuotaUser
-  = lens _creQuotaUser (\ s a -> s{_creQuotaUser = a})
+ciQuotaUser :: Lens' CreativesInsert' (Maybe Text)
+ciQuotaUser
+  = lens _ciQuotaUser (\ s a -> s{_ciQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-crePrettyPrint :: Lens' CreativesInsert' Bool
-crePrettyPrint
-  = lens _crePrettyPrint
-      (\ s a -> s{_crePrettyPrint = a})
+ciPrettyPrint :: Lens' CreativesInsert' Bool
+ciPrettyPrint
+  = lens _ciPrettyPrint
+      (\ s a -> s{_ciPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-creUserIp :: Lens' CreativesInsert' (Maybe Text)
-creUserIp
-  = lens _creUserIp (\ s a -> s{_creUserIp = a})
+ciUserIP :: Lens' CreativesInsert' (Maybe Text)
+ciUserIP = lens _ciUserIP (\ s a -> s{_ciUserIP = a})
+
+-- | Multipart request metadata.
+ciCreative :: Lens' CreativesInsert' Creative
+ciCreative
+  = lens _ciCreative (\ s a -> s{_ciCreative = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-creKey :: Lens' CreativesInsert' (Maybe Text)
-creKey = lens _creKey (\ s a -> s{_creKey = a})
+ciKey :: Lens' CreativesInsert' (Maybe Key)
+ciKey = lens _ciKey (\ s a -> s{_ciKey = a})
 
 -- | OAuth 2.0 token for the current user.
-creOauthToken :: Lens' CreativesInsert' (Maybe Text)
-creOauthToken
-  = lens _creOauthToken
-      (\ s a -> s{_creOauthToken = a})
+ciOAuthToken :: Lens' CreativesInsert' (Maybe OAuthToken)
+ciOAuthToken
+  = lens _ciOAuthToken (\ s a -> s{_ciOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-creFields :: Lens' CreativesInsert' (Maybe Text)
-creFields
-  = lens _creFields (\ s a -> s{_creFields = a})
+ciFields :: Lens' CreativesInsert' (Maybe Text)
+ciFields = lens _ciFields (\ s a -> s{_ciFields = a})
 
--- | Data format for the response.
-creAlt :: Lens' CreativesInsert' Alt
-creAlt = lens _creAlt (\ s a -> s{_creAlt = a})
+instance GoogleAuth CreativesInsert' where
+        authKey = ciKey . _Just
+        authToken = ciOAuthToken . _Just
 
 instance GoogleRequest CreativesInsert' where
         type Rs CreativesInsert' = Creative
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u CreativesInsert'{..}
-          = go _creQuotaUser (Just _crePrettyPrint) _creUserIp
-              _creKey
-              _creOauthToken
-              _creFields
-              (Just _creAlt)
+          = go _ciQuotaUser (Just _ciPrettyPrint) _ciUserIP
+              _ciKey
+              _ciOAuthToken
+              _ciFields
+              (Just AltJSON)
+              _ciCreative
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CreativesInsertResource)

@@ -34,11 +34,11 @@ module Network.Google.Resource.Compute.Networks.Insert
     , niQuotaUser
     , niPrettyPrint
     , niProject
-    , niUserIp
+    , niUserIP
+    , niNetwork
     , niKey
-    , niOauthToken
+    , niOAuthToken
     , niFields
-    , niAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -53,10 +53,11 @@ type NetworksInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] Operation
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Network :> Post '[JSON] Operation
 
 -- | Creates a network resource in the specified project using the data
 -- included in the request.
@@ -66,11 +67,11 @@ data NetworksInsert' = NetworksInsert'
     { _niQuotaUser   :: !(Maybe Text)
     , _niPrettyPrint :: !Bool
     , _niProject     :: !Text
-    , _niUserIp      :: !(Maybe Text)
-    , _niKey         :: !(Maybe Text)
-    , _niOauthToken  :: !(Maybe Text)
+    , _niUserIP      :: !(Maybe Text)
+    , _niNetwork     :: !Network
+    , _niKey         :: !(Maybe Key)
+    , _niOAuthToken  :: !(Maybe OAuthToken)
     , _niFields      :: !(Maybe Text)
-    , _niAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NetworksInsert'' with the minimum fields required to make a request.
@@ -83,28 +84,29 @@ data NetworksInsert' = NetworksInsert'
 --
 -- * 'niProject'
 --
--- * 'niUserIp'
+-- * 'niUserIP'
+--
+-- * 'niNetwork'
 --
 -- * 'niKey'
 --
--- * 'niOauthToken'
+-- * 'niOAuthToken'
 --
 -- * 'niFields'
---
--- * 'niAlt'
 networksInsert'
     :: Text -- ^ 'project'
+    -> Network -- ^ 'Network'
     -> NetworksInsert'
-networksInsert' pNiProject_ =
+networksInsert' pNiProject_ pNiNetwork_ =
     NetworksInsert'
     { _niQuotaUser = Nothing
     , _niPrettyPrint = True
     , _niProject = pNiProject_
-    , _niUserIp = Nothing
+    , _niUserIP = Nothing
+    , _niNetwork = pNiNetwork_
     , _niKey = Nothing
-    , _niOauthToken = Nothing
+    , _niOAuthToken = Nothing
     , _niFields = Nothing
-    , _niAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,38 +129,44 @@ niProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-niUserIp :: Lens' NetworksInsert' (Maybe Text)
-niUserIp = lens _niUserIp (\ s a -> s{_niUserIp = a})
+niUserIP :: Lens' NetworksInsert' (Maybe Text)
+niUserIP = lens _niUserIP (\ s a -> s{_niUserIP = a})
+
+-- | Multipart request metadata.
+niNetwork :: Lens' NetworksInsert' Network
+niNetwork
+  = lens _niNetwork (\ s a -> s{_niNetwork = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-niKey :: Lens' NetworksInsert' (Maybe Text)
+niKey :: Lens' NetworksInsert' (Maybe Key)
 niKey = lens _niKey (\ s a -> s{_niKey = a})
 
 -- | OAuth 2.0 token for the current user.
-niOauthToken :: Lens' NetworksInsert' (Maybe Text)
-niOauthToken
-  = lens _niOauthToken (\ s a -> s{_niOauthToken = a})
+niOAuthToken :: Lens' NetworksInsert' (Maybe OAuthToken)
+niOAuthToken
+  = lens _niOAuthToken (\ s a -> s{_niOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 niFields :: Lens' NetworksInsert' (Maybe Text)
 niFields = lens _niFields (\ s a -> s{_niFields = a})
 
--- | Data format for the response.
-niAlt :: Lens' NetworksInsert' Alt
-niAlt = lens _niAlt (\ s a -> s{_niAlt = a})
+instance GoogleAuth NetworksInsert' where
+        authKey = niKey . _Just
+        authToken = niOAuthToken . _Just
 
 instance GoogleRequest NetworksInsert' where
         type Rs NetworksInsert' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u NetworksInsert'{..}
           = go _niQuotaUser (Just _niPrettyPrint) _niProject
-              _niUserIp
+              _niUserIP
               _niKey
-              _niOauthToken
+              _niOAuthToken
               _niFields
-              (Just _niAlt)
+              (Just AltJSON)
+              _niNetwork
           where go
                   = clientWithRoute
                       (Proxy :: Proxy NetworksInsertResource)

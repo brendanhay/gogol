@@ -32,13 +32,12 @@ module Network.Google.Resource.DFAReporting.AccountPermissionGroups.Get
     -- * Request Lenses
     , apggQuotaUser
     , apggPrettyPrint
-    , apggUserIp
+    , apggUserIP
     , apggProfileId
     , apggKey
     , apggId
-    , apggOauthToken
+    , apggOAuthToken
     , apggFields
-    , apggAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,10 +53,10 @@ type AccountPermissionGroupsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :>
+                         QueryParam "alt" AltJSON :>
                            Get '[JSON] AccountPermissionGroup
 
 -- | Gets one account permission group by ID.
@@ -66,13 +65,12 @@ type AccountPermissionGroupsGetResource =
 data AccountPermissionGroupsGet' = AccountPermissionGroupsGet'
     { _apggQuotaUser   :: !(Maybe Text)
     , _apggPrettyPrint :: !Bool
-    , _apggUserIp      :: !(Maybe Text)
+    , _apggUserIP      :: !(Maybe Text)
     , _apggProfileId   :: !Int64
-    , _apggKey         :: !(Maybe Text)
+    , _apggKey         :: !(Maybe Key)
     , _apggId          :: !Int64
-    , _apggOauthToken  :: !(Maybe Text)
+    , _apggOAuthToken  :: !(Maybe OAuthToken)
     , _apggFields      :: !(Maybe Text)
-    , _apggAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountPermissionGroupsGet'' with the minimum fields required to make a request.
@@ -83,7 +81,7 @@ data AccountPermissionGroupsGet' = AccountPermissionGroupsGet'
 --
 -- * 'apggPrettyPrint'
 --
--- * 'apggUserIp'
+-- * 'apggUserIP'
 --
 -- * 'apggProfileId'
 --
@@ -91,11 +89,9 @@ data AccountPermissionGroupsGet' = AccountPermissionGroupsGet'
 --
 -- * 'apggId'
 --
--- * 'apggOauthToken'
+-- * 'apggOAuthToken'
 --
 -- * 'apggFields'
---
--- * 'apggAlt'
 accountPermissionGroupsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
@@ -104,13 +100,12 @@ accountPermissionGroupsGet' pApggProfileId_ pApggId_ =
     AccountPermissionGroupsGet'
     { _apggQuotaUser = Nothing
     , _apggPrettyPrint = True
-    , _apggUserIp = Nothing
+    , _apggUserIP = Nothing
     , _apggProfileId = pApggProfileId_
     , _apggKey = Nothing
     , _apggId = pApggId_
-    , _apggOauthToken = Nothing
+    , _apggOAuthToken = Nothing
     , _apggFields = Nothing
-    , _apggAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -129,9 +124,9 @@ apggPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-apggUserIp :: Lens' AccountPermissionGroupsGet' (Maybe Text)
-apggUserIp
-  = lens _apggUserIp (\ s a -> s{_apggUserIp = a})
+apggUserIP :: Lens' AccountPermissionGroupsGet' (Maybe Text)
+apggUserIP
+  = lens _apggUserIP (\ s a -> s{_apggUserIP = a})
 
 -- | User profile ID associated with this request.
 apggProfileId :: Lens' AccountPermissionGroupsGet' Int64
@@ -142,7 +137,7 @@ apggProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-apggKey :: Lens' AccountPermissionGroupsGet' (Maybe Text)
+apggKey :: Lens' AccountPermissionGroupsGet' (Maybe Key)
 apggKey = lens _apggKey (\ s a -> s{_apggKey = a})
 
 -- | Account permission group ID.
@@ -150,19 +145,19 @@ apggId :: Lens' AccountPermissionGroupsGet' Int64
 apggId = lens _apggId (\ s a -> s{_apggId = a})
 
 -- | OAuth 2.0 token for the current user.
-apggOauthToken :: Lens' AccountPermissionGroupsGet' (Maybe Text)
-apggOauthToken
-  = lens _apggOauthToken
-      (\ s a -> s{_apggOauthToken = a})
+apggOAuthToken :: Lens' AccountPermissionGroupsGet' (Maybe OAuthToken)
+apggOAuthToken
+  = lens _apggOAuthToken
+      (\ s a -> s{_apggOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 apggFields :: Lens' AccountPermissionGroupsGet' (Maybe Text)
 apggFields
   = lens _apggFields (\ s a -> s{_apggFields = a})
 
--- | Data format for the response.
-apggAlt :: Lens' AccountPermissionGroupsGet' Alt
-apggAlt = lens _apggAlt (\ s a -> s{_apggAlt = a})
+instance GoogleAuth AccountPermissionGroupsGet' where
+        authKey = apggKey . _Just
+        authToken = apggOAuthToken . _Just
 
 instance GoogleRequest AccountPermissionGroupsGet'
          where
@@ -171,13 +166,13 @@ instance GoogleRequest AccountPermissionGroupsGet'
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AccountPermissionGroupsGet'{..}
           = go _apggQuotaUser (Just _apggPrettyPrint)
-              _apggUserIp
+              _apggUserIP
               _apggProfileId
               _apggKey
               _apggId
-              _apggOauthToken
+              _apggOAuthToken
               _apggFields
-              (Just _apggAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountPermissionGroupsGetResource)

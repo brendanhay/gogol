@@ -41,10 +41,9 @@ module Network.Google.Resource.PubSub.Projects.Topics.GetIAMPolicy
     , ptgipBearerToken
     , ptgipKey
     , ptgipResource
-    , ptgipOauthToken
+    , ptgipOAuthToken
     , ptgipFields
     , ptgipCallback
-    , ptgipAlt
     ) where
 
 import           Network.Google.Prelude
@@ -63,11 +62,11 @@ type ProjectsTopicsGetIAMPolicyResource =
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
                        QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
                                QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :> Get '[JSON] Policy
+                                 QueryParam "alt" AltJSON :> Get '[JSON] Policy
 
 -- | Gets the access control policy for a resource. Is empty if the policy or
 -- the resource does not exist.
@@ -82,12 +81,11 @@ data ProjectsTopicsGetIAMPolicy' = ProjectsTopicsGetIAMPolicy'
     , _ptgipAccessToken    :: !(Maybe Text)
     , _ptgipUploadType     :: !(Maybe Text)
     , _ptgipBearerToken    :: !(Maybe Text)
-    , _ptgipKey            :: !(Maybe Text)
+    , _ptgipKey            :: !(Maybe Key)
     , _ptgipResource       :: !Text
-    , _ptgipOauthToken     :: !(Maybe Text)
+    , _ptgipOAuthToken     :: !(Maybe OAuthToken)
     , _ptgipFields         :: !(Maybe Text)
     , _ptgipCallback       :: !(Maybe Text)
-    , _ptgipAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsTopicsGetIAMPolicy'' with the minimum fields required to make a request.
@@ -114,13 +112,11 @@ data ProjectsTopicsGetIAMPolicy' = ProjectsTopicsGetIAMPolicy'
 --
 -- * 'ptgipResource'
 --
--- * 'ptgipOauthToken'
+-- * 'ptgipOAuthToken'
 --
 -- * 'ptgipFields'
 --
 -- * 'ptgipCallback'
---
--- * 'ptgipAlt'
 projectsTopicsGetIAMPolicy'
     :: Text -- ^ 'resource'
     -> ProjectsTopicsGetIAMPolicy'
@@ -136,10 +132,9 @@ projectsTopicsGetIAMPolicy' pPtgipResource_ =
     , _ptgipBearerToken = Nothing
     , _ptgipKey = Nothing
     , _ptgipResource = pPtgipResource_
-    , _ptgipOauthToken = Nothing
+    , _ptgipOAuthToken = Nothing
     , _ptgipFields = Nothing
     , _ptgipCallback = Nothing
-    , _ptgipAlt = "json"
     }
 
 -- | V1 error format.
@@ -192,7 +187,7 @@ ptgipBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ptgipKey :: Lens' ProjectsTopicsGetIAMPolicy' (Maybe Text)
+ptgipKey :: Lens' ProjectsTopicsGetIAMPolicy' (Maybe Key)
 ptgipKey = lens _ptgipKey (\ s a -> s{_ptgipKey = a})
 
 -- | REQUIRED: The resource for which policy is being requested. Resource is
@@ -203,10 +198,10 @@ ptgipResource
       (\ s a -> s{_ptgipResource = a})
 
 -- | OAuth 2.0 token for the current user.
-ptgipOauthToken :: Lens' ProjectsTopicsGetIAMPolicy' (Maybe Text)
-ptgipOauthToken
-  = lens _ptgipOauthToken
-      (\ s a -> s{_ptgipOauthToken = a})
+ptgipOAuthToken :: Lens' ProjectsTopicsGetIAMPolicy' (Maybe OAuthToken)
+ptgipOAuthToken
+  = lens _ptgipOAuthToken
+      (\ s a -> s{_ptgipOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ptgipFields :: Lens' ProjectsTopicsGetIAMPolicy' (Maybe Text)
@@ -219,9 +214,9 @@ ptgipCallback
   = lens _ptgipCallback
       (\ s a -> s{_ptgipCallback = a})
 
--- | Data format for response.
-ptgipAlt :: Lens' ProjectsTopicsGetIAMPolicy' Text
-ptgipAlt = lens _ptgipAlt (\ s a -> s{_ptgipAlt = a})
+instance GoogleAuth ProjectsTopicsGetIAMPolicy' where
+        authKey = ptgipKey . _Just
+        authToken = ptgipOAuthToken . _Just
 
 instance GoogleRequest ProjectsTopicsGetIAMPolicy'
          where
@@ -237,10 +232,10 @@ instance GoogleRequest ProjectsTopicsGetIAMPolicy'
               _ptgipBearerToken
               _ptgipKey
               _ptgipResource
-              _ptgipOauthToken
+              _ptgipOAuthToken
               _ptgipFields
               _ptgipCallback
-              (Just _ptgipAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsTopicsGetIAMPolicyResource)

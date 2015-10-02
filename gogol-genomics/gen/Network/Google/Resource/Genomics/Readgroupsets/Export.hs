@@ -35,11 +35,11 @@ module Network.Google.Resource.Genomics.Readgroupsets.Export
     -- * Request Lenses
     , reQuotaUser
     , rePrettyPrint
-    , reUserIp
+    , reUserIP
+    , reExportReadGroupSetsRequest
     , reKey
-    , reOauthToken
+    , reOAuthToken
     , reFields
-    , reAlt
     ) where
 
 import           Network.Google.Genomics.Types
@@ -53,11 +53,12 @@ type ReadgroupsetsExportResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :>
-                       Post '[JSON] ExportReadGroupSetsResponse
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] ExportReadGroupSetsRequest :>
+                         Post '[JSON] ExportReadGroupSetsResponse
 
 -- | Exports read group sets to a BAM file in Google Cloud Storage. Note that
 -- currently there may be some differences between exported BAM files and
@@ -66,13 +67,13 @@ type ReadgroupsetsExportResource =
 --
 -- /See:/ 'readgroupsetsExport'' smart constructor.
 data ReadgroupsetsExport' = ReadgroupsetsExport'
-    { _reQuotaUser   :: !(Maybe Text)
-    , _rePrettyPrint :: !Bool
-    , _reUserIp      :: !(Maybe Text)
-    , _reKey         :: !(Maybe Text)
-    , _reOauthToken  :: !(Maybe Text)
-    , _reFields      :: !(Maybe Text)
-    , _reAlt         :: !Alt
+    { _reQuotaUser                  :: !(Maybe Text)
+    , _rePrettyPrint                :: !Bool
+    , _reUserIP                     :: !(Maybe Text)
+    , _reExportReadGroupSetsRequest :: !ExportReadGroupSetsRequest
+    , _reKey                        :: !(Maybe Key)
+    , _reOAuthToken                 :: !(Maybe OAuthToken)
+    , _reFields                     :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReadgroupsetsExport'' with the minimum fields required to make a request.
@@ -83,26 +84,27 @@ data ReadgroupsetsExport' = ReadgroupsetsExport'
 --
 -- * 'rePrettyPrint'
 --
--- * 'reUserIp'
+-- * 'reUserIP'
+--
+-- * 'reExportReadGroupSetsRequest'
 --
 -- * 'reKey'
 --
--- * 'reOauthToken'
+-- * 'reOAuthToken'
 --
 -- * 'reFields'
---
--- * 'reAlt'
 readgroupsetsExport'
-    :: ReadgroupsetsExport'
-readgroupsetsExport' =
+    :: ExportReadGroupSetsRequest -- ^ 'ExportReadGroupSetsRequest'
+    -> ReadgroupsetsExport'
+readgroupsetsExport' pReExportReadGroupSetsRequest_ =
     ReadgroupsetsExport'
     { _reQuotaUser = Nothing
     , _rePrettyPrint = True
-    , _reUserIp = Nothing
+    , _reUserIP = Nothing
+    , _reExportReadGroupSetsRequest = pReExportReadGroupSetsRequest_
     , _reKey = Nothing
-    , _reOauthToken = Nothing
+    , _reOAuthToken = Nothing
     , _reFields = Nothing
-    , _reAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,38 +122,45 @@ rePrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-reUserIp :: Lens' ReadgroupsetsExport' (Maybe Text)
-reUserIp = lens _reUserIp (\ s a -> s{_reUserIp = a})
+reUserIP :: Lens' ReadgroupsetsExport' (Maybe Text)
+reUserIP = lens _reUserIP (\ s a -> s{_reUserIP = a})
+
+-- | Multipart request metadata.
+reExportReadGroupSetsRequest :: Lens' ReadgroupsetsExport' ExportReadGroupSetsRequest
+reExportReadGroupSetsRequest
+  = lens _reExportReadGroupSetsRequest
+      (\ s a -> s{_reExportReadGroupSetsRequest = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-reKey :: Lens' ReadgroupsetsExport' (Maybe Text)
+reKey :: Lens' ReadgroupsetsExport' (Maybe Key)
 reKey = lens _reKey (\ s a -> s{_reKey = a})
 
 -- | OAuth 2.0 token for the current user.
-reOauthToken :: Lens' ReadgroupsetsExport' (Maybe Text)
-reOauthToken
-  = lens _reOauthToken (\ s a -> s{_reOauthToken = a})
+reOAuthToken :: Lens' ReadgroupsetsExport' (Maybe OAuthToken)
+reOAuthToken
+  = lens _reOAuthToken (\ s a -> s{_reOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 reFields :: Lens' ReadgroupsetsExport' (Maybe Text)
 reFields = lens _reFields (\ s a -> s{_reFields = a})
 
--- | Data format for the response.
-reAlt :: Lens' ReadgroupsetsExport' Alt
-reAlt = lens _reAlt (\ s a -> s{_reAlt = a})
+instance GoogleAuth ReadgroupsetsExport' where
+        authKey = reKey . _Just
+        authToken = reOAuthToken . _Just
 
 instance GoogleRequest ReadgroupsetsExport' where
         type Rs ReadgroupsetsExport' =
              ExportReadGroupSetsResponse
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u ReadgroupsetsExport'{..}
-          = go _reQuotaUser (Just _rePrettyPrint) _reUserIp
+          = go _reQuotaUser (Just _rePrettyPrint) _reUserIP
               _reKey
-              _reOauthToken
+              _reOAuthToken
               _reFields
-              (Just _reAlt)
+              (Just AltJSON)
+              _reExportReadGroupSetsRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ReadgroupsetsExportResource)

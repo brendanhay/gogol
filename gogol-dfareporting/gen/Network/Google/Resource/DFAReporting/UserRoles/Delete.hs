@@ -32,13 +32,12 @@ module Network.Google.Resource.DFAReporting.UserRoles.Delete
     -- * Request Lenses
     , urdQuotaUser
     , urdPrettyPrint
-    , urdUserIp
+    , urdUserIP
     , urdProfileId
     , urdKey
     , urdId
-    , urdOauthToken
+    , urdOAuthToken
     , urdFields
-    , urdAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,10 +53,10 @@ type UserRolesDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Delete '[JSON] ()
+                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an existing user role.
 --
@@ -65,13 +64,12 @@ type UserRolesDeleteResource =
 data UserRolesDelete' = UserRolesDelete'
     { _urdQuotaUser   :: !(Maybe Text)
     , _urdPrettyPrint :: !Bool
-    , _urdUserIp      :: !(Maybe Text)
+    , _urdUserIP      :: !(Maybe Text)
     , _urdProfileId   :: !Int64
-    , _urdKey         :: !(Maybe Text)
+    , _urdKey         :: !(Maybe Key)
     , _urdId          :: !Int64
-    , _urdOauthToken  :: !(Maybe Text)
+    , _urdOAuthToken  :: !(Maybe OAuthToken)
     , _urdFields      :: !(Maybe Text)
-    , _urdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserRolesDelete'' with the minimum fields required to make a request.
@@ -82,7 +80,7 @@ data UserRolesDelete' = UserRolesDelete'
 --
 -- * 'urdPrettyPrint'
 --
--- * 'urdUserIp'
+-- * 'urdUserIP'
 --
 -- * 'urdProfileId'
 --
@@ -90,11 +88,9 @@ data UserRolesDelete' = UserRolesDelete'
 --
 -- * 'urdId'
 --
--- * 'urdOauthToken'
+-- * 'urdOAuthToken'
 --
 -- * 'urdFields'
---
--- * 'urdAlt'
 userRolesDelete'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
@@ -103,13 +99,12 @@ userRolesDelete' pUrdProfileId_ pUrdId_ =
     UserRolesDelete'
     { _urdQuotaUser = Nothing
     , _urdPrettyPrint = True
-    , _urdUserIp = Nothing
+    , _urdUserIP = Nothing
     , _urdProfileId = pUrdProfileId_
     , _urdKey = Nothing
     , _urdId = pUrdId_
-    , _urdOauthToken = Nothing
+    , _urdOAuthToken = Nothing
     , _urdFields = Nothing
-    , _urdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,9 +122,9 @@ urdPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-urdUserIp :: Lens' UserRolesDelete' (Maybe Text)
-urdUserIp
-  = lens _urdUserIp (\ s a -> s{_urdUserIp = a})
+urdUserIP :: Lens' UserRolesDelete' (Maybe Text)
+urdUserIP
+  = lens _urdUserIP (\ s a -> s{_urdUserIP = a})
 
 -- | User profile ID associated with this request.
 urdProfileId :: Lens' UserRolesDelete' Int64
@@ -139,7 +134,7 @@ urdProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-urdKey :: Lens' UserRolesDelete' (Maybe Text)
+urdKey :: Lens' UserRolesDelete' (Maybe Key)
 urdKey = lens _urdKey (\ s a -> s{_urdKey = a})
 
 -- | User role ID.
@@ -147,31 +142,31 @@ urdId :: Lens' UserRolesDelete' Int64
 urdId = lens _urdId (\ s a -> s{_urdId = a})
 
 -- | OAuth 2.0 token for the current user.
-urdOauthToken :: Lens' UserRolesDelete' (Maybe Text)
-urdOauthToken
-  = lens _urdOauthToken
-      (\ s a -> s{_urdOauthToken = a})
+urdOAuthToken :: Lens' UserRolesDelete' (Maybe OAuthToken)
+urdOAuthToken
+  = lens _urdOAuthToken
+      (\ s a -> s{_urdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 urdFields :: Lens' UserRolesDelete' (Maybe Text)
 urdFields
   = lens _urdFields (\ s a -> s{_urdFields = a})
 
--- | Data format for the response.
-urdAlt :: Lens' UserRolesDelete' Alt
-urdAlt = lens _urdAlt (\ s a -> s{_urdAlt = a})
+instance GoogleAuth UserRolesDelete' where
+        authKey = urdKey . _Just
+        authToken = urdOAuthToken . _Just
 
 instance GoogleRequest UserRolesDelete' where
         type Rs UserRolesDelete' = ()
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u UserRolesDelete'{..}
-          = go _urdQuotaUser (Just _urdPrettyPrint) _urdUserIp
+          = go _urdQuotaUser (Just _urdPrettyPrint) _urdUserIP
               _urdProfileId
               _urdKey
               _urdId
-              _urdOauthToken
+              _urdOAuthToken
               _urdFields
-              (Just _urdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UserRolesDeleteResource)

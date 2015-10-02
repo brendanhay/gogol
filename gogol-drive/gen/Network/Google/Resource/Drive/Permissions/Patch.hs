@@ -32,14 +32,14 @@ module Network.Google.Resource.Drive.Permissions.Patch
     -- * Request Lenses
     , pppQuotaUser
     , pppPrettyPrint
-    , pppUserIp
+    , pppUserIP
     , pppKey
     , pppTransferOwnership
     , pppFileId
-    , pppOauthToken
+    , pppOAuthToken
+    , pppPermission
     , pppPermissionId
     , pppFields
-    , pppAlt
     ) where
 
 import           Network.Google.Drive.Types
@@ -55,11 +55,13 @@ type PermissionsPatchResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "transferOwnership" Bool :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Patch '[JSON] Permission
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] Permission :>
+                               Patch '[JSON] Permission
 
 -- | Updates a permission using patch semantics.
 --
@@ -67,14 +69,14 @@ type PermissionsPatchResource =
 data PermissionsPatch' = PermissionsPatch'
     { _pppQuotaUser         :: !(Maybe Text)
     , _pppPrettyPrint       :: !Bool
-    , _pppUserIp            :: !(Maybe Text)
-    , _pppKey               :: !(Maybe Text)
+    , _pppUserIP            :: !(Maybe Text)
+    , _pppKey               :: !(Maybe Key)
     , _pppTransferOwnership :: !Bool
     , _pppFileId            :: !Text
-    , _pppOauthToken        :: !(Maybe Text)
+    , _pppOAuthToken        :: !(Maybe OAuthToken)
+    , _pppPermission        :: !Permission
     , _pppPermissionId      :: !Text
     , _pppFields            :: !(Maybe Text)
-    , _pppAlt               :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PermissionsPatch'' with the minimum fields required to make a request.
@@ -85,7 +87,7 @@ data PermissionsPatch' = PermissionsPatch'
 --
 -- * 'pppPrettyPrint'
 --
--- * 'pppUserIp'
+-- * 'pppUserIP'
 --
 -- * 'pppKey'
 --
@@ -93,29 +95,30 @@ data PermissionsPatch' = PermissionsPatch'
 --
 -- * 'pppFileId'
 --
--- * 'pppOauthToken'
+-- * 'pppOAuthToken'
+--
+-- * 'pppPermission'
 --
 -- * 'pppPermissionId'
 --
 -- * 'pppFields'
---
--- * 'pppAlt'
 permissionsPatch'
     :: Text -- ^ 'fileId'
+    -> Permission -- ^ 'Permission'
     -> Text -- ^ 'permissionId'
     -> PermissionsPatch'
-permissionsPatch' pPppFileId_ pPppPermissionId_ =
+permissionsPatch' pPppFileId_ pPppPermission_ pPppPermissionId_ =
     PermissionsPatch'
     { _pppQuotaUser = Nothing
     , _pppPrettyPrint = True
-    , _pppUserIp = Nothing
+    , _pppUserIP = Nothing
     , _pppKey = Nothing
     , _pppTransferOwnership = False
     , _pppFileId = pPppFileId_
-    , _pppOauthToken = Nothing
+    , _pppOAuthToken = Nothing
+    , _pppPermission = pPppPermission_
     , _pppPermissionId = pPppPermissionId_
     , _pppFields = Nothing
-    , _pppAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -133,14 +136,14 @@ pppPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-pppUserIp :: Lens' PermissionsPatch' (Maybe Text)
-pppUserIp
-  = lens _pppUserIp (\ s a -> s{_pppUserIp = a})
+pppUserIP :: Lens' PermissionsPatch' (Maybe Text)
+pppUserIP
+  = lens _pppUserIP (\ s a -> s{_pppUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pppKey :: Lens' PermissionsPatch' (Maybe Text)
+pppKey :: Lens' PermissionsPatch' (Maybe Key)
 pppKey = lens _pppKey (\ s a -> s{_pppKey = a})
 
 -- | Whether changing a role to \'owner\' downgrades the current owners to
@@ -156,10 +159,16 @@ pppFileId
   = lens _pppFileId (\ s a -> s{_pppFileId = a})
 
 -- | OAuth 2.0 token for the current user.
-pppOauthToken :: Lens' PermissionsPatch' (Maybe Text)
-pppOauthToken
-  = lens _pppOauthToken
-      (\ s a -> s{_pppOauthToken = a})
+pppOAuthToken :: Lens' PermissionsPatch' (Maybe OAuthToken)
+pppOAuthToken
+  = lens _pppOAuthToken
+      (\ s a -> s{_pppOAuthToken = a})
+
+-- | Multipart request metadata.
+pppPermission :: Lens' PermissionsPatch' Permission
+pppPermission
+  = lens _pppPermission
+      (\ s a -> s{_pppPermission = a})
 
 -- | The ID for the permission.
 pppPermissionId :: Lens' PermissionsPatch' Text
@@ -172,22 +181,23 @@ pppFields :: Lens' PermissionsPatch' (Maybe Text)
 pppFields
   = lens _pppFields (\ s a -> s{_pppFields = a})
 
--- | Data format for the response.
-pppAlt :: Lens' PermissionsPatch' Alt
-pppAlt = lens _pppAlt (\ s a -> s{_pppAlt = a})
+instance GoogleAuth PermissionsPatch' where
+        authKey = pppKey . _Just
+        authToken = pppOAuthToken . _Just
 
 instance GoogleRequest PermissionsPatch' where
         type Rs PermissionsPatch' = Permission
         request = requestWithRoute defReq driveURL
         requestWithRoute r u PermissionsPatch'{..}
-          = go _pppQuotaUser (Just _pppPrettyPrint) _pppUserIp
+          = go _pppQuotaUser (Just _pppPrettyPrint) _pppUserIP
               _pppKey
               (Just _pppTransferOwnership)
               _pppFileId
-              _pppOauthToken
+              _pppOAuthToken
               _pppPermissionId
               _pppFields
-              (Just _pppAlt)
+              (Just AltJSON)
+              _pppPermission
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PermissionsPatchResource)

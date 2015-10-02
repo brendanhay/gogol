@@ -32,13 +32,12 @@ module Network.Google.Resource.URLShortener.URL.Get
     -- * Request Lenses
     , ugQuotaUser
     , ugPrettyPrint
-    , ugUserIp
+    , ugUserIP
     , ugKey
     , ugProjection
-    , ugOauthToken
-    , ugShortUrl
+    , ugOAuthToken
+    , ugShortURL
     , ugFields
-    , ugAlt
     ) where
 
 import           Network.Google.Prelude
@@ -51,13 +50,13 @@ type UrlGetResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
+             QueryParam "key" Key :>
                QueryParam "projection" URLshortenerURLGetProjection
                  :>
-                 QueryParam "oauth_token" Text :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "shortUrl" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Get '[JSON] URL
+                       QueryParam "alt" AltJSON :> Get '[JSON] URL
 
 -- | Expands a short URL or gets creation time and analytics.
 --
@@ -65,13 +64,12 @@ type UrlGetResource =
 data URLGet' = URLGet'
     { _ugQuotaUser   :: !(Maybe Text)
     , _ugPrettyPrint :: !Bool
-    , _ugUserIp      :: !(Maybe Text)
-    , _ugKey         :: !(Maybe Text)
+    , _ugUserIP      :: !(Maybe Text)
+    , _ugKey         :: !(Maybe Key)
     , _ugProjection  :: !(Maybe URLshortenerURLGetProjection)
-    , _ugOauthToken  :: !(Maybe Text)
-    , _ugShortUrl    :: !Text
+    , _ugOAuthToken  :: !(Maybe OAuthToken)
+    , _ugShortURL    :: !Text
     , _ugFields      :: !(Maybe Text)
-    , _ugAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLGet'' with the minimum fields required to make a request.
@@ -82,33 +80,30 @@ data URLGet' = URLGet'
 --
 -- * 'ugPrettyPrint'
 --
--- * 'ugUserIp'
+-- * 'ugUserIP'
 --
 -- * 'ugKey'
 --
 -- * 'ugProjection'
 --
--- * 'ugOauthToken'
+-- * 'ugOAuthToken'
 --
--- * 'ugShortUrl'
+-- * 'ugShortURL'
 --
 -- * 'ugFields'
---
--- * 'ugAlt'
 uRLGet'
     :: Text -- ^ 'shortUrl'
     -> URLGet'
-uRLGet' pUgShortUrl_ =
+uRLGet' pUgShortURL_ =
     URLGet'
     { _ugQuotaUser = Nothing
     , _ugPrettyPrint = True
-    , _ugUserIp = Nothing
+    , _ugUserIP = Nothing
     , _ugKey = Nothing
     , _ugProjection = Nothing
-    , _ugOauthToken = Nothing
-    , _ugShortUrl = pUgShortUrl_
+    , _ugOAuthToken = Nothing
+    , _ugShortURL = pUgShortURL_
     , _ugFields = Nothing
-    , _ugAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -126,13 +121,13 @@ ugPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ugUserIp :: Lens' URLGet' (Maybe Text)
-ugUserIp = lens _ugUserIp (\ s a -> s{_ugUserIp = a})
+ugUserIP :: Lens' URLGet' (Maybe Text)
+ugUserIP = lens _ugUserIP (\ s a -> s{_ugUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ugKey :: Lens' URLGet' (Maybe Text)
+ugKey :: Lens' URLGet' (Maybe Key)
 ugKey = lens _ugKey (\ s a -> s{_ugKey = a})
 
 -- | Additional information to return.
@@ -141,33 +136,33 @@ ugProjection
   = lens _ugProjection (\ s a -> s{_ugProjection = a})
 
 -- | OAuth 2.0 token for the current user.
-ugOauthToken :: Lens' URLGet' (Maybe Text)
-ugOauthToken
-  = lens _ugOauthToken (\ s a -> s{_ugOauthToken = a})
+ugOAuthToken :: Lens' URLGet' (Maybe OAuthToken)
+ugOAuthToken
+  = lens _ugOAuthToken (\ s a -> s{_ugOAuthToken = a})
 
 -- | The short URL, including the protocol.
-ugShortUrl :: Lens' URLGet' Text
-ugShortUrl
-  = lens _ugShortUrl (\ s a -> s{_ugShortUrl = a})
+ugShortURL :: Lens' URLGet' Text
+ugShortURL
+  = lens _ugShortURL (\ s a -> s{_ugShortURL = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ugFields :: Lens' URLGet' (Maybe Text)
 ugFields = lens _ugFields (\ s a -> s{_ugFields = a})
 
--- | Data format for the response.
-ugAlt :: Lens' URLGet' Alt
-ugAlt = lens _ugAlt (\ s a -> s{_ugAlt = a})
+instance GoogleAuth URLGet' where
+        authKey = ugKey . _Just
+        authToken = ugOAuthToken . _Just
 
 instance GoogleRequest URLGet' where
         type Rs URLGet' = URL
         request = requestWithRoute defReq uRLShortenerURL
         requestWithRoute r u URLGet'{..}
-          = go _ugQuotaUser (Just _ugPrettyPrint) _ugUserIp
+          = go _ugQuotaUser (Just _ugPrettyPrint) _ugUserIP
               _ugKey
               _ugProjection
-              _ugOauthToken
-              (Just _ugShortUrl)
+              _ugOAuthToken
+              (Just _ugShortURL)
               _ugFields
-              (Just _ugAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy UrlGetResource) r u

@@ -33,12 +33,12 @@ module Network.Google.Resource.FusionTables.Template.Update
     , temQuotaUser
     , temPrettyPrint
     , temTemplateId
-    , temUserIp
+    , temUserIP
     , temKey
-    , temOauthToken
+    , temTemplate
+    , temOAuthToken
     , temTableId
     , temFields
-    , temAlt
     ) where
 
 import           Network.Google.FusionTables.Types
@@ -54,10 +54,11 @@ type TemplateUpdateResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Put '[JSON] Template
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Template :> Put '[JSON] Template
 
 -- | Updates an existing template
 --
@@ -66,12 +67,12 @@ data TemplateUpdate' = TemplateUpdate'
     { _temQuotaUser   :: !(Maybe Text)
     , _temPrettyPrint :: !Bool
     , _temTemplateId  :: !Int32
-    , _temUserIp      :: !(Maybe Text)
-    , _temKey         :: !(Maybe Text)
-    , _temOauthToken  :: !(Maybe Text)
+    , _temUserIP      :: !(Maybe Text)
+    , _temKey         :: !(Maybe Key)
+    , _temTemplate    :: !Template
+    , _temOAuthToken  :: !(Maybe OAuthToken)
     , _temTableId     :: !Text
     , _temFields      :: !(Maybe Text)
-    , _temAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TemplateUpdate'' with the minimum fields required to make a request.
@@ -84,32 +85,33 @@ data TemplateUpdate' = TemplateUpdate'
 --
 -- * 'temTemplateId'
 --
--- * 'temUserIp'
+-- * 'temUserIP'
 --
 -- * 'temKey'
 --
--- * 'temOauthToken'
+-- * 'temTemplate'
+--
+-- * 'temOAuthToken'
 --
 -- * 'temTableId'
 --
 -- * 'temFields'
---
--- * 'temAlt'
 templateUpdate'
     :: Int32 -- ^ 'templateId'
+    -> Template -- ^ 'Template'
     -> Text -- ^ 'tableId'
     -> TemplateUpdate'
-templateUpdate' pTemTemplateId_ pTemTableId_ =
+templateUpdate' pTemTemplateId_ pTemTemplate_ pTemTableId_ =
     TemplateUpdate'
     { _temQuotaUser = Nothing
     , _temPrettyPrint = True
     , _temTemplateId = pTemTemplateId_
-    , _temUserIp = Nothing
+    , _temUserIP = Nothing
     , _temKey = Nothing
-    , _temOauthToken = Nothing
+    , _temTemplate = pTemTemplate_
+    , _temOAuthToken = Nothing
     , _temTableId = pTemTableId_
     , _temFields = Nothing
-    , _temAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -133,21 +135,26 @@ temTemplateId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-temUserIp :: Lens' TemplateUpdate' (Maybe Text)
-temUserIp
-  = lens _temUserIp (\ s a -> s{_temUserIp = a})
+temUserIP :: Lens' TemplateUpdate' (Maybe Text)
+temUserIP
+  = lens _temUserIP (\ s a -> s{_temUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-temKey :: Lens' TemplateUpdate' (Maybe Text)
+temKey :: Lens' TemplateUpdate' (Maybe Key)
 temKey = lens _temKey (\ s a -> s{_temKey = a})
 
+-- | Multipart request metadata.
+temTemplate :: Lens' TemplateUpdate' Template
+temTemplate
+  = lens _temTemplate (\ s a -> s{_temTemplate = a})
+
 -- | OAuth 2.0 token for the current user.
-temOauthToken :: Lens' TemplateUpdate' (Maybe Text)
-temOauthToken
-  = lens _temOauthToken
-      (\ s a -> s{_temOauthToken = a})
+temOAuthToken :: Lens' TemplateUpdate' (Maybe OAuthToken)
+temOAuthToken
+  = lens _temOAuthToken
+      (\ s a -> s{_temOAuthToken = a})
 
 -- | Table to which the updated template belongs
 temTableId :: Lens' TemplateUpdate' Text
@@ -159,9 +166,9 @@ temFields :: Lens' TemplateUpdate' (Maybe Text)
 temFields
   = lens _temFields (\ s a -> s{_temFields = a})
 
--- | Data format for the response.
-temAlt :: Lens' TemplateUpdate' Alt
-temAlt = lens _temAlt (\ s a -> s{_temAlt = a})
+instance GoogleAuth TemplateUpdate' where
+        authKey = temKey . _Just
+        authToken = temOAuthToken . _Just
 
 instance GoogleRequest TemplateUpdate' where
         type Rs TemplateUpdate' = Template
@@ -169,12 +176,13 @@ instance GoogleRequest TemplateUpdate' where
         requestWithRoute r u TemplateUpdate'{..}
           = go _temQuotaUser (Just _temPrettyPrint)
               _temTemplateId
-              _temUserIp
+              _temUserIP
               _temKey
-              _temOauthToken
+              _temOAuthToken
               _temTableId
               _temFields
-              (Just _temAlt)
+              (Just AltJSON)
+              _temTemplate
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TemplateUpdateResource)

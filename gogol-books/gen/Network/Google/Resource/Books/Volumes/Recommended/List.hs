@@ -32,14 +32,13 @@ module Network.Google.Resource.Books.Volumes.Recommended.List
     -- * Request Lenses
     , vrlQuotaUser
     , vrlPrettyPrint
-    , vrlUserIp
+    , vrlUserIP
     , vrlLocale
     , vrlMaxAllowedMaturityRating
     , vrlKey
     , vrlSource
-    , vrlOauthToken
+    , vrlOAuthToken
     , vrlFields
-    , vrlAlt
     ) where
 
 import           Network.Google.Books.Types
@@ -57,11 +56,11 @@ type VolumesRecommendedListResource =
                  QueryParam "maxAllowedMaturityRating"
                    BooksVolumesRecommendedListMaxAllowedMaturityRating
                    :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "source" Text :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Get '[JSON] Volumes
+                           QueryParam "alt" AltJSON :> Get '[JSON] Volumes
 
 -- | Return a list of recommended books for the current user.
 --
@@ -69,14 +68,13 @@ type VolumesRecommendedListResource =
 data VolumesRecommendedList' = VolumesRecommendedList'
     { _vrlQuotaUser                :: !(Maybe Text)
     , _vrlPrettyPrint              :: !Bool
-    , _vrlUserIp                   :: !(Maybe Text)
+    , _vrlUserIP                   :: !(Maybe Text)
     , _vrlLocale                   :: !(Maybe Text)
     , _vrlMaxAllowedMaturityRating :: !(Maybe BooksVolumesRecommendedListMaxAllowedMaturityRating)
-    , _vrlKey                      :: !(Maybe Text)
+    , _vrlKey                      :: !(Maybe Key)
     , _vrlSource                   :: !(Maybe Text)
-    , _vrlOauthToken               :: !(Maybe Text)
+    , _vrlOAuthToken               :: !(Maybe OAuthToken)
     , _vrlFields                   :: !(Maybe Text)
-    , _vrlAlt                      :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VolumesRecommendedList'' with the minimum fields required to make a request.
@@ -87,7 +85,7 @@ data VolumesRecommendedList' = VolumesRecommendedList'
 --
 -- * 'vrlPrettyPrint'
 --
--- * 'vrlUserIp'
+-- * 'vrlUserIP'
 --
 -- * 'vrlLocale'
 --
@@ -97,25 +95,22 @@ data VolumesRecommendedList' = VolumesRecommendedList'
 --
 -- * 'vrlSource'
 --
--- * 'vrlOauthToken'
+-- * 'vrlOAuthToken'
 --
 -- * 'vrlFields'
---
--- * 'vrlAlt'
 volumesRecommendedList'
     :: VolumesRecommendedList'
 volumesRecommendedList' =
     VolumesRecommendedList'
     { _vrlQuotaUser = Nothing
     , _vrlPrettyPrint = True
-    , _vrlUserIp = Nothing
+    , _vrlUserIP = Nothing
     , _vrlLocale = Nothing
     , _vrlMaxAllowedMaturityRating = Nothing
     , _vrlKey = Nothing
     , _vrlSource = Nothing
-    , _vrlOauthToken = Nothing
+    , _vrlOAuthToken = Nothing
     , _vrlFields = Nothing
-    , _vrlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -133,9 +128,9 @@ vrlPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-vrlUserIp :: Lens' VolumesRecommendedList' (Maybe Text)
-vrlUserIp
-  = lens _vrlUserIp (\ s a -> s{_vrlUserIp = a})
+vrlUserIP :: Lens' VolumesRecommendedList' (Maybe Text)
+vrlUserIP
+  = lens _vrlUserIP (\ s a -> s{_vrlUserIP = a})
 
 -- | ISO-639-1 language and ISO-3166-1 country code. Ex: \'en_US\'. Used for
 -- generating recommendations.
@@ -153,7 +148,7 @@ vrlMaxAllowedMaturityRating
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vrlKey :: Lens' VolumesRecommendedList' (Maybe Text)
+vrlKey :: Lens' VolumesRecommendedList' (Maybe Key)
 vrlKey = lens _vrlKey (\ s a -> s{_vrlKey = a})
 
 -- | String to identify the originator of this request.
@@ -162,32 +157,32 @@ vrlSource
   = lens _vrlSource (\ s a -> s{_vrlSource = a})
 
 -- | OAuth 2.0 token for the current user.
-vrlOauthToken :: Lens' VolumesRecommendedList' (Maybe Text)
-vrlOauthToken
-  = lens _vrlOauthToken
-      (\ s a -> s{_vrlOauthToken = a})
+vrlOAuthToken :: Lens' VolumesRecommendedList' (Maybe OAuthToken)
+vrlOAuthToken
+  = lens _vrlOAuthToken
+      (\ s a -> s{_vrlOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 vrlFields :: Lens' VolumesRecommendedList' (Maybe Text)
 vrlFields
   = lens _vrlFields (\ s a -> s{_vrlFields = a})
 
--- | Data format for the response.
-vrlAlt :: Lens' VolumesRecommendedList' Alt
-vrlAlt = lens _vrlAlt (\ s a -> s{_vrlAlt = a})
+instance GoogleAuth VolumesRecommendedList' where
+        authKey = vrlKey . _Just
+        authToken = vrlOAuthToken . _Just
 
 instance GoogleRequest VolumesRecommendedList' where
         type Rs VolumesRecommendedList' = Volumes
         request = requestWithRoute defReq booksURL
         requestWithRoute r u VolumesRecommendedList'{..}
-          = go _vrlQuotaUser (Just _vrlPrettyPrint) _vrlUserIp
+          = go _vrlQuotaUser (Just _vrlPrettyPrint) _vrlUserIP
               _vrlLocale
               _vrlMaxAllowedMaturityRating
               _vrlKey
               _vrlSource
-              _vrlOauthToken
+              _vrlOAuthToken
               _vrlFields
-              (Just _vrlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy VolumesRecommendedListResource)

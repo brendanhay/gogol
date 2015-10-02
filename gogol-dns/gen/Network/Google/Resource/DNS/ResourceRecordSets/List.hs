@@ -33,16 +33,15 @@ module Network.Google.Resource.DNS.ResourceRecordSets.List
     , rrslQuotaUser
     , rrslPrettyPrint
     , rrslProject
-    , rrslUserIp
+    , rrslUserIP
     , rrslKey
     , rrslName
     , rrslPageToken
     , rrslType
-    , rrslOauthToken
+    , rrslOAuthToken
     , rrslManagedZone
     , rrslMaxResults
     , rrslFields
-    , rrslAlt
     ) where
 
 import           Network.Google.DNS.Types
@@ -58,14 +57,14 @@ type ResourceRecordSetsListResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "name" Text :>
                        QueryParam "pageToken" Text :>
                          QueryParam "type" Text :>
-                           QueryParam "oauth_token" Text :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "maxResults" Int32 :>
                                QueryParam "fields" Text :>
-                                 QueryParam "alt" Alt :>
+                                 QueryParam "alt" AltJSON :>
                                    Get '[JSON] ResourceRecordSetsListResponse
 
 -- | Enumerate ResourceRecordSets that have been created but not yet deleted.
@@ -75,16 +74,15 @@ data ResourceRecordSetsList' = ResourceRecordSetsList'
     { _rrslQuotaUser   :: !(Maybe Text)
     , _rrslPrettyPrint :: !Bool
     , _rrslProject     :: !Text
-    , _rrslUserIp      :: !(Maybe Text)
-    , _rrslKey         :: !(Maybe Text)
+    , _rrslUserIP      :: !(Maybe Text)
+    , _rrslKey         :: !(Maybe Key)
     , _rrslName        :: !(Maybe Text)
     , _rrslPageToken   :: !(Maybe Text)
     , _rrslType        :: !(Maybe Text)
-    , _rrslOauthToken  :: !(Maybe Text)
+    , _rrslOAuthToken  :: !(Maybe OAuthToken)
     , _rrslManagedZone :: !Text
     , _rrslMaxResults  :: !(Maybe Int32)
     , _rrslFields      :: !(Maybe Text)
-    , _rrslAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ResourceRecordSetsList'' with the minimum fields required to make a request.
@@ -97,7 +95,7 @@ data ResourceRecordSetsList' = ResourceRecordSetsList'
 --
 -- * 'rrslProject'
 --
--- * 'rrslUserIp'
+-- * 'rrslUserIP'
 --
 -- * 'rrslKey'
 --
@@ -107,15 +105,13 @@ data ResourceRecordSetsList' = ResourceRecordSetsList'
 --
 -- * 'rrslType'
 --
--- * 'rrslOauthToken'
+-- * 'rrslOAuthToken'
 --
 -- * 'rrslManagedZone'
 --
 -- * 'rrslMaxResults'
 --
 -- * 'rrslFields'
---
--- * 'rrslAlt'
 resourceRecordSetsList'
     :: Text -- ^ 'project'
     -> Text -- ^ 'managedZone'
@@ -125,16 +121,15 @@ resourceRecordSetsList' pRrslProject_ pRrslManagedZone_ =
     { _rrslQuotaUser = Nothing
     , _rrslPrettyPrint = True
     , _rrslProject = pRrslProject_
-    , _rrslUserIp = Nothing
+    , _rrslUserIP = Nothing
     , _rrslKey = Nothing
     , _rrslName = Nothing
     , _rrslPageToken = Nothing
     , _rrslType = Nothing
-    , _rrslOauthToken = Nothing
+    , _rrslOAuthToken = Nothing
     , _rrslManagedZone = pRrslManagedZone_
     , _rrslMaxResults = Nothing
     , _rrslFields = Nothing
-    , _rrslAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -158,14 +153,14 @@ rrslProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rrslUserIp :: Lens' ResourceRecordSetsList' (Maybe Text)
-rrslUserIp
-  = lens _rrslUserIp (\ s a -> s{_rrslUserIp = a})
+rrslUserIP :: Lens' ResourceRecordSetsList' (Maybe Text)
+rrslUserIP
+  = lens _rrslUserIP (\ s a -> s{_rrslUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rrslKey :: Lens' ResourceRecordSetsList' (Maybe Text)
+rrslKey :: Lens' ResourceRecordSetsList' (Maybe Key)
 rrslKey = lens _rrslKey (\ s a -> s{_rrslKey = a})
 
 -- | Restricts the list to return only records with this fully qualified
@@ -186,10 +181,10 @@ rrslType :: Lens' ResourceRecordSetsList' (Maybe Text)
 rrslType = lens _rrslType (\ s a -> s{_rrslType = a})
 
 -- | OAuth 2.0 token for the current user.
-rrslOauthToken :: Lens' ResourceRecordSetsList' (Maybe Text)
-rrslOauthToken
-  = lens _rrslOauthToken
-      (\ s a -> s{_rrslOauthToken = a})
+rrslOAuthToken :: Lens' ResourceRecordSetsList' (Maybe OAuthToken)
+rrslOAuthToken
+  = lens _rrslOAuthToken
+      (\ s a -> s{_rrslOAuthToken = a})
 
 -- | Identifies the managed zone addressed by this request. Can be the
 -- managed zone name or id.
@@ -210,9 +205,9 @@ rrslFields :: Lens' ResourceRecordSetsList' (Maybe Text)
 rrslFields
   = lens _rrslFields (\ s a -> s{_rrslFields = a})
 
--- | Data format for the response.
-rrslAlt :: Lens' ResourceRecordSetsList' Alt
-rrslAlt = lens _rrslAlt (\ s a -> s{_rrslAlt = a})
+instance GoogleAuth ResourceRecordSetsList' where
+        authKey = rrslKey . _Just
+        authToken = rrslOAuthToken . _Just
 
 instance GoogleRequest ResourceRecordSetsList' where
         type Rs ResourceRecordSetsList' =
@@ -221,16 +216,16 @@ instance GoogleRequest ResourceRecordSetsList' where
         requestWithRoute r u ResourceRecordSetsList'{..}
           = go _rrslQuotaUser (Just _rrslPrettyPrint)
               _rrslProject
-              _rrslUserIp
+              _rrslUserIP
               _rrslKey
               _rrslName
               _rrslPageToken
               _rrslType
-              _rrslOauthToken
+              _rrslOAuthToken
               _rrslManagedZone
               _rrslMaxResults
               _rrslFields
-              (Just _rrslAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ResourceRecordSetsListResource)

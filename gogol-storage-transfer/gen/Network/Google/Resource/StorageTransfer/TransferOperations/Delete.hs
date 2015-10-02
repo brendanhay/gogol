@@ -19,7 +19,7 @@
 --
 -- | This method is not supported and the server returns \`UNIMPLEMENTED\`.
 --
--- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @StoragetransferTransferOperationsDelete@.
+-- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @StorageTransferTransferOperationsDelete@.
 module Network.Google.Resource.StorageTransfer.TransferOperations.Delete
     (
     -- * REST Resource
@@ -40,16 +40,15 @@ module Network.Google.Resource.StorageTransfer.TransferOperations.Delete
     , todBearerToken
     , todKey
     , todName
-    , todOauthToken
+    , todOAuthToken
     , todFields
     , todCallback
-    , todAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.StorageTransfer.Types
 
--- | A resource alias for @StoragetransferTransferOperationsDelete@ which the
+-- | A resource alias for @StorageTransferTransferOperationsDelete@ which the
 -- 'TransferOperationsDelete'' request conforms to.
 type TransferOperationsDeleteResource =
      "v1" :>
@@ -62,11 +61,12 @@ type TransferOperationsDeleteResource =
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
                        QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
                                QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :> Delete '[JSON] Empty
+                                 QueryParam "alt" AltJSON :>
+                                   Delete '[JSON] Empty
 
 -- | This method is not supported and the server returns \`UNIMPLEMENTED\`.
 --
@@ -80,12 +80,11 @@ data TransferOperationsDelete' = TransferOperationsDelete'
     , _todAccessToken    :: !(Maybe Text)
     , _todUploadType     :: !(Maybe Text)
     , _todBearerToken    :: !(Maybe Text)
-    , _todKey            :: !(Maybe Text)
+    , _todKey            :: !(Maybe Key)
     , _todName           :: !Text
-    , _todOauthToken     :: !(Maybe Text)
+    , _todOAuthToken     :: !(Maybe OAuthToken)
     , _todFields         :: !(Maybe Text)
     , _todCallback       :: !(Maybe Text)
-    , _todAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TransferOperationsDelete'' with the minimum fields required to make a request.
@@ -112,13 +111,11 @@ data TransferOperationsDelete' = TransferOperationsDelete'
 --
 -- * 'todName'
 --
--- * 'todOauthToken'
+-- * 'todOAuthToken'
 --
 -- * 'todFields'
 --
 -- * 'todCallback'
---
--- * 'todAlt'
 transferOperationsDelete'
     :: Text -- ^ 'name'
     -> TransferOperationsDelete'
@@ -134,10 +131,9 @@ transferOperationsDelete' pTodName_ =
     , _todBearerToken = Nothing
     , _todKey = Nothing
     , _todName = pTodName_
-    , _todOauthToken = Nothing
+    , _todOAuthToken = Nothing
     , _todFields = Nothing
     , _todCallback = Nothing
-    , _todAlt = "json"
     }
 
 -- | V1 error format.
@@ -188,7 +184,7 @@ todBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-todKey :: Lens' TransferOperationsDelete' (Maybe Text)
+todKey :: Lens' TransferOperationsDelete' (Maybe Key)
 todKey = lens _todKey (\ s a -> s{_todKey = a})
 
 -- | The name of the operation resource to be deleted.
@@ -196,10 +192,10 @@ todName :: Lens' TransferOperationsDelete' Text
 todName = lens _todName (\ s a -> s{_todName = a})
 
 -- | OAuth 2.0 token for the current user.
-todOauthToken :: Lens' TransferOperationsDelete' (Maybe Text)
-todOauthToken
-  = lens _todOauthToken
-      (\ s a -> s{_todOauthToken = a})
+todOAuthToken :: Lens' TransferOperationsDelete' (Maybe OAuthToken)
+todOAuthToken
+  = lens _todOAuthToken
+      (\ s a -> s{_todOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 todFields :: Lens' TransferOperationsDelete' (Maybe Text)
@@ -211,9 +207,9 @@ todCallback :: Lens' TransferOperationsDelete' (Maybe Text)
 todCallback
   = lens _todCallback (\ s a -> s{_todCallback = a})
 
--- | Data format for response.
-todAlt :: Lens' TransferOperationsDelete' Text
-todAlt = lens _todAlt (\ s a -> s{_todAlt = a})
+instance GoogleAuth TransferOperationsDelete' where
+        authKey = todKey . _Just
+        authToken = todOAuthToken . _Just
 
 instance GoogleRequest TransferOperationsDelete'
          where
@@ -228,10 +224,10 @@ instance GoogleRequest TransferOperationsDelete'
               _todBearerToken
               _todKey
               _todName
-              _todOauthToken
+              _todOAuthToken
               _todFields
               _todCallback
-              (Just _todAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TransferOperationsDeleteResource)

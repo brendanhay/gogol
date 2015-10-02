@@ -33,15 +33,14 @@ module Network.Google.Resource.BigQuery.Datasets.List
     -- * Request Lenses
     , dlQuotaUser
     , dlPrettyPrint
-    , dlUserIp
+    , dlUserIP
     , dlAll
     , dlKey
     , dlPageToken
     , dlProjectId
-    , dlOauthToken
+    , dlOAuthToken
     , dlMaxResults
     , dlFields
-    , dlAlt
     ) where
 
 import           Network.Google.BigQuery.Types
@@ -57,12 +56,12 @@ type DatasetsListResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "all" Bool :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "maxResults" Word32 :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Get '[JSON] DatasetList
+                             QueryParam "alt" AltJSON :> Get '[JSON] DatasetList
 
 -- | Lists all datasets in the specified project to which you have been
 -- granted the READER dataset role.
@@ -71,15 +70,14 @@ type DatasetsListResource =
 data DatasetsList' = DatasetsList'
     { _dlQuotaUser   :: !(Maybe Text)
     , _dlPrettyPrint :: !Bool
-    , _dlUserIp      :: !(Maybe Text)
+    , _dlUserIP      :: !(Maybe Text)
     , _dlAll         :: !(Maybe Bool)
-    , _dlKey         :: !(Maybe Text)
+    , _dlKey         :: !(Maybe Key)
     , _dlPageToken   :: !(Maybe Text)
     , _dlProjectId   :: !Text
-    , _dlOauthToken  :: !(Maybe Text)
+    , _dlOAuthToken  :: !(Maybe OAuthToken)
     , _dlMaxResults  :: !(Maybe Word32)
     , _dlFields      :: !(Maybe Text)
-    , _dlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetsList'' with the minimum fields required to make a request.
@@ -90,7 +88,7 @@ data DatasetsList' = DatasetsList'
 --
 -- * 'dlPrettyPrint'
 --
--- * 'dlUserIp'
+-- * 'dlUserIP'
 --
 -- * 'dlAll'
 --
@@ -100,13 +98,11 @@ data DatasetsList' = DatasetsList'
 --
 -- * 'dlProjectId'
 --
--- * 'dlOauthToken'
+-- * 'dlOAuthToken'
 --
 -- * 'dlMaxResults'
 --
 -- * 'dlFields'
---
--- * 'dlAlt'
 datasetsList'
     :: Text -- ^ 'projectId'
     -> DatasetsList'
@@ -114,15 +110,14 @@ datasetsList' pDlProjectId_ =
     DatasetsList'
     { _dlQuotaUser = Nothing
     , _dlPrettyPrint = True
-    , _dlUserIp = Nothing
+    , _dlUserIP = Nothing
     , _dlAll = Nothing
     , _dlKey = Nothing
     , _dlPageToken = Nothing
     , _dlProjectId = pDlProjectId_
-    , _dlOauthToken = Nothing
+    , _dlOAuthToken = Nothing
     , _dlMaxResults = Nothing
     , _dlFields = Nothing
-    , _dlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -140,8 +135,8 @@ dlPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-dlUserIp :: Lens' DatasetsList' (Maybe Text)
-dlUserIp = lens _dlUserIp (\ s a -> s{_dlUserIp = a})
+dlUserIP :: Lens' DatasetsList' (Maybe Text)
+dlUserIP = lens _dlUserIP (\ s a -> s{_dlUserIP = a})
 
 -- | Whether to list all datasets, including hidden ones
 dlAll :: Lens' DatasetsList' (Maybe Bool)
@@ -150,7 +145,7 @@ dlAll = lens _dlAll (\ s a -> s{_dlAll = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dlKey :: Lens' DatasetsList' (Maybe Text)
+dlKey :: Lens' DatasetsList' (Maybe Key)
 dlKey = lens _dlKey (\ s a -> s{_dlKey = a})
 
 -- | Page token, returned by a previous call, to request the next page of
@@ -165,9 +160,9 @@ dlProjectId
   = lens _dlProjectId (\ s a -> s{_dlProjectId = a})
 
 -- | OAuth 2.0 token for the current user.
-dlOauthToken :: Lens' DatasetsList' (Maybe Text)
-dlOauthToken
-  = lens _dlOauthToken (\ s a -> s{_dlOauthToken = a})
+dlOAuthToken :: Lens' DatasetsList' (Maybe OAuthToken)
+dlOAuthToken
+  = lens _dlOAuthToken (\ s a -> s{_dlOAuthToken = a})
 
 -- | The maximum number of results to return
 dlMaxResults :: Lens' DatasetsList' (Maybe Word32)
@@ -178,23 +173,23 @@ dlMaxResults
 dlFields :: Lens' DatasetsList' (Maybe Text)
 dlFields = lens _dlFields (\ s a -> s{_dlFields = a})
 
--- | Data format for the response.
-dlAlt :: Lens' DatasetsList' Alt
-dlAlt = lens _dlAlt (\ s a -> s{_dlAlt = a})
+instance GoogleAuth DatasetsList' where
+        authKey = dlKey . _Just
+        authToken = dlOAuthToken . _Just
 
 instance GoogleRequest DatasetsList' where
         type Rs DatasetsList' = DatasetList
         request = requestWithRoute defReq bigQueryURL
         requestWithRoute r u DatasetsList'{..}
-          = go _dlQuotaUser (Just _dlPrettyPrint) _dlUserIp
+          = go _dlQuotaUser (Just _dlPrettyPrint) _dlUserIP
               _dlAll
               _dlKey
               _dlPageToken
               _dlProjectId
-              _dlOauthToken
+              _dlOAuthToken
               _dlMaxResults
               _dlFields
-              (Just _dlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy DatasetsListResource)

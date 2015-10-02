@@ -32,12 +32,11 @@ module Network.Google.Resource.Drive.Files.Touch
     -- * Request Lenses
     , ftQuotaUser
     , ftPrettyPrint
-    , ftUserIp
+    , ftUserIP
     , ftKey
     , ftFileId
-    , ftOauthToken
+    , ftOAuthToken
     , ftFields
-    , ftAlt
     ) where
 
 import           Network.Google.Drive.Types
@@ -52,10 +51,10 @@ type FilesTouchResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] File
+                       QueryParam "alt" AltJSON :> Post '[JSON] File
 
 -- | Set the file\'s updated time to the current server time.
 --
@@ -63,12 +62,11 @@ type FilesTouchResource =
 data FilesTouch' = FilesTouch'
     { _ftQuotaUser   :: !(Maybe Text)
     , _ftPrettyPrint :: !Bool
-    , _ftUserIp      :: !(Maybe Text)
-    , _ftKey         :: !(Maybe Text)
+    , _ftUserIP      :: !(Maybe Text)
+    , _ftKey         :: !(Maybe Key)
     , _ftFileId      :: !Text
-    , _ftOauthToken  :: !(Maybe Text)
+    , _ftOAuthToken  :: !(Maybe OAuthToken)
     , _ftFields      :: !(Maybe Text)
-    , _ftAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FilesTouch'' with the minimum fields required to make a request.
@@ -79,17 +77,15 @@ data FilesTouch' = FilesTouch'
 --
 -- * 'ftPrettyPrint'
 --
--- * 'ftUserIp'
+-- * 'ftUserIP'
 --
 -- * 'ftKey'
 --
 -- * 'ftFileId'
 --
--- * 'ftOauthToken'
+-- * 'ftOAuthToken'
 --
 -- * 'ftFields'
---
--- * 'ftAlt'
 filesTouch'
     :: Text -- ^ 'fileId'
     -> FilesTouch'
@@ -97,12 +93,11 @@ filesTouch' pFtFileId_ =
     FilesTouch'
     { _ftQuotaUser = Nothing
     , _ftPrettyPrint = True
-    , _ftUserIp = Nothing
+    , _ftUserIP = Nothing
     , _ftKey = Nothing
     , _ftFileId = pFtFileId_
-    , _ftOauthToken = Nothing
+    , _ftOAuthToken = Nothing
     , _ftFields = Nothing
-    , _ftAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,13 +115,13 @@ ftPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ftUserIp :: Lens' FilesTouch' (Maybe Text)
-ftUserIp = lens _ftUserIp (\ s a -> s{_ftUserIp = a})
+ftUserIP :: Lens' FilesTouch' (Maybe Text)
+ftUserIP = lens _ftUserIP (\ s a -> s{_ftUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ftKey :: Lens' FilesTouch' (Maybe Text)
+ftKey :: Lens' FilesTouch' (Maybe Key)
 ftKey = lens _ftKey (\ s a -> s{_ftKey = a})
 
 -- | The ID of the file to update.
@@ -134,28 +129,28 @@ ftFileId :: Lens' FilesTouch' Text
 ftFileId = lens _ftFileId (\ s a -> s{_ftFileId = a})
 
 -- | OAuth 2.0 token for the current user.
-ftOauthToken :: Lens' FilesTouch' (Maybe Text)
-ftOauthToken
-  = lens _ftOauthToken (\ s a -> s{_ftOauthToken = a})
+ftOAuthToken :: Lens' FilesTouch' (Maybe OAuthToken)
+ftOAuthToken
+  = lens _ftOAuthToken (\ s a -> s{_ftOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ftFields :: Lens' FilesTouch' (Maybe Text)
 ftFields = lens _ftFields (\ s a -> s{_ftFields = a})
 
--- | Data format for the response.
-ftAlt :: Lens' FilesTouch' Alt
-ftAlt = lens _ftAlt (\ s a -> s{_ftAlt = a})
+instance GoogleAuth FilesTouch' where
+        authKey = ftKey . _Just
+        authToken = ftOAuthToken . _Just
 
 instance GoogleRequest FilesTouch' where
         type Rs FilesTouch' = File
         request = requestWithRoute defReq driveURL
         requestWithRoute r u FilesTouch'{..}
-          = go _ftQuotaUser (Just _ftPrettyPrint) _ftUserIp
+          = go _ftQuotaUser (Just _ftPrettyPrint) _ftUserIP
               _ftKey
               _ftFileId
-              _ftOauthToken
+              _ftOAuthToken
               _ftFields
-              (Just _ftAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy FilesTouchResource)
                       r

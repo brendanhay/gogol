@@ -32,12 +32,12 @@ module Network.Google.Resource.Datastore.Datasets.Lookup
     -- * Request Lenses
     , dlQuotaUser
     , dlPrettyPrint
-    , dlUserIp
+    , dlUserIP
+    , dlLookupRequest
     , dlKey
     , dlDatasetId
-    , dlOauthToken
+    , dlOAuthToken
     , dlFields
-    , dlAlt
     ) where
 
 import           Network.Google.Datastore.Types
@@ -51,23 +51,25 @@ type DatasetsLookupResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Post '[JSON] LookupResponse
+                     QueryParam "alt" AltPROTO :>
+                       ReqBody '[JSON] LookupRequest :>
+                         Post '[JSON] LookupResponse
 
 -- | Look up some entities by key.
 --
 -- /See:/ 'datasetsLookup'' smart constructor.
 data DatasetsLookup' = DatasetsLookup'
-    { _dlQuotaUser   :: !(Maybe Text)
-    , _dlPrettyPrint :: !Bool
-    , _dlUserIp      :: !(Maybe Text)
-    , _dlKey         :: !(Maybe Text)
-    , _dlDatasetId   :: !Text
-    , _dlOauthToken  :: !(Maybe Text)
-    , _dlFields      :: !(Maybe Text)
-    , _dlAlt         :: !Alt
+    { _dlQuotaUser     :: !(Maybe Text)
+    , _dlPrettyPrint   :: !Bool
+    , _dlUserIP        :: !(Maybe Text)
+    , _dlLookupRequest :: !LookupRequest
+    , _dlKey           :: !(Maybe Key)
+    , _dlDatasetId     :: !Text
+    , _dlOAuthToken    :: !(Maybe OAuthToken)
+    , _dlFields        :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetsLookup'' with the minimum fields required to make a request.
@@ -78,30 +80,31 @@ data DatasetsLookup' = DatasetsLookup'
 --
 -- * 'dlPrettyPrint'
 --
--- * 'dlUserIp'
+-- * 'dlUserIP'
+--
+-- * 'dlLookupRequest'
 --
 -- * 'dlKey'
 --
 -- * 'dlDatasetId'
 --
--- * 'dlOauthToken'
+-- * 'dlOAuthToken'
 --
 -- * 'dlFields'
---
--- * 'dlAlt'
 datasetsLookup'
-    :: Text -- ^ 'datasetId'
+    :: LookupRequest -- ^ 'LookupRequest'
+    -> Text -- ^ 'datasetId'
     -> DatasetsLookup'
-datasetsLookup' pDlDatasetId_ =
+datasetsLookup' pDlLookupRequest_ pDlDatasetId_ =
     DatasetsLookup'
     { _dlQuotaUser = Nothing
     , _dlPrettyPrint = True
-    , _dlUserIp = Nothing
+    , _dlUserIP = Nothing
+    , _dlLookupRequest = pDlLookupRequest_
     , _dlKey = Nothing
     , _dlDatasetId = pDlDatasetId_
-    , _dlOauthToken = Nothing
+    , _dlOAuthToken = Nothing
     , _dlFields = Nothing
-    , _dlAlt = Proto
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -119,13 +122,19 @@ dlPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-dlUserIp :: Lens' DatasetsLookup' (Maybe Text)
-dlUserIp = lens _dlUserIp (\ s a -> s{_dlUserIp = a})
+dlUserIP :: Lens' DatasetsLookup' (Maybe Text)
+dlUserIP = lens _dlUserIP (\ s a -> s{_dlUserIP = a})
+
+-- | Multipart request metadata.
+dlLookupRequest :: Lens' DatasetsLookup' LookupRequest
+dlLookupRequest
+  = lens _dlLookupRequest
+      (\ s a -> s{_dlLookupRequest = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dlKey :: Lens' DatasetsLookup' (Maybe Text)
+dlKey :: Lens' DatasetsLookup' (Maybe Key)
 dlKey = lens _dlKey (\ s a -> s{_dlKey = a})
 
 -- | Identifies the dataset.
@@ -134,28 +143,29 @@ dlDatasetId
   = lens _dlDatasetId (\ s a -> s{_dlDatasetId = a})
 
 -- | OAuth 2.0 token for the current user.
-dlOauthToken :: Lens' DatasetsLookup' (Maybe Text)
-dlOauthToken
-  = lens _dlOauthToken (\ s a -> s{_dlOauthToken = a})
+dlOAuthToken :: Lens' DatasetsLookup' (Maybe OAuthToken)
+dlOAuthToken
+  = lens _dlOAuthToken (\ s a -> s{_dlOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 dlFields :: Lens' DatasetsLookup' (Maybe Text)
 dlFields = lens _dlFields (\ s a -> s{_dlFields = a})
 
--- | Data format for the response.
-dlAlt :: Lens' DatasetsLookup' Alt
-dlAlt = lens _dlAlt (\ s a -> s{_dlAlt = a})
+instance GoogleAuth DatasetsLookup' where
+        authKey = dlKey . _Just
+        authToken = dlOAuthToken . _Just
 
 instance GoogleRequest DatasetsLookup' where
         type Rs DatasetsLookup' = LookupResponse
         request = requestWithRoute defReq datastoreURL
         requestWithRoute r u DatasetsLookup'{..}
-          = go _dlQuotaUser (Just _dlPrettyPrint) _dlUserIp
+          = go _dlQuotaUser (Just _dlPrettyPrint) _dlUserIP
               _dlKey
               _dlDatasetId
-              _dlOauthToken
+              _dlOAuthToken
               _dlFields
-              (Just _dlAlt)
+              (Just AltPROTO)
+              _dlLookupRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy DatasetsLookupResource)

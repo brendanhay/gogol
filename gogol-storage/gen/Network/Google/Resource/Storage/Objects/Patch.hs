@@ -36,16 +36,16 @@ module Network.Google.Resource.Storage.Objects.Patch
     , opIfGenerationNotMatch
     , opPrettyPrint
     , opIfGenerationMatch
-    , opUserIp
+    , opUserIP
     , opBucket
     , opKey
     , opIfMetagenerationNotMatch
     , opObject
+    , opObject
     , opProjection
-    , opOauthToken
+    , opOAuthToken
     , opGeneration
     , opFields
-    , opAlt
     ) where
 
 import           Network.Google.Prelude
@@ -64,16 +64,17 @@ type ObjectsPatchResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "ifGenerationMatch" Word64 :>
                        QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
+                         QueryParam "key" Key :>
                            QueryParam "ifMetagenerationNotMatch" Word64 :>
                              QueryParam "projection"
                                StorageObjectsPatchProjection
                                :>
-                               QueryParam "oauth_token" Text :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "generation" Word64 :>
                                    QueryParam "fields" Text :>
-                                     QueryParam "alt" Alt :>
-                                       Patch '[JSON] Object
+                                     QueryParam "alt" AltJSON :>
+                                       ReqBody '[JSON] Object :>
+                                         Patch '[JSON] Object
 
 -- | Updates a data blob\'s associated metadata. This method supports patch
 -- semantics.
@@ -85,16 +86,16 @@ data ObjectsPatch' = ObjectsPatch'
     , _opIfGenerationNotMatch     :: !(Maybe Word64)
     , _opPrettyPrint              :: !Bool
     , _opIfGenerationMatch        :: !(Maybe Word64)
-    , _opUserIp                   :: !(Maybe Text)
+    , _opUserIP                   :: !(Maybe Text)
     , _opBucket                   :: !Text
-    , _opKey                      :: !(Maybe Text)
+    , _opKey                      :: !(Maybe Key)
     , _opIfMetagenerationNotMatch :: !(Maybe Word64)
     , _opObject                   :: !Text
+    , _opObject                   :: !Object
     , _opProjection               :: !(Maybe StorageObjectsPatchProjection)
-    , _opOauthToken               :: !(Maybe Text)
+    , _opOAuthToken               :: !(Maybe OAuthToken)
     , _opGeneration               :: !(Maybe Word64)
     , _opFields                   :: !(Maybe Text)
-    , _opAlt                      :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectsPatch'' with the minimum fields required to make a request.
@@ -111,7 +112,7 @@ data ObjectsPatch' = ObjectsPatch'
 --
 -- * 'opIfGenerationMatch'
 --
--- * 'opUserIp'
+-- * 'opUserIP'
 --
 -- * 'opBucket'
 --
@@ -121,36 +122,37 @@ data ObjectsPatch' = ObjectsPatch'
 --
 -- * 'opObject'
 --
+-- * 'opObject'
+--
 -- * 'opProjection'
 --
--- * 'opOauthToken'
+-- * 'opOAuthToken'
 --
 -- * 'opGeneration'
 --
 -- * 'opFields'
---
--- * 'opAlt'
 objectsPatch'
     :: Text -- ^ 'bucket'
     -> Text -- ^ 'object'
+    -> Object -- ^ 'Object'
     -> ObjectsPatch'
-objectsPatch' pOpBucket_ pOpObject_ =
+objectsPatch' pOpBucket_ pOpObject_ pOpObject_ =
     ObjectsPatch'
     { _opQuotaUser = Nothing
     , _opIfMetagenerationMatch = Nothing
     , _opIfGenerationNotMatch = Nothing
     , _opPrettyPrint = True
     , _opIfGenerationMatch = Nothing
-    , _opUserIp = Nothing
+    , _opUserIP = Nothing
     , _opBucket = pOpBucket_
     , _opKey = Nothing
     , _opIfMetagenerationNotMatch = Nothing
     , _opObject = pOpObject_
+    , _opObject = pOpObject_
     , _opProjection = Nothing
-    , _opOauthToken = Nothing
+    , _opOAuthToken = Nothing
     , _opGeneration = Nothing
     , _opFields = Nothing
-    , _opAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -189,8 +191,8 @@ opIfGenerationMatch
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-opUserIp :: Lens' ObjectsPatch' (Maybe Text)
-opUserIp = lens _opUserIp (\ s a -> s{_opUserIp = a})
+opUserIP :: Lens' ObjectsPatch' (Maybe Text)
+opUserIP = lens _opUserIP (\ s a -> s{_opUserIP = a})
 
 -- | Name of the bucket in which the object resides.
 opBucket :: Lens' ObjectsPatch' Text
@@ -199,7 +201,7 @@ opBucket = lens _opBucket (\ s a -> s{_opBucket = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-opKey :: Lens' ObjectsPatch' (Maybe Text)
+opKey :: Lens' ObjectsPatch' (Maybe Key)
 opKey = lens _opKey (\ s a -> s{_opKey = a})
 
 -- | Makes the operation conditional on whether the object\'s current
@@ -213,15 +215,19 @@ opIfMetagenerationNotMatch
 opObject :: Lens' ObjectsPatch' Text
 opObject = lens _opObject (\ s a -> s{_opObject = a})
 
+-- | Multipart request metadata.
+opObject :: Lens' ObjectsPatch' Object
+opObject = lens _opObject (\ s a -> s{_opObject = a})
+
 -- | Set of properties to return. Defaults to full.
 opProjection :: Lens' ObjectsPatch' (Maybe StorageObjectsPatchProjection)
 opProjection
   = lens _opProjection (\ s a -> s{_opProjection = a})
 
 -- | OAuth 2.0 token for the current user.
-opOauthToken :: Lens' ObjectsPatch' (Maybe Text)
-opOauthToken
-  = lens _opOauthToken (\ s a -> s{_opOauthToken = a})
+opOAuthToken :: Lens' ObjectsPatch' (Maybe OAuthToken)
+opOAuthToken
+  = lens _opOAuthToken (\ s a -> s{_opOAuthToken = a})
 
 -- | If present, selects a specific revision of this object (as opposed to
 -- the latest version, the default).
@@ -233,9 +239,9 @@ opGeneration
 opFields :: Lens' ObjectsPatch' (Maybe Text)
 opFields = lens _opFields (\ s a -> s{_opFields = a})
 
--- | Data format for the response.
-opAlt :: Lens' ObjectsPatch' Alt
-opAlt = lens _opAlt (\ s a -> s{_opAlt = a})
+instance GoogleAuth ObjectsPatch' where
+        authKey = opKey . _Just
+        authToken = opOAuthToken . _Just
 
 instance GoogleRequest ObjectsPatch' where
         type Rs ObjectsPatch' = Object
@@ -245,16 +251,17 @@ instance GoogleRequest ObjectsPatch' where
               _opIfGenerationNotMatch
               (Just _opPrettyPrint)
               _opIfGenerationMatch
-              _opUserIp
+              _opUserIP
               _opBucket
               _opKey
               _opIfMetagenerationNotMatch
               _opObject
               _opProjection
-              _opOauthToken
+              _opOAuthToken
               _opGeneration
               _opFields
-              (Just _opAlt)
+              (Just AltJSON)
+              _opObject
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ObjectsPatchResource)

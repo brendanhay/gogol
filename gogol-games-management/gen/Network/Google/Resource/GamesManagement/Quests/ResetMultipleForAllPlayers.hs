@@ -34,11 +34,11 @@ module Network.Google.Resource.GamesManagement.Quests.ResetMultipleForAllPlayers
     -- * Request Lenses
     , qrmfapQuotaUser
     , qrmfapPrettyPrint
-    , qrmfapUserIp
+    , qrmfapUserIP
+    , qrmfapQuestsResetMultipleForAllRequest
     , qrmfapKey
-    , qrmfapOauthToken
+    , qrmfapOAuthToken
     , qrmfapFields
-    , qrmfapAlt
     ) where
 
 import           Network.Google.GamesManagement.Types
@@ -52,10 +52,12 @@ type QuestsResetMultipleForAllPlayersResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Post '[JSON] ()
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] QuestsResetMultipleForAllRequest :>
+                         Post '[JSON] ()
 
 -- | Resets quests with the given IDs for all players. This method is only
 -- available to user accounts for your developer console. Only draft quests
@@ -63,13 +65,13 @@ type QuestsResetMultipleForAllPlayersResource =
 --
 -- /See:/ 'questsResetMultipleForAllPlayers'' smart constructor.
 data QuestsResetMultipleForAllPlayers' = QuestsResetMultipleForAllPlayers'
-    { _qrmfapQuotaUser   :: !(Maybe Text)
-    , _qrmfapPrettyPrint :: !Bool
-    , _qrmfapUserIp      :: !(Maybe Text)
-    , _qrmfapKey         :: !(Maybe Text)
-    , _qrmfapOauthToken  :: !(Maybe Text)
-    , _qrmfapFields      :: !(Maybe Text)
-    , _qrmfapAlt         :: !Alt
+    { _qrmfapQuotaUser                        :: !(Maybe Text)
+    , _qrmfapPrettyPrint                      :: !Bool
+    , _qrmfapUserIP                           :: !(Maybe Text)
+    , _qrmfapQuestsResetMultipleForAllRequest :: !QuestsResetMultipleForAllRequest
+    , _qrmfapKey                              :: !(Maybe Key)
+    , _qrmfapOAuthToken                       :: !(Maybe OAuthToken)
+    , _qrmfapFields                           :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QuestsResetMultipleForAllPlayers'' with the minimum fields required to make a request.
@@ -80,26 +82,27 @@ data QuestsResetMultipleForAllPlayers' = QuestsResetMultipleForAllPlayers'
 --
 -- * 'qrmfapPrettyPrint'
 --
--- * 'qrmfapUserIp'
+-- * 'qrmfapUserIP'
+--
+-- * 'qrmfapQuestsResetMultipleForAllRequest'
 --
 -- * 'qrmfapKey'
 --
--- * 'qrmfapOauthToken'
+-- * 'qrmfapOAuthToken'
 --
 -- * 'qrmfapFields'
---
--- * 'qrmfapAlt'
 questsResetMultipleForAllPlayers'
-    :: QuestsResetMultipleForAllPlayers'
-questsResetMultipleForAllPlayers' =
+    :: QuestsResetMultipleForAllRequest -- ^ 'QuestsResetMultipleForAllRequest'
+    -> QuestsResetMultipleForAllPlayers'
+questsResetMultipleForAllPlayers' pQrmfapQuestsResetMultipleForAllRequest_ =
     QuestsResetMultipleForAllPlayers'
     { _qrmfapQuotaUser = Nothing
     , _qrmfapPrettyPrint = True
-    , _qrmfapUserIp = Nothing
+    , _qrmfapUserIP = Nothing
+    , _qrmfapQuestsResetMultipleForAllRequest = pQrmfapQuestsResetMultipleForAllRequest_
     , _qrmfapKey = Nothing
-    , _qrmfapOauthToken = Nothing
+    , _qrmfapOAuthToken = Nothing
     , _qrmfapFields = Nothing
-    , _qrmfapAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -118,32 +121,39 @@ qrmfapPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-qrmfapUserIp :: Lens' QuestsResetMultipleForAllPlayers' (Maybe Text)
-qrmfapUserIp
-  = lens _qrmfapUserIp (\ s a -> s{_qrmfapUserIp = a})
+qrmfapUserIP :: Lens' QuestsResetMultipleForAllPlayers' (Maybe Text)
+qrmfapUserIP
+  = lens _qrmfapUserIP (\ s a -> s{_qrmfapUserIP = a})
+
+-- | Multipart request metadata.
+qrmfapQuestsResetMultipleForAllRequest :: Lens' QuestsResetMultipleForAllPlayers' QuestsResetMultipleForAllRequest
+qrmfapQuestsResetMultipleForAllRequest
+  = lens _qrmfapQuestsResetMultipleForAllRequest
+      (\ s a ->
+         s{_qrmfapQuestsResetMultipleForAllRequest = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-qrmfapKey :: Lens' QuestsResetMultipleForAllPlayers' (Maybe Text)
+qrmfapKey :: Lens' QuestsResetMultipleForAllPlayers' (Maybe Key)
 qrmfapKey
   = lens _qrmfapKey (\ s a -> s{_qrmfapKey = a})
 
 -- | OAuth 2.0 token for the current user.
-qrmfapOauthToken :: Lens' QuestsResetMultipleForAllPlayers' (Maybe Text)
-qrmfapOauthToken
-  = lens _qrmfapOauthToken
-      (\ s a -> s{_qrmfapOauthToken = a})
+qrmfapOAuthToken :: Lens' QuestsResetMultipleForAllPlayers' (Maybe OAuthToken)
+qrmfapOAuthToken
+  = lens _qrmfapOAuthToken
+      (\ s a -> s{_qrmfapOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 qrmfapFields :: Lens' QuestsResetMultipleForAllPlayers' (Maybe Text)
 qrmfapFields
   = lens _qrmfapFields (\ s a -> s{_qrmfapFields = a})
 
--- | Data format for the response.
-qrmfapAlt :: Lens' QuestsResetMultipleForAllPlayers' Alt
-qrmfapAlt
-  = lens _qrmfapAlt (\ s a -> s{_qrmfapAlt = a})
+instance GoogleAuth QuestsResetMultipleForAllPlayers'
+         where
+        authKey = qrmfapKey . _Just
+        authToken = qrmfapOAuthToken . _Just
 
 instance GoogleRequest
          QuestsResetMultipleForAllPlayers' where
@@ -152,11 +162,12 @@ instance GoogleRequest
         requestWithRoute r u
           QuestsResetMultipleForAllPlayers'{..}
           = go _qrmfapQuotaUser (Just _qrmfapPrettyPrint)
-              _qrmfapUserIp
+              _qrmfapUserIP
               _qrmfapKey
-              _qrmfapOauthToken
+              _qrmfapOAuthToken
               _qrmfapFields
-              (Just _qrmfapAlt)
+              (Just AltJSON)
+              _qrmfapQuestsResetMultipleForAllRequest
           where go
                   = clientWithRoute
                       (Proxy ::

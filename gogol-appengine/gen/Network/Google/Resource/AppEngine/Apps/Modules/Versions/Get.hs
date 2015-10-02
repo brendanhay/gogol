@@ -19,7 +19,7 @@
 --
 -- | Gets application deployment information.
 --
--- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @AppengineAppsModulesVersionsGet@.
+-- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @AppEngineAppsModulesVersionsGet@.
 module Network.Google.Resource.AppEngine.Apps.Modules.Versions.Get
     (
     -- * REST Resource
@@ -43,16 +43,15 @@ module Network.Google.Resource.AppEngine.Apps.Modules.Versions.Get
     , amvgKey
     , amvgAppsId
     , amvgView
-    , amvgOauthToken
+    , amvgOAuthToken
     , amvgFields
     , amvgCallback
-    , amvgAlt
     ) where
 
 import           Network.Google.AppEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AppengineAppsModulesVersionsGet@ which the
+-- | A resource alias for @AppEngineAppsModulesVersionsGet@ which the
 -- 'AppsModulesVersionsGet'' request conforms to.
 type AppsModulesVersionsGetResource =
      "v1beta4" :>
@@ -70,12 +69,12 @@ type AppsModulesVersionsGetResource =
                              QueryParam "access_token" Text :>
                                QueryParam "uploadType" Text :>
                                  QueryParam "bearer_token" Text :>
-                                   QueryParam "key" Text :>
+                                   QueryParam "key" Key :>
                                      QueryParam "view" Text :>
-                                       QueryParam "oauth_token" Text :>
+                                       QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "fields" Text :>
                                            QueryParam "callback" Text :>
-                                             QueryParam "alt" Text :>
+                                             QueryParam "alt" AltJSON :>
                                                Get '[JSON] Version
 
 -- | Gets application deployment information.
@@ -92,13 +91,12 @@ data AppsModulesVersionsGet' = AppsModulesVersionsGet'
     , _amvgVersionsId     :: !Text
     , _amvgModulesId      :: !Text
     , _amvgBearerToken    :: !(Maybe Text)
-    , _amvgKey            :: !(Maybe Text)
+    , _amvgKey            :: !(Maybe Key)
     , _amvgAppsId         :: !Text
     , _amvgView           :: !(Maybe Text)
-    , _amvgOauthToken     :: !(Maybe Text)
+    , _amvgOAuthToken     :: !(Maybe OAuthToken)
     , _amvgFields         :: !(Maybe Text)
     , _amvgCallback       :: !(Maybe Text)
-    , _amvgAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AppsModulesVersionsGet'' with the minimum fields required to make a request.
@@ -131,13 +129,11 @@ data AppsModulesVersionsGet' = AppsModulesVersionsGet'
 --
 -- * 'amvgView'
 --
--- * 'amvgOauthToken'
+-- * 'amvgOAuthToken'
 --
 -- * 'amvgFields'
 --
 -- * 'amvgCallback'
---
--- * 'amvgAlt'
 appsModulesVersionsGet'
     :: Text -- ^ 'versionsId'
     -> Text -- ^ 'modulesId'
@@ -158,10 +154,9 @@ appsModulesVersionsGet' pAmvgVersionsId_ pAmvgModulesId_ pAmvgAppsId_ =
     , _amvgKey = Nothing
     , _amvgAppsId = pAmvgAppsId_
     , _amvgView = Nothing
-    , _amvgOauthToken = Nothing
+    , _amvgOAuthToken = Nothing
     , _amvgFields = Nothing
     , _amvgCallback = Nothing
-    , _amvgAlt = "json"
     }
 
 -- | V1 error format.
@@ -226,7 +221,7 @@ amvgBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-amvgKey :: Lens' AppsModulesVersionsGet' (Maybe Text)
+amvgKey :: Lens' AppsModulesVersionsGet' (Maybe Key)
 amvgKey = lens _amvgKey (\ s a -> s{_amvgKey = a})
 
 -- | Part of \`name\`. Name of the resource requested. For example:
@@ -240,10 +235,10 @@ amvgView :: Lens' AppsModulesVersionsGet' (Maybe Text)
 amvgView = lens _amvgView (\ s a -> s{_amvgView = a})
 
 -- | OAuth 2.0 token for the current user.
-amvgOauthToken :: Lens' AppsModulesVersionsGet' (Maybe Text)
-amvgOauthToken
-  = lens _amvgOauthToken
-      (\ s a -> s{_amvgOauthToken = a})
+amvgOAuthToken :: Lens' AppsModulesVersionsGet' (Maybe OAuthToken)
+amvgOAuthToken
+  = lens _amvgOAuthToken
+      (\ s a -> s{_amvgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 amvgFields :: Lens' AppsModulesVersionsGet' (Maybe Text)
@@ -255,9 +250,9 @@ amvgCallback :: Lens' AppsModulesVersionsGet' (Maybe Text)
 amvgCallback
   = lens _amvgCallback (\ s a -> s{_amvgCallback = a})
 
--- | Data format for response.
-amvgAlt :: Lens' AppsModulesVersionsGet' Text
-amvgAlt = lens _amvgAlt (\ s a -> s{_amvgAlt = a})
+instance GoogleAuth AppsModulesVersionsGet' where
+        authKey = amvgKey . _Just
+        authToken = amvgOAuthToken . _Just
 
 instance GoogleRequest AppsModulesVersionsGet' where
         type Rs AppsModulesVersionsGet' = Version
@@ -275,10 +270,10 @@ instance GoogleRequest AppsModulesVersionsGet' where
               _amvgKey
               _amvgAppsId
               _amvgView
-              _amvgOauthToken
+              _amvgOAuthToken
               _amvgFields
               _amvgCallback
-              (Just _amvgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AppsModulesVersionsGetResource)

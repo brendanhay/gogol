@@ -33,13 +33,12 @@ module Network.Google.Resource.Drive.Properties.Delete
     , pdQuotaUser
     , pdPrettyPrint
     , pdPropertyKey
-    , pdUserIp
+    , pdUserIP
     , pdVisibility
     , pdKey
     , pdFileId
-    , pdOauthToken
+    , pdOAuthToken
     , pdFields
-    , pdAlt
     ) where
 
 import           Network.Google.Drive.Types
@@ -56,10 +55,10 @@ type PropertiesDeleteResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "visibility" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Delete '[JSON] ()
+                           QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a property.
 --
@@ -68,13 +67,12 @@ data PropertiesDelete' = PropertiesDelete'
     { _pdQuotaUser   :: !(Maybe Text)
     , _pdPrettyPrint :: !Bool
     , _pdPropertyKey :: !Text
-    , _pdUserIp      :: !(Maybe Text)
+    , _pdUserIP      :: !(Maybe Text)
     , _pdVisibility  :: !Text
-    , _pdKey         :: !(Maybe Text)
+    , _pdKey         :: !(Maybe Key)
     , _pdFileId      :: !Text
-    , _pdOauthToken  :: !(Maybe Text)
+    , _pdOAuthToken  :: !(Maybe OAuthToken)
     , _pdFields      :: !(Maybe Text)
-    , _pdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PropertiesDelete'' with the minimum fields required to make a request.
@@ -87,7 +85,7 @@ data PropertiesDelete' = PropertiesDelete'
 --
 -- * 'pdPropertyKey'
 --
--- * 'pdUserIp'
+-- * 'pdUserIP'
 --
 -- * 'pdVisibility'
 --
@@ -95,11 +93,9 @@ data PropertiesDelete' = PropertiesDelete'
 --
 -- * 'pdFileId'
 --
--- * 'pdOauthToken'
+-- * 'pdOAuthToken'
 --
 -- * 'pdFields'
---
--- * 'pdAlt'
 propertiesDelete'
     :: Text -- ^ 'propertyKey'
     -> Text -- ^ 'fileId'
@@ -109,13 +105,12 @@ propertiesDelete' pPdPropertyKey_ pPdFileId_ =
     { _pdQuotaUser = Nothing
     , _pdPrettyPrint = True
     , _pdPropertyKey = pPdPropertyKey_
-    , _pdUserIp = Nothing
+    , _pdUserIP = Nothing
     , _pdVisibility = "private"
     , _pdKey = Nothing
     , _pdFileId = pPdFileId_
-    , _pdOauthToken = Nothing
+    , _pdOAuthToken = Nothing
     , _pdFields = Nothing
-    , _pdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,8 +134,8 @@ pdPropertyKey
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-pdUserIp :: Lens' PropertiesDelete' (Maybe Text)
-pdUserIp = lens _pdUserIp (\ s a -> s{_pdUserIp = a})
+pdUserIP :: Lens' PropertiesDelete' (Maybe Text)
+pdUserIP = lens _pdUserIP (\ s a -> s{_pdUserIP = a})
 
 -- | The visibility of the property.
 pdVisibility :: Lens' PropertiesDelete' Text
@@ -150,7 +145,7 @@ pdVisibility
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pdKey :: Lens' PropertiesDelete' (Maybe Text)
+pdKey :: Lens' PropertiesDelete' (Maybe Key)
 pdKey = lens _pdKey (\ s a -> s{_pdKey = a})
 
 -- | The ID of the file.
@@ -158,17 +153,17 @@ pdFileId :: Lens' PropertiesDelete' Text
 pdFileId = lens _pdFileId (\ s a -> s{_pdFileId = a})
 
 -- | OAuth 2.0 token for the current user.
-pdOauthToken :: Lens' PropertiesDelete' (Maybe Text)
-pdOauthToken
-  = lens _pdOauthToken (\ s a -> s{_pdOauthToken = a})
+pdOAuthToken :: Lens' PropertiesDelete' (Maybe OAuthToken)
+pdOAuthToken
+  = lens _pdOAuthToken (\ s a -> s{_pdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 pdFields :: Lens' PropertiesDelete' (Maybe Text)
 pdFields = lens _pdFields (\ s a -> s{_pdFields = a})
 
--- | Data format for the response.
-pdAlt :: Lens' PropertiesDelete' Alt
-pdAlt = lens _pdAlt (\ s a -> s{_pdAlt = a})
+instance GoogleAuth PropertiesDelete' where
+        authKey = pdKey . _Just
+        authToken = pdOAuthToken . _Just
 
 instance GoogleRequest PropertiesDelete' where
         type Rs PropertiesDelete' = ()
@@ -176,13 +171,13 @@ instance GoogleRequest PropertiesDelete' where
         requestWithRoute r u PropertiesDelete'{..}
           = go _pdQuotaUser (Just _pdPrettyPrint)
               _pdPropertyKey
-              _pdUserIp
+              _pdUserIP
               (Just _pdVisibility)
               _pdKey
               _pdFileId
-              _pdOauthToken
+              _pdOAuthToken
               _pdFields
-              (Just _pdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PropertiesDeleteResource)

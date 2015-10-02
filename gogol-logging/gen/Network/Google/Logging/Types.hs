@@ -29,7 +29,7 @@ module Network.Google.Logging.Types
     , log
     , logName
     , logDisplayName
-    , logPayloadType
+    , logPayLoadType
 
     -- * LogError
     , LogError
@@ -58,17 +58,17 @@ module Network.Google.Logging.Types
     , rlInstanceIndex
     , rlModuleId
     , rlVersionId
-    , rlHttpVersion
+    , rlHTTPVersion
     , rlTaskName
     , rlPendingTime
     , rlWasLoadingRequest
     , rlStartTime
     , rlLatency
-    , rlUrlMapEntry
+    , rlURLMapEntry
     , rlCost
     , rlReferrer
     , rlLine
-    , rlIp
+    , rlIP
     , rlAppId
     , rlMethod
     , rlResource
@@ -104,9 +104,9 @@ module Network.Google.Logging.Types
     , listSinksResponse
     , lsrSinks
 
-    -- * LogEntryProtoPayload
-    , LogEntryProtoPayload
-    , logEntryProtoPayload
+    -- * LogEntryProtoPayLoad
+    , LogEntryProtoPayLoad
+    , logEntryProtoPayLoad
 
     -- * ListLogServiceIndexesResponse
     , ListLogServiceIndexesResponse
@@ -146,8 +146,8 @@ module Network.Google.Logging.Types
     , HTTPRequest
     , hTTPRequest
     , httprStatus
-    , httprRequestUrl
-    , httprRemoteIp
+    , httprRequestURL
+    , httprRemoteIP
     , httprRequestSize
     , httprUserAgent
     , httprResponseSize
@@ -186,12 +186,12 @@ module Network.Google.Logging.Types
     , LogEntry
     , logEntry
     , leLog
-    , leTextPayload
-    , leHttpRequest
-    , leStructPayload
+    , leTextPayLoad
+    , leHTTPRequest
+    , leStructPayLoad
     , leInsertId
     , leMetadata
-    , leProtoPayload
+    , leProtoPayLoad
 
     -- * SourceLocation
     , SourceLocation
@@ -206,9 +206,9 @@ module Network.Google.Logging.Types
     , srRepository
     , srRevisionId
 
-    -- * LogEntryStructPayload
-    , LogEntryStructPayload
-    , logEntryStructPayload
+    -- * LogEntryStructPayLoad
+    , LogEntryStructPayLoad
+    , logEntryStructPayLoad
     ) where
 
 import           Network.Google.Logging.Types.Product

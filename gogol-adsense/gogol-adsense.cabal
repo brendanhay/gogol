@@ -33,16 +33,16 @@ library
     exposed-modules:
           Network.Google.AdSense
         , Network.Google.AdSense.Types
-        , Network.Google.Resource.AdSense.Accounts.Adclients.List
-        , Network.Google.Resource.AdSense.Accounts.Adunits.Customchannels.List
-        , Network.Google.Resource.AdSense.Accounts.Adunits.Get
-        , Network.Google.Resource.AdSense.Accounts.Adunits.GetAdCode
-        , Network.Google.Resource.AdSense.Accounts.Adunits.List
+        , Network.Google.Resource.AdSense.Accounts.AdClients.List
+        , Network.Google.Resource.AdSense.Accounts.AdUnits.CustomChannels.List
+        , Network.Google.Resource.AdSense.Accounts.AdUnits.Get
+        , Network.Google.Resource.AdSense.Accounts.AdUnits.GetAdCode
+        , Network.Google.Resource.AdSense.Accounts.AdUnits.List
         , Network.Google.Resource.AdSense.Accounts.Alerts.Delete
         , Network.Google.Resource.AdSense.Accounts.Alerts.List
-        , Network.Google.Resource.AdSense.Accounts.Customchannels.Adunits.List
-        , Network.Google.Resource.AdSense.Accounts.Customchannels.Get
-        , Network.Google.Resource.AdSense.Accounts.Customchannels.List
+        , Network.Google.Resource.AdSense.Accounts.CustomChannels.AdUnits.List
+        , Network.Google.Resource.AdSense.Accounts.CustomChannels.Get
+        , Network.Google.Resource.AdSense.Accounts.CustomChannels.List
         , Network.Google.Resource.AdSense.Accounts.Get
         , Network.Google.Resource.AdSense.Accounts.List
         , Network.Google.Resource.AdSense.Accounts.Payments.List
@@ -51,17 +51,17 @@ library
         , Network.Google.Resource.AdSense.Accounts.Reports.Saved.List
         , Network.Google.Resource.AdSense.Accounts.Savedadstyles.Get
         , Network.Google.Resource.AdSense.Accounts.Savedadstyles.List
-        , Network.Google.Resource.AdSense.Accounts.URLchannels.List
-        , Network.Google.Resource.AdSense.Adclients.List
-        , Network.Google.Resource.AdSense.Adunits.Customchannels.List
-        , Network.Google.Resource.AdSense.Adunits.Get
-        , Network.Google.Resource.AdSense.Adunits.GetAdCode
-        , Network.Google.Resource.AdSense.Adunits.List
+        , Network.Google.Resource.AdSense.Accounts.URLChannels.List
+        , Network.Google.Resource.AdSense.AdClients.List
+        , Network.Google.Resource.AdSense.AdUnits.CustomChannels.List
+        , Network.Google.Resource.AdSense.AdUnits.Get
+        , Network.Google.Resource.AdSense.AdUnits.GetAdCode
+        , Network.Google.Resource.AdSense.AdUnits.List
         , Network.Google.Resource.AdSense.Alerts.Delete
         , Network.Google.Resource.AdSense.Alerts.List
-        , Network.Google.Resource.AdSense.Customchannels.Adunits.List
-        , Network.Google.Resource.AdSense.Customchannels.Get
-        , Network.Google.Resource.AdSense.Customchannels.List
+        , Network.Google.Resource.AdSense.CustomChannels.AdUnits.List
+        , Network.Google.Resource.AdSense.CustomChannels.Get
+        , Network.Google.Resource.AdSense.CustomChannels.List
         , Network.Google.Resource.AdSense.Metadata.Dimensions.List
         , Network.Google.Resource.AdSense.Metadata.Metrics.List
         , Network.Google.Resource.AdSense.Payments.List
@@ -70,7 +70,7 @@ library
         , Network.Google.Resource.AdSense.Reports.Saved.List
         , Network.Google.Resource.AdSense.Savedadstyles.Get
         , Network.Google.Resource.AdSense.Savedadstyles.List
-        , Network.Google.Resource.AdSense.URLchannels.List
+        , Network.Google.Resource.AdSense.URLChannels.List
 
     other-modules:
           Network.Google.AdSense.Types.Product

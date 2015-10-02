@@ -33,11 +33,10 @@ module Network.Google.Resource.GamesManagement.Achievements.ResetAllForAllPlayer
     -- * Request Lenses
     , arafapQuotaUser
     , arafapPrettyPrint
-    , arafapUserIp
+    , arafapUserIP
     , arafapKey
-    , arafapOauthToken
+    , arafapOAuthToken
     , arafapFields
-    , arafapAlt
     ) where
 
 import           Network.Google.GamesManagement.Types
@@ -51,10 +50,10 @@ type AchievementsResetAllForAllPlayersResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Post '[JSON] ()
+                     QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Resets all draft achievements for all players. This method is only
 -- available to user accounts for your developer console.
@@ -63,11 +62,10 @@ type AchievementsResetAllForAllPlayersResource =
 data AchievementsResetAllForAllPlayers' = AchievementsResetAllForAllPlayers'
     { _arafapQuotaUser   :: !(Maybe Text)
     , _arafapPrettyPrint :: !Bool
-    , _arafapUserIp      :: !(Maybe Text)
-    , _arafapKey         :: !(Maybe Text)
-    , _arafapOauthToken  :: !(Maybe Text)
+    , _arafapUserIP      :: !(Maybe Text)
+    , _arafapKey         :: !(Maybe Key)
+    , _arafapOAuthToken  :: !(Maybe OAuthToken)
     , _arafapFields      :: !(Maybe Text)
-    , _arafapAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementsResetAllForAllPlayers'' with the minimum fields required to make a request.
@@ -78,26 +76,23 @@ data AchievementsResetAllForAllPlayers' = AchievementsResetAllForAllPlayers'
 --
 -- * 'arafapPrettyPrint'
 --
--- * 'arafapUserIp'
+-- * 'arafapUserIP'
 --
 -- * 'arafapKey'
 --
--- * 'arafapOauthToken'
+-- * 'arafapOAuthToken'
 --
 -- * 'arafapFields'
---
--- * 'arafapAlt'
 achievementsResetAllForAllPlayers'
     :: AchievementsResetAllForAllPlayers'
 achievementsResetAllForAllPlayers' =
     AchievementsResetAllForAllPlayers'
     { _arafapQuotaUser = Nothing
     , _arafapPrettyPrint = True
-    , _arafapUserIp = Nothing
+    , _arafapUserIP = Nothing
     , _arafapKey = Nothing
-    , _arafapOauthToken = Nothing
+    , _arafapOAuthToken = Nothing
     , _arafapFields = Nothing
-    , _arafapAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -116,32 +111,32 @@ arafapPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-arafapUserIp :: Lens' AchievementsResetAllForAllPlayers' (Maybe Text)
-arafapUserIp
-  = lens _arafapUserIp (\ s a -> s{_arafapUserIp = a})
+arafapUserIP :: Lens' AchievementsResetAllForAllPlayers' (Maybe Text)
+arafapUserIP
+  = lens _arafapUserIP (\ s a -> s{_arafapUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-arafapKey :: Lens' AchievementsResetAllForAllPlayers' (Maybe Text)
+arafapKey :: Lens' AchievementsResetAllForAllPlayers' (Maybe Key)
 arafapKey
   = lens _arafapKey (\ s a -> s{_arafapKey = a})
 
 -- | OAuth 2.0 token for the current user.
-arafapOauthToken :: Lens' AchievementsResetAllForAllPlayers' (Maybe Text)
-arafapOauthToken
-  = lens _arafapOauthToken
-      (\ s a -> s{_arafapOauthToken = a})
+arafapOAuthToken :: Lens' AchievementsResetAllForAllPlayers' (Maybe OAuthToken)
+arafapOAuthToken
+  = lens _arafapOAuthToken
+      (\ s a -> s{_arafapOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 arafapFields :: Lens' AchievementsResetAllForAllPlayers' (Maybe Text)
 arafapFields
   = lens _arafapFields (\ s a -> s{_arafapFields = a})
 
--- | Data format for the response.
-arafapAlt :: Lens' AchievementsResetAllForAllPlayers' Alt
-arafapAlt
-  = lens _arafapAlt (\ s a -> s{_arafapAlt = a})
+instance GoogleAuth
+         AchievementsResetAllForAllPlayers' where
+        authKey = arafapKey . _Just
+        authToken = arafapOAuthToken . _Just
 
 instance GoogleRequest
          AchievementsResetAllForAllPlayers' where
@@ -150,11 +145,11 @@ instance GoogleRequest
         requestWithRoute r u
           AchievementsResetAllForAllPlayers'{..}
           = go _arafapQuotaUser (Just _arafapPrettyPrint)
-              _arafapUserIp
+              _arafapUserIP
               _arafapKey
-              _arafapOauthToken
+              _arafapOAuthToken
               _arafapFields
-              (Just _arafapAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

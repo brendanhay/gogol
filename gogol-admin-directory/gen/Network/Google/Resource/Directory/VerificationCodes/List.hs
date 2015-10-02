@@ -33,12 +33,11 @@ module Network.Google.Resource.Directory.VerificationCodes.List
     -- * Request Lenses
     , vclQuotaUser
     , vclPrettyPrint
-    , vclUserIp
+    , vclUserIP
     , vclKey
-    , vclOauthToken
+    , vclOAuthToken
     , vclUserKey
     , vclFields
-    , vclAlt
     ) where
 
 import           Network.Google.AdminDirectory.Types
@@ -53,10 +52,11 @@ type VerificationCodesListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Get '[JSON] VerificationCodes
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] VerificationCodes
 
 -- | Returns the current set of valid backup verification codes for the
 -- specified user.
@@ -65,12 +65,11 @@ type VerificationCodesListResource =
 data VerificationCodesList' = VerificationCodesList'
     { _vclQuotaUser   :: !(Maybe Text)
     , _vclPrettyPrint :: !Bool
-    , _vclUserIp      :: !(Maybe Text)
-    , _vclKey         :: !(Maybe Text)
-    , _vclOauthToken  :: !(Maybe Text)
+    , _vclUserIP      :: !(Maybe Text)
+    , _vclKey         :: !(Maybe Key)
+    , _vclOAuthToken  :: !(Maybe OAuthToken)
     , _vclUserKey     :: !Text
     , _vclFields      :: !(Maybe Text)
-    , _vclAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VerificationCodesList'' with the minimum fields required to make a request.
@@ -81,17 +80,15 @@ data VerificationCodesList' = VerificationCodesList'
 --
 -- * 'vclPrettyPrint'
 --
--- * 'vclUserIp'
+-- * 'vclUserIP'
 --
 -- * 'vclKey'
 --
--- * 'vclOauthToken'
+-- * 'vclOAuthToken'
 --
 -- * 'vclUserKey'
 --
 -- * 'vclFields'
---
--- * 'vclAlt'
 verificationCodesList'
     :: Text -- ^ 'userKey'
     -> VerificationCodesList'
@@ -99,12 +96,11 @@ verificationCodesList' pVclUserKey_ =
     VerificationCodesList'
     { _vclQuotaUser = Nothing
     , _vclPrettyPrint = True
-    , _vclUserIp = Nothing
+    , _vclUserIP = Nothing
     , _vclKey = Nothing
-    , _vclOauthToken = Nothing
+    , _vclOAuthToken = Nothing
     , _vclUserKey = pVclUserKey_
     , _vclFields = Nothing
-    , _vclAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -122,21 +118,21 @@ vclPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-vclUserIp :: Lens' VerificationCodesList' (Maybe Text)
-vclUserIp
-  = lens _vclUserIp (\ s a -> s{_vclUserIp = a})
+vclUserIP :: Lens' VerificationCodesList' (Maybe Text)
+vclUserIP
+  = lens _vclUserIP (\ s a -> s{_vclUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vclKey :: Lens' VerificationCodesList' (Maybe Text)
+vclKey :: Lens' VerificationCodesList' (Maybe Key)
 vclKey = lens _vclKey (\ s a -> s{_vclKey = a})
 
 -- | OAuth 2.0 token for the current user.
-vclOauthToken :: Lens' VerificationCodesList' (Maybe Text)
-vclOauthToken
-  = lens _vclOauthToken
-      (\ s a -> s{_vclOauthToken = a})
+vclOAuthToken :: Lens' VerificationCodesList' (Maybe OAuthToken)
+vclOAuthToken
+  = lens _vclOAuthToken
+      (\ s a -> s{_vclOAuthToken = a})
 
 -- | Identifies the user in the API request. The value can be the user\'s
 -- primary email address, alias email address, or unique user ID.
@@ -149,20 +145,20 @@ vclFields :: Lens' VerificationCodesList' (Maybe Text)
 vclFields
   = lens _vclFields (\ s a -> s{_vclFields = a})
 
--- | Data format for the response.
-vclAlt :: Lens' VerificationCodesList' Alt
-vclAlt = lens _vclAlt (\ s a -> s{_vclAlt = a})
+instance GoogleAuth VerificationCodesList' where
+        authKey = vclKey . _Just
+        authToken = vclOAuthToken . _Just
 
 instance GoogleRequest VerificationCodesList' where
         type Rs VerificationCodesList' = VerificationCodes
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u VerificationCodesList'{..}
-          = go _vclQuotaUser (Just _vclPrettyPrint) _vclUserIp
+          = go _vclQuotaUser (Just _vclPrettyPrint) _vclUserIP
               _vclKey
-              _vclOauthToken
+              _vclOAuthToken
               _vclUserKey
               _vclFields
-              (Just _vclAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy VerificationCodesListResource)

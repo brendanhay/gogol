@@ -25,8 +25,8 @@ module Network.Google.AppsCalendar.Types
     , cleLocation
     , cleKind
     , cleNotificationSettings
-    , cleBackgroundColor
-    , cleForegroundColor
+    , cleBackgRoundColor
+    , cleForegRoundColor
     , cleDefaultReminders
     , cleSelected
     , clePrimary
@@ -71,12 +71,12 @@ module Network.Google.AppsCalendar.Types
     , eRecurrence
     , eGadget
     , eSequence
-    , eICalUID
+    , eICalUId
     , eEnd
     , eAttendeesOmitted
     , eSource
     , eId
-    , eHtmlLink
+    , eHTMLLink
     , eUpdated
     , eColorId
     , eAnyoneCanAddSelf
@@ -115,7 +115,7 @@ module Network.Google.AppsCalendar.Types
     -- * EventAttachment
     , EventAttachment
     , eventAttachment
-    , eaFileUrl
+    , eaFileURL
     , eaIconLink
     , eaMimeType
     , eaTitle
@@ -138,8 +138,8 @@ module Network.Google.AppsCalendar.Types
     -- * ColorDefinition
     , ColorDefinition
     , colorDefinition
-    , cdForeground
-    , cdBackground
+    , cdForegRound
+    , cdBackgRound
 
     -- * Error
     , Error
@@ -156,13 +156,13 @@ module Network.Google.AppsCalendar.Types
     -- * Channel
     , Channel
     , channel
-    , cResourceUri
+    , cResourceURI
     , cResourceId
     , cKind
     , cExpiration
     , cToken
     , cAddress
-    , cPayload
+    , cPayLoad
     , cParams
     , cId
     , cType
@@ -366,11 +366,8 @@ module Network.Google.AppsCalendar.Types
     -- * EventSource
     , EventSource
     , eventSource
-    , esUrl
+    , esURL
     , esTitle
-
-    -- * Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.AppsCalendar.Types.Product

@@ -32,13 +32,12 @@ module Network.Google.Resource.Drive.Revisions.Delete
     -- * Request Lenses
     , rdQuotaUser
     , rdPrettyPrint
-    , rdUserIp
+    , rdUserIP
     , rdKey
     , rdFileId
-    , rdOauthToken
+    , rdOAuthToken
     , rdRevisionId
     , rdFields
-    , rdAlt
     ) where
 
 import           Network.Google.Drive.Types
@@ -54,10 +53,10 @@ type RevisionsDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Delete '[JSON] ()
+                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Removes a revision.
 --
@@ -65,13 +64,12 @@ type RevisionsDeleteResource =
 data RevisionsDelete' = RevisionsDelete'
     { _rdQuotaUser   :: !(Maybe Text)
     , _rdPrettyPrint :: !Bool
-    , _rdUserIp      :: !(Maybe Text)
-    , _rdKey         :: !(Maybe Text)
+    , _rdUserIP      :: !(Maybe Text)
+    , _rdKey         :: !(Maybe Key)
     , _rdFileId      :: !Text
-    , _rdOauthToken  :: !(Maybe Text)
+    , _rdOAuthToken  :: !(Maybe OAuthToken)
     , _rdRevisionId  :: !Text
     , _rdFields      :: !(Maybe Text)
-    , _rdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RevisionsDelete'' with the minimum fields required to make a request.
@@ -82,19 +80,17 @@ data RevisionsDelete' = RevisionsDelete'
 --
 -- * 'rdPrettyPrint'
 --
--- * 'rdUserIp'
+-- * 'rdUserIP'
 --
 -- * 'rdKey'
 --
 -- * 'rdFileId'
 --
--- * 'rdOauthToken'
+-- * 'rdOAuthToken'
 --
 -- * 'rdRevisionId'
 --
 -- * 'rdFields'
---
--- * 'rdAlt'
 revisionsDelete'
     :: Text -- ^ 'fileId'
     -> Text -- ^ 'revisionId'
@@ -103,13 +99,12 @@ revisionsDelete' pRdFileId_ pRdRevisionId_ =
     RevisionsDelete'
     { _rdQuotaUser = Nothing
     , _rdPrettyPrint = True
-    , _rdUserIp = Nothing
+    , _rdUserIP = Nothing
     , _rdKey = Nothing
     , _rdFileId = pRdFileId_
-    , _rdOauthToken = Nothing
+    , _rdOAuthToken = Nothing
     , _rdRevisionId = pRdRevisionId_
     , _rdFields = Nothing
-    , _rdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,13 +122,13 @@ rdPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rdUserIp :: Lens' RevisionsDelete' (Maybe Text)
-rdUserIp = lens _rdUserIp (\ s a -> s{_rdUserIp = a})
+rdUserIP :: Lens' RevisionsDelete' (Maybe Text)
+rdUserIP = lens _rdUserIP (\ s a -> s{_rdUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rdKey :: Lens' RevisionsDelete' (Maybe Text)
+rdKey :: Lens' RevisionsDelete' (Maybe Key)
 rdKey = lens _rdKey (\ s a -> s{_rdKey = a})
 
 -- | The ID of the file.
@@ -141,9 +136,9 @@ rdFileId :: Lens' RevisionsDelete' Text
 rdFileId = lens _rdFileId (\ s a -> s{_rdFileId = a})
 
 -- | OAuth 2.0 token for the current user.
-rdOauthToken :: Lens' RevisionsDelete' (Maybe Text)
-rdOauthToken
-  = lens _rdOauthToken (\ s a -> s{_rdOauthToken = a})
+rdOAuthToken :: Lens' RevisionsDelete' (Maybe OAuthToken)
+rdOAuthToken
+  = lens _rdOAuthToken (\ s a -> s{_rdOAuthToken = a})
 
 -- | The ID of the revision.
 rdRevisionId :: Lens' RevisionsDelete' Text
@@ -154,21 +149,21 @@ rdRevisionId
 rdFields :: Lens' RevisionsDelete' (Maybe Text)
 rdFields = lens _rdFields (\ s a -> s{_rdFields = a})
 
--- | Data format for the response.
-rdAlt :: Lens' RevisionsDelete' Alt
-rdAlt = lens _rdAlt (\ s a -> s{_rdAlt = a})
+instance GoogleAuth RevisionsDelete' where
+        authKey = rdKey . _Just
+        authToken = rdOAuthToken . _Just
 
 instance GoogleRequest RevisionsDelete' where
         type Rs RevisionsDelete' = ()
         request = requestWithRoute defReq driveURL
         requestWithRoute r u RevisionsDelete'{..}
-          = go _rdQuotaUser (Just _rdPrettyPrint) _rdUserIp
+          = go _rdQuotaUser (Just _rdPrettyPrint) _rdUserIP
               _rdKey
               _rdFileId
-              _rdOauthToken
+              _rdOAuthToken
               _rdRevisionId
               _rdFields
-              (Just _rdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy RevisionsDeleteResource)

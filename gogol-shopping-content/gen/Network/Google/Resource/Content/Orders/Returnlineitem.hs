@@ -33,12 +33,12 @@ module Network.Google.Resource.Content.Orders.Returnlineitem
     , orrQuotaUser
     , orrMerchantId
     , orrPrettyPrint
-    , orrUserIp
+    , orrOrdersReturnLineItemRequest
+    , orrUserIP
     , orrKey
-    , orrOauthToken
+    , orrOAuthToken
     , orrOrderId
     , orrFields
-    , orrAlt
     ) where
 
 import           Network.Google.Prelude
@@ -54,25 +54,26 @@ type OrdersReturnlineitemResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :>
-                           Post '[JSON] OrdersReturnLineItemResponse
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] OrdersReturnLineItemRequest :>
+                             Post '[JSON] OrdersReturnLineItemResponse
 
 -- | Returns a line item.
 --
 -- /See:/ 'ordersReturnlineitem'' smart constructor.
 data OrdersReturnlineitem' = OrdersReturnlineitem'
-    { _orrQuotaUser   :: !(Maybe Text)
-    , _orrMerchantId  :: !Word64
-    , _orrPrettyPrint :: !Bool
-    , _orrUserIp      :: !(Maybe Text)
-    , _orrKey         :: !(Maybe Text)
-    , _orrOauthToken  :: !(Maybe Text)
-    , _orrOrderId     :: !Text
-    , _orrFields      :: !(Maybe Text)
-    , _orrAlt         :: !Alt
+    { _orrQuotaUser                   :: !(Maybe Text)
+    , _orrMerchantId                  :: !Word64
+    , _orrPrettyPrint                 :: !Bool
+    , _orrOrdersReturnLineItemRequest :: !OrdersReturnLineItemRequest
+    , _orrUserIP                      :: !(Maybe Text)
+    , _orrKey                         :: !(Maybe Key)
+    , _orrOAuthToken                  :: !(Maybe OAuthToken)
+    , _orrOrderId                     :: !Text
+    , _orrFields                      :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersReturnlineitem'' with the minimum fields required to make a request.
@@ -85,32 +86,33 @@ data OrdersReturnlineitem' = OrdersReturnlineitem'
 --
 -- * 'orrPrettyPrint'
 --
--- * 'orrUserIp'
+-- * 'orrOrdersReturnLineItemRequest'
+--
+-- * 'orrUserIP'
 --
 -- * 'orrKey'
 --
--- * 'orrOauthToken'
+-- * 'orrOAuthToken'
 --
 -- * 'orrOrderId'
 --
 -- * 'orrFields'
---
--- * 'orrAlt'
 ordersReturnlineitem'
     :: Word64 -- ^ 'merchantId'
+    -> OrdersReturnLineItemRequest -- ^ 'OrdersReturnLineItemRequest'
     -> Text -- ^ 'orderId'
     -> OrdersReturnlineitem'
-ordersReturnlineitem' pOrrMerchantId_ pOrrOrderId_ =
+ordersReturnlineitem' pOrrMerchantId_ pOrrOrdersReturnLineItemRequest_ pOrrOrderId_ =
     OrdersReturnlineitem'
     { _orrQuotaUser = Nothing
     , _orrMerchantId = pOrrMerchantId_
     , _orrPrettyPrint = True
-    , _orrUserIp = Nothing
+    , _orrOrdersReturnLineItemRequest = pOrrOrdersReturnLineItemRequest_
+    , _orrUserIP = Nothing
     , _orrKey = Nothing
-    , _orrOauthToken = Nothing
+    , _orrOAuthToken = Nothing
     , _orrOrderId = pOrrOrderId_
     , _orrFields = Nothing
-    , _orrAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -132,23 +134,29 @@ orrPrettyPrint
   = lens _orrPrettyPrint
       (\ s a -> s{_orrPrettyPrint = a})
 
+-- | Multipart request metadata.
+orrOrdersReturnLineItemRequest :: Lens' OrdersReturnlineitem' OrdersReturnLineItemRequest
+orrOrdersReturnLineItemRequest
+  = lens _orrOrdersReturnLineItemRequest
+      (\ s a -> s{_orrOrdersReturnLineItemRequest = a})
+
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-orrUserIp :: Lens' OrdersReturnlineitem' (Maybe Text)
-orrUserIp
-  = lens _orrUserIp (\ s a -> s{_orrUserIp = a})
+orrUserIP :: Lens' OrdersReturnlineitem' (Maybe Text)
+orrUserIP
+  = lens _orrUserIP (\ s a -> s{_orrUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-orrKey :: Lens' OrdersReturnlineitem' (Maybe Text)
+orrKey :: Lens' OrdersReturnlineitem' (Maybe Key)
 orrKey = lens _orrKey (\ s a -> s{_orrKey = a})
 
 -- | OAuth 2.0 token for the current user.
-orrOauthToken :: Lens' OrdersReturnlineitem' (Maybe Text)
-orrOauthToken
-  = lens _orrOauthToken
-      (\ s a -> s{_orrOauthToken = a})
+orrOAuthToken :: Lens' OrdersReturnlineitem' (Maybe OAuthToken)
+orrOAuthToken
+  = lens _orrOAuthToken
+      (\ s a -> s{_orrOAuthToken = a})
 
 -- | The ID of the order.
 orrOrderId :: Lens' OrdersReturnlineitem' Text
@@ -160,9 +168,9 @@ orrFields :: Lens' OrdersReturnlineitem' (Maybe Text)
 orrFields
   = lens _orrFields (\ s a -> s{_orrFields = a})
 
--- | Data format for the response.
-orrAlt :: Lens' OrdersReturnlineitem' Alt
-orrAlt = lens _orrAlt (\ s a -> s{_orrAlt = a})
+instance GoogleAuth OrdersReturnlineitem' where
+        authKey = orrKey . _Just
+        authToken = orrOAuthToken . _Just
 
 instance GoogleRequest OrdersReturnlineitem' where
         type Rs OrdersReturnlineitem' =
@@ -171,12 +179,13 @@ instance GoogleRequest OrdersReturnlineitem' where
         requestWithRoute r u OrdersReturnlineitem'{..}
           = go _orrQuotaUser _orrMerchantId
               (Just _orrPrettyPrint)
-              _orrUserIp
+              _orrUserIP
               _orrKey
-              _orrOauthToken
+              _orrOAuthToken
               _orrOrderId
               _orrFields
-              (Just _orrAlt)
+              (Just AltJSON)
+              _orrOrdersReturnLineItemRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy OrdersReturnlineitemResource)

@@ -31,12 +31,12 @@ module Network.Google.Resource.Genomics.Variants.Create
 
     -- * Request Lenses
     , varQuotaUser
+    , varVariant
     , varPrettyPrint
-    , varUserIp
+    , varUserIP
     , varKey
-    , varOauthToken
+    , varOAuthToken
     , varFields
-    , varAlt
     ) where
 
 import           Network.Google.Genomics.Types
@@ -49,22 +49,23 @@ type VariantsCreateResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
-               QueryParam "oauth_token" Text :>
+             QueryParam "key" Key :>
+               QueryParam "oauth_token" OAuthToken :>
                  QueryParam "fields" Text :>
-                   QueryParam "alt" Alt :> Post '[JSON] Variant
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Variant :> Post '[JSON] Variant
 
 -- | Creates a new variant.
 --
 -- /See:/ 'variantsCreate'' smart constructor.
 data VariantsCreate' = VariantsCreate'
     { _varQuotaUser   :: !(Maybe Text)
+    , _varVariant     :: !Variant
     , _varPrettyPrint :: !Bool
-    , _varUserIp      :: !(Maybe Text)
-    , _varKey         :: !(Maybe Text)
-    , _varOauthToken  :: !(Maybe Text)
+    , _varUserIP      :: !(Maybe Text)
+    , _varKey         :: !(Maybe Key)
+    , _varOAuthToken  :: !(Maybe OAuthToken)
     , _varFields      :: !(Maybe Text)
-    , _varAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantsCreate'' with the minimum fields required to make a request.
@@ -73,28 +74,29 @@ data VariantsCreate' = VariantsCreate'
 --
 -- * 'varQuotaUser'
 --
+-- * 'varVariant'
+--
 -- * 'varPrettyPrint'
 --
--- * 'varUserIp'
+-- * 'varUserIP'
 --
 -- * 'varKey'
 --
--- * 'varOauthToken'
+-- * 'varOAuthToken'
 --
 -- * 'varFields'
---
--- * 'varAlt'
 variantsCreate'
-    :: VariantsCreate'
-variantsCreate' =
+    :: Variant -- ^ 'Variant'
+    -> VariantsCreate'
+variantsCreate' pVarVariant_ =
     VariantsCreate'
     { _varQuotaUser = Nothing
+    , _varVariant = pVarVariant_
     , _varPrettyPrint = True
-    , _varUserIp = Nothing
+    , _varUserIP = Nothing
     , _varKey = Nothing
-    , _varOauthToken = Nothing
+    , _varOAuthToken = Nothing
     , _varFields = Nothing
-    , _varAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -104,6 +106,11 @@ varQuotaUser :: Lens' VariantsCreate' (Maybe Text)
 varQuotaUser
   = lens _varQuotaUser (\ s a -> s{_varQuotaUser = a})
 
+-- | Multipart request metadata.
+varVariant :: Lens' VariantsCreate' Variant
+varVariant
+  = lens _varVariant (\ s a -> s{_varVariant = a})
+
 -- | Returns response with indentations and line breaks.
 varPrettyPrint :: Lens' VariantsCreate' Bool
 varPrettyPrint
@@ -112,40 +119,41 @@ varPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-varUserIp :: Lens' VariantsCreate' (Maybe Text)
-varUserIp
-  = lens _varUserIp (\ s a -> s{_varUserIp = a})
+varUserIP :: Lens' VariantsCreate' (Maybe Text)
+varUserIP
+  = lens _varUserIP (\ s a -> s{_varUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-varKey :: Lens' VariantsCreate' (Maybe Text)
+varKey :: Lens' VariantsCreate' (Maybe Key)
 varKey = lens _varKey (\ s a -> s{_varKey = a})
 
 -- | OAuth 2.0 token for the current user.
-varOauthToken :: Lens' VariantsCreate' (Maybe Text)
-varOauthToken
-  = lens _varOauthToken
-      (\ s a -> s{_varOauthToken = a})
+varOAuthToken :: Lens' VariantsCreate' (Maybe OAuthToken)
+varOAuthToken
+  = lens _varOAuthToken
+      (\ s a -> s{_varOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 varFields :: Lens' VariantsCreate' (Maybe Text)
 varFields
   = lens _varFields (\ s a -> s{_varFields = a})
 
--- | Data format for the response.
-varAlt :: Lens' VariantsCreate' Alt
-varAlt = lens _varAlt (\ s a -> s{_varAlt = a})
+instance GoogleAuth VariantsCreate' where
+        authKey = varKey . _Just
+        authToken = varOAuthToken . _Just
 
 instance GoogleRequest VariantsCreate' where
         type Rs VariantsCreate' = Variant
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u VariantsCreate'{..}
-          = go _varQuotaUser (Just _varPrettyPrint) _varUserIp
+          = go _varQuotaUser (Just _varPrettyPrint) _varUserIP
               _varKey
-              _varOauthToken
+              _varOAuthToken
               _varFields
-              (Just _varAlt)
+              (Just AltJSON)
+              _varVariant
           where go
                   = clientWithRoute
                       (Proxy :: Proxy VariantsCreateResource)

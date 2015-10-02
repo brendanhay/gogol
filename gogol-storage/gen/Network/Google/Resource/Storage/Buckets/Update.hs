@@ -33,14 +33,14 @@ module Network.Google.Resource.Storage.Buckets.Update
     , buQuotaUser
     , buIfMetagenerationMatch
     , buPrettyPrint
-    , buUserIp
+    , buUserIP
+    , buBucket
     , buBucket
     , buKey
     , buIfMetagenerationNotMatch
     , buProjection
-    , buOauthToken
+    , buOAuthToken
     , buFields
-    , buAlt
     ) where
 
 import           Network.Google.Prelude
@@ -55,14 +55,15 @@ type BucketsUpdateResource =
            QueryParam "ifMetagenerationMatch" Word64 :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "ifMetagenerationNotMatch" Word64 :>
                      QueryParam "projection"
                        StorageBucketsUpdateProjection
                        :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Put '[JSON] Bucket
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] Bucket :> Put '[JSON] Bucket
 
 -- | Updates a bucket.
 --
@@ -71,14 +72,14 @@ data BucketsUpdate' = BucketsUpdate'
     { _buQuotaUser                :: !(Maybe Text)
     , _buIfMetagenerationMatch    :: !(Maybe Word64)
     , _buPrettyPrint              :: !Bool
-    , _buUserIp                   :: !(Maybe Text)
+    , _buUserIP                   :: !(Maybe Text)
+    , _buBucket                   :: !Bucket
     , _buBucket                   :: !Text
-    , _buKey                      :: !(Maybe Text)
+    , _buKey                      :: !(Maybe Key)
     , _buIfMetagenerationNotMatch :: !(Maybe Word64)
     , _buProjection               :: !(Maybe StorageBucketsUpdateProjection)
-    , _buOauthToken               :: !(Maybe Text)
+    , _buOAuthToken               :: !(Maybe OAuthToken)
     , _buFields                   :: !(Maybe Text)
-    , _buAlt                      :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketsUpdate'' with the minimum fields required to make a request.
@@ -91,7 +92,9 @@ data BucketsUpdate' = BucketsUpdate'
 --
 -- * 'buPrettyPrint'
 --
--- * 'buUserIp'
+-- * 'buUserIP'
+--
+-- * 'buBucket'
 --
 -- * 'buBucket'
 --
@@ -101,27 +104,26 @@ data BucketsUpdate' = BucketsUpdate'
 --
 -- * 'buProjection'
 --
--- * 'buOauthToken'
+-- * 'buOAuthToken'
 --
 -- * 'buFields'
---
--- * 'buAlt'
 bucketsUpdate'
-    :: Text -- ^ 'bucket'
+    :: Bucket -- ^ 'Bucket'
+    -> Text -- ^ 'bucket'
     -> BucketsUpdate'
-bucketsUpdate' pBuBucket_ =
+bucketsUpdate' pBuBucket_ pBuBucket_ =
     BucketsUpdate'
     { _buQuotaUser = Nothing
     , _buIfMetagenerationMatch = Nothing
     , _buPrettyPrint = True
-    , _buUserIp = Nothing
+    , _buUserIP = Nothing
+    , _buBucket = pBuBucket_
     , _buBucket = pBuBucket_
     , _buKey = Nothing
     , _buIfMetagenerationNotMatch = Nothing
     , _buProjection = Nothing
-    , _buOauthToken = Nothing
+    , _buOAuthToken = Nothing
     , _buFields = Nothing
-    , _buAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -146,8 +148,12 @@ buPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-buUserIp :: Lens' BucketsUpdate' (Maybe Text)
-buUserIp = lens _buUserIp (\ s a -> s{_buUserIp = a})
+buUserIP :: Lens' BucketsUpdate' (Maybe Text)
+buUserIP = lens _buUserIP (\ s a -> s{_buUserIP = a})
+
+-- | Multipart request metadata.
+buBucket :: Lens' BucketsUpdate' Bucket
+buBucket = lens _buBucket (\ s a -> s{_buBucket = a})
 
 -- | Name of a bucket.
 buBucket :: Lens' BucketsUpdate' Text
@@ -156,7 +162,7 @@ buBucket = lens _buBucket (\ s a -> s{_buBucket = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-buKey :: Lens' BucketsUpdate' (Maybe Text)
+buKey :: Lens' BucketsUpdate' (Maybe Key)
 buKey = lens _buKey (\ s a -> s{_buKey = a})
 
 -- | Makes the return of the bucket metadata conditional on whether the
@@ -172,17 +178,17 @@ buProjection
   = lens _buProjection (\ s a -> s{_buProjection = a})
 
 -- | OAuth 2.0 token for the current user.
-buOauthToken :: Lens' BucketsUpdate' (Maybe Text)
-buOauthToken
-  = lens _buOauthToken (\ s a -> s{_buOauthToken = a})
+buOAuthToken :: Lens' BucketsUpdate' (Maybe OAuthToken)
+buOAuthToken
+  = lens _buOAuthToken (\ s a -> s{_buOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 buFields :: Lens' BucketsUpdate' (Maybe Text)
 buFields = lens _buFields (\ s a -> s{_buFields = a})
 
--- | Data format for the response.
-buAlt :: Lens' BucketsUpdate' Alt
-buAlt = lens _buAlt (\ s a -> s{_buAlt = a})
+instance GoogleAuth BucketsUpdate' where
+        authKey = buKey . _Just
+        authToken = buOAuthToken . _Just
 
 instance GoogleRequest BucketsUpdate' where
         type Rs BucketsUpdate' = Bucket
@@ -190,14 +196,15 @@ instance GoogleRequest BucketsUpdate' where
         requestWithRoute r u BucketsUpdate'{..}
           = go _buQuotaUser _buIfMetagenerationMatch
               (Just _buPrettyPrint)
-              _buUserIp
+              _buUserIP
               _buBucket
               _buKey
               _buIfMetagenerationNotMatch
               _buProjection
-              _buOauthToken
+              _buOAuthToken
               _buFields
-              (Just _buAlt)
+              (Just AltJSON)
+              _buBucket
           where go
                   = clientWithRoute
                       (Proxy :: Proxy BucketsUpdateResource)

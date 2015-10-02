@@ -84,9 +84,6 @@ module Network.Google.FreebaseSearch
 
     -- ** FreebaseSearchSpell
     , FreebaseSearchSpell (..)
-
-    -- ** Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.FreebaseSearch.Types

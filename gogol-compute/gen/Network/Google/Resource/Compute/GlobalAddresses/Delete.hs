@@ -33,12 +33,11 @@ module Network.Google.Resource.Compute.GlobalAddresses.Delete
     , gadQuotaUser
     , gadPrettyPrint
     , gadProject
-    , gadUserIp
+    , gadUserIP
     , gadAddress
     , gadKey
-    , gadOauthToken
+    , gadOAuthToken
     , gadFields
-    , gadAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -54,10 +53,10 @@ type GlobalAddressesDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Delete '[JSON] Operation
+                         QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified address resource.
 --
@@ -66,12 +65,11 @@ data GlobalAddressesDelete' = GlobalAddressesDelete'
     { _gadQuotaUser   :: !(Maybe Text)
     , _gadPrettyPrint :: !Bool
     , _gadProject     :: !Text
-    , _gadUserIp      :: !(Maybe Text)
+    , _gadUserIP      :: !(Maybe Text)
     , _gadAddress     :: !Text
-    , _gadKey         :: !(Maybe Text)
-    , _gadOauthToken  :: !(Maybe Text)
+    , _gadKey         :: !(Maybe Key)
+    , _gadOAuthToken  :: !(Maybe OAuthToken)
     , _gadFields      :: !(Maybe Text)
-    , _gadAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GlobalAddressesDelete'' with the minimum fields required to make a request.
@@ -84,17 +82,15 @@ data GlobalAddressesDelete' = GlobalAddressesDelete'
 --
 -- * 'gadProject'
 --
--- * 'gadUserIp'
+-- * 'gadUserIP'
 --
 -- * 'gadAddress'
 --
 -- * 'gadKey'
 --
--- * 'gadOauthToken'
+-- * 'gadOAuthToken'
 --
 -- * 'gadFields'
---
--- * 'gadAlt'
 globalAddressesDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'address'
@@ -104,12 +100,11 @@ globalAddressesDelete' pGadProject_ pGadAddress_ =
     { _gadQuotaUser = Nothing
     , _gadPrettyPrint = True
     , _gadProject = pGadProject_
-    , _gadUserIp = Nothing
+    , _gadUserIP = Nothing
     , _gadAddress = pGadAddress_
     , _gadKey = Nothing
-    , _gadOauthToken = Nothing
+    , _gadOAuthToken = Nothing
     , _gadFields = Nothing
-    , _gadAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -132,9 +127,9 @@ gadProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-gadUserIp :: Lens' GlobalAddressesDelete' (Maybe Text)
-gadUserIp
-  = lens _gadUserIp (\ s a -> s{_gadUserIp = a})
+gadUserIP :: Lens' GlobalAddressesDelete' (Maybe Text)
+gadUserIP
+  = lens _gadUserIP (\ s a -> s{_gadUserIP = a})
 
 -- | Name of the address resource to delete.
 gadAddress :: Lens' GlobalAddressesDelete' Text
@@ -144,35 +139,35 @@ gadAddress
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-gadKey :: Lens' GlobalAddressesDelete' (Maybe Text)
+gadKey :: Lens' GlobalAddressesDelete' (Maybe Key)
 gadKey = lens _gadKey (\ s a -> s{_gadKey = a})
 
 -- | OAuth 2.0 token for the current user.
-gadOauthToken :: Lens' GlobalAddressesDelete' (Maybe Text)
-gadOauthToken
-  = lens _gadOauthToken
-      (\ s a -> s{_gadOauthToken = a})
+gadOAuthToken :: Lens' GlobalAddressesDelete' (Maybe OAuthToken)
+gadOAuthToken
+  = lens _gadOAuthToken
+      (\ s a -> s{_gadOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 gadFields :: Lens' GlobalAddressesDelete' (Maybe Text)
 gadFields
   = lens _gadFields (\ s a -> s{_gadFields = a})
 
--- | Data format for the response.
-gadAlt :: Lens' GlobalAddressesDelete' Alt
-gadAlt = lens _gadAlt (\ s a -> s{_gadAlt = a})
+instance GoogleAuth GlobalAddressesDelete' where
+        authKey = gadKey . _Just
+        authToken = gadOAuthToken . _Just
 
 instance GoogleRequest GlobalAddressesDelete' where
         type Rs GlobalAddressesDelete' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u GlobalAddressesDelete'{..}
           = go _gadQuotaUser (Just _gadPrettyPrint) _gadProject
-              _gadUserIp
+              _gadUserIP
               _gadAddress
               _gadKey
-              _gadOauthToken
+              _gadOAuthToken
               _gadFields
-              (Just _gadAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy GlobalAddressesDeleteResource)

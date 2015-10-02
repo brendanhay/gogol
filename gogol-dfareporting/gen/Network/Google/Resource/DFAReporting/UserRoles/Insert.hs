@@ -32,12 +32,12 @@ module Network.Google.Resource.DFAReporting.UserRoles.Insert
     -- * Request Lenses
     , uriQuotaUser
     , uriPrettyPrint
-    , uriUserIp
+    , uriUserIP
     , uriProfileId
     , uriKey
-    , uriOauthToken
+    , uriUserRole
+    , uriOAuthToken
     , uriFields
-    , uriAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,10 +52,11 @@ type UserRolesInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] UserRole
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] UserRole :> Post '[JSON] UserRole
 
 -- | Inserts a new user role.
 --
@@ -63,12 +64,12 @@ type UserRolesInsertResource =
 data UserRolesInsert' = UserRolesInsert'
     { _uriQuotaUser   :: !(Maybe Text)
     , _uriPrettyPrint :: !Bool
-    , _uriUserIp      :: !(Maybe Text)
+    , _uriUserIP      :: !(Maybe Text)
     , _uriProfileId   :: !Int64
-    , _uriKey         :: !(Maybe Text)
-    , _uriOauthToken  :: !(Maybe Text)
+    , _uriKey         :: !(Maybe Key)
+    , _uriUserRole    :: !UserRole
+    , _uriOAuthToken  :: !(Maybe OAuthToken)
     , _uriFields      :: !(Maybe Text)
-    , _uriAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserRolesInsert'' with the minimum fields required to make a request.
@@ -79,30 +80,31 @@ data UserRolesInsert' = UserRolesInsert'
 --
 -- * 'uriPrettyPrint'
 --
--- * 'uriUserIp'
+-- * 'uriUserIP'
 --
 -- * 'uriProfileId'
 --
 -- * 'uriKey'
 --
--- * 'uriOauthToken'
+-- * 'uriUserRole'
+--
+-- * 'uriOAuthToken'
 --
 -- * 'uriFields'
---
--- * 'uriAlt'
 userRolesInsert'
     :: Int64 -- ^ 'profileId'
+    -> UserRole -- ^ 'UserRole'
     -> UserRolesInsert'
-userRolesInsert' pUriProfileId_ =
+userRolesInsert' pUriProfileId_ pUriUserRole_ =
     UserRolesInsert'
     { _uriQuotaUser = Nothing
     , _uriPrettyPrint = True
-    , _uriUserIp = Nothing
+    , _uriUserIP = Nothing
     , _uriProfileId = pUriProfileId_
     , _uriKey = Nothing
-    , _uriOauthToken = Nothing
+    , _uriUserRole = pUriUserRole_
+    , _uriOAuthToken = Nothing
     , _uriFields = Nothing
-    , _uriAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,9 +122,9 @@ uriPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-uriUserIp :: Lens' UserRolesInsert' (Maybe Text)
-uriUserIp
-  = lens _uriUserIp (\ s a -> s{_uriUserIp = a})
+uriUserIP :: Lens' UserRolesInsert' (Maybe Text)
+uriUserIP
+  = lens _uriUserIP (\ s a -> s{_uriUserIP = a})
 
 -- | User profile ID associated with this request.
 uriProfileId :: Lens' UserRolesInsert' Int64
@@ -132,34 +134,40 @@ uriProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-uriKey :: Lens' UserRolesInsert' (Maybe Text)
+uriKey :: Lens' UserRolesInsert' (Maybe Key)
 uriKey = lens _uriKey (\ s a -> s{_uriKey = a})
 
+-- | Multipart request metadata.
+uriUserRole :: Lens' UserRolesInsert' UserRole
+uriUserRole
+  = lens _uriUserRole (\ s a -> s{_uriUserRole = a})
+
 -- | OAuth 2.0 token for the current user.
-uriOauthToken :: Lens' UserRolesInsert' (Maybe Text)
-uriOauthToken
-  = lens _uriOauthToken
-      (\ s a -> s{_uriOauthToken = a})
+uriOAuthToken :: Lens' UserRolesInsert' (Maybe OAuthToken)
+uriOAuthToken
+  = lens _uriOAuthToken
+      (\ s a -> s{_uriOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 uriFields :: Lens' UserRolesInsert' (Maybe Text)
 uriFields
   = lens _uriFields (\ s a -> s{_uriFields = a})
 
--- | Data format for the response.
-uriAlt :: Lens' UserRolesInsert' Alt
-uriAlt = lens _uriAlt (\ s a -> s{_uriAlt = a})
+instance GoogleAuth UserRolesInsert' where
+        authKey = uriKey . _Just
+        authToken = uriOAuthToken . _Just
 
 instance GoogleRequest UserRolesInsert' where
         type Rs UserRolesInsert' = UserRole
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u UserRolesInsert'{..}
-          = go _uriQuotaUser (Just _uriPrettyPrint) _uriUserIp
+          = go _uriQuotaUser (Just _uriPrettyPrint) _uriUserIP
               _uriProfileId
               _uriKey
-              _uriOauthToken
+              _uriOAuthToken
               _uriFields
-              (Just _uriAlt)
+              (Just AltJSON)
+              _uriUserRole
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UserRolesInsertResource)

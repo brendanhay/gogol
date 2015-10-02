@@ -19,7 +19,7 @@
 --
 -- | Lists all manifests for a given deployment.
 --
--- /See:/ <https://developers.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentmanagerManifestsList@.
+-- /See:/ <https://developers.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerManifestsList@.
 module Network.Google.Resource.DeploymentManager.Manifests.List
     (
     -- * REST Resource
@@ -33,21 +33,20 @@ module Network.Google.Resource.DeploymentManager.Manifests.List
     , mlQuotaUser
     , mlPrettyPrint
     , mlProject
-    , mlUserIp
+    , mlUserIP
     , mlKey
     , mlFilter
     , mlPageToken
-    , mlOauthToken
+    , mlOAuthToken
     , mlMaxResults
     , mlFields
-    , mlAlt
     , mlDeployment
     ) where
 
 import           Network.Google.DeploymentManager.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DeploymentmanagerManifestsList@ which the
+-- | A resource alias for @DeploymentManagerManifestsList@ which the
 -- 'ManifestsList'' request conforms to.
 type ManifestsListResource =
      Capture "project" Text :>
@@ -58,13 +57,13 @@ type ManifestsListResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
+                     QueryParam "key" Key :>
                        QueryParam "filter" Text :>
                          QueryParam "pageToken" Text :>
-                           QueryParam "oauth_token" Text :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "maxResults" Word32 :>
                                QueryParam "fields" Text :>
-                                 QueryParam "alt" Alt :>
+                                 QueryParam "alt" AltJSON :>
                                    Get '[JSON] ManifestsListResponse
 
 -- | Lists all manifests for a given deployment.
@@ -74,14 +73,13 @@ data ManifestsList' = ManifestsList'
     { _mlQuotaUser   :: !(Maybe Text)
     , _mlPrettyPrint :: !Bool
     , _mlProject     :: !Text
-    , _mlUserIp      :: !(Maybe Text)
-    , _mlKey         :: !(Maybe Text)
+    , _mlUserIP      :: !(Maybe Text)
+    , _mlKey         :: !(Maybe Key)
     , _mlFilter      :: !(Maybe Text)
     , _mlPageToken   :: !(Maybe Text)
-    , _mlOauthToken  :: !(Maybe Text)
+    , _mlOAuthToken  :: !(Maybe OAuthToken)
     , _mlMaxResults  :: !Word32
     , _mlFields      :: !(Maybe Text)
-    , _mlAlt         :: !Alt
     , _mlDeployment  :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -95,7 +93,7 @@ data ManifestsList' = ManifestsList'
 --
 -- * 'mlProject'
 --
--- * 'mlUserIp'
+-- * 'mlUserIP'
 --
 -- * 'mlKey'
 --
@@ -103,13 +101,11 @@ data ManifestsList' = ManifestsList'
 --
 -- * 'mlPageToken'
 --
--- * 'mlOauthToken'
+-- * 'mlOAuthToken'
 --
 -- * 'mlMaxResults'
 --
 -- * 'mlFields'
---
--- * 'mlAlt'
 --
 -- * 'mlDeployment'
 manifestsList'
@@ -121,14 +117,13 @@ manifestsList' pMlProject_ pMlDeployment_ =
     { _mlQuotaUser = Nothing
     , _mlPrettyPrint = True
     , _mlProject = pMlProject_
-    , _mlUserIp = Nothing
+    , _mlUserIP = Nothing
     , _mlKey = Nothing
     , _mlFilter = Nothing
     , _mlPageToken = Nothing
-    , _mlOauthToken = Nothing
+    , _mlOAuthToken = Nothing
     , _mlMaxResults = 500
     , _mlFields = Nothing
-    , _mlAlt = JSON
     , _mlDeployment = pMlDeployment_
     }
 
@@ -152,13 +147,13 @@ mlProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mlUserIp :: Lens' ManifestsList' (Maybe Text)
-mlUserIp = lens _mlUserIp (\ s a -> s{_mlUserIp = a})
+mlUserIP :: Lens' ManifestsList' (Maybe Text)
+mlUserIP = lens _mlUserIP (\ s a -> s{_mlUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mlKey :: Lens' ManifestsList' (Maybe Text)
+mlKey :: Lens' ManifestsList' (Maybe Key)
 mlKey = lens _mlKey (\ s a -> s{_mlKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
@@ -183,9 +178,9 @@ mlPageToken
   = lens _mlPageToken (\ s a -> s{_mlPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-mlOauthToken :: Lens' ManifestsList' (Maybe Text)
-mlOauthToken
-  = lens _mlOauthToken (\ s a -> s{_mlOauthToken = a})
+mlOAuthToken :: Lens' ManifestsList' (Maybe OAuthToken)
+mlOAuthToken
+  = lens _mlOAuthToken (\ s a -> s{_mlOAuthToken = a})
 
 -- | Maximum count of results to be returned.
 mlMaxResults :: Lens' ManifestsList' Word32
@@ -196,14 +191,14 @@ mlMaxResults
 mlFields :: Lens' ManifestsList' (Maybe Text)
 mlFields = lens _mlFields (\ s a -> s{_mlFields = a})
 
--- | Data format for the response.
-mlAlt :: Lens' ManifestsList' Alt
-mlAlt = lens _mlAlt (\ s a -> s{_mlAlt = a})
-
 -- | The name of the deployment for this request.
 mlDeployment :: Lens' ManifestsList' Text
 mlDeployment
   = lens _mlDeployment (\ s a -> s{_mlDeployment = a})
+
+instance GoogleAuth ManifestsList' where
+        authKey = mlKey . _Just
+        authToken = mlOAuthToken . _Just
 
 instance GoogleRequest ManifestsList' where
         type Rs ManifestsList' = ManifestsListResponse
@@ -211,15 +206,15 @@ instance GoogleRequest ManifestsList' where
           = requestWithRoute defReq deploymentManagerURL
         requestWithRoute r u ManifestsList'{..}
           = go _mlQuotaUser (Just _mlPrettyPrint) _mlProject
-              _mlUserIp
+              _mlUserIP
               _mlKey
               _mlFilter
               _mlPageToken
-              _mlOauthToken
+              _mlOAuthToken
               (Just _mlMaxResults)
               _mlFields
-              (Just _mlAlt)
               _mlDeployment
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ManifestsListResource)

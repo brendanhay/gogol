@@ -19,7 +19,7 @@
 --
 -- | Updates a GTM Tag.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersTagsUpdate@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersTagsUpdate@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Tags.Update
     (
     -- * REST Resource
@@ -32,21 +32,21 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Tags.Update
     -- * Request Lenses
     , actucQuotaUser
     , actucPrettyPrint
+    , actucTag
     , actucContainerId
-    , actucUserIp
+    , actucUserIP
     , actucFingerprint
     , actucAccountId
     , actucTagId
     , actucKey
-    , actucOauthToken
+    , actucOAuthToken
     , actucFields
-    , actucAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagmanagerAccountsContainersTagsUpdate@ which the
+-- | A resource alias for @TagManagerAccountsContainersTagsUpdate@ which the
 -- 'AccountsContainersTagsUpdate'' request conforms to.
 type AccountsContainersTagsUpdateResource =
      "accounts" :>
@@ -59,10 +59,11 @@ type AccountsContainersTagsUpdateResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fingerprint" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :> Put '[JSON] Tag
+                               QueryParam "alt" AltJSON :>
+                                 ReqBody '[JSON] Tag :> Put '[JSON] Tag
 
 -- | Updates a GTM Tag.
 --
@@ -70,15 +71,15 @@ type AccountsContainersTagsUpdateResource =
 data AccountsContainersTagsUpdate' = AccountsContainersTagsUpdate'
     { _actucQuotaUser   :: !(Maybe Text)
     , _actucPrettyPrint :: !Bool
+    , _actucTag         :: !Tag
     , _actucContainerId :: !Text
-    , _actucUserIp      :: !(Maybe Text)
+    , _actucUserIP      :: !(Maybe Text)
     , _actucFingerprint :: !(Maybe Text)
     , _actucAccountId   :: !Text
     , _actucTagId       :: !Text
-    , _actucKey         :: !(Maybe Text)
-    , _actucOauthToken  :: !(Maybe Text)
+    , _actucKey         :: !(Maybe Key)
+    , _actucOAuthToken  :: !(Maybe OAuthToken)
     , _actucFields      :: !(Maybe Text)
-    , _actucAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersTagsUpdate'' with the minimum fields required to make a request.
@@ -89,9 +90,11 @@ data AccountsContainersTagsUpdate' = AccountsContainersTagsUpdate'
 --
 -- * 'actucPrettyPrint'
 --
+-- * 'actucTag'
+--
 -- * 'actucContainerId'
 --
--- * 'actucUserIp'
+-- * 'actucUserIP'
 --
 -- * 'actucFingerprint'
 --
@@ -101,29 +104,28 @@ data AccountsContainersTagsUpdate' = AccountsContainersTagsUpdate'
 --
 -- * 'actucKey'
 --
--- * 'actucOauthToken'
+-- * 'actucOAuthToken'
 --
 -- * 'actucFields'
---
--- * 'actucAlt'
 accountsContainersTagsUpdate'
-    :: Text -- ^ 'containerId'
+    :: Tag -- ^ 'Tag'
+    -> Text -- ^ 'containerId'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'tagId'
     -> AccountsContainersTagsUpdate'
-accountsContainersTagsUpdate' pActucContainerId_ pActucAccountId_ pActucTagId_ =
+accountsContainersTagsUpdate' pActucTag_ pActucContainerId_ pActucAccountId_ pActucTagId_ =
     AccountsContainersTagsUpdate'
     { _actucQuotaUser = Nothing
     , _actucPrettyPrint = True
+    , _actucTag = pActucTag_
     , _actucContainerId = pActucContainerId_
-    , _actucUserIp = Nothing
+    , _actucUserIP = Nothing
     , _actucFingerprint = Nothing
     , _actucAccountId = pActucAccountId_
     , _actucTagId = pActucTagId_
     , _actucKey = Nothing
-    , _actucOauthToken = Nothing
+    , _actucOAuthToken = Nothing
     , _actucFields = Nothing
-    , _actucAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -140,6 +142,10 @@ actucPrettyPrint
   = lens _actucPrettyPrint
       (\ s a -> s{_actucPrettyPrint = a})
 
+-- | Multipart request metadata.
+actucTag :: Lens' AccountsContainersTagsUpdate' Tag
+actucTag = lens _actucTag (\ s a -> s{_actucTag = a})
+
 -- | The GTM Container ID.
 actucContainerId :: Lens' AccountsContainersTagsUpdate' Text
 actucContainerId
@@ -148,9 +154,9 @@ actucContainerId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-actucUserIp :: Lens' AccountsContainersTagsUpdate' (Maybe Text)
-actucUserIp
-  = lens _actucUserIp (\ s a -> s{_actucUserIp = a})
+actucUserIP :: Lens' AccountsContainersTagsUpdate' (Maybe Text)
+actucUserIP
+  = lens _actucUserIP (\ s a -> s{_actucUserIP = a})
 
 -- | When provided, this fingerprint must match the fingerprint of the tag in
 -- storage.
@@ -173,23 +179,24 @@ actucTagId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-actucKey :: Lens' AccountsContainersTagsUpdate' (Maybe Text)
+actucKey :: Lens' AccountsContainersTagsUpdate' (Maybe Key)
 actucKey = lens _actucKey (\ s a -> s{_actucKey = a})
 
 -- | OAuth 2.0 token for the current user.
-actucOauthToken :: Lens' AccountsContainersTagsUpdate' (Maybe Text)
-actucOauthToken
-  = lens _actucOauthToken
-      (\ s a -> s{_actucOauthToken = a})
+actucOAuthToken :: Lens' AccountsContainersTagsUpdate' (Maybe OAuthToken)
+actucOAuthToken
+  = lens _actucOAuthToken
+      (\ s a -> s{_actucOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 actucFields :: Lens' AccountsContainersTagsUpdate' (Maybe Text)
 actucFields
   = lens _actucFields (\ s a -> s{_actucFields = a})
 
--- | Data format for the response.
-actucAlt :: Lens' AccountsContainersTagsUpdate' Alt
-actucAlt = lens _actucAlt (\ s a -> s{_actucAlt = a})
+instance GoogleAuth AccountsContainersTagsUpdate'
+         where
+        authKey = actucKey . _Just
+        authToken = actucOAuthToken . _Just
 
 instance GoogleRequest AccountsContainersTagsUpdate'
          where
@@ -199,14 +206,15 @@ instance GoogleRequest AccountsContainersTagsUpdate'
           AccountsContainersTagsUpdate'{..}
           = go _actucQuotaUser (Just _actucPrettyPrint)
               _actucContainerId
-              _actucUserIp
+              _actucUserIP
               _actucFingerprint
               _actucAccountId
               _actucTagId
               _actucKey
-              _actucOauthToken
+              _actucOAuthToken
               _actucFields
-              (Just _actucAlt)
+              (Just AltJSON)
+              _actucTag
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountsContainersTagsUpdateResource)

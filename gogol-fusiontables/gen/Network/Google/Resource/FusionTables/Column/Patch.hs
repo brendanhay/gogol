@@ -33,13 +33,13 @@ module Network.Google.Resource.FusionTables.Column.Patch
     -- * Request Lenses
     , cpQuotaUser
     , cpPrettyPrint
-    , cpUserIp
+    , cpUserIP
     , cpKey
-    , cpOauthToken
+    , cpOAuthToken
     , cpTableId
     , cpColumnId
+    , cpColumn
     , cpFields
-    , cpAlt
     ) where
 
 import           Network.Google.FusionTables.Types
@@ -55,10 +55,11 @@ type ColumnPatchResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Patch '[JSON] Column
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Column :> Patch '[JSON] Column
 
 -- | Updates the name or type of an existing column. This method supports
 -- patch semantics.
@@ -67,13 +68,13 @@ type ColumnPatchResource =
 data ColumnPatch' = ColumnPatch'
     { _cpQuotaUser   :: !(Maybe Text)
     , _cpPrettyPrint :: !Bool
-    , _cpUserIp      :: !(Maybe Text)
-    , _cpKey         :: !(Maybe Text)
-    , _cpOauthToken  :: !(Maybe Text)
+    , _cpUserIP      :: !(Maybe Text)
+    , _cpKey         :: !(Maybe Key)
+    , _cpOAuthToken  :: !(Maybe OAuthToken)
     , _cpTableId     :: !Text
     , _cpColumnId    :: !Text
+    , _cpColumn      :: !Column
     , _cpFields      :: !(Maybe Text)
-    , _cpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ColumnPatch'' with the minimum fields required to make a request.
@@ -84,34 +85,35 @@ data ColumnPatch' = ColumnPatch'
 --
 -- * 'cpPrettyPrint'
 --
--- * 'cpUserIp'
+-- * 'cpUserIP'
 --
 -- * 'cpKey'
 --
--- * 'cpOauthToken'
+-- * 'cpOAuthToken'
 --
 -- * 'cpTableId'
 --
 -- * 'cpColumnId'
 --
--- * 'cpFields'
+-- * 'cpColumn'
 --
--- * 'cpAlt'
+-- * 'cpFields'
 columnPatch'
     :: Text -- ^ 'tableId'
     -> Text -- ^ 'columnId'
+    -> Column -- ^ 'Column'
     -> ColumnPatch'
-columnPatch' pCpTableId_ pCpColumnId_ =
+columnPatch' pCpTableId_ pCpColumnId_ pCpColumn_ =
     ColumnPatch'
     { _cpQuotaUser = Nothing
     , _cpPrettyPrint = True
-    , _cpUserIp = Nothing
+    , _cpUserIP = Nothing
     , _cpKey = Nothing
-    , _cpOauthToken = Nothing
+    , _cpOAuthToken = Nothing
     , _cpTableId = pCpTableId_
     , _cpColumnId = pCpColumnId_
+    , _cpColumn = pCpColumn_
     , _cpFields = Nothing
-    , _cpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -129,19 +131,19 @@ cpPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cpUserIp :: Lens' ColumnPatch' (Maybe Text)
-cpUserIp = lens _cpUserIp (\ s a -> s{_cpUserIp = a})
+cpUserIP :: Lens' ColumnPatch' (Maybe Text)
+cpUserIP = lens _cpUserIP (\ s a -> s{_cpUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cpKey :: Lens' ColumnPatch' (Maybe Text)
+cpKey :: Lens' ColumnPatch' (Maybe Key)
 cpKey = lens _cpKey (\ s a -> s{_cpKey = a})
 
 -- | OAuth 2.0 token for the current user.
-cpOauthToken :: Lens' ColumnPatch' (Maybe Text)
-cpOauthToken
-  = lens _cpOauthToken (\ s a -> s{_cpOauthToken = a})
+cpOAuthToken :: Lens' ColumnPatch' (Maybe OAuthToken)
+cpOAuthToken
+  = lens _cpOAuthToken (\ s a -> s{_cpOAuthToken = a})
 
 -- | Table for which the column is being updated.
 cpTableId :: Lens' ColumnPatch' Text
@@ -153,25 +155,30 @@ cpColumnId :: Lens' ColumnPatch' Text
 cpColumnId
   = lens _cpColumnId (\ s a -> s{_cpColumnId = a})
 
+-- | Multipart request metadata.
+cpColumn :: Lens' ColumnPatch' Column
+cpColumn = lens _cpColumn (\ s a -> s{_cpColumn = a})
+
 -- | Selector specifying which fields to include in a partial response.
 cpFields :: Lens' ColumnPatch' (Maybe Text)
 cpFields = lens _cpFields (\ s a -> s{_cpFields = a})
 
--- | Data format for the response.
-cpAlt :: Lens' ColumnPatch' Alt
-cpAlt = lens _cpAlt (\ s a -> s{_cpAlt = a})
+instance GoogleAuth ColumnPatch' where
+        authKey = cpKey . _Just
+        authToken = cpOAuthToken . _Just
 
 instance GoogleRequest ColumnPatch' where
         type Rs ColumnPatch' = Column
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u ColumnPatch'{..}
-          = go _cpQuotaUser (Just _cpPrettyPrint) _cpUserIp
+          = go _cpQuotaUser (Just _cpPrettyPrint) _cpUserIP
               _cpKey
-              _cpOauthToken
+              _cpOAuthToken
               _cpTableId
               _cpColumnId
               _cpFields
-              (Just _cpAlt)
+              (Just AltJSON)
+              _cpColumn
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ColumnPatchResource)

@@ -32,13 +32,12 @@ module Network.Google.Resource.FusionTables.Column.Get
     -- * Request Lenses
     , cgQuotaUser
     , cgPrettyPrint
-    , cgUserIp
+    , cgUserIP
     , cgKey
-    , cgOauthToken
+    , cgOAuthToken
     , cgTableId
     , cgColumnId
     , cgFields
-    , cgAlt
     ) where
 
 import           Network.Google.FusionTables.Types
@@ -54,10 +53,10 @@ type ColumnGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] Column
+                         QueryParam "alt" AltJSON :> Get '[JSON] Column
 
 -- | Retrieves a specific column by its ID.
 --
@@ -65,13 +64,12 @@ type ColumnGetResource =
 data ColumnGet' = ColumnGet'
     { _cgQuotaUser   :: !(Maybe Text)
     , _cgPrettyPrint :: !Bool
-    , _cgUserIp      :: !(Maybe Text)
-    , _cgKey         :: !(Maybe Text)
-    , _cgOauthToken  :: !(Maybe Text)
+    , _cgUserIP      :: !(Maybe Text)
+    , _cgKey         :: !(Maybe Key)
+    , _cgOAuthToken  :: !(Maybe OAuthToken)
     , _cgTableId     :: !Text
     , _cgColumnId    :: !Text
     , _cgFields      :: !(Maybe Text)
-    , _cgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ColumnGet'' with the minimum fields required to make a request.
@@ -82,19 +80,17 @@ data ColumnGet' = ColumnGet'
 --
 -- * 'cgPrettyPrint'
 --
--- * 'cgUserIp'
+-- * 'cgUserIP'
 --
 -- * 'cgKey'
 --
--- * 'cgOauthToken'
+-- * 'cgOAuthToken'
 --
 -- * 'cgTableId'
 --
 -- * 'cgColumnId'
 --
 -- * 'cgFields'
---
--- * 'cgAlt'
 columnGet'
     :: Text -- ^ 'tableId'
     -> Text -- ^ 'columnId'
@@ -103,13 +99,12 @@ columnGet' pCgTableId_ pCgColumnId_ =
     ColumnGet'
     { _cgQuotaUser = Nothing
     , _cgPrettyPrint = True
-    , _cgUserIp = Nothing
+    , _cgUserIP = Nothing
     , _cgKey = Nothing
-    , _cgOauthToken = Nothing
+    , _cgOAuthToken = Nothing
     , _cgTableId = pCgTableId_
     , _cgColumnId = pCgColumnId_
     , _cgFields = Nothing
-    , _cgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,19 +122,19 @@ cgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cgUserIp :: Lens' ColumnGet' (Maybe Text)
-cgUserIp = lens _cgUserIp (\ s a -> s{_cgUserIp = a})
+cgUserIP :: Lens' ColumnGet' (Maybe Text)
+cgUserIP = lens _cgUserIP (\ s a -> s{_cgUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cgKey :: Lens' ColumnGet' (Maybe Text)
+cgKey :: Lens' ColumnGet' (Maybe Key)
 cgKey = lens _cgKey (\ s a -> s{_cgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-cgOauthToken :: Lens' ColumnGet' (Maybe Text)
-cgOauthToken
-  = lens _cgOauthToken (\ s a -> s{_cgOauthToken = a})
+cgOAuthToken :: Lens' ColumnGet' (Maybe OAuthToken)
+cgOAuthToken
+  = lens _cgOAuthToken (\ s a -> s{_cgOAuthToken = a})
 
 -- | Table to which the column belongs.
 cgTableId :: Lens' ColumnGet' Text
@@ -155,21 +150,21 @@ cgColumnId
 cgFields :: Lens' ColumnGet' (Maybe Text)
 cgFields = lens _cgFields (\ s a -> s{_cgFields = a})
 
--- | Data format for the response.
-cgAlt :: Lens' ColumnGet' Alt
-cgAlt = lens _cgAlt (\ s a -> s{_cgAlt = a})
+instance GoogleAuth ColumnGet' where
+        authKey = cgKey . _Just
+        authToken = cgOAuthToken . _Just
 
 instance GoogleRequest ColumnGet' where
         type Rs ColumnGet' = Column
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u ColumnGet'{..}
-          = go _cgQuotaUser (Just _cgPrettyPrint) _cgUserIp
+          = go _cgQuotaUser (Just _cgPrettyPrint) _cgUserIP
               _cgKey
-              _cgOauthToken
+              _cgOAuthToken
               _cgTableId
               _cgColumnId
               _cgFields
-              (Just _cgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy ColumnGetResource)
                       r

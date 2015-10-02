@@ -35,12 +35,12 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.RecreateInstances
     , igmriPrettyPrint
     , igmriProject
     , igmriInstanceGroupManager
-    , igmriUserIp
+    , igmriUserIP
+    , igmriInstanceGroupManagersRecreateInstancesRequest
     , igmriZone
     , igmriKey
-    , igmriOauthToken
+    , igmriOAuthToken
     , igmriFields
-    , igmriAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -58,26 +58,29 @@ type InstanceGroupManagersRecreateInstancesResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Post '[JSON] Operation
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON]
+                                 InstanceGroupManagersRecreateInstancesRequest
+                                 :> Post '[JSON] Operation
 
 -- | Recreates the specified instances. The instances are deleted, then
 -- recreated using the managed instance group\'s current instance template.
 --
 -- /See:/ 'instanceGroupManagersRecreateInstances'' smart constructor.
 data InstanceGroupManagersRecreateInstances' = InstanceGroupManagersRecreateInstances'
-    { _igmriQuotaUser            :: !(Maybe Text)
-    , _igmriPrettyPrint          :: !Bool
-    , _igmriProject              :: !Text
-    , _igmriInstanceGroupManager :: !Text
-    , _igmriUserIp               :: !(Maybe Text)
-    , _igmriZone                 :: !Text
-    , _igmriKey                  :: !(Maybe Text)
-    , _igmriOauthToken           :: !(Maybe Text)
-    , _igmriFields               :: !(Maybe Text)
-    , _igmriAlt                  :: !Alt
+    { _igmriQuotaUser                                     :: !(Maybe Text)
+    , _igmriPrettyPrint                                   :: !Bool
+    , _igmriProject                                       :: !Text
+    , _igmriInstanceGroupManager                          :: !Text
+    , _igmriUserIP                                        :: !(Maybe Text)
+    , _igmriInstanceGroupManagersRecreateInstancesRequest :: !InstanceGroupManagersRecreateInstancesRequest
+    , _igmriZone                                          :: !Text
+    , _igmriKey                                           :: !(Maybe Key)
+    , _igmriOAuthToken                                    :: !(Maybe OAuthToken)
+    , _igmriFields                                        :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagersRecreateInstances'' with the minimum fields required to make a request.
@@ -92,34 +95,35 @@ data InstanceGroupManagersRecreateInstances' = InstanceGroupManagersRecreateInst
 --
 -- * 'igmriInstanceGroupManager'
 --
--- * 'igmriUserIp'
+-- * 'igmriUserIP'
+--
+-- * 'igmriInstanceGroupManagersRecreateInstancesRequest'
 --
 -- * 'igmriZone'
 --
 -- * 'igmriKey'
 --
--- * 'igmriOauthToken'
+-- * 'igmriOAuthToken'
 --
 -- * 'igmriFields'
---
--- * 'igmriAlt'
 instanceGroupManagersRecreateInstances'
     :: Text -- ^ 'project'
     -> Text -- ^ 'instanceGroupManager'
+    -> InstanceGroupManagersRecreateInstancesRequest -- ^ 'InstanceGroupManagersRecreateInstancesRequest'
     -> Text -- ^ 'zone'
     -> InstanceGroupManagersRecreateInstances'
-instanceGroupManagersRecreateInstances' pIgmriProject_ pIgmriInstanceGroupManager_ pIgmriZone_ =
+instanceGroupManagersRecreateInstances' pIgmriProject_ pIgmriInstanceGroupManager_ pIgmriInstanceGroupManagersRecreateInstancesRequest_ pIgmriZone_ =
     InstanceGroupManagersRecreateInstances'
     { _igmriQuotaUser = Nothing
     , _igmriPrettyPrint = True
     , _igmriProject = pIgmriProject_
     , _igmriInstanceGroupManager = pIgmriInstanceGroupManager_
-    , _igmriUserIp = Nothing
+    , _igmriUserIP = Nothing
+    , _igmriInstanceGroupManagersRecreateInstancesRequest = pIgmriInstanceGroupManagersRecreateInstancesRequest_
     , _igmriZone = pIgmriZone_
     , _igmriKey = Nothing
-    , _igmriOauthToken = Nothing
+    , _igmriOAuthToken = Nothing
     , _igmriFields = Nothing
-    , _igmriAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -149,9 +153,18 @@ igmriInstanceGroupManager
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-igmriUserIp :: Lens' InstanceGroupManagersRecreateInstances' (Maybe Text)
-igmriUserIp
-  = lens _igmriUserIp (\ s a -> s{_igmriUserIp = a})
+igmriUserIP :: Lens' InstanceGroupManagersRecreateInstances' (Maybe Text)
+igmriUserIP
+  = lens _igmriUserIP (\ s a -> s{_igmriUserIP = a})
+
+-- | Multipart request metadata.
+igmriInstanceGroupManagersRecreateInstancesRequest :: Lens' InstanceGroupManagersRecreateInstances' InstanceGroupManagersRecreateInstancesRequest
+igmriInstanceGroupManagersRecreateInstancesRequest
+  = lens
+      _igmriInstanceGroupManagersRecreateInstancesRequest
+      (\ s a ->
+         s{_igmriInstanceGroupManagersRecreateInstancesRequest
+             = a})
 
 -- | The URL of the zone where the managed instance group is located.
 igmriZone :: Lens' InstanceGroupManagersRecreateInstances' Text
@@ -161,23 +174,24 @@ igmriZone
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-igmriKey :: Lens' InstanceGroupManagersRecreateInstances' (Maybe Text)
+igmriKey :: Lens' InstanceGroupManagersRecreateInstances' (Maybe Key)
 igmriKey = lens _igmriKey (\ s a -> s{_igmriKey = a})
 
 -- | OAuth 2.0 token for the current user.
-igmriOauthToken :: Lens' InstanceGroupManagersRecreateInstances' (Maybe Text)
-igmriOauthToken
-  = lens _igmriOauthToken
-      (\ s a -> s{_igmriOauthToken = a})
+igmriOAuthToken :: Lens' InstanceGroupManagersRecreateInstances' (Maybe OAuthToken)
+igmriOAuthToken
+  = lens _igmriOAuthToken
+      (\ s a -> s{_igmriOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 igmriFields :: Lens' InstanceGroupManagersRecreateInstances' (Maybe Text)
 igmriFields
   = lens _igmriFields (\ s a -> s{_igmriFields = a})
 
--- | Data format for the response.
-igmriAlt :: Lens' InstanceGroupManagersRecreateInstances' Alt
-igmriAlt = lens _igmriAlt (\ s a -> s{_igmriAlt = a})
+instance GoogleAuth
+         InstanceGroupManagersRecreateInstances' where
+        authKey = igmriKey . _Just
+        authToken = igmriOAuthToken . _Just
 
 instance GoogleRequest
          InstanceGroupManagersRecreateInstances' where
@@ -189,12 +203,13 @@ instance GoogleRequest
           = go _igmriQuotaUser (Just _igmriPrettyPrint)
               _igmriProject
               _igmriInstanceGroupManager
-              _igmriUserIp
+              _igmriUserIP
               _igmriZone
               _igmriKey
-              _igmriOauthToken
+              _igmriOAuthToken
               _igmriFields
-              (Just _igmriAlt)
+              (Just AltJSON)
+              _igmriInstanceGroupManagersRecreateInstancesRequest
           where go
                   = clientWithRoute
                       (Proxy ::

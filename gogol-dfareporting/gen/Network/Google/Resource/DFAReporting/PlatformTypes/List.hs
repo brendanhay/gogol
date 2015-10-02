@@ -32,12 +32,11 @@ module Network.Google.Resource.DFAReporting.PlatformTypes.List
     -- * Request Lenses
     , ptlQuotaUser
     , ptlPrettyPrint
-    , ptlUserIp
+    , ptlUserIP
     , ptlProfileId
     , ptlKey
-    , ptlOauthToken
+    , ptlOAuthToken
     , ptlFields
-    , ptlAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,10 +51,10 @@ type PlatformTypesListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :>
+                       QueryParam "alt" AltJSON :>
                          Get '[JSON] PlatformTypesListResponse
 
 -- | Retrieves a list of platform types.
@@ -64,12 +63,11 @@ type PlatformTypesListResource =
 data PlatformTypesList' = PlatformTypesList'
     { _ptlQuotaUser   :: !(Maybe Text)
     , _ptlPrettyPrint :: !Bool
-    , _ptlUserIp      :: !(Maybe Text)
+    , _ptlUserIP      :: !(Maybe Text)
     , _ptlProfileId   :: !Int64
-    , _ptlKey         :: !(Maybe Text)
-    , _ptlOauthToken  :: !(Maybe Text)
+    , _ptlKey         :: !(Maybe Key)
+    , _ptlOAuthToken  :: !(Maybe OAuthToken)
     , _ptlFields      :: !(Maybe Text)
-    , _ptlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlatformTypesList'' with the minimum fields required to make a request.
@@ -80,17 +78,15 @@ data PlatformTypesList' = PlatformTypesList'
 --
 -- * 'ptlPrettyPrint'
 --
--- * 'ptlUserIp'
+-- * 'ptlUserIP'
 --
 -- * 'ptlProfileId'
 --
 -- * 'ptlKey'
 --
--- * 'ptlOauthToken'
+-- * 'ptlOAuthToken'
 --
 -- * 'ptlFields'
---
--- * 'ptlAlt'
 platformTypesList'
     :: Int64 -- ^ 'profileId'
     -> PlatformTypesList'
@@ -98,12 +94,11 @@ platformTypesList' pPtlProfileId_ =
     PlatformTypesList'
     { _ptlQuotaUser = Nothing
     , _ptlPrettyPrint = True
-    , _ptlUserIp = Nothing
+    , _ptlUserIP = Nothing
     , _ptlProfileId = pPtlProfileId_
     , _ptlKey = Nothing
-    , _ptlOauthToken = Nothing
+    , _ptlOAuthToken = Nothing
     , _ptlFields = Nothing
-    , _ptlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -121,9 +116,9 @@ ptlPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ptlUserIp :: Lens' PlatformTypesList' (Maybe Text)
-ptlUserIp
-  = lens _ptlUserIp (\ s a -> s{_ptlUserIp = a})
+ptlUserIP :: Lens' PlatformTypesList' (Maybe Text)
+ptlUserIP
+  = lens _ptlUserIP (\ s a -> s{_ptlUserIP = a})
 
 -- | User profile ID associated with this request.
 ptlProfileId :: Lens' PlatformTypesList' Int64
@@ -133,35 +128,35 @@ ptlProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ptlKey :: Lens' PlatformTypesList' (Maybe Text)
+ptlKey :: Lens' PlatformTypesList' (Maybe Key)
 ptlKey = lens _ptlKey (\ s a -> s{_ptlKey = a})
 
 -- | OAuth 2.0 token for the current user.
-ptlOauthToken :: Lens' PlatformTypesList' (Maybe Text)
-ptlOauthToken
-  = lens _ptlOauthToken
-      (\ s a -> s{_ptlOauthToken = a})
+ptlOAuthToken :: Lens' PlatformTypesList' (Maybe OAuthToken)
+ptlOAuthToken
+  = lens _ptlOAuthToken
+      (\ s a -> s{_ptlOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ptlFields :: Lens' PlatformTypesList' (Maybe Text)
 ptlFields
   = lens _ptlFields (\ s a -> s{_ptlFields = a})
 
--- | Data format for the response.
-ptlAlt :: Lens' PlatformTypesList' Alt
-ptlAlt = lens _ptlAlt (\ s a -> s{_ptlAlt = a})
+instance GoogleAuth PlatformTypesList' where
+        authKey = ptlKey . _Just
+        authToken = ptlOAuthToken . _Just
 
 instance GoogleRequest PlatformTypesList' where
         type Rs PlatformTypesList' =
              PlatformTypesListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlatformTypesList'{..}
-          = go _ptlQuotaUser (Just _ptlPrettyPrint) _ptlUserIp
+          = go _ptlQuotaUser (Just _ptlPrettyPrint) _ptlUserIP
               _ptlProfileId
               _ptlKey
-              _ptlOauthToken
+              _ptlOAuthToken
               _ptlFields
-              (Just _ptlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PlatformTypesListResource)

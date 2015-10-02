@@ -77,24 +77,24 @@ instance ToJSON Parent where
 --
 -- /See:/ 'photo' smart constructor.
 newtype Photo = Photo
-    { _pUrl :: Maybe Text
+    { _pURL :: Maybe Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Photo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'pUrl'
+-- * 'pURL'
 photo
     :: Photo
 photo =
     Photo
-    { _pUrl = Nothing
+    { _pURL = Nothing
     }
 
 -- | The URL of the photo.
-pUrl :: Lens' Photo (Maybe Text)
-pUrl = lens _pUrl (\ s a -> s{_pUrl = a})
+pURL :: Lens' Photo (Maybe Text)
+pURL = lens _pURL (\ s a -> s{_pURL = a})
 
 instance FromJSON Photo where
         parseJSON
@@ -102,21 +102,21 @@ instance FromJSON Photo where
 
 instance ToJSON Photo where
         toJSON Photo{..}
-          = object (catMaybes [("url" .=) <$> _pUrl])
+          = object (catMaybes [("url" .=) <$> _pURL])
 
 -- | Represents the changes associated with an action taken by a user.
 --
 -- /See:/ 'event' smart constructor.
 data Event = Event
     { _ePrimaryEventType     :: !(Maybe EventPrimaryEventType)
-    , _eUser                 :: !(Maybe (Maybe User))
+    , _eUser                 :: !(Maybe User)
     , _eEventTimeMillis      :: !(Maybe Word64)
-    , _eRename               :: !(Maybe (Maybe Rename))
+    , _eRename               :: !(Maybe Rename)
     , _eFromUserDeletion     :: !(Maybe Bool)
     , _eAdditionalEventTypes :: !(Maybe [EventAdditionalEventTypes])
-    , _ePermissionChanges    :: !(Maybe [Maybe PermissionChange])
-    , _eTarget               :: !(Maybe (Maybe Target))
-    , _eMove                 :: !(Maybe (Maybe Move))
+    , _ePermissionChanges    :: !(Maybe [PermissionChange])
+    , _eTarget               :: !(Maybe Target)
+    , _eMove                 :: !(Maybe Move)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Event' with the minimum fields required to make a request.
@@ -162,7 +162,7 @@ ePrimaryEventType
       (\ s a -> s{_ePrimaryEventType = a})
 
 -- | Represents the user responsible for the event.
-eUser :: Lens' Event (Maybe (Maybe User))
+eUser :: Lens' Event (Maybe User)
 eUser = lens _eUser (\ s a -> s{_eUser = a})
 
 -- | The time at which the event occurred formatted as Unix time in
@@ -173,7 +173,7 @@ eEventTimeMillis
       (\ s a -> s{_eEventTimeMillis = a})
 
 -- | Extra information for rename type events, such as the old and new names.
-eRename :: Lens' Event (Maybe (Maybe Rename))
+eRename :: Lens' Event (Maybe Rename)
 eRename = lens _eRename (\ s a -> s{_eRename = a})
 
 -- | Whether this event is caused by a user being deleted.
@@ -195,7 +195,7 @@ eAdditionalEventTypes
 
 -- | Extra information for permissionChange type events, such as the user or
 -- group the new permission applies to.
-ePermissionChanges :: Lens' Event [Maybe PermissionChange]
+ePermissionChanges :: Lens' Event [PermissionChange]
 ePermissionChanges
   = lens _ePermissionChanges
       (\ s a -> s{_ePermissionChanges = a})
@@ -203,12 +203,12 @@ ePermissionChanges
       . _Coerce
 
 -- | Information specific to the Target object modified by the event.
-eTarget :: Lens' Event (Maybe (Maybe Target))
+eTarget :: Lens' Event (Maybe Target)
 eTarget = lens _eTarget (\ s a -> s{_eTarget = a})
 
 -- | Extra information for move type events, such as changes in an object\'s
 -- parents.
-eMove :: Lens' Event (Maybe (Maybe Move))
+eMove :: Lens' Event (Maybe Move)
 eMove = lens _eMove (\ s a -> s{_eMove = a})
 
 instance FromJSON Event where
@@ -245,7 +245,7 @@ instance ToJSON Event where
 -- /See:/ 'listActivitiesResponse' smart constructor.
 data ListActivitiesResponse = ListActivitiesResponse
     { _larNextPageToken :: !(Maybe Text)
-    , _larActivities    :: !(Maybe [Maybe Activity])
+    , _larActivities    :: !(Maybe [Activity])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListActivitiesResponse' with the minimum fields required to make a request.
@@ -270,7 +270,7 @@ larNextPageToken
       (\ s a -> s{_larNextPageToken = a})
 
 -- | List of activities.
-larActivities :: Lens' ListActivitiesResponse [Maybe Activity]
+larActivities :: Lens' ListActivitiesResponse [Activity]
 larActivities
   = lens _larActivities
       (\ s a -> s{_larActivities = a})
@@ -297,8 +297,8 @@ instance ToJSON ListActivitiesResponse where
 --
 -- /See:/ 'permissionChange' smart constructor.
 data PermissionChange = PermissionChange
-    { _pcAddedPermissions   :: !(Maybe [Maybe Permission])
-    , _pcRemovedPermissions :: !(Maybe [Maybe Permission])
+    { _pcAddedPermissions   :: !(Maybe [Permission])
+    , _pcRemovedPermissions :: !(Maybe [Permission])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PermissionChange' with the minimum fields required to make a request.
@@ -317,7 +317,7 @@ permissionChange =
     }
 
 -- | Lists all Permission objects added.
-pcAddedPermissions :: Lens' PermissionChange [Maybe Permission]
+pcAddedPermissions :: Lens' PermissionChange [Permission]
 pcAddedPermissions
   = lens _pcAddedPermissions
       (\ s a -> s{_pcAddedPermissions = a})
@@ -325,7 +325,7 @@ pcAddedPermissions
       . _Coerce
 
 -- | Lists all Permission objects removed.
-pcRemovedPermissions :: Lens' PermissionChange [Maybe Permission]
+pcRemovedPermissions :: Lens' PermissionChange [Permission]
 pcRemovedPermissions
   = lens _pcRemovedPermissions
       (\ s a -> s{_pcRemovedPermissions = a})
@@ -351,7 +351,7 @@ instance ToJSON PermissionChange where
 --
 -- /See:/ 'user' smart constructor.
 data User = User
-    { _uPhoto :: !(Maybe (Maybe Photo))
+    { _uPhoto :: !(Maybe Photo)
     , _uName  :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -371,7 +371,7 @@ user =
     }
 
 -- | The profile photo of the user.
-uPhoto :: Lens' User (Maybe (Maybe Photo))
+uPhoto :: Lens' User (Maybe Photo)
 uPhoto = lens _uPhoto (\ s a -> s{_uPhoto = a})
 
 -- | The displayable name of the user.
@@ -395,8 +395,8 @@ instance ToJSON User where
 --
 -- /See:/ 'activity' smart constructor.
 data Activity = Activity
-    { _aSingleEvents  :: !(Maybe [Maybe Event])
-    , _aCombinedEvent :: !(Maybe (Maybe Event))
+    { _aSingleEvents  :: !(Maybe [Event])
+    , _aCombinedEvent :: !(Maybe Event)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Activity' with the minimum fields required to make a request.
@@ -415,7 +415,7 @@ activity =
     }
 
 -- | A list of all the Events that make up the Activity.
-aSingleEvents :: Lens' Activity [Maybe Event]
+aSingleEvents :: Lens' Activity [Event]
 aSingleEvents
   = lens _aSingleEvents
       (\ s a -> s{_aSingleEvents = a})
@@ -423,7 +423,7 @@ aSingleEvents
       . _Coerce
 
 -- | The fields common to all of the singleEvents that make up the Activity.
-aCombinedEvent :: Lens' Activity (Maybe (Maybe Event))
+aCombinedEvent :: Lens' Activity (Maybe Event)
 aCombinedEvent
   = lens _aCombinedEvent
       (\ s a -> s{_aCombinedEvent = a})
@@ -496,7 +496,7 @@ instance ToJSON Rename where
 -- /See:/ 'permission' smart constructor.
 data Permission = Permission
     { _pWithLink     :: !(Maybe Bool)
-    , _pUser         :: !(Maybe (Maybe User))
+    , _pUser         :: !(Maybe User)
     , _pRole         :: !(Maybe PermissionRole)
     , _pName         :: !(Maybe Text)
     , _pType         :: !(Maybe PermissionType)
@@ -536,7 +536,7 @@ pWithLink
   = lens _pWithLink (\ s a -> s{_pWithLink = a})
 
 -- | The user\'s information if the type is USER.
-pUser :: Lens' Permission (Maybe (Maybe User))
+pUser :: Lens' Permission (Maybe User)
 pUser = lens _pUser (\ s a -> s{_pUser = a})
 
 -- | Indicates the Google Drive permissions role. The role determines a
@@ -584,8 +584,8 @@ instance ToJSON Permission where
 --
 -- /See:/ 'move' smart constructor.
 data Move = Move
-    { _mAddedParents   :: !(Maybe [Maybe Parent])
-    , _mRemovedParents :: !(Maybe [Maybe Parent])
+    { _mAddedParents   :: !(Maybe [Parent])
+    , _mRemovedParents :: !(Maybe [Parent])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Move' with the minimum fields required to make a request.
@@ -604,7 +604,7 @@ move =
     }
 
 -- | The added parent(s).
-mAddedParents :: Lens' Move [Maybe Parent]
+mAddedParents :: Lens' Move [Parent]
 mAddedParents
   = lens _mAddedParents
       (\ s a -> s{_mAddedParents = a})
@@ -612,7 +612,7 @@ mAddedParents
       . _Coerce
 
 -- | The removed parent(s).
-mRemovedParents :: Lens' Move [Maybe Parent]
+mRemovedParents :: Lens' Move [Parent]
 mRemovedParents
   = lens _mRemovedParents
       (\ s a -> s{_mRemovedParents = a})

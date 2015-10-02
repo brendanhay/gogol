@@ -33,7 +33,7 @@ module Network.Google.Resource.YouTubeAnalytics.Reports.Query
     , rqQuotaUser
     , rqMetrics
     , rqPrettyPrint
-    , rqUserIp
+    , rqUserIP
     , rqFilters
     , rqIds
     , rqEndDate
@@ -41,12 +41,11 @@ module Network.Google.Resource.YouTubeAnalytics.Reports.Query
     , rqCurrency
     , rqSort
     , rqDimensions
-    , rqOauthToken
+    , rqOAuthToken
     , rqStartIndex
     , rqMaxResults
     , rqStartDate
     , rqFields
-    , rqAlt
     ) where
 
 import           Network.Google.Prelude
@@ -63,16 +62,16 @@ type ReportsQueryResource =
                QueryParam "filters" Text :>
                  QueryParam "ids" Text :>
                    QueryParam "end-date" Text :>
-                     QueryParam "key" Text :>
+                     QueryParam "key" Key :>
                        QueryParam "currency" Text :>
                          QueryParam "sort" Text :>
                            QueryParam "dimensions" Text :>
-                             QueryParam "oauth_token" Text :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "start-index" Int32 :>
                                  QueryParam "max-results" Int32 :>
                                    QueryParam "start-date" Text :>
                                      QueryParam "fields" Text :>
-                                       QueryParam "alt" Alt :>
+                                       QueryParam "alt" AltJSON :>
                                          Get '[JSON] ResultTable
 
 -- | Retrieve your YouTube Analytics reports.
@@ -82,20 +81,19 @@ data ReportsQuery' = ReportsQuery'
     { _rqQuotaUser   :: !(Maybe Text)
     , _rqMetrics     :: !Text
     , _rqPrettyPrint :: !Bool
-    , _rqUserIp      :: !(Maybe Text)
+    , _rqUserIP      :: !(Maybe Text)
     , _rqFilters     :: !(Maybe Text)
     , _rqIds         :: !Text
     , _rqEndDate     :: !Text
-    , _rqKey         :: !(Maybe Text)
+    , _rqKey         :: !(Maybe Key)
     , _rqCurrency    :: !(Maybe Text)
     , _rqSort        :: !(Maybe Text)
     , _rqDimensions  :: !(Maybe Text)
-    , _rqOauthToken  :: !(Maybe Text)
+    , _rqOAuthToken  :: !(Maybe OAuthToken)
     , _rqStartIndex  :: !(Maybe Int32)
     , _rqMaxResults  :: !(Maybe Int32)
     , _rqStartDate   :: !Text
     , _rqFields      :: !(Maybe Text)
-    , _rqAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsQuery'' with the minimum fields required to make a request.
@@ -108,7 +106,7 @@ data ReportsQuery' = ReportsQuery'
 --
 -- * 'rqPrettyPrint'
 --
--- * 'rqUserIp'
+-- * 'rqUserIP'
 --
 -- * 'rqFilters'
 --
@@ -124,7 +122,7 @@ data ReportsQuery' = ReportsQuery'
 --
 -- * 'rqDimensions'
 --
--- * 'rqOauthToken'
+-- * 'rqOAuthToken'
 --
 -- * 'rqStartIndex'
 --
@@ -133,8 +131,6 @@ data ReportsQuery' = ReportsQuery'
 -- * 'rqStartDate'
 --
 -- * 'rqFields'
---
--- * 'rqAlt'
 reportsQuery'
     :: Text -- ^ 'metrics'
     -> Text -- ^ 'ids'
@@ -146,7 +142,7 @@ reportsQuery' pRqMetrics_ pRqIds_ pRqEndDate_ pRqStartDate_ =
     { _rqQuotaUser = Nothing
     , _rqMetrics = pRqMetrics_
     , _rqPrettyPrint = True
-    , _rqUserIp = Nothing
+    , _rqUserIP = Nothing
     , _rqFilters = Nothing
     , _rqIds = pRqIds_
     , _rqEndDate = pRqEndDate_
@@ -154,12 +150,11 @@ reportsQuery' pRqMetrics_ pRqIds_ pRqEndDate_ pRqStartDate_ =
     , _rqCurrency = Nothing
     , _rqSort = Nothing
     , _rqDimensions = Nothing
-    , _rqOauthToken = Nothing
+    , _rqOAuthToken = Nothing
     , _rqStartIndex = Nothing
     , _rqMaxResults = Nothing
     , _rqStartDate = pRqStartDate_
     , _rqFields = Nothing
-    , _rqAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -185,8 +180,8 @@ rqPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rqUserIp :: Lens' ReportsQuery' (Maybe Text)
-rqUserIp = lens _rqUserIp (\ s a -> s{_rqUserIp = a})
+rqUserIP :: Lens' ReportsQuery' (Maybe Text)
+rqUserIP = lens _rqUserIP (\ s a -> s{_rqUserIP = a})
 
 -- | A list of filters that should be applied when retrieving YouTube
 -- Analytics data. The Available Reports document identifies the dimensions
@@ -219,7 +214,7 @@ rqEndDate
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rqKey :: Lens' ReportsQuery' (Maybe Text)
+rqKey :: Lens' ReportsQuery' (Maybe Key)
 rqKey = lens _rqKey (\ s a -> s{_rqKey = a})
 
 -- | The currency to which financial metrics should be converted. The default
@@ -245,9 +240,9 @@ rqDimensions
   = lens _rqDimensions (\ s a -> s{_rqDimensions = a})
 
 -- | OAuth 2.0 token for the current user.
-rqOauthToken :: Lens' ReportsQuery' (Maybe Text)
-rqOauthToken
-  = lens _rqOauthToken (\ s a -> s{_rqOauthToken = a})
+rqOAuthToken :: Lens' ReportsQuery' (Maybe OAuthToken)
+rqOAuthToken
+  = lens _rqOAuthToken (\ s a -> s{_rqOAuthToken = a})
 
 -- | An index of the first entity to retrieve. Use this parameter as a
 -- pagination mechanism along with the max-results parameter (one-based,
@@ -271,9 +266,9 @@ rqStartDate
 rqFields :: Lens' ReportsQuery' (Maybe Text)
 rqFields = lens _rqFields (\ s a -> s{_rqFields = a})
 
--- | Data format for the response.
-rqAlt :: Lens' ReportsQuery' Alt
-rqAlt = lens _rqAlt (\ s a -> s{_rqAlt = a})
+instance GoogleAuth ReportsQuery' where
+        authKey = rqKey . _Just
+        authToken = rqOAuthToken . _Just
 
 instance GoogleRequest ReportsQuery' where
         type Rs ReportsQuery' = ResultTable
@@ -281,7 +276,7 @@ instance GoogleRequest ReportsQuery' where
         requestWithRoute r u ReportsQuery'{..}
           = go _rqQuotaUser (Just _rqMetrics)
               (Just _rqPrettyPrint)
-              _rqUserIp
+              _rqUserIP
               _rqFilters
               (Just _rqIds)
               (Just _rqEndDate)
@@ -289,12 +284,12 @@ instance GoogleRequest ReportsQuery' where
               _rqCurrency
               _rqSort
               _rqDimensions
-              _rqOauthToken
+              _rqOAuthToken
               _rqStartIndex
               _rqMaxResults
               (Just _rqStartDate)
               _rqFields
-              (Just _rqAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ReportsQueryResource)

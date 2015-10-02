@@ -32,11 +32,11 @@ module Network.Google.Resource.AdExchangeBuyer.Offers.List
     -- * Request Lenses
     , olQuotaUser
     , olPrettyPrint
-    , olUserIp
+    , olUserIP
     , olKey
-    , olOauthToken
+    , olListOffersRequest
+    , olOAuthToken
     , olFields
-    , olAlt
     ) where
 
 import           Network.Google.AdExchangeBuyer.Types
@@ -49,23 +49,24 @@ type OffersListResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
-               QueryParam "oauth_token" Text :>
+             QueryParam "key" Key :>
+               QueryParam "oauth_token" OAuthToken :>
                  QueryParam "fields" Text :>
-                   QueryParam "alt" Alt :>
-                     Get '[JSON] ListOffersResponse
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] ListOffersRequest :>
+                       Get '[JSON] ListOffersResponse
 
 -- | Lists all offers the authenticated user has access to.
 --
 -- /See:/ 'offersList'' smart constructor.
 data OffersList' = OffersList'
-    { _olQuotaUser   :: !(Maybe Text)
-    , _olPrettyPrint :: !Bool
-    , _olUserIp      :: !(Maybe Text)
-    , _olKey         :: !(Maybe Text)
-    , _olOauthToken  :: !(Maybe Text)
-    , _olFields      :: !(Maybe Text)
-    , _olAlt         :: !Alt
+    { _olQuotaUser         :: !(Maybe Text)
+    , _olPrettyPrint       :: !Bool
+    , _olUserIP            :: !(Maybe Text)
+    , _olKey               :: !(Maybe Key)
+    , _olListOffersRequest :: !ListOffersRequest
+    , _olOAuthToken        :: !(Maybe OAuthToken)
+    , _olFields            :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OffersList'' with the minimum fields required to make a request.
@@ -76,26 +77,27 @@ data OffersList' = OffersList'
 --
 -- * 'olPrettyPrint'
 --
--- * 'olUserIp'
+-- * 'olUserIP'
 --
 -- * 'olKey'
 --
--- * 'olOauthToken'
+-- * 'olListOffersRequest'
+--
+-- * 'olOAuthToken'
 --
 -- * 'olFields'
---
--- * 'olAlt'
 offersList'
-    :: OffersList'
-offersList' =
+    :: ListOffersRequest -- ^ 'ListOffersRequest'
+    -> OffersList'
+offersList' pOlListOffersRequest_ =
     OffersList'
     { _olQuotaUser = Nothing
     , _olPrettyPrint = True
-    , _olUserIp = Nothing
+    , _olUserIP = Nothing
     , _olKey = Nothing
-    , _olOauthToken = Nothing
+    , _olListOffersRequest = pOlListOffersRequest_
+    , _olOAuthToken = Nothing
     , _olFields = Nothing
-    , _olAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -113,37 +115,44 @@ olPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-olUserIp :: Lens' OffersList' (Maybe Text)
-olUserIp = lens _olUserIp (\ s a -> s{_olUserIp = a})
+olUserIP :: Lens' OffersList' (Maybe Text)
+olUserIP = lens _olUserIP (\ s a -> s{_olUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-olKey :: Lens' OffersList' (Maybe Text)
+olKey :: Lens' OffersList' (Maybe Key)
 olKey = lens _olKey (\ s a -> s{_olKey = a})
 
+-- | Multipart request metadata.
+olListOffersRequest :: Lens' OffersList' ListOffersRequest
+olListOffersRequest
+  = lens _olListOffersRequest
+      (\ s a -> s{_olListOffersRequest = a})
+
 -- | OAuth 2.0 token for the current user.
-olOauthToken :: Lens' OffersList' (Maybe Text)
-olOauthToken
-  = lens _olOauthToken (\ s a -> s{_olOauthToken = a})
+olOAuthToken :: Lens' OffersList' (Maybe OAuthToken)
+olOAuthToken
+  = lens _olOAuthToken (\ s a -> s{_olOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 olFields :: Lens' OffersList' (Maybe Text)
 olFields = lens _olFields (\ s a -> s{_olFields = a})
 
--- | Data format for the response.
-olAlt :: Lens' OffersList' Alt
-olAlt = lens _olAlt (\ s a -> s{_olAlt = a})
+instance GoogleAuth OffersList' where
+        authKey = olKey . _Just
+        authToken = olOAuthToken . _Just
 
 instance GoogleRequest OffersList' where
         type Rs OffersList' = ListOffersResponse
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u OffersList'{..}
-          = go _olQuotaUser (Just _olPrettyPrint) _olUserIp
+          = go _olQuotaUser (Just _olPrettyPrint) _olUserIP
               _olKey
-              _olOauthToken
+              _olOAuthToken
               _olFields
-              (Just _olAlt)
+              (Just AltJSON)
+              _olListOffersRequest
           where go
                   = clientWithRoute (Proxy :: Proxy OffersListResource)
                       r

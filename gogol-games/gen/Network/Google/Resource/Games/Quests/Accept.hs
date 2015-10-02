@@ -33,13 +33,12 @@ module Network.Google.Resource.Games.Quests.Accept
     -- * Request Lenses
     , qaQuotaUser
     , qaPrettyPrint
-    , qaUserIp
+    , qaUserIP
     , qaKey
     , qaLanguage
-    , qaOauthToken
+    , qaOAuthToken
     , qaQuestId
     , qaFields
-    , qaAlt
     ) where
 
 import           Network.Google.Games.Types
@@ -54,11 +53,11 @@ type QuestsAcceptResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "language" Text :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Post '[JSON] Quest
+                         QueryParam "alt" AltJSON :> Post '[JSON] Quest
 
 -- | Indicates that the currently authorized user will participate in the
 -- quest.
@@ -67,13 +66,12 @@ type QuestsAcceptResource =
 data QuestsAccept' = QuestsAccept'
     { _qaQuotaUser   :: !(Maybe Text)
     , _qaPrettyPrint :: !Bool
-    , _qaUserIp      :: !(Maybe Text)
-    , _qaKey         :: !(Maybe Text)
+    , _qaUserIP      :: !(Maybe Text)
+    , _qaKey         :: !(Maybe Key)
     , _qaLanguage    :: !(Maybe Text)
-    , _qaOauthToken  :: !(Maybe Text)
+    , _qaOAuthToken  :: !(Maybe OAuthToken)
     , _qaQuestId     :: !Text
     , _qaFields      :: !(Maybe Text)
-    , _qaAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QuestsAccept'' with the minimum fields required to make a request.
@@ -84,19 +82,17 @@ data QuestsAccept' = QuestsAccept'
 --
 -- * 'qaPrettyPrint'
 --
--- * 'qaUserIp'
+-- * 'qaUserIP'
 --
 -- * 'qaKey'
 --
 -- * 'qaLanguage'
 --
--- * 'qaOauthToken'
+-- * 'qaOAuthToken'
 --
 -- * 'qaQuestId'
 --
 -- * 'qaFields'
---
--- * 'qaAlt'
 questsAccept'
     :: Text -- ^ 'questId'
     -> QuestsAccept'
@@ -104,13 +100,12 @@ questsAccept' pQaQuestId_ =
     QuestsAccept'
     { _qaQuotaUser = Nothing
     , _qaPrettyPrint = True
-    , _qaUserIp = Nothing
+    , _qaUserIP = Nothing
     , _qaKey = Nothing
     , _qaLanguage = Nothing
-    , _qaOauthToken = Nothing
+    , _qaOAuthToken = Nothing
     , _qaQuestId = pQaQuestId_
     , _qaFields = Nothing
-    , _qaAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -128,13 +123,13 @@ qaPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-qaUserIp :: Lens' QuestsAccept' (Maybe Text)
-qaUserIp = lens _qaUserIp (\ s a -> s{_qaUserIp = a})
+qaUserIP :: Lens' QuestsAccept' (Maybe Text)
+qaUserIP = lens _qaUserIP (\ s a -> s{_qaUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-qaKey :: Lens' QuestsAccept' (Maybe Text)
+qaKey :: Lens' QuestsAccept' (Maybe Key)
 qaKey = lens _qaKey (\ s a -> s{_qaKey = a})
 
 -- | The preferred language to use for strings returned by this method.
@@ -143,9 +138,9 @@ qaLanguage
   = lens _qaLanguage (\ s a -> s{_qaLanguage = a})
 
 -- | OAuth 2.0 token for the current user.
-qaOauthToken :: Lens' QuestsAccept' (Maybe Text)
-qaOauthToken
-  = lens _qaOauthToken (\ s a -> s{_qaOauthToken = a})
+qaOAuthToken :: Lens' QuestsAccept' (Maybe OAuthToken)
+qaOAuthToken
+  = lens _qaOAuthToken (\ s a -> s{_qaOAuthToken = a})
 
 -- | The ID of the quest.
 qaQuestId :: Lens' QuestsAccept' Text
@@ -156,21 +151,21 @@ qaQuestId
 qaFields :: Lens' QuestsAccept' (Maybe Text)
 qaFields = lens _qaFields (\ s a -> s{_qaFields = a})
 
--- | Data format for the response.
-qaAlt :: Lens' QuestsAccept' Alt
-qaAlt = lens _qaAlt (\ s a -> s{_qaAlt = a})
+instance GoogleAuth QuestsAccept' where
+        authKey = qaKey . _Just
+        authToken = qaOAuthToken . _Just
 
 instance GoogleRequest QuestsAccept' where
         type Rs QuestsAccept' = Quest
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u QuestsAccept'{..}
-          = go _qaQuotaUser (Just _qaPrettyPrint) _qaUserIp
+          = go _qaQuotaUser (Just _qaPrettyPrint) _qaUserIP
               _qaKey
               _qaLanguage
-              _qaOauthToken
+              _qaOAuthToken
               _qaQuestId
               _qaFields
-              (Just _qaAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy QuestsAcceptResource)

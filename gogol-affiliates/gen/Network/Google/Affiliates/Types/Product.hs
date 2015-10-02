@@ -121,21 +121,21 @@ instance ToJSON CcOfferRewards where
 data Event = Event
     { _eModifyDate          :: !(Maybe UTCTime)
     , _eStatus              :: !(Maybe Text)
-    , _eCommissionableSales :: !(Maybe (Maybe Money))
+    , _eCommissionableSales :: !(Maybe Money)
     , _eChargeId            :: !(Maybe Text)
     , _eAdvertiserName      :: !(Maybe Text)
     , _eChargeType          :: !(Maybe Text)
     , _eMemberId            :: !(Maybe Text)
     , _eKind                :: !Text
-    , _eNetworkFee          :: !(Maybe (Maybe Money))
+    , _eNetworkFee          :: !(Maybe Money)
     , _eAdvertiserId        :: !(Maybe Int64)
     , _eEventDate           :: !(Maybe UTCTime)
     , _eProducts            :: !(Maybe [EventProducts])
-    , _ePublisherFee        :: !(Maybe (Maybe Money))
+    , _ePublisherFee        :: !(Maybe Money)
     , _eType                :: !(Maybe Text)
     , _eOrderId             :: !(Maybe Text)
     , _ePublisherId         :: !(Maybe Int64)
-    , _eEarnings            :: !(Maybe (Maybe Money))
+    , _eEarnings            :: !(Maybe Money)
     , _ePublisherName       :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -215,7 +215,7 @@ eStatus = lens _eStatus (\ s a -> s{_eStatus = a})
 
 -- | Amount of money exchanged during the transaction. Only returned for
 -- charge and conversion events.
-eCommissionableSales :: Lens' Event (Maybe (Maybe Money))
+eCommissionableSales :: Lens' Event (Maybe Money)
 eCommissionableSales
   = lens _eCommissionableSales
       (\ s a -> s{_eCommissionableSales = a})
@@ -249,7 +249,7 @@ eKind :: Lens' Event Text
 eKind = lens _eKind (\ s a -> s{_eKind = a})
 
 -- | Fee that the advertiser paid to the Google Affiliate Network.
-eNetworkFee :: Lens' Event (Maybe (Maybe Money))
+eNetworkFee :: Lens' Event (Maybe Money)
 eNetworkFee
   = lens _eNetworkFee (\ s a -> s{_eNetworkFee = a})
 
@@ -272,7 +272,7 @@ eProducts
       . _Coerce
 
 -- | Fee that the advertiser paid to the publisher.
-ePublisherFee :: Lens' Event (Maybe (Maybe Money))
+ePublisherFee :: Lens' Event (Maybe Money)
 ePublisherFee
   = lens _ePublisherFee
       (\ s a -> s{_ePublisherFee = a})
@@ -291,7 +291,7 @@ ePublisherId
   = lens _ePublisherId (\ s a -> s{_ePublisherId = a})
 
 -- | Earnings by the publisher.
-eEarnings :: Lens' Event (Maybe (Maybe Money))
+eEarnings :: Lens' Event (Maybe Money)
 eEarnings
   = lens _eEarnings (\ s a -> s{_eEarnings = a})
 
@@ -351,8 +351,8 @@ instance ToJSON Event where
 -- /See:/ 'link' smart constructor.
 data Link = Link
     { _lAuthorship            :: !(Maybe Text)
-    , _lDestinationUrl        :: !(Maybe Text)
-    , _lClickTrackingUrl      :: !(Maybe Text)
+    , _lDestinationURL        :: !(Maybe Text)
+    , _lClickTrackingURL      :: !(Maybe Text)
     , _lCreateDate            :: !(Maybe UTCTime)
     , _lKind                  :: !Text
     , _lAdvertiserId          :: !(Maybe Int64)
@@ -362,11 +362,11 @@ data Link = Link
     , _lAvailability          :: !(Maybe Text)
     , _lStartDate             :: !(Maybe UTCTime)
     , _lName                  :: !(Maybe Text)
-    , _lImpressionTrackingUrl :: !(Maybe Text)
+    , _lImpressionTrackingURL :: !(Maybe Text)
     , _lSpecialOffers         :: !(Maybe LinkSpecialOffers)
-    , _lEpcSevenDayAverage    :: !(Maybe (Maybe Money))
+    , _lEpcSevenDayAverage    :: !(Maybe Money)
     , _lId                    :: !(Maybe Int64)
-    , _lEpcNinetyDayAverage   :: !(Maybe (Maybe Money))
+    , _lEpcNinetyDayAverage   :: !(Maybe Money)
     , _lLinkType              :: !(Maybe Text)
     , _lIsActive              :: !(Maybe Bool)
     , _lDuration              :: !(Maybe Text)
@@ -379,9 +379,9 @@ data Link = Link
 --
 -- * 'lAuthorship'
 --
--- * 'lDestinationUrl'
+-- * 'lDestinationURL'
 --
--- * 'lClickTrackingUrl'
+-- * 'lClickTrackingURL'
 --
 -- * 'lCreateDate'
 --
@@ -401,7 +401,7 @@ data Link = Link
 --
 -- * 'lName'
 --
--- * 'lImpressionTrackingUrl'
+-- * 'lImpressionTrackingURL'
 --
 -- * 'lSpecialOffers'
 --
@@ -423,8 +423,8 @@ link
 link =
     Link
     { _lAuthorship = Nothing
-    , _lDestinationUrl = Nothing
-    , _lClickTrackingUrl = Nothing
+    , _lDestinationURL = Nothing
+    , _lClickTrackingURL = Nothing
     , _lCreateDate = Nothing
     , _lKind = "gan#link"
     , _lAdvertiserId = Nothing
@@ -434,7 +434,7 @@ link =
     , _lAvailability = Nothing
     , _lStartDate = Nothing
     , _lName = Nothing
-    , _lImpressionTrackingUrl = Nothing
+    , _lImpressionTrackingURL = Nothing
     , _lSpecialOffers = Nothing
     , _lEpcSevenDayAverage = Nothing
     , _lId = Nothing
@@ -451,16 +451,16 @@ lAuthorship
   = lens _lAuthorship (\ s a -> s{_lAuthorship = a})
 
 -- | The destination URL for the link.
-lDestinationUrl :: Lens' Link (Maybe Text)
-lDestinationUrl
-  = lens _lDestinationUrl
-      (\ s a -> s{_lDestinationUrl = a})
+lDestinationURL :: Lens' Link (Maybe Text)
+lDestinationURL
+  = lens _lDestinationURL
+      (\ s a -> s{_lDestinationURL = a})
 
 -- | Tracking url for clicks.
-lClickTrackingUrl :: Lens' Link (Maybe Text)
-lClickTrackingUrl
-  = lens _lClickTrackingUrl
-      (\ s a -> s{_lClickTrackingUrl = a})
+lClickTrackingURL :: Lens' Link (Maybe Text)
+lClickTrackingURL
+  = lens _lClickTrackingURL
+      (\ s a -> s{_lClickTrackingURL = a})
 
 -- | Date that this link was created.
 lCreateDate :: Lens' Link (Maybe UTCTime)
@@ -509,10 +509,10 @@ lName :: Lens' Link (Maybe Text)
 lName = lens _lName (\ s a -> s{_lName = a})
 
 -- | Tracking url for impressions.
-lImpressionTrackingUrl :: Lens' Link (Maybe Text)
-lImpressionTrackingUrl
-  = lens _lImpressionTrackingUrl
-      (\ s a -> s{_lImpressionTrackingUrl = a})
+lImpressionTrackingURL :: Lens' Link (Maybe Text)
+lImpressionTrackingURL
+  = lens _lImpressionTrackingURL
+      (\ s a -> s{_lImpressionTrackingURL = a})
 
 -- | Special offers on the link.
 lSpecialOffers :: Lens' Link (Maybe LinkSpecialOffers)
@@ -523,7 +523,7 @@ lSpecialOffers
 -- | The sum of fees paid to publishers divided by the total number of clicks
 -- over the past seven days on this link. This value should be multiplied
 -- by 100 at the time of display.
-lEpcSevenDayAverage :: Lens' Link (Maybe (Maybe Money))
+lEpcSevenDayAverage :: Lens' Link (Maybe Money)
 lEpcSevenDayAverage
   = lens _lEpcSevenDayAverage
       (\ s a -> s{_lEpcSevenDayAverage = a})
@@ -535,7 +535,7 @@ lId = lens _lId (\ s a -> s{_lId = a})
 -- | The sum of fees paid to publishers divided by the total number of clicks
 -- over the past three months on this link. This value should be multiplied
 -- by 100 at the time of display.
-lEpcNinetyDayAverage :: Lens' Link (Maybe (Maybe Money))
+lEpcNinetyDayAverage :: Lens' Link (Maybe Money)
 lEpcNinetyDayAverage
   = lens _lEpcNinetyDayAverage
       (\ s a -> s{_lEpcNinetyDayAverage = a})
@@ -591,8 +591,8 @@ instance ToJSON Link where
           = object
               (catMaybes
                  [("authorship" .=) <$> _lAuthorship,
-                  ("destinationUrl" .=) <$> _lDestinationUrl,
-                  ("clickTrackingUrl" .=) <$> _lClickTrackingUrl,
+                  ("destinationUrl" .=) <$> _lDestinationURL,
+                  ("clickTrackingUrl" .=) <$> _lClickTrackingURL,
                   ("createDate" .=) <$> _lCreateDate,
                   Just ("kind" .= _lKind),
                   ("advertiserId" .=) <$> _lAdvertiserId,
@@ -603,7 +603,7 @@ instance ToJSON Link where
                   ("startDate" .=) <$> _lStartDate,
                   ("name" .=) <$> _lName,
                   ("impressionTrackingUrl" .=) <$>
-                    _lImpressionTrackingUrl,
+                    _lImpressionTrackingURL,
                   ("specialOffers" .=) <$> _lSpecialOffers,
                   ("epcSevenDayAverage" .=) <$> _lEpcSevenDayAverage,
                   ("id" .=) <$> _lId,
@@ -664,7 +664,7 @@ instance ToJSON Money where
 -- /See:/ 'ccOffers' smart constructor.
 data CcOffers = CcOffers
     { _coKind  :: !Text
-    , _coItems :: !(Maybe [Maybe CcOffer])
+    , _coItems :: !(Maybe [CcOffer])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CcOffers' with the minimum fields required to make a request.
@@ -687,7 +687,7 @@ coKind :: Lens' CcOffers Text
 coKind = lens _coKind (\ s a -> s{_coKind = a})
 
 -- | The credit card offers.
-coItems :: Lens' CcOffers [Maybe CcOffer]
+coItems :: Lens' CcOffers [CcOffer]
 coItems
   = lens _coItems (\ s a -> s{_coItems = a}) . _Default
       . _Coerce
@@ -712,7 +712,7 @@ instance ToJSON CcOffers where
 data Advertisers = Advertisers
     { _aNextPageToken :: !(Maybe Text)
     , _aKind          :: !Text
-    , _aItems         :: !(Maybe [Maybe Advertiser])
+    , _aItems         :: !(Maybe [Advertiser])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Advertisers' with the minimum fields required to make a request.
@@ -745,7 +745,7 @@ aKind :: Lens' Advertisers Text
 aKind = lens _aKind (\ s a -> s{_aKind = a})
 
 -- | The advertiser list.
-aItems :: Lens' Advertisers [Maybe Advertiser]
+aItems :: Lens' Advertisers [Advertiser]
 aItems
   = lens _aItems (\ s a -> s{_aItems = a}) . _Default .
       _Coerce
@@ -1005,14 +1005,14 @@ instance ToJSON CcOfferBonusRewards where
 -- /See:/ 'eventProducts' smart constructor.
 data EventProducts = EventProducts
     { _epSkuName      :: !(Maybe Text)
-    , _epNetworkFee   :: !(Maybe (Maybe Money))
+    , _epNetworkFee   :: !(Maybe Money)
     , _epQuantity     :: !(Maybe Int64)
     , _epCategoryName :: !(Maybe Text)
     , _epCategoryId   :: !(Maybe Text)
     , _epSku          :: !(Maybe Text)
-    , _epPublisherFee :: !(Maybe (Maybe Money))
-    , _epUnitPrice    :: !(Maybe (Maybe Money))
-    , _epEarnings     :: !(Maybe (Maybe Money))
+    , _epPublisherFee :: !(Maybe Money)
+    , _epUnitPrice    :: !(Maybe Money)
+    , _epEarnings     :: !(Maybe Money)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventProducts' with the minimum fields required to make a request.
@@ -1058,7 +1058,7 @@ epSkuName
 
 -- | Fee that the advertiser paid to the Google Affiliate Network for this
 -- product.
-epNetworkFee :: Lens' EventProducts (Maybe (Maybe Money))
+epNetworkFee :: Lens' EventProducts (Maybe Money)
 epNetworkFee
   = lens _epNetworkFee (\ s a -> s{_epNetworkFee = a})
 
@@ -1083,18 +1083,18 @@ epSku :: Lens' EventProducts (Maybe Text)
 epSku = lens _epSku (\ s a -> s{_epSku = a})
 
 -- | Fee that the advertiser paid to the publisehr for this product.
-epPublisherFee :: Lens' EventProducts (Maybe (Maybe Money))
+epPublisherFee :: Lens' EventProducts (Maybe Money)
 epPublisherFee
   = lens _epPublisherFee
       (\ s a -> s{_epPublisherFee = a})
 
 -- | Price per unit of this product.
-epUnitPrice :: Lens' EventProducts (Maybe (Maybe Money))
+epUnitPrice :: Lens' EventProducts (Maybe Money)
 epUnitPrice
   = lens _epUnitPrice (\ s a -> s{_epUnitPrice = a})
 
 -- | Amount earned by the publisher on this product.
-epEarnings :: Lens' EventProducts (Maybe (Maybe Money))
+epEarnings :: Lens' EventProducts (Maybe Money)
 epEarnings
   = lens _epEarnings (\ s a -> s{_epEarnings = a})
 
@@ -1131,7 +1131,7 @@ instance ToJSON EventProducts where
 data Events = Events
     { _eveNextPageToken :: !(Maybe Text)
     , _eveKind          :: !Text
-    , _eveItems         :: !(Maybe [Maybe Event])
+    , _eveItems         :: !(Maybe [Event])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Events' with the minimum fields required to make a request.
@@ -1164,7 +1164,7 @@ eveKind :: Lens' Events Text
 eveKind = lens _eveKind (\ s a -> s{_eveKind = a})
 
 -- | The event list.
-eveItems :: Lens' Events [Maybe Event]
+eveItems :: Lens' Events [Event]
 eveItems
   = lens _eveItems (\ s a -> s{_eveItems = a}) .
       _Default
@@ -1191,11 +1191,11 @@ instance ToJSON Events where
 --
 -- /See:/ 'linkSpecialOffers' smart constructor.
 data LinkSpecialOffers = LinkSpecialOffers
-    { _lsoFreeShippingMin :: !(Maybe (Maybe Money))
+    { _lsoFreeShippingMin :: !(Maybe Money)
     , _lsoPercentOff      :: !(Maybe Double)
-    , _lsoPriceCut        :: !(Maybe (Maybe Money))
-    , _lsoPriceCutMin     :: !(Maybe (Maybe Money))
-    , _lsoPercentOffMin   :: !(Maybe (Maybe Money))
+    , _lsoPriceCut        :: !(Maybe Money)
+    , _lsoPriceCutMin     :: !(Maybe Money)
+    , _lsoPercentOffMin   :: !(Maybe Money)
     , _lsoFreeShipping    :: !(Maybe Bool)
     , _lsoPromotionCodes  :: !(Maybe [Text])
     , _lsoFreeGift        :: !(Maybe Bool)
@@ -1235,7 +1235,7 @@ linkSpecialOffers =
     }
 
 -- | Minimum purchase amount for free shipping promotion
-lsoFreeShippingMin :: Lens' LinkSpecialOffers (Maybe (Maybe Money))
+lsoFreeShippingMin :: Lens' LinkSpecialOffers (Maybe Money)
 lsoFreeShippingMin
   = lens _lsoFreeShippingMin
       (\ s a -> s{_lsoFreeShippingMin = a})
@@ -1247,18 +1247,18 @@ lsoPercentOff
       (\ s a -> s{_lsoPercentOff = a})
 
 -- | Price cut on the purchase
-lsoPriceCut :: Lens' LinkSpecialOffers (Maybe (Maybe Money))
+lsoPriceCut :: Lens' LinkSpecialOffers (Maybe Money)
 lsoPriceCut
   = lens _lsoPriceCut (\ s a -> s{_lsoPriceCut = a})
 
 -- | Minimum purchase amount for price cut promotion
-lsoPriceCutMin :: Lens' LinkSpecialOffers (Maybe (Maybe Money))
+lsoPriceCutMin :: Lens' LinkSpecialOffers (Maybe Money)
 lsoPriceCutMin
   = lens _lsoPriceCutMin
       (\ s a -> s{_lsoPriceCutMin = a})
 
 -- | Minimum purchase amount for percent off promotion
-lsoPercentOffMin :: Lens' LinkSpecialOffers (Maybe (Maybe Money))
+lsoPercentOffMin :: Lens' LinkSpecialOffers (Maybe Money)
 lsoPercentOffMin
   = lens _lsoPercentOffMin
       (\ s a -> s{_lsoPercentOffMin = a})
@@ -1313,7 +1313,7 @@ instance ToJSON LinkSpecialOffers where
 data Publishers = Publishers
     { _pNextPageToken :: !(Maybe Text)
     , _pKind          :: !Text
-    , _pItems         :: !(Maybe [Maybe Publisher])
+    , _pItems         :: !(Maybe [Publisher])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Publishers' with the minimum fields required to make a request.
@@ -1346,7 +1346,7 @@ pKind :: Lens' Publishers Text
 pKind = lens _pKind (\ s a -> s{_pKind = a})
 
 -- | The entity list.
-pItems :: Lens' Publishers [Maybe Publisher]
+pItems :: Lens' Publishers [Publisher]
 pItems
   = lens _pItems (\ s a -> s{_pItems = a}) . _Default .
       _Coerce
@@ -1375,10 +1375,10 @@ data Advertiser = Advertiser
     , _advContactPhone               :: !(Maybe Text)
     , _advContactEmail               :: !(Maybe Text)
     , _advStatus                     :: !(Maybe Text)
-    , _advLogoUrl                    :: !(Maybe Text)
+    , _advLogoURL                    :: !(Maybe Text)
     , _advKind                       :: !Text
     , _advCategory                   :: !(Maybe Text)
-    , _advSiteUrl                    :: !(Maybe Text)
+    , _advSiteURL                    :: !(Maybe Text)
     , _advPayoutRank                 :: !(Maybe Text)
     , _advJoinDate                   :: !(Maybe UTCTime)
     , _advDefaultLinkId              :: !(Maybe Int64)
@@ -1386,10 +1386,10 @@ data Advertiser = Advertiser
     , _advName                       :: !(Maybe Text)
     , _advProductFeedsEnabled        :: !(Maybe Bool)
     , _advMerchantCenterIds          :: !(Maybe [Int64])
-    , _advEpcSevenDayAverage         :: !(Maybe (Maybe Money))
-    , _advItem                       :: !(Maybe (Maybe Advertiser))
+    , _advEpcSevenDayAverage         :: !(Maybe Money)
+    , _advItem                       :: !(Maybe Advertiser)
     , _advId                         :: !(Maybe Int64)
-    , _advEpcNinetyDayAverage        :: !(Maybe (Maybe Money))
+    , _advEpcNinetyDayAverage        :: !(Maybe Money)
     , _advCommissionDuration         :: !(Maybe Int32)
     , _advDescription                :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -1406,13 +1406,13 @@ data Advertiser = Advertiser
 --
 -- * 'advStatus'
 --
--- * 'advLogoUrl'
+-- * 'advLogoURL'
 --
 -- * 'advKind'
 --
 -- * 'advCategory'
 --
--- * 'advSiteUrl'
+-- * 'advSiteURL'
 --
 -- * 'advPayoutRank'
 --
@@ -1447,10 +1447,10 @@ advertiser =
     , _advContactPhone = Nothing
     , _advContactEmail = Nothing
     , _advStatus = Nothing
-    , _advLogoUrl = Nothing
+    , _advLogoURL = Nothing
     , _advKind = "gan#advertiser"
     , _advCategory = Nothing
-    , _advSiteUrl = Nothing
+    , _advSiteURL = Nothing
     , _advPayoutRank = Nothing
     , _advJoinDate = Nothing
     , _advDefaultLinkId = Nothing
@@ -1490,9 +1490,9 @@ advStatus
   = lens _advStatus (\ s a -> s{_advStatus = a})
 
 -- | URL to the logo this advertiser uses on the Google Affiliate Network.
-advLogoUrl :: Lens' Advertiser (Maybe Text)
-advLogoUrl
-  = lens _advLogoUrl (\ s a -> s{_advLogoUrl = a})
+advLogoURL :: Lens' Advertiser (Maybe Text)
+advLogoURL
+  = lens _advLogoURL (\ s a -> s{_advLogoURL = a})
 
 -- | The kind for an advertiser.
 advKind :: Lens' Advertiser Text
@@ -1506,9 +1506,9 @@ advCategory
   = lens _advCategory (\ s a -> s{_advCategory = a})
 
 -- | URL of the website this advertiser advertises from.
-advSiteUrl :: Lens' Advertiser (Maybe Text)
-advSiteUrl
-  = lens _advSiteUrl (\ s a -> s{_advSiteUrl = a})
+advSiteURL :: Lens' Advertiser (Maybe Text)
+advSiteURL
+  = lens _advSiteURL (\ s a -> s{_advSiteURL = a})
 
 -- | A rank based on commissions paid to publishers over the past 90 days. A
 -- number between 1 and 4 where 4 means the top quartile (most money paid)
@@ -1559,13 +1559,13 @@ advMerchantCenterIds
 -- | The sum of fees paid to publishers divided by the total number of clicks
 -- over the past seven days. This value should be multiplied by 100 at the
 -- time of display.
-advEpcSevenDayAverage :: Lens' Advertiser (Maybe (Maybe Money))
+advEpcSevenDayAverage :: Lens' Advertiser (Maybe Money)
 advEpcSevenDayAverage
   = lens _advEpcSevenDayAverage
       (\ s a -> s{_advEpcSevenDayAverage = a})
 
 -- | The requested advertiser.
-advItem :: Lens' Advertiser (Maybe (Maybe Advertiser))
+advItem :: Lens' Advertiser (Maybe Advertiser)
 advItem = lens _advItem (\ s a -> s{_advItem = a})
 
 -- | The ID of this advertiser.
@@ -1575,7 +1575,7 @@ advId = lens _advId (\ s a -> s{_advId = a})
 -- | The sum of fees paid to publishers divided by the total number of clicks
 -- over the past three months. This value should be multiplied by 100 at
 -- the time of display.
-advEpcNinetyDayAverage :: Lens' Advertiser (Maybe (Maybe Money))
+advEpcNinetyDayAverage :: Lens' Advertiser (Maybe Money)
 advEpcNinetyDayAverage
   = lens _advEpcNinetyDayAverage
       (\ s a -> s{_advEpcNinetyDayAverage = a})
@@ -1629,10 +1629,10 @@ instance ToJSON Advertiser where
                   ("contactPhone" .=) <$> _advContactPhone,
                   ("contactEmail" .=) <$> _advContactEmail,
                   ("status" .=) <$> _advStatus,
-                  ("logoUrl" .=) <$> _advLogoUrl,
+                  ("logoUrl" .=) <$> _advLogoURL,
                   Just ("kind" .= _advKind),
                   ("category" .=) <$> _advCategory,
-                  ("siteUrl" .=) <$> _advSiteUrl,
+                  ("siteUrl" .=) <$> _advSiteURL,
                   ("payoutRank" .=) <$> _advPayoutRank,
                   ("joinDate" .=) <$> _advJoinDate,
                   ("defaultLinkId" .=) <$> _advDefaultLinkId,
@@ -1658,7 +1658,7 @@ instance ToJSON Advertiser where
 -- /See:/ 'ccOffer' smart constructor.
 data CcOffer = CcOffer
     { _cMinimumFinanceCharge          :: !(Maybe Text)
-    , _cTrackingUrl                   :: !(Maybe Text)
+    , _cTrackingURL                   :: !(Maybe Text)
     , _cProhibitedCategories          :: !(Maybe [Text])
     , _cBalanceComputationMethod      :: !(Maybe Text)
     , _cInitialSetupAndProcessingFee  :: !(Maybe Text)
@@ -1689,9 +1689,9 @@ data CcOffer = CcOffer
     , _cOffersImmediateCashReward     :: !(Maybe Bool)
     , _cRewards                       :: !(Maybe [CcOfferRewards])
     , _cCardType                      :: !(Maybe Text)
-    , _cImageUrl                      :: !(Maybe Text)
+    , _cImageURL                      :: !(Maybe Text)
     , _cCreditLimitMax                :: !(Maybe Double)
-    , _cLandingPageUrl                :: !(Maybe Text)
+    , _cLandingPageURL                :: !(Maybe Text)
     , _cAnnualFee                     :: !(Maybe Double)
     , _cRewardsExpire                 :: !(Maybe Bool)
     , _cFirstYearAnnualFee            :: !(Maybe Double)
@@ -1728,7 +1728,7 @@ data CcOffer = CcOffer
 --
 -- * 'cMinimumFinanceCharge'
 --
--- * 'cTrackingUrl'
+-- * 'cTrackingURL'
 --
 -- * 'cProhibitedCategories'
 --
@@ -1790,11 +1790,11 @@ data CcOffer = CcOffer
 --
 -- * 'cCardType'
 --
--- * 'cImageUrl'
+-- * 'cImageURL'
 --
 -- * 'cCreditLimitMax'
 --
--- * 'cLandingPageUrl'
+-- * 'cLandingPageURL'
 --
 -- * 'cAnnualFee'
 --
@@ -1856,7 +1856,7 @@ ccOffer
 ccOffer =
     CcOffer
     { _cMinimumFinanceCharge = Nothing
-    , _cTrackingUrl = Nothing
+    , _cTrackingURL = Nothing
     , _cProhibitedCategories = Nothing
     , _cBalanceComputationMethod = Nothing
     , _cInitialSetupAndProcessingFee = Nothing
@@ -1887,9 +1887,9 @@ ccOffer =
     , _cOffersImmediateCashReward = Nothing
     , _cRewards = Nothing
     , _cCardType = Nothing
-    , _cImageUrl = Nothing
+    , _cImageURL = Nothing
     , _cCreditLimitMax = Nothing
-    , _cLandingPageUrl = Nothing
+    , _cLandingPageURL = Nothing
     , _cAnnualFee = Nothing
     , _cRewardsExpire = Nothing
     , _cFirstYearAnnualFee = Nothing
@@ -1927,9 +1927,9 @@ cMinimumFinanceCharge
       (\ s a -> s{_cMinimumFinanceCharge = a})
 
 -- | The link to ping to register a click on this offer. A summary field.
-cTrackingUrl :: Lens' CcOffer (Maybe Text)
-cTrackingUrl
-  = lens _cTrackingUrl (\ s a -> s{_cTrackingUrl = a})
+cTrackingURL :: Lens' CcOffer (Maybe Text)
+cTrackingURL
+  = lens _cTrackingURL (\ s a -> s{_cTrackingURL = a})
 
 -- | Categories in which the issuer does not wish the card to be displayed. A
 -- summary field.
@@ -2126,9 +2126,9 @@ cCardType
 
 -- | The link to the image of the card that is shown on Connect Commerce. A
 -- summary field.
-cImageUrl :: Lens' CcOffer (Maybe Text)
-cImageUrl
-  = lens _cImageUrl (\ s a -> s{_cImageUrl = a})
+cImageURL :: Lens' CcOffer (Maybe Text)
+cImageURL
+  = lens _cImageURL (\ s a -> s{_cImageURL = a})
 
 -- | The high end for credit limits the issuer imposes on recipients of this
 -- card.
@@ -2138,10 +2138,10 @@ cCreditLimitMax
       (\ s a -> s{_cCreditLimitMax = a})
 
 -- | The link to the issuer\'s page for this card. A summary field.
-cLandingPageUrl :: Lens' CcOffer (Maybe Text)
-cLandingPageUrl
-  = lens _cLandingPageUrl
-      (\ s a -> s{_cLandingPageUrl = a})
+cLandingPageURL :: Lens' CcOffer (Maybe Text)
+cLandingPageURL
+  = lens _cLandingPageURL
+      (\ s a -> s{_cLandingPageURL = a})
 
 -- | The ongoing annual fee, in dollars.
 cAnnualFee :: Lens' CcOffer (Maybe Double)
@@ -2402,7 +2402,7 @@ instance ToJSON CcOffer where
               (catMaybes
                  [("minimumFinanceCharge" .=) <$>
                     _cMinimumFinanceCharge,
-                  ("trackingUrl" .=) <$> _cTrackingUrl,
+                  ("trackingUrl" .=) <$> _cTrackingURL,
                   ("prohibitedCategories" .=) <$>
                     _cProhibitedCategories,
                   ("balanceComputationMethod" .=) <$>
@@ -2443,9 +2443,9 @@ instance ToJSON CcOffer where
                     _cOffersImmediateCashReward,
                   ("rewards" .=) <$> _cRewards,
                   ("cardType" .=) <$> _cCardType,
-                  ("imageUrl" .=) <$> _cImageUrl,
+                  ("imageUrl" .=) <$> _cImageURL,
                   ("creditLimitMax" .=) <$> _cCreditLimitMax,
-                  ("landingPageUrl" .=) <$> _cLandingPageUrl,
+                  ("landingPageUrl" .=) <$> _cLandingPageURL,
                   ("annualFee" .=) <$> _cAnnualFee,
                   ("rewardsExpire" .=) <$> _cRewardsExpire,
                   ("firstYearAnnualFee" .=) <$> _cFirstYearAnnualFee,
@@ -2486,7 +2486,7 @@ instance ToJSON CcOffer where
 data Links = Links
     { _linNextPageToken :: !(Maybe Text)
     , _linKind          :: !Text
-    , _linItems         :: !(Maybe [Maybe Link])
+    , _linItems         :: !(Maybe [Link])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Links' with the minimum fields required to make a request.
@@ -2518,7 +2518,7 @@ linKind :: Lens' Links Text
 linKind = lens _linKind (\ s a -> s{_linKind = a})
 
 -- | The links.
-linItems :: Lens' Links [Maybe Link]
+linItems :: Lens' Links [Link]
 linItems
   = lens _linItems (\ s a -> s{_linItems = a}) .
       _Default
@@ -2551,10 +2551,10 @@ data Publisher = Publisher
     , _pubJoinDate            :: !(Maybe UTCTime)
     , _pubClassification      :: !(Maybe Text)
     , _pubName                :: !(Maybe Text)
-    , _pubEpcSevenDayAverage  :: !(Maybe (Maybe Money))
-    , _pubItem                :: !(Maybe (Maybe Publisher))
+    , _pubEpcSevenDayAverage  :: !(Maybe Money)
+    , _pubItem                :: !(Maybe Publisher)
     , _pubId                  :: !(Maybe Int64)
-    , _pubEpcNinetyDayAverage :: !(Maybe (Maybe Money))
+    , _pubEpcNinetyDayAverage :: !(Maybe Money)
     , _pubSites               :: !(Maybe [Text])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -2639,13 +2639,13 @@ pubName = lens _pubName (\ s a -> s{_pubName = a})
 -- | The sum of fees paid to this publisher divided by the total number of
 -- clicks over the past seven days. Values are multiplied by 100 for
 -- display purposes.
-pubEpcSevenDayAverage :: Lens' Publisher (Maybe (Maybe Money))
+pubEpcSevenDayAverage :: Lens' Publisher (Maybe Money)
 pubEpcSevenDayAverage
   = lens _pubEpcSevenDayAverage
       (\ s a -> s{_pubEpcSevenDayAverage = a})
 
 -- | The requested publisher.
-pubItem :: Lens' Publisher (Maybe (Maybe Publisher))
+pubItem :: Lens' Publisher (Maybe Publisher)
 pubItem = lens _pubItem (\ s a -> s{_pubItem = a})
 
 -- | The ID of this publisher.
@@ -2655,7 +2655,7 @@ pubId = lens _pubId (\ s a -> s{_pubId = a})
 -- | The sum of fees paid to this publisher divided by the total number of
 -- clicks over the past three months. Values are multiplied by 100 for
 -- display purposes.
-pubEpcNinetyDayAverage :: Lens' Publisher (Maybe (Maybe Money))
+pubEpcNinetyDayAverage :: Lens' Publisher (Maybe Money)
 pubEpcNinetyDayAverage
   = lens _pubEpcNinetyDayAverage
       (\ s a -> s{_pubEpcNinetyDayAverage = a})

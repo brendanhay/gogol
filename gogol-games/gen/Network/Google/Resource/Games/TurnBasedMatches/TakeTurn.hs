@@ -32,13 +32,13 @@ module Network.Google.Resource.Games.TurnBasedMatches.TakeTurn
     -- * Request Lenses
     , tbmttQuotaUser
     , tbmttPrettyPrint
-    , tbmttUserIp
+    , tbmttTurnBasedMatchTurn
+    , tbmttUserIP
     , tbmttKey
     , tbmttLanguage
-    , tbmttOauthToken
+    , tbmttOAuthToken
     , tbmttMatchId
     , tbmttFields
-    , tbmttAlt
     ) where
 
 import           Network.Google.Games.Types
@@ -53,25 +53,27 @@ type TurnBasedMatchesTakeTurnResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "language" Text :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Put '[JSON] TurnBasedMatch
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] TurnBasedMatchTurn :>
+                             Put '[JSON] TurnBasedMatch
 
 -- | Commit the results of a player turn.
 --
 -- /See:/ 'turnBasedMatchesTakeTurn'' smart constructor.
 data TurnBasedMatchesTakeTurn' = TurnBasedMatchesTakeTurn'
-    { _tbmttQuotaUser   :: !(Maybe Text)
-    , _tbmttPrettyPrint :: !Bool
-    , _tbmttUserIp      :: !(Maybe Text)
-    , _tbmttKey         :: !(Maybe Text)
-    , _tbmttLanguage    :: !(Maybe Text)
-    , _tbmttOauthToken  :: !(Maybe Text)
-    , _tbmttMatchId     :: !Text
-    , _tbmttFields      :: !(Maybe Text)
-    , _tbmttAlt         :: !Alt
+    { _tbmttQuotaUser          :: !(Maybe Text)
+    , _tbmttPrettyPrint        :: !Bool
+    , _tbmttTurnBasedMatchTurn :: !TurnBasedMatchTurn
+    , _tbmttUserIP             :: !(Maybe Text)
+    , _tbmttKey                :: !(Maybe Key)
+    , _tbmttLanguage           :: !(Maybe Text)
+    , _tbmttOAuthToken         :: !(Maybe OAuthToken)
+    , _tbmttMatchId            :: !Text
+    , _tbmttFields             :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchesTakeTurn'' with the minimum fields required to make a request.
@@ -82,33 +84,34 @@ data TurnBasedMatchesTakeTurn' = TurnBasedMatchesTakeTurn'
 --
 -- * 'tbmttPrettyPrint'
 --
--- * 'tbmttUserIp'
+-- * 'tbmttTurnBasedMatchTurn'
+--
+-- * 'tbmttUserIP'
 --
 -- * 'tbmttKey'
 --
 -- * 'tbmttLanguage'
 --
--- * 'tbmttOauthToken'
+-- * 'tbmttOAuthToken'
 --
 -- * 'tbmttMatchId'
 --
 -- * 'tbmttFields'
---
--- * 'tbmttAlt'
 turnBasedMatchesTakeTurn'
-    :: Text -- ^ 'matchId'
+    :: TurnBasedMatchTurn -- ^ 'TurnBasedMatchTurn'
+    -> Text -- ^ 'matchId'
     -> TurnBasedMatchesTakeTurn'
-turnBasedMatchesTakeTurn' pTbmttMatchId_ =
+turnBasedMatchesTakeTurn' pTbmttTurnBasedMatchTurn_ pTbmttMatchId_ =
     TurnBasedMatchesTakeTurn'
     { _tbmttQuotaUser = Nothing
     , _tbmttPrettyPrint = True
-    , _tbmttUserIp = Nothing
+    , _tbmttTurnBasedMatchTurn = pTbmttTurnBasedMatchTurn_
+    , _tbmttUserIP = Nothing
     , _tbmttKey = Nothing
     , _tbmttLanguage = Nothing
-    , _tbmttOauthToken = Nothing
+    , _tbmttOAuthToken = Nothing
     , _tbmttMatchId = pTbmttMatchId_
     , _tbmttFields = Nothing
-    , _tbmttAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -125,16 +128,22 @@ tbmttPrettyPrint
   = lens _tbmttPrettyPrint
       (\ s a -> s{_tbmttPrettyPrint = a})
 
+-- | Multipart request metadata.
+tbmttTurnBasedMatchTurn :: Lens' TurnBasedMatchesTakeTurn' TurnBasedMatchTurn
+tbmttTurnBasedMatchTurn
+  = lens _tbmttTurnBasedMatchTurn
+      (\ s a -> s{_tbmttTurnBasedMatchTurn = a})
+
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tbmttUserIp :: Lens' TurnBasedMatchesTakeTurn' (Maybe Text)
-tbmttUserIp
-  = lens _tbmttUserIp (\ s a -> s{_tbmttUserIp = a})
+tbmttUserIP :: Lens' TurnBasedMatchesTakeTurn' (Maybe Text)
+tbmttUserIP
+  = lens _tbmttUserIP (\ s a -> s{_tbmttUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tbmttKey :: Lens' TurnBasedMatchesTakeTurn' (Maybe Text)
+tbmttKey :: Lens' TurnBasedMatchesTakeTurn' (Maybe Key)
 tbmttKey = lens _tbmttKey (\ s a -> s{_tbmttKey = a})
 
 -- | The preferred language to use for strings returned by this method.
@@ -144,10 +153,10 @@ tbmttLanguage
       (\ s a -> s{_tbmttLanguage = a})
 
 -- | OAuth 2.0 token for the current user.
-tbmttOauthToken :: Lens' TurnBasedMatchesTakeTurn' (Maybe Text)
-tbmttOauthToken
-  = lens _tbmttOauthToken
-      (\ s a -> s{_tbmttOauthToken = a})
+tbmttOAuthToken :: Lens' TurnBasedMatchesTakeTurn' (Maybe OAuthToken)
+tbmttOAuthToken
+  = lens _tbmttOAuthToken
+      (\ s a -> s{_tbmttOAuthToken = a})
 
 -- | The ID of the match.
 tbmttMatchId :: Lens' TurnBasedMatchesTakeTurn' Text
@@ -159,9 +168,9 @@ tbmttFields :: Lens' TurnBasedMatchesTakeTurn' (Maybe Text)
 tbmttFields
   = lens _tbmttFields (\ s a -> s{_tbmttFields = a})
 
--- | Data format for the response.
-tbmttAlt :: Lens' TurnBasedMatchesTakeTurn' Alt
-tbmttAlt = lens _tbmttAlt (\ s a -> s{_tbmttAlt = a})
+instance GoogleAuth TurnBasedMatchesTakeTurn' where
+        authKey = tbmttKey . _Just
+        authToken = tbmttOAuthToken . _Just
 
 instance GoogleRequest TurnBasedMatchesTakeTurn'
          where
@@ -169,13 +178,14 @@ instance GoogleRequest TurnBasedMatchesTakeTurn'
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u TurnBasedMatchesTakeTurn'{..}
           = go _tbmttQuotaUser (Just _tbmttPrettyPrint)
-              _tbmttUserIp
+              _tbmttUserIP
               _tbmttKey
               _tbmttLanguage
-              _tbmttOauthToken
+              _tbmttOAuthToken
               _tbmttMatchId
               _tbmttFields
-              (Just _tbmttAlt)
+              (Just AltJSON)
+              _tbmttTurnBasedMatchTurn
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TurnBasedMatchesTakeTurnResource)

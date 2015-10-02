@@ -33,13 +33,13 @@ module Network.Google.Resource.DFAReporting.AccountUserProfiles.Patch
     -- * Request Lenses
     , auppQuotaUser
     , auppPrettyPrint
-    , auppUserIp
+    , auppUserIP
+    , auppAccountUserProfile
     , auppProfileId
     , auppKey
     , auppId
-    , auppOauthToken
+    , auppOAuthToken
     , auppFields
-    , auppAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,27 +54,28 @@ type AccountUserProfilesPatchResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "id" Int64 :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :>
-                           Patch '[JSON] AccountUserProfile
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] AccountUserProfile :>
+                             Patch '[JSON] AccountUserProfile
 
 -- | Updates an existing account user profile. This method supports patch
 -- semantics.
 --
 -- /See:/ 'accountUserProfilesPatch'' smart constructor.
 data AccountUserProfilesPatch' = AccountUserProfilesPatch'
-    { _auppQuotaUser   :: !(Maybe Text)
-    , _auppPrettyPrint :: !Bool
-    , _auppUserIp      :: !(Maybe Text)
-    , _auppProfileId   :: !Int64
-    , _auppKey         :: !(Maybe Text)
-    , _auppId          :: !Int64
-    , _auppOauthToken  :: !(Maybe Text)
-    , _auppFields      :: !(Maybe Text)
-    , _auppAlt         :: !Alt
+    { _auppQuotaUser          :: !(Maybe Text)
+    , _auppPrettyPrint        :: !Bool
+    , _auppUserIP             :: !(Maybe Text)
+    , _auppAccountUserProfile :: !AccountUserProfile
+    , _auppProfileId          :: !Int64
+    , _auppKey                :: !(Maybe Key)
+    , _auppId                 :: !Int64
+    , _auppOAuthToken         :: !(Maybe OAuthToken)
+    , _auppFields             :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountUserProfilesPatch'' with the minimum fields required to make a request.
@@ -85,7 +86,9 @@ data AccountUserProfilesPatch' = AccountUserProfilesPatch'
 --
 -- * 'auppPrettyPrint'
 --
--- * 'auppUserIp'
+-- * 'auppUserIP'
+--
+-- * 'auppAccountUserProfile'
 --
 -- * 'auppProfileId'
 --
@@ -93,26 +96,25 @@ data AccountUserProfilesPatch' = AccountUserProfilesPatch'
 --
 -- * 'auppId'
 --
--- * 'auppOauthToken'
+-- * 'auppOAuthToken'
 --
 -- * 'auppFields'
---
--- * 'auppAlt'
 accountUserProfilesPatch'
-    :: Int64 -- ^ 'profileId'
+    :: AccountUserProfile -- ^ 'AccountUserProfile'
+    -> Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> AccountUserProfilesPatch'
-accountUserProfilesPatch' pAuppProfileId_ pAuppId_ =
+accountUserProfilesPatch' pAuppAccountUserProfile_ pAuppProfileId_ pAuppId_ =
     AccountUserProfilesPatch'
     { _auppQuotaUser = Nothing
     , _auppPrettyPrint = True
-    , _auppUserIp = Nothing
+    , _auppUserIP = Nothing
+    , _auppAccountUserProfile = pAuppAccountUserProfile_
     , _auppProfileId = pAuppProfileId_
     , _auppKey = Nothing
     , _auppId = pAuppId_
-    , _auppOauthToken = Nothing
+    , _auppOAuthToken = Nothing
     , _auppFields = Nothing
-    , _auppAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -131,9 +133,15 @@ auppPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-auppUserIp :: Lens' AccountUserProfilesPatch' (Maybe Text)
-auppUserIp
-  = lens _auppUserIp (\ s a -> s{_auppUserIp = a})
+auppUserIP :: Lens' AccountUserProfilesPatch' (Maybe Text)
+auppUserIP
+  = lens _auppUserIP (\ s a -> s{_auppUserIP = a})
+
+-- | Multipart request metadata.
+auppAccountUserProfile :: Lens' AccountUserProfilesPatch' AccountUserProfile
+auppAccountUserProfile
+  = lens _auppAccountUserProfile
+      (\ s a -> s{_auppAccountUserProfile = a})
 
 -- | User profile ID associated with this request.
 auppProfileId :: Lens' AccountUserProfilesPatch' Int64
@@ -144,7 +152,7 @@ auppProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-auppKey :: Lens' AccountUserProfilesPatch' (Maybe Text)
+auppKey :: Lens' AccountUserProfilesPatch' (Maybe Key)
 auppKey = lens _auppKey (\ s a -> s{_auppKey = a})
 
 -- | User profile ID.
@@ -152,19 +160,19 @@ auppId :: Lens' AccountUserProfilesPatch' Int64
 auppId = lens _auppId (\ s a -> s{_auppId = a})
 
 -- | OAuth 2.0 token for the current user.
-auppOauthToken :: Lens' AccountUserProfilesPatch' (Maybe Text)
-auppOauthToken
-  = lens _auppOauthToken
-      (\ s a -> s{_auppOauthToken = a})
+auppOAuthToken :: Lens' AccountUserProfilesPatch' (Maybe OAuthToken)
+auppOAuthToken
+  = lens _auppOAuthToken
+      (\ s a -> s{_auppOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 auppFields :: Lens' AccountUserProfilesPatch' (Maybe Text)
 auppFields
   = lens _auppFields (\ s a -> s{_auppFields = a})
 
--- | Data format for the response.
-auppAlt :: Lens' AccountUserProfilesPatch' Alt
-auppAlt = lens _auppAlt (\ s a -> s{_auppAlt = a})
+instance GoogleAuth AccountUserProfilesPatch' where
+        authKey = auppKey . _Just
+        authToken = auppOAuthToken . _Just
 
 instance GoogleRequest AccountUserProfilesPatch'
          where
@@ -173,13 +181,14 @@ instance GoogleRequest AccountUserProfilesPatch'
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AccountUserProfilesPatch'{..}
           = go _auppQuotaUser (Just _auppPrettyPrint)
-              _auppUserIp
+              _auppUserIP
               _auppProfileId
               _auppKey
               (Just _auppId)
-              _auppOauthToken
+              _auppOAuthToken
               _auppFields
-              (Just _auppAlt)
+              (Just AltJSON)
+              _auppAccountUserProfile
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountUserProfilesPatchResource)

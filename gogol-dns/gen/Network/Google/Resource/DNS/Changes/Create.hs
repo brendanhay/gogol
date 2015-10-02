@@ -33,12 +33,12 @@ module Network.Google.Resource.DNS.Changes.Create
     , ccQuotaUser
     , ccPrettyPrint
     , ccProject
-    , ccUserIp
+    , ccUserIP
+    , ccChange
     , ccKey
-    , ccOauthToken
+    , ccOAuthToken
     , ccManagedZone
     , ccFields
-    , ccAlt
     ) where
 
 import           Network.Google.DNS.Types
@@ -54,10 +54,11 @@ type ChangesCreateResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Post '[JSON] Change
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Change :> Post '[JSON] Change
 
 -- | Atomically update the ResourceRecordSet collection.
 --
@@ -66,12 +67,12 @@ data ChangesCreate' = ChangesCreate'
     { _ccQuotaUser   :: !(Maybe Text)
     , _ccPrettyPrint :: !Bool
     , _ccProject     :: !Text
-    , _ccUserIp      :: !(Maybe Text)
-    , _ccKey         :: !(Maybe Text)
-    , _ccOauthToken  :: !(Maybe Text)
+    , _ccUserIP      :: !(Maybe Text)
+    , _ccChange      :: !Change
+    , _ccKey         :: !(Maybe Key)
+    , _ccOAuthToken  :: !(Maybe OAuthToken)
     , _ccManagedZone :: !Text
     , _ccFields      :: !(Maybe Text)
-    , _ccAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChangesCreate'' with the minimum fields required to make a request.
@@ -84,32 +85,33 @@ data ChangesCreate' = ChangesCreate'
 --
 -- * 'ccProject'
 --
--- * 'ccUserIp'
+-- * 'ccUserIP'
+--
+-- * 'ccChange'
 --
 -- * 'ccKey'
 --
--- * 'ccOauthToken'
+-- * 'ccOAuthToken'
 --
 -- * 'ccManagedZone'
 --
 -- * 'ccFields'
---
--- * 'ccAlt'
 changesCreate'
     :: Text -- ^ 'project'
+    -> Change -- ^ 'Change'
     -> Text -- ^ 'managedZone'
     -> ChangesCreate'
-changesCreate' pCcProject_ pCcManagedZone_ =
+changesCreate' pCcProject_ pCcChange_ pCcManagedZone_ =
     ChangesCreate'
     { _ccQuotaUser = Nothing
     , _ccPrettyPrint = True
     , _ccProject = pCcProject_
-    , _ccUserIp = Nothing
+    , _ccUserIP = Nothing
+    , _ccChange = pCcChange_
     , _ccKey = Nothing
-    , _ccOauthToken = Nothing
+    , _ccOAuthToken = Nothing
     , _ccManagedZone = pCcManagedZone_
     , _ccFields = Nothing
-    , _ccAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -132,19 +134,23 @@ ccProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ccUserIp :: Lens' ChangesCreate' (Maybe Text)
-ccUserIp = lens _ccUserIp (\ s a -> s{_ccUserIp = a})
+ccUserIP :: Lens' ChangesCreate' (Maybe Text)
+ccUserIP = lens _ccUserIP (\ s a -> s{_ccUserIP = a})
+
+-- | Multipart request metadata.
+ccChange :: Lens' ChangesCreate' Change
+ccChange = lens _ccChange (\ s a -> s{_ccChange = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ccKey :: Lens' ChangesCreate' (Maybe Text)
+ccKey :: Lens' ChangesCreate' (Maybe Key)
 ccKey = lens _ccKey (\ s a -> s{_ccKey = a})
 
 -- | OAuth 2.0 token for the current user.
-ccOauthToken :: Lens' ChangesCreate' (Maybe Text)
-ccOauthToken
-  = lens _ccOauthToken (\ s a -> s{_ccOauthToken = a})
+ccOAuthToken :: Lens' ChangesCreate' (Maybe OAuthToken)
+ccOAuthToken
+  = lens _ccOAuthToken (\ s a -> s{_ccOAuthToken = a})
 
 -- | Identifies the managed zone addressed by this request. Can be the
 -- managed zone name or id.
@@ -157,21 +163,22 @@ ccManagedZone
 ccFields :: Lens' ChangesCreate' (Maybe Text)
 ccFields = lens _ccFields (\ s a -> s{_ccFields = a})
 
--- | Data format for the response.
-ccAlt :: Lens' ChangesCreate' Alt
-ccAlt = lens _ccAlt (\ s a -> s{_ccAlt = a})
+instance GoogleAuth ChangesCreate' where
+        authKey = ccKey . _Just
+        authToken = ccOAuthToken . _Just
 
 instance GoogleRequest ChangesCreate' where
         type Rs ChangesCreate' = Change
         request = requestWithRoute defReq dNSURL
         requestWithRoute r u ChangesCreate'{..}
           = go _ccQuotaUser (Just _ccPrettyPrint) _ccProject
-              _ccUserIp
+              _ccUserIP
               _ccKey
-              _ccOauthToken
+              _ccOAuthToken
               _ccManagedZone
               _ccFields
-              (Just _ccAlt)
+              (Just AltJSON)
+              _ccChange
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ChangesCreateResource)

@@ -19,7 +19,7 @@
 --
 -- | Creates a Container Version.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersVersionsCreate@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersVersionsCreate@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Create
     (
     -- * REST Resource
@@ -32,19 +32,19 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Create
     -- * Request Lenses
     , acvcQuotaUser
     , acvcPrettyPrint
+    , acvcCreateContainerVersionRequestVersionOptions
     , acvcContainerId
-    , acvcUserIp
+    , acvcUserIP
     , acvcAccountId
     , acvcKey
-    , acvcOauthToken
+    , acvcOAuthToken
     , acvcFields
-    , acvcAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagmanagerAccountsContainersVersionsCreate@ which the
+-- | A resource alias for @TagManagerAccountsContainersVersionsCreate@ which the
 -- 'AccountsContainersVersionsCreate'' request conforms to.
 type AccountsContainersVersionsCreateResource =
      "accounts" :>
@@ -55,25 +55,27 @@ type AccountsContainersVersionsCreateResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :>
-                             Post '[JSON] CreateContainerVersionResponse
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON]
+                               CreateContainerVersionRequestVersionOptions
+                               :> Post '[JSON] CreateContainerVersionResponse
 
 -- | Creates a Container Version.
 --
 -- /See:/ 'accountsContainersVersionsCreate'' smart constructor.
 data AccountsContainersVersionsCreate' = AccountsContainersVersionsCreate'
-    { _acvcQuotaUser   :: !(Maybe Text)
-    , _acvcPrettyPrint :: !Bool
-    , _acvcContainerId :: !Text
-    , _acvcUserIp      :: !(Maybe Text)
-    , _acvcAccountId   :: !Text
-    , _acvcKey         :: !(Maybe Text)
-    , _acvcOauthToken  :: !(Maybe Text)
-    , _acvcFields      :: !(Maybe Text)
-    , _acvcAlt         :: !Alt
+    { _acvcQuotaUser                                   :: !(Maybe Text)
+    , _acvcPrettyPrint                                 :: !Bool
+    , _acvcCreateContainerVersionRequestVersionOptions :: !CreateContainerVersionRequestVersionOptions
+    , _acvcContainerId                                 :: !Text
+    , _acvcUserIP                                      :: !(Maybe Text)
+    , _acvcAccountId                                   :: !Text
+    , _acvcKey                                         :: !(Maybe Key)
+    , _acvcOAuthToken                                  :: !(Maybe OAuthToken)
+    , _acvcFields                                      :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersVersionsCreate'' with the minimum fields required to make a request.
@@ -84,34 +86,35 @@ data AccountsContainersVersionsCreate' = AccountsContainersVersionsCreate'
 --
 -- * 'acvcPrettyPrint'
 --
+-- * 'acvcCreateContainerVersionRequestVersionOptions'
+--
 -- * 'acvcContainerId'
 --
--- * 'acvcUserIp'
+-- * 'acvcUserIP'
 --
 -- * 'acvcAccountId'
 --
 -- * 'acvcKey'
 --
--- * 'acvcOauthToken'
+-- * 'acvcOAuthToken'
 --
 -- * 'acvcFields'
---
--- * 'acvcAlt'
 accountsContainersVersionsCreate'
-    :: Text -- ^ 'containerId'
+    :: CreateContainerVersionRequestVersionOptions -- ^ 'CreateContainerVersionRequestVersionOptions'
+    -> Text -- ^ 'containerId'
     -> Text -- ^ 'accountId'
     -> AccountsContainersVersionsCreate'
-accountsContainersVersionsCreate' pAcvcContainerId_ pAcvcAccountId_ =
+accountsContainersVersionsCreate' pAcvcCreateContainerVersionRequestVersionOptions_ pAcvcContainerId_ pAcvcAccountId_ =
     AccountsContainersVersionsCreate'
     { _acvcQuotaUser = Nothing
     , _acvcPrettyPrint = True
+    , _acvcCreateContainerVersionRequestVersionOptions = pAcvcCreateContainerVersionRequestVersionOptions_
     , _acvcContainerId = pAcvcContainerId_
-    , _acvcUserIp = Nothing
+    , _acvcUserIP = Nothing
     , _acvcAccountId = pAcvcAccountId_
     , _acvcKey = Nothing
-    , _acvcOauthToken = Nothing
+    , _acvcOAuthToken = Nothing
     , _acvcFields = Nothing
-    , _acvcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -128,6 +131,15 @@ acvcPrettyPrint
   = lens _acvcPrettyPrint
       (\ s a -> s{_acvcPrettyPrint = a})
 
+-- | Multipart request metadata.
+acvcCreateContainerVersionRequestVersionOptions :: Lens' AccountsContainersVersionsCreate' CreateContainerVersionRequestVersionOptions
+acvcCreateContainerVersionRequestVersionOptions
+  = lens
+      _acvcCreateContainerVersionRequestVersionOptions
+      (\ s a ->
+         s{_acvcCreateContainerVersionRequestVersionOptions =
+             a})
+
 -- | The GTM Container ID.
 acvcContainerId :: Lens' AccountsContainersVersionsCreate' Text
 acvcContainerId
@@ -136,9 +148,9 @@ acvcContainerId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-acvcUserIp :: Lens' AccountsContainersVersionsCreate' (Maybe Text)
-acvcUserIp
-  = lens _acvcUserIp (\ s a -> s{_acvcUserIp = a})
+acvcUserIP :: Lens' AccountsContainersVersionsCreate' (Maybe Text)
+acvcUserIP
+  = lens _acvcUserIP (\ s a -> s{_acvcUserIP = a})
 
 -- | The GTM Account ID.
 acvcAccountId :: Lens' AccountsContainersVersionsCreate' Text
@@ -149,23 +161,24 @@ acvcAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-acvcKey :: Lens' AccountsContainersVersionsCreate' (Maybe Text)
+acvcKey :: Lens' AccountsContainersVersionsCreate' (Maybe Key)
 acvcKey = lens _acvcKey (\ s a -> s{_acvcKey = a})
 
 -- | OAuth 2.0 token for the current user.
-acvcOauthToken :: Lens' AccountsContainersVersionsCreate' (Maybe Text)
-acvcOauthToken
-  = lens _acvcOauthToken
-      (\ s a -> s{_acvcOauthToken = a})
+acvcOAuthToken :: Lens' AccountsContainersVersionsCreate' (Maybe OAuthToken)
+acvcOAuthToken
+  = lens _acvcOAuthToken
+      (\ s a -> s{_acvcOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 acvcFields :: Lens' AccountsContainersVersionsCreate' (Maybe Text)
 acvcFields
   = lens _acvcFields (\ s a -> s{_acvcFields = a})
 
--- | Data format for the response.
-acvcAlt :: Lens' AccountsContainersVersionsCreate' Alt
-acvcAlt = lens _acvcAlt (\ s a -> s{_acvcAlt = a})
+instance GoogleAuth AccountsContainersVersionsCreate'
+         where
+        authKey = acvcKey . _Just
+        authToken = acvcOAuthToken . _Just
 
 instance GoogleRequest
          AccountsContainersVersionsCreate' where
@@ -176,12 +189,13 @@ instance GoogleRequest
           AccountsContainersVersionsCreate'{..}
           = go _acvcQuotaUser (Just _acvcPrettyPrint)
               _acvcContainerId
-              _acvcUserIp
+              _acvcUserIP
               _acvcAccountId
               _acvcKey
-              _acvcOauthToken
+              _acvcOAuthToken
               _acvcFields
-              (Just _acvcAlt)
+              (Just AltJSON)
+              _acvcCreateContainerVersionRequestVersionOptions
           where go
                   = clientWithRoute
                       (Proxy ::

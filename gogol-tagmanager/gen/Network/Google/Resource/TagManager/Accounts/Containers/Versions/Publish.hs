@@ -19,7 +19,7 @@
 --
 -- | Publishes a Container Version.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersVersionsPublish@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersVersionsPublish@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Publish
     (
     -- * REST Resource
@@ -33,20 +33,19 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Publish
     , acvpQuotaUser
     , acvpPrettyPrint
     , acvpContainerId
-    , acvpUserIp
+    , acvpUserIP
     , acvpFingerprint
     , acvpContainerVersionId
     , acvpAccountId
     , acvpKey
-    , acvpOauthToken
+    , acvpOAuthToken
     , acvpFields
-    , acvpAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagmanagerAccountsContainersVersionsPublish@ which the
+-- | A resource alias for @TagManagerAccountsContainersVersionsPublish@ which the
 -- 'AccountsContainersVersionsPublish'' request conforms to.
 type AccountsContainersVersionsPublishResource =
      "accounts" :>
@@ -60,10 +59,10 @@ type AccountsContainersVersionsPublishResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
                          QueryParam "fingerprint" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "fields" Text :>
-                                 QueryParam "alt" Alt :>
+                                 QueryParam "alt" AltJSON :>
                                    Post '[JSON] PublishContainerVersionResponse
 
 -- | Publishes a Container Version.
@@ -73,14 +72,13 @@ data AccountsContainersVersionsPublish' = AccountsContainersVersionsPublish'
     { _acvpQuotaUser          :: !(Maybe Text)
     , _acvpPrettyPrint        :: !Bool
     , _acvpContainerId        :: !Text
-    , _acvpUserIp             :: !(Maybe Text)
+    , _acvpUserIP             :: !(Maybe Text)
     , _acvpFingerprint        :: !(Maybe Text)
     , _acvpContainerVersionId :: !Text
     , _acvpAccountId          :: !Text
-    , _acvpKey                :: !(Maybe Text)
-    , _acvpOauthToken         :: !(Maybe Text)
+    , _acvpKey                :: !(Maybe Key)
+    , _acvpOAuthToken         :: !(Maybe OAuthToken)
     , _acvpFields             :: !(Maybe Text)
-    , _acvpAlt                :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersVersionsPublish'' with the minimum fields required to make a request.
@@ -93,7 +91,7 @@ data AccountsContainersVersionsPublish' = AccountsContainersVersionsPublish'
 --
 -- * 'acvpContainerId'
 --
--- * 'acvpUserIp'
+-- * 'acvpUserIP'
 --
 -- * 'acvpFingerprint'
 --
@@ -103,11 +101,9 @@ data AccountsContainersVersionsPublish' = AccountsContainersVersionsPublish'
 --
 -- * 'acvpKey'
 --
--- * 'acvpOauthToken'
+-- * 'acvpOAuthToken'
 --
 -- * 'acvpFields'
---
--- * 'acvpAlt'
 accountsContainersVersionsPublish'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'containerVersionId'
@@ -118,14 +114,13 @@ accountsContainersVersionsPublish' pAcvpContainerId_ pAcvpContainerVersionId_ pA
     { _acvpQuotaUser = Nothing
     , _acvpPrettyPrint = True
     , _acvpContainerId = pAcvpContainerId_
-    , _acvpUserIp = Nothing
+    , _acvpUserIP = Nothing
     , _acvpFingerprint = Nothing
     , _acvpContainerVersionId = pAcvpContainerVersionId_
     , _acvpAccountId = pAcvpAccountId_
     , _acvpKey = Nothing
-    , _acvpOauthToken = Nothing
+    , _acvpOAuthToken = Nothing
     , _acvpFields = Nothing
-    , _acvpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,9 +145,9 @@ acvpContainerId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-acvpUserIp :: Lens' AccountsContainersVersionsPublish' (Maybe Text)
-acvpUserIp
-  = lens _acvpUserIp (\ s a -> s{_acvpUserIp = a})
+acvpUserIP :: Lens' AccountsContainersVersionsPublish' (Maybe Text)
+acvpUserIP
+  = lens _acvpUserIP (\ s a -> s{_acvpUserIP = a})
 
 -- | When provided, this fingerprint must match the fingerprint of the
 -- container version in storage.
@@ -176,23 +171,24 @@ acvpAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-acvpKey :: Lens' AccountsContainersVersionsPublish' (Maybe Text)
+acvpKey :: Lens' AccountsContainersVersionsPublish' (Maybe Key)
 acvpKey = lens _acvpKey (\ s a -> s{_acvpKey = a})
 
 -- | OAuth 2.0 token for the current user.
-acvpOauthToken :: Lens' AccountsContainersVersionsPublish' (Maybe Text)
-acvpOauthToken
-  = lens _acvpOauthToken
-      (\ s a -> s{_acvpOauthToken = a})
+acvpOAuthToken :: Lens' AccountsContainersVersionsPublish' (Maybe OAuthToken)
+acvpOAuthToken
+  = lens _acvpOAuthToken
+      (\ s a -> s{_acvpOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 acvpFields :: Lens' AccountsContainersVersionsPublish' (Maybe Text)
 acvpFields
   = lens _acvpFields (\ s a -> s{_acvpFields = a})
 
--- | Data format for the response.
-acvpAlt :: Lens' AccountsContainersVersionsPublish' Alt
-acvpAlt = lens _acvpAlt (\ s a -> s{_acvpAlt = a})
+instance GoogleAuth
+         AccountsContainersVersionsPublish' where
+        authKey = acvpKey . _Just
+        authToken = acvpOAuthToken . _Just
 
 instance GoogleRequest
          AccountsContainersVersionsPublish' where
@@ -203,14 +199,14 @@ instance GoogleRequest
           AccountsContainersVersionsPublish'{..}
           = go _acvpQuotaUser (Just _acvpPrettyPrint)
               _acvpContainerId
-              _acvpUserIp
+              _acvpUserIP
               _acvpFingerprint
               _acvpContainerVersionId
               _acvpAccountId
               _acvpKey
-              _acvpOauthToken
+              _acvpOAuthToken
               _acvpFields
-              (Just _acvpAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

@@ -47,11 +47,10 @@ module Network.Google.Resource.Classroom.Courses.List
     , clBearerToken
     , clKey
     , clPageToken
-    , clOauthToken
+    , clOAuthToken
     , clPageSize
     , clFields
     , clCallback
-    , clAlt
     ) where
 
 import           Network.Google.Classroom.Types
@@ -72,13 +71,13 @@ type CoursesListResource =
                        QueryParam "uploadType" Text :>
                          QueryParam "teacherId" Text :>
                            QueryParam "bearer_token" Text :>
-                             QueryParam "key" Text :>
+                             QueryParam "key" Key :>
                                QueryParam "pageToken" Text :>
-                                 QueryParam "oauth_token" Text :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "pageSize" Int32 :>
                                      QueryParam "fields" Text :>
                                        QueryParam "callback" Text :>
-                                         QueryParam "alt" Text :>
+                                         QueryParam "alt" AltJSON :>
                                            Get '[JSON] ListCoursesResponse
 
 -- | Returns a list of courses that the requesting user is permitted to view,
@@ -100,13 +99,12 @@ data CoursesList' = CoursesList'
     , _clUploadType     :: !(Maybe Text)
     , _clTeacherId      :: !(Maybe Text)
     , _clBearerToken    :: !(Maybe Text)
-    , _clKey            :: !(Maybe Text)
+    , _clKey            :: !(Maybe Key)
     , _clPageToken      :: !(Maybe Text)
-    , _clOauthToken     :: !(Maybe Text)
+    , _clOAuthToken     :: !(Maybe OAuthToken)
     , _clPageSize       :: !(Maybe Int32)
     , _clFields         :: !(Maybe Text)
     , _clCallback       :: !(Maybe Text)
-    , _clAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CoursesList'' with the minimum fields required to make a request.
@@ -137,15 +135,13 @@ data CoursesList' = CoursesList'
 --
 -- * 'clPageToken'
 --
--- * 'clOauthToken'
+-- * 'clOAuthToken'
 --
 -- * 'clPageSize'
 --
 -- * 'clFields'
 --
 -- * 'clCallback'
---
--- * 'clAlt'
 coursesList'
     :: CoursesList'
 coursesList' =
@@ -162,11 +158,10 @@ coursesList' =
     , _clBearerToken = Nothing
     , _clKey = Nothing
     , _clPageToken = Nothing
-    , _clOauthToken = Nothing
+    , _clOAuthToken = Nothing
     , _clPageSize = Nothing
     , _clFields = Nothing
     , _clCallback = Nothing
-    , _clAlt = "json"
     }
 
 -- | Restricts returned courses to those having a student with the specified
@@ -232,7 +227,7 @@ clBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-clKey :: Lens' CoursesList' (Maybe Text)
+clKey :: Lens' CoursesList' (Maybe Key)
 clKey = lens _clKey (\ s a -> s{_clKey = a})
 
 -- | [nextPageToken][google.classroom.v1.ListCoursesResponse.next_page_token]
@@ -246,9 +241,9 @@ clPageToken
   = lens _clPageToken (\ s a -> s{_clPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-clOauthToken :: Lens' CoursesList' (Maybe Text)
-clOauthToken
-  = lens _clOauthToken (\ s a -> s{_clOauthToken = a})
+clOAuthToken :: Lens' CoursesList' (Maybe OAuthToken)
+clOAuthToken
+  = lens _clOAuthToken (\ s a -> s{_clOAuthToken = a})
 
 -- | Maximum number of items to return. Zero or unspecified indicates that
 -- the server may assign a maximum. The server may return fewer than the
@@ -266,9 +261,9 @@ clCallback :: Lens' CoursesList' (Maybe Text)
 clCallback
   = lens _clCallback (\ s a -> s{_clCallback = a})
 
--- | Data format for response.
-clAlt :: Lens' CoursesList' Text
-clAlt = lens _clAlt (\ s a -> s{_clAlt = a})
+instance GoogleAuth CoursesList' where
+        authKey = clKey . _Just
+        authToken = clOAuthToken . _Just
 
 instance GoogleRequest CoursesList' where
         type Rs CoursesList' = ListCoursesResponse
@@ -284,11 +279,11 @@ instance GoogleRequest CoursesList' where
               _clBearerToken
               _clKey
               _clPageToken
-              _clOauthToken
+              _clOAuthToken
               _clPageSize
               _clFields
               _clCallback
-              (Just _clAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CoursesListResource)

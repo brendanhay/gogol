@@ -32,14 +32,13 @@ module Network.Google.Resource.PlusDomains.People.ListByCircle
     -- * Request Lenses
     , plbcQuotaUser
     , plbcPrettyPrint
-    , plbcUserIp
+    , plbcUserIP
     , plbcKey
     , plbcCircleId
     , plbcPageToken
-    , plbcOauthToken
+    , plbcOAuthToken
     , plbcMaxResults
     , plbcFields
-    , plbcAlt
     ) where
 
 import           Network.Google.PlusDomains.Types
@@ -54,12 +53,12 @@ type PeopleListByCircleResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "maxResults" Word32 :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Get '[JSON] PeopleFeed
+                           QueryParam "alt" AltJSON :> Get '[JSON] PeopleFeed
 
 -- | List all of the people who are members of a circle.
 --
@@ -67,14 +66,13 @@ type PeopleListByCircleResource =
 data PeopleListByCircle' = PeopleListByCircle'
     { _plbcQuotaUser   :: !(Maybe Text)
     , _plbcPrettyPrint :: !Bool
-    , _plbcUserIp      :: !(Maybe Text)
-    , _plbcKey         :: !(Maybe Text)
+    , _plbcUserIP      :: !(Maybe Text)
+    , _plbcKey         :: !(Maybe Key)
     , _plbcCircleId    :: !Text
     , _plbcPageToken   :: !(Maybe Text)
-    , _plbcOauthToken  :: !(Maybe Text)
+    , _plbcOAuthToken  :: !(Maybe OAuthToken)
     , _plbcMaxResults  :: !Word32
     , _plbcFields      :: !(Maybe Text)
-    , _plbcAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PeopleListByCircle'' with the minimum fields required to make a request.
@@ -85,7 +83,7 @@ data PeopleListByCircle' = PeopleListByCircle'
 --
 -- * 'plbcPrettyPrint'
 --
--- * 'plbcUserIp'
+-- * 'plbcUserIP'
 --
 -- * 'plbcKey'
 --
@@ -93,13 +91,11 @@ data PeopleListByCircle' = PeopleListByCircle'
 --
 -- * 'plbcPageToken'
 --
--- * 'plbcOauthToken'
+-- * 'plbcOAuthToken'
 --
 -- * 'plbcMaxResults'
 --
 -- * 'plbcFields'
---
--- * 'plbcAlt'
 peopleListByCircle'
     :: Text -- ^ 'circleId'
     -> PeopleListByCircle'
@@ -107,14 +103,13 @@ peopleListByCircle' pPlbcCircleId_ =
     PeopleListByCircle'
     { _plbcQuotaUser = Nothing
     , _plbcPrettyPrint = True
-    , _plbcUserIp = Nothing
+    , _plbcUserIP = Nothing
     , _plbcKey = Nothing
     , _plbcCircleId = pPlbcCircleId_
     , _plbcPageToken = Nothing
-    , _plbcOauthToken = Nothing
+    , _plbcOAuthToken = Nothing
     , _plbcMaxResults = 20
     , _plbcFields = Nothing
-    , _plbcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -133,14 +128,14 @@ plbcPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-plbcUserIp :: Lens' PeopleListByCircle' (Maybe Text)
-plbcUserIp
-  = lens _plbcUserIp (\ s a -> s{_plbcUserIp = a})
+plbcUserIP :: Lens' PeopleListByCircle' (Maybe Text)
+plbcUserIP
+  = lens _plbcUserIP (\ s a -> s{_plbcUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-plbcKey :: Lens' PeopleListByCircle' (Maybe Text)
+plbcKey :: Lens' PeopleListByCircle' (Maybe Key)
 plbcKey = lens _plbcKey (\ s a -> s{_plbcKey = a})
 
 -- | The ID of the circle to get the members of.
@@ -157,10 +152,10 @@ plbcPageToken
       (\ s a -> s{_plbcPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-plbcOauthToken :: Lens' PeopleListByCircle' (Maybe Text)
-plbcOauthToken
-  = lens _plbcOauthToken
-      (\ s a -> s{_plbcOauthToken = a})
+plbcOAuthToken :: Lens' PeopleListByCircle' (Maybe OAuthToken)
+plbcOAuthToken
+  = lens _plbcOAuthToken
+      (\ s a -> s{_plbcOAuthToken = a})
 
 -- | The maximum number of people to include in the response, which is used
 -- for paging. For any response, the actual number returned might be less
@@ -175,23 +170,23 @@ plbcFields :: Lens' PeopleListByCircle' (Maybe Text)
 plbcFields
   = lens _plbcFields (\ s a -> s{_plbcFields = a})
 
--- | Data format for the response.
-plbcAlt :: Lens' PeopleListByCircle' Alt
-plbcAlt = lens _plbcAlt (\ s a -> s{_plbcAlt = a})
+instance GoogleAuth PeopleListByCircle' where
+        authKey = plbcKey . _Just
+        authToken = plbcOAuthToken . _Just
 
 instance GoogleRequest PeopleListByCircle' where
         type Rs PeopleListByCircle' = PeopleFeed
         request = requestWithRoute defReq plusDomainsURL
         requestWithRoute r u PeopleListByCircle'{..}
           = go _plbcQuotaUser (Just _plbcPrettyPrint)
-              _plbcUserIp
+              _plbcUserIP
               _plbcKey
               _plbcCircleId
               _plbcPageToken
-              _plbcOauthToken
+              _plbcOAuthToken
               (Just _plbcMaxResults)
               _plbcFields
-              (Just _plbcAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PeopleListByCircleResource)

@@ -46,12 +46,12 @@ module Network.Google.Resource.Classroom.Invitations.Create
     , icPp
     , icAccessToken
     , icUploadType
+    , icInvitation
     , icBearerToken
     , icKey
-    , icOauthToken
+    , icOAuthToken
     , icFields
     , icCallback
-    , icAlt
     ) where
 
 import           Network.Google.Classroom.Types
@@ -70,12 +70,13 @@ type InvitationsCreateResource =
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
                        QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
                                QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :>
-                                   Post '[JSON] Invitation
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON] Invitation :>
+                                     Post '[JSON] Invitation
 
 -- | Creates an invitation. Only one invitation for a user and course may
 -- exist at a time. Delete and re-create an invitation to make changes.
@@ -97,12 +98,12 @@ data InvitationsCreate' = InvitationsCreate'
     , _icPp             :: !Bool
     , _icAccessToken    :: !(Maybe Text)
     , _icUploadType     :: !(Maybe Text)
+    , _icInvitation     :: !Invitation
     , _icBearerToken    :: !(Maybe Text)
-    , _icKey            :: !(Maybe Text)
-    , _icOauthToken     :: !(Maybe Text)
+    , _icKey            :: !(Maybe Key)
+    , _icOAuthToken     :: !(Maybe OAuthToken)
     , _icFields         :: !(Maybe Text)
     , _icCallback       :: !(Maybe Text)
-    , _icAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InvitationsCreate'' with the minimum fields required to make a request.
@@ -123,20 +124,21 @@ data InvitationsCreate' = InvitationsCreate'
 --
 -- * 'icUploadType'
 --
+-- * 'icInvitation'
+--
 -- * 'icBearerToken'
 --
 -- * 'icKey'
 --
--- * 'icOauthToken'
+-- * 'icOAuthToken'
 --
 -- * 'icFields'
 --
 -- * 'icCallback'
---
--- * 'icAlt'
 invitationsCreate'
-    :: InvitationsCreate'
-invitationsCreate' =
+    :: Invitation -- ^ 'Invitation'
+    -> InvitationsCreate'
+invitationsCreate' pIcInvitation_ =
     InvitationsCreate'
     { _icXgafv = Nothing
     , _icQuotaUser = Nothing
@@ -145,12 +147,12 @@ invitationsCreate' =
     , _icPp = True
     , _icAccessToken = Nothing
     , _icUploadType = Nothing
+    , _icInvitation = pIcInvitation_
     , _icBearerToken = Nothing
     , _icKey = Nothing
-    , _icOauthToken = Nothing
+    , _icOAuthToken = Nothing
     , _icFields = Nothing
     , _icCallback = Nothing
-    , _icAlt = "json"
     }
 
 -- | V1 error format.
@@ -191,6 +193,11 @@ icUploadType :: Lens' InvitationsCreate' (Maybe Text)
 icUploadType
   = lens _icUploadType (\ s a -> s{_icUploadType = a})
 
+-- | Multipart request metadata.
+icInvitation :: Lens' InvitationsCreate' Invitation
+icInvitation
+  = lens _icInvitation (\ s a -> s{_icInvitation = a})
+
 -- | OAuth bearer token.
 icBearerToken :: Lens' InvitationsCreate' (Maybe Text)
 icBearerToken
@@ -200,13 +207,13 @@ icBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-icKey :: Lens' InvitationsCreate' (Maybe Text)
+icKey :: Lens' InvitationsCreate' (Maybe Key)
 icKey = lens _icKey (\ s a -> s{_icKey = a})
 
 -- | OAuth 2.0 token for the current user.
-icOauthToken :: Lens' InvitationsCreate' (Maybe Text)
-icOauthToken
-  = lens _icOauthToken (\ s a -> s{_icOauthToken = a})
+icOAuthToken :: Lens' InvitationsCreate' (Maybe OAuthToken)
+icOAuthToken
+  = lens _icOAuthToken (\ s a -> s{_icOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 icFields :: Lens' InvitationsCreate' (Maybe Text)
@@ -217,9 +224,9 @@ icCallback :: Lens' InvitationsCreate' (Maybe Text)
 icCallback
   = lens _icCallback (\ s a -> s{_icCallback = a})
 
--- | Data format for response.
-icAlt :: Lens' InvitationsCreate' Text
-icAlt = lens _icAlt (\ s a -> s{_icAlt = a})
+instance GoogleAuth InvitationsCreate' where
+        authKey = icKey . _Just
+        authToken = icOAuthToken . _Just
 
 instance GoogleRequest InvitationsCreate' where
         type Rs InvitationsCreate' = Invitation
@@ -232,10 +239,11 @@ instance GoogleRequest InvitationsCreate' where
               _icUploadType
               _icBearerToken
               _icKey
-              _icOauthToken
+              _icOAuthToken
               _icFields
               _icCallback
-              (Just _icAlt)
+              (Just AltJSON)
+              _icInvitation
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InvitationsCreateResource)

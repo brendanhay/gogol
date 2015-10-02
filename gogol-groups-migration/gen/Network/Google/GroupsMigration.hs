@@ -36,9 +36,6 @@ module Network.Google.GroupsMigration
     , groups
     , gKind
     , gResponseCode
-
-    -- ** Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.GroupsMigration.Types

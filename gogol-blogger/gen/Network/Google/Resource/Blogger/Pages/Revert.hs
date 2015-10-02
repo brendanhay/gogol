@@ -32,13 +32,12 @@ module Network.Google.Resource.Blogger.Pages.Revert
     -- * Request Lenses
     , pagQuotaUser
     , pagPrettyPrint
-    , pagUserIp
+    , pagUserIP
     , pagBlogId
     , pagPageId
     , pagKey
-    , pagOauthToken
+    , pagOAuthToken
     , pagFields
-    , pagAlt
     ) where
 
 import           Network.Google.Blogger.Types
@@ -55,10 +54,10 @@ type PagesRevertResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Post '[JSON] Page
+                           QueryParam "alt" AltJSON :> Post '[JSON] Page
 
 -- | Revert a published or scheduled page to draft state.
 --
@@ -66,13 +65,12 @@ type PagesRevertResource =
 data PagesRevert' = PagesRevert'
     { _pagQuotaUser   :: !(Maybe Text)
     , _pagPrettyPrint :: !Bool
-    , _pagUserIp      :: !(Maybe Text)
+    , _pagUserIP      :: !(Maybe Text)
     , _pagBlogId      :: !Text
     , _pagPageId      :: !Text
-    , _pagKey         :: !(Maybe Text)
-    , _pagOauthToken  :: !(Maybe Text)
+    , _pagKey         :: !(Maybe Key)
+    , _pagOAuthToken  :: !(Maybe OAuthToken)
     , _pagFields      :: !(Maybe Text)
-    , _pagAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PagesRevert'' with the minimum fields required to make a request.
@@ -83,7 +81,7 @@ data PagesRevert' = PagesRevert'
 --
 -- * 'pagPrettyPrint'
 --
--- * 'pagUserIp'
+-- * 'pagUserIP'
 --
 -- * 'pagBlogId'
 --
@@ -91,11 +89,9 @@ data PagesRevert' = PagesRevert'
 --
 -- * 'pagKey'
 --
--- * 'pagOauthToken'
+-- * 'pagOAuthToken'
 --
 -- * 'pagFields'
---
--- * 'pagAlt'
 pagesRevert'
     :: Text -- ^ 'blogId'
     -> Text -- ^ 'pageId'
@@ -104,13 +100,12 @@ pagesRevert' pPagBlogId_ pPagPageId_ =
     PagesRevert'
     { _pagQuotaUser = Nothing
     , _pagPrettyPrint = True
-    , _pagUserIp = Nothing
+    , _pagUserIP = Nothing
     , _pagBlogId = pPagBlogId_
     , _pagPageId = pPagPageId_
     , _pagKey = Nothing
-    , _pagOauthToken = Nothing
+    , _pagOAuthToken = Nothing
     , _pagFields = Nothing
-    , _pagAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -128,9 +123,9 @@ pagPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-pagUserIp :: Lens' PagesRevert' (Maybe Text)
-pagUserIp
-  = lens _pagUserIp (\ s a -> s{_pagUserIp = a})
+pagUserIP :: Lens' PagesRevert' (Maybe Text)
+pagUserIP
+  = lens _pagUserIP (\ s a -> s{_pagUserIP = a})
 
 -- | The ID of the blog.
 pagBlogId :: Lens' PagesRevert' Text
@@ -145,35 +140,35 @@ pagPageId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pagKey :: Lens' PagesRevert' (Maybe Text)
+pagKey :: Lens' PagesRevert' (Maybe Key)
 pagKey = lens _pagKey (\ s a -> s{_pagKey = a})
 
 -- | OAuth 2.0 token for the current user.
-pagOauthToken :: Lens' PagesRevert' (Maybe Text)
-pagOauthToken
-  = lens _pagOauthToken
-      (\ s a -> s{_pagOauthToken = a})
+pagOAuthToken :: Lens' PagesRevert' (Maybe OAuthToken)
+pagOAuthToken
+  = lens _pagOAuthToken
+      (\ s a -> s{_pagOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 pagFields :: Lens' PagesRevert' (Maybe Text)
 pagFields
   = lens _pagFields (\ s a -> s{_pagFields = a})
 
--- | Data format for the response.
-pagAlt :: Lens' PagesRevert' Alt
-pagAlt = lens _pagAlt (\ s a -> s{_pagAlt = a})
+instance GoogleAuth PagesRevert' where
+        authKey = pagKey . _Just
+        authToken = pagOAuthToken . _Just
 
 instance GoogleRequest PagesRevert' where
         type Rs PagesRevert' = Page
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PagesRevert'{..}
-          = go _pagQuotaUser (Just _pagPrettyPrint) _pagUserIp
+          = go _pagQuotaUser (Just _pagPrettyPrint) _pagUserIP
               _pagBlogId
               _pagPageId
               _pagKey
-              _pagOauthToken
+              _pagOAuthToken
               _pagFields
-              (Just _pagAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PagesRevertResource)

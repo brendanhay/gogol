@@ -34,11 +34,10 @@ module Network.Google.Resource.Genomics.AnnotationSets.Get
     , asgQuotaUser
     , asgPrettyPrint
     , asgAnnotationSetId
-    , asgUserIp
+    , asgUserIP
     , asgKey
-    , asgOauthToken
+    , asgOAuthToken
     , asgFields
-    , asgAlt
     ) where
 
 import           Network.Google.Genomics.Types
@@ -52,10 +51,10 @@ type AnnotationSetsGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Get '[JSON] AnnotationSet
+                     QueryParam "alt" AltJSON :> Get '[JSON] AnnotationSet
 
 -- | Gets an annotation set. Caller must have READ permission for the
 -- associated dataset.
@@ -65,11 +64,10 @@ data AnnotationSetsGet' = AnnotationSetsGet'
     { _asgQuotaUser       :: !(Maybe Text)
     , _asgPrettyPrint     :: !Bool
     , _asgAnnotationSetId :: !Text
-    , _asgUserIp          :: !(Maybe Text)
-    , _asgKey             :: !(Maybe Text)
-    , _asgOauthToken      :: !(Maybe Text)
+    , _asgUserIP          :: !(Maybe Text)
+    , _asgKey             :: !(Maybe Key)
+    , _asgOAuthToken      :: !(Maybe OAuthToken)
     , _asgFields          :: !(Maybe Text)
-    , _asgAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnnotationSetsGet'' with the minimum fields required to make a request.
@@ -82,15 +80,13 @@ data AnnotationSetsGet' = AnnotationSetsGet'
 --
 -- * 'asgAnnotationSetId'
 --
--- * 'asgUserIp'
+-- * 'asgUserIP'
 --
 -- * 'asgKey'
 --
--- * 'asgOauthToken'
+-- * 'asgOAuthToken'
 --
 -- * 'asgFields'
---
--- * 'asgAlt'
 annotationSetsGet'
     :: Text -- ^ 'annotationSetId'
     -> AnnotationSetsGet'
@@ -99,11 +95,10 @@ annotationSetsGet' pAsgAnnotationSetId_ =
     { _asgQuotaUser = Nothing
     , _asgPrettyPrint = True
     , _asgAnnotationSetId = pAsgAnnotationSetId_
-    , _asgUserIp = Nothing
+    , _asgUserIP = Nothing
     , _asgKey = Nothing
-    , _asgOauthToken = Nothing
+    , _asgOAuthToken = Nothing
     , _asgFields = Nothing
-    , _asgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,30 +122,30 @@ asgAnnotationSetId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-asgUserIp :: Lens' AnnotationSetsGet' (Maybe Text)
-asgUserIp
-  = lens _asgUserIp (\ s a -> s{_asgUserIp = a})
+asgUserIP :: Lens' AnnotationSetsGet' (Maybe Text)
+asgUserIP
+  = lens _asgUserIP (\ s a -> s{_asgUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-asgKey :: Lens' AnnotationSetsGet' (Maybe Text)
+asgKey :: Lens' AnnotationSetsGet' (Maybe Key)
 asgKey = lens _asgKey (\ s a -> s{_asgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-asgOauthToken :: Lens' AnnotationSetsGet' (Maybe Text)
-asgOauthToken
-  = lens _asgOauthToken
-      (\ s a -> s{_asgOauthToken = a})
+asgOAuthToken :: Lens' AnnotationSetsGet' (Maybe OAuthToken)
+asgOAuthToken
+  = lens _asgOAuthToken
+      (\ s a -> s{_asgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 asgFields :: Lens' AnnotationSetsGet' (Maybe Text)
 asgFields
   = lens _asgFields (\ s a -> s{_asgFields = a})
 
--- | Data format for the response.
-asgAlt :: Lens' AnnotationSetsGet' Alt
-asgAlt = lens _asgAlt (\ s a -> s{_asgAlt = a})
+instance GoogleAuth AnnotationSetsGet' where
+        authKey = asgKey . _Just
+        authToken = asgOAuthToken . _Just
 
 instance GoogleRequest AnnotationSetsGet' where
         type Rs AnnotationSetsGet' = AnnotationSet
@@ -158,11 +153,11 @@ instance GoogleRequest AnnotationSetsGet' where
         requestWithRoute r u AnnotationSetsGet'{..}
           = go _asgQuotaUser (Just _asgPrettyPrint)
               _asgAnnotationSetId
-              _asgUserIp
+              _asgUserIP
               _asgKey
-              _asgOauthToken
+              _asgOAuthToken
               _asgFields
-              (Just _asgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AnnotationSetsGetResource)

@@ -33,12 +33,11 @@ module Network.Google.Resource.Analytics.Management.Filters.Get
     , mfgQuotaUser
     , mfgPrettyPrint
     , mfgFilterId
-    , mfgUserIp
+    , mfgUserIP
     , mfgAccountId
     , mfgKey
-    , mfgOauthToken
+    , mfgOAuthToken
     , mfgFields
-    , mfgAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -55,10 +54,10 @@ type ManagementFiltersGetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Get '[JSON] Filter
+                           QueryParam "alt" AltJSON :> Get '[JSON] Filter
 
 -- | Returns a filters to which the user has access.
 --
@@ -67,12 +66,11 @@ data ManagementFiltersGet' = ManagementFiltersGet'
     { _mfgQuotaUser   :: !(Maybe Text)
     , _mfgPrettyPrint :: !Bool
     , _mfgFilterId    :: !Text
-    , _mfgUserIp      :: !(Maybe Text)
+    , _mfgUserIP      :: !(Maybe Text)
     , _mfgAccountId   :: !Text
-    , _mfgKey         :: !(Maybe Text)
-    , _mfgOauthToken  :: !(Maybe Text)
+    , _mfgKey         :: !(Maybe Key)
+    , _mfgOAuthToken  :: !(Maybe OAuthToken)
     , _mfgFields      :: !(Maybe Text)
-    , _mfgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementFiltersGet'' with the minimum fields required to make a request.
@@ -85,17 +83,15 @@ data ManagementFiltersGet' = ManagementFiltersGet'
 --
 -- * 'mfgFilterId'
 --
--- * 'mfgUserIp'
+-- * 'mfgUserIP'
 --
 -- * 'mfgAccountId'
 --
 -- * 'mfgKey'
 --
--- * 'mfgOauthToken'
+-- * 'mfgOAuthToken'
 --
 -- * 'mfgFields'
---
--- * 'mfgAlt'
 managementFiltersGet'
     :: Text -- ^ 'filterId'
     -> Text -- ^ 'accountId'
@@ -105,12 +101,11 @@ managementFiltersGet' pMfgFilterId_ pMfgAccountId_ =
     { _mfgQuotaUser = Nothing
     , _mfgPrettyPrint = False
     , _mfgFilterId = pMfgFilterId_
-    , _mfgUserIp = Nothing
+    , _mfgUserIP = Nothing
     , _mfgAccountId = pMfgAccountId_
     , _mfgKey = Nothing
-    , _mfgOauthToken = Nothing
+    , _mfgOAuthToken = Nothing
     , _mfgFields = Nothing
-    , _mfgAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -133,9 +128,9 @@ mfgFilterId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mfgUserIp :: Lens' ManagementFiltersGet' (Maybe Text)
-mfgUserIp
-  = lens _mfgUserIp (\ s a -> s{_mfgUserIp = a})
+mfgUserIP :: Lens' ManagementFiltersGet' (Maybe Text)
+mfgUserIP
+  = lens _mfgUserIP (\ s a -> s{_mfgUserIP = a})
 
 -- | Account ID to retrieve filters for.
 mfgAccountId :: Lens' ManagementFiltersGet' Text
@@ -145,23 +140,23 @@ mfgAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mfgKey :: Lens' ManagementFiltersGet' (Maybe Text)
+mfgKey :: Lens' ManagementFiltersGet' (Maybe Key)
 mfgKey = lens _mfgKey (\ s a -> s{_mfgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-mfgOauthToken :: Lens' ManagementFiltersGet' (Maybe Text)
-mfgOauthToken
-  = lens _mfgOauthToken
-      (\ s a -> s{_mfgOauthToken = a})
+mfgOAuthToken :: Lens' ManagementFiltersGet' (Maybe OAuthToken)
+mfgOAuthToken
+  = lens _mfgOAuthToken
+      (\ s a -> s{_mfgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 mfgFields :: Lens' ManagementFiltersGet' (Maybe Text)
 mfgFields
   = lens _mfgFields (\ s a -> s{_mfgFields = a})
 
--- | Data format for the response.
-mfgAlt :: Lens' ManagementFiltersGet' Alt
-mfgAlt = lens _mfgAlt (\ s a -> s{_mfgAlt = a})
+instance GoogleAuth ManagementFiltersGet' where
+        authKey = mfgKey . _Just
+        authToken = mfgOAuthToken . _Just
 
 instance GoogleRequest ManagementFiltersGet' where
         type Rs ManagementFiltersGet' = Filter
@@ -169,12 +164,12 @@ instance GoogleRequest ManagementFiltersGet' where
         requestWithRoute r u ManagementFiltersGet'{..}
           = go _mfgQuotaUser (Just _mfgPrettyPrint)
               _mfgFilterId
-              _mfgUserIp
+              _mfgUserIP
               _mfgAccountId
               _mfgKey
-              _mfgOauthToken
+              _mfgOAuthToken
               _mfgFields
-              (Just _mfgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ManagementFiltersGetResource)

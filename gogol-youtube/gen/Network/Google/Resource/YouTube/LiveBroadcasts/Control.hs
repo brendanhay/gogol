@@ -34,17 +34,16 @@ module Network.Google.Resource.YouTube.LiveBroadcasts.Control
     , lbcQuotaUser
     , lbcPart
     , lbcPrettyPrint
-    , lbcUserIp
+    , lbcUserIP
     , lbcOnBehalfOfContentOwner
     , lbcKey
     , lbcOnBehalfOfContentOwnerChannel
     , lbcId
     , lbcDisplaySlate
-    , lbcOauthToken
+    , lbcOAuthToken
     , lbcWalltime
     , lbcOffsetTimeMs
     , lbcFields
-    , lbcAlt
     ) where
 
 import           Network.Google.Prelude
@@ -60,15 +59,15 @@ type LiveBroadcastsControlResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "onBehalfOfContentOwner" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "onBehalfOfContentOwnerChannel" Text :>
                        QueryParam "id" Text :>
                          QueryParam "displaySlate" Bool :>
-                           QueryParam "oauth_token" Text :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "walltime" UTCTime :>
                                QueryParam "offsetTimeMs" Word64 :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "alt" Alt :>
+                                   QueryParam "alt" AltJSON :>
                                      Post '[JSON] LiveBroadcast
 
 -- | Controls the settings for a slate that can be displayed in the broadcast
@@ -79,17 +78,16 @@ data LiveBroadcastsControl' = LiveBroadcastsControl'
     { _lbcQuotaUser                     :: !(Maybe Text)
     , _lbcPart                          :: !Text
     , _lbcPrettyPrint                   :: !Bool
-    , _lbcUserIp                        :: !(Maybe Text)
+    , _lbcUserIP                        :: !(Maybe Text)
     , _lbcOnBehalfOfContentOwner        :: !(Maybe Text)
-    , _lbcKey                           :: !(Maybe Text)
+    , _lbcKey                           :: !(Maybe Key)
     , _lbcOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _lbcId                            :: !Text
     , _lbcDisplaySlate                  :: !(Maybe Bool)
-    , _lbcOauthToken                    :: !(Maybe Text)
+    , _lbcOAuthToken                    :: !(Maybe OAuthToken)
     , _lbcWalltime                      :: !(Maybe UTCTime)
     , _lbcOffsetTimeMs                  :: !(Maybe Word64)
     , _lbcFields                        :: !(Maybe Text)
-    , _lbcAlt                           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveBroadcastsControl'' with the minimum fields required to make a request.
@@ -102,7 +100,7 @@ data LiveBroadcastsControl' = LiveBroadcastsControl'
 --
 -- * 'lbcPrettyPrint'
 --
--- * 'lbcUserIp'
+-- * 'lbcUserIP'
 --
 -- * 'lbcOnBehalfOfContentOwner'
 --
@@ -114,15 +112,13 @@ data LiveBroadcastsControl' = LiveBroadcastsControl'
 --
 -- * 'lbcDisplaySlate'
 --
--- * 'lbcOauthToken'
+-- * 'lbcOAuthToken'
 --
 -- * 'lbcWalltime'
 --
 -- * 'lbcOffsetTimeMs'
 --
 -- * 'lbcFields'
---
--- * 'lbcAlt'
 liveBroadcastsControl'
     :: Text -- ^ 'part'
     -> Text -- ^ 'id'
@@ -132,17 +128,16 @@ liveBroadcastsControl' pLbcPart_ pLbcId_ =
     { _lbcQuotaUser = Nothing
     , _lbcPart = pLbcPart_
     , _lbcPrettyPrint = True
-    , _lbcUserIp = Nothing
+    , _lbcUserIP = Nothing
     , _lbcOnBehalfOfContentOwner = Nothing
     , _lbcKey = Nothing
     , _lbcOnBehalfOfContentOwnerChannel = Nothing
     , _lbcId = pLbcId_
     , _lbcDisplaySlate = Nothing
-    , _lbcOauthToken = Nothing
+    , _lbcOAuthToken = Nothing
     , _lbcWalltime = Nothing
     , _lbcOffsetTimeMs = Nothing
     , _lbcFields = Nothing
-    , _lbcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -167,9 +162,9 @@ lbcPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-lbcUserIp :: Lens' LiveBroadcastsControl' (Maybe Text)
-lbcUserIp
-  = lens _lbcUserIp (\ s a -> s{_lbcUserIp = a})
+lbcUserIP :: Lens' LiveBroadcastsControl' (Maybe Text)
+lbcUserIP
+  = lens _lbcUserIP (\ s a -> s{_lbcUserIP = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
@@ -189,7 +184,7 @@ lbcOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lbcKey :: Lens' LiveBroadcastsControl' (Maybe Text)
+lbcKey :: Lens' LiveBroadcastsControl' (Maybe Key)
 lbcKey = lens _lbcKey (\ s a -> s{_lbcKey = a})
 
 -- | This parameter can only be used in a properly authorized request. Note:
@@ -226,10 +221,10 @@ lbcDisplaySlate
       (\ s a -> s{_lbcDisplaySlate = a})
 
 -- | OAuth 2.0 token for the current user.
-lbcOauthToken :: Lens' LiveBroadcastsControl' (Maybe Text)
-lbcOauthToken
-  = lens _lbcOauthToken
-      (\ s a -> s{_lbcOauthToken = a})
+lbcOAuthToken :: Lens' LiveBroadcastsControl' (Maybe OAuthToken)
+lbcOAuthToken
+  = lens _lbcOAuthToken
+      (\ s a -> s{_lbcOAuthToken = a})
 
 -- | The walltime parameter specifies the wall clock time at which the
 -- specified slate change will occur. The value is specified in ISO 8601
@@ -258,9 +253,9 @@ lbcFields :: Lens' LiveBroadcastsControl' (Maybe Text)
 lbcFields
   = lens _lbcFields (\ s a -> s{_lbcFields = a})
 
--- | Data format for the response.
-lbcAlt :: Lens' LiveBroadcastsControl' Alt
-lbcAlt = lens _lbcAlt (\ s a -> s{_lbcAlt = a})
+instance GoogleAuth LiveBroadcastsControl' where
+        authKey = lbcKey . _Just
+        authToken = lbcOAuthToken . _Just
 
 instance GoogleRequest LiveBroadcastsControl' where
         type Rs LiveBroadcastsControl' = LiveBroadcast
@@ -268,17 +263,17 @@ instance GoogleRequest LiveBroadcastsControl' where
         requestWithRoute r u LiveBroadcastsControl'{..}
           = go _lbcQuotaUser (Just _lbcPart)
               (Just _lbcPrettyPrint)
-              _lbcUserIp
+              _lbcUserIP
               _lbcOnBehalfOfContentOwner
               _lbcKey
               _lbcOnBehalfOfContentOwnerChannel
               (Just _lbcId)
               _lbcDisplaySlate
-              _lbcOauthToken
+              _lbcOAuthToken
               _lbcWalltime
               _lbcOffsetTimeMs
               _lbcFields
-              (Just _lbcAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy LiveBroadcastsControlResource)

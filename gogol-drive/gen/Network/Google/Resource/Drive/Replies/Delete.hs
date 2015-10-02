@@ -32,14 +32,13 @@ module Network.Google.Resource.Drive.Replies.Delete
     -- * Request Lenses
     , rddQuotaUser
     , rddPrettyPrint
-    , rddUserIp
+    , rddUserIP
     , rddKey
     , rddReplyId
     , rddFileId
-    , rddOauthToken
+    , rddOAuthToken
     , rddCommentId
     , rddFields
-    , rddAlt
     ) where
 
 import           Network.Google.Drive.Types
@@ -57,10 +56,10 @@ type RepliesDeleteResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Delete '[JSON] ()
+                             QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a reply.
 --
@@ -68,14 +67,13 @@ type RepliesDeleteResource =
 data RepliesDelete' = RepliesDelete'
     { _rddQuotaUser   :: !(Maybe Text)
     , _rddPrettyPrint :: !Bool
-    , _rddUserIp      :: !(Maybe Text)
-    , _rddKey         :: !(Maybe Text)
+    , _rddUserIP      :: !(Maybe Text)
+    , _rddKey         :: !(Maybe Key)
     , _rddReplyId     :: !Text
     , _rddFileId      :: !Text
-    , _rddOauthToken  :: !(Maybe Text)
+    , _rddOAuthToken  :: !(Maybe OAuthToken)
     , _rddCommentId   :: !Text
     , _rddFields      :: !(Maybe Text)
-    , _rddAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RepliesDelete'' with the minimum fields required to make a request.
@@ -86,7 +84,7 @@ data RepliesDelete' = RepliesDelete'
 --
 -- * 'rddPrettyPrint'
 --
--- * 'rddUserIp'
+-- * 'rddUserIP'
 --
 -- * 'rddKey'
 --
@@ -94,13 +92,11 @@ data RepliesDelete' = RepliesDelete'
 --
 -- * 'rddFileId'
 --
--- * 'rddOauthToken'
+-- * 'rddOAuthToken'
 --
 -- * 'rddCommentId'
 --
 -- * 'rddFields'
---
--- * 'rddAlt'
 repliesDelete'
     :: Text -- ^ 'replyId'
     -> Text -- ^ 'fileId'
@@ -110,14 +106,13 @@ repliesDelete' pRddReplyId_ pRddFileId_ pRddCommentId_ =
     RepliesDelete'
     { _rddQuotaUser = Nothing
     , _rddPrettyPrint = True
-    , _rddUserIp = Nothing
+    , _rddUserIP = Nothing
     , _rddKey = Nothing
     , _rddReplyId = pRddReplyId_
     , _rddFileId = pRddFileId_
-    , _rddOauthToken = Nothing
+    , _rddOAuthToken = Nothing
     , _rddCommentId = pRddCommentId_
     , _rddFields = Nothing
-    , _rddAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,14 +130,14 @@ rddPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rddUserIp :: Lens' RepliesDelete' (Maybe Text)
-rddUserIp
-  = lens _rddUserIp (\ s a -> s{_rddUserIp = a})
+rddUserIP :: Lens' RepliesDelete' (Maybe Text)
+rddUserIP
+  = lens _rddUserIP (\ s a -> s{_rddUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rddKey :: Lens' RepliesDelete' (Maybe Text)
+rddKey :: Lens' RepliesDelete' (Maybe Key)
 rddKey = lens _rddKey (\ s a -> s{_rddKey = a})
 
 -- | The ID of the reply.
@@ -156,10 +151,10 @@ rddFileId
   = lens _rddFileId (\ s a -> s{_rddFileId = a})
 
 -- | OAuth 2.0 token for the current user.
-rddOauthToken :: Lens' RepliesDelete' (Maybe Text)
-rddOauthToken
-  = lens _rddOauthToken
-      (\ s a -> s{_rddOauthToken = a})
+rddOAuthToken :: Lens' RepliesDelete' (Maybe OAuthToken)
+rddOAuthToken
+  = lens _rddOAuthToken
+      (\ s a -> s{_rddOAuthToken = a})
 
 -- | The ID of the comment.
 rddCommentId :: Lens' RepliesDelete' Text
@@ -171,22 +166,22 @@ rddFields :: Lens' RepliesDelete' (Maybe Text)
 rddFields
   = lens _rddFields (\ s a -> s{_rddFields = a})
 
--- | Data format for the response.
-rddAlt :: Lens' RepliesDelete' Alt
-rddAlt = lens _rddAlt (\ s a -> s{_rddAlt = a})
+instance GoogleAuth RepliesDelete' where
+        authKey = rddKey . _Just
+        authToken = rddOAuthToken . _Just
 
 instance GoogleRequest RepliesDelete' where
         type Rs RepliesDelete' = ()
         request = requestWithRoute defReq driveURL
         requestWithRoute r u RepliesDelete'{..}
-          = go _rddQuotaUser (Just _rddPrettyPrint) _rddUserIp
+          = go _rddQuotaUser (Just _rddPrettyPrint) _rddUserIP
               _rddKey
               _rddReplyId
               _rddFileId
-              _rddOauthToken
+              _rddOAuthToken
               _rddCommentId
               _rddFields
-              (Just _rddAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy RepliesDeleteResource)

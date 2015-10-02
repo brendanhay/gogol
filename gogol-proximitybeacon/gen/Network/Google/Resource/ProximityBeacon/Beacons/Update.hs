@@ -43,12 +43,12 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Update
     , buAccessToken
     , buBeaconName
     , buUploadType
+    , buBeacon
     , buBearerToken
     , buKey
-    , buOauthToken
+    , buOAuthToken
     , buFields
     , buCallback
-    , buAlt
     ) where
 
 import           Network.Google.Prelude
@@ -67,11 +67,12 @@ type BeaconsUpdateResource =
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
                        QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
                                QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :> Put '[JSON] Beacon
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON] Beacon :> Put '[JSON] Beacon
 
 -- | Updates the information about the specified beacon. **Any field that you
 -- do not populate in the submitted beacon will be permanently erased**, so
@@ -90,12 +91,12 @@ data BeaconsUpdate' = BeaconsUpdate'
     , _buAccessToken    :: !(Maybe Text)
     , _buBeaconName     :: !Text
     , _buUploadType     :: !(Maybe Text)
+    , _buBeacon         :: !Beacon
     , _buBearerToken    :: !(Maybe Text)
-    , _buKey            :: !(Maybe Text)
-    , _buOauthToken     :: !(Maybe Text)
+    , _buKey            :: !(Maybe Key)
+    , _buOAuthToken     :: !(Maybe OAuthToken)
     , _buFields         :: !(Maybe Text)
     , _buCallback       :: !(Maybe Text)
-    , _buAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BeaconsUpdate'' with the minimum fields required to make a request.
@@ -118,21 +119,22 @@ data BeaconsUpdate' = BeaconsUpdate'
 --
 -- * 'buUploadType'
 --
+-- * 'buBeacon'
+--
 -- * 'buBearerToken'
 --
 -- * 'buKey'
 --
--- * 'buOauthToken'
+-- * 'buOAuthToken'
 --
 -- * 'buFields'
 --
 -- * 'buCallback'
---
--- * 'buAlt'
 beaconsUpdate'
     :: Text -- ^ 'beaconName'
+    -> Beacon -- ^ 'Beacon'
     -> BeaconsUpdate'
-beaconsUpdate' pBuBeaconName_ =
+beaconsUpdate' pBuBeaconName_ pBuBeacon_ =
     BeaconsUpdate'
     { _buXgafv = Nothing
     , _buQuotaUser = Nothing
@@ -142,12 +144,12 @@ beaconsUpdate' pBuBeaconName_ =
     , _buAccessToken = Nothing
     , _buBeaconName = pBuBeaconName_
     , _buUploadType = Nothing
+    , _buBeacon = pBuBeacon_
     , _buBearerToken = Nothing
     , _buKey = Nothing
-    , _buOauthToken = Nothing
+    , _buOAuthToken = Nothing
     , _buFields = Nothing
     , _buCallback = Nothing
-    , _buAlt = "json"
     }
 
 -- | V1 error format.
@@ -198,6 +200,10 @@ buUploadType :: Lens' BeaconsUpdate' (Maybe Text)
 buUploadType
   = lens _buUploadType (\ s a -> s{_buUploadType = a})
 
+-- | Multipart request metadata.
+buBeacon :: Lens' BeaconsUpdate' Beacon
+buBeacon = lens _buBeacon (\ s a -> s{_buBeacon = a})
+
 -- | OAuth bearer token.
 buBearerToken :: Lens' BeaconsUpdate' (Maybe Text)
 buBearerToken
@@ -207,13 +213,13 @@ buBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-buKey :: Lens' BeaconsUpdate' (Maybe Text)
+buKey :: Lens' BeaconsUpdate' (Maybe Key)
 buKey = lens _buKey (\ s a -> s{_buKey = a})
 
 -- | OAuth 2.0 token for the current user.
-buOauthToken :: Lens' BeaconsUpdate' (Maybe Text)
-buOauthToken
-  = lens _buOauthToken (\ s a -> s{_buOauthToken = a})
+buOAuthToken :: Lens' BeaconsUpdate' (Maybe OAuthToken)
+buOAuthToken
+  = lens _buOAuthToken (\ s a -> s{_buOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 buFields :: Lens' BeaconsUpdate' (Maybe Text)
@@ -224,9 +230,9 @@ buCallback :: Lens' BeaconsUpdate' (Maybe Text)
 buCallback
   = lens _buCallback (\ s a -> s{_buCallback = a})
 
--- | Data format for response.
-buAlt :: Lens' BeaconsUpdate' Text
-buAlt = lens _buAlt (\ s a -> s{_buAlt = a})
+instance GoogleAuth BeaconsUpdate' where
+        authKey = buKey . _Just
+        authToken = buOAuthToken . _Just
 
 instance GoogleRequest BeaconsUpdate' where
         type Rs BeaconsUpdate' = Beacon
@@ -240,10 +246,11 @@ instance GoogleRequest BeaconsUpdate' where
               _buUploadType
               _buBearerToken
               _buKey
-              _buOauthToken
+              _buOAuthToken
               _buFields
               _buCallback
-              (Just _buAlt)
+              (Just AltJSON)
+              _buBeacon
           where go
                   = clientWithRoute
                       (Proxy :: Proxy BeaconsUpdateResource)

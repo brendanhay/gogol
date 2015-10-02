@@ -19,7 +19,7 @@
 --
 -- | Gets a user\'s Account & Container Permissions.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsPermissionsGet@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsPermissionsGet@.
 module Network.Google.Resource.TagManager.Accounts.Permissions.Get
     (
     -- * REST Resource
@@ -32,19 +32,18 @@ module Network.Google.Resource.TagManager.Accounts.Permissions.Get
     -- * Request Lenses
     , apgQuotaUser
     , apgPrettyPrint
-    , apgUserIp
+    , apgUserIP
     , apgAccountId
     , apgKey
-    , apgOauthToken
+    , apgOAuthToken
     , apgPermissionId
     , apgFields
-    , apgAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagmanagerAccountsPermissionsGet@ which the
+-- | A resource alias for @TagManagerAccountsPermissionsGet@ which the
 -- 'AccountsPermissionsGet'' request conforms to.
 type AccountsPermissionsGetResource =
      "accounts" :>
@@ -54,10 +53,10 @@ type AccountsPermissionsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] UserAccess
+                         QueryParam "alt" AltJSON :> Get '[JSON] UserAccess
 
 -- | Gets a user\'s Account & Container Permissions.
 --
@@ -65,13 +64,12 @@ type AccountsPermissionsGetResource =
 data AccountsPermissionsGet' = AccountsPermissionsGet'
     { _apgQuotaUser    :: !(Maybe Text)
     , _apgPrettyPrint  :: !Bool
-    , _apgUserIp       :: !(Maybe Text)
+    , _apgUserIP       :: !(Maybe Text)
     , _apgAccountId    :: !Text
-    , _apgKey          :: !(Maybe Text)
-    , _apgOauthToken   :: !(Maybe Text)
+    , _apgKey          :: !(Maybe Key)
+    , _apgOAuthToken   :: !(Maybe OAuthToken)
     , _apgPermissionId :: !Text
     , _apgFields       :: !(Maybe Text)
-    , _apgAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsPermissionsGet'' with the minimum fields required to make a request.
@@ -82,19 +80,17 @@ data AccountsPermissionsGet' = AccountsPermissionsGet'
 --
 -- * 'apgPrettyPrint'
 --
--- * 'apgUserIp'
+-- * 'apgUserIP'
 --
 -- * 'apgAccountId'
 --
 -- * 'apgKey'
 --
--- * 'apgOauthToken'
+-- * 'apgOAuthToken'
 --
 -- * 'apgPermissionId'
 --
 -- * 'apgFields'
---
--- * 'apgAlt'
 accountsPermissionsGet'
     :: Text -- ^ 'accountId'
     -> Text -- ^ 'permissionId'
@@ -103,13 +99,12 @@ accountsPermissionsGet' pApgAccountId_ pApgPermissionId_ =
     AccountsPermissionsGet'
     { _apgQuotaUser = Nothing
     , _apgPrettyPrint = True
-    , _apgUserIp = Nothing
+    , _apgUserIP = Nothing
     , _apgAccountId = pApgAccountId_
     , _apgKey = Nothing
-    , _apgOauthToken = Nothing
+    , _apgOAuthToken = Nothing
     , _apgPermissionId = pApgPermissionId_
     , _apgFields = Nothing
-    , _apgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,9 +122,9 @@ apgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-apgUserIp :: Lens' AccountsPermissionsGet' (Maybe Text)
-apgUserIp
-  = lens _apgUserIp (\ s a -> s{_apgUserIp = a})
+apgUserIP :: Lens' AccountsPermissionsGet' (Maybe Text)
+apgUserIP
+  = lens _apgUserIP (\ s a -> s{_apgUserIP = a})
 
 -- | The GTM Account ID.
 apgAccountId :: Lens' AccountsPermissionsGet' Text
@@ -139,14 +134,14 @@ apgAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-apgKey :: Lens' AccountsPermissionsGet' (Maybe Text)
+apgKey :: Lens' AccountsPermissionsGet' (Maybe Key)
 apgKey = lens _apgKey (\ s a -> s{_apgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-apgOauthToken :: Lens' AccountsPermissionsGet' (Maybe Text)
-apgOauthToken
-  = lens _apgOauthToken
-      (\ s a -> s{_apgOauthToken = a})
+apgOAuthToken :: Lens' AccountsPermissionsGet' (Maybe OAuthToken)
+apgOAuthToken
+  = lens _apgOAuthToken
+      (\ s a -> s{_apgOAuthToken = a})
 
 -- | The GTM User ID.
 apgPermissionId :: Lens' AccountsPermissionsGet' Text
@@ -159,21 +154,21 @@ apgFields :: Lens' AccountsPermissionsGet' (Maybe Text)
 apgFields
   = lens _apgFields (\ s a -> s{_apgFields = a})
 
--- | Data format for the response.
-apgAlt :: Lens' AccountsPermissionsGet' Alt
-apgAlt = lens _apgAlt (\ s a -> s{_apgAlt = a})
+instance GoogleAuth AccountsPermissionsGet' where
+        authKey = apgKey . _Just
+        authToken = apgOAuthToken . _Just
 
 instance GoogleRequest AccountsPermissionsGet' where
         type Rs AccountsPermissionsGet' = UserAccess
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u AccountsPermissionsGet'{..}
-          = go _apgQuotaUser (Just _apgPrettyPrint) _apgUserIp
+          = go _apgQuotaUser (Just _apgPrettyPrint) _apgUserIP
               _apgAccountId
               _apgKey
-              _apgOauthToken
+              _apgOAuthToken
               _apgPermissionId
               _apgFields
-              (Just _apgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountsPermissionsGetResource)

@@ -32,13 +32,12 @@ module Network.Google.Resource.Analytics.Management.Accounts.List
     -- * Request Lenses
     , malQuotaUser
     , malPrettyPrint
-    , malUserIp
+    , malUserIP
     , malKey
-    , malOauthToken
+    , malOAuthToken
     , malStartIndex
     , malMaxResults
     , malFields
-    , malAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -52,12 +51,12 @@ type ManagementAccountsListResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "start-index" Int32 :>
                      QueryParam "max-results" Int32 :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] Accounts
+                         QueryParam "alt" AltJSON :> Get '[JSON] Accounts
 
 -- | Lists all accounts to which the user has access.
 --
@@ -65,13 +64,12 @@ type ManagementAccountsListResource =
 data ManagementAccountsList' = ManagementAccountsList'
     { _malQuotaUser   :: !(Maybe Text)
     , _malPrettyPrint :: !Bool
-    , _malUserIp      :: !(Maybe Text)
-    , _malKey         :: !(Maybe Text)
-    , _malOauthToken  :: !(Maybe Text)
+    , _malUserIP      :: !(Maybe Text)
+    , _malKey         :: !(Maybe Key)
+    , _malOAuthToken  :: !(Maybe OAuthToken)
     , _malStartIndex  :: !(Maybe Int32)
     , _malMaxResults  :: !(Maybe Int32)
     , _malFields      :: !(Maybe Text)
-    , _malAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementAccountsList'' with the minimum fields required to make a request.
@@ -82,32 +80,29 @@ data ManagementAccountsList' = ManagementAccountsList'
 --
 -- * 'malPrettyPrint'
 --
--- * 'malUserIp'
+-- * 'malUserIP'
 --
 -- * 'malKey'
 --
--- * 'malOauthToken'
+-- * 'malOAuthToken'
 --
 -- * 'malStartIndex'
 --
 -- * 'malMaxResults'
 --
 -- * 'malFields'
---
--- * 'malAlt'
 managementAccountsList'
     :: ManagementAccountsList'
 managementAccountsList' =
     ManagementAccountsList'
     { _malQuotaUser = Nothing
     , _malPrettyPrint = False
-    , _malUserIp = Nothing
+    , _malUserIP = Nothing
     , _malKey = Nothing
-    , _malOauthToken = Nothing
+    , _malOAuthToken = Nothing
     , _malStartIndex = Nothing
     , _malMaxResults = Nothing
     , _malFields = Nothing
-    , _malAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -125,21 +120,21 @@ malPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-malUserIp :: Lens' ManagementAccountsList' (Maybe Text)
-malUserIp
-  = lens _malUserIp (\ s a -> s{_malUserIp = a})
+malUserIP :: Lens' ManagementAccountsList' (Maybe Text)
+malUserIP
+  = lens _malUserIP (\ s a -> s{_malUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-malKey :: Lens' ManagementAccountsList' (Maybe Text)
+malKey :: Lens' ManagementAccountsList' (Maybe Key)
 malKey = lens _malKey (\ s a -> s{_malKey = a})
 
 -- | OAuth 2.0 token for the current user.
-malOauthToken :: Lens' ManagementAccountsList' (Maybe Text)
-malOauthToken
-  = lens _malOauthToken
-      (\ s a -> s{_malOauthToken = a})
+malOAuthToken :: Lens' ManagementAccountsList' (Maybe OAuthToken)
+malOAuthToken
+  = lens _malOAuthToken
+      (\ s a -> s{_malOAuthToken = a})
 
 -- | An index of the first account to retrieve. Use this parameter as a
 -- pagination mechanism along with the max-results parameter.
@@ -159,21 +154,21 @@ malFields :: Lens' ManagementAccountsList' (Maybe Text)
 malFields
   = lens _malFields (\ s a -> s{_malFields = a})
 
--- | Data format for the response.
-malAlt :: Lens' ManagementAccountsList' Alt
-malAlt = lens _malAlt (\ s a -> s{_malAlt = a})
+instance GoogleAuth ManagementAccountsList' where
+        authKey = malKey . _Just
+        authToken = malOAuthToken . _Just
 
 instance GoogleRequest ManagementAccountsList' where
         type Rs ManagementAccountsList' = Accounts
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementAccountsList'{..}
-          = go _malQuotaUser (Just _malPrettyPrint) _malUserIp
+          = go _malQuotaUser (Just _malPrettyPrint) _malUserIP
               _malKey
-              _malOauthToken
+              _malOAuthToken
               _malStartIndex
               _malMaxResults
               _malFields
-              (Just _malAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ManagementAccountsListResource)

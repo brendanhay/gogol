@@ -36,14 +36,14 @@ module Network.Google.Resource.Coordinate.Schedule.Patch
     , spJobId
     , spAllDay
     , spStartTime
-    , spUserIp
+    , spSchedule
+    , spUserIP
     , spTeamId
     , spKey
     , spEndTime
-    , spOauthToken
+    , spOAuthToken
     , spDuration
     , spFields
-    , spAlt
     ) where
 
 import           Network.Google.MapsCoordinate.Types
@@ -62,13 +62,14 @@ type SchedulePatchResource =
                    QueryParam "allDay" Bool :>
                      QueryParam "startTime" Word64 :>
                        QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
+                         QueryParam "key" Key :>
                            QueryParam "endTime" Word64 :>
-                             QueryParam "oauth_token" Text :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "duration" Word64 :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "alt" Alt :>
-                                     Patch '[JSON] Schedule
+                                   QueryParam "alt" AltJSON :>
+                                     ReqBody '[JSON] Schedule :>
+                                       Patch '[JSON] Schedule
 
 -- | Replaces the schedule of a job with the provided schedule. This method
 -- supports patch semantics.
@@ -80,14 +81,14 @@ data SchedulePatch' = SchedulePatch'
     , _spJobId       :: !Word64
     , _spAllDay      :: !(Maybe Bool)
     , _spStartTime   :: !(Maybe Word64)
-    , _spUserIp      :: !(Maybe Text)
+    , _spSchedule    :: !Schedule
+    , _spUserIP      :: !(Maybe Text)
     , _spTeamId      :: !Text
-    , _spKey         :: !(Maybe Text)
+    , _spKey         :: !(Maybe Key)
     , _spEndTime     :: !(Maybe Word64)
-    , _spOauthToken  :: !(Maybe Text)
+    , _spOAuthToken  :: !(Maybe OAuthToken)
     , _spDuration    :: !(Maybe Word64)
     , _spFields      :: !(Maybe Text)
-    , _spAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SchedulePatch'' with the minimum fields required to make a request.
@@ -104,7 +105,9 @@ data SchedulePatch' = SchedulePatch'
 --
 -- * 'spStartTime'
 --
--- * 'spUserIp'
+-- * 'spSchedule'
+--
+-- * 'spUserIP'
 --
 -- * 'spTeamId'
 --
@@ -112,32 +115,31 @@ data SchedulePatch' = SchedulePatch'
 --
 -- * 'spEndTime'
 --
--- * 'spOauthToken'
+-- * 'spOAuthToken'
 --
 -- * 'spDuration'
 --
 -- * 'spFields'
---
--- * 'spAlt'
 schedulePatch'
     :: Word64 -- ^ 'jobId'
+    -> Schedule -- ^ 'Schedule'
     -> Text -- ^ 'teamId'
     -> SchedulePatch'
-schedulePatch' pSpJobId_ pSpTeamId_ =
+schedulePatch' pSpJobId_ pSpSchedule_ pSpTeamId_ =
     SchedulePatch'
     { _spQuotaUser = Nothing
     , _spPrettyPrint = True
     , _spJobId = pSpJobId_
     , _spAllDay = Nothing
     , _spStartTime = Nothing
-    , _spUserIp = Nothing
+    , _spSchedule = pSpSchedule_
+    , _spUserIP = Nothing
     , _spTeamId = pSpTeamId_
     , _spKey = Nothing
     , _spEndTime = Nothing
-    , _spOauthToken = Nothing
+    , _spOAuthToken = Nothing
     , _spDuration = Nothing
     , _spFields = Nothing
-    , _spAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -167,10 +169,15 @@ spStartTime :: Lens' SchedulePatch' (Maybe Word64)
 spStartTime
   = lens _spStartTime (\ s a -> s{_spStartTime = a})
 
+-- | Multipart request metadata.
+spSchedule :: Lens' SchedulePatch' Schedule
+spSchedule
+  = lens _spSchedule (\ s a -> s{_spSchedule = a})
+
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-spUserIp :: Lens' SchedulePatch' (Maybe Text)
-spUserIp = lens _spUserIp (\ s a -> s{_spUserIp = a})
+spUserIP :: Lens' SchedulePatch' (Maybe Text)
+spUserIP = lens _spUserIP (\ s a -> s{_spUserIP = a})
 
 -- | Team ID
 spTeamId :: Lens' SchedulePatch' Text
@@ -179,7 +186,7 @@ spTeamId = lens _spTeamId (\ s a -> s{_spTeamId = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-spKey :: Lens' SchedulePatch' (Maybe Text)
+spKey :: Lens' SchedulePatch' (Maybe Key)
 spKey = lens _spKey (\ s a -> s{_spKey = a})
 
 -- | Scheduled end time in milliseconds since epoch.
@@ -188,9 +195,9 @@ spEndTime
   = lens _spEndTime (\ s a -> s{_spEndTime = a})
 
 -- | OAuth 2.0 token for the current user.
-spOauthToken :: Lens' SchedulePatch' (Maybe Text)
-spOauthToken
-  = lens _spOauthToken (\ s a -> s{_spOauthToken = a})
+spOAuthToken :: Lens' SchedulePatch' (Maybe OAuthToken)
+spOAuthToken
+  = lens _spOAuthToken (\ s a -> s{_spOAuthToken = a})
 
 -- | Job duration in milliseconds.
 spDuration :: Lens' SchedulePatch' (Maybe Word64)
@@ -201,9 +208,9 @@ spDuration
 spFields :: Lens' SchedulePatch' (Maybe Text)
 spFields = lens _spFields (\ s a -> s{_spFields = a})
 
--- | Data format for the response.
-spAlt :: Lens' SchedulePatch' Alt
-spAlt = lens _spAlt (\ s a -> s{_spAlt = a})
+instance GoogleAuth SchedulePatch' where
+        authKey = spKey . _Just
+        authToken = spOAuthToken . _Just
 
 instance GoogleRequest SchedulePatch' where
         type Rs SchedulePatch' = Schedule
@@ -212,14 +219,15 @@ instance GoogleRequest SchedulePatch' where
           = go _spQuotaUser (Just _spPrettyPrint) _spJobId
               _spAllDay
               _spStartTime
-              _spUserIp
+              _spUserIP
               _spTeamId
               _spKey
               _spEndTime
-              _spOauthToken
+              _spOAuthToken
               _spDuration
               _spFields
-              (Just _spAlt)
+              (Just AltJSON)
+              _spSchedule
           where go
                   = clientWithRoute
                       (Proxy :: Proxy SchedulePatchResource)

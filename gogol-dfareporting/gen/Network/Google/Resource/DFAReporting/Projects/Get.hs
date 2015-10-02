@@ -32,13 +32,12 @@ module Network.Google.Resource.DFAReporting.Projects.Get
     -- * Request Lenses
     , proQuotaUser
     , proPrettyPrint
-    , proUserIp
+    , proUserIP
     , proProfileId
     , proKey
     , proId
-    , proOauthToken
+    , proOAuthToken
     , proFields
-    , proAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,10 +53,10 @@ type ProjectsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] Project
+                         QueryParam "alt" AltJSON :> Get '[JSON] Project
 
 -- | Gets one project by ID.
 --
@@ -65,13 +64,12 @@ type ProjectsGetResource =
 data ProjectsGet' = ProjectsGet'
     { _proQuotaUser   :: !(Maybe Text)
     , _proPrettyPrint :: !Bool
-    , _proUserIp      :: !(Maybe Text)
+    , _proUserIP      :: !(Maybe Text)
     , _proProfileId   :: !Int64
-    , _proKey         :: !(Maybe Text)
+    , _proKey         :: !(Maybe Key)
     , _proId          :: !Int64
-    , _proOauthToken  :: !(Maybe Text)
+    , _proOAuthToken  :: !(Maybe OAuthToken)
     , _proFields      :: !(Maybe Text)
-    , _proAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsGet'' with the minimum fields required to make a request.
@@ -82,7 +80,7 @@ data ProjectsGet' = ProjectsGet'
 --
 -- * 'proPrettyPrint'
 --
--- * 'proUserIp'
+-- * 'proUserIP'
 --
 -- * 'proProfileId'
 --
@@ -90,11 +88,9 @@ data ProjectsGet' = ProjectsGet'
 --
 -- * 'proId'
 --
--- * 'proOauthToken'
+-- * 'proOAuthToken'
 --
 -- * 'proFields'
---
--- * 'proAlt'
 projectsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
@@ -103,13 +99,12 @@ projectsGet' pProProfileId_ pProId_ =
     ProjectsGet'
     { _proQuotaUser = Nothing
     , _proPrettyPrint = True
-    , _proUserIp = Nothing
+    , _proUserIP = Nothing
     , _proProfileId = pProProfileId_
     , _proKey = Nothing
     , _proId = pProId_
-    , _proOauthToken = Nothing
+    , _proOAuthToken = Nothing
     , _proFields = Nothing
-    , _proAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,9 +122,9 @@ proPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-proUserIp :: Lens' ProjectsGet' (Maybe Text)
-proUserIp
-  = lens _proUserIp (\ s a -> s{_proUserIp = a})
+proUserIP :: Lens' ProjectsGet' (Maybe Text)
+proUserIP
+  = lens _proUserIP (\ s a -> s{_proUserIP = a})
 
 -- | User profile ID associated with this request.
 proProfileId :: Lens' ProjectsGet' Int64
@@ -139,7 +134,7 @@ proProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-proKey :: Lens' ProjectsGet' (Maybe Text)
+proKey :: Lens' ProjectsGet' (Maybe Key)
 proKey = lens _proKey (\ s a -> s{_proKey = a})
 
 -- | Project ID.
@@ -147,31 +142,31 @@ proId :: Lens' ProjectsGet' Int64
 proId = lens _proId (\ s a -> s{_proId = a})
 
 -- | OAuth 2.0 token for the current user.
-proOauthToken :: Lens' ProjectsGet' (Maybe Text)
-proOauthToken
-  = lens _proOauthToken
-      (\ s a -> s{_proOauthToken = a})
+proOAuthToken :: Lens' ProjectsGet' (Maybe OAuthToken)
+proOAuthToken
+  = lens _proOAuthToken
+      (\ s a -> s{_proOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 proFields :: Lens' ProjectsGet' (Maybe Text)
 proFields
   = lens _proFields (\ s a -> s{_proFields = a})
 
--- | Data format for the response.
-proAlt :: Lens' ProjectsGet' Alt
-proAlt = lens _proAlt (\ s a -> s{_proAlt = a})
+instance GoogleAuth ProjectsGet' where
+        authKey = proKey . _Just
+        authToken = proOAuthToken . _Just
 
 instance GoogleRequest ProjectsGet' where
         type Rs ProjectsGet' = Project
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ProjectsGet'{..}
-          = go _proQuotaUser (Just _proPrettyPrint) _proUserIp
+          = go _proQuotaUser (Just _proPrettyPrint) _proUserIP
               _proProfileId
               _proKey
               _proId
-              _proOauthToken
+              _proOAuthToken
               _proFields
-              (Just _proAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsGetResource)

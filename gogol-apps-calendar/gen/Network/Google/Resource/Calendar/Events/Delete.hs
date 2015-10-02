@@ -33,13 +33,12 @@ module Network.Google.Resource.Calendar.Events.Delete
     , edQuotaUser
     , edCalendarId
     , edPrettyPrint
-    , edUserIp
+    , edUserIP
     , edKey
     , edSendNotifications
-    , edOauthToken
+    , edOAuthToken
     , edEventId
     , edFields
-    , edAlt
     ) where
 
 import           Network.Google.AppsCalendar.Types
@@ -55,11 +54,11 @@ type EventsDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "sendNotifications" Bool :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Delete '[JSON] ()
+                           QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an event.
 --
@@ -68,13 +67,12 @@ data EventsDelete' = EventsDelete'
     { _edQuotaUser         :: !(Maybe Text)
     , _edCalendarId        :: !Text
     , _edPrettyPrint       :: !Bool
-    , _edUserIp            :: !(Maybe Text)
-    , _edKey               :: !(Maybe Text)
+    , _edUserIP            :: !(Maybe Text)
+    , _edKey               :: !(Maybe Key)
     , _edSendNotifications :: !(Maybe Bool)
-    , _edOauthToken        :: !(Maybe Text)
+    , _edOAuthToken        :: !(Maybe OAuthToken)
     , _edEventId           :: !Text
     , _edFields            :: !(Maybe Text)
-    , _edAlt               :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsDelete'' with the minimum fields required to make a request.
@@ -87,19 +85,17 @@ data EventsDelete' = EventsDelete'
 --
 -- * 'edPrettyPrint'
 --
--- * 'edUserIp'
+-- * 'edUserIP'
 --
 -- * 'edKey'
 --
 -- * 'edSendNotifications'
 --
--- * 'edOauthToken'
+-- * 'edOAuthToken'
 --
 -- * 'edEventId'
 --
 -- * 'edFields'
---
--- * 'edAlt'
 eventsDelete'
     :: Text -- ^ 'calendarId'
     -> Text -- ^ 'eventId'
@@ -109,13 +105,12 @@ eventsDelete' pEdCalendarId_ pEdEventId_ =
     { _edQuotaUser = Nothing
     , _edCalendarId = pEdCalendarId_
     , _edPrettyPrint = True
-    , _edUserIp = Nothing
+    , _edUserIP = Nothing
     , _edKey = Nothing
     , _edSendNotifications = Nothing
-    , _edOauthToken = Nothing
+    , _edOAuthToken = Nothing
     , _edEventId = pEdEventId_
     , _edFields = Nothing
-    , _edAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -140,13 +135,13 @@ edPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-edUserIp :: Lens' EventsDelete' (Maybe Text)
-edUserIp = lens _edUserIp (\ s a -> s{_edUserIp = a})
+edUserIP :: Lens' EventsDelete' (Maybe Text)
+edUserIP = lens _edUserIP (\ s a -> s{_edUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-edKey :: Lens' EventsDelete' (Maybe Text)
+edKey :: Lens' EventsDelete' (Maybe Key)
 edKey = lens _edKey (\ s a -> s{_edKey = a})
 
 -- | Whether to send notifications about the deletion of the event. Optional.
@@ -157,9 +152,9 @@ edSendNotifications
       (\ s a -> s{_edSendNotifications = a})
 
 -- | OAuth 2.0 token for the current user.
-edOauthToken :: Lens' EventsDelete' (Maybe Text)
-edOauthToken
-  = lens _edOauthToken (\ s a -> s{_edOauthToken = a})
+edOAuthToken :: Lens' EventsDelete' (Maybe OAuthToken)
+edOAuthToken
+  = lens _edOAuthToken (\ s a -> s{_edOAuthToken = a})
 
 -- | Event identifier.
 edEventId :: Lens' EventsDelete' Text
@@ -170,22 +165,22 @@ edEventId
 edFields :: Lens' EventsDelete' (Maybe Text)
 edFields = lens _edFields (\ s a -> s{_edFields = a})
 
--- | Data format for the response.
-edAlt :: Lens' EventsDelete' Alt
-edAlt = lens _edAlt (\ s a -> s{_edAlt = a})
+instance GoogleAuth EventsDelete' where
+        authKey = edKey . _Just
+        authToken = edOAuthToken . _Just
 
 instance GoogleRequest EventsDelete' where
         type Rs EventsDelete' = ()
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u EventsDelete'{..}
           = go _edQuotaUser _edCalendarId (Just _edPrettyPrint)
-              _edUserIp
+              _edUserIP
               _edKey
               _edSendNotifications
-              _edOauthToken
+              _edOAuthToken
               _edEventId
               _edFields
-              (Just _edAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy EventsDeleteResource)

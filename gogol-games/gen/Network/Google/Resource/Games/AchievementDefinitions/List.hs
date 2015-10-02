@@ -32,14 +32,13 @@ module Network.Google.Resource.Games.AchievementDefinitions.List
     -- * Request Lenses
     , adlQuotaUser
     , adlPrettyPrint
-    , adlUserIp
+    , adlUserIP
     , adlKey
     , adlLanguage
     , adlPageToken
-    , adlOauthToken
+    , adlOAuthToken
     , adlMaxResults
     , adlFields
-    , adlAlt
     ) where
 
 import           Network.Google.Games.Types
@@ -52,13 +51,13 @@ type AchievementDefinitionsListResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
+             QueryParam "key" Key :>
                QueryParam "language" Text :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "oauth_token" Text :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "maxResults" Int32 :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :>
+                         QueryParam "alt" AltJSON :>
                            Get '[JSON] AchievementDefinitionsListResponse
 
 -- | Lists all the achievement definitions for your application.
@@ -67,14 +66,13 @@ type AchievementDefinitionsListResource =
 data AchievementDefinitionsList' = AchievementDefinitionsList'
     { _adlQuotaUser   :: !(Maybe Text)
     , _adlPrettyPrint :: !Bool
-    , _adlUserIp      :: !(Maybe Text)
-    , _adlKey         :: !(Maybe Text)
+    , _adlUserIP      :: !(Maybe Text)
+    , _adlKey         :: !(Maybe Key)
     , _adlLanguage    :: !(Maybe Text)
     , _adlPageToken   :: !(Maybe Text)
-    , _adlOauthToken  :: !(Maybe Text)
+    , _adlOAuthToken  :: !(Maybe OAuthToken)
     , _adlMaxResults  :: !(Maybe Int32)
     , _adlFields      :: !(Maybe Text)
-    , _adlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementDefinitionsList'' with the minimum fields required to make a request.
@@ -85,7 +83,7 @@ data AchievementDefinitionsList' = AchievementDefinitionsList'
 --
 -- * 'adlPrettyPrint'
 --
--- * 'adlUserIp'
+-- * 'adlUserIP'
 --
 -- * 'adlKey'
 --
@@ -93,27 +91,24 @@ data AchievementDefinitionsList' = AchievementDefinitionsList'
 --
 -- * 'adlPageToken'
 --
--- * 'adlOauthToken'
+-- * 'adlOAuthToken'
 --
 -- * 'adlMaxResults'
 --
 -- * 'adlFields'
---
--- * 'adlAlt'
 achievementDefinitionsList'
     :: AchievementDefinitionsList'
 achievementDefinitionsList' =
     AchievementDefinitionsList'
     { _adlQuotaUser = Nothing
     , _adlPrettyPrint = True
-    , _adlUserIp = Nothing
+    , _adlUserIP = Nothing
     , _adlKey = Nothing
     , _adlLanguage = Nothing
     , _adlPageToken = Nothing
-    , _adlOauthToken = Nothing
+    , _adlOAuthToken = Nothing
     , _adlMaxResults = Nothing
     , _adlFields = Nothing
-    , _adlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -131,14 +126,14 @@ adlPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-adlUserIp :: Lens' AchievementDefinitionsList' (Maybe Text)
-adlUserIp
-  = lens _adlUserIp (\ s a -> s{_adlUserIp = a})
+adlUserIP :: Lens' AchievementDefinitionsList' (Maybe Text)
+adlUserIP
+  = lens _adlUserIP (\ s a -> s{_adlUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-adlKey :: Lens' AchievementDefinitionsList' (Maybe Text)
+adlKey :: Lens' AchievementDefinitionsList' (Maybe Key)
 adlKey = lens _adlKey (\ s a -> s{_adlKey = a})
 
 -- | The preferred language to use for strings returned by this method.
@@ -152,10 +147,10 @@ adlPageToken
   = lens _adlPageToken (\ s a -> s{_adlPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-adlOauthToken :: Lens' AchievementDefinitionsList' (Maybe Text)
-adlOauthToken
-  = lens _adlOauthToken
-      (\ s a -> s{_adlOauthToken = a})
+adlOAuthToken :: Lens' AchievementDefinitionsList' (Maybe OAuthToken)
+adlOAuthToken
+  = lens _adlOAuthToken
+      (\ s a -> s{_adlOAuthToken = a})
 
 -- | The maximum number of achievement resources to return in the response,
 -- used for paging. For any response, the actual number of achievement
@@ -170,9 +165,9 @@ adlFields :: Lens' AchievementDefinitionsList' (Maybe Text)
 adlFields
   = lens _adlFields (\ s a -> s{_adlFields = a})
 
--- | Data format for the response.
-adlAlt :: Lens' AchievementDefinitionsList' Alt
-adlAlt = lens _adlAlt (\ s a -> s{_adlAlt = a})
+instance GoogleAuth AchievementDefinitionsList' where
+        authKey = adlKey . _Just
+        authToken = adlOAuthToken . _Just
 
 instance GoogleRequest AchievementDefinitionsList'
          where
@@ -180,14 +175,14 @@ instance GoogleRequest AchievementDefinitionsList'
              AchievementDefinitionsListResponse
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u AchievementDefinitionsList'{..}
-          = go _adlQuotaUser (Just _adlPrettyPrint) _adlUserIp
+          = go _adlQuotaUser (Just _adlPrettyPrint) _adlUserIP
               _adlKey
               _adlLanguage
               _adlPageToken
-              _adlOauthToken
+              _adlOAuthToken
               _adlMaxResults
               _adlFields
-              (Just _adlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AchievementDefinitionsListResource)

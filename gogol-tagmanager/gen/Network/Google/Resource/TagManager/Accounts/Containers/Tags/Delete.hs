@@ -19,7 +19,7 @@
 --
 -- | Deletes a GTM Tag.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersTagsDelete@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersTagsDelete@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Tags.Delete
     (
     -- * REST Resource
@@ -33,19 +33,18 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Tags.Delete
     , actdcQuotaUser
     , actdcPrettyPrint
     , actdcContainerId
-    , actdcUserIp
+    , actdcUserIP
     , actdcAccountId
     , actdcTagId
     , actdcKey
-    , actdcOauthToken
+    , actdcOAuthToken
     , actdcFields
-    , actdcAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagmanagerAccountsContainersTagsDelete@ which the
+-- | A resource alias for @TagManagerAccountsContainersTagsDelete@ which the
 -- 'AccountsContainersTagsDelete'' request conforms to.
 type AccountsContainersTagsDeleteResource =
      "accounts" :>
@@ -57,10 +56,10 @@ type AccountsContainersTagsDeleteResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Delete '[JSON] ()
+                             QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a GTM Tag.
 --
@@ -69,13 +68,12 @@ data AccountsContainersTagsDelete' = AccountsContainersTagsDelete'
     { _actdcQuotaUser   :: !(Maybe Text)
     , _actdcPrettyPrint :: !Bool
     , _actdcContainerId :: !Text
-    , _actdcUserIp      :: !(Maybe Text)
+    , _actdcUserIP      :: !(Maybe Text)
     , _actdcAccountId   :: !Text
     , _actdcTagId       :: !Text
-    , _actdcKey         :: !(Maybe Text)
-    , _actdcOauthToken  :: !(Maybe Text)
+    , _actdcKey         :: !(Maybe Key)
+    , _actdcOAuthToken  :: !(Maybe OAuthToken)
     , _actdcFields      :: !(Maybe Text)
-    , _actdcAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersTagsDelete'' with the minimum fields required to make a request.
@@ -88,7 +86,7 @@ data AccountsContainersTagsDelete' = AccountsContainersTagsDelete'
 --
 -- * 'actdcContainerId'
 --
--- * 'actdcUserIp'
+-- * 'actdcUserIP'
 --
 -- * 'actdcAccountId'
 --
@@ -96,11 +94,9 @@ data AccountsContainersTagsDelete' = AccountsContainersTagsDelete'
 --
 -- * 'actdcKey'
 --
--- * 'actdcOauthToken'
+-- * 'actdcOAuthToken'
 --
 -- * 'actdcFields'
---
--- * 'actdcAlt'
 accountsContainersTagsDelete'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'accountId'
@@ -111,13 +107,12 @@ accountsContainersTagsDelete' pActdcContainerId_ pActdcAccountId_ pActdcTagId_ =
     { _actdcQuotaUser = Nothing
     , _actdcPrettyPrint = True
     , _actdcContainerId = pActdcContainerId_
-    , _actdcUserIp = Nothing
+    , _actdcUserIP = Nothing
     , _actdcAccountId = pActdcAccountId_
     , _actdcTagId = pActdcTagId_
     , _actdcKey = Nothing
-    , _actdcOauthToken = Nothing
+    , _actdcOAuthToken = Nothing
     , _actdcFields = Nothing
-    , _actdcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -142,9 +137,9 @@ actdcContainerId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-actdcUserIp :: Lens' AccountsContainersTagsDelete' (Maybe Text)
-actdcUserIp
-  = lens _actdcUserIp (\ s a -> s{_actdcUserIp = a})
+actdcUserIP :: Lens' AccountsContainersTagsDelete' (Maybe Text)
+actdcUserIP
+  = lens _actdcUserIP (\ s a -> s{_actdcUserIP = a})
 
 -- | The GTM Account ID.
 actdcAccountId :: Lens' AccountsContainersTagsDelete' Text
@@ -160,23 +155,24 @@ actdcTagId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-actdcKey :: Lens' AccountsContainersTagsDelete' (Maybe Text)
+actdcKey :: Lens' AccountsContainersTagsDelete' (Maybe Key)
 actdcKey = lens _actdcKey (\ s a -> s{_actdcKey = a})
 
 -- | OAuth 2.0 token for the current user.
-actdcOauthToken :: Lens' AccountsContainersTagsDelete' (Maybe Text)
-actdcOauthToken
-  = lens _actdcOauthToken
-      (\ s a -> s{_actdcOauthToken = a})
+actdcOAuthToken :: Lens' AccountsContainersTagsDelete' (Maybe OAuthToken)
+actdcOAuthToken
+  = lens _actdcOAuthToken
+      (\ s a -> s{_actdcOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 actdcFields :: Lens' AccountsContainersTagsDelete' (Maybe Text)
 actdcFields
   = lens _actdcFields (\ s a -> s{_actdcFields = a})
 
--- | Data format for the response.
-actdcAlt :: Lens' AccountsContainersTagsDelete' Alt
-actdcAlt = lens _actdcAlt (\ s a -> s{_actdcAlt = a})
+instance GoogleAuth AccountsContainersTagsDelete'
+         where
+        authKey = actdcKey . _Just
+        authToken = actdcOAuthToken . _Just
 
 instance GoogleRequest AccountsContainersTagsDelete'
          where
@@ -186,13 +182,13 @@ instance GoogleRequest AccountsContainersTagsDelete'
           AccountsContainersTagsDelete'{..}
           = go _actdcQuotaUser (Just _actdcPrettyPrint)
               _actdcContainerId
-              _actdcUserIp
+              _actdcUserIP
               _actdcAccountId
               _actdcTagId
               _actdcKey
-              _actdcOauthToken
+              _actdcOAuthToken
               _actdcFields
-              (Just _actdcAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountsContainersTagsDeleteResource)

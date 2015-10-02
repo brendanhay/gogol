@@ -150,10 +150,10 @@ module Network.Google.AdSense.Types
     , AdStyleColors
     , adStyleColors
     , ascText
-    , ascUrl
-    , ascBorder
+    , ascURL
+    , ascBOrder
     , ascTitle
-    , ascBackground
+    , ascBackgRound
 
     -- * AdClient
     , AdClient
@@ -169,7 +169,7 @@ module Network.Google.AdSense.Types
     , AdUnitContentAdsSettingsBackupOption
     , adUnitContentAdsSettingsBackupOption
     , aucasboColor
-    , aucasboUrl
+    , aucasboURL
     , aucasboType
 
     -- * SavedAdStyles
@@ -239,7 +239,7 @@ module Network.Google.AdSense.Types
     , uRLChannel
     , urlcKind
     , urlcId
-    , urlcUrlPattern
+    , urlcURLPattern
 
     -- * AdCode
     , AdCode
@@ -272,9 +272,6 @@ module Network.Google.AdSense.Types
     , aucasBackupOption
     , aucasSize
     , aucasType
-
-    -- * Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.AdSense.Types.Product

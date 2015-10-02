@@ -263,7 +263,7 @@ module Network.Google.Gmail
     , mRaw
     , mSnippet
     , mSizeEstimate
-    , mPayload
+    , mPayLoad
     , mHistoryId
     , mId
     , mLabelIds
@@ -308,9 +308,6 @@ module Network.Google.Gmail
     , lmrNextPageToken
     , lmrResultSizeEstimate
     , lmrMessages
-
-    -- ** Alt
-    , Alt (..)
 
     -- ** GmailUsersMessagesGetFormat
     , GmailUsersMessagesGetFormat (..)

@@ -33,13 +33,12 @@ module Network.Google.Resource.AdSense.Accounts.Alerts.Delete
     -- * Request Lenses
     , aadQuotaUser
     , aadPrettyPrint
-    , aadUserIp
+    , aadUserIP
     , aadAlertId
     , aadAccountId
     , aadKey
-    , aadOauthToken
+    , aadOAuthToken
     , aadFields
-    , aadAlt
     ) where
 
 import           Network.Google.AdSense.Types
@@ -55,10 +54,10 @@ type AccountsAlertsDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Delete '[JSON] ()
+                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Dismiss (delete) the specified alert from the specified publisher
 -- AdSense account.
@@ -67,13 +66,12 @@ type AccountsAlertsDeleteResource =
 data AccountsAlertsDelete' = AccountsAlertsDelete'
     { _aadQuotaUser   :: !(Maybe Text)
     , _aadPrettyPrint :: !Bool
-    , _aadUserIp      :: !(Maybe Text)
+    , _aadUserIP      :: !(Maybe Text)
     , _aadAlertId     :: !Text
     , _aadAccountId   :: !Text
-    , _aadKey         :: !(Maybe Text)
-    , _aadOauthToken  :: !(Maybe Text)
+    , _aadKey         :: !(Maybe Key)
+    , _aadOAuthToken  :: !(Maybe OAuthToken)
     , _aadFields      :: !(Maybe Text)
-    , _aadAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsAlertsDelete'' with the minimum fields required to make a request.
@@ -84,7 +82,7 @@ data AccountsAlertsDelete' = AccountsAlertsDelete'
 --
 -- * 'aadPrettyPrint'
 --
--- * 'aadUserIp'
+-- * 'aadUserIP'
 --
 -- * 'aadAlertId'
 --
@@ -92,11 +90,9 @@ data AccountsAlertsDelete' = AccountsAlertsDelete'
 --
 -- * 'aadKey'
 --
--- * 'aadOauthToken'
+-- * 'aadOAuthToken'
 --
 -- * 'aadFields'
---
--- * 'aadAlt'
 accountsAlertsDelete'
     :: Text -- ^ 'alertId'
     -> Text -- ^ 'accountId'
@@ -105,13 +101,12 @@ accountsAlertsDelete' pAadAlertId_ pAadAccountId_ =
     AccountsAlertsDelete'
     { _aadQuotaUser = Nothing
     , _aadPrettyPrint = True
-    , _aadUserIp = Nothing
+    , _aadUserIP = Nothing
     , _aadAlertId = pAadAlertId_
     , _aadAccountId = pAadAccountId_
     , _aadKey = Nothing
-    , _aadOauthToken = Nothing
+    , _aadOAuthToken = Nothing
     , _aadFields = Nothing
-    , _aadAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -129,9 +124,9 @@ aadPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-aadUserIp :: Lens' AccountsAlertsDelete' (Maybe Text)
-aadUserIp
-  = lens _aadUserIp (\ s a -> s{_aadUserIp = a})
+aadUserIP :: Lens' AccountsAlertsDelete' (Maybe Text)
+aadUserIP
+  = lens _aadUserIP (\ s a -> s{_aadUserIP = a})
 
 -- | Alert to delete.
 aadAlertId :: Lens' AccountsAlertsDelete' Text
@@ -146,35 +141,35 @@ aadAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aadKey :: Lens' AccountsAlertsDelete' (Maybe Text)
+aadKey :: Lens' AccountsAlertsDelete' (Maybe Key)
 aadKey = lens _aadKey (\ s a -> s{_aadKey = a})
 
 -- | OAuth 2.0 token for the current user.
-aadOauthToken :: Lens' AccountsAlertsDelete' (Maybe Text)
-aadOauthToken
-  = lens _aadOauthToken
-      (\ s a -> s{_aadOauthToken = a})
+aadOAuthToken :: Lens' AccountsAlertsDelete' (Maybe OAuthToken)
+aadOAuthToken
+  = lens _aadOAuthToken
+      (\ s a -> s{_aadOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 aadFields :: Lens' AccountsAlertsDelete' (Maybe Text)
 aadFields
   = lens _aadFields (\ s a -> s{_aadFields = a})
 
--- | Data format for the response.
-aadAlt :: Lens' AccountsAlertsDelete' Alt
-aadAlt = lens _aadAlt (\ s a -> s{_aadAlt = a})
+instance GoogleAuth AccountsAlertsDelete' where
+        authKey = aadKey . _Just
+        authToken = aadOAuthToken . _Just
 
 instance GoogleRequest AccountsAlertsDelete' where
         type Rs AccountsAlertsDelete' = ()
         request = requestWithRoute defReq adSenseURL
         requestWithRoute r u AccountsAlertsDelete'{..}
-          = go _aadQuotaUser (Just _aadPrettyPrint) _aadUserIp
+          = go _aadQuotaUser (Just _aadPrettyPrint) _aadUserIP
               _aadAlertId
               _aadAccountId
               _aadKey
-              _aadOauthToken
+              _aadOAuthToken
               _aadFields
-              (Just _aadAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountsAlertsDeleteResource)

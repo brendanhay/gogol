@@ -42,11 +42,10 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.List
     , pjlView
     , pjlPageToken
     , pjlProjectId
-    , pjlOauthToken
+    , pjlOAuthToken
     , pjlPageSize
     , pjlFields
     , pjlCallback
-    , pjlAlt
     ) where
 
 import           Network.Google.Dataflow.Types
@@ -67,14 +66,14 @@ type ProjectsJobsListResource =
                        QueryParam "access_token" Text :>
                          QueryParam "uploadType" Text :>
                            QueryParam "bearer_token" Text :>
-                             QueryParam "key" Text :>
+                             QueryParam "key" Key :>
                                QueryParam "view" Text :>
                                  QueryParam "pageToken" Text :>
-                                   QueryParam "oauth_token" Text :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "pageSize" Int32 :>
                                        QueryParam "fields" Text :>
                                          QueryParam "callback" Text :>
-                                           QueryParam "alt" Text :>
+                                           QueryParam "alt" AltJSON :>
                                              Get '[JSON] ListJobsResponse
 
 -- | List the jobs of a project
@@ -89,15 +88,14 @@ data ProjectsJobsList' = ProjectsJobsList'
     , _pjlAccessToken    :: !(Maybe Text)
     , _pjlUploadType     :: !(Maybe Text)
     , _pjlBearerToken    :: !(Maybe Text)
-    , _pjlKey            :: !(Maybe Text)
+    , _pjlKey            :: !(Maybe Key)
     , _pjlView           :: !(Maybe Text)
     , _pjlPageToken      :: !(Maybe Text)
     , _pjlProjectId      :: !Text
-    , _pjlOauthToken     :: !(Maybe Text)
+    , _pjlOAuthToken     :: !(Maybe OAuthToken)
     , _pjlPageSize       :: !(Maybe Int32)
     , _pjlFields         :: !(Maybe Text)
     , _pjlCallback       :: !(Maybe Text)
-    , _pjlAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsJobsList'' with the minimum fields required to make a request.
@@ -128,15 +126,13 @@ data ProjectsJobsList' = ProjectsJobsList'
 --
 -- * 'pjlProjectId'
 --
--- * 'pjlOauthToken'
+-- * 'pjlOAuthToken'
 --
 -- * 'pjlPageSize'
 --
 -- * 'pjlFields'
 --
 -- * 'pjlCallback'
---
--- * 'pjlAlt'
 projectsJobsList'
     :: Text -- ^ 'projectId'
     -> ProjectsJobsList'
@@ -154,11 +150,10 @@ projectsJobsList' pPjlProjectId_ =
     , _pjlView = Nothing
     , _pjlPageToken = Nothing
     , _pjlProjectId = pPjlProjectId_
-    , _pjlOauthToken = Nothing
+    , _pjlOAuthToken = Nothing
     , _pjlPageSize = Nothing
     , _pjlFields = Nothing
     , _pjlCallback = Nothing
-    , _pjlAlt = "json"
     }
 
 -- | V1 error format.
@@ -209,7 +204,7 @@ pjlBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pjlKey :: Lens' ProjectsJobsList' (Maybe Text)
+pjlKey :: Lens' ProjectsJobsList' (Maybe Key)
 pjlKey = lens _pjlKey (\ s a -> s{_pjlKey = a})
 
 -- | Level of information requested in response. Default is SUMMARY.
@@ -228,10 +223,10 @@ pjlProjectId
   = lens _pjlProjectId (\ s a -> s{_pjlProjectId = a})
 
 -- | OAuth 2.0 token for the current user.
-pjlOauthToken :: Lens' ProjectsJobsList' (Maybe Text)
-pjlOauthToken
-  = lens _pjlOauthToken
-      (\ s a -> s{_pjlOauthToken = a})
+pjlOAuthToken :: Lens' ProjectsJobsList' (Maybe OAuthToken)
+pjlOAuthToken
+  = lens _pjlOAuthToken
+      (\ s a -> s{_pjlOAuthToken = a})
 
 -- | If there are many jobs, limit response to at most this many. The actual
 -- number of jobs returned will be the lesser of max_responses and an
@@ -250,9 +245,9 @@ pjlCallback :: Lens' ProjectsJobsList' (Maybe Text)
 pjlCallback
   = lens _pjlCallback (\ s a -> s{_pjlCallback = a})
 
--- | Data format for response.
-pjlAlt :: Lens' ProjectsJobsList' Text
-pjlAlt = lens _pjlAlt (\ s a -> s{_pjlAlt = a})
+instance GoogleAuth ProjectsJobsList' where
+        authKey = pjlKey . _Just
+        authToken = pjlOAuthToken . _Just
 
 instance GoogleRequest ProjectsJobsList' where
         type Rs ProjectsJobsList' = ListJobsResponse
@@ -268,11 +263,11 @@ instance GoogleRequest ProjectsJobsList' where
               _pjlView
               _pjlPageToken
               _pjlProjectId
-              _pjlOauthToken
+              _pjlOAuthToken
               _pjlPageSize
               _pjlFields
               _pjlCallback
-              (Just _pjlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsJobsListResource)

@@ -34,12 +34,11 @@ module Network.Google.Resource.Taskqueue.Taskqueues.Get
     , tasQuotaUser
     , tasPrettyPrint
     , tasProject
-    , tasUserIp
+    , tasUserIP
     , tasKey
     , tasGetStats
-    , tasOauthToken
+    , tasOAuthToken
     , tasFields
-    , tasAlt
     ) where
 
 import           Network.Google.AppEngineTaskQueue.Types
@@ -54,11 +53,11 @@ type TaskqueuesGetResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "getStats" Bool :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] TaskQueue
+                         QueryParam "alt" AltJSON :> Get '[JSON] TaskQueue
 
 -- | Get detailed information about a TaskQueue.
 --
@@ -68,12 +67,11 @@ data TaskqueuesGet' = TaskqueuesGet'
     , _tasQuotaUser   :: !(Maybe Text)
     , _tasPrettyPrint :: !Bool
     , _tasProject     :: !Text
-    , _tasUserIp      :: !(Maybe Text)
-    , _tasKey         :: !(Maybe Text)
+    , _tasUserIP      :: !(Maybe Text)
+    , _tasKey         :: !(Maybe Key)
     , _tasGetStats    :: !(Maybe Bool)
-    , _tasOauthToken  :: !(Maybe Text)
+    , _tasOAuthToken  :: !(Maybe OAuthToken)
     , _tasFields      :: !(Maybe Text)
-    , _tasAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TaskqueuesGet'' with the minimum fields required to make a request.
@@ -88,17 +86,15 @@ data TaskqueuesGet' = TaskqueuesGet'
 --
 -- * 'tasProject'
 --
--- * 'tasUserIp'
+-- * 'tasUserIP'
 --
 -- * 'tasKey'
 --
 -- * 'tasGetStats'
 --
--- * 'tasOauthToken'
+-- * 'tasOAuthToken'
 --
 -- * 'tasFields'
---
--- * 'tasAlt'
 taskqueuesGet'
     :: Text -- ^ 'taskqueue'
     -> Text -- ^ 'project'
@@ -109,12 +105,11 @@ taskqueuesGet' pTasTaskqueue_ pTasProject_ =
     , _tasQuotaUser = Nothing
     , _tasPrettyPrint = True
     , _tasProject = pTasProject_
-    , _tasUserIp = Nothing
+    , _tasUserIP = Nothing
     , _tasKey = Nothing
     , _tasGetStats = Nothing
-    , _tasOauthToken = Nothing
+    , _tasOAuthToken = Nothing
     , _tasFields = Nothing
-    , _tasAlt = JSON
     }
 
 -- | The id of the taskqueue to get the properties of.
@@ -142,14 +137,14 @@ tasProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tasUserIp :: Lens' TaskqueuesGet' (Maybe Text)
-tasUserIp
-  = lens _tasUserIp (\ s a -> s{_tasUserIp = a})
+tasUserIP :: Lens' TaskqueuesGet' (Maybe Text)
+tasUserIP
+  = lens _tasUserIP (\ s a -> s{_tasUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tasKey :: Lens' TaskqueuesGet' (Maybe Text)
+tasKey :: Lens' TaskqueuesGet' (Maybe Key)
 tasKey = lens _tasKey (\ s a -> s{_tasKey = a})
 
 -- | Whether to get stats. Optional.
@@ -158,19 +153,19 @@ tasGetStats
   = lens _tasGetStats (\ s a -> s{_tasGetStats = a})
 
 -- | OAuth 2.0 token for the current user.
-tasOauthToken :: Lens' TaskqueuesGet' (Maybe Text)
-tasOauthToken
-  = lens _tasOauthToken
-      (\ s a -> s{_tasOauthToken = a})
+tasOAuthToken :: Lens' TaskqueuesGet' (Maybe OAuthToken)
+tasOAuthToken
+  = lens _tasOAuthToken
+      (\ s a -> s{_tasOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 tasFields :: Lens' TaskqueuesGet' (Maybe Text)
 tasFields
   = lens _tasFields (\ s a -> s{_tasFields = a})
 
--- | Data format for the response.
-tasAlt :: Lens' TaskqueuesGet' Alt
-tasAlt = lens _tasAlt (\ s a -> s{_tasAlt = a})
+instance GoogleAuth TaskqueuesGet' where
+        authKey = tasKey . _Just
+        authToken = tasOAuthToken . _Just
 
 instance GoogleRequest TaskqueuesGet' where
         type Rs TaskqueuesGet' = TaskQueue
@@ -180,12 +175,12 @@ instance GoogleRequest TaskqueuesGet' where
           = go _tasTaskqueue _tasQuotaUser
               (Just _tasPrettyPrint)
               _tasProject
-              _tasUserIp
+              _tasUserIP
               _tasKey
               _tasGetStats
-              _tasOauthToken
+              _tasOAuthToken
               _tasFields
-              (Just _tasAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TaskqueuesGetResource)

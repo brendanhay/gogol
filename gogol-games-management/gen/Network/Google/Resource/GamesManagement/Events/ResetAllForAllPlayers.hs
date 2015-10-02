@@ -34,11 +34,10 @@ module Network.Google.Resource.GamesManagement.Events.ResetAllForAllPlayers
     -- * Request Lenses
     , erafapQuotaUser
     , erafapPrettyPrint
-    , erafapUserIp
+    , erafapUserIP
     , erafapKey
-    , erafapOauthToken
+    , erafapOAuthToken
     , erafapFields
-    , erafapAlt
     ) where
 
 import           Network.Google.GamesManagement.Types
@@ -52,10 +51,10 @@ type EventsResetAllForAllPlayersResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Post '[JSON] ()
+                     QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Resets all draft events for all players. This method is only available
 -- to user accounts for your developer console. All quests that use any of
@@ -65,11 +64,10 @@ type EventsResetAllForAllPlayersResource =
 data EventsResetAllForAllPlayers' = EventsResetAllForAllPlayers'
     { _erafapQuotaUser   :: !(Maybe Text)
     , _erafapPrettyPrint :: !Bool
-    , _erafapUserIp      :: !(Maybe Text)
-    , _erafapKey         :: !(Maybe Text)
-    , _erafapOauthToken  :: !(Maybe Text)
+    , _erafapUserIP      :: !(Maybe Text)
+    , _erafapKey         :: !(Maybe Key)
+    , _erafapOAuthToken  :: !(Maybe OAuthToken)
     , _erafapFields      :: !(Maybe Text)
-    , _erafapAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsResetAllForAllPlayers'' with the minimum fields required to make a request.
@@ -80,26 +78,23 @@ data EventsResetAllForAllPlayers' = EventsResetAllForAllPlayers'
 --
 -- * 'erafapPrettyPrint'
 --
--- * 'erafapUserIp'
+-- * 'erafapUserIP'
 --
 -- * 'erafapKey'
 --
--- * 'erafapOauthToken'
+-- * 'erafapOAuthToken'
 --
 -- * 'erafapFields'
---
--- * 'erafapAlt'
 eventsResetAllForAllPlayers'
     :: EventsResetAllForAllPlayers'
 eventsResetAllForAllPlayers' =
     EventsResetAllForAllPlayers'
     { _erafapQuotaUser = Nothing
     , _erafapPrettyPrint = True
-    , _erafapUserIp = Nothing
+    , _erafapUserIP = Nothing
     , _erafapKey = Nothing
-    , _erafapOauthToken = Nothing
+    , _erafapOAuthToken = Nothing
     , _erafapFields = Nothing
-    , _erafapAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -118,32 +113,32 @@ erafapPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-erafapUserIp :: Lens' EventsResetAllForAllPlayers' (Maybe Text)
-erafapUserIp
-  = lens _erafapUserIp (\ s a -> s{_erafapUserIp = a})
+erafapUserIP :: Lens' EventsResetAllForAllPlayers' (Maybe Text)
+erafapUserIP
+  = lens _erafapUserIP (\ s a -> s{_erafapUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-erafapKey :: Lens' EventsResetAllForAllPlayers' (Maybe Text)
+erafapKey :: Lens' EventsResetAllForAllPlayers' (Maybe Key)
 erafapKey
   = lens _erafapKey (\ s a -> s{_erafapKey = a})
 
 -- | OAuth 2.0 token for the current user.
-erafapOauthToken :: Lens' EventsResetAllForAllPlayers' (Maybe Text)
-erafapOauthToken
-  = lens _erafapOauthToken
-      (\ s a -> s{_erafapOauthToken = a})
+erafapOAuthToken :: Lens' EventsResetAllForAllPlayers' (Maybe OAuthToken)
+erafapOAuthToken
+  = lens _erafapOAuthToken
+      (\ s a -> s{_erafapOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 erafapFields :: Lens' EventsResetAllForAllPlayers' (Maybe Text)
 erafapFields
   = lens _erafapFields (\ s a -> s{_erafapFields = a})
 
--- | Data format for the response.
-erafapAlt :: Lens' EventsResetAllForAllPlayers' Alt
-erafapAlt
-  = lens _erafapAlt (\ s a -> s{_erafapAlt = a})
+instance GoogleAuth EventsResetAllForAllPlayers'
+         where
+        authKey = erafapKey . _Just
+        authToken = erafapOAuthToken . _Just
 
 instance GoogleRequest EventsResetAllForAllPlayers'
          where
@@ -151,11 +146,11 @@ instance GoogleRequest EventsResetAllForAllPlayers'
         request = requestWithRoute defReq gamesManagementURL
         requestWithRoute r u EventsResetAllForAllPlayers'{..}
           = go _erafapQuotaUser (Just _erafapPrettyPrint)
-              _erafapUserIp
+              _erafapUserIP
               _erafapKey
-              _erafapOauthToken
+              _erafapOAuthToken
               _erafapFields
-              (Just _erafapAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy EventsResetAllForAllPlayersResource)

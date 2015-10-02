@@ -68,14 +68,14 @@ library
         , Network.Google.Resource.YouTube.LiveStreams.Insert
         , Network.Google.Resource.YouTube.LiveStreams.List
         , Network.Google.Resource.YouTube.LiveStreams.Update
-        , Network.Google.Resource.YouTube.PlaylistItems.Delete
-        , Network.Google.Resource.YouTube.PlaylistItems.Insert
-        , Network.Google.Resource.YouTube.PlaylistItems.List
-        , Network.Google.Resource.YouTube.PlaylistItems.Update
-        , Network.Google.Resource.YouTube.Playlists.Delete
-        , Network.Google.Resource.YouTube.Playlists.Insert
-        , Network.Google.Resource.YouTube.Playlists.List
-        , Network.Google.Resource.YouTube.Playlists.Update
+        , Network.Google.Resource.YouTube.PlayListItems.Delete
+        , Network.Google.Resource.YouTube.PlayListItems.Insert
+        , Network.Google.Resource.YouTube.PlayListItems.List
+        , Network.Google.Resource.YouTube.PlayListItems.Update
+        , Network.Google.Resource.YouTube.PlayLists.Delete
+        , Network.Google.Resource.YouTube.PlayLists.Insert
+        , Network.Google.Resource.YouTube.PlayLists.List
+        , Network.Google.Resource.YouTube.PlayLists.Update
         , Network.Google.Resource.YouTube.Search.List
         , Network.Google.Resource.YouTube.Subscriptions.Delete
         , Network.Google.Resource.YouTube.Subscriptions.Insert

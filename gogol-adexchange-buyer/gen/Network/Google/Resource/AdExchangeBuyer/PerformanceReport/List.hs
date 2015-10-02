@@ -32,16 +32,15 @@ module Network.Google.Resource.AdExchangeBuyer.PerformanceReport.List
     -- * Request Lenses
     , prlQuotaUser
     , prlPrettyPrint
-    , prlUserIp
+    , prlUserIP
     , prlAccountId
     , prlKey
     , prlPageToken
-    , prlOauthToken
+    , prlOAuthToken
     , prlEndDateTime
     , prlMaxResults
     , prlStartDateTime
     , prlFields
-    , prlAlt
     ) where
 
 import           Network.Google.AdExchangeBuyer.Types
@@ -55,14 +54,14 @@ type PerformanceReportListResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
              QueryParam "accountId" Int64 :>
-               QueryParam "key" Text :>
+               QueryParam "key" Key :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "oauth_token" Text :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "endDateTime" Text :>
                        QueryParam "maxResults" Word32 :>
                          QueryParam "startDateTime" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :>
+                             QueryParam "alt" AltJSON :>
                                Get '[JSON] PerformanceReportList
 
 -- | Retrieves the authenticated user\'s list of performance metrics.
@@ -71,16 +70,15 @@ type PerformanceReportListResource =
 data PerformanceReportList' = PerformanceReportList'
     { _prlQuotaUser     :: !(Maybe Text)
     , _prlPrettyPrint   :: !Bool
-    , _prlUserIp        :: !(Maybe Text)
+    , _prlUserIP        :: !(Maybe Text)
     , _prlAccountId     :: !Int64
-    , _prlKey           :: !(Maybe Text)
+    , _prlKey           :: !(Maybe Key)
     , _prlPageToken     :: !(Maybe Text)
-    , _prlOauthToken    :: !(Maybe Text)
+    , _prlOAuthToken    :: !(Maybe OAuthToken)
     , _prlEndDateTime   :: !Text
     , _prlMaxResults    :: !(Maybe Word32)
     , _prlStartDateTime :: !Text
     , _prlFields        :: !(Maybe Text)
-    , _prlAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PerformanceReportList'' with the minimum fields required to make a request.
@@ -91,7 +89,7 @@ data PerformanceReportList' = PerformanceReportList'
 --
 -- * 'prlPrettyPrint'
 --
--- * 'prlUserIp'
+-- * 'prlUserIP'
 --
 -- * 'prlAccountId'
 --
@@ -99,7 +97,7 @@ data PerformanceReportList' = PerformanceReportList'
 --
 -- * 'prlPageToken'
 --
--- * 'prlOauthToken'
+-- * 'prlOAuthToken'
 --
 -- * 'prlEndDateTime'
 --
@@ -108,8 +106,6 @@ data PerformanceReportList' = PerformanceReportList'
 -- * 'prlStartDateTime'
 --
 -- * 'prlFields'
---
--- * 'prlAlt'
 performanceReportList'
     :: Int64 -- ^ 'accountId'
     -> Text -- ^ 'endDateTime'
@@ -119,16 +115,15 @@ performanceReportList' pPrlAccountId_ pPrlEndDateTime_ pPrlStartDateTime_ =
     PerformanceReportList'
     { _prlQuotaUser = Nothing
     , _prlPrettyPrint = True
-    , _prlUserIp = Nothing
+    , _prlUserIP = Nothing
     , _prlAccountId = pPrlAccountId_
     , _prlKey = Nothing
     , _prlPageToken = Nothing
-    , _prlOauthToken = Nothing
+    , _prlOAuthToken = Nothing
     , _prlEndDateTime = pPrlEndDateTime_
     , _prlMaxResults = Nothing
     , _prlStartDateTime = pPrlStartDateTime_
     , _prlFields = Nothing
-    , _prlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -146,9 +141,9 @@ prlPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-prlUserIp :: Lens' PerformanceReportList' (Maybe Text)
-prlUserIp
-  = lens _prlUserIp (\ s a -> s{_prlUserIp = a})
+prlUserIP :: Lens' PerformanceReportList' (Maybe Text)
+prlUserIP
+  = lens _prlUserIP (\ s a -> s{_prlUserIP = a})
 
 -- | The account id to get the reports.
 prlAccountId :: Lens' PerformanceReportList' Int64
@@ -158,7 +153,7 @@ prlAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-prlKey :: Lens' PerformanceReportList' (Maybe Text)
+prlKey :: Lens' PerformanceReportList' (Maybe Key)
 prlKey = lens _prlKey (\ s a -> s{_prlKey = a})
 
 -- | A continuation token, used to page through performance reports. To
@@ -169,10 +164,10 @@ prlPageToken
   = lens _prlPageToken (\ s a -> s{_prlPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-prlOauthToken :: Lens' PerformanceReportList' (Maybe Text)
-prlOauthToken
-  = lens _prlOauthToken
-      (\ s a -> s{_prlOauthToken = a})
+prlOAuthToken :: Lens' PerformanceReportList' (Maybe OAuthToken)
+prlOAuthToken
+  = lens _prlOAuthToken
+      (\ s a -> s{_prlOAuthToken = a})
 
 -- | The end time of the report in ISO 8601 timestamp format using UTC.
 prlEndDateTime :: Lens' PerformanceReportList' Text
@@ -198,25 +193,25 @@ prlFields :: Lens' PerformanceReportList' (Maybe Text)
 prlFields
   = lens _prlFields (\ s a -> s{_prlFields = a})
 
--- | Data format for the response.
-prlAlt :: Lens' PerformanceReportList' Alt
-prlAlt = lens _prlAlt (\ s a -> s{_prlAlt = a})
+instance GoogleAuth PerformanceReportList' where
+        authKey = prlKey . _Just
+        authToken = prlOAuthToken . _Just
 
 instance GoogleRequest PerformanceReportList' where
         type Rs PerformanceReportList' =
              PerformanceReportList
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u PerformanceReportList'{..}
-          = go _prlQuotaUser (Just _prlPrettyPrint) _prlUserIp
+          = go _prlQuotaUser (Just _prlPrettyPrint) _prlUserIP
               (Just _prlAccountId)
               _prlKey
               _prlPageToken
-              _prlOauthToken
+              _prlOAuthToken
               (Just _prlEndDateTime)
               _prlMaxResults
               (Just _prlStartDateTime)
               _prlFields
-              (Just _prlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PerformanceReportListResource)

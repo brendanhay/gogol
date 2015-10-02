@@ -33,13 +33,12 @@ module Network.Google.Resource.Compute.VPNTunnels.Delete
     , vtdQuotaUser
     , vtdPrettyPrint
     , vtdProject
-    , vtdUserIp
+    , vtdUserIP
     , vtdKey
-    , vtdVpnTunnel
+    , vtdVPNTunnel
     , vtdRegion
-    , vtdOauthToken
+    , vtdOAuthToken
     , vtdFields
-    , vtdAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -56,10 +55,10 @@ type VpnTunnelsDeleteResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Delete '[JSON] Operation
+                           QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified VpnTunnel resource.
 --
@@ -68,13 +67,12 @@ data VPNTunnelsDelete' = VPNTunnelsDelete'
     { _vtdQuotaUser   :: !(Maybe Text)
     , _vtdPrettyPrint :: !Bool
     , _vtdProject     :: !Text
-    , _vtdUserIp      :: !(Maybe Text)
-    , _vtdKey         :: !(Maybe Text)
-    , _vtdVpnTunnel   :: !Text
+    , _vtdUserIP      :: !(Maybe Text)
+    , _vtdKey         :: !(Maybe Key)
+    , _vtdVPNTunnel   :: !Text
     , _vtdRegion      :: !Text
-    , _vtdOauthToken  :: !(Maybe Text)
+    , _vtdOAuthToken  :: !(Maybe OAuthToken)
     , _vtdFields      :: !(Maybe Text)
-    , _vtdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VPNTunnelsDelete'' with the minimum fields required to make a request.
@@ -87,36 +85,33 @@ data VPNTunnelsDelete' = VPNTunnelsDelete'
 --
 -- * 'vtdProject'
 --
--- * 'vtdUserIp'
+-- * 'vtdUserIP'
 --
 -- * 'vtdKey'
 --
--- * 'vtdVpnTunnel'
+-- * 'vtdVPNTunnel'
 --
 -- * 'vtdRegion'
 --
--- * 'vtdOauthToken'
+-- * 'vtdOAuthToken'
 --
 -- * 'vtdFields'
---
--- * 'vtdAlt'
 vPNTunnelsDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'vpnTunnel'
     -> Text -- ^ 'region'
     -> VPNTunnelsDelete'
-vPNTunnelsDelete' pVtdProject_ pVtdVpnTunnel_ pVtdRegion_ =
+vPNTunnelsDelete' pVtdProject_ pVtdVPNTunnel_ pVtdRegion_ =
     VPNTunnelsDelete'
     { _vtdQuotaUser = Nothing
     , _vtdPrettyPrint = True
     , _vtdProject = pVtdProject_
-    , _vtdUserIp = Nothing
+    , _vtdUserIP = Nothing
     , _vtdKey = Nothing
-    , _vtdVpnTunnel = pVtdVpnTunnel_
+    , _vtdVPNTunnel = pVtdVPNTunnel_
     , _vtdRegion = pVtdRegion_
-    , _vtdOauthToken = Nothing
+    , _vtdOAuthToken = Nothing
     , _vtdFields = Nothing
-    , _vtdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,20 +134,20 @@ vtdProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-vtdUserIp :: Lens' VPNTunnelsDelete' (Maybe Text)
-vtdUserIp
-  = lens _vtdUserIp (\ s a -> s{_vtdUserIp = a})
+vtdUserIP :: Lens' VPNTunnelsDelete' (Maybe Text)
+vtdUserIP
+  = lens _vtdUserIP (\ s a -> s{_vtdUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vtdKey :: Lens' VPNTunnelsDelete' (Maybe Text)
+vtdKey :: Lens' VPNTunnelsDelete' (Maybe Key)
 vtdKey = lens _vtdKey (\ s a -> s{_vtdKey = a})
 
 -- | Name of the VpnTunnel resource to delete.
-vtdVpnTunnel :: Lens' VPNTunnelsDelete' Text
-vtdVpnTunnel
-  = lens _vtdVpnTunnel (\ s a -> s{_vtdVpnTunnel = a})
+vtdVPNTunnel :: Lens' VPNTunnelsDelete' Text
+vtdVPNTunnel
+  = lens _vtdVPNTunnel (\ s a -> s{_vtdVPNTunnel = a})
 
 -- | The name of the region for this request.
 vtdRegion :: Lens' VPNTunnelsDelete' Text
@@ -160,32 +155,32 @@ vtdRegion
   = lens _vtdRegion (\ s a -> s{_vtdRegion = a})
 
 -- | OAuth 2.0 token for the current user.
-vtdOauthToken :: Lens' VPNTunnelsDelete' (Maybe Text)
-vtdOauthToken
-  = lens _vtdOauthToken
-      (\ s a -> s{_vtdOauthToken = a})
+vtdOAuthToken :: Lens' VPNTunnelsDelete' (Maybe OAuthToken)
+vtdOAuthToken
+  = lens _vtdOAuthToken
+      (\ s a -> s{_vtdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 vtdFields :: Lens' VPNTunnelsDelete' (Maybe Text)
 vtdFields
   = lens _vtdFields (\ s a -> s{_vtdFields = a})
 
--- | Data format for the response.
-vtdAlt :: Lens' VPNTunnelsDelete' Alt
-vtdAlt = lens _vtdAlt (\ s a -> s{_vtdAlt = a})
+instance GoogleAuth VPNTunnelsDelete' where
+        authKey = vtdKey . _Just
+        authToken = vtdOAuthToken . _Just
 
 instance GoogleRequest VPNTunnelsDelete' where
         type Rs VPNTunnelsDelete' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u VPNTunnelsDelete'{..}
           = go _vtdQuotaUser (Just _vtdPrettyPrint) _vtdProject
-              _vtdUserIp
+              _vtdUserIP
               _vtdKey
-              _vtdVpnTunnel
+              _vtdVPNTunnel
               _vtdRegion
-              _vtdOauthToken
+              _vtdOAuthToken
               _vtdFields
-              (Just _vtdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy VpnTunnelsDeleteResource)

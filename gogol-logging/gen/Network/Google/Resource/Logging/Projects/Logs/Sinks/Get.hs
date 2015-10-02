@@ -40,12 +40,11 @@ module Network.Google.Resource.Logging.Projects.Logs.Sinks.Get
     , plsgUploadType
     , plsgBearerToken
     , plsgKey
-    , plsgOauthToken
+    , plsgOAuthToken
     , plsgProjectsId
     , plsgSinksId
     , plsgFields
     , plsgCallback
-    , plsgAlt
     ) where
 
 import           Network.Google.Logging.Types
@@ -69,11 +68,11 @@ type ProjectsLogsSinksGetResource =
                              QueryParam "access_token" Text :>
                                QueryParam "uploadType" Text :>
                                  QueryParam "bearer_token" Text :>
-                                   QueryParam "key" Text :>
-                                     QueryParam "oauth_token" Text :>
+                                   QueryParam "key" Key :>
+                                     QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "fields" Text :>
                                          QueryParam "callback" Text :>
-                                           QueryParam "alt" Text :>
+                                           QueryParam "alt" AltJSON :>
                                              Get '[JSON] LogSink
 
 -- | Gets a log sink.
@@ -89,13 +88,12 @@ data ProjectsLogsSinksGet' = ProjectsLogsSinksGet'
     , _plsgAccessToken    :: !(Maybe Text)
     , _plsgUploadType     :: !(Maybe Text)
     , _plsgBearerToken    :: !(Maybe Text)
-    , _plsgKey            :: !(Maybe Text)
-    , _plsgOauthToken     :: !(Maybe Text)
+    , _plsgKey            :: !(Maybe Key)
+    , _plsgOAuthToken     :: !(Maybe OAuthToken)
     , _plsgProjectsId     :: !Text
     , _plsgSinksId        :: !Text
     , _plsgFields         :: !(Maybe Text)
     , _plsgCallback       :: !(Maybe Text)
-    , _plsgAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsLogsSinksGet'' with the minimum fields required to make a request.
@@ -122,7 +120,7 @@ data ProjectsLogsSinksGet' = ProjectsLogsSinksGet'
 --
 -- * 'plsgKey'
 --
--- * 'plsgOauthToken'
+-- * 'plsgOAuthToken'
 --
 -- * 'plsgProjectsId'
 --
@@ -131,8 +129,6 @@ data ProjectsLogsSinksGet' = ProjectsLogsSinksGet'
 -- * 'plsgFields'
 --
 -- * 'plsgCallback'
---
--- * 'plsgAlt'
 projectsLogsSinksGet'
     :: Text -- ^ 'logsId'
     -> Text -- ^ 'projectsId'
@@ -150,12 +146,11 @@ projectsLogsSinksGet' pPlsgLogsId_ pPlsgProjectsId_ pPlsgSinksId_ =
     , _plsgUploadType = Nothing
     , _plsgBearerToken = Nothing
     , _plsgKey = Nothing
-    , _plsgOauthToken = Nothing
+    , _plsgOAuthToken = Nothing
     , _plsgProjectsId = pPlsgProjectsId_
     , _plsgSinksId = pPlsgSinksId_
     , _plsgFields = Nothing
     , _plsgCallback = Nothing
-    , _plsgAlt = "json"
     }
 
 -- | V1 error format.
@@ -213,14 +208,14 @@ plsgBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-plsgKey :: Lens' ProjectsLogsSinksGet' (Maybe Text)
+plsgKey :: Lens' ProjectsLogsSinksGet' (Maybe Key)
 plsgKey = lens _plsgKey (\ s a -> s{_plsgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-plsgOauthToken :: Lens' ProjectsLogsSinksGet' (Maybe Text)
-plsgOauthToken
-  = lens _plsgOauthToken
-      (\ s a -> s{_plsgOauthToken = a})
+plsgOAuthToken :: Lens' ProjectsLogsSinksGet' (Maybe OAuthToken)
+plsgOAuthToken
+  = lens _plsgOAuthToken
+      (\ s a -> s{_plsgOAuthToken = a})
 
 -- | Part of \`sinkName\`. The resource name of the log sink to return.
 plsgProjectsId :: Lens' ProjectsLogsSinksGet' Text
@@ -243,9 +238,9 @@ plsgCallback :: Lens' ProjectsLogsSinksGet' (Maybe Text)
 plsgCallback
   = lens _plsgCallback (\ s a -> s{_plsgCallback = a})
 
--- | Data format for response.
-plsgAlt :: Lens' ProjectsLogsSinksGet' Text
-plsgAlt = lens _plsgAlt (\ s a -> s{_plsgAlt = a})
+instance GoogleAuth ProjectsLogsSinksGet' where
+        authKey = plsgKey . _Just
+        authToken = plsgOAuthToken . _Just
 
 instance GoogleRequest ProjectsLogsSinksGet' where
         type Rs ProjectsLogsSinksGet' = LogSink
@@ -260,12 +255,12 @@ instance GoogleRequest ProjectsLogsSinksGet' where
               _plsgUploadType
               _plsgBearerToken
               _plsgKey
-              _plsgOauthToken
+              _plsgOAuthToken
               _plsgProjectsId
               _plsgSinksId
               _plsgFields
               _plsgCallback
-              (Just _plsgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsLogsSinksGetResource)

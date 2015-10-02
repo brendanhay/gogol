@@ -32,14 +32,13 @@ module Network.Google.Resource.Fitness.Users.Sessions.Delete
     -- * Request Lenses
     , usdQuotaUser
     , usdPrettyPrint
-    , usdUserIp
+    , usdUserIP
     , usdUserId
     , usdKey
     , usdCurrentTimeMillis
-    , usdOauthToken
+    , usdOAuthToken
     , usdSessionId
     , usdFields
-    , usdAlt
     ) where
 
 import           Network.Google.Fitness.Types
@@ -54,11 +53,11 @@ type UsersSessionsDeleteResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "currentTimeMillis" Int64 :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Delete '[JSON] ()
+                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a session specified by the given session ID.
 --
@@ -66,14 +65,13 @@ type UsersSessionsDeleteResource =
 data UsersSessionsDelete' = UsersSessionsDelete'
     { _usdQuotaUser         :: !(Maybe Text)
     , _usdPrettyPrint       :: !Bool
-    , _usdUserIp            :: !(Maybe Text)
+    , _usdUserIP            :: !(Maybe Text)
     , _usdUserId            :: !Text
-    , _usdKey               :: !(Maybe Text)
+    , _usdKey               :: !(Maybe Key)
     , _usdCurrentTimeMillis :: !(Maybe Int64)
-    , _usdOauthToken        :: !(Maybe Text)
+    , _usdOAuthToken        :: !(Maybe OAuthToken)
     , _usdSessionId         :: !Text
     , _usdFields            :: !(Maybe Text)
-    , _usdAlt               :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersSessionsDelete'' with the minimum fields required to make a request.
@@ -84,7 +82,7 @@ data UsersSessionsDelete' = UsersSessionsDelete'
 --
 -- * 'usdPrettyPrint'
 --
--- * 'usdUserIp'
+-- * 'usdUserIP'
 --
 -- * 'usdUserId'
 --
@@ -92,13 +90,11 @@ data UsersSessionsDelete' = UsersSessionsDelete'
 --
 -- * 'usdCurrentTimeMillis'
 --
--- * 'usdOauthToken'
+-- * 'usdOAuthToken'
 --
 -- * 'usdSessionId'
 --
 -- * 'usdFields'
---
--- * 'usdAlt'
 usersSessionsDelete'
     :: Text -- ^ 'userId'
     -> Text -- ^ 'sessionId'
@@ -107,14 +103,13 @@ usersSessionsDelete' pUsdUserId_ pUsdSessionId_ =
     UsersSessionsDelete'
     { _usdQuotaUser = Nothing
     , _usdPrettyPrint = True
-    , _usdUserIp = Nothing
+    , _usdUserIP = Nothing
     , _usdUserId = pUsdUserId_
     , _usdKey = Nothing
     , _usdCurrentTimeMillis = Nothing
-    , _usdOauthToken = Nothing
+    , _usdOAuthToken = Nothing
     , _usdSessionId = pUsdSessionId_
     , _usdFields = Nothing
-    , _usdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -132,9 +127,9 @@ usdPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-usdUserIp :: Lens' UsersSessionsDelete' (Maybe Text)
-usdUserIp
-  = lens _usdUserIp (\ s a -> s{_usdUserIp = a})
+usdUserIP :: Lens' UsersSessionsDelete' (Maybe Text)
+usdUserIP
+  = lens _usdUserIP (\ s a -> s{_usdUserIP = a})
 
 -- | Delete a session for the person identified. Use me to indicate the
 -- authenticated user. Only me is supported at this time.
@@ -145,7 +140,7 @@ usdUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-usdKey :: Lens' UsersSessionsDelete' (Maybe Text)
+usdKey :: Lens' UsersSessionsDelete' (Maybe Key)
 usdKey = lens _usdKey (\ s a -> s{_usdKey = a})
 
 -- | The client\'s current time in milliseconds since epoch.
@@ -155,10 +150,10 @@ usdCurrentTimeMillis
       (\ s a -> s{_usdCurrentTimeMillis = a})
 
 -- | OAuth 2.0 token for the current user.
-usdOauthToken :: Lens' UsersSessionsDelete' (Maybe Text)
-usdOauthToken
-  = lens _usdOauthToken
-      (\ s a -> s{_usdOauthToken = a})
+usdOAuthToken :: Lens' UsersSessionsDelete' (Maybe OAuthToken)
+usdOAuthToken
+  = lens _usdOAuthToken
+      (\ s a -> s{_usdOAuthToken = a})
 
 -- | The ID of the session to be deleted.
 usdSessionId :: Lens' UsersSessionsDelete' Text
@@ -170,22 +165,22 @@ usdFields :: Lens' UsersSessionsDelete' (Maybe Text)
 usdFields
   = lens _usdFields (\ s a -> s{_usdFields = a})
 
--- | Data format for the response.
-usdAlt :: Lens' UsersSessionsDelete' Alt
-usdAlt = lens _usdAlt (\ s a -> s{_usdAlt = a})
+instance GoogleAuth UsersSessionsDelete' where
+        authKey = usdKey . _Just
+        authToken = usdOAuthToken . _Just
 
 instance GoogleRequest UsersSessionsDelete' where
         type Rs UsersSessionsDelete' = ()
         request = requestWithRoute defReq fitnessURL
         requestWithRoute r u UsersSessionsDelete'{..}
-          = go _usdQuotaUser (Just _usdPrettyPrint) _usdUserIp
+          = go _usdQuotaUser (Just _usdPrettyPrint) _usdUserIP
               _usdUserId
               _usdKey
               _usdCurrentTimeMillis
-              _usdOauthToken
+              _usdOAuthToken
               _usdSessionId
               _usdFields
-              (Just _usdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersSessionsDeleteResource)

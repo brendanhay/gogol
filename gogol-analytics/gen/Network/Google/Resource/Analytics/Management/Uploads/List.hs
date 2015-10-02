@@ -33,15 +33,14 @@ module Network.Google.Resource.Analytics.Management.Uploads.List
     , mulQuotaUser
     , mulPrettyPrint
     , mulWebPropertyId
-    , mulUserIp
+    , mulUserIP
     , mulCustomDataSourceId
     , mulAccountId
     , mulKey
-    , mulOauthToken
+    , mulOAuthToken
     , mulStartIndex
     , mulMaxResults
     , mulFields
-    , mulAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -61,12 +60,13 @@ type ManagementUploadsListResource =
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "start-index" Int32 :>
                                  QueryParam "max-results" Int32 :>
                                    QueryParam "fields" Text :>
-                                     QueryParam "alt" Alt :> Get '[JSON] Uploads
+                                     QueryParam "alt" AltJSON :>
+                                       Get '[JSON] Uploads
 
 -- | List uploads to which the user has access.
 --
@@ -75,15 +75,14 @@ data ManagementUploadsList' = ManagementUploadsList'
     { _mulQuotaUser          :: !(Maybe Text)
     , _mulPrettyPrint        :: !Bool
     , _mulWebPropertyId      :: !Text
-    , _mulUserIp             :: !(Maybe Text)
+    , _mulUserIP             :: !(Maybe Text)
     , _mulCustomDataSourceId :: !Text
     , _mulAccountId          :: !Text
-    , _mulKey                :: !(Maybe Text)
-    , _mulOauthToken         :: !(Maybe Text)
+    , _mulKey                :: !(Maybe Key)
+    , _mulOAuthToken         :: !(Maybe OAuthToken)
     , _mulStartIndex         :: !(Maybe Int32)
     , _mulMaxResults         :: !(Maybe Int32)
     , _mulFields             :: !(Maybe Text)
-    , _mulAlt                :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementUploadsList'' with the minimum fields required to make a request.
@@ -96,7 +95,7 @@ data ManagementUploadsList' = ManagementUploadsList'
 --
 -- * 'mulWebPropertyId'
 --
--- * 'mulUserIp'
+-- * 'mulUserIP'
 --
 -- * 'mulCustomDataSourceId'
 --
@@ -104,15 +103,13 @@ data ManagementUploadsList' = ManagementUploadsList'
 --
 -- * 'mulKey'
 --
--- * 'mulOauthToken'
+-- * 'mulOAuthToken'
 --
 -- * 'mulStartIndex'
 --
 -- * 'mulMaxResults'
 --
 -- * 'mulFields'
---
--- * 'mulAlt'
 managementUploadsList'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'customDataSourceId'
@@ -123,15 +120,14 @@ managementUploadsList' pMulWebPropertyId_ pMulCustomDataSourceId_ pMulAccountId_
     { _mulQuotaUser = Nothing
     , _mulPrettyPrint = False
     , _mulWebPropertyId = pMulWebPropertyId_
-    , _mulUserIp = Nothing
+    , _mulUserIP = Nothing
     , _mulCustomDataSourceId = pMulCustomDataSourceId_
     , _mulAccountId = pMulAccountId_
     , _mulKey = Nothing
-    , _mulOauthToken = Nothing
+    , _mulOAuthToken = Nothing
     , _mulStartIndex = Nothing
     , _mulMaxResults = Nothing
     , _mulFields = Nothing
-    , _mulAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -155,9 +151,9 @@ mulWebPropertyId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mulUserIp :: Lens' ManagementUploadsList' (Maybe Text)
-mulUserIp
-  = lens _mulUserIp (\ s a -> s{_mulUserIp = a})
+mulUserIP :: Lens' ManagementUploadsList' (Maybe Text)
+mulUserIP
+  = lens _mulUserIP (\ s a -> s{_mulUserIP = a})
 
 -- | Custom data source Id for uploads to retrieve.
 mulCustomDataSourceId :: Lens' ManagementUploadsList' Text
@@ -173,14 +169,14 @@ mulAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mulKey :: Lens' ManagementUploadsList' (Maybe Text)
+mulKey :: Lens' ManagementUploadsList' (Maybe Key)
 mulKey = lens _mulKey (\ s a -> s{_mulKey = a})
 
 -- | OAuth 2.0 token for the current user.
-mulOauthToken :: Lens' ManagementUploadsList' (Maybe Text)
-mulOauthToken
-  = lens _mulOauthToken
-      (\ s a -> s{_mulOauthToken = a})
+mulOAuthToken :: Lens' ManagementUploadsList' (Maybe OAuthToken)
+mulOAuthToken
+  = lens _mulOAuthToken
+      (\ s a -> s{_mulOAuthToken = a})
 
 -- | A 1-based index of the first upload to retrieve. Use this parameter as a
 -- pagination mechanism along with the max-results parameter.
@@ -200,9 +196,9 @@ mulFields :: Lens' ManagementUploadsList' (Maybe Text)
 mulFields
   = lens _mulFields (\ s a -> s{_mulFields = a})
 
--- | Data format for the response.
-mulAlt :: Lens' ManagementUploadsList' Alt
-mulAlt = lens _mulAlt (\ s a -> s{_mulAlt = a})
+instance GoogleAuth ManagementUploadsList' where
+        authKey = mulKey . _Just
+        authToken = mulOAuthToken . _Just
 
 instance GoogleRequest ManagementUploadsList' where
         type Rs ManagementUploadsList' = Uploads
@@ -210,15 +206,15 @@ instance GoogleRequest ManagementUploadsList' where
         requestWithRoute r u ManagementUploadsList'{..}
           = go _mulQuotaUser (Just _mulPrettyPrint)
               _mulWebPropertyId
-              _mulUserIp
+              _mulUserIP
               _mulCustomDataSourceId
               _mulAccountId
               _mulKey
-              _mulOauthToken
+              _mulOAuthToken
               _mulStartIndex
               _mulMaxResults
               _mulFields
-              (Just _mulAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ManagementUploadsListResource)

@@ -32,12 +32,11 @@ module Network.Google.Resource.Genomics.Callsets.Delete
     -- * Request Lenses
     , cdQuotaUser
     , cdPrettyPrint
-    , cdUserIp
+    , cdUserIP
     , cdKey
     , cdCallSetId
-    , cdOauthToken
+    , cdOAuthToken
     , cdFields
-    , cdAlt
     ) where
 
 import           Network.Google.Genomics.Types
@@ -51,10 +50,10 @@ type CallsetsDeleteResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Delete '[JSON] ()
+                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a call set.
 --
@@ -62,12 +61,11 @@ type CallsetsDeleteResource =
 data CallsetsDelete' = CallsetsDelete'
     { _cdQuotaUser   :: !(Maybe Text)
     , _cdPrettyPrint :: !Bool
-    , _cdUserIp      :: !(Maybe Text)
-    , _cdKey         :: !(Maybe Text)
+    , _cdUserIP      :: !(Maybe Text)
+    , _cdKey         :: !(Maybe Key)
     , _cdCallSetId   :: !Text
-    , _cdOauthToken  :: !(Maybe Text)
+    , _cdOAuthToken  :: !(Maybe OAuthToken)
     , _cdFields      :: !(Maybe Text)
-    , _cdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CallsetsDelete'' with the minimum fields required to make a request.
@@ -78,17 +76,15 @@ data CallsetsDelete' = CallsetsDelete'
 --
 -- * 'cdPrettyPrint'
 --
--- * 'cdUserIp'
+-- * 'cdUserIP'
 --
 -- * 'cdKey'
 --
 -- * 'cdCallSetId'
 --
--- * 'cdOauthToken'
+-- * 'cdOAuthToken'
 --
 -- * 'cdFields'
---
--- * 'cdAlt'
 callsetsDelete'
     :: Text -- ^ 'callSetId'
     -> CallsetsDelete'
@@ -96,12 +92,11 @@ callsetsDelete' pCdCallSetId_ =
     CallsetsDelete'
     { _cdQuotaUser = Nothing
     , _cdPrettyPrint = True
-    , _cdUserIp = Nothing
+    , _cdUserIP = Nothing
     , _cdKey = Nothing
     , _cdCallSetId = pCdCallSetId_
-    , _cdOauthToken = Nothing
+    , _cdOAuthToken = Nothing
     , _cdFields = Nothing
-    , _cdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -119,13 +114,13 @@ cdPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cdUserIp :: Lens' CallsetsDelete' (Maybe Text)
-cdUserIp = lens _cdUserIp (\ s a -> s{_cdUserIp = a})
+cdUserIP :: Lens' CallsetsDelete' (Maybe Text)
+cdUserIP = lens _cdUserIP (\ s a -> s{_cdUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cdKey :: Lens' CallsetsDelete' (Maybe Text)
+cdKey :: Lens' CallsetsDelete' (Maybe Key)
 cdKey = lens _cdKey (\ s a -> s{_cdKey = a})
 
 -- | The ID of the call set to be deleted.
@@ -134,28 +129,28 @@ cdCallSetId
   = lens _cdCallSetId (\ s a -> s{_cdCallSetId = a})
 
 -- | OAuth 2.0 token for the current user.
-cdOauthToken :: Lens' CallsetsDelete' (Maybe Text)
-cdOauthToken
-  = lens _cdOauthToken (\ s a -> s{_cdOauthToken = a})
+cdOAuthToken :: Lens' CallsetsDelete' (Maybe OAuthToken)
+cdOAuthToken
+  = lens _cdOAuthToken (\ s a -> s{_cdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cdFields :: Lens' CallsetsDelete' (Maybe Text)
 cdFields = lens _cdFields (\ s a -> s{_cdFields = a})
 
--- | Data format for the response.
-cdAlt :: Lens' CallsetsDelete' Alt
-cdAlt = lens _cdAlt (\ s a -> s{_cdAlt = a})
+instance GoogleAuth CallsetsDelete' where
+        authKey = cdKey . _Just
+        authToken = cdOAuthToken . _Just
 
 instance GoogleRequest CallsetsDelete' where
         type Rs CallsetsDelete' = ()
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u CallsetsDelete'{..}
-          = go _cdQuotaUser (Just _cdPrettyPrint) _cdUserIp
+          = go _cdQuotaUser (Just _cdPrettyPrint) _cdUserIP
               _cdKey
               _cdCallSetId
-              _cdOauthToken
+              _cdOAuthToken
               _cdFields
-              (Just _cdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CallsetsDeleteResource)

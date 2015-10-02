@@ -177,9 +177,9 @@ instance ToJSON StringValue where
 -- /See:/ 'stats' smart constructor.
 data Stats = Stats
     { _sTime         :: !(Maybe Double)
-    , _sDoubleValues :: !(Maybe [Maybe DoubleValue])
-    , _sStringValues :: !(Maybe [Maybe StringValue])
-    , _sIntValues    :: !(Maybe [Maybe IntValue])
+    , _sDoubleValues :: !(Maybe [DoubleValue])
+    , _sStringValues :: !(Maybe [StringValue])
+    , _sIntValues    :: !(Maybe [IntValue])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Stats' with the minimum fields required to make a request.
@@ -206,21 +206,21 @@ stats =
 sTime :: Lens' Stats (Maybe Double)
 sTime = lens _sTime (\ s a -> s{_sTime = a})
 
-sDoubleValues :: Lens' Stats [Maybe DoubleValue]
+sDoubleValues :: Lens' Stats [DoubleValue]
 sDoubleValues
   = lens _sDoubleValues
       (\ s a -> s{_sDoubleValues = a})
       . _Default
       . _Coerce
 
-sStringValues :: Lens' Stats [Maybe StringValue]
+sStringValues :: Lens' Stats [StringValue]
 sStringValues
   = lens _sStringValues
       (\ s a -> s{_sStringValues = a})
       . _Default
       . _Coerce
 
-sIntValues :: Lens' Stats [Maybe IntValue]
+sIntValues :: Lens' Stats [IntValue]
 sIntValues
   = lens _sIntValues (\ s a -> s{_sIntValues = a}) .
       _Default
@@ -247,7 +247,7 @@ instance ToJSON Stats where
 --
 -- /See:/ 'aggregatedStats' smart constructor.
 newtype AggregatedStats = AggregatedStats
-    { _asStats :: Maybe [Maybe Stats]
+    { _asStats :: Maybe [Stats]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AggregatedStats' with the minimum fields required to make a request.
@@ -262,7 +262,7 @@ aggregatedStats =
     { _asStats = Nothing
     }
 
-asStats :: Lens' AggregatedStats [Maybe Stats]
+asStats :: Lens' AggregatedStats [Stats]
 asStats
   = lens _asStats (\ s a -> s{_asStats = a}) . _Default
       . _Coerce

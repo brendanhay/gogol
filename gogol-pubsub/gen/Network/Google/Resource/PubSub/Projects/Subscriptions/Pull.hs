@@ -40,13 +40,13 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.Pull
     , pspPp
     , pspAccessToken
     , pspUploadType
+    , pspPullRequest
     , pspBearerToken
     , pspKey
-    , pspOauthToken
+    , pspOAuthToken
     , pspSubscription
     , pspFields
     , pspCallback
-    , pspAlt
     ) where
 
 import           Network.Google.Prelude
@@ -65,12 +65,13 @@ type ProjectsSubscriptionsPullResource =
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
                        QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
                                QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :>
-                                   Post '[JSON] PullResponse
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON] PullRequest :>
+                                     Post '[JSON] PullResponse
 
 -- | Pulls messages from the server. Returns an empty list if there are no
 -- messages available in the backlog. The server may return UNAVAILABLE if
@@ -86,13 +87,13 @@ data ProjectsSubscriptionsPull' = ProjectsSubscriptionsPull'
     , _pspPp             :: !Bool
     , _pspAccessToken    :: !(Maybe Text)
     , _pspUploadType     :: !(Maybe Text)
+    , _pspPullRequest    :: !PullRequest
     , _pspBearerToken    :: !(Maybe Text)
-    , _pspKey            :: !(Maybe Text)
-    , _pspOauthToken     :: !(Maybe Text)
+    , _pspKey            :: !(Maybe Key)
+    , _pspOAuthToken     :: !(Maybe OAuthToken)
     , _pspSubscription   :: !Text
     , _pspFields         :: !(Maybe Text)
     , _pspCallback       :: !(Maybe Text)
-    , _pspAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsSubscriptionsPull'' with the minimum fields required to make a request.
@@ -113,23 +114,24 @@ data ProjectsSubscriptionsPull' = ProjectsSubscriptionsPull'
 --
 -- * 'pspUploadType'
 --
+-- * 'pspPullRequest'
+--
 -- * 'pspBearerToken'
 --
 -- * 'pspKey'
 --
--- * 'pspOauthToken'
+-- * 'pspOAuthToken'
 --
 -- * 'pspSubscription'
 --
 -- * 'pspFields'
 --
 -- * 'pspCallback'
---
--- * 'pspAlt'
 projectsSubscriptionsPull'
-    :: Text -- ^ 'subscription'
+    :: PullRequest -- ^ 'PullRequest'
+    -> Text -- ^ 'subscription'
     -> ProjectsSubscriptionsPull'
-projectsSubscriptionsPull' pPspSubscription_ =
+projectsSubscriptionsPull' pPspPullRequest_ pPspSubscription_ =
     ProjectsSubscriptionsPull'
     { _pspXgafv = Nothing
     , _pspQuotaUser = Nothing
@@ -138,13 +140,13 @@ projectsSubscriptionsPull' pPspSubscription_ =
     , _pspPp = True
     , _pspAccessToken = Nothing
     , _pspUploadType = Nothing
+    , _pspPullRequest = pPspPullRequest_
     , _pspBearerToken = Nothing
     , _pspKey = Nothing
-    , _pspOauthToken = Nothing
+    , _pspOAuthToken = Nothing
     , _pspSubscription = pPspSubscription_
     , _pspFields = Nothing
     , _pspCallback = Nothing
-    , _pspAlt = "json"
     }
 
 -- | V1 error format.
@@ -186,6 +188,12 @@ pspUploadType
   = lens _pspUploadType
       (\ s a -> s{_pspUploadType = a})
 
+-- | Multipart request metadata.
+pspPullRequest :: Lens' ProjectsSubscriptionsPull' PullRequest
+pspPullRequest
+  = lens _pspPullRequest
+      (\ s a -> s{_pspPullRequest = a})
+
 -- | OAuth bearer token.
 pspBearerToken :: Lens' ProjectsSubscriptionsPull' (Maybe Text)
 pspBearerToken
@@ -195,14 +203,14 @@ pspBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pspKey :: Lens' ProjectsSubscriptionsPull' (Maybe Text)
+pspKey :: Lens' ProjectsSubscriptionsPull' (Maybe Key)
 pspKey = lens _pspKey (\ s a -> s{_pspKey = a})
 
 -- | OAuth 2.0 token for the current user.
-pspOauthToken :: Lens' ProjectsSubscriptionsPull' (Maybe Text)
-pspOauthToken
-  = lens _pspOauthToken
-      (\ s a -> s{_pspOauthToken = a})
+pspOAuthToken :: Lens' ProjectsSubscriptionsPull' (Maybe OAuthToken)
+pspOAuthToken
+  = lens _pspOAuthToken
+      (\ s a -> s{_pspOAuthToken = a})
 
 -- | The subscription from which messages should be pulled.
 pspSubscription :: Lens' ProjectsSubscriptionsPull' Text
@@ -220,9 +228,9 @@ pspCallback :: Lens' ProjectsSubscriptionsPull' (Maybe Text)
 pspCallback
   = lens _pspCallback (\ s a -> s{_pspCallback = a})
 
--- | Data format for response.
-pspAlt :: Lens' ProjectsSubscriptionsPull' Text
-pspAlt = lens _pspAlt (\ s a -> s{_pspAlt = a})
+instance GoogleAuth ProjectsSubscriptionsPull' where
+        authKey = pspKey . _Just
+        authToken = pspOAuthToken . _Just
 
 instance GoogleRequest ProjectsSubscriptionsPull'
          where
@@ -236,11 +244,12 @@ instance GoogleRequest ProjectsSubscriptionsPull'
               _pspUploadType
               _pspBearerToken
               _pspKey
-              _pspOauthToken
+              _pspOAuthToken
               _pspSubscription
               _pspFields
               _pspCallback
-              (Just _pspAlt)
+              (Just AltJSON)
+              _pspPullRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsSubscriptionsPullResource)

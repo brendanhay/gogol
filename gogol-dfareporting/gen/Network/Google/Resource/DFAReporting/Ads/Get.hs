@@ -32,13 +32,12 @@ module Network.Google.Resource.DFAReporting.Ads.Get
     -- * Request Lenses
     , adsdQuotaUser
     , adsdPrettyPrint
-    , adsdUserIp
+    , adsdUserIP
     , adsdProfileId
     , adsdKey
     , adsdId
-    , adsdOauthToken
+    , adsdOAuthToken
     , adsdFields
-    , adsdAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,10 +53,10 @@ type AdsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] Ad
+                         QueryParam "alt" AltJSON :> Get '[JSON] Ad
 
 -- | Gets one ad by ID.
 --
@@ -65,13 +64,12 @@ type AdsGetResource =
 data AdsGet' = AdsGet'
     { _adsdQuotaUser   :: !(Maybe Text)
     , _adsdPrettyPrint :: !Bool
-    , _adsdUserIp      :: !(Maybe Text)
+    , _adsdUserIP      :: !(Maybe Text)
     , _adsdProfileId   :: !Int64
-    , _adsdKey         :: !(Maybe Text)
+    , _adsdKey         :: !(Maybe Key)
     , _adsdId          :: !Int64
-    , _adsdOauthToken  :: !(Maybe Text)
+    , _adsdOAuthToken  :: !(Maybe OAuthToken)
     , _adsdFields      :: !(Maybe Text)
-    , _adsdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdsGet'' with the minimum fields required to make a request.
@@ -82,7 +80,7 @@ data AdsGet' = AdsGet'
 --
 -- * 'adsdPrettyPrint'
 --
--- * 'adsdUserIp'
+-- * 'adsdUserIP'
 --
 -- * 'adsdProfileId'
 --
@@ -90,11 +88,9 @@ data AdsGet' = AdsGet'
 --
 -- * 'adsdId'
 --
--- * 'adsdOauthToken'
+-- * 'adsdOAuthToken'
 --
 -- * 'adsdFields'
---
--- * 'adsdAlt'
 adsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
@@ -103,13 +99,12 @@ adsGet' pAdsdProfileId_ pAdsdId_ =
     AdsGet'
     { _adsdQuotaUser = Nothing
     , _adsdPrettyPrint = True
-    , _adsdUserIp = Nothing
+    , _adsdUserIP = Nothing
     , _adsdProfileId = pAdsdProfileId_
     , _adsdKey = Nothing
     , _adsdId = pAdsdId_
-    , _adsdOauthToken = Nothing
+    , _adsdOAuthToken = Nothing
     , _adsdFields = Nothing
-    , _adsdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -128,9 +123,9 @@ adsdPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-adsdUserIp :: Lens' AdsGet' (Maybe Text)
-adsdUserIp
-  = lens _adsdUserIp (\ s a -> s{_adsdUserIp = a})
+adsdUserIP :: Lens' AdsGet' (Maybe Text)
+adsdUserIP
+  = lens _adsdUserIP (\ s a -> s{_adsdUserIP = a})
 
 -- | User profile ID associated with this request.
 adsdProfileId :: Lens' AdsGet' Int64
@@ -141,7 +136,7 @@ adsdProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-adsdKey :: Lens' AdsGet' (Maybe Text)
+adsdKey :: Lens' AdsGet' (Maybe Key)
 adsdKey = lens _adsdKey (\ s a -> s{_adsdKey = a})
 
 -- | Ad ID.
@@ -149,31 +144,31 @@ adsdId :: Lens' AdsGet' Int64
 adsdId = lens _adsdId (\ s a -> s{_adsdId = a})
 
 -- | OAuth 2.0 token for the current user.
-adsdOauthToken :: Lens' AdsGet' (Maybe Text)
-adsdOauthToken
-  = lens _adsdOauthToken
-      (\ s a -> s{_adsdOauthToken = a})
+adsdOAuthToken :: Lens' AdsGet' (Maybe OAuthToken)
+adsdOAuthToken
+  = lens _adsdOAuthToken
+      (\ s a -> s{_adsdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 adsdFields :: Lens' AdsGet' (Maybe Text)
 adsdFields
   = lens _adsdFields (\ s a -> s{_adsdFields = a})
 
--- | Data format for the response.
-adsdAlt :: Lens' AdsGet' Alt
-adsdAlt = lens _adsdAlt (\ s a -> s{_adsdAlt = a})
+instance GoogleAuth AdsGet' where
+        authKey = adsdKey . _Just
+        authToken = adsdOAuthToken . _Just
 
 instance GoogleRequest AdsGet' where
         type Rs AdsGet' = Ad
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AdsGet'{..}
           = go _adsdQuotaUser (Just _adsdPrettyPrint)
-              _adsdUserIp
+              _adsdUserIP
               _adsdProfileId
               _adsdKey
               _adsdId
-              _adsdOauthToken
+              _adsdOAuthToken
               _adsdFields
-              (Just _adsdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy AdsGetResource) r u

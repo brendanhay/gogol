@@ -35,13 +35,13 @@ module Network.Google.Resource.BigQuery.Datasets.Patch
     -- * Request Lenses
     , dpQuotaUser
     , dpPrettyPrint
-    , dpUserIp
+    , dpDataset
+    , dpUserIP
     , dpKey
     , dpDatasetId
     , dpProjectId
-    , dpOauthToken
+    , dpOAuthToken
     , dpFields
-    , dpAlt
     ) where
 
 import           Network.Google.BigQuery.Types
@@ -57,10 +57,11 @@ type DatasetsPatchResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Patch '[JSON] Dataset
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Dataset :> Patch '[JSON] Dataset
 
 -- | Updates information in an existing dataset. The update method replaces
 -- the entire dataset resource, whereas the patch method only replaces
@@ -71,13 +72,13 @@ type DatasetsPatchResource =
 data DatasetsPatch' = DatasetsPatch'
     { _dpQuotaUser   :: !(Maybe Text)
     , _dpPrettyPrint :: !Bool
-    , _dpUserIp      :: !(Maybe Text)
-    , _dpKey         :: !(Maybe Text)
+    , _dpDataset     :: !Dataset
+    , _dpUserIP      :: !(Maybe Text)
+    , _dpKey         :: !(Maybe Key)
     , _dpDatasetId   :: !Text
     , _dpProjectId   :: !Text
-    , _dpOauthToken  :: !(Maybe Text)
+    , _dpOAuthToken  :: !(Maybe OAuthToken)
     , _dpFields      :: !(Maybe Text)
-    , _dpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetsPatch'' with the minimum fields required to make a request.
@@ -88,7 +89,9 @@ data DatasetsPatch' = DatasetsPatch'
 --
 -- * 'dpPrettyPrint'
 --
--- * 'dpUserIp'
+-- * 'dpDataset'
+--
+-- * 'dpUserIP'
 --
 -- * 'dpKey'
 --
@@ -96,26 +99,25 @@ data DatasetsPatch' = DatasetsPatch'
 --
 -- * 'dpProjectId'
 --
--- * 'dpOauthToken'
+-- * 'dpOAuthToken'
 --
 -- * 'dpFields'
---
--- * 'dpAlt'
 datasetsPatch'
-    :: Text -- ^ 'datasetId'
+    :: Dataset -- ^ 'Dataset'
+    -> Text -- ^ 'datasetId'
     -> Text -- ^ 'projectId'
     -> DatasetsPatch'
-datasetsPatch' pDpDatasetId_ pDpProjectId_ =
+datasetsPatch' pDpDataset_ pDpDatasetId_ pDpProjectId_ =
     DatasetsPatch'
     { _dpQuotaUser = Nothing
     , _dpPrettyPrint = True
-    , _dpUserIp = Nothing
+    , _dpDataset = pDpDataset_
+    , _dpUserIP = Nothing
     , _dpKey = Nothing
     , _dpDatasetId = pDpDatasetId_
     , _dpProjectId = pDpProjectId_
-    , _dpOauthToken = Nothing
+    , _dpOAuthToken = Nothing
     , _dpFields = Nothing
-    , _dpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -131,15 +133,20 @@ dpPrettyPrint
   = lens _dpPrettyPrint
       (\ s a -> s{_dpPrettyPrint = a})
 
+-- | Multipart request metadata.
+dpDataset :: Lens' DatasetsPatch' Dataset
+dpDataset
+  = lens _dpDataset (\ s a -> s{_dpDataset = a})
+
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-dpUserIp :: Lens' DatasetsPatch' (Maybe Text)
-dpUserIp = lens _dpUserIp (\ s a -> s{_dpUserIp = a})
+dpUserIP :: Lens' DatasetsPatch' (Maybe Text)
+dpUserIP = lens _dpUserIP (\ s a -> s{_dpUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dpKey :: Lens' DatasetsPatch' (Maybe Text)
+dpKey :: Lens' DatasetsPatch' (Maybe Key)
 dpKey = lens _dpKey (\ s a -> s{_dpKey = a})
 
 -- | Dataset ID of the dataset being updated
@@ -153,29 +160,30 @@ dpProjectId
   = lens _dpProjectId (\ s a -> s{_dpProjectId = a})
 
 -- | OAuth 2.0 token for the current user.
-dpOauthToken :: Lens' DatasetsPatch' (Maybe Text)
-dpOauthToken
-  = lens _dpOauthToken (\ s a -> s{_dpOauthToken = a})
+dpOAuthToken :: Lens' DatasetsPatch' (Maybe OAuthToken)
+dpOAuthToken
+  = lens _dpOAuthToken (\ s a -> s{_dpOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 dpFields :: Lens' DatasetsPatch' (Maybe Text)
 dpFields = lens _dpFields (\ s a -> s{_dpFields = a})
 
--- | Data format for the response.
-dpAlt :: Lens' DatasetsPatch' Alt
-dpAlt = lens _dpAlt (\ s a -> s{_dpAlt = a})
+instance GoogleAuth DatasetsPatch' where
+        authKey = dpKey . _Just
+        authToken = dpOAuthToken . _Just
 
 instance GoogleRequest DatasetsPatch' where
         type Rs DatasetsPatch' = Dataset
         request = requestWithRoute defReq bigQueryURL
         requestWithRoute r u DatasetsPatch'{..}
-          = go _dpQuotaUser (Just _dpPrettyPrint) _dpUserIp
+          = go _dpQuotaUser (Just _dpPrettyPrint) _dpUserIP
               _dpKey
               _dpDatasetId
               _dpProjectId
-              _dpOauthToken
+              _dpOAuthToken
               _dpFields
-              (Just _dpAlt)
+              (Just AltJSON)
+              _dpDataset
           where go
                   = clientWithRoute
                       (Proxy :: Proxy DatasetsPatchResource)

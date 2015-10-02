@@ -33,15 +33,14 @@ module Network.Google.Resource.Analytics.Management.ProfileFilterLinks.List
     , mpfllQuotaUser
     , mpfllPrettyPrint
     , mpfllWebPropertyId
-    , mpfllUserIp
+    , mpfllUserIP
     , mpfllProfileId
     , mpfllAccountId
     , mpfllKey
-    , mpfllOauthToken
+    , mpfllOAuthToken
     , mpfllStartIndex
     , mpfllMaxResults
     , mpfllFields
-    , mpfllAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -61,12 +60,12 @@ type ManagementProfileFilterLinksListResource =
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "start-index" Int32 :>
                                  QueryParam "max-results" Int32 :>
                                    QueryParam "fields" Text :>
-                                     QueryParam "alt" Alt :>
+                                     QueryParam "alt" AltJSON :>
                                        Get '[JSON] ProfileFilterLinks
 
 -- | Lists all profile filter links for a profile.
@@ -76,15 +75,14 @@ data ManagementProfileFilterLinksList' = ManagementProfileFilterLinksList'
     { _mpfllQuotaUser     :: !(Maybe Text)
     , _mpfllPrettyPrint   :: !Bool
     , _mpfllWebPropertyId :: !Text
-    , _mpfllUserIp        :: !(Maybe Text)
+    , _mpfllUserIP        :: !(Maybe Text)
     , _mpfllProfileId     :: !Text
     , _mpfllAccountId     :: !Text
-    , _mpfllKey           :: !(Maybe Text)
-    , _mpfllOauthToken    :: !(Maybe Text)
+    , _mpfllKey           :: !(Maybe Key)
+    , _mpfllOAuthToken    :: !(Maybe OAuthToken)
     , _mpfllStartIndex    :: !(Maybe Int32)
     , _mpfllMaxResults    :: !(Maybe Int32)
     , _mpfllFields        :: !(Maybe Text)
-    , _mpfllAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProfileFilterLinksList'' with the minimum fields required to make a request.
@@ -97,7 +95,7 @@ data ManagementProfileFilterLinksList' = ManagementProfileFilterLinksList'
 --
 -- * 'mpfllWebPropertyId'
 --
--- * 'mpfllUserIp'
+-- * 'mpfllUserIP'
 --
 -- * 'mpfllProfileId'
 --
@@ -105,15 +103,13 @@ data ManagementProfileFilterLinksList' = ManagementProfileFilterLinksList'
 --
 -- * 'mpfllKey'
 --
--- * 'mpfllOauthToken'
+-- * 'mpfllOAuthToken'
 --
 -- * 'mpfllStartIndex'
 --
 -- * 'mpfllMaxResults'
 --
 -- * 'mpfllFields'
---
--- * 'mpfllAlt'
 managementProfileFilterLinksList'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
@@ -124,15 +120,14 @@ managementProfileFilterLinksList' pMpfllWebPropertyId_ pMpfllProfileId_ pMpfllAc
     { _mpfllQuotaUser = Nothing
     , _mpfllPrettyPrint = False
     , _mpfllWebPropertyId = pMpfllWebPropertyId_
-    , _mpfllUserIp = Nothing
+    , _mpfllUserIP = Nothing
     , _mpfllProfileId = pMpfllProfileId_
     , _mpfllAccountId = pMpfllAccountId_
     , _mpfllKey = Nothing
-    , _mpfllOauthToken = Nothing
+    , _mpfllOAuthToken = Nothing
     , _mpfllStartIndex = Nothing
     , _mpfllMaxResults = Nothing
     , _mpfllFields = Nothing
-    , _mpfllAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -159,9 +154,9 @@ mpfllWebPropertyId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mpfllUserIp :: Lens' ManagementProfileFilterLinksList' (Maybe Text)
-mpfllUserIp
-  = lens _mpfllUserIp (\ s a -> s{_mpfllUserIp = a})
+mpfllUserIP :: Lens' ManagementProfileFilterLinksList' (Maybe Text)
+mpfllUserIP
+  = lens _mpfllUserIP (\ s a -> s{_mpfllUserIP = a})
 
 -- | Profile ID to retrieve filter links for. Can either be a specific
 -- profile ID or \'~all\', which refers to all the profiles that user has
@@ -180,14 +175,14 @@ mpfllAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mpfllKey :: Lens' ManagementProfileFilterLinksList' (Maybe Text)
+mpfllKey :: Lens' ManagementProfileFilterLinksList' (Maybe Key)
 mpfllKey = lens _mpfllKey (\ s a -> s{_mpfllKey = a})
 
 -- | OAuth 2.0 token for the current user.
-mpfllOauthToken :: Lens' ManagementProfileFilterLinksList' (Maybe Text)
-mpfllOauthToken
-  = lens _mpfllOauthToken
-      (\ s a -> s{_mpfllOauthToken = a})
+mpfllOAuthToken :: Lens' ManagementProfileFilterLinksList' (Maybe OAuthToken)
+mpfllOAuthToken
+  = lens _mpfllOAuthToken
+      (\ s a -> s{_mpfllOAuthToken = a})
 
 -- | An index of the first entity to retrieve. Use this parameter as a
 -- pagination mechanism along with the max-results parameter.
@@ -207,9 +202,10 @@ mpfllFields :: Lens' ManagementProfileFilterLinksList' (Maybe Text)
 mpfllFields
   = lens _mpfllFields (\ s a -> s{_mpfllFields = a})
 
--- | Data format for the response.
-mpfllAlt :: Lens' ManagementProfileFilterLinksList' Alt
-mpfllAlt = lens _mpfllAlt (\ s a -> s{_mpfllAlt = a})
+instance GoogleAuth ManagementProfileFilterLinksList'
+         where
+        authKey = mpfllKey . _Just
+        authToken = mpfllOAuthToken . _Just
 
 instance GoogleRequest
          ManagementProfileFilterLinksList' where
@@ -220,15 +216,15 @@ instance GoogleRequest
           ManagementProfileFilterLinksList'{..}
           = go _mpfllQuotaUser (Just _mpfllPrettyPrint)
               _mpfllWebPropertyId
-              _mpfllUserIp
+              _mpfllUserIP
               _mpfllProfileId
               _mpfllAccountId
               _mpfllKey
-              _mpfllOauthToken
+              _mpfllOAuthToken
               _mpfllStartIndex
               _mpfllMaxResults
               _mpfllFields
-              (Just _mpfllAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

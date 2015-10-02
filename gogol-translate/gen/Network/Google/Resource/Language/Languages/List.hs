@@ -32,12 +32,11 @@ module Network.Google.Resource.Language.Languages.List
     -- * Request Lenses
     , llQuotaUser
     , llPrettyPrint
-    , llUserIp
+    , llUserIP
     , llKey
-    , llOauthToken
+    , llOAuthToken
     , llTarget
     , llFields
-    , llAlt
     ) where
 
 import           Network.Google.Prelude
@@ -51,11 +50,11 @@ type LanguagesListResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "target" Text :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :>
+                       QueryParam "alt" AltJSON :>
                          Get '[JSON] LanguagesListResponse
 
 -- | List the source\/target languages supported by the API
@@ -64,12 +63,11 @@ type LanguagesListResource =
 data LanguagesList' = LanguagesList'
     { _llQuotaUser   :: !(Maybe Text)
     , _llPrettyPrint :: !Bool
-    , _llUserIp      :: !(Maybe Text)
-    , _llKey         :: !(Maybe Text)
-    , _llOauthToken  :: !(Maybe Text)
+    , _llUserIP      :: !(Maybe Text)
+    , _llKey         :: !(Maybe Key)
+    , _llOAuthToken  :: !(Maybe OAuthToken)
     , _llTarget      :: !(Maybe Text)
     , _llFields      :: !(Maybe Text)
-    , _llAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LanguagesList'' with the minimum fields required to make a request.
@@ -80,29 +78,26 @@ data LanguagesList' = LanguagesList'
 --
 -- * 'llPrettyPrint'
 --
--- * 'llUserIp'
+-- * 'llUserIP'
 --
 -- * 'llKey'
 --
--- * 'llOauthToken'
+-- * 'llOAuthToken'
 --
 -- * 'llTarget'
 --
 -- * 'llFields'
---
--- * 'llAlt'
 languagesList'
     :: LanguagesList'
 languagesList' =
     LanguagesList'
     { _llQuotaUser = Nothing
     , _llPrettyPrint = True
-    , _llUserIp = Nothing
+    , _llUserIP = Nothing
     , _llKey = Nothing
-    , _llOauthToken = Nothing
+    , _llOAuthToken = Nothing
     , _llTarget = Nothing
     , _llFields = Nothing
-    , _llAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,19 +115,19 @@ llPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-llUserIp :: Lens' LanguagesList' (Maybe Text)
-llUserIp = lens _llUserIp (\ s a -> s{_llUserIp = a})
+llUserIP :: Lens' LanguagesList' (Maybe Text)
+llUserIP = lens _llUserIP (\ s a -> s{_llUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-llKey :: Lens' LanguagesList' (Maybe Text)
+llKey :: Lens' LanguagesList' (Maybe Key)
 llKey = lens _llKey (\ s a -> s{_llKey = a})
 
 -- | OAuth 2.0 token for the current user.
-llOauthToken :: Lens' LanguagesList' (Maybe Text)
-llOauthToken
-  = lens _llOauthToken (\ s a -> s{_llOauthToken = a})
+llOAuthToken :: Lens' LanguagesList' (Maybe OAuthToken)
+llOAuthToken
+  = lens _llOAuthToken (\ s a -> s{_llOAuthToken = a})
 
 -- | the language and collation in which the localized results should be
 -- returned
@@ -143,20 +138,20 @@ llTarget = lens _llTarget (\ s a -> s{_llTarget = a})
 llFields :: Lens' LanguagesList' (Maybe Text)
 llFields = lens _llFields (\ s a -> s{_llFields = a})
 
--- | Data format for the response.
-llAlt :: Lens' LanguagesList' Alt
-llAlt = lens _llAlt (\ s a -> s{_llAlt = a})
+instance GoogleAuth LanguagesList' where
+        authKey = llKey . _Just
+        authToken = llOAuthToken . _Just
 
 instance GoogleRequest LanguagesList' where
         type Rs LanguagesList' = LanguagesListResponse
         request = requestWithRoute defReq translateURL
         requestWithRoute r u LanguagesList'{..}
-          = go _llQuotaUser (Just _llPrettyPrint) _llUserIp
+          = go _llQuotaUser (Just _llPrettyPrint) _llUserIP
               _llKey
-              _llOauthToken
+              _llOAuthToken
               _llTarget
               _llFields
-              (Just _llAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy LanguagesListResource)

@@ -32,12 +32,11 @@ module Network.Google.Resource.AdExchangeBuyer.BillingInfo.Get
     -- * Request Lenses
     , bigQuotaUser
     , bigPrettyPrint
-    , bigUserIp
+    , bigUserIP
     , bigAccountId
     , bigKey
-    , bigOauthToken
+    , bigOAuthToken
     , bigFields
-    , bigAlt
     ) where
 
 import           Network.Google.AdExchangeBuyer.Types
@@ -51,10 +50,10 @@ type BillingInfoGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Get '[JSON] BillingInfo
+                     QueryParam "alt" AltJSON :> Get '[JSON] BillingInfo
 
 -- | Returns the billing information for one account specified by account ID.
 --
@@ -62,12 +61,11 @@ type BillingInfoGetResource =
 data BillingInfoGet' = BillingInfoGet'
     { _bigQuotaUser   :: !(Maybe Text)
     , _bigPrettyPrint :: !Bool
-    , _bigUserIp      :: !(Maybe Text)
+    , _bigUserIP      :: !(Maybe Text)
     , _bigAccountId   :: !Int32
-    , _bigKey         :: !(Maybe Text)
-    , _bigOauthToken  :: !(Maybe Text)
+    , _bigKey         :: !(Maybe Key)
+    , _bigOAuthToken  :: !(Maybe OAuthToken)
     , _bigFields      :: !(Maybe Text)
-    , _bigAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BillingInfoGet'' with the minimum fields required to make a request.
@@ -78,17 +76,15 @@ data BillingInfoGet' = BillingInfoGet'
 --
 -- * 'bigPrettyPrint'
 --
--- * 'bigUserIp'
+-- * 'bigUserIP'
 --
 -- * 'bigAccountId'
 --
 -- * 'bigKey'
 --
--- * 'bigOauthToken'
+-- * 'bigOAuthToken'
 --
 -- * 'bigFields'
---
--- * 'bigAlt'
 billingInfoGet'
     :: Int32 -- ^ 'accountId'
     -> BillingInfoGet'
@@ -96,12 +92,11 @@ billingInfoGet' pBigAccountId_ =
     BillingInfoGet'
     { _bigQuotaUser = Nothing
     , _bigPrettyPrint = True
-    , _bigUserIp = Nothing
+    , _bigUserIP = Nothing
     , _bigAccountId = pBigAccountId_
     , _bigKey = Nothing
-    , _bigOauthToken = Nothing
+    , _bigOAuthToken = Nothing
     , _bigFields = Nothing
-    , _bigAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -119,9 +114,9 @@ bigPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-bigUserIp :: Lens' BillingInfoGet' (Maybe Text)
-bigUserIp
-  = lens _bigUserIp (\ s a -> s{_bigUserIp = a})
+bigUserIP :: Lens' BillingInfoGet' (Maybe Text)
+bigUserIP
+  = lens _bigUserIP (\ s a -> s{_bigUserIP = a})
 
 -- | The account id.
 bigAccountId :: Lens' BillingInfoGet' Int32
@@ -131,34 +126,34 @@ bigAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-bigKey :: Lens' BillingInfoGet' (Maybe Text)
+bigKey :: Lens' BillingInfoGet' (Maybe Key)
 bigKey = lens _bigKey (\ s a -> s{_bigKey = a})
 
 -- | OAuth 2.0 token for the current user.
-bigOauthToken :: Lens' BillingInfoGet' (Maybe Text)
-bigOauthToken
-  = lens _bigOauthToken
-      (\ s a -> s{_bigOauthToken = a})
+bigOAuthToken :: Lens' BillingInfoGet' (Maybe OAuthToken)
+bigOAuthToken
+  = lens _bigOAuthToken
+      (\ s a -> s{_bigOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 bigFields :: Lens' BillingInfoGet' (Maybe Text)
 bigFields
   = lens _bigFields (\ s a -> s{_bigFields = a})
 
--- | Data format for the response.
-bigAlt :: Lens' BillingInfoGet' Alt
-bigAlt = lens _bigAlt (\ s a -> s{_bigAlt = a})
+instance GoogleAuth BillingInfoGet' where
+        authKey = bigKey . _Just
+        authToken = bigOAuthToken . _Just
 
 instance GoogleRequest BillingInfoGet' where
         type Rs BillingInfoGet' = BillingInfo
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u BillingInfoGet'{..}
-          = go _bigQuotaUser (Just _bigPrettyPrint) _bigUserIp
+          = go _bigQuotaUser (Just _bigPrettyPrint) _bigUserIP
               _bigAccountId
               _bigKey
-              _bigOauthToken
+              _bigOAuthToken
               _bigFields
-              (Just _bigAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy BillingInfoGetResource)

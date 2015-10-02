@@ -34,15 +34,15 @@ module Network.Google.Resource.Calendar.CalendarList.Watch
     , clwQuotaUser
     , clwPrettyPrint
     , clwMinAccessRole
-    , clwUserIp
+    , clwUserIP
+    , clwChannel
     , clwShowDeleted
     , clwShowHidden
     , clwKey
     , clwPageToken
-    , clwOauthToken
+    , clwOAuthToken
     , clwMaxResults
     , clwFields
-    , clwAlt
     ) where
 
 import           Network.Google.AppsCalendar.Types
@@ -64,13 +64,14 @@ type CalendarListWatchResource =
                      QueryParam "userIp" Text :>
                        QueryParam "showDeleted" Bool :>
                          QueryParam "showHidden" Bool :>
-                           QueryParam "key" Text :>
+                           QueryParam "key" Key :>
                              QueryParam "pageToken" Text :>
-                               QueryParam "oauth_token" Text :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "maxResults" Int32 :>
                                    QueryParam "fields" Text :>
-                                     QueryParam "alt" Alt :>
-                                       Post '[JSON] Channel
+                                     QueryParam "alt" AltJSON :>
+                                       ReqBody '[JSON] Channel :>
+                                         Post '[JSON] Channel
 
 -- | Watch for changes to CalendarList resources.
 --
@@ -80,15 +81,15 @@ data CalendarListWatch' = CalendarListWatch'
     , _clwQuotaUser     :: !(Maybe Text)
     , _clwPrettyPrint   :: !Bool
     , _clwMinAccessRole :: !(Maybe CalendarCalendarListWatchMinAccessRole)
-    , _clwUserIp        :: !(Maybe Text)
+    , _clwUserIP        :: !(Maybe Text)
+    , _clwChannel       :: !Channel
     , _clwShowDeleted   :: !(Maybe Bool)
     , _clwShowHidden    :: !(Maybe Bool)
-    , _clwKey           :: !(Maybe Text)
+    , _clwKey           :: !(Maybe Key)
     , _clwPageToken     :: !(Maybe Text)
-    , _clwOauthToken    :: !(Maybe Text)
+    , _clwOAuthToken    :: !(Maybe OAuthToken)
     , _clwMaxResults    :: !(Maybe Int32)
     , _clwFields        :: !(Maybe Text)
-    , _clwAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CalendarListWatch'' with the minimum fields required to make a request.
@@ -103,7 +104,9 @@ data CalendarListWatch' = CalendarListWatch'
 --
 -- * 'clwMinAccessRole'
 --
--- * 'clwUserIp'
+-- * 'clwUserIP'
+--
+-- * 'clwChannel'
 --
 -- * 'clwShowDeleted'
 --
@@ -113,30 +116,29 @@ data CalendarListWatch' = CalendarListWatch'
 --
 -- * 'clwPageToken'
 --
--- * 'clwOauthToken'
+-- * 'clwOAuthToken'
 --
 -- * 'clwMaxResults'
 --
 -- * 'clwFields'
---
--- * 'clwAlt'
 calendarListWatch'
-    :: CalendarListWatch'
-calendarListWatch' =
+    :: Channel -- ^ 'Channel'
+    -> CalendarListWatch'
+calendarListWatch' pClwChannel_ =
     CalendarListWatch'
     { _clwSyncToken = Nothing
     , _clwQuotaUser = Nothing
     , _clwPrettyPrint = True
     , _clwMinAccessRole = Nothing
-    , _clwUserIp = Nothing
+    , _clwUserIP = Nothing
+    , _clwChannel = pClwChannel_
     , _clwShowDeleted = Nothing
     , _clwShowHidden = Nothing
     , _clwKey = Nothing
     , _clwPageToken = Nothing
-    , _clwOauthToken = Nothing
+    , _clwOAuthToken = Nothing
     , _clwMaxResults = Nothing
     , _clwFields = Nothing
-    , _clwAlt = JSON
     }
 
 -- | Token obtained from the nextSyncToken field returned on the last page of
@@ -178,9 +180,14 @@ clwMinAccessRole
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-clwUserIp :: Lens' CalendarListWatch' (Maybe Text)
-clwUserIp
-  = lens _clwUserIp (\ s a -> s{_clwUserIp = a})
+clwUserIP :: Lens' CalendarListWatch' (Maybe Text)
+clwUserIP
+  = lens _clwUserIP (\ s a -> s{_clwUserIP = a})
+
+-- | Multipart request metadata.
+clwChannel :: Lens' CalendarListWatch' Channel
+clwChannel
+  = lens _clwChannel (\ s a -> s{_clwChannel = a})
 
 -- | Whether to include deleted calendar list entries in the result.
 -- Optional. The default is False.
@@ -198,7 +205,7 @@ clwShowHidden
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-clwKey :: Lens' CalendarListWatch' (Maybe Text)
+clwKey :: Lens' CalendarListWatch' (Maybe Key)
 clwKey = lens _clwKey (\ s a -> s{_clwKey = a})
 
 -- | Token specifying which result page to return. Optional.
@@ -207,10 +214,10 @@ clwPageToken
   = lens _clwPageToken (\ s a -> s{_clwPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-clwOauthToken :: Lens' CalendarListWatch' (Maybe Text)
-clwOauthToken
-  = lens _clwOauthToken
-      (\ s a -> s{_clwOauthToken = a})
+clwOAuthToken :: Lens' CalendarListWatch' (Maybe OAuthToken)
+clwOAuthToken
+  = lens _clwOAuthToken
+      (\ s a -> s{_clwOAuthToken = a})
 
 -- | Maximum number of entries returned on one result page. By default the
 -- value is 100 entries. The page size can never be larger than 250
@@ -225,9 +232,9 @@ clwFields :: Lens' CalendarListWatch' (Maybe Text)
 clwFields
   = lens _clwFields (\ s a -> s{_clwFields = a})
 
--- | Data format for the response.
-clwAlt :: Lens' CalendarListWatch' Alt
-clwAlt = lens _clwAlt (\ s a -> s{_clwAlt = a})
+instance GoogleAuth CalendarListWatch' where
+        authKey = clwKey . _Just
+        authToken = clwOAuthToken . _Just
 
 instance GoogleRequest CalendarListWatch' where
         type Rs CalendarListWatch' = Channel
@@ -236,15 +243,16 @@ instance GoogleRequest CalendarListWatch' where
           = go _clwSyncToken _clwQuotaUser
               (Just _clwPrettyPrint)
               _clwMinAccessRole
-              _clwUserIp
+              _clwUserIP
               _clwShowDeleted
               _clwShowHidden
               _clwKey
               _clwPageToken
-              _clwOauthToken
+              _clwOAuthToken
               _clwMaxResults
               _clwFields
-              (Just _clwAlt)
+              (Just AltJSON)
+              _clwChannel
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CalendarListWatchResource)

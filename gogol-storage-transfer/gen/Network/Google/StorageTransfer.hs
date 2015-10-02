@@ -27,40 +27,40 @@ module Network.Google.StorageTransfer
 
     -- * REST Resources
 
-    -- ** StoragetransferGetGoogleServiceAccount
+    -- ** StorageTransferGetGoogleServiceAccount
     , module Network.Google.Resource.StorageTransfer.GetGoogleServiceAccount
 
-    -- ** StoragetransferGoogleServiceAccountsGet
+    -- ** StorageTransferGoogleServiceAccountsGet
     , module Network.Google.Resource.StorageTransfer.GoogleServiceAccounts.Get
 
-    -- ** StoragetransferTransferJobsCreate
+    -- ** StorageTransferTransferJobsCreate
     , module Network.Google.Resource.StorageTransfer.TransferJobs.Create
 
-    -- ** StoragetransferTransferJobsGet
+    -- ** StorageTransferTransferJobsGet
     , module Network.Google.Resource.StorageTransfer.TransferJobs.Get
 
-    -- ** StoragetransferTransferJobsList
+    -- ** StorageTransferTransferJobsList
     , module Network.Google.Resource.StorageTransfer.TransferJobs.List
 
-    -- ** StoragetransferTransferJobsPatch
+    -- ** StorageTransferTransferJobsPatch
     , module Network.Google.Resource.StorageTransfer.TransferJobs.Patch
 
-    -- ** StoragetransferTransferOperationsCancel
+    -- ** StorageTransferTransferOperationsCancel
     , module Network.Google.Resource.StorageTransfer.TransferOperations.Cancel
 
-    -- ** StoragetransferTransferOperationsDelete
+    -- ** StorageTransferTransferOperationsDelete
     , module Network.Google.Resource.StorageTransfer.TransferOperations.Delete
 
-    -- ** StoragetransferTransferOperationsGet
+    -- ** StorageTransferTransferOperationsGet
     , module Network.Google.Resource.StorageTransfer.TransferOperations.Get
 
-    -- ** StoragetransferTransferOperationsList
+    -- ** StorageTransferTransferOperationsList
     , module Network.Google.Resource.StorageTransfer.TransferOperations.List
 
-    -- ** StoragetransferTransferOperationsPause
+    -- ** StorageTransferTransferOperationsPause
     , module Network.Google.Resource.StorageTransfer.TransferOperations.Pause
 
-    -- ** StoragetransferTransferOperationsResume
+    -- ** StorageTransferTransferOperationsResume
     , module Network.Google.Resource.StorageTransfer.TransferOperations.Resume
 
     -- * Types
@@ -191,12 +191,12 @@ module Network.Google.StorageTransfer
     -- ** HTTPData
     , HTTPData
     , hTTPData
-    , httpdListUrl
+    , httpdListURL
 
     -- ** ErrorLogEntry
     , ErrorLogEntry
     , errorLogEntry
-    , eleUrl
+    , eleURL
     , eleErrorDetails
 
     -- ** TimeOfDay
@@ -232,7 +232,7 @@ module Network.Google.StorageTransfer
     , transferSpec
     , tsGcsDataSource
     , tsObjectConditions
-    , tsHttpDataSource
+    , tsHTTPDataSource
     , tsAwsS3DataSource
     , tsGcsDataSink
     , tsTransferOptions

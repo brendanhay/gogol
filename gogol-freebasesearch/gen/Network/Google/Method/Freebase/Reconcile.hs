@@ -33,16 +33,15 @@ module Network.Google.Method.Freebase.Reconcile
     , rQuotaUser
     , rPrettyPrint
     , rKind
-    , rUserIp
+    , rUserIP
     , rLang
     , rConfidence
     , rKey
     , rName
     , rLimit
     , rProp
-    , rOauthToken
+    , rOAuthToken
     , rFields
-    , rAlt
     ) where
 
 import           Network.Google.FreebaseSearch.Types
@@ -58,13 +57,14 @@ type ReconcileMethod =
              QueryParam "userIp" Text :>
                QueryParams "lang" Text :>
                  QueryParam "confidence" Float :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "name" Text :>
                        QueryParam "limit" Int32 :>
                          QueryParams "prop" Text :>
-                           QueryParam "oauth_token" Text :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :> Get '[JSON] ReconcileGet
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] ReconcileGet
 
 -- | Reconcile entities to Freebase open data.
 --
@@ -73,16 +73,15 @@ data Reconcile' = Reconcile'
     { _rQuotaUser   :: !(Maybe Text)
     , _rPrettyPrint :: !Bool
     , _rKind        :: !(Maybe Text)
-    , _rUserIp      :: !(Maybe Text)
+    , _rUserIP      :: !(Maybe Text)
     , _rLang        :: !(Maybe Text)
     , _rConfidence  :: !Float
-    , _rKey         :: !(Maybe Text)
+    , _rKey         :: !(Maybe Key)
     , _rName        :: !(Maybe Text)
     , _rLimit       :: !Int32
     , _rProp        :: !(Maybe Text)
-    , _rOauthToken  :: !(Maybe Text)
+    , _rOAuthToken  :: !(Maybe OAuthToken)
     , _rFields      :: !(Maybe Text)
-    , _rAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Reconcile'' with the minimum fields required to make a request.
@@ -95,7 +94,7 @@ data Reconcile' = Reconcile'
 --
 -- * 'rKind'
 --
--- * 'rUserIp'
+-- * 'rUserIP'
 --
 -- * 'rLang'
 --
@@ -109,11 +108,9 @@ data Reconcile' = Reconcile'
 --
 -- * 'rProp'
 --
--- * 'rOauthToken'
+-- * 'rOAuthToken'
 --
 -- * 'rFields'
---
--- * 'rAlt'
 reconcile'
     :: Reconcile'
 reconcile' =
@@ -121,16 +118,15 @@ reconcile' =
     { _rQuotaUser = Nothing
     , _rPrettyPrint = True
     , _rKind = Nothing
-    , _rUserIp = Nothing
+    , _rUserIP = Nothing
     , _rLang = Nothing
     , _rConfidence = 0.99
     , _rKey = Nothing
     , _rName = Nothing
     , _rLimit = 3
     , _rProp = Nothing
-    , _rOauthToken = Nothing
+    , _rOAuthToken = Nothing
     , _rFields = Nothing
-    , _rAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -151,8 +147,8 @@ rKind = lens _rKind (\ s a -> s{_rKind = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rUserIp :: Lens' Reconcile' (Maybe Text)
-rUserIp = lens _rUserIp (\ s a -> s{_rUserIp = a})
+rUserIP :: Lens' Reconcile' (Maybe Text)
+rUserIP = lens _rUserIP (\ s a -> s{_rUserIP = a})
 
 -- | Languages for names and values. First language is used for display.
 -- Default is \'en\'.
@@ -167,7 +163,7 @@ rConfidence
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rKey :: Lens' Reconcile' (Maybe Text)
+rKey :: Lens' Reconcile' (Maybe Key)
 rKey = lens _rKey (\ s a -> s{_rKey = a})
 
 -- | Name of entity.
@@ -183,32 +179,32 @@ rProp :: Lens' Reconcile' (Maybe Text)
 rProp = lens _rProp (\ s a -> s{_rProp = a})
 
 -- | OAuth 2.0 token for the current user.
-rOauthToken :: Lens' Reconcile' (Maybe Text)
-rOauthToken
-  = lens _rOauthToken (\ s a -> s{_rOauthToken = a})
+rOAuthToken :: Lens' Reconcile' (Maybe OAuthToken)
+rOAuthToken
+  = lens _rOAuthToken (\ s a -> s{_rOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 rFields :: Lens' Reconcile' (Maybe Text)
 rFields = lens _rFields (\ s a -> s{_rFields = a})
 
--- | Data format for the response.
-rAlt :: Lens' Reconcile' Alt
-rAlt = lens _rAlt (\ s a -> s{_rAlt = a})
+instance GoogleAuth Reconcile' where
+        authKey = rKey . _Just
+        authToken = rOAuthToken . _Just
 
 instance GoogleRequest Reconcile' where
         type Rs Reconcile' = ReconcileGet
         request = requestWithRoute defReq freebaseSearchURL
         requestWithRoute r u Reconcile'{..}
-          = go _rQuotaUser (Just _rPrettyPrint) _rKind _rUserIp
+          = go _rQuotaUser (Just _rPrettyPrint) _rKind _rUserIP
               _rLang
               (Just _rConfidence)
               _rKey
               _rName
               (Just _rLimit)
               _rProp
-              _rOauthToken
+              _rOAuthToken
               _rFields
-              (Just _rAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy ReconcileMethod) r
                       u

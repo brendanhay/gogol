@@ -548,7 +548,7 @@ instance ToJSON GroupItem where
 -- /See:/ 'batchReportDefinitionList' smart constructor.
 data BatchReportDefinitionList = BatchReportDefinitionList
     { _brdlKind  :: !Text
-    , _brdlItems :: !(Maybe [Maybe BatchReportDefinition])
+    , _brdlItems :: !(Maybe [BatchReportDefinition])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BatchReportDefinitionList' with the minimum fields required to make a request.
@@ -574,7 +574,7 @@ brdlKind = lens _brdlKind (\ s a -> s{_brdlKind = a})
 
 -- | A list of batchReportDefinition resources that match the request
 -- criteria.
-brdlItems :: Lens' BatchReportDefinitionList [Maybe BatchReportDefinition]
+brdlItems :: Lens' BatchReportDefinitionList [BatchReportDefinition]
 brdlItems
   = lens _brdlItems (\ s a -> s{_brdlItems = a}) .
       _Default
@@ -659,7 +659,7 @@ instance ToJSON ResultTableColumnHeaders where
 -- /See:/ 'batchReportList' smart constructor.
 data BatchReportList = BatchReportList
     { _brlKind  :: !Text
-    , _brlItems :: !(Maybe [Maybe BatchReport])
+    , _brlItems :: !(Maybe [BatchReport])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BatchReportList' with the minimum fields required to make a request.
@@ -684,7 +684,7 @@ brlKind :: Lens' BatchReportList Text
 brlKind = lens _brlKind (\ s a -> s{_brlKind = a})
 
 -- | A list of batchReport resources that match the request criteria.
-brlItems :: Lens' BatchReportList [Maybe BatchReport]
+brlItems :: Lens' BatchReportList [BatchReport]
 brlItems
   = lens _brlItems (\ s a -> s{_brlItems = a}) .
       _Default
@@ -762,7 +762,7 @@ instance ToJSON BatchReportTimeSpan where
 data GroupItemListResponse = GroupItemListResponse
     { _gilrEtag  :: !(Maybe Text)
     , _gilrKind  :: !Text
-    , _gilrItems :: !(Maybe [Maybe GroupItem])
+    , _gilrItems :: !(Maybe [GroupItem])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupItemListResponse' with the minimum fields required to make a request.
@@ -789,7 +789,7 @@ gilrEtag = lens _gilrEtag (\ s a -> s{_gilrEtag = a})
 gilrKind :: Lens' GroupItemListResponse Text
 gilrKind = lens _gilrKind (\ s a -> s{_gilrKind = a})
 
-gilrItems :: Lens' GroupItemListResponse [Maybe GroupItem]
+gilrItems :: Lens' GroupItemListResponse [GroupItem]
 gilrItems
   = lens _gilrItems (\ s a -> s{_gilrItems = a}) .
       _Default
@@ -816,7 +816,7 @@ instance ToJSON GroupItemListResponse where
 -- /See:/ 'batchReportOutputs' smart constructor.
 data BatchReportOutputs = BatchReportOutputs
     { _broFormat      :: !(Maybe Text)
-    , _broDownloadUrl :: !(Maybe Text)
+    , _broDownloadURL :: !(Maybe Text)
     , _broType        :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -826,7 +826,7 @@ data BatchReportOutputs = BatchReportOutputs
 --
 -- * 'broFormat'
 --
--- * 'broDownloadUrl'
+-- * 'broDownloadURL'
 --
 -- * 'broType'
 batchReportOutputs
@@ -834,7 +834,7 @@ batchReportOutputs
 batchReportOutputs =
     BatchReportOutputs
     { _broFormat = Nothing
-    , _broDownloadUrl = Nothing
+    , _broDownloadURL = Nothing
     , _broType = "cloudStorageOutput"
     }
 
@@ -845,10 +845,10 @@ broFormat
 
 -- | Cloud storage URL to download this report. This URL is valid for 30
 -- minutes.
-broDownloadUrl :: Lens' BatchReportOutputs (Maybe Text)
-broDownloadUrl
-  = lens _broDownloadUrl
-      (\ s a -> s{_broDownloadUrl = a})
+broDownloadURL :: Lens' BatchReportOutputs (Maybe Text)
+broDownloadURL
+  = lens _broDownloadURL
+      (\ s a -> s{_broDownloadURL = a})
 
 -- | Type of the output.
 broType :: Lens' BatchReportOutputs Text
@@ -867,7 +867,7 @@ instance ToJSON BatchReportOutputs where
           = object
               (catMaybes
                  [("format" .=) <$> _broFormat,
-                  ("downloadUrl" .=) <$> _broDownloadUrl,
+                  ("downloadUrl" .=) <$> _broDownloadURL,
                   Just ("type" .= _broType)])
 
 -- | A paginated list of grouList resources returned in response to a
@@ -877,7 +877,7 @@ instance ToJSON BatchReportOutputs where
 data GroupListResponse = GroupListResponse
     { _glrEtag  :: !(Maybe Text)
     , _glrKind  :: !Text
-    , _glrItems :: !(Maybe [Maybe Group])
+    , _glrItems :: !(Maybe [Group])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupListResponse' with the minimum fields required to make a request.
@@ -904,7 +904,7 @@ glrEtag = lens _glrEtag (\ s a -> s{_glrEtag = a})
 glrKind :: Lens' GroupListResponse Text
 glrKind = lens _glrKind (\ s a -> s{_glrKind = a})
 
-glrItems :: Lens' GroupListResponse [Maybe Group]
+glrItems :: Lens' GroupListResponse [Group]
 glrItems
   = lens _glrItems (\ s a -> s{_glrItems = a}) .
       _Default

@@ -32,12 +32,11 @@ module Network.Google.Resource.Directory.Users.Delete
     -- * Request Lenses
     , udQuotaUser
     , udPrettyPrint
-    , udUserIp
+    , udUserIP
     , udKey
-    , udOauthToken
+    , udOAuthToken
     , udUserKey
     , udFields
-    , udAlt
     ) where
 
 import           Network.Google.AdminDirectory.Types
@@ -51,10 +50,10 @@ type UsersDeleteResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Delete '[JSON] ()
+                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete user
 --
@@ -62,12 +61,11 @@ type UsersDeleteResource =
 data UsersDelete' = UsersDelete'
     { _udQuotaUser   :: !(Maybe Text)
     , _udPrettyPrint :: !Bool
-    , _udUserIp      :: !(Maybe Text)
-    , _udKey         :: !(Maybe Text)
-    , _udOauthToken  :: !(Maybe Text)
+    , _udUserIP      :: !(Maybe Text)
+    , _udKey         :: !(Maybe Key)
+    , _udOAuthToken  :: !(Maybe OAuthToken)
     , _udUserKey     :: !Text
     , _udFields      :: !(Maybe Text)
-    , _udAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDelete'' with the minimum fields required to make a request.
@@ -78,17 +76,15 @@ data UsersDelete' = UsersDelete'
 --
 -- * 'udPrettyPrint'
 --
--- * 'udUserIp'
+-- * 'udUserIP'
 --
 -- * 'udKey'
 --
--- * 'udOauthToken'
+-- * 'udOAuthToken'
 --
 -- * 'udUserKey'
 --
 -- * 'udFields'
---
--- * 'udAlt'
 usersDelete'
     :: Text -- ^ 'userKey'
     -> UsersDelete'
@@ -96,12 +92,11 @@ usersDelete' pUdUserKey_ =
     UsersDelete'
     { _udQuotaUser = Nothing
     , _udPrettyPrint = True
-    , _udUserIp = Nothing
+    , _udUserIP = Nothing
     , _udKey = Nothing
-    , _udOauthToken = Nothing
+    , _udOAuthToken = Nothing
     , _udUserKey = pUdUserKey_
     , _udFields = Nothing
-    , _udAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -119,19 +114,19 @@ udPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-udUserIp :: Lens' UsersDelete' (Maybe Text)
-udUserIp = lens _udUserIp (\ s a -> s{_udUserIp = a})
+udUserIP :: Lens' UsersDelete' (Maybe Text)
+udUserIP = lens _udUserIP (\ s a -> s{_udUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-udKey :: Lens' UsersDelete' (Maybe Text)
+udKey :: Lens' UsersDelete' (Maybe Key)
 udKey = lens _udKey (\ s a -> s{_udKey = a})
 
 -- | OAuth 2.0 token for the current user.
-udOauthToken :: Lens' UsersDelete' (Maybe Text)
-udOauthToken
-  = lens _udOauthToken (\ s a -> s{_udOauthToken = a})
+udOAuthToken :: Lens' UsersDelete' (Maybe OAuthToken)
+udOAuthToken
+  = lens _udOAuthToken (\ s a -> s{_udOAuthToken = a})
 
 -- | Email or immutable Id of the user
 udUserKey :: Lens' UsersDelete' Text
@@ -142,20 +137,20 @@ udUserKey
 udFields :: Lens' UsersDelete' (Maybe Text)
 udFields = lens _udFields (\ s a -> s{_udFields = a})
 
--- | Data format for the response.
-udAlt :: Lens' UsersDelete' Alt
-udAlt = lens _udAlt (\ s a -> s{_udAlt = a})
+instance GoogleAuth UsersDelete' where
+        authKey = udKey . _Just
+        authToken = udOAuthToken . _Just
 
 instance GoogleRequest UsersDelete' where
         type Rs UsersDelete' = ()
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u UsersDelete'{..}
-          = go _udQuotaUser (Just _udPrettyPrint) _udUserIp
+          = go _udQuotaUser (Just _udPrettyPrint) _udUserIP
               _udKey
-              _udOauthToken
+              _udOAuthToken
               _udUserKey
               _udFields
-              (Just _udAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersDeleteResource)

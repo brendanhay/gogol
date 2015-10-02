@@ -36,15 +36,14 @@ module Network.Google.Resource.YouTube.LiveBroadcasts.Bind_direct
     , lQuotaUser
     , lPart
     , lPrettyPrint
-    , lUserIp
+    , lUserIP
     , lOnBehalfOfContentOwner
     , lKey
     , lOnBehalfOfContentOwnerChannel
     , lId
-    , lOauthToken
+    , lOAuthToken
     , lStreamId
     , lFields
-    , lAlt
     ) where
 
 import           Network.Google.Prelude
@@ -61,13 +60,13 @@ type LiveBroadcastsBind_directResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "onBehalfOfContentOwner" Text :>
-                     QueryParam "key" Text :>
+                     QueryParam "key" Key :>
                        QueryParam "onBehalfOfContentOwnerChannel" Text :>
                          QueryParam "id" Text :>
-                           QueryParam "oauth_token" Text :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "streamId" Text :>
                                QueryParam "fields" Text :>
-                                 QueryParam "alt" Alt :>
+                                 QueryParam "alt" AltJSON :>
                                    Post '[JSON] LiveBroadcast
 
 -- | Binds a YouTube broadcast to a stream or removes an existing binding
@@ -80,15 +79,14 @@ data LiveBroadcastsBind_direct' = LiveBroadcastsBind_direct'
     { _lQuotaUser                     :: !(Maybe Text)
     , _lPart                          :: !Text
     , _lPrettyPrint                   :: !Bool
-    , _lUserIp                        :: !(Maybe Text)
+    , _lUserIP                        :: !(Maybe Text)
     , _lOnBehalfOfContentOwner        :: !(Maybe Text)
-    , _lKey                           :: !(Maybe Text)
+    , _lKey                           :: !(Maybe Key)
     , _lOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _lId                            :: !Text
-    , _lOauthToken                    :: !(Maybe Text)
+    , _lOAuthToken                    :: !(Maybe OAuthToken)
     , _lStreamId                      :: !(Maybe Text)
     , _lFields                        :: !(Maybe Text)
-    , _lAlt                           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveBroadcastsBind_direct'' with the minimum fields required to make a request.
@@ -101,7 +99,7 @@ data LiveBroadcastsBind_direct' = LiveBroadcastsBind_direct'
 --
 -- * 'lPrettyPrint'
 --
--- * 'lUserIp'
+-- * 'lUserIP'
 --
 -- * 'lOnBehalfOfContentOwner'
 --
@@ -111,13 +109,11 @@ data LiveBroadcastsBind_direct' = LiveBroadcastsBind_direct'
 --
 -- * 'lId'
 --
--- * 'lOauthToken'
+-- * 'lOAuthToken'
 --
 -- * 'lStreamId'
 --
 -- * 'lFields'
---
--- * 'lAlt'
 liveBroadcastsBind_direct'
     :: Text -- ^ 'part'
     -> Text -- ^ 'id'
@@ -127,15 +123,14 @@ liveBroadcastsBind_direct' pLPart_ pLId_ =
     { _lQuotaUser = Nothing
     , _lPart = pLPart_
     , _lPrettyPrint = True
-    , _lUserIp = Nothing
+    , _lUserIP = Nothing
     , _lOnBehalfOfContentOwner = Nothing
     , _lKey = Nothing
     , _lOnBehalfOfContentOwnerChannel = Nothing
     , _lId = pLId_
-    , _lOauthToken = Nothing
+    , _lOAuthToken = Nothing
     , _lStreamId = Nothing
     , _lFields = Nothing
-    , _lAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -159,8 +154,8 @@ lPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-lUserIp :: Lens' LiveBroadcastsBind_direct' (Maybe Text)
-lUserIp = lens _lUserIp (\ s a -> s{_lUserIp = a})
+lUserIP :: Lens' LiveBroadcastsBind_direct' (Maybe Text)
+lUserIP = lens _lUserIP (\ s a -> s{_lUserIP = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
@@ -180,7 +175,7 @@ lOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lKey :: Lens' LiveBroadcastsBind_direct' (Maybe Text)
+lKey :: Lens' LiveBroadcastsBind_direct' (Maybe Key)
 lKey = lens _lKey (\ s a -> s{_lKey = a})
 
 -- | This parameter can only be used in a properly authorized request. Note:
@@ -210,9 +205,9 @@ lId :: Lens' LiveBroadcastsBind_direct' Text
 lId = lens _lId (\ s a -> s{_lId = a})
 
 -- | OAuth 2.0 token for the current user.
-lOauthToken :: Lens' LiveBroadcastsBind_direct' (Maybe Text)
-lOauthToken
-  = lens _lOauthToken (\ s a -> s{_lOauthToken = a})
+lOAuthToken :: Lens' LiveBroadcastsBind_direct' (Maybe OAuthToken)
+lOAuthToken
+  = lens _lOAuthToken (\ s a -> s{_lOAuthToken = a})
 
 -- | The streamId parameter specifies the unique ID of the video stream that
 -- is being bound to a broadcast. If this parameter is omitted, the API
@@ -226,9 +221,9 @@ lStreamId
 lFields :: Lens' LiveBroadcastsBind_direct' (Maybe Text)
 lFields = lens _lFields (\ s a -> s{_lFields = a})
 
--- | Data format for the response.
-lAlt :: Lens' LiveBroadcastsBind_direct' Alt
-lAlt = lens _lAlt (\ s a -> s{_lAlt = a})
+instance GoogleAuth LiveBroadcastsBind_direct' where
+        authKey = lKey . _Just
+        authToken = lOAuthToken . _Just
 
 instance GoogleRequest LiveBroadcastsBind_direct'
          where
@@ -236,15 +231,15 @@ instance GoogleRequest LiveBroadcastsBind_direct'
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u LiveBroadcastsBind_direct'{..}
           = go _lQuotaUser (Just _lPart) (Just _lPrettyPrint)
-              _lUserIp
+              _lUserIP
               _lOnBehalfOfContentOwner
               _lKey
               _lOnBehalfOfContentOwnerChannel
               (Just _lId)
-              _lOauthToken
+              _lOAuthToken
               _lStreamId
               _lFields
-              (Just _lAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy LiveBroadcastsBind_directResource)

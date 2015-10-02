@@ -130,7 +130,7 @@ module Network.Google.Spectrum
     -- ** VcardTelephone
     , VcardTelephone
     , vcardTelephone
-    , vtUri
+    , vtURI
 
     -- ** DeviceOwner
     , DeviceOwner
@@ -241,7 +241,7 @@ module Network.Google.Spectrum
     -- ** DatabaseSpec
     , DatabaseSpec
     , databaseSpec
-    , dsUri
+    , dsURI
     , dsName
 
     -- ** SpectrumMessage
@@ -313,9 +313,6 @@ module Network.Google.Spectrum
     , DeviceCapabilities
     , deviceCapabilities
     , dcFrequencyRanges
-
-    -- ** Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.Prelude

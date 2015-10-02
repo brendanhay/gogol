@@ -20,7 +20,7 @@
 -- | Looks up information relevant to a voter based on the voter\'s
 -- registered address.
 --
--- /See:/ <https://developers.google.com/civic-information Google Civic Information API Reference> for @CivicinfoElectionsVoterInfoQuery@.
+-- /See:/ <https://developers.google.com/civic-information Google Civic Information API Reference> for @CivicInfoElectionsVoterInfoQuery@.
 module Network.Google.Resource.CivicInfo.Elections.VoterInfoQuery
     (
     -- * REST Resource
@@ -33,20 +33,19 @@ module Network.Google.Resource.CivicInfo.Elections.VoterInfoQuery
     -- * Request Lenses
     , eviqQuotaUser
     , eviqPrettyPrint
-    , eviqUserIp
+    , eviqUserIP
     , eviqElectionId
     , eviqAddress
     , eviqKey
     , eviqOfficialOnly
-    , eviqOauthToken
+    , eviqOAuthToken
     , eviqFields
-    , eviqAlt
     ) where
 
 import           Network.Google.CivicInfo.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CivicinfoElectionsVoterInfoQuery@ which the
+-- | A resource alias for @CivicInfoElectionsVoterInfoQuery@ which the
 -- 'ElectionsVoterInfoQuery'' request conforms to.
 type ElectionsVoterInfoQueryResource =
      "voterinfo" :>
@@ -55,11 +54,12 @@ type ElectionsVoterInfoQueryResource =
            QueryParam "userIp" Text :>
              QueryParam "electionId" Int64 :>
                QueryParam "address" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "officialOnly" Bool :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] VoterInfoResponse
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] VoterInfoResponse
 
 -- | Looks up information relevant to a voter based on the voter\'s
 -- registered address.
@@ -68,14 +68,13 @@ type ElectionsVoterInfoQueryResource =
 data ElectionsVoterInfoQuery' = ElectionsVoterInfoQuery'
     { _eviqQuotaUser    :: !(Maybe Text)
     , _eviqPrettyPrint  :: !Bool
-    , _eviqUserIp       :: !(Maybe Text)
+    , _eviqUserIP       :: !(Maybe Text)
     , _eviqElectionId   :: !Int64
     , _eviqAddress      :: !Text
-    , _eviqKey          :: !(Maybe Text)
+    , _eviqKey          :: !(Maybe Key)
     , _eviqOfficialOnly :: !Bool
-    , _eviqOauthToken   :: !(Maybe Text)
+    , _eviqOAuthToken   :: !(Maybe OAuthToken)
     , _eviqFields       :: !(Maybe Text)
-    , _eviqAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ElectionsVoterInfoQuery'' with the minimum fields required to make a request.
@@ -86,7 +85,7 @@ data ElectionsVoterInfoQuery' = ElectionsVoterInfoQuery'
 --
 -- * 'eviqPrettyPrint'
 --
--- * 'eviqUserIp'
+-- * 'eviqUserIP'
 --
 -- * 'eviqElectionId'
 --
@@ -96,11 +95,9 @@ data ElectionsVoterInfoQuery' = ElectionsVoterInfoQuery'
 --
 -- * 'eviqOfficialOnly'
 --
--- * 'eviqOauthToken'
+-- * 'eviqOAuthToken'
 --
 -- * 'eviqFields'
---
--- * 'eviqAlt'
 electionsVoterInfoQuery'
     :: Text -- ^ 'address'
     -> ElectionsVoterInfoQuery'
@@ -108,14 +105,13 @@ electionsVoterInfoQuery' pEviqAddress_ =
     ElectionsVoterInfoQuery'
     { _eviqQuotaUser = Nothing
     , _eviqPrettyPrint = True
-    , _eviqUserIp = Nothing
+    , _eviqUserIP = Nothing
     , _eviqElectionId = 0
     , _eviqAddress = pEviqAddress_
     , _eviqKey = Nothing
     , _eviqOfficialOnly = False
-    , _eviqOauthToken = Nothing
+    , _eviqOAuthToken = Nothing
     , _eviqFields = Nothing
-    , _eviqAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -134,9 +130,9 @@ eviqPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-eviqUserIp :: Lens' ElectionsVoterInfoQuery' (Maybe Text)
-eviqUserIp
-  = lens _eviqUserIp (\ s a -> s{_eviqUserIp = a})
+eviqUserIP :: Lens' ElectionsVoterInfoQuery' (Maybe Text)
+eviqUserIP
+  = lens _eviqUserIP (\ s a -> s{_eviqUserIP = a})
 
 -- | The unique ID of the election to look up. A list of election IDs can be
 -- obtained at
@@ -154,7 +150,7 @@ eviqAddress
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-eviqKey :: Lens' ElectionsVoterInfoQuery' (Maybe Text)
+eviqKey :: Lens' ElectionsVoterInfoQuery' (Maybe Key)
 eviqKey = lens _eviqKey (\ s a -> s{_eviqKey = a})
 
 -- | If set to true, only data from official state sources will be returned.
@@ -164,33 +160,33 @@ eviqOfficialOnly
       (\ s a -> s{_eviqOfficialOnly = a})
 
 -- | OAuth 2.0 token for the current user.
-eviqOauthToken :: Lens' ElectionsVoterInfoQuery' (Maybe Text)
-eviqOauthToken
-  = lens _eviqOauthToken
-      (\ s a -> s{_eviqOauthToken = a})
+eviqOAuthToken :: Lens' ElectionsVoterInfoQuery' (Maybe OAuthToken)
+eviqOAuthToken
+  = lens _eviqOAuthToken
+      (\ s a -> s{_eviqOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 eviqFields :: Lens' ElectionsVoterInfoQuery' (Maybe Text)
 eviqFields
   = lens _eviqFields (\ s a -> s{_eviqFields = a})
 
--- | Data format for the response.
-eviqAlt :: Lens' ElectionsVoterInfoQuery' Alt
-eviqAlt = lens _eviqAlt (\ s a -> s{_eviqAlt = a})
+instance GoogleAuth ElectionsVoterInfoQuery' where
+        authKey = eviqKey . _Just
+        authToken = eviqOAuthToken . _Just
 
 instance GoogleRequest ElectionsVoterInfoQuery' where
         type Rs ElectionsVoterInfoQuery' = VoterInfoResponse
         request = requestWithRoute defReq civicInfoURL
         requestWithRoute r u ElectionsVoterInfoQuery'{..}
           = go _eviqQuotaUser (Just _eviqPrettyPrint)
-              _eviqUserIp
+              _eviqUserIP
               (Just _eviqElectionId)
               (Just _eviqAddress)
               _eviqKey
               (Just _eviqOfficialOnly)
-              _eviqOauthToken
+              _eviqOAuthToken
               _eviqFields
-              (Just _eviqAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ElectionsVoterInfoQueryResource)

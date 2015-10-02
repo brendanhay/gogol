@@ -33,12 +33,11 @@ module Network.Google.Resource.Genomics.Annotations.Get
     -- * Request Lenses
     , agQuotaUser
     , agPrettyPrint
-    , agUserIp
+    , agUserIP
     , agKey
     , agAnnotationId
-    , agOauthToken
+    , agOAuthToken
     , agFields
-    , agAlt
     ) where
 
 import           Network.Google.Genomics.Types
@@ -52,10 +51,10 @@ type AnnotationsGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Get '[JSON] Annotation
+                     QueryParam "alt" AltJSON :> Get '[JSON] Annotation
 
 -- | Gets an annotation. Caller must have READ permission for the associated
 -- annotation set.
@@ -64,12 +63,11 @@ type AnnotationsGetResource =
 data AnnotationsGet' = AnnotationsGet'
     { _agQuotaUser    :: !(Maybe Text)
     , _agPrettyPrint  :: !Bool
-    , _agUserIp       :: !(Maybe Text)
-    , _agKey          :: !(Maybe Text)
+    , _agUserIP       :: !(Maybe Text)
+    , _agKey          :: !(Maybe Key)
     , _agAnnotationId :: !Text
-    , _agOauthToken   :: !(Maybe Text)
+    , _agOAuthToken   :: !(Maybe OAuthToken)
     , _agFields       :: !(Maybe Text)
-    , _agAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnnotationsGet'' with the minimum fields required to make a request.
@@ -80,17 +78,15 @@ data AnnotationsGet' = AnnotationsGet'
 --
 -- * 'agPrettyPrint'
 --
--- * 'agUserIp'
+-- * 'agUserIP'
 --
 -- * 'agKey'
 --
 -- * 'agAnnotationId'
 --
--- * 'agOauthToken'
+-- * 'agOAuthToken'
 --
 -- * 'agFields'
---
--- * 'agAlt'
 annotationsGet'
     :: Text -- ^ 'annotationId'
     -> AnnotationsGet'
@@ -98,12 +94,11 @@ annotationsGet' pAgAnnotationId_ =
     AnnotationsGet'
     { _agQuotaUser = Nothing
     , _agPrettyPrint = True
-    , _agUserIp = Nothing
+    , _agUserIP = Nothing
     , _agKey = Nothing
     , _agAnnotationId = pAgAnnotationId_
-    , _agOauthToken = Nothing
+    , _agOAuthToken = Nothing
     , _agFields = Nothing
-    , _agAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -121,13 +116,13 @@ agPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-agUserIp :: Lens' AnnotationsGet' (Maybe Text)
-agUserIp = lens _agUserIp (\ s a -> s{_agUserIp = a})
+agUserIP :: Lens' AnnotationsGet' (Maybe Text)
+agUserIP = lens _agUserIP (\ s a -> s{_agUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-agKey :: Lens' AnnotationsGet' (Maybe Text)
+agKey :: Lens' AnnotationsGet' (Maybe Key)
 agKey = lens _agKey (\ s a -> s{_agKey = a})
 
 -- | The ID of the annotation set to be retrieved.
@@ -137,28 +132,28 @@ agAnnotationId
       (\ s a -> s{_agAnnotationId = a})
 
 -- | OAuth 2.0 token for the current user.
-agOauthToken :: Lens' AnnotationsGet' (Maybe Text)
-agOauthToken
-  = lens _agOauthToken (\ s a -> s{_agOauthToken = a})
+agOAuthToken :: Lens' AnnotationsGet' (Maybe OAuthToken)
+agOAuthToken
+  = lens _agOAuthToken (\ s a -> s{_agOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 agFields :: Lens' AnnotationsGet' (Maybe Text)
 agFields = lens _agFields (\ s a -> s{_agFields = a})
 
--- | Data format for the response.
-agAlt :: Lens' AnnotationsGet' Alt
-agAlt = lens _agAlt (\ s a -> s{_agAlt = a})
+instance GoogleAuth AnnotationsGet' where
+        authKey = agKey . _Just
+        authToken = agOAuthToken . _Just
 
 instance GoogleRequest AnnotationsGet' where
         type Rs AnnotationsGet' = Annotation
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u AnnotationsGet'{..}
-          = go _agQuotaUser (Just _agPrettyPrint) _agUserIp
+          = go _agQuotaUser (Just _agPrettyPrint) _agUserIP
               _agKey
               _agAnnotationId
-              _agOauthToken
+              _agOAuthToken
               _agFields
-              (Just _agAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AnnotationsGetResource)

@@ -44,11 +44,10 @@ module Network.Google.Resource.Classroom.Courses.Teachers.List
     , ctlBearerToken
     , ctlKey
     , ctlPageToken
-    , ctlOauthToken
+    , ctlOAuthToken
     , ctlPageSize
     , ctlFields
     , ctlCallback
-    , ctlAlt
     ) where
 
 import           Network.Google.Classroom.Types
@@ -69,13 +68,13 @@ type CoursesTeachersListResource =
                        QueryParam "access_token" Text :>
                          QueryParam "uploadType" Text :>
                            QueryParam "bearer_token" Text :>
-                             QueryParam "key" Text :>
+                             QueryParam "key" Key :>
                                QueryParam "pageToken" Text :>
-                                 QueryParam "oauth_token" Text :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "pageSize" Int32 :>
                                      QueryParam "fields" Text :>
                                        QueryParam "callback" Text :>
-                                         QueryParam "alt" Text :>
+                                         QueryParam "alt" AltJSON :>
                                            Get '[JSON] ListTeachersResponse
 
 -- | Returns a list of teachers of this course that the requester is
@@ -94,13 +93,12 @@ data CoursesTeachersList' = CoursesTeachersList'
     , _ctlAccessToken    :: !(Maybe Text)
     , _ctlUploadType     :: !(Maybe Text)
     , _ctlBearerToken    :: !(Maybe Text)
-    , _ctlKey            :: !(Maybe Text)
+    , _ctlKey            :: !(Maybe Key)
     , _ctlPageToken      :: !(Maybe Text)
-    , _ctlOauthToken     :: !(Maybe Text)
+    , _ctlOAuthToken     :: !(Maybe OAuthToken)
     , _ctlPageSize       :: !(Maybe Int32)
     , _ctlFields         :: !(Maybe Text)
     , _ctlCallback       :: !(Maybe Text)
-    , _ctlAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CoursesTeachersList'' with the minimum fields required to make a request.
@@ -129,15 +127,13 @@ data CoursesTeachersList' = CoursesTeachersList'
 --
 -- * 'ctlPageToken'
 --
--- * 'ctlOauthToken'
+-- * 'ctlOAuthToken'
 --
 -- * 'ctlPageSize'
 --
 -- * 'ctlFields'
 --
 -- * 'ctlCallback'
---
--- * 'ctlAlt'
 coursesTeachersList'
     :: Text -- ^ 'courseId'
     -> CoursesTeachersList'
@@ -154,11 +150,10 @@ coursesTeachersList' pCtlCourseId_ =
     , _ctlBearerToken = Nothing
     , _ctlKey = Nothing
     , _ctlPageToken = Nothing
-    , _ctlOauthToken = Nothing
+    , _ctlOAuthToken = Nothing
     , _ctlPageSize = Nothing
     , _ctlFields = Nothing
     , _ctlCallback = Nothing
-    , _ctlAlt = "json"
     }
 
 -- | V1 error format.
@@ -216,7 +211,7 @@ ctlBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ctlKey :: Lens' CoursesTeachersList' (Maybe Text)
+ctlKey :: Lens' CoursesTeachersList' (Maybe Key)
 ctlKey = lens _ctlKey (\ s a -> s{_ctlKey = a})
 
 -- | [nextPageToken][google.classroom.v1.ListTeachersResponse.next_page_token]
@@ -230,10 +225,10 @@ ctlPageToken
   = lens _ctlPageToken (\ s a -> s{_ctlPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-ctlOauthToken :: Lens' CoursesTeachersList' (Maybe Text)
-ctlOauthToken
-  = lens _ctlOauthToken
-      (\ s a -> s{_ctlOauthToken = a})
+ctlOAuthToken :: Lens' CoursesTeachersList' (Maybe OAuthToken)
+ctlOAuthToken
+  = lens _ctlOAuthToken
+      (\ s a -> s{_ctlOAuthToken = a})
 
 -- | Maximum number of items to return. Zero means no maximum. The server may
 -- return fewer than the specified number of results.
@@ -251,9 +246,9 @@ ctlCallback :: Lens' CoursesTeachersList' (Maybe Text)
 ctlCallback
   = lens _ctlCallback (\ s a -> s{_ctlCallback = a})
 
--- | Data format for response.
-ctlAlt :: Lens' CoursesTeachersList' Text
-ctlAlt = lens _ctlAlt (\ s a -> s{_ctlAlt = a})
+instance GoogleAuth CoursesTeachersList' where
+        authKey = ctlKey . _Just
+        authToken = ctlOAuthToken . _Just
 
 instance GoogleRequest CoursesTeachersList' where
         type Rs CoursesTeachersList' = ListTeachersResponse
@@ -268,11 +263,11 @@ instance GoogleRequest CoursesTeachersList' where
               _ctlBearerToken
               _ctlKey
               _ctlPageToken
-              _ctlOauthToken
+              _ctlOAuthToken
               _ctlPageSize
               _ctlFields
               _ctlCallback
-              (Just _ctlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CoursesTeachersListResource)

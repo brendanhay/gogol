@@ -32,13 +32,12 @@ module Network.Google.Resource.AdSense.Savedadstyles.List
     -- * Request Lenses
     , slQuotaUser
     , slPrettyPrint
-    , slUserIp
+    , slUserIP
     , slKey
     , slPageToken
-    , slOauthToken
+    , slOAuthToken
     , slMaxResults
     , slFields
-    , slAlt
     ) where
 
 import           Network.Google.AdSense.Types
@@ -51,12 +50,12 @@ type SavedadstylesListResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
+             QueryParam "key" Key :>
                QueryParam "pageToken" Text :>
-                 QueryParam "oauth_token" Text :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "maxResults" Int32 :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Get '[JSON] SavedAdStyles
+                       QueryParam "alt" AltJSON :> Get '[JSON] SavedAdStyles
 
 -- | List all saved ad styles in the user\'s account.
 --
@@ -64,13 +63,12 @@ type SavedadstylesListResource =
 data SavedadstylesList' = SavedadstylesList'
     { _slQuotaUser   :: !(Maybe Text)
     , _slPrettyPrint :: !Bool
-    , _slUserIp      :: !(Maybe Text)
-    , _slKey         :: !(Maybe Text)
+    , _slUserIP      :: !(Maybe Text)
+    , _slKey         :: !(Maybe Key)
     , _slPageToken   :: !(Maybe Text)
-    , _slOauthToken  :: !(Maybe Text)
+    , _slOAuthToken  :: !(Maybe OAuthToken)
     , _slMaxResults  :: !(Maybe Int32)
     , _slFields      :: !(Maybe Text)
-    , _slAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SavedadstylesList'' with the minimum fields required to make a request.
@@ -81,32 +79,29 @@ data SavedadstylesList' = SavedadstylesList'
 --
 -- * 'slPrettyPrint'
 --
--- * 'slUserIp'
+-- * 'slUserIP'
 --
 -- * 'slKey'
 --
 -- * 'slPageToken'
 --
--- * 'slOauthToken'
+-- * 'slOAuthToken'
 --
 -- * 'slMaxResults'
 --
 -- * 'slFields'
---
--- * 'slAlt'
 savedadstylesList'
     :: SavedadstylesList'
 savedadstylesList' =
     SavedadstylesList'
     { _slQuotaUser = Nothing
     , _slPrettyPrint = True
-    , _slUserIp = Nothing
+    , _slUserIP = Nothing
     , _slKey = Nothing
     , _slPageToken = Nothing
-    , _slOauthToken = Nothing
+    , _slOAuthToken = Nothing
     , _slMaxResults = Nothing
     , _slFields = Nothing
-    , _slAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -124,13 +119,13 @@ slPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-slUserIp :: Lens' SavedadstylesList' (Maybe Text)
-slUserIp = lens _slUserIp (\ s a -> s{_slUserIp = a})
+slUserIP :: Lens' SavedadstylesList' (Maybe Text)
+slUserIP = lens _slUserIP (\ s a -> s{_slUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-slKey :: Lens' SavedadstylesList' (Maybe Text)
+slKey :: Lens' SavedadstylesList' (Maybe Key)
 slKey = lens _slKey (\ s a -> s{_slKey = a})
 
 -- | A continuation token, used to page through saved ad styles. To retrieve
@@ -141,9 +136,9 @@ slPageToken
   = lens _slPageToken (\ s a -> s{_slPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-slOauthToken :: Lens' SavedadstylesList' (Maybe Text)
-slOauthToken
-  = lens _slOauthToken (\ s a -> s{_slOauthToken = a})
+slOAuthToken :: Lens' SavedadstylesList' (Maybe OAuthToken)
+slOAuthToken
+  = lens _slOAuthToken (\ s a -> s{_slOAuthToken = a})
 
 -- | The maximum number of saved ad styles to include in the response, used
 -- for paging.
@@ -155,21 +150,21 @@ slMaxResults
 slFields :: Lens' SavedadstylesList' (Maybe Text)
 slFields = lens _slFields (\ s a -> s{_slFields = a})
 
--- | Data format for the response.
-slAlt :: Lens' SavedadstylesList' Alt
-slAlt = lens _slAlt (\ s a -> s{_slAlt = a})
+instance GoogleAuth SavedadstylesList' where
+        authKey = slKey . _Just
+        authToken = slOAuthToken . _Just
 
 instance GoogleRequest SavedadstylesList' where
         type Rs SavedadstylesList' = SavedAdStyles
         request = requestWithRoute defReq adSenseURL
         requestWithRoute r u SavedadstylesList'{..}
-          = go _slQuotaUser (Just _slPrettyPrint) _slUserIp
+          = go _slQuotaUser (Just _slPrettyPrint) _slUserIP
               _slKey
               _slPageToken
-              _slOauthToken
+              _slOAuthToken
               _slMaxResults
               _slFields
-              (Just _slAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy SavedadstylesListResource)

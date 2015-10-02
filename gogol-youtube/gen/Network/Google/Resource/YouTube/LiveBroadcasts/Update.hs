@@ -34,13 +34,13 @@ module Network.Google.Resource.YouTube.LiveBroadcasts.Update
     , lbuQuotaUser
     , lbuPart
     , lbuPrettyPrint
-    , lbuUserIp
+    , lbuUserIP
+    , lbuLiveBroadcast
     , lbuOnBehalfOfContentOwner
     , lbuKey
     , lbuOnBehalfOfContentOwnerChannel
-    , lbuOauthToken
+    , lbuOAuthToken
     , lbuFields
-    , lbuAlt
     ) where
 
 import           Network.Google.Prelude
@@ -55,11 +55,13 @@ type LiveBroadcastsUpdateResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "onBehalfOfContentOwner" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "onBehalfOfContentOwnerChannel" Text :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Put '[JSON] LiveBroadcast
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] LiveBroadcast :>
+                             Put '[JSON] LiveBroadcast
 
 -- | Updates a broadcast. For example, you could modify the broadcast
 -- settings defined in the liveBroadcast resource\'s contentDetails object.
@@ -69,13 +71,13 @@ data LiveBroadcastsUpdate' = LiveBroadcastsUpdate'
     { _lbuQuotaUser                     :: !(Maybe Text)
     , _lbuPart                          :: !Text
     , _lbuPrettyPrint                   :: !Bool
-    , _lbuUserIp                        :: !(Maybe Text)
+    , _lbuUserIP                        :: !(Maybe Text)
+    , _lbuLiveBroadcast                 :: !LiveBroadcast
     , _lbuOnBehalfOfContentOwner        :: !(Maybe Text)
-    , _lbuKey                           :: !(Maybe Text)
+    , _lbuKey                           :: !(Maybe Key)
     , _lbuOnBehalfOfContentOwnerChannel :: !(Maybe Text)
-    , _lbuOauthToken                    :: !(Maybe Text)
+    , _lbuOAuthToken                    :: !(Maybe OAuthToken)
     , _lbuFields                        :: !(Maybe Text)
-    , _lbuAlt                           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveBroadcastsUpdate'' with the minimum fields required to make a request.
@@ -88,7 +90,9 @@ data LiveBroadcastsUpdate' = LiveBroadcastsUpdate'
 --
 -- * 'lbuPrettyPrint'
 --
--- * 'lbuUserIp'
+-- * 'lbuUserIP'
+--
+-- * 'lbuLiveBroadcast'
 --
 -- * 'lbuOnBehalfOfContentOwner'
 --
@@ -96,26 +100,25 @@ data LiveBroadcastsUpdate' = LiveBroadcastsUpdate'
 --
 -- * 'lbuOnBehalfOfContentOwnerChannel'
 --
--- * 'lbuOauthToken'
+-- * 'lbuOAuthToken'
 --
 -- * 'lbuFields'
---
--- * 'lbuAlt'
 liveBroadcastsUpdate'
     :: Text -- ^ 'part'
+    -> LiveBroadcast -- ^ 'LiveBroadcast'
     -> LiveBroadcastsUpdate'
-liveBroadcastsUpdate' pLbuPart_ =
+liveBroadcastsUpdate' pLbuPart_ pLbuLiveBroadcast_ =
     LiveBroadcastsUpdate'
     { _lbuQuotaUser = Nothing
     , _lbuPart = pLbuPart_
     , _lbuPrettyPrint = True
-    , _lbuUserIp = Nothing
+    , _lbuUserIP = Nothing
+    , _lbuLiveBroadcast = pLbuLiveBroadcast_
     , _lbuOnBehalfOfContentOwner = Nothing
     , _lbuKey = Nothing
     , _lbuOnBehalfOfContentOwnerChannel = Nothing
-    , _lbuOauthToken = Nothing
+    , _lbuOAuthToken = Nothing
     , _lbuFields = Nothing
-    , _lbuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -149,9 +152,15 @@ lbuPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-lbuUserIp :: Lens' LiveBroadcastsUpdate' (Maybe Text)
-lbuUserIp
-  = lens _lbuUserIp (\ s a -> s{_lbuUserIp = a})
+lbuUserIP :: Lens' LiveBroadcastsUpdate' (Maybe Text)
+lbuUserIP
+  = lens _lbuUserIP (\ s a -> s{_lbuUserIP = a})
+
+-- | Multipart request metadata.
+lbuLiveBroadcast :: Lens' LiveBroadcastsUpdate' LiveBroadcast
+lbuLiveBroadcast
+  = lens _lbuLiveBroadcast
+      (\ s a -> s{_lbuLiveBroadcast = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
@@ -171,7 +180,7 @@ lbuOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lbuKey :: Lens' LiveBroadcastsUpdate' (Maybe Text)
+lbuKey :: Lens' LiveBroadcastsUpdate' (Maybe Key)
 lbuKey = lens _lbuKey (\ s a -> s{_lbuKey = a})
 
 -- | This parameter can only be used in a properly authorized request. Note:
@@ -196,19 +205,19 @@ lbuOnBehalfOfContentOwnerChannel
       (\ s a -> s{_lbuOnBehalfOfContentOwnerChannel = a})
 
 -- | OAuth 2.0 token for the current user.
-lbuOauthToken :: Lens' LiveBroadcastsUpdate' (Maybe Text)
-lbuOauthToken
-  = lens _lbuOauthToken
-      (\ s a -> s{_lbuOauthToken = a})
+lbuOAuthToken :: Lens' LiveBroadcastsUpdate' (Maybe OAuthToken)
+lbuOAuthToken
+  = lens _lbuOAuthToken
+      (\ s a -> s{_lbuOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 lbuFields :: Lens' LiveBroadcastsUpdate' (Maybe Text)
 lbuFields
   = lens _lbuFields (\ s a -> s{_lbuFields = a})
 
--- | Data format for the response.
-lbuAlt :: Lens' LiveBroadcastsUpdate' Alt
-lbuAlt = lens _lbuAlt (\ s a -> s{_lbuAlt = a})
+instance GoogleAuth LiveBroadcastsUpdate' where
+        authKey = lbuKey . _Just
+        authToken = lbuOAuthToken . _Just
 
 instance GoogleRequest LiveBroadcastsUpdate' where
         type Rs LiveBroadcastsUpdate' = LiveBroadcast
@@ -216,13 +225,14 @@ instance GoogleRequest LiveBroadcastsUpdate' where
         requestWithRoute r u LiveBroadcastsUpdate'{..}
           = go _lbuQuotaUser (Just _lbuPart)
               (Just _lbuPrettyPrint)
-              _lbuUserIp
+              _lbuUserIP
               _lbuOnBehalfOfContentOwner
               _lbuKey
               _lbuOnBehalfOfContentOwnerChannel
-              _lbuOauthToken
+              _lbuOAuthToken
               _lbuFields
-              (Just _lbuAlt)
+              (Just AltJSON)
+              _lbuLiveBroadcast
           where go
                   = clientWithRoute
                       (Proxy :: Proxy LiveBroadcastsUpdateResource)

@@ -26,19 +26,19 @@ module Network.Google.CivicInfo
 
     -- * REST Resources
 
-    -- ** CivicinfoDivisionsSearch
+    -- ** CivicInfoDivisionsSearch
     , module Network.Google.Resource.CivicInfo.Divisions.Search
 
-    -- ** CivicinfoElectionsElectionQuery
+    -- ** CivicInfoElectionsElectionQuery
     , module Network.Google.Resource.CivicInfo.Elections.ElectionQuery
 
-    -- ** CivicinfoElectionsVoterInfoQuery
+    -- ** CivicInfoElectionsVoterInfoQuery
     , module Network.Google.Resource.CivicInfo.Elections.VoterInfoQuery
 
-    -- ** CivicinfoRepresentativesRepresentativeInfoByAddress
+    -- ** CivicInfoRepresentativesRepresentativeInfoByAddress
     , module Network.Google.Resource.CivicInfo.Representatives.RepresentativeInfoByAddress
 
-    -- ** CivicinfoRepresentativesRepresentativeInfoByDivision
+    -- ** CivicInfoRepresentativesRepresentativeInfoByDivision
     , module Network.Google.Resource.CivicInfo.Representatives.RepresentativeInfoByDivision
 
     -- * Types
@@ -82,20 +82,20 @@ module Network.Google.CivicInfo
     , gdOfficeIndices
     , gdAlsoKnownAs
 
-    -- ** CivicinfoRepresentativesRepresentativeInfoByDivisionLevels
-    , CivicinfoRepresentativesRepresentativeInfoByDivisionLevels (..)
+    -- ** CivicInfoRepresentativesRepresentativeInfoByDivisionLevels
+    , CivicInfoRepresentativesRepresentativeInfoByDivisionLevels (..)
 
-    -- ** CivicinfoRepresentativesRepresentativeInfoByAddressLevels
-    , CivicinfoRepresentativesRepresentativeInfoByAddressLevels (..)
+    -- ** CivicInfoRepresentativesRepresentativeInfoByAddressLevels
+    , CivicInfoRepresentativesRepresentativeInfoByAddressLevels (..)
 
     -- ** Candidate
     , Candidate
     , candidate
     , cEmail
     , cPhone
-    , cPhotoUrl
+    , cPhotoURL
     , cChannels
-    , cCandidateUrl
+    , cCandidateURL
     , cOrderOnBallot
     , cName
     , cParty
@@ -110,8 +110,8 @@ module Network.Google.CivicInfo
     , oName
     , oLevels
 
-    -- ** CivicinfoRepresentativesRepresentativeInfoByDivisionRoles
-    , CivicinfoRepresentativesRepresentativeInfoByDivisionRoles (..)
+    -- ** CivicInfoRepresentativesRepresentativeInfoByDivisionRoles
+    , CivicInfoRepresentativesRepresentativeInfoByDivisionRoles (..)
 
     -- ** Election
     , Election
@@ -147,25 +147,25 @@ module Network.Google.CivicInfo
     , AdministrativeBody
     , administrativeBody
     , abCorrespondenceAddress
-    , abAbsenteeVotingInfoUrl
+    , abAbsenteeVotingInfoURL
     , abHoursOfOperation
-    , abBallotInfoUrl
+    , abBallotInfoURL
     , abPhysicalAddress
-    , abElectionRegistrationConfirmationUrl
-    , abElectionInfoUrl
-    , abVotingLocationFinderUrl
+    , abElectionRegistrationConfirmationURL
+    , abElectionInfoURL
+    , abVotingLocationFinderURL
     , abElectionOfficials
     , abName
-    , abElectionRulesUrl
+    , abElectionRulesURL
     , abVoterServices
-    , abElectionRegistrationUrl
+    , abElectionRegistrationURL
 
     -- ** Contest
     , Contest
     , contest
     , conReferendumPassageThreshold
     , conRoles
-    , conReferendumUrl
+    , conReferendumURL
     , conReferendumEffectOfAbstain
     , conReferendumSubtitle
     , conNumberVotingFor
@@ -198,8 +198,8 @@ module Network.Google.CivicInfo
     , RepresentativeInfoDataDivisions
     , representativeInfoDataDivisions
 
-    -- ** CivicinfoRepresentativesRepresentativeInfoByAddressRoles
-    , CivicinfoRepresentativesRepresentativeInfoByAddressRoles (..)
+    -- ** CivicInfoRepresentativesRepresentativeInfoByAddressRoles
+    , CivicInfoRepresentativesRepresentativeInfoByAddressRoles (..)
 
     -- ** ElectionOfficial
     , ElectionOfficial
@@ -259,17 +259,14 @@ module Network.Google.CivicInfo
     -- ** Official
     , Official
     , official
-    , offPhotoUrl
-    , offUrls
+    , offPhotoURL
+    , offURLs
     , offChannels
     , offAddress
     , offPhones
     , offName
     , offEmails
     , offParty
-
-    -- ** Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.CivicInfo.Types

@@ -35,7 +35,7 @@ module Network.Google.Resource.Coordinate.Jobs.Update
     , juJobId
     , juProgress
     , juNote
-    , juUserIp
+    , juUserIP
     , juTeamId
     , juCustomerPhoneNumber
     , juCustomerName
@@ -43,12 +43,12 @@ module Network.Google.Resource.Coordinate.Jobs.Update
     , juAssignee
     , juLat
     , juKey
+    , juJob
     , juLng
     , juTitle
-    , juOauthToken
+    , juOAuthToken
     , juFields
     , juCustomField
-    , juAlt
     ) where
 
 import           Network.Google.MapsCoordinate.Types
@@ -71,14 +71,15 @@ type JobsUpdateResource =
                            QueryParam "address" Text :>
                              QueryParam "assignee" Text :>
                                QueryParam "lat" Double :>
-                                 QueryParam "key" Text :>
+                                 QueryParam "key" Key :>
                                    QueryParam "lng" Double :>
                                      QueryParam "title" Text :>
-                                       QueryParam "oauth_token" Text :>
+                                       QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "fields" Text :>
                                            QueryParams "customField" Text :>
-                                             QueryParam "alt" Alt :>
-                                               Put '[JSON] Job
+                                             QueryParam "alt" AltJSON :>
+                                               ReqBody '[JSON] Job :>
+                                                 Put '[JSON] Job
 
 -- | Updates a job. Fields that are set in the job state will be updated.
 --
@@ -89,20 +90,20 @@ data JobsUpdate' = JobsUpdate'
     , _juJobId               :: !Word64
     , _juProgress            :: !(Maybe CoordinateJobsUpdateProgress)
     , _juNote                :: !(Maybe Text)
-    , _juUserIp              :: !(Maybe Text)
+    , _juUserIP              :: !(Maybe Text)
     , _juTeamId              :: !Text
     , _juCustomerPhoneNumber :: !(Maybe Text)
     , _juCustomerName        :: !(Maybe Text)
     , _juAddress             :: !(Maybe Text)
     , _juAssignee            :: !(Maybe Text)
     , _juLat                 :: !(Maybe Double)
-    , _juKey                 :: !(Maybe Text)
+    , _juKey                 :: !(Maybe Key)
+    , _juJob                 :: !Job
     , _juLng                 :: !(Maybe Double)
     , _juTitle               :: !(Maybe Text)
-    , _juOauthToken          :: !(Maybe Text)
+    , _juOAuthToken          :: !(Maybe OAuthToken)
     , _juFields              :: !(Maybe Text)
     , _juCustomField         :: !(Maybe Text)
-    , _juAlt                 :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobsUpdate'' with the minimum fields required to make a request.
@@ -119,7 +120,7 @@ data JobsUpdate' = JobsUpdate'
 --
 -- * 'juNote'
 --
--- * 'juUserIp'
+-- * 'juUserIP'
 --
 -- * 'juTeamId'
 --
@@ -135,29 +136,30 @@ data JobsUpdate' = JobsUpdate'
 --
 -- * 'juKey'
 --
+-- * 'juJob'
+--
 -- * 'juLng'
 --
 -- * 'juTitle'
 --
--- * 'juOauthToken'
+-- * 'juOAuthToken'
 --
 -- * 'juFields'
 --
 -- * 'juCustomField'
---
--- * 'juAlt'
 jobsUpdate'
     :: Word64 -- ^ 'jobId'
     -> Text -- ^ 'teamId'
+    -> Job -- ^ 'Job'
     -> JobsUpdate'
-jobsUpdate' pJuJobId_ pJuTeamId_ =
+jobsUpdate' pJuJobId_ pJuTeamId_ pJuJob_ =
     JobsUpdate'
     { _juQuotaUser = Nothing
     , _juPrettyPrint = True
     , _juJobId = pJuJobId_
     , _juProgress = Nothing
     , _juNote = Nothing
-    , _juUserIp = Nothing
+    , _juUserIP = Nothing
     , _juTeamId = pJuTeamId_
     , _juCustomerPhoneNumber = Nothing
     , _juCustomerName = Nothing
@@ -165,12 +167,12 @@ jobsUpdate' pJuJobId_ pJuTeamId_ =
     , _juAssignee = Nothing
     , _juLat = Nothing
     , _juKey = Nothing
+    , _juJob = pJuJob_
     , _juLng = Nothing
     , _juTitle = Nothing
-    , _juOauthToken = Nothing
+    , _juOAuthToken = Nothing
     , _juFields = Nothing
     , _juCustomField = Nothing
-    , _juAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -201,8 +203,8 @@ juNote = lens _juNote (\ s a -> s{_juNote = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-juUserIp :: Lens' JobsUpdate' (Maybe Text)
-juUserIp = lens _juUserIp (\ s a -> s{_juUserIp = a})
+juUserIP :: Lens' JobsUpdate' (Maybe Text)
+juUserIP = lens _juUserIP (\ s a -> s{_juUserIP = a})
 
 -- | Team ID
 juTeamId :: Lens' JobsUpdate' Text
@@ -237,8 +239,12 @@ juLat = lens _juLat (\ s a -> s{_juLat = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-juKey :: Lens' JobsUpdate' (Maybe Text)
+juKey :: Lens' JobsUpdate' (Maybe Key)
 juKey = lens _juKey (\ s a -> s{_juKey = a})
+
+-- | Multipart request metadata.
+juJob :: Lens' JobsUpdate' Job
+juJob = lens _juJob (\ s a -> s{_juJob = a})
 
 -- | The longitude coordinate of this job\'s location.
 juLng :: Lens' JobsUpdate' (Maybe Double)
@@ -249,9 +255,9 @@ juTitle :: Lens' JobsUpdate' (Maybe Text)
 juTitle = lens _juTitle (\ s a -> s{_juTitle = a})
 
 -- | OAuth 2.0 token for the current user.
-juOauthToken :: Lens' JobsUpdate' (Maybe Text)
-juOauthToken
-  = lens _juOauthToken (\ s a -> s{_juOauthToken = a})
+juOAuthToken :: Lens' JobsUpdate' (Maybe OAuthToken)
+juOAuthToken
+  = lens _juOAuthToken (\ s a -> s{_juOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 juFields :: Lens' JobsUpdate' (Maybe Text)
@@ -268,9 +274,9 @@ juCustomField
   = lens _juCustomField
       (\ s a -> s{_juCustomField = a})
 
--- | Data format for the response.
-juAlt :: Lens' JobsUpdate' Alt
-juAlt = lens _juAlt (\ s a -> s{_juAlt = a})
+instance GoogleAuth JobsUpdate' where
+        authKey = juKey . _Just
+        authToken = juOAuthToken . _Just
 
 instance GoogleRequest JobsUpdate' where
         type Rs JobsUpdate' = Job
@@ -279,7 +285,7 @@ instance GoogleRequest JobsUpdate' where
           = go _juQuotaUser (Just _juPrettyPrint) _juJobId
               _juProgress
               _juNote
-              _juUserIp
+              _juUserIP
               _juTeamId
               _juCustomerPhoneNumber
               _juCustomerName
@@ -289,10 +295,11 @@ instance GoogleRequest JobsUpdate' where
               _juKey
               _juLng
               _juTitle
-              _juOauthToken
+              _juOAuthToken
               _juFields
               _juCustomField
-              (Just _juAlt)
+              (Just AltJSON)
+              _juJob
           where go
                   = clientWithRoute (Proxy :: Proxy JobsUpdateResource)
                       r

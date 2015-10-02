@@ -33,12 +33,12 @@ module Network.Google.Resource.Storage.Buckets.Insert
     , biQuotaUser
     , biPrettyPrint
     , biProject
-    , biUserIp
+    , biUserIP
+    , biBucket
     , biKey
     , biProjection
-    , biOauthToken
+    , biOAuthToken
     , biFields
-    , biAlt
     ) where
 
 import           Network.Google.Prelude
@@ -52,13 +52,14 @@ type BucketsInsertResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "project" Text :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
+               QueryParam "key" Key :>
                  QueryParam "projection"
                    StorageBucketsInsertProjection
                    :>
-                   QueryParam "oauth_token" Text :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] Bucket
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Bucket :> Post '[JSON] Bucket
 
 -- | Creates a new bucket.
 --
@@ -67,12 +68,12 @@ data BucketsInsert' = BucketsInsert'
     { _biQuotaUser   :: !(Maybe Text)
     , _biPrettyPrint :: !Bool
     , _biProject     :: !Text
-    , _biUserIp      :: !(Maybe Text)
-    , _biKey         :: !(Maybe Text)
+    , _biUserIP      :: !(Maybe Text)
+    , _biBucket      :: !Bucket
+    , _biKey         :: !(Maybe Key)
     , _biProjection  :: !(Maybe StorageBucketsInsertProjection)
-    , _biOauthToken  :: !(Maybe Text)
+    , _biOAuthToken  :: !(Maybe OAuthToken)
     , _biFields      :: !(Maybe Text)
-    , _biAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketsInsert'' with the minimum fields required to make a request.
@@ -85,31 +86,32 @@ data BucketsInsert' = BucketsInsert'
 --
 -- * 'biProject'
 --
--- * 'biUserIp'
+-- * 'biUserIP'
+--
+-- * 'biBucket'
 --
 -- * 'biKey'
 --
 -- * 'biProjection'
 --
--- * 'biOauthToken'
+-- * 'biOAuthToken'
 --
 -- * 'biFields'
---
--- * 'biAlt'
 bucketsInsert'
     :: Text -- ^ 'project'
+    -> Bucket -- ^ 'Bucket'
     -> BucketsInsert'
-bucketsInsert' pBiProject_ =
+bucketsInsert' pBiProject_ pBiBucket_ =
     BucketsInsert'
     { _biQuotaUser = Nothing
     , _biPrettyPrint = True
     , _biProject = pBiProject_
-    , _biUserIp = Nothing
+    , _biUserIP = Nothing
+    , _biBucket = pBiBucket_
     , _biKey = Nothing
     , _biProjection = Nothing
-    , _biOauthToken = Nothing
+    , _biOAuthToken = Nothing
     , _biFields = Nothing
-    , _biAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -132,13 +134,17 @@ biProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-biUserIp :: Lens' BucketsInsert' (Maybe Text)
-biUserIp = lens _biUserIp (\ s a -> s{_biUserIp = a})
+biUserIP :: Lens' BucketsInsert' (Maybe Text)
+biUserIP = lens _biUserIP (\ s a -> s{_biUserIP = a})
+
+-- | Multipart request metadata.
+biBucket :: Lens' BucketsInsert' Bucket
+biBucket = lens _biBucket (\ s a -> s{_biBucket = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-biKey :: Lens' BucketsInsert' (Maybe Text)
+biKey :: Lens' BucketsInsert' (Maybe Key)
 biKey = lens _biKey (\ s a -> s{_biKey = a})
 
 -- | Set of properties to return. Defaults to noAcl, unless the bucket
@@ -149,17 +155,17 @@ biProjection
   = lens _biProjection (\ s a -> s{_biProjection = a})
 
 -- | OAuth 2.0 token for the current user.
-biOauthToken :: Lens' BucketsInsert' (Maybe Text)
-biOauthToken
-  = lens _biOauthToken (\ s a -> s{_biOauthToken = a})
+biOAuthToken :: Lens' BucketsInsert' (Maybe OAuthToken)
+biOAuthToken
+  = lens _biOAuthToken (\ s a -> s{_biOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 biFields :: Lens' BucketsInsert' (Maybe Text)
 biFields = lens _biFields (\ s a -> s{_biFields = a})
 
--- | Data format for the response.
-biAlt :: Lens' BucketsInsert' Alt
-biAlt = lens _biAlt (\ s a -> s{_biAlt = a})
+instance GoogleAuth BucketsInsert' where
+        authKey = biKey . _Just
+        authToken = biOAuthToken . _Just
 
 instance GoogleRequest BucketsInsert' where
         type Rs BucketsInsert' = Bucket
@@ -167,12 +173,13 @@ instance GoogleRequest BucketsInsert' where
         requestWithRoute r u BucketsInsert'{..}
           = go _biQuotaUser (Just _biPrettyPrint)
               (Just _biProject)
-              _biUserIp
+              _biUserIP
               _biKey
               _biProjection
-              _biOauthToken
+              _biOAuthToken
               _biFields
-              (Just _biAlt)
+              (Just AltJSON)
+              _biBucket
           where go
                   = clientWithRoute
                       (Proxy :: Proxy BucketsInsertResource)

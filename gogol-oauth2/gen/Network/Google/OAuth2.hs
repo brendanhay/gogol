@@ -24,19 +24,19 @@ module Network.Google.OAuth2
 
     -- * Service Methods
 
-    -- ** Oauth2GetCertForOpenIdConnect
+    -- ** OAuth2GetCertForOpenIdConnect
     , module Network.Google.Method.OAuth2.GetCertForOpenIdConnect
 
-    -- ** Oauth2Tokeninfo
-    , module Network.Google.Method.OAuth2.Tokeninfo
+    -- ** OAuth2TokenInfo
+    , module Network.Google.Method.OAuth2.TokenInfo
 
     -- * REST Resources
 
-    -- ** Oauth2UserinfoGet
-    , module Network.Google.Resource.OAuth2.Userinfo.Get
+    -- ** OAuth2UserInfoGet
+    , module Network.Google.Resource.OAuth2.UserInfo.Get
 
-    -- ** Oauth2UserinfoV2MeGet
-    , module Network.Google.Resource.OAuth2.Userinfo.V2.Me.Get
+    -- ** OAuth2UserInfoV2MeGet
+    , module Network.Google.Resource.OAuth2.UserInfo.V2.Me.Get
 
     -- * Types
 
@@ -50,58 +50,55 @@ module Network.Google.OAuth2
     , jkE
     , jkKty
 
-    -- ** Tokeninfo
-    , Tokeninfo
-    , tokeninfo
-    , tAudience
-    , tEmail
-    , tExpiresIn
-    , tAccessType
-    , tScope
-    , tVerifiedEmail
-    , tUserId
-    , tTokenHandle
-    , tIssuedTo
+    -- ** TokenInfo
+    , TokenInfo
+    , tokenInfo
+    , tiAudience
+    , tiEmail
+    , tiExpiresIn
+    , tiAccessType
+    , tiScope
+    , tiVerifiedEmail
+    , tiUserId
+    , tiTokenHandle
+    , tiIssuedTo
 
     -- ** Jwk
     , Jwk
     , jwk
     , jwkKeys
 
-    -- ** Userinfoplus
-    , Userinfoplus
-    , userinfoplus
-    , uHd
-    , uEmail
-    , uLink
-    , uLocale
-    , uGivenName
-    , uFamilyName
-    , uPicture
-    , uGender
-    , uName
-    , uVerifiedEmail
-    , uId
-
-    -- ** Alt
-    , Alt (..)
+    -- ** UserInfoplus
+    , UserInfoplus
+    , userInfoplus
+    , uiHd
+    , uiEmail
+    , uiLink
+    , uiLocale
+    , uiGivenName
+    , uiFamilyName
+    , uiPicture
+    , uiGender
+    , uiName
+    , uiVerifiedEmail
+    , uiId
     ) where
 
 import           Network.Google.Method.OAuth2.GetCertForOpenIdConnect
-import           Network.Google.Method.OAuth2.Tokeninfo
+import           Network.Google.Method.OAuth2.TokenInfo
 import           Network.Google.OAuth2.Types
 import           Network.Google.Prelude
-import           Network.Google.Resource.OAuth2.Userinfo.Get
-import           Network.Google.Resource.OAuth2.Userinfo.V2.Me.Get
+import           Network.Google.Resource.OAuth2.UserInfo.Get
+import           Network.Google.Resource.OAuth2.UserInfo.V2.Me.Get
 
 {- $resources
 TODO
 -}
 
 type OAuth2API =
-     UserinfoV2MeGetResource :<|> UserinfoGetResource :<|>
+     UserInfoV2MeGetResource :<|> UserInfoGetResource :<|>
        GetCertForOpenIdConnectMethod
-       :<|> TokeninfoMethod
+       :<|> TokenInfoMethod
 
 oAuth2API :: Proxy OAuth2API
 oAuth2API = Proxy

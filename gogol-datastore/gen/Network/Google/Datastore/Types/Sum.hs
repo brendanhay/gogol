@@ -298,32 +298,3 @@ instance FromJSON PropertyExpressionAggregationFunction where
 
 instance ToJSON PropertyExpressionAggregationFunction where
     toJSON = toJSONText
-
--- | Data format for the response.
-data Alt
-    = JSON
-      -- ^ @json@
-      -- Responses with Content-Type of application\/json
-    | Proto
-      -- ^ @proto@
-      -- Responses with Content-Type of application\/x-protobuf
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable Alt
-
-instance FromText Alt where
-    fromText = \case
-        "json" -> Just JSON
-        "proto" -> Just Proto
-        _ -> Nothing
-
-instance ToText Alt where
-    toText = \case
-        JSON -> "json"
-        Proto -> "proto"
-
-instance FromJSON Alt where
-    parseJSON = parseJSONText "Alt"
-
-instance ToJSON Alt where
-    toJSON = toJSONText

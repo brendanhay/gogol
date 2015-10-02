@@ -19,7 +19,7 @@
 --
 -- | Updates a user\'s Account & Container Permissions.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsPermissionsUpdate@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsPermissionsUpdate@.
 module Network.Google.Resource.TagManager.Accounts.Permissions.Update
     (
     -- * REST Resource
@@ -32,19 +32,19 @@ module Network.Google.Resource.TagManager.Accounts.Permissions.Update
     -- * Request Lenses
     , apuQuotaUser
     , apuPrettyPrint
-    , apuUserIp
+    , apuUserAccess
+    , apuUserIP
     , apuAccountId
     , apuKey
-    , apuOauthToken
+    , apuOAuthToken
     , apuPermissionId
     , apuFields
-    , apuAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagmanagerAccountsPermissionsUpdate@ which the
+-- | A resource alias for @TagManagerAccountsPermissionsUpdate@ which the
 -- 'AccountsPermissionsUpdate'' request conforms to.
 type AccountsPermissionsUpdateResource =
      "accounts" :>
@@ -54,10 +54,11 @@ type AccountsPermissionsUpdateResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Put '[JSON] UserAccess
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] UserAccess :> Put '[JSON] UserAccess
 
 -- | Updates a user\'s Account & Container Permissions.
 --
@@ -65,13 +66,13 @@ type AccountsPermissionsUpdateResource =
 data AccountsPermissionsUpdate' = AccountsPermissionsUpdate'
     { _apuQuotaUser    :: !(Maybe Text)
     , _apuPrettyPrint  :: !Bool
-    , _apuUserIp       :: !(Maybe Text)
+    , _apuUserAccess   :: !UserAccess
+    , _apuUserIP       :: !(Maybe Text)
     , _apuAccountId    :: !Text
-    , _apuKey          :: !(Maybe Text)
-    , _apuOauthToken   :: !(Maybe Text)
+    , _apuKey          :: !(Maybe Key)
+    , _apuOAuthToken   :: !(Maybe OAuthToken)
     , _apuPermissionId :: !Text
     , _apuFields       :: !(Maybe Text)
-    , _apuAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsPermissionsUpdate'' with the minimum fields required to make a request.
@@ -82,34 +83,35 @@ data AccountsPermissionsUpdate' = AccountsPermissionsUpdate'
 --
 -- * 'apuPrettyPrint'
 --
--- * 'apuUserIp'
+-- * 'apuUserAccess'
+--
+-- * 'apuUserIP'
 --
 -- * 'apuAccountId'
 --
 -- * 'apuKey'
 --
--- * 'apuOauthToken'
+-- * 'apuOAuthToken'
 --
 -- * 'apuPermissionId'
 --
 -- * 'apuFields'
---
--- * 'apuAlt'
 accountsPermissionsUpdate'
-    :: Text -- ^ 'accountId'
+    :: UserAccess -- ^ 'UserAccess'
+    -> Text -- ^ 'accountId'
     -> Text -- ^ 'permissionId'
     -> AccountsPermissionsUpdate'
-accountsPermissionsUpdate' pApuAccountId_ pApuPermissionId_ =
+accountsPermissionsUpdate' pApuUserAccess_ pApuAccountId_ pApuPermissionId_ =
     AccountsPermissionsUpdate'
     { _apuQuotaUser = Nothing
     , _apuPrettyPrint = True
-    , _apuUserIp = Nothing
+    , _apuUserAccess = pApuUserAccess_
+    , _apuUserIP = Nothing
     , _apuAccountId = pApuAccountId_
     , _apuKey = Nothing
-    , _apuOauthToken = Nothing
+    , _apuOAuthToken = Nothing
     , _apuPermissionId = pApuPermissionId_
     , _apuFields = Nothing
-    , _apuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -125,11 +127,17 @@ apuPrettyPrint
   = lens _apuPrettyPrint
       (\ s a -> s{_apuPrettyPrint = a})
 
+-- | Multipart request metadata.
+apuUserAccess :: Lens' AccountsPermissionsUpdate' UserAccess
+apuUserAccess
+  = lens _apuUserAccess
+      (\ s a -> s{_apuUserAccess = a})
+
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-apuUserIp :: Lens' AccountsPermissionsUpdate' (Maybe Text)
-apuUserIp
-  = lens _apuUserIp (\ s a -> s{_apuUserIp = a})
+apuUserIP :: Lens' AccountsPermissionsUpdate' (Maybe Text)
+apuUserIP
+  = lens _apuUserIP (\ s a -> s{_apuUserIP = a})
 
 -- | The GTM Account ID.
 apuAccountId :: Lens' AccountsPermissionsUpdate' Text
@@ -139,14 +147,14 @@ apuAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-apuKey :: Lens' AccountsPermissionsUpdate' (Maybe Text)
+apuKey :: Lens' AccountsPermissionsUpdate' (Maybe Key)
 apuKey = lens _apuKey (\ s a -> s{_apuKey = a})
 
 -- | OAuth 2.0 token for the current user.
-apuOauthToken :: Lens' AccountsPermissionsUpdate' (Maybe Text)
-apuOauthToken
-  = lens _apuOauthToken
-      (\ s a -> s{_apuOauthToken = a})
+apuOAuthToken :: Lens' AccountsPermissionsUpdate' (Maybe OAuthToken)
+apuOAuthToken
+  = lens _apuOAuthToken
+      (\ s a -> s{_apuOAuthToken = a})
 
 -- | The GTM User ID.
 apuPermissionId :: Lens' AccountsPermissionsUpdate' Text
@@ -159,22 +167,23 @@ apuFields :: Lens' AccountsPermissionsUpdate' (Maybe Text)
 apuFields
   = lens _apuFields (\ s a -> s{_apuFields = a})
 
--- | Data format for the response.
-apuAlt :: Lens' AccountsPermissionsUpdate' Alt
-apuAlt = lens _apuAlt (\ s a -> s{_apuAlt = a})
+instance GoogleAuth AccountsPermissionsUpdate' where
+        authKey = apuKey . _Just
+        authToken = apuOAuthToken . _Just
 
 instance GoogleRequest AccountsPermissionsUpdate'
          where
         type Rs AccountsPermissionsUpdate' = UserAccess
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u AccountsPermissionsUpdate'{..}
-          = go _apuQuotaUser (Just _apuPrettyPrint) _apuUserIp
+          = go _apuQuotaUser (Just _apuPrettyPrint) _apuUserIP
               _apuAccountId
               _apuKey
-              _apuOauthToken
+              _apuOAuthToken
               _apuPermissionId
               _apuFields
-              (Just _apuAlt)
+              (Just AltJSON)
+              _apuUserAccess
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountsPermissionsUpdateResource)

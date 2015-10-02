@@ -33,14 +33,13 @@ module Network.Google.Resource.Compute.Instances.DeleteAccessConfig
     , idacQuotaUser
     , idacPrettyPrint
     , idacProject
-    , idacUserIp
+    , idacUserIP
     , idacNetworkInterface
     , idacZone
     , idacKey
-    , idacOauthToken
+    , idacOAuthToken
     , idacAccessConfig
     , idacFields
-    , idacAlt
     , idacInstance
     ) where
 
@@ -60,11 +59,12 @@ type InstancesDeleteAccessConfigResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "networkInterface" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "accessConfig" Text :>
                                QueryParam "fields" Text :>
-                                 QueryParam "alt" Alt :> Post '[JSON] Operation
+                                 QueryParam "alt" AltJSON :>
+                                   Post '[JSON] Operation
 
 -- | Deletes an access config from an instance\'s network interface.
 --
@@ -73,14 +73,13 @@ data InstancesDeleteAccessConfig' = InstancesDeleteAccessConfig'
     { _idacQuotaUser        :: !(Maybe Text)
     , _idacPrettyPrint      :: !Bool
     , _idacProject          :: !Text
-    , _idacUserIp           :: !(Maybe Text)
+    , _idacUserIP           :: !(Maybe Text)
     , _idacNetworkInterface :: !Text
     , _idacZone             :: !Text
-    , _idacKey              :: !(Maybe Text)
-    , _idacOauthToken       :: !(Maybe Text)
+    , _idacKey              :: !(Maybe Key)
+    , _idacOAuthToken       :: !(Maybe OAuthToken)
     , _idacAccessConfig     :: !Text
     , _idacFields           :: !(Maybe Text)
-    , _idacAlt              :: !Alt
     , _idacInstance         :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -94,7 +93,7 @@ data InstancesDeleteAccessConfig' = InstancesDeleteAccessConfig'
 --
 -- * 'idacProject'
 --
--- * 'idacUserIp'
+-- * 'idacUserIP'
 --
 -- * 'idacNetworkInterface'
 --
@@ -102,13 +101,11 @@ data InstancesDeleteAccessConfig' = InstancesDeleteAccessConfig'
 --
 -- * 'idacKey'
 --
--- * 'idacOauthToken'
+-- * 'idacOAuthToken'
 --
 -- * 'idacAccessConfig'
 --
 -- * 'idacFields'
---
--- * 'idacAlt'
 --
 -- * 'idacInstance'
 instancesDeleteAccessConfig'
@@ -123,14 +120,13 @@ instancesDeleteAccessConfig' pIdacProject_ pIdacNetworkInterface_ pIdacZone_ pId
     { _idacQuotaUser = Nothing
     , _idacPrettyPrint = True
     , _idacProject = pIdacProject_
-    , _idacUserIp = Nothing
+    , _idacUserIP = Nothing
     , _idacNetworkInterface = pIdacNetworkInterface_
     , _idacZone = pIdacZone_
     , _idacKey = Nothing
-    , _idacOauthToken = Nothing
+    , _idacOAuthToken = Nothing
     , _idacAccessConfig = pIdacAccessConfig_
     , _idacFields = Nothing
-    , _idacAlt = JSON
     , _idacInstance = pIdacInstance_
     }
 
@@ -155,9 +151,9 @@ idacProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-idacUserIp :: Lens' InstancesDeleteAccessConfig' (Maybe Text)
-idacUserIp
-  = lens _idacUserIp (\ s a -> s{_idacUserIp = a})
+idacUserIP :: Lens' InstancesDeleteAccessConfig' (Maybe Text)
+idacUserIP
+  = lens _idacUserIP (\ s a -> s{_idacUserIP = a})
 
 -- | The name of the network interface.
 idacNetworkInterface :: Lens' InstancesDeleteAccessConfig' Text
@@ -172,14 +168,14 @@ idacZone = lens _idacZone (\ s a -> s{_idacZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-idacKey :: Lens' InstancesDeleteAccessConfig' (Maybe Text)
+idacKey :: Lens' InstancesDeleteAccessConfig' (Maybe Key)
 idacKey = lens _idacKey (\ s a -> s{_idacKey = a})
 
 -- | OAuth 2.0 token for the current user.
-idacOauthToken :: Lens' InstancesDeleteAccessConfig' (Maybe Text)
-idacOauthToken
-  = lens _idacOauthToken
-      (\ s a -> s{_idacOauthToken = a})
+idacOAuthToken :: Lens' InstancesDeleteAccessConfig' (Maybe OAuthToken)
+idacOAuthToken
+  = lens _idacOAuthToken
+      (\ s a -> s{_idacOAuthToken = a})
 
 -- | The name of the access config to delete.
 idacAccessConfig :: Lens' InstancesDeleteAccessConfig' Text
@@ -192,14 +188,15 @@ idacFields :: Lens' InstancesDeleteAccessConfig' (Maybe Text)
 idacFields
   = lens _idacFields (\ s a -> s{_idacFields = a})
 
--- | Data format for the response.
-idacAlt :: Lens' InstancesDeleteAccessConfig' Alt
-idacAlt = lens _idacAlt (\ s a -> s{_idacAlt = a})
-
 -- | The instance name for this request.
 idacInstance :: Lens' InstancesDeleteAccessConfig' Text
 idacInstance
   = lens _idacInstance (\ s a -> s{_idacInstance = a})
+
+instance GoogleAuth InstancesDeleteAccessConfig'
+         where
+        authKey = idacKey . _Just
+        authToken = idacOAuthToken . _Just
 
 instance GoogleRequest InstancesDeleteAccessConfig'
          where
@@ -208,15 +205,15 @@ instance GoogleRequest InstancesDeleteAccessConfig'
         requestWithRoute r u InstancesDeleteAccessConfig'{..}
           = go _idacQuotaUser (Just _idacPrettyPrint)
               _idacProject
-              _idacUserIp
+              _idacUserIP
               (Just _idacNetworkInterface)
               _idacZone
               _idacKey
-              _idacOauthToken
+              _idacOAuthToken
               (Just _idacAccessConfig)
               _idacFields
-              (Just _idacAlt)
               _idacInstance
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InstancesDeleteAccessConfigResource)

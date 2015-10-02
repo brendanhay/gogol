@@ -33,12 +33,11 @@ module Network.Google.Resource.FusionTables.Task.Get
     , tgQuotaUser
     , tgPrettyPrint
     , tgTaskId
-    , tgUserIp
+    , tgUserIP
     , tgKey
-    , tgOauthToken
+    , tgOAuthToken
     , tgTableId
     , tgFields
-    , tgAlt
     ) where
 
 import           Network.Google.FusionTables.Types
@@ -54,10 +53,10 @@ type TaskGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] Task
+                         QueryParam "alt" AltJSON :> Get '[JSON] Task
 
 -- | Retrieves a specific task by its ID.
 --
@@ -66,12 +65,11 @@ data TaskGet' = TaskGet'
     { _tgQuotaUser   :: !(Maybe Text)
     , _tgPrettyPrint :: !Bool
     , _tgTaskId      :: !Text
-    , _tgUserIp      :: !(Maybe Text)
-    , _tgKey         :: !(Maybe Text)
-    , _tgOauthToken  :: !(Maybe Text)
+    , _tgUserIP      :: !(Maybe Text)
+    , _tgKey         :: !(Maybe Key)
+    , _tgOAuthToken  :: !(Maybe OAuthToken)
     , _tgTableId     :: !Text
     , _tgFields      :: !(Maybe Text)
-    , _tgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TaskGet'' with the minimum fields required to make a request.
@@ -84,17 +82,15 @@ data TaskGet' = TaskGet'
 --
 -- * 'tgTaskId'
 --
--- * 'tgUserIp'
+-- * 'tgUserIP'
 --
 -- * 'tgKey'
 --
--- * 'tgOauthToken'
+-- * 'tgOAuthToken'
 --
 -- * 'tgTableId'
 --
 -- * 'tgFields'
---
--- * 'tgAlt'
 taskGet'
     :: Text -- ^ 'taskId'
     -> Text -- ^ 'tableId'
@@ -104,12 +100,11 @@ taskGet' pTgTaskId_ pTgTableId_ =
     { _tgQuotaUser = Nothing
     , _tgPrettyPrint = True
     , _tgTaskId = pTgTaskId_
-    , _tgUserIp = Nothing
+    , _tgUserIP = Nothing
     , _tgKey = Nothing
-    , _tgOauthToken = Nothing
+    , _tgOAuthToken = Nothing
     , _tgTableId = pTgTableId_
     , _tgFields = Nothing
-    , _tgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -131,19 +126,19 @@ tgTaskId = lens _tgTaskId (\ s a -> s{_tgTaskId = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tgUserIp :: Lens' TaskGet' (Maybe Text)
-tgUserIp = lens _tgUserIp (\ s a -> s{_tgUserIp = a})
+tgUserIP :: Lens' TaskGet' (Maybe Text)
+tgUserIP = lens _tgUserIP (\ s a -> s{_tgUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tgKey :: Lens' TaskGet' (Maybe Text)
+tgKey :: Lens' TaskGet' (Maybe Key)
 tgKey = lens _tgKey (\ s a -> s{_tgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-tgOauthToken :: Lens' TaskGet' (Maybe Text)
-tgOauthToken
-  = lens _tgOauthToken (\ s a -> s{_tgOauthToken = a})
+tgOAuthToken :: Lens' TaskGet' (Maybe OAuthToken)
+tgOAuthToken
+  = lens _tgOAuthToken (\ s a -> s{_tgOAuthToken = a})
 
 -- | Table to which the task belongs.
 tgTableId :: Lens' TaskGet' Text
@@ -154,21 +149,21 @@ tgTableId
 tgFields :: Lens' TaskGet' (Maybe Text)
 tgFields = lens _tgFields (\ s a -> s{_tgFields = a})
 
--- | Data format for the response.
-tgAlt :: Lens' TaskGet' Alt
-tgAlt = lens _tgAlt (\ s a -> s{_tgAlt = a})
+instance GoogleAuth TaskGet' where
+        authKey = tgKey . _Just
+        authToken = tgOAuthToken . _Just
 
 instance GoogleRequest TaskGet' where
         type Rs TaskGet' = Task
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u TaskGet'{..}
           = go _tgQuotaUser (Just _tgPrettyPrint) _tgTaskId
-              _tgUserIp
+              _tgUserIP
               _tgKey
-              _tgOauthToken
+              _tgOAuthToken
               _tgTableId
               _tgFields
-              (Just _tgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy TaskGetResource) r
                       u

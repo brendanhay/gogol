@@ -32,14 +32,13 @@ module Network.Google.Resource.Games.Rooms.List
     -- * Request Lenses
     , rQuotaUser
     , rPrettyPrint
-    , rUserIp
+    , rUserIP
     , rKey
     , rLanguage
     , rPageToken
-    , rOauthToken
+    , rOAuthToken
     , rMaxResults
     , rFields
-    , rAlt
     ) where
 
 import           Network.Google.Games.Types
@@ -52,13 +51,13 @@ type RoomsListResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
+             QueryParam "key" Key :>
                QueryParam "language" Text :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "oauth_token" Text :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "maxResults" Int32 :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] RoomList
+                         QueryParam "alt" AltJSON :> Get '[JSON] RoomList
 
 -- | Returns invitations to join rooms.
 --
@@ -66,14 +65,13 @@ type RoomsListResource =
 data RoomsList' = RoomsList'
     { _rQuotaUser   :: !(Maybe Text)
     , _rPrettyPrint :: !Bool
-    , _rUserIp      :: !(Maybe Text)
-    , _rKey         :: !(Maybe Text)
+    , _rUserIP      :: !(Maybe Text)
+    , _rKey         :: !(Maybe Key)
     , _rLanguage    :: !(Maybe Text)
     , _rPageToken   :: !(Maybe Text)
-    , _rOauthToken  :: !(Maybe Text)
+    , _rOAuthToken  :: !(Maybe OAuthToken)
     , _rMaxResults  :: !(Maybe Int32)
     , _rFields      :: !(Maybe Text)
-    , _rAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomsList'' with the minimum fields required to make a request.
@@ -84,7 +82,7 @@ data RoomsList' = RoomsList'
 --
 -- * 'rPrettyPrint'
 --
--- * 'rUserIp'
+-- * 'rUserIP'
 --
 -- * 'rKey'
 --
@@ -92,27 +90,24 @@ data RoomsList' = RoomsList'
 --
 -- * 'rPageToken'
 --
--- * 'rOauthToken'
+-- * 'rOAuthToken'
 --
 -- * 'rMaxResults'
 --
 -- * 'rFields'
---
--- * 'rAlt'
 roomsList'
     :: RoomsList'
 roomsList' =
     RoomsList'
     { _rQuotaUser = Nothing
     , _rPrettyPrint = True
-    , _rUserIp = Nothing
+    , _rUserIP = Nothing
     , _rKey = Nothing
     , _rLanguage = Nothing
     , _rPageToken = Nothing
-    , _rOauthToken = Nothing
+    , _rOAuthToken = Nothing
     , _rMaxResults = Nothing
     , _rFields = Nothing
-    , _rAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -129,13 +124,13 @@ rPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rUserIp :: Lens' RoomsList' (Maybe Text)
-rUserIp = lens _rUserIp (\ s a -> s{_rUserIp = a})
+rUserIP :: Lens' RoomsList' (Maybe Text)
+rUserIP = lens _rUserIP (\ s a -> s{_rUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rKey :: Lens' RoomsList' (Maybe Text)
+rKey :: Lens' RoomsList' (Maybe Key)
 rKey = lens _rKey (\ s a -> s{_rKey = a})
 
 -- | The preferred language to use for strings returned by this method.
@@ -149,9 +144,9 @@ rPageToken
   = lens _rPageToken (\ s a -> s{_rPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-rOauthToken :: Lens' RoomsList' (Maybe Text)
-rOauthToken
-  = lens _rOauthToken (\ s a -> s{_rOauthToken = a})
+rOAuthToken :: Lens' RoomsList' (Maybe OAuthToken)
+rOAuthToken
+  = lens _rOAuthToken (\ s a -> s{_rOAuthToken = a})
 
 -- | The maximum number of rooms to return in the response, used for paging.
 -- For any response, the actual number of rooms to return may be less than
@@ -164,21 +159,21 @@ rMaxResults
 rFields :: Lens' RoomsList' (Maybe Text)
 rFields = lens _rFields (\ s a -> s{_rFields = a})
 
--- | Data format for the response.
-rAlt :: Lens' RoomsList' Alt
-rAlt = lens _rAlt (\ s a -> s{_rAlt = a})
+instance GoogleAuth RoomsList' where
+        authKey = rKey . _Just
+        authToken = rOAuthToken . _Just
 
 instance GoogleRequest RoomsList' where
         type Rs RoomsList' = RoomList
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u RoomsList'{..}
-          = go _rQuotaUser (Just _rPrettyPrint) _rUserIp _rKey
+          = go _rQuotaUser (Just _rPrettyPrint) _rUserIP _rKey
               _rLanguage
               _rPageToken
-              _rOauthToken
+              _rOAuthToken
               _rMaxResults
               _rFields
-              (Just _rAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy RoomsListResource)
                       r

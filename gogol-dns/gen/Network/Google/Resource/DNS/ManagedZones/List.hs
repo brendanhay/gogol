@@ -33,14 +33,13 @@ module Network.Google.Resource.DNS.ManagedZones.List
     , mzlQuotaUser
     , mzlPrettyPrint
     , mzlProject
-    , mzlUserIp
+    , mzlUserIP
     , mzlKey
     , mzlPageToken
-    , mzlOauthToken
-    , mzlDnsName
+    , mzlOAuthToken
+    , mzlDNSName
     , mzlMaxResults
     , mzlFields
-    , mzlAlt
     ) where
 
 import           Network.Google.DNS.Types
@@ -54,13 +53,13 @@ type ManagedZonesListResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
+               QueryParam "key" Key :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "oauth_token" Text :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "dnsName" Text :>
                        QueryParam "maxResults" Int32 :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :>
+                           QueryParam "alt" AltJSON :>
                              Get '[JSON] ManagedZonesListResponse
 
 -- | Enumerate ManagedZones that have been created but not yet deleted.
@@ -70,14 +69,13 @@ data ManagedZonesList' = ManagedZonesList'
     { _mzlQuotaUser   :: !(Maybe Text)
     , _mzlPrettyPrint :: !Bool
     , _mzlProject     :: !Text
-    , _mzlUserIp      :: !(Maybe Text)
-    , _mzlKey         :: !(Maybe Text)
+    , _mzlUserIP      :: !(Maybe Text)
+    , _mzlKey         :: !(Maybe Key)
     , _mzlPageToken   :: !(Maybe Text)
-    , _mzlOauthToken  :: !(Maybe Text)
-    , _mzlDnsName     :: !(Maybe Text)
+    , _mzlOAuthToken  :: !(Maybe OAuthToken)
+    , _mzlDNSName     :: !(Maybe Text)
     , _mzlMaxResults  :: !(Maybe Int32)
     , _mzlFields      :: !(Maybe Text)
-    , _mzlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagedZonesList'' with the minimum fields required to make a request.
@@ -90,21 +88,19 @@ data ManagedZonesList' = ManagedZonesList'
 --
 -- * 'mzlProject'
 --
--- * 'mzlUserIp'
+-- * 'mzlUserIP'
 --
 -- * 'mzlKey'
 --
 -- * 'mzlPageToken'
 --
--- * 'mzlOauthToken'
+-- * 'mzlOAuthToken'
 --
--- * 'mzlDnsName'
+-- * 'mzlDNSName'
 --
 -- * 'mzlMaxResults'
 --
 -- * 'mzlFields'
---
--- * 'mzlAlt'
 managedZonesList'
     :: Text -- ^ 'project'
     -> ManagedZonesList'
@@ -113,14 +109,13 @@ managedZonesList' pMzlProject_ =
     { _mzlQuotaUser = Nothing
     , _mzlPrettyPrint = True
     , _mzlProject = pMzlProject_
-    , _mzlUserIp = Nothing
+    , _mzlUserIP = Nothing
     , _mzlKey = Nothing
     , _mzlPageToken = Nothing
-    , _mzlOauthToken = Nothing
-    , _mzlDnsName = Nothing
+    , _mzlOAuthToken = Nothing
+    , _mzlDNSName = Nothing
     , _mzlMaxResults = Nothing
     , _mzlFields = Nothing
-    , _mzlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -143,14 +138,14 @@ mzlProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mzlUserIp :: Lens' ManagedZonesList' (Maybe Text)
-mzlUserIp
-  = lens _mzlUserIp (\ s a -> s{_mzlUserIp = a})
+mzlUserIP :: Lens' ManagedZonesList' (Maybe Text)
+mzlUserIP
+  = lens _mzlUserIP (\ s a -> s{_mzlUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mzlKey :: Lens' ManagedZonesList' (Maybe Text)
+mzlKey :: Lens' ManagedZonesList' (Maybe Key)
 mzlKey = lens _mzlKey (\ s a -> s{_mzlKey = a})
 
 -- | Optional. A tag returned by a previous list request that was truncated.
@@ -160,15 +155,15 @@ mzlPageToken
   = lens _mzlPageToken (\ s a -> s{_mzlPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-mzlOauthToken :: Lens' ManagedZonesList' (Maybe Text)
-mzlOauthToken
-  = lens _mzlOauthToken
-      (\ s a -> s{_mzlOauthToken = a})
+mzlOAuthToken :: Lens' ManagedZonesList' (Maybe OAuthToken)
+mzlOAuthToken
+  = lens _mzlOAuthToken
+      (\ s a -> s{_mzlOAuthToken = a})
 
 -- | Restricts the list to return only zones with this domain name.
-mzlDnsName :: Lens' ManagedZonesList' (Maybe Text)
-mzlDnsName
-  = lens _mzlDnsName (\ s a -> s{_mzlDnsName = a})
+mzlDNSName :: Lens' ManagedZonesList' (Maybe Text)
+mzlDNSName
+  = lens _mzlDNSName (\ s a -> s{_mzlDNSName = a})
 
 -- | Optional. Maximum number of results to be returned. If unspecified, the
 -- server will decide how many results to return.
@@ -182,23 +177,23 @@ mzlFields :: Lens' ManagedZonesList' (Maybe Text)
 mzlFields
   = lens _mzlFields (\ s a -> s{_mzlFields = a})
 
--- | Data format for the response.
-mzlAlt :: Lens' ManagedZonesList' Alt
-mzlAlt = lens _mzlAlt (\ s a -> s{_mzlAlt = a})
+instance GoogleAuth ManagedZonesList' where
+        authKey = mzlKey . _Just
+        authToken = mzlOAuthToken . _Just
 
 instance GoogleRequest ManagedZonesList' where
         type Rs ManagedZonesList' = ManagedZonesListResponse
         request = requestWithRoute defReq dNSURL
         requestWithRoute r u ManagedZonesList'{..}
           = go _mzlQuotaUser (Just _mzlPrettyPrint) _mzlProject
-              _mzlUserIp
+              _mzlUserIP
               _mzlKey
               _mzlPageToken
-              _mzlOauthToken
-              _mzlDnsName
+              _mzlOAuthToken
+              _mzlDNSName
               _mzlMaxResults
               _mzlFields
-              (Just _mzlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ManagedZonesListResource)

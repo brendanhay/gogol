@@ -33,11 +33,10 @@ module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Dele
     , acdQuotaUser
     , acdPrettyPrint
     , acdAchievementId
-    , acdUserIp
+    , acdUserIP
     , acdKey
-    , acdOauthToken
+    , acdOAuthToken
     , acdFields
-    , acdAlt
     ) where
 
 import           Network.Google.GamesConfiguration.Types
@@ -51,10 +50,10 @@ type AchievementConfigurationsDeleteResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Delete '[JSON] ()
+                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete the achievement configuration with the given ID.
 --
@@ -63,11 +62,10 @@ data AchievementConfigurationsDelete' = AchievementConfigurationsDelete'
     { _acdQuotaUser     :: !(Maybe Text)
     , _acdPrettyPrint   :: !Bool
     , _acdAchievementId :: !Text
-    , _acdUserIp        :: !(Maybe Text)
-    , _acdKey           :: !(Maybe Text)
-    , _acdOauthToken    :: !(Maybe Text)
+    , _acdUserIP        :: !(Maybe Text)
+    , _acdKey           :: !(Maybe Key)
+    , _acdOAuthToken    :: !(Maybe OAuthToken)
     , _acdFields        :: !(Maybe Text)
-    , _acdAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementConfigurationsDelete'' with the minimum fields required to make a request.
@@ -80,15 +78,13 @@ data AchievementConfigurationsDelete' = AchievementConfigurationsDelete'
 --
 -- * 'acdAchievementId'
 --
--- * 'acdUserIp'
+-- * 'acdUserIP'
 --
 -- * 'acdKey'
 --
--- * 'acdOauthToken'
+-- * 'acdOAuthToken'
 --
 -- * 'acdFields'
---
--- * 'acdAlt'
 achievementConfigurationsDelete'
     :: Text -- ^ 'achievementId'
     -> AchievementConfigurationsDelete'
@@ -97,11 +93,10 @@ achievementConfigurationsDelete' pAcdAchievementId_ =
     { _acdQuotaUser = Nothing
     , _acdPrettyPrint = True
     , _acdAchievementId = pAcdAchievementId_
-    , _acdUserIp = Nothing
+    , _acdUserIP = Nothing
     , _acdKey = Nothing
-    , _acdOauthToken = Nothing
+    , _acdOAuthToken = Nothing
     , _acdFields = Nothing
-    , _acdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -125,30 +120,31 @@ acdAchievementId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-acdUserIp :: Lens' AchievementConfigurationsDelete' (Maybe Text)
-acdUserIp
-  = lens _acdUserIp (\ s a -> s{_acdUserIp = a})
+acdUserIP :: Lens' AchievementConfigurationsDelete' (Maybe Text)
+acdUserIP
+  = lens _acdUserIP (\ s a -> s{_acdUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-acdKey :: Lens' AchievementConfigurationsDelete' (Maybe Text)
+acdKey :: Lens' AchievementConfigurationsDelete' (Maybe Key)
 acdKey = lens _acdKey (\ s a -> s{_acdKey = a})
 
 -- | OAuth 2.0 token for the current user.
-acdOauthToken :: Lens' AchievementConfigurationsDelete' (Maybe Text)
-acdOauthToken
-  = lens _acdOauthToken
-      (\ s a -> s{_acdOauthToken = a})
+acdOAuthToken :: Lens' AchievementConfigurationsDelete' (Maybe OAuthToken)
+acdOAuthToken
+  = lens _acdOAuthToken
+      (\ s a -> s{_acdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 acdFields :: Lens' AchievementConfigurationsDelete' (Maybe Text)
 acdFields
   = lens _acdFields (\ s a -> s{_acdFields = a})
 
--- | Data format for the response.
-acdAlt :: Lens' AchievementConfigurationsDelete' Alt
-acdAlt = lens _acdAlt (\ s a -> s{_acdAlt = a})
+instance GoogleAuth AchievementConfigurationsDelete'
+         where
+        authKey = acdKey . _Just
+        authToken = acdOAuthToken . _Just
 
 instance GoogleRequest
          AchievementConfigurationsDelete' where
@@ -159,11 +155,11 @@ instance GoogleRequest
           AchievementConfigurationsDelete'{..}
           = go _acdQuotaUser (Just _acdPrettyPrint)
               _acdAchievementId
-              _acdUserIp
+              _acdUserIP
               _acdKey
-              _acdOauthToken
+              _acdOAuthToken
               _acdFields
-              (Just _acdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

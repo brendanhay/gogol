@@ -31,15 +31,15 @@ module Network.Google.Resource.Calendar.CalendarList.Patch
     , CalendarListPatch'
 
     -- * Request Lenses
+    , clpCalendarListEntry
     , clpQuotaUser
     , clpCalendarId
     , clpPrettyPrint
-    , clpUserIp
+    , clpUserIP
     , clpColorRgbFormat
     , clpKey
-    , clpOauthToken
+    , clpOAuthToken
     , clpFields
-    , clpAlt
     ) where
 
 import           Network.Google.AppsCalendar.Types
@@ -56,31 +56,34 @@ type CalendarListPatchResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "colorRgbFormat" Bool :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :>
-                             Patch '[JSON] CalendarListEntry
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] CalendarListEntry :>
+                               Patch '[JSON] CalendarListEntry
 
 -- | Updates an entry on the user\'s calendar list. This method supports
 -- patch semantics.
 --
 -- /See:/ 'calendarListPatch'' smart constructor.
 data CalendarListPatch' = CalendarListPatch'
-    { _clpQuotaUser      :: !(Maybe Text)
-    , _clpCalendarId     :: !Text
-    , _clpPrettyPrint    :: !Bool
-    , _clpUserIp         :: !(Maybe Text)
-    , _clpColorRgbFormat :: !(Maybe Bool)
-    , _clpKey            :: !(Maybe Text)
-    , _clpOauthToken     :: !(Maybe Text)
-    , _clpFields         :: !(Maybe Text)
-    , _clpAlt            :: !Alt
+    { _clpCalendarListEntry :: !CalendarListEntry
+    , _clpQuotaUser         :: !(Maybe Text)
+    , _clpCalendarId        :: !Text
+    , _clpPrettyPrint       :: !Bool
+    , _clpUserIP            :: !(Maybe Text)
+    , _clpColorRgbFormat    :: !(Maybe Bool)
+    , _clpKey               :: !(Maybe Key)
+    , _clpOAuthToken        :: !(Maybe OAuthToken)
+    , _clpFields            :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CalendarListPatch'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'clpCalendarListEntry'
 --
 -- * 'clpQuotaUser'
 --
@@ -88,32 +91,37 @@ data CalendarListPatch' = CalendarListPatch'
 --
 -- * 'clpPrettyPrint'
 --
--- * 'clpUserIp'
+-- * 'clpUserIP'
 --
 -- * 'clpColorRgbFormat'
 --
 -- * 'clpKey'
 --
--- * 'clpOauthToken'
+-- * 'clpOAuthToken'
 --
 -- * 'clpFields'
---
--- * 'clpAlt'
 calendarListPatch'
-    :: Text -- ^ 'calendarId'
+    :: CalendarListEntry -- ^ 'CalendarListEntry'
+    -> Text -- ^ 'calendarId'
     -> CalendarListPatch'
-calendarListPatch' pClpCalendarId_ =
+calendarListPatch' pClpCalendarListEntry_ pClpCalendarId_ =
     CalendarListPatch'
-    { _clpQuotaUser = Nothing
+    { _clpCalendarListEntry = pClpCalendarListEntry_
+    , _clpQuotaUser = Nothing
     , _clpCalendarId = pClpCalendarId_
     , _clpPrettyPrint = True
-    , _clpUserIp = Nothing
+    , _clpUserIP = Nothing
     , _clpColorRgbFormat = Nothing
     , _clpKey = Nothing
-    , _clpOauthToken = Nothing
+    , _clpOAuthToken = Nothing
     , _clpFields = Nothing
-    , _clpAlt = JSON
     }
+
+-- | Multipart request metadata.
+clpCalendarListEntry :: Lens' CalendarListPatch' CalendarListEntry
+clpCalendarListEntry
+  = lens _clpCalendarListEntry
+      (\ s a -> s{_clpCalendarListEntry = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -138,9 +146,9 @@ clpPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-clpUserIp :: Lens' CalendarListPatch' (Maybe Text)
-clpUserIp
-  = lens _clpUserIp (\ s a -> s{_clpUserIp = a})
+clpUserIP :: Lens' CalendarListPatch' (Maybe Text)
+clpUserIP
+  = lens _clpUserIP (\ s a -> s{_clpUserIP = a})
 
 -- | Whether to use the foregroundColor and backgroundColor fields to write
 -- the calendar colors (RGB). If this feature is used, the index-based
@@ -154,23 +162,23 @@ clpColorRgbFormat
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-clpKey :: Lens' CalendarListPatch' (Maybe Text)
+clpKey :: Lens' CalendarListPatch' (Maybe Key)
 clpKey = lens _clpKey (\ s a -> s{_clpKey = a})
 
 -- | OAuth 2.0 token for the current user.
-clpOauthToken :: Lens' CalendarListPatch' (Maybe Text)
-clpOauthToken
-  = lens _clpOauthToken
-      (\ s a -> s{_clpOauthToken = a})
+clpOAuthToken :: Lens' CalendarListPatch' (Maybe OAuthToken)
+clpOAuthToken
+  = lens _clpOAuthToken
+      (\ s a -> s{_clpOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 clpFields :: Lens' CalendarListPatch' (Maybe Text)
 clpFields
   = lens _clpFields (\ s a -> s{_clpFields = a})
 
--- | Data format for the response.
-clpAlt :: Lens' CalendarListPatch' Alt
-clpAlt = lens _clpAlt (\ s a -> s{_clpAlt = a})
+instance GoogleAuth CalendarListPatch' where
+        authKey = clpKey . _Just
+        authToken = clpOAuthToken . _Just
 
 instance GoogleRequest CalendarListPatch' where
         type Rs CalendarListPatch' = CalendarListEntry
@@ -178,12 +186,13 @@ instance GoogleRequest CalendarListPatch' where
         requestWithRoute r u CalendarListPatch'{..}
           = go _clpQuotaUser _clpCalendarId
               (Just _clpPrettyPrint)
-              _clpUserIp
+              _clpUserIP
               _clpColorRgbFormat
               _clpKey
-              _clpOauthToken
+              _clpOAuthToken
               _clpFields
-              (Just _clpAlt)
+              (Just AltJSON)
+              _clpCalendarListEntry
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CalendarListPatchResource)

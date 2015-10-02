@@ -32,13 +32,13 @@ module Network.Google.Resource.DFAReporting.Campaigns.Patch
     -- * Request Lenses
     , cpQuotaUser
     , cpPrettyPrint
-    , cpUserIp
+    , cpUserIP
     , cpProfileId
+    , cpCampaign
     , cpKey
     , cpId
-    , cpOauthToken
+    , cpOAuthToken
     , cpFields
-    , cpAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -53,11 +53,12 @@ type CampaignsPatchResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "id" Int64 :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Patch '[JSON] Campaign
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Campaign :> Patch '[JSON] Campaign
 
 -- | Updates an existing campaign. This method supports patch semantics.
 --
@@ -65,13 +66,13 @@ type CampaignsPatchResource =
 data CampaignsPatch' = CampaignsPatch'
     { _cpQuotaUser   :: !(Maybe Text)
     , _cpPrettyPrint :: !Bool
-    , _cpUserIp      :: !(Maybe Text)
+    , _cpUserIP      :: !(Maybe Text)
     , _cpProfileId   :: !Int64
-    , _cpKey         :: !(Maybe Text)
+    , _cpCampaign    :: !Campaign
+    , _cpKey         :: !(Maybe Key)
     , _cpId          :: !Int64
-    , _cpOauthToken  :: !(Maybe Text)
+    , _cpOAuthToken  :: !(Maybe OAuthToken)
     , _cpFields      :: !(Maybe Text)
-    , _cpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CampaignsPatch'' with the minimum fields required to make a request.
@@ -82,34 +83,35 @@ data CampaignsPatch' = CampaignsPatch'
 --
 -- * 'cpPrettyPrint'
 --
--- * 'cpUserIp'
+-- * 'cpUserIP'
 --
 -- * 'cpProfileId'
+--
+-- * 'cpCampaign'
 --
 -- * 'cpKey'
 --
 -- * 'cpId'
 --
--- * 'cpOauthToken'
+-- * 'cpOAuthToken'
 --
 -- * 'cpFields'
---
--- * 'cpAlt'
 campaignsPatch'
     :: Int64 -- ^ 'profileId'
+    -> Campaign -- ^ 'Campaign'
     -> Int64 -- ^ 'id'
     -> CampaignsPatch'
-campaignsPatch' pCpProfileId_ pCpId_ =
+campaignsPatch' pCpProfileId_ pCpCampaign_ pCpId_ =
     CampaignsPatch'
     { _cpQuotaUser = Nothing
     , _cpPrettyPrint = True
-    , _cpUserIp = Nothing
+    , _cpUserIP = Nothing
     , _cpProfileId = pCpProfileId_
+    , _cpCampaign = pCpCampaign_
     , _cpKey = Nothing
     , _cpId = pCpId_
-    , _cpOauthToken = Nothing
+    , _cpOAuthToken = Nothing
     , _cpFields = Nothing
-    , _cpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,18 +129,23 @@ cpPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cpUserIp :: Lens' CampaignsPatch' (Maybe Text)
-cpUserIp = lens _cpUserIp (\ s a -> s{_cpUserIp = a})
+cpUserIP :: Lens' CampaignsPatch' (Maybe Text)
+cpUserIP = lens _cpUserIP (\ s a -> s{_cpUserIP = a})
 
 -- | User profile ID associated with this request.
 cpProfileId :: Lens' CampaignsPatch' Int64
 cpProfileId
   = lens _cpProfileId (\ s a -> s{_cpProfileId = a})
 
+-- | Multipart request metadata.
+cpCampaign :: Lens' CampaignsPatch' Campaign
+cpCampaign
+  = lens _cpCampaign (\ s a -> s{_cpCampaign = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cpKey :: Lens' CampaignsPatch' (Maybe Text)
+cpKey :: Lens' CampaignsPatch' (Maybe Key)
 cpKey = lens _cpKey (\ s a -> s{_cpKey = a})
 
 -- | Campaign ID.
@@ -146,29 +153,30 @@ cpId :: Lens' CampaignsPatch' Int64
 cpId = lens _cpId (\ s a -> s{_cpId = a})
 
 -- | OAuth 2.0 token for the current user.
-cpOauthToken :: Lens' CampaignsPatch' (Maybe Text)
-cpOauthToken
-  = lens _cpOauthToken (\ s a -> s{_cpOauthToken = a})
+cpOAuthToken :: Lens' CampaignsPatch' (Maybe OAuthToken)
+cpOAuthToken
+  = lens _cpOAuthToken (\ s a -> s{_cpOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cpFields :: Lens' CampaignsPatch' (Maybe Text)
 cpFields = lens _cpFields (\ s a -> s{_cpFields = a})
 
--- | Data format for the response.
-cpAlt :: Lens' CampaignsPatch' Alt
-cpAlt = lens _cpAlt (\ s a -> s{_cpAlt = a})
+instance GoogleAuth CampaignsPatch' where
+        authKey = cpKey . _Just
+        authToken = cpOAuthToken . _Just
 
 instance GoogleRequest CampaignsPatch' where
         type Rs CampaignsPatch' = Campaign
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CampaignsPatch'{..}
-          = go _cpQuotaUser (Just _cpPrettyPrint) _cpUserIp
+          = go _cpQuotaUser (Just _cpPrettyPrint) _cpUserIP
               _cpProfileId
               _cpKey
               (Just _cpId)
-              _cpOauthToken
+              _cpOAuthToken
               _cpFields
-              (Just _cpAlt)
+              (Just AltJSON)
+              _cpCampaign
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CampaignsPatchResource)

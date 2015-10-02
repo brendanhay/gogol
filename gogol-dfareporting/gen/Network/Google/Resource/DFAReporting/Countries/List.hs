@@ -32,12 +32,11 @@ module Network.Google.Resource.DFAReporting.Countries.List
     -- * Request Lenses
     , couQuotaUser
     , couPrettyPrint
-    , couUserIp
+    , couUserIP
     , couProfileId
     , couKey
-    , couOauthToken
+    , couOAuthToken
     , couFields
-    , couAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,10 +51,10 @@ type CountriesListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :>
+                       QueryParam "alt" AltJSON :>
                          Get '[JSON] CountriesListResponse
 
 -- | Retrieves a list of countries.
@@ -64,12 +63,11 @@ type CountriesListResource =
 data CountriesList' = CountriesList'
     { _couQuotaUser   :: !(Maybe Text)
     , _couPrettyPrint :: !Bool
-    , _couUserIp      :: !(Maybe Text)
+    , _couUserIP      :: !(Maybe Text)
     , _couProfileId   :: !Int64
-    , _couKey         :: !(Maybe Text)
-    , _couOauthToken  :: !(Maybe Text)
+    , _couKey         :: !(Maybe Key)
+    , _couOAuthToken  :: !(Maybe OAuthToken)
     , _couFields      :: !(Maybe Text)
-    , _couAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CountriesList'' with the minimum fields required to make a request.
@@ -80,17 +78,15 @@ data CountriesList' = CountriesList'
 --
 -- * 'couPrettyPrint'
 --
--- * 'couUserIp'
+-- * 'couUserIP'
 --
 -- * 'couProfileId'
 --
 -- * 'couKey'
 --
--- * 'couOauthToken'
+-- * 'couOAuthToken'
 --
 -- * 'couFields'
---
--- * 'couAlt'
 countriesList'
     :: Int64 -- ^ 'profileId'
     -> CountriesList'
@@ -98,12 +94,11 @@ countriesList' pCouProfileId_ =
     CountriesList'
     { _couQuotaUser = Nothing
     , _couPrettyPrint = True
-    , _couUserIp = Nothing
+    , _couUserIP = Nothing
     , _couProfileId = pCouProfileId_
     , _couKey = Nothing
-    , _couOauthToken = Nothing
+    , _couOAuthToken = Nothing
     , _couFields = Nothing
-    , _couAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -121,9 +116,9 @@ couPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-couUserIp :: Lens' CountriesList' (Maybe Text)
-couUserIp
-  = lens _couUserIp (\ s a -> s{_couUserIp = a})
+couUserIP :: Lens' CountriesList' (Maybe Text)
+couUserIP
+  = lens _couUserIP (\ s a -> s{_couUserIP = a})
 
 -- | User profile ID associated with this request.
 couProfileId :: Lens' CountriesList' Int64
@@ -133,34 +128,34 @@ couProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-couKey :: Lens' CountriesList' (Maybe Text)
+couKey :: Lens' CountriesList' (Maybe Key)
 couKey = lens _couKey (\ s a -> s{_couKey = a})
 
 -- | OAuth 2.0 token for the current user.
-couOauthToken :: Lens' CountriesList' (Maybe Text)
-couOauthToken
-  = lens _couOauthToken
-      (\ s a -> s{_couOauthToken = a})
+couOAuthToken :: Lens' CountriesList' (Maybe OAuthToken)
+couOAuthToken
+  = lens _couOAuthToken
+      (\ s a -> s{_couOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 couFields :: Lens' CountriesList' (Maybe Text)
 couFields
   = lens _couFields (\ s a -> s{_couFields = a})
 
--- | Data format for the response.
-couAlt :: Lens' CountriesList' Alt
-couAlt = lens _couAlt (\ s a -> s{_couAlt = a})
+instance GoogleAuth CountriesList' where
+        authKey = couKey . _Just
+        authToken = couOAuthToken . _Just
 
 instance GoogleRequest CountriesList' where
         type Rs CountriesList' = CountriesListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CountriesList'{..}
-          = go _couQuotaUser (Just _couPrettyPrint) _couUserIp
+          = go _couQuotaUser (Just _couPrettyPrint) _couUserIP
               _couProfileId
               _couKey
-              _couOauthToken
+              _couOAuthToken
               _couFields
-              (Just _couAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CountriesListResource)

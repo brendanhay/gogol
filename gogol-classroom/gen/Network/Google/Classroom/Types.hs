@@ -69,7 +69,7 @@ module Network.Google.Classroom.Types
     -- * UserProfile
     , UserProfile
     , userProfile
-    , upPhotoUrl
+    , upPhotoURL
     , upName
     , upEmailAddress
     , upId

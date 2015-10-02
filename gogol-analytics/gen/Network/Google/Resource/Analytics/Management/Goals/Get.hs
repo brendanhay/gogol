@@ -34,13 +34,12 @@ module Network.Google.Resource.Analytics.Management.Goals.Get
     , mggPrettyPrint
     , mggWebPropertyId
     , mggGoalId
-    , mggUserIp
+    , mggUserIP
     , mggProfileId
     , mggAccountId
     , mggKey
-    , mggOauthToken
+    , mggOAuthToken
     , mggFields
-    , mggAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -61,10 +60,10 @@ type ManagementGoalsGetResource =
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "alt" Alt :> Get '[JSON] Goal
+                                   QueryParam "alt" AltJSON :> Get '[JSON] Goal
 
 -- | Gets a goal to which the user has access.
 --
@@ -74,13 +73,12 @@ data ManagementGoalsGet' = ManagementGoalsGet'
     , _mggPrettyPrint   :: !Bool
     , _mggWebPropertyId :: !Text
     , _mggGoalId        :: !Text
-    , _mggUserIp        :: !(Maybe Text)
+    , _mggUserIP        :: !(Maybe Text)
     , _mggProfileId     :: !Text
     , _mggAccountId     :: !Text
-    , _mggKey           :: !(Maybe Text)
-    , _mggOauthToken    :: !(Maybe Text)
+    , _mggKey           :: !(Maybe Key)
+    , _mggOAuthToken    :: !(Maybe OAuthToken)
     , _mggFields        :: !(Maybe Text)
-    , _mggAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementGoalsGet'' with the minimum fields required to make a request.
@@ -95,7 +93,7 @@ data ManagementGoalsGet' = ManagementGoalsGet'
 --
 -- * 'mggGoalId'
 --
--- * 'mggUserIp'
+-- * 'mggUserIP'
 --
 -- * 'mggProfileId'
 --
@@ -103,11 +101,9 @@ data ManagementGoalsGet' = ManagementGoalsGet'
 --
 -- * 'mggKey'
 --
--- * 'mggOauthToken'
+-- * 'mggOAuthToken'
 --
 -- * 'mggFields'
---
--- * 'mggAlt'
 managementGoalsGet'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'goalId'
@@ -120,13 +116,12 @@ managementGoalsGet' pMggWebPropertyId_ pMggGoalId_ pMggProfileId_ pMggAccountId_
     , _mggPrettyPrint = False
     , _mggWebPropertyId = pMggWebPropertyId_
     , _mggGoalId = pMggGoalId_
-    , _mggUserIp = Nothing
+    , _mggUserIP = Nothing
     , _mggProfileId = pMggProfileId_
     , _mggAccountId = pMggAccountId_
     , _mggKey = Nothing
-    , _mggOauthToken = Nothing
+    , _mggOAuthToken = Nothing
     , _mggFields = Nothing
-    , _mggAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -155,9 +150,9 @@ mggGoalId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mggUserIp :: Lens' ManagementGoalsGet' (Maybe Text)
-mggUserIp
-  = lens _mggUserIp (\ s a -> s{_mggUserIp = a})
+mggUserIP :: Lens' ManagementGoalsGet' (Maybe Text)
+mggUserIP
+  = lens _mggUserIP (\ s a -> s{_mggUserIP = a})
 
 -- | View (Profile) ID to retrieve the goal for.
 mggProfileId :: Lens' ManagementGoalsGet' Text
@@ -172,23 +167,23 @@ mggAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mggKey :: Lens' ManagementGoalsGet' (Maybe Text)
+mggKey :: Lens' ManagementGoalsGet' (Maybe Key)
 mggKey = lens _mggKey (\ s a -> s{_mggKey = a})
 
 -- | OAuth 2.0 token for the current user.
-mggOauthToken :: Lens' ManagementGoalsGet' (Maybe Text)
-mggOauthToken
-  = lens _mggOauthToken
-      (\ s a -> s{_mggOauthToken = a})
+mggOAuthToken :: Lens' ManagementGoalsGet' (Maybe OAuthToken)
+mggOAuthToken
+  = lens _mggOAuthToken
+      (\ s a -> s{_mggOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 mggFields :: Lens' ManagementGoalsGet' (Maybe Text)
 mggFields
   = lens _mggFields (\ s a -> s{_mggFields = a})
 
--- | Data format for the response.
-mggAlt :: Lens' ManagementGoalsGet' Alt
-mggAlt = lens _mggAlt (\ s a -> s{_mggAlt = a})
+instance GoogleAuth ManagementGoalsGet' where
+        authKey = mggKey . _Just
+        authToken = mggOAuthToken . _Just
 
 instance GoogleRequest ManagementGoalsGet' where
         type Rs ManagementGoalsGet' = Goal
@@ -197,13 +192,13 @@ instance GoogleRequest ManagementGoalsGet' where
           = go _mggQuotaUser (Just _mggPrettyPrint)
               _mggWebPropertyId
               _mggGoalId
-              _mggUserIp
+              _mggUserIP
               _mggProfileId
               _mggAccountId
               _mggKey
-              _mggOauthToken
+              _mggOAuthToken
               _mggFields
-              (Just _mggAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ManagementGoalsGetResource)

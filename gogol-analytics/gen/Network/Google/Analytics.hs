@@ -227,32 +227,32 @@ module Network.Google.Analytics
     -- ** AnalyticsManagementWebPropertyAdWordsLinksUpdate
     , module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Update
 
-    -- ** AnalyticsManagementWebpropertiesGet
-    , module Network.Google.Resource.Analytics.Management.Webproperties.Get
+    -- ** AnalyticsManagementWebPropertiesGet
+    , module Network.Google.Resource.Analytics.Management.WebProperties.Get
 
-    -- ** AnalyticsManagementWebpropertiesInsert
-    , module Network.Google.Resource.Analytics.Management.Webproperties.Insert
+    -- ** AnalyticsManagementWebPropertiesInsert
+    , module Network.Google.Resource.Analytics.Management.WebProperties.Insert
 
-    -- ** AnalyticsManagementWebpropertiesList
-    , module Network.Google.Resource.Analytics.Management.Webproperties.List
+    -- ** AnalyticsManagementWebPropertiesList
+    , module Network.Google.Resource.Analytics.Management.WebProperties.List
 
-    -- ** AnalyticsManagementWebpropertiesPatch
-    , module Network.Google.Resource.Analytics.Management.Webproperties.Patch
+    -- ** AnalyticsManagementWebPropertiesPatch
+    , module Network.Google.Resource.Analytics.Management.WebProperties.Patch
 
-    -- ** AnalyticsManagementWebpropertiesUpdate
-    , module Network.Google.Resource.Analytics.Management.Webproperties.Update
+    -- ** AnalyticsManagementWebPropertiesUpdate
+    , module Network.Google.Resource.Analytics.Management.WebProperties.Update
 
-    -- ** AnalyticsManagementWebpropertyUserLinksDelete
-    , module Network.Google.Resource.Analytics.Management.WebpropertyUserLinks.Delete
+    -- ** AnalyticsManagementWebPropertyUserLinksDelete
+    , module Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.Delete
 
-    -- ** AnalyticsManagementWebpropertyUserLinksInsert
-    , module Network.Google.Resource.Analytics.Management.WebpropertyUserLinks.Insert
+    -- ** AnalyticsManagementWebPropertyUserLinksInsert
+    , module Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.Insert
 
-    -- ** AnalyticsManagementWebpropertyUserLinksList
-    , module Network.Google.Resource.Analytics.Management.WebpropertyUserLinks.List
+    -- ** AnalyticsManagementWebPropertyUserLinksList
+    , module Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.List
 
-    -- ** AnalyticsManagementWebpropertyUserLinksUpdate
-    , module Network.Google.Resource.Analytics.Management.WebpropertyUserLinks.Update
+    -- ** AnalyticsManagementWebPropertyUserLinksUpdate
+    , module Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.Update
 
     -- ** AnalyticsMetadataColumnsList
     , module Network.Google.Resource.Analytics.Metadata.Columns.List
@@ -413,11 +413,11 @@ module Network.Google.Analytics
     , unsampledReportDriveDownloadDetails
     , urdddDocumentId
 
-    -- ** WebpropertyChildLink
-    , WebpropertyChildLink
-    , webpropertyChildLink
-    , wclHref
-    , wclType
+    -- ** WebPropertyChildLink
+    , WebPropertyChildLink
+    , webPropertyChildLink
+    , wpclHref
+    , wpclType
 
     -- ** McfDataProfileInfo
     , McfDataProfileInfo
@@ -534,7 +534,7 @@ module Network.Google.Analytics
     , wpsName
     , wpsInternalWebPropertyId
     , wpsId
-    , wpsWebsiteUrl
+    , wpsWebsiteURL
     , wpsLevel
 
     -- ** GoalEventDetails
@@ -595,7 +595,7 @@ module Network.Google.Analytics
     , proId
     , proUpdated
     , proPermissions
-    , proWebsiteUrl
+    , proWebsiteURL
     , proType
     , proStripSiteSearchCategoryParameters
     , proTimezone
@@ -671,17 +671,17 @@ module Network.Google.Analytics
     -- ** AnalyticsDataGaGetOutput
     , AnalyticsDataGaGetOutput (..)
 
-    -- ** Webproperties
-    , Webproperties
-    , webproperties
-    , wNextLink
-    , wItemsPerPage
-    , wKind
-    , wUsername
-    , wItems
-    , wTotalResults
-    , wStartIndex
-    , wPreviousLink
+    -- ** WebProperties
+    , WebProperties
+    , webProperties
+    , wpNextLink
+    , wpItemsPerPage
+    , wpKind
+    , wpUsername
+    , wpItems
+    , wpTotalResults
+    , wpStartIndex
+    , wpPreviousLink
 
     -- ** McfDataRows
     , McfDataRows
@@ -761,7 +761,7 @@ module Network.Google.Analytics
     , expInternalWebPropertyId
     , expId
     , expUpdated
-    , expRewriteVariationUrlsAsOriginal
+    , expRewriteVariationURLsAsOriginal
     , expObjectiveMetric
     , expWinnerConfidenceLevel
     , expServingFramework
@@ -831,25 +831,25 @@ module Network.Google.Analytics
     , cdplHref
     , cdplType
 
-    -- ** Webproperty
-    , Webproperty
-    , webproperty
-    , webParentLink
-    , webChildLink
-    , webDefaultProfileId
-    , webKind
-    , webCreated
-    , webSelfLink
-    , webAccountId
-    , webName
-    , webInternalWebPropertyId
-    , webId
-    , webUpdated
-    , webProfileCount
-    , webPermissions
-    , webWebsiteUrl
-    , webIndustryVertical
-    , webLevel
+    -- ** WebProperty
+    , WebProperty
+    , webProperty
+    , wParentLink
+    , wChildLink
+    , wDefaultProfileId
+    , wKind
+    , wCreated
+    , wSelfLink
+    , wAccountId
+    , wName
+    , wInternalWebPropertyId
+    , wId
+    , wUpdated
+    , wProfileCount
+    , wPermissions
+    , wWebsiteURL
+    , wIndustryVertical
+    , wLevel
 
     -- ** CustomMetric
     , CustomMetric
@@ -870,10 +870,10 @@ module Network.Google.Analytics
     , cusType
     , cusIndex
 
-    -- ** WebpropertyPermissions
-    , WebpropertyPermissions
-    , webpropertyPermissions
-    , wpEffective
+    -- ** WebPropertyPermissions
+    , WebPropertyPermissions
+    , webPropertyPermissions
+    , wppEffective
 
     -- ** RealtimeData
     , RealtimeData
@@ -948,11 +948,11 @@ module Network.Google.Analytics
     -- ** AccountTicket
     , AccountTicket
     , accountTicket
-    , atRedirectUri
+    , atRedirectURI
     , atKind
     , atProfile
     , atAccount
-    , atWebproperty
+    , atWebProperty
     , atId
 
     -- ** RealtimeDataQuery
@@ -997,7 +997,7 @@ module Network.Google.Analytics
     , goaName
     , goaInternalWebPropertyId
     , goaId
-    , goaUrlDestinationDetails
+    , goaURLDestinationDetails
     , goaVisitNumPagesDetails
     , goaUpdated
     , goaType
@@ -1048,7 +1048,7 @@ module Network.Google.Analytics
     -- ** GoalURLDestinationDetails
     , GoalURLDestinationDetails
     , goalURLDestinationDetails
-    , guddUrl
+    , guddURL
     , guddMatchType
     , guddSteps
     , guddCaseSensitive
@@ -1127,7 +1127,7 @@ module Network.Google.Analytics
     , experimentVariations
     , evStatus
     , evWeight
-    , evUrl
+    , evURL
     , evWon
     , evName
 
@@ -1166,11 +1166,11 @@ module Network.Google.Analytics
     -- ** AnalyticsDataGaGetSamplingLevel
     , AnalyticsDataGaGetSamplingLevel (..)
 
-    -- ** WebpropertyParentLink
-    , WebpropertyParentLink
-    , webpropertyParentLink
-    , wplHref
-    , wplType
+    -- ** WebPropertyParentLink
+    , WebPropertyParentLink
+    , webPropertyParentLink
+    , wpplHref
+    , wpplType
 
     -- ** Upload
     , Upload
@@ -1219,16 +1219,13 @@ module Network.Google.Analytics
     -- ** GoalURLDestinationDetailsSteps
     , GoalURLDestinationDetailsSteps
     , goalURLDestinationDetailsSteps
-    , guddsUrl
+    , guddsURL
     , guddsName
     , guddsNumber
 
     -- ** ColumnAttributes
     , ColumnAttributes
     , columnAttributes
-
-    -- ** Alt
-    , Alt (..)
 
     -- ** ProfileChildLink
     , ProfileChildLink
@@ -1311,21 +1308,21 @@ import           Network.Google.Resource.Analytics.Management.Uploads.DeleteUplo
 import           Network.Google.Resource.Analytics.Management.Uploads.Get
 import           Network.Google.Resource.Analytics.Management.Uploads.List
 import           Network.Google.Resource.Analytics.Management.Uploads.UploadData
-import           Network.Google.Resource.Analytics.Management.Webproperties.Get
-import           Network.Google.Resource.Analytics.Management.Webproperties.Insert
-import           Network.Google.Resource.Analytics.Management.Webproperties.List
-import           Network.Google.Resource.Analytics.Management.Webproperties.Patch
-import           Network.Google.Resource.Analytics.Management.Webproperties.Update
+import           Network.Google.Resource.Analytics.Management.WebProperties.Get
+import           Network.Google.Resource.Analytics.Management.WebProperties.Insert
+import           Network.Google.Resource.Analytics.Management.WebProperties.List
+import           Network.Google.Resource.Analytics.Management.WebProperties.Patch
+import           Network.Google.Resource.Analytics.Management.WebProperties.Update
 import           Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Delete
 import           Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Get
 import           Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Insert
 import           Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.List
 import           Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Patch
 import           Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Update
-import           Network.Google.Resource.Analytics.Management.WebpropertyUserLinks.Delete
-import           Network.Google.Resource.Analytics.Management.WebpropertyUserLinks.Insert
-import           Network.Google.Resource.Analytics.Management.WebpropertyUserLinks.List
-import           Network.Google.Resource.Analytics.Management.WebpropertyUserLinks.Update
+import           Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.Delete
+import           Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.Insert
+import           Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.List
+import           Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.Update
 import           Network.Google.Resource.Analytics.Metadata.Columns.List
 import           Network.Google.Resource.Analytics.Provisioning.CreateAccountTicket
 
@@ -1353,10 +1350,10 @@ type AnalyticsAPI =
        :<|> ManagementExperimentsDeleteResource
        :<|> ManagementExperimentsUpdateResource
        :<|> ManagementCustomDataSourcesListResource
-       :<|> ManagementWebpropertyUserLinksInsertResource
-       :<|> ManagementWebpropertyUserLinksListResource
-       :<|> ManagementWebpropertyUserLinksDeleteResource
-       :<|> ManagementWebpropertyUserLinksUpdateResource
+       :<|> ManagementWebPropertyUserLinksInsertResource
+       :<|> ManagementWebPropertyUserLinksListResource
+       :<|> ManagementWebPropertyUserLinksDeleteResource
+       :<|> ManagementWebPropertyUserLinksUpdateResource
        :<|> ManagementProfilesInsertResource
        :<|> ManagementProfilesListResource
        :<|> ManagementProfilesPatchResource
@@ -1375,11 +1372,11 @@ type AnalyticsAPI =
        :<|> ManagementGoalsPatchResource
        :<|> ManagementGoalsGetResource
        :<|> ManagementGoalsUpdateResource
-       :<|> ManagementWebpropertiesInsertResource
-       :<|> ManagementWebpropertiesListResource
-       :<|> ManagementWebpropertiesPatchResource
-       :<|> ManagementWebpropertiesGetResource
-       :<|> ManagementWebpropertiesUpdateResource
+       :<|> ManagementWebPropertiesInsertResource
+       :<|> ManagementWebPropertiesListResource
+       :<|> ManagementWebPropertiesPatchResource
+       :<|> ManagementWebPropertiesGetResource
+       :<|> ManagementWebPropertiesUpdateResource
        :<|> ManagementCustomMetricsInsertResource
        :<|> ManagementCustomMetricsListResource
        :<|> ManagementCustomMetricsPatchResource

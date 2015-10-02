@@ -32,12 +32,12 @@ module Network.Google.Resource.DFAReporting.PlacementGroups.Update
     -- * Request Lenses
     , pguQuotaUser
     , pguPrettyPrint
-    , pguUserIp
+    , pguUserIP
     , pguProfileId
     , pguKey
-    , pguOauthToken
+    , pguOAuthToken
+    , pguPlacementGroup
     , pguFields
-    , pguAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,23 +52,25 @@ type PlacementGroupsUpdateResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Put '[JSON] PlacementGroup
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] PlacementGroup :>
+                           Put '[JSON] PlacementGroup
 
 -- | Updates an existing placement group.
 --
 -- /See:/ 'placementGroupsUpdate'' smart constructor.
 data PlacementGroupsUpdate' = PlacementGroupsUpdate'
-    { _pguQuotaUser   :: !(Maybe Text)
-    , _pguPrettyPrint :: !Bool
-    , _pguUserIp      :: !(Maybe Text)
-    , _pguProfileId   :: !Int64
-    , _pguKey         :: !(Maybe Text)
-    , _pguOauthToken  :: !(Maybe Text)
-    , _pguFields      :: !(Maybe Text)
-    , _pguAlt         :: !Alt
+    { _pguQuotaUser      :: !(Maybe Text)
+    , _pguPrettyPrint    :: !Bool
+    , _pguUserIP         :: !(Maybe Text)
+    , _pguProfileId      :: !Int64
+    , _pguKey            :: !(Maybe Key)
+    , _pguOAuthToken     :: !(Maybe OAuthToken)
+    , _pguPlacementGroup :: !PlacementGroup
+    , _pguFields         :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementGroupsUpdate'' with the minimum fields required to make a request.
@@ -79,30 +81,31 @@ data PlacementGroupsUpdate' = PlacementGroupsUpdate'
 --
 -- * 'pguPrettyPrint'
 --
--- * 'pguUserIp'
+-- * 'pguUserIP'
 --
 -- * 'pguProfileId'
 --
 -- * 'pguKey'
 --
--- * 'pguOauthToken'
+-- * 'pguOAuthToken'
+--
+-- * 'pguPlacementGroup'
 --
 -- * 'pguFields'
---
--- * 'pguAlt'
 placementGroupsUpdate'
     :: Int64 -- ^ 'profileId'
+    -> PlacementGroup -- ^ 'PlacementGroup'
     -> PlacementGroupsUpdate'
-placementGroupsUpdate' pPguProfileId_ =
+placementGroupsUpdate' pPguProfileId_ pPguPlacementGroup_ =
     PlacementGroupsUpdate'
     { _pguQuotaUser = Nothing
     , _pguPrettyPrint = True
-    , _pguUserIp = Nothing
+    , _pguUserIP = Nothing
     , _pguProfileId = pPguProfileId_
     , _pguKey = Nothing
-    , _pguOauthToken = Nothing
+    , _pguOAuthToken = Nothing
+    , _pguPlacementGroup = pPguPlacementGroup_
     , _pguFields = Nothing
-    , _pguAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,9 +123,9 @@ pguPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-pguUserIp :: Lens' PlacementGroupsUpdate' (Maybe Text)
-pguUserIp
-  = lens _pguUserIp (\ s a -> s{_pguUserIp = a})
+pguUserIP :: Lens' PlacementGroupsUpdate' (Maybe Text)
+pguUserIP
+  = lens _pguUserIP (\ s a -> s{_pguUserIP = a})
 
 -- | User profile ID associated with this request.
 pguProfileId :: Lens' PlacementGroupsUpdate' Int64
@@ -132,34 +135,41 @@ pguProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pguKey :: Lens' PlacementGroupsUpdate' (Maybe Text)
+pguKey :: Lens' PlacementGroupsUpdate' (Maybe Key)
 pguKey = lens _pguKey (\ s a -> s{_pguKey = a})
 
 -- | OAuth 2.0 token for the current user.
-pguOauthToken :: Lens' PlacementGroupsUpdate' (Maybe Text)
-pguOauthToken
-  = lens _pguOauthToken
-      (\ s a -> s{_pguOauthToken = a})
+pguOAuthToken :: Lens' PlacementGroupsUpdate' (Maybe OAuthToken)
+pguOAuthToken
+  = lens _pguOAuthToken
+      (\ s a -> s{_pguOAuthToken = a})
+
+-- | Multipart request metadata.
+pguPlacementGroup :: Lens' PlacementGroupsUpdate' PlacementGroup
+pguPlacementGroup
+  = lens _pguPlacementGroup
+      (\ s a -> s{_pguPlacementGroup = a})
 
 -- | Selector specifying which fields to include in a partial response.
 pguFields :: Lens' PlacementGroupsUpdate' (Maybe Text)
 pguFields
   = lens _pguFields (\ s a -> s{_pguFields = a})
 
--- | Data format for the response.
-pguAlt :: Lens' PlacementGroupsUpdate' Alt
-pguAlt = lens _pguAlt (\ s a -> s{_pguAlt = a})
+instance GoogleAuth PlacementGroupsUpdate' where
+        authKey = pguKey . _Just
+        authToken = pguOAuthToken . _Just
 
 instance GoogleRequest PlacementGroupsUpdate' where
         type Rs PlacementGroupsUpdate' = PlacementGroup
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlacementGroupsUpdate'{..}
-          = go _pguQuotaUser (Just _pguPrettyPrint) _pguUserIp
+          = go _pguQuotaUser (Just _pguPrettyPrint) _pguUserIP
               _pguProfileId
               _pguKey
-              _pguOauthToken
+              _pguOAuthToken
               _pguFields
-              (Just _pguAlt)
+              (Just AltJSON)
+              _pguPlacementGroup
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PlacementGroupsUpdateResource)

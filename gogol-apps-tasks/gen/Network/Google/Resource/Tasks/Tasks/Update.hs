@@ -30,15 +30,15 @@ module Network.Google.Resource.Tasks.Tasks.Update
     , TasksUpdate'
 
     -- * Request Lenses
-    , tuuQuotaUser
-    , tuuPrettyPrint
-    , tuuUserIp
-    , tuuKey
-    , tuuTasklist
-    , tuuTask
-    , tuuOauthToken
-    , tuuFields
-    , tuuAlt
+    , tuQuotaUser
+    , tuPrettyPrint
+    , tuUserIP
+    , tuKey
+    , tuTaskList
+    , tuTask
+    , tuTask
+    , tuOAuthToken
+    , tuFields
     ) where
 
 import           Network.Google.AppsTasks.Types
@@ -54,124 +54,128 @@ type TasksUpdateResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Put '[JSON] Task
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Task :> Put '[JSON] Task
 
 -- | Updates the specified task.
 --
 -- /See:/ 'tasksUpdate'' smart constructor.
 data TasksUpdate' = TasksUpdate'
-    { _tuuQuotaUser   :: !(Maybe Text)
-    , _tuuPrettyPrint :: !Bool
-    , _tuuUserIp      :: !(Maybe Text)
-    , _tuuKey         :: !(Maybe Text)
-    , _tuuTasklist    :: !Text
-    , _tuuTask        :: !Text
-    , _tuuOauthToken  :: !(Maybe Text)
-    , _tuuFields      :: !(Maybe Text)
-    , _tuuAlt         :: !Alt
+    { _tuQuotaUser   :: !(Maybe Text)
+    , _tuPrettyPrint :: !Bool
+    , _tuUserIP      :: !(Maybe Text)
+    , _tuKey         :: !(Maybe Key)
+    , _tuTaskList    :: !Text
+    , _tuTask        :: !Task
+    , _tuTask        :: !Text
+    , _tuOAuthToken  :: !(Maybe OAuthToken)
+    , _tuFields      :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TasksUpdate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tuuQuotaUser'
+-- * 'tuQuotaUser'
 --
--- * 'tuuPrettyPrint'
+-- * 'tuPrettyPrint'
 --
--- * 'tuuUserIp'
+-- * 'tuUserIP'
 --
--- * 'tuuKey'
+-- * 'tuKey'
 --
--- * 'tuuTasklist'
+-- * 'tuTaskList'
 --
--- * 'tuuTask'
+-- * 'tuTask'
 --
--- * 'tuuOauthToken'
+-- * 'tuTask'
 --
--- * 'tuuFields'
+-- * 'tuOAuthToken'
 --
--- * 'tuuAlt'
+-- * 'tuFields'
 tasksUpdate'
     :: Text -- ^ 'tasklist'
+    -> Task -- ^ 'Task'
     -> Text -- ^ 'task'
     -> TasksUpdate'
-tasksUpdate' pTuuTasklist_ pTuuTask_ =
+tasksUpdate' pTuTaskList_ pTuTask_ pTuTask_ =
     TasksUpdate'
-    { _tuuQuotaUser = Nothing
-    , _tuuPrettyPrint = True
-    , _tuuUserIp = Nothing
-    , _tuuKey = Nothing
-    , _tuuTasklist = pTuuTasklist_
-    , _tuuTask = pTuuTask_
-    , _tuuOauthToken = Nothing
-    , _tuuFields = Nothing
-    , _tuuAlt = JSON
+    { _tuQuotaUser = Nothing
+    , _tuPrettyPrint = True
+    , _tuUserIP = Nothing
+    , _tuKey = Nothing
+    , _tuTaskList = pTuTaskList_
+    , _tuTask = pTuTask_
+    , _tuTask = pTuTask_
+    , _tuOAuthToken = Nothing
+    , _tuFields = Nothing
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-tuuQuotaUser :: Lens' TasksUpdate' (Maybe Text)
-tuuQuotaUser
-  = lens _tuuQuotaUser (\ s a -> s{_tuuQuotaUser = a})
+tuQuotaUser :: Lens' TasksUpdate' (Maybe Text)
+tuQuotaUser
+  = lens _tuQuotaUser (\ s a -> s{_tuQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-tuuPrettyPrint :: Lens' TasksUpdate' Bool
-tuuPrettyPrint
-  = lens _tuuPrettyPrint
-      (\ s a -> s{_tuuPrettyPrint = a})
+tuPrettyPrint :: Lens' TasksUpdate' Bool
+tuPrettyPrint
+  = lens _tuPrettyPrint
+      (\ s a -> s{_tuPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tuuUserIp :: Lens' TasksUpdate' (Maybe Text)
-tuuUserIp
-  = lens _tuuUserIp (\ s a -> s{_tuuUserIp = a})
+tuUserIP :: Lens' TasksUpdate' (Maybe Text)
+tuUserIP = lens _tuUserIP (\ s a -> s{_tuUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tuuKey :: Lens' TasksUpdate' (Maybe Text)
-tuuKey = lens _tuuKey (\ s a -> s{_tuuKey = a})
+tuKey :: Lens' TasksUpdate' (Maybe Key)
+tuKey = lens _tuKey (\ s a -> s{_tuKey = a})
 
 -- | Task list identifier.
-tuuTasklist :: Lens' TasksUpdate' Text
-tuuTasklist
-  = lens _tuuTasklist (\ s a -> s{_tuuTasklist = a})
+tuTaskList :: Lens' TasksUpdate' Text
+tuTaskList
+  = lens _tuTaskList (\ s a -> s{_tuTaskList = a})
+
+-- | Multipart request metadata.
+tuTask :: Lens' TasksUpdate' Task
+tuTask = lens _tuTask (\ s a -> s{_tuTask = a})
 
 -- | Task identifier.
-tuuTask :: Lens' TasksUpdate' Text
-tuuTask = lens _tuuTask (\ s a -> s{_tuuTask = a})
+tuTask :: Lens' TasksUpdate' Text
+tuTask = lens _tuTask (\ s a -> s{_tuTask = a})
 
 -- | OAuth 2.0 token for the current user.
-tuuOauthToken :: Lens' TasksUpdate' (Maybe Text)
-tuuOauthToken
-  = lens _tuuOauthToken
-      (\ s a -> s{_tuuOauthToken = a})
+tuOAuthToken :: Lens' TasksUpdate' (Maybe OAuthToken)
+tuOAuthToken
+  = lens _tuOAuthToken (\ s a -> s{_tuOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-tuuFields :: Lens' TasksUpdate' (Maybe Text)
-tuuFields
-  = lens _tuuFields (\ s a -> s{_tuuFields = a})
+tuFields :: Lens' TasksUpdate' (Maybe Text)
+tuFields = lens _tuFields (\ s a -> s{_tuFields = a})
 
--- | Data format for the response.
-tuuAlt :: Lens' TasksUpdate' Alt
-tuuAlt = lens _tuuAlt (\ s a -> s{_tuuAlt = a})
+instance GoogleAuth TasksUpdate' where
+        authKey = tuKey . _Just
+        authToken = tuOAuthToken . _Just
 
 instance GoogleRequest TasksUpdate' where
         type Rs TasksUpdate' = Task
         request = requestWithRoute defReq appsTasksURL
         requestWithRoute r u TasksUpdate'{..}
-          = go _tuuQuotaUser (Just _tuuPrettyPrint) _tuuUserIp
-              _tuuKey
-              _tuuTasklist
-              _tuuTask
-              _tuuOauthToken
-              _tuuFields
-              (Just _tuuAlt)
+          = go _tuQuotaUser (Just _tuPrettyPrint) _tuUserIP
+              _tuKey
+              _tuTaskList
+              _tuTask
+              _tuOAuthToken
+              _tuFields
+              (Just AltJSON)
+              _tuTask
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TasksUpdateResource)

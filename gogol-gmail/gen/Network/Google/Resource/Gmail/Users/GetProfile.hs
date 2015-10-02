@@ -32,12 +32,11 @@ module Network.Google.Resource.Gmail.Users.GetProfile
     -- * Request Lenses
     , ugpQuotaUser
     , ugpPrettyPrint
-    , ugpUserIp
+    , ugpUserIP
     , ugpUserId
     , ugpKey
-    , ugpOauthToken
+    , ugpOAuthToken
     , ugpFields
-    , ugpAlt
     ) where
 
 import           Network.Google.Gmail.Types
@@ -51,10 +50,10 @@ type UsersGetProfileResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Get '[JSON] Profile
+                     QueryParam "alt" AltJSON :> Get '[JSON] Profile
 
 -- | Gets the current user\'s Gmail profile.
 --
@@ -62,12 +61,11 @@ type UsersGetProfileResource =
 data UsersGetProfile' = UsersGetProfile'
     { _ugpQuotaUser   :: !(Maybe Text)
     , _ugpPrettyPrint :: !Bool
-    , _ugpUserIp      :: !(Maybe Text)
+    , _ugpUserIP      :: !(Maybe Text)
     , _ugpUserId      :: !Text
-    , _ugpKey         :: !(Maybe Text)
-    , _ugpOauthToken  :: !(Maybe Text)
+    , _ugpKey         :: !(Maybe Key)
+    , _ugpOAuthToken  :: !(Maybe OAuthToken)
     , _ugpFields      :: !(Maybe Text)
-    , _ugpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersGetProfile'' with the minimum fields required to make a request.
@@ -78,17 +76,15 @@ data UsersGetProfile' = UsersGetProfile'
 --
 -- * 'ugpPrettyPrint'
 --
--- * 'ugpUserIp'
+-- * 'ugpUserIP'
 --
 -- * 'ugpUserId'
 --
 -- * 'ugpKey'
 --
--- * 'ugpOauthToken'
+-- * 'ugpOAuthToken'
 --
 -- * 'ugpFields'
---
--- * 'ugpAlt'
 usersGetProfile'
     :: Text
     -> UsersGetProfile'
@@ -96,12 +92,11 @@ usersGetProfile' pUgpUserId_ =
     UsersGetProfile'
     { _ugpQuotaUser = Nothing
     , _ugpPrettyPrint = True
-    , _ugpUserIp = Nothing
+    , _ugpUserIP = Nothing
     , _ugpUserId = pUgpUserId_
     , _ugpKey = Nothing
-    , _ugpOauthToken = Nothing
+    , _ugpOAuthToken = Nothing
     , _ugpFields = Nothing
-    , _ugpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -119,9 +114,9 @@ ugpPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ugpUserIp :: Lens' UsersGetProfile' (Maybe Text)
-ugpUserIp
-  = lens _ugpUserIp (\ s a -> s{_ugpUserIp = a})
+ugpUserIP :: Lens' UsersGetProfile' (Maybe Text)
+ugpUserIP
+  = lens _ugpUserIP (\ s a -> s{_ugpUserIP = a})
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
@@ -132,34 +127,34 @@ ugpUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ugpKey :: Lens' UsersGetProfile' (Maybe Text)
+ugpKey :: Lens' UsersGetProfile' (Maybe Key)
 ugpKey = lens _ugpKey (\ s a -> s{_ugpKey = a})
 
 -- | OAuth 2.0 token for the current user.
-ugpOauthToken :: Lens' UsersGetProfile' (Maybe Text)
-ugpOauthToken
-  = lens _ugpOauthToken
-      (\ s a -> s{_ugpOauthToken = a})
+ugpOAuthToken :: Lens' UsersGetProfile' (Maybe OAuthToken)
+ugpOAuthToken
+  = lens _ugpOAuthToken
+      (\ s a -> s{_ugpOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ugpFields :: Lens' UsersGetProfile' (Maybe Text)
 ugpFields
   = lens _ugpFields (\ s a -> s{_ugpFields = a})
 
--- | Data format for the response.
-ugpAlt :: Lens' UsersGetProfile' Alt
-ugpAlt = lens _ugpAlt (\ s a -> s{_ugpAlt = a})
+instance GoogleAuth UsersGetProfile' where
+        authKey = ugpKey . _Just
+        authToken = ugpOAuthToken . _Just
 
 instance GoogleRequest UsersGetProfile' where
         type Rs UsersGetProfile' = Profile
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersGetProfile'{..}
-          = go _ugpQuotaUser (Just _ugpPrettyPrint) _ugpUserIp
+          = go _ugpQuotaUser (Just _ugpPrettyPrint) _ugpUserIP
               _ugpUserId
               _ugpKey
-              _ugpOauthToken
+              _ugpOAuthToken
               _ugpFields
-              (Just _ugpAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersGetProfileResource)

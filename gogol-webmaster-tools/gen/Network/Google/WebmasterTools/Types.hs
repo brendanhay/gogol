@@ -40,7 +40,7 @@ module Network.Google.WebmasterTools.Types
     -- * URLSampleDetails
     , URLSampleDetails
     , uRLSampleDetails
-    , usdLinkedFromUrls
+    , usdLinkedFromURLs
     , usdContainingSitemaps
 
     -- * APIdataRow
@@ -86,7 +86,7 @@ module Network.Google.WebmasterTools.Types
     -- * URLCrawlErrorsSamplesListResponse
     , URLCrawlErrorsSamplesListResponse
     , uRLCrawlErrorsSamplesListResponse
-    , uceslrUrlCrawlErrorSample
+    , uceslrURLCrawlErrorSample
 
     -- * URLCrawlErrorsCountsQueryResponse
     , URLCrawlErrorsCountsQueryResponse
@@ -97,9 +97,9 @@ module Network.Google.WebmasterTools.Types
     , URLCrawlErrorsSample
     , uRLCrawlErrorsSample
     , ucesResponseCode
-    , ucesUrlDetails
+    , ucesURLDetails
     , ucesLastCrawled
-    , ucesPageUrl
+    , ucesPageURL
     , ucesFirstDetected
 
     -- * SitemapsListResponse
@@ -149,10 +149,7 @@ module Network.Google.WebmasterTools.Types
     , WmxSite
     , wmxSite
     , wsPermissionLevel
-    , wsSiteUrl
-
-    -- * Alt
-    , Alt (..)
+    , wsSiteURL
 
     -- * WebmastersURLcrawlerrorscountsQueryPlatform
     , WebmastersURLcrawlerrorscountsQueryPlatform (..)

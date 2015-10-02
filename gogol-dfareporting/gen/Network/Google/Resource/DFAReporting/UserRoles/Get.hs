@@ -32,13 +32,12 @@ module Network.Google.Resource.DFAReporting.UserRoles.Get
     -- * Request Lenses
     , urgQuotaUser
     , urgPrettyPrint
-    , urgUserIp
+    , urgUserIP
     , urgProfileId
     , urgKey
     , urgId
-    , urgOauthToken
+    , urgOAuthToken
     , urgFields
-    , urgAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,10 +53,10 @@ type UserRolesGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] UserRole
+                         QueryParam "alt" AltJSON :> Get '[JSON] UserRole
 
 -- | Gets one user role by ID.
 --
@@ -65,13 +64,12 @@ type UserRolesGetResource =
 data UserRolesGet' = UserRolesGet'
     { _urgQuotaUser   :: !(Maybe Text)
     , _urgPrettyPrint :: !Bool
-    , _urgUserIp      :: !(Maybe Text)
+    , _urgUserIP      :: !(Maybe Text)
     , _urgProfileId   :: !Int64
-    , _urgKey         :: !(Maybe Text)
+    , _urgKey         :: !(Maybe Key)
     , _urgId          :: !Int64
-    , _urgOauthToken  :: !(Maybe Text)
+    , _urgOAuthToken  :: !(Maybe OAuthToken)
     , _urgFields      :: !(Maybe Text)
-    , _urgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserRolesGet'' with the minimum fields required to make a request.
@@ -82,7 +80,7 @@ data UserRolesGet' = UserRolesGet'
 --
 -- * 'urgPrettyPrint'
 --
--- * 'urgUserIp'
+-- * 'urgUserIP'
 --
 -- * 'urgProfileId'
 --
@@ -90,11 +88,9 @@ data UserRolesGet' = UserRolesGet'
 --
 -- * 'urgId'
 --
--- * 'urgOauthToken'
+-- * 'urgOAuthToken'
 --
 -- * 'urgFields'
---
--- * 'urgAlt'
 userRolesGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
@@ -103,13 +99,12 @@ userRolesGet' pUrgProfileId_ pUrgId_ =
     UserRolesGet'
     { _urgQuotaUser = Nothing
     , _urgPrettyPrint = True
-    , _urgUserIp = Nothing
+    , _urgUserIP = Nothing
     , _urgProfileId = pUrgProfileId_
     , _urgKey = Nothing
     , _urgId = pUrgId_
-    , _urgOauthToken = Nothing
+    , _urgOAuthToken = Nothing
     , _urgFields = Nothing
-    , _urgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,9 +122,9 @@ urgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-urgUserIp :: Lens' UserRolesGet' (Maybe Text)
-urgUserIp
-  = lens _urgUserIp (\ s a -> s{_urgUserIp = a})
+urgUserIP :: Lens' UserRolesGet' (Maybe Text)
+urgUserIP
+  = lens _urgUserIP (\ s a -> s{_urgUserIP = a})
 
 -- | User profile ID associated with this request.
 urgProfileId :: Lens' UserRolesGet' Int64
@@ -139,7 +134,7 @@ urgProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-urgKey :: Lens' UserRolesGet' (Maybe Text)
+urgKey :: Lens' UserRolesGet' (Maybe Key)
 urgKey = lens _urgKey (\ s a -> s{_urgKey = a})
 
 -- | User role ID.
@@ -147,31 +142,31 @@ urgId :: Lens' UserRolesGet' Int64
 urgId = lens _urgId (\ s a -> s{_urgId = a})
 
 -- | OAuth 2.0 token for the current user.
-urgOauthToken :: Lens' UserRolesGet' (Maybe Text)
-urgOauthToken
-  = lens _urgOauthToken
-      (\ s a -> s{_urgOauthToken = a})
+urgOAuthToken :: Lens' UserRolesGet' (Maybe OAuthToken)
+urgOAuthToken
+  = lens _urgOAuthToken
+      (\ s a -> s{_urgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 urgFields :: Lens' UserRolesGet' (Maybe Text)
 urgFields
   = lens _urgFields (\ s a -> s{_urgFields = a})
 
--- | Data format for the response.
-urgAlt :: Lens' UserRolesGet' Alt
-urgAlt = lens _urgAlt (\ s a -> s{_urgAlt = a})
+instance GoogleAuth UserRolesGet' where
+        authKey = urgKey . _Just
+        authToken = urgOAuthToken . _Just
 
 instance GoogleRequest UserRolesGet' where
         type Rs UserRolesGet' = UserRole
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u UserRolesGet'{..}
-          = go _urgQuotaUser (Just _urgPrettyPrint) _urgUserIp
+          = go _urgQuotaUser (Just _urgPrettyPrint) _urgUserIP
               _urgProfileId
               _urgKey
               _urgId
-              _urgOauthToken
+              _urgOAuthToken
               _urgFields
-              (Just _urgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UserRolesGetResource)

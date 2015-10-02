@@ -32,13 +32,13 @@ module Network.Google.Resource.Directory.Notifications.Patch
     -- * Request Lenses
     , npQuotaUser
     , npPrettyPrint
-    , npUserIp
+    , npNotification
+    , npUserIP
     , npCustomer
     , npKey
     , npNotificationId
-    , npOauthToken
+    , npOAuthToken
     , npFields
-    , npAlt
     ) where
 
 import           Network.Google.AdminDirectory.Types
@@ -54,10 +54,12 @@ type NotificationsPatchResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Patch '[JSON] Notification
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Notification :>
+                             Patch '[JSON] Notification
 
 -- | Updates a notification. This method supports patch semantics.
 --
@@ -65,13 +67,13 @@ type NotificationsPatchResource =
 data NotificationsPatch' = NotificationsPatch'
     { _npQuotaUser      :: !(Maybe Text)
     , _npPrettyPrint    :: !Bool
-    , _npUserIp         :: !(Maybe Text)
+    , _npNotification   :: !Notification
+    , _npUserIP         :: !(Maybe Text)
     , _npCustomer       :: !Text
-    , _npKey            :: !(Maybe Text)
+    , _npKey            :: !(Maybe Key)
     , _npNotificationId :: !Text
-    , _npOauthToken     :: !(Maybe Text)
+    , _npOAuthToken     :: !(Maybe OAuthToken)
     , _npFields         :: !(Maybe Text)
-    , _npAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NotificationsPatch'' with the minimum fields required to make a request.
@@ -82,7 +84,9 @@ data NotificationsPatch' = NotificationsPatch'
 --
 -- * 'npPrettyPrint'
 --
--- * 'npUserIp'
+-- * 'npNotification'
+--
+-- * 'npUserIP'
 --
 -- * 'npCustomer'
 --
@@ -90,26 +94,25 @@ data NotificationsPatch' = NotificationsPatch'
 --
 -- * 'npNotificationId'
 --
--- * 'npOauthToken'
+-- * 'npOAuthToken'
 --
 -- * 'npFields'
---
--- * 'npAlt'
 notificationsPatch'
-    :: Text -- ^ 'customer'
+    :: Notification -- ^ 'Notification'
+    -> Text -- ^ 'customer'
     -> Text -- ^ 'notificationId'
     -> NotificationsPatch'
-notificationsPatch' pNpCustomer_ pNpNotificationId_ =
+notificationsPatch' pNpNotification_ pNpCustomer_ pNpNotificationId_ =
     NotificationsPatch'
     { _npQuotaUser = Nothing
     , _npPrettyPrint = True
-    , _npUserIp = Nothing
+    , _npNotification = pNpNotification_
+    , _npUserIP = Nothing
     , _npCustomer = pNpCustomer_
     , _npKey = Nothing
     , _npNotificationId = pNpNotificationId_
-    , _npOauthToken = Nothing
+    , _npOAuthToken = Nothing
     , _npFields = Nothing
-    , _npAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -125,10 +128,16 @@ npPrettyPrint
   = lens _npPrettyPrint
       (\ s a -> s{_npPrettyPrint = a})
 
+-- | Multipart request metadata.
+npNotification :: Lens' NotificationsPatch' Notification
+npNotification
+  = lens _npNotification
+      (\ s a -> s{_npNotification = a})
+
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-npUserIp :: Lens' NotificationsPatch' (Maybe Text)
-npUserIp = lens _npUserIp (\ s a -> s{_npUserIp = a})
+npUserIP :: Lens' NotificationsPatch' (Maybe Text)
+npUserIP = lens _npUserIP (\ s a -> s{_npUserIP = a})
 
 -- | The unique ID for the customer\'s Google account.
 npCustomer :: Lens' NotificationsPatch' Text
@@ -138,7 +147,7 @@ npCustomer
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-npKey :: Lens' NotificationsPatch' (Maybe Text)
+npKey :: Lens' NotificationsPatch' (Maybe Key)
 npKey = lens _npKey (\ s a -> s{_npKey = a})
 
 -- | The unique ID of the notification.
@@ -148,29 +157,30 @@ npNotificationId
       (\ s a -> s{_npNotificationId = a})
 
 -- | OAuth 2.0 token for the current user.
-npOauthToken :: Lens' NotificationsPatch' (Maybe Text)
-npOauthToken
-  = lens _npOauthToken (\ s a -> s{_npOauthToken = a})
+npOAuthToken :: Lens' NotificationsPatch' (Maybe OAuthToken)
+npOAuthToken
+  = lens _npOAuthToken (\ s a -> s{_npOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 npFields :: Lens' NotificationsPatch' (Maybe Text)
 npFields = lens _npFields (\ s a -> s{_npFields = a})
 
--- | Data format for the response.
-npAlt :: Lens' NotificationsPatch' Alt
-npAlt = lens _npAlt (\ s a -> s{_npAlt = a})
+instance GoogleAuth NotificationsPatch' where
+        authKey = npKey . _Just
+        authToken = npOAuthToken . _Just
 
 instance GoogleRequest NotificationsPatch' where
         type Rs NotificationsPatch' = Notification
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u NotificationsPatch'{..}
-          = go _npQuotaUser (Just _npPrettyPrint) _npUserIp
+          = go _npQuotaUser (Just _npPrettyPrint) _npUserIP
               _npCustomer
               _npKey
               _npNotificationId
-              _npOauthToken
+              _npOAuthToken
               _npFields
-              (Just _npAlt)
+              (Just AltJSON)
+              _npNotification
           where go
                   = clientWithRoute
                       (Proxy :: Proxy NotificationsPatchResource)

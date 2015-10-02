@@ -32,17 +32,16 @@ module Network.Google.Resource.Drive.Changes.List
     -- * Request Lenses
     , cllQuotaUser
     , cllPrettyPrint
-    , cllUserIp
+    , cllUserIP
     , cllIncludeSubscribed
     , cllStartChangeId
     , cllKey
     , cllSpaces
     , cllPageToken
-    , cllOauthToken
+    , cllOAuthToken
     , cllMaxResults
     , cllIncludeDeleted
     , cllFields
-    , cllAlt
     ) where
 
 import           Network.Google.Drive.Types
@@ -57,14 +56,15 @@ type ChangesListResource =
            QueryParam "userIp" Text :>
              QueryParam "includeSubscribed" Bool :>
                QueryParam "startChangeId" Int64 :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "spaces" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "maxResults" Int32 :>
                            QueryParam "includeDeleted" Bool :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :> Get '[JSON] ChangeList
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] ChangeList
 
 -- | Lists the changes for a user.
 --
@@ -72,17 +72,16 @@ type ChangesListResource =
 data ChangesList' = ChangesList'
     { _cllQuotaUser         :: !(Maybe Text)
     , _cllPrettyPrint       :: !Bool
-    , _cllUserIp            :: !(Maybe Text)
+    , _cllUserIP            :: !(Maybe Text)
     , _cllIncludeSubscribed :: !Bool
     , _cllStartChangeId     :: !(Maybe Int64)
-    , _cllKey               :: !(Maybe Text)
+    , _cllKey               :: !(Maybe Key)
     , _cllSpaces            :: !(Maybe Text)
     , _cllPageToken         :: !(Maybe Text)
-    , _cllOauthToken        :: !(Maybe Text)
+    , _cllOAuthToken        :: !(Maybe OAuthToken)
     , _cllMaxResults        :: !Int32
     , _cllIncludeDeleted    :: !Bool
     , _cllFields            :: !(Maybe Text)
-    , _cllAlt               :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChangesList'' with the minimum fields required to make a request.
@@ -93,7 +92,7 @@ data ChangesList' = ChangesList'
 --
 -- * 'cllPrettyPrint'
 --
--- * 'cllUserIp'
+-- * 'cllUserIP'
 --
 -- * 'cllIncludeSubscribed'
 --
@@ -105,32 +104,29 @@ data ChangesList' = ChangesList'
 --
 -- * 'cllPageToken'
 --
--- * 'cllOauthToken'
+-- * 'cllOAuthToken'
 --
 -- * 'cllMaxResults'
 --
 -- * 'cllIncludeDeleted'
 --
 -- * 'cllFields'
---
--- * 'cllAlt'
 changesList'
     :: ChangesList'
 changesList' =
     ChangesList'
     { _cllQuotaUser = Nothing
     , _cllPrettyPrint = True
-    , _cllUserIp = Nothing
+    , _cllUserIP = Nothing
     , _cllIncludeSubscribed = True
     , _cllStartChangeId = Nothing
     , _cllKey = Nothing
     , _cllSpaces = Nothing
     , _cllPageToken = Nothing
-    , _cllOauthToken = Nothing
+    , _cllOAuthToken = Nothing
     , _cllMaxResults = 100
     , _cllIncludeDeleted = True
     , _cllFields = Nothing
-    , _cllAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,9 +144,9 @@ cllPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cllUserIp :: Lens' ChangesList' (Maybe Text)
-cllUserIp
-  = lens _cllUserIp (\ s a -> s{_cllUserIp = a})
+cllUserIP :: Lens' ChangesList' (Maybe Text)
+cllUserIP
+  = lens _cllUserIP (\ s a -> s{_cllUserIP = a})
 
 -- | Whether to include public files the user has opened and shared files.
 -- When set to false, the list only includes owned files plus any shared or
@@ -169,7 +165,7 @@ cllStartChangeId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cllKey :: Lens' ChangesList' (Maybe Text)
+cllKey :: Lens' ChangesList' (Maybe Key)
 cllKey = lens _cllKey (\ s a -> s{_cllKey = a})
 
 -- | A comma-separated list of spaces to query. Supported values are
@@ -184,10 +180,10 @@ cllPageToken
   = lens _cllPageToken (\ s a -> s{_cllPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-cllOauthToken :: Lens' ChangesList' (Maybe Text)
-cllOauthToken
-  = lens _cllOauthToken
-      (\ s a -> s{_cllOauthToken = a})
+cllOAuthToken :: Lens' ChangesList' (Maybe OAuthToken)
+cllOAuthToken
+  = lens _cllOAuthToken
+      (\ s a -> s{_cllOAuthToken = a})
 
 -- | Maximum number of changes to return.
 cllMaxResults :: Lens' ChangesList' Int32
@@ -206,25 +202,25 @@ cllFields :: Lens' ChangesList' (Maybe Text)
 cllFields
   = lens _cllFields (\ s a -> s{_cllFields = a})
 
--- | Data format for the response.
-cllAlt :: Lens' ChangesList' Alt
-cllAlt = lens _cllAlt (\ s a -> s{_cllAlt = a})
+instance GoogleAuth ChangesList' where
+        authKey = cllKey . _Just
+        authToken = cllOAuthToken . _Just
 
 instance GoogleRequest ChangesList' where
         type Rs ChangesList' = ChangeList
         request = requestWithRoute defReq driveURL
         requestWithRoute r u ChangesList'{..}
-          = go _cllQuotaUser (Just _cllPrettyPrint) _cllUserIp
+          = go _cllQuotaUser (Just _cllPrettyPrint) _cllUserIP
               (Just _cllIncludeSubscribed)
               _cllStartChangeId
               _cllKey
               _cllSpaces
               _cllPageToken
-              _cllOauthToken
+              _cllOAuthToken
               (Just _cllMaxResults)
               (Just _cllIncludeDeleted)
               _cllFields
-              (Just _cllAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ChangesListResource)

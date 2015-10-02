@@ -34,12 +34,12 @@ module Network.Google.Resource.Compute.Addresses.Insert
     , aiQuotaUser
     , aiPrettyPrint
     , aiProject
-    , aiUserIp
+    , aiUserIP
+    , aiAddress
     , aiKey
     , aiRegion
-    , aiOauthToken
+    , aiOAuthToken
     , aiFields
-    , aiAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -55,10 +55,11 @@ type AddressesInsertResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Post '[JSON] Operation
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Address :> Post '[JSON] Operation
 
 -- | Creates an address resource in the specified project using the data
 -- included in the request.
@@ -68,12 +69,12 @@ data AddressesInsert' = AddressesInsert'
     { _aiQuotaUser   :: !(Maybe Text)
     , _aiPrettyPrint :: !Bool
     , _aiProject     :: !Text
-    , _aiUserIp      :: !(Maybe Text)
-    , _aiKey         :: !(Maybe Text)
+    , _aiUserIP      :: !(Maybe Text)
+    , _aiAddress     :: !Address
+    , _aiKey         :: !(Maybe Key)
     , _aiRegion      :: !Text
-    , _aiOauthToken  :: !(Maybe Text)
+    , _aiOAuthToken  :: !(Maybe OAuthToken)
     , _aiFields      :: !(Maybe Text)
-    , _aiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AddressesInsert'' with the minimum fields required to make a request.
@@ -86,32 +87,33 @@ data AddressesInsert' = AddressesInsert'
 --
 -- * 'aiProject'
 --
--- * 'aiUserIp'
+-- * 'aiUserIP'
+--
+-- * 'aiAddress'
 --
 -- * 'aiKey'
 --
 -- * 'aiRegion'
 --
--- * 'aiOauthToken'
+-- * 'aiOAuthToken'
 --
 -- * 'aiFields'
---
--- * 'aiAlt'
 addressesInsert'
     :: Text -- ^ 'project'
+    -> Address -- ^ 'Address'
     -> Text -- ^ 'region'
     -> AddressesInsert'
-addressesInsert' pAiProject_ pAiRegion_ =
+addressesInsert' pAiProject_ pAiAddress_ pAiRegion_ =
     AddressesInsert'
     { _aiQuotaUser = Nothing
     , _aiPrettyPrint = True
     , _aiProject = pAiProject_
-    , _aiUserIp = Nothing
+    , _aiUserIP = Nothing
+    , _aiAddress = pAiAddress_
     , _aiKey = Nothing
     , _aiRegion = pAiRegion_
-    , _aiOauthToken = Nothing
+    , _aiOAuthToken = Nothing
     , _aiFields = Nothing
-    , _aiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -134,13 +136,18 @@ aiProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-aiUserIp :: Lens' AddressesInsert' (Maybe Text)
-aiUserIp = lens _aiUserIp (\ s a -> s{_aiUserIp = a})
+aiUserIP :: Lens' AddressesInsert' (Maybe Text)
+aiUserIP = lens _aiUserIP (\ s a -> s{_aiUserIP = a})
+
+-- | Multipart request metadata.
+aiAddress :: Lens' AddressesInsert' Address
+aiAddress
+  = lens _aiAddress (\ s a -> s{_aiAddress = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aiKey :: Lens' AddressesInsert' (Maybe Text)
+aiKey :: Lens' AddressesInsert' (Maybe Key)
 aiKey = lens _aiKey (\ s a -> s{_aiKey = a})
 
 -- | The name of the region for this request.
@@ -148,29 +155,30 @@ aiRegion :: Lens' AddressesInsert' Text
 aiRegion = lens _aiRegion (\ s a -> s{_aiRegion = a})
 
 -- | OAuth 2.0 token for the current user.
-aiOauthToken :: Lens' AddressesInsert' (Maybe Text)
-aiOauthToken
-  = lens _aiOauthToken (\ s a -> s{_aiOauthToken = a})
+aiOAuthToken :: Lens' AddressesInsert' (Maybe OAuthToken)
+aiOAuthToken
+  = lens _aiOAuthToken (\ s a -> s{_aiOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 aiFields :: Lens' AddressesInsert' (Maybe Text)
 aiFields = lens _aiFields (\ s a -> s{_aiFields = a})
 
--- | Data format for the response.
-aiAlt :: Lens' AddressesInsert' Alt
-aiAlt = lens _aiAlt (\ s a -> s{_aiAlt = a})
+instance GoogleAuth AddressesInsert' where
+        authKey = aiKey . _Just
+        authToken = aiOAuthToken . _Just
 
 instance GoogleRequest AddressesInsert' where
         type Rs AddressesInsert' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u AddressesInsert'{..}
           = go _aiQuotaUser (Just _aiPrettyPrint) _aiProject
-              _aiUserIp
+              _aiUserIP
               _aiKey
               _aiRegion
-              _aiOauthToken
+              _aiOAuthToken
               _aiFields
-              (Just _aiAlt)
+              (Just AltJSON)
+              _aiAddress
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AddressesInsertResource)

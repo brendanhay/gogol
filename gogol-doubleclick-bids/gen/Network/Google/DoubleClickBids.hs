@@ -26,29 +26,29 @@ module Network.Google.DoubleClickBids
 
     -- * REST Resources
 
-    -- ** DoubleclickbidmanagerLineitemsDownloadlineitems
-    , module Network.Google.Resource.Doubleclickbidmanager.Lineitems.Downloadlineitems
+    -- ** DoubleClickBidManagerLineitemsDownloadlineitems
+    , module Network.Google.Resource.DoubleClickBidManager.Lineitems.Downloadlineitems
 
-    -- ** DoubleclickbidmanagerLineitemsUploadlineitems
-    , module Network.Google.Resource.Doubleclickbidmanager.Lineitems.Uploadlineitems
+    -- ** DoubleClickBidManagerLineitemsUploadlineitems
+    , module Network.Google.Resource.DoubleClickBidManager.Lineitems.Uploadlineitems
 
-    -- ** DoubleclickbidmanagerQueriesCreatequery
-    , module Network.Google.Resource.Doubleclickbidmanager.Queries.Createquery
+    -- ** DoubleClickBidManagerQueriesCreatequery
+    , module Network.Google.Resource.DoubleClickBidManager.Queries.Createquery
 
-    -- ** DoubleclickbidmanagerQueriesDeletequery
-    , module Network.Google.Resource.Doubleclickbidmanager.Queries.Deletequery
+    -- ** DoubleClickBidManagerQueriesDeletequery
+    , module Network.Google.Resource.DoubleClickBidManager.Queries.Deletequery
 
-    -- ** DoubleclickbidmanagerQueriesGetquery
-    , module Network.Google.Resource.Doubleclickbidmanager.Queries.Getquery
+    -- ** DoubleClickBidManagerQueriesGetquery
+    , module Network.Google.Resource.DoubleClickBidManager.Queries.Getquery
 
-    -- ** DoubleclickbidmanagerQueriesListqueries
-    , module Network.Google.Resource.Doubleclickbidmanager.Queries.Listqueries
+    -- ** DoubleClickBidManagerQueriesListqueries
+    , module Network.Google.Resource.DoubleClickBidManager.Queries.Listqueries
 
-    -- ** DoubleclickbidmanagerQueriesRunquery
-    , module Network.Google.Resource.Doubleclickbidmanager.Queries.Runquery
+    -- ** DoubleClickBidManagerQueriesRunquery
+    , module Network.Google.Resource.DoubleClickBidManager.Queries.Runquery
 
-    -- ** DoubleclickbidmanagerReportsListreports
-    , module Network.Google.Resource.Doubleclickbidmanager.Reports.Listreports
+    -- ** DoubleClickBidManagerReportsListreports
+    , module Network.Google.Resource.DoubleClickBidManager.Reports.Listreports
 
     -- * Types
 
@@ -235,23 +235,20 @@ module Network.Google.DoubleClickBids
     -- ** DownloadLineItemsRequestFormat
     , DownloadLineItemsRequestFormat (..)
 
-    -- ** Alt
-    , Alt (..)
-
     -- ** ReportStatusFormat
     , ReportStatusFormat (..)
     ) where
 
 import           Network.Google.DoubleClickBids.Types
 import           Network.Google.Prelude
-import           Network.Google.Resource.Doubleclickbidmanager.Lineitems.Downloadlineitems
-import           Network.Google.Resource.Doubleclickbidmanager.Lineitems.Uploadlineitems
-import           Network.Google.Resource.Doubleclickbidmanager.Queries.Createquery
-import           Network.Google.Resource.Doubleclickbidmanager.Queries.Deletequery
-import           Network.Google.Resource.Doubleclickbidmanager.Queries.Getquery
-import           Network.Google.Resource.Doubleclickbidmanager.Queries.Listqueries
-import           Network.Google.Resource.Doubleclickbidmanager.Queries.Runquery
-import           Network.Google.Resource.Doubleclickbidmanager.Reports.Listreports
+import           Network.Google.Resource.DoubleClickBidManager.Lineitems.Downloadlineitems
+import           Network.Google.Resource.DoubleClickBidManager.Lineitems.Uploadlineitems
+import           Network.Google.Resource.DoubleClickBidManager.Queries.Createquery
+import           Network.Google.Resource.DoubleClickBidManager.Queries.Deletequery
+import           Network.Google.Resource.DoubleClickBidManager.Queries.Getquery
+import           Network.Google.Resource.DoubleClickBidManager.Queries.Listqueries
+import           Network.Google.Resource.DoubleClickBidManager.Queries.Runquery
+import           Network.Google.Resource.DoubleClickBidManager.Reports.Listreports
 
 {- $resources
 TODO

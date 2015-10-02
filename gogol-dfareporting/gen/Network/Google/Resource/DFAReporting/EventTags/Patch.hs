@@ -32,13 +32,13 @@ module Network.Google.Resource.DFAReporting.EventTags.Patch
     -- * Request Lenses
     , etpQuotaUser
     , etpPrettyPrint
-    , etpUserIp
+    , etpUserIP
     , etpProfileId
     , etpKey
     , etpId
-    , etpOauthToken
+    , etpOAuthToken
+    , etpEventTag
     , etpFields
-    , etpAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -53,11 +53,12 @@ type EventTagsPatchResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "id" Int64 :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Patch '[JSON] EventTag
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] EventTag :> Patch '[JSON] EventTag
 
 -- | Updates an existing event tag. This method supports patch semantics.
 --
@@ -65,13 +66,13 @@ type EventTagsPatchResource =
 data EventTagsPatch' = EventTagsPatch'
     { _etpQuotaUser   :: !(Maybe Text)
     , _etpPrettyPrint :: !Bool
-    , _etpUserIp      :: !(Maybe Text)
+    , _etpUserIP      :: !(Maybe Text)
     , _etpProfileId   :: !Int64
-    , _etpKey         :: !(Maybe Text)
+    , _etpKey         :: !(Maybe Key)
     , _etpId          :: !Int64
-    , _etpOauthToken  :: !(Maybe Text)
+    , _etpOAuthToken  :: !(Maybe OAuthToken)
+    , _etpEventTag    :: !EventTag
     , _etpFields      :: !(Maybe Text)
-    , _etpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventTagsPatch'' with the minimum fields required to make a request.
@@ -82,7 +83,7 @@ data EventTagsPatch' = EventTagsPatch'
 --
 -- * 'etpPrettyPrint'
 --
--- * 'etpUserIp'
+-- * 'etpUserIP'
 --
 -- * 'etpProfileId'
 --
@@ -90,26 +91,27 @@ data EventTagsPatch' = EventTagsPatch'
 --
 -- * 'etpId'
 --
--- * 'etpOauthToken'
+-- * 'etpOAuthToken'
+--
+-- * 'etpEventTag'
 --
 -- * 'etpFields'
---
--- * 'etpAlt'
 eventTagsPatch'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
+    -> EventTag -- ^ 'EventTag'
     -> EventTagsPatch'
-eventTagsPatch' pEtpProfileId_ pEtpId_ =
+eventTagsPatch' pEtpProfileId_ pEtpId_ pEtpEventTag_ =
     EventTagsPatch'
     { _etpQuotaUser = Nothing
     , _etpPrettyPrint = True
-    , _etpUserIp = Nothing
+    , _etpUserIP = Nothing
     , _etpProfileId = pEtpProfileId_
     , _etpKey = Nothing
     , _etpId = pEtpId_
-    , _etpOauthToken = Nothing
+    , _etpOAuthToken = Nothing
+    , _etpEventTag = pEtpEventTag_
     , _etpFields = Nothing
-    , _etpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,9 +129,9 @@ etpPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-etpUserIp :: Lens' EventTagsPatch' (Maybe Text)
-etpUserIp
-  = lens _etpUserIp (\ s a -> s{_etpUserIp = a})
+etpUserIP :: Lens' EventTagsPatch' (Maybe Text)
+etpUserIP
+  = lens _etpUserIP (\ s a -> s{_etpUserIP = a})
 
 -- | User profile ID associated with this request.
 etpProfileId :: Lens' EventTagsPatch' Int64
@@ -139,7 +141,7 @@ etpProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-etpKey :: Lens' EventTagsPatch' (Maybe Text)
+etpKey :: Lens' EventTagsPatch' (Maybe Key)
 etpKey = lens _etpKey (\ s a -> s{_etpKey = a})
 
 -- | Event tag ID.
@@ -147,31 +149,37 @@ etpId :: Lens' EventTagsPatch' Int64
 etpId = lens _etpId (\ s a -> s{_etpId = a})
 
 -- | OAuth 2.0 token for the current user.
-etpOauthToken :: Lens' EventTagsPatch' (Maybe Text)
-etpOauthToken
-  = lens _etpOauthToken
-      (\ s a -> s{_etpOauthToken = a})
+etpOAuthToken :: Lens' EventTagsPatch' (Maybe OAuthToken)
+etpOAuthToken
+  = lens _etpOAuthToken
+      (\ s a -> s{_etpOAuthToken = a})
+
+-- | Multipart request metadata.
+etpEventTag :: Lens' EventTagsPatch' EventTag
+etpEventTag
+  = lens _etpEventTag (\ s a -> s{_etpEventTag = a})
 
 -- | Selector specifying which fields to include in a partial response.
 etpFields :: Lens' EventTagsPatch' (Maybe Text)
 etpFields
   = lens _etpFields (\ s a -> s{_etpFields = a})
 
--- | Data format for the response.
-etpAlt :: Lens' EventTagsPatch' Alt
-etpAlt = lens _etpAlt (\ s a -> s{_etpAlt = a})
+instance GoogleAuth EventTagsPatch' where
+        authKey = etpKey . _Just
+        authToken = etpOAuthToken . _Just
 
 instance GoogleRequest EventTagsPatch' where
         type Rs EventTagsPatch' = EventTag
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u EventTagsPatch'{..}
-          = go _etpQuotaUser (Just _etpPrettyPrint) _etpUserIp
+          = go _etpQuotaUser (Just _etpPrettyPrint) _etpUserIP
               _etpProfileId
               _etpKey
               (Just _etpId)
-              _etpOauthToken
+              _etpOAuthToken
               _etpFields
-              (Just _etpAlt)
+              (Just AltJSON)
+              _etpEventTag
           where go
                   = clientWithRoute
                       (Proxy :: Proxy EventTagsPatchResource)

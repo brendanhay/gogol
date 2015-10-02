@@ -33,12 +33,11 @@ module Network.Google.Resource.AdSense.Accounts.Savedadstyles.Get
     , asgQuotaUser
     , asgPrettyPrint
     , asgSavedAdStyleId
-    , asgUserIp
+    , asgUserIP
     , asgAccountId
     , asgKey
-    , asgOauthToken
+    , asgOAuthToken
     , asgFields
-    , asgAlt
     ) where
 
 import           Network.Google.AdSense.Types
@@ -54,10 +53,10 @@ type AccountsSavedadstylesGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] SavedAdStyle
+                         QueryParam "alt" AltJSON :> Get '[JSON] SavedAdStyle
 
 -- | List a specific saved ad style for the specified account.
 --
@@ -66,12 +65,11 @@ data AccountsSavedadstylesGet' = AccountsSavedadstylesGet'
     { _asgQuotaUser      :: !(Maybe Text)
     , _asgPrettyPrint    :: !Bool
     , _asgSavedAdStyleId :: !Text
-    , _asgUserIp         :: !(Maybe Text)
+    , _asgUserIP         :: !(Maybe Text)
     , _asgAccountId      :: !Text
-    , _asgKey            :: !(Maybe Text)
-    , _asgOauthToken     :: !(Maybe Text)
+    , _asgKey            :: !(Maybe Key)
+    , _asgOAuthToken     :: !(Maybe OAuthToken)
     , _asgFields         :: !(Maybe Text)
-    , _asgAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsSavedadstylesGet'' with the minimum fields required to make a request.
@@ -84,17 +82,15 @@ data AccountsSavedadstylesGet' = AccountsSavedadstylesGet'
 --
 -- * 'asgSavedAdStyleId'
 --
--- * 'asgUserIp'
+-- * 'asgUserIP'
 --
 -- * 'asgAccountId'
 --
 -- * 'asgKey'
 --
--- * 'asgOauthToken'
+-- * 'asgOAuthToken'
 --
 -- * 'asgFields'
---
--- * 'asgAlt'
 accountsSavedadstylesGet'
     :: Text -- ^ 'savedAdStyleId'
     -> Text -- ^ 'accountId'
@@ -104,12 +100,11 @@ accountsSavedadstylesGet' pAsgSavedAdStyleId_ pAsgAccountId_ =
     { _asgQuotaUser = Nothing
     , _asgPrettyPrint = True
     , _asgSavedAdStyleId = pAsgSavedAdStyleId_
-    , _asgUserIp = Nothing
+    , _asgUserIP = Nothing
     , _asgAccountId = pAsgAccountId_
     , _asgKey = Nothing
-    , _asgOauthToken = Nothing
+    , _asgOAuthToken = Nothing
     , _asgFields = Nothing
-    , _asgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -133,9 +128,9 @@ asgSavedAdStyleId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-asgUserIp :: Lens' AccountsSavedadstylesGet' (Maybe Text)
-asgUserIp
-  = lens _asgUserIp (\ s a -> s{_asgUserIp = a})
+asgUserIP :: Lens' AccountsSavedadstylesGet' (Maybe Text)
+asgUserIP
+  = lens _asgUserIP (\ s a -> s{_asgUserIP = a})
 
 -- | Account for which to get the saved ad style.
 asgAccountId :: Lens' AccountsSavedadstylesGet' Text
@@ -145,23 +140,23 @@ asgAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-asgKey :: Lens' AccountsSavedadstylesGet' (Maybe Text)
+asgKey :: Lens' AccountsSavedadstylesGet' (Maybe Key)
 asgKey = lens _asgKey (\ s a -> s{_asgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-asgOauthToken :: Lens' AccountsSavedadstylesGet' (Maybe Text)
-asgOauthToken
-  = lens _asgOauthToken
-      (\ s a -> s{_asgOauthToken = a})
+asgOAuthToken :: Lens' AccountsSavedadstylesGet' (Maybe OAuthToken)
+asgOAuthToken
+  = lens _asgOAuthToken
+      (\ s a -> s{_asgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 asgFields :: Lens' AccountsSavedadstylesGet' (Maybe Text)
 asgFields
   = lens _asgFields (\ s a -> s{_asgFields = a})
 
--- | Data format for the response.
-asgAlt :: Lens' AccountsSavedadstylesGet' Alt
-asgAlt = lens _asgAlt (\ s a -> s{_asgAlt = a})
+instance GoogleAuth AccountsSavedadstylesGet' where
+        authKey = asgKey . _Just
+        authToken = asgOAuthToken . _Just
 
 instance GoogleRequest AccountsSavedadstylesGet'
          where
@@ -170,12 +165,12 @@ instance GoogleRequest AccountsSavedadstylesGet'
         requestWithRoute r u AccountsSavedadstylesGet'{..}
           = go _asgQuotaUser (Just _asgPrettyPrint)
               _asgSavedAdStyleId
-              _asgUserIp
+              _asgUserIP
               _asgAccountId
               _asgKey
-              _asgOauthToken
+              _asgOAuthToken
               _asgFields
-              (Just _asgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountsSavedadstylesGetResource)

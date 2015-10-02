@@ -32,7 +32,7 @@ module Network.Google.Resource.DFAReporting.Orders.List
     -- * Request Lenses
     , olQuotaUser
     , olPrettyPrint
-    , olUserIp
+    , olUserIP
     , olSearchString
     , olIds
     , olProfileId
@@ -41,11 +41,10 @@ module Network.Google.Resource.DFAReporting.Orders.List
     , olPageToken
     , olProjectId
     , olSortField
-    , olOauthToken
+    , olOAuthToken
     , olSiteId
     , olMaxResults
     , olFields
-    , olAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -67,16 +66,16 @@ type OrdersListResource =
                          QueryParam "sortOrder"
                            DfareportingOrdersListSortOrder
                            :>
-                           QueryParam "key" Text :>
+                           QueryParam "key" Key :>
                              QueryParam "pageToken" Text :>
                                QueryParam "sortField"
                                  DfareportingOrdersListSortField
                                  :>
-                                 QueryParam "oauth_token" Text :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParams "siteId" Int64 :>
                                      QueryParam "maxResults" Int32 :>
                                        QueryParam "fields" Text :>
-                                         QueryParam "alt" Alt :>
+                                         QueryParam "alt" AltJSON :>
                                            Get '[JSON] OrdersListResponse
 
 -- | Retrieves a list of orders, possibly filtered.
@@ -85,20 +84,19 @@ type OrdersListResource =
 data OrdersList' = OrdersList'
     { _olQuotaUser    :: !(Maybe Text)
     , _olPrettyPrint  :: !Bool
-    , _olUserIp       :: !(Maybe Text)
+    , _olUserIP       :: !(Maybe Text)
     , _olSearchString :: !(Maybe Text)
     , _olIds          :: !(Maybe Int64)
     , _olProfileId    :: !Int64
     , _olSortOrder    :: !(Maybe DfareportingOrdersListSortOrder)
-    , _olKey          :: !(Maybe Text)
+    , _olKey          :: !(Maybe Key)
     , _olPageToken    :: !(Maybe Text)
     , _olProjectId    :: !Int64
     , _olSortField    :: !(Maybe DfareportingOrdersListSortField)
-    , _olOauthToken   :: !(Maybe Text)
+    , _olOAuthToken   :: !(Maybe OAuthToken)
     , _olSiteId       :: !(Maybe Int64)
     , _olMaxResults   :: !(Maybe Int32)
     , _olFields       :: !(Maybe Text)
-    , _olAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersList'' with the minimum fields required to make a request.
@@ -109,7 +107,7 @@ data OrdersList' = OrdersList'
 --
 -- * 'olPrettyPrint'
 --
--- * 'olUserIp'
+-- * 'olUserIP'
 --
 -- * 'olSearchString'
 --
@@ -127,15 +125,13 @@ data OrdersList' = OrdersList'
 --
 -- * 'olSortField'
 --
--- * 'olOauthToken'
+-- * 'olOAuthToken'
 --
 -- * 'olSiteId'
 --
 -- * 'olMaxResults'
 --
 -- * 'olFields'
---
--- * 'olAlt'
 ordersList'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'projectId'
@@ -144,7 +140,7 @@ ordersList' pOlProfileId_ pOlProjectId_ =
     OrdersList'
     { _olQuotaUser = Nothing
     , _olPrettyPrint = True
-    , _olUserIp = Nothing
+    , _olUserIP = Nothing
     , _olSearchString = Nothing
     , _olIds = Nothing
     , _olProfileId = pOlProfileId_
@@ -153,11 +149,10 @@ ordersList' pOlProfileId_ pOlProjectId_ =
     , _olPageToken = Nothing
     , _olProjectId = pOlProjectId_
     , _olSortField = Nothing
-    , _olOauthToken = Nothing
+    , _olOAuthToken = Nothing
     , _olSiteId = Nothing
     , _olMaxResults = Nothing
     , _olFields = Nothing
-    , _olAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -175,8 +170,8 @@ olPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-olUserIp :: Lens' OrdersList' (Maybe Text)
-olUserIp = lens _olUserIp (\ s a -> s{_olUserIp = a})
+olUserIP :: Lens' OrdersList' (Maybe Text)
+olUserIP = lens _olUserIP (\ s a -> s{_olUserIP = a})
 
 -- | Allows searching for orders by name or ID. Wildcards (*) are allowed.
 -- For example, \"order*2015\" will return orders with names like \"order
@@ -206,7 +201,7 @@ olSortOrder
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-olKey :: Lens' OrdersList' (Maybe Text)
+olKey :: Lens' OrdersList' (Maybe Key)
 olKey = lens _olKey (\ s a -> s{_olKey = a})
 
 -- | Value of the nextPageToken from the previous result page.
@@ -225,9 +220,9 @@ olSortField
   = lens _olSortField (\ s a -> s{_olSortField = a})
 
 -- | OAuth 2.0 token for the current user.
-olOauthToken :: Lens' OrdersList' (Maybe Text)
-olOauthToken
-  = lens _olOauthToken (\ s a -> s{_olOauthToken = a})
+olOAuthToken :: Lens' OrdersList' (Maybe OAuthToken)
+olOAuthToken
+  = lens _olOAuthToken (\ s a -> s{_olOAuthToken = a})
 
 -- | Select only orders that are associated with these site IDs.
 olSiteId :: Lens' OrdersList' (Maybe Int64)
@@ -242,15 +237,15 @@ olMaxResults
 olFields :: Lens' OrdersList' (Maybe Text)
 olFields = lens _olFields (\ s a -> s{_olFields = a})
 
--- | Data format for the response.
-olAlt :: Lens' OrdersList' Alt
-olAlt = lens _olAlt (\ s a -> s{_olAlt = a})
+instance GoogleAuth OrdersList' where
+        authKey = olKey . _Just
+        authToken = olOAuthToken . _Just
 
 instance GoogleRequest OrdersList' where
         type Rs OrdersList' = OrdersListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u OrdersList'{..}
-          = go _olQuotaUser (Just _olPrettyPrint) _olUserIp
+          = go _olQuotaUser (Just _olPrettyPrint) _olUserIP
               _olSearchString
               _olIds
               _olProfileId
@@ -259,11 +254,11 @@ instance GoogleRequest OrdersList' where
               _olPageToken
               _olProjectId
               _olSortField
-              _olOauthToken
+              _olOAuthToken
               _olSiteId
               _olMaxResults
               _olFields
-              (Just _olAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy OrdersListResource)
                       r

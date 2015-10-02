@@ -19,7 +19,7 @@
 --
 -- | Gets a Container Version.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersVersionsGet@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersVersionsGet@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Get
     (
     -- * REST Resource
@@ -33,19 +33,18 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Get
     , acvgcQuotaUser
     , acvgcPrettyPrint
     , acvgcContainerId
-    , acvgcUserIp
+    , acvgcUserIP
     , acvgcContainerVersionId
     , acvgcAccountId
     , acvgcKey
-    , acvgcOauthToken
+    , acvgcOAuthToken
     , acvgcFields
-    , acvgcAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagmanagerAccountsContainersVersionsGet@ which the
+-- | A resource alias for @TagManagerAccountsContainersVersionsGet@ which the
 -- 'AccountsContainersVersionsGet'' request conforms to.
 type AccountsContainersVersionsGetResource =
      "accounts" :>
@@ -57,10 +56,10 @@ type AccountsContainersVersionsGetResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :>
+                             QueryParam "alt" AltJSON :>
                                Get '[JSON] ContainerVersion
 
 -- | Gets a Container Version.
@@ -70,13 +69,12 @@ data AccountsContainersVersionsGet' = AccountsContainersVersionsGet'
     { _acvgcQuotaUser          :: !(Maybe Text)
     , _acvgcPrettyPrint        :: !Bool
     , _acvgcContainerId        :: !Text
-    , _acvgcUserIp             :: !(Maybe Text)
+    , _acvgcUserIP             :: !(Maybe Text)
     , _acvgcContainerVersionId :: !Text
     , _acvgcAccountId          :: !Text
-    , _acvgcKey                :: !(Maybe Text)
-    , _acvgcOauthToken         :: !(Maybe Text)
+    , _acvgcKey                :: !(Maybe Key)
+    , _acvgcOAuthToken         :: !(Maybe OAuthToken)
     , _acvgcFields             :: !(Maybe Text)
-    , _acvgcAlt                :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersVersionsGet'' with the minimum fields required to make a request.
@@ -89,7 +87,7 @@ data AccountsContainersVersionsGet' = AccountsContainersVersionsGet'
 --
 -- * 'acvgcContainerId'
 --
--- * 'acvgcUserIp'
+-- * 'acvgcUserIP'
 --
 -- * 'acvgcContainerVersionId'
 --
@@ -97,11 +95,9 @@ data AccountsContainersVersionsGet' = AccountsContainersVersionsGet'
 --
 -- * 'acvgcKey'
 --
--- * 'acvgcOauthToken'
+-- * 'acvgcOAuthToken'
 --
 -- * 'acvgcFields'
---
--- * 'acvgcAlt'
 accountsContainersVersionsGet'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'containerVersionId'
@@ -112,13 +108,12 @@ accountsContainersVersionsGet' pAcvgcContainerId_ pAcvgcContainerVersionId_ pAcv
     { _acvgcQuotaUser = Nothing
     , _acvgcPrettyPrint = True
     , _acvgcContainerId = pAcvgcContainerId_
-    , _acvgcUserIp = Nothing
+    , _acvgcUserIP = Nothing
     , _acvgcContainerVersionId = pAcvgcContainerVersionId_
     , _acvgcAccountId = pAcvgcAccountId_
     , _acvgcKey = Nothing
-    , _acvgcOauthToken = Nothing
+    , _acvgcOAuthToken = Nothing
     , _acvgcFields = Nothing
-    , _acvgcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -143,9 +138,9 @@ acvgcContainerId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-acvgcUserIp :: Lens' AccountsContainersVersionsGet' (Maybe Text)
-acvgcUserIp
-  = lens _acvgcUserIp (\ s a -> s{_acvgcUserIp = a})
+acvgcUserIP :: Lens' AccountsContainersVersionsGet' (Maybe Text)
+acvgcUserIP
+  = lens _acvgcUserIP (\ s a -> s{_acvgcUserIP = a})
 
 -- | The GTM Container Version ID. Specify published to retrieve the
 -- currently published version.
@@ -163,23 +158,24 @@ acvgcAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-acvgcKey :: Lens' AccountsContainersVersionsGet' (Maybe Text)
+acvgcKey :: Lens' AccountsContainersVersionsGet' (Maybe Key)
 acvgcKey = lens _acvgcKey (\ s a -> s{_acvgcKey = a})
 
 -- | OAuth 2.0 token for the current user.
-acvgcOauthToken :: Lens' AccountsContainersVersionsGet' (Maybe Text)
-acvgcOauthToken
-  = lens _acvgcOauthToken
-      (\ s a -> s{_acvgcOauthToken = a})
+acvgcOAuthToken :: Lens' AccountsContainersVersionsGet' (Maybe OAuthToken)
+acvgcOAuthToken
+  = lens _acvgcOAuthToken
+      (\ s a -> s{_acvgcOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 acvgcFields :: Lens' AccountsContainersVersionsGet' (Maybe Text)
 acvgcFields
   = lens _acvgcFields (\ s a -> s{_acvgcFields = a})
 
--- | Data format for the response.
-acvgcAlt :: Lens' AccountsContainersVersionsGet' Alt
-acvgcAlt = lens _acvgcAlt (\ s a -> s{_acvgcAlt = a})
+instance GoogleAuth AccountsContainersVersionsGet'
+         where
+        authKey = acvgcKey . _Just
+        authToken = acvgcOAuthToken . _Just
 
 instance GoogleRequest AccountsContainersVersionsGet'
          where
@@ -190,13 +186,13 @@ instance GoogleRequest AccountsContainersVersionsGet'
           AccountsContainersVersionsGet'{..}
           = go _acvgcQuotaUser (Just _acvgcPrettyPrint)
               _acvgcContainerId
-              _acvgcUserIp
+              _acvgcUserIP
               _acvgcContainerVersionId
               _acvgcAccountId
               _acvgcKey
-              _acvgcOauthToken
+              _acvgcOAuthToken
               _acvgcFields
-              (Just _acvgcAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

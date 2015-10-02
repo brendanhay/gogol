@@ -32,13 +32,13 @@ module Network.Google.Resource.Reseller.Subscriptions.ChangeRenewalSettings
     -- * Request Lenses
     , scrsQuotaUser
     , scrsPrettyPrint
-    , scrsUserIp
+    , scrsUserIP
     , scrsCustomerId
     , scrsKey
-    , scrsOauthToken
+    , scrsOAuthToken
+    , scrsRenewalSettings
     , scrsSubscriptionId
     , scrsFields
-    , scrsAlt
     ) where
 
 import           Network.Google.AppsReseller.Types
@@ -55,24 +55,26 @@ type SubscriptionsChangeRenewalSettingsResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Post '[JSON] Subscription
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] RenewalSettings :>
+                               Post '[JSON] Subscription
 
 -- | Changes the renewal settings of a subscription
 --
 -- /See:/ 'subscriptionsChangeRenewalSettings'' smart constructor.
 data SubscriptionsChangeRenewalSettings' = SubscriptionsChangeRenewalSettings'
-    { _scrsQuotaUser      :: !(Maybe Text)
-    , _scrsPrettyPrint    :: !Bool
-    , _scrsUserIp         :: !(Maybe Text)
-    , _scrsCustomerId     :: !Text
-    , _scrsKey            :: !(Maybe Text)
-    , _scrsOauthToken     :: !(Maybe Text)
-    , _scrsSubscriptionId :: !Text
-    , _scrsFields         :: !(Maybe Text)
-    , _scrsAlt            :: !Alt
+    { _scrsQuotaUser       :: !(Maybe Text)
+    , _scrsPrettyPrint     :: !Bool
+    , _scrsUserIP          :: !(Maybe Text)
+    , _scrsCustomerId      :: !Text
+    , _scrsKey             :: !(Maybe Key)
+    , _scrsOAuthToken      :: !(Maybe OAuthToken)
+    , _scrsRenewalSettings :: !RenewalSettings
+    , _scrsSubscriptionId  :: !Text
+    , _scrsFields          :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionsChangeRenewalSettings'' with the minimum fields required to make a request.
@@ -83,34 +85,35 @@ data SubscriptionsChangeRenewalSettings' = SubscriptionsChangeRenewalSettings'
 --
 -- * 'scrsPrettyPrint'
 --
--- * 'scrsUserIp'
+-- * 'scrsUserIP'
 --
 -- * 'scrsCustomerId'
 --
 -- * 'scrsKey'
 --
--- * 'scrsOauthToken'
+-- * 'scrsOAuthToken'
+--
+-- * 'scrsRenewalSettings'
 --
 -- * 'scrsSubscriptionId'
 --
 -- * 'scrsFields'
---
--- * 'scrsAlt'
 subscriptionsChangeRenewalSettings'
     :: Text -- ^ 'customerId'
+    -> RenewalSettings -- ^ 'RenewalSettings'
     -> Text -- ^ 'subscriptionId'
     -> SubscriptionsChangeRenewalSettings'
-subscriptionsChangeRenewalSettings' pScrsCustomerId_ pScrsSubscriptionId_ =
+subscriptionsChangeRenewalSettings' pScrsCustomerId_ pScrsRenewalSettings_ pScrsSubscriptionId_ =
     SubscriptionsChangeRenewalSettings'
     { _scrsQuotaUser = Nothing
     , _scrsPrettyPrint = True
-    , _scrsUserIp = Nothing
+    , _scrsUserIP = Nothing
     , _scrsCustomerId = pScrsCustomerId_
     , _scrsKey = Nothing
-    , _scrsOauthToken = Nothing
+    , _scrsOAuthToken = Nothing
+    , _scrsRenewalSettings = pScrsRenewalSettings_
     , _scrsSubscriptionId = pScrsSubscriptionId_
     , _scrsFields = Nothing
-    , _scrsAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -129,9 +132,9 @@ scrsPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-scrsUserIp :: Lens' SubscriptionsChangeRenewalSettings' (Maybe Text)
-scrsUserIp
-  = lens _scrsUserIp (\ s a -> s{_scrsUserIp = a})
+scrsUserIP :: Lens' SubscriptionsChangeRenewalSettings' (Maybe Text)
+scrsUserIP
+  = lens _scrsUserIP (\ s a -> s{_scrsUserIP = a})
 
 -- | Id of the Customer
 scrsCustomerId :: Lens' SubscriptionsChangeRenewalSettings' Text
@@ -142,14 +145,20 @@ scrsCustomerId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-scrsKey :: Lens' SubscriptionsChangeRenewalSettings' (Maybe Text)
+scrsKey :: Lens' SubscriptionsChangeRenewalSettings' (Maybe Key)
 scrsKey = lens _scrsKey (\ s a -> s{_scrsKey = a})
 
 -- | OAuth 2.0 token for the current user.
-scrsOauthToken :: Lens' SubscriptionsChangeRenewalSettings' (Maybe Text)
-scrsOauthToken
-  = lens _scrsOauthToken
-      (\ s a -> s{_scrsOauthToken = a})
+scrsOAuthToken :: Lens' SubscriptionsChangeRenewalSettings' (Maybe OAuthToken)
+scrsOAuthToken
+  = lens _scrsOAuthToken
+      (\ s a -> s{_scrsOAuthToken = a})
+
+-- | Multipart request metadata.
+scrsRenewalSettings :: Lens' SubscriptionsChangeRenewalSettings' RenewalSettings
+scrsRenewalSettings
+  = lens _scrsRenewalSettings
+      (\ s a -> s{_scrsRenewalSettings = a})
 
 -- | Id of the subscription, which is unique for a customer
 scrsSubscriptionId :: Lens' SubscriptionsChangeRenewalSettings' Text
@@ -162,9 +171,10 @@ scrsFields :: Lens' SubscriptionsChangeRenewalSettings' (Maybe Text)
 scrsFields
   = lens _scrsFields (\ s a -> s{_scrsFields = a})
 
--- | Data format for the response.
-scrsAlt :: Lens' SubscriptionsChangeRenewalSettings' Alt
-scrsAlt = lens _scrsAlt (\ s a -> s{_scrsAlt = a})
+instance GoogleAuth
+         SubscriptionsChangeRenewalSettings' where
+        authKey = scrsKey . _Just
+        authToken = scrsOAuthToken . _Just
 
 instance GoogleRequest
          SubscriptionsChangeRenewalSettings' where
@@ -174,13 +184,14 @@ instance GoogleRequest
         requestWithRoute r u
           SubscriptionsChangeRenewalSettings'{..}
           = go _scrsQuotaUser (Just _scrsPrettyPrint)
-              _scrsUserIp
+              _scrsUserIP
               _scrsCustomerId
               _scrsKey
-              _scrsOauthToken
+              _scrsOAuthToken
               _scrsSubscriptionId
               _scrsFields
-              (Just _scrsAlt)
+              (Just AltJSON)
+              _scrsRenewalSettings
           where go
                   = clientWithRoute
                       (Proxy ::

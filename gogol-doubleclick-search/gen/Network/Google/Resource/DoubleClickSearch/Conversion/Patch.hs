@@ -20,7 +20,7 @@
 -- | Updates a batch of conversions in DoubleClick Search. This method
 -- supports patch semantics.
 --
--- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @DoubleclicksearchConversionPatch@.
+-- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @DoubleClicksearchConversionPatch@.
 module Network.Google.Resource.DoubleClickSearch.Conversion.Patch
     (
     -- * REST Resource
@@ -35,22 +35,22 @@ module Network.Google.Resource.DoubleClickSearch.Conversion.Patch
     , cpPrettyPrint
     , cpEngineAccountId
     , cpAgencyId
-    , cpUserIp
+    , cpUserIP
     , cpAdvertiserId
     , cpEndDate
     , cpStartDate
     , cpKey
     , cpStartRow
-    , cpOauthToken
+    , cpConversionList
+    , cpOAuthToken
     , cpRowCount
     , cpFields
-    , cpAlt
     ) where
 
 import           Network.Google.DoubleClickSearch.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DoubleclicksearchConversionPatch@ which the
+-- | A resource alias for @DoubleClicksearchConversionPatch@ which the
 -- 'ConversionPatch'' request conforms to.
 type ConversionPatchResource =
      "conversion" :>
@@ -62,13 +62,14 @@ type ConversionPatchResource =
                  QueryParam "advertiserId" Int64 :>
                    QueryParam "endDate" Int32 :>
                      QueryParam "startDate" Int32 :>
-                       QueryParam "key" Text :>
+                       QueryParam "key" Key :>
                          QueryParam "startRow" Word32 :>
-                           QueryParam "oauth_token" Text :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "rowCount" Int32 :>
                                QueryParam "fields" Text :>
-                                 QueryParam "alt" Alt :>
-                                   Patch '[JSON] ConversionList
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON] ConversionList :>
+                                     Patch '[JSON] ConversionList
 
 -- | Updates a batch of conversions in DoubleClick Search. This method
 -- supports patch semantics.
@@ -79,16 +80,16 @@ data ConversionPatch' = ConversionPatch'
     , _cpPrettyPrint     :: !Bool
     , _cpEngineAccountId :: !Int64
     , _cpAgencyId        :: !Int64
-    , _cpUserIp          :: !(Maybe Text)
+    , _cpUserIP          :: !(Maybe Text)
     , _cpAdvertiserId    :: !Int64
     , _cpEndDate         :: !Int32
     , _cpStartDate       :: !Int32
-    , _cpKey             :: !(Maybe Text)
+    , _cpKey             :: !(Maybe Key)
     , _cpStartRow        :: !Word32
-    , _cpOauthToken      :: !(Maybe Text)
+    , _cpConversionList  :: !ConversionList
+    , _cpOAuthToken      :: !(Maybe OAuthToken)
     , _cpRowCount        :: !Int32
     , _cpFields          :: !(Maybe Text)
-    , _cpAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ConversionPatch'' with the minimum fields required to make a request.
@@ -103,7 +104,7 @@ data ConversionPatch' = ConversionPatch'
 --
 -- * 'cpAgencyId'
 --
--- * 'cpUserIp'
+-- * 'cpUserIP'
 --
 -- * 'cpAdvertiserId'
 --
@@ -115,13 +116,13 @@ data ConversionPatch' = ConversionPatch'
 --
 -- * 'cpStartRow'
 --
--- * 'cpOauthToken'
+-- * 'cpConversionList'
+--
+-- * 'cpOAuthToken'
 --
 -- * 'cpRowCount'
 --
 -- * 'cpFields'
---
--- * 'cpAlt'
 conversionPatch'
     :: Int64 -- ^ 'engineAccountId'
     -> Int64 -- ^ 'agencyId'
@@ -129,24 +130,25 @@ conversionPatch'
     -> Int32 -- ^ 'endDate'
     -> Int32 -- ^ 'startDate'
     -> Word32 -- ^ 'startRow'
+    -> ConversionList -- ^ 'ConversionList'
     -> Int32 -- ^ 'rowCount'
     -> ConversionPatch'
-conversionPatch' pCpEngineAccountId_ pCpAgencyId_ pCpAdvertiserId_ pCpEndDate_ pCpStartDate_ pCpStartRow_ pCpRowCount_ =
+conversionPatch' pCpEngineAccountId_ pCpAgencyId_ pCpAdvertiserId_ pCpEndDate_ pCpStartDate_ pCpStartRow_ pCpConversionList_ pCpRowCount_ =
     ConversionPatch'
     { _cpQuotaUser = Nothing
     , _cpPrettyPrint = True
     , _cpEngineAccountId = pCpEngineAccountId_
     , _cpAgencyId = pCpAgencyId_
-    , _cpUserIp = Nothing
+    , _cpUserIP = Nothing
     , _cpAdvertiserId = pCpAdvertiserId_
     , _cpEndDate = pCpEndDate_
     , _cpStartDate = pCpStartDate_
     , _cpKey = Nothing
     , _cpStartRow = pCpStartRow_
-    , _cpOauthToken = Nothing
+    , _cpConversionList = pCpConversionList_
+    , _cpOAuthToken = Nothing
     , _cpRowCount = pCpRowCount_
     , _cpFields = Nothing
-    , _cpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -175,8 +177,8 @@ cpAgencyId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cpUserIp :: Lens' ConversionPatch' (Maybe Text)
-cpUserIp = lens _cpUserIp (\ s a -> s{_cpUserIp = a})
+cpUserIP :: Lens' ConversionPatch' (Maybe Text)
+cpUserIP = lens _cpUserIP (\ s a -> s{_cpUserIP = a})
 
 -- | Numeric ID of the advertiser.
 cpAdvertiserId :: Lens' ConversionPatch' Int64
@@ -199,7 +201,7 @@ cpStartDate
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cpKey :: Lens' ConversionPatch' (Maybe Text)
+cpKey :: Lens' ConversionPatch' (Maybe Key)
 cpKey = lens _cpKey (\ s a -> s{_cpKey = a})
 
 -- | The 0-based starting index for retrieving conversions results.
@@ -207,10 +209,16 @@ cpStartRow :: Lens' ConversionPatch' Word32
 cpStartRow
   = lens _cpStartRow (\ s a -> s{_cpStartRow = a})
 
+-- | Multipart request metadata.
+cpConversionList :: Lens' ConversionPatch' ConversionList
+cpConversionList
+  = lens _cpConversionList
+      (\ s a -> s{_cpConversionList = a})
+
 -- | OAuth 2.0 token for the current user.
-cpOauthToken :: Lens' ConversionPatch' (Maybe Text)
-cpOauthToken
-  = lens _cpOauthToken (\ s a -> s{_cpOauthToken = a})
+cpOAuthToken :: Lens' ConversionPatch' (Maybe OAuthToken)
+cpOAuthToken
+  = lens _cpOAuthToken (\ s a -> s{_cpOAuthToken = a})
 
 -- | The number of conversions to return per call.
 cpRowCount :: Lens' ConversionPatch' Int32
@@ -221,9 +229,9 @@ cpRowCount
 cpFields :: Lens' ConversionPatch' (Maybe Text)
 cpFields = lens _cpFields (\ s a -> s{_cpFields = a})
 
--- | Data format for the response.
-cpAlt :: Lens' ConversionPatch' Alt
-cpAlt = lens _cpAlt (\ s a -> s{_cpAlt = a})
+instance GoogleAuth ConversionPatch' where
+        authKey = cpKey . _Just
+        authToken = cpOAuthToken . _Just
 
 instance GoogleRequest ConversionPatch' where
         type Rs ConversionPatch' = ConversionList
@@ -233,16 +241,17 @@ instance GoogleRequest ConversionPatch' where
           = go _cpQuotaUser (Just _cpPrettyPrint)
               (Just _cpEngineAccountId)
               (Just _cpAgencyId)
-              _cpUserIp
+              _cpUserIP
               (Just _cpAdvertiserId)
               (Just _cpEndDate)
               (Just _cpStartDate)
               _cpKey
               (Just _cpStartRow)
-              _cpOauthToken
+              _cpOAuthToken
               (Just _cpRowCount)
               _cpFields
-              (Just _cpAlt)
+              (Just AltJSON)
+              _cpConversionList
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ConversionPatchResource)

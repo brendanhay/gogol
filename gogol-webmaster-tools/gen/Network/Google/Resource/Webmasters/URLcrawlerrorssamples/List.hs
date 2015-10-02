@@ -34,13 +34,12 @@ module Network.Google.Resource.Webmasters.URLcrawlerrorssamples.List
     , ulQuotaUser
     , ulPrettyPrint
     , ulPlatform
-    , ulUserIp
+    , ulUserIP
     , ulCategory
-    , ulSiteUrl
+    , ulSiteURL
     , ulKey
-    , ulOauthToken
+    , ulOAuthToken
     , ulFields
-    , ulAlt
     ) where
 
 import           Network.Google.Prelude
@@ -61,10 +60,10 @@ type UrlcrawlerrorssamplesListResource =
                    QueryParam "category"
                      WebmastersURLcrawlerrorssamplesListCategory
                      :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :>
+                           QueryParam "alt" AltJSON :>
                              Get '[JSON] URLCrawlErrorsSamplesListResponse
 
 -- | Lists a site\'s sample URLs for the specified crawl error category and
@@ -75,13 +74,12 @@ data URLcrawlerrorssamplesList' = URLcrawlerrorssamplesList'
     { _ulQuotaUser   :: !(Maybe Text)
     , _ulPrettyPrint :: !Bool
     , _ulPlatform    :: !WebmastersURLcrawlerrorssamplesListPlatform
-    , _ulUserIp      :: !(Maybe Text)
+    , _ulUserIP      :: !(Maybe Text)
     , _ulCategory    :: !WebmastersURLcrawlerrorssamplesListCategory
-    , _ulSiteUrl     :: !Text
-    , _ulKey         :: !(Maybe Text)
-    , _ulOauthToken  :: !(Maybe Text)
+    , _ulSiteURL     :: !Text
+    , _ulKey         :: !(Maybe Key)
+    , _ulOAuthToken  :: !(Maybe OAuthToken)
     , _ulFields      :: !(Maybe Text)
-    , _ulAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLcrawlerrorssamplesList'' with the minimum fields required to make a request.
@@ -94,36 +92,33 @@ data URLcrawlerrorssamplesList' = URLcrawlerrorssamplesList'
 --
 -- * 'ulPlatform'
 --
--- * 'ulUserIp'
+-- * 'ulUserIP'
 --
 -- * 'ulCategory'
 --
--- * 'ulSiteUrl'
+-- * 'ulSiteURL'
 --
 -- * 'ulKey'
 --
--- * 'ulOauthToken'
+-- * 'ulOAuthToken'
 --
 -- * 'ulFields'
---
--- * 'ulAlt'
 uRLcrawlerrorssamplesList'
     :: WebmastersURLcrawlerrorssamplesListPlatform -- ^ 'platform'
     -> WebmastersURLcrawlerrorssamplesListCategory -- ^ 'category'
     -> Text -- ^ 'siteUrl'
     -> URLcrawlerrorssamplesList'
-uRLcrawlerrorssamplesList' pUlPlatform_ pUlCategory_ pUlSiteUrl_ =
+uRLcrawlerrorssamplesList' pUlPlatform_ pUlCategory_ pUlSiteURL_ =
     URLcrawlerrorssamplesList'
     { _ulQuotaUser = Nothing
     , _ulPrettyPrint = True
     , _ulPlatform = pUlPlatform_
-    , _ulUserIp = Nothing
+    , _ulUserIP = Nothing
     , _ulCategory = pUlCategory_
-    , _ulSiteUrl = pUlSiteUrl_
+    , _ulSiteURL = pUlSiteURL_
     , _ulKey = Nothing
-    , _ulOauthToken = Nothing
+    , _ulOAuthToken = Nothing
     , _ulFields = Nothing
-    , _ulAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -146,8 +141,8 @@ ulPlatform
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ulUserIp :: Lens' URLcrawlerrorssamplesList' (Maybe Text)
-ulUserIp = lens _ulUserIp (\ s a -> s{_ulUserIp = a})
+ulUserIP :: Lens' URLcrawlerrorssamplesList' (Maybe Text)
+ulUserIP = lens _ulUserIP (\ s a -> s{_ulUserIP = a})
 
 -- | The crawl error category. For example: authPermissions
 ulCategory :: Lens' URLcrawlerrorssamplesList' WebmastersURLcrawlerrorssamplesListCategory
@@ -156,28 +151,28 @@ ulCategory
 
 -- | The site\'s URL, including protocol. For example:
 -- http:\/\/www.example.com\/
-ulSiteUrl :: Lens' URLcrawlerrorssamplesList' Text
-ulSiteUrl
-  = lens _ulSiteUrl (\ s a -> s{_ulSiteUrl = a})
+ulSiteURL :: Lens' URLcrawlerrorssamplesList' Text
+ulSiteURL
+  = lens _ulSiteURL (\ s a -> s{_ulSiteURL = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ulKey :: Lens' URLcrawlerrorssamplesList' (Maybe Text)
+ulKey :: Lens' URLcrawlerrorssamplesList' (Maybe Key)
 ulKey = lens _ulKey (\ s a -> s{_ulKey = a})
 
 -- | OAuth 2.0 token for the current user.
-ulOauthToken :: Lens' URLcrawlerrorssamplesList' (Maybe Text)
-ulOauthToken
-  = lens _ulOauthToken (\ s a -> s{_ulOauthToken = a})
+ulOAuthToken :: Lens' URLcrawlerrorssamplesList' (Maybe OAuthToken)
+ulOAuthToken
+  = lens _ulOAuthToken (\ s a -> s{_ulOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ulFields :: Lens' URLcrawlerrorssamplesList' (Maybe Text)
 ulFields = lens _ulFields (\ s a -> s{_ulFields = a})
 
--- | Data format for the response.
-ulAlt :: Lens' URLcrawlerrorssamplesList' Alt
-ulAlt = lens _ulAlt (\ s a -> s{_ulAlt = a})
+instance GoogleAuth URLcrawlerrorssamplesList' where
+        authKey = ulKey . _Just
+        authToken = ulOAuthToken . _Just
 
 instance GoogleRequest URLcrawlerrorssamplesList'
          where
@@ -187,13 +182,13 @@ instance GoogleRequest URLcrawlerrorssamplesList'
         requestWithRoute r u URLcrawlerrorssamplesList'{..}
           = go _ulQuotaUser (Just _ulPrettyPrint)
               (Just _ulPlatform)
-              _ulUserIp
+              _ulUserIP
               (Just _ulCategory)
-              _ulSiteUrl
+              _ulSiteURL
               _ulKey
-              _ulOauthToken
+              _ulOAuthToken
               _ulFields
-              (Just _ulAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UrlcrawlerrorssamplesListResource)

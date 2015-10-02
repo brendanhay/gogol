@@ -19,7 +19,7 @@
 --
 -- | Creates a GTM Tag.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersTagsCreate@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersTagsCreate@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Tags.Create
     (
     -- * REST Resource
@@ -32,19 +32,19 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Tags.Create
     -- * Request Lenses
     , actcQuotaUser
     , actcPrettyPrint
+    , actcTag
     , actcContainerId
-    , actcUserIp
+    , actcUserIP
     , actcAccountId
     , actcKey
-    , actcOauthToken
+    , actcOAuthToken
     , actcFields
-    , actcAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagmanagerAccountsContainersTagsCreate@ which the
+-- | A resource alias for @TagManagerAccountsContainersTagsCreate@ which the
 -- 'AccountsContainersTagsCreate'' request conforms to.
 type AccountsContainersTagsCreateResource =
      "accounts" :>
@@ -55,10 +55,11 @@ type AccountsContainersTagsCreateResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Post '[JSON] Tag
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] Tag :> Post '[JSON] Tag
 
 -- | Creates a GTM Tag.
 --
@@ -66,13 +67,13 @@ type AccountsContainersTagsCreateResource =
 data AccountsContainersTagsCreate' = AccountsContainersTagsCreate'
     { _actcQuotaUser   :: !(Maybe Text)
     , _actcPrettyPrint :: !Bool
+    , _actcTag         :: !Tag
     , _actcContainerId :: !Text
-    , _actcUserIp      :: !(Maybe Text)
+    , _actcUserIP      :: !(Maybe Text)
     , _actcAccountId   :: !Text
-    , _actcKey         :: !(Maybe Text)
-    , _actcOauthToken  :: !(Maybe Text)
+    , _actcKey         :: !(Maybe Key)
+    , _actcOAuthToken  :: !(Maybe OAuthToken)
     , _actcFields      :: !(Maybe Text)
-    , _actcAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersTagsCreate'' with the minimum fields required to make a request.
@@ -83,34 +84,35 @@ data AccountsContainersTagsCreate' = AccountsContainersTagsCreate'
 --
 -- * 'actcPrettyPrint'
 --
+-- * 'actcTag'
+--
 -- * 'actcContainerId'
 --
--- * 'actcUserIp'
+-- * 'actcUserIP'
 --
 -- * 'actcAccountId'
 --
 -- * 'actcKey'
 --
--- * 'actcOauthToken'
+-- * 'actcOAuthToken'
 --
 -- * 'actcFields'
---
--- * 'actcAlt'
 accountsContainersTagsCreate'
-    :: Text -- ^ 'containerId'
+    :: Tag -- ^ 'Tag'
+    -> Text -- ^ 'containerId'
     -> Text -- ^ 'accountId'
     -> AccountsContainersTagsCreate'
-accountsContainersTagsCreate' pActcContainerId_ pActcAccountId_ =
+accountsContainersTagsCreate' pActcTag_ pActcContainerId_ pActcAccountId_ =
     AccountsContainersTagsCreate'
     { _actcQuotaUser = Nothing
     , _actcPrettyPrint = True
+    , _actcTag = pActcTag_
     , _actcContainerId = pActcContainerId_
-    , _actcUserIp = Nothing
+    , _actcUserIP = Nothing
     , _actcAccountId = pActcAccountId_
     , _actcKey = Nothing
-    , _actcOauthToken = Nothing
+    , _actcOAuthToken = Nothing
     , _actcFields = Nothing
-    , _actcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,6 +129,10 @@ actcPrettyPrint
   = lens _actcPrettyPrint
       (\ s a -> s{_actcPrettyPrint = a})
 
+-- | Multipart request metadata.
+actcTag :: Lens' AccountsContainersTagsCreate' Tag
+actcTag = lens _actcTag (\ s a -> s{_actcTag = a})
+
 -- | The GTM Container ID.
 actcContainerId :: Lens' AccountsContainersTagsCreate' Text
 actcContainerId
@@ -135,9 +141,9 @@ actcContainerId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-actcUserIp :: Lens' AccountsContainersTagsCreate' (Maybe Text)
-actcUserIp
-  = lens _actcUserIp (\ s a -> s{_actcUserIp = a})
+actcUserIP :: Lens' AccountsContainersTagsCreate' (Maybe Text)
+actcUserIP
+  = lens _actcUserIP (\ s a -> s{_actcUserIP = a})
 
 -- | The GTM Account ID.
 actcAccountId :: Lens' AccountsContainersTagsCreate' Text
@@ -148,23 +154,24 @@ actcAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-actcKey :: Lens' AccountsContainersTagsCreate' (Maybe Text)
+actcKey :: Lens' AccountsContainersTagsCreate' (Maybe Key)
 actcKey = lens _actcKey (\ s a -> s{_actcKey = a})
 
 -- | OAuth 2.0 token for the current user.
-actcOauthToken :: Lens' AccountsContainersTagsCreate' (Maybe Text)
-actcOauthToken
-  = lens _actcOauthToken
-      (\ s a -> s{_actcOauthToken = a})
+actcOAuthToken :: Lens' AccountsContainersTagsCreate' (Maybe OAuthToken)
+actcOAuthToken
+  = lens _actcOAuthToken
+      (\ s a -> s{_actcOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 actcFields :: Lens' AccountsContainersTagsCreate' (Maybe Text)
 actcFields
   = lens _actcFields (\ s a -> s{_actcFields = a})
 
--- | Data format for the response.
-actcAlt :: Lens' AccountsContainersTagsCreate' Alt
-actcAlt = lens _actcAlt (\ s a -> s{_actcAlt = a})
+instance GoogleAuth AccountsContainersTagsCreate'
+         where
+        authKey = actcKey . _Just
+        authToken = actcOAuthToken . _Just
 
 instance GoogleRequest AccountsContainersTagsCreate'
          where
@@ -174,12 +181,13 @@ instance GoogleRequest AccountsContainersTagsCreate'
           AccountsContainersTagsCreate'{..}
           = go _actcQuotaUser (Just _actcPrettyPrint)
               _actcContainerId
-              _actcUserIp
+              _actcUserIP
               _actcAccountId
               _actcKey
-              _actcOauthToken
+              _actcOAuthToken
               _actcFields
-              (Just _actcAlt)
+              (Just AltJSON)
+              _actcTag
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountsContainersTagsCreateResource)

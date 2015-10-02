@@ -32,12 +32,12 @@ module Network.Google.Resource.Directory.Schemas.Insert
     -- * Request Lenses
     , siQuotaUser
     , siPrettyPrint
-    , siUserIp
+    , siUserIP
     , siCustomerId
+    , siSchema
     , siKey
-    , siOauthToken
+    , siOAuthToken
     , siFields
-    , siAlt
     ) where
 
 import           Network.Google.AdminDirectory.Types
@@ -52,10 +52,11 @@ type SchemasInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] Schema
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Schema :> Post '[JSON] Schema
 
 -- | Create schema.
 --
@@ -63,12 +64,12 @@ type SchemasInsertResource =
 data SchemasInsert' = SchemasInsert'
     { _siQuotaUser   :: !(Maybe Text)
     , _siPrettyPrint :: !Bool
-    , _siUserIp      :: !(Maybe Text)
+    , _siUserIP      :: !(Maybe Text)
     , _siCustomerId  :: !Text
-    , _siKey         :: !(Maybe Text)
-    , _siOauthToken  :: !(Maybe Text)
+    , _siSchema      :: !Schema
+    , _siKey         :: !(Maybe Key)
+    , _siOAuthToken  :: !(Maybe OAuthToken)
     , _siFields      :: !(Maybe Text)
-    , _siAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SchemasInsert'' with the minimum fields required to make a request.
@@ -79,30 +80,31 @@ data SchemasInsert' = SchemasInsert'
 --
 -- * 'siPrettyPrint'
 --
--- * 'siUserIp'
+-- * 'siUserIP'
 --
 -- * 'siCustomerId'
 --
+-- * 'siSchema'
+--
 -- * 'siKey'
 --
--- * 'siOauthToken'
+-- * 'siOAuthToken'
 --
 -- * 'siFields'
---
--- * 'siAlt'
 schemasInsert'
     :: Text -- ^ 'customerId'
+    -> Schema -- ^ 'Schema'
     -> SchemasInsert'
-schemasInsert' pSiCustomerId_ =
+schemasInsert' pSiCustomerId_ pSiSchema_ =
     SchemasInsert'
     { _siQuotaUser = Nothing
     , _siPrettyPrint = True
-    , _siUserIp = Nothing
+    , _siUserIP = Nothing
     , _siCustomerId = pSiCustomerId_
+    , _siSchema = pSiSchema_
     , _siKey = Nothing
-    , _siOauthToken = Nothing
+    , _siOAuthToken = Nothing
     , _siFields = Nothing
-    , _siAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,43 +122,48 @@ siPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-siUserIp :: Lens' SchemasInsert' (Maybe Text)
-siUserIp = lens _siUserIp (\ s a -> s{_siUserIp = a})
+siUserIP :: Lens' SchemasInsert' (Maybe Text)
+siUserIP = lens _siUserIP (\ s a -> s{_siUserIP = a})
 
 -- | Immutable id of the Google Apps account
 siCustomerId :: Lens' SchemasInsert' Text
 siCustomerId
   = lens _siCustomerId (\ s a -> s{_siCustomerId = a})
 
+-- | Multipart request metadata.
+siSchema :: Lens' SchemasInsert' Schema
+siSchema = lens _siSchema (\ s a -> s{_siSchema = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-siKey :: Lens' SchemasInsert' (Maybe Text)
+siKey :: Lens' SchemasInsert' (Maybe Key)
 siKey = lens _siKey (\ s a -> s{_siKey = a})
 
 -- | OAuth 2.0 token for the current user.
-siOauthToken :: Lens' SchemasInsert' (Maybe Text)
-siOauthToken
-  = lens _siOauthToken (\ s a -> s{_siOauthToken = a})
+siOAuthToken :: Lens' SchemasInsert' (Maybe OAuthToken)
+siOAuthToken
+  = lens _siOAuthToken (\ s a -> s{_siOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 siFields :: Lens' SchemasInsert' (Maybe Text)
 siFields = lens _siFields (\ s a -> s{_siFields = a})
 
--- | Data format for the response.
-siAlt :: Lens' SchemasInsert' Alt
-siAlt = lens _siAlt (\ s a -> s{_siAlt = a})
+instance GoogleAuth SchemasInsert' where
+        authKey = siKey . _Just
+        authToken = siOAuthToken . _Just
 
 instance GoogleRequest SchemasInsert' where
         type Rs SchemasInsert' = Schema
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u SchemasInsert'{..}
-          = go _siQuotaUser (Just _siPrettyPrint) _siUserIp
+          = go _siQuotaUser (Just _siPrettyPrint) _siUserIP
               _siCustomerId
               _siKey
-              _siOauthToken
+              _siOAuthToken
               _siFields
-              (Just _siAlt)
+              (Just AltJSON)
+              _siSchema
           where go
                   = clientWithRoute
                       (Proxy :: Proxy SchemasInsertResource)

@@ -32,13 +32,12 @@ module Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.Get
     -- * Request Lenses
     , pcgQuotaUser
     , pcgPrettyPrint
-    , pcgUserIp
+    , pcgUserIP
     , pcgAccountId
     , pcgKey
     , pcgConfigId
-    , pcgOauthToken
+    , pcgOAuthToken
     , pcgFields
-    , pcgAlt
     ) where
 
 import           Network.Google.AdExchangeBuyer.Types
@@ -53,10 +52,10 @@ type PretargetingConfigGetResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :>
+                       QueryParam "alt" AltJSON :>
                          Get '[JSON] PretargetingConfig
 
 -- | Gets a specific pretargeting configuration
@@ -65,13 +64,12 @@ type PretargetingConfigGetResource =
 data PretargetingConfigGet' = PretargetingConfigGet'
     { _pcgQuotaUser   :: !(Maybe Text)
     , _pcgPrettyPrint :: !Bool
-    , _pcgUserIp      :: !(Maybe Text)
+    , _pcgUserIP      :: !(Maybe Text)
     , _pcgAccountId   :: !Int64
-    , _pcgKey         :: !(Maybe Text)
+    , _pcgKey         :: !(Maybe Key)
     , _pcgConfigId    :: !Int64
-    , _pcgOauthToken  :: !(Maybe Text)
+    , _pcgOAuthToken  :: !(Maybe OAuthToken)
     , _pcgFields      :: !(Maybe Text)
-    , _pcgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PretargetingConfigGet'' with the minimum fields required to make a request.
@@ -82,7 +80,7 @@ data PretargetingConfigGet' = PretargetingConfigGet'
 --
 -- * 'pcgPrettyPrint'
 --
--- * 'pcgUserIp'
+-- * 'pcgUserIP'
 --
 -- * 'pcgAccountId'
 --
@@ -90,11 +88,9 @@ data PretargetingConfigGet' = PretargetingConfigGet'
 --
 -- * 'pcgConfigId'
 --
--- * 'pcgOauthToken'
+-- * 'pcgOAuthToken'
 --
 -- * 'pcgFields'
---
--- * 'pcgAlt'
 pretargetingConfigGet'
     :: Int64 -- ^ 'accountId'
     -> Int64 -- ^ 'configId'
@@ -103,13 +99,12 @@ pretargetingConfigGet' pPcgAccountId_ pPcgConfigId_ =
     PretargetingConfigGet'
     { _pcgQuotaUser = Nothing
     , _pcgPrettyPrint = True
-    , _pcgUserIp = Nothing
+    , _pcgUserIP = Nothing
     , _pcgAccountId = pPcgAccountId_
     , _pcgKey = Nothing
     , _pcgConfigId = pPcgConfigId_
-    , _pcgOauthToken = Nothing
+    , _pcgOAuthToken = Nothing
     , _pcgFields = Nothing
-    , _pcgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,9 +122,9 @@ pcgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-pcgUserIp :: Lens' PretargetingConfigGet' (Maybe Text)
-pcgUserIp
-  = lens _pcgUserIp (\ s a -> s{_pcgUserIp = a})
+pcgUserIP :: Lens' PretargetingConfigGet' (Maybe Text)
+pcgUserIP
+  = lens _pcgUserIP (\ s a -> s{_pcgUserIP = a})
 
 -- | The account id to get the pretargeting config for.
 pcgAccountId :: Lens' PretargetingConfigGet' Int64
@@ -139,7 +134,7 @@ pcgAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pcgKey :: Lens' PretargetingConfigGet' (Maybe Text)
+pcgKey :: Lens' PretargetingConfigGet' (Maybe Key)
 pcgKey = lens _pcgKey (\ s a -> s{_pcgKey = a})
 
 -- | The specific id of the configuration to retrieve.
@@ -148,31 +143,31 @@ pcgConfigId
   = lens _pcgConfigId (\ s a -> s{_pcgConfigId = a})
 
 -- | OAuth 2.0 token for the current user.
-pcgOauthToken :: Lens' PretargetingConfigGet' (Maybe Text)
-pcgOauthToken
-  = lens _pcgOauthToken
-      (\ s a -> s{_pcgOauthToken = a})
+pcgOAuthToken :: Lens' PretargetingConfigGet' (Maybe OAuthToken)
+pcgOAuthToken
+  = lens _pcgOAuthToken
+      (\ s a -> s{_pcgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 pcgFields :: Lens' PretargetingConfigGet' (Maybe Text)
 pcgFields
   = lens _pcgFields (\ s a -> s{_pcgFields = a})
 
--- | Data format for the response.
-pcgAlt :: Lens' PretargetingConfigGet' Alt
-pcgAlt = lens _pcgAlt (\ s a -> s{_pcgAlt = a})
+instance GoogleAuth PretargetingConfigGet' where
+        authKey = pcgKey . _Just
+        authToken = pcgOAuthToken . _Just
 
 instance GoogleRequest PretargetingConfigGet' where
         type Rs PretargetingConfigGet' = PretargetingConfig
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u PretargetingConfigGet'{..}
-          = go _pcgQuotaUser (Just _pcgPrettyPrint) _pcgUserIp
+          = go _pcgQuotaUser (Just _pcgPrettyPrint) _pcgUserIP
               _pcgAccountId
               _pcgKey
               _pcgConfigId
-              _pcgOauthToken
+              _pcgOAuthToken
               _pcgFields
-              (Just _pcgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PretargetingConfigGetResource)

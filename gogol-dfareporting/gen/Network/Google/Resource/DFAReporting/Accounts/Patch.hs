@@ -32,13 +32,13 @@ module Network.Google.Resource.DFAReporting.Accounts.Patch
     -- * Request Lenses
     , ap1QuotaUser
     , ap1PrettyPrint
-    , ap1UserIp
+    , ap1UserIP
     , ap1ProfileId
+    , ap1Account
     , ap1Key
     , ap1Id
-    , ap1OauthToken
+    , ap1OAuthToken
     , ap1Fields
-    , ap1Alt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -53,11 +53,12 @@ type AccountsPatchResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "id" Int64 :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Patch '[JSON] Account
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Account :> Patch '[JSON] Account
 
 -- | Updates an existing account. This method supports patch semantics.
 --
@@ -65,13 +66,13 @@ type AccountsPatchResource =
 data AccountsPatch' = AccountsPatch'
     { _ap1QuotaUser   :: !(Maybe Text)
     , _ap1PrettyPrint :: !Bool
-    , _ap1UserIp      :: !(Maybe Text)
+    , _ap1UserIP      :: !(Maybe Text)
     , _ap1ProfileId   :: !Int64
-    , _ap1Key         :: !(Maybe Text)
+    , _ap1Account     :: !Account
+    , _ap1Key         :: !(Maybe Key)
     , _ap1Id          :: !Int64
-    , _ap1OauthToken  :: !(Maybe Text)
+    , _ap1OAuthToken  :: !(Maybe OAuthToken)
     , _ap1Fields      :: !(Maybe Text)
-    , _ap1Alt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsPatch'' with the minimum fields required to make a request.
@@ -82,34 +83,35 @@ data AccountsPatch' = AccountsPatch'
 --
 -- * 'ap1PrettyPrint'
 --
--- * 'ap1UserIp'
+-- * 'ap1UserIP'
 --
 -- * 'ap1ProfileId'
+--
+-- * 'ap1Account'
 --
 -- * 'ap1Key'
 --
 -- * 'ap1Id'
 --
--- * 'ap1OauthToken'
+-- * 'ap1OAuthToken'
 --
 -- * 'ap1Fields'
---
--- * 'ap1Alt'
 accountsPatch'
     :: Int64 -- ^ 'profileId'
+    -> Account -- ^ 'Account'
     -> Int64 -- ^ 'id'
     -> AccountsPatch'
-accountsPatch' pAp1ProfileId_ pAp1Id_ =
+accountsPatch' pAp1ProfileId_ pAp1Account_ pAp1Id_ =
     AccountsPatch'
     { _ap1QuotaUser = Nothing
     , _ap1PrettyPrint = True
-    , _ap1UserIp = Nothing
+    , _ap1UserIP = Nothing
     , _ap1ProfileId = pAp1ProfileId_
+    , _ap1Account = pAp1Account_
     , _ap1Key = Nothing
     , _ap1Id = pAp1Id_
-    , _ap1OauthToken = Nothing
+    , _ap1OAuthToken = Nothing
     , _ap1Fields = Nothing
-    , _ap1Alt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,19 +129,24 @@ ap1PrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ap1UserIp :: Lens' AccountsPatch' (Maybe Text)
-ap1UserIp
-  = lens _ap1UserIp (\ s a -> s{_ap1UserIp = a})
+ap1UserIP :: Lens' AccountsPatch' (Maybe Text)
+ap1UserIP
+  = lens _ap1UserIP (\ s a -> s{_ap1UserIP = a})
 
 -- | User profile ID associated with this request.
 ap1ProfileId :: Lens' AccountsPatch' Int64
 ap1ProfileId
   = lens _ap1ProfileId (\ s a -> s{_ap1ProfileId = a})
 
+-- | Multipart request metadata.
+ap1Account :: Lens' AccountsPatch' Account
+ap1Account
+  = lens _ap1Account (\ s a -> s{_ap1Account = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ap1Key :: Lens' AccountsPatch' (Maybe Text)
+ap1Key :: Lens' AccountsPatch' (Maybe Key)
 ap1Key = lens _ap1Key (\ s a -> s{_ap1Key = a})
 
 -- | Account ID.
@@ -147,31 +154,32 @@ ap1Id :: Lens' AccountsPatch' Int64
 ap1Id = lens _ap1Id (\ s a -> s{_ap1Id = a})
 
 -- | OAuth 2.0 token for the current user.
-ap1OauthToken :: Lens' AccountsPatch' (Maybe Text)
-ap1OauthToken
-  = lens _ap1OauthToken
-      (\ s a -> s{_ap1OauthToken = a})
+ap1OAuthToken :: Lens' AccountsPatch' (Maybe OAuthToken)
+ap1OAuthToken
+  = lens _ap1OAuthToken
+      (\ s a -> s{_ap1OAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ap1Fields :: Lens' AccountsPatch' (Maybe Text)
 ap1Fields
   = lens _ap1Fields (\ s a -> s{_ap1Fields = a})
 
--- | Data format for the response.
-ap1Alt :: Lens' AccountsPatch' Alt
-ap1Alt = lens _ap1Alt (\ s a -> s{_ap1Alt = a})
+instance GoogleAuth AccountsPatch' where
+        authKey = ap1Key . _Just
+        authToken = ap1OAuthToken . _Just
 
 instance GoogleRequest AccountsPatch' where
         type Rs AccountsPatch' = Account
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AccountsPatch'{..}
-          = go _ap1QuotaUser (Just _ap1PrettyPrint) _ap1UserIp
+          = go _ap1QuotaUser (Just _ap1PrettyPrint) _ap1UserIP
               _ap1ProfileId
               _ap1Key
               (Just _ap1Id)
-              _ap1OauthToken
+              _ap1OAuthToken
               _ap1Fields
-              (Just _ap1Alt)
+              (Just AltJSON)
+              _ap1Account
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountsPatchResource)

@@ -33,13 +33,12 @@ module Network.Google.Resource.Compute.VPNTunnels.Get
     , vtgQuotaUser
     , vtgPrettyPrint
     , vtgProject
-    , vtgUserIp
+    , vtgUserIP
     , vtgKey
-    , vtgVpnTunnel
+    , vtgVPNTunnel
     , vtgRegion
-    , vtgOauthToken
+    , vtgOAuthToken
     , vtgFields
-    , vtgAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -56,10 +55,10 @@ type VpnTunnelsGetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Get '[JSON] VPNTunnel
+                           QueryParam "alt" AltJSON :> Get '[JSON] VPNTunnel
 
 -- | Returns the specified VpnTunnel resource.
 --
@@ -68,13 +67,12 @@ data VPNTunnelsGet' = VPNTunnelsGet'
     { _vtgQuotaUser   :: !(Maybe Text)
     , _vtgPrettyPrint :: !Bool
     , _vtgProject     :: !Text
-    , _vtgUserIp      :: !(Maybe Text)
-    , _vtgKey         :: !(Maybe Text)
-    , _vtgVpnTunnel   :: !Text
+    , _vtgUserIP      :: !(Maybe Text)
+    , _vtgKey         :: !(Maybe Key)
+    , _vtgVPNTunnel   :: !Text
     , _vtgRegion      :: !Text
-    , _vtgOauthToken  :: !(Maybe Text)
+    , _vtgOAuthToken  :: !(Maybe OAuthToken)
     , _vtgFields      :: !(Maybe Text)
-    , _vtgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VPNTunnelsGet'' with the minimum fields required to make a request.
@@ -87,36 +85,33 @@ data VPNTunnelsGet' = VPNTunnelsGet'
 --
 -- * 'vtgProject'
 --
--- * 'vtgUserIp'
+-- * 'vtgUserIP'
 --
 -- * 'vtgKey'
 --
--- * 'vtgVpnTunnel'
+-- * 'vtgVPNTunnel'
 --
 -- * 'vtgRegion'
 --
--- * 'vtgOauthToken'
+-- * 'vtgOAuthToken'
 --
 -- * 'vtgFields'
---
--- * 'vtgAlt'
 vPNTunnelsGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'vpnTunnel'
     -> Text -- ^ 'region'
     -> VPNTunnelsGet'
-vPNTunnelsGet' pVtgProject_ pVtgVpnTunnel_ pVtgRegion_ =
+vPNTunnelsGet' pVtgProject_ pVtgVPNTunnel_ pVtgRegion_ =
     VPNTunnelsGet'
     { _vtgQuotaUser = Nothing
     , _vtgPrettyPrint = True
     , _vtgProject = pVtgProject_
-    , _vtgUserIp = Nothing
+    , _vtgUserIP = Nothing
     , _vtgKey = Nothing
-    , _vtgVpnTunnel = pVtgVpnTunnel_
+    , _vtgVPNTunnel = pVtgVPNTunnel_
     , _vtgRegion = pVtgRegion_
-    , _vtgOauthToken = Nothing
+    , _vtgOAuthToken = Nothing
     , _vtgFields = Nothing
-    , _vtgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,20 +134,20 @@ vtgProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-vtgUserIp :: Lens' VPNTunnelsGet' (Maybe Text)
-vtgUserIp
-  = lens _vtgUserIp (\ s a -> s{_vtgUserIp = a})
+vtgUserIP :: Lens' VPNTunnelsGet' (Maybe Text)
+vtgUserIP
+  = lens _vtgUserIP (\ s a -> s{_vtgUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vtgKey :: Lens' VPNTunnelsGet' (Maybe Text)
+vtgKey :: Lens' VPNTunnelsGet' (Maybe Key)
 vtgKey = lens _vtgKey (\ s a -> s{_vtgKey = a})
 
 -- | Name of the VpnTunnel resource to return.
-vtgVpnTunnel :: Lens' VPNTunnelsGet' Text
-vtgVpnTunnel
-  = lens _vtgVpnTunnel (\ s a -> s{_vtgVpnTunnel = a})
+vtgVPNTunnel :: Lens' VPNTunnelsGet' Text
+vtgVPNTunnel
+  = lens _vtgVPNTunnel (\ s a -> s{_vtgVPNTunnel = a})
 
 -- | The name of the region for this request.
 vtgRegion :: Lens' VPNTunnelsGet' Text
@@ -160,32 +155,32 @@ vtgRegion
   = lens _vtgRegion (\ s a -> s{_vtgRegion = a})
 
 -- | OAuth 2.0 token for the current user.
-vtgOauthToken :: Lens' VPNTunnelsGet' (Maybe Text)
-vtgOauthToken
-  = lens _vtgOauthToken
-      (\ s a -> s{_vtgOauthToken = a})
+vtgOAuthToken :: Lens' VPNTunnelsGet' (Maybe OAuthToken)
+vtgOAuthToken
+  = lens _vtgOAuthToken
+      (\ s a -> s{_vtgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 vtgFields :: Lens' VPNTunnelsGet' (Maybe Text)
 vtgFields
   = lens _vtgFields (\ s a -> s{_vtgFields = a})
 
--- | Data format for the response.
-vtgAlt :: Lens' VPNTunnelsGet' Alt
-vtgAlt = lens _vtgAlt (\ s a -> s{_vtgAlt = a})
+instance GoogleAuth VPNTunnelsGet' where
+        authKey = vtgKey . _Just
+        authToken = vtgOAuthToken . _Just
 
 instance GoogleRequest VPNTunnelsGet' where
         type Rs VPNTunnelsGet' = VPNTunnel
         request = requestWithRoute defReq computeURL
         requestWithRoute r u VPNTunnelsGet'{..}
           = go _vtgQuotaUser (Just _vtgPrettyPrint) _vtgProject
-              _vtgUserIp
+              _vtgUserIP
               _vtgKey
-              _vtgVpnTunnel
+              _vtgVPNTunnel
               _vtgRegion
-              _vtgOauthToken
+              _vtgOAuthToken
               _vtgFields
-              (Just _vtgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy VpnTunnelsGetResource)

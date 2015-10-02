@@ -32,12 +32,12 @@ module Network.Google.Resource.DFAReporting.AccountUserProfiles.Insert
     -- * Request Lenses
     , aupiQuotaUser
     , aupiPrettyPrint
-    , aupiUserIp
+    , aupiUserIP
+    , aupiAccountUserProfile
     , aupiProfileId
     , aupiKey
-    , aupiOauthToken
+    , aupiOAuthToken
     , aupiFields
-    , aupiAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,24 +52,25 @@ type AccountUserProfilesInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :>
-                         Post '[JSON] AccountUserProfile
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] AccountUserProfile :>
+                           Post '[JSON] AccountUserProfile
 
 -- | Inserts a new account user profile.
 --
 -- /See:/ 'accountUserProfilesInsert'' smart constructor.
 data AccountUserProfilesInsert' = AccountUserProfilesInsert'
-    { _aupiQuotaUser   :: !(Maybe Text)
-    , _aupiPrettyPrint :: !Bool
-    , _aupiUserIp      :: !(Maybe Text)
-    , _aupiProfileId   :: !Int64
-    , _aupiKey         :: !(Maybe Text)
-    , _aupiOauthToken  :: !(Maybe Text)
-    , _aupiFields      :: !(Maybe Text)
-    , _aupiAlt         :: !Alt
+    { _aupiQuotaUser          :: !(Maybe Text)
+    , _aupiPrettyPrint        :: !Bool
+    , _aupiUserIP             :: !(Maybe Text)
+    , _aupiAccountUserProfile :: !AccountUserProfile
+    , _aupiProfileId          :: !Int64
+    , _aupiKey                :: !(Maybe Key)
+    , _aupiOAuthToken         :: !(Maybe OAuthToken)
+    , _aupiFields             :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountUserProfilesInsert'' with the minimum fields required to make a request.
@@ -80,30 +81,31 @@ data AccountUserProfilesInsert' = AccountUserProfilesInsert'
 --
 -- * 'aupiPrettyPrint'
 --
--- * 'aupiUserIp'
+-- * 'aupiUserIP'
+--
+-- * 'aupiAccountUserProfile'
 --
 -- * 'aupiProfileId'
 --
 -- * 'aupiKey'
 --
--- * 'aupiOauthToken'
+-- * 'aupiOAuthToken'
 --
 -- * 'aupiFields'
---
--- * 'aupiAlt'
 accountUserProfilesInsert'
-    :: Int64 -- ^ 'profileId'
+    :: AccountUserProfile -- ^ 'AccountUserProfile'
+    -> Int64 -- ^ 'profileId'
     -> AccountUserProfilesInsert'
-accountUserProfilesInsert' pAupiProfileId_ =
+accountUserProfilesInsert' pAupiAccountUserProfile_ pAupiProfileId_ =
     AccountUserProfilesInsert'
     { _aupiQuotaUser = Nothing
     , _aupiPrettyPrint = True
-    , _aupiUserIp = Nothing
+    , _aupiUserIP = Nothing
+    , _aupiAccountUserProfile = pAupiAccountUserProfile_
     , _aupiProfileId = pAupiProfileId_
     , _aupiKey = Nothing
-    , _aupiOauthToken = Nothing
+    , _aupiOAuthToken = Nothing
     , _aupiFields = Nothing
-    , _aupiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -122,9 +124,15 @@ aupiPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-aupiUserIp :: Lens' AccountUserProfilesInsert' (Maybe Text)
-aupiUserIp
-  = lens _aupiUserIp (\ s a -> s{_aupiUserIp = a})
+aupiUserIP :: Lens' AccountUserProfilesInsert' (Maybe Text)
+aupiUserIP
+  = lens _aupiUserIP (\ s a -> s{_aupiUserIP = a})
+
+-- | Multipart request metadata.
+aupiAccountUserProfile :: Lens' AccountUserProfilesInsert' AccountUserProfile
+aupiAccountUserProfile
+  = lens _aupiAccountUserProfile
+      (\ s a -> s{_aupiAccountUserProfile = a})
 
 -- | User profile ID associated with this request.
 aupiProfileId :: Lens' AccountUserProfilesInsert' Int64
@@ -135,23 +143,23 @@ aupiProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aupiKey :: Lens' AccountUserProfilesInsert' (Maybe Text)
+aupiKey :: Lens' AccountUserProfilesInsert' (Maybe Key)
 aupiKey = lens _aupiKey (\ s a -> s{_aupiKey = a})
 
 -- | OAuth 2.0 token for the current user.
-aupiOauthToken :: Lens' AccountUserProfilesInsert' (Maybe Text)
-aupiOauthToken
-  = lens _aupiOauthToken
-      (\ s a -> s{_aupiOauthToken = a})
+aupiOAuthToken :: Lens' AccountUserProfilesInsert' (Maybe OAuthToken)
+aupiOAuthToken
+  = lens _aupiOAuthToken
+      (\ s a -> s{_aupiOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 aupiFields :: Lens' AccountUserProfilesInsert' (Maybe Text)
 aupiFields
   = lens _aupiFields (\ s a -> s{_aupiFields = a})
 
--- | Data format for the response.
-aupiAlt :: Lens' AccountUserProfilesInsert' Alt
-aupiAlt = lens _aupiAlt (\ s a -> s{_aupiAlt = a})
+instance GoogleAuth AccountUserProfilesInsert' where
+        authKey = aupiKey . _Just
+        authToken = aupiOAuthToken . _Just
 
 instance GoogleRequest AccountUserProfilesInsert'
          where
@@ -160,12 +168,13 @@ instance GoogleRequest AccountUserProfilesInsert'
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AccountUserProfilesInsert'{..}
           = go _aupiQuotaUser (Just _aupiPrettyPrint)
-              _aupiUserIp
+              _aupiUserIP
               _aupiProfileId
               _aupiKey
-              _aupiOauthToken
+              _aupiOAuthToken
               _aupiFields
-              (Just _aupiAlt)
+              (Just AltJSON)
+              _aupiAccountUserProfile
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountUserProfilesInsertResource)

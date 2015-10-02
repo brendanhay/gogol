@@ -33,13 +33,13 @@ module Network.Google.Resource.YouTube.LiveBroadcasts.Insert
     , lbiQuotaUser
     , lbiPart
     , lbiPrettyPrint
-    , lbiUserIp
+    , lbiUserIP
+    , lbiLiveBroadcast
     , lbiOnBehalfOfContentOwner
     , lbiKey
     , lbiOnBehalfOfContentOwnerChannel
-    , lbiOauthToken
+    , lbiOAuthToken
     , lbiFields
-    , lbiAlt
     ) where
 
 import           Network.Google.Prelude
@@ -54,11 +54,13 @@ type LiveBroadcastsInsertResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "onBehalfOfContentOwner" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "onBehalfOfContentOwnerChannel" Text :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Post '[JSON] LiveBroadcast
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] LiveBroadcast :>
+                             Post '[JSON] LiveBroadcast
 
 -- | Creates a broadcast.
 --
@@ -67,13 +69,13 @@ data LiveBroadcastsInsert' = LiveBroadcastsInsert'
     { _lbiQuotaUser                     :: !(Maybe Text)
     , _lbiPart                          :: !Text
     , _lbiPrettyPrint                   :: !Bool
-    , _lbiUserIp                        :: !(Maybe Text)
+    , _lbiUserIP                        :: !(Maybe Text)
+    , _lbiLiveBroadcast                 :: !LiveBroadcast
     , _lbiOnBehalfOfContentOwner        :: !(Maybe Text)
-    , _lbiKey                           :: !(Maybe Text)
+    , _lbiKey                           :: !(Maybe Key)
     , _lbiOnBehalfOfContentOwnerChannel :: !(Maybe Text)
-    , _lbiOauthToken                    :: !(Maybe Text)
+    , _lbiOAuthToken                    :: !(Maybe OAuthToken)
     , _lbiFields                        :: !(Maybe Text)
-    , _lbiAlt                           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveBroadcastsInsert'' with the minimum fields required to make a request.
@@ -86,7 +88,9 @@ data LiveBroadcastsInsert' = LiveBroadcastsInsert'
 --
 -- * 'lbiPrettyPrint'
 --
--- * 'lbiUserIp'
+-- * 'lbiUserIP'
+--
+-- * 'lbiLiveBroadcast'
 --
 -- * 'lbiOnBehalfOfContentOwner'
 --
@@ -94,26 +98,25 @@ data LiveBroadcastsInsert' = LiveBroadcastsInsert'
 --
 -- * 'lbiOnBehalfOfContentOwnerChannel'
 --
--- * 'lbiOauthToken'
+-- * 'lbiOAuthToken'
 --
 -- * 'lbiFields'
---
--- * 'lbiAlt'
 liveBroadcastsInsert'
     :: Text -- ^ 'part'
+    -> LiveBroadcast -- ^ 'LiveBroadcast'
     -> LiveBroadcastsInsert'
-liveBroadcastsInsert' pLbiPart_ =
+liveBroadcastsInsert' pLbiPart_ pLbiLiveBroadcast_ =
     LiveBroadcastsInsert'
     { _lbiQuotaUser = Nothing
     , _lbiPart = pLbiPart_
     , _lbiPrettyPrint = True
-    , _lbiUserIp = Nothing
+    , _lbiUserIP = Nothing
+    , _lbiLiveBroadcast = pLbiLiveBroadcast_
     , _lbiOnBehalfOfContentOwner = Nothing
     , _lbiKey = Nothing
     , _lbiOnBehalfOfContentOwnerChannel = Nothing
-    , _lbiOauthToken = Nothing
+    , _lbiOAuthToken = Nothing
     , _lbiFields = Nothing
-    , _lbiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,9 +142,15 @@ lbiPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-lbiUserIp :: Lens' LiveBroadcastsInsert' (Maybe Text)
-lbiUserIp
-  = lens _lbiUserIp (\ s a -> s{_lbiUserIp = a})
+lbiUserIP :: Lens' LiveBroadcastsInsert' (Maybe Text)
+lbiUserIP
+  = lens _lbiUserIP (\ s a -> s{_lbiUserIP = a})
+
+-- | Multipart request metadata.
+lbiLiveBroadcast :: Lens' LiveBroadcastsInsert' LiveBroadcast
+lbiLiveBroadcast
+  = lens _lbiLiveBroadcast
+      (\ s a -> s{_lbiLiveBroadcast = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
@@ -161,7 +170,7 @@ lbiOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lbiKey :: Lens' LiveBroadcastsInsert' (Maybe Text)
+lbiKey :: Lens' LiveBroadcastsInsert' (Maybe Key)
 lbiKey = lens _lbiKey (\ s a -> s{_lbiKey = a})
 
 -- | This parameter can only be used in a properly authorized request. Note:
@@ -186,19 +195,19 @@ lbiOnBehalfOfContentOwnerChannel
       (\ s a -> s{_lbiOnBehalfOfContentOwnerChannel = a})
 
 -- | OAuth 2.0 token for the current user.
-lbiOauthToken :: Lens' LiveBroadcastsInsert' (Maybe Text)
-lbiOauthToken
-  = lens _lbiOauthToken
-      (\ s a -> s{_lbiOauthToken = a})
+lbiOAuthToken :: Lens' LiveBroadcastsInsert' (Maybe OAuthToken)
+lbiOAuthToken
+  = lens _lbiOAuthToken
+      (\ s a -> s{_lbiOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 lbiFields :: Lens' LiveBroadcastsInsert' (Maybe Text)
 lbiFields
   = lens _lbiFields (\ s a -> s{_lbiFields = a})
 
--- | Data format for the response.
-lbiAlt :: Lens' LiveBroadcastsInsert' Alt
-lbiAlt = lens _lbiAlt (\ s a -> s{_lbiAlt = a})
+instance GoogleAuth LiveBroadcastsInsert' where
+        authKey = lbiKey . _Just
+        authToken = lbiOAuthToken . _Just
 
 instance GoogleRequest LiveBroadcastsInsert' where
         type Rs LiveBroadcastsInsert' = LiveBroadcast
@@ -206,13 +215,14 @@ instance GoogleRequest LiveBroadcastsInsert' where
         requestWithRoute r u LiveBroadcastsInsert'{..}
           = go _lbiQuotaUser (Just _lbiPart)
               (Just _lbiPrettyPrint)
-              _lbiUserIp
+              _lbiUserIP
               _lbiOnBehalfOfContentOwner
               _lbiKey
               _lbiOnBehalfOfContentOwnerChannel
-              _lbiOauthToken
+              _lbiOAuthToken
               _lbiFields
-              (Just _lbiAlt)
+              (Just AltJSON)
+              _lbiLiveBroadcast
           where go
                   = clientWithRoute
                       (Proxy :: Proxy LiveBroadcastsInsertResource)

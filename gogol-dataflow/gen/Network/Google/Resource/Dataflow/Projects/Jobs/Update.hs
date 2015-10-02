@@ -40,11 +40,11 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.Update
     , pjuUploadType
     , pjuBearerToken
     , pjuKey
+    , pjuJob
     , pjuProjectId
-    , pjuOauthToken
+    , pjuOAuthToken
     , pjuFields
     , pjuCallback
-    , pjuAlt
     ) where
 
 import           Network.Google.Dataflow.Types
@@ -66,11 +66,12 @@ type ProjectsJobsUpdateResource =
                          QueryParam "access_token" Text :>
                            QueryParam "uploadType" Text :>
                              QueryParam "bearer_token" Text :>
-                               QueryParam "key" Text :>
-                                 QueryParam "oauth_token" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "fields" Text :>
                                      QueryParam "callback" Text :>
-                                       QueryParam "alt" Text :> Put '[JSON] Job
+                                       QueryParam "alt" AltJSON :>
+                                         ReqBody '[JSON] Job :> Put '[JSON] Job
 
 -- | Updates the state of an existing dataflow job.
 --
@@ -85,12 +86,12 @@ data ProjectsJobsUpdate' = ProjectsJobsUpdate'
     , _pjuAccessToken    :: !(Maybe Text)
     , _pjuUploadType     :: !(Maybe Text)
     , _pjuBearerToken    :: !(Maybe Text)
-    , _pjuKey            :: !(Maybe Text)
+    , _pjuKey            :: !(Maybe Key)
+    , _pjuJob            :: !Job
     , _pjuProjectId      :: !Text
-    , _pjuOauthToken     :: !(Maybe Text)
+    , _pjuOAuthToken     :: !(Maybe OAuthToken)
     , _pjuFields         :: !(Maybe Text)
     , _pjuCallback       :: !(Maybe Text)
-    , _pjuAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsJobsUpdate'' with the minimum fields required to make a request.
@@ -117,20 +118,21 @@ data ProjectsJobsUpdate' = ProjectsJobsUpdate'
 --
 -- * 'pjuKey'
 --
+-- * 'pjuJob'
+--
 -- * 'pjuProjectId'
 --
--- * 'pjuOauthToken'
+-- * 'pjuOAuthToken'
 --
 -- * 'pjuFields'
 --
 -- * 'pjuCallback'
---
--- * 'pjuAlt'
 projectsJobsUpdate'
     :: Text -- ^ 'jobId'
+    -> Job -- ^ 'Job'
     -> Text -- ^ 'projectId'
     -> ProjectsJobsUpdate'
-projectsJobsUpdate' pPjuJobId_ pPjuProjectId_ =
+projectsJobsUpdate' pPjuJobId_ pPjuJob_ pPjuProjectId_ =
     ProjectsJobsUpdate'
     { _pjuXgafv = Nothing
     , _pjuQuotaUser = Nothing
@@ -142,11 +144,11 @@ projectsJobsUpdate' pPjuJobId_ pPjuProjectId_ =
     , _pjuUploadType = Nothing
     , _pjuBearerToken = Nothing
     , _pjuKey = Nothing
+    , _pjuJob = pPjuJob_
     , _pjuProjectId = pPjuProjectId_
-    , _pjuOauthToken = Nothing
+    , _pjuOAuthToken = Nothing
     , _pjuFields = Nothing
     , _pjuCallback = Nothing
-    , _pjuAlt = "json"
     }
 
 -- | V1 error format.
@@ -201,8 +203,12 @@ pjuBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pjuKey :: Lens' ProjectsJobsUpdate' (Maybe Text)
+pjuKey :: Lens' ProjectsJobsUpdate' (Maybe Key)
 pjuKey = lens _pjuKey (\ s a -> s{_pjuKey = a})
+
+-- | Multipart request metadata.
+pjuJob :: Lens' ProjectsJobsUpdate' Job
+pjuJob = lens _pjuJob (\ s a -> s{_pjuJob = a})
 
 -- | The project which owns the job.
 pjuProjectId :: Lens' ProjectsJobsUpdate' Text
@@ -210,10 +216,10 @@ pjuProjectId
   = lens _pjuProjectId (\ s a -> s{_pjuProjectId = a})
 
 -- | OAuth 2.0 token for the current user.
-pjuOauthToken :: Lens' ProjectsJobsUpdate' (Maybe Text)
-pjuOauthToken
-  = lens _pjuOauthToken
-      (\ s a -> s{_pjuOauthToken = a})
+pjuOAuthToken :: Lens' ProjectsJobsUpdate' (Maybe OAuthToken)
+pjuOAuthToken
+  = lens _pjuOAuthToken
+      (\ s a -> s{_pjuOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 pjuFields :: Lens' ProjectsJobsUpdate' (Maybe Text)
@@ -225,9 +231,9 @@ pjuCallback :: Lens' ProjectsJobsUpdate' (Maybe Text)
 pjuCallback
   = lens _pjuCallback (\ s a -> s{_pjuCallback = a})
 
--- | Data format for response.
-pjuAlt :: Lens' ProjectsJobsUpdate' Text
-pjuAlt = lens _pjuAlt (\ s a -> s{_pjuAlt = a})
+instance GoogleAuth ProjectsJobsUpdate' where
+        authKey = pjuKey . _Just
+        authToken = pjuOAuthToken . _Just
 
 instance GoogleRequest ProjectsJobsUpdate' where
         type Rs ProjectsJobsUpdate' = Job
@@ -242,10 +248,11 @@ instance GoogleRequest ProjectsJobsUpdate' where
               _pjuBearerToken
               _pjuKey
               _pjuProjectId
-              _pjuOauthToken
+              _pjuOAuthToken
               _pjuFields
               _pjuCallback
-              (Just _pjuAlt)
+              (Just AltJSON)
+              _pjuJob
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsJobsUpdateResource)

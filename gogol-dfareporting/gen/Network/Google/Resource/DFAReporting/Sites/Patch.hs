@@ -32,13 +32,13 @@ module Network.Google.Resource.DFAReporting.Sites.Patch
     -- * Request Lenses
     , spQuotaUser
     , spPrettyPrint
-    , spUserIp
+    , spUserIP
     , spProfileId
     , spKey
     , spId
-    , spOauthToken
+    , spOAuthToken
+    , spSite
     , spFields
-    , spAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -53,11 +53,12 @@ type SitesPatchResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "id" Int64 :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Patch '[JSON] Site
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Site :> Patch '[JSON] Site
 
 -- | Updates an existing site. This method supports patch semantics.
 --
@@ -65,13 +66,13 @@ type SitesPatchResource =
 data SitesPatch' = SitesPatch'
     { _spQuotaUser   :: !(Maybe Text)
     , _spPrettyPrint :: !Bool
-    , _spUserIp      :: !(Maybe Text)
+    , _spUserIP      :: !(Maybe Text)
     , _spProfileId   :: !Int64
-    , _spKey         :: !(Maybe Text)
+    , _spKey         :: !(Maybe Key)
     , _spId          :: !Int64
-    , _spOauthToken  :: !(Maybe Text)
+    , _spOAuthToken  :: !(Maybe OAuthToken)
+    , _spSite        :: !Site
     , _spFields      :: !(Maybe Text)
-    , _spAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SitesPatch'' with the minimum fields required to make a request.
@@ -82,7 +83,7 @@ data SitesPatch' = SitesPatch'
 --
 -- * 'spPrettyPrint'
 --
--- * 'spUserIp'
+-- * 'spUserIP'
 --
 -- * 'spProfileId'
 --
@@ -90,26 +91,27 @@ data SitesPatch' = SitesPatch'
 --
 -- * 'spId'
 --
--- * 'spOauthToken'
+-- * 'spOAuthToken'
+--
+-- * 'spSite'
 --
 -- * 'spFields'
---
--- * 'spAlt'
 sitesPatch'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
+    -> Site -- ^ 'Site'
     -> SitesPatch'
-sitesPatch' pSpProfileId_ pSpId_ =
+sitesPatch' pSpProfileId_ pSpId_ pSpSite_ =
     SitesPatch'
     { _spQuotaUser = Nothing
     , _spPrettyPrint = True
-    , _spUserIp = Nothing
+    , _spUserIP = Nothing
     , _spProfileId = pSpProfileId_
     , _spKey = Nothing
     , _spId = pSpId_
-    , _spOauthToken = Nothing
+    , _spOAuthToken = Nothing
+    , _spSite = pSpSite_
     , _spFields = Nothing
-    , _spAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,8 +129,8 @@ spPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-spUserIp :: Lens' SitesPatch' (Maybe Text)
-spUserIp = lens _spUserIp (\ s a -> s{_spUserIp = a})
+spUserIP :: Lens' SitesPatch' (Maybe Text)
+spUserIP = lens _spUserIP (\ s a -> s{_spUserIP = a})
 
 -- | User profile ID associated with this request.
 spProfileId :: Lens' SitesPatch' Int64
@@ -138,7 +140,7 @@ spProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-spKey :: Lens' SitesPatch' (Maybe Text)
+spKey :: Lens' SitesPatch' (Maybe Key)
 spKey = lens _spKey (\ s a -> s{_spKey = a})
 
 -- | Site ID.
@@ -146,29 +148,34 @@ spId :: Lens' SitesPatch' Int64
 spId = lens _spId (\ s a -> s{_spId = a})
 
 -- | OAuth 2.0 token for the current user.
-spOauthToken :: Lens' SitesPatch' (Maybe Text)
-spOauthToken
-  = lens _spOauthToken (\ s a -> s{_spOauthToken = a})
+spOAuthToken :: Lens' SitesPatch' (Maybe OAuthToken)
+spOAuthToken
+  = lens _spOAuthToken (\ s a -> s{_spOAuthToken = a})
+
+-- | Multipart request metadata.
+spSite :: Lens' SitesPatch' Site
+spSite = lens _spSite (\ s a -> s{_spSite = a})
 
 -- | Selector specifying which fields to include in a partial response.
 spFields :: Lens' SitesPatch' (Maybe Text)
 spFields = lens _spFields (\ s a -> s{_spFields = a})
 
--- | Data format for the response.
-spAlt :: Lens' SitesPatch' Alt
-spAlt = lens _spAlt (\ s a -> s{_spAlt = a})
+instance GoogleAuth SitesPatch' where
+        authKey = spKey . _Just
+        authToken = spOAuthToken . _Just
 
 instance GoogleRequest SitesPatch' where
         type Rs SitesPatch' = Site
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u SitesPatch'{..}
-          = go _spQuotaUser (Just _spPrettyPrint) _spUserIp
+          = go _spQuotaUser (Just _spPrettyPrint) _spUserIP
               _spProfileId
               _spKey
               (Just _spId)
-              _spOauthToken
+              _spOAuthToken
               _spFields
-              (Just _spAlt)
+              (Just AltJSON)
+              _spSite
           where go
                   = clientWithRoute (Proxy :: Proxy SitesPatchResource)
                       r

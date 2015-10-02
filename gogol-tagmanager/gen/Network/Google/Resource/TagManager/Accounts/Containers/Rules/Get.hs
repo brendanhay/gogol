@@ -19,7 +19,7 @@
 --
 -- | Gets a GTM Rule.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersRulesGet@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersRulesGet@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Rules.Get
     (
     -- * REST Resource
@@ -33,19 +33,18 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Rules.Get
     , acrgQuotaUser
     , acrgPrettyPrint
     , acrgContainerId
-    , acrgUserIp
+    , acrgUserIP
     , acrgRuleId
     , acrgAccountId
     , acrgKey
-    , acrgOauthToken
+    , acrgOAuthToken
     , acrgFields
-    , acrgAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagmanagerAccountsContainersRulesGet@ which the
+-- | A resource alias for @TagManagerAccountsContainersRulesGet@ which the
 -- 'AccountsContainersRulesGet'' request conforms to.
 type AccountsContainersRulesGetResource =
      "accounts" :>
@@ -57,10 +56,10 @@ type AccountsContainersRulesGetResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Get '[JSON] Rule
+                             QueryParam "alt" AltJSON :> Get '[JSON] Rule
 
 -- | Gets a GTM Rule.
 --
@@ -69,13 +68,12 @@ data AccountsContainersRulesGet' = AccountsContainersRulesGet'
     { _acrgQuotaUser   :: !(Maybe Text)
     , _acrgPrettyPrint :: !Bool
     , _acrgContainerId :: !Text
-    , _acrgUserIp      :: !(Maybe Text)
+    , _acrgUserIP      :: !(Maybe Text)
     , _acrgRuleId      :: !Text
     , _acrgAccountId   :: !Text
-    , _acrgKey         :: !(Maybe Text)
-    , _acrgOauthToken  :: !(Maybe Text)
+    , _acrgKey         :: !(Maybe Key)
+    , _acrgOAuthToken  :: !(Maybe OAuthToken)
     , _acrgFields      :: !(Maybe Text)
-    , _acrgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersRulesGet'' with the minimum fields required to make a request.
@@ -88,7 +86,7 @@ data AccountsContainersRulesGet' = AccountsContainersRulesGet'
 --
 -- * 'acrgContainerId'
 --
--- * 'acrgUserIp'
+-- * 'acrgUserIP'
 --
 -- * 'acrgRuleId'
 --
@@ -96,11 +94,9 @@ data AccountsContainersRulesGet' = AccountsContainersRulesGet'
 --
 -- * 'acrgKey'
 --
--- * 'acrgOauthToken'
+-- * 'acrgOAuthToken'
 --
 -- * 'acrgFields'
---
--- * 'acrgAlt'
 accountsContainersRulesGet'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'ruleId'
@@ -111,13 +107,12 @@ accountsContainersRulesGet' pAcrgContainerId_ pAcrgRuleId_ pAcrgAccountId_ =
     { _acrgQuotaUser = Nothing
     , _acrgPrettyPrint = True
     , _acrgContainerId = pAcrgContainerId_
-    , _acrgUserIp = Nothing
+    , _acrgUserIP = Nothing
     , _acrgRuleId = pAcrgRuleId_
     , _acrgAccountId = pAcrgAccountId_
     , _acrgKey = Nothing
-    , _acrgOauthToken = Nothing
+    , _acrgOAuthToken = Nothing
     , _acrgFields = Nothing
-    , _acrgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -142,9 +137,9 @@ acrgContainerId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-acrgUserIp :: Lens' AccountsContainersRulesGet' (Maybe Text)
-acrgUserIp
-  = lens _acrgUserIp (\ s a -> s{_acrgUserIp = a})
+acrgUserIP :: Lens' AccountsContainersRulesGet' (Maybe Text)
+acrgUserIP
+  = lens _acrgUserIP (\ s a -> s{_acrgUserIP = a})
 
 -- | The GTM Rule ID.
 acrgRuleId :: Lens' AccountsContainersRulesGet' Text
@@ -160,23 +155,23 @@ acrgAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-acrgKey :: Lens' AccountsContainersRulesGet' (Maybe Text)
+acrgKey :: Lens' AccountsContainersRulesGet' (Maybe Key)
 acrgKey = lens _acrgKey (\ s a -> s{_acrgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-acrgOauthToken :: Lens' AccountsContainersRulesGet' (Maybe Text)
-acrgOauthToken
-  = lens _acrgOauthToken
-      (\ s a -> s{_acrgOauthToken = a})
+acrgOAuthToken :: Lens' AccountsContainersRulesGet' (Maybe OAuthToken)
+acrgOAuthToken
+  = lens _acrgOAuthToken
+      (\ s a -> s{_acrgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 acrgFields :: Lens' AccountsContainersRulesGet' (Maybe Text)
 acrgFields
   = lens _acrgFields (\ s a -> s{_acrgFields = a})
 
--- | Data format for the response.
-acrgAlt :: Lens' AccountsContainersRulesGet' Alt
-acrgAlt = lens _acrgAlt (\ s a -> s{_acrgAlt = a})
+instance GoogleAuth AccountsContainersRulesGet' where
+        authKey = acrgKey . _Just
+        authToken = acrgOAuthToken . _Just
 
 instance GoogleRequest AccountsContainersRulesGet'
          where
@@ -185,13 +180,13 @@ instance GoogleRequest AccountsContainersRulesGet'
         requestWithRoute r u AccountsContainersRulesGet'{..}
           = go _acrgQuotaUser (Just _acrgPrettyPrint)
               _acrgContainerId
-              _acrgUserIp
+              _acrgUserIP
               _acrgRuleId
               _acrgAccountId
               _acrgKey
-              _acrgOauthToken
+              _acrgOAuthToken
               _acrgFields
-              (Just _acrgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountsContainersRulesGetResource)

@@ -33,11 +33,11 @@ module Network.Google.Resource.Spectrum.Paws.Init
     -- * Request Lenses
     , piQuotaUser
     , piPrettyPrint
-    , piUserIp
+    , piUserIP
     , piKey
-    , piOauthToken
+    , piOAuthToken
+    , piPawsInitRequest
     , piFields
-    , piAlt
     ) where
 
 import           Network.Google.Prelude
@@ -50,23 +50,25 @@ type PawsInitResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
-               QueryParam "oauth_token" Text :>
+             QueryParam "key" Key :>
+               QueryParam "oauth_token" OAuthToken :>
                  QueryParam "fields" Text :>
-                   QueryParam "alt" Alt :> Post '[JSON] PawsInitResponse
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] PawsInitRequest :>
+                       Post '[JSON] PawsInitResponse
 
 -- | Initializes the connection between a white space device and the
 -- database.
 --
 -- /See:/ 'pawsInit'' smart constructor.
 data PawsInit' = PawsInit'
-    { _piQuotaUser   :: !(Maybe Text)
-    , _piPrettyPrint :: !Bool
-    , _piUserIp      :: !(Maybe Text)
-    , _piKey         :: !(Maybe Text)
-    , _piOauthToken  :: !(Maybe Text)
-    , _piFields      :: !(Maybe Text)
-    , _piAlt         :: !Alt
+    { _piQuotaUser       :: !(Maybe Text)
+    , _piPrettyPrint     :: !Bool
+    , _piUserIP          :: !(Maybe Text)
+    , _piKey             :: !(Maybe Key)
+    , _piOAuthToken      :: !(Maybe OAuthToken)
+    , _piPawsInitRequest :: !PawsInitRequest
+    , _piFields          :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PawsInit'' with the minimum fields required to make a request.
@@ -77,26 +79,27 @@ data PawsInit' = PawsInit'
 --
 -- * 'piPrettyPrint'
 --
--- * 'piUserIp'
+-- * 'piUserIP'
 --
 -- * 'piKey'
 --
--- * 'piOauthToken'
+-- * 'piOAuthToken'
+--
+-- * 'piPawsInitRequest'
 --
 -- * 'piFields'
---
--- * 'piAlt'
 pawsInit'
-    :: PawsInit'
-pawsInit' =
+    :: PawsInitRequest -- ^ 'PawsInitRequest'
+    -> PawsInit'
+pawsInit' pPiPawsInitRequest_ =
     PawsInit'
     { _piQuotaUser = Nothing
     , _piPrettyPrint = True
-    , _piUserIp = Nothing
+    , _piUserIP = Nothing
     , _piKey = Nothing
-    , _piOauthToken = Nothing
+    , _piOAuthToken = Nothing
+    , _piPawsInitRequest = pPiPawsInitRequest_
     , _piFields = Nothing
-    , _piAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -114,37 +117,44 @@ piPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-piUserIp :: Lens' PawsInit' (Maybe Text)
-piUserIp = lens _piUserIp (\ s a -> s{_piUserIp = a})
+piUserIP :: Lens' PawsInit' (Maybe Text)
+piUserIP = lens _piUserIP (\ s a -> s{_piUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-piKey :: Lens' PawsInit' (Maybe Text)
+piKey :: Lens' PawsInit' (Maybe Key)
 piKey = lens _piKey (\ s a -> s{_piKey = a})
 
 -- | OAuth 2.0 token for the current user.
-piOauthToken :: Lens' PawsInit' (Maybe Text)
-piOauthToken
-  = lens _piOauthToken (\ s a -> s{_piOauthToken = a})
+piOAuthToken :: Lens' PawsInit' (Maybe OAuthToken)
+piOAuthToken
+  = lens _piOAuthToken (\ s a -> s{_piOAuthToken = a})
+
+-- | Multipart request metadata.
+piPawsInitRequest :: Lens' PawsInit' PawsInitRequest
+piPawsInitRequest
+  = lens _piPawsInitRequest
+      (\ s a -> s{_piPawsInitRequest = a})
 
 -- | Selector specifying which fields to include in a partial response.
 piFields :: Lens' PawsInit' (Maybe Text)
 piFields = lens _piFields (\ s a -> s{_piFields = a})
 
--- | Data format for the response.
-piAlt :: Lens' PawsInit' Alt
-piAlt = lens _piAlt (\ s a -> s{_piAlt = a})
+instance GoogleAuth PawsInit' where
+        authKey = piKey . _Just
+        authToken = piOAuthToken . _Just
 
 instance GoogleRequest PawsInit' where
         type Rs PawsInit' = PawsInitResponse
         request = requestWithRoute defReq spectrumURL
         requestWithRoute r u PawsInit'{..}
-          = go _piQuotaUser (Just _piPrettyPrint) _piUserIp
+          = go _piQuotaUser (Just _piPrettyPrint) _piUserIP
               _piKey
-              _piOauthToken
+              _piOAuthToken
               _piFields
-              (Just _piAlt)
+              (Just AltJSON)
+              _piPawsInitRequest
           where go
                   = clientWithRoute (Proxy :: Proxy PawsInitResource) r
                       u

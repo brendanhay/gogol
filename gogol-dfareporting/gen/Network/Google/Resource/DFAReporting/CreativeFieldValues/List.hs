@@ -33,7 +33,7 @@ module Network.Google.Resource.DFAReporting.CreativeFieldValues.List
     , cfvlCreativeFieldId
     , cfvlQuotaUser
     , cfvlPrettyPrint
-    , cfvlUserIp
+    , cfvlUserIP
     , cfvlSearchString
     , cfvlIds
     , cfvlProfileId
@@ -41,10 +41,9 @@ module Network.Google.Resource.DFAReporting.CreativeFieldValues.List
     , cfvlKey
     , cfvlPageToken
     , cfvlSortField
-    , cfvlOauthToken
+    , cfvlOAuthToken
     , cfvlMaxResults
     , cfvlFields
-    , cfvlAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -66,15 +65,15 @@ type CreativeFieldValuesListResource =
                          QueryParam "sortOrder"
                            DfareportingCreativeFieldValuesListSortOrder
                            :>
-                           QueryParam "key" Text :>
+                           QueryParam "key" Key :>
                              QueryParam "pageToken" Text :>
                                QueryParam "sortField"
                                  DfareportingCreativeFieldValuesListSortField
                                  :>
-                                 QueryParam "oauth_token" Text :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "maxResults" Int32 :>
                                      QueryParam "fields" Text :>
-                                       QueryParam "alt" Alt :>
+                                       QueryParam "alt" AltJSON :>
                                          Get '[JSON]
                                            CreativeFieldValuesListResponse
 
@@ -85,18 +84,17 @@ data CreativeFieldValuesList' = CreativeFieldValuesList'
     { _cfvlCreativeFieldId :: !Int64
     , _cfvlQuotaUser       :: !(Maybe Text)
     , _cfvlPrettyPrint     :: !Bool
-    , _cfvlUserIp          :: !(Maybe Text)
+    , _cfvlUserIP          :: !(Maybe Text)
     , _cfvlSearchString    :: !(Maybe Text)
     , _cfvlIds             :: !(Maybe Int64)
     , _cfvlProfileId       :: !Int64
     , _cfvlSortOrder       :: !(Maybe DfareportingCreativeFieldValuesListSortOrder)
-    , _cfvlKey             :: !(Maybe Text)
+    , _cfvlKey             :: !(Maybe Key)
     , _cfvlPageToken       :: !(Maybe Text)
     , _cfvlSortField       :: !(Maybe DfareportingCreativeFieldValuesListSortField)
-    , _cfvlOauthToken      :: !(Maybe Text)
+    , _cfvlOAuthToken      :: !(Maybe OAuthToken)
     , _cfvlMaxResults      :: !(Maybe Int32)
     , _cfvlFields          :: !(Maybe Text)
-    , _cfvlAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeFieldValuesList'' with the minimum fields required to make a request.
@@ -109,7 +107,7 @@ data CreativeFieldValuesList' = CreativeFieldValuesList'
 --
 -- * 'cfvlPrettyPrint'
 --
--- * 'cfvlUserIp'
+-- * 'cfvlUserIP'
 --
 -- * 'cfvlSearchString'
 --
@@ -125,13 +123,11 @@ data CreativeFieldValuesList' = CreativeFieldValuesList'
 --
 -- * 'cfvlSortField'
 --
--- * 'cfvlOauthToken'
+-- * 'cfvlOAuthToken'
 --
 -- * 'cfvlMaxResults'
 --
 -- * 'cfvlFields'
---
--- * 'cfvlAlt'
 creativeFieldValuesList'
     :: Int64 -- ^ 'creativeFieldId'
     -> Int64 -- ^ 'profileId'
@@ -141,7 +137,7 @@ creativeFieldValuesList' pCfvlCreativeFieldId_ pCfvlProfileId_ =
     { _cfvlCreativeFieldId = pCfvlCreativeFieldId_
     , _cfvlQuotaUser = Nothing
     , _cfvlPrettyPrint = True
-    , _cfvlUserIp = Nothing
+    , _cfvlUserIP = Nothing
     , _cfvlSearchString = Nothing
     , _cfvlIds = Nothing
     , _cfvlProfileId = pCfvlProfileId_
@@ -149,10 +145,9 @@ creativeFieldValuesList' pCfvlCreativeFieldId_ pCfvlProfileId_ =
     , _cfvlKey = Nothing
     , _cfvlPageToken = Nothing
     , _cfvlSortField = Nothing
-    , _cfvlOauthToken = Nothing
+    , _cfvlOAuthToken = Nothing
     , _cfvlMaxResults = Nothing
     , _cfvlFields = Nothing
-    , _cfvlAlt = JSON
     }
 
 -- | Creative field ID for this creative field value.
@@ -177,9 +172,9 @@ cfvlPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cfvlUserIp :: Lens' CreativeFieldValuesList' (Maybe Text)
-cfvlUserIp
-  = lens _cfvlUserIp (\ s a -> s{_cfvlUserIp = a})
+cfvlUserIP :: Lens' CreativeFieldValuesList' (Maybe Text)
+cfvlUserIP
+  = lens _cfvlUserIP (\ s a -> s{_cfvlUserIP = a})
 
 -- | Allows searching for creative field values by their values. Wildcards
 -- (e.g. *) are not allowed.
@@ -207,7 +202,7 @@ cfvlSortOrder
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cfvlKey :: Lens' CreativeFieldValuesList' (Maybe Text)
+cfvlKey :: Lens' CreativeFieldValuesList' (Maybe Key)
 cfvlKey = lens _cfvlKey (\ s a -> s{_cfvlKey = a})
 
 -- | Value of the nextPageToken from the previous result page.
@@ -223,10 +218,10 @@ cfvlSortField
       (\ s a -> s{_cfvlSortField = a})
 
 -- | OAuth 2.0 token for the current user.
-cfvlOauthToken :: Lens' CreativeFieldValuesList' (Maybe Text)
-cfvlOauthToken
-  = lens _cfvlOauthToken
-      (\ s a -> s{_cfvlOauthToken = a})
+cfvlOAuthToken :: Lens' CreativeFieldValuesList' (Maybe OAuthToken)
+cfvlOAuthToken
+  = lens _cfvlOAuthToken
+      (\ s a -> s{_cfvlOAuthToken = a})
 
 -- | Maximum number of results to return.
 cfvlMaxResults :: Lens' CreativeFieldValuesList' (Maybe Int32)
@@ -239,9 +234,9 @@ cfvlFields :: Lens' CreativeFieldValuesList' (Maybe Text)
 cfvlFields
   = lens _cfvlFields (\ s a -> s{_cfvlFields = a})
 
--- | Data format for the response.
-cfvlAlt :: Lens' CreativeFieldValuesList' Alt
-cfvlAlt = lens _cfvlAlt (\ s a -> s{_cfvlAlt = a})
+instance GoogleAuth CreativeFieldValuesList' where
+        authKey = cfvlKey . _Just
+        authToken = cfvlOAuthToken . _Just
 
 instance GoogleRequest CreativeFieldValuesList' where
         type Rs CreativeFieldValuesList' =
@@ -250,7 +245,7 @@ instance GoogleRequest CreativeFieldValuesList' where
         requestWithRoute r u CreativeFieldValuesList'{..}
           = go _cfvlCreativeFieldId _cfvlQuotaUser
               (Just _cfvlPrettyPrint)
-              _cfvlUserIp
+              _cfvlUserIP
               _cfvlSearchString
               _cfvlIds
               _cfvlProfileId
@@ -258,10 +253,10 @@ instance GoogleRequest CreativeFieldValuesList' where
               _cfvlKey
               _cfvlPageToken
               _cfvlSortField
-              _cfvlOauthToken
+              _cfvlOAuthToken
               _cfvlMaxResults
               _cfvlFields
-              (Just _cfvlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CreativeFieldValuesListResource)

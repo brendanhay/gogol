@@ -34,13 +34,12 @@ module Network.Google.Resource.Games.Scores.Submit
     , sPrettyPrint
     , sScoreTag
     , sScore
-    , sUserIp
+    , sUserIP
     , sLeaderboardId
     , sKey
     , sLanguage
-    , sOauthToken
+    , sOAuthToken
     , sFields
-    , sAlt
     ) where
 
 import           Network.Google.Games.Types
@@ -57,11 +56,11 @@ type ScoresSubmitResource =
                QueryParam "scoreTag" Text :>
                  QueryParam "score" Int64 :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
+                     QueryParam "key" Key :>
                        QueryParam "language" Text :>
-                         QueryParam "oauth_token" Text :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :>
+                             QueryParam "alt" AltJSON :>
                                Post '[JSON] PlayerScoreResponse
 
 -- | Submits a score to the specified leaderboard.
@@ -72,13 +71,12 @@ data ScoresSubmit' = ScoresSubmit'
     , _sPrettyPrint   :: !Bool
     , _sScoreTag      :: !(Maybe Text)
     , _sScore         :: !Int64
-    , _sUserIp        :: !(Maybe Text)
+    , _sUserIP        :: !(Maybe Text)
     , _sLeaderboardId :: !Text
-    , _sKey           :: !(Maybe Text)
+    , _sKey           :: !(Maybe Key)
     , _sLanguage      :: !(Maybe Text)
-    , _sOauthToken    :: !(Maybe Text)
+    , _sOAuthToken    :: !(Maybe OAuthToken)
     , _sFields        :: !(Maybe Text)
-    , _sAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ScoresSubmit'' with the minimum fields required to make a request.
@@ -93,7 +91,7 @@ data ScoresSubmit' = ScoresSubmit'
 --
 -- * 'sScore'
 --
--- * 'sUserIp'
+-- * 'sUserIP'
 --
 -- * 'sLeaderboardId'
 --
@@ -101,11 +99,9 @@ data ScoresSubmit' = ScoresSubmit'
 --
 -- * 'sLanguage'
 --
--- * 'sOauthToken'
+-- * 'sOAuthToken'
 --
 -- * 'sFields'
---
--- * 'sAlt'
 scoresSubmit'
     :: Int64 -- ^ 'score'
     -> Text -- ^ 'leaderboardId'
@@ -116,13 +112,12 @@ scoresSubmit' pSScore_ pSLeaderboardId_ =
     , _sPrettyPrint = True
     , _sScoreTag = Nothing
     , _sScore = pSScore_
-    , _sUserIp = Nothing
+    , _sUserIP = Nothing
     , _sLeaderboardId = pSLeaderboardId_
     , _sKey = Nothing
     , _sLanguage = Nothing
-    , _sOauthToken = Nothing
+    , _sOAuthToken = Nothing
     , _sFields = Nothing
-    , _sAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -155,8 +150,8 @@ sScore = lens _sScore (\ s a -> s{_sScore = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-sUserIp :: Lens' ScoresSubmit' (Maybe Text)
-sUserIp = lens _sUserIp (\ s a -> s{_sUserIp = a})
+sUserIP :: Lens' ScoresSubmit' (Maybe Text)
+sUserIP = lens _sUserIP (\ s a -> s{_sUserIP = a})
 
 -- | The ID of the leaderboard.
 sLeaderboardId :: Lens' ScoresSubmit' Text
@@ -167,7 +162,7 @@ sLeaderboardId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-sKey :: Lens' ScoresSubmit' (Maybe Text)
+sKey :: Lens' ScoresSubmit' (Maybe Key)
 sKey = lens _sKey (\ s a -> s{_sKey = a})
 
 -- | The preferred language to use for strings returned by this method.
@@ -176,17 +171,17 @@ sLanguage
   = lens _sLanguage (\ s a -> s{_sLanguage = a})
 
 -- | OAuth 2.0 token for the current user.
-sOauthToken :: Lens' ScoresSubmit' (Maybe Text)
-sOauthToken
-  = lens _sOauthToken (\ s a -> s{_sOauthToken = a})
+sOAuthToken :: Lens' ScoresSubmit' (Maybe OAuthToken)
+sOAuthToken
+  = lens _sOAuthToken (\ s a -> s{_sOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 sFields :: Lens' ScoresSubmit' (Maybe Text)
 sFields = lens _sFields (\ s a -> s{_sFields = a})
 
--- | Data format for the response.
-sAlt :: Lens' ScoresSubmit' Alt
-sAlt = lens _sAlt (\ s a -> s{_sAlt = a})
+instance GoogleAuth ScoresSubmit' where
+        authKey = sKey . _Just
+        authToken = sOAuthToken . _Just
 
 instance GoogleRequest ScoresSubmit' where
         type Rs ScoresSubmit' = PlayerScoreResponse
@@ -194,13 +189,13 @@ instance GoogleRequest ScoresSubmit' where
         requestWithRoute r u ScoresSubmit'{..}
           = go _sQuotaUser (Just _sPrettyPrint) _sScoreTag
               (Just _sScore)
-              _sUserIp
+              _sUserIP
               _sLeaderboardId
               _sKey
               _sLanguage
-              _sOauthToken
+              _sOAuthToken
               _sFields
-              (Just _sAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ScoresSubmitResource)

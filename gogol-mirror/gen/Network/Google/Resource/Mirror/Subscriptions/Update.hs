@@ -32,12 +32,12 @@ module Network.Google.Resource.Mirror.Subscriptions.Update
     -- * Request Lenses
     , suQuotaUser
     , suPrettyPrint
-    , suUserIp
+    , suUserIP
     , suKey
     , suId
-    , suOauthToken
+    , suOAuthToken
+    , suSubscription
     , suFields
-    , suAlt
     ) where
 
 import           Network.Google.Mirror.Types
@@ -51,23 +51,25 @@ type SubscriptionsUpdateResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Put '[JSON] Subscription
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Subscription :>
+                         Put '[JSON] Subscription
 
 -- | Updates an existing subscription in place.
 --
 -- /See:/ 'subscriptionsUpdate'' smart constructor.
 data SubscriptionsUpdate' = SubscriptionsUpdate'
-    { _suQuotaUser   :: !(Maybe Text)
-    , _suPrettyPrint :: !Bool
-    , _suUserIp      :: !(Maybe Text)
-    , _suKey         :: !(Maybe Text)
-    , _suId          :: !Text
-    , _suOauthToken  :: !(Maybe Text)
-    , _suFields      :: !(Maybe Text)
-    , _suAlt         :: !Alt
+    { _suQuotaUser    :: !(Maybe Text)
+    , _suPrettyPrint  :: !Bool
+    , _suUserIP       :: !(Maybe Text)
+    , _suKey          :: !(Maybe Key)
+    , _suId           :: !Text
+    , _suOAuthToken   :: !(Maybe OAuthToken)
+    , _suSubscription :: !Subscription
+    , _suFields       :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionsUpdate'' with the minimum fields required to make a request.
@@ -78,30 +80,31 @@ data SubscriptionsUpdate' = SubscriptionsUpdate'
 --
 -- * 'suPrettyPrint'
 --
--- * 'suUserIp'
+-- * 'suUserIP'
 --
 -- * 'suKey'
 --
 -- * 'suId'
 --
--- * 'suOauthToken'
+-- * 'suOAuthToken'
+--
+-- * 'suSubscription'
 --
 -- * 'suFields'
---
--- * 'suAlt'
 subscriptionsUpdate'
     :: Text -- ^ 'id'
+    -> Subscription -- ^ 'Subscription'
     -> SubscriptionsUpdate'
-subscriptionsUpdate' pSuId_ =
+subscriptionsUpdate' pSuId_ pSuSubscription_ =
     SubscriptionsUpdate'
     { _suQuotaUser = Nothing
     , _suPrettyPrint = True
-    , _suUserIp = Nothing
+    , _suUserIP = Nothing
     , _suKey = Nothing
     , _suId = pSuId_
-    , _suOauthToken = Nothing
+    , _suOAuthToken = Nothing
+    , _suSubscription = pSuSubscription_
     , _suFields = Nothing
-    , _suAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -119,13 +122,13 @@ suPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-suUserIp :: Lens' SubscriptionsUpdate' (Maybe Text)
-suUserIp = lens _suUserIp (\ s a -> s{_suUserIp = a})
+suUserIP :: Lens' SubscriptionsUpdate' (Maybe Text)
+suUserIP = lens _suUserIP (\ s a -> s{_suUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-suKey :: Lens' SubscriptionsUpdate' (Maybe Text)
+suKey :: Lens' SubscriptionsUpdate' (Maybe Key)
 suKey = lens _suKey (\ s a -> s{_suKey = a})
 
 -- | The ID of the subscription.
@@ -133,28 +136,35 @@ suId :: Lens' SubscriptionsUpdate' Text
 suId = lens _suId (\ s a -> s{_suId = a})
 
 -- | OAuth 2.0 token for the current user.
-suOauthToken :: Lens' SubscriptionsUpdate' (Maybe Text)
-suOauthToken
-  = lens _suOauthToken (\ s a -> s{_suOauthToken = a})
+suOAuthToken :: Lens' SubscriptionsUpdate' (Maybe OAuthToken)
+suOAuthToken
+  = lens _suOAuthToken (\ s a -> s{_suOAuthToken = a})
+
+-- | Multipart request metadata.
+suSubscription :: Lens' SubscriptionsUpdate' Subscription
+suSubscription
+  = lens _suSubscription
+      (\ s a -> s{_suSubscription = a})
 
 -- | Selector specifying which fields to include in a partial response.
 suFields :: Lens' SubscriptionsUpdate' (Maybe Text)
 suFields = lens _suFields (\ s a -> s{_suFields = a})
 
--- | Data format for the response.
-suAlt :: Lens' SubscriptionsUpdate' Alt
-suAlt = lens _suAlt (\ s a -> s{_suAlt = a})
+instance GoogleAuth SubscriptionsUpdate' where
+        authKey = suKey . _Just
+        authToken = suOAuthToken . _Just
 
 instance GoogleRequest SubscriptionsUpdate' where
         type Rs SubscriptionsUpdate' = Subscription
         request = requestWithRoute defReq mirrorURL
         requestWithRoute r u SubscriptionsUpdate'{..}
-          = go _suQuotaUser (Just _suPrettyPrint) _suUserIp
+          = go _suQuotaUser (Just _suPrettyPrint) _suUserIP
               _suKey
               _suId
-              _suOauthToken
+              _suOAuthToken
               _suFields
-              (Just _suAlt)
+              (Just AltJSON)
+              _suSubscription
           where go
                   = clientWithRoute
                       (Proxy :: Proxy SubscriptionsUpdateResource)

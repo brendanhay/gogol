@@ -27,50 +27,50 @@ module Network.Google.ResourceManager
 
     -- * REST Resources
 
-    -- ** CloudresourcemanagerOrganizationsGet
-    , module Network.Google.Resource.Cloudresourcemanager.Organizations.Get
+    -- ** CloudResourceManagerOrganizationsGet
+    , module Network.Google.Resource.CloudResourceManager.Organizations.Get
 
-    -- ** CloudresourcemanagerOrganizationsGetIAMPolicy
-    , module Network.Google.Resource.Cloudresourcemanager.Organizations.GetIAMPolicy
+    -- ** CloudResourceManagerOrganizationsGetIAMPolicy
+    , module Network.Google.Resource.CloudResourceManager.Organizations.GetIAMPolicy
 
-    -- ** CloudresourcemanagerOrganizationsList
-    , module Network.Google.Resource.Cloudresourcemanager.Organizations.List
+    -- ** CloudResourceManagerOrganizationsList
+    , module Network.Google.Resource.CloudResourceManager.Organizations.List
 
-    -- ** CloudresourcemanagerOrganizationsSetIAMPolicy
-    , module Network.Google.Resource.Cloudresourcemanager.Organizations.SetIAMPolicy
+    -- ** CloudResourceManagerOrganizationsSetIAMPolicy
+    , module Network.Google.Resource.CloudResourceManager.Organizations.SetIAMPolicy
 
-    -- ** CloudresourcemanagerOrganizationsTestIAMPermissions
-    , module Network.Google.Resource.Cloudresourcemanager.Organizations.TestIAMPermissions
+    -- ** CloudResourceManagerOrganizationsTestIAMPermissions
+    , module Network.Google.Resource.CloudResourceManager.Organizations.TestIAMPermissions
 
-    -- ** CloudresourcemanagerOrganizationsUpdate
-    , module Network.Google.Resource.Cloudresourcemanager.Organizations.Update
+    -- ** CloudResourceManagerOrganizationsUpdate
+    , module Network.Google.Resource.CloudResourceManager.Organizations.Update
 
-    -- ** CloudresourcemanagerProjectsCreate
-    , module Network.Google.Resource.Cloudresourcemanager.Projects.Create
+    -- ** CloudResourceManagerProjectsCreate
+    , module Network.Google.Resource.CloudResourceManager.Projects.Create
 
-    -- ** CloudresourcemanagerProjectsDelete
-    , module Network.Google.Resource.Cloudresourcemanager.Projects.Delete
+    -- ** CloudResourceManagerProjectsDelete
+    , module Network.Google.Resource.CloudResourceManager.Projects.Delete
 
-    -- ** CloudresourcemanagerProjectsGet
-    , module Network.Google.Resource.Cloudresourcemanager.Projects.Get
+    -- ** CloudResourceManagerProjectsGet
+    , module Network.Google.Resource.CloudResourceManager.Projects.Get
 
-    -- ** CloudresourcemanagerProjectsGetIAMPolicy
-    , module Network.Google.Resource.Cloudresourcemanager.Projects.GetIAMPolicy
+    -- ** CloudResourceManagerProjectsGetIAMPolicy
+    , module Network.Google.Resource.CloudResourceManager.Projects.GetIAMPolicy
 
-    -- ** CloudresourcemanagerProjectsList
-    , module Network.Google.Resource.Cloudresourcemanager.Projects.List
+    -- ** CloudResourceManagerProjectsList
+    , module Network.Google.Resource.CloudResourceManager.Projects.List
 
-    -- ** CloudresourcemanagerProjectsSetIAMPolicy
-    , module Network.Google.Resource.Cloudresourcemanager.Projects.SetIAMPolicy
+    -- ** CloudResourceManagerProjectsSetIAMPolicy
+    , module Network.Google.Resource.CloudResourceManager.Projects.SetIAMPolicy
 
-    -- ** CloudresourcemanagerProjectsTestIAMPermissions
-    , module Network.Google.Resource.Cloudresourcemanager.Projects.TestIAMPermissions
+    -- ** CloudResourceManagerProjectsTestIAMPermissions
+    , module Network.Google.Resource.CloudResourceManager.Projects.TestIAMPermissions
 
-    -- ** CloudresourcemanagerProjectsUndelete
-    , module Network.Google.Resource.Cloudresourcemanager.Projects.Undelete
+    -- ** CloudResourceManagerProjectsUndelete
+    , module Network.Google.Resource.CloudResourceManager.Projects.Undelete
 
-    -- ** CloudresourcemanagerProjectsUpdate
-    , module Network.Google.Resource.Cloudresourcemanager.Projects.Update
+    -- ** CloudResourceManagerProjectsUpdate
+    , module Network.Google.Resource.CloudResourceManager.Projects.Update
 
     -- * Types
 
@@ -157,21 +157,21 @@ module Network.Google.ResourceManager
     ) where
 
 import           Network.Google.Prelude
-import           Network.Google.Resource.Cloudresourcemanager.Organizations.Get
-import           Network.Google.Resource.Cloudresourcemanager.Organizations.GetIAMPolicy
-import           Network.Google.Resource.Cloudresourcemanager.Organizations.List
-import           Network.Google.Resource.Cloudresourcemanager.Organizations.SetIAMPolicy
-import           Network.Google.Resource.Cloudresourcemanager.Organizations.TestIAMPermissions
-import           Network.Google.Resource.Cloudresourcemanager.Organizations.Update
-import           Network.Google.Resource.Cloudresourcemanager.Projects.Create
-import           Network.Google.Resource.Cloudresourcemanager.Projects.Delete
-import           Network.Google.Resource.Cloudresourcemanager.Projects.Get
-import           Network.Google.Resource.Cloudresourcemanager.Projects.GetIAMPolicy
-import           Network.Google.Resource.Cloudresourcemanager.Projects.List
-import           Network.Google.Resource.Cloudresourcemanager.Projects.SetIAMPolicy
-import           Network.Google.Resource.Cloudresourcemanager.Projects.TestIAMPermissions
-import           Network.Google.Resource.Cloudresourcemanager.Projects.Undelete
-import           Network.Google.Resource.Cloudresourcemanager.Projects.Update
+import           Network.Google.Resource.CloudResourceManager.Organizations.Get
+import           Network.Google.Resource.CloudResourceManager.Organizations.GetIAMPolicy
+import           Network.Google.Resource.CloudResourceManager.Organizations.List
+import           Network.Google.Resource.CloudResourceManager.Organizations.SetIAMPolicy
+import           Network.Google.Resource.CloudResourceManager.Organizations.TestIAMPermissions
+import           Network.Google.Resource.CloudResourceManager.Organizations.Update
+import           Network.Google.Resource.CloudResourceManager.Projects.Create
+import           Network.Google.Resource.CloudResourceManager.Projects.Delete
+import           Network.Google.Resource.CloudResourceManager.Projects.Get
+import           Network.Google.Resource.CloudResourceManager.Projects.GetIAMPolicy
+import           Network.Google.Resource.CloudResourceManager.Projects.List
+import           Network.Google.Resource.CloudResourceManager.Projects.SetIAMPolicy
+import           Network.Google.Resource.CloudResourceManager.Projects.TestIAMPermissions
+import           Network.Google.Resource.CloudResourceManager.Projects.Undelete
+import           Network.Google.Resource.CloudResourceManager.Projects.Update
 import           Network.Google.ResourceManager.Types
 
 {- $resources

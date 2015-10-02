@@ -19,7 +19,7 @@
 --
 -- | Lists all the modules in the application.
 --
--- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @AppengineAppsModulesList@.
+-- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @AppEngineAppsModulesList@.
 module Network.Google.Resource.AppEngine.Apps.Modules.List
     (
     -- * REST Resource
@@ -41,17 +41,16 @@ module Network.Google.Resource.AppEngine.Apps.Modules.List
     , amlKey
     , amlAppsId
     , amlPageToken
-    , amlOauthToken
+    , amlOAuthToken
     , amlPageSize
     , amlFields
     , amlCallback
-    , amlAlt
     ) where
 
 import           Network.Google.AppEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AppengineAppsModulesList@ which the
+-- | A resource alias for @AppEngineAppsModulesList@ which the
 -- 'AppsModulesList'' request conforms to.
 type AppsModulesListResource =
      "v1beta4" :>
@@ -66,13 +65,13 @@ type AppsModulesListResource =
                        QueryParam "access_token" Text :>
                          QueryParam "uploadType" Text :>
                            QueryParam "bearer_token" Text :>
-                             QueryParam "key" Text :>
+                             QueryParam "key" Key :>
                                QueryParam "pageToken" Text :>
-                                 QueryParam "oauth_token" Text :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "pageSize" Int32 :>
                                      QueryParam "fields" Text :>
                                        QueryParam "callback" Text :>
-                                         QueryParam "alt" Text :>
+                                         QueryParam "alt" AltJSON :>
                                            Get '[JSON] ListModulesResponse
 
 -- | Lists all the modules in the application.
@@ -87,14 +86,13 @@ data AppsModulesList' = AppsModulesList'
     , _amlAccessToken    :: !(Maybe Text)
     , _amlUploadType     :: !(Maybe Text)
     , _amlBearerToken    :: !(Maybe Text)
-    , _amlKey            :: !(Maybe Text)
+    , _amlKey            :: !(Maybe Key)
     , _amlAppsId         :: !Text
     , _amlPageToken      :: !(Maybe Text)
-    , _amlOauthToken     :: !(Maybe Text)
+    , _amlOAuthToken     :: !(Maybe OAuthToken)
     , _amlPageSize       :: !(Maybe Int32)
     , _amlFields         :: !(Maybe Text)
     , _amlCallback       :: !(Maybe Text)
-    , _amlAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AppsModulesList'' with the minimum fields required to make a request.
@@ -123,15 +121,13 @@ data AppsModulesList' = AppsModulesList'
 --
 -- * 'amlPageToken'
 --
--- * 'amlOauthToken'
+-- * 'amlOAuthToken'
 --
 -- * 'amlPageSize'
 --
 -- * 'amlFields'
 --
 -- * 'amlCallback'
---
--- * 'amlAlt'
 appsModulesList'
     :: Text -- ^ 'appsId'
     -> AppsModulesList'
@@ -148,11 +144,10 @@ appsModulesList' pAmlAppsId_ =
     , _amlKey = Nothing
     , _amlAppsId = pAmlAppsId_
     , _amlPageToken = Nothing
-    , _amlOauthToken = Nothing
+    , _amlOAuthToken = Nothing
     , _amlPageSize = Nothing
     , _amlFields = Nothing
     , _amlCallback = Nothing
-    , _amlAlt = "json"
     }
 
 -- | V1 error format.
@@ -203,7 +198,7 @@ amlBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-amlKey :: Lens' AppsModulesList' (Maybe Text)
+amlKey :: Lens' AppsModulesList' (Maybe Key)
 amlKey = lens _amlKey (\ s a -> s{_amlKey = a})
 
 -- | Part of \`name\`. Name of the resource requested. For example:
@@ -218,10 +213,10 @@ amlPageToken
   = lens _amlPageToken (\ s a -> s{_amlPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-amlOauthToken :: Lens' AppsModulesList' (Maybe Text)
-amlOauthToken
-  = lens _amlOauthToken
-      (\ s a -> s{_amlOauthToken = a})
+amlOAuthToken :: Lens' AppsModulesList' (Maybe OAuthToken)
+amlOAuthToken
+  = lens _amlOAuthToken
+      (\ s a -> s{_amlOAuthToken = a})
 
 -- | Maximum results to return per page.
 amlPageSize :: Lens' AppsModulesList' (Maybe Int32)
@@ -238,9 +233,9 @@ amlCallback :: Lens' AppsModulesList' (Maybe Text)
 amlCallback
   = lens _amlCallback (\ s a -> s{_amlCallback = a})
 
--- | Data format for response.
-amlAlt :: Lens' AppsModulesList' Text
-amlAlt = lens _amlAlt (\ s a -> s{_amlAlt = a})
+instance GoogleAuth AppsModulesList' where
+        authKey = amlKey . _Just
+        authToken = amlOAuthToken . _Just
 
 instance GoogleRequest AppsModulesList' where
         type Rs AppsModulesList' = ListModulesResponse
@@ -255,11 +250,11 @@ instance GoogleRequest AppsModulesList' where
               _amlKey
               _amlAppsId
               _amlPageToken
-              _amlOauthToken
+              _amlOAuthToken
               _amlPageSize
               _amlFields
               _amlCallback
-              (Just _amlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AppsModulesListResource)

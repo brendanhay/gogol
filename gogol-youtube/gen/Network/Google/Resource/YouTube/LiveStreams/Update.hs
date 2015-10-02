@@ -35,13 +35,13 @@ module Network.Google.Resource.YouTube.LiveStreams.Update
     , lsuQuotaUser
     , lsuPart
     , lsuPrettyPrint
-    , lsuUserIp
+    , lsuLiveStream
+    , lsuUserIP
     , lsuOnBehalfOfContentOwner
     , lsuKey
     , lsuOnBehalfOfContentOwnerChannel
-    , lsuOauthToken
+    , lsuOAuthToken
     , lsuFields
-    , lsuAlt
     ) where
 
 import           Network.Google.Prelude
@@ -56,11 +56,12 @@ type LiveStreamsUpdateResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "onBehalfOfContentOwner" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "onBehalfOfContentOwnerChannel" Text :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Put '[JSON] LiveStream
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] LiveStream :> Put '[JSON] LiveStream
 
 -- | Updates a video stream. If the properties that you want to change cannot
 -- be updated, then you need to create a new stream with the proper
@@ -71,13 +72,13 @@ data LiveStreamsUpdate' = LiveStreamsUpdate'
     { _lsuQuotaUser                     :: !(Maybe Text)
     , _lsuPart                          :: !Text
     , _lsuPrettyPrint                   :: !Bool
-    , _lsuUserIp                        :: !(Maybe Text)
+    , _lsuLiveStream                    :: !LiveStream
+    , _lsuUserIP                        :: !(Maybe Text)
     , _lsuOnBehalfOfContentOwner        :: !(Maybe Text)
-    , _lsuKey                           :: !(Maybe Text)
+    , _lsuKey                           :: !(Maybe Key)
     , _lsuOnBehalfOfContentOwnerChannel :: !(Maybe Text)
-    , _lsuOauthToken                    :: !(Maybe Text)
+    , _lsuOAuthToken                    :: !(Maybe OAuthToken)
     , _lsuFields                        :: !(Maybe Text)
-    , _lsuAlt                           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveStreamsUpdate'' with the minimum fields required to make a request.
@@ -90,7 +91,9 @@ data LiveStreamsUpdate' = LiveStreamsUpdate'
 --
 -- * 'lsuPrettyPrint'
 --
--- * 'lsuUserIp'
+-- * 'lsuLiveStream'
+--
+-- * 'lsuUserIP'
 --
 -- * 'lsuOnBehalfOfContentOwner'
 --
@@ -98,26 +101,25 @@ data LiveStreamsUpdate' = LiveStreamsUpdate'
 --
 -- * 'lsuOnBehalfOfContentOwnerChannel'
 --
--- * 'lsuOauthToken'
+-- * 'lsuOAuthToken'
 --
 -- * 'lsuFields'
---
--- * 'lsuAlt'
 liveStreamsUpdate'
     :: Text -- ^ 'part'
+    -> LiveStream -- ^ 'LiveStream'
     -> LiveStreamsUpdate'
-liveStreamsUpdate' pLsuPart_ =
+liveStreamsUpdate' pLsuPart_ pLsuLiveStream_ =
     LiveStreamsUpdate'
     { _lsuQuotaUser = Nothing
     , _lsuPart = pLsuPart_
     , _lsuPrettyPrint = True
-    , _lsuUserIp = Nothing
+    , _lsuLiveStream = pLsuLiveStream_
+    , _lsuUserIP = Nothing
     , _lsuOnBehalfOfContentOwner = Nothing
     , _lsuKey = Nothing
     , _lsuOnBehalfOfContentOwnerChannel = Nothing
-    , _lsuOauthToken = Nothing
+    , _lsuOAuthToken = Nothing
     , _lsuFields = Nothing
-    , _lsuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -144,11 +146,17 @@ lsuPrettyPrint
   = lens _lsuPrettyPrint
       (\ s a -> s{_lsuPrettyPrint = a})
 
+-- | Multipart request metadata.
+lsuLiveStream :: Lens' LiveStreamsUpdate' LiveStream
+lsuLiveStream
+  = lens _lsuLiveStream
+      (\ s a -> s{_lsuLiveStream = a})
+
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-lsuUserIp :: Lens' LiveStreamsUpdate' (Maybe Text)
-lsuUserIp
-  = lens _lsuUserIp (\ s a -> s{_lsuUserIp = a})
+lsuUserIP :: Lens' LiveStreamsUpdate' (Maybe Text)
+lsuUserIP
+  = lens _lsuUserIP (\ s a -> s{_lsuUserIP = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
@@ -168,7 +176,7 @@ lsuOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lsuKey :: Lens' LiveStreamsUpdate' (Maybe Text)
+lsuKey :: Lens' LiveStreamsUpdate' (Maybe Key)
 lsuKey = lens _lsuKey (\ s a -> s{_lsuKey = a})
 
 -- | This parameter can only be used in a properly authorized request. Note:
@@ -193,19 +201,19 @@ lsuOnBehalfOfContentOwnerChannel
       (\ s a -> s{_lsuOnBehalfOfContentOwnerChannel = a})
 
 -- | OAuth 2.0 token for the current user.
-lsuOauthToken :: Lens' LiveStreamsUpdate' (Maybe Text)
-lsuOauthToken
-  = lens _lsuOauthToken
-      (\ s a -> s{_lsuOauthToken = a})
+lsuOAuthToken :: Lens' LiveStreamsUpdate' (Maybe OAuthToken)
+lsuOAuthToken
+  = lens _lsuOAuthToken
+      (\ s a -> s{_lsuOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 lsuFields :: Lens' LiveStreamsUpdate' (Maybe Text)
 lsuFields
   = lens _lsuFields (\ s a -> s{_lsuFields = a})
 
--- | Data format for the response.
-lsuAlt :: Lens' LiveStreamsUpdate' Alt
-lsuAlt = lens _lsuAlt (\ s a -> s{_lsuAlt = a})
+instance GoogleAuth LiveStreamsUpdate' where
+        authKey = lsuKey . _Just
+        authToken = lsuOAuthToken . _Just
 
 instance GoogleRequest LiveStreamsUpdate' where
         type Rs LiveStreamsUpdate' = LiveStream
@@ -213,13 +221,14 @@ instance GoogleRequest LiveStreamsUpdate' where
         requestWithRoute r u LiveStreamsUpdate'{..}
           = go _lsuQuotaUser (Just _lsuPart)
               (Just _lsuPrettyPrint)
-              _lsuUserIp
+              _lsuUserIP
               _lsuOnBehalfOfContentOwner
               _lsuKey
               _lsuOnBehalfOfContentOwnerChannel
-              _lsuOauthToken
+              _lsuOAuthToken
               _lsuFields
-              (Just _lsuAlt)
+              (Just AltJSON)
+              _lsuLiveStream
           where go
                   = clientWithRoute
                       (Proxy :: Proxy LiveStreamsUpdateResource)

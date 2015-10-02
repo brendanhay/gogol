@@ -32,12 +32,12 @@ module Network.Google.Resource.GroupsMigration.Archive.Insert
     -- * Request Lenses
     , aiQuotaUser
     , aiPrettyPrint
-    , aiUserIp
+    , aiUserIP
+    , aiMedia
     , aiKey
     , aiGroupId
-    , aiOauthToken
+    , aiOAuthToken
     , aiFields
-    , aiAlt
     ) where
 
 import           Network.Google.GroupsMigration.Types
@@ -51,10 +51,10 @@ type ArchiveInsertResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Post '[JSON] Groups
+                     QueryParam "alt" AltJSON :> Post '[JSON] Groups
 
 -- | Inserts a new mail into the archive of the Google group.
 --
@@ -62,12 +62,12 @@ type ArchiveInsertResource =
 data ArchiveInsert' = ArchiveInsert'
     { _aiQuotaUser   :: !(Maybe Text)
     , _aiPrettyPrint :: !Bool
-    , _aiUserIp      :: !(Maybe Text)
-    , _aiKey         :: !(Maybe Text)
+    , _aiUserIP      :: !(Maybe Text)
+    , _aiMedia       :: !Body
+    , _aiKey         :: !(Maybe Key)
     , _aiGroupId     :: !Text
-    , _aiOauthToken  :: !(Maybe Text)
+    , _aiOAuthToken  :: !(Maybe OAuthToken)
     , _aiFields      :: !(Maybe Text)
-    , _aiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ArchiveInsert'' with the minimum fields required to make a request.
@@ -78,30 +78,31 @@ data ArchiveInsert' = ArchiveInsert'
 --
 -- * 'aiPrettyPrint'
 --
--- * 'aiUserIp'
+-- * 'aiUserIP'
+--
+-- * 'aiMedia'
 --
 -- * 'aiKey'
 --
 -- * 'aiGroupId'
 --
--- * 'aiOauthToken'
+-- * 'aiOAuthToken'
 --
 -- * 'aiFields'
---
--- * 'aiAlt'
 archiveInsert'
-    :: Text -- ^ 'groupId'
+    :: Body -- ^ 'media'
+    -> Text -- ^ 'groupId'
     -> ArchiveInsert'
-archiveInsert' pAiGroupId_ =
+archiveInsert' pAiMedia_ pAiGroupId_ =
     ArchiveInsert'
     { _aiQuotaUser = Nothing
     , _aiPrettyPrint = True
-    , _aiUserIp = Nothing
+    , _aiUserIP = Nothing
+    , _aiMedia = pAiMedia_
     , _aiKey = Nothing
     , _aiGroupId = pAiGroupId_
-    , _aiOauthToken = Nothing
+    , _aiOAuthToken = Nothing
     , _aiFields = Nothing
-    , _aiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -119,13 +120,16 @@ aiPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-aiUserIp :: Lens' ArchiveInsert' (Maybe Text)
-aiUserIp = lens _aiUserIp (\ s a -> s{_aiUserIp = a})
+aiUserIP :: Lens' ArchiveInsert' (Maybe Text)
+aiUserIP = lens _aiUserIP (\ s a -> s{_aiUserIP = a})
+
+aiMedia :: Lens' ArchiveInsert' Body
+aiMedia = lens _aiMedia (\ s a -> s{_aiMedia = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aiKey :: Lens' ArchiveInsert' (Maybe Text)
+aiKey :: Lens' ArchiveInsert' (Maybe Key)
 aiKey = lens _aiKey (\ s a -> s{_aiKey = a})
 
 -- | The group ID
@@ -134,28 +138,29 @@ aiGroupId
   = lens _aiGroupId (\ s a -> s{_aiGroupId = a})
 
 -- | OAuth 2.0 token for the current user.
-aiOauthToken :: Lens' ArchiveInsert' (Maybe Text)
-aiOauthToken
-  = lens _aiOauthToken (\ s a -> s{_aiOauthToken = a})
+aiOAuthToken :: Lens' ArchiveInsert' (Maybe OAuthToken)
+aiOAuthToken
+  = lens _aiOAuthToken (\ s a -> s{_aiOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 aiFields :: Lens' ArchiveInsert' (Maybe Text)
 aiFields = lens _aiFields (\ s a -> s{_aiFields = a})
 
--- | Data format for the response.
-aiAlt :: Lens' ArchiveInsert' Alt
-aiAlt = lens _aiAlt (\ s a -> s{_aiAlt = a})
+instance GoogleAuth ArchiveInsert' where
+        authKey = aiKey . _Just
+        authToken = aiOAuthToken . _Just
 
 instance GoogleRequest ArchiveInsert' where
         type Rs ArchiveInsert' = Groups
         request = requestWithRoute defReq groupsMigrationURL
         requestWithRoute r u ArchiveInsert'{..}
-          = go _aiQuotaUser (Just _aiPrettyPrint) _aiUserIp
+          = go _aiQuotaUser (Just _aiPrettyPrint) _aiUserIP
+              _aiMedia
               _aiKey
               _aiGroupId
-              _aiOauthToken
+              _aiOAuthToken
               _aiFields
-              (Just _aiAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ArchiveInsertResource)

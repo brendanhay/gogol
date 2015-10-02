@@ -33,17 +33,17 @@ module Network.Google.Resource.Blogger.Posts.Update
     , puFetchBody
     , puQuotaUser
     , puPrettyPrint
-    , puUserIp
+    , puUserIP
+    , puPost
     , puFetchImages
     , puBlogId
     , puMaxComments
     , puKey
     , puRevert
     , puPostId
-    , puOauthToken
+    , puOAuthToken
     , puPublish
     , puFields
-    , puAlt
     ) where
 
 import           Network.Google.Blogger.Types
@@ -62,12 +62,13 @@ type PostsUpdateResource =
                    QueryParam "userIp" Text :>
                      QueryParam "fetchImages" Bool :>
                        QueryParam "maxComments" Word32 :>
-                         QueryParam "key" Text :>
+                         QueryParam "key" Key :>
                            QueryParam "revert" Bool :>
-                             QueryParam "oauth_token" Text :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "publish" Bool :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "alt" Alt :> Put '[JSON] Post
+                                   QueryParam "alt" AltJSON :>
+                                     ReqBody '[JSON] Post :> Put '[JSON] Post
 
 -- | Update a post.
 --
@@ -76,17 +77,17 @@ data PostsUpdate' = PostsUpdate'
     { _puFetchBody   :: !Bool
     , _puQuotaUser   :: !(Maybe Text)
     , _puPrettyPrint :: !Bool
-    , _puUserIp      :: !(Maybe Text)
+    , _puUserIP      :: !(Maybe Text)
+    , _puPost        :: !Post
     , _puFetchImages :: !(Maybe Bool)
     , _puBlogId      :: !Text
     , _puMaxComments :: !(Maybe Word32)
-    , _puKey         :: !(Maybe Text)
+    , _puKey         :: !(Maybe Key)
     , _puRevert      :: !(Maybe Bool)
     , _puPostId      :: !Text
-    , _puOauthToken  :: !(Maybe Text)
+    , _puOAuthToken  :: !(Maybe OAuthToken)
     , _puPublish     :: !(Maybe Bool)
     , _puFields      :: !(Maybe Text)
-    , _puAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostsUpdate'' with the minimum fields required to make a request.
@@ -99,7 +100,9 @@ data PostsUpdate' = PostsUpdate'
 --
 -- * 'puPrettyPrint'
 --
--- * 'puUserIp'
+-- * 'puUserIP'
+--
+-- * 'puPost'
 --
 -- * 'puFetchImages'
 --
@@ -113,33 +116,32 @@ data PostsUpdate' = PostsUpdate'
 --
 -- * 'puPostId'
 --
--- * 'puOauthToken'
+-- * 'puOAuthToken'
 --
 -- * 'puPublish'
 --
 -- * 'puFields'
---
--- * 'puAlt'
 postsUpdate'
-    :: Text -- ^ 'blogId'
+    :: Post -- ^ 'Post'
+    -> Text -- ^ 'blogId'
     -> Text -- ^ 'postId'
     -> PostsUpdate'
-postsUpdate' pPuBlogId_ pPuPostId_ =
+postsUpdate' pPuPost_ pPuBlogId_ pPuPostId_ =
     PostsUpdate'
     { _puFetchBody = True
     , _puQuotaUser = Nothing
     , _puPrettyPrint = True
-    , _puUserIp = Nothing
+    , _puUserIP = Nothing
+    , _puPost = pPuPost_
     , _puFetchImages = Nothing
     , _puBlogId = pPuBlogId_
     , _puMaxComments = Nothing
     , _puKey = Nothing
     , _puRevert = Nothing
     , _puPostId = pPuPostId_
-    , _puOauthToken = Nothing
+    , _puOAuthToken = Nothing
     , _puPublish = Nothing
     , _puFields = Nothing
-    , _puAlt = JSON
     }
 
 -- | Whether the body content of the post is included with the result
@@ -163,8 +165,12 @@ puPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-puUserIp :: Lens' PostsUpdate' (Maybe Text)
-puUserIp = lens _puUserIp (\ s a -> s{_puUserIp = a})
+puUserIP :: Lens' PostsUpdate' (Maybe Text)
+puUserIP = lens _puUserIP (\ s a -> s{_puUserIP = a})
+
+-- | Multipart request metadata.
+puPost :: Lens' PostsUpdate' Post
+puPost = lens _puPost (\ s a -> s{_puPost = a})
 
 -- | Whether image URL metadata for each post is included in the returned
 -- result (default: false).
@@ -186,7 +192,7 @@ puMaxComments
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-puKey :: Lens' PostsUpdate' (Maybe Text)
+puKey :: Lens' PostsUpdate' (Maybe Key)
 puKey = lens _puKey (\ s a -> s{_puKey = a})
 
 -- | Whether a revert action should be performed when the post is updated
@@ -199,9 +205,9 @@ puPostId :: Lens' PostsUpdate' Text
 puPostId = lens _puPostId (\ s a -> s{_puPostId = a})
 
 -- | OAuth 2.0 token for the current user.
-puOauthToken :: Lens' PostsUpdate' (Maybe Text)
-puOauthToken
-  = lens _puOauthToken (\ s a -> s{_puOauthToken = a})
+puOAuthToken :: Lens' PostsUpdate' (Maybe OAuthToken)
+puOAuthToken
+  = lens _puOAuthToken (\ s a -> s{_puOAuthToken = a})
 
 -- | Whether a publish action should be performed when the post is updated
 -- (default: false).
@@ -213,9 +219,9 @@ puPublish
 puFields :: Lens' PostsUpdate' (Maybe Text)
 puFields = lens _puFields (\ s a -> s{_puFields = a})
 
--- | Data format for the response.
-puAlt :: Lens' PostsUpdate' Alt
-puAlt = lens _puAlt (\ s a -> s{_puAlt = a})
+instance GoogleAuth PostsUpdate' where
+        authKey = puKey . _Just
+        authToken = puOAuthToken . _Just
 
 instance GoogleRequest PostsUpdate' where
         type Rs PostsUpdate' = Post
@@ -223,17 +229,18 @@ instance GoogleRequest PostsUpdate' where
         requestWithRoute r u PostsUpdate'{..}
           = go (Just _puFetchBody) _puQuotaUser
               (Just _puPrettyPrint)
-              _puUserIp
+              _puUserIP
               _puFetchImages
               _puBlogId
               _puMaxComments
               _puKey
               _puRevert
               _puPostId
-              _puOauthToken
+              _puOAuthToken
               _puPublish
               _puFields
-              (Just _puAlt)
+              (Just AltJSON)
+              _puPost
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PostsUpdateResource)

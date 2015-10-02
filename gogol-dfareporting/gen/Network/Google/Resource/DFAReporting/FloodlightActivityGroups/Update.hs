@@ -32,12 +32,12 @@ module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Update
     -- * Request Lenses
     , faguQuotaUser
     , faguPrettyPrint
-    , faguUserIp
+    , faguFloodlightActivityGroup
+    , faguUserIP
     , faguProfileId
     , faguKey
-    , faguOauthToken
+    , faguOAuthToken
     , faguFields
-    , faguAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,24 +52,25 @@ type FloodlightActivityGroupsUpdateResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :>
-                         Put '[JSON] FloodlightActivityGroup
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] FloodlightActivityGroup :>
+                           Put '[JSON] FloodlightActivityGroup
 
 -- | Updates an existing floodlight activity group.
 --
 -- /See:/ 'floodlightActivityGroupsUpdate'' smart constructor.
 data FloodlightActivityGroupsUpdate' = FloodlightActivityGroupsUpdate'
-    { _faguQuotaUser   :: !(Maybe Text)
-    , _faguPrettyPrint :: !Bool
-    , _faguUserIp      :: !(Maybe Text)
-    , _faguProfileId   :: !Int64
-    , _faguKey         :: !(Maybe Text)
-    , _faguOauthToken  :: !(Maybe Text)
-    , _faguFields      :: !(Maybe Text)
-    , _faguAlt         :: !Alt
+    { _faguQuotaUser               :: !(Maybe Text)
+    , _faguPrettyPrint             :: !Bool
+    , _faguFloodlightActivityGroup :: !FloodlightActivityGroup
+    , _faguUserIP                  :: !(Maybe Text)
+    , _faguProfileId               :: !Int64
+    , _faguKey                     :: !(Maybe Key)
+    , _faguOAuthToken              :: !(Maybe OAuthToken)
+    , _faguFields                  :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivityGroupsUpdate'' with the minimum fields required to make a request.
@@ -80,30 +81,31 @@ data FloodlightActivityGroupsUpdate' = FloodlightActivityGroupsUpdate'
 --
 -- * 'faguPrettyPrint'
 --
--- * 'faguUserIp'
+-- * 'faguFloodlightActivityGroup'
+--
+-- * 'faguUserIP'
 --
 -- * 'faguProfileId'
 --
 -- * 'faguKey'
 --
--- * 'faguOauthToken'
+-- * 'faguOAuthToken'
 --
 -- * 'faguFields'
---
--- * 'faguAlt'
 floodlightActivityGroupsUpdate'
-    :: Int64 -- ^ 'profileId'
+    :: FloodlightActivityGroup -- ^ 'FloodlightActivityGroup'
+    -> Int64 -- ^ 'profileId'
     -> FloodlightActivityGroupsUpdate'
-floodlightActivityGroupsUpdate' pFaguProfileId_ =
+floodlightActivityGroupsUpdate' pFaguFloodlightActivityGroup_ pFaguProfileId_ =
     FloodlightActivityGroupsUpdate'
     { _faguQuotaUser = Nothing
     , _faguPrettyPrint = True
-    , _faguUserIp = Nothing
+    , _faguFloodlightActivityGroup = pFaguFloodlightActivityGroup_
+    , _faguUserIP = Nothing
     , _faguProfileId = pFaguProfileId_
     , _faguKey = Nothing
-    , _faguOauthToken = Nothing
+    , _faguOAuthToken = Nothing
     , _faguFields = Nothing
-    , _faguAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,11 +122,17 @@ faguPrettyPrint
   = lens _faguPrettyPrint
       (\ s a -> s{_faguPrettyPrint = a})
 
+-- | Multipart request metadata.
+faguFloodlightActivityGroup :: Lens' FloodlightActivityGroupsUpdate' FloodlightActivityGroup
+faguFloodlightActivityGroup
+  = lens _faguFloodlightActivityGroup
+      (\ s a -> s{_faguFloodlightActivityGroup = a})
+
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-faguUserIp :: Lens' FloodlightActivityGroupsUpdate' (Maybe Text)
-faguUserIp
-  = lens _faguUserIp (\ s a -> s{_faguUserIp = a})
+faguUserIP :: Lens' FloodlightActivityGroupsUpdate' (Maybe Text)
+faguUserIP
+  = lens _faguUserIP (\ s a -> s{_faguUserIP = a})
 
 -- | User profile ID associated with this request.
 faguProfileId :: Lens' FloodlightActivityGroupsUpdate' Int64
@@ -135,23 +143,24 @@ faguProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-faguKey :: Lens' FloodlightActivityGroupsUpdate' (Maybe Text)
+faguKey :: Lens' FloodlightActivityGroupsUpdate' (Maybe Key)
 faguKey = lens _faguKey (\ s a -> s{_faguKey = a})
 
 -- | OAuth 2.0 token for the current user.
-faguOauthToken :: Lens' FloodlightActivityGroupsUpdate' (Maybe Text)
-faguOauthToken
-  = lens _faguOauthToken
-      (\ s a -> s{_faguOauthToken = a})
+faguOAuthToken :: Lens' FloodlightActivityGroupsUpdate' (Maybe OAuthToken)
+faguOAuthToken
+  = lens _faguOAuthToken
+      (\ s a -> s{_faguOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 faguFields :: Lens' FloodlightActivityGroupsUpdate' (Maybe Text)
 faguFields
   = lens _faguFields (\ s a -> s{_faguFields = a})
 
--- | Data format for the response.
-faguAlt :: Lens' FloodlightActivityGroupsUpdate' Alt
-faguAlt = lens _faguAlt (\ s a -> s{_faguAlt = a})
+instance GoogleAuth FloodlightActivityGroupsUpdate'
+         where
+        authKey = faguKey . _Just
+        authToken = faguOAuthToken . _Just
 
 instance GoogleRequest
          FloodlightActivityGroupsUpdate' where
@@ -161,12 +170,13 @@ instance GoogleRequest
         requestWithRoute r u
           FloodlightActivityGroupsUpdate'{..}
           = go _faguQuotaUser (Just _faguPrettyPrint)
-              _faguUserIp
+              _faguUserIP
               _faguProfileId
               _faguKey
-              _faguOauthToken
+              _faguOAuthToken
               _faguFields
-              (Just _faguAlt)
+              (Just AltJSON)
+              _faguFloodlightActivityGroup
           where go
                   = clientWithRoute
                       (Proxy ::

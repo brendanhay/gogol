@@ -33,11 +33,10 @@ module Network.Google.Resource.Calendar.Calendars.Get
     , cQuotaUser
     , cCalendarId
     , cPrettyPrint
-    , cUserIp
+    , cUserIP
     , cKey
-    , cOauthToken
+    , cOAuthToken
     , cFields
-    , cAlt
     ) where
 
 import           Network.Google.AppsCalendar.Types
@@ -51,10 +50,10 @@ type CalendarsGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Get '[JSON] Calendar
+                     QueryParam "alt" AltJSON :> Get '[JSON] Calendar
 
 -- | Returns metadata for a calendar.
 --
@@ -63,11 +62,10 @@ data CalendarsGet' = CalendarsGet'
     { _cQuotaUser   :: !(Maybe Text)
     , _cCalendarId  :: !Text
     , _cPrettyPrint :: !Bool
-    , _cUserIp      :: !(Maybe Text)
-    , _cKey         :: !(Maybe Text)
-    , _cOauthToken  :: !(Maybe Text)
+    , _cUserIP      :: !(Maybe Text)
+    , _cKey         :: !(Maybe Key)
+    , _cOAuthToken  :: !(Maybe OAuthToken)
     , _cFields      :: !(Maybe Text)
-    , _cAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CalendarsGet'' with the minimum fields required to make a request.
@@ -80,15 +78,13 @@ data CalendarsGet' = CalendarsGet'
 --
 -- * 'cPrettyPrint'
 --
--- * 'cUserIp'
+-- * 'cUserIP'
 --
 -- * 'cKey'
 --
--- * 'cOauthToken'
+-- * 'cOAuthToken'
 --
 -- * 'cFields'
---
--- * 'cAlt'
 calendarsGet'
     :: Text -- ^ 'calendarId'
     -> CalendarsGet'
@@ -97,11 +93,10 @@ calendarsGet' pCCalendarId_ =
     { _cQuotaUser = Nothing
     , _cCalendarId = pCCalendarId_
     , _cPrettyPrint = True
-    , _cUserIp = Nothing
+    , _cUserIP = Nothing
     , _cKey = Nothing
-    , _cOauthToken = Nothing
+    , _cOAuthToken = Nothing
     , _cFields = Nothing
-    , _cAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -125,38 +120,38 @@ cPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cUserIp :: Lens' CalendarsGet' (Maybe Text)
-cUserIp = lens _cUserIp (\ s a -> s{_cUserIp = a})
+cUserIP :: Lens' CalendarsGet' (Maybe Text)
+cUserIP = lens _cUserIP (\ s a -> s{_cUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cKey :: Lens' CalendarsGet' (Maybe Text)
+cKey :: Lens' CalendarsGet' (Maybe Key)
 cKey = lens _cKey (\ s a -> s{_cKey = a})
 
 -- | OAuth 2.0 token for the current user.
-cOauthToken :: Lens' CalendarsGet' (Maybe Text)
-cOauthToken
-  = lens _cOauthToken (\ s a -> s{_cOauthToken = a})
+cOAuthToken :: Lens' CalendarsGet' (Maybe OAuthToken)
+cOAuthToken
+  = lens _cOAuthToken (\ s a -> s{_cOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cFields :: Lens' CalendarsGet' (Maybe Text)
 cFields = lens _cFields (\ s a -> s{_cFields = a})
 
--- | Data format for the response.
-cAlt :: Lens' CalendarsGet' Alt
-cAlt = lens _cAlt (\ s a -> s{_cAlt = a})
+instance GoogleAuth CalendarsGet' where
+        authKey = cKey . _Just
+        authToken = cOAuthToken . _Just
 
 instance GoogleRequest CalendarsGet' where
         type Rs CalendarsGet' = Calendar
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u CalendarsGet'{..}
           = go _cQuotaUser _cCalendarId (Just _cPrettyPrint)
-              _cUserIp
+              _cUserIP
               _cKey
-              _cOauthToken
+              _cOAuthToken
               _cFields
-              (Just _cAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CalendarsGetResource)

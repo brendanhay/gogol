@@ -32,14 +32,13 @@ module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.List
     -- * Request Lenses
     , aclQuotaUser
     , aclPrettyPrint
-    , aclUserIp
+    , aclUserIP
     , aclApplicationId
     , aclKey
     , aclPageToken
-    , aclOauthToken
+    , aclOAuthToken
     , aclMaxResults
     , aclFields
-    , aclAlt
     ) where
 
 import           Network.Google.GamesConfiguration.Types
@@ -54,12 +53,12 @@ type AchievementConfigurationsListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "maxResults" Int32 :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :>
+                           QueryParam "alt" AltJSON :>
                              Get '[JSON] AchievementConfigurationListResponse
 
 -- | Returns a list of the achievement configurations in this application.
@@ -68,14 +67,13 @@ type AchievementConfigurationsListResource =
 data AchievementConfigurationsList' = AchievementConfigurationsList'
     { _aclQuotaUser     :: !(Maybe Text)
     , _aclPrettyPrint   :: !Bool
-    , _aclUserIp        :: !(Maybe Text)
+    , _aclUserIP        :: !(Maybe Text)
     , _aclApplicationId :: !Text
-    , _aclKey           :: !(Maybe Text)
+    , _aclKey           :: !(Maybe Key)
     , _aclPageToken     :: !(Maybe Text)
-    , _aclOauthToken    :: !(Maybe Text)
+    , _aclOAuthToken    :: !(Maybe OAuthToken)
     , _aclMaxResults    :: !(Maybe Int32)
     , _aclFields        :: !(Maybe Text)
-    , _aclAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementConfigurationsList'' with the minimum fields required to make a request.
@@ -86,7 +84,7 @@ data AchievementConfigurationsList' = AchievementConfigurationsList'
 --
 -- * 'aclPrettyPrint'
 --
--- * 'aclUserIp'
+-- * 'aclUserIP'
 --
 -- * 'aclApplicationId'
 --
@@ -94,13 +92,11 @@ data AchievementConfigurationsList' = AchievementConfigurationsList'
 --
 -- * 'aclPageToken'
 --
--- * 'aclOauthToken'
+-- * 'aclOAuthToken'
 --
 -- * 'aclMaxResults'
 --
 -- * 'aclFields'
---
--- * 'aclAlt'
 achievementConfigurationsList'
     :: Text -- ^ 'applicationId'
     -> AchievementConfigurationsList'
@@ -108,14 +104,13 @@ achievementConfigurationsList' pAclApplicationId_ =
     AchievementConfigurationsList'
     { _aclQuotaUser = Nothing
     , _aclPrettyPrint = True
-    , _aclUserIp = Nothing
+    , _aclUserIP = Nothing
     , _aclApplicationId = pAclApplicationId_
     , _aclKey = Nothing
     , _aclPageToken = Nothing
-    , _aclOauthToken = Nothing
+    , _aclOAuthToken = Nothing
     , _aclMaxResults = Nothing
     , _aclFields = Nothing
-    , _aclAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -133,9 +128,9 @@ aclPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-aclUserIp :: Lens' AchievementConfigurationsList' (Maybe Text)
-aclUserIp
-  = lens _aclUserIp (\ s a -> s{_aclUserIp = a})
+aclUserIP :: Lens' AchievementConfigurationsList' (Maybe Text)
+aclUserIP
+  = lens _aclUserIP (\ s a -> s{_aclUserIP = a})
 
 -- | The application ID from the Google Play developer console.
 aclApplicationId :: Lens' AchievementConfigurationsList' Text
@@ -146,7 +141,7 @@ aclApplicationId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aclKey :: Lens' AchievementConfigurationsList' (Maybe Text)
+aclKey :: Lens' AchievementConfigurationsList' (Maybe Key)
 aclKey = lens _aclKey (\ s a -> s{_aclKey = a})
 
 -- | The token returned by the previous request.
@@ -155,10 +150,10 @@ aclPageToken
   = lens _aclPageToken (\ s a -> s{_aclPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-aclOauthToken :: Lens' AchievementConfigurationsList' (Maybe Text)
-aclOauthToken
-  = lens _aclOauthToken
-      (\ s a -> s{_aclOauthToken = a})
+aclOAuthToken :: Lens' AchievementConfigurationsList' (Maybe OAuthToken)
+aclOAuthToken
+  = lens _aclOAuthToken
+      (\ s a -> s{_aclOAuthToken = a})
 
 -- | The maximum number of resource configurations to return in the response,
 -- used for paging. For any response, the actual number of resources
@@ -173,9 +168,10 @@ aclFields :: Lens' AchievementConfigurationsList' (Maybe Text)
 aclFields
   = lens _aclFields (\ s a -> s{_aclFields = a})
 
--- | Data format for the response.
-aclAlt :: Lens' AchievementConfigurationsList' Alt
-aclAlt = lens _aclAlt (\ s a -> s{_aclAlt = a})
+instance GoogleAuth AchievementConfigurationsList'
+         where
+        authKey = aclKey . _Just
+        authToken = aclOAuthToken . _Just
 
 instance GoogleRequest AchievementConfigurationsList'
          where
@@ -185,14 +181,14 @@ instance GoogleRequest AchievementConfigurationsList'
           = requestWithRoute defReq gamesConfigurationURL
         requestWithRoute r u
           AchievementConfigurationsList'{..}
-          = go _aclQuotaUser (Just _aclPrettyPrint) _aclUserIp
+          = go _aclQuotaUser (Just _aclPrettyPrint) _aclUserIP
               _aclApplicationId
               _aclKey
               _aclPageToken
-              _aclOauthToken
+              _aclOAuthToken
               _aclMaxResults
               _aclFields
-              (Just _aclAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

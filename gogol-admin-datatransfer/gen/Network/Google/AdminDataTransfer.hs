@@ -27,20 +27,20 @@ module Network.Google.AdminDataTransfer
 
     -- * REST Resources
 
-    -- ** DatatransferApplicationsGet
-    , module Network.Google.Resource.Datatransfer.Applications.Get
+    -- ** DataTransferApplicationsGet
+    , module Network.Google.Resource.DataTransfer.Applications.Get
 
-    -- ** DatatransferApplicationsList
-    , module Network.Google.Resource.Datatransfer.Applications.List
+    -- ** DataTransferApplicationsList
+    , module Network.Google.Resource.DataTransfer.Applications.List
 
-    -- ** DatatransferTransfersGet
-    , module Network.Google.Resource.Datatransfer.Transfers.Get
+    -- ** DataTransferTransfersGet
+    , module Network.Google.Resource.DataTransfer.Transfers.Get
 
-    -- ** DatatransferTransfersInsert
-    , module Network.Google.Resource.Datatransfer.Transfers.Insert
+    -- ** DataTransferTransfersInsert
+    , module Network.Google.Resource.DataTransfer.Transfers.Insert
 
-    -- ** DatatransferTransfersList
-    , module Network.Google.Resource.Datatransfer.Transfers.List
+    -- ** DataTransferTransfersList
+    , module Network.Google.Resource.DataTransfer.Transfers.List
 
     -- * Types
 
@@ -87,9 +87,6 @@ module Network.Google.AdminDataTransfer
     , dtlrKind
     , dtlrDataTransfers
 
-    -- ** Alt
-    , Alt (..)
-
     -- ** ApplicationDataTransfer
     , ApplicationDataTransfer
     , applicationDataTransfer
@@ -100,11 +97,11 @@ module Network.Google.AdminDataTransfer
 
 import           Network.Google.AdminDataTransfer.Types
 import           Network.Google.Prelude
-import           Network.Google.Resource.Datatransfer.Applications.Get
-import           Network.Google.Resource.Datatransfer.Applications.List
-import           Network.Google.Resource.Datatransfer.Transfers.Get
-import           Network.Google.Resource.Datatransfer.Transfers.Insert
-import           Network.Google.Resource.Datatransfer.Transfers.List
+import           Network.Google.Resource.DataTransfer.Applications.Get
+import           Network.Google.Resource.DataTransfer.Applications.List
+import           Network.Google.Resource.DataTransfer.Transfers.Get
+import           Network.Google.Resource.DataTransfer.Transfers.Insert
+import           Network.Google.Resource.DataTransfer.Transfers.List
 
 {- $resources
 TODO

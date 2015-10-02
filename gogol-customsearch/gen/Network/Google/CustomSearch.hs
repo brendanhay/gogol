@@ -70,7 +70,7 @@ module Network.Google.CustomSearch
     , SearchSpelling
     , searchSpelling
     , ssCorrectedQuery
-    , ssHtmlCorrectedQuery
+    , ssHTMLCorrectedQuery
 
     -- ** ResultPagemap
     , ResultPagemap
@@ -98,11 +98,11 @@ module Network.Google.CustomSearch
     , rSnippet
     , rKind
     , rLink
-    , rHtmlSnippet
-    , rHtmlFormattedUrl
+    , rHTMLSnippet
+    , rHTMLFormattedURL
     , rCacheId
-    , rFormattedUrl
-    , rHtmlTitle
+    , rFormattedURL
+    , rHTMLTitle
     , rLabels
     , rTitle
 
@@ -181,7 +181,7 @@ module Network.Google.CustomSearch
     , pDisplayLink
     , pBodyLines
     , pLink
-    , pHtmlTitle
+    , pHTMLTitle
     , pTitle
 
     -- ** Search
@@ -190,7 +190,7 @@ module Network.Google.CustomSearch
     , sQueries
     , sContext
     , sKind
-    , sUrl
+    , sURL
     , sItems
     , sSearchInformation
     , sPromotions
@@ -200,8 +200,8 @@ module Network.Google.CustomSearch
     , PromotionBodyLines
     , promotionBodyLines
     , pblLink
-    , pblUrl
-    , pblHtmlTitle
+    , pblURL
+    , pblHTMLTitle
     , pblTitle
 
     -- ** SearchCseListFilter
@@ -213,9 +213,6 @@ module Network.Google.CustomSearch
     , cfAnchor
     , cfLabelWithOp
     , cfLabel
-
-    -- ** Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.CustomSearch.Types

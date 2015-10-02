@@ -33,14 +33,13 @@ module Network.Google.Resource.Storage.Buckets.List
     , blQuotaUser
     , blPrettyPrint
     , blProject
-    , blUserIp
+    , blUserIP
     , blKey
     , blProjection
     , blPageToken
-    , blOauthToken
+    , blOAuthToken
     , blMaxResults
     , blFields
-    , blAlt
     ) where
 
 import           Network.Google.Prelude
@@ -54,14 +53,14 @@ type BucketsListResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "project" Text :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
+               QueryParam "key" Key :>
                  QueryParam "projection" StorageBucketsListProjection
                    :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "maxResults" Word32 :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Get '[JSON] Buckets
+                           QueryParam "alt" AltJSON :> Get '[JSON] Buckets
 
 -- | Retrieves a list of buckets for a given project.
 --
@@ -70,14 +69,13 @@ data BucketsList' = BucketsList'
     { _blQuotaUser   :: !(Maybe Text)
     , _blPrettyPrint :: !Bool
     , _blProject     :: !Text
-    , _blUserIp      :: !(Maybe Text)
-    , _blKey         :: !(Maybe Text)
+    , _blUserIP      :: !(Maybe Text)
+    , _blKey         :: !(Maybe Key)
     , _blProjection  :: !(Maybe StorageBucketsListProjection)
     , _blPageToken   :: !(Maybe Text)
-    , _blOauthToken  :: !(Maybe Text)
+    , _blOAuthToken  :: !(Maybe OAuthToken)
     , _blMaxResults  :: !(Maybe Word32)
     , _blFields      :: !(Maybe Text)
-    , _blAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketsList'' with the minimum fields required to make a request.
@@ -90,7 +88,7 @@ data BucketsList' = BucketsList'
 --
 -- * 'blProject'
 --
--- * 'blUserIp'
+-- * 'blUserIP'
 --
 -- * 'blKey'
 --
@@ -98,13 +96,11 @@ data BucketsList' = BucketsList'
 --
 -- * 'blPageToken'
 --
--- * 'blOauthToken'
+-- * 'blOAuthToken'
 --
 -- * 'blMaxResults'
 --
 -- * 'blFields'
---
--- * 'blAlt'
 bucketsList'
     :: Text -- ^ 'project'
     -> BucketsList'
@@ -113,14 +109,13 @@ bucketsList' pBlProject_ =
     { _blQuotaUser = Nothing
     , _blPrettyPrint = True
     , _blProject = pBlProject_
-    , _blUserIp = Nothing
+    , _blUserIP = Nothing
     , _blKey = Nothing
     , _blProjection = Nothing
     , _blPageToken = Nothing
-    , _blOauthToken = Nothing
+    , _blOAuthToken = Nothing
     , _blMaxResults = Nothing
     , _blFields = Nothing
-    , _blAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -143,13 +138,13 @@ blProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-blUserIp :: Lens' BucketsList' (Maybe Text)
-blUserIp = lens _blUserIp (\ s a -> s{_blUserIp = a})
+blUserIP :: Lens' BucketsList' (Maybe Text)
+blUserIP = lens _blUserIP (\ s a -> s{_blUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-blKey :: Lens' BucketsList' (Maybe Text)
+blKey :: Lens' BucketsList' (Maybe Key)
 blKey = lens _blKey (\ s a -> s{_blKey = a})
 
 -- | Set of properties to return. Defaults to noAcl.
@@ -164,9 +159,9 @@ blPageToken
   = lens _blPageToken (\ s a -> s{_blPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-blOauthToken :: Lens' BucketsList' (Maybe Text)
-blOauthToken
-  = lens _blOauthToken (\ s a -> s{_blOauthToken = a})
+blOAuthToken :: Lens' BucketsList' (Maybe OAuthToken)
+blOAuthToken
+  = lens _blOAuthToken (\ s a -> s{_blOAuthToken = a})
 
 -- | Maximum number of buckets to return.
 blMaxResults :: Lens' BucketsList' (Maybe Word32)
@@ -177,9 +172,9 @@ blMaxResults
 blFields :: Lens' BucketsList' (Maybe Text)
 blFields = lens _blFields (\ s a -> s{_blFields = a})
 
--- | Data format for the response.
-blAlt :: Lens' BucketsList' Alt
-blAlt = lens _blAlt (\ s a -> s{_blAlt = a})
+instance GoogleAuth BucketsList' where
+        authKey = blKey . _Just
+        authToken = blOAuthToken . _Just
 
 instance GoogleRequest BucketsList' where
         type Rs BucketsList' = Buckets
@@ -187,14 +182,14 @@ instance GoogleRequest BucketsList' where
         requestWithRoute r u BucketsList'{..}
           = go _blQuotaUser (Just _blPrettyPrint)
               (Just _blProject)
-              _blUserIp
+              _blUserIP
               _blKey
               _blProjection
               _blPageToken
-              _blOauthToken
+              _blOAuthToken
               _blMaxResults
               _blFields
-              (Just _blAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy BucketsListResource)

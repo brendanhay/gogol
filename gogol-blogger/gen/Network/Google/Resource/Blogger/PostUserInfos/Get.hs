@@ -34,15 +34,14 @@ module Network.Google.Resource.Blogger.PostUserInfos.Get
     -- * Request Lenses
     , puigQuotaUser
     , puigPrettyPrint
-    , puigUserIp
+    , puigUserIP
     , puigBlogId
     , puigMaxComments
     , puigUserId
     , puigKey
     , puigPostId
-    , puigOauthToken
+    , puigOAuthToken
     , puigFields
-    , puigAlt
     ) where
 
 import           Network.Google.Blogger.Types
@@ -61,10 +60,11 @@ type PostUserInfosGetResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "maxComments" Word32 :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :> Get '[JSON] PostUserInfo
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] PostUserInfo
 
 -- | Gets one post and user info pair, by post ID and user ID. The post user
 -- info contains per-user information about the post, such as access
@@ -74,15 +74,14 @@ type PostUserInfosGetResource =
 data PostUserInfosGet' = PostUserInfosGet'
     { _puigQuotaUser   :: !(Maybe Text)
     , _puigPrettyPrint :: !Bool
-    , _puigUserIp      :: !(Maybe Text)
+    , _puigUserIP      :: !(Maybe Text)
     , _puigBlogId      :: !Text
     , _puigMaxComments :: !(Maybe Word32)
     , _puigUserId      :: !Text
-    , _puigKey         :: !(Maybe Text)
+    , _puigKey         :: !(Maybe Key)
     , _puigPostId      :: !Text
-    , _puigOauthToken  :: !(Maybe Text)
+    , _puigOAuthToken  :: !(Maybe OAuthToken)
     , _puigFields      :: !(Maybe Text)
-    , _puigAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostUserInfosGet'' with the minimum fields required to make a request.
@@ -93,7 +92,7 @@ data PostUserInfosGet' = PostUserInfosGet'
 --
 -- * 'puigPrettyPrint'
 --
--- * 'puigUserIp'
+-- * 'puigUserIP'
 --
 -- * 'puigBlogId'
 --
@@ -105,11 +104,9 @@ data PostUserInfosGet' = PostUserInfosGet'
 --
 -- * 'puigPostId'
 --
--- * 'puigOauthToken'
+-- * 'puigOAuthToken'
 --
 -- * 'puigFields'
---
--- * 'puigAlt'
 postUserInfosGet'
     :: Text -- ^ 'blogId'
     -> Text -- ^ 'userId'
@@ -119,15 +116,14 @@ postUserInfosGet' pPuigBlogId_ pPuigUserId_ pPuigPostId_ =
     PostUserInfosGet'
     { _puigQuotaUser = Nothing
     , _puigPrettyPrint = True
-    , _puigUserIp = Nothing
+    , _puigUserIP = Nothing
     , _puigBlogId = pPuigBlogId_
     , _puigMaxComments = Nothing
     , _puigUserId = pPuigUserId_
     , _puigKey = Nothing
     , _puigPostId = pPuigPostId_
-    , _puigOauthToken = Nothing
+    , _puigOAuthToken = Nothing
     , _puigFields = Nothing
-    , _puigAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -146,9 +142,9 @@ puigPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-puigUserIp :: Lens' PostUserInfosGet' (Maybe Text)
-puigUserIp
-  = lens _puigUserIp (\ s a -> s{_puigUserIp = a})
+puigUserIP :: Lens' PostUserInfosGet' (Maybe Text)
+puigUserIP
+  = lens _puigUserIP (\ s a -> s{_puigUserIP = a})
 
 -- | The ID of the blog.
 puigBlogId :: Lens' PostUserInfosGet' Text
@@ -170,7 +166,7 @@ puigUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-puigKey :: Lens' PostUserInfosGet' (Maybe Text)
+puigKey :: Lens' PostUserInfosGet' (Maybe Key)
 puigKey = lens _puigKey (\ s a -> s{_puigKey = a})
 
 -- | The ID of the post to get.
@@ -179,34 +175,34 @@ puigPostId
   = lens _puigPostId (\ s a -> s{_puigPostId = a})
 
 -- | OAuth 2.0 token for the current user.
-puigOauthToken :: Lens' PostUserInfosGet' (Maybe Text)
-puigOauthToken
-  = lens _puigOauthToken
-      (\ s a -> s{_puigOauthToken = a})
+puigOAuthToken :: Lens' PostUserInfosGet' (Maybe OAuthToken)
+puigOAuthToken
+  = lens _puigOAuthToken
+      (\ s a -> s{_puigOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 puigFields :: Lens' PostUserInfosGet' (Maybe Text)
 puigFields
   = lens _puigFields (\ s a -> s{_puigFields = a})
 
--- | Data format for the response.
-puigAlt :: Lens' PostUserInfosGet' Alt
-puigAlt = lens _puigAlt (\ s a -> s{_puigAlt = a})
+instance GoogleAuth PostUserInfosGet' where
+        authKey = puigKey . _Just
+        authToken = puigOAuthToken . _Just
 
 instance GoogleRequest PostUserInfosGet' where
         type Rs PostUserInfosGet' = PostUserInfo
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PostUserInfosGet'{..}
           = go _puigQuotaUser (Just _puigPrettyPrint)
-              _puigUserIp
+              _puigUserIP
               _puigBlogId
               _puigMaxComments
               _puigUserId
               _puigKey
               _puigPostId
-              _puigOauthToken
+              _puigOAuthToken
               _puigFields
-              (Just _puigAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PostUserInfosGetResource)

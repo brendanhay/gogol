@@ -45,10 +45,9 @@ module Network.Google.Resource.Classroom.Courses.Students.Delete
     , csdUserId
     , csdBearerToken
     , csdKey
-    , csdOauthToken
+    , csdOAuthToken
     , csdFields
     , csdCallback
-    , csdAlt
     ) where
 
 import           Network.Google.Classroom.Types
@@ -70,11 +69,11 @@ type CoursesStudentsDeleteResource =
                          QueryParam "access_token" Text :>
                            QueryParam "uploadType" Text :>
                              QueryParam "bearer_token" Text :>
-                               QueryParam "key" Text :>
-                                 QueryParam "oauth_token" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "fields" Text :>
                                      QueryParam "callback" Text :>
-                                       QueryParam "alt" Text :>
+                                       QueryParam "alt" AltJSON :>
                                          Delete '[JSON] Empty
 
 -- | Deletes a student of a course. This method returns the following error
@@ -95,11 +94,10 @@ data CoursesStudentsDelete' = CoursesStudentsDelete'
     , _csdUploadType     :: !(Maybe Text)
     , _csdUserId         :: !Text
     , _csdBearerToken    :: !(Maybe Text)
-    , _csdKey            :: !(Maybe Text)
-    , _csdOauthToken     :: !(Maybe Text)
+    , _csdKey            :: !(Maybe Key)
+    , _csdOAuthToken     :: !(Maybe OAuthToken)
     , _csdFields         :: !(Maybe Text)
     , _csdCallback       :: !(Maybe Text)
-    , _csdAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CoursesStudentsDelete'' with the minimum fields required to make a request.
@@ -128,13 +126,11 @@ data CoursesStudentsDelete' = CoursesStudentsDelete'
 --
 -- * 'csdKey'
 --
--- * 'csdOauthToken'
+-- * 'csdOAuthToken'
 --
 -- * 'csdFields'
 --
 -- * 'csdCallback'
---
--- * 'csdAlt'
 coursesStudentsDelete'
     :: Text -- ^ 'courseId'
     -> Text -- ^ 'userId'
@@ -152,10 +148,9 @@ coursesStudentsDelete' pCsdCourseId_ pCsdUserId_ =
     , _csdUserId = pCsdUserId_
     , _csdBearerToken = Nothing
     , _csdKey = Nothing
-    , _csdOauthToken = Nothing
+    , _csdOAuthToken = Nothing
     , _csdFields = Nothing
     , _csdCallback = Nothing
-    , _csdAlt = "json"
     }
 
 -- | V1 error format.
@@ -220,14 +215,14 @@ csdBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-csdKey :: Lens' CoursesStudentsDelete' (Maybe Text)
+csdKey :: Lens' CoursesStudentsDelete' (Maybe Key)
 csdKey = lens _csdKey (\ s a -> s{_csdKey = a})
 
 -- | OAuth 2.0 token for the current user.
-csdOauthToken :: Lens' CoursesStudentsDelete' (Maybe Text)
-csdOauthToken
-  = lens _csdOauthToken
-      (\ s a -> s{_csdOauthToken = a})
+csdOAuthToken :: Lens' CoursesStudentsDelete' (Maybe OAuthToken)
+csdOAuthToken
+  = lens _csdOAuthToken
+      (\ s a -> s{_csdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 csdFields :: Lens' CoursesStudentsDelete' (Maybe Text)
@@ -239,9 +234,9 @@ csdCallback :: Lens' CoursesStudentsDelete' (Maybe Text)
 csdCallback
   = lens _csdCallback (\ s a -> s{_csdCallback = a})
 
--- | Data format for response.
-csdAlt :: Lens' CoursesStudentsDelete' Text
-csdAlt = lens _csdAlt (\ s a -> s{_csdAlt = a})
+instance GoogleAuth CoursesStudentsDelete' where
+        authKey = csdKey . _Just
+        authToken = csdOAuthToken . _Just
 
 instance GoogleRequest CoursesStudentsDelete' where
         type Rs CoursesStudentsDelete' = Empty
@@ -256,10 +251,10 @@ instance GoogleRequest CoursesStudentsDelete' where
               _csdUserId
               _csdBearerToken
               _csdKey
-              _csdOauthToken
+              _csdOAuthToken
               _csdFields
               _csdCallback
-              (Just _csdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CoursesStudentsDeleteResource)

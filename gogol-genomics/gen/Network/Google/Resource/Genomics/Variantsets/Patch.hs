@@ -34,11 +34,11 @@ module Network.Google.Resource.Genomics.Variantsets.Patch
     , vpQuotaUser
     , vpPrettyPrint
     , vpVariantSetId
-    , vpUserIp
+    , vpUserIP
     , vpKey
-    , vpOauthToken
+    , vpVariantSet
+    , vpOAuthToken
     , vpFields
-    , vpAlt
     ) where
 
 import           Network.Google.Genomics.Types
@@ -52,10 +52,12 @@ type VariantsetsPatchResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Patch '[JSON] VariantSet
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] VariantSet :>
+                         Patch '[JSON] VariantSet
 
 -- | Updates a variant set\'s metadata. All other modifications are silently
 -- ignored. This method supports patch semantics.
@@ -65,11 +67,11 @@ data VariantsetsPatch' = VariantsetsPatch'
     { _vpQuotaUser    :: !(Maybe Text)
     , _vpPrettyPrint  :: !Bool
     , _vpVariantSetId :: !Text
-    , _vpUserIp       :: !(Maybe Text)
-    , _vpKey          :: !(Maybe Text)
-    , _vpOauthToken   :: !(Maybe Text)
+    , _vpUserIP       :: !(Maybe Text)
+    , _vpKey          :: !(Maybe Key)
+    , _vpVariantSet   :: !VariantSet
+    , _vpOAuthToken   :: !(Maybe OAuthToken)
     , _vpFields       :: !(Maybe Text)
-    , _vpAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantsetsPatch'' with the minimum fields required to make a request.
@@ -82,28 +84,29 @@ data VariantsetsPatch' = VariantsetsPatch'
 --
 -- * 'vpVariantSetId'
 --
--- * 'vpUserIp'
+-- * 'vpUserIP'
 --
 -- * 'vpKey'
 --
--- * 'vpOauthToken'
+-- * 'vpVariantSet'
+--
+-- * 'vpOAuthToken'
 --
 -- * 'vpFields'
---
--- * 'vpAlt'
 variantsetsPatch'
     :: Text -- ^ 'variantSetId'
+    -> VariantSet -- ^ 'VariantSet'
     -> VariantsetsPatch'
-variantsetsPatch' pVpVariantSetId_ =
+variantsetsPatch' pVpVariantSetId_ pVpVariantSet_ =
     VariantsetsPatch'
     { _vpQuotaUser = Nothing
     , _vpPrettyPrint = True
     , _vpVariantSetId = pVpVariantSetId_
-    , _vpUserIp = Nothing
+    , _vpUserIP = Nothing
     , _vpKey = Nothing
-    , _vpOauthToken = Nothing
+    , _vpVariantSet = pVpVariantSet_
+    , _vpOAuthToken = Nothing
     , _vpFields = Nothing
-    , _vpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,27 +130,32 @@ vpVariantSetId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-vpUserIp :: Lens' VariantsetsPatch' (Maybe Text)
-vpUserIp = lens _vpUserIp (\ s a -> s{_vpUserIp = a})
+vpUserIP :: Lens' VariantsetsPatch' (Maybe Text)
+vpUserIP = lens _vpUserIP (\ s a -> s{_vpUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vpKey :: Lens' VariantsetsPatch' (Maybe Text)
+vpKey :: Lens' VariantsetsPatch' (Maybe Key)
 vpKey = lens _vpKey (\ s a -> s{_vpKey = a})
 
+-- | Multipart request metadata.
+vpVariantSet :: Lens' VariantsetsPatch' VariantSet
+vpVariantSet
+  = lens _vpVariantSet (\ s a -> s{_vpVariantSet = a})
+
 -- | OAuth 2.0 token for the current user.
-vpOauthToken :: Lens' VariantsetsPatch' (Maybe Text)
-vpOauthToken
-  = lens _vpOauthToken (\ s a -> s{_vpOauthToken = a})
+vpOAuthToken :: Lens' VariantsetsPatch' (Maybe OAuthToken)
+vpOAuthToken
+  = lens _vpOAuthToken (\ s a -> s{_vpOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 vpFields :: Lens' VariantsetsPatch' (Maybe Text)
 vpFields = lens _vpFields (\ s a -> s{_vpFields = a})
 
--- | Data format for the response.
-vpAlt :: Lens' VariantsetsPatch' Alt
-vpAlt = lens _vpAlt (\ s a -> s{_vpAlt = a})
+instance GoogleAuth VariantsetsPatch' where
+        authKey = vpKey . _Just
+        authToken = vpOAuthToken . _Just
 
 instance GoogleRequest VariantsetsPatch' where
         type Rs VariantsetsPatch' = VariantSet
@@ -155,11 +163,12 @@ instance GoogleRequest VariantsetsPatch' where
         requestWithRoute r u VariantsetsPatch'{..}
           = go _vpQuotaUser (Just _vpPrettyPrint)
               _vpVariantSetId
-              _vpUserIp
+              _vpUserIP
               _vpKey
-              _vpOauthToken
+              _vpOAuthToken
               _vpFields
-              (Just _vpAlt)
+              (Just AltJSON)
+              _vpVariantSet
           where go
                   = clientWithRoute
                       (Proxy :: Proxy VariantsetsPatchResource)

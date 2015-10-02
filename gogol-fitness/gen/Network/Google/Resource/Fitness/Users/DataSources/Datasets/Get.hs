@@ -36,16 +36,15 @@ module Network.Google.Resource.Fitness.Users.DataSources.Datasets.Get
     -- * Request Lenses
     , udsdgQuotaUser
     , udsdgPrettyPrint
-    , udsdgUserIp
+    , udsdgUserIP
     , udsdgDataSourceId
     , udsdgUserId
     , udsdgKey
     , udsdgDatasetId
     , udsdgLimit
     , udsdgPageToken
-    , udsdgOauthToken
+    , udsdgOAuthToken
     , udsdgFields
-    , udsdgAlt
     ) where
 
 import           Network.Google.Fitness.Types
@@ -62,12 +61,12 @@ type UsersDataSourcesDatasetsGetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
+                     QueryParam "key" Key :>
                        QueryParam "limit" Int32 :>
                          QueryParam "pageToken" Text :>
-                           QueryParam "oauth_token" Text :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :> Get '[JSON] Dataset
+                               QueryParam "alt" AltJSON :> Get '[JSON] Dataset
 
 -- | Returns a dataset containing all data points whose start and end times
 -- overlap with the specified range of the dataset minimum start time and
@@ -79,16 +78,15 @@ type UsersDataSourcesDatasetsGetResource =
 data UsersDataSourcesDatasetsGet' = UsersDataSourcesDatasetsGet'
     { _udsdgQuotaUser    :: !(Maybe Text)
     , _udsdgPrettyPrint  :: !Bool
-    , _udsdgUserIp       :: !(Maybe Text)
+    , _udsdgUserIP       :: !(Maybe Text)
     , _udsdgDataSourceId :: !Text
     , _udsdgUserId       :: !Text
-    , _udsdgKey          :: !(Maybe Text)
+    , _udsdgKey          :: !(Maybe Key)
     , _udsdgDatasetId    :: !Text
     , _udsdgLimit        :: !(Maybe Int32)
     , _udsdgPageToken    :: !(Maybe Text)
-    , _udsdgOauthToken   :: !(Maybe Text)
+    , _udsdgOAuthToken   :: !(Maybe OAuthToken)
     , _udsdgFields       :: !(Maybe Text)
-    , _udsdgAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDataSourcesDatasetsGet'' with the minimum fields required to make a request.
@@ -99,7 +97,7 @@ data UsersDataSourcesDatasetsGet' = UsersDataSourcesDatasetsGet'
 --
 -- * 'udsdgPrettyPrint'
 --
--- * 'udsdgUserIp'
+-- * 'udsdgUserIP'
 --
 -- * 'udsdgDataSourceId'
 --
@@ -113,11 +111,9 @@ data UsersDataSourcesDatasetsGet' = UsersDataSourcesDatasetsGet'
 --
 -- * 'udsdgPageToken'
 --
--- * 'udsdgOauthToken'
+-- * 'udsdgOAuthToken'
 --
 -- * 'udsdgFields'
---
--- * 'udsdgAlt'
 usersDataSourcesDatasetsGet'
     :: Text -- ^ 'dataSourceId'
     -> Text -- ^ 'userId'
@@ -127,16 +123,15 @@ usersDataSourcesDatasetsGet' pUdsdgDataSourceId_ pUdsdgUserId_ pUdsdgDatasetId_ 
     UsersDataSourcesDatasetsGet'
     { _udsdgQuotaUser = Nothing
     , _udsdgPrettyPrint = True
-    , _udsdgUserIp = Nothing
+    , _udsdgUserIP = Nothing
     , _udsdgDataSourceId = pUdsdgDataSourceId_
     , _udsdgUserId = pUdsdgUserId_
     , _udsdgKey = Nothing
     , _udsdgDatasetId = pUdsdgDatasetId_
     , _udsdgLimit = Nothing
     , _udsdgPageToken = Nothing
-    , _udsdgOauthToken = Nothing
+    , _udsdgOAuthToken = Nothing
     , _udsdgFields = Nothing
-    , _udsdgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -155,9 +150,9 @@ udsdgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-udsdgUserIp :: Lens' UsersDataSourcesDatasetsGet' (Maybe Text)
-udsdgUserIp
-  = lens _udsdgUserIp (\ s a -> s{_udsdgUserIp = a})
+udsdgUserIP :: Lens' UsersDataSourcesDatasetsGet' (Maybe Text)
+udsdgUserIP
+  = lens _udsdgUserIP (\ s a -> s{_udsdgUserIP = a})
 
 -- | The data stream ID of the data source that created the dataset.
 udsdgDataSourceId :: Lens' UsersDataSourcesDatasetsGet' Text
@@ -174,7 +169,7 @@ udsdgUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-udsdgKey :: Lens' UsersDataSourcesDatasetsGet' (Maybe Text)
+udsdgKey :: Lens' UsersDataSourcesDatasetsGet' (Maybe Key)
 udsdgKey = lens _udsdgKey (\ s a -> s{_udsdgKey = a})
 
 -- | Dataset identifier that is a composite of the minimum data point start
@@ -204,19 +199,20 @@ udsdgPageToken
       (\ s a -> s{_udsdgPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-udsdgOauthToken :: Lens' UsersDataSourcesDatasetsGet' (Maybe Text)
-udsdgOauthToken
-  = lens _udsdgOauthToken
-      (\ s a -> s{_udsdgOauthToken = a})
+udsdgOAuthToken :: Lens' UsersDataSourcesDatasetsGet' (Maybe OAuthToken)
+udsdgOAuthToken
+  = lens _udsdgOAuthToken
+      (\ s a -> s{_udsdgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 udsdgFields :: Lens' UsersDataSourcesDatasetsGet' (Maybe Text)
 udsdgFields
   = lens _udsdgFields (\ s a -> s{_udsdgFields = a})
 
--- | Data format for the response.
-udsdgAlt :: Lens' UsersDataSourcesDatasetsGet' Alt
-udsdgAlt = lens _udsdgAlt (\ s a -> s{_udsdgAlt = a})
+instance GoogleAuth UsersDataSourcesDatasetsGet'
+         where
+        authKey = udsdgKey . _Just
+        authToken = udsdgOAuthToken . _Just
 
 instance GoogleRequest UsersDataSourcesDatasetsGet'
          where
@@ -224,16 +220,16 @@ instance GoogleRequest UsersDataSourcesDatasetsGet'
         request = requestWithRoute defReq fitnessURL
         requestWithRoute r u UsersDataSourcesDatasetsGet'{..}
           = go _udsdgQuotaUser (Just _udsdgPrettyPrint)
-              _udsdgUserIp
+              _udsdgUserIP
               _udsdgDataSourceId
               _udsdgUserId
               _udsdgKey
               _udsdgDatasetId
               _udsdgLimit
               _udsdgPageToken
-              _udsdgOauthToken
+              _udsdgOAuthToken
               _udsdgFields
-              (Just _udsdgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersDataSourcesDatasetsGetResource)

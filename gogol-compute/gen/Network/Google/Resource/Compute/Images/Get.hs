@@ -34,11 +34,10 @@ module Network.Google.Resource.Compute.Images.Get
     , imamImage
     , imamPrettyPrint
     , imamProject
-    , imamUserIp
+    , imamUserIP
     , imamKey
-    , imamOauthToken
+    , imamOAuthToken
     , imamFields
-    , imamAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -54,10 +53,10 @@ type ImagesGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] Image
+                         QueryParam "alt" AltJSON :> Get '[JSON] Image
 
 -- | Returns the specified image resource.
 --
@@ -67,11 +66,10 @@ data ImagesGet' = ImagesGet'
     , _imamImage       :: !Text
     , _imamPrettyPrint :: !Bool
     , _imamProject     :: !Text
-    , _imamUserIp      :: !(Maybe Text)
-    , _imamKey         :: !(Maybe Text)
-    , _imamOauthToken  :: !(Maybe Text)
+    , _imamUserIP      :: !(Maybe Text)
+    , _imamKey         :: !(Maybe Key)
+    , _imamOAuthToken  :: !(Maybe OAuthToken)
     , _imamFields      :: !(Maybe Text)
-    , _imamAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ImagesGet'' with the minimum fields required to make a request.
@@ -86,15 +84,13 @@ data ImagesGet' = ImagesGet'
 --
 -- * 'imamProject'
 --
--- * 'imamUserIp'
+-- * 'imamUserIP'
 --
 -- * 'imamKey'
 --
--- * 'imamOauthToken'
+-- * 'imamOAuthToken'
 --
 -- * 'imamFields'
---
--- * 'imamAlt'
 imagesGet'
     :: Text -- ^ 'image'
     -> Text -- ^ 'project'
@@ -105,11 +101,10 @@ imagesGet' pImamImage_ pImamProject_ =
     , _imamImage = pImamImage_
     , _imamPrettyPrint = True
     , _imamProject = pImamProject_
-    , _imamUserIp = Nothing
+    , _imamUserIP = Nothing
     , _imamKey = Nothing
-    , _imamOauthToken = Nothing
+    , _imamOAuthToken = Nothing
     , _imamFields = Nothing
-    , _imamAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -138,30 +133,30 @@ imamProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-imamUserIp :: Lens' ImagesGet' (Maybe Text)
-imamUserIp
-  = lens _imamUserIp (\ s a -> s{_imamUserIp = a})
+imamUserIP :: Lens' ImagesGet' (Maybe Text)
+imamUserIP
+  = lens _imamUserIP (\ s a -> s{_imamUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-imamKey :: Lens' ImagesGet' (Maybe Text)
+imamKey :: Lens' ImagesGet' (Maybe Key)
 imamKey = lens _imamKey (\ s a -> s{_imamKey = a})
 
 -- | OAuth 2.0 token for the current user.
-imamOauthToken :: Lens' ImagesGet' (Maybe Text)
-imamOauthToken
-  = lens _imamOauthToken
-      (\ s a -> s{_imamOauthToken = a})
+imamOAuthToken :: Lens' ImagesGet' (Maybe OAuthToken)
+imamOAuthToken
+  = lens _imamOAuthToken
+      (\ s a -> s{_imamOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 imamFields :: Lens' ImagesGet' (Maybe Text)
 imamFields
   = lens _imamFields (\ s a -> s{_imamFields = a})
 
--- | Data format for the response.
-imamAlt :: Lens' ImagesGet' Alt
-imamAlt = lens _imamAlt (\ s a -> s{_imamAlt = a})
+instance GoogleAuth ImagesGet' where
+        authKey = imamKey . _Just
+        authToken = imamOAuthToken . _Just
 
 instance GoogleRequest ImagesGet' where
         type Rs ImagesGet' = Image
@@ -170,11 +165,11 @@ instance GoogleRequest ImagesGet' where
           = go _imamQuotaUser _imamImage
               (Just _imamPrettyPrint)
               _imamProject
-              _imamUserIp
+              _imamUserIP
               _imamKey
-              _imamOauthToken
+              _imamOAuthToken
               _imamFields
-              (Just _imamAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy ImagesGetResource)
                       r

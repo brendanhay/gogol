@@ -32,12 +32,12 @@ module Network.Google.Resource.YouTube.Videos.ReportAbuse
     -- * Request Lenses
     , vraQuotaUser
     , vraPrettyPrint
-    , vraUserIp
+    , vraUserIP
     , vraOnBehalfOfContentOwner
     , vraKey
-    , vraOauthToken
+    , vraVideoAbuseReport
+    , vraOAuthToken
     , vraFields
-    , vraAlt
     ) where
 
 import           Network.Google.Prelude
@@ -52,10 +52,11 @@ type VideosReportAbuseResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "onBehalfOfContentOwner" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] ()
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] VideoAbuseReport :> Post '[JSON] ()
 
 -- | Report abuse for a video.
 --
@@ -63,12 +64,12 @@ type VideosReportAbuseResource =
 data VideosReportAbuse' = VideosReportAbuse'
     { _vraQuotaUser              :: !(Maybe Text)
     , _vraPrettyPrint            :: !Bool
-    , _vraUserIp                 :: !(Maybe Text)
+    , _vraUserIP                 :: !(Maybe Text)
     , _vraOnBehalfOfContentOwner :: !(Maybe Text)
-    , _vraKey                    :: !(Maybe Text)
-    , _vraOauthToken             :: !(Maybe Text)
+    , _vraKey                    :: !(Maybe Key)
+    , _vraVideoAbuseReport       :: !VideoAbuseReport
+    , _vraOAuthToken             :: !(Maybe OAuthToken)
     , _vraFields                 :: !(Maybe Text)
-    , _vraAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideosReportAbuse'' with the minimum fields required to make a request.
@@ -79,29 +80,30 @@ data VideosReportAbuse' = VideosReportAbuse'
 --
 -- * 'vraPrettyPrint'
 --
--- * 'vraUserIp'
+-- * 'vraUserIP'
 --
 -- * 'vraOnBehalfOfContentOwner'
 --
 -- * 'vraKey'
 --
--- * 'vraOauthToken'
+-- * 'vraVideoAbuseReport'
+--
+-- * 'vraOAuthToken'
 --
 -- * 'vraFields'
---
--- * 'vraAlt'
 videosReportAbuse'
-    :: VideosReportAbuse'
-videosReportAbuse' =
+    :: VideoAbuseReport -- ^ 'VideoAbuseReport'
+    -> VideosReportAbuse'
+videosReportAbuse' pVraVideoAbuseReport_ =
     VideosReportAbuse'
     { _vraQuotaUser = Nothing
     , _vraPrettyPrint = True
-    , _vraUserIp = Nothing
+    , _vraUserIP = Nothing
     , _vraOnBehalfOfContentOwner = Nothing
     , _vraKey = Nothing
-    , _vraOauthToken = Nothing
+    , _vraVideoAbuseReport = pVraVideoAbuseReport_
+    , _vraOAuthToken = Nothing
     , _vraFields = Nothing
-    , _vraAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -119,9 +121,9 @@ vraPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-vraUserIp :: Lens' VideosReportAbuse' (Maybe Text)
-vraUserIp
-  = lens _vraUserIp (\ s a -> s{_vraUserIp = a})
+vraUserIP :: Lens' VideosReportAbuse' (Maybe Text)
+vraUserIP
+  = lens _vraUserIP (\ s a -> s{_vraUserIP = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
@@ -141,34 +143,41 @@ vraOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vraKey :: Lens' VideosReportAbuse' (Maybe Text)
+vraKey :: Lens' VideosReportAbuse' (Maybe Key)
 vraKey = lens _vraKey (\ s a -> s{_vraKey = a})
 
+-- | Multipart request metadata.
+vraVideoAbuseReport :: Lens' VideosReportAbuse' VideoAbuseReport
+vraVideoAbuseReport
+  = lens _vraVideoAbuseReport
+      (\ s a -> s{_vraVideoAbuseReport = a})
+
 -- | OAuth 2.0 token for the current user.
-vraOauthToken :: Lens' VideosReportAbuse' (Maybe Text)
-vraOauthToken
-  = lens _vraOauthToken
-      (\ s a -> s{_vraOauthToken = a})
+vraOAuthToken :: Lens' VideosReportAbuse' (Maybe OAuthToken)
+vraOAuthToken
+  = lens _vraOAuthToken
+      (\ s a -> s{_vraOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 vraFields :: Lens' VideosReportAbuse' (Maybe Text)
 vraFields
   = lens _vraFields (\ s a -> s{_vraFields = a})
 
--- | Data format for the response.
-vraAlt :: Lens' VideosReportAbuse' Alt
-vraAlt = lens _vraAlt (\ s a -> s{_vraAlt = a})
+instance GoogleAuth VideosReportAbuse' where
+        authKey = vraKey . _Just
+        authToken = vraOAuthToken . _Just
 
 instance GoogleRequest VideosReportAbuse' where
         type Rs VideosReportAbuse' = ()
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u VideosReportAbuse'{..}
-          = go _vraQuotaUser (Just _vraPrettyPrint) _vraUserIp
+          = go _vraQuotaUser (Just _vraPrettyPrint) _vraUserIP
               _vraOnBehalfOfContentOwner
               _vraKey
-              _vraOauthToken
+              _vraOAuthToken
               _vraFields
-              (Just _vraAlt)
+              (Just AltJSON)
+              _vraVideoAbuseReport
           where go
                   = clientWithRoute
                       (Proxy :: Proxy VideosReportAbuseResource)

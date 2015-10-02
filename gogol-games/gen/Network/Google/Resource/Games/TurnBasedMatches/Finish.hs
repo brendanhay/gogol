@@ -34,13 +34,13 @@ module Network.Google.Resource.Games.TurnBasedMatches.Finish
     -- * Request Lenses
     , tbmfQuotaUser
     , tbmfPrettyPrint
-    , tbmfUserIp
+    , tbmfUserIP
     , tbmfKey
     , tbmfLanguage
-    , tbmfOauthToken
+    , tbmfTurnBasedMatchResults
+    , tbmfOAuthToken
     , tbmfMatchId
     , tbmfFields
-    , tbmfAlt
     ) where
 
 import           Network.Google.Games.Types
@@ -55,11 +55,13 @@ type TurnBasedMatchesFinishResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "language" Text :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Put '[JSON] TurnBasedMatch
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] TurnBasedMatchResults :>
+                             Put '[JSON] TurnBasedMatch
 
 -- | Finish a turn-based match. Each player should make this call once, after
 -- all results are in. Only the player whose turn it is may make the first
@@ -67,15 +69,15 @@ type TurnBasedMatchesFinishResource =
 --
 -- /See:/ 'turnBasedMatchesFinish'' smart constructor.
 data TurnBasedMatchesFinish' = TurnBasedMatchesFinish'
-    { _tbmfQuotaUser   :: !(Maybe Text)
-    , _tbmfPrettyPrint :: !Bool
-    , _tbmfUserIp      :: !(Maybe Text)
-    , _tbmfKey         :: !(Maybe Text)
-    , _tbmfLanguage    :: !(Maybe Text)
-    , _tbmfOauthToken  :: !(Maybe Text)
-    , _tbmfMatchId     :: !Text
-    , _tbmfFields      :: !(Maybe Text)
-    , _tbmfAlt         :: !Alt
+    { _tbmfQuotaUser             :: !(Maybe Text)
+    , _tbmfPrettyPrint           :: !Bool
+    , _tbmfUserIP                :: !(Maybe Text)
+    , _tbmfKey                   :: !(Maybe Key)
+    , _tbmfLanguage              :: !(Maybe Text)
+    , _tbmfTurnBasedMatchResults :: !TurnBasedMatchResults
+    , _tbmfOAuthToken            :: !(Maybe OAuthToken)
+    , _tbmfMatchId               :: !Text
+    , _tbmfFields                :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchesFinish'' with the minimum fields required to make a request.
@@ -86,33 +88,34 @@ data TurnBasedMatchesFinish' = TurnBasedMatchesFinish'
 --
 -- * 'tbmfPrettyPrint'
 --
--- * 'tbmfUserIp'
+-- * 'tbmfUserIP'
 --
 -- * 'tbmfKey'
 --
 -- * 'tbmfLanguage'
 --
--- * 'tbmfOauthToken'
+-- * 'tbmfTurnBasedMatchResults'
+--
+-- * 'tbmfOAuthToken'
 --
 -- * 'tbmfMatchId'
 --
 -- * 'tbmfFields'
---
--- * 'tbmfAlt'
 turnBasedMatchesFinish'
-    :: Text -- ^ 'matchId'
+    :: TurnBasedMatchResults -- ^ 'TurnBasedMatchResults'
+    -> Text -- ^ 'matchId'
     -> TurnBasedMatchesFinish'
-turnBasedMatchesFinish' pTbmfMatchId_ =
+turnBasedMatchesFinish' pTbmfTurnBasedMatchResults_ pTbmfMatchId_ =
     TurnBasedMatchesFinish'
     { _tbmfQuotaUser = Nothing
     , _tbmfPrettyPrint = True
-    , _tbmfUserIp = Nothing
+    , _tbmfUserIP = Nothing
     , _tbmfKey = Nothing
     , _tbmfLanguage = Nothing
-    , _tbmfOauthToken = Nothing
+    , _tbmfTurnBasedMatchResults = pTbmfTurnBasedMatchResults_
+    , _tbmfOAuthToken = Nothing
     , _tbmfMatchId = pTbmfMatchId_
     , _tbmfFields = Nothing
-    , _tbmfAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -131,14 +134,14 @@ tbmfPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tbmfUserIp :: Lens' TurnBasedMatchesFinish' (Maybe Text)
-tbmfUserIp
-  = lens _tbmfUserIp (\ s a -> s{_tbmfUserIp = a})
+tbmfUserIP :: Lens' TurnBasedMatchesFinish' (Maybe Text)
+tbmfUserIP
+  = lens _tbmfUserIP (\ s a -> s{_tbmfUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tbmfKey :: Lens' TurnBasedMatchesFinish' (Maybe Text)
+tbmfKey :: Lens' TurnBasedMatchesFinish' (Maybe Key)
 tbmfKey = lens _tbmfKey (\ s a -> s{_tbmfKey = a})
 
 -- | The preferred language to use for strings returned by this method.
@@ -146,11 +149,17 @@ tbmfLanguage :: Lens' TurnBasedMatchesFinish' (Maybe Text)
 tbmfLanguage
   = lens _tbmfLanguage (\ s a -> s{_tbmfLanguage = a})
 
+-- | Multipart request metadata.
+tbmfTurnBasedMatchResults :: Lens' TurnBasedMatchesFinish' TurnBasedMatchResults
+tbmfTurnBasedMatchResults
+  = lens _tbmfTurnBasedMatchResults
+      (\ s a -> s{_tbmfTurnBasedMatchResults = a})
+
 -- | OAuth 2.0 token for the current user.
-tbmfOauthToken :: Lens' TurnBasedMatchesFinish' (Maybe Text)
-tbmfOauthToken
-  = lens _tbmfOauthToken
-      (\ s a -> s{_tbmfOauthToken = a})
+tbmfOAuthToken :: Lens' TurnBasedMatchesFinish' (Maybe OAuthToken)
+tbmfOAuthToken
+  = lens _tbmfOAuthToken
+      (\ s a -> s{_tbmfOAuthToken = a})
 
 -- | The ID of the match.
 tbmfMatchId :: Lens' TurnBasedMatchesFinish' Text
@@ -162,22 +171,23 @@ tbmfFields :: Lens' TurnBasedMatchesFinish' (Maybe Text)
 tbmfFields
   = lens _tbmfFields (\ s a -> s{_tbmfFields = a})
 
--- | Data format for the response.
-tbmfAlt :: Lens' TurnBasedMatchesFinish' Alt
-tbmfAlt = lens _tbmfAlt (\ s a -> s{_tbmfAlt = a})
+instance GoogleAuth TurnBasedMatchesFinish' where
+        authKey = tbmfKey . _Just
+        authToken = tbmfOAuthToken . _Just
 
 instance GoogleRequest TurnBasedMatchesFinish' where
         type Rs TurnBasedMatchesFinish' = TurnBasedMatch
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u TurnBasedMatchesFinish'{..}
           = go _tbmfQuotaUser (Just _tbmfPrettyPrint)
-              _tbmfUserIp
+              _tbmfUserIP
               _tbmfKey
               _tbmfLanguage
-              _tbmfOauthToken
+              _tbmfOAuthToken
               _tbmfMatchId
               _tbmfFields
-              (Just _tbmfAlt)
+              (Just AltJSON)
+              _tbmfTurnBasedMatchResults
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TurnBasedMatchesFinishResource)

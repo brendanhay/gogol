@@ -34,12 +34,11 @@ module Network.Google.Resource.Compute.ZoneOperations.Get
     , zogPrettyPrint
     , zogProject
     , zogOperation
-    , zogUserIp
+    , zogUserIP
     , zogZone
     , zogKey
-    , zogOauthToken
+    , zogOAuthToken
     , zogFields
-    , zogAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -56,10 +55,10 @@ type ZoneOperationsGetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Get '[JSON] Operation
+                           QueryParam "alt" AltJSON :> Get '[JSON] Operation
 
 -- | Retrieves the specified zone-specific Operations resource.
 --
@@ -69,12 +68,11 @@ data ZoneOperationsGet' = ZoneOperationsGet'
     , _zogPrettyPrint :: !Bool
     , _zogProject     :: !Text
     , _zogOperation   :: !Text
-    , _zogUserIp      :: !(Maybe Text)
+    , _zogUserIP      :: !(Maybe Text)
     , _zogZone        :: !Text
-    , _zogKey         :: !(Maybe Text)
-    , _zogOauthToken  :: !(Maybe Text)
+    , _zogKey         :: !(Maybe Key)
+    , _zogOAuthToken  :: !(Maybe OAuthToken)
     , _zogFields      :: !(Maybe Text)
-    , _zogAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZoneOperationsGet'' with the minimum fields required to make a request.
@@ -89,17 +87,15 @@ data ZoneOperationsGet' = ZoneOperationsGet'
 --
 -- * 'zogOperation'
 --
--- * 'zogUserIp'
+-- * 'zogUserIP'
 --
 -- * 'zogZone'
 --
 -- * 'zogKey'
 --
--- * 'zogOauthToken'
+-- * 'zogOAuthToken'
 --
 -- * 'zogFields'
---
--- * 'zogAlt'
 zoneOperationsGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'operation'
@@ -111,12 +107,11 @@ zoneOperationsGet' pZogProject_ pZogOperation_ pZogZone_ =
     , _zogPrettyPrint = True
     , _zogProject = pZogProject_
     , _zogOperation = pZogOperation_
-    , _zogUserIp = Nothing
+    , _zogUserIP = Nothing
     , _zogZone = pZogZone_
     , _zogKey = Nothing
-    , _zogOauthToken = Nothing
+    , _zogOAuthToken = Nothing
     , _zogFields = Nothing
-    , _zogAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -144,9 +139,9 @@ zogOperation
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-zogUserIp :: Lens' ZoneOperationsGet' (Maybe Text)
-zogUserIp
-  = lens _zogUserIp (\ s a -> s{_zogUserIp = a})
+zogUserIP :: Lens' ZoneOperationsGet' (Maybe Text)
+zogUserIP
+  = lens _zogUserIP (\ s a -> s{_zogUserIP = a})
 
 -- | Name of the zone scoping this request.
 zogZone :: Lens' ZoneOperationsGet' Text
@@ -155,23 +150,23 @@ zogZone = lens _zogZone (\ s a -> s{_zogZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-zogKey :: Lens' ZoneOperationsGet' (Maybe Text)
+zogKey :: Lens' ZoneOperationsGet' (Maybe Key)
 zogKey = lens _zogKey (\ s a -> s{_zogKey = a})
 
 -- | OAuth 2.0 token for the current user.
-zogOauthToken :: Lens' ZoneOperationsGet' (Maybe Text)
-zogOauthToken
-  = lens _zogOauthToken
-      (\ s a -> s{_zogOauthToken = a})
+zogOAuthToken :: Lens' ZoneOperationsGet' (Maybe OAuthToken)
+zogOAuthToken
+  = lens _zogOAuthToken
+      (\ s a -> s{_zogOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 zogFields :: Lens' ZoneOperationsGet' (Maybe Text)
 zogFields
   = lens _zogFields (\ s a -> s{_zogFields = a})
 
--- | Data format for the response.
-zogAlt :: Lens' ZoneOperationsGet' Alt
-zogAlt = lens _zogAlt (\ s a -> s{_zogAlt = a})
+instance GoogleAuth ZoneOperationsGet' where
+        authKey = zogKey . _Just
+        authToken = zogOAuthToken . _Just
 
 instance GoogleRequest ZoneOperationsGet' where
         type Rs ZoneOperationsGet' = Operation
@@ -179,12 +174,12 @@ instance GoogleRequest ZoneOperationsGet' where
         requestWithRoute r u ZoneOperationsGet'{..}
           = go _zogQuotaUser (Just _zogPrettyPrint) _zogProject
               _zogOperation
-              _zogUserIp
+              _zogUserIP
               _zogZone
               _zogKey
-              _zogOauthToken
+              _zogOAuthToken
               _zogFields
-              (Just _zogAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ZoneOperationsGetResource)

@@ -34,11 +34,10 @@ module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Get
     , acgQuotaUser
     , acgPrettyPrint
     , acgAchievementId
-    , acgUserIp
+    , acgUserIP
     , acgKey
-    , acgOauthToken
+    , acgOAuthToken
     , acgFields
-    , acgAlt
     ) where
 
 import           Network.Google.GamesConfiguration.Types
@@ -52,10 +51,10 @@ type AchievementConfigurationsGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :>
+                     QueryParam "alt" AltJSON :>
                        Get '[JSON] AchievementConfiguration
 
 -- | Retrieves the metadata of the achievement configuration with the given
@@ -66,11 +65,10 @@ data AchievementConfigurationsGet' = AchievementConfigurationsGet'
     { _acgQuotaUser     :: !(Maybe Text)
     , _acgPrettyPrint   :: !Bool
     , _acgAchievementId :: !Text
-    , _acgUserIp        :: !(Maybe Text)
-    , _acgKey           :: !(Maybe Text)
-    , _acgOauthToken    :: !(Maybe Text)
+    , _acgUserIP        :: !(Maybe Text)
+    , _acgKey           :: !(Maybe Key)
+    , _acgOAuthToken    :: !(Maybe OAuthToken)
     , _acgFields        :: !(Maybe Text)
-    , _acgAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementConfigurationsGet'' with the minimum fields required to make a request.
@@ -83,15 +81,13 @@ data AchievementConfigurationsGet' = AchievementConfigurationsGet'
 --
 -- * 'acgAchievementId'
 --
--- * 'acgUserIp'
+-- * 'acgUserIP'
 --
 -- * 'acgKey'
 --
--- * 'acgOauthToken'
+-- * 'acgOAuthToken'
 --
 -- * 'acgFields'
---
--- * 'acgAlt'
 achievementConfigurationsGet'
     :: Text -- ^ 'achievementId'
     -> AchievementConfigurationsGet'
@@ -100,11 +96,10 @@ achievementConfigurationsGet' pAcgAchievementId_ =
     { _acgQuotaUser = Nothing
     , _acgPrettyPrint = True
     , _acgAchievementId = pAcgAchievementId_
-    , _acgUserIp = Nothing
+    , _acgUserIP = Nothing
     , _acgKey = Nothing
-    , _acgOauthToken = Nothing
+    , _acgOAuthToken = Nothing
     , _acgFields = Nothing
-    , _acgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -128,30 +123,31 @@ acgAchievementId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-acgUserIp :: Lens' AchievementConfigurationsGet' (Maybe Text)
-acgUserIp
-  = lens _acgUserIp (\ s a -> s{_acgUserIp = a})
+acgUserIP :: Lens' AchievementConfigurationsGet' (Maybe Text)
+acgUserIP
+  = lens _acgUserIP (\ s a -> s{_acgUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-acgKey :: Lens' AchievementConfigurationsGet' (Maybe Text)
+acgKey :: Lens' AchievementConfigurationsGet' (Maybe Key)
 acgKey = lens _acgKey (\ s a -> s{_acgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-acgOauthToken :: Lens' AchievementConfigurationsGet' (Maybe Text)
-acgOauthToken
-  = lens _acgOauthToken
-      (\ s a -> s{_acgOauthToken = a})
+acgOAuthToken :: Lens' AchievementConfigurationsGet' (Maybe OAuthToken)
+acgOAuthToken
+  = lens _acgOAuthToken
+      (\ s a -> s{_acgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 acgFields :: Lens' AchievementConfigurationsGet' (Maybe Text)
 acgFields
   = lens _acgFields (\ s a -> s{_acgFields = a})
 
--- | Data format for the response.
-acgAlt :: Lens' AchievementConfigurationsGet' Alt
-acgAlt = lens _acgAlt (\ s a -> s{_acgAlt = a})
+instance GoogleAuth AchievementConfigurationsGet'
+         where
+        authKey = acgKey . _Just
+        authToken = acgOAuthToken . _Just
 
 instance GoogleRequest AchievementConfigurationsGet'
          where
@@ -163,11 +159,11 @@ instance GoogleRequest AchievementConfigurationsGet'
           AchievementConfigurationsGet'{..}
           = go _acgQuotaUser (Just _acgPrettyPrint)
               _acgAchievementId
-              _acgUserIp
+              _acgUserIP
               _acgKey
-              _acgOauthToken
+              _acgOAuthToken
               _acgFields
-              (Just _acgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AchievementConfigurationsGetResource)

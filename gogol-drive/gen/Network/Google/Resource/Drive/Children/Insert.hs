@@ -32,12 +32,12 @@ module Network.Google.Resource.Drive.Children.Insert
     -- * Request Lenses
     , cQuotaUser
     , cPrettyPrint
-    , cUserIp
+    , cUserIP
     , cFolderId
+    , cChildReference
     , cKey
-    , cOauthToken
+    , cOAuthToken
     , cFields
-    , cAlt
     ) where
 
 import           Network.Google.Drive.Types
@@ -52,23 +52,25 @@ type ChildrenInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] ChildReference
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] ChildReference :>
+                           Post '[JSON] ChildReference
 
 -- | Inserts a file into a folder.
 --
 -- /See:/ 'childrenInsert'' smart constructor.
 data ChildrenInsert' = ChildrenInsert'
-    { _cQuotaUser   :: !(Maybe Text)
-    , _cPrettyPrint :: !Bool
-    , _cUserIp      :: !(Maybe Text)
-    , _cFolderId    :: !Text
-    , _cKey         :: !(Maybe Text)
-    , _cOauthToken  :: !(Maybe Text)
-    , _cFields      :: !(Maybe Text)
-    , _cAlt         :: !Alt
+    { _cQuotaUser      :: !(Maybe Text)
+    , _cPrettyPrint    :: !Bool
+    , _cUserIP         :: !(Maybe Text)
+    , _cFolderId       :: !Text
+    , _cChildReference :: !ChildReference
+    , _cKey            :: !(Maybe Key)
+    , _cOAuthToken     :: !(Maybe OAuthToken)
+    , _cFields         :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChildrenInsert'' with the minimum fields required to make a request.
@@ -79,30 +81,31 @@ data ChildrenInsert' = ChildrenInsert'
 --
 -- * 'cPrettyPrint'
 --
--- * 'cUserIp'
+-- * 'cUserIP'
 --
 -- * 'cFolderId'
 --
+-- * 'cChildReference'
+--
 -- * 'cKey'
 --
--- * 'cOauthToken'
+-- * 'cOAuthToken'
 --
 -- * 'cFields'
---
--- * 'cAlt'
 childrenInsert'
     :: Text -- ^ 'folderId'
+    -> ChildReference -- ^ 'ChildReference'
     -> ChildrenInsert'
-childrenInsert' pCFolderId_ =
+childrenInsert' pCFolderId_ pCChildReference_ =
     ChildrenInsert'
     { _cQuotaUser = Nothing
     , _cPrettyPrint = True
-    , _cUserIp = Nothing
+    , _cUserIP = Nothing
     , _cFolderId = pCFolderId_
+    , _cChildReference = pCChildReference_
     , _cKey = Nothing
-    , _cOauthToken = Nothing
+    , _cOAuthToken = Nothing
     , _cFields = Nothing
-    , _cAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -119,43 +122,50 @@ cPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cUserIp :: Lens' ChildrenInsert' (Maybe Text)
-cUserIp = lens _cUserIp (\ s a -> s{_cUserIp = a})
+cUserIP :: Lens' ChildrenInsert' (Maybe Text)
+cUserIP = lens _cUserIP (\ s a -> s{_cUserIP = a})
 
 -- | The ID of the folder.
 cFolderId :: Lens' ChildrenInsert' Text
 cFolderId
   = lens _cFolderId (\ s a -> s{_cFolderId = a})
 
+-- | Multipart request metadata.
+cChildReference :: Lens' ChildrenInsert' ChildReference
+cChildReference
+  = lens _cChildReference
+      (\ s a -> s{_cChildReference = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cKey :: Lens' ChildrenInsert' (Maybe Text)
+cKey :: Lens' ChildrenInsert' (Maybe Key)
 cKey = lens _cKey (\ s a -> s{_cKey = a})
 
 -- | OAuth 2.0 token for the current user.
-cOauthToken :: Lens' ChildrenInsert' (Maybe Text)
-cOauthToken
-  = lens _cOauthToken (\ s a -> s{_cOauthToken = a})
+cOAuthToken :: Lens' ChildrenInsert' (Maybe OAuthToken)
+cOAuthToken
+  = lens _cOAuthToken (\ s a -> s{_cOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cFields :: Lens' ChildrenInsert' (Maybe Text)
 cFields = lens _cFields (\ s a -> s{_cFields = a})
 
--- | Data format for the response.
-cAlt :: Lens' ChildrenInsert' Alt
-cAlt = lens _cAlt (\ s a -> s{_cAlt = a})
+instance GoogleAuth ChildrenInsert' where
+        authKey = cKey . _Just
+        authToken = cOAuthToken . _Just
 
 instance GoogleRequest ChildrenInsert' where
         type Rs ChildrenInsert' = ChildReference
         request = requestWithRoute defReq driveURL
         requestWithRoute r u ChildrenInsert'{..}
-          = go _cQuotaUser (Just _cPrettyPrint) _cUserIp
+          = go _cQuotaUser (Just _cPrettyPrint) _cUserIP
               _cFolderId
               _cKey
-              _cOauthToken
+              _cOAuthToken
               _cFields
-              (Just _cAlt)
+              (Just AltJSON)
+              _cChildReference
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ChildrenInsertResource)

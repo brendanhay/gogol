@@ -35,16 +35,16 @@ module Network.Google.Resource.Compute.InstanceGroups.ListInstances
     , igliQuotaUser
     , igliPrettyPrint
     , igliProject
-    , igliUserIp
+    , igliUserIP
     , igliZone
+    , igliInstanceGroupsListInstancesRequest
     , igliKey
     , igliFilter
     , igliPageToken
-    , igliOauthToken
+    , igliOAuthToken
     , igliInstanceGroup
     , igliMaxResults
     , igliFields
-    , igliAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -62,14 +62,17 @@ type InstanceGroupsListInstancesResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
+                       QueryParam "key" Key :>
                          QueryParam "filter" Text :>
                            QueryParam "pageToken" Text :>
-                             QueryParam "oauth_token" Text :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "maxResults" Word32 :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "alt" Alt :>
-                                     Post '[JSON] InstanceGroupsListInstances
+                                   QueryParam "alt" AltJSON :>
+                                     ReqBody '[JSON]
+                                       InstanceGroupsListInstancesRequest
+                                       :>
+                                       Post '[JSON] InstanceGroupsListInstances
 
 -- | Lists instances in an instance group. The parameters for this method
 -- specify whether the list filters instances by state and named ports
@@ -77,19 +80,19 @@ type InstanceGroupsListInstancesResource =
 --
 -- /See:/ 'instanceGroupsListInstances'' smart constructor.
 data InstanceGroupsListInstances' = InstanceGroupsListInstances'
-    { _igliQuotaUser     :: !(Maybe Text)
-    , _igliPrettyPrint   :: !Bool
-    , _igliProject       :: !Text
-    , _igliUserIp        :: !(Maybe Text)
-    , _igliZone          :: !Text
-    , _igliKey           :: !(Maybe Text)
-    , _igliFilter        :: !(Maybe Text)
-    , _igliPageToken     :: !(Maybe Text)
-    , _igliOauthToken    :: !(Maybe Text)
-    , _igliInstanceGroup :: !Text
-    , _igliMaxResults    :: !Word32
-    , _igliFields        :: !(Maybe Text)
-    , _igliAlt           :: !Alt
+    { _igliQuotaUser                          :: !(Maybe Text)
+    , _igliPrettyPrint                        :: !Bool
+    , _igliProject                            :: !Text
+    , _igliUserIP                             :: !(Maybe Text)
+    , _igliZone                               :: !Text
+    , _igliInstanceGroupsListInstancesRequest :: !InstanceGroupsListInstancesRequest
+    , _igliKey                                :: !(Maybe Key)
+    , _igliFilter                             :: !(Maybe Text)
+    , _igliPageToken                          :: !(Maybe Text)
+    , _igliOAuthToken                         :: !(Maybe OAuthToken)
+    , _igliInstanceGroup                      :: !Text
+    , _igliMaxResults                         :: !Word32
+    , _igliFields                             :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupsListInstances'' with the minimum fields required to make a request.
@@ -102,9 +105,11 @@ data InstanceGroupsListInstances' = InstanceGroupsListInstances'
 --
 -- * 'igliProject'
 --
--- * 'igliUserIp'
+-- * 'igliUserIP'
 --
 -- * 'igliZone'
+--
+-- * 'igliInstanceGroupsListInstancesRequest'
 --
 -- * 'igliKey'
 --
@@ -112,35 +117,34 @@ data InstanceGroupsListInstances' = InstanceGroupsListInstances'
 --
 -- * 'igliPageToken'
 --
--- * 'igliOauthToken'
+-- * 'igliOAuthToken'
 --
 -- * 'igliInstanceGroup'
 --
 -- * 'igliMaxResults'
 --
 -- * 'igliFields'
---
--- * 'igliAlt'
 instanceGroupsListInstances'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
+    -> InstanceGroupsListInstancesRequest -- ^ 'InstanceGroupsListInstancesRequest'
     -> Text -- ^ 'instanceGroup'
     -> InstanceGroupsListInstances'
-instanceGroupsListInstances' pIgliProject_ pIgliZone_ pIgliInstanceGroup_ =
+instanceGroupsListInstances' pIgliProject_ pIgliZone_ pIgliInstanceGroupsListInstancesRequest_ pIgliInstanceGroup_ =
     InstanceGroupsListInstances'
     { _igliQuotaUser = Nothing
     , _igliPrettyPrint = True
     , _igliProject = pIgliProject_
-    , _igliUserIp = Nothing
+    , _igliUserIP = Nothing
     , _igliZone = pIgliZone_
+    , _igliInstanceGroupsListInstancesRequest = pIgliInstanceGroupsListInstancesRequest_
     , _igliKey = Nothing
     , _igliFilter = Nothing
     , _igliPageToken = Nothing
-    , _igliOauthToken = Nothing
+    , _igliOAuthToken = Nothing
     , _igliInstanceGroup = pIgliInstanceGroup_
     , _igliMaxResults = 500
     , _igliFields = Nothing
-    , _igliAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -164,18 +168,25 @@ igliProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-igliUserIp :: Lens' InstanceGroupsListInstances' (Maybe Text)
-igliUserIp
-  = lens _igliUserIp (\ s a -> s{_igliUserIp = a})
+igliUserIP :: Lens' InstanceGroupsListInstances' (Maybe Text)
+igliUserIP
+  = lens _igliUserIP (\ s a -> s{_igliUserIP = a})
 
 -- | The URL of the zone where the instance group is located.
 igliZone :: Lens' InstanceGroupsListInstances' Text
 igliZone = lens _igliZone (\ s a -> s{_igliZone = a})
 
+-- | Multipart request metadata.
+igliInstanceGroupsListInstancesRequest :: Lens' InstanceGroupsListInstances' InstanceGroupsListInstancesRequest
+igliInstanceGroupsListInstancesRequest
+  = lens _igliInstanceGroupsListInstancesRequest
+      (\ s a ->
+         s{_igliInstanceGroupsListInstancesRequest = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-igliKey :: Lens' InstanceGroupsListInstances' (Maybe Text)
+igliKey :: Lens' InstanceGroupsListInstances' (Maybe Key)
 igliKey = lens _igliKey (\ s a -> s{_igliKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
@@ -202,10 +213,10 @@ igliPageToken
       (\ s a -> s{_igliPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-igliOauthToken :: Lens' InstanceGroupsListInstances' (Maybe Text)
-igliOauthToken
-  = lens _igliOauthToken
-      (\ s a -> s{_igliOauthToken = a})
+igliOAuthToken :: Lens' InstanceGroupsListInstances' (Maybe OAuthToken)
+igliOAuthToken
+  = lens _igliOAuthToken
+      (\ s a -> s{_igliOAuthToken = a})
 
 -- | The name of the instance group from which you want to generate a list of
 -- included instances.
@@ -225,9 +236,10 @@ igliFields :: Lens' InstanceGroupsListInstances' (Maybe Text)
 igliFields
   = lens _igliFields (\ s a -> s{_igliFields = a})
 
--- | Data format for the response.
-igliAlt :: Lens' InstanceGroupsListInstances' Alt
-igliAlt = lens _igliAlt (\ s a -> s{_igliAlt = a})
+instance GoogleAuth InstanceGroupsListInstances'
+         where
+        authKey = igliKey . _Just
+        authToken = igliOAuthToken . _Just
 
 instance GoogleRequest InstanceGroupsListInstances'
          where
@@ -237,16 +249,17 @@ instance GoogleRequest InstanceGroupsListInstances'
         requestWithRoute r u InstanceGroupsListInstances'{..}
           = go _igliQuotaUser (Just _igliPrettyPrint)
               _igliProject
-              _igliUserIp
+              _igliUserIP
               _igliZone
               _igliKey
               _igliFilter
               _igliPageToken
-              _igliOauthToken
+              _igliOAuthToken
               _igliInstanceGroup
               (Just _igliMaxResults)
               _igliFields
-              (Just _igliAlt)
+              (Just AltJSON)
+              _igliInstanceGroupsListInstancesRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InstanceGroupsListInstancesResource)

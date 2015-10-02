@@ -47,11 +47,10 @@ module Network.Google.Resource.Classroom.Invitations.List
     , ilBearerToken
     , ilKey
     , ilPageToken
-    , ilOauthToken
+    , ilOAuthToken
     , ilPageSize
     , ilFields
     , ilCallback
-    , ilAlt
     ) where
 
 import           Network.Google.Classroom.Types
@@ -72,13 +71,13 @@ type InvitationsListResource =
                        QueryParam "uploadType" Text :>
                          QueryParam "userId" Text :>
                            QueryParam "bearer_token" Text :>
-                             QueryParam "key" Text :>
+                             QueryParam "key" Key :>
                                QueryParam "pageToken" Text :>
-                                 QueryParam "oauth_token" Text :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "pageSize" Int32 :>
                                      QueryParam "fields" Text :>
                                        QueryParam "callback" Text :>
-                                         QueryParam "alt" Text :>
+                                         QueryParam "alt" AltJSON :>
                                            Get '[JSON] ListInvitationsResponse
 
 -- | Returns a list of invitations that the requesting user is permitted to
@@ -100,13 +99,12 @@ data InvitationsList' = InvitationsList'
     , _ilUploadType     :: !(Maybe Text)
     , _ilUserId         :: !(Maybe Text)
     , _ilBearerToken    :: !(Maybe Text)
-    , _ilKey            :: !(Maybe Text)
+    , _ilKey            :: !(Maybe Key)
     , _ilPageToken      :: !(Maybe Text)
-    , _ilOauthToken     :: !(Maybe Text)
+    , _ilOAuthToken     :: !(Maybe OAuthToken)
     , _ilPageSize       :: !(Maybe Int32)
     , _ilFields         :: !(Maybe Text)
     , _ilCallback       :: !(Maybe Text)
-    , _ilAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InvitationsList'' with the minimum fields required to make a request.
@@ -137,15 +135,13 @@ data InvitationsList' = InvitationsList'
 --
 -- * 'ilPageToken'
 --
--- * 'ilOauthToken'
+-- * 'ilOAuthToken'
 --
 -- * 'ilPageSize'
 --
 -- * 'ilFields'
 --
 -- * 'ilCallback'
---
--- * 'ilAlt'
 invitationsList'
     :: InvitationsList'
 invitationsList' =
@@ -162,11 +158,10 @@ invitationsList' =
     , _ilBearerToken = Nothing
     , _ilKey = Nothing
     , _ilPageToken = Nothing
-    , _ilOauthToken = Nothing
+    , _ilOAuthToken = Nothing
     , _ilPageSize = Nothing
     , _ilFields = Nothing
     , _ilCallback = Nothing
-    , _ilAlt = "json"
     }
 
 -- | V1 error format.
@@ -229,7 +224,7 @@ ilBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ilKey :: Lens' InvitationsList' (Maybe Text)
+ilKey :: Lens' InvitationsList' (Maybe Key)
 ilKey = lens _ilKey (\ s a -> s{_ilKey = a})
 
 -- | [nextPageToken][google.classroom.v1.ListInvitationsResponse.next_page_token]
@@ -243,9 +238,9 @@ ilPageToken
   = lens _ilPageToken (\ s a -> s{_ilPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-ilOauthToken :: Lens' InvitationsList' (Maybe Text)
-ilOauthToken
-  = lens _ilOauthToken (\ s a -> s{_ilOauthToken = a})
+ilOAuthToken :: Lens' InvitationsList' (Maybe OAuthToken)
+ilOAuthToken
+  = lens _ilOAuthToken (\ s a -> s{_ilOAuthToken = a})
 
 -- | Maximum number of items to return. Zero means no maximum. The server may
 -- return fewer than the specified number of results.
@@ -262,9 +257,9 @@ ilCallback :: Lens' InvitationsList' (Maybe Text)
 ilCallback
   = lens _ilCallback (\ s a -> s{_ilCallback = a})
 
--- | Data format for response.
-ilAlt :: Lens' InvitationsList' Text
-ilAlt = lens _ilAlt (\ s a -> s{_ilAlt = a})
+instance GoogleAuth InvitationsList' where
+        authKey = ilKey . _Just
+        authToken = ilOAuthToken . _Just
 
 instance GoogleRequest InvitationsList' where
         type Rs InvitationsList' = ListInvitationsResponse
@@ -280,11 +275,11 @@ instance GoogleRequest InvitationsList' where
               _ilBearerToken
               _ilKey
               _ilPageToken
-              _ilOauthToken
+              _ilOAuthToken
               _ilPageSize
               _ilFields
               _ilCallback
-              (Just _ilAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InvitationsListResource)

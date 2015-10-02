@@ -33,13 +33,12 @@ module Network.Google.Resource.Compute.DiskTypes.Get
     , dtgQuotaUser
     , dtgPrettyPrint
     , dtgProject
-    , dtgUserIp
+    , dtgUserIP
     , dtgZone
     , dtgKey
     , dtgDiskType
-    , dtgOauthToken
+    , dtgOAuthToken
     , dtgFields
-    , dtgAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -56,10 +55,10 @@ type DiskTypesGetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Get '[JSON] DiskType
+                           QueryParam "alt" AltJSON :> Get '[JSON] DiskType
 
 -- | Returns the specified disk type resource.
 --
@@ -68,13 +67,12 @@ data DiskTypesGet' = DiskTypesGet'
     { _dtgQuotaUser   :: !(Maybe Text)
     , _dtgPrettyPrint :: !Bool
     , _dtgProject     :: !Text
-    , _dtgUserIp      :: !(Maybe Text)
+    , _dtgUserIP      :: !(Maybe Text)
     , _dtgZone        :: !Text
-    , _dtgKey         :: !(Maybe Text)
+    , _dtgKey         :: !(Maybe Key)
     , _dtgDiskType    :: !Text
-    , _dtgOauthToken  :: !(Maybe Text)
+    , _dtgOAuthToken  :: !(Maybe OAuthToken)
     , _dtgFields      :: !(Maybe Text)
-    , _dtgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DiskTypesGet'' with the minimum fields required to make a request.
@@ -87,7 +85,7 @@ data DiskTypesGet' = DiskTypesGet'
 --
 -- * 'dtgProject'
 --
--- * 'dtgUserIp'
+-- * 'dtgUserIP'
 --
 -- * 'dtgZone'
 --
@@ -95,11 +93,9 @@ data DiskTypesGet' = DiskTypesGet'
 --
 -- * 'dtgDiskType'
 --
--- * 'dtgOauthToken'
+-- * 'dtgOAuthToken'
 --
 -- * 'dtgFields'
---
--- * 'dtgAlt'
 diskTypesGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
@@ -110,13 +106,12 @@ diskTypesGet' pDtgProject_ pDtgZone_ pDtgDiskType_ =
     { _dtgQuotaUser = Nothing
     , _dtgPrettyPrint = True
     , _dtgProject = pDtgProject_
-    , _dtgUserIp = Nothing
+    , _dtgUserIP = Nothing
     , _dtgZone = pDtgZone_
     , _dtgKey = Nothing
     , _dtgDiskType = pDtgDiskType_
-    , _dtgOauthToken = Nothing
+    , _dtgOAuthToken = Nothing
     , _dtgFields = Nothing
-    , _dtgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,9 +134,9 @@ dtgProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-dtgUserIp :: Lens' DiskTypesGet' (Maybe Text)
-dtgUserIp
-  = lens _dtgUserIp (\ s a -> s{_dtgUserIp = a})
+dtgUserIP :: Lens' DiskTypesGet' (Maybe Text)
+dtgUserIP
+  = lens _dtgUserIP (\ s a -> s{_dtgUserIP = a})
 
 -- | The name of the zone for this request.
 dtgZone :: Lens' DiskTypesGet' Text
@@ -150,7 +145,7 @@ dtgZone = lens _dtgZone (\ s a -> s{_dtgZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dtgKey :: Lens' DiskTypesGet' (Maybe Text)
+dtgKey :: Lens' DiskTypesGet' (Maybe Key)
 dtgKey = lens _dtgKey (\ s a -> s{_dtgKey = a})
 
 -- | Name of the disk type resource to return.
@@ -159,32 +154,32 @@ dtgDiskType
   = lens _dtgDiskType (\ s a -> s{_dtgDiskType = a})
 
 -- | OAuth 2.0 token for the current user.
-dtgOauthToken :: Lens' DiskTypesGet' (Maybe Text)
-dtgOauthToken
-  = lens _dtgOauthToken
-      (\ s a -> s{_dtgOauthToken = a})
+dtgOAuthToken :: Lens' DiskTypesGet' (Maybe OAuthToken)
+dtgOAuthToken
+  = lens _dtgOAuthToken
+      (\ s a -> s{_dtgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 dtgFields :: Lens' DiskTypesGet' (Maybe Text)
 dtgFields
   = lens _dtgFields (\ s a -> s{_dtgFields = a})
 
--- | Data format for the response.
-dtgAlt :: Lens' DiskTypesGet' Alt
-dtgAlt = lens _dtgAlt (\ s a -> s{_dtgAlt = a})
+instance GoogleAuth DiskTypesGet' where
+        authKey = dtgKey . _Just
+        authToken = dtgOAuthToken . _Just
 
 instance GoogleRequest DiskTypesGet' where
         type Rs DiskTypesGet' = DiskType
         request = requestWithRoute defReq computeURL
         requestWithRoute r u DiskTypesGet'{..}
           = go _dtgQuotaUser (Just _dtgPrettyPrint) _dtgProject
-              _dtgUserIp
+              _dtgUserIP
               _dtgZone
               _dtgKey
               _dtgDiskType
-              _dtgOauthToken
+              _dtgOAuthToken
               _dtgFields
-              (Just _dtgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy DiskTypesGetResource)

@@ -36,7 +36,7 @@ module Network.Google.Resource.Gan.Events.List
     , elEventDateMin
     , elChargeType
     , elMemberId
-    , elUserIp
+    , elUserIP
     , elModifyDateMax
     , elAdvertiserId
     , elModifyDateMin
@@ -48,13 +48,12 @@ module Network.Google.Resource.Gan.Events.List
     , elLinkId
     , elPageToken
     , elType
-    , elOauthToken
+    , elOAuthToken
     , elOrderId
     , elPublisherId
     , elProductCategory
     , elMaxResults
     , elFields
-    , elAlt
     ) where
 
 import           Network.Google.Affiliates.Types
@@ -77,12 +76,13 @@ type EventsListResource =
                            QueryParam "advertiserId" Text :>
                              QueryParam "modifyDateMin" Text :>
                                QueryParam "eventDateMax" Text :>
-                                 QueryParam "key" Text :>
+                                 QueryParam "key" Key :>
                                    QueryParam "sku" Text :>
                                      QueryParam "linkId" Text :>
                                        QueryParam "pageToken" Text :>
                                          QueryParam "type" GanEventsListType :>
-                                           QueryParam "oauth_token" Text :>
+                                           QueryParam "oauth_token" OAuthToken
+                                             :>
                                              QueryParam "orderId" Text :>
                                                QueryParam "publisherId" Text :>
                                                  QueryParam "productCategory"
@@ -92,8 +92,8 @@ type EventsListResource =
                                                      Word32
                                                      :>
                                                      QueryParam "fields" Text :>
-                                                       QueryParam "alt" Alt :>
-                                                         Get '[JSON] Events
+                                                       QueryParam "alt" AltJSON
+                                                         :> Get '[JSON] Events
 
 -- | Retrieves event data for a given advertiser\/publisher.
 --
@@ -105,25 +105,24 @@ data EventsList' = EventsList'
     , _elEventDateMin    :: !(Maybe Text)
     , _elChargeType      :: !(Maybe GanEventsListChargeType)
     , _elMemberId        :: !(Maybe Text)
-    , _elUserIp          :: !(Maybe Text)
+    , _elUserIP          :: !(Maybe Text)
     , _elModifyDateMax   :: !(Maybe Text)
     , _elAdvertiserId    :: !(Maybe Text)
     , _elModifyDateMin   :: !(Maybe Text)
     , _elRoleId          :: !Text
     , _elRole            :: !GanEventsListRole
     , _elEventDateMax    :: !(Maybe Text)
-    , _elKey             :: !(Maybe Text)
+    , _elKey             :: !(Maybe Key)
     , _elSku             :: !(Maybe Text)
     , _elLinkId          :: !(Maybe Text)
     , _elPageToken       :: !(Maybe Text)
     , _elType            :: !(Maybe GanEventsListType)
-    , _elOauthToken      :: !(Maybe Text)
+    , _elOAuthToken      :: !(Maybe OAuthToken)
     , _elOrderId         :: !(Maybe Text)
     , _elPublisherId     :: !(Maybe Text)
     , _elProductCategory :: !(Maybe Text)
     , _elMaxResults      :: !(Maybe Word32)
     , _elFields          :: !(Maybe Text)
-    , _elAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsList'' with the minimum fields required to make a request.
@@ -142,7 +141,7 @@ data EventsList' = EventsList'
 --
 -- * 'elMemberId'
 --
--- * 'elUserIp'
+-- * 'elUserIP'
 --
 -- * 'elModifyDateMax'
 --
@@ -166,7 +165,7 @@ data EventsList' = EventsList'
 --
 -- * 'elType'
 --
--- * 'elOauthToken'
+-- * 'elOAuthToken'
 --
 -- * 'elOrderId'
 --
@@ -177,8 +176,6 @@ data EventsList' = EventsList'
 -- * 'elMaxResults'
 --
 -- * 'elFields'
---
--- * 'elAlt'
 eventsList'
     :: Text -- ^ 'roleId'
     -> GanEventsListRole -- ^ 'role'
@@ -191,7 +188,7 @@ eventsList' pElRoleId_ pElRole_ =
     , _elEventDateMin = Nothing
     , _elChargeType = Nothing
     , _elMemberId = Nothing
-    , _elUserIp = Nothing
+    , _elUserIP = Nothing
     , _elModifyDateMax = Nothing
     , _elAdvertiserId = Nothing
     , _elModifyDateMin = Nothing
@@ -203,13 +200,12 @@ eventsList' pElRoleId_ pElRole_ =
     , _elLinkId = Nothing
     , _elPageToken = Nothing
     , _elType = Nothing
-    , _elOauthToken = Nothing
+    , _elOAuthToken = Nothing
     , _elOrderId = Nothing
     , _elPublisherId = Nothing
     , _elProductCategory = Nothing
     , _elMaxResults = Nothing
     , _elFields = Nothing
-    , _elAlt = JSON
     }
 
 -- | Filters out all events that do not have the given status. Valid values:
@@ -252,8 +248,8 @@ elMemberId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-elUserIp :: Lens' EventsList' (Maybe Text)
-elUserIp = lens _elUserIp (\ s a -> s{_elUserIp = a})
+elUserIP :: Lens' EventsList' (Maybe Text)
+elUserIP = lens _elUserIP (\ s a -> s{_elUserIP = a})
 
 -- | Filters out all events modified later than given date. Optional.
 -- Defaults to 24 hours after modifyDateMin, if modifyDateMin is explicitly
@@ -298,7 +294,7 @@ elEventDateMax
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-elKey :: Lens' EventsList' (Maybe Text)
+elKey :: Lens' EventsList' (Maybe Key)
 elKey = lens _elKey (\ s a -> s{_elKey = a})
 
 -- | Caret(^) delimited list of SKUs. Filters out all events that do not
@@ -322,9 +318,9 @@ elType :: Lens' EventsList' (Maybe GanEventsListType)
 elType = lens _elType (\ s a -> s{_elType = a})
 
 -- | OAuth 2.0 token for the current user.
-elOauthToken :: Lens' EventsList' (Maybe Text)
-elOauthToken
-  = lens _elOauthToken (\ s a -> s{_elOauthToken = a})
+elOAuthToken :: Lens' EventsList' (Maybe OAuthToken)
+elOAuthToken
+  = lens _elOAuthToken (\ s a -> s{_elOAuthToken = a})
 
 -- | Caret(^) delimited list of order IDs. Filters out all events that do not
 -- reference one of the given order IDs. Optional.
@@ -357,9 +353,9 @@ elMaxResults
 elFields :: Lens' EventsList' (Maybe Text)
 elFields = lens _elFields (\ s a -> s{_elFields = a})
 
--- | Data format for the response.
-elAlt :: Lens' EventsList' Alt
-elAlt = lens _elAlt (\ s a -> s{_elAlt = a})
+instance GoogleAuth EventsList' where
+        authKey = elKey . _Just
+        authToken = elOAuthToken . _Just
 
 instance GoogleRequest EventsList' where
         type Rs EventsList' = Events
@@ -369,7 +365,7 @@ instance GoogleRequest EventsList' where
               _elEventDateMin
               _elChargeType
               _elMemberId
-              _elUserIp
+              _elUserIP
               _elModifyDateMax
               _elAdvertiserId
               _elModifyDateMin
@@ -381,13 +377,13 @@ instance GoogleRequest EventsList' where
               _elLinkId
               _elPageToken
               _elType
-              _elOauthToken
+              _elOAuthToken
               _elOrderId
               _elPublisherId
               _elProductCategory
               _elMaxResults
               _elFields
-              (Just _elAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy EventsListResource)
                       r

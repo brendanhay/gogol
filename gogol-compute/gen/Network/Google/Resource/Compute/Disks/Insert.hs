@@ -34,13 +34,13 @@ module Network.Google.Resource.Compute.Disks.Insert
     , diQuotaUser
     , diPrettyPrint
     , diSourceImage
+    , diDisk
     , diProject
-    , diUserIp
+    , diUserIP
     , diZone
     , diKey
-    , diOauthToken
+    , diOAuthToken
     , diFields
-    , diAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -57,10 +57,11 @@ type DisksInsertResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "sourceImage" Text :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Post '[JSON] Operation
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] Disk :> Post '[JSON] Operation
 
 -- | Creates a persistent disk in the specified project using the data
 -- included in the request.
@@ -70,13 +71,13 @@ data DisksInsert' = DisksInsert'
     { _diQuotaUser   :: !(Maybe Text)
     , _diPrettyPrint :: !Bool
     , _diSourceImage :: !(Maybe Text)
+    , _diDisk        :: !Disk
     , _diProject     :: !Text
-    , _diUserIp      :: !(Maybe Text)
+    , _diUserIP      :: !(Maybe Text)
     , _diZone        :: !Text
-    , _diKey         :: !(Maybe Text)
-    , _diOauthToken  :: !(Maybe Text)
+    , _diKey         :: !(Maybe Key)
+    , _diOAuthToken  :: !(Maybe OAuthToken)
     , _diFields      :: !(Maybe Text)
-    , _diAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DisksInsert'' with the minimum fields required to make a request.
@@ -89,35 +90,36 @@ data DisksInsert' = DisksInsert'
 --
 -- * 'diSourceImage'
 --
+-- * 'diDisk'
+--
 -- * 'diProject'
 --
--- * 'diUserIp'
+-- * 'diUserIP'
 --
 -- * 'diZone'
 --
 -- * 'diKey'
 --
--- * 'diOauthToken'
+-- * 'diOAuthToken'
 --
 -- * 'diFields'
---
--- * 'diAlt'
 disksInsert'
-    :: Text -- ^ 'project'
+    :: Disk -- ^ 'Disk'
+    -> Text -- ^ 'project'
     -> Text -- ^ 'zone'
     -> DisksInsert'
-disksInsert' pDiProject_ pDiZone_ =
+disksInsert' pDiDisk_ pDiProject_ pDiZone_ =
     DisksInsert'
     { _diQuotaUser = Nothing
     , _diPrettyPrint = True
     , _diSourceImage = Nothing
+    , _diDisk = pDiDisk_
     , _diProject = pDiProject_
-    , _diUserIp = Nothing
+    , _diUserIP = Nothing
     , _diZone = pDiZone_
     , _diKey = Nothing
-    , _diOauthToken = Nothing
+    , _diOAuthToken = Nothing
     , _diFields = Nothing
-    , _diAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,6 +141,10 @@ diSourceImage
   = lens _diSourceImage
       (\ s a -> s{_diSourceImage = a})
 
+-- | Multipart request metadata.
+diDisk :: Lens' DisksInsert' Disk
+diDisk = lens _diDisk (\ s a -> s{_diDisk = a})
+
 -- | Project ID for this request.
 diProject :: Lens' DisksInsert' Text
 diProject
@@ -146,8 +152,8 @@ diProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-diUserIp :: Lens' DisksInsert' (Maybe Text)
-diUserIp = lens _diUserIp (\ s a -> s{_diUserIp = a})
+diUserIP :: Lens' DisksInsert' (Maybe Text)
+diUserIP = lens _diUserIP (\ s a -> s{_diUserIP = a})
 
 -- | The name of the zone for this request.
 diZone :: Lens' DisksInsert' Text
@@ -156,21 +162,21 @@ diZone = lens _diZone (\ s a -> s{_diZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-diKey :: Lens' DisksInsert' (Maybe Text)
+diKey :: Lens' DisksInsert' (Maybe Key)
 diKey = lens _diKey (\ s a -> s{_diKey = a})
 
 -- | OAuth 2.0 token for the current user.
-diOauthToken :: Lens' DisksInsert' (Maybe Text)
-diOauthToken
-  = lens _diOauthToken (\ s a -> s{_diOauthToken = a})
+diOAuthToken :: Lens' DisksInsert' (Maybe OAuthToken)
+diOAuthToken
+  = lens _diOAuthToken (\ s a -> s{_diOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 diFields :: Lens' DisksInsert' (Maybe Text)
 diFields = lens _diFields (\ s a -> s{_diFields = a})
 
--- | Data format for the response.
-diAlt :: Lens' DisksInsert' Alt
-diAlt = lens _diAlt (\ s a -> s{_diAlt = a})
+instance GoogleAuth DisksInsert' where
+        authKey = diKey . _Just
+        authToken = diOAuthToken . _Just
 
 instance GoogleRequest DisksInsert' where
         type Rs DisksInsert' = Operation
@@ -179,12 +185,13 @@ instance GoogleRequest DisksInsert' where
           = go _diQuotaUser (Just _diPrettyPrint)
               _diSourceImage
               _diProject
-              _diUserIp
+              _diUserIP
               _diZone
               _diKey
-              _diOauthToken
+              _diOAuthToken
               _diFields
-              (Just _diAlt)
+              (Just AltJSON)
+              _diDisk
           where go
                   = clientWithRoute
                       (Proxy :: Proxy DisksInsertResource)

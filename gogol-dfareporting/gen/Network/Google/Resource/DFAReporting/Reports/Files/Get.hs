@@ -32,14 +32,13 @@ module Network.Google.Resource.DFAReporting.Reports.Files.Get
     -- * Request Lenses
     , rfgQuotaUser
     , rfgPrettyPrint
-    , rfgUserIp
+    , rfgUserIP
     , rfgReportId
     , rfgProfileId
     , rfgKey
     , rfgFileId
-    , rfgOauthToken
+    , rfgOAuthToken
     , rfgFields
-    , rfgAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -57,10 +56,25 @@ type ReportsFilesGetResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Get '[JSON] File
+                             QueryParam "alt" AltJSON :> Get '[JSON] File
+       :<|>
+       "userprofiles" :>
+         Capture "profileId" Int64 :>
+           "reports" :>
+             Capture "reportId" Int64 :>
+               "files" :>
+                 Capture "fileId" Int64 :>
+                   QueryParam "quotaUser" Text :>
+                     QueryParam "prettyPrint" Bool :>
+                       QueryParam "userIp" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Media :>
+                                 Get '[OctetStream] Stream
 
 -- | Retrieves a report file.
 --
@@ -68,14 +82,13 @@ type ReportsFilesGetResource =
 data ReportsFilesGet' = ReportsFilesGet'
     { _rfgQuotaUser   :: !(Maybe Text)
     , _rfgPrettyPrint :: !Bool
-    , _rfgUserIp      :: !(Maybe Text)
+    , _rfgUserIP      :: !(Maybe Text)
     , _rfgReportId    :: !Int64
     , _rfgProfileId   :: !Int64
-    , _rfgKey         :: !(Maybe Text)
+    , _rfgKey         :: !(Maybe Key)
     , _rfgFileId      :: !Int64
-    , _rfgOauthToken  :: !(Maybe Text)
+    , _rfgOAuthToken  :: !(Maybe OAuthToken)
     , _rfgFields      :: !(Maybe Text)
-    , _rfgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsFilesGet'' with the minimum fields required to make a request.
@@ -86,7 +99,7 @@ data ReportsFilesGet' = ReportsFilesGet'
 --
 -- * 'rfgPrettyPrint'
 --
--- * 'rfgUserIp'
+-- * 'rfgUserIP'
 --
 -- * 'rfgReportId'
 --
@@ -96,11 +109,9 @@ data ReportsFilesGet' = ReportsFilesGet'
 --
 -- * 'rfgFileId'
 --
--- * 'rfgOauthToken'
+-- * 'rfgOAuthToken'
 --
 -- * 'rfgFields'
---
--- * 'rfgAlt'
 reportsFilesGet'
     :: Int64 -- ^ 'reportId'
     -> Int64 -- ^ 'profileId'
@@ -110,14 +121,13 @@ reportsFilesGet' pRfgReportId_ pRfgProfileId_ pRfgFileId_ =
     ReportsFilesGet'
     { _rfgQuotaUser = Nothing
     , _rfgPrettyPrint = True
-    , _rfgUserIp = Nothing
+    , _rfgUserIP = Nothing
     , _rfgReportId = pRfgReportId_
     , _rfgProfileId = pRfgProfileId_
     , _rfgKey = Nothing
     , _rfgFileId = pRfgFileId_
-    , _rfgOauthToken = Nothing
+    , _rfgOAuthToken = Nothing
     , _rfgFields = Nothing
-    , _rfgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,9 +145,9 @@ rfgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rfgUserIp :: Lens' ReportsFilesGet' (Maybe Text)
-rfgUserIp
-  = lens _rfgUserIp (\ s a -> s{_rfgUserIp = a})
+rfgUserIP :: Lens' ReportsFilesGet' (Maybe Text)
+rfgUserIP
+  = lens _rfgUserIP (\ s a -> s{_rfgUserIP = a})
 
 -- | The ID of the report.
 rfgReportId :: Lens' ReportsFilesGet' Int64
@@ -152,7 +162,7 @@ rfgProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rfgKey :: Lens' ReportsFilesGet' (Maybe Text)
+rfgKey :: Lens' ReportsFilesGet' (Maybe Key)
 rfgKey = lens _rfgKey (\ s a -> s{_rfgKey = a})
 
 -- | The ID of the report file.
@@ -161,33 +171,51 @@ rfgFileId
   = lens _rfgFileId (\ s a -> s{_rfgFileId = a})
 
 -- | OAuth 2.0 token for the current user.
-rfgOauthToken :: Lens' ReportsFilesGet' (Maybe Text)
-rfgOauthToken
-  = lens _rfgOauthToken
-      (\ s a -> s{_rfgOauthToken = a})
+rfgOAuthToken :: Lens' ReportsFilesGet' (Maybe OAuthToken)
+rfgOAuthToken
+  = lens _rfgOAuthToken
+      (\ s a -> s{_rfgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 rfgFields :: Lens' ReportsFilesGet' (Maybe Text)
 rfgFields
   = lens _rfgFields (\ s a -> s{_rfgFields = a})
 
--- | Data format for the response.
-rfgAlt :: Lens' ReportsFilesGet' Alt
-rfgAlt = lens _rfgAlt (\ s a -> s{_rfgAlt = a})
+instance GoogleAuth ReportsFilesGet' where
+        authKey = rfgKey . _Just
+        authToken = rfgOAuthToken . _Just
 
 instance GoogleRequest ReportsFilesGet' where
         type Rs ReportsFilesGet' = File
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ReportsFilesGet'{..}
-          = go _rfgQuotaUser (Just _rfgPrettyPrint) _rfgUserIp
+          = go _rfgQuotaUser (Just _rfgPrettyPrint) _rfgUserIP
               _rfgReportId
               _rfgProfileId
               _rfgKey
               _rfgFileId
-              _rfgOauthToken
+              _rfgOAuthToken
               _rfgFields
-              (Just _rfgAlt)
-          where go
+              (Just AltJSON)
+          where go :<|> _
+                  = clientWithRoute
+                      (Proxy :: Proxy ReportsFilesGetResource)
+                      r
+                      u
+
+instance GoogleRequest ReportsFilesGet' where
+        type Rs (Download ReportsFilesGet') = Stream
+        request = requestWithRoute defReq dFAReportingURL
+        requestWithRoute r u ReportsFilesGet'{..}
+          = go _rfgQuotaUser (Just _rfgPrettyPrint) _rfgUserIP
+              _rfgReportId
+              _rfgProfileId
+              _rfgKey
+              _rfgFileId
+              _rfgOAuthToken
+              _rfgFields
+              (Just Media)
+          where go :<|> _
                   = clientWithRoute
                       (Proxy :: Proxy ReportsFilesGetResource)
                       r

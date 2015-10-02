@@ -33,14 +33,13 @@ module Network.Google.Resource.Compute.Zones.List
     , zlQuotaUser
     , zlPrettyPrint
     , zlProject
-    , zlUserIp
+    , zlUserIP
     , zlKey
     , zlFilter
     , zlPageToken
-    , zlOauthToken
+    , zlOAuthToken
     , zlMaxResults
     , zlFields
-    , zlAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -54,13 +53,13 @@ type ZonesListResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
+               QueryParam "key" Key :>
                  QueryParam "filter" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "maxResults" Word32 :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Get '[JSON] ZoneList
+                           QueryParam "alt" AltJSON :> Get '[JSON] ZoneList
 
 -- | Retrieves the list of zone resources available to the specified project.
 --
@@ -69,14 +68,13 @@ data ZonesList' = ZonesList'
     { _zlQuotaUser   :: !(Maybe Text)
     , _zlPrettyPrint :: !Bool
     , _zlProject     :: !Text
-    , _zlUserIp      :: !(Maybe Text)
-    , _zlKey         :: !(Maybe Text)
+    , _zlUserIP      :: !(Maybe Text)
+    , _zlKey         :: !(Maybe Key)
     , _zlFilter      :: !(Maybe Text)
     , _zlPageToken   :: !(Maybe Text)
-    , _zlOauthToken  :: !(Maybe Text)
+    , _zlOAuthToken  :: !(Maybe OAuthToken)
     , _zlMaxResults  :: !Word32
     , _zlFields      :: !(Maybe Text)
-    , _zlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZonesList'' with the minimum fields required to make a request.
@@ -89,7 +87,7 @@ data ZonesList' = ZonesList'
 --
 -- * 'zlProject'
 --
--- * 'zlUserIp'
+-- * 'zlUserIP'
 --
 -- * 'zlKey'
 --
@@ -97,13 +95,11 @@ data ZonesList' = ZonesList'
 --
 -- * 'zlPageToken'
 --
--- * 'zlOauthToken'
+-- * 'zlOAuthToken'
 --
 -- * 'zlMaxResults'
 --
 -- * 'zlFields'
---
--- * 'zlAlt'
 zonesList'
     :: Text -- ^ 'project'
     -> ZonesList'
@@ -112,14 +108,13 @@ zonesList' pZlProject_ =
     { _zlQuotaUser = Nothing
     , _zlPrettyPrint = True
     , _zlProject = pZlProject_
-    , _zlUserIp = Nothing
+    , _zlUserIP = Nothing
     , _zlKey = Nothing
     , _zlFilter = Nothing
     , _zlPageToken = Nothing
-    , _zlOauthToken = Nothing
+    , _zlOAuthToken = Nothing
     , _zlMaxResults = 500
     , _zlFields = Nothing
-    , _zlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -142,13 +137,13 @@ zlProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-zlUserIp :: Lens' ZonesList' (Maybe Text)
-zlUserIp = lens _zlUserIp (\ s a -> s{_zlUserIp = a})
+zlUserIP :: Lens' ZonesList' (Maybe Text)
+zlUserIP = lens _zlUserIP (\ s a -> s{_zlUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-zlKey :: Lens' ZonesList' (Maybe Text)
+zlKey :: Lens' ZonesList' (Maybe Key)
 zlKey = lens _zlKey (\ s a -> s{_zlKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
@@ -173,9 +168,9 @@ zlPageToken
   = lens _zlPageToken (\ s a -> s{_zlPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-zlOauthToken :: Lens' ZonesList' (Maybe Text)
-zlOauthToken
-  = lens _zlOauthToken (\ s a -> s{_zlOauthToken = a})
+zlOAuthToken :: Lens' ZonesList' (Maybe OAuthToken)
+zlOAuthToken
+  = lens _zlOAuthToken (\ s a -> s{_zlOAuthToken = a})
 
 -- | Maximum count of results to be returned.
 zlMaxResults :: Lens' ZonesList' Word32
@@ -186,23 +181,23 @@ zlMaxResults
 zlFields :: Lens' ZonesList' (Maybe Text)
 zlFields = lens _zlFields (\ s a -> s{_zlFields = a})
 
--- | Data format for the response.
-zlAlt :: Lens' ZonesList' Alt
-zlAlt = lens _zlAlt (\ s a -> s{_zlAlt = a})
+instance GoogleAuth ZonesList' where
+        authKey = zlKey . _Just
+        authToken = zlOAuthToken . _Just
 
 instance GoogleRequest ZonesList' where
         type Rs ZonesList' = ZoneList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u ZonesList'{..}
           = go _zlQuotaUser (Just _zlPrettyPrint) _zlProject
-              _zlUserIp
+              _zlUserIP
               _zlKey
               _zlFilter
               _zlPageToken
-              _zlOauthToken
+              _zlOAuthToken
               (Just _zlMaxResults)
               _zlFields
-              (Just _zlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy ZonesListResource)
                       r

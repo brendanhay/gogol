@@ -36,7 +36,7 @@ module Network.Google.Resource.Blogger.PostUserInfos.List
     , puilQuotaUser
     , puilPrettyPrint
     , puilOrderBy
-    , puilUserIp
+    , puilUserIP
     , puilEndDate
     , puilBlogId
     , puilUserId
@@ -46,10 +46,9 @@ module Network.Google.Resource.Blogger.PostUserInfos.List
     , puilView
     , puilLabels
     , puilPageToken
-    , puilOauthToken
+    , puilOAuthToken
     , puilMaxResults
     , puilFields
-    , puilAlt
     ) where
 
 import           Network.Google.Blogger.Types
@@ -72,16 +71,16 @@ type PostUserInfosListResource =
                        QueryParam "userIp" Text :>
                          QueryParam "endDate" UTCTime :>
                            QueryParam "startDate" UTCTime :>
-                             QueryParam "key" Text :>
+                             QueryParam "key" Key :>
                                QueryParam "fetchBodies" Bool :>
                                  QueryParam "view" BloggerPostUserInfosListView
                                    :>
                                    QueryParam "labels" Text :>
                                      QueryParam "pageToken" Text :>
-                                       QueryParam "oauth_token" Text :>
+                                       QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "maxResults" Word32 :>
                                            QueryParam "fields" Text :>
-                                             QueryParam "alt" Alt :>
+                                             QueryParam "alt" AltJSON :>
                                                Get '[JSON] PostUserInfosList
 
 -- | Retrieves a list of post and post user info pairs, possibly filtered.
@@ -94,20 +93,19 @@ data PostUserInfosList' = PostUserInfosList'
     , _puilQuotaUser   :: !(Maybe Text)
     , _puilPrettyPrint :: !Bool
     , _puilOrderBy     :: !BloggerPostUserInfosListOrderBy
-    , _puilUserIp      :: !(Maybe Text)
+    , _puilUserIP      :: !(Maybe Text)
     , _puilEndDate     :: !(Maybe UTCTime)
     , _puilBlogId      :: !Text
     , _puilUserId      :: !Text
     , _puilStartDate   :: !(Maybe UTCTime)
-    , _puilKey         :: !(Maybe Text)
+    , _puilKey         :: !(Maybe Key)
     , _puilFetchBodies :: !Bool
     , _puilView        :: !(Maybe BloggerPostUserInfosListView)
     , _puilLabels      :: !(Maybe Text)
     , _puilPageToken   :: !(Maybe Text)
-    , _puilOauthToken  :: !(Maybe Text)
+    , _puilOAuthToken  :: !(Maybe OAuthToken)
     , _puilMaxResults  :: !(Maybe Word32)
     , _puilFields      :: !(Maybe Text)
-    , _puilAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostUserInfosList'' with the minimum fields required to make a request.
@@ -122,7 +120,7 @@ data PostUserInfosList' = PostUserInfosList'
 --
 -- * 'puilOrderBy'
 --
--- * 'puilUserIp'
+-- * 'puilUserIP'
 --
 -- * 'puilEndDate'
 --
@@ -142,13 +140,11 @@ data PostUserInfosList' = PostUserInfosList'
 --
 -- * 'puilPageToken'
 --
--- * 'puilOauthToken'
+-- * 'puilOAuthToken'
 --
 -- * 'puilMaxResults'
 --
 -- * 'puilFields'
---
--- * 'puilAlt'
 postUserInfosList'
     :: Text -- ^ 'blogId'
     -> Text -- ^ 'userId'
@@ -159,7 +155,7 @@ postUserInfosList' pPuilBlogId_ pPuilUserId_ =
     , _puilQuotaUser = Nothing
     , _puilPrettyPrint = True
     , _puilOrderBy = BPUILOBPublished
-    , _puilUserIp = Nothing
+    , _puilUserIP = Nothing
     , _puilEndDate = Nothing
     , _puilBlogId = pPuilBlogId_
     , _puilUserId = pPuilUserId_
@@ -169,10 +165,9 @@ postUserInfosList' pPuilBlogId_ pPuilUserId_ =
     , _puilView = Nothing
     , _puilLabels = Nothing
     , _puilPageToken = Nothing
-    , _puilOauthToken = Nothing
+    , _puilOAuthToken = Nothing
     , _puilMaxResults = Nothing
     , _puilFields = Nothing
-    , _puilAlt = JSON
     }
 
 puilStatus :: Lens' PostUserInfosList' (Maybe BloggerPostUserInfosListStatus)
@@ -200,9 +195,9 @@ puilOrderBy
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-puilUserIp :: Lens' PostUserInfosList' (Maybe Text)
-puilUserIp
-  = lens _puilUserIp (\ s a -> s{_puilUserIp = a})
+puilUserIP :: Lens' PostUserInfosList' (Maybe Text)
+puilUserIP
+  = lens _puilUserIP (\ s a -> s{_puilUserIP = a})
 
 -- | Latest post date to fetch, a date-time with RFC 3339 formatting.
 puilEndDate :: Lens' PostUserInfosList' (Maybe UTCTime)
@@ -229,7 +224,7 @@ puilStartDate
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-puilKey :: Lens' PostUserInfosList' (Maybe Text)
+puilKey :: Lens' PostUserInfosList' (Maybe Key)
 puilKey = lens _puilKey (\ s a -> s{_puilKey = a})
 
 -- | Whether the body content of posts is included. Default is false.
@@ -255,10 +250,10 @@ puilPageToken
       (\ s a -> s{_puilPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-puilOauthToken :: Lens' PostUserInfosList' (Maybe Text)
-puilOauthToken
-  = lens _puilOauthToken
-      (\ s a -> s{_puilOauthToken = a})
+puilOAuthToken :: Lens' PostUserInfosList' (Maybe OAuthToken)
+puilOAuthToken
+  = lens _puilOAuthToken
+      (\ s a -> s{_puilOAuthToken = a})
 
 -- | Maximum number of posts to fetch.
 puilMaxResults :: Lens' PostUserInfosList' (Maybe Word32)
@@ -271,9 +266,9 @@ puilFields :: Lens' PostUserInfosList' (Maybe Text)
 puilFields
   = lens _puilFields (\ s a -> s{_puilFields = a})
 
--- | Data format for the response.
-puilAlt :: Lens' PostUserInfosList' Alt
-puilAlt = lens _puilAlt (\ s a -> s{_puilAlt = a})
+instance GoogleAuth PostUserInfosList' where
+        authKey = puilKey . _Just
+        authToken = puilOAuthToken . _Just
 
 instance GoogleRequest PostUserInfosList' where
         type Rs PostUserInfosList' = PostUserInfosList
@@ -282,7 +277,7 @@ instance GoogleRequest PostUserInfosList' where
           = go _puilStatus _puilQuotaUser
               (Just _puilPrettyPrint)
               (Just _puilOrderBy)
-              _puilUserIp
+              _puilUserIP
               _puilEndDate
               _puilBlogId
               _puilUserId
@@ -292,10 +287,10 @@ instance GoogleRequest PostUserInfosList' where
               _puilView
               _puilLabels
               _puilPageToken
-              _puilOauthToken
+              _puilOAuthToken
               _puilMaxResults
               _puilFields
-              (Just _puilAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PostUserInfosListResource)

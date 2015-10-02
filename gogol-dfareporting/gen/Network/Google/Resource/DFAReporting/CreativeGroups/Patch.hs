@@ -33,13 +33,13 @@ module Network.Google.Resource.DFAReporting.CreativeGroups.Patch
     -- * Request Lenses
     , cgpQuotaUser
     , cgpPrettyPrint
-    , cgpUserIp
+    , cgpUserIP
     , cgpProfileId
+    , cgpCreativeGroup
     , cgpKey
     , cgpId
-    , cgpOauthToken
+    , cgpOAuthToken
     , cgpFields
-    , cgpAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,26 +54,28 @@ type CreativeGroupsPatchResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "id" Int64 :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Patch '[JSON] CreativeGroup
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] CreativeGroup :>
+                             Patch '[JSON] CreativeGroup
 
 -- | Updates an existing creative group. This method supports patch
 -- semantics.
 --
 -- /See:/ 'creativeGroupsPatch'' smart constructor.
 data CreativeGroupsPatch' = CreativeGroupsPatch'
-    { _cgpQuotaUser   :: !(Maybe Text)
-    , _cgpPrettyPrint :: !Bool
-    , _cgpUserIp      :: !(Maybe Text)
-    , _cgpProfileId   :: !Int64
-    , _cgpKey         :: !(Maybe Text)
-    , _cgpId          :: !Int64
-    , _cgpOauthToken  :: !(Maybe Text)
-    , _cgpFields      :: !(Maybe Text)
-    , _cgpAlt         :: !Alt
+    { _cgpQuotaUser     :: !(Maybe Text)
+    , _cgpPrettyPrint   :: !Bool
+    , _cgpUserIP        :: !(Maybe Text)
+    , _cgpProfileId     :: !Int64
+    , _cgpCreativeGroup :: !CreativeGroup
+    , _cgpKey           :: !(Maybe Key)
+    , _cgpId            :: !Int64
+    , _cgpOAuthToken    :: !(Maybe OAuthToken)
+    , _cgpFields        :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeGroupsPatch'' with the minimum fields required to make a request.
@@ -84,34 +86,35 @@ data CreativeGroupsPatch' = CreativeGroupsPatch'
 --
 -- * 'cgpPrettyPrint'
 --
--- * 'cgpUserIp'
+-- * 'cgpUserIP'
 --
 -- * 'cgpProfileId'
+--
+-- * 'cgpCreativeGroup'
 --
 -- * 'cgpKey'
 --
 -- * 'cgpId'
 --
--- * 'cgpOauthToken'
+-- * 'cgpOAuthToken'
 --
 -- * 'cgpFields'
---
--- * 'cgpAlt'
 creativeGroupsPatch'
     :: Int64 -- ^ 'profileId'
+    -> CreativeGroup -- ^ 'CreativeGroup'
     -> Int64 -- ^ 'id'
     -> CreativeGroupsPatch'
-creativeGroupsPatch' pCgpProfileId_ pCgpId_ =
+creativeGroupsPatch' pCgpProfileId_ pCgpCreativeGroup_ pCgpId_ =
     CreativeGroupsPatch'
     { _cgpQuotaUser = Nothing
     , _cgpPrettyPrint = True
-    , _cgpUserIp = Nothing
+    , _cgpUserIP = Nothing
     , _cgpProfileId = pCgpProfileId_
+    , _cgpCreativeGroup = pCgpCreativeGroup_
     , _cgpKey = Nothing
     , _cgpId = pCgpId_
-    , _cgpOauthToken = Nothing
+    , _cgpOAuthToken = Nothing
     , _cgpFields = Nothing
-    , _cgpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -129,19 +132,25 @@ cgpPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cgpUserIp :: Lens' CreativeGroupsPatch' (Maybe Text)
-cgpUserIp
-  = lens _cgpUserIp (\ s a -> s{_cgpUserIp = a})
+cgpUserIP :: Lens' CreativeGroupsPatch' (Maybe Text)
+cgpUserIP
+  = lens _cgpUserIP (\ s a -> s{_cgpUserIP = a})
 
 -- | User profile ID associated with this request.
 cgpProfileId :: Lens' CreativeGroupsPatch' Int64
 cgpProfileId
   = lens _cgpProfileId (\ s a -> s{_cgpProfileId = a})
 
+-- | Multipart request metadata.
+cgpCreativeGroup :: Lens' CreativeGroupsPatch' CreativeGroup
+cgpCreativeGroup
+  = lens _cgpCreativeGroup
+      (\ s a -> s{_cgpCreativeGroup = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cgpKey :: Lens' CreativeGroupsPatch' (Maybe Text)
+cgpKey :: Lens' CreativeGroupsPatch' (Maybe Key)
 cgpKey = lens _cgpKey (\ s a -> s{_cgpKey = a})
 
 -- | Creative group ID.
@@ -149,31 +158,32 @@ cgpId :: Lens' CreativeGroupsPatch' Int64
 cgpId = lens _cgpId (\ s a -> s{_cgpId = a})
 
 -- | OAuth 2.0 token for the current user.
-cgpOauthToken :: Lens' CreativeGroupsPatch' (Maybe Text)
-cgpOauthToken
-  = lens _cgpOauthToken
-      (\ s a -> s{_cgpOauthToken = a})
+cgpOAuthToken :: Lens' CreativeGroupsPatch' (Maybe OAuthToken)
+cgpOAuthToken
+  = lens _cgpOAuthToken
+      (\ s a -> s{_cgpOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cgpFields :: Lens' CreativeGroupsPatch' (Maybe Text)
 cgpFields
   = lens _cgpFields (\ s a -> s{_cgpFields = a})
 
--- | Data format for the response.
-cgpAlt :: Lens' CreativeGroupsPatch' Alt
-cgpAlt = lens _cgpAlt (\ s a -> s{_cgpAlt = a})
+instance GoogleAuth CreativeGroupsPatch' where
+        authKey = cgpKey . _Just
+        authToken = cgpOAuthToken . _Just
 
 instance GoogleRequest CreativeGroupsPatch' where
         type Rs CreativeGroupsPatch' = CreativeGroup
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativeGroupsPatch'{..}
-          = go _cgpQuotaUser (Just _cgpPrettyPrint) _cgpUserIp
+          = go _cgpQuotaUser (Just _cgpPrettyPrint) _cgpUserIP
               _cgpProfileId
               _cgpKey
               (Just _cgpId)
-              _cgpOauthToken
+              _cgpOAuthToken
               _cgpFields
-              (Just _cgpAlt)
+              (Just AltJSON)
+              _cgpCreativeGroup
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CreativeGroupsPatchResource)

@@ -33,14 +33,13 @@ module Network.Google.Resource.Analytics.Management.Uploads.Get
     , mugQuotaUser
     , mugPrettyPrint
     , mugWebPropertyId
-    , mugUserIp
+    , mugUserIP
     , mugCustomDataSourceId
     , mugAccountId
     , mugKey
-    , mugOauthToken
+    , mugOAuthToken
     , mugUploadId
     , mugFields
-    , mugAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -61,10 +60,11 @@ type ManagementUploadsGetResource =
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "alt" Alt :> Get '[JSON] Upload
+                                   QueryParam "alt" AltJSON :>
+                                     Get '[JSON] Upload
 
 -- | List uploads to which the user has access.
 --
@@ -73,14 +73,13 @@ data ManagementUploadsGet' = ManagementUploadsGet'
     { _mugQuotaUser          :: !(Maybe Text)
     , _mugPrettyPrint        :: !Bool
     , _mugWebPropertyId      :: !Text
-    , _mugUserIp             :: !(Maybe Text)
+    , _mugUserIP             :: !(Maybe Text)
     , _mugCustomDataSourceId :: !Text
     , _mugAccountId          :: !Text
-    , _mugKey                :: !(Maybe Text)
-    , _mugOauthToken         :: !(Maybe Text)
+    , _mugKey                :: !(Maybe Key)
+    , _mugOAuthToken         :: !(Maybe OAuthToken)
     , _mugUploadId           :: !Text
     , _mugFields             :: !(Maybe Text)
-    , _mugAlt                :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementUploadsGet'' with the minimum fields required to make a request.
@@ -93,7 +92,7 @@ data ManagementUploadsGet' = ManagementUploadsGet'
 --
 -- * 'mugWebPropertyId'
 --
--- * 'mugUserIp'
+-- * 'mugUserIP'
 --
 -- * 'mugCustomDataSourceId'
 --
@@ -101,13 +100,11 @@ data ManagementUploadsGet' = ManagementUploadsGet'
 --
 -- * 'mugKey'
 --
--- * 'mugOauthToken'
+-- * 'mugOAuthToken'
 --
 -- * 'mugUploadId'
 --
 -- * 'mugFields'
---
--- * 'mugAlt'
 managementUploadsGet'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'customDataSourceId'
@@ -119,14 +116,13 @@ managementUploadsGet' pMugWebPropertyId_ pMugCustomDataSourceId_ pMugAccountId_ 
     { _mugQuotaUser = Nothing
     , _mugPrettyPrint = False
     , _mugWebPropertyId = pMugWebPropertyId_
-    , _mugUserIp = Nothing
+    , _mugUserIP = Nothing
     , _mugCustomDataSourceId = pMugCustomDataSourceId_
     , _mugAccountId = pMugAccountId_
     , _mugKey = Nothing
-    , _mugOauthToken = Nothing
+    , _mugOAuthToken = Nothing
     , _mugUploadId = pMugUploadId_
     , _mugFields = Nothing
-    , _mugAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,9 +146,9 @@ mugWebPropertyId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mugUserIp :: Lens' ManagementUploadsGet' (Maybe Text)
-mugUserIp
-  = lens _mugUserIp (\ s a -> s{_mugUserIp = a})
+mugUserIP :: Lens' ManagementUploadsGet' (Maybe Text)
+mugUserIP
+  = lens _mugUserIP (\ s a -> s{_mugUserIP = a})
 
 -- | Custom data source Id for upload to retrieve.
 mugCustomDataSourceId :: Lens' ManagementUploadsGet' Text
@@ -168,14 +164,14 @@ mugAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mugKey :: Lens' ManagementUploadsGet' (Maybe Text)
+mugKey :: Lens' ManagementUploadsGet' (Maybe Key)
 mugKey = lens _mugKey (\ s a -> s{_mugKey = a})
 
 -- | OAuth 2.0 token for the current user.
-mugOauthToken :: Lens' ManagementUploadsGet' (Maybe Text)
-mugOauthToken
-  = lens _mugOauthToken
-      (\ s a -> s{_mugOauthToken = a})
+mugOAuthToken :: Lens' ManagementUploadsGet' (Maybe OAuthToken)
+mugOAuthToken
+  = lens _mugOAuthToken
+      (\ s a -> s{_mugOAuthToken = a})
 
 -- | Upload Id to retrieve.
 mugUploadId :: Lens' ManagementUploadsGet' Text
@@ -187,9 +183,9 @@ mugFields :: Lens' ManagementUploadsGet' (Maybe Text)
 mugFields
   = lens _mugFields (\ s a -> s{_mugFields = a})
 
--- | Data format for the response.
-mugAlt :: Lens' ManagementUploadsGet' Alt
-mugAlt = lens _mugAlt (\ s a -> s{_mugAlt = a})
+instance GoogleAuth ManagementUploadsGet' where
+        authKey = mugKey . _Just
+        authToken = mugOAuthToken . _Just
 
 instance GoogleRequest ManagementUploadsGet' where
         type Rs ManagementUploadsGet' = Upload
@@ -197,14 +193,14 @@ instance GoogleRequest ManagementUploadsGet' where
         requestWithRoute r u ManagementUploadsGet'{..}
           = go _mugQuotaUser (Just _mugPrettyPrint)
               _mugWebPropertyId
-              _mugUserIp
+              _mugUserIP
               _mugCustomDataSourceId
               _mugAccountId
               _mugKey
-              _mugOauthToken
+              _mugOAuthToken
               _mugUploadId
               _mugFields
-              (Just _mugAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ManagementUploadsGetResource)

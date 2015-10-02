@@ -32,14 +32,13 @@ module Network.Google.Resource.Licensing.LicenseAssignments.Delete
     -- * Request Lenses
     , ladQuotaUser
     , ladPrettyPrint
-    , ladUserIp
+    , ladUserIP
     , ladSkuId
     , ladUserId
     , ladKey
-    , ladOauthToken
+    , ladOAuthToken
     , ladProductId
     , ladFields
-    , ladAlt
     ) where
 
 import           Network.Google.AppsLicensing.Types
@@ -56,10 +55,10 @@ type LicenseAssignmentsDeleteResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Delete '[JSON] ()
+                           QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Revoke License.
 --
@@ -67,14 +66,13 @@ type LicenseAssignmentsDeleteResource =
 data LicenseAssignmentsDelete' = LicenseAssignmentsDelete'
     { _ladQuotaUser   :: !(Maybe Text)
     , _ladPrettyPrint :: !Bool
-    , _ladUserIp      :: !(Maybe Text)
+    , _ladUserIP      :: !(Maybe Text)
     , _ladSkuId       :: !Text
     , _ladUserId      :: !Text
-    , _ladKey         :: !(Maybe Text)
-    , _ladOauthToken  :: !(Maybe Text)
+    , _ladKey         :: !(Maybe Key)
+    , _ladOAuthToken  :: !(Maybe OAuthToken)
     , _ladProductId   :: !Text
     , _ladFields      :: !(Maybe Text)
-    , _ladAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LicenseAssignmentsDelete'' with the minimum fields required to make a request.
@@ -85,7 +83,7 @@ data LicenseAssignmentsDelete' = LicenseAssignmentsDelete'
 --
 -- * 'ladPrettyPrint'
 --
--- * 'ladUserIp'
+-- * 'ladUserIP'
 --
 -- * 'ladSkuId'
 --
@@ -93,13 +91,11 @@ data LicenseAssignmentsDelete' = LicenseAssignmentsDelete'
 --
 -- * 'ladKey'
 --
--- * 'ladOauthToken'
+-- * 'ladOAuthToken'
 --
 -- * 'ladProductId'
 --
 -- * 'ladFields'
---
--- * 'ladAlt'
 licenseAssignmentsDelete'
     :: Text -- ^ 'skuId'
     -> Text -- ^ 'userId'
@@ -109,14 +105,13 @@ licenseAssignmentsDelete' pLadSkuId_ pLadUserId_ pLadProductId_ =
     LicenseAssignmentsDelete'
     { _ladQuotaUser = Nothing
     , _ladPrettyPrint = True
-    , _ladUserIp = Nothing
+    , _ladUserIP = Nothing
     , _ladSkuId = pLadSkuId_
     , _ladUserId = pLadUserId_
     , _ladKey = Nothing
-    , _ladOauthToken = Nothing
+    , _ladOAuthToken = Nothing
     , _ladProductId = pLadProductId_
     , _ladFields = Nothing
-    , _ladAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -134,9 +129,9 @@ ladPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ladUserIp :: Lens' LicenseAssignmentsDelete' (Maybe Text)
-ladUserIp
-  = lens _ladUserIp (\ s a -> s{_ladUserIp = a})
+ladUserIP :: Lens' LicenseAssignmentsDelete' (Maybe Text)
+ladUserIP
+  = lens _ladUserIP (\ s a -> s{_ladUserIP = a})
 
 -- | Name for sku
 ladSkuId :: Lens' LicenseAssignmentsDelete' Text
@@ -150,14 +145,14 @@ ladUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ladKey :: Lens' LicenseAssignmentsDelete' (Maybe Text)
+ladKey :: Lens' LicenseAssignmentsDelete' (Maybe Key)
 ladKey = lens _ladKey (\ s a -> s{_ladKey = a})
 
 -- | OAuth 2.0 token for the current user.
-ladOauthToken :: Lens' LicenseAssignmentsDelete' (Maybe Text)
-ladOauthToken
-  = lens _ladOauthToken
-      (\ s a -> s{_ladOauthToken = a})
+ladOAuthToken :: Lens' LicenseAssignmentsDelete' (Maybe OAuthToken)
+ladOAuthToken
+  = lens _ladOAuthToken
+      (\ s a -> s{_ladOAuthToken = a})
 
 -- | Name for product
 ladProductId :: Lens' LicenseAssignmentsDelete' Text
@@ -169,23 +164,23 @@ ladFields :: Lens' LicenseAssignmentsDelete' (Maybe Text)
 ladFields
   = lens _ladFields (\ s a -> s{_ladFields = a})
 
--- | Data format for the response.
-ladAlt :: Lens' LicenseAssignmentsDelete' Alt
-ladAlt = lens _ladAlt (\ s a -> s{_ladAlt = a})
+instance GoogleAuth LicenseAssignmentsDelete' where
+        authKey = ladKey . _Just
+        authToken = ladOAuthToken . _Just
 
 instance GoogleRequest LicenseAssignmentsDelete'
          where
         type Rs LicenseAssignmentsDelete' = ()
         request = requestWithRoute defReq appsLicensingURL
         requestWithRoute r u LicenseAssignmentsDelete'{..}
-          = go _ladQuotaUser (Just _ladPrettyPrint) _ladUserIp
+          = go _ladQuotaUser (Just _ladPrettyPrint) _ladUserIP
               _ladSkuId
               _ladUserId
               _ladKey
-              _ladOauthToken
+              _ladOAuthToken
               _ladProductId
               _ladFields
-              (Just _ladAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy LicenseAssignmentsDeleteResource)

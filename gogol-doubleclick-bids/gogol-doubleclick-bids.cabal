@@ -32,14 +32,14 @@ library
     exposed-modules:
           Network.Google.DoubleClickBids
         , Network.Google.DoubleClickBids.Types
-        , Network.Google.Resource.Doubleclickbidmanager.Lineitems.Downloadlineitems
-        , Network.Google.Resource.Doubleclickbidmanager.Lineitems.Uploadlineitems
-        , Network.Google.Resource.Doubleclickbidmanager.Queries.Createquery
-        , Network.Google.Resource.Doubleclickbidmanager.Queries.Deletequery
-        , Network.Google.Resource.Doubleclickbidmanager.Queries.Getquery
-        , Network.Google.Resource.Doubleclickbidmanager.Queries.Listqueries
-        , Network.Google.Resource.Doubleclickbidmanager.Queries.Runquery
-        , Network.Google.Resource.Doubleclickbidmanager.Reports.Listreports
+        , Network.Google.Resource.DoubleClickBidManager.Lineitems.Downloadlineitems
+        , Network.Google.Resource.DoubleClickBidManager.Lineitems.Uploadlineitems
+        , Network.Google.Resource.DoubleClickBidManager.Queries.Createquery
+        , Network.Google.Resource.DoubleClickBidManager.Queries.Deletequery
+        , Network.Google.Resource.DoubleClickBidManager.Queries.Getquery
+        , Network.Google.Resource.DoubleClickBidManager.Queries.Listqueries
+        , Network.Google.Resource.DoubleClickBidManager.Queries.Runquery
+        , Network.Google.Resource.DoubleClickBidManager.Reports.Listreports
 
     other-modules:
           Network.Google.DoubleClickBids.Types.Product

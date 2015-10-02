@@ -30,13 +30,13 @@ module Network.Google.Resource.Content.Orders.Custombatch
     , OrdersCustombatch'
 
     -- * Request Lenses
-    , ooQuotaUser
-    , ooPrettyPrint
-    , ooUserIp
-    , ooKey
-    , ooOauthToken
-    , ooFields
-    , ooAlt
+    , ordQuotaUser
+    , ordPrettyPrint
+    , ordUserIP
+    , ordOrdersCustomBatchRequest
+    , ordKey
+    , ordOAuthToken
+    , ordFields
     ) where
 
 import           Network.Google.Prelude
@@ -50,102 +50,114 @@ type OrdersCustombatchResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :>
-                       Post '[JSON] OrdersCustomBatchResponse
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] OrdersCustomBatchRequest :>
+                         Post '[JSON] OrdersCustomBatchResponse
 
 -- | Retrieves or modifies multiple orders in a single request.
 --
 -- /See:/ 'ordersCustombatch'' smart constructor.
 data OrdersCustombatch' = OrdersCustombatch'
-    { _ooQuotaUser   :: !(Maybe Text)
-    , _ooPrettyPrint :: !Bool
-    , _ooUserIp      :: !(Maybe Text)
-    , _ooKey         :: !(Maybe Text)
-    , _ooOauthToken  :: !(Maybe Text)
-    , _ooFields      :: !(Maybe Text)
-    , _ooAlt         :: !Alt
+    { _ordQuotaUser                :: !(Maybe Text)
+    , _ordPrettyPrint              :: !Bool
+    , _ordUserIP                   :: !(Maybe Text)
+    , _ordOrdersCustomBatchRequest :: !OrdersCustomBatchRequest
+    , _ordKey                      :: !(Maybe Key)
+    , _ordOAuthToken               :: !(Maybe OAuthToken)
+    , _ordFields                   :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersCustombatch'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ooQuotaUser'
+-- * 'ordQuotaUser'
 --
--- * 'ooPrettyPrint'
+-- * 'ordPrettyPrint'
 --
--- * 'ooUserIp'
+-- * 'ordUserIP'
 --
--- * 'ooKey'
+-- * 'ordOrdersCustomBatchRequest'
 --
--- * 'ooOauthToken'
+-- * 'ordKey'
 --
--- * 'ooFields'
+-- * 'ordOAuthToken'
 --
--- * 'ooAlt'
+-- * 'ordFields'
 ordersCustombatch'
-    :: OrdersCustombatch'
-ordersCustombatch' =
+    :: OrdersCustomBatchRequest -- ^ 'OrdersCustomBatchRequest'
+    -> OrdersCustombatch'
+ordersCustombatch' pOrdOrdersCustomBatchRequest_ =
     OrdersCustombatch'
-    { _ooQuotaUser = Nothing
-    , _ooPrettyPrint = True
-    , _ooUserIp = Nothing
-    , _ooKey = Nothing
-    , _ooOauthToken = Nothing
-    , _ooFields = Nothing
-    , _ooAlt = JSON
+    { _ordQuotaUser = Nothing
+    , _ordPrettyPrint = True
+    , _ordUserIP = Nothing
+    , _ordOrdersCustomBatchRequest = pOrdOrdersCustomBatchRequest_
+    , _ordKey = Nothing
+    , _ordOAuthToken = Nothing
+    , _ordFields = Nothing
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-ooQuotaUser :: Lens' OrdersCustombatch' (Maybe Text)
-ooQuotaUser
-  = lens _ooQuotaUser (\ s a -> s{_ooQuotaUser = a})
+ordQuotaUser :: Lens' OrdersCustombatch' (Maybe Text)
+ordQuotaUser
+  = lens _ordQuotaUser (\ s a -> s{_ordQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-ooPrettyPrint :: Lens' OrdersCustombatch' Bool
-ooPrettyPrint
-  = lens _ooPrettyPrint
-      (\ s a -> s{_ooPrettyPrint = a})
+ordPrettyPrint :: Lens' OrdersCustombatch' Bool
+ordPrettyPrint
+  = lens _ordPrettyPrint
+      (\ s a -> s{_ordPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ooUserIp :: Lens' OrdersCustombatch' (Maybe Text)
-ooUserIp = lens _ooUserIp (\ s a -> s{_ooUserIp = a})
+ordUserIP :: Lens' OrdersCustombatch' (Maybe Text)
+ordUserIP
+  = lens _ordUserIP (\ s a -> s{_ordUserIP = a})
+
+-- | Multipart request metadata.
+ordOrdersCustomBatchRequest :: Lens' OrdersCustombatch' OrdersCustomBatchRequest
+ordOrdersCustomBatchRequest
+  = lens _ordOrdersCustomBatchRequest
+      (\ s a -> s{_ordOrdersCustomBatchRequest = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ooKey :: Lens' OrdersCustombatch' (Maybe Text)
-ooKey = lens _ooKey (\ s a -> s{_ooKey = a})
+ordKey :: Lens' OrdersCustombatch' (Maybe Key)
+ordKey = lens _ordKey (\ s a -> s{_ordKey = a})
 
 -- | OAuth 2.0 token for the current user.
-ooOauthToken :: Lens' OrdersCustombatch' (Maybe Text)
-ooOauthToken
-  = lens _ooOauthToken (\ s a -> s{_ooOauthToken = a})
+ordOAuthToken :: Lens' OrdersCustombatch' (Maybe OAuthToken)
+ordOAuthToken
+  = lens _ordOAuthToken
+      (\ s a -> s{_ordOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-ooFields :: Lens' OrdersCustombatch' (Maybe Text)
-ooFields = lens _ooFields (\ s a -> s{_ooFields = a})
+ordFields :: Lens' OrdersCustombatch' (Maybe Text)
+ordFields
+  = lens _ordFields (\ s a -> s{_ordFields = a})
 
--- | Data format for the response.
-ooAlt :: Lens' OrdersCustombatch' Alt
-ooAlt = lens _ooAlt (\ s a -> s{_ooAlt = a})
+instance GoogleAuth OrdersCustombatch' where
+        authKey = ordKey . _Just
+        authToken = ordOAuthToken . _Just
 
 instance GoogleRequest OrdersCustombatch' where
         type Rs OrdersCustombatch' =
              OrdersCustomBatchResponse
         request = requestWithRoute defReq shoppingContentURL
         requestWithRoute r u OrdersCustombatch'{..}
-          = go _ooQuotaUser (Just _ooPrettyPrint) _ooUserIp
-              _ooKey
-              _ooOauthToken
-              _ooFields
-              (Just _ooAlt)
+          = go _ordQuotaUser (Just _ordPrettyPrint) _ordUserIP
+              _ordKey
+              _ordOAuthToken
+              _ordFields
+              (Just AltJSON)
+              _ordOrdersCustomBatchRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy OrdersCustombatchResource)

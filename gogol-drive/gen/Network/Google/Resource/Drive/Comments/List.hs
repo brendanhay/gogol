@@ -32,16 +32,15 @@ module Network.Google.Resource.Drive.Comments.List
     -- * Request Lenses
     , comQuotaUser
     , comPrettyPrint
-    , comUserIp
+    , comUserIP
     , comKey
     , comUpdatedMin
     , comPageToken
     , comFileId
-    , comOauthToken
+    , comOAuthToken
     , comMaxResults
     , comIncludeDeleted
     , comFields
-    , comAlt
     ) where
 
 import           Network.Google.Drive.Types
@@ -56,14 +55,15 @@ type CommentsListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "updatedMin" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "maxResults" Int32 :>
                            QueryParam "includeDeleted" Bool :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :> Get '[JSON] CommentList
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] CommentList
 
 -- | Lists a file\'s comments.
 --
@@ -71,16 +71,15 @@ type CommentsListResource =
 data CommentsList' = CommentsList'
     { _comQuotaUser      :: !(Maybe Text)
     , _comPrettyPrint    :: !Bool
-    , _comUserIp         :: !(Maybe Text)
-    , _comKey            :: !(Maybe Text)
+    , _comUserIP         :: !(Maybe Text)
+    , _comKey            :: !(Maybe Key)
     , _comUpdatedMin     :: !(Maybe Text)
     , _comPageToken      :: !(Maybe Text)
     , _comFileId         :: !Text
-    , _comOauthToken     :: !(Maybe Text)
+    , _comOAuthToken     :: !(Maybe OAuthToken)
     , _comMaxResults     :: !Int32
     , _comIncludeDeleted :: !Bool
     , _comFields         :: !(Maybe Text)
-    , _comAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsList'' with the minimum fields required to make a request.
@@ -91,7 +90,7 @@ data CommentsList' = CommentsList'
 --
 -- * 'comPrettyPrint'
 --
--- * 'comUserIp'
+-- * 'comUserIP'
 --
 -- * 'comKey'
 --
@@ -101,15 +100,13 @@ data CommentsList' = CommentsList'
 --
 -- * 'comFileId'
 --
--- * 'comOauthToken'
+-- * 'comOAuthToken'
 --
 -- * 'comMaxResults'
 --
 -- * 'comIncludeDeleted'
 --
 -- * 'comFields'
---
--- * 'comAlt'
 commentsList'
     :: Text -- ^ 'fileId'
     -> CommentsList'
@@ -117,16 +114,15 @@ commentsList' pComFileId_ =
     CommentsList'
     { _comQuotaUser = Nothing
     , _comPrettyPrint = True
-    , _comUserIp = Nothing
+    , _comUserIP = Nothing
     , _comKey = Nothing
     , _comUpdatedMin = Nothing
     , _comPageToken = Nothing
     , _comFileId = pComFileId_
-    , _comOauthToken = Nothing
+    , _comOAuthToken = Nothing
     , _comMaxResults = 20
     , _comIncludeDeleted = False
     , _comFields = Nothing
-    , _comAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -144,14 +140,14 @@ comPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-comUserIp :: Lens' CommentsList' (Maybe Text)
-comUserIp
-  = lens _comUserIp (\ s a -> s{_comUserIp = a})
+comUserIP :: Lens' CommentsList' (Maybe Text)
+comUserIP
+  = lens _comUserIP (\ s a -> s{_comUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-comKey :: Lens' CommentsList' (Maybe Text)
+comKey :: Lens' CommentsList' (Maybe Key)
 comKey = lens _comKey (\ s a -> s{_comKey = a})
 
 -- | Only discussions that were updated after this timestamp will be
@@ -174,10 +170,10 @@ comFileId
   = lens _comFileId (\ s a -> s{_comFileId = a})
 
 -- | OAuth 2.0 token for the current user.
-comOauthToken :: Lens' CommentsList' (Maybe Text)
-comOauthToken
-  = lens _comOauthToken
-      (\ s a -> s{_comOauthToken = a})
+comOAuthToken :: Lens' CommentsList' (Maybe OAuthToken)
+comOAuthToken
+  = lens _comOAuthToken
+      (\ s a -> s{_comOAuthToken = a})
 
 -- | The maximum number of discussions to include in the response, used for
 -- paging.
@@ -198,24 +194,24 @@ comFields :: Lens' CommentsList' (Maybe Text)
 comFields
   = lens _comFields (\ s a -> s{_comFields = a})
 
--- | Data format for the response.
-comAlt :: Lens' CommentsList' Alt
-comAlt = lens _comAlt (\ s a -> s{_comAlt = a})
+instance GoogleAuth CommentsList' where
+        authKey = comKey . _Just
+        authToken = comOAuthToken . _Just
 
 instance GoogleRequest CommentsList' where
         type Rs CommentsList' = CommentList
         request = requestWithRoute defReq driveURL
         requestWithRoute r u CommentsList'{..}
-          = go _comQuotaUser (Just _comPrettyPrint) _comUserIp
+          = go _comQuotaUser (Just _comPrettyPrint) _comUserIP
               _comKey
               _comUpdatedMin
               _comPageToken
               _comFileId
-              _comOauthToken
+              _comOAuthToken
               (Just _comMaxResults)
               (Just _comIncludeDeleted)
               _comFields
-              (Just _comAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CommentsListResource)

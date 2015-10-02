@@ -32,14 +32,13 @@ module Network.Google.Resource.Genomics.Datasets.List
     -- * Request Lenses
     , dlQuotaUser
     , dlPrettyPrint
-    , dlUserIp
+    , dlUserIP
     , dlProjectNumber
     , dlKey
     , dlPageToken
-    , dlOauthToken
+    , dlOAuthToken
     , dlPageSize
     , dlFields
-    , dlAlt
     ) where
 
 import           Network.Google.Genomics.Types
@@ -53,12 +52,12 @@ type DatasetsListResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
              QueryParam "projectNumber" Int64 :>
-               QueryParam "key" Text :>
+               QueryParam "key" Key :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "oauth_token" Text :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "pageSize" Int32 :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :>
+                         QueryParam "alt" AltJSON :>
                            Get '[JSON] ListDatasetsResponse
 
 -- | Lists datasets within a project.
@@ -67,14 +66,13 @@ type DatasetsListResource =
 data DatasetsList' = DatasetsList'
     { _dlQuotaUser     :: !(Maybe Text)
     , _dlPrettyPrint   :: !Bool
-    , _dlUserIp        :: !(Maybe Text)
+    , _dlUserIP        :: !(Maybe Text)
     , _dlProjectNumber :: !(Maybe Int64)
-    , _dlKey           :: !(Maybe Text)
+    , _dlKey           :: !(Maybe Key)
     , _dlPageToken     :: !(Maybe Text)
-    , _dlOauthToken    :: !(Maybe Text)
+    , _dlOAuthToken    :: !(Maybe OAuthToken)
     , _dlPageSize      :: !(Maybe Int32)
     , _dlFields        :: !(Maybe Text)
-    , _dlAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetsList'' with the minimum fields required to make a request.
@@ -85,7 +83,7 @@ data DatasetsList' = DatasetsList'
 --
 -- * 'dlPrettyPrint'
 --
--- * 'dlUserIp'
+-- * 'dlUserIP'
 --
 -- * 'dlProjectNumber'
 --
@@ -93,27 +91,24 @@ data DatasetsList' = DatasetsList'
 --
 -- * 'dlPageToken'
 --
--- * 'dlOauthToken'
+-- * 'dlOAuthToken'
 --
 -- * 'dlPageSize'
 --
 -- * 'dlFields'
---
--- * 'dlAlt'
 datasetsList'
     :: DatasetsList'
 datasetsList' =
     DatasetsList'
     { _dlQuotaUser = Nothing
     , _dlPrettyPrint = True
-    , _dlUserIp = Nothing
+    , _dlUserIP = Nothing
     , _dlProjectNumber = Nothing
     , _dlKey = Nothing
     , _dlPageToken = Nothing
-    , _dlOauthToken = Nothing
+    , _dlOAuthToken = Nothing
     , _dlPageSize = Nothing
     , _dlFields = Nothing
-    , _dlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -131,8 +126,8 @@ dlPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-dlUserIp :: Lens' DatasetsList' (Maybe Text)
-dlUserIp = lens _dlUserIp (\ s a -> s{_dlUserIp = a})
+dlUserIP :: Lens' DatasetsList' (Maybe Text)
+dlUserIP = lens _dlUserIP (\ s a -> s{_dlUserIP = a})
 
 -- | Required. The project to list datasets for.
 dlProjectNumber :: Lens' DatasetsList' (Maybe Int64)
@@ -143,7 +138,7 @@ dlProjectNumber
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dlKey :: Lens' DatasetsList' (Maybe Text)
+dlKey :: Lens' DatasetsList' (Maybe Key)
 dlKey = lens _dlKey (\ s a -> s{_dlKey = a})
 
 -- | The continuation token, which is used to page through large result sets.
@@ -154,9 +149,9 @@ dlPageToken
   = lens _dlPageToken (\ s a -> s{_dlPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-dlOauthToken :: Lens' DatasetsList' (Maybe Text)
-dlOauthToken
-  = lens _dlOauthToken (\ s a -> s{_dlOauthToken = a})
+dlOAuthToken :: Lens' DatasetsList' (Maybe OAuthToken)
+dlOAuthToken
+  = lens _dlOAuthToken (\ s a -> s{_dlOAuthToken = a})
 
 -- | The maximum number of results returned by this request. If unspecified,
 -- defaults to 50.
@@ -168,22 +163,22 @@ dlPageSize
 dlFields :: Lens' DatasetsList' (Maybe Text)
 dlFields = lens _dlFields (\ s a -> s{_dlFields = a})
 
--- | Data format for the response.
-dlAlt :: Lens' DatasetsList' Alt
-dlAlt = lens _dlAlt (\ s a -> s{_dlAlt = a})
+instance GoogleAuth DatasetsList' where
+        authKey = dlKey . _Just
+        authToken = dlOAuthToken . _Just
 
 instance GoogleRequest DatasetsList' where
         type Rs DatasetsList' = ListDatasetsResponse
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u DatasetsList'{..}
-          = go _dlQuotaUser (Just _dlPrettyPrint) _dlUserIp
+          = go _dlQuotaUser (Just _dlPrettyPrint) _dlUserIP
               _dlProjectNumber
               _dlKey
               _dlPageToken
-              _dlOauthToken
+              _dlOAuthToken
               _dlPageSize
               _dlFields
-              (Just _dlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy DatasetsListResource)

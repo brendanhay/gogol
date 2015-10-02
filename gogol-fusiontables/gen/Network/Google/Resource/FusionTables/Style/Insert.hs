@@ -32,12 +32,12 @@ module Network.Google.Resource.FusionTables.Style.Insert
     -- * Request Lenses
     , siQuotaUser
     , siPrettyPrint
-    , siUserIp
+    , siUserIP
+    , siStyleSetting
     , siKey
-    , siOauthToken
+    , siOAuthToken
     , siTableId
     , siFields
-    , siAlt
     ) where
 
 import           Network.Google.FusionTables.Types
@@ -52,23 +52,25 @@ type StyleInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] StyleSetting
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] StyleSetting :>
+                           Post '[JSON] StyleSetting
 
 -- | Adds a new style for the table.
 --
 -- /See:/ 'styleInsert'' smart constructor.
 data StyleInsert' = StyleInsert'
-    { _siQuotaUser   :: !(Maybe Text)
-    , _siPrettyPrint :: !Bool
-    , _siUserIp      :: !(Maybe Text)
-    , _siKey         :: !(Maybe Text)
-    , _siOauthToken  :: !(Maybe Text)
-    , _siTableId     :: !Text
-    , _siFields      :: !(Maybe Text)
-    , _siAlt         :: !Alt
+    { _siQuotaUser    :: !(Maybe Text)
+    , _siPrettyPrint  :: !Bool
+    , _siUserIP       :: !(Maybe Text)
+    , _siStyleSetting :: !StyleSetting
+    , _siKey          :: !(Maybe Key)
+    , _siOAuthToken   :: !(Maybe OAuthToken)
+    , _siTableId      :: !Text
+    , _siFields       :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StyleInsert'' with the minimum fields required to make a request.
@@ -79,30 +81,31 @@ data StyleInsert' = StyleInsert'
 --
 -- * 'siPrettyPrint'
 --
--- * 'siUserIp'
+-- * 'siUserIP'
+--
+-- * 'siStyleSetting'
 --
 -- * 'siKey'
 --
--- * 'siOauthToken'
+-- * 'siOAuthToken'
 --
 -- * 'siTableId'
 --
 -- * 'siFields'
---
--- * 'siAlt'
 styleInsert'
-    :: Text -- ^ 'tableId'
+    :: StyleSetting -- ^ 'StyleSetting'
+    -> Text -- ^ 'tableId'
     -> StyleInsert'
-styleInsert' pSiTableId_ =
+styleInsert' pSiStyleSetting_ pSiTableId_ =
     StyleInsert'
     { _siQuotaUser = Nothing
     , _siPrettyPrint = True
-    , _siUserIp = Nothing
+    , _siUserIP = Nothing
+    , _siStyleSetting = pSiStyleSetting_
     , _siKey = Nothing
-    , _siOauthToken = Nothing
+    , _siOAuthToken = Nothing
     , _siTableId = pSiTableId_
     , _siFields = Nothing
-    , _siAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,19 +123,25 @@ siPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-siUserIp :: Lens' StyleInsert' (Maybe Text)
-siUserIp = lens _siUserIp (\ s a -> s{_siUserIp = a})
+siUserIP :: Lens' StyleInsert' (Maybe Text)
+siUserIP = lens _siUserIP (\ s a -> s{_siUserIP = a})
+
+-- | Multipart request metadata.
+siStyleSetting :: Lens' StyleInsert' StyleSetting
+siStyleSetting
+  = lens _siStyleSetting
+      (\ s a -> s{_siStyleSetting = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-siKey :: Lens' StyleInsert' (Maybe Text)
+siKey :: Lens' StyleInsert' (Maybe Key)
 siKey = lens _siKey (\ s a -> s{_siKey = a})
 
 -- | OAuth 2.0 token for the current user.
-siOauthToken :: Lens' StyleInsert' (Maybe Text)
-siOauthToken
-  = lens _siOauthToken (\ s a -> s{_siOauthToken = a})
+siOAuthToken :: Lens' StyleInsert' (Maybe OAuthToken)
+siOAuthToken
+  = lens _siOAuthToken (\ s a -> s{_siOAuthToken = a})
 
 -- | Table for which a new style is being added
 siTableId :: Lens' StyleInsert' Text
@@ -143,20 +152,21 @@ siTableId
 siFields :: Lens' StyleInsert' (Maybe Text)
 siFields = lens _siFields (\ s a -> s{_siFields = a})
 
--- | Data format for the response.
-siAlt :: Lens' StyleInsert' Alt
-siAlt = lens _siAlt (\ s a -> s{_siAlt = a})
+instance GoogleAuth StyleInsert' where
+        authKey = siKey . _Just
+        authToken = siOAuthToken . _Just
 
 instance GoogleRequest StyleInsert' where
         type Rs StyleInsert' = StyleSetting
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u StyleInsert'{..}
-          = go _siQuotaUser (Just _siPrettyPrint) _siUserIp
+          = go _siQuotaUser (Just _siPrettyPrint) _siUserIP
               _siKey
-              _siOauthToken
+              _siOAuthToken
               _siTableId
               _siFields
-              (Just _siAlt)
+              (Just AltJSON)
+              _siStyleSetting
           where go
                   = clientWithRoute
                       (Proxy :: Proxy StyleInsertResource)

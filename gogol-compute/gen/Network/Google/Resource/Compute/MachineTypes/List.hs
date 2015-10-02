@@ -34,15 +34,14 @@ module Network.Google.Resource.Compute.MachineTypes.List
     , mtlQuotaUser
     , mtlPrettyPrint
     , mtlProject
-    , mtlUserIp
+    , mtlUserIP
     , mtlZone
     , mtlKey
     , mtlFilter
     , mtlPageToken
-    , mtlOauthToken
+    , mtlOAuthToken
     , mtlMaxResults
     , mtlFields
-    , mtlAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -58,13 +57,13 @@ type MachineTypesListResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "filter" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "maxResults" Word32 :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :>
+                               QueryParam "alt" AltJSON :>
                                  Get '[JSON] MachineTypeList
 
 -- | Retrieves the list of machine type resources available to the specified
@@ -75,15 +74,14 @@ data MachineTypesList' = MachineTypesList'
     { _mtlQuotaUser   :: !(Maybe Text)
     , _mtlPrettyPrint :: !Bool
     , _mtlProject     :: !Text
-    , _mtlUserIp      :: !(Maybe Text)
+    , _mtlUserIP      :: !(Maybe Text)
     , _mtlZone        :: !Text
-    , _mtlKey         :: !(Maybe Text)
+    , _mtlKey         :: !(Maybe Key)
     , _mtlFilter      :: !(Maybe Text)
     , _mtlPageToken   :: !(Maybe Text)
-    , _mtlOauthToken  :: !(Maybe Text)
+    , _mtlOAuthToken  :: !(Maybe OAuthToken)
     , _mtlMaxResults  :: !Word32
     , _mtlFields      :: !(Maybe Text)
-    , _mtlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MachineTypesList'' with the minimum fields required to make a request.
@@ -96,7 +94,7 @@ data MachineTypesList' = MachineTypesList'
 --
 -- * 'mtlProject'
 --
--- * 'mtlUserIp'
+-- * 'mtlUserIP'
 --
 -- * 'mtlZone'
 --
@@ -106,13 +104,11 @@ data MachineTypesList' = MachineTypesList'
 --
 -- * 'mtlPageToken'
 --
--- * 'mtlOauthToken'
+-- * 'mtlOAuthToken'
 --
 -- * 'mtlMaxResults'
 --
 -- * 'mtlFields'
---
--- * 'mtlAlt'
 machineTypesList'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
@@ -122,15 +118,14 @@ machineTypesList' pMtlProject_ pMtlZone_ =
     { _mtlQuotaUser = Nothing
     , _mtlPrettyPrint = True
     , _mtlProject = pMtlProject_
-    , _mtlUserIp = Nothing
+    , _mtlUserIP = Nothing
     , _mtlZone = pMtlZone_
     , _mtlKey = Nothing
     , _mtlFilter = Nothing
     , _mtlPageToken = Nothing
-    , _mtlOauthToken = Nothing
+    , _mtlOAuthToken = Nothing
     , _mtlMaxResults = 500
     , _mtlFields = Nothing
-    , _mtlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,9 +148,9 @@ mtlProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mtlUserIp :: Lens' MachineTypesList' (Maybe Text)
-mtlUserIp
-  = lens _mtlUserIp (\ s a -> s{_mtlUserIp = a})
+mtlUserIP :: Lens' MachineTypesList' (Maybe Text)
+mtlUserIP
+  = lens _mtlUserIP (\ s a -> s{_mtlUserIP = a})
 
 -- | The name of the zone for this request.
 mtlZone :: Lens' MachineTypesList' Text
@@ -164,7 +159,7 @@ mtlZone = lens _mtlZone (\ s a -> s{_mtlZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mtlKey :: Lens' MachineTypesList' (Maybe Text)
+mtlKey :: Lens' MachineTypesList' (Maybe Key)
 mtlKey = lens _mtlKey (\ s a -> s{_mtlKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
@@ -190,10 +185,10 @@ mtlPageToken
   = lens _mtlPageToken (\ s a -> s{_mtlPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-mtlOauthToken :: Lens' MachineTypesList' (Maybe Text)
-mtlOauthToken
-  = lens _mtlOauthToken
-      (\ s a -> s{_mtlOauthToken = a})
+mtlOAuthToken :: Lens' MachineTypesList' (Maybe OAuthToken)
+mtlOAuthToken
+  = lens _mtlOAuthToken
+      (\ s a -> s{_mtlOAuthToken = a})
 
 -- | Maximum count of results to be returned.
 mtlMaxResults :: Lens' MachineTypesList' Word32
@@ -206,24 +201,24 @@ mtlFields :: Lens' MachineTypesList' (Maybe Text)
 mtlFields
   = lens _mtlFields (\ s a -> s{_mtlFields = a})
 
--- | Data format for the response.
-mtlAlt :: Lens' MachineTypesList' Alt
-mtlAlt = lens _mtlAlt (\ s a -> s{_mtlAlt = a})
+instance GoogleAuth MachineTypesList' where
+        authKey = mtlKey . _Just
+        authToken = mtlOAuthToken . _Just
 
 instance GoogleRequest MachineTypesList' where
         type Rs MachineTypesList' = MachineTypeList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u MachineTypesList'{..}
           = go _mtlQuotaUser (Just _mtlPrettyPrint) _mtlProject
-              _mtlUserIp
+              _mtlUserIP
               _mtlZone
               _mtlKey
               _mtlFilter
               _mtlPageToken
-              _mtlOauthToken
+              _mtlOAuthToken
               (Just _mtlMaxResults)
               _mtlFields
-              (Just _mtlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy MachineTypesListResource)

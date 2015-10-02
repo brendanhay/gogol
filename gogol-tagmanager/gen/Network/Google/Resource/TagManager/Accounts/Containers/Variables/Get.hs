@@ -19,7 +19,7 @@
 --
 -- | Gets a GTM Variable.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersVariablesGet@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersVariablesGet@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Variables.Get
     (
     -- * REST Resource
@@ -33,19 +33,18 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Variables.Get
     , acvgQuotaUser
     , acvgPrettyPrint
     , acvgContainerId
-    , acvgUserIp
+    , acvgUserIP
     , acvgVariableId
     , acvgAccountId
     , acvgKey
-    , acvgOauthToken
+    , acvgOAuthToken
     , acvgFields
-    , acvgAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagmanagerAccountsContainersVariablesGet@ which the
+-- | A resource alias for @TagManagerAccountsContainersVariablesGet@ which the
 -- 'AccountsContainersVariablesGet'' request conforms to.
 type AccountsContainersVariablesGetResource =
      "accounts" :>
@@ -57,10 +56,10 @@ type AccountsContainersVariablesGetResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Get '[JSON] Variable
+                             QueryParam "alt" AltJSON :> Get '[JSON] Variable
 
 -- | Gets a GTM Variable.
 --
@@ -69,13 +68,12 @@ data AccountsContainersVariablesGet' = AccountsContainersVariablesGet'
     { _acvgQuotaUser   :: !(Maybe Text)
     , _acvgPrettyPrint :: !Bool
     , _acvgContainerId :: !Text
-    , _acvgUserIp      :: !(Maybe Text)
+    , _acvgUserIP      :: !(Maybe Text)
     , _acvgVariableId  :: !Text
     , _acvgAccountId   :: !Text
-    , _acvgKey         :: !(Maybe Text)
-    , _acvgOauthToken  :: !(Maybe Text)
+    , _acvgKey         :: !(Maybe Key)
+    , _acvgOAuthToken  :: !(Maybe OAuthToken)
     , _acvgFields      :: !(Maybe Text)
-    , _acvgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersVariablesGet'' with the minimum fields required to make a request.
@@ -88,7 +86,7 @@ data AccountsContainersVariablesGet' = AccountsContainersVariablesGet'
 --
 -- * 'acvgContainerId'
 --
--- * 'acvgUserIp'
+-- * 'acvgUserIP'
 --
 -- * 'acvgVariableId'
 --
@@ -96,11 +94,9 @@ data AccountsContainersVariablesGet' = AccountsContainersVariablesGet'
 --
 -- * 'acvgKey'
 --
--- * 'acvgOauthToken'
+-- * 'acvgOAuthToken'
 --
 -- * 'acvgFields'
---
--- * 'acvgAlt'
 accountsContainersVariablesGet'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'variableId'
@@ -111,13 +107,12 @@ accountsContainersVariablesGet' pAcvgContainerId_ pAcvgVariableId_ pAcvgAccountI
     { _acvgQuotaUser = Nothing
     , _acvgPrettyPrint = True
     , _acvgContainerId = pAcvgContainerId_
-    , _acvgUserIp = Nothing
+    , _acvgUserIP = Nothing
     , _acvgVariableId = pAcvgVariableId_
     , _acvgAccountId = pAcvgAccountId_
     , _acvgKey = Nothing
-    , _acvgOauthToken = Nothing
+    , _acvgOAuthToken = Nothing
     , _acvgFields = Nothing
-    , _acvgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -142,9 +137,9 @@ acvgContainerId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-acvgUserIp :: Lens' AccountsContainersVariablesGet' (Maybe Text)
-acvgUserIp
-  = lens _acvgUserIp (\ s a -> s{_acvgUserIp = a})
+acvgUserIP :: Lens' AccountsContainersVariablesGet' (Maybe Text)
+acvgUserIP
+  = lens _acvgUserIP (\ s a -> s{_acvgUserIP = a})
 
 -- | The GTM Variable ID.
 acvgVariableId :: Lens' AccountsContainersVariablesGet' Text
@@ -161,23 +156,24 @@ acvgAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-acvgKey :: Lens' AccountsContainersVariablesGet' (Maybe Text)
+acvgKey :: Lens' AccountsContainersVariablesGet' (Maybe Key)
 acvgKey = lens _acvgKey (\ s a -> s{_acvgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-acvgOauthToken :: Lens' AccountsContainersVariablesGet' (Maybe Text)
-acvgOauthToken
-  = lens _acvgOauthToken
-      (\ s a -> s{_acvgOauthToken = a})
+acvgOAuthToken :: Lens' AccountsContainersVariablesGet' (Maybe OAuthToken)
+acvgOAuthToken
+  = lens _acvgOAuthToken
+      (\ s a -> s{_acvgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 acvgFields :: Lens' AccountsContainersVariablesGet' (Maybe Text)
 acvgFields
   = lens _acvgFields (\ s a -> s{_acvgFields = a})
 
--- | Data format for the response.
-acvgAlt :: Lens' AccountsContainersVariablesGet' Alt
-acvgAlt = lens _acvgAlt (\ s a -> s{_acvgAlt = a})
+instance GoogleAuth AccountsContainersVariablesGet'
+         where
+        authKey = acvgKey . _Just
+        authToken = acvgOAuthToken . _Just
 
 instance GoogleRequest
          AccountsContainersVariablesGet' where
@@ -187,13 +183,13 @@ instance GoogleRequest
           AccountsContainersVariablesGet'{..}
           = go _acvgQuotaUser (Just _acvgPrettyPrint)
               _acvgContainerId
-              _acvgUserIp
+              _acvgUserIP
               _acvgVariableId
               _acvgAccountId
               _acvgKey
-              _acvgOauthToken
+              _acvgOAuthToken
               _acvgFields
-              (Just _acvgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

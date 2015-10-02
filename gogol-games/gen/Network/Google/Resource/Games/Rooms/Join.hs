@@ -31,15 +31,15 @@ module Network.Google.Resource.Games.Rooms.Join
     , RoomsJoin'
 
     -- * Request Lenses
+    , rjRoomJoinRequest
     , rjQuotaUser
     , rjPrettyPrint
-    , rjUserIp
+    , rjUserIP
     , rjKey
     , rjRoomId
     , rjLanguage
-    , rjOauthToken
+    , rjOAuthToken
     , rjFields
-    , rjAlt
     ) where
 
 import           Network.Google.Games.Types
@@ -54,37 +54,40 @@ type RoomsJoinResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "language" Text :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Post '[JSON] Room
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] RoomJoinRequest :> Post '[JSON] Room
 
 -- | Join a room. For internal use by the Games SDK only. Calling this method
 -- directly is unsupported.
 --
 -- /See:/ 'roomsJoin'' smart constructor.
 data RoomsJoin' = RoomsJoin'
-    { _rjQuotaUser   :: !(Maybe Text)
-    , _rjPrettyPrint :: !Bool
-    , _rjUserIp      :: !(Maybe Text)
-    , _rjKey         :: !(Maybe Text)
-    , _rjRoomId      :: !Text
-    , _rjLanguage    :: !(Maybe Text)
-    , _rjOauthToken  :: !(Maybe Text)
-    , _rjFields      :: !(Maybe Text)
-    , _rjAlt         :: !Alt
+    { _rjRoomJoinRequest :: !RoomJoinRequest
+    , _rjQuotaUser       :: !(Maybe Text)
+    , _rjPrettyPrint     :: !Bool
+    , _rjUserIP          :: !(Maybe Text)
+    , _rjKey             :: !(Maybe Key)
+    , _rjRoomId          :: !Text
+    , _rjLanguage        :: !(Maybe Text)
+    , _rjOAuthToken      :: !(Maybe OAuthToken)
+    , _rjFields          :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomsJoin'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'rjRoomJoinRequest'
+--
 -- * 'rjQuotaUser'
 --
 -- * 'rjPrettyPrint'
 --
--- * 'rjUserIp'
+-- * 'rjUserIP'
 --
 -- * 'rjKey'
 --
@@ -92,26 +95,31 @@ data RoomsJoin' = RoomsJoin'
 --
 -- * 'rjLanguage'
 --
--- * 'rjOauthToken'
+-- * 'rjOAuthToken'
 --
 -- * 'rjFields'
---
--- * 'rjAlt'
 roomsJoin'
-    :: Text -- ^ 'roomId'
+    :: RoomJoinRequest -- ^ 'RoomJoinRequest'
+    -> Text -- ^ 'roomId'
     -> RoomsJoin'
-roomsJoin' pRjRoomId_ =
+roomsJoin' pRjRoomJoinRequest_ pRjRoomId_ =
     RoomsJoin'
-    { _rjQuotaUser = Nothing
+    { _rjRoomJoinRequest = pRjRoomJoinRequest_
+    , _rjQuotaUser = Nothing
     , _rjPrettyPrint = True
-    , _rjUserIp = Nothing
+    , _rjUserIP = Nothing
     , _rjKey = Nothing
     , _rjRoomId = pRjRoomId_
     , _rjLanguage = Nothing
-    , _rjOauthToken = Nothing
+    , _rjOAuthToken = Nothing
     , _rjFields = Nothing
-    , _rjAlt = JSON
     }
+
+-- | Multipart request metadata.
+rjRoomJoinRequest :: Lens' RoomsJoin' RoomJoinRequest
+rjRoomJoinRequest
+  = lens _rjRoomJoinRequest
+      (\ s a -> s{_rjRoomJoinRequest = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -128,13 +136,13 @@ rjPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rjUserIp :: Lens' RoomsJoin' (Maybe Text)
-rjUserIp = lens _rjUserIp (\ s a -> s{_rjUserIp = a})
+rjUserIP :: Lens' RoomsJoin' (Maybe Text)
+rjUserIP = lens _rjUserIP (\ s a -> s{_rjUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rjKey :: Lens' RoomsJoin' (Maybe Text)
+rjKey :: Lens' RoomsJoin' (Maybe Key)
 rjKey = lens _rjKey (\ s a -> s{_rjKey = a})
 
 -- | The ID of the room.
@@ -147,29 +155,30 @@ rjLanguage
   = lens _rjLanguage (\ s a -> s{_rjLanguage = a})
 
 -- | OAuth 2.0 token for the current user.
-rjOauthToken :: Lens' RoomsJoin' (Maybe Text)
-rjOauthToken
-  = lens _rjOauthToken (\ s a -> s{_rjOauthToken = a})
+rjOAuthToken :: Lens' RoomsJoin' (Maybe OAuthToken)
+rjOAuthToken
+  = lens _rjOAuthToken (\ s a -> s{_rjOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 rjFields :: Lens' RoomsJoin' (Maybe Text)
 rjFields = lens _rjFields (\ s a -> s{_rjFields = a})
 
--- | Data format for the response.
-rjAlt :: Lens' RoomsJoin' Alt
-rjAlt = lens _rjAlt (\ s a -> s{_rjAlt = a})
+instance GoogleAuth RoomsJoin' where
+        authKey = rjKey . _Just
+        authToken = rjOAuthToken . _Just
 
 instance GoogleRequest RoomsJoin' where
         type Rs RoomsJoin' = Room
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u RoomsJoin'{..}
-          = go _rjQuotaUser (Just _rjPrettyPrint) _rjUserIp
+          = go _rjQuotaUser (Just _rjPrettyPrint) _rjUserIP
               _rjKey
               _rjRoomId
               _rjLanguage
-              _rjOauthToken
+              _rjOAuthToken
               _rjFields
-              (Just _rjAlt)
+              (Just AltJSON)
+              _rjRoomJoinRequest
           where go
                   = clientWithRoute (Proxy :: Proxy RoomsJoinResource)
                       r

@@ -34,7 +34,7 @@ module Network.Google.Resource.YouTube.Subscriptions.List
     , sPart
     , sPrettyPrint
     , sMine
-    , sUserIp
+    , sUserIP
     , sChannelId
     , sOnBehalfOfContentOwner
     , sKey
@@ -43,11 +43,10 @@ module Network.Google.Resource.YouTube.Subscriptions.List
     , sMySubscribers
     , sForChannelId
     , sPageToken
-    , sOauthToken
+    , sOAuthToken
     , sOrder
     , sMaxResults
     , sFields
-    , sAlt
     ) where
 
 import           Network.Google.Prelude
@@ -64,19 +63,19 @@ type SubscriptionsListResource =
                QueryParam "userIp" Text :>
                  QueryParam "channelId" Text :>
                    QueryParam "onBehalfOfContentOwner" Text :>
-                     QueryParam "key" Text :>
+                     QueryParam "key" Key :>
                        QueryParam "onBehalfOfContentOwnerChannel" Text :>
                          QueryParam "id" Text :>
                            QueryParam "mySubscribers" Bool :>
                              QueryParam "forChannelId" Text :>
                                QueryParam "pageToken" Text :>
-                                 QueryParam "oauth_token" Text :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "order"
                                      YouTubeSubscriptionsListOrder
                                      :>
                                      QueryParam "maxResults" Word32 :>
                                        QueryParam "fields" Text :>
-                                         QueryParam "alt" Alt :>
+                                         QueryParam "alt" AltJSON :>
                                            Get '[JSON] SubscriptionListResponse
 
 -- | Returns subscription resources that match the API request criteria.
@@ -87,20 +86,19 @@ data SubscriptionsList' = SubscriptionsList'
     , _sPart                          :: !Text
     , _sPrettyPrint                   :: !Bool
     , _sMine                          :: !(Maybe Bool)
-    , _sUserIp                        :: !(Maybe Text)
+    , _sUserIP                        :: !(Maybe Text)
     , _sChannelId                     :: !(Maybe Text)
     , _sOnBehalfOfContentOwner        :: !(Maybe Text)
-    , _sKey                           :: !(Maybe Text)
+    , _sKey                           :: !(Maybe Key)
     , _sOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _sId                            :: !(Maybe Text)
     , _sMySubscribers                 :: !(Maybe Bool)
     , _sForChannelId                  :: !(Maybe Text)
     , _sPageToken                     :: !(Maybe Text)
-    , _sOauthToken                    :: !(Maybe Text)
+    , _sOAuthToken                    :: !(Maybe OAuthToken)
     , _sOrder                         :: !YouTubeSubscriptionsListOrder
     , _sMaxResults                    :: !Word32
     , _sFields                        :: !(Maybe Text)
-    , _sAlt                           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionsList'' with the minimum fields required to make a request.
@@ -115,7 +113,7 @@ data SubscriptionsList' = SubscriptionsList'
 --
 -- * 'sMine'
 --
--- * 'sUserIp'
+-- * 'sUserIP'
 --
 -- * 'sChannelId'
 --
@@ -133,15 +131,13 @@ data SubscriptionsList' = SubscriptionsList'
 --
 -- * 'sPageToken'
 --
--- * 'sOauthToken'
+-- * 'sOAuthToken'
 --
 -- * 'sOrder'
 --
 -- * 'sMaxResults'
 --
 -- * 'sFields'
---
--- * 'sAlt'
 subscriptionsList'
     :: Text -- ^ 'part'
     -> SubscriptionsList'
@@ -151,7 +147,7 @@ subscriptionsList' pSPart_ =
     , _sPart = pSPart_
     , _sPrettyPrint = True
     , _sMine = Nothing
-    , _sUserIp = Nothing
+    , _sUserIP = Nothing
     , _sChannelId = Nothing
     , _sOnBehalfOfContentOwner = Nothing
     , _sKey = Nothing
@@ -160,11 +156,10 @@ subscriptionsList' pSPart_ =
     , _sMySubscribers = Nothing
     , _sForChannelId = Nothing
     , _sPageToken = Nothing
-    , _sOauthToken = Nothing
+    , _sOAuthToken = Nothing
     , _sOrder = YSubscriptionOrderRelevance
     , _sMaxResults = 5
     , _sFields = Nothing
-    , _sAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -196,8 +191,8 @@ sMine = lens _sMine (\ s a -> s{_sMine = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-sUserIp :: Lens' SubscriptionsList' (Maybe Text)
-sUserIp = lens _sUserIp (\ s a -> s{_sUserIp = a})
+sUserIP :: Lens' SubscriptionsList' (Maybe Text)
+sUserIP = lens _sUserIP (\ s a -> s{_sUserIP = a})
 
 -- | The channelId parameter specifies a YouTube channel ID. The API will
 -- only return that channel\'s subscriptions.
@@ -223,7 +218,7 @@ sOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-sKey :: Lens' SubscriptionsList' (Maybe Text)
+sKey :: Lens' SubscriptionsList' (Maybe Key)
 sKey = lens _sKey (\ s a -> s{_sKey = a})
 
 -- | This parameter can only be used in a properly authorized request. Note:
@@ -277,9 +272,9 @@ sPageToken
   = lens _sPageToken (\ s a -> s{_sPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-sOauthToken :: Lens' SubscriptionsList' (Maybe Text)
-sOauthToken
-  = lens _sOauthToken (\ s a -> s{_sOauthToken = a})
+sOAuthToken :: Lens' SubscriptionsList' (Maybe OAuthToken)
+sOAuthToken
+  = lens _sOAuthToken (\ s a -> s{_sOAuthToken = a})
 
 -- | The order parameter specifies the method that will be used to sort
 -- resources in the API response.
@@ -296,9 +291,9 @@ sMaxResults
 sFields :: Lens' SubscriptionsList' (Maybe Text)
 sFields = lens _sFields (\ s a -> s{_sFields = a})
 
--- | Data format for the response.
-sAlt :: Lens' SubscriptionsList' Alt
-sAlt = lens _sAlt (\ s a -> s{_sAlt = a})
+instance GoogleAuth SubscriptionsList' where
+        authKey = sKey . _Just
+        authToken = sOAuthToken . _Just
 
 instance GoogleRequest SubscriptionsList' where
         type Rs SubscriptionsList' = SubscriptionListResponse
@@ -306,7 +301,7 @@ instance GoogleRequest SubscriptionsList' where
         requestWithRoute r u SubscriptionsList'{..}
           = go _sQuotaUser (Just _sPart) (Just _sPrettyPrint)
               _sMine
-              _sUserIp
+              _sUserIP
               _sChannelId
               _sOnBehalfOfContentOwner
               _sKey
@@ -315,11 +310,11 @@ instance GoogleRequest SubscriptionsList' where
               _sMySubscribers
               _sForChannelId
               _sPageToken
-              _sOauthToken
+              _sOAuthToken
               (Just _sOrder)
               (Just _sMaxResults)
               _sFields
-              (Just _sAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy SubscriptionsListResource)

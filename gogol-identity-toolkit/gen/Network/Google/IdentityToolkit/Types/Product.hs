@@ -23,7 +23,7 @@ import           Network.Google.Prelude
 -- /See:/ 'userInfo' smart constructor.
 data UserInfo = UserInfo
     { _uiEmail             :: !(Maybe Text)
-    , _uiPhotoUrl          :: !(Maybe Text)
+    , _uiPhotoURL          :: !(Maybe Text)
     , _uiDisabled          :: !(Maybe Bool)
     , _uiProviderUserInfo  :: !(Maybe [UserInfoProviderUserInfo])
     , _uiValidSince        :: !(Maybe Int64)
@@ -42,7 +42,7 @@ data UserInfo = UserInfo
 --
 -- * 'uiEmail'
 --
--- * 'uiPhotoUrl'
+-- * 'uiPhotoURL'
 --
 -- * 'uiDisabled'
 --
@@ -68,7 +68,7 @@ userInfo
 userInfo =
     UserInfo
     { _uiEmail = Nothing
-    , _uiPhotoUrl = Nothing
+    , _uiPhotoURL = Nothing
     , _uiDisabled = Nothing
     , _uiProviderUserInfo = Nothing
     , _uiValidSince = Nothing
@@ -86,9 +86,9 @@ uiEmail :: Lens' UserInfo (Maybe Text)
 uiEmail = lens _uiEmail (\ s a -> s{_uiEmail = a})
 
 -- | The URL of the user profile photo.
-uiPhotoUrl :: Lens' UserInfo (Maybe Text)
-uiPhotoUrl
-  = lens _uiPhotoUrl (\ s a -> s{_uiPhotoUrl = a})
+uiPhotoURL :: Lens' UserInfo (Maybe Text)
+uiPhotoURL
+  = lens _uiPhotoURL (\ s a -> s{_uiPhotoURL = a})
 
 -- | Whether the user is disabled.
 uiDisabled :: Lens' UserInfo (Maybe Bool)
@@ -168,7 +168,7 @@ instance ToJSON UserInfo where
           = object
               (catMaybes
                  [("email" .=) <$> _uiEmail,
-                  ("photoUrl" .=) <$> _uiPhotoUrl,
+                  ("photoUrl" .=) <$> _uiPhotoURL,
                   ("disabled" .=) <$> _uiDisabled,
                   ("providerUserInfo" .=) <$> _uiProviderUserInfo,
                   ("validSince" .=) <$> _uiValidSince,
@@ -182,331 +182,332 @@ instance ToJSON UserInfo where
 
 -- | Request to verify the password.
 --
--- /See:/ 'identitytoolkitRelyingpartyVerifyPasswordRequest' smart constructor.
-data IdentitytoolkitRelyingpartyVerifyPasswordRequest = IdentitytoolkitRelyingpartyVerifyPasswordRequest
-    { _irvprEmail            :: !(Maybe Text)
-    , _irvprCaptchaChallenge :: !(Maybe Text)
-    , _irvprPassword         :: !(Maybe Text)
-    , _irvprCaptchaResponse  :: !(Maybe Text)
-    , _irvprPendingIdToken   :: !(Maybe Text)
+-- /See:/ 'identitytoolkitRelyingPartyyVerifyPasswordRequest' smart constructor.
+data IdentitytoolkitRelyingPartyyVerifyPasswordRequest = IdentitytoolkitRelyingPartyyVerifyPasswordRequest
+    { _irpvprEmail            :: !(Maybe Text)
+    , _irpvprCaptchaChallenge :: !(Maybe Text)
+    , _irpvprPassword         :: !(Maybe Text)
+    , _irpvprCaptchaResponse  :: !(Maybe Text)
+    , _irpvprPendingIdToken   :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'IdentitytoolkitRelyingpartyVerifyPasswordRequest' with the minimum fields required to make a request.
+-- | Creates a value of 'IdentitytoolkitRelyingPartyyVerifyPasswordRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'irvprEmail'
+-- * 'irpvprEmail'
 --
--- * 'irvprCaptchaChallenge'
+-- * 'irpvprCaptchaChallenge'
 --
--- * 'irvprPassword'
+-- * 'irpvprPassword'
 --
--- * 'irvprCaptchaResponse'
+-- * 'irpvprCaptchaResponse'
 --
--- * 'irvprPendingIdToken'
-identitytoolkitRelyingpartyVerifyPasswordRequest
-    :: IdentitytoolkitRelyingpartyVerifyPasswordRequest
-identitytoolkitRelyingpartyVerifyPasswordRequest =
-    IdentitytoolkitRelyingpartyVerifyPasswordRequest
-    { _irvprEmail = Nothing
-    , _irvprCaptchaChallenge = Nothing
-    , _irvprPassword = Nothing
-    , _irvprCaptchaResponse = Nothing
-    , _irvprPendingIdToken = Nothing
+-- * 'irpvprPendingIdToken'
+identitytoolkitRelyingPartyyVerifyPasswordRequest
+    :: IdentitytoolkitRelyingPartyyVerifyPasswordRequest
+identitytoolkitRelyingPartyyVerifyPasswordRequest =
+    IdentitytoolkitRelyingPartyyVerifyPasswordRequest
+    { _irpvprEmail = Nothing
+    , _irpvprCaptchaChallenge = Nothing
+    , _irpvprPassword = Nothing
+    , _irpvprCaptchaResponse = Nothing
+    , _irpvprPendingIdToken = Nothing
     }
 
 -- | The email of the user.
-irvprEmail :: Lens' IdentitytoolkitRelyingpartyVerifyPasswordRequest (Maybe Text)
-irvprEmail
-  = lens _irvprEmail (\ s a -> s{_irvprEmail = a})
+irpvprEmail :: Lens' IdentitytoolkitRelyingPartyyVerifyPasswordRequest (Maybe Text)
+irpvprEmail
+  = lens _irpvprEmail (\ s a -> s{_irpvprEmail = a})
 
 -- | The captcha challenge.
-irvprCaptchaChallenge :: Lens' IdentitytoolkitRelyingpartyVerifyPasswordRequest (Maybe Text)
-irvprCaptchaChallenge
-  = lens _irvprCaptchaChallenge
-      (\ s a -> s{_irvprCaptchaChallenge = a})
+irpvprCaptchaChallenge :: Lens' IdentitytoolkitRelyingPartyyVerifyPasswordRequest (Maybe Text)
+irpvprCaptchaChallenge
+  = lens _irpvprCaptchaChallenge
+      (\ s a -> s{_irpvprCaptchaChallenge = a})
 
 -- | The password inputed by the user.
-irvprPassword :: Lens' IdentitytoolkitRelyingpartyVerifyPasswordRequest (Maybe Text)
-irvprPassword
-  = lens _irvprPassword
-      (\ s a -> s{_irvprPassword = a})
+irpvprPassword :: Lens' IdentitytoolkitRelyingPartyyVerifyPasswordRequest (Maybe Text)
+irpvprPassword
+  = lens _irpvprPassword
+      (\ s a -> s{_irpvprPassword = a})
 
 -- | Response to the captcha.
-irvprCaptchaResponse :: Lens' IdentitytoolkitRelyingpartyVerifyPasswordRequest (Maybe Text)
-irvprCaptchaResponse
-  = lens _irvprCaptchaResponse
-      (\ s a -> s{_irvprCaptchaResponse = a})
+irpvprCaptchaResponse :: Lens' IdentitytoolkitRelyingPartyyVerifyPasswordRequest (Maybe Text)
+irpvprCaptchaResponse
+  = lens _irpvprCaptchaResponse
+      (\ s a -> s{_irpvprCaptchaResponse = a})
 
 -- | The GITKit token for the non-trusted IDP, which is to be confirmed by
 -- the user.
-irvprPendingIdToken :: Lens' IdentitytoolkitRelyingpartyVerifyPasswordRequest (Maybe Text)
-irvprPendingIdToken
-  = lens _irvprPendingIdToken
-      (\ s a -> s{_irvprPendingIdToken = a})
+irpvprPendingIdToken :: Lens' IdentitytoolkitRelyingPartyyVerifyPasswordRequest (Maybe Text)
+irpvprPendingIdToken
+  = lens _irpvprPendingIdToken
+      (\ s a -> s{_irpvprPendingIdToken = a})
 
 instance FromJSON
-         IdentitytoolkitRelyingpartyVerifyPasswordRequest
+         IdentitytoolkitRelyingPartyyVerifyPasswordRequest
          where
         parseJSON
           = withObject
-              "IdentitytoolkitRelyingpartyVerifyPasswordRequest"
+              "IdentitytoolkitRelyingPartyyVerifyPasswordRequest"
               (\ o ->
-                 IdentitytoolkitRelyingpartyVerifyPasswordRequest <$>
+                 IdentitytoolkitRelyingPartyyVerifyPasswordRequest <$>
                    (o .:? "email") <*> (o .:? "captchaChallenge") <*>
                      (o .:? "password")
                      <*> (o .:? "captchaResponse")
                      <*> (o .:? "pendingIdToken"))
 
 instance ToJSON
-         IdentitytoolkitRelyingpartyVerifyPasswordRequest
+         IdentitytoolkitRelyingPartyyVerifyPasswordRequest
          where
         toJSON
-          IdentitytoolkitRelyingpartyVerifyPasswordRequest{..}
+          IdentitytoolkitRelyingPartyyVerifyPasswordRequest{..}
           = object
               (catMaybes
-                 [("email" .=) <$> _irvprEmail,
-                  ("captchaChallenge" .=) <$> _irvprCaptchaChallenge,
-                  ("password" .=) <$> _irvprPassword,
-                  ("captchaResponse" .=) <$> _irvprCaptchaResponse,
-                  ("pendingIdToken" .=) <$> _irvprPendingIdToken])
+                 [("email" .=) <$> _irpvprEmail,
+                  ("captchaChallenge" .=) <$> _irpvprCaptchaChallenge,
+                  ("password" .=) <$> _irpvprPassword,
+                  ("captchaResponse" .=) <$> _irpvprCaptchaResponse,
+                  ("pendingIdToken" .=) <$> _irpvprPendingIdToken])
 
 -- | Request to verify the IDP assertion.
 --
--- /See:/ 'identitytoolkitRelyingpartyVerifyAssertionRequest' smart constructor.
-data IdentitytoolkitRelyingpartyVerifyAssertionRequest = IdentitytoolkitRelyingpartyVerifyAssertionRequest
-    { _irvarPostBody           :: !(Maybe Text)
-    , _irvarReturnRefreshToken :: !(Maybe Bool)
-    , _irvarRequestUri         :: !(Maybe Text)
-    , _irvarPendingIdToken     :: !(Maybe Text)
+-- /See:/ 'identitytoolkitRelyingPartyyVerifyAssertionRequest' smart constructor.
+data IdentitytoolkitRelyingPartyyVerifyAssertionRequest = IdentitytoolkitRelyingPartyyVerifyAssertionRequest
+    { _irpvarPostBody           :: !(Maybe Text)
+    , _irpvarReturnRefreshToken :: !(Maybe Bool)
+    , _irpvarRequestURI         :: !(Maybe Text)
+    , _irpvarPendingIdToken     :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'IdentitytoolkitRelyingpartyVerifyAssertionRequest' with the minimum fields required to make a request.
+-- | Creates a value of 'IdentitytoolkitRelyingPartyyVerifyAssertionRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'irvarPostBody'
+-- * 'irpvarPostBody'
 --
--- * 'irvarReturnRefreshToken'
+-- * 'irpvarReturnRefreshToken'
 --
--- * 'irvarRequestUri'
+-- * 'irpvarRequestURI'
 --
--- * 'irvarPendingIdToken'
-identitytoolkitRelyingpartyVerifyAssertionRequest
-    :: IdentitytoolkitRelyingpartyVerifyAssertionRequest
-identitytoolkitRelyingpartyVerifyAssertionRequest =
-    IdentitytoolkitRelyingpartyVerifyAssertionRequest
-    { _irvarPostBody = Nothing
-    , _irvarReturnRefreshToken = Nothing
-    , _irvarRequestUri = Nothing
-    , _irvarPendingIdToken = Nothing
+-- * 'irpvarPendingIdToken'
+identitytoolkitRelyingPartyyVerifyAssertionRequest
+    :: IdentitytoolkitRelyingPartyyVerifyAssertionRequest
+identitytoolkitRelyingPartyyVerifyAssertionRequest =
+    IdentitytoolkitRelyingPartyyVerifyAssertionRequest
+    { _irpvarPostBody = Nothing
+    , _irpvarReturnRefreshToken = Nothing
+    , _irpvarRequestURI = Nothing
+    , _irpvarPendingIdToken = Nothing
     }
 
 -- | The post body if the request is a HTTP POST.
-irvarPostBody :: Lens' IdentitytoolkitRelyingpartyVerifyAssertionRequest (Maybe Text)
-irvarPostBody
-  = lens _irvarPostBody
-      (\ s a -> s{_irvarPostBody = a})
+irpvarPostBody :: Lens' IdentitytoolkitRelyingPartyyVerifyAssertionRequest (Maybe Text)
+irpvarPostBody
+  = lens _irpvarPostBody
+      (\ s a -> s{_irpvarPostBody = a})
 
 -- | Whether to return refresh tokens.
-irvarReturnRefreshToken :: Lens' IdentitytoolkitRelyingpartyVerifyAssertionRequest (Maybe Bool)
-irvarReturnRefreshToken
-  = lens _irvarReturnRefreshToken
-      (\ s a -> s{_irvarReturnRefreshToken = a})
+irpvarReturnRefreshToken :: Lens' IdentitytoolkitRelyingPartyyVerifyAssertionRequest (Maybe Bool)
+irpvarReturnRefreshToken
+  = lens _irpvarReturnRefreshToken
+      (\ s a -> s{_irpvarReturnRefreshToken = a})
 
 -- | The URI to which the IDP redirects the user back. It may contain
 -- federated login result params added by the IDP.
-irvarRequestUri :: Lens' IdentitytoolkitRelyingpartyVerifyAssertionRequest (Maybe Text)
-irvarRequestUri
-  = lens _irvarRequestUri
-      (\ s a -> s{_irvarRequestUri = a})
+irpvarRequestURI :: Lens' IdentitytoolkitRelyingPartyyVerifyAssertionRequest (Maybe Text)
+irpvarRequestURI
+  = lens _irpvarRequestURI
+      (\ s a -> s{_irpvarRequestURI = a})
 
 -- | The GITKit token for the non-trusted IDP pending to be confirmed by the
 -- user.
-irvarPendingIdToken :: Lens' IdentitytoolkitRelyingpartyVerifyAssertionRequest (Maybe Text)
-irvarPendingIdToken
-  = lens _irvarPendingIdToken
-      (\ s a -> s{_irvarPendingIdToken = a})
+irpvarPendingIdToken :: Lens' IdentitytoolkitRelyingPartyyVerifyAssertionRequest (Maybe Text)
+irpvarPendingIdToken
+  = lens _irpvarPendingIdToken
+      (\ s a -> s{_irpvarPendingIdToken = a})
 
 instance FromJSON
-         IdentitytoolkitRelyingpartyVerifyAssertionRequest
+         IdentitytoolkitRelyingPartyyVerifyAssertionRequest
          where
         parseJSON
           = withObject
-              "IdentitytoolkitRelyingpartyVerifyAssertionRequest"
+              "IdentitytoolkitRelyingPartyyVerifyAssertionRequest"
               (\ o ->
-                 IdentitytoolkitRelyingpartyVerifyAssertionRequest <$>
+                 IdentitytoolkitRelyingPartyyVerifyAssertionRequest
+                   <$>
                    (o .:? "postBody") <*> (o .:? "returnRefreshToken")
                      <*> (o .:? "requestUri")
                      <*> (o .:? "pendingIdToken"))
 
 instance ToJSON
-         IdentitytoolkitRelyingpartyVerifyAssertionRequest
+         IdentitytoolkitRelyingPartyyVerifyAssertionRequest
          where
         toJSON
-          IdentitytoolkitRelyingpartyVerifyAssertionRequest{..}
+          IdentitytoolkitRelyingPartyyVerifyAssertionRequest{..}
           = object
               (catMaybes
-                 [("postBody" .=) <$> _irvarPostBody,
+                 [("postBody" .=) <$> _irpvarPostBody,
                   ("returnRefreshToken" .=) <$>
-                    _irvarReturnRefreshToken,
-                  ("requestUri" .=) <$> _irvarRequestUri,
-                  ("pendingIdToken" .=) <$> _irvarPendingIdToken])
+                    _irpvarReturnRefreshToken,
+                  ("requestUri" .=) <$> _irpvarRequestURI,
+                  ("pendingIdToken" .=) <$> _irpvarPendingIdToken])
 
 -- | Request to set the account information.
 --
--- /See:/ 'identitytoolkitRelyingpartySetAccountInfoRequest' smart constructor.
-data IdentitytoolkitRelyingpartySetAccountInfoRequest = IdentitytoolkitRelyingpartySetAccountInfoRequest
-    { _irsairUpgradeToFederatedLogin :: !(Maybe Bool)
-    , _irsairEmail                   :: !(Maybe Text)
-    , _irsairCaptchaChallenge        :: !(Maybe Text)
-    , _irsairValidSince              :: !(Maybe Int64)
-    , _irsairOobCode                 :: !(Maybe Text)
-    , _irsairPassword                :: !(Maybe Text)
-    , _irsairCaptchaResponse         :: !(Maybe Text)
-    , _irsairEmailVerified           :: !(Maybe Bool)
-    , _irsairDisplayName             :: !(Maybe Text)
-    , _irsairDisableUser             :: !(Maybe Bool)
-    , _irsairLocalId                 :: !(Maybe Text)
-    , _irsairIdToken                 :: !(Maybe Text)
-    , _irsairProvider                :: !(Maybe [Text])
+-- /See:/ 'identitytoolkitRelyingPartyySetAccountInfoRequest' smart constructor.
+data IdentitytoolkitRelyingPartyySetAccountInfoRequest = IdentitytoolkitRelyingPartyySetAccountInfoRequest
+    { _irpsairUpgradeToFederatedLogin :: !(Maybe Bool)
+    , _irpsairEmail                   :: !(Maybe Text)
+    , _irpsairCaptchaChallenge        :: !(Maybe Text)
+    , _irpsairValidSince              :: !(Maybe Int64)
+    , _irpsairOobCode                 :: !(Maybe Text)
+    , _irpsairPassword                :: !(Maybe Text)
+    , _irpsairCaptchaResponse         :: !(Maybe Text)
+    , _irpsairEmailVerified           :: !(Maybe Bool)
+    , _irpsairDisplayName             :: !(Maybe Text)
+    , _irpsairDisableUser             :: !(Maybe Bool)
+    , _irpsairLocalId                 :: !(Maybe Text)
+    , _irpsairIdToken                 :: !(Maybe Text)
+    , _irpsairProvider                :: !(Maybe [Text])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'IdentitytoolkitRelyingpartySetAccountInfoRequest' with the minimum fields required to make a request.
+-- | Creates a value of 'IdentitytoolkitRelyingPartyySetAccountInfoRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'irsairUpgradeToFederatedLogin'
+-- * 'irpsairUpgradeToFederatedLogin'
 --
--- * 'irsairEmail'
+-- * 'irpsairEmail'
 --
--- * 'irsairCaptchaChallenge'
+-- * 'irpsairCaptchaChallenge'
 --
--- * 'irsairValidSince'
+-- * 'irpsairValidSince'
 --
--- * 'irsairOobCode'
+-- * 'irpsairOobCode'
 --
--- * 'irsairPassword'
+-- * 'irpsairPassword'
 --
--- * 'irsairCaptchaResponse'
+-- * 'irpsairCaptchaResponse'
 --
--- * 'irsairEmailVerified'
+-- * 'irpsairEmailVerified'
 --
--- * 'irsairDisplayName'
+-- * 'irpsairDisplayName'
 --
--- * 'irsairDisableUser'
+-- * 'irpsairDisableUser'
 --
--- * 'irsairLocalId'
+-- * 'irpsairLocalId'
 --
--- * 'irsairIdToken'
+-- * 'irpsairIdToken'
 --
--- * 'irsairProvider'
-identitytoolkitRelyingpartySetAccountInfoRequest
-    :: IdentitytoolkitRelyingpartySetAccountInfoRequest
-identitytoolkitRelyingpartySetAccountInfoRequest =
-    IdentitytoolkitRelyingpartySetAccountInfoRequest
-    { _irsairUpgradeToFederatedLogin = Nothing
-    , _irsairEmail = Nothing
-    , _irsairCaptchaChallenge = Nothing
-    , _irsairValidSince = Nothing
-    , _irsairOobCode = Nothing
-    , _irsairPassword = Nothing
-    , _irsairCaptchaResponse = Nothing
-    , _irsairEmailVerified = Nothing
-    , _irsairDisplayName = Nothing
-    , _irsairDisableUser = Nothing
-    , _irsairLocalId = Nothing
-    , _irsairIdToken = Nothing
-    , _irsairProvider = Nothing
+-- * 'irpsairProvider'
+identitytoolkitRelyingPartyySetAccountInfoRequest
+    :: IdentitytoolkitRelyingPartyySetAccountInfoRequest
+identitytoolkitRelyingPartyySetAccountInfoRequest =
+    IdentitytoolkitRelyingPartyySetAccountInfoRequest
+    { _irpsairUpgradeToFederatedLogin = Nothing
+    , _irpsairEmail = Nothing
+    , _irpsairCaptchaChallenge = Nothing
+    , _irpsairValidSince = Nothing
+    , _irpsairOobCode = Nothing
+    , _irpsairPassword = Nothing
+    , _irpsairCaptchaResponse = Nothing
+    , _irpsairEmailVerified = Nothing
+    , _irpsairDisplayName = Nothing
+    , _irpsairDisableUser = Nothing
+    , _irpsairLocalId = Nothing
+    , _irpsairIdToken = Nothing
+    , _irpsairProvider = Nothing
     }
 
 -- | Mark the user to upgrade to federated login.
-irsairUpgradeToFederatedLogin :: Lens' IdentitytoolkitRelyingpartySetAccountInfoRequest (Maybe Bool)
-irsairUpgradeToFederatedLogin
-  = lens _irsairUpgradeToFederatedLogin
-      (\ s a -> s{_irsairUpgradeToFederatedLogin = a})
+irpsairUpgradeToFederatedLogin :: Lens' IdentitytoolkitRelyingPartyySetAccountInfoRequest (Maybe Bool)
+irpsairUpgradeToFederatedLogin
+  = lens _irpsairUpgradeToFederatedLogin
+      (\ s a -> s{_irpsairUpgradeToFederatedLogin = a})
 
 -- | The email of the user.
-irsairEmail :: Lens' IdentitytoolkitRelyingpartySetAccountInfoRequest (Maybe Text)
-irsairEmail
-  = lens _irsairEmail (\ s a -> s{_irsairEmail = a})
+irpsairEmail :: Lens' IdentitytoolkitRelyingPartyySetAccountInfoRequest (Maybe Text)
+irpsairEmail
+  = lens _irpsairEmail (\ s a -> s{_irpsairEmail = a})
 
 -- | The captcha challenge.
-irsairCaptchaChallenge :: Lens' IdentitytoolkitRelyingpartySetAccountInfoRequest (Maybe Text)
-irsairCaptchaChallenge
-  = lens _irsairCaptchaChallenge
-      (\ s a -> s{_irsairCaptchaChallenge = a})
+irpsairCaptchaChallenge :: Lens' IdentitytoolkitRelyingPartyySetAccountInfoRequest (Maybe Text)
+irpsairCaptchaChallenge
+  = lens _irpsairCaptchaChallenge
+      (\ s a -> s{_irpsairCaptchaChallenge = a})
 
 -- | Timestamp in seconds for valid login token.
-irsairValidSince :: Lens' IdentitytoolkitRelyingpartySetAccountInfoRequest (Maybe Int64)
-irsairValidSince
-  = lens _irsairValidSince
-      (\ s a -> s{_irsairValidSince = a})
+irpsairValidSince :: Lens' IdentitytoolkitRelyingPartyySetAccountInfoRequest (Maybe Int64)
+irpsairValidSince
+  = lens _irpsairValidSince
+      (\ s a -> s{_irpsairValidSince = a})
 
 -- | The out-of-band code of the change email request.
-irsairOobCode :: Lens' IdentitytoolkitRelyingpartySetAccountInfoRequest (Maybe Text)
-irsairOobCode
-  = lens _irsairOobCode
-      (\ s a -> s{_irsairOobCode = a})
+irpsairOobCode :: Lens' IdentitytoolkitRelyingPartyySetAccountInfoRequest (Maybe Text)
+irpsairOobCode
+  = lens _irpsairOobCode
+      (\ s a -> s{_irpsairOobCode = a})
 
 -- | The new password of the user.
-irsairPassword :: Lens' IdentitytoolkitRelyingpartySetAccountInfoRequest (Maybe Text)
-irsairPassword
-  = lens _irsairPassword
-      (\ s a -> s{_irsairPassword = a})
+irpsairPassword :: Lens' IdentitytoolkitRelyingPartyySetAccountInfoRequest (Maybe Text)
+irpsairPassword
+  = lens _irpsairPassword
+      (\ s a -> s{_irpsairPassword = a})
 
 -- | Response to the captcha.
-irsairCaptchaResponse :: Lens' IdentitytoolkitRelyingpartySetAccountInfoRequest (Maybe Text)
-irsairCaptchaResponse
-  = lens _irsairCaptchaResponse
-      (\ s a -> s{_irsairCaptchaResponse = a})
+irpsairCaptchaResponse :: Lens' IdentitytoolkitRelyingPartyySetAccountInfoRequest (Maybe Text)
+irpsairCaptchaResponse
+  = lens _irpsairCaptchaResponse
+      (\ s a -> s{_irpsairCaptchaResponse = a})
 
 -- | Mark the email as verified or not.
-irsairEmailVerified :: Lens' IdentitytoolkitRelyingpartySetAccountInfoRequest (Maybe Bool)
-irsairEmailVerified
-  = lens _irsairEmailVerified
-      (\ s a -> s{_irsairEmailVerified = a})
+irpsairEmailVerified :: Lens' IdentitytoolkitRelyingPartyySetAccountInfoRequest (Maybe Bool)
+irpsairEmailVerified
+  = lens _irpsairEmailVerified
+      (\ s a -> s{_irpsairEmailVerified = a})
 
 -- | The name of the user.
-irsairDisplayName :: Lens' IdentitytoolkitRelyingpartySetAccountInfoRequest (Maybe Text)
-irsairDisplayName
-  = lens _irsairDisplayName
-      (\ s a -> s{_irsairDisplayName = a})
+irpsairDisplayName :: Lens' IdentitytoolkitRelyingPartyySetAccountInfoRequest (Maybe Text)
+irpsairDisplayName
+  = lens _irpsairDisplayName
+      (\ s a -> s{_irpsairDisplayName = a})
 
 -- | Whether to disable the user.
-irsairDisableUser :: Lens' IdentitytoolkitRelyingpartySetAccountInfoRequest (Maybe Bool)
-irsairDisableUser
-  = lens _irsairDisableUser
-      (\ s a -> s{_irsairDisableUser = a})
+irpsairDisableUser :: Lens' IdentitytoolkitRelyingPartyySetAccountInfoRequest (Maybe Bool)
+irpsairDisableUser
+  = lens _irpsairDisableUser
+      (\ s a -> s{_irpsairDisableUser = a})
 
 -- | The local ID of the user.
-irsairLocalId :: Lens' IdentitytoolkitRelyingpartySetAccountInfoRequest (Maybe Text)
-irsairLocalId
-  = lens _irsairLocalId
-      (\ s a -> s{_irsairLocalId = a})
+irpsairLocalId :: Lens' IdentitytoolkitRelyingPartyySetAccountInfoRequest (Maybe Text)
+irpsairLocalId
+  = lens _irpsairLocalId
+      (\ s a -> s{_irpsairLocalId = a})
 
 -- | The GITKit token of the authenticated user.
-irsairIdToken :: Lens' IdentitytoolkitRelyingpartySetAccountInfoRequest (Maybe Text)
-irsairIdToken
-  = lens _irsairIdToken
-      (\ s a -> s{_irsairIdToken = a})
+irpsairIdToken :: Lens' IdentitytoolkitRelyingPartyySetAccountInfoRequest (Maybe Text)
+irpsairIdToken
+  = lens _irpsairIdToken
+      (\ s a -> s{_irpsairIdToken = a})
 
 -- | The associated IDPs of the user.
-irsairProvider :: Lens' IdentitytoolkitRelyingpartySetAccountInfoRequest [Text]
-irsairProvider
-  = lens _irsairProvider
-      (\ s a -> s{_irsairProvider = a})
+irpsairProvider :: Lens' IdentitytoolkitRelyingPartyySetAccountInfoRequest [Text]
+irpsairProvider
+  = lens _irpsairProvider
+      (\ s a -> s{_irpsairProvider = a})
       . _Default
       . _Coerce
 
 instance FromJSON
-         IdentitytoolkitRelyingpartySetAccountInfoRequest
+         IdentitytoolkitRelyingPartyySetAccountInfoRequest
          where
         parseJSON
           = withObject
-              "IdentitytoolkitRelyingpartySetAccountInfoRequest"
+              "IdentitytoolkitRelyingPartyySetAccountInfoRequest"
               (\ o ->
-                 IdentitytoolkitRelyingpartySetAccountInfoRequest <$>
+                 IdentitytoolkitRelyingPartyySetAccountInfoRequest <$>
                    (o .:? "upgradeToFederatedLogin") <*> (o .:? "email")
                      <*> (o .:? "captchaChallenge")
                      <*> (o .:? "validSince")
@@ -521,26 +522,26 @@ instance FromJSON
                      <*> (o .:? "provider" .!= mempty))
 
 instance ToJSON
-         IdentitytoolkitRelyingpartySetAccountInfoRequest
+         IdentitytoolkitRelyingPartyySetAccountInfoRequest
          where
         toJSON
-          IdentitytoolkitRelyingpartySetAccountInfoRequest{..}
+          IdentitytoolkitRelyingPartyySetAccountInfoRequest{..}
           = object
               (catMaybes
                  [("upgradeToFederatedLogin" .=) <$>
-                    _irsairUpgradeToFederatedLogin,
-                  ("email" .=) <$> _irsairEmail,
-                  ("captchaChallenge" .=) <$> _irsairCaptchaChallenge,
-                  ("validSince" .=) <$> _irsairValidSince,
-                  ("oobCode" .=) <$> _irsairOobCode,
-                  ("password" .=) <$> _irsairPassword,
-                  ("captchaResponse" .=) <$> _irsairCaptchaResponse,
-                  ("emailVerified" .=) <$> _irsairEmailVerified,
-                  ("displayName" .=) <$> _irsairDisplayName,
-                  ("disableUser" .=) <$> _irsairDisableUser,
-                  ("localId" .=) <$> _irsairLocalId,
-                  ("idToken" .=) <$> _irsairIdToken,
-                  ("provider" .=) <$> _irsairProvider])
+                    _irpsairUpgradeToFederatedLogin,
+                  ("email" .=) <$> _irpsairEmail,
+                  ("captchaChallenge" .=) <$> _irpsairCaptchaChallenge,
+                  ("validSince" .=) <$> _irpsairValidSince,
+                  ("oobCode" .=) <$> _irpsairOobCode,
+                  ("password" .=) <$> _irpsairPassword,
+                  ("captchaResponse" .=) <$> _irpsairCaptchaResponse,
+                  ("emailVerified" .=) <$> _irpsairEmailVerified,
+                  ("displayName" .=) <$> _irpsairDisplayName,
+                  ("disableUser" .=) <$> _irpsairDisableUser,
+                  ("localId" .=) <$> _irpsairLocalId,
+                  ("idToken" .=) <$> _irpsairIdToken,
+                  ("provider" .=) <$> _irpsairProvider])
 
 -- | Respone of deleting account.
 --
@@ -582,7 +583,7 @@ instance ToJSON DeleteAccountResponse where
 -- /See:/ 'downloadAccountResponse' smart constructor.
 data DownloadAccountResponse = DownloadAccountResponse
     { _dNextPageToken :: !(Maybe Text)
-    , _dUsers         :: !(Maybe [Maybe UserInfo])
+    , _dUsers         :: !(Maybe [UserInfo])
     , _dKind          :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -612,7 +613,7 @@ dNextPageToken
       (\ s a -> s{_dNextPageToken = a})
 
 -- | The user accounts data.
-dUsers :: Lens' DownloadAccountResponse [Maybe UserInfo]
+dUsers :: Lens' DownloadAccountResponse [UserInfo]
 dUsers
   = lens _dUsers (\ s a -> s{_dUsers = a}) . _Default .
       _Coerce
@@ -742,7 +743,7 @@ instance ToJSON UploadAccountResponse where
 data CreateAuthURIResponse = CreateAuthURIResponse
     { _caurProviderId          :: !(Maybe Text)
     , _caurKind                :: !Text
-    , _caurAuthUri             :: !(Maybe Text)
+    , _caurAuthURI             :: !(Maybe Text)
     , _caurCaptchaRequired     :: !(Maybe Bool)
     , _caurRegistered          :: !(Maybe Bool)
     , _caurForExistingProvider :: !(Maybe Bool)
@@ -756,7 +757,7 @@ data CreateAuthURIResponse = CreateAuthURIResponse
 --
 -- * 'caurKind'
 --
--- * 'caurAuthUri'
+-- * 'caurAuthURI'
 --
 -- * 'caurCaptchaRequired'
 --
@@ -769,7 +770,7 @@ createAuthURIResponse =
     CreateAuthURIResponse
     { _caurProviderId = Nothing
     , _caurKind = "identitytoolkit#CreateAuthUriResponse"
-    , _caurAuthUri = Nothing
+    , _caurAuthURI = Nothing
     , _caurCaptchaRequired = Nothing
     , _caurRegistered = Nothing
     , _caurForExistingProvider = Nothing
@@ -786,9 +787,9 @@ caurKind :: Lens' CreateAuthURIResponse Text
 caurKind = lens _caurKind (\ s a -> s{_caurKind = a})
 
 -- | The URI used by the IDP to authenticate the user.
-caurAuthUri :: Lens' CreateAuthURIResponse (Maybe Text)
-caurAuthUri
-  = lens _caurAuthUri (\ s a -> s{_caurAuthUri = a})
+caurAuthURI :: Lens' CreateAuthURIResponse (Maybe Text)
+caurAuthURI
+  = lens _caurAuthURI (\ s a -> s{_caurAuthURI = a})
 
 -- | True if captcha is required.
 caurCaptchaRequired :: Lens' CreateAuthURIResponse (Maybe Bool)
@@ -827,7 +828,7 @@ instance ToJSON CreateAuthURIResponse where
               (catMaybes
                  [("providerId" .=) <$> _caurProviderId,
                   Just ("kind" .= _caurKind),
-                  ("authUri" .=) <$> _caurAuthUri,
+                  ("authUri" .=) <$> _caurAuthURI,
                   ("captchaRequired" .=) <$> _caurCaptchaRequired,
                   ("registered" .=) <$> _caurRegistered,
                   ("forExistingProvider" .=) <$>
@@ -836,92 +837,95 @@ instance ToJSON CreateAuthURIResponse where
 -- | Request of getting a code for user confirmation (reset password, change
 -- email etc.)
 --
--- /See:/ 'relyingparty' smart constructor.
-data Relyingparty = Relyingparty
-    { _rEmail       :: !(Maybe Text)
-    , _rKind        :: !Text
-    , _rUserIp      :: !(Maybe Text)
-    , _rRequestType :: !(Maybe Text)
-    , _rCaptchaResp :: !(Maybe Text)
-    , _rNewEmail    :: !(Maybe Text)
-    , _rChallenge   :: !(Maybe Text)
-    , _rIdToken     :: !(Maybe Text)
+-- /See:/ 'relyingPartyy' smart constructor.
+data RelyingPartyy = RelyingPartyy
+    { _rpEmail       :: !(Maybe Text)
+    , _rpKind        :: !Text
+    , _rpUserIP      :: !(Maybe Text)
+    , _rpRequestType :: !(Maybe Text)
+    , _rpCaptchaResp :: !(Maybe Text)
+    , _rpNewEmail    :: !(Maybe Text)
+    , _rpChallenge   :: !(Maybe Text)
+    , _rpIdToken     :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Relyingparty' with the minimum fields required to make a request.
+-- | Creates a value of 'RelyingPartyy' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rEmail'
+-- * 'rpEmail'
 --
--- * 'rKind'
+-- * 'rpKind'
 --
--- * 'rUserIp'
+-- * 'rpUserIP'
 --
--- * 'rRequestType'
+-- * 'rpRequestType'
 --
--- * 'rCaptchaResp'
+-- * 'rpCaptchaResp'
 --
--- * 'rNewEmail'
+-- * 'rpNewEmail'
 --
--- * 'rChallenge'
+-- * 'rpChallenge'
 --
--- * 'rIdToken'
-relyingparty
-    :: Relyingparty
-relyingparty =
-    Relyingparty
-    { _rEmail = Nothing
-    , _rKind = "identitytoolkit#relyingparty"
-    , _rUserIp = Nothing
-    , _rRequestType = Nothing
-    , _rCaptchaResp = Nothing
-    , _rNewEmail = Nothing
-    , _rChallenge = Nothing
-    , _rIdToken = Nothing
+-- * 'rpIdToken'
+relyingPartyy
+    :: RelyingPartyy
+relyingPartyy =
+    RelyingPartyy
+    { _rpEmail = Nothing
+    , _rpKind = "identitytoolkit#relyingparty"
+    , _rpUserIP = Nothing
+    , _rpRequestType = Nothing
+    , _rpCaptchaResp = Nothing
+    , _rpNewEmail = Nothing
+    , _rpChallenge = Nothing
+    , _rpIdToken = Nothing
     }
 
 -- | The email of the user.
-rEmail :: Lens' Relyingparty (Maybe Text)
-rEmail = lens _rEmail (\ s a -> s{_rEmail = a})
+rpEmail :: Lens' RelyingPartyy (Maybe Text)
+rpEmail = lens _rpEmail (\ s a -> s{_rpEmail = a})
 
 -- | The fixed string \"identitytoolkit#relyingparty\".
-rKind :: Lens' Relyingparty Text
-rKind = lens _rKind (\ s a -> s{_rKind = a})
+rpKind :: Lens' RelyingPartyy Text
+rpKind = lens _rpKind (\ s a -> s{_rpKind = a})
 
 -- | The IP address of the user.
-rUserIp :: Lens' Relyingparty (Maybe Text)
-rUserIp = lens _rUserIp (\ s a -> s{_rUserIp = a})
+rpUserIP :: Lens' RelyingPartyy (Maybe Text)
+rpUserIP = lens _rpUserIP (\ s a -> s{_rpUserIP = a})
 
 -- | The request type.
-rRequestType :: Lens' Relyingparty (Maybe Text)
-rRequestType
-  = lens _rRequestType (\ s a -> s{_rRequestType = a})
+rpRequestType :: Lens' RelyingPartyy (Maybe Text)
+rpRequestType
+  = lens _rpRequestType
+      (\ s a -> s{_rpRequestType = a})
 
 -- | The recaptcha response from the user.
-rCaptchaResp :: Lens' Relyingparty (Maybe Text)
-rCaptchaResp
-  = lens _rCaptchaResp (\ s a -> s{_rCaptchaResp = a})
+rpCaptchaResp :: Lens' RelyingPartyy (Maybe Text)
+rpCaptchaResp
+  = lens _rpCaptchaResp
+      (\ s a -> s{_rpCaptchaResp = a})
 
 -- | The new email if the code is for email change.
-rNewEmail :: Lens' Relyingparty (Maybe Text)
-rNewEmail
-  = lens _rNewEmail (\ s a -> s{_rNewEmail = a})
+rpNewEmail :: Lens' RelyingPartyy (Maybe Text)
+rpNewEmail
+  = lens _rpNewEmail (\ s a -> s{_rpNewEmail = a})
 
 -- | The recaptcha challenge presented to the user.
-rChallenge :: Lens' Relyingparty (Maybe Text)
-rChallenge
-  = lens _rChallenge (\ s a -> s{_rChallenge = a})
+rpChallenge :: Lens' RelyingPartyy (Maybe Text)
+rpChallenge
+  = lens _rpChallenge (\ s a -> s{_rpChallenge = a})
 
 -- | The user\'s Gitkit login token for email change.
-rIdToken :: Lens' Relyingparty (Maybe Text)
-rIdToken = lens _rIdToken (\ s a -> s{_rIdToken = a})
+rpIdToken :: Lens' RelyingPartyy (Maybe Text)
+rpIdToken
+  = lens _rpIdToken (\ s a -> s{_rpIdToken = a})
 
-instance FromJSON Relyingparty where
+instance FromJSON RelyingPartyy where
         parseJSON
-          = withObject "Relyingparty"
+          = withObject "RelyingPartyy"
               (\ o ->
-                 Relyingparty <$>
+                 RelyingPartyy <$>
                    (o .:? "email") <*>
                      (o .:? "kind" .!= "identitytoolkit#relyingparty")
                      <*> (o .:? "userIp")
@@ -931,246 +935,248 @@ instance FromJSON Relyingparty where
                      <*> (o .:? "challenge")
                      <*> (o .:? "idToken"))
 
-instance ToJSON Relyingparty where
-        toJSON Relyingparty{..}
+instance ToJSON RelyingPartyy where
+        toJSON RelyingPartyy{..}
           = object
               (catMaybes
-                 [("email" .=) <$> _rEmail, Just ("kind" .= _rKind),
-                  ("userIp" .=) <$> _rUserIp,
-                  ("requestType" .=) <$> _rRequestType,
-                  ("captchaResp" .=) <$> _rCaptchaResp,
-                  ("newEmail" .=) <$> _rNewEmail,
-                  ("challenge" .=) <$> _rChallenge,
-                  ("idToken" .=) <$> _rIdToken])
+                 [("email" .=) <$> _rpEmail, Just ("kind" .= _rpKind),
+                  ("userIp" .=) <$> _rpUserIP,
+                  ("requestType" .=) <$> _rpRequestType,
+                  ("captchaResp" .=) <$> _rpCaptchaResp,
+                  ("newEmail" .=) <$> _rpNewEmail,
+                  ("challenge" .=) <$> _rpChallenge,
+                  ("idToken" .=) <$> _rpIdToken])
 
 -- | Request to get the account information.
 --
--- /See:/ 'identitytoolkitRelyingpartyGetAccountInfoRequest' smart constructor.
-data IdentitytoolkitRelyingpartyGetAccountInfoRequest = IdentitytoolkitRelyingpartyGetAccountInfoRequest
-    { _irgairEmail   :: !(Maybe [Text])
-    , _irgairLocalId :: !(Maybe [Text])
-    , _irgairIdToken :: !(Maybe Text)
+-- /See:/ 'identitytoolkitRelyingPartyyGetAccountInfoRequest' smart constructor.
+data IdentitytoolkitRelyingPartyyGetAccountInfoRequest = IdentitytoolkitRelyingPartyyGetAccountInfoRequest
+    { _irpgairEmail   :: !(Maybe [Text])
+    , _irpgairLocalId :: !(Maybe [Text])
+    , _irpgairIdToken :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'IdentitytoolkitRelyingpartyGetAccountInfoRequest' with the minimum fields required to make a request.
+-- | Creates a value of 'IdentitytoolkitRelyingPartyyGetAccountInfoRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'irgairEmail'
+-- * 'irpgairEmail'
 --
--- * 'irgairLocalId'
+-- * 'irpgairLocalId'
 --
--- * 'irgairIdToken'
-identitytoolkitRelyingpartyGetAccountInfoRequest
-    :: IdentitytoolkitRelyingpartyGetAccountInfoRequest
-identitytoolkitRelyingpartyGetAccountInfoRequest =
-    IdentitytoolkitRelyingpartyGetAccountInfoRequest
-    { _irgairEmail = Nothing
-    , _irgairLocalId = Nothing
-    , _irgairIdToken = Nothing
+-- * 'irpgairIdToken'
+identitytoolkitRelyingPartyyGetAccountInfoRequest
+    :: IdentitytoolkitRelyingPartyyGetAccountInfoRequest
+identitytoolkitRelyingPartyyGetAccountInfoRequest =
+    IdentitytoolkitRelyingPartyyGetAccountInfoRequest
+    { _irpgairEmail = Nothing
+    , _irpgairLocalId = Nothing
+    , _irpgairIdToken = Nothing
     }
 
 -- | The list of emails of the users to inquiry.
-irgairEmail :: Lens' IdentitytoolkitRelyingpartyGetAccountInfoRequest [Text]
-irgairEmail
-  = lens _irgairEmail (\ s a -> s{_irgairEmail = a}) .
-      _Default
+irpgairEmail :: Lens' IdentitytoolkitRelyingPartyyGetAccountInfoRequest [Text]
+irpgairEmail
+  = lens _irpgairEmail (\ s a -> s{_irpgairEmail = a})
+      . _Default
       . _Coerce
 
 -- | The list of local ID\'s of the users to inquiry.
-irgairLocalId :: Lens' IdentitytoolkitRelyingpartyGetAccountInfoRequest [Text]
-irgairLocalId
-  = lens _irgairLocalId
-      (\ s a -> s{_irgairLocalId = a})
+irpgairLocalId :: Lens' IdentitytoolkitRelyingPartyyGetAccountInfoRequest [Text]
+irpgairLocalId
+  = lens _irpgairLocalId
+      (\ s a -> s{_irpgairLocalId = a})
       . _Default
       . _Coerce
 
 -- | The GITKit token of the authenticated user.
-irgairIdToken :: Lens' IdentitytoolkitRelyingpartyGetAccountInfoRequest (Maybe Text)
-irgairIdToken
-  = lens _irgairIdToken
-      (\ s a -> s{_irgairIdToken = a})
+irpgairIdToken :: Lens' IdentitytoolkitRelyingPartyyGetAccountInfoRequest (Maybe Text)
+irpgairIdToken
+  = lens _irpgairIdToken
+      (\ s a -> s{_irpgairIdToken = a})
 
 instance FromJSON
-         IdentitytoolkitRelyingpartyGetAccountInfoRequest
+         IdentitytoolkitRelyingPartyyGetAccountInfoRequest
          where
         parseJSON
           = withObject
-              "IdentitytoolkitRelyingpartyGetAccountInfoRequest"
+              "IdentitytoolkitRelyingPartyyGetAccountInfoRequest"
               (\ o ->
-                 IdentitytoolkitRelyingpartyGetAccountInfoRequest <$>
+                 IdentitytoolkitRelyingPartyyGetAccountInfoRequest <$>
                    (o .:? "email" .!= mempty) <*>
                      (o .:? "localId" .!= mempty)
                      <*> (o .:? "idToken"))
 
 instance ToJSON
-         IdentitytoolkitRelyingpartyGetAccountInfoRequest
+         IdentitytoolkitRelyingPartyyGetAccountInfoRequest
          where
         toJSON
-          IdentitytoolkitRelyingpartyGetAccountInfoRequest{..}
+          IdentitytoolkitRelyingPartyyGetAccountInfoRequest{..}
           = object
               (catMaybes
-                 [("email" .=) <$> _irgairEmail,
-                  ("localId" .=) <$> _irgairLocalId,
-                  ("idToken" .=) <$> _irgairIdToken])
+                 [("email" .=) <$> _irpgairEmail,
+                  ("localId" .=) <$> _irpgairLocalId,
+                  ("idToken" .=) <$> _irpgairIdToken])
 
 -- | Respone of getting public keys.
 --
--- /See:/ 'identitytoolkitRelyingpartyGetPublicKeysResponse' smart constructor.
-data IdentitytoolkitRelyingpartyGetPublicKeysResponse =
-    IdentitytoolkitRelyingpartyGetPublicKeysResponse
+-- /See:/ 'identitytoolkitRelyingPartyyGetPublicKeysResponse' smart constructor.
+data IdentitytoolkitRelyingPartyyGetPublicKeysResponse =
+    IdentitytoolkitRelyingPartyyGetPublicKeysResponse
     deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'IdentitytoolkitRelyingpartyGetPublicKeysResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'IdentitytoolkitRelyingPartyyGetPublicKeysResponse' with the minimum fields required to make a request.
 --
-identitytoolkitRelyingpartyGetPublicKeysResponse
-    :: IdentitytoolkitRelyingpartyGetPublicKeysResponse
-identitytoolkitRelyingpartyGetPublicKeysResponse =
-    IdentitytoolkitRelyingpartyGetPublicKeysResponse
+identitytoolkitRelyingPartyyGetPublicKeysResponse
+    :: IdentitytoolkitRelyingPartyyGetPublicKeysResponse
+identitytoolkitRelyingPartyyGetPublicKeysResponse =
+    IdentitytoolkitRelyingPartyyGetPublicKeysResponse
 
 instance FromJSON
-         IdentitytoolkitRelyingpartyGetPublicKeysResponse
+         IdentitytoolkitRelyingPartyyGetPublicKeysResponse
          where
         parseJSON
           = withObject
-              "IdentitytoolkitRelyingpartyGetPublicKeysResponse"
+              "IdentitytoolkitRelyingPartyyGetPublicKeysResponse"
               (\ o ->
                  pure
-                   IdentitytoolkitRelyingpartyGetPublicKeysResponse)
+                   IdentitytoolkitRelyingPartyyGetPublicKeysResponse)
 
 instance ToJSON
-         IdentitytoolkitRelyingpartyGetPublicKeysResponse
+         IdentitytoolkitRelyingPartyyGetPublicKeysResponse
          where
         toJSON = const (Object mempty)
 
 -- | Request to get the IDP authentication URL.
 --
--- /See:/ 'identitytoolkitRelyingpartyCreateAuthURIRequest' smart constructor.
-data IdentitytoolkitRelyingpartyCreateAuthURIRequest = IdentitytoolkitRelyingpartyCreateAuthURIRequest
-    { _ircaurProviderId       :: !(Maybe Text)
-    , _ircaurClientId         :: !(Maybe Text)
-    , _ircaurContext          :: !(Maybe Text)
-    , _ircaurIdentifier       :: !(Maybe Text)
-    , _ircaurOtaApp           :: !(Maybe Text)
-    , _ircaurOauthConsumerKey :: !(Maybe Text)
-    , _ircaurAppId            :: !(Maybe Text)
-    , _ircaurContinueUri      :: !(Maybe Text)
-    , _ircaurOauthScope       :: !(Maybe Text)
-    , _ircaurOpenidRealm      :: !(Maybe Text)
+-- /See:/ 'identitytoolkitRelyingPartyyCreateAuthURIRequest' smart constructor.
+data IdentitytoolkitRelyingPartyyCreateAuthURIRequest = IdentitytoolkitRelyingPartyyCreateAuthURIRequest
+    { _irpcaurProviderId       :: !(Maybe Text)
+    , _irpcaurClientId         :: !(Maybe Text)
+    , _irpcaurContext          :: !(Maybe Text)
+    , _irpcaurIdentifier       :: !(Maybe Text)
+    , _irpcaurOtaApp           :: !(Maybe Text)
+    , _irpcaurOAuthConsumerKey :: !(Maybe Text)
+    , _irpcaurAppId            :: !(Maybe Text)
+    , _irpcaurContinueURI      :: !(Maybe Text)
+    , _irpcaurOAuthScope       :: !(Maybe Text)
+    , _irpcaurOpenidRealm      :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'IdentitytoolkitRelyingpartyCreateAuthURIRequest' with the minimum fields required to make a request.
+-- | Creates a value of 'IdentitytoolkitRelyingPartyyCreateAuthURIRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ircaurProviderId'
+-- * 'irpcaurProviderId'
 --
--- * 'ircaurClientId'
+-- * 'irpcaurClientId'
 --
--- * 'ircaurContext'
+-- * 'irpcaurContext'
 --
--- * 'ircaurIdentifier'
+-- * 'irpcaurIdentifier'
 --
--- * 'ircaurOtaApp'
+-- * 'irpcaurOtaApp'
 --
--- * 'ircaurOauthConsumerKey'
+-- * 'irpcaurOAuthConsumerKey'
 --
--- * 'ircaurAppId'
+-- * 'irpcaurAppId'
 --
--- * 'ircaurContinueUri'
+-- * 'irpcaurContinueURI'
 --
--- * 'ircaurOauthScope'
+-- * 'irpcaurOAuthScope'
 --
--- * 'ircaurOpenidRealm'
-identitytoolkitRelyingpartyCreateAuthURIRequest
-    :: IdentitytoolkitRelyingpartyCreateAuthURIRequest
-identitytoolkitRelyingpartyCreateAuthURIRequest =
-    IdentitytoolkitRelyingpartyCreateAuthURIRequest
-    { _ircaurProviderId = Nothing
-    , _ircaurClientId = Nothing
-    , _ircaurContext = Nothing
-    , _ircaurIdentifier = Nothing
-    , _ircaurOtaApp = Nothing
-    , _ircaurOauthConsumerKey = Nothing
-    , _ircaurAppId = Nothing
-    , _ircaurContinueUri = Nothing
-    , _ircaurOauthScope = Nothing
-    , _ircaurOpenidRealm = Nothing
+-- * 'irpcaurOpenidRealm'
+identitytoolkitRelyingPartyyCreateAuthURIRequest
+    :: IdentitytoolkitRelyingPartyyCreateAuthURIRequest
+identitytoolkitRelyingPartyyCreateAuthURIRequest =
+    IdentitytoolkitRelyingPartyyCreateAuthURIRequest
+    { _irpcaurProviderId = Nothing
+    , _irpcaurClientId = Nothing
+    , _irpcaurContext = Nothing
+    , _irpcaurIdentifier = Nothing
+    , _irpcaurOtaApp = Nothing
+    , _irpcaurOAuthConsumerKey = Nothing
+    , _irpcaurAppId = Nothing
+    , _irpcaurContinueURI = Nothing
+    , _irpcaurOAuthScope = Nothing
+    , _irpcaurOpenidRealm = Nothing
     }
 
 -- | The IdP ID. For white listed IdPs it\'s a short domain name e.g.
 -- google.com, aol.com, live.net and yahoo.com. For other OpenID IdPs it\'s
 -- the OP identifier.
-ircaurProviderId :: Lens' IdentitytoolkitRelyingpartyCreateAuthURIRequest (Maybe Text)
-ircaurProviderId
-  = lens _ircaurProviderId
-      (\ s a -> s{_ircaurProviderId = a})
+irpcaurProviderId :: Lens' IdentitytoolkitRelyingPartyyCreateAuthURIRequest (Maybe Text)
+irpcaurProviderId
+  = lens _irpcaurProviderId
+      (\ s a -> s{_irpcaurProviderId = a})
 
 -- | The relying party OAuth client ID.
-ircaurClientId :: Lens' IdentitytoolkitRelyingpartyCreateAuthURIRequest (Maybe Text)
-ircaurClientId
-  = lens _ircaurClientId
-      (\ s a -> s{_ircaurClientId = a})
+irpcaurClientId :: Lens' IdentitytoolkitRelyingPartyyCreateAuthURIRequest (Maybe Text)
+irpcaurClientId
+  = lens _irpcaurClientId
+      (\ s a -> s{_irpcaurClientId = a})
 
 -- | The opaque value used by the client to maintain context info between the
 -- authentication request and the IDP callback.
-ircaurContext :: Lens' IdentitytoolkitRelyingpartyCreateAuthURIRequest (Maybe Text)
-ircaurContext
-  = lens _ircaurContext
-      (\ s a -> s{_ircaurContext = a})
+irpcaurContext :: Lens' IdentitytoolkitRelyingPartyyCreateAuthURIRequest (Maybe Text)
+irpcaurContext
+  = lens _irpcaurContext
+      (\ s a -> s{_irpcaurContext = a})
 
 -- | The email or federated ID of the user.
-ircaurIdentifier :: Lens' IdentitytoolkitRelyingpartyCreateAuthURIRequest (Maybe Text)
-ircaurIdentifier
-  = lens _ircaurIdentifier
-      (\ s a -> s{_ircaurIdentifier = a})
+irpcaurIdentifier :: Lens' IdentitytoolkitRelyingPartyyCreateAuthURIRequest (Maybe Text)
+irpcaurIdentifier
+  = lens _irpcaurIdentifier
+      (\ s a -> s{_irpcaurIdentifier = a})
 
 -- | The native app package for OTA installation.
-ircaurOtaApp :: Lens' IdentitytoolkitRelyingpartyCreateAuthURIRequest (Maybe Text)
-ircaurOtaApp
-  = lens _ircaurOtaApp (\ s a -> s{_ircaurOtaApp = a})
+irpcaurOtaApp :: Lens' IdentitytoolkitRelyingPartyyCreateAuthURIRequest (Maybe Text)
+irpcaurOtaApp
+  = lens _irpcaurOtaApp
+      (\ s a -> s{_irpcaurOtaApp = a})
 
 -- | The developer\'s consumer key for OpenId OAuth Extension
-ircaurOauthConsumerKey :: Lens' IdentitytoolkitRelyingpartyCreateAuthURIRequest (Maybe Text)
-ircaurOauthConsumerKey
-  = lens _ircaurOauthConsumerKey
-      (\ s a -> s{_ircaurOauthConsumerKey = a})
+irpcaurOAuthConsumerKey :: Lens' IdentitytoolkitRelyingPartyyCreateAuthURIRequest (Maybe Text)
+irpcaurOAuthConsumerKey
+  = lens _irpcaurOAuthConsumerKey
+      (\ s a -> s{_irpcaurOAuthConsumerKey = a})
 
 -- | The app ID of the mobile app, base64(CERT_SHA1):PACKAGE_NAME for
 -- Android, BUNDLE_ID for iOS.
-ircaurAppId :: Lens' IdentitytoolkitRelyingpartyCreateAuthURIRequest (Maybe Text)
-ircaurAppId
-  = lens _ircaurAppId (\ s a -> s{_ircaurAppId = a})
+irpcaurAppId :: Lens' IdentitytoolkitRelyingPartyyCreateAuthURIRequest (Maybe Text)
+irpcaurAppId
+  = lens _irpcaurAppId (\ s a -> s{_irpcaurAppId = a})
 
 -- | The URI to which the IDP redirects the user after the federated login
 -- flow.
-ircaurContinueUri :: Lens' IdentitytoolkitRelyingpartyCreateAuthURIRequest (Maybe Text)
-ircaurContinueUri
-  = lens _ircaurContinueUri
-      (\ s a -> s{_ircaurContinueUri = a})
+irpcaurContinueURI :: Lens' IdentitytoolkitRelyingPartyyCreateAuthURIRequest (Maybe Text)
+irpcaurContinueURI
+  = lens _irpcaurContinueURI
+      (\ s a -> s{_irpcaurContinueURI = a})
 
 -- | Additional oauth scopes, beyond the basid user profile, that the user
 -- would be prompted to grant
-ircaurOauthScope :: Lens' IdentitytoolkitRelyingpartyCreateAuthURIRequest (Maybe Text)
-ircaurOauthScope
-  = lens _ircaurOauthScope
-      (\ s a -> s{_ircaurOauthScope = a})
+irpcaurOAuthScope :: Lens' IdentitytoolkitRelyingPartyyCreateAuthURIRequest (Maybe Text)
+irpcaurOAuthScope
+  = lens _irpcaurOAuthScope
+      (\ s a -> s{_irpcaurOAuthScope = a})
 
 -- | Optional realm for OpenID protocol. The sub string
 -- \"scheme:\/\/domain:port\" of the param \"continueUri\" is used if this
 -- is not set.
-ircaurOpenidRealm :: Lens' IdentitytoolkitRelyingpartyCreateAuthURIRequest (Maybe Text)
-ircaurOpenidRealm
-  = lens _ircaurOpenidRealm
-      (\ s a -> s{_ircaurOpenidRealm = a})
+irpcaurOpenidRealm :: Lens' IdentitytoolkitRelyingPartyyCreateAuthURIRequest (Maybe Text)
+irpcaurOpenidRealm
+  = lens _irpcaurOpenidRealm
+      (\ s a -> s{_irpcaurOpenidRealm = a})
 
 instance FromJSON
-         IdentitytoolkitRelyingpartyCreateAuthURIRequest where
+         IdentitytoolkitRelyingPartyyCreateAuthURIRequest
+         where
         parseJSON
           = withObject
-              "IdentitytoolkitRelyingpartyCreateAuthURIRequest"
+              "IdentitytoolkitRelyingPartyyCreateAuthURIRequest"
               (\ o ->
-                 IdentitytoolkitRelyingpartyCreateAuthURIRequest <$>
+                 IdentitytoolkitRelyingPartyyCreateAuthURIRequest <$>
                    (o .:? "providerId") <*> (o .:? "clientId") <*>
                      (o .:? "context")
                      <*> (o .:? "identifier")
@@ -1182,104 +1188,106 @@ instance FromJSON
                      <*> (o .:? "openidRealm"))
 
 instance ToJSON
-         IdentitytoolkitRelyingpartyCreateAuthURIRequest where
+         IdentitytoolkitRelyingPartyyCreateAuthURIRequest
+         where
         toJSON
-          IdentitytoolkitRelyingpartyCreateAuthURIRequest{..}
+          IdentitytoolkitRelyingPartyyCreateAuthURIRequest{..}
           = object
               (catMaybes
-                 [("providerId" .=) <$> _ircaurProviderId,
-                  ("clientId" .=) <$> _ircaurClientId,
-                  ("context" .=) <$> _ircaurContext,
-                  ("identifier" .=) <$> _ircaurIdentifier,
-                  ("otaApp" .=) <$> _ircaurOtaApp,
-                  ("oauthConsumerKey" .=) <$> _ircaurOauthConsumerKey,
-                  ("appId" .=) <$> _ircaurAppId,
-                  ("continueUri" .=) <$> _ircaurContinueUri,
-                  ("oauthScope" .=) <$> _ircaurOauthScope,
-                  ("openidRealm" .=) <$> _ircaurOpenidRealm])
+                 [("providerId" .=) <$> _irpcaurProviderId,
+                  ("clientId" .=) <$> _irpcaurClientId,
+                  ("context" .=) <$> _irpcaurContext,
+                  ("identifier" .=) <$> _irpcaurIdentifier,
+                  ("otaApp" .=) <$> _irpcaurOtaApp,
+                  ("oauthConsumerKey" .=) <$> _irpcaurOAuthConsumerKey,
+                  ("appId" .=) <$> _irpcaurAppId,
+                  ("continueUri" .=) <$> _irpcaurContinueURI,
+                  ("oauthScope" .=) <$> _irpcaurOAuthScope,
+                  ("openidRealm" .=) <$> _irpcaurOpenidRealm])
 
 -- | Request to upload user account in batch.
 --
--- /See:/ 'identitytoolkitRelyingpartyUploadAccountRequest' smart constructor.
-data IdentitytoolkitRelyingpartyUploadAccountRequest = IdentitytoolkitRelyingpartyUploadAccountRequest
-    { _iruarUsers         :: !(Maybe [Maybe UserInfo])
-    , _iruarMemoryCost    :: !(Maybe Int32)
-    , _iruarSaltSeparator :: !(Maybe Word8)
-    , _iruarHashAlgorithm :: !(Maybe Text)
-    , _iruarSignerKey     :: !(Maybe Word8)
-    , _iruarRounds        :: !(Maybe Int32)
+-- /See:/ 'identitytoolkitRelyingPartyyUploadAccountRequest' smart constructor.
+data IdentitytoolkitRelyingPartyyUploadAccountRequest = IdentitytoolkitRelyingPartyyUploadAccountRequest
+    { _irpuarUsers         :: !(Maybe [UserInfo])
+    , _irpuarMemoryCost    :: !(Maybe Int32)
+    , _irpuarSaltSeparator :: !(Maybe Word8)
+    , _irpuarHashAlgorithm :: !(Maybe Text)
+    , _irpuarSignerKey     :: !(Maybe Word8)
+    , _irpuarRounds        :: !(Maybe Int32)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'IdentitytoolkitRelyingpartyUploadAccountRequest' with the minimum fields required to make a request.
+-- | Creates a value of 'IdentitytoolkitRelyingPartyyUploadAccountRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'iruarUsers'
+-- * 'irpuarUsers'
 --
--- * 'iruarMemoryCost'
+-- * 'irpuarMemoryCost'
 --
--- * 'iruarSaltSeparator'
+-- * 'irpuarSaltSeparator'
 --
--- * 'iruarHashAlgorithm'
+-- * 'irpuarHashAlgorithm'
 --
--- * 'iruarSignerKey'
+-- * 'irpuarSignerKey'
 --
--- * 'iruarRounds'
-identitytoolkitRelyingpartyUploadAccountRequest
-    :: IdentitytoolkitRelyingpartyUploadAccountRequest
-identitytoolkitRelyingpartyUploadAccountRequest =
-    IdentitytoolkitRelyingpartyUploadAccountRequest
-    { _iruarUsers = Nothing
-    , _iruarMemoryCost = Nothing
-    , _iruarSaltSeparator = Nothing
-    , _iruarHashAlgorithm = Nothing
-    , _iruarSignerKey = Nothing
-    , _iruarRounds = Nothing
+-- * 'irpuarRounds'
+identitytoolkitRelyingPartyyUploadAccountRequest
+    :: IdentitytoolkitRelyingPartyyUploadAccountRequest
+identitytoolkitRelyingPartyyUploadAccountRequest =
+    IdentitytoolkitRelyingPartyyUploadAccountRequest
+    { _irpuarUsers = Nothing
+    , _irpuarMemoryCost = Nothing
+    , _irpuarSaltSeparator = Nothing
+    , _irpuarHashAlgorithm = Nothing
+    , _irpuarSignerKey = Nothing
+    , _irpuarRounds = Nothing
     }
 
 -- | The account info to be stored.
-iruarUsers :: Lens' IdentitytoolkitRelyingpartyUploadAccountRequest [Maybe UserInfo]
-iruarUsers
-  = lens _iruarUsers (\ s a -> s{_iruarUsers = a}) .
+irpuarUsers :: Lens' IdentitytoolkitRelyingPartyyUploadAccountRequest [UserInfo]
+irpuarUsers
+  = lens _irpuarUsers (\ s a -> s{_irpuarUsers = a}) .
       _Default
       . _Coerce
 
 -- | Memory cost for hash calculation. Used by scrypt similar algorithms.
-iruarMemoryCost :: Lens' IdentitytoolkitRelyingpartyUploadAccountRequest (Maybe Int32)
-iruarMemoryCost
-  = lens _iruarMemoryCost
-      (\ s a -> s{_iruarMemoryCost = a})
+irpuarMemoryCost :: Lens' IdentitytoolkitRelyingPartyyUploadAccountRequest (Maybe Int32)
+irpuarMemoryCost
+  = lens _irpuarMemoryCost
+      (\ s a -> s{_irpuarMemoryCost = a})
 
 -- | The salt separator.
-iruarSaltSeparator :: Lens' IdentitytoolkitRelyingpartyUploadAccountRequest (Maybe Word8)
-iruarSaltSeparator
-  = lens _iruarSaltSeparator
-      (\ s a -> s{_iruarSaltSeparator = a})
+irpuarSaltSeparator :: Lens' IdentitytoolkitRelyingPartyyUploadAccountRequest (Maybe Word8)
+irpuarSaltSeparator
+  = lens _irpuarSaltSeparator
+      (\ s a -> s{_irpuarSaltSeparator = a})
 
 -- | The password hash algorithm.
-iruarHashAlgorithm :: Lens' IdentitytoolkitRelyingpartyUploadAccountRequest (Maybe Text)
-iruarHashAlgorithm
-  = lens _iruarHashAlgorithm
-      (\ s a -> s{_iruarHashAlgorithm = a})
+irpuarHashAlgorithm :: Lens' IdentitytoolkitRelyingPartyyUploadAccountRequest (Maybe Text)
+irpuarHashAlgorithm
+  = lens _irpuarHashAlgorithm
+      (\ s a -> s{_irpuarHashAlgorithm = a})
 
 -- | The key for to hash the password.
-iruarSignerKey :: Lens' IdentitytoolkitRelyingpartyUploadAccountRequest (Maybe Word8)
-iruarSignerKey
-  = lens _iruarSignerKey
-      (\ s a -> s{_iruarSignerKey = a})
+irpuarSignerKey :: Lens' IdentitytoolkitRelyingPartyyUploadAccountRequest (Maybe Word8)
+irpuarSignerKey
+  = lens _irpuarSignerKey
+      (\ s a -> s{_irpuarSignerKey = a})
 
 -- | Rounds for hash calculation. Used by scrypt and similar algorithms.
-iruarRounds :: Lens' IdentitytoolkitRelyingpartyUploadAccountRequest (Maybe Int32)
-iruarRounds
-  = lens _iruarRounds (\ s a -> s{_iruarRounds = a})
+irpuarRounds :: Lens' IdentitytoolkitRelyingPartyyUploadAccountRequest (Maybe Int32)
+irpuarRounds
+  = lens _irpuarRounds (\ s a -> s{_irpuarRounds = a})
 
 instance FromJSON
-         IdentitytoolkitRelyingpartyUploadAccountRequest where
+         IdentitytoolkitRelyingPartyyUploadAccountRequest
+         where
         parseJSON
           = withObject
-              "IdentitytoolkitRelyingpartyUploadAccountRequest"
+              "IdentitytoolkitRelyingPartyyUploadAccountRequest"
               (\ o ->
-                 IdentitytoolkitRelyingpartyUploadAccountRequest <$>
+                 IdentitytoolkitRelyingPartyyUploadAccountRequest <$>
                    (o .:? "users" .!= mempty) <*> (o .:? "memoryCost")
                      <*> (o .:? "saltSeparator")
                      <*> (o .:? "hashAlgorithm")
@@ -1287,98 +1295,102 @@ instance FromJSON
                      <*> (o .:? "rounds"))
 
 instance ToJSON
-         IdentitytoolkitRelyingpartyUploadAccountRequest where
+         IdentitytoolkitRelyingPartyyUploadAccountRequest
+         where
         toJSON
-          IdentitytoolkitRelyingpartyUploadAccountRequest{..}
+          IdentitytoolkitRelyingPartyyUploadAccountRequest{..}
           = object
               (catMaybes
-                 [("users" .=) <$> _iruarUsers,
-                  ("memoryCost" .=) <$> _iruarMemoryCost,
-                  ("saltSeparator" .=) <$> _iruarSaltSeparator,
-                  ("hashAlgorithm" .=) <$> _iruarHashAlgorithm,
-                  ("signerKey" .=) <$> _iruarSignerKey,
-                  ("rounds" .=) <$> _iruarRounds])
+                 [("users" .=) <$> _irpuarUsers,
+                  ("memoryCost" .=) <$> _irpuarMemoryCost,
+                  ("saltSeparator" .=) <$> _irpuarSaltSeparator,
+                  ("hashAlgorithm" .=) <$> _irpuarHashAlgorithm,
+                  ("signerKey" .=) <$> _irpuarSignerKey,
+                  ("rounds" .=) <$> _irpuarRounds])
 
 -- | Request to reset the password.
 --
--- /See:/ 'identitytoolkitRelyingpartyResetPasswordRequest' smart constructor.
-data IdentitytoolkitRelyingpartyResetPasswordRequest = IdentitytoolkitRelyingpartyResetPasswordRequest
-    { _irrprEmail       :: !(Maybe Text)
-    , _irrprNewPassword :: !(Maybe Text)
-    , _irrprOobCode     :: !(Maybe Text)
-    , _irrprOldPassword :: !(Maybe Text)
+-- /See:/ 'identitytoolkitRelyingPartyyResetPasswordRequest' smart constructor.
+data IdentitytoolkitRelyingPartyyResetPasswordRequest = IdentitytoolkitRelyingPartyyResetPasswordRequest
+    { _irprprEmail       :: !(Maybe Text)
+    , _irprprNewPassword :: !(Maybe Text)
+    , _irprprOobCode     :: !(Maybe Text)
+    , _irprprOldPassword :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'IdentitytoolkitRelyingpartyResetPasswordRequest' with the minimum fields required to make a request.
+-- | Creates a value of 'IdentitytoolkitRelyingPartyyResetPasswordRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'irrprEmail'
+-- * 'irprprEmail'
 --
--- * 'irrprNewPassword'
+-- * 'irprprNewPassword'
 --
--- * 'irrprOobCode'
+-- * 'irprprOobCode'
 --
--- * 'irrprOldPassword'
-identitytoolkitRelyingpartyResetPasswordRequest
-    :: IdentitytoolkitRelyingpartyResetPasswordRequest
-identitytoolkitRelyingpartyResetPasswordRequest =
-    IdentitytoolkitRelyingpartyResetPasswordRequest
-    { _irrprEmail = Nothing
-    , _irrprNewPassword = Nothing
-    , _irrprOobCode = Nothing
-    , _irrprOldPassword = Nothing
+-- * 'irprprOldPassword'
+identitytoolkitRelyingPartyyResetPasswordRequest
+    :: IdentitytoolkitRelyingPartyyResetPasswordRequest
+identitytoolkitRelyingPartyyResetPasswordRequest =
+    IdentitytoolkitRelyingPartyyResetPasswordRequest
+    { _irprprEmail = Nothing
+    , _irprprNewPassword = Nothing
+    , _irprprOobCode = Nothing
+    , _irprprOldPassword = Nothing
     }
 
 -- | The email address of the user.
-irrprEmail :: Lens' IdentitytoolkitRelyingpartyResetPasswordRequest (Maybe Text)
-irrprEmail
-  = lens _irrprEmail (\ s a -> s{_irrprEmail = a})
+irprprEmail :: Lens' IdentitytoolkitRelyingPartyyResetPasswordRequest (Maybe Text)
+irprprEmail
+  = lens _irprprEmail (\ s a -> s{_irprprEmail = a})
 
 -- | The new password inputted by the user.
-irrprNewPassword :: Lens' IdentitytoolkitRelyingpartyResetPasswordRequest (Maybe Text)
-irrprNewPassword
-  = lens _irrprNewPassword
-      (\ s a -> s{_irrprNewPassword = a})
+irprprNewPassword :: Lens' IdentitytoolkitRelyingPartyyResetPasswordRequest (Maybe Text)
+irprprNewPassword
+  = lens _irprprNewPassword
+      (\ s a -> s{_irprprNewPassword = a})
 
 -- | The confirmation code.
-irrprOobCode :: Lens' IdentitytoolkitRelyingpartyResetPasswordRequest (Maybe Text)
-irrprOobCode
-  = lens _irrprOobCode (\ s a -> s{_irrprOobCode = a})
+irprprOobCode :: Lens' IdentitytoolkitRelyingPartyyResetPasswordRequest (Maybe Text)
+irprprOobCode
+  = lens _irprprOobCode
+      (\ s a -> s{_irprprOobCode = a})
 
 -- | The old password inputted by the user.
-irrprOldPassword :: Lens' IdentitytoolkitRelyingpartyResetPasswordRequest (Maybe Text)
-irrprOldPassword
-  = lens _irrprOldPassword
-      (\ s a -> s{_irrprOldPassword = a})
+irprprOldPassword :: Lens' IdentitytoolkitRelyingPartyyResetPasswordRequest (Maybe Text)
+irprprOldPassword
+  = lens _irprprOldPassword
+      (\ s a -> s{_irprprOldPassword = a})
 
 instance FromJSON
-         IdentitytoolkitRelyingpartyResetPasswordRequest where
+         IdentitytoolkitRelyingPartyyResetPasswordRequest
+         where
         parseJSON
           = withObject
-              "IdentitytoolkitRelyingpartyResetPasswordRequest"
+              "IdentitytoolkitRelyingPartyyResetPasswordRequest"
               (\ o ->
-                 IdentitytoolkitRelyingpartyResetPasswordRequest <$>
+                 IdentitytoolkitRelyingPartyyResetPasswordRequest <$>
                    (o .:? "email") <*> (o .:? "newPassword") <*>
                      (o .:? "oobCode")
                      <*> (o .:? "oldPassword"))
 
 instance ToJSON
-         IdentitytoolkitRelyingpartyResetPasswordRequest where
+         IdentitytoolkitRelyingPartyyResetPasswordRequest
+         where
         toJSON
-          IdentitytoolkitRelyingpartyResetPasswordRequest{..}
+          IdentitytoolkitRelyingPartyyResetPasswordRequest{..}
           = object
               (catMaybes
-                 [("email" .=) <$> _irrprEmail,
-                  ("newPassword" .=) <$> _irrprNewPassword,
-                  ("oobCode" .=) <$> _irrprOobCode,
-                  ("oldPassword" .=) <$> _irrprOldPassword])
+                 [("email" .=) <$> _irprprEmail,
+                  ("newPassword" .=) <$> _irprprNewPassword,
+                  ("oobCode" .=) <$> _irprprOobCode,
+                  ("oldPassword" .=) <$> _irprprOldPassword])
 
 -- | Response of getting account information.
 --
 -- /See:/ 'getAccountInfoResponse' smart constructor.
 data GetAccountInfoResponse = GetAccountInfoResponse
-    { _gairUsers :: !(Maybe [Maybe UserInfo])
+    { _gairUsers :: !(Maybe [UserInfo])
     , _gairKind  :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1398,7 +1410,7 @@ getAccountInfoResponse =
     }
 
 -- | The info of the users.
-gairUsers :: Lens' GetAccountInfoResponse [Maybe UserInfo]
+gairUsers :: Lens' GetAccountInfoResponse [UserInfo]
 gairUsers
   = lens _gairUsers (\ s a -> s{_gairUsers = a}) .
       _Default
@@ -1477,49 +1489,52 @@ instance ToJSON GetOobConfirmationCodeResponse where
 
 -- | Request to delete account.
 --
--- /See:/ 'identitytoolkitRelyingpartyDeleteAccountRequest' smart constructor.
-newtype IdentitytoolkitRelyingpartyDeleteAccountRequest = IdentitytoolkitRelyingpartyDeleteAccountRequest
-    { _irdarLocalId :: Maybe Text
+-- /See:/ 'identitytoolkitRelyingPartyyDeleteAccountRequest' smart constructor.
+newtype IdentitytoolkitRelyingPartyyDeleteAccountRequest = IdentitytoolkitRelyingPartyyDeleteAccountRequest
+    { _irpdarLocalId :: Maybe Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'IdentitytoolkitRelyingpartyDeleteAccountRequest' with the minimum fields required to make a request.
+-- | Creates a value of 'IdentitytoolkitRelyingPartyyDeleteAccountRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'irdarLocalId'
-identitytoolkitRelyingpartyDeleteAccountRequest
-    :: IdentitytoolkitRelyingpartyDeleteAccountRequest
-identitytoolkitRelyingpartyDeleteAccountRequest =
-    IdentitytoolkitRelyingpartyDeleteAccountRequest
-    { _irdarLocalId = Nothing
+-- * 'irpdarLocalId'
+identitytoolkitRelyingPartyyDeleteAccountRequest
+    :: IdentitytoolkitRelyingPartyyDeleteAccountRequest
+identitytoolkitRelyingPartyyDeleteAccountRequest =
+    IdentitytoolkitRelyingPartyyDeleteAccountRequest
+    { _irpdarLocalId = Nothing
     }
 
 -- | The local ID of the user.
-irdarLocalId :: Lens' IdentitytoolkitRelyingpartyDeleteAccountRequest (Maybe Text)
-irdarLocalId
-  = lens _irdarLocalId (\ s a -> s{_irdarLocalId = a})
+irpdarLocalId :: Lens' IdentitytoolkitRelyingPartyyDeleteAccountRequest (Maybe Text)
+irpdarLocalId
+  = lens _irpdarLocalId
+      (\ s a -> s{_irpdarLocalId = a})
 
 instance FromJSON
-         IdentitytoolkitRelyingpartyDeleteAccountRequest where
+         IdentitytoolkitRelyingPartyyDeleteAccountRequest
+         where
         parseJSON
           = withObject
-              "IdentitytoolkitRelyingpartyDeleteAccountRequest"
+              "IdentitytoolkitRelyingPartyyDeleteAccountRequest"
               (\ o ->
-                 IdentitytoolkitRelyingpartyDeleteAccountRequest <$>
+                 IdentitytoolkitRelyingPartyyDeleteAccountRequest <$>
                    (o .:? "localId"))
 
 instance ToJSON
-         IdentitytoolkitRelyingpartyDeleteAccountRequest where
+         IdentitytoolkitRelyingPartyyDeleteAccountRequest
+         where
         toJSON
-          IdentitytoolkitRelyingpartyDeleteAccountRequest{..}
+          IdentitytoolkitRelyingPartyyDeleteAccountRequest{..}
           = object
-              (catMaybes [("localId" .=) <$> _irdarLocalId])
+              (catMaybes [("localId" .=) <$> _irpdarLocalId])
 
 --
 -- /See:/ 'setAccountInfoResponseProviderUserInfo' smart constructor.
 data SetAccountInfoResponseProviderUserInfo = SetAccountInfoResponseProviderUserInfo
     { _sairpuiProviderId  :: !(Maybe Text)
-    , _sairpuiPhotoUrl    :: !(Maybe Text)
+    , _sairpuiPhotoURL    :: !(Maybe Text)
     , _sairpuiDisplayName :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1529,7 +1544,7 @@ data SetAccountInfoResponseProviderUserInfo = SetAccountInfoResponseProviderUser
 --
 -- * 'sairpuiProviderId'
 --
--- * 'sairpuiPhotoUrl'
+-- * 'sairpuiPhotoURL'
 --
 -- * 'sairpuiDisplayName'
 setAccountInfoResponseProviderUserInfo
@@ -1537,7 +1552,7 @@ setAccountInfoResponseProviderUserInfo
 setAccountInfoResponseProviderUserInfo =
     SetAccountInfoResponseProviderUserInfo
     { _sairpuiProviderId = Nothing
-    , _sairpuiPhotoUrl = Nothing
+    , _sairpuiPhotoURL = Nothing
     , _sairpuiDisplayName = Nothing
     }
 
@@ -1550,10 +1565,10 @@ sairpuiProviderId
       (\ s a -> s{_sairpuiProviderId = a})
 
 -- | The user\'s photo url at the IDP.
-sairpuiPhotoUrl :: Lens' SetAccountInfoResponseProviderUserInfo (Maybe Text)
-sairpuiPhotoUrl
-  = lens _sairpuiPhotoUrl
-      (\ s a -> s{_sairpuiPhotoUrl = a})
+sairpuiPhotoURL :: Lens' SetAccountInfoResponseProviderUserInfo (Maybe Text)
+sairpuiPhotoURL
+  = lens _sairpuiPhotoURL
+      (\ s a -> s{_sairpuiPhotoURL = a})
 
 -- | The user\'s display name at the IDP.
 sairpuiDisplayName :: Lens' SetAccountInfoResponseProviderUserInfo (Maybe Text)
@@ -1576,79 +1591,79 @@ instance ToJSON
           = object
               (catMaybes
                  [("providerId" .=) <$> _sairpuiProviderId,
-                  ("photoUrl" .=) <$> _sairpuiPhotoUrl,
+                  ("photoUrl" .=) <$> _sairpuiPhotoURL,
                   ("displayName" .=) <$> _sairpuiDisplayName])
 
 -- | Request to download user account in batch.
 --
--- /See:/ 'identitytoolkitRelyingpartyDownloadAccountRequest' smart constructor.
-data IdentitytoolkitRelyingpartyDownloadAccountRequest = IdentitytoolkitRelyingpartyDownloadAccountRequest
-    { _irdarNextPageToken :: !(Maybe Text)
-    , _irdarMaxResults    :: !(Maybe Word32)
+-- /See:/ 'identitytoolkitRelyingPartyyDownloadAccountRequest' smart constructor.
+data IdentitytoolkitRelyingPartyyDownloadAccountRequest = IdentitytoolkitRelyingPartyyDownloadAccountRequest
+    { _irpdarNextPageToken :: !(Maybe Text)
+    , _irpdarMaxResults    :: !(Maybe Word32)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'IdentitytoolkitRelyingpartyDownloadAccountRequest' with the minimum fields required to make a request.
+-- | Creates a value of 'IdentitytoolkitRelyingPartyyDownloadAccountRequest' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'irdarNextPageToken'
+-- * 'irpdarNextPageToken'
 --
--- * 'irdarMaxResults'
-identitytoolkitRelyingpartyDownloadAccountRequest
-    :: IdentitytoolkitRelyingpartyDownloadAccountRequest
-identitytoolkitRelyingpartyDownloadAccountRequest =
-    IdentitytoolkitRelyingpartyDownloadAccountRequest
-    { _irdarNextPageToken = Nothing
-    , _irdarMaxResults = Nothing
+-- * 'irpdarMaxResults'
+identitytoolkitRelyingPartyyDownloadAccountRequest
+    :: IdentitytoolkitRelyingPartyyDownloadAccountRequest
+identitytoolkitRelyingPartyyDownloadAccountRequest =
+    IdentitytoolkitRelyingPartyyDownloadAccountRequest
+    { _irpdarNextPageToken = Nothing
+    , _irpdarMaxResults = Nothing
     }
 
 -- | The token for the next page. This should be taken from the previous
 -- response.
-irdarNextPageToken :: Lens' IdentitytoolkitRelyingpartyDownloadAccountRequest (Maybe Text)
-irdarNextPageToken
-  = lens _irdarNextPageToken
-      (\ s a -> s{_irdarNextPageToken = a})
+irpdarNextPageToken :: Lens' IdentitytoolkitRelyingPartyyDownloadAccountRequest (Maybe Text)
+irpdarNextPageToken
+  = lens _irpdarNextPageToken
+      (\ s a -> s{_irpdarNextPageToken = a})
 
 -- | The max number of results to return in the response.
-irdarMaxResults :: Lens' IdentitytoolkitRelyingpartyDownloadAccountRequest (Maybe Word32)
-irdarMaxResults
-  = lens _irdarMaxResults
-      (\ s a -> s{_irdarMaxResults = a})
+irpdarMaxResults :: Lens' IdentitytoolkitRelyingPartyyDownloadAccountRequest (Maybe Word32)
+irpdarMaxResults
+  = lens _irpdarMaxResults
+      (\ s a -> s{_irpdarMaxResults = a})
 
 instance FromJSON
-         IdentitytoolkitRelyingpartyDownloadAccountRequest
+         IdentitytoolkitRelyingPartyyDownloadAccountRequest
          where
         parseJSON
           = withObject
-              "IdentitytoolkitRelyingpartyDownloadAccountRequest"
+              "IdentitytoolkitRelyingPartyyDownloadAccountRequest"
               (\ o ->
-                 IdentitytoolkitRelyingpartyDownloadAccountRequest <$>
-                   (o .:? "nextPageToken") <*> (o .:? "maxResults"))
+                 IdentitytoolkitRelyingPartyyDownloadAccountRequest
+                   <$> (o .:? "nextPageToken") <*> (o .:? "maxResults"))
 
 instance ToJSON
-         IdentitytoolkitRelyingpartyDownloadAccountRequest
+         IdentitytoolkitRelyingPartyyDownloadAccountRequest
          where
         toJSON
-          IdentitytoolkitRelyingpartyDownloadAccountRequest{..}
+          IdentitytoolkitRelyingPartyyDownloadAccountRequest{..}
           = object
               (catMaybes
-                 [("nextPageToken" .=) <$> _irdarNextPageToken,
-                  ("maxResults" .=) <$> _irdarMaxResults])
+                 [("nextPageToken" .=) <$> _irpdarNextPageToken,
+                  ("maxResults" .=) <$> _irpdarMaxResults])
 
 -- | Request of verifying the password.
 --
 -- /See:/ 'verifyPasswordResponse' smart constructor.
 data VerifyPasswordResponse = VerifyPasswordResponse
     { _vprEmail                  :: !(Maybe Text)
-    , _vprPhotoUrl               :: !(Maybe Text)
-    , _vprOauthAccessToken       :: !(Maybe Text)
+    , _vprPhotoURL               :: !(Maybe Text)
+    , _vprOAuthAccessToken       :: !(Maybe Text)
     , _vprKind                   :: !Text
-    , _vprOauthExpireIn          :: !(Maybe Int32)
+    , _vprOAuthExpireIn          :: !(Maybe Int32)
     , _vprDisplayName            :: !(Maybe Text)
     , _vprLocalId                :: !(Maybe Text)
     , _vprRegistered             :: !(Maybe Bool)
     , _vprIdToken                :: !(Maybe Text)
-    , _vprOauthAuthorizationCode :: !(Maybe Text)
+    , _vprOAuthAuthorizationCode :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VerifyPasswordResponse' with the minimum fields required to make a request.
@@ -1657,13 +1672,13 @@ data VerifyPasswordResponse = VerifyPasswordResponse
 --
 -- * 'vprEmail'
 --
--- * 'vprPhotoUrl'
+-- * 'vprPhotoURL'
 --
--- * 'vprOauthAccessToken'
+-- * 'vprOAuthAccessToken'
 --
 -- * 'vprKind'
 --
--- * 'vprOauthExpireIn'
+-- * 'vprOAuthExpireIn'
 --
 -- * 'vprDisplayName'
 --
@@ -1673,21 +1688,21 @@ data VerifyPasswordResponse = VerifyPasswordResponse
 --
 -- * 'vprIdToken'
 --
--- * 'vprOauthAuthorizationCode'
+-- * 'vprOAuthAuthorizationCode'
 verifyPasswordResponse
     :: VerifyPasswordResponse
 verifyPasswordResponse =
     VerifyPasswordResponse
     { _vprEmail = Nothing
-    , _vprPhotoUrl = Nothing
-    , _vprOauthAccessToken = Nothing
+    , _vprPhotoURL = Nothing
+    , _vprOAuthAccessToken = Nothing
     , _vprKind = "identitytoolkit#VerifyPasswordResponse"
-    , _vprOauthExpireIn = Nothing
+    , _vprOAuthExpireIn = Nothing
     , _vprDisplayName = Nothing
     , _vprLocalId = Nothing
     , _vprRegistered = Nothing
     , _vprIdToken = Nothing
-    , _vprOauthAuthorizationCode = Nothing
+    , _vprOAuthAuthorizationCode = Nothing
     }
 
 -- | The email returned by the IdP. NOTE: The federated login user may not
@@ -1696,25 +1711,25 @@ vprEmail :: Lens' VerifyPasswordResponse (Maybe Text)
 vprEmail = lens _vprEmail (\ s a -> s{_vprEmail = a})
 
 -- | The URI of the user\'s photo at IdP
-vprPhotoUrl :: Lens' VerifyPasswordResponse (Maybe Text)
-vprPhotoUrl
-  = lens _vprPhotoUrl (\ s a -> s{_vprPhotoUrl = a})
+vprPhotoURL :: Lens' VerifyPasswordResponse (Maybe Text)
+vprPhotoURL
+  = lens _vprPhotoURL (\ s a -> s{_vprPhotoURL = a})
 
 -- | The OAuth2 access token.
-vprOauthAccessToken :: Lens' VerifyPasswordResponse (Maybe Text)
-vprOauthAccessToken
-  = lens _vprOauthAccessToken
-      (\ s a -> s{_vprOauthAccessToken = a})
+vprOAuthAccessToken :: Lens' VerifyPasswordResponse (Maybe Text)
+vprOAuthAccessToken
+  = lens _vprOAuthAccessToken
+      (\ s a -> s{_vprOAuthAccessToken = a})
 
 -- | The fixed string \"identitytoolkit#VerifyPasswordResponse\".
 vprKind :: Lens' VerifyPasswordResponse Text
 vprKind = lens _vprKind (\ s a -> s{_vprKind = a})
 
 -- | The lifetime in seconds of the OAuth2 access token.
-vprOauthExpireIn :: Lens' VerifyPasswordResponse (Maybe Int32)
-vprOauthExpireIn
-  = lens _vprOauthExpireIn
-      (\ s a -> s{_vprOauthExpireIn = a})
+vprOAuthExpireIn :: Lens' VerifyPasswordResponse (Maybe Int32)
+vprOAuthExpireIn
+  = lens _vprOAuthExpireIn
+      (\ s a -> s{_vprOAuthExpireIn = a})
 
 -- | The name of the user.
 vprDisplayName :: Lens' VerifyPasswordResponse (Maybe Text)
@@ -1740,10 +1755,10 @@ vprIdToken
   = lens _vprIdToken (\ s a -> s{_vprIdToken = a})
 
 -- | The OAuth2 authorization code.
-vprOauthAuthorizationCode :: Lens' VerifyPasswordResponse (Maybe Text)
-vprOauthAuthorizationCode
-  = lens _vprOauthAuthorizationCode
-      (\ s a -> s{_vprOauthAuthorizationCode = a})
+vprOAuthAuthorizationCode :: Lens' VerifyPasswordResponse (Maybe Text)
+vprOAuthAuthorizationCode
+  = lens _vprOAuthAuthorizationCode
+      (\ s a -> s{_vprOAuthAuthorizationCode = a})
 
 instance FromJSON VerifyPasswordResponse where
         parseJSON
@@ -1767,16 +1782,16 @@ instance ToJSON VerifyPasswordResponse where
           = object
               (catMaybes
                  [("email" .=) <$> _vprEmail,
-                  ("photoUrl" .=) <$> _vprPhotoUrl,
-                  ("oauthAccessToken" .=) <$> _vprOauthAccessToken,
+                  ("photoUrl" .=) <$> _vprPhotoURL,
+                  ("oauthAccessToken" .=) <$> _vprOAuthAccessToken,
                   Just ("kind" .= _vprKind),
-                  ("oauthExpireIn" .=) <$> _vprOauthExpireIn,
+                  ("oauthExpireIn" .=) <$> _vprOAuthExpireIn,
                   ("displayName" .=) <$> _vprDisplayName,
                   ("localId" .=) <$> _vprLocalId,
                   ("registered" .=) <$> _vprRegistered,
                   ("idToken" .=) <$> _vprIdToken,
                   ("oauthAuthorizationCode" .=) <$>
-                    _vprOauthAuthorizationCode])
+                    _vprOAuthAuthorizationCode])
 
 -- | Response of verifying the IDP assertion.
 --
@@ -1786,17 +1801,17 @@ data VerifyAssertionResponse = VerifyAssertionResponse
     , _varFullName               :: !(Maybe Text)
     , _varEmail                  :: !(Maybe Text)
     , _varEmailRecycled          :: !(Maybe Bool)
-    , _varPhotoUrl               :: !(Maybe Text)
+    , _varPhotoURL               :: !(Maybe Text)
     , _varVerifiedProvider       :: !(Maybe [Text])
     , _varContext                :: !(Maybe Text)
     , _varNeedConfirmation       :: !(Maybe Bool)
     , _varOriginalEmail          :: !(Maybe Text)
     , _varLastName               :: !(Maybe Text)
-    , _varOauthAccessToken       :: !(Maybe Text)
+    , _varOAuthAccessToken       :: !(Maybe Text)
     , _varDateOfBirth            :: !(Maybe Text)
     , _varKind                   :: !Text
-    , _varOauthExpireIn          :: !(Maybe Int32)
-    , _varAppInstallationUrl     :: !(Maybe Text)
+    , _varOAuthExpireIn          :: !(Maybe Int32)
+    , _varAppInstallationURL     :: !(Maybe Text)
     , _varAction                 :: !(Maybe Text)
     , _varFederatedId            :: !(Maybe Text)
     , _varAppScheme              :: !(Maybe Text)
@@ -1805,13 +1820,13 @@ data VerifyAssertionResponse = VerifyAssertionResponse
     , _varLanguage               :: !(Maybe Text)
     , _varFirstName              :: !(Maybe Text)
     , _varDisplayName            :: !(Maybe Text)
-    , _varOauthRequestToken      :: !(Maybe Text)
-    , _varOauthScope             :: !(Maybe Text)
+    , _varOAuthRequestToken      :: !(Maybe Text)
+    , _varOAuthScope             :: !(Maybe Text)
     , _varNickName               :: !(Maybe Text)
     , _varLocalId                :: !(Maybe Text)
     , _varTimeZone               :: !(Maybe Text)
     , _varIdToken                :: !(Maybe Text)
-    , _varOauthAuthorizationCode :: !(Maybe Text)
+    , _varOAuthAuthorizationCode :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VerifyAssertionResponse' with the minimum fields required to make a request.
@@ -1826,7 +1841,7 @@ data VerifyAssertionResponse = VerifyAssertionResponse
 --
 -- * 'varEmailRecycled'
 --
--- * 'varPhotoUrl'
+-- * 'varPhotoURL'
 --
 -- * 'varVerifiedProvider'
 --
@@ -1838,15 +1853,15 @@ data VerifyAssertionResponse = VerifyAssertionResponse
 --
 -- * 'varLastName'
 --
--- * 'varOauthAccessToken'
+-- * 'varOAuthAccessToken'
 --
 -- * 'varDateOfBirth'
 --
 -- * 'varKind'
 --
--- * 'varOauthExpireIn'
+-- * 'varOAuthExpireIn'
 --
--- * 'varAppInstallationUrl'
+-- * 'varAppInstallationURL'
 --
 -- * 'varAction'
 --
@@ -1864,9 +1879,9 @@ data VerifyAssertionResponse = VerifyAssertionResponse
 --
 -- * 'varDisplayName'
 --
--- * 'varOauthRequestToken'
+-- * 'varOAuthRequestToken'
 --
--- * 'varOauthScope'
+-- * 'varOAuthScope'
 --
 -- * 'varNickName'
 --
@@ -1876,7 +1891,7 @@ data VerifyAssertionResponse = VerifyAssertionResponse
 --
 -- * 'varIdToken'
 --
--- * 'varOauthAuthorizationCode'
+-- * 'varOAuthAuthorizationCode'
 verifyAssertionResponse
     :: VerifyAssertionResponse
 verifyAssertionResponse =
@@ -1885,17 +1900,17 @@ verifyAssertionResponse =
     , _varFullName = Nothing
     , _varEmail = Nothing
     , _varEmailRecycled = Nothing
-    , _varPhotoUrl = Nothing
+    , _varPhotoURL = Nothing
     , _varVerifiedProvider = Nothing
     , _varContext = Nothing
     , _varNeedConfirmation = Nothing
     , _varOriginalEmail = Nothing
     , _varLastName = Nothing
-    , _varOauthAccessToken = Nothing
+    , _varOAuthAccessToken = Nothing
     , _varDateOfBirth = Nothing
     , _varKind = "identitytoolkit#VerifyAssertionResponse"
-    , _varOauthExpireIn = Nothing
-    , _varAppInstallationUrl = Nothing
+    , _varOAuthExpireIn = Nothing
+    , _varAppInstallationURL = Nothing
     , _varAction = Nothing
     , _varFederatedId = Nothing
     , _varAppScheme = Nothing
@@ -1904,13 +1919,13 @@ verifyAssertionResponse =
     , _varLanguage = Nothing
     , _varFirstName = Nothing
     , _varDisplayName = Nothing
-    , _varOauthRequestToken = Nothing
-    , _varOauthScope = Nothing
+    , _varOAuthRequestToken = Nothing
+    , _varOAuthScope = Nothing
     , _varNickName = Nothing
     , _varLocalId = Nothing
     , _varTimeZone = Nothing
     , _varIdToken = Nothing
-    , _varOauthAuthorizationCode = Nothing
+    , _varOAuthAuthorizationCode = Nothing
     }
 
 -- | The IdP ID. For white listed IdPs it\'s a short domain name e.g.
@@ -1941,9 +1956,9 @@ varEmailRecycled
       (\ s a -> s{_varEmailRecycled = a})
 
 -- | The URI of the public accessible profiel picture.
-varPhotoUrl :: Lens' VerifyAssertionResponse (Maybe Text)
-varPhotoUrl
-  = lens _varPhotoUrl (\ s a -> s{_varPhotoUrl = a})
+varPhotoURL :: Lens' VerifyAssertionResponse (Maybe Text)
+varPhotoURL
+  = lens _varPhotoURL (\ s a -> s{_varPhotoURL = a})
 
 -- | When action is \'map\', contains the idps which can be used for
 -- confirmation.
@@ -1980,10 +1995,10 @@ varLastName
   = lens _varLastName (\ s a -> s{_varLastName = a})
 
 -- | The OAuth2 access token.
-varOauthAccessToken :: Lens' VerifyAssertionResponse (Maybe Text)
-varOauthAccessToken
-  = lens _varOauthAccessToken
-      (\ s a -> s{_varOauthAccessToken = a})
+varOAuthAccessToken :: Lens' VerifyAssertionResponse (Maybe Text)
+varOAuthAccessToken
+  = lens _varOAuthAccessToken
+      (\ s a -> s{_varOAuthAccessToken = a})
 
 -- | The birth date of the IdP account.
 varDateOfBirth :: Lens' VerifyAssertionResponse (Maybe Text)
@@ -1996,16 +2011,16 @@ varKind :: Lens' VerifyAssertionResponse Text
 varKind = lens _varKind (\ s a -> s{_varKind = a})
 
 -- | The lifetime in seconds of the OAuth2 access token.
-varOauthExpireIn :: Lens' VerifyAssertionResponse (Maybe Int32)
-varOauthExpireIn
-  = lens _varOauthExpireIn
-      (\ s a -> s{_varOauthExpireIn = a})
+varOAuthExpireIn :: Lens' VerifyAssertionResponse (Maybe Int32)
+varOAuthExpireIn
+  = lens _varOAuthExpireIn
+      (\ s a -> s{_varOAuthExpireIn = a})
 
 -- | URL for OTA app installation.
-varAppInstallationUrl :: Lens' VerifyAssertionResponse (Maybe Text)
-varAppInstallationUrl
-  = lens _varAppInstallationUrl
-      (\ s a -> s{_varAppInstallationUrl = a})
+varAppInstallationURL :: Lens' VerifyAssertionResponse (Maybe Text)
+varAppInstallationURL
+  = lens _varAppInstallationURL
+      (\ s a -> s{_varAppInstallationURL = a})
 
 -- | The action code.
 varAction :: Lens' VerifyAssertionResponse (Maybe Text)
@@ -2055,16 +2070,16 @@ varDisplayName
       (\ s a -> s{_varDisplayName = a})
 
 -- | The user approved request token for the OpenID OAuth extension.
-varOauthRequestToken :: Lens' VerifyAssertionResponse (Maybe Text)
-varOauthRequestToken
-  = lens _varOauthRequestToken
-      (\ s a -> s{_varOauthRequestToken = a})
+varOAuthRequestToken :: Lens' VerifyAssertionResponse (Maybe Text)
+varOAuthRequestToken
+  = lens _varOAuthRequestToken
+      (\ s a -> s{_varOAuthRequestToken = a})
 
 -- | The scope for the OpenID OAuth extension.
-varOauthScope :: Lens' VerifyAssertionResponse (Maybe Text)
-varOauthScope
-  = lens _varOauthScope
-      (\ s a -> s{_varOauthScope = a})
+varOAuthScope :: Lens' VerifyAssertionResponse (Maybe Text)
+varOAuthScope
+  = lens _varOAuthScope
+      (\ s a -> s{_varOAuthScope = a})
 
 -- | The nick name of the user.
 varNickName :: Lens' VerifyAssertionResponse (Maybe Text)
@@ -2088,10 +2103,10 @@ varIdToken
   = lens _varIdToken (\ s a -> s{_varIdToken = a})
 
 -- | The OAuth2 authorization code.
-varOauthAuthorizationCode :: Lens' VerifyAssertionResponse (Maybe Text)
-varOauthAuthorizationCode
-  = lens _varOauthAuthorizationCode
-      (\ s a -> s{_varOauthAuthorizationCode = a})
+varOAuthAuthorizationCode :: Lens' VerifyAssertionResponse (Maybe Text)
+varOAuthAuthorizationCode
+  = lens _varOAuthAuthorizationCode
+      (\ s a -> s{_varOAuthAuthorizationCode = a})
 
 instance FromJSON VerifyAssertionResponse where
         parseJSON
@@ -2138,17 +2153,17 @@ instance ToJSON VerifyAssertionResponse where
                   ("fullName" .=) <$> _varFullName,
                   ("email" .=) <$> _varEmail,
                   ("emailRecycled" .=) <$> _varEmailRecycled,
-                  ("photoUrl" .=) <$> _varPhotoUrl,
+                  ("photoUrl" .=) <$> _varPhotoURL,
                   ("verifiedProvider" .=) <$> _varVerifiedProvider,
                   ("context" .=) <$> _varContext,
                   ("needConfirmation" .=) <$> _varNeedConfirmation,
                   ("originalEmail" .=) <$> _varOriginalEmail,
                   ("lastName" .=) <$> _varLastName,
-                  ("oauthAccessToken" .=) <$> _varOauthAccessToken,
+                  ("oauthAccessToken" .=) <$> _varOAuthAccessToken,
                   ("dateOfBirth" .=) <$> _varDateOfBirth,
                   Just ("kind" .= _varKind),
-                  ("oauthExpireIn" .=) <$> _varOauthExpireIn,
-                  ("appInstallationUrl" .=) <$> _varAppInstallationUrl,
+                  ("oauthExpireIn" .=) <$> _varOAuthExpireIn,
+                  ("appInstallationUrl" .=) <$> _varAppInstallationURL,
                   ("action" .=) <$> _varAction,
                   ("federatedId" .=) <$> _varFederatedId,
                   ("appScheme" .=) <$> _varAppScheme,
@@ -2157,14 +2172,14 @@ instance ToJSON VerifyAssertionResponse where
                   ("language" .=) <$> _varLanguage,
                   ("firstName" .=) <$> _varFirstName,
                   ("displayName" .=) <$> _varDisplayName,
-                  ("oauthRequestToken" .=) <$> _varOauthRequestToken,
-                  ("oauthScope" .=) <$> _varOauthScope,
+                  ("oauthRequestToken" .=) <$> _varOAuthRequestToken,
+                  ("oauthScope" .=) <$> _varOAuthScope,
                   ("nickName" .=) <$> _varNickName,
                   ("localId" .=) <$> _varLocalId,
                   ("timeZone" .=) <$> _varTimeZone,
                   ("idToken" .=) <$> _varIdToken,
                   ("oauthAuthorizationCode" .=) <$>
-                    _varOauthAuthorizationCode])
+                    _varOAuthAuthorizationCode])
 
 -- | Respone of setting the account information.
 --
@@ -2374,7 +2389,7 @@ instance ToJSON UploadAccountResponseError where
 -- /See:/ 'userInfoProviderUserInfo' smart constructor.
 data UserInfoProviderUserInfo = UserInfoProviderUserInfo
     { _uipuiProviderId  :: !(Maybe Text)
-    , _uipuiPhotoUrl    :: !(Maybe Text)
+    , _uipuiPhotoURL    :: !(Maybe Text)
     , _uipuiFederatedId :: !(Maybe Text)
     , _uipuiDisplayName :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -2385,7 +2400,7 @@ data UserInfoProviderUserInfo = UserInfoProviderUserInfo
 --
 -- * 'uipuiProviderId'
 --
--- * 'uipuiPhotoUrl'
+-- * 'uipuiPhotoURL'
 --
 -- * 'uipuiFederatedId'
 --
@@ -2395,7 +2410,7 @@ userInfoProviderUserInfo
 userInfoProviderUserInfo =
     UserInfoProviderUserInfo
     { _uipuiProviderId = Nothing
-    , _uipuiPhotoUrl = Nothing
+    , _uipuiPhotoURL = Nothing
     , _uipuiFederatedId = Nothing
     , _uipuiDisplayName = Nothing
     }
@@ -2409,10 +2424,10 @@ uipuiProviderId
       (\ s a -> s{_uipuiProviderId = a})
 
 -- | The user\'s photo url at the IDP.
-uipuiPhotoUrl :: Lens' UserInfoProviderUserInfo (Maybe Text)
-uipuiPhotoUrl
-  = lens _uipuiPhotoUrl
-      (\ s a -> s{_uipuiPhotoUrl = a})
+uipuiPhotoURL :: Lens' UserInfoProviderUserInfo (Maybe Text)
+uipuiPhotoURL
+  = lens _uipuiPhotoURL
+      (\ s a -> s{_uipuiPhotoURL = a})
 
 -- | User\'s identifier at IDP.
 uipuiFederatedId :: Lens' UserInfoProviderUserInfo (Maybe Text)
@@ -2440,6 +2455,6 @@ instance ToJSON UserInfoProviderUserInfo where
           = object
               (catMaybes
                  [("providerId" .=) <$> _uipuiProviderId,
-                  ("photoUrl" .=) <$> _uipuiPhotoUrl,
+                  ("photoUrl" .=) <$> _uipuiPhotoURL,
                   ("federatedId" .=) <$> _uipuiFederatedId,
                   ("displayName" .=) <$> _uipuiDisplayName])

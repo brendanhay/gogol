@@ -33,13 +33,12 @@ module Network.Google.Resource.DFAReporting.CreativeFieldValues.Get
     , cfvgCreativeFieldId
     , cfvgQuotaUser
     , cfvgPrettyPrint
-    , cfvgUserIp
+    , cfvgUserIP
     , cfvgProfileId
     , cfvgKey
     , cfvgId
-    , cfvgOauthToken
+    , cfvgOAuthToken
     , cfvgFields
-    , cfvgAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -57,10 +56,10 @@ type CreativeFieldValuesGetResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :>
+                             QueryParam "alt" AltJSON :>
                                Get '[JSON] CreativeFieldValue
 
 -- | Gets one creative field value by ID.
@@ -70,13 +69,12 @@ data CreativeFieldValuesGet' = CreativeFieldValuesGet'
     { _cfvgCreativeFieldId :: !Int64
     , _cfvgQuotaUser       :: !(Maybe Text)
     , _cfvgPrettyPrint     :: !Bool
-    , _cfvgUserIp          :: !(Maybe Text)
+    , _cfvgUserIP          :: !(Maybe Text)
     , _cfvgProfileId       :: !Int64
-    , _cfvgKey             :: !(Maybe Text)
+    , _cfvgKey             :: !(Maybe Key)
     , _cfvgId              :: !Int64
-    , _cfvgOauthToken      :: !(Maybe Text)
+    , _cfvgOAuthToken      :: !(Maybe OAuthToken)
     , _cfvgFields          :: !(Maybe Text)
-    , _cfvgAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeFieldValuesGet'' with the minimum fields required to make a request.
@@ -89,7 +87,7 @@ data CreativeFieldValuesGet' = CreativeFieldValuesGet'
 --
 -- * 'cfvgPrettyPrint'
 --
--- * 'cfvgUserIp'
+-- * 'cfvgUserIP'
 --
 -- * 'cfvgProfileId'
 --
@@ -97,11 +95,9 @@ data CreativeFieldValuesGet' = CreativeFieldValuesGet'
 --
 -- * 'cfvgId'
 --
--- * 'cfvgOauthToken'
+-- * 'cfvgOAuthToken'
 --
 -- * 'cfvgFields'
---
--- * 'cfvgAlt'
 creativeFieldValuesGet'
     :: Int64 -- ^ 'creativeFieldId'
     -> Int64 -- ^ 'profileId'
@@ -112,13 +108,12 @@ creativeFieldValuesGet' pCfvgCreativeFieldId_ pCfvgProfileId_ pCfvgId_ =
     { _cfvgCreativeFieldId = pCfvgCreativeFieldId_
     , _cfvgQuotaUser = Nothing
     , _cfvgPrettyPrint = True
-    , _cfvgUserIp = Nothing
+    , _cfvgUserIP = Nothing
     , _cfvgProfileId = pCfvgProfileId_
     , _cfvgKey = Nothing
     , _cfvgId = pCfvgId_
-    , _cfvgOauthToken = Nothing
+    , _cfvgOAuthToken = Nothing
     , _cfvgFields = Nothing
-    , _cfvgAlt = JSON
     }
 
 -- | Creative field ID for this creative field value.
@@ -143,9 +138,9 @@ cfvgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cfvgUserIp :: Lens' CreativeFieldValuesGet' (Maybe Text)
-cfvgUserIp
-  = lens _cfvgUserIp (\ s a -> s{_cfvgUserIp = a})
+cfvgUserIP :: Lens' CreativeFieldValuesGet' (Maybe Text)
+cfvgUserIP
+  = lens _cfvgUserIP (\ s a -> s{_cfvgUserIP = a})
 
 -- | User profile ID associated with this request.
 cfvgProfileId :: Lens' CreativeFieldValuesGet' Int64
@@ -156,7 +151,7 @@ cfvgProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cfvgKey :: Lens' CreativeFieldValuesGet' (Maybe Text)
+cfvgKey :: Lens' CreativeFieldValuesGet' (Maybe Key)
 cfvgKey = lens _cfvgKey (\ s a -> s{_cfvgKey = a})
 
 -- | Creative Field Value ID
@@ -164,19 +159,19 @@ cfvgId :: Lens' CreativeFieldValuesGet' Int64
 cfvgId = lens _cfvgId (\ s a -> s{_cfvgId = a})
 
 -- | OAuth 2.0 token for the current user.
-cfvgOauthToken :: Lens' CreativeFieldValuesGet' (Maybe Text)
-cfvgOauthToken
-  = lens _cfvgOauthToken
-      (\ s a -> s{_cfvgOauthToken = a})
+cfvgOAuthToken :: Lens' CreativeFieldValuesGet' (Maybe OAuthToken)
+cfvgOAuthToken
+  = lens _cfvgOAuthToken
+      (\ s a -> s{_cfvgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cfvgFields :: Lens' CreativeFieldValuesGet' (Maybe Text)
 cfvgFields
   = lens _cfvgFields (\ s a -> s{_cfvgFields = a})
 
--- | Data format for the response.
-cfvgAlt :: Lens' CreativeFieldValuesGet' Alt
-cfvgAlt = lens _cfvgAlt (\ s a -> s{_cfvgAlt = a})
+instance GoogleAuth CreativeFieldValuesGet' where
+        authKey = cfvgKey . _Just
+        authToken = cfvgOAuthToken . _Just
 
 instance GoogleRequest CreativeFieldValuesGet' where
         type Rs CreativeFieldValuesGet' = CreativeFieldValue
@@ -184,13 +179,13 @@ instance GoogleRequest CreativeFieldValuesGet' where
         requestWithRoute r u CreativeFieldValuesGet'{..}
           = go _cfvgCreativeFieldId _cfvgQuotaUser
               (Just _cfvgPrettyPrint)
-              _cfvgUserIp
+              _cfvgUserIP
               _cfvgProfileId
               _cfvgKey
               _cfvgId
-              _cfvgOauthToken
+              _cfvgOAuthToken
               _cfvgFields
-              (Just _cfvgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CreativeFieldValuesGetResource)

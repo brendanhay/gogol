@@ -33,13 +33,12 @@ module Network.Google.Resource.Analytics.Management.Profiles.Get
     , mpgQuotaUser
     , mpgPrettyPrint
     , mpgWebPropertyId
-    , mpgUserIp
+    , mpgUserIP
     , mpgProfileId
     , mpgAccountId
     , mpgKey
-    , mpgOauthToken
+    , mpgOAuthToken
     , mpgFields
-    , mpgAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -58,10 +57,10 @@ type ManagementProfilesGetResource =
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :> Get '[JSON] Profile
+                               QueryParam "alt" AltJSON :> Get '[JSON] Profile
 
 -- | Gets a view (profile) to which the user has access.
 --
@@ -70,13 +69,12 @@ data ManagementProfilesGet' = ManagementProfilesGet'
     { _mpgQuotaUser     :: !(Maybe Text)
     , _mpgPrettyPrint   :: !Bool
     , _mpgWebPropertyId :: !Text
-    , _mpgUserIp        :: !(Maybe Text)
+    , _mpgUserIP        :: !(Maybe Text)
     , _mpgProfileId     :: !Text
     , _mpgAccountId     :: !Text
-    , _mpgKey           :: !(Maybe Text)
-    , _mpgOauthToken    :: !(Maybe Text)
+    , _mpgKey           :: !(Maybe Key)
+    , _mpgOAuthToken    :: !(Maybe OAuthToken)
     , _mpgFields        :: !(Maybe Text)
-    , _mpgAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProfilesGet'' with the minimum fields required to make a request.
@@ -89,7 +87,7 @@ data ManagementProfilesGet' = ManagementProfilesGet'
 --
 -- * 'mpgWebPropertyId'
 --
--- * 'mpgUserIp'
+-- * 'mpgUserIP'
 --
 -- * 'mpgProfileId'
 --
@@ -97,11 +95,9 @@ data ManagementProfilesGet' = ManagementProfilesGet'
 --
 -- * 'mpgKey'
 --
--- * 'mpgOauthToken'
+-- * 'mpgOAuthToken'
 --
 -- * 'mpgFields'
---
--- * 'mpgAlt'
 managementProfilesGet'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
@@ -112,13 +108,12 @@ managementProfilesGet' pMpgWebPropertyId_ pMpgProfileId_ pMpgAccountId_ =
     { _mpgQuotaUser = Nothing
     , _mpgPrettyPrint = False
     , _mpgWebPropertyId = pMpgWebPropertyId_
-    , _mpgUserIp = Nothing
+    , _mpgUserIP = Nothing
     , _mpgProfileId = pMpgProfileId_
     , _mpgAccountId = pMpgAccountId_
     , _mpgKey = Nothing
-    , _mpgOauthToken = Nothing
+    , _mpgOAuthToken = Nothing
     , _mpgFields = Nothing
-    , _mpgAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -142,9 +137,9 @@ mpgWebPropertyId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mpgUserIp :: Lens' ManagementProfilesGet' (Maybe Text)
-mpgUserIp
-  = lens _mpgUserIp (\ s a -> s{_mpgUserIp = a})
+mpgUserIP :: Lens' ManagementProfilesGet' (Maybe Text)
+mpgUserIP
+  = lens _mpgUserIP (\ s a -> s{_mpgUserIP = a})
 
 -- | View (Profile) ID to retrieve the goal for.
 mpgProfileId :: Lens' ManagementProfilesGet' Text
@@ -159,23 +154,23 @@ mpgAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mpgKey :: Lens' ManagementProfilesGet' (Maybe Text)
+mpgKey :: Lens' ManagementProfilesGet' (Maybe Key)
 mpgKey = lens _mpgKey (\ s a -> s{_mpgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-mpgOauthToken :: Lens' ManagementProfilesGet' (Maybe Text)
-mpgOauthToken
-  = lens _mpgOauthToken
-      (\ s a -> s{_mpgOauthToken = a})
+mpgOAuthToken :: Lens' ManagementProfilesGet' (Maybe OAuthToken)
+mpgOAuthToken
+  = lens _mpgOAuthToken
+      (\ s a -> s{_mpgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 mpgFields :: Lens' ManagementProfilesGet' (Maybe Text)
 mpgFields
   = lens _mpgFields (\ s a -> s{_mpgFields = a})
 
--- | Data format for the response.
-mpgAlt :: Lens' ManagementProfilesGet' Alt
-mpgAlt = lens _mpgAlt (\ s a -> s{_mpgAlt = a})
+instance GoogleAuth ManagementProfilesGet' where
+        authKey = mpgKey . _Just
+        authToken = mpgOAuthToken . _Just
 
 instance GoogleRequest ManagementProfilesGet' where
         type Rs ManagementProfilesGet' = Profile
@@ -183,13 +178,13 @@ instance GoogleRequest ManagementProfilesGet' where
         requestWithRoute r u ManagementProfilesGet'{..}
           = go _mpgQuotaUser (Just _mpgPrettyPrint)
               _mpgWebPropertyId
-              _mpgUserIp
+              _mpgUserIP
               _mpgProfileId
               _mpgAccountId
               _mpgKey
-              _mpgOauthToken
+              _mpgOAuthToken
               _mpgFields
-              (Just _mpgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ManagementProfilesGetResource)

@@ -36,13 +36,12 @@ module Network.Google.Resource.Games.TurnBasedMatches.Rematch
     , tbmrRequestId
     , tbmrQuotaUser
     , tbmrPrettyPrint
-    , tbmrUserIp
+    , tbmrUserIP
     , tbmrKey
     , tbmrLanguage
-    , tbmrOauthToken
+    , tbmrOAuthToken
     , tbmrMatchId
     , tbmrFields
-    , tbmrAlt
     ) where
 
 import           Network.Google.Games.Types
@@ -58,11 +57,11 @@ type TurnBasedMatchesRematchResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "language" Text :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :>
+                           QueryParam "alt" AltJSON :>
                              Post '[JSON] TurnBasedMatchRematch
 
 -- | Create a rematch of a match that was previously completed, with the same
@@ -75,13 +74,12 @@ data TurnBasedMatchesRematch' = TurnBasedMatchesRematch'
     { _tbmrRequestId   :: !(Maybe Int64)
     , _tbmrQuotaUser   :: !(Maybe Text)
     , _tbmrPrettyPrint :: !Bool
-    , _tbmrUserIp      :: !(Maybe Text)
-    , _tbmrKey         :: !(Maybe Text)
+    , _tbmrUserIP      :: !(Maybe Text)
+    , _tbmrKey         :: !(Maybe Key)
     , _tbmrLanguage    :: !(Maybe Text)
-    , _tbmrOauthToken  :: !(Maybe Text)
+    , _tbmrOAuthToken  :: !(Maybe OAuthToken)
     , _tbmrMatchId     :: !Text
     , _tbmrFields      :: !(Maybe Text)
-    , _tbmrAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchesRematch'' with the minimum fields required to make a request.
@@ -94,19 +92,17 @@ data TurnBasedMatchesRematch' = TurnBasedMatchesRematch'
 --
 -- * 'tbmrPrettyPrint'
 --
--- * 'tbmrUserIp'
+-- * 'tbmrUserIP'
 --
 -- * 'tbmrKey'
 --
 -- * 'tbmrLanguage'
 --
--- * 'tbmrOauthToken'
+-- * 'tbmrOAuthToken'
 --
 -- * 'tbmrMatchId'
 --
 -- * 'tbmrFields'
---
--- * 'tbmrAlt'
 turnBasedMatchesRematch'
     :: Text -- ^ 'matchId'
     -> TurnBasedMatchesRematch'
@@ -115,13 +111,12 @@ turnBasedMatchesRematch' pTbmrMatchId_ =
     { _tbmrRequestId = Nothing
     , _tbmrQuotaUser = Nothing
     , _tbmrPrettyPrint = True
-    , _tbmrUserIp = Nothing
+    , _tbmrUserIP = Nothing
     , _tbmrKey = Nothing
     , _tbmrLanguage = Nothing
-    , _tbmrOauthToken = Nothing
+    , _tbmrOAuthToken = Nothing
     , _tbmrMatchId = pTbmrMatchId_
     , _tbmrFields = Nothing
-    , _tbmrAlt = JSON
     }
 
 -- | A randomly generated numeric ID for each request specified by the
@@ -148,14 +143,14 @@ tbmrPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tbmrUserIp :: Lens' TurnBasedMatchesRematch' (Maybe Text)
-tbmrUserIp
-  = lens _tbmrUserIp (\ s a -> s{_tbmrUserIp = a})
+tbmrUserIP :: Lens' TurnBasedMatchesRematch' (Maybe Text)
+tbmrUserIP
+  = lens _tbmrUserIP (\ s a -> s{_tbmrUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tbmrKey :: Lens' TurnBasedMatchesRematch' (Maybe Text)
+tbmrKey :: Lens' TurnBasedMatchesRematch' (Maybe Key)
 tbmrKey = lens _tbmrKey (\ s a -> s{_tbmrKey = a})
 
 -- | The preferred language to use for strings returned by this method.
@@ -164,10 +159,10 @@ tbmrLanguage
   = lens _tbmrLanguage (\ s a -> s{_tbmrLanguage = a})
 
 -- | OAuth 2.0 token for the current user.
-tbmrOauthToken :: Lens' TurnBasedMatchesRematch' (Maybe Text)
-tbmrOauthToken
-  = lens _tbmrOauthToken
-      (\ s a -> s{_tbmrOauthToken = a})
+tbmrOAuthToken :: Lens' TurnBasedMatchesRematch' (Maybe OAuthToken)
+tbmrOAuthToken
+  = lens _tbmrOAuthToken
+      (\ s a -> s{_tbmrOAuthToken = a})
 
 -- | The ID of the match.
 tbmrMatchId :: Lens' TurnBasedMatchesRematch' Text
@@ -179,9 +174,9 @@ tbmrFields :: Lens' TurnBasedMatchesRematch' (Maybe Text)
 tbmrFields
   = lens _tbmrFields (\ s a -> s{_tbmrFields = a})
 
--- | Data format for the response.
-tbmrAlt :: Lens' TurnBasedMatchesRematch' Alt
-tbmrAlt = lens _tbmrAlt (\ s a -> s{_tbmrAlt = a})
+instance GoogleAuth TurnBasedMatchesRematch' where
+        authKey = tbmrKey . _Just
+        authToken = tbmrOAuthToken . _Just
 
 instance GoogleRequest TurnBasedMatchesRematch' where
         type Rs TurnBasedMatchesRematch' =
@@ -190,13 +185,13 @@ instance GoogleRequest TurnBasedMatchesRematch' where
         requestWithRoute r u TurnBasedMatchesRematch'{..}
           = go _tbmrRequestId _tbmrQuotaUser
               (Just _tbmrPrettyPrint)
-              _tbmrUserIp
+              _tbmrUserIP
               _tbmrKey
               _tbmrLanguage
-              _tbmrOauthToken
+              _tbmrOAuthToken
               _tbmrMatchId
               _tbmrFields
-              (Just _tbmrAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TurnBasedMatchesRematchResource)

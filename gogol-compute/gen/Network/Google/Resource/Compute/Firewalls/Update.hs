@@ -34,12 +34,12 @@ module Network.Google.Resource.Compute.Firewalls.Update
     , fuQuotaUser
     , fuPrettyPrint
     , fuProject
-    , fuUserIp
+    , fuUserIP
     , fuKey
-    , fuOauthToken
+    , fuOAuthToken
+    , fuFirewall
     , fuFirewall
     , fuFields
-    , fuAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -55,10 +55,11 @@ type FirewallsUpdateResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Put '[JSON] Operation
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Firewall :> Put '[JSON] Operation
 
 -- | Updates the specified firewall resource with the data included in the
 -- request.
@@ -68,12 +69,12 @@ data FirewallsUpdate' = FirewallsUpdate'
     { _fuQuotaUser   :: !(Maybe Text)
     , _fuPrettyPrint :: !Bool
     , _fuProject     :: !Text
-    , _fuUserIp      :: !(Maybe Text)
-    , _fuKey         :: !(Maybe Text)
-    , _fuOauthToken  :: !(Maybe Text)
+    , _fuUserIP      :: !(Maybe Text)
+    , _fuKey         :: !(Maybe Key)
+    , _fuOAuthToken  :: !(Maybe OAuthToken)
     , _fuFirewall    :: !Text
+    , _fuFirewall    :: !Firewall
     , _fuFields      :: !(Maybe Text)
-    , _fuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FirewallsUpdate'' with the minimum fields required to make a request.
@@ -86,32 +87,33 @@ data FirewallsUpdate' = FirewallsUpdate'
 --
 -- * 'fuProject'
 --
--- * 'fuUserIp'
+-- * 'fuUserIP'
 --
 -- * 'fuKey'
 --
--- * 'fuOauthToken'
+-- * 'fuOAuthToken'
+--
+-- * 'fuFirewall'
 --
 -- * 'fuFirewall'
 --
 -- * 'fuFields'
---
--- * 'fuAlt'
 firewallsUpdate'
     :: Text -- ^ 'project'
     -> Text -- ^ 'firewall'
+    -> Firewall -- ^ 'Firewall'
     -> FirewallsUpdate'
-firewallsUpdate' pFuProject_ pFuFirewall_ =
+firewallsUpdate' pFuProject_ pFuFirewall_ pFuFirewall_ =
     FirewallsUpdate'
     { _fuQuotaUser = Nothing
     , _fuPrettyPrint = True
     , _fuProject = pFuProject_
-    , _fuUserIp = Nothing
+    , _fuUserIP = Nothing
     , _fuKey = Nothing
-    , _fuOauthToken = Nothing
+    , _fuOAuthToken = Nothing
+    , _fuFirewall = pFuFirewall_
     , _fuFirewall = pFuFirewall_
     , _fuFields = Nothing
-    , _fuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -134,22 +136,27 @@ fuProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-fuUserIp :: Lens' FirewallsUpdate' (Maybe Text)
-fuUserIp = lens _fuUserIp (\ s a -> s{_fuUserIp = a})
+fuUserIP :: Lens' FirewallsUpdate' (Maybe Text)
+fuUserIP = lens _fuUserIP (\ s a -> s{_fuUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fuKey :: Lens' FirewallsUpdate' (Maybe Text)
+fuKey :: Lens' FirewallsUpdate' (Maybe Key)
 fuKey = lens _fuKey (\ s a -> s{_fuKey = a})
 
 -- | OAuth 2.0 token for the current user.
-fuOauthToken :: Lens' FirewallsUpdate' (Maybe Text)
-fuOauthToken
-  = lens _fuOauthToken (\ s a -> s{_fuOauthToken = a})
+fuOAuthToken :: Lens' FirewallsUpdate' (Maybe OAuthToken)
+fuOAuthToken
+  = lens _fuOAuthToken (\ s a -> s{_fuOAuthToken = a})
 
 -- | Name of the firewall resource to update.
 fuFirewall :: Lens' FirewallsUpdate' Text
+fuFirewall
+  = lens _fuFirewall (\ s a -> s{_fuFirewall = a})
+
+-- | Multipart request metadata.
+fuFirewall :: Lens' FirewallsUpdate' Firewall
 fuFirewall
   = lens _fuFirewall (\ s a -> s{_fuFirewall = a})
 
@@ -157,21 +164,22 @@ fuFirewall
 fuFields :: Lens' FirewallsUpdate' (Maybe Text)
 fuFields = lens _fuFields (\ s a -> s{_fuFields = a})
 
--- | Data format for the response.
-fuAlt :: Lens' FirewallsUpdate' Alt
-fuAlt = lens _fuAlt (\ s a -> s{_fuAlt = a})
+instance GoogleAuth FirewallsUpdate' where
+        authKey = fuKey . _Just
+        authToken = fuOAuthToken . _Just
 
 instance GoogleRequest FirewallsUpdate' where
         type Rs FirewallsUpdate' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u FirewallsUpdate'{..}
           = go _fuQuotaUser (Just _fuPrettyPrint) _fuProject
-              _fuUserIp
+              _fuUserIP
               _fuKey
-              _fuOauthToken
+              _fuOAuthToken
               _fuFirewall
               _fuFields
-              (Just _fuAlt)
+              (Just AltJSON)
+              _fuFirewall
           where go
                   = clientWithRoute
                       (Proxy :: Proxy FirewallsUpdateResource)

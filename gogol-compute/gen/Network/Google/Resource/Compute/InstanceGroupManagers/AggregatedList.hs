@@ -34,14 +34,13 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.AggregatedList
     , igmalQuotaUser
     , igmalPrettyPrint
     , igmalProject
-    , igmalUserIp
+    , igmalUserIP
     , igmalKey
     , igmalFilter
     , igmalPageToken
-    , igmalOauthToken
+    , igmalOAuthToken
     , igmalMaxResults
     , igmalFields
-    , igmalAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -56,13 +55,13 @@ type InstanceGroupManagersAggregatedListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "filter" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "maxResults" Word32 :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :>
+                             QueryParam "alt" AltJSON :>
                                Get '[JSON] InstanceGroupManagerAggregatedList
 
 -- | Retrieves the list of managed instance groups, and groups them by
@@ -73,14 +72,13 @@ data InstanceGroupManagersAggregatedList' = InstanceGroupManagersAggregatedList'
     { _igmalQuotaUser   :: !(Maybe Text)
     , _igmalPrettyPrint :: !Bool
     , _igmalProject     :: !Text
-    , _igmalUserIp      :: !(Maybe Text)
-    , _igmalKey         :: !(Maybe Text)
+    , _igmalUserIP      :: !(Maybe Text)
+    , _igmalKey         :: !(Maybe Key)
     , _igmalFilter      :: !(Maybe Text)
     , _igmalPageToken   :: !(Maybe Text)
-    , _igmalOauthToken  :: !(Maybe Text)
+    , _igmalOAuthToken  :: !(Maybe OAuthToken)
     , _igmalMaxResults  :: !Word32
     , _igmalFields      :: !(Maybe Text)
-    , _igmalAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagersAggregatedList'' with the minimum fields required to make a request.
@@ -93,7 +91,7 @@ data InstanceGroupManagersAggregatedList' = InstanceGroupManagersAggregatedList'
 --
 -- * 'igmalProject'
 --
--- * 'igmalUserIp'
+-- * 'igmalUserIP'
 --
 -- * 'igmalKey'
 --
@@ -101,13 +99,11 @@ data InstanceGroupManagersAggregatedList' = InstanceGroupManagersAggregatedList'
 --
 -- * 'igmalPageToken'
 --
--- * 'igmalOauthToken'
+-- * 'igmalOAuthToken'
 --
 -- * 'igmalMaxResults'
 --
 -- * 'igmalFields'
---
--- * 'igmalAlt'
 instanceGroupManagersAggregatedList'
     :: Text -- ^ 'project'
     -> InstanceGroupManagersAggregatedList'
@@ -116,14 +112,13 @@ instanceGroupManagersAggregatedList' pIgmalProject_ =
     { _igmalQuotaUser = Nothing
     , _igmalPrettyPrint = True
     , _igmalProject = pIgmalProject_
-    , _igmalUserIp = Nothing
+    , _igmalUserIP = Nothing
     , _igmalKey = Nothing
     , _igmalFilter = Nothing
     , _igmalPageToken = Nothing
-    , _igmalOauthToken = Nothing
+    , _igmalOAuthToken = Nothing
     , _igmalMaxResults = 500
     , _igmalFields = Nothing
-    , _igmalAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -147,14 +142,14 @@ igmalProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-igmalUserIp :: Lens' InstanceGroupManagersAggregatedList' (Maybe Text)
-igmalUserIp
-  = lens _igmalUserIp (\ s a -> s{_igmalUserIp = a})
+igmalUserIP :: Lens' InstanceGroupManagersAggregatedList' (Maybe Text)
+igmalUserIP
+  = lens _igmalUserIP (\ s a -> s{_igmalUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-igmalKey :: Lens' InstanceGroupManagersAggregatedList' (Maybe Text)
+igmalKey :: Lens' InstanceGroupManagersAggregatedList' (Maybe Key)
 igmalKey = lens _igmalKey (\ s a -> s{_igmalKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
@@ -181,10 +176,10 @@ igmalPageToken
       (\ s a -> s{_igmalPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-igmalOauthToken :: Lens' InstanceGroupManagersAggregatedList' (Maybe Text)
-igmalOauthToken
-  = lens _igmalOauthToken
-      (\ s a -> s{_igmalOauthToken = a})
+igmalOAuthToken :: Lens' InstanceGroupManagersAggregatedList' (Maybe OAuthToken)
+igmalOAuthToken
+  = lens _igmalOAuthToken
+      (\ s a -> s{_igmalOAuthToken = a})
 
 -- | Maximum count of results to be returned.
 igmalMaxResults :: Lens' InstanceGroupManagersAggregatedList' Word32
@@ -197,9 +192,10 @@ igmalFields :: Lens' InstanceGroupManagersAggregatedList' (Maybe Text)
 igmalFields
   = lens _igmalFields (\ s a -> s{_igmalFields = a})
 
--- | Data format for the response.
-igmalAlt :: Lens' InstanceGroupManagersAggregatedList' Alt
-igmalAlt = lens _igmalAlt (\ s a -> s{_igmalAlt = a})
+instance GoogleAuth
+         InstanceGroupManagersAggregatedList' where
+        authKey = igmalKey . _Just
+        authToken = igmalOAuthToken . _Just
 
 instance GoogleRequest
          InstanceGroupManagersAggregatedList' where
@@ -210,14 +206,14 @@ instance GoogleRequest
           InstanceGroupManagersAggregatedList'{..}
           = go _igmalQuotaUser (Just _igmalPrettyPrint)
               _igmalProject
-              _igmalUserIp
+              _igmalUserIP
               _igmalKey
               _igmalFilter
               _igmalPageToken
-              _igmalOauthToken
+              _igmalOAuthToken
               (Just _igmalMaxResults)
               _igmalFields
-              (Just _igmalAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

@@ -32,12 +32,11 @@ module Network.Google.Resource.Container.Projects.Operations.List
     -- * Request Lenses
     , polQuotaUser
     , polPrettyPrint
-    , polUserIp
+    , polUserIP
     , polKey
     , polProjectId
-    , polOauthToken
+    , polOAuthToken
     , polFields
-    , polAlt
     ) where
 
 import           Network.Google.Container.Types
@@ -51,10 +50,10 @@ type ProjectsOperationsListResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :>
+                     QueryParam "alt" AltJSON :>
                        Get '[JSON] ListAggregatedOperationsResponse
 
 -- | Lists all operations in a project, across all zones.
@@ -63,12 +62,11 @@ type ProjectsOperationsListResource =
 data ProjectsOperationsList' = ProjectsOperationsList'
     { _polQuotaUser   :: !(Maybe Text)
     , _polPrettyPrint :: !Bool
-    , _polUserIp      :: !(Maybe Text)
-    , _polKey         :: !(Maybe Text)
+    , _polUserIP      :: !(Maybe Text)
+    , _polKey         :: !(Maybe Key)
     , _polProjectId   :: !Text
-    , _polOauthToken  :: !(Maybe Text)
+    , _polOAuthToken  :: !(Maybe OAuthToken)
     , _polFields      :: !(Maybe Text)
-    , _polAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsOperationsList'' with the minimum fields required to make a request.
@@ -79,17 +77,15 @@ data ProjectsOperationsList' = ProjectsOperationsList'
 --
 -- * 'polPrettyPrint'
 --
--- * 'polUserIp'
+-- * 'polUserIP'
 --
 -- * 'polKey'
 --
 -- * 'polProjectId'
 --
--- * 'polOauthToken'
+-- * 'polOAuthToken'
 --
 -- * 'polFields'
---
--- * 'polAlt'
 projectsOperationsList'
     :: Text -- ^ 'projectId'
     -> ProjectsOperationsList'
@@ -97,12 +93,11 @@ projectsOperationsList' pPolProjectId_ =
     ProjectsOperationsList'
     { _polQuotaUser = Nothing
     , _polPrettyPrint = True
-    , _polUserIp = Nothing
+    , _polUserIP = Nothing
     , _polKey = Nothing
     , _polProjectId = pPolProjectId_
-    , _polOauthToken = Nothing
+    , _polOAuthToken = Nothing
     , _polFields = Nothing
-    , _polAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,14 +115,14 @@ polPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-polUserIp :: Lens' ProjectsOperationsList' (Maybe Text)
-polUserIp
-  = lens _polUserIp (\ s a -> s{_polUserIp = a})
+polUserIP :: Lens' ProjectsOperationsList' (Maybe Text)
+polUserIP
+  = lens _polUserIP (\ s a -> s{_polUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-polKey :: Lens' ProjectsOperationsList' (Maybe Text)
+polKey :: Lens' ProjectsOperationsList' (Maybe Key)
 polKey = lens _polKey (\ s a -> s{_polKey = a})
 
 -- | The Google Developers Console project ID or project number.
@@ -136,31 +131,31 @@ polProjectId
   = lens _polProjectId (\ s a -> s{_polProjectId = a})
 
 -- | OAuth 2.0 token for the current user.
-polOauthToken :: Lens' ProjectsOperationsList' (Maybe Text)
-polOauthToken
-  = lens _polOauthToken
-      (\ s a -> s{_polOauthToken = a})
+polOAuthToken :: Lens' ProjectsOperationsList' (Maybe OAuthToken)
+polOAuthToken
+  = lens _polOAuthToken
+      (\ s a -> s{_polOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 polFields :: Lens' ProjectsOperationsList' (Maybe Text)
 polFields
   = lens _polFields (\ s a -> s{_polFields = a})
 
--- | Data format for the response.
-polAlt :: Lens' ProjectsOperationsList' Alt
-polAlt = lens _polAlt (\ s a -> s{_polAlt = a})
+instance GoogleAuth ProjectsOperationsList' where
+        authKey = polKey . _Just
+        authToken = polOAuthToken . _Just
 
 instance GoogleRequest ProjectsOperationsList' where
         type Rs ProjectsOperationsList' =
              ListAggregatedOperationsResponse
         request = requestWithRoute defReq containerURL
         requestWithRoute r u ProjectsOperationsList'{..}
-          = go _polQuotaUser (Just _polPrettyPrint) _polUserIp
+          = go _polQuotaUser (Just _polPrettyPrint) _polUserIP
               _polKey
               _polProjectId
-              _polOauthToken
+              _polOAuthToken
               _polFields
-              (Just _polAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsOperationsListResource)

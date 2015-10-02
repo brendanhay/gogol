@@ -33,12 +33,12 @@ module Network.Google.Resource.YouTube.ChannelSections.Update
     , csuQuotaUser
     , csuPart
     , csuPrettyPrint
-    , csuUserIp
+    , csuChannelSection
+    , csuUserIP
     , csuOnBehalfOfContentOwner
     , csuKey
-    , csuOauthToken
+    , csuOAuthToken
     , csuFields
-    , csuAlt
     ) where
 
 import           Network.Google.Prelude
@@ -53,10 +53,12 @@ type ChannelSectionsUpdateResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "onBehalfOfContentOwner" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Put '[JSON] ChannelSection
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] ChannelSection :>
+                           Put '[JSON] ChannelSection
 
 -- | Update a channelSection.
 --
@@ -65,12 +67,12 @@ data ChannelSectionsUpdate' = ChannelSectionsUpdate'
     { _csuQuotaUser              :: !(Maybe Text)
     , _csuPart                   :: !Text
     , _csuPrettyPrint            :: !Bool
-    , _csuUserIp                 :: !(Maybe Text)
+    , _csuChannelSection         :: !ChannelSection
+    , _csuUserIP                 :: !(Maybe Text)
     , _csuOnBehalfOfContentOwner :: !(Maybe Text)
-    , _csuKey                    :: !(Maybe Text)
-    , _csuOauthToken             :: !(Maybe Text)
+    , _csuKey                    :: !(Maybe Key)
+    , _csuOAuthToken             :: !(Maybe OAuthToken)
     , _csuFields                 :: !(Maybe Text)
-    , _csuAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChannelSectionsUpdate'' with the minimum fields required to make a request.
@@ -83,31 +85,32 @@ data ChannelSectionsUpdate' = ChannelSectionsUpdate'
 --
 -- * 'csuPrettyPrint'
 --
--- * 'csuUserIp'
+-- * 'csuChannelSection'
+--
+-- * 'csuUserIP'
 --
 -- * 'csuOnBehalfOfContentOwner'
 --
 -- * 'csuKey'
 --
--- * 'csuOauthToken'
+-- * 'csuOAuthToken'
 --
 -- * 'csuFields'
---
--- * 'csuAlt'
 channelSectionsUpdate'
     :: Text -- ^ 'part'
+    -> ChannelSection -- ^ 'ChannelSection'
     -> ChannelSectionsUpdate'
-channelSectionsUpdate' pCsuPart_ =
+channelSectionsUpdate' pCsuPart_ pCsuChannelSection_ =
     ChannelSectionsUpdate'
     { _csuQuotaUser = Nothing
     , _csuPart = pCsuPart_
     , _csuPrettyPrint = True
-    , _csuUserIp = Nothing
+    , _csuChannelSection = pCsuChannelSection_
+    , _csuUserIP = Nothing
     , _csuOnBehalfOfContentOwner = Nothing
     , _csuKey = Nothing
-    , _csuOauthToken = Nothing
+    , _csuOAuthToken = Nothing
     , _csuFields = Nothing
-    , _csuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -130,11 +133,17 @@ csuPrettyPrint
   = lens _csuPrettyPrint
       (\ s a -> s{_csuPrettyPrint = a})
 
+-- | Multipart request metadata.
+csuChannelSection :: Lens' ChannelSectionsUpdate' ChannelSection
+csuChannelSection
+  = lens _csuChannelSection
+      (\ s a -> s{_csuChannelSection = a})
+
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-csuUserIp :: Lens' ChannelSectionsUpdate' (Maybe Text)
-csuUserIp
-  = lens _csuUserIp (\ s a -> s{_csuUserIp = a})
+csuUserIP :: Lens' ChannelSectionsUpdate' (Maybe Text)
+csuUserIP
+  = lens _csuUserIP (\ s a -> s{_csuUserIP = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
@@ -154,23 +163,23 @@ csuOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-csuKey :: Lens' ChannelSectionsUpdate' (Maybe Text)
+csuKey :: Lens' ChannelSectionsUpdate' (Maybe Key)
 csuKey = lens _csuKey (\ s a -> s{_csuKey = a})
 
 -- | OAuth 2.0 token for the current user.
-csuOauthToken :: Lens' ChannelSectionsUpdate' (Maybe Text)
-csuOauthToken
-  = lens _csuOauthToken
-      (\ s a -> s{_csuOauthToken = a})
+csuOAuthToken :: Lens' ChannelSectionsUpdate' (Maybe OAuthToken)
+csuOAuthToken
+  = lens _csuOAuthToken
+      (\ s a -> s{_csuOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 csuFields :: Lens' ChannelSectionsUpdate' (Maybe Text)
 csuFields
   = lens _csuFields (\ s a -> s{_csuFields = a})
 
--- | Data format for the response.
-csuAlt :: Lens' ChannelSectionsUpdate' Alt
-csuAlt = lens _csuAlt (\ s a -> s{_csuAlt = a})
+instance GoogleAuth ChannelSectionsUpdate' where
+        authKey = csuKey . _Just
+        authToken = csuOAuthToken . _Just
 
 instance GoogleRequest ChannelSectionsUpdate' where
         type Rs ChannelSectionsUpdate' = ChannelSection
@@ -178,12 +187,13 @@ instance GoogleRequest ChannelSectionsUpdate' where
         requestWithRoute r u ChannelSectionsUpdate'{..}
           = go _csuQuotaUser (Just _csuPart)
               (Just _csuPrettyPrint)
-              _csuUserIp
+              _csuUserIP
               _csuOnBehalfOfContentOwner
               _csuKey
-              _csuOauthToken
+              _csuOAuthToken
               _csuFields
-              (Just _csuAlt)
+              (Just AltJSON)
+              _csuChannelSection
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ChannelSectionsUpdateResource)

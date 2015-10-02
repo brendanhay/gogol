@@ -33,11 +33,10 @@ module Network.Google.Resource.Games.Applications.Played
     -- * Request Lenses
     , apQuotaUser
     , apPrettyPrint
-    , apUserIp
+    , apUserIP
     , apKey
-    , apOauthToken
+    , apOAuthToken
     , apFields
-    , apAlt
     ) where
 
 import           Network.Google.Games.Types
@@ -51,10 +50,10 @@ type ApplicationsPlayedResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Post '[JSON] ()
+                     QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Indicate that the the currently authenticated user is playing your
 -- application.
@@ -63,11 +62,10 @@ type ApplicationsPlayedResource =
 data ApplicationsPlayed' = ApplicationsPlayed'
     { _apQuotaUser   :: !(Maybe Text)
     , _apPrettyPrint :: !Bool
-    , _apUserIp      :: !(Maybe Text)
-    , _apKey         :: !(Maybe Text)
-    , _apOauthToken  :: !(Maybe Text)
+    , _apUserIP      :: !(Maybe Text)
+    , _apKey         :: !(Maybe Key)
+    , _apOAuthToken  :: !(Maybe OAuthToken)
     , _apFields      :: !(Maybe Text)
-    , _apAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ApplicationsPlayed'' with the minimum fields required to make a request.
@@ -78,26 +76,23 @@ data ApplicationsPlayed' = ApplicationsPlayed'
 --
 -- * 'apPrettyPrint'
 --
--- * 'apUserIp'
+-- * 'apUserIP'
 --
 -- * 'apKey'
 --
--- * 'apOauthToken'
+-- * 'apOAuthToken'
 --
 -- * 'apFields'
---
--- * 'apAlt'
 applicationsPlayed'
     :: ApplicationsPlayed'
 applicationsPlayed' =
     ApplicationsPlayed'
     { _apQuotaUser = Nothing
     , _apPrettyPrint = True
-    , _apUserIp = Nothing
+    , _apUserIP = Nothing
     , _apKey = Nothing
-    , _apOauthToken = Nothing
+    , _apOAuthToken = Nothing
     , _apFields = Nothing
-    , _apAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -115,37 +110,37 @@ apPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-apUserIp :: Lens' ApplicationsPlayed' (Maybe Text)
-apUserIp = lens _apUserIp (\ s a -> s{_apUserIp = a})
+apUserIP :: Lens' ApplicationsPlayed' (Maybe Text)
+apUserIP = lens _apUserIP (\ s a -> s{_apUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-apKey :: Lens' ApplicationsPlayed' (Maybe Text)
+apKey :: Lens' ApplicationsPlayed' (Maybe Key)
 apKey = lens _apKey (\ s a -> s{_apKey = a})
 
 -- | OAuth 2.0 token for the current user.
-apOauthToken :: Lens' ApplicationsPlayed' (Maybe Text)
-apOauthToken
-  = lens _apOauthToken (\ s a -> s{_apOauthToken = a})
+apOAuthToken :: Lens' ApplicationsPlayed' (Maybe OAuthToken)
+apOAuthToken
+  = lens _apOAuthToken (\ s a -> s{_apOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 apFields :: Lens' ApplicationsPlayed' (Maybe Text)
 apFields = lens _apFields (\ s a -> s{_apFields = a})
 
--- | Data format for the response.
-apAlt :: Lens' ApplicationsPlayed' Alt
-apAlt = lens _apAlt (\ s a -> s{_apAlt = a})
+instance GoogleAuth ApplicationsPlayed' where
+        authKey = apKey . _Just
+        authToken = apOAuthToken . _Just
 
 instance GoogleRequest ApplicationsPlayed' where
         type Rs ApplicationsPlayed' = ()
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u ApplicationsPlayed'{..}
-          = go _apQuotaUser (Just _apPrettyPrint) _apUserIp
+          = go _apQuotaUser (Just _apPrettyPrint) _apUserIP
               _apKey
-              _apOauthToken
+              _apOAuthToken
               _apFields
-              (Just _apAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ApplicationsPlayedResource)

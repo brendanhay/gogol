@@ -32,12 +32,12 @@ module Network.Google.Resource.Directory.Users.Update
     -- * Request Lenses
     , uuQuotaUser
     , uuPrettyPrint
-    , uuUserIp
+    , uuUserIP
+    , uuUser
     , uuKey
-    , uuOauthToken
+    , uuOAuthToken
     , uuUserKey
     , uuFields
-    , uuAlt
     ) where
 
 import           Network.Google.AdminDirectory.Types
@@ -51,10 +51,11 @@ type UsersUpdateResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Put '[JSON] User
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] User :> Put '[JSON] User
 
 -- | update user
 --
@@ -62,12 +63,12 @@ type UsersUpdateResource =
 data UsersUpdate' = UsersUpdate'
     { _uuQuotaUser   :: !(Maybe Text)
     , _uuPrettyPrint :: !Bool
-    , _uuUserIp      :: !(Maybe Text)
-    , _uuKey         :: !(Maybe Text)
-    , _uuOauthToken  :: !(Maybe Text)
+    , _uuUserIP      :: !(Maybe Text)
+    , _uuUser        :: !User
+    , _uuKey         :: !(Maybe Key)
+    , _uuOAuthToken  :: !(Maybe OAuthToken)
     , _uuUserKey     :: !Text
     , _uuFields      :: !(Maybe Text)
-    , _uuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersUpdate'' with the minimum fields required to make a request.
@@ -78,30 +79,31 @@ data UsersUpdate' = UsersUpdate'
 --
 -- * 'uuPrettyPrint'
 --
--- * 'uuUserIp'
+-- * 'uuUserIP'
+--
+-- * 'uuUser'
 --
 -- * 'uuKey'
 --
--- * 'uuOauthToken'
+-- * 'uuOAuthToken'
 --
 -- * 'uuUserKey'
 --
 -- * 'uuFields'
---
--- * 'uuAlt'
 usersUpdate'
-    :: Text -- ^ 'userKey'
+    :: User -- ^ 'User'
+    -> Text -- ^ 'userKey'
     -> UsersUpdate'
-usersUpdate' pUuUserKey_ =
+usersUpdate' pUuUser_ pUuUserKey_ =
     UsersUpdate'
     { _uuQuotaUser = Nothing
     , _uuPrettyPrint = True
-    , _uuUserIp = Nothing
+    , _uuUserIP = Nothing
+    , _uuUser = pUuUser_
     , _uuKey = Nothing
-    , _uuOauthToken = Nothing
+    , _uuOAuthToken = Nothing
     , _uuUserKey = pUuUserKey_
     , _uuFields = Nothing
-    , _uuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -119,19 +121,23 @@ uuPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-uuUserIp :: Lens' UsersUpdate' (Maybe Text)
-uuUserIp = lens _uuUserIp (\ s a -> s{_uuUserIp = a})
+uuUserIP :: Lens' UsersUpdate' (Maybe Text)
+uuUserIP = lens _uuUserIP (\ s a -> s{_uuUserIP = a})
+
+-- | Multipart request metadata.
+uuUser :: Lens' UsersUpdate' User
+uuUser = lens _uuUser (\ s a -> s{_uuUser = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-uuKey :: Lens' UsersUpdate' (Maybe Text)
+uuKey :: Lens' UsersUpdate' (Maybe Key)
 uuKey = lens _uuKey (\ s a -> s{_uuKey = a})
 
 -- | OAuth 2.0 token for the current user.
-uuOauthToken :: Lens' UsersUpdate' (Maybe Text)
-uuOauthToken
-  = lens _uuOauthToken (\ s a -> s{_uuOauthToken = a})
+uuOAuthToken :: Lens' UsersUpdate' (Maybe OAuthToken)
+uuOAuthToken
+  = lens _uuOAuthToken (\ s a -> s{_uuOAuthToken = a})
 
 -- | Email or immutable Id of the user. If Id, it should match with id of
 -- user object
@@ -143,20 +149,21 @@ uuUserKey
 uuFields :: Lens' UsersUpdate' (Maybe Text)
 uuFields = lens _uuFields (\ s a -> s{_uuFields = a})
 
--- | Data format for the response.
-uuAlt :: Lens' UsersUpdate' Alt
-uuAlt = lens _uuAlt (\ s a -> s{_uuAlt = a})
+instance GoogleAuth UsersUpdate' where
+        authKey = uuKey . _Just
+        authToken = uuOAuthToken . _Just
 
 instance GoogleRequest UsersUpdate' where
         type Rs UsersUpdate' = User
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u UsersUpdate'{..}
-          = go _uuQuotaUser (Just _uuPrettyPrint) _uuUserIp
+          = go _uuQuotaUser (Just _uuPrettyPrint) _uuUserIP
               _uuKey
-              _uuOauthToken
+              _uuOAuthToken
               _uuUserKey
               _uuFields
-              (Just _uuAlt)
+              (Just AltJSON)
+              _uuUser
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersUpdateResource)

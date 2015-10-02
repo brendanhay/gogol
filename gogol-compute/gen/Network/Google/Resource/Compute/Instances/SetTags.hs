@@ -34,12 +34,12 @@ module Network.Google.Resource.Compute.Instances.SetTags
     , istQuotaUser
     , istPrettyPrint
     , istProject
-    , istUserIp
+    , istUserIP
     , istZone
     , istKey
-    , istOauthToken
+    , istOAuthToken
+    , istTags
     , istFields
-    , istAlt
     , istInstance
     ) where
 
@@ -58,10 +58,11 @@ type InstancesSetTagsResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Post '[JSON] Operation
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] Tags :> Post '[JSON] Operation
 
 -- | Sets tags for the specified instance to the data included in the
 -- request.
@@ -71,12 +72,12 @@ data InstancesSetTags' = InstancesSetTags'
     { _istQuotaUser   :: !(Maybe Text)
     , _istPrettyPrint :: !Bool
     , _istProject     :: !Text
-    , _istUserIp      :: !(Maybe Text)
+    , _istUserIP      :: !(Maybe Text)
     , _istZone        :: !Text
-    , _istKey         :: !(Maybe Text)
-    , _istOauthToken  :: !(Maybe Text)
+    , _istKey         :: !(Maybe Key)
+    , _istOAuthToken  :: !(Maybe OAuthToken)
+    , _istTags        :: !Tags
     , _istFields      :: !(Maybe Text)
-    , _istAlt         :: !Alt
     , _istInstance    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -90,35 +91,36 @@ data InstancesSetTags' = InstancesSetTags'
 --
 -- * 'istProject'
 --
--- * 'istUserIp'
+-- * 'istUserIP'
 --
 -- * 'istZone'
 --
 -- * 'istKey'
 --
--- * 'istOauthToken'
+-- * 'istOAuthToken'
+--
+-- * 'istTags'
 --
 -- * 'istFields'
---
--- * 'istAlt'
 --
 -- * 'istInstance'
 instancesSetTags'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
+    -> Tags -- ^ 'Tags'
     -> Text -- ^ 'instance'
     -> InstancesSetTags'
-instancesSetTags' pIstProject_ pIstZone_ pIstInstance_ =
+instancesSetTags' pIstProject_ pIstZone_ pIstTags_ pIstInstance_ =
     InstancesSetTags'
     { _istQuotaUser = Nothing
     , _istPrettyPrint = True
     , _istProject = pIstProject_
-    , _istUserIp = Nothing
+    , _istUserIP = Nothing
     , _istZone = pIstZone_
     , _istKey = Nothing
-    , _istOauthToken = Nothing
+    , _istOAuthToken = Nothing
+    , _istTags = pIstTags_
     , _istFields = Nothing
-    , _istAlt = JSON
     , _istInstance = pIstInstance_
     }
 
@@ -142,9 +144,9 @@ istProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-istUserIp :: Lens' InstancesSetTags' (Maybe Text)
-istUserIp
-  = lens _istUserIp (\ s a -> s{_istUserIp = a})
+istUserIP :: Lens' InstancesSetTags' (Maybe Text)
+istUserIP
+  = lens _istUserIP (\ s a -> s{_istUserIP = a})
 
 -- | The name of the zone for this request.
 istZone :: Lens' InstancesSetTags' Text
@@ -153,41 +155,46 @@ istZone = lens _istZone (\ s a -> s{_istZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-istKey :: Lens' InstancesSetTags' (Maybe Text)
+istKey :: Lens' InstancesSetTags' (Maybe Key)
 istKey = lens _istKey (\ s a -> s{_istKey = a})
 
 -- | OAuth 2.0 token for the current user.
-istOauthToken :: Lens' InstancesSetTags' (Maybe Text)
-istOauthToken
-  = lens _istOauthToken
-      (\ s a -> s{_istOauthToken = a})
+istOAuthToken :: Lens' InstancesSetTags' (Maybe OAuthToken)
+istOAuthToken
+  = lens _istOAuthToken
+      (\ s a -> s{_istOAuthToken = a})
+
+-- | Multipart request metadata.
+istTags :: Lens' InstancesSetTags' Tags
+istTags = lens _istTags (\ s a -> s{_istTags = a})
 
 -- | Selector specifying which fields to include in a partial response.
 istFields :: Lens' InstancesSetTags' (Maybe Text)
 istFields
   = lens _istFields (\ s a -> s{_istFields = a})
 
--- | Data format for the response.
-istAlt :: Lens' InstancesSetTags' Alt
-istAlt = lens _istAlt (\ s a -> s{_istAlt = a})
-
 -- | Name of the instance scoping this request.
 istInstance :: Lens' InstancesSetTags' Text
 istInstance
   = lens _istInstance (\ s a -> s{_istInstance = a})
+
+instance GoogleAuth InstancesSetTags' where
+        authKey = istKey . _Just
+        authToken = istOAuthToken . _Just
 
 instance GoogleRequest InstancesSetTags' where
         type Rs InstancesSetTags' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstancesSetTags'{..}
           = go _istQuotaUser (Just _istPrettyPrint) _istProject
-              _istUserIp
+              _istUserIP
               _istZone
               _istKey
-              _istOauthToken
+              _istOAuthToken
               _istFields
-              (Just _istAlt)
               _istInstance
+              (Just AltJSON)
+              _istTags
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InstancesSetTagsResource)

@@ -43,13 +43,12 @@ module Network.Google.Resource.Logging.Projects.LogServices.Indexes.List
     , plsilLogServicesId
     , plsilDepth
     , plsilPageToken
-    , plsilOauthToken
+    , plsilOAuthToken
     , plsilProjectsId
     , plsilPageSize
     , plsilIndexPrefix
     , plsilFields
     , plsilCallback
-    , plsilAlt
     ) where
 
 import           Network.Google.Logging.Types
@@ -73,15 +72,15 @@ type ProjectsLogServicesIndexesListResource =
                              QueryParam "access_token" Text :>
                                QueryParam "uploadType" Text :>
                                  QueryParam "bearer_token" Text :>
-                                   QueryParam "key" Text :>
+                                   QueryParam "key" Key :>
                                      QueryParam "depth" Int32 :>
                                        QueryParam "pageToken" Text :>
-                                         QueryParam "oauth_token" Text :>
+                                         QueryParam "oauth_token" OAuthToken :>
                                            QueryParam "pageSize" Int32 :>
                                              QueryParam "indexPrefix" Text :>
                                                QueryParam "fields" Text :>
                                                  QueryParam "callback" Text :>
-                                                   QueryParam "alt" Text :>
+                                                   QueryParam "alt" AltJSON :>
                                                      Get '[JSON]
                                                        ListLogServiceIndexesResponse
 
@@ -98,17 +97,16 @@ data ProjectsLogServicesIndexesList' = ProjectsLogServicesIndexesList'
     , _plsilAccessToken    :: !(Maybe Text)
     , _plsilUploadType     :: !(Maybe Text)
     , _plsilBearerToken    :: !(Maybe Text)
-    , _plsilKey            :: !(Maybe Text)
+    , _plsilKey            :: !(Maybe Key)
     , _plsilLogServicesId  :: !Text
     , _plsilDepth          :: !(Maybe Int32)
     , _plsilPageToken      :: !(Maybe Text)
-    , _plsilOauthToken     :: !(Maybe Text)
+    , _plsilOAuthToken     :: !(Maybe OAuthToken)
     , _plsilProjectsId     :: !Text
     , _plsilPageSize       :: !(Maybe Int32)
     , _plsilIndexPrefix    :: !(Maybe Text)
     , _plsilFields         :: !(Maybe Text)
     , _plsilCallback       :: !(Maybe Text)
-    , _plsilAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsLogServicesIndexesList'' with the minimum fields required to make a request.
@@ -141,7 +139,7 @@ data ProjectsLogServicesIndexesList' = ProjectsLogServicesIndexesList'
 --
 -- * 'plsilPageToken'
 --
--- * 'plsilOauthToken'
+-- * 'plsilOAuthToken'
 --
 -- * 'plsilProjectsId'
 --
@@ -152,8 +150,6 @@ data ProjectsLogServicesIndexesList' = ProjectsLogServicesIndexesList'
 -- * 'plsilFields'
 --
 -- * 'plsilCallback'
---
--- * 'plsilAlt'
 projectsLogServicesIndexesList'
     :: Text -- ^ 'logServicesId'
     -> Text -- ^ 'projectsId'
@@ -173,13 +169,12 @@ projectsLogServicesIndexesList' pPlsilLogServicesId_ pPlsilProjectsId_ =
     , _plsilLogServicesId = pPlsilLogServicesId_
     , _plsilDepth = Nothing
     , _plsilPageToken = Nothing
-    , _plsilOauthToken = Nothing
+    , _plsilOAuthToken = Nothing
     , _plsilProjectsId = pPlsilProjectsId_
     , _plsilPageSize = Nothing
     , _plsilIndexPrefix = Nothing
     , _plsilFields = Nothing
     , _plsilCallback = Nothing
-    , _plsilAlt = "json"
     }
 
 -- | _Optional_. The resource name of a log, such as
@@ -238,7 +233,7 @@ plsilBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-plsilKey :: Lens' ProjectsLogServicesIndexesList' (Maybe Text)
+plsilKey :: Lens' ProjectsLogServicesIndexesList' (Maybe Key)
 plsilKey = lens _plsilKey (\ s a -> s{_plsilKey = a})
 
 -- | Part of \`serviceName\`. See documentation of \`projectsId\`.
@@ -270,10 +265,10 @@ plsilPageToken
       (\ s a -> s{_plsilPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-plsilOauthToken :: Lens' ProjectsLogServicesIndexesList' (Maybe Text)
-plsilOauthToken
-  = lens _plsilOauthToken
-      (\ s a -> s{_plsilOauthToken = a})
+plsilOAuthToken :: Lens' ProjectsLogServicesIndexesList' (Maybe OAuthToken)
+plsilOAuthToken
+  = lens _plsilOAuthToken
+      (\ s a -> s{_plsilOAuthToken = a})
 
 -- | Part of \`serviceName\`. The resource name of a log service whose
 -- service indexes are requested. Example:
@@ -319,9 +314,10 @@ plsilCallback
   = lens _plsilCallback
       (\ s a -> s{_plsilCallback = a})
 
--- | Data format for response.
-plsilAlt :: Lens' ProjectsLogServicesIndexesList' Text
-plsilAlt = lens _plsilAlt (\ s a -> s{_plsilAlt = a})
+instance GoogleAuth ProjectsLogServicesIndexesList'
+         where
+        authKey = plsilKey . _Just
+        authToken = plsilOAuthToken . _Just
 
 instance GoogleRequest
          ProjectsLogServicesIndexesList' where
@@ -341,13 +337,13 @@ instance GoogleRequest
               _plsilLogServicesId
               _plsilDepth
               _plsilPageToken
-              _plsilOauthToken
+              _plsilOAuthToken
               _plsilProjectsId
               _plsilPageSize
               _plsilIndexPrefix
               _plsilFields
               _plsilCallback
-              (Just _plsilAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

@@ -33,12 +33,12 @@ module Network.Google.Resource.Analytics.Management.CustomMetrics.Insert
     , mcmiQuotaUser
     , mcmiPrettyPrint
     , mcmiWebPropertyId
-    , mcmiUserIp
+    , mcmiUserIP
     , mcmiAccountId
     , mcmiKey
-    , mcmiOauthToken
+    , mcmiCustomMetric
+    , mcmiOAuthToken
     , mcmiFields
-    , mcmiAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -56,10 +56,12 @@ type ManagementCustomMetricsInsertResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Post '[JSON] CustomMetric
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] CustomMetric :>
+                                 Post '[JSON] CustomMetric
 
 -- | Create a new custom metric.
 --
@@ -68,12 +70,12 @@ data ManagementCustomMetricsInsert' = ManagementCustomMetricsInsert'
     { _mcmiQuotaUser     :: !(Maybe Text)
     , _mcmiPrettyPrint   :: !Bool
     , _mcmiWebPropertyId :: !Text
-    , _mcmiUserIp        :: !(Maybe Text)
+    , _mcmiUserIP        :: !(Maybe Text)
     , _mcmiAccountId     :: !Text
-    , _mcmiKey           :: !(Maybe Text)
-    , _mcmiOauthToken    :: !(Maybe Text)
+    , _mcmiKey           :: !(Maybe Key)
+    , _mcmiCustomMetric  :: !CustomMetric
+    , _mcmiOAuthToken    :: !(Maybe OAuthToken)
     , _mcmiFields        :: !(Maybe Text)
-    , _mcmiAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementCustomMetricsInsert'' with the minimum fields required to make a request.
@@ -86,32 +88,33 @@ data ManagementCustomMetricsInsert' = ManagementCustomMetricsInsert'
 --
 -- * 'mcmiWebPropertyId'
 --
--- * 'mcmiUserIp'
+-- * 'mcmiUserIP'
 --
 -- * 'mcmiAccountId'
 --
 -- * 'mcmiKey'
 --
--- * 'mcmiOauthToken'
+-- * 'mcmiCustomMetric'
+--
+-- * 'mcmiOAuthToken'
 --
 -- * 'mcmiFields'
---
--- * 'mcmiAlt'
 managementCustomMetricsInsert'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'accountId'
+    -> CustomMetric -- ^ 'CustomMetric'
     -> ManagementCustomMetricsInsert'
-managementCustomMetricsInsert' pMcmiWebPropertyId_ pMcmiAccountId_ =
+managementCustomMetricsInsert' pMcmiWebPropertyId_ pMcmiAccountId_ pMcmiCustomMetric_ =
     ManagementCustomMetricsInsert'
     { _mcmiQuotaUser = Nothing
     , _mcmiPrettyPrint = False
     , _mcmiWebPropertyId = pMcmiWebPropertyId_
-    , _mcmiUserIp = Nothing
+    , _mcmiUserIP = Nothing
     , _mcmiAccountId = pMcmiAccountId_
     , _mcmiKey = Nothing
-    , _mcmiOauthToken = Nothing
+    , _mcmiCustomMetric = pMcmiCustomMetric_
+    , _mcmiOAuthToken = Nothing
     , _mcmiFields = Nothing
-    , _mcmiAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -136,9 +139,9 @@ mcmiWebPropertyId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mcmiUserIp :: Lens' ManagementCustomMetricsInsert' (Maybe Text)
-mcmiUserIp
-  = lens _mcmiUserIp (\ s a -> s{_mcmiUserIp = a})
+mcmiUserIP :: Lens' ManagementCustomMetricsInsert' (Maybe Text)
+mcmiUserIP
+  = lens _mcmiUserIP (\ s a -> s{_mcmiUserIP = a})
 
 -- | Account ID for the custom metric to create.
 mcmiAccountId :: Lens' ManagementCustomMetricsInsert' Text
@@ -149,23 +152,30 @@ mcmiAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mcmiKey :: Lens' ManagementCustomMetricsInsert' (Maybe Text)
+mcmiKey :: Lens' ManagementCustomMetricsInsert' (Maybe Key)
 mcmiKey = lens _mcmiKey (\ s a -> s{_mcmiKey = a})
 
+-- | Multipart request metadata.
+mcmiCustomMetric :: Lens' ManagementCustomMetricsInsert' CustomMetric
+mcmiCustomMetric
+  = lens _mcmiCustomMetric
+      (\ s a -> s{_mcmiCustomMetric = a})
+
 -- | OAuth 2.0 token for the current user.
-mcmiOauthToken :: Lens' ManagementCustomMetricsInsert' (Maybe Text)
-mcmiOauthToken
-  = lens _mcmiOauthToken
-      (\ s a -> s{_mcmiOauthToken = a})
+mcmiOAuthToken :: Lens' ManagementCustomMetricsInsert' (Maybe OAuthToken)
+mcmiOAuthToken
+  = lens _mcmiOAuthToken
+      (\ s a -> s{_mcmiOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 mcmiFields :: Lens' ManagementCustomMetricsInsert' (Maybe Text)
 mcmiFields
   = lens _mcmiFields (\ s a -> s{_mcmiFields = a})
 
--- | Data format for the response.
-mcmiAlt :: Lens' ManagementCustomMetricsInsert' Alt
-mcmiAlt = lens _mcmiAlt (\ s a -> s{_mcmiAlt = a})
+instance GoogleAuth ManagementCustomMetricsInsert'
+         where
+        authKey = mcmiKey . _Just
+        authToken = mcmiOAuthToken . _Just
 
 instance GoogleRequest ManagementCustomMetricsInsert'
          where
@@ -175,12 +185,13 @@ instance GoogleRequest ManagementCustomMetricsInsert'
           ManagementCustomMetricsInsert'{..}
           = go _mcmiQuotaUser (Just _mcmiPrettyPrint)
               _mcmiWebPropertyId
-              _mcmiUserIp
+              _mcmiUserIP
               _mcmiAccountId
               _mcmiKey
-              _mcmiOauthToken
+              _mcmiOAuthToken
               _mcmiFields
-              (Just _mcmiAlt)
+              (Just AltJSON)
+              _mcmiCustomMetric
           where go
                   = clientWithRoute
                       (Proxy ::

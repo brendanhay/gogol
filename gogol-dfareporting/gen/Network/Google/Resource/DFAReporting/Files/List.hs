@@ -32,17 +32,16 @@ module Network.Google.Resource.DFAReporting.Files.List
     -- * Request Lenses
     , flQuotaUser
     , flPrettyPrint
-    , flUserIp
+    , flUserIP
     , flProfileId
     , flSortOrder
     , flKey
     , flScope
     , flPageToken
     , flSortField
-    , flOauthToken
+    , flOAuthToken
     , flMaxResults
     , flFields
-    , flAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -59,15 +58,16 @@ type FilesListResource =
                QueryParam "userIp" Text :>
                  QueryParam "sortOrder" DfareportingFilesListSortOrder
                    :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "scope" DfareportingFilesListScope :>
                        QueryParam "pageToken" Text :>
                          QueryParam "sortField" DfareportingFilesListSortField
                            :>
-                           QueryParam "oauth_token" Text :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "maxResults" Int32 :>
                                QueryParam "fields" Text :>
-                                 QueryParam "alt" Alt :> Get '[JSON] FileList
+                                 QueryParam "alt" AltJSON :>
+                                   Get '[JSON] FileList
 
 -- | Lists files for a user profile.
 --
@@ -75,17 +75,16 @@ type FilesListResource =
 data FilesList' = FilesList'
     { _flQuotaUser   :: !(Maybe Text)
     , _flPrettyPrint :: !Bool
-    , _flUserIp      :: !(Maybe Text)
+    , _flUserIP      :: !(Maybe Text)
     , _flProfileId   :: !Int64
     , _flSortOrder   :: !DfareportingFilesListSortOrder
-    , _flKey         :: !(Maybe Text)
+    , _flKey         :: !(Maybe Key)
     , _flScope       :: !DfareportingFilesListScope
     , _flPageToken   :: !(Maybe Text)
     , _flSortField   :: !DfareportingFilesListSortField
-    , _flOauthToken  :: !(Maybe Text)
+    , _flOAuthToken  :: !(Maybe OAuthToken)
     , _flMaxResults  :: !(Maybe Int32)
     , _flFields      :: !(Maybe Text)
-    , _flAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FilesList'' with the minimum fields required to make a request.
@@ -96,7 +95,7 @@ data FilesList' = FilesList'
 --
 -- * 'flPrettyPrint'
 --
--- * 'flUserIp'
+-- * 'flUserIP'
 --
 -- * 'flProfileId'
 --
@@ -110,13 +109,11 @@ data FilesList' = FilesList'
 --
 -- * 'flSortField'
 --
--- * 'flOauthToken'
+-- * 'flOAuthToken'
 --
 -- * 'flMaxResults'
 --
 -- * 'flFields'
---
--- * 'flAlt'
 filesList'
     :: Int64 -- ^ 'profileId'
     -> FilesList'
@@ -124,17 +121,16 @@ filesList' pFlProfileId_ =
     FilesList'
     { _flQuotaUser = Nothing
     , _flPrettyPrint = True
-    , _flUserIp = Nothing
+    , _flUserIP = Nothing
     , _flProfileId = pFlProfileId_
     , _flSortOrder = DFLSODescending
     , _flKey = Nothing
     , _flScope = Mine
     , _flPageToken = Nothing
     , _flSortField = DFLSFLastModifiedTime
-    , _flOauthToken = Nothing
+    , _flOAuthToken = Nothing
     , _flMaxResults = Nothing
     , _flFields = Nothing
-    , _flAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,8 +148,8 @@ flPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-flUserIp :: Lens' FilesList' (Maybe Text)
-flUserIp = lens _flUserIp (\ s a -> s{_flUserIp = a})
+flUserIP :: Lens' FilesList' (Maybe Text)
+flUserIP = lens _flUserIP (\ s a -> s{_flUserIP = a})
 
 -- | The DFA profile ID.
 flProfileId :: Lens' FilesList' Int64
@@ -168,7 +164,7 @@ flSortOrder
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-flKey :: Lens' FilesList' (Maybe Text)
+flKey :: Lens' FilesList' (Maybe Key)
 flKey = lens _flKey (\ s a -> s{_flKey = a})
 
 -- | The scope that defines which results are returned, default is \'MINE\'.
@@ -186,9 +182,9 @@ flSortField
   = lens _flSortField (\ s a -> s{_flSortField = a})
 
 -- | OAuth 2.0 token for the current user.
-flOauthToken :: Lens' FilesList' (Maybe Text)
-flOauthToken
-  = lens _flOauthToken (\ s a -> s{_flOauthToken = a})
+flOAuthToken :: Lens' FilesList' (Maybe OAuthToken)
+flOAuthToken
+  = lens _flOAuthToken (\ s a -> s{_flOAuthToken = a})
 
 -- | Maximum number of results to return.
 flMaxResults :: Lens' FilesList' (Maybe Int32)
@@ -199,25 +195,25 @@ flMaxResults
 flFields :: Lens' FilesList' (Maybe Text)
 flFields = lens _flFields (\ s a -> s{_flFields = a})
 
--- | Data format for the response.
-flAlt :: Lens' FilesList' Alt
-flAlt = lens _flAlt (\ s a -> s{_flAlt = a})
+instance GoogleAuth FilesList' where
+        authKey = flKey . _Just
+        authToken = flOAuthToken . _Just
 
 instance GoogleRequest FilesList' where
         type Rs FilesList' = FileList
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u FilesList'{..}
-          = go _flQuotaUser (Just _flPrettyPrint) _flUserIp
+          = go _flQuotaUser (Just _flPrettyPrint) _flUserIP
               _flProfileId
               (Just _flSortOrder)
               _flKey
               (Just _flScope)
               _flPageToken
               (Just _flSortField)
-              _flOauthToken
+              _flOAuthToken
               _flMaxResults
               _flFields
-              (Just _flAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy FilesListResource)
                       r

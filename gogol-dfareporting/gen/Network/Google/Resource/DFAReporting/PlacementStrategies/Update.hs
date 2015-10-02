@@ -32,12 +32,12 @@ module Network.Google.Resource.DFAReporting.PlacementStrategies.Update
     -- * Request Lenses
     , psuQuotaUser
     , psuPrettyPrint
-    , psuUserIp
+    , psuUserIP
     , psuProfileId
     , psuKey
-    , psuOauthToken
+    , psuPlacementStrategy
+    , psuOAuthToken
     , psuFields
-    , psuAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,23 +52,25 @@ type PlacementStrategiesUpdateResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Put '[JSON] PlacementStrategy
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] PlacementStrategy :>
+                           Put '[JSON] PlacementStrategy
 
 -- | Updates an existing placement strategy.
 --
 -- /See:/ 'placementStrategiesUpdate'' smart constructor.
 data PlacementStrategiesUpdate' = PlacementStrategiesUpdate'
-    { _psuQuotaUser   :: !(Maybe Text)
-    , _psuPrettyPrint :: !Bool
-    , _psuUserIp      :: !(Maybe Text)
-    , _psuProfileId   :: !Int64
-    , _psuKey         :: !(Maybe Text)
-    , _psuOauthToken  :: !(Maybe Text)
-    , _psuFields      :: !(Maybe Text)
-    , _psuAlt         :: !Alt
+    { _psuQuotaUser         :: !(Maybe Text)
+    , _psuPrettyPrint       :: !Bool
+    , _psuUserIP            :: !(Maybe Text)
+    , _psuProfileId         :: !Int64
+    , _psuKey               :: !(Maybe Key)
+    , _psuPlacementStrategy :: !PlacementStrategy
+    , _psuOAuthToken        :: !(Maybe OAuthToken)
+    , _psuFields            :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementStrategiesUpdate'' with the minimum fields required to make a request.
@@ -79,30 +81,31 @@ data PlacementStrategiesUpdate' = PlacementStrategiesUpdate'
 --
 -- * 'psuPrettyPrint'
 --
--- * 'psuUserIp'
+-- * 'psuUserIP'
 --
 -- * 'psuProfileId'
 --
 -- * 'psuKey'
 --
--- * 'psuOauthToken'
+-- * 'psuPlacementStrategy'
+--
+-- * 'psuOAuthToken'
 --
 -- * 'psuFields'
---
--- * 'psuAlt'
 placementStrategiesUpdate'
     :: Int64 -- ^ 'profileId'
+    -> PlacementStrategy -- ^ 'PlacementStrategy'
     -> PlacementStrategiesUpdate'
-placementStrategiesUpdate' pPsuProfileId_ =
+placementStrategiesUpdate' pPsuProfileId_ pPsuPlacementStrategy_ =
     PlacementStrategiesUpdate'
     { _psuQuotaUser = Nothing
     , _psuPrettyPrint = True
-    , _psuUserIp = Nothing
+    , _psuUserIP = Nothing
     , _psuProfileId = pPsuProfileId_
     , _psuKey = Nothing
-    , _psuOauthToken = Nothing
+    , _psuPlacementStrategy = pPsuPlacementStrategy_
+    , _psuOAuthToken = Nothing
     , _psuFields = Nothing
-    , _psuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,9 +123,9 @@ psuPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-psuUserIp :: Lens' PlacementStrategiesUpdate' (Maybe Text)
-psuUserIp
-  = lens _psuUserIp (\ s a -> s{_psuUserIp = a})
+psuUserIP :: Lens' PlacementStrategiesUpdate' (Maybe Text)
+psuUserIP
+  = lens _psuUserIP (\ s a -> s{_psuUserIP = a})
 
 -- | User profile ID associated with this request.
 psuProfileId :: Lens' PlacementStrategiesUpdate' Int64
@@ -132,23 +135,29 @@ psuProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-psuKey :: Lens' PlacementStrategiesUpdate' (Maybe Text)
+psuKey :: Lens' PlacementStrategiesUpdate' (Maybe Key)
 psuKey = lens _psuKey (\ s a -> s{_psuKey = a})
 
+-- | Multipart request metadata.
+psuPlacementStrategy :: Lens' PlacementStrategiesUpdate' PlacementStrategy
+psuPlacementStrategy
+  = lens _psuPlacementStrategy
+      (\ s a -> s{_psuPlacementStrategy = a})
+
 -- | OAuth 2.0 token for the current user.
-psuOauthToken :: Lens' PlacementStrategiesUpdate' (Maybe Text)
-psuOauthToken
-  = lens _psuOauthToken
-      (\ s a -> s{_psuOauthToken = a})
+psuOAuthToken :: Lens' PlacementStrategiesUpdate' (Maybe OAuthToken)
+psuOAuthToken
+  = lens _psuOAuthToken
+      (\ s a -> s{_psuOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 psuFields :: Lens' PlacementStrategiesUpdate' (Maybe Text)
 psuFields
   = lens _psuFields (\ s a -> s{_psuFields = a})
 
--- | Data format for the response.
-psuAlt :: Lens' PlacementStrategiesUpdate' Alt
-psuAlt = lens _psuAlt (\ s a -> s{_psuAlt = a})
+instance GoogleAuth PlacementStrategiesUpdate' where
+        authKey = psuKey . _Just
+        authToken = psuOAuthToken . _Just
 
 instance GoogleRequest PlacementStrategiesUpdate'
          where
@@ -156,12 +165,13 @@ instance GoogleRequest PlacementStrategiesUpdate'
              PlacementStrategy
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlacementStrategiesUpdate'{..}
-          = go _psuQuotaUser (Just _psuPrettyPrint) _psuUserIp
+          = go _psuQuotaUser (Just _psuPrettyPrint) _psuUserIP
               _psuProfileId
               _psuKey
-              _psuOauthToken
+              _psuOAuthToken
               _psuFields
-              (Just _psuAlt)
+              (Just AltJSON)
+              _psuPlacementStrategy
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PlacementStrategiesUpdateResource)

@@ -33,12 +33,11 @@ module Network.Google.Resource.Analytics.Management.Filters.Delete
     , mfdQuotaUser
     , mfdPrettyPrint
     , mfdFilterId
-    , mfdUserIp
+    , mfdUserIP
     , mfdAccountId
     , mfdKey
-    , mfdOauthToken
+    , mfdOAuthToken
     , mfdFields
-    , mfdAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -55,10 +54,10 @@ type ManagementFiltersDeleteResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Delete '[JSON] Filter
+                           QueryParam "alt" AltJSON :> Delete '[JSON] Filter
 
 -- | Delete a filter.
 --
@@ -67,12 +66,11 @@ data ManagementFiltersDelete' = ManagementFiltersDelete'
     { _mfdQuotaUser   :: !(Maybe Text)
     , _mfdPrettyPrint :: !Bool
     , _mfdFilterId    :: !Text
-    , _mfdUserIp      :: !(Maybe Text)
+    , _mfdUserIP      :: !(Maybe Text)
     , _mfdAccountId   :: !Text
-    , _mfdKey         :: !(Maybe Text)
-    , _mfdOauthToken  :: !(Maybe Text)
+    , _mfdKey         :: !(Maybe Key)
+    , _mfdOAuthToken  :: !(Maybe OAuthToken)
     , _mfdFields      :: !(Maybe Text)
-    , _mfdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementFiltersDelete'' with the minimum fields required to make a request.
@@ -85,17 +83,15 @@ data ManagementFiltersDelete' = ManagementFiltersDelete'
 --
 -- * 'mfdFilterId'
 --
--- * 'mfdUserIp'
+-- * 'mfdUserIP'
 --
 -- * 'mfdAccountId'
 --
 -- * 'mfdKey'
 --
--- * 'mfdOauthToken'
+-- * 'mfdOAuthToken'
 --
 -- * 'mfdFields'
---
--- * 'mfdAlt'
 managementFiltersDelete'
     :: Text -- ^ 'filterId'
     -> Text -- ^ 'accountId'
@@ -105,12 +101,11 @@ managementFiltersDelete' pMfdFilterId_ pMfdAccountId_ =
     { _mfdQuotaUser = Nothing
     , _mfdPrettyPrint = False
     , _mfdFilterId = pMfdFilterId_
-    , _mfdUserIp = Nothing
+    , _mfdUserIP = Nothing
     , _mfdAccountId = pMfdAccountId_
     , _mfdKey = Nothing
-    , _mfdOauthToken = Nothing
+    , _mfdOAuthToken = Nothing
     , _mfdFields = Nothing
-    , _mfdAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -133,9 +128,9 @@ mfdFilterId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mfdUserIp :: Lens' ManagementFiltersDelete' (Maybe Text)
-mfdUserIp
-  = lens _mfdUserIp (\ s a -> s{_mfdUserIp = a})
+mfdUserIP :: Lens' ManagementFiltersDelete' (Maybe Text)
+mfdUserIP
+  = lens _mfdUserIP (\ s a -> s{_mfdUserIP = a})
 
 -- | Account ID to delete the filter for.
 mfdAccountId :: Lens' ManagementFiltersDelete' Text
@@ -145,23 +140,23 @@ mfdAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mfdKey :: Lens' ManagementFiltersDelete' (Maybe Text)
+mfdKey :: Lens' ManagementFiltersDelete' (Maybe Key)
 mfdKey = lens _mfdKey (\ s a -> s{_mfdKey = a})
 
 -- | OAuth 2.0 token for the current user.
-mfdOauthToken :: Lens' ManagementFiltersDelete' (Maybe Text)
-mfdOauthToken
-  = lens _mfdOauthToken
-      (\ s a -> s{_mfdOauthToken = a})
+mfdOAuthToken :: Lens' ManagementFiltersDelete' (Maybe OAuthToken)
+mfdOAuthToken
+  = lens _mfdOAuthToken
+      (\ s a -> s{_mfdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 mfdFields :: Lens' ManagementFiltersDelete' (Maybe Text)
 mfdFields
   = lens _mfdFields (\ s a -> s{_mfdFields = a})
 
--- | Data format for the response.
-mfdAlt :: Lens' ManagementFiltersDelete' Alt
-mfdAlt = lens _mfdAlt (\ s a -> s{_mfdAlt = a})
+instance GoogleAuth ManagementFiltersDelete' where
+        authKey = mfdKey . _Just
+        authToken = mfdOAuthToken . _Just
 
 instance GoogleRequest ManagementFiltersDelete' where
         type Rs ManagementFiltersDelete' = Filter
@@ -169,12 +164,12 @@ instance GoogleRequest ManagementFiltersDelete' where
         requestWithRoute r u ManagementFiltersDelete'{..}
           = go _mfdQuotaUser (Just _mfdPrettyPrint)
               _mfdFilterId
-              _mfdUserIp
+              _mfdUserIP
               _mfdAccountId
               _mfdKey
-              _mfdOauthToken
+              _mfdOAuthToken
               _mfdFields
-              (Just _mfdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ManagementFiltersDeleteResource)

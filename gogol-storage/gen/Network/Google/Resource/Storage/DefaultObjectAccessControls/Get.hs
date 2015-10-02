@@ -33,13 +33,12 @@ module Network.Google.Resource.Storage.DefaultObjectAccessControls.Get
     -- * Request Lenses
     , doacgQuotaUser
     , doacgPrettyPrint
-    , doacgUserIp
+    , doacgUserIP
     , doacgBucket
     , doacgKey
-    , doacgOauthToken
+    , doacgOAuthToken
     , doacgEntity
     , doacgFields
-    , doacgAlt
     ) where
 
 import           Network.Google.Prelude
@@ -55,10 +54,10 @@ type DefaultObjectAccessControlsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :>
+                         QueryParam "alt" AltJSON :>
                            Get '[JSON] ObjectAccessControl
 
 -- | Returns the default object ACL entry for the specified entity on the
@@ -68,13 +67,12 @@ type DefaultObjectAccessControlsGetResource =
 data DefaultObjectAccessControlsGet' = DefaultObjectAccessControlsGet'
     { _doacgQuotaUser   :: !(Maybe Text)
     , _doacgPrettyPrint :: !Bool
-    , _doacgUserIp      :: !(Maybe Text)
+    , _doacgUserIP      :: !(Maybe Text)
     , _doacgBucket      :: !Text
-    , _doacgKey         :: !(Maybe Text)
-    , _doacgOauthToken  :: !(Maybe Text)
+    , _doacgKey         :: !(Maybe Key)
+    , _doacgOAuthToken  :: !(Maybe OAuthToken)
     , _doacgEntity      :: !Text
     , _doacgFields      :: !(Maybe Text)
-    , _doacgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DefaultObjectAccessControlsGet'' with the minimum fields required to make a request.
@@ -85,19 +83,17 @@ data DefaultObjectAccessControlsGet' = DefaultObjectAccessControlsGet'
 --
 -- * 'doacgPrettyPrint'
 --
--- * 'doacgUserIp'
+-- * 'doacgUserIP'
 --
 -- * 'doacgBucket'
 --
 -- * 'doacgKey'
 --
--- * 'doacgOauthToken'
+-- * 'doacgOAuthToken'
 --
 -- * 'doacgEntity'
 --
 -- * 'doacgFields'
---
--- * 'doacgAlt'
 defaultObjectAccessControlsGet'
     :: Text -- ^ 'bucket'
     -> Text -- ^ 'entity'
@@ -106,13 +102,12 @@ defaultObjectAccessControlsGet' pDoacgBucket_ pDoacgEntity_ =
     DefaultObjectAccessControlsGet'
     { _doacgQuotaUser = Nothing
     , _doacgPrettyPrint = True
-    , _doacgUserIp = Nothing
+    , _doacgUserIP = Nothing
     , _doacgBucket = pDoacgBucket_
     , _doacgKey = Nothing
-    , _doacgOauthToken = Nothing
+    , _doacgOAuthToken = Nothing
     , _doacgEntity = pDoacgEntity_
     , _doacgFields = Nothing
-    , _doacgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -131,9 +126,9 @@ doacgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-doacgUserIp :: Lens' DefaultObjectAccessControlsGet' (Maybe Text)
-doacgUserIp
-  = lens _doacgUserIp (\ s a -> s{_doacgUserIp = a})
+doacgUserIP :: Lens' DefaultObjectAccessControlsGet' (Maybe Text)
+doacgUserIP
+  = lens _doacgUserIP (\ s a -> s{_doacgUserIP = a})
 
 -- | Name of a bucket.
 doacgBucket :: Lens' DefaultObjectAccessControlsGet' Text
@@ -143,14 +138,14 @@ doacgBucket
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-doacgKey :: Lens' DefaultObjectAccessControlsGet' (Maybe Text)
+doacgKey :: Lens' DefaultObjectAccessControlsGet' (Maybe Key)
 doacgKey = lens _doacgKey (\ s a -> s{_doacgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-doacgOauthToken :: Lens' DefaultObjectAccessControlsGet' (Maybe Text)
-doacgOauthToken
-  = lens _doacgOauthToken
-      (\ s a -> s{_doacgOauthToken = a})
+doacgOAuthToken :: Lens' DefaultObjectAccessControlsGet' (Maybe OAuthToken)
+doacgOAuthToken
+  = lens _doacgOAuthToken
+      (\ s a -> s{_doacgOAuthToken = a})
 
 -- | The entity holding the permission. Can be user-userId,
 -- user-emailAddress, group-groupId, group-emailAddress, allUsers, or
@@ -164,9 +159,10 @@ doacgFields :: Lens' DefaultObjectAccessControlsGet' (Maybe Text)
 doacgFields
   = lens _doacgFields (\ s a -> s{_doacgFields = a})
 
--- | Data format for the response.
-doacgAlt :: Lens' DefaultObjectAccessControlsGet' Alt
-doacgAlt = lens _doacgAlt (\ s a -> s{_doacgAlt = a})
+instance GoogleAuth DefaultObjectAccessControlsGet'
+         where
+        authKey = doacgKey . _Just
+        authToken = doacgOAuthToken . _Just
 
 instance GoogleRequest
          DefaultObjectAccessControlsGet' where
@@ -176,13 +172,13 @@ instance GoogleRequest
         requestWithRoute r u
           DefaultObjectAccessControlsGet'{..}
           = go _doacgQuotaUser (Just _doacgPrettyPrint)
-              _doacgUserIp
+              _doacgUserIP
               _doacgBucket
               _doacgKey
-              _doacgOauthToken
+              _doacgOAuthToken
               _doacgEntity
               _doacgFields
-              (Just _doacgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

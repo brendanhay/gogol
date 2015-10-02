@@ -32,13 +32,12 @@ module Network.Google.Resource.URLShortener.URL.List
     -- * Request Lenses
     , ulQuotaUser
     , ulPrettyPrint
-    , ulUserIp
+    , ulUserIP
     , ulStartToken
     , ulKey
     , ulProjection
-    , ulOauthToken
+    , ulOAuthToken
     , ulFields
-    , ulAlt
     ) where
 
 import           Network.Google.Prelude
@@ -53,12 +52,12 @@ type UrlListResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "start-token" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "projection" URLshortenerURLListProjection
                      :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] URLHistory
+                         QueryParam "alt" AltJSON :> Get '[JSON] URLHistory
 
 -- | Retrieves a list of URLs shortened by a user.
 --
@@ -66,13 +65,12 @@ type UrlListResource =
 data URLList' = URLList'
     { _ulQuotaUser   :: !(Maybe Text)
     , _ulPrettyPrint :: !Bool
-    , _ulUserIp      :: !(Maybe Text)
+    , _ulUserIP      :: !(Maybe Text)
     , _ulStartToken  :: !(Maybe Text)
-    , _ulKey         :: !(Maybe Text)
+    , _ulKey         :: !(Maybe Key)
     , _ulProjection  :: !(Maybe URLshortenerURLListProjection)
-    , _ulOauthToken  :: !(Maybe Text)
+    , _ulOAuthToken  :: !(Maybe OAuthToken)
     , _ulFields      :: !(Maybe Text)
-    , _ulAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLList'' with the minimum fields required to make a request.
@@ -83,7 +81,7 @@ data URLList' = URLList'
 --
 -- * 'ulPrettyPrint'
 --
--- * 'ulUserIp'
+-- * 'ulUserIP'
 --
 -- * 'ulStartToken'
 --
@@ -91,24 +89,21 @@ data URLList' = URLList'
 --
 -- * 'ulProjection'
 --
--- * 'ulOauthToken'
+-- * 'ulOAuthToken'
 --
 -- * 'ulFields'
---
--- * 'ulAlt'
 uRLList'
     :: URLList'
 uRLList' =
     URLList'
     { _ulQuotaUser = Nothing
     , _ulPrettyPrint = True
-    , _ulUserIp = Nothing
+    , _ulUserIP = Nothing
     , _ulStartToken = Nothing
     , _ulKey = Nothing
     , _ulProjection = Nothing
-    , _ulOauthToken = Nothing
+    , _ulOAuthToken = Nothing
     , _ulFields = Nothing
-    , _ulAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -126,8 +121,8 @@ ulPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ulUserIp :: Lens' URLList' (Maybe Text)
-ulUserIp = lens _ulUserIp (\ s a -> s{_ulUserIp = a})
+ulUserIP :: Lens' URLList' (Maybe Text)
+ulUserIP = lens _ulUserIP (\ s a -> s{_ulUserIP = a})
 
 -- | Token for requesting successive pages of results.
 ulStartToken :: Lens' URLList' (Maybe Text)
@@ -137,7 +132,7 @@ ulStartToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ulKey :: Lens' URLList' (Maybe Text)
+ulKey :: Lens' URLList' (Maybe Key)
 ulKey = lens _ulKey (\ s a -> s{_ulKey = a})
 
 -- | Additional information to return.
@@ -146,29 +141,29 @@ ulProjection
   = lens _ulProjection (\ s a -> s{_ulProjection = a})
 
 -- | OAuth 2.0 token for the current user.
-ulOauthToken :: Lens' URLList' (Maybe Text)
-ulOauthToken
-  = lens _ulOauthToken (\ s a -> s{_ulOauthToken = a})
+ulOAuthToken :: Lens' URLList' (Maybe OAuthToken)
+ulOAuthToken
+  = lens _ulOAuthToken (\ s a -> s{_ulOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ulFields :: Lens' URLList' (Maybe Text)
 ulFields = lens _ulFields (\ s a -> s{_ulFields = a})
 
--- | Data format for the response.
-ulAlt :: Lens' URLList' Alt
-ulAlt = lens _ulAlt (\ s a -> s{_ulAlt = a})
+instance GoogleAuth URLList' where
+        authKey = ulKey . _Just
+        authToken = ulOAuthToken . _Just
 
 instance GoogleRequest URLList' where
         type Rs URLList' = URLHistory
         request = requestWithRoute defReq uRLShortenerURL
         requestWithRoute r u URLList'{..}
-          = go _ulQuotaUser (Just _ulPrettyPrint) _ulUserIp
+          = go _ulQuotaUser (Just _ulPrettyPrint) _ulUserIP
               _ulStartToken
               _ulKey
               _ulProjection
-              _ulOauthToken
+              _ulOAuthToken
               _ulFields
-              (Just _ulAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy UrlListResource) r
                       u

@@ -32,13 +32,12 @@ module Network.Google.Resource.Games.TurnBasedMatches.Decline
     -- * Request Lenses
     , tQuotaUser
     , tPrettyPrint
-    , tUserIp
+    , tUserIP
     , tKey
     , tLanguage
-    , tOauthToken
+    , tOAuthToken
     , tMatchId
     , tFields
-    , tAlt
     ) where
 
 import           Network.Google.Games.Types
@@ -53,11 +52,12 @@ type TurnBasedMatchesDeclineResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "language" Text :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Put '[JSON] TurnBasedMatch
+                         QueryParam "alt" AltJSON :>
+                           Put '[JSON] TurnBasedMatch
 
 -- | Decline an invitation to play a turn-based match.
 --
@@ -65,13 +65,12 @@ type TurnBasedMatchesDeclineResource =
 data TurnBasedMatchesDecline' = TurnBasedMatchesDecline'
     { _tQuotaUser   :: !(Maybe Text)
     , _tPrettyPrint :: !Bool
-    , _tUserIp      :: !(Maybe Text)
-    , _tKey         :: !(Maybe Text)
+    , _tUserIP      :: !(Maybe Text)
+    , _tKey         :: !(Maybe Key)
     , _tLanguage    :: !(Maybe Text)
-    , _tOauthToken  :: !(Maybe Text)
+    , _tOAuthToken  :: !(Maybe OAuthToken)
     , _tMatchId     :: !Text
     , _tFields      :: !(Maybe Text)
-    , _tAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchesDecline'' with the minimum fields required to make a request.
@@ -82,19 +81,17 @@ data TurnBasedMatchesDecline' = TurnBasedMatchesDecline'
 --
 -- * 'tPrettyPrint'
 --
--- * 'tUserIp'
+-- * 'tUserIP'
 --
 -- * 'tKey'
 --
 -- * 'tLanguage'
 --
--- * 'tOauthToken'
+-- * 'tOAuthToken'
 --
 -- * 'tMatchId'
 --
 -- * 'tFields'
---
--- * 'tAlt'
 turnBasedMatchesDecline'
     :: Text -- ^ 'matchId'
     -> TurnBasedMatchesDecline'
@@ -102,13 +99,12 @@ turnBasedMatchesDecline' pTMatchId_ =
     TurnBasedMatchesDecline'
     { _tQuotaUser = Nothing
     , _tPrettyPrint = True
-    , _tUserIp = Nothing
+    , _tUserIP = Nothing
     , _tKey = Nothing
     , _tLanguage = Nothing
-    , _tOauthToken = Nothing
+    , _tOAuthToken = Nothing
     , _tMatchId = pTMatchId_
     , _tFields = Nothing
-    , _tAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -125,13 +121,13 @@ tPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tUserIp :: Lens' TurnBasedMatchesDecline' (Maybe Text)
-tUserIp = lens _tUserIp (\ s a -> s{_tUserIp = a})
+tUserIP :: Lens' TurnBasedMatchesDecline' (Maybe Text)
+tUserIP = lens _tUserIP (\ s a -> s{_tUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tKey :: Lens' TurnBasedMatchesDecline' (Maybe Text)
+tKey :: Lens' TurnBasedMatchesDecline' (Maybe Key)
 tKey = lens _tKey (\ s a -> s{_tKey = a})
 
 -- | The preferred language to use for strings returned by this method.
@@ -140,9 +136,9 @@ tLanguage
   = lens _tLanguage (\ s a -> s{_tLanguage = a})
 
 -- | OAuth 2.0 token for the current user.
-tOauthToken :: Lens' TurnBasedMatchesDecline' (Maybe Text)
-tOauthToken
-  = lens _tOauthToken (\ s a -> s{_tOauthToken = a})
+tOAuthToken :: Lens' TurnBasedMatchesDecline' (Maybe OAuthToken)
+tOAuthToken
+  = lens _tOAuthToken (\ s a -> s{_tOAuthToken = a})
 
 -- | The ID of the match.
 tMatchId :: Lens' TurnBasedMatchesDecline' Text
@@ -152,20 +148,20 @@ tMatchId = lens _tMatchId (\ s a -> s{_tMatchId = a})
 tFields :: Lens' TurnBasedMatchesDecline' (Maybe Text)
 tFields = lens _tFields (\ s a -> s{_tFields = a})
 
--- | Data format for the response.
-tAlt :: Lens' TurnBasedMatchesDecline' Alt
-tAlt = lens _tAlt (\ s a -> s{_tAlt = a})
+instance GoogleAuth TurnBasedMatchesDecline' where
+        authKey = tKey . _Just
+        authToken = tOAuthToken . _Just
 
 instance GoogleRequest TurnBasedMatchesDecline' where
         type Rs TurnBasedMatchesDecline' = TurnBasedMatch
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u TurnBasedMatchesDecline'{..}
-          = go _tQuotaUser (Just _tPrettyPrint) _tUserIp _tKey
+          = go _tQuotaUser (Just _tPrettyPrint) _tUserIP _tKey
               _tLanguage
-              _tOauthToken
+              _tOAuthToken
               _tMatchId
               _tFields
-              (Just _tAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TurnBasedMatchesDeclineResource)

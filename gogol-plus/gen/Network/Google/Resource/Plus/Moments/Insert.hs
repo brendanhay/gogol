@@ -33,14 +33,14 @@ module Network.Google.Resource.Plus.Moments.Insert
     -- * Request Lenses
     , miQuotaUser
     , miPrettyPrint
-    , miUserIp
+    , miMoment
+    , miUserIP
     , miCollection
     , miDebug
     , miUserId
     , miKey
-    , miOauthToken
+    , miOAuthToken
     , miFields
-    , miAlt
     ) where
 
 import           Network.Google.Plus.Types
@@ -57,10 +57,11 @@ type MomentsInsertResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "debug" Bool :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Post '[JSON] Moment
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] Moment :> Post '[JSON] Moment
 
 -- | Record a moment representing a user\'s action such as making a purchase
 -- or commenting on a blog.
@@ -69,14 +70,14 @@ type MomentsInsertResource =
 data MomentsInsert' = MomentsInsert'
     { _miQuotaUser   :: !(Maybe Text)
     , _miPrettyPrint :: !Bool
-    , _miUserIp      :: !(Maybe Text)
+    , _miMoment      :: !Moment
+    , _miUserIP      :: !(Maybe Text)
     , _miCollection  :: !PlusMomentsInsertCollection
     , _miDebug       :: !(Maybe Bool)
     , _miUserId      :: !Text
-    , _miKey         :: !(Maybe Text)
-    , _miOauthToken  :: !(Maybe Text)
+    , _miKey         :: !(Maybe Key)
+    , _miOAuthToken  :: !(Maybe OAuthToken)
     , _miFields      :: !(Maybe Text)
-    , _miAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MomentsInsert'' with the minimum fields required to make a request.
@@ -87,7 +88,9 @@ data MomentsInsert' = MomentsInsert'
 --
 -- * 'miPrettyPrint'
 --
--- * 'miUserIp'
+-- * 'miMoment'
+--
+-- * 'miUserIP'
 --
 -- * 'miCollection'
 --
@@ -97,27 +100,26 @@ data MomentsInsert' = MomentsInsert'
 --
 -- * 'miKey'
 --
--- * 'miOauthToken'
+-- * 'miOAuthToken'
 --
 -- * 'miFields'
---
--- * 'miAlt'
 momentsInsert'
-    :: PlusMomentsInsertCollection -- ^ 'collection'
+    :: Moment -- ^ 'Moment'
+    -> PlusMomentsInsertCollection -- ^ 'collection'
     -> Text -- ^ 'userId'
     -> MomentsInsert'
-momentsInsert' pMiCollection_ pMiUserId_ =
+momentsInsert' pMiMoment_ pMiCollection_ pMiUserId_ =
     MomentsInsert'
     { _miQuotaUser = Nothing
     , _miPrettyPrint = True
-    , _miUserIp = Nothing
+    , _miMoment = pMiMoment_
+    , _miUserIP = Nothing
     , _miCollection = pMiCollection_
     , _miDebug = Nothing
     , _miUserId = pMiUserId_
     , _miKey = Nothing
-    , _miOauthToken = Nothing
+    , _miOAuthToken = Nothing
     , _miFields = Nothing
-    , _miAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -133,10 +135,14 @@ miPrettyPrint
   = lens _miPrettyPrint
       (\ s a -> s{_miPrettyPrint = a})
 
+-- | Multipart request metadata.
+miMoment :: Lens' MomentsInsert' Moment
+miMoment = lens _miMoment (\ s a -> s{_miMoment = a})
+
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-miUserIp :: Lens' MomentsInsert' (Maybe Text)
-miUserIp = lens _miUserIp (\ s a -> s{_miUserIp = a})
+miUserIP :: Lens' MomentsInsert' (Maybe Text)
+miUserIP = lens _miUserIP (\ s a -> s{_miUserIP = a})
 
 -- | The collection to which to write moments.
 miCollection :: Lens' MomentsInsert' PlusMomentsInsertCollection
@@ -155,34 +161,35 @@ miUserId = lens _miUserId (\ s a -> s{_miUserId = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-miKey :: Lens' MomentsInsert' (Maybe Text)
+miKey :: Lens' MomentsInsert' (Maybe Key)
 miKey = lens _miKey (\ s a -> s{_miKey = a})
 
 -- | OAuth 2.0 token for the current user.
-miOauthToken :: Lens' MomentsInsert' (Maybe Text)
-miOauthToken
-  = lens _miOauthToken (\ s a -> s{_miOauthToken = a})
+miOAuthToken :: Lens' MomentsInsert' (Maybe OAuthToken)
+miOAuthToken
+  = lens _miOAuthToken (\ s a -> s{_miOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 miFields :: Lens' MomentsInsert' (Maybe Text)
 miFields = lens _miFields (\ s a -> s{_miFields = a})
 
--- | Data format for the response.
-miAlt :: Lens' MomentsInsert' Alt
-miAlt = lens _miAlt (\ s a -> s{_miAlt = a})
+instance GoogleAuth MomentsInsert' where
+        authKey = miKey . _Just
+        authToken = miOAuthToken . _Just
 
 instance GoogleRequest MomentsInsert' where
         type Rs MomentsInsert' = Moment
         request = requestWithRoute defReq plusURL
         requestWithRoute r u MomentsInsert'{..}
-          = go _miQuotaUser (Just _miPrettyPrint) _miUserIp
+          = go _miQuotaUser (Just _miPrettyPrint) _miUserIP
               _miCollection
               _miDebug
               _miUserId
               _miKey
-              _miOauthToken
+              _miOAuthToken
               _miFields
-              (Just _miAlt)
+              (Just AltJSON)
+              _miMoment
           where go
                   = clientWithRoute
                       (Proxy :: Proxy MomentsInsertResource)

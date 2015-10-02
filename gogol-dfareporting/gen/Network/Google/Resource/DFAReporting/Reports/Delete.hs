@@ -32,13 +32,12 @@ module Network.Google.Resource.DFAReporting.Reports.Delete
     -- * Request Lenses
     , rdQuotaUser
     , rdPrettyPrint
-    , rdUserIp
+    , rdUserIP
     , rdReportId
     , rdProfileId
     , rdKey
-    , rdOauthToken
+    , rdOAuthToken
     , rdFields
-    , rdAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,10 +53,10 @@ type ReportsDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Delete '[JSON] ()
+                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a report by its ID.
 --
@@ -65,13 +64,12 @@ type ReportsDeleteResource =
 data ReportsDelete' = ReportsDelete'
     { _rdQuotaUser   :: !(Maybe Text)
     , _rdPrettyPrint :: !Bool
-    , _rdUserIp      :: !(Maybe Text)
+    , _rdUserIP      :: !(Maybe Text)
     , _rdReportId    :: !Int64
     , _rdProfileId   :: !Int64
-    , _rdKey         :: !(Maybe Text)
-    , _rdOauthToken  :: !(Maybe Text)
+    , _rdKey         :: !(Maybe Key)
+    , _rdOAuthToken  :: !(Maybe OAuthToken)
     , _rdFields      :: !(Maybe Text)
-    , _rdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsDelete'' with the minimum fields required to make a request.
@@ -82,7 +80,7 @@ data ReportsDelete' = ReportsDelete'
 --
 -- * 'rdPrettyPrint'
 --
--- * 'rdUserIp'
+-- * 'rdUserIP'
 --
 -- * 'rdReportId'
 --
@@ -90,11 +88,9 @@ data ReportsDelete' = ReportsDelete'
 --
 -- * 'rdKey'
 --
--- * 'rdOauthToken'
+-- * 'rdOAuthToken'
 --
 -- * 'rdFields'
---
--- * 'rdAlt'
 reportsDelete'
     :: Int64 -- ^ 'reportId'
     -> Int64 -- ^ 'profileId'
@@ -103,13 +99,12 @@ reportsDelete' pRdReportId_ pRdProfileId_ =
     ReportsDelete'
     { _rdQuotaUser = Nothing
     , _rdPrettyPrint = True
-    , _rdUserIp = Nothing
+    , _rdUserIP = Nothing
     , _rdReportId = pRdReportId_
     , _rdProfileId = pRdProfileId_
     , _rdKey = Nothing
-    , _rdOauthToken = Nothing
+    , _rdOAuthToken = Nothing
     , _rdFields = Nothing
-    , _rdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,8 +122,8 @@ rdPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rdUserIp :: Lens' ReportsDelete' (Maybe Text)
-rdUserIp = lens _rdUserIp (\ s a -> s{_rdUserIp = a})
+rdUserIP :: Lens' ReportsDelete' (Maybe Text)
+rdUserIP = lens _rdUserIP (\ s a -> s{_rdUserIP = a})
 
 -- | The ID of the report.
 rdReportId :: Lens' ReportsDelete' Int64
@@ -143,33 +138,33 @@ rdProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rdKey :: Lens' ReportsDelete' (Maybe Text)
+rdKey :: Lens' ReportsDelete' (Maybe Key)
 rdKey = lens _rdKey (\ s a -> s{_rdKey = a})
 
 -- | OAuth 2.0 token for the current user.
-rdOauthToken :: Lens' ReportsDelete' (Maybe Text)
-rdOauthToken
-  = lens _rdOauthToken (\ s a -> s{_rdOauthToken = a})
+rdOAuthToken :: Lens' ReportsDelete' (Maybe OAuthToken)
+rdOAuthToken
+  = lens _rdOAuthToken (\ s a -> s{_rdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 rdFields :: Lens' ReportsDelete' (Maybe Text)
 rdFields = lens _rdFields (\ s a -> s{_rdFields = a})
 
--- | Data format for the response.
-rdAlt :: Lens' ReportsDelete' Alt
-rdAlt = lens _rdAlt (\ s a -> s{_rdAlt = a})
+instance GoogleAuth ReportsDelete' where
+        authKey = rdKey . _Just
+        authToken = rdOAuthToken . _Just
 
 instance GoogleRequest ReportsDelete' where
         type Rs ReportsDelete' = ()
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ReportsDelete'{..}
-          = go _rdQuotaUser (Just _rdPrettyPrint) _rdUserIp
+          = go _rdQuotaUser (Just _rdPrettyPrint) _rdUserIP
               _rdReportId
               _rdProfileId
               _rdKey
-              _rdOauthToken
+              _rdOAuthToken
               _rdFields
-              (Just _rdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ReportsDeleteResource)

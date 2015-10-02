@@ -37,14 +37,13 @@ module Network.Google.Resource.YouTube.Captions.List
     , cllQuotaUser
     , cllPart
     , cllPrettyPrint
-    , cllUserIp
+    , cllUserIP
     , cllOnBehalfOfContentOwner
     , cllVideoId
     , cllKey
     , cllId
-    , cllOauthToken
+    , cllOAuthToken
     , cllFields
-    , cllAlt
     ) where
 
 import           Network.Google.Prelude
@@ -61,11 +60,11 @@ type CaptionsListResource =
                QueryParam "userIp" Text :>
                  QueryParam "onBehalfOfContentOwner" Text :>
                    QueryParam "videoId" Text :>
-                     QueryParam "key" Text :>
+                     QueryParam "key" Key :>
                        QueryParam "id" Text :>
-                         QueryParam "oauth_token" Text :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :>
+                             QueryParam "alt" AltJSON :>
                                Get '[JSON] CaptionListResponse
 
 -- | Returns a list of caption tracks that are associated with a specified
@@ -79,14 +78,13 @@ data CaptionsList' = CaptionsList'
     , _cllQuotaUser              :: !(Maybe Text)
     , _cllPart                   :: !Text
     , _cllPrettyPrint            :: !Bool
-    , _cllUserIp                 :: !(Maybe Text)
+    , _cllUserIP                 :: !(Maybe Text)
     , _cllOnBehalfOfContentOwner :: !(Maybe Text)
     , _cllVideoId                :: !Text
-    , _cllKey                    :: !(Maybe Text)
+    , _cllKey                    :: !(Maybe Key)
     , _cllId                     :: !(Maybe Text)
-    , _cllOauthToken             :: !(Maybe Text)
+    , _cllOAuthToken             :: !(Maybe OAuthToken)
     , _cllFields                 :: !(Maybe Text)
-    , _cllAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CaptionsList'' with the minimum fields required to make a request.
@@ -101,7 +99,7 @@ data CaptionsList' = CaptionsList'
 --
 -- * 'cllPrettyPrint'
 --
--- * 'cllUserIp'
+-- * 'cllUserIP'
 --
 -- * 'cllOnBehalfOfContentOwner'
 --
@@ -111,11 +109,9 @@ data CaptionsList' = CaptionsList'
 --
 -- * 'cllId'
 --
--- * 'cllOauthToken'
+-- * 'cllOAuthToken'
 --
 -- * 'cllFields'
---
--- * 'cllAlt'
 captionsList'
     :: Text -- ^ 'part'
     -> Text -- ^ 'videoId'
@@ -126,14 +122,13 @@ captionsList' pCllPart_ pCllVideoId_ =
     , _cllQuotaUser = Nothing
     , _cllPart = pCllPart_
     , _cllPrettyPrint = True
-    , _cllUserIp = Nothing
+    , _cllUserIP = Nothing
     , _cllOnBehalfOfContentOwner = Nothing
     , _cllVideoId = pCllVideoId_
     , _cllKey = Nothing
     , _cllId = Nothing
-    , _cllOauthToken = Nothing
+    , _cllOAuthToken = Nothing
     , _cllFields = Nothing
-    , _cllAlt = JSON
     }
 
 -- | ID of the Google+ Page for the channel that the request is on behalf of.
@@ -163,9 +158,9 @@ cllPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cllUserIp :: Lens' CaptionsList' (Maybe Text)
-cllUserIp
-  = lens _cllUserIp (\ s a -> s{_cllUserIp = a})
+cllUserIP :: Lens' CaptionsList' (Maybe Text)
+cllUserIP
+  = lens _cllUserIP (\ s a -> s{_cllUserIP = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
@@ -191,7 +186,7 @@ cllVideoId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cllKey :: Lens' CaptionsList' (Maybe Text)
+cllKey :: Lens' CaptionsList' (Maybe Key)
 cllKey = lens _cllKey (\ s a -> s{_cllKey = a})
 
 -- | The id parameter specifies a comma-separated list of IDs that identify
@@ -201,19 +196,19 @@ cllId :: Lens' CaptionsList' (Maybe Text)
 cllId = lens _cllId (\ s a -> s{_cllId = a})
 
 -- | OAuth 2.0 token for the current user.
-cllOauthToken :: Lens' CaptionsList' (Maybe Text)
-cllOauthToken
-  = lens _cllOauthToken
-      (\ s a -> s{_cllOauthToken = a})
+cllOAuthToken :: Lens' CaptionsList' (Maybe OAuthToken)
+cllOAuthToken
+  = lens _cllOAuthToken
+      (\ s a -> s{_cllOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cllFields :: Lens' CaptionsList' (Maybe Text)
 cllFields
   = lens _cllFields (\ s a -> s{_cllFields = a})
 
--- | Data format for the response.
-cllAlt :: Lens' CaptionsList' Alt
-cllAlt = lens _cllAlt (\ s a -> s{_cllAlt = a})
+instance GoogleAuth CaptionsList' where
+        authKey = cllKey . _Just
+        authToken = cllOAuthToken . _Just
 
 instance GoogleRequest CaptionsList' where
         type Rs CaptionsList' = CaptionListResponse
@@ -221,14 +216,14 @@ instance GoogleRequest CaptionsList' where
         requestWithRoute r u CaptionsList'{..}
           = go _cllOnBehalfOf _cllQuotaUser (Just _cllPart)
               (Just _cllPrettyPrint)
-              _cllUserIp
+              _cllUserIP
               _cllOnBehalfOfContentOwner
               (Just _cllVideoId)
               _cllKey
               _cllId
-              _cllOauthToken
+              _cllOAuthToken
               _cllFields
-              (Just _cllAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CaptionsListResource)

@@ -34,15 +34,14 @@ module Network.Google.Resource.Compute.TargetPools.List
     , tplQuotaUser
     , tplPrettyPrint
     , tplProject
-    , tplUserIp
+    , tplUserIP
     , tplKey
     , tplFilter
     , tplRegion
     , tplPageToken
-    , tplOauthToken
+    , tplOAuthToken
     , tplMaxResults
     , tplFields
-    , tplAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -58,13 +57,13 @@ type TargetPoolsListResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "filter" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "maxResults" Word32 :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :>
+                               QueryParam "alt" AltJSON :>
                                  Get '[JSON] TargetPoolList
 
 -- | Retrieves the list of TargetPool resources available to the specified
@@ -75,15 +74,14 @@ data TargetPoolsList' = TargetPoolsList'
     { _tplQuotaUser   :: !(Maybe Text)
     , _tplPrettyPrint :: !Bool
     , _tplProject     :: !Text
-    , _tplUserIp      :: !(Maybe Text)
-    , _tplKey         :: !(Maybe Text)
+    , _tplUserIP      :: !(Maybe Text)
+    , _tplKey         :: !(Maybe Key)
     , _tplFilter      :: !(Maybe Text)
     , _tplRegion      :: !Text
     , _tplPageToken   :: !(Maybe Text)
-    , _tplOauthToken  :: !(Maybe Text)
+    , _tplOAuthToken  :: !(Maybe OAuthToken)
     , _tplMaxResults  :: !Word32
     , _tplFields      :: !(Maybe Text)
-    , _tplAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetPoolsList'' with the minimum fields required to make a request.
@@ -96,7 +94,7 @@ data TargetPoolsList' = TargetPoolsList'
 --
 -- * 'tplProject'
 --
--- * 'tplUserIp'
+-- * 'tplUserIP'
 --
 -- * 'tplKey'
 --
@@ -106,13 +104,11 @@ data TargetPoolsList' = TargetPoolsList'
 --
 -- * 'tplPageToken'
 --
--- * 'tplOauthToken'
+-- * 'tplOAuthToken'
 --
 -- * 'tplMaxResults'
 --
 -- * 'tplFields'
---
--- * 'tplAlt'
 targetPoolsList'
     :: Text -- ^ 'project'
     -> Text -- ^ 'region'
@@ -122,15 +118,14 @@ targetPoolsList' pTplProject_ pTplRegion_ =
     { _tplQuotaUser = Nothing
     , _tplPrettyPrint = True
     , _tplProject = pTplProject_
-    , _tplUserIp = Nothing
+    , _tplUserIP = Nothing
     , _tplKey = Nothing
     , _tplFilter = Nothing
     , _tplRegion = pTplRegion_
     , _tplPageToken = Nothing
-    , _tplOauthToken = Nothing
+    , _tplOAuthToken = Nothing
     , _tplMaxResults = 500
     , _tplFields = Nothing
-    , _tplAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,14 +148,14 @@ tplProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tplUserIp :: Lens' TargetPoolsList' (Maybe Text)
-tplUserIp
-  = lens _tplUserIp (\ s a -> s{_tplUserIp = a})
+tplUserIP :: Lens' TargetPoolsList' (Maybe Text)
+tplUserIP
+  = lens _tplUserIP (\ s a -> s{_tplUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tplKey :: Lens' TargetPoolsList' (Maybe Text)
+tplKey :: Lens' TargetPoolsList' (Maybe Key)
 tplKey = lens _tplKey (\ s a -> s{_tplKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
@@ -191,10 +186,10 @@ tplPageToken
   = lens _tplPageToken (\ s a -> s{_tplPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-tplOauthToken :: Lens' TargetPoolsList' (Maybe Text)
-tplOauthToken
-  = lens _tplOauthToken
-      (\ s a -> s{_tplOauthToken = a})
+tplOAuthToken :: Lens' TargetPoolsList' (Maybe OAuthToken)
+tplOAuthToken
+  = lens _tplOAuthToken
+      (\ s a -> s{_tplOAuthToken = a})
 
 -- | Maximum count of results to be returned.
 tplMaxResults :: Lens' TargetPoolsList' Word32
@@ -207,24 +202,24 @@ tplFields :: Lens' TargetPoolsList' (Maybe Text)
 tplFields
   = lens _tplFields (\ s a -> s{_tplFields = a})
 
--- | Data format for the response.
-tplAlt :: Lens' TargetPoolsList' Alt
-tplAlt = lens _tplAlt (\ s a -> s{_tplAlt = a})
+instance GoogleAuth TargetPoolsList' where
+        authKey = tplKey . _Just
+        authToken = tplOAuthToken . _Just
 
 instance GoogleRequest TargetPoolsList' where
         type Rs TargetPoolsList' = TargetPoolList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u TargetPoolsList'{..}
           = go _tplQuotaUser (Just _tplPrettyPrint) _tplProject
-              _tplUserIp
+              _tplUserIP
               _tplKey
               _tplFilter
               _tplRegion
               _tplPageToken
-              _tplOauthToken
+              _tplOAuthToken
               (Just _tplMaxResults)
               _tplFields
-              (Just _tplAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TargetPoolsListResource)

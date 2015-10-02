@@ -33,13 +33,12 @@ module Network.Google.Resource.Storage.Buckets.Delete
     , bdQuotaUser
     , bdIfMetagenerationMatch
     , bdPrettyPrint
-    , bdUserIp
+    , bdUserIP
     , bdBucket
     , bdKey
     , bdIfMetagenerationNotMatch
-    , bdOauthToken
+    , bdOAuthToken
     , bdFields
-    , bdAlt
     ) where
 
 import           Network.Google.Prelude
@@ -54,11 +53,11 @@ type BucketsDeleteResource =
            QueryParam "ifMetagenerationMatch" Word64 :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "ifMetagenerationNotMatch" Word64 :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Delete '[JSON] ()
+                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Permanently deletes an empty bucket.
 --
@@ -67,13 +66,12 @@ data BucketsDelete' = BucketsDelete'
     { _bdQuotaUser                :: !(Maybe Text)
     , _bdIfMetagenerationMatch    :: !(Maybe Word64)
     , _bdPrettyPrint              :: !Bool
-    , _bdUserIp                   :: !(Maybe Text)
+    , _bdUserIP                   :: !(Maybe Text)
     , _bdBucket                   :: !Text
-    , _bdKey                      :: !(Maybe Text)
+    , _bdKey                      :: !(Maybe Key)
     , _bdIfMetagenerationNotMatch :: !(Maybe Word64)
-    , _bdOauthToken               :: !(Maybe Text)
+    , _bdOAuthToken               :: !(Maybe OAuthToken)
     , _bdFields                   :: !(Maybe Text)
-    , _bdAlt                      :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketsDelete'' with the minimum fields required to make a request.
@@ -86,7 +84,7 @@ data BucketsDelete' = BucketsDelete'
 --
 -- * 'bdPrettyPrint'
 --
--- * 'bdUserIp'
+-- * 'bdUserIP'
 --
 -- * 'bdBucket'
 --
@@ -94,11 +92,9 @@ data BucketsDelete' = BucketsDelete'
 --
 -- * 'bdIfMetagenerationNotMatch'
 --
--- * 'bdOauthToken'
+-- * 'bdOAuthToken'
 --
 -- * 'bdFields'
---
--- * 'bdAlt'
 bucketsDelete'
     :: Text -- ^ 'bucket'
     -> BucketsDelete'
@@ -107,13 +103,12 @@ bucketsDelete' pBdBucket_ =
     { _bdQuotaUser = Nothing
     , _bdIfMetagenerationMatch = Nothing
     , _bdPrettyPrint = True
-    , _bdUserIp = Nothing
+    , _bdUserIP = Nothing
     , _bdBucket = pBdBucket_
     , _bdKey = Nothing
     , _bdIfMetagenerationNotMatch = Nothing
-    , _bdOauthToken = Nothing
+    , _bdOAuthToken = Nothing
     , _bdFields = Nothing
-    , _bdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -138,8 +133,8 @@ bdPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-bdUserIp :: Lens' BucketsDelete' (Maybe Text)
-bdUserIp = lens _bdUserIp (\ s a -> s{_bdUserIp = a})
+bdUserIP :: Lens' BucketsDelete' (Maybe Text)
+bdUserIP = lens _bdUserIP (\ s a -> s{_bdUserIP = a})
 
 -- | Name of a bucket.
 bdBucket :: Lens' BucketsDelete' Text
@@ -148,7 +143,7 @@ bdBucket = lens _bdBucket (\ s a -> s{_bdBucket = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-bdKey :: Lens' BucketsDelete' (Maybe Text)
+bdKey :: Lens' BucketsDelete' (Maybe Key)
 bdKey = lens _bdKey (\ s a -> s{_bdKey = a})
 
 -- | Makes the return of the bucket metadata conditional on whether the
@@ -159,17 +154,17 @@ bdIfMetagenerationNotMatch
       (\ s a -> s{_bdIfMetagenerationNotMatch = a})
 
 -- | OAuth 2.0 token for the current user.
-bdOauthToken :: Lens' BucketsDelete' (Maybe Text)
-bdOauthToken
-  = lens _bdOauthToken (\ s a -> s{_bdOauthToken = a})
+bdOAuthToken :: Lens' BucketsDelete' (Maybe OAuthToken)
+bdOAuthToken
+  = lens _bdOAuthToken (\ s a -> s{_bdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 bdFields :: Lens' BucketsDelete' (Maybe Text)
 bdFields = lens _bdFields (\ s a -> s{_bdFields = a})
 
--- | Data format for the response.
-bdAlt :: Lens' BucketsDelete' Alt
-bdAlt = lens _bdAlt (\ s a -> s{_bdAlt = a})
+instance GoogleAuth BucketsDelete' where
+        authKey = bdKey . _Just
+        authToken = bdOAuthToken . _Just
 
 instance GoogleRequest BucketsDelete' where
         type Rs BucketsDelete' = ()
@@ -177,13 +172,13 @@ instance GoogleRequest BucketsDelete' where
         requestWithRoute r u BucketsDelete'{..}
           = go _bdQuotaUser _bdIfMetagenerationMatch
               (Just _bdPrettyPrint)
-              _bdUserIp
+              _bdUserIP
               _bdBucket
               _bdKey
               _bdIfMetagenerationNotMatch
-              _bdOauthToken
+              _bdOAuthToken
               _bdFields
-              (Just _bdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy BucketsDeleteResource)

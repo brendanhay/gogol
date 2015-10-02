@@ -34,14 +34,13 @@ module Network.Google.Resource.Games.Applications.Get
     -- * Request Lenses
     , agQuotaUser
     , agPrettyPrint
-    , agUserIp
+    , agUserIP
     , agApplicationId
     , agKey
     , agPlatformType
     , agLanguage
-    , agOauthToken
+    , agOAuthToken
     , agFields
-    , agAlt
     ) where
 
 import           Network.Google.Games.Types
@@ -55,14 +54,14 @@ type ApplicationsGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
+               QueryParam "key" Key :>
                  QueryParam "platformType"
                    GamesApplicationsGetPlatformType
                    :>
                    QueryParam "language" Text :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] Application
+                         QueryParam "alt" AltJSON :> Get '[JSON] Application
 
 -- | Retrieves the metadata of the application with the given ID. If the
 -- requested application is not available for the specified platformType,
@@ -72,14 +71,13 @@ type ApplicationsGetResource =
 data ApplicationsGet' = ApplicationsGet'
     { _agQuotaUser     :: !(Maybe Text)
     , _agPrettyPrint   :: !Bool
-    , _agUserIp        :: !(Maybe Text)
+    , _agUserIP        :: !(Maybe Text)
     , _agApplicationId :: !Text
-    , _agKey           :: !(Maybe Text)
+    , _agKey           :: !(Maybe Key)
     , _agPlatformType  :: !(Maybe GamesApplicationsGetPlatformType)
     , _agLanguage      :: !(Maybe Text)
-    , _agOauthToken    :: !(Maybe Text)
+    , _agOAuthToken    :: !(Maybe OAuthToken)
     , _agFields        :: !(Maybe Text)
-    , _agAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ApplicationsGet'' with the minimum fields required to make a request.
@@ -90,7 +88,7 @@ data ApplicationsGet' = ApplicationsGet'
 --
 -- * 'agPrettyPrint'
 --
--- * 'agUserIp'
+-- * 'agUserIP'
 --
 -- * 'agApplicationId'
 --
@@ -100,11 +98,9 @@ data ApplicationsGet' = ApplicationsGet'
 --
 -- * 'agLanguage'
 --
--- * 'agOauthToken'
+-- * 'agOAuthToken'
 --
 -- * 'agFields'
---
--- * 'agAlt'
 applicationsGet'
     :: Text -- ^ 'applicationId'
     -> ApplicationsGet'
@@ -112,14 +108,13 @@ applicationsGet' pAgApplicationId_ =
     ApplicationsGet'
     { _agQuotaUser = Nothing
     , _agPrettyPrint = True
-    , _agUserIp = Nothing
+    , _agUserIP = Nothing
     , _agApplicationId = pAgApplicationId_
     , _agKey = Nothing
     , _agPlatformType = Nothing
     , _agLanguage = Nothing
-    , _agOauthToken = Nothing
+    , _agOAuthToken = Nothing
     , _agFields = Nothing
-    , _agAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -137,8 +132,8 @@ agPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-agUserIp :: Lens' ApplicationsGet' (Maybe Text)
-agUserIp = lens _agUserIp (\ s a -> s{_agUserIp = a})
+agUserIP :: Lens' ApplicationsGet' (Maybe Text)
+agUserIP = lens _agUserIP (\ s a -> s{_agUserIP = a})
 
 -- | The application ID from the Google Play developer console.
 agApplicationId :: Lens' ApplicationsGet' Text
@@ -149,7 +144,7 @@ agApplicationId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-agKey :: Lens' ApplicationsGet' (Maybe Text)
+agKey :: Lens' ApplicationsGet' (Maybe Key)
 agKey = lens _agKey (\ s a -> s{_agKey = a})
 
 -- | Restrict application details returned to the specific platform.
@@ -164,30 +159,30 @@ agLanguage
   = lens _agLanguage (\ s a -> s{_agLanguage = a})
 
 -- | OAuth 2.0 token for the current user.
-agOauthToken :: Lens' ApplicationsGet' (Maybe Text)
-agOauthToken
-  = lens _agOauthToken (\ s a -> s{_agOauthToken = a})
+agOAuthToken :: Lens' ApplicationsGet' (Maybe OAuthToken)
+agOAuthToken
+  = lens _agOAuthToken (\ s a -> s{_agOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 agFields :: Lens' ApplicationsGet' (Maybe Text)
 agFields = lens _agFields (\ s a -> s{_agFields = a})
 
--- | Data format for the response.
-agAlt :: Lens' ApplicationsGet' Alt
-agAlt = lens _agAlt (\ s a -> s{_agAlt = a})
+instance GoogleAuth ApplicationsGet' where
+        authKey = agKey . _Just
+        authToken = agOAuthToken . _Just
 
 instance GoogleRequest ApplicationsGet' where
         type Rs ApplicationsGet' = Application
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u ApplicationsGet'{..}
-          = go _agQuotaUser (Just _agPrettyPrint) _agUserIp
+          = go _agQuotaUser (Just _agPrettyPrint) _agUserIP
               _agApplicationId
               _agKey
               _agPlatformType
               _agLanguage
-              _agOauthToken
+              _agOAuthToken
               _agFields
-              (Just _agAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ApplicationsGetResource)

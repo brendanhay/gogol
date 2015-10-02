@@ -27,7 +27,7 @@ import           Network.Google.ResourceManager.Types.Sum
 -- /See:/ 'listProjectsResponse' smart constructor.
 data ListProjectsResponse = ListProjectsResponse
     { _lprNextPageToken :: !(Maybe Text)
-    , _lprProjects      :: !(Maybe [Maybe Project])
+    , _lprProjects      :: !(Maybe [Project])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListProjectsResponse' with the minimum fields required to make a request.
@@ -60,7 +60,7 @@ lprNextPageToken
 
 -- | The list of projects that matched the list filter. This list can be
 -- paginated.
-lprProjects :: Lens' ListProjectsResponse [Maybe Project]
+lprProjects :: Lens' ListProjectsResponse [Project]
 lprProjects
   = lens _lprProjects (\ s a -> s{_lprProjects = a}) .
       _Default
@@ -197,7 +197,7 @@ instance ToJSON OrganizationOwner where
 --
 -- /See:/ 'project' smart constructor.
 data Project = Project
-    { _pParent         :: !(Maybe (Maybe ResourceId))
+    { _pParent         :: !(Maybe ResourceId)
     , _pProjectNumber  :: !(Maybe Int64)
     , _pName           :: !(Maybe Text)
     , _pLabels         :: !(Maybe ProjectLabels)
@@ -239,7 +239,7 @@ project =
 -- | An optional reference to a parent Resource. The only supported parent
 -- type is \"organization\". Once set, the parent cannot be modified.
 -- Read-write.
-pParent :: Lens' Project (Maybe (Maybe ResourceId))
+pParent :: Lens' Project (Maybe ResourceId)
 pParent = lens _pParent (\ s a -> s{_pParent = a})
 
 -- | The number uniquely identifying the project. Example: 415104041262
@@ -337,7 +337,7 @@ instance ToJSON Empty where
 --
 -- /See:/ 'setIAMPolicyRequest' smart constructor.
 newtype SetIAMPolicyRequest = SetIAMPolicyRequest
-    { _siprPolicy :: Maybe (Maybe Policy)
+    { _siprPolicy :: Maybe Policy
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SetIAMPolicyRequest' with the minimum fields required to make a request.
@@ -356,7 +356,7 @@ setIAMPolicyRequest =
 -- size of the policy is limited to a few 10s of KB. An empty policy is a
 -- valid policy but certain Cloud Platform services (such as Projects)
 -- might reject them.
-siprPolicy :: Lens' SetIAMPolicyRequest (Maybe (Maybe Policy))
+siprPolicy :: Lens' SetIAMPolicyRequest (Maybe Policy)
 siprPolicy
   = lens _siprPolicy (\ s a -> s{_siprPolicy = a})
 
@@ -497,7 +497,7 @@ instance ToJSON ProjectLabels where
 data Policy = Policy
     { _pEtag     :: !(Maybe Word8)
     , _pVersion  :: !(Maybe Int32)
-    , _pBindings :: !(Maybe [Maybe Binding])
+    , _pBindings :: !(Maybe [Binding])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Policy' with the minimum fields required to make a request.
@@ -529,7 +529,7 @@ pVersion = lens _pVersion (\ s a -> s{_pVersion = a})
 -- | Associates a list of \`members\` to a \`role\`. Multiple \`bindings\`
 -- must not be specified for the same \`role\`. \`bindings\` with no
 -- members will result in an error.
-pBindings :: Lens' Policy [Maybe Binding]
+pBindings :: Lens' Policy [Binding]
 pBindings
   = lens _pBindings (\ s a -> s{_pBindings = a}) .
       _Default
@@ -556,7 +556,7 @@ instance ToJSON Policy where
 --
 -- /See:/ 'organization' smart constructor.
 data Organization = Organization
-    { _oOwner          :: !(Maybe (Maybe OrganizationOwner))
+    { _oOwner          :: !(Maybe OrganizationOwner)
     , _oDisplayName    :: !(Maybe Text)
     , _oOrganizationId :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -581,7 +581,7 @@ organization =
 
 -- | The owner of this Organization. The owner should be specified upon
 -- creation. Once set, it cannot be changed. This field is required.
-oOwner :: Lens' Organization (Maybe (Maybe OrganizationOwner))
+oOwner :: Lens' Organization (Maybe OrganizationOwner)
 oOwner = lens _oOwner (\ s a -> s{_oOwner = a})
 
 -- | A friendly string to be used to refer to the Organization in the UI.
@@ -681,7 +681,7 @@ instance ToJSON Binding where
 -- /See:/ 'listOrganizationsResponse' smart constructor.
 data ListOrganizationsResponse = ListOrganizationsResponse
     { _lorNextPageToken :: !(Maybe Text)
-    , _lorOrganizations :: !(Maybe [Maybe Organization])
+    , _lorOrganizations :: !(Maybe [Organization])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListOrganizationsResponse' with the minimum fields required to make a request.
@@ -711,7 +711,7 @@ lorNextPageToken
 
 -- | The list of Organizations that matched the list query, possibly
 -- paginated.
-lorOrganizations :: Lens' ListOrganizationsResponse [Maybe Organization]
+lorOrganizations :: Lens' ListOrganizationsResponse [Organization]
 lorOrganizations
   = lens _lorOrganizations
       (\ s a -> s{_lorOrganizations = a})

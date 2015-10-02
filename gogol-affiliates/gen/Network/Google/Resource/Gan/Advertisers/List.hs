@@ -33,7 +33,7 @@ module Network.Google.Resource.Gan.Advertisers.List
     -- * Request Lenses
     , alQuotaUser
     , alPrettyPrint
-    , alUserIp
+    , alUserIP
     , alRelationshipStatus
     , alMinSevenDayEpc
     , alRoleId
@@ -43,10 +43,9 @@ module Network.Google.Resource.Gan.Advertisers.List
     , alMinPayoutRank
     , alAdvertiserCategory
     , alPageToken
-    , alOauthToken
+    , alOAuthToken
     , alMaxResults
     , alFields
-    , alAlt
     ) where
 
 import           Network.Google.Affiliates.Types
@@ -66,14 +65,14 @@ type AdvertisersListResource =
                    :>
                    QueryParam "minSevenDayEpc" Double :>
                      QueryParam "minNinetyDayEpc" Double :>
-                       QueryParam "key" Text :>
+                       QueryParam "key" Key :>
                          QueryParam "minPayoutRank" Int32 :>
                            QueryParam "advertiserCategory" Text :>
                              QueryParam "pageToken" Text :>
-                               QueryParam "oauth_token" Text :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "maxResults" Word32 :>
                                    QueryParam "fields" Text :>
-                                     QueryParam "alt" Alt :>
+                                     QueryParam "alt" AltJSON :>
                                        Get '[JSON] Advertisers
 
 -- | Retrieves data about all advertisers that the requesting
@@ -83,20 +82,19 @@ type AdvertisersListResource =
 data AdvertisersList' = AdvertisersList'
     { _alQuotaUser          :: !(Maybe Text)
     , _alPrettyPrint        :: !Bool
-    , _alUserIp             :: !(Maybe Text)
+    , _alUserIP             :: !(Maybe Text)
     , _alRelationshipStatus :: !(Maybe GanAdvertisersListRelationshipStatus)
     , _alMinSevenDayEpc     :: !(Maybe Double)
     , _alRoleId             :: !Text
     , _alMinNinetyDayEpc    :: !(Maybe Double)
     , _alRole               :: !GanAdvertisersListRole
-    , _alKey                :: !(Maybe Text)
+    , _alKey                :: !(Maybe Key)
     , _alMinPayoutRank      :: !(Maybe Int32)
     , _alAdvertiserCategory :: !(Maybe Text)
     , _alPageToken          :: !(Maybe Text)
-    , _alOauthToken         :: !(Maybe Text)
+    , _alOAuthToken         :: !(Maybe OAuthToken)
     , _alMaxResults         :: !(Maybe Word32)
     , _alFields             :: !(Maybe Text)
-    , _alAlt                :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertisersList'' with the minimum fields required to make a request.
@@ -107,7 +105,7 @@ data AdvertisersList' = AdvertisersList'
 --
 -- * 'alPrettyPrint'
 --
--- * 'alUserIp'
+-- * 'alUserIP'
 --
 -- * 'alRelationshipStatus'
 --
@@ -127,13 +125,11 @@ data AdvertisersList' = AdvertisersList'
 --
 -- * 'alPageToken'
 --
--- * 'alOauthToken'
+-- * 'alOAuthToken'
 --
 -- * 'alMaxResults'
 --
 -- * 'alFields'
---
--- * 'alAlt'
 advertisersList'
     :: Text -- ^ 'roleId'
     -> GanAdvertisersListRole -- ^ 'role'
@@ -142,7 +138,7 @@ advertisersList' pAlRoleId_ pAlRole_ =
     AdvertisersList'
     { _alQuotaUser = Nothing
     , _alPrettyPrint = True
-    , _alUserIp = Nothing
+    , _alUserIP = Nothing
     , _alRelationshipStatus = Nothing
     , _alMinSevenDayEpc = Nothing
     , _alRoleId = pAlRoleId_
@@ -152,10 +148,9 @@ advertisersList' pAlRoleId_ pAlRole_ =
     , _alMinPayoutRank = Nothing
     , _alAdvertiserCategory = Nothing
     , _alPageToken = Nothing
-    , _alOauthToken = Nothing
+    , _alOAuthToken = Nothing
     , _alMaxResults = Nothing
     , _alFields = Nothing
-    , _alAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -173,8 +168,8 @@ alPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-alUserIp :: Lens' AdvertisersList' (Maybe Text)
-alUserIp = lens _alUserIp (\ s a -> s{_alUserIp = a})
+alUserIP :: Lens' AdvertisersList' (Maybe Text)
+alUserIP = lens _alUserIP (\ s a -> s{_alUserIP = a})
 
 -- | Filters out all advertisers for which do not have the given relationship
 -- status with the requesting publisher.
@@ -209,7 +204,7 @@ alRole = lens _alRole (\ s a -> s{_alRole = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-alKey :: Lens' AdvertisersList' (Maybe Text)
+alKey :: Lens' AdvertisersList' (Maybe Key)
 alKey = lens _alKey (\ s a -> s{_alKey = a})
 
 -- | A value between 1 and 4, where 1 represents the quartile of advertisers
@@ -238,9 +233,9 @@ alPageToken
   = lens _alPageToken (\ s a -> s{_alPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-alOauthToken :: Lens' AdvertisersList' (Maybe Text)
-alOauthToken
-  = lens _alOauthToken (\ s a -> s{_alOauthToken = a})
+alOAuthToken :: Lens' AdvertisersList' (Maybe OAuthToken)
+alOAuthToken
+  = lens _alOAuthToken (\ s a -> s{_alOAuthToken = a})
 
 -- | Max number of items to return in this page. Optional. Defaults to 20.
 alMaxResults :: Lens' AdvertisersList' (Maybe Word32)
@@ -251,15 +246,15 @@ alMaxResults
 alFields :: Lens' AdvertisersList' (Maybe Text)
 alFields = lens _alFields (\ s a -> s{_alFields = a})
 
--- | Data format for the response.
-alAlt :: Lens' AdvertisersList' Alt
-alAlt = lens _alAlt (\ s a -> s{_alAlt = a})
+instance GoogleAuth AdvertisersList' where
+        authKey = alKey . _Just
+        authToken = alOAuthToken . _Just
 
 instance GoogleRequest AdvertisersList' where
         type Rs AdvertisersList' = Advertisers
         request = requestWithRoute defReq affiliatesURL
         requestWithRoute r u AdvertisersList'{..}
-          = go _alQuotaUser (Just _alPrettyPrint) _alUserIp
+          = go _alQuotaUser (Just _alPrettyPrint) _alUserIP
               _alRelationshipStatus
               _alMinSevenDayEpc
               _alRoleId
@@ -269,10 +264,10 @@ instance GoogleRequest AdvertisersList' where
               _alMinPayoutRank
               _alAdvertiserCategory
               _alPageToken
-              _alOauthToken
+              _alOAuthToken
               _alMaxResults
               _alFields
-              (Just _alAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AdvertisersListResource)

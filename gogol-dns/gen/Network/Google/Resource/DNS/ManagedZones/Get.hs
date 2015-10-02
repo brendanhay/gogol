@@ -33,12 +33,11 @@ module Network.Google.Resource.DNS.ManagedZones.Get
     , mzgQuotaUser
     , mzgPrettyPrint
     , mzgProject
-    , mzgUserIp
+    , mzgUserIP
     , mzgKey
-    , mzgOauthToken
+    , mzgOAuthToken
     , mzgManagedZone
     , mzgFields
-    , mzgAlt
     ) where
 
 import           Network.Google.DNS.Types
@@ -53,10 +52,10 @@ type ManagedZonesGetResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Get '[JSON] ManagedZone
+                       QueryParam "alt" AltJSON :> Get '[JSON] ManagedZone
 
 -- | Fetch the representation of an existing ManagedZone.
 --
@@ -65,12 +64,11 @@ data ManagedZonesGet' = ManagedZonesGet'
     { _mzgQuotaUser   :: !(Maybe Text)
     , _mzgPrettyPrint :: !Bool
     , _mzgProject     :: !Text
-    , _mzgUserIp      :: !(Maybe Text)
-    , _mzgKey         :: !(Maybe Text)
-    , _mzgOauthToken  :: !(Maybe Text)
+    , _mzgUserIP      :: !(Maybe Text)
+    , _mzgKey         :: !(Maybe Key)
+    , _mzgOAuthToken  :: !(Maybe OAuthToken)
     , _mzgManagedZone :: !Text
     , _mzgFields      :: !(Maybe Text)
-    , _mzgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagedZonesGet'' with the minimum fields required to make a request.
@@ -83,17 +81,15 @@ data ManagedZonesGet' = ManagedZonesGet'
 --
 -- * 'mzgProject'
 --
--- * 'mzgUserIp'
+-- * 'mzgUserIP'
 --
 -- * 'mzgKey'
 --
--- * 'mzgOauthToken'
+-- * 'mzgOAuthToken'
 --
 -- * 'mzgManagedZone'
 --
 -- * 'mzgFields'
---
--- * 'mzgAlt'
 managedZonesGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'managedZone'
@@ -103,12 +99,11 @@ managedZonesGet' pMzgProject_ pMzgManagedZone_ =
     { _mzgQuotaUser = Nothing
     , _mzgPrettyPrint = True
     , _mzgProject = pMzgProject_
-    , _mzgUserIp = Nothing
+    , _mzgUserIP = Nothing
     , _mzgKey = Nothing
-    , _mzgOauthToken = Nothing
+    , _mzgOAuthToken = Nothing
     , _mzgManagedZone = pMzgManagedZone_
     , _mzgFields = Nothing
-    , _mzgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -131,21 +126,21 @@ mzgProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mzgUserIp :: Lens' ManagedZonesGet' (Maybe Text)
-mzgUserIp
-  = lens _mzgUserIp (\ s a -> s{_mzgUserIp = a})
+mzgUserIP :: Lens' ManagedZonesGet' (Maybe Text)
+mzgUserIP
+  = lens _mzgUserIP (\ s a -> s{_mzgUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mzgKey :: Lens' ManagedZonesGet' (Maybe Text)
+mzgKey :: Lens' ManagedZonesGet' (Maybe Key)
 mzgKey = lens _mzgKey (\ s a -> s{_mzgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-mzgOauthToken :: Lens' ManagedZonesGet' (Maybe Text)
-mzgOauthToken
-  = lens _mzgOauthToken
-      (\ s a -> s{_mzgOauthToken = a})
+mzgOAuthToken :: Lens' ManagedZonesGet' (Maybe OAuthToken)
+mzgOAuthToken
+  = lens _mzgOAuthToken
+      (\ s a -> s{_mzgOAuthToken = a})
 
 -- | Identifies the managed zone addressed by this request. Can be the
 -- managed zone name or id.
@@ -159,21 +154,21 @@ mzgFields :: Lens' ManagedZonesGet' (Maybe Text)
 mzgFields
   = lens _mzgFields (\ s a -> s{_mzgFields = a})
 
--- | Data format for the response.
-mzgAlt :: Lens' ManagedZonesGet' Alt
-mzgAlt = lens _mzgAlt (\ s a -> s{_mzgAlt = a})
+instance GoogleAuth ManagedZonesGet' where
+        authKey = mzgKey . _Just
+        authToken = mzgOAuthToken . _Just
 
 instance GoogleRequest ManagedZonesGet' where
         type Rs ManagedZonesGet' = ManagedZone
         request = requestWithRoute defReq dNSURL
         requestWithRoute r u ManagedZonesGet'{..}
           = go _mzgQuotaUser (Just _mzgPrettyPrint) _mzgProject
-              _mzgUserIp
+              _mzgUserIP
               _mzgKey
-              _mzgOauthToken
+              _mzgOAuthToken
               _mzgManagedZone
               _mzgFields
-              (Just _mzgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ManagedZonesGetResource)

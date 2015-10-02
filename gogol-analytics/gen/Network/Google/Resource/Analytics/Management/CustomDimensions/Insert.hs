@@ -33,12 +33,12 @@ module Network.Google.Resource.Analytics.Management.CustomDimensions.Insert
     , mcdiQuotaUser
     , mcdiPrettyPrint
     , mcdiWebPropertyId
-    , mcdiUserIp
+    , mcdiUserIP
     , mcdiAccountId
     , mcdiKey
-    , mcdiOauthToken
+    , mcdiOAuthToken
+    , mcdiCustomDimension
     , mcdiFields
-    , mcdiAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -56,25 +56,26 @@ type ManagementCustomDimensionsInsertResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :>
-                               Post '[JSON] CustomDimension
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] CustomDimension :>
+                                 Post '[JSON] CustomDimension
 
 -- | Create a new custom dimension.
 --
 -- /See:/ 'managementCustomDimensionsInsert'' smart constructor.
 data ManagementCustomDimensionsInsert' = ManagementCustomDimensionsInsert'
-    { _mcdiQuotaUser     :: !(Maybe Text)
-    , _mcdiPrettyPrint   :: !Bool
-    , _mcdiWebPropertyId :: !Text
-    , _mcdiUserIp        :: !(Maybe Text)
-    , _mcdiAccountId     :: !Text
-    , _mcdiKey           :: !(Maybe Text)
-    , _mcdiOauthToken    :: !(Maybe Text)
-    , _mcdiFields        :: !(Maybe Text)
-    , _mcdiAlt           :: !Alt
+    { _mcdiQuotaUser       :: !(Maybe Text)
+    , _mcdiPrettyPrint     :: !Bool
+    , _mcdiWebPropertyId   :: !Text
+    , _mcdiUserIP          :: !(Maybe Text)
+    , _mcdiAccountId       :: !Text
+    , _mcdiKey             :: !(Maybe Key)
+    , _mcdiOAuthToken      :: !(Maybe OAuthToken)
+    , _mcdiCustomDimension :: !CustomDimension
+    , _mcdiFields          :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementCustomDimensionsInsert'' with the minimum fields required to make a request.
@@ -87,32 +88,33 @@ data ManagementCustomDimensionsInsert' = ManagementCustomDimensionsInsert'
 --
 -- * 'mcdiWebPropertyId'
 --
--- * 'mcdiUserIp'
+-- * 'mcdiUserIP'
 --
 -- * 'mcdiAccountId'
 --
 -- * 'mcdiKey'
 --
--- * 'mcdiOauthToken'
+-- * 'mcdiOAuthToken'
+--
+-- * 'mcdiCustomDimension'
 --
 -- * 'mcdiFields'
---
--- * 'mcdiAlt'
 managementCustomDimensionsInsert'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'accountId'
+    -> CustomDimension -- ^ 'CustomDimension'
     -> ManagementCustomDimensionsInsert'
-managementCustomDimensionsInsert' pMcdiWebPropertyId_ pMcdiAccountId_ =
+managementCustomDimensionsInsert' pMcdiWebPropertyId_ pMcdiAccountId_ pMcdiCustomDimension_ =
     ManagementCustomDimensionsInsert'
     { _mcdiQuotaUser = Nothing
     , _mcdiPrettyPrint = False
     , _mcdiWebPropertyId = pMcdiWebPropertyId_
-    , _mcdiUserIp = Nothing
+    , _mcdiUserIP = Nothing
     , _mcdiAccountId = pMcdiAccountId_
     , _mcdiKey = Nothing
-    , _mcdiOauthToken = Nothing
+    , _mcdiOAuthToken = Nothing
+    , _mcdiCustomDimension = pMcdiCustomDimension_
     , _mcdiFields = Nothing
-    , _mcdiAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -137,9 +139,9 @@ mcdiWebPropertyId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mcdiUserIp :: Lens' ManagementCustomDimensionsInsert' (Maybe Text)
-mcdiUserIp
-  = lens _mcdiUserIp (\ s a -> s{_mcdiUserIp = a})
+mcdiUserIP :: Lens' ManagementCustomDimensionsInsert' (Maybe Text)
+mcdiUserIP
+  = lens _mcdiUserIP (\ s a -> s{_mcdiUserIP = a})
 
 -- | Account ID for the custom dimension to create.
 mcdiAccountId :: Lens' ManagementCustomDimensionsInsert' Text
@@ -150,23 +152,30 @@ mcdiAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mcdiKey :: Lens' ManagementCustomDimensionsInsert' (Maybe Text)
+mcdiKey :: Lens' ManagementCustomDimensionsInsert' (Maybe Key)
 mcdiKey = lens _mcdiKey (\ s a -> s{_mcdiKey = a})
 
 -- | OAuth 2.0 token for the current user.
-mcdiOauthToken :: Lens' ManagementCustomDimensionsInsert' (Maybe Text)
-mcdiOauthToken
-  = lens _mcdiOauthToken
-      (\ s a -> s{_mcdiOauthToken = a})
+mcdiOAuthToken :: Lens' ManagementCustomDimensionsInsert' (Maybe OAuthToken)
+mcdiOAuthToken
+  = lens _mcdiOAuthToken
+      (\ s a -> s{_mcdiOAuthToken = a})
+
+-- | Multipart request metadata.
+mcdiCustomDimension :: Lens' ManagementCustomDimensionsInsert' CustomDimension
+mcdiCustomDimension
+  = lens _mcdiCustomDimension
+      (\ s a -> s{_mcdiCustomDimension = a})
 
 -- | Selector specifying which fields to include in a partial response.
 mcdiFields :: Lens' ManagementCustomDimensionsInsert' (Maybe Text)
 mcdiFields
   = lens _mcdiFields (\ s a -> s{_mcdiFields = a})
 
--- | Data format for the response.
-mcdiAlt :: Lens' ManagementCustomDimensionsInsert' Alt
-mcdiAlt = lens _mcdiAlt (\ s a -> s{_mcdiAlt = a})
+instance GoogleAuth ManagementCustomDimensionsInsert'
+         where
+        authKey = mcdiKey . _Just
+        authToken = mcdiOAuthToken . _Just
 
 instance GoogleRequest
          ManagementCustomDimensionsInsert' where
@@ -177,12 +186,13 @@ instance GoogleRequest
           ManagementCustomDimensionsInsert'{..}
           = go _mcdiQuotaUser (Just _mcdiPrettyPrint)
               _mcdiWebPropertyId
-              _mcdiUserIp
+              _mcdiUserIP
               _mcdiAccountId
               _mcdiKey
-              _mcdiOauthToken
+              _mcdiOAuthToken
               _mcdiFields
-              (Just _mcdiAlt)
+              (Just AltJSON)
+              _mcdiCustomDimension
           where go
                   = clientWithRoute
                       (Proxy ::

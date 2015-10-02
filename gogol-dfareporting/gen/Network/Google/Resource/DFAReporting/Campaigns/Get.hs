@@ -32,13 +32,12 @@ module Network.Google.Resource.DFAReporting.Campaigns.Get
     -- * Request Lenses
     , camaQuotaUser
     , camaPrettyPrint
-    , camaUserIp
+    , camaUserIP
     , camaProfileId
     , camaKey
     , camaId
-    , camaOauthToken
+    , camaOAuthToken
     , camaFields
-    , camaAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,10 +53,10 @@ type CampaignsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] Campaign
+                         QueryParam "alt" AltJSON :> Get '[JSON] Campaign
 
 -- | Gets one campaign by ID.
 --
@@ -65,13 +64,12 @@ type CampaignsGetResource =
 data CampaignsGet' = CampaignsGet'
     { _camaQuotaUser   :: !(Maybe Text)
     , _camaPrettyPrint :: !Bool
-    , _camaUserIp      :: !(Maybe Text)
+    , _camaUserIP      :: !(Maybe Text)
     , _camaProfileId   :: !Int64
-    , _camaKey         :: !(Maybe Text)
+    , _camaKey         :: !(Maybe Key)
     , _camaId          :: !Int64
-    , _camaOauthToken  :: !(Maybe Text)
+    , _camaOAuthToken  :: !(Maybe OAuthToken)
     , _camaFields      :: !(Maybe Text)
-    , _camaAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CampaignsGet'' with the minimum fields required to make a request.
@@ -82,7 +80,7 @@ data CampaignsGet' = CampaignsGet'
 --
 -- * 'camaPrettyPrint'
 --
--- * 'camaUserIp'
+-- * 'camaUserIP'
 --
 -- * 'camaProfileId'
 --
@@ -90,11 +88,9 @@ data CampaignsGet' = CampaignsGet'
 --
 -- * 'camaId'
 --
--- * 'camaOauthToken'
+-- * 'camaOAuthToken'
 --
 -- * 'camaFields'
---
--- * 'camaAlt'
 campaignsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
@@ -103,13 +99,12 @@ campaignsGet' pCamaProfileId_ pCamaId_ =
     CampaignsGet'
     { _camaQuotaUser = Nothing
     , _camaPrettyPrint = True
-    , _camaUserIp = Nothing
+    , _camaUserIP = Nothing
     , _camaProfileId = pCamaProfileId_
     , _camaKey = Nothing
     , _camaId = pCamaId_
-    , _camaOauthToken = Nothing
+    , _camaOAuthToken = Nothing
     , _camaFields = Nothing
-    , _camaAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -128,9 +123,9 @@ camaPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-camaUserIp :: Lens' CampaignsGet' (Maybe Text)
-camaUserIp
-  = lens _camaUserIp (\ s a -> s{_camaUserIp = a})
+camaUserIP :: Lens' CampaignsGet' (Maybe Text)
+camaUserIP
+  = lens _camaUserIP (\ s a -> s{_camaUserIP = a})
 
 -- | User profile ID associated with this request.
 camaProfileId :: Lens' CampaignsGet' Int64
@@ -141,7 +136,7 @@ camaProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-camaKey :: Lens' CampaignsGet' (Maybe Text)
+camaKey :: Lens' CampaignsGet' (Maybe Key)
 camaKey = lens _camaKey (\ s a -> s{_camaKey = a})
 
 -- | Campaign ID.
@@ -149,32 +144,32 @@ camaId :: Lens' CampaignsGet' Int64
 camaId = lens _camaId (\ s a -> s{_camaId = a})
 
 -- | OAuth 2.0 token for the current user.
-camaOauthToken :: Lens' CampaignsGet' (Maybe Text)
-camaOauthToken
-  = lens _camaOauthToken
-      (\ s a -> s{_camaOauthToken = a})
+camaOAuthToken :: Lens' CampaignsGet' (Maybe OAuthToken)
+camaOAuthToken
+  = lens _camaOAuthToken
+      (\ s a -> s{_camaOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 camaFields :: Lens' CampaignsGet' (Maybe Text)
 camaFields
   = lens _camaFields (\ s a -> s{_camaFields = a})
 
--- | Data format for the response.
-camaAlt :: Lens' CampaignsGet' Alt
-camaAlt = lens _camaAlt (\ s a -> s{_camaAlt = a})
+instance GoogleAuth CampaignsGet' where
+        authKey = camaKey . _Just
+        authToken = camaOAuthToken . _Just
 
 instance GoogleRequest CampaignsGet' where
         type Rs CampaignsGet' = Campaign
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CampaignsGet'{..}
           = go _camaQuotaUser (Just _camaPrettyPrint)
-              _camaUserIp
+              _camaUserIP
               _camaProfileId
               _camaKey
               _camaId
-              _camaOauthToken
+              _camaOAuthToken
               _camaFields
-              (Just _camaAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CampaignsGetResource)

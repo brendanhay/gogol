@@ -34,12 +34,12 @@ module Network.Google.Resource.Compute.TargetVPNGateways.Insert
     , tvgiQuotaUser
     , tvgiPrettyPrint
     , tvgiProject
-    , tvgiUserIp
+    , tvgiUserIP
+    , tvgiTargetVPNGateway
     , tvgiKey
     , tvgiRegion
-    , tvgiOauthToken
+    , tvgiOAuthToken
     , tvgiFields
-    , tvgiAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -55,25 +55,27 @@ type TargetVPNGatewaysInsertResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Post '[JSON] Operation
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] TargetVPNGateway :>
+                             Post '[JSON] Operation
 
 -- | Creates a TargetVpnGateway resource in the specified project and region
 -- using the data included in the request.
 --
 -- /See:/ 'targetVPNGatewaysInsert'' smart constructor.
 data TargetVPNGatewaysInsert' = TargetVPNGatewaysInsert'
-    { _tvgiQuotaUser   :: !(Maybe Text)
-    , _tvgiPrettyPrint :: !Bool
-    , _tvgiProject     :: !Text
-    , _tvgiUserIp      :: !(Maybe Text)
-    , _tvgiKey         :: !(Maybe Text)
-    , _tvgiRegion      :: !Text
-    , _tvgiOauthToken  :: !(Maybe Text)
-    , _tvgiFields      :: !(Maybe Text)
-    , _tvgiAlt         :: !Alt
+    { _tvgiQuotaUser        :: !(Maybe Text)
+    , _tvgiPrettyPrint      :: !Bool
+    , _tvgiProject          :: !Text
+    , _tvgiUserIP           :: !(Maybe Text)
+    , _tvgiTargetVPNGateway :: !TargetVPNGateway
+    , _tvgiKey              :: !(Maybe Key)
+    , _tvgiRegion           :: !Text
+    , _tvgiOAuthToken       :: !(Maybe OAuthToken)
+    , _tvgiFields           :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetVPNGatewaysInsert'' with the minimum fields required to make a request.
@@ -86,32 +88,33 @@ data TargetVPNGatewaysInsert' = TargetVPNGatewaysInsert'
 --
 -- * 'tvgiProject'
 --
--- * 'tvgiUserIp'
+-- * 'tvgiUserIP'
+--
+-- * 'tvgiTargetVPNGateway'
 --
 -- * 'tvgiKey'
 --
 -- * 'tvgiRegion'
 --
--- * 'tvgiOauthToken'
+-- * 'tvgiOAuthToken'
 --
 -- * 'tvgiFields'
---
--- * 'tvgiAlt'
 targetVPNGatewaysInsert'
     :: Text -- ^ 'project'
+    -> TargetVPNGateway -- ^ 'TargetVPNGateway'
     -> Text -- ^ 'region'
     -> TargetVPNGatewaysInsert'
-targetVPNGatewaysInsert' pTvgiProject_ pTvgiRegion_ =
+targetVPNGatewaysInsert' pTvgiProject_ pTvgiTargetVPNGateway_ pTvgiRegion_ =
     TargetVPNGatewaysInsert'
     { _tvgiQuotaUser = Nothing
     , _tvgiPrettyPrint = True
     , _tvgiProject = pTvgiProject_
-    , _tvgiUserIp = Nothing
+    , _tvgiUserIP = Nothing
+    , _tvgiTargetVPNGateway = pTvgiTargetVPNGateway_
     , _tvgiKey = Nothing
     , _tvgiRegion = pTvgiRegion_
-    , _tvgiOauthToken = Nothing
+    , _tvgiOAuthToken = Nothing
     , _tvgiFields = Nothing
-    , _tvgiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,14 +138,20 @@ tvgiProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tvgiUserIp :: Lens' TargetVPNGatewaysInsert' (Maybe Text)
-tvgiUserIp
-  = lens _tvgiUserIp (\ s a -> s{_tvgiUserIp = a})
+tvgiUserIP :: Lens' TargetVPNGatewaysInsert' (Maybe Text)
+tvgiUserIP
+  = lens _tvgiUserIP (\ s a -> s{_tvgiUserIP = a})
+
+-- | Multipart request metadata.
+tvgiTargetVPNGateway :: Lens' TargetVPNGatewaysInsert' TargetVPNGateway
+tvgiTargetVPNGateway
+  = lens _tvgiTargetVPNGateway
+      (\ s a -> s{_tvgiTargetVPNGateway = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tvgiKey :: Lens' TargetVPNGatewaysInsert' (Maybe Text)
+tvgiKey :: Lens' TargetVPNGatewaysInsert' (Maybe Key)
 tvgiKey = lens _tvgiKey (\ s a -> s{_tvgiKey = a})
 
 -- | The name of the region for this request.
@@ -151,19 +160,19 @@ tvgiRegion
   = lens _tvgiRegion (\ s a -> s{_tvgiRegion = a})
 
 -- | OAuth 2.0 token for the current user.
-tvgiOauthToken :: Lens' TargetVPNGatewaysInsert' (Maybe Text)
-tvgiOauthToken
-  = lens _tvgiOauthToken
-      (\ s a -> s{_tvgiOauthToken = a})
+tvgiOAuthToken :: Lens' TargetVPNGatewaysInsert' (Maybe OAuthToken)
+tvgiOAuthToken
+  = lens _tvgiOAuthToken
+      (\ s a -> s{_tvgiOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 tvgiFields :: Lens' TargetVPNGatewaysInsert' (Maybe Text)
 tvgiFields
   = lens _tvgiFields (\ s a -> s{_tvgiFields = a})
 
--- | Data format for the response.
-tvgiAlt :: Lens' TargetVPNGatewaysInsert' Alt
-tvgiAlt = lens _tvgiAlt (\ s a -> s{_tvgiAlt = a})
+instance GoogleAuth TargetVPNGatewaysInsert' where
+        authKey = tvgiKey . _Just
+        authToken = tvgiOAuthToken . _Just
 
 instance GoogleRequest TargetVPNGatewaysInsert' where
         type Rs TargetVPNGatewaysInsert' = Operation
@@ -171,12 +180,13 @@ instance GoogleRequest TargetVPNGatewaysInsert' where
         requestWithRoute r u TargetVPNGatewaysInsert'{..}
           = go _tvgiQuotaUser (Just _tvgiPrettyPrint)
               _tvgiProject
-              _tvgiUserIp
+              _tvgiUserIP
               _tvgiKey
               _tvgiRegion
-              _tvgiOauthToken
+              _tvgiOAuthToken
               _tvgiFields
-              (Just _tvgiAlt)
+              (Just AltJSON)
+              _tvgiTargetVPNGateway
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TargetVPNGatewaysInsertResource)

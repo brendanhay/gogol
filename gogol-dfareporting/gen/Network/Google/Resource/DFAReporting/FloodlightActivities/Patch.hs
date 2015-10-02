@@ -33,13 +33,13 @@ module Network.Google.Resource.DFAReporting.FloodlightActivities.Patch
     -- * Request Lenses
     , fapQuotaUser
     , fapPrettyPrint
-    , fapUserIp
+    , fapUserIP
     , fapProfileId
     , fapKey
+    , fapFloodlightActivity
     , fapId
-    , fapOauthToken
+    , fapOAuthToken
     , fapFields
-    , fapAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,27 +54,28 @@ type FloodlightActivitiesPatchResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "id" Int64 :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :>
-                           Patch '[JSON] FloodlightActivity
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] FloodlightActivity :>
+                             Patch '[JSON] FloodlightActivity
 
 -- | Updates an existing floodlight activity. This method supports patch
 -- semantics.
 --
 -- /See:/ 'floodlightActivitiesPatch'' smart constructor.
 data FloodlightActivitiesPatch' = FloodlightActivitiesPatch'
-    { _fapQuotaUser   :: !(Maybe Text)
-    , _fapPrettyPrint :: !Bool
-    , _fapUserIp      :: !(Maybe Text)
-    , _fapProfileId   :: !Int64
-    , _fapKey         :: !(Maybe Text)
-    , _fapId          :: !Int64
-    , _fapOauthToken  :: !(Maybe Text)
-    , _fapFields      :: !(Maybe Text)
-    , _fapAlt         :: !Alt
+    { _fapQuotaUser          :: !(Maybe Text)
+    , _fapPrettyPrint        :: !Bool
+    , _fapUserIP             :: !(Maybe Text)
+    , _fapProfileId          :: !Int64
+    , _fapKey                :: !(Maybe Key)
+    , _fapFloodlightActivity :: !FloodlightActivity
+    , _fapId                 :: !Int64
+    , _fapOAuthToken         :: !(Maybe OAuthToken)
+    , _fapFields             :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivitiesPatch'' with the minimum fields required to make a request.
@@ -85,34 +86,35 @@ data FloodlightActivitiesPatch' = FloodlightActivitiesPatch'
 --
 -- * 'fapPrettyPrint'
 --
--- * 'fapUserIp'
+-- * 'fapUserIP'
 --
 -- * 'fapProfileId'
 --
 -- * 'fapKey'
 --
+-- * 'fapFloodlightActivity'
+--
 -- * 'fapId'
 --
--- * 'fapOauthToken'
+-- * 'fapOAuthToken'
 --
 -- * 'fapFields'
---
--- * 'fapAlt'
 floodlightActivitiesPatch'
     :: Int64 -- ^ 'profileId'
+    -> FloodlightActivity -- ^ 'FloodlightActivity'
     -> Int64 -- ^ 'id'
     -> FloodlightActivitiesPatch'
-floodlightActivitiesPatch' pFapProfileId_ pFapId_ =
+floodlightActivitiesPatch' pFapProfileId_ pFapFloodlightActivity_ pFapId_ =
     FloodlightActivitiesPatch'
     { _fapQuotaUser = Nothing
     , _fapPrettyPrint = True
-    , _fapUserIp = Nothing
+    , _fapUserIP = Nothing
     , _fapProfileId = pFapProfileId_
     , _fapKey = Nothing
+    , _fapFloodlightActivity = pFapFloodlightActivity_
     , _fapId = pFapId_
-    , _fapOauthToken = Nothing
+    , _fapOAuthToken = Nothing
     , _fapFields = Nothing
-    , _fapAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -130,9 +132,9 @@ fapPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-fapUserIp :: Lens' FloodlightActivitiesPatch' (Maybe Text)
-fapUserIp
-  = lens _fapUserIp (\ s a -> s{_fapUserIp = a})
+fapUserIP :: Lens' FloodlightActivitiesPatch' (Maybe Text)
+fapUserIP
+  = lens _fapUserIP (\ s a -> s{_fapUserIP = a})
 
 -- | User profile ID associated with this request.
 fapProfileId :: Lens' FloodlightActivitiesPatch' Int64
@@ -142,27 +144,33 @@ fapProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fapKey :: Lens' FloodlightActivitiesPatch' (Maybe Text)
+fapKey :: Lens' FloodlightActivitiesPatch' (Maybe Key)
 fapKey = lens _fapKey (\ s a -> s{_fapKey = a})
+
+-- | Multipart request metadata.
+fapFloodlightActivity :: Lens' FloodlightActivitiesPatch' FloodlightActivity
+fapFloodlightActivity
+  = lens _fapFloodlightActivity
+      (\ s a -> s{_fapFloodlightActivity = a})
 
 -- | Floodlight activity ID.
 fapId :: Lens' FloodlightActivitiesPatch' Int64
 fapId = lens _fapId (\ s a -> s{_fapId = a})
 
 -- | OAuth 2.0 token for the current user.
-fapOauthToken :: Lens' FloodlightActivitiesPatch' (Maybe Text)
-fapOauthToken
-  = lens _fapOauthToken
-      (\ s a -> s{_fapOauthToken = a})
+fapOAuthToken :: Lens' FloodlightActivitiesPatch' (Maybe OAuthToken)
+fapOAuthToken
+  = lens _fapOAuthToken
+      (\ s a -> s{_fapOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 fapFields :: Lens' FloodlightActivitiesPatch' (Maybe Text)
 fapFields
   = lens _fapFields (\ s a -> s{_fapFields = a})
 
--- | Data format for the response.
-fapAlt :: Lens' FloodlightActivitiesPatch' Alt
-fapAlt = lens _fapAlt (\ s a -> s{_fapAlt = a})
+instance GoogleAuth FloodlightActivitiesPatch' where
+        authKey = fapKey . _Just
+        authToken = fapOAuthToken . _Just
 
 instance GoogleRequest FloodlightActivitiesPatch'
          where
@@ -170,13 +178,14 @@ instance GoogleRequest FloodlightActivitiesPatch'
              FloodlightActivity
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u FloodlightActivitiesPatch'{..}
-          = go _fapQuotaUser (Just _fapPrettyPrint) _fapUserIp
+          = go _fapQuotaUser (Just _fapPrettyPrint) _fapUserIP
               _fapProfileId
               _fapKey
               (Just _fapId)
-              _fapOauthToken
+              _fapOAuthToken
               _fapFields
-              (Just _fapAlt)
+              (Just AltJSON)
+              _fapFloodlightActivity
           where go
                   = clientWithRoute
                       (Proxy :: Proxy FloodlightActivitiesPatchResource)

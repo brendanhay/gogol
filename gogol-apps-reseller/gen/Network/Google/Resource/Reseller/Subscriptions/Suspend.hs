@@ -32,13 +32,12 @@ module Network.Google.Resource.Reseller.Subscriptions.Suspend
     -- * Request Lenses
     , ssQuotaUser
     , ssPrettyPrint
-    , ssUserIp
+    , ssUserIP
     , ssCustomerId
     , ssKey
-    , ssOauthToken
+    , ssOAuthToken
     , ssSubscriptionId
     , ssFields
-    , ssAlt
     ) where
 
 import           Network.Google.AppsReseller.Types
@@ -55,10 +54,10 @@ type SubscriptionsSuspendResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Post '[JSON] Subscription
+                           QueryParam "alt" AltJSON :> Post '[JSON] Subscription
 
 -- | Suspends an active subscription
 --
@@ -66,13 +65,12 @@ type SubscriptionsSuspendResource =
 data SubscriptionsSuspend' = SubscriptionsSuspend'
     { _ssQuotaUser      :: !(Maybe Text)
     , _ssPrettyPrint    :: !Bool
-    , _ssUserIp         :: !(Maybe Text)
+    , _ssUserIP         :: !(Maybe Text)
     , _ssCustomerId     :: !Text
-    , _ssKey            :: !(Maybe Text)
-    , _ssOauthToken     :: !(Maybe Text)
+    , _ssKey            :: !(Maybe Key)
+    , _ssOAuthToken     :: !(Maybe OAuthToken)
     , _ssSubscriptionId :: !Text
     , _ssFields         :: !(Maybe Text)
-    , _ssAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionsSuspend'' with the minimum fields required to make a request.
@@ -83,19 +81,17 @@ data SubscriptionsSuspend' = SubscriptionsSuspend'
 --
 -- * 'ssPrettyPrint'
 --
--- * 'ssUserIp'
+-- * 'ssUserIP'
 --
 -- * 'ssCustomerId'
 --
 -- * 'ssKey'
 --
--- * 'ssOauthToken'
+-- * 'ssOAuthToken'
 --
 -- * 'ssSubscriptionId'
 --
 -- * 'ssFields'
---
--- * 'ssAlt'
 subscriptionsSuspend'
     :: Text -- ^ 'customerId'
     -> Text -- ^ 'subscriptionId'
@@ -104,13 +100,12 @@ subscriptionsSuspend' pSsCustomerId_ pSsSubscriptionId_ =
     SubscriptionsSuspend'
     { _ssQuotaUser = Nothing
     , _ssPrettyPrint = True
-    , _ssUserIp = Nothing
+    , _ssUserIP = Nothing
     , _ssCustomerId = pSsCustomerId_
     , _ssKey = Nothing
-    , _ssOauthToken = Nothing
+    , _ssOAuthToken = Nothing
     , _ssSubscriptionId = pSsSubscriptionId_
     , _ssFields = Nothing
-    , _ssAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -128,8 +123,8 @@ ssPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ssUserIp :: Lens' SubscriptionsSuspend' (Maybe Text)
-ssUserIp = lens _ssUserIp (\ s a -> s{_ssUserIp = a})
+ssUserIP :: Lens' SubscriptionsSuspend' (Maybe Text)
+ssUserIP = lens _ssUserIP (\ s a -> s{_ssUserIP = a})
 
 -- | Id of the Customer
 ssCustomerId :: Lens' SubscriptionsSuspend' Text
@@ -139,13 +134,13 @@ ssCustomerId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ssKey :: Lens' SubscriptionsSuspend' (Maybe Text)
+ssKey :: Lens' SubscriptionsSuspend' (Maybe Key)
 ssKey = lens _ssKey (\ s a -> s{_ssKey = a})
 
 -- | OAuth 2.0 token for the current user.
-ssOauthToken :: Lens' SubscriptionsSuspend' (Maybe Text)
-ssOauthToken
-  = lens _ssOauthToken (\ s a -> s{_ssOauthToken = a})
+ssOAuthToken :: Lens' SubscriptionsSuspend' (Maybe OAuthToken)
+ssOAuthToken
+  = lens _ssOAuthToken (\ s a -> s{_ssOAuthToken = a})
 
 -- | Id of the subscription, which is unique for a customer
 ssSubscriptionId :: Lens' SubscriptionsSuspend' Text
@@ -157,21 +152,21 @@ ssSubscriptionId
 ssFields :: Lens' SubscriptionsSuspend' (Maybe Text)
 ssFields = lens _ssFields (\ s a -> s{_ssFields = a})
 
--- | Data format for the response.
-ssAlt :: Lens' SubscriptionsSuspend' Alt
-ssAlt = lens _ssAlt (\ s a -> s{_ssAlt = a})
+instance GoogleAuth SubscriptionsSuspend' where
+        authKey = ssKey . _Just
+        authToken = ssOAuthToken . _Just
 
 instance GoogleRequest SubscriptionsSuspend' where
         type Rs SubscriptionsSuspend' = Subscription
         request = requestWithRoute defReq appsResellerURL
         requestWithRoute r u SubscriptionsSuspend'{..}
-          = go _ssQuotaUser (Just _ssPrettyPrint) _ssUserIp
+          = go _ssQuotaUser (Just _ssPrettyPrint) _ssUserIP
               _ssCustomerId
               _ssKey
-              _ssOauthToken
+              _ssOAuthToken
               _ssSubscriptionId
               _ssFields
-              (Just _ssAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy SubscriptionsSuspendResource)

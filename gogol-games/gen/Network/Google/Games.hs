@@ -505,7 +505,7 @@ module Network.Google.Games
     -- ** AnonymousPlayer
     , AnonymousPlayer
     , anonymousPlayer
-    , apAvatarImageUrl
+    , apAvatarImageURL
     , apKind
     , apDisplayName
 
@@ -536,7 +536,7 @@ module Network.Google.Games
     , snapshotImage
     , siHeight
     , siKind
-    , siUrl
+    , siURL
     , siMimeType
     , siWidth
 
@@ -571,11 +571,11 @@ module Network.Google.Games
     , InstanceIosDetails
     , instanceIosDetails
     , iidItunesAppId
-    , iidPreferredForIpad
-    , iidSupportIphone
+    , iidPreferredForIPad
+    , iidSupportIPhone
     , iidKind
-    , iidSupportIpad
-    , iidPreferredForIphone
+    , iidSupportIPad
+    , iidPreferredForIPhone
     , iidBundleIdentifier
 
     -- ** EventUpdateResponse
@@ -589,7 +589,7 @@ module Network.Google.Games
     -- ** RevisionCheckResponse
     , RevisionCheckResponse
     , revisionCheckResponse
-    , rcrApiVersion
+    , rcrAPIVersion
     , rcrKind
     , rcrRevisionStatus
 
@@ -637,19 +637,19 @@ module Network.Google.Games
     , Leaderboard
     , leaderboard
     , lKind
-    , lIsIconUrlDefault
+    , lIsIconURLDefault
     , lName
     , lId
-    , lIconUrl
+    , lIconURL
     , lOrder
 
     -- ** EventDefinition
     , EventDefinition
     , eventDefinition
-    , edIsDefaultImageUrl
+    , edIsDefaultImageURL
     , edKind
     , edVisibility
-    , edImageUrl
+    , edImageURL
     , edDisplayName
     , edId
     , edChildEvents
@@ -704,15 +704,15 @@ module Network.Google.Games
     , auruAchievementId
     , auruKind
     , auruUpdateType
-    , auruSetStepsAtLeastPayload
-    , auruIncrementPayload
+    , auruSetStepsAtLeastPayLoad
+    , auruIncrementPayLoad
 
     -- ** ImageAsset
     , ImageAsset
     , imageAsset
     , iaHeight
     , iaKind
-    , iaUrl
+    , iaURL
     , iaWidth
     , iaName
 
@@ -783,23 +783,23 @@ module Network.Google.Games
     , achievementDefinition
     , adAchievementType
     , adFormattedTotalSteps
-    , adRevealedIconUrl
+    , adRevealedIconURL
     , adKind
     , adExperiencePoints
     , adInitialState
     , adName
     , adId
-    , adIsUnlockedIconUrlDefault
+    , adIsUnlockedIconURLDefault
     , adTotalSteps
     , adDescription
-    , adIsRevealedIconUrlDefault
-    , adUnlockedIconUrl
+    , adIsRevealedIconURLDefault
+    , adUnlockedIconURL
 
     -- ** PushTokenIdIos
     , PushTokenIdIos
     , pushTokenIdIos
-    , ptiiApnsDeviceToken
-    , ptiiApnsEnvironment
+    , ptiiAPNSDeviceToken
+    , ptiiAPNSEnvironment
 
     -- ** PlayerAchievementListResponse
     , PlayerAchievementListResponse
@@ -974,7 +974,7 @@ module Network.Google.Games
     , Player
     , player
     , plaLastPlayedWith
-    , plaAvatarImageUrl
+    , plaAvatarImageURL
     , plaKind
     , plaExperienceInfo
     , plaName
@@ -994,7 +994,7 @@ module Network.Google.Games
     , instanceWebDetails
     , iwdPreferred
     , iwdKind
-    , iwdLaunchUrl
+    , iwdLaunchURL
 
     -- ** GamesScoresListWindowCollection
     , GamesScoresListWindowCollection (..)
@@ -1029,7 +1029,7 @@ module Network.Google.Games
     , Quest
     , quest
     , queLastUpdatedTimestampMillis
-    , queBannerUrl
+    , queBannerURL
     , queState
     , queMilestones
     , queKind
@@ -1037,12 +1037,12 @@ module Network.Google.Games
     , queEndTimestampMillis
     , queName
     , queId
-    , queIconUrl
+    , queIconURL
     , queStartTimestampMillis
     , queNotifyTimestampMillis
     , queDescription
-    , queIsDefaultBannerUrl
-    , queIsDefaultIconUrl
+    , queIsDefaultBannerURL
+    , queIsDefaultIconURL
     , queAcceptedTimestampMillis
 
     -- ** EventRecordFailure
@@ -1060,7 +1060,7 @@ module Network.Google.Games
     , iWebInstance
     , iIosInstance
     , iName
-    , iAcquisitionUri
+    , iAcquisitionURI
     , iPlatformType
     , iTurnBasedPlay
     , iRealtimePlay
@@ -1076,9 +1076,6 @@ module Network.Google.Games
 
     -- ** GamesScoresListWindowTimeSpan
     , GamesScoresListWindowTimeSpan (..)
-
-    -- ** Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.Games.Types

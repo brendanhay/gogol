@@ -32,12 +32,11 @@ module Network.Google.Resource.DFAReporting.PostalCodes.List
     -- * Request Lenses
     , pclQuotaUser
     , pclPrettyPrint
-    , pclUserIp
+    , pclUserIP
     , pclProfileId
     , pclKey
-    , pclOauthToken
+    , pclOAuthToken
     , pclFields
-    , pclAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,10 +51,10 @@ type PostalCodesListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :>
+                       QueryParam "alt" AltJSON :>
                          Get '[JSON] PostalCodesListResponse
 
 -- | Retrieves a list of postal codes.
@@ -64,12 +63,11 @@ type PostalCodesListResource =
 data PostalCodesList' = PostalCodesList'
     { _pclQuotaUser   :: !(Maybe Text)
     , _pclPrettyPrint :: !Bool
-    , _pclUserIp      :: !(Maybe Text)
+    , _pclUserIP      :: !(Maybe Text)
     , _pclProfileId   :: !Int64
-    , _pclKey         :: !(Maybe Text)
-    , _pclOauthToken  :: !(Maybe Text)
+    , _pclKey         :: !(Maybe Key)
+    , _pclOAuthToken  :: !(Maybe OAuthToken)
     , _pclFields      :: !(Maybe Text)
-    , _pclAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostalCodesList'' with the minimum fields required to make a request.
@@ -80,17 +78,15 @@ data PostalCodesList' = PostalCodesList'
 --
 -- * 'pclPrettyPrint'
 --
--- * 'pclUserIp'
+-- * 'pclUserIP'
 --
 -- * 'pclProfileId'
 --
 -- * 'pclKey'
 --
--- * 'pclOauthToken'
+-- * 'pclOAuthToken'
 --
 -- * 'pclFields'
---
--- * 'pclAlt'
 postalCodesList'
     :: Int64 -- ^ 'profileId'
     -> PostalCodesList'
@@ -98,12 +94,11 @@ postalCodesList' pPclProfileId_ =
     PostalCodesList'
     { _pclQuotaUser = Nothing
     , _pclPrettyPrint = True
-    , _pclUserIp = Nothing
+    , _pclUserIP = Nothing
     , _pclProfileId = pPclProfileId_
     , _pclKey = Nothing
-    , _pclOauthToken = Nothing
+    , _pclOAuthToken = Nothing
     , _pclFields = Nothing
-    , _pclAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -121,9 +116,9 @@ pclPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-pclUserIp :: Lens' PostalCodesList' (Maybe Text)
-pclUserIp
-  = lens _pclUserIp (\ s a -> s{_pclUserIp = a})
+pclUserIP :: Lens' PostalCodesList' (Maybe Text)
+pclUserIP
+  = lens _pclUserIP (\ s a -> s{_pclUserIP = a})
 
 -- | User profile ID associated with this request.
 pclProfileId :: Lens' PostalCodesList' Int64
@@ -133,34 +128,34 @@ pclProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pclKey :: Lens' PostalCodesList' (Maybe Text)
+pclKey :: Lens' PostalCodesList' (Maybe Key)
 pclKey = lens _pclKey (\ s a -> s{_pclKey = a})
 
 -- | OAuth 2.0 token for the current user.
-pclOauthToken :: Lens' PostalCodesList' (Maybe Text)
-pclOauthToken
-  = lens _pclOauthToken
-      (\ s a -> s{_pclOauthToken = a})
+pclOAuthToken :: Lens' PostalCodesList' (Maybe OAuthToken)
+pclOAuthToken
+  = lens _pclOAuthToken
+      (\ s a -> s{_pclOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 pclFields :: Lens' PostalCodesList' (Maybe Text)
 pclFields
   = lens _pclFields (\ s a -> s{_pclFields = a})
 
--- | Data format for the response.
-pclAlt :: Lens' PostalCodesList' Alt
-pclAlt = lens _pclAlt (\ s a -> s{_pclAlt = a})
+instance GoogleAuth PostalCodesList' where
+        authKey = pclKey . _Just
+        authToken = pclOAuthToken . _Just
 
 instance GoogleRequest PostalCodesList' where
         type Rs PostalCodesList' = PostalCodesListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PostalCodesList'{..}
-          = go _pclQuotaUser (Just _pclPrettyPrint) _pclUserIp
+          = go _pclQuotaUser (Just _pclPrettyPrint) _pclUserIP
               _pclProfileId
               _pclKey
-              _pclOauthToken
+              _pclOAuthToken
               _pclFields
-              (Just _pclAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PostalCodesListResource)

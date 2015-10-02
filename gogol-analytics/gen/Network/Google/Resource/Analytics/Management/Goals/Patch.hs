@@ -35,13 +35,13 @@ module Network.Google.Resource.Analytics.Management.Goals.Patch
     , mgpPrettyPrint
     , mgpWebPropertyId
     , mgpGoalId
-    , mgpUserIp
+    , mgpUserIP
     , mgpProfileId
     , mgpAccountId
     , mgpKey
-    , mgpOauthToken
+    , mgpGoal
+    , mgpOAuthToken
     , mgpFields
-    , mgpAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -62,10 +62,11 @@ type ManagementGoalsPatchResource =
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "alt" Alt :> Patch '[JSON] Goal
+                                   QueryParam "alt" AltJSON :>
+                                     ReqBody '[JSON] Goal :> Patch '[JSON] Goal
 
 -- | Updates an existing view (profile). This method supports patch
 -- semantics.
@@ -76,13 +77,13 @@ data ManagementGoalsPatch' = ManagementGoalsPatch'
     , _mgpPrettyPrint   :: !Bool
     , _mgpWebPropertyId :: !Text
     , _mgpGoalId        :: !Text
-    , _mgpUserIp        :: !(Maybe Text)
+    , _mgpUserIP        :: !(Maybe Text)
     , _mgpProfileId     :: !Text
     , _mgpAccountId     :: !Text
-    , _mgpKey           :: !(Maybe Text)
-    , _mgpOauthToken    :: !(Maybe Text)
+    , _mgpKey           :: !(Maybe Key)
+    , _mgpGoal          :: !Goal
+    , _mgpOAuthToken    :: !(Maybe OAuthToken)
     , _mgpFields        :: !(Maybe Text)
-    , _mgpAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementGoalsPatch'' with the minimum fields required to make a request.
@@ -97,7 +98,7 @@ data ManagementGoalsPatch' = ManagementGoalsPatch'
 --
 -- * 'mgpGoalId'
 --
--- * 'mgpUserIp'
+-- * 'mgpUserIP'
 --
 -- * 'mgpProfileId'
 --
@@ -105,30 +106,31 @@ data ManagementGoalsPatch' = ManagementGoalsPatch'
 --
 -- * 'mgpKey'
 --
--- * 'mgpOauthToken'
+-- * 'mgpGoal'
+--
+-- * 'mgpOAuthToken'
 --
 -- * 'mgpFields'
---
--- * 'mgpAlt'
 managementGoalsPatch'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'goalId'
     -> Text -- ^ 'profileId'
     -> Text -- ^ 'accountId'
+    -> Goal -- ^ 'Goal'
     -> ManagementGoalsPatch'
-managementGoalsPatch' pMgpWebPropertyId_ pMgpGoalId_ pMgpProfileId_ pMgpAccountId_ =
+managementGoalsPatch' pMgpWebPropertyId_ pMgpGoalId_ pMgpProfileId_ pMgpAccountId_ pMgpGoal_ =
     ManagementGoalsPatch'
     { _mgpQuotaUser = Nothing
     , _mgpPrettyPrint = False
     , _mgpWebPropertyId = pMgpWebPropertyId_
     , _mgpGoalId = pMgpGoalId_
-    , _mgpUserIp = Nothing
+    , _mgpUserIP = Nothing
     , _mgpProfileId = pMgpProfileId_
     , _mgpAccountId = pMgpAccountId_
     , _mgpKey = Nothing
-    , _mgpOauthToken = Nothing
+    , _mgpGoal = pMgpGoal_
+    , _mgpOAuthToken = Nothing
     , _mgpFields = Nothing
-    , _mgpAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -157,9 +159,9 @@ mgpGoalId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mgpUserIp :: Lens' ManagementGoalsPatch' (Maybe Text)
-mgpUserIp
-  = lens _mgpUserIp (\ s a -> s{_mgpUserIp = a})
+mgpUserIP :: Lens' ManagementGoalsPatch' (Maybe Text)
+mgpUserIP
+  = lens _mgpUserIP (\ s a -> s{_mgpUserIP = a})
 
 -- | View (Profile) ID to update the goal.
 mgpProfileId :: Lens' ManagementGoalsPatch' Text
@@ -174,23 +176,27 @@ mgpAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mgpKey :: Lens' ManagementGoalsPatch' (Maybe Text)
+mgpKey :: Lens' ManagementGoalsPatch' (Maybe Key)
 mgpKey = lens _mgpKey (\ s a -> s{_mgpKey = a})
 
+-- | Multipart request metadata.
+mgpGoal :: Lens' ManagementGoalsPatch' Goal
+mgpGoal = lens _mgpGoal (\ s a -> s{_mgpGoal = a})
+
 -- | OAuth 2.0 token for the current user.
-mgpOauthToken :: Lens' ManagementGoalsPatch' (Maybe Text)
-mgpOauthToken
-  = lens _mgpOauthToken
-      (\ s a -> s{_mgpOauthToken = a})
+mgpOAuthToken :: Lens' ManagementGoalsPatch' (Maybe OAuthToken)
+mgpOAuthToken
+  = lens _mgpOAuthToken
+      (\ s a -> s{_mgpOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 mgpFields :: Lens' ManagementGoalsPatch' (Maybe Text)
 mgpFields
   = lens _mgpFields (\ s a -> s{_mgpFields = a})
 
--- | Data format for the response.
-mgpAlt :: Lens' ManagementGoalsPatch' Alt
-mgpAlt = lens _mgpAlt (\ s a -> s{_mgpAlt = a})
+instance GoogleAuth ManagementGoalsPatch' where
+        authKey = mgpKey . _Just
+        authToken = mgpOAuthToken . _Just
 
 instance GoogleRequest ManagementGoalsPatch' where
         type Rs ManagementGoalsPatch' = Goal
@@ -199,13 +205,14 @@ instance GoogleRequest ManagementGoalsPatch' where
           = go _mgpQuotaUser (Just _mgpPrettyPrint)
               _mgpWebPropertyId
               _mgpGoalId
-              _mgpUserIp
+              _mgpUserIP
               _mgpProfileId
               _mgpAccountId
               _mgpKey
-              _mgpOauthToken
+              _mgpOAuthToken
               _mgpFields
-              (Just _mgpAlt)
+              (Just AltJSON)
+              _mgpGoal
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ManagementGoalsPatchResource)

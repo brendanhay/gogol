@@ -32,13 +32,12 @@ module Network.Google.Resource.Gmail.Users.Messages.Untrash
     -- * Request Lenses
     , umuQuotaUser
     , umuPrettyPrint
-    , umuUserIp
+    , umuUserIP
     , umuUserId
     , umuKey
     , umuId
-    , umuOauthToken
+    , umuOAuthToken
     , umuFields
-    , umuAlt
     ) where
 
 import           Network.Google.Gmail.Types
@@ -54,10 +53,10 @@ type UsersMessagesUntrashResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Post '[JSON] Message
+                         QueryParam "alt" AltJSON :> Post '[JSON] Message
 
 -- | Removes the specified message from the trash.
 --
@@ -65,13 +64,12 @@ type UsersMessagesUntrashResource =
 data UsersMessagesUntrash' = UsersMessagesUntrash'
     { _umuQuotaUser   :: !(Maybe Text)
     , _umuPrettyPrint :: !Bool
-    , _umuUserIp      :: !(Maybe Text)
+    , _umuUserIP      :: !(Maybe Text)
     , _umuUserId      :: !Text
-    , _umuKey         :: !(Maybe Text)
+    , _umuKey         :: !(Maybe Key)
     , _umuId          :: !Text
-    , _umuOauthToken  :: !(Maybe Text)
+    , _umuOAuthToken  :: !(Maybe OAuthToken)
     , _umuFields      :: !(Maybe Text)
-    , _umuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersMessagesUntrash'' with the minimum fields required to make a request.
@@ -82,7 +80,7 @@ data UsersMessagesUntrash' = UsersMessagesUntrash'
 --
 -- * 'umuPrettyPrint'
 --
--- * 'umuUserIp'
+-- * 'umuUserIP'
 --
 -- * 'umuUserId'
 --
@@ -90,11 +88,9 @@ data UsersMessagesUntrash' = UsersMessagesUntrash'
 --
 -- * 'umuId'
 --
--- * 'umuOauthToken'
+-- * 'umuOAuthToken'
 --
 -- * 'umuFields'
---
--- * 'umuAlt'
 usersMessagesUntrash'
     :: Text -- ^ 'id'
     -> Text
@@ -103,13 +99,12 @@ usersMessagesUntrash' pUmuUserId_ pUmuId_ =
     UsersMessagesUntrash'
     { _umuQuotaUser = Nothing
     , _umuPrettyPrint = True
-    , _umuUserIp = Nothing
+    , _umuUserIP = Nothing
     , _umuUserId = pUmuUserId_
     , _umuKey = Nothing
     , _umuId = pUmuId_
-    , _umuOauthToken = Nothing
+    , _umuOAuthToken = Nothing
     , _umuFields = Nothing
-    , _umuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,9 +122,9 @@ umuPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-umuUserIp :: Lens' UsersMessagesUntrash' (Maybe Text)
-umuUserIp
-  = lens _umuUserIp (\ s a -> s{_umuUserIp = a})
+umuUserIP :: Lens' UsersMessagesUntrash' (Maybe Text)
+umuUserIP
+  = lens _umuUserIP (\ s a -> s{_umuUserIP = a})
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
@@ -140,7 +135,7 @@ umuUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-umuKey :: Lens' UsersMessagesUntrash' (Maybe Text)
+umuKey :: Lens' UsersMessagesUntrash' (Maybe Key)
 umuKey = lens _umuKey (\ s a -> s{_umuKey = a})
 
 -- | The ID of the message to remove from Trash.
@@ -148,31 +143,31 @@ umuId :: Lens' UsersMessagesUntrash' Text
 umuId = lens _umuId (\ s a -> s{_umuId = a})
 
 -- | OAuth 2.0 token for the current user.
-umuOauthToken :: Lens' UsersMessagesUntrash' (Maybe Text)
-umuOauthToken
-  = lens _umuOauthToken
-      (\ s a -> s{_umuOauthToken = a})
+umuOAuthToken :: Lens' UsersMessagesUntrash' (Maybe OAuthToken)
+umuOAuthToken
+  = lens _umuOAuthToken
+      (\ s a -> s{_umuOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 umuFields :: Lens' UsersMessagesUntrash' (Maybe Text)
 umuFields
   = lens _umuFields (\ s a -> s{_umuFields = a})
 
--- | Data format for the response.
-umuAlt :: Lens' UsersMessagesUntrash' Alt
-umuAlt = lens _umuAlt (\ s a -> s{_umuAlt = a})
+instance GoogleAuth UsersMessagesUntrash' where
+        authKey = umuKey . _Just
+        authToken = umuOAuthToken . _Just
 
 instance GoogleRequest UsersMessagesUntrash' where
         type Rs UsersMessagesUntrash' = Message
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersMessagesUntrash'{..}
-          = go _umuQuotaUser (Just _umuPrettyPrint) _umuUserIp
+          = go _umuQuotaUser (Just _umuPrettyPrint) _umuUserIP
               _umuUserId
               _umuKey
               _umuId
-              _umuOauthToken
+              _umuOAuthToken
               _umuFields
-              (Just _umuAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersMessagesUntrashResource)

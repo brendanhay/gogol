@@ -32,13 +32,12 @@ module Network.Google.Resource.Fitness.Users.DataSources.Get
     -- * Request Lenses
     , udsgQuotaUser
     , udsgPrettyPrint
-    , udsgUserIp
+    , udsgUserIP
     , udsgDataSourceId
     , udsgUserId
     , udsgKey
-    , udsgOauthToken
+    , udsgOAuthToken
     , udsgFields
-    , udsgAlt
     ) where
 
 import           Network.Google.Fitness.Types
@@ -53,10 +52,10 @@ type UsersDataSourcesGetResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Get '[JSON] DataSource
+                       QueryParam "alt" AltJSON :> Get '[JSON] DataSource
 
 -- | Returns a data source identified by a data stream ID.
 --
@@ -64,13 +63,12 @@ type UsersDataSourcesGetResource =
 data UsersDataSourcesGet' = UsersDataSourcesGet'
     { _udsgQuotaUser    :: !(Maybe Text)
     , _udsgPrettyPrint  :: !Bool
-    , _udsgUserIp       :: !(Maybe Text)
+    , _udsgUserIP       :: !(Maybe Text)
     , _udsgDataSourceId :: !Text
     , _udsgUserId       :: !Text
-    , _udsgKey          :: !(Maybe Text)
-    , _udsgOauthToken   :: !(Maybe Text)
+    , _udsgKey          :: !(Maybe Key)
+    , _udsgOAuthToken   :: !(Maybe OAuthToken)
     , _udsgFields       :: !(Maybe Text)
-    , _udsgAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDataSourcesGet'' with the minimum fields required to make a request.
@@ -81,7 +79,7 @@ data UsersDataSourcesGet' = UsersDataSourcesGet'
 --
 -- * 'udsgPrettyPrint'
 --
--- * 'udsgUserIp'
+-- * 'udsgUserIP'
 --
 -- * 'udsgDataSourceId'
 --
@@ -89,11 +87,9 @@ data UsersDataSourcesGet' = UsersDataSourcesGet'
 --
 -- * 'udsgKey'
 --
--- * 'udsgOauthToken'
+-- * 'udsgOAuthToken'
 --
 -- * 'udsgFields'
---
--- * 'udsgAlt'
 usersDataSourcesGet'
     :: Text -- ^ 'dataSourceId'
     -> Text -- ^ 'userId'
@@ -102,13 +98,12 @@ usersDataSourcesGet' pUdsgDataSourceId_ pUdsgUserId_ =
     UsersDataSourcesGet'
     { _udsgQuotaUser = Nothing
     , _udsgPrettyPrint = True
-    , _udsgUserIp = Nothing
+    , _udsgUserIP = Nothing
     , _udsgDataSourceId = pUdsgDataSourceId_
     , _udsgUserId = pUdsgUserId_
     , _udsgKey = Nothing
-    , _udsgOauthToken = Nothing
+    , _udsgOAuthToken = Nothing
     , _udsgFields = Nothing
-    , _udsgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,9 +122,9 @@ udsgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-udsgUserIp :: Lens' UsersDataSourcesGet' (Maybe Text)
-udsgUserIp
-  = lens _udsgUserIp (\ s a -> s{_udsgUserIp = a})
+udsgUserIP :: Lens' UsersDataSourcesGet' (Maybe Text)
+udsgUserIP
+  = lens _udsgUserIP (\ s a -> s{_udsgUserIP = a})
 
 -- | The data stream ID of the data source to retrieve.
 udsgDataSourceId :: Lens' UsersDataSourcesGet' Text
@@ -146,36 +141,36 @@ udsgUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-udsgKey :: Lens' UsersDataSourcesGet' (Maybe Text)
+udsgKey :: Lens' UsersDataSourcesGet' (Maybe Key)
 udsgKey = lens _udsgKey (\ s a -> s{_udsgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-udsgOauthToken :: Lens' UsersDataSourcesGet' (Maybe Text)
-udsgOauthToken
-  = lens _udsgOauthToken
-      (\ s a -> s{_udsgOauthToken = a})
+udsgOAuthToken :: Lens' UsersDataSourcesGet' (Maybe OAuthToken)
+udsgOAuthToken
+  = lens _udsgOAuthToken
+      (\ s a -> s{_udsgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 udsgFields :: Lens' UsersDataSourcesGet' (Maybe Text)
 udsgFields
   = lens _udsgFields (\ s a -> s{_udsgFields = a})
 
--- | Data format for the response.
-udsgAlt :: Lens' UsersDataSourcesGet' Alt
-udsgAlt = lens _udsgAlt (\ s a -> s{_udsgAlt = a})
+instance GoogleAuth UsersDataSourcesGet' where
+        authKey = udsgKey . _Just
+        authToken = udsgOAuthToken . _Just
 
 instance GoogleRequest UsersDataSourcesGet' where
         type Rs UsersDataSourcesGet' = DataSource
         request = requestWithRoute defReq fitnessURL
         requestWithRoute r u UsersDataSourcesGet'{..}
           = go _udsgQuotaUser (Just _udsgPrettyPrint)
-              _udsgUserIp
+              _udsgUserIP
               _udsgDataSourceId
               _udsgUserId
               _udsgKey
-              _udsgOauthToken
+              _udsgOAuthToken
               _udsgFields
-              (Just _udsgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersDataSourcesGetResource)

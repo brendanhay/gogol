@@ -36,7 +36,7 @@ module Network.Google.Resource.YouTube.Channels.List
     , clPrettyPrint
     , clMine
     , clForUsername
-    , clUserIp
+    , clUserIP
     , clHl
     , clOnBehalfOfContentOwner
     , clKey
@@ -44,11 +44,10 @@ module Network.Google.Resource.YouTube.Channels.List
     , clId
     , clMySubscribers
     , clPageToken
-    , clOauthToken
+    , clOAuthToken
     , clManagedByMe
     , clMaxResults
     , clFields
-    , clAlt
     ) where
 
 import           Network.Google.Prelude
@@ -66,16 +65,16 @@ type ChannelsListResource =
                  QueryParam "userIp" Text :>
                    QueryParam "hl" Text :>
                      QueryParam "onBehalfOfContentOwner" Text :>
-                       QueryParam "key" Text :>
+                       QueryParam "key" Key :>
                          QueryParam "categoryId" Text :>
                            QueryParam "id" Text :>
                              QueryParam "mySubscribers" Bool :>
                                QueryParam "pageToken" Text :>
-                                 QueryParam "oauth_token" Text :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "managedByMe" Bool :>
                                      QueryParam "maxResults" Word32 :>
                                        QueryParam "fields" Text :>
-                                         QueryParam "alt" Alt :>
+                                         QueryParam "alt" AltJSON :>
                                            Get '[JSON] ChannelListResponse
 
 -- | Returns a collection of zero or more channel resources that match the
@@ -88,19 +87,18 @@ data ChannelsList' = ChannelsList'
     , _clPrettyPrint            :: !Bool
     , _clMine                   :: !(Maybe Bool)
     , _clForUsername            :: !(Maybe Text)
-    , _clUserIp                 :: !(Maybe Text)
+    , _clUserIP                 :: !(Maybe Text)
     , _clHl                     :: !(Maybe Text)
     , _clOnBehalfOfContentOwner :: !(Maybe Text)
-    , _clKey                    :: !(Maybe Text)
+    , _clKey                    :: !(Maybe Key)
     , _clCategoryId             :: !(Maybe Text)
     , _clId                     :: !(Maybe Text)
     , _clMySubscribers          :: !(Maybe Bool)
     , _clPageToken              :: !(Maybe Text)
-    , _clOauthToken             :: !(Maybe Text)
+    , _clOAuthToken             :: !(Maybe OAuthToken)
     , _clManagedByMe            :: !(Maybe Bool)
     , _clMaxResults             :: !Word32
     , _clFields                 :: !(Maybe Text)
-    , _clAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChannelsList'' with the minimum fields required to make a request.
@@ -117,7 +115,7 @@ data ChannelsList' = ChannelsList'
 --
 -- * 'clForUsername'
 --
--- * 'clUserIp'
+-- * 'clUserIP'
 --
 -- * 'clHl'
 --
@@ -133,15 +131,13 @@ data ChannelsList' = ChannelsList'
 --
 -- * 'clPageToken'
 --
--- * 'clOauthToken'
+-- * 'clOAuthToken'
 --
 -- * 'clManagedByMe'
 --
 -- * 'clMaxResults'
 --
 -- * 'clFields'
---
--- * 'clAlt'
 channelsList'
     :: Text -- ^ 'part'
     -> ChannelsList'
@@ -152,7 +148,7 @@ channelsList' pClPart_ =
     , _clPrettyPrint = True
     , _clMine = Nothing
     , _clForUsername = Nothing
-    , _clUserIp = Nothing
+    , _clUserIP = Nothing
     , _clHl = Nothing
     , _clOnBehalfOfContentOwner = Nothing
     , _clKey = Nothing
@@ -160,11 +156,10 @@ channelsList' pClPart_ =
     , _clId = Nothing
     , _clMySubscribers = Nothing
     , _clPageToken = Nothing
-    , _clOauthToken = Nothing
+    , _clOAuthToken = Nothing
     , _clManagedByMe = Nothing
     , _clMaxResults = 5
     , _clFields = Nothing
-    , _clAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -204,8 +199,8 @@ clForUsername
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-clUserIp :: Lens' ChannelsList' (Maybe Text)
-clUserIp = lens _clUserIp (\ s a -> s{_clUserIp = a})
+clUserIP :: Lens' ChannelsList' (Maybe Text)
+clUserIP = lens _clUserIP (\ s a -> s{_clUserIP = a})
 
 -- | The hl parameter should be used for filter out the properties that are
 -- not in the given language. Used for the brandingSettings part.
@@ -230,7 +225,7 @@ clOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-clKey :: Lens' ChannelsList' (Maybe Text)
+clKey :: Lens' ChannelsList' (Maybe Key)
 clKey = lens _clKey (\ s a -> s{_clKey = a})
 
 -- | The categoryId parameter specifies a YouTube guide category, thereby
@@ -260,9 +255,9 @@ clPageToken
   = lens _clPageToken (\ s a -> s{_clPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-clOauthToken :: Lens' ChannelsList' (Maybe Text)
-clOauthToken
-  = lens _clOauthToken (\ s a -> s{_clOauthToken = a})
+clOAuthToken :: Lens' ChannelsList' (Maybe OAuthToken)
+clOAuthToken
+  = lens _clOAuthToken (\ s a -> s{_clOAuthToken = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. Set this parameter\'s value to true to instruct the API to
@@ -285,9 +280,9 @@ clMaxResults
 clFields :: Lens' ChannelsList' (Maybe Text)
 clFields = lens _clFields (\ s a -> s{_clFields = a})
 
--- | Data format for the response.
-clAlt :: Lens' ChannelsList' Alt
-clAlt = lens _clAlt (\ s a -> s{_clAlt = a})
+instance GoogleAuth ChannelsList' where
+        authKey = clKey . _Just
+        authToken = clOAuthToken . _Just
 
 instance GoogleRequest ChannelsList' where
         type Rs ChannelsList' = ChannelListResponse
@@ -297,7 +292,7 @@ instance GoogleRequest ChannelsList' where
               (Just _clPrettyPrint)
               _clMine
               _clForUsername
-              _clUserIp
+              _clUserIP
               _clHl
               _clOnBehalfOfContentOwner
               _clKey
@@ -305,11 +300,11 @@ instance GoogleRequest ChannelsList' where
               _clId
               _clMySubscribers
               _clPageToken
-              _clOauthToken
+              _clOAuthToken
               _clManagedByMe
               (Just _clMaxResults)
               _clFields
-              (Just _clAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ChannelsListResource)

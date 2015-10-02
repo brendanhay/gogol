@@ -32,12 +32,12 @@ module Network.Google.Resource.Datastore.Datasets.BeginTransaction
     -- * Request Lenses
     , dbtQuotaUser
     , dbtPrettyPrint
-    , dbtUserIp
+    , dbtBeginTransactionRequest
+    , dbtUserIP
     , dbtKey
     , dbtDatasetId
-    , dbtOauthToken
+    , dbtOAuthToken
     , dbtFields
-    , dbtAlt
     ) where
 
 import           Network.Google.Datastore.Types
@@ -51,24 +51,25 @@ type DatasetsBeginTransactionResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :>
-                       Post '[JSON] BeginTransactionResponse
+                     QueryParam "alt" AltPROTO :>
+                       ReqBody '[JSON] BeginTransactionRequest :>
+                         Post '[JSON] BeginTransactionResponse
 
 -- | Begin a new transaction.
 --
 -- /See:/ 'datasetsBeginTransaction'' smart constructor.
 data DatasetsBeginTransaction' = DatasetsBeginTransaction'
-    { _dbtQuotaUser   :: !(Maybe Text)
-    , _dbtPrettyPrint :: !Bool
-    , _dbtUserIp      :: !(Maybe Text)
-    , _dbtKey         :: !(Maybe Text)
-    , _dbtDatasetId   :: !Text
-    , _dbtOauthToken  :: !(Maybe Text)
-    , _dbtFields      :: !(Maybe Text)
-    , _dbtAlt         :: !Alt
+    { _dbtQuotaUser               :: !(Maybe Text)
+    , _dbtPrettyPrint             :: !Bool
+    , _dbtBeginTransactionRequest :: !BeginTransactionRequest
+    , _dbtUserIP                  :: !(Maybe Text)
+    , _dbtKey                     :: !(Maybe Key)
+    , _dbtDatasetId               :: !Text
+    , _dbtOAuthToken              :: !(Maybe OAuthToken)
+    , _dbtFields                  :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetsBeginTransaction'' with the minimum fields required to make a request.
@@ -79,30 +80,31 @@ data DatasetsBeginTransaction' = DatasetsBeginTransaction'
 --
 -- * 'dbtPrettyPrint'
 --
--- * 'dbtUserIp'
+-- * 'dbtBeginTransactionRequest'
+--
+-- * 'dbtUserIP'
 --
 -- * 'dbtKey'
 --
 -- * 'dbtDatasetId'
 --
--- * 'dbtOauthToken'
+-- * 'dbtOAuthToken'
 --
 -- * 'dbtFields'
---
--- * 'dbtAlt'
 datasetsBeginTransaction'
-    :: Text -- ^ 'datasetId'
+    :: BeginTransactionRequest -- ^ 'BeginTransactionRequest'
+    -> Text -- ^ 'datasetId'
     -> DatasetsBeginTransaction'
-datasetsBeginTransaction' pDbtDatasetId_ =
+datasetsBeginTransaction' pDbtBeginTransactionRequest_ pDbtDatasetId_ =
     DatasetsBeginTransaction'
     { _dbtQuotaUser = Nothing
     , _dbtPrettyPrint = True
-    , _dbtUserIp = Nothing
+    , _dbtBeginTransactionRequest = pDbtBeginTransactionRequest_
+    , _dbtUserIP = Nothing
     , _dbtKey = Nothing
     , _dbtDatasetId = pDbtDatasetId_
-    , _dbtOauthToken = Nothing
+    , _dbtOAuthToken = Nothing
     , _dbtFields = Nothing
-    , _dbtAlt = Proto
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -118,16 +120,22 @@ dbtPrettyPrint
   = lens _dbtPrettyPrint
       (\ s a -> s{_dbtPrettyPrint = a})
 
+-- | Multipart request metadata.
+dbtBeginTransactionRequest :: Lens' DatasetsBeginTransaction' BeginTransactionRequest
+dbtBeginTransactionRequest
+  = lens _dbtBeginTransactionRequest
+      (\ s a -> s{_dbtBeginTransactionRequest = a})
+
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-dbtUserIp :: Lens' DatasetsBeginTransaction' (Maybe Text)
-dbtUserIp
-  = lens _dbtUserIp (\ s a -> s{_dbtUserIp = a})
+dbtUserIP :: Lens' DatasetsBeginTransaction' (Maybe Text)
+dbtUserIP
+  = lens _dbtUserIP (\ s a -> s{_dbtUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dbtKey :: Lens' DatasetsBeginTransaction' (Maybe Text)
+dbtKey :: Lens' DatasetsBeginTransaction' (Maybe Key)
 dbtKey = lens _dbtKey (\ s a -> s{_dbtKey = a})
 
 -- | Identifies the dataset.
@@ -136,19 +144,19 @@ dbtDatasetId
   = lens _dbtDatasetId (\ s a -> s{_dbtDatasetId = a})
 
 -- | OAuth 2.0 token for the current user.
-dbtOauthToken :: Lens' DatasetsBeginTransaction' (Maybe Text)
-dbtOauthToken
-  = lens _dbtOauthToken
-      (\ s a -> s{_dbtOauthToken = a})
+dbtOAuthToken :: Lens' DatasetsBeginTransaction' (Maybe OAuthToken)
+dbtOAuthToken
+  = lens _dbtOAuthToken
+      (\ s a -> s{_dbtOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 dbtFields :: Lens' DatasetsBeginTransaction' (Maybe Text)
 dbtFields
   = lens _dbtFields (\ s a -> s{_dbtFields = a})
 
--- | Data format for the response.
-dbtAlt :: Lens' DatasetsBeginTransaction' Alt
-dbtAlt = lens _dbtAlt (\ s a -> s{_dbtAlt = a})
+instance GoogleAuth DatasetsBeginTransaction' where
+        authKey = dbtKey . _Just
+        authToken = dbtOAuthToken . _Just
 
 instance GoogleRequest DatasetsBeginTransaction'
          where
@@ -156,12 +164,13 @@ instance GoogleRequest DatasetsBeginTransaction'
              BeginTransactionResponse
         request = requestWithRoute defReq datastoreURL
         requestWithRoute r u DatasetsBeginTransaction'{..}
-          = go _dbtQuotaUser (Just _dbtPrettyPrint) _dbtUserIp
+          = go _dbtQuotaUser (Just _dbtPrettyPrint) _dbtUserIP
               _dbtKey
               _dbtDatasetId
-              _dbtOauthToken
+              _dbtOAuthToken
               _dbtFields
-              (Just _dbtAlt)
+              (Just AltPROTO)
+              _dbtBeginTransactionRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy DatasetsBeginTransactionResource)

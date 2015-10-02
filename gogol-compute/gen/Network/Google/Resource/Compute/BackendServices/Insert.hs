@@ -34,11 +34,11 @@ module Network.Google.Resource.Compute.BackendServices.Insert
     , bsiQuotaUser
     , bsiPrettyPrint
     , bsiProject
-    , bsiUserIp
+    , bsiUserIP
     , bsiKey
-    , bsiOauthToken
+    , bsiOAuthToken
+    , bsiBackendService
     , bsiFields
-    , bsiAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -53,24 +53,26 @@ type BackendServicesInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] Operation
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] BackendService :>
+                           Post '[JSON] Operation
 
 -- | Creates a BackendService resource in the specified project using the
 -- data included in the request.
 --
 -- /See:/ 'backendServicesInsert'' smart constructor.
 data BackendServicesInsert' = BackendServicesInsert'
-    { _bsiQuotaUser   :: !(Maybe Text)
-    , _bsiPrettyPrint :: !Bool
-    , _bsiProject     :: !Text
-    , _bsiUserIp      :: !(Maybe Text)
-    , _bsiKey         :: !(Maybe Text)
-    , _bsiOauthToken  :: !(Maybe Text)
-    , _bsiFields      :: !(Maybe Text)
-    , _bsiAlt         :: !Alt
+    { _bsiQuotaUser      :: !(Maybe Text)
+    , _bsiPrettyPrint    :: !Bool
+    , _bsiProject        :: !Text
+    , _bsiUserIP         :: !(Maybe Text)
+    , _bsiKey            :: !(Maybe Key)
+    , _bsiOAuthToken     :: !(Maybe OAuthToken)
+    , _bsiBackendService :: !BackendService
+    , _bsiFields         :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BackendServicesInsert'' with the minimum fields required to make a request.
@@ -83,28 +85,29 @@ data BackendServicesInsert' = BackendServicesInsert'
 --
 -- * 'bsiProject'
 --
--- * 'bsiUserIp'
+-- * 'bsiUserIP'
 --
 -- * 'bsiKey'
 --
--- * 'bsiOauthToken'
+-- * 'bsiOAuthToken'
+--
+-- * 'bsiBackendService'
 --
 -- * 'bsiFields'
---
--- * 'bsiAlt'
 backendServicesInsert'
     :: Text -- ^ 'project'
+    -> BackendService -- ^ 'BackendService'
     -> BackendServicesInsert'
-backendServicesInsert' pBsiProject_ =
+backendServicesInsert' pBsiProject_ pBsiBackendService_ =
     BackendServicesInsert'
     { _bsiQuotaUser = Nothing
     , _bsiPrettyPrint = True
     , _bsiProject = pBsiProject_
-    , _bsiUserIp = Nothing
+    , _bsiUserIP = Nothing
     , _bsiKey = Nothing
-    , _bsiOauthToken = Nothing
+    , _bsiOAuthToken = Nothing
+    , _bsiBackendService = pBsiBackendService_
     , _bsiFields = Nothing
-    , _bsiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,41 +130,48 @@ bsiProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-bsiUserIp :: Lens' BackendServicesInsert' (Maybe Text)
-bsiUserIp
-  = lens _bsiUserIp (\ s a -> s{_bsiUserIp = a})
+bsiUserIP :: Lens' BackendServicesInsert' (Maybe Text)
+bsiUserIP
+  = lens _bsiUserIP (\ s a -> s{_bsiUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-bsiKey :: Lens' BackendServicesInsert' (Maybe Text)
+bsiKey :: Lens' BackendServicesInsert' (Maybe Key)
 bsiKey = lens _bsiKey (\ s a -> s{_bsiKey = a})
 
 -- | OAuth 2.0 token for the current user.
-bsiOauthToken :: Lens' BackendServicesInsert' (Maybe Text)
-bsiOauthToken
-  = lens _bsiOauthToken
-      (\ s a -> s{_bsiOauthToken = a})
+bsiOAuthToken :: Lens' BackendServicesInsert' (Maybe OAuthToken)
+bsiOAuthToken
+  = lens _bsiOAuthToken
+      (\ s a -> s{_bsiOAuthToken = a})
+
+-- | Multipart request metadata.
+bsiBackendService :: Lens' BackendServicesInsert' BackendService
+bsiBackendService
+  = lens _bsiBackendService
+      (\ s a -> s{_bsiBackendService = a})
 
 -- | Selector specifying which fields to include in a partial response.
 bsiFields :: Lens' BackendServicesInsert' (Maybe Text)
 bsiFields
   = lens _bsiFields (\ s a -> s{_bsiFields = a})
 
--- | Data format for the response.
-bsiAlt :: Lens' BackendServicesInsert' Alt
-bsiAlt = lens _bsiAlt (\ s a -> s{_bsiAlt = a})
+instance GoogleAuth BackendServicesInsert' where
+        authKey = bsiKey . _Just
+        authToken = bsiOAuthToken . _Just
 
 instance GoogleRequest BackendServicesInsert' where
         type Rs BackendServicesInsert' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u BackendServicesInsert'{..}
           = go _bsiQuotaUser (Just _bsiPrettyPrint) _bsiProject
-              _bsiUserIp
+              _bsiUserIP
               _bsiKey
-              _bsiOauthToken
+              _bsiOAuthToken
               _bsiFields
-              (Just _bsiAlt)
+              (Just AltJSON)
+              _bsiBackendService
           where go
                   = clientWithRoute
                       (Proxy :: Proxy BackendServicesInsertResource)

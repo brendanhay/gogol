@@ -33,12 +33,11 @@ module Network.Google.Resource.Compute.InstanceTemplates.Delete
     , itdQuotaUser
     , itdPrettyPrint
     , itdProject
-    , itdUserIp
+    , itdUserIP
     , itdInstanceTemplate
     , itdKey
-    , itdOauthToken
+    , itdOAuthToken
     , itdFields
-    , itdAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -54,10 +53,10 @@ type InstanceTemplatesDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Delete '[JSON] Operation
+                         QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified instance template.
 --
@@ -66,12 +65,11 @@ data InstanceTemplatesDelete' = InstanceTemplatesDelete'
     { _itdQuotaUser        :: !(Maybe Text)
     , _itdPrettyPrint      :: !Bool
     , _itdProject          :: !Text
-    , _itdUserIp           :: !(Maybe Text)
+    , _itdUserIP           :: !(Maybe Text)
     , _itdInstanceTemplate :: !Text
-    , _itdKey              :: !(Maybe Text)
-    , _itdOauthToken       :: !(Maybe Text)
+    , _itdKey              :: !(Maybe Key)
+    , _itdOAuthToken       :: !(Maybe OAuthToken)
     , _itdFields           :: !(Maybe Text)
-    , _itdAlt              :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceTemplatesDelete'' with the minimum fields required to make a request.
@@ -84,17 +82,15 @@ data InstanceTemplatesDelete' = InstanceTemplatesDelete'
 --
 -- * 'itdProject'
 --
--- * 'itdUserIp'
+-- * 'itdUserIP'
 --
 -- * 'itdInstanceTemplate'
 --
 -- * 'itdKey'
 --
--- * 'itdOauthToken'
+-- * 'itdOAuthToken'
 --
 -- * 'itdFields'
---
--- * 'itdAlt'
 instanceTemplatesDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'instanceTemplate'
@@ -104,12 +100,11 @@ instanceTemplatesDelete' pItdProject_ pItdInstanceTemplate_ =
     { _itdQuotaUser = Nothing
     , _itdPrettyPrint = True
     , _itdProject = pItdProject_
-    , _itdUserIp = Nothing
+    , _itdUserIP = Nothing
     , _itdInstanceTemplate = pItdInstanceTemplate_
     , _itdKey = Nothing
-    , _itdOauthToken = Nothing
+    , _itdOAuthToken = Nothing
     , _itdFields = Nothing
-    , _itdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -132,9 +127,9 @@ itdProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-itdUserIp :: Lens' InstanceTemplatesDelete' (Maybe Text)
-itdUserIp
-  = lens _itdUserIp (\ s a -> s{_itdUserIp = a})
+itdUserIP :: Lens' InstanceTemplatesDelete' (Maybe Text)
+itdUserIP
+  = lens _itdUserIP (\ s a -> s{_itdUserIP = a})
 
 -- | The name of the instance template to delete.
 itdInstanceTemplate :: Lens' InstanceTemplatesDelete' Text
@@ -145,35 +140,35 @@ itdInstanceTemplate
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-itdKey :: Lens' InstanceTemplatesDelete' (Maybe Text)
+itdKey :: Lens' InstanceTemplatesDelete' (Maybe Key)
 itdKey = lens _itdKey (\ s a -> s{_itdKey = a})
 
 -- | OAuth 2.0 token for the current user.
-itdOauthToken :: Lens' InstanceTemplatesDelete' (Maybe Text)
-itdOauthToken
-  = lens _itdOauthToken
-      (\ s a -> s{_itdOauthToken = a})
+itdOAuthToken :: Lens' InstanceTemplatesDelete' (Maybe OAuthToken)
+itdOAuthToken
+  = lens _itdOAuthToken
+      (\ s a -> s{_itdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 itdFields :: Lens' InstanceTemplatesDelete' (Maybe Text)
 itdFields
   = lens _itdFields (\ s a -> s{_itdFields = a})
 
--- | Data format for the response.
-itdAlt :: Lens' InstanceTemplatesDelete' Alt
-itdAlt = lens _itdAlt (\ s a -> s{_itdAlt = a})
+instance GoogleAuth InstanceTemplatesDelete' where
+        authKey = itdKey . _Just
+        authToken = itdOAuthToken . _Just
 
 instance GoogleRequest InstanceTemplatesDelete' where
         type Rs InstanceTemplatesDelete' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstanceTemplatesDelete'{..}
           = go _itdQuotaUser (Just _itdPrettyPrint) _itdProject
-              _itdUserIp
+              _itdUserIP
               _itdInstanceTemplate
               _itdKey
-              _itdOauthToken
+              _itdOAuthToken
               _itdFields
-              (Just _itdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InstanceTemplatesDeleteResource)

@@ -33,13 +33,13 @@ module Network.Google.Resource.Analytics.Management.Goals.Insert
     , mgiQuotaUser
     , mgiPrettyPrint
     , mgiWebPropertyId
-    , mgiUserIp
+    , mgiUserIP
     , mgiProfileId
     , mgiAccountId
     , mgiKey
-    , mgiOauthToken
+    , mgiGoal
+    , mgiOAuthToken
     , mgiFields
-    , mgiAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -59,10 +59,11 @@ type ManagementGoalsInsertResource =
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "fields" Text :>
-                                 QueryParam "alt" Alt :> Post '[JSON] Goal
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON] Goal :> Post '[JSON] Goal
 
 -- | Create a new goal.
 --
@@ -71,13 +72,13 @@ data ManagementGoalsInsert' = ManagementGoalsInsert'
     { _mgiQuotaUser     :: !(Maybe Text)
     , _mgiPrettyPrint   :: !Bool
     , _mgiWebPropertyId :: !Text
-    , _mgiUserIp        :: !(Maybe Text)
+    , _mgiUserIP        :: !(Maybe Text)
     , _mgiProfileId     :: !Text
     , _mgiAccountId     :: !Text
-    , _mgiKey           :: !(Maybe Text)
-    , _mgiOauthToken    :: !(Maybe Text)
+    , _mgiKey           :: !(Maybe Key)
+    , _mgiGoal          :: !Goal
+    , _mgiOAuthToken    :: !(Maybe OAuthToken)
     , _mgiFields        :: !(Maybe Text)
-    , _mgiAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementGoalsInsert'' with the minimum fields required to make a request.
@@ -90,7 +91,7 @@ data ManagementGoalsInsert' = ManagementGoalsInsert'
 --
 -- * 'mgiWebPropertyId'
 --
--- * 'mgiUserIp'
+-- * 'mgiUserIP'
 --
 -- * 'mgiProfileId'
 --
@@ -98,28 +99,29 @@ data ManagementGoalsInsert' = ManagementGoalsInsert'
 --
 -- * 'mgiKey'
 --
--- * 'mgiOauthToken'
+-- * 'mgiGoal'
+--
+-- * 'mgiOAuthToken'
 --
 -- * 'mgiFields'
---
--- * 'mgiAlt'
 managementGoalsInsert'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
     -> Text -- ^ 'accountId'
+    -> Goal -- ^ 'Goal'
     -> ManagementGoalsInsert'
-managementGoalsInsert' pMgiWebPropertyId_ pMgiProfileId_ pMgiAccountId_ =
+managementGoalsInsert' pMgiWebPropertyId_ pMgiProfileId_ pMgiAccountId_ pMgiGoal_ =
     ManagementGoalsInsert'
     { _mgiQuotaUser = Nothing
     , _mgiPrettyPrint = False
     , _mgiWebPropertyId = pMgiWebPropertyId_
-    , _mgiUserIp = Nothing
+    , _mgiUserIP = Nothing
     , _mgiProfileId = pMgiProfileId_
     , _mgiAccountId = pMgiAccountId_
     , _mgiKey = Nothing
-    , _mgiOauthToken = Nothing
+    , _mgiGoal = pMgiGoal_
+    , _mgiOAuthToken = Nothing
     , _mgiFields = Nothing
-    , _mgiAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -143,9 +145,9 @@ mgiWebPropertyId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mgiUserIp :: Lens' ManagementGoalsInsert' (Maybe Text)
-mgiUserIp
-  = lens _mgiUserIp (\ s a -> s{_mgiUserIp = a})
+mgiUserIP :: Lens' ManagementGoalsInsert' (Maybe Text)
+mgiUserIP
+  = lens _mgiUserIP (\ s a -> s{_mgiUserIP = a})
 
 -- | View (Profile) ID to create the goal for.
 mgiProfileId :: Lens' ManagementGoalsInsert' Text
@@ -160,23 +162,27 @@ mgiAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mgiKey :: Lens' ManagementGoalsInsert' (Maybe Text)
+mgiKey :: Lens' ManagementGoalsInsert' (Maybe Key)
 mgiKey = lens _mgiKey (\ s a -> s{_mgiKey = a})
 
+-- | Multipart request metadata.
+mgiGoal :: Lens' ManagementGoalsInsert' Goal
+mgiGoal = lens _mgiGoal (\ s a -> s{_mgiGoal = a})
+
 -- | OAuth 2.0 token for the current user.
-mgiOauthToken :: Lens' ManagementGoalsInsert' (Maybe Text)
-mgiOauthToken
-  = lens _mgiOauthToken
-      (\ s a -> s{_mgiOauthToken = a})
+mgiOAuthToken :: Lens' ManagementGoalsInsert' (Maybe OAuthToken)
+mgiOAuthToken
+  = lens _mgiOAuthToken
+      (\ s a -> s{_mgiOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 mgiFields :: Lens' ManagementGoalsInsert' (Maybe Text)
 mgiFields
   = lens _mgiFields (\ s a -> s{_mgiFields = a})
 
--- | Data format for the response.
-mgiAlt :: Lens' ManagementGoalsInsert' Alt
-mgiAlt = lens _mgiAlt (\ s a -> s{_mgiAlt = a})
+instance GoogleAuth ManagementGoalsInsert' where
+        authKey = mgiKey . _Just
+        authToken = mgiOAuthToken . _Just
 
 instance GoogleRequest ManagementGoalsInsert' where
         type Rs ManagementGoalsInsert' = Goal
@@ -184,13 +190,14 @@ instance GoogleRequest ManagementGoalsInsert' where
         requestWithRoute r u ManagementGoalsInsert'{..}
           = go _mgiQuotaUser (Just _mgiPrettyPrint)
               _mgiWebPropertyId
-              _mgiUserIp
+              _mgiUserIP
               _mgiProfileId
               _mgiAccountId
               _mgiKey
-              _mgiOauthToken
+              _mgiOAuthToken
               _mgiFields
-              (Just _mgiAlt)
+              (Just AltJSON)
+              _mgiGoal
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ManagementGoalsInsertResource)

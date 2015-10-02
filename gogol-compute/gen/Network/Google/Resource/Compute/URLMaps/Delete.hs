@@ -31,14 +31,13 @@ module Network.Google.Resource.Compute.URLMaps.Delete
 
     -- * Request Lenses
     , umdQuotaUser
-    , umdUrlMap
+    , umdURLMap
     , umdPrettyPrint
     , umdProject
-    , umdUserIp
+    , umdUserIP
     , umdKey
-    , umdOauthToken
+    , umdOAuthToken
     , umdFields
-    , umdAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -54,24 +53,23 @@ type UrlMapsDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Delete '[JSON] Operation
+                         QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified UrlMap resource.
 --
 -- /See:/ 'uRLMapsDelete'' smart constructor.
 data URLMapsDelete' = URLMapsDelete'
     { _umdQuotaUser   :: !(Maybe Text)
-    , _umdUrlMap      :: !Text
+    , _umdURLMap      :: !Text
     , _umdPrettyPrint :: !Bool
     , _umdProject     :: !Text
-    , _umdUserIp      :: !(Maybe Text)
-    , _umdKey         :: !(Maybe Text)
-    , _umdOauthToken  :: !(Maybe Text)
+    , _umdUserIP      :: !(Maybe Text)
+    , _umdKey         :: !(Maybe Key)
+    , _umdOAuthToken  :: !(Maybe OAuthToken)
     , _umdFields      :: !(Maybe Text)
-    , _umdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLMapsDelete'' with the minimum fields required to make a request.
@@ -80,36 +78,33 @@ data URLMapsDelete' = URLMapsDelete'
 --
 -- * 'umdQuotaUser'
 --
--- * 'umdUrlMap'
+-- * 'umdURLMap'
 --
 -- * 'umdPrettyPrint'
 --
 -- * 'umdProject'
 --
--- * 'umdUserIp'
+-- * 'umdUserIP'
 --
 -- * 'umdKey'
 --
--- * 'umdOauthToken'
+-- * 'umdOAuthToken'
 --
 -- * 'umdFields'
---
--- * 'umdAlt'
 uRLMapsDelete'
     :: Text -- ^ 'urlMap'
     -> Text -- ^ 'project'
     -> URLMapsDelete'
-uRLMapsDelete' pUmdUrlMap_ pUmdProject_ =
+uRLMapsDelete' pUmdURLMap_ pUmdProject_ =
     URLMapsDelete'
     { _umdQuotaUser = Nothing
-    , _umdUrlMap = pUmdUrlMap_
+    , _umdURLMap = pUmdURLMap_
     , _umdPrettyPrint = True
     , _umdProject = pUmdProject_
-    , _umdUserIp = Nothing
+    , _umdUserIP = Nothing
     , _umdKey = Nothing
-    , _umdOauthToken = Nothing
+    , _umdOAuthToken = Nothing
     , _umdFields = Nothing
-    , _umdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,9 +115,9 @@ umdQuotaUser
   = lens _umdQuotaUser (\ s a -> s{_umdQuotaUser = a})
 
 -- | Name of the UrlMap resource to delete.
-umdUrlMap :: Lens' URLMapsDelete' Text
-umdUrlMap
-  = lens _umdUrlMap (\ s a -> s{_umdUrlMap = a})
+umdURLMap :: Lens' URLMapsDelete' Text
+umdURLMap
+  = lens _umdURLMap (\ s a -> s{_umdURLMap = a})
 
 -- | Returns response with indentations and line breaks.
 umdPrettyPrint :: Lens' URLMapsDelete' Bool
@@ -137,42 +132,42 @@ umdProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-umdUserIp :: Lens' URLMapsDelete' (Maybe Text)
-umdUserIp
-  = lens _umdUserIp (\ s a -> s{_umdUserIp = a})
+umdUserIP :: Lens' URLMapsDelete' (Maybe Text)
+umdUserIP
+  = lens _umdUserIP (\ s a -> s{_umdUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-umdKey :: Lens' URLMapsDelete' (Maybe Text)
+umdKey :: Lens' URLMapsDelete' (Maybe Key)
 umdKey = lens _umdKey (\ s a -> s{_umdKey = a})
 
 -- | OAuth 2.0 token for the current user.
-umdOauthToken :: Lens' URLMapsDelete' (Maybe Text)
-umdOauthToken
-  = lens _umdOauthToken
-      (\ s a -> s{_umdOauthToken = a})
+umdOAuthToken :: Lens' URLMapsDelete' (Maybe OAuthToken)
+umdOAuthToken
+  = lens _umdOAuthToken
+      (\ s a -> s{_umdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 umdFields :: Lens' URLMapsDelete' (Maybe Text)
 umdFields
   = lens _umdFields (\ s a -> s{_umdFields = a})
 
--- | Data format for the response.
-umdAlt :: Lens' URLMapsDelete' Alt
-umdAlt = lens _umdAlt (\ s a -> s{_umdAlt = a})
+instance GoogleAuth URLMapsDelete' where
+        authKey = umdKey . _Just
+        authToken = umdOAuthToken . _Just
 
 instance GoogleRequest URLMapsDelete' where
         type Rs URLMapsDelete' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u URLMapsDelete'{..}
-          = go _umdQuotaUser _umdUrlMap (Just _umdPrettyPrint)
+          = go _umdQuotaUser _umdURLMap (Just _umdPrettyPrint)
               _umdProject
-              _umdUserIp
+              _umdUserIP
               _umdKey
-              _umdOauthToken
+              _umdOAuthToken
               _umdFields
-              (Just _umdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UrlMapsDeleteResource)

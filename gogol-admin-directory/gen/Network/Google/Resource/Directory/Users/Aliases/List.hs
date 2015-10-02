@@ -33,12 +33,11 @@ module Network.Google.Resource.Directory.Users.Aliases.List
     , ualEvent
     , ualQuotaUser
     , ualPrettyPrint
-    , ualUserIp
+    , ualUserIP
     , ualKey
-    , ualOauthToken
+    , ualOAuthToken
     , ualUserKey
     , ualFields
-    , ualAlt
     ) where
 
 import           Network.Google.AdminDirectory.Types
@@ -54,10 +53,10 @@ type UsersAliasesListResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] Aliases
+                         QueryParam "alt" AltJSON :> Get '[JSON] Aliases
 
 -- | List all aliases for a user
 --
@@ -66,12 +65,11 @@ data UsersAliasesList' = UsersAliasesList'
     { _ualEvent       :: !(Maybe DirectoryUsersAliasesListEvent)
     , _ualQuotaUser   :: !(Maybe Text)
     , _ualPrettyPrint :: !Bool
-    , _ualUserIp      :: !(Maybe Text)
-    , _ualKey         :: !(Maybe Text)
-    , _ualOauthToken  :: !(Maybe Text)
+    , _ualUserIP      :: !(Maybe Text)
+    , _ualKey         :: !(Maybe Key)
+    , _ualOAuthToken  :: !(Maybe OAuthToken)
     , _ualUserKey     :: !Text
     , _ualFields      :: !(Maybe Text)
-    , _ualAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersAliasesList'' with the minimum fields required to make a request.
@@ -84,17 +82,15 @@ data UsersAliasesList' = UsersAliasesList'
 --
 -- * 'ualPrettyPrint'
 --
--- * 'ualUserIp'
+-- * 'ualUserIP'
 --
 -- * 'ualKey'
 --
--- * 'ualOauthToken'
+-- * 'ualOAuthToken'
 --
 -- * 'ualUserKey'
 --
 -- * 'ualFields'
---
--- * 'ualAlt'
 usersAliasesList'
     :: Text -- ^ 'userKey'
     -> UsersAliasesList'
@@ -103,12 +99,11 @@ usersAliasesList' pUalUserKey_ =
     { _ualEvent = Nothing
     , _ualQuotaUser = Nothing
     , _ualPrettyPrint = True
-    , _ualUserIp = Nothing
+    , _ualUserIP = Nothing
     , _ualKey = Nothing
-    , _ualOauthToken = Nothing
+    , _ualOAuthToken = Nothing
     , _ualUserKey = pUalUserKey_
     , _ualFields = Nothing
-    , _ualAlt = JSON
     }
 
 -- | Event on which subscription is intended (if subscribing)
@@ -130,21 +125,21 @@ ualPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ualUserIp :: Lens' UsersAliasesList' (Maybe Text)
-ualUserIp
-  = lens _ualUserIp (\ s a -> s{_ualUserIp = a})
+ualUserIP :: Lens' UsersAliasesList' (Maybe Text)
+ualUserIP
+  = lens _ualUserIP (\ s a -> s{_ualUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ualKey :: Lens' UsersAliasesList' (Maybe Text)
+ualKey :: Lens' UsersAliasesList' (Maybe Key)
 ualKey = lens _ualKey (\ s a -> s{_ualKey = a})
 
 -- | OAuth 2.0 token for the current user.
-ualOauthToken :: Lens' UsersAliasesList' (Maybe Text)
-ualOauthToken
-  = lens _ualOauthToken
-      (\ s a -> s{_ualOauthToken = a})
+ualOAuthToken :: Lens' UsersAliasesList' (Maybe OAuthToken)
+ualOAuthToken
+  = lens _ualOAuthToken
+      (\ s a -> s{_ualOAuthToken = a})
 
 -- | Email or immutable Id of the user
 ualUserKey :: Lens' UsersAliasesList' Text
@@ -156,21 +151,21 @@ ualFields :: Lens' UsersAliasesList' (Maybe Text)
 ualFields
   = lens _ualFields (\ s a -> s{_ualFields = a})
 
--- | Data format for the response.
-ualAlt :: Lens' UsersAliasesList' Alt
-ualAlt = lens _ualAlt (\ s a -> s{_ualAlt = a})
+instance GoogleAuth UsersAliasesList' where
+        authKey = ualKey . _Just
+        authToken = ualOAuthToken . _Just
 
 instance GoogleRequest UsersAliasesList' where
         type Rs UsersAliasesList' = Aliases
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u UsersAliasesList'{..}
           = go _ualEvent _ualQuotaUser (Just _ualPrettyPrint)
-              _ualUserIp
+              _ualUserIP
               _ualKey
-              _ualOauthToken
+              _ualOAuthToken
               _ualUserKey
               _ualFields
-              (Just _ualAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersAliasesListResource)

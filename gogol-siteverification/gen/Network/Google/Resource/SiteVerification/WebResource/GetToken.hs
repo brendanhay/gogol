@@ -32,11 +32,11 @@ module Network.Google.Resource.SiteVerification.WebResource.GetToken
     -- * Request Lenses
     , wrgtQuotaUser
     , wrgtPrettyPrint
-    , wrgtUserIp
+    , wrgtUserIP
+    , wrgtSiteVerificationWebResourceGettokenRequest
     , wrgtKey
-    , wrgtOauthToken
+    , wrgtOAuthToken
     , wrgtFields
-    , wrgtAlt
     ) where
 
 import           Network.Google.Prelude
@@ -49,24 +49,27 @@ type WebResourceGetTokenResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
-               QueryParam "oauth_token" Text :>
+             QueryParam "key" Key :>
+               QueryParam "oauth_token" OAuthToken :>
                  QueryParam "fields" Text :>
-                   QueryParam "alt" Alt :>
-                     Post '[JSON]
-                       SiteVerificationWebResourceGettokenResponse
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON]
+                       SiteVerificationWebResourceGettokenRequest
+                       :>
+                       Post '[JSON]
+                         SiteVerificationWebResourceGettokenResponse
 
 -- | Get a verification token for placing on a website or domain.
 --
 -- /See:/ 'webResourceGetToken'' smart constructor.
 data WebResourceGetToken' = WebResourceGetToken'
-    { _wrgtQuotaUser   :: !(Maybe Text)
-    , _wrgtPrettyPrint :: !Bool
-    , _wrgtUserIp      :: !(Maybe Text)
-    , _wrgtKey         :: !(Maybe Text)
-    , _wrgtOauthToken  :: !(Maybe Text)
-    , _wrgtFields      :: !(Maybe Text)
-    , _wrgtAlt         :: !Alt
+    { _wrgtQuotaUser                                  :: !(Maybe Text)
+    , _wrgtPrettyPrint                                :: !Bool
+    , _wrgtUserIP                                     :: !(Maybe Text)
+    , _wrgtSiteVerificationWebResourceGettokenRequest :: !SiteVerificationWebResourceGettokenRequest
+    , _wrgtKey                                        :: !(Maybe Key)
+    , _wrgtOAuthToken                                 :: !(Maybe OAuthToken)
+    , _wrgtFields                                     :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WebResourceGetToken'' with the minimum fields required to make a request.
@@ -77,26 +80,27 @@ data WebResourceGetToken' = WebResourceGetToken'
 --
 -- * 'wrgtPrettyPrint'
 --
--- * 'wrgtUserIp'
+-- * 'wrgtUserIP'
+--
+-- * 'wrgtSiteVerificationWebResourceGettokenRequest'
 --
 -- * 'wrgtKey'
 --
--- * 'wrgtOauthToken'
+-- * 'wrgtOAuthToken'
 --
 -- * 'wrgtFields'
---
--- * 'wrgtAlt'
 webResourceGetToken'
-    :: WebResourceGetToken'
-webResourceGetToken' =
+    :: SiteVerificationWebResourceGettokenRequest -- ^ 'SiteVerificationWebResourceGettokenRequest'
+    -> WebResourceGetToken'
+webResourceGetToken' pWrgtSiteVerificationWebResourceGettokenRequest_ =
     WebResourceGetToken'
     { _wrgtQuotaUser = Nothing
     , _wrgtPrettyPrint = False
-    , _wrgtUserIp = Nothing
+    , _wrgtUserIP = Nothing
+    , _wrgtSiteVerificationWebResourceGettokenRequest = pWrgtSiteVerificationWebResourceGettokenRequest_
     , _wrgtKey = Nothing
-    , _wrgtOauthToken = Nothing
+    , _wrgtOAuthToken = Nothing
     , _wrgtFields = Nothing
-    , _wrgtAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -115,30 +119,39 @@ wrgtPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-wrgtUserIp :: Lens' WebResourceGetToken' (Maybe Text)
-wrgtUserIp
-  = lens _wrgtUserIp (\ s a -> s{_wrgtUserIp = a})
+wrgtUserIP :: Lens' WebResourceGetToken' (Maybe Text)
+wrgtUserIP
+  = lens _wrgtUserIP (\ s a -> s{_wrgtUserIP = a})
+
+-- | Multipart request metadata.
+wrgtSiteVerificationWebResourceGettokenRequest :: Lens' WebResourceGetToken' SiteVerificationWebResourceGettokenRequest
+wrgtSiteVerificationWebResourceGettokenRequest
+  = lens
+      _wrgtSiteVerificationWebResourceGettokenRequest
+      (\ s a ->
+         s{_wrgtSiteVerificationWebResourceGettokenRequest =
+             a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-wrgtKey :: Lens' WebResourceGetToken' (Maybe Text)
+wrgtKey :: Lens' WebResourceGetToken' (Maybe Key)
 wrgtKey = lens _wrgtKey (\ s a -> s{_wrgtKey = a})
 
 -- | OAuth 2.0 token for the current user.
-wrgtOauthToken :: Lens' WebResourceGetToken' (Maybe Text)
-wrgtOauthToken
-  = lens _wrgtOauthToken
-      (\ s a -> s{_wrgtOauthToken = a})
+wrgtOAuthToken :: Lens' WebResourceGetToken' (Maybe OAuthToken)
+wrgtOAuthToken
+  = lens _wrgtOAuthToken
+      (\ s a -> s{_wrgtOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 wrgtFields :: Lens' WebResourceGetToken' (Maybe Text)
 wrgtFields
   = lens _wrgtFields (\ s a -> s{_wrgtFields = a})
 
--- | Data format for the response.
-wrgtAlt :: Lens' WebResourceGetToken' Alt
-wrgtAlt = lens _wrgtAlt (\ s a -> s{_wrgtAlt = a})
+instance GoogleAuth WebResourceGetToken' where
+        authKey = wrgtKey . _Just
+        authToken = wrgtOAuthToken . _Just
 
 instance GoogleRequest WebResourceGetToken' where
         type Rs WebResourceGetToken' =
@@ -146,11 +159,12 @@ instance GoogleRequest WebResourceGetToken' where
         request = requestWithRoute defReq siteVerificationURL
         requestWithRoute r u WebResourceGetToken'{..}
           = go _wrgtQuotaUser (Just _wrgtPrettyPrint)
-              _wrgtUserIp
+              _wrgtUserIP
               _wrgtKey
-              _wrgtOauthToken
+              _wrgtOAuthToken
               _wrgtFields
-              (Just _wrgtAlt)
+              (Just AltJSON)
+              _wrgtSiteVerificationWebResourceGettokenRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy WebResourceGetTokenResource)

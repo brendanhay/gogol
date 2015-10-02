@@ -32,14 +32,14 @@ module Network.Google.Resource.Fitness.Users.Sessions.Update
     -- * Request Lenses
     , usuQuotaUser
     , usuPrettyPrint
-    , usuUserIp
+    , usuUserIP
     , usuUserId
     , usuKey
     , usuCurrentTimeMillis
-    , usuOauthToken
+    , usuOAuthToken
     , usuSessionId
+    , usuSession
     , usuFields
-    , usuAlt
     ) where
 
 import           Network.Google.Fitness.Types
@@ -54,11 +54,12 @@ type UsersSessionsUpdateResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "currentTimeMillis" Int64 :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Put '[JSON] Session
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Session :> Put '[JSON] Session
 
 -- | Updates or insert a given session.
 --
@@ -66,14 +67,14 @@ type UsersSessionsUpdateResource =
 data UsersSessionsUpdate' = UsersSessionsUpdate'
     { _usuQuotaUser         :: !(Maybe Text)
     , _usuPrettyPrint       :: !Bool
-    , _usuUserIp            :: !(Maybe Text)
+    , _usuUserIP            :: !(Maybe Text)
     , _usuUserId            :: !Text
-    , _usuKey               :: !(Maybe Text)
+    , _usuKey               :: !(Maybe Key)
     , _usuCurrentTimeMillis :: !(Maybe Int64)
-    , _usuOauthToken        :: !(Maybe Text)
+    , _usuOAuthToken        :: !(Maybe OAuthToken)
     , _usuSessionId         :: !Text
+    , _usuSession           :: !Session
     , _usuFields            :: !(Maybe Text)
-    , _usuAlt               :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersSessionsUpdate'' with the minimum fields required to make a request.
@@ -84,7 +85,7 @@ data UsersSessionsUpdate' = UsersSessionsUpdate'
 --
 -- * 'usuPrettyPrint'
 --
--- * 'usuUserIp'
+-- * 'usuUserIP'
 --
 -- * 'usuUserId'
 --
@@ -92,29 +93,30 @@ data UsersSessionsUpdate' = UsersSessionsUpdate'
 --
 -- * 'usuCurrentTimeMillis'
 --
--- * 'usuOauthToken'
+-- * 'usuOAuthToken'
 --
 -- * 'usuSessionId'
 --
--- * 'usuFields'
+-- * 'usuSession'
 --
--- * 'usuAlt'
+-- * 'usuFields'
 usersSessionsUpdate'
     :: Text -- ^ 'userId'
     -> Text -- ^ 'sessionId'
+    -> Session -- ^ 'Session'
     -> UsersSessionsUpdate'
-usersSessionsUpdate' pUsuUserId_ pUsuSessionId_ =
+usersSessionsUpdate' pUsuUserId_ pUsuSessionId_ pUsuSession_ =
     UsersSessionsUpdate'
     { _usuQuotaUser = Nothing
     , _usuPrettyPrint = True
-    , _usuUserIp = Nothing
+    , _usuUserIP = Nothing
     , _usuUserId = pUsuUserId_
     , _usuKey = Nothing
     , _usuCurrentTimeMillis = Nothing
-    , _usuOauthToken = Nothing
+    , _usuOAuthToken = Nothing
     , _usuSessionId = pUsuSessionId_
+    , _usuSession = pUsuSession_
     , _usuFields = Nothing
-    , _usuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -132,9 +134,9 @@ usuPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-usuUserIp :: Lens' UsersSessionsUpdate' (Maybe Text)
-usuUserIp
-  = lens _usuUserIp (\ s a -> s{_usuUserIp = a})
+usuUserIP :: Lens' UsersSessionsUpdate' (Maybe Text)
+usuUserIP
+  = lens _usuUserIP (\ s a -> s{_usuUserIP = a})
 
 -- | Create sessions for the person identified. Use me to indicate the
 -- authenticated user. Only me is supported at this time.
@@ -145,7 +147,7 @@ usuUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-usuKey :: Lens' UsersSessionsUpdate' (Maybe Text)
+usuKey :: Lens' UsersSessionsUpdate' (Maybe Key)
 usuKey = lens _usuKey (\ s a -> s{_usuKey = a})
 
 -- | The client\'s current time in milliseconds since epoch.
@@ -155,37 +157,43 @@ usuCurrentTimeMillis
       (\ s a -> s{_usuCurrentTimeMillis = a})
 
 -- | OAuth 2.0 token for the current user.
-usuOauthToken :: Lens' UsersSessionsUpdate' (Maybe Text)
-usuOauthToken
-  = lens _usuOauthToken
-      (\ s a -> s{_usuOauthToken = a})
+usuOAuthToken :: Lens' UsersSessionsUpdate' (Maybe OAuthToken)
+usuOAuthToken
+  = lens _usuOAuthToken
+      (\ s a -> s{_usuOAuthToken = a})
 
 -- | The ID of the session to be created.
 usuSessionId :: Lens' UsersSessionsUpdate' Text
 usuSessionId
   = lens _usuSessionId (\ s a -> s{_usuSessionId = a})
 
+-- | Multipart request metadata.
+usuSession :: Lens' UsersSessionsUpdate' Session
+usuSession
+  = lens _usuSession (\ s a -> s{_usuSession = a})
+
 -- | Selector specifying which fields to include in a partial response.
 usuFields :: Lens' UsersSessionsUpdate' (Maybe Text)
 usuFields
   = lens _usuFields (\ s a -> s{_usuFields = a})
 
--- | Data format for the response.
-usuAlt :: Lens' UsersSessionsUpdate' Alt
-usuAlt = lens _usuAlt (\ s a -> s{_usuAlt = a})
+instance GoogleAuth UsersSessionsUpdate' where
+        authKey = usuKey . _Just
+        authToken = usuOAuthToken . _Just
 
 instance GoogleRequest UsersSessionsUpdate' where
         type Rs UsersSessionsUpdate' = Session
         request = requestWithRoute defReq fitnessURL
         requestWithRoute r u UsersSessionsUpdate'{..}
-          = go _usuQuotaUser (Just _usuPrettyPrint) _usuUserIp
+          = go _usuQuotaUser (Just _usuPrettyPrint) _usuUserIP
               _usuUserId
               _usuKey
               _usuCurrentTimeMillis
-              _usuOauthToken
+              _usuOAuthToken
               _usuSessionId
               _usuFields
-              (Just _usuAlt)
+              (Just AltJSON)
+              _usuSession
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersSessionsUpdateResource)

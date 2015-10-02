@@ -34,14 +34,13 @@ module Network.Google.Resource.Compute.Snapshots.List
     , slQuotaUser
     , slPrettyPrint
     , slProject
-    , slUserIp
+    , slUserIP
     , slKey
     , slFilter
     , slPageToken
-    , slOauthToken
+    , slOAuthToken
     , slMaxResults
     , slFields
-    , slAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -56,13 +55,14 @@ type SnapshotsListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "filter" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "maxResults" Word32 :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Get '[JSON] SnapshotList
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] SnapshotList
 
 -- | Retrieves the list of Snapshot resources contained within the specified
 -- project.
@@ -72,14 +72,13 @@ data SnapshotsList' = SnapshotsList'
     { _slQuotaUser   :: !(Maybe Text)
     , _slPrettyPrint :: !Bool
     , _slProject     :: !Text
-    , _slUserIp      :: !(Maybe Text)
-    , _slKey         :: !(Maybe Text)
+    , _slUserIP      :: !(Maybe Text)
+    , _slKey         :: !(Maybe Key)
     , _slFilter      :: !(Maybe Text)
     , _slPageToken   :: !(Maybe Text)
-    , _slOauthToken  :: !(Maybe Text)
+    , _slOAuthToken  :: !(Maybe OAuthToken)
     , _slMaxResults  :: !Word32
     , _slFields      :: !(Maybe Text)
-    , _slAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SnapshotsList'' with the minimum fields required to make a request.
@@ -92,7 +91,7 @@ data SnapshotsList' = SnapshotsList'
 --
 -- * 'slProject'
 --
--- * 'slUserIp'
+-- * 'slUserIP'
 --
 -- * 'slKey'
 --
@@ -100,13 +99,11 @@ data SnapshotsList' = SnapshotsList'
 --
 -- * 'slPageToken'
 --
--- * 'slOauthToken'
+-- * 'slOAuthToken'
 --
 -- * 'slMaxResults'
 --
 -- * 'slFields'
---
--- * 'slAlt'
 snapshotsList'
     :: Text -- ^ 'project'
     -> SnapshotsList'
@@ -115,14 +112,13 @@ snapshotsList' pSlProject_ =
     { _slQuotaUser = Nothing
     , _slPrettyPrint = True
     , _slProject = pSlProject_
-    , _slUserIp = Nothing
+    , _slUserIP = Nothing
     , _slKey = Nothing
     , _slFilter = Nothing
     , _slPageToken = Nothing
-    , _slOauthToken = Nothing
+    , _slOAuthToken = Nothing
     , _slMaxResults = 500
     , _slFields = Nothing
-    , _slAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -145,13 +141,13 @@ slProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-slUserIp :: Lens' SnapshotsList' (Maybe Text)
-slUserIp = lens _slUserIp (\ s a -> s{_slUserIp = a})
+slUserIP :: Lens' SnapshotsList' (Maybe Text)
+slUserIP = lens _slUserIP (\ s a -> s{_slUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-slKey :: Lens' SnapshotsList' (Maybe Text)
+slKey :: Lens' SnapshotsList' (Maybe Key)
 slKey = lens _slKey (\ s a -> s{_slKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
@@ -176,9 +172,9 @@ slPageToken
   = lens _slPageToken (\ s a -> s{_slPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-slOauthToken :: Lens' SnapshotsList' (Maybe Text)
-slOauthToken
-  = lens _slOauthToken (\ s a -> s{_slOauthToken = a})
+slOAuthToken :: Lens' SnapshotsList' (Maybe OAuthToken)
+slOAuthToken
+  = lens _slOAuthToken (\ s a -> s{_slOAuthToken = a})
 
 -- | Maximum count of results to be returned.
 slMaxResults :: Lens' SnapshotsList' Word32
@@ -189,23 +185,23 @@ slMaxResults
 slFields :: Lens' SnapshotsList' (Maybe Text)
 slFields = lens _slFields (\ s a -> s{_slFields = a})
 
--- | Data format for the response.
-slAlt :: Lens' SnapshotsList' Alt
-slAlt = lens _slAlt (\ s a -> s{_slAlt = a})
+instance GoogleAuth SnapshotsList' where
+        authKey = slKey . _Just
+        authToken = slOAuthToken . _Just
 
 instance GoogleRequest SnapshotsList' where
         type Rs SnapshotsList' = SnapshotList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u SnapshotsList'{..}
           = go _slQuotaUser (Just _slPrettyPrint) _slProject
-              _slUserIp
+              _slUserIP
               _slKey
               _slFilter
               _slPageToken
-              _slOauthToken
+              _slOAuthToken
               (Just _slMaxResults)
               _slFields
-              (Just _slAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy SnapshotsListResource)

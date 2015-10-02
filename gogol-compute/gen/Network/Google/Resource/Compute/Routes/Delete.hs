@@ -33,12 +33,11 @@ module Network.Google.Resource.Compute.Routes.Delete
     , rdQuotaUser
     , rdPrettyPrint
     , rdProject
-    , rdUserIp
+    , rdUserIP
     , rdRoute
     , rdKey
-    , rdOauthToken
+    , rdOAuthToken
     , rdFields
-    , rdAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -54,10 +53,10 @@ type RoutesDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Delete '[JSON] Operation
+                         QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified route resource.
 --
@@ -66,12 +65,11 @@ data RoutesDelete' = RoutesDelete'
     { _rdQuotaUser   :: !(Maybe Text)
     , _rdPrettyPrint :: !Bool
     , _rdProject     :: !Text
-    , _rdUserIp      :: !(Maybe Text)
+    , _rdUserIP      :: !(Maybe Text)
     , _rdRoute       :: !Text
-    , _rdKey         :: !(Maybe Text)
-    , _rdOauthToken  :: !(Maybe Text)
+    , _rdKey         :: !(Maybe Key)
+    , _rdOAuthToken  :: !(Maybe OAuthToken)
     , _rdFields      :: !(Maybe Text)
-    , _rdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoutesDelete'' with the minimum fields required to make a request.
@@ -84,17 +82,15 @@ data RoutesDelete' = RoutesDelete'
 --
 -- * 'rdProject'
 --
--- * 'rdUserIp'
+-- * 'rdUserIP'
 --
 -- * 'rdRoute'
 --
 -- * 'rdKey'
 --
--- * 'rdOauthToken'
+-- * 'rdOAuthToken'
 --
 -- * 'rdFields'
---
--- * 'rdAlt'
 routesDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'route'
@@ -104,12 +100,11 @@ routesDelete' pRdProject_ pRdRoute_ =
     { _rdQuotaUser = Nothing
     , _rdPrettyPrint = True
     , _rdProject = pRdProject_
-    , _rdUserIp = Nothing
+    , _rdUserIP = Nothing
     , _rdRoute = pRdRoute_
     , _rdKey = Nothing
-    , _rdOauthToken = Nothing
+    , _rdOAuthToken = Nothing
     , _rdFields = Nothing
-    , _rdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -132,8 +127,8 @@ rdProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rdUserIp :: Lens' RoutesDelete' (Maybe Text)
-rdUserIp = lens _rdUserIp (\ s a -> s{_rdUserIp = a})
+rdUserIP :: Lens' RoutesDelete' (Maybe Text)
+rdUserIP = lens _rdUserIP (\ s a -> s{_rdUserIP = a})
 
 -- | Name of the route resource to delete.
 rdRoute :: Lens' RoutesDelete' Text
@@ -142,33 +137,33 @@ rdRoute = lens _rdRoute (\ s a -> s{_rdRoute = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rdKey :: Lens' RoutesDelete' (Maybe Text)
+rdKey :: Lens' RoutesDelete' (Maybe Key)
 rdKey = lens _rdKey (\ s a -> s{_rdKey = a})
 
 -- | OAuth 2.0 token for the current user.
-rdOauthToken :: Lens' RoutesDelete' (Maybe Text)
-rdOauthToken
-  = lens _rdOauthToken (\ s a -> s{_rdOauthToken = a})
+rdOAuthToken :: Lens' RoutesDelete' (Maybe OAuthToken)
+rdOAuthToken
+  = lens _rdOAuthToken (\ s a -> s{_rdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 rdFields :: Lens' RoutesDelete' (Maybe Text)
 rdFields = lens _rdFields (\ s a -> s{_rdFields = a})
 
--- | Data format for the response.
-rdAlt :: Lens' RoutesDelete' Alt
-rdAlt = lens _rdAlt (\ s a -> s{_rdAlt = a})
+instance GoogleAuth RoutesDelete' where
+        authKey = rdKey . _Just
+        authToken = rdOAuthToken . _Just
 
 instance GoogleRequest RoutesDelete' where
         type Rs RoutesDelete' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u RoutesDelete'{..}
           = go _rdQuotaUser (Just _rdPrettyPrint) _rdProject
-              _rdUserIp
+              _rdUserIP
               _rdRoute
               _rdKey
-              _rdOauthToken
+              _rdOAuthToken
               _rdFields
-              (Just _rdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy RoutesDeleteResource)

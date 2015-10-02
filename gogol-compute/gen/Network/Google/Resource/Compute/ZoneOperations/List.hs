@@ -34,15 +34,14 @@ module Network.Google.Resource.Compute.ZoneOperations.List
     , zolQuotaUser
     , zolPrettyPrint
     , zolProject
-    , zolUserIp
+    , zolUserIP
     , zolZone
     , zolKey
     , zolFilter
     , zolPageToken
-    , zolOauthToken
+    , zolOAuthToken
     , zolMaxResults
     , zolFields
-    , zolAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -58,13 +57,14 @@ type ZoneOperationsListResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "filter" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "maxResults" Word32 :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :> Get '[JSON] OperationList
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] OperationList
 
 -- | Retrieves the list of Operation resources contained within the specified
 -- zone.
@@ -74,15 +74,14 @@ data ZoneOperationsList' = ZoneOperationsList'
     { _zolQuotaUser   :: !(Maybe Text)
     , _zolPrettyPrint :: !Bool
     , _zolProject     :: !Text
-    , _zolUserIp      :: !(Maybe Text)
+    , _zolUserIP      :: !(Maybe Text)
     , _zolZone        :: !Text
-    , _zolKey         :: !(Maybe Text)
+    , _zolKey         :: !(Maybe Key)
     , _zolFilter      :: !(Maybe Text)
     , _zolPageToken   :: !(Maybe Text)
-    , _zolOauthToken  :: !(Maybe Text)
+    , _zolOAuthToken  :: !(Maybe OAuthToken)
     , _zolMaxResults  :: !Word32
     , _zolFields      :: !(Maybe Text)
-    , _zolAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZoneOperationsList'' with the minimum fields required to make a request.
@@ -95,7 +94,7 @@ data ZoneOperationsList' = ZoneOperationsList'
 --
 -- * 'zolProject'
 --
--- * 'zolUserIp'
+-- * 'zolUserIP'
 --
 -- * 'zolZone'
 --
@@ -105,13 +104,11 @@ data ZoneOperationsList' = ZoneOperationsList'
 --
 -- * 'zolPageToken'
 --
--- * 'zolOauthToken'
+-- * 'zolOAuthToken'
 --
 -- * 'zolMaxResults'
 --
 -- * 'zolFields'
---
--- * 'zolAlt'
 zoneOperationsList'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
@@ -121,15 +118,14 @@ zoneOperationsList' pZolProject_ pZolZone_ =
     { _zolQuotaUser = Nothing
     , _zolPrettyPrint = True
     , _zolProject = pZolProject_
-    , _zolUserIp = Nothing
+    , _zolUserIP = Nothing
     , _zolZone = pZolZone_
     , _zolKey = Nothing
     , _zolFilter = Nothing
     , _zolPageToken = Nothing
-    , _zolOauthToken = Nothing
+    , _zolOAuthToken = Nothing
     , _zolMaxResults = 500
     , _zolFields = Nothing
-    , _zolAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,9 +148,9 @@ zolProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-zolUserIp :: Lens' ZoneOperationsList' (Maybe Text)
-zolUserIp
-  = lens _zolUserIp (\ s a -> s{_zolUserIp = a})
+zolUserIP :: Lens' ZoneOperationsList' (Maybe Text)
+zolUserIP
+  = lens _zolUserIP (\ s a -> s{_zolUserIP = a})
 
 -- | Name of the zone scoping this request.
 zolZone :: Lens' ZoneOperationsList' Text
@@ -163,7 +159,7 @@ zolZone = lens _zolZone (\ s a -> s{_zolZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-zolKey :: Lens' ZoneOperationsList' (Maybe Text)
+zolKey :: Lens' ZoneOperationsList' (Maybe Key)
 zolKey = lens _zolKey (\ s a -> s{_zolKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
@@ -189,10 +185,10 @@ zolPageToken
   = lens _zolPageToken (\ s a -> s{_zolPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-zolOauthToken :: Lens' ZoneOperationsList' (Maybe Text)
-zolOauthToken
-  = lens _zolOauthToken
-      (\ s a -> s{_zolOauthToken = a})
+zolOAuthToken :: Lens' ZoneOperationsList' (Maybe OAuthToken)
+zolOAuthToken
+  = lens _zolOAuthToken
+      (\ s a -> s{_zolOAuthToken = a})
 
 -- | Maximum count of results to be returned.
 zolMaxResults :: Lens' ZoneOperationsList' Word32
@@ -205,24 +201,24 @@ zolFields :: Lens' ZoneOperationsList' (Maybe Text)
 zolFields
   = lens _zolFields (\ s a -> s{_zolFields = a})
 
--- | Data format for the response.
-zolAlt :: Lens' ZoneOperationsList' Alt
-zolAlt = lens _zolAlt (\ s a -> s{_zolAlt = a})
+instance GoogleAuth ZoneOperationsList' where
+        authKey = zolKey . _Just
+        authToken = zolOAuthToken . _Just
 
 instance GoogleRequest ZoneOperationsList' where
         type Rs ZoneOperationsList' = OperationList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u ZoneOperationsList'{..}
           = go _zolQuotaUser (Just _zolPrettyPrint) _zolProject
-              _zolUserIp
+              _zolUserIP
               _zolZone
               _zolKey
               _zolFilter
               _zolPageToken
-              _zolOauthToken
+              _zolOAuthToken
               (Just _zolMaxResults)
               _zolFields
-              (Just _zolAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ZoneOperationsListResource)

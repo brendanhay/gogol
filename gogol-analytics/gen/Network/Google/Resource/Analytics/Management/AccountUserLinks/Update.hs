@@ -32,13 +32,13 @@ module Network.Google.Resource.Analytics.Management.AccountUserLinks.Update
     -- * Request Lenses
     , mauluQuotaUser
     , mauluPrettyPrint
-    , mauluUserIp
+    , mauluUserIP
     , mauluAccountId
     , mauluKey
+    , mauluEntityUserLink
     , mauluLinkId
-    , mauluOauthToken
+    , mauluOAuthToken
     , mauluFields
-    , mauluAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -55,24 +55,26 @@ type ManagementAccountUserLinksUpdateResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Put '[JSON] EntityUserLink
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] EntityUserLink :>
+                               Put '[JSON] EntityUserLink
 
 -- | Updates permissions for an existing user on the given account.
 --
 -- /See:/ 'managementAccountUserLinksUpdate'' smart constructor.
 data ManagementAccountUserLinksUpdate' = ManagementAccountUserLinksUpdate'
-    { _mauluQuotaUser   :: !(Maybe Text)
-    , _mauluPrettyPrint :: !Bool
-    , _mauluUserIp      :: !(Maybe Text)
-    , _mauluAccountId   :: !Text
-    , _mauluKey         :: !(Maybe Text)
-    , _mauluLinkId      :: !Text
-    , _mauluOauthToken  :: !(Maybe Text)
-    , _mauluFields      :: !(Maybe Text)
-    , _mauluAlt         :: !Alt
+    { _mauluQuotaUser      :: !(Maybe Text)
+    , _mauluPrettyPrint    :: !Bool
+    , _mauluUserIP         :: !(Maybe Text)
+    , _mauluAccountId      :: !Text
+    , _mauluKey            :: !(Maybe Key)
+    , _mauluEntityUserLink :: !EntityUserLink
+    , _mauluLinkId         :: !Text
+    , _mauluOAuthToken     :: !(Maybe OAuthToken)
+    , _mauluFields         :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementAccountUserLinksUpdate'' with the minimum fields required to make a request.
@@ -83,34 +85,35 @@ data ManagementAccountUserLinksUpdate' = ManagementAccountUserLinksUpdate'
 --
 -- * 'mauluPrettyPrint'
 --
--- * 'mauluUserIp'
+-- * 'mauluUserIP'
 --
 -- * 'mauluAccountId'
 --
 -- * 'mauluKey'
 --
+-- * 'mauluEntityUserLink'
+--
 -- * 'mauluLinkId'
 --
--- * 'mauluOauthToken'
+-- * 'mauluOAuthToken'
 --
 -- * 'mauluFields'
---
--- * 'mauluAlt'
 managementAccountUserLinksUpdate'
     :: Text -- ^ 'accountId'
+    -> EntityUserLink -- ^ 'EntityUserLink'
     -> Text -- ^ 'linkId'
     -> ManagementAccountUserLinksUpdate'
-managementAccountUserLinksUpdate' pMauluAccountId_ pMauluLinkId_ =
+managementAccountUserLinksUpdate' pMauluAccountId_ pMauluEntityUserLink_ pMauluLinkId_ =
     ManagementAccountUserLinksUpdate'
     { _mauluQuotaUser = Nothing
     , _mauluPrettyPrint = False
-    , _mauluUserIp = Nothing
+    , _mauluUserIP = Nothing
     , _mauluAccountId = pMauluAccountId_
     , _mauluKey = Nothing
+    , _mauluEntityUserLink = pMauluEntityUserLink_
     , _mauluLinkId = pMauluLinkId_
-    , _mauluOauthToken = Nothing
+    , _mauluOAuthToken = Nothing
     , _mauluFields = Nothing
-    , _mauluAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -129,9 +132,9 @@ mauluPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mauluUserIp :: Lens' ManagementAccountUserLinksUpdate' (Maybe Text)
-mauluUserIp
-  = lens _mauluUserIp (\ s a -> s{_mauluUserIp = a})
+mauluUserIP :: Lens' ManagementAccountUserLinksUpdate' (Maybe Text)
+mauluUserIP
+  = lens _mauluUserIP (\ s a -> s{_mauluUserIP = a})
 
 -- | Account ID to update the account-user link for.
 mauluAccountId :: Lens' ManagementAccountUserLinksUpdate' Text
@@ -142,8 +145,14 @@ mauluAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mauluKey :: Lens' ManagementAccountUserLinksUpdate' (Maybe Text)
+mauluKey :: Lens' ManagementAccountUserLinksUpdate' (Maybe Key)
 mauluKey = lens _mauluKey (\ s a -> s{_mauluKey = a})
+
+-- | Multipart request metadata.
+mauluEntityUserLink :: Lens' ManagementAccountUserLinksUpdate' EntityUserLink
+mauluEntityUserLink
+  = lens _mauluEntityUserLink
+      (\ s a -> s{_mauluEntityUserLink = a})
 
 -- | Link ID to update the account-user link for.
 mauluLinkId :: Lens' ManagementAccountUserLinksUpdate' Text
@@ -151,19 +160,20 @@ mauluLinkId
   = lens _mauluLinkId (\ s a -> s{_mauluLinkId = a})
 
 -- | OAuth 2.0 token for the current user.
-mauluOauthToken :: Lens' ManagementAccountUserLinksUpdate' (Maybe Text)
-mauluOauthToken
-  = lens _mauluOauthToken
-      (\ s a -> s{_mauluOauthToken = a})
+mauluOAuthToken :: Lens' ManagementAccountUserLinksUpdate' (Maybe OAuthToken)
+mauluOAuthToken
+  = lens _mauluOAuthToken
+      (\ s a -> s{_mauluOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 mauluFields :: Lens' ManagementAccountUserLinksUpdate' (Maybe Text)
 mauluFields
   = lens _mauluFields (\ s a -> s{_mauluFields = a})
 
--- | Data format for the response.
-mauluAlt :: Lens' ManagementAccountUserLinksUpdate' Alt
-mauluAlt = lens _mauluAlt (\ s a -> s{_mauluAlt = a})
+instance GoogleAuth ManagementAccountUserLinksUpdate'
+         where
+        authKey = mauluKey . _Just
+        authToken = mauluOAuthToken . _Just
 
 instance GoogleRequest
          ManagementAccountUserLinksUpdate' where
@@ -173,13 +183,14 @@ instance GoogleRequest
         requestWithRoute r u
           ManagementAccountUserLinksUpdate'{..}
           = go _mauluQuotaUser (Just _mauluPrettyPrint)
-              _mauluUserIp
+              _mauluUserIP
               _mauluAccountId
               _mauluKey
               _mauluLinkId
-              _mauluOauthToken
+              _mauluOAuthToken
               _mauluFields
-              (Just _mauluAlt)
+              (Just AltJSON)
+              _mauluEntityUserLink
           where go
                   = clientWithRoute
                       (Proxy ::

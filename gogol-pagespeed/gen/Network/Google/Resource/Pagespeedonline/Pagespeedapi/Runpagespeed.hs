@@ -35,16 +35,15 @@ module Network.Google.Resource.Pagespeedonline.Pagespeedapi.Runpagespeed
     , prScreenshot
     , prQuotaUser
     , prPrettyPrint
-    , prUserIp
+    , prUserIP
     , prLocale
-    , prUrl
+    , prURL
     , prFilterThirdPartyResources
     , prStrategy
     , prRule
     , prKey
-    , prOauthToken
+    , prOAuthToken
     , prFields
-    , prAlt
     ) where
 
 import           Network.Google.PageSpeed.Types
@@ -65,10 +64,10 @@ type PagespeedapiRunpagespeedResource =
                        PagespeedonlinePagespeedapiRunpagespeedStrategy
                        :>
                        QueryParams "rule" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :> Get '[JSON] Result
+                               QueryParam "alt" AltJSON :> Get '[JSON] Result
 
 -- | Runs PageSpeed analysis on the page at the specified URL, and returns
 -- PageSpeed scores, a list of suggestions to make that page faster, and
@@ -79,16 +78,15 @@ data PagespeedapiRunpagespeed' = PagespeedapiRunpagespeed'
     { _prScreenshot                :: !Bool
     , _prQuotaUser                 :: !(Maybe Text)
     , _prPrettyPrint               :: !Bool
-    , _prUserIp                    :: !(Maybe Text)
+    , _prUserIP                    :: !(Maybe Text)
     , _prLocale                    :: !(Maybe Text)
-    , _prUrl                       :: !Text
+    , _prURL                       :: !Text
     , _prFilterThirdPartyResources :: !Bool
     , _prStrategy                  :: !(Maybe PagespeedonlinePagespeedapiRunpagespeedStrategy)
     , _prRule                      :: !(Maybe Text)
-    , _prKey                       :: !(Maybe Text)
-    , _prOauthToken                :: !(Maybe Text)
+    , _prKey                       :: !(Maybe Key)
+    , _prOAuthToken                :: !(Maybe OAuthToken)
     , _prFields                    :: !(Maybe Text)
-    , _prAlt                       :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PagespeedapiRunpagespeed'' with the minimum fields required to make a request.
@@ -101,11 +99,11 @@ data PagespeedapiRunpagespeed' = PagespeedapiRunpagespeed'
 --
 -- * 'prPrettyPrint'
 --
--- * 'prUserIp'
+-- * 'prUserIP'
 --
 -- * 'prLocale'
 --
--- * 'prUrl'
+-- * 'prURL'
 --
 -- * 'prFilterThirdPartyResources'
 --
@@ -115,29 +113,26 @@ data PagespeedapiRunpagespeed' = PagespeedapiRunpagespeed'
 --
 -- * 'prKey'
 --
--- * 'prOauthToken'
+-- * 'prOAuthToken'
 --
 -- * 'prFields'
---
--- * 'prAlt'
 pagespeedapiRunpagespeed'
     :: Text -- ^ 'url'
     -> PagespeedapiRunpagespeed'
-pagespeedapiRunpagespeed' pPrUrl_ =
+pagespeedapiRunpagespeed' pPrURL_ =
     PagespeedapiRunpagespeed'
     { _prScreenshot = False
     , _prQuotaUser = Nothing
     , _prPrettyPrint = True
-    , _prUserIp = Nothing
+    , _prUserIP = Nothing
     , _prLocale = Nothing
-    , _prUrl = pPrUrl_
+    , _prURL = pPrURL_
     , _prFilterThirdPartyResources = False
     , _prStrategy = Nothing
     , _prRule = Nothing
     , _prKey = Nothing
-    , _prOauthToken = Nothing
+    , _prOAuthToken = Nothing
     , _prFields = Nothing
-    , _prAlt = JSON
     }
 
 -- | Indicates if binary data containing a screenshot should be included
@@ -160,16 +155,16 @@ prPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-prUserIp :: Lens' PagespeedapiRunpagespeed' (Maybe Text)
-prUserIp = lens _prUserIp (\ s a -> s{_prUserIp = a})
+prUserIP :: Lens' PagespeedapiRunpagespeed' (Maybe Text)
+prUserIP = lens _prUserIP (\ s a -> s{_prUserIP = a})
 
 -- | The locale used to localize formatted results
 prLocale :: Lens' PagespeedapiRunpagespeed' (Maybe Text)
 prLocale = lens _prLocale (\ s a -> s{_prLocale = a})
 
 -- | The URL to fetch and analyze
-prUrl :: Lens' PagespeedapiRunpagespeed' Text
-prUrl = lens _prUrl (\ s a -> s{_prUrl = a})
+prURL :: Lens' PagespeedapiRunpagespeed' Text
+prURL = lens _prURL (\ s a -> s{_prURL = a})
 
 -- | Indicates if third party resources should be filtered out before
 -- PageSpeed analysis.
@@ -190,21 +185,21 @@ prRule = lens _prRule (\ s a -> s{_prRule = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-prKey :: Lens' PagespeedapiRunpagespeed' (Maybe Text)
+prKey :: Lens' PagespeedapiRunpagespeed' (Maybe Key)
 prKey = lens _prKey (\ s a -> s{_prKey = a})
 
 -- | OAuth 2.0 token for the current user.
-prOauthToken :: Lens' PagespeedapiRunpagespeed' (Maybe Text)
-prOauthToken
-  = lens _prOauthToken (\ s a -> s{_prOauthToken = a})
+prOAuthToken :: Lens' PagespeedapiRunpagespeed' (Maybe OAuthToken)
+prOAuthToken
+  = lens _prOAuthToken (\ s a -> s{_prOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 prFields :: Lens' PagespeedapiRunpagespeed' (Maybe Text)
 prFields = lens _prFields (\ s a -> s{_prFields = a})
 
--- | Data format for the response.
-prAlt :: Lens' PagespeedapiRunpagespeed' Alt
-prAlt = lens _prAlt (\ s a -> s{_prAlt = a})
+instance GoogleAuth PagespeedapiRunpagespeed' where
+        authKey = prKey . _Just
+        authToken = prOAuthToken . _Just
 
 instance GoogleRequest PagespeedapiRunpagespeed'
          where
@@ -213,16 +208,16 @@ instance GoogleRequest PagespeedapiRunpagespeed'
         requestWithRoute r u PagespeedapiRunpagespeed'{..}
           = go (Just _prScreenshot) _prQuotaUser
               (Just _prPrettyPrint)
-              _prUserIp
+              _prUserIP
               _prLocale
-              (Just _prUrl)
+              (Just _prURL)
               (Just _prFilterThirdPartyResources)
               _prStrategy
               _prRule
               _prKey
-              _prOauthToken
+              _prOAuthToken
               _prFields
-              (Just _prAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PagespeedapiRunpagespeedResource)

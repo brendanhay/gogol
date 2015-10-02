@@ -35,12 +35,11 @@ module Network.Google.Resource.Games.Achievements.Increment
     , aiQuotaUser
     , aiPrettyPrint
     , aiAchievementId
-    , aiUserIp
+    , aiUserIP
     , aiKey
-    , aiOauthToken
+    , aiOAuthToken
     , aiStepsToIncrement
     , aiFields
-    , aiAlt
     ) where
 
 import           Network.Google.Games.Types
@@ -56,11 +55,11 @@ type AchievementsIncrementResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "stepsToIncrement" Int32 :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :>
+                           QueryParam "alt" AltJSON :>
                              Post '[JSON] AchievementIncrementResponse
 
 -- | Increments the steps of the achievement with the given ID for the
@@ -72,12 +71,11 @@ data AchievementsIncrement' = AchievementsIncrement'
     , _aiQuotaUser        :: !(Maybe Text)
     , _aiPrettyPrint      :: !Bool
     , _aiAchievementId    :: !Text
-    , _aiUserIp           :: !(Maybe Text)
-    , _aiKey              :: !(Maybe Text)
-    , _aiOauthToken       :: !(Maybe Text)
+    , _aiUserIP           :: !(Maybe Text)
+    , _aiKey              :: !(Maybe Key)
+    , _aiOAuthToken       :: !(Maybe OAuthToken)
     , _aiStepsToIncrement :: !Int32
     , _aiFields           :: !(Maybe Text)
-    , _aiAlt              :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementsIncrement'' with the minimum fields required to make a request.
@@ -92,17 +90,15 @@ data AchievementsIncrement' = AchievementsIncrement'
 --
 -- * 'aiAchievementId'
 --
--- * 'aiUserIp'
+-- * 'aiUserIP'
 --
 -- * 'aiKey'
 --
--- * 'aiOauthToken'
+-- * 'aiOAuthToken'
 --
 -- * 'aiStepsToIncrement'
 --
 -- * 'aiFields'
---
--- * 'aiAlt'
 achievementsIncrement'
     :: Text -- ^ 'achievementId'
     -> Int32 -- ^ 'stepsToIncrement'
@@ -113,12 +109,11 @@ achievementsIncrement' pAiAchievementId_ pAiStepsToIncrement_ =
     , _aiQuotaUser = Nothing
     , _aiPrettyPrint = True
     , _aiAchievementId = pAiAchievementId_
-    , _aiUserIp = Nothing
+    , _aiUserIP = Nothing
     , _aiKey = Nothing
-    , _aiOauthToken = Nothing
+    , _aiOAuthToken = Nothing
     , _aiStepsToIncrement = pAiStepsToIncrement_
     , _aiFields = Nothing
-    , _aiAlt = JSON
     }
 
 -- | A randomly generated numeric ID for each request specified by the
@@ -149,19 +144,19 @@ aiAchievementId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-aiUserIp :: Lens' AchievementsIncrement' (Maybe Text)
-aiUserIp = lens _aiUserIp (\ s a -> s{_aiUserIp = a})
+aiUserIP :: Lens' AchievementsIncrement' (Maybe Text)
+aiUserIP = lens _aiUserIP (\ s a -> s{_aiUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aiKey :: Lens' AchievementsIncrement' (Maybe Text)
+aiKey :: Lens' AchievementsIncrement' (Maybe Key)
 aiKey = lens _aiKey (\ s a -> s{_aiKey = a})
 
 -- | OAuth 2.0 token for the current user.
-aiOauthToken :: Lens' AchievementsIncrement' (Maybe Text)
-aiOauthToken
-  = lens _aiOauthToken (\ s a -> s{_aiOauthToken = a})
+aiOAuthToken :: Lens' AchievementsIncrement' (Maybe OAuthToken)
+aiOAuthToken
+  = lens _aiOAuthToken (\ s a -> s{_aiOAuthToken = a})
 
 -- | The number of steps to increment.
 aiStepsToIncrement :: Lens' AchievementsIncrement' Int32
@@ -173,9 +168,9 @@ aiStepsToIncrement
 aiFields :: Lens' AchievementsIncrement' (Maybe Text)
 aiFields = lens _aiFields (\ s a -> s{_aiFields = a})
 
--- | Data format for the response.
-aiAlt :: Lens' AchievementsIncrement' Alt
-aiAlt = lens _aiAlt (\ s a -> s{_aiAlt = a})
+instance GoogleAuth AchievementsIncrement' where
+        authKey = aiKey . _Just
+        authToken = aiOAuthToken . _Just
 
 instance GoogleRequest AchievementsIncrement' where
         type Rs AchievementsIncrement' =
@@ -184,12 +179,12 @@ instance GoogleRequest AchievementsIncrement' where
         requestWithRoute r u AchievementsIncrement'{..}
           = go _aiRequestId _aiQuotaUser (Just _aiPrettyPrint)
               _aiAchievementId
-              _aiUserIp
+              _aiUserIP
               _aiKey
-              _aiOauthToken
+              _aiOAuthToken
               (Just _aiStepsToIncrement)
               _aiFields
-              (Just _aiAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AchievementsIncrementResource)

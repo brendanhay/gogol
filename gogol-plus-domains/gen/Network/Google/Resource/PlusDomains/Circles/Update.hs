@@ -32,12 +32,12 @@ module Network.Google.Resource.PlusDomains.Circles.Update
     -- * Request Lenses
     , cuQuotaUser
     , cuPrettyPrint
-    , cuUserIp
+    , cuCircle
+    , cuUserIP
     , cuKey
     , cuCircleId
-    , cuOauthToken
+    , cuOAuthToken
     , cuFields
-    , cuAlt
     ) where
 
 import           Network.Google.PlusDomains.Types
@@ -51,10 +51,11 @@ type CirclesUpdateResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Put '[JSON] Circle
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Circle :> Put '[JSON] Circle
 
 -- | Update a circle\'s description.
 --
@@ -62,12 +63,12 @@ type CirclesUpdateResource =
 data CirclesUpdate' = CirclesUpdate'
     { _cuQuotaUser   :: !(Maybe Text)
     , _cuPrettyPrint :: !Bool
-    , _cuUserIp      :: !(Maybe Text)
-    , _cuKey         :: !(Maybe Text)
+    , _cuCircle      :: !Circle
+    , _cuUserIP      :: !(Maybe Text)
+    , _cuKey         :: !(Maybe Key)
     , _cuCircleId    :: !Text
-    , _cuOauthToken  :: !(Maybe Text)
+    , _cuOAuthToken  :: !(Maybe OAuthToken)
     , _cuFields      :: !(Maybe Text)
-    , _cuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CirclesUpdate'' with the minimum fields required to make a request.
@@ -78,30 +79,31 @@ data CirclesUpdate' = CirclesUpdate'
 --
 -- * 'cuPrettyPrint'
 --
--- * 'cuUserIp'
+-- * 'cuCircle'
+--
+-- * 'cuUserIP'
 --
 -- * 'cuKey'
 --
 -- * 'cuCircleId'
 --
--- * 'cuOauthToken'
+-- * 'cuOAuthToken'
 --
 -- * 'cuFields'
---
--- * 'cuAlt'
 circlesUpdate'
-    :: Text -- ^ 'circleId'
+    :: Circle -- ^ 'Circle'
+    -> Text -- ^ 'circleId'
     -> CirclesUpdate'
-circlesUpdate' pCuCircleId_ =
+circlesUpdate' pCuCircle_ pCuCircleId_ =
     CirclesUpdate'
     { _cuQuotaUser = Nothing
     , _cuPrettyPrint = True
-    , _cuUserIp = Nothing
+    , _cuCircle = pCuCircle_
+    , _cuUserIP = Nothing
     , _cuKey = Nothing
     , _cuCircleId = pCuCircleId_
-    , _cuOauthToken = Nothing
+    , _cuOAuthToken = Nothing
     , _cuFields = Nothing
-    , _cuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -117,15 +119,19 @@ cuPrettyPrint
   = lens _cuPrettyPrint
       (\ s a -> s{_cuPrettyPrint = a})
 
+-- | Multipart request metadata.
+cuCircle :: Lens' CirclesUpdate' Circle
+cuCircle = lens _cuCircle (\ s a -> s{_cuCircle = a})
+
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cuUserIp :: Lens' CirclesUpdate' (Maybe Text)
-cuUserIp = lens _cuUserIp (\ s a -> s{_cuUserIp = a})
+cuUserIP :: Lens' CirclesUpdate' (Maybe Text)
+cuUserIP = lens _cuUserIP (\ s a -> s{_cuUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cuKey :: Lens' CirclesUpdate' (Maybe Text)
+cuKey :: Lens' CirclesUpdate' (Maybe Key)
 cuKey = lens _cuKey (\ s a -> s{_cuKey = a})
 
 -- | The ID of the circle to update.
@@ -134,28 +140,29 @@ cuCircleId
   = lens _cuCircleId (\ s a -> s{_cuCircleId = a})
 
 -- | OAuth 2.0 token for the current user.
-cuOauthToken :: Lens' CirclesUpdate' (Maybe Text)
-cuOauthToken
-  = lens _cuOauthToken (\ s a -> s{_cuOauthToken = a})
+cuOAuthToken :: Lens' CirclesUpdate' (Maybe OAuthToken)
+cuOAuthToken
+  = lens _cuOAuthToken (\ s a -> s{_cuOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cuFields :: Lens' CirclesUpdate' (Maybe Text)
 cuFields = lens _cuFields (\ s a -> s{_cuFields = a})
 
--- | Data format for the response.
-cuAlt :: Lens' CirclesUpdate' Alt
-cuAlt = lens _cuAlt (\ s a -> s{_cuAlt = a})
+instance GoogleAuth CirclesUpdate' where
+        authKey = cuKey . _Just
+        authToken = cuOAuthToken . _Just
 
 instance GoogleRequest CirclesUpdate' where
         type Rs CirclesUpdate' = Circle
         request = requestWithRoute defReq plusDomainsURL
         requestWithRoute r u CirclesUpdate'{..}
-          = go _cuQuotaUser (Just _cuPrettyPrint) _cuUserIp
+          = go _cuQuotaUser (Just _cuPrettyPrint) _cuUserIP
               _cuKey
               _cuCircleId
-              _cuOauthToken
+              _cuOAuthToken
               _cuFields
-              (Just _cuAlt)
+              (Just AltJSON)
+              _cuCircle
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CirclesUpdateResource)

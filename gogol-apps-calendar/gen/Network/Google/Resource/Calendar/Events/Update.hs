@@ -30,19 +30,19 @@ module Network.Google.Resource.Calendar.Events.Update
     , EventsUpdate'
 
     -- * Request Lenses
+    , euEvent
     , euQuotaUser
     , euCalendarId
     , euPrettyPrint
-    , euUserIp
+    , euUserIP
     , euMaxAttendees
     , euKey
     , euSendNotifications
-    , euOauthToken
+    , euOAuthToken
     , euSupportsAttachments
     , euAlwaysIncludeEmail
     , euEventId
     , euFields
-    , euAlt
     ) where
 
 import           Network.Google.AppsCalendar.Types
@@ -59,36 +59,39 @@ type EventsUpdateResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "maxAttendees" Int32 :>
-                     QueryParam "key" Text :>
+                     QueryParam "key" Key :>
                        QueryParam "sendNotifications" Bool :>
-                         QueryParam "oauth_token" Text :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "supportsAttachments" Bool :>
                              QueryParam "alwaysIncludeEmail" Bool :>
                                QueryParam "fields" Text :>
-                                 QueryParam "alt" Alt :> Put '[JSON] Event
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON] Event :> Put '[JSON] Event
 
 -- | Updates an event.
 --
 -- /See:/ 'eventsUpdate'' smart constructor.
 data EventsUpdate' = EventsUpdate'
-    { _euQuotaUser           :: !(Maybe Text)
+    { _euEvent               :: !Event
+    , _euQuotaUser           :: !(Maybe Text)
     , _euCalendarId          :: !Text
     , _euPrettyPrint         :: !Bool
-    , _euUserIp              :: !(Maybe Text)
+    , _euUserIP              :: !(Maybe Text)
     , _euMaxAttendees        :: !(Maybe Int32)
-    , _euKey                 :: !(Maybe Text)
+    , _euKey                 :: !(Maybe Key)
     , _euSendNotifications   :: !(Maybe Bool)
-    , _euOauthToken          :: !(Maybe Text)
+    , _euOAuthToken          :: !(Maybe OAuthToken)
     , _euSupportsAttachments :: !(Maybe Bool)
     , _euAlwaysIncludeEmail  :: !(Maybe Bool)
     , _euEventId             :: !Text
     , _euFields              :: !(Maybe Text)
-    , _euAlt                 :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsUpdate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'euEvent'
 --
 -- * 'euQuotaUser'
 --
@@ -96,7 +99,7 @@ data EventsUpdate' = EventsUpdate'
 --
 -- * 'euPrettyPrint'
 --
--- * 'euUserIp'
+-- * 'euUserIP'
 --
 -- * 'euMaxAttendees'
 --
@@ -104,7 +107,7 @@ data EventsUpdate' = EventsUpdate'
 --
 -- * 'euSendNotifications'
 --
--- * 'euOauthToken'
+-- * 'euOAuthToken'
 --
 -- * 'euSupportsAttachments'
 --
@@ -113,28 +116,31 @@ data EventsUpdate' = EventsUpdate'
 -- * 'euEventId'
 --
 -- * 'euFields'
---
--- * 'euAlt'
 eventsUpdate'
-    :: Text -- ^ 'calendarId'
+    :: Event -- ^ 'Event'
+    -> Text -- ^ 'calendarId'
     -> Text -- ^ 'eventId'
     -> EventsUpdate'
-eventsUpdate' pEuCalendarId_ pEuEventId_ =
+eventsUpdate' pEuEvent_ pEuCalendarId_ pEuEventId_ =
     EventsUpdate'
-    { _euQuotaUser = Nothing
+    { _euEvent = pEuEvent_
+    , _euQuotaUser = Nothing
     , _euCalendarId = pEuCalendarId_
     , _euPrettyPrint = True
-    , _euUserIp = Nothing
+    , _euUserIP = Nothing
     , _euMaxAttendees = Nothing
     , _euKey = Nothing
     , _euSendNotifications = Nothing
-    , _euOauthToken = Nothing
+    , _euOAuthToken = Nothing
     , _euSupportsAttachments = Nothing
     , _euAlwaysIncludeEmail = Nothing
     , _euEventId = pEuEventId_
     , _euFields = Nothing
-    , _euAlt = JSON
     }
+
+-- | Multipart request metadata.
+euEvent :: Lens' EventsUpdate' Event
+euEvent = lens _euEvent (\ s a -> s{_euEvent = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -158,8 +164,8 @@ euPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-euUserIp :: Lens' EventsUpdate' (Maybe Text)
-euUserIp = lens _euUserIp (\ s a -> s{_euUserIp = a})
+euUserIP :: Lens' EventsUpdate' (Maybe Text)
+euUserIP = lens _euUserIP (\ s a -> s{_euUserIP = a})
 
 -- | The maximum number of attendees to include in the response. If there are
 -- more than the specified number of attendees, only the participant is
@@ -172,7 +178,7 @@ euMaxAttendees
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-euKey :: Lens' EventsUpdate' (Maybe Text)
+euKey :: Lens' EventsUpdate' (Maybe Key)
 euKey = lens _euKey (\ s a -> s{_euKey = a})
 
 -- | Whether to send notifications about the event update (e.g. attendee\'s
@@ -183,9 +189,9 @@ euSendNotifications
       (\ s a -> s{_euSendNotifications = a})
 
 -- | OAuth 2.0 token for the current user.
-euOauthToken :: Lens' EventsUpdate' (Maybe Text)
-euOauthToken
-  = lens _euOauthToken (\ s a -> s{_euOauthToken = a})
+euOAuthToken :: Lens' EventsUpdate' (Maybe OAuthToken)
+euOAuthToken
+  = lens _euOAuthToken (\ s a -> s{_euOAuthToken = a})
 
 -- | Whether API client performing operation supports event attachments.
 -- Optional. The default is False.
@@ -214,25 +220,26 @@ euEventId
 euFields :: Lens' EventsUpdate' (Maybe Text)
 euFields = lens _euFields (\ s a -> s{_euFields = a})
 
--- | Data format for the response.
-euAlt :: Lens' EventsUpdate' Alt
-euAlt = lens _euAlt (\ s a -> s{_euAlt = a})
+instance GoogleAuth EventsUpdate' where
+        authKey = euKey . _Just
+        authToken = euOAuthToken . _Just
 
 instance GoogleRequest EventsUpdate' where
         type Rs EventsUpdate' = Event
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u EventsUpdate'{..}
           = go _euQuotaUser _euCalendarId (Just _euPrettyPrint)
-              _euUserIp
+              _euUserIP
               _euMaxAttendees
               _euKey
               _euSendNotifications
-              _euOauthToken
+              _euOAuthToken
               _euSupportsAttachments
               _euAlwaysIncludeEmail
               _euEventId
               _euFields
-              (Just _euAlt)
+              (Just AltJSON)
+              _euEvent
           where go
                   = clientWithRoute
                       (Proxy :: Proxy EventsUpdateResource)

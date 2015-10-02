@@ -33,12 +33,12 @@ module Network.Google.Resource.Content.Orders.Cancel
     , ocQuotaUser
     , ocMerchantId
     , ocPrettyPrint
-    , ocUserIp
+    , ocUserIP
     , ocKey
-    , ocOauthToken
+    , ocOrdersCancelRequest
+    , ocOAuthToken
     , ocOrderId
     , ocFields
-    , ocAlt
     ) where
 
 import           Network.Google.Prelude
@@ -54,25 +54,26 @@ type OrdersCancelResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :>
-                           Post '[JSON] OrdersCancelResponse
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] OrdersCancelRequest :>
+                             Post '[JSON] OrdersCancelResponse
 
 -- | Cancels all line items in an order.
 --
 -- /See:/ 'ordersCancel'' smart constructor.
 data OrdersCancel' = OrdersCancel'
-    { _ocQuotaUser   :: !(Maybe Text)
-    , _ocMerchantId  :: !Word64
-    , _ocPrettyPrint :: !Bool
-    , _ocUserIp      :: !(Maybe Text)
-    , _ocKey         :: !(Maybe Text)
-    , _ocOauthToken  :: !(Maybe Text)
-    , _ocOrderId     :: !Text
-    , _ocFields      :: !(Maybe Text)
-    , _ocAlt         :: !Alt
+    { _ocQuotaUser           :: !(Maybe Text)
+    , _ocMerchantId          :: !Word64
+    , _ocPrettyPrint         :: !Bool
+    , _ocUserIP              :: !(Maybe Text)
+    , _ocKey                 :: !(Maybe Key)
+    , _ocOrdersCancelRequest :: !OrdersCancelRequest
+    , _ocOAuthToken          :: !(Maybe OAuthToken)
+    , _ocOrderId             :: !Text
+    , _ocFields              :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersCancel'' with the minimum fields required to make a request.
@@ -85,32 +86,33 @@ data OrdersCancel' = OrdersCancel'
 --
 -- * 'ocPrettyPrint'
 --
--- * 'ocUserIp'
+-- * 'ocUserIP'
 --
 -- * 'ocKey'
 --
--- * 'ocOauthToken'
+-- * 'ocOrdersCancelRequest'
+--
+-- * 'ocOAuthToken'
 --
 -- * 'ocOrderId'
 --
 -- * 'ocFields'
---
--- * 'ocAlt'
 ordersCancel'
     :: Word64 -- ^ 'merchantId'
+    -> OrdersCancelRequest -- ^ 'OrdersCancelRequest'
     -> Text -- ^ 'orderId'
     -> OrdersCancel'
-ordersCancel' pOcMerchantId_ pOcOrderId_ =
+ordersCancel' pOcMerchantId_ pOcOrdersCancelRequest_ pOcOrderId_ =
     OrdersCancel'
     { _ocQuotaUser = Nothing
     , _ocMerchantId = pOcMerchantId_
     , _ocPrettyPrint = True
-    , _ocUserIp = Nothing
+    , _ocUserIP = Nothing
     , _ocKey = Nothing
-    , _ocOauthToken = Nothing
+    , _ocOrdersCancelRequest = pOcOrdersCancelRequest_
+    , _ocOAuthToken = Nothing
     , _ocOrderId = pOcOrderId_
     , _ocFields = Nothing
-    , _ocAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -133,19 +135,25 @@ ocPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ocUserIp :: Lens' OrdersCancel' (Maybe Text)
-ocUserIp = lens _ocUserIp (\ s a -> s{_ocUserIp = a})
+ocUserIP :: Lens' OrdersCancel' (Maybe Text)
+ocUserIP = lens _ocUserIP (\ s a -> s{_ocUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ocKey :: Lens' OrdersCancel' (Maybe Text)
+ocKey :: Lens' OrdersCancel' (Maybe Key)
 ocKey = lens _ocKey (\ s a -> s{_ocKey = a})
 
+-- | Multipart request metadata.
+ocOrdersCancelRequest :: Lens' OrdersCancel' OrdersCancelRequest
+ocOrdersCancelRequest
+  = lens _ocOrdersCancelRequest
+      (\ s a -> s{_ocOrdersCancelRequest = a})
+
 -- | OAuth 2.0 token for the current user.
-ocOauthToken :: Lens' OrdersCancel' (Maybe Text)
-ocOauthToken
-  = lens _ocOauthToken (\ s a -> s{_ocOauthToken = a})
+ocOAuthToken :: Lens' OrdersCancel' (Maybe OAuthToken)
+ocOAuthToken
+  = lens _ocOAuthToken (\ s a -> s{_ocOAuthToken = a})
 
 -- | The ID of the order to cancel.
 ocOrderId :: Lens' OrdersCancel' Text
@@ -156,21 +164,22 @@ ocOrderId
 ocFields :: Lens' OrdersCancel' (Maybe Text)
 ocFields = lens _ocFields (\ s a -> s{_ocFields = a})
 
--- | Data format for the response.
-ocAlt :: Lens' OrdersCancel' Alt
-ocAlt = lens _ocAlt (\ s a -> s{_ocAlt = a})
+instance GoogleAuth OrdersCancel' where
+        authKey = ocKey . _Just
+        authToken = ocOAuthToken . _Just
 
 instance GoogleRequest OrdersCancel' where
         type Rs OrdersCancel' = OrdersCancelResponse
         request = requestWithRoute defReq shoppingContentURL
         requestWithRoute r u OrdersCancel'{..}
           = go _ocQuotaUser _ocMerchantId (Just _ocPrettyPrint)
-              _ocUserIp
+              _ocUserIP
               _ocKey
-              _ocOauthToken
+              _ocOAuthToken
               _ocOrderId
               _ocFields
-              (Just _ocAlt)
+              (Just AltJSON)
+              _ocOrdersCancelRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy OrdersCancelResource)

@@ -33,11 +33,11 @@ module Network.Google.Resource.Genomics.Readgroupsets.Search
     -- * Request Lenses
     , reaQuotaUser
     , reaPrettyPrint
-    , reaUserIp
+    , reaUserIP
+    , reaSearchReadGroupSetsRequest
     , reaKey
-    , reaOauthToken
+    , reaOAuthToken
     , reaFields
-    , reaAlt
     ) where
 
 import           Network.Google.Genomics.Types
@@ -51,24 +51,25 @@ type ReadgroupsetsSearchResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :>
-                       Post '[JSON] SearchReadGroupSetsResponse
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] SearchReadGroupSetsRequest :>
+                         Post '[JSON] SearchReadGroupSetsResponse
 
 -- | Searches for read group sets matching the criteria. Implements
 -- GlobalAllianceApi.searchReadGroupSets.
 --
 -- /See:/ 'readgroupsetsSearch'' smart constructor.
 data ReadgroupsetsSearch' = ReadgroupsetsSearch'
-    { _reaQuotaUser   :: !(Maybe Text)
-    , _reaPrettyPrint :: !Bool
-    , _reaUserIp      :: !(Maybe Text)
-    , _reaKey         :: !(Maybe Text)
-    , _reaOauthToken  :: !(Maybe Text)
-    , _reaFields      :: !(Maybe Text)
-    , _reaAlt         :: !Alt
+    { _reaQuotaUser                  :: !(Maybe Text)
+    , _reaPrettyPrint                :: !Bool
+    , _reaUserIP                     :: !(Maybe Text)
+    , _reaSearchReadGroupSetsRequest :: !SearchReadGroupSetsRequest
+    , _reaKey                        :: !(Maybe Key)
+    , _reaOAuthToken                 :: !(Maybe OAuthToken)
+    , _reaFields                     :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReadgroupsetsSearch'' with the minimum fields required to make a request.
@@ -79,26 +80,27 @@ data ReadgroupsetsSearch' = ReadgroupsetsSearch'
 --
 -- * 'reaPrettyPrint'
 --
--- * 'reaUserIp'
+-- * 'reaUserIP'
+--
+-- * 'reaSearchReadGroupSetsRequest'
 --
 -- * 'reaKey'
 --
--- * 'reaOauthToken'
+-- * 'reaOAuthToken'
 --
 -- * 'reaFields'
---
--- * 'reaAlt'
 readgroupsetsSearch'
-    :: ReadgroupsetsSearch'
-readgroupsetsSearch' =
+    :: SearchReadGroupSetsRequest -- ^ 'SearchReadGroupSetsRequest'
+    -> ReadgroupsetsSearch'
+readgroupsetsSearch' pReaSearchReadGroupSetsRequest_ =
     ReadgroupsetsSearch'
     { _reaQuotaUser = Nothing
     , _reaPrettyPrint = True
-    , _reaUserIp = Nothing
+    , _reaUserIP = Nothing
+    , _reaSearchReadGroupSetsRequest = pReaSearchReadGroupSetsRequest_
     , _reaKey = Nothing
-    , _reaOauthToken = Nothing
+    , _reaOAuthToken = Nothing
     , _reaFields = Nothing
-    , _reaAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -116,41 +118,48 @@ reaPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-reaUserIp :: Lens' ReadgroupsetsSearch' (Maybe Text)
-reaUserIp
-  = lens _reaUserIp (\ s a -> s{_reaUserIp = a})
+reaUserIP :: Lens' ReadgroupsetsSearch' (Maybe Text)
+reaUserIP
+  = lens _reaUserIP (\ s a -> s{_reaUserIP = a})
+
+-- | Multipart request metadata.
+reaSearchReadGroupSetsRequest :: Lens' ReadgroupsetsSearch' SearchReadGroupSetsRequest
+reaSearchReadGroupSetsRequest
+  = lens _reaSearchReadGroupSetsRequest
+      (\ s a -> s{_reaSearchReadGroupSetsRequest = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-reaKey :: Lens' ReadgroupsetsSearch' (Maybe Text)
+reaKey :: Lens' ReadgroupsetsSearch' (Maybe Key)
 reaKey = lens _reaKey (\ s a -> s{_reaKey = a})
 
 -- | OAuth 2.0 token for the current user.
-reaOauthToken :: Lens' ReadgroupsetsSearch' (Maybe Text)
-reaOauthToken
-  = lens _reaOauthToken
-      (\ s a -> s{_reaOauthToken = a})
+reaOAuthToken :: Lens' ReadgroupsetsSearch' (Maybe OAuthToken)
+reaOAuthToken
+  = lens _reaOAuthToken
+      (\ s a -> s{_reaOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 reaFields :: Lens' ReadgroupsetsSearch' (Maybe Text)
 reaFields
   = lens _reaFields (\ s a -> s{_reaFields = a})
 
--- | Data format for the response.
-reaAlt :: Lens' ReadgroupsetsSearch' Alt
-reaAlt = lens _reaAlt (\ s a -> s{_reaAlt = a})
+instance GoogleAuth ReadgroupsetsSearch' where
+        authKey = reaKey . _Just
+        authToken = reaOAuthToken . _Just
 
 instance GoogleRequest ReadgroupsetsSearch' where
         type Rs ReadgroupsetsSearch' =
              SearchReadGroupSetsResponse
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u ReadgroupsetsSearch'{..}
-          = go _reaQuotaUser (Just _reaPrettyPrint) _reaUserIp
+          = go _reaQuotaUser (Just _reaPrettyPrint) _reaUserIP
               _reaKey
-              _reaOauthToken
+              _reaOAuthToken
               _reaFields
-              (Just _reaAlt)
+              (Just AltJSON)
+              _reaSearchReadGroupSetsRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ReadgroupsetsSearchResource)

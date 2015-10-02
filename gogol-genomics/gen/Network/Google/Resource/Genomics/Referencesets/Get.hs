@@ -33,11 +33,10 @@ module Network.Google.Resource.Genomics.Referencesets.Get
     , rReferenceSetId
     , rQuotaUser
     , rPrettyPrint
-    , rUserIp
+    , rUserIP
     , rKey
-    , rOauthToken
+    , rOAuthToken
     , rFields
-    , rAlt
     ) where
 
 import           Network.Google.Genomics.Types
@@ -51,10 +50,10 @@ type ReferencesetsGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Get '[JSON] ReferenceSet
+                     QueryParam "alt" AltJSON :> Get '[JSON] ReferenceSet
 
 -- | Gets a reference set. Implements GlobalAllianceApi.getReferenceSet.
 --
@@ -63,11 +62,10 @@ data ReferencesetsGet' = ReferencesetsGet'
     { _rReferenceSetId :: !Text
     , _rQuotaUser      :: !(Maybe Text)
     , _rPrettyPrint    :: !Bool
-    , _rUserIp         :: !(Maybe Text)
-    , _rKey            :: !(Maybe Text)
-    , _rOauthToken     :: !(Maybe Text)
+    , _rUserIP         :: !(Maybe Text)
+    , _rKey            :: !(Maybe Key)
+    , _rOAuthToken     :: !(Maybe OAuthToken)
     , _rFields         :: !(Maybe Text)
-    , _rAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReferencesetsGet'' with the minimum fields required to make a request.
@@ -80,15 +78,13 @@ data ReferencesetsGet' = ReferencesetsGet'
 --
 -- * 'rPrettyPrint'
 --
--- * 'rUserIp'
+-- * 'rUserIP'
 --
 -- * 'rKey'
 --
--- * 'rOauthToken'
+-- * 'rOAuthToken'
 --
 -- * 'rFields'
---
--- * 'rAlt'
 referencesetsGet'
     :: Text -- ^ 'referenceSetId'
     -> ReferencesetsGet'
@@ -97,11 +93,10 @@ referencesetsGet' pRReferenceSetId_ =
     { _rReferenceSetId = pRReferenceSetId_
     , _rQuotaUser = Nothing
     , _rPrettyPrint = True
-    , _rUserIp = Nothing
+    , _rUserIP = Nothing
     , _rKey = Nothing
-    , _rOauthToken = Nothing
+    , _rOAuthToken = Nothing
     , _rFields = Nothing
-    , _rAlt = JSON
     }
 
 -- | The ID of the reference set.
@@ -124,27 +119,27 @@ rPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rUserIp :: Lens' ReferencesetsGet' (Maybe Text)
-rUserIp = lens _rUserIp (\ s a -> s{_rUserIp = a})
+rUserIP :: Lens' ReferencesetsGet' (Maybe Text)
+rUserIP = lens _rUserIP (\ s a -> s{_rUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rKey :: Lens' ReferencesetsGet' (Maybe Text)
+rKey :: Lens' ReferencesetsGet' (Maybe Key)
 rKey = lens _rKey (\ s a -> s{_rKey = a})
 
 -- | OAuth 2.0 token for the current user.
-rOauthToken :: Lens' ReferencesetsGet' (Maybe Text)
-rOauthToken
-  = lens _rOauthToken (\ s a -> s{_rOauthToken = a})
+rOAuthToken :: Lens' ReferencesetsGet' (Maybe OAuthToken)
+rOAuthToken
+  = lens _rOAuthToken (\ s a -> s{_rOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 rFields :: Lens' ReferencesetsGet' (Maybe Text)
 rFields = lens _rFields (\ s a -> s{_rFields = a})
 
--- | Data format for the response.
-rAlt :: Lens' ReferencesetsGet' Alt
-rAlt = lens _rAlt (\ s a -> s{_rAlt = a})
+instance GoogleAuth ReferencesetsGet' where
+        authKey = rKey . _Just
+        authToken = rOAuthToken . _Just
 
 instance GoogleRequest ReferencesetsGet' where
         type Rs ReferencesetsGet' = ReferenceSet
@@ -152,11 +147,11 @@ instance GoogleRequest ReferencesetsGet' where
         requestWithRoute r u ReferencesetsGet'{..}
           = go _rReferenceSetId _rQuotaUser
               (Just _rPrettyPrint)
-              _rUserIp
+              _rUserIP
               _rKey
-              _rOauthToken
+              _rOAuthToken
               _rFields
-              (Just _rAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ReferencesetsGetResource)

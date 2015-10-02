@@ -23,7 +23,7 @@
 -- to use different resource name schemes, such as
 -- \`users\/*\/operations\`.
 --
--- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @AppengineAppsOperationsList@.
+-- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @AppEngineAppsOperationsList@.
 module Network.Google.Resource.AppEngine.Apps.Operations.List
     (
     -- * REST Resource
@@ -46,17 +46,16 @@ module Network.Google.Resource.AppEngine.Apps.Operations.List
     , aolAppsId
     , aolFilter
     , aolPageToken
-    , aolOauthToken
+    , aolOAuthToken
     , aolPageSize
     , aolFields
     , aolCallback
-    , aolAlt
     ) where
 
 import           Network.Google.AppEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AppengineAppsOperationsList@ which the
+-- | A resource alias for @AppEngineAppsOperationsList@ which the
 -- 'AppsOperationsList'' request conforms to.
 type AppsOperationsListResource =
      "v1beta4" :>
@@ -71,14 +70,14 @@ type AppsOperationsListResource =
                        QueryParam "access_token" Text :>
                          QueryParam "uploadType" Text :>
                            QueryParam "bearer_token" Text :>
-                             QueryParam "key" Text :>
+                             QueryParam "key" Key :>
                                QueryParam "filter" Text :>
                                  QueryParam "pageToken" Text :>
-                                   QueryParam "oauth_token" Text :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "pageSize" Int32 :>
                                        QueryParam "fields" Text :>
                                          QueryParam "callback" Text :>
-                                           QueryParam "alt" Text :>
+                                           QueryParam "alt" AltJSON :>
                                              Get '[JSON] ListOperationsResponse
 
 -- | Lists operations that match the specified filter in the request. If the
@@ -97,15 +96,14 @@ data AppsOperationsList' = AppsOperationsList'
     , _aolAccessToken    :: !(Maybe Text)
     , _aolUploadType     :: !(Maybe Text)
     , _aolBearerToken    :: !(Maybe Text)
-    , _aolKey            :: !(Maybe Text)
+    , _aolKey            :: !(Maybe Key)
     , _aolAppsId         :: !Text
     , _aolFilter         :: !(Maybe Text)
     , _aolPageToken      :: !(Maybe Text)
-    , _aolOauthToken     :: !(Maybe Text)
+    , _aolOAuthToken     :: !(Maybe OAuthToken)
     , _aolPageSize       :: !(Maybe Int32)
     , _aolFields         :: !(Maybe Text)
     , _aolCallback       :: !(Maybe Text)
-    , _aolAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AppsOperationsList'' with the minimum fields required to make a request.
@@ -136,15 +134,13 @@ data AppsOperationsList' = AppsOperationsList'
 --
 -- * 'aolPageToken'
 --
--- * 'aolOauthToken'
+-- * 'aolOAuthToken'
 --
 -- * 'aolPageSize'
 --
 -- * 'aolFields'
 --
 -- * 'aolCallback'
---
--- * 'aolAlt'
 appsOperationsList'
     :: Text -- ^ 'appsId'
     -> AppsOperationsList'
@@ -162,11 +158,10 @@ appsOperationsList' pAolAppsId_ =
     , _aolAppsId = pAolAppsId_
     , _aolFilter = Nothing
     , _aolPageToken = Nothing
-    , _aolOauthToken = Nothing
+    , _aolOAuthToken = Nothing
     , _aolPageSize = Nothing
     , _aolFields = Nothing
     , _aolCallback = Nothing
-    , _aolAlt = "json"
     }
 
 -- | V1 error format.
@@ -217,7 +212,7 @@ aolBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aolKey :: Lens' AppsOperationsList' (Maybe Text)
+aolKey :: Lens' AppsOperationsList' (Maybe Key)
 aolKey = lens _aolKey (\ s a -> s{_aolKey = a})
 
 -- | Part of \`name\`. The name of the operation collection.
@@ -236,10 +231,10 @@ aolPageToken
   = lens _aolPageToken (\ s a -> s{_aolPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-aolOauthToken :: Lens' AppsOperationsList' (Maybe Text)
-aolOauthToken
-  = lens _aolOauthToken
-      (\ s a -> s{_aolOauthToken = a})
+aolOAuthToken :: Lens' AppsOperationsList' (Maybe OAuthToken)
+aolOAuthToken
+  = lens _aolOAuthToken
+      (\ s a -> s{_aolOAuthToken = a})
 
 -- | The standard list page size.
 aolPageSize :: Lens' AppsOperationsList' (Maybe Int32)
@@ -256,9 +251,9 @@ aolCallback :: Lens' AppsOperationsList' (Maybe Text)
 aolCallback
   = lens _aolCallback (\ s a -> s{_aolCallback = a})
 
--- | Data format for response.
-aolAlt :: Lens' AppsOperationsList' Text
-aolAlt = lens _aolAlt (\ s a -> s{_aolAlt = a})
+instance GoogleAuth AppsOperationsList' where
+        authKey = aolKey . _Just
+        authToken = aolOAuthToken . _Just
 
 instance GoogleRequest AppsOperationsList' where
         type Rs AppsOperationsList' = ListOperationsResponse
@@ -274,11 +269,11 @@ instance GoogleRequest AppsOperationsList' where
               _aolAppsId
               _aolFilter
               _aolPageToken
-              _aolOauthToken
+              _aolOAuthToken
               _aolPageSize
               _aolFields
               _aolCallback
-              (Just _aolAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AppsOperationsListResource)

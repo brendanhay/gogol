@@ -33,12 +33,11 @@ module Network.Google.Resource.Compute.HTTPHealthChecks.Delete
     , httphcdQuotaUser
     , httphcdPrettyPrint
     , httphcdProject
-    , httphcdUserIp
+    , httphcdUserIP
     , httphcdKey
-    , httphcdHttpHealthCheck
-    , httphcdOauthToken
+    , httphcdHTTPHealthCheck
+    , httphcdOAuthToken
     , httphcdFields
-    , httphcdAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -54,10 +53,10 @@ type HttpHealthChecksDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Delete '[JSON] Operation
+                         QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified HttpHealthCheck resource.
 --
@@ -66,12 +65,11 @@ data HTTPHealthChecksDelete' = HTTPHealthChecksDelete'
     { _httphcdQuotaUser       :: !(Maybe Text)
     , _httphcdPrettyPrint     :: !Bool
     , _httphcdProject         :: !Text
-    , _httphcdUserIp          :: !(Maybe Text)
-    , _httphcdKey             :: !(Maybe Text)
-    , _httphcdHttpHealthCheck :: !Text
-    , _httphcdOauthToken      :: !(Maybe Text)
+    , _httphcdUserIP          :: !(Maybe Text)
+    , _httphcdKey             :: !(Maybe Key)
+    , _httphcdHTTPHealthCheck :: !Text
+    , _httphcdOAuthToken      :: !(Maybe OAuthToken)
     , _httphcdFields          :: !(Maybe Text)
-    , _httphcdAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'HTTPHealthChecksDelete'' with the minimum fields required to make a request.
@@ -84,32 +82,29 @@ data HTTPHealthChecksDelete' = HTTPHealthChecksDelete'
 --
 -- * 'httphcdProject'
 --
--- * 'httphcdUserIp'
+-- * 'httphcdUserIP'
 --
 -- * 'httphcdKey'
 --
--- * 'httphcdHttpHealthCheck'
+-- * 'httphcdHTTPHealthCheck'
 --
--- * 'httphcdOauthToken'
+-- * 'httphcdOAuthToken'
 --
 -- * 'httphcdFields'
---
--- * 'httphcdAlt'
 hTTPHealthChecksDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'httpHealthCheck'
     -> HTTPHealthChecksDelete'
-hTTPHealthChecksDelete' pHttphcdProject_ pHttphcdHttpHealthCheck_ =
+hTTPHealthChecksDelete' pHttphcdProject_ pHttphcdHTTPHealthCheck_ =
     HTTPHealthChecksDelete'
     { _httphcdQuotaUser = Nothing
     , _httphcdPrettyPrint = True
     , _httphcdProject = pHttphcdProject_
-    , _httphcdUserIp = Nothing
+    , _httphcdUserIP = Nothing
     , _httphcdKey = Nothing
-    , _httphcdHttpHealthCheck = pHttphcdHttpHealthCheck_
-    , _httphcdOauthToken = Nothing
+    , _httphcdHTTPHealthCheck = pHttphcdHTTPHealthCheck_
+    , _httphcdOAuthToken = Nothing
     , _httphcdFields = Nothing
-    , _httphcdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -134,29 +129,29 @@ httphcdProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-httphcdUserIp :: Lens' HTTPHealthChecksDelete' (Maybe Text)
-httphcdUserIp
-  = lens _httphcdUserIp
-      (\ s a -> s{_httphcdUserIp = a})
+httphcdUserIP :: Lens' HTTPHealthChecksDelete' (Maybe Text)
+httphcdUserIP
+  = lens _httphcdUserIP
+      (\ s a -> s{_httphcdUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-httphcdKey :: Lens' HTTPHealthChecksDelete' (Maybe Text)
+httphcdKey :: Lens' HTTPHealthChecksDelete' (Maybe Key)
 httphcdKey
   = lens _httphcdKey (\ s a -> s{_httphcdKey = a})
 
 -- | Name of the HttpHealthCheck resource to delete.
-httphcdHttpHealthCheck :: Lens' HTTPHealthChecksDelete' Text
-httphcdHttpHealthCheck
-  = lens _httphcdHttpHealthCheck
-      (\ s a -> s{_httphcdHttpHealthCheck = a})
+httphcdHTTPHealthCheck :: Lens' HTTPHealthChecksDelete' Text
+httphcdHTTPHealthCheck
+  = lens _httphcdHTTPHealthCheck
+      (\ s a -> s{_httphcdHTTPHealthCheck = a})
 
 -- | OAuth 2.0 token for the current user.
-httphcdOauthToken :: Lens' HTTPHealthChecksDelete' (Maybe Text)
-httphcdOauthToken
-  = lens _httphcdOauthToken
-      (\ s a -> s{_httphcdOauthToken = a})
+httphcdOAuthToken :: Lens' HTTPHealthChecksDelete' (Maybe OAuthToken)
+httphcdOAuthToken
+  = lens _httphcdOAuthToken
+      (\ s a -> s{_httphcdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 httphcdFields :: Lens' HTTPHealthChecksDelete' (Maybe Text)
@@ -164,10 +159,9 @@ httphcdFields
   = lens _httphcdFields
       (\ s a -> s{_httphcdFields = a})
 
--- | Data format for the response.
-httphcdAlt :: Lens' HTTPHealthChecksDelete' Alt
-httphcdAlt
-  = lens _httphcdAlt (\ s a -> s{_httphcdAlt = a})
+instance GoogleAuth HTTPHealthChecksDelete' where
+        authKey = httphcdKey . _Just
+        authToken = httphcdOAuthToken . _Just
 
 instance GoogleRequest HTTPHealthChecksDelete' where
         type Rs HTTPHealthChecksDelete' = Operation
@@ -175,12 +169,12 @@ instance GoogleRequest HTTPHealthChecksDelete' where
         requestWithRoute r u HTTPHealthChecksDelete'{..}
           = go _httphcdQuotaUser (Just _httphcdPrettyPrint)
               _httphcdProject
-              _httphcdUserIp
+              _httphcdUserIP
               _httphcdKey
-              _httphcdHttpHealthCheck
-              _httphcdOauthToken
+              _httphcdHTTPHealthCheck
+              _httphcdOAuthToken
               _httphcdFields
-              (Just _httphcdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy HttpHealthChecksDeleteResource)

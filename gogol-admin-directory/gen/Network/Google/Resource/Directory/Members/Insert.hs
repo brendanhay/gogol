@@ -32,12 +32,12 @@ module Network.Google.Resource.Directory.Members.Insert
     -- * Request Lenses
     , miQuotaUser
     , miPrettyPrint
-    , miUserIp
+    , miUserIP
     , miGroupKey
     , miKey
-    , miOauthToken
+    , miMember
+    , miOAuthToken
     , miFields
-    , miAlt
     ) where
 
 import           Network.Google.AdminDirectory.Types
@@ -52,10 +52,11 @@ type MembersInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] Member
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Member :> Post '[JSON] Member
 
 -- | Add user to the specified group.
 --
@@ -63,12 +64,12 @@ type MembersInsertResource =
 data MembersInsert' = MembersInsert'
     { _miQuotaUser   :: !(Maybe Text)
     , _miPrettyPrint :: !Bool
-    , _miUserIp      :: !(Maybe Text)
+    , _miUserIP      :: !(Maybe Text)
     , _miGroupKey    :: !Text
-    , _miKey         :: !(Maybe Text)
-    , _miOauthToken  :: !(Maybe Text)
+    , _miKey         :: !(Maybe Key)
+    , _miMember      :: !Member
+    , _miOAuthToken  :: !(Maybe OAuthToken)
     , _miFields      :: !(Maybe Text)
-    , _miAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MembersInsert'' with the minimum fields required to make a request.
@@ -79,30 +80,31 @@ data MembersInsert' = MembersInsert'
 --
 -- * 'miPrettyPrint'
 --
--- * 'miUserIp'
+-- * 'miUserIP'
 --
 -- * 'miGroupKey'
 --
 -- * 'miKey'
 --
--- * 'miOauthToken'
+-- * 'miMember'
+--
+-- * 'miOAuthToken'
 --
 -- * 'miFields'
---
--- * 'miAlt'
 membersInsert'
     :: Text -- ^ 'groupKey'
+    -> Member -- ^ 'Member'
     -> MembersInsert'
-membersInsert' pMiGroupKey_ =
+membersInsert' pMiGroupKey_ pMiMember_ =
     MembersInsert'
     { _miQuotaUser = Nothing
     , _miPrettyPrint = True
-    , _miUserIp = Nothing
+    , _miUserIP = Nothing
     , _miGroupKey = pMiGroupKey_
     , _miKey = Nothing
-    , _miOauthToken = Nothing
+    , _miMember = pMiMember_
+    , _miOAuthToken = Nothing
     , _miFields = Nothing
-    , _miAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,8 +122,8 @@ miPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-miUserIp :: Lens' MembersInsert' (Maybe Text)
-miUserIp = lens _miUserIp (\ s a -> s{_miUserIp = a})
+miUserIP :: Lens' MembersInsert' (Maybe Text)
+miUserIP = lens _miUserIP (\ s a -> s{_miUserIP = a})
 
 -- | Email or immutable Id of the group
 miGroupKey :: Lens' MembersInsert' Text
@@ -131,32 +133,37 @@ miGroupKey
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-miKey :: Lens' MembersInsert' (Maybe Text)
+miKey :: Lens' MembersInsert' (Maybe Key)
 miKey = lens _miKey (\ s a -> s{_miKey = a})
 
+-- | Multipart request metadata.
+miMember :: Lens' MembersInsert' Member
+miMember = lens _miMember (\ s a -> s{_miMember = a})
+
 -- | OAuth 2.0 token for the current user.
-miOauthToken :: Lens' MembersInsert' (Maybe Text)
-miOauthToken
-  = lens _miOauthToken (\ s a -> s{_miOauthToken = a})
+miOAuthToken :: Lens' MembersInsert' (Maybe OAuthToken)
+miOAuthToken
+  = lens _miOAuthToken (\ s a -> s{_miOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 miFields :: Lens' MembersInsert' (Maybe Text)
 miFields = lens _miFields (\ s a -> s{_miFields = a})
 
--- | Data format for the response.
-miAlt :: Lens' MembersInsert' Alt
-miAlt = lens _miAlt (\ s a -> s{_miAlt = a})
+instance GoogleAuth MembersInsert' where
+        authKey = miKey . _Just
+        authToken = miOAuthToken . _Just
 
 instance GoogleRequest MembersInsert' where
         type Rs MembersInsert' = Member
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u MembersInsert'{..}
-          = go _miQuotaUser (Just _miPrettyPrint) _miUserIp
+          = go _miQuotaUser (Just _miPrettyPrint) _miUserIP
               _miGroupKey
               _miKey
-              _miOauthToken
+              _miOAuthToken
               _miFields
-              (Just _miAlt)
+              (Just AltJSON)
+              _miMember
           where go
                   = clientWithRoute
                       (Proxy :: Proxy MembersInsertResource)

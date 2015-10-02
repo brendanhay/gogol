@@ -32,15 +32,14 @@ module Network.Google.Resource.Games.Players.List
     -- * Request Lenses
     , plQuotaUser
     , plPrettyPrint
-    , plUserIp
+    , plUserIP
     , plCollection
     , plKey
     , plLanguage
     , plPageToken
-    , plOauthToken
+    , plOAuthToken
     , plMaxResults
     , plFields
-    , plAlt
     ) where
 
 import           Network.Google.Games.Types
@@ -56,13 +55,13 @@ type PlayersListResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "language" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "maxResults" Int32 :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :>
+                               QueryParam "alt" AltJSON :>
                                  Get '[JSON] PlayerListResponse
 
 -- | Get the collection of players for the currently authenticated user.
@@ -71,15 +70,14 @@ type PlayersListResource =
 data PlayersList' = PlayersList'
     { _plQuotaUser   :: !(Maybe Text)
     , _plPrettyPrint :: !Bool
-    , _plUserIp      :: !(Maybe Text)
+    , _plUserIP      :: !(Maybe Text)
     , _plCollection  :: !GamesPlayersListCollection
-    , _plKey         :: !(Maybe Text)
+    , _plKey         :: !(Maybe Key)
     , _plLanguage    :: !(Maybe Text)
     , _plPageToken   :: !(Maybe Text)
-    , _plOauthToken  :: !(Maybe Text)
+    , _plOAuthToken  :: !(Maybe OAuthToken)
     , _plMaxResults  :: !(Maybe Int32)
     , _plFields      :: !(Maybe Text)
-    , _plAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayersList'' with the minimum fields required to make a request.
@@ -90,7 +88,7 @@ data PlayersList' = PlayersList'
 --
 -- * 'plPrettyPrint'
 --
--- * 'plUserIp'
+-- * 'plUserIP'
 --
 -- * 'plCollection'
 --
@@ -100,13 +98,11 @@ data PlayersList' = PlayersList'
 --
 -- * 'plPageToken'
 --
--- * 'plOauthToken'
+-- * 'plOAuthToken'
 --
 -- * 'plMaxResults'
 --
 -- * 'plFields'
---
--- * 'plAlt'
 playersList'
     :: GamesPlayersListCollection -- ^ 'collection'
     -> PlayersList'
@@ -114,15 +110,14 @@ playersList' pPlCollection_ =
     PlayersList'
     { _plQuotaUser = Nothing
     , _plPrettyPrint = True
-    , _plUserIp = Nothing
+    , _plUserIP = Nothing
     , _plCollection = pPlCollection_
     , _plKey = Nothing
     , _plLanguage = Nothing
     , _plPageToken = Nothing
-    , _plOauthToken = Nothing
+    , _plOAuthToken = Nothing
     , _plMaxResults = Nothing
     , _plFields = Nothing
-    , _plAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -140,8 +135,8 @@ plPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-plUserIp :: Lens' PlayersList' (Maybe Text)
-plUserIp = lens _plUserIp (\ s a -> s{_plUserIp = a})
+plUserIP :: Lens' PlayersList' (Maybe Text)
+plUserIP = lens _plUserIP (\ s a -> s{_plUserIP = a})
 
 -- | Collection of players being retrieved
 plCollection :: Lens' PlayersList' GamesPlayersListCollection
@@ -151,7 +146,7 @@ plCollection
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-plKey :: Lens' PlayersList' (Maybe Text)
+plKey :: Lens' PlayersList' (Maybe Key)
 plKey = lens _plKey (\ s a -> s{_plKey = a})
 
 -- | The preferred language to use for strings returned by this method.
@@ -165,9 +160,9 @@ plPageToken
   = lens _plPageToken (\ s a -> s{_plPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-plOauthToken :: Lens' PlayersList' (Maybe Text)
-plOauthToken
-  = lens _plOauthToken (\ s a -> s{_plOauthToken = a})
+plOAuthToken :: Lens' PlayersList' (Maybe OAuthToken)
+plOAuthToken
+  = lens _plOAuthToken (\ s a -> s{_plOAuthToken = a})
 
 -- | The maximum number of player resources to return in the response, used
 -- for paging. For any response, the actual number of player resources
@@ -180,23 +175,23 @@ plMaxResults
 plFields :: Lens' PlayersList' (Maybe Text)
 plFields = lens _plFields (\ s a -> s{_plFields = a})
 
--- | Data format for the response.
-plAlt :: Lens' PlayersList' Alt
-plAlt = lens _plAlt (\ s a -> s{_plAlt = a})
+instance GoogleAuth PlayersList' where
+        authKey = plKey . _Just
+        authToken = plOAuthToken . _Just
 
 instance GoogleRequest PlayersList' where
         type Rs PlayersList' = PlayerListResponse
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u PlayersList'{..}
-          = go _plQuotaUser (Just _plPrettyPrint) _plUserIp
+          = go _plQuotaUser (Just _plPrettyPrint) _plUserIP
               _plCollection
               _plKey
               _plLanguage
               _plPageToken
-              _plOauthToken
+              _plOAuthToken
               _plMaxResults
               _plFields
-              (Just _plAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PlayersListResource)

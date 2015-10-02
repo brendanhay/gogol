@@ -37,16 +37,16 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.ModifyAckDeadline
     , psmadQuotaUser
     , psmadPrettyPrint
     , psmadUploadProtocol
+    , psmadModifyAckDeadlineRequest
     , psmadPp
     , psmadAccessToken
     , psmadUploadType
     , psmadBearerToken
     , psmadKey
-    , psmadOauthToken
+    , psmadOAuthToken
     , psmadSubscription
     , psmadFields
     , psmadCallback
-    , psmadAlt
     ) where
 
 import           Network.Google.Prelude
@@ -65,11 +65,13 @@ type ProjectsSubscriptionsModifyAckDeadlineResource =
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
                        QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
                                QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :> Post '[JSON] Empty
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON] ModifyAckDeadlineRequest :>
+                                     Post '[JSON] Empty
 
 -- | Modifies the ack deadline for a specific message. This method is useful
 -- to indicate that more time is needed to process a message by the
@@ -78,20 +80,20 @@ type ProjectsSubscriptionsModifyAckDeadlineResource =
 --
 -- /See:/ 'projectsSubscriptionsModifyAckDeadline'' smart constructor.
 data ProjectsSubscriptionsModifyAckDeadline' = ProjectsSubscriptionsModifyAckDeadline'
-    { _psmadXgafv          :: !(Maybe Text)
-    , _psmadQuotaUser      :: !(Maybe Text)
-    , _psmadPrettyPrint    :: !Bool
-    , _psmadUploadProtocol :: !(Maybe Text)
-    , _psmadPp             :: !Bool
-    , _psmadAccessToken    :: !(Maybe Text)
-    , _psmadUploadType     :: !(Maybe Text)
-    , _psmadBearerToken    :: !(Maybe Text)
-    , _psmadKey            :: !(Maybe Text)
-    , _psmadOauthToken     :: !(Maybe Text)
-    , _psmadSubscription   :: !Text
-    , _psmadFields         :: !(Maybe Text)
-    , _psmadCallback       :: !(Maybe Text)
-    , _psmadAlt            :: !Text
+    { _psmadXgafv                    :: !(Maybe Text)
+    , _psmadQuotaUser                :: !(Maybe Text)
+    , _psmadPrettyPrint              :: !Bool
+    , _psmadUploadProtocol           :: !(Maybe Text)
+    , _psmadModifyAckDeadlineRequest :: !ModifyAckDeadlineRequest
+    , _psmadPp                       :: !Bool
+    , _psmadAccessToken              :: !(Maybe Text)
+    , _psmadUploadType               :: !(Maybe Text)
+    , _psmadBearerToken              :: !(Maybe Text)
+    , _psmadKey                      :: !(Maybe Key)
+    , _psmadOAuthToken               :: !(Maybe OAuthToken)
+    , _psmadSubscription             :: !Text
+    , _psmadFields                   :: !(Maybe Text)
+    , _psmadCallback                 :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsSubscriptionsModifyAckDeadline'' with the minimum fields required to make a request.
@@ -106,6 +108,8 @@ data ProjectsSubscriptionsModifyAckDeadline' = ProjectsSubscriptionsModifyAckDea
 --
 -- * 'psmadUploadProtocol'
 --
+-- * 'psmadModifyAckDeadlineRequest'
+--
 -- * 'psmadPp'
 --
 -- * 'psmadAccessToken'
@@ -116,34 +120,33 @@ data ProjectsSubscriptionsModifyAckDeadline' = ProjectsSubscriptionsModifyAckDea
 --
 -- * 'psmadKey'
 --
--- * 'psmadOauthToken'
+-- * 'psmadOAuthToken'
 --
 -- * 'psmadSubscription'
 --
 -- * 'psmadFields'
 --
 -- * 'psmadCallback'
---
--- * 'psmadAlt'
 projectsSubscriptionsModifyAckDeadline'
-    :: Text -- ^ 'subscription'
+    :: ModifyAckDeadlineRequest -- ^ 'ModifyAckDeadlineRequest'
+    -> Text -- ^ 'subscription'
     -> ProjectsSubscriptionsModifyAckDeadline'
-projectsSubscriptionsModifyAckDeadline' pPsmadSubscription_ =
+projectsSubscriptionsModifyAckDeadline' pPsmadModifyAckDeadlineRequest_ pPsmadSubscription_ =
     ProjectsSubscriptionsModifyAckDeadline'
     { _psmadXgafv = Nothing
     , _psmadQuotaUser = Nothing
     , _psmadPrettyPrint = True
     , _psmadUploadProtocol = Nothing
+    , _psmadModifyAckDeadlineRequest = pPsmadModifyAckDeadlineRequest_
     , _psmadPp = True
     , _psmadAccessToken = Nothing
     , _psmadUploadType = Nothing
     , _psmadBearerToken = Nothing
     , _psmadKey = Nothing
-    , _psmadOauthToken = Nothing
+    , _psmadOAuthToken = Nothing
     , _psmadSubscription = pPsmadSubscription_
     , _psmadFields = Nothing
     , _psmadCallback = Nothing
-    , _psmadAlt = "json"
     }
 
 -- | V1 error format.
@@ -171,6 +174,12 @@ psmadUploadProtocol
   = lens _psmadUploadProtocol
       (\ s a -> s{_psmadUploadProtocol = a})
 
+-- | Multipart request metadata.
+psmadModifyAckDeadlineRequest :: Lens' ProjectsSubscriptionsModifyAckDeadline' ModifyAckDeadlineRequest
+psmadModifyAckDeadlineRequest
+  = lens _psmadModifyAckDeadlineRequest
+      (\ s a -> s{_psmadModifyAckDeadlineRequest = a})
+
 -- | Pretty-print response.
 psmadPp :: Lens' ProjectsSubscriptionsModifyAckDeadline' Bool
 psmadPp = lens _psmadPp (\ s a -> s{_psmadPp = a})
@@ -196,14 +205,14 @@ psmadBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-psmadKey :: Lens' ProjectsSubscriptionsModifyAckDeadline' (Maybe Text)
+psmadKey :: Lens' ProjectsSubscriptionsModifyAckDeadline' (Maybe Key)
 psmadKey = lens _psmadKey (\ s a -> s{_psmadKey = a})
 
 -- | OAuth 2.0 token for the current user.
-psmadOauthToken :: Lens' ProjectsSubscriptionsModifyAckDeadline' (Maybe Text)
-psmadOauthToken
-  = lens _psmadOauthToken
-      (\ s a -> s{_psmadOauthToken = a})
+psmadOAuthToken :: Lens' ProjectsSubscriptionsModifyAckDeadline' (Maybe OAuthToken)
+psmadOAuthToken
+  = lens _psmadOAuthToken
+      (\ s a -> s{_psmadOAuthToken = a})
 
 -- | The name of the subscription.
 psmadSubscription :: Lens' ProjectsSubscriptionsModifyAckDeadline' Text
@@ -222,9 +231,10 @@ psmadCallback
   = lens _psmadCallback
       (\ s a -> s{_psmadCallback = a})
 
--- | Data format for response.
-psmadAlt :: Lens' ProjectsSubscriptionsModifyAckDeadline' Text
-psmadAlt = lens _psmadAlt (\ s a -> s{_psmadAlt = a})
+instance GoogleAuth
+         ProjectsSubscriptionsModifyAckDeadline' where
+        authKey = psmadKey . _Just
+        authToken = psmadOAuthToken . _Just
 
 instance GoogleRequest
          ProjectsSubscriptionsModifyAckDeadline' where
@@ -241,11 +251,12 @@ instance GoogleRequest
               _psmadUploadType
               _psmadBearerToken
               _psmadKey
-              _psmadOauthToken
+              _psmadOAuthToken
               _psmadSubscription
               _psmadFields
               _psmadCallback
-              (Just _psmadAlt)
+              (Just AltJSON)
+              _psmadModifyAckDeadlineRequest
           where go
                   = clientWithRoute
                       (Proxy ::

@@ -32,12 +32,11 @@ module Network.Google.Resource.Webmasters.Sites.Delete
     -- * Request Lenses
     , sdQuotaUser
     , sdPrettyPrint
-    , sdUserIp
-    , sdSiteUrl
+    , sdUserIP
+    , sdSiteURL
     , sdKey
-    , sdOauthToken
+    , sdOAuthToken
     , sdFields
-    , sdAlt
     ) where
 
 import           Network.Google.Prelude
@@ -51,10 +50,10 @@ type SitesDeleteResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Delete '[JSON] ()
+                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Removes a site from the set of the user\'s Webmaster Tools sites.
 --
@@ -62,12 +61,11 @@ type SitesDeleteResource =
 data SitesDelete' = SitesDelete'
     { _sdQuotaUser   :: !(Maybe Text)
     , _sdPrettyPrint :: !Bool
-    , _sdUserIp      :: !(Maybe Text)
-    , _sdSiteUrl     :: !Text
-    , _sdKey         :: !(Maybe Text)
-    , _sdOauthToken  :: !(Maybe Text)
+    , _sdUserIP      :: !(Maybe Text)
+    , _sdSiteURL     :: !Text
+    , _sdKey         :: !(Maybe Key)
+    , _sdOAuthToken  :: !(Maybe OAuthToken)
     , _sdFields      :: !(Maybe Text)
-    , _sdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SitesDelete'' with the minimum fields required to make a request.
@@ -78,30 +76,27 @@ data SitesDelete' = SitesDelete'
 --
 -- * 'sdPrettyPrint'
 --
--- * 'sdUserIp'
+-- * 'sdUserIP'
 --
--- * 'sdSiteUrl'
+-- * 'sdSiteURL'
 --
 -- * 'sdKey'
 --
--- * 'sdOauthToken'
+-- * 'sdOAuthToken'
 --
 -- * 'sdFields'
---
--- * 'sdAlt'
 sitesDelete'
     :: Text -- ^ 'siteUrl'
     -> SitesDelete'
-sitesDelete' pSdSiteUrl_ =
+sitesDelete' pSdSiteURL_ =
     SitesDelete'
     { _sdQuotaUser = Nothing
     , _sdPrettyPrint = True
-    , _sdUserIp = Nothing
-    , _sdSiteUrl = pSdSiteUrl_
+    , _sdUserIP = Nothing
+    , _sdSiteURL = pSdSiteURL_
     , _sdKey = Nothing
-    , _sdOauthToken = Nothing
+    , _sdOAuthToken = Nothing
     , _sdFields = Nothing
-    , _sdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -119,44 +114,44 @@ sdPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-sdUserIp :: Lens' SitesDelete' (Maybe Text)
-sdUserIp = lens _sdUserIp (\ s a -> s{_sdUserIp = a})
+sdUserIP :: Lens' SitesDelete' (Maybe Text)
+sdUserIP = lens _sdUserIP (\ s a -> s{_sdUserIP = a})
 
 -- | The URI of the property as defined in Search Console. Examples:
 -- http:\/\/www.example.com\/ or android-app:\/\/com.example\/
-sdSiteUrl :: Lens' SitesDelete' Text
-sdSiteUrl
-  = lens _sdSiteUrl (\ s a -> s{_sdSiteUrl = a})
+sdSiteURL :: Lens' SitesDelete' Text
+sdSiteURL
+  = lens _sdSiteURL (\ s a -> s{_sdSiteURL = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-sdKey :: Lens' SitesDelete' (Maybe Text)
+sdKey :: Lens' SitesDelete' (Maybe Key)
 sdKey = lens _sdKey (\ s a -> s{_sdKey = a})
 
 -- | OAuth 2.0 token for the current user.
-sdOauthToken :: Lens' SitesDelete' (Maybe Text)
-sdOauthToken
-  = lens _sdOauthToken (\ s a -> s{_sdOauthToken = a})
+sdOAuthToken :: Lens' SitesDelete' (Maybe OAuthToken)
+sdOAuthToken
+  = lens _sdOAuthToken (\ s a -> s{_sdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 sdFields :: Lens' SitesDelete' (Maybe Text)
 sdFields = lens _sdFields (\ s a -> s{_sdFields = a})
 
--- | Data format for the response.
-sdAlt :: Lens' SitesDelete' Alt
-sdAlt = lens _sdAlt (\ s a -> s{_sdAlt = a})
+instance GoogleAuth SitesDelete' where
+        authKey = sdKey . _Just
+        authToken = sdOAuthToken . _Just
 
 instance GoogleRequest SitesDelete' where
         type Rs SitesDelete' = ()
         request = requestWithRoute defReq webmasterToolsURL
         requestWithRoute r u SitesDelete'{..}
-          = go _sdQuotaUser (Just _sdPrettyPrint) _sdUserIp
-              _sdSiteUrl
+          = go _sdQuotaUser (Just _sdPrettyPrint) _sdUserIP
+              _sdSiteURL
               _sdKey
-              _sdOauthToken
+              _sdOAuthToken
               _sdFields
-              (Just _sdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy SitesDeleteResource)

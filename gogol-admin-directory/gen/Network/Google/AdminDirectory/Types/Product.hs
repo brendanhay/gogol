@@ -265,7 +265,7 @@ instance ToJSON OrgUnit where
 --
 -- /See:/ 'groups' smart constructor.
 data Groups = Groups
-    { _gGroups        :: !(Maybe [Maybe Group])
+    { _gGroups        :: !(Maybe [Group])
     , _gEtag          :: !(Maybe Text)
     , _gNextPageToken :: !(Maybe Text)
     , _gKind          :: !Text
@@ -293,7 +293,7 @@ groups =
     }
 
 -- | List of group objects.
-gGroups :: Lens' Groups [Maybe Group]
+gGroups :: Lens' Groups [Group]
 gGroups
   = lens _gGroups (\ s a -> s{_gGroups = a}) . _Default
       . _Coerce
@@ -677,48 +677,48 @@ instance ToJSON Group where
                   ("description" .=) <$> _groDescription])
 
 --
--- /See:/ 'chromeOsDeviceActiveTimeRanges' smart constructor.
-data ChromeOsDeviceActiveTimeRanges = ChromeOsDeviceActiveTimeRanges
+-- /See:/ 'chromeOSDeviceActiveTimeRanges' smart constructor.
+data ChromeOSDeviceActiveTimeRanges = ChromeOSDeviceActiveTimeRanges
     { _codatrDate       :: !(Maybe UTCTime)
     , _codatrActiveTime :: !(Maybe Int32)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ChromeOsDeviceActiveTimeRanges' with the minimum fields required to make a request.
+-- | Creates a value of 'ChromeOSDeviceActiveTimeRanges' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'codatrDate'
 --
 -- * 'codatrActiveTime'
-chromeOsDeviceActiveTimeRanges
-    :: ChromeOsDeviceActiveTimeRanges
-chromeOsDeviceActiveTimeRanges =
-    ChromeOsDeviceActiveTimeRanges
+chromeOSDeviceActiveTimeRanges
+    :: ChromeOSDeviceActiveTimeRanges
+chromeOSDeviceActiveTimeRanges =
+    ChromeOSDeviceActiveTimeRanges
     { _codatrDate = Nothing
     , _codatrActiveTime = Nothing
     }
 
 -- | Date of usage
-codatrDate :: Lens' ChromeOsDeviceActiveTimeRanges (Maybe UTCTime)
+codatrDate :: Lens' ChromeOSDeviceActiveTimeRanges (Maybe UTCTime)
 codatrDate
   = lens _codatrDate (\ s a -> s{_codatrDate = a})
 
 -- | Duration in milliseconds
-codatrActiveTime :: Lens' ChromeOsDeviceActiveTimeRanges (Maybe Int32)
+codatrActiveTime :: Lens' ChromeOSDeviceActiveTimeRanges (Maybe Int32)
 codatrActiveTime
   = lens _codatrActiveTime
       (\ s a -> s{_codatrActiveTime = a})
 
-instance FromJSON ChromeOsDeviceActiveTimeRanges
+instance FromJSON ChromeOSDeviceActiveTimeRanges
          where
         parseJSON
-          = withObject "ChromeOsDeviceActiveTimeRanges"
+          = withObject "ChromeOSDeviceActiveTimeRanges"
               (\ o ->
-                 ChromeOsDeviceActiveTimeRanges <$>
+                 ChromeOSDeviceActiveTimeRanges <$>
                    (o .:? "date") <*> (o .:? "activeTime"))
 
-instance ToJSON ChromeOsDeviceActiveTimeRanges where
-        toJSON ChromeOsDeviceActiveTimeRanges{..}
+instance ToJSON ChromeOSDeviceActiveTimeRanges where
+        toJSON ChromeOSDeviceActiveTimeRanges{..}
           = object
               (catMaybes
                  [("date" .=) <$> _codatrDate,
@@ -830,7 +830,7 @@ instance ToJSON Asp where
 -- /See:/ 'schemas' smart constructor.
 data Schemas = Schemas
     { _sEtag    :: !(Maybe Text)
-    , _sSchemas :: !(Maybe [Maybe Schema])
+    , _sSchemas :: !(Maybe [Schema])
     , _sKind    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -857,7 +857,7 @@ sEtag :: Lens' Schemas (Maybe Text)
 sEtag = lens _sEtag (\ s a -> s{_sEtag = a})
 
 -- | List of UserSchema objects.
-sSchemas :: Lens' Schemas [Maybe Schema]
+sSchemas :: Lens' Schemas [Schema]
 sSchemas
   = lens _sSchemas (\ s a -> s{_sSchemas = a}) .
       _Default
@@ -885,21 +885,21 @@ instance ToJSON Schemas where
 
 -- | JSON template for Chrome Os Device resource in Directory API.
 --
--- /See:/ 'chromeOsDevice' smart constructor.
-data ChromeOsDevice = ChromeOsDevice
+-- /See:/ 'chromeOSDevice' smart constructor.
+data ChromeOSDevice = ChromeOSDevice
     { _codStatus             :: !(Maybe Text)
     , _codEtag               :: !(Maybe Text)
     , _codAnnotatedUser      :: !(Maybe Text)
     , _codPlatformVersion    :: !(Maybe Text)
     , _codLastSync           :: !(Maybe UTCTime)
-    , _codActiveTimeRanges   :: !(Maybe [ChromeOsDeviceActiveTimeRanges])
+    , _codActiveTimeRanges   :: !(Maybe [ChromeOSDeviceActiveTimeRanges])
     , _codKind               :: !Text
-    , _codEthernetMacAddress :: !(Maybe Text)
+    , _codEthernetMACAddress :: !(Maybe Text)
     , _codLastEnrollmentTime :: !(Maybe UTCTime)
     , _codAnnotatedLocation  :: !(Maybe Text)
-    , _codMacAddress         :: !(Maybe Text)
+    , _codMACAddress         :: !(Maybe Text)
     , _codOrgUnitPath        :: !(Maybe Text)
-    , _codRecentUsers        :: !(Maybe [ChromeOsDeviceRecentUsers])
+    , _codRecentUsers        :: !(Maybe [ChromeOSDeviceRecentUsers])
     , _codSupportEndDate     :: !(Maybe UTCTime)
     , _codModel              :: !(Maybe Text)
     , _codWillAutoRenew      :: !(Maybe Bool)
@@ -911,10 +911,10 @@ data ChromeOsDevice = ChromeOsDevice
     , _codNotes              :: !(Maybe Text)
     , _codSerialNumber       :: !(Maybe Text)
     , _codFirmwareVersion    :: !(Maybe Text)
-    , _codOsVersion          :: !(Maybe Text)
+    , _codOSVersion          :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ChromeOsDevice' with the minimum fields required to make a request.
+-- | Creates a value of 'ChromeOSDevice' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
@@ -932,13 +932,13 @@ data ChromeOsDevice = ChromeOsDevice
 --
 -- * 'codKind'
 --
--- * 'codEthernetMacAddress'
+-- * 'codEthernetMACAddress'
 --
 -- * 'codLastEnrollmentTime'
 --
 -- * 'codAnnotatedLocation'
 --
--- * 'codMacAddress'
+-- * 'codMACAddress'
 --
 -- * 'codOrgUnitPath'
 --
@@ -966,11 +966,11 @@ data ChromeOsDevice = ChromeOsDevice
 --
 -- * 'codFirmwareVersion'
 --
--- * 'codOsVersion'
-chromeOsDevice
-    :: ChromeOsDevice
-chromeOsDevice =
-    ChromeOsDevice
+-- * 'codOSVersion'
+chromeOSDevice
+    :: ChromeOSDevice
+chromeOSDevice =
+    ChromeOSDevice
     { _codStatus = Nothing
     , _codEtag = Nothing
     , _codAnnotatedUser = Nothing
@@ -978,10 +978,10 @@ chromeOsDevice =
     , _codLastSync = Nothing
     , _codActiveTimeRanges = Nothing
     , _codKind = "admin#directory#chromeosdevice"
-    , _codEthernetMacAddress = Nothing
+    , _codEthernetMACAddress = Nothing
     , _codLastEnrollmentTime = Nothing
     , _codAnnotatedLocation = Nothing
-    , _codMacAddress = Nothing
+    , _codMACAddress = Nothing
     , _codOrgUnitPath = Nothing
     , _codRecentUsers = Nothing
     , _codSupportEndDate = Nothing
@@ -995,38 +995,38 @@ chromeOsDevice =
     , _codNotes = Nothing
     , _codSerialNumber = Nothing
     , _codFirmwareVersion = Nothing
-    , _codOsVersion = Nothing
+    , _codOSVersion = Nothing
     }
 
 -- | status of the device (Read-only)
-codStatus :: Lens' ChromeOsDevice (Maybe Text)
+codStatus :: Lens' ChromeOSDevice (Maybe Text)
 codStatus
   = lens _codStatus (\ s a -> s{_codStatus = a})
 
 -- | ETag of the resource.
-codEtag :: Lens' ChromeOsDevice (Maybe Text)
+codEtag :: Lens' ChromeOSDevice (Maybe Text)
 codEtag = lens _codEtag (\ s a -> s{_codEtag = a})
 
 -- | User of the device
-codAnnotatedUser :: Lens' ChromeOsDevice (Maybe Text)
+codAnnotatedUser :: Lens' ChromeOSDevice (Maybe Text)
 codAnnotatedUser
   = lens _codAnnotatedUser
       (\ s a -> s{_codAnnotatedUser = a})
 
 -- | Chromebook platform version (Read-only)
-codPlatformVersion :: Lens' ChromeOsDevice (Maybe Text)
+codPlatformVersion :: Lens' ChromeOSDevice (Maybe Text)
 codPlatformVersion
   = lens _codPlatformVersion
       (\ s a -> s{_codPlatformVersion = a})
 
 -- | Date and time the device was last synchronized with the policy settings
 -- in the Google Apps administrator control panel (Read-only)
-codLastSync :: Lens' ChromeOsDevice (Maybe UTCTime)
+codLastSync :: Lens' ChromeOSDevice (Maybe UTCTime)
 codLastSync
   = lens _codLastSync (\ s a -> s{_codLastSync = a})
 
 -- | List of active time ranges (Read-only)
-codActiveTimeRanges :: Lens' ChromeOsDevice [ChromeOsDeviceActiveTimeRanges]
+codActiveTimeRanges :: Lens' ChromeOSDevice [ChromeOSDeviceActiveTimeRanges]
 codActiveTimeRanges
   = lens _codActiveTimeRanges
       (\ s a -> s{_codActiveTimeRanges = a})
@@ -1034,42 +1034,42 @@ codActiveTimeRanges
       . _Coerce
 
 -- | Kind of resource this is.
-codKind :: Lens' ChromeOsDevice Text
+codKind :: Lens' ChromeOSDevice Text
 codKind = lens _codKind (\ s a -> s{_codKind = a})
 
 -- | Chromebook Mac Address on ethernet network interface (Read-only)
-codEthernetMacAddress :: Lens' ChromeOsDevice (Maybe Text)
-codEthernetMacAddress
-  = lens _codEthernetMacAddress
-      (\ s a -> s{_codEthernetMacAddress = a})
+codEthernetMACAddress :: Lens' ChromeOSDevice (Maybe Text)
+codEthernetMACAddress
+  = lens _codEthernetMACAddress
+      (\ s a -> s{_codEthernetMACAddress = a})
 
 -- | Date and time the device was last enrolled (Read-only)
-codLastEnrollmentTime :: Lens' ChromeOsDevice (Maybe UTCTime)
+codLastEnrollmentTime :: Lens' ChromeOSDevice (Maybe UTCTime)
 codLastEnrollmentTime
   = lens _codLastEnrollmentTime
       (\ s a -> s{_codLastEnrollmentTime = a})
 
 -- | Address or location of the device as noted by the administrator
-codAnnotatedLocation :: Lens' ChromeOsDevice (Maybe Text)
+codAnnotatedLocation :: Lens' ChromeOSDevice (Maybe Text)
 codAnnotatedLocation
   = lens _codAnnotatedLocation
       (\ s a -> s{_codAnnotatedLocation = a})
 
 -- | Chromebook Mac Address on wifi network interface (Read-only)
-codMacAddress :: Lens' ChromeOsDevice (Maybe Text)
-codMacAddress
-  = lens _codMacAddress
-      (\ s a -> s{_codMacAddress = a})
+codMACAddress :: Lens' ChromeOSDevice (Maybe Text)
+codMACAddress
+  = lens _codMACAddress
+      (\ s a -> s{_codMACAddress = a})
 
 -- | OrgUnit of the device
-codOrgUnitPath :: Lens' ChromeOsDevice (Maybe Text)
+codOrgUnitPath :: Lens' ChromeOSDevice (Maybe Text)
 codOrgUnitPath
   = lens _codOrgUnitPath
       (\ s a -> s{_codOrgUnitPath = a})
 
 -- | List of recent device users, in descending order by last login time
 -- (Read-only)
-codRecentUsers :: Lens' ChromeOsDevice [ChromeOsDeviceRecentUsers]
+codRecentUsers :: Lens' ChromeOSDevice [ChromeOSDeviceRecentUsers]
 codRecentUsers
   = lens _codRecentUsers
       (\ s a -> s{_codRecentUsers = a})
@@ -1077,74 +1077,74 @@ codRecentUsers
       . _Coerce
 
 -- | Final date the device will be supported (Read-only)
-codSupportEndDate :: Lens' ChromeOsDevice (Maybe UTCTime)
+codSupportEndDate :: Lens' ChromeOSDevice (Maybe UTCTime)
 codSupportEndDate
   = lens _codSupportEndDate
       (\ s a -> s{_codSupportEndDate = a})
 
 -- | Chromebook Model (Read-only)
-codModel :: Lens' ChromeOsDevice (Maybe Text)
+codModel :: Lens' ChromeOSDevice (Maybe Text)
 codModel = lens _codModel (\ s a -> s{_codModel = a})
 
 -- | Will Chromebook auto renew after support end date (Read-only)
-codWillAutoRenew :: Lens' ChromeOsDevice (Maybe Bool)
+codWillAutoRenew :: Lens' ChromeOSDevice (Maybe Bool)
 codWillAutoRenew
   = lens _codWillAutoRenew
       (\ s a -> s{_codWillAutoRenew = a})
 
 -- | Mobile Equipment identifier for the 3G mobile card in the Chromebook
 -- (Read-only)
-codMeid :: Lens' ChromeOsDevice (Maybe Text)
+codMeid :: Lens' ChromeOSDevice (Maybe Text)
 codMeid = lens _codMeid (\ s a -> s{_codMeid = a})
 
 -- | Unique identifier of Chrome OS Device (Read-only)
-codDeviceId :: Lens' ChromeOsDevice (Maybe Text)
+codDeviceId :: Lens' ChromeOSDevice (Maybe Text)
 codDeviceId
   = lens _codDeviceId (\ s a -> s{_codDeviceId = a})
 
 -- | Chromebook boot mode (Read-only)
-codBootMode :: Lens' ChromeOsDevice (Maybe Text)
+codBootMode :: Lens' ChromeOSDevice (Maybe Text)
 codBootMode
   = lens _codBootMode (\ s a -> s{_codBootMode = a})
 
 -- | Chromebook order number (Read-only)
-codOrderNumber :: Lens' ChromeOsDevice (Maybe Text)
+codOrderNumber :: Lens' ChromeOSDevice (Maybe Text)
 codOrderNumber
   = lens _codOrderNumber
       (\ s a -> s{_codOrderNumber = a})
 
 -- | AssetId specified during enrollment or through later annotation
-codAnnotatedAssetId :: Lens' ChromeOsDevice (Maybe Text)
+codAnnotatedAssetId :: Lens' ChromeOSDevice (Maybe Text)
 codAnnotatedAssetId
   = lens _codAnnotatedAssetId
       (\ s a -> s{_codAnnotatedAssetId = a})
 
 -- | Notes added by the administrator
-codNotes :: Lens' ChromeOsDevice (Maybe Text)
+codNotes :: Lens' ChromeOSDevice (Maybe Text)
 codNotes = lens _codNotes (\ s a -> s{_codNotes = a})
 
 -- | Chromebook serial number (Read-only)
-codSerialNumber :: Lens' ChromeOsDevice (Maybe Text)
+codSerialNumber :: Lens' ChromeOSDevice (Maybe Text)
 codSerialNumber
   = lens _codSerialNumber
       (\ s a -> s{_codSerialNumber = a})
 
 -- | Chromebook firmware version (Read-only)
-codFirmwareVersion :: Lens' ChromeOsDevice (Maybe Text)
+codFirmwareVersion :: Lens' ChromeOSDevice (Maybe Text)
 codFirmwareVersion
   = lens _codFirmwareVersion
       (\ s a -> s{_codFirmwareVersion = a})
 
 -- | Chromebook Os Version (Read-only)
-codOsVersion :: Lens' ChromeOsDevice (Maybe Text)
-codOsVersion
-  = lens _codOsVersion (\ s a -> s{_codOsVersion = a})
+codOSVersion :: Lens' ChromeOSDevice (Maybe Text)
+codOSVersion
+  = lens _codOSVersion (\ s a -> s{_codOSVersion = a})
 
-instance FromJSON ChromeOsDevice where
+instance FromJSON ChromeOSDevice where
         parseJSON
-          = withObject "ChromeOsDevice"
+          = withObject "ChromeOSDevice"
               (\ o ->
-                 ChromeOsDevice <$>
+                 ChromeOSDevice <$>
                    (o .:? "status") <*> (o .:? "etag") <*>
                      (o .:? "annotatedUser")
                      <*> (o .:? "platformVersion")
@@ -1171,8 +1171,8 @@ instance FromJSON ChromeOsDevice where
                      <*> (o .:? "firmwareVersion")
                      <*> (o .:? "osVersion"))
 
-instance ToJSON ChromeOsDevice where
-        toJSON ChromeOsDevice{..}
+instance ToJSON ChromeOSDevice where
+        toJSON ChromeOSDevice{..}
           = object
               (catMaybes
                  [("status" .=) <$> _codStatus,
@@ -1182,10 +1182,10 @@ instance ToJSON ChromeOsDevice where
                   ("lastSync" .=) <$> _codLastSync,
                   ("activeTimeRanges" .=) <$> _codActiveTimeRanges,
                   Just ("kind" .= _codKind),
-                  ("ethernetMacAddress" .=) <$> _codEthernetMacAddress,
+                  ("ethernetMacAddress" .=) <$> _codEthernetMACAddress,
                   ("lastEnrollmentTime" .=) <$> _codLastEnrollmentTime,
                   ("annotatedLocation" .=) <$> _codAnnotatedLocation,
-                  ("macAddress" .=) <$> _codMacAddress,
+                  ("macAddress" .=) <$> _codMACAddress,
                   ("orgUnitPath" .=) <$> _codOrgUnitPath,
                   ("recentUsers" .=) <$> _codRecentUsers,
                   ("supportEndDate" .=) <$> _codSupportEndDate,
@@ -1199,7 +1199,7 @@ instance ToJSON ChromeOsDevice where
                   ("notes" .=) <$> _codNotes,
                   ("serialNumber" .=) <$> _codSerialNumber,
                   ("firmwareVersion" .=) <$> _codFirmwareVersion,
-                  ("osVersion" .=) <$> _codOsVersion])
+                  ("osVersion" .=) <$> _codOSVersion])
 
 -- | JSON response template for List Users operation in Apps Directory API.
 --
@@ -1207,7 +1207,7 @@ instance ToJSON ChromeOsDevice where
 data Users = Users
     { _uEtag          :: !(Maybe Text)
     , _uNextPageToken :: !(Maybe Text)
-    , _uUsers         :: !(Maybe [Maybe User])
+    , _uUsers         :: !(Maybe [User])
     , _uKind          :: !Text
     , _uTriggerEvent  :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -1247,7 +1247,7 @@ uNextPageToken
       (\ s a -> s{_uNextPageToken = a})
 
 -- | List of user objects.
-uUsers :: Lens' Users [Maybe User]
+uUsers :: Lens' Users [User]
 uUsers
   = lens _uUsers (\ s a -> s{_uUsers = a}) . _Default .
       _Coerce
@@ -1513,7 +1513,7 @@ instance ToJSON UserCustomSchemas where
 data Aliases = Aliases
     { _aEtag    :: !(Maybe Text)
     , _aKind    :: !Text
-    , _aAliases :: !(Maybe [Maybe Alias])
+    , _aAliases :: !(Maybe [Alias])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Aliases' with the minimum fields required to make a request.
@@ -1543,7 +1543,7 @@ aKind :: Lens' Aliases Text
 aKind = lens _aKind (\ s a -> s{_aKind = a})
 
 -- | List of alias objects.
-aAliases :: Lens' Aliases [Maybe Alias]
+aAliases :: Lens' Aliases [Alias]
 aAliases
   = lens _aAliases (\ s a -> s{_aAliases = a}) .
       _Default
@@ -1571,7 +1571,7 @@ instance ToJSON Aliases where
 data Tokens = Tokens
     { _tEtag  :: !(Maybe Text)
     , _tKind  :: !Text
-    , _tItems :: !(Maybe [Maybe Token])
+    , _tItems :: !(Maybe [Token])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Tokens' with the minimum fields required to make a request.
@@ -1601,7 +1601,7 @@ tKind :: Lens' Tokens Text
 tKind = lens _tKind (\ s a -> s{_tKind = a})
 
 -- | A list of Token resources.
-tItems :: Lens' Tokens [Maybe Token]
+tItems :: Lens' Tokens [Token]
 tItems
   = lens _tItems (\ s a -> s{_tItems = a}) . _Default .
       _Coerce
@@ -1631,7 +1631,7 @@ data Token = Token
     , _tokDisplayText :: !(Maybe Text)
     , _tokKind        :: !Text
     , _tokScopes      :: !(Maybe [Text])
-    , _tokNativeApp   :: !(Maybe Bool)
+    , _tokNATiveApp   :: !(Maybe Bool)
     , _tokAnonymous   :: !(Maybe Bool)
     , _tokUserKey     :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -1650,7 +1650,7 @@ data Token = Token
 --
 -- * 'tokScopes'
 --
--- * 'tokNativeApp'
+-- * 'tokNATiveApp'
 --
 -- * 'tokAnonymous'
 --
@@ -1664,7 +1664,7 @@ token =
     , _tokDisplayText = Nothing
     , _tokKind = "admin#directory#token"
     , _tokScopes = Nothing
-    , _tokNativeApp = Nothing
+    , _tokNATiveApp = Nothing
     , _tokAnonymous = Nothing
     , _tokUserKey = Nothing
     }
@@ -1697,9 +1697,9 @@ tokScopes
 
 -- | Whether the token is issued to an installed application. The value is
 -- true if the application is installed to a desktop or mobile device.
-tokNativeApp :: Lens' Token (Maybe Bool)
-tokNativeApp
-  = lens _tokNativeApp (\ s a -> s{_tokNativeApp = a})
+tokNATiveApp :: Lens' Token (Maybe Bool)
+tokNATiveApp
+  = lens _tokNATiveApp (\ s a -> s{_tokNATiveApp = a})
 
 -- | Whether the application is registered with Google. The value is true if
 -- the application has an anonymous Client ID.
@@ -1734,51 +1734,51 @@ instance ToJSON Token where
                   ("displayText" .=) <$> _tokDisplayText,
                   Just ("kind" .= _tokKind),
                   ("scopes" .=) <$> _tokScopes,
-                  ("nativeApp" .=) <$> _tokNativeApp,
+                  ("nativeApp" .=) <$> _tokNATiveApp,
                   ("anonymous" .=) <$> _tokAnonymous,
                   ("userKey" .=) <$> _tokUserKey])
 
 --
--- /See:/ 'chromeOsDeviceRecentUsers' smart constructor.
-data ChromeOsDeviceRecentUsers = ChromeOsDeviceRecentUsers
+-- /See:/ 'chromeOSDeviceRecentUsers' smart constructor.
+data ChromeOSDeviceRecentUsers = ChromeOSDeviceRecentUsers
     { _codruEmail :: !(Maybe Text)
     , _codruType  :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ChromeOsDeviceRecentUsers' with the minimum fields required to make a request.
+-- | Creates a value of 'ChromeOSDeviceRecentUsers' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
 -- * 'codruEmail'
 --
 -- * 'codruType'
-chromeOsDeviceRecentUsers
-    :: ChromeOsDeviceRecentUsers
-chromeOsDeviceRecentUsers =
-    ChromeOsDeviceRecentUsers
+chromeOSDeviceRecentUsers
+    :: ChromeOSDeviceRecentUsers
+chromeOSDeviceRecentUsers =
+    ChromeOSDeviceRecentUsers
     { _codruEmail = Nothing
     , _codruType = Nothing
     }
 
 -- | Email address of the user. Present only if the user type is managed
-codruEmail :: Lens' ChromeOsDeviceRecentUsers (Maybe Text)
+codruEmail :: Lens' ChromeOSDeviceRecentUsers (Maybe Text)
 codruEmail
   = lens _codruEmail (\ s a -> s{_codruEmail = a})
 
 -- | The type of the user
-codruType :: Lens' ChromeOsDeviceRecentUsers (Maybe Text)
+codruType :: Lens' ChromeOSDeviceRecentUsers (Maybe Text)
 codruType
   = lens _codruType (\ s a -> s{_codruType = a})
 
-instance FromJSON ChromeOsDeviceRecentUsers where
+instance FromJSON ChromeOSDeviceRecentUsers where
         parseJSON
-          = withObject "ChromeOsDeviceRecentUsers"
+          = withObject "ChromeOSDeviceRecentUsers"
               (\ o ->
-                 ChromeOsDeviceRecentUsers <$>
+                 ChromeOSDeviceRecentUsers <$>
                    (o .:? "email") <*> (o .:? "type"))
 
-instance ToJSON ChromeOsDeviceRecentUsers where
-        toJSON ChromeOsDeviceRecentUsers{..}
+instance ToJSON ChromeOSDeviceRecentUsers where
+        toJSON ChromeOSDeviceRecentUsers{..}
           = object
               (catMaybes
                  [("email" .=) <$> _codruEmail,
@@ -1827,7 +1827,7 @@ data MobileDevices = MobileDevices
     { _mdEtag          :: !(Maybe Text)
     , _mdNextPageToken :: !(Maybe Text)
     , _mdKind          :: !Text
-    , _mdMobiledevices :: !(Maybe [Maybe MobileDevice])
+    , _mdMobileDevices :: !(Maybe [MobileDevice])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MobileDevices' with the minimum fields required to make a request.
@@ -1840,7 +1840,7 @@ data MobileDevices = MobileDevices
 --
 -- * 'mdKind'
 --
--- * 'mdMobiledevices'
+-- * 'mdMobileDevices'
 mobileDevices
     :: MobileDevices
 mobileDevices =
@@ -1848,7 +1848,7 @@ mobileDevices =
     { _mdEtag = Nothing
     , _mdNextPageToken = Nothing
     , _mdKind = "admin#directory#mobiledevices"
-    , _mdMobiledevices = Nothing
+    , _mdMobileDevices = Nothing
     }
 
 -- | ETag of the resource.
@@ -1866,10 +1866,10 @@ mdKind :: Lens' MobileDevices Text
 mdKind = lens _mdKind (\ s a -> s{_mdKind = a})
 
 -- | List of Mobile Device objects.
-mdMobiledevices :: Lens' MobileDevices [Maybe MobileDevice]
-mdMobiledevices
-  = lens _mdMobiledevices
-      (\ s a -> s{_mdMobiledevices = a})
+mdMobileDevices :: Lens' MobileDevices [MobileDevice]
+mdMobileDevices
+  = lens _mdMobileDevices
+      (\ s a -> s{_mdMobileDevices = a})
       . _Default
       . _Coerce
 
@@ -1889,7 +1889,7 @@ instance ToJSON MobileDevices where
                  [("etag" .=) <$> _mdEtag,
                   ("nextPageToken" .=) <$> _mdNextPageToken,
                   Just ("kind" .= _mdKind),
-                  ("mobiledevices" .=) <$> _mdMobiledevices])
+                  ("mobiledevices" .=) <$> _mdMobileDevices])
 
 -- | JSON response template for List Members operation in Directory API.
 --
@@ -1898,7 +1898,7 @@ data Members = Members
     { _mEtag          :: !(Maybe Text)
     , _mNextPageToken :: !(Maybe Text)
     , _mKind          :: !Text
-    , _mMembers       :: !(Maybe [Maybe Member])
+    , _mMembers       :: !(Maybe [Member])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Members' with the minimum fields required to make a request.
@@ -1937,7 +1937,7 @@ mKind :: Lens' Members Text
 mKind = lens _mKind (\ s a -> s{_mKind = a})
 
 -- | List of member objects.
-mMembers :: Lens' Members [Maybe Member]
+mMembers :: Lens' Members [Member]
 mMembers
   = lens _mMembers (\ s a -> s{_mMembers = a}) .
       _Default
@@ -1965,13 +1965,13 @@ instance ToJSON Members where
 --
 -- /See:/ 'channel' smart constructor.
 data Channel = Channel
-    { _cResourceUri :: !(Maybe Text)
+    { _cResourceURI :: !(Maybe Text)
     , _cResourceId  :: !(Maybe Text)
     , _cKind        :: !Text
     , _cExpiration  :: !(Maybe Int64)
     , _cToken       :: !(Maybe Text)
     , _cAddress     :: !(Maybe Text)
-    , _cPayload     :: !(Maybe Bool)
+    , _cPayLoad     :: !(Maybe Bool)
     , _cParams      :: !(Maybe ChannelParams)
     , _cId          :: !(Maybe Text)
     , _cType        :: !(Maybe Text)
@@ -1981,7 +1981,7 @@ data Channel = Channel
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cResourceUri'
+-- * 'cResourceURI'
 --
 -- * 'cResourceId'
 --
@@ -1993,7 +1993,7 @@ data Channel = Channel
 --
 -- * 'cAddress'
 --
--- * 'cPayload'
+-- * 'cPayLoad'
 --
 -- * 'cParams'
 --
@@ -2004,22 +2004,22 @@ channel
     :: Channel
 channel =
     Channel
-    { _cResourceUri = Nothing
+    { _cResourceURI = Nothing
     , _cResourceId = Nothing
     , _cKind = "api#channel"
     , _cExpiration = Nothing
     , _cToken = Nothing
     , _cAddress = Nothing
-    , _cPayload = Nothing
+    , _cPayLoad = Nothing
     , _cParams = Nothing
     , _cId = Nothing
     , _cType = Nothing
     }
 
 -- | A version-specific identifier for the watched resource.
-cResourceUri :: Lens' Channel (Maybe Text)
-cResourceUri
-  = lens _cResourceUri (\ s a -> s{_cResourceUri = a})
+cResourceURI :: Lens' Channel (Maybe Text)
+cResourceURI
+  = lens _cResourceURI (\ s a -> s{_cResourceURI = a})
 
 -- | An opaque ID that identifies the resource being watched on this channel.
 -- Stable across different API versions.
@@ -2048,8 +2048,8 @@ cAddress :: Lens' Channel (Maybe Text)
 cAddress = lens _cAddress (\ s a -> s{_cAddress = a})
 
 -- | A Boolean value to indicate whether payload is wanted. Optional.
-cPayload :: Lens' Channel (Maybe Bool)
-cPayload = lens _cPayload (\ s a -> s{_cPayload = a})
+cPayLoad :: Lens' Channel (Maybe Bool)
+cPayLoad = lens _cPayLoad (\ s a -> s{_cPayLoad = a})
 
 -- | Additional parameters controlling delivery channel behavior. Optional.
 cParams :: Lens' Channel (Maybe ChannelParams)
@@ -2082,13 +2082,13 @@ instance ToJSON Channel where
         toJSON Channel{..}
           = object
               (catMaybes
-                 [("resourceUri" .=) <$> _cResourceUri,
+                 [("resourceUri" .=) <$> _cResourceURI,
                   ("resourceId" .=) <$> _cResourceId,
                   Just ("kind" .= _cKind),
                   ("expiration" .=) <$> _cExpiration,
                   ("token" .=) <$> _cToken,
                   ("address" .=) <$> _cAddress,
-                  ("payload" .=) <$> _cPayload,
+                  ("payload" .=) <$> _cPayLoad,
                   ("params" .=) <$> _cParams, ("id" .=) <$> _cId,
                   ("type" .=) <$> _cType])
 
@@ -2320,7 +2320,7 @@ data User = User
     , _useLastLoginTime              :: !(Maybe UTCTime)
     , _useThumbnailPhotoEtag         :: !(Maybe Text)
     , _useEtag                       :: !(Maybe Text)
-    , _useIpWhitelisted              :: !(Maybe Bool)
+    , _useIPWhiteListed              :: !(Maybe Bool)
     , _useRelations                  :: !(Maybe JSONValue)
     , _useHashFunction               :: !(Maybe Text)
     , _useKind                       :: !Text
@@ -2328,7 +2328,7 @@ data User = User
     , _useWebsites                   :: !(Maybe JSONValue)
     , _useAddresses                  :: !(Maybe JSONValue)
     , _useAliases                    :: !(Maybe [Text])
-    , _useThumbnailPhotoUrl          :: !(Maybe Text)
+    , _useThumbnailPhotoURL          :: !(Maybe Text)
     , _useExternalIds                :: !(Maybe JSONValue)
     , _useSuspended                  :: !(Maybe Bool)
     , _useAgreedToTerms              :: !(Maybe Bool)
@@ -2338,7 +2338,7 @@ data User = User
     , _useCustomerId                 :: !(Maybe Text)
     , _useIncludeInGlobalAddressList :: !(Maybe Bool)
     , _usePhones                     :: !(Maybe JSONValue)
-    , _useName                       :: !(Maybe (Maybe UserName))
+    , _useName                       :: !(Maybe UserName)
     , _usePassword                   :: !(Maybe Text)
     , _useEmails                     :: !(Maybe JSONValue)
     , _useIms                        :: !(Maybe JSONValue)
@@ -2365,7 +2365,7 @@ data User = User
 --
 -- * 'useEtag'
 --
--- * 'useIpWhitelisted'
+-- * 'useIPWhiteListed'
 --
 -- * 'useRelations'
 --
@@ -2381,7 +2381,7 @@ data User = User
 --
 -- * 'useAliases'
 --
--- * 'useThumbnailPhotoUrl'
+-- * 'useThumbnailPhotoURL'
 --
 -- * 'useExternalIds'
 --
@@ -2434,7 +2434,7 @@ user =
     , _useLastLoginTime = Nothing
     , _useThumbnailPhotoEtag = Nothing
     , _useEtag = Nothing
-    , _useIpWhitelisted = Nothing
+    , _useIPWhiteListed = Nothing
     , _useRelations = Nothing
     , _useHashFunction = Nothing
     , _useKind = "admin#directory#user"
@@ -2442,7 +2442,7 @@ user =
     , _useWebsites = Nothing
     , _useAddresses = Nothing
     , _useAliases = Nothing
-    , _useThumbnailPhotoUrl = Nothing
+    , _useThumbnailPhotoURL = Nothing
     , _useExternalIds = Nothing
     , _useSuspended = Nothing
     , _useAgreedToTerms = Nothing
@@ -2490,10 +2490,10 @@ useEtag :: Lens' User (Maybe Text)
 useEtag = lens _useEtag (\ s a -> s{_useEtag = a})
 
 -- | Boolean indicating if ip is whitelisted
-useIpWhitelisted :: Lens' User (Maybe Bool)
-useIpWhitelisted
-  = lens _useIpWhitelisted
-      (\ s a -> s{_useIpWhitelisted = a})
+useIPWhiteListed :: Lens' User (Maybe Bool)
+useIPWhiteListed
+  = lens _useIPWhiteListed
+      (\ s a -> s{_useIPWhiteListed = a})
 
 useRelations :: Lens' User (Maybe JSONValue)
 useRelations
@@ -2531,10 +2531,10 @@ useAliases
       . _Coerce
 
 -- | Photo Url of the user (Read-only)
-useThumbnailPhotoUrl :: Lens' User (Maybe Text)
-useThumbnailPhotoUrl
-  = lens _useThumbnailPhotoUrl
-      (\ s a -> s{_useThumbnailPhotoUrl = a})
+useThumbnailPhotoURL :: Lens' User (Maybe Text)
+useThumbnailPhotoURL
+  = lens _useThumbnailPhotoURL
+      (\ s a -> s{_useThumbnailPhotoURL = a})
 
 useExternalIds :: Lens' User (Maybe JSONValue)
 useExternalIds
@@ -2588,7 +2588,7 @@ usePhones
   = lens _usePhones (\ s a -> s{_usePhones = a})
 
 -- | User\'s name
-useName :: Lens' User (Maybe (Maybe UserName))
+useName :: Lens' User (Maybe UserName)
 useName = lens _useName (\ s a -> s{_useName = a})
 
 -- | User\'s password
@@ -2698,7 +2698,7 @@ instance ToJSON User where
                   ("lastLoginTime" .=) <$> _useLastLoginTime,
                   ("thumbnailPhotoEtag" .=) <$> _useThumbnailPhotoEtag,
                   ("etag" .=) <$> _useEtag,
-                  ("ipWhitelisted" .=) <$> _useIpWhitelisted,
+                  ("ipWhitelisted" .=) <$> _useIPWhiteListed,
                   ("relations" .=) <$> _useRelations,
                   ("hashFunction" .=) <$> _useHashFunction,
                   Just ("kind" .= _useKind),
@@ -2707,7 +2707,7 @@ instance ToJSON User where
                   ("websites" .=) <$> _useWebsites,
                   ("addresses" .=) <$> _useAddresses,
                   ("aliases" .=) <$> _useAliases,
-                  ("thumbnailPhotoUrl" .=) <$> _useThumbnailPhotoUrl,
+                  ("thumbnailPhotoUrl" .=) <$> _useThumbnailPhotoURL,
                   ("externalIds" .=) <$> _useExternalIds,
                   ("suspended" .=) <$> _useSuspended,
                   ("agreedToTerms" .=) <$> _useAgreedToTerms,
@@ -2738,7 +2738,7 @@ data Schema = Schema
     , _schKind       :: !Text
     , _schSchemaName :: !(Maybe Text)
     , _schSchemaId   :: !(Maybe Text)
-    , _schFields     :: !(Maybe [Maybe SchemaFieldSpec])
+    , _schFields     :: !(Maybe [SchemaFieldSpec])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Schema' with the minimum fields required to make a request.
@@ -2785,7 +2785,7 @@ schSchemaId
   = lens _schSchemaId (\ s a -> s{_schSchemaId = a})
 
 -- | Fields of Schema
-schFields :: Lens' Schema [Maybe SchemaFieldSpec]
+schFields :: Lens' Schema [SchemaFieldSpec]
 schFields
   = lens _schFields (\ s a -> s{_schFields = a}) .
       _Default
@@ -2818,7 +2818,7 @@ instance ToJSON Schema where
 data OrgUnits = OrgUnits
     { _oEtag              :: !(Maybe Text)
     , _oKind              :: !Text
-    , _oOrganizationUnits :: !(Maybe [Maybe OrgUnit])
+    , _oOrganizationUnits :: !(Maybe [OrgUnit])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrgUnits' with the minimum fields required to make a request.
@@ -2848,7 +2848,7 @@ oKind :: Lens' OrgUnits Text
 oKind = lens _oKind (\ s a -> s{_oKind = a})
 
 -- | List of user objects.
-oOrganizationUnits :: Lens' OrgUnits [Maybe OrgUnit]
+oOrganizationUnits :: Lens' OrgUnits [OrgUnit]
 oOrganizationUnits
   = lens _oOrganizationUnits
       (\ s a -> s{_oOrganizationUnits = a})
@@ -2899,7 +2899,7 @@ instance ToJSON ChannelParams where
 data VerificationCodes = VerificationCodes
     { _vEtag  :: !(Maybe Text)
     , _vKind  :: !Text
-    , _vItems :: !(Maybe [Maybe VerificationCode])
+    , _vItems :: !(Maybe [VerificationCode])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VerificationCodes' with the minimum fields required to make a request.
@@ -2930,7 +2930,7 @@ vKind :: Lens' VerificationCodes Text
 vKind = lens _vKind (\ s a -> s{_vKind = a})
 
 -- | A list of verification code resources.
-vItems :: Lens' VerificationCodes [Maybe VerificationCode]
+vItems :: Lens' VerificationCodes [VerificationCode]
 vItems
   = lens _vItems (\ s a -> s{_vItems = a}) . _Default .
       _Coerce
@@ -3083,7 +3083,7 @@ instance ToJSON UserWebsite where
 --
 -- /See:/ 'userOrganization' smart constructor.
 data UserOrganization = UserOrganization
-    { _uoDepartment  :: !(Maybe Text)
+    { _uoDePartyment :: !(Maybe Text)
     , _uoLocation    :: !(Maybe Text)
     , _uoCostCenter  :: !(Maybe Text)
     , _uoDomain      :: !(Maybe Text)
@@ -3100,7 +3100,7 @@ data UserOrganization = UserOrganization
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'uoDepartment'
+-- * 'uoDePartyment'
 --
 -- * 'uoLocation'
 --
@@ -3125,7 +3125,7 @@ userOrganization
     :: UserOrganization
 userOrganization =
     UserOrganization
-    { _uoDepartment = Nothing
+    { _uoDePartyment = Nothing
     , _uoLocation = Nothing
     , _uoCostCenter = Nothing
     , _uoDomain = Nothing
@@ -3139,9 +3139,10 @@ userOrganization =
     }
 
 -- | Department within the organization.
-uoDepartment :: Lens' UserOrganization (Maybe Text)
-uoDepartment
-  = lens _uoDepartment (\ s a -> s{_uoDepartment = a})
+uoDePartyment :: Lens' UserOrganization (Maybe Text)
+uoDePartyment
+  = lens _uoDePartyment
+      (\ s a -> s{_uoDePartyment = a})
 
 -- | Location of the organization. This need not be fully qualified address.
 uoLocation :: Lens' UserOrganization (Maybe Text)
@@ -3213,7 +3214,7 @@ instance ToJSON UserOrganization where
         toJSON UserOrganization{..}
           = object
               (catMaybes
-                 [("department" .=) <$> _uoDepartment,
+                 [("department" .=) <$> _uoDePartyment,
                   ("location" .=) <$> _uoLocation,
                   ("costCenter" .=) <$> _uoCostCenter,
                   ("domain" .=) <$> _uoDomain,
@@ -3562,314 +3563,314 @@ instance ToJSON Member where
 --
 -- /See:/ 'mobileDevice' smart constructor.
 data MobileDevice = MobileDevice
-    { _mddEmail                          :: !(Maybe [Text])
-    , _mddStatus                         :: !(Maybe Text)
-    , _mddEtag                           :: !(Maybe Text)
-    , _mddResourceId                     :: !(Maybe Text)
-    , _mddBuildNumber                    :: !(Maybe Text)
-    , _mddManagedAccountIsOnOwnerProfile :: !(Maybe Bool)
-    , _mddLastSync                       :: !(Maybe UTCTime)
-    , _mddOtherAccountsInfo              :: !(Maybe [Text])
-    , _mddKind                           :: !Text
-    , _mddAdbStatus                      :: !(Maybe Bool)
-    , _mddNetworkOperator                :: !(Maybe Text)
-    , _mddKernelVersion                  :: !(Maybe Text)
-    , _mddOs                             :: !(Maybe Text)
-    , _mddName                           :: !(Maybe [Text])
-    , _mddModel                          :: !(Maybe Text)
-    , _mddDeveloperOptionsStatus         :: !(Maybe Bool)
-    , _mddUnknownSourcesStatus           :: !(Maybe Bool)
-    , _mddMeid                           :: !(Maybe Text)
-    , _mddDeviceId                       :: !(Maybe Text)
-    , _mddFirstSync                      :: !(Maybe UTCTime)
-    , _mddUserAgent                      :: !(Maybe Text)
-    , _mddImei                           :: !(Maybe Text)
-    , _mddType                           :: !(Maybe Text)
-    , _mddWifiMacAddress                 :: !(Maybe Text)
-    , _mddSerialNumber                   :: !(Maybe Text)
-    , _mddHardwareId                     :: !(Maybe Text)
-    , _mddBasebandVersion                :: !(Maybe Text)
-    , _mddSupportsWorkProfile            :: !(Maybe Bool)
-    , _mddDeviceCompromisedStatus        :: !(Maybe Text)
-    , _mddApplications                   :: !(Maybe [MobileDeviceApplications])
-    , _mddDefaultLanguage                :: !(Maybe Text)
+    { _mobEmail                          :: !(Maybe [Text])
+    , _mobStatus                         :: !(Maybe Text)
+    , _mobEtag                           :: !(Maybe Text)
+    , _mobResourceId                     :: !(Maybe Text)
+    , _mobBuildNumber                    :: !(Maybe Text)
+    , _mobManagedAccountIsOnOwnerProfile :: !(Maybe Bool)
+    , _mobLastSync                       :: !(Maybe UTCTime)
+    , _mobOtherAccountsInfo              :: !(Maybe [Text])
+    , _mobKind                           :: !Text
+    , _mobAdbStatus                      :: !(Maybe Bool)
+    , _mobNetworkOperator                :: !(Maybe Text)
+    , _mobKernelVersion                  :: !(Maybe Text)
+    , _mobOS                             :: !(Maybe Text)
+    , _mobName                           :: !(Maybe [Text])
+    , _mobModel                          :: !(Maybe Text)
+    , _mobDeveloperOptionsStatus         :: !(Maybe Bool)
+    , _mobUnknownSourcesStatus           :: !(Maybe Bool)
+    , _mobMeid                           :: !(Maybe Text)
+    , _mobDeviceId                       :: !(Maybe Text)
+    , _mobFirstSync                      :: !(Maybe UTCTime)
+    , _mobUserAgent                      :: !(Maybe Text)
+    , _mobImei                           :: !(Maybe Text)
+    , _mobType                           :: !(Maybe Text)
+    , _mobWifiMACAddress                 :: !(Maybe Text)
+    , _mobSerialNumber                   :: !(Maybe Text)
+    , _mobHardwareId                     :: !(Maybe Text)
+    , _mobBasebandVersion                :: !(Maybe Text)
+    , _mobSupportsWorkProfile            :: !(Maybe Bool)
+    , _mobDeviceCompromisedStatus        :: !(Maybe Text)
+    , _mobApplications                   :: !(Maybe [MobileDeviceApplications])
+    , _mobDefaultLanguage                :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MobileDevice' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'mddEmail'
+-- * 'mobEmail'
 --
--- * 'mddStatus'
+-- * 'mobStatus'
 --
--- * 'mddEtag'
+-- * 'mobEtag'
 --
--- * 'mddResourceId'
+-- * 'mobResourceId'
 --
--- * 'mddBuildNumber'
+-- * 'mobBuildNumber'
 --
--- * 'mddManagedAccountIsOnOwnerProfile'
+-- * 'mobManagedAccountIsOnOwnerProfile'
 --
--- * 'mddLastSync'
+-- * 'mobLastSync'
 --
--- * 'mddOtherAccountsInfo'
+-- * 'mobOtherAccountsInfo'
 --
--- * 'mddKind'
+-- * 'mobKind'
 --
--- * 'mddAdbStatus'
+-- * 'mobAdbStatus'
 --
--- * 'mddNetworkOperator'
+-- * 'mobNetworkOperator'
 --
--- * 'mddKernelVersion'
+-- * 'mobKernelVersion'
 --
--- * 'mddOs'
+-- * 'mobOS'
 --
--- * 'mddName'
+-- * 'mobName'
 --
--- * 'mddModel'
+-- * 'mobModel'
 --
--- * 'mddDeveloperOptionsStatus'
+-- * 'mobDeveloperOptionsStatus'
 --
--- * 'mddUnknownSourcesStatus'
+-- * 'mobUnknownSourcesStatus'
 --
--- * 'mddMeid'
+-- * 'mobMeid'
 --
--- * 'mddDeviceId'
+-- * 'mobDeviceId'
 --
--- * 'mddFirstSync'
+-- * 'mobFirstSync'
 --
--- * 'mddUserAgent'
+-- * 'mobUserAgent'
 --
--- * 'mddImei'
+-- * 'mobImei'
 --
--- * 'mddType'
+-- * 'mobType'
 --
--- * 'mddWifiMacAddress'
+-- * 'mobWifiMACAddress'
 --
--- * 'mddSerialNumber'
+-- * 'mobSerialNumber'
 --
--- * 'mddHardwareId'
+-- * 'mobHardwareId'
 --
--- * 'mddBasebandVersion'
+-- * 'mobBasebandVersion'
 --
--- * 'mddSupportsWorkProfile'
+-- * 'mobSupportsWorkProfile'
 --
--- * 'mddDeviceCompromisedStatus'
+-- * 'mobDeviceCompromisedStatus'
 --
--- * 'mddApplications'
+-- * 'mobApplications'
 --
--- * 'mddDefaultLanguage'
+-- * 'mobDefaultLanguage'
 mobileDevice
     :: MobileDevice
 mobileDevice =
     MobileDevice
-    { _mddEmail = Nothing
-    , _mddStatus = Nothing
-    , _mddEtag = Nothing
-    , _mddResourceId = Nothing
-    , _mddBuildNumber = Nothing
-    , _mddManagedAccountIsOnOwnerProfile = Nothing
-    , _mddLastSync = Nothing
-    , _mddOtherAccountsInfo = Nothing
-    , _mddKind = "admin#directory#mobiledevice"
-    , _mddAdbStatus = Nothing
-    , _mddNetworkOperator = Nothing
-    , _mddKernelVersion = Nothing
-    , _mddOs = Nothing
-    , _mddName = Nothing
-    , _mddModel = Nothing
-    , _mddDeveloperOptionsStatus = Nothing
-    , _mddUnknownSourcesStatus = Nothing
-    , _mddMeid = Nothing
-    , _mddDeviceId = Nothing
-    , _mddFirstSync = Nothing
-    , _mddUserAgent = Nothing
-    , _mddImei = Nothing
-    , _mddType = Nothing
-    , _mddWifiMacAddress = Nothing
-    , _mddSerialNumber = Nothing
-    , _mddHardwareId = Nothing
-    , _mddBasebandVersion = Nothing
-    , _mddSupportsWorkProfile = Nothing
-    , _mddDeviceCompromisedStatus = Nothing
-    , _mddApplications = Nothing
-    , _mddDefaultLanguage = Nothing
+    { _mobEmail = Nothing
+    , _mobStatus = Nothing
+    , _mobEtag = Nothing
+    , _mobResourceId = Nothing
+    , _mobBuildNumber = Nothing
+    , _mobManagedAccountIsOnOwnerProfile = Nothing
+    , _mobLastSync = Nothing
+    , _mobOtherAccountsInfo = Nothing
+    , _mobKind = "admin#directory#mobiledevice"
+    , _mobAdbStatus = Nothing
+    , _mobNetworkOperator = Nothing
+    , _mobKernelVersion = Nothing
+    , _mobOS = Nothing
+    , _mobName = Nothing
+    , _mobModel = Nothing
+    , _mobDeveloperOptionsStatus = Nothing
+    , _mobUnknownSourcesStatus = Nothing
+    , _mobMeid = Nothing
+    , _mobDeviceId = Nothing
+    , _mobFirstSync = Nothing
+    , _mobUserAgent = Nothing
+    , _mobImei = Nothing
+    , _mobType = Nothing
+    , _mobWifiMACAddress = Nothing
+    , _mobSerialNumber = Nothing
+    , _mobHardwareId = Nothing
+    , _mobBasebandVersion = Nothing
+    , _mobSupportsWorkProfile = Nothing
+    , _mobDeviceCompromisedStatus = Nothing
+    , _mobApplications = Nothing
+    , _mobDefaultLanguage = Nothing
     }
 
 -- | List of owner user\'s email addresses (Read-only)
-mddEmail :: Lens' MobileDevice [Text]
-mddEmail
-  = lens _mddEmail (\ s a -> s{_mddEmail = a}) .
+mobEmail :: Lens' MobileDevice [Text]
+mobEmail
+  = lens _mobEmail (\ s a -> s{_mobEmail = a}) .
       _Default
       . _Coerce
 
 -- | Status of the device (Read-only)
-mddStatus :: Lens' MobileDevice (Maybe Text)
-mddStatus
-  = lens _mddStatus (\ s a -> s{_mddStatus = a})
+mobStatus :: Lens' MobileDevice (Maybe Text)
+mobStatus
+  = lens _mobStatus (\ s a -> s{_mobStatus = a})
 
 -- | ETag of the resource.
-mddEtag :: Lens' MobileDevice (Maybe Text)
-mddEtag = lens _mddEtag (\ s a -> s{_mddEtag = a})
+mobEtag :: Lens' MobileDevice (Maybe Text)
+mobEtag = lens _mobEtag (\ s a -> s{_mobEtag = a})
 
 -- | Unique identifier of Mobile Device (Read-only)
-mddResourceId :: Lens' MobileDevice (Maybe Text)
-mddResourceId
-  = lens _mddResourceId
-      (\ s a -> s{_mddResourceId = a})
+mobResourceId :: Lens' MobileDevice (Maybe Text)
+mobResourceId
+  = lens _mobResourceId
+      (\ s a -> s{_mobResourceId = a})
 
 -- | Mobile Device Build number (Read-only)
-mddBuildNumber :: Lens' MobileDevice (Maybe Text)
-mddBuildNumber
-  = lens _mddBuildNumber
-      (\ s a -> s{_mddBuildNumber = a})
+mobBuildNumber :: Lens' MobileDevice (Maybe Text)
+mobBuildNumber
+  = lens _mobBuildNumber
+      (\ s a -> s{_mobBuildNumber = a})
 
 -- | Boolean indicating if this account is on owner\/primary profile or not
 -- (Read-only)
-mddManagedAccountIsOnOwnerProfile :: Lens' MobileDevice (Maybe Bool)
-mddManagedAccountIsOnOwnerProfile
-  = lens _mddManagedAccountIsOnOwnerProfile
-      (\ s a -> s{_mddManagedAccountIsOnOwnerProfile = a})
+mobManagedAccountIsOnOwnerProfile :: Lens' MobileDevice (Maybe Bool)
+mobManagedAccountIsOnOwnerProfile
+  = lens _mobManagedAccountIsOnOwnerProfile
+      (\ s a -> s{_mobManagedAccountIsOnOwnerProfile = a})
 
 -- | Date and time the device was last synchronized with the policy settings
 -- in the Google Apps administrator control panel (Read-only)
-mddLastSync :: Lens' MobileDevice (Maybe UTCTime)
-mddLastSync
-  = lens _mddLastSync (\ s a -> s{_mddLastSync = a})
+mobLastSync :: Lens' MobileDevice (Maybe UTCTime)
+mobLastSync
+  = lens _mobLastSync (\ s a -> s{_mobLastSync = a})
 
 -- | List of accounts added on device (Read-only)
-mddOtherAccountsInfo :: Lens' MobileDevice [Text]
-mddOtherAccountsInfo
-  = lens _mddOtherAccountsInfo
-      (\ s a -> s{_mddOtherAccountsInfo = a})
+mobOtherAccountsInfo :: Lens' MobileDevice [Text]
+mobOtherAccountsInfo
+  = lens _mobOtherAccountsInfo
+      (\ s a -> s{_mobOtherAccountsInfo = a})
       . _Default
       . _Coerce
 
 -- | Kind of resource this is.
-mddKind :: Lens' MobileDevice Text
-mddKind = lens _mddKind (\ s a -> s{_mddKind = a})
+mobKind :: Lens' MobileDevice Text
+mobKind = lens _mobKind (\ s a -> s{_mobKind = a})
 
 -- | Adb (USB debugging) enabled or disabled on device (Read-only)
-mddAdbStatus :: Lens' MobileDevice (Maybe Bool)
-mddAdbStatus
-  = lens _mddAdbStatus (\ s a -> s{_mddAdbStatus = a})
+mobAdbStatus :: Lens' MobileDevice (Maybe Bool)
+mobAdbStatus
+  = lens _mobAdbStatus (\ s a -> s{_mobAdbStatus = a})
 
 -- | Mobile Device mobile or network operator (if available) (Read-only)
-mddNetworkOperator :: Lens' MobileDevice (Maybe Text)
-mddNetworkOperator
-  = lens _mddNetworkOperator
-      (\ s a -> s{_mddNetworkOperator = a})
+mobNetworkOperator :: Lens' MobileDevice (Maybe Text)
+mobNetworkOperator
+  = lens _mobNetworkOperator
+      (\ s a -> s{_mobNetworkOperator = a})
 
 -- | Mobile Device Kernel version (Read-only)
-mddKernelVersion :: Lens' MobileDevice (Maybe Text)
-mddKernelVersion
-  = lens _mddKernelVersion
-      (\ s a -> s{_mddKernelVersion = a})
+mobKernelVersion :: Lens' MobileDevice (Maybe Text)
+mobKernelVersion
+  = lens _mobKernelVersion
+      (\ s a -> s{_mobKernelVersion = a})
 
 -- | Name of the mobile operating system
-mddOs :: Lens' MobileDevice (Maybe Text)
-mddOs = lens _mddOs (\ s a -> s{_mddOs = a})
+mobOS :: Lens' MobileDevice (Maybe Text)
+mobOS = lens _mobOS (\ s a -> s{_mobOS = a})
 
 -- | List of owner user\'s names (Read-only)
-mddName :: Lens' MobileDevice [Text]
-mddName
-  = lens _mddName (\ s a -> s{_mddName = a}) . _Default
+mobName :: Lens' MobileDevice [Text]
+mobName
+  = lens _mobName (\ s a -> s{_mobName = a}) . _Default
       . _Coerce
 
 -- | Name of the model of the device
-mddModel :: Lens' MobileDevice (Maybe Text)
-mddModel = lens _mddModel (\ s a -> s{_mddModel = a})
+mobModel :: Lens' MobileDevice (Maybe Text)
+mobModel = lens _mobModel (\ s a -> s{_mobModel = a})
 
 -- | Developer options enabled or disabled on device (Read-only)
-mddDeveloperOptionsStatus :: Lens' MobileDevice (Maybe Bool)
-mddDeveloperOptionsStatus
-  = lens _mddDeveloperOptionsStatus
-      (\ s a -> s{_mddDeveloperOptionsStatus = a})
+mobDeveloperOptionsStatus :: Lens' MobileDevice (Maybe Bool)
+mobDeveloperOptionsStatus
+  = lens _mobDeveloperOptionsStatus
+      (\ s a -> s{_mobDeveloperOptionsStatus = a})
 
 -- | Unknown sources enabled or disabled on device (Read-only)
-mddUnknownSourcesStatus :: Lens' MobileDevice (Maybe Bool)
-mddUnknownSourcesStatus
-  = lens _mddUnknownSourcesStatus
-      (\ s a -> s{_mddUnknownSourcesStatus = a})
+mobUnknownSourcesStatus :: Lens' MobileDevice (Maybe Bool)
+mobUnknownSourcesStatus
+  = lens _mobUnknownSourcesStatus
+      (\ s a -> s{_mobUnknownSourcesStatus = a})
 
 -- | Mobile Device MEID number (Read-only)
-mddMeid :: Lens' MobileDevice (Maybe Text)
-mddMeid = lens _mddMeid (\ s a -> s{_mddMeid = a})
+mobMeid :: Lens' MobileDevice (Maybe Text)
+mobMeid = lens _mobMeid (\ s a -> s{_mobMeid = a})
 
 -- | Mobile Device serial number (Read-only)
-mddDeviceId :: Lens' MobileDevice (Maybe Text)
-mddDeviceId
-  = lens _mddDeviceId (\ s a -> s{_mddDeviceId = a})
+mobDeviceId :: Lens' MobileDevice (Maybe Text)
+mobDeviceId
+  = lens _mobDeviceId (\ s a -> s{_mobDeviceId = a})
 
 -- | Date and time the device was first synchronized with the policy settings
 -- in the Google Apps administrator control panel (Read-only)
-mddFirstSync :: Lens' MobileDevice (Maybe UTCTime)
-mddFirstSync
-  = lens _mddFirstSync (\ s a -> s{_mddFirstSync = a})
+mobFirstSync :: Lens' MobileDevice (Maybe UTCTime)
+mobFirstSync
+  = lens _mobFirstSync (\ s a -> s{_mobFirstSync = a})
 
 -- | Mobile Device user agent
-mddUserAgent :: Lens' MobileDevice (Maybe Text)
-mddUserAgent
-  = lens _mddUserAgent (\ s a -> s{_mddUserAgent = a})
+mobUserAgent :: Lens' MobileDevice (Maybe Text)
+mobUserAgent
+  = lens _mobUserAgent (\ s a -> s{_mobUserAgent = a})
 
 -- | Mobile Device IMEI number (Read-only)
-mddImei :: Lens' MobileDevice (Maybe Text)
-mddImei = lens _mddImei (\ s a -> s{_mddImei = a})
+mobImei :: Lens' MobileDevice (Maybe Text)
+mobImei = lens _mobImei (\ s a -> s{_mobImei = a})
 
 -- | The type of device (Read-only)
-mddType :: Lens' MobileDevice (Maybe Text)
-mddType = lens _mddType (\ s a -> s{_mddType = a})
+mobType :: Lens' MobileDevice (Maybe Text)
+mobType = lens _mobType (\ s a -> s{_mobType = a})
 
 -- | Mobile Device WiFi MAC address (Read-only)
-mddWifiMacAddress :: Lens' MobileDevice (Maybe Text)
-mddWifiMacAddress
-  = lens _mddWifiMacAddress
-      (\ s a -> s{_mddWifiMacAddress = a})
+mobWifiMACAddress :: Lens' MobileDevice (Maybe Text)
+mobWifiMACAddress
+  = lens _mobWifiMACAddress
+      (\ s a -> s{_mobWifiMACAddress = a})
 
 -- | Mobile Device SSN or Serial Number (Read-only)
-mddSerialNumber :: Lens' MobileDevice (Maybe Text)
-mddSerialNumber
-  = lens _mddSerialNumber
-      (\ s a -> s{_mddSerialNumber = a})
+mobSerialNumber :: Lens' MobileDevice (Maybe Text)
+mobSerialNumber
+  = lens _mobSerialNumber
+      (\ s a -> s{_mobSerialNumber = a})
 
 -- | Mobile Device Hardware Id (Read-only)
-mddHardwareId :: Lens' MobileDevice (Maybe Text)
-mddHardwareId
-  = lens _mddHardwareId
-      (\ s a -> s{_mddHardwareId = a})
+mobHardwareId :: Lens' MobileDevice (Maybe Text)
+mobHardwareId
+  = lens _mobHardwareId
+      (\ s a -> s{_mobHardwareId = a})
 
 -- | Mobile Device Baseband version (Read-only)
-mddBasebandVersion :: Lens' MobileDevice (Maybe Text)
-mddBasebandVersion
-  = lens _mddBasebandVersion
-      (\ s a -> s{_mddBasebandVersion = a})
+mobBasebandVersion :: Lens' MobileDevice (Maybe Text)
+mobBasebandVersion
+  = lens _mobBasebandVersion
+      (\ s a -> s{_mobBasebandVersion = a})
 
 -- | Work profile supported on device (Read-only)
-mddSupportsWorkProfile :: Lens' MobileDevice (Maybe Bool)
-mddSupportsWorkProfile
-  = lens _mddSupportsWorkProfile
-      (\ s a -> s{_mddSupportsWorkProfile = a})
+mobSupportsWorkProfile :: Lens' MobileDevice (Maybe Bool)
+mobSupportsWorkProfile
+  = lens _mobSupportsWorkProfile
+      (\ s a -> s{_mobSupportsWorkProfile = a})
 
 -- | Mobile Device compromised status (Read-only)
-mddDeviceCompromisedStatus :: Lens' MobileDevice (Maybe Text)
-mddDeviceCompromisedStatus
-  = lens _mddDeviceCompromisedStatus
-      (\ s a -> s{_mddDeviceCompromisedStatus = a})
+mobDeviceCompromisedStatus :: Lens' MobileDevice (Maybe Text)
+mobDeviceCompromisedStatus
+  = lens _mobDeviceCompromisedStatus
+      (\ s a -> s{_mobDeviceCompromisedStatus = a})
 
 -- | List of applications installed on Mobile Device
-mddApplications :: Lens' MobileDevice [MobileDeviceApplications]
-mddApplications
-  = lens _mddApplications
-      (\ s a -> s{_mddApplications = a})
+mobApplications :: Lens' MobileDevice [MobileDeviceApplications]
+mobApplications
+  = lens _mobApplications
+      (\ s a -> s{_mobApplications = a})
       . _Default
       . _Coerce
 
 -- | The default locale used on the Mobile Device (Read-only)
-mddDefaultLanguage :: Lens' MobileDevice (Maybe Text)
-mddDefaultLanguage
-  = lens _mddDefaultLanguage
-      (\ s a -> s{_mddDefaultLanguage = a})
+mobDefaultLanguage :: Lens' MobileDevice (Maybe Text)
+mobDefaultLanguage
+  = lens _mobDefaultLanguage
+      (\ s a -> s{_mobDefaultLanguage = a})
 
 instance FromJSON MobileDevice where
         parseJSON
@@ -3911,40 +3912,40 @@ instance ToJSON MobileDevice where
         toJSON MobileDevice{..}
           = object
               (catMaybes
-                 [("email" .=) <$> _mddEmail,
-                  ("status" .=) <$> _mddStatus,
-                  ("etag" .=) <$> _mddEtag,
-                  ("resourceId" .=) <$> _mddResourceId,
-                  ("buildNumber" .=) <$> _mddBuildNumber,
+                 [("email" .=) <$> _mobEmail,
+                  ("status" .=) <$> _mobStatus,
+                  ("etag" .=) <$> _mobEtag,
+                  ("resourceId" .=) <$> _mobResourceId,
+                  ("buildNumber" .=) <$> _mobBuildNumber,
                   ("managedAccountIsOnOwnerProfile" .=) <$>
-                    _mddManagedAccountIsOnOwnerProfile,
-                  ("lastSync" .=) <$> _mddLastSync,
-                  ("otherAccountsInfo" .=) <$> _mddOtherAccountsInfo,
-                  Just ("kind" .= _mddKind),
-                  ("adbStatus" .=) <$> _mddAdbStatus,
-                  ("networkOperator" .=) <$> _mddNetworkOperator,
-                  ("kernelVersion" .=) <$> _mddKernelVersion,
-                  ("os" .=) <$> _mddOs, ("name" .=) <$> _mddName,
-                  ("model" .=) <$> _mddModel,
+                    _mobManagedAccountIsOnOwnerProfile,
+                  ("lastSync" .=) <$> _mobLastSync,
+                  ("otherAccountsInfo" .=) <$> _mobOtherAccountsInfo,
+                  Just ("kind" .= _mobKind),
+                  ("adbStatus" .=) <$> _mobAdbStatus,
+                  ("networkOperator" .=) <$> _mobNetworkOperator,
+                  ("kernelVersion" .=) <$> _mobKernelVersion,
+                  ("os" .=) <$> _mobOS, ("name" .=) <$> _mobName,
+                  ("model" .=) <$> _mobModel,
                   ("developerOptionsStatus" .=) <$>
-                    _mddDeveloperOptionsStatus,
+                    _mobDeveloperOptionsStatus,
                   ("unknownSourcesStatus" .=) <$>
-                    _mddUnknownSourcesStatus,
-                  ("meid" .=) <$> _mddMeid,
-                  ("deviceId" .=) <$> _mddDeviceId,
-                  ("firstSync" .=) <$> _mddFirstSync,
-                  ("userAgent" .=) <$> _mddUserAgent,
-                  ("imei" .=) <$> _mddImei, ("type" .=) <$> _mddType,
-                  ("wifiMacAddress" .=) <$> _mddWifiMacAddress,
-                  ("serialNumber" .=) <$> _mddSerialNumber,
-                  ("hardwareId" .=) <$> _mddHardwareId,
-                  ("basebandVersion" .=) <$> _mddBasebandVersion,
+                    _mobUnknownSourcesStatus,
+                  ("meid" .=) <$> _mobMeid,
+                  ("deviceId" .=) <$> _mobDeviceId,
+                  ("firstSync" .=) <$> _mobFirstSync,
+                  ("userAgent" .=) <$> _mobUserAgent,
+                  ("imei" .=) <$> _mobImei, ("type" .=) <$> _mobType,
+                  ("wifiMacAddress" .=) <$> _mobWifiMACAddress,
+                  ("serialNumber" .=) <$> _mobSerialNumber,
+                  ("hardwareId" .=) <$> _mobHardwareId,
+                  ("basebandVersion" .=) <$> _mobBasebandVersion,
                   ("supportsWorkProfile" .=) <$>
-                    _mddSupportsWorkProfile,
+                    _mobSupportsWorkProfile,
                   ("deviceCompromisedStatus" .=) <$>
-                    _mddDeviceCompromisedStatus,
-                  ("applications" .=) <$> _mddApplications,
-                  ("defaultLanguage" .=) <$> _mddDefaultLanguage])
+                    _mobDeviceCompromisedStatus,
+                  ("applications" .=) <$> _mobApplications,
+                  ("defaultLanguage" .=) <$> _mobDefaultLanguage])
 
 -- | JSON template for a set of custom properties (i.e. all fields in a
 -- particular schema)
@@ -4195,7 +4196,7 @@ data Notifications = Notifications
     { _notEtag                     :: !(Maybe Text)
     , _notNextPageToken            :: !(Maybe Text)
     , _notKind                     :: !Text
-    , _notItems                    :: !(Maybe [Maybe Notification])
+    , _notItems                    :: !(Maybe [Notification])
     , _notUnreadNotificationsCount :: !(Maybe Int32)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -4238,7 +4239,7 @@ notKind :: Lens' Notifications Text
 notKind = lens _notKind (\ s a -> s{_notKind = a})
 
 -- | List of notifications in this page.
-notItems :: Lens' Notifications [Maybe Notification]
+notItems :: Lens' Notifications [Notification]
 notItems
   = lens _notItems (\ s a -> s{_notItems = a}) .
       _Default
@@ -4333,7 +4334,7 @@ instance ToJSON UserExternalId where
 data Asps = Asps
     { _aaEtag  :: !(Maybe Text)
     , _aaKind  :: !Text
-    , _aaItems :: !(Maybe [Maybe Asp])
+    , _aaItems :: !(Maybe [Asp])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Asps' with the minimum fields required to make a request.
@@ -4363,7 +4364,7 @@ aaKind :: Lens' Asps Text
 aaKind = lens _aaKind (\ s a -> s{_aaKind = a})
 
 -- | A list of ASP resources.
-aaItems :: Lens' Asps [Maybe Asp]
+aaItems :: Lens' Asps [Asp]
 aaItems
   = lens _aaItems (\ s a -> s{_aaItems = a}) . _Default
       . _Coerce
@@ -4387,71 +4388,71 @@ instance ToJSON Asps where
 -- | JSON response template for List Chrome OS Devices operation in Directory
 -- API.
 --
--- /See:/ 'chromeOsDevices' smart constructor.
-data ChromeOsDevices = ChromeOsDevices
-    { _codsEtag            :: !(Maybe Text)
-    , _codsNextPageToken   :: !(Maybe Text)
-    , _codsKind            :: !Text
-    , _codsChromeosdevices :: !(Maybe [Maybe ChromeOsDevice])
+-- /See:/ 'chromeOSDevices' smart constructor.
+data ChromeOSDevices = ChromeOSDevices
+    { _cosdEtag            :: !(Maybe Text)
+    , _cosdNextPageToken   :: !(Maybe Text)
+    , _cosdKind            :: !Text
+    , _cosdChromeosDevices :: !(Maybe [ChromeOSDevice])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ChromeOsDevices' with the minimum fields required to make a request.
+-- | Creates a value of 'ChromeOSDevices' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'codsEtag'
+-- * 'cosdEtag'
 --
--- * 'codsNextPageToken'
+-- * 'cosdNextPageToken'
 --
--- * 'codsKind'
+-- * 'cosdKind'
 --
--- * 'codsChromeosdevices'
-chromeOsDevices
-    :: ChromeOsDevices
-chromeOsDevices =
-    ChromeOsDevices
-    { _codsEtag = Nothing
-    , _codsNextPageToken = Nothing
-    , _codsKind = "admin#directory#chromeosdevices"
-    , _codsChromeosdevices = Nothing
+-- * 'cosdChromeosDevices'
+chromeOSDevices
+    :: ChromeOSDevices
+chromeOSDevices =
+    ChromeOSDevices
+    { _cosdEtag = Nothing
+    , _cosdNextPageToken = Nothing
+    , _cosdKind = "admin#directory#chromeosdevices"
+    , _cosdChromeosDevices = Nothing
     }
 
 -- | ETag of the resource.
-codsEtag :: Lens' ChromeOsDevices (Maybe Text)
-codsEtag = lens _codsEtag (\ s a -> s{_codsEtag = a})
+cosdEtag :: Lens' ChromeOSDevices (Maybe Text)
+cosdEtag = lens _cosdEtag (\ s a -> s{_cosdEtag = a})
 
 -- | Token used to access next page of this result.
-codsNextPageToken :: Lens' ChromeOsDevices (Maybe Text)
-codsNextPageToken
-  = lens _codsNextPageToken
-      (\ s a -> s{_codsNextPageToken = a})
+cosdNextPageToken :: Lens' ChromeOSDevices (Maybe Text)
+cosdNextPageToken
+  = lens _cosdNextPageToken
+      (\ s a -> s{_cosdNextPageToken = a})
 
 -- | Kind of resource this is.
-codsKind :: Lens' ChromeOsDevices Text
-codsKind = lens _codsKind (\ s a -> s{_codsKind = a})
+cosdKind :: Lens' ChromeOSDevices Text
+cosdKind = lens _cosdKind (\ s a -> s{_cosdKind = a})
 
 -- | List of Chrome OS Device objects.
-codsChromeosdevices :: Lens' ChromeOsDevices [Maybe ChromeOsDevice]
-codsChromeosdevices
-  = lens _codsChromeosdevices
-      (\ s a -> s{_codsChromeosdevices = a})
+cosdChromeosDevices :: Lens' ChromeOSDevices [ChromeOSDevice]
+cosdChromeosDevices
+  = lens _cosdChromeosDevices
+      (\ s a -> s{_cosdChromeosDevices = a})
       . _Default
       . _Coerce
 
-instance FromJSON ChromeOsDevices where
+instance FromJSON ChromeOSDevices where
         parseJSON
-          = withObject "ChromeOsDevices"
+          = withObject "ChromeOSDevices"
               (\ o ->
-                 ChromeOsDevices <$>
+                 ChromeOSDevices <$>
                    (o .:? "etag") <*> (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!= "admin#directory#chromeosdevices")
                      <*> (o .:? "chromeosdevices" .!= mempty))
 
-instance ToJSON ChromeOsDevices where
-        toJSON ChromeOsDevices{..}
+instance ToJSON ChromeOSDevices where
+        toJSON ChromeOSDevices{..}
           = object
               (catMaybes
-                 [("etag" .=) <$> _codsEtag,
-                  ("nextPageToken" .=) <$> _codsNextPageToken,
-                  Just ("kind" .= _codsKind),
-                  ("chromeosdevices" .=) <$> _codsChromeosdevices])
+                 [("etag" .=) <$> _cosdEtag,
+                  ("nextPageToken" .=) <$> _cosdNextPageToken,
+                  Just ("kind" .= _cosdKind),
+                  ("chromeosdevices" .=) <$> _cosdChromeosDevices])

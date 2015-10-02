@@ -85,9 +85,6 @@ module Network.Google.SiteVerification
     , svwrrOwners
     , svwrrId
     , svwrrSite
-
-    -- ** Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.Prelude

@@ -32,11 +32,11 @@ module Network.Google.Resource.Games.Pushtokens.Update
     -- * Request Lenses
     , puQuotaUser
     , puPrettyPrint
-    , puUserIp
+    , puPushToken
+    , puUserIP
     , puKey
-    , puOauthToken
+    , puOAuthToken
     , puFields
-    , puAlt
     ) where
 
 import           Network.Google.Games.Types
@@ -49,10 +49,11 @@ type PushtokensUpdateResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
-               QueryParam "oauth_token" Text :>
+             QueryParam "key" Key :>
+               QueryParam "oauth_token" OAuthToken :>
                  QueryParam "fields" Text :>
-                   QueryParam "alt" Alt :> Put '[JSON] ()
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] PushToken :> Put '[JSON] ()
 
 -- | Registers a push token for the current user and application.
 --
@@ -60,11 +61,11 @@ type PushtokensUpdateResource =
 data PushtokensUpdate' = PushtokensUpdate'
     { _puQuotaUser   :: !(Maybe Text)
     , _puPrettyPrint :: !Bool
-    , _puUserIp      :: !(Maybe Text)
-    , _puKey         :: !(Maybe Text)
-    , _puOauthToken  :: !(Maybe Text)
+    , _puPushToken   :: !PushToken
+    , _puUserIP      :: !(Maybe Text)
+    , _puKey         :: !(Maybe Key)
+    , _puOAuthToken  :: !(Maybe OAuthToken)
     , _puFields      :: !(Maybe Text)
-    , _puAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PushtokensUpdate'' with the minimum fields required to make a request.
@@ -75,26 +76,27 @@ data PushtokensUpdate' = PushtokensUpdate'
 --
 -- * 'puPrettyPrint'
 --
--- * 'puUserIp'
+-- * 'puPushToken'
+--
+-- * 'puUserIP'
 --
 -- * 'puKey'
 --
--- * 'puOauthToken'
+-- * 'puOAuthToken'
 --
 -- * 'puFields'
---
--- * 'puAlt'
 pushtokensUpdate'
-    :: PushtokensUpdate'
-pushtokensUpdate' =
+    :: PushToken -- ^ 'PushToken'
+    -> PushtokensUpdate'
+pushtokensUpdate' pPuPushToken_ =
     PushtokensUpdate'
     { _puQuotaUser = Nothing
     , _puPrettyPrint = True
-    , _puUserIp = Nothing
+    , _puPushToken = pPuPushToken_
+    , _puUserIP = Nothing
     , _puKey = Nothing
-    , _puOauthToken = Nothing
+    , _puOAuthToken = Nothing
     , _puFields = Nothing
-    , _puAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -110,39 +112,45 @@ puPrettyPrint
   = lens _puPrettyPrint
       (\ s a -> s{_puPrettyPrint = a})
 
+-- | Multipart request metadata.
+puPushToken :: Lens' PushtokensUpdate' PushToken
+puPushToken
+  = lens _puPushToken (\ s a -> s{_puPushToken = a})
+
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-puUserIp :: Lens' PushtokensUpdate' (Maybe Text)
-puUserIp = lens _puUserIp (\ s a -> s{_puUserIp = a})
+puUserIP :: Lens' PushtokensUpdate' (Maybe Text)
+puUserIP = lens _puUserIP (\ s a -> s{_puUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-puKey :: Lens' PushtokensUpdate' (Maybe Text)
+puKey :: Lens' PushtokensUpdate' (Maybe Key)
 puKey = lens _puKey (\ s a -> s{_puKey = a})
 
 -- | OAuth 2.0 token for the current user.
-puOauthToken :: Lens' PushtokensUpdate' (Maybe Text)
-puOauthToken
-  = lens _puOauthToken (\ s a -> s{_puOauthToken = a})
+puOAuthToken :: Lens' PushtokensUpdate' (Maybe OAuthToken)
+puOAuthToken
+  = lens _puOAuthToken (\ s a -> s{_puOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 puFields :: Lens' PushtokensUpdate' (Maybe Text)
 puFields = lens _puFields (\ s a -> s{_puFields = a})
 
--- | Data format for the response.
-puAlt :: Lens' PushtokensUpdate' Alt
-puAlt = lens _puAlt (\ s a -> s{_puAlt = a})
+instance GoogleAuth PushtokensUpdate' where
+        authKey = puKey . _Just
+        authToken = puOAuthToken . _Just
 
 instance GoogleRequest PushtokensUpdate' where
         type Rs PushtokensUpdate' = ()
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u PushtokensUpdate'{..}
-          = go _puQuotaUser (Just _puPrettyPrint) _puUserIp
+          = go _puQuotaUser (Just _puPrettyPrint) _puUserIP
               _puKey
-              _puOauthToken
+              _puOAuthToken
               _puFields
-              (Just _puAlt)
+              (Just AltJSON)
+              _puPushToken
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PushtokensUpdateResource)

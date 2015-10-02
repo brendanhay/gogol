@@ -32,13 +32,12 @@ module Network.Google.Resource.DFAReporting.FloodlightActivities.Delete
     -- * Request Lenses
     , fadQuotaUser
     , fadPrettyPrint
-    , fadUserIp
+    , fadUserIP
     , fadProfileId
     , fadKey
     , fadId
-    , fadOauthToken
+    , fadOAuthToken
     , fadFields
-    , fadAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,10 +53,10 @@ type FloodlightActivitiesDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Delete '[JSON] ()
+                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an existing floodlight activity.
 --
@@ -65,13 +64,12 @@ type FloodlightActivitiesDeleteResource =
 data FloodlightActivitiesDelete' = FloodlightActivitiesDelete'
     { _fadQuotaUser   :: !(Maybe Text)
     , _fadPrettyPrint :: !Bool
-    , _fadUserIp      :: !(Maybe Text)
+    , _fadUserIP      :: !(Maybe Text)
     , _fadProfileId   :: !Int64
-    , _fadKey         :: !(Maybe Text)
+    , _fadKey         :: !(Maybe Key)
     , _fadId          :: !Int64
-    , _fadOauthToken  :: !(Maybe Text)
+    , _fadOAuthToken  :: !(Maybe OAuthToken)
     , _fadFields      :: !(Maybe Text)
-    , _fadAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivitiesDelete'' with the minimum fields required to make a request.
@@ -82,7 +80,7 @@ data FloodlightActivitiesDelete' = FloodlightActivitiesDelete'
 --
 -- * 'fadPrettyPrint'
 --
--- * 'fadUserIp'
+-- * 'fadUserIP'
 --
 -- * 'fadProfileId'
 --
@@ -90,11 +88,9 @@ data FloodlightActivitiesDelete' = FloodlightActivitiesDelete'
 --
 -- * 'fadId'
 --
--- * 'fadOauthToken'
+-- * 'fadOAuthToken'
 --
 -- * 'fadFields'
---
--- * 'fadAlt'
 floodlightActivitiesDelete'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
@@ -103,13 +99,12 @@ floodlightActivitiesDelete' pFadProfileId_ pFadId_ =
     FloodlightActivitiesDelete'
     { _fadQuotaUser = Nothing
     , _fadPrettyPrint = True
-    , _fadUserIp = Nothing
+    , _fadUserIP = Nothing
     , _fadProfileId = pFadProfileId_
     , _fadKey = Nothing
     , _fadId = pFadId_
-    , _fadOauthToken = Nothing
+    , _fadOAuthToken = Nothing
     , _fadFields = Nothing
-    , _fadAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,9 +122,9 @@ fadPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-fadUserIp :: Lens' FloodlightActivitiesDelete' (Maybe Text)
-fadUserIp
-  = lens _fadUserIp (\ s a -> s{_fadUserIp = a})
+fadUserIP :: Lens' FloodlightActivitiesDelete' (Maybe Text)
+fadUserIP
+  = lens _fadUserIP (\ s a -> s{_fadUserIP = a})
 
 -- | User profile ID associated with this request.
 fadProfileId :: Lens' FloodlightActivitiesDelete' Int64
@@ -139,7 +134,7 @@ fadProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fadKey :: Lens' FloodlightActivitiesDelete' (Maybe Text)
+fadKey :: Lens' FloodlightActivitiesDelete' (Maybe Key)
 fadKey = lens _fadKey (\ s a -> s{_fadKey = a})
 
 -- | Floodlight activity ID.
@@ -147,32 +142,32 @@ fadId :: Lens' FloodlightActivitiesDelete' Int64
 fadId = lens _fadId (\ s a -> s{_fadId = a})
 
 -- | OAuth 2.0 token for the current user.
-fadOauthToken :: Lens' FloodlightActivitiesDelete' (Maybe Text)
-fadOauthToken
-  = lens _fadOauthToken
-      (\ s a -> s{_fadOauthToken = a})
+fadOAuthToken :: Lens' FloodlightActivitiesDelete' (Maybe OAuthToken)
+fadOAuthToken
+  = lens _fadOAuthToken
+      (\ s a -> s{_fadOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 fadFields :: Lens' FloodlightActivitiesDelete' (Maybe Text)
 fadFields
   = lens _fadFields (\ s a -> s{_fadFields = a})
 
--- | Data format for the response.
-fadAlt :: Lens' FloodlightActivitiesDelete' Alt
-fadAlt = lens _fadAlt (\ s a -> s{_fadAlt = a})
+instance GoogleAuth FloodlightActivitiesDelete' where
+        authKey = fadKey . _Just
+        authToken = fadOAuthToken . _Just
 
 instance GoogleRequest FloodlightActivitiesDelete'
          where
         type Rs FloodlightActivitiesDelete' = ()
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u FloodlightActivitiesDelete'{..}
-          = go _fadQuotaUser (Just _fadPrettyPrint) _fadUserIp
+          = go _fadQuotaUser (Just _fadPrettyPrint) _fadUserIP
               _fadProfileId
               _fadKey
               _fadId
-              _fadOauthToken
+              _fadOAuthToken
               _fadFields
-              (Just _fadAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy FloodlightActivitiesDeleteResource)

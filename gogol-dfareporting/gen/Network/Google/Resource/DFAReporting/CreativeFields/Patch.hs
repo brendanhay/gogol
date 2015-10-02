@@ -33,13 +33,13 @@ module Network.Google.Resource.DFAReporting.CreativeFields.Patch
     -- * Request Lenses
     , cfpQuotaUser
     , cfpPrettyPrint
-    , cfpUserIp
+    , cfpUserIP
     , cfpProfileId
     , cfpKey
     , cfpId
-    , cfpOauthToken
+    , cfpOAuthToken
+    , cfpCreativeField
     , cfpFields
-    , cfpAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,26 +54,28 @@ type CreativeFieldsPatchResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "id" Int64 :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Patch '[JSON] CreativeField
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] CreativeField :>
+                             Patch '[JSON] CreativeField
 
 -- | Updates an existing creative field. This method supports patch
 -- semantics.
 --
 -- /See:/ 'creativeFieldsPatch'' smart constructor.
 data CreativeFieldsPatch' = CreativeFieldsPatch'
-    { _cfpQuotaUser   :: !(Maybe Text)
-    , _cfpPrettyPrint :: !Bool
-    , _cfpUserIp      :: !(Maybe Text)
-    , _cfpProfileId   :: !Int64
-    , _cfpKey         :: !(Maybe Text)
-    , _cfpId          :: !Int64
-    , _cfpOauthToken  :: !(Maybe Text)
-    , _cfpFields      :: !(Maybe Text)
-    , _cfpAlt         :: !Alt
+    { _cfpQuotaUser     :: !(Maybe Text)
+    , _cfpPrettyPrint   :: !Bool
+    , _cfpUserIP        :: !(Maybe Text)
+    , _cfpProfileId     :: !Int64
+    , _cfpKey           :: !(Maybe Key)
+    , _cfpId            :: !Int64
+    , _cfpOAuthToken    :: !(Maybe OAuthToken)
+    , _cfpCreativeField :: !CreativeField
+    , _cfpFields        :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeFieldsPatch'' with the minimum fields required to make a request.
@@ -84,7 +86,7 @@ data CreativeFieldsPatch' = CreativeFieldsPatch'
 --
 -- * 'cfpPrettyPrint'
 --
--- * 'cfpUserIp'
+-- * 'cfpUserIP'
 --
 -- * 'cfpProfileId'
 --
@@ -92,26 +94,27 @@ data CreativeFieldsPatch' = CreativeFieldsPatch'
 --
 -- * 'cfpId'
 --
--- * 'cfpOauthToken'
+-- * 'cfpOAuthToken'
+--
+-- * 'cfpCreativeField'
 --
 -- * 'cfpFields'
---
--- * 'cfpAlt'
 creativeFieldsPatch'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
+    -> CreativeField -- ^ 'CreativeField'
     -> CreativeFieldsPatch'
-creativeFieldsPatch' pCfpProfileId_ pCfpId_ =
+creativeFieldsPatch' pCfpProfileId_ pCfpId_ pCfpCreativeField_ =
     CreativeFieldsPatch'
     { _cfpQuotaUser = Nothing
     , _cfpPrettyPrint = True
-    , _cfpUserIp = Nothing
+    , _cfpUserIP = Nothing
     , _cfpProfileId = pCfpProfileId_
     , _cfpKey = Nothing
     , _cfpId = pCfpId_
-    , _cfpOauthToken = Nothing
+    , _cfpOAuthToken = Nothing
+    , _cfpCreativeField = pCfpCreativeField_
     , _cfpFields = Nothing
-    , _cfpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -129,9 +132,9 @@ cfpPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cfpUserIp :: Lens' CreativeFieldsPatch' (Maybe Text)
-cfpUserIp
-  = lens _cfpUserIp (\ s a -> s{_cfpUserIp = a})
+cfpUserIP :: Lens' CreativeFieldsPatch' (Maybe Text)
+cfpUserIP
+  = lens _cfpUserIP (\ s a -> s{_cfpUserIP = a})
 
 -- | User profile ID associated with this request.
 cfpProfileId :: Lens' CreativeFieldsPatch' Int64
@@ -141,7 +144,7 @@ cfpProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cfpKey :: Lens' CreativeFieldsPatch' (Maybe Text)
+cfpKey :: Lens' CreativeFieldsPatch' (Maybe Key)
 cfpKey = lens _cfpKey (\ s a -> s{_cfpKey = a})
 
 -- | Creative Field ID
@@ -149,31 +152,38 @@ cfpId :: Lens' CreativeFieldsPatch' Int64
 cfpId = lens _cfpId (\ s a -> s{_cfpId = a})
 
 -- | OAuth 2.0 token for the current user.
-cfpOauthToken :: Lens' CreativeFieldsPatch' (Maybe Text)
-cfpOauthToken
-  = lens _cfpOauthToken
-      (\ s a -> s{_cfpOauthToken = a})
+cfpOAuthToken :: Lens' CreativeFieldsPatch' (Maybe OAuthToken)
+cfpOAuthToken
+  = lens _cfpOAuthToken
+      (\ s a -> s{_cfpOAuthToken = a})
+
+-- | Multipart request metadata.
+cfpCreativeField :: Lens' CreativeFieldsPatch' CreativeField
+cfpCreativeField
+  = lens _cfpCreativeField
+      (\ s a -> s{_cfpCreativeField = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cfpFields :: Lens' CreativeFieldsPatch' (Maybe Text)
 cfpFields
   = lens _cfpFields (\ s a -> s{_cfpFields = a})
 
--- | Data format for the response.
-cfpAlt :: Lens' CreativeFieldsPatch' Alt
-cfpAlt = lens _cfpAlt (\ s a -> s{_cfpAlt = a})
+instance GoogleAuth CreativeFieldsPatch' where
+        authKey = cfpKey . _Just
+        authToken = cfpOAuthToken . _Just
 
 instance GoogleRequest CreativeFieldsPatch' where
         type Rs CreativeFieldsPatch' = CreativeField
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativeFieldsPatch'{..}
-          = go _cfpQuotaUser (Just _cfpPrettyPrint) _cfpUserIp
+          = go _cfpQuotaUser (Just _cfpPrettyPrint) _cfpUserIP
               _cfpProfileId
               _cfpKey
               (Just _cfpId)
-              _cfpOauthToken
+              _cfpOAuthToken
               _cfpFields
-              (Just _cfpAlt)
+              (Just AltJSON)
+              _cfpCreativeField
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CreativeFieldsPatchResource)

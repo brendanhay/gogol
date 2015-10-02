@@ -33,12 +33,11 @@ module Network.Google.Resource.AdExchangeSeller.Accounts.Metadata.Dimensions.Lis
     -- * Request Lenses
     , amdlQuotaUser
     , amdlPrettyPrint
-    , amdlUserIp
+    , amdlUserIP
     , amdlAccountId
     , amdlKey
-    , amdlOauthToken
+    , amdlOAuthToken
     , amdlFields
-    , amdlAlt
     ) where
 
 import           Network.Google.AdExchangeSeller.Types
@@ -54,10 +53,10 @@ type AccountsMetadataDimensionsListResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] Metadata
+                         QueryParam "alt" AltJSON :> Get '[JSON] Metadata
 
 -- | List the metadata for the dimensions available to this AdExchange
 -- account.
@@ -66,12 +65,11 @@ type AccountsMetadataDimensionsListResource =
 data AccountsMetadataDimensionsList' = AccountsMetadataDimensionsList'
     { _amdlQuotaUser   :: !(Maybe Text)
     , _amdlPrettyPrint :: !Bool
-    , _amdlUserIp      :: !(Maybe Text)
+    , _amdlUserIP      :: !(Maybe Text)
     , _amdlAccountId   :: !Text
-    , _amdlKey         :: !(Maybe Text)
-    , _amdlOauthToken  :: !(Maybe Text)
+    , _amdlKey         :: !(Maybe Key)
+    , _amdlOAuthToken  :: !(Maybe OAuthToken)
     , _amdlFields      :: !(Maybe Text)
-    , _amdlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsMetadataDimensionsList'' with the minimum fields required to make a request.
@@ -82,17 +80,15 @@ data AccountsMetadataDimensionsList' = AccountsMetadataDimensionsList'
 --
 -- * 'amdlPrettyPrint'
 --
--- * 'amdlUserIp'
+-- * 'amdlUserIP'
 --
 -- * 'amdlAccountId'
 --
 -- * 'amdlKey'
 --
--- * 'amdlOauthToken'
+-- * 'amdlOAuthToken'
 --
 -- * 'amdlFields'
---
--- * 'amdlAlt'
 accountsMetadataDimensionsList'
     :: Text -- ^ 'accountId'
     -> AccountsMetadataDimensionsList'
@@ -100,12 +96,11 @@ accountsMetadataDimensionsList' pAmdlAccountId_ =
     AccountsMetadataDimensionsList'
     { _amdlQuotaUser = Nothing
     , _amdlPrettyPrint = True
-    , _amdlUserIp = Nothing
+    , _amdlUserIP = Nothing
     , _amdlAccountId = pAmdlAccountId_
     , _amdlKey = Nothing
-    , _amdlOauthToken = Nothing
+    , _amdlOAuthToken = Nothing
     , _amdlFields = Nothing
-    , _amdlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -124,9 +119,9 @@ amdlPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-amdlUserIp :: Lens' AccountsMetadataDimensionsList' (Maybe Text)
-amdlUserIp
-  = lens _amdlUserIp (\ s a -> s{_amdlUserIp = a})
+amdlUserIP :: Lens' AccountsMetadataDimensionsList' (Maybe Text)
+amdlUserIP
+  = lens _amdlUserIP (\ s a -> s{_amdlUserIP = a})
 
 -- | Account with visibility to the dimensions.
 amdlAccountId :: Lens' AccountsMetadataDimensionsList' Text
@@ -137,23 +132,24 @@ amdlAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-amdlKey :: Lens' AccountsMetadataDimensionsList' (Maybe Text)
+amdlKey :: Lens' AccountsMetadataDimensionsList' (Maybe Key)
 amdlKey = lens _amdlKey (\ s a -> s{_amdlKey = a})
 
 -- | OAuth 2.0 token for the current user.
-amdlOauthToken :: Lens' AccountsMetadataDimensionsList' (Maybe Text)
-amdlOauthToken
-  = lens _amdlOauthToken
-      (\ s a -> s{_amdlOauthToken = a})
+amdlOAuthToken :: Lens' AccountsMetadataDimensionsList' (Maybe OAuthToken)
+amdlOAuthToken
+  = lens _amdlOAuthToken
+      (\ s a -> s{_amdlOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 amdlFields :: Lens' AccountsMetadataDimensionsList' (Maybe Text)
 amdlFields
   = lens _amdlFields (\ s a -> s{_amdlFields = a})
 
--- | Data format for the response.
-amdlAlt :: Lens' AccountsMetadataDimensionsList' Alt
-amdlAlt = lens _amdlAlt (\ s a -> s{_amdlAlt = a})
+instance GoogleAuth AccountsMetadataDimensionsList'
+         where
+        authKey = amdlKey . _Just
+        authToken = amdlOAuthToken . _Just
 
 instance GoogleRequest
          AccountsMetadataDimensionsList' where
@@ -162,12 +158,12 @@ instance GoogleRequest
         requestWithRoute r u
           AccountsMetadataDimensionsList'{..}
           = go _amdlQuotaUser (Just _amdlPrettyPrint)
-              _amdlUserIp
+              _amdlUserIP
               _amdlAccountId
               _amdlKey
-              _amdlOauthToken
+              _amdlOAuthToken
               _amdlFields
-              (Just _amdlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

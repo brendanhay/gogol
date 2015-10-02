@@ -34,12 +34,12 @@ module Network.Google.Resource.Compute.Instances.Insert
     , iiQuotaUser
     , iiPrettyPrint
     , iiProject
-    , iiUserIp
+    , iiUserIP
     , iiZone
     , iiKey
-    , iiOauthToken
+    , iiOAuthToken
+    , iiInstance
     , iiFields
-    , iiAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -55,10 +55,11 @@ type InstancesInsertResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Post '[JSON] Operation
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Instance :> Post '[JSON] Operation
 
 -- | Creates an instance resource in the specified project using the data
 -- included in the request.
@@ -68,12 +69,12 @@ data InstancesInsert' = InstancesInsert'
     { _iiQuotaUser   :: !(Maybe Text)
     , _iiPrettyPrint :: !Bool
     , _iiProject     :: !Text
-    , _iiUserIp      :: !(Maybe Text)
+    , _iiUserIP      :: !(Maybe Text)
     , _iiZone        :: !Text
-    , _iiKey         :: !(Maybe Text)
-    , _iiOauthToken  :: !(Maybe Text)
+    , _iiKey         :: !(Maybe Key)
+    , _iiOAuthToken  :: !(Maybe OAuthToken)
+    , _iiInstance    :: !Instance
     , _iiFields      :: !(Maybe Text)
-    , _iiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesInsert'' with the minimum fields required to make a request.
@@ -86,32 +87,33 @@ data InstancesInsert' = InstancesInsert'
 --
 -- * 'iiProject'
 --
--- * 'iiUserIp'
+-- * 'iiUserIP'
 --
 -- * 'iiZone'
 --
 -- * 'iiKey'
 --
--- * 'iiOauthToken'
+-- * 'iiOAuthToken'
+--
+-- * 'iiInstance'
 --
 -- * 'iiFields'
---
--- * 'iiAlt'
 instancesInsert'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
+    -> Instance -- ^ 'Instance'
     -> InstancesInsert'
-instancesInsert' pIiProject_ pIiZone_ =
+instancesInsert' pIiProject_ pIiZone_ pIiInstance_ =
     InstancesInsert'
     { _iiQuotaUser = Nothing
     , _iiPrettyPrint = True
     , _iiProject = pIiProject_
-    , _iiUserIp = Nothing
+    , _iiUserIP = Nothing
     , _iiZone = pIiZone_
     , _iiKey = Nothing
-    , _iiOauthToken = Nothing
+    , _iiOAuthToken = Nothing
+    , _iiInstance = pIiInstance_
     , _iiFields = Nothing
-    , _iiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -134,8 +136,8 @@ iiProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-iiUserIp :: Lens' InstancesInsert' (Maybe Text)
-iiUserIp = lens _iiUserIp (\ s a -> s{_iiUserIp = a})
+iiUserIP :: Lens' InstancesInsert' (Maybe Text)
+iiUserIP = lens _iiUserIP (\ s a -> s{_iiUserIP = a})
 
 -- | The name of the zone for this request.
 iiZone :: Lens' InstancesInsert' Text
@@ -144,33 +146,39 @@ iiZone = lens _iiZone (\ s a -> s{_iiZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-iiKey :: Lens' InstancesInsert' (Maybe Text)
+iiKey :: Lens' InstancesInsert' (Maybe Key)
 iiKey = lens _iiKey (\ s a -> s{_iiKey = a})
 
 -- | OAuth 2.0 token for the current user.
-iiOauthToken :: Lens' InstancesInsert' (Maybe Text)
-iiOauthToken
-  = lens _iiOauthToken (\ s a -> s{_iiOauthToken = a})
+iiOAuthToken :: Lens' InstancesInsert' (Maybe OAuthToken)
+iiOAuthToken
+  = lens _iiOAuthToken (\ s a -> s{_iiOAuthToken = a})
+
+-- | Multipart request metadata.
+iiInstance :: Lens' InstancesInsert' Instance
+iiInstance
+  = lens _iiInstance (\ s a -> s{_iiInstance = a})
 
 -- | Selector specifying which fields to include in a partial response.
 iiFields :: Lens' InstancesInsert' (Maybe Text)
 iiFields = lens _iiFields (\ s a -> s{_iiFields = a})
 
--- | Data format for the response.
-iiAlt :: Lens' InstancesInsert' Alt
-iiAlt = lens _iiAlt (\ s a -> s{_iiAlt = a})
+instance GoogleAuth InstancesInsert' where
+        authKey = iiKey . _Just
+        authToken = iiOAuthToken . _Just
 
 instance GoogleRequest InstancesInsert' where
         type Rs InstancesInsert' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstancesInsert'{..}
           = go _iiQuotaUser (Just _iiPrettyPrint) _iiProject
-              _iiUserIp
+              _iiUserIP
               _iiZone
               _iiKey
-              _iiOauthToken
+              _iiOAuthToken
               _iiFields
-              (Just _iiAlt)
+              (Just AltJSON)
+              _iiInstance
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InstancesInsertResource)

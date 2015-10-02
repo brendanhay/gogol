@@ -32,12 +32,11 @@ module Network.Google.Resource.Reseller.Customers.Get
     -- * Request Lenses
     , cgQuotaUser
     , cgPrettyPrint
-    , cgUserIp
+    , cgUserIP
     , cgCustomerId
     , cgKey
-    , cgOauthToken
+    , cgOAuthToken
     , cgFields
-    , cgAlt
     ) where
 
 import           Network.Google.AppsReseller.Types
@@ -51,10 +50,10 @@ type CustomersGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Get '[JSON] Customer
+                     QueryParam "alt" AltJSON :> Get '[JSON] Customer
 
 -- | Gets a customer resource if one exists and is owned by the reseller.
 --
@@ -62,12 +61,11 @@ type CustomersGetResource =
 data CustomersGet' = CustomersGet'
     { _cgQuotaUser   :: !(Maybe Text)
     , _cgPrettyPrint :: !Bool
-    , _cgUserIp      :: !(Maybe Text)
+    , _cgUserIP      :: !(Maybe Text)
     , _cgCustomerId  :: !Text
-    , _cgKey         :: !(Maybe Text)
-    , _cgOauthToken  :: !(Maybe Text)
+    , _cgKey         :: !(Maybe Key)
+    , _cgOAuthToken  :: !(Maybe OAuthToken)
     , _cgFields      :: !(Maybe Text)
-    , _cgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CustomersGet'' with the minimum fields required to make a request.
@@ -78,17 +76,15 @@ data CustomersGet' = CustomersGet'
 --
 -- * 'cgPrettyPrint'
 --
--- * 'cgUserIp'
+-- * 'cgUserIP'
 --
 -- * 'cgCustomerId'
 --
 -- * 'cgKey'
 --
--- * 'cgOauthToken'
+-- * 'cgOAuthToken'
 --
 -- * 'cgFields'
---
--- * 'cgAlt'
 customersGet'
     :: Text -- ^ 'customerId'
     -> CustomersGet'
@@ -96,12 +92,11 @@ customersGet' pCgCustomerId_ =
     CustomersGet'
     { _cgQuotaUser = Nothing
     , _cgPrettyPrint = True
-    , _cgUserIp = Nothing
+    , _cgUserIP = Nothing
     , _cgCustomerId = pCgCustomerId_
     , _cgKey = Nothing
-    , _cgOauthToken = Nothing
+    , _cgOAuthToken = Nothing
     , _cgFields = Nothing
-    , _cgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -119,8 +114,8 @@ cgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cgUserIp :: Lens' CustomersGet' (Maybe Text)
-cgUserIp = lens _cgUserIp (\ s a -> s{_cgUserIp = a})
+cgUserIP :: Lens' CustomersGet' (Maybe Text)
+cgUserIP = lens _cgUserIP (\ s a -> s{_cgUserIP = a})
 
 -- | Id of the Customer
 cgCustomerId :: Lens' CustomersGet' Text
@@ -130,32 +125,32 @@ cgCustomerId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cgKey :: Lens' CustomersGet' (Maybe Text)
+cgKey :: Lens' CustomersGet' (Maybe Key)
 cgKey = lens _cgKey (\ s a -> s{_cgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-cgOauthToken :: Lens' CustomersGet' (Maybe Text)
-cgOauthToken
-  = lens _cgOauthToken (\ s a -> s{_cgOauthToken = a})
+cgOAuthToken :: Lens' CustomersGet' (Maybe OAuthToken)
+cgOAuthToken
+  = lens _cgOAuthToken (\ s a -> s{_cgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cgFields :: Lens' CustomersGet' (Maybe Text)
 cgFields = lens _cgFields (\ s a -> s{_cgFields = a})
 
--- | Data format for the response.
-cgAlt :: Lens' CustomersGet' Alt
-cgAlt = lens _cgAlt (\ s a -> s{_cgAlt = a})
+instance GoogleAuth CustomersGet' where
+        authKey = cgKey . _Just
+        authToken = cgOAuthToken . _Just
 
 instance GoogleRequest CustomersGet' where
         type Rs CustomersGet' = Customer
         request = requestWithRoute defReq appsResellerURL
         requestWithRoute r u CustomersGet'{..}
-          = go _cgQuotaUser (Just _cgPrettyPrint) _cgUserIp
+          = go _cgQuotaUser (Just _cgPrettyPrint) _cgUserIP
               _cgCustomerId
               _cgKey
-              _cgOauthToken
+              _cgOAuthToken
               _cgFields
-              (Just _cgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CustomersGetResource)

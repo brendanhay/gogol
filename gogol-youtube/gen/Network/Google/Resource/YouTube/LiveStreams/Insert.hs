@@ -34,13 +34,13 @@ module Network.Google.Resource.YouTube.LiveStreams.Insert
     , lsiQuotaUser
     , lsiPart
     , lsiPrettyPrint
-    , lsiUserIp
+    , lsiLiveStream
+    , lsiUserIP
     , lsiOnBehalfOfContentOwner
     , lsiKey
     , lsiOnBehalfOfContentOwnerChannel
-    , lsiOauthToken
+    , lsiOAuthToken
     , lsiFields
-    , lsiAlt
     ) where
 
 import           Network.Google.Prelude
@@ -55,11 +55,12 @@ type LiveStreamsInsertResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "onBehalfOfContentOwner" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "onBehalfOfContentOwnerChannel" Text :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Post '[JSON] LiveStream
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] LiveStream :> Post '[JSON] LiveStream
 
 -- | Creates a video stream. The stream enables you to send your video to
 -- YouTube, which can then broadcast the video to your audience.
@@ -69,13 +70,13 @@ data LiveStreamsInsert' = LiveStreamsInsert'
     { _lsiQuotaUser                     :: !(Maybe Text)
     , _lsiPart                          :: !Text
     , _lsiPrettyPrint                   :: !Bool
-    , _lsiUserIp                        :: !(Maybe Text)
+    , _lsiLiveStream                    :: !LiveStream
+    , _lsiUserIP                        :: !(Maybe Text)
     , _lsiOnBehalfOfContentOwner        :: !(Maybe Text)
-    , _lsiKey                           :: !(Maybe Text)
+    , _lsiKey                           :: !(Maybe Key)
     , _lsiOnBehalfOfContentOwnerChannel :: !(Maybe Text)
-    , _lsiOauthToken                    :: !(Maybe Text)
+    , _lsiOAuthToken                    :: !(Maybe OAuthToken)
     , _lsiFields                        :: !(Maybe Text)
-    , _lsiAlt                           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveStreamsInsert'' with the minimum fields required to make a request.
@@ -88,7 +89,9 @@ data LiveStreamsInsert' = LiveStreamsInsert'
 --
 -- * 'lsiPrettyPrint'
 --
--- * 'lsiUserIp'
+-- * 'lsiLiveStream'
+--
+-- * 'lsiUserIP'
 --
 -- * 'lsiOnBehalfOfContentOwner'
 --
@@ -96,26 +99,25 @@ data LiveStreamsInsert' = LiveStreamsInsert'
 --
 -- * 'lsiOnBehalfOfContentOwnerChannel'
 --
--- * 'lsiOauthToken'
+-- * 'lsiOAuthToken'
 --
 -- * 'lsiFields'
---
--- * 'lsiAlt'
 liveStreamsInsert'
     :: Text -- ^ 'part'
+    -> LiveStream -- ^ 'LiveStream'
     -> LiveStreamsInsert'
-liveStreamsInsert' pLsiPart_ =
+liveStreamsInsert' pLsiPart_ pLsiLiveStream_ =
     LiveStreamsInsert'
     { _lsiQuotaUser = Nothing
     , _lsiPart = pLsiPart_
     , _lsiPrettyPrint = True
-    , _lsiUserIp = Nothing
+    , _lsiLiveStream = pLsiLiveStream_
+    , _lsiUserIP = Nothing
     , _lsiOnBehalfOfContentOwner = Nothing
     , _lsiKey = Nothing
     , _lsiOnBehalfOfContentOwnerChannel = Nothing
-    , _lsiOauthToken = Nothing
+    , _lsiOAuthToken = Nothing
     , _lsiFields = Nothing
-    , _lsiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -138,11 +140,17 @@ lsiPrettyPrint
   = lens _lsiPrettyPrint
       (\ s a -> s{_lsiPrettyPrint = a})
 
+-- | Multipart request metadata.
+lsiLiveStream :: Lens' LiveStreamsInsert' LiveStream
+lsiLiveStream
+  = lens _lsiLiveStream
+      (\ s a -> s{_lsiLiveStream = a})
+
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-lsiUserIp :: Lens' LiveStreamsInsert' (Maybe Text)
-lsiUserIp
-  = lens _lsiUserIp (\ s a -> s{_lsiUserIp = a})
+lsiUserIP :: Lens' LiveStreamsInsert' (Maybe Text)
+lsiUserIP
+  = lens _lsiUserIP (\ s a -> s{_lsiUserIP = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
@@ -162,7 +170,7 @@ lsiOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lsiKey :: Lens' LiveStreamsInsert' (Maybe Text)
+lsiKey :: Lens' LiveStreamsInsert' (Maybe Key)
 lsiKey = lens _lsiKey (\ s a -> s{_lsiKey = a})
 
 -- | This parameter can only be used in a properly authorized request. Note:
@@ -187,19 +195,19 @@ lsiOnBehalfOfContentOwnerChannel
       (\ s a -> s{_lsiOnBehalfOfContentOwnerChannel = a})
 
 -- | OAuth 2.0 token for the current user.
-lsiOauthToken :: Lens' LiveStreamsInsert' (Maybe Text)
-lsiOauthToken
-  = lens _lsiOauthToken
-      (\ s a -> s{_lsiOauthToken = a})
+lsiOAuthToken :: Lens' LiveStreamsInsert' (Maybe OAuthToken)
+lsiOAuthToken
+  = lens _lsiOAuthToken
+      (\ s a -> s{_lsiOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 lsiFields :: Lens' LiveStreamsInsert' (Maybe Text)
 lsiFields
   = lens _lsiFields (\ s a -> s{_lsiFields = a})
 
--- | Data format for the response.
-lsiAlt :: Lens' LiveStreamsInsert' Alt
-lsiAlt = lens _lsiAlt (\ s a -> s{_lsiAlt = a})
+instance GoogleAuth LiveStreamsInsert' where
+        authKey = lsiKey . _Just
+        authToken = lsiOAuthToken . _Just
 
 instance GoogleRequest LiveStreamsInsert' where
         type Rs LiveStreamsInsert' = LiveStream
@@ -207,13 +215,14 @@ instance GoogleRequest LiveStreamsInsert' where
         requestWithRoute r u LiveStreamsInsert'{..}
           = go _lsiQuotaUser (Just _lsiPart)
               (Just _lsiPrettyPrint)
-              _lsiUserIp
+              _lsiUserIP
               _lsiOnBehalfOfContentOwner
               _lsiKey
               _lsiOnBehalfOfContentOwnerChannel
-              _lsiOauthToken
+              _lsiOAuthToken
               _lsiFields
-              (Just _lsiAlt)
+              (Just AltJSON)
+              _lsiLiveStream
           where go
                   = clientWithRoute
                       (Proxy :: Proxy LiveStreamsInsertResource)

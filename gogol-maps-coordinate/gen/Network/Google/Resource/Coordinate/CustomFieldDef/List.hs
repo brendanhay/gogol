@@ -32,12 +32,11 @@ module Network.Google.Resource.Coordinate.CustomFieldDef.List
     -- * Request Lenses
     , cfdlQuotaUser
     , cfdlPrettyPrint
-    , cfdlUserIp
+    , cfdlUserIP
     , cfdlTeamId
     , cfdlKey
-    , cfdlOauthToken
+    , cfdlOAuthToken
     , cfdlFields
-    , cfdlAlt
     ) where
 
 import           Network.Google.MapsCoordinate.Types
@@ -52,10 +51,10 @@ type CustomFieldDefListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :>
+                       QueryParam "alt" AltJSON :>
                          Get '[JSON] CustomFieldDefListResponse
 
 -- | Retrieves a list of custom field definitions for a team.
@@ -64,12 +63,11 @@ type CustomFieldDefListResource =
 data CustomFieldDefList' = CustomFieldDefList'
     { _cfdlQuotaUser   :: !(Maybe Text)
     , _cfdlPrettyPrint :: !Bool
-    , _cfdlUserIp      :: !(Maybe Text)
+    , _cfdlUserIP      :: !(Maybe Text)
     , _cfdlTeamId      :: !Text
-    , _cfdlKey         :: !(Maybe Text)
-    , _cfdlOauthToken  :: !(Maybe Text)
+    , _cfdlKey         :: !(Maybe Key)
+    , _cfdlOAuthToken  :: !(Maybe OAuthToken)
     , _cfdlFields      :: !(Maybe Text)
-    , _cfdlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CustomFieldDefList'' with the minimum fields required to make a request.
@@ -80,17 +78,15 @@ data CustomFieldDefList' = CustomFieldDefList'
 --
 -- * 'cfdlPrettyPrint'
 --
--- * 'cfdlUserIp'
+-- * 'cfdlUserIP'
 --
 -- * 'cfdlTeamId'
 --
 -- * 'cfdlKey'
 --
--- * 'cfdlOauthToken'
+-- * 'cfdlOAuthToken'
 --
 -- * 'cfdlFields'
---
--- * 'cfdlAlt'
 customFieldDefList'
     :: Text -- ^ 'teamId'
     -> CustomFieldDefList'
@@ -98,12 +94,11 @@ customFieldDefList' pCfdlTeamId_ =
     CustomFieldDefList'
     { _cfdlQuotaUser = Nothing
     , _cfdlPrettyPrint = True
-    , _cfdlUserIp = Nothing
+    , _cfdlUserIP = Nothing
     , _cfdlTeamId = pCfdlTeamId_
     , _cfdlKey = Nothing
-    , _cfdlOauthToken = Nothing
+    , _cfdlOAuthToken = Nothing
     , _cfdlFields = Nothing
-    , _cfdlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -122,9 +117,9 @@ cfdlPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cfdlUserIp :: Lens' CustomFieldDefList' (Maybe Text)
-cfdlUserIp
-  = lens _cfdlUserIp (\ s a -> s{_cfdlUserIp = a})
+cfdlUserIP :: Lens' CustomFieldDefList' (Maybe Text)
+cfdlUserIP
+  = lens _cfdlUserIP (\ s a -> s{_cfdlUserIP = a})
 
 -- | Team ID
 cfdlTeamId :: Lens' CustomFieldDefList' Text
@@ -134,23 +129,23 @@ cfdlTeamId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cfdlKey :: Lens' CustomFieldDefList' (Maybe Text)
+cfdlKey :: Lens' CustomFieldDefList' (Maybe Key)
 cfdlKey = lens _cfdlKey (\ s a -> s{_cfdlKey = a})
 
 -- | OAuth 2.0 token for the current user.
-cfdlOauthToken :: Lens' CustomFieldDefList' (Maybe Text)
-cfdlOauthToken
-  = lens _cfdlOauthToken
-      (\ s a -> s{_cfdlOauthToken = a})
+cfdlOAuthToken :: Lens' CustomFieldDefList' (Maybe OAuthToken)
+cfdlOAuthToken
+  = lens _cfdlOAuthToken
+      (\ s a -> s{_cfdlOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cfdlFields :: Lens' CustomFieldDefList' (Maybe Text)
 cfdlFields
   = lens _cfdlFields (\ s a -> s{_cfdlFields = a})
 
--- | Data format for the response.
-cfdlAlt :: Lens' CustomFieldDefList' Alt
-cfdlAlt = lens _cfdlAlt (\ s a -> s{_cfdlAlt = a})
+instance GoogleAuth CustomFieldDefList' where
+        authKey = cfdlKey . _Just
+        authToken = cfdlOAuthToken . _Just
 
 instance GoogleRequest CustomFieldDefList' where
         type Rs CustomFieldDefList' =
@@ -158,12 +153,12 @@ instance GoogleRequest CustomFieldDefList' where
         request = requestWithRoute defReq mapsCoordinateURL
         requestWithRoute r u CustomFieldDefList'{..}
           = go _cfdlQuotaUser (Just _cfdlPrettyPrint)
-              _cfdlUserIp
+              _cfdlUserIP
               _cfdlTeamId
               _cfdlKey
-              _cfdlOauthToken
+              _cfdlOAuthToken
               _cfdlFields
-              (Just _cfdlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CustomFieldDefListResource)

@@ -33,15 +33,14 @@ module Network.Google.Resource.Analytics.Management.UnsampledReports.List
     , murlQuotaUser
     , murlPrettyPrint
     , murlWebPropertyId
-    , murlUserIp
+    , murlUserIP
     , murlProfileId
     , murlAccountId
     , murlKey
-    , murlOauthToken
+    , murlOAuthToken
     , murlStartIndex
     , murlMaxResults
     , murlFields
-    , murlAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -61,12 +60,12 @@ type ManagementUnsampledReportsListResource =
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "start-index" Int32 :>
                                  QueryParam "max-results" Int32 :>
                                    QueryParam "fields" Text :>
-                                     QueryParam "alt" Alt :>
+                                     QueryParam "alt" AltJSON :>
                                        Get '[JSON] UnsampledReports
 
 -- | Lists unsampled reports to which the user has access.
@@ -76,15 +75,14 @@ data ManagementUnsampledReportsList' = ManagementUnsampledReportsList'
     { _murlQuotaUser     :: !(Maybe Text)
     , _murlPrettyPrint   :: !Bool
     , _murlWebPropertyId :: !Text
-    , _murlUserIp        :: !(Maybe Text)
+    , _murlUserIP        :: !(Maybe Text)
     , _murlProfileId     :: !Text
     , _murlAccountId     :: !Text
-    , _murlKey           :: !(Maybe Text)
-    , _murlOauthToken    :: !(Maybe Text)
+    , _murlKey           :: !(Maybe Key)
+    , _murlOAuthToken    :: !(Maybe OAuthToken)
     , _murlStartIndex    :: !(Maybe Int32)
     , _murlMaxResults    :: !(Maybe Int32)
     , _murlFields        :: !(Maybe Text)
-    , _murlAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementUnsampledReportsList'' with the minimum fields required to make a request.
@@ -97,7 +95,7 @@ data ManagementUnsampledReportsList' = ManagementUnsampledReportsList'
 --
 -- * 'murlWebPropertyId'
 --
--- * 'murlUserIp'
+-- * 'murlUserIP'
 --
 -- * 'murlProfileId'
 --
@@ -105,15 +103,13 @@ data ManagementUnsampledReportsList' = ManagementUnsampledReportsList'
 --
 -- * 'murlKey'
 --
--- * 'murlOauthToken'
+-- * 'murlOAuthToken'
 --
 -- * 'murlStartIndex'
 --
 -- * 'murlMaxResults'
 --
 -- * 'murlFields'
---
--- * 'murlAlt'
 managementUnsampledReportsList'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
@@ -124,15 +120,14 @@ managementUnsampledReportsList' pMurlWebPropertyId_ pMurlProfileId_ pMurlAccount
     { _murlQuotaUser = Nothing
     , _murlPrettyPrint = False
     , _murlWebPropertyId = pMurlWebPropertyId_
-    , _murlUserIp = Nothing
+    , _murlUserIP = Nothing
     , _murlProfileId = pMurlProfileId_
     , _murlAccountId = pMurlAccountId_
     , _murlKey = Nothing
-    , _murlOauthToken = Nothing
+    , _murlOAuthToken = Nothing
     , _murlStartIndex = Nothing
     , _murlMaxResults = Nothing
     , _murlFields = Nothing
-    , _murlAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -158,9 +153,9 @@ murlWebPropertyId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-murlUserIp :: Lens' ManagementUnsampledReportsList' (Maybe Text)
-murlUserIp
-  = lens _murlUserIp (\ s a -> s{_murlUserIp = a})
+murlUserIP :: Lens' ManagementUnsampledReportsList' (Maybe Text)
+murlUserIP
+  = lens _murlUserIP (\ s a -> s{_murlUserIP = a})
 
 -- | View (Profile) ID to retrieve unsampled reports for. Must be a specific
 -- view (profile) ID, ~all is not supported.
@@ -179,14 +174,14 @@ murlAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-murlKey :: Lens' ManagementUnsampledReportsList' (Maybe Text)
+murlKey :: Lens' ManagementUnsampledReportsList' (Maybe Key)
 murlKey = lens _murlKey (\ s a -> s{_murlKey = a})
 
 -- | OAuth 2.0 token for the current user.
-murlOauthToken :: Lens' ManagementUnsampledReportsList' (Maybe Text)
-murlOauthToken
-  = lens _murlOauthToken
-      (\ s a -> s{_murlOauthToken = a})
+murlOAuthToken :: Lens' ManagementUnsampledReportsList' (Maybe OAuthToken)
+murlOAuthToken
+  = lens _murlOAuthToken
+      (\ s a -> s{_murlOAuthToken = a})
 
 -- | An index of the first unsampled report to retrieve. Use this parameter
 -- as a pagination mechanism along with the max-results parameter.
@@ -206,9 +201,10 @@ murlFields :: Lens' ManagementUnsampledReportsList' (Maybe Text)
 murlFields
   = lens _murlFields (\ s a -> s{_murlFields = a})
 
--- | Data format for the response.
-murlAlt :: Lens' ManagementUnsampledReportsList' Alt
-murlAlt = lens _murlAlt (\ s a -> s{_murlAlt = a})
+instance GoogleAuth ManagementUnsampledReportsList'
+         where
+        authKey = murlKey . _Just
+        authToken = murlOAuthToken . _Just
 
 instance GoogleRequest
          ManagementUnsampledReportsList' where
@@ -219,15 +215,15 @@ instance GoogleRequest
           ManagementUnsampledReportsList'{..}
           = go _murlQuotaUser (Just _murlPrettyPrint)
               _murlWebPropertyId
-              _murlUserIp
+              _murlUserIP
               _murlProfileId
               _murlAccountId
               _murlKey
-              _murlOauthToken
+              _murlOAuthToken
               _murlStartIndex
               _murlMaxResults
               _murlFields
-              (Just _murlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

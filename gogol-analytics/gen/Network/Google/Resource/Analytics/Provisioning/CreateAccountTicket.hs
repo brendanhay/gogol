@@ -32,11 +32,11 @@ module Network.Google.Resource.Analytics.Provisioning.CreateAccountTicket
     -- * Request Lenses
     , pcatQuotaUser
     , pcatPrettyPrint
-    , pcatUserIp
+    , pcatUserIP
     , pcatKey
-    , pcatOauthToken
+    , pcatAccountTicket
+    , pcatOAuthToken
     , pcatFields
-    , pcatAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -50,22 +50,24 @@ type ProvisioningCreateAccountTicketResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Post '[JSON] AccountTicket
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] AccountTicket :>
+                         Post '[JSON] AccountTicket
 
 -- | Creates an account ticket.
 --
 -- /See:/ 'provisioningCreateAccountTicket'' smart constructor.
 data ProvisioningCreateAccountTicket' = ProvisioningCreateAccountTicket'
-    { _pcatQuotaUser   :: !(Maybe Text)
-    , _pcatPrettyPrint :: !Bool
-    , _pcatUserIp      :: !(Maybe Text)
-    , _pcatKey         :: !(Maybe Text)
-    , _pcatOauthToken  :: !(Maybe Text)
-    , _pcatFields      :: !(Maybe Text)
-    , _pcatAlt         :: !Alt
+    { _pcatQuotaUser     :: !(Maybe Text)
+    , _pcatPrettyPrint   :: !Bool
+    , _pcatUserIP        :: !(Maybe Text)
+    , _pcatKey           :: !(Maybe Key)
+    , _pcatAccountTicket :: !AccountTicket
+    , _pcatOAuthToken    :: !(Maybe OAuthToken)
+    , _pcatFields        :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProvisioningCreateAccountTicket'' with the minimum fields required to make a request.
@@ -76,26 +78,27 @@ data ProvisioningCreateAccountTicket' = ProvisioningCreateAccountTicket'
 --
 -- * 'pcatPrettyPrint'
 --
--- * 'pcatUserIp'
+-- * 'pcatUserIP'
 --
 -- * 'pcatKey'
 --
--- * 'pcatOauthToken'
+-- * 'pcatAccountTicket'
+--
+-- * 'pcatOAuthToken'
 --
 -- * 'pcatFields'
---
--- * 'pcatAlt'
 provisioningCreateAccountTicket'
-    :: ProvisioningCreateAccountTicket'
-provisioningCreateAccountTicket' =
+    :: AccountTicket -- ^ 'AccountTicket'
+    -> ProvisioningCreateAccountTicket'
+provisioningCreateAccountTicket' pPcatAccountTicket_ =
     ProvisioningCreateAccountTicket'
     { _pcatQuotaUser = Nothing
     , _pcatPrettyPrint = False
-    , _pcatUserIp = Nothing
+    , _pcatUserIP = Nothing
     , _pcatKey = Nothing
-    , _pcatOauthToken = Nothing
+    , _pcatAccountTicket = pPcatAccountTicket_
+    , _pcatOAuthToken = Nothing
     , _pcatFields = Nothing
-    , _pcatAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -114,30 +117,37 @@ pcatPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-pcatUserIp :: Lens' ProvisioningCreateAccountTicket' (Maybe Text)
-pcatUserIp
-  = lens _pcatUserIp (\ s a -> s{_pcatUserIp = a})
+pcatUserIP :: Lens' ProvisioningCreateAccountTicket' (Maybe Text)
+pcatUserIP
+  = lens _pcatUserIP (\ s a -> s{_pcatUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pcatKey :: Lens' ProvisioningCreateAccountTicket' (Maybe Text)
+pcatKey :: Lens' ProvisioningCreateAccountTicket' (Maybe Key)
 pcatKey = lens _pcatKey (\ s a -> s{_pcatKey = a})
 
+-- | Multipart request metadata.
+pcatAccountTicket :: Lens' ProvisioningCreateAccountTicket' AccountTicket
+pcatAccountTicket
+  = lens _pcatAccountTicket
+      (\ s a -> s{_pcatAccountTicket = a})
+
 -- | OAuth 2.0 token for the current user.
-pcatOauthToken :: Lens' ProvisioningCreateAccountTicket' (Maybe Text)
-pcatOauthToken
-  = lens _pcatOauthToken
-      (\ s a -> s{_pcatOauthToken = a})
+pcatOAuthToken :: Lens' ProvisioningCreateAccountTicket' (Maybe OAuthToken)
+pcatOAuthToken
+  = lens _pcatOAuthToken
+      (\ s a -> s{_pcatOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 pcatFields :: Lens' ProvisioningCreateAccountTicket' (Maybe Text)
 pcatFields
   = lens _pcatFields (\ s a -> s{_pcatFields = a})
 
--- | Data format for the response.
-pcatAlt :: Lens' ProvisioningCreateAccountTicket' Alt
-pcatAlt = lens _pcatAlt (\ s a -> s{_pcatAlt = a})
+instance GoogleAuth ProvisioningCreateAccountTicket'
+         where
+        authKey = pcatKey . _Just
+        authToken = pcatOAuthToken . _Just
 
 instance GoogleRequest
          ProvisioningCreateAccountTicket' where
@@ -147,11 +157,12 @@ instance GoogleRequest
         requestWithRoute r u
           ProvisioningCreateAccountTicket'{..}
           = go _pcatQuotaUser (Just _pcatPrettyPrint)
-              _pcatUserIp
+              _pcatUserIP
               _pcatKey
-              _pcatOauthToken
+              _pcatOAuthToken
               _pcatFields
-              (Just _pcatAlt)
+              (Just AltJSON)
+              _pcatAccountTicket
           where go
                   = clientWithRoute
                       (Proxy ::

@@ -30,43 +30,43 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.Resource.Sql.BackupRuns.Delete
-        , Network.Google.Resource.Sql.BackupRuns.Get
-        , Network.Google.Resource.Sql.BackupRuns.List
-        , Network.Google.Resource.Sql.Databases.Delete
-        , Network.Google.Resource.Sql.Databases.Get
-        , Network.Google.Resource.Sql.Databases.Insert
-        , Network.Google.Resource.Sql.Databases.List
-        , Network.Google.Resource.Sql.Databases.Patch
-        , Network.Google.Resource.Sql.Databases.Update
-        , Network.Google.Resource.Sql.Flags.List
-        , Network.Google.Resource.Sql.Instances.Clone
-        , Network.Google.Resource.Sql.Instances.Delete
-        , Network.Google.Resource.Sql.Instances.Export
-        , Network.Google.Resource.Sql.Instances.Get
-        , Network.Google.Resource.Sql.Instances.Import
-        , Network.Google.Resource.Sql.Instances.Insert
-        , Network.Google.Resource.Sql.Instances.List
-        , Network.Google.Resource.Sql.Instances.Patch
-        , Network.Google.Resource.Sql.Instances.PromoteReplica
-        , Network.Google.Resource.Sql.Instances.ResetSSLConfig
-        , Network.Google.Resource.Sql.Instances.Restart
-        , Network.Google.Resource.Sql.Instances.RestoreBackup
-        , Network.Google.Resource.Sql.Instances.StartReplica
-        , Network.Google.Resource.Sql.Instances.StopReplica
-        , Network.Google.Resource.Sql.Instances.Update
-        , Network.Google.Resource.Sql.Operations.Get
-        , Network.Google.Resource.Sql.Operations.List
-        , Network.Google.Resource.Sql.SSLCerts.CreateEphemeral
-        , Network.Google.Resource.Sql.SSLCerts.Delete
-        , Network.Google.Resource.Sql.SSLCerts.Get
-        , Network.Google.Resource.Sql.SSLCerts.Insert
-        , Network.Google.Resource.Sql.SSLCerts.List
-        , Network.Google.Resource.Sql.Tiers.List
-        , Network.Google.Resource.Sql.Users.Delete
-        , Network.Google.Resource.Sql.Users.Insert
-        , Network.Google.Resource.Sql.Users.List
-        , Network.Google.Resource.Sql.Users.Update
+          Network.Google.Resource.SQL.BackupRuns.Delete
+        , Network.Google.Resource.SQL.BackupRuns.Get
+        , Network.Google.Resource.SQL.BackupRuns.List
+        , Network.Google.Resource.SQL.Databases.Delete
+        , Network.Google.Resource.SQL.Databases.Get
+        , Network.Google.Resource.SQL.Databases.Insert
+        , Network.Google.Resource.SQL.Databases.List
+        , Network.Google.Resource.SQL.Databases.Patch
+        , Network.Google.Resource.SQL.Databases.Update
+        , Network.Google.Resource.SQL.Flags.List
+        , Network.Google.Resource.SQL.Instances.Clone
+        , Network.Google.Resource.SQL.Instances.Delete
+        , Network.Google.Resource.SQL.Instances.Export
+        , Network.Google.Resource.SQL.Instances.Get
+        , Network.Google.Resource.SQL.Instances.Import
+        , Network.Google.Resource.SQL.Instances.Insert
+        , Network.Google.Resource.SQL.Instances.List
+        , Network.Google.Resource.SQL.Instances.Patch
+        , Network.Google.Resource.SQL.Instances.PromoteReplica
+        , Network.Google.Resource.SQL.Instances.ResetSSLConfig
+        , Network.Google.Resource.SQL.Instances.Restart
+        , Network.Google.Resource.SQL.Instances.RestoreBackup
+        , Network.Google.Resource.SQL.Instances.StartReplica
+        , Network.Google.Resource.SQL.Instances.StopReplica
+        , Network.Google.Resource.SQL.Instances.Update
+        , Network.Google.Resource.SQL.Operations.Get
+        , Network.Google.Resource.SQL.Operations.List
+        , Network.Google.Resource.SQL.SSLCerts.CreateEphemeral
+        , Network.Google.Resource.SQL.SSLCerts.Delete
+        , Network.Google.Resource.SQL.SSLCerts.Get
+        , Network.Google.Resource.SQL.SSLCerts.Insert
+        , Network.Google.Resource.SQL.SSLCerts.List
+        , Network.Google.Resource.SQL.Tiers.List
+        , Network.Google.Resource.SQL.Users.Delete
+        , Network.Google.Resource.SQL.Users.Insert
+        , Network.Google.Resource.SQL.Users.List
+        , Network.Google.Resource.SQL.Users.Update
         , Network.Google.SQLAdmin
         , Network.Google.SQLAdmin.Types
 

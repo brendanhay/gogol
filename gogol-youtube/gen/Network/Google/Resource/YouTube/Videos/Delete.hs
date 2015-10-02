@@ -32,13 +32,12 @@ module Network.Google.Resource.YouTube.Videos.Delete
     -- * Request Lenses
     , vdQuotaUser
     , vdPrettyPrint
-    , vdUserIp
+    , vdUserIP
     , vdOnBehalfOfContentOwner
     , vdKey
     , vdId
-    , vdOauthToken
+    , vdOAuthToken
     , vdFields
-    , vdAlt
     ) where
 
 import           Network.Google.Prelude
@@ -52,11 +51,11 @@ type VideosDeleteResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
              QueryParam "onBehalfOfContentOwner" Text :>
-               QueryParam "key" Text :>
+               QueryParam "key" Key :>
                  QueryParam "id" Text :>
-                   QueryParam "oauth_token" Text :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Delete '[JSON] ()
+                       QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a YouTube video.
 --
@@ -64,13 +63,12 @@ type VideosDeleteResource =
 data VideosDelete' = VideosDelete'
     { _vdQuotaUser              :: !(Maybe Text)
     , _vdPrettyPrint            :: !Bool
-    , _vdUserIp                 :: !(Maybe Text)
+    , _vdUserIP                 :: !(Maybe Text)
     , _vdOnBehalfOfContentOwner :: !(Maybe Text)
-    , _vdKey                    :: !(Maybe Text)
+    , _vdKey                    :: !(Maybe Key)
     , _vdId                     :: !Text
-    , _vdOauthToken             :: !(Maybe Text)
+    , _vdOAuthToken             :: !(Maybe OAuthToken)
     , _vdFields                 :: !(Maybe Text)
-    , _vdAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideosDelete'' with the minimum fields required to make a request.
@@ -81,7 +79,7 @@ data VideosDelete' = VideosDelete'
 --
 -- * 'vdPrettyPrint'
 --
--- * 'vdUserIp'
+-- * 'vdUserIP'
 --
 -- * 'vdOnBehalfOfContentOwner'
 --
@@ -89,11 +87,9 @@ data VideosDelete' = VideosDelete'
 --
 -- * 'vdId'
 --
--- * 'vdOauthToken'
+-- * 'vdOAuthToken'
 --
 -- * 'vdFields'
---
--- * 'vdAlt'
 videosDelete'
     :: Text -- ^ 'id'
     -> VideosDelete'
@@ -101,13 +97,12 @@ videosDelete' pVdId_ =
     VideosDelete'
     { _vdQuotaUser = Nothing
     , _vdPrettyPrint = True
-    , _vdUserIp = Nothing
+    , _vdUserIP = Nothing
     , _vdOnBehalfOfContentOwner = Nothing
     , _vdKey = Nothing
     , _vdId = pVdId_
-    , _vdOauthToken = Nothing
+    , _vdOAuthToken = Nothing
     , _vdFields = Nothing
-    , _vdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -125,8 +120,8 @@ vdPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-vdUserIp :: Lens' VideosDelete' (Maybe Text)
-vdUserIp = lens _vdUserIp (\ s a -> s{_vdUserIp = a})
+vdUserIP :: Lens' VideosDelete' (Maybe Text)
+vdUserIP = lens _vdUserIP (\ s a -> s{_vdUserIP = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
@@ -146,7 +141,7 @@ vdOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vdKey :: Lens' VideosDelete' (Maybe Text)
+vdKey :: Lens' VideosDelete' (Maybe Key)
 vdKey = lens _vdKey (\ s a -> s{_vdKey = a})
 
 -- | The id parameter specifies the YouTube video ID for the resource that is
@@ -156,29 +151,29 @@ vdId :: Lens' VideosDelete' Text
 vdId = lens _vdId (\ s a -> s{_vdId = a})
 
 -- | OAuth 2.0 token for the current user.
-vdOauthToken :: Lens' VideosDelete' (Maybe Text)
-vdOauthToken
-  = lens _vdOauthToken (\ s a -> s{_vdOauthToken = a})
+vdOAuthToken :: Lens' VideosDelete' (Maybe OAuthToken)
+vdOAuthToken
+  = lens _vdOAuthToken (\ s a -> s{_vdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 vdFields :: Lens' VideosDelete' (Maybe Text)
 vdFields = lens _vdFields (\ s a -> s{_vdFields = a})
 
--- | Data format for the response.
-vdAlt :: Lens' VideosDelete' Alt
-vdAlt = lens _vdAlt (\ s a -> s{_vdAlt = a})
+instance GoogleAuth VideosDelete' where
+        authKey = vdKey . _Just
+        authToken = vdOAuthToken . _Just
 
 instance GoogleRequest VideosDelete' where
         type Rs VideosDelete' = ()
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u VideosDelete'{..}
-          = go _vdQuotaUser (Just _vdPrettyPrint) _vdUserIp
+          = go _vdQuotaUser (Just _vdPrettyPrint) _vdUserIP
               _vdOnBehalfOfContentOwner
               _vdKey
               (Just _vdId)
-              _vdOauthToken
+              _vdOAuthToken
               _vdFields
-              (Just _vdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy VideosDeleteResource)

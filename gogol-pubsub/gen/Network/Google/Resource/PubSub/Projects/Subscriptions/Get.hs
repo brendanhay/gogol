@@ -39,11 +39,10 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.Get
     , psgUploadType
     , psgBearerToken
     , psgKey
-    , psgOauthToken
+    , psgOAuthToken
     , psgSubscription
     , psgFields
     , psgCallback
-    , psgAlt
     ) where
 
 import           Network.Google.Prelude
@@ -62,11 +61,11 @@ type ProjectsSubscriptionsGetResource =
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
                        QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
                                QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :>
+                                 QueryParam "alt" AltJSON :>
                                    Get '[JSON] Subscription
 
 -- | Gets the configuration details of a subscription.
@@ -81,12 +80,11 @@ data ProjectsSubscriptionsGet' = ProjectsSubscriptionsGet'
     , _psgAccessToken    :: !(Maybe Text)
     , _psgUploadType     :: !(Maybe Text)
     , _psgBearerToken    :: !(Maybe Text)
-    , _psgKey            :: !(Maybe Text)
-    , _psgOauthToken     :: !(Maybe Text)
+    , _psgKey            :: !(Maybe Key)
+    , _psgOAuthToken     :: !(Maybe OAuthToken)
     , _psgSubscription   :: !Text
     , _psgFields         :: !(Maybe Text)
     , _psgCallback       :: !(Maybe Text)
-    , _psgAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsSubscriptionsGet'' with the minimum fields required to make a request.
@@ -111,15 +109,13 @@ data ProjectsSubscriptionsGet' = ProjectsSubscriptionsGet'
 --
 -- * 'psgKey'
 --
--- * 'psgOauthToken'
+-- * 'psgOAuthToken'
 --
 -- * 'psgSubscription'
 --
 -- * 'psgFields'
 --
 -- * 'psgCallback'
---
--- * 'psgAlt'
 projectsSubscriptionsGet'
     :: Text -- ^ 'subscription'
     -> ProjectsSubscriptionsGet'
@@ -134,11 +130,10 @@ projectsSubscriptionsGet' pPsgSubscription_ =
     , _psgUploadType = Nothing
     , _psgBearerToken = Nothing
     , _psgKey = Nothing
-    , _psgOauthToken = Nothing
+    , _psgOAuthToken = Nothing
     , _psgSubscription = pPsgSubscription_
     , _psgFields = Nothing
     , _psgCallback = Nothing
-    , _psgAlt = "json"
     }
 
 -- | V1 error format.
@@ -189,14 +184,14 @@ psgBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-psgKey :: Lens' ProjectsSubscriptionsGet' (Maybe Text)
+psgKey :: Lens' ProjectsSubscriptionsGet' (Maybe Key)
 psgKey = lens _psgKey (\ s a -> s{_psgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-psgOauthToken :: Lens' ProjectsSubscriptionsGet' (Maybe Text)
-psgOauthToken
-  = lens _psgOauthToken
-      (\ s a -> s{_psgOauthToken = a})
+psgOAuthToken :: Lens' ProjectsSubscriptionsGet' (Maybe OAuthToken)
+psgOAuthToken
+  = lens _psgOAuthToken
+      (\ s a -> s{_psgOAuthToken = a})
 
 -- | The name of the subscription to get.
 psgSubscription :: Lens' ProjectsSubscriptionsGet' Text
@@ -214,9 +209,9 @@ psgCallback :: Lens' ProjectsSubscriptionsGet' (Maybe Text)
 psgCallback
   = lens _psgCallback (\ s a -> s{_psgCallback = a})
 
--- | Data format for response.
-psgAlt :: Lens' ProjectsSubscriptionsGet' Text
-psgAlt = lens _psgAlt (\ s a -> s{_psgAlt = a})
+instance GoogleAuth ProjectsSubscriptionsGet' where
+        authKey = psgKey . _Just
+        authToken = psgOAuthToken . _Just
 
 instance GoogleRequest ProjectsSubscriptionsGet'
          where
@@ -230,11 +225,11 @@ instance GoogleRequest ProjectsSubscriptionsGet'
               _psgUploadType
               _psgBearerToken
               _psgKey
-              _psgOauthToken
+              _psgOAuthToken
               _psgSubscription
               _psgFields
               _psgCallback
-              (Just _psgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsSubscriptionsGetResource)

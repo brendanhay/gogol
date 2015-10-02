@@ -32,12 +32,12 @@ module Network.Google.Resource.DFAReporting.Creatives.Insert
     -- * Request Lenses
     , creQuotaUser
     , crePrettyPrint
-    , creUserIp
+    , creUserIP
+    , creCreative
     , creProfileId
     , creKey
-    , creOauthToken
+    , creOAuthToken
     , creFields
-    , creAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,10 +52,11 @@ type CreativesInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] Creative
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Creative :> Post '[JSON] Creative
 
 -- | Inserts a new creative.
 --
@@ -63,12 +64,12 @@ type CreativesInsertResource =
 data CreativesInsert' = CreativesInsert'
     { _creQuotaUser   :: !(Maybe Text)
     , _crePrettyPrint :: !Bool
-    , _creUserIp      :: !(Maybe Text)
+    , _creUserIP      :: !(Maybe Text)
+    , _creCreative    :: !Creative
     , _creProfileId   :: !Int64
-    , _creKey         :: !(Maybe Text)
-    , _creOauthToken  :: !(Maybe Text)
+    , _creKey         :: !(Maybe Key)
+    , _creOAuthToken  :: !(Maybe OAuthToken)
     , _creFields      :: !(Maybe Text)
-    , _creAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativesInsert'' with the minimum fields required to make a request.
@@ -79,30 +80,31 @@ data CreativesInsert' = CreativesInsert'
 --
 -- * 'crePrettyPrint'
 --
--- * 'creUserIp'
+-- * 'creUserIP'
+--
+-- * 'creCreative'
 --
 -- * 'creProfileId'
 --
 -- * 'creKey'
 --
--- * 'creOauthToken'
+-- * 'creOAuthToken'
 --
 -- * 'creFields'
---
--- * 'creAlt'
 creativesInsert'
-    :: Int64 -- ^ 'profileId'
+    :: Creative -- ^ 'Creative'
+    -> Int64 -- ^ 'profileId'
     -> CreativesInsert'
-creativesInsert' pCreProfileId_ =
+creativesInsert' pCreCreative_ pCreProfileId_ =
     CreativesInsert'
     { _creQuotaUser = Nothing
     , _crePrettyPrint = True
-    , _creUserIp = Nothing
+    , _creUserIP = Nothing
+    , _creCreative = pCreCreative_
     , _creProfileId = pCreProfileId_
     , _creKey = Nothing
-    , _creOauthToken = Nothing
+    , _creOAuthToken = Nothing
     , _creFields = Nothing
-    , _creAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,9 +122,14 @@ crePrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-creUserIp :: Lens' CreativesInsert' (Maybe Text)
-creUserIp
-  = lens _creUserIp (\ s a -> s{_creUserIp = a})
+creUserIP :: Lens' CreativesInsert' (Maybe Text)
+creUserIP
+  = lens _creUserIP (\ s a -> s{_creUserIP = a})
+
+-- | Multipart request metadata.
+creCreative :: Lens' CreativesInsert' Creative
+creCreative
+  = lens _creCreative (\ s a -> s{_creCreative = a})
 
 -- | User profile ID associated with this request.
 creProfileId :: Lens' CreativesInsert' Int64
@@ -132,34 +139,35 @@ creProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-creKey :: Lens' CreativesInsert' (Maybe Text)
+creKey :: Lens' CreativesInsert' (Maybe Key)
 creKey = lens _creKey (\ s a -> s{_creKey = a})
 
 -- | OAuth 2.0 token for the current user.
-creOauthToken :: Lens' CreativesInsert' (Maybe Text)
-creOauthToken
-  = lens _creOauthToken
-      (\ s a -> s{_creOauthToken = a})
+creOAuthToken :: Lens' CreativesInsert' (Maybe OAuthToken)
+creOAuthToken
+  = lens _creOAuthToken
+      (\ s a -> s{_creOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 creFields :: Lens' CreativesInsert' (Maybe Text)
 creFields
   = lens _creFields (\ s a -> s{_creFields = a})
 
--- | Data format for the response.
-creAlt :: Lens' CreativesInsert' Alt
-creAlt = lens _creAlt (\ s a -> s{_creAlt = a})
+instance GoogleAuth CreativesInsert' where
+        authKey = creKey . _Just
+        authToken = creOAuthToken . _Just
 
 instance GoogleRequest CreativesInsert' where
         type Rs CreativesInsert' = Creative
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativesInsert'{..}
-          = go _creQuotaUser (Just _crePrettyPrint) _creUserIp
+          = go _creQuotaUser (Just _crePrettyPrint) _creUserIP
               _creProfileId
               _creKey
-              _creOauthToken
+              _creOAuthToken
               _creFields
-              (Just _creAlt)
+              (Just AltJSON)
+              _creCreative
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CreativesInsertResource)

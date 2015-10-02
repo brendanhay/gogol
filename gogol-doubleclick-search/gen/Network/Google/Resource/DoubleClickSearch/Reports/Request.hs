@@ -19,7 +19,7 @@
 --
 -- | Inserts a report request into the reporting system.
 --
--- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @DoubleclicksearchReportsRequest@.
+-- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @DoubleClicksearchReportsRequest@.
 module Network.Google.Resource.DoubleClickSearch.Reports.Request
     (
     -- * REST Resource
@@ -31,40 +31,41 @@ module Network.Google.Resource.DoubleClickSearch.Reports.Request
 
     -- * Request Lenses
     , rrQuotaUser
+    , rrReportRequest
     , rrPrettyPrint
-    , rrUserIp
+    , rrUserIP
     , rrKey
-    , rrOauthToken
+    , rrOAuthToken
     , rrFields
-    , rrAlt
     ) where
 
 import           Network.Google.DoubleClickSearch.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DoubleclicksearchReportsRequest@ which the
+-- | A resource alias for @DoubleClicksearchReportsRequest@ which the
 -- 'ReportsRequest'' request conforms to.
 type ReportsRequestResource =
      "reports" :>
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
-               QueryParam "oauth_token" Text :>
+             QueryParam "key" Key :>
+               QueryParam "oauth_token" OAuthToken :>
                  QueryParam "fields" Text :>
-                   QueryParam "alt" Alt :> Post '[JSON] Report
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] ReportRequest :> Post '[JSON] Report
 
 -- | Inserts a report request into the reporting system.
 --
 -- /See:/ 'reportsRequest'' smart constructor.
 data ReportsRequest' = ReportsRequest'
-    { _rrQuotaUser   :: !(Maybe Text)
-    , _rrPrettyPrint :: !Bool
-    , _rrUserIp      :: !(Maybe Text)
-    , _rrKey         :: !(Maybe Text)
-    , _rrOauthToken  :: !(Maybe Text)
-    , _rrFields      :: !(Maybe Text)
-    , _rrAlt         :: !Alt
+    { _rrQuotaUser     :: !(Maybe Text)
+    , _rrReportRequest :: !ReportRequest
+    , _rrPrettyPrint   :: !Bool
+    , _rrUserIP        :: !(Maybe Text)
+    , _rrKey           :: !(Maybe Key)
+    , _rrOAuthToken    :: !(Maybe OAuthToken)
+    , _rrFields        :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsRequest'' with the minimum fields required to make a request.
@@ -73,28 +74,29 @@ data ReportsRequest' = ReportsRequest'
 --
 -- * 'rrQuotaUser'
 --
+-- * 'rrReportRequest'
+--
 -- * 'rrPrettyPrint'
 --
--- * 'rrUserIp'
+-- * 'rrUserIP'
 --
 -- * 'rrKey'
 --
--- * 'rrOauthToken'
+-- * 'rrOAuthToken'
 --
 -- * 'rrFields'
---
--- * 'rrAlt'
 reportsRequest'
-    :: ReportsRequest'
-reportsRequest' =
+    :: ReportRequest -- ^ 'ReportRequest'
+    -> ReportsRequest'
+reportsRequest' pRrReportRequest_ =
     ReportsRequest'
     { _rrQuotaUser = Nothing
+    , _rrReportRequest = pRrReportRequest_
     , _rrPrettyPrint = True
-    , _rrUserIp = Nothing
+    , _rrUserIP = Nothing
     , _rrKey = Nothing
-    , _rrOauthToken = Nothing
+    , _rrOAuthToken = Nothing
     , _rrFields = Nothing
-    , _rrAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -104,6 +106,12 @@ rrQuotaUser :: Lens' ReportsRequest' (Maybe Text)
 rrQuotaUser
   = lens _rrQuotaUser (\ s a -> s{_rrQuotaUser = a})
 
+-- | Multipart request metadata.
+rrReportRequest :: Lens' ReportsRequest' ReportRequest
+rrReportRequest
+  = lens _rrReportRequest
+      (\ s a -> s{_rrReportRequest = a})
+
 -- | Returns response with indentations and line breaks.
 rrPrettyPrint :: Lens' ReportsRequest' Bool
 rrPrettyPrint
@@ -112,38 +120,39 @@ rrPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rrUserIp :: Lens' ReportsRequest' (Maybe Text)
-rrUserIp = lens _rrUserIp (\ s a -> s{_rrUserIp = a})
+rrUserIP :: Lens' ReportsRequest' (Maybe Text)
+rrUserIP = lens _rrUserIP (\ s a -> s{_rrUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rrKey :: Lens' ReportsRequest' (Maybe Text)
+rrKey :: Lens' ReportsRequest' (Maybe Key)
 rrKey = lens _rrKey (\ s a -> s{_rrKey = a})
 
 -- | OAuth 2.0 token for the current user.
-rrOauthToken :: Lens' ReportsRequest' (Maybe Text)
-rrOauthToken
-  = lens _rrOauthToken (\ s a -> s{_rrOauthToken = a})
+rrOAuthToken :: Lens' ReportsRequest' (Maybe OAuthToken)
+rrOAuthToken
+  = lens _rrOAuthToken (\ s a -> s{_rrOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 rrFields :: Lens' ReportsRequest' (Maybe Text)
 rrFields = lens _rrFields (\ s a -> s{_rrFields = a})
 
--- | Data format for the response.
-rrAlt :: Lens' ReportsRequest' Alt
-rrAlt = lens _rrAlt (\ s a -> s{_rrAlt = a})
+instance GoogleAuth ReportsRequest' where
+        authKey = rrKey . _Just
+        authToken = rrOAuthToken . _Just
 
 instance GoogleRequest ReportsRequest' where
         type Rs ReportsRequest' = Report
         request
           = requestWithRoute defReq doubleClickSearchURL
         requestWithRoute r u ReportsRequest'{..}
-          = go _rrQuotaUser (Just _rrPrettyPrint) _rrUserIp
+          = go _rrQuotaUser (Just _rrPrettyPrint) _rrUserIP
               _rrKey
-              _rrOauthToken
+              _rrOAuthToken
               _rrFields
-              (Just _rrAlt)
+              (Just AltJSON)
+              _rrReportRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ReportsRequestResource)

@@ -24,7 +24,7 @@ module Network.Google.AppEngineTaskQueue.Types
     , tqStats
     , tqMaxLeases
     , tqId
-    , tqAcl
+    , tqACL
 
     -- * Tasks2
     , Tasks2
@@ -61,12 +61,9 @@ module Network.Google.AppEngineTaskQueue.Types
     , ttTag
     , ttKind
     , ttQueueName
-    , ttPayloadBase64
+    , ttPayLoadBase64
     , ttId
     , ttLeaseTimestamp
-
-    -- * Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.AppEngineTaskQueue.Types.Product

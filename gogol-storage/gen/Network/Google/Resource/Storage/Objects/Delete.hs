@@ -37,15 +37,14 @@ module Network.Google.Resource.Storage.Objects.Delete
     , odIfGenerationNotMatch
     , odPrettyPrint
     , odIfGenerationMatch
-    , odUserIp
+    , odUserIP
     , odBucket
     , odKey
     , odIfMetagenerationNotMatch
     , odObject
-    , odOauthToken
+    , odOAuthToken
     , odGeneration
     , odFields
-    , odAlt
     ) where
 
 import           Network.Google.Prelude
@@ -64,12 +63,12 @@ type ObjectsDeleteResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "ifGenerationMatch" Word64 :>
                        QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
+                         QueryParam "key" Key :>
                            QueryParam "ifMetagenerationNotMatch" Word64 :>
-                             QueryParam "oauth_token" Text :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "generation" Word64 :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "alt" Alt :> Delete '[JSON] ()
+                                   QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes data blobs and associated metadata. Deletions are permanent if
 -- versioning is not enabled for the bucket, or if the generation parameter
@@ -82,15 +81,14 @@ data ObjectsDelete' = ObjectsDelete'
     , _odIfGenerationNotMatch     :: !(Maybe Word64)
     , _odPrettyPrint              :: !Bool
     , _odIfGenerationMatch        :: !(Maybe Word64)
-    , _odUserIp                   :: !(Maybe Text)
+    , _odUserIP                   :: !(Maybe Text)
     , _odBucket                   :: !Text
-    , _odKey                      :: !(Maybe Text)
+    , _odKey                      :: !(Maybe Key)
     , _odIfMetagenerationNotMatch :: !(Maybe Word64)
     , _odObject                   :: !Text
-    , _odOauthToken               :: !(Maybe Text)
+    , _odOAuthToken               :: !(Maybe OAuthToken)
     , _odGeneration               :: !(Maybe Word64)
     , _odFields                   :: !(Maybe Text)
-    , _odAlt                      :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectsDelete'' with the minimum fields required to make a request.
@@ -107,7 +105,7 @@ data ObjectsDelete' = ObjectsDelete'
 --
 -- * 'odIfGenerationMatch'
 --
--- * 'odUserIp'
+-- * 'odUserIP'
 --
 -- * 'odBucket'
 --
@@ -117,13 +115,11 @@ data ObjectsDelete' = ObjectsDelete'
 --
 -- * 'odObject'
 --
--- * 'odOauthToken'
+-- * 'odOAuthToken'
 --
 -- * 'odGeneration'
 --
 -- * 'odFields'
---
--- * 'odAlt'
 objectsDelete'
     :: Text -- ^ 'bucket'
     -> Text -- ^ 'object'
@@ -135,15 +131,14 @@ objectsDelete' pOdBucket_ pOdObject_ =
     , _odIfGenerationNotMatch = Nothing
     , _odPrettyPrint = True
     , _odIfGenerationMatch = Nothing
-    , _odUserIp = Nothing
+    , _odUserIP = Nothing
     , _odBucket = pOdBucket_
     , _odKey = Nothing
     , _odIfMetagenerationNotMatch = Nothing
     , _odObject = pOdObject_
-    , _odOauthToken = Nothing
+    , _odOAuthToken = Nothing
     , _odGeneration = Nothing
     , _odFields = Nothing
-    , _odAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -182,8 +177,8 @@ odIfGenerationMatch
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-odUserIp :: Lens' ObjectsDelete' (Maybe Text)
-odUserIp = lens _odUserIp (\ s a -> s{_odUserIp = a})
+odUserIP :: Lens' ObjectsDelete' (Maybe Text)
+odUserIP = lens _odUserIP (\ s a -> s{_odUserIP = a})
 
 -- | Name of the bucket in which the object resides.
 odBucket :: Lens' ObjectsDelete' Text
@@ -192,7 +187,7 @@ odBucket = lens _odBucket (\ s a -> s{_odBucket = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-odKey :: Lens' ObjectsDelete' (Maybe Text)
+odKey :: Lens' ObjectsDelete' (Maybe Key)
 odKey = lens _odKey (\ s a -> s{_odKey = a})
 
 -- | Makes the operation conditional on whether the object\'s current
@@ -207,9 +202,9 @@ odObject :: Lens' ObjectsDelete' Text
 odObject = lens _odObject (\ s a -> s{_odObject = a})
 
 -- | OAuth 2.0 token for the current user.
-odOauthToken :: Lens' ObjectsDelete' (Maybe Text)
-odOauthToken
-  = lens _odOauthToken (\ s a -> s{_odOauthToken = a})
+odOAuthToken :: Lens' ObjectsDelete' (Maybe OAuthToken)
+odOAuthToken
+  = lens _odOAuthToken (\ s a -> s{_odOAuthToken = a})
 
 -- | If present, permanently deletes a specific revision of this object (as
 -- opposed to the latest version, the default).
@@ -221,9 +216,9 @@ odGeneration
 odFields :: Lens' ObjectsDelete' (Maybe Text)
 odFields = lens _odFields (\ s a -> s{_odFields = a})
 
--- | Data format for the response.
-odAlt :: Lens' ObjectsDelete' Alt
-odAlt = lens _odAlt (\ s a -> s{_odAlt = a})
+instance GoogleAuth ObjectsDelete' where
+        authKey = odKey . _Just
+        authToken = odOAuthToken . _Just
 
 instance GoogleRequest ObjectsDelete' where
         type Rs ObjectsDelete' = ()
@@ -233,15 +228,15 @@ instance GoogleRequest ObjectsDelete' where
               _odIfGenerationNotMatch
               (Just _odPrettyPrint)
               _odIfGenerationMatch
-              _odUserIp
+              _odUserIP
               _odBucket
               _odKey
               _odIfMetagenerationNotMatch
               _odObject
-              _odOauthToken
+              _odOAuthToken
               _odGeneration
               _odFields
-              (Just _odAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ObjectsDeleteResource)

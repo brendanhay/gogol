@@ -33,12 +33,11 @@ module Network.Google.Resource.Compute.Networks.Get
     , ngQuotaUser
     , ngPrettyPrint
     , ngProject
-    , ngUserIp
+    , ngUserIP
     , ngNetwork
     , ngKey
-    , ngOauthToken
+    , ngOAuthToken
     , ngFields
-    , ngAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -54,10 +53,10 @@ type NetworksGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] Network
+                         QueryParam "alt" AltJSON :> Get '[JSON] Network
 
 -- | Returns the specified network resource.
 --
@@ -66,12 +65,11 @@ data NetworksGet' = NetworksGet'
     { _ngQuotaUser   :: !(Maybe Text)
     , _ngPrettyPrint :: !Bool
     , _ngProject     :: !Text
-    , _ngUserIp      :: !(Maybe Text)
+    , _ngUserIP      :: !(Maybe Text)
     , _ngNetwork     :: !Text
-    , _ngKey         :: !(Maybe Text)
-    , _ngOauthToken  :: !(Maybe Text)
+    , _ngKey         :: !(Maybe Key)
+    , _ngOAuthToken  :: !(Maybe OAuthToken)
     , _ngFields      :: !(Maybe Text)
-    , _ngAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NetworksGet'' with the minimum fields required to make a request.
@@ -84,17 +82,15 @@ data NetworksGet' = NetworksGet'
 --
 -- * 'ngProject'
 --
--- * 'ngUserIp'
+-- * 'ngUserIP'
 --
 -- * 'ngNetwork'
 --
 -- * 'ngKey'
 --
--- * 'ngOauthToken'
+-- * 'ngOAuthToken'
 --
 -- * 'ngFields'
---
--- * 'ngAlt'
 networksGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'network'
@@ -104,12 +100,11 @@ networksGet' pNgProject_ pNgNetwork_ =
     { _ngQuotaUser = Nothing
     , _ngPrettyPrint = True
     , _ngProject = pNgProject_
-    , _ngUserIp = Nothing
+    , _ngUserIP = Nothing
     , _ngNetwork = pNgNetwork_
     , _ngKey = Nothing
-    , _ngOauthToken = Nothing
+    , _ngOAuthToken = Nothing
     , _ngFields = Nothing
-    , _ngAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -132,8 +127,8 @@ ngProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ngUserIp :: Lens' NetworksGet' (Maybe Text)
-ngUserIp = lens _ngUserIp (\ s a -> s{_ngUserIp = a})
+ngUserIP :: Lens' NetworksGet' (Maybe Text)
+ngUserIP = lens _ngUserIP (\ s a -> s{_ngUserIP = a})
 
 -- | Name of the network resource to return.
 ngNetwork :: Lens' NetworksGet' Text
@@ -143,33 +138,33 @@ ngNetwork
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ngKey :: Lens' NetworksGet' (Maybe Text)
+ngKey :: Lens' NetworksGet' (Maybe Key)
 ngKey = lens _ngKey (\ s a -> s{_ngKey = a})
 
 -- | OAuth 2.0 token for the current user.
-ngOauthToken :: Lens' NetworksGet' (Maybe Text)
-ngOauthToken
-  = lens _ngOauthToken (\ s a -> s{_ngOauthToken = a})
+ngOAuthToken :: Lens' NetworksGet' (Maybe OAuthToken)
+ngOAuthToken
+  = lens _ngOAuthToken (\ s a -> s{_ngOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ngFields :: Lens' NetworksGet' (Maybe Text)
 ngFields = lens _ngFields (\ s a -> s{_ngFields = a})
 
--- | Data format for the response.
-ngAlt :: Lens' NetworksGet' Alt
-ngAlt = lens _ngAlt (\ s a -> s{_ngAlt = a})
+instance GoogleAuth NetworksGet' where
+        authKey = ngKey . _Just
+        authToken = ngOAuthToken . _Just
 
 instance GoogleRequest NetworksGet' where
         type Rs NetworksGet' = Network
         request = requestWithRoute defReq computeURL
         requestWithRoute r u NetworksGet'{..}
           = go _ngQuotaUser (Just _ngPrettyPrint) _ngProject
-              _ngUserIp
+              _ngUserIP
               _ngNetwork
               _ngKey
-              _ngOauthToken
+              _ngOAuthToken
               _ngFields
-              (Just _ngAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy NetworksGetResource)

@@ -33,11 +33,10 @@ module Network.Google.Resource.Compute.BackendServices.Delete
     , bsdQuotaUser
     , bsdPrettyPrint
     , bsdProject
-    , bsdUserIp
+    , bsdUserIP
     , bsdKey
-    , bsdOauthToken
+    , bsdOAuthToken
     , bsdFields
-    , bsdAlt
     , bsdBackendService
     ) where
 
@@ -54,10 +53,10 @@ type BackendServicesDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Delete '[JSON] Operation
+                         QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified BackendService resource.
 --
@@ -66,11 +65,10 @@ data BackendServicesDelete' = BackendServicesDelete'
     { _bsdQuotaUser      :: !(Maybe Text)
     , _bsdPrettyPrint    :: !Bool
     , _bsdProject        :: !Text
-    , _bsdUserIp         :: !(Maybe Text)
-    , _bsdKey            :: !(Maybe Text)
-    , _bsdOauthToken     :: !(Maybe Text)
+    , _bsdUserIP         :: !(Maybe Text)
+    , _bsdKey            :: !(Maybe Key)
+    , _bsdOAuthToken     :: !(Maybe OAuthToken)
     , _bsdFields         :: !(Maybe Text)
-    , _bsdAlt            :: !Alt
     , _bsdBackendService :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -84,15 +82,13 @@ data BackendServicesDelete' = BackendServicesDelete'
 --
 -- * 'bsdProject'
 --
--- * 'bsdUserIp'
+-- * 'bsdUserIP'
 --
 -- * 'bsdKey'
 --
--- * 'bsdOauthToken'
+-- * 'bsdOAuthToken'
 --
 -- * 'bsdFields'
---
--- * 'bsdAlt'
 --
 -- * 'bsdBackendService'
 backendServicesDelete'
@@ -104,11 +100,10 @@ backendServicesDelete' pBsdProject_ pBsdBackendService_ =
     { _bsdQuotaUser = Nothing
     , _bsdPrettyPrint = True
     , _bsdProject = pBsdProject_
-    , _bsdUserIp = Nothing
+    , _bsdUserIP = Nothing
     , _bsdKey = Nothing
-    , _bsdOauthToken = Nothing
+    , _bsdOAuthToken = Nothing
     , _bsdFields = Nothing
-    , _bsdAlt = JSON
     , _bsdBackendService = pBsdBackendService_
     }
 
@@ -132,30 +127,26 @@ bsdProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-bsdUserIp :: Lens' BackendServicesDelete' (Maybe Text)
-bsdUserIp
-  = lens _bsdUserIp (\ s a -> s{_bsdUserIp = a})
+bsdUserIP :: Lens' BackendServicesDelete' (Maybe Text)
+bsdUserIP
+  = lens _bsdUserIP (\ s a -> s{_bsdUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-bsdKey :: Lens' BackendServicesDelete' (Maybe Text)
+bsdKey :: Lens' BackendServicesDelete' (Maybe Key)
 bsdKey = lens _bsdKey (\ s a -> s{_bsdKey = a})
 
 -- | OAuth 2.0 token for the current user.
-bsdOauthToken :: Lens' BackendServicesDelete' (Maybe Text)
-bsdOauthToken
-  = lens _bsdOauthToken
-      (\ s a -> s{_bsdOauthToken = a})
+bsdOAuthToken :: Lens' BackendServicesDelete' (Maybe OAuthToken)
+bsdOAuthToken
+  = lens _bsdOAuthToken
+      (\ s a -> s{_bsdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 bsdFields :: Lens' BackendServicesDelete' (Maybe Text)
 bsdFields
   = lens _bsdFields (\ s a -> s{_bsdFields = a})
-
--- | Data format for the response.
-bsdAlt :: Lens' BackendServicesDelete' Alt
-bsdAlt = lens _bsdAlt (\ s a -> s{_bsdAlt = a})
 
 -- | Name of the BackendService resource to delete.
 bsdBackendService :: Lens' BackendServicesDelete' Text
@@ -163,17 +154,21 @@ bsdBackendService
   = lens _bsdBackendService
       (\ s a -> s{_bsdBackendService = a})
 
+instance GoogleAuth BackendServicesDelete' where
+        authKey = bsdKey . _Just
+        authToken = bsdOAuthToken . _Just
+
 instance GoogleRequest BackendServicesDelete' where
         type Rs BackendServicesDelete' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u BackendServicesDelete'{..}
           = go _bsdQuotaUser (Just _bsdPrettyPrint) _bsdProject
-              _bsdUserIp
+              _bsdUserIP
               _bsdKey
-              _bsdOauthToken
+              _bsdOAuthToken
               _bsdFields
-              (Just _bsdAlt)
               _bsdBackendService
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy BackendServicesDeleteResource)

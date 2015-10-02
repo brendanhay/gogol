@@ -35,11 +35,11 @@ module Network.Google.Resource.Genomics.AnnotationSets.Update
     , asuQuotaUser
     , asuPrettyPrint
     , asuAnnotationSetId
-    , asuUserIp
+    , asuUserIP
     , asuKey
-    , asuOauthToken
+    , asuAnnotationSet
+    , asuOAuthToken
     , asuFields
-    , asuAlt
     ) where
 
 import           Network.Google.Genomics.Types
@@ -53,10 +53,12 @@ type AnnotationSetsUpdateResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Put '[JSON] AnnotationSet
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] AnnotationSet :>
+                         Put '[JSON] AnnotationSet
 
 -- | Updates an annotation set. The update must respect all mutability
 -- restrictions and other invariants described on the annotation set
@@ -67,11 +69,11 @@ data AnnotationSetsUpdate' = AnnotationSetsUpdate'
     { _asuQuotaUser       :: !(Maybe Text)
     , _asuPrettyPrint     :: !Bool
     , _asuAnnotationSetId :: !Text
-    , _asuUserIp          :: !(Maybe Text)
-    , _asuKey             :: !(Maybe Text)
-    , _asuOauthToken      :: !(Maybe Text)
+    , _asuUserIP          :: !(Maybe Text)
+    , _asuKey             :: !(Maybe Key)
+    , _asuAnnotationSet   :: !AnnotationSet
+    , _asuOAuthToken      :: !(Maybe OAuthToken)
     , _asuFields          :: !(Maybe Text)
-    , _asuAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnnotationSetsUpdate'' with the minimum fields required to make a request.
@@ -84,28 +86,29 @@ data AnnotationSetsUpdate' = AnnotationSetsUpdate'
 --
 -- * 'asuAnnotationSetId'
 --
--- * 'asuUserIp'
+-- * 'asuUserIP'
 --
 -- * 'asuKey'
 --
--- * 'asuOauthToken'
+-- * 'asuAnnotationSet'
+--
+-- * 'asuOAuthToken'
 --
 -- * 'asuFields'
---
--- * 'asuAlt'
 annotationSetsUpdate'
     :: Text -- ^ 'annotationSetId'
+    -> AnnotationSet -- ^ 'AnnotationSet'
     -> AnnotationSetsUpdate'
-annotationSetsUpdate' pAsuAnnotationSetId_ =
+annotationSetsUpdate' pAsuAnnotationSetId_ pAsuAnnotationSet_ =
     AnnotationSetsUpdate'
     { _asuQuotaUser = Nothing
     , _asuPrettyPrint = True
     , _asuAnnotationSetId = pAsuAnnotationSetId_
-    , _asuUserIp = Nothing
+    , _asuUserIP = Nothing
     , _asuKey = Nothing
-    , _asuOauthToken = Nothing
+    , _asuAnnotationSet = pAsuAnnotationSet_
+    , _asuOAuthToken = Nothing
     , _asuFields = Nothing
-    , _asuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -129,30 +132,36 @@ asuAnnotationSetId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-asuUserIp :: Lens' AnnotationSetsUpdate' (Maybe Text)
-asuUserIp
-  = lens _asuUserIp (\ s a -> s{_asuUserIp = a})
+asuUserIP :: Lens' AnnotationSetsUpdate' (Maybe Text)
+asuUserIP
+  = lens _asuUserIP (\ s a -> s{_asuUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-asuKey :: Lens' AnnotationSetsUpdate' (Maybe Text)
+asuKey :: Lens' AnnotationSetsUpdate' (Maybe Key)
 asuKey = lens _asuKey (\ s a -> s{_asuKey = a})
 
+-- | Multipart request metadata.
+asuAnnotationSet :: Lens' AnnotationSetsUpdate' AnnotationSet
+asuAnnotationSet
+  = lens _asuAnnotationSet
+      (\ s a -> s{_asuAnnotationSet = a})
+
 -- | OAuth 2.0 token for the current user.
-asuOauthToken :: Lens' AnnotationSetsUpdate' (Maybe Text)
-asuOauthToken
-  = lens _asuOauthToken
-      (\ s a -> s{_asuOauthToken = a})
+asuOAuthToken :: Lens' AnnotationSetsUpdate' (Maybe OAuthToken)
+asuOAuthToken
+  = lens _asuOAuthToken
+      (\ s a -> s{_asuOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 asuFields :: Lens' AnnotationSetsUpdate' (Maybe Text)
 asuFields
   = lens _asuFields (\ s a -> s{_asuFields = a})
 
--- | Data format for the response.
-asuAlt :: Lens' AnnotationSetsUpdate' Alt
-asuAlt = lens _asuAlt (\ s a -> s{_asuAlt = a})
+instance GoogleAuth AnnotationSetsUpdate' where
+        authKey = asuKey . _Just
+        authToken = asuOAuthToken . _Just
 
 instance GoogleRequest AnnotationSetsUpdate' where
         type Rs AnnotationSetsUpdate' = AnnotationSet
@@ -160,11 +169,12 @@ instance GoogleRequest AnnotationSetsUpdate' where
         requestWithRoute r u AnnotationSetsUpdate'{..}
           = go _asuQuotaUser (Just _asuPrettyPrint)
               _asuAnnotationSetId
-              _asuUserIp
+              _asuUserIP
               _asuKey
-              _asuOauthToken
+              _asuOAuthToken
               _asuFields
-              (Just _asuAlt)
+              (Just AltJSON)
+              _asuAnnotationSet
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AnnotationSetsUpdateResource)

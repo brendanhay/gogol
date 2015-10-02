@@ -32,11 +32,10 @@ module Network.Google.Resource.Mirror.Contacts.List
     -- * Request Lenses
     , clQuotaUser
     , clPrettyPrint
-    , clUserIp
+    , clUserIP
     , clKey
-    , clOauthToken
+    , clOAuthToken
     , clFields
-    , clAlt
     ) where
 
 import           Network.Google.Mirror.Types
@@ -49,10 +48,10 @@ type ContactsListResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
-               QueryParam "oauth_token" Text :>
+             QueryParam "key" Key :>
+               QueryParam "oauth_token" OAuthToken :>
                  QueryParam "fields" Text :>
-                   QueryParam "alt" Alt :>
+                   QueryParam "alt" AltJSON :>
                      Get '[JSON] ContactsListResponse
 
 -- | Retrieves a list of contacts for the authenticated user.
@@ -61,11 +60,10 @@ type ContactsListResource =
 data ContactsList' = ContactsList'
     { _clQuotaUser   :: !(Maybe Text)
     , _clPrettyPrint :: !Bool
-    , _clUserIp      :: !(Maybe Text)
-    , _clKey         :: !(Maybe Text)
-    , _clOauthToken  :: !(Maybe Text)
+    , _clUserIP      :: !(Maybe Text)
+    , _clKey         :: !(Maybe Key)
+    , _clOAuthToken  :: !(Maybe OAuthToken)
     , _clFields      :: !(Maybe Text)
-    , _clAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContactsList'' with the minimum fields required to make a request.
@@ -76,26 +74,23 @@ data ContactsList' = ContactsList'
 --
 -- * 'clPrettyPrint'
 --
--- * 'clUserIp'
+-- * 'clUserIP'
 --
 -- * 'clKey'
 --
--- * 'clOauthToken'
+-- * 'clOAuthToken'
 --
 -- * 'clFields'
---
--- * 'clAlt'
 contactsList'
     :: ContactsList'
 contactsList' =
     ContactsList'
     { _clQuotaUser = Nothing
     , _clPrettyPrint = True
-    , _clUserIp = Nothing
+    , _clUserIP = Nothing
     , _clKey = Nothing
-    , _clOauthToken = Nothing
+    , _clOAuthToken = Nothing
     , _clFields = Nothing
-    , _clAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -113,37 +108,37 @@ clPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-clUserIp :: Lens' ContactsList' (Maybe Text)
-clUserIp = lens _clUserIp (\ s a -> s{_clUserIp = a})
+clUserIP :: Lens' ContactsList' (Maybe Text)
+clUserIP = lens _clUserIP (\ s a -> s{_clUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-clKey :: Lens' ContactsList' (Maybe Text)
+clKey :: Lens' ContactsList' (Maybe Key)
 clKey = lens _clKey (\ s a -> s{_clKey = a})
 
 -- | OAuth 2.0 token for the current user.
-clOauthToken :: Lens' ContactsList' (Maybe Text)
-clOauthToken
-  = lens _clOauthToken (\ s a -> s{_clOauthToken = a})
+clOAuthToken :: Lens' ContactsList' (Maybe OAuthToken)
+clOAuthToken
+  = lens _clOAuthToken (\ s a -> s{_clOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 clFields :: Lens' ContactsList' (Maybe Text)
 clFields = lens _clFields (\ s a -> s{_clFields = a})
 
--- | Data format for the response.
-clAlt :: Lens' ContactsList' Alt
-clAlt = lens _clAlt (\ s a -> s{_clAlt = a})
+instance GoogleAuth ContactsList' where
+        authKey = clKey . _Just
+        authToken = clOAuthToken . _Just
 
 instance GoogleRequest ContactsList' where
         type Rs ContactsList' = ContactsListResponse
         request = requestWithRoute defReq mirrorURL
         requestWithRoute r u ContactsList'{..}
-          = go _clQuotaUser (Just _clPrettyPrint) _clUserIp
+          = go _clQuotaUser (Just _clPrettyPrint) _clUserIP
               _clKey
-              _clOauthToken
+              _clOAuthToken
               _clFields
-              (Just _clAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ContactsListResource)

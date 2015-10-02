@@ -32,13 +32,14 @@ module Network.Google.Resource.Gmail.Users.Drafts.Update
     -- * Request Lenses
     , uduQuotaUser
     , uduPrettyPrint
-    , uduUserIp
+    , uduUserIP
     , uduUserId
+    , uduMedia
     , uduKey
     , uduId
-    , uduOauthToken
+    , uduDraft
+    , uduOAuthToken
     , uduFields
-    , uduAlt
     ) where
 
 import           Network.Google.Gmail.Types
@@ -53,10 +54,12 @@ type UsersDraftsUpdateResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Put '[JSON] Draft
+                       QueryParam "alt" AltJSON :>
+                         MultipartRelated '[JSON] Draft Body :>
+                           Put '[JSON] Draft
 
 -- | Replaces a draft\'s content.
 --
@@ -64,13 +67,14 @@ type UsersDraftsUpdateResource =
 data UsersDraftsUpdate' = UsersDraftsUpdate'
     { _uduQuotaUser   :: !(Maybe Text)
     , _uduPrettyPrint :: !Bool
-    , _uduUserIp      :: !(Maybe Text)
+    , _uduUserIP      :: !(Maybe Text)
     , _uduUserId      :: !Text
-    , _uduKey         :: !(Maybe Text)
+    , _uduMedia       :: !Body
+    , _uduKey         :: !(Maybe Key)
     , _uduId          :: !Text
-    , _uduOauthToken  :: !(Maybe Text)
+    , _uduDraft       :: !Draft
+    , _uduOAuthToken  :: !(Maybe OAuthToken)
     , _uduFields      :: !(Maybe Text)
-    , _uduAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDraftsUpdate'' with the minimum fields required to make a request.
@@ -81,34 +85,39 @@ data UsersDraftsUpdate' = UsersDraftsUpdate'
 --
 -- * 'uduPrettyPrint'
 --
--- * 'uduUserIp'
+-- * 'uduUserIP'
 --
 -- * 'uduUserId'
+--
+-- * 'uduMedia'
 --
 -- * 'uduKey'
 --
 -- * 'uduId'
 --
--- * 'uduOauthToken'
+-- * 'uduDraft'
+--
+-- * 'uduOAuthToken'
 --
 -- * 'uduFields'
---
--- * 'uduAlt'
 usersDraftsUpdate'
-    :: Text -- ^ 'id'
-    -> Text
+    :: Text -- ^ 'media'
+    -> Body -- ^ 'id'
+    -> Text -- ^ 'Draft'
+    -> Draft
     -> UsersDraftsUpdate'
-usersDraftsUpdate' pUduUserId_ pUduId_ =
+usersDraftsUpdate' pUduUserId_ pUduMedia_ pUduId_ pUduDraft_ =
     UsersDraftsUpdate'
     { _uduQuotaUser = Nothing
     , _uduPrettyPrint = True
-    , _uduUserIp = Nothing
+    , _uduUserIP = Nothing
     , _uduUserId = pUduUserId_
+    , _uduMedia = pUduMedia_
     , _uduKey = Nothing
     , _uduId = pUduId_
-    , _uduOauthToken = Nothing
+    , _uduDraft = pUduDraft_
+    , _uduOAuthToken = Nothing
     , _uduFields = Nothing
-    , _uduAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -126,9 +135,9 @@ uduPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-uduUserIp :: Lens' UsersDraftsUpdate' (Maybe Text)
-uduUserIp
-  = lens _uduUserIp (\ s a -> s{_uduUserIp = a})
+uduUserIP :: Lens' UsersDraftsUpdate' (Maybe Text)
+uduUserIP
+  = lens _uduUserIP (\ s a -> s{_uduUserIP = a})
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
@@ -136,42 +145,51 @@ uduUserId :: Lens' UsersDraftsUpdate' Text
 uduUserId
   = lens _uduUserId (\ s a -> s{_uduUserId = a})
 
+uduMedia :: Lens' UsersDraftsUpdate' Body
+uduMedia = lens _uduMedia (\ s a -> s{_uduMedia = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-uduKey :: Lens' UsersDraftsUpdate' (Maybe Text)
+uduKey :: Lens' UsersDraftsUpdate' (Maybe Key)
 uduKey = lens _uduKey (\ s a -> s{_uduKey = a})
 
 -- | The ID of the draft to update.
 uduId :: Lens' UsersDraftsUpdate' Text
 uduId = lens _uduId (\ s a -> s{_uduId = a})
 
+-- | Multipart request metadata.
+uduDraft :: Lens' UsersDraftsUpdate' Draft
+uduDraft = lens _uduDraft (\ s a -> s{_uduDraft = a})
+
 -- | OAuth 2.0 token for the current user.
-uduOauthToken :: Lens' UsersDraftsUpdate' (Maybe Text)
-uduOauthToken
-  = lens _uduOauthToken
-      (\ s a -> s{_uduOauthToken = a})
+uduOAuthToken :: Lens' UsersDraftsUpdate' (Maybe OAuthToken)
+uduOAuthToken
+  = lens _uduOAuthToken
+      (\ s a -> s{_uduOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 uduFields :: Lens' UsersDraftsUpdate' (Maybe Text)
 uduFields
   = lens _uduFields (\ s a -> s{_uduFields = a})
 
--- | Data format for the response.
-uduAlt :: Lens' UsersDraftsUpdate' Alt
-uduAlt = lens _uduAlt (\ s a -> s{_uduAlt = a})
+instance GoogleAuth UsersDraftsUpdate' where
+        authKey = uduKey . _Just
+        authToken = uduOAuthToken . _Just
 
 instance GoogleRequest UsersDraftsUpdate' where
         type Rs UsersDraftsUpdate' = Draft
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersDraftsUpdate'{..}
-          = go _uduQuotaUser (Just _uduPrettyPrint) _uduUserIp
+          = go _uduQuotaUser (Just _uduPrettyPrint) _uduUserIP
               _uduUserId
+              _uduMedia
               _uduKey
               _uduId
-              _uduOauthToken
+              _uduOAuthToken
               _uduFields
-              (Just _uduAlt)
+              (Just AltJSON)
+              _uduDraft
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersDraftsUpdateResource)

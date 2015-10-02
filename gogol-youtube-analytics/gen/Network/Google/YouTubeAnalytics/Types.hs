@@ -115,7 +115,7 @@ module Network.Google.YouTubeAnalytics.Types
     , BatchReportOutputs
     , batchReportOutputs
     , broFormat
-    , broDownloadUrl
+    , broDownloadURL
     , broType
 
     -- * GroupListResponse
@@ -124,9 +124,6 @@ module Network.Google.YouTubeAnalytics.Types
     , glrEtag
     , glrKind
     , glrItems
-
-    -- * Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.Prelude

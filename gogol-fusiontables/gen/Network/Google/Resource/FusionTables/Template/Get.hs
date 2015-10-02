@@ -33,12 +33,11 @@ module Network.Google.Resource.FusionTables.Template.Get
     , tggQuotaUser
     , tggPrettyPrint
     , tggTemplateId
-    , tggUserIp
+    , tggUserIP
     , tggKey
-    , tggOauthToken
+    , tggOAuthToken
     , tggTableId
     , tggFields
-    , tggAlt
     ) where
 
 import           Network.Google.FusionTables.Types
@@ -54,10 +53,10 @@ type TemplateGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] Template
+                         QueryParam "alt" AltJSON :> Get '[JSON] Template
 
 -- | Retrieves a specific template by its id
 --
@@ -66,12 +65,11 @@ data TemplateGet' = TemplateGet'
     { _tggQuotaUser   :: !(Maybe Text)
     , _tggPrettyPrint :: !Bool
     , _tggTemplateId  :: !Int32
-    , _tggUserIp      :: !(Maybe Text)
-    , _tggKey         :: !(Maybe Text)
-    , _tggOauthToken  :: !(Maybe Text)
+    , _tggUserIP      :: !(Maybe Text)
+    , _tggKey         :: !(Maybe Key)
+    , _tggOAuthToken  :: !(Maybe OAuthToken)
     , _tggTableId     :: !Text
     , _tggFields      :: !(Maybe Text)
-    , _tggAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TemplateGet'' with the minimum fields required to make a request.
@@ -84,17 +82,15 @@ data TemplateGet' = TemplateGet'
 --
 -- * 'tggTemplateId'
 --
--- * 'tggUserIp'
+-- * 'tggUserIP'
 --
 -- * 'tggKey'
 --
--- * 'tggOauthToken'
+-- * 'tggOAuthToken'
 --
 -- * 'tggTableId'
 --
 -- * 'tggFields'
---
--- * 'tggAlt'
 templateGet'
     :: Int32 -- ^ 'templateId'
     -> Text -- ^ 'tableId'
@@ -104,12 +100,11 @@ templateGet' pTggTemplateId_ pTggTableId_ =
     { _tggQuotaUser = Nothing
     , _tggPrettyPrint = True
     , _tggTemplateId = pTggTemplateId_
-    , _tggUserIp = Nothing
+    , _tggUserIP = Nothing
     , _tggKey = Nothing
-    , _tggOauthToken = Nothing
+    , _tggOAuthToken = Nothing
     , _tggTableId = pTggTableId_
     , _tggFields = Nothing
-    , _tggAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -133,21 +128,21 @@ tggTemplateId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tggUserIp :: Lens' TemplateGet' (Maybe Text)
-tggUserIp
-  = lens _tggUserIp (\ s a -> s{_tggUserIp = a})
+tggUserIP :: Lens' TemplateGet' (Maybe Text)
+tggUserIP
+  = lens _tggUserIP (\ s a -> s{_tggUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tggKey :: Lens' TemplateGet' (Maybe Text)
+tggKey :: Lens' TemplateGet' (Maybe Key)
 tggKey = lens _tggKey (\ s a -> s{_tggKey = a})
 
 -- | OAuth 2.0 token for the current user.
-tggOauthToken :: Lens' TemplateGet' (Maybe Text)
-tggOauthToken
-  = lens _tggOauthToken
-      (\ s a -> s{_tggOauthToken = a})
+tggOAuthToken :: Lens' TemplateGet' (Maybe OAuthToken)
+tggOAuthToken
+  = lens _tggOAuthToken
+      (\ s a -> s{_tggOAuthToken = a})
 
 -- | Table to which the template belongs
 tggTableId :: Lens' TemplateGet' Text
@@ -159,9 +154,9 @@ tggFields :: Lens' TemplateGet' (Maybe Text)
 tggFields
   = lens _tggFields (\ s a -> s{_tggFields = a})
 
--- | Data format for the response.
-tggAlt :: Lens' TemplateGet' Alt
-tggAlt = lens _tggAlt (\ s a -> s{_tggAlt = a})
+instance GoogleAuth TemplateGet' where
+        authKey = tggKey . _Just
+        authToken = tggOAuthToken . _Just
 
 instance GoogleRequest TemplateGet' where
         type Rs TemplateGet' = Template
@@ -169,12 +164,12 @@ instance GoogleRequest TemplateGet' where
         requestWithRoute r u TemplateGet'{..}
           = go _tggQuotaUser (Just _tggPrettyPrint)
               _tggTemplateId
-              _tggUserIp
+              _tggUserIP
               _tggKey
-              _tggOauthToken
+              _tggOAuthToken
               _tggTableId
               _tggFields
-              (Just _tggAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TemplateGetResource)

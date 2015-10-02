@@ -33,12 +33,11 @@ module Network.Google.Resource.YouTube.I18nRegions.List
     , irlQuotaUser
     , irlPart
     , irlPrettyPrint
-    , irlUserIp
+    , irlUserIP
     , irlHl
     , irlKey
-    , irlOauthToken
+    , irlOAuthToken
     , irlFields
-    , irlAlt
     ) where
 
 import           Network.Google.Prelude
@@ -53,10 +52,10 @@ type I18nRegionsListResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "hl" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :>
+                       QueryParam "alt" AltJSON :>
                          Get '[JSON] I18nRegionListResponse
 
 -- | Returns a list of content regions that the YouTube website supports.
@@ -66,12 +65,11 @@ data I18nRegionsList' = I18nRegionsList'
     { _irlQuotaUser   :: !(Maybe Text)
     , _irlPart        :: !Text
     , _irlPrettyPrint :: !Bool
-    , _irlUserIp      :: !(Maybe Text)
+    , _irlUserIP      :: !(Maybe Text)
     , _irlHl          :: !Text
-    , _irlKey         :: !(Maybe Text)
-    , _irlOauthToken  :: !(Maybe Text)
+    , _irlKey         :: !(Maybe Key)
+    , _irlOAuthToken  :: !(Maybe OAuthToken)
     , _irlFields      :: !(Maybe Text)
-    , _irlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'I18nRegionsList'' with the minimum fields required to make a request.
@@ -84,17 +82,15 @@ data I18nRegionsList' = I18nRegionsList'
 --
 -- * 'irlPrettyPrint'
 --
--- * 'irlUserIp'
+-- * 'irlUserIP'
 --
 -- * 'irlHl'
 --
 -- * 'irlKey'
 --
--- * 'irlOauthToken'
+-- * 'irlOAuthToken'
 --
 -- * 'irlFields'
---
--- * 'irlAlt'
 i18nRegionsList'
     :: Text -- ^ 'part'
     -> I18nRegionsList'
@@ -103,12 +99,11 @@ i18nRegionsList' pIrlPart_ =
     { _irlQuotaUser = Nothing
     , _irlPart = pIrlPart_
     , _irlPrettyPrint = True
-    , _irlUserIp = Nothing
+    , _irlUserIP = Nothing
     , _irlHl = "en_US"
     , _irlKey = Nothing
-    , _irlOauthToken = Nothing
+    , _irlOAuthToken = Nothing
     , _irlFields = Nothing
-    , _irlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -131,9 +126,9 @@ irlPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-irlUserIp :: Lens' I18nRegionsList' (Maybe Text)
-irlUserIp
-  = lens _irlUserIp (\ s a -> s{_irlUserIp = a})
+irlUserIP :: Lens' I18nRegionsList' (Maybe Text)
+irlUserIP
+  = lens _irlUserIP (\ s a -> s{_irlUserIP = a})
 
 -- | The hl parameter specifies the language that should be used for text
 -- values in the API response.
@@ -143,23 +138,23 @@ irlHl = lens _irlHl (\ s a -> s{_irlHl = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-irlKey :: Lens' I18nRegionsList' (Maybe Text)
+irlKey :: Lens' I18nRegionsList' (Maybe Key)
 irlKey = lens _irlKey (\ s a -> s{_irlKey = a})
 
 -- | OAuth 2.0 token for the current user.
-irlOauthToken :: Lens' I18nRegionsList' (Maybe Text)
-irlOauthToken
-  = lens _irlOauthToken
-      (\ s a -> s{_irlOauthToken = a})
+irlOAuthToken :: Lens' I18nRegionsList' (Maybe OAuthToken)
+irlOAuthToken
+  = lens _irlOAuthToken
+      (\ s a -> s{_irlOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 irlFields :: Lens' I18nRegionsList' (Maybe Text)
 irlFields
   = lens _irlFields (\ s a -> s{_irlFields = a})
 
--- | Data format for the response.
-irlAlt :: Lens' I18nRegionsList' Alt
-irlAlt = lens _irlAlt (\ s a -> s{_irlAlt = a})
+instance GoogleAuth I18nRegionsList' where
+        authKey = irlKey . _Just
+        authToken = irlOAuthToken . _Just
 
 instance GoogleRequest I18nRegionsList' where
         type Rs I18nRegionsList' = I18nRegionListResponse
@@ -167,12 +162,12 @@ instance GoogleRequest I18nRegionsList' where
         requestWithRoute r u I18nRegionsList'{..}
           = go _irlQuotaUser (Just _irlPart)
               (Just _irlPrettyPrint)
-              _irlUserIp
+              _irlUserIP
               (Just _irlHl)
               _irlKey
-              _irlOauthToken
+              _irlOAuthToken
               _irlFields
-              (Just _irlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy I18nRegionsListResource)

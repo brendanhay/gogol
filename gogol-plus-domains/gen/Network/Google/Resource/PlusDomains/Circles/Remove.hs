@@ -32,12 +32,11 @@ module Network.Google.Resource.PlusDomains.Circles.Remove
     -- * Request Lenses
     , crQuotaUser
     , crPrettyPrint
-    , crUserIp
+    , crUserIP
     , crKey
     , crCircleId
-    , crOauthToken
+    , crOAuthToken
     , crFields
-    , crAlt
     ) where
 
 import           Network.Google.PlusDomains.Types
@@ -51,10 +50,10 @@ type CirclesRemoveResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Delete '[JSON] ()
+                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete a circle.
 --
@@ -62,12 +61,11 @@ type CirclesRemoveResource =
 data CirclesRemove' = CirclesRemove'
     { _crQuotaUser   :: !(Maybe Text)
     , _crPrettyPrint :: !Bool
-    , _crUserIp      :: !(Maybe Text)
-    , _crKey         :: !(Maybe Text)
+    , _crUserIP      :: !(Maybe Text)
+    , _crKey         :: !(Maybe Key)
     , _crCircleId    :: !Text
-    , _crOauthToken  :: !(Maybe Text)
+    , _crOAuthToken  :: !(Maybe OAuthToken)
     , _crFields      :: !(Maybe Text)
-    , _crAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CirclesRemove'' with the minimum fields required to make a request.
@@ -78,17 +76,15 @@ data CirclesRemove' = CirclesRemove'
 --
 -- * 'crPrettyPrint'
 --
--- * 'crUserIp'
+-- * 'crUserIP'
 --
 -- * 'crKey'
 --
 -- * 'crCircleId'
 --
--- * 'crOauthToken'
+-- * 'crOAuthToken'
 --
 -- * 'crFields'
---
--- * 'crAlt'
 circlesRemove'
     :: Text -- ^ 'circleId'
     -> CirclesRemove'
@@ -96,12 +92,11 @@ circlesRemove' pCrCircleId_ =
     CirclesRemove'
     { _crQuotaUser = Nothing
     , _crPrettyPrint = True
-    , _crUserIp = Nothing
+    , _crUserIP = Nothing
     , _crKey = Nothing
     , _crCircleId = pCrCircleId_
-    , _crOauthToken = Nothing
+    , _crOAuthToken = Nothing
     , _crFields = Nothing
-    , _crAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -119,13 +114,13 @@ crPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-crUserIp :: Lens' CirclesRemove' (Maybe Text)
-crUserIp = lens _crUserIp (\ s a -> s{_crUserIp = a})
+crUserIP :: Lens' CirclesRemove' (Maybe Text)
+crUserIP = lens _crUserIP (\ s a -> s{_crUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-crKey :: Lens' CirclesRemove' (Maybe Text)
+crKey :: Lens' CirclesRemove' (Maybe Key)
 crKey = lens _crKey (\ s a -> s{_crKey = a})
 
 -- | The ID of the circle to delete.
@@ -134,28 +129,28 @@ crCircleId
   = lens _crCircleId (\ s a -> s{_crCircleId = a})
 
 -- | OAuth 2.0 token for the current user.
-crOauthToken :: Lens' CirclesRemove' (Maybe Text)
-crOauthToken
-  = lens _crOauthToken (\ s a -> s{_crOauthToken = a})
+crOAuthToken :: Lens' CirclesRemove' (Maybe OAuthToken)
+crOAuthToken
+  = lens _crOAuthToken (\ s a -> s{_crOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 crFields :: Lens' CirclesRemove' (Maybe Text)
 crFields = lens _crFields (\ s a -> s{_crFields = a})
 
--- | Data format for the response.
-crAlt :: Lens' CirclesRemove' Alt
-crAlt = lens _crAlt (\ s a -> s{_crAlt = a})
+instance GoogleAuth CirclesRemove' where
+        authKey = crKey . _Just
+        authToken = crOAuthToken . _Just
 
 instance GoogleRequest CirclesRemove' where
         type Rs CirclesRemove' = ()
         request = requestWithRoute defReq plusDomainsURL
         requestWithRoute r u CirclesRemove'{..}
-          = go _crQuotaUser (Just _crPrettyPrint) _crUserIp
+          = go _crQuotaUser (Just _crPrettyPrint) _crUserIP
               _crKey
               _crCircleId
-              _crOauthToken
+              _crOAuthToken
               _crFields
-              (Just _crAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CirclesRemoveResource)

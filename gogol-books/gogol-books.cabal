@@ -35,9 +35,9 @@ library
         , Network.Google.Resource.Books.Bookshelves.Get
         , Network.Google.Resource.Books.Bookshelves.List
         , Network.Google.Resource.Books.Bookshelves.Volumes.List
-        , Network.Google.Resource.Books.Cloudloading.AddBook
-        , Network.Google.Resource.Books.Cloudloading.DeleteBook
-        , Network.Google.Resource.Books.Cloudloading.UpdateBook
+        , Network.Google.Resource.Books.CloudLoading.AddBook
+        , Network.Google.Resource.Books.CloudLoading.DeleteBook
+        , Network.Google.Resource.Books.CloudLoading.UpdateBook
         , Network.Google.Resource.Books.Dictionary.ListOfflineMetadata
         , Network.Google.Resource.Books.Layers.AnnotationData.Get
         , Network.Google.Resource.Books.Layers.AnnotationData.List
@@ -45,37 +45,37 @@ library
         , Network.Google.Resource.Books.Layers.List
         , Network.Google.Resource.Books.Layers.VolumeAnnotations.Get
         , Network.Google.Resource.Books.Layers.VolumeAnnotations.List
-        , Network.Google.Resource.Books.Myconfig.GetUserSettings
-        , Network.Google.Resource.Books.Myconfig.ReleaseDownloadAccess
-        , Network.Google.Resource.Books.Myconfig.RequestAccess
-        , Network.Google.Resource.Books.Myconfig.SyncVolumeLicenses
-        , Network.Google.Resource.Books.Myconfig.UpdateUserSettings
-        , Network.Google.Resource.Books.Mylibrary.Annotations.Delete
-        , Network.Google.Resource.Books.Mylibrary.Annotations.Insert
-        , Network.Google.Resource.Books.Mylibrary.Annotations.List
-        , Network.Google.Resource.Books.Mylibrary.Annotations.Summary
-        , Network.Google.Resource.Books.Mylibrary.Annotations.Update
-        , Network.Google.Resource.Books.Mylibrary.Bookshelves.AddVolume
-        , Network.Google.Resource.Books.Mylibrary.Bookshelves.ClearVolumes
-        , Network.Google.Resource.Books.Mylibrary.Bookshelves.Get
-        , Network.Google.Resource.Books.Mylibrary.Bookshelves.List
-        , Network.Google.Resource.Books.Mylibrary.Bookshelves.MoveVolume
-        , Network.Google.Resource.Books.Mylibrary.Bookshelves.RemoveVolume
-        , Network.Google.Resource.Books.Mylibrary.Bookshelves.Volumes.List
-        , Network.Google.Resource.Books.Mylibrary.Readingpositions.Get
-        , Network.Google.Resource.Books.Mylibrary.Readingpositions.SetPosition
+        , Network.Google.Resource.Books.MyConfig.GetUserSettings
+        , Network.Google.Resource.Books.MyConfig.ReleaseDownloadAccess
+        , Network.Google.Resource.Books.MyConfig.RequestAccess
+        , Network.Google.Resource.Books.MyConfig.SyncVolumeLicenses
+        , Network.Google.Resource.Books.MyConfig.UpdateUserSettings
+        , Network.Google.Resource.Books.MyLibrary.Annotations.Delete
+        , Network.Google.Resource.Books.MyLibrary.Annotations.Insert
+        , Network.Google.Resource.Books.MyLibrary.Annotations.List
+        , Network.Google.Resource.Books.MyLibrary.Annotations.Summary
+        , Network.Google.Resource.Books.MyLibrary.Annotations.Update
+        , Network.Google.Resource.Books.MyLibrary.Bookshelves.AddVolume
+        , Network.Google.Resource.Books.MyLibrary.Bookshelves.ClearVolumes
+        , Network.Google.Resource.Books.MyLibrary.Bookshelves.Get
+        , Network.Google.Resource.Books.MyLibrary.Bookshelves.List
+        , Network.Google.Resource.Books.MyLibrary.Bookshelves.MoveVolume
+        , Network.Google.Resource.Books.MyLibrary.Bookshelves.RemoveVolume
+        , Network.Google.Resource.Books.MyLibrary.Bookshelves.Volumes.List
+        , Network.Google.Resource.Books.MyLibrary.ReadingPositions.Get
+        , Network.Google.Resource.Books.MyLibrary.ReadingPositions.SetPosition
         , Network.Google.Resource.Books.Onboarding.ListCategories
         , Network.Google.Resource.Books.Onboarding.ListCategoryVolumes
-        , Network.Google.Resource.Books.Promooffer.Accept
-        , Network.Google.Resource.Books.Promooffer.Dismiss
-        , Network.Google.Resource.Books.Promooffer.Get
+        , Network.Google.Resource.Books.PromoOffer.Accept
+        , Network.Google.Resource.Books.PromoOffer.Dismiss
+        , Network.Google.Resource.Books.PromoOffer.Get
         , Network.Google.Resource.Books.Volumes.Associated.List
         , Network.Google.Resource.Books.Volumes.Get
         , Network.Google.Resource.Books.Volumes.List
         , Network.Google.Resource.Books.Volumes.Mybooks.List
         , Network.Google.Resource.Books.Volumes.Recommended.List
         , Network.Google.Resource.Books.Volumes.Recommended.Rate
-        , Network.Google.Resource.Books.Volumes.Useruploaded.List
+        , Network.Google.Resource.Books.Volumes.UserUploaded.List
 
     other-modules:
           Network.Google.Books.Types.Product

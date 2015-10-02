@@ -33,17 +33,16 @@ module Network.Google.Resource.Blogger.Comments.ListByBlog
     , clbbStatus
     , clbbQuotaUser
     , clbbPrettyPrint
-    , clbbUserIp
+    , clbbUserIP
     , clbbEndDate
     , clbbBlogId
     , clbbStartDate
     , clbbKey
     , clbbFetchBodies
     , clbbPageToken
-    , clbbOauthToken
+    , clbbOAuthToken
     , clbbMaxResults
     , clbbFields
-    , clbbAlt
     ) where
 
 import           Network.Google.Blogger.Types
@@ -62,13 +61,13 @@ type CommentsListByBlogResource =
                  QueryParam "userIp" Text :>
                    QueryParam "endDate" UTCTime :>
                      QueryParam "startDate" UTCTime :>
-                       QueryParam "key" Text :>
+                       QueryParam "key" Key :>
                          QueryParam "fetchBodies" Bool :>
                            QueryParam "pageToken" Text :>
-                             QueryParam "oauth_token" Text :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "maxResults" Word32 :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "alt" Alt :>
+                                   QueryParam "alt" AltJSON :>
                                      Get '[JSON] CommentList
 
 -- | Retrieves the comments for a blog, across all posts, possibly filtered.
@@ -78,17 +77,16 @@ data CommentsListByBlog' = CommentsListByBlog'
     { _clbbStatus      :: !(Maybe BloggerCommentsListByBlogStatus)
     , _clbbQuotaUser   :: !(Maybe Text)
     , _clbbPrettyPrint :: !Bool
-    , _clbbUserIp      :: !(Maybe Text)
+    , _clbbUserIP      :: !(Maybe Text)
     , _clbbEndDate     :: !(Maybe UTCTime)
     , _clbbBlogId      :: !Text
     , _clbbStartDate   :: !(Maybe UTCTime)
-    , _clbbKey         :: !(Maybe Text)
+    , _clbbKey         :: !(Maybe Key)
     , _clbbFetchBodies :: !(Maybe Bool)
     , _clbbPageToken   :: !(Maybe Text)
-    , _clbbOauthToken  :: !(Maybe Text)
+    , _clbbOAuthToken  :: !(Maybe OAuthToken)
     , _clbbMaxResults  :: !(Maybe Word32)
     , _clbbFields      :: !(Maybe Text)
-    , _clbbAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsListByBlog'' with the minimum fields required to make a request.
@@ -101,7 +99,7 @@ data CommentsListByBlog' = CommentsListByBlog'
 --
 -- * 'clbbPrettyPrint'
 --
--- * 'clbbUserIp'
+-- * 'clbbUserIP'
 --
 -- * 'clbbEndDate'
 --
@@ -115,13 +113,11 @@ data CommentsListByBlog' = CommentsListByBlog'
 --
 -- * 'clbbPageToken'
 --
--- * 'clbbOauthToken'
+-- * 'clbbOAuthToken'
 --
 -- * 'clbbMaxResults'
 --
 -- * 'clbbFields'
---
--- * 'clbbAlt'
 commentsListByBlog'
     :: Text -- ^ 'blogId'
     -> CommentsListByBlog'
@@ -130,17 +126,16 @@ commentsListByBlog' pClbbBlogId_ =
     { _clbbStatus = Nothing
     , _clbbQuotaUser = Nothing
     , _clbbPrettyPrint = True
-    , _clbbUserIp = Nothing
+    , _clbbUserIP = Nothing
     , _clbbEndDate = Nothing
     , _clbbBlogId = pClbbBlogId_
     , _clbbStartDate = Nothing
     , _clbbKey = Nothing
     , _clbbFetchBodies = Nothing
     , _clbbPageToken = Nothing
-    , _clbbOauthToken = Nothing
+    , _clbbOAuthToken = Nothing
     , _clbbMaxResults = Nothing
     , _clbbFields = Nothing
-    , _clbbAlt = JSON
     }
 
 clbbStatus :: Lens' CommentsListByBlog' (Maybe BloggerCommentsListByBlogStatus)
@@ -163,9 +158,9 @@ clbbPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-clbbUserIp :: Lens' CommentsListByBlog' (Maybe Text)
-clbbUserIp
-  = lens _clbbUserIp (\ s a -> s{_clbbUserIp = a})
+clbbUserIP :: Lens' CommentsListByBlog' (Maybe Text)
+clbbUserIP
+  = lens _clbbUserIP (\ s a -> s{_clbbUserIP = a})
 
 -- | Latest date of comment to fetch, a date-time with RFC 3339 formatting.
 clbbEndDate :: Lens' CommentsListByBlog' (Maybe UTCTime)
@@ -186,7 +181,7 @@ clbbStartDate
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-clbbKey :: Lens' CommentsListByBlog' (Maybe Text)
+clbbKey :: Lens' CommentsListByBlog' (Maybe Key)
 clbbKey = lens _clbbKey (\ s a -> s{_clbbKey = a})
 
 -- | Whether the body content of the comments is included.
@@ -202,10 +197,10 @@ clbbPageToken
       (\ s a -> s{_clbbPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-clbbOauthToken :: Lens' CommentsListByBlog' (Maybe Text)
-clbbOauthToken
-  = lens _clbbOauthToken
-      (\ s a -> s{_clbbOauthToken = a})
+clbbOAuthToken :: Lens' CommentsListByBlog' (Maybe OAuthToken)
+clbbOAuthToken
+  = lens _clbbOAuthToken
+      (\ s a -> s{_clbbOAuthToken = a})
 
 -- | Maximum number of comments to include in the result.
 clbbMaxResults :: Lens' CommentsListByBlog' (Maybe Word32)
@@ -218,9 +213,9 @@ clbbFields :: Lens' CommentsListByBlog' (Maybe Text)
 clbbFields
   = lens _clbbFields (\ s a -> s{_clbbFields = a})
 
--- | Data format for the response.
-clbbAlt :: Lens' CommentsListByBlog' Alt
-clbbAlt = lens _clbbAlt (\ s a -> s{_clbbAlt = a})
+instance GoogleAuth CommentsListByBlog' where
+        authKey = clbbKey . _Just
+        authToken = clbbOAuthToken . _Just
 
 instance GoogleRequest CommentsListByBlog' where
         type Rs CommentsListByBlog' = CommentList
@@ -228,17 +223,17 @@ instance GoogleRequest CommentsListByBlog' where
         requestWithRoute r u CommentsListByBlog'{..}
           = go _clbbStatus _clbbQuotaUser
               (Just _clbbPrettyPrint)
-              _clbbUserIp
+              _clbbUserIP
               _clbbEndDate
               _clbbBlogId
               _clbbStartDate
               _clbbKey
               _clbbFetchBodies
               _clbbPageToken
-              _clbbOauthToken
+              _clbbOAuthToken
               _clbbMaxResults
               _clbbFields
-              (Just _clbbAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CommentsListByBlogResource)

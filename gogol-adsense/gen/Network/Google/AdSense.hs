@@ -27,20 +27,20 @@ module Network.Google.AdSense
 
     -- * REST Resources
 
-    -- ** AdsenseAccountsAdclientsList
-    , module Network.Google.Resource.AdSense.Accounts.Adclients.List
+    -- ** AdsenseAccountsAdClientsList
+    , module Network.Google.Resource.AdSense.Accounts.AdClients.List
 
-    -- ** AdsenseAccountsAdunitsCustomchannelsList
-    , module Network.Google.Resource.AdSense.Accounts.Adunits.Customchannels.List
+    -- ** AdsenseAccountsAdUnitsCustomChannelsList
+    , module Network.Google.Resource.AdSense.Accounts.AdUnits.CustomChannels.List
 
-    -- ** AdsenseAccountsAdunitsGet
-    , module Network.Google.Resource.AdSense.Accounts.Adunits.Get
+    -- ** AdsenseAccountsAdUnitsGet
+    , module Network.Google.Resource.AdSense.Accounts.AdUnits.Get
 
-    -- ** AdsenseAccountsAdunitsGetAdCode
-    , module Network.Google.Resource.AdSense.Accounts.Adunits.GetAdCode
+    -- ** AdsenseAccountsAdUnitsGetAdCode
+    , module Network.Google.Resource.AdSense.Accounts.AdUnits.GetAdCode
 
-    -- ** AdsenseAccountsAdunitsList
-    , module Network.Google.Resource.AdSense.Accounts.Adunits.List
+    -- ** AdsenseAccountsAdUnitsList
+    , module Network.Google.Resource.AdSense.Accounts.AdUnits.List
 
     -- ** AdsenseAccountsAlertsDelete
     , module Network.Google.Resource.AdSense.Accounts.Alerts.Delete
@@ -48,14 +48,14 @@ module Network.Google.AdSense
     -- ** AdsenseAccountsAlertsList
     , module Network.Google.Resource.AdSense.Accounts.Alerts.List
 
-    -- ** AdsenseAccountsCustomchannelsAdunitsList
-    , module Network.Google.Resource.AdSense.Accounts.Customchannels.Adunits.List
+    -- ** AdsenseAccountsCustomChannelsAdUnitsList
+    , module Network.Google.Resource.AdSense.Accounts.CustomChannels.AdUnits.List
 
-    -- ** AdsenseAccountsCustomchannelsGet
-    , module Network.Google.Resource.AdSense.Accounts.Customchannels.Get
+    -- ** AdsenseAccountsCustomChannelsGet
+    , module Network.Google.Resource.AdSense.Accounts.CustomChannels.Get
 
-    -- ** AdsenseAccountsCustomchannelsList
-    , module Network.Google.Resource.AdSense.Accounts.Customchannels.List
+    -- ** AdsenseAccountsCustomChannelsList
+    , module Network.Google.Resource.AdSense.Accounts.CustomChannels.List
 
     -- ** AdsenseAccountsGet
     , module Network.Google.Resource.AdSense.Accounts.Get
@@ -81,23 +81,23 @@ module Network.Google.AdSense
     -- ** AdsenseAccountsSavedadstylesList
     , module Network.Google.Resource.AdSense.Accounts.Savedadstyles.List
 
-    -- ** AdsenseAccountsURLchannelsList
-    , module Network.Google.Resource.AdSense.Accounts.URLchannels.List
+    -- ** AdsenseAccountsURLChannelsList
+    , module Network.Google.Resource.AdSense.Accounts.URLChannels.List
 
-    -- ** AdsenseAdclientsList
-    , module Network.Google.Resource.AdSense.Adclients.List
+    -- ** AdsenseAdClientsList
+    , module Network.Google.Resource.AdSense.AdClients.List
 
-    -- ** AdsenseAdunitsCustomchannelsList
-    , module Network.Google.Resource.AdSense.Adunits.Customchannels.List
+    -- ** AdsenseAdUnitsCustomChannelsList
+    , module Network.Google.Resource.AdSense.AdUnits.CustomChannels.List
 
-    -- ** AdsenseAdunitsGet
-    , module Network.Google.Resource.AdSense.Adunits.Get
+    -- ** AdsenseAdUnitsGet
+    , module Network.Google.Resource.AdSense.AdUnits.Get
 
-    -- ** AdsenseAdunitsGetAdCode
-    , module Network.Google.Resource.AdSense.Adunits.GetAdCode
+    -- ** AdsenseAdUnitsGetAdCode
+    , module Network.Google.Resource.AdSense.AdUnits.GetAdCode
 
-    -- ** AdsenseAdunitsList
-    , module Network.Google.Resource.AdSense.Adunits.List
+    -- ** AdsenseAdUnitsList
+    , module Network.Google.Resource.AdSense.AdUnits.List
 
     -- ** AdsenseAlertsDelete
     , module Network.Google.Resource.AdSense.Alerts.Delete
@@ -105,14 +105,14 @@ module Network.Google.AdSense
     -- ** AdsenseAlertsList
     , module Network.Google.Resource.AdSense.Alerts.List
 
-    -- ** AdsenseCustomchannelsAdunitsList
-    , module Network.Google.Resource.AdSense.Customchannels.Adunits.List
+    -- ** AdsenseCustomChannelsAdUnitsList
+    , module Network.Google.Resource.AdSense.CustomChannels.AdUnits.List
 
-    -- ** AdsenseCustomchannelsGet
-    , module Network.Google.Resource.AdSense.Customchannels.Get
+    -- ** AdsenseCustomChannelsGet
+    , module Network.Google.Resource.AdSense.CustomChannels.Get
 
-    -- ** AdsenseCustomchannelsList
-    , module Network.Google.Resource.AdSense.Customchannels.List
+    -- ** AdsenseCustomChannelsList
+    , module Network.Google.Resource.AdSense.CustomChannels.List
 
     -- ** AdsenseMetadataDimensionsList
     , module Network.Google.Resource.AdSense.Metadata.Dimensions.List
@@ -138,8 +138,8 @@ module Network.Google.AdSense
     -- ** AdsenseSavedadstylesList
     , module Network.Google.Resource.AdSense.Savedadstyles.List
 
-    -- ** AdsenseURLchannelsList
-    , module Network.Google.Resource.AdSense.URLchannels.List
+    -- ** AdsenseURLChannelsList
+    , module Network.Google.Resource.AdSense.URLChannels.List
 
     -- * Types
 
@@ -276,10 +276,10 @@ module Network.Google.AdSense
     , AdStyleColors
     , adStyleColors
     , ascText
-    , ascUrl
-    , ascBorder
+    , ascURL
+    , ascBOrder
     , ascTitle
-    , ascBackground
+    , ascBackgRound
 
     -- ** AdClient
     , AdClient
@@ -295,7 +295,7 @@ module Network.Google.AdSense
     , AdUnitContentAdsSettingsBackupOption
     , adUnitContentAdsSettingsBackupOption
     , aucasboColor
-    , aucasboUrl
+    , aucasboURL
     , aucasboType
 
     -- ** SavedAdStyles
@@ -365,7 +365,7 @@ module Network.Google.AdSense
     , uRLChannel
     , urlcKind
     , urlcId
-    , urlcUrlPattern
+    , urlcURLPattern
 
     -- ** AdCode
     , AdCode
@@ -398,23 +398,20 @@ module Network.Google.AdSense
     , aucasBackupOption
     , aucasSize
     , aucasType
-
-    -- ** Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.AdSense.Types
 import           Network.Google.Prelude
-import           Network.Google.Resource.AdSense.Accounts.Adclients.List
-import           Network.Google.Resource.AdSense.Accounts.Adunits.Customchannels.List
-import           Network.Google.Resource.AdSense.Accounts.Adunits.Get
-import           Network.Google.Resource.AdSense.Accounts.Adunits.GetAdCode
-import           Network.Google.Resource.AdSense.Accounts.Adunits.List
+import           Network.Google.Resource.AdSense.Accounts.AdClients.List
+import           Network.Google.Resource.AdSense.Accounts.AdUnits.CustomChannels.List
+import           Network.Google.Resource.AdSense.Accounts.AdUnits.Get
+import           Network.Google.Resource.AdSense.Accounts.AdUnits.GetAdCode
+import           Network.Google.Resource.AdSense.Accounts.AdUnits.List
 import           Network.Google.Resource.AdSense.Accounts.Alerts.Delete
 import           Network.Google.Resource.AdSense.Accounts.Alerts.List
-import           Network.Google.Resource.AdSense.Accounts.Customchannels.Adunits.List
-import           Network.Google.Resource.AdSense.Accounts.Customchannels.Get
-import           Network.Google.Resource.AdSense.Accounts.Customchannels.List
+import           Network.Google.Resource.AdSense.Accounts.CustomChannels.AdUnits.List
+import           Network.Google.Resource.AdSense.Accounts.CustomChannels.Get
+import           Network.Google.Resource.AdSense.Accounts.CustomChannels.List
 import           Network.Google.Resource.AdSense.Accounts.Get
 import           Network.Google.Resource.AdSense.Accounts.List
 import           Network.Google.Resource.AdSense.Accounts.Payments.List
@@ -423,17 +420,17 @@ import           Network.Google.Resource.AdSense.Accounts.Reports.Saved.Generate
 import           Network.Google.Resource.AdSense.Accounts.Reports.Saved.List
 import           Network.Google.Resource.AdSense.Accounts.Savedadstyles.Get
 import           Network.Google.Resource.AdSense.Accounts.Savedadstyles.List
-import           Network.Google.Resource.AdSense.Accounts.URLchannels.List
-import           Network.Google.Resource.AdSense.Adclients.List
-import           Network.Google.Resource.AdSense.Adunits.Customchannels.List
-import           Network.Google.Resource.AdSense.Adunits.Get
-import           Network.Google.Resource.AdSense.Adunits.GetAdCode
-import           Network.Google.Resource.AdSense.Adunits.List
+import           Network.Google.Resource.AdSense.Accounts.URLChannels.List
+import           Network.Google.Resource.AdSense.AdClients.List
+import           Network.Google.Resource.AdSense.AdUnits.CustomChannels.List
+import           Network.Google.Resource.AdSense.AdUnits.Get
+import           Network.Google.Resource.AdSense.AdUnits.GetAdCode
+import           Network.Google.Resource.AdSense.AdUnits.List
 import           Network.Google.Resource.AdSense.Alerts.Delete
 import           Network.Google.Resource.AdSense.Alerts.List
-import           Network.Google.Resource.AdSense.Customchannels.Adunits.List
-import           Network.Google.Resource.AdSense.Customchannels.Get
-import           Network.Google.Resource.AdSense.Customchannels.List
+import           Network.Google.Resource.AdSense.CustomChannels.AdUnits.List
+import           Network.Google.Resource.AdSense.CustomChannels.Get
+import           Network.Google.Resource.AdSense.CustomChannels.List
 import           Network.Google.Resource.AdSense.Metadata.Dimensions.List
 import           Network.Google.Resource.AdSense.Metadata.Metrics.List
 import           Network.Google.Resource.AdSense.Payments.List
@@ -442,28 +439,28 @@ import           Network.Google.Resource.AdSense.Reports.Saved.Generate
 import           Network.Google.Resource.AdSense.Reports.Saved.List
 import           Network.Google.Resource.AdSense.Savedadstyles.Get
 import           Network.Google.Resource.AdSense.Savedadstyles.List
-import           Network.Google.Resource.AdSense.URLchannels.List
+import           Network.Google.Resource.AdSense.URLChannels.List
 
 {- $resources
 TODO
 -}
 
 type AdSenseAPI =
-     AdclientsListResource :<|>
-       AccountsAdclientsListResource
+     AdClientsListResource :<|>
+       AccountsAdClientsListResource
        :<|> AccountsReportsSavedListResource
        :<|> AccountsReportsSavedGenerateResource
        :<|> AccountsReportsGenerateResource
        :<|> AccountsAlertsListResource
        :<|> AccountsAlertsDeleteResource
-       :<|> AccountsAdunitsCustomchannelsListResource
-       :<|> AccountsAdunitsListResource
-       :<|> AccountsAdunitsGetResource
-       :<|> AccountsAdunitsGetAdCodeResource
-       :<|> AccountsUrlchannelsListResource
-       :<|> AccountsCustomchannelsAdunitsListResource
-       :<|> AccountsCustomchannelsListResource
-       :<|> AccountsCustomchannelsGetResource
+       :<|> AccountsAdUnitsCustomChannelsListResource
+       :<|> AccountsAdUnitsListResource
+       :<|> AccountsAdUnitsGetResource
+       :<|> AccountsAdUnitsGetAdCodeResource
+       :<|> AccountsUrlChannelsListResource
+       :<|> AccountsCustomChannelsAdUnitsListResource
+       :<|> AccountsCustomChannelsListResource
+       :<|> AccountsCustomChannelsGetResource
        :<|> AccountsSavedadstylesListResource
        :<|> AccountsSavedadstylesGetResource
        :<|> AccountsPaymentsListResource
@@ -474,14 +471,14 @@ type AdSenseAPI =
        :<|> ReportsGenerateResource
        :<|> AlertsListResource
        :<|> AlertsDeleteResource
-       :<|> AdunitsCustomchannelsListResource
-       :<|> AdunitsListResource
-       :<|> AdunitsGetResource
-       :<|> AdunitsGetAdCodeResource
-       :<|> UrlchannelsListResource
-       :<|> CustomchannelsAdunitsListResource
-       :<|> CustomchannelsListResource
-       :<|> CustomchannelsGetResource
+       :<|> AdUnitsCustomChannelsListResource
+       :<|> AdUnitsListResource
+       :<|> AdUnitsGetResource
+       :<|> AdUnitsGetAdCodeResource
+       :<|> UrlChannelsListResource
+       :<|> CustomChannelsAdUnitsListResource
+       :<|> CustomChannelsListResource
+       :<|> CustomChannelsGetResource
        :<|> SavedadstylesListResource
        :<|> SavedadstylesGetResource
        :<|> MetadataMetricsListResource

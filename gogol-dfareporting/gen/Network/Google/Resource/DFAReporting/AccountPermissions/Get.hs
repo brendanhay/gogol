@@ -32,13 +32,12 @@ module Network.Google.Resource.DFAReporting.AccountPermissions.Get
     -- * Request Lenses
     , accQuotaUser
     , accPrettyPrint
-    , accUserIp
+    , accUserIP
     , accProfileId
     , accKey
     , accId
-    , accOauthToken
+    , accOAuthToken
     , accFields
-    , accAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,10 +53,11 @@ type AccountPermissionsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] AccountPermission
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] AccountPermission
 
 -- | Gets one account permission by ID.
 --
@@ -65,13 +65,12 @@ type AccountPermissionsGetResource =
 data AccountPermissionsGet' = AccountPermissionsGet'
     { _accQuotaUser   :: !(Maybe Text)
     , _accPrettyPrint :: !Bool
-    , _accUserIp      :: !(Maybe Text)
+    , _accUserIP      :: !(Maybe Text)
     , _accProfileId   :: !Int64
-    , _accKey         :: !(Maybe Text)
+    , _accKey         :: !(Maybe Key)
     , _accId          :: !Int64
-    , _accOauthToken  :: !(Maybe Text)
+    , _accOAuthToken  :: !(Maybe OAuthToken)
     , _accFields      :: !(Maybe Text)
-    , _accAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountPermissionsGet'' with the minimum fields required to make a request.
@@ -82,7 +81,7 @@ data AccountPermissionsGet' = AccountPermissionsGet'
 --
 -- * 'accPrettyPrint'
 --
--- * 'accUserIp'
+-- * 'accUserIP'
 --
 -- * 'accProfileId'
 --
@@ -90,11 +89,9 @@ data AccountPermissionsGet' = AccountPermissionsGet'
 --
 -- * 'accId'
 --
--- * 'accOauthToken'
+-- * 'accOAuthToken'
 --
 -- * 'accFields'
---
--- * 'accAlt'
 accountPermissionsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
@@ -103,13 +100,12 @@ accountPermissionsGet' pAccProfileId_ pAccId_ =
     AccountPermissionsGet'
     { _accQuotaUser = Nothing
     , _accPrettyPrint = True
-    , _accUserIp = Nothing
+    , _accUserIP = Nothing
     , _accProfileId = pAccProfileId_
     , _accKey = Nothing
     , _accId = pAccId_
-    , _accOauthToken = Nothing
+    , _accOAuthToken = Nothing
     , _accFields = Nothing
-    , _accAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,9 +123,9 @@ accPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-accUserIp :: Lens' AccountPermissionsGet' (Maybe Text)
-accUserIp
-  = lens _accUserIp (\ s a -> s{_accUserIp = a})
+accUserIP :: Lens' AccountPermissionsGet' (Maybe Text)
+accUserIP
+  = lens _accUserIP (\ s a -> s{_accUserIP = a})
 
 -- | User profile ID associated with this request.
 accProfileId :: Lens' AccountPermissionsGet' Int64
@@ -139,7 +135,7 @@ accProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-accKey :: Lens' AccountPermissionsGet' (Maybe Text)
+accKey :: Lens' AccountPermissionsGet' (Maybe Key)
 accKey = lens _accKey (\ s a -> s{_accKey = a})
 
 -- | Account permission ID.
@@ -147,31 +143,31 @@ accId :: Lens' AccountPermissionsGet' Int64
 accId = lens _accId (\ s a -> s{_accId = a})
 
 -- | OAuth 2.0 token for the current user.
-accOauthToken :: Lens' AccountPermissionsGet' (Maybe Text)
-accOauthToken
-  = lens _accOauthToken
-      (\ s a -> s{_accOauthToken = a})
+accOAuthToken :: Lens' AccountPermissionsGet' (Maybe OAuthToken)
+accOAuthToken
+  = lens _accOAuthToken
+      (\ s a -> s{_accOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 accFields :: Lens' AccountPermissionsGet' (Maybe Text)
 accFields
   = lens _accFields (\ s a -> s{_accFields = a})
 
--- | Data format for the response.
-accAlt :: Lens' AccountPermissionsGet' Alt
-accAlt = lens _accAlt (\ s a -> s{_accAlt = a})
+instance GoogleAuth AccountPermissionsGet' where
+        authKey = accKey . _Just
+        authToken = accOAuthToken . _Just
 
 instance GoogleRequest AccountPermissionsGet' where
         type Rs AccountPermissionsGet' = AccountPermission
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AccountPermissionsGet'{..}
-          = go _accQuotaUser (Just _accPrettyPrint) _accUserIp
+          = go _accQuotaUser (Just _accPrettyPrint) _accUserIP
               _accProfileId
               _accKey
               _accId
-              _accOauthToken
+              _accOAuthToken
               _accFields
-              (Just _accAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountPermissionsGetResource)

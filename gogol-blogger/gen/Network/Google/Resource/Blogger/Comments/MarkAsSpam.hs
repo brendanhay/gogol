@@ -32,14 +32,13 @@ module Network.Google.Resource.Blogger.Comments.MarkAsSpam
     -- * Request Lenses
     , cmasQuotaUser
     , cmasPrettyPrint
-    , cmasUserIp
+    , cmasUserIP
     , cmasBlogId
     , cmasKey
     , cmasPostId
-    , cmasOauthToken
+    , cmasOAuthToken
     , cmasCommentId
     , cmasFields
-    , cmasAlt
     ) where
 
 import           Network.Google.Blogger.Types
@@ -58,10 +57,10 @@ type CommentsMarkAsSpamResource =
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :> Post '[JSON] Comment
+                               QueryParam "alt" AltJSON :> Post '[JSON] Comment
 
 -- | Marks a comment as spam.
 --
@@ -69,14 +68,13 @@ type CommentsMarkAsSpamResource =
 data CommentsMarkAsSpam' = CommentsMarkAsSpam'
     { _cmasQuotaUser   :: !(Maybe Text)
     , _cmasPrettyPrint :: !Bool
-    , _cmasUserIp      :: !(Maybe Text)
+    , _cmasUserIP      :: !(Maybe Text)
     , _cmasBlogId      :: !Text
-    , _cmasKey         :: !(Maybe Text)
+    , _cmasKey         :: !(Maybe Key)
     , _cmasPostId      :: !Text
-    , _cmasOauthToken  :: !(Maybe Text)
+    , _cmasOAuthToken  :: !(Maybe OAuthToken)
     , _cmasCommentId   :: !Text
     , _cmasFields      :: !(Maybe Text)
-    , _cmasAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsMarkAsSpam'' with the minimum fields required to make a request.
@@ -87,7 +85,7 @@ data CommentsMarkAsSpam' = CommentsMarkAsSpam'
 --
 -- * 'cmasPrettyPrint'
 --
--- * 'cmasUserIp'
+-- * 'cmasUserIP'
 --
 -- * 'cmasBlogId'
 --
@@ -95,13 +93,11 @@ data CommentsMarkAsSpam' = CommentsMarkAsSpam'
 --
 -- * 'cmasPostId'
 --
--- * 'cmasOauthToken'
+-- * 'cmasOAuthToken'
 --
 -- * 'cmasCommentId'
 --
 -- * 'cmasFields'
---
--- * 'cmasAlt'
 commentsMarkAsSpam'
     :: Text -- ^ 'blogId'
     -> Text -- ^ 'postId'
@@ -111,14 +107,13 @@ commentsMarkAsSpam' pCmasBlogId_ pCmasPostId_ pCmasCommentId_ =
     CommentsMarkAsSpam'
     { _cmasQuotaUser = Nothing
     , _cmasPrettyPrint = True
-    , _cmasUserIp = Nothing
+    , _cmasUserIP = Nothing
     , _cmasBlogId = pCmasBlogId_
     , _cmasKey = Nothing
     , _cmasPostId = pCmasPostId_
-    , _cmasOauthToken = Nothing
+    , _cmasOAuthToken = Nothing
     , _cmasCommentId = pCmasCommentId_
     , _cmasFields = Nothing
-    , _cmasAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -137,9 +132,9 @@ cmasPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cmasUserIp :: Lens' CommentsMarkAsSpam' (Maybe Text)
-cmasUserIp
-  = lens _cmasUserIp (\ s a -> s{_cmasUserIp = a})
+cmasUserIP :: Lens' CommentsMarkAsSpam' (Maybe Text)
+cmasUserIP
+  = lens _cmasUserIP (\ s a -> s{_cmasUserIP = a})
 
 -- | The ID of the Blog.
 cmasBlogId :: Lens' CommentsMarkAsSpam' Text
@@ -149,7 +144,7 @@ cmasBlogId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cmasKey :: Lens' CommentsMarkAsSpam' (Maybe Text)
+cmasKey :: Lens' CommentsMarkAsSpam' (Maybe Key)
 cmasKey = lens _cmasKey (\ s a -> s{_cmasKey = a})
 
 -- | The ID of the Post.
@@ -158,10 +153,10 @@ cmasPostId
   = lens _cmasPostId (\ s a -> s{_cmasPostId = a})
 
 -- | OAuth 2.0 token for the current user.
-cmasOauthToken :: Lens' CommentsMarkAsSpam' (Maybe Text)
-cmasOauthToken
-  = lens _cmasOauthToken
-      (\ s a -> s{_cmasOauthToken = a})
+cmasOAuthToken :: Lens' CommentsMarkAsSpam' (Maybe OAuthToken)
+cmasOAuthToken
+  = lens _cmasOAuthToken
+      (\ s a -> s{_cmasOAuthToken = a})
 
 -- | The ID of the comment to mark as spam.
 cmasCommentId :: Lens' CommentsMarkAsSpam' Text
@@ -174,23 +169,23 @@ cmasFields :: Lens' CommentsMarkAsSpam' (Maybe Text)
 cmasFields
   = lens _cmasFields (\ s a -> s{_cmasFields = a})
 
--- | Data format for the response.
-cmasAlt :: Lens' CommentsMarkAsSpam' Alt
-cmasAlt = lens _cmasAlt (\ s a -> s{_cmasAlt = a})
+instance GoogleAuth CommentsMarkAsSpam' where
+        authKey = cmasKey . _Just
+        authToken = cmasOAuthToken . _Just
 
 instance GoogleRequest CommentsMarkAsSpam' where
         type Rs CommentsMarkAsSpam' = Comment
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u CommentsMarkAsSpam'{..}
           = go _cmasQuotaUser (Just _cmasPrettyPrint)
-              _cmasUserIp
+              _cmasUserIP
               _cmasBlogId
               _cmasKey
               _cmasPostId
-              _cmasOauthToken
+              _cmasOAuthToken
               _cmasCommentId
               _cmasFields
-              (Just _cmasAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CommentsMarkAsSpamResource)

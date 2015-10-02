@@ -65,10 +65,10 @@ instance ToJSON ReconcileGetCosts where
 --
 -- /See:/ 'reconcileGet' smart constructor.
 data ReconcileGet = ReconcileGet
-    { _rgCandidate :: !(Maybe [Maybe ReconcileCandidate])
+    { _rgCandidate :: !(Maybe [ReconcileCandidate])
     , _rgCosts     :: !(Maybe ReconcileGetCosts)
     , _rgWarning   :: !(Maybe [ReconcileGetWarning])
-    , _rgMatch     :: !(Maybe (Maybe ReconcileCandidate))
+    , _rgMatch     :: !(Maybe ReconcileCandidate)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReconcileGet' with the minimum fields required to make a request.
@@ -95,7 +95,7 @@ reconcileGet =
 -- | If filled, then the listed candidates are potential matches, and such
 -- should be evaluated by a more discerning algorithm or human. The matches
 -- are ordered by confidence.
-rgCandidate :: Lens' ReconcileGet [Maybe ReconcileCandidate]
+rgCandidate :: Lens' ReconcileGet [ReconcileCandidate]
 rgCandidate
   = lens _rgCandidate (\ s a -> s{_rgCandidate = a}) .
       _Default
@@ -119,7 +119,7 @@ rgWarning
 
 -- | If filled, this entity is guaranteed to match at requested confidence
 -- probability (default 99%).
-rgMatch :: Lens' ReconcileGet (Maybe (Maybe ReconcileCandidate))
+rgMatch :: Lens' ReconcileGet (Maybe ReconcileCandidate)
 rgMatch = lens _rgMatch (\ s a -> s{_rgMatch = a})
 
 instance FromJSON ReconcileGet where

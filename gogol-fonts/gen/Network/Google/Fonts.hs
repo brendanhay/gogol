@@ -55,9 +55,6 @@ module Network.Google.Fonts
     -- ** WebfontFiles
     , WebfontFiles
     , webfontFiles
-
-    -- ** Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.Fonts.Types

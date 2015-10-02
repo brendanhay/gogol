@@ -32,12 +32,13 @@ module Network.Google.Resource.Gmail.Users.Drafts.Create
     -- * Request Lenses
     , udcQuotaUser
     , udcPrettyPrint
-    , udcUserIp
+    , udcUserIP
     , udcUserId
+    , udcMedia
     , udcKey
-    , udcOauthToken
+    , udcDraft
+    , udcOAuthToken
     , udcFields
-    , udcAlt
     ) where
 
 import           Network.Google.Gmail.Types
@@ -51,10 +52,12 @@ type UsersDraftsCreateResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Post '[JSON] Draft
+                     QueryParam "alt" AltJSON :>
+                       MultipartRelated '[JSON] Draft Body :>
+                         Post '[JSON] Draft
 
 -- | Creates a new draft with the DRAFT label.
 --
@@ -62,12 +65,13 @@ type UsersDraftsCreateResource =
 data UsersDraftsCreate' = UsersDraftsCreate'
     { _udcQuotaUser   :: !(Maybe Text)
     , _udcPrettyPrint :: !Bool
-    , _udcUserIp      :: !(Maybe Text)
+    , _udcUserIP      :: !(Maybe Text)
     , _udcUserId      :: !Text
-    , _udcKey         :: !(Maybe Text)
-    , _udcOauthToken  :: !(Maybe Text)
+    , _udcMedia       :: !Body
+    , _udcKey         :: !(Maybe Key)
+    , _udcDraft       :: !Draft
+    , _udcOAuthToken  :: !(Maybe OAuthToken)
     , _udcFields      :: !(Maybe Text)
-    , _udcAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDraftsCreate'' with the minimum fields required to make a request.
@@ -78,30 +82,35 @@ data UsersDraftsCreate' = UsersDraftsCreate'
 --
 -- * 'udcPrettyPrint'
 --
--- * 'udcUserIp'
+-- * 'udcUserIP'
 --
 -- * 'udcUserId'
 --
+-- * 'udcMedia'
+--
 -- * 'udcKey'
 --
--- * 'udcOauthToken'
+-- * 'udcDraft'
+--
+-- * 'udcOAuthToken'
 --
 -- * 'udcFields'
---
--- * 'udcAlt'
 usersDraftsCreate'
-    :: Text
+    :: Text -- ^ 'media'
+    -> Body -- ^ 'Draft'
+    -> Draft
     -> UsersDraftsCreate'
-usersDraftsCreate' pUdcUserId_ =
+usersDraftsCreate' pUdcUserId_ pUdcMedia_ pUdcDraft_ =
     UsersDraftsCreate'
     { _udcQuotaUser = Nothing
     , _udcPrettyPrint = True
-    , _udcUserIp = Nothing
+    , _udcUserIP = Nothing
     , _udcUserId = pUdcUserId_
+    , _udcMedia = pUdcMedia_
     , _udcKey = Nothing
-    , _udcOauthToken = Nothing
+    , _udcDraft = pUdcDraft_
+    , _udcOAuthToken = Nothing
     , _udcFields = Nothing
-    , _udcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -119,9 +128,9 @@ udcPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-udcUserIp :: Lens' UsersDraftsCreate' (Maybe Text)
-udcUserIp
-  = lens _udcUserIp (\ s a -> s{_udcUserIp = a})
+udcUserIP :: Lens' UsersDraftsCreate' (Maybe Text)
+udcUserIP
+  = lens _udcUserIP (\ s a -> s{_udcUserIP = a})
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
@@ -129,37 +138,46 @@ udcUserId :: Lens' UsersDraftsCreate' Text
 udcUserId
   = lens _udcUserId (\ s a -> s{_udcUserId = a})
 
+udcMedia :: Lens' UsersDraftsCreate' Body
+udcMedia = lens _udcMedia (\ s a -> s{_udcMedia = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-udcKey :: Lens' UsersDraftsCreate' (Maybe Text)
+udcKey :: Lens' UsersDraftsCreate' (Maybe Key)
 udcKey = lens _udcKey (\ s a -> s{_udcKey = a})
 
+-- | Multipart request metadata.
+udcDraft :: Lens' UsersDraftsCreate' Draft
+udcDraft = lens _udcDraft (\ s a -> s{_udcDraft = a})
+
 -- | OAuth 2.0 token for the current user.
-udcOauthToken :: Lens' UsersDraftsCreate' (Maybe Text)
-udcOauthToken
-  = lens _udcOauthToken
-      (\ s a -> s{_udcOauthToken = a})
+udcOAuthToken :: Lens' UsersDraftsCreate' (Maybe OAuthToken)
+udcOAuthToken
+  = lens _udcOAuthToken
+      (\ s a -> s{_udcOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 udcFields :: Lens' UsersDraftsCreate' (Maybe Text)
 udcFields
   = lens _udcFields (\ s a -> s{_udcFields = a})
 
--- | Data format for the response.
-udcAlt :: Lens' UsersDraftsCreate' Alt
-udcAlt = lens _udcAlt (\ s a -> s{_udcAlt = a})
+instance GoogleAuth UsersDraftsCreate' where
+        authKey = udcKey . _Just
+        authToken = udcOAuthToken . _Just
 
 instance GoogleRequest UsersDraftsCreate' where
         type Rs UsersDraftsCreate' = Draft
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersDraftsCreate'{..}
-          = go _udcQuotaUser (Just _udcPrettyPrint) _udcUserIp
+          = go _udcQuotaUser (Just _udcPrettyPrint) _udcUserIP
               _udcUserId
+              _udcMedia
               _udcKey
-              _udcOauthToken
+              _udcOAuthToken
               _udcFields
-              (Just _udcAlt)
+              (Just AltJSON)
+              _udcDraft
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersDraftsCreateResource)

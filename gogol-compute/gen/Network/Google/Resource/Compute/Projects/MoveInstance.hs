@@ -34,11 +34,11 @@ module Network.Google.Resource.Compute.Projects.MoveInstance
     , pmiQuotaUser
     , pmiPrettyPrint
     , pmiProject
-    , pmiUserIp
+    , pmiUserIP
     , pmiKey
-    , pmiOauthToken
+    , pmiOAuthToken
+    , pmiInstanceMoveRequest
     , pmiFields
-    , pmiAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -52,24 +52,26 @@ type ProjectsMoveInstanceResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Post '[JSON] Operation
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] InstanceMoveRequest :>
+                         Post '[JSON] Operation
 
 -- | Moves an instance and its attached persistent disks from one zone to
 -- another.
 --
 -- /See:/ 'projectsMoveInstance'' smart constructor.
 data ProjectsMoveInstance' = ProjectsMoveInstance'
-    { _pmiQuotaUser   :: !(Maybe Text)
-    , _pmiPrettyPrint :: !Bool
-    , _pmiProject     :: !Text
-    , _pmiUserIp      :: !(Maybe Text)
-    , _pmiKey         :: !(Maybe Text)
-    , _pmiOauthToken  :: !(Maybe Text)
-    , _pmiFields      :: !(Maybe Text)
-    , _pmiAlt         :: !Alt
+    { _pmiQuotaUser           :: !(Maybe Text)
+    , _pmiPrettyPrint         :: !Bool
+    , _pmiProject             :: !Text
+    , _pmiUserIP              :: !(Maybe Text)
+    , _pmiKey                 :: !(Maybe Key)
+    , _pmiOAuthToken          :: !(Maybe OAuthToken)
+    , _pmiInstanceMoveRequest :: !InstanceMoveRequest
+    , _pmiFields              :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsMoveInstance'' with the minimum fields required to make a request.
@@ -82,28 +84,29 @@ data ProjectsMoveInstance' = ProjectsMoveInstance'
 --
 -- * 'pmiProject'
 --
--- * 'pmiUserIp'
+-- * 'pmiUserIP'
 --
 -- * 'pmiKey'
 --
--- * 'pmiOauthToken'
+-- * 'pmiOAuthToken'
+--
+-- * 'pmiInstanceMoveRequest'
 --
 -- * 'pmiFields'
---
--- * 'pmiAlt'
 projectsMoveInstance'
     :: Text -- ^ 'project'
+    -> InstanceMoveRequest -- ^ 'InstanceMoveRequest'
     -> ProjectsMoveInstance'
-projectsMoveInstance' pPmiProject_ =
+projectsMoveInstance' pPmiProject_ pPmiInstanceMoveRequest_ =
     ProjectsMoveInstance'
     { _pmiQuotaUser = Nothing
     , _pmiPrettyPrint = True
     , _pmiProject = pPmiProject_
-    , _pmiUserIp = Nothing
+    , _pmiUserIP = Nothing
     , _pmiKey = Nothing
-    , _pmiOauthToken = Nothing
+    , _pmiOAuthToken = Nothing
+    , _pmiInstanceMoveRequest = pPmiInstanceMoveRequest_
     , _pmiFields = Nothing
-    , _pmiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -126,41 +129,48 @@ pmiProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-pmiUserIp :: Lens' ProjectsMoveInstance' (Maybe Text)
-pmiUserIp
-  = lens _pmiUserIp (\ s a -> s{_pmiUserIp = a})
+pmiUserIP :: Lens' ProjectsMoveInstance' (Maybe Text)
+pmiUserIP
+  = lens _pmiUserIP (\ s a -> s{_pmiUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pmiKey :: Lens' ProjectsMoveInstance' (Maybe Text)
+pmiKey :: Lens' ProjectsMoveInstance' (Maybe Key)
 pmiKey = lens _pmiKey (\ s a -> s{_pmiKey = a})
 
 -- | OAuth 2.0 token for the current user.
-pmiOauthToken :: Lens' ProjectsMoveInstance' (Maybe Text)
-pmiOauthToken
-  = lens _pmiOauthToken
-      (\ s a -> s{_pmiOauthToken = a})
+pmiOAuthToken :: Lens' ProjectsMoveInstance' (Maybe OAuthToken)
+pmiOAuthToken
+  = lens _pmiOAuthToken
+      (\ s a -> s{_pmiOAuthToken = a})
+
+-- | Multipart request metadata.
+pmiInstanceMoveRequest :: Lens' ProjectsMoveInstance' InstanceMoveRequest
+pmiInstanceMoveRequest
+  = lens _pmiInstanceMoveRequest
+      (\ s a -> s{_pmiInstanceMoveRequest = a})
 
 -- | Selector specifying which fields to include in a partial response.
 pmiFields :: Lens' ProjectsMoveInstance' (Maybe Text)
 pmiFields
   = lens _pmiFields (\ s a -> s{_pmiFields = a})
 
--- | Data format for the response.
-pmiAlt :: Lens' ProjectsMoveInstance' Alt
-pmiAlt = lens _pmiAlt (\ s a -> s{_pmiAlt = a})
+instance GoogleAuth ProjectsMoveInstance' where
+        authKey = pmiKey . _Just
+        authToken = pmiOAuthToken . _Just
 
 instance GoogleRequest ProjectsMoveInstance' where
         type Rs ProjectsMoveInstance' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u ProjectsMoveInstance'{..}
           = go _pmiQuotaUser (Just _pmiPrettyPrint) _pmiProject
-              _pmiUserIp
+              _pmiUserIP
               _pmiKey
-              _pmiOauthToken
+              _pmiOAuthToken
               _pmiFields
-              (Just _pmiAlt)
+              (Just AltJSON)
+              _pmiInstanceMoveRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsMoveInstanceResource)

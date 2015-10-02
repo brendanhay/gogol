@@ -33,14 +33,13 @@ module Network.Google.Resource.Blogger.Posts.GetByPath
     , pgbpQuotaUser
     , pgbpPrettyPrint
     , pgbpPath
-    , pgbpUserIp
+    , pgbpUserIP
     , pgbpBlogId
     , pgbpMaxComments
     , pgbpKey
     , pgbpView
-    , pgbpOauthToken
+    , pgbpOAuthToken
     , pgbpFields
-    , pgbpAlt
     ) where
 
 import           Network.Google.Blogger.Types
@@ -58,11 +57,11 @@ type PostsGetByPathResource =
                  QueryParam "path" Text :>
                    QueryParam "userIp" Text :>
                      QueryParam "maxComments" Word32 :>
-                       QueryParam "key" Text :>
+                       QueryParam "key" Key :>
                          QueryParam "view" BloggerPostsGetByPathView :>
-                           QueryParam "oauth_token" Text :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :> Get '[JSON] Post
+                               QueryParam "alt" AltJSON :> Get '[JSON] Post
 
 -- | Retrieve a Post by Path.
 --
@@ -71,14 +70,13 @@ data PostsGetByPath' = PostsGetByPath'
     { _pgbpQuotaUser   :: !(Maybe Text)
     , _pgbpPrettyPrint :: !Bool
     , _pgbpPath        :: !Text
-    , _pgbpUserIp      :: !(Maybe Text)
+    , _pgbpUserIP      :: !(Maybe Text)
     , _pgbpBlogId      :: !Text
     , _pgbpMaxComments :: !(Maybe Word32)
-    , _pgbpKey         :: !(Maybe Text)
+    , _pgbpKey         :: !(Maybe Key)
     , _pgbpView        :: !(Maybe BloggerPostsGetByPathView)
-    , _pgbpOauthToken  :: !(Maybe Text)
+    , _pgbpOAuthToken  :: !(Maybe OAuthToken)
     , _pgbpFields      :: !(Maybe Text)
-    , _pgbpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostsGetByPath'' with the minimum fields required to make a request.
@@ -91,7 +89,7 @@ data PostsGetByPath' = PostsGetByPath'
 --
 -- * 'pgbpPath'
 --
--- * 'pgbpUserIp'
+-- * 'pgbpUserIP'
 --
 -- * 'pgbpBlogId'
 --
@@ -101,11 +99,9 @@ data PostsGetByPath' = PostsGetByPath'
 --
 -- * 'pgbpView'
 --
--- * 'pgbpOauthToken'
+-- * 'pgbpOAuthToken'
 --
 -- * 'pgbpFields'
---
--- * 'pgbpAlt'
 postsGetByPath'
     :: Text -- ^ 'path'
     -> Text -- ^ 'blogId'
@@ -115,14 +111,13 @@ postsGetByPath' pPgbpPath_ pPgbpBlogId_ =
     { _pgbpQuotaUser = Nothing
     , _pgbpPrettyPrint = True
     , _pgbpPath = pPgbpPath_
-    , _pgbpUserIp = Nothing
+    , _pgbpUserIP = Nothing
     , _pgbpBlogId = pPgbpBlogId_
     , _pgbpMaxComments = Nothing
     , _pgbpKey = Nothing
     , _pgbpView = Nothing
-    , _pgbpOauthToken = Nothing
+    , _pgbpOAuthToken = Nothing
     , _pgbpFields = Nothing
-    , _pgbpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -145,9 +140,9 @@ pgbpPath = lens _pgbpPath (\ s a -> s{_pgbpPath = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-pgbpUserIp :: Lens' PostsGetByPath' (Maybe Text)
-pgbpUserIp
-  = lens _pgbpUserIp (\ s a -> s{_pgbpUserIp = a})
+pgbpUserIP :: Lens' PostsGetByPath' (Maybe Text)
+pgbpUserIP
+  = lens _pgbpUserIP (\ s a -> s{_pgbpUserIP = a})
 
 -- | ID of the blog to fetch the post from.
 pgbpBlogId :: Lens' PostsGetByPath' Text
@@ -163,7 +158,7 @@ pgbpMaxComments
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pgbpKey :: Lens' PostsGetByPath' (Maybe Text)
+pgbpKey :: Lens' PostsGetByPath' (Maybe Key)
 pgbpKey = lens _pgbpKey (\ s a -> s{_pgbpKey = a})
 
 -- | Access level with which to view the returned result. Note that some
@@ -172,19 +167,19 @@ pgbpView :: Lens' PostsGetByPath' (Maybe BloggerPostsGetByPathView)
 pgbpView = lens _pgbpView (\ s a -> s{_pgbpView = a})
 
 -- | OAuth 2.0 token for the current user.
-pgbpOauthToken :: Lens' PostsGetByPath' (Maybe Text)
-pgbpOauthToken
-  = lens _pgbpOauthToken
-      (\ s a -> s{_pgbpOauthToken = a})
+pgbpOAuthToken :: Lens' PostsGetByPath' (Maybe OAuthToken)
+pgbpOAuthToken
+  = lens _pgbpOAuthToken
+      (\ s a -> s{_pgbpOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 pgbpFields :: Lens' PostsGetByPath' (Maybe Text)
 pgbpFields
   = lens _pgbpFields (\ s a -> s{_pgbpFields = a})
 
--- | Data format for the response.
-pgbpAlt :: Lens' PostsGetByPath' Alt
-pgbpAlt = lens _pgbpAlt (\ s a -> s{_pgbpAlt = a})
+instance GoogleAuth PostsGetByPath' where
+        authKey = pgbpKey . _Just
+        authToken = pgbpOAuthToken . _Just
 
 instance GoogleRequest PostsGetByPath' where
         type Rs PostsGetByPath' = Post
@@ -192,14 +187,14 @@ instance GoogleRequest PostsGetByPath' where
         requestWithRoute r u PostsGetByPath'{..}
           = go _pgbpQuotaUser (Just _pgbpPrettyPrint)
               (Just _pgbpPath)
-              _pgbpUserIp
+              _pgbpUserIP
               _pgbpBlogId
               _pgbpMaxComments
               _pgbpKey
               _pgbpView
-              _pgbpOauthToken
+              _pgbpOAuthToken
               _pgbpFields
-              (Just _pgbpAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PostsGetByPathResource)

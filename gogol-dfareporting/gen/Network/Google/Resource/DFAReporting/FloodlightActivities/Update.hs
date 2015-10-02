@@ -32,12 +32,12 @@ module Network.Google.Resource.DFAReporting.FloodlightActivities.Update
     -- * Request Lenses
     , fauQuotaUser
     , fauPrettyPrint
-    , fauUserIp
+    , fauUserIP
     , fauProfileId
     , fauKey
-    , fauOauthToken
+    , fauFloodlightActivity
+    , fauOAuthToken
     , fauFields
-    , fauAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,24 +52,25 @@ type FloodlightActivitiesUpdateResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :>
-                         Put '[JSON] FloodlightActivity
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] FloodlightActivity :>
+                           Put '[JSON] FloodlightActivity
 
 -- | Updates an existing floodlight activity.
 --
 -- /See:/ 'floodlightActivitiesUpdate'' smart constructor.
 data FloodlightActivitiesUpdate' = FloodlightActivitiesUpdate'
-    { _fauQuotaUser   :: !(Maybe Text)
-    , _fauPrettyPrint :: !Bool
-    , _fauUserIp      :: !(Maybe Text)
-    , _fauProfileId   :: !Int64
-    , _fauKey         :: !(Maybe Text)
-    , _fauOauthToken  :: !(Maybe Text)
-    , _fauFields      :: !(Maybe Text)
-    , _fauAlt         :: !Alt
+    { _fauQuotaUser          :: !(Maybe Text)
+    , _fauPrettyPrint        :: !Bool
+    , _fauUserIP             :: !(Maybe Text)
+    , _fauProfileId          :: !Int64
+    , _fauKey                :: !(Maybe Key)
+    , _fauFloodlightActivity :: !FloodlightActivity
+    , _fauOAuthToken         :: !(Maybe OAuthToken)
+    , _fauFields             :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivitiesUpdate'' with the minimum fields required to make a request.
@@ -80,30 +81,31 @@ data FloodlightActivitiesUpdate' = FloodlightActivitiesUpdate'
 --
 -- * 'fauPrettyPrint'
 --
--- * 'fauUserIp'
+-- * 'fauUserIP'
 --
 -- * 'fauProfileId'
 --
 -- * 'fauKey'
 --
--- * 'fauOauthToken'
+-- * 'fauFloodlightActivity'
+--
+-- * 'fauOAuthToken'
 --
 -- * 'fauFields'
---
--- * 'fauAlt'
 floodlightActivitiesUpdate'
     :: Int64 -- ^ 'profileId'
+    -> FloodlightActivity -- ^ 'FloodlightActivity'
     -> FloodlightActivitiesUpdate'
-floodlightActivitiesUpdate' pFauProfileId_ =
+floodlightActivitiesUpdate' pFauProfileId_ pFauFloodlightActivity_ =
     FloodlightActivitiesUpdate'
     { _fauQuotaUser = Nothing
     , _fauPrettyPrint = True
-    , _fauUserIp = Nothing
+    , _fauUserIP = Nothing
     , _fauProfileId = pFauProfileId_
     , _fauKey = Nothing
-    , _fauOauthToken = Nothing
+    , _fauFloodlightActivity = pFauFloodlightActivity_
+    , _fauOAuthToken = Nothing
     , _fauFields = Nothing
-    , _fauAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -121,9 +123,9 @@ fauPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-fauUserIp :: Lens' FloodlightActivitiesUpdate' (Maybe Text)
-fauUserIp
-  = lens _fauUserIp (\ s a -> s{_fauUserIp = a})
+fauUserIP :: Lens' FloodlightActivitiesUpdate' (Maybe Text)
+fauUserIP
+  = lens _fauUserIP (\ s a -> s{_fauUserIP = a})
 
 -- | User profile ID associated with this request.
 fauProfileId :: Lens' FloodlightActivitiesUpdate' Int64
@@ -133,23 +135,29 @@ fauProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fauKey :: Lens' FloodlightActivitiesUpdate' (Maybe Text)
+fauKey :: Lens' FloodlightActivitiesUpdate' (Maybe Key)
 fauKey = lens _fauKey (\ s a -> s{_fauKey = a})
 
+-- | Multipart request metadata.
+fauFloodlightActivity :: Lens' FloodlightActivitiesUpdate' FloodlightActivity
+fauFloodlightActivity
+  = lens _fauFloodlightActivity
+      (\ s a -> s{_fauFloodlightActivity = a})
+
 -- | OAuth 2.0 token for the current user.
-fauOauthToken :: Lens' FloodlightActivitiesUpdate' (Maybe Text)
-fauOauthToken
-  = lens _fauOauthToken
-      (\ s a -> s{_fauOauthToken = a})
+fauOAuthToken :: Lens' FloodlightActivitiesUpdate' (Maybe OAuthToken)
+fauOAuthToken
+  = lens _fauOAuthToken
+      (\ s a -> s{_fauOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 fauFields :: Lens' FloodlightActivitiesUpdate' (Maybe Text)
 fauFields
   = lens _fauFields (\ s a -> s{_fauFields = a})
 
--- | Data format for the response.
-fauAlt :: Lens' FloodlightActivitiesUpdate' Alt
-fauAlt = lens _fauAlt (\ s a -> s{_fauAlt = a})
+instance GoogleAuth FloodlightActivitiesUpdate' where
+        authKey = fauKey . _Just
+        authToken = fauOAuthToken . _Just
 
 instance GoogleRequest FloodlightActivitiesUpdate'
          where
@@ -157,12 +165,13 @@ instance GoogleRequest FloodlightActivitiesUpdate'
              FloodlightActivity
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u FloodlightActivitiesUpdate'{..}
-          = go _fauQuotaUser (Just _fauPrettyPrint) _fauUserIp
+          = go _fauQuotaUser (Just _fauPrettyPrint) _fauUserIP
               _fauProfileId
               _fauKey
-              _fauOauthToken
+              _fauOAuthToken
               _fauFields
-              (Just _fauAlt)
+              (Just AltJSON)
+              _fauFloodlightActivity
           where go
                   = clientWithRoute
                       (Proxy :: Proxy FloodlightActivitiesUpdateResource)

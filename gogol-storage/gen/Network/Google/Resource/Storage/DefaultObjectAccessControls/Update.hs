@@ -32,13 +32,13 @@ module Network.Google.Resource.Storage.DefaultObjectAccessControls.Update
     -- * Request Lenses
     , doacuQuotaUser
     , doacuPrettyPrint
-    , doacuUserIp
+    , doacuUserIP
     , doacuBucket
     , doacuKey
-    , doacuOauthToken
+    , doacuOAuthToken
     , doacuEntity
+    , doacuObjectAccessControl
     , doacuFields
-    , doacuAlt
     ) where
 
 import           Network.Google.Prelude
@@ -54,25 +54,26 @@ type DefaultObjectAccessControlsUpdateResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :>
-                           Put '[JSON] ObjectAccessControl
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] ObjectAccessControl :>
+                             Put '[JSON] ObjectAccessControl
 
 -- | Updates a default object ACL entry on the specified bucket.
 --
 -- /See:/ 'defaultObjectAccessControlsUpdate'' smart constructor.
 data DefaultObjectAccessControlsUpdate' = DefaultObjectAccessControlsUpdate'
-    { _doacuQuotaUser   :: !(Maybe Text)
-    , _doacuPrettyPrint :: !Bool
-    , _doacuUserIp      :: !(Maybe Text)
-    , _doacuBucket      :: !Text
-    , _doacuKey         :: !(Maybe Text)
-    , _doacuOauthToken  :: !(Maybe Text)
-    , _doacuEntity      :: !Text
-    , _doacuFields      :: !(Maybe Text)
-    , _doacuAlt         :: !Alt
+    { _doacuQuotaUser           :: !(Maybe Text)
+    , _doacuPrettyPrint         :: !Bool
+    , _doacuUserIP              :: !(Maybe Text)
+    , _doacuBucket              :: !Text
+    , _doacuKey                 :: !(Maybe Key)
+    , _doacuOAuthToken          :: !(Maybe OAuthToken)
+    , _doacuEntity              :: !Text
+    , _doacuObjectAccessControl :: !ObjectAccessControl
+    , _doacuFields              :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DefaultObjectAccessControlsUpdate'' with the minimum fields required to make a request.
@@ -83,34 +84,35 @@ data DefaultObjectAccessControlsUpdate' = DefaultObjectAccessControlsUpdate'
 --
 -- * 'doacuPrettyPrint'
 --
--- * 'doacuUserIp'
+-- * 'doacuUserIP'
 --
 -- * 'doacuBucket'
 --
 -- * 'doacuKey'
 --
--- * 'doacuOauthToken'
+-- * 'doacuOAuthToken'
 --
 -- * 'doacuEntity'
 --
--- * 'doacuFields'
+-- * 'doacuObjectAccessControl'
 --
--- * 'doacuAlt'
+-- * 'doacuFields'
 defaultObjectAccessControlsUpdate'
     :: Text -- ^ 'bucket'
     -> Text -- ^ 'entity'
+    -> ObjectAccessControl -- ^ 'ObjectAccessControl'
     -> DefaultObjectAccessControlsUpdate'
-defaultObjectAccessControlsUpdate' pDoacuBucket_ pDoacuEntity_ =
+defaultObjectAccessControlsUpdate' pDoacuBucket_ pDoacuEntity_ pDoacuObjectAccessControl_ =
     DefaultObjectAccessControlsUpdate'
     { _doacuQuotaUser = Nothing
     , _doacuPrettyPrint = True
-    , _doacuUserIp = Nothing
+    , _doacuUserIP = Nothing
     , _doacuBucket = pDoacuBucket_
     , _doacuKey = Nothing
-    , _doacuOauthToken = Nothing
+    , _doacuOAuthToken = Nothing
     , _doacuEntity = pDoacuEntity_
+    , _doacuObjectAccessControl = pDoacuObjectAccessControl_
     , _doacuFields = Nothing
-    , _doacuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -129,9 +131,9 @@ doacuPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-doacuUserIp :: Lens' DefaultObjectAccessControlsUpdate' (Maybe Text)
-doacuUserIp
-  = lens _doacuUserIp (\ s a -> s{_doacuUserIp = a})
+doacuUserIP :: Lens' DefaultObjectAccessControlsUpdate' (Maybe Text)
+doacuUserIP
+  = lens _doacuUserIP (\ s a -> s{_doacuUserIP = a})
 
 -- | Name of a bucket.
 doacuBucket :: Lens' DefaultObjectAccessControlsUpdate' Text
@@ -141,14 +143,14 @@ doacuBucket
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-doacuKey :: Lens' DefaultObjectAccessControlsUpdate' (Maybe Text)
+doacuKey :: Lens' DefaultObjectAccessControlsUpdate' (Maybe Key)
 doacuKey = lens _doacuKey (\ s a -> s{_doacuKey = a})
 
 -- | OAuth 2.0 token for the current user.
-doacuOauthToken :: Lens' DefaultObjectAccessControlsUpdate' (Maybe Text)
-doacuOauthToken
-  = lens _doacuOauthToken
-      (\ s a -> s{_doacuOauthToken = a})
+doacuOAuthToken :: Lens' DefaultObjectAccessControlsUpdate' (Maybe OAuthToken)
+doacuOAuthToken
+  = lens _doacuOAuthToken
+      (\ s a -> s{_doacuOAuthToken = a})
 
 -- | The entity holding the permission. Can be user-userId,
 -- user-emailAddress, group-groupId, group-emailAddress, allUsers, or
@@ -157,14 +159,21 @@ doacuEntity :: Lens' DefaultObjectAccessControlsUpdate' Text
 doacuEntity
   = lens _doacuEntity (\ s a -> s{_doacuEntity = a})
 
+-- | Multipart request metadata.
+doacuObjectAccessControl :: Lens' DefaultObjectAccessControlsUpdate' ObjectAccessControl
+doacuObjectAccessControl
+  = lens _doacuObjectAccessControl
+      (\ s a -> s{_doacuObjectAccessControl = a})
+
 -- | Selector specifying which fields to include in a partial response.
 doacuFields :: Lens' DefaultObjectAccessControlsUpdate' (Maybe Text)
 doacuFields
   = lens _doacuFields (\ s a -> s{_doacuFields = a})
 
--- | Data format for the response.
-doacuAlt :: Lens' DefaultObjectAccessControlsUpdate' Alt
-doacuAlt = lens _doacuAlt (\ s a -> s{_doacuAlt = a})
+instance GoogleAuth
+         DefaultObjectAccessControlsUpdate' where
+        authKey = doacuKey . _Just
+        authToken = doacuOAuthToken . _Just
 
 instance GoogleRequest
          DefaultObjectAccessControlsUpdate' where
@@ -174,13 +183,14 @@ instance GoogleRequest
         requestWithRoute r u
           DefaultObjectAccessControlsUpdate'{..}
           = go _doacuQuotaUser (Just _doacuPrettyPrint)
-              _doacuUserIp
+              _doacuUserIP
               _doacuBucket
               _doacuKey
-              _doacuOauthToken
+              _doacuOAuthToken
               _doacuEntity
               _doacuFields
-              (Just _doacuAlt)
+              (Just AltJSON)
+              _doacuObjectAccessControl
           where go
                   = clientWithRoute
                       (Proxy ::

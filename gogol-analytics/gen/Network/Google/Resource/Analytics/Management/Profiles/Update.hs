@@ -33,13 +33,13 @@ module Network.Google.Resource.Analytics.Management.Profiles.Update
     , mpuQuotaUser
     , mpuPrettyPrint
     , mpuWebPropertyId
-    , mpuUserIp
+    , mpuUserIP
+    , mpuProfile
     , mpuProfileId
     , mpuAccountId
     , mpuKey
-    , mpuOauthToken
+    , mpuOAuthToken
     , mpuFields
-    , mpuAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -58,10 +58,11 @@ type ManagementProfilesUpdateResource =
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :> Put '[JSON] Profile
+                               QueryParam "alt" AltJSON :>
+                                 ReqBody '[JSON] Profile :> Put '[JSON] Profile
 
 -- | Updates an existing view (profile).
 --
@@ -70,13 +71,13 @@ data ManagementProfilesUpdate' = ManagementProfilesUpdate'
     { _mpuQuotaUser     :: !(Maybe Text)
     , _mpuPrettyPrint   :: !Bool
     , _mpuWebPropertyId :: !Text
-    , _mpuUserIp        :: !(Maybe Text)
+    , _mpuUserIP        :: !(Maybe Text)
+    , _mpuProfile       :: !Profile
     , _mpuProfileId     :: !Text
     , _mpuAccountId     :: !Text
-    , _mpuKey           :: !(Maybe Text)
-    , _mpuOauthToken    :: !(Maybe Text)
+    , _mpuKey           :: !(Maybe Key)
+    , _mpuOAuthToken    :: !(Maybe OAuthToken)
     , _mpuFields        :: !(Maybe Text)
-    , _mpuAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProfilesUpdate'' with the minimum fields required to make a request.
@@ -89,7 +90,9 @@ data ManagementProfilesUpdate' = ManagementProfilesUpdate'
 --
 -- * 'mpuWebPropertyId'
 --
--- * 'mpuUserIp'
+-- * 'mpuUserIP'
+--
+-- * 'mpuProfile'
 --
 -- * 'mpuProfileId'
 --
@@ -97,28 +100,27 @@ data ManagementProfilesUpdate' = ManagementProfilesUpdate'
 --
 -- * 'mpuKey'
 --
--- * 'mpuOauthToken'
+-- * 'mpuOAuthToken'
 --
 -- * 'mpuFields'
---
--- * 'mpuAlt'
 managementProfilesUpdate'
     :: Text -- ^ 'webPropertyId'
+    -> Profile -- ^ 'Profile'
     -> Text -- ^ 'profileId'
     -> Text -- ^ 'accountId'
     -> ManagementProfilesUpdate'
-managementProfilesUpdate' pMpuWebPropertyId_ pMpuProfileId_ pMpuAccountId_ =
+managementProfilesUpdate' pMpuWebPropertyId_ pMpuProfile_ pMpuProfileId_ pMpuAccountId_ =
     ManagementProfilesUpdate'
     { _mpuQuotaUser = Nothing
     , _mpuPrettyPrint = False
     , _mpuWebPropertyId = pMpuWebPropertyId_
-    , _mpuUserIp = Nothing
+    , _mpuUserIP = Nothing
+    , _mpuProfile = pMpuProfile_
     , _mpuProfileId = pMpuProfileId_
     , _mpuAccountId = pMpuAccountId_
     , _mpuKey = Nothing
-    , _mpuOauthToken = Nothing
+    , _mpuOAuthToken = Nothing
     , _mpuFields = Nothing
-    , _mpuAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -142,9 +144,14 @@ mpuWebPropertyId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mpuUserIp :: Lens' ManagementProfilesUpdate' (Maybe Text)
-mpuUserIp
-  = lens _mpuUserIp (\ s a -> s{_mpuUserIp = a})
+mpuUserIP :: Lens' ManagementProfilesUpdate' (Maybe Text)
+mpuUserIP
+  = lens _mpuUserIP (\ s a -> s{_mpuUserIP = a})
+
+-- | Multipart request metadata.
+mpuProfile :: Lens' ManagementProfilesUpdate' Profile
+mpuProfile
+  = lens _mpuProfile (\ s a -> s{_mpuProfile = a})
 
 -- | ID of the view (profile) to be updated.
 mpuProfileId :: Lens' ManagementProfilesUpdate' Text
@@ -159,23 +166,23 @@ mpuAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mpuKey :: Lens' ManagementProfilesUpdate' (Maybe Text)
+mpuKey :: Lens' ManagementProfilesUpdate' (Maybe Key)
 mpuKey = lens _mpuKey (\ s a -> s{_mpuKey = a})
 
 -- | OAuth 2.0 token for the current user.
-mpuOauthToken :: Lens' ManagementProfilesUpdate' (Maybe Text)
-mpuOauthToken
-  = lens _mpuOauthToken
-      (\ s a -> s{_mpuOauthToken = a})
+mpuOAuthToken :: Lens' ManagementProfilesUpdate' (Maybe OAuthToken)
+mpuOAuthToken
+  = lens _mpuOAuthToken
+      (\ s a -> s{_mpuOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 mpuFields :: Lens' ManagementProfilesUpdate' (Maybe Text)
 mpuFields
   = lens _mpuFields (\ s a -> s{_mpuFields = a})
 
--- | Data format for the response.
-mpuAlt :: Lens' ManagementProfilesUpdate' Alt
-mpuAlt = lens _mpuAlt (\ s a -> s{_mpuAlt = a})
+instance GoogleAuth ManagementProfilesUpdate' where
+        authKey = mpuKey . _Just
+        authToken = mpuOAuthToken . _Just
 
 instance GoogleRequest ManagementProfilesUpdate'
          where
@@ -184,13 +191,14 @@ instance GoogleRequest ManagementProfilesUpdate'
         requestWithRoute r u ManagementProfilesUpdate'{..}
           = go _mpuQuotaUser (Just _mpuPrettyPrint)
               _mpuWebPropertyId
-              _mpuUserIp
+              _mpuUserIP
               _mpuProfileId
               _mpuAccountId
               _mpuKey
-              _mpuOauthToken
+              _mpuOAuthToken
               _mpuFields
-              (Just _mpuAlt)
+              (Just AltJSON)
+              _mpuProfile
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ManagementProfilesUpdateResource)

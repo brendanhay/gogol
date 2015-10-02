@@ -34,12 +34,11 @@ module Network.Google.Resource.Compute.RegionOperations.Get
     , rogPrettyPrint
     , rogProject
     , rogOperation
-    , rogUserIp
+    , rogUserIP
     , rogKey
     , rogRegion
-    , rogOauthToken
+    , rogOAuthToken
     , rogFields
-    , rogAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -56,10 +55,10 @@ type RegionOperationsGetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Get '[JSON] Operation
+                           QueryParam "alt" AltJSON :> Get '[JSON] Operation
 
 -- | Retrieves the specified region-specific Operations resource.
 --
@@ -69,12 +68,11 @@ data RegionOperationsGet' = RegionOperationsGet'
     , _rogPrettyPrint :: !Bool
     , _rogProject     :: !Text
     , _rogOperation   :: !Text
-    , _rogUserIp      :: !(Maybe Text)
-    , _rogKey         :: !(Maybe Text)
+    , _rogUserIP      :: !(Maybe Text)
+    , _rogKey         :: !(Maybe Key)
     , _rogRegion      :: !Text
-    , _rogOauthToken  :: !(Maybe Text)
+    , _rogOAuthToken  :: !(Maybe OAuthToken)
     , _rogFields      :: !(Maybe Text)
-    , _rogAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RegionOperationsGet'' with the minimum fields required to make a request.
@@ -89,17 +87,15 @@ data RegionOperationsGet' = RegionOperationsGet'
 --
 -- * 'rogOperation'
 --
--- * 'rogUserIp'
+-- * 'rogUserIP'
 --
 -- * 'rogKey'
 --
 -- * 'rogRegion'
 --
--- * 'rogOauthToken'
+-- * 'rogOAuthToken'
 --
 -- * 'rogFields'
---
--- * 'rogAlt'
 regionOperationsGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'operation'
@@ -111,12 +107,11 @@ regionOperationsGet' pRogProject_ pRogOperation_ pRogRegion_ =
     , _rogPrettyPrint = True
     , _rogProject = pRogProject_
     , _rogOperation = pRogOperation_
-    , _rogUserIp = Nothing
+    , _rogUserIP = Nothing
     , _rogKey = Nothing
     , _rogRegion = pRogRegion_
-    , _rogOauthToken = Nothing
+    , _rogOAuthToken = Nothing
     , _rogFields = Nothing
-    , _rogAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -144,14 +139,14 @@ rogOperation
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rogUserIp :: Lens' RegionOperationsGet' (Maybe Text)
-rogUserIp
-  = lens _rogUserIp (\ s a -> s{_rogUserIp = a})
+rogUserIP :: Lens' RegionOperationsGet' (Maybe Text)
+rogUserIP
+  = lens _rogUserIP (\ s a -> s{_rogUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rogKey :: Lens' RegionOperationsGet' (Maybe Text)
+rogKey :: Lens' RegionOperationsGet' (Maybe Key)
 rogKey = lens _rogKey (\ s a -> s{_rogKey = a})
 
 -- | Name of the zone scoping this request.
@@ -160,19 +155,19 @@ rogRegion
   = lens _rogRegion (\ s a -> s{_rogRegion = a})
 
 -- | OAuth 2.0 token for the current user.
-rogOauthToken :: Lens' RegionOperationsGet' (Maybe Text)
-rogOauthToken
-  = lens _rogOauthToken
-      (\ s a -> s{_rogOauthToken = a})
+rogOAuthToken :: Lens' RegionOperationsGet' (Maybe OAuthToken)
+rogOAuthToken
+  = lens _rogOAuthToken
+      (\ s a -> s{_rogOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 rogFields :: Lens' RegionOperationsGet' (Maybe Text)
 rogFields
   = lens _rogFields (\ s a -> s{_rogFields = a})
 
--- | Data format for the response.
-rogAlt :: Lens' RegionOperationsGet' Alt
-rogAlt = lens _rogAlt (\ s a -> s{_rogAlt = a})
+instance GoogleAuth RegionOperationsGet' where
+        authKey = rogKey . _Just
+        authToken = rogOAuthToken . _Just
 
 instance GoogleRequest RegionOperationsGet' where
         type Rs RegionOperationsGet' = Operation
@@ -180,12 +175,12 @@ instance GoogleRequest RegionOperationsGet' where
         requestWithRoute r u RegionOperationsGet'{..}
           = go _rogQuotaUser (Just _rogPrettyPrint) _rogProject
               _rogOperation
-              _rogUserIp
+              _rogUserIP
               _rogKey
               _rogRegion
-              _rogOauthToken
+              _rogOAuthToken
               _rogFields
-              (Just _rogAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy RegionOperationsGetResource)

@@ -39,10 +39,10 @@ module Network.Google.Resource.Partners.UserEvents.Log
     , uelUploadType
     , uelBearerToken
     , uelKey
-    , uelOauthToken
+    , uelLogUserEventRequest
+    , uelOAuthToken
     , uelFields
     , uelCallback
-    , uelAlt
     ) where
 
 import           Network.Google.Partners.Types
@@ -61,30 +61,31 @@ type UserEventsLogResource =
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
                        QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
                                QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :>
-                                   Post '[JSON] LogUserEventResponse
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON] LogUserEventRequest :>
+                                     Post '[JSON] LogUserEventResponse
 
 -- | Logs a user event.
 --
 -- /See:/ 'userEventsLog'' smart constructor.
 data UserEventsLog' = UserEventsLog'
-    { _uelXgafv          :: !(Maybe Text)
-    , _uelQuotaUser      :: !(Maybe Text)
-    , _uelPrettyPrint    :: !Bool
-    , _uelUploadProtocol :: !(Maybe Text)
-    , _uelPp             :: !Bool
-    , _uelAccessToken    :: !(Maybe Text)
-    , _uelUploadType     :: !(Maybe Text)
-    , _uelBearerToken    :: !(Maybe Text)
-    , _uelKey            :: !(Maybe Text)
-    , _uelOauthToken     :: !(Maybe Text)
-    , _uelFields         :: !(Maybe Text)
-    , _uelCallback       :: !(Maybe Text)
-    , _uelAlt            :: !Text
+    { _uelXgafv               :: !(Maybe Text)
+    , _uelQuotaUser           :: !(Maybe Text)
+    , _uelPrettyPrint         :: !Bool
+    , _uelUploadProtocol      :: !(Maybe Text)
+    , _uelPp                  :: !Bool
+    , _uelAccessToken         :: !(Maybe Text)
+    , _uelUploadType          :: !(Maybe Text)
+    , _uelBearerToken         :: !(Maybe Text)
+    , _uelKey                 :: !(Maybe Key)
+    , _uelLogUserEventRequest :: !LogUserEventRequest
+    , _uelOAuthToken          :: !(Maybe OAuthToken)
+    , _uelFields              :: !(Maybe Text)
+    , _uelCallback            :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserEventsLog'' with the minimum fields required to make a request.
@@ -109,16 +110,17 @@ data UserEventsLog' = UserEventsLog'
 --
 -- * 'uelKey'
 --
--- * 'uelOauthToken'
+-- * 'uelLogUserEventRequest'
+--
+-- * 'uelOAuthToken'
 --
 -- * 'uelFields'
 --
 -- * 'uelCallback'
---
--- * 'uelAlt'
 userEventsLog'
-    :: UserEventsLog'
-userEventsLog' =
+    :: LogUserEventRequest -- ^ 'LogUserEventRequest'
+    -> UserEventsLog'
+userEventsLog' pUelLogUserEventRequest_ =
     UserEventsLog'
     { _uelXgafv = Nothing
     , _uelQuotaUser = Nothing
@@ -129,10 +131,10 @@ userEventsLog' =
     , _uelUploadType = Nothing
     , _uelBearerToken = Nothing
     , _uelKey = Nothing
-    , _uelOauthToken = Nothing
+    , _uelLogUserEventRequest = pUelLogUserEventRequest_
+    , _uelOAuthToken = Nothing
     , _uelFields = Nothing
     , _uelCallback = Nothing
-    , _uelAlt = "json"
     }
 
 -- | V1 error format.
@@ -183,14 +185,20 @@ uelBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-uelKey :: Lens' UserEventsLog' (Maybe Text)
+uelKey :: Lens' UserEventsLog' (Maybe Key)
 uelKey = lens _uelKey (\ s a -> s{_uelKey = a})
 
+-- | Multipart request metadata.
+uelLogUserEventRequest :: Lens' UserEventsLog' LogUserEventRequest
+uelLogUserEventRequest
+  = lens _uelLogUserEventRequest
+      (\ s a -> s{_uelLogUserEventRequest = a})
+
 -- | OAuth 2.0 token for the current user.
-uelOauthToken :: Lens' UserEventsLog' (Maybe Text)
-uelOauthToken
-  = lens _uelOauthToken
-      (\ s a -> s{_uelOauthToken = a})
+uelOAuthToken :: Lens' UserEventsLog' (Maybe OAuthToken)
+uelOAuthToken
+  = lens _uelOAuthToken
+      (\ s a -> s{_uelOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 uelFields :: Lens' UserEventsLog' (Maybe Text)
@@ -202,9 +210,9 @@ uelCallback :: Lens' UserEventsLog' (Maybe Text)
 uelCallback
   = lens _uelCallback (\ s a -> s{_uelCallback = a})
 
--- | Data format for response.
-uelAlt :: Lens' UserEventsLog' Text
-uelAlt = lens _uelAlt (\ s a -> s{_uelAlt = a})
+instance GoogleAuth UserEventsLog' where
+        authKey = uelKey . _Just
+        authToken = uelOAuthToken . _Just
 
 instance GoogleRequest UserEventsLog' where
         type Rs UserEventsLog' = LogUserEventResponse
@@ -217,10 +225,11 @@ instance GoogleRequest UserEventsLog' where
               _uelUploadType
               _uelBearerToken
               _uelKey
-              _uelOauthToken
+              _uelOAuthToken
               _uelFields
               _uelCallback
-              (Just _uelAlt)
+              (Just AltJSON)
+              _uelLogUserEventRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UserEventsLogResource)

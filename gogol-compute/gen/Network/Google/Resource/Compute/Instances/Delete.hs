@@ -34,12 +34,11 @@ module Network.Google.Resource.Compute.Instances.Delete
     , iQuotaUser
     , iPrettyPrint
     , iProject
-    , iUserIp
+    , iUserIP
     , iZone
     , iKey
-    , iOauthToken
+    , iOAuthToken
     , iFields
-    , iAlt
     , iInstance
     ) where
 
@@ -57,10 +56,10 @@ type InstancesDeleteResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Delete '[JSON] Operation
+                           QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified Instance resource. For more information, see
 -- Shutting down an instance.
@@ -70,12 +69,11 @@ data InstancesDelete' = InstancesDelete'
     { _iQuotaUser   :: !(Maybe Text)
     , _iPrettyPrint :: !Bool
     , _iProject     :: !Text
-    , _iUserIp      :: !(Maybe Text)
+    , _iUserIP      :: !(Maybe Text)
     , _iZone        :: !Text
-    , _iKey         :: !(Maybe Text)
-    , _iOauthToken  :: !(Maybe Text)
+    , _iKey         :: !(Maybe Key)
+    , _iOAuthToken  :: !(Maybe OAuthToken)
     , _iFields      :: !(Maybe Text)
-    , _iAlt         :: !Alt
     , _iInstance    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -89,17 +87,15 @@ data InstancesDelete' = InstancesDelete'
 --
 -- * 'iProject'
 --
--- * 'iUserIp'
+-- * 'iUserIP'
 --
 -- * 'iZone'
 --
 -- * 'iKey'
 --
--- * 'iOauthToken'
+-- * 'iOAuthToken'
 --
 -- * 'iFields'
---
--- * 'iAlt'
 --
 -- * 'iInstance'
 instancesDelete'
@@ -112,12 +108,11 @@ instancesDelete' pIProject_ pIZone_ pIInstance_ =
     { _iQuotaUser = Nothing
     , _iPrettyPrint = True
     , _iProject = pIProject_
-    , _iUserIp = Nothing
+    , _iUserIP = Nothing
     , _iZone = pIZone_
     , _iKey = Nothing
-    , _iOauthToken = Nothing
+    , _iOAuthToken = Nothing
     , _iFields = Nothing
-    , _iAlt = JSON
     , _iInstance = pIInstance_
     }
 
@@ -139,8 +134,8 @@ iProject = lens _iProject (\ s a -> s{_iProject = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-iUserIp :: Lens' InstancesDelete' (Maybe Text)
-iUserIp = lens _iUserIp (\ s a -> s{_iUserIp = a})
+iUserIP :: Lens' InstancesDelete' (Maybe Text)
+iUserIP = lens _iUserIP (\ s a -> s{_iUserIP = a})
 
 -- | The name of the zone for this request.
 iZone :: Lens' InstancesDelete' Text
@@ -149,39 +144,39 @@ iZone = lens _iZone (\ s a -> s{_iZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-iKey :: Lens' InstancesDelete' (Maybe Text)
+iKey :: Lens' InstancesDelete' (Maybe Key)
 iKey = lens _iKey (\ s a -> s{_iKey = a})
 
 -- | OAuth 2.0 token for the current user.
-iOauthToken :: Lens' InstancesDelete' (Maybe Text)
-iOauthToken
-  = lens _iOauthToken (\ s a -> s{_iOauthToken = a})
+iOAuthToken :: Lens' InstancesDelete' (Maybe OAuthToken)
+iOAuthToken
+  = lens _iOAuthToken (\ s a -> s{_iOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 iFields :: Lens' InstancesDelete' (Maybe Text)
 iFields = lens _iFields (\ s a -> s{_iFields = a})
-
--- | Data format for the response.
-iAlt :: Lens' InstancesDelete' Alt
-iAlt = lens _iAlt (\ s a -> s{_iAlt = a})
 
 -- | Name of the instance resource to delete.
 iInstance :: Lens' InstancesDelete' Text
 iInstance
   = lens _iInstance (\ s a -> s{_iInstance = a})
 
+instance GoogleAuth InstancesDelete' where
+        authKey = iKey . _Just
+        authToken = iOAuthToken . _Just
+
 instance GoogleRequest InstancesDelete' where
         type Rs InstancesDelete' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstancesDelete'{..}
           = go _iQuotaUser (Just _iPrettyPrint) _iProject
-              _iUserIp
+              _iUserIP
               _iZone
               _iKey
-              _iOauthToken
+              _iOAuthToken
               _iFields
-              (Just _iAlt)
               _iInstance
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InstancesDeleteResource)

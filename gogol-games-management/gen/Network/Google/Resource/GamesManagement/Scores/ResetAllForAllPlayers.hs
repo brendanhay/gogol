@@ -33,11 +33,10 @@ module Network.Google.Resource.GamesManagement.Scores.ResetAllForAllPlayers
     -- * Request Lenses
     , srafapQuotaUser
     , srafapPrettyPrint
-    , srafapUserIp
+    , srafapUserIP
     , srafapKey
-    , srafapOauthToken
+    , srafapOAuthToken
     , srafapFields
-    , srafapAlt
     ) where
 
 import           Network.Google.GamesManagement.Types
@@ -51,10 +50,10 @@ type ScoresResetAllForAllPlayersResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Post '[JSON] ()
+                     QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Resets scores for all draft leaderboards for all players. This method is
 -- only available to user accounts for your developer console.
@@ -63,11 +62,10 @@ type ScoresResetAllForAllPlayersResource =
 data ScoresResetAllForAllPlayers' = ScoresResetAllForAllPlayers'
     { _srafapQuotaUser   :: !(Maybe Text)
     , _srafapPrettyPrint :: !Bool
-    , _srafapUserIp      :: !(Maybe Text)
-    , _srafapKey         :: !(Maybe Text)
-    , _srafapOauthToken  :: !(Maybe Text)
+    , _srafapUserIP      :: !(Maybe Text)
+    , _srafapKey         :: !(Maybe Key)
+    , _srafapOAuthToken  :: !(Maybe OAuthToken)
     , _srafapFields      :: !(Maybe Text)
-    , _srafapAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ScoresResetAllForAllPlayers'' with the minimum fields required to make a request.
@@ -78,26 +76,23 @@ data ScoresResetAllForAllPlayers' = ScoresResetAllForAllPlayers'
 --
 -- * 'srafapPrettyPrint'
 --
--- * 'srafapUserIp'
+-- * 'srafapUserIP'
 --
 -- * 'srafapKey'
 --
--- * 'srafapOauthToken'
+-- * 'srafapOAuthToken'
 --
 -- * 'srafapFields'
---
--- * 'srafapAlt'
 scoresResetAllForAllPlayers'
     :: ScoresResetAllForAllPlayers'
 scoresResetAllForAllPlayers' =
     ScoresResetAllForAllPlayers'
     { _srafapQuotaUser = Nothing
     , _srafapPrettyPrint = True
-    , _srafapUserIp = Nothing
+    , _srafapUserIP = Nothing
     , _srafapKey = Nothing
-    , _srafapOauthToken = Nothing
+    , _srafapOAuthToken = Nothing
     , _srafapFields = Nothing
-    , _srafapAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -116,32 +111,32 @@ srafapPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-srafapUserIp :: Lens' ScoresResetAllForAllPlayers' (Maybe Text)
-srafapUserIp
-  = lens _srafapUserIp (\ s a -> s{_srafapUserIp = a})
+srafapUserIP :: Lens' ScoresResetAllForAllPlayers' (Maybe Text)
+srafapUserIP
+  = lens _srafapUserIP (\ s a -> s{_srafapUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-srafapKey :: Lens' ScoresResetAllForAllPlayers' (Maybe Text)
+srafapKey :: Lens' ScoresResetAllForAllPlayers' (Maybe Key)
 srafapKey
   = lens _srafapKey (\ s a -> s{_srafapKey = a})
 
 -- | OAuth 2.0 token for the current user.
-srafapOauthToken :: Lens' ScoresResetAllForAllPlayers' (Maybe Text)
-srafapOauthToken
-  = lens _srafapOauthToken
-      (\ s a -> s{_srafapOauthToken = a})
+srafapOAuthToken :: Lens' ScoresResetAllForAllPlayers' (Maybe OAuthToken)
+srafapOAuthToken
+  = lens _srafapOAuthToken
+      (\ s a -> s{_srafapOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 srafapFields :: Lens' ScoresResetAllForAllPlayers' (Maybe Text)
 srafapFields
   = lens _srafapFields (\ s a -> s{_srafapFields = a})
 
--- | Data format for the response.
-srafapAlt :: Lens' ScoresResetAllForAllPlayers' Alt
-srafapAlt
-  = lens _srafapAlt (\ s a -> s{_srafapAlt = a})
+instance GoogleAuth ScoresResetAllForAllPlayers'
+         where
+        authKey = srafapKey . _Just
+        authToken = srafapOAuthToken . _Just
 
 instance GoogleRequest ScoresResetAllForAllPlayers'
          where
@@ -149,11 +144,11 @@ instance GoogleRequest ScoresResetAllForAllPlayers'
         request = requestWithRoute defReq gamesManagementURL
         requestWithRoute r u ScoresResetAllForAllPlayers'{..}
           = go _srafapQuotaUser (Just _srafapPrettyPrint)
-              _srafapUserIp
+              _srafapUserIP
               _srafapKey
-              _srafapOauthToken
+              _srafapOAuthToken
               _srafapFields
-              (Just _srafapAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ScoresResetAllForAllPlayersResource)

@@ -34,11 +34,11 @@ module Network.Google.Resource.Compute.HTTPHealthChecks.Insert
     , httphciQuotaUser
     , httphciPrettyPrint
     , httphciProject
-    , httphciUserIp
+    , httphciUserIP
     , httphciKey
-    , httphciOauthToken
+    , httphciHTTPHealthCheck
+    , httphciOAuthToken
     , httphciFields
-    , httphciAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -53,24 +53,26 @@ type HttpHealthChecksInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] Operation
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] HTTPHealthCheck :>
+                           Post '[JSON] Operation
 
 -- | Creates a HttpHealthCheck resource in the specified project using the
 -- data included in the request.
 --
 -- /See:/ 'hTTPHealthChecksInsert'' smart constructor.
 data HTTPHealthChecksInsert' = HTTPHealthChecksInsert'
-    { _httphciQuotaUser   :: !(Maybe Text)
-    , _httphciPrettyPrint :: !Bool
-    , _httphciProject     :: !Text
-    , _httphciUserIp      :: !(Maybe Text)
-    , _httphciKey         :: !(Maybe Text)
-    , _httphciOauthToken  :: !(Maybe Text)
-    , _httphciFields      :: !(Maybe Text)
-    , _httphciAlt         :: !Alt
+    { _httphciQuotaUser       :: !(Maybe Text)
+    , _httphciPrettyPrint     :: !Bool
+    , _httphciProject         :: !Text
+    , _httphciUserIP          :: !(Maybe Text)
+    , _httphciKey             :: !(Maybe Key)
+    , _httphciHTTPHealthCheck :: !HTTPHealthCheck
+    , _httphciOAuthToken      :: !(Maybe OAuthToken)
+    , _httphciFields          :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'HTTPHealthChecksInsert'' with the minimum fields required to make a request.
@@ -83,28 +85,29 @@ data HTTPHealthChecksInsert' = HTTPHealthChecksInsert'
 --
 -- * 'httphciProject'
 --
--- * 'httphciUserIp'
+-- * 'httphciUserIP'
 --
 -- * 'httphciKey'
 --
--- * 'httphciOauthToken'
+-- * 'httphciHTTPHealthCheck'
+--
+-- * 'httphciOAuthToken'
 --
 -- * 'httphciFields'
---
--- * 'httphciAlt'
 hTTPHealthChecksInsert'
     :: Text -- ^ 'project'
+    -> HTTPHealthCheck -- ^ 'HTTPHealthCheck'
     -> HTTPHealthChecksInsert'
-hTTPHealthChecksInsert' pHttphciProject_ =
+hTTPHealthChecksInsert' pHttphciProject_ pHttphciHTTPHealthCheck_ =
     HTTPHealthChecksInsert'
     { _httphciQuotaUser = Nothing
     , _httphciPrettyPrint = True
     , _httphciProject = pHttphciProject_
-    , _httphciUserIp = Nothing
+    , _httphciUserIP = Nothing
     , _httphciKey = Nothing
-    , _httphciOauthToken = Nothing
+    , _httphciHTTPHealthCheck = pHttphciHTTPHealthCheck_
+    , _httphciOAuthToken = Nothing
     , _httphciFields = Nothing
-    , _httphciAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -129,23 +132,29 @@ httphciProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-httphciUserIp :: Lens' HTTPHealthChecksInsert' (Maybe Text)
-httphciUserIp
-  = lens _httphciUserIp
-      (\ s a -> s{_httphciUserIp = a})
+httphciUserIP :: Lens' HTTPHealthChecksInsert' (Maybe Text)
+httphciUserIP
+  = lens _httphciUserIP
+      (\ s a -> s{_httphciUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-httphciKey :: Lens' HTTPHealthChecksInsert' (Maybe Text)
+httphciKey :: Lens' HTTPHealthChecksInsert' (Maybe Key)
 httphciKey
   = lens _httphciKey (\ s a -> s{_httphciKey = a})
 
+-- | Multipart request metadata.
+httphciHTTPHealthCheck :: Lens' HTTPHealthChecksInsert' HTTPHealthCheck
+httphciHTTPHealthCheck
+  = lens _httphciHTTPHealthCheck
+      (\ s a -> s{_httphciHTTPHealthCheck = a})
+
 -- | OAuth 2.0 token for the current user.
-httphciOauthToken :: Lens' HTTPHealthChecksInsert' (Maybe Text)
-httphciOauthToken
-  = lens _httphciOauthToken
-      (\ s a -> s{_httphciOauthToken = a})
+httphciOAuthToken :: Lens' HTTPHealthChecksInsert' (Maybe OAuthToken)
+httphciOAuthToken
+  = lens _httphciOAuthToken
+      (\ s a -> s{_httphciOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 httphciFields :: Lens' HTTPHealthChecksInsert' (Maybe Text)
@@ -153,10 +162,9 @@ httphciFields
   = lens _httphciFields
       (\ s a -> s{_httphciFields = a})
 
--- | Data format for the response.
-httphciAlt :: Lens' HTTPHealthChecksInsert' Alt
-httphciAlt
-  = lens _httphciAlt (\ s a -> s{_httphciAlt = a})
+instance GoogleAuth HTTPHealthChecksInsert' where
+        authKey = httphciKey . _Just
+        authToken = httphciOAuthToken . _Just
 
 instance GoogleRequest HTTPHealthChecksInsert' where
         type Rs HTTPHealthChecksInsert' = Operation
@@ -164,11 +172,12 @@ instance GoogleRequest HTTPHealthChecksInsert' where
         requestWithRoute r u HTTPHealthChecksInsert'{..}
           = go _httphciQuotaUser (Just _httphciPrettyPrint)
               _httphciProject
-              _httphciUserIp
+              _httphciUserIP
               _httphciKey
-              _httphciOauthToken
+              _httphciOAuthToken
               _httphciFields
-              (Just _httphciAlt)
+              (Just AltJSON)
+              _httphciHTTPHealthCheck
           where go
                   = clientWithRoute
                       (Proxy :: Proxy HttpHealthChecksInsertResource)

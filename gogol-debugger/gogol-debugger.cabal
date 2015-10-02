@@ -33,14 +33,14 @@ library
     exposed-modules:
           Network.Google.Debugger
         , Network.Google.Debugger.Types
-        , Network.Google.Resource.Clouddebugger.Controller.Debuggees.Breakpoints.List
-        , Network.Google.Resource.Clouddebugger.Controller.Debuggees.Breakpoints.Update
-        , Network.Google.Resource.Clouddebugger.Controller.Debuggees.Register
-        , Network.Google.Resource.Clouddebugger.Debugger.Debuggees.Breakpoints.Delete
-        , Network.Google.Resource.Clouddebugger.Debugger.Debuggees.Breakpoints.Get
-        , Network.Google.Resource.Clouddebugger.Debugger.Debuggees.Breakpoints.List
-        , Network.Google.Resource.Clouddebugger.Debugger.Debuggees.Breakpoints.Set
-        , Network.Google.Resource.Clouddebugger.Debugger.Debuggees.List
+        , Network.Google.Resource.CloudDebugger.Controller.Debuggees.Breakpoints.List
+        , Network.Google.Resource.CloudDebugger.Controller.Debuggees.Breakpoints.Update
+        , Network.Google.Resource.CloudDebugger.Controller.Debuggees.Register
+        , Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.Delete
+        , Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.Get
+        , Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.List
+        , Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.Set
+        , Network.Google.Resource.CloudDebugger.Debugger.Debuggees.List
 
     other-modules:
           Network.Google.Debugger.Types.Product

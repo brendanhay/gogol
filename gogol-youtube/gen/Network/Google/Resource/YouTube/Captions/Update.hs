@@ -36,13 +36,14 @@ module Network.Google.Resource.YouTube.Captions.Update
     , capQuotaUser
     , capPart
     , capPrettyPrint
-    , capUserIp
+    , capUserIP
+    , capCaption
+    , capMedia
     , capOnBehalfOfContentOwner
     , capKey
     , capSync
-    , capOauthToken
+    , capOAuthToken
     , capFields
-    , capAlt
     ) where
 
 import           Network.Google.Prelude
@@ -58,11 +59,13 @@ type CaptionsUpdateResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "onBehalfOfContentOwner" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "sync" Bool :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Put '[JSON] Caption
+                           QueryParam "alt" AltJSON :>
+                             MultipartRelated '[JSON] Caption Body :>
+                               Put '[JSON] Caption
 
 -- | Updates a caption track. When updating a caption track, you can change
 -- the track\'s draft status, upload a new caption file for the track, or
@@ -74,13 +77,14 @@ data CaptionsUpdate' = CaptionsUpdate'
     , _capQuotaUser              :: !(Maybe Text)
     , _capPart                   :: !Text
     , _capPrettyPrint            :: !Bool
-    , _capUserIp                 :: !(Maybe Text)
+    , _capUserIP                 :: !(Maybe Text)
+    , _capCaption                :: !Caption
+    , _capMedia                  :: !Body
     , _capOnBehalfOfContentOwner :: !(Maybe Text)
-    , _capKey                    :: !(Maybe Text)
+    , _capKey                    :: !(Maybe Key)
     , _capSync                   :: !(Maybe Bool)
-    , _capOauthToken             :: !(Maybe Text)
+    , _capOAuthToken             :: !(Maybe OAuthToken)
     , _capFields                 :: !(Maybe Text)
-    , _capAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CaptionsUpdate'' with the minimum fields required to make a request.
@@ -95,7 +99,11 @@ data CaptionsUpdate' = CaptionsUpdate'
 --
 -- * 'capPrettyPrint'
 --
--- * 'capUserIp'
+-- * 'capUserIP'
+--
+-- * 'capCaption'
+--
+-- * 'capMedia'
 --
 -- * 'capOnBehalfOfContentOwner'
 --
@@ -103,27 +111,28 @@ data CaptionsUpdate' = CaptionsUpdate'
 --
 -- * 'capSync'
 --
--- * 'capOauthToken'
+-- * 'capOAuthToken'
 --
 -- * 'capFields'
---
--- * 'capAlt'
 captionsUpdate'
     :: Text -- ^ 'part'
+    -> Caption -- ^ 'Caption'
+    -> Body -- ^ 'media'
     -> CaptionsUpdate'
-captionsUpdate' pCapPart_ =
+captionsUpdate' pCapPart_ pCapCaption_ pCapMedia_ =
     CaptionsUpdate'
     { _capOnBehalfOf = Nothing
     , _capQuotaUser = Nothing
     , _capPart = pCapPart_
     , _capPrettyPrint = True
-    , _capUserIp = Nothing
+    , _capUserIP = Nothing
+    , _capCaption = pCapCaption_
+    , _capMedia = pCapMedia_
     , _capOnBehalfOfContentOwner = Nothing
     , _capKey = Nothing
     , _capSync = Nothing
-    , _capOauthToken = Nothing
+    , _capOAuthToken = Nothing
     , _capFields = Nothing
-    , _capAlt = JSON
     }
 
 -- | ID of the Google+ Page for the channel that the request is be on behalf
@@ -156,9 +165,17 @@ capPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-capUserIp :: Lens' CaptionsUpdate' (Maybe Text)
-capUserIp
-  = lens _capUserIp (\ s a -> s{_capUserIp = a})
+capUserIP :: Lens' CaptionsUpdate' (Maybe Text)
+capUserIP
+  = lens _capUserIP (\ s a -> s{_capUserIP = a})
+
+-- | Multipart request metadata.
+capCaption :: Lens' CaptionsUpdate' Caption
+capCaption
+  = lens _capCaption (\ s a -> s{_capCaption = a})
+
+capMedia :: Lens' CaptionsUpdate' Body
+capMedia = lens _capMedia (\ s a -> s{_capMedia = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
@@ -178,7 +195,7 @@ capOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-capKey :: Lens' CaptionsUpdate' (Maybe Text)
+capKey :: Lens' CaptionsUpdate' (Maybe Key)
 capKey = lens _capKey (\ s a -> s{_capKey = a})
 
 -- | Note: The API server only processes the parameter value if the request
@@ -190,19 +207,19 @@ capSync :: Lens' CaptionsUpdate' (Maybe Bool)
 capSync = lens _capSync (\ s a -> s{_capSync = a})
 
 -- | OAuth 2.0 token for the current user.
-capOauthToken :: Lens' CaptionsUpdate' (Maybe Text)
-capOauthToken
-  = lens _capOauthToken
-      (\ s a -> s{_capOauthToken = a})
+capOAuthToken :: Lens' CaptionsUpdate' (Maybe OAuthToken)
+capOAuthToken
+  = lens _capOAuthToken
+      (\ s a -> s{_capOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 capFields :: Lens' CaptionsUpdate' (Maybe Text)
 capFields
   = lens _capFields (\ s a -> s{_capFields = a})
 
--- | Data format for the response.
-capAlt :: Lens' CaptionsUpdate' Alt
-capAlt = lens _capAlt (\ s a -> s{_capAlt = a})
+instance GoogleAuth CaptionsUpdate' where
+        authKey = capKey . _Just
+        authToken = capOAuthToken . _Just
 
 instance GoogleRequest CaptionsUpdate' where
         type Rs CaptionsUpdate' = Caption
@@ -210,13 +227,15 @@ instance GoogleRequest CaptionsUpdate' where
         requestWithRoute r u CaptionsUpdate'{..}
           = go _capOnBehalfOf _capQuotaUser (Just _capPart)
               (Just _capPrettyPrint)
-              _capUserIp
+              _capUserIP
+              _capMedia
               _capOnBehalfOfContentOwner
               _capKey
               _capSync
-              _capOauthToken
+              _capOAuthToken
               _capFields
-              (Just _capAlt)
+              (Just AltJSON)
+              _capCaption
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CaptionsUpdateResource)

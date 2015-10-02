@@ -35,14 +35,14 @@ module Network.Google.Books
     -- ** BooksBookshelvesVolumesList
     , module Network.Google.Resource.Books.Bookshelves.Volumes.List
 
-    -- ** BooksCloudloadingAddBook
-    , module Network.Google.Resource.Books.Cloudloading.AddBook
+    -- ** BooksCloudLoadingAddBook
+    , module Network.Google.Resource.Books.CloudLoading.AddBook
 
-    -- ** BooksCloudloadingDeleteBook
-    , module Network.Google.Resource.Books.Cloudloading.DeleteBook
+    -- ** BooksCloudLoadingDeleteBook
+    , module Network.Google.Resource.Books.CloudLoading.DeleteBook
 
-    -- ** BooksCloudloadingUpdateBook
-    , module Network.Google.Resource.Books.Cloudloading.UpdateBook
+    -- ** BooksCloudLoadingUpdateBook
+    , module Network.Google.Resource.Books.CloudLoading.UpdateBook
 
     -- ** BooksDictionaryListOfflineMetadata
     , module Network.Google.Resource.Books.Dictionary.ListOfflineMetadata
@@ -65,62 +65,62 @@ module Network.Google.Books
     -- ** BooksLayersVolumeAnnotationsList
     , module Network.Google.Resource.Books.Layers.VolumeAnnotations.List
 
-    -- ** BooksMyconfigGetUserSettings
-    , module Network.Google.Resource.Books.Myconfig.GetUserSettings
+    -- ** BooksMyConfigGetUserSettings
+    , module Network.Google.Resource.Books.MyConfig.GetUserSettings
 
-    -- ** BooksMyconfigReleaseDownloadAccess
-    , module Network.Google.Resource.Books.Myconfig.ReleaseDownloadAccess
+    -- ** BooksMyConfigReleaseDownloadAccess
+    , module Network.Google.Resource.Books.MyConfig.ReleaseDownloadAccess
 
-    -- ** BooksMyconfigRequestAccess
-    , module Network.Google.Resource.Books.Myconfig.RequestAccess
+    -- ** BooksMyConfigRequestAccess
+    , module Network.Google.Resource.Books.MyConfig.RequestAccess
 
-    -- ** BooksMyconfigSyncVolumeLicenses
-    , module Network.Google.Resource.Books.Myconfig.SyncVolumeLicenses
+    -- ** BooksMyConfigSyncVolumeLicenses
+    , module Network.Google.Resource.Books.MyConfig.SyncVolumeLicenses
 
-    -- ** BooksMyconfigUpdateUserSettings
-    , module Network.Google.Resource.Books.Myconfig.UpdateUserSettings
+    -- ** BooksMyConfigUpdateUserSettings
+    , module Network.Google.Resource.Books.MyConfig.UpdateUserSettings
 
-    -- ** BooksMylibraryAnnotationsDelete
-    , module Network.Google.Resource.Books.Mylibrary.Annotations.Delete
+    -- ** BooksMyLibraryAnnotationsDelete
+    , module Network.Google.Resource.Books.MyLibrary.Annotations.Delete
 
-    -- ** BooksMylibraryAnnotationsInsert
-    , module Network.Google.Resource.Books.Mylibrary.Annotations.Insert
+    -- ** BooksMyLibraryAnnotationsInsert
+    , module Network.Google.Resource.Books.MyLibrary.Annotations.Insert
 
-    -- ** BooksMylibraryAnnotationsList
-    , module Network.Google.Resource.Books.Mylibrary.Annotations.List
+    -- ** BooksMyLibraryAnnotationsList
+    , module Network.Google.Resource.Books.MyLibrary.Annotations.List
 
-    -- ** BooksMylibraryAnnotationsSummary
-    , module Network.Google.Resource.Books.Mylibrary.Annotations.Summary
+    -- ** BooksMyLibraryAnnotationsSummary
+    , module Network.Google.Resource.Books.MyLibrary.Annotations.Summary
 
-    -- ** BooksMylibraryAnnotationsUpdate
-    , module Network.Google.Resource.Books.Mylibrary.Annotations.Update
+    -- ** BooksMyLibraryAnnotationsUpdate
+    , module Network.Google.Resource.Books.MyLibrary.Annotations.Update
 
-    -- ** BooksMylibraryBookshelvesAddVolume
-    , module Network.Google.Resource.Books.Mylibrary.Bookshelves.AddVolume
+    -- ** BooksMyLibraryBookshelvesAddVolume
+    , module Network.Google.Resource.Books.MyLibrary.Bookshelves.AddVolume
 
-    -- ** BooksMylibraryBookshelvesClearVolumes
-    , module Network.Google.Resource.Books.Mylibrary.Bookshelves.ClearVolumes
+    -- ** BooksMyLibraryBookshelvesClearVolumes
+    , module Network.Google.Resource.Books.MyLibrary.Bookshelves.ClearVolumes
 
-    -- ** BooksMylibraryBookshelvesGet
-    , module Network.Google.Resource.Books.Mylibrary.Bookshelves.Get
+    -- ** BooksMyLibraryBookshelvesGet
+    , module Network.Google.Resource.Books.MyLibrary.Bookshelves.Get
 
-    -- ** BooksMylibraryBookshelvesList
-    , module Network.Google.Resource.Books.Mylibrary.Bookshelves.List
+    -- ** BooksMyLibraryBookshelvesList
+    , module Network.Google.Resource.Books.MyLibrary.Bookshelves.List
 
-    -- ** BooksMylibraryBookshelvesMoveVolume
-    , module Network.Google.Resource.Books.Mylibrary.Bookshelves.MoveVolume
+    -- ** BooksMyLibraryBookshelvesMoveVolume
+    , module Network.Google.Resource.Books.MyLibrary.Bookshelves.MoveVolume
 
-    -- ** BooksMylibraryBookshelvesRemoveVolume
-    , module Network.Google.Resource.Books.Mylibrary.Bookshelves.RemoveVolume
+    -- ** BooksMyLibraryBookshelvesRemoveVolume
+    , module Network.Google.Resource.Books.MyLibrary.Bookshelves.RemoveVolume
 
-    -- ** BooksMylibraryBookshelvesVolumesList
-    , module Network.Google.Resource.Books.Mylibrary.Bookshelves.Volumes.List
+    -- ** BooksMyLibraryBookshelvesVolumesList
+    , module Network.Google.Resource.Books.MyLibrary.Bookshelves.Volumes.List
 
-    -- ** BooksMylibraryReadingpositionsGet
-    , module Network.Google.Resource.Books.Mylibrary.Readingpositions.Get
+    -- ** BooksMyLibraryReadingPositionsGet
+    , module Network.Google.Resource.Books.MyLibrary.ReadingPositions.Get
 
-    -- ** BooksMylibraryReadingpositionsSetPosition
-    , module Network.Google.Resource.Books.Mylibrary.Readingpositions.SetPosition
+    -- ** BooksMyLibraryReadingPositionsSetPosition
+    , module Network.Google.Resource.Books.MyLibrary.ReadingPositions.SetPosition
 
     -- ** BooksOnboardingListCategories
     , module Network.Google.Resource.Books.Onboarding.ListCategories
@@ -128,14 +128,14 @@ module Network.Google.Books
     -- ** BooksOnboardingListCategoryVolumes
     , module Network.Google.Resource.Books.Onboarding.ListCategoryVolumes
 
-    -- ** BooksPromoofferAccept
-    , module Network.Google.Resource.Books.Promooffer.Accept
+    -- ** BooksPromoOfferAccept
+    , module Network.Google.Resource.Books.PromoOffer.Accept
 
-    -- ** BooksPromoofferDismiss
-    , module Network.Google.Resource.Books.Promooffer.Dismiss
+    -- ** BooksPromoOfferDismiss
+    , module Network.Google.Resource.Books.PromoOffer.Dismiss
 
-    -- ** BooksPromoofferGet
-    , module Network.Google.Resource.Books.Promooffer.Get
+    -- ** BooksPromoOfferGet
+    , module Network.Google.Resource.Books.PromoOffer.Get
 
     -- ** BooksVolumesAssociatedList
     , module Network.Google.Resource.Books.Volumes.Associated.List
@@ -155,8 +155,8 @@ module Network.Google.Books
     -- ** BooksVolumesRecommendedRate
     , module Network.Google.Resource.Books.Volumes.Recommended.Rate
 
-    -- ** BooksVolumesUseruploadedList
-    , module Network.Google.Resource.Books.Volumes.Useruploaded.List
+    -- ** BooksVolumesUserUploadedList
+    , module Network.Google.Resource.Books.Volumes.UserUploaded.List
 
     -- * Types
 
@@ -197,8 +197,8 @@ module Network.Google.Books
     , annKind
     , annItems
 
-    -- ** BooksMylibraryReadingpositionsSetPositionAction
-    , BooksMylibraryReadingpositionsSetPositionAction (..)
+    -- ** BooksMyLibraryReadingPositionsSetPositionAction
+    , BooksMyLibraryReadingPositionsSetPositionAction (..)
 
     -- ** GeolayerdataGeoViewport
     , GeolayerdataGeoViewport
@@ -241,13 +241,13 @@ module Network.Google.Books
     , ddwscValue
     , ddwscType
 
-    -- ** BooksCloudloadingResource
-    , BooksCloudloadingResource
-    , booksCloudloadingResource
-    , bcrProcessingState
-    , bcrVolumeId
-    , bcrAuthor
-    , bcrTitle
+    -- ** BooksCloudLoadingResource
+    , BooksCloudLoadingResource
+    , booksCloudLoadingResource
+    , bclrProcessingState
+    , bclrVolumeId
+    , bclrAuthor
+    , bclrTitle
 
     -- ** Layersummary
     , Layersummary
@@ -273,7 +273,7 @@ module Network.Google.Books
     , vuiUserUploadedVolumeInfo
     , vuiIsPurchased
     , vuiRentalState
-    , vuiIsPreordered
+    , vuiIsPreOrdered
     , vuiReview
     , vuiRentalPeriod
     , vuiUpdated
@@ -285,7 +285,7 @@ module Network.Google.Books
     , ReviewSource
     , reviewSource
     , rsExtraDescription
-    , rsUrl
+    , rsURL
     , rsDescription
 
     -- ** Annotationdata
@@ -363,7 +363,7 @@ module Network.Google.Books
     , vaiEmbeddable
     , vaiAccessViewStatus
     , vaiDownloadAccess
-    , vaiViewOrderUrl
+    , vaiViewOrderURL
     , vaiPublicDomain
 
     -- ** VolumeUserInfoCopy
@@ -450,8 +450,8 @@ module Network.Google.Books
     , vvRecommendedInfo
     , vvVolumeInfo
 
-    -- ** BooksMylibraryBookshelvesRemoveVolumeReason
-    , BooksMylibraryBookshelvesRemoveVolumeReason (..)
+    -- ** BooksMyLibraryBookshelvesRemoveVolumeReason
+    , BooksMyLibraryBookshelvesRemoveVolumeReason (..)
 
     -- ** BooksOnboardingListCategoryVolumesMaxAllowedMaturityRating
     , BooksOnboardingListCategoryVolumesMaxAllowedMaturityRating (..)
@@ -463,21 +463,21 @@ module Network.Google.Books
     , GeolayerdataCommon
     , geolayerdataCommon
     , gcSnippet
-    , gcSnippetUrl
+    , gcSnippetURL
     , gcLang
     , gcTitle
-    , gcPreviewImageUrl
+    , gcPreviewImageURL
 
     -- ** DictlayerdataDictWordsSource
     , DictlayerdataDictWordsSource
     , dictlayerdataDictWordsSource
-    , ddwsUrl
+    , ddwsURL
     , ddwsAttribution
 
     -- ** DictlayerdataDictWordsSensesDefinitionsExamplesSource
     , DictlayerdataDictWordsSensesDefinitionsExamplesSource
     , dictlayerdataDictWordsSensesDefinitionsExamplesSource
-    , ddwsdesUrl
+    , ddwsdesURL
     , ddwsdesAttribution
 
     -- ** BooksVolumesListFilter
@@ -512,7 +512,7 @@ module Network.Google.Books
     , categoryItems
     , ciName
     , ciCategoryId
-    , ciBadgeUrl
+    , ciBadgeURL
 
     -- ** DictlayerdataDictWordsSensesDefinitionsExamples
     , DictlayerdataDictWordsSensesDefinitionsExamples
@@ -554,7 +554,7 @@ module Network.Google.Books
     -- ** DictlayerdataDictWordsSensesSynonymsSource
     , DictlayerdataDictWordsSensesSynonymsSource
     , dictlayerdataDictWordsSensesSynonymsSource
-    , ddwsssUrl
+    , ddwsssURL
     , ddwsssAttribution
 
     -- ** VolumeSaleInfoOffersRetailPrice
@@ -568,8 +568,8 @@ module Network.Google.Books
     , dictlayerdataCommon
     , dcTitle
 
-    -- ** BooksMyconfigSyncVolumeLicensesFeatures
-    , BooksMyconfigSyncVolumeLicensesFeatures (..)
+    -- ** BooksMyConfigSyncVolumeLicensesFeatures
+    , BooksMyConfigSyncVolumeLicensesFeatures (..)
 
     -- ** GeolayerdataGeoViewportLo
     , GeolayerdataGeoViewportLo
@@ -577,8 +577,8 @@ module Network.Google.Books
     , ggvlLatitude
     , ggvlLongitude
 
-    -- ** BooksVolumesUseruploadedListProcessingState
-    , BooksVolumesUseruploadedListProcessingState (..)
+    -- ** BooksVolumesUserUploadedListProcessingState
+    , BooksVolumesUserUploadedListProcessingState (..)
 
     -- ** DownloadAccessRestriction
     , DownloadAccessRestriction
@@ -596,8 +596,8 @@ module Network.Google.Books
     , darMessage
     , darNonce
 
-    -- ** BooksMylibraryBookshelvesAddVolumeReason
-    , BooksMylibraryBookshelvesAddVolumeReason (..)
+    -- ** BooksMyLibraryBookshelvesAddVolumeReason
+    , BooksMyLibraryBookshelvesAddVolumeReason (..)
 
     -- ** VolumeSaleInfoRetailPrice
     , VolumeSaleInfoRetailPrice
@@ -615,7 +615,7 @@ module Network.Google.Books
     , rVolumeId
     , rAuthor
     , rSource
-    , rFullTextUrl
+    , rFullTextURL
     , rTitle
     , rType
 
@@ -672,9 +672,9 @@ module Network.Google.Books
     , OffersItems
     , offersItems
     , oiItems
-    , oiArtUrl
+    , oiArtURL
     , oiId
-    , oiGservicesKey
+    , oiGServicesKey
 
     -- ** Metadata
     , Metadata
@@ -733,7 +733,7 @@ module Network.Google.Books
     -- ** DictlayerdataDictWordsExamplesSource
     , DictlayerdataDictWordsExamplesSource
     , dictlayerdataDictWordsExamplesSource
-    , ddwesUrl
+    , ddwesURL
     , ddwesAttribution
 
     -- ** VolumeSaleInfoOffersRentalDuration
@@ -780,7 +780,7 @@ module Network.Google.Books
     -- ** DictlayerdataDictWordsSenses
     , DictlayerdataDictWordsSenses
     , dictlayerdataDictWordsSenses
-    , ddwsPronunciationUrl
+    , ddwsPronunciationURL
     , ddwsConjugations
     , ddwsPronunciation
     , ddwsSynonyms
@@ -792,7 +792,7 @@ module Network.Google.Books
     -- ** DictlayerdataDictWordsDerivativesSource
     , DictlayerdataDictWordsDerivativesSource
     , dictlayerdataDictWordsDerivativesSource
-    , ddwdsUrl
+    , ddwdsURL
     , ddwdsAttribution
 
     -- ** MetadataItems
@@ -801,7 +801,7 @@ module Network.Google.Books
     , miSize
     , miVersion
     , miLanguage
-    , miDownloadUrl
+    , miDownloadURL
     , miEncryptedKey
 
     -- ** DictlayerdataDict
@@ -820,7 +820,7 @@ module Network.Google.Books
     , OffersItemsItems
     , offersItemsItems
     , oiiCanonicalVolumeLink
-    , oiiCoverUrl
+    , oiiCoverURL
     , oiiVolumeId
     , oiiAuthor
     , oiiTitle
@@ -841,8 +841,8 @@ module Network.Google.Books
     , carMessage
     , carNonce
 
-    -- ** BooksMylibraryBookshelvesVolumesListProjection
-    , BooksMylibraryBookshelvesVolumesListProjection (..)
+    -- ** BooksMyLibraryBookshelvesVolumesListProjection
+    , BooksMyLibraryBookshelvesVolumesListProjection (..)
 
     -- ** DownloadAccesses
     , DownloadAccesses
@@ -862,7 +862,7 @@ module Network.Google.Books
     -- ** DictlayerdataDictSource
     , DictlayerdataDictSource
     , dictlayerdataDictSource
-    , ddsUrl
+    , ddsURL
     , ddsAttribution
 
     -- ** GeolayerdataGeoViewportHi
@@ -914,7 +914,7 @@ module Network.Google.Books
     -- ** DictlayerdataDictWordsSensesSource
     , DictlayerdataDictWordsSensesSource
     , dictlayerdataDictWordsSensesSource
-    , ddwssUrl
+    , ddwssURL
     , ddwssAttribution
 
     -- ** BooksVolumesMybooksListProcessingState
@@ -927,8 +927,8 @@ module Network.Google.Books
     , layKind
     , layItems
 
-    -- ** BooksMyconfigRequestAccessLicenseTypes
-    , BooksMyconfigRequestAccessLicenseTypes (..)
+    -- ** BooksMyConfigRequestAccessLicenseTypes
+    , BooksMyConfigRequestAccessLicenseTypes (..)
 
     -- ** VolumeSaleInfoOffersListPrice
     , VolumeSaleInfoOffersListPrice
@@ -943,9 +943,6 @@ module Network.Google.Books
     , barEndOffset
     , barEndPosition
     , barStartPosition
-
-    -- ** Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.Books.Types
@@ -953,9 +950,9 @@ import           Network.Google.Prelude
 import           Network.Google.Resource.Books.Bookshelves.Get
 import           Network.Google.Resource.Books.Bookshelves.List
 import           Network.Google.Resource.Books.Bookshelves.Volumes.List
-import           Network.Google.Resource.Books.Cloudloading.AddBook
-import           Network.Google.Resource.Books.Cloudloading.DeleteBook
-import           Network.Google.Resource.Books.Cloudloading.UpdateBook
+import           Network.Google.Resource.Books.CloudLoading.AddBook
+import           Network.Google.Resource.Books.CloudLoading.DeleteBook
+import           Network.Google.Resource.Books.CloudLoading.UpdateBook
 import           Network.Google.Resource.Books.Dictionary.ListOfflineMetadata
 import           Network.Google.Resource.Books.Layers.AnnotationData.Get
 import           Network.Google.Resource.Books.Layers.AnnotationData.List
@@ -963,37 +960,37 @@ import           Network.Google.Resource.Books.Layers.Get
 import           Network.Google.Resource.Books.Layers.List
 import           Network.Google.Resource.Books.Layers.VolumeAnnotations.Get
 import           Network.Google.Resource.Books.Layers.VolumeAnnotations.List
-import           Network.Google.Resource.Books.Myconfig.GetUserSettings
-import           Network.Google.Resource.Books.Myconfig.ReleaseDownloadAccess
-import           Network.Google.Resource.Books.Myconfig.RequestAccess
-import           Network.Google.Resource.Books.Myconfig.SyncVolumeLicenses
-import           Network.Google.Resource.Books.Myconfig.UpdateUserSettings
-import           Network.Google.Resource.Books.Mylibrary.Annotations.Delete
-import           Network.Google.Resource.Books.Mylibrary.Annotations.Insert
-import           Network.Google.Resource.Books.Mylibrary.Annotations.List
-import           Network.Google.Resource.Books.Mylibrary.Annotations.Summary
-import           Network.Google.Resource.Books.Mylibrary.Annotations.Update
-import           Network.Google.Resource.Books.Mylibrary.Bookshelves.AddVolume
-import           Network.Google.Resource.Books.Mylibrary.Bookshelves.ClearVolumes
-import           Network.Google.Resource.Books.Mylibrary.Bookshelves.Get
-import           Network.Google.Resource.Books.Mylibrary.Bookshelves.List
-import           Network.Google.Resource.Books.Mylibrary.Bookshelves.MoveVolume
-import           Network.Google.Resource.Books.Mylibrary.Bookshelves.RemoveVolume
-import           Network.Google.Resource.Books.Mylibrary.Bookshelves.Volumes.List
-import           Network.Google.Resource.Books.Mylibrary.Readingpositions.Get
-import           Network.Google.Resource.Books.Mylibrary.Readingpositions.SetPosition
+import           Network.Google.Resource.Books.MyConfig.GetUserSettings
+import           Network.Google.Resource.Books.MyConfig.ReleaseDownloadAccess
+import           Network.Google.Resource.Books.MyConfig.RequestAccess
+import           Network.Google.Resource.Books.MyConfig.SyncVolumeLicenses
+import           Network.Google.Resource.Books.MyConfig.UpdateUserSettings
+import           Network.Google.Resource.Books.MyLibrary.Annotations.Delete
+import           Network.Google.Resource.Books.MyLibrary.Annotations.Insert
+import           Network.Google.Resource.Books.MyLibrary.Annotations.List
+import           Network.Google.Resource.Books.MyLibrary.Annotations.Summary
+import           Network.Google.Resource.Books.MyLibrary.Annotations.Update
+import           Network.Google.Resource.Books.MyLibrary.Bookshelves.AddVolume
+import           Network.Google.Resource.Books.MyLibrary.Bookshelves.ClearVolumes
+import           Network.Google.Resource.Books.MyLibrary.Bookshelves.Get
+import           Network.Google.Resource.Books.MyLibrary.Bookshelves.List
+import           Network.Google.Resource.Books.MyLibrary.Bookshelves.MoveVolume
+import           Network.Google.Resource.Books.MyLibrary.Bookshelves.RemoveVolume
+import           Network.Google.Resource.Books.MyLibrary.Bookshelves.Volumes.List
+import           Network.Google.Resource.Books.MyLibrary.ReadingPositions.Get
+import           Network.Google.Resource.Books.MyLibrary.ReadingPositions.SetPosition
 import           Network.Google.Resource.Books.Onboarding.ListCategories
 import           Network.Google.Resource.Books.Onboarding.ListCategoryVolumes
-import           Network.Google.Resource.Books.Promooffer.Accept
-import           Network.Google.Resource.Books.Promooffer.Dismiss
-import           Network.Google.Resource.Books.Promooffer.Get
+import           Network.Google.Resource.Books.PromoOffer.Accept
+import           Network.Google.Resource.Books.PromoOffer.Dismiss
+import           Network.Google.Resource.Books.PromoOffer.Get
 import           Network.Google.Resource.Books.Volumes.Associated.List
 import           Network.Google.Resource.Books.Volumes.Get
 import           Network.Google.Resource.Books.Volumes.List
 import           Network.Google.Resource.Books.Volumes.Mybooks.List
 import           Network.Google.Resource.Books.Volumes.Recommended.List
 import           Network.Google.Resource.Books.Volumes.Recommended.Rate
-import           Network.Google.Resource.Books.Volumes.Useruploaded.List
+import           Network.Google.Resource.Books.Volumes.UserUploaded.List
 
 {- $resources
 TODO
@@ -1002,26 +999,26 @@ TODO
 type BooksAPI =
      OnboardingListCategoriesResource :<|>
        OnboardingListCategoryVolumesResource
-       :<|> MylibraryAnnotationsSummaryResource
-       :<|> MylibraryAnnotationsInsertResource
-       :<|> MylibraryAnnotationsListResource
-       :<|> MylibraryAnnotationsDeleteResource
-       :<|> MylibraryAnnotationsUpdateResource
-       :<|> MylibraryReadingpositionsGetResource
-       :<|> MylibraryReadingpositionsSetPositionResource
-       :<|> MylibraryBookshelvesVolumesListResource
-       :<|> MylibraryBookshelvesClearVolumesResource
-       :<|> MylibraryBookshelvesListResource
-       :<|> MylibraryBookshelvesGetResource
-       :<|> MylibraryBookshelvesRemoveVolumeResource
-       :<|> MylibraryBookshelvesAddVolumeResource
-       :<|> MylibraryBookshelvesMoveVolumeResource
-       :<|> PromoofferAcceptResource
-       :<|> PromoofferGetResource
-       :<|> PromoofferDismissResource
-       :<|> CloudloadingAddBookResource
-       :<|> CloudloadingUpdateBookResource
-       :<|> CloudloadingDeleteBookResource
+       :<|> MyLibraryAnnotationsSummaryResource
+       :<|> MyLibraryAnnotationsInsertResource
+       :<|> MyLibraryAnnotationsListResource
+       :<|> MyLibraryAnnotationsDeleteResource
+       :<|> MyLibraryAnnotationsUpdateResource
+       :<|> MyLibraryReadingPositionsGetResource
+       :<|> MyLibraryReadingPositionsSetPositionResource
+       :<|> MyLibraryBookshelvesVolumesListResource
+       :<|> MyLibraryBookshelvesClearVolumesResource
+       :<|> MyLibraryBookshelvesListResource
+       :<|> MyLibraryBookshelvesGetResource
+       :<|> MyLibraryBookshelvesRemoveVolumeResource
+       :<|> MyLibraryBookshelvesAddVolumeResource
+       :<|> MyLibraryBookshelvesMoveVolumeResource
+       :<|> PromoOfferAcceptResource
+       :<|> PromoOfferGetResource
+       :<|> PromoOfferDismissResource
+       :<|> CloudLoadingAddBookResource
+       :<|> CloudLoadingUpdateBookResource
+       :<|> CloudLoadingDeleteBookResource
        :<|> LayersVolumeAnnotationsListResource
        :<|> LayersVolumeAnnotationsGetResource
        :<|> LayersAnnotationDataListResource
@@ -1029,7 +1026,7 @@ type BooksAPI =
        :<|> LayersListResource
        :<|> LayersGetResource
        :<|> DictionaryListOfflineMetadataResource
-       :<|> VolumesUseruploadedListResource
+       :<|> VolumesUserUploadedListResource
        :<|> VolumesRecommendedListResource
        :<|> VolumesRecommendedRateResource
        :<|> VolumesAssociatedListResource
@@ -1039,11 +1036,11 @@ type BooksAPI =
        :<|> BookshelvesVolumesListResource
        :<|> BookshelvesListResource
        :<|> BookshelvesGetResource
-       :<|> MyconfigSyncVolumeLicensesResource
-       :<|> MyconfigGetUserSettingsResource
-       :<|> MyconfigRequestAccessResource
-       :<|> MyconfigUpdateUserSettingsResource
-       :<|> MyconfigReleaseDownloadAccessResource
+       :<|> MyConfigSyncVolumeLicensesResource
+       :<|> MyConfigGetUserSettingsResource
+       :<|> MyConfigRequestAccessResource
+       :<|> MyConfigUpdateUserSettingsResource
+       :<|> MyConfigReleaseDownloadAccessResource
 
 booksAPI :: Proxy BooksAPI
 booksAPI = Proxy

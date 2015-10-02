@@ -32,11 +32,10 @@ module Network.Google.Resource.Drive.Files.EmptyTrash
     -- * Request Lenses
     , fetQuotaUser
     , fetPrettyPrint
-    , fetUserIp
+    , fetUserIP
     , fetKey
-    , fetOauthToken
+    , fetOAuthToken
     , fetFields
-    , fetAlt
     ) where
 
 import           Network.Google.Drive.Types
@@ -50,10 +49,10 @@ type FilesEmptyTrashResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Delete '[JSON] ()
+                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Permanently deletes all of the user\'s trashed files.
 --
@@ -61,11 +60,10 @@ type FilesEmptyTrashResource =
 data FilesEmptyTrash' = FilesEmptyTrash'
     { _fetQuotaUser   :: !(Maybe Text)
     , _fetPrettyPrint :: !Bool
-    , _fetUserIp      :: !(Maybe Text)
-    , _fetKey         :: !(Maybe Text)
-    , _fetOauthToken  :: !(Maybe Text)
+    , _fetUserIP      :: !(Maybe Text)
+    , _fetKey         :: !(Maybe Key)
+    , _fetOAuthToken  :: !(Maybe OAuthToken)
     , _fetFields      :: !(Maybe Text)
-    , _fetAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FilesEmptyTrash'' with the minimum fields required to make a request.
@@ -76,26 +74,23 @@ data FilesEmptyTrash' = FilesEmptyTrash'
 --
 -- * 'fetPrettyPrint'
 --
--- * 'fetUserIp'
+-- * 'fetUserIP'
 --
 -- * 'fetKey'
 --
--- * 'fetOauthToken'
+-- * 'fetOAuthToken'
 --
 -- * 'fetFields'
---
--- * 'fetAlt'
 filesEmptyTrash'
     :: FilesEmptyTrash'
 filesEmptyTrash' =
     FilesEmptyTrash'
     { _fetQuotaUser = Nothing
     , _fetPrettyPrint = True
-    , _fetUserIp = Nothing
+    , _fetUserIP = Nothing
     , _fetKey = Nothing
-    , _fetOauthToken = Nothing
+    , _fetOAuthToken = Nothing
     , _fetFields = Nothing
-    , _fetAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -113,40 +108,40 @@ fetPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-fetUserIp :: Lens' FilesEmptyTrash' (Maybe Text)
-fetUserIp
-  = lens _fetUserIp (\ s a -> s{_fetUserIp = a})
+fetUserIP :: Lens' FilesEmptyTrash' (Maybe Text)
+fetUserIP
+  = lens _fetUserIP (\ s a -> s{_fetUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fetKey :: Lens' FilesEmptyTrash' (Maybe Text)
+fetKey :: Lens' FilesEmptyTrash' (Maybe Key)
 fetKey = lens _fetKey (\ s a -> s{_fetKey = a})
 
 -- | OAuth 2.0 token for the current user.
-fetOauthToken :: Lens' FilesEmptyTrash' (Maybe Text)
-fetOauthToken
-  = lens _fetOauthToken
-      (\ s a -> s{_fetOauthToken = a})
+fetOAuthToken :: Lens' FilesEmptyTrash' (Maybe OAuthToken)
+fetOAuthToken
+  = lens _fetOAuthToken
+      (\ s a -> s{_fetOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 fetFields :: Lens' FilesEmptyTrash' (Maybe Text)
 fetFields
   = lens _fetFields (\ s a -> s{_fetFields = a})
 
--- | Data format for the response.
-fetAlt :: Lens' FilesEmptyTrash' Alt
-fetAlt = lens _fetAlt (\ s a -> s{_fetAlt = a})
+instance GoogleAuth FilesEmptyTrash' where
+        authKey = fetKey . _Just
+        authToken = fetOAuthToken . _Just
 
 instance GoogleRequest FilesEmptyTrash' where
         type Rs FilesEmptyTrash' = ()
         request = requestWithRoute defReq driveURL
         requestWithRoute r u FilesEmptyTrash'{..}
-          = go _fetQuotaUser (Just _fetPrettyPrint) _fetUserIp
+          = go _fetQuotaUser (Just _fetPrettyPrint) _fetUserIP
               _fetKey
-              _fetOauthToken
+              _fetOAuthToken
               _fetFields
-              (Just _fetAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy FilesEmptyTrashResource)

@@ -32,13 +32,12 @@ module Network.Google.Resource.DFAReporting.FloodlightConfigurations.Get
     -- * Request Lenses
     , fcgQuotaUser
     , fcgPrettyPrint
-    , fcgUserIp
+    , fcgUserIP
     , fcgProfileId
     , fcgKey
     , fcgId
-    , fcgOauthToken
+    , fcgOAuthToken
     , fcgFields
-    , fcgAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,10 +53,10 @@ type FloodlightConfigurationsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :>
+                         QueryParam "alt" AltJSON :>
                            Get '[JSON] FloodlightConfiguration
 
 -- | Gets one floodlight configuration by ID.
@@ -66,13 +65,12 @@ type FloodlightConfigurationsGetResource =
 data FloodlightConfigurationsGet' = FloodlightConfigurationsGet'
     { _fcgQuotaUser   :: !(Maybe Text)
     , _fcgPrettyPrint :: !Bool
-    , _fcgUserIp      :: !(Maybe Text)
+    , _fcgUserIP      :: !(Maybe Text)
     , _fcgProfileId   :: !Int64
-    , _fcgKey         :: !(Maybe Text)
+    , _fcgKey         :: !(Maybe Key)
     , _fcgId          :: !Int64
-    , _fcgOauthToken  :: !(Maybe Text)
+    , _fcgOAuthToken  :: !(Maybe OAuthToken)
     , _fcgFields      :: !(Maybe Text)
-    , _fcgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightConfigurationsGet'' with the minimum fields required to make a request.
@@ -83,7 +81,7 @@ data FloodlightConfigurationsGet' = FloodlightConfigurationsGet'
 --
 -- * 'fcgPrettyPrint'
 --
--- * 'fcgUserIp'
+-- * 'fcgUserIP'
 --
 -- * 'fcgProfileId'
 --
@@ -91,11 +89,9 @@ data FloodlightConfigurationsGet' = FloodlightConfigurationsGet'
 --
 -- * 'fcgId'
 --
--- * 'fcgOauthToken'
+-- * 'fcgOAuthToken'
 --
 -- * 'fcgFields'
---
--- * 'fcgAlt'
 floodlightConfigurationsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
@@ -104,13 +100,12 @@ floodlightConfigurationsGet' pFcgProfileId_ pFcgId_ =
     FloodlightConfigurationsGet'
     { _fcgQuotaUser = Nothing
     , _fcgPrettyPrint = True
-    , _fcgUserIp = Nothing
+    , _fcgUserIP = Nothing
     , _fcgProfileId = pFcgProfileId_
     , _fcgKey = Nothing
     , _fcgId = pFcgId_
-    , _fcgOauthToken = Nothing
+    , _fcgOAuthToken = Nothing
     , _fcgFields = Nothing
-    , _fcgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -128,9 +123,9 @@ fcgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-fcgUserIp :: Lens' FloodlightConfigurationsGet' (Maybe Text)
-fcgUserIp
-  = lens _fcgUserIp (\ s a -> s{_fcgUserIp = a})
+fcgUserIP :: Lens' FloodlightConfigurationsGet' (Maybe Text)
+fcgUserIP
+  = lens _fcgUserIP (\ s a -> s{_fcgUserIP = a})
 
 -- | User profile ID associated with this request.
 fcgProfileId :: Lens' FloodlightConfigurationsGet' Int64
@@ -140,7 +135,7 @@ fcgProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fcgKey :: Lens' FloodlightConfigurationsGet' (Maybe Text)
+fcgKey :: Lens' FloodlightConfigurationsGet' (Maybe Key)
 fcgKey = lens _fcgKey (\ s a -> s{_fcgKey = a})
 
 -- | Floodlight configuration ID.
@@ -148,19 +143,20 @@ fcgId :: Lens' FloodlightConfigurationsGet' Int64
 fcgId = lens _fcgId (\ s a -> s{_fcgId = a})
 
 -- | OAuth 2.0 token for the current user.
-fcgOauthToken :: Lens' FloodlightConfigurationsGet' (Maybe Text)
-fcgOauthToken
-  = lens _fcgOauthToken
-      (\ s a -> s{_fcgOauthToken = a})
+fcgOAuthToken :: Lens' FloodlightConfigurationsGet' (Maybe OAuthToken)
+fcgOAuthToken
+  = lens _fcgOAuthToken
+      (\ s a -> s{_fcgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 fcgFields :: Lens' FloodlightConfigurationsGet' (Maybe Text)
 fcgFields
   = lens _fcgFields (\ s a -> s{_fcgFields = a})
 
--- | Data format for the response.
-fcgAlt :: Lens' FloodlightConfigurationsGet' Alt
-fcgAlt = lens _fcgAlt (\ s a -> s{_fcgAlt = a})
+instance GoogleAuth FloodlightConfigurationsGet'
+         where
+        authKey = fcgKey . _Just
+        authToken = fcgOAuthToken . _Just
 
 instance GoogleRequest FloodlightConfigurationsGet'
          where
@@ -168,13 +164,13 @@ instance GoogleRequest FloodlightConfigurationsGet'
              FloodlightConfiguration
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u FloodlightConfigurationsGet'{..}
-          = go _fcgQuotaUser (Just _fcgPrettyPrint) _fcgUserIp
+          = go _fcgQuotaUser (Just _fcgPrettyPrint) _fcgUserIP
               _fcgProfileId
               _fcgKey
               _fcgId
-              _fcgOauthToken
+              _fcgOAuthToken
               _fcgFields
-              (Just _fcgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy FloodlightConfigurationsGetResource)

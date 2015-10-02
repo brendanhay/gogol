@@ -33,16 +33,15 @@ module Network.Google.Resource.Blogger.Pages.List
     , plStatus
     , plQuotaUser
     , plPrettyPrint
-    , plUserIp
+    , plUserIP
     , plBlogId
     , plKey
     , plFetchBodies
     , plView
     , plPageToken
-    , plOauthToken
+    , plOAuthToken
     , plMaxResults
     , plFields
-    , plAlt
     ) where
 
 import           Network.Google.Blogger.Types
@@ -58,14 +57,15 @@ type PagesListResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "fetchBodies" Bool :>
                        QueryParam "view" BloggerPagesListView :>
                          QueryParam "pageToken" Text :>
-                           QueryParam "oauth_token" Text :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "maxResults" Word32 :>
                                QueryParam "fields" Text :>
-                                 QueryParam "alt" Alt :> Get '[JSON] PageList
+                                 QueryParam "alt" AltJSON :>
+                                   Get '[JSON] PageList
 
 -- | Retrieves the pages for a blog, optionally including non-LIVE statuses.
 --
@@ -74,16 +74,15 @@ data PagesList' = PagesList'
     { _plStatus      :: !(Maybe BloggerPagesListStatus)
     , _plQuotaUser   :: !(Maybe Text)
     , _plPrettyPrint :: !Bool
-    , _plUserIp      :: !(Maybe Text)
+    , _plUserIP      :: !(Maybe Text)
     , _plBlogId      :: !Text
-    , _plKey         :: !(Maybe Text)
+    , _plKey         :: !(Maybe Key)
     , _plFetchBodies :: !(Maybe Bool)
     , _plView        :: !(Maybe BloggerPagesListView)
     , _plPageToken   :: !(Maybe Text)
-    , _plOauthToken  :: !(Maybe Text)
+    , _plOAuthToken  :: !(Maybe OAuthToken)
     , _plMaxResults  :: !(Maybe Word32)
     , _plFields      :: !(Maybe Text)
-    , _plAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PagesList'' with the minimum fields required to make a request.
@@ -96,7 +95,7 @@ data PagesList' = PagesList'
 --
 -- * 'plPrettyPrint'
 --
--- * 'plUserIp'
+-- * 'plUserIP'
 --
 -- * 'plBlogId'
 --
@@ -108,13 +107,11 @@ data PagesList' = PagesList'
 --
 -- * 'plPageToken'
 --
--- * 'plOauthToken'
+-- * 'plOAuthToken'
 --
 -- * 'plMaxResults'
 --
 -- * 'plFields'
---
--- * 'plAlt'
 pagesList'
     :: Text -- ^ 'blogId'
     -> PagesList'
@@ -123,16 +120,15 @@ pagesList' pPlBlogId_ =
     { _plStatus = Nothing
     , _plQuotaUser = Nothing
     , _plPrettyPrint = True
-    , _plUserIp = Nothing
+    , _plUserIP = Nothing
     , _plBlogId = pPlBlogId_
     , _plKey = Nothing
     , _plFetchBodies = Nothing
     , _plView = Nothing
     , _plPageToken = Nothing
-    , _plOauthToken = Nothing
+    , _plOAuthToken = Nothing
     , _plMaxResults = Nothing
     , _plFields = Nothing
-    , _plAlt = JSON
     }
 
 plStatus :: Lens' PagesList' (Maybe BloggerPagesListStatus)
@@ -153,8 +149,8 @@ plPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-plUserIp :: Lens' PagesList' (Maybe Text)
-plUserIp = lens _plUserIp (\ s a -> s{_plUserIp = a})
+plUserIP :: Lens' PagesList' (Maybe Text)
+plUserIP = lens _plUserIP (\ s a -> s{_plUserIP = a})
 
 -- | ID of the blog to fetch Pages from.
 plBlogId :: Lens' PagesList' Text
@@ -163,7 +159,7 @@ plBlogId = lens _plBlogId (\ s a -> s{_plBlogId = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-plKey :: Lens' PagesList' (Maybe Text)
+plKey :: Lens' PagesList' (Maybe Key)
 plKey = lens _plKey (\ s a -> s{_plKey = a})
 
 -- | Whether to retrieve the Page bodies.
@@ -183,9 +179,9 @@ plPageToken
   = lens _plPageToken (\ s a -> s{_plPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-plOauthToken :: Lens' PagesList' (Maybe Text)
-plOauthToken
-  = lens _plOauthToken (\ s a -> s{_plOauthToken = a})
+plOAuthToken :: Lens' PagesList' (Maybe OAuthToken)
+plOAuthToken
+  = lens _plOAuthToken (\ s a -> s{_plOAuthToken = a})
 
 -- | Maximum number of Pages to fetch.
 plMaxResults :: Lens' PagesList' (Maybe Word32)
@@ -196,25 +192,25 @@ plMaxResults
 plFields :: Lens' PagesList' (Maybe Text)
 plFields = lens _plFields (\ s a -> s{_plFields = a})
 
--- | Data format for the response.
-plAlt :: Lens' PagesList' Alt
-plAlt = lens _plAlt (\ s a -> s{_plAlt = a})
+instance GoogleAuth PagesList' where
+        authKey = plKey . _Just
+        authToken = plOAuthToken . _Just
 
 instance GoogleRequest PagesList' where
         type Rs PagesList' = PageList
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PagesList'{..}
           = go _plStatus _plQuotaUser (Just _plPrettyPrint)
-              _plUserIp
+              _plUserIP
               _plBlogId
               _plKey
               _plFetchBodies
               _plView
               _plPageToken
-              _plOauthToken
+              _plOAuthToken
               _plMaxResults
               _plFields
-              (Just _plAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy PagesListResource)
                       r

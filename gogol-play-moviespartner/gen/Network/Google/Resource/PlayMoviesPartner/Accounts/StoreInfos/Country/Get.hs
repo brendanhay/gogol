@@ -21,7 +21,7 @@
 -- Authorization rules_ and _Get methods rules_ for more information about
 -- this method.
 --
--- /See:/ <https://developers.google.com/playmoviespartner/ Google Play Movies Partner API Reference> for @PlaymoviespartnerAccountsStoreInfosCountryGet@.
+-- /See:/ <https://developers.google.com/playmoviespartner/ Google Play Movies Partner API Reference> for @PlaymoviesPartynerAccountsStoreInfosCountryGet@.
 module Network.Google.Resource.PlayMoviesPartner.Accounts.StoreInfos.Country.Get
     (
     -- * REST Resource
@@ -44,16 +44,15 @@ module Network.Google.Resource.PlayMoviesPartner.Accounts.StoreInfos.Country.Get
     , asicgAccountId
     , asicgBearerToken
     , asicgKey
-    , asicgOauthToken
+    , asicgOAuthToken
     , asicgFields
     , asicgCallback
-    , asicgAlt
     ) where
 
 import           Network.Google.PlayMoviesPartner.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlaymoviespartnerAccountsStoreInfosCountryGet@ which the
+-- | A resource alias for @PlaymoviesPartynerAccountsStoreInfosCountryGet@ which the
 -- 'AccountsStoreInfosCountryGet'' request conforms to.
 type AccountsStoreInfosCountryGetResource =
      "v1" :>
@@ -71,11 +70,11 @@ type AccountsStoreInfosCountryGetResource =
                              QueryParam "access_token" Text :>
                                QueryParam "uploadType" Text :>
                                  QueryParam "bearer_token" Text :>
-                                   QueryParam "key" Text :>
-                                     QueryParam "oauth_token" Text :>
+                                   QueryParam "key" Key :>
+                                     QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "fields" Text :>
                                          QueryParam "callback" Text :>
-                                           QueryParam "alt" Text :>
+                                           QueryParam "alt" AltJSON :>
                                              Get '[JSON] StoreInfo
 
 -- | Get a StoreInfo given its video id and country. See _Authentication and
@@ -95,11 +94,10 @@ data AccountsStoreInfosCountryGet' = AccountsStoreInfosCountryGet'
     , _asicgVideoId        :: !Text
     , _asicgAccountId      :: !Text
     , _asicgBearerToken    :: !(Maybe Text)
-    , _asicgKey            :: !(Maybe Text)
-    , _asicgOauthToken     :: !(Maybe Text)
+    , _asicgKey            :: !(Maybe Key)
+    , _asicgOAuthToken     :: !(Maybe OAuthToken)
     , _asicgFields         :: !(Maybe Text)
     , _asicgCallback       :: !(Maybe Text)
-    , _asicgAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsStoreInfosCountryGet'' with the minimum fields required to make a request.
@@ -130,13 +128,11 @@ data AccountsStoreInfosCountryGet' = AccountsStoreInfosCountryGet'
 --
 -- * 'asicgKey'
 --
--- * 'asicgOauthToken'
+-- * 'asicgOAuthToken'
 --
 -- * 'asicgFields'
 --
 -- * 'asicgCallback'
---
--- * 'asicgAlt'
 accountsStoreInfosCountryGet'
     :: Text -- ^ 'country'
     -> Text -- ^ 'videoId'
@@ -156,10 +152,9 @@ accountsStoreInfosCountryGet' pAsicgCountry_ pAsicgVideoId_ pAsicgAccountId_ =
     , _asicgAccountId = pAsicgAccountId_
     , _asicgBearerToken = Nothing
     , _asicgKey = Nothing
-    , _asicgOauthToken = Nothing
+    , _asicgOAuthToken = Nothing
     , _asicgFields = Nothing
     , _asicgCallback = Nothing
-    , _asicgAlt = "json"
     }
 
 -- | V1 error format.
@@ -228,14 +223,14 @@ asicgBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-asicgKey :: Lens' AccountsStoreInfosCountryGet' (Maybe Text)
+asicgKey :: Lens' AccountsStoreInfosCountryGet' (Maybe Key)
 asicgKey = lens _asicgKey (\ s a -> s{_asicgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-asicgOauthToken :: Lens' AccountsStoreInfosCountryGet' (Maybe Text)
-asicgOauthToken
-  = lens _asicgOauthToken
-      (\ s a -> s{_asicgOauthToken = a})
+asicgOAuthToken :: Lens' AccountsStoreInfosCountryGet' (Maybe OAuthToken)
+asicgOAuthToken
+  = lens _asicgOAuthToken
+      (\ s a -> s{_asicgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 asicgFields :: Lens' AccountsStoreInfosCountryGet' (Maybe Text)
@@ -248,9 +243,10 @@ asicgCallback
   = lens _asicgCallback
       (\ s a -> s{_asicgCallback = a})
 
--- | Data format for response.
-asicgAlt :: Lens' AccountsStoreInfosCountryGet' Text
-asicgAlt = lens _asicgAlt (\ s a -> s{_asicgAlt = a})
+instance GoogleAuth AccountsStoreInfosCountryGet'
+         where
+        authKey = asicgKey . _Just
+        authToken = asicgOAuthToken . _Just
 
 instance GoogleRequest AccountsStoreInfosCountryGet'
          where
@@ -270,10 +266,10 @@ instance GoogleRequest AccountsStoreInfosCountryGet'
               _asicgAccountId
               _asicgBearerToken
               _asicgKey
-              _asicgOauthToken
+              _asicgOAuthToken
               _asicgFields
               _asicgCallback
-              (Just _asicgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountsStoreInfosCountryGetResource)

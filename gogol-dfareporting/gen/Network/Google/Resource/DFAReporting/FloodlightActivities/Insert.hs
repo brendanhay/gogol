@@ -32,12 +32,12 @@ module Network.Google.Resource.DFAReporting.FloodlightActivities.Insert
     -- * Request Lenses
     , faiQuotaUser
     , faiPrettyPrint
-    , faiUserIp
+    , faiUserIP
     , faiProfileId
     , faiKey
-    , faiOauthToken
+    , faiFloodlightActivity
+    , faiOAuthToken
     , faiFields
-    , faiAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,24 +52,25 @@ type FloodlightActivitiesInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :>
-                         Post '[JSON] FloodlightActivity
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] FloodlightActivity :>
+                           Post '[JSON] FloodlightActivity
 
 -- | Inserts a new floodlight activity.
 --
 -- /See:/ 'floodlightActivitiesInsert'' smart constructor.
 data FloodlightActivitiesInsert' = FloodlightActivitiesInsert'
-    { _faiQuotaUser   :: !(Maybe Text)
-    , _faiPrettyPrint :: !Bool
-    , _faiUserIp      :: !(Maybe Text)
-    , _faiProfileId   :: !Int64
-    , _faiKey         :: !(Maybe Text)
-    , _faiOauthToken  :: !(Maybe Text)
-    , _faiFields      :: !(Maybe Text)
-    , _faiAlt         :: !Alt
+    { _faiQuotaUser          :: !(Maybe Text)
+    , _faiPrettyPrint        :: !Bool
+    , _faiUserIP             :: !(Maybe Text)
+    , _faiProfileId          :: !Int64
+    , _faiKey                :: !(Maybe Key)
+    , _faiFloodlightActivity :: !FloodlightActivity
+    , _faiOAuthToken         :: !(Maybe OAuthToken)
+    , _faiFields             :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivitiesInsert'' with the minimum fields required to make a request.
@@ -80,30 +81,31 @@ data FloodlightActivitiesInsert' = FloodlightActivitiesInsert'
 --
 -- * 'faiPrettyPrint'
 --
--- * 'faiUserIp'
+-- * 'faiUserIP'
 --
 -- * 'faiProfileId'
 --
 -- * 'faiKey'
 --
--- * 'faiOauthToken'
+-- * 'faiFloodlightActivity'
+--
+-- * 'faiOAuthToken'
 --
 -- * 'faiFields'
---
--- * 'faiAlt'
 floodlightActivitiesInsert'
     :: Int64 -- ^ 'profileId'
+    -> FloodlightActivity -- ^ 'FloodlightActivity'
     -> FloodlightActivitiesInsert'
-floodlightActivitiesInsert' pFaiProfileId_ =
+floodlightActivitiesInsert' pFaiProfileId_ pFaiFloodlightActivity_ =
     FloodlightActivitiesInsert'
     { _faiQuotaUser = Nothing
     , _faiPrettyPrint = True
-    , _faiUserIp = Nothing
+    , _faiUserIP = Nothing
     , _faiProfileId = pFaiProfileId_
     , _faiKey = Nothing
-    , _faiOauthToken = Nothing
+    , _faiFloodlightActivity = pFaiFloodlightActivity_
+    , _faiOAuthToken = Nothing
     , _faiFields = Nothing
-    , _faiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -121,9 +123,9 @@ faiPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-faiUserIp :: Lens' FloodlightActivitiesInsert' (Maybe Text)
-faiUserIp
-  = lens _faiUserIp (\ s a -> s{_faiUserIp = a})
+faiUserIP :: Lens' FloodlightActivitiesInsert' (Maybe Text)
+faiUserIP
+  = lens _faiUserIP (\ s a -> s{_faiUserIP = a})
 
 -- | User profile ID associated with this request.
 faiProfileId :: Lens' FloodlightActivitiesInsert' Int64
@@ -133,23 +135,29 @@ faiProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-faiKey :: Lens' FloodlightActivitiesInsert' (Maybe Text)
+faiKey :: Lens' FloodlightActivitiesInsert' (Maybe Key)
 faiKey = lens _faiKey (\ s a -> s{_faiKey = a})
 
+-- | Multipart request metadata.
+faiFloodlightActivity :: Lens' FloodlightActivitiesInsert' FloodlightActivity
+faiFloodlightActivity
+  = lens _faiFloodlightActivity
+      (\ s a -> s{_faiFloodlightActivity = a})
+
 -- | OAuth 2.0 token for the current user.
-faiOauthToken :: Lens' FloodlightActivitiesInsert' (Maybe Text)
-faiOauthToken
-  = lens _faiOauthToken
-      (\ s a -> s{_faiOauthToken = a})
+faiOAuthToken :: Lens' FloodlightActivitiesInsert' (Maybe OAuthToken)
+faiOAuthToken
+  = lens _faiOAuthToken
+      (\ s a -> s{_faiOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 faiFields :: Lens' FloodlightActivitiesInsert' (Maybe Text)
 faiFields
   = lens _faiFields (\ s a -> s{_faiFields = a})
 
--- | Data format for the response.
-faiAlt :: Lens' FloodlightActivitiesInsert' Alt
-faiAlt = lens _faiAlt (\ s a -> s{_faiAlt = a})
+instance GoogleAuth FloodlightActivitiesInsert' where
+        authKey = faiKey . _Just
+        authToken = faiOAuthToken . _Just
 
 instance GoogleRequest FloodlightActivitiesInsert'
          where
@@ -157,12 +165,13 @@ instance GoogleRequest FloodlightActivitiesInsert'
              FloodlightActivity
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u FloodlightActivitiesInsert'{..}
-          = go _faiQuotaUser (Just _faiPrettyPrint) _faiUserIp
+          = go _faiQuotaUser (Just _faiPrettyPrint) _faiUserIP
               _faiProfileId
               _faiKey
-              _faiOauthToken
+              _faiOAuthToken
               _faiFields
-              (Just _faiAlt)
+              (Just AltJSON)
+              _faiFloodlightActivity
           where go
                   = clientWithRoute
                       (Proxy :: Proxy FloodlightActivitiesInsertResource)

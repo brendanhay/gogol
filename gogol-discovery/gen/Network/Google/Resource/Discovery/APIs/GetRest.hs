@@ -32,13 +32,12 @@ module Network.Google.Resource.Discovery.APIs.GetRest
     -- * Request Lenses
     , agrQuotaUser
     , agrPrettyPrint
-    , agrUserIp
+    , agrUserIP
     , agrKey
     , agrVersion
-    , agrApi
-    , agrOauthToken
+    , agrAPI
+    , agrOAuthToken
     , agrFields
-    , agrAlt
     ) where
 
 import           Network.Google.Discovery.Types
@@ -54,10 +53,11 @@ type ApisGetRestResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] RestDescription
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] RestDescription
 
 -- | Retrieve the description of a particular version of an api.
 --
@@ -65,13 +65,12 @@ type ApisGetRestResource =
 data APIsGetRest' = APIsGetRest'
     { _agrQuotaUser   :: !(Maybe Text)
     , _agrPrettyPrint :: !Bool
-    , _agrUserIp      :: !(Maybe Text)
-    , _agrKey         :: !(Maybe Text)
+    , _agrUserIP      :: !(Maybe Text)
+    , _agrKey         :: !(Maybe Key)
     , _agrVersion     :: !Text
-    , _agrApi         :: !Text
-    , _agrOauthToken  :: !(Maybe Text)
+    , _agrAPI         :: !Text
+    , _agrOAuthToken  :: !(Maybe OAuthToken)
     , _agrFields      :: !(Maybe Text)
-    , _agrAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'APIsGetRest'' with the minimum fields required to make a request.
@@ -82,34 +81,31 @@ data APIsGetRest' = APIsGetRest'
 --
 -- * 'agrPrettyPrint'
 --
--- * 'agrUserIp'
+-- * 'agrUserIP'
 --
 -- * 'agrKey'
 --
 -- * 'agrVersion'
 --
--- * 'agrApi'
+-- * 'agrAPI'
 --
--- * 'agrOauthToken'
+-- * 'agrOAuthToken'
 --
 -- * 'agrFields'
---
--- * 'agrAlt'
 aPIsGetRest'
     :: Text -- ^ 'version'
     -> Text -- ^ 'api'
     -> APIsGetRest'
-aPIsGetRest' pAgrVersion_ pAgrApi_ =
+aPIsGetRest' pAgrVersion_ pAgrAPI_ =
     APIsGetRest'
     { _agrQuotaUser = Nothing
     , _agrPrettyPrint = True
-    , _agrUserIp = Nothing
+    , _agrUserIP = Nothing
     , _agrKey = Nothing
     , _agrVersion = pAgrVersion_
-    , _agrApi = pAgrApi_
-    , _agrOauthToken = Nothing
+    , _agrAPI = pAgrAPI_
+    , _agrOAuthToken = Nothing
     , _agrFields = Nothing
-    , _agrAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,14 +123,14 @@ agrPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-agrUserIp :: Lens' APIsGetRest' (Maybe Text)
-agrUserIp
-  = lens _agrUserIp (\ s a -> s{_agrUserIp = a})
+agrUserIP :: Lens' APIsGetRest' (Maybe Text)
+agrUserIP
+  = lens _agrUserIP (\ s a -> s{_agrUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-agrKey :: Lens' APIsGetRest' (Maybe Text)
+agrKey :: Lens' APIsGetRest' (Maybe Key)
 agrKey = lens _agrKey (\ s a -> s{_agrKey = a})
 
 -- | The version of the API.
@@ -143,35 +139,35 @@ agrVersion
   = lens _agrVersion (\ s a -> s{_agrVersion = a})
 
 -- | The name of the API.
-agrApi :: Lens' APIsGetRest' Text
-agrApi = lens _agrApi (\ s a -> s{_agrApi = a})
+agrAPI :: Lens' APIsGetRest' Text
+agrAPI = lens _agrAPI (\ s a -> s{_agrAPI = a})
 
 -- | OAuth 2.0 token for the current user.
-agrOauthToken :: Lens' APIsGetRest' (Maybe Text)
-agrOauthToken
-  = lens _agrOauthToken
-      (\ s a -> s{_agrOauthToken = a})
+agrOAuthToken :: Lens' APIsGetRest' (Maybe OAuthToken)
+agrOAuthToken
+  = lens _agrOAuthToken
+      (\ s a -> s{_agrOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 agrFields :: Lens' APIsGetRest' (Maybe Text)
 agrFields
   = lens _agrFields (\ s a -> s{_agrFields = a})
 
--- | Data format for the response.
-agrAlt :: Lens' APIsGetRest' Alt
-agrAlt = lens _agrAlt (\ s a -> s{_agrAlt = a})
+instance GoogleAuth APIsGetRest' where
+        authKey = agrKey . _Just
+        authToken = agrOAuthToken . _Just
 
 instance GoogleRequest APIsGetRest' where
         type Rs APIsGetRest' = RestDescription
         request = requestWithRoute defReq discoveryURL
         requestWithRoute r u APIsGetRest'{..}
-          = go _agrQuotaUser (Just _agrPrettyPrint) _agrUserIp
+          = go _agrQuotaUser (Just _agrPrettyPrint) _agrUserIP
               _agrKey
               _agrVersion
-              _agrApi
-              _agrOauthToken
+              _agrAPI
+              _agrOAuthToken
               _agrFields
-              (Just _agrAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ApisGetRestResource)

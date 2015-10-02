@@ -32,12 +32,11 @@ module Network.Google.Resource.DFAReporting.Regions.List
     -- * Request Lenses
     , rlQuotaUser
     , rlPrettyPrint
-    , rlUserIp
+    , rlUserIP
     , rlProfileId
     , rlKey
-    , rlOauthToken
+    , rlOAuthToken
     , rlFields
-    , rlAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,10 +51,10 @@ type RegionsListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :>
+                       QueryParam "alt" AltJSON :>
                          Get '[JSON] RegionsListResponse
 
 -- | Retrieves a list of regions.
@@ -64,12 +63,11 @@ type RegionsListResource =
 data RegionsList' = RegionsList'
     { _rlQuotaUser   :: !(Maybe Text)
     , _rlPrettyPrint :: !Bool
-    , _rlUserIp      :: !(Maybe Text)
+    , _rlUserIP      :: !(Maybe Text)
     , _rlProfileId   :: !Int64
-    , _rlKey         :: !(Maybe Text)
-    , _rlOauthToken  :: !(Maybe Text)
+    , _rlKey         :: !(Maybe Key)
+    , _rlOAuthToken  :: !(Maybe OAuthToken)
     , _rlFields      :: !(Maybe Text)
-    , _rlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RegionsList'' with the minimum fields required to make a request.
@@ -80,17 +78,15 @@ data RegionsList' = RegionsList'
 --
 -- * 'rlPrettyPrint'
 --
--- * 'rlUserIp'
+-- * 'rlUserIP'
 --
 -- * 'rlProfileId'
 --
 -- * 'rlKey'
 --
--- * 'rlOauthToken'
+-- * 'rlOAuthToken'
 --
 -- * 'rlFields'
---
--- * 'rlAlt'
 regionsList'
     :: Int64 -- ^ 'profileId'
     -> RegionsList'
@@ -98,12 +94,11 @@ regionsList' pRlProfileId_ =
     RegionsList'
     { _rlQuotaUser = Nothing
     , _rlPrettyPrint = True
-    , _rlUserIp = Nothing
+    , _rlUserIP = Nothing
     , _rlProfileId = pRlProfileId_
     , _rlKey = Nothing
-    , _rlOauthToken = Nothing
+    , _rlOAuthToken = Nothing
     , _rlFields = Nothing
-    , _rlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -121,8 +116,8 @@ rlPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rlUserIp :: Lens' RegionsList' (Maybe Text)
-rlUserIp = lens _rlUserIp (\ s a -> s{_rlUserIp = a})
+rlUserIP :: Lens' RegionsList' (Maybe Text)
+rlUserIP = lens _rlUserIP (\ s a -> s{_rlUserIP = a})
 
 -- | User profile ID associated with this request.
 rlProfileId :: Lens' RegionsList' Int64
@@ -132,32 +127,32 @@ rlProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rlKey :: Lens' RegionsList' (Maybe Text)
+rlKey :: Lens' RegionsList' (Maybe Key)
 rlKey = lens _rlKey (\ s a -> s{_rlKey = a})
 
 -- | OAuth 2.0 token for the current user.
-rlOauthToken :: Lens' RegionsList' (Maybe Text)
-rlOauthToken
-  = lens _rlOauthToken (\ s a -> s{_rlOauthToken = a})
+rlOAuthToken :: Lens' RegionsList' (Maybe OAuthToken)
+rlOAuthToken
+  = lens _rlOAuthToken (\ s a -> s{_rlOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 rlFields :: Lens' RegionsList' (Maybe Text)
 rlFields = lens _rlFields (\ s a -> s{_rlFields = a})
 
--- | Data format for the response.
-rlAlt :: Lens' RegionsList' Alt
-rlAlt = lens _rlAlt (\ s a -> s{_rlAlt = a})
+instance GoogleAuth RegionsList' where
+        authKey = rlKey . _Just
+        authToken = rlOAuthToken . _Just
 
 instance GoogleRequest RegionsList' where
         type Rs RegionsList' = RegionsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u RegionsList'{..}
-          = go _rlQuotaUser (Just _rlPrettyPrint) _rlUserIp
+          = go _rlQuotaUser (Just _rlPrettyPrint) _rlUserIP
               _rlProfileId
               _rlKey
-              _rlOauthToken
+              _rlOAuthToken
               _rlFields
-              (Just _rlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy RegionsListResource)

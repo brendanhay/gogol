@@ -34,12 +34,12 @@ module Network.Google.Resource.Compute.VPNTunnels.Insert
     , vtiQuotaUser
     , vtiPrettyPrint
     , vtiProject
-    , vtiUserIp
+    , vtiUserIP
     , vtiKey
     , vtiRegion
-    , vtiOauthToken
+    , vtiVPNTunnel
+    , vtiOAuthToken
     , vtiFields
-    , vtiAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -55,10 +55,11 @@ type VpnTunnelsInsertResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Post '[JSON] Operation
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] VPNTunnel :> Post '[JSON] Operation
 
 -- | Creates a VpnTunnel resource in the specified project and region using
 -- the data included in the request.
@@ -68,12 +69,12 @@ data VPNTunnelsInsert' = VPNTunnelsInsert'
     { _vtiQuotaUser   :: !(Maybe Text)
     , _vtiPrettyPrint :: !Bool
     , _vtiProject     :: !Text
-    , _vtiUserIp      :: !(Maybe Text)
-    , _vtiKey         :: !(Maybe Text)
+    , _vtiUserIP      :: !(Maybe Text)
+    , _vtiKey         :: !(Maybe Key)
     , _vtiRegion      :: !Text
-    , _vtiOauthToken  :: !(Maybe Text)
+    , _vtiVPNTunnel   :: !VPNTunnel
+    , _vtiOAuthToken  :: !(Maybe OAuthToken)
     , _vtiFields      :: !(Maybe Text)
-    , _vtiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VPNTunnelsInsert'' with the minimum fields required to make a request.
@@ -86,32 +87,33 @@ data VPNTunnelsInsert' = VPNTunnelsInsert'
 --
 -- * 'vtiProject'
 --
--- * 'vtiUserIp'
+-- * 'vtiUserIP'
 --
 -- * 'vtiKey'
 --
 -- * 'vtiRegion'
 --
--- * 'vtiOauthToken'
+-- * 'vtiVPNTunnel'
+--
+-- * 'vtiOAuthToken'
 --
 -- * 'vtiFields'
---
--- * 'vtiAlt'
 vPNTunnelsInsert'
     :: Text -- ^ 'project'
     -> Text -- ^ 'region'
+    -> VPNTunnel -- ^ 'VPNTunnel'
     -> VPNTunnelsInsert'
-vPNTunnelsInsert' pVtiProject_ pVtiRegion_ =
+vPNTunnelsInsert' pVtiProject_ pVtiRegion_ pVtiVPNTunnel_ =
     VPNTunnelsInsert'
     { _vtiQuotaUser = Nothing
     , _vtiPrettyPrint = True
     , _vtiProject = pVtiProject_
-    , _vtiUserIp = Nothing
+    , _vtiUserIP = Nothing
     , _vtiKey = Nothing
     , _vtiRegion = pVtiRegion_
-    , _vtiOauthToken = Nothing
+    , _vtiVPNTunnel = pVtiVPNTunnel_
+    , _vtiOAuthToken = Nothing
     , _vtiFields = Nothing
-    , _vtiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -134,14 +136,14 @@ vtiProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-vtiUserIp :: Lens' VPNTunnelsInsert' (Maybe Text)
-vtiUserIp
-  = lens _vtiUserIp (\ s a -> s{_vtiUserIp = a})
+vtiUserIP :: Lens' VPNTunnelsInsert' (Maybe Text)
+vtiUserIP
+  = lens _vtiUserIP (\ s a -> s{_vtiUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vtiKey :: Lens' VPNTunnelsInsert' (Maybe Text)
+vtiKey :: Lens' VPNTunnelsInsert' (Maybe Key)
 vtiKey = lens _vtiKey (\ s a -> s{_vtiKey = a})
 
 -- | The name of the region for this request.
@@ -149,32 +151,38 @@ vtiRegion :: Lens' VPNTunnelsInsert' Text
 vtiRegion
   = lens _vtiRegion (\ s a -> s{_vtiRegion = a})
 
+-- | Multipart request metadata.
+vtiVPNTunnel :: Lens' VPNTunnelsInsert' VPNTunnel
+vtiVPNTunnel
+  = lens _vtiVPNTunnel (\ s a -> s{_vtiVPNTunnel = a})
+
 -- | OAuth 2.0 token for the current user.
-vtiOauthToken :: Lens' VPNTunnelsInsert' (Maybe Text)
-vtiOauthToken
-  = lens _vtiOauthToken
-      (\ s a -> s{_vtiOauthToken = a})
+vtiOAuthToken :: Lens' VPNTunnelsInsert' (Maybe OAuthToken)
+vtiOAuthToken
+  = lens _vtiOAuthToken
+      (\ s a -> s{_vtiOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 vtiFields :: Lens' VPNTunnelsInsert' (Maybe Text)
 vtiFields
   = lens _vtiFields (\ s a -> s{_vtiFields = a})
 
--- | Data format for the response.
-vtiAlt :: Lens' VPNTunnelsInsert' Alt
-vtiAlt = lens _vtiAlt (\ s a -> s{_vtiAlt = a})
+instance GoogleAuth VPNTunnelsInsert' where
+        authKey = vtiKey . _Just
+        authToken = vtiOAuthToken . _Just
 
 instance GoogleRequest VPNTunnelsInsert' where
         type Rs VPNTunnelsInsert' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u VPNTunnelsInsert'{..}
           = go _vtiQuotaUser (Just _vtiPrettyPrint) _vtiProject
-              _vtiUserIp
+              _vtiUserIP
               _vtiKey
               _vtiRegion
-              _vtiOauthToken
+              _vtiOAuthToken
               _vtiFields
-              (Just _vtiAlt)
+              (Just AltJSON)
+              _vtiVPNTunnel
           where go
                   = clientWithRoute
                       (Proxy :: Proxy VpnTunnelsInsertResource)

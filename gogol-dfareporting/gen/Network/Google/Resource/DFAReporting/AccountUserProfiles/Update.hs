@@ -32,12 +32,12 @@ module Network.Google.Resource.DFAReporting.AccountUserProfiles.Update
     -- * Request Lenses
     , aupuQuotaUser
     , aupuPrettyPrint
-    , aupuUserIp
+    , aupuUserIP
+    , aupuAccountUserProfile
     , aupuProfileId
     , aupuKey
-    , aupuOauthToken
+    , aupuOAuthToken
     , aupuFields
-    , aupuAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,24 +52,25 @@ type AccountUserProfilesUpdateResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :>
-                         Put '[JSON] AccountUserProfile
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] AccountUserProfile :>
+                           Put '[JSON] AccountUserProfile
 
 -- | Updates an existing account user profile.
 --
 -- /See:/ 'accountUserProfilesUpdate'' smart constructor.
 data AccountUserProfilesUpdate' = AccountUserProfilesUpdate'
-    { _aupuQuotaUser   :: !(Maybe Text)
-    , _aupuPrettyPrint :: !Bool
-    , _aupuUserIp      :: !(Maybe Text)
-    , _aupuProfileId   :: !Int64
-    , _aupuKey         :: !(Maybe Text)
-    , _aupuOauthToken  :: !(Maybe Text)
-    , _aupuFields      :: !(Maybe Text)
-    , _aupuAlt         :: !Alt
+    { _aupuQuotaUser          :: !(Maybe Text)
+    , _aupuPrettyPrint        :: !Bool
+    , _aupuUserIP             :: !(Maybe Text)
+    , _aupuAccountUserProfile :: !AccountUserProfile
+    , _aupuProfileId          :: !Int64
+    , _aupuKey                :: !(Maybe Key)
+    , _aupuOAuthToken         :: !(Maybe OAuthToken)
+    , _aupuFields             :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountUserProfilesUpdate'' with the minimum fields required to make a request.
@@ -80,30 +81,31 @@ data AccountUserProfilesUpdate' = AccountUserProfilesUpdate'
 --
 -- * 'aupuPrettyPrint'
 --
--- * 'aupuUserIp'
+-- * 'aupuUserIP'
+--
+-- * 'aupuAccountUserProfile'
 --
 -- * 'aupuProfileId'
 --
 -- * 'aupuKey'
 --
--- * 'aupuOauthToken'
+-- * 'aupuOAuthToken'
 --
 -- * 'aupuFields'
---
--- * 'aupuAlt'
 accountUserProfilesUpdate'
-    :: Int64 -- ^ 'profileId'
+    :: AccountUserProfile -- ^ 'AccountUserProfile'
+    -> Int64 -- ^ 'profileId'
     -> AccountUserProfilesUpdate'
-accountUserProfilesUpdate' pAupuProfileId_ =
+accountUserProfilesUpdate' pAupuAccountUserProfile_ pAupuProfileId_ =
     AccountUserProfilesUpdate'
     { _aupuQuotaUser = Nothing
     , _aupuPrettyPrint = True
-    , _aupuUserIp = Nothing
+    , _aupuUserIP = Nothing
+    , _aupuAccountUserProfile = pAupuAccountUserProfile_
     , _aupuProfileId = pAupuProfileId_
     , _aupuKey = Nothing
-    , _aupuOauthToken = Nothing
+    , _aupuOAuthToken = Nothing
     , _aupuFields = Nothing
-    , _aupuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -122,9 +124,15 @@ aupuPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-aupuUserIp :: Lens' AccountUserProfilesUpdate' (Maybe Text)
-aupuUserIp
-  = lens _aupuUserIp (\ s a -> s{_aupuUserIp = a})
+aupuUserIP :: Lens' AccountUserProfilesUpdate' (Maybe Text)
+aupuUserIP
+  = lens _aupuUserIP (\ s a -> s{_aupuUserIP = a})
+
+-- | Multipart request metadata.
+aupuAccountUserProfile :: Lens' AccountUserProfilesUpdate' AccountUserProfile
+aupuAccountUserProfile
+  = lens _aupuAccountUserProfile
+      (\ s a -> s{_aupuAccountUserProfile = a})
 
 -- | User profile ID associated with this request.
 aupuProfileId :: Lens' AccountUserProfilesUpdate' Int64
@@ -135,23 +143,23 @@ aupuProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aupuKey :: Lens' AccountUserProfilesUpdate' (Maybe Text)
+aupuKey :: Lens' AccountUserProfilesUpdate' (Maybe Key)
 aupuKey = lens _aupuKey (\ s a -> s{_aupuKey = a})
 
 -- | OAuth 2.0 token for the current user.
-aupuOauthToken :: Lens' AccountUserProfilesUpdate' (Maybe Text)
-aupuOauthToken
-  = lens _aupuOauthToken
-      (\ s a -> s{_aupuOauthToken = a})
+aupuOAuthToken :: Lens' AccountUserProfilesUpdate' (Maybe OAuthToken)
+aupuOAuthToken
+  = lens _aupuOAuthToken
+      (\ s a -> s{_aupuOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 aupuFields :: Lens' AccountUserProfilesUpdate' (Maybe Text)
 aupuFields
   = lens _aupuFields (\ s a -> s{_aupuFields = a})
 
--- | Data format for the response.
-aupuAlt :: Lens' AccountUserProfilesUpdate' Alt
-aupuAlt = lens _aupuAlt (\ s a -> s{_aupuAlt = a})
+instance GoogleAuth AccountUserProfilesUpdate' where
+        authKey = aupuKey . _Just
+        authToken = aupuOAuthToken . _Just
 
 instance GoogleRequest AccountUserProfilesUpdate'
          where
@@ -160,12 +168,13 @@ instance GoogleRequest AccountUserProfilesUpdate'
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AccountUserProfilesUpdate'{..}
           = go _aupuQuotaUser (Just _aupuPrettyPrint)
-              _aupuUserIp
+              _aupuUserIP
               _aupuProfileId
               _aupuKey
-              _aupuOauthToken
+              _aupuOAuthToken
               _aupuFields
-              (Just _aupuAlt)
+              (Just AltJSON)
+              _aupuAccountUserProfile
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountUserProfilesUpdateResource)

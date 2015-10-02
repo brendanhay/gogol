@@ -58,7 +58,7 @@ data Audience = Audience
     { _aEtag        :: !(Maybe Text)
     , _aKind        :: !Text
     , _aVisibility  :: !(Maybe Text)
-    , _aItem        :: !(Maybe (Maybe PlusDomainsACLentryResource))
+    , _aItem        :: !(Maybe PlusDomainsACLentryResource)
     , _aMemberCount :: !(Maybe Word32)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -104,7 +104,7 @@ aVisibility
   = lens _aVisibility (\ s a -> s{_aVisibility = a})
 
 -- | The access control list entry.
-aItem :: Lens' Audience (Maybe (Maybe PlusDomainsACLentryResource))
+aItem :: Lens' Audience (Maybe PlusDomainsACLentryResource)
 aItem = lens _aItem (\ s a -> s{_aItem = a})
 
 -- | The number of people in this circle. This only applies if entity_type is
@@ -167,24 +167,24 @@ instance ToJSON ActivityProvider where
 --
 -- /See:/ 'activityObjectAttachmentsPreviewThumbnails' smart constructor.
 newtype ActivityObjectAttachmentsPreviewThumbnails = ActivityObjectAttachmentsPreviewThumbnails
-    { _aoaptUrl :: Maybe Text
+    { _aoaptURL :: Maybe Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivityObjectAttachmentsPreviewThumbnails' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aoaptUrl'
+-- * 'aoaptURL'
 activityObjectAttachmentsPreviewThumbnails
     :: ActivityObjectAttachmentsPreviewThumbnails
 activityObjectAttachmentsPreviewThumbnails =
     ActivityObjectAttachmentsPreviewThumbnails
-    { _aoaptUrl = Nothing
+    { _aoaptURL = Nothing
     }
 
 -- | URL of the thumbnail image.
-aoaptUrl :: Lens' ActivityObjectAttachmentsPreviewThumbnails (Maybe Text)
-aoaptUrl = lens _aoaptUrl (\ s a -> s{_aoaptUrl = a})
+aoaptURL :: Lens' ActivityObjectAttachmentsPreviewThumbnails (Maybe Text)
+aoaptURL = lens _aoaptURL (\ s a -> s{_aoaptURL = a})
 
 instance FromJSON
          ActivityObjectAttachmentsPreviewThumbnails where
@@ -198,32 +198,32 @@ instance FromJSON
 instance ToJSON
          ActivityObjectAttachmentsPreviewThumbnails where
         toJSON ActivityObjectAttachmentsPreviewThumbnails{..}
-          = object (catMaybes [("url" .=) <$> _aoaptUrl])
+          = object (catMaybes [("url" .=) <$> _aoaptURL])
 
 -- | The image representation of this actor.
 --
 -- /See:/ 'commentActorImage' smart constructor.
 newtype CommentActorImage = CommentActorImage
-    { _caiUrl :: Maybe Text
+    { _caiURL :: Maybe Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentActorImage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'caiUrl'
+-- * 'caiURL'
 commentActorImage
     :: CommentActorImage
 commentActorImage =
     CommentActorImage
-    { _caiUrl = Nothing
+    { _caiURL = Nothing
     }
 
 -- | The URL of the actor\'s profile photo. To resize the image and crop it
 -- to a square, append the query string ?sz=x, where x is the dimension in
 -- pixels of each side.
-caiUrl :: Lens' CommentActorImage (Maybe Text)
-caiUrl = lens _caiUrl (\ s a -> s{_caiUrl = a})
+caiURL :: Lens' CommentActorImage (Maybe Text)
+caiURL = lens _caiURL (\ s a -> s{_caiURL = a})
 
 instance FromJSON CommentActorImage where
         parseJSON
@@ -232,7 +232,7 @@ instance FromJSON CommentActorImage where
 
 instance ToJSON CommentActorImage where
         toJSON CommentActorImage{..}
-          = object (catMaybes [("url" .=) <$> _caiUrl])
+          = object (catMaybes [("url" .=) <$> _caiURL])
 
 -- | People who +1\'d this activity.
 --
@@ -385,7 +385,7 @@ data ActivityObjectAttachments = ActivityObjectAttachments
     , _aoaImage             :: !(Maybe ActivityObjectAttachmentsImage)
     , _aoaObjectType        :: !(Maybe Text)
     , _aoaPreviewThumbnails :: !(Maybe [ActivityObjectAttachmentsPreviewThumbnails])
-    , _aoaUrl               :: !(Maybe Text)
+    , _aoaURL               :: !(Maybe Text)
     , _aoaEmbed             :: !(Maybe ActivityObjectAttachmentsEmbed)
     , _aoaContent           :: !(Maybe Text)
     , _aoaThumbnails        :: !(Maybe [ActivityObjectAttachmentsThumbnails])
@@ -405,7 +405,7 @@ data ActivityObjectAttachments = ActivityObjectAttachments
 --
 -- * 'aoaPreviewThumbnails'
 --
--- * 'aoaUrl'
+-- * 'aoaURL'
 --
 -- * 'aoaEmbed'
 --
@@ -424,7 +424,7 @@ activityObjectAttachments =
     , _aoaImage = Nothing
     , _aoaObjectType = Nothing
     , _aoaPreviewThumbnails = Nothing
-    , _aoaUrl = Nothing
+    , _aoaURL = Nothing
     , _aoaEmbed = Nothing
     , _aoaContent = Nothing
     , _aoaThumbnails = Nothing
@@ -461,8 +461,8 @@ aoaPreviewThumbnails
       . _Coerce
 
 -- | The link to the attachment, which should be of type text\/html.
-aoaUrl :: Lens' ActivityObjectAttachments (Maybe Text)
-aoaUrl = lens _aoaUrl (\ s a -> s{_aoaUrl = a})
+aoaURL :: Lens' ActivityObjectAttachments (Maybe Text)
+aoaURL = lens _aoaURL (\ s a -> s{_aoaURL = a})
 
 -- | If the attachment is a video, the embeddable link.
 aoaEmbed :: Lens' ActivityObjectAttachments (Maybe ActivityObjectAttachmentsEmbed)
@@ -517,7 +517,7 @@ instance ToJSON ActivityObjectAttachments where
                   ("image" .=) <$> _aoaImage,
                   ("objectType" .=) <$> _aoaObjectType,
                   ("previewThumbnails" .=) <$> _aoaPreviewThumbnails,
-                  ("url" .=) <$> _aoaUrl, ("embed" .=) <$> _aoaEmbed,
+                  ("url" .=) <$> _aoaURL, ("embed" .=) <$> _aoaEmbed,
                   ("content" .=) <$> _aoaContent,
                   ("thumbnails" .=) <$> _aoaThumbnails,
                   ("displayName" .=) <$> _aoaDisplayName,
@@ -528,7 +528,7 @@ instance ToJSON ActivityObjectAttachments where
 -- /See:/ 'activityObjectAttachmentsThumbnailsImage' smart constructor.
 data ActivityObjectAttachmentsThumbnailsImage = ActivityObjectAttachmentsThumbnailsImage
     { _aoatiHeight :: !(Maybe Word32)
-    , _aoatiUrl    :: !(Maybe Text)
+    , _aoatiURL    :: !(Maybe Text)
     , _aoatiWidth  :: !(Maybe Word32)
     , _aoatiType   :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -539,7 +539,7 @@ data ActivityObjectAttachmentsThumbnailsImage = ActivityObjectAttachmentsThumbna
 --
 -- * 'aoatiHeight'
 --
--- * 'aoatiUrl'
+-- * 'aoatiURL'
 --
 -- * 'aoatiWidth'
 --
@@ -549,7 +549,7 @@ activityObjectAttachmentsThumbnailsImage
 activityObjectAttachmentsThumbnailsImage =
     ActivityObjectAttachmentsThumbnailsImage
     { _aoatiHeight = Nothing
-    , _aoatiUrl = Nothing
+    , _aoatiURL = Nothing
     , _aoatiWidth = Nothing
     , _aoatiType = Nothing
     }
@@ -560,8 +560,8 @@ aoatiHeight
   = lens _aoatiHeight (\ s a -> s{_aoatiHeight = a})
 
 -- | Image url.
-aoatiUrl :: Lens' ActivityObjectAttachmentsThumbnailsImage (Maybe Text)
-aoatiUrl = lens _aoatiUrl (\ s a -> s{_aoatiUrl = a})
+aoatiURL :: Lens' ActivityObjectAttachmentsThumbnailsImage (Maybe Text)
+aoatiURL = lens _aoatiURL (\ s a -> s{_aoatiURL = a})
 
 -- | The width, in pixels, of the linked resource.
 aoatiWidth :: Lens' ActivityObjectAttachmentsThumbnailsImage (Maybe Word32)
@@ -590,7 +590,7 @@ instance ToJSON
           = object
               (catMaybes
                  [("height" .=) <$> _aoatiHeight,
-                  ("url" .=) <$> _aoatiUrl,
+                  ("url" .=) <$> _aoatiURL,
                   ("width" .=) <$> _aoatiWidth,
                   ("type" .=) <$> _aoatiType])
 
@@ -711,9 +711,9 @@ data Person = Person
     , _pCover              :: !(Maybe PersonCover)
     , _pKind               :: !Text
     , _pRelationshipStatus :: !(Maybe Text)
-    , _pUrls               :: !(Maybe [PersonURLs])
+    , _pURLs               :: !(Maybe [PersonURLs])
     , _pDomain             :: !(Maybe Text)
-    , _pUrl                :: !(Maybe Text)
+    , _pURL                :: !(Maybe Text)
     , _pVerified           :: !(Maybe Bool)
     , _pBirthday           :: !(Maybe Text)
     , _pIsPlusUser         :: !(Maybe Bool)
@@ -755,11 +755,11 @@ data Person = Person
 --
 -- * 'pRelationshipStatus'
 --
--- * 'pUrls'
+-- * 'pURLs'
 --
 -- * 'pDomain'
 --
--- * 'pUrl'
+-- * 'pURL'
 --
 -- * 'pVerified'
 --
@@ -804,9 +804,9 @@ person =
     , _pCover = Nothing
     , _pKind = "plus#person"
     , _pRelationshipStatus = Nothing
-    , _pUrls = Nothing
+    , _pURLs = Nothing
     , _pDomain = Nothing
-    , _pUrl = Nothing
+    , _pURL = Nothing
     , _pVerified = Nothing
     , _pBirthday = Nothing
     , _pIsPlusUser = Nothing
@@ -886,9 +886,9 @@ pRelationshipStatus
       (\ s a -> s{_pRelationshipStatus = a})
 
 -- | A list of URLs for this person.
-pUrls :: Lens' Person [PersonURLs]
-pUrls
-  = lens _pUrls (\ s a -> s{_pUrls = a}) . _Default .
+pURLs :: Lens' Person [PersonURLs]
+pURLs
+  = lens _pURLs (\ s a -> s{_pURLs = a}) . _Default .
       _Coerce
 
 -- | The hosted domain name for the user\'s Google Apps account. For
@@ -898,8 +898,8 @@ pDomain :: Lens' Person (Maybe Text)
 pDomain = lens _pDomain (\ s a -> s{_pDomain = a})
 
 -- | The URL of this person\'s profile.
-pUrl :: Lens' Person (Maybe Text)
-pUrl = lens _pUrl (\ s a -> s{_pUrl = a})
+pURL :: Lens' Person (Maybe Text)
+pURL = lens _pURL (\ s a -> s{_pURL = a})
 
 -- | Whether the person or Google+ Page has been verified.
 pVerified :: Lens' Person (Maybe Bool)
@@ -1029,8 +1029,8 @@ instance ToJSON Person where
                   ("objectType" .=) <$> _pObjectType,
                   ("cover" .=) <$> _pCover, Just ("kind" .= _pKind),
                   ("relationshipStatus" .=) <$> _pRelationshipStatus,
-                  ("urls" .=) <$> _pUrls, ("domain" .=) <$> _pDomain,
-                  ("url" .=) <$> _pUrl, ("verified" .=) <$> _pVerified,
+                  ("urls" .=) <$> _pURLs, ("domain" .=) <$> _pDomain,
+                  ("url" .=) <$> _pURL, ("verified" .=) <$> _pVerified,
                   ("birthday" .=) <$> _pBirthday,
                   ("isPlusUser" .=) <$> _pIsPlusUser,
                   ("tagline" .=) <$> _pTagline,
@@ -1048,7 +1048,7 @@ instance ToJSON Person where
 -- /See:/ 'videostream' smart constructor.
 data Videostream = Videostream
     { _vHeight :: !(Maybe Int32)
-    , _vUrl    :: !(Maybe Text)
+    , _vURL    :: !(Maybe Text)
     , _vWidth  :: !(Maybe Int32)
     , _vType   :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -1059,7 +1059,7 @@ data Videostream = Videostream
 --
 -- * 'vHeight'
 --
--- * 'vUrl'
+-- * 'vURL'
 --
 -- * 'vWidth'
 --
@@ -1069,7 +1069,7 @@ videostream
 videostream =
     Videostream
     { _vHeight = Nothing
-    , _vUrl = Nothing
+    , _vURL = Nothing
     , _vWidth = Nothing
     , _vType = Nothing
     }
@@ -1079,8 +1079,8 @@ vHeight :: Lens' Videostream (Maybe Int32)
 vHeight = lens _vHeight (\ s a -> s{_vHeight = a})
 
 -- | URL of the video stream.
-vUrl :: Lens' Videostream (Maybe Text)
-vUrl = lens _vUrl (\ s a -> s{_vUrl = a})
+vURL :: Lens' Videostream (Maybe Text)
+vURL = lens _vURL (\ s a -> s{_vURL = a})
 
 -- | The width, in pixels, of the video resource.
 vWidth :: Lens' Videostream (Maybe Int32)
@@ -1103,13 +1103,13 @@ instance ToJSON Videostream where
         toJSON Videostream{..}
           = object
               (catMaybes
-                 [("height" .=) <$> _vHeight, ("url" .=) <$> _vUrl,
+                 [("height" .=) <$> _vHeight, ("url" .=) <$> _vURL,
                   ("width" .=) <$> _vWidth, ("type" .=) <$> _vType])
 
 --
 -- /See:/ 'commentInReplyTo' smart constructor.
 data CommentInReplyTo = CommentInReplyTo
-    { _cirtUrl :: !(Maybe Text)
+    { _cirtURL :: !(Maybe Text)
     , _cirtId  :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1117,20 +1117,20 @@ data CommentInReplyTo = CommentInReplyTo
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cirtUrl'
+-- * 'cirtURL'
 --
 -- * 'cirtId'
 commentInReplyTo
     :: CommentInReplyTo
 commentInReplyTo =
     CommentInReplyTo
-    { _cirtUrl = Nothing
+    { _cirtURL = Nothing
     , _cirtId = Nothing
     }
 
 -- | The URL of the activity.
-cirtUrl :: Lens' CommentInReplyTo (Maybe Text)
-cirtUrl = lens _cirtUrl (\ s a -> s{_cirtUrl = a})
+cirtURL :: Lens' CommentInReplyTo (Maybe Text)
+cirtURL = lens _cirtURL (\ s a -> s{_cirtURL = a})
 
 -- | The ID of the activity.
 cirtId :: Lens' CommentInReplyTo (Maybe Text)
@@ -1146,12 +1146,12 @@ instance ToJSON CommentInReplyTo where
         toJSON CommentInReplyTo{..}
           = object
               (catMaybes
-                 [("url" .=) <$> _cirtUrl, ("id" .=) <$> _cirtId])
+                 [("url" .=) <$> _cirtURL, ("id" .=) <$> _cirtId])
 
 --
 -- /See:/ 'personOrganizations' smart constructor.
 data PersonOrganizations = PersonOrganizations
-    { _poDepartment  :: !(Maybe Text)
+    { _poDePartyment :: !(Maybe Text)
     , _poLocation    :: !(Maybe Text)
     , _poEndDate     :: !(Maybe Text)
     , _poPrimary     :: !(Maybe Bool)
@@ -1166,7 +1166,7 @@ data PersonOrganizations = PersonOrganizations
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'poDepartment'
+-- * 'poDePartyment'
 --
 -- * 'poLocation'
 --
@@ -1187,7 +1187,7 @@ personOrganizations
     :: PersonOrganizations
 personOrganizations =
     PersonOrganizations
-    { _poDepartment = Nothing
+    { _poDePartyment = Nothing
     , _poLocation = Nothing
     , _poEndDate = Nothing
     , _poPrimary = Nothing
@@ -1199,9 +1199,10 @@ personOrganizations =
     }
 
 -- | The department within the organization. Deprecated.
-poDepartment :: Lens' PersonOrganizations (Maybe Text)
-poDepartment
-  = lens _poDepartment (\ s a -> s{_poDepartment = a})
+poDePartyment :: Lens' PersonOrganizations (Maybe Text)
+poDePartyment
+  = lens _poDePartyment
+      (\ s a -> s{_poDePartyment = a})
 
 -- | The location of this organization. Deprecated.
 poLocation :: Lens' PersonOrganizations (Maybe Text)
@@ -1262,7 +1263,7 @@ instance ToJSON PersonOrganizations where
         toJSON PersonOrganizations{..}
           = object
               (catMaybes
-                 [("department" .=) <$> _poDepartment,
+                 [("department" .=) <$> _poDePartyment,
                   ("location" .=) <$> _poLocation,
                   ("endDate" .=) <$> _poEndDate,
                   ("primary" .=) <$> _poPrimary,
@@ -1276,7 +1277,7 @@ instance ToJSON PersonOrganizations where
 -- /See:/ 'activityObjectAttachmentsImage' smart constructor.
 data ActivityObjectAttachmentsImage = ActivityObjectAttachmentsImage
     { _aoaiHeight :: !(Maybe Word32)
-    , _aoaiUrl    :: !(Maybe Text)
+    , _aoaiURL    :: !(Maybe Text)
     , _aoaiWidth  :: !(Maybe Word32)
     , _aoaiType   :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -1287,7 +1288,7 @@ data ActivityObjectAttachmentsImage = ActivityObjectAttachmentsImage
 --
 -- * 'aoaiHeight'
 --
--- * 'aoaiUrl'
+-- * 'aoaiURL'
 --
 -- * 'aoaiWidth'
 --
@@ -1297,7 +1298,7 @@ activityObjectAttachmentsImage
 activityObjectAttachmentsImage =
     ActivityObjectAttachmentsImage
     { _aoaiHeight = Nothing
-    , _aoaiUrl = Nothing
+    , _aoaiURL = Nothing
     , _aoaiWidth = Nothing
     , _aoaiType = Nothing
     }
@@ -1308,8 +1309,8 @@ aoaiHeight
   = lens _aoaiHeight (\ s a -> s{_aoaiHeight = a})
 
 -- | Image URL.
-aoaiUrl :: Lens' ActivityObjectAttachmentsImage (Maybe Text)
-aoaiUrl = lens _aoaiUrl (\ s a -> s{_aoaiUrl = a})
+aoaiURL :: Lens' ActivityObjectAttachmentsImage (Maybe Text)
+aoaiURL = lens _aoaiURL (\ s a -> s{_aoaiURL = a})
 
 -- | The width, in pixels, of the linked resource.
 aoaiWidth :: Lens' ActivityObjectAttachmentsImage (Maybe Word32)
@@ -1335,7 +1336,7 @@ instance ToJSON ActivityObjectAttachmentsImage where
           = object
               (catMaybes
                  [("height" .=) <$> _aoaiHeight,
-                  ("url" .=) <$> _aoaiUrl, ("width" .=) <$> _aoaiWidth,
+                  ("url" .=) <$> _aoaiURL, ("width" .=) <$> _aoaiWidth,
                   ("type" .=) <$> _aoaiType])
 
 -- | The person who posted this comment.
@@ -1343,7 +1344,7 @@ instance ToJSON ActivityObjectAttachmentsImage where
 -- /See:/ 'commentActor' smart constructor.
 data CommentActor = CommentActor
     { _caImage        :: !(Maybe CommentActorImage)
-    , _caUrl          :: !(Maybe Text)
+    , _caURL          :: !(Maybe Text)
     , _caDisplayName  :: !(Maybe Text)
     , _caId           :: !(Maybe Text)
     , _caVerification :: !(Maybe CommentActorVerification)
@@ -1355,7 +1356,7 @@ data CommentActor = CommentActor
 --
 -- * 'caImage'
 --
--- * 'caUrl'
+-- * 'caURL'
 --
 -- * 'caDisplayName'
 --
@@ -1367,7 +1368,7 @@ commentActor
 commentActor =
     CommentActor
     { _caImage = Nothing
-    , _caUrl = Nothing
+    , _caURL = Nothing
     , _caDisplayName = Nothing
     , _caId = Nothing
     , _caVerification = Nothing
@@ -1378,8 +1379,8 @@ caImage :: Lens' CommentActor (Maybe CommentActorImage)
 caImage = lens _caImage (\ s a -> s{_caImage = a})
 
 -- | A link to the Person resource for this actor.
-caUrl :: Lens' CommentActor (Maybe Text)
-caUrl = lens _caUrl (\ s a -> s{_caUrl = a})
+caURL :: Lens' CommentActor (Maybe Text)
+caURL = lens _caURL (\ s a -> s{_caURL = a})
 
 -- | The name of this actor, suitable for display.
 caDisplayName :: Lens' CommentActor (Maybe Text)
@@ -1411,7 +1412,7 @@ instance ToJSON CommentActor where
         toJSON CommentActor{..}
           = object
               (catMaybes
-                 [("image" .=) <$> _caImage, ("url" .=) <$> _caUrl,
+                 [("image" .=) <$> _caImage, ("url" .=) <$> _caURL,
                   ("displayName" .=) <$> _caDisplayName,
                   ("id" .=) <$> _caId,
                   ("verification" .=) <$> _caVerification])
@@ -1424,7 +1425,7 @@ data CircleFeed = CircleFeed
     , _cfNextPageToken :: !(Maybe Text)
     , _cfNextLink      :: !(Maybe Text)
     , _cfKind          :: !Text
-    , _cfItems         :: !(Maybe [Maybe Circle])
+    , _cfItems         :: !(Maybe [Circle])
     , _cfSelfLink      :: !(Maybe Text)
     , _cfTitle         :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -1491,7 +1492,7 @@ cfKind :: Lens' CircleFeed Text
 cfKind = lens _cfKind (\ s a -> s{_cfKind = a})
 
 -- | The circles in this page of results.
-cfItems :: Lens' CircleFeed [Maybe Circle]
+cfItems :: Lens' CircleFeed [Circle]
 cfItems
   = lens _cfItems (\ s a -> s{_cfItems = a}) . _Default
       . _Coerce
@@ -1538,7 +1539,7 @@ data ActivityObject = ActivityObject
     , _aoAttachments     :: !(Maybe [ActivityObjectAttachments])
     , _aoObjectType      :: !(Maybe Text)
     , _aoOriginalContent :: !(Maybe Text)
-    , _aoUrl             :: !(Maybe Text)
+    , _aoURL             :: !(Maybe Text)
     , _aoActor           :: !(Maybe ActivityObjectActor)
     , _aoContent         :: !(Maybe Text)
     , _aoReplies         :: !(Maybe ActivityObjectReplies)
@@ -1559,7 +1560,7 @@ data ActivityObject = ActivityObject
 --
 -- * 'aoOriginalContent'
 --
--- * 'aoUrl'
+-- * 'aoURL'
 --
 -- * 'aoActor'
 --
@@ -1580,7 +1581,7 @@ activityObject =
     , _aoAttachments = Nothing
     , _aoObjectType = Nothing
     , _aoOriginalContent = Nothing
-    , _aoUrl = Nothing
+    , _aoURL = Nothing
     , _aoActor = Nothing
     , _aoContent = Nothing
     , _aoReplies = Nothing
@@ -1618,8 +1619,8 @@ aoOriginalContent
       (\ s a -> s{_aoOriginalContent = a})
 
 -- | The URL that points to the linked resource.
-aoUrl :: Lens' ActivityObject (Maybe Text)
-aoUrl = lens _aoUrl (\ s a -> s{_aoUrl = a})
+aoURL :: Lens' ActivityObject (Maybe Text)
+aoURL = lens _aoURL (\ s a -> s{_aoURL = a})
 
 -- | If this activity\'s object is itself another activity, such as when a
 -- person reshares an activity, this property specifies the original
@@ -1678,7 +1679,7 @@ instance ToJSON ActivityObject where
                   ("attachments" .=) <$> _aoAttachments,
                   ("objectType" .=) <$> _aoObjectType,
                   ("originalContent" .=) <$> _aoOriginalContent,
-                  ("url" .=) <$> _aoUrl, ("actor" .=) <$> _aoActor,
+                  ("url" .=) <$> _aoURL, ("actor" .=) <$> _aoActor,
                   ("content" .=) <$> _aoContent,
                   ("replies" .=) <$> _aoReplies, ("id" .=) <$> _aoId,
                   ("statusForViewer" .=) <$> _aoStatusForViewer,
@@ -1691,7 +1692,7 @@ instance ToJSON ActivityObject where
 -- /See:/ 'activityObjectActor' smart constructor.
 data ActivityObjectActor = ActivityObjectActor
     { _aImage        :: !(Maybe ActivityObjectActorImage)
-    , _aUrl          :: !(Maybe Text)
+    , _aURL          :: !(Maybe Text)
     , _aDisplayName  :: !(Maybe Text)
     , _aId           :: !(Maybe Text)
     , _aVerification :: !(Maybe ActivityObjectActorVerification)
@@ -1703,7 +1704,7 @@ data ActivityObjectActor = ActivityObjectActor
 --
 -- * 'aImage'
 --
--- * 'aUrl'
+-- * 'aURL'
 --
 -- * 'aDisplayName'
 --
@@ -1715,7 +1716,7 @@ activityObjectActor
 activityObjectActor =
     ActivityObjectActor
     { _aImage = Nothing
-    , _aUrl = Nothing
+    , _aURL = Nothing
     , _aDisplayName = Nothing
     , _aId = Nothing
     , _aVerification = Nothing
@@ -1726,8 +1727,8 @@ aImage :: Lens' ActivityObjectActor (Maybe ActivityObjectActorImage)
 aImage = lens _aImage (\ s a -> s{_aImage = a})
 
 -- | A link to the original actor\'s Google profile.
-aUrl :: Lens' ActivityObjectActor (Maybe Text)
-aUrl = lens _aUrl (\ s a -> s{_aUrl = a})
+aURL :: Lens' ActivityObjectActor (Maybe Text)
+aURL = lens _aURL (\ s a -> s{_aURL = a})
 
 -- | The original actor\'s name, which is suitable for display.
 aDisplayName :: Lens' ActivityObjectActor (Maybe Text)
@@ -1758,7 +1759,7 @@ instance ToJSON ActivityObjectActor where
         toJSON ActivityObjectActor{..}
           = object
               (catMaybes
-                 [("image" .=) <$> _aImage, ("url" .=) <$> _aUrl,
+                 [("image" .=) <$> _aImage, ("url" .=) <$> _aURL,
                   ("displayName" .=) <$> _aDisplayName,
                   ("id" .=) <$> _aId,
                   ("verification" .=) <$> _aVerification])
@@ -1767,26 +1768,26 @@ instance ToJSON ActivityObjectActor where
 --
 -- /See:/ 'mediaAuthorImage' smart constructor.
 newtype MediaAuthorImage = MediaAuthorImage
-    { _maiUrl :: Maybe Text
+    { _maiURL :: Maybe Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MediaAuthorImage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'maiUrl'
+-- * 'maiURL'
 mediaAuthorImage
     :: MediaAuthorImage
 mediaAuthorImage =
     MediaAuthorImage
-    { _maiUrl = Nothing
+    { _maiURL = Nothing
     }
 
 -- | The URL of the author\'s profile photo. To resize the image and crop it
 -- to a square, append the query string ?sz=x, where x is the dimension in
 -- pixels of each side.
-maiUrl :: Lens' MediaAuthorImage (Maybe Text)
-maiUrl = lens _maiUrl (\ s a -> s{_maiUrl = a})
+maiURL :: Lens' MediaAuthorImage (Maybe Text)
+maiURL = lens _maiURL (\ s a -> s{_maiURL = a})
 
 instance FromJSON MediaAuthorImage where
         parseJSON
@@ -1795,32 +1796,32 @@ instance FromJSON MediaAuthorImage where
 
 instance ToJSON MediaAuthorImage where
         toJSON MediaAuthorImage{..}
-          = object (catMaybes [("url" .=) <$> _maiUrl])
+          = object (catMaybes [("url" .=) <$> _maiURL])
 
 -- | The image representation of the actor.
 --
 -- /See:/ 'activityActorImage' smart constructor.
 newtype ActivityActorImage = ActivityActorImage
-    { _aaiUrl :: Maybe Text
+    { _aaiURL :: Maybe Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivityActorImage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aaiUrl'
+-- * 'aaiURL'
 activityActorImage
     :: ActivityActorImage
 activityActorImage =
     ActivityActorImage
-    { _aaiUrl = Nothing
+    { _aaiURL = Nothing
     }
 
 -- | The URL of the actor\'s profile photo. To resize the image and crop it
 -- to a square, append the query string ?sz=x, where x is the dimension in
 -- pixels of each side.
-aaiUrl :: Lens' ActivityActorImage (Maybe Text)
-aaiUrl = lens _aaiUrl (\ s a -> s{_aaiUrl = a})
+aaiURL :: Lens' ActivityActorImage (Maybe Text)
+aaiURL = lens _aaiURL (\ s a -> s{_aaiURL = a})
 
 instance FromJSON ActivityActorImage where
         parseJSON
@@ -1829,7 +1830,7 @@ instance FromJSON ActivityActorImage where
 
 instance ToJSON ActivityActorImage where
         toJSON ActivityActorImage{..}
-          = object (catMaybes [("url" .=) <$> _aaiUrl])
+          = object (catMaybes [("url" .=) <$> _aaiURL])
 
 --
 -- /See:/ 'plusDomainsACLentryResource' smart constructor.
@@ -1898,7 +1899,7 @@ instance ToJSON PlusDomainsACLentryResource where
 -- /See:/ 'mediaAuthor' smart constructor.
 data MediaAuthor = MediaAuthor
     { _maImage       :: !(Maybe MediaAuthorImage)
-    , _maUrl         :: !(Maybe Text)
+    , _maURL         :: !(Maybe Text)
     , _maDisplayName :: !(Maybe Text)
     , _maId          :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -1909,7 +1910,7 @@ data MediaAuthor = MediaAuthor
 --
 -- * 'maImage'
 --
--- * 'maUrl'
+-- * 'maURL'
 --
 -- * 'maDisplayName'
 --
@@ -1919,7 +1920,7 @@ mediaAuthor
 mediaAuthor =
     MediaAuthor
     { _maImage = Nothing
-    , _maUrl = Nothing
+    , _maURL = Nothing
     , _maDisplayName = Nothing
     , _maId = Nothing
     }
@@ -1929,8 +1930,8 @@ maImage :: Lens' MediaAuthor (Maybe MediaAuthorImage)
 maImage = lens _maImage (\ s a -> s{_maImage = a})
 
 -- | A link to the author\'s Google profile.
-maUrl :: Lens' MediaAuthor (Maybe Text)
-maUrl = lens _maUrl (\ s a -> s{_maUrl = a})
+maURL :: Lens' MediaAuthor (Maybe Text)
+maURL = lens _maURL (\ s a -> s{_maURL = a})
 
 -- | The author\'s name.
 maDisplayName :: Lens' MediaAuthor (Maybe Text)
@@ -1955,7 +1956,7 @@ instance ToJSON MediaAuthor where
         toJSON MediaAuthor{..}
           = object
               (catMaybes
-                 [("image" .=) <$> _maImage, ("url" .=) <$> _maUrl,
+                 [("image" .=) <$> _maImage, ("url" .=) <$> _maURL,
                   ("displayName" .=) <$> _maDisplayName,
                   ("id" .=) <$> _maId])
 
@@ -1966,7 +1967,7 @@ data PeopleFeed = PeopleFeed
     , _pfEtag          :: !(Maybe Text)
     , _pfNextPageToken :: !(Maybe Text)
     , _pfKind          :: !Text
-    , _pfItems         :: !(Maybe [Maybe Person])
+    , _pfItems         :: !(Maybe [Person])
     , _pfSelfLink      :: !(Maybe Text)
     , _pfTitle         :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -2028,7 +2029,7 @@ pfKind = lens _pfKind (\ s a -> s{_pfKind = a})
 -- | The people in this page of results. Each item includes the id,
 -- displayName, image, and url for the person. To retrieve additional
 -- profile data, see the people.get method.
-pfItems :: Lens' PeopleFeed [Maybe Person]
+pfItems :: Lens' PeopleFeed [Person]
 pfItems
   = lens _pfItems (\ s a -> s{_pfItems = a}) . _Default
       . _Coerce
@@ -2069,7 +2070,7 @@ instance ToJSON PeopleFeed where
 --
 -- /See:/ 'activityObjectAttachmentsEmbed' smart constructor.
 data ActivityObjectAttachmentsEmbed = ActivityObjectAttachmentsEmbed
-    { _aoaeUrl  :: !(Maybe Text)
+    { _aoaeURL  :: !(Maybe Text)
     , _aoaeType :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -2077,20 +2078,20 @@ data ActivityObjectAttachmentsEmbed = ActivityObjectAttachmentsEmbed
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aoaeUrl'
+-- * 'aoaeURL'
 --
 -- * 'aoaeType'
 activityObjectAttachmentsEmbed
     :: ActivityObjectAttachmentsEmbed
 activityObjectAttachmentsEmbed =
     ActivityObjectAttachmentsEmbed
-    { _aoaeUrl = Nothing
+    { _aoaeURL = Nothing
     , _aoaeType = Nothing
     }
 
 -- | URL of the link.
-aoaeUrl :: Lens' ActivityObjectAttachmentsEmbed (Maybe Text)
-aoaeUrl = lens _aoaeUrl (\ s a -> s{_aoaeUrl = a})
+aoaeURL :: Lens' ActivityObjectAttachmentsEmbed (Maybe Text)
+aoaeURL = lens _aoaeURL (\ s a -> s{_aoaeURL = a})
 
 -- | Media type of the link.
 aoaeType :: Lens' ActivityObjectAttachmentsEmbed (Maybe Text)
@@ -2108,14 +2109,14 @@ instance ToJSON ActivityObjectAttachmentsEmbed where
         toJSON ActivityObjectAttachmentsEmbed{..}
           = object
               (catMaybes
-                 [("url" .=) <$> _aoaeUrl, ("type" .=) <$> _aoaeType])
+                 [("url" .=) <$> _aoaeURL, ("type" .=) <$> _aoaeType])
 
 -- | The person\'s primary cover image.
 --
 -- /See:/ 'personCoverCoverPhoto' smart constructor.
 data PersonCoverCoverPhoto = PersonCoverCoverPhoto
     { _pccpHeight :: !(Maybe Int32)
-    , _pccpUrl    :: !(Maybe Text)
+    , _pccpURL    :: !(Maybe Text)
     , _pccpWidth  :: !(Maybe Int32)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -2125,7 +2126,7 @@ data PersonCoverCoverPhoto = PersonCoverCoverPhoto
 --
 -- * 'pccpHeight'
 --
--- * 'pccpUrl'
+-- * 'pccpURL'
 --
 -- * 'pccpWidth'
 personCoverCoverPhoto
@@ -2133,7 +2134,7 @@ personCoverCoverPhoto
 personCoverCoverPhoto =
     PersonCoverCoverPhoto
     { _pccpHeight = Nothing
-    , _pccpUrl = Nothing
+    , _pccpURL = Nothing
     , _pccpWidth = Nothing
     }
 
@@ -2143,8 +2144,8 @@ pccpHeight
   = lens _pccpHeight (\ s a -> s{_pccpHeight = a})
 
 -- | The URL of the image.
-pccpUrl :: Lens' PersonCoverCoverPhoto (Maybe Text)
-pccpUrl = lens _pccpUrl (\ s a -> s{_pccpUrl = a})
+pccpURL :: Lens' PersonCoverCoverPhoto (Maybe Text)
+pccpURL = lens _pccpURL (\ s a -> s{_pccpURL = a})
 
 -- | The width of the image.
 pccpWidth :: Lens' PersonCoverCoverPhoto (Maybe Int32)
@@ -2164,7 +2165,7 @@ instance ToJSON PersonCoverCoverPhoto where
           = object
               (catMaybes
                  [("height" .=) <$> _pccpHeight,
-                  ("url" .=) <$> _pccpUrl,
+                  ("url" .=) <$> _pccpURL,
                   ("width" .=) <$> _pccpWidth])
 
 -- | The people in this circle.
@@ -2260,10 +2261,10 @@ data Media = Media
     , _mVideoStatus      :: !(Maybe Text)
     , _mKind             :: !Text
     , _mPublished        :: !(Maybe UTCTime)
-    , _mUrl              :: !(Maybe Text)
+    , _mURL              :: !(Maybe Text)
     , _mWidth            :: !(Maybe Word32)
-    , _mMediaUrl         :: !(Maybe Text)
-    , _mStreams          :: !(Maybe [Maybe Videostream])
+    , _mMediaURL         :: !(Maybe Text)
+    , _mStreams          :: !(Maybe [Videostream])
     , _mExif             :: !(Maybe MediaExif)
     , _mDisplayName      :: !(Maybe Text)
     , _mAuthor           :: !(Maybe MediaAuthor)
@@ -2292,11 +2293,11 @@ data Media = Media
 --
 -- * 'mPublished'
 --
--- * 'mUrl'
+-- * 'mURL'
 --
 -- * 'mWidth'
 --
--- * 'mMediaUrl'
+-- * 'mMediaURL'
 --
 -- * 'mStreams'
 --
@@ -2323,9 +2324,9 @@ media =
     , _mVideoStatus = Nothing
     , _mKind = "plus#media"
     , _mPublished = Nothing
-    , _mUrl = Nothing
+    , _mURL = Nothing
     , _mWidth = Nothing
-    , _mMediaUrl = Nothing
+    , _mMediaURL = Nothing
     , _mStreams = Nothing
     , _mExif = Nothing
     , _mDisplayName = Nothing
@@ -2378,22 +2379,22 @@ mPublished
   = lens _mPublished (\ s a -> s{_mPublished = a})
 
 -- | The URL for the page that hosts this media.
-mUrl :: Lens' Media (Maybe Text)
-mUrl = lens _mUrl (\ s a -> s{_mUrl = a})
+mURL :: Lens' Media (Maybe Text)
+mURL = lens _mURL (\ s a -> s{_mURL = a})
 
 -- | The width in pixels of the original image.
 mWidth :: Lens' Media (Maybe Word32)
 mWidth = lens _mWidth (\ s a -> s{_mWidth = a})
 
 -- | The URL of this photo or video\'s still image.
-mMediaUrl :: Lens' Media (Maybe Text)
-mMediaUrl
-  = lens _mMediaUrl (\ s a -> s{_mMediaUrl = a})
+mMediaURL :: Lens' Media (Maybe Text)
+mMediaURL
+  = lens _mMediaURL (\ s a -> s{_mMediaURL = a})
 
 -- | The list of video streams for this video. There might be several
 -- different streams available for a single video, either Flash or MPEG, of
 -- various sizes
-mStreams :: Lens' Media [Maybe Videostream]
+mStreams :: Lens' Media [Videostream]
 mStreams
   = lens _mStreams (\ s a -> s{_mStreams = a}) .
       _Default
@@ -2463,8 +2464,8 @@ instance ToJSON Media where
                   ("videoStatus" .=) <$> _mVideoStatus,
                   Just ("kind" .= _mKind),
                   ("published" .=) <$> _mPublished,
-                  ("url" .=) <$> _mUrl, ("width" .=) <$> _mWidth,
-                  ("mediaUrl" .=) <$> _mMediaUrl,
+                  ("url" .=) <$> _mURL, ("width" .=) <$> _mWidth,
+                  ("mediaUrl" .=) <$> _mMediaURL,
                   ("streams" .=) <$> _mStreams, ("exif" .=) <$> _mExif,
                   ("displayName" .=) <$> _mDisplayName,
                   ("author" .=) <$> _mAuthor, ("id" .=) <$> _mId,
@@ -2475,24 +2476,24 @@ instance ToJSON Media where
 --
 -- /See:/ 'activityObjectActorImage' smart constructor.
 newtype ActivityObjectActorImage = ActivityObjectActorImage
-    { _actUrl :: Maybe Text
+    { _actURL :: Maybe Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivityObjectActorImage' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'actUrl'
+-- * 'actURL'
 activityObjectActorImage
     :: ActivityObjectActorImage
 activityObjectActorImage =
     ActivityObjectActorImage
-    { _actUrl = Nothing
+    { _actURL = Nothing
     }
 
 -- | A URL that points to a thumbnail photo of the original actor.
-actUrl :: Lens' ActivityObjectActorImage (Maybe Text)
-actUrl = lens _actUrl (\ s a -> s{_actUrl = a})
+actURL :: Lens' ActivityObjectActorImage (Maybe Text)
+actURL = lens _actURL (\ s a -> s{_actURL = a})
 
 instance FromJSON ActivityObjectActorImage where
         parseJSON
@@ -2501,7 +2502,7 @@ instance FromJSON ActivityObjectActorImage where
 
 instance ToJSON ActivityObjectActorImage where
         toJSON ActivityObjectActorImage{..}
-          = object (catMaybes [("url" .=) <$> _actUrl])
+          = object (catMaybes [("url" .=) <$> _actURL])
 
 -- | Verification status of actor.
 --
@@ -2548,7 +2549,7 @@ data ActivityFeed = ActivityFeed
     , _afNextPageToken :: !(Maybe Text)
     , _afNextLink      :: !(Maybe Text)
     , _afKind          :: !Text
-    , _afItems         :: !(Maybe [Maybe Activity])
+    , _afItems         :: !(Maybe [Activity])
     , _afSelfLink      :: !(Maybe Text)
     , _afId            :: !(Maybe Text)
     , _afUpdated       :: !(Maybe UTCTime)
@@ -2614,7 +2615,7 @@ afKind :: Lens' ActivityFeed Text
 afKind = lens _afKind (\ s a -> s{_afKind = a})
 
 -- | The activities in this page of results.
-afItems :: Lens' ActivityFeed [Maybe Activity]
+afItems :: Lens' ActivityFeed [Activity]
 afItems
   = lens _afItems (\ s a -> s{_afItems = a}) . _Default
       . _Coerce
@@ -2800,7 +2801,7 @@ instance ToJSON PersonEmails where
 --
 -- /See:/ 'personImage' smart constructor.
 data PersonImage = PersonImage
-    { _piUrl       :: !(Maybe Text)
+    { _piURL       :: !(Maybe Text)
     , _piIsDefault :: !(Maybe Bool)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -2808,22 +2809,22 @@ data PersonImage = PersonImage
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'piUrl'
+-- * 'piURL'
 --
 -- * 'piIsDefault'
 personImage
     :: PersonImage
 personImage =
     PersonImage
-    { _piUrl = Nothing
+    { _piURL = Nothing
     , _piIsDefault = Nothing
     }
 
 -- | The URL of the person\'s profile photo. To resize the image and crop it
 -- to a square, append the query string ?sz=x, where x is the dimension in
 -- pixels of each side.
-piUrl :: Lens' PersonImage (Maybe Text)
-piUrl = lens _piUrl (\ s a -> s{_piUrl = a})
+piURL :: Lens' PersonImage (Maybe Text)
+piURL = lens _piURL (\ s a -> s{_piURL = a})
 
 -- | Whether the person\'s profile photo is the default one
 piIsDefault :: Lens' PersonImage (Maybe Bool)
@@ -2841,7 +2842,7 @@ instance ToJSON PersonImage where
         toJSON PersonImage{..}
           = object
               (catMaybes
-                 [("url" .=) <$> _piUrl,
+                 [("url" .=) <$> _piURL,
                   ("isDefault" .=) <$> _piIsDefault])
 
 -- | An object representation of the individual components of a person\'s
@@ -2976,7 +2977,7 @@ instance ToJSON PlaceAddress where
 -- /See:/ 'activityObjectAttachmentsThumbnails' smart constructor.
 data ActivityObjectAttachmentsThumbnails = ActivityObjectAttachmentsThumbnails
     { _aoatImage       :: !(Maybe ActivityObjectAttachmentsThumbnailsImage)
-    , _aoatUrl         :: !(Maybe Text)
+    , _aoatURL         :: !(Maybe Text)
     , _aoatDescription :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -2986,7 +2987,7 @@ data ActivityObjectAttachmentsThumbnails = ActivityObjectAttachmentsThumbnails
 --
 -- * 'aoatImage'
 --
--- * 'aoatUrl'
+-- * 'aoatURL'
 --
 -- * 'aoatDescription'
 activityObjectAttachmentsThumbnails
@@ -2994,7 +2995,7 @@ activityObjectAttachmentsThumbnails
 activityObjectAttachmentsThumbnails =
     ActivityObjectAttachmentsThumbnails
     { _aoatImage = Nothing
-    , _aoatUrl = Nothing
+    , _aoatURL = Nothing
     , _aoatDescription = Nothing
     }
 
@@ -3004,8 +3005,8 @@ aoatImage
   = lens _aoatImage (\ s a -> s{_aoatImage = a})
 
 -- | URL of the webpage containing the image.
-aoatUrl :: Lens' ActivityObjectAttachmentsThumbnails (Maybe Text)
-aoatUrl = lens _aoatUrl (\ s a -> s{_aoatUrl = a})
+aoatURL :: Lens' ActivityObjectAttachmentsThumbnails (Maybe Text)
+aoatURL = lens _aoatURL (\ s a -> s{_aoatURL = a})
 
 -- | Potential name of the thumbnail.
 aoatDescription :: Lens' ActivityObjectAttachmentsThumbnails (Maybe Text)
@@ -3028,7 +3029,7 @@ instance ToJSON ActivityObjectAttachmentsThumbnails
           = object
               (catMaybes
                  [("image" .=) <$> _aoatImage,
-                  ("url" .=) <$> _aoatUrl,
+                  ("url" .=) <$> _aoatURL,
                   ("description" .=) <$> _aoatDescription])
 
 -- | Status of the activity as seen by the viewer.
@@ -3123,7 +3124,7 @@ data AudiencesFeed = AudiencesFeed
     , _audEtag          :: !(Maybe Text)
     , _audNextPageToken :: !(Maybe Text)
     , _audKind          :: !Text
-    , _audItems         :: !(Maybe [Maybe Audience])
+    , _audItems         :: !(Maybe [Audience])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AudiencesFeed' with the minimum fields required to make a request.
@@ -3175,7 +3176,7 @@ audKind :: Lens' AudiencesFeed Text
 audKind = lens _audKind (\ s a -> s{_audKind = a})
 
 -- | The audiences in this result.
-audItems :: Lens' AudiencesFeed [Maybe Audience]
+audItems :: Lens' AudiencesFeed [Audience]
 audItems
   = lens _audItems (\ s a -> s{_audItems = a}) .
       _Default
@@ -3204,16 +3205,16 @@ instance ToJSON AudiencesFeed where
 --
 -- /See:/ 'activity' smart constructor.
 data Activity = Activity
-    { _aaAccess          :: !(Maybe (Maybe ACL))
+    { _aaAccess          :: !(Maybe ACL)
     , _aaPlaceName       :: !(Maybe Text)
     , _aaEtag            :: !(Maybe Text)
     , _aaAnnotation      :: !(Maybe Text)
-    , _aaLocation        :: !(Maybe (Maybe Place))
+    , _aaLocation        :: !(Maybe Place)
     , _aaGeocode         :: !(Maybe Text)
     , _aaKind            :: !Text
     , _aaRadius          :: !(Maybe Text)
     , _aaPublished       :: !(Maybe UTCTime)
-    , _aaUrl             :: !(Maybe Text)
+    , _aaURL             :: !(Maybe Text)
     , _aaActor           :: !(Maybe ActivityActor)
     , _aaAddress         :: !(Maybe Text)
     , _aaObject          :: !(Maybe ActivityObject)
@@ -3248,7 +3249,7 @@ data Activity = Activity
 --
 -- * 'aaPublished'
 --
--- * 'aaUrl'
+-- * 'aaURL'
 --
 -- * 'aaActor'
 --
@@ -3282,7 +3283,7 @@ activity =
     , _aaKind = "plus#activity"
     , _aaRadius = Nothing
     , _aaPublished = Nothing
-    , _aaUrl = Nothing
+    , _aaURL = Nothing
     , _aaActor = Nothing
     , _aaAddress = Nothing
     , _aaObject = Nothing
@@ -3296,7 +3297,7 @@ activity =
     }
 
 -- | Identifies who has access to see this activity.
-aaAccess :: Lens' Activity (Maybe (Maybe ACL))
+aaAccess :: Lens' Activity (Maybe ACL)
 aaAccess = lens _aaAccess (\ s a -> s{_aaAccess = a})
 
 -- | Name of the place where this activity occurred.
@@ -3315,7 +3316,7 @@ aaAnnotation
   = lens _aaAnnotation (\ s a -> s{_aaAnnotation = a})
 
 -- | The location where this activity occurred.
-aaLocation :: Lens' Activity (Maybe (Maybe Place))
+aaLocation :: Lens' Activity (Maybe Place)
 aaLocation
   = lens _aaLocation (\ s a -> s{_aaLocation = a})
 
@@ -3341,8 +3342,8 @@ aaPublished
   = lens _aaPublished (\ s a -> s{_aaPublished = a})
 
 -- | The link to this activity.
-aaUrl :: Lens' Activity (Maybe Text)
-aaUrl = lens _aaUrl (\ s a -> s{_aaUrl = a})
+aaURL :: Lens' Activity (Maybe Text)
+aaURL = lens _aaURL (\ s a -> s{_aaURL = a})
 
 -- | The person who performed this activity.
 aaActor :: Lens' Activity (Maybe ActivityActor)
@@ -3433,7 +3434,7 @@ instance ToJSON Activity where
                   Just ("kind" .= _aaKind),
                   ("radius" .=) <$> _aaRadius,
                   ("published" .=) <$> _aaPublished,
-                  ("url" .=) <$> _aaUrl, ("actor" .=) <$> _aaActor,
+                  ("url" .=) <$> _aaURL, ("actor" .=) <$> _aaActor,
                   ("address" .=) <$> _aaAddress,
                   ("object" .=) <$> _aaObject, ("id" .=) <$> _aaId,
                   ("updated" .=) <$> _aaUpdated,
@@ -3826,7 +3827,7 @@ instance ToJSON Comment where
 -- /See:/ 'activityActor' smart constructor.
 data ActivityActor = ActivityActor
     { _aaaImage        :: !(Maybe ActivityActorImage)
-    , _aaaUrl          :: !(Maybe Text)
+    , _aaaURL          :: !(Maybe Text)
     , _aaaName         :: !(Maybe ActivityActorName)
     , _aaaDisplayName  :: !(Maybe Text)
     , _aaaId           :: !(Maybe Text)
@@ -3839,7 +3840,7 @@ data ActivityActor = ActivityActor
 --
 -- * 'aaaImage'
 --
--- * 'aaaUrl'
+-- * 'aaaURL'
 --
 -- * 'aaaName'
 --
@@ -3853,7 +3854,7 @@ activityActor
 activityActor =
     ActivityActor
     { _aaaImage = Nothing
-    , _aaaUrl = Nothing
+    , _aaaURL = Nothing
     , _aaaName = Nothing
     , _aaaDisplayName = Nothing
     , _aaaId = Nothing
@@ -3865,8 +3866,8 @@ aaaImage :: Lens' ActivityActor (Maybe ActivityActorImage)
 aaaImage = lens _aaaImage (\ s a -> s{_aaaImage = a})
 
 -- | The link to the actor\'s Google profile.
-aaaUrl :: Lens' ActivityActor (Maybe Text)
-aaaUrl = lens _aaaUrl (\ s a -> s{_aaaUrl = a})
+aaaURL :: Lens' ActivityActor (Maybe Text)
+aaaURL = lens _aaaURL (\ s a -> s{_aaaURL = a})
 
 -- | An object representation of the individual components of name.
 aaaName :: Lens' ActivityActor (Maybe ActivityActorName)
@@ -3902,7 +3903,7 @@ instance ToJSON ActivityActor where
         toJSON ActivityActor{..}
           = object
               (catMaybes
-                 [("image" .=) <$> _aaaImage, ("url" .=) <$> _aaaUrl,
+                 [("image" .=) <$> _aaaImage, ("url" .=) <$> _aaaURL,
                   ("name" .=) <$> _aaaName,
                   ("displayName" .=) <$> _aaaDisplayName,
                   ("id" .=) <$> _aaaId,
@@ -3976,7 +3977,7 @@ instance ToJSON CommentObject where
 -- /See:/ 'activityObjectAttachmentsFullImage' smart constructor.
 data ActivityObjectAttachmentsFullImage = ActivityObjectAttachmentsFullImage
     { _aoafiHeight :: !(Maybe Word32)
-    , _aoafiUrl    :: !(Maybe Text)
+    , _aoafiURL    :: !(Maybe Text)
     , _aoafiWidth  :: !(Maybe Word32)
     , _aoafiType   :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -3987,7 +3988,7 @@ data ActivityObjectAttachmentsFullImage = ActivityObjectAttachmentsFullImage
 --
 -- * 'aoafiHeight'
 --
--- * 'aoafiUrl'
+-- * 'aoafiURL'
 --
 -- * 'aoafiWidth'
 --
@@ -3997,7 +3998,7 @@ activityObjectAttachmentsFullImage
 activityObjectAttachmentsFullImage =
     ActivityObjectAttachmentsFullImage
     { _aoafiHeight = Nothing
-    , _aoafiUrl = Nothing
+    , _aoafiURL = Nothing
     , _aoafiWidth = Nothing
     , _aoafiType = Nothing
     }
@@ -4008,8 +4009,8 @@ aoafiHeight
   = lens _aoafiHeight (\ s a -> s{_aoafiHeight = a})
 
 -- | URL of the image.
-aoafiUrl :: Lens' ActivityObjectAttachmentsFullImage (Maybe Text)
-aoafiUrl = lens _aoafiUrl (\ s a -> s{_aoafiUrl = a})
+aoafiURL :: Lens' ActivityObjectAttachmentsFullImage (Maybe Text)
+aoafiURL = lens _aoafiURL (\ s a -> s{_aoafiURL = a})
 
 -- | The width, in pixels, of the linked resource.
 aoafiWidth :: Lens' ActivityObjectAttachmentsFullImage (Maybe Word32)
@@ -4037,7 +4038,7 @@ instance ToJSON ActivityObjectAttachmentsFullImage
           = object
               (catMaybes
                  [("height" .=) <$> _aoafiHeight,
-                  ("url" .=) <$> _aoafiUrl,
+                  ("url" .=) <$> _aoafiURL,
                   ("width" .=) <$> _aoafiWidth,
                   ("type" .=) <$> _aoafiType])
 
@@ -4045,7 +4046,7 @@ instance ToJSON ActivityObjectAttachmentsFullImage
 -- /See:/ 'aCL' smart constructor.
 data ACL = ACL
     { _aclKind             :: !Text
-    , _aclItems            :: !(Maybe [Maybe PlusDomainsACLentryResource])
+    , _aclItems            :: !(Maybe [PlusDomainsACLentryResource])
     , _aclDomainRestricted :: !(Maybe Bool)
     , _aclDescription      :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -4077,7 +4078,7 @@ aclKind :: Lens' ACL Text
 aclKind = lens _aclKind (\ s a -> s{_aclKind = a})
 
 -- | The list of access entries.
-aclItems :: Lens' ACL [Maybe PlusDomainsACLentryResource]
+aclItems :: Lens' ACL [PlusDomainsACLentryResource]
 aclItems
   = lens _aclItems (\ s a -> s{_aclItems = a}) .
       _Default
@@ -4153,7 +4154,7 @@ data CommentFeed = CommentFeed
     , _cffNextPageToken :: !(Maybe Text)
     , _cffNextLink      :: !(Maybe Text)
     , _cffKind          :: !Text
-    , _cffItems         :: !(Maybe [Maybe Comment])
+    , _cffItems         :: !(Maybe [Comment])
     , _cffId            :: !(Maybe Text)
     , _cffUpdated       :: !(Maybe UTCTime)
     , _cffTitle         :: !(Maybe Text)
@@ -4215,7 +4216,7 @@ cffKind :: Lens' CommentFeed Text
 cffKind = lens _cffKind (\ s a -> s{_cffKind = a})
 
 -- | The comments in this page of results.
-cffItems :: Lens' CommentFeed [Maybe Comment]
+cffItems :: Lens' CommentFeed [Comment]
 cffItems
   = lens _cffItems (\ s a -> s{_cffItems = a}) .
       _Default

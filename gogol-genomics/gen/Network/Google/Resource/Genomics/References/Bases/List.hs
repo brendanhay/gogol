@@ -33,16 +33,15 @@ module Network.Google.Resource.Genomics.References.Bases.List
     -- * Request Lenses
     , rblQuotaUser
     , rblPrettyPrint
-    , rblUserIp
+    , rblUserIP
     , rblStart
     , rblReferenceId
     , rblKey
     , rblEnd
     , rblPageToken
-    , rblOauthToken
+    , rblOAuthToken
     , rblPageSize
     , rblFields
-    , rblAlt
     ) where
 
 import           Network.Google.Genomics.Types
@@ -58,13 +57,13 @@ type ReferencesBasesListResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "start" Int64 :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "end" Int64 :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "pageSize" Int32 :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :>
+                               QueryParam "alt" AltJSON :>
                                  Get '[JSON] ListBasesResponse
 
 -- | Lists the bases in a reference, optionally restricted to a range.
@@ -74,16 +73,15 @@ type ReferencesBasesListResource =
 data ReferencesBasesList' = ReferencesBasesList'
     { _rblQuotaUser   :: !(Maybe Text)
     , _rblPrettyPrint :: !Bool
-    , _rblUserIp      :: !(Maybe Text)
+    , _rblUserIP      :: !(Maybe Text)
     , _rblStart       :: !(Maybe Int64)
     , _rblReferenceId :: !Text
-    , _rblKey         :: !(Maybe Text)
+    , _rblKey         :: !(Maybe Key)
     , _rblEnd         :: !(Maybe Int64)
     , _rblPageToken   :: !(Maybe Text)
-    , _rblOauthToken  :: !(Maybe Text)
+    , _rblOAuthToken  :: !(Maybe OAuthToken)
     , _rblPageSize    :: !(Maybe Int32)
     , _rblFields      :: !(Maybe Text)
-    , _rblAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReferencesBasesList'' with the minimum fields required to make a request.
@@ -94,7 +92,7 @@ data ReferencesBasesList' = ReferencesBasesList'
 --
 -- * 'rblPrettyPrint'
 --
--- * 'rblUserIp'
+-- * 'rblUserIP'
 --
 -- * 'rblStart'
 --
@@ -106,13 +104,11 @@ data ReferencesBasesList' = ReferencesBasesList'
 --
 -- * 'rblPageToken'
 --
--- * 'rblOauthToken'
+-- * 'rblOAuthToken'
 --
 -- * 'rblPageSize'
 --
 -- * 'rblFields'
---
--- * 'rblAlt'
 referencesBasesList'
     :: Text -- ^ 'referenceId'
     -> ReferencesBasesList'
@@ -120,16 +116,15 @@ referencesBasesList' pRblReferenceId_ =
     ReferencesBasesList'
     { _rblQuotaUser = Nothing
     , _rblPrettyPrint = True
-    , _rblUserIp = Nothing
+    , _rblUserIP = Nothing
     , _rblStart = Nothing
     , _rblReferenceId = pRblReferenceId_
     , _rblKey = Nothing
     , _rblEnd = Nothing
     , _rblPageToken = Nothing
-    , _rblOauthToken = Nothing
+    , _rblOAuthToken = Nothing
     , _rblPageSize = Nothing
     , _rblFields = Nothing
-    , _rblAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -147,9 +142,9 @@ rblPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rblUserIp :: Lens' ReferencesBasesList' (Maybe Text)
-rblUserIp
-  = lens _rblUserIp (\ s a -> s{_rblUserIp = a})
+rblUserIP :: Lens' ReferencesBasesList' (Maybe Text)
+rblUserIP
+  = lens _rblUserIP (\ s a -> s{_rblUserIP = a})
 
 -- | The start position (0-based) of this query. Defaults to 0.
 rblStart :: Lens' ReferencesBasesList' (Maybe Int64)
@@ -164,7 +159,7 @@ rblReferenceId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rblKey :: Lens' ReferencesBasesList' (Maybe Text)
+rblKey :: Lens' ReferencesBasesList' (Maybe Key)
 rblKey = lens _rblKey (\ s a -> s{_rblKey = a})
 
 -- | The end position (0-based, exclusive) of this query. Defaults to the
@@ -180,10 +175,10 @@ rblPageToken
   = lens _rblPageToken (\ s a -> s{_rblPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-rblOauthToken :: Lens' ReferencesBasesList' (Maybe Text)
-rblOauthToken
-  = lens _rblOauthToken
-      (\ s a -> s{_rblOauthToken = a})
+rblOAuthToken :: Lens' ReferencesBasesList' (Maybe OAuthToken)
+rblOAuthToken
+  = lens _rblOAuthToken
+      (\ s a -> s{_rblOAuthToken = a})
 
 -- | Specifies the maximum number of bases to return in a single page.
 rblPageSize :: Lens' ReferencesBasesList' (Maybe Int32)
@@ -195,24 +190,24 @@ rblFields :: Lens' ReferencesBasesList' (Maybe Text)
 rblFields
   = lens _rblFields (\ s a -> s{_rblFields = a})
 
--- | Data format for the response.
-rblAlt :: Lens' ReferencesBasesList' Alt
-rblAlt = lens _rblAlt (\ s a -> s{_rblAlt = a})
+instance GoogleAuth ReferencesBasesList' where
+        authKey = rblKey . _Just
+        authToken = rblOAuthToken . _Just
 
 instance GoogleRequest ReferencesBasesList' where
         type Rs ReferencesBasesList' = ListBasesResponse
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u ReferencesBasesList'{..}
-          = go _rblQuotaUser (Just _rblPrettyPrint) _rblUserIp
+          = go _rblQuotaUser (Just _rblPrettyPrint) _rblUserIP
               _rblStart
               _rblReferenceId
               _rblKey
               _rblEnd
               _rblPageToken
-              _rblOauthToken
+              _rblOAuthToken
               _rblPageSize
               _rblFields
-              (Just _rblAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ReferencesBasesListResource)

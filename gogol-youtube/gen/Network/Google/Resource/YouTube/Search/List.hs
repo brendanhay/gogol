@@ -45,7 +45,7 @@ module Network.Google.Resource.YouTube.Search.List
     , slForDeveloper
     , slLocation
     , slLocationRadius
-    , slUserIp
+    , slUserIP
     , slForContentOwner
     , slChannelId
     , slQ
@@ -61,7 +61,7 @@ module Network.Google.Resource.YouTube.Search.List
     , slRelatedToVideoId
     , slPageToken
     , slType
-    , slOauthToken
+    , slOAuthToken
     , slChannelType
     , slRelevanceLanguage
     , slOrder
@@ -70,7 +70,6 @@ module Network.Google.Resource.YouTube.Search.List
     , slVideoType
     , slVideoDimension
     , slFields
-    , slAlt
     ) where
 
 import           Network.Google.Prelude
@@ -117,7 +116,7 @@ type SearchListResource =
                                                QueryParam "videoCategoryId" Text
                                                  :>
                                                  QueryParam "topicId" Text :>
-                                                   QueryParam "key" Text :>
+                                                   QueryParam "key" Key :>
                                                      QueryParam "safeSearch"
                                                        YouTubeSearchListSafeSearch
                                                        :>
@@ -138,7 +137,7 @@ type SearchListResource =
                                                                :>
                                                                QueryParam
                                                                  "oauth_token"
-                                                                 Text
+                                                                 OAuthToken
                                                                  :>
                                                                  QueryParam
                                                                    "channelType"
@@ -174,7 +173,7 @@ type SearchListResource =
                                                                                  :>
                                                                                  QueryParam
                                                                                    "alt"
-                                                                                   Alt
+                                                                                   AltJSON
                                                                                    :>
                                                                                    Get
                                                                                      '[JSON]
@@ -199,7 +198,7 @@ data SearchList' = SearchList'
     , _slForDeveloper           :: !(Maybe Bool)
     , _slLocation               :: !(Maybe Text)
     , _slLocationRadius         :: !(Maybe Text)
-    , _slUserIp                 :: !(Maybe Text)
+    , _slUserIP                 :: !(Maybe Text)
     , _slForContentOwner        :: !(Maybe Bool)
     , _slChannelId              :: !(Maybe Text)
     , _slQ                      :: !(Maybe Text)
@@ -209,13 +208,13 @@ data SearchList' = SearchList'
     , _slOnBehalfOfContentOwner :: !(Maybe Text)
     , _slVideoCategoryId        :: !(Maybe Text)
     , _slTopicId                :: !(Maybe Text)
-    , _slKey                    :: !(Maybe Text)
+    , _slKey                    :: !(Maybe Key)
     , _slSafeSearch             :: !(Maybe YouTubeSearchListSafeSearch)
     , _slVideoSyndicated        :: !(Maybe YouTubeSearchListVideoSyndicated)
     , _slRelatedToVideoId       :: !(Maybe Text)
     , _slPageToken              :: !(Maybe Text)
     , _slType                   :: !Text
-    , _slOauthToken             :: !(Maybe Text)
+    , _slOAuthToken             :: !(Maybe OAuthToken)
     , _slChannelType            :: !(Maybe YouTubeSearchListChannelType)
     , _slRelevanceLanguage      :: !(Maybe Text)
     , _slOrder                  :: !YouTubeSearchListOrder
@@ -224,7 +223,6 @@ data SearchList' = SearchList'
     , _slVideoType              :: !(Maybe YouTubeSearchListVideoType)
     , _slVideoDimension         :: !(Maybe YouTubeSearchListVideoDimension)
     , _slFields                 :: !(Maybe Text)
-    , _slAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SearchList'' with the minimum fields required to make a request.
@@ -255,7 +253,7 @@ data SearchList' = SearchList'
 --
 -- * 'slLocationRadius'
 --
--- * 'slUserIp'
+-- * 'slUserIP'
 --
 -- * 'slForContentOwner'
 --
@@ -287,7 +285,7 @@ data SearchList' = SearchList'
 --
 -- * 'slType'
 --
--- * 'slOauthToken'
+-- * 'slOAuthToken'
 --
 -- * 'slChannelType'
 --
@@ -304,8 +302,6 @@ data SearchList' = SearchList'
 -- * 'slVideoDimension'
 --
 -- * 'slFields'
---
--- * 'slAlt'
 searchList'
     :: Text -- ^ 'part'
     -> SearchList'
@@ -323,7 +319,7 @@ searchList' pSlPart_ =
     , _slForDeveloper = Nothing
     , _slLocation = Nothing
     , _slLocationRadius = Nothing
-    , _slUserIp = Nothing
+    , _slUserIP = Nothing
     , _slForContentOwner = Nothing
     , _slChannelId = Nothing
     , _slQ = Nothing
@@ -339,7 +335,7 @@ searchList' pSlPart_ =
     , _slRelatedToVideoId = Nothing
     , _slPageToken = Nothing
     , _slType = "video,channel,playlist"
-    , _slOauthToken = Nothing
+    , _slOAuthToken = Nothing
     , _slChannelType = Nothing
     , _slRelevanceLanguage = Nothing
     , _slOrder = YTSLOSearchSortRelevance
@@ -348,7 +344,6 @@ searchList' pSlPart_ =
     , _slVideoType = Nothing
     , _slVideoDimension = Nothing
     , _slFields = Nothing
-    , _slAlt = JSON
     }
 
 -- | The publishedAfter parameter indicates that the API response should only
@@ -463,8 +458,8 @@ slLocationRadius
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-slUserIp :: Lens' SearchList' (Maybe Text)
-slUserIp = lens _slUserIp (\ s a -> s{_slUserIp = a})
+slUserIP :: Lens' SearchList' (Maybe Text)
+slUserIP = lens _slUserIP (\ s a -> s{_slUserIP = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The forContentOwner parameter restricts the search to only
@@ -550,7 +545,7 @@ slTopicId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-slKey :: Lens' SearchList' (Maybe Text)
+slKey :: Lens' SearchList' (Maybe Key)
 slKey = lens _slKey (\ s a -> s{_slKey = a})
 
 -- | The safeSearch parameter indicates whether the search results should
@@ -591,9 +586,9 @@ slType :: Lens' SearchList' Text
 slType = lens _slType (\ s a -> s{_slType = a})
 
 -- | OAuth 2.0 token for the current user.
-slOauthToken :: Lens' SearchList' (Maybe Text)
-slOauthToken
-  = lens _slOauthToken (\ s a -> s{_slOauthToken = a})
+slOAuthToken :: Lens' SearchList' (Maybe OAuthToken)
+slOAuthToken
+  = lens _slOAuthToken (\ s a -> s{_slOAuthToken = a})
 
 -- | The channelType parameter lets you restrict a search to a particular
 -- type of channel.
@@ -651,9 +646,9 @@ slVideoDimension
 slFields :: Lens' SearchList' (Maybe Text)
 slFields = lens _slFields (\ s a -> s{_slFields = a})
 
--- | Data format for the response.
-slAlt :: Lens' SearchList' Alt
-slAlt = lens _slAlt (\ s a -> s{_slAlt = a})
+instance GoogleAuth SearchList' where
+        authKey = slKey . _Just
+        authToken = slOAuthToken . _Just
 
 instance GoogleRequest SearchList' where
         type Rs SearchList' = SearchListResponse
@@ -670,7 +665,7 @@ instance GoogleRequest SearchList' where
               _slForDeveloper
               _slLocation
               _slLocationRadius
-              _slUserIp
+              _slUserIP
               _slForContentOwner
               _slChannelId
               _slQ
@@ -686,7 +681,7 @@ instance GoogleRequest SearchList' where
               _slRelatedToVideoId
               _slPageToken
               (Just _slType)
-              _slOauthToken
+              _slOAuthToken
               _slChannelType
               _slRelevanceLanguage
               (Just _slOrder)
@@ -695,7 +690,7 @@ instance GoogleRequest SearchList' where
               _slVideoType
               _slVideoDimension
               _slFields
-              (Just _slAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy SearchListResource)
                       r

@@ -201,9 +201,6 @@ module Network.Google.MapsCoordinate
     , cKind
     , cValue
 
-    -- ** Alt
-    , Alt (..)
-
     -- ** EnumItemDef
     , EnumItemDef
     , enumItemDef

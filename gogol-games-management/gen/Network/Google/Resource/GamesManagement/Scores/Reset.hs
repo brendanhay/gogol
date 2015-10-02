@@ -34,12 +34,11 @@ module Network.Google.Resource.GamesManagement.Scores.Reset
     -- * Request Lenses
     , srQuotaUser
     , srPrettyPrint
-    , srUserIp
+    , srUserIP
     , srLeaderboardId
     , srKey
-    , srOauthToken
+    , srOAuthToken
     , srFields
-    , srAlt
     ) where
 
 import           Network.Google.GamesManagement.Types
@@ -55,10 +54,10 @@ type ScoresResetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :>
+                         QueryParam "alt" AltJSON :>
                            Post '[JSON] PlayerScoreResetResponse
 
 -- | Resets scores for the leaderboard with the given ID for the currently
@@ -69,12 +68,11 @@ type ScoresResetResource =
 data ScoresReset' = ScoresReset'
     { _srQuotaUser     :: !(Maybe Text)
     , _srPrettyPrint   :: !Bool
-    , _srUserIp        :: !(Maybe Text)
+    , _srUserIP        :: !(Maybe Text)
     , _srLeaderboardId :: !Text
-    , _srKey           :: !(Maybe Text)
-    , _srOauthToken    :: !(Maybe Text)
+    , _srKey           :: !(Maybe Key)
+    , _srOAuthToken    :: !(Maybe OAuthToken)
     , _srFields        :: !(Maybe Text)
-    , _srAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ScoresReset'' with the minimum fields required to make a request.
@@ -85,17 +83,15 @@ data ScoresReset' = ScoresReset'
 --
 -- * 'srPrettyPrint'
 --
--- * 'srUserIp'
+-- * 'srUserIP'
 --
 -- * 'srLeaderboardId'
 --
 -- * 'srKey'
 --
--- * 'srOauthToken'
+-- * 'srOAuthToken'
 --
 -- * 'srFields'
---
--- * 'srAlt'
 scoresReset'
     :: Text -- ^ 'leaderboardId'
     -> ScoresReset'
@@ -103,12 +99,11 @@ scoresReset' pSrLeaderboardId_ =
     ScoresReset'
     { _srQuotaUser = Nothing
     , _srPrettyPrint = True
-    , _srUserIp = Nothing
+    , _srUserIP = Nothing
     , _srLeaderboardId = pSrLeaderboardId_
     , _srKey = Nothing
-    , _srOauthToken = Nothing
+    , _srOAuthToken = Nothing
     , _srFields = Nothing
-    , _srAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -126,8 +121,8 @@ srPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-srUserIp :: Lens' ScoresReset' (Maybe Text)
-srUserIp = lens _srUserIp (\ s a -> s{_srUserIp = a})
+srUserIP :: Lens' ScoresReset' (Maybe Text)
+srUserIP = lens _srUserIP (\ s a -> s{_srUserIP = a})
 
 -- | The ID of the leaderboard.
 srLeaderboardId :: Lens' ScoresReset' Text
@@ -138,32 +133,32 @@ srLeaderboardId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-srKey :: Lens' ScoresReset' (Maybe Text)
+srKey :: Lens' ScoresReset' (Maybe Key)
 srKey = lens _srKey (\ s a -> s{_srKey = a})
 
 -- | OAuth 2.0 token for the current user.
-srOauthToken :: Lens' ScoresReset' (Maybe Text)
-srOauthToken
-  = lens _srOauthToken (\ s a -> s{_srOauthToken = a})
+srOAuthToken :: Lens' ScoresReset' (Maybe OAuthToken)
+srOAuthToken
+  = lens _srOAuthToken (\ s a -> s{_srOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 srFields :: Lens' ScoresReset' (Maybe Text)
 srFields = lens _srFields (\ s a -> s{_srFields = a})
 
--- | Data format for the response.
-srAlt :: Lens' ScoresReset' Alt
-srAlt = lens _srAlt (\ s a -> s{_srAlt = a})
+instance GoogleAuth ScoresReset' where
+        authKey = srKey . _Just
+        authToken = srOAuthToken . _Just
 
 instance GoogleRequest ScoresReset' where
         type Rs ScoresReset' = PlayerScoreResetResponse
         request = requestWithRoute defReq gamesManagementURL
         requestWithRoute r u ScoresReset'{..}
-          = go _srQuotaUser (Just _srPrettyPrint) _srUserIp
+          = go _srQuotaUser (Just _srPrettyPrint) _srUserIP
               _srLeaderboardId
               _srKey
-              _srOauthToken
+              _srOAuthToken
               _srFields
-              (Just _srAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ScoresResetResource)

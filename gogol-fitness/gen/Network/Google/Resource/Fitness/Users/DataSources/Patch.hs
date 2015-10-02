@@ -37,13 +37,13 @@ module Network.Google.Resource.Fitness.Users.DataSources.Patch
     -- * Request Lenses
     , udspQuotaUser
     , udspPrettyPrint
-    , udspUserIp
+    , udspUserIP
     , udspDataSourceId
     , udspUserId
     , udspKey
-    , udspOauthToken
+    , udspDataSource
+    , udspOAuthToken
     , udspFields
-    , udspAlt
     ) where
 
 import           Network.Google.Fitness.Types
@@ -58,10 +58,12 @@ type UsersDataSourcesPatchResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Patch '[JSON] DataSource
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] DataSource :>
+                           Patch '[JSON] DataSource
 
 -- | Updates a given data source. It is an error to modify the data source\'s
 -- data stream ID, data type, type, stream name or device information apart
@@ -74,13 +76,13 @@ type UsersDataSourcesPatchResource =
 data UsersDataSourcesPatch' = UsersDataSourcesPatch'
     { _udspQuotaUser    :: !(Maybe Text)
     , _udspPrettyPrint  :: !Bool
-    , _udspUserIp       :: !(Maybe Text)
+    , _udspUserIP       :: !(Maybe Text)
     , _udspDataSourceId :: !Text
     , _udspUserId       :: !Text
-    , _udspKey          :: !(Maybe Text)
-    , _udspOauthToken   :: !(Maybe Text)
+    , _udspKey          :: !(Maybe Key)
+    , _udspDataSource   :: !DataSource
+    , _udspOAuthToken   :: !(Maybe OAuthToken)
     , _udspFields       :: !(Maybe Text)
-    , _udspAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDataSourcesPatch'' with the minimum fields required to make a request.
@@ -91,7 +93,7 @@ data UsersDataSourcesPatch' = UsersDataSourcesPatch'
 --
 -- * 'udspPrettyPrint'
 --
--- * 'udspUserIp'
+-- * 'udspUserIP'
 --
 -- * 'udspDataSourceId'
 --
@@ -99,26 +101,27 @@ data UsersDataSourcesPatch' = UsersDataSourcesPatch'
 --
 -- * 'udspKey'
 --
--- * 'udspOauthToken'
+-- * 'udspDataSource'
+--
+-- * 'udspOAuthToken'
 --
 -- * 'udspFields'
---
--- * 'udspAlt'
 usersDataSourcesPatch'
     :: Text -- ^ 'dataSourceId'
     -> Text -- ^ 'userId'
+    -> DataSource -- ^ 'DataSource'
     -> UsersDataSourcesPatch'
-usersDataSourcesPatch' pUdspDataSourceId_ pUdspUserId_ =
+usersDataSourcesPatch' pUdspDataSourceId_ pUdspUserId_ pUdspDataSource_ =
     UsersDataSourcesPatch'
     { _udspQuotaUser = Nothing
     , _udspPrettyPrint = True
-    , _udspUserIp = Nothing
+    , _udspUserIP = Nothing
     , _udspDataSourceId = pUdspDataSourceId_
     , _udspUserId = pUdspUserId_
     , _udspKey = Nothing
-    , _udspOauthToken = Nothing
+    , _udspDataSource = pUdspDataSource_
+    , _udspOAuthToken = Nothing
     , _udspFields = Nothing
-    , _udspAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -137,9 +140,9 @@ udspPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-udspUserIp :: Lens' UsersDataSourcesPatch' (Maybe Text)
-udspUserIp
-  = lens _udspUserIp (\ s a -> s{_udspUserIp = a})
+udspUserIP :: Lens' UsersDataSourcesPatch' (Maybe Text)
+udspUserIP
+  = lens _udspUserIP (\ s a -> s{_udspUserIP = a})
 
 -- | The data stream ID of the data source to update.
 udspDataSourceId :: Lens' UsersDataSourcesPatch' Text
@@ -156,36 +159,43 @@ udspUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-udspKey :: Lens' UsersDataSourcesPatch' (Maybe Text)
+udspKey :: Lens' UsersDataSourcesPatch' (Maybe Key)
 udspKey = lens _udspKey (\ s a -> s{_udspKey = a})
 
+-- | Multipart request metadata.
+udspDataSource :: Lens' UsersDataSourcesPatch' DataSource
+udspDataSource
+  = lens _udspDataSource
+      (\ s a -> s{_udspDataSource = a})
+
 -- | OAuth 2.0 token for the current user.
-udspOauthToken :: Lens' UsersDataSourcesPatch' (Maybe Text)
-udspOauthToken
-  = lens _udspOauthToken
-      (\ s a -> s{_udspOauthToken = a})
+udspOAuthToken :: Lens' UsersDataSourcesPatch' (Maybe OAuthToken)
+udspOAuthToken
+  = lens _udspOAuthToken
+      (\ s a -> s{_udspOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 udspFields :: Lens' UsersDataSourcesPatch' (Maybe Text)
 udspFields
   = lens _udspFields (\ s a -> s{_udspFields = a})
 
--- | Data format for the response.
-udspAlt :: Lens' UsersDataSourcesPatch' Alt
-udspAlt = lens _udspAlt (\ s a -> s{_udspAlt = a})
+instance GoogleAuth UsersDataSourcesPatch' where
+        authKey = udspKey . _Just
+        authToken = udspOAuthToken . _Just
 
 instance GoogleRequest UsersDataSourcesPatch' where
         type Rs UsersDataSourcesPatch' = DataSource
         request = requestWithRoute defReq fitnessURL
         requestWithRoute r u UsersDataSourcesPatch'{..}
           = go _udspQuotaUser (Just _udspPrettyPrint)
-              _udspUserIp
+              _udspUserIP
               _udspDataSourceId
               _udspUserId
               _udspKey
-              _udspOauthToken
+              _udspOAuthToken
               _udspFields
-              (Just _udspAlt)
+              (Just AltJSON)
+              _udspDataSource
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersDataSourcesPatchResource)

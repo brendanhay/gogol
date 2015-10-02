@@ -33,7 +33,7 @@ module Network.Google.Resource.Gan.Publishers.List
     -- * Request Lenses
     , plQuotaUser
     , plPrettyPrint
-    , plUserIp
+    , plUserIP
     , plRelationshipStatus
     , plMinSevenDayEpc
     , plRoleId
@@ -42,11 +42,10 @@ module Network.Google.Resource.Gan.Publishers.List
     , plKey
     , plMinPayoutRank
     , plPageToken
-    , plOauthToken
+    , plOAuthToken
     , plPublisherCategory
     , plMaxResults
     , plFields
-    , plAlt
     ) where
 
 import           Network.Google.Affiliates.Types
@@ -66,14 +65,14 @@ type PublishersListResource =
                    :>
                    QueryParam "minSevenDayEpc" Double :>
                      QueryParam "minNinetyDayEpc" Double :>
-                       QueryParam "key" Text :>
+                       QueryParam "key" Key :>
                          QueryParam "minPayoutRank" Int32 :>
                            QueryParam "pageToken" Text :>
-                             QueryParam "oauth_token" Text :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "publisherCategory" Text :>
                                  QueryParam "maxResults" Word32 :>
                                    QueryParam "fields" Text :>
-                                     QueryParam "alt" Alt :>
+                                     QueryParam "alt" AltJSON :>
                                        Get '[JSON] Publishers
 
 -- | Retrieves data about all publishers that the requesting
@@ -83,20 +82,19 @@ type PublishersListResource =
 data PublishersList' = PublishersList'
     { _plQuotaUser          :: !(Maybe Text)
     , _plPrettyPrint        :: !Bool
-    , _plUserIp             :: !(Maybe Text)
+    , _plUserIP             :: !(Maybe Text)
     , _plRelationshipStatus :: !(Maybe GanPublishersListRelationshipStatus)
     , _plMinSevenDayEpc     :: !(Maybe Double)
     , _plRoleId             :: !Text
     , _plMinNinetyDayEpc    :: !(Maybe Double)
     , _plRole               :: !GanPublishersListRole
-    , _plKey                :: !(Maybe Text)
+    , _plKey                :: !(Maybe Key)
     , _plMinPayoutRank      :: !(Maybe Int32)
     , _plPageToken          :: !(Maybe Text)
-    , _plOauthToken         :: !(Maybe Text)
+    , _plOAuthToken         :: !(Maybe OAuthToken)
     , _plPublisherCategory  :: !(Maybe Text)
     , _plMaxResults         :: !(Maybe Word32)
     , _plFields             :: !(Maybe Text)
-    , _plAlt                :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PublishersList'' with the minimum fields required to make a request.
@@ -107,7 +105,7 @@ data PublishersList' = PublishersList'
 --
 -- * 'plPrettyPrint'
 --
--- * 'plUserIp'
+-- * 'plUserIP'
 --
 -- * 'plRelationshipStatus'
 --
@@ -125,15 +123,13 @@ data PublishersList' = PublishersList'
 --
 -- * 'plPageToken'
 --
--- * 'plOauthToken'
+-- * 'plOAuthToken'
 --
 -- * 'plPublisherCategory'
 --
 -- * 'plMaxResults'
 --
 -- * 'plFields'
---
--- * 'plAlt'
 publishersList'
     :: Text -- ^ 'roleId'
     -> GanPublishersListRole -- ^ 'role'
@@ -142,7 +138,7 @@ publishersList' pPlRoleId_ pPlRole_ =
     PublishersList'
     { _plQuotaUser = Nothing
     , _plPrettyPrint = True
-    , _plUserIp = Nothing
+    , _plUserIP = Nothing
     , _plRelationshipStatus = Nothing
     , _plMinSevenDayEpc = Nothing
     , _plRoleId = pPlRoleId_
@@ -151,11 +147,10 @@ publishersList' pPlRoleId_ pPlRole_ =
     , _plKey = Nothing
     , _plMinPayoutRank = Nothing
     , _plPageToken = Nothing
-    , _plOauthToken = Nothing
+    , _plOAuthToken = Nothing
     , _plPublisherCategory = Nothing
     , _plMaxResults = Nothing
     , _plFields = Nothing
-    , _plAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -173,8 +168,8 @@ plPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-plUserIp :: Lens' PublishersList' (Maybe Text)
-plUserIp = lens _plUserIp (\ s a -> s{_plUserIp = a})
+plUserIP :: Lens' PublishersList' (Maybe Text)
+plUserIP = lens _plUserIP (\ s a -> s{_plUserIP = a})
 
 -- | Filters out all publishers for which do not have the given relationship
 -- status with the requesting publisher.
@@ -209,7 +204,7 @@ plRole = lens _plRole (\ s a -> s{_plRole = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-plKey :: Lens' PublishersList' (Maybe Text)
+plKey :: Lens' PublishersList' (Maybe Key)
 plKey = lens _plKey (\ s a -> s{_plKey = a})
 
 -- | A value between 1 and 4, where 1 represents the quartile of publishers
@@ -228,9 +223,9 @@ plPageToken
   = lens _plPageToken (\ s a -> s{_plPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-plOauthToken :: Lens' PublishersList' (Maybe Text)
-plOauthToken
-  = lens _plOauthToken (\ s a -> s{_plOauthToken = a})
+plOAuthToken :: Lens' PublishersList' (Maybe OAuthToken)
+plOAuthToken
+  = lens _plOAuthToken (\ s a -> s{_plOAuthToken = a})
 
 -- | Caret(^) delimted list of publisher categories. Valid categories:
 -- (unclassified|community_and_content|shopping_and_promotion|loyalty_and_rewards|network|search_specialist|comparison_shopping|email).
@@ -250,15 +245,15 @@ plMaxResults
 plFields :: Lens' PublishersList' (Maybe Text)
 plFields = lens _plFields (\ s a -> s{_plFields = a})
 
--- | Data format for the response.
-plAlt :: Lens' PublishersList' Alt
-plAlt = lens _plAlt (\ s a -> s{_plAlt = a})
+instance GoogleAuth PublishersList' where
+        authKey = plKey . _Just
+        authToken = plOAuthToken . _Just
 
 instance GoogleRequest PublishersList' where
         type Rs PublishersList' = Publishers
         request = requestWithRoute defReq affiliatesURL
         requestWithRoute r u PublishersList'{..}
-          = go _plQuotaUser (Just _plPrettyPrint) _plUserIp
+          = go _plQuotaUser (Just _plPrettyPrint) _plUserIP
               _plRelationshipStatus
               _plMinSevenDayEpc
               _plRoleId
@@ -267,11 +262,11 @@ instance GoogleRequest PublishersList' where
               _plKey
               _plMinPayoutRank
               _plPageToken
-              _plOauthToken
+              _plOAuthToken
               _plPublisherCategory
               _plMaxResults
               _plFields
-              (Just _plAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PublishersListResource)

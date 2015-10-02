@@ -33,13 +33,12 @@ module Network.Google.Resource.Webmasters.Sitemaps.List
     -- * Request Lenses
     , sllQuotaUser
     , sllPrettyPrint
-    , sllUserIp
-    , sllSiteUrl
+    , sllUserIP
+    , sllSiteURL
     , sllSitemapIndex
     , sllKey
-    , sllOauthToken
+    , sllOAuthToken
     , sllFields
-    , sllAlt
     ) where
 
 import           Network.Google.Prelude
@@ -55,10 +54,10 @@ type SitemapsListResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "sitemapIndex" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :>
+                         QueryParam "alt" AltJSON :>
                            Get '[JSON] SitemapsListResponse
 
 -- | Lists the sitemaps-entries submitted for this site, or included in the
@@ -68,13 +67,12 @@ type SitemapsListResource =
 data SitemapsList' = SitemapsList'
     { _sllQuotaUser    :: !(Maybe Text)
     , _sllPrettyPrint  :: !Bool
-    , _sllUserIp       :: !(Maybe Text)
-    , _sllSiteUrl      :: !Text
+    , _sllUserIP       :: !(Maybe Text)
+    , _sllSiteURL      :: !Text
     , _sllSitemapIndex :: !(Maybe Text)
-    , _sllKey          :: !(Maybe Text)
-    , _sllOauthToken   :: !(Maybe Text)
+    , _sllKey          :: !(Maybe Key)
+    , _sllOAuthToken   :: !(Maybe OAuthToken)
     , _sllFields       :: !(Maybe Text)
-    , _sllAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SitemapsList'' with the minimum fields required to make a request.
@@ -85,33 +83,30 @@ data SitemapsList' = SitemapsList'
 --
 -- * 'sllPrettyPrint'
 --
--- * 'sllUserIp'
+-- * 'sllUserIP'
 --
--- * 'sllSiteUrl'
+-- * 'sllSiteURL'
 --
 -- * 'sllSitemapIndex'
 --
 -- * 'sllKey'
 --
--- * 'sllOauthToken'
+-- * 'sllOAuthToken'
 --
 -- * 'sllFields'
---
--- * 'sllAlt'
 sitemapsList'
     :: Text -- ^ 'siteUrl'
     -> SitemapsList'
-sitemapsList' pSllSiteUrl_ =
+sitemapsList' pSllSiteURL_ =
     SitemapsList'
     { _sllQuotaUser = Nothing
     , _sllPrettyPrint = True
-    , _sllUserIp = Nothing
-    , _sllSiteUrl = pSllSiteUrl_
+    , _sllUserIP = Nothing
+    , _sllSiteURL = pSllSiteURL_
     , _sllSitemapIndex = Nothing
     , _sllKey = Nothing
-    , _sllOauthToken = Nothing
+    , _sllOAuthToken = Nothing
     , _sllFields = Nothing
-    , _sllAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -129,15 +124,15 @@ sllPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-sllUserIp :: Lens' SitemapsList' (Maybe Text)
-sllUserIp
-  = lens _sllUserIp (\ s a -> s{_sllUserIp = a})
+sllUserIP :: Lens' SitemapsList' (Maybe Text)
+sllUserIP
+  = lens _sllUserIP (\ s a -> s{_sllUserIP = a})
 
 -- | The site\'s URL, including protocol. For example:
 -- http:\/\/www.example.com\/
-sllSiteUrl :: Lens' SitemapsList' Text
-sllSiteUrl
-  = lens _sllSiteUrl (\ s a -> s{_sllSiteUrl = a})
+sllSiteURL :: Lens' SitemapsList' Text
+sllSiteURL
+  = lens _sllSiteURL (\ s a -> s{_sllSiteURL = a})
 
 -- | A URL of a site\'s sitemap index. For example:
 -- http:\/\/www.example.com\/sitemapindex.xml
@@ -149,35 +144,35 @@ sllSitemapIndex
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-sllKey :: Lens' SitemapsList' (Maybe Text)
+sllKey :: Lens' SitemapsList' (Maybe Key)
 sllKey = lens _sllKey (\ s a -> s{_sllKey = a})
 
 -- | OAuth 2.0 token for the current user.
-sllOauthToken :: Lens' SitemapsList' (Maybe Text)
-sllOauthToken
-  = lens _sllOauthToken
-      (\ s a -> s{_sllOauthToken = a})
+sllOAuthToken :: Lens' SitemapsList' (Maybe OAuthToken)
+sllOAuthToken
+  = lens _sllOAuthToken
+      (\ s a -> s{_sllOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 sllFields :: Lens' SitemapsList' (Maybe Text)
 sllFields
   = lens _sllFields (\ s a -> s{_sllFields = a})
 
--- | Data format for the response.
-sllAlt :: Lens' SitemapsList' Alt
-sllAlt = lens _sllAlt (\ s a -> s{_sllAlt = a})
+instance GoogleAuth SitemapsList' where
+        authKey = sllKey . _Just
+        authToken = sllOAuthToken . _Just
 
 instance GoogleRequest SitemapsList' where
         type Rs SitemapsList' = SitemapsListResponse
         request = requestWithRoute defReq webmasterToolsURL
         requestWithRoute r u SitemapsList'{..}
-          = go _sllQuotaUser (Just _sllPrettyPrint) _sllUserIp
-              _sllSiteUrl
+          = go _sllQuotaUser (Just _sllPrettyPrint) _sllUserIP
+              _sllSiteURL
               _sllSitemapIndex
               _sllKey
-              _sllOauthToken
+              _sllOAuthToken
               _sllFields
-              (Just _sllAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy SitemapsListResource)

@@ -22,7 +22,7 @@
 -- operation will not have any effect on the version that is being served
 -- (i.e. the published version).
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersVersionsRestore@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersVersionsRestore@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Restore
     (
     -- * REST Resource
@@ -36,19 +36,18 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Restore
     , acvrQuotaUser
     , acvrPrettyPrint
     , acvrContainerId
-    , acvrUserIp
+    , acvrUserIP
     , acvrContainerVersionId
     , acvrAccountId
     , acvrKey
-    , acvrOauthToken
+    , acvrOAuthToken
     , acvrFields
-    , acvrAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagmanagerAccountsContainersVersionsRestore@ which the
+-- | A resource alias for @TagManagerAccountsContainersVersionsRestore@ which the
 -- 'AccountsContainersVersionsRestore'' request conforms to.
 type AccountsContainersVersionsRestoreResource =
      "accounts" :>
@@ -61,10 +60,10 @@ type AccountsContainersVersionsRestoreResource =
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :>
+                               QueryParam "alt" AltJSON :>
                                  Post '[JSON] ContainerVersion
 
 -- | Restores a Container Version. This will overwrite the container\'s
@@ -77,13 +76,12 @@ data AccountsContainersVersionsRestore' = AccountsContainersVersionsRestore'
     { _acvrQuotaUser          :: !(Maybe Text)
     , _acvrPrettyPrint        :: !Bool
     , _acvrContainerId        :: !Text
-    , _acvrUserIp             :: !(Maybe Text)
+    , _acvrUserIP             :: !(Maybe Text)
     , _acvrContainerVersionId :: !Text
     , _acvrAccountId          :: !Text
-    , _acvrKey                :: !(Maybe Text)
-    , _acvrOauthToken         :: !(Maybe Text)
+    , _acvrKey                :: !(Maybe Key)
+    , _acvrOAuthToken         :: !(Maybe OAuthToken)
     , _acvrFields             :: !(Maybe Text)
-    , _acvrAlt                :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersVersionsRestore'' with the minimum fields required to make a request.
@@ -96,7 +94,7 @@ data AccountsContainersVersionsRestore' = AccountsContainersVersionsRestore'
 --
 -- * 'acvrContainerId'
 --
--- * 'acvrUserIp'
+-- * 'acvrUserIP'
 --
 -- * 'acvrContainerVersionId'
 --
@@ -104,11 +102,9 @@ data AccountsContainersVersionsRestore' = AccountsContainersVersionsRestore'
 --
 -- * 'acvrKey'
 --
--- * 'acvrOauthToken'
+-- * 'acvrOAuthToken'
 --
 -- * 'acvrFields'
---
--- * 'acvrAlt'
 accountsContainersVersionsRestore'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'containerVersionId'
@@ -119,13 +115,12 @@ accountsContainersVersionsRestore' pAcvrContainerId_ pAcvrContainerVersionId_ pA
     { _acvrQuotaUser = Nothing
     , _acvrPrettyPrint = True
     , _acvrContainerId = pAcvrContainerId_
-    , _acvrUserIp = Nothing
+    , _acvrUserIP = Nothing
     , _acvrContainerVersionId = pAcvrContainerVersionId_
     , _acvrAccountId = pAcvrAccountId_
     , _acvrKey = Nothing
-    , _acvrOauthToken = Nothing
+    , _acvrOAuthToken = Nothing
     , _acvrFields = Nothing
-    , _acvrAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,9 +145,9 @@ acvrContainerId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-acvrUserIp :: Lens' AccountsContainersVersionsRestore' (Maybe Text)
-acvrUserIp
-  = lens _acvrUserIp (\ s a -> s{_acvrUserIp = a})
+acvrUserIP :: Lens' AccountsContainersVersionsRestore' (Maybe Text)
+acvrUserIP
+  = lens _acvrUserIP (\ s a -> s{_acvrUserIP = a})
 
 -- | The GTM Container Version ID.
 acvrContainerVersionId :: Lens' AccountsContainersVersionsRestore' Text
@@ -169,23 +164,24 @@ acvrAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-acvrKey :: Lens' AccountsContainersVersionsRestore' (Maybe Text)
+acvrKey :: Lens' AccountsContainersVersionsRestore' (Maybe Key)
 acvrKey = lens _acvrKey (\ s a -> s{_acvrKey = a})
 
 -- | OAuth 2.0 token for the current user.
-acvrOauthToken :: Lens' AccountsContainersVersionsRestore' (Maybe Text)
-acvrOauthToken
-  = lens _acvrOauthToken
-      (\ s a -> s{_acvrOauthToken = a})
+acvrOAuthToken :: Lens' AccountsContainersVersionsRestore' (Maybe OAuthToken)
+acvrOAuthToken
+  = lens _acvrOAuthToken
+      (\ s a -> s{_acvrOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 acvrFields :: Lens' AccountsContainersVersionsRestore' (Maybe Text)
 acvrFields
   = lens _acvrFields (\ s a -> s{_acvrFields = a})
 
--- | Data format for the response.
-acvrAlt :: Lens' AccountsContainersVersionsRestore' Alt
-acvrAlt = lens _acvrAlt (\ s a -> s{_acvrAlt = a})
+instance GoogleAuth
+         AccountsContainersVersionsRestore' where
+        authKey = acvrKey . _Just
+        authToken = acvrOAuthToken . _Just
 
 instance GoogleRequest
          AccountsContainersVersionsRestore' where
@@ -196,13 +192,13 @@ instance GoogleRequest
           AccountsContainersVersionsRestore'{..}
           = go _acvrQuotaUser (Just _acvrPrettyPrint)
               _acvrContainerId
-              _acvrUserIp
+              _acvrUserIP
               _acvrContainerVersionId
               _acvrAccountId
               _acvrKey
-              _acvrOauthToken
+              _acvrOAuthToken
               _acvrFields
-              (Just _acvrAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

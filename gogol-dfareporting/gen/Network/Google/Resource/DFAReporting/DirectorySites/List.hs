@@ -32,7 +32,7 @@ module Network.Google.Resource.DFAReporting.DirectorySites.List
     -- * Request Lenses
     , dslQuotaUser
     , dslPrettyPrint
-    , dslUserIp
+    , dslUserIP
     , dslSearchString
     , dslAcceptsInterstitialPlacements
     , dslAcceptsPublisherPaidPlacements
@@ -45,12 +45,11 @@ module Network.Google.Resource.DFAReporting.DirectorySites.List
     , dslPageToken
     , dslSortField
     , dslAcceptsInStreamVideoPlacements
-    , dslOauthToken
+    , dslOAuthToken
     , dslMaxResults
     , dslParentId
     , dslDfpNetworkCode
     , dslFields
-    , dslAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -73,7 +72,7 @@ type DirectorySitesListResource =
                            DfareportingDirectorySitesListSortOrder
                            :>
                            QueryParam "active" Bool :>
-                             QueryParam "key" Text :>
+                             QueryParam "key" Key :>
                                QueryParam "countryId" Int64 :>
                                  QueryParam "pageToken" Text :>
                                    QueryParam "sortField"
@@ -82,13 +81,13 @@ type DirectorySitesListResource =
                                      QueryParam "acceptsInStreamVideoPlacements"
                                        Bool
                                        :>
-                                       QueryParam "oauth_token" Text :>
+                                       QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "maxResults" Int32 :>
                                            QueryParam "parentId" Int64 :>
                                              QueryParam "dfp_network_code" Text
                                                :>
                                                QueryParam "fields" Text :>
-                                                 QueryParam "alt" Alt :>
+                                                 QueryParam "alt" AltJSON :>
                                                    Get '[JSON]
                                                      DirectorySitesListResponse
 
@@ -98,7 +97,7 @@ type DirectorySitesListResource =
 data DirectorySitesList' = DirectorySitesList'
     { _dslQuotaUser                      :: !(Maybe Text)
     , _dslPrettyPrint                    :: !Bool
-    , _dslUserIp                         :: !(Maybe Text)
+    , _dslUserIP                         :: !(Maybe Text)
     , _dslSearchString                   :: !(Maybe Text)
     , _dslAcceptsInterstitialPlacements  :: !(Maybe Bool)
     , _dslAcceptsPublisherPaidPlacements :: !(Maybe Bool)
@@ -106,17 +105,16 @@ data DirectorySitesList' = DirectorySitesList'
     , _dslProfileId                      :: !Int64
     , _dslSortOrder                      :: !(Maybe DfareportingDirectorySitesListSortOrder)
     , _dslActive                         :: !(Maybe Bool)
-    , _dslKey                            :: !(Maybe Text)
+    , _dslKey                            :: !(Maybe Key)
     , _dslCountryId                      :: !(Maybe Int64)
     , _dslPageToken                      :: !(Maybe Text)
     , _dslSortField                      :: !(Maybe DfareportingDirectorySitesListSortField)
     , _dslAcceptsInStreamVideoPlacements :: !(Maybe Bool)
-    , _dslOauthToken                     :: !(Maybe Text)
+    , _dslOAuthToken                     :: !(Maybe OAuthToken)
     , _dslMaxResults                     :: !(Maybe Int32)
     , _dslParentId                       :: !(Maybe Int64)
     , _dslDfpNetworkCode                 :: !(Maybe Text)
     , _dslFields                         :: !(Maybe Text)
-    , _dslAlt                            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DirectorySitesList'' with the minimum fields required to make a request.
@@ -127,7 +125,7 @@ data DirectorySitesList' = DirectorySitesList'
 --
 -- * 'dslPrettyPrint'
 --
--- * 'dslUserIp'
+-- * 'dslUserIP'
 --
 -- * 'dslSearchString'
 --
@@ -153,7 +151,7 @@ data DirectorySitesList' = DirectorySitesList'
 --
 -- * 'dslAcceptsInStreamVideoPlacements'
 --
--- * 'dslOauthToken'
+-- * 'dslOAuthToken'
 --
 -- * 'dslMaxResults'
 --
@@ -162,8 +160,6 @@ data DirectorySitesList' = DirectorySitesList'
 -- * 'dslDfpNetworkCode'
 --
 -- * 'dslFields'
---
--- * 'dslAlt'
 directorySitesList'
     :: Int64 -- ^ 'profileId'
     -> DirectorySitesList'
@@ -171,7 +167,7 @@ directorySitesList' pDslProfileId_ =
     DirectorySitesList'
     { _dslQuotaUser = Nothing
     , _dslPrettyPrint = True
-    , _dslUserIp = Nothing
+    , _dslUserIP = Nothing
     , _dslSearchString = Nothing
     , _dslAcceptsInterstitialPlacements = Nothing
     , _dslAcceptsPublisherPaidPlacements = Nothing
@@ -184,12 +180,11 @@ directorySitesList' pDslProfileId_ =
     , _dslPageToken = Nothing
     , _dslSortField = Nothing
     , _dslAcceptsInStreamVideoPlacements = Nothing
-    , _dslOauthToken = Nothing
+    , _dslOAuthToken = Nothing
     , _dslMaxResults = Nothing
     , _dslParentId = Nothing
     , _dslDfpNetworkCode = Nothing
     , _dslFields = Nothing
-    , _dslAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -207,9 +202,9 @@ dslPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-dslUserIp :: Lens' DirectorySitesList' (Maybe Text)
-dslUserIp
-  = lens _dslUserIp (\ s a -> s{_dslUserIp = a})
+dslUserIP :: Lens' DirectorySitesList' (Maybe Text)
+dslUserIP
+  = lens _dslUserIP (\ s a -> s{_dslUserIP = a})
 
 -- | Allows searching for objects by name, ID or URL. Wildcards (*) are
 -- allowed. For example, \"directory site*2015\" will return objects with
@@ -261,7 +256,7 @@ dslActive
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dslKey :: Lens' DirectorySitesList' (Maybe Text)
+dslKey :: Lens' DirectorySitesList' (Maybe Key)
 dslKey = lens _dslKey (\ s a -> s{_dslKey = a})
 
 -- | Select only directory sites with this country ID.
@@ -287,10 +282,10 @@ dslAcceptsInStreamVideoPlacements
       (\ s a -> s{_dslAcceptsInStreamVideoPlacements = a})
 
 -- | OAuth 2.0 token for the current user.
-dslOauthToken :: Lens' DirectorySitesList' (Maybe Text)
-dslOauthToken
-  = lens _dslOauthToken
-      (\ s a -> s{_dslOauthToken = a})
+dslOAuthToken :: Lens' DirectorySitesList' (Maybe OAuthToken)
+dslOAuthToken
+  = lens _dslOAuthToken
+      (\ s a -> s{_dslOAuthToken = a})
 
 -- | Maximum number of results to return.
 dslMaxResults :: Lens' DirectorySitesList' (Maybe Int32)
@@ -314,16 +309,16 @@ dslFields :: Lens' DirectorySitesList' (Maybe Text)
 dslFields
   = lens _dslFields (\ s a -> s{_dslFields = a})
 
--- | Data format for the response.
-dslAlt :: Lens' DirectorySitesList' Alt
-dslAlt = lens _dslAlt (\ s a -> s{_dslAlt = a})
+instance GoogleAuth DirectorySitesList' where
+        authKey = dslKey . _Just
+        authToken = dslOAuthToken . _Just
 
 instance GoogleRequest DirectorySitesList' where
         type Rs DirectorySitesList' =
              DirectorySitesListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u DirectorySitesList'{..}
-          = go _dslQuotaUser (Just _dslPrettyPrint) _dslUserIp
+          = go _dslQuotaUser (Just _dslPrettyPrint) _dslUserIP
               _dslSearchString
               _dslAcceptsInterstitialPlacements
               _dslAcceptsPublisherPaidPlacements
@@ -336,12 +331,12 @@ instance GoogleRequest DirectorySitesList' where
               _dslPageToken
               _dslSortField
               _dslAcceptsInStreamVideoPlacements
-              _dslOauthToken
+              _dslOAuthToken
               _dslMaxResults
               _dslParentId
               _dslDfpNetworkCode
               _dslFields
-              (Just _dslAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy DirectorySitesListResource)

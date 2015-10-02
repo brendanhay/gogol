@@ -36,7 +36,7 @@ module Network.Google.PageSpeed.Types
     -- * ResultPageStats
     , ResultPageStats
     , resultPageStats
-    , rpsHtmlResponseBytes
+    , rpsHTMLResponseBytes
     , rpsTotalRequestBytes
     , rpsNumberResources
     , rpsNumberStaticResources
@@ -119,9 +119,6 @@ module Network.Google.PageSpeed.Types
     -- * ResultFormattedResultsRuleResults
     , ResultFormattedResultsRuleResults
     , resultFormattedResultsRuleResults
-
-    -- * Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.PageSpeed.Types.Product

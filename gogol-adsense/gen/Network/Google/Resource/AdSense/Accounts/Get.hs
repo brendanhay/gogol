@@ -32,13 +32,12 @@ module Network.Google.Resource.AdSense.Accounts.Get
     -- * Request Lenses
     , agQuotaUser
     , agPrettyPrint
-    , agUserIp
+    , agUserIP
     , agTree
     , agAccountId
     , agKey
-    , agOauthToken
+    , agOAuthToken
     , agFields
-    , agAlt
     ) where
 
 import           Network.Google.AdSense.Types
@@ -53,10 +52,10 @@ type AccountsGetResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "tree" Bool :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Get '[JSON] Account
+                       QueryParam "alt" AltJSON :> Get '[JSON] Account
 
 -- | Get information about the selected AdSense account.
 --
@@ -64,13 +63,12 @@ type AccountsGetResource =
 data AccountsGet' = AccountsGet'
     { _agQuotaUser   :: !(Maybe Text)
     , _agPrettyPrint :: !Bool
-    , _agUserIp      :: !(Maybe Text)
+    , _agUserIP      :: !(Maybe Text)
     , _agTree        :: !(Maybe Bool)
     , _agAccountId   :: !Text
-    , _agKey         :: !(Maybe Text)
-    , _agOauthToken  :: !(Maybe Text)
+    , _agKey         :: !(Maybe Key)
+    , _agOAuthToken  :: !(Maybe OAuthToken)
     , _agFields      :: !(Maybe Text)
-    , _agAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsGet'' with the minimum fields required to make a request.
@@ -81,7 +79,7 @@ data AccountsGet' = AccountsGet'
 --
 -- * 'agPrettyPrint'
 --
--- * 'agUserIp'
+-- * 'agUserIP'
 --
 -- * 'agTree'
 --
@@ -89,11 +87,9 @@ data AccountsGet' = AccountsGet'
 --
 -- * 'agKey'
 --
--- * 'agOauthToken'
+-- * 'agOAuthToken'
 --
 -- * 'agFields'
---
--- * 'agAlt'
 accountsGet'
     :: Text -- ^ 'accountId'
     -> AccountsGet'
@@ -101,13 +97,12 @@ accountsGet' pAgAccountId_ =
     AccountsGet'
     { _agQuotaUser = Nothing
     , _agPrettyPrint = True
-    , _agUserIp = Nothing
+    , _agUserIP = Nothing
     , _agTree = Nothing
     , _agAccountId = pAgAccountId_
     , _agKey = Nothing
-    , _agOauthToken = Nothing
+    , _agOAuthToken = Nothing
     , _agFields = Nothing
-    , _agAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -125,8 +120,8 @@ agPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-agUserIp :: Lens' AccountsGet' (Maybe Text)
-agUserIp = lens _agUserIp (\ s a -> s{_agUserIp = a})
+agUserIP :: Lens' AccountsGet' (Maybe Text)
+agUserIP = lens _agUserIP (\ s a -> s{_agUserIP = a})
 
 -- | Whether the tree of sub accounts should be returned.
 agTree :: Lens' AccountsGet' (Maybe Bool)
@@ -140,33 +135,33 @@ agAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-agKey :: Lens' AccountsGet' (Maybe Text)
+agKey :: Lens' AccountsGet' (Maybe Key)
 agKey = lens _agKey (\ s a -> s{_agKey = a})
 
 -- | OAuth 2.0 token for the current user.
-agOauthToken :: Lens' AccountsGet' (Maybe Text)
-agOauthToken
-  = lens _agOauthToken (\ s a -> s{_agOauthToken = a})
+agOAuthToken :: Lens' AccountsGet' (Maybe OAuthToken)
+agOAuthToken
+  = lens _agOAuthToken (\ s a -> s{_agOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 agFields :: Lens' AccountsGet' (Maybe Text)
 agFields = lens _agFields (\ s a -> s{_agFields = a})
 
--- | Data format for the response.
-agAlt :: Lens' AccountsGet' Alt
-agAlt = lens _agAlt (\ s a -> s{_agAlt = a})
+instance GoogleAuth AccountsGet' where
+        authKey = agKey . _Just
+        authToken = agOAuthToken . _Just
 
 instance GoogleRequest AccountsGet' where
         type Rs AccountsGet' = Account
         request = requestWithRoute defReq adSenseURL
         requestWithRoute r u AccountsGet'{..}
-          = go _agQuotaUser (Just _agPrettyPrint) _agUserIp
+          = go _agQuotaUser (Just _agPrettyPrint) _agUserIP
               _agTree
               _agAccountId
               _agKey
-              _agOauthToken
+              _agOAuthToken
               _agFields
-              (Just _agAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountsGetResource)

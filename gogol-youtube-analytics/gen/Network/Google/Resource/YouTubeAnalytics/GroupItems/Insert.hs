@@ -32,12 +32,12 @@ module Network.Google.Resource.YouTubeAnalytics.GroupItems.Insert
     -- * Request Lenses
     , giiQuotaUser
     , giiPrettyPrint
-    , giiUserIp
+    , giiUserIP
     , giiOnBehalfOfContentOwner
     , giiKey
-    , giiOauthToken
+    , giiGroupItem
+    , giiOAuthToken
     , giiFields
-    , giiAlt
     ) where
 
 import           Network.Google.Prelude
@@ -51,10 +51,11 @@ type GroupItemsInsertResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
              QueryParam "onBehalfOfContentOwner" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Post '[JSON] GroupItem
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] GroupItem :> Post '[JSON] GroupItem
 
 -- | Creates a group item.
 --
@@ -62,12 +63,12 @@ type GroupItemsInsertResource =
 data GroupItemsInsert' = GroupItemsInsert'
     { _giiQuotaUser              :: !(Maybe Text)
     , _giiPrettyPrint            :: !Bool
-    , _giiUserIp                 :: !(Maybe Text)
+    , _giiUserIP                 :: !(Maybe Text)
     , _giiOnBehalfOfContentOwner :: !(Maybe Text)
-    , _giiKey                    :: !(Maybe Text)
-    , _giiOauthToken             :: !(Maybe Text)
+    , _giiKey                    :: !(Maybe Key)
+    , _giiGroupItem              :: !GroupItem
+    , _giiOAuthToken             :: !(Maybe OAuthToken)
     , _giiFields                 :: !(Maybe Text)
-    , _giiAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupItemsInsert'' with the minimum fields required to make a request.
@@ -78,29 +79,30 @@ data GroupItemsInsert' = GroupItemsInsert'
 --
 -- * 'giiPrettyPrint'
 --
--- * 'giiUserIp'
+-- * 'giiUserIP'
 --
 -- * 'giiOnBehalfOfContentOwner'
 --
 -- * 'giiKey'
 --
--- * 'giiOauthToken'
+-- * 'giiGroupItem'
+--
+-- * 'giiOAuthToken'
 --
 -- * 'giiFields'
---
--- * 'giiAlt'
 groupItemsInsert'
-    :: GroupItemsInsert'
-groupItemsInsert' =
+    :: GroupItem -- ^ 'GroupItem'
+    -> GroupItemsInsert'
+groupItemsInsert' pGiiGroupItem_ =
     GroupItemsInsert'
     { _giiQuotaUser = Nothing
     , _giiPrettyPrint = True
-    , _giiUserIp = Nothing
+    , _giiUserIP = Nothing
     , _giiOnBehalfOfContentOwner = Nothing
     , _giiKey = Nothing
-    , _giiOauthToken = Nothing
+    , _giiGroupItem = pGiiGroupItem_
+    , _giiOAuthToken = Nothing
     , _giiFields = Nothing
-    , _giiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -118,9 +120,9 @@ giiPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-giiUserIp :: Lens' GroupItemsInsert' (Maybe Text)
-giiUserIp
-  = lens _giiUserIp (\ s a -> s{_giiUserIp = a})
+giiUserIP :: Lens' GroupItemsInsert' (Maybe Text)
+giiUserIP
+  = lens _giiUserIP (\ s a -> s{_giiUserIP = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
@@ -140,34 +142,40 @@ giiOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-giiKey :: Lens' GroupItemsInsert' (Maybe Text)
+giiKey :: Lens' GroupItemsInsert' (Maybe Key)
 giiKey = lens _giiKey (\ s a -> s{_giiKey = a})
 
+-- | Multipart request metadata.
+giiGroupItem :: Lens' GroupItemsInsert' GroupItem
+giiGroupItem
+  = lens _giiGroupItem (\ s a -> s{_giiGroupItem = a})
+
 -- | OAuth 2.0 token for the current user.
-giiOauthToken :: Lens' GroupItemsInsert' (Maybe Text)
-giiOauthToken
-  = lens _giiOauthToken
-      (\ s a -> s{_giiOauthToken = a})
+giiOAuthToken :: Lens' GroupItemsInsert' (Maybe OAuthToken)
+giiOAuthToken
+  = lens _giiOAuthToken
+      (\ s a -> s{_giiOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 giiFields :: Lens' GroupItemsInsert' (Maybe Text)
 giiFields
   = lens _giiFields (\ s a -> s{_giiFields = a})
 
--- | Data format for the response.
-giiAlt :: Lens' GroupItemsInsert' Alt
-giiAlt = lens _giiAlt (\ s a -> s{_giiAlt = a})
+instance GoogleAuth GroupItemsInsert' where
+        authKey = giiKey . _Just
+        authToken = giiOAuthToken . _Just
 
 instance GoogleRequest GroupItemsInsert' where
         type Rs GroupItemsInsert' = GroupItem
         request = requestWithRoute defReq youTubeAnalyticsURL
         requestWithRoute r u GroupItemsInsert'{..}
-          = go _giiQuotaUser (Just _giiPrettyPrint) _giiUserIp
+          = go _giiQuotaUser (Just _giiPrettyPrint) _giiUserIP
               _giiOnBehalfOfContentOwner
               _giiKey
-              _giiOauthToken
+              _giiOAuthToken
               _giiFields
-              (Just _giiAlt)
+              (Just AltJSON)
+              _giiGroupItem
           where go
                   = clientWithRoute
                       (Proxy :: Proxy GroupItemsInsertResource)

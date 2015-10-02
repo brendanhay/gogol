@@ -32,14 +32,14 @@ module Network.Google.Resource.Drive.Replies.Update
     -- * Request Lenses
     , repQuotaUser
     , repPrettyPrint
-    , repUserIp
+    , repUserIP
+    , repCommentReply
     , repKey
     , repReplyId
     , repFileId
-    , repOauthToken
+    , repOAuthToken
     , repCommentId
     , repFields
-    , repAlt
     ) where
 
 import           Network.Google.Drive.Types
@@ -57,25 +57,27 @@ type RepliesUpdateResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Put '[JSON] CommentReply
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] CommentReply :>
+                                 Put '[JSON] CommentReply
 
 -- | Updates an existing reply.
 --
 -- /See:/ 'repliesUpdate'' smart constructor.
 data RepliesUpdate' = RepliesUpdate'
-    { _repQuotaUser   :: !(Maybe Text)
-    , _repPrettyPrint :: !Bool
-    , _repUserIp      :: !(Maybe Text)
-    , _repKey         :: !(Maybe Text)
-    , _repReplyId     :: !Text
-    , _repFileId      :: !Text
-    , _repOauthToken  :: !(Maybe Text)
-    , _repCommentId   :: !Text
-    , _repFields      :: !(Maybe Text)
-    , _repAlt         :: !Alt
+    { _repQuotaUser    :: !(Maybe Text)
+    , _repPrettyPrint  :: !Bool
+    , _repUserIP       :: !(Maybe Text)
+    , _repCommentReply :: !CommentReply
+    , _repKey          :: !(Maybe Key)
+    , _repReplyId      :: !Text
+    , _repFileId       :: !Text
+    , _repOAuthToken   :: !(Maybe OAuthToken)
+    , _repCommentId    :: !Text
+    , _repFields       :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RepliesUpdate'' with the minimum fields required to make a request.
@@ -86,7 +88,9 @@ data RepliesUpdate' = RepliesUpdate'
 --
 -- * 'repPrettyPrint'
 --
--- * 'repUserIp'
+-- * 'repUserIP'
+--
+-- * 'repCommentReply'
 --
 -- * 'repKey'
 --
@@ -94,30 +98,29 @@ data RepliesUpdate' = RepliesUpdate'
 --
 -- * 'repFileId'
 --
--- * 'repOauthToken'
+-- * 'repOAuthToken'
 --
 -- * 'repCommentId'
 --
 -- * 'repFields'
---
--- * 'repAlt'
 repliesUpdate'
-    :: Text -- ^ 'replyId'
+    :: CommentReply -- ^ 'CommentReply'
+    -> Text -- ^ 'replyId'
     -> Text -- ^ 'fileId'
     -> Text -- ^ 'commentId'
     -> RepliesUpdate'
-repliesUpdate' pRepReplyId_ pRepFileId_ pRepCommentId_ =
+repliesUpdate' pRepCommentReply_ pRepReplyId_ pRepFileId_ pRepCommentId_ =
     RepliesUpdate'
     { _repQuotaUser = Nothing
     , _repPrettyPrint = True
-    , _repUserIp = Nothing
+    , _repUserIP = Nothing
+    , _repCommentReply = pRepCommentReply_
     , _repKey = Nothing
     , _repReplyId = pRepReplyId_
     , _repFileId = pRepFileId_
-    , _repOauthToken = Nothing
+    , _repOAuthToken = Nothing
     , _repCommentId = pRepCommentId_
     , _repFields = Nothing
-    , _repAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,14 +138,20 @@ repPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-repUserIp :: Lens' RepliesUpdate' (Maybe Text)
-repUserIp
-  = lens _repUserIp (\ s a -> s{_repUserIp = a})
+repUserIP :: Lens' RepliesUpdate' (Maybe Text)
+repUserIP
+  = lens _repUserIP (\ s a -> s{_repUserIP = a})
+
+-- | Multipart request metadata.
+repCommentReply :: Lens' RepliesUpdate' CommentReply
+repCommentReply
+  = lens _repCommentReply
+      (\ s a -> s{_repCommentReply = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-repKey :: Lens' RepliesUpdate' (Maybe Text)
+repKey :: Lens' RepliesUpdate' (Maybe Key)
 repKey = lens _repKey (\ s a -> s{_repKey = a})
 
 -- | The ID of the reply.
@@ -156,10 +165,10 @@ repFileId
   = lens _repFileId (\ s a -> s{_repFileId = a})
 
 -- | OAuth 2.0 token for the current user.
-repOauthToken :: Lens' RepliesUpdate' (Maybe Text)
-repOauthToken
-  = lens _repOauthToken
-      (\ s a -> s{_repOauthToken = a})
+repOAuthToken :: Lens' RepliesUpdate' (Maybe OAuthToken)
+repOAuthToken
+  = lens _repOAuthToken
+      (\ s a -> s{_repOAuthToken = a})
 
 -- | The ID of the comment.
 repCommentId :: Lens' RepliesUpdate' Text
@@ -171,22 +180,23 @@ repFields :: Lens' RepliesUpdate' (Maybe Text)
 repFields
   = lens _repFields (\ s a -> s{_repFields = a})
 
--- | Data format for the response.
-repAlt :: Lens' RepliesUpdate' Alt
-repAlt = lens _repAlt (\ s a -> s{_repAlt = a})
+instance GoogleAuth RepliesUpdate' where
+        authKey = repKey . _Just
+        authToken = repOAuthToken . _Just
 
 instance GoogleRequest RepliesUpdate' where
         type Rs RepliesUpdate' = CommentReply
         request = requestWithRoute defReq driveURL
         requestWithRoute r u RepliesUpdate'{..}
-          = go _repQuotaUser (Just _repPrettyPrint) _repUserIp
+          = go _repQuotaUser (Just _repPrettyPrint) _repUserIP
               _repKey
               _repReplyId
               _repFileId
-              _repOauthToken
+              _repOAuthToken
               _repCommentId
               _repFields
-              (Just _repAlt)
+              (Just AltJSON)
+              _repCommentReply
           where go
                   = clientWithRoute
                       (Proxy :: Proxy RepliesUpdateResource)

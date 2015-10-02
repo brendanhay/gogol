@@ -32,13 +32,12 @@ module Network.Google.Resource.DFAReporting.Accounts.Get
     -- * Request Lenses
     , ag1QuotaUser
     , ag1PrettyPrint
-    , ag1UserIp
+    , ag1UserIP
     , ag1ProfileId
     , ag1Key
     , ag1Id
-    , ag1OauthToken
+    , ag1OAuthToken
     , ag1Fields
-    , ag1Alt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,10 +53,10 @@ type AccountsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] Account
+                         QueryParam "alt" AltJSON :> Get '[JSON] Account
 
 -- | Gets one account by ID.
 --
@@ -65,13 +64,12 @@ type AccountsGetResource =
 data AccountsGet' = AccountsGet'
     { _ag1QuotaUser   :: !(Maybe Text)
     , _ag1PrettyPrint :: !Bool
-    , _ag1UserIp      :: !(Maybe Text)
+    , _ag1UserIP      :: !(Maybe Text)
     , _ag1ProfileId   :: !Int64
-    , _ag1Key         :: !(Maybe Text)
+    , _ag1Key         :: !(Maybe Key)
     , _ag1Id          :: !Int64
-    , _ag1OauthToken  :: !(Maybe Text)
+    , _ag1OAuthToken  :: !(Maybe OAuthToken)
     , _ag1Fields      :: !(Maybe Text)
-    , _ag1Alt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsGet'' with the minimum fields required to make a request.
@@ -82,7 +80,7 @@ data AccountsGet' = AccountsGet'
 --
 -- * 'ag1PrettyPrint'
 --
--- * 'ag1UserIp'
+-- * 'ag1UserIP'
 --
 -- * 'ag1ProfileId'
 --
@@ -90,11 +88,9 @@ data AccountsGet' = AccountsGet'
 --
 -- * 'ag1Id'
 --
--- * 'ag1OauthToken'
+-- * 'ag1OAuthToken'
 --
 -- * 'ag1Fields'
---
--- * 'ag1Alt'
 accountsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
@@ -103,13 +99,12 @@ accountsGet' pAg1ProfileId_ pAg1Id_ =
     AccountsGet'
     { _ag1QuotaUser = Nothing
     , _ag1PrettyPrint = True
-    , _ag1UserIp = Nothing
+    , _ag1UserIP = Nothing
     , _ag1ProfileId = pAg1ProfileId_
     , _ag1Key = Nothing
     , _ag1Id = pAg1Id_
-    , _ag1OauthToken = Nothing
+    , _ag1OAuthToken = Nothing
     , _ag1Fields = Nothing
-    , _ag1Alt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,9 +122,9 @@ ag1PrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ag1UserIp :: Lens' AccountsGet' (Maybe Text)
-ag1UserIp
-  = lens _ag1UserIp (\ s a -> s{_ag1UserIp = a})
+ag1UserIP :: Lens' AccountsGet' (Maybe Text)
+ag1UserIP
+  = lens _ag1UserIP (\ s a -> s{_ag1UserIP = a})
 
 -- | User profile ID associated with this request.
 ag1ProfileId :: Lens' AccountsGet' Int64
@@ -139,7 +134,7 @@ ag1ProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ag1Key :: Lens' AccountsGet' (Maybe Text)
+ag1Key :: Lens' AccountsGet' (Maybe Key)
 ag1Key = lens _ag1Key (\ s a -> s{_ag1Key = a})
 
 -- | Account ID.
@@ -147,31 +142,31 @@ ag1Id :: Lens' AccountsGet' Int64
 ag1Id = lens _ag1Id (\ s a -> s{_ag1Id = a})
 
 -- | OAuth 2.0 token for the current user.
-ag1OauthToken :: Lens' AccountsGet' (Maybe Text)
-ag1OauthToken
-  = lens _ag1OauthToken
-      (\ s a -> s{_ag1OauthToken = a})
+ag1OAuthToken :: Lens' AccountsGet' (Maybe OAuthToken)
+ag1OAuthToken
+  = lens _ag1OAuthToken
+      (\ s a -> s{_ag1OAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ag1Fields :: Lens' AccountsGet' (Maybe Text)
 ag1Fields
   = lens _ag1Fields (\ s a -> s{_ag1Fields = a})
 
--- | Data format for the response.
-ag1Alt :: Lens' AccountsGet' Alt
-ag1Alt = lens _ag1Alt (\ s a -> s{_ag1Alt = a})
+instance GoogleAuth AccountsGet' where
+        authKey = ag1Key . _Just
+        authToken = ag1OAuthToken . _Just
 
 instance GoogleRequest AccountsGet' where
         type Rs AccountsGet' = Account
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AccountsGet'{..}
-          = go _ag1QuotaUser (Just _ag1PrettyPrint) _ag1UserIp
+          = go _ag1QuotaUser (Just _ag1PrettyPrint) _ag1UserIP
               _ag1ProfileId
               _ag1Key
               _ag1Id
-              _ag1OauthToken
+              _ag1OAuthToken
               _ag1Fields
-              (Just _ag1Alt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountsGetResource)

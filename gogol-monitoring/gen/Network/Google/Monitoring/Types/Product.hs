@@ -78,7 +78,7 @@ data ListTimeseriesResponse = ListTimeseriesResponse
     , _ltrKind          :: !Text
     , _ltrOldest        :: !(Maybe UTCTime)
     , _ltrYoungest      :: !(Maybe UTCTime)
-    , _ltrTimeseries    :: !(Maybe [Maybe Timeseries])
+    , _ltrTimeseries    :: !(Maybe [Timeseries])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListTimeseriesResponse' with the minimum fields required to make a request.
@@ -133,7 +133,7 @@ ltrYoungest
   = lens _ltrYoungest (\ s a -> s{_ltrYoungest = a})
 
 -- | The returned time series.
-ltrTimeseries :: Lens' ListTimeseriesResponse [Maybe Timeseries]
+ltrTimeseries :: Lens' ListTimeseriesResponse [Timeseries]
 ltrTimeseries
   = lens _ltrTimeseries
       (\ s a -> s{_ltrTimeseries = a})
@@ -168,9 +168,9 @@ instance ToJSON ListTimeseriesResponse where
 -- /See:/ 'metricDescriptor' smart constructor.
 data MetricDescriptor = MetricDescriptor
     { _mdProject        :: !(Maybe Text)
-    , _mdTypeDescriptor :: !(Maybe (Maybe MetricDescriptorTypeDescriptor))
+    , _mdTypeDescriptor :: !(Maybe MetricDescriptorTypeDescriptor)
     , _mdName           :: !(Maybe Text)
-    , _mdLabels         :: !(Maybe [Maybe MetricDescriptorLabelDescriptor])
+    , _mdLabels         :: !(Maybe [MetricDescriptorLabelDescriptor])
     , _mdDescription    :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -204,7 +204,7 @@ mdProject
   = lens _mdProject (\ s a -> s{_mdProject = a})
 
 -- | Type description for this metric.
-mdTypeDescriptor :: Lens' MetricDescriptor (Maybe (Maybe MetricDescriptorTypeDescriptor))
+mdTypeDescriptor :: Lens' MetricDescriptor (Maybe MetricDescriptorTypeDescriptor)
 mdTypeDescriptor
   = lens _mdTypeDescriptor
       (\ s a -> s{_mdTypeDescriptor = a})
@@ -214,7 +214,7 @@ mdName :: Lens' MetricDescriptor (Maybe Text)
 mdName = lens _mdName (\ s a -> s{_mdName = a})
 
 -- | Labels defined for this metric.
-mdLabels :: Lens' MetricDescriptor [Maybe MetricDescriptorLabelDescriptor]
+mdLabels :: Lens' MetricDescriptor [MetricDescriptorLabelDescriptor]
 mdLabels
   = lens _mdLabels (\ s a -> s{_mdLabels = a}) .
       _Default
@@ -376,7 +376,7 @@ instance ToJSON WriteTimeseriesRequestCommonLabels
 -- /See:/ 'writeTimeseriesRequest' smart constructor.
 data WriteTimeseriesRequest = WriteTimeseriesRequest
     { _wtrCommonLabels :: !(Maybe WriteTimeseriesRequestCommonLabels)
-    , _wtrTimeseries   :: !(Maybe [Maybe TimeseriesPoint])
+    , _wtrTimeseries   :: !(Maybe [TimeseriesPoint])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WriteTimeseriesRequest' with the minimum fields required to make a request.
@@ -403,7 +403,7 @@ wtrCommonLabels
 -- | Provide time series specific labels and the data points for each time
 -- series. The labels in timeseries and the common_labels should form a
 -- complete list of labels that required by the metric.
-wtrTimeseries :: Lens' WriteTimeseriesRequest [Maybe TimeseriesPoint]
+wtrTimeseries :: Lens' WriteTimeseriesRequest [TimeseriesPoint]
 wtrTimeseries
   = lens _wtrTimeseries
       (\ s a -> s{_wtrTimeseries = a})
@@ -429,7 +429,7 @@ instance ToJSON WriteTimeseriesRequest where
 --
 -- /See:/ 'listMetricDescriptorsResponse' smart constructor.
 data ListMetricDescriptorsResponse = ListMetricDescriptorsResponse
-    { _lmdrMetrics       :: !(Maybe [Maybe MetricDescriptor])
+    { _lmdrMetrics       :: !(Maybe [MetricDescriptor])
     , _lmdrNextPageToken :: !(Maybe Text)
     , _lmdrKind          :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -453,7 +453,7 @@ listMetricDescriptorsResponse =
     }
 
 -- | The returned metric descriptors.
-lmdrMetrics :: Lens' ListMetricDescriptorsResponse [Maybe MetricDescriptor]
+lmdrMetrics :: Lens' ListMetricDescriptorsResponse [MetricDescriptor]
 lmdrMetrics
   = lens _lmdrMetrics (\ s a -> s{_lmdrMetrics = a}) .
       _Default
@@ -699,9 +699,9 @@ instance ToJSON TimeseriesDescriptorLabel where
 --
 -- /See:/ 'pointDistribution' smart constructor.
 data PointDistribution = PointDistribution
-    { _pdOverflowBucket  :: !(Maybe (Maybe PointDistributionOverflowBucket))
-    , _pdBuckets         :: !(Maybe [Maybe PointDistributionBucket])
-    , _pdUnderflowBucket :: !(Maybe (Maybe PointDistributionUnderflowBucket))
+    { _pdOverflowBucket  :: !(Maybe PointDistributionOverflowBucket)
+    , _pdBuckets         :: !(Maybe [PointDistributionBucket])
+    , _pdUnderflowBucket :: !(Maybe PointDistributionUnderflowBucket)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PointDistribution' with the minimum fields required to make a request.
@@ -723,20 +723,20 @@ pointDistribution =
     }
 
 -- | The overflow bucket.
-pdOverflowBucket :: Lens' PointDistribution (Maybe (Maybe PointDistributionOverflowBucket))
+pdOverflowBucket :: Lens' PointDistribution (Maybe PointDistributionOverflowBucket)
 pdOverflowBucket
   = lens _pdOverflowBucket
       (\ s a -> s{_pdOverflowBucket = a})
 
 -- | The finite buckets.
-pdBuckets :: Lens' PointDistribution [Maybe PointDistributionBucket]
+pdBuckets :: Lens' PointDistribution [PointDistributionBucket]
 pdBuckets
   = lens _pdBuckets (\ s a -> s{_pdBuckets = a}) .
       _Default
       . _Coerce
 
 -- | The underflow bucket.
-pdUnderflowBucket :: Lens' PointDistribution (Maybe (Maybe PointDistributionUnderflowBucket))
+pdUnderflowBucket :: Lens' PointDistribution (Maybe PointDistributionUnderflowBucket)
 pdUnderflowBucket
   = lens _pdUnderflowBucket
       (\ s a -> s{_pdUnderflowBucket = a})
@@ -767,7 +767,7 @@ data Point = Point
     , _pStart             :: !(Maybe UTCTime)
     , _pDoubleValue       :: !(Maybe Double)
     , _pStringValue       :: !(Maybe Text)
-    , _pDistributionValue :: !(Maybe (Maybe PointDistribution))
+    , _pDistributionValue :: !(Maybe PointDistribution)
     , _pEnd               :: !(Maybe UTCTime)
     , _pInt64Value        :: !(Maybe Int64)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -830,7 +830,7 @@ pStringValue
 -- contain a list of buckets and\/or an underflowBucket and an
 -- overflowBucket. The values of these points can be used to create a
 -- histogram.
-pDistributionValue :: Lens' Point (Maybe (Maybe PointDistribution))
+pDistributionValue :: Lens' Point (Maybe PointDistribution)
 pDistributionValue
   = lens _pDistributionValue
       (\ s a -> s{_pDistributionValue = a})
@@ -932,7 +932,7 @@ data ListTimeseriesDescriptorsResponse = ListTimeseriesDescriptorsResponse
     , _lKind          :: !Text
     , _lOldest        :: !(Maybe UTCTime)
     , _lYoungest      :: !(Maybe UTCTime)
-    , _lTimeseries    :: !(Maybe [Maybe TimeseriesDescriptor])
+    , _lTimeseries    :: !(Maybe [TimeseriesDescriptor])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListTimeseriesDescriptorsResponse' with the minimum fields required to make a request.
@@ -984,7 +984,7 @@ lYoungest
   = lens _lYoungest (\ s a -> s{_lYoungest = a})
 
 -- | The returned time series descriptors.
-lTimeseries :: Lens' ListTimeseriesDescriptorsResponse [Maybe TimeseriesDescriptor]
+lTimeseries :: Lens' ListTimeseriesDescriptorsResponse [TimeseriesDescriptor]
 lTimeseries
   = lens _lTimeseries (\ s a -> s{_lTimeseries = a}) .
       _Default
@@ -1055,8 +1055,8 @@ instance ToJSON ListMetricDescriptorsRequest where
 --
 -- /See:/ 'timeseriesPoint' smart constructor.
 data TimeseriesPoint = TimeseriesPoint
-    { _tpPoint          :: !(Maybe (Maybe Point))
-    , _tpTimeseriesDesc :: !(Maybe (Maybe TimeseriesDescriptor))
+    { _tpPoint          :: !(Maybe Point)
+    , _tpTimeseriesDesc :: !(Maybe TimeseriesDescriptor)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TimeseriesPoint' with the minimum fields required to make a request.
@@ -1075,11 +1075,11 @@ timeseriesPoint =
     }
 
 -- | The data point in this time series snapshot.
-tpPoint :: Lens' TimeseriesPoint (Maybe (Maybe Point))
+tpPoint :: Lens' TimeseriesPoint (Maybe Point)
 tpPoint = lens _tpPoint (\ s a -> s{_tpPoint = a})
 
 -- | The descriptor of this time series.
-tpTimeseriesDesc :: Lens' TimeseriesPoint (Maybe (Maybe TimeseriesDescriptor))
+tpTimeseriesDesc :: Lens' TimeseriesPoint (Maybe TimeseriesDescriptor)
 tpTimeseriesDesc
   = lens _tpTimeseriesDesc
       (\ s a -> s{_tpTimeseriesDesc = a})
@@ -1234,8 +1234,8 @@ instance ToJSON DeleteMetricDescriptorResponse where
 --
 -- /See:/ 'timeseries' smart constructor.
 data Timeseries = Timeseries
-    { _tPoints         :: !(Maybe [Maybe Point])
-    , _tTimeseriesDesc :: !(Maybe (Maybe TimeseriesDescriptor))
+    { _tPoints         :: !(Maybe [Point])
+    , _tTimeseriesDesc :: !(Maybe TimeseriesDescriptor)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Timeseries' with the minimum fields required to make a request.
@@ -1255,13 +1255,13 @@ timeseries =
 
 -- | The data points of this time series. The points are listed in order of
 -- their end timestamp, from younger to older.
-tPoints :: Lens' Timeseries [Maybe Point]
+tPoints :: Lens' Timeseries [Point]
 tPoints
   = lens _tPoints (\ s a -> s{_tPoints = a}) . _Default
       . _Coerce
 
 -- | The descriptor of this time series.
-tTimeseriesDesc :: Lens' Timeseries (Maybe (Maybe TimeseriesDescriptor))
+tTimeseriesDesc :: Lens' Timeseries (Maybe TimeseriesDescriptor)
 tTimeseriesDesc
   = lens _tTimeseriesDesc
       (\ s a -> s{_tTimeseriesDesc = a})

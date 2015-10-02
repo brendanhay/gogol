@@ -19,7 +19,7 @@
 --
 -- | Gets information about an application.
 --
--- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @AppengineAppsGet@.
+-- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @AppEngineAppsGet@.
 module Network.Google.Resource.AppEngine.Apps.Get
     (
     -- * REST Resource
@@ -41,16 +41,15 @@ module Network.Google.Resource.AppEngine.Apps.Get
     , agKey
     , agAppsId
     , agEnsureResourcesExist
-    , agOauthToken
+    , agOAuthToken
     , agFields
     , agCallback
-    , agAlt
     ) where
 
 import           Network.Google.AppEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AppengineAppsGet@ which the
+-- | A resource alias for @AppEngineAppsGet@ which the
 -- 'AppsGet'' request conforms to.
 type AppsGetResource =
      "v1beta4" :>
@@ -64,12 +63,12 @@ type AppsGetResource =
                      QueryParam "access_token" Text :>
                        QueryParam "uploadType" Text :>
                          QueryParam "bearer_token" Text :>
-                           QueryParam "key" Text :>
+                           QueryParam "key" Key :>
                              QueryParam "ensureResourcesExist" Bool :>
-                               QueryParam "oauth_token" Text :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "fields" Text :>
                                    QueryParam "callback" Text :>
-                                     QueryParam "alt" Text :>
+                                     QueryParam "alt" AltJSON :>
                                        Get '[JSON] Application
 
 -- | Gets information about an application.
@@ -84,13 +83,12 @@ data AppsGet' = AppsGet'
     , _agAccessToken          :: !(Maybe Text)
     , _agUploadType           :: !(Maybe Text)
     , _agBearerToken          :: !(Maybe Text)
-    , _agKey                  :: !(Maybe Text)
+    , _agKey                  :: !(Maybe Key)
     , _agAppsId               :: !Text
     , _agEnsureResourcesExist :: !(Maybe Bool)
-    , _agOauthToken           :: !(Maybe Text)
+    , _agOAuthToken           :: !(Maybe OAuthToken)
     , _agFields               :: !(Maybe Text)
     , _agCallback             :: !(Maybe Text)
-    , _agAlt                  :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AppsGet'' with the minimum fields required to make a request.
@@ -119,13 +117,11 @@ data AppsGet' = AppsGet'
 --
 -- * 'agEnsureResourcesExist'
 --
--- * 'agOauthToken'
+-- * 'agOAuthToken'
 --
 -- * 'agFields'
 --
 -- * 'agCallback'
---
--- * 'agAlt'
 appsGet'
     :: Text -- ^ 'appsId'
     -> AppsGet'
@@ -142,10 +138,9 @@ appsGet' pAgAppsId_ =
     , _agKey = Nothing
     , _agAppsId = pAgAppsId_
     , _agEnsureResourcesExist = Nothing
-    , _agOauthToken = Nothing
+    , _agOAuthToken = Nothing
     , _agFields = Nothing
     , _agCallback = Nothing
-    , _agAlt = "json"
     }
 
 -- | V1 error format.
@@ -195,7 +190,7 @@ agBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-agKey :: Lens' AppsGet' (Maybe Text)
+agKey :: Lens' AppsGet' (Maybe Key)
 agKey = lens _agKey (\ s a -> s{_agKey = a})
 
 -- | Part of \`name\`. Name of the application to get. For example:
@@ -213,9 +208,9 @@ agEnsureResourcesExist
       (\ s a -> s{_agEnsureResourcesExist = a})
 
 -- | OAuth 2.0 token for the current user.
-agOauthToken :: Lens' AppsGet' (Maybe Text)
-agOauthToken
-  = lens _agOauthToken (\ s a -> s{_agOauthToken = a})
+agOAuthToken :: Lens' AppsGet' (Maybe OAuthToken)
+agOAuthToken
+  = lens _agOAuthToken (\ s a -> s{_agOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 agFields :: Lens' AppsGet' (Maybe Text)
@@ -226,9 +221,9 @@ agCallback :: Lens' AppsGet' (Maybe Text)
 agCallback
   = lens _agCallback (\ s a -> s{_agCallback = a})
 
--- | Data format for response.
-agAlt :: Lens' AppsGet' Text
-agAlt = lens _agAlt (\ s a -> s{_agAlt = a})
+instance GoogleAuth AppsGet' where
+        authKey = agKey . _Just
+        authToken = agOAuthToken . _Just
 
 instance GoogleRequest AppsGet' where
         type Rs AppsGet' = Application
@@ -243,10 +238,10 @@ instance GoogleRequest AppsGet' where
               _agKey
               _agAppsId
               _agEnsureResourcesExist
-              _agOauthToken
+              _agOAuthToken
               _agFields
               _agCallback
-              (Just _agAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy AppsGetResource) r
                       u

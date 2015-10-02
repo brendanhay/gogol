@@ -32,14 +32,13 @@ module Network.Google.Resource.Licensing.LicenseAssignments.Get
     -- * Request Lenses
     , lagQuotaUser
     , lagPrettyPrint
-    , lagUserIp
+    , lagUserIP
     , lagSkuId
     , lagUserId
     , lagKey
-    , lagOauthToken
+    , lagOAuthToken
     , lagProductId
     , lagFields
-    , lagAlt
     ) where
 
 import           Network.Google.AppsLicensing.Types
@@ -56,10 +55,11 @@ type LicenseAssignmentsGetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Get '[JSON] LicenseAssignment
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] LicenseAssignment
 
 -- | Get license assignment of a particular product and sku for a user
 --
@@ -67,14 +67,13 @@ type LicenseAssignmentsGetResource =
 data LicenseAssignmentsGet' = LicenseAssignmentsGet'
     { _lagQuotaUser   :: !(Maybe Text)
     , _lagPrettyPrint :: !Bool
-    , _lagUserIp      :: !(Maybe Text)
+    , _lagUserIP      :: !(Maybe Text)
     , _lagSkuId       :: !Text
     , _lagUserId      :: !Text
-    , _lagKey         :: !(Maybe Text)
-    , _lagOauthToken  :: !(Maybe Text)
+    , _lagKey         :: !(Maybe Key)
+    , _lagOAuthToken  :: !(Maybe OAuthToken)
     , _lagProductId   :: !Text
     , _lagFields      :: !(Maybe Text)
-    , _lagAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LicenseAssignmentsGet'' with the minimum fields required to make a request.
@@ -85,7 +84,7 @@ data LicenseAssignmentsGet' = LicenseAssignmentsGet'
 --
 -- * 'lagPrettyPrint'
 --
--- * 'lagUserIp'
+-- * 'lagUserIP'
 --
 -- * 'lagSkuId'
 --
@@ -93,13 +92,11 @@ data LicenseAssignmentsGet' = LicenseAssignmentsGet'
 --
 -- * 'lagKey'
 --
--- * 'lagOauthToken'
+-- * 'lagOAuthToken'
 --
 -- * 'lagProductId'
 --
 -- * 'lagFields'
---
--- * 'lagAlt'
 licenseAssignmentsGet'
     :: Text -- ^ 'skuId'
     -> Text -- ^ 'userId'
@@ -109,14 +106,13 @@ licenseAssignmentsGet' pLagSkuId_ pLagUserId_ pLagProductId_ =
     LicenseAssignmentsGet'
     { _lagQuotaUser = Nothing
     , _lagPrettyPrint = True
-    , _lagUserIp = Nothing
+    , _lagUserIP = Nothing
     , _lagSkuId = pLagSkuId_
     , _lagUserId = pLagUserId_
     , _lagKey = Nothing
-    , _lagOauthToken = Nothing
+    , _lagOAuthToken = Nothing
     , _lagProductId = pLagProductId_
     , _lagFields = Nothing
-    , _lagAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -134,9 +130,9 @@ lagPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-lagUserIp :: Lens' LicenseAssignmentsGet' (Maybe Text)
-lagUserIp
-  = lens _lagUserIp (\ s a -> s{_lagUserIp = a})
+lagUserIP :: Lens' LicenseAssignmentsGet' (Maybe Text)
+lagUserIP
+  = lens _lagUserIP (\ s a -> s{_lagUserIP = a})
 
 -- | Name for sku
 lagSkuId :: Lens' LicenseAssignmentsGet' Text
@@ -150,14 +146,14 @@ lagUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lagKey :: Lens' LicenseAssignmentsGet' (Maybe Text)
+lagKey :: Lens' LicenseAssignmentsGet' (Maybe Key)
 lagKey = lens _lagKey (\ s a -> s{_lagKey = a})
 
 -- | OAuth 2.0 token for the current user.
-lagOauthToken :: Lens' LicenseAssignmentsGet' (Maybe Text)
-lagOauthToken
-  = lens _lagOauthToken
-      (\ s a -> s{_lagOauthToken = a})
+lagOAuthToken :: Lens' LicenseAssignmentsGet' (Maybe OAuthToken)
+lagOAuthToken
+  = lens _lagOAuthToken
+      (\ s a -> s{_lagOAuthToken = a})
 
 -- | Name for product
 lagProductId :: Lens' LicenseAssignmentsGet' Text
@@ -169,22 +165,22 @@ lagFields :: Lens' LicenseAssignmentsGet' (Maybe Text)
 lagFields
   = lens _lagFields (\ s a -> s{_lagFields = a})
 
--- | Data format for the response.
-lagAlt :: Lens' LicenseAssignmentsGet' Alt
-lagAlt = lens _lagAlt (\ s a -> s{_lagAlt = a})
+instance GoogleAuth LicenseAssignmentsGet' where
+        authKey = lagKey . _Just
+        authToken = lagOAuthToken . _Just
 
 instance GoogleRequest LicenseAssignmentsGet' where
         type Rs LicenseAssignmentsGet' = LicenseAssignment
         request = requestWithRoute defReq appsLicensingURL
         requestWithRoute r u LicenseAssignmentsGet'{..}
-          = go _lagQuotaUser (Just _lagPrettyPrint) _lagUserIp
+          = go _lagQuotaUser (Just _lagPrettyPrint) _lagUserIP
               _lagSkuId
               _lagUserId
               _lagKey
-              _lagOauthToken
+              _lagOAuthToken
               _lagProductId
               _lagFields
-              (Just _lagAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy LicenseAssignmentsGetResource)

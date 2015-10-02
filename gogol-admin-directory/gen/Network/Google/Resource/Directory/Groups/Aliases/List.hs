@@ -32,12 +32,11 @@ module Network.Google.Resource.Directory.Groups.Aliases.List
     -- * Request Lenses
     , galQuotaUser
     , galPrettyPrint
-    , galUserIp
+    , galUserIP
     , galGroupKey
     , galKey
-    , galOauthToken
+    , galOAuthToken
     , galFields
-    , galAlt
     ) where
 
 import           Network.Google.AdminDirectory.Types
@@ -52,10 +51,10 @@ type GroupsAliasesListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Get '[JSON] Aliases
+                       QueryParam "alt" AltJSON :> Get '[JSON] Aliases
 
 -- | List all aliases for a group
 --
@@ -63,12 +62,11 @@ type GroupsAliasesListResource =
 data GroupsAliasesList' = GroupsAliasesList'
     { _galQuotaUser   :: !(Maybe Text)
     , _galPrettyPrint :: !Bool
-    , _galUserIp      :: !(Maybe Text)
+    , _galUserIP      :: !(Maybe Text)
     , _galGroupKey    :: !Text
-    , _galKey         :: !(Maybe Text)
-    , _galOauthToken  :: !(Maybe Text)
+    , _galKey         :: !(Maybe Key)
+    , _galOAuthToken  :: !(Maybe OAuthToken)
     , _galFields      :: !(Maybe Text)
-    , _galAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupsAliasesList'' with the minimum fields required to make a request.
@@ -79,17 +77,15 @@ data GroupsAliasesList' = GroupsAliasesList'
 --
 -- * 'galPrettyPrint'
 --
--- * 'galUserIp'
+-- * 'galUserIP'
 --
 -- * 'galGroupKey'
 --
 -- * 'galKey'
 --
--- * 'galOauthToken'
+-- * 'galOAuthToken'
 --
 -- * 'galFields'
---
--- * 'galAlt'
 groupsAliasesList'
     :: Text -- ^ 'groupKey'
     -> GroupsAliasesList'
@@ -97,12 +93,11 @@ groupsAliasesList' pGalGroupKey_ =
     GroupsAliasesList'
     { _galQuotaUser = Nothing
     , _galPrettyPrint = True
-    , _galUserIp = Nothing
+    , _galUserIP = Nothing
     , _galGroupKey = pGalGroupKey_
     , _galKey = Nothing
-    , _galOauthToken = Nothing
+    , _galOAuthToken = Nothing
     , _galFields = Nothing
-    , _galAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,9 +115,9 @@ galPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-galUserIp :: Lens' GroupsAliasesList' (Maybe Text)
-galUserIp
-  = lens _galUserIp (\ s a -> s{_galUserIp = a})
+galUserIP :: Lens' GroupsAliasesList' (Maybe Text)
+galUserIP
+  = lens _galUserIP (\ s a -> s{_galUserIP = a})
 
 -- | Email or immutable Id of the group
 galGroupKey :: Lens' GroupsAliasesList' Text
@@ -132,34 +127,34 @@ galGroupKey
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-galKey :: Lens' GroupsAliasesList' (Maybe Text)
+galKey :: Lens' GroupsAliasesList' (Maybe Key)
 galKey = lens _galKey (\ s a -> s{_galKey = a})
 
 -- | OAuth 2.0 token for the current user.
-galOauthToken :: Lens' GroupsAliasesList' (Maybe Text)
-galOauthToken
-  = lens _galOauthToken
-      (\ s a -> s{_galOauthToken = a})
+galOAuthToken :: Lens' GroupsAliasesList' (Maybe OAuthToken)
+galOAuthToken
+  = lens _galOAuthToken
+      (\ s a -> s{_galOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 galFields :: Lens' GroupsAliasesList' (Maybe Text)
 galFields
   = lens _galFields (\ s a -> s{_galFields = a})
 
--- | Data format for the response.
-galAlt :: Lens' GroupsAliasesList' Alt
-galAlt = lens _galAlt (\ s a -> s{_galAlt = a})
+instance GoogleAuth GroupsAliasesList' where
+        authKey = galKey . _Just
+        authToken = galOAuthToken . _Just
 
 instance GoogleRequest GroupsAliasesList' where
         type Rs GroupsAliasesList' = Aliases
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u GroupsAliasesList'{..}
-          = go _galQuotaUser (Just _galPrettyPrint) _galUserIp
+          = go _galQuotaUser (Just _galPrettyPrint) _galUserIP
               _galGroupKey
               _galKey
-              _galOauthToken
+              _galOAuthToken
               _galFields
-              (Just _galAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy GroupsAliasesListResource)

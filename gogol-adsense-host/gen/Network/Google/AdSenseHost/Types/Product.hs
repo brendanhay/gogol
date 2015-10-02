@@ -28,8 +28,8 @@ data AssociationSession = AssociationSession
     , _asAccountId     :: !(Maybe Text)
     , _asProductCodes  :: !(Maybe [Text])
     , _asId            :: !(Maybe Text)
-    , _asWebsiteUrl    :: !(Maybe Text)
-    , _asRedirectUrl   :: !(Maybe Text)
+    , _asWebsiteURL    :: !(Maybe Text)
+    , _asRedirectURL   :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AssociationSession' with the minimum fields required to make a request.
@@ -50,9 +50,9 @@ data AssociationSession = AssociationSession
 --
 -- * 'asId'
 --
--- * 'asWebsiteUrl'
+-- * 'asWebsiteURL'
 --
--- * 'asRedirectUrl'
+-- * 'asRedirectURL'
 associationSession
     :: AssociationSession
 associationSession =
@@ -64,8 +64,8 @@ associationSession =
     , _asAccountId = Nothing
     , _asProductCodes = Nothing
     , _asId = Nothing
-    , _asWebsiteUrl = Nothing
-    , _asRedirectUrl = Nothing
+    , _asWebsiteURL = Nothing
+    , _asRedirectURL = Nothing
     }
 
 -- | Status of the completed association, available once the association
@@ -108,16 +108,16 @@ asId :: Lens' AssociationSession (Maybe Text)
 asId = lens _asId (\ s a -> s{_asId = a})
 
 -- | The URL of the user\'s hosted website.
-asWebsiteUrl :: Lens' AssociationSession (Maybe Text)
-asWebsiteUrl
-  = lens _asWebsiteUrl (\ s a -> s{_asWebsiteUrl = a})
+asWebsiteURL :: Lens' AssociationSession (Maybe Text)
+asWebsiteURL
+  = lens _asWebsiteURL (\ s a -> s{_asWebsiteURL = a})
 
 -- | Redirect URL of this association session. Used to redirect users into
 -- the AdSense association flow.
-asRedirectUrl :: Lens' AssociationSession (Maybe Text)
-asRedirectUrl
-  = lens _asRedirectUrl
-      (\ s a -> s{_asRedirectUrl = a})
+asRedirectURL :: Lens' AssociationSession (Maybe Text)
+asRedirectURL
+  = lens _asRedirectURL
+      (\ s a -> s{_asRedirectURL = a})
 
 instance FromJSON AssociationSession where
         parseJSON
@@ -145,8 +145,8 @@ instance ToJSON AssociationSession where
                   ("accountId" .=) <$> _asAccountId,
                   ("productCodes" .=) <$> _asProductCodes,
                   ("id" .=) <$> _asId,
-                  ("websiteUrl" .=) <$> _asWebsiteUrl,
-                  ("redirectUrl" .=) <$> _asRedirectUrl])
+                  ("websiteUrl" .=) <$> _asWebsiteURL,
+                  ("redirectUrl" .=) <$> _asRedirectURL])
 
 --
 -- /See:/ 'adClients' smart constructor.
@@ -154,7 +154,7 @@ data AdClients = AdClients
     { _acEtag          :: !(Maybe Text)
     , _acNextPageToken :: !(Maybe Text)
     , _acKind          :: !Text
-    , _acItems         :: !(Maybe [Maybe AdClient])
+    , _acItems         :: !(Maybe [AdClient])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdClients' with the minimum fields required to make a request.
@@ -194,7 +194,7 @@ acKind :: Lens' AdClients Text
 acKind = lens _acKind (\ s a -> s{_acKind = a})
 
 -- | The ad clients returned in this list response.
-acItems :: Lens' AdClients [Maybe AdClient]
+acItems :: Lens' AdClients [AdClient]
 acItems
   = lens _acItems (\ s a -> s{_acItems = a}) . _Default
       . _Coerce
@@ -221,7 +221,7 @@ instance ToJSON AdClients where
 data Accounts = Accounts
     { _aEtag  :: !(Maybe Text)
     , _aKind  :: !Text
-    , _aItems :: !(Maybe [Maybe Account])
+    , _aItems :: !(Maybe [Account])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Accounts' with the minimum fields required to make a request.
@@ -251,7 +251,7 @@ aKind :: Lens' Accounts Text
 aKind = lens _aKind (\ s a -> s{_aKind = a})
 
 -- | The accounts returned in this list response.
-aItems :: Lens' Accounts [Maybe Account]
+aItems :: Lens' Accounts [Account]
 aItems
   = lens _aItems (\ s a -> s{_aItems = a}) . _Default .
       _Coerce
@@ -335,7 +335,7 @@ data AdUnits = AdUnits
     { _auEtag          :: !(Maybe Text)
     , _auNextPageToken :: !(Maybe Text)
     , _auKind          :: !Text
-    , _auItems         :: !(Maybe [Maybe AdUnit])
+    , _auItems         :: !(Maybe [AdUnit])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdUnits' with the minimum fields required to make a request.
@@ -375,7 +375,7 @@ auKind :: Lens' AdUnits Text
 auKind = lens _auKind (\ s a -> s{_auKind = a})
 
 -- | The ad units returned in this list response.
-auItems :: Lens' AdUnits [Maybe AdUnit]
+auItems :: Lens' AdUnits [AdUnit]
 auItems
   = lens _auItems (\ s a -> s{_auItems = a}) . _Default
       . _Coerce
@@ -403,7 +403,7 @@ data AdUnit = AdUnit
     { _adStatus                   :: !(Maybe Text)
     , _adMobileContentAdsSettings :: !(Maybe AdUnitMobileContentAdsSettings)
     , _adKind                     :: !Text
-    , _adCustomStyle              :: !(Maybe (Maybe AdStyle))
+    , _adCustomStyle              :: !(Maybe AdStyle)
     , _adName                     :: !(Maybe Text)
     , _adContentAdsSettings       :: !(Maybe AdUnitContentAdsSettings)
     , _adCode                     :: !(Maybe Text)
@@ -462,7 +462,7 @@ adKind :: Lens' AdUnit Text
 adKind = lens _adKind (\ s a -> s{_adKind = a})
 
 -- | Custom style information specific to this ad unit.
-adCustomStyle :: Lens' AdUnit (Maybe (Maybe AdStyle))
+adCustomStyle :: Lens' AdUnit (Maybe AdStyle)
 adCustomStyle
   = lens _adCustomStyle
       (\ s a -> s{_adCustomStyle = a})
@@ -520,7 +520,7 @@ data URLChannels = URLChannels
     { _ucEtag          :: !(Maybe Text)
     , _ucNextPageToken :: !(Maybe Text)
     , _ucKind          :: !Text
-    , _ucItems         :: !(Maybe [Maybe URLChannel])
+    , _ucItems         :: !(Maybe [URLChannel])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLChannels' with the minimum fields required to make a request.
@@ -561,7 +561,7 @@ ucKind :: Lens' URLChannels Text
 ucKind = lens _ucKind (\ s a -> s{_ucKind = a})
 
 -- | The URL channels returned in this list response.
-ucItems :: Lens' URLChannels [Maybe URLChannel]
+ucItems :: Lens' URLChannels [URLChannel]
 ucItems
   = lens _ucItems (\ s a -> s{_ucItems = a}) . _Default
       . _Coerce
@@ -589,7 +589,7 @@ data CustomChannels = CustomChannels
     { _ccEtag          :: !(Maybe Text)
     , _ccNextPageToken :: !(Maybe Text)
     , _ccKind          :: !Text
-    , _ccItems         :: !(Maybe [Maybe CustomChannel])
+    , _ccItems         :: !(Maybe [CustomChannel])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CustomChannels' with the minimum fields required to make a request.
@@ -630,7 +630,7 @@ ccKind :: Lens' CustomChannels Text
 ccKind = lens _ccKind (\ s a -> s{_ccKind = a})
 
 -- | The custom channels returned in this list response.
-ccItems :: Lens' CustomChannels [Maybe CustomChannel]
+ccItems :: Lens' CustomChannels [CustomChannel]
 ccItems
   = lens _ccItems (\ s a -> s{_ccItems = a}) . _Default
       . _Coerce
@@ -962,10 +962,10 @@ instance ToJSON Account where
 -- /See:/ 'adStyleColors' smart constructor.
 data AdStyleColors = AdStyleColors
     { _ascText       :: !(Maybe Text)
-    , _ascUrl        :: !(Maybe Text)
-    , _ascBorder     :: !(Maybe Text)
+    , _ascURL        :: !(Maybe Text)
+    , _ascBOrder     :: !(Maybe Text)
     , _ascTitle      :: !(Maybe Text)
-    , _ascBackground :: !(Maybe Text)
+    , _ascBackgRound :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdStyleColors' with the minimum fields required to make a request.
@@ -974,22 +974,22 @@ data AdStyleColors = AdStyleColors
 --
 -- * 'ascText'
 --
--- * 'ascUrl'
+-- * 'ascURL'
 --
--- * 'ascBorder'
+-- * 'ascBOrder'
 --
 -- * 'ascTitle'
 --
--- * 'ascBackground'
+-- * 'ascBackgRound'
 adStyleColors
     :: AdStyleColors
 adStyleColors =
     AdStyleColors
     { _ascText = Nothing
-    , _ascUrl = Nothing
-    , _ascBorder = Nothing
+    , _ascURL = Nothing
+    , _ascBOrder = Nothing
     , _ascTitle = Nothing
-    , _ascBackground = Nothing
+    , _ascBackgRound = Nothing
     }
 
 -- | The color of the ad text.
@@ -997,23 +997,23 @@ ascText :: Lens' AdStyleColors (Maybe Text)
 ascText = lens _ascText (\ s a -> s{_ascText = a})
 
 -- | The color of the ad url.
-ascUrl :: Lens' AdStyleColors (Maybe Text)
-ascUrl = lens _ascUrl (\ s a -> s{_ascUrl = a})
+ascURL :: Lens' AdStyleColors (Maybe Text)
+ascURL = lens _ascURL (\ s a -> s{_ascURL = a})
 
 -- | The color of the ad border.
-ascBorder :: Lens' AdStyleColors (Maybe Text)
-ascBorder
-  = lens _ascBorder (\ s a -> s{_ascBorder = a})
+ascBOrder :: Lens' AdStyleColors (Maybe Text)
+ascBOrder
+  = lens _ascBOrder (\ s a -> s{_ascBOrder = a})
 
 -- | The color of the ad title.
 ascTitle :: Lens' AdStyleColors (Maybe Text)
 ascTitle = lens _ascTitle (\ s a -> s{_ascTitle = a})
 
 -- | The color of the ad background.
-ascBackground :: Lens' AdStyleColors (Maybe Text)
-ascBackground
-  = lens _ascBackground
-      (\ s a -> s{_ascBackground = a})
+ascBackgRound :: Lens' AdStyleColors (Maybe Text)
+ascBackgRound
+  = lens _ascBackgRound
+      (\ s a -> s{_ascBackgRound = a})
 
 instance FromJSON AdStyleColors where
         parseJSON
@@ -1028,10 +1028,10 @@ instance ToJSON AdStyleColors where
         toJSON AdStyleColors{..}
           = object
               (catMaybes
-                 [("text" .=) <$> _ascText, ("url" .=) <$> _ascUrl,
-                  ("border" .=) <$> _ascBorder,
+                 [("text" .=) <$> _ascText, ("url" .=) <$> _ascURL,
+                  ("border" .=) <$> _ascBOrder,
                   ("title" .=) <$> _ascTitle,
-                  ("background" .=) <$> _ascBackground])
+                  ("background" .=) <$> _ascBackgRound])
 
 --
 -- /See:/ 'adClient' smart constructor.
@@ -1119,7 +1119,7 @@ instance ToJSON AdClient where
 -- /See:/ 'adUnitContentAdsSettingsBackupOption' smart constructor.
 data AdUnitContentAdsSettingsBackupOption = AdUnitContentAdsSettingsBackupOption
     { _aucasboColor :: !(Maybe Text)
-    , _aucasboUrl   :: !(Maybe Text)
+    , _aucasboURL   :: !(Maybe Text)
     , _aucasboType  :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1129,7 +1129,7 @@ data AdUnitContentAdsSettingsBackupOption = AdUnitContentAdsSettingsBackupOption
 --
 -- * 'aucasboColor'
 --
--- * 'aucasboUrl'
+-- * 'aucasboURL'
 --
 -- * 'aucasboType'
 adUnitContentAdsSettingsBackupOption
@@ -1137,7 +1137,7 @@ adUnitContentAdsSettingsBackupOption
 adUnitContentAdsSettingsBackupOption =
     AdUnitContentAdsSettingsBackupOption
     { _aucasboColor = Nothing
-    , _aucasboUrl = Nothing
+    , _aucasboURL = Nothing
     , _aucasboType = Nothing
     }
 
@@ -1149,9 +1149,9 @@ aucasboColor
   = lens _aucasboColor (\ s a -> s{_aucasboColor = a})
 
 -- | URL to use when type is set to URL.
-aucasboUrl :: Lens' AdUnitContentAdsSettingsBackupOption (Maybe Text)
-aucasboUrl
-  = lens _aucasboUrl (\ s a -> s{_aucasboUrl = a})
+aucasboURL :: Lens' AdUnitContentAdsSettingsBackupOption (Maybe Text)
+aucasboURL
+  = lens _aucasboURL (\ s a -> s{_aucasboURL = a})
 
 -- | Type of the backup option. Possible values are BLANK, COLOR and URL.
 aucasboType :: Lens' AdUnitContentAdsSettingsBackupOption (Maybe Text)
@@ -1172,7 +1172,7 @@ instance ToJSON AdUnitContentAdsSettingsBackupOption
           = object
               (catMaybes
                  [("color" .=) <$> _aucasboColor,
-                  ("url" .=) <$> _aucasboUrl,
+                  ("url" .=) <$> _aucasboURL,
                   ("type" .=) <$> _aucasboType])
 
 --
@@ -1314,7 +1314,7 @@ instance ToJSON CustomChannel where
 data URLChannel = URLChannel
     { _urlcKind       :: !Text
     , _urlcId         :: !(Maybe Text)
-    , _urlcUrlPattern :: !(Maybe Text)
+    , _urlcURLPattern :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLChannel' with the minimum fields required to make a request.
@@ -1325,14 +1325,14 @@ data URLChannel = URLChannel
 --
 -- * 'urlcId'
 --
--- * 'urlcUrlPattern'
+-- * 'urlcURLPattern'
 uRLChannel
     :: URLChannel
 uRLChannel =
     URLChannel
     { _urlcKind = "adsensehost#urlChannel"
     , _urlcId = Nothing
-    , _urlcUrlPattern = Nothing
+    , _urlcURLPattern = Nothing
     }
 
 -- | Kind of resource this is, in this case adsensehost#urlChannel.
@@ -1347,10 +1347,10 @@ urlcId = lens _urlcId (\ s a -> s{_urlcId = a})
 
 -- | URL Pattern of this URL channel. Does not include \"http:\/\/\" or
 -- \"https:\/\/\". Example: www.example.com\/home
-urlcUrlPattern :: Lens' URLChannel (Maybe Text)
-urlcUrlPattern
-  = lens _urlcUrlPattern
-      (\ s a -> s{_urlcUrlPattern = a})
+urlcURLPattern :: Lens' URLChannel (Maybe Text)
+urlcURLPattern
+  = lens _urlcURLPattern
+      (\ s a -> s{_urlcURLPattern = a})
 
 instance FromJSON URLChannel where
         parseJSON
@@ -1366,7 +1366,7 @@ instance ToJSON URLChannel where
           = object
               (catMaybes
                  [Just ("kind" .= _urlcKind), ("id" .=) <$> _urlcId,
-                  ("urlPattern" .=) <$> _urlcUrlPattern])
+                  ("urlPattern" .=) <$> _urlcURLPattern])
 
 --
 -- /See:/ 'adCode' smart constructor.

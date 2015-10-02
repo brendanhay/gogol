@@ -34,11 +34,11 @@ module Network.Google.Resource.GamesManagement.Events.ResetMultipleForAllPlayers
     -- * Request Lenses
     , ermfapQuotaUser
     , ermfapPrettyPrint
-    , ermfapUserIp
+    , ermfapUserIP
+    , ermfapEventsResetMultipleForAllRequest
     , ermfapKey
-    , ermfapOauthToken
+    , ermfapOAuthToken
     , ermfapFields
-    , ermfapAlt
     ) where
 
 import           Network.Google.GamesManagement.Types
@@ -52,10 +52,12 @@ type EventsResetMultipleForAllPlayersResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Post '[JSON] ()
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] EventsResetMultipleForAllRequest :>
+                         Post '[JSON] ()
 
 -- | Resets events with the given IDs for all players. This method is only
 -- available to user accounts for your developer console. Only draft events
@@ -63,13 +65,13 @@ type EventsResetMultipleForAllPlayersResource =
 --
 -- /See:/ 'eventsResetMultipleForAllPlayers'' smart constructor.
 data EventsResetMultipleForAllPlayers' = EventsResetMultipleForAllPlayers'
-    { _ermfapQuotaUser   :: !(Maybe Text)
-    , _ermfapPrettyPrint :: !Bool
-    , _ermfapUserIp      :: !(Maybe Text)
-    , _ermfapKey         :: !(Maybe Text)
-    , _ermfapOauthToken  :: !(Maybe Text)
-    , _ermfapFields      :: !(Maybe Text)
-    , _ermfapAlt         :: !Alt
+    { _ermfapQuotaUser                        :: !(Maybe Text)
+    , _ermfapPrettyPrint                      :: !Bool
+    , _ermfapUserIP                           :: !(Maybe Text)
+    , _ermfapEventsResetMultipleForAllRequest :: !EventsResetMultipleForAllRequest
+    , _ermfapKey                              :: !(Maybe Key)
+    , _ermfapOAuthToken                       :: !(Maybe OAuthToken)
+    , _ermfapFields                           :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsResetMultipleForAllPlayers'' with the minimum fields required to make a request.
@@ -80,26 +82,27 @@ data EventsResetMultipleForAllPlayers' = EventsResetMultipleForAllPlayers'
 --
 -- * 'ermfapPrettyPrint'
 --
--- * 'ermfapUserIp'
+-- * 'ermfapUserIP'
+--
+-- * 'ermfapEventsResetMultipleForAllRequest'
 --
 -- * 'ermfapKey'
 --
--- * 'ermfapOauthToken'
+-- * 'ermfapOAuthToken'
 --
 -- * 'ermfapFields'
---
--- * 'ermfapAlt'
 eventsResetMultipleForAllPlayers'
-    :: EventsResetMultipleForAllPlayers'
-eventsResetMultipleForAllPlayers' =
+    :: EventsResetMultipleForAllRequest -- ^ 'EventsResetMultipleForAllRequest'
+    -> EventsResetMultipleForAllPlayers'
+eventsResetMultipleForAllPlayers' pErmfapEventsResetMultipleForAllRequest_ =
     EventsResetMultipleForAllPlayers'
     { _ermfapQuotaUser = Nothing
     , _ermfapPrettyPrint = True
-    , _ermfapUserIp = Nothing
+    , _ermfapUserIP = Nothing
+    , _ermfapEventsResetMultipleForAllRequest = pErmfapEventsResetMultipleForAllRequest_
     , _ermfapKey = Nothing
-    , _ermfapOauthToken = Nothing
+    , _ermfapOAuthToken = Nothing
     , _ermfapFields = Nothing
-    , _ermfapAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -118,32 +121,39 @@ ermfapPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ermfapUserIp :: Lens' EventsResetMultipleForAllPlayers' (Maybe Text)
-ermfapUserIp
-  = lens _ermfapUserIp (\ s a -> s{_ermfapUserIp = a})
+ermfapUserIP :: Lens' EventsResetMultipleForAllPlayers' (Maybe Text)
+ermfapUserIP
+  = lens _ermfapUserIP (\ s a -> s{_ermfapUserIP = a})
+
+-- | Multipart request metadata.
+ermfapEventsResetMultipleForAllRequest :: Lens' EventsResetMultipleForAllPlayers' EventsResetMultipleForAllRequest
+ermfapEventsResetMultipleForAllRequest
+  = lens _ermfapEventsResetMultipleForAllRequest
+      (\ s a ->
+         s{_ermfapEventsResetMultipleForAllRequest = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ermfapKey :: Lens' EventsResetMultipleForAllPlayers' (Maybe Text)
+ermfapKey :: Lens' EventsResetMultipleForAllPlayers' (Maybe Key)
 ermfapKey
   = lens _ermfapKey (\ s a -> s{_ermfapKey = a})
 
 -- | OAuth 2.0 token for the current user.
-ermfapOauthToken :: Lens' EventsResetMultipleForAllPlayers' (Maybe Text)
-ermfapOauthToken
-  = lens _ermfapOauthToken
-      (\ s a -> s{_ermfapOauthToken = a})
+ermfapOAuthToken :: Lens' EventsResetMultipleForAllPlayers' (Maybe OAuthToken)
+ermfapOAuthToken
+  = lens _ermfapOAuthToken
+      (\ s a -> s{_ermfapOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ermfapFields :: Lens' EventsResetMultipleForAllPlayers' (Maybe Text)
 ermfapFields
   = lens _ermfapFields (\ s a -> s{_ermfapFields = a})
 
--- | Data format for the response.
-ermfapAlt :: Lens' EventsResetMultipleForAllPlayers' Alt
-ermfapAlt
-  = lens _ermfapAlt (\ s a -> s{_ermfapAlt = a})
+instance GoogleAuth EventsResetMultipleForAllPlayers'
+         where
+        authKey = ermfapKey . _Just
+        authToken = ermfapOAuthToken . _Just
 
 instance GoogleRequest
          EventsResetMultipleForAllPlayers' where
@@ -152,11 +162,12 @@ instance GoogleRequest
         requestWithRoute r u
           EventsResetMultipleForAllPlayers'{..}
           = go _ermfapQuotaUser (Just _ermfapPrettyPrint)
-              _ermfapUserIp
+              _ermfapUserIP
               _ermfapKey
-              _ermfapOauthToken
+              _ermfapOAuthToken
               _ermfapFields
-              (Just _ermfapAlt)
+              (Just AltJSON)
+              _ermfapEventsResetMultipleForAllRequest
           where go
                   = clientWithRoute
                       (Proxy ::

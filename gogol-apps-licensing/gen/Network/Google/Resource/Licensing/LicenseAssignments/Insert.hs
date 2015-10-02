@@ -32,13 +32,13 @@ module Network.Google.Resource.Licensing.LicenseAssignments.Insert
     -- * Request Lenses
     , laiQuotaUser
     , laiPrettyPrint
-    , laiUserIp
+    , laiLicenseAssignmentInsert
+    , laiUserIP
     , laiSkuId
     , laiKey
-    , laiOauthToken
+    , laiOAuthToken
     , laiProductId
     , laiFields
-    , laiAlt
     ) where
 
 import           Network.Google.AppsLicensing.Types
@@ -54,25 +54,26 @@ type LicenseAssignmentsInsertResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :>
-                           Post '[JSON] LicenseAssignment
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] LicenseAssignmentInsert :>
+                             Post '[JSON] LicenseAssignment
 
 -- | Assign License.
 --
 -- /See:/ 'licenseAssignmentsInsert'' smart constructor.
 data LicenseAssignmentsInsert' = LicenseAssignmentsInsert'
-    { _laiQuotaUser   :: !(Maybe Text)
-    , _laiPrettyPrint :: !Bool
-    , _laiUserIp      :: !(Maybe Text)
-    , _laiSkuId       :: !Text
-    , _laiKey         :: !(Maybe Text)
-    , _laiOauthToken  :: !(Maybe Text)
-    , _laiProductId   :: !Text
-    , _laiFields      :: !(Maybe Text)
-    , _laiAlt         :: !Alt
+    { _laiQuotaUser               :: !(Maybe Text)
+    , _laiPrettyPrint             :: !Bool
+    , _laiLicenseAssignmentInsert :: !LicenseAssignmentInsert
+    , _laiUserIP                  :: !(Maybe Text)
+    , _laiSkuId                   :: !Text
+    , _laiKey                     :: !(Maybe Key)
+    , _laiOAuthToken              :: !(Maybe OAuthToken)
+    , _laiProductId               :: !Text
+    , _laiFields                  :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LicenseAssignmentsInsert'' with the minimum fields required to make a request.
@@ -83,34 +84,35 @@ data LicenseAssignmentsInsert' = LicenseAssignmentsInsert'
 --
 -- * 'laiPrettyPrint'
 --
--- * 'laiUserIp'
+-- * 'laiLicenseAssignmentInsert'
+--
+-- * 'laiUserIP'
 --
 -- * 'laiSkuId'
 --
 -- * 'laiKey'
 --
--- * 'laiOauthToken'
+-- * 'laiOAuthToken'
 --
 -- * 'laiProductId'
 --
 -- * 'laiFields'
---
--- * 'laiAlt'
 licenseAssignmentsInsert'
-    :: Text -- ^ 'skuId'
+    :: LicenseAssignmentInsert -- ^ 'LicenseAssignmentInsert'
+    -> Text -- ^ 'skuId'
     -> Text -- ^ 'productId'
     -> LicenseAssignmentsInsert'
-licenseAssignmentsInsert' pLaiSkuId_ pLaiProductId_ =
+licenseAssignmentsInsert' pLaiLicenseAssignmentInsert_ pLaiSkuId_ pLaiProductId_ =
     LicenseAssignmentsInsert'
     { _laiQuotaUser = Nothing
     , _laiPrettyPrint = True
-    , _laiUserIp = Nothing
+    , _laiLicenseAssignmentInsert = pLaiLicenseAssignmentInsert_
+    , _laiUserIP = Nothing
     , _laiSkuId = pLaiSkuId_
     , _laiKey = Nothing
-    , _laiOauthToken = Nothing
+    , _laiOAuthToken = Nothing
     , _laiProductId = pLaiProductId_
     , _laiFields = Nothing
-    , _laiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -126,11 +128,17 @@ laiPrettyPrint
   = lens _laiPrettyPrint
       (\ s a -> s{_laiPrettyPrint = a})
 
+-- | Multipart request metadata.
+laiLicenseAssignmentInsert :: Lens' LicenseAssignmentsInsert' LicenseAssignmentInsert
+laiLicenseAssignmentInsert
+  = lens _laiLicenseAssignmentInsert
+      (\ s a -> s{_laiLicenseAssignmentInsert = a})
+
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-laiUserIp :: Lens' LicenseAssignmentsInsert' (Maybe Text)
-laiUserIp
-  = lens _laiUserIp (\ s a -> s{_laiUserIp = a})
+laiUserIP :: Lens' LicenseAssignmentsInsert' (Maybe Text)
+laiUserIP
+  = lens _laiUserIP (\ s a -> s{_laiUserIP = a})
 
 -- | Name for sku
 laiSkuId :: Lens' LicenseAssignmentsInsert' Text
@@ -139,14 +147,14 @@ laiSkuId = lens _laiSkuId (\ s a -> s{_laiSkuId = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-laiKey :: Lens' LicenseAssignmentsInsert' (Maybe Text)
+laiKey :: Lens' LicenseAssignmentsInsert' (Maybe Key)
 laiKey = lens _laiKey (\ s a -> s{_laiKey = a})
 
 -- | OAuth 2.0 token for the current user.
-laiOauthToken :: Lens' LicenseAssignmentsInsert' (Maybe Text)
-laiOauthToken
-  = lens _laiOauthToken
-      (\ s a -> s{_laiOauthToken = a})
+laiOAuthToken :: Lens' LicenseAssignmentsInsert' (Maybe OAuthToken)
+laiOAuthToken
+  = lens _laiOAuthToken
+      (\ s a -> s{_laiOAuthToken = a})
 
 -- | Name for product
 laiProductId :: Lens' LicenseAssignmentsInsert' Text
@@ -158,22 +166,23 @@ laiFields :: Lens' LicenseAssignmentsInsert' (Maybe Text)
 laiFields
   = lens _laiFields (\ s a -> s{_laiFields = a})
 
--- | Data format for the response.
-laiAlt :: Lens' LicenseAssignmentsInsert' Alt
-laiAlt = lens _laiAlt (\ s a -> s{_laiAlt = a})
+instance GoogleAuth LicenseAssignmentsInsert' where
+        authKey = laiKey . _Just
+        authToken = laiOAuthToken . _Just
 
 instance GoogleRequest LicenseAssignmentsInsert'
          where
         type Rs LicenseAssignmentsInsert' = LicenseAssignment
         request = requestWithRoute defReq appsLicensingURL
         requestWithRoute r u LicenseAssignmentsInsert'{..}
-          = go _laiQuotaUser (Just _laiPrettyPrint) _laiUserIp
+          = go _laiQuotaUser (Just _laiPrettyPrint) _laiUserIP
               _laiSkuId
               _laiKey
-              _laiOauthToken
+              _laiOAuthToken
               _laiProductId
               _laiFields
-              (Just _laiAlt)
+              (Just AltJSON)
+              _laiLicenseAssignmentInsert
           where go
                   = clientWithRoute
                       (Proxy :: Proxy LicenseAssignmentsInsertResource)

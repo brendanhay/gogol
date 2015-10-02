@@ -33,12 +33,12 @@ module Network.Google.Resource.Content.Orders.Refund
     , orQuotaUser
     , orMerchantId
     , orPrettyPrint
-    , orUserIp
+    , orOrdersRefundRequest
+    , orUserIP
     , orKey
-    , orOauthToken
+    , orOAuthToken
     , orOrderId
     , orFields
-    , orAlt
     ) where
 
 import           Network.Google.Prelude
@@ -54,25 +54,26 @@ type OrdersRefundResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :>
-                           Post '[JSON] OrdersRefundResponse
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] OrdersRefundRequest :>
+                             Post '[JSON] OrdersRefundResponse
 
 -- | Refund a portion of the order, up to the full amount paid.
 --
 -- /See:/ 'ordersRefund'' smart constructor.
 data OrdersRefund' = OrdersRefund'
-    { _orQuotaUser   :: !(Maybe Text)
-    , _orMerchantId  :: !Word64
-    , _orPrettyPrint :: !Bool
-    , _orUserIp      :: !(Maybe Text)
-    , _orKey         :: !(Maybe Text)
-    , _orOauthToken  :: !(Maybe Text)
-    , _orOrderId     :: !Text
-    , _orFields      :: !(Maybe Text)
-    , _orAlt         :: !Alt
+    { _orQuotaUser           :: !(Maybe Text)
+    , _orMerchantId          :: !Word64
+    , _orPrettyPrint         :: !Bool
+    , _orOrdersRefundRequest :: !OrdersRefundRequest
+    , _orUserIP              :: !(Maybe Text)
+    , _orKey                 :: !(Maybe Key)
+    , _orOAuthToken          :: !(Maybe OAuthToken)
+    , _orOrderId             :: !Text
+    , _orFields              :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersRefund'' with the minimum fields required to make a request.
@@ -85,32 +86,33 @@ data OrdersRefund' = OrdersRefund'
 --
 -- * 'orPrettyPrint'
 --
--- * 'orUserIp'
+-- * 'orOrdersRefundRequest'
+--
+-- * 'orUserIP'
 --
 -- * 'orKey'
 --
--- * 'orOauthToken'
+-- * 'orOAuthToken'
 --
 -- * 'orOrderId'
 --
 -- * 'orFields'
---
--- * 'orAlt'
 ordersRefund'
     :: Word64 -- ^ 'merchantId'
+    -> OrdersRefundRequest -- ^ 'OrdersRefundRequest'
     -> Text -- ^ 'orderId'
     -> OrdersRefund'
-ordersRefund' pOrMerchantId_ pOrOrderId_ =
+ordersRefund' pOrMerchantId_ pOrOrdersRefundRequest_ pOrOrderId_ =
     OrdersRefund'
     { _orQuotaUser = Nothing
     , _orMerchantId = pOrMerchantId_
     , _orPrettyPrint = True
-    , _orUserIp = Nothing
+    , _orOrdersRefundRequest = pOrOrdersRefundRequest_
+    , _orUserIP = Nothing
     , _orKey = Nothing
-    , _orOauthToken = Nothing
+    , _orOAuthToken = Nothing
     , _orOrderId = pOrOrderId_
     , _orFields = Nothing
-    , _orAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -131,21 +133,27 @@ orPrettyPrint
   = lens _orPrettyPrint
       (\ s a -> s{_orPrettyPrint = a})
 
+-- | Multipart request metadata.
+orOrdersRefundRequest :: Lens' OrdersRefund' OrdersRefundRequest
+orOrdersRefundRequest
+  = lens _orOrdersRefundRequest
+      (\ s a -> s{_orOrdersRefundRequest = a})
+
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-orUserIp :: Lens' OrdersRefund' (Maybe Text)
-orUserIp = lens _orUserIp (\ s a -> s{_orUserIp = a})
+orUserIP :: Lens' OrdersRefund' (Maybe Text)
+orUserIP = lens _orUserIP (\ s a -> s{_orUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-orKey :: Lens' OrdersRefund' (Maybe Text)
+orKey :: Lens' OrdersRefund' (Maybe Key)
 orKey = lens _orKey (\ s a -> s{_orKey = a})
 
 -- | OAuth 2.0 token for the current user.
-orOauthToken :: Lens' OrdersRefund' (Maybe Text)
-orOauthToken
-  = lens _orOauthToken (\ s a -> s{_orOauthToken = a})
+orOAuthToken :: Lens' OrdersRefund' (Maybe OAuthToken)
+orOAuthToken
+  = lens _orOAuthToken (\ s a -> s{_orOAuthToken = a})
 
 -- | The ID of the order to refund.
 orOrderId :: Lens' OrdersRefund' Text
@@ -156,21 +164,22 @@ orOrderId
 orFields :: Lens' OrdersRefund' (Maybe Text)
 orFields = lens _orFields (\ s a -> s{_orFields = a})
 
--- | Data format for the response.
-orAlt :: Lens' OrdersRefund' Alt
-orAlt = lens _orAlt (\ s a -> s{_orAlt = a})
+instance GoogleAuth OrdersRefund' where
+        authKey = orKey . _Just
+        authToken = orOAuthToken . _Just
 
 instance GoogleRequest OrdersRefund' where
         type Rs OrdersRefund' = OrdersRefundResponse
         request = requestWithRoute defReq shoppingContentURL
         requestWithRoute r u OrdersRefund'{..}
           = go _orQuotaUser _orMerchantId (Just _orPrettyPrint)
-              _orUserIp
+              _orUserIP
               _orKey
-              _orOauthToken
+              _orOAuthToken
               _orOrderId
               _orFields
-              (Just _orAlt)
+              (Just AltJSON)
+              _orOrdersRefundRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy OrdersRefundResource)

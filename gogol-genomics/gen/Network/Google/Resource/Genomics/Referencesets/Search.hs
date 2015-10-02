@@ -33,11 +33,11 @@ module Network.Google.Resource.Genomics.Referencesets.Search
     -- * Request Lenses
     , rssQuotaUser
     , rssPrettyPrint
-    , rssUserIp
+    , rssSearchReferenceSetsRequest
+    , rssUserIP
     , rssKey
-    , rssOauthToken
+    , rssOAuthToken
     , rssFields
-    , rssAlt
     ) where
 
 import           Network.Google.Genomics.Types
@@ -51,24 +51,25 @@ type ReferencesetsSearchResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :>
-                       Post '[JSON] SearchReferenceSetsResponse
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] SearchReferenceSetsRequest :>
+                         Post '[JSON] SearchReferenceSetsResponse
 
 -- | Searches for reference sets which match the given criteria. Implements
 -- GlobalAllianceApi.searchReferenceSets.
 --
 -- /See:/ 'referencesetsSearch'' smart constructor.
 data ReferencesetsSearch' = ReferencesetsSearch'
-    { _rssQuotaUser   :: !(Maybe Text)
-    , _rssPrettyPrint :: !Bool
-    , _rssUserIp      :: !(Maybe Text)
-    , _rssKey         :: !(Maybe Text)
-    , _rssOauthToken  :: !(Maybe Text)
-    , _rssFields      :: !(Maybe Text)
-    , _rssAlt         :: !Alt
+    { _rssQuotaUser                  :: !(Maybe Text)
+    , _rssPrettyPrint                :: !Bool
+    , _rssSearchReferenceSetsRequest :: !SearchReferenceSetsRequest
+    , _rssUserIP                     :: !(Maybe Text)
+    , _rssKey                        :: !(Maybe Key)
+    , _rssOAuthToken                 :: !(Maybe OAuthToken)
+    , _rssFields                     :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReferencesetsSearch'' with the minimum fields required to make a request.
@@ -79,26 +80,27 @@ data ReferencesetsSearch' = ReferencesetsSearch'
 --
 -- * 'rssPrettyPrint'
 --
--- * 'rssUserIp'
+-- * 'rssSearchReferenceSetsRequest'
+--
+-- * 'rssUserIP'
 --
 -- * 'rssKey'
 --
--- * 'rssOauthToken'
+-- * 'rssOAuthToken'
 --
 -- * 'rssFields'
---
--- * 'rssAlt'
 referencesetsSearch'
-    :: ReferencesetsSearch'
-referencesetsSearch' =
+    :: SearchReferenceSetsRequest -- ^ 'SearchReferenceSetsRequest'
+    -> ReferencesetsSearch'
+referencesetsSearch' pRssSearchReferenceSetsRequest_ =
     ReferencesetsSearch'
     { _rssQuotaUser = Nothing
     , _rssPrettyPrint = True
-    , _rssUserIp = Nothing
+    , _rssSearchReferenceSetsRequest = pRssSearchReferenceSetsRequest_
+    , _rssUserIP = Nothing
     , _rssKey = Nothing
-    , _rssOauthToken = Nothing
+    , _rssOAuthToken = Nothing
     , _rssFields = Nothing
-    , _rssAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -114,43 +116,50 @@ rssPrettyPrint
   = lens _rssPrettyPrint
       (\ s a -> s{_rssPrettyPrint = a})
 
+-- | Multipart request metadata.
+rssSearchReferenceSetsRequest :: Lens' ReferencesetsSearch' SearchReferenceSetsRequest
+rssSearchReferenceSetsRequest
+  = lens _rssSearchReferenceSetsRequest
+      (\ s a -> s{_rssSearchReferenceSetsRequest = a})
+
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rssUserIp :: Lens' ReferencesetsSearch' (Maybe Text)
-rssUserIp
-  = lens _rssUserIp (\ s a -> s{_rssUserIp = a})
+rssUserIP :: Lens' ReferencesetsSearch' (Maybe Text)
+rssUserIP
+  = lens _rssUserIP (\ s a -> s{_rssUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rssKey :: Lens' ReferencesetsSearch' (Maybe Text)
+rssKey :: Lens' ReferencesetsSearch' (Maybe Key)
 rssKey = lens _rssKey (\ s a -> s{_rssKey = a})
 
 -- | OAuth 2.0 token for the current user.
-rssOauthToken :: Lens' ReferencesetsSearch' (Maybe Text)
-rssOauthToken
-  = lens _rssOauthToken
-      (\ s a -> s{_rssOauthToken = a})
+rssOAuthToken :: Lens' ReferencesetsSearch' (Maybe OAuthToken)
+rssOAuthToken
+  = lens _rssOAuthToken
+      (\ s a -> s{_rssOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 rssFields :: Lens' ReferencesetsSearch' (Maybe Text)
 rssFields
   = lens _rssFields (\ s a -> s{_rssFields = a})
 
--- | Data format for the response.
-rssAlt :: Lens' ReferencesetsSearch' Alt
-rssAlt = lens _rssAlt (\ s a -> s{_rssAlt = a})
+instance GoogleAuth ReferencesetsSearch' where
+        authKey = rssKey . _Just
+        authToken = rssOAuthToken . _Just
 
 instance GoogleRequest ReferencesetsSearch' where
         type Rs ReferencesetsSearch' =
              SearchReferenceSetsResponse
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u ReferencesetsSearch'{..}
-          = go _rssQuotaUser (Just _rssPrettyPrint) _rssUserIp
+          = go _rssQuotaUser (Just _rssPrettyPrint) _rssUserIP
               _rssKey
-              _rssOauthToken
+              _rssOAuthToken
               _rssFields
-              (Just _rssAlt)
+              (Just AltJSON)
+              _rssSearchReferenceSetsRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ReferencesetsSearchResource)

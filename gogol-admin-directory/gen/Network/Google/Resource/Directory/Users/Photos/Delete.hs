@@ -32,12 +32,11 @@ module Network.Google.Resource.Directory.Users.Photos.Delete
     -- * Request Lenses
     , updQuotaUser
     , updPrettyPrint
-    , updUserIp
+    , updUserIP
     , updKey
-    , updOauthToken
+    , updOAuthToken
     , updUserKey
     , updFields
-    , updAlt
     ) where
 
 import           Network.Google.AdminDirectory.Types
@@ -53,10 +52,10 @@ type UsersPhotosDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Delete '[JSON] ()
+                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Remove photos for the user
 --
@@ -64,12 +63,11 @@ type UsersPhotosDeleteResource =
 data UsersPhotosDelete' = UsersPhotosDelete'
     { _updQuotaUser   :: !(Maybe Text)
     , _updPrettyPrint :: !Bool
-    , _updUserIp      :: !(Maybe Text)
-    , _updKey         :: !(Maybe Text)
-    , _updOauthToken  :: !(Maybe Text)
+    , _updUserIP      :: !(Maybe Text)
+    , _updKey         :: !(Maybe Key)
+    , _updOAuthToken  :: !(Maybe OAuthToken)
     , _updUserKey     :: !Text
     , _updFields      :: !(Maybe Text)
-    , _updAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersPhotosDelete'' with the minimum fields required to make a request.
@@ -80,17 +78,15 @@ data UsersPhotosDelete' = UsersPhotosDelete'
 --
 -- * 'updPrettyPrint'
 --
--- * 'updUserIp'
+-- * 'updUserIP'
 --
 -- * 'updKey'
 --
--- * 'updOauthToken'
+-- * 'updOAuthToken'
 --
 -- * 'updUserKey'
 --
 -- * 'updFields'
---
--- * 'updAlt'
 usersPhotosDelete'
     :: Text -- ^ 'userKey'
     -> UsersPhotosDelete'
@@ -98,12 +94,11 @@ usersPhotosDelete' pUpdUserKey_ =
     UsersPhotosDelete'
     { _updQuotaUser = Nothing
     , _updPrettyPrint = True
-    , _updUserIp = Nothing
+    , _updUserIP = Nothing
     , _updKey = Nothing
-    , _updOauthToken = Nothing
+    , _updOAuthToken = Nothing
     , _updUserKey = pUpdUserKey_
     , _updFields = Nothing
-    , _updAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -121,21 +116,21 @@ updPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-updUserIp :: Lens' UsersPhotosDelete' (Maybe Text)
-updUserIp
-  = lens _updUserIp (\ s a -> s{_updUserIp = a})
+updUserIP :: Lens' UsersPhotosDelete' (Maybe Text)
+updUserIP
+  = lens _updUserIP (\ s a -> s{_updUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-updKey :: Lens' UsersPhotosDelete' (Maybe Text)
+updKey :: Lens' UsersPhotosDelete' (Maybe Key)
 updKey = lens _updKey (\ s a -> s{_updKey = a})
 
 -- | OAuth 2.0 token for the current user.
-updOauthToken :: Lens' UsersPhotosDelete' (Maybe Text)
-updOauthToken
-  = lens _updOauthToken
-      (\ s a -> s{_updOauthToken = a})
+updOAuthToken :: Lens' UsersPhotosDelete' (Maybe OAuthToken)
+updOAuthToken
+  = lens _updOAuthToken
+      (\ s a -> s{_updOAuthToken = a})
 
 -- | Email or immutable Id of the user
 updUserKey :: Lens' UsersPhotosDelete' Text
@@ -147,20 +142,20 @@ updFields :: Lens' UsersPhotosDelete' (Maybe Text)
 updFields
   = lens _updFields (\ s a -> s{_updFields = a})
 
--- | Data format for the response.
-updAlt :: Lens' UsersPhotosDelete' Alt
-updAlt = lens _updAlt (\ s a -> s{_updAlt = a})
+instance GoogleAuth UsersPhotosDelete' where
+        authKey = updKey . _Just
+        authToken = updOAuthToken . _Just
 
 instance GoogleRequest UsersPhotosDelete' where
         type Rs UsersPhotosDelete' = ()
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u UsersPhotosDelete'{..}
-          = go _updQuotaUser (Just _updPrettyPrint) _updUserIp
+          = go _updQuotaUser (Just _updPrettyPrint) _updUserIP
               _updKey
-              _updOauthToken
+              _updOAuthToken
               _updUserKey
               _updFields
-              (Just _updAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersPhotosDeleteResource)

@@ -33,13 +33,12 @@ module Network.Google.Resource.Drive.Apps.List
     , alQuotaUser
     , alLanguageCode
     , alPrettyPrint
-    , alUserIp
+    , alUserIP
     , alKey
-    , alOauthToken
+    , alOAuthToken
     , alAppFilterExtensions
     , alAppFilterMimeTypes
     , alFields
-    , alAlt
     ) where
 
 import           Network.Google.Drive.Types
@@ -53,12 +52,12 @@ type AppsListResource =
          QueryParam "languageCode" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "appFilterExtensions" Text :>
                      QueryParam "appFilterMimeTypes" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] AppList
+                         QueryParam "alt" AltJSON :> Get '[JSON] AppList
 
 -- | Lists a user\'s installed apps.
 --
@@ -67,13 +66,12 @@ data AppsList' = AppsList'
     { _alQuotaUser           :: !(Maybe Text)
     , _alLanguageCode        :: !(Maybe Text)
     , _alPrettyPrint         :: !Bool
-    , _alUserIp              :: !(Maybe Text)
-    , _alKey                 :: !(Maybe Text)
-    , _alOauthToken          :: !(Maybe Text)
+    , _alUserIP              :: !(Maybe Text)
+    , _alKey                 :: !(Maybe Key)
+    , _alOAuthToken          :: !(Maybe OAuthToken)
     , _alAppFilterExtensions :: !Text
     , _alAppFilterMimeTypes  :: !Text
     , _alFields              :: !(Maybe Text)
-    , _alAlt                 :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AppsList'' with the minimum fields required to make a request.
@@ -86,19 +84,17 @@ data AppsList' = AppsList'
 --
 -- * 'alPrettyPrint'
 --
--- * 'alUserIp'
+-- * 'alUserIP'
 --
 -- * 'alKey'
 --
--- * 'alOauthToken'
+-- * 'alOAuthToken'
 --
 -- * 'alAppFilterExtensions'
 --
 -- * 'alAppFilterMimeTypes'
 --
 -- * 'alFields'
---
--- * 'alAlt'
 appsList'
     :: AppsList'
 appsList' =
@@ -106,13 +102,12 @@ appsList' =
     { _alQuotaUser = Nothing
     , _alLanguageCode = Nothing
     , _alPrettyPrint = True
-    , _alUserIp = Nothing
+    , _alUserIP = Nothing
     , _alKey = Nothing
-    , _alOauthToken = Nothing
+    , _alOAuthToken = Nothing
     , _alAppFilterExtensions = ""
     , _alAppFilterMimeTypes = ""
     , _alFields = Nothing
-    , _alAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -137,19 +132,19 @@ alPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-alUserIp :: Lens' AppsList' (Maybe Text)
-alUserIp = lens _alUserIp (\ s a -> s{_alUserIp = a})
+alUserIP :: Lens' AppsList' (Maybe Text)
+alUserIP = lens _alUserIP (\ s a -> s{_alUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-alKey :: Lens' AppsList' (Maybe Text)
+alKey :: Lens' AppsList' (Maybe Key)
 alKey = lens _alKey (\ s a -> s{_alKey = a})
 
 -- | OAuth 2.0 token for the current user.
-alOauthToken :: Lens' AppsList' (Maybe Text)
-alOauthToken
-  = lens _alOauthToken (\ s a -> s{_alOauthToken = a})
+alOAuthToken :: Lens' AppsList' (Maybe OAuthToken)
+alOAuthToken
+  = lens _alOAuthToken (\ s a -> s{_alOAuthToken = a})
 
 -- | A comma-separated list of file extensions for open with filtering. All
 -- apps within the given app query scope which can open any of the given
@@ -174,9 +169,9 @@ alAppFilterMimeTypes
 alFields :: Lens' AppsList' (Maybe Text)
 alFields = lens _alFields (\ s a -> s{_alFields = a})
 
--- | Data format for the response.
-alAlt :: Lens' AppsList' Alt
-alAlt = lens _alAlt (\ s a -> s{_alAlt = a})
+instance GoogleAuth AppsList' where
+        authKey = alKey . _Just
+        authToken = alOAuthToken . _Just
 
 instance GoogleRequest AppsList' where
         type Rs AppsList' = AppList
@@ -184,13 +179,13 @@ instance GoogleRequest AppsList' where
         requestWithRoute r u AppsList'{..}
           = go _alQuotaUser _alLanguageCode
               (Just _alPrettyPrint)
-              _alUserIp
+              _alUserIP
               _alKey
-              _alOauthToken
+              _alOAuthToken
               (Just _alAppFilterExtensions)
               (Just _alAppFilterMimeTypes)
               _alFields
-              (Just _alAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy AppsListResource) r
                       u

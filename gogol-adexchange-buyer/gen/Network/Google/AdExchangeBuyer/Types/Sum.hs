@@ -18,7 +18,7 @@ module Network.Google.AdExchangeBuyer.Types.Sum where
 import           Network.Google.Prelude
 
 -- | The proposed action to take on the order.
-data AdexchangebuyerMarketplaceordersUpdateUpdateAction
+data AdexchangebuyerMarketplaceOrdersUpdateUpdateAction
     = Accept
       -- ^ @accept@
     | Cancel
@@ -31,9 +31,9 @@ data AdexchangebuyerMarketplaceordersUpdateUpdateAction
       -- ^ @updateFinalized@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable AdexchangebuyerMarketplaceordersUpdateUpdateAction
+instance Hashable AdexchangebuyerMarketplaceOrdersUpdateUpdateAction
 
-instance FromText AdexchangebuyerMarketplaceordersUpdateUpdateAction where
+instance FromText AdexchangebuyerMarketplaceOrdersUpdateUpdateAction where
     fromText = \case
         "accept" -> Just Accept
         "cancel" -> Just Cancel
@@ -42,7 +42,7 @@ instance FromText AdexchangebuyerMarketplaceordersUpdateUpdateAction where
         "updateFinalized" -> Just UpdateFinalized
         _ -> Nothing
 
-instance ToText AdexchangebuyerMarketplaceordersUpdateUpdateAction where
+instance ToText AdexchangebuyerMarketplaceOrdersUpdateUpdateAction where
     toText = \case
         Accept -> "accept"
         Cancel -> "cancel"
@@ -50,10 +50,10 @@ instance ToText AdexchangebuyerMarketplaceordersUpdateUpdateAction where
         UnknownAction -> "unknownAction"
         UpdateFinalized -> "updateFinalized"
 
-instance FromJSON AdexchangebuyerMarketplaceordersUpdateUpdateAction where
-    parseJSON = parseJSONText "AdexchangebuyerMarketplaceordersUpdateUpdateAction"
+instance FromJSON AdexchangebuyerMarketplaceOrdersUpdateUpdateAction where
+    parseJSON = parseJSONText "AdexchangebuyerMarketplaceOrdersUpdateUpdateAction"
 
-instance ToJSON AdexchangebuyerMarketplaceordersUpdateUpdateAction where
+instance ToJSON AdexchangebuyerMarketplaceOrdersUpdateUpdateAction where
     toJSON = toJSONText
 
 -- | When specified, only creatives having the given open auction status are
@@ -98,42 +98,42 @@ instance ToJSON AdexchangebuyerCreativesListOpenAuctionStatusFilter where
     toJSON = toJSONText
 
 -- | The proposed action to take on the order.
-data AdexchangebuyerMarketplaceordersPatchUpdateAction
-    = AMPUAAccept
+data AdexchangebuyerMarketplaceOrdersPatchUpdateAction
+    = AMOPUAAccept
       -- ^ @accept@
-    | AMPUACancel
+    | AMOPUACancel
       -- ^ @cancel@
-    | AMPUAPropose
+    | AMOPUAPropose
       -- ^ @propose@
-    | AMPUAUnknownAction
+    | AMOPUAUnknownAction
       -- ^ @unknownAction@
-    | AMPUAUpdateFinalized
+    | AMOPUAUpdateFinalized
       -- ^ @updateFinalized@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable AdexchangebuyerMarketplaceordersPatchUpdateAction
+instance Hashable AdexchangebuyerMarketplaceOrdersPatchUpdateAction
 
-instance FromText AdexchangebuyerMarketplaceordersPatchUpdateAction where
+instance FromText AdexchangebuyerMarketplaceOrdersPatchUpdateAction where
     fromText = \case
-        "accept" -> Just AMPUAAccept
-        "cancel" -> Just AMPUACancel
-        "propose" -> Just AMPUAPropose
-        "unknownAction" -> Just AMPUAUnknownAction
-        "updateFinalized" -> Just AMPUAUpdateFinalized
+        "accept" -> Just AMOPUAAccept
+        "cancel" -> Just AMOPUACancel
+        "propose" -> Just AMOPUAPropose
+        "unknownAction" -> Just AMOPUAUnknownAction
+        "updateFinalized" -> Just AMOPUAUpdateFinalized
         _ -> Nothing
 
-instance ToText AdexchangebuyerMarketplaceordersPatchUpdateAction where
+instance ToText AdexchangebuyerMarketplaceOrdersPatchUpdateAction where
     toText = \case
-        AMPUAAccept -> "accept"
-        AMPUACancel -> "cancel"
-        AMPUAPropose -> "propose"
-        AMPUAUnknownAction -> "unknownAction"
-        AMPUAUpdateFinalized -> "updateFinalized"
+        AMOPUAAccept -> "accept"
+        AMOPUACancel -> "cancel"
+        AMOPUAPropose -> "propose"
+        AMOPUAUnknownAction -> "unknownAction"
+        AMOPUAUpdateFinalized -> "updateFinalized"
 
-instance FromJSON AdexchangebuyerMarketplaceordersPatchUpdateAction where
-    parseJSON = parseJSONText "AdexchangebuyerMarketplaceordersPatchUpdateAction"
+instance FromJSON AdexchangebuyerMarketplaceOrdersPatchUpdateAction where
+    parseJSON = parseJSONText "AdexchangebuyerMarketplaceOrdersPatchUpdateAction"
 
-instance ToJSON AdexchangebuyerMarketplaceordersPatchUpdateAction where
+instance ToJSON AdexchangebuyerMarketplaceOrdersPatchUpdateAction where
     toJSON = toJSONText
 
 -- | When specified, only creatives having the given direct deals status are
@@ -175,28 +175,4 @@ instance FromJSON AdexchangebuyerCreativesListDealsStatusFilter where
     parseJSON = parseJSONText "AdexchangebuyerCreativesListDealsStatusFilter"
 
 instance ToJSON AdexchangebuyerCreativesListDealsStatusFilter where
-    toJSON = toJSONText
-
--- | Data format for the response.
-data Alt
-    = JSON
-      -- ^ @json@
-      -- Responses with Content-Type of application\/json
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable Alt
-
-instance FromText Alt where
-    fromText = \case
-        "json" -> Just JSON
-        _ -> Nothing
-
-instance ToText Alt where
-    toText = \case
-        JSON -> "json"
-
-instance FromJSON Alt where
-    parseJSON = parseJSONText "Alt"
-
-instance ToJSON Alt where
     toJSON = toJSONText

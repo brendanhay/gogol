@@ -32,12 +32,11 @@ module Network.Google.Resource.PlusDomains.People.Get
     -- * Request Lenses
     , pgQuotaUser
     , pgPrettyPrint
-    , pgUserIp
+    , pgUserIP
     , pgUserId
     , pgKey
-    , pgOauthToken
+    , pgOAuthToken
     , pgFields
-    , pgAlt
     ) where
 
 import           Network.Google.PlusDomains.Types
@@ -51,10 +50,10 @@ type PeopleGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Get '[JSON] Person
+                     QueryParam "alt" AltJSON :> Get '[JSON] Person
 
 -- | Get a person\'s profile.
 --
@@ -62,12 +61,11 @@ type PeopleGetResource =
 data PeopleGet' = PeopleGet'
     { _pgQuotaUser   :: !(Maybe Text)
     , _pgPrettyPrint :: !Bool
-    , _pgUserIp      :: !(Maybe Text)
+    , _pgUserIP      :: !(Maybe Text)
     , _pgUserId      :: !Text
-    , _pgKey         :: !(Maybe Text)
-    , _pgOauthToken  :: !(Maybe Text)
+    , _pgKey         :: !(Maybe Key)
+    , _pgOAuthToken  :: !(Maybe OAuthToken)
     , _pgFields      :: !(Maybe Text)
-    , _pgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PeopleGet'' with the minimum fields required to make a request.
@@ -78,17 +76,15 @@ data PeopleGet' = PeopleGet'
 --
 -- * 'pgPrettyPrint'
 --
--- * 'pgUserIp'
+-- * 'pgUserIP'
 --
 -- * 'pgUserId'
 --
 -- * 'pgKey'
 --
--- * 'pgOauthToken'
+-- * 'pgOAuthToken'
 --
 -- * 'pgFields'
---
--- * 'pgAlt'
 peopleGet'
     :: Text -- ^ 'userId'
     -> PeopleGet'
@@ -96,12 +92,11 @@ peopleGet' pPgUserId_ =
     PeopleGet'
     { _pgQuotaUser = Nothing
     , _pgPrettyPrint = True
-    , _pgUserIp = Nothing
+    , _pgUserIP = Nothing
     , _pgUserId = pPgUserId_
     , _pgKey = Nothing
-    , _pgOauthToken = Nothing
+    , _pgOAuthToken = Nothing
     , _pgFields = Nothing
-    , _pgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -119,8 +114,8 @@ pgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-pgUserIp :: Lens' PeopleGet' (Maybe Text)
-pgUserIp = lens _pgUserIp (\ s a -> s{_pgUserIp = a})
+pgUserIP :: Lens' PeopleGet' (Maybe Text)
+pgUserIP = lens _pgUserIP (\ s a -> s{_pgUserIP = a})
 
 -- | The ID of the person to get the profile for. The special value \"me\"
 -- can be used to indicate the authenticated user.
@@ -130,32 +125,32 @@ pgUserId = lens _pgUserId (\ s a -> s{_pgUserId = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pgKey :: Lens' PeopleGet' (Maybe Text)
+pgKey :: Lens' PeopleGet' (Maybe Key)
 pgKey = lens _pgKey (\ s a -> s{_pgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-pgOauthToken :: Lens' PeopleGet' (Maybe Text)
-pgOauthToken
-  = lens _pgOauthToken (\ s a -> s{_pgOauthToken = a})
+pgOAuthToken :: Lens' PeopleGet' (Maybe OAuthToken)
+pgOAuthToken
+  = lens _pgOAuthToken (\ s a -> s{_pgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 pgFields :: Lens' PeopleGet' (Maybe Text)
 pgFields = lens _pgFields (\ s a -> s{_pgFields = a})
 
--- | Data format for the response.
-pgAlt :: Lens' PeopleGet' Alt
-pgAlt = lens _pgAlt (\ s a -> s{_pgAlt = a})
+instance GoogleAuth PeopleGet' where
+        authKey = pgKey . _Just
+        authToken = pgOAuthToken . _Just
 
 instance GoogleRequest PeopleGet' where
         type Rs PeopleGet' = Person
         request = requestWithRoute defReq plusDomainsURL
         requestWithRoute r u PeopleGet'{..}
-          = go _pgQuotaUser (Just _pgPrettyPrint) _pgUserIp
+          = go _pgQuotaUser (Just _pgPrettyPrint) _pgUserIP
               _pgUserId
               _pgKey
-              _pgOauthToken
+              _pgOAuthToken
               _pgFields
-              (Just _pgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy PeopleGetResource)
                       r

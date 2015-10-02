@@ -19,7 +19,7 @@
 --
 -- | Deletes a GTM Rule.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersRulesDelete@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersRulesDelete@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Rules.Delete
     (
     -- * REST Resource
@@ -33,19 +33,18 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Rules.Delete
     , acrdQuotaUser
     , acrdPrettyPrint
     , acrdContainerId
-    , acrdUserIp
+    , acrdUserIP
     , acrdRuleId
     , acrdAccountId
     , acrdKey
-    , acrdOauthToken
+    , acrdOAuthToken
     , acrdFields
-    , acrdAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagmanagerAccountsContainersRulesDelete@ which the
+-- | A resource alias for @TagManagerAccountsContainersRulesDelete@ which the
 -- 'AccountsContainersRulesDelete'' request conforms to.
 type AccountsContainersRulesDeleteResource =
      "accounts" :>
@@ -57,10 +56,10 @@ type AccountsContainersRulesDeleteResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Delete '[JSON] ()
+                             QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a GTM Rule.
 --
@@ -69,13 +68,12 @@ data AccountsContainersRulesDelete' = AccountsContainersRulesDelete'
     { _acrdQuotaUser   :: !(Maybe Text)
     , _acrdPrettyPrint :: !Bool
     , _acrdContainerId :: !Text
-    , _acrdUserIp      :: !(Maybe Text)
+    , _acrdUserIP      :: !(Maybe Text)
     , _acrdRuleId      :: !Text
     , _acrdAccountId   :: !Text
-    , _acrdKey         :: !(Maybe Text)
-    , _acrdOauthToken  :: !(Maybe Text)
+    , _acrdKey         :: !(Maybe Key)
+    , _acrdOAuthToken  :: !(Maybe OAuthToken)
     , _acrdFields      :: !(Maybe Text)
-    , _acrdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersRulesDelete'' with the minimum fields required to make a request.
@@ -88,7 +86,7 @@ data AccountsContainersRulesDelete' = AccountsContainersRulesDelete'
 --
 -- * 'acrdContainerId'
 --
--- * 'acrdUserIp'
+-- * 'acrdUserIP'
 --
 -- * 'acrdRuleId'
 --
@@ -96,11 +94,9 @@ data AccountsContainersRulesDelete' = AccountsContainersRulesDelete'
 --
 -- * 'acrdKey'
 --
--- * 'acrdOauthToken'
+-- * 'acrdOAuthToken'
 --
 -- * 'acrdFields'
---
--- * 'acrdAlt'
 accountsContainersRulesDelete'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'ruleId'
@@ -111,13 +107,12 @@ accountsContainersRulesDelete' pAcrdContainerId_ pAcrdRuleId_ pAcrdAccountId_ =
     { _acrdQuotaUser = Nothing
     , _acrdPrettyPrint = True
     , _acrdContainerId = pAcrdContainerId_
-    , _acrdUserIp = Nothing
+    , _acrdUserIP = Nothing
     , _acrdRuleId = pAcrdRuleId_
     , _acrdAccountId = pAcrdAccountId_
     , _acrdKey = Nothing
-    , _acrdOauthToken = Nothing
+    , _acrdOAuthToken = Nothing
     , _acrdFields = Nothing
-    , _acrdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -142,9 +137,9 @@ acrdContainerId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-acrdUserIp :: Lens' AccountsContainersRulesDelete' (Maybe Text)
-acrdUserIp
-  = lens _acrdUserIp (\ s a -> s{_acrdUserIp = a})
+acrdUserIP :: Lens' AccountsContainersRulesDelete' (Maybe Text)
+acrdUserIP
+  = lens _acrdUserIP (\ s a -> s{_acrdUserIP = a})
 
 -- | The GTM Rule ID.
 acrdRuleId :: Lens' AccountsContainersRulesDelete' Text
@@ -160,23 +155,24 @@ acrdAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-acrdKey :: Lens' AccountsContainersRulesDelete' (Maybe Text)
+acrdKey :: Lens' AccountsContainersRulesDelete' (Maybe Key)
 acrdKey = lens _acrdKey (\ s a -> s{_acrdKey = a})
 
 -- | OAuth 2.0 token for the current user.
-acrdOauthToken :: Lens' AccountsContainersRulesDelete' (Maybe Text)
-acrdOauthToken
-  = lens _acrdOauthToken
-      (\ s a -> s{_acrdOauthToken = a})
+acrdOAuthToken :: Lens' AccountsContainersRulesDelete' (Maybe OAuthToken)
+acrdOAuthToken
+  = lens _acrdOAuthToken
+      (\ s a -> s{_acrdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 acrdFields :: Lens' AccountsContainersRulesDelete' (Maybe Text)
 acrdFields
   = lens _acrdFields (\ s a -> s{_acrdFields = a})
 
--- | Data format for the response.
-acrdAlt :: Lens' AccountsContainersRulesDelete' Alt
-acrdAlt = lens _acrdAlt (\ s a -> s{_acrdAlt = a})
+instance GoogleAuth AccountsContainersRulesDelete'
+         where
+        authKey = acrdKey . _Just
+        authToken = acrdOAuthToken . _Just
 
 instance GoogleRequest AccountsContainersRulesDelete'
          where
@@ -186,13 +182,13 @@ instance GoogleRequest AccountsContainersRulesDelete'
           AccountsContainersRulesDelete'{..}
           = go _acrdQuotaUser (Just _acrdPrettyPrint)
               _acrdContainerId
-              _acrdUserIp
+              _acrdUserIP
               _acrdRuleId
               _acrdAccountId
               _acrdKey
-              _acrdOauthToken
+              _acrdOAuthToken
               _acrdFields
-              (Just _acrdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

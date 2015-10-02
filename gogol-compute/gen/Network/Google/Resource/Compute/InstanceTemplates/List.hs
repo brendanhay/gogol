@@ -34,14 +34,13 @@ module Network.Google.Resource.Compute.InstanceTemplates.List
     , itlQuotaUser
     , itlPrettyPrint
     , itlProject
-    , itlUserIp
+    , itlUserIP
     , itlKey
     , itlFilter
     , itlPageToken
-    , itlOauthToken
+    , itlOAuthToken
     , itlMaxResults
     , itlFields
-    , itlAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -56,13 +55,13 @@ type InstanceTemplatesListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "filter" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "maxResults" Word32 :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :>
+                             QueryParam "alt" AltJSON :>
                                Get '[JSON] InstanceTemplateList
 
 -- | Retrieves a list of instance templates that are contained within the
@@ -73,14 +72,13 @@ data InstanceTemplatesList' = InstanceTemplatesList'
     { _itlQuotaUser   :: !(Maybe Text)
     , _itlPrettyPrint :: !Bool
     , _itlProject     :: !Text
-    , _itlUserIp      :: !(Maybe Text)
-    , _itlKey         :: !(Maybe Text)
+    , _itlUserIP      :: !(Maybe Text)
+    , _itlKey         :: !(Maybe Key)
     , _itlFilter      :: !(Maybe Text)
     , _itlPageToken   :: !(Maybe Text)
-    , _itlOauthToken  :: !(Maybe Text)
+    , _itlOAuthToken  :: !(Maybe OAuthToken)
     , _itlMaxResults  :: !Word32
     , _itlFields      :: !(Maybe Text)
-    , _itlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceTemplatesList'' with the minimum fields required to make a request.
@@ -93,7 +91,7 @@ data InstanceTemplatesList' = InstanceTemplatesList'
 --
 -- * 'itlProject'
 --
--- * 'itlUserIp'
+-- * 'itlUserIP'
 --
 -- * 'itlKey'
 --
@@ -101,13 +99,11 @@ data InstanceTemplatesList' = InstanceTemplatesList'
 --
 -- * 'itlPageToken'
 --
--- * 'itlOauthToken'
+-- * 'itlOAuthToken'
 --
 -- * 'itlMaxResults'
 --
 -- * 'itlFields'
---
--- * 'itlAlt'
 instanceTemplatesList'
     :: Text -- ^ 'project'
     -> InstanceTemplatesList'
@@ -116,14 +112,13 @@ instanceTemplatesList' pItlProject_ =
     { _itlQuotaUser = Nothing
     , _itlPrettyPrint = True
     , _itlProject = pItlProject_
-    , _itlUserIp = Nothing
+    , _itlUserIP = Nothing
     , _itlKey = Nothing
     , _itlFilter = Nothing
     , _itlPageToken = Nothing
-    , _itlOauthToken = Nothing
+    , _itlOAuthToken = Nothing
     , _itlMaxResults = 500
     , _itlFields = Nothing
-    , _itlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -146,14 +141,14 @@ itlProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-itlUserIp :: Lens' InstanceTemplatesList' (Maybe Text)
-itlUserIp
-  = lens _itlUserIp (\ s a -> s{_itlUserIp = a})
+itlUserIP :: Lens' InstanceTemplatesList' (Maybe Text)
+itlUserIP
+  = lens _itlUserIP (\ s a -> s{_itlUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-itlKey :: Lens' InstanceTemplatesList' (Maybe Text)
+itlKey :: Lens' InstanceTemplatesList' (Maybe Key)
 itlKey = lens _itlKey (\ s a -> s{_itlKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
@@ -179,10 +174,10 @@ itlPageToken
   = lens _itlPageToken (\ s a -> s{_itlPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-itlOauthToken :: Lens' InstanceTemplatesList' (Maybe Text)
-itlOauthToken
-  = lens _itlOauthToken
-      (\ s a -> s{_itlOauthToken = a})
+itlOAuthToken :: Lens' InstanceTemplatesList' (Maybe OAuthToken)
+itlOAuthToken
+  = lens _itlOAuthToken
+      (\ s a -> s{_itlOAuthToken = a})
 
 -- | Maximum count of results to be returned.
 itlMaxResults :: Lens' InstanceTemplatesList' Word32
@@ -195,23 +190,23 @@ itlFields :: Lens' InstanceTemplatesList' (Maybe Text)
 itlFields
   = lens _itlFields (\ s a -> s{_itlFields = a})
 
--- | Data format for the response.
-itlAlt :: Lens' InstanceTemplatesList' Alt
-itlAlt = lens _itlAlt (\ s a -> s{_itlAlt = a})
+instance GoogleAuth InstanceTemplatesList' where
+        authKey = itlKey . _Just
+        authToken = itlOAuthToken . _Just
 
 instance GoogleRequest InstanceTemplatesList' where
         type Rs InstanceTemplatesList' = InstanceTemplateList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstanceTemplatesList'{..}
           = go _itlQuotaUser (Just _itlPrettyPrint) _itlProject
-              _itlUserIp
+              _itlUserIP
               _itlKey
               _itlFilter
               _itlPageToken
-              _itlOauthToken
+              _itlOAuthToken
               (Just _itlMaxResults)
               _itlFields
-              (Just _itlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InstanceTemplatesListResource)

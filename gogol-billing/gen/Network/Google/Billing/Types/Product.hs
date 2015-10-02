@@ -170,7 +170,7 @@ instance ToJSON ProjectBillingInfo where
 -- /See:/ 'listProjectBillingInfoResponse' smart constructor.
 data ListProjectBillingInfoResponse = ListProjectBillingInfoResponse
     { _lpbirNextPageToken      :: !(Maybe Text)
-    , _lpbirProjectBillingInfo :: !(Maybe [Maybe ProjectBillingInfo])
+    , _lpbirProjectBillingInfo :: !(Maybe [ProjectBillingInfo])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListProjectBillingInfoResponse' with the minimum fields required to make a request.
@@ -199,7 +199,7 @@ lpbirNextPageToken
 
 -- | A list of \`ProjectBillingInfo\` resources representing the projects
 -- associated with the billing account.
-lpbirProjectBillingInfo :: Lens' ListProjectBillingInfoResponse [Maybe ProjectBillingInfo]
+lpbirProjectBillingInfo :: Lens' ListProjectBillingInfoResponse [ProjectBillingInfo]
 lpbirProjectBillingInfo
   = lens _lpbirProjectBillingInfo
       (\ s a -> s{_lpbirProjectBillingInfo = a})
@@ -228,7 +228,7 @@ instance ToJSON ListProjectBillingInfoResponse where
 -- /See:/ 'listBillingAccountsResponse' smart constructor.
 data ListBillingAccountsResponse = ListBillingAccountsResponse
     { _lbarNextPageToken   :: !(Maybe Text)
-    , _lbarBillingAccounts :: !(Maybe [Maybe BillingAccount])
+    , _lbarBillingAccounts :: !(Maybe [BillingAccount])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListBillingAccountsResponse' with the minimum fields required to make a request.
@@ -256,7 +256,7 @@ lbarNextPageToken
       (\ s a -> s{_lbarNextPageToken = a})
 
 -- | A list of billing accounts.
-lbarBillingAccounts :: Lens' ListBillingAccountsResponse [Maybe BillingAccount]
+lbarBillingAccounts :: Lens' ListBillingAccountsResponse [BillingAccount]
 lbarBillingAccounts
   = lens _lbarBillingAccounts
       (\ s a -> s{_lbarBillingAccounts = a})

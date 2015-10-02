@@ -24,8 +24,8 @@ data URL = URL
     { _urlStatus    :: !(Maybe Text)
     , _urlKind      :: !Text
     , _urlCreated   :: !(Maybe Text)
-    , _urlAnalytics :: !(Maybe (Maybe AnalyticsSummary))
-    , _urlLongUrl   :: !(Maybe Text)
+    , _urlAnalytics :: !(Maybe AnalyticsSummary)
+    , _urlLongURL   :: !(Maybe Text)
     , _urlId        :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -41,7 +41,7 @@ data URL = URL
 --
 -- * 'urlAnalytics'
 --
--- * 'urlLongUrl'
+-- * 'urlLongURL'
 --
 -- * 'urlId'
 uRL
@@ -52,7 +52,7 @@ uRL =
     , _urlKind = "urlshortener#url"
     , _urlCreated = Nothing
     , _urlAnalytics = Nothing
-    , _urlLongUrl = Nothing
+    , _urlLongURL = Nothing
     , _urlId = Nothing
     }
 
@@ -76,15 +76,15 @@ urlCreated
 
 -- | A summary of the click analytics for the short and long URL. Might not
 -- be present if not requested or currently unavailable.
-urlAnalytics :: Lens' URL (Maybe (Maybe AnalyticsSummary))
+urlAnalytics :: Lens' URL (Maybe AnalyticsSummary)
 urlAnalytics
   = lens _urlAnalytics (\ s a -> s{_urlAnalytics = a})
 
 -- | Long URL, e.g. \"http:\/\/www.google.com\/\". Might not be present if
 -- the status is \"REMOVED\".
-urlLongUrl :: Lens' URL (Maybe Text)
-urlLongUrl
-  = lens _urlLongUrl (\ s a -> s{_urlLongUrl = a})
+urlLongURL :: Lens' URL (Maybe Text)
+urlLongURL
+  = lens _urlLongURL (\ s a -> s{_urlLongURL = a})
 
 -- | Short URL, e.g. \"http:\/\/goo.gl\/l6MS\".
 urlId :: Lens' URL (Maybe Text)
@@ -110,7 +110,7 @@ instance ToJSON URL where
                   Just ("kind" .= _urlKind),
                   ("created" .=) <$> _urlCreated,
                   ("analytics" .=) <$> _urlAnalytics,
-                  ("longUrl" .=) <$> _urlLongUrl,
+                  ("longUrl" .=) <$> _urlLongURL,
                   ("id" .=) <$> _urlId])
 
 --
@@ -159,12 +159,12 @@ instance ToJSON StringCount where
 --
 -- /See:/ 'analyticsSnapshot' smart constructor.
 data AnalyticsSnapshot = AnalyticsSnapshot
-    { _asPlatforms      :: !(Maybe [Maybe StringCount])
-    , _asShortUrlClicks :: !(Maybe Int64)
-    , _asReferrers      :: !(Maybe [Maybe StringCount])
-    , _asCountries      :: !(Maybe [Maybe StringCount])
-    , _asLongUrlClicks  :: !(Maybe Int64)
-    , _asBrowsers       :: !(Maybe [Maybe StringCount])
+    { _asPlatforms      :: !(Maybe [StringCount])
+    , _asShortURLClicks :: !(Maybe Int64)
+    , _asReferrers      :: !(Maybe [StringCount])
+    , _asCountries      :: !(Maybe [StringCount])
+    , _asLongURLClicks  :: !(Maybe Int64)
+    , _asBrowsers       :: !(Maybe [StringCount])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnalyticsSnapshot' with the minimum fields required to make a request.
@@ -173,13 +173,13 @@ data AnalyticsSnapshot = AnalyticsSnapshot
 --
 -- * 'asPlatforms'
 --
--- * 'asShortUrlClicks'
+-- * 'asShortURLClicks'
 --
 -- * 'asReferrers'
 --
 -- * 'asCountries'
 --
--- * 'asLongUrlClicks'
+-- * 'asLongURLClicks'
 --
 -- * 'asBrowsers'
 analyticsSnapshot
@@ -187,30 +187,30 @@ analyticsSnapshot
 analyticsSnapshot =
     AnalyticsSnapshot
     { _asPlatforms = Nothing
-    , _asShortUrlClicks = Nothing
+    , _asShortURLClicks = Nothing
     , _asReferrers = Nothing
     , _asCountries = Nothing
-    , _asLongUrlClicks = Nothing
+    , _asLongURLClicks = Nothing
     , _asBrowsers = Nothing
     }
 
 -- | Top platforms or OSes, e.g. \"Windows\"; sorted by (descending) click
 -- counts. Only present if this data is available.
-asPlatforms :: Lens' AnalyticsSnapshot [Maybe StringCount]
+asPlatforms :: Lens' AnalyticsSnapshot [StringCount]
 asPlatforms
   = lens _asPlatforms (\ s a -> s{_asPlatforms = a}) .
       _Default
       . _Coerce
 
 -- | Number of clicks on this short URL.
-asShortUrlClicks :: Lens' AnalyticsSnapshot (Maybe Int64)
-asShortUrlClicks
-  = lens _asShortUrlClicks
-      (\ s a -> s{_asShortUrlClicks = a})
+asShortURLClicks :: Lens' AnalyticsSnapshot (Maybe Int64)
+asShortURLClicks
+  = lens _asShortURLClicks
+      (\ s a -> s{_asShortURLClicks = a})
 
 -- | Top referring hosts, e.g. \"www.google.com\"; sorted by (descending)
 -- click counts. Only present if this data is available.
-asReferrers :: Lens' AnalyticsSnapshot [Maybe StringCount]
+asReferrers :: Lens' AnalyticsSnapshot [StringCount]
 asReferrers
   = lens _asReferrers (\ s a -> s{_asReferrers = a}) .
       _Default
@@ -219,21 +219,21 @@ asReferrers
 -- | Top countries (expressed as country codes), e.g. \"US\" or \"DE\";
 -- sorted by (descending) click counts. Only present if this data is
 -- available.
-asCountries :: Lens' AnalyticsSnapshot [Maybe StringCount]
+asCountries :: Lens' AnalyticsSnapshot [StringCount]
 asCountries
   = lens _asCountries (\ s a -> s{_asCountries = a}) .
       _Default
       . _Coerce
 
 -- | Number of clicks on all goo.gl short URLs pointing to this long URL.
-asLongUrlClicks :: Lens' AnalyticsSnapshot (Maybe Int64)
-asLongUrlClicks
-  = lens _asLongUrlClicks
-      (\ s a -> s{_asLongUrlClicks = a})
+asLongURLClicks :: Lens' AnalyticsSnapshot (Maybe Int64)
+asLongURLClicks
+  = lens _asLongURLClicks
+      (\ s a -> s{_asLongURLClicks = a})
 
 -- | Top browsers, e.g. \"Chrome\"; sorted by (descending) click counts. Only
 -- present if this data is available.
-asBrowsers :: Lens' AnalyticsSnapshot [Maybe StringCount]
+asBrowsers :: Lens' AnalyticsSnapshot [StringCount]
 asBrowsers
   = lens _asBrowsers (\ s a -> s{_asBrowsers = a}) .
       _Default
@@ -256,20 +256,20 @@ instance ToJSON AnalyticsSnapshot where
           = object
               (catMaybes
                  [("platforms" .=) <$> _asPlatforms,
-                  ("shortUrlClicks" .=) <$> _asShortUrlClicks,
+                  ("shortUrlClicks" .=) <$> _asShortURLClicks,
                   ("referrers" .=) <$> _asReferrers,
                   ("countries" .=) <$> _asCountries,
-                  ("longUrlClicks" .=) <$> _asLongUrlClicks,
+                  ("longUrlClicks" .=) <$> _asLongURLClicks,
                   ("browsers" .=) <$> _asBrowsers])
 
 --
 -- /See:/ 'analyticsSummary' smart constructor.
 data AnalyticsSummary = AnalyticsSummary
-    { _asWeek     :: !(Maybe (Maybe AnalyticsSnapshot))
-    , _asAllTime  :: !(Maybe (Maybe AnalyticsSnapshot))
-    , _asDay      :: !(Maybe (Maybe AnalyticsSnapshot))
-    , _asTwoHours :: !(Maybe (Maybe AnalyticsSnapshot))
-    , _asMonth    :: !(Maybe (Maybe AnalyticsSnapshot))
+    { _asWeek     :: !(Maybe AnalyticsSnapshot)
+    , _asAllTime  :: !(Maybe AnalyticsSnapshot)
+    , _asDay      :: !(Maybe AnalyticsSnapshot)
+    , _asTwoHours :: !(Maybe AnalyticsSnapshot)
+    , _asMonth    :: !(Maybe AnalyticsSnapshot)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnalyticsSummary' with the minimum fields required to make a request.
@@ -297,25 +297,25 @@ analyticsSummary =
     }
 
 -- | Click analytics over the last week.
-asWeek :: Lens' AnalyticsSummary (Maybe (Maybe AnalyticsSnapshot))
+asWeek :: Lens' AnalyticsSummary (Maybe AnalyticsSnapshot)
 asWeek = lens _asWeek (\ s a -> s{_asWeek = a})
 
 -- | Click analytics over all time.
-asAllTime :: Lens' AnalyticsSummary (Maybe (Maybe AnalyticsSnapshot))
+asAllTime :: Lens' AnalyticsSummary (Maybe AnalyticsSnapshot)
 asAllTime
   = lens _asAllTime (\ s a -> s{_asAllTime = a})
 
 -- | Click analytics over the last day.
-asDay :: Lens' AnalyticsSummary (Maybe (Maybe AnalyticsSnapshot))
+asDay :: Lens' AnalyticsSummary (Maybe AnalyticsSnapshot)
 asDay = lens _asDay (\ s a -> s{_asDay = a})
 
 -- | Click analytics over the last two hours.
-asTwoHours :: Lens' AnalyticsSummary (Maybe (Maybe AnalyticsSnapshot))
+asTwoHours :: Lens' AnalyticsSummary (Maybe AnalyticsSnapshot)
 asTwoHours
   = lens _asTwoHours (\ s a -> s{_asTwoHours = a})
 
 -- | Click analytics over the last month.
-asMonth :: Lens' AnalyticsSummary (Maybe (Maybe AnalyticsSnapshot))
+asMonth :: Lens' AnalyticsSummary (Maybe AnalyticsSnapshot)
 asMonth = lens _asMonth (\ s a -> s{_asMonth = a})
 
 instance FromJSON AnalyticsSummary where
@@ -344,7 +344,7 @@ data URLHistory = URLHistory
     , _uhNextPageToken :: !(Maybe Text)
     , _uhItemsPerPage  :: !(Maybe Int32)
     , _uhKind          :: !Text
-    , _uhItems         :: !(Maybe [Maybe URL])
+    , _uhItems         :: !(Maybe [URL])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLHistory' with the minimum fields required to make a request.
@@ -395,7 +395,7 @@ uhKind :: Lens' URLHistory Text
 uhKind = lens _uhKind (\ s a -> s{_uhKind = a})
 
 -- | A list of URL resources.
-uhItems :: Lens' URLHistory [Maybe URL]
+uhItems :: Lens' URLHistory [URL]
 uhItems
   = lens _uhItems (\ s a -> s{_uhItems = a}) . _Default
       . _Coerce

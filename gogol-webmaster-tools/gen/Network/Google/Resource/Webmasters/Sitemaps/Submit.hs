@@ -33,12 +33,11 @@ module Network.Google.Resource.Webmasters.Sitemaps.Submit
     , ssQuotaUser
     , ssPrettyPrint
     , ssFeedpath
-    , ssUserIp
-    , ssSiteUrl
+    , ssUserIP
+    , ssSiteURL
     , ssKey
-    , ssOauthToken
+    , ssOAuthToken
     , ssFields
-    , ssAlt
     ) where
 
 import           Network.Google.Prelude
@@ -54,10 +53,10 @@ type SitemapsSubmitResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Put '[JSON] ()
+                         QueryParam "alt" AltJSON :> Put '[JSON] ()
 
 -- | Submits a sitemap for a site.
 --
@@ -66,12 +65,11 @@ data SitemapsSubmit' = SitemapsSubmit'
     { _ssQuotaUser   :: !(Maybe Text)
     , _ssPrettyPrint :: !Bool
     , _ssFeedpath    :: !Text
-    , _ssUserIp      :: !(Maybe Text)
-    , _ssSiteUrl     :: !Text
-    , _ssKey         :: !(Maybe Text)
-    , _ssOauthToken  :: !(Maybe Text)
+    , _ssUserIP      :: !(Maybe Text)
+    , _ssSiteURL     :: !Text
+    , _ssKey         :: !(Maybe Key)
+    , _ssOAuthToken  :: !(Maybe OAuthToken)
     , _ssFields      :: !(Maybe Text)
-    , _ssAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SitemapsSubmit'' with the minimum fields required to make a request.
@@ -84,32 +82,29 @@ data SitemapsSubmit' = SitemapsSubmit'
 --
 -- * 'ssFeedpath'
 --
--- * 'ssUserIp'
+-- * 'ssUserIP'
 --
--- * 'ssSiteUrl'
+-- * 'ssSiteURL'
 --
 -- * 'ssKey'
 --
--- * 'ssOauthToken'
+-- * 'ssOAuthToken'
 --
 -- * 'ssFields'
---
--- * 'ssAlt'
 sitemapsSubmit'
     :: Text -- ^ 'feedpath'
     -> Text -- ^ 'siteUrl'
     -> SitemapsSubmit'
-sitemapsSubmit' pSsFeedpath_ pSsSiteUrl_ =
+sitemapsSubmit' pSsFeedpath_ pSsSiteURL_ =
     SitemapsSubmit'
     { _ssQuotaUser = Nothing
     , _ssPrettyPrint = True
     , _ssFeedpath = pSsFeedpath_
-    , _ssUserIp = Nothing
-    , _ssSiteUrl = pSsSiteUrl_
+    , _ssUserIP = Nothing
+    , _ssSiteURL = pSsSiteURL_
     , _ssKey = Nothing
-    , _ssOauthToken = Nothing
+    , _ssOAuthToken = Nothing
     , _ssFields = Nothing
-    , _ssAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -133,45 +128,45 @@ ssFeedpath
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ssUserIp :: Lens' SitemapsSubmit' (Maybe Text)
-ssUserIp = lens _ssUserIp (\ s a -> s{_ssUserIp = a})
+ssUserIP :: Lens' SitemapsSubmit' (Maybe Text)
+ssUserIP = lens _ssUserIP (\ s a -> s{_ssUserIP = a})
 
 -- | The site\'s URL, including protocol. For example:
 -- http:\/\/www.example.com\/
-ssSiteUrl :: Lens' SitemapsSubmit' Text
-ssSiteUrl
-  = lens _ssSiteUrl (\ s a -> s{_ssSiteUrl = a})
+ssSiteURL :: Lens' SitemapsSubmit' Text
+ssSiteURL
+  = lens _ssSiteURL (\ s a -> s{_ssSiteURL = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ssKey :: Lens' SitemapsSubmit' (Maybe Text)
+ssKey :: Lens' SitemapsSubmit' (Maybe Key)
 ssKey = lens _ssKey (\ s a -> s{_ssKey = a})
 
 -- | OAuth 2.0 token for the current user.
-ssOauthToken :: Lens' SitemapsSubmit' (Maybe Text)
-ssOauthToken
-  = lens _ssOauthToken (\ s a -> s{_ssOauthToken = a})
+ssOAuthToken :: Lens' SitemapsSubmit' (Maybe OAuthToken)
+ssOAuthToken
+  = lens _ssOAuthToken (\ s a -> s{_ssOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ssFields :: Lens' SitemapsSubmit' (Maybe Text)
 ssFields = lens _ssFields (\ s a -> s{_ssFields = a})
 
--- | Data format for the response.
-ssAlt :: Lens' SitemapsSubmit' Alt
-ssAlt = lens _ssAlt (\ s a -> s{_ssAlt = a})
+instance GoogleAuth SitemapsSubmit' where
+        authKey = ssKey . _Just
+        authToken = ssOAuthToken . _Just
 
 instance GoogleRequest SitemapsSubmit' where
         type Rs SitemapsSubmit' = ()
         request = requestWithRoute defReq webmasterToolsURL
         requestWithRoute r u SitemapsSubmit'{..}
           = go _ssQuotaUser (Just _ssPrettyPrint) _ssFeedpath
-              _ssUserIp
-              _ssSiteUrl
+              _ssUserIP
+              _ssSiteURL
               _ssKey
-              _ssOauthToken
+              _ssOAuthToken
               _ssFields
-              (Just _ssAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy SitemapsSubmitResource)

@@ -19,7 +19,7 @@
 --
 -- | Gets information about a specific deployment.
 --
--- /See:/ <https://developers.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentmanagerDeploymentsGet@.
+-- /See:/ <https://developers.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerDeploymentsGet@.
 module Network.Google.Resource.DeploymentManager.Deployments.Get
     (
     -- * REST Resource
@@ -33,18 +33,17 @@ module Network.Google.Resource.DeploymentManager.Deployments.Get
     , dgQuotaUser
     , dgPrettyPrint
     , dgProject
-    , dgUserIp
+    , dgUserIP
     , dgKey
-    , dgOauthToken
+    , dgOAuthToken
     , dgFields
-    , dgAlt
     , dgDeployment
     ) where
 
 import           Network.Google.DeploymentManager.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DeploymentmanagerDeploymentsGet@ which the
+-- | A resource alias for @DeploymentManagerDeploymentsGet@ which the
 -- 'DeploymentsGet'' request conforms to.
 type DeploymentsGetResource =
      Capture "project" Text :>
@@ -54,10 +53,10 @@ type DeploymentsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] Deployment
+                         QueryParam "alt" AltJSON :> Get '[JSON] Deployment
 
 -- | Gets information about a specific deployment.
 --
@@ -66,11 +65,10 @@ data DeploymentsGet' = DeploymentsGet'
     { _dgQuotaUser   :: !(Maybe Text)
     , _dgPrettyPrint :: !Bool
     , _dgProject     :: !Text
-    , _dgUserIp      :: !(Maybe Text)
-    , _dgKey         :: !(Maybe Text)
-    , _dgOauthToken  :: !(Maybe Text)
+    , _dgUserIP      :: !(Maybe Text)
+    , _dgKey         :: !(Maybe Key)
+    , _dgOAuthToken  :: !(Maybe OAuthToken)
     , _dgFields      :: !(Maybe Text)
-    , _dgAlt         :: !Alt
     , _dgDeployment  :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -84,15 +82,13 @@ data DeploymentsGet' = DeploymentsGet'
 --
 -- * 'dgProject'
 --
--- * 'dgUserIp'
+-- * 'dgUserIP'
 --
 -- * 'dgKey'
 --
--- * 'dgOauthToken'
+-- * 'dgOAuthToken'
 --
 -- * 'dgFields'
---
--- * 'dgAlt'
 --
 -- * 'dgDeployment'
 deploymentsGet'
@@ -104,11 +100,10 @@ deploymentsGet' pDgProject_ pDgDeployment_ =
     { _dgQuotaUser = Nothing
     , _dgPrettyPrint = True
     , _dgProject = pDgProject_
-    , _dgUserIp = Nothing
+    , _dgUserIP = Nothing
     , _dgKey = Nothing
-    , _dgOauthToken = Nothing
+    , _dgOAuthToken = Nothing
     , _dgFields = Nothing
-    , _dgAlt = JSON
     , _dgDeployment = pDgDeployment_
     }
 
@@ -132,32 +127,32 @@ dgProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-dgUserIp :: Lens' DeploymentsGet' (Maybe Text)
-dgUserIp = lens _dgUserIp (\ s a -> s{_dgUserIp = a})
+dgUserIP :: Lens' DeploymentsGet' (Maybe Text)
+dgUserIP = lens _dgUserIP (\ s a -> s{_dgUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dgKey :: Lens' DeploymentsGet' (Maybe Text)
+dgKey :: Lens' DeploymentsGet' (Maybe Key)
 dgKey = lens _dgKey (\ s a -> s{_dgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-dgOauthToken :: Lens' DeploymentsGet' (Maybe Text)
-dgOauthToken
-  = lens _dgOauthToken (\ s a -> s{_dgOauthToken = a})
+dgOAuthToken :: Lens' DeploymentsGet' (Maybe OAuthToken)
+dgOAuthToken
+  = lens _dgOAuthToken (\ s a -> s{_dgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 dgFields :: Lens' DeploymentsGet' (Maybe Text)
 dgFields = lens _dgFields (\ s a -> s{_dgFields = a})
 
--- | Data format for the response.
-dgAlt :: Lens' DeploymentsGet' Alt
-dgAlt = lens _dgAlt (\ s a -> s{_dgAlt = a})
-
 -- | The name of the deployment for this request.
 dgDeployment :: Lens' DeploymentsGet' Text
 dgDeployment
   = lens _dgDeployment (\ s a -> s{_dgDeployment = a})
+
+instance GoogleAuth DeploymentsGet' where
+        authKey = dgKey . _Just
+        authToken = dgOAuthToken . _Just
 
 instance GoogleRequest DeploymentsGet' where
         type Rs DeploymentsGet' = Deployment
@@ -165,12 +160,12 @@ instance GoogleRequest DeploymentsGet' where
           = requestWithRoute defReq deploymentManagerURL
         requestWithRoute r u DeploymentsGet'{..}
           = go _dgQuotaUser (Just _dgPrettyPrint) _dgProject
-              _dgUserIp
+              _dgUserIP
               _dgKey
-              _dgOauthToken
+              _dgOAuthToken
               _dgFields
-              (Just _dgAlt)
               _dgDeployment
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy DeploymentsGetResource)

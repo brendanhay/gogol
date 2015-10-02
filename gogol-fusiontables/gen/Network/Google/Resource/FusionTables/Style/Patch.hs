@@ -32,13 +32,13 @@ module Network.Google.Resource.FusionTables.Style.Patch
     -- * Request Lenses
     , spQuotaUser
     , spPrettyPrint
-    , spUserIp
+    , spUserIP
+    , spStyleSetting
     , spKey
     , spStyleId
-    , spOauthToken
+    , spOAuthToken
     , spTableId
     , spFields
-    , spAlt
     ) where
 
 import           Network.Google.FusionTables.Types
@@ -54,24 +54,26 @@ type StylePatchResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Patch '[JSON] StyleSetting
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] StyleSetting :>
+                             Patch '[JSON] StyleSetting
 
 -- | Updates an existing style. This method supports patch semantics.
 --
 -- /See:/ 'stylePatch'' smart constructor.
 data StylePatch' = StylePatch'
-    { _spQuotaUser   :: !(Maybe Text)
-    , _spPrettyPrint :: !Bool
-    , _spUserIp      :: !(Maybe Text)
-    , _spKey         :: !(Maybe Text)
-    , _spStyleId     :: !Int32
-    , _spOauthToken  :: !(Maybe Text)
-    , _spTableId     :: !Text
-    , _spFields      :: !(Maybe Text)
-    , _spAlt         :: !Alt
+    { _spQuotaUser    :: !(Maybe Text)
+    , _spPrettyPrint  :: !Bool
+    , _spUserIP       :: !(Maybe Text)
+    , _spStyleSetting :: !StyleSetting
+    , _spKey          :: !(Maybe Key)
+    , _spStyleId      :: !Int32
+    , _spOAuthToken   :: !(Maybe OAuthToken)
+    , _spTableId      :: !Text
+    , _spFields       :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StylePatch'' with the minimum fields required to make a request.
@@ -82,34 +84,35 @@ data StylePatch' = StylePatch'
 --
 -- * 'spPrettyPrint'
 --
--- * 'spUserIp'
+-- * 'spUserIP'
+--
+-- * 'spStyleSetting'
 --
 -- * 'spKey'
 --
 -- * 'spStyleId'
 --
--- * 'spOauthToken'
+-- * 'spOAuthToken'
 --
 -- * 'spTableId'
 --
 -- * 'spFields'
---
--- * 'spAlt'
 stylePatch'
-    :: Int32 -- ^ 'styleId'
+    :: StyleSetting -- ^ 'StyleSetting'
+    -> Int32 -- ^ 'styleId'
     -> Text -- ^ 'tableId'
     -> StylePatch'
-stylePatch' pSpStyleId_ pSpTableId_ =
+stylePatch' pSpStyleSetting_ pSpStyleId_ pSpTableId_ =
     StylePatch'
     { _spQuotaUser = Nothing
     , _spPrettyPrint = True
-    , _spUserIp = Nothing
+    , _spUserIP = Nothing
+    , _spStyleSetting = pSpStyleSetting_
     , _spKey = Nothing
     , _spStyleId = pSpStyleId_
-    , _spOauthToken = Nothing
+    , _spOAuthToken = Nothing
     , _spTableId = pSpTableId_
     , _spFields = Nothing
-    , _spAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,13 +130,19 @@ spPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-spUserIp :: Lens' StylePatch' (Maybe Text)
-spUserIp = lens _spUserIp (\ s a -> s{_spUserIp = a})
+spUserIP :: Lens' StylePatch' (Maybe Text)
+spUserIP = lens _spUserIP (\ s a -> s{_spUserIP = a})
+
+-- | Multipart request metadata.
+spStyleSetting :: Lens' StylePatch' StyleSetting
+spStyleSetting
+  = lens _spStyleSetting
+      (\ s a -> s{_spStyleSetting = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-spKey :: Lens' StylePatch' (Maybe Text)
+spKey :: Lens' StylePatch' (Maybe Key)
 spKey = lens _spKey (\ s a -> s{_spKey = a})
 
 -- | Identifier (within a table) for the style being updated.
@@ -142,9 +151,9 @@ spStyleId
   = lens _spStyleId (\ s a -> s{_spStyleId = a})
 
 -- | OAuth 2.0 token for the current user.
-spOauthToken :: Lens' StylePatch' (Maybe Text)
-spOauthToken
-  = lens _spOauthToken (\ s a -> s{_spOauthToken = a})
+spOAuthToken :: Lens' StylePatch' (Maybe OAuthToken)
+spOAuthToken
+  = lens _spOAuthToken (\ s a -> s{_spOAuthToken = a})
 
 -- | Table whose style is being updated.
 spTableId :: Lens' StylePatch' Text
@@ -155,21 +164,22 @@ spTableId
 spFields :: Lens' StylePatch' (Maybe Text)
 spFields = lens _spFields (\ s a -> s{_spFields = a})
 
--- | Data format for the response.
-spAlt :: Lens' StylePatch' Alt
-spAlt = lens _spAlt (\ s a -> s{_spAlt = a})
+instance GoogleAuth StylePatch' where
+        authKey = spKey . _Just
+        authToken = spOAuthToken . _Just
 
 instance GoogleRequest StylePatch' where
         type Rs StylePatch' = StyleSetting
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u StylePatch'{..}
-          = go _spQuotaUser (Just _spPrettyPrint) _spUserIp
+          = go _spQuotaUser (Just _spPrettyPrint) _spUserIP
               _spKey
               _spStyleId
-              _spOauthToken
+              _spOAuthToken
               _spTableId
               _spFields
-              (Just _spAlt)
+              (Just AltJSON)
+              _spStyleSetting
           where go
                   = clientWithRoute (Proxy :: Proxy StylePatchResource)
                       r

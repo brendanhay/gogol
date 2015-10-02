@@ -32,7 +32,7 @@ module Network.Google.Resource.DFAReporting.PlacementStrategies.List
     -- * Request Lenses
     , pslQuotaUser
     , pslPrettyPrint
-    , pslUserIp
+    , pslUserIP
     , pslSearchString
     , pslIds
     , pslProfileId
@@ -40,10 +40,9 @@ module Network.Google.Resource.DFAReporting.PlacementStrategies.List
     , pslKey
     , pslPageToken
     , pslSortField
-    , pslOauthToken
+    , pslOAuthToken
     , pslMaxResults
     , pslFields
-    , pslAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -63,15 +62,15 @@ type PlacementStrategiesListResource =
                      QueryParam "sortOrder"
                        DfareportingPlacementStrategiesListSortOrder
                        :>
-                       QueryParam "key" Text :>
+                       QueryParam "key" Key :>
                          QueryParam "pageToken" Text :>
                            QueryParam "sortField"
                              DfareportingPlacementStrategiesListSortField
                              :>
-                             QueryParam "oauth_token" Text :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "maxResults" Int32 :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "alt" Alt :>
+                                   QueryParam "alt" AltJSON :>
                                      Get '[JSON] PlacementStrategiesListResponse
 
 -- | Retrieves a list of placement strategies, possibly filtered.
@@ -80,18 +79,17 @@ type PlacementStrategiesListResource =
 data PlacementStrategiesList' = PlacementStrategiesList'
     { _pslQuotaUser    :: !(Maybe Text)
     , _pslPrettyPrint  :: !Bool
-    , _pslUserIp       :: !(Maybe Text)
+    , _pslUserIP       :: !(Maybe Text)
     , _pslSearchString :: !(Maybe Text)
     , _pslIds          :: !(Maybe Int64)
     , _pslProfileId    :: !Int64
     , _pslSortOrder    :: !(Maybe DfareportingPlacementStrategiesListSortOrder)
-    , _pslKey          :: !(Maybe Text)
+    , _pslKey          :: !(Maybe Key)
     , _pslPageToken    :: !(Maybe Text)
     , _pslSortField    :: !(Maybe DfareportingPlacementStrategiesListSortField)
-    , _pslOauthToken   :: !(Maybe Text)
+    , _pslOAuthToken   :: !(Maybe OAuthToken)
     , _pslMaxResults   :: !(Maybe Int32)
     , _pslFields       :: !(Maybe Text)
-    , _pslAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementStrategiesList'' with the minimum fields required to make a request.
@@ -102,7 +100,7 @@ data PlacementStrategiesList' = PlacementStrategiesList'
 --
 -- * 'pslPrettyPrint'
 --
--- * 'pslUserIp'
+-- * 'pslUserIP'
 --
 -- * 'pslSearchString'
 --
@@ -118,13 +116,11 @@ data PlacementStrategiesList' = PlacementStrategiesList'
 --
 -- * 'pslSortField'
 --
--- * 'pslOauthToken'
+-- * 'pslOAuthToken'
 --
 -- * 'pslMaxResults'
 --
 -- * 'pslFields'
---
--- * 'pslAlt'
 placementStrategiesList'
     :: Int64 -- ^ 'profileId'
     -> PlacementStrategiesList'
@@ -132,7 +128,7 @@ placementStrategiesList' pPslProfileId_ =
     PlacementStrategiesList'
     { _pslQuotaUser = Nothing
     , _pslPrettyPrint = True
-    , _pslUserIp = Nothing
+    , _pslUserIP = Nothing
     , _pslSearchString = Nothing
     , _pslIds = Nothing
     , _pslProfileId = pPslProfileId_
@@ -140,10 +136,9 @@ placementStrategiesList' pPslProfileId_ =
     , _pslKey = Nothing
     , _pslPageToken = Nothing
     , _pslSortField = Nothing
-    , _pslOauthToken = Nothing
+    , _pslOAuthToken = Nothing
     , _pslMaxResults = Nothing
     , _pslFields = Nothing
-    , _pslAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -161,9 +156,9 @@ pslPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-pslUserIp :: Lens' PlacementStrategiesList' (Maybe Text)
-pslUserIp
-  = lens _pslUserIp (\ s a -> s{_pslUserIp = a})
+pslUserIP :: Lens' PlacementStrategiesList' (Maybe Text)
+pslUserIP
+  = lens _pslUserIP (\ s a -> s{_pslUserIP = a})
 
 -- | Allows searching for objects by name or ID. Wildcards (*) are allowed.
 -- For example, \"placementstrategy*2015\" will return objects with names
@@ -195,7 +190,7 @@ pslSortOrder
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pslKey :: Lens' PlacementStrategiesList' (Maybe Text)
+pslKey :: Lens' PlacementStrategiesList' (Maybe Key)
 pslKey = lens _pslKey (\ s a -> s{_pslKey = a})
 
 -- | Value of the nextPageToken from the previous result page.
@@ -209,10 +204,10 @@ pslSortField
   = lens _pslSortField (\ s a -> s{_pslSortField = a})
 
 -- | OAuth 2.0 token for the current user.
-pslOauthToken :: Lens' PlacementStrategiesList' (Maybe Text)
-pslOauthToken
-  = lens _pslOauthToken
-      (\ s a -> s{_pslOauthToken = a})
+pslOAuthToken :: Lens' PlacementStrategiesList' (Maybe OAuthToken)
+pslOAuthToken
+  = lens _pslOAuthToken
+      (\ s a -> s{_pslOAuthToken = a})
 
 -- | Maximum number of results to return.
 pslMaxResults :: Lens' PlacementStrategiesList' (Maybe Int32)
@@ -225,16 +220,16 @@ pslFields :: Lens' PlacementStrategiesList' (Maybe Text)
 pslFields
   = lens _pslFields (\ s a -> s{_pslFields = a})
 
--- | Data format for the response.
-pslAlt :: Lens' PlacementStrategiesList' Alt
-pslAlt = lens _pslAlt (\ s a -> s{_pslAlt = a})
+instance GoogleAuth PlacementStrategiesList' where
+        authKey = pslKey . _Just
+        authToken = pslOAuthToken . _Just
 
 instance GoogleRequest PlacementStrategiesList' where
         type Rs PlacementStrategiesList' =
              PlacementStrategiesListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlacementStrategiesList'{..}
-          = go _pslQuotaUser (Just _pslPrettyPrint) _pslUserIp
+          = go _pslQuotaUser (Just _pslPrettyPrint) _pslUserIP
               _pslSearchString
               _pslIds
               _pslProfileId
@@ -242,10 +237,10 @@ instance GoogleRequest PlacementStrategiesList' where
               _pslKey
               _pslPageToken
               _pslSortField
-              _pslOauthToken
+              _pslOAuthToken
               _pslMaxResults
               _pslFields
-              (Just _pslAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PlacementStrategiesListResource)

@@ -33,11 +33,10 @@ module Network.Google.Resource.AdSense.Savedadstyles.Get
     , sgQuotaUser
     , sgPrettyPrint
     , sgSavedAdStyleId
-    , sgUserIp
+    , sgUserIP
     , sgKey
-    , sgOauthToken
+    , sgOAuthToken
     , sgFields
-    , sgAlt
     ) where
 
 import           Network.Google.AdSense.Types
@@ -51,10 +50,10 @@ type SavedadstylesGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Get '[JSON] SavedAdStyle
+                     QueryParam "alt" AltJSON :> Get '[JSON] SavedAdStyle
 
 -- | Get a specific saved ad style from the user\'s account.
 --
@@ -63,11 +62,10 @@ data SavedadstylesGet' = SavedadstylesGet'
     { _sgQuotaUser      :: !(Maybe Text)
     , _sgPrettyPrint    :: !Bool
     , _sgSavedAdStyleId :: !Text
-    , _sgUserIp         :: !(Maybe Text)
-    , _sgKey            :: !(Maybe Text)
-    , _sgOauthToken     :: !(Maybe Text)
+    , _sgUserIP         :: !(Maybe Text)
+    , _sgKey            :: !(Maybe Key)
+    , _sgOAuthToken     :: !(Maybe OAuthToken)
     , _sgFields         :: !(Maybe Text)
-    , _sgAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SavedadstylesGet'' with the minimum fields required to make a request.
@@ -80,15 +78,13 @@ data SavedadstylesGet' = SavedadstylesGet'
 --
 -- * 'sgSavedAdStyleId'
 --
--- * 'sgUserIp'
+-- * 'sgUserIP'
 --
 -- * 'sgKey'
 --
--- * 'sgOauthToken'
+-- * 'sgOAuthToken'
 --
 -- * 'sgFields'
---
--- * 'sgAlt'
 savedadstylesGet'
     :: Text -- ^ 'savedAdStyleId'
     -> SavedadstylesGet'
@@ -97,11 +93,10 @@ savedadstylesGet' pSgSavedAdStyleId_ =
     { _sgQuotaUser = Nothing
     , _sgPrettyPrint = True
     , _sgSavedAdStyleId = pSgSavedAdStyleId_
-    , _sgUserIp = Nothing
+    , _sgUserIP = Nothing
     , _sgKey = Nothing
-    , _sgOauthToken = Nothing
+    , _sgOAuthToken = Nothing
     , _sgFields = Nothing
-    , _sgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -125,27 +120,27 @@ sgSavedAdStyleId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-sgUserIp :: Lens' SavedadstylesGet' (Maybe Text)
-sgUserIp = lens _sgUserIp (\ s a -> s{_sgUserIp = a})
+sgUserIP :: Lens' SavedadstylesGet' (Maybe Text)
+sgUserIP = lens _sgUserIP (\ s a -> s{_sgUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-sgKey :: Lens' SavedadstylesGet' (Maybe Text)
+sgKey :: Lens' SavedadstylesGet' (Maybe Key)
 sgKey = lens _sgKey (\ s a -> s{_sgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-sgOauthToken :: Lens' SavedadstylesGet' (Maybe Text)
-sgOauthToken
-  = lens _sgOauthToken (\ s a -> s{_sgOauthToken = a})
+sgOAuthToken :: Lens' SavedadstylesGet' (Maybe OAuthToken)
+sgOAuthToken
+  = lens _sgOAuthToken (\ s a -> s{_sgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 sgFields :: Lens' SavedadstylesGet' (Maybe Text)
 sgFields = lens _sgFields (\ s a -> s{_sgFields = a})
 
--- | Data format for the response.
-sgAlt :: Lens' SavedadstylesGet' Alt
-sgAlt = lens _sgAlt (\ s a -> s{_sgAlt = a})
+instance GoogleAuth SavedadstylesGet' where
+        authKey = sgKey . _Just
+        authToken = sgOAuthToken . _Just
 
 instance GoogleRequest SavedadstylesGet' where
         type Rs SavedadstylesGet' = SavedAdStyle
@@ -153,11 +148,11 @@ instance GoogleRequest SavedadstylesGet' where
         requestWithRoute r u SavedadstylesGet'{..}
           = go _sgQuotaUser (Just _sgPrettyPrint)
               _sgSavedAdStyleId
-              _sgUserIp
+              _sgUserIP
               _sgKey
-              _sgOauthToken
+              _sgOAuthToken
               _sgFields
-              (Just _sgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy SavedadstylesGetResource)

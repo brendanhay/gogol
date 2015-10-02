@@ -40,10 +40,10 @@ module Network.Google.Resource.PubSub.Projects.Topics.TestIAMPermissions
     , pttipBearerToken
     , pttipKey
     , pttipResource
-    , pttipOauthToken
+    , pttipTestIAMPermissionsRequest
+    , pttipOAuthToken
     , pttipFields
     , pttipCallback
-    , pttipAlt
     ) where
 
 import           Network.Google.Prelude
@@ -62,31 +62,32 @@ type ProjectsTopicsTestIAMPermissionsResource =
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
                        QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
                                QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :>
-                                   Post '[JSON] TestIAMPermissionsResponse
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON] TestIAMPermissionsRequest :>
+                                     Post '[JSON] TestIAMPermissionsResponse
 
 -- | Returns permissions that a caller has on the specified resource.
 --
 -- /See:/ 'projectsTopicsTestIAMPermissions'' smart constructor.
 data ProjectsTopicsTestIAMPermissions' = ProjectsTopicsTestIAMPermissions'
-    { _pttipXgafv          :: !(Maybe Text)
-    , _pttipQuotaUser      :: !(Maybe Text)
-    , _pttipPrettyPrint    :: !Bool
-    , _pttipUploadProtocol :: !(Maybe Text)
-    , _pttipPp             :: !Bool
-    , _pttipAccessToken    :: !(Maybe Text)
-    , _pttipUploadType     :: !(Maybe Text)
-    , _pttipBearerToken    :: !(Maybe Text)
-    , _pttipKey            :: !(Maybe Text)
-    , _pttipResource       :: !Text
-    , _pttipOauthToken     :: !(Maybe Text)
-    , _pttipFields         :: !(Maybe Text)
-    , _pttipCallback       :: !(Maybe Text)
-    , _pttipAlt            :: !Text
+    { _pttipXgafv                     :: !(Maybe Text)
+    , _pttipQuotaUser                 :: !(Maybe Text)
+    , _pttipPrettyPrint               :: !Bool
+    , _pttipUploadProtocol            :: !(Maybe Text)
+    , _pttipPp                        :: !Bool
+    , _pttipAccessToken               :: !(Maybe Text)
+    , _pttipUploadType                :: !(Maybe Text)
+    , _pttipBearerToken               :: !(Maybe Text)
+    , _pttipKey                       :: !(Maybe Key)
+    , _pttipResource                  :: !Text
+    , _pttipTestIAMPermissionsRequest :: !TestIAMPermissionsRequest
+    , _pttipOAuthToken                :: !(Maybe OAuthToken)
+    , _pttipFields                    :: !(Maybe Text)
+    , _pttipCallback                  :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsTopicsTestIAMPermissions'' with the minimum fields required to make a request.
@@ -113,17 +114,18 @@ data ProjectsTopicsTestIAMPermissions' = ProjectsTopicsTestIAMPermissions'
 --
 -- * 'pttipResource'
 --
--- * 'pttipOauthToken'
+-- * 'pttipTestIAMPermissionsRequest'
+--
+-- * 'pttipOAuthToken'
 --
 -- * 'pttipFields'
 --
 -- * 'pttipCallback'
---
--- * 'pttipAlt'
 projectsTopicsTestIAMPermissions'
     :: Text -- ^ 'resource'
+    -> TestIAMPermissionsRequest -- ^ 'TestIAMPermissionsRequest'
     -> ProjectsTopicsTestIAMPermissions'
-projectsTopicsTestIAMPermissions' pPttipResource_ =
+projectsTopicsTestIAMPermissions' pPttipResource_ pPttipTestIAMPermissionsRequest_ =
     ProjectsTopicsTestIAMPermissions'
     { _pttipXgafv = Nothing
     , _pttipQuotaUser = Nothing
@@ -135,10 +137,10 @@ projectsTopicsTestIAMPermissions' pPttipResource_ =
     , _pttipBearerToken = Nothing
     , _pttipKey = Nothing
     , _pttipResource = pPttipResource_
-    , _pttipOauthToken = Nothing
+    , _pttipTestIAMPermissionsRequest = pPttipTestIAMPermissionsRequest_
+    , _pttipOAuthToken = Nothing
     , _pttipFields = Nothing
     , _pttipCallback = Nothing
-    , _pttipAlt = "json"
     }
 
 -- | V1 error format.
@@ -191,7 +193,7 @@ pttipBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pttipKey :: Lens' ProjectsTopicsTestIAMPermissions' (Maybe Text)
+pttipKey :: Lens' ProjectsTopicsTestIAMPermissions' (Maybe Key)
 pttipKey = lens _pttipKey (\ s a -> s{_pttipKey = a})
 
 -- | REQUIRED: The resource for which policy detail is being requested.
@@ -201,11 +203,17 @@ pttipResource
   = lens _pttipResource
       (\ s a -> s{_pttipResource = a})
 
+-- | Multipart request metadata.
+pttipTestIAMPermissionsRequest :: Lens' ProjectsTopicsTestIAMPermissions' TestIAMPermissionsRequest
+pttipTestIAMPermissionsRequest
+  = lens _pttipTestIAMPermissionsRequest
+      (\ s a -> s{_pttipTestIAMPermissionsRequest = a})
+
 -- | OAuth 2.0 token for the current user.
-pttipOauthToken :: Lens' ProjectsTopicsTestIAMPermissions' (Maybe Text)
-pttipOauthToken
-  = lens _pttipOauthToken
-      (\ s a -> s{_pttipOauthToken = a})
+pttipOAuthToken :: Lens' ProjectsTopicsTestIAMPermissions' (Maybe OAuthToken)
+pttipOAuthToken
+  = lens _pttipOAuthToken
+      (\ s a -> s{_pttipOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 pttipFields :: Lens' ProjectsTopicsTestIAMPermissions' (Maybe Text)
@@ -218,9 +226,10 @@ pttipCallback
   = lens _pttipCallback
       (\ s a -> s{_pttipCallback = a})
 
--- | Data format for response.
-pttipAlt :: Lens' ProjectsTopicsTestIAMPermissions' Text
-pttipAlt = lens _pttipAlt (\ s a -> s{_pttipAlt = a})
+instance GoogleAuth ProjectsTopicsTestIAMPermissions'
+         where
+        authKey = pttipKey . _Just
+        authToken = pttipOAuthToken . _Just
 
 instance GoogleRequest
          ProjectsTopicsTestIAMPermissions' where
@@ -238,10 +247,11 @@ instance GoogleRequest
               _pttipBearerToken
               _pttipKey
               _pttipResource
-              _pttipOauthToken
+              _pttipOAuthToken
               _pttipFields
               _pttipCallback
-              (Just _pttipAlt)
+              (Just AltJSON)
+              _pttipTestIAMPermissionsRequest
           where go
                   = clientWithRoute
                       (Proxy ::

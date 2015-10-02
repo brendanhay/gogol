@@ -39,11 +39,11 @@ module Network.Google.Resource.Genomics.Annotations.BatchCreate
     -- * Request Lenses
     , abcQuotaUser
     , abcPrettyPrint
-    , abcUserIp
+    , abcBatchCreateAnnotationsRequest
+    , abcUserIP
     , abcKey
-    , abcOauthToken
+    , abcOAuthToken
     , abcFields
-    , abcAlt
     ) where
 
 import           Network.Google.Genomics.Types
@@ -56,11 +56,12 @@ type AnnotationsBatchCreateResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
-               QueryParam "oauth_token" Text :>
+             QueryParam "key" Key :>
+               QueryParam "oauth_token" OAuthToken :>
                  QueryParam "fields" Text :>
-                   QueryParam "alt" Alt :>
-                     Post '[JSON] BatchAnnotationsResponse
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] BatchCreateAnnotationsRequest :>
+                       Post '[JSON] BatchAnnotationsResponse
 
 -- | Creates one or more new annotations atomically. All annotations must
 -- belong to the same annotation set. Caller must have WRITE permission for
@@ -73,13 +74,13 @@ type AnnotationsBatchCreateResource =
 --
 -- /See:/ 'annotationsBatchCreate'' smart constructor.
 data AnnotationsBatchCreate' = AnnotationsBatchCreate'
-    { _abcQuotaUser   :: !(Maybe Text)
-    , _abcPrettyPrint :: !Bool
-    , _abcUserIp      :: !(Maybe Text)
-    , _abcKey         :: !(Maybe Text)
-    , _abcOauthToken  :: !(Maybe Text)
-    , _abcFields      :: !(Maybe Text)
-    , _abcAlt         :: !Alt
+    { _abcQuotaUser                     :: !(Maybe Text)
+    , _abcPrettyPrint                   :: !Bool
+    , _abcBatchCreateAnnotationsRequest :: !BatchCreateAnnotationsRequest
+    , _abcUserIP                        :: !(Maybe Text)
+    , _abcKey                           :: !(Maybe Key)
+    , _abcOAuthToken                    :: !(Maybe OAuthToken)
+    , _abcFields                        :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnnotationsBatchCreate'' with the minimum fields required to make a request.
@@ -90,26 +91,27 @@ data AnnotationsBatchCreate' = AnnotationsBatchCreate'
 --
 -- * 'abcPrettyPrint'
 --
--- * 'abcUserIp'
+-- * 'abcBatchCreateAnnotationsRequest'
+--
+-- * 'abcUserIP'
 --
 -- * 'abcKey'
 --
--- * 'abcOauthToken'
+-- * 'abcOAuthToken'
 --
 -- * 'abcFields'
---
--- * 'abcAlt'
 annotationsBatchCreate'
-    :: AnnotationsBatchCreate'
-annotationsBatchCreate' =
+    :: BatchCreateAnnotationsRequest -- ^ 'BatchCreateAnnotationsRequest'
+    -> AnnotationsBatchCreate'
+annotationsBatchCreate' pAbcBatchCreateAnnotationsRequest_ =
     AnnotationsBatchCreate'
     { _abcQuotaUser = Nothing
     , _abcPrettyPrint = True
-    , _abcUserIp = Nothing
+    , _abcBatchCreateAnnotationsRequest = pAbcBatchCreateAnnotationsRequest_
+    , _abcUserIP = Nothing
     , _abcKey = Nothing
-    , _abcOauthToken = Nothing
+    , _abcOAuthToken = Nothing
     , _abcFields = Nothing
-    , _abcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -125,43 +127,50 @@ abcPrettyPrint
   = lens _abcPrettyPrint
       (\ s a -> s{_abcPrettyPrint = a})
 
+-- | Multipart request metadata.
+abcBatchCreateAnnotationsRequest :: Lens' AnnotationsBatchCreate' BatchCreateAnnotationsRequest
+abcBatchCreateAnnotationsRequest
+  = lens _abcBatchCreateAnnotationsRequest
+      (\ s a -> s{_abcBatchCreateAnnotationsRequest = a})
+
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-abcUserIp :: Lens' AnnotationsBatchCreate' (Maybe Text)
-abcUserIp
-  = lens _abcUserIp (\ s a -> s{_abcUserIp = a})
+abcUserIP :: Lens' AnnotationsBatchCreate' (Maybe Text)
+abcUserIP
+  = lens _abcUserIP (\ s a -> s{_abcUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-abcKey :: Lens' AnnotationsBatchCreate' (Maybe Text)
+abcKey :: Lens' AnnotationsBatchCreate' (Maybe Key)
 abcKey = lens _abcKey (\ s a -> s{_abcKey = a})
 
 -- | OAuth 2.0 token for the current user.
-abcOauthToken :: Lens' AnnotationsBatchCreate' (Maybe Text)
-abcOauthToken
-  = lens _abcOauthToken
-      (\ s a -> s{_abcOauthToken = a})
+abcOAuthToken :: Lens' AnnotationsBatchCreate' (Maybe OAuthToken)
+abcOAuthToken
+  = lens _abcOAuthToken
+      (\ s a -> s{_abcOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 abcFields :: Lens' AnnotationsBatchCreate' (Maybe Text)
 abcFields
   = lens _abcFields (\ s a -> s{_abcFields = a})
 
--- | Data format for the response.
-abcAlt :: Lens' AnnotationsBatchCreate' Alt
-abcAlt = lens _abcAlt (\ s a -> s{_abcAlt = a})
+instance GoogleAuth AnnotationsBatchCreate' where
+        authKey = abcKey . _Just
+        authToken = abcOAuthToken . _Just
 
 instance GoogleRequest AnnotationsBatchCreate' where
         type Rs AnnotationsBatchCreate' =
              BatchAnnotationsResponse
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u AnnotationsBatchCreate'{..}
-          = go _abcQuotaUser (Just _abcPrettyPrint) _abcUserIp
+          = go _abcQuotaUser (Just _abcPrettyPrint) _abcUserIP
               _abcKey
-              _abcOauthToken
+              _abcOAuthToken
               _abcFields
-              (Just _abcAlt)
+              (Just AltJSON)
+              _abcBatchCreateAnnotationsRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AnnotationsBatchCreateResource)

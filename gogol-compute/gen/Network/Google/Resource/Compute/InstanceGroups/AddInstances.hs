@@ -32,15 +32,15 @@ module Network.Google.Resource.Compute.InstanceGroups.AddInstances
 
     -- * Request Lenses
     , igaiQuotaUser
+    , igaiInstanceGroupsAddInstancesRequest
     , igaiPrettyPrint
     , igaiProject
-    , igaiUserIp
+    , igaiUserIP
     , igaiZone
     , igaiKey
-    , igaiOauthToken
+    , igaiOAuthToken
     , igaiInstanceGroup
     , igaiFields
-    , igaiAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -58,26 +58,28 @@ type InstanceGroupsAddInstancesResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Post '[JSON] Operation
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] InstanceGroupsAddInstancesRequest
+                                 :> Post '[JSON] Operation
 
 -- | Adds a list of instances to an instance group. All of the instances in
 -- the instance group must be in the same network.
 --
 -- /See:/ 'instanceGroupsAddInstances'' smart constructor.
 data InstanceGroupsAddInstances' = InstanceGroupsAddInstances'
-    { _igaiQuotaUser     :: !(Maybe Text)
-    , _igaiPrettyPrint   :: !Bool
-    , _igaiProject       :: !Text
-    , _igaiUserIp        :: !(Maybe Text)
-    , _igaiZone          :: !Text
-    , _igaiKey           :: !(Maybe Text)
-    , _igaiOauthToken    :: !(Maybe Text)
-    , _igaiInstanceGroup :: !Text
-    , _igaiFields        :: !(Maybe Text)
-    , _igaiAlt           :: !Alt
+    { _igaiQuotaUser                         :: !(Maybe Text)
+    , _igaiInstanceGroupsAddInstancesRequest :: !InstanceGroupsAddInstancesRequest
+    , _igaiPrettyPrint                       :: !Bool
+    , _igaiProject                           :: !Text
+    , _igaiUserIP                            :: !(Maybe Text)
+    , _igaiZone                              :: !Text
+    , _igaiKey                               :: !(Maybe Key)
+    , _igaiOAuthToken                        :: !(Maybe OAuthToken)
+    , _igaiInstanceGroup                     :: !Text
+    , _igaiFields                            :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupsAddInstances'' with the minimum fields required to make a request.
@@ -86,40 +88,41 @@ data InstanceGroupsAddInstances' = InstanceGroupsAddInstances'
 --
 -- * 'igaiQuotaUser'
 --
+-- * 'igaiInstanceGroupsAddInstancesRequest'
+--
 -- * 'igaiPrettyPrint'
 --
 -- * 'igaiProject'
 --
--- * 'igaiUserIp'
+-- * 'igaiUserIP'
 --
 -- * 'igaiZone'
 --
 -- * 'igaiKey'
 --
--- * 'igaiOauthToken'
+-- * 'igaiOAuthToken'
 --
 -- * 'igaiInstanceGroup'
 --
 -- * 'igaiFields'
---
--- * 'igaiAlt'
 instanceGroupsAddInstances'
-    :: Text -- ^ 'project'
+    :: InstanceGroupsAddInstancesRequest -- ^ 'InstanceGroupsAddInstancesRequest'
+    -> Text -- ^ 'project'
     -> Text -- ^ 'zone'
     -> Text -- ^ 'instanceGroup'
     -> InstanceGroupsAddInstances'
-instanceGroupsAddInstances' pIgaiProject_ pIgaiZone_ pIgaiInstanceGroup_ =
+instanceGroupsAddInstances' pIgaiInstanceGroupsAddInstancesRequest_ pIgaiProject_ pIgaiZone_ pIgaiInstanceGroup_ =
     InstanceGroupsAddInstances'
     { _igaiQuotaUser = Nothing
+    , _igaiInstanceGroupsAddInstancesRequest = pIgaiInstanceGroupsAddInstancesRequest_
     , _igaiPrettyPrint = True
     , _igaiProject = pIgaiProject_
-    , _igaiUserIp = Nothing
+    , _igaiUserIP = Nothing
     , _igaiZone = pIgaiZone_
     , _igaiKey = Nothing
-    , _igaiOauthToken = Nothing
+    , _igaiOAuthToken = Nothing
     , _igaiInstanceGroup = pIgaiInstanceGroup_
     , _igaiFields = Nothing
-    , _igaiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -129,6 +132,13 @@ igaiQuotaUser :: Lens' InstanceGroupsAddInstances' (Maybe Text)
 igaiQuotaUser
   = lens _igaiQuotaUser
       (\ s a -> s{_igaiQuotaUser = a})
+
+-- | Multipart request metadata.
+igaiInstanceGroupsAddInstancesRequest :: Lens' InstanceGroupsAddInstances' InstanceGroupsAddInstancesRequest
+igaiInstanceGroupsAddInstancesRequest
+  = lens _igaiInstanceGroupsAddInstancesRequest
+      (\ s a ->
+         s{_igaiInstanceGroupsAddInstancesRequest = a})
 
 -- | Returns response with indentations and line breaks.
 igaiPrettyPrint :: Lens' InstanceGroupsAddInstances' Bool
@@ -143,9 +153,9 @@ igaiProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-igaiUserIp :: Lens' InstanceGroupsAddInstances' (Maybe Text)
-igaiUserIp
-  = lens _igaiUserIp (\ s a -> s{_igaiUserIp = a})
+igaiUserIP :: Lens' InstanceGroupsAddInstances' (Maybe Text)
+igaiUserIP
+  = lens _igaiUserIP (\ s a -> s{_igaiUserIP = a})
 
 -- | The URL of the zone where the instance group is located.
 igaiZone :: Lens' InstanceGroupsAddInstances' Text
@@ -154,14 +164,14 @@ igaiZone = lens _igaiZone (\ s a -> s{_igaiZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-igaiKey :: Lens' InstanceGroupsAddInstances' (Maybe Text)
+igaiKey :: Lens' InstanceGroupsAddInstances' (Maybe Key)
 igaiKey = lens _igaiKey (\ s a -> s{_igaiKey = a})
 
 -- | OAuth 2.0 token for the current user.
-igaiOauthToken :: Lens' InstanceGroupsAddInstances' (Maybe Text)
-igaiOauthToken
-  = lens _igaiOauthToken
-      (\ s a -> s{_igaiOauthToken = a})
+igaiOAuthToken :: Lens' InstanceGroupsAddInstances' (Maybe OAuthToken)
+igaiOAuthToken
+  = lens _igaiOAuthToken
+      (\ s a -> s{_igaiOAuthToken = a})
 
 -- | The name of the instance group where you are adding instances.
 igaiInstanceGroup :: Lens' InstanceGroupsAddInstances' Text
@@ -174,9 +184,9 @@ igaiFields :: Lens' InstanceGroupsAddInstances' (Maybe Text)
 igaiFields
   = lens _igaiFields (\ s a -> s{_igaiFields = a})
 
--- | Data format for the response.
-igaiAlt :: Lens' InstanceGroupsAddInstances' Alt
-igaiAlt = lens _igaiAlt (\ s a -> s{_igaiAlt = a})
+instance GoogleAuth InstanceGroupsAddInstances' where
+        authKey = igaiKey . _Just
+        authToken = igaiOAuthToken . _Just
 
 instance GoogleRequest InstanceGroupsAddInstances'
          where
@@ -185,13 +195,14 @@ instance GoogleRequest InstanceGroupsAddInstances'
         requestWithRoute r u InstanceGroupsAddInstances'{..}
           = go _igaiQuotaUser (Just _igaiPrettyPrint)
               _igaiProject
-              _igaiUserIp
+              _igaiUserIP
               _igaiZone
               _igaiKey
-              _igaiOauthToken
+              _igaiOAuthToken
               _igaiInstanceGroup
               _igaiFields
-              (Just _igaiAlt)
+              (Just AltJSON)
+              _igaiInstanceGroupsAddInstancesRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InstanceGroupsAddInstancesResource)

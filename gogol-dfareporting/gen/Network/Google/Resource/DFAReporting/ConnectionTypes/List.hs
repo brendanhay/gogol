@@ -32,12 +32,11 @@ module Network.Google.Resource.DFAReporting.ConnectionTypes.List
     -- * Request Lenses
     , ctlQuotaUser
     , ctlPrettyPrint
-    , ctlUserIp
+    , ctlUserIP
     , ctlProfileId
     , ctlKey
-    , ctlOauthToken
+    , ctlOAuthToken
     , ctlFields
-    , ctlAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,10 +51,10 @@ type ConnectionTypesListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :>
+                       QueryParam "alt" AltJSON :>
                          Get '[JSON] ConnectionTypesListResponse
 
 -- | Retrieves a list of connection types.
@@ -64,12 +63,11 @@ type ConnectionTypesListResource =
 data ConnectionTypesList' = ConnectionTypesList'
     { _ctlQuotaUser   :: !(Maybe Text)
     , _ctlPrettyPrint :: !Bool
-    , _ctlUserIp      :: !(Maybe Text)
+    , _ctlUserIP      :: !(Maybe Text)
     , _ctlProfileId   :: !Int64
-    , _ctlKey         :: !(Maybe Text)
-    , _ctlOauthToken  :: !(Maybe Text)
+    , _ctlKey         :: !(Maybe Key)
+    , _ctlOAuthToken  :: !(Maybe OAuthToken)
     , _ctlFields      :: !(Maybe Text)
-    , _ctlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ConnectionTypesList'' with the minimum fields required to make a request.
@@ -80,17 +78,15 @@ data ConnectionTypesList' = ConnectionTypesList'
 --
 -- * 'ctlPrettyPrint'
 --
--- * 'ctlUserIp'
+-- * 'ctlUserIP'
 --
 -- * 'ctlProfileId'
 --
 -- * 'ctlKey'
 --
--- * 'ctlOauthToken'
+-- * 'ctlOAuthToken'
 --
 -- * 'ctlFields'
---
--- * 'ctlAlt'
 connectionTypesList'
     :: Int64 -- ^ 'profileId'
     -> ConnectionTypesList'
@@ -98,12 +94,11 @@ connectionTypesList' pCtlProfileId_ =
     ConnectionTypesList'
     { _ctlQuotaUser = Nothing
     , _ctlPrettyPrint = True
-    , _ctlUserIp = Nothing
+    , _ctlUserIP = Nothing
     , _ctlProfileId = pCtlProfileId_
     , _ctlKey = Nothing
-    , _ctlOauthToken = Nothing
+    , _ctlOAuthToken = Nothing
     , _ctlFields = Nothing
-    , _ctlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -121,9 +116,9 @@ ctlPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ctlUserIp :: Lens' ConnectionTypesList' (Maybe Text)
-ctlUserIp
-  = lens _ctlUserIp (\ s a -> s{_ctlUserIp = a})
+ctlUserIP :: Lens' ConnectionTypesList' (Maybe Text)
+ctlUserIP
+  = lens _ctlUserIP (\ s a -> s{_ctlUserIP = a})
 
 -- | User profile ID associated with this request.
 ctlProfileId :: Lens' ConnectionTypesList' Int64
@@ -133,35 +128,35 @@ ctlProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ctlKey :: Lens' ConnectionTypesList' (Maybe Text)
+ctlKey :: Lens' ConnectionTypesList' (Maybe Key)
 ctlKey = lens _ctlKey (\ s a -> s{_ctlKey = a})
 
 -- | OAuth 2.0 token for the current user.
-ctlOauthToken :: Lens' ConnectionTypesList' (Maybe Text)
-ctlOauthToken
-  = lens _ctlOauthToken
-      (\ s a -> s{_ctlOauthToken = a})
+ctlOAuthToken :: Lens' ConnectionTypesList' (Maybe OAuthToken)
+ctlOAuthToken
+  = lens _ctlOAuthToken
+      (\ s a -> s{_ctlOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ctlFields :: Lens' ConnectionTypesList' (Maybe Text)
 ctlFields
   = lens _ctlFields (\ s a -> s{_ctlFields = a})
 
--- | Data format for the response.
-ctlAlt :: Lens' ConnectionTypesList' Alt
-ctlAlt = lens _ctlAlt (\ s a -> s{_ctlAlt = a})
+instance GoogleAuth ConnectionTypesList' where
+        authKey = ctlKey . _Just
+        authToken = ctlOAuthToken . _Just
 
 instance GoogleRequest ConnectionTypesList' where
         type Rs ConnectionTypesList' =
              ConnectionTypesListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ConnectionTypesList'{..}
-          = go _ctlQuotaUser (Just _ctlPrettyPrint) _ctlUserIp
+          = go _ctlQuotaUser (Just _ctlPrettyPrint) _ctlUserIP
               _ctlProfileId
               _ctlKey
-              _ctlOauthToken
+              _ctlOAuthToken
               _ctlFields
-              (Just _ctlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ConnectionTypesListResource)

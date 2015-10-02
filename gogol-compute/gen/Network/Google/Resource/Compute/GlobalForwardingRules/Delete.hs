@@ -34,11 +34,10 @@ module Network.Google.Resource.Compute.GlobalForwardingRules.Delete
     , gfrdPrettyPrint
     , gfrdProject
     , gfrdForwardingRule
-    , gfrdUserIp
+    , gfrdUserIP
     , gfrdKey
-    , gfrdOauthToken
+    , gfrdOAuthToken
     , gfrdFields
-    , gfrdAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -54,10 +53,10 @@ type GlobalForwardingRulesDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Delete '[JSON] Operation
+                         QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified ForwardingRule resource.
 --
@@ -67,11 +66,10 @@ data GlobalForwardingRulesDelete' = GlobalForwardingRulesDelete'
     , _gfrdPrettyPrint    :: !Bool
     , _gfrdProject        :: !Text
     , _gfrdForwardingRule :: !Text
-    , _gfrdUserIp         :: !(Maybe Text)
-    , _gfrdKey            :: !(Maybe Text)
-    , _gfrdOauthToken     :: !(Maybe Text)
+    , _gfrdUserIP         :: !(Maybe Text)
+    , _gfrdKey            :: !(Maybe Key)
+    , _gfrdOAuthToken     :: !(Maybe OAuthToken)
     , _gfrdFields         :: !(Maybe Text)
-    , _gfrdAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GlobalForwardingRulesDelete'' with the minimum fields required to make a request.
@@ -86,15 +84,13 @@ data GlobalForwardingRulesDelete' = GlobalForwardingRulesDelete'
 --
 -- * 'gfrdForwardingRule'
 --
--- * 'gfrdUserIp'
+-- * 'gfrdUserIP'
 --
 -- * 'gfrdKey'
 --
--- * 'gfrdOauthToken'
+-- * 'gfrdOAuthToken'
 --
 -- * 'gfrdFields'
---
--- * 'gfrdAlt'
 globalForwardingRulesDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'forwardingRule'
@@ -105,11 +101,10 @@ globalForwardingRulesDelete' pGfrdProject_ pGfrdForwardingRule_ =
     , _gfrdPrettyPrint = True
     , _gfrdProject = pGfrdProject_
     , _gfrdForwardingRule = pGfrdForwardingRule_
-    , _gfrdUserIp = Nothing
+    , _gfrdUserIP = Nothing
     , _gfrdKey = Nothing
-    , _gfrdOauthToken = Nothing
+    , _gfrdOAuthToken = Nothing
     , _gfrdFields = Nothing
-    , _gfrdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,30 +134,31 @@ gfrdForwardingRule
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-gfrdUserIp :: Lens' GlobalForwardingRulesDelete' (Maybe Text)
-gfrdUserIp
-  = lens _gfrdUserIp (\ s a -> s{_gfrdUserIp = a})
+gfrdUserIP :: Lens' GlobalForwardingRulesDelete' (Maybe Text)
+gfrdUserIP
+  = lens _gfrdUserIP (\ s a -> s{_gfrdUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-gfrdKey :: Lens' GlobalForwardingRulesDelete' (Maybe Text)
+gfrdKey :: Lens' GlobalForwardingRulesDelete' (Maybe Key)
 gfrdKey = lens _gfrdKey (\ s a -> s{_gfrdKey = a})
 
 -- | OAuth 2.0 token for the current user.
-gfrdOauthToken :: Lens' GlobalForwardingRulesDelete' (Maybe Text)
-gfrdOauthToken
-  = lens _gfrdOauthToken
-      (\ s a -> s{_gfrdOauthToken = a})
+gfrdOAuthToken :: Lens' GlobalForwardingRulesDelete' (Maybe OAuthToken)
+gfrdOAuthToken
+  = lens _gfrdOAuthToken
+      (\ s a -> s{_gfrdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 gfrdFields :: Lens' GlobalForwardingRulesDelete' (Maybe Text)
 gfrdFields
   = lens _gfrdFields (\ s a -> s{_gfrdFields = a})
 
--- | Data format for the response.
-gfrdAlt :: Lens' GlobalForwardingRulesDelete' Alt
-gfrdAlt = lens _gfrdAlt (\ s a -> s{_gfrdAlt = a})
+instance GoogleAuth GlobalForwardingRulesDelete'
+         where
+        authKey = gfrdKey . _Just
+        authToken = gfrdOAuthToken . _Just
 
 instance GoogleRequest GlobalForwardingRulesDelete'
          where
@@ -172,11 +168,11 @@ instance GoogleRequest GlobalForwardingRulesDelete'
           = go _gfrdQuotaUser (Just _gfrdPrettyPrint)
               _gfrdProject
               _gfrdForwardingRule
-              _gfrdUserIp
+              _gfrdUserIP
               _gfrdKey
-              _gfrdOauthToken
+              _gfrdOAuthToken
               _gfrdFields
-              (Just _gfrdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy GlobalForwardingRulesDeleteResource)

@@ -143,12 +143,12 @@ module Network.Google.StorageTransfer.Types
     -- * HTTPData
     , HTTPData
     , hTTPData
-    , httpdListUrl
+    , httpdListURL
 
     -- * ErrorLogEntry
     , ErrorLogEntry
     , errorLogEntry
-    , eleUrl
+    , eleURL
     , eleErrorDetails
 
     -- * TimeOfDay
@@ -184,7 +184,7 @@ module Network.Google.StorageTransfer.Types
     , transferSpec
     , tsGcsDataSource
     , tsObjectConditions
-    , tsHttpDataSource
+    , tsHTTPDataSource
     , tsAwsS3DataSource
     , tsGcsDataSink
     , tsTransferOptions

@@ -33,11 +33,11 @@ module Network.Google.Resource.Calendar.Calendars.Update
     , cuQuotaUser
     , cuCalendarId
     , cuPrettyPrint
-    , cuUserIp
+    , cuUserIP
     , cuKey
-    , cuOauthToken
+    , cuCalendar
+    , cuOAuthToken
     , cuFields
-    , cuAlt
     ) where
 
 import           Network.Google.AppsCalendar.Types
@@ -51,10 +51,11 @@ type CalendarsUpdateResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Put '[JSON] Calendar
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Calendar :> Put '[JSON] Calendar
 
 -- | Updates metadata for a calendar.
 --
@@ -63,11 +64,11 @@ data CalendarsUpdate' = CalendarsUpdate'
     { _cuQuotaUser   :: !(Maybe Text)
     , _cuCalendarId  :: !Text
     , _cuPrettyPrint :: !Bool
-    , _cuUserIp      :: !(Maybe Text)
-    , _cuKey         :: !(Maybe Text)
-    , _cuOauthToken  :: !(Maybe Text)
+    , _cuUserIP      :: !(Maybe Text)
+    , _cuKey         :: !(Maybe Key)
+    , _cuCalendar    :: !Calendar
+    , _cuOAuthToken  :: !(Maybe OAuthToken)
     , _cuFields      :: !(Maybe Text)
-    , _cuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CalendarsUpdate'' with the minimum fields required to make a request.
@@ -80,28 +81,29 @@ data CalendarsUpdate' = CalendarsUpdate'
 --
 -- * 'cuPrettyPrint'
 --
--- * 'cuUserIp'
+-- * 'cuUserIP'
 --
 -- * 'cuKey'
 --
--- * 'cuOauthToken'
+-- * 'cuCalendar'
+--
+-- * 'cuOAuthToken'
 --
 -- * 'cuFields'
---
--- * 'cuAlt'
 calendarsUpdate'
     :: Text -- ^ 'calendarId'
+    -> Calendar -- ^ 'Calendar'
     -> CalendarsUpdate'
-calendarsUpdate' pCuCalendarId_ =
+calendarsUpdate' pCuCalendarId_ pCuCalendar_ =
     CalendarsUpdate'
     { _cuQuotaUser = Nothing
     , _cuCalendarId = pCuCalendarId_
     , _cuPrettyPrint = True
-    , _cuUserIp = Nothing
+    , _cuUserIP = Nothing
     , _cuKey = Nothing
-    , _cuOauthToken = Nothing
+    , _cuCalendar = pCuCalendar_
+    , _cuOAuthToken = Nothing
     , _cuFields = Nothing
-    , _cuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -126,38 +128,44 @@ cuPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cuUserIp :: Lens' CalendarsUpdate' (Maybe Text)
-cuUserIp = lens _cuUserIp (\ s a -> s{_cuUserIp = a})
+cuUserIP :: Lens' CalendarsUpdate' (Maybe Text)
+cuUserIP = lens _cuUserIP (\ s a -> s{_cuUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cuKey :: Lens' CalendarsUpdate' (Maybe Text)
+cuKey :: Lens' CalendarsUpdate' (Maybe Key)
 cuKey = lens _cuKey (\ s a -> s{_cuKey = a})
 
+-- | Multipart request metadata.
+cuCalendar :: Lens' CalendarsUpdate' Calendar
+cuCalendar
+  = lens _cuCalendar (\ s a -> s{_cuCalendar = a})
+
 -- | OAuth 2.0 token for the current user.
-cuOauthToken :: Lens' CalendarsUpdate' (Maybe Text)
-cuOauthToken
-  = lens _cuOauthToken (\ s a -> s{_cuOauthToken = a})
+cuOAuthToken :: Lens' CalendarsUpdate' (Maybe OAuthToken)
+cuOAuthToken
+  = lens _cuOAuthToken (\ s a -> s{_cuOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cuFields :: Lens' CalendarsUpdate' (Maybe Text)
 cuFields = lens _cuFields (\ s a -> s{_cuFields = a})
 
--- | Data format for the response.
-cuAlt :: Lens' CalendarsUpdate' Alt
-cuAlt = lens _cuAlt (\ s a -> s{_cuAlt = a})
+instance GoogleAuth CalendarsUpdate' where
+        authKey = cuKey . _Just
+        authToken = cuOAuthToken . _Just
 
 instance GoogleRequest CalendarsUpdate' where
         type Rs CalendarsUpdate' = Calendar
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u CalendarsUpdate'{..}
           = go _cuQuotaUser _cuCalendarId (Just _cuPrettyPrint)
-              _cuUserIp
+              _cuUserIP
               _cuKey
-              _cuOauthToken
+              _cuOAuthToken
               _cuFields
-              (Just _cuAlt)
+              (Just AltJSON)
+              _cuCalendar
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CalendarsUpdateResource)

@@ -33,17 +33,17 @@ module Network.Google.Resource.Blogger.Posts.Patch
     , ppFetchBody
     , ppQuotaUser
     , ppPrettyPrint
-    , ppUserIp
+    , ppUserIP
+    , ppPost
     , ppFetchImages
     , ppBlogId
     , ppMaxComments
     , ppKey
     , ppRevert
     , ppPostId
-    , ppOauthToken
+    , ppOAuthToken
     , ppPublish
     , ppFields
-    , ppAlt
     ) where
 
 import           Network.Google.Blogger.Types
@@ -62,12 +62,13 @@ type PostsPatchResource =
                    QueryParam "userIp" Text :>
                      QueryParam "fetchImages" Bool :>
                        QueryParam "maxComments" Word32 :>
-                         QueryParam "key" Text :>
+                         QueryParam "key" Key :>
                            QueryParam "revert" Bool :>
-                             QueryParam "oauth_token" Text :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "publish" Bool :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "alt" Alt :> Patch '[JSON] Post
+                                   QueryParam "alt" AltJSON :>
+                                     ReqBody '[JSON] Post :> Patch '[JSON] Post
 
 -- | Update a post. This method supports patch semantics.
 --
@@ -76,17 +77,17 @@ data PostsPatch' = PostsPatch'
     { _ppFetchBody   :: !Bool
     , _ppQuotaUser   :: !(Maybe Text)
     , _ppPrettyPrint :: !Bool
-    , _ppUserIp      :: !(Maybe Text)
+    , _ppUserIP      :: !(Maybe Text)
+    , _ppPost        :: !Post
     , _ppFetchImages :: !(Maybe Bool)
     , _ppBlogId      :: !Text
     , _ppMaxComments :: !(Maybe Word32)
-    , _ppKey         :: !(Maybe Text)
+    , _ppKey         :: !(Maybe Key)
     , _ppRevert      :: !(Maybe Bool)
     , _ppPostId      :: !Text
-    , _ppOauthToken  :: !(Maybe Text)
+    , _ppOAuthToken  :: !(Maybe OAuthToken)
     , _ppPublish     :: !(Maybe Bool)
     , _ppFields      :: !(Maybe Text)
-    , _ppAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostsPatch'' with the minimum fields required to make a request.
@@ -99,7 +100,9 @@ data PostsPatch' = PostsPatch'
 --
 -- * 'ppPrettyPrint'
 --
--- * 'ppUserIp'
+-- * 'ppUserIP'
+--
+-- * 'ppPost'
 --
 -- * 'ppFetchImages'
 --
@@ -113,33 +116,32 @@ data PostsPatch' = PostsPatch'
 --
 -- * 'ppPostId'
 --
--- * 'ppOauthToken'
+-- * 'ppOAuthToken'
 --
 -- * 'ppPublish'
 --
 -- * 'ppFields'
---
--- * 'ppAlt'
 postsPatch'
-    :: Text -- ^ 'blogId'
+    :: Post -- ^ 'Post'
+    -> Text -- ^ 'blogId'
     -> Text -- ^ 'postId'
     -> PostsPatch'
-postsPatch' pPpBlogId_ pPpPostId_ =
+postsPatch' pPpPost_ pPpBlogId_ pPpPostId_ =
     PostsPatch'
     { _ppFetchBody = True
     , _ppQuotaUser = Nothing
     , _ppPrettyPrint = True
-    , _ppUserIp = Nothing
+    , _ppUserIP = Nothing
+    , _ppPost = pPpPost_
     , _ppFetchImages = Nothing
     , _ppBlogId = pPpBlogId_
     , _ppMaxComments = Nothing
     , _ppKey = Nothing
     , _ppRevert = Nothing
     , _ppPostId = pPpPostId_
-    , _ppOauthToken = Nothing
+    , _ppOAuthToken = Nothing
     , _ppPublish = Nothing
     , _ppFields = Nothing
-    , _ppAlt = JSON
     }
 
 -- | Whether the body content of the post is included with the result
@@ -163,8 +165,12 @@ ppPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ppUserIp :: Lens' PostsPatch' (Maybe Text)
-ppUserIp = lens _ppUserIp (\ s a -> s{_ppUserIp = a})
+ppUserIP :: Lens' PostsPatch' (Maybe Text)
+ppUserIP = lens _ppUserIP (\ s a -> s{_ppUserIP = a})
+
+-- | Multipart request metadata.
+ppPost :: Lens' PostsPatch' Post
+ppPost = lens _ppPost (\ s a -> s{_ppPost = a})
 
 -- | Whether image URL metadata for each post is included in the returned
 -- result (default: false).
@@ -186,7 +192,7 @@ ppMaxComments
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ppKey :: Lens' PostsPatch' (Maybe Text)
+ppKey :: Lens' PostsPatch' (Maybe Key)
 ppKey = lens _ppKey (\ s a -> s{_ppKey = a})
 
 -- | Whether a revert action should be performed when the post is updated
@@ -199,9 +205,9 @@ ppPostId :: Lens' PostsPatch' Text
 ppPostId = lens _ppPostId (\ s a -> s{_ppPostId = a})
 
 -- | OAuth 2.0 token for the current user.
-ppOauthToken :: Lens' PostsPatch' (Maybe Text)
-ppOauthToken
-  = lens _ppOauthToken (\ s a -> s{_ppOauthToken = a})
+ppOAuthToken :: Lens' PostsPatch' (Maybe OAuthToken)
+ppOAuthToken
+  = lens _ppOAuthToken (\ s a -> s{_ppOAuthToken = a})
 
 -- | Whether a publish action should be performed when the post is updated
 -- (default: false).
@@ -213,9 +219,9 @@ ppPublish
 ppFields :: Lens' PostsPatch' (Maybe Text)
 ppFields = lens _ppFields (\ s a -> s{_ppFields = a})
 
--- | Data format for the response.
-ppAlt :: Lens' PostsPatch' Alt
-ppAlt = lens _ppAlt (\ s a -> s{_ppAlt = a})
+instance GoogleAuth PostsPatch' where
+        authKey = ppKey . _Just
+        authToken = ppOAuthToken . _Just
 
 instance GoogleRequest PostsPatch' where
         type Rs PostsPatch' = Post
@@ -223,17 +229,18 @@ instance GoogleRequest PostsPatch' where
         requestWithRoute r u PostsPatch'{..}
           = go (Just _ppFetchBody) _ppQuotaUser
               (Just _ppPrettyPrint)
-              _ppUserIp
+              _ppUserIP
               _ppFetchImages
               _ppBlogId
               _ppMaxComments
               _ppKey
               _ppRevert
               _ppPostId
-              _ppOauthToken
+              _ppOAuthToken
               _ppPublish
               _ppFields
-              (Just _ppAlt)
+              (Just AltJSON)
+              _ppPost
           where go
                   = clientWithRoute (Proxy :: Proxy PostsPatchResource)
                       r

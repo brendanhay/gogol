@@ -27,32 +27,32 @@ module Network.Google.AdSenseHost
 
     -- * REST Resources
 
-    -- ** AdsensehostAccountsAdclientsGet
-    , module Network.Google.Resource.AdSenseHost.Accounts.Adclients.Get
+    -- ** AdsensehostAccountsAdClientsGet
+    , module Network.Google.Resource.AdSenseHost.Accounts.AdClients.Get
 
-    -- ** AdsensehostAccountsAdclientsList
-    , module Network.Google.Resource.AdSenseHost.Accounts.Adclients.List
+    -- ** AdsensehostAccountsAdClientsList
+    , module Network.Google.Resource.AdSenseHost.Accounts.AdClients.List
 
-    -- ** AdsensehostAccountsAdunitsDelete
-    , module Network.Google.Resource.AdSenseHost.Accounts.Adunits.Delete
+    -- ** AdsensehostAccountsAdUnitsDelete
+    , module Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Delete
 
-    -- ** AdsensehostAccountsAdunitsGet
-    , module Network.Google.Resource.AdSenseHost.Accounts.Adunits.Get
+    -- ** AdsensehostAccountsAdUnitsGet
+    , module Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Get
 
-    -- ** AdsensehostAccountsAdunitsGetAdCode
-    , module Network.Google.Resource.AdSenseHost.Accounts.Adunits.GetAdCode
+    -- ** AdsensehostAccountsAdUnitsGetAdCode
+    , module Network.Google.Resource.AdSenseHost.Accounts.AdUnits.GetAdCode
 
-    -- ** AdsensehostAccountsAdunitsInsert
-    , module Network.Google.Resource.AdSenseHost.Accounts.Adunits.Insert
+    -- ** AdsensehostAccountsAdUnitsInsert
+    , module Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Insert
 
-    -- ** AdsensehostAccountsAdunitsList
-    , module Network.Google.Resource.AdSenseHost.Accounts.Adunits.List
+    -- ** AdsensehostAccountsAdUnitsList
+    , module Network.Google.Resource.AdSenseHost.Accounts.AdUnits.List
 
-    -- ** AdsensehostAccountsAdunitsPatch
-    , module Network.Google.Resource.AdSenseHost.Accounts.Adunits.Patch
+    -- ** AdsensehostAccountsAdUnitsPatch
+    , module Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Patch
 
-    -- ** AdsensehostAccountsAdunitsUpdate
-    , module Network.Google.Resource.AdSenseHost.Accounts.Adunits.Update
+    -- ** AdsensehostAccountsAdUnitsUpdate
+    , module Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Update
 
     -- ** AdsensehostAccountsGet
     , module Network.Google.Resource.AdSenseHost.Accounts.Get
@@ -63,11 +63,11 @@ module Network.Google.AdSenseHost
     -- ** AdsensehostAccountsReportsGenerate
     , module Network.Google.Resource.AdSenseHost.Accounts.Reports.Generate
 
-    -- ** AdsensehostAdclientsGet
-    , module Network.Google.Resource.AdSenseHost.Adclients.Get
+    -- ** AdsensehostAdClientsGet
+    , module Network.Google.Resource.AdSenseHost.AdClients.Get
 
-    -- ** AdsensehostAdclientsList
-    , module Network.Google.Resource.AdSenseHost.Adclients.List
+    -- ** AdsensehostAdClientsList
+    , module Network.Google.Resource.AdSenseHost.AdClients.List
 
     -- ** AdsensehostAssociationsessionsStart
     , module Network.Google.Resource.AdSenseHost.Associationsessions.Start
@@ -75,35 +75,35 @@ module Network.Google.AdSenseHost
     -- ** AdsensehostAssociationsessionsVerify
     , module Network.Google.Resource.AdSenseHost.Associationsessions.Verify
 
-    -- ** AdsensehostCustomchannelsDelete
-    , module Network.Google.Resource.AdSenseHost.Customchannels.Delete
+    -- ** AdsensehostCustomChannelsDelete
+    , module Network.Google.Resource.AdSenseHost.CustomChannels.Delete
 
-    -- ** AdsensehostCustomchannelsGet
-    , module Network.Google.Resource.AdSenseHost.Customchannels.Get
+    -- ** AdsensehostCustomChannelsGet
+    , module Network.Google.Resource.AdSenseHost.CustomChannels.Get
 
-    -- ** AdsensehostCustomchannelsInsert
-    , module Network.Google.Resource.AdSenseHost.Customchannels.Insert
+    -- ** AdsensehostCustomChannelsInsert
+    , module Network.Google.Resource.AdSenseHost.CustomChannels.Insert
 
-    -- ** AdsensehostCustomchannelsList
-    , module Network.Google.Resource.AdSenseHost.Customchannels.List
+    -- ** AdsensehostCustomChannelsList
+    , module Network.Google.Resource.AdSenseHost.CustomChannels.List
 
-    -- ** AdsensehostCustomchannelsPatch
-    , module Network.Google.Resource.AdSenseHost.Customchannels.Patch
+    -- ** AdsensehostCustomChannelsPatch
+    , module Network.Google.Resource.AdSenseHost.CustomChannels.Patch
 
-    -- ** AdsensehostCustomchannelsUpdate
-    , module Network.Google.Resource.AdSenseHost.Customchannels.Update
+    -- ** AdsensehostCustomChannelsUpdate
+    , module Network.Google.Resource.AdSenseHost.CustomChannels.Update
 
     -- ** AdsensehostReportsGenerate
     , module Network.Google.Resource.AdSenseHost.Reports.Generate
 
-    -- ** AdsensehostURLchannelsDelete
-    , module Network.Google.Resource.AdSenseHost.URLchannels.Delete
+    -- ** AdsensehostURLChannelsDelete
+    , module Network.Google.Resource.AdSenseHost.URLChannels.Delete
 
-    -- ** AdsensehostURLchannelsInsert
-    , module Network.Google.Resource.AdSenseHost.URLchannels.Insert
+    -- ** AdsensehostURLChannelsInsert
+    , module Network.Google.Resource.AdSenseHost.URLChannels.Insert
 
-    -- ** AdsensehostURLchannelsList
-    , module Network.Google.Resource.AdSenseHost.URLchannels.List
+    -- ** AdsensehostURLChannelsList
+    , module Network.Google.Resource.AdSenseHost.URLChannels.List
 
     -- * Types
 
@@ -117,8 +117,8 @@ module Network.Google.AdSenseHost
     , asAccountId
     , asProductCodes
     , asId
-    , asWebsiteUrl
-    , asRedirectUrl
+    , asWebsiteURL
+    , asRedirectURL
 
     -- ** AdClients
     , AdClients
@@ -218,10 +218,10 @@ module Network.Google.AdSenseHost
     , AdStyleColors
     , adStyleColors
     , ascText
-    , ascUrl
-    , ascBorder
+    , ascURL
+    , ascBOrder
     , ascTitle
-    , ascBackground
+    , ascBackgRound
 
     -- ** AdClient
     , AdClient
@@ -236,7 +236,7 @@ module Network.Google.AdSenseHost
     , AdUnitContentAdsSettingsBackupOption
     , adUnitContentAdsSettingsBackupOption
     , aucasboColor
-    , aucasboUrl
+    , aucasboURL
     , aucasboType
 
     -- ** AdStyle
@@ -260,7 +260,7 @@ module Network.Google.AdSenseHost
     , uRLChannel
     , urlcKind
     , urlcId
-    , urlcUrlPattern
+    , urlcURLPattern
 
     -- ** AdCode
     , AdCode
@@ -274,39 +274,36 @@ module Network.Google.AdSenseHost
     , aucasBackupOption
     , aucasSize
     , aucasType
-
-    -- ** Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.AdSenseHost.Types
 import           Network.Google.Prelude
-import           Network.Google.Resource.AdSenseHost.Accounts.Adclients.Get
-import           Network.Google.Resource.AdSenseHost.Accounts.Adclients.List
-import           Network.Google.Resource.AdSenseHost.Accounts.Adunits.Delete
-import           Network.Google.Resource.AdSenseHost.Accounts.Adunits.Get
-import           Network.Google.Resource.AdSenseHost.Accounts.Adunits.GetAdCode
-import           Network.Google.Resource.AdSenseHost.Accounts.Adunits.Insert
-import           Network.Google.Resource.AdSenseHost.Accounts.Adunits.List
-import           Network.Google.Resource.AdSenseHost.Accounts.Adunits.Patch
-import           Network.Google.Resource.AdSenseHost.Accounts.Adunits.Update
+import           Network.Google.Resource.AdSenseHost.Accounts.AdClients.Get
+import           Network.Google.Resource.AdSenseHost.Accounts.AdClients.List
+import           Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Delete
+import           Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Get
+import           Network.Google.Resource.AdSenseHost.Accounts.AdUnits.GetAdCode
+import           Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Insert
+import           Network.Google.Resource.AdSenseHost.Accounts.AdUnits.List
+import           Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Patch
+import           Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Update
 import           Network.Google.Resource.AdSenseHost.Accounts.Get
 import           Network.Google.Resource.AdSenseHost.Accounts.List
 import           Network.Google.Resource.AdSenseHost.Accounts.Reports.Generate
-import           Network.Google.Resource.AdSenseHost.Adclients.Get
-import           Network.Google.Resource.AdSenseHost.Adclients.List
+import           Network.Google.Resource.AdSenseHost.AdClients.Get
+import           Network.Google.Resource.AdSenseHost.AdClients.List
 import           Network.Google.Resource.AdSenseHost.Associationsessions.Start
 import           Network.Google.Resource.AdSenseHost.Associationsessions.Verify
-import           Network.Google.Resource.AdSenseHost.Customchannels.Delete
-import           Network.Google.Resource.AdSenseHost.Customchannels.Get
-import           Network.Google.Resource.AdSenseHost.Customchannels.Insert
-import           Network.Google.Resource.AdSenseHost.Customchannels.List
-import           Network.Google.Resource.AdSenseHost.Customchannels.Patch
-import           Network.Google.Resource.AdSenseHost.Customchannels.Update
+import           Network.Google.Resource.AdSenseHost.CustomChannels.Delete
+import           Network.Google.Resource.AdSenseHost.CustomChannels.Get
+import           Network.Google.Resource.AdSenseHost.CustomChannels.Insert
+import           Network.Google.Resource.AdSenseHost.CustomChannels.List
+import           Network.Google.Resource.AdSenseHost.CustomChannels.Patch
+import           Network.Google.Resource.AdSenseHost.CustomChannels.Update
 import           Network.Google.Resource.AdSenseHost.Reports.Generate
-import           Network.Google.Resource.AdSenseHost.URLchannels.Delete
-import           Network.Google.Resource.AdSenseHost.URLchannels.Insert
-import           Network.Google.Resource.AdSenseHost.URLchannels.List
+import           Network.Google.Resource.AdSenseHost.URLChannels.Delete
+import           Network.Google.Resource.AdSenseHost.URLChannels.Insert
+import           Network.Google.Resource.AdSenseHost.URLChannels.List
 
 {- $resources
 TODO
@@ -315,30 +312,30 @@ TODO
 type AdSenseHostAPI =
      AssociationsessionsVerifyResource :<|>
        AssociationsessionsStartResource
-       :<|> AdclientsListResource
-       :<|> AdclientsGetResource
-       :<|> AccountsAdclientsListResource
-       :<|> AccountsAdclientsGetResource
+       :<|> AdClientsListResource
+       :<|> AdClientsGetResource
+       :<|> AccountsAdClientsListResource
+       :<|> AccountsAdClientsGetResource
        :<|> AccountsReportsGenerateResource
-       :<|> AccountsAdunitsInsertResource
-       :<|> AccountsAdunitsListResource
-       :<|> AccountsAdunitsPatchResource
-       :<|> AccountsAdunitsGetResource
-       :<|> AccountsAdunitsGetAdCodeResource
-       :<|> AccountsAdunitsDeleteResource
-       :<|> AccountsAdunitsUpdateResource
+       :<|> AccountsAdUnitsInsertResource
+       :<|> AccountsAdUnitsListResource
+       :<|> AccountsAdUnitsPatchResource
+       :<|> AccountsAdUnitsGetResource
+       :<|> AccountsAdUnitsGetAdCodeResource
+       :<|> AccountsAdUnitsDeleteResource
+       :<|> AccountsAdUnitsUpdateResource
        :<|> AccountsListResource
        :<|> AccountsGetResource
        :<|> ReportsGenerateResource
-       :<|> UrlchannelsInsertResource
-       :<|> UrlchannelsListResource
-       :<|> UrlchannelsDeleteResource
-       :<|> CustomchannelsInsertResource
-       :<|> CustomchannelsListResource
-       :<|> CustomchannelsPatchResource
-       :<|> CustomchannelsGetResource
-       :<|> CustomchannelsDeleteResource
-       :<|> CustomchannelsUpdateResource
+       :<|> UrlChannelsInsertResource
+       :<|> UrlChannelsListResource
+       :<|> UrlChannelsDeleteResource
+       :<|> CustomChannelsInsertResource
+       :<|> CustomChannelsListResource
+       :<|> CustomChannelsPatchResource
+       :<|> CustomChannelsGetResource
+       :<|> CustomChannelsDeleteResource
+       :<|> CustomChannelsUpdateResource
 
 adSenseHostAPI :: Proxy AdSenseHostAPI
 adSenseHostAPI = Proxy

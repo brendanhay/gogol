@@ -32,13 +32,13 @@ module Network.Google.Resource.DFAReporting.Reports.Patch
     -- * Request Lenses
     , rpQuotaUser
     , rpPrettyPrint
-    , rpUserIp
+    , rpUserIP
     , rpReportId
     , rpProfileId
+    , rpReport
     , rpKey
-    , rpOauthToken
+    , rpOAuthToken
     , rpFields
-    , rpAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,10 +54,11 @@ type ReportsPatchResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Patch '[JSON] Report
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Report :> Patch '[JSON] Report
 
 -- | Updates a report. This method supports patch semantics.
 --
@@ -65,13 +66,13 @@ type ReportsPatchResource =
 data ReportsPatch' = ReportsPatch'
     { _rpQuotaUser   :: !(Maybe Text)
     , _rpPrettyPrint :: !Bool
-    , _rpUserIp      :: !(Maybe Text)
+    , _rpUserIP      :: !(Maybe Text)
     , _rpReportId    :: !Int64
     , _rpProfileId   :: !Int64
-    , _rpKey         :: !(Maybe Text)
-    , _rpOauthToken  :: !(Maybe Text)
+    , _rpReport      :: !Report
+    , _rpKey         :: !(Maybe Key)
+    , _rpOAuthToken  :: !(Maybe OAuthToken)
     , _rpFields      :: !(Maybe Text)
-    , _rpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsPatch'' with the minimum fields required to make a request.
@@ -82,34 +83,35 @@ data ReportsPatch' = ReportsPatch'
 --
 -- * 'rpPrettyPrint'
 --
--- * 'rpUserIp'
+-- * 'rpUserIP'
 --
 -- * 'rpReportId'
 --
 -- * 'rpProfileId'
 --
+-- * 'rpReport'
+--
 -- * 'rpKey'
 --
--- * 'rpOauthToken'
+-- * 'rpOAuthToken'
 --
 -- * 'rpFields'
---
--- * 'rpAlt'
 reportsPatch'
     :: Int64 -- ^ 'reportId'
     -> Int64 -- ^ 'profileId'
+    -> Report -- ^ 'Report'
     -> ReportsPatch'
-reportsPatch' pRpReportId_ pRpProfileId_ =
+reportsPatch' pRpReportId_ pRpProfileId_ pRpReport_ =
     ReportsPatch'
     { _rpQuotaUser = Nothing
     , _rpPrettyPrint = True
-    , _rpUserIp = Nothing
+    , _rpUserIP = Nothing
     , _rpReportId = pRpReportId_
     , _rpProfileId = pRpProfileId_
+    , _rpReport = pRpReport_
     , _rpKey = Nothing
-    , _rpOauthToken = Nothing
+    , _rpOAuthToken = Nothing
     , _rpFields = Nothing
-    , _rpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,8 +129,8 @@ rpPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rpUserIp :: Lens' ReportsPatch' (Maybe Text)
-rpUserIp = lens _rpUserIp (\ s a -> s{_rpUserIp = a})
+rpUserIP :: Lens' ReportsPatch' (Maybe Text)
+rpUserIP = lens _rpUserIP (\ s a -> s{_rpUserIP = a})
 
 -- | The ID of the report.
 rpReportId :: Lens' ReportsPatch' Int64
@@ -140,36 +142,41 @@ rpProfileId :: Lens' ReportsPatch' Int64
 rpProfileId
   = lens _rpProfileId (\ s a -> s{_rpProfileId = a})
 
+-- | Multipart request metadata.
+rpReport :: Lens' ReportsPatch' Report
+rpReport = lens _rpReport (\ s a -> s{_rpReport = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rpKey :: Lens' ReportsPatch' (Maybe Text)
+rpKey :: Lens' ReportsPatch' (Maybe Key)
 rpKey = lens _rpKey (\ s a -> s{_rpKey = a})
 
 -- | OAuth 2.0 token for the current user.
-rpOauthToken :: Lens' ReportsPatch' (Maybe Text)
-rpOauthToken
-  = lens _rpOauthToken (\ s a -> s{_rpOauthToken = a})
+rpOAuthToken :: Lens' ReportsPatch' (Maybe OAuthToken)
+rpOAuthToken
+  = lens _rpOAuthToken (\ s a -> s{_rpOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 rpFields :: Lens' ReportsPatch' (Maybe Text)
 rpFields = lens _rpFields (\ s a -> s{_rpFields = a})
 
--- | Data format for the response.
-rpAlt :: Lens' ReportsPatch' Alt
-rpAlt = lens _rpAlt (\ s a -> s{_rpAlt = a})
+instance GoogleAuth ReportsPatch' where
+        authKey = rpKey . _Just
+        authToken = rpOAuthToken . _Just
 
 instance GoogleRequest ReportsPatch' where
         type Rs ReportsPatch' = Report
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ReportsPatch'{..}
-          = go _rpQuotaUser (Just _rpPrettyPrint) _rpUserIp
+          = go _rpQuotaUser (Just _rpPrettyPrint) _rpUserIP
               _rpReportId
               _rpProfileId
               _rpKey
-              _rpOauthToken
+              _rpOAuthToken
               _rpFields
-              (Just _rpAlt)
+              (Just AltJSON)
+              _rpReport
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ReportsPatchResource)

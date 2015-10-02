@@ -31,15 +31,15 @@ module Network.Google.Resource.Calendar.Events.Import
     , EventsImport'
 
     -- * Request Lenses
+    , eEvent
     , eQuotaUser
     , eCalendarId
     , ePrettyPrint
-    , eUserIp
+    , eUserIP
     , eKey
-    , eOauthToken
+    , eOAuthToken
     , eSupportsAttachments
     , eFields
-    , eAlt
     ) where
 
 import           Network.Google.AppsCalendar.Types
@@ -55,31 +55,34 @@ type EventsImportResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "supportsAttachments" Bool :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Post '[JSON] Event
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] Event :> Post '[JSON] Event
 
 -- | Imports an event. This operation is used to add a private copy of an
 -- existing event to a calendar.
 --
 -- /See:/ 'eventsImport'' smart constructor.
 data EventsImport' = EventsImport'
-    { _eQuotaUser           :: !(Maybe Text)
+    { _eEvent               :: !Event
+    , _eQuotaUser           :: !(Maybe Text)
     , _eCalendarId          :: !Text
     , _ePrettyPrint         :: !Bool
-    , _eUserIp              :: !(Maybe Text)
-    , _eKey                 :: !(Maybe Text)
-    , _eOauthToken          :: !(Maybe Text)
+    , _eUserIP              :: !(Maybe Text)
+    , _eKey                 :: !(Maybe Key)
+    , _eOAuthToken          :: !(Maybe OAuthToken)
     , _eSupportsAttachments :: !(Maybe Bool)
     , _eFields              :: !(Maybe Text)
-    , _eAlt                 :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsImport'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'eEvent'
 --
 -- * 'eQuotaUser'
 --
@@ -87,32 +90,35 @@ data EventsImport' = EventsImport'
 --
 -- * 'ePrettyPrint'
 --
--- * 'eUserIp'
+-- * 'eUserIP'
 --
 -- * 'eKey'
 --
--- * 'eOauthToken'
+-- * 'eOAuthToken'
 --
 -- * 'eSupportsAttachments'
 --
 -- * 'eFields'
---
--- * 'eAlt'
 eventsImport'
-    :: Text -- ^ 'calendarId'
+    :: Event -- ^ 'Event'
+    -> Text -- ^ 'calendarId'
     -> EventsImport'
-eventsImport' pECalendarId_ =
+eventsImport' pEEvent_ pECalendarId_ =
     EventsImport'
-    { _eQuotaUser = Nothing
+    { _eEvent = pEEvent_
+    , _eQuotaUser = Nothing
     , _eCalendarId = pECalendarId_
     , _ePrettyPrint = True
-    , _eUserIp = Nothing
+    , _eUserIP = Nothing
     , _eKey = Nothing
-    , _eOauthToken = Nothing
+    , _eOAuthToken = Nothing
     , _eSupportsAttachments = Nothing
     , _eFields = Nothing
-    , _eAlt = JSON
     }
+
+-- | Multipart request metadata.
+eEvent :: Lens' EventsImport' Event
+eEvent = lens _eEvent (\ s a -> s{_eEvent = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -135,19 +141,19 @@ ePrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-eUserIp :: Lens' EventsImport' (Maybe Text)
-eUserIp = lens _eUserIp (\ s a -> s{_eUserIp = a})
+eUserIP :: Lens' EventsImport' (Maybe Text)
+eUserIP = lens _eUserIP (\ s a -> s{_eUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-eKey :: Lens' EventsImport' (Maybe Text)
+eKey :: Lens' EventsImport' (Maybe Key)
 eKey = lens _eKey (\ s a -> s{_eKey = a})
 
 -- | OAuth 2.0 token for the current user.
-eOauthToken :: Lens' EventsImport' (Maybe Text)
-eOauthToken
-  = lens _eOauthToken (\ s a -> s{_eOauthToken = a})
+eOAuthToken :: Lens' EventsImport' (Maybe OAuthToken)
+eOAuthToken
+  = lens _eOAuthToken (\ s a -> s{_eOAuthToken = a})
 
 -- | Whether API client performing operation supports event attachments.
 -- Optional. The default is False.
@@ -160,21 +166,22 @@ eSupportsAttachments
 eFields :: Lens' EventsImport' (Maybe Text)
 eFields = lens _eFields (\ s a -> s{_eFields = a})
 
--- | Data format for the response.
-eAlt :: Lens' EventsImport' Alt
-eAlt = lens _eAlt (\ s a -> s{_eAlt = a})
+instance GoogleAuth EventsImport' where
+        authKey = eKey . _Just
+        authToken = eOAuthToken . _Just
 
 instance GoogleRequest EventsImport' where
         type Rs EventsImport' = Event
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u EventsImport'{..}
           = go _eQuotaUser _eCalendarId (Just _ePrettyPrint)
-              _eUserIp
+              _eUserIP
               _eKey
-              _eOauthToken
+              _eOAuthToken
               _eSupportsAttachments
               _eFields
-              (Just _eAlt)
+              (Just AltJSON)
+              _eEvent
           where go
                   = clientWithRoute
                       (Proxy :: Proxy EventsImportResource)

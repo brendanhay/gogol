@@ -33,13 +33,13 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.Insert
     -- * Request Lenses
     , igmiQuotaUser
     , igmiPrettyPrint
+    , igmiInstanceGroupManager
     , igmiProject
-    , igmiUserIp
+    , igmiUserIP
     , igmiZone
     , igmiKey
-    , igmiOauthToken
+    , igmiOAuthToken
     , igmiFields
-    , igmiAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -55,25 +55,27 @@ type InstanceGroupManagersInsertResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Post '[JSON] Operation
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] InstanceGroupManager :>
+                             Post '[JSON] Operation
 
 -- | Creates a managed instance group resource in the specified project using
 -- the data that is included in the request.
 --
 -- /See:/ 'instanceGroupManagersInsert'' smart constructor.
 data InstanceGroupManagersInsert' = InstanceGroupManagersInsert'
-    { _igmiQuotaUser   :: !(Maybe Text)
-    , _igmiPrettyPrint :: !Bool
-    , _igmiProject     :: !Text
-    , _igmiUserIp      :: !(Maybe Text)
-    , _igmiZone        :: !Text
-    , _igmiKey         :: !(Maybe Text)
-    , _igmiOauthToken  :: !(Maybe Text)
-    , _igmiFields      :: !(Maybe Text)
-    , _igmiAlt         :: !Alt
+    { _igmiQuotaUser            :: !(Maybe Text)
+    , _igmiPrettyPrint          :: !Bool
+    , _igmiInstanceGroupManager :: !InstanceGroupManager
+    , _igmiProject              :: !Text
+    , _igmiUserIP               :: !(Maybe Text)
+    , _igmiZone                 :: !Text
+    , _igmiKey                  :: !(Maybe Key)
+    , _igmiOAuthToken           :: !(Maybe OAuthToken)
+    , _igmiFields               :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagersInsert'' with the minimum fields required to make a request.
@@ -84,34 +86,35 @@ data InstanceGroupManagersInsert' = InstanceGroupManagersInsert'
 --
 -- * 'igmiPrettyPrint'
 --
+-- * 'igmiInstanceGroupManager'
+--
 -- * 'igmiProject'
 --
--- * 'igmiUserIp'
+-- * 'igmiUserIP'
 --
 -- * 'igmiZone'
 --
 -- * 'igmiKey'
 --
--- * 'igmiOauthToken'
+-- * 'igmiOAuthToken'
 --
 -- * 'igmiFields'
---
--- * 'igmiAlt'
 instanceGroupManagersInsert'
-    :: Text -- ^ 'project'
+    :: InstanceGroupManager -- ^ 'InstanceGroupManager'
+    -> Text -- ^ 'project'
     -> Text -- ^ 'zone'
     -> InstanceGroupManagersInsert'
-instanceGroupManagersInsert' pIgmiProject_ pIgmiZone_ =
+instanceGroupManagersInsert' pIgmiInstanceGroupManager_ pIgmiProject_ pIgmiZone_ =
     InstanceGroupManagersInsert'
     { _igmiQuotaUser = Nothing
     , _igmiPrettyPrint = True
+    , _igmiInstanceGroupManager = pIgmiInstanceGroupManager_
     , _igmiProject = pIgmiProject_
-    , _igmiUserIp = Nothing
+    , _igmiUserIP = Nothing
     , _igmiZone = pIgmiZone_
     , _igmiKey = Nothing
-    , _igmiOauthToken = Nothing
+    , _igmiOAuthToken = Nothing
     , _igmiFields = Nothing
-    , _igmiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -128,6 +131,12 @@ igmiPrettyPrint
   = lens _igmiPrettyPrint
       (\ s a -> s{_igmiPrettyPrint = a})
 
+-- | Multipart request metadata.
+igmiInstanceGroupManager :: Lens' InstanceGroupManagersInsert' InstanceGroupManager
+igmiInstanceGroupManager
+  = lens _igmiInstanceGroupManager
+      (\ s a -> s{_igmiInstanceGroupManager = a})
+
 -- | The project ID for this request.
 igmiProject :: Lens' InstanceGroupManagersInsert' Text
 igmiProject
@@ -135,9 +144,9 @@ igmiProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-igmiUserIp :: Lens' InstanceGroupManagersInsert' (Maybe Text)
-igmiUserIp
-  = lens _igmiUserIp (\ s a -> s{_igmiUserIp = a})
+igmiUserIP :: Lens' InstanceGroupManagersInsert' (Maybe Text)
+igmiUserIP
+  = lens _igmiUserIP (\ s a -> s{_igmiUserIP = a})
 
 -- | The URL of the zone where the managed instance group is located.
 igmiZone :: Lens' InstanceGroupManagersInsert' Text
@@ -146,23 +155,24 @@ igmiZone = lens _igmiZone (\ s a -> s{_igmiZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-igmiKey :: Lens' InstanceGroupManagersInsert' (Maybe Text)
+igmiKey :: Lens' InstanceGroupManagersInsert' (Maybe Key)
 igmiKey = lens _igmiKey (\ s a -> s{_igmiKey = a})
 
 -- | OAuth 2.0 token for the current user.
-igmiOauthToken :: Lens' InstanceGroupManagersInsert' (Maybe Text)
-igmiOauthToken
-  = lens _igmiOauthToken
-      (\ s a -> s{_igmiOauthToken = a})
+igmiOAuthToken :: Lens' InstanceGroupManagersInsert' (Maybe OAuthToken)
+igmiOAuthToken
+  = lens _igmiOAuthToken
+      (\ s a -> s{_igmiOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 igmiFields :: Lens' InstanceGroupManagersInsert' (Maybe Text)
 igmiFields
   = lens _igmiFields (\ s a -> s{_igmiFields = a})
 
--- | Data format for the response.
-igmiAlt :: Lens' InstanceGroupManagersInsert' Alt
-igmiAlt = lens _igmiAlt (\ s a -> s{_igmiAlt = a})
+instance GoogleAuth InstanceGroupManagersInsert'
+         where
+        authKey = igmiKey . _Just
+        authToken = igmiOAuthToken . _Just
 
 instance GoogleRequest InstanceGroupManagersInsert'
          where
@@ -171,12 +181,13 @@ instance GoogleRequest InstanceGroupManagersInsert'
         requestWithRoute r u InstanceGroupManagersInsert'{..}
           = go _igmiQuotaUser (Just _igmiPrettyPrint)
               _igmiProject
-              _igmiUserIp
+              _igmiUserIP
               _igmiZone
               _igmiKey
-              _igmiOauthToken
+              _igmiOAuthToken
               _igmiFields
-              (Just _igmiAlt)
+              (Just AltJSON)
+              _igmiInstanceGroupManager
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InstanceGroupManagersInsertResource)

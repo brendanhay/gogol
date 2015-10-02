@@ -34,11 +34,10 @@ module Network.Google.Resource.Calendar.Calendars.Clear
     , ccQuotaUser
     , ccCalendarId
     , ccPrettyPrint
-    , ccUserIp
+    , ccUserIP
     , ccKey
-    , ccOauthToken
+    , ccOAuthToken
     , ccFields
-    , ccAlt
     ) where
 
 import           Network.Google.AppsCalendar.Types
@@ -53,10 +52,10 @@ type CalendarsClearResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] ()
+                       QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Clears a primary calendar. This operation deletes all events associated
 -- with the primary calendar of an account.
@@ -66,11 +65,10 @@ data CalendarsClear' = CalendarsClear'
     { _ccQuotaUser   :: !(Maybe Text)
     , _ccCalendarId  :: !Text
     , _ccPrettyPrint :: !Bool
-    , _ccUserIp      :: !(Maybe Text)
-    , _ccKey         :: !(Maybe Text)
-    , _ccOauthToken  :: !(Maybe Text)
+    , _ccUserIP      :: !(Maybe Text)
+    , _ccKey         :: !(Maybe Key)
+    , _ccOAuthToken  :: !(Maybe OAuthToken)
     , _ccFields      :: !(Maybe Text)
-    , _ccAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CalendarsClear'' with the minimum fields required to make a request.
@@ -83,15 +81,13 @@ data CalendarsClear' = CalendarsClear'
 --
 -- * 'ccPrettyPrint'
 --
--- * 'ccUserIp'
+-- * 'ccUserIP'
 --
 -- * 'ccKey'
 --
--- * 'ccOauthToken'
+-- * 'ccOAuthToken'
 --
 -- * 'ccFields'
---
--- * 'ccAlt'
 calendarsClear'
     :: Text -- ^ 'calendarId'
     -> CalendarsClear'
@@ -100,11 +96,10 @@ calendarsClear' pCcCalendarId_ =
     { _ccQuotaUser = Nothing
     , _ccCalendarId = pCcCalendarId_
     , _ccPrettyPrint = True
-    , _ccUserIp = Nothing
+    , _ccUserIP = Nothing
     , _ccKey = Nothing
-    , _ccOauthToken = Nothing
+    , _ccOAuthToken = Nothing
     , _ccFields = Nothing
-    , _ccAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -129,38 +124,38 @@ ccPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ccUserIp :: Lens' CalendarsClear' (Maybe Text)
-ccUserIp = lens _ccUserIp (\ s a -> s{_ccUserIp = a})
+ccUserIP :: Lens' CalendarsClear' (Maybe Text)
+ccUserIP = lens _ccUserIP (\ s a -> s{_ccUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ccKey :: Lens' CalendarsClear' (Maybe Text)
+ccKey :: Lens' CalendarsClear' (Maybe Key)
 ccKey = lens _ccKey (\ s a -> s{_ccKey = a})
 
 -- | OAuth 2.0 token for the current user.
-ccOauthToken :: Lens' CalendarsClear' (Maybe Text)
-ccOauthToken
-  = lens _ccOauthToken (\ s a -> s{_ccOauthToken = a})
+ccOAuthToken :: Lens' CalendarsClear' (Maybe OAuthToken)
+ccOAuthToken
+  = lens _ccOAuthToken (\ s a -> s{_ccOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ccFields :: Lens' CalendarsClear' (Maybe Text)
 ccFields = lens _ccFields (\ s a -> s{_ccFields = a})
 
--- | Data format for the response.
-ccAlt :: Lens' CalendarsClear' Alt
-ccAlt = lens _ccAlt (\ s a -> s{_ccAlt = a})
+instance GoogleAuth CalendarsClear' where
+        authKey = ccKey . _Just
+        authToken = ccOAuthToken . _Just
 
 instance GoogleRequest CalendarsClear' where
         type Rs CalendarsClear' = ()
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u CalendarsClear'{..}
           = go _ccQuotaUser _ccCalendarId (Just _ccPrettyPrint)
-              _ccUserIp
+              _ccUserIP
               _ccKey
-              _ccOauthToken
+              _ccOAuthToken
               _ccFields
-              (Just _ccAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CalendarsClearResource)

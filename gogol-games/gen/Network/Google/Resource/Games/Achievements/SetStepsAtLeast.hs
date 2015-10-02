@@ -36,12 +36,11 @@ module Network.Google.Resource.Games.Achievements.SetStepsAtLeast
     , assalQuotaUser
     , assalPrettyPrint
     , assalAchievementId
-    , assalUserIp
+    , assalUserIP
     , assalSteps
     , assalKey
-    , assalOauthToken
+    , assalOAuthToken
     , assalFields
-    , assalAlt
     ) where
 
 import           Network.Google.Games.Types
@@ -57,10 +56,10 @@ type AchievementsSetStepsAtLeastResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "steps" Int32 :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :>
+                         QueryParam "alt" AltJSON :>
                            Post '[JSON] AchievementSetStepsAtLeastResponse
 
 -- | Sets the steps for the currently authenticated player towards unlocking
@@ -73,12 +72,11 @@ data AchievementsSetStepsAtLeast' = AchievementsSetStepsAtLeast'
     { _assalQuotaUser     :: !(Maybe Text)
     , _assalPrettyPrint   :: !Bool
     , _assalAchievementId :: !Text
-    , _assalUserIp        :: !(Maybe Text)
+    , _assalUserIP        :: !(Maybe Text)
     , _assalSteps         :: !Int32
-    , _assalKey           :: !(Maybe Text)
-    , _assalOauthToken    :: !(Maybe Text)
+    , _assalKey           :: !(Maybe Key)
+    , _assalOAuthToken    :: !(Maybe OAuthToken)
     , _assalFields        :: !(Maybe Text)
-    , _assalAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementsSetStepsAtLeast'' with the minimum fields required to make a request.
@@ -91,17 +89,15 @@ data AchievementsSetStepsAtLeast' = AchievementsSetStepsAtLeast'
 --
 -- * 'assalAchievementId'
 --
--- * 'assalUserIp'
+-- * 'assalUserIP'
 --
 -- * 'assalSteps'
 --
 -- * 'assalKey'
 --
--- * 'assalOauthToken'
+-- * 'assalOAuthToken'
 --
 -- * 'assalFields'
---
--- * 'assalAlt'
 achievementsSetStepsAtLeast'
     :: Text -- ^ 'achievementId'
     -> Int32 -- ^ 'steps'
@@ -111,12 +107,11 @@ achievementsSetStepsAtLeast' pAssalAchievementId_ pAssalSteps_ =
     { _assalQuotaUser = Nothing
     , _assalPrettyPrint = True
     , _assalAchievementId = pAssalAchievementId_
-    , _assalUserIp = Nothing
+    , _assalUserIP = Nothing
     , _assalSteps = pAssalSteps_
     , _assalKey = Nothing
-    , _assalOauthToken = Nothing
+    , _assalOAuthToken = Nothing
     , _assalFields = Nothing
-    , _assalAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -141,9 +136,9 @@ assalAchievementId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-assalUserIp :: Lens' AchievementsSetStepsAtLeast' (Maybe Text)
-assalUserIp
-  = lens _assalUserIp (\ s a -> s{_assalUserIp = a})
+assalUserIP :: Lens' AchievementsSetStepsAtLeast' (Maybe Text)
+assalUserIP
+  = lens _assalUserIP (\ s a -> s{_assalUserIP = a})
 
 -- | The minimum value to set the steps to.
 assalSteps :: Lens' AchievementsSetStepsAtLeast' Int32
@@ -153,23 +148,24 @@ assalSteps
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-assalKey :: Lens' AchievementsSetStepsAtLeast' (Maybe Text)
+assalKey :: Lens' AchievementsSetStepsAtLeast' (Maybe Key)
 assalKey = lens _assalKey (\ s a -> s{_assalKey = a})
 
 -- | OAuth 2.0 token for the current user.
-assalOauthToken :: Lens' AchievementsSetStepsAtLeast' (Maybe Text)
-assalOauthToken
-  = lens _assalOauthToken
-      (\ s a -> s{_assalOauthToken = a})
+assalOAuthToken :: Lens' AchievementsSetStepsAtLeast' (Maybe OAuthToken)
+assalOAuthToken
+  = lens _assalOAuthToken
+      (\ s a -> s{_assalOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 assalFields :: Lens' AchievementsSetStepsAtLeast' (Maybe Text)
 assalFields
   = lens _assalFields (\ s a -> s{_assalFields = a})
 
--- | Data format for the response.
-assalAlt :: Lens' AchievementsSetStepsAtLeast' Alt
-assalAlt = lens _assalAlt (\ s a -> s{_assalAlt = a})
+instance GoogleAuth AchievementsSetStepsAtLeast'
+         where
+        authKey = assalKey . _Just
+        authToken = assalOAuthToken . _Just
 
 instance GoogleRequest AchievementsSetStepsAtLeast'
          where
@@ -179,12 +175,12 @@ instance GoogleRequest AchievementsSetStepsAtLeast'
         requestWithRoute r u AchievementsSetStepsAtLeast'{..}
           = go _assalQuotaUser (Just _assalPrettyPrint)
               _assalAchievementId
-              _assalUserIp
+              _assalUserIP
               (Just _assalSteps)
               _assalKey
-              _assalOauthToken
+              _assalOAuthToken
               _assalFields
-              (Just _assalAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AchievementsSetStepsAtLeastResource)

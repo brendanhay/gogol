@@ -33,15 +33,14 @@ module Network.Google.Resource.Games.Quests.List
     -- * Request Lenses
     , qlQuotaUser
     , qlPrettyPrint
-    , qlUserIp
+    , qlUserIP
     , qlKey
     , qlLanguage
     , qlPageToken
-    , qlOauthToken
+    , qlOAuthToken
     , qlPlayerId
     , qlMaxResults
     , qlFields
-    , qlAlt
     ) where
 
 import           Network.Google.Games.Types
@@ -56,13 +55,13 @@ type QuestsListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "language" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "maxResults" Int32 :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :>
+                             QueryParam "alt" AltJSON :>
                                Get '[JSON] QuestListResponse
 
 -- | Get a list of quests for your application and the currently
@@ -72,15 +71,14 @@ type QuestsListResource =
 data QuestsList' = QuestsList'
     { _qlQuotaUser   :: !(Maybe Text)
     , _qlPrettyPrint :: !Bool
-    , _qlUserIp      :: !(Maybe Text)
-    , _qlKey         :: !(Maybe Text)
+    , _qlUserIP      :: !(Maybe Text)
+    , _qlKey         :: !(Maybe Key)
     , _qlLanguage    :: !(Maybe Text)
     , _qlPageToken   :: !(Maybe Text)
-    , _qlOauthToken  :: !(Maybe Text)
+    , _qlOAuthToken  :: !(Maybe OAuthToken)
     , _qlPlayerId    :: !Text
     , _qlMaxResults  :: !(Maybe Int32)
     , _qlFields      :: !(Maybe Text)
-    , _qlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QuestsList'' with the minimum fields required to make a request.
@@ -91,7 +89,7 @@ data QuestsList' = QuestsList'
 --
 -- * 'qlPrettyPrint'
 --
--- * 'qlUserIp'
+-- * 'qlUserIP'
 --
 -- * 'qlKey'
 --
@@ -99,15 +97,13 @@ data QuestsList' = QuestsList'
 --
 -- * 'qlPageToken'
 --
--- * 'qlOauthToken'
+-- * 'qlOAuthToken'
 --
 -- * 'qlPlayerId'
 --
 -- * 'qlMaxResults'
 --
 -- * 'qlFields'
---
--- * 'qlAlt'
 questsList'
     :: Text -- ^ 'playerId'
     -> QuestsList'
@@ -115,15 +111,14 @@ questsList' pQlPlayerId_ =
     QuestsList'
     { _qlQuotaUser = Nothing
     , _qlPrettyPrint = True
-    , _qlUserIp = Nothing
+    , _qlUserIP = Nothing
     , _qlKey = Nothing
     , _qlLanguage = Nothing
     , _qlPageToken = Nothing
-    , _qlOauthToken = Nothing
+    , _qlOAuthToken = Nothing
     , _qlPlayerId = pQlPlayerId_
     , _qlMaxResults = Nothing
     , _qlFields = Nothing
-    , _qlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -141,13 +136,13 @@ qlPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-qlUserIp :: Lens' QuestsList' (Maybe Text)
-qlUserIp = lens _qlUserIp (\ s a -> s{_qlUserIp = a})
+qlUserIP :: Lens' QuestsList' (Maybe Text)
+qlUserIP = lens _qlUserIP (\ s a -> s{_qlUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-qlKey :: Lens' QuestsList' (Maybe Text)
+qlKey :: Lens' QuestsList' (Maybe Key)
 qlKey = lens _qlKey (\ s a -> s{_qlKey = a})
 
 -- | The preferred language to use for strings returned by this method.
@@ -161,9 +156,9 @@ qlPageToken
   = lens _qlPageToken (\ s a -> s{_qlPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-qlOauthToken :: Lens' QuestsList' (Maybe Text)
-qlOauthToken
-  = lens _qlOauthToken (\ s a -> s{_qlOauthToken = a})
+qlOAuthToken :: Lens' QuestsList' (Maybe OAuthToken)
+qlOAuthToken
+  = lens _qlOAuthToken (\ s a -> s{_qlOAuthToken = a})
 
 -- | A player ID. A value of me may be used in place of the authenticated
 -- player\'s ID.
@@ -183,23 +178,23 @@ qlMaxResults
 qlFields :: Lens' QuestsList' (Maybe Text)
 qlFields = lens _qlFields (\ s a -> s{_qlFields = a})
 
--- | Data format for the response.
-qlAlt :: Lens' QuestsList' Alt
-qlAlt = lens _qlAlt (\ s a -> s{_qlAlt = a})
+instance GoogleAuth QuestsList' where
+        authKey = qlKey . _Just
+        authToken = qlOAuthToken . _Just
 
 instance GoogleRequest QuestsList' where
         type Rs QuestsList' = QuestListResponse
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u QuestsList'{..}
-          = go _qlQuotaUser (Just _qlPrettyPrint) _qlUserIp
+          = go _qlQuotaUser (Just _qlPrettyPrint) _qlUserIP
               _qlKey
               _qlLanguage
               _qlPageToken
-              _qlOauthToken
+              _qlOAuthToken
               _qlPlayerId
               _qlMaxResults
               _qlFields
-              (Just _qlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy QuestsListResource)
                       r

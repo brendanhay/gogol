@@ -34,14 +34,14 @@ module Network.Google.Resource.Calendar.ACL.Watch
     , awQuotaUser
     , awCalendarId
     , awPrettyPrint
-    , awUserIp
+    , awUserIP
+    , awChannel
     , awShowDeleted
     , awKey
     , awPageToken
-    , awOauthToken
+    , awOAuthToken
     , awMaxResults
     , awFields
-    , awAlt
     ) where
 
 import           Network.Google.AppsCalendar.Types
@@ -59,12 +59,14 @@ type AclWatchResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "showDeleted" Bool :>
-                       QueryParam "key" Text :>
+                       QueryParam "key" Key :>
                          QueryParam "pageToken" Text :>
-                           QueryParam "oauth_token" Text :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "maxResults" Int32 :>
                                QueryParam "fields" Text :>
-                                 QueryParam "alt" Alt :> Post '[JSON] Channel
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON] Channel :>
+                                     Post '[JSON] Channel
 
 -- | Watch for changes to ACL resources.
 --
@@ -74,14 +76,14 @@ data ACLWatch' = ACLWatch'
     , _awQuotaUser   :: !(Maybe Text)
     , _awCalendarId  :: !Text
     , _awPrettyPrint :: !Bool
-    , _awUserIp      :: !(Maybe Text)
+    , _awUserIP      :: !(Maybe Text)
+    , _awChannel     :: !Channel
     , _awShowDeleted :: !(Maybe Bool)
-    , _awKey         :: !(Maybe Text)
+    , _awKey         :: !(Maybe Key)
     , _awPageToken   :: !(Maybe Text)
-    , _awOauthToken  :: !(Maybe Text)
+    , _awOAuthToken  :: !(Maybe OAuthToken)
     , _awMaxResults  :: !(Maybe Int32)
     , _awFields      :: !(Maybe Text)
-    , _awAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ACLWatch'' with the minimum fields required to make a request.
@@ -96,7 +98,9 @@ data ACLWatch' = ACLWatch'
 --
 -- * 'awPrettyPrint'
 --
--- * 'awUserIp'
+-- * 'awUserIP'
+--
+-- * 'awChannel'
 --
 -- * 'awShowDeleted'
 --
@@ -104,30 +108,29 @@ data ACLWatch' = ACLWatch'
 --
 -- * 'awPageToken'
 --
--- * 'awOauthToken'
+-- * 'awOAuthToken'
 --
 -- * 'awMaxResults'
 --
 -- * 'awFields'
---
--- * 'awAlt'
 aCLWatch'
     :: Text -- ^ 'calendarId'
+    -> Channel -- ^ 'Channel'
     -> ACLWatch'
-aCLWatch' pAwCalendarId_ =
+aCLWatch' pAwCalendarId_ pAwChannel_ =
     ACLWatch'
     { _awSyncToken = Nothing
     , _awQuotaUser = Nothing
     , _awCalendarId = pAwCalendarId_
     , _awPrettyPrint = True
-    , _awUserIp = Nothing
+    , _awUserIP = Nothing
+    , _awChannel = pAwChannel_
     , _awShowDeleted = Nothing
     , _awKey = Nothing
     , _awPageToken = Nothing
-    , _awOauthToken = Nothing
+    , _awOAuthToken = Nothing
     , _awMaxResults = Nothing
     , _awFields = Nothing
-    , _awAlt = JSON
     }
 
 -- | Token obtained from the nextSyncToken field returned on the last page of
@@ -165,8 +168,13 @@ awPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-awUserIp :: Lens' ACLWatch' (Maybe Text)
-awUserIp = lens _awUserIp (\ s a -> s{_awUserIp = a})
+awUserIP :: Lens' ACLWatch' (Maybe Text)
+awUserIP = lens _awUserIP (\ s a -> s{_awUserIP = a})
+
+-- | Multipart request metadata.
+awChannel :: Lens' ACLWatch' Channel
+awChannel
+  = lens _awChannel (\ s a -> s{_awChannel = a})
 
 -- | Whether to include deleted ACLs in the result. Deleted ACLs are
 -- represented by role equal to \"none\". Deleted ACLs will always be
@@ -179,7 +187,7 @@ awShowDeleted
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-awKey :: Lens' ACLWatch' (Maybe Text)
+awKey :: Lens' ACLWatch' (Maybe Key)
 awKey = lens _awKey (\ s a -> s{_awKey = a})
 
 -- | Token specifying which result page to return. Optional.
@@ -188,9 +196,9 @@ awPageToken
   = lens _awPageToken (\ s a -> s{_awPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-awOauthToken :: Lens' ACLWatch' (Maybe Text)
-awOauthToken
-  = lens _awOauthToken (\ s a -> s{_awOauthToken = a})
+awOAuthToken :: Lens' ACLWatch' (Maybe OAuthToken)
+awOAuthToken
+  = lens _awOAuthToken (\ s a -> s{_awOAuthToken = a})
 
 -- | Maximum number of entries returned on one result page. By default the
 -- value is 100 entries. The page size can never be larger than 250
@@ -203,9 +211,9 @@ awMaxResults
 awFields :: Lens' ACLWatch' (Maybe Text)
 awFields = lens _awFields (\ s a -> s{_awFields = a})
 
--- | Data format for the response.
-awAlt :: Lens' ACLWatch' Alt
-awAlt = lens _awAlt (\ s a -> s{_awAlt = a})
+instance GoogleAuth ACLWatch' where
+        authKey = awKey . _Just
+        authToken = awOAuthToken . _Just
 
 instance GoogleRequest ACLWatch' where
         type Rs ACLWatch' = Channel
@@ -213,14 +221,15 @@ instance GoogleRequest ACLWatch' where
         requestWithRoute r u ACLWatch'{..}
           = go _awSyncToken _awQuotaUser _awCalendarId
               (Just _awPrettyPrint)
-              _awUserIp
+              _awUserIP
               _awShowDeleted
               _awKey
               _awPageToken
-              _awOauthToken
+              _awOAuthToken
               _awMaxResults
               _awFields
-              (Just _awAlt)
+              (Just AltJSON)
+              _awChannel
           where go
                   = clientWithRoute (Proxy :: Proxy AclWatchResource) r
                       u

@@ -34,12 +34,11 @@ module Network.Google.Resource.Compute.Instances.Start
     , insnQuotaUser
     , insnPrettyPrint
     , insnProject
-    , insnUserIp
+    , insnUserIP
     , insnZone
     , insnKey
-    , insnOauthToken
+    , insnOAuthToken
     , insnFields
-    , insnAlt
     , insnInstance
     ) where
 
@@ -58,10 +57,10 @@ type InstancesStartResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Post '[JSON] Operation
+                             QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
 -- | This method starts an instance that was stopped using the using the
 -- instances().stop method. For more information, see Restart an instance.
@@ -71,12 +70,11 @@ data InstancesStart' = InstancesStart'
     { _insnQuotaUser   :: !(Maybe Text)
     , _insnPrettyPrint :: !Bool
     , _insnProject     :: !Text
-    , _insnUserIp      :: !(Maybe Text)
+    , _insnUserIP      :: !(Maybe Text)
     , _insnZone        :: !Text
-    , _insnKey         :: !(Maybe Text)
-    , _insnOauthToken  :: !(Maybe Text)
+    , _insnKey         :: !(Maybe Key)
+    , _insnOAuthToken  :: !(Maybe OAuthToken)
     , _insnFields      :: !(Maybe Text)
-    , _insnAlt         :: !Alt
     , _insnInstance    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -90,17 +88,15 @@ data InstancesStart' = InstancesStart'
 --
 -- * 'insnProject'
 --
--- * 'insnUserIp'
+-- * 'insnUserIP'
 --
 -- * 'insnZone'
 --
 -- * 'insnKey'
 --
--- * 'insnOauthToken'
+-- * 'insnOAuthToken'
 --
 -- * 'insnFields'
---
--- * 'insnAlt'
 --
 -- * 'insnInstance'
 instancesStart'
@@ -113,12 +109,11 @@ instancesStart' pInsnProject_ pInsnZone_ pInsnInstance_ =
     { _insnQuotaUser = Nothing
     , _insnPrettyPrint = True
     , _insnProject = pInsnProject_
-    , _insnUserIp = Nothing
+    , _insnUserIP = Nothing
     , _insnZone = pInsnZone_
     , _insnKey = Nothing
-    , _insnOauthToken = Nothing
+    , _insnOAuthToken = Nothing
     , _insnFields = Nothing
-    , _insnAlt = JSON
     , _insnInstance = pInsnInstance_
     }
 
@@ -143,9 +138,9 @@ insnProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-insnUserIp :: Lens' InstancesStart' (Maybe Text)
-insnUserIp
-  = lens _insnUserIp (\ s a -> s{_insnUserIp = a})
+insnUserIP :: Lens' InstancesStart' (Maybe Text)
+insnUserIP
+  = lens _insnUserIP (\ s a -> s{_insnUserIP = a})
 
 -- | The name of the zone for this request.
 insnZone :: Lens' InstancesStart' Text
@@ -154,28 +149,28 @@ insnZone = lens _insnZone (\ s a -> s{_insnZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-insnKey :: Lens' InstancesStart' (Maybe Text)
+insnKey :: Lens' InstancesStart' (Maybe Key)
 insnKey = lens _insnKey (\ s a -> s{_insnKey = a})
 
 -- | OAuth 2.0 token for the current user.
-insnOauthToken :: Lens' InstancesStart' (Maybe Text)
-insnOauthToken
-  = lens _insnOauthToken
-      (\ s a -> s{_insnOauthToken = a})
+insnOAuthToken :: Lens' InstancesStart' (Maybe OAuthToken)
+insnOAuthToken
+  = lens _insnOAuthToken
+      (\ s a -> s{_insnOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 insnFields :: Lens' InstancesStart' (Maybe Text)
 insnFields
   = lens _insnFields (\ s a -> s{_insnFields = a})
 
--- | Data format for the response.
-insnAlt :: Lens' InstancesStart' Alt
-insnAlt = lens _insnAlt (\ s a -> s{_insnAlt = a})
-
 -- | Name of the instance resource to start.
 insnInstance :: Lens' InstancesStart' Text
 insnInstance
   = lens _insnInstance (\ s a -> s{_insnInstance = a})
+
+instance GoogleAuth InstancesStart' where
+        authKey = insnKey . _Just
+        authToken = insnOAuthToken . _Just
 
 instance GoogleRequest InstancesStart' where
         type Rs InstancesStart' = Operation
@@ -183,13 +178,13 @@ instance GoogleRequest InstancesStart' where
         requestWithRoute r u InstancesStart'{..}
           = go _insnQuotaUser (Just _insnPrettyPrint)
               _insnProject
-              _insnUserIp
+              _insnUserIP
               _insnZone
               _insnKey
-              _insnOauthToken
+              _insnOAuthToken
               _insnFields
-              (Just _insnAlt)
               _insnInstance
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InstancesStartResource)

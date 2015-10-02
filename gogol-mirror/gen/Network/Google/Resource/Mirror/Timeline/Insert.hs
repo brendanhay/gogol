@@ -32,11 +32,12 @@ module Network.Google.Resource.Mirror.Timeline.Insert
     -- * Request Lenses
     , tiQuotaUser
     , tiPrettyPrint
-    , tiUserIp
+    , tiUserIP
+    , tiMedia
     , tiKey
-    , tiOauthToken
+    , tiOAuthToken
+    , tiTimelineItem
     , tiFields
-    , tiAlt
     ) where
 
 import           Network.Google.Mirror.Types
@@ -49,22 +50,25 @@ type TimelineInsertResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
-               QueryParam "oauth_token" Text :>
+             QueryParam "key" Key :>
+               QueryParam "oauth_token" OAuthToken :>
                  QueryParam "fields" Text :>
-                   QueryParam "alt" Alt :> Post '[JSON] TimelineItem
+                   QueryParam "alt" AltJSON :>
+                     MultipartRelated '[JSON] TimelineItem Body :>
+                       Post '[JSON] TimelineItem
 
 -- | Inserts a new item into the timeline.
 --
 -- /See:/ 'timelineInsert'' smart constructor.
 data TimelineInsert' = TimelineInsert'
-    { _tiQuotaUser   :: !(Maybe Text)
-    , _tiPrettyPrint :: !Bool
-    , _tiUserIp      :: !(Maybe Text)
-    , _tiKey         :: !(Maybe Text)
-    , _tiOauthToken  :: !(Maybe Text)
-    , _tiFields      :: !(Maybe Text)
-    , _tiAlt         :: !Alt
+    { _tiQuotaUser    :: !(Maybe Text)
+    , _tiPrettyPrint  :: !Bool
+    , _tiUserIP       :: !(Maybe Text)
+    , _tiMedia        :: !Body
+    , _tiKey          :: !(Maybe Key)
+    , _tiOAuthToken   :: !(Maybe OAuthToken)
+    , _tiTimelineItem :: !TimelineItem
+    , _tiFields       :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TimelineInsert'' with the minimum fields required to make a request.
@@ -75,26 +79,31 @@ data TimelineInsert' = TimelineInsert'
 --
 -- * 'tiPrettyPrint'
 --
--- * 'tiUserIp'
+-- * 'tiUserIP'
+--
+-- * 'tiMedia'
 --
 -- * 'tiKey'
 --
--- * 'tiOauthToken'
+-- * 'tiOAuthToken'
+--
+-- * 'tiTimelineItem'
 --
 -- * 'tiFields'
---
--- * 'tiAlt'
 timelineInsert'
-    :: TimelineInsert'
-timelineInsert' =
+    :: Body -- ^ 'media'
+    -> TimelineItem -- ^ 'TimelineItem'
+    -> TimelineInsert'
+timelineInsert' pTiMedia_ pTiTimelineItem_ =
     TimelineInsert'
     { _tiQuotaUser = Nothing
     , _tiPrettyPrint = True
-    , _tiUserIp = Nothing
+    , _tiUserIP = Nothing
+    , _tiMedia = pTiMedia_
     , _tiKey = Nothing
-    , _tiOauthToken = Nothing
+    , _tiOAuthToken = Nothing
+    , _tiTimelineItem = pTiTimelineItem_
     , _tiFields = Nothing
-    , _tiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -112,37 +121,48 @@ tiPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tiUserIp :: Lens' TimelineInsert' (Maybe Text)
-tiUserIp = lens _tiUserIp (\ s a -> s{_tiUserIp = a})
+tiUserIP :: Lens' TimelineInsert' (Maybe Text)
+tiUserIP = lens _tiUserIP (\ s a -> s{_tiUserIP = a})
+
+tiMedia :: Lens' TimelineInsert' Body
+tiMedia = lens _tiMedia (\ s a -> s{_tiMedia = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tiKey :: Lens' TimelineInsert' (Maybe Text)
+tiKey :: Lens' TimelineInsert' (Maybe Key)
 tiKey = lens _tiKey (\ s a -> s{_tiKey = a})
 
 -- | OAuth 2.0 token for the current user.
-tiOauthToken :: Lens' TimelineInsert' (Maybe Text)
-tiOauthToken
-  = lens _tiOauthToken (\ s a -> s{_tiOauthToken = a})
+tiOAuthToken :: Lens' TimelineInsert' (Maybe OAuthToken)
+tiOAuthToken
+  = lens _tiOAuthToken (\ s a -> s{_tiOAuthToken = a})
+
+-- | Multipart request metadata.
+tiTimelineItem :: Lens' TimelineInsert' TimelineItem
+tiTimelineItem
+  = lens _tiTimelineItem
+      (\ s a -> s{_tiTimelineItem = a})
 
 -- | Selector specifying which fields to include in a partial response.
 tiFields :: Lens' TimelineInsert' (Maybe Text)
 tiFields = lens _tiFields (\ s a -> s{_tiFields = a})
 
--- | Data format for the response.
-tiAlt :: Lens' TimelineInsert' Alt
-tiAlt = lens _tiAlt (\ s a -> s{_tiAlt = a})
+instance GoogleAuth TimelineInsert' where
+        authKey = tiKey . _Just
+        authToken = tiOAuthToken . _Just
 
 instance GoogleRequest TimelineInsert' where
         type Rs TimelineInsert' = TimelineItem
         request = requestWithRoute defReq mirrorURL
         requestWithRoute r u TimelineInsert'{..}
-          = go _tiQuotaUser (Just _tiPrettyPrint) _tiUserIp
+          = go _tiQuotaUser (Just _tiPrettyPrint) _tiUserIP
+              _tiMedia
               _tiKey
-              _tiOauthToken
+              _tiOAuthToken
               _tiFields
-              (Just _tiAlt)
+              (Just AltJSON)
+              _tiTimelineItem
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TimelineInsertResource)

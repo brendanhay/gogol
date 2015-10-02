@@ -32,7 +32,7 @@ module Network.Google.Resource.DFAReporting.OrderDocuments.List
     -- * Request Lenses
     , odlQuotaUser
     , odlPrettyPrint
-    , odlUserIp
+    , odlUserIP
     , odlSearchString
     , odlIds
     , odlProfileId
@@ -41,13 +41,12 @@ module Network.Google.Resource.DFAReporting.OrderDocuments.List
     , odlPageToken
     , odlProjectId
     , odlSortField
-    , odlOauthToken
+    , odlOAuthToken
     , odlOrderId
     , odlApproved
     , odlSiteId
     , odlMaxResults
     , odlFields
-    , odlAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -69,18 +68,18 @@ type OrderDocumentsListResource =
                          QueryParam "sortOrder"
                            DfareportingOrderDocumentsListSortOrder
                            :>
-                           QueryParam "key" Text :>
+                           QueryParam "key" Key :>
                              QueryParam "pageToken" Text :>
                                QueryParam "sortField"
                                  DfareportingOrderDocumentsListSortField
                                  :>
-                                 QueryParam "oauth_token" Text :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParams "orderId" Int64 :>
                                      QueryParam "approved" Bool :>
                                        QueryParams "siteId" Int64 :>
                                          QueryParam "maxResults" Int32 :>
                                            QueryParam "fields" Text :>
-                                             QueryParam "alt" Alt :>
+                                             QueryParam "alt" AltJSON :>
                                                Get '[JSON]
                                                  OrderDocumentsListResponse
 
@@ -90,22 +89,21 @@ type OrderDocumentsListResource =
 data OrderDocumentsList' = OrderDocumentsList'
     { _odlQuotaUser    :: !(Maybe Text)
     , _odlPrettyPrint  :: !Bool
-    , _odlUserIp       :: !(Maybe Text)
+    , _odlUserIP       :: !(Maybe Text)
     , _odlSearchString :: !(Maybe Text)
     , _odlIds          :: !(Maybe Int64)
     , _odlProfileId    :: !Int64
     , _odlSortOrder    :: !(Maybe DfareportingOrderDocumentsListSortOrder)
-    , _odlKey          :: !(Maybe Text)
+    , _odlKey          :: !(Maybe Key)
     , _odlPageToken    :: !(Maybe Text)
     , _odlProjectId    :: !Int64
     , _odlSortField    :: !(Maybe DfareportingOrderDocumentsListSortField)
-    , _odlOauthToken   :: !(Maybe Text)
+    , _odlOAuthToken   :: !(Maybe OAuthToken)
     , _odlOrderId      :: !(Maybe Int64)
     , _odlApproved     :: !(Maybe Bool)
     , _odlSiteId       :: !(Maybe Int64)
     , _odlMaxResults   :: !(Maybe Int32)
     , _odlFields       :: !(Maybe Text)
-    , _odlAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrderDocumentsList'' with the minimum fields required to make a request.
@@ -116,7 +114,7 @@ data OrderDocumentsList' = OrderDocumentsList'
 --
 -- * 'odlPrettyPrint'
 --
--- * 'odlUserIp'
+-- * 'odlUserIP'
 --
 -- * 'odlSearchString'
 --
@@ -134,7 +132,7 @@ data OrderDocumentsList' = OrderDocumentsList'
 --
 -- * 'odlSortField'
 --
--- * 'odlOauthToken'
+-- * 'odlOAuthToken'
 --
 -- * 'odlOrderId'
 --
@@ -145,8 +143,6 @@ data OrderDocumentsList' = OrderDocumentsList'
 -- * 'odlMaxResults'
 --
 -- * 'odlFields'
---
--- * 'odlAlt'
 orderDocumentsList'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'projectId'
@@ -155,7 +151,7 @@ orderDocumentsList' pOdlProfileId_ pOdlProjectId_ =
     OrderDocumentsList'
     { _odlQuotaUser = Nothing
     , _odlPrettyPrint = True
-    , _odlUserIp = Nothing
+    , _odlUserIP = Nothing
     , _odlSearchString = Nothing
     , _odlIds = Nothing
     , _odlProfileId = pOdlProfileId_
@@ -164,13 +160,12 @@ orderDocumentsList' pOdlProfileId_ pOdlProjectId_ =
     , _odlPageToken = Nothing
     , _odlProjectId = pOdlProjectId_
     , _odlSortField = Nothing
-    , _odlOauthToken = Nothing
+    , _odlOAuthToken = Nothing
     , _odlOrderId = Nothing
     , _odlApproved = Nothing
     , _odlSiteId = Nothing
     , _odlMaxResults = Nothing
     , _odlFields = Nothing
-    , _odlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -188,9 +183,9 @@ odlPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-odlUserIp :: Lens' OrderDocumentsList' (Maybe Text)
-odlUserIp
-  = lens _odlUserIp (\ s a -> s{_odlUserIp = a})
+odlUserIP :: Lens' OrderDocumentsList' (Maybe Text)
+odlUserIP
+  = lens _odlUserIP (\ s a -> s{_odlUserIP = a})
 
 -- | Allows searching for order documents by name or ID. Wildcards (*) are
 -- allowed. For example, \"orderdocument*2015\" will return order documents
@@ -222,7 +217,7 @@ odlSortOrder
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-odlKey :: Lens' OrderDocumentsList' (Maybe Text)
+odlKey :: Lens' OrderDocumentsList' (Maybe Key)
 odlKey = lens _odlKey (\ s a -> s{_odlKey = a})
 
 -- | Value of the nextPageToken from the previous result page.
@@ -241,10 +236,10 @@ odlSortField
   = lens _odlSortField (\ s a -> s{_odlSortField = a})
 
 -- | OAuth 2.0 token for the current user.
-odlOauthToken :: Lens' OrderDocumentsList' (Maybe Text)
-odlOauthToken
-  = lens _odlOauthToken
-      (\ s a -> s{_odlOauthToken = a})
+odlOAuthToken :: Lens' OrderDocumentsList' (Maybe OAuthToken)
+odlOAuthToken
+  = lens _odlOAuthToken
+      (\ s a -> s{_odlOAuthToken = a})
 
 -- | Select only order documents for specified orders.
 odlOrderId :: Lens' OrderDocumentsList' (Maybe Int64)
@@ -273,16 +268,16 @@ odlFields :: Lens' OrderDocumentsList' (Maybe Text)
 odlFields
   = lens _odlFields (\ s a -> s{_odlFields = a})
 
--- | Data format for the response.
-odlAlt :: Lens' OrderDocumentsList' Alt
-odlAlt = lens _odlAlt (\ s a -> s{_odlAlt = a})
+instance GoogleAuth OrderDocumentsList' where
+        authKey = odlKey . _Just
+        authToken = odlOAuthToken . _Just
 
 instance GoogleRequest OrderDocumentsList' where
         type Rs OrderDocumentsList' =
              OrderDocumentsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u OrderDocumentsList'{..}
-          = go _odlQuotaUser (Just _odlPrettyPrint) _odlUserIp
+          = go _odlQuotaUser (Just _odlPrettyPrint) _odlUserIP
               _odlSearchString
               _odlIds
               _odlProfileId
@@ -291,13 +286,13 @@ instance GoogleRequest OrderDocumentsList' where
               _odlPageToken
               _odlProjectId
               _odlSortField
-              _odlOauthToken
+              _odlOAuthToken
               _odlOrderId
               _odlApproved
               _odlSiteId
               _odlMaxResults
               _odlFields
-              (Just _odlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy OrderDocumentsListResource)

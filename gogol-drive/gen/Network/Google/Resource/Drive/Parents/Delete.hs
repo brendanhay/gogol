@@ -32,13 +32,12 @@ module Network.Google.Resource.Drive.Parents.Delete
     -- * Request Lenses
     , pddQuotaUser
     , pddPrettyPrint
-    , pddUserIp
+    , pddUserIP
     , pddKey
     , pddFileId
-    , pddOauthToken
+    , pddOAuthToken
     , pddParentId
     , pddFields
-    , pddAlt
     ) where
 
 import           Network.Google.Drive.Types
@@ -54,10 +53,10 @@ type ParentsDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Delete '[JSON] ()
+                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Removes a parent from a file.
 --
@@ -65,13 +64,12 @@ type ParentsDeleteResource =
 data ParentsDelete' = ParentsDelete'
     { _pddQuotaUser   :: !(Maybe Text)
     , _pddPrettyPrint :: !Bool
-    , _pddUserIp      :: !(Maybe Text)
-    , _pddKey         :: !(Maybe Text)
+    , _pddUserIP      :: !(Maybe Text)
+    , _pddKey         :: !(Maybe Key)
     , _pddFileId      :: !Text
-    , _pddOauthToken  :: !(Maybe Text)
+    , _pddOAuthToken  :: !(Maybe OAuthToken)
     , _pddParentId    :: !Text
     , _pddFields      :: !(Maybe Text)
-    , _pddAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ParentsDelete'' with the minimum fields required to make a request.
@@ -82,19 +80,17 @@ data ParentsDelete' = ParentsDelete'
 --
 -- * 'pddPrettyPrint'
 --
--- * 'pddUserIp'
+-- * 'pddUserIP'
 --
 -- * 'pddKey'
 --
 -- * 'pddFileId'
 --
--- * 'pddOauthToken'
+-- * 'pddOAuthToken'
 --
 -- * 'pddParentId'
 --
 -- * 'pddFields'
---
--- * 'pddAlt'
 parentsDelete'
     :: Text -- ^ 'fileId'
     -> Text -- ^ 'parentId'
@@ -103,13 +99,12 @@ parentsDelete' pPddFileId_ pPddParentId_ =
     ParentsDelete'
     { _pddQuotaUser = Nothing
     , _pddPrettyPrint = True
-    , _pddUserIp = Nothing
+    , _pddUserIP = Nothing
     , _pddKey = Nothing
     , _pddFileId = pPddFileId_
-    , _pddOauthToken = Nothing
+    , _pddOAuthToken = Nothing
     , _pddParentId = pPddParentId_
     , _pddFields = Nothing
-    , _pddAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,14 +122,14 @@ pddPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-pddUserIp :: Lens' ParentsDelete' (Maybe Text)
-pddUserIp
-  = lens _pddUserIp (\ s a -> s{_pddUserIp = a})
+pddUserIP :: Lens' ParentsDelete' (Maybe Text)
+pddUserIP
+  = lens _pddUserIP (\ s a -> s{_pddUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pddKey :: Lens' ParentsDelete' (Maybe Text)
+pddKey :: Lens' ParentsDelete' (Maybe Key)
 pddKey = lens _pddKey (\ s a -> s{_pddKey = a})
 
 -- | The ID of the file.
@@ -143,10 +138,10 @@ pddFileId
   = lens _pddFileId (\ s a -> s{_pddFileId = a})
 
 -- | OAuth 2.0 token for the current user.
-pddOauthToken :: Lens' ParentsDelete' (Maybe Text)
-pddOauthToken
-  = lens _pddOauthToken
-      (\ s a -> s{_pddOauthToken = a})
+pddOAuthToken :: Lens' ParentsDelete' (Maybe OAuthToken)
+pddOAuthToken
+  = lens _pddOAuthToken
+      (\ s a -> s{_pddOAuthToken = a})
 
 -- | The ID of the parent.
 pddParentId :: Lens' ParentsDelete' Text
@@ -158,21 +153,21 @@ pddFields :: Lens' ParentsDelete' (Maybe Text)
 pddFields
   = lens _pddFields (\ s a -> s{_pddFields = a})
 
--- | Data format for the response.
-pddAlt :: Lens' ParentsDelete' Alt
-pddAlt = lens _pddAlt (\ s a -> s{_pddAlt = a})
+instance GoogleAuth ParentsDelete' where
+        authKey = pddKey . _Just
+        authToken = pddOAuthToken . _Just
 
 instance GoogleRequest ParentsDelete' where
         type Rs ParentsDelete' = ()
         request = requestWithRoute defReq driveURL
         requestWithRoute r u ParentsDelete'{..}
-          = go _pddQuotaUser (Just _pddPrettyPrint) _pddUserIp
+          = go _pddQuotaUser (Just _pddPrettyPrint) _pddUserIP
               _pddKey
               _pddFileId
-              _pddOauthToken
+              _pddOAuthToken
               _pddParentId
               _pddFields
-              (Just _pddAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ParentsDeleteResource)

@@ -58,7 +58,7 @@ data LicenseAssignmentList = LicenseAssignmentList
     { _lalEtag          :: !(Maybe Text)
     , _lalNextPageToken :: !(Maybe Text)
     , _lalKind          :: !Text
-    , _lalItems         :: !(Maybe [Maybe LicenseAssignment])
+    , _lalItems         :: !(Maybe [LicenseAssignment])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LicenseAssignmentList' with the minimum fields required to make a request.
@@ -98,7 +98,7 @@ lalKind :: Lens' LicenseAssignmentList Text
 lalKind = lens _lalKind (\ s a -> s{_lalKind = a})
 
 -- | The LicenseAssignments in this page of results.
-lalItems :: Lens' LicenseAssignmentList [Maybe LicenseAssignment]
+lalItems :: Lens' LicenseAssignmentList [LicenseAssignment]
 lalItems
   = lens _lalItems (\ s a -> s{_lalItems = a}) .
       _Default

@@ -24,7 +24,7 @@ import           Network.Google.Prelude
 data InstanceGroupList = InstanceGroupList
     { _iglNextPageToken :: !(Maybe Text)
     , _iglKind          :: !Text
-    , _iglItems         :: !(Maybe [Maybe InstanceGroup])
+    , _iglItems         :: !(Maybe [InstanceGroup])
     , _iglSelfLink      :: !(Maybe Text)
     , _iglId            :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -65,7 +65,7 @@ iglKind :: Lens' InstanceGroupList Text
 iglKind = lens _iglKind (\ s a -> s{_iglKind = a})
 
 -- | A list of InstanceGroup resources.
-iglItems :: Lens' InstanceGroupList [Maybe InstanceGroup]
+iglItems :: Lens' InstanceGroupList [InstanceGroup]
 iglItems
   = lens _iglItems (\ s a -> s{_iglItems = a}) .
       _Default
@@ -372,7 +372,7 @@ instance ToJSON AutoscalerAggregatedListItems where
 --
 -- /See:/ 'addressesScopedList' smart constructor.
 data AddressesScopedList = AddressesScopedList
-    { _aslAddresses :: !(Maybe [Maybe Address])
+    { _aslAddresses :: !(Maybe [Address])
     , _aslWarning   :: !(Maybe AddressesScopedListWarning)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -392,7 +392,7 @@ addressesScopedList =
     }
 
 -- | [Output Only] List of addresses contained in this scope.
-aslAddresses :: Lens' AddressesScopedList [Maybe Address]
+aslAddresses :: Lens' AddressesScopedList [Address]
 aslAddresses
   = lens _aslAddresses (\ s a -> s{_aslAddresses = a})
       . _Default
@@ -652,7 +652,7 @@ instance ToJSON Snapshot where
 data FirewallList = FirewallList
     { _flNextPageToken :: !(Maybe Text)
     , _flKind          :: !Text
-    , _flItems         :: !(Maybe [Maybe Firewall])
+    , _flItems         :: !(Maybe [Firewall])
     , _flSelfLink      :: !(Maybe Text)
     , _flId            :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -693,7 +693,7 @@ flKind :: Lens' FirewallList Text
 flKind = lens _flKind (\ s a -> s{_flKind = a})
 
 -- | [Output Only] A list of Firewall resources.
-flItems :: Lens' FirewallList [Maybe Firewall]
+flItems :: Lens' FirewallList [Firewall]
 flItems
   = lens _flItems (\ s a -> s{_flItems = a}) . _Default
       . _Coerce
@@ -921,7 +921,7 @@ instance ToJSON MachineTypeScratchDisks where
 data OperationList = OperationList
     { _olNextPageToken :: !(Maybe Text)
     , _olKind          :: !Text
-    , _olItems         :: !(Maybe [Maybe Operation])
+    , _olItems         :: !(Maybe [Operation])
     , _olSelfLink      :: !(Maybe Text)
     , _olId            :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -962,7 +962,7 @@ olKind :: Lens' OperationList Text
 olKind = lens _olKind (\ s a -> s{_olKind = a})
 
 -- | [Output Only] The Operation resources.
-olItems :: Lens' OperationList [Maybe Operation]
+olItems :: Lens' OperationList [Operation]
 olItems
   = lens _olItems (\ s a -> s{_olItems = a}) . _Default
       . _Coerce
@@ -999,7 +999,7 @@ instance ToJSON OperationList where
 --
 -- /See:/ 'vPNTunnelsScopedList' smart constructor.
 data VPNTunnelsScopedList = VPNTunnelsScopedList
-    { _vtslVpnTunnels :: !(Maybe [Maybe VPNTunnel])
+    { _vtslVPNTunnels :: !(Maybe [VPNTunnel])
     , _vtslWarning    :: !(Maybe VPNTunnelsScopedListWarning)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1007,22 +1007,22 @@ data VPNTunnelsScopedList = VPNTunnelsScopedList
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'vtslVpnTunnels'
+-- * 'vtslVPNTunnels'
 --
 -- * 'vtslWarning'
 vPNTunnelsScopedList
     :: VPNTunnelsScopedList
 vPNTunnelsScopedList =
     VPNTunnelsScopedList
-    { _vtslVpnTunnels = Nothing
+    { _vtslVPNTunnels = Nothing
     , _vtslWarning = Nothing
     }
 
 -- | List of vpn tunnels contained in this scope.
-vtslVpnTunnels :: Lens' VPNTunnelsScopedList [Maybe VPNTunnel]
-vtslVpnTunnels
-  = lens _vtslVpnTunnels
-      (\ s a -> s{_vtslVpnTunnels = a})
+vtslVPNTunnels :: Lens' VPNTunnelsScopedList [VPNTunnel]
+vtslVPNTunnels
+  = lens _vtslVPNTunnels
+      (\ s a -> s{_vtslVPNTunnels = a})
       . _Default
       . _Coerce
 
@@ -1044,13 +1044,13 @@ instance ToJSON VPNTunnelsScopedList where
         toJSON VPNTunnelsScopedList{..}
           = object
               (catMaybes
-                 [("vpnTunnels" .=) <$> _vtslVpnTunnels,
+                 [("vpnTunnels" .=) <$> _vtslVPNTunnels,
                   ("warning" .=) <$> _vtslWarning])
 
 --
 -- /See:/ 'instanceGroupsAddInstancesRequest' smart constructor.
 newtype InstanceGroupsAddInstancesRequest = InstanceGroupsAddInstancesRequest
-    { _igairInstances :: Maybe [Maybe InstanceReference]
+    { _igairInstances :: Maybe [InstanceReference]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupsAddInstancesRequest' with the minimum fields required to make a request.
@@ -1066,7 +1066,7 @@ instanceGroupsAddInstancesRequest =
     }
 
 -- | The instances to add to the instance group.
-igairInstances :: Lens' InstanceGroupsAddInstancesRequest [Maybe InstanceReference]
+igairInstances :: Lens' InstanceGroupsAddInstancesRequest [InstanceReference]
 igairInstances
   = lens _igairInstances
       (\ s a -> s{_igairInstances = a})
@@ -1093,7 +1093,7 @@ instance ToJSON InstanceGroupsAddInstancesRequest
 data TargetPoolList = TargetPoolList
     { _tplNextPageToken :: !(Maybe Text)
     , _tplKind          :: !Text
-    , _tplItems         :: !(Maybe [Maybe TargetPool])
+    , _tplItems         :: !(Maybe [TargetPool])
     , _tplSelfLink      :: !(Maybe Text)
     , _tplId            :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -1133,7 +1133,7 @@ tplKind :: Lens' TargetPoolList Text
 tplKind = lens _tplKind (\ s a -> s{_tplKind = a})
 
 -- | A list of TargetPool resources.
-tplItems :: Lens' TargetPoolList [Maybe TargetPool]
+tplItems :: Lens' TargetPoolList [TargetPool]
 tplItems
   = lens _tplItems (\ s a -> s{_tplItems = a}) .
       _Default
@@ -1175,7 +1175,7 @@ instance ToJSON TargetPoolList where
 data DiskList = DiskList
     { _dlNextPageToken :: !(Maybe Text)
     , _dlKind          :: !Text
-    , _dlItems         :: !(Maybe [Maybe Disk])
+    , _dlItems         :: !(Maybe [Disk])
     , _dlSelfLink      :: !(Maybe Text)
     , _dlId            :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -1216,7 +1216,7 @@ dlKind :: Lens' DiskList Text
 dlKind = lens _dlKind (\ s a -> s{_dlKind = a})
 
 -- | [Output Only] A list of persistent disks.
-dlItems :: Lens' DiskList [Maybe Disk]
+dlItems :: Lens' DiskList [Disk]
 dlItems
   = lens _dlItems (\ s a -> s{_dlItems = a}) . _Default
       . _Coerce
@@ -1253,7 +1253,7 @@ instance ToJSON DiskList where
 --
 -- /See:/ 'targetPoolsAddInstanceRequest' smart constructor.
 newtype TargetPoolsAddInstanceRequest = TargetPoolsAddInstanceRequest
-    { _tpairInstances :: Maybe [Maybe InstanceReference]
+    { _tpairInstances :: Maybe [InstanceReference]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetPoolsAddInstanceRequest' with the minimum fields required to make a request.
@@ -1269,7 +1269,7 @@ targetPoolsAddInstanceRequest =
     }
 
 -- | URLs of the instances to be added to targetPool.
-tpairInstances :: Lens' TargetPoolsAddInstanceRequest [Maybe InstanceReference]
+tpairInstances :: Lens' TargetPoolsAddInstanceRequest [InstanceReference]
 tpairInstances
   = lens _tpairInstances
       (\ s a -> s{_tpairInstances = a})
@@ -1294,7 +1294,7 @@ instance ToJSON TargetPoolsAddInstanceRequest where
 data ForwardingRuleList = ForwardingRuleList
     { _frlNextPageToken :: !(Maybe Text)
     , _frlKind          :: !Text
-    , _frlItems         :: !(Maybe [Maybe ForwardingRule])
+    , _frlItems         :: !(Maybe [ForwardingRule])
     , _frlSelfLink      :: !(Maybe Text)
     , _frlId            :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -1334,7 +1334,7 @@ frlKind :: Lens' ForwardingRuleList Text
 frlKind = lens _frlKind (\ s a -> s{_frlKind = a})
 
 -- | A list of ForwardingRule resources.
-frlItems :: Lens' ForwardingRuleList [Maybe ForwardingRule]
+frlItems :: Lens' ForwardingRuleList [ForwardingRule]
 frlItems
   = lens _frlItems (\ s a -> s{_frlItems = a}) .
       _Default
@@ -1376,16 +1376,16 @@ instance ToJSON ForwardingRuleList where
 --
 -- /See:/ 'uRLMap' smart constructor.
 data URLMap = URLMap
-    { _umTests             :: !(Maybe [Maybe URLMapTest])
+    { _umTests             :: !(Maybe [URLMapTest])
     , _umKind              :: !Text
     , _umFingerprint       :: !(Maybe Word8)
     , _umDefaultService    :: !(Maybe Text)
     , _umSelfLink          :: !(Maybe Text)
     , _umName              :: !(Maybe Text)
     , _umCreationTimestamp :: !(Maybe Text)
-    , _umPathMatchers      :: !(Maybe [Maybe PathMatcher])
+    , _umPathMatchers      :: !(Maybe [PathMatcher])
     , _umId                :: !(Maybe Word64)
-    , _umHostRules         :: !(Maybe [Maybe HostRule])
+    , _umHostRules         :: !(Maybe [HostRule])
     , _umDescription       :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1433,7 +1433,7 @@ uRLMap =
 
 -- | The list of expected URL mappings. Request to update this UrlMap will
 -- succeed only all of the test cases pass.
-umTests :: Lens' URLMap [Maybe URLMapTest]
+umTests :: Lens' URLMap [URLMapTest]
 umTests
   = lens _umTests (\ s a -> s{_umTests = a}) . _Default
       . _Coerce
@@ -1479,7 +1479,7 @@ umCreationTimestamp
       (\ s a -> s{_umCreationTimestamp = a})
 
 -- | The list of named PathMatchers to use against the URL.
-umPathMatchers :: Lens' URLMap [Maybe PathMatcher]
+umPathMatchers :: Lens' URLMap [PathMatcher]
 umPathMatchers
   = lens _umPathMatchers
       (\ s a -> s{_umPathMatchers = a})
@@ -1491,7 +1491,7 @@ umId :: Lens' URLMap (Maybe Word64)
 umId = lens _umId (\ s a -> s{_umId = a})
 
 -- | The list of HostRules to use against the URL.
-umHostRules :: Lens' URLMap [Maybe HostRule]
+umHostRules :: Lens' URLMap [HostRule]
 umHostRules
   = lens _umHostRules (\ s a -> s{_umHostRules = a}) .
       _Default
@@ -1542,7 +1542,7 @@ instance ToJSON URLMap where
 data InstanceGroupManagerList = InstanceGroupManagerList
     { _igmlNextPageToken :: !(Maybe Text)
     , _igmlKind          :: !Text
-    , _igmlItems         :: !(Maybe [Maybe InstanceGroupManager])
+    , _igmlItems         :: !(Maybe [InstanceGroupManager])
     , _igmlSelfLink      :: !(Maybe Text)
     , _igmlId            :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -1584,7 +1584,7 @@ igmlKind :: Lens' InstanceGroupManagerList Text
 igmlKind = lens _igmlKind (\ s a -> s{_igmlKind = a})
 
 -- | [Output Only] A list of managed instance group resources.
-igmlItems :: Lens' InstanceGroupManagerList [Maybe InstanceGroupManager]
+igmlItems :: Lens' InstanceGroupManagerList [InstanceGroupManager]
 igmlItems
   = lens _igmlItems (\ s a -> s{_igmlItems = a}) .
       _Default
@@ -1626,7 +1626,7 @@ instance ToJSON InstanceGroupManagerList where
 -- /See:/ 'instanceGroupsSetNamedPortsRequest' smart constructor.
 data InstanceGroupsSetNamedPortsRequest = InstanceGroupsSetNamedPortsRequest
     { _igsnprFingerprint :: !(Maybe Word8)
-    , _igsnprNamedPorts  :: !(Maybe [Maybe NamedPort])
+    , _igsnprNamedPorts  :: !(Maybe [NamedPort])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupsSetNamedPortsRequest' with the minimum fields required to make a request.
@@ -1653,7 +1653,7 @@ igsnprFingerprint
       (\ s a -> s{_igsnprFingerprint = a})
 
 -- | The list of named ports to set for this instance group.
-igsnprNamedPorts :: Lens' InstanceGroupsSetNamedPortsRequest [Maybe NamedPort]
+igsnprNamedPorts :: Lens' InstanceGroupsSetNamedPortsRequest [NamedPort]
 igsnprNamedPorts
   = lens _igsnprNamedPorts
       (\ s a -> s{_igsnprNamedPorts = a})
@@ -1765,7 +1765,7 @@ data Image = Image
     , _iLicenses          :: !(Maybe [Text])
     , _iSourceDisk        :: !(Maybe Text)
     , _iDescription       :: !(Maybe Text)
-    , _iDeprecated        :: !(Maybe (Maybe DeprecationStatus))
+    , _iDeprecated        :: !(Maybe DeprecationStatus)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Image' with the minimum fields required to make a request.
@@ -1912,7 +1912,7 @@ iDescription
   = lens _iDescription (\ s a -> s{_iDescription = a})
 
 -- | The deprecation status associated with this image.
-iDeprecated :: Lens' Image (Maybe (Maybe DeprecationStatus))
+iDeprecated :: Lens' Image (Maybe DeprecationStatus)
 iDeprecated
   = lens _iDeprecated (\ s a -> s{_iDeprecated = a})
 
@@ -2039,7 +2039,7 @@ instance ToJSON TargetInstanceAggregatedList where
 -- /See:/ 'forwardingRulesScopedList' smart constructor.
 data ForwardingRulesScopedList = ForwardingRulesScopedList
     { _frslWarning         :: !(Maybe ForwardingRulesScopedListWarning)
-    , _frslForwardingRules :: !(Maybe [Maybe ForwardingRule])
+    , _frslForwardingRules :: !(Maybe [ForwardingRule])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ForwardingRulesScopedList' with the minimum fields required to make a request.
@@ -2064,7 +2064,7 @@ frslWarning
   = lens _frslWarning (\ s a -> s{_frslWarning = a})
 
 -- | List of forwarding rules contained in this scope.
-frslForwardingRules :: Lens' ForwardingRulesScopedList [Maybe ForwardingRule]
+frslForwardingRules :: Lens' ForwardingRulesScopedList [ForwardingRule]
 frslForwardingRules
   = lens _frslForwardingRules
       (\ s a -> s{_frslForwardingRules = a})
@@ -2201,7 +2201,7 @@ instance ToJSON InstanceReference where
 -- /See:/ 'instanceWithNamedPorts' smart constructor.
 data InstanceWithNamedPorts = InstanceWithNamedPorts
     { _iwnpStatus     :: !(Maybe InstanceWithNamedPortsStatus)
-    , _iwnpNamedPorts :: !(Maybe [Maybe NamedPort])
+    , _iwnpNamedPorts :: !(Maybe [NamedPort])
     , _iwnpInstance   :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -2229,7 +2229,7 @@ iwnpStatus
   = lens _iwnpStatus (\ s a -> s{_iwnpStatus = a})
 
 -- | The named ports that belong to this instance group.
-iwnpNamedPorts :: Lens' InstanceWithNamedPorts [Maybe NamedPort]
+iwnpNamedPorts :: Lens' InstanceWithNamedPorts [NamedPort]
 iwnpNamedPorts
   = lens _iwnpNamedPorts
       (\ s a -> s{_iwnpNamedPorts = a})
@@ -2261,7 +2261,7 @@ instance ToJSON InstanceWithNamedPorts where
 -- /See:/ 'instanceGroupManagersScopedList' smart constructor.
 data InstanceGroupManagersScopedList = InstanceGroupManagersScopedList
     { _igmslWarning               :: !(Maybe InstanceGroupManagersScopedListWarning)
-    , _igmslInstanceGroupManagers :: !(Maybe [Maybe InstanceGroupManager])
+    , _igmslInstanceGroupManagers :: !(Maybe [InstanceGroupManager])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagersScopedList' with the minimum fields required to make a request.
@@ -2287,7 +2287,7 @@ igmslWarning
 
 -- | [Output Only] The list of managed instance groups that are contained in
 -- the specified project and zone.
-igmslInstanceGroupManagers :: Lens' InstanceGroupManagersScopedList [Maybe InstanceGroupManager]
+igmslInstanceGroupManagers :: Lens' InstanceGroupManagersScopedList [InstanceGroupManager]
 igmslInstanceGroupManagers
   = lens _igmslInstanceGroupManagers
       (\ s a -> s{_igmslInstanceGroupManagers = a})
@@ -2403,7 +2403,7 @@ instance ToJSON InstanceGroupManagerAggregatedList
 -- /See:/ 'disksScopedList' smart constructor.
 data DisksScopedList = DisksScopedList
     { _dslWarning :: !(Maybe DisksScopedListWarning)
-    , _dslDisks   :: !(Maybe [Maybe Disk])
+    , _dslDisks   :: !(Maybe [Disk])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DisksScopedList' with the minimum fields required to make a request.
@@ -2428,7 +2428,7 @@ dslWarning
   = lens _dslWarning (\ s a -> s{_dslWarning = a})
 
 -- | [Output Only] List of disks contained in this scope.
-dslDisks :: Lens' DisksScopedList [Maybe Disk]
+dslDisks :: Lens' DisksScopedList [Disk]
 dslDisks
   = lens _dslDisks (\ s a -> s{_dslDisks = a}) .
       _Default
@@ -2495,7 +2495,7 @@ instance ToJSON NamedPort where
 -- /See:/ 'targetPoolsScopedList' smart constructor.
 data TargetPoolsScopedList = TargetPoolsScopedList
     { _tpslWarning     :: !(Maybe TargetPoolsScopedListWarning)
-    , _tpslTargetPools :: !(Maybe [Maybe TargetPool])
+    , _tpslTargetPools :: !(Maybe [TargetPool])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetPoolsScopedList' with the minimum fields required to make a request.
@@ -2520,7 +2520,7 @@ tpslWarning
   = lens _tpslWarning (\ s a -> s{_tpslWarning = a})
 
 -- | List of target pools contained in this scope.
-tpslTargetPools :: Lens' TargetPoolsScopedList [Maybe TargetPool]
+tpslTargetPools :: Lens' TargetPoolsScopedList [TargetPool]
 tpslTargetPools
   = lens _tpslTargetPools
       (\ s a -> s{_tpslTargetPools = a})
@@ -2546,7 +2546,7 @@ instance ToJSON TargetPoolsScopedList where
 -- /See:/ 'operationsScopedList' smart constructor.
 data OperationsScopedList = OperationsScopedList
     { _oslWarning    :: !(Maybe OperationsScopedListWarning)
-    , _oslOperations :: !(Maybe [Maybe Operation])
+    , _oslOperations :: !(Maybe [Operation])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperationsScopedList' with the minimum fields required to make a request.
@@ -2571,7 +2571,7 @@ oslWarning
   = lens _oslWarning (\ s a -> s{_oslWarning = a})
 
 -- | [Output Only] List of operations contained in this scope.
-oslOperations :: Lens' OperationsScopedList [Maybe Operation]
+oslOperations :: Lens' OperationsScopedList [Operation]
 oslOperations
   = lens _oslOperations
       (\ s a -> s{_oslOperations = a})
@@ -2758,7 +2758,7 @@ instance ToJSON ForwardingRuleAggregatedList where
 data TargetInstanceList = TargetInstanceList
     { _tilNextPageToken :: !(Maybe Text)
     , _tilKind          :: !Text
-    , _tilItems         :: !(Maybe [Maybe TargetInstance])
+    , _tilItems         :: !(Maybe [TargetInstance])
     , _tilSelfLink      :: !(Maybe Text)
     , _tilId            :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -2798,7 +2798,7 @@ tilKind :: Lens' TargetInstanceList Text
 tilKind = lens _tilKind (\ s a -> s{_tilKind = a})
 
 -- | A list of TargetInstance resources.
-tilItems :: Lens' TargetInstanceList [Maybe TargetInstance]
+tilItems :: Lens' TargetInstanceList [TargetInstance]
 tilItems
   = lens _tilItems (\ s a -> s{_tilItems = a}) .
       _Default
@@ -2949,7 +2949,7 @@ instance ToJSON TargetPoolAggregatedList where
 data ImageList = ImageList
     { _ilNextPageToken :: !(Maybe Text)
     , _ilKind          :: !Text
-    , _ilItems         :: !(Maybe [Maybe Image])
+    , _ilItems         :: !(Maybe [Image])
     , _ilSelfLink      :: !(Maybe Text)
     , _ilId            :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -2989,7 +2989,7 @@ ilKind :: Lens' ImageList Text
 ilKind = lens _ilKind (\ s a -> s{_ilKind = a})
 
 -- | A list of Image resources.
-ilItems :: Lens' ImageList [Maybe Image]
+ilItems :: Lens' ImageList [Image]
 ilItems
   = lens _ilItems (\ s a -> s{_ilItems = a}) . _Default
       . _Coerce
@@ -3600,7 +3600,7 @@ data InstanceGroupManager = InstanceGroupManager
     , _igmInstanceTemplate  :: !(Maybe Text)
     , _igmTargetSize        :: !(Maybe Int32)
     , _igmSelfLink          :: !(Maybe Text)
-    , _igmCurrentActions    :: !(Maybe (Maybe InstanceGroupManagerActionsSummary))
+    , _igmCurrentActions    :: !(Maybe InstanceGroupManagerActionsSummary)
     , _igmName              :: !(Maybe Text)
     , _igmCreationTimestamp :: !(Maybe Text)
     , _igmId                :: !(Maybe Word64)
@@ -3709,7 +3709,7 @@ igmSelfLink
 
 -- | [Output Only] The list of instance actions and the number of instances
 -- in this managed instance group that are scheduled for those actions.
-igmCurrentActions :: Lens' InstanceGroupManager (Maybe (Maybe InstanceGroupManagerActionsSummary))
+igmCurrentActions :: Lens' InstanceGroupManager (Maybe InstanceGroupManagerActionsSummary)
 igmCurrentActions
   = lens _igmCurrentActions
       (\ s a -> s{_igmCurrentActions = a})
@@ -4084,10 +4084,10 @@ data Operation = Operation
     , _oStartTime           :: !(Maybe Text)
     , _oKind                :: !Text
     , _oError               :: !(Maybe OperationError)
-    , _oHttpErrorMessage    :: !(Maybe Text)
+    , _oHTTPErrorMessage    :: !(Maybe Text)
     , _oZone                :: !(Maybe Text)
     , _oWarnings            :: !(Maybe [OperationWarnings])
-    , _oHttpErrorStatusCode :: !(Maybe Int32)
+    , _oHTTPErrorStatusCode :: !(Maybe Int32)
     , _oUser                :: !(Maybe Text)
     , _oSelfLink            :: !(Maybe Text)
     , _oName                :: !(Maybe Text)
@@ -4119,13 +4119,13 @@ data Operation = Operation
 --
 -- * 'oError'
 --
--- * 'oHttpErrorMessage'
+-- * 'oHTTPErrorMessage'
 --
 -- * 'oZone'
 --
 -- * 'oWarnings'
 --
--- * 'oHttpErrorStatusCode'
+-- * 'oHTTPErrorStatusCode'
 --
 -- * 'oUser'
 --
@@ -4159,10 +4159,10 @@ operation =
     , _oStartTime = Nothing
     , _oKind = "compute#operation"
     , _oError = Nothing
-    , _oHttpErrorMessage = Nothing
+    , _oHTTPErrorMessage = Nothing
     , _oZone = Nothing
     , _oWarnings = Nothing
-    , _oHttpErrorStatusCode = Nothing
+    , _oHTTPErrorStatusCode = Nothing
     , _oUser = Nothing
     , _oSelfLink = Nothing
     , _oName = Nothing
@@ -4220,10 +4220,10 @@ oError = lens _oError (\ s a -> s{_oError = a})
 
 -- | [Output Only] If the operation fails, this field contains the HTTP error
 -- message that was returned, such as NOT FOUND.
-oHttpErrorMessage :: Lens' Operation (Maybe Text)
-oHttpErrorMessage
-  = lens _oHttpErrorMessage
-      (\ s a -> s{_oHttpErrorMessage = a})
+oHTTPErrorMessage :: Lens' Operation (Maybe Text)
+oHTTPErrorMessage
+  = lens _oHTTPErrorMessage
+      (\ s a -> s{_oHTTPErrorMessage = a})
 
 -- | [Output Only] URL of the zone where the operation resides.
 oZone :: Lens' Operation (Maybe Text)
@@ -4239,10 +4239,10 @@ oWarnings
 
 -- | [Output Only] If the operation fails, this field contains the HTTP error
 -- message that was returned, such as 404.
-oHttpErrorStatusCode :: Lens' Operation (Maybe Int32)
-oHttpErrorStatusCode
-  = lens _oHttpErrorStatusCode
-      (\ s a -> s{_oHttpErrorStatusCode = a})
+oHTTPErrorStatusCode :: Lens' Operation (Maybe Int32)
+oHTTPErrorStatusCode
+  = lens _oHTTPErrorStatusCode
+      (\ s a -> s{_oHTTPErrorStatusCode = a})
 
 -- | [Output Only] User who requested the operation, for example:
 -- user\'example.com.
@@ -4341,10 +4341,10 @@ instance ToJSON Operation where
                   ("progress" .=) <$> _oProgress,
                   ("startTime" .=) <$> _oStartTime,
                   Just ("kind" .= _oKind), ("error" .=) <$> _oError,
-                  ("httpErrorMessage" .=) <$> _oHttpErrorMessage,
+                  ("httpErrorMessage" .=) <$> _oHTTPErrorMessage,
                   ("zone" .=) <$> _oZone,
                   ("warnings" .=) <$> _oWarnings,
-                  ("httpErrorStatusCode" .=) <$> _oHttpErrorStatusCode,
+                  ("httpErrorStatusCode" .=) <$> _oHTTPErrorStatusCode,
                   ("user" .=) <$> _oUser,
                   ("selfLink" .=) <$> _oSelfLink,
                   ("name" .=) <$> _oName,
@@ -4363,15 +4363,15 @@ instance ToJSON Operation where
 -- /See:/ 'project' smart constructor.
 data Project = Project
     { _pKind                   :: !Text
-    , _pUsageExportLocation    :: !(Maybe (Maybe UsageExportLocation))
+    , _pUsageExportLocation    :: !(Maybe UsageExportLocation)
     , _pSelfLink               :: !(Maybe Text)
     , _pName                   :: !(Maybe Text)
     , _pCreationTimestamp      :: !(Maybe Text)
     , _pEnabledFeatures        :: !(Maybe [Text])
-    , _pQuotas                 :: !(Maybe [Maybe Quota])
+    , _pQuotas                 :: !(Maybe [Quota])
     , _pId                     :: !(Maybe Word64)
     , _pDescription            :: !(Maybe Text)
-    , _pCommonInstanceMetadata :: !(Maybe (Maybe Metadata))
+    , _pCommonInstanceMetadata :: !(Maybe Metadata)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Project' with the minimum fields required to make a request.
@@ -4419,7 +4419,7 @@ pKind = lens _pKind (\ s a -> s{_pKind = a})
 
 -- | The location in Cloud Storage and naming method of the daily usage
 -- report.
-pUsageExportLocation :: Lens' Project (Maybe (Maybe UsageExportLocation))
+pUsageExportLocation :: Lens' Project (Maybe UsageExportLocation)
 pUsageExportLocation
   = lens _pUsageExportLocation
       (\ s a -> s{_pUsageExportLocation = a})
@@ -4448,7 +4448,7 @@ pEnabledFeatures
       . _Coerce
 
 -- | [Output Only] Quotas assigned to this project.
-pQuotas :: Lens' Project [Maybe Quota]
+pQuotas :: Lens' Project [Quota]
 pQuotas
   = lens _pQuotas (\ s a -> s{_pQuotas = a}) . _Default
       . _Coerce
@@ -4464,7 +4464,7 @@ pDescription
 
 -- | Metadata key\/value pairs available to all instances contained in this
 -- project. See Custom metadata for more information.
-pCommonInstanceMetadata :: Lens' Project (Maybe (Maybe Metadata))
+pCommonInstanceMetadata :: Lens' Project (Maybe Metadata)
 pCommonInstanceMetadata
   = lens _pCommonInstanceMetadata
       (\ s a -> s{_pCommonInstanceMetadata = a})
@@ -4506,7 +4506,7 @@ instance ToJSON Project where
 data URLMapList = URLMapList
     { _umlNextPageToken :: !(Maybe Text)
     , _umlKind          :: !Text
-    , _umlItems         :: !(Maybe [Maybe URLMap])
+    , _umlItems         :: !(Maybe [URLMap])
     , _umlSelfLink      :: !(Maybe Text)
     , _umlId            :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -4546,7 +4546,7 @@ umlKind :: Lens' URLMapList Text
 umlKind = lens _umlKind (\ s a -> s{_umlKind = a})
 
 -- | A list of UrlMap resources.
-umlItems :: Lens' URLMapList [Maybe URLMap]
+umlItems :: Lens' URLMapList [URLMap]
 umlItems
   = lens _umlItems (\ s a -> s{_umlItems = a}) .
       _Default
@@ -4585,7 +4585,7 @@ instance ToJSON URLMapList where
 --
 -- /See:/ 'targetPoolsRemoveInstanceRequest' smart constructor.
 newtype TargetPoolsRemoveInstanceRequest = TargetPoolsRemoveInstanceRequest
-    { _tprirInstances :: Maybe [Maybe InstanceReference]
+    { _tprirInstances :: Maybe [InstanceReference]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetPoolsRemoveInstanceRequest' with the minimum fields required to make a request.
@@ -4601,7 +4601,7 @@ targetPoolsRemoveInstanceRequest =
     }
 
 -- | URLs of the instances to be removed from targetPool.
-tprirInstances :: Lens' TargetPoolsRemoveInstanceRequest [Maybe InstanceReference]
+tprirInstances :: Lens' TargetPoolsRemoveInstanceRequest [InstanceReference]
 tprirInstances
   = lens _tprirInstances
       (\ s a -> s{_tprirInstances = a})
@@ -4682,15 +4682,15 @@ instance ToJSON RouteWarnings where
 --
 -- /See:/ 'instanceProperties' smart constructor.
 data InstanceProperties = InstanceProperties
-    { _ipServiceAccounts   :: !(Maybe [Maybe ServiceAccount])
-    , _ipNetworkInterfaces :: !(Maybe [Maybe NetworkInterface])
+    { _ipServiceAccounts   :: !(Maybe [ServiceAccount])
+    , _ipNetworkInterfaces :: !(Maybe [NetworkInterface])
     , _ipMachineType       :: !(Maybe Text)
-    , _ipMetadata          :: !(Maybe (Maybe Metadata))
-    , _ipScheduling        :: !(Maybe (Maybe Scheduling))
-    , _ipDisks             :: !(Maybe [Maybe AttachedDisk])
-    , _ipCanIpForward      :: !(Maybe Bool)
+    , _ipMetadata          :: !(Maybe Metadata)
+    , _ipScheduling        :: !(Maybe Scheduling)
+    , _ipDisks             :: !(Maybe [AttachedDisk])
+    , _ipCanIPForward      :: !(Maybe Bool)
     , _ipDescription       :: !(Maybe Text)
-    , _ipTags              :: !(Maybe (Maybe Tags))
+    , _ipTags              :: !(Maybe Tags)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceProperties' with the minimum fields required to make a request.
@@ -4709,7 +4709,7 @@ data InstanceProperties = InstanceProperties
 --
 -- * 'ipDisks'
 --
--- * 'ipCanIpForward'
+-- * 'ipCanIPForward'
 --
 -- * 'ipDescription'
 --
@@ -4724,7 +4724,7 @@ instanceProperties =
     , _ipMetadata = Nothing
     , _ipScheduling = Nothing
     , _ipDisks = Nothing
-    , _ipCanIpForward = Nothing
+    , _ipCanIPForward = Nothing
     , _ipDescription = Nothing
     , _ipTags = Nothing
     }
@@ -4733,7 +4733,7 @@ instanceProperties =
 -- these service accounts are available to the instances that are created
 -- from this template. Use metadata queries to obtain the access tokens for
 -- these instances.
-ipServiceAccounts :: Lens' InstanceProperties [Maybe ServiceAccount]
+ipServiceAccounts :: Lens' InstanceProperties [ServiceAccount]
 ipServiceAccounts
   = lens _ipServiceAccounts
       (\ s a -> s{_ipServiceAccounts = a})
@@ -4746,7 +4746,7 @@ ipServiceAccounts
 -- ONE_TO_ONE_NAT is the only supported access configuration. If you do not
 -- specify any access configurations, the instances that are created from
 -- this template will have no external internet access.
-ipNetworkInterfaces :: Lens' InstanceProperties [Maybe NetworkInterface]
+ipNetworkInterfaces :: Lens' InstanceProperties [NetworkInterface]
 ipNetworkInterfaces
   = lens _ipNetworkInterfaces
       (\ s a -> s{_ipNetworkInterfaces = a})
@@ -4763,19 +4763,19 @@ ipMachineType
 -- | The metadata key\/value pairs to assign to instances that are created
 -- from this template. These pairs can consist of custom metadata or
 -- predefined keys. See Project and instance metadata for more information.
-ipMetadata :: Lens' InstanceProperties (Maybe (Maybe Metadata))
+ipMetadata :: Lens' InstanceProperties (Maybe Metadata)
 ipMetadata
   = lens _ipMetadata (\ s a -> s{_ipMetadata = a})
 
 -- | A list of scheduling options for the instances that are created from
 -- this template.
-ipScheduling :: Lens' InstanceProperties (Maybe (Maybe Scheduling))
+ipScheduling :: Lens' InstanceProperties (Maybe Scheduling)
 ipScheduling
   = lens _ipScheduling (\ s a -> s{_ipScheduling = a})
 
 -- | An array of disks that are associated with the instances that are
 -- created from this template.
-ipDisks :: Lens' InstanceProperties [Maybe AttachedDisk]
+ipDisks :: Lens' InstanceProperties [AttachedDisk]
 ipDisks
   = lens _ipDisks (\ s a -> s{_ipDisks = a}) . _Default
       . _Coerce
@@ -4785,10 +4785,10 @@ ipDisks
 -- packets with destination IP addresses other than their own. If you use
 -- these instances as an IP gateway or as the next-hop in a Route resource,
 -- specify true. Otherwise, specify false.
-ipCanIpForward :: Lens' InstanceProperties (Maybe Bool)
-ipCanIpForward
-  = lens _ipCanIpForward
-      (\ s a -> s{_ipCanIpForward = a})
+ipCanIPForward :: Lens' InstanceProperties (Maybe Bool)
+ipCanIPForward
+  = lens _ipCanIPForward
+      (\ s a -> s{_ipCanIPForward = a})
 
 -- | An optional text description for the instances that are created from
 -- this instance template.
@@ -4801,7 +4801,7 @@ ipDescription
 -- template. The tags identify valid sources or targets for network
 -- firewalls. The setTags method can modify this list of tags. Each tag
 -- within the list must comply with RFC1035.
-ipTags :: Lens' InstanceProperties (Maybe (Maybe Tags))
+ipTags :: Lens' InstanceProperties (Maybe Tags)
 ipTags = lens _ipTags (\ s a -> s{_ipTags = a})
 
 instance FromJSON InstanceProperties where
@@ -4829,7 +4829,7 @@ instance ToJSON InstanceProperties where
                   ("metadata" .=) <$> _ipMetadata,
                   ("scheduling" .=) <$> _ipScheduling,
                   ("disks" .=) <$> _ipDisks,
-                  ("canIpForward" .=) <$> _ipCanIpForward,
+                  ("canIpForward" .=) <$> _ipCanIPForward,
                   ("description" .=) <$> _ipDescription,
                   ("tags" .=) <$> _ipTags])
 
@@ -5112,7 +5112,7 @@ instance ToJSON ManagedInstanceLastAttemptErrors
 -- /See:/ 'targetPoolInstanceHealth' smart constructor.
 data TargetPoolInstanceHealth = TargetPoolInstanceHealth
     { _tpihKind         :: !Text
-    , _tpihHealthStatus :: !(Maybe [Maybe HealthStatus])
+    , _tpihHealthStatus :: !(Maybe [HealthStatus])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetPoolInstanceHealth' with the minimum fields required to make a request.
@@ -5134,7 +5134,7 @@ targetPoolInstanceHealth =
 tpihKind :: Lens' TargetPoolInstanceHealth Text
 tpihKind = lens _tpihKind (\ s a -> s{_tpihKind = a})
 
-tpihHealthStatus :: Lens' TargetPoolInstanceHealth [Maybe HealthStatus]
+tpihHealthStatus :: Lens' TargetPoolInstanceHealth [HealthStatus]
 tpihHealthStatus
   = lens _tpihHealthStatus
       (\ s a -> s{_tpihHealthStatus = a})
@@ -5162,7 +5162,7 @@ instance ToJSON TargetPoolInstanceHealth where
 -- /See:/ 'targetInstance' smart constructor.
 data TargetInstance = TargetInstance
     { _tiKind              :: !Text
-    , _tiNatPolicy         :: !(Maybe TargetInstanceNATPolicy)
+    , _tiNATPolicy         :: !(Maybe TargetInstanceNATPolicy)
     , _tiZone              :: !(Maybe Text)
     , _tiSelfLink          :: !(Maybe Text)
     , _tiName              :: !(Maybe Text)
@@ -5178,7 +5178,7 @@ data TargetInstance = TargetInstance
 --
 -- * 'tiKind'
 --
--- * 'tiNatPolicy'
+-- * 'tiNATPolicy'
 --
 -- * 'tiZone'
 --
@@ -5198,7 +5198,7 @@ targetInstance
 targetInstance =
     TargetInstance
     { _tiKind = "compute#targetInstance"
-    , _tiNatPolicy = Nothing
+    , _tiNATPolicy = Nothing
     , _tiZone = Nothing
     , _tiSelfLink = Nothing
     , _tiName = Nothing
@@ -5214,9 +5214,9 @@ tiKind = lens _tiKind (\ s a -> s{_tiKind = a})
 
 -- | NAT option controlling how IPs are NAT\'ed to the instance. Currently
 -- only NO_NAT (default value) is supported.
-tiNatPolicy :: Lens' TargetInstance (Maybe TargetInstanceNATPolicy)
-tiNatPolicy
-  = lens _tiNatPolicy (\ s a -> s{_tiNatPolicy = a})
+tiNATPolicy :: Lens' TargetInstance (Maybe TargetInstanceNATPolicy)
+tiNATPolicy
+  = lens _tiNATPolicy (\ s a -> s{_tiNATPolicy = a})
 
 -- | [Output Only] URL of the zone where the target instance resides.
 tiZone :: Lens' TargetInstance (Maybe Text)
@@ -5279,7 +5279,7 @@ instance ToJSON TargetInstance where
           = object
               (catMaybes
                  [Just ("kind" .= _tiKind),
-                  ("natPolicy" .=) <$> _tiNatPolicy,
+                  ("natPolicy" .=) <$> _tiNATPolicy,
                   ("zone" .=) <$> _tiZone,
                   ("selfLink" .=) <$> _tiSelfLink,
                   ("name" .=) <$> _tiName,
@@ -5398,7 +5398,7 @@ instance ToJSON DiskTypesScopedListWarningData where
 --
 -- /See:/ 'instanceGroupManagersListManagedInstancesResponse' smart constructor.
 newtype InstanceGroupManagersListManagedInstancesResponse = InstanceGroupManagersListManagedInstancesResponse
-    { _igmlmirManagedInstances :: Maybe [Maybe ManagedInstance]
+    { _igmlmirManagedInstances :: Maybe [ManagedInstance]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagersListManagedInstancesResponse' with the minimum fields required to make a request.
@@ -5414,7 +5414,7 @@ instanceGroupManagersListManagedInstancesResponse =
     }
 
 -- | List of managed instances. If empty - all instances are listed.
-igmlmirManagedInstances :: Lens' InstanceGroupManagersListManagedInstancesResponse [Maybe ManagedInstance]
+igmlmirManagedInstances :: Lens' InstanceGroupManagersListManagedInstancesResponse [ManagedInstance]
 igmlmirManagedInstances
   = lens _igmlmirManagedInstances
       (\ s a -> s{_igmlmirManagedInstances = a})
@@ -5444,7 +5444,7 @@ instance ToJSON
 --
 -- /See:/ 'instanceGroupsRemoveInstancesRequest' smart constructor.
 newtype InstanceGroupsRemoveInstancesRequest = InstanceGroupsRemoveInstancesRequest
-    { _igrirInstances :: Maybe [Maybe InstanceReference]
+    { _igrirInstances :: Maybe [InstanceReference]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupsRemoveInstancesRequest' with the minimum fields required to make a request.
@@ -5460,7 +5460,7 @@ instanceGroupsRemoveInstancesRequest =
     }
 
 -- | The instances to remove from the instance group.
-igrirInstances :: Lens' InstanceGroupsRemoveInstancesRequest [Maybe InstanceReference]
+igrirInstances :: Lens' InstanceGroupsRemoveInstancesRequest [InstanceReference]
 igrirInstances
   = lens _igrirInstances
       (\ s a -> s{_igrirInstances = a})
@@ -5624,31 +5624,31 @@ instance ToJSON AttachedDiskInitializeParams where
 --
 -- /See:/ 'networkInterface' smart constructor.
 data NetworkInterface = NetworkInterface
-    { _niNetwork       :: !(Maybe Text)
-    , _niName          :: !(Maybe Text)
-    , _niNetworkIP     :: !(Maybe Text)
-    , _niAccessConfigs :: !(Maybe [Maybe AccessConfig])
+    { _nNetwork       :: !(Maybe Text)
+    , _nName          :: !(Maybe Text)
+    , _nNetworkIP     :: !(Maybe Text)
+    , _nAccessConfigs :: !(Maybe [AccessConfig])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NetworkInterface' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'niNetwork'
+-- * 'nNetwork'
 --
--- * 'niName'
+-- * 'nName'
 --
--- * 'niNetworkIP'
+-- * 'nNetworkIP'
 --
--- * 'niAccessConfigs'
+-- * 'nAccessConfigs'
 networkInterface
     :: NetworkInterface
 networkInterface =
     NetworkInterface
-    { _niNetwork = Nothing
-    , _niName = Nothing
-    , _niNetworkIP = Nothing
-    , _niAccessConfigs = Nothing
+    { _nNetwork = Nothing
+    , _nName = Nothing
+    , _nNetworkIP = Nothing
+    , _nAccessConfigs = Nothing
     }
 
 -- | URL of the network resource for this instance. This is required for
@@ -5660,28 +5660,27 @@ networkInterface =
 -- https:\/\/www.googleapis.com\/compute\/v1\/projects\/project\/global\/networks\/network
 -- - projects\/project\/global\/networks\/network -
 -- global\/networks\/default
-niNetwork :: Lens' NetworkInterface (Maybe Text)
-niNetwork
-  = lens _niNetwork (\ s a -> s{_niNetwork = a})
+nNetwork :: Lens' NetworkInterface (Maybe Text)
+nNetwork = lens _nNetwork (\ s a -> s{_nNetwork = a})
 
 -- | [Output Only] The name of the network interface, generated by the
 -- server. For network devices, these are eth0, eth1, etc.
-niName :: Lens' NetworkInterface (Maybe Text)
-niName = lens _niName (\ s a -> s{_niName = a})
+nName :: Lens' NetworkInterface (Maybe Text)
+nName = lens _nName (\ s a -> s{_nName = a})
 
 -- | [Output Only] An optional IPV4 internal network address assigned to the
 -- instance for this network interface.
-niNetworkIP :: Lens' NetworkInterface (Maybe Text)
-niNetworkIP
-  = lens _niNetworkIP (\ s a -> s{_niNetworkIP = a})
+nNetworkIP :: Lens' NetworkInterface (Maybe Text)
+nNetworkIP
+  = lens _nNetworkIP (\ s a -> s{_nNetworkIP = a})
 
 -- | An array of configurations for this interface. Currently, ONE_TO_ONE_NAT
 -- is the only access config supported. If there are no accessConfigs
 -- specified, then this instance will have no external internet access.
-niAccessConfigs :: Lens' NetworkInterface [Maybe AccessConfig]
-niAccessConfigs
-  = lens _niAccessConfigs
-      (\ s a -> s{_niAccessConfigs = a})
+nAccessConfigs :: Lens' NetworkInterface [AccessConfig]
+nAccessConfigs
+  = lens _nAccessConfigs
+      (\ s a -> s{_nAccessConfigs = a})
       . _Default
       . _Coerce
 
@@ -5698,10 +5697,10 @@ instance ToJSON NetworkInterface where
         toJSON NetworkInterface{..}
           = object
               (catMaybes
-                 [("network" .=) <$> _niNetwork,
-                  ("name" .=) <$> _niName,
-                  ("networkIP" .=) <$> _niNetworkIP,
-                  ("accessConfigs" .=) <$> _niAccessConfigs])
+                 [("network" .=) <$> _nNetwork,
+                  ("name" .=) <$> _nName,
+                  ("networkIP" .=) <$> _nNetworkIP,
+                  ("accessConfigs" .=) <$> _nAccessConfigs])
 
 -- | A list of instance templates.
 --
@@ -5709,7 +5708,7 @@ instance ToJSON NetworkInterface where
 data InstanceTemplateList = InstanceTemplateList
     { _itlNextPageToken :: !(Maybe Text)
     , _itlKind          :: !Text
-    , _itlItems         :: !(Maybe [Maybe InstanceTemplate])
+    , _itlItems         :: !(Maybe [InstanceTemplate])
     , _itlSelfLink      :: !(Maybe Text)
     , _itlId            :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -5750,7 +5749,7 @@ itlKind :: Lens' InstanceTemplateList Text
 itlKind = lens _itlKind (\ s a -> s{_itlKind = a})
 
 -- | A list of InstanceTemplate resources.
-itlItems :: Lens' InstanceTemplateList [Maybe InstanceTemplate]
+itlItems :: Lens' InstanceTemplateList [InstanceTemplate]
 itlItems
   = lens _itlItems (\ s a -> s{_itlItems = a}) .
       _Default
@@ -5791,7 +5790,7 @@ instance ToJSON InstanceTemplateList where
 --
 -- /See:/ 'targetPoolsRemoveHealthCheckRequest' smart constructor.
 newtype TargetPoolsRemoveHealthCheckRequest = TargetPoolsRemoveHealthCheckRequest
-    { _tprhcrHealthChecks :: Maybe [Maybe HealthCheckReference]
+    { _tprhcrHealthChecks :: Maybe [HealthCheckReference]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetPoolsRemoveHealthCheckRequest' with the minimum fields required to make a request.
@@ -5807,7 +5806,7 @@ targetPoolsRemoveHealthCheckRequest =
     }
 
 -- | Health check URLs to be removed from targetPool.
-tprhcrHealthChecks :: Lens' TargetPoolsRemoveHealthCheckRequest [Maybe HealthCheckReference]
+tprhcrHealthChecks :: Lens' TargetPoolsRemoveHealthCheckRequest [HealthCheckReference]
 tprhcrHealthChecks
   = lens _tprhcrHealthChecks
       (\ s a -> s{_tprhcrHealthChecks = a})
@@ -5835,7 +5834,7 @@ instance ToJSON TargetPoolsRemoveHealthCheckRequest
 data RouteList = RouteList
     { _rlNextPageToken :: !(Maybe Text)
     , _rlKind          :: !Text
-    , _rlItems         :: !(Maybe [Maybe Route])
+    , _rlItems         :: !(Maybe [Route])
     , _rlSelfLink      :: !(Maybe Text)
     , _rlId            :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -5875,7 +5874,7 @@ rlKind :: Lens' RouteList Text
 rlKind = lens _rlKind (\ s a -> s{_rlKind = a})
 
 -- | A list of Route resources.
-rlItems :: Lens' RouteList [Maybe Route]
+rlItems :: Lens' RouteList [Route]
 rlItems
   = lens _rlItems (\ s a -> s{_rlItems = a}) . _Default
       . _Coerce
@@ -5915,7 +5914,7 @@ instance ToJSON RouteList where
 data TargetVPNGatewayList = TargetVPNGatewayList
     { _tvglNextPageToken :: !(Maybe Text)
     , _tvglKind          :: !Text
-    , _tvglItems         :: !(Maybe [Maybe TargetVPNGateway])
+    , _tvglItems         :: !(Maybe [TargetVPNGateway])
     , _tvglSelfLink      :: !(Maybe Text)
     , _tvglId            :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -5956,7 +5955,7 @@ tvglKind :: Lens' TargetVPNGatewayList Text
 tvglKind = lens _tvglKind (\ s a -> s{_tvglKind = a})
 
 -- | [Output Only] A list of TargetVpnGateway resources.
-tvglItems :: Lens' TargetVPNGatewayList [Maybe TargetVPNGateway]
+tvglItems :: Lens' TargetVPNGatewayList [TargetVPNGateway]
 tvglItems
   = lens _tvglItems (\ s a -> s{_tvglItems = a}) .
       _Default
@@ -6260,7 +6259,7 @@ instance ToJSON InstanceAggregatedList where
 -- /See:/ 'instancesScopedList' smart constructor.
 data InstancesScopedList = InstancesScopedList
     { _islWarning   :: !(Maybe InstancesScopedListWarning)
-    , _islInstances :: !(Maybe [Maybe Instance])
+    , _islInstances :: !(Maybe [Instance])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesScopedList' with the minimum fields required to make a request.
@@ -6285,7 +6284,7 @@ islWarning
   = lens _islWarning (\ s a -> s{_islWarning = a})
 
 -- | [Output Only] List of instances contained in this scope.
-islInstances :: Lens' InstancesScopedList [Maybe Instance]
+islInstances :: Lens' InstancesScopedList [Instance]
 islInstances
   = lens _islInstances (\ s a -> s{_islInstances = a})
       . _Default
@@ -6318,7 +6317,7 @@ data Zone = Zone
     , _zId                 :: !(Maybe Word64)
     , _zRegion             :: !(Maybe Text)
     , _zDescription        :: !(Maybe Text)
-    , _zDeprecated         :: !(Maybe (Maybe DeprecationStatus))
+    , _zDeprecated         :: !(Maybe DeprecationStatus)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Zone' with the minimum fields required to make a request.
@@ -6407,7 +6406,7 @@ zDescription
   = lens _zDescription (\ s a -> s{_zDescription = a})
 
 -- | [Output Only] The deprecation status associated with this zone.
-zDeprecated :: Lens' Zone (Maybe (Maybe DeprecationStatus))
+zDeprecated :: Lens' Zone (Maybe DeprecationStatus)
 zDeprecated
   = lens _zDeprecated (\ s a -> s{_zDeprecated = a})
 
@@ -6552,64 +6551,64 @@ instance ToJSON
 --
 -- /See:/ 'network' smart constructor.
 data Network = Network
-    { _nKind              :: !Text
-    , _nIPv4Range         :: !(Maybe Text)
-    , _nSelfLink          :: !(Maybe Text)
-    , _nName              :: !(Maybe Text)
-    , _nCreationTimestamp :: !(Maybe Text)
-    , _nId                :: !(Maybe Word64)
-    , _nGatewayIPv4       :: !(Maybe Text)
-    , _nDescription       :: !(Maybe Text)
+    { _netKind              :: !Text
+    , _netIPv4Range         :: !(Maybe Text)
+    , _netSelfLink          :: !(Maybe Text)
+    , _netName              :: !(Maybe Text)
+    , _netCreationTimestamp :: !(Maybe Text)
+    , _netId                :: !(Maybe Word64)
+    , _netGatewayIPv4       :: !(Maybe Text)
+    , _netDescription       :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Network' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'nKind'
+-- * 'netKind'
 --
--- * 'nIPv4Range'
+-- * 'netIPv4Range'
 --
--- * 'nSelfLink'
+-- * 'netSelfLink'
 --
--- * 'nName'
+-- * 'netName'
 --
--- * 'nCreationTimestamp'
+-- * 'netCreationTimestamp'
 --
--- * 'nId'
+-- * 'netId'
 --
--- * 'nGatewayIPv4'
+-- * 'netGatewayIPv4'
 --
--- * 'nDescription'
+-- * 'netDescription'
 network
     :: Network
 network =
     Network
-    { _nKind = "compute#network"
-    , _nIPv4Range = Nothing
-    , _nSelfLink = Nothing
-    , _nName = Nothing
-    , _nCreationTimestamp = Nothing
-    , _nId = Nothing
-    , _nGatewayIPv4 = Nothing
-    , _nDescription = Nothing
+    { _netKind = "compute#network"
+    , _netIPv4Range = Nothing
+    , _netSelfLink = Nothing
+    , _netName = Nothing
+    , _netCreationTimestamp = Nothing
+    , _netId = Nothing
+    , _netGatewayIPv4 = Nothing
+    , _netDescription = Nothing
     }
 
 -- | [Output Only] Type of the resource. Always compute#network for networks.
-nKind :: Lens' Network Text
-nKind = lens _nKind (\ s a -> s{_nKind = a})
+netKind :: Lens' Network Text
+netKind = lens _netKind (\ s a -> s{_netKind = a})
 
 -- | The range of internal addresses that are legal on this network. This
 -- range is a CIDR specification, for example: 192.168.0.0\/16. Provided by
 -- the client when the network is created.
-nIPv4Range :: Lens' Network (Maybe Text)
-nIPv4Range
-  = lens _nIPv4Range (\ s a -> s{_nIPv4Range = a})
+netIPv4Range :: Lens' Network (Maybe Text)
+netIPv4Range
+  = lens _netIPv4Range (\ s a -> s{_netIPv4Range = a})
 
 -- | [Output Only] Server-defined URL for the resource.
-nSelfLink :: Lens' Network (Maybe Text)
-nSelfLink
-  = lens _nSelfLink (\ s a -> s{_nSelfLink = a})
+netSelfLink :: Lens' Network (Maybe Text)
+netSelfLink
+  = lens _netSelfLink (\ s a -> s{_netSelfLink = a})
 
 -- | Name of the resource. Provided by the client when the resource is
 -- created. The name must be 1-63 characters long, and comply with RFC1035.
@@ -6618,31 +6617,33 @@ nSelfLink
 -- character must be a lowercase letter, and all following characters must
 -- be a dash, lowercase letter, or digit, except the last character, which
 -- cannot be a dash.
-nName :: Lens' Network (Maybe Text)
-nName = lens _nName (\ s a -> s{_nName = a})
+netName :: Lens' Network (Maybe Text)
+netName = lens _netName (\ s a -> s{_netName = a})
 
 -- | [Output Only] Creation timestamp in RFC3339 text format.
-nCreationTimestamp :: Lens' Network (Maybe Text)
-nCreationTimestamp
-  = lens _nCreationTimestamp
-      (\ s a -> s{_nCreationTimestamp = a})
+netCreationTimestamp :: Lens' Network (Maybe Text)
+netCreationTimestamp
+  = lens _netCreationTimestamp
+      (\ s a -> s{_netCreationTimestamp = a})
 
 -- | [Output Only] Unique identifier for the resource. Defined by the server.
-nId :: Lens' Network (Maybe Word64)
-nId = lens _nId (\ s a -> s{_nId = a})
+netId :: Lens' Network (Maybe Word64)
+netId = lens _netId (\ s a -> s{_netId = a})
 
 -- | A gateway address for default routing to other networks. This value is
 -- read only and is selected by the Google Compute Engine, typically as the
 -- first usable address in the IPv4Range.
-nGatewayIPv4 :: Lens' Network (Maybe Text)
-nGatewayIPv4
-  = lens _nGatewayIPv4 (\ s a -> s{_nGatewayIPv4 = a})
+netGatewayIPv4 :: Lens' Network (Maybe Text)
+netGatewayIPv4
+  = lens _netGatewayIPv4
+      (\ s a -> s{_netGatewayIPv4 = a})
 
 -- | An optional textual description of the resource. Provided by the client
 -- when the resource is created.
-nDescription :: Lens' Network (Maybe Text)
-nDescription
-  = lens _nDescription (\ s a -> s{_nDescription = a})
+netDescription :: Lens' Network (Maybe Text)
+netDescription
+  = lens _netDescription
+      (\ s a -> s{_netDescription = a})
 
 instance FromJSON Network where
         parseJSON
@@ -6662,14 +6663,14 @@ instance ToJSON Network where
         toJSON Network{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _nKind),
-                  ("IPv4Range" .=) <$> _nIPv4Range,
-                  ("selfLink" .=) <$> _nSelfLink,
-                  ("name" .=) <$> _nName,
-                  ("creationTimestamp" .=) <$> _nCreationTimestamp,
-                  ("id" .=) <$> _nId,
-                  ("gatewayIPv4" .=) <$> _nGatewayIPv4,
-                  ("description" .=) <$> _nDescription])
+                 [Just ("kind" .= _netKind),
+                  ("IPv4Range" .=) <$> _netIPv4Range,
+                  ("selfLink" .=) <$> _netSelfLink,
+                  ("name" .=) <$> _netName,
+                  ("creationTimestamp" .=) <$> _netCreationTimestamp,
+                  ("id" .=) <$> _netId,
+                  ("gatewayIPv4" .=) <$> _netGatewayIPv4,
+                  ("description" .=) <$> _netDescription])
 
 --
 -- /See:/ 'firewallAllowed' smart constructor.
@@ -6828,13 +6829,13 @@ data Route = Route
     , _rNextHopNetwork    :: !(Maybe Text)
     , _rNetwork           :: !(Maybe Text)
     , _rWarnings          :: !(Maybe [RouteWarnings])
-    , _rNextHopIp         :: !(Maybe Text)
+    , _rNextHopIP         :: !(Maybe Text)
     , _rDestRange         :: !(Maybe Text)
     , _rSelfLink          :: !(Maybe Text)
     , _rName              :: !(Maybe Text)
     , _rCreationTimestamp :: !(Maybe Text)
     , _rId                :: !(Maybe Word64)
-    , _rNextHopVpnTunnel  :: !(Maybe Text)
+    , _rNextHopVPNTunnel  :: !(Maybe Text)
     , _rDescription       :: !(Maybe Text)
     , _rTags              :: !(Maybe [Text])
     , _rNextHopInstance   :: !(Maybe Text)
@@ -6856,7 +6857,7 @@ data Route = Route
 --
 -- * 'rWarnings'
 --
--- * 'rNextHopIp'
+-- * 'rNextHopIP'
 --
 -- * 'rDestRange'
 --
@@ -6868,7 +6869,7 @@ data Route = Route
 --
 -- * 'rId'
 --
--- * 'rNextHopVpnTunnel'
+-- * 'rNextHopVPNTunnel'
 --
 -- * 'rDescription'
 --
@@ -6885,13 +6886,13 @@ route =
     , _rNextHopNetwork = Nothing
     , _rNetwork = Nothing
     , _rWarnings = Nothing
-    , _rNextHopIp = Nothing
+    , _rNextHopIP = Nothing
     , _rDestRange = Nothing
     , _rSelfLink = Nothing
     , _rName = Nothing
     , _rCreationTimestamp = Nothing
     , _rId = Nothing
-    , _rNextHopVpnTunnel = Nothing
+    , _rNextHopVPNTunnel = Nothing
     , _rDescription = Nothing
     , _rTags = Nothing
     , _rNextHopInstance = Nothing
@@ -6937,9 +6938,9 @@ rWarnings
 
 -- | The network IP address of an instance that should handle matching
 -- packets.
-rNextHopIp :: Lens' Route (Maybe Text)
-rNextHopIp
-  = lens _rNextHopIp (\ s a -> s{_rNextHopIp = a})
+rNextHopIP :: Lens' Route (Maybe Text)
+rNextHopIP
+  = lens _rNextHopIP (\ s a -> s{_rNextHopIP = a})
 
 -- | The destination range of outgoing packets that this route applies to.
 rDestRange :: Lens' Route (Maybe Text)
@@ -6972,10 +6973,10 @@ rId :: Lens' Route (Maybe Word64)
 rId = lens _rId (\ s a -> s{_rId = a})
 
 -- | The URL to a VpnTunnel that should handle matching packets.
-rNextHopVpnTunnel :: Lens' Route (Maybe Text)
-rNextHopVpnTunnel
-  = lens _rNextHopVpnTunnel
-      (\ s a -> s{_rNextHopVpnTunnel = a})
+rNextHopVPNTunnel :: Lens' Route (Maybe Text)
+rNextHopVPNTunnel
+  = lens _rNextHopVPNTunnel
+      (\ s a -> s{_rNextHopVPNTunnel = a})
 
 -- | An optional textual description of the resource. Provided by the client
 -- when the resource is created.
@@ -7029,13 +7030,13 @@ instance ToJSON Route where
                   ("nextHopNetwork" .=) <$> _rNextHopNetwork,
                   ("network" .=) <$> _rNetwork,
                   ("warnings" .=) <$> _rWarnings,
-                  ("nextHopIp" .=) <$> _rNextHopIp,
+                  ("nextHopIp" .=) <$> _rNextHopIP,
                   ("destRange" .=) <$> _rDestRange,
                   ("selfLink" .=) <$> _rSelfLink,
                   ("name" .=) <$> _rName,
                   ("creationTimestamp" .=) <$> _rCreationTimestamp,
                   ("id" .=) <$> _rId,
-                  ("nextHopVpnTunnel" .=) <$> _rNextHopVpnTunnel,
+                  ("nextHopVpnTunnel" .=) <$> _rNextHopVPNTunnel,
                   ("description" .=) <$> _rDescription,
                   ("tags" .=) <$> _rTags,
                   ("nextHopInstance" .=) <$> _rNextHopInstance])
@@ -7050,7 +7051,7 @@ data InstanceTemplate = InstanceTemplate
     , _itCreationTimestamp :: !(Maybe Text)
     , _itId                :: !(Maybe Word64)
     , _itDescription       :: !(Maybe Text)
-    , _itProperties        :: !(Maybe (Maybe InstanceProperties))
+    , _itProperties        :: !(Maybe InstanceProperties)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceTemplate' with the minimum fields required to make a request.
@@ -7118,7 +7119,7 @@ itDescription
       (\ s a -> s{_itDescription = a})
 
 -- | The instance properties for the instance template resource.
-itProperties :: Lens' InstanceTemplate (Maybe (Maybe InstanceProperties))
+itProperties :: Lens' InstanceTemplate (Maybe InstanceProperties)
 itProperties
   = lens _itProperties (\ s a -> s{_itProperties = a})
 
@@ -7184,7 +7185,7 @@ instance ToJSON HealthCheckReference where
 --
 -- /See:/ 'uRLMapsValidateResponse' smart constructor.
 newtype URLMapsValidateResponse = URLMapsValidateResponse
-    { _umvrResult :: Maybe (Maybe URLMapValidationResult)
+    { _umvrResult :: Maybe URLMapValidationResult
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLMapsValidateResponse' with the minimum fields required to make a request.
@@ -7199,7 +7200,7 @@ uRLMapsValidateResponse =
     { _umvrResult = Nothing
     }
 
-umvrResult :: Lens' URLMapsValidateResponse (Maybe (Maybe URLMapValidationResult))
+umvrResult :: Lens' URLMapsValidateResponse (Maybe URLMapValidationResult)
 umvrResult
   = lens _umvrResult (\ s a -> s{_umvrResult = a})
 
@@ -7601,7 +7602,7 @@ instance ToJSON
 --
 -- /See:/ 'managedInstance' smart constructor.
 data ManagedInstance = ManagedInstance
-    { _miLastAttempt    :: !(Maybe (Maybe ManagedInstanceLastAttempt))
+    { _miLastAttempt    :: !(Maybe ManagedInstanceLastAttempt)
     , _miCurrentAction  :: !(Maybe ManagedInstanceCurrentAction)
     , _miId             :: !(Maybe Word64)
     , _miInstanceStatus :: !(Maybe ManagedInstanceInstanceStatus)
@@ -7633,7 +7634,7 @@ managedInstance =
     }
 
 -- | Information about the last attempt to create or delete the instance.
-miLastAttempt :: Lens' ManagedInstance (Maybe (Maybe ManagedInstanceLastAttempt))
+miLastAttempt :: Lens' ManagedInstance (Maybe ManagedInstanceLastAttempt)
 miLastAttempt
   = lens _miLastAttempt
       (\ s a -> s{_miLastAttempt = a})
@@ -7728,7 +7729,7 @@ instance ToJSON InstanceGroupsListInstancesRequest
 data AddressList = AddressList
     { _alNextPageToken :: !(Maybe Text)
     , _alKind          :: !Text
-    , _alItems         :: !(Maybe [Maybe Address])
+    , _alItems         :: !(Maybe [Address])
     , _alSelfLink      :: !(Maybe Text)
     , _alId            :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -7769,7 +7770,7 @@ alKind :: Lens' AddressList Text
 alKind = lens _alKind (\ s a -> s{_alKind = a})
 
 -- | [Output Only] A list of Address resources.
-alItems :: Lens' AddressList [Maybe Address]
+alItems :: Lens' AddressList [Address]
 alItems
   = lens _alItems (\ s a -> s{_alItems = a}) . _Default
       . _Coerce
@@ -7832,7 +7833,7 @@ instance ToJSON ForwardingRuleAggregatedListItems
 data ZoneList = ZoneList
     { _zlNextPageToken :: !(Maybe Text)
     , _zlKind          :: !Text
-    , _zlItems         :: !(Maybe [Maybe Zone])
+    , _zlItems         :: !(Maybe [Zone])
     , _zlSelfLink      :: !(Maybe Text)
     , _zlId            :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -7872,7 +7873,7 @@ zlKind :: Lens' ZoneList Text
 zlKind = lens _zlKind (\ s a -> s{_zlKind = a})
 
 -- | [Output Only] A list of Zone resources.
-zlItems :: Lens' ZoneList [Maybe Zone]
+zlItems :: Lens' ZoneList [Zone]
 zlItems
   = lens _zlItems (\ s a -> s{_zlItems = a}) . _Default
       . _Coerce
@@ -8079,24 +8080,24 @@ instance ToJSON InstanceGroupManagerActionsSummary
 --
 -- /See:/ 'uRLMapReference' smart constructor.
 newtype URLMapReference = URLMapReference
-    { _umrUrlMap :: Maybe Text
+    { _umrURLMap :: Maybe Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLMapReference' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'umrUrlMap'
+-- * 'umrURLMap'
 uRLMapReference
     :: URLMapReference
 uRLMapReference =
     URLMapReference
-    { _umrUrlMap = Nothing
+    { _umrURLMap = Nothing
     }
 
-umrUrlMap :: Lens' URLMapReference (Maybe Text)
-umrUrlMap
-  = lens _umrUrlMap (\ s a -> s{_umrUrlMap = a})
+umrURLMap :: Lens' URLMapReference (Maybe Text)
+umrURLMap
+  = lens _umrURLMap (\ s a -> s{_umrURLMap = a})
 
 instance FromJSON URLMapReference where
         parseJSON
@@ -8105,7 +8106,7 @@ instance FromJSON URLMapReference where
 
 instance ToJSON URLMapReference where
         toJSON URLMapReference{..}
-          = object (catMaybes [("urlMap" .=) <$> _umrUrlMap])
+          = object (catMaybes [("urlMap" .=) <$> _umrURLMap])
 
 --
 -- /See:/ 'zoneMaintenanceWindows' smart constructor.
@@ -8179,7 +8180,7 @@ instance ToJSON ZoneMaintenanceWindows where
 --
 -- /See:/ 'targetPoolsAddHealthCheckRequest' smart constructor.
 newtype TargetPoolsAddHealthCheckRequest = TargetPoolsAddHealthCheckRequest
-    { _tpahcrHealthChecks :: Maybe [Maybe HealthCheckReference]
+    { _tpahcrHealthChecks :: Maybe [HealthCheckReference]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetPoolsAddHealthCheckRequest' with the minimum fields required to make a request.
@@ -8195,7 +8196,7 @@ targetPoolsAddHealthCheckRequest =
     }
 
 -- | Health check URLs to be added to targetPool.
-tpahcrHealthChecks :: Lens' TargetPoolsAddHealthCheckRequest [Maybe HealthCheckReference]
+tpahcrHealthChecks :: Lens' TargetPoolsAddHealthCheckRequest [HealthCheckReference]
 tpahcrHealthChecks
   = lens _tpahcrHealthChecks
       (\ s a -> s{_tpahcrHealthChecks = a})
@@ -8223,7 +8224,7 @@ instance ToJSON TargetPoolsAddHealthCheckRequest
 data NetworkList = NetworkList
     { _nlNextPageToken :: !(Maybe Text)
     , _nlKind          :: !Text
-    , _nlItems         :: !(Maybe [Maybe Network])
+    , _nlItems         :: !(Maybe [Network])
     , _nlSelfLink      :: !(Maybe Text)
     , _nlId            :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -8264,7 +8265,7 @@ nlKind :: Lens' NetworkList Text
 nlKind = lens _nlKind (\ s a -> s{_nlKind = a})
 
 -- | [Output Only] A list of Network resources.
-nlItems :: Lens' NetworkList [Maybe Network]
+nlItems :: Lens' NetworkList [Network]
 nlItems
   = lens _nlItems (\ s a -> s{_nlItems = a}) . _Default
       . _Coerce
@@ -8582,7 +8583,7 @@ instance ToJSON TargetPoolAggregatedListItems where
 -- /See:/ 'targetInstancesScopedList' smart constructor.
 data TargetInstancesScopedList = TargetInstancesScopedList
     { _tislWarning         :: !(Maybe TargetInstancesScopedListWarning)
-    , _tislTargetInstances :: !(Maybe [Maybe TargetInstance])
+    , _tislTargetInstances :: !(Maybe [TargetInstance])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetInstancesScopedList' with the minimum fields required to make a request.
@@ -8607,7 +8608,7 @@ tislWarning
   = lens _tislWarning (\ s a -> s{_tislWarning = a})
 
 -- | List of target instances contained in this scope.
-tislTargetInstances :: Lens' TargetInstancesScopedList [Maybe TargetInstance]
+tislTargetInstances :: Lens' TargetInstancesScopedList [TargetInstance]
 tislTargetInstances
   = lens _tislTargetInstances
       (\ s a -> s{_tislTargetInstances = a})
@@ -8635,7 +8636,7 @@ instance ToJSON TargetInstancesScopedList where
 data MachineTypeList = MachineTypeList
     { _mtlNextPageToken :: !(Maybe Text)
     , _mtlKind          :: !Text
-    , _mtlItems         :: !(Maybe [Maybe MachineType])
+    , _mtlItems         :: !(Maybe [MachineType])
     , _mtlSelfLink      :: !(Maybe Text)
     , _mtlId            :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -8676,7 +8677,7 @@ mtlKind :: Lens' MachineTypeList Text
 mtlKind = lens _mtlKind (\ s a -> s{_mtlKind = a})
 
 -- | [Output Only] A list of Machine Type resources.
-mtlItems :: Lens' MachineTypeList [Maybe MachineType]
+mtlItems :: Lens' MachineTypeList [MachineType]
 mtlItems
   = lens _mtlItems (\ s a -> s{_mtlItems = a}) .
       _Default
@@ -8718,7 +8719,7 @@ instance ToJSON MachineTypeList where
 data DiskTypeList = DiskTypeList
     { _dtlNextPageToken :: !(Maybe Text)
     , _dtlKind          :: !Text
-    , _dtlItems         :: !(Maybe [Maybe DiskType])
+    , _dtlItems         :: !(Maybe [DiskType])
     , _dtlSelfLink      :: !(Maybe Text)
     , _dtlId            :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -8759,7 +8760,7 @@ dtlKind :: Lens' DiskTypeList Text
 dtlKind = lens _dtlKind (\ s a -> s{_dtlKind = a})
 
 -- | [Output Only] A list of Disk Type resources.
-dtlItems :: Lens' DiskTypeList [Maybe DiskType]
+dtlItems :: Lens' DiskTypeList [DiskType]
 dtlItems
   = lens _dtlItems (\ s a -> s{_dtlItems = a}) .
       _Default
@@ -8881,7 +8882,7 @@ instance ToJSON VPNTunnelAggregatedList where
 data AutoscalerList = AutoscalerList
     { _autNextPageToken :: !(Maybe Text)
     , _autKind          :: !Text
-    , _autItems         :: !(Maybe [Maybe Autoscaler])
+    , _autItems         :: !(Maybe [Autoscaler])
     , _autSelfLink      :: !(Maybe Text)
     , _autId            :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -8921,7 +8922,7 @@ autKind :: Lens' AutoscalerList Text
 autKind = lens _autKind (\ s a -> s{_autKind = a})
 
 -- | A list of Autoscaler resources.
-autItems :: Lens' AutoscalerList [Maybe Autoscaler]
+autItems :: Lens' AutoscalerList [Autoscaler]
 autItems
   = lens _autItems (\ s a -> s{_autItems = a}) .
       _Default
@@ -8965,7 +8966,7 @@ data AttachedDisk = AttachedDisk
     , _adMode             :: !(Maybe AttachedDiskMode)
     , _adBoot             :: !(Maybe Bool)
     , _adAutoDelete       :: !(Maybe Bool)
-    , _adInitializeParams :: !(Maybe (Maybe AttachedDiskInitializeParams))
+    , _adInitializeParams :: !(Maybe AttachedDiskInitializeParams)
     , _adDeviceName       :: !(Maybe Text)
     , _adInterface        :: !(Maybe AttachedDiskInterface)
     , _adSource           :: !(Maybe Text)
@@ -9042,7 +9043,7 @@ adAutoDelete
 -- create boot disks or local SSDs attached to the new instance. This
 -- property is mutually exclusive with the source property; you can only
 -- define one or the other, but not both.
-adInitializeParams :: Lens' AttachedDisk (Maybe (Maybe AttachedDiskInitializeParams))
+adInitializeParams :: Lens' AttachedDisk (Maybe AttachedDiskInitializeParams)
 adInitializeParams
   = lens _adInitializeParams
       (\ s a -> s{_adInitializeParams = a})
@@ -9124,7 +9125,7 @@ instance ToJSON AttachedDisk where
 data TargetHTTPProxyList = TargetHTTPProxyList
     { _thttpplNextPageToken :: !(Maybe Text)
     , _thttpplKind          :: !Text
-    , _thttpplItems         :: !(Maybe [Maybe TargetHTTPProxy])
+    , _thttpplItems         :: !(Maybe [TargetHTTPProxy])
     , _thttpplSelfLink      :: !(Maybe Text)
     , _thttpplId            :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -9166,7 +9167,7 @@ thttpplKind
   = lens _thttpplKind (\ s a -> s{_thttpplKind = a})
 
 -- | A list of TargetHttpProxy resources.
-thttpplItems :: Lens' TargetHTTPProxyList [Maybe TargetHTTPProxy]
+thttpplItems :: Lens' TargetHTTPProxyList [TargetHTTPProxy]
 thttpplItems
   = lens _thttpplItems (\ s a -> s{_thttpplItems = a})
       . _Default
@@ -9228,7 +9229,7 @@ instance ToJSON AddressAggregatedListItems where
 --
 -- /See:/ 'machineTypesScopedList' smart constructor.
 data MachineTypesScopedList = MachineTypesScopedList
-    { _mtslMachineTypes :: !(Maybe [Maybe MachineType])
+    { _mtslMachineTypes :: !(Maybe [MachineType])
     , _mtslWarning      :: !(Maybe MachineTypesScopedListWarning)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -9248,7 +9249,7 @@ machineTypesScopedList =
     }
 
 -- | [Output Only] List of machine types contained in this scope.
-mtslMachineTypes :: Lens' MachineTypesScopedList [Maybe MachineType]
+mtslMachineTypes :: Lens' MachineTypesScopedList [MachineType]
 mtslMachineTypes
   = lens _mtslMachineTypes
       (\ s a -> s{_mtslMachineTypes = a})
@@ -9282,7 +9283,7 @@ instance ToJSON MachineTypesScopedList where
 data VPNTunnelList = VPNTunnelList
     { _vtlNextPageToken :: !(Maybe Text)
     , _vtlKind          :: !Text
-    , _vtlItems         :: !(Maybe [Maybe VPNTunnel])
+    , _vtlItems         :: !(Maybe [VPNTunnel])
     , _vtlSelfLink      :: !(Maybe Text)
     , _vtlId            :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -9323,7 +9324,7 @@ vtlKind :: Lens' VPNTunnelList Text
 vtlKind = lens _vtlKind (\ s a -> s{_vtlKind = a})
 
 -- | [Output Only] A list of VpnTunnel resources.
-vtlItems :: Lens' VPNTunnelList [Maybe VPNTunnel]
+vtlItems :: Lens' VPNTunnelList [VPNTunnel]
 vtlItems
   = lens _vtlItems (\ s a -> s{_vtlItems = a}) .
       _Default
@@ -9363,7 +9364,7 @@ instance ToJSON VPNTunnelList where
 -- /See:/ 'backendServiceGroupHealth' smart constructor.
 data BackendServiceGroupHealth = BackendServiceGroupHealth
     { _bsghKind         :: !Text
-    , _bsghHealthStatus :: !(Maybe [Maybe HealthStatus])
+    , _bsghHealthStatus :: !(Maybe [HealthStatus])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BackendServiceGroupHealth' with the minimum fields required to make a request.
@@ -9386,7 +9387,7 @@ backendServiceGroupHealth =
 bsghKind :: Lens' BackendServiceGroupHealth Text
 bsghKind = lens _bsghKind (\ s a -> s{_bsghKind = a})
 
-bsghHealthStatus :: Lens' BackendServiceGroupHealth [Maybe HealthStatus]
+bsghHealthStatus :: Lens' BackendServiceGroupHealth [HealthStatus]
 bsghHealthStatus
   = lens _bsghHealthStatus
       (\ s a -> s{_bsghHealthStatus = a})
@@ -9686,10 +9687,10 @@ instance ToJSON HTTPHealthCheck where
 --
 -- /See:/ 'autoscalingPolicy' smart constructor.
 data AutoscalingPolicy = AutoscalingPolicy
-    { _apCustomMetricUtilizations :: !(Maybe [Maybe AutoscalingPolicyCustomMetricUtilization])
+    { _apCustomMetricUtilizations :: !(Maybe [AutoscalingPolicyCustomMetricUtilization])
     , _apMaxNumReplicas           :: !(Maybe Int32)
-    , _apCpuUtilization           :: !(Maybe (Maybe AutoscalingPolicyCPUUtilization))
-    , _apLoadBalancingUtilization :: !(Maybe (Maybe AutoscalingPolicyLoadBalancingUtilization))
+    , _apCPUUtilization           :: !(Maybe AutoscalingPolicyCPUUtilization)
+    , _apLoadBalancingUtilization :: !(Maybe AutoscalingPolicyLoadBalancingUtilization)
     , _apMinNumReplicas           :: !(Maybe Int32)
     , _apCoolDownPeriodSec        :: !(Maybe Int32)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -9702,7 +9703,7 @@ data AutoscalingPolicy = AutoscalingPolicy
 --
 -- * 'apMaxNumReplicas'
 --
--- * 'apCpuUtilization'
+-- * 'apCPUUtilization'
 --
 -- * 'apLoadBalancingUtilization'
 --
@@ -9715,14 +9716,14 @@ autoscalingPolicy =
     AutoscalingPolicy
     { _apCustomMetricUtilizations = Nothing
     , _apMaxNumReplicas = Nothing
-    , _apCpuUtilization = Nothing
+    , _apCPUUtilization = Nothing
     , _apLoadBalancingUtilization = Nothing
     , _apMinNumReplicas = Nothing
     , _apCoolDownPeriodSec = Nothing
     }
 
 -- | Configuration parameters of autoscaling based on custom metric.
-apCustomMetricUtilizations :: Lens' AutoscalingPolicy [Maybe AutoscalingPolicyCustomMetricUtilization]
+apCustomMetricUtilizations :: Lens' AutoscalingPolicy [AutoscalingPolicyCustomMetricUtilization]
 apCustomMetricUtilizations
   = lens _apCustomMetricUtilizations
       (\ s a -> s{_apCustomMetricUtilizations = a})
@@ -9741,13 +9742,13 @@ apMaxNumReplicas
 -- | TODO(jbartosik): Add support for scaling based on muliple utilization
 -- metrics (take max recommendation). Exactly one utilization policy should
 -- be provided. Configuration parameters of CPU based autoscaling policy.
-apCpuUtilization :: Lens' AutoscalingPolicy (Maybe (Maybe AutoscalingPolicyCPUUtilization))
-apCpuUtilization
-  = lens _apCpuUtilization
-      (\ s a -> s{_apCpuUtilization = a})
+apCPUUtilization :: Lens' AutoscalingPolicy (Maybe AutoscalingPolicyCPUUtilization)
+apCPUUtilization
+  = lens _apCPUUtilization
+      (\ s a -> s{_apCPUUtilization = a})
 
 -- | Configuration parameters of autoscaling based on load balancer.
-apLoadBalancingUtilization :: Lens' AutoscalingPolicy (Maybe (Maybe AutoscalingPolicyLoadBalancingUtilization))
+apLoadBalancingUtilization :: Lens' AutoscalingPolicy (Maybe AutoscalingPolicyLoadBalancingUtilization)
 apLoadBalancingUtilization
   = lens _apLoadBalancingUtilization
       (\ s a -> s{_apLoadBalancingUtilization = a})
@@ -9789,7 +9790,7 @@ instance ToJSON AutoscalingPolicy where
                  [("customMetricUtilizations" .=) <$>
                     _apCustomMetricUtilizations,
                   ("maxNumReplicas" .=) <$> _apMaxNumReplicas,
-                  ("cpuUtilization" .=) <$> _apCpuUtilization,
+                  ("cpuUtilization" .=) <$> _apCPUUtilization,
                   ("loadBalancingUtilization" .=) <$>
                     _apLoadBalancingUtilization,
                   ("minNumReplicas" .=) <$> _apMinNumReplicas,
@@ -9798,7 +9799,7 @@ instance ToJSON AutoscalingPolicy where
 --
 -- /See:/ 'autoscalersScopedList' smart constructor.
 data AutoscalersScopedList = AutoscalersScopedList
-    { _aAutoscalers :: !(Maybe [Maybe Autoscaler])
+    { _aAutoscalers :: !(Maybe [Autoscaler])
     , _aWarning     :: !(Maybe AutoscalersScopedListWarning)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -9818,7 +9819,7 @@ autoscalersScopedList =
     }
 
 -- | List of autoscalers contained in this scope.
-aAutoscalers :: Lens' AutoscalersScopedList [Maybe Autoscaler]
+aAutoscalers :: Lens' AutoscalersScopedList [Autoscaler]
 aAutoscalers
   = lens _aAutoscalers (\ s a -> s{_aAutoscalers = a})
       . _Default
@@ -9847,7 +9848,7 @@ instance ToJSON AutoscalersScopedList where
 --
 -- /See:/ 'diskTypesScopedList' smart constructor.
 data DiskTypesScopedList = DiskTypesScopedList
-    { _dtslDiskTypes :: !(Maybe [Maybe DiskType])
+    { _dtslDiskTypes :: !(Maybe [DiskType])
     , _dtslWarning   :: !(Maybe DiskTypesScopedListWarning)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -9867,7 +9868,7 @@ diskTypesScopedList =
     }
 
 -- | [Output Only] List of disk types contained in this scope.
-dtslDiskTypes :: Lens' DiskTypesScopedList [Maybe DiskType]
+dtslDiskTypes :: Lens' DiskTypesScopedList [DiskType]
 dtslDiskTypes
   = lens _dtslDiskTypes
       (\ s a -> s{_dtslDiskTypes = a})
@@ -10059,7 +10060,7 @@ instance ToJSON MachineTypeAggregatedList where
 data RegionList = RegionList
     { _regNextPageToken :: !(Maybe Text)
     , _regKind          :: !Text
-    , _regItems         :: !(Maybe [Maybe Region])
+    , _regItems         :: !(Maybe [Region])
     , _regSelfLink      :: !(Maybe Text)
     , _regId            :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -10100,7 +10101,7 @@ regKind :: Lens' RegionList Text
 regKind = lens _regKind (\ s a -> s{_regKind = a})
 
 -- | [Output Only] A list of Region resources.
-regItems :: Lens' RegionList [Maybe Region]
+regItems :: Lens' RegionList [Region]
 regItems
   = lens _regItems (\ s a -> s{_regItems = a}) .
       _Default
@@ -10186,12 +10187,12 @@ data MachineType = MachineType
     , _mtCreationTimestamp            :: !(Maybe Text)
     , _mtScratchDisks                 :: !(Maybe [MachineTypeScratchDisks])
     , _mtId                           :: !(Maybe Word64)
-    , _mtGuestCpus                    :: !(Maybe Int32)
+    , _mtGuestCPUs                    :: !(Maybe Int32)
     , _mtMaximumPersistentDisksSizeGb :: !(Maybe Int64)
     , _mtMaximumPersistentDisks       :: !(Maybe Int32)
     , _mtMemoryMb                     :: !(Maybe Int32)
     , _mtDescription                  :: !(Maybe Text)
-    , _mtDeprecated                   :: !(Maybe (Maybe DeprecationStatus))
+    , _mtDeprecated                   :: !(Maybe DeprecationStatus)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MachineType' with the minimum fields required to make a request.
@@ -10214,7 +10215,7 @@ data MachineType = MachineType
 --
 -- * 'mtId'
 --
--- * 'mtGuestCpus'
+-- * 'mtGuestCPUs'
 --
 -- * 'mtMaximumPersistentDisksSizeGb'
 --
@@ -10237,7 +10238,7 @@ machineType =
     , _mtCreationTimestamp = Nothing
     , _mtScratchDisks = Nothing
     , _mtId = Nothing
-    , _mtGuestCpus = Nothing
+    , _mtGuestCPUs = Nothing
     , _mtMaximumPersistentDisksSizeGb = Nothing
     , _mtMaximumPersistentDisks = Nothing
     , _mtMemoryMb = Nothing
@@ -10289,9 +10290,9 @@ mtId :: Lens' MachineType (Maybe Word64)
 mtId = lens _mtId (\ s a -> s{_mtId = a})
 
 -- | [Output Only] The tumber of CPUs exposed to the instance.
-mtGuestCpus :: Lens' MachineType (Maybe Int32)
-mtGuestCpus
-  = lens _mtGuestCpus (\ s a -> s{_mtGuestCpus = a})
+mtGuestCPUs :: Lens' MachineType (Maybe Int32)
+mtGuestCPUs
+  = lens _mtGuestCPUs (\ s a -> s{_mtGuestCPUs = a})
 
 -- | [Output Only] Maximum total persistent disks size (GB) allowed.
 mtMaximumPersistentDisksSizeGb :: Lens' MachineType (Maybe Int64)
@@ -10318,7 +10319,7 @@ mtDescription
       (\ s a -> s{_mtDescription = a})
 
 -- | [Output Only] The deprecation status associated with this machine type.
-mtDeprecated :: Lens' MachineType (Maybe (Maybe DeprecationStatus))
+mtDeprecated :: Lens' MachineType (Maybe DeprecationStatus)
 mtDeprecated
   = lens _mtDeprecated (\ s a -> s{_mtDeprecated = a})
 
@@ -10354,7 +10355,7 @@ instance ToJSON MachineType where
                   ("creationTimestamp" .=) <$> _mtCreationTimestamp,
                   ("scratchDisks" .=) <$> _mtScratchDisks,
                   ("id" .=) <$> _mtId,
-                  ("guestCpus" .=) <$> _mtGuestCpus,
+                  ("guestCpus" .=) <$> _mtGuestCPUs,
                   ("maximumPersistentDisksSizeGb" .=) <$>
                     _mtMaximumPersistentDisksSizeGb,
                   ("maximumPersistentDisks" .=) <$>
@@ -10376,7 +10377,7 @@ data DiskType = DiskType
     , _dtValidDiskSize     :: !(Maybe Text)
     , _dtDescription       :: !(Maybe Text)
     , _dtDefaultDiskSizeGb :: !(Maybe Int64)
-    , _dtDeprecated        :: !(Maybe (Maybe DeprecationStatus))
+    , _dtDeprecated        :: !(Maybe DeprecationStatus)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DiskType' with the minimum fields required to make a request.
@@ -10466,7 +10467,7 @@ dtDefaultDiskSizeGb
       (\ s a -> s{_dtDefaultDiskSizeGb = a})
 
 -- | [Output Only] The deprecation status associated with this disk type.
-dtDeprecated :: Lens' DiskType (Maybe (Maybe DeprecationStatus))
+dtDeprecated :: Lens' DiskType (Maybe DeprecationStatus)
 dtDeprecated
   = lens _dtDeprecated (\ s a -> s{_dtDeprecated = a})
 
@@ -10507,7 +10508,7 @@ data URLMapValidationResult = URLMapValidationResult
     { _umvrLoadErrors    :: !(Maybe [Text])
     , _umvrLoadSucceeded :: !(Maybe Bool)
     , _umvrTestPassed    :: !(Maybe Bool)
-    , _umvrTestFailures  :: !(Maybe [Maybe TestFailure])
+    , _umvrTestFailures  :: !(Maybe [TestFailure])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLMapValidationResult' with the minimum fields required to make a request.
@@ -10552,7 +10553,7 @@ umvrTestPassed
   = lens _umvrTestPassed
       (\ s a -> s{_umvrTestPassed = a})
 
-umvrTestFailures :: Lens' URLMapValidationResult [Maybe TestFailure]
+umvrTestFailures :: Lens' URLMapValidationResult [TestFailure]
 umvrTestFailures
   = lens _umvrTestFailures
       (\ s a -> s{_umvrTestFailures = a})
@@ -10649,7 +10650,7 @@ data Autoscaler = Autoscaler
     , _aaSelfLink          :: !(Maybe Text)
     , _aaName              :: !(Maybe Text)
     , _aaCreationTimestamp :: !(Maybe Text)
-    , _aaAutoscalingPolicy :: !(Maybe (Maybe AutoscalingPolicy))
+    , _aaAutoscalingPolicy :: !(Maybe AutoscalingPolicy)
     , _aaId                :: !(Maybe Word64)
     , _aaDescription       :: !(Maybe Text)
     , _aaTarget            :: !(Maybe Text)
@@ -10721,7 +10722,7 @@ aaCreationTimestamp
       (\ s a -> s{_aaCreationTimestamp = a})
 
 -- | Autoscaling configuration.
-aaAutoscalingPolicy :: Lens' Autoscaler (Maybe (Maybe AutoscalingPolicy))
+aaAutoscalingPolicy :: Lens' Autoscaler (Maybe AutoscalingPolicy)
 aaAutoscalingPolicy
   = lens _aaAutoscalingPolicy
       (\ s a -> s{_aaAutoscalingPolicy = a})
@@ -10775,7 +10776,7 @@ instance ToJSON Autoscaler where
 data InstanceGroupsListInstances = InstanceGroupsListInstances
     { _igliNextPageToken :: !(Maybe Text)
     , _igliKind          :: !Text
-    , _igliItems         :: !(Maybe [Maybe InstanceWithNamedPorts])
+    , _igliItems         :: !(Maybe [InstanceWithNamedPorts])
     , _igliSelfLink      :: !(Maybe Text)
     , _igliId            :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -10817,7 +10818,7 @@ igliKind = lens _igliKind (\ s a -> s{_igliKind = a})
 
 -- | A list of InstanceWithNamedPorts resources, which contains all named
 -- ports for the given instance.
-igliItems :: Lens' InstanceGroupsListInstances [Maybe InstanceWithNamedPorts]
+igliItems :: Lens' InstanceGroupsListInstances [InstanceWithNamedPorts]
 igliItems
   = lens _igliItems (\ s a -> s{_igliItems = a}) .
       _Default
@@ -10973,7 +10974,7 @@ instance ToJSON Metadata where
 --
 -- /See:/ 'targetHTTPProxy' smart constructor.
 data TargetHTTPProxy = TargetHTTPProxy
-    { _thttppUrlMap            :: !(Maybe Text)
+    { _thttppURLMap            :: !(Maybe Text)
     , _thttppKind              :: !Text
     , _thttppSelfLink          :: !(Maybe Text)
     , _thttppName              :: !(Maybe Text)
@@ -10986,7 +10987,7 @@ data TargetHTTPProxy = TargetHTTPProxy
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'thttppUrlMap'
+-- * 'thttppURLMap'
 --
 -- * 'thttppKind'
 --
@@ -11003,7 +11004,7 @@ targetHTTPProxy
     :: TargetHTTPProxy
 targetHTTPProxy =
     TargetHTTPProxy
-    { _thttppUrlMap = Nothing
+    { _thttppURLMap = Nothing
     , _thttppKind = "compute#targetHttpProxy"
     , _thttppSelfLink = Nothing
     , _thttppName = Nothing
@@ -11014,9 +11015,9 @@ targetHTTPProxy =
 
 -- | URL to the UrlMap resource that defines the mapping from URL to the
 -- BackendService.
-thttppUrlMap :: Lens' TargetHTTPProxy (Maybe Text)
-thttppUrlMap
-  = lens _thttppUrlMap (\ s a -> s{_thttppUrlMap = a})
+thttppURLMap :: Lens' TargetHTTPProxy (Maybe Text)
+thttppURLMap
+  = lens _thttppURLMap (\ s a -> s{_thttppURLMap = a})
 
 -- | [Output Only] Type of resource. Always compute#Operation for Operation
 -- resources.
@@ -11075,7 +11076,7 @@ instance ToJSON TargetHTTPProxy where
         toJSON TargetHTTPProxy{..}
           = object
               (catMaybes
-                 [("urlMap" .=) <$> _thttppUrlMap,
+                 [("urlMap" .=) <$> _thttppURLMap,
                   Just ("kind" .= _thttppKind),
                   ("selfLink" .=) <$> _thttppSelfLink,
                   ("name" .=) <$> _thttppName,
@@ -11094,10 +11095,10 @@ data Region = Region
     , _rrSelfLink          :: !(Maybe Text)
     , _rrName              :: !(Maybe Text)
     , _rrCreationTimestamp :: !(Maybe Text)
-    , _rrQuotas            :: !(Maybe [Maybe Quota])
+    , _rrQuotas            :: !(Maybe [Quota])
     , _rrId                :: !(Maybe Word64)
     , _rrDescription       :: !(Maybe Text)
-    , _rrDeprecated        :: !(Maybe (Maybe DeprecationStatus))
+    , _rrDeprecated        :: !(Maybe DeprecationStatus)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Region' with the minimum fields required to make a request.
@@ -11170,7 +11171,7 @@ rrCreationTimestamp
       (\ s a -> s{_rrCreationTimestamp = a})
 
 -- | [Output Only] Quotas assigned to this region.
-rrQuotas :: Lens' Region [Maybe Quota]
+rrQuotas :: Lens' Region [Quota]
 rrQuotas
   = lens _rrQuotas (\ s a -> s{_rrQuotas = a}) .
       _Default
@@ -11188,7 +11189,7 @@ rrDescription
       (\ s a -> s{_rrDescription = a})
 
 -- | [Output Only] The deprecation status associated with this region.
-rrDeprecated :: Lens' Region (Maybe (Maybe DeprecationStatus))
+rrDeprecated :: Lens' Region (Maybe DeprecationStatus)
 rrDeprecated
   = lens _rrDeprecated (\ s a -> s{_rrDeprecated = a})
 
@@ -11380,8 +11381,8 @@ data VPNTunnel = VPNTunnel
     { _vtDetailedStatus    :: !(Maybe Text)
     , _vtStatus            :: !(Maybe VPNTunnelStatus)
     , _vtKind              :: !Text
-    , _vtPeerIp            :: !(Maybe Text)
-    , _vtTargetVpnGateway  :: !(Maybe Text)
+    , _vtPeerIP            :: !(Maybe Text)
+    , _vtTargetVPNGateway  :: !(Maybe Text)
     , _vtSelfLink          :: !(Maybe Text)
     , _vtSharedSecret      :: !(Maybe Text)
     , _vtName              :: !(Maybe Text)
@@ -11403,9 +11404,9 @@ data VPNTunnel = VPNTunnel
 --
 -- * 'vtKind'
 --
--- * 'vtPeerIp'
+-- * 'vtPeerIP'
 --
--- * 'vtTargetVpnGateway'
+-- * 'vtTargetVPNGateway'
 --
 -- * 'vtSelfLink'
 --
@@ -11431,8 +11432,8 @@ vPNTunnel =
     { _vtDetailedStatus = Nothing
     , _vtStatus = Nothing
     , _vtKind = "compute#vpnTunnel"
-    , _vtPeerIp = Nothing
-    , _vtTargetVpnGateway = Nothing
+    , _vtPeerIP = Nothing
+    , _vtTargetVPNGateway = Nothing
     , _vtSelfLink = Nothing
     , _vtSharedSecret = Nothing
     , _vtName = Nothing
@@ -11460,15 +11461,15 @@ vtKind :: Lens' VPNTunnel Text
 vtKind = lens _vtKind (\ s a -> s{_vtKind = a})
 
 -- | IP address of the peer VPN gateway.
-vtPeerIp :: Lens' VPNTunnel (Maybe Text)
-vtPeerIp = lens _vtPeerIp (\ s a -> s{_vtPeerIp = a})
+vtPeerIP :: Lens' VPNTunnel (Maybe Text)
+vtPeerIP = lens _vtPeerIP (\ s a -> s{_vtPeerIP = a})
 
 -- | URL of the VPN gateway to which this VPN tunnel is associated. Provided
 -- by the client when the VPN tunnel is created.
-vtTargetVpnGateway :: Lens' VPNTunnel (Maybe Text)
-vtTargetVpnGateway
-  = lens _vtTargetVpnGateway
-      (\ s a -> s{_vtTargetVpnGateway = a})
+vtTargetVPNGateway :: Lens' VPNTunnel (Maybe Text)
+vtTargetVPNGateway
+  = lens _vtTargetVPNGateway
+      (\ s a -> s{_vtTargetVPNGateway = a})
 
 -- | [Output Only] Server-defined URL for the resource.
 vtSelfLink :: Lens' VPNTunnel (Maybe Text)
@@ -11551,8 +11552,8 @@ instance ToJSON VPNTunnel where
                  [("detailedStatus" .=) <$> _vtDetailedStatus,
                   ("status" .=) <$> _vtStatus,
                   Just ("kind" .= _vtKind),
-                  ("peerIp" .=) <$> _vtPeerIp,
-                  ("targetVpnGateway" .=) <$> _vtTargetVpnGateway,
+                  ("peerIp" .=) <$> _vtPeerIP,
+                  ("targetVpnGateway" .=) <$> _vtTargetVPNGateway,
                   ("selfLink" .=) <$> _vtSelfLink,
                   ("sharedSecret" .=) <$> _vtSharedSecret,
                   ("name" .=) <$> _vtName,
@@ -11899,7 +11900,7 @@ instance ToJSON
 --
 -- /See:/ 'healthStatus' smart constructor.
 data HealthStatus = HealthStatus
-    { _hsIpAddress   :: !(Maybe Text)
+    { _hsIPAddress   :: !(Maybe Text)
     , _hsHealthState :: !(Maybe HealthStatusHealthState)
     , _hsPort        :: !(Maybe Int32)
     , _hsInstance    :: !(Maybe Text)
@@ -11909,7 +11910,7 @@ data HealthStatus = HealthStatus
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'hsIpAddress'
+-- * 'hsIPAddress'
 --
 -- * 'hsHealthState'
 --
@@ -11920,16 +11921,16 @@ healthStatus
     :: HealthStatus
 healthStatus =
     HealthStatus
-    { _hsIpAddress = Nothing
+    { _hsIPAddress = Nothing
     , _hsHealthState = Nothing
     , _hsPort = Nothing
     , _hsInstance = Nothing
     }
 
 -- | The IP address represented by this resource.
-hsIpAddress :: Lens' HealthStatus (Maybe Text)
-hsIpAddress
-  = lens _hsIpAddress (\ s a -> s{_hsIpAddress = a})
+hsIPAddress :: Lens' HealthStatus (Maybe Text)
+hsIPAddress
+  = lens _hsIPAddress (\ s a -> s{_hsIPAddress = a})
 
 -- | Health state of the instance.
 hsHealthState :: Lens' HealthStatus (Maybe HealthStatusHealthState)
@@ -11959,7 +11960,7 @@ instance ToJSON HealthStatus where
         toJSON HealthStatus{..}
           = object
               (catMaybes
-                 [("ipAddress" .=) <$> _hsIpAddress,
+                 [("ipAddress" .=) <$> _hsIPAddress,
                   ("healthState" .=) <$> _hsHealthState,
                   ("port" .=) <$> _hsPort,
                   ("instance" .=) <$> _hsInstance])
@@ -12117,7 +12118,7 @@ instance ToJSON
 data HTTPHealthCheckList = HTTPHealthCheckList
     { _httphclNextPageToken :: !(Maybe Text)
     , _httphclKind          :: !Text
-    , _httphclItems         :: !(Maybe [Maybe HTTPHealthCheck])
+    , _httphclItems         :: !(Maybe [HTTPHealthCheck])
     , _httphclSelfLink      :: !(Maybe Text)
     , _httphclId            :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -12158,7 +12159,7 @@ httphclKind
   = lens _httphclKind (\ s a -> s{_httphclKind = a})
 
 -- | A list of HttpHealthCheck resources.
-httphclItems :: Lens' HTTPHealthCheckList [Maybe HTTPHealthCheck]
+httphclItems :: Lens' HTTPHealthCheckList [HTTPHealthCheck]
 httphclItems
   = lens _httphclItems (\ s a -> s{_httphclItems = a})
       . _Default
@@ -12199,7 +12200,7 @@ instance ToJSON HTTPHealthCheckList where
 --
 -- /See:/ 'uRLMapsValidateRequest' smart constructor.
 newtype URLMapsValidateRequest = URLMapsValidateRequest
-    { _umvrResource :: Maybe (Maybe URLMap)
+    { _umvrResource :: Maybe URLMap
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLMapsValidateRequest' with the minimum fields required to make a request.
@@ -12215,7 +12216,7 @@ uRLMapsValidateRequest =
     }
 
 -- | Content of the UrlMap to be validated.
-umvrResource :: Lens' URLMapsValidateRequest (Maybe (Maybe URLMap))
+umvrResource :: Lens' URLMapsValidateRequest (Maybe URLMap)
 umvrResource
   = lens _umvrResource (\ s a -> s{_umvrResource = a})
 
@@ -12288,7 +12289,7 @@ instance ToJSON PathRule where
 data BackendServiceList = BackendServiceList
     { _bslNextPageToken :: !(Maybe Text)
     , _bslKind          :: !Text
-    , _bslItems         :: !(Maybe [Maybe BackendService])
+    , _bslItems         :: !(Maybe [BackendService])
     , _bslSelfLink      :: !(Maybe Text)
     , _bslId            :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -12329,7 +12330,7 @@ bslKind :: Lens' BackendServiceList Text
 bslKind = lens _bslKind (\ s a -> s{_bslKind = a})
 
 -- | A list of BackendService resources.
-bslItems :: Lens' BackendServiceList [Maybe BackendService]
+bslItems :: Lens' BackendServiceList [BackendService]
 bslItems
   = lens _bslItems (\ s a -> s{_bslItems = a}) .
       _Default
@@ -12663,7 +12664,7 @@ instance ToJSON InstanceGroupsScopedListWarningData
 data InstanceList = InstanceList
     { _insNextPageToken :: !(Maybe Text)
     , _insKind          :: !Text
-    , _insItems         :: !(Maybe [Maybe Instance])
+    , _insItems         :: !(Maybe [Instance])
     , _insSelfLink      :: !(Maybe Text)
     , _insId            :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -12704,7 +12705,7 @@ insKind :: Lens' InstanceList Text
 insKind = lens _insKind (\ s a -> s{_insKind = a})
 
 -- | [Output Only] A list of Instance resources.
-insItems :: Lens' InstanceList [Maybe Instance]
+insItems :: Lens' InstanceList [Instance]
 insItems
   = lens _insItems (\ s a -> s{_insItems = a}) .
       _Default
@@ -12932,7 +12933,7 @@ data InstanceGroup = InstanceGroup
     , _ig1CreationTimestamp :: !(Maybe Text)
     , _ig1Id                :: !(Maybe Word64)
     , _ig1Description       :: !(Maybe Text)
-    , _ig1NamedPorts        :: !(Maybe [Maybe NamedPort])
+    , _ig1NamedPorts        :: !(Maybe [NamedPort])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroup' with the minimum fields required to make a request.
@@ -13038,7 +13039,7 @@ ig1Description
 -- of a port number. Named ports can also contain multiple ports. For
 -- example: [{name: ?http?, port: 80},{name: \"http\", port: 8080}] Named
 -- ports apply to all instances in this instance group.
-ig1NamedPorts :: Lens' InstanceGroup [Maybe NamedPort]
+ig1NamedPorts :: Lens' InstanceGroup [NamedPort]
 ig1NamedPorts
   = lens _ig1NamedPorts
       (\ s a -> s{_ig1NamedPorts = a})
@@ -13325,7 +13326,7 @@ instance ToJSON TestFailure where
 --
 -- /See:/ 'targetVPNGatewaysScopedList' smart constructor.
 data TargetVPNGatewaysScopedList = TargetVPNGatewaysScopedList
-    { _tvgslTargetVpnGateways :: !(Maybe [Maybe TargetVPNGateway])
+    { _tvgslTargetVPNGateways :: !(Maybe [TargetVPNGateway])
     , _tvgslWarning           :: !(Maybe TargetVPNGatewaysScopedListWarning)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -13333,22 +13334,22 @@ data TargetVPNGatewaysScopedList = TargetVPNGatewaysScopedList
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tvgslTargetVpnGateways'
+-- * 'tvgslTargetVPNGateways'
 --
 -- * 'tvgslWarning'
 targetVPNGatewaysScopedList
     :: TargetVPNGatewaysScopedList
 targetVPNGatewaysScopedList =
     TargetVPNGatewaysScopedList
-    { _tvgslTargetVpnGateways = Nothing
+    { _tvgslTargetVPNGateways = Nothing
     , _tvgslWarning = Nothing
     }
 
 -- | [Output Only] List of target vpn gateways contained in this scope.
-tvgslTargetVpnGateways :: Lens' TargetVPNGatewaysScopedList [Maybe TargetVPNGateway]
-tvgslTargetVpnGateways
-  = lens _tvgslTargetVpnGateways
-      (\ s a -> s{_tvgslTargetVpnGateways = a})
+tvgslTargetVPNGateways :: Lens' TargetVPNGatewaysScopedList [TargetVPNGateway]
+tvgslTargetVPNGateways
+  = lens _tvgslTargetVPNGateways
+      (\ s a -> s{_tvgslTargetVPNGateways = a})
       . _Default
       . _Coerce
 
@@ -13371,7 +13372,7 @@ instance ToJSON TargetVPNGatewaysScopedList where
           = object
               (catMaybes
                  [("targetVpnGateways" .=) <$>
-                    _tvgslTargetVpnGateways,
+                    _tvgslTargetVPNGateways,
                   ("warning" .=) <$> _tvgslWarning])
 
 -- | A quotas entry.
@@ -13434,7 +13435,7 @@ instance ToJSON Quota where
 data SnapshotList = SnapshotList
     { _slNextPageToken :: !(Maybe Text)
     , _slKind          :: !Text
-    , _slItems         :: !(Maybe [Maybe Snapshot])
+    , _slItems         :: !(Maybe [Snapshot])
     , _slSelfLink      :: !(Maybe Text)
     , _slId            :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -13474,7 +13475,7 @@ slKind :: Lens' SnapshotList Text
 slKind = lens _slKind (\ s a -> s{_slKind = a})
 
 -- | A list of Snapshot resources.
-slItems :: Lens' SnapshotList [Maybe Snapshot]
+slItems :: Lens' SnapshotList [Snapshot]
 slItems
   = lens _slItems (\ s a -> s{_slItems = a}) . _Default
       . _Coerce
@@ -13557,7 +13558,7 @@ instance ToJSON AutoscalingPolicyCPUUtilization where
 data AccessConfig = AccessConfig
     { _acKind  :: !Text
     , _acName  :: !(Maybe Text)
-    , _acNatIP :: !(Maybe Text)
+    , _acNATIP :: !(Maybe Text)
     , _acType  :: !AccessConfigType
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -13569,7 +13570,7 @@ data AccessConfig = AccessConfig
 --
 -- * 'acName'
 --
--- * 'acNatIP'
+-- * 'acNATIP'
 --
 -- * 'acType'
 accessConfig
@@ -13578,7 +13579,7 @@ accessConfig =
     AccessConfig
     { _acKind = "compute#accessConfig"
     , _acName = Nothing
-    , _acNatIP = Nothing
+    , _acNATIP = Nothing
     , _acType = OneToOneNAT
     }
 
@@ -13596,8 +13597,8 @@ acName = lens _acName (\ s a -> s{_acName = a})
 -- undefined to use an IP from a shared ephemeral IP address pool. If you
 -- specify a static external IP address, it must live in the same region as
 -- the zone of the instance.
-acNatIP :: Lens' AccessConfig (Maybe Text)
-acNatIP = lens _acNatIP (\ s a -> s{_acNatIP = a})
+acNATIP :: Lens' AccessConfig (Maybe Text)
+acNATIP = lens _acNATIP (\ s a -> s{_acNATIP = a})
 
 -- | The type of configuration. The default and only option is
 -- ONE_TO_ONE_NAT.
@@ -13619,7 +13620,7 @@ instance ToJSON AccessConfig where
           = object
               (catMaybes
                  [Just ("kind" .= _acKind), ("name" .=) <$> _acName,
-                  ("natIP" .=) <$> _acNatIP, Just ("type" .= _acType)])
+                  ("natIP" .=) <$> _acNATIP, Just ("type" .= _acType)])
 
 --
 -- /See:/ 'resourceGroupReference' smart constructor.
@@ -13971,7 +13972,7 @@ instance ToJSON Tags where
 --
 -- /See:/ 'backendService' smart constructor.
 data BackendService = BackendService
-    { _bsBackends          :: !(Maybe [Maybe Backend])
+    { _bsBackends          :: !(Maybe [Backend])
     , _bsKind              :: !Text
     , _bsFingerprint       :: !(Maybe Word8)
     , _bsProtocol          :: !(Maybe BackendServiceProtocol)
@@ -14035,7 +14036,7 @@ backendService =
     }
 
 -- | The list of backends that serve this BackendService.
-bsBackends :: Lens' BackendService [Maybe Backend]
+bsBackends :: Lens' BackendService [Backend]
 bsBackends
   = lens _bsBackends (\ s a -> s{_bsBackends = a}) .
       _Default
@@ -14285,23 +14286,23 @@ instance ToJSON InstanceMoveRequest where
 -- /See:/ 'instance'' smart constructor.
 data Instance = Instance
     { _i1Status            :: !(Maybe InstanceStatus)
-    , _i1ServiceAccounts   :: !(Maybe [Maybe ServiceAccount])
-    , _i1NetworkInterfaces :: !(Maybe [Maybe NetworkInterface])
+    , _i1ServiceAccounts   :: !(Maybe [ServiceAccount])
+    , _i1NetworkInterfaces :: !(Maybe [NetworkInterface])
     , _i1Kind              :: !Text
     , _i1Zone              :: !(Maybe Text)
-    , _i1CpuPlatform       :: !(Maybe Text)
+    , _i1CPUPlatform       :: !(Maybe Text)
     , _i1SelfLink          :: !(Maybe Text)
     , _i1Name              :: !(Maybe Text)
     , _i1StatusMessage     :: !(Maybe Text)
     , _i1CreationTimestamp :: !(Maybe Text)
     , _i1MachineType       :: !(Maybe Text)
-    , _i1Metadata          :: !(Maybe (Maybe Metadata))
+    , _i1Metadata          :: !(Maybe Metadata)
     , _i1Id                :: !(Maybe Word64)
-    , _i1Scheduling        :: !(Maybe (Maybe Scheduling))
-    , _i1Disks             :: !(Maybe [Maybe AttachedDisk])
-    , _i1CanIpForward      :: !(Maybe Bool)
+    , _i1Scheduling        :: !(Maybe Scheduling)
+    , _i1Disks             :: !(Maybe [AttachedDisk])
+    , _i1CanIPForward      :: !(Maybe Bool)
     , _i1Description       :: !(Maybe Text)
-    , _i1Tags              :: !(Maybe (Maybe Tags))
+    , _i1Tags              :: !(Maybe Tags)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Instance' with the minimum fields required to make a request.
@@ -14318,7 +14319,7 @@ data Instance = Instance
 --
 -- * 'i1Zone'
 --
--- * 'i1CpuPlatform'
+-- * 'i1CPUPlatform'
 --
 -- * 'i1SelfLink'
 --
@@ -14338,7 +14339,7 @@ data Instance = Instance
 --
 -- * 'i1Disks'
 --
--- * 'i1CanIpForward'
+-- * 'i1CanIPForward'
 --
 -- * 'i1Description'
 --
@@ -14352,7 +14353,7 @@ instance' =
     , _i1NetworkInterfaces = Nothing
     , _i1Kind = "compute#instance"
     , _i1Zone = Nothing
-    , _i1CpuPlatform = Nothing
+    , _i1CPUPlatform = Nothing
     , _i1SelfLink = Nothing
     , _i1Name = Nothing
     , _i1StatusMessage = Nothing
@@ -14362,7 +14363,7 @@ instance' =
     , _i1Id = Nothing
     , _i1Scheduling = Nothing
     , _i1Disks = Nothing
-    , _i1CanIpForward = Nothing
+    , _i1CanIPForward = Nothing
     , _i1Description = Nothing
     , _i1Tags = Nothing
     }
@@ -14377,7 +14378,7 @@ i1Status = lens _i1Status (\ s a -> s{_i1Status = a})
 -- accessed through the metadata server and used to authenticate
 -- applications on the instance. See Authenticating from Google Compute
 -- Engine for more information.
-i1ServiceAccounts :: Lens' Instance [Maybe ServiceAccount]
+i1ServiceAccounts :: Lens' Instance [ServiceAccount]
 i1ServiceAccounts
   = lens _i1ServiceAccounts
       (\ s a -> s{_i1ServiceAccounts = a})
@@ -14387,7 +14388,7 @@ i1ServiceAccounts
 -- | An array of configurations for this interface. This specifies how this
 -- interface is configured to interact with other network services, such as
 -- connecting to the internet.
-i1NetworkInterfaces :: Lens' Instance [Maybe NetworkInterface]
+i1NetworkInterfaces :: Lens' Instance [NetworkInterface]
 i1NetworkInterfaces
   = lens _i1NetworkInterfaces
       (\ s a -> s{_i1NetworkInterfaces = a})
@@ -14404,10 +14405,10 @@ i1Zone :: Lens' Instance (Maybe Text)
 i1Zone = lens _i1Zone (\ s a -> s{_i1Zone = a})
 
 -- | [Output Only] The CPU platform used by this instance.
-i1CpuPlatform :: Lens' Instance (Maybe Text)
-i1CpuPlatform
-  = lens _i1CpuPlatform
-      (\ s a -> s{_i1CpuPlatform = a})
+i1CPUPlatform :: Lens' Instance (Maybe Text)
+i1CPUPlatform
+  = lens _i1CPUPlatform
+      (\ s a -> s{_i1CPUPlatform = a})
 
 -- | [Output Only] Server defined URL for this resource.
 i1SelfLink :: Lens' Instance (Maybe Text)
@@ -14447,7 +14448,7 @@ i1MachineType
 
 -- | The metadata key\/value pairs assigned to this instance. This includes
 -- custom metadata and predefined keys.
-i1Metadata :: Lens' Instance (Maybe (Maybe Metadata))
+i1Metadata :: Lens' Instance (Maybe Metadata)
 i1Metadata
   = lens _i1Metadata (\ s a -> s{_i1Metadata = a})
 
@@ -14456,13 +14457,13 @@ i1Id :: Lens' Instance (Maybe Word64)
 i1Id = lens _i1Id (\ s a -> s{_i1Id = a})
 
 -- | Scheduling options for this instance.
-i1Scheduling :: Lens' Instance (Maybe (Maybe Scheduling))
+i1Scheduling :: Lens' Instance (Maybe Scheduling)
 i1Scheduling
   = lens _i1Scheduling (\ s a -> s{_i1Scheduling = a})
 
 -- | Array of disks associated with this instance. Persistent disks must be
 -- created before you can assign them.
-i1Disks :: Lens' Instance [Maybe AttachedDisk]
+i1Disks :: Lens' Instance [AttachedDisk]
 i1Disks
   = lens _i1Disks (\ s a -> s{_i1Disks = a}) . _Default
       . _Coerce
@@ -14471,10 +14472,10 @@ i1Disks
 -- destination or source IPs. This is required if you plan to use this
 -- instance to forward routes. For more information, see Enabling IP
 -- Forwarding.
-i1CanIpForward :: Lens' Instance (Maybe Bool)
-i1CanIpForward
-  = lens _i1CanIpForward
-      (\ s a -> s{_i1CanIpForward = a})
+i1CanIPForward :: Lens' Instance (Maybe Bool)
+i1CanIPForward
+  = lens _i1CanIPForward
+      (\ s a -> s{_i1CanIPForward = a})
 
 -- | An optional textual description of the resource; provided by the client
 -- when the resource is created.
@@ -14487,7 +14488,7 @@ i1Description
 -- sources or targets for network firewalls and are specified by the client
 -- during instance creation. The tags can be later modified by the setTags
 -- method. Each tag within the list must comply with RFC1035.
-i1Tags :: Lens' Instance (Maybe (Maybe Tags))
+i1Tags :: Lens' Instance (Maybe Tags)
 i1Tags = lens _i1Tags (\ s a -> s{_i1Tags = a})
 
 instance FromJSON Instance where
@@ -14522,7 +14523,7 @@ instance ToJSON Instance where
                   ("serviceAccounts" .=) <$> _i1ServiceAccounts,
                   ("networkInterfaces" .=) <$> _i1NetworkInterfaces,
                   Just ("kind" .= _i1Kind), ("zone" .=) <$> _i1Zone,
-                  ("cpuPlatform" .=) <$> _i1CpuPlatform,
+                  ("cpuPlatform" .=) <$> _i1CPUPlatform,
                   ("selfLink" .=) <$> _i1SelfLink,
                   ("name" .=) <$> _i1Name,
                   ("statusMessage" .=) <$> _i1StatusMessage,
@@ -14531,7 +14532,7 @@ instance ToJSON Instance where
                   ("metadata" .=) <$> _i1Metadata, ("id" .=) <$> _i1Id,
                   ("scheduling" .=) <$> _i1Scheduling,
                   ("disks" .=) <$> _i1Disks,
-                  ("canIpForward" .=) <$> _i1CanIpForward,
+                  ("canIpForward" .=) <$> _i1CanIPForward,
                   ("description" .=) <$> _i1Description,
                   ("tags" .=) <$> _i1Tags])
 
@@ -14564,7 +14565,7 @@ instance ToJSON VPNTunnelAggregatedListItems where
 data PathMatcher = PathMatcher
     { _pmDefaultService :: !(Maybe Text)
     , _pmName           :: !(Maybe Text)
-    , _pmPathRules      :: !(Maybe [Maybe PathRule])
+    , _pmPathRules      :: !(Maybe [PathRule])
     , _pmDescription    :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -14602,7 +14603,7 @@ pmName :: Lens' PathMatcher (Maybe Text)
 pmName = lens _pmName (\ s a -> s{_pmName = a})
 
 -- | The list of path rules.
-pmPathRules :: Lens' PathMatcher [Maybe PathRule]
+pmPathRules :: Lens' PathMatcher [PathRule]
 pmPathRules
   = lens _pmPathRules (\ s a -> s{_pmPathRules = a}) .
       _Default
@@ -14636,7 +14637,7 @@ instance ToJSON PathMatcher where
 -- /See:/ 'instanceGroupsScopedList' smart constructor.
 data InstanceGroupsScopedList = InstanceGroupsScopedList
     { _igslWarning        :: !(Maybe InstanceGroupsScopedListWarning)
-    , _igslInstanceGroups :: !(Maybe [Maybe InstanceGroup])
+    , _igslInstanceGroups :: !(Maybe [InstanceGroup])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupsScopedList' with the minimum fields required to make a request.
@@ -14662,7 +14663,7 @@ igslWarning
 
 -- | [Output Only] The list of instance groups that are contained in this
 -- scope.
-igslInstanceGroups :: Lens' InstanceGroupsScopedList [Maybe InstanceGroup]
+igslInstanceGroups :: Lens' InstanceGroupsScopedList [InstanceGroup]
 igslInstanceGroups
   = lens _igslInstanceGroups
       (\ s a -> s{_igslInstanceGroups = a})

@@ -32,12 +32,11 @@ module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Dele
     -- * Request Lenses
     , lcdQuotaUser
     , lcdPrettyPrint
-    , lcdUserIp
+    , lcdUserIP
     , lcdLeaderboardId
     , lcdKey
-    , lcdOauthToken
+    , lcdOAuthToken
     , lcdFields
-    , lcdAlt
     ) where
 
 import           Network.Google.GamesConfiguration.Types
@@ -51,10 +50,10 @@ type LeaderboardConfigurationsDeleteResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Delete '[JSON] ()
+                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete the leaderboard configuration with the given ID.
 --
@@ -62,12 +61,11 @@ type LeaderboardConfigurationsDeleteResource =
 data LeaderboardConfigurationsDelete' = LeaderboardConfigurationsDelete'
     { _lcdQuotaUser     :: !(Maybe Text)
     , _lcdPrettyPrint   :: !Bool
-    , _lcdUserIp        :: !(Maybe Text)
+    , _lcdUserIP        :: !(Maybe Text)
     , _lcdLeaderboardId :: !Text
-    , _lcdKey           :: !(Maybe Text)
-    , _lcdOauthToken    :: !(Maybe Text)
+    , _lcdKey           :: !(Maybe Key)
+    , _lcdOAuthToken    :: !(Maybe OAuthToken)
     , _lcdFields        :: !(Maybe Text)
-    , _lcdAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LeaderboardConfigurationsDelete'' with the minimum fields required to make a request.
@@ -78,17 +76,15 @@ data LeaderboardConfigurationsDelete' = LeaderboardConfigurationsDelete'
 --
 -- * 'lcdPrettyPrint'
 --
--- * 'lcdUserIp'
+-- * 'lcdUserIP'
 --
 -- * 'lcdLeaderboardId'
 --
 -- * 'lcdKey'
 --
--- * 'lcdOauthToken'
+-- * 'lcdOAuthToken'
 --
 -- * 'lcdFields'
---
--- * 'lcdAlt'
 leaderboardConfigurationsDelete'
     :: Text -- ^ 'leaderboardId'
     -> LeaderboardConfigurationsDelete'
@@ -96,12 +92,11 @@ leaderboardConfigurationsDelete' pLcdLeaderboardId_ =
     LeaderboardConfigurationsDelete'
     { _lcdQuotaUser = Nothing
     , _lcdPrettyPrint = True
-    , _lcdUserIp = Nothing
+    , _lcdUserIP = Nothing
     , _lcdLeaderboardId = pLcdLeaderboardId_
     , _lcdKey = Nothing
-    , _lcdOauthToken = Nothing
+    , _lcdOAuthToken = Nothing
     , _lcdFields = Nothing
-    , _lcdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -119,9 +114,9 @@ lcdPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-lcdUserIp :: Lens' LeaderboardConfigurationsDelete' (Maybe Text)
-lcdUserIp
-  = lens _lcdUserIp (\ s a -> s{_lcdUserIp = a})
+lcdUserIP :: Lens' LeaderboardConfigurationsDelete' (Maybe Text)
+lcdUserIP
+  = lens _lcdUserIP (\ s a -> s{_lcdUserIP = a})
 
 -- | The ID of the leaderboard.
 lcdLeaderboardId :: Lens' LeaderboardConfigurationsDelete' Text
@@ -132,23 +127,24 @@ lcdLeaderboardId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lcdKey :: Lens' LeaderboardConfigurationsDelete' (Maybe Text)
+lcdKey :: Lens' LeaderboardConfigurationsDelete' (Maybe Key)
 lcdKey = lens _lcdKey (\ s a -> s{_lcdKey = a})
 
 -- | OAuth 2.0 token for the current user.
-lcdOauthToken :: Lens' LeaderboardConfigurationsDelete' (Maybe Text)
-lcdOauthToken
-  = lens _lcdOauthToken
-      (\ s a -> s{_lcdOauthToken = a})
+lcdOAuthToken :: Lens' LeaderboardConfigurationsDelete' (Maybe OAuthToken)
+lcdOAuthToken
+  = lens _lcdOAuthToken
+      (\ s a -> s{_lcdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 lcdFields :: Lens' LeaderboardConfigurationsDelete' (Maybe Text)
 lcdFields
   = lens _lcdFields (\ s a -> s{_lcdFields = a})
 
--- | Data format for the response.
-lcdAlt :: Lens' LeaderboardConfigurationsDelete' Alt
-lcdAlt = lens _lcdAlt (\ s a -> s{_lcdAlt = a})
+instance GoogleAuth LeaderboardConfigurationsDelete'
+         where
+        authKey = lcdKey . _Just
+        authToken = lcdOAuthToken . _Just
 
 instance GoogleRequest
          LeaderboardConfigurationsDelete' where
@@ -157,12 +153,12 @@ instance GoogleRequest
           = requestWithRoute defReq gamesConfigurationURL
         requestWithRoute r u
           LeaderboardConfigurationsDelete'{..}
-          = go _lcdQuotaUser (Just _lcdPrettyPrint) _lcdUserIp
+          = go _lcdQuotaUser (Just _lcdPrettyPrint) _lcdUserIP
               _lcdLeaderboardId
               _lcdKey
-              _lcdOauthToken
+              _lcdOAuthToken
               _lcdFields
-              (Just _lcdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

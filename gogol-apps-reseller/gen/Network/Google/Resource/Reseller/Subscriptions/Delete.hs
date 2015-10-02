@@ -32,14 +32,13 @@ module Network.Google.Resource.Reseller.Subscriptions.Delete
     -- * Request Lenses
     , sdQuotaUser
     , sdPrettyPrint
-    , sdUserIp
+    , sdUserIP
     , sdCustomerId
     , sdDeletionType
     , sdKey
-    , sdOauthToken
+    , sdOAuthToken
     , sdSubscriptionId
     , sdFields
-    , sdAlt
     ) where
 
 import           Network.Google.AppsReseller.Types
@@ -58,10 +57,10 @@ type SubscriptionsDeleteResource =
                    QueryParam "deletionType"
                      ResellerSubscriptionsDeleteDeletionType
                      :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Delete '[JSON] ()
+                           QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Cancels\/Downgrades a subscription.
 --
@@ -69,14 +68,13 @@ type SubscriptionsDeleteResource =
 data SubscriptionsDelete' = SubscriptionsDelete'
     { _sdQuotaUser      :: !(Maybe Text)
     , _sdPrettyPrint    :: !Bool
-    , _sdUserIp         :: !(Maybe Text)
+    , _sdUserIP         :: !(Maybe Text)
     , _sdCustomerId     :: !Text
     , _sdDeletionType   :: !ResellerSubscriptionsDeleteDeletionType
-    , _sdKey            :: !(Maybe Text)
-    , _sdOauthToken     :: !(Maybe Text)
+    , _sdKey            :: !(Maybe Key)
+    , _sdOAuthToken     :: !(Maybe OAuthToken)
     , _sdSubscriptionId :: !Text
     , _sdFields         :: !(Maybe Text)
-    , _sdAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionsDelete'' with the minimum fields required to make a request.
@@ -87,7 +85,7 @@ data SubscriptionsDelete' = SubscriptionsDelete'
 --
 -- * 'sdPrettyPrint'
 --
--- * 'sdUserIp'
+-- * 'sdUserIP'
 --
 -- * 'sdCustomerId'
 --
@@ -95,13 +93,11 @@ data SubscriptionsDelete' = SubscriptionsDelete'
 --
 -- * 'sdKey'
 --
--- * 'sdOauthToken'
+-- * 'sdOAuthToken'
 --
 -- * 'sdSubscriptionId'
 --
 -- * 'sdFields'
---
--- * 'sdAlt'
 subscriptionsDelete'
     :: Text -- ^ 'customerId'
     -> ResellerSubscriptionsDeleteDeletionType -- ^ 'deletionType'
@@ -111,14 +107,13 @@ subscriptionsDelete' pSdCustomerId_ pSdDeletionType_ pSdSubscriptionId_ =
     SubscriptionsDelete'
     { _sdQuotaUser = Nothing
     , _sdPrettyPrint = True
-    , _sdUserIp = Nothing
+    , _sdUserIP = Nothing
     , _sdCustomerId = pSdCustomerId_
     , _sdDeletionType = pSdDeletionType_
     , _sdKey = Nothing
-    , _sdOauthToken = Nothing
+    , _sdOAuthToken = Nothing
     , _sdSubscriptionId = pSdSubscriptionId_
     , _sdFields = Nothing
-    , _sdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -136,8 +131,8 @@ sdPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-sdUserIp :: Lens' SubscriptionsDelete' (Maybe Text)
-sdUserIp = lens _sdUserIp (\ s a -> s{_sdUserIp = a})
+sdUserIP :: Lens' SubscriptionsDelete' (Maybe Text)
+sdUserIP = lens _sdUserIP (\ s a -> s{_sdUserIP = a})
 
 -- | Id of the Customer
 sdCustomerId :: Lens' SubscriptionsDelete' Text
@@ -153,13 +148,13 @@ sdDeletionType
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-sdKey :: Lens' SubscriptionsDelete' (Maybe Text)
+sdKey :: Lens' SubscriptionsDelete' (Maybe Key)
 sdKey = lens _sdKey (\ s a -> s{_sdKey = a})
 
 -- | OAuth 2.0 token for the current user.
-sdOauthToken :: Lens' SubscriptionsDelete' (Maybe Text)
-sdOauthToken
-  = lens _sdOauthToken (\ s a -> s{_sdOauthToken = a})
+sdOAuthToken :: Lens' SubscriptionsDelete' (Maybe OAuthToken)
+sdOAuthToken
+  = lens _sdOAuthToken (\ s a -> s{_sdOAuthToken = a})
 
 -- | Id of the subscription, which is unique for a customer
 sdSubscriptionId :: Lens' SubscriptionsDelete' Text
@@ -171,22 +166,22 @@ sdSubscriptionId
 sdFields :: Lens' SubscriptionsDelete' (Maybe Text)
 sdFields = lens _sdFields (\ s a -> s{_sdFields = a})
 
--- | Data format for the response.
-sdAlt :: Lens' SubscriptionsDelete' Alt
-sdAlt = lens _sdAlt (\ s a -> s{_sdAlt = a})
+instance GoogleAuth SubscriptionsDelete' where
+        authKey = sdKey . _Just
+        authToken = sdOAuthToken . _Just
 
 instance GoogleRequest SubscriptionsDelete' where
         type Rs SubscriptionsDelete' = ()
         request = requestWithRoute defReq appsResellerURL
         requestWithRoute r u SubscriptionsDelete'{..}
-          = go _sdQuotaUser (Just _sdPrettyPrint) _sdUserIp
+          = go _sdQuotaUser (Just _sdPrettyPrint) _sdUserIP
               _sdCustomerId
               (Just _sdDeletionType)
               _sdKey
-              _sdOauthToken
+              _sdOAuthToken
               _sdSubscriptionId
               _sdFields
-              (Just _sdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy SubscriptionsDeleteResource)

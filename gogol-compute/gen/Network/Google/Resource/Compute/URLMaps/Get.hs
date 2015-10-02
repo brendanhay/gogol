@@ -31,14 +31,13 @@ module Network.Google.Resource.Compute.URLMaps.Get
 
     -- * Request Lenses
     , umgQuotaUser
-    , umgUrlMap
+    , umgURLMap
     , umgPrettyPrint
     , umgProject
-    , umgUserIp
+    , umgUserIP
     , umgKey
-    , umgOauthToken
+    , umgOAuthToken
     , umgFields
-    , umgAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -54,24 +53,23 @@ type UrlMapsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] URLMap
+                         QueryParam "alt" AltJSON :> Get '[JSON] URLMap
 
 -- | Returns the specified UrlMap resource.
 --
 -- /See:/ 'uRLMapsGet'' smart constructor.
 data URLMapsGet' = URLMapsGet'
     { _umgQuotaUser   :: !(Maybe Text)
-    , _umgUrlMap      :: !Text
+    , _umgURLMap      :: !Text
     , _umgPrettyPrint :: !Bool
     , _umgProject     :: !Text
-    , _umgUserIp      :: !(Maybe Text)
-    , _umgKey         :: !(Maybe Text)
-    , _umgOauthToken  :: !(Maybe Text)
+    , _umgUserIP      :: !(Maybe Text)
+    , _umgKey         :: !(Maybe Key)
+    , _umgOAuthToken  :: !(Maybe OAuthToken)
     , _umgFields      :: !(Maybe Text)
-    , _umgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLMapsGet'' with the minimum fields required to make a request.
@@ -80,36 +78,33 @@ data URLMapsGet' = URLMapsGet'
 --
 -- * 'umgQuotaUser'
 --
--- * 'umgUrlMap'
+-- * 'umgURLMap'
 --
 -- * 'umgPrettyPrint'
 --
 -- * 'umgProject'
 --
--- * 'umgUserIp'
+-- * 'umgUserIP'
 --
 -- * 'umgKey'
 --
--- * 'umgOauthToken'
+-- * 'umgOAuthToken'
 --
 -- * 'umgFields'
---
--- * 'umgAlt'
 uRLMapsGet'
     :: Text -- ^ 'urlMap'
     -> Text -- ^ 'project'
     -> URLMapsGet'
-uRLMapsGet' pUmgUrlMap_ pUmgProject_ =
+uRLMapsGet' pUmgURLMap_ pUmgProject_ =
     URLMapsGet'
     { _umgQuotaUser = Nothing
-    , _umgUrlMap = pUmgUrlMap_
+    , _umgURLMap = pUmgURLMap_
     , _umgPrettyPrint = True
     , _umgProject = pUmgProject_
-    , _umgUserIp = Nothing
+    , _umgUserIP = Nothing
     , _umgKey = Nothing
-    , _umgOauthToken = Nothing
+    , _umgOAuthToken = Nothing
     , _umgFields = Nothing
-    , _umgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,9 +115,9 @@ umgQuotaUser
   = lens _umgQuotaUser (\ s a -> s{_umgQuotaUser = a})
 
 -- | Name of the UrlMap resource to return.
-umgUrlMap :: Lens' URLMapsGet' Text
-umgUrlMap
-  = lens _umgUrlMap (\ s a -> s{_umgUrlMap = a})
+umgURLMap :: Lens' URLMapsGet' Text
+umgURLMap
+  = lens _umgURLMap (\ s a -> s{_umgURLMap = a})
 
 -- | Returns response with indentations and line breaks.
 umgPrettyPrint :: Lens' URLMapsGet' Bool
@@ -137,42 +132,42 @@ umgProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-umgUserIp :: Lens' URLMapsGet' (Maybe Text)
-umgUserIp
-  = lens _umgUserIp (\ s a -> s{_umgUserIp = a})
+umgUserIP :: Lens' URLMapsGet' (Maybe Text)
+umgUserIP
+  = lens _umgUserIP (\ s a -> s{_umgUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-umgKey :: Lens' URLMapsGet' (Maybe Text)
+umgKey :: Lens' URLMapsGet' (Maybe Key)
 umgKey = lens _umgKey (\ s a -> s{_umgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-umgOauthToken :: Lens' URLMapsGet' (Maybe Text)
-umgOauthToken
-  = lens _umgOauthToken
-      (\ s a -> s{_umgOauthToken = a})
+umgOAuthToken :: Lens' URLMapsGet' (Maybe OAuthToken)
+umgOAuthToken
+  = lens _umgOAuthToken
+      (\ s a -> s{_umgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 umgFields :: Lens' URLMapsGet' (Maybe Text)
 umgFields
   = lens _umgFields (\ s a -> s{_umgFields = a})
 
--- | Data format for the response.
-umgAlt :: Lens' URLMapsGet' Alt
-umgAlt = lens _umgAlt (\ s a -> s{_umgAlt = a})
+instance GoogleAuth URLMapsGet' where
+        authKey = umgKey . _Just
+        authToken = umgOAuthToken . _Just
 
 instance GoogleRequest URLMapsGet' where
         type Rs URLMapsGet' = URLMap
         request = requestWithRoute defReq computeURL
         requestWithRoute r u URLMapsGet'{..}
-          = go _umgQuotaUser _umgUrlMap (Just _umgPrettyPrint)
+          = go _umgQuotaUser _umgURLMap (Just _umgPrettyPrint)
               _umgProject
-              _umgUserIp
+              _umgUserIP
               _umgKey
-              _umgOauthToken
+              _umgOAuthToken
               _umgFields
-              (Just _umgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy UrlMapsGetResource)
                       r

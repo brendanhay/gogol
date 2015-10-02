@@ -19,7 +19,7 @@
 --
 -- | Deletes a GTM Variable.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersVariablesDelete@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersVariablesDelete@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Variables.Delete
     (
     -- * REST Resource
@@ -33,19 +33,18 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Variables.Delete
     , acvdQuotaUser
     , acvdPrettyPrint
     , acvdContainerId
-    , acvdUserIp
+    , acvdUserIP
     , acvdVariableId
     , acvdAccountId
     , acvdKey
-    , acvdOauthToken
+    , acvdOAuthToken
     , acvdFields
-    , acvdAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagmanagerAccountsContainersVariablesDelete@ which the
+-- | A resource alias for @TagManagerAccountsContainersVariablesDelete@ which the
 -- 'AccountsContainersVariablesDelete'' request conforms to.
 type AccountsContainersVariablesDeleteResource =
      "accounts" :>
@@ -57,10 +56,10 @@ type AccountsContainersVariablesDeleteResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Delete '[JSON] ()
+                             QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a GTM Variable.
 --
@@ -69,13 +68,12 @@ data AccountsContainersVariablesDelete' = AccountsContainersVariablesDelete'
     { _acvdQuotaUser   :: !(Maybe Text)
     , _acvdPrettyPrint :: !Bool
     , _acvdContainerId :: !Text
-    , _acvdUserIp      :: !(Maybe Text)
+    , _acvdUserIP      :: !(Maybe Text)
     , _acvdVariableId  :: !Text
     , _acvdAccountId   :: !Text
-    , _acvdKey         :: !(Maybe Text)
-    , _acvdOauthToken  :: !(Maybe Text)
+    , _acvdKey         :: !(Maybe Key)
+    , _acvdOAuthToken  :: !(Maybe OAuthToken)
     , _acvdFields      :: !(Maybe Text)
-    , _acvdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersVariablesDelete'' with the minimum fields required to make a request.
@@ -88,7 +86,7 @@ data AccountsContainersVariablesDelete' = AccountsContainersVariablesDelete'
 --
 -- * 'acvdContainerId'
 --
--- * 'acvdUserIp'
+-- * 'acvdUserIP'
 --
 -- * 'acvdVariableId'
 --
@@ -96,11 +94,9 @@ data AccountsContainersVariablesDelete' = AccountsContainersVariablesDelete'
 --
 -- * 'acvdKey'
 --
--- * 'acvdOauthToken'
+-- * 'acvdOAuthToken'
 --
 -- * 'acvdFields'
---
--- * 'acvdAlt'
 accountsContainersVariablesDelete'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'variableId'
@@ -111,13 +107,12 @@ accountsContainersVariablesDelete' pAcvdContainerId_ pAcvdVariableId_ pAcvdAccou
     { _acvdQuotaUser = Nothing
     , _acvdPrettyPrint = True
     , _acvdContainerId = pAcvdContainerId_
-    , _acvdUserIp = Nothing
+    , _acvdUserIP = Nothing
     , _acvdVariableId = pAcvdVariableId_
     , _acvdAccountId = pAcvdAccountId_
     , _acvdKey = Nothing
-    , _acvdOauthToken = Nothing
+    , _acvdOAuthToken = Nothing
     , _acvdFields = Nothing
-    , _acvdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -142,9 +137,9 @@ acvdContainerId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-acvdUserIp :: Lens' AccountsContainersVariablesDelete' (Maybe Text)
-acvdUserIp
-  = lens _acvdUserIp (\ s a -> s{_acvdUserIp = a})
+acvdUserIP :: Lens' AccountsContainersVariablesDelete' (Maybe Text)
+acvdUserIP
+  = lens _acvdUserIP (\ s a -> s{_acvdUserIP = a})
 
 -- | The GTM Variable ID.
 acvdVariableId :: Lens' AccountsContainersVariablesDelete' Text
@@ -161,23 +156,24 @@ acvdAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-acvdKey :: Lens' AccountsContainersVariablesDelete' (Maybe Text)
+acvdKey :: Lens' AccountsContainersVariablesDelete' (Maybe Key)
 acvdKey = lens _acvdKey (\ s a -> s{_acvdKey = a})
 
 -- | OAuth 2.0 token for the current user.
-acvdOauthToken :: Lens' AccountsContainersVariablesDelete' (Maybe Text)
-acvdOauthToken
-  = lens _acvdOauthToken
-      (\ s a -> s{_acvdOauthToken = a})
+acvdOAuthToken :: Lens' AccountsContainersVariablesDelete' (Maybe OAuthToken)
+acvdOAuthToken
+  = lens _acvdOAuthToken
+      (\ s a -> s{_acvdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 acvdFields :: Lens' AccountsContainersVariablesDelete' (Maybe Text)
 acvdFields
   = lens _acvdFields (\ s a -> s{_acvdFields = a})
 
--- | Data format for the response.
-acvdAlt :: Lens' AccountsContainersVariablesDelete' Alt
-acvdAlt = lens _acvdAlt (\ s a -> s{_acvdAlt = a})
+instance GoogleAuth
+         AccountsContainersVariablesDelete' where
+        authKey = acvdKey . _Just
+        authToken = acvdOAuthToken . _Just
 
 instance GoogleRequest
          AccountsContainersVariablesDelete' where
@@ -187,13 +183,13 @@ instance GoogleRequest
           AccountsContainersVariablesDelete'{..}
           = go _acvdQuotaUser (Just _acvdPrettyPrint)
               _acvdContainerId
-              _acvdUserIp
+              _acvdUserIP
               _acvdVariableId
               _acvdAccountId
               _acvdKey
-              _acvdOauthToken
+              _acvdOAuthToken
               _acvdFields
-              (Just _acvdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

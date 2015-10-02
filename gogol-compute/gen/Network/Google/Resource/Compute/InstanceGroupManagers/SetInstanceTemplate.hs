@@ -32,16 +32,16 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.SetInstanceTemplate
     , InstanceGroupManagersSetInstanceTemplate'
 
     -- * Request Lenses
+    , igmsitInstanceGroupManagersSetInstanceTemplateRequest
     , igmsitQuotaUser
     , igmsitPrettyPrint
     , igmsitProject
     , igmsitInstanceGroupManager
-    , igmsitUserIp
+    , igmsitUserIP
     , igmsitZone
     , igmsitKey
-    , igmsitOauthToken
+    , igmsitOAuthToken
     , igmsitFields
-    , igmsitAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -60,10 +60,13 @@ type InstanceGroupManagersSetInstanceTemplateResource
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Post '[JSON] Operation
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON]
+                                 InstanceGroupManagersSetInstanceTemplateRequest
+                                 :> Post '[JSON] Operation
 
 -- | Specifies the instance template to use when creating new instances in
 -- this group. The templates for existing instances in the group do not
@@ -71,21 +74,23 @@ type InstanceGroupManagersSetInstanceTemplateResource
 --
 -- /See:/ 'instanceGroupManagersSetInstanceTemplate'' smart constructor.
 data InstanceGroupManagersSetInstanceTemplate' = InstanceGroupManagersSetInstanceTemplate'
-    { _igmsitQuotaUser            :: !(Maybe Text)
-    , _igmsitPrettyPrint          :: !Bool
-    , _igmsitProject              :: !Text
-    , _igmsitInstanceGroupManager :: !Text
-    , _igmsitUserIp               :: !(Maybe Text)
-    , _igmsitZone                 :: !Text
-    , _igmsitKey                  :: !(Maybe Text)
-    , _igmsitOauthToken           :: !(Maybe Text)
-    , _igmsitFields               :: !(Maybe Text)
-    , _igmsitAlt                  :: !Alt
+    { _igmsitInstanceGroupManagersSetInstanceTemplateRequest :: !InstanceGroupManagersSetInstanceTemplateRequest
+    , _igmsitQuotaUser                                       :: !(Maybe Text)
+    , _igmsitPrettyPrint                                     :: !Bool
+    , _igmsitProject                                         :: !Text
+    , _igmsitInstanceGroupManager                            :: !Text
+    , _igmsitUserIP                                          :: !(Maybe Text)
+    , _igmsitZone                                            :: !Text
+    , _igmsitKey                                             :: !(Maybe Key)
+    , _igmsitOAuthToken                                      :: !(Maybe OAuthToken)
+    , _igmsitFields                                          :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagersSetInstanceTemplate'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'igmsitInstanceGroupManagersSetInstanceTemplateRequest'
 --
 -- * 'igmsitQuotaUser'
 --
@@ -95,35 +100,43 @@ data InstanceGroupManagersSetInstanceTemplate' = InstanceGroupManagersSetInstanc
 --
 -- * 'igmsitInstanceGroupManager'
 --
--- * 'igmsitUserIp'
+-- * 'igmsitUserIP'
 --
 -- * 'igmsitZone'
 --
 -- * 'igmsitKey'
 --
--- * 'igmsitOauthToken'
+-- * 'igmsitOAuthToken'
 --
 -- * 'igmsitFields'
---
--- * 'igmsitAlt'
 instanceGroupManagersSetInstanceTemplate'
-    :: Text -- ^ 'project'
+    :: InstanceGroupManagersSetInstanceTemplateRequest -- ^ 'InstanceGroupManagersSetInstanceTemplateRequest'
+    -> Text -- ^ 'project'
     -> Text -- ^ 'instanceGroupManager'
     -> Text -- ^ 'zone'
     -> InstanceGroupManagersSetInstanceTemplate'
-instanceGroupManagersSetInstanceTemplate' pIgmsitProject_ pIgmsitInstanceGroupManager_ pIgmsitZone_ =
+instanceGroupManagersSetInstanceTemplate' pIgmsitInstanceGroupManagersSetInstanceTemplateRequest_ pIgmsitProject_ pIgmsitInstanceGroupManager_ pIgmsitZone_ =
     InstanceGroupManagersSetInstanceTemplate'
-    { _igmsitQuotaUser = Nothing
+    { _igmsitInstanceGroupManagersSetInstanceTemplateRequest = pIgmsitInstanceGroupManagersSetInstanceTemplateRequest_
+    , _igmsitQuotaUser = Nothing
     , _igmsitPrettyPrint = True
     , _igmsitProject = pIgmsitProject_
     , _igmsitInstanceGroupManager = pIgmsitInstanceGroupManager_
-    , _igmsitUserIp = Nothing
+    , _igmsitUserIP = Nothing
     , _igmsitZone = pIgmsitZone_
     , _igmsitKey = Nothing
-    , _igmsitOauthToken = Nothing
+    , _igmsitOAuthToken = Nothing
     , _igmsitFields = Nothing
-    , _igmsitAlt = JSON
     }
+
+-- | Multipart request metadata.
+igmsitInstanceGroupManagersSetInstanceTemplateRequest :: Lens' InstanceGroupManagersSetInstanceTemplate' InstanceGroupManagersSetInstanceTemplateRequest
+igmsitInstanceGroupManagersSetInstanceTemplateRequest
+  = lens
+      _igmsitInstanceGroupManagersSetInstanceTemplateRequest
+      (\ s a ->
+         s{_igmsitInstanceGroupManagersSetInstanceTemplateRequest
+             = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -153,9 +166,9 @@ igmsitInstanceGroupManager
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-igmsitUserIp :: Lens' InstanceGroupManagersSetInstanceTemplate' (Maybe Text)
-igmsitUserIp
-  = lens _igmsitUserIp (\ s a -> s{_igmsitUserIp = a})
+igmsitUserIP :: Lens' InstanceGroupManagersSetInstanceTemplate' (Maybe Text)
+igmsitUserIP
+  = lens _igmsitUserIP (\ s a -> s{_igmsitUserIP = a})
 
 -- | The URL of the zone where the managed instance group is located.
 igmsitZone :: Lens' InstanceGroupManagersSetInstanceTemplate' Text
@@ -165,25 +178,25 @@ igmsitZone
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-igmsitKey :: Lens' InstanceGroupManagersSetInstanceTemplate' (Maybe Text)
+igmsitKey :: Lens' InstanceGroupManagersSetInstanceTemplate' (Maybe Key)
 igmsitKey
   = lens _igmsitKey (\ s a -> s{_igmsitKey = a})
 
 -- | OAuth 2.0 token for the current user.
-igmsitOauthToken :: Lens' InstanceGroupManagersSetInstanceTemplate' (Maybe Text)
-igmsitOauthToken
-  = lens _igmsitOauthToken
-      (\ s a -> s{_igmsitOauthToken = a})
+igmsitOAuthToken :: Lens' InstanceGroupManagersSetInstanceTemplate' (Maybe OAuthToken)
+igmsitOAuthToken
+  = lens _igmsitOAuthToken
+      (\ s a -> s{_igmsitOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 igmsitFields :: Lens' InstanceGroupManagersSetInstanceTemplate' (Maybe Text)
 igmsitFields
   = lens _igmsitFields (\ s a -> s{_igmsitFields = a})
 
--- | Data format for the response.
-igmsitAlt :: Lens' InstanceGroupManagersSetInstanceTemplate' Alt
-igmsitAlt
-  = lens _igmsitAlt (\ s a -> s{_igmsitAlt = a})
+instance GoogleAuth
+         InstanceGroupManagersSetInstanceTemplate' where
+        authKey = igmsitKey . _Just
+        authToken = igmsitOAuthToken . _Just
 
 instance GoogleRequest
          InstanceGroupManagersSetInstanceTemplate' where
@@ -195,12 +208,13 @@ instance GoogleRequest
           = go _igmsitQuotaUser (Just _igmsitPrettyPrint)
               _igmsitProject
               _igmsitInstanceGroupManager
-              _igmsitUserIp
+              _igmsitUserIP
               _igmsitZone
               _igmsitKey
-              _igmsitOauthToken
+              _igmsitOAuthToken
               _igmsitFields
-              (Just _igmsitAlt)
+              (Just AltJSON)
+              _igmsitInstanceGroupManagersSetInstanceTemplateRequest
           where go
                   = clientWithRoute
                       (Proxy ::

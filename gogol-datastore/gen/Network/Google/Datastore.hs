@@ -317,9 +317,6 @@ module Network.Google.Datastore
     , propertyOrder
     , poProperty
     , poDirection
-
-    -- ** Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.Datastore.Types

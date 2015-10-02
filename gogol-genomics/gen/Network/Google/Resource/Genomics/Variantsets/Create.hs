@@ -35,11 +35,11 @@ module Network.Google.Resource.Genomics.Variantsets.Create
     -- * Request Lenses
     , vcQuotaUser
     , vcPrettyPrint
-    , vcUserIp
+    , vcUserIP
     , vcKey
-    , vcOauthToken
+    , vcVariantSet
+    , vcOAuthToken
     , vcFields
-    , vcAlt
     ) where
 
 import           Network.Google.Genomics.Types
@@ -52,10 +52,11 @@ type VariantsetsCreateResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
-               QueryParam "oauth_token" Text :>
+             QueryParam "key" Key :>
+               QueryParam "oauth_token" OAuthToken :>
                  QueryParam "fields" Text :>
-                   QueryParam "alt" Alt :> Post '[JSON] VariantSet
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] VariantSet :> Post '[JSON] VariantSet
 
 -- | Creates a new variant set (only necessary in v1). The provided variant
 -- set must have a valid datasetId set - all other fields are optional.
@@ -66,11 +67,11 @@ type VariantsetsCreateResource =
 data VariantsetsCreate' = VariantsetsCreate'
     { _vcQuotaUser   :: !(Maybe Text)
     , _vcPrettyPrint :: !Bool
-    , _vcUserIp      :: !(Maybe Text)
-    , _vcKey         :: !(Maybe Text)
-    , _vcOauthToken  :: !(Maybe Text)
+    , _vcUserIP      :: !(Maybe Text)
+    , _vcKey         :: !(Maybe Key)
+    , _vcVariantSet  :: !VariantSet
+    , _vcOAuthToken  :: !(Maybe OAuthToken)
     , _vcFields      :: !(Maybe Text)
-    , _vcAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantsetsCreate'' with the minimum fields required to make a request.
@@ -81,26 +82,27 @@ data VariantsetsCreate' = VariantsetsCreate'
 --
 -- * 'vcPrettyPrint'
 --
--- * 'vcUserIp'
+-- * 'vcUserIP'
 --
 -- * 'vcKey'
 --
--- * 'vcOauthToken'
+-- * 'vcVariantSet'
+--
+-- * 'vcOAuthToken'
 --
 -- * 'vcFields'
---
--- * 'vcAlt'
 variantsetsCreate'
-    :: VariantsetsCreate'
-variantsetsCreate' =
+    :: VariantSet -- ^ 'VariantSet'
+    -> VariantsetsCreate'
+variantsetsCreate' pVcVariantSet_ =
     VariantsetsCreate'
     { _vcQuotaUser = Nothing
     , _vcPrettyPrint = True
-    , _vcUserIp = Nothing
+    , _vcUserIP = Nothing
     , _vcKey = Nothing
-    , _vcOauthToken = Nothing
+    , _vcVariantSet = pVcVariantSet_
+    , _vcOAuthToken = Nothing
     , _vcFields = Nothing
-    , _vcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -118,37 +120,43 @@ vcPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-vcUserIp :: Lens' VariantsetsCreate' (Maybe Text)
-vcUserIp = lens _vcUserIp (\ s a -> s{_vcUserIp = a})
+vcUserIP :: Lens' VariantsetsCreate' (Maybe Text)
+vcUserIP = lens _vcUserIP (\ s a -> s{_vcUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vcKey :: Lens' VariantsetsCreate' (Maybe Text)
+vcKey :: Lens' VariantsetsCreate' (Maybe Key)
 vcKey = lens _vcKey (\ s a -> s{_vcKey = a})
 
+-- | Multipart request metadata.
+vcVariantSet :: Lens' VariantsetsCreate' VariantSet
+vcVariantSet
+  = lens _vcVariantSet (\ s a -> s{_vcVariantSet = a})
+
 -- | OAuth 2.0 token for the current user.
-vcOauthToken :: Lens' VariantsetsCreate' (Maybe Text)
-vcOauthToken
-  = lens _vcOauthToken (\ s a -> s{_vcOauthToken = a})
+vcOAuthToken :: Lens' VariantsetsCreate' (Maybe OAuthToken)
+vcOAuthToken
+  = lens _vcOAuthToken (\ s a -> s{_vcOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 vcFields :: Lens' VariantsetsCreate' (Maybe Text)
 vcFields = lens _vcFields (\ s a -> s{_vcFields = a})
 
--- | Data format for the response.
-vcAlt :: Lens' VariantsetsCreate' Alt
-vcAlt = lens _vcAlt (\ s a -> s{_vcAlt = a})
+instance GoogleAuth VariantsetsCreate' where
+        authKey = vcKey . _Just
+        authToken = vcOAuthToken . _Just
 
 instance GoogleRequest VariantsetsCreate' where
         type Rs VariantsetsCreate' = VariantSet
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u VariantsetsCreate'{..}
-          = go _vcQuotaUser (Just _vcPrettyPrint) _vcUserIp
+          = go _vcQuotaUser (Just _vcPrettyPrint) _vcUserIP
               _vcKey
-              _vcOauthToken
+              _vcOAuthToken
               _vcFields
-              (Just _vcAlt)
+              (Just AltJSON)
+              _vcVariantSet
           where go
                   = clientWithRoute
                       (Proxy :: Proxy VariantsetsCreateResource)

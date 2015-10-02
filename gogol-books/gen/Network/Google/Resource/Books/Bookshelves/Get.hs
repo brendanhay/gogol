@@ -32,14 +32,13 @@ module Network.Google.Resource.Books.Bookshelves.Get
     -- * Request Lenses
     , bgQuotaUser
     , bgPrettyPrint
-    , bgUserIp
+    , bgUserIP
     , bgUserId
     , bgShelf
     , bgKey
     , bgSource
-    , bgOauthToken
+    , bgOAuthToken
     , bgFields
-    , bgAlt
     ) where
 
 import           Network.Google.Books.Types
@@ -55,11 +54,11 @@ type BookshelvesGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "source" Text :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Get '[JSON] Bookshelf
+                           QueryParam "alt" AltJSON :> Get '[JSON] Bookshelf
 
 -- | Retrieves metadata for a specific bookshelf for the specified user.
 --
@@ -67,14 +66,13 @@ type BookshelvesGetResource =
 data BookshelvesGet' = BookshelvesGet'
     { _bgQuotaUser   :: !(Maybe Text)
     , _bgPrettyPrint :: !Bool
-    , _bgUserIp      :: !(Maybe Text)
+    , _bgUserIP      :: !(Maybe Text)
     , _bgUserId      :: !Text
     , _bgShelf       :: !Text
-    , _bgKey         :: !(Maybe Text)
+    , _bgKey         :: !(Maybe Key)
     , _bgSource      :: !(Maybe Text)
-    , _bgOauthToken  :: !(Maybe Text)
+    , _bgOAuthToken  :: !(Maybe OAuthToken)
     , _bgFields      :: !(Maybe Text)
-    , _bgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BookshelvesGet'' with the minimum fields required to make a request.
@@ -85,7 +83,7 @@ data BookshelvesGet' = BookshelvesGet'
 --
 -- * 'bgPrettyPrint'
 --
--- * 'bgUserIp'
+-- * 'bgUserIP'
 --
 -- * 'bgUserId'
 --
@@ -95,11 +93,9 @@ data BookshelvesGet' = BookshelvesGet'
 --
 -- * 'bgSource'
 --
--- * 'bgOauthToken'
+-- * 'bgOAuthToken'
 --
 -- * 'bgFields'
---
--- * 'bgAlt'
 bookshelvesGet'
     :: Text -- ^ 'userId'
     -> Text -- ^ 'shelf'
@@ -108,14 +104,13 @@ bookshelvesGet' pBgUserId_ pBgShelf_ =
     BookshelvesGet'
     { _bgQuotaUser = Nothing
     , _bgPrettyPrint = True
-    , _bgUserIp = Nothing
+    , _bgUserIP = Nothing
     , _bgUserId = pBgUserId_
     , _bgShelf = pBgShelf_
     , _bgKey = Nothing
     , _bgSource = Nothing
-    , _bgOauthToken = Nothing
+    , _bgOAuthToken = Nothing
     , _bgFields = Nothing
-    , _bgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -133,8 +128,8 @@ bgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-bgUserIp :: Lens' BookshelvesGet' (Maybe Text)
-bgUserIp = lens _bgUserIp (\ s a -> s{_bgUserIp = a})
+bgUserIP :: Lens' BookshelvesGet' (Maybe Text)
+bgUserIP = lens _bgUserIP (\ s a -> s{_bgUserIP = a})
 
 -- | ID of user for whom to retrieve bookshelves.
 bgUserId :: Lens' BookshelvesGet' Text
@@ -147,7 +142,7 @@ bgShelf = lens _bgShelf (\ s a -> s{_bgShelf = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-bgKey :: Lens' BookshelvesGet' (Maybe Text)
+bgKey :: Lens' BookshelvesGet' (Maybe Key)
 bgKey = lens _bgKey (\ s a -> s{_bgKey = a})
 
 -- | String to identify the originator of this request.
@@ -155,30 +150,30 @@ bgSource :: Lens' BookshelvesGet' (Maybe Text)
 bgSource = lens _bgSource (\ s a -> s{_bgSource = a})
 
 -- | OAuth 2.0 token for the current user.
-bgOauthToken :: Lens' BookshelvesGet' (Maybe Text)
-bgOauthToken
-  = lens _bgOauthToken (\ s a -> s{_bgOauthToken = a})
+bgOAuthToken :: Lens' BookshelvesGet' (Maybe OAuthToken)
+bgOAuthToken
+  = lens _bgOAuthToken (\ s a -> s{_bgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 bgFields :: Lens' BookshelvesGet' (Maybe Text)
 bgFields = lens _bgFields (\ s a -> s{_bgFields = a})
 
--- | Data format for the response.
-bgAlt :: Lens' BookshelvesGet' Alt
-bgAlt = lens _bgAlt (\ s a -> s{_bgAlt = a})
+instance GoogleAuth BookshelvesGet' where
+        authKey = bgKey . _Just
+        authToken = bgOAuthToken . _Just
 
 instance GoogleRequest BookshelvesGet' where
         type Rs BookshelvesGet' = Bookshelf
         request = requestWithRoute defReq booksURL
         requestWithRoute r u BookshelvesGet'{..}
-          = go _bgQuotaUser (Just _bgPrettyPrint) _bgUserIp
+          = go _bgQuotaUser (Just _bgPrettyPrint) _bgUserIP
               _bgUserId
               _bgShelf
               _bgKey
               _bgSource
-              _bgOauthToken
+              _bgOAuthToken
               _bgFields
-              (Just _bgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy BookshelvesGetResource)

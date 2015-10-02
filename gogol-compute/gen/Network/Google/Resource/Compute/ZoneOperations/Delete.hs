@@ -34,12 +34,11 @@ module Network.Google.Resource.Compute.ZoneOperations.Delete
     , zodPrettyPrint
     , zodProject
     , zodOperation
-    , zodUserIp
+    , zodUserIP
     , zodZone
     , zodKey
-    , zodOauthToken
+    , zodOAuthToken
     , zodFields
-    , zodAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -56,10 +55,10 @@ type ZoneOperationsDeleteResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Delete '[JSON] ()
+                           QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes the specified zone-specific Operations resource.
 --
@@ -69,12 +68,11 @@ data ZoneOperationsDelete' = ZoneOperationsDelete'
     , _zodPrettyPrint :: !Bool
     , _zodProject     :: !Text
     , _zodOperation   :: !Text
-    , _zodUserIp      :: !(Maybe Text)
+    , _zodUserIP      :: !(Maybe Text)
     , _zodZone        :: !Text
-    , _zodKey         :: !(Maybe Text)
-    , _zodOauthToken  :: !(Maybe Text)
+    , _zodKey         :: !(Maybe Key)
+    , _zodOAuthToken  :: !(Maybe OAuthToken)
     , _zodFields      :: !(Maybe Text)
-    , _zodAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZoneOperationsDelete'' with the minimum fields required to make a request.
@@ -89,17 +87,15 @@ data ZoneOperationsDelete' = ZoneOperationsDelete'
 --
 -- * 'zodOperation'
 --
--- * 'zodUserIp'
+-- * 'zodUserIP'
 --
 -- * 'zodZone'
 --
 -- * 'zodKey'
 --
--- * 'zodOauthToken'
+-- * 'zodOAuthToken'
 --
 -- * 'zodFields'
---
--- * 'zodAlt'
 zoneOperationsDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'operation'
@@ -111,12 +107,11 @@ zoneOperationsDelete' pZodProject_ pZodOperation_ pZodZone_ =
     , _zodPrettyPrint = True
     , _zodProject = pZodProject_
     , _zodOperation = pZodOperation_
-    , _zodUserIp = Nothing
+    , _zodUserIP = Nothing
     , _zodZone = pZodZone_
     , _zodKey = Nothing
-    , _zodOauthToken = Nothing
+    , _zodOAuthToken = Nothing
     , _zodFields = Nothing
-    , _zodAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -144,9 +139,9 @@ zodOperation
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-zodUserIp :: Lens' ZoneOperationsDelete' (Maybe Text)
-zodUserIp
-  = lens _zodUserIp (\ s a -> s{_zodUserIp = a})
+zodUserIP :: Lens' ZoneOperationsDelete' (Maybe Text)
+zodUserIP
+  = lens _zodUserIP (\ s a -> s{_zodUserIP = a})
 
 -- | Name of the zone scoping this request.
 zodZone :: Lens' ZoneOperationsDelete' Text
@@ -155,23 +150,23 @@ zodZone = lens _zodZone (\ s a -> s{_zodZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-zodKey :: Lens' ZoneOperationsDelete' (Maybe Text)
+zodKey :: Lens' ZoneOperationsDelete' (Maybe Key)
 zodKey = lens _zodKey (\ s a -> s{_zodKey = a})
 
 -- | OAuth 2.0 token for the current user.
-zodOauthToken :: Lens' ZoneOperationsDelete' (Maybe Text)
-zodOauthToken
-  = lens _zodOauthToken
-      (\ s a -> s{_zodOauthToken = a})
+zodOAuthToken :: Lens' ZoneOperationsDelete' (Maybe OAuthToken)
+zodOAuthToken
+  = lens _zodOAuthToken
+      (\ s a -> s{_zodOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 zodFields :: Lens' ZoneOperationsDelete' (Maybe Text)
 zodFields
   = lens _zodFields (\ s a -> s{_zodFields = a})
 
--- | Data format for the response.
-zodAlt :: Lens' ZoneOperationsDelete' Alt
-zodAlt = lens _zodAlt (\ s a -> s{_zodAlt = a})
+instance GoogleAuth ZoneOperationsDelete' where
+        authKey = zodKey . _Just
+        authToken = zodOAuthToken . _Just
 
 instance GoogleRequest ZoneOperationsDelete' where
         type Rs ZoneOperationsDelete' = ()
@@ -179,12 +174,12 @@ instance GoogleRequest ZoneOperationsDelete' where
         requestWithRoute r u ZoneOperationsDelete'{..}
           = go _zodQuotaUser (Just _zodPrettyPrint) _zodProject
               _zodOperation
-              _zodUserIp
+              _zodUserIP
               _zodZone
               _zodKey
-              _zodOauthToken
+              _zodOAuthToken
               _zodFields
-              (Just _zodAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ZoneOperationsDeleteResource)

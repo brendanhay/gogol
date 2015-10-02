@@ -33,13 +33,13 @@ module Network.Google.Resource.Compute.InstanceGroups.RemoveInstances
     , igriQuotaUser
     , igriPrettyPrint
     , igriProject
-    , igriUserIp
+    , igriUserIP
+    , igriInstanceGroupsRemoveInstancesRequest
     , igriZone
     , igriKey
-    , igriOauthToken
+    , igriOAuthToken
     , igriInstanceGroup
     , igriFields
-    , igriAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -57,25 +57,28 @@ type InstanceGroupsRemoveInstancesResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Post '[JSON] Operation
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON]
+                                 InstanceGroupsRemoveInstancesRequest
+                                 :> Post '[JSON] Operation
 
 -- | Removes a list of instances from an instance group.
 --
 -- /See:/ 'instanceGroupsRemoveInstances'' smart constructor.
 data InstanceGroupsRemoveInstances' = InstanceGroupsRemoveInstances'
-    { _igriQuotaUser     :: !(Maybe Text)
-    , _igriPrettyPrint   :: !Bool
-    , _igriProject       :: !Text
-    , _igriUserIp        :: !(Maybe Text)
-    , _igriZone          :: !Text
-    , _igriKey           :: !(Maybe Text)
-    , _igriOauthToken    :: !(Maybe Text)
-    , _igriInstanceGroup :: !Text
-    , _igriFields        :: !(Maybe Text)
-    , _igriAlt           :: !Alt
+    { _igriQuotaUser                            :: !(Maybe Text)
+    , _igriPrettyPrint                          :: !Bool
+    , _igriProject                              :: !Text
+    , _igriUserIP                               :: !(Maybe Text)
+    , _igriInstanceGroupsRemoveInstancesRequest :: !InstanceGroupsRemoveInstancesRequest
+    , _igriZone                                 :: !Text
+    , _igriKey                                  :: !(Maybe Key)
+    , _igriOAuthToken                           :: !(Maybe OAuthToken)
+    , _igriInstanceGroup                        :: !Text
+    , _igriFields                               :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupsRemoveInstances'' with the minimum fields required to make a request.
@@ -88,36 +91,37 @@ data InstanceGroupsRemoveInstances' = InstanceGroupsRemoveInstances'
 --
 -- * 'igriProject'
 --
--- * 'igriUserIp'
+-- * 'igriUserIP'
+--
+-- * 'igriInstanceGroupsRemoveInstancesRequest'
 --
 -- * 'igriZone'
 --
 -- * 'igriKey'
 --
--- * 'igriOauthToken'
+-- * 'igriOAuthToken'
 --
 -- * 'igriInstanceGroup'
 --
 -- * 'igriFields'
---
--- * 'igriAlt'
 instanceGroupsRemoveInstances'
     :: Text -- ^ 'project'
+    -> InstanceGroupsRemoveInstancesRequest -- ^ 'InstanceGroupsRemoveInstancesRequest'
     -> Text -- ^ 'zone'
     -> Text -- ^ 'instanceGroup'
     -> InstanceGroupsRemoveInstances'
-instanceGroupsRemoveInstances' pIgriProject_ pIgriZone_ pIgriInstanceGroup_ =
+instanceGroupsRemoveInstances' pIgriProject_ pIgriInstanceGroupsRemoveInstancesRequest_ pIgriZone_ pIgriInstanceGroup_ =
     InstanceGroupsRemoveInstances'
     { _igriQuotaUser = Nothing
     , _igriPrettyPrint = True
     , _igriProject = pIgriProject_
-    , _igriUserIp = Nothing
+    , _igriUserIP = Nothing
+    , _igriInstanceGroupsRemoveInstancesRequest = pIgriInstanceGroupsRemoveInstancesRequest_
     , _igriZone = pIgriZone_
     , _igriKey = Nothing
-    , _igriOauthToken = Nothing
+    , _igriOAuthToken = Nothing
     , _igriInstanceGroup = pIgriInstanceGroup_
     , _igriFields = Nothing
-    , _igriAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -141,9 +145,16 @@ igriProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-igriUserIp :: Lens' InstanceGroupsRemoveInstances' (Maybe Text)
-igriUserIp
-  = lens _igriUserIp (\ s a -> s{_igriUserIp = a})
+igriUserIP :: Lens' InstanceGroupsRemoveInstances' (Maybe Text)
+igriUserIP
+  = lens _igriUserIP (\ s a -> s{_igriUserIP = a})
+
+-- | Multipart request metadata.
+igriInstanceGroupsRemoveInstancesRequest :: Lens' InstanceGroupsRemoveInstances' InstanceGroupsRemoveInstancesRequest
+igriInstanceGroupsRemoveInstancesRequest
+  = lens _igriInstanceGroupsRemoveInstancesRequest
+      (\ s a ->
+         s{_igriInstanceGroupsRemoveInstancesRequest = a})
 
 -- | The URL of the zone where the instance group is located.
 igriZone :: Lens' InstanceGroupsRemoveInstances' Text
@@ -152,14 +163,14 @@ igriZone = lens _igriZone (\ s a -> s{_igriZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-igriKey :: Lens' InstanceGroupsRemoveInstances' (Maybe Text)
+igriKey :: Lens' InstanceGroupsRemoveInstances' (Maybe Key)
 igriKey = lens _igriKey (\ s a -> s{_igriKey = a})
 
 -- | OAuth 2.0 token for the current user.
-igriOauthToken :: Lens' InstanceGroupsRemoveInstances' (Maybe Text)
-igriOauthToken
-  = lens _igriOauthToken
-      (\ s a -> s{_igriOauthToken = a})
+igriOAuthToken :: Lens' InstanceGroupsRemoveInstances' (Maybe OAuthToken)
+igriOAuthToken
+  = lens _igriOAuthToken
+      (\ s a -> s{_igriOAuthToken = a})
 
 -- | The name of the instance group where the specified instances will be
 -- removed.
@@ -173,9 +184,10 @@ igriFields :: Lens' InstanceGroupsRemoveInstances' (Maybe Text)
 igriFields
   = lens _igriFields (\ s a -> s{_igriFields = a})
 
--- | Data format for the response.
-igriAlt :: Lens' InstanceGroupsRemoveInstances' Alt
-igriAlt = lens _igriAlt (\ s a -> s{_igriAlt = a})
+instance GoogleAuth InstanceGroupsRemoveInstances'
+         where
+        authKey = igriKey . _Just
+        authToken = igriOAuthToken . _Just
 
 instance GoogleRequest InstanceGroupsRemoveInstances'
          where
@@ -185,13 +197,14 @@ instance GoogleRequest InstanceGroupsRemoveInstances'
           InstanceGroupsRemoveInstances'{..}
           = go _igriQuotaUser (Just _igriPrettyPrint)
               _igriProject
-              _igriUserIp
+              _igriUserIP
               _igriZone
               _igriKey
-              _igriOauthToken
+              _igriOAuthToken
               _igriInstanceGroup
               _igriFields
-              (Just _igriAlt)
+              (Just AltJSON)
+              _igriInstanceGroupsRemoveInstancesRequest
           where go
                   = clientWithRoute
                       (Proxy ::

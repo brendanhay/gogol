@@ -30,14 +30,14 @@ module Network.Google.Resource.Calendar.CalendarList.Insert
     , CalendarListInsert'
 
     -- * Request Lenses
+    , cliCalendarListEntry
     , cliQuotaUser
     , cliPrettyPrint
-    , cliUserIp
+    , cliUserIP
     , cliColorRgbFormat
     , cliKey
-    , cliOauthToken
+    , cliOAuthToken
     , cliFields
-    , cliAlt
     ) where
 
 import           Network.Google.AppsCalendar.Types
@@ -53,58 +53,66 @@ type CalendarListInsertResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "colorRgbFormat" Bool :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :>
-                           Post '[JSON] CalendarListEntry
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] CalendarListEntry :>
+                             Post '[JSON] CalendarListEntry
 
 -- | Adds an entry to the user\'s calendar list.
 --
 -- /See:/ 'calendarListInsert'' smart constructor.
 data CalendarListInsert' = CalendarListInsert'
-    { _cliQuotaUser      :: !(Maybe Text)
-    , _cliPrettyPrint    :: !Bool
-    , _cliUserIp         :: !(Maybe Text)
-    , _cliColorRgbFormat :: !(Maybe Bool)
-    , _cliKey            :: !(Maybe Text)
-    , _cliOauthToken     :: !(Maybe Text)
-    , _cliFields         :: !(Maybe Text)
-    , _cliAlt            :: !Alt
+    { _cliCalendarListEntry :: !CalendarListEntry
+    , _cliQuotaUser         :: !(Maybe Text)
+    , _cliPrettyPrint       :: !Bool
+    , _cliUserIP            :: !(Maybe Text)
+    , _cliColorRgbFormat    :: !(Maybe Bool)
+    , _cliKey               :: !(Maybe Key)
+    , _cliOAuthToken        :: !(Maybe OAuthToken)
+    , _cliFields            :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CalendarListInsert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'cliCalendarListEntry'
+--
 -- * 'cliQuotaUser'
 --
 -- * 'cliPrettyPrint'
 --
--- * 'cliUserIp'
+-- * 'cliUserIP'
 --
 -- * 'cliColorRgbFormat'
 --
 -- * 'cliKey'
 --
--- * 'cliOauthToken'
+-- * 'cliOAuthToken'
 --
 -- * 'cliFields'
---
--- * 'cliAlt'
 calendarListInsert'
-    :: CalendarListInsert'
-calendarListInsert' =
+    :: CalendarListEntry -- ^ 'CalendarListEntry'
+    -> CalendarListInsert'
+calendarListInsert' pCliCalendarListEntry_ =
     CalendarListInsert'
-    { _cliQuotaUser = Nothing
+    { _cliCalendarListEntry = pCliCalendarListEntry_
+    , _cliQuotaUser = Nothing
     , _cliPrettyPrint = True
-    , _cliUserIp = Nothing
+    , _cliUserIP = Nothing
     , _cliColorRgbFormat = Nothing
     , _cliKey = Nothing
-    , _cliOauthToken = Nothing
+    , _cliOAuthToken = Nothing
     , _cliFields = Nothing
-    , _cliAlt = JSON
     }
+
+-- | Multipart request metadata.
+cliCalendarListEntry :: Lens' CalendarListInsert' CalendarListEntry
+cliCalendarListEntry
+  = lens _cliCalendarListEntry
+      (\ s a -> s{_cliCalendarListEntry = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -121,9 +129,9 @@ cliPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cliUserIp :: Lens' CalendarListInsert' (Maybe Text)
-cliUserIp
-  = lens _cliUserIp (\ s a -> s{_cliUserIp = a})
+cliUserIP :: Lens' CalendarListInsert' (Maybe Text)
+cliUserIP
+  = lens _cliUserIP (\ s a -> s{_cliUserIP = a})
 
 -- | Whether to use the foregroundColor and backgroundColor fields to write
 -- the calendar colors (RGB). If this feature is used, the index-based
@@ -137,34 +145,35 @@ cliColorRgbFormat
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cliKey :: Lens' CalendarListInsert' (Maybe Text)
+cliKey :: Lens' CalendarListInsert' (Maybe Key)
 cliKey = lens _cliKey (\ s a -> s{_cliKey = a})
 
 -- | OAuth 2.0 token for the current user.
-cliOauthToken :: Lens' CalendarListInsert' (Maybe Text)
-cliOauthToken
-  = lens _cliOauthToken
-      (\ s a -> s{_cliOauthToken = a})
+cliOAuthToken :: Lens' CalendarListInsert' (Maybe OAuthToken)
+cliOAuthToken
+  = lens _cliOAuthToken
+      (\ s a -> s{_cliOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cliFields :: Lens' CalendarListInsert' (Maybe Text)
 cliFields
   = lens _cliFields (\ s a -> s{_cliFields = a})
 
--- | Data format for the response.
-cliAlt :: Lens' CalendarListInsert' Alt
-cliAlt = lens _cliAlt (\ s a -> s{_cliAlt = a})
+instance GoogleAuth CalendarListInsert' where
+        authKey = cliKey . _Just
+        authToken = cliOAuthToken . _Just
 
 instance GoogleRequest CalendarListInsert' where
         type Rs CalendarListInsert' = CalendarListEntry
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u CalendarListInsert'{..}
-          = go _cliQuotaUser (Just _cliPrettyPrint) _cliUserIp
+          = go _cliQuotaUser (Just _cliPrettyPrint) _cliUserIP
               _cliColorRgbFormat
               _cliKey
-              _cliOauthToken
+              _cliOAuthToken
               _cliFields
-              (Just _cliAlt)
+              (Just AltJSON)
+              _cliCalendarListEntry
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CalendarListInsertResource)

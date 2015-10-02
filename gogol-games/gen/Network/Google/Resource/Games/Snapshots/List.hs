@@ -33,15 +33,14 @@ module Network.Google.Resource.Games.Snapshots.List
     -- * Request Lenses
     , slQuotaUser
     , slPrettyPrint
-    , slUserIp
+    , slUserIP
     , slKey
     , slLanguage
     , slPageToken
-    , slOauthToken
+    , slOAuthToken
     , slPlayerId
     , slMaxResults
     , slFields
-    , slAlt
     ) where
 
 import           Network.Google.Games.Types
@@ -56,13 +55,13 @@ type SnapshotsListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "language" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "maxResults" Int32 :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :>
+                             QueryParam "alt" AltJSON :>
                                Get '[JSON] SnapshotListResponse
 
 -- | Retrieves a list of snapshots created by your application for the player
@@ -72,15 +71,14 @@ type SnapshotsListResource =
 data SnapshotsList' = SnapshotsList'
     { _slQuotaUser   :: !(Maybe Text)
     , _slPrettyPrint :: !Bool
-    , _slUserIp      :: !(Maybe Text)
-    , _slKey         :: !(Maybe Text)
+    , _slUserIP      :: !(Maybe Text)
+    , _slKey         :: !(Maybe Key)
     , _slLanguage    :: !(Maybe Text)
     , _slPageToken   :: !(Maybe Text)
-    , _slOauthToken  :: !(Maybe Text)
+    , _slOAuthToken  :: !(Maybe OAuthToken)
     , _slPlayerId    :: !Text
     , _slMaxResults  :: !(Maybe Int32)
     , _slFields      :: !(Maybe Text)
-    , _slAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SnapshotsList'' with the minimum fields required to make a request.
@@ -91,7 +89,7 @@ data SnapshotsList' = SnapshotsList'
 --
 -- * 'slPrettyPrint'
 --
--- * 'slUserIp'
+-- * 'slUserIP'
 --
 -- * 'slKey'
 --
@@ -99,15 +97,13 @@ data SnapshotsList' = SnapshotsList'
 --
 -- * 'slPageToken'
 --
--- * 'slOauthToken'
+-- * 'slOAuthToken'
 --
 -- * 'slPlayerId'
 --
 -- * 'slMaxResults'
 --
 -- * 'slFields'
---
--- * 'slAlt'
 snapshotsList'
     :: Text -- ^ 'playerId'
     -> SnapshotsList'
@@ -115,15 +111,14 @@ snapshotsList' pSlPlayerId_ =
     SnapshotsList'
     { _slQuotaUser = Nothing
     , _slPrettyPrint = True
-    , _slUserIp = Nothing
+    , _slUserIP = Nothing
     , _slKey = Nothing
     , _slLanguage = Nothing
     , _slPageToken = Nothing
-    , _slOauthToken = Nothing
+    , _slOAuthToken = Nothing
     , _slPlayerId = pSlPlayerId_
     , _slMaxResults = Nothing
     , _slFields = Nothing
-    , _slAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -141,13 +136,13 @@ slPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-slUserIp :: Lens' SnapshotsList' (Maybe Text)
-slUserIp = lens _slUserIp (\ s a -> s{_slUserIp = a})
+slUserIP :: Lens' SnapshotsList' (Maybe Text)
+slUserIP = lens _slUserIP (\ s a -> s{_slUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-slKey :: Lens' SnapshotsList' (Maybe Text)
+slKey :: Lens' SnapshotsList' (Maybe Key)
 slKey = lens _slKey (\ s a -> s{_slKey = a})
 
 -- | The preferred language to use for strings returned by this method.
@@ -161,9 +156,9 @@ slPageToken
   = lens _slPageToken (\ s a -> s{_slPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-slOauthToken :: Lens' SnapshotsList' (Maybe Text)
-slOauthToken
-  = lens _slOauthToken (\ s a -> s{_slOauthToken = a})
+slOAuthToken :: Lens' SnapshotsList' (Maybe OAuthToken)
+slOAuthToken
+  = lens _slOAuthToken (\ s a -> s{_slOAuthToken = a})
 
 -- | A player ID. A value of me may be used in place of the authenticated
 -- player\'s ID.
@@ -182,23 +177,23 @@ slMaxResults
 slFields :: Lens' SnapshotsList' (Maybe Text)
 slFields = lens _slFields (\ s a -> s{_slFields = a})
 
--- | Data format for the response.
-slAlt :: Lens' SnapshotsList' Alt
-slAlt = lens _slAlt (\ s a -> s{_slAlt = a})
+instance GoogleAuth SnapshotsList' where
+        authKey = slKey . _Just
+        authToken = slOAuthToken . _Just
 
 instance GoogleRequest SnapshotsList' where
         type Rs SnapshotsList' = SnapshotListResponse
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u SnapshotsList'{..}
-          = go _slQuotaUser (Just _slPrettyPrint) _slUserIp
+          = go _slQuotaUser (Just _slPrettyPrint) _slUserIP
               _slKey
               _slLanguage
               _slPageToken
-              _slOauthToken
+              _slOAuthToken
               _slPlayerId
               _slMaxResults
               _slFields
-              (Just _slAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy SnapshotsListResource)

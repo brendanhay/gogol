@@ -32,11 +32,10 @@ module Network.Google.Resource.DFAReporting.UserProfiles.List
     -- * Request Lenses
     , uplQuotaUser
     , uplPrettyPrint
-    , uplUserIp
+    , uplUserIP
     , uplKey
-    , uplOauthToken
+    , uplOAuthToken
     , uplFields
-    , uplAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -49,10 +48,11 @@ type UserProfilesListResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
-               QueryParam "oauth_token" Text :>
+             QueryParam "key" Key :>
+               QueryParam "oauth_token" OAuthToken :>
                  QueryParam "fields" Text :>
-                   QueryParam "alt" Alt :> Get '[JSON] UserProfileList
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] UserProfileList
 
 -- | Retrieves list of user profiles for a user.
 --
@@ -60,11 +60,10 @@ type UserProfilesListResource =
 data UserProfilesList' = UserProfilesList'
     { _uplQuotaUser   :: !(Maybe Text)
     , _uplPrettyPrint :: !Bool
-    , _uplUserIp      :: !(Maybe Text)
-    , _uplKey         :: !(Maybe Text)
-    , _uplOauthToken  :: !(Maybe Text)
+    , _uplUserIP      :: !(Maybe Text)
+    , _uplKey         :: !(Maybe Key)
+    , _uplOAuthToken  :: !(Maybe OAuthToken)
     , _uplFields      :: !(Maybe Text)
-    , _uplAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserProfilesList'' with the minimum fields required to make a request.
@@ -75,26 +74,23 @@ data UserProfilesList' = UserProfilesList'
 --
 -- * 'uplPrettyPrint'
 --
--- * 'uplUserIp'
+-- * 'uplUserIP'
 --
 -- * 'uplKey'
 --
--- * 'uplOauthToken'
+-- * 'uplOAuthToken'
 --
 -- * 'uplFields'
---
--- * 'uplAlt'
 userProfilesList'
     :: UserProfilesList'
 userProfilesList' =
     UserProfilesList'
     { _uplQuotaUser = Nothing
     , _uplPrettyPrint = True
-    , _uplUserIp = Nothing
+    , _uplUserIP = Nothing
     , _uplKey = Nothing
-    , _uplOauthToken = Nothing
+    , _uplOAuthToken = Nothing
     , _uplFields = Nothing
-    , _uplAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -112,40 +108,40 @@ uplPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-uplUserIp :: Lens' UserProfilesList' (Maybe Text)
-uplUserIp
-  = lens _uplUserIp (\ s a -> s{_uplUserIp = a})
+uplUserIP :: Lens' UserProfilesList' (Maybe Text)
+uplUserIP
+  = lens _uplUserIP (\ s a -> s{_uplUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-uplKey :: Lens' UserProfilesList' (Maybe Text)
+uplKey :: Lens' UserProfilesList' (Maybe Key)
 uplKey = lens _uplKey (\ s a -> s{_uplKey = a})
 
 -- | OAuth 2.0 token for the current user.
-uplOauthToken :: Lens' UserProfilesList' (Maybe Text)
-uplOauthToken
-  = lens _uplOauthToken
-      (\ s a -> s{_uplOauthToken = a})
+uplOAuthToken :: Lens' UserProfilesList' (Maybe OAuthToken)
+uplOAuthToken
+  = lens _uplOAuthToken
+      (\ s a -> s{_uplOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 uplFields :: Lens' UserProfilesList' (Maybe Text)
 uplFields
   = lens _uplFields (\ s a -> s{_uplFields = a})
 
--- | Data format for the response.
-uplAlt :: Lens' UserProfilesList' Alt
-uplAlt = lens _uplAlt (\ s a -> s{_uplAlt = a})
+instance GoogleAuth UserProfilesList' where
+        authKey = uplKey . _Just
+        authToken = uplOAuthToken . _Just
 
 instance GoogleRequest UserProfilesList' where
         type Rs UserProfilesList' = UserProfileList
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u UserProfilesList'{..}
-          = go _uplQuotaUser (Just _uplPrettyPrint) _uplUserIp
+          = go _uplQuotaUser (Just _uplPrettyPrint) _uplUserIP
               _uplKey
-              _uplOauthToken
+              _uplOAuthToken
               _uplFields
-              (Just _uplAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UserProfilesListResource)

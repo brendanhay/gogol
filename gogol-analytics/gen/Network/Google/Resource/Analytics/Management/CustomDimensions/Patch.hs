@@ -35,13 +35,13 @@ module Network.Google.Resource.Analytics.Management.CustomDimensions.Patch
     , mcdpPrettyPrint
     , mcdpWebPropertyId
     , mcdpIgnoreCustomDataSourceLinks
-    , mcdpUserIp
+    , mcdpUserIP
     , mcdpAccountId
     , mcdpKey
-    , mcdpOauthToken
+    , mcdpOAuthToken
+    , mcdpCustomDimension
     , mcdpCustomDimensionId
     , mcdpFields
-    , mcdpAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -61,11 +61,12 @@ type ManagementCustomDimensionsPatchResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "ignoreCustomDataSourceLinks" Bool :>
                          QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "fields" Text :>
-                                 QueryParam "alt" Alt :>
-                                   Patch '[JSON] CustomDimension
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON] CustomDimension :>
+                                     Patch '[JSON] CustomDimension
 
 -- | Updates an existing custom dimension. This method supports patch
 -- semantics.
@@ -76,13 +77,13 @@ data ManagementCustomDimensionsPatch' = ManagementCustomDimensionsPatch'
     , _mcdpPrettyPrint                 :: !Bool
     , _mcdpWebPropertyId               :: !Text
     , _mcdpIgnoreCustomDataSourceLinks :: !Bool
-    , _mcdpUserIp                      :: !(Maybe Text)
+    , _mcdpUserIP                      :: !(Maybe Text)
     , _mcdpAccountId                   :: !Text
-    , _mcdpKey                         :: !(Maybe Text)
-    , _mcdpOauthToken                  :: !(Maybe Text)
+    , _mcdpKey                         :: !(Maybe Key)
+    , _mcdpOAuthToken                  :: !(Maybe OAuthToken)
+    , _mcdpCustomDimension             :: !CustomDimension
     , _mcdpCustomDimensionId           :: !Text
     , _mcdpFields                      :: !(Maybe Text)
-    , _mcdpAlt                         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementCustomDimensionsPatch'' with the minimum fields required to make a request.
@@ -97,37 +98,38 @@ data ManagementCustomDimensionsPatch' = ManagementCustomDimensionsPatch'
 --
 -- * 'mcdpIgnoreCustomDataSourceLinks'
 --
--- * 'mcdpUserIp'
+-- * 'mcdpUserIP'
 --
 -- * 'mcdpAccountId'
 --
 -- * 'mcdpKey'
 --
--- * 'mcdpOauthToken'
+-- * 'mcdpOAuthToken'
+--
+-- * 'mcdpCustomDimension'
 --
 -- * 'mcdpCustomDimensionId'
 --
 -- * 'mcdpFields'
---
--- * 'mcdpAlt'
 managementCustomDimensionsPatch'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'accountId'
+    -> CustomDimension -- ^ 'CustomDimension'
     -> Text -- ^ 'customDimensionId'
     -> ManagementCustomDimensionsPatch'
-managementCustomDimensionsPatch' pMcdpWebPropertyId_ pMcdpAccountId_ pMcdpCustomDimensionId_ =
+managementCustomDimensionsPatch' pMcdpWebPropertyId_ pMcdpAccountId_ pMcdpCustomDimension_ pMcdpCustomDimensionId_ =
     ManagementCustomDimensionsPatch'
     { _mcdpQuotaUser = Nothing
     , _mcdpPrettyPrint = False
     , _mcdpWebPropertyId = pMcdpWebPropertyId_
     , _mcdpIgnoreCustomDataSourceLinks = False
-    , _mcdpUserIp = Nothing
+    , _mcdpUserIP = Nothing
     , _mcdpAccountId = pMcdpAccountId_
     , _mcdpKey = Nothing
-    , _mcdpOauthToken = Nothing
+    , _mcdpOAuthToken = Nothing
+    , _mcdpCustomDimension = pMcdpCustomDimension_
     , _mcdpCustomDimensionId = pMcdpCustomDimensionId_
     , _mcdpFields = Nothing
-    , _mcdpAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -159,9 +161,9 @@ mcdpIgnoreCustomDataSourceLinks
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mcdpUserIp :: Lens' ManagementCustomDimensionsPatch' (Maybe Text)
-mcdpUserIp
-  = lens _mcdpUserIp (\ s a -> s{_mcdpUserIp = a})
+mcdpUserIP :: Lens' ManagementCustomDimensionsPatch' (Maybe Text)
+mcdpUserIP
+  = lens _mcdpUserIP (\ s a -> s{_mcdpUserIP = a})
 
 -- | Account ID for the custom dimension to update.
 mcdpAccountId :: Lens' ManagementCustomDimensionsPatch' Text
@@ -172,14 +174,20 @@ mcdpAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mcdpKey :: Lens' ManagementCustomDimensionsPatch' (Maybe Text)
+mcdpKey :: Lens' ManagementCustomDimensionsPatch' (Maybe Key)
 mcdpKey = lens _mcdpKey (\ s a -> s{_mcdpKey = a})
 
 -- | OAuth 2.0 token for the current user.
-mcdpOauthToken :: Lens' ManagementCustomDimensionsPatch' (Maybe Text)
-mcdpOauthToken
-  = lens _mcdpOauthToken
-      (\ s a -> s{_mcdpOauthToken = a})
+mcdpOAuthToken :: Lens' ManagementCustomDimensionsPatch' (Maybe OAuthToken)
+mcdpOAuthToken
+  = lens _mcdpOAuthToken
+      (\ s a -> s{_mcdpOAuthToken = a})
+
+-- | Multipart request metadata.
+mcdpCustomDimension :: Lens' ManagementCustomDimensionsPatch' CustomDimension
+mcdpCustomDimension
+  = lens _mcdpCustomDimension
+      (\ s a -> s{_mcdpCustomDimension = a})
 
 -- | Custom dimension ID for the custom dimension to update.
 mcdpCustomDimensionId :: Lens' ManagementCustomDimensionsPatch' Text
@@ -192,9 +200,10 @@ mcdpFields :: Lens' ManagementCustomDimensionsPatch' (Maybe Text)
 mcdpFields
   = lens _mcdpFields (\ s a -> s{_mcdpFields = a})
 
--- | Data format for the response.
-mcdpAlt :: Lens' ManagementCustomDimensionsPatch' Alt
-mcdpAlt = lens _mcdpAlt (\ s a -> s{_mcdpAlt = a})
+instance GoogleAuth ManagementCustomDimensionsPatch'
+         where
+        authKey = mcdpKey . _Just
+        authToken = mcdpOAuthToken . _Just
 
 instance GoogleRequest
          ManagementCustomDimensionsPatch' where
@@ -206,13 +215,14 @@ instance GoogleRequest
           = go _mcdpQuotaUser (Just _mcdpPrettyPrint)
               _mcdpWebPropertyId
               (Just _mcdpIgnoreCustomDataSourceLinks)
-              _mcdpUserIp
+              _mcdpUserIP
               _mcdpAccountId
               _mcdpKey
-              _mcdpOauthToken
+              _mcdpOAuthToken
               _mcdpCustomDimensionId
               _mcdpFields
-              (Just _mcdpAlt)
+              (Just AltJSON)
+              _mcdpCustomDimension
           where go
                   = clientWithRoute
                       (Proxy ::

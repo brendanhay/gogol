@@ -59,8 +59,8 @@ module Network.Google.SQLAdmin.Types
     , importContext
     , icDatabase
     , icKind
-    , icCsvImportOptions
-    , icUri
+    , icCSVImportOptions
+    , icURI
     , icFileType
 
     -- * Settings
@@ -72,7 +72,7 @@ module Network.Google.SQLAdmin.Types
     , sAuthorizedGaeApplications
     , sKind
     , sPricingPlan
-    , sIpConfiguration
+    , sIPConfiguration
     , sDatabaseReplicationEnabled
     , sTier
     , sDatabaseFlags
@@ -100,7 +100,7 @@ module Network.Google.SQLAdmin.Types
     -- * IPMapping
     , IPMapping
     , iPMapping
-    , imIpAddress
+    , imIPAddress
     , imTimeToRetire
 
     -- * Operation
@@ -138,11 +138,11 @@ module Network.Google.SQLAdmin.Types
     -- * ExportContext
     , ExportContext
     , exportContext
-    , ecCsvExportOptions
+    , ecCSVExportOptions
     , ecKind
-    , ecUri
+    , ecURI
     , ecFileType
-    , ecSqlExportOptions
+    , ecSQLExportOptions
     , ecDatabases
 
     -- * UsersListResponse
@@ -168,8 +168,8 @@ module Network.Google.SQLAdmin.Types
     , IPConfiguration
     , iPConfiguration
     , icAuthorizedNetworks
-    , icRequireSsl
-    , icIpv4Enabled
+    , icRequireSSL
+    , icIPv4Enabled
 
     -- * ExportContextCSVExportOptions
     , ExportContextCSVExportOptions
@@ -205,7 +205,7 @@ module Network.Google.SQLAdmin.Types
     , datOnPremisesConfiguration
     , datEtag
     , datState
-    , datIpv6Address
+    , datIPv6Address
     , datServerCaCert
     , datDatabaseVersion
     , datProject
@@ -220,7 +220,7 @@ module Network.Google.SQLAdmin.Types
     , datReplicaConfiguration
     , datRegion
     , datServiceAccountEmailAddress
-    , datIpAddresses
+    , datIPAddresses
 
     -- * Flag
     , Flag
@@ -262,20 +262,20 @@ module Network.Google.SQLAdmin.Types
     , aeName
     , aeExpirationTime
 
-    -- * MySqlReplicaConfiguration
-    , MySqlReplicaConfiguration
-    , mySqlReplicaConfiguration
-    , msrcVerifyServerCertificate
-    , msrcKind
-    , msrcClientKey
-    , msrcUsername
-    , msrcSslCipher
-    , msrcMasterHeartbeatPeriod
-    , msrcConnectRetryInterval
-    , msrcClientCertificate
-    , msrcCaCertificate
-    , msrcDumpFilePath
-    , msrcPassword
+    -- * MySQLReplicaConfiguration
+    , MySQLReplicaConfiguration
+    , mySQLReplicaConfiguration
+    , msqlrcVerifyServerCertificate
+    , msqlrcKind
+    , msqlrcClientKey
+    , msqlrcUsername
+    , msqlrcSSLCipher
+    , msqlrcMasterHeartbeatPeriod
+    , msqlrcConnectRetryInterval
+    , msqlrcClientCertificate
+    , msqlrcCaCertificate
+    , msqlrcDumpFilePath
+    , msqlrcPassword
 
     -- * Tier
     , Tier
@@ -368,11 +368,11 @@ module Network.Google.SQLAdmin.Types
     , bcKind
     , bcBinaryLogEnabled
 
-    -- * ExportContextSqlExportOptions
-    , ExportContextSqlExportOptions
-    , exportContextSqlExportOptions
-    , ecseoSchemaOnly
-    , ecseoTables
+    -- * ExportContextSQLExportOptions
+    , ExportContextSQLExportOptions
+    , exportContextSQLExportOptions
+    , ecsqleoSchemaOnly
+    , ecsqleoTables
 
     -- * RestoreBackupContext
     , RestoreBackupContext
@@ -380,9 +380,6 @@ module Network.Google.SQLAdmin.Types
     , rbcInstanceId
     , rbcBackupRunId
     , rbcKind
-
-    -- * Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.Prelude

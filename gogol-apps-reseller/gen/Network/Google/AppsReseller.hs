@@ -93,7 +93,7 @@ module Network.Google.AppsReseller
     -- ** Customer
     , Customer
     , customer
-    , cResourceUiUrl
+    , cResourceUiURL
     , cKind
     , cCustomerId
     , cAlternateEmail
@@ -147,7 +147,7 @@ module Network.Google.AppsReseller
     , subuBillingMethod
     , subuStatus
     , subuTrialSettings
-    , subuResourceUiUrl
+    , subuResourceUiURL
     , subuKind
     , subuSkuId
     , subuPlan
@@ -170,9 +170,6 @@ module Network.Google.AppsReseller
     , subscriptionTransferInfo
     , stiTransferabilityExpirationTime
     , stiMinimumTransferableSeats
-
-    -- ** Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.AppsReseller.Types

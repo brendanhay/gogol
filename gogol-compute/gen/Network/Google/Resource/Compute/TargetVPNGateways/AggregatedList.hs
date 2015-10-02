@@ -33,14 +33,13 @@ module Network.Google.Resource.Compute.TargetVPNGateways.AggregatedList
     , tvgalQuotaUser
     , tvgalPrettyPrint
     , tvgalProject
-    , tvgalUserIp
+    , tvgalUserIP
     , tvgalKey
     , tvgalFilter
     , tvgalPageToken
-    , tvgalOauthToken
+    , tvgalOAuthToken
     , tvgalMaxResults
     , tvgalFields
-    , tvgalAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -55,13 +54,13 @@ type TargetVPNGatewaysAggregatedListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "filter" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "maxResults" Word32 :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :>
+                             QueryParam "alt" AltJSON :>
                                Get '[JSON] TargetVPNGatewayAggregatedList
 
 -- | Retrieves the list of target VPN gateways grouped by scope.
@@ -71,14 +70,13 @@ data TargetVPNGatewaysAggregatedList' = TargetVPNGatewaysAggregatedList'
     { _tvgalQuotaUser   :: !(Maybe Text)
     , _tvgalPrettyPrint :: !Bool
     , _tvgalProject     :: !Text
-    , _tvgalUserIp      :: !(Maybe Text)
-    , _tvgalKey         :: !(Maybe Text)
+    , _tvgalUserIP      :: !(Maybe Text)
+    , _tvgalKey         :: !(Maybe Key)
     , _tvgalFilter      :: !(Maybe Text)
     , _tvgalPageToken   :: !(Maybe Text)
-    , _tvgalOauthToken  :: !(Maybe Text)
+    , _tvgalOAuthToken  :: !(Maybe OAuthToken)
     , _tvgalMaxResults  :: !Word32
     , _tvgalFields      :: !(Maybe Text)
-    , _tvgalAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetVPNGatewaysAggregatedList'' with the minimum fields required to make a request.
@@ -91,7 +89,7 @@ data TargetVPNGatewaysAggregatedList' = TargetVPNGatewaysAggregatedList'
 --
 -- * 'tvgalProject'
 --
--- * 'tvgalUserIp'
+-- * 'tvgalUserIP'
 --
 -- * 'tvgalKey'
 --
@@ -99,13 +97,11 @@ data TargetVPNGatewaysAggregatedList' = TargetVPNGatewaysAggregatedList'
 --
 -- * 'tvgalPageToken'
 --
--- * 'tvgalOauthToken'
+-- * 'tvgalOAuthToken'
 --
 -- * 'tvgalMaxResults'
 --
 -- * 'tvgalFields'
---
--- * 'tvgalAlt'
 targetVPNGatewaysAggregatedList'
     :: Text -- ^ 'project'
     -> TargetVPNGatewaysAggregatedList'
@@ -114,14 +110,13 @@ targetVPNGatewaysAggregatedList' pTvgalProject_ =
     { _tvgalQuotaUser = Nothing
     , _tvgalPrettyPrint = True
     , _tvgalProject = pTvgalProject_
-    , _tvgalUserIp = Nothing
+    , _tvgalUserIP = Nothing
     , _tvgalKey = Nothing
     , _tvgalFilter = Nothing
     , _tvgalPageToken = Nothing
-    , _tvgalOauthToken = Nothing
+    , _tvgalOAuthToken = Nothing
     , _tvgalMaxResults = 500
     , _tvgalFields = Nothing
-    , _tvgalAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -145,14 +140,14 @@ tvgalProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tvgalUserIp :: Lens' TargetVPNGatewaysAggregatedList' (Maybe Text)
-tvgalUserIp
-  = lens _tvgalUserIp (\ s a -> s{_tvgalUserIp = a})
+tvgalUserIP :: Lens' TargetVPNGatewaysAggregatedList' (Maybe Text)
+tvgalUserIP
+  = lens _tvgalUserIP (\ s a -> s{_tvgalUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tvgalKey :: Lens' TargetVPNGatewaysAggregatedList' (Maybe Text)
+tvgalKey :: Lens' TargetVPNGatewaysAggregatedList' (Maybe Key)
 tvgalKey = lens _tvgalKey (\ s a -> s{_tvgalKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
@@ -179,10 +174,10 @@ tvgalPageToken
       (\ s a -> s{_tvgalPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-tvgalOauthToken :: Lens' TargetVPNGatewaysAggregatedList' (Maybe Text)
-tvgalOauthToken
-  = lens _tvgalOauthToken
-      (\ s a -> s{_tvgalOauthToken = a})
+tvgalOAuthToken :: Lens' TargetVPNGatewaysAggregatedList' (Maybe OAuthToken)
+tvgalOAuthToken
+  = lens _tvgalOAuthToken
+      (\ s a -> s{_tvgalOAuthToken = a})
 
 -- | Maximum count of results to be returned.
 tvgalMaxResults :: Lens' TargetVPNGatewaysAggregatedList' Word32
@@ -195,9 +190,10 @@ tvgalFields :: Lens' TargetVPNGatewaysAggregatedList' (Maybe Text)
 tvgalFields
   = lens _tvgalFields (\ s a -> s{_tvgalFields = a})
 
--- | Data format for the response.
-tvgalAlt :: Lens' TargetVPNGatewaysAggregatedList' Alt
-tvgalAlt = lens _tvgalAlt (\ s a -> s{_tvgalAlt = a})
+instance GoogleAuth TargetVPNGatewaysAggregatedList'
+         where
+        authKey = tvgalKey . _Just
+        authToken = tvgalOAuthToken . _Just
 
 instance GoogleRequest
          TargetVPNGatewaysAggregatedList' where
@@ -208,14 +204,14 @@ instance GoogleRequest
           TargetVPNGatewaysAggregatedList'{..}
           = go _tvgalQuotaUser (Just _tvgalPrettyPrint)
               _tvgalProject
-              _tvgalUserIp
+              _tvgalUserIP
               _tvgalKey
               _tvgalFilter
               _tvgalPageToken
-              _tvgalOauthToken
+              _tvgalOAuthToken
               (Just _tvgalMaxResults)
               _tvgalFields
-              (Just _tvgalAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

@@ -34,13 +34,13 @@ module Network.Google.Resource.Blogger.Posts.Insert
     , piiQuotaUser
     , piiPrettyPrint
     , piiIsDraft
-    , piiUserIp
+    , piiUserIP
+    , piiPost
     , piiFetchImages
     , piiBlogId
     , piiKey
-    , piiOauthToken
+    , piiOAuthToken
     , piiFields
-    , piiAlt
     ) where
 
 import           Network.Google.Blogger.Types
@@ -58,10 +58,11 @@ type PostsInsertResource =
                  QueryParam "isDraft" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "fetchImages" Bool :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Post '[JSON] Post
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] Post :> Post '[JSON] Post
 
 -- | Add a post.
 --
@@ -71,13 +72,13 @@ data PostsInsert' = PostsInsert'
     , _piiQuotaUser   :: !(Maybe Text)
     , _piiPrettyPrint :: !Bool
     , _piiIsDraft     :: !(Maybe Bool)
-    , _piiUserIp      :: !(Maybe Text)
+    , _piiUserIP      :: !(Maybe Text)
+    , _piiPost        :: !Post
     , _piiFetchImages :: !(Maybe Bool)
     , _piiBlogId      :: !Text
-    , _piiKey         :: !(Maybe Text)
-    , _piiOauthToken  :: !(Maybe Text)
+    , _piiKey         :: !(Maybe Key)
+    , _piiOAuthToken  :: !(Maybe OAuthToken)
     , _piiFields      :: !(Maybe Text)
-    , _piiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostsInsert'' with the minimum fields required to make a request.
@@ -92,7 +93,9 @@ data PostsInsert' = PostsInsert'
 --
 -- * 'piiIsDraft'
 --
--- * 'piiUserIp'
+-- * 'piiUserIP'
+--
+-- * 'piiPost'
 --
 -- * 'piiFetchImages'
 --
@@ -100,27 +103,26 @@ data PostsInsert' = PostsInsert'
 --
 -- * 'piiKey'
 --
--- * 'piiOauthToken'
+-- * 'piiOAuthToken'
 --
 -- * 'piiFields'
---
--- * 'piiAlt'
 postsInsert'
-    :: Text -- ^ 'blogId'
+    :: Post -- ^ 'Post'
+    -> Text -- ^ 'blogId'
     -> PostsInsert'
-postsInsert' pPiiBlogId_ =
+postsInsert' pPiiPost_ pPiiBlogId_ =
     PostsInsert'
     { _piiFetchBody = True
     , _piiQuotaUser = Nothing
     , _piiPrettyPrint = True
     , _piiIsDraft = Nothing
-    , _piiUserIp = Nothing
+    , _piiUserIP = Nothing
+    , _piiPost = pPiiPost_
     , _piiFetchImages = Nothing
     , _piiBlogId = pPiiBlogId_
     , _piiKey = Nothing
-    , _piiOauthToken = Nothing
+    , _piiOAuthToken = Nothing
     , _piiFields = Nothing
-    , _piiAlt = JSON
     }
 
 -- | Whether the body content of the post is included with the result
@@ -149,9 +151,13 @@ piiIsDraft
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-piiUserIp :: Lens' PostsInsert' (Maybe Text)
-piiUserIp
-  = lens _piiUserIp (\ s a -> s{_piiUserIp = a})
+piiUserIP :: Lens' PostsInsert' (Maybe Text)
+piiUserIP
+  = lens _piiUserIP (\ s a -> s{_piiUserIP = a})
+
+-- | Multipart request metadata.
+piiPost :: Lens' PostsInsert' Post
+piiPost = lens _piiPost (\ s a -> s{_piiPost = a})
 
 -- | Whether image URL metadata for each post is included in the returned
 -- result (default: false).
@@ -168,23 +174,23 @@ piiBlogId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-piiKey :: Lens' PostsInsert' (Maybe Text)
+piiKey :: Lens' PostsInsert' (Maybe Key)
 piiKey = lens _piiKey (\ s a -> s{_piiKey = a})
 
 -- | OAuth 2.0 token for the current user.
-piiOauthToken :: Lens' PostsInsert' (Maybe Text)
-piiOauthToken
-  = lens _piiOauthToken
-      (\ s a -> s{_piiOauthToken = a})
+piiOAuthToken :: Lens' PostsInsert' (Maybe OAuthToken)
+piiOAuthToken
+  = lens _piiOAuthToken
+      (\ s a -> s{_piiOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 piiFields :: Lens' PostsInsert' (Maybe Text)
 piiFields
   = lens _piiFields (\ s a -> s{_piiFields = a})
 
--- | Data format for the response.
-piiAlt :: Lens' PostsInsert' Alt
-piiAlt = lens _piiAlt (\ s a -> s{_piiAlt = a})
+instance GoogleAuth PostsInsert' where
+        authKey = piiKey . _Just
+        authToken = piiOAuthToken . _Just
 
 instance GoogleRequest PostsInsert' where
         type Rs PostsInsert' = Post
@@ -193,13 +199,14 @@ instance GoogleRequest PostsInsert' where
           = go (Just _piiFetchBody) _piiQuotaUser
               (Just _piiPrettyPrint)
               _piiIsDraft
-              _piiUserIp
+              _piiUserIP
               _piiFetchImages
               _piiBlogId
               _piiKey
-              _piiOauthToken
+              _piiOAuthToken
               _piiFields
-              (Just _piiAlt)
+              (Just AltJSON)
+              _piiPost
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PostsInsertResource)

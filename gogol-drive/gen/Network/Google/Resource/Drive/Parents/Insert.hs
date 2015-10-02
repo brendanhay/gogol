@@ -31,13 +31,13 @@ module Network.Google.Resource.Drive.Parents.Insert
 
     -- * Request Lenses
     , piiQuotaUser
+    , piiParentReference
     , piiPrettyPrint
-    , piiUserIp
+    , piiUserIP
     , piiKey
     , piiFileId
-    , piiOauthToken
+    , piiOAuthToken
     , piiFields
-    , piiAlt
     ) where
 
 import           Network.Google.Drive.Types
@@ -52,23 +52,25 @@ type ParentsInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] ParentReference
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] ParentReference :>
+                           Post '[JSON] ParentReference
 
 -- | Adds a parent folder for a file.
 --
 -- /See:/ 'parentsInsert'' smart constructor.
 data ParentsInsert' = ParentsInsert'
-    { _piiQuotaUser   :: !(Maybe Text)
-    , _piiPrettyPrint :: !Bool
-    , _piiUserIp      :: !(Maybe Text)
-    , _piiKey         :: !(Maybe Text)
-    , _piiFileId      :: !Text
-    , _piiOauthToken  :: !(Maybe Text)
-    , _piiFields      :: !(Maybe Text)
-    , _piiAlt         :: !Alt
+    { _piiQuotaUser       :: !(Maybe Text)
+    , _piiParentReference :: !ParentReference
+    , _piiPrettyPrint     :: !Bool
+    , _piiUserIP          :: !(Maybe Text)
+    , _piiKey             :: !(Maybe Key)
+    , _piiFileId          :: !Text
+    , _piiOAuthToken      :: !(Maybe OAuthToken)
+    , _piiFields          :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ParentsInsert'' with the minimum fields required to make a request.
@@ -77,32 +79,33 @@ data ParentsInsert' = ParentsInsert'
 --
 -- * 'piiQuotaUser'
 --
+-- * 'piiParentReference'
+--
 -- * 'piiPrettyPrint'
 --
--- * 'piiUserIp'
+-- * 'piiUserIP'
 --
 -- * 'piiKey'
 --
 -- * 'piiFileId'
 --
--- * 'piiOauthToken'
+-- * 'piiOAuthToken'
 --
 -- * 'piiFields'
---
--- * 'piiAlt'
 parentsInsert'
-    :: Text -- ^ 'fileId'
+    :: ParentReference -- ^ 'ParentReference'
+    -> Text -- ^ 'fileId'
     -> ParentsInsert'
-parentsInsert' pPiiFileId_ =
+parentsInsert' pPiiParentReference_ pPiiFileId_ =
     ParentsInsert'
     { _piiQuotaUser = Nothing
+    , _piiParentReference = pPiiParentReference_
     , _piiPrettyPrint = True
-    , _piiUserIp = Nothing
+    , _piiUserIP = Nothing
     , _piiKey = Nothing
     , _piiFileId = pPiiFileId_
-    , _piiOauthToken = Nothing
+    , _piiOAuthToken = Nothing
     , _piiFields = Nothing
-    , _piiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -112,6 +115,12 @@ piiQuotaUser :: Lens' ParentsInsert' (Maybe Text)
 piiQuotaUser
   = lens _piiQuotaUser (\ s a -> s{_piiQuotaUser = a})
 
+-- | Multipart request metadata.
+piiParentReference :: Lens' ParentsInsert' ParentReference
+piiParentReference
+  = lens _piiParentReference
+      (\ s a -> s{_piiParentReference = a})
+
 -- | Returns response with indentations and line breaks.
 piiPrettyPrint :: Lens' ParentsInsert' Bool
 piiPrettyPrint
@@ -120,14 +129,14 @@ piiPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-piiUserIp :: Lens' ParentsInsert' (Maybe Text)
-piiUserIp
-  = lens _piiUserIp (\ s a -> s{_piiUserIp = a})
+piiUserIP :: Lens' ParentsInsert' (Maybe Text)
+piiUserIP
+  = lens _piiUserIP (\ s a -> s{_piiUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-piiKey :: Lens' ParentsInsert' (Maybe Text)
+piiKey :: Lens' ParentsInsert' (Maybe Key)
 piiKey = lens _piiKey (\ s a -> s{_piiKey = a})
 
 -- | The ID of the file.
@@ -136,30 +145,31 @@ piiFileId
   = lens _piiFileId (\ s a -> s{_piiFileId = a})
 
 -- | OAuth 2.0 token for the current user.
-piiOauthToken :: Lens' ParentsInsert' (Maybe Text)
-piiOauthToken
-  = lens _piiOauthToken
-      (\ s a -> s{_piiOauthToken = a})
+piiOAuthToken :: Lens' ParentsInsert' (Maybe OAuthToken)
+piiOAuthToken
+  = lens _piiOAuthToken
+      (\ s a -> s{_piiOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 piiFields :: Lens' ParentsInsert' (Maybe Text)
 piiFields
   = lens _piiFields (\ s a -> s{_piiFields = a})
 
--- | Data format for the response.
-piiAlt :: Lens' ParentsInsert' Alt
-piiAlt = lens _piiAlt (\ s a -> s{_piiAlt = a})
+instance GoogleAuth ParentsInsert' where
+        authKey = piiKey . _Just
+        authToken = piiOAuthToken . _Just
 
 instance GoogleRequest ParentsInsert' where
         type Rs ParentsInsert' = ParentReference
         request = requestWithRoute defReq driveURL
         requestWithRoute r u ParentsInsert'{..}
-          = go _piiQuotaUser (Just _piiPrettyPrint) _piiUserIp
+          = go _piiQuotaUser (Just _piiPrettyPrint) _piiUserIP
               _piiKey
               _piiFileId
-              _piiOauthToken
+              _piiOAuthToken
               _piiFields
-              (Just _piiAlt)
+              (Just AltJSON)
+              _piiParentReference
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ParentsInsertResource)

@@ -23,7 +23,7 @@
 -- to use different resource name schemes, such as
 -- \`users\/*\/operations\`.
 --
--- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @StoragetransferTransferOperationsList@.
+-- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @StorageTransferTransferOperationsList@.
 module Network.Google.Resource.StorageTransfer.TransferOperations.List
     (
     -- * REST Resource
@@ -46,17 +46,16 @@ module Network.Google.Resource.StorageTransfer.TransferOperations.List
     , tolName
     , tolFilter
     , tolPageToken
-    , tolOauthToken
+    , tolOAuthToken
     , tolPageSize
     , tolFields
     , tolCallback
-    , tolAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.StorageTransfer.Types
 
--- | A resource alias for @StoragetransferTransferOperationsList@ which the
+-- | A resource alias for @StorageTransferTransferOperationsList@ which the
 -- 'TransferOperationsList'' request conforms to.
 type TransferOperationsListResource =
      "v1" :>
@@ -69,14 +68,14 @@ type TransferOperationsListResource =
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
                        QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
+                         QueryParam "key" Key :>
                            QueryParam "filter" Text :>
                              QueryParam "pageToken" Text :>
-                               QueryParam "oauth_token" Text :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "pageSize" Int32 :>
                                    QueryParam "fields" Text :>
                                      QueryParam "callback" Text :>
-                                       QueryParam "alt" Text :>
+                                       QueryParam "alt" AltJSON :>
                                          Get '[JSON] ListOperationsResponse
 
 -- | Lists operations that match the specified filter in the request. If the
@@ -95,15 +94,14 @@ data TransferOperationsList' = TransferOperationsList'
     , _tolAccessToken    :: !(Maybe Text)
     , _tolUploadType     :: !(Maybe Text)
     , _tolBearerToken    :: !(Maybe Text)
-    , _tolKey            :: !(Maybe Text)
+    , _tolKey            :: !(Maybe Key)
     , _tolName           :: !Text
     , _tolFilter         :: !(Maybe Text)
     , _tolPageToken      :: !(Maybe Text)
-    , _tolOauthToken     :: !(Maybe Text)
+    , _tolOAuthToken     :: !(Maybe OAuthToken)
     , _tolPageSize       :: !(Maybe Int32)
     , _tolFields         :: !(Maybe Text)
     , _tolCallback       :: !(Maybe Text)
-    , _tolAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TransferOperationsList'' with the minimum fields required to make a request.
@@ -134,15 +132,13 @@ data TransferOperationsList' = TransferOperationsList'
 --
 -- * 'tolPageToken'
 --
--- * 'tolOauthToken'
+-- * 'tolOAuthToken'
 --
 -- * 'tolPageSize'
 --
 -- * 'tolFields'
 --
 -- * 'tolCallback'
---
--- * 'tolAlt'
 transferOperationsList'
     :: Text -- ^ 'name'
     -> TransferOperationsList'
@@ -160,11 +156,10 @@ transferOperationsList' pTolName_ =
     , _tolName = pTolName_
     , _tolFilter = Nothing
     , _tolPageToken = Nothing
-    , _tolOauthToken = Nothing
+    , _tolOAuthToken = Nothing
     , _tolPageSize = Nothing
     , _tolFields = Nothing
     , _tolCallback = Nothing
-    , _tolAlt = "json"
     }
 
 -- | V1 error format.
@@ -215,7 +210,7 @@ tolBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tolKey :: Lens' TransferOperationsList' (Maybe Text)
+tolKey :: Lens' TransferOperationsList' (Maybe Key)
 tolKey = lens _tolKey (\ s a -> s{_tolKey = a})
 
 -- | The value \`transferOperations\`.
@@ -233,10 +228,10 @@ tolPageToken
   = lens _tolPageToken (\ s a -> s{_tolPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-tolOauthToken :: Lens' TransferOperationsList' (Maybe Text)
-tolOauthToken
-  = lens _tolOauthToken
-      (\ s a -> s{_tolOauthToken = a})
+tolOAuthToken :: Lens' TransferOperationsList' (Maybe OAuthToken)
+tolOAuthToken
+  = lens _tolOAuthToken
+      (\ s a -> s{_tolOAuthToken = a})
 
 -- | The standard list page size.
 tolPageSize :: Lens' TransferOperationsList' (Maybe Int32)
@@ -253,9 +248,9 @@ tolCallback :: Lens' TransferOperationsList' (Maybe Text)
 tolCallback
   = lens _tolCallback (\ s a -> s{_tolCallback = a})
 
--- | Data format for response.
-tolAlt :: Lens' TransferOperationsList' Text
-tolAlt = lens _tolAlt (\ s a -> s{_tolAlt = a})
+instance GoogleAuth TransferOperationsList' where
+        authKey = tolKey . _Just
+        authToken = tolOAuthToken . _Just
 
 instance GoogleRequest TransferOperationsList' where
         type Rs TransferOperationsList' =
@@ -272,11 +267,11 @@ instance GoogleRequest TransferOperationsList' where
               _tolName
               _tolFilter
               _tolPageToken
-              _tolOauthToken
+              _tolOAuthToken
               _tolPageSize
               _tolFields
               _tolCallback
-              (Just _tolAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TransferOperationsListResource)

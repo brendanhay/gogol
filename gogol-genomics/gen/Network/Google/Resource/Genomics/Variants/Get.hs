@@ -32,12 +32,11 @@ module Network.Google.Resource.Genomics.Variants.Get
     -- * Request Lenses
     , vggQuotaUser
     , vggPrettyPrint
-    , vggUserIp
+    , vggUserIP
     , vggKey
     , vggVariantId
-    , vggOauthToken
+    , vggOAuthToken
     , vggFields
-    , vggAlt
     ) where
 
 import           Network.Google.Genomics.Types
@@ -51,10 +50,10 @@ type VariantsGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Get '[JSON] Variant
+                     QueryParam "alt" AltJSON :> Get '[JSON] Variant
 
 -- | Gets a variant by ID.
 --
@@ -62,12 +61,11 @@ type VariantsGetResource =
 data VariantsGet' = VariantsGet'
     { _vggQuotaUser   :: !(Maybe Text)
     , _vggPrettyPrint :: !Bool
-    , _vggUserIp      :: !(Maybe Text)
-    , _vggKey         :: !(Maybe Text)
+    , _vggUserIP      :: !(Maybe Text)
+    , _vggKey         :: !(Maybe Key)
     , _vggVariantId   :: !Text
-    , _vggOauthToken  :: !(Maybe Text)
+    , _vggOAuthToken  :: !(Maybe OAuthToken)
     , _vggFields      :: !(Maybe Text)
-    , _vggAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantsGet'' with the minimum fields required to make a request.
@@ -78,17 +76,15 @@ data VariantsGet' = VariantsGet'
 --
 -- * 'vggPrettyPrint'
 --
--- * 'vggUserIp'
+-- * 'vggUserIP'
 --
 -- * 'vggKey'
 --
 -- * 'vggVariantId'
 --
--- * 'vggOauthToken'
+-- * 'vggOAuthToken'
 --
 -- * 'vggFields'
---
--- * 'vggAlt'
 variantsGet'
     :: Text -- ^ 'variantId'
     -> VariantsGet'
@@ -96,12 +92,11 @@ variantsGet' pVggVariantId_ =
     VariantsGet'
     { _vggQuotaUser = Nothing
     , _vggPrettyPrint = True
-    , _vggUserIp = Nothing
+    , _vggUserIP = Nothing
     , _vggKey = Nothing
     , _vggVariantId = pVggVariantId_
-    , _vggOauthToken = Nothing
+    , _vggOAuthToken = Nothing
     , _vggFields = Nothing
-    , _vggAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -119,14 +114,14 @@ vggPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-vggUserIp :: Lens' VariantsGet' (Maybe Text)
-vggUserIp
-  = lens _vggUserIp (\ s a -> s{_vggUserIp = a})
+vggUserIP :: Lens' VariantsGet' (Maybe Text)
+vggUserIP
+  = lens _vggUserIP (\ s a -> s{_vggUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vggKey :: Lens' VariantsGet' (Maybe Text)
+vggKey :: Lens' VariantsGet' (Maybe Key)
 vggKey = lens _vggKey (\ s a -> s{_vggKey = a})
 
 -- | The ID of the variant.
@@ -135,30 +130,30 @@ vggVariantId
   = lens _vggVariantId (\ s a -> s{_vggVariantId = a})
 
 -- | OAuth 2.0 token for the current user.
-vggOauthToken :: Lens' VariantsGet' (Maybe Text)
-vggOauthToken
-  = lens _vggOauthToken
-      (\ s a -> s{_vggOauthToken = a})
+vggOAuthToken :: Lens' VariantsGet' (Maybe OAuthToken)
+vggOAuthToken
+  = lens _vggOAuthToken
+      (\ s a -> s{_vggOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 vggFields :: Lens' VariantsGet' (Maybe Text)
 vggFields
   = lens _vggFields (\ s a -> s{_vggFields = a})
 
--- | Data format for the response.
-vggAlt :: Lens' VariantsGet' Alt
-vggAlt = lens _vggAlt (\ s a -> s{_vggAlt = a})
+instance GoogleAuth VariantsGet' where
+        authKey = vggKey . _Just
+        authToken = vggOAuthToken . _Just
 
 instance GoogleRequest VariantsGet' where
         type Rs VariantsGet' = Variant
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u VariantsGet'{..}
-          = go _vggQuotaUser (Just _vggPrettyPrint) _vggUserIp
+          = go _vggQuotaUser (Just _vggPrettyPrint) _vggUserIP
               _vggKey
               _vggVariantId
-              _vggOauthToken
+              _vggOAuthToken
               _vggFields
-              (Just _vggAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy VariantsGetResource)

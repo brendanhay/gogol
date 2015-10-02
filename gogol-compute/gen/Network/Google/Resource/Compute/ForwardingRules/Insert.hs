@@ -34,12 +34,12 @@ module Network.Google.Resource.Compute.ForwardingRules.Insert
     , friQuotaUser
     , friPrettyPrint
     , friProject
-    , friUserIp
+    , friForwardingRule
+    , friUserIP
     , friKey
     , friRegion
-    , friOauthToken
+    , friOAuthToken
     , friFields
-    , friAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -55,25 +55,27 @@ type ForwardingRulesInsertResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Post '[JSON] Operation
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] ForwardingRule :>
+                             Post '[JSON] Operation
 
 -- | Creates a ForwardingRule resource in the specified project and region
 -- using the data included in the request.
 --
 -- /See:/ 'forwardingRulesInsert'' smart constructor.
 data ForwardingRulesInsert' = ForwardingRulesInsert'
-    { _friQuotaUser   :: !(Maybe Text)
-    , _friPrettyPrint :: !Bool
-    , _friProject     :: !Text
-    , _friUserIp      :: !(Maybe Text)
-    , _friKey         :: !(Maybe Text)
-    , _friRegion      :: !Text
-    , _friOauthToken  :: !(Maybe Text)
-    , _friFields      :: !(Maybe Text)
-    , _friAlt         :: !Alt
+    { _friQuotaUser      :: !(Maybe Text)
+    , _friPrettyPrint    :: !Bool
+    , _friProject        :: !Text
+    , _friForwardingRule :: !ForwardingRule
+    , _friUserIP         :: !(Maybe Text)
+    , _friKey            :: !(Maybe Key)
+    , _friRegion         :: !Text
+    , _friOAuthToken     :: !(Maybe OAuthToken)
+    , _friFields         :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ForwardingRulesInsert'' with the minimum fields required to make a request.
@@ -86,32 +88,33 @@ data ForwardingRulesInsert' = ForwardingRulesInsert'
 --
 -- * 'friProject'
 --
--- * 'friUserIp'
+-- * 'friForwardingRule'
+--
+-- * 'friUserIP'
 --
 -- * 'friKey'
 --
 -- * 'friRegion'
 --
--- * 'friOauthToken'
+-- * 'friOAuthToken'
 --
 -- * 'friFields'
---
--- * 'friAlt'
 forwardingRulesInsert'
     :: Text -- ^ 'project'
+    -> ForwardingRule -- ^ 'ForwardingRule'
     -> Text -- ^ 'region'
     -> ForwardingRulesInsert'
-forwardingRulesInsert' pFriProject_ pFriRegion_ =
+forwardingRulesInsert' pFriProject_ pFriForwardingRule_ pFriRegion_ =
     ForwardingRulesInsert'
     { _friQuotaUser = Nothing
     , _friPrettyPrint = True
     , _friProject = pFriProject_
-    , _friUserIp = Nothing
+    , _friForwardingRule = pFriForwardingRule_
+    , _friUserIP = Nothing
     , _friKey = Nothing
     , _friRegion = pFriRegion_
-    , _friOauthToken = Nothing
+    , _friOAuthToken = Nothing
     , _friFields = Nothing
-    , _friAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -132,16 +135,22 @@ friProject :: Lens' ForwardingRulesInsert' Text
 friProject
   = lens _friProject (\ s a -> s{_friProject = a})
 
+-- | Multipart request metadata.
+friForwardingRule :: Lens' ForwardingRulesInsert' ForwardingRule
+friForwardingRule
+  = lens _friForwardingRule
+      (\ s a -> s{_friForwardingRule = a})
+
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-friUserIp :: Lens' ForwardingRulesInsert' (Maybe Text)
-friUserIp
-  = lens _friUserIp (\ s a -> s{_friUserIp = a})
+friUserIP :: Lens' ForwardingRulesInsert' (Maybe Text)
+friUserIP
+  = lens _friUserIP (\ s a -> s{_friUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-friKey :: Lens' ForwardingRulesInsert' (Maybe Text)
+friKey :: Lens' ForwardingRulesInsert' (Maybe Key)
 friKey = lens _friKey (\ s a -> s{_friKey = a})
 
 -- | Name of the region scoping this request.
@@ -150,31 +159,32 @@ friRegion
   = lens _friRegion (\ s a -> s{_friRegion = a})
 
 -- | OAuth 2.0 token for the current user.
-friOauthToken :: Lens' ForwardingRulesInsert' (Maybe Text)
-friOauthToken
-  = lens _friOauthToken
-      (\ s a -> s{_friOauthToken = a})
+friOAuthToken :: Lens' ForwardingRulesInsert' (Maybe OAuthToken)
+friOAuthToken
+  = lens _friOAuthToken
+      (\ s a -> s{_friOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 friFields :: Lens' ForwardingRulesInsert' (Maybe Text)
 friFields
   = lens _friFields (\ s a -> s{_friFields = a})
 
--- | Data format for the response.
-friAlt :: Lens' ForwardingRulesInsert' Alt
-friAlt = lens _friAlt (\ s a -> s{_friAlt = a})
+instance GoogleAuth ForwardingRulesInsert' where
+        authKey = friKey . _Just
+        authToken = friOAuthToken . _Just
 
 instance GoogleRequest ForwardingRulesInsert' where
         type Rs ForwardingRulesInsert' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u ForwardingRulesInsert'{..}
           = go _friQuotaUser (Just _friPrettyPrint) _friProject
-              _friUserIp
+              _friUserIP
               _friKey
               _friRegion
-              _friOauthToken
+              _friOAuthToken
               _friFields
-              (Just _friAlt)
+              (Just AltJSON)
+              _friForwardingRule
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ForwardingRulesInsertResource)

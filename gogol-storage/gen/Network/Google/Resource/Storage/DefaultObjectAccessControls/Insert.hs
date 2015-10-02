@@ -32,12 +32,12 @@ module Network.Google.Resource.Storage.DefaultObjectAccessControls.Insert
     -- * Request Lenses
     , doaciQuotaUser
     , doaciPrettyPrint
-    , doaciUserIp
+    , doaciUserIP
     , doaciBucket
     , doaciKey
-    , doaciOauthToken
+    , doaciOAuthToken
+    , doaciObjectAccessControl
     , doaciFields
-    , doaciAlt
     ) where
 
 import           Network.Google.Prelude
@@ -52,24 +52,25 @@ type DefaultObjectAccessControlsInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :>
-                         Post '[JSON] ObjectAccessControl
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] ObjectAccessControl :>
+                           Post '[JSON] ObjectAccessControl
 
 -- | Creates a new default object ACL entry on the specified bucket.
 --
 -- /See:/ 'defaultObjectAccessControlsInsert'' smart constructor.
 data DefaultObjectAccessControlsInsert' = DefaultObjectAccessControlsInsert'
-    { _doaciQuotaUser   :: !(Maybe Text)
-    , _doaciPrettyPrint :: !Bool
-    , _doaciUserIp      :: !(Maybe Text)
-    , _doaciBucket      :: !Text
-    , _doaciKey         :: !(Maybe Text)
-    , _doaciOauthToken  :: !(Maybe Text)
-    , _doaciFields      :: !(Maybe Text)
-    , _doaciAlt         :: !Alt
+    { _doaciQuotaUser           :: !(Maybe Text)
+    , _doaciPrettyPrint         :: !Bool
+    , _doaciUserIP              :: !(Maybe Text)
+    , _doaciBucket              :: !Text
+    , _doaciKey                 :: !(Maybe Key)
+    , _doaciOAuthToken          :: !(Maybe OAuthToken)
+    , _doaciObjectAccessControl :: !ObjectAccessControl
+    , _doaciFields              :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DefaultObjectAccessControlsInsert'' with the minimum fields required to make a request.
@@ -80,30 +81,31 @@ data DefaultObjectAccessControlsInsert' = DefaultObjectAccessControlsInsert'
 --
 -- * 'doaciPrettyPrint'
 --
--- * 'doaciUserIp'
+-- * 'doaciUserIP'
 --
 -- * 'doaciBucket'
 --
 -- * 'doaciKey'
 --
--- * 'doaciOauthToken'
+-- * 'doaciOAuthToken'
+--
+-- * 'doaciObjectAccessControl'
 --
 -- * 'doaciFields'
---
--- * 'doaciAlt'
 defaultObjectAccessControlsInsert'
     :: Text -- ^ 'bucket'
+    -> ObjectAccessControl -- ^ 'ObjectAccessControl'
     -> DefaultObjectAccessControlsInsert'
-defaultObjectAccessControlsInsert' pDoaciBucket_ =
+defaultObjectAccessControlsInsert' pDoaciBucket_ pDoaciObjectAccessControl_ =
     DefaultObjectAccessControlsInsert'
     { _doaciQuotaUser = Nothing
     , _doaciPrettyPrint = True
-    , _doaciUserIp = Nothing
+    , _doaciUserIP = Nothing
     , _doaciBucket = pDoaciBucket_
     , _doaciKey = Nothing
-    , _doaciOauthToken = Nothing
+    , _doaciOAuthToken = Nothing
+    , _doaciObjectAccessControl = pDoaciObjectAccessControl_
     , _doaciFields = Nothing
-    , _doaciAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -122,9 +124,9 @@ doaciPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-doaciUserIp :: Lens' DefaultObjectAccessControlsInsert' (Maybe Text)
-doaciUserIp
-  = lens _doaciUserIp (\ s a -> s{_doaciUserIp = a})
+doaciUserIP :: Lens' DefaultObjectAccessControlsInsert' (Maybe Text)
+doaciUserIP
+  = lens _doaciUserIP (\ s a -> s{_doaciUserIP = a})
 
 -- | Name of a bucket.
 doaciBucket :: Lens' DefaultObjectAccessControlsInsert' Text
@@ -134,23 +136,30 @@ doaciBucket
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-doaciKey :: Lens' DefaultObjectAccessControlsInsert' (Maybe Text)
+doaciKey :: Lens' DefaultObjectAccessControlsInsert' (Maybe Key)
 doaciKey = lens _doaciKey (\ s a -> s{_doaciKey = a})
 
 -- | OAuth 2.0 token for the current user.
-doaciOauthToken :: Lens' DefaultObjectAccessControlsInsert' (Maybe Text)
-doaciOauthToken
-  = lens _doaciOauthToken
-      (\ s a -> s{_doaciOauthToken = a})
+doaciOAuthToken :: Lens' DefaultObjectAccessControlsInsert' (Maybe OAuthToken)
+doaciOAuthToken
+  = lens _doaciOAuthToken
+      (\ s a -> s{_doaciOAuthToken = a})
+
+-- | Multipart request metadata.
+doaciObjectAccessControl :: Lens' DefaultObjectAccessControlsInsert' ObjectAccessControl
+doaciObjectAccessControl
+  = lens _doaciObjectAccessControl
+      (\ s a -> s{_doaciObjectAccessControl = a})
 
 -- | Selector specifying which fields to include in a partial response.
 doaciFields :: Lens' DefaultObjectAccessControlsInsert' (Maybe Text)
 doaciFields
   = lens _doaciFields (\ s a -> s{_doaciFields = a})
 
--- | Data format for the response.
-doaciAlt :: Lens' DefaultObjectAccessControlsInsert' Alt
-doaciAlt = lens _doaciAlt (\ s a -> s{_doaciAlt = a})
+instance GoogleAuth
+         DefaultObjectAccessControlsInsert' where
+        authKey = doaciKey . _Just
+        authToken = doaciOAuthToken . _Just
 
 instance GoogleRequest
          DefaultObjectAccessControlsInsert' where
@@ -160,12 +169,13 @@ instance GoogleRequest
         requestWithRoute r u
           DefaultObjectAccessControlsInsert'{..}
           = go _doaciQuotaUser (Just _doaciPrettyPrint)
-              _doaciUserIp
+              _doaciUserIP
               _doaciBucket
               _doaciKey
-              _doaciOauthToken
+              _doaciOAuthToken
               _doaciFields
-              (Just _doaciAlt)
+              (Just AltJSON)
+              _doaciObjectAccessControl
           where go
                   = clientWithRoute
                       (Proxy ::

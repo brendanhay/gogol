@@ -32,13 +32,12 @@ module Network.Google.Resource.Container.Projects.Zones.Operations.List
     -- * Request Lenses
     , pzolQuotaUser
     , pzolPrettyPrint
-    , pzolUserIp
+    , pzolUserIP
     , pzolZoneId
     , pzolKey
     , pzolProjectId
-    , pzolOauthToken
+    , pzolOAuthToken
     , pzolFields
-    , pzolAlt
     ) where
 
 import           Network.Google.Container.Types
@@ -54,10 +53,10 @@ type ProjectsZonesOperationsListResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :>
+                         QueryParam "alt" AltJSON :>
                            Get '[JSON] ListOperationsResponse
 
 -- | Lists all operations in a project in a specific zone.
@@ -66,13 +65,12 @@ type ProjectsZonesOperationsListResource =
 data ProjectsZonesOperationsList' = ProjectsZonesOperationsList'
     { _pzolQuotaUser   :: !(Maybe Text)
     , _pzolPrettyPrint :: !Bool
-    , _pzolUserIp      :: !(Maybe Text)
+    , _pzolUserIP      :: !(Maybe Text)
     , _pzolZoneId      :: !Text
-    , _pzolKey         :: !(Maybe Text)
+    , _pzolKey         :: !(Maybe Key)
     , _pzolProjectId   :: !Text
-    , _pzolOauthToken  :: !(Maybe Text)
+    , _pzolOAuthToken  :: !(Maybe OAuthToken)
     , _pzolFields      :: !(Maybe Text)
-    , _pzolAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsZonesOperationsList'' with the minimum fields required to make a request.
@@ -83,7 +81,7 @@ data ProjectsZonesOperationsList' = ProjectsZonesOperationsList'
 --
 -- * 'pzolPrettyPrint'
 --
--- * 'pzolUserIp'
+-- * 'pzolUserIP'
 --
 -- * 'pzolZoneId'
 --
@@ -91,11 +89,9 @@ data ProjectsZonesOperationsList' = ProjectsZonesOperationsList'
 --
 -- * 'pzolProjectId'
 --
--- * 'pzolOauthToken'
+-- * 'pzolOAuthToken'
 --
 -- * 'pzolFields'
---
--- * 'pzolAlt'
 projectsZonesOperationsList'
     :: Text -- ^ 'zoneId'
     -> Text -- ^ 'projectId'
@@ -104,13 +100,12 @@ projectsZonesOperationsList' pPzolZoneId_ pPzolProjectId_ =
     ProjectsZonesOperationsList'
     { _pzolQuotaUser = Nothing
     , _pzolPrettyPrint = True
-    , _pzolUserIp = Nothing
+    , _pzolUserIP = Nothing
     , _pzolZoneId = pPzolZoneId_
     , _pzolKey = Nothing
     , _pzolProjectId = pPzolProjectId_
-    , _pzolOauthToken = Nothing
+    , _pzolOAuthToken = Nothing
     , _pzolFields = Nothing
-    , _pzolAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -129,9 +124,9 @@ pzolPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-pzolUserIp :: Lens' ProjectsZonesOperationsList' (Maybe Text)
-pzolUserIp
-  = lens _pzolUserIp (\ s a -> s{_pzolUserIp = a})
+pzolUserIP :: Lens' ProjectsZonesOperationsList' (Maybe Text)
+pzolUserIP
+  = lens _pzolUserIP (\ s a -> s{_pzolUserIP = a})
 
 -- | The name of the Google Compute Engine zone to return operations for.
 pzolZoneId :: Lens' ProjectsZonesOperationsList' Text
@@ -141,7 +136,7 @@ pzolZoneId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pzolKey :: Lens' ProjectsZonesOperationsList' (Maybe Text)
+pzolKey :: Lens' ProjectsZonesOperationsList' (Maybe Key)
 pzolKey = lens _pzolKey (\ s a -> s{_pzolKey = a})
 
 -- | The Google Developers Console project ID or project number.
@@ -151,19 +146,20 @@ pzolProjectId
       (\ s a -> s{_pzolProjectId = a})
 
 -- | OAuth 2.0 token for the current user.
-pzolOauthToken :: Lens' ProjectsZonesOperationsList' (Maybe Text)
-pzolOauthToken
-  = lens _pzolOauthToken
-      (\ s a -> s{_pzolOauthToken = a})
+pzolOAuthToken :: Lens' ProjectsZonesOperationsList' (Maybe OAuthToken)
+pzolOAuthToken
+  = lens _pzolOAuthToken
+      (\ s a -> s{_pzolOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 pzolFields :: Lens' ProjectsZonesOperationsList' (Maybe Text)
 pzolFields
   = lens _pzolFields (\ s a -> s{_pzolFields = a})
 
--- | Data format for the response.
-pzolAlt :: Lens' ProjectsZonesOperationsList' Alt
-pzolAlt = lens _pzolAlt (\ s a -> s{_pzolAlt = a})
+instance GoogleAuth ProjectsZonesOperationsList'
+         where
+        authKey = pzolKey . _Just
+        authToken = pzolOAuthToken . _Just
 
 instance GoogleRequest ProjectsZonesOperationsList'
          where
@@ -172,13 +168,13 @@ instance GoogleRequest ProjectsZonesOperationsList'
         request = requestWithRoute defReq containerURL
         requestWithRoute r u ProjectsZonesOperationsList'{..}
           = go _pzolQuotaUser (Just _pzolPrettyPrint)
-              _pzolUserIp
+              _pzolUserIP
               _pzolZoneId
               _pzolKey
               _pzolProjectId
-              _pzolOauthToken
+              _pzolOAuthToken
               _pzolFields
-              (Just _pzolAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsZonesOperationsListResource)

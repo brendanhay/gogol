@@ -19,7 +19,7 @@
 --
 
 --
--- /See:/ <https://developers.google.com/accounts/docs/OAuth2 Google OAuth2 API Reference> for @Oauth2GetCertForOpenIdConnect@.
+-- /See:/ <https://developers.google.com/accounts/docs/OAuth2 Google OAuth2 API Reference> for @OAuth2GetCertForOpenIdConnect@.
 module Network.Google.Method.OAuth2.GetCertForOpenIdConnect
     (
     -- * REST Resource
@@ -32,17 +32,16 @@ module Network.Google.Method.OAuth2.GetCertForOpenIdConnect
     -- * Request Lenses
     , gcfoicQuotaUser
     , gcfoicPrettyPrint
-    , gcfoicUserIp
+    , gcfoicUserIP
     , gcfoicKey
-    , gcfoicOauthToken
+    , gcfoicOAuthToken
     , gcfoicFields
-    , gcfoicAlt
     ) where
 
 import           Network.Google.OAuth2.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @Oauth2GetCertForOpenIdConnect@ which the
+-- | A resource alias for @OAuth2GetCertForOpenIdConnect@ which the
 -- 'GetCertForOpenIdConnect'' request conforms to.
 type GetCertForOpenIdConnectMethod =
      "oauth2" :>
@@ -51,21 +50,20 @@ type GetCertForOpenIdConnectMethod =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Get '[JSON] Jwk
+                       QueryParam "alt" AltJSON :> Get '[JSON] Jwk
 
 --
 -- /See:/ 'getCertForOpenIdConnect'' smart constructor.
 data GetCertForOpenIdConnect' = GetCertForOpenIdConnect'
     { _gcfoicQuotaUser   :: !(Maybe Text)
     , _gcfoicPrettyPrint :: !Bool
-    , _gcfoicUserIp      :: !(Maybe Text)
-    , _gcfoicKey         :: !(Maybe Text)
-    , _gcfoicOauthToken  :: !(Maybe Text)
+    , _gcfoicUserIP      :: !(Maybe Text)
+    , _gcfoicKey         :: !(Maybe Key)
+    , _gcfoicOAuthToken  :: !(Maybe OAuthToken)
     , _gcfoicFields      :: !(Maybe Text)
-    , _gcfoicAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GetCertForOpenIdConnect'' with the minimum fields required to make a request.
@@ -76,26 +74,23 @@ data GetCertForOpenIdConnect' = GetCertForOpenIdConnect'
 --
 -- * 'gcfoicPrettyPrint'
 --
--- * 'gcfoicUserIp'
+-- * 'gcfoicUserIP'
 --
 -- * 'gcfoicKey'
 --
--- * 'gcfoicOauthToken'
+-- * 'gcfoicOAuthToken'
 --
 -- * 'gcfoicFields'
---
--- * 'gcfoicAlt'
 getCertForOpenIdConnect'
     :: GetCertForOpenIdConnect'
 getCertForOpenIdConnect' =
     GetCertForOpenIdConnect'
     { _gcfoicQuotaUser = Nothing
     , _gcfoicPrettyPrint = True
-    , _gcfoicUserIp = Nothing
+    , _gcfoicUserIP = Nothing
     , _gcfoicKey = Nothing
-    , _gcfoicOauthToken = Nothing
+    , _gcfoicOAuthToken = Nothing
     , _gcfoicFields = Nothing
-    , _gcfoicAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -114,43 +109,42 @@ gcfoicPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-gcfoicUserIp :: Lens' GetCertForOpenIdConnect' (Maybe Text)
-gcfoicUserIp
-  = lens _gcfoicUserIp (\ s a -> s{_gcfoicUserIp = a})
+gcfoicUserIP :: Lens' GetCertForOpenIdConnect' (Maybe Text)
+gcfoicUserIP
+  = lens _gcfoicUserIP (\ s a -> s{_gcfoicUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-gcfoicKey :: Lens' GetCertForOpenIdConnect' (Maybe Text)
+gcfoicKey :: Lens' GetCertForOpenIdConnect' (Maybe Key)
 gcfoicKey
   = lens _gcfoicKey (\ s a -> s{_gcfoicKey = a})
 
 -- | OAuth 2.0 token for the current user.
-gcfoicOauthToken :: Lens' GetCertForOpenIdConnect' (Maybe Text)
-gcfoicOauthToken
-  = lens _gcfoicOauthToken
-      (\ s a -> s{_gcfoicOauthToken = a})
+gcfoicOAuthToken :: Lens' GetCertForOpenIdConnect' (Maybe OAuthToken)
+gcfoicOAuthToken
+  = lens _gcfoicOAuthToken
+      (\ s a -> s{_gcfoicOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 gcfoicFields :: Lens' GetCertForOpenIdConnect' (Maybe Text)
 gcfoicFields
   = lens _gcfoicFields (\ s a -> s{_gcfoicFields = a})
 
--- | Data format for the response.
-gcfoicAlt :: Lens' GetCertForOpenIdConnect' Alt
-gcfoicAlt
-  = lens _gcfoicAlt (\ s a -> s{_gcfoicAlt = a})
+instance GoogleAuth GetCertForOpenIdConnect' where
+        authKey = gcfoicKey . _Just
+        authToken = gcfoicOAuthToken . _Just
 
 instance GoogleRequest GetCertForOpenIdConnect' where
         type Rs GetCertForOpenIdConnect' = Jwk
         request = requestWithRoute defReq oAuth2URL
         requestWithRoute r u GetCertForOpenIdConnect'{..}
           = go _gcfoicQuotaUser (Just _gcfoicPrettyPrint)
-              _gcfoicUserIp
+              _gcfoicUserIP
               _gcfoicKey
-              _gcfoicOauthToken
+              _gcfoicOAuthToken
               _gcfoicFields
-              (Just _gcfoicAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy GetCertForOpenIdConnectMethod)

@@ -34,13 +34,12 @@ module Network.Google.Resource.GamesManagement.Players.Unhide
     -- * Request Lenses
     , puQuotaUser
     , puPrettyPrint
-    , puUserIp
+    , puUserIP
     , puApplicationId
     , puKey
-    , puOauthToken
+    , puOAuthToken
     , puPlayerId
     , puFields
-    , puAlt
     ) where
 
 import           Network.Google.GamesManagement.Types
@@ -57,10 +56,10 @@ type PlayersUnhideResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Delete '[JSON] ()
+                           QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Unhide the given player\'s leaderboard scores from the given
 -- application. This method is only available to user accounts for your
@@ -70,13 +69,12 @@ type PlayersUnhideResource =
 data PlayersUnhide' = PlayersUnhide'
     { _puQuotaUser     :: !(Maybe Text)
     , _puPrettyPrint   :: !Bool
-    , _puUserIp        :: !(Maybe Text)
+    , _puUserIP        :: !(Maybe Text)
     , _puApplicationId :: !Text
-    , _puKey           :: !(Maybe Text)
-    , _puOauthToken    :: !(Maybe Text)
+    , _puKey           :: !(Maybe Key)
+    , _puOAuthToken    :: !(Maybe OAuthToken)
     , _puPlayerId      :: !Text
     , _puFields        :: !(Maybe Text)
-    , _puAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayersUnhide'' with the minimum fields required to make a request.
@@ -87,19 +85,17 @@ data PlayersUnhide' = PlayersUnhide'
 --
 -- * 'puPrettyPrint'
 --
--- * 'puUserIp'
+-- * 'puUserIP'
 --
 -- * 'puApplicationId'
 --
 -- * 'puKey'
 --
--- * 'puOauthToken'
+-- * 'puOAuthToken'
 --
 -- * 'puPlayerId'
 --
 -- * 'puFields'
---
--- * 'puAlt'
 playersUnhide'
     :: Text -- ^ 'applicationId'
     -> Text -- ^ 'playerId'
@@ -108,13 +104,12 @@ playersUnhide' pPuApplicationId_ pPuPlayerId_ =
     PlayersUnhide'
     { _puQuotaUser = Nothing
     , _puPrettyPrint = True
-    , _puUserIp = Nothing
+    , _puUserIP = Nothing
     , _puApplicationId = pPuApplicationId_
     , _puKey = Nothing
-    , _puOauthToken = Nothing
+    , _puOAuthToken = Nothing
     , _puPlayerId = pPuPlayerId_
     , _puFields = Nothing
-    , _puAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -132,8 +127,8 @@ puPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-puUserIp :: Lens' PlayersUnhide' (Maybe Text)
-puUserIp = lens _puUserIp (\ s a -> s{_puUserIp = a})
+puUserIP :: Lens' PlayersUnhide' (Maybe Text)
+puUserIP = lens _puUserIP (\ s a -> s{_puUserIP = a})
 
 -- | The application ID from the Google Play developer console.
 puApplicationId :: Lens' PlayersUnhide' Text
@@ -144,13 +139,13 @@ puApplicationId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-puKey :: Lens' PlayersUnhide' (Maybe Text)
+puKey :: Lens' PlayersUnhide' (Maybe Key)
 puKey = lens _puKey (\ s a -> s{_puKey = a})
 
 -- | OAuth 2.0 token for the current user.
-puOauthToken :: Lens' PlayersUnhide' (Maybe Text)
-puOauthToken
-  = lens _puOauthToken (\ s a -> s{_puOauthToken = a})
+puOAuthToken :: Lens' PlayersUnhide' (Maybe OAuthToken)
+puOAuthToken
+  = lens _puOAuthToken (\ s a -> s{_puOAuthToken = a})
 
 -- | A player ID. A value of me may be used in place of the authenticated
 -- player\'s ID.
@@ -162,21 +157,21 @@ puPlayerId
 puFields :: Lens' PlayersUnhide' (Maybe Text)
 puFields = lens _puFields (\ s a -> s{_puFields = a})
 
--- | Data format for the response.
-puAlt :: Lens' PlayersUnhide' Alt
-puAlt = lens _puAlt (\ s a -> s{_puAlt = a})
+instance GoogleAuth PlayersUnhide' where
+        authKey = puKey . _Just
+        authToken = puOAuthToken . _Just
 
 instance GoogleRequest PlayersUnhide' where
         type Rs PlayersUnhide' = ()
         request = requestWithRoute defReq gamesManagementURL
         requestWithRoute r u PlayersUnhide'{..}
-          = go _puQuotaUser (Just _puPrettyPrint) _puUserIp
+          = go _puQuotaUser (Just _puPrettyPrint) _puUserIP
               _puApplicationId
               _puKey
-              _puOauthToken
+              _puOAuthToken
               _puPlayerId
               _puFields
-              (Just _puAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PlayersUnhideResource)

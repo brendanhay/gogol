@@ -34,11 +34,10 @@ module Network.Google.Resource.Taskqueue.Tasks.List
     , tQuotaUser
     , tPrettyPrint
     , tProject
-    , tUserIp
+    , tUserIP
     , tKey
-    , tOauthToken
+    , tOAuthToken
     , tFields
-    , tAlt
     ) where
 
 import           Network.Google.AppEngineTaskQueue.Types
@@ -54,10 +53,10 @@ type TasksListResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] Tasks2
+                         QueryParam "alt" AltJSON :> Get '[JSON] Tasks2
 
 -- | List Tasks in a TaskQueue
 --
@@ -67,11 +66,10 @@ data TasksList' = TasksList'
     , _tQuotaUser   :: !(Maybe Text)
     , _tPrettyPrint :: !Bool
     , _tProject     :: !Text
-    , _tUserIp      :: !(Maybe Text)
-    , _tKey         :: !(Maybe Text)
-    , _tOauthToken  :: !(Maybe Text)
+    , _tUserIP      :: !(Maybe Text)
+    , _tKey         :: !(Maybe Key)
+    , _tOAuthToken  :: !(Maybe OAuthToken)
     , _tFields      :: !(Maybe Text)
-    , _tAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TasksList'' with the minimum fields required to make a request.
@@ -86,15 +84,13 @@ data TasksList' = TasksList'
 --
 -- * 'tProject'
 --
--- * 'tUserIp'
+-- * 'tUserIP'
 --
 -- * 'tKey'
 --
--- * 'tOauthToken'
+-- * 'tOAuthToken'
 --
 -- * 'tFields'
---
--- * 'tAlt'
 tasksList'
     :: Text -- ^ 'taskqueue'
     -> Text -- ^ 'project'
@@ -105,11 +101,10 @@ tasksList' pTTaskqueue_ pTProject_ =
     , _tQuotaUser = Nothing
     , _tPrettyPrint = True
     , _tProject = pTProject_
-    , _tUserIp = Nothing
+    , _tUserIP = Nothing
     , _tKey = Nothing
-    , _tOauthToken = Nothing
+    , _tOAuthToken = Nothing
     , _tFields = Nothing
-    , _tAlt = JSON
     }
 
 -- | The id of the taskqueue to list tasks from.
@@ -135,27 +130,27 @@ tProject = lens _tProject (\ s a -> s{_tProject = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tUserIp :: Lens' TasksList' (Maybe Text)
-tUserIp = lens _tUserIp (\ s a -> s{_tUserIp = a})
+tUserIP :: Lens' TasksList' (Maybe Text)
+tUserIP = lens _tUserIP (\ s a -> s{_tUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tKey :: Lens' TasksList' (Maybe Text)
+tKey :: Lens' TasksList' (Maybe Key)
 tKey = lens _tKey (\ s a -> s{_tKey = a})
 
 -- | OAuth 2.0 token for the current user.
-tOauthToken :: Lens' TasksList' (Maybe Text)
-tOauthToken
-  = lens _tOauthToken (\ s a -> s{_tOauthToken = a})
+tOAuthToken :: Lens' TasksList' (Maybe OAuthToken)
+tOAuthToken
+  = lens _tOAuthToken (\ s a -> s{_tOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 tFields :: Lens' TasksList' (Maybe Text)
 tFields = lens _tFields (\ s a -> s{_tFields = a})
 
--- | Data format for the response.
-tAlt :: Lens' TasksList' Alt
-tAlt = lens _tAlt (\ s a -> s{_tAlt = a})
+instance GoogleAuth TasksList' where
+        authKey = tKey . _Just
+        authToken = tOAuthToken . _Just
 
 instance GoogleRequest TasksList' where
         type Rs TasksList' = Tasks2
@@ -164,11 +159,11 @@ instance GoogleRequest TasksList' where
         requestWithRoute r u TasksList'{..}
           = go _tTaskqueue _tQuotaUser (Just _tPrettyPrint)
               _tProject
-              _tUserIp
+              _tUserIP
               _tKey
-              _tOauthToken
+              _tOAuthToken
               _tFields
-              (Just _tAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy TasksListResource)
                       r

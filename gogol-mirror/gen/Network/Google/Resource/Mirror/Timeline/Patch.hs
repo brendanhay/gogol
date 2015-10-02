@@ -32,12 +32,12 @@ module Network.Google.Resource.Mirror.Timeline.Patch
     -- * Request Lenses
     , tpQuotaUser
     , tpPrettyPrint
-    , tpUserIp
+    , tpUserIP
     , tpKey
     , tpId
-    , tpOauthToken
+    , tpOAuthToken
+    , tpTimelineItem
     , tpFields
-    , tpAlt
     ) where
 
 import           Network.Google.Mirror.Types
@@ -51,23 +51,25 @@ type TimelinePatchResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Patch '[JSON] TimelineItem
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] TimelineItem :>
+                         Patch '[JSON] TimelineItem
 
 -- | Updates a timeline item in place. This method supports patch semantics.
 --
 -- /See:/ 'timelinePatch'' smart constructor.
 data TimelinePatch' = TimelinePatch'
-    { _tpQuotaUser   :: !(Maybe Text)
-    , _tpPrettyPrint :: !Bool
-    , _tpUserIp      :: !(Maybe Text)
-    , _tpKey         :: !(Maybe Text)
-    , _tpId          :: !Text
-    , _tpOauthToken  :: !(Maybe Text)
-    , _tpFields      :: !(Maybe Text)
-    , _tpAlt         :: !Alt
+    { _tpQuotaUser    :: !(Maybe Text)
+    , _tpPrettyPrint  :: !Bool
+    , _tpUserIP       :: !(Maybe Text)
+    , _tpKey          :: !(Maybe Key)
+    , _tpId           :: !Text
+    , _tpOAuthToken   :: !(Maybe OAuthToken)
+    , _tpTimelineItem :: !TimelineItem
+    , _tpFields       :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TimelinePatch'' with the minimum fields required to make a request.
@@ -78,30 +80,31 @@ data TimelinePatch' = TimelinePatch'
 --
 -- * 'tpPrettyPrint'
 --
--- * 'tpUserIp'
+-- * 'tpUserIP'
 --
 -- * 'tpKey'
 --
 -- * 'tpId'
 --
--- * 'tpOauthToken'
+-- * 'tpOAuthToken'
+--
+-- * 'tpTimelineItem'
 --
 -- * 'tpFields'
---
--- * 'tpAlt'
 timelinePatch'
     :: Text -- ^ 'id'
+    -> TimelineItem -- ^ 'TimelineItem'
     -> TimelinePatch'
-timelinePatch' pTpId_ =
+timelinePatch' pTpId_ pTpTimelineItem_ =
     TimelinePatch'
     { _tpQuotaUser = Nothing
     , _tpPrettyPrint = True
-    , _tpUserIp = Nothing
+    , _tpUserIP = Nothing
     , _tpKey = Nothing
     , _tpId = pTpId_
-    , _tpOauthToken = Nothing
+    , _tpOAuthToken = Nothing
+    , _tpTimelineItem = pTpTimelineItem_
     , _tpFields = Nothing
-    , _tpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -119,13 +122,13 @@ tpPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tpUserIp :: Lens' TimelinePatch' (Maybe Text)
-tpUserIp = lens _tpUserIp (\ s a -> s{_tpUserIp = a})
+tpUserIP :: Lens' TimelinePatch' (Maybe Text)
+tpUserIP = lens _tpUserIP (\ s a -> s{_tpUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tpKey :: Lens' TimelinePatch' (Maybe Text)
+tpKey :: Lens' TimelinePatch' (Maybe Key)
 tpKey = lens _tpKey (\ s a -> s{_tpKey = a})
 
 -- | The ID of the timeline item.
@@ -133,28 +136,35 @@ tpId :: Lens' TimelinePatch' Text
 tpId = lens _tpId (\ s a -> s{_tpId = a})
 
 -- | OAuth 2.0 token for the current user.
-tpOauthToken :: Lens' TimelinePatch' (Maybe Text)
-tpOauthToken
-  = lens _tpOauthToken (\ s a -> s{_tpOauthToken = a})
+tpOAuthToken :: Lens' TimelinePatch' (Maybe OAuthToken)
+tpOAuthToken
+  = lens _tpOAuthToken (\ s a -> s{_tpOAuthToken = a})
+
+-- | Multipart request metadata.
+tpTimelineItem :: Lens' TimelinePatch' TimelineItem
+tpTimelineItem
+  = lens _tpTimelineItem
+      (\ s a -> s{_tpTimelineItem = a})
 
 -- | Selector specifying which fields to include in a partial response.
 tpFields :: Lens' TimelinePatch' (Maybe Text)
 tpFields = lens _tpFields (\ s a -> s{_tpFields = a})
 
--- | Data format for the response.
-tpAlt :: Lens' TimelinePatch' Alt
-tpAlt = lens _tpAlt (\ s a -> s{_tpAlt = a})
+instance GoogleAuth TimelinePatch' where
+        authKey = tpKey . _Just
+        authToken = tpOAuthToken . _Just
 
 instance GoogleRequest TimelinePatch' where
         type Rs TimelinePatch' = TimelineItem
         request = requestWithRoute defReq mirrorURL
         requestWithRoute r u TimelinePatch'{..}
-          = go _tpQuotaUser (Just _tpPrettyPrint) _tpUserIp
+          = go _tpQuotaUser (Just _tpPrettyPrint) _tpUserIP
               _tpKey
               _tpId
-              _tpOauthToken
+              _tpOAuthToken
               _tpFields
-              (Just _tpAlt)
+              (Just AltJSON)
+              _tpTimelineItem
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TimelinePatchResource)

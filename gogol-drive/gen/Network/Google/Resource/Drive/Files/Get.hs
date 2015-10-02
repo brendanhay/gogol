@@ -32,16 +32,15 @@ module Network.Google.Resource.Drive.Files.Get
     -- * Request Lenses
     , fgQuotaUser
     , fgPrettyPrint
-    , fgUserIp
+    , fgUserIP
     , fgUpdateViewedDate
     , fgKey
     , fgProjection
     , fgAcknowledgeAbuse
     , fgFileId
-    , fgOauthToken
+    , fgOAuthToken
     , fgRevisionId
     , fgFields
-    , fgAlt
     ) where
 
 import           Network.Google.Drive.Types
@@ -56,13 +55,28 @@ type FilesGetResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "updateViewedDate" Bool :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "projection" DriveFilesGetProjection :>
                      QueryParam "acknowledgeAbuse" Bool :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "revisionId" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Get '[JSON] File
+                             QueryParam "alt" AltJSON :> Get '[JSON] File
+       :<|>
+       "files" :>
+         Capture "fileId" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "updateViewedDate" Bool :>
+                   QueryParam "key" Key :>
+                     QueryParam "projection" DriveFilesGetProjection :>
+                       QueryParam "acknowledgeAbuse" Bool :>
+                         QueryParam "oauth_token" OAuthToken :>
+                           QueryParam "revisionId" Text :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Media :>
+                                 Get '[OctetStream] Stream
 
 -- | Gets a file\'s metadata by ID.
 --
@@ -70,16 +84,15 @@ type FilesGetResource =
 data FilesGet' = FilesGet'
     { _fgQuotaUser        :: !(Maybe Text)
     , _fgPrettyPrint      :: !Bool
-    , _fgUserIp           :: !(Maybe Text)
+    , _fgUserIP           :: !(Maybe Text)
     , _fgUpdateViewedDate :: !Bool
-    , _fgKey              :: !(Maybe Text)
+    , _fgKey              :: !(Maybe Key)
     , _fgProjection       :: !(Maybe DriveFilesGetProjection)
     , _fgAcknowledgeAbuse :: !Bool
     , _fgFileId           :: !Text
-    , _fgOauthToken       :: !(Maybe Text)
+    , _fgOAuthToken       :: !(Maybe OAuthToken)
     , _fgRevisionId       :: !(Maybe Text)
     , _fgFields           :: !(Maybe Text)
-    , _fgAlt              :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FilesGet'' with the minimum fields required to make a request.
@@ -90,7 +103,7 @@ data FilesGet' = FilesGet'
 --
 -- * 'fgPrettyPrint'
 --
--- * 'fgUserIp'
+-- * 'fgUserIP'
 --
 -- * 'fgUpdateViewedDate'
 --
@@ -102,13 +115,11 @@ data FilesGet' = FilesGet'
 --
 -- * 'fgFileId'
 --
--- * 'fgOauthToken'
+-- * 'fgOAuthToken'
 --
 -- * 'fgRevisionId'
 --
 -- * 'fgFields'
---
--- * 'fgAlt'
 filesGet'
     :: Text -- ^ 'fileId'
     -> FilesGet'
@@ -116,16 +127,15 @@ filesGet' pFgFileId_ =
     FilesGet'
     { _fgQuotaUser = Nothing
     , _fgPrettyPrint = True
-    , _fgUserIp = Nothing
+    , _fgUserIP = Nothing
     , _fgUpdateViewedDate = False
     , _fgKey = Nothing
     , _fgProjection = Nothing
     , _fgAcknowledgeAbuse = False
     , _fgFileId = pFgFileId_
-    , _fgOauthToken = Nothing
+    , _fgOAuthToken = Nothing
     , _fgRevisionId = Nothing
     , _fgFields = Nothing
-    , _fgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -143,8 +153,8 @@ fgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-fgUserIp :: Lens' FilesGet' (Maybe Text)
-fgUserIp = lens _fgUserIp (\ s a -> s{_fgUserIp = a})
+fgUserIP :: Lens' FilesGet' (Maybe Text)
+fgUserIP = lens _fgUserIP (\ s a -> s{_fgUserIP = a})
 
 -- | Deprecated: Use files.update with modifiedDateBehavior=noChange,
 -- updateViewedDate=true and an empty request body.
@@ -156,7 +166,7 @@ fgUpdateViewedDate
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fgKey :: Lens' FilesGet' (Maybe Text)
+fgKey :: Lens' FilesGet' (Maybe Key)
 fgKey = lens _fgKey (\ s a -> s{_fgKey = a})
 
 -- | This parameter is deprecated and has no function.
@@ -176,9 +186,9 @@ fgFileId :: Lens' FilesGet' Text
 fgFileId = lens _fgFileId (\ s a -> s{_fgFileId = a})
 
 -- | OAuth 2.0 token for the current user.
-fgOauthToken :: Lens' FilesGet' (Maybe Text)
-fgOauthToken
-  = lens _fgOauthToken (\ s a -> s{_fgOauthToken = a})
+fgOAuthToken :: Lens' FilesGet' (Maybe OAuthToken)
+fgOAuthToken
+  = lens _fgOAuthToken (\ s a -> s{_fgOAuthToken = a})
 
 -- | Specifies the Revision ID that should be downloaded. Ignored unless
 -- alt=media is specified.
@@ -190,24 +200,42 @@ fgRevisionId
 fgFields :: Lens' FilesGet' (Maybe Text)
 fgFields = lens _fgFields (\ s a -> s{_fgFields = a})
 
--- | Data format for the response.
-fgAlt :: Lens' FilesGet' Alt
-fgAlt = lens _fgAlt (\ s a -> s{_fgAlt = a})
+instance GoogleAuth FilesGet' where
+        authKey = fgKey . _Just
+        authToken = fgOAuthToken . _Just
 
 instance GoogleRequest FilesGet' where
         type Rs FilesGet' = File
         request = requestWithRoute defReq driveURL
         requestWithRoute r u FilesGet'{..}
-          = go _fgQuotaUser (Just _fgPrettyPrint) _fgUserIp
+          = go _fgQuotaUser (Just _fgPrettyPrint) _fgUserIP
               (Just _fgUpdateViewedDate)
               _fgKey
               _fgProjection
               (Just _fgAcknowledgeAbuse)
               _fgFileId
-              _fgOauthToken
+              _fgOAuthToken
               _fgRevisionId
               _fgFields
-              (Just _fgAlt)
-          where go
+              (Just AltJSON)
+          where go :<|> _
+                  = clientWithRoute (Proxy :: Proxy FilesGetResource) r
+                      u
+
+instance GoogleRequest FilesGet' where
+        type Rs (Download FilesGet') = Stream
+        request = requestWithRoute defReq driveURL
+        requestWithRoute r u FilesGet'{..}
+          = go _fgQuotaUser (Just _fgPrettyPrint) _fgUserIP
+              (Just _fgUpdateViewedDate)
+              _fgKey
+              _fgProjection
+              (Just _fgAcknowledgeAbuse)
+              _fgFileId
+              _fgOAuthToken
+              _fgRevisionId
+              _fgFields
+              (Just Media)
+          where go :<|> _
                   = clientWithRoute (Proxy :: Proxy FilesGetResource) r
                       u

@@ -32,13 +32,12 @@ module Network.Google.Resource.Drive.Permissions.Delete
     -- * Request Lenses
     , perQuotaUser
     , perPrettyPrint
-    , perUserIp
+    , perUserIP
     , perKey
     , perFileId
-    , perOauthToken
+    , perOAuthToken
     , perPermissionId
     , perFields
-    , perAlt
     ) where
 
 import           Network.Google.Drive.Types
@@ -54,10 +53,10 @@ type PermissionsDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Delete '[JSON] ()
+                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a permission from a file.
 --
@@ -65,13 +64,12 @@ type PermissionsDeleteResource =
 data PermissionsDelete' = PermissionsDelete'
     { _perQuotaUser    :: !(Maybe Text)
     , _perPrettyPrint  :: !Bool
-    , _perUserIp       :: !(Maybe Text)
-    , _perKey          :: !(Maybe Text)
+    , _perUserIP       :: !(Maybe Text)
+    , _perKey          :: !(Maybe Key)
     , _perFileId       :: !Text
-    , _perOauthToken   :: !(Maybe Text)
+    , _perOAuthToken   :: !(Maybe OAuthToken)
     , _perPermissionId :: !Text
     , _perFields       :: !(Maybe Text)
-    , _perAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PermissionsDelete'' with the minimum fields required to make a request.
@@ -82,19 +80,17 @@ data PermissionsDelete' = PermissionsDelete'
 --
 -- * 'perPrettyPrint'
 --
--- * 'perUserIp'
+-- * 'perUserIP'
 --
 -- * 'perKey'
 --
 -- * 'perFileId'
 --
--- * 'perOauthToken'
+-- * 'perOAuthToken'
 --
 -- * 'perPermissionId'
 --
 -- * 'perFields'
---
--- * 'perAlt'
 permissionsDelete'
     :: Text -- ^ 'fileId'
     -> Text -- ^ 'permissionId'
@@ -103,13 +99,12 @@ permissionsDelete' pPerFileId_ pPerPermissionId_ =
     PermissionsDelete'
     { _perQuotaUser = Nothing
     , _perPrettyPrint = True
-    , _perUserIp = Nothing
+    , _perUserIP = Nothing
     , _perKey = Nothing
     , _perFileId = pPerFileId_
-    , _perOauthToken = Nothing
+    , _perOAuthToken = Nothing
     , _perPermissionId = pPerPermissionId_
     , _perFields = Nothing
-    , _perAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,14 +122,14 @@ perPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-perUserIp :: Lens' PermissionsDelete' (Maybe Text)
-perUserIp
-  = lens _perUserIp (\ s a -> s{_perUserIp = a})
+perUserIP :: Lens' PermissionsDelete' (Maybe Text)
+perUserIP
+  = lens _perUserIP (\ s a -> s{_perUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-perKey :: Lens' PermissionsDelete' (Maybe Text)
+perKey :: Lens' PermissionsDelete' (Maybe Key)
 perKey = lens _perKey (\ s a -> s{_perKey = a})
 
 -- | The ID for the file.
@@ -143,10 +138,10 @@ perFileId
   = lens _perFileId (\ s a -> s{_perFileId = a})
 
 -- | OAuth 2.0 token for the current user.
-perOauthToken :: Lens' PermissionsDelete' (Maybe Text)
-perOauthToken
-  = lens _perOauthToken
-      (\ s a -> s{_perOauthToken = a})
+perOAuthToken :: Lens' PermissionsDelete' (Maybe OAuthToken)
+perOAuthToken
+  = lens _perOAuthToken
+      (\ s a -> s{_perOAuthToken = a})
 
 -- | The ID for the permission.
 perPermissionId :: Lens' PermissionsDelete' Text
@@ -159,21 +154,21 @@ perFields :: Lens' PermissionsDelete' (Maybe Text)
 perFields
   = lens _perFields (\ s a -> s{_perFields = a})
 
--- | Data format for the response.
-perAlt :: Lens' PermissionsDelete' Alt
-perAlt = lens _perAlt (\ s a -> s{_perAlt = a})
+instance GoogleAuth PermissionsDelete' where
+        authKey = perKey . _Just
+        authToken = perOAuthToken . _Just
 
 instance GoogleRequest PermissionsDelete' where
         type Rs PermissionsDelete' = ()
         request = requestWithRoute defReq driveURL
         requestWithRoute r u PermissionsDelete'{..}
-          = go _perQuotaUser (Just _perPrettyPrint) _perUserIp
+          = go _perQuotaUser (Just _perPrettyPrint) _perUserIP
               _perKey
               _perFileId
-              _perOauthToken
+              _perOAuthToken
               _perPermissionId
               _perFields
-              (Just _perAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PermissionsDeleteResource)

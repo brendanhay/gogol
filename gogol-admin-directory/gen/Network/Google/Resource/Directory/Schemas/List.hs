@@ -32,12 +32,11 @@ module Network.Google.Resource.Directory.Schemas.List
     -- * Request Lenses
     , slQuotaUser
     , slPrettyPrint
-    , slUserIp
+    , slUserIP
     , slCustomerId
     , slKey
-    , slOauthToken
+    , slOAuthToken
     , slFields
-    , slAlt
     ) where
 
 import           Network.Google.AdminDirectory.Types
@@ -52,10 +51,10 @@ type SchemasListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Get '[JSON] Schemas
+                       QueryParam "alt" AltJSON :> Get '[JSON] Schemas
 
 -- | Retrieve all schemas for a customer
 --
@@ -63,12 +62,11 @@ type SchemasListResource =
 data SchemasList' = SchemasList'
     { _slQuotaUser   :: !(Maybe Text)
     , _slPrettyPrint :: !Bool
-    , _slUserIp      :: !(Maybe Text)
+    , _slUserIP      :: !(Maybe Text)
     , _slCustomerId  :: !Text
-    , _slKey         :: !(Maybe Text)
-    , _slOauthToken  :: !(Maybe Text)
+    , _slKey         :: !(Maybe Key)
+    , _slOAuthToken  :: !(Maybe OAuthToken)
     , _slFields      :: !(Maybe Text)
-    , _slAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SchemasList'' with the minimum fields required to make a request.
@@ -79,17 +77,15 @@ data SchemasList' = SchemasList'
 --
 -- * 'slPrettyPrint'
 --
--- * 'slUserIp'
+-- * 'slUserIP'
 --
 -- * 'slCustomerId'
 --
 -- * 'slKey'
 --
--- * 'slOauthToken'
+-- * 'slOAuthToken'
 --
 -- * 'slFields'
---
--- * 'slAlt'
 schemasList'
     :: Text -- ^ 'customerId'
     -> SchemasList'
@@ -97,12 +93,11 @@ schemasList' pSlCustomerId_ =
     SchemasList'
     { _slQuotaUser = Nothing
     , _slPrettyPrint = True
-    , _slUserIp = Nothing
+    , _slUserIP = Nothing
     , _slCustomerId = pSlCustomerId_
     , _slKey = Nothing
-    , _slOauthToken = Nothing
+    , _slOAuthToken = Nothing
     , _slFields = Nothing
-    , _slAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,8 +115,8 @@ slPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-slUserIp :: Lens' SchemasList' (Maybe Text)
-slUserIp = lens _slUserIp (\ s a -> s{_slUserIp = a})
+slUserIP :: Lens' SchemasList' (Maybe Text)
+slUserIP = lens _slUserIP (\ s a -> s{_slUserIP = a})
 
 -- | Immutable id of the Google Apps account
 slCustomerId :: Lens' SchemasList' Text
@@ -131,32 +126,32 @@ slCustomerId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-slKey :: Lens' SchemasList' (Maybe Text)
+slKey :: Lens' SchemasList' (Maybe Key)
 slKey = lens _slKey (\ s a -> s{_slKey = a})
 
 -- | OAuth 2.0 token for the current user.
-slOauthToken :: Lens' SchemasList' (Maybe Text)
-slOauthToken
-  = lens _slOauthToken (\ s a -> s{_slOauthToken = a})
+slOAuthToken :: Lens' SchemasList' (Maybe OAuthToken)
+slOAuthToken
+  = lens _slOAuthToken (\ s a -> s{_slOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 slFields :: Lens' SchemasList' (Maybe Text)
 slFields = lens _slFields (\ s a -> s{_slFields = a})
 
--- | Data format for the response.
-slAlt :: Lens' SchemasList' Alt
-slAlt = lens _slAlt (\ s a -> s{_slAlt = a})
+instance GoogleAuth SchemasList' where
+        authKey = slKey . _Just
+        authToken = slOAuthToken . _Just
 
 instance GoogleRequest SchemasList' where
         type Rs SchemasList' = Schemas
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u SchemasList'{..}
-          = go _slQuotaUser (Just _slPrettyPrint) _slUserIp
+          = go _slQuotaUser (Just _slPrettyPrint) _slUserIP
               _slCustomerId
               _slKey
-              _slOauthToken
+              _slOAuthToken
               _slFields
-              (Just _slAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy SchemasListResource)

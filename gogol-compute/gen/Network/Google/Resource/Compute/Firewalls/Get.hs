@@ -33,12 +33,11 @@ module Network.Google.Resource.Compute.Firewalls.Get
     , fgQuotaUser
     , fgPrettyPrint
     , fgProject
-    , fgUserIp
+    , fgUserIP
     , fgKey
-    , fgOauthToken
+    , fgOAuthToken
     , fgFirewall
     , fgFields
-    , fgAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -54,10 +53,10 @@ type FirewallsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] Firewall
+                         QueryParam "alt" AltJSON :> Get '[JSON] Firewall
 
 -- | Returns the specified firewall resource.
 --
@@ -66,12 +65,11 @@ data FirewallsGet' = FirewallsGet'
     { _fgQuotaUser   :: !(Maybe Text)
     , _fgPrettyPrint :: !Bool
     , _fgProject     :: !Text
-    , _fgUserIp      :: !(Maybe Text)
-    , _fgKey         :: !(Maybe Text)
-    , _fgOauthToken  :: !(Maybe Text)
+    , _fgUserIP      :: !(Maybe Text)
+    , _fgKey         :: !(Maybe Key)
+    , _fgOAuthToken  :: !(Maybe OAuthToken)
     , _fgFirewall    :: !Text
     , _fgFields      :: !(Maybe Text)
-    , _fgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FirewallsGet'' with the minimum fields required to make a request.
@@ -84,17 +82,15 @@ data FirewallsGet' = FirewallsGet'
 --
 -- * 'fgProject'
 --
--- * 'fgUserIp'
+-- * 'fgUserIP'
 --
 -- * 'fgKey'
 --
--- * 'fgOauthToken'
+-- * 'fgOAuthToken'
 --
 -- * 'fgFirewall'
 --
 -- * 'fgFields'
---
--- * 'fgAlt'
 firewallsGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'firewall'
@@ -104,12 +100,11 @@ firewallsGet' pFgProject_ pFgFirewall_ =
     { _fgQuotaUser = Nothing
     , _fgPrettyPrint = True
     , _fgProject = pFgProject_
-    , _fgUserIp = Nothing
+    , _fgUserIP = Nothing
     , _fgKey = Nothing
-    , _fgOauthToken = Nothing
+    , _fgOAuthToken = Nothing
     , _fgFirewall = pFgFirewall_
     , _fgFields = Nothing
-    , _fgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -132,19 +127,19 @@ fgProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-fgUserIp :: Lens' FirewallsGet' (Maybe Text)
-fgUserIp = lens _fgUserIp (\ s a -> s{_fgUserIp = a})
+fgUserIP :: Lens' FirewallsGet' (Maybe Text)
+fgUserIP = lens _fgUserIP (\ s a -> s{_fgUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fgKey :: Lens' FirewallsGet' (Maybe Text)
+fgKey :: Lens' FirewallsGet' (Maybe Key)
 fgKey = lens _fgKey (\ s a -> s{_fgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-fgOauthToken :: Lens' FirewallsGet' (Maybe Text)
-fgOauthToken
-  = lens _fgOauthToken (\ s a -> s{_fgOauthToken = a})
+fgOAuthToken :: Lens' FirewallsGet' (Maybe OAuthToken)
+fgOAuthToken
+  = lens _fgOAuthToken (\ s a -> s{_fgOAuthToken = a})
 
 -- | Name of the firewall resource to return.
 fgFirewall :: Lens' FirewallsGet' Text
@@ -155,21 +150,21 @@ fgFirewall
 fgFields :: Lens' FirewallsGet' (Maybe Text)
 fgFields = lens _fgFields (\ s a -> s{_fgFields = a})
 
--- | Data format for the response.
-fgAlt :: Lens' FirewallsGet' Alt
-fgAlt = lens _fgAlt (\ s a -> s{_fgAlt = a})
+instance GoogleAuth FirewallsGet' where
+        authKey = fgKey . _Just
+        authToken = fgOAuthToken . _Just
 
 instance GoogleRequest FirewallsGet' where
         type Rs FirewallsGet' = Firewall
         request = requestWithRoute defReq computeURL
         requestWithRoute r u FirewallsGet'{..}
           = go _fgQuotaUser (Just _fgPrettyPrint) _fgProject
-              _fgUserIp
+              _fgUserIP
               _fgKey
-              _fgOauthToken
+              _fgOAuthToken
               _fgFirewall
               _fgFields
-              (Just _fgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy FirewallsGetResource)

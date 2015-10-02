@@ -33,14 +33,13 @@ module Network.Google.Resource.Analytics.Management.UnsampledReports.Get
     , murgQuotaUser
     , murgPrettyPrint
     , murgWebPropertyId
-    , murgUserIp
+    , murgUserIP
     , murgProfileId
     , murgAccountId
     , murgKey
     , murgUnsampledReportId
-    , murgOauthToken
+    , murgOAuthToken
     , murgFields
-    , murgAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -61,10 +60,10 @@ type ManagementUnsampledReportsGetResource =
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "alt" Alt :>
+                                   QueryParam "alt" AltJSON :>
                                      Get '[JSON] UnsampledReport
 
 -- | Returns a single unsampled report.
@@ -74,14 +73,13 @@ data ManagementUnsampledReportsGet' = ManagementUnsampledReportsGet'
     { _murgQuotaUser         :: !(Maybe Text)
     , _murgPrettyPrint       :: !Bool
     , _murgWebPropertyId     :: !Text
-    , _murgUserIp            :: !(Maybe Text)
+    , _murgUserIP            :: !(Maybe Text)
     , _murgProfileId         :: !Text
     , _murgAccountId         :: !Text
-    , _murgKey               :: !(Maybe Text)
+    , _murgKey               :: !(Maybe Key)
     , _murgUnsampledReportId :: !Text
-    , _murgOauthToken        :: !(Maybe Text)
+    , _murgOAuthToken        :: !(Maybe OAuthToken)
     , _murgFields            :: !(Maybe Text)
-    , _murgAlt               :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementUnsampledReportsGet'' with the minimum fields required to make a request.
@@ -94,7 +92,7 @@ data ManagementUnsampledReportsGet' = ManagementUnsampledReportsGet'
 --
 -- * 'murgWebPropertyId'
 --
--- * 'murgUserIp'
+-- * 'murgUserIP'
 --
 -- * 'murgProfileId'
 --
@@ -104,11 +102,9 @@ data ManagementUnsampledReportsGet' = ManagementUnsampledReportsGet'
 --
 -- * 'murgUnsampledReportId'
 --
--- * 'murgOauthToken'
+-- * 'murgOAuthToken'
 --
 -- * 'murgFields'
---
--- * 'murgAlt'
 managementUnsampledReportsGet'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
@@ -120,14 +116,13 @@ managementUnsampledReportsGet' pMurgWebPropertyId_ pMurgProfileId_ pMurgAccountI
     { _murgQuotaUser = Nothing
     , _murgPrettyPrint = False
     , _murgWebPropertyId = pMurgWebPropertyId_
-    , _murgUserIp = Nothing
+    , _murgUserIP = Nothing
     , _murgProfileId = pMurgProfileId_
     , _murgAccountId = pMurgAccountId_
     , _murgKey = Nothing
     , _murgUnsampledReportId = pMurgUnsampledReportId_
-    , _murgOauthToken = Nothing
+    , _murgOAuthToken = Nothing
     , _murgFields = Nothing
-    , _murgAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,9 +147,9 @@ murgWebPropertyId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-murgUserIp :: Lens' ManagementUnsampledReportsGet' (Maybe Text)
-murgUserIp
-  = lens _murgUserIp (\ s a -> s{_murgUserIp = a})
+murgUserIP :: Lens' ManagementUnsampledReportsGet' (Maybe Text)
+murgUserIP
+  = lens _murgUserIP (\ s a -> s{_murgUserIP = a})
 
 -- | View (Profile) ID to retrieve unsampled report for.
 murgProfileId :: Lens' ManagementUnsampledReportsGet' Text
@@ -171,7 +166,7 @@ murgAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-murgKey :: Lens' ManagementUnsampledReportsGet' (Maybe Text)
+murgKey :: Lens' ManagementUnsampledReportsGet' (Maybe Key)
 murgKey = lens _murgKey (\ s a -> s{_murgKey = a})
 
 -- | ID of the unsampled report to retrieve.
@@ -181,19 +176,20 @@ murgUnsampledReportId
       (\ s a -> s{_murgUnsampledReportId = a})
 
 -- | OAuth 2.0 token for the current user.
-murgOauthToken :: Lens' ManagementUnsampledReportsGet' (Maybe Text)
-murgOauthToken
-  = lens _murgOauthToken
-      (\ s a -> s{_murgOauthToken = a})
+murgOAuthToken :: Lens' ManagementUnsampledReportsGet' (Maybe OAuthToken)
+murgOAuthToken
+  = lens _murgOAuthToken
+      (\ s a -> s{_murgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 murgFields :: Lens' ManagementUnsampledReportsGet' (Maybe Text)
 murgFields
   = lens _murgFields (\ s a -> s{_murgFields = a})
 
--- | Data format for the response.
-murgAlt :: Lens' ManagementUnsampledReportsGet' Alt
-murgAlt = lens _murgAlt (\ s a -> s{_murgAlt = a})
+instance GoogleAuth ManagementUnsampledReportsGet'
+         where
+        authKey = murgKey . _Just
+        authToken = murgOAuthToken . _Just
 
 instance GoogleRequest ManagementUnsampledReportsGet'
          where
@@ -204,14 +200,14 @@ instance GoogleRequest ManagementUnsampledReportsGet'
           ManagementUnsampledReportsGet'{..}
           = go _murgQuotaUser (Just _murgPrettyPrint)
               _murgWebPropertyId
-              _murgUserIp
+              _murgUserIP
               _murgProfileId
               _murgAccountId
               _murgKey
               _murgUnsampledReportId
-              _murgOauthToken
+              _murgOAuthToken
               _murgFields
-              (Just _murgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

@@ -32,12 +32,12 @@ module Network.Google.Resource.DFAReporting.EventTags.Update
     -- * Request Lenses
     , etuQuotaUser
     , etuPrettyPrint
-    , etuUserIp
+    , etuUserIP
     , etuProfileId
     , etuKey
-    , etuOauthToken
+    , etuOAuthToken
+    , etuEventTag
     , etuFields
-    , etuAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,10 +52,11 @@ type EventTagsUpdateResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Put '[JSON] EventTag
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] EventTag :> Put '[JSON] EventTag
 
 -- | Updates an existing event tag.
 --
@@ -63,12 +64,12 @@ type EventTagsUpdateResource =
 data EventTagsUpdate' = EventTagsUpdate'
     { _etuQuotaUser   :: !(Maybe Text)
     , _etuPrettyPrint :: !Bool
-    , _etuUserIp      :: !(Maybe Text)
+    , _etuUserIP      :: !(Maybe Text)
     , _etuProfileId   :: !Int64
-    , _etuKey         :: !(Maybe Text)
-    , _etuOauthToken  :: !(Maybe Text)
+    , _etuKey         :: !(Maybe Key)
+    , _etuOAuthToken  :: !(Maybe OAuthToken)
+    , _etuEventTag    :: !EventTag
     , _etuFields      :: !(Maybe Text)
-    , _etuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventTagsUpdate'' with the minimum fields required to make a request.
@@ -79,30 +80,31 @@ data EventTagsUpdate' = EventTagsUpdate'
 --
 -- * 'etuPrettyPrint'
 --
--- * 'etuUserIp'
+-- * 'etuUserIP'
 --
 -- * 'etuProfileId'
 --
 -- * 'etuKey'
 --
--- * 'etuOauthToken'
+-- * 'etuOAuthToken'
+--
+-- * 'etuEventTag'
 --
 -- * 'etuFields'
---
--- * 'etuAlt'
 eventTagsUpdate'
     :: Int64 -- ^ 'profileId'
+    -> EventTag -- ^ 'EventTag'
     -> EventTagsUpdate'
-eventTagsUpdate' pEtuProfileId_ =
+eventTagsUpdate' pEtuProfileId_ pEtuEventTag_ =
     EventTagsUpdate'
     { _etuQuotaUser = Nothing
     , _etuPrettyPrint = True
-    , _etuUserIp = Nothing
+    , _etuUserIP = Nothing
     , _etuProfileId = pEtuProfileId_
     , _etuKey = Nothing
-    , _etuOauthToken = Nothing
+    , _etuOAuthToken = Nothing
+    , _etuEventTag = pEtuEventTag_
     , _etuFields = Nothing
-    , _etuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,9 +122,9 @@ etuPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-etuUserIp :: Lens' EventTagsUpdate' (Maybe Text)
-etuUserIp
-  = lens _etuUserIp (\ s a -> s{_etuUserIp = a})
+etuUserIP :: Lens' EventTagsUpdate' (Maybe Text)
+etuUserIP
+  = lens _etuUserIP (\ s a -> s{_etuUserIP = a})
 
 -- | User profile ID associated with this request.
 etuProfileId :: Lens' EventTagsUpdate' Int64
@@ -132,34 +134,40 @@ etuProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-etuKey :: Lens' EventTagsUpdate' (Maybe Text)
+etuKey :: Lens' EventTagsUpdate' (Maybe Key)
 etuKey = lens _etuKey (\ s a -> s{_etuKey = a})
 
 -- | OAuth 2.0 token for the current user.
-etuOauthToken :: Lens' EventTagsUpdate' (Maybe Text)
-etuOauthToken
-  = lens _etuOauthToken
-      (\ s a -> s{_etuOauthToken = a})
+etuOAuthToken :: Lens' EventTagsUpdate' (Maybe OAuthToken)
+etuOAuthToken
+  = lens _etuOAuthToken
+      (\ s a -> s{_etuOAuthToken = a})
+
+-- | Multipart request metadata.
+etuEventTag :: Lens' EventTagsUpdate' EventTag
+etuEventTag
+  = lens _etuEventTag (\ s a -> s{_etuEventTag = a})
 
 -- | Selector specifying which fields to include in a partial response.
 etuFields :: Lens' EventTagsUpdate' (Maybe Text)
 etuFields
   = lens _etuFields (\ s a -> s{_etuFields = a})
 
--- | Data format for the response.
-etuAlt :: Lens' EventTagsUpdate' Alt
-etuAlt = lens _etuAlt (\ s a -> s{_etuAlt = a})
+instance GoogleAuth EventTagsUpdate' where
+        authKey = etuKey . _Just
+        authToken = etuOAuthToken . _Just
 
 instance GoogleRequest EventTagsUpdate' where
         type Rs EventTagsUpdate' = EventTag
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u EventTagsUpdate'{..}
-          = go _etuQuotaUser (Just _etuPrettyPrint) _etuUserIp
+          = go _etuQuotaUser (Just _etuPrettyPrint) _etuUserIP
               _etuProfileId
               _etuKey
-              _etuOauthToken
+              _etuOAuthToken
               _etuFields
-              (Just _etuAlt)
+              (Just AltJSON)
+              _etuEventTag
           where go
                   = clientWithRoute
                       (Proxy :: Proxy EventTagsUpdateResource)

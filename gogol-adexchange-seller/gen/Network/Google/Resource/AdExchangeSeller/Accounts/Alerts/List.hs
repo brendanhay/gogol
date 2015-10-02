@@ -32,13 +32,12 @@ module Network.Google.Resource.AdExchangeSeller.Accounts.Alerts.List
     -- * Request Lenses
     , aalQuotaUser
     , aalPrettyPrint
-    , aalUserIp
+    , aalUserIP
     , aalLocale
     , aalAccountId
     , aalKey
-    , aalOauthToken
+    , aalOAuthToken
     , aalFields
-    , aalAlt
     ) where
 
 import           Network.Google.AdExchangeSeller.Types
@@ -54,10 +53,10 @@ type AccountsAlertsListResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "locale" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] Alerts
+                         QueryParam "alt" AltJSON :> Get '[JSON] Alerts
 
 -- | List the alerts for this Ad Exchange account.
 --
@@ -65,13 +64,12 @@ type AccountsAlertsListResource =
 data AccountsAlertsList' = AccountsAlertsList'
     { _aalQuotaUser   :: !(Maybe Text)
     , _aalPrettyPrint :: !Bool
-    , _aalUserIp      :: !(Maybe Text)
+    , _aalUserIP      :: !(Maybe Text)
     , _aalLocale      :: !(Maybe Text)
     , _aalAccountId   :: !Text
-    , _aalKey         :: !(Maybe Text)
-    , _aalOauthToken  :: !(Maybe Text)
+    , _aalKey         :: !(Maybe Key)
+    , _aalOAuthToken  :: !(Maybe OAuthToken)
     , _aalFields      :: !(Maybe Text)
-    , _aalAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsAlertsList'' with the minimum fields required to make a request.
@@ -82,7 +80,7 @@ data AccountsAlertsList' = AccountsAlertsList'
 --
 -- * 'aalPrettyPrint'
 --
--- * 'aalUserIp'
+-- * 'aalUserIP'
 --
 -- * 'aalLocale'
 --
@@ -90,11 +88,9 @@ data AccountsAlertsList' = AccountsAlertsList'
 --
 -- * 'aalKey'
 --
--- * 'aalOauthToken'
+-- * 'aalOAuthToken'
 --
 -- * 'aalFields'
---
--- * 'aalAlt'
 accountsAlertsList'
     :: Text -- ^ 'accountId'
     -> AccountsAlertsList'
@@ -102,13 +98,12 @@ accountsAlertsList' pAalAccountId_ =
     AccountsAlertsList'
     { _aalQuotaUser = Nothing
     , _aalPrettyPrint = True
-    , _aalUserIp = Nothing
+    , _aalUserIP = Nothing
     , _aalLocale = Nothing
     , _aalAccountId = pAalAccountId_
     , _aalKey = Nothing
-    , _aalOauthToken = Nothing
+    , _aalOAuthToken = Nothing
     , _aalFields = Nothing
-    , _aalAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -126,9 +121,9 @@ aalPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-aalUserIp :: Lens' AccountsAlertsList' (Maybe Text)
-aalUserIp
-  = lens _aalUserIp (\ s a -> s{_aalUserIp = a})
+aalUserIP :: Lens' AccountsAlertsList' (Maybe Text)
+aalUserIP
+  = lens _aalUserIP (\ s a -> s{_aalUserIP = a})
 
 -- | The locale to use for translating alert messages. The account locale
 -- will be used if this is not supplied. The AdSense default (English) will
@@ -145,35 +140,35 @@ aalAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aalKey :: Lens' AccountsAlertsList' (Maybe Text)
+aalKey :: Lens' AccountsAlertsList' (Maybe Key)
 aalKey = lens _aalKey (\ s a -> s{_aalKey = a})
 
 -- | OAuth 2.0 token for the current user.
-aalOauthToken :: Lens' AccountsAlertsList' (Maybe Text)
-aalOauthToken
-  = lens _aalOauthToken
-      (\ s a -> s{_aalOauthToken = a})
+aalOAuthToken :: Lens' AccountsAlertsList' (Maybe OAuthToken)
+aalOAuthToken
+  = lens _aalOAuthToken
+      (\ s a -> s{_aalOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 aalFields :: Lens' AccountsAlertsList' (Maybe Text)
 aalFields
   = lens _aalFields (\ s a -> s{_aalFields = a})
 
--- | Data format for the response.
-aalAlt :: Lens' AccountsAlertsList' Alt
-aalAlt = lens _aalAlt (\ s a -> s{_aalAlt = a})
+instance GoogleAuth AccountsAlertsList' where
+        authKey = aalKey . _Just
+        authToken = aalOAuthToken . _Just
 
 instance GoogleRequest AccountsAlertsList' where
         type Rs AccountsAlertsList' = Alerts
         request = requestWithRoute defReq adExchangeSellerURL
         requestWithRoute r u AccountsAlertsList'{..}
-          = go _aalQuotaUser (Just _aalPrettyPrint) _aalUserIp
+          = go _aalQuotaUser (Just _aalPrettyPrint) _aalUserIP
               _aalLocale
               _aalAccountId
               _aalKey
-              _aalOauthToken
+              _aalOAuthToken
               _aalFields
-              (Just _aalAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountsAlertsListResource)

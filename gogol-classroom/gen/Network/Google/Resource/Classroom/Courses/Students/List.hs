@@ -44,11 +44,10 @@ module Network.Google.Resource.Classroom.Courses.Students.List
     , cslBearerToken
     , cslKey
     , cslPageToken
-    , cslOauthToken
+    , cslOAuthToken
     , cslPageSize
     , cslFields
     , cslCallback
-    , cslAlt
     ) where
 
 import           Network.Google.Classroom.Types
@@ -69,13 +68,13 @@ type CoursesStudentsListResource =
                        QueryParam "access_token" Text :>
                          QueryParam "uploadType" Text :>
                            QueryParam "bearer_token" Text :>
-                             QueryParam "key" Text :>
+                             QueryParam "key" Key :>
                                QueryParam "pageToken" Text :>
-                                 QueryParam "oauth_token" Text :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "pageSize" Int32 :>
                                      QueryParam "fields" Text :>
                                        QueryParam "callback" Text :>
-                                         QueryParam "alt" Text :>
+                                         QueryParam "alt" AltJSON :>
                                            Get '[JSON] ListStudentsResponse
 
 -- | Returns a list of students of this course that the requester is
@@ -94,13 +93,12 @@ data CoursesStudentsList' = CoursesStudentsList'
     , _cslAccessToken    :: !(Maybe Text)
     , _cslUploadType     :: !(Maybe Text)
     , _cslBearerToken    :: !(Maybe Text)
-    , _cslKey            :: !(Maybe Text)
+    , _cslKey            :: !(Maybe Key)
     , _cslPageToken      :: !(Maybe Text)
-    , _cslOauthToken     :: !(Maybe Text)
+    , _cslOAuthToken     :: !(Maybe OAuthToken)
     , _cslPageSize       :: !(Maybe Int32)
     , _cslFields         :: !(Maybe Text)
     , _cslCallback       :: !(Maybe Text)
-    , _cslAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CoursesStudentsList'' with the minimum fields required to make a request.
@@ -129,15 +127,13 @@ data CoursesStudentsList' = CoursesStudentsList'
 --
 -- * 'cslPageToken'
 --
--- * 'cslOauthToken'
+-- * 'cslOAuthToken'
 --
 -- * 'cslPageSize'
 --
 -- * 'cslFields'
 --
 -- * 'cslCallback'
---
--- * 'cslAlt'
 coursesStudentsList'
     :: Text -- ^ 'courseId'
     -> CoursesStudentsList'
@@ -154,11 +150,10 @@ coursesStudentsList' pCslCourseId_ =
     , _cslBearerToken = Nothing
     , _cslKey = Nothing
     , _cslPageToken = Nothing
-    , _cslOauthToken = Nothing
+    , _cslOAuthToken = Nothing
     , _cslPageSize = Nothing
     , _cslFields = Nothing
     , _cslCallback = Nothing
-    , _cslAlt = "json"
     }
 
 -- | V1 error format.
@@ -216,7 +211,7 @@ cslBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cslKey :: Lens' CoursesStudentsList' (Maybe Text)
+cslKey :: Lens' CoursesStudentsList' (Maybe Key)
 cslKey = lens _cslKey (\ s a -> s{_cslKey = a})
 
 -- | [nextPageToken][google.classroom.v1.ListStudentsResponse.next_page_token]
@@ -230,10 +225,10 @@ cslPageToken
   = lens _cslPageToken (\ s a -> s{_cslPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-cslOauthToken :: Lens' CoursesStudentsList' (Maybe Text)
-cslOauthToken
-  = lens _cslOauthToken
-      (\ s a -> s{_cslOauthToken = a})
+cslOAuthToken :: Lens' CoursesStudentsList' (Maybe OAuthToken)
+cslOAuthToken
+  = lens _cslOAuthToken
+      (\ s a -> s{_cslOAuthToken = a})
 
 -- | Maximum number of items to return. Zero means no maximum. The server may
 -- return fewer than the specified number of results.
@@ -251,9 +246,9 @@ cslCallback :: Lens' CoursesStudentsList' (Maybe Text)
 cslCallback
   = lens _cslCallback (\ s a -> s{_cslCallback = a})
 
--- | Data format for response.
-cslAlt :: Lens' CoursesStudentsList' Text
-cslAlt = lens _cslAlt (\ s a -> s{_cslAlt = a})
+instance GoogleAuth CoursesStudentsList' where
+        authKey = cslKey . _Just
+        authToken = cslOAuthToken . _Just
 
 instance GoogleRequest CoursesStudentsList' where
         type Rs CoursesStudentsList' = ListStudentsResponse
@@ -268,11 +263,11 @@ instance GoogleRequest CoursesStudentsList' where
               _cslBearerToken
               _cslKey
               _cslPageToken
-              _cslOauthToken
+              _cslOAuthToken
               _cslPageSize
               _cslFields
               _cslCallback
-              (Just _cslAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CoursesStudentsListResource)

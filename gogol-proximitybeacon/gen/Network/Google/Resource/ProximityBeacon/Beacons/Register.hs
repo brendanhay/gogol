@@ -39,12 +39,12 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Register
     , brPp
     , brAccessToken
     , brUploadType
+    , brBeacon
     , brBearerToken
     , brKey
-    , brOauthToken
+    , brOAuthToken
     , brFields
     , brCallback
-    , brAlt
     ) where
 
 import           Network.Google.Prelude
@@ -63,11 +63,12 @@ type BeaconsRegisterResource =
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
                        QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
                                QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :> Post '[JSON] Beacon
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON] Beacon :> Post '[JSON] Beacon
 
 -- | Registers a previously unregistered beacon given its \`advertisedId\`.
 -- These IDs are unique within the system. An ID can be registered only
@@ -82,12 +83,12 @@ data BeaconsRegister' = BeaconsRegister'
     , _brPp             :: !Bool
     , _brAccessToken    :: !(Maybe Text)
     , _brUploadType     :: !(Maybe Text)
+    , _brBeacon         :: !Beacon
     , _brBearerToken    :: !(Maybe Text)
-    , _brKey            :: !(Maybe Text)
-    , _brOauthToken     :: !(Maybe Text)
+    , _brKey            :: !(Maybe Key)
+    , _brOAuthToken     :: !(Maybe OAuthToken)
     , _brFields         :: !(Maybe Text)
     , _brCallback       :: !(Maybe Text)
-    , _brAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BeaconsRegister'' with the minimum fields required to make a request.
@@ -108,20 +109,21 @@ data BeaconsRegister' = BeaconsRegister'
 --
 -- * 'brUploadType'
 --
+-- * 'brBeacon'
+--
 -- * 'brBearerToken'
 --
 -- * 'brKey'
 --
--- * 'brOauthToken'
+-- * 'brOAuthToken'
 --
 -- * 'brFields'
 --
 -- * 'brCallback'
---
--- * 'brAlt'
 beaconsRegister'
-    :: BeaconsRegister'
-beaconsRegister' =
+    :: Beacon -- ^ 'Beacon'
+    -> BeaconsRegister'
+beaconsRegister' pBrBeacon_ =
     BeaconsRegister'
     { _brXgafv = Nothing
     , _brQuotaUser = Nothing
@@ -130,12 +132,12 @@ beaconsRegister' =
     , _brPp = True
     , _brAccessToken = Nothing
     , _brUploadType = Nothing
+    , _brBeacon = pBrBeacon_
     , _brBearerToken = Nothing
     , _brKey = Nothing
-    , _brOauthToken = Nothing
+    , _brOAuthToken = Nothing
     , _brFields = Nothing
     , _brCallback = Nothing
-    , _brAlt = "json"
     }
 
 -- | V1 error format.
@@ -176,6 +178,10 @@ brUploadType :: Lens' BeaconsRegister' (Maybe Text)
 brUploadType
   = lens _brUploadType (\ s a -> s{_brUploadType = a})
 
+-- | Multipart request metadata.
+brBeacon :: Lens' BeaconsRegister' Beacon
+brBeacon = lens _brBeacon (\ s a -> s{_brBeacon = a})
+
 -- | OAuth bearer token.
 brBearerToken :: Lens' BeaconsRegister' (Maybe Text)
 brBearerToken
@@ -185,13 +191,13 @@ brBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-brKey :: Lens' BeaconsRegister' (Maybe Text)
+brKey :: Lens' BeaconsRegister' (Maybe Key)
 brKey = lens _brKey (\ s a -> s{_brKey = a})
 
 -- | OAuth 2.0 token for the current user.
-brOauthToken :: Lens' BeaconsRegister' (Maybe Text)
-brOauthToken
-  = lens _brOauthToken (\ s a -> s{_brOauthToken = a})
+brOAuthToken :: Lens' BeaconsRegister' (Maybe OAuthToken)
+brOAuthToken
+  = lens _brOAuthToken (\ s a -> s{_brOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 brFields :: Lens' BeaconsRegister' (Maybe Text)
@@ -202,9 +208,9 @@ brCallback :: Lens' BeaconsRegister' (Maybe Text)
 brCallback
   = lens _brCallback (\ s a -> s{_brCallback = a})
 
--- | Data format for response.
-brAlt :: Lens' BeaconsRegister' Text
-brAlt = lens _brAlt (\ s a -> s{_brAlt = a})
+instance GoogleAuth BeaconsRegister' where
+        authKey = brKey . _Just
+        authToken = brOAuthToken . _Just
 
 instance GoogleRequest BeaconsRegister' where
         type Rs BeaconsRegister' = Beacon
@@ -217,10 +223,11 @@ instance GoogleRequest BeaconsRegister' where
               _brUploadType
               _brBearerToken
               _brKey
-              _brOauthToken
+              _brOAuthToken
               _brFields
               _brCallback
-              (Just _brAlt)
+              (Just AltJSON)
+              _brBeacon
           where go
                   = clientWithRoute
                       (Proxy :: Proxy BeaconsRegisterResource)

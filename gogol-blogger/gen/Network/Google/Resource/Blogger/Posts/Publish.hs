@@ -34,13 +34,12 @@ module Network.Google.Resource.Blogger.Posts.Publish
     , posQuotaUser
     , posPrettyPrint
     , posPublishDate
-    , posUserIp
+    , posUserIP
     , posBlogId
     , posKey
     , posPostId
-    , posOauthToken
+    , posOAuthToken
     , posFields
-    , posAlt
     ) where
 
 import           Network.Google.Blogger.Types
@@ -58,10 +57,10 @@ type PostsPublishResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "publishDate" UTCTime :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Post '[JSON] Post
+                             QueryParam "alt" AltJSON :> Post '[JSON] Post
 
 -- | Publishes a draft post, optionally at the specific time of the given
 -- publishDate parameter.
@@ -71,13 +70,12 @@ data PostsPublish' = PostsPublish'
     { _posQuotaUser   :: !(Maybe Text)
     , _posPrettyPrint :: !Bool
     , _posPublishDate :: !(Maybe UTCTime)
-    , _posUserIp      :: !(Maybe Text)
+    , _posUserIP      :: !(Maybe Text)
     , _posBlogId      :: !Text
-    , _posKey         :: !(Maybe Text)
+    , _posKey         :: !(Maybe Key)
     , _posPostId      :: !Text
-    , _posOauthToken  :: !(Maybe Text)
+    , _posOAuthToken  :: !(Maybe OAuthToken)
     , _posFields      :: !(Maybe Text)
-    , _posAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostsPublish'' with the minimum fields required to make a request.
@@ -90,7 +88,7 @@ data PostsPublish' = PostsPublish'
 --
 -- * 'posPublishDate'
 --
--- * 'posUserIp'
+-- * 'posUserIP'
 --
 -- * 'posBlogId'
 --
@@ -98,11 +96,9 @@ data PostsPublish' = PostsPublish'
 --
 -- * 'posPostId'
 --
--- * 'posOauthToken'
+-- * 'posOAuthToken'
 --
 -- * 'posFields'
---
--- * 'posAlt'
 postsPublish'
     :: Text -- ^ 'blogId'
     -> Text -- ^ 'postId'
@@ -112,13 +108,12 @@ postsPublish' pPosBlogId_ pPosPostId_ =
     { _posQuotaUser = Nothing
     , _posPrettyPrint = True
     , _posPublishDate = Nothing
-    , _posUserIp = Nothing
+    , _posUserIP = Nothing
     , _posBlogId = pPosBlogId_
     , _posKey = Nothing
     , _posPostId = pPosPostId_
-    , _posOauthToken = Nothing
+    , _posOAuthToken = Nothing
     , _posFields = Nothing
-    , _posAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -145,9 +140,9 @@ posPublishDate
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-posUserIp :: Lens' PostsPublish' (Maybe Text)
-posUserIp
-  = lens _posUserIp (\ s a -> s{_posUserIp = a})
+posUserIP :: Lens' PostsPublish' (Maybe Text)
+posUserIP
+  = lens _posUserIP (\ s a -> s{_posUserIP = a})
 
 -- | The ID of the Blog.
 posBlogId :: Lens' PostsPublish' Text
@@ -157,7 +152,7 @@ posBlogId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-posKey :: Lens' PostsPublish' (Maybe Text)
+posKey :: Lens' PostsPublish' (Maybe Key)
 posKey = lens _posKey (\ s a -> s{_posKey = a})
 
 -- | The ID of the Post.
@@ -166,19 +161,19 @@ posPostId
   = lens _posPostId (\ s a -> s{_posPostId = a})
 
 -- | OAuth 2.0 token for the current user.
-posOauthToken :: Lens' PostsPublish' (Maybe Text)
-posOauthToken
-  = lens _posOauthToken
-      (\ s a -> s{_posOauthToken = a})
+posOAuthToken :: Lens' PostsPublish' (Maybe OAuthToken)
+posOAuthToken
+  = lens _posOAuthToken
+      (\ s a -> s{_posOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 posFields :: Lens' PostsPublish' (Maybe Text)
 posFields
   = lens _posFields (\ s a -> s{_posFields = a})
 
--- | Data format for the response.
-posAlt :: Lens' PostsPublish' Alt
-posAlt = lens _posAlt (\ s a -> s{_posAlt = a})
+instance GoogleAuth PostsPublish' where
+        authKey = posKey . _Just
+        authToken = posOAuthToken . _Just
 
 instance GoogleRequest PostsPublish' where
         type Rs PostsPublish' = Post
@@ -186,13 +181,13 @@ instance GoogleRequest PostsPublish' where
         requestWithRoute r u PostsPublish'{..}
           = go _posQuotaUser (Just _posPrettyPrint)
               _posPublishDate
-              _posUserIp
+              _posUserIP
               _posBlogId
               _posKey
               _posPostId
-              _posOauthToken
+              _posOAuthToken
               _posFields
-              (Just _posAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PostsPublishResource)

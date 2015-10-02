@@ -158,7 +158,7 @@ module Network.Google.AdExchangeSeller.Types
     , uRLChannel
     , urlcKind
     , urlcId
-    , urlcUrlPattern
+    , urlcURLPattern
 
     -- * PreferredDeal
     , PreferredDeal
@@ -171,9 +171,6 @@ module Network.Google.AdExchangeSeller.Types
     , pEndTime
     , pId
     , pFixedCpm
-
-    -- * Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.AdExchangeSeller.Types.Product

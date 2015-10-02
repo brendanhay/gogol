@@ -44,7 +44,7 @@ module Network.Google.URLShortener
     , urlKind
     , urlCreated
     , urlAnalytics
-    , urlLongUrl
+    , urlLongURL
     , urlId
 
     -- ** StringCount
@@ -60,10 +60,10 @@ module Network.Google.URLShortener
     , AnalyticsSnapshot
     , analyticsSnapshot
     , asPlatforms
-    , asShortUrlClicks
+    , asShortURLClicks
     , asReferrers
     , asCountries
-    , asLongUrlClicks
+    , asLongURLClicks
     , asBrowsers
 
     -- ** AnalyticsSummary
@@ -86,9 +86,6 @@ module Network.Google.URLShortener
     , uhItemsPerPage
     , uhKind
     , uhItems
-
-    -- ** Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.Prelude

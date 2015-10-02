@@ -19,7 +19,7 @@
 --
 -- | Lists all operations for a project.
 --
--- /See:/ <https://developers.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentmanagerOperationsList@.
+-- /See:/ <https://developers.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerOperationsList@.
 module Network.Google.Resource.DeploymentManager.Operations.List
     (
     -- * REST Resource
@@ -33,20 +33,19 @@ module Network.Google.Resource.DeploymentManager.Operations.List
     , olQuotaUser
     , olPrettyPrint
     , olProject
-    , olUserIp
+    , olUserIP
     , olKey
     , olFilter
     , olPageToken
-    , olOauthToken
+    , olOAuthToken
     , olMaxResults
     , olFields
-    , olAlt
     ) where
 
 import           Network.Google.DeploymentManager.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DeploymentmanagerOperationsList@ which the
+-- | A resource alias for @DeploymentManagerOperationsList@ which the
 -- 'OperationsList'' request conforms to.
 type OperationsListResource =
      Capture "project" Text :>
@@ -55,13 +54,13 @@ type OperationsListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "filter" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "maxResults" Word32 :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :>
+                             QueryParam "alt" AltJSON :>
                                Get '[JSON] OperationsListResponse
 
 -- | Lists all operations for a project.
@@ -71,14 +70,13 @@ data OperationsList' = OperationsList'
     { _olQuotaUser   :: !(Maybe Text)
     , _olPrettyPrint :: !Bool
     , _olProject     :: !Text
-    , _olUserIp      :: !(Maybe Text)
-    , _olKey         :: !(Maybe Text)
+    , _olUserIP      :: !(Maybe Text)
+    , _olKey         :: !(Maybe Key)
     , _olFilter      :: !(Maybe Text)
     , _olPageToken   :: !(Maybe Text)
-    , _olOauthToken  :: !(Maybe Text)
+    , _olOAuthToken  :: !(Maybe OAuthToken)
     , _olMaxResults  :: !Word32
     , _olFields      :: !(Maybe Text)
-    , _olAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperationsList'' with the minimum fields required to make a request.
@@ -91,7 +89,7 @@ data OperationsList' = OperationsList'
 --
 -- * 'olProject'
 --
--- * 'olUserIp'
+-- * 'olUserIP'
 --
 -- * 'olKey'
 --
@@ -99,13 +97,11 @@ data OperationsList' = OperationsList'
 --
 -- * 'olPageToken'
 --
--- * 'olOauthToken'
+-- * 'olOAuthToken'
 --
 -- * 'olMaxResults'
 --
 -- * 'olFields'
---
--- * 'olAlt'
 operationsList'
     :: Text -- ^ 'project'
     -> OperationsList'
@@ -114,14 +110,13 @@ operationsList' pOlProject_ =
     { _olQuotaUser = Nothing
     , _olPrettyPrint = True
     , _olProject = pOlProject_
-    , _olUserIp = Nothing
+    , _olUserIP = Nothing
     , _olKey = Nothing
     , _olFilter = Nothing
     , _olPageToken = Nothing
-    , _olOauthToken = Nothing
+    , _olOAuthToken = Nothing
     , _olMaxResults = 500
     , _olFields = Nothing
-    , _olAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -144,13 +139,13 @@ olProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-olUserIp :: Lens' OperationsList' (Maybe Text)
-olUserIp = lens _olUserIp (\ s a -> s{_olUserIp = a})
+olUserIP :: Lens' OperationsList' (Maybe Text)
+olUserIP = lens _olUserIP (\ s a -> s{_olUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-olKey :: Lens' OperationsList' (Maybe Text)
+olKey :: Lens' OperationsList' (Maybe Key)
 olKey = lens _olKey (\ s a -> s{_olKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
@@ -175,9 +170,9 @@ olPageToken
   = lens _olPageToken (\ s a -> s{_olPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-olOauthToken :: Lens' OperationsList' (Maybe Text)
-olOauthToken
-  = lens _olOauthToken (\ s a -> s{_olOauthToken = a})
+olOAuthToken :: Lens' OperationsList' (Maybe OAuthToken)
+olOAuthToken
+  = lens _olOAuthToken (\ s a -> s{_olOAuthToken = a})
 
 -- | Maximum count of results to be returned.
 olMaxResults :: Lens' OperationsList' Word32
@@ -188,9 +183,9 @@ olMaxResults
 olFields :: Lens' OperationsList' (Maybe Text)
 olFields = lens _olFields (\ s a -> s{_olFields = a})
 
--- | Data format for the response.
-olAlt :: Lens' OperationsList' Alt
-olAlt = lens _olAlt (\ s a -> s{_olAlt = a})
+instance GoogleAuth OperationsList' where
+        authKey = olKey . _Just
+        authToken = olOAuthToken . _Just
 
 instance GoogleRequest OperationsList' where
         type Rs OperationsList' = OperationsListResponse
@@ -198,14 +193,14 @@ instance GoogleRequest OperationsList' where
           = requestWithRoute defReq deploymentManagerURL
         requestWithRoute r u OperationsList'{..}
           = go _olQuotaUser (Just _olPrettyPrint) _olProject
-              _olUserIp
+              _olUserIP
               _olKey
               _olFilter
               _olPageToken
-              _olOauthToken
+              _olOAuthToken
               (Just _olMaxResults)
               _olFields
-              (Just _olAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy OperationsListResource)

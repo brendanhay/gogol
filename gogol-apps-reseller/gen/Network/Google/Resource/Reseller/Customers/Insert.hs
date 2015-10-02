@@ -32,12 +32,12 @@ module Network.Google.Resource.Reseller.Customers.Insert
     -- * Request Lenses
     , ciQuotaUser
     , ciPrettyPrint
-    , ciUserIp
+    , ciUserIP
+    , ciCustomer
     , ciKey
     , ciCustomerAuthToken
-    , ciOauthToken
+    , ciOAuthToken
     , ciFields
-    , ciAlt
     ) where
 
 import           Network.Google.AppsReseller.Types
@@ -50,11 +50,12 @@ type CustomersInsertResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
+             QueryParam "key" Key :>
                QueryParam "customerAuthToken" Text :>
-                 QueryParam "oauth_token" Text :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Post '[JSON] Customer
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Customer :> Post '[JSON] Customer
 
 -- | Creates a customer resource if one does not already exist.
 --
@@ -62,12 +63,12 @@ type CustomersInsertResource =
 data CustomersInsert' = CustomersInsert'
     { _ciQuotaUser         :: !(Maybe Text)
     , _ciPrettyPrint       :: !Bool
-    , _ciUserIp            :: !(Maybe Text)
-    , _ciKey               :: !(Maybe Text)
+    , _ciUserIP            :: !(Maybe Text)
+    , _ciCustomer          :: !Customer
+    , _ciKey               :: !(Maybe Key)
     , _ciCustomerAuthToken :: !(Maybe Text)
-    , _ciOauthToken        :: !(Maybe Text)
+    , _ciOAuthToken        :: !(Maybe OAuthToken)
     , _ciFields            :: !(Maybe Text)
-    , _ciAlt               :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CustomersInsert'' with the minimum fields required to make a request.
@@ -78,29 +79,30 @@ data CustomersInsert' = CustomersInsert'
 --
 -- * 'ciPrettyPrint'
 --
--- * 'ciUserIp'
+-- * 'ciUserIP'
+--
+-- * 'ciCustomer'
 --
 -- * 'ciKey'
 --
 -- * 'ciCustomerAuthToken'
 --
--- * 'ciOauthToken'
+-- * 'ciOAuthToken'
 --
 -- * 'ciFields'
---
--- * 'ciAlt'
 customersInsert'
-    :: CustomersInsert'
-customersInsert' =
+    :: Customer -- ^ 'Customer'
+    -> CustomersInsert'
+customersInsert' pCiCustomer_ =
     CustomersInsert'
     { _ciQuotaUser = Nothing
     , _ciPrettyPrint = True
-    , _ciUserIp = Nothing
+    , _ciUserIP = Nothing
+    , _ciCustomer = pCiCustomer_
     , _ciKey = Nothing
     , _ciCustomerAuthToken = Nothing
-    , _ciOauthToken = Nothing
+    , _ciOAuthToken = Nothing
     , _ciFields = Nothing
-    , _ciAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -118,13 +120,18 @@ ciPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ciUserIp :: Lens' CustomersInsert' (Maybe Text)
-ciUserIp = lens _ciUserIp (\ s a -> s{_ciUserIp = a})
+ciUserIP :: Lens' CustomersInsert' (Maybe Text)
+ciUserIP = lens _ciUserIP (\ s a -> s{_ciUserIP = a})
+
+-- | Multipart request metadata.
+ciCustomer :: Lens' CustomersInsert' Customer
+ciCustomer
+  = lens _ciCustomer (\ s a -> s{_ciCustomer = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ciKey :: Lens' CustomersInsert' (Maybe Text)
+ciKey :: Lens' CustomersInsert' (Maybe Key)
 ciKey = lens _ciKey (\ s a -> s{_ciKey = a})
 
 -- | An auth token needed for inserting a customer for which domain already
@@ -136,28 +143,29 @@ ciCustomerAuthToken
       (\ s a -> s{_ciCustomerAuthToken = a})
 
 -- | OAuth 2.0 token for the current user.
-ciOauthToken :: Lens' CustomersInsert' (Maybe Text)
-ciOauthToken
-  = lens _ciOauthToken (\ s a -> s{_ciOauthToken = a})
+ciOAuthToken :: Lens' CustomersInsert' (Maybe OAuthToken)
+ciOAuthToken
+  = lens _ciOAuthToken (\ s a -> s{_ciOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ciFields :: Lens' CustomersInsert' (Maybe Text)
 ciFields = lens _ciFields (\ s a -> s{_ciFields = a})
 
--- | Data format for the response.
-ciAlt :: Lens' CustomersInsert' Alt
-ciAlt = lens _ciAlt (\ s a -> s{_ciAlt = a})
+instance GoogleAuth CustomersInsert' where
+        authKey = ciKey . _Just
+        authToken = ciOAuthToken . _Just
 
 instance GoogleRequest CustomersInsert' where
         type Rs CustomersInsert' = Customer
         request = requestWithRoute defReq appsResellerURL
         requestWithRoute r u CustomersInsert'{..}
-          = go _ciQuotaUser (Just _ciPrettyPrint) _ciUserIp
+          = go _ciQuotaUser (Just _ciPrettyPrint) _ciUserIP
               _ciKey
               _ciCustomerAuthToken
-              _ciOauthToken
+              _ciOAuthToken
               _ciFields
-              (Just _ciAlt)
+              (Just AltJSON)
+              _ciCustomer
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CustomersInsertResource)

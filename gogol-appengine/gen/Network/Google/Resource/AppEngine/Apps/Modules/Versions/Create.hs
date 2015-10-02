@@ -19,7 +19,7 @@
 --
 -- | Deploys new code and resource files to a version.
 --
--- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @AppengineAppsModulesVersionsCreate@.
+-- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @AppEngineAppsModulesVersionsCreate@.
 module Network.Google.Resource.AppEngine.Apps.Modules.Versions.Create
     (
     -- * REST Resource
@@ -41,16 +41,16 @@ module Network.Google.Resource.AppEngine.Apps.Modules.Versions.Create
     , amvcBearerToken
     , amvcKey
     , amvcAppsId
-    , amvcOauthToken
+    , amvcVersion
+    , amvcOAuthToken
     , amvcFields
     , amvcCallback
-    , amvcAlt
     ) where
 
 import           Network.Google.AppEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AppengineAppsModulesVersionsCreate@ which the
+-- | A resource alias for @AppEngineAppsModulesVersionsCreate@ which the
 -- 'AppsModulesVersionsCreate'' request conforms to.
 type AppsModulesVersionsCreateResource =
      "v1beta4" :>
@@ -67,12 +67,13 @@ type AppsModulesVersionsCreateResource =
                            QueryParam "access_token" Text :>
                              QueryParam "uploadType" Text :>
                                QueryParam "bearer_token" Text :>
-                                 QueryParam "key" Text :>
-                                   QueryParam "oauth_token" Text :>
+                                 QueryParam "key" Key :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "fields" Text :>
                                        QueryParam "callback" Text :>
-                                         QueryParam "alt" Text :>
-                                           Post '[JSON] Operation
+                                         QueryParam "alt" AltJSON :>
+                                           ReqBody '[JSON] Version :>
+                                             Post '[JSON] Operation
 
 -- | Deploys new code and resource files to a version.
 --
@@ -87,12 +88,12 @@ data AppsModulesVersionsCreate' = AppsModulesVersionsCreate'
     , _amvcUploadType     :: !(Maybe Text)
     , _amvcModulesId      :: !Text
     , _amvcBearerToken    :: !(Maybe Text)
-    , _amvcKey            :: !(Maybe Text)
+    , _amvcKey            :: !(Maybe Key)
     , _amvcAppsId         :: !Text
-    , _amvcOauthToken     :: !(Maybe Text)
+    , _amvcVersion        :: !Version
+    , _amvcOAuthToken     :: !(Maybe OAuthToken)
     , _amvcFields         :: !(Maybe Text)
     , _amvcCallback       :: !(Maybe Text)
-    , _amvcAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AppsModulesVersionsCreate'' with the minimum fields required to make a request.
@@ -121,18 +122,19 @@ data AppsModulesVersionsCreate' = AppsModulesVersionsCreate'
 --
 -- * 'amvcAppsId'
 --
--- * 'amvcOauthToken'
+-- * 'amvcVersion'
+--
+-- * 'amvcOAuthToken'
 --
 -- * 'amvcFields'
 --
 -- * 'amvcCallback'
---
--- * 'amvcAlt'
 appsModulesVersionsCreate'
     :: Text -- ^ 'modulesId'
     -> Text -- ^ 'appsId'
+    -> Version -- ^ 'Version'
     -> AppsModulesVersionsCreate'
-appsModulesVersionsCreate' pAmvcModulesId_ pAmvcAppsId_ =
+appsModulesVersionsCreate' pAmvcModulesId_ pAmvcAppsId_ pAmvcVersion_ =
     AppsModulesVersionsCreate'
     { _amvcXgafv = Nothing
     , _amvcQuotaUser = Nothing
@@ -145,10 +147,10 @@ appsModulesVersionsCreate' pAmvcModulesId_ pAmvcAppsId_ =
     , _amvcBearerToken = Nothing
     , _amvcKey = Nothing
     , _amvcAppsId = pAmvcAppsId_
-    , _amvcOauthToken = Nothing
+    , _amvcVersion = pAmvcVersion_
+    , _amvcOAuthToken = Nothing
     , _amvcFields = Nothing
     , _amvcCallback = Nothing
-    , _amvcAlt = "json"
     }
 
 -- | V1 error format.
@@ -207,7 +209,7 @@ amvcBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-amvcKey :: Lens' AppsModulesVersionsCreate' (Maybe Text)
+amvcKey :: Lens' AppsModulesVersionsCreate' (Maybe Key)
 amvcKey = lens _amvcKey (\ s a -> s{_amvcKey = a})
 
 -- | Part of \`name\`. Name of the resource to update. For example:
@@ -216,11 +218,16 @@ amvcAppsId :: Lens' AppsModulesVersionsCreate' Text
 amvcAppsId
   = lens _amvcAppsId (\ s a -> s{_amvcAppsId = a})
 
+-- | Multipart request metadata.
+amvcVersion :: Lens' AppsModulesVersionsCreate' Version
+amvcVersion
+  = lens _amvcVersion (\ s a -> s{_amvcVersion = a})
+
 -- | OAuth 2.0 token for the current user.
-amvcOauthToken :: Lens' AppsModulesVersionsCreate' (Maybe Text)
-amvcOauthToken
-  = lens _amvcOauthToken
-      (\ s a -> s{_amvcOauthToken = a})
+amvcOAuthToken :: Lens' AppsModulesVersionsCreate' (Maybe OAuthToken)
+amvcOAuthToken
+  = lens _amvcOAuthToken
+      (\ s a -> s{_amvcOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 amvcFields :: Lens' AppsModulesVersionsCreate' (Maybe Text)
@@ -232,9 +239,9 @@ amvcCallback :: Lens' AppsModulesVersionsCreate' (Maybe Text)
 amvcCallback
   = lens _amvcCallback (\ s a -> s{_amvcCallback = a})
 
--- | Data format for response.
-amvcAlt :: Lens' AppsModulesVersionsCreate' Text
-amvcAlt = lens _amvcAlt (\ s a -> s{_amvcAlt = a})
+instance GoogleAuth AppsModulesVersionsCreate' where
+        authKey = amvcKey . _Just
+        authToken = amvcOAuthToken . _Just
 
 instance GoogleRequest AppsModulesVersionsCreate'
          where
@@ -251,10 +258,11 @@ instance GoogleRequest AppsModulesVersionsCreate'
               _amvcBearerToken
               _amvcKey
               _amvcAppsId
-              _amvcOauthToken
+              _amvcOAuthToken
               _amvcFields
               _amvcCallback
-              (Just _amvcAlt)
+              (Just AltJSON)
+              _amvcVersion
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AppsModulesVersionsCreateResource)

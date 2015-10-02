@@ -33,13 +33,13 @@ module Network.Google.Resource.DFAReporting.FloodlightConfigurations.Patch
     -- * Request Lenses
     , fcpQuotaUser
     , fcpPrettyPrint
-    , fcpUserIp
+    , fcpUserIP
     , fcpProfileId
     , fcpKey
     , fcpId
-    , fcpOauthToken
+    , fcpFloodlightConfiguration
+    , fcpOAuthToken
     , fcpFields
-    , fcpAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,27 +54,28 @@ type FloodlightConfigurationsPatchResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "id" Int64 :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :>
-                           Patch '[JSON] FloodlightConfiguration
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] FloodlightConfiguration :>
+                             Patch '[JSON] FloodlightConfiguration
 
 -- | Updates an existing floodlight configuration. This method supports patch
 -- semantics.
 --
 -- /See:/ 'floodlightConfigurationsPatch'' smart constructor.
 data FloodlightConfigurationsPatch' = FloodlightConfigurationsPatch'
-    { _fcpQuotaUser   :: !(Maybe Text)
-    , _fcpPrettyPrint :: !Bool
-    , _fcpUserIp      :: !(Maybe Text)
-    , _fcpProfileId   :: !Int64
-    , _fcpKey         :: !(Maybe Text)
-    , _fcpId          :: !Int64
-    , _fcpOauthToken  :: !(Maybe Text)
-    , _fcpFields      :: !(Maybe Text)
-    , _fcpAlt         :: !Alt
+    { _fcpQuotaUser               :: !(Maybe Text)
+    , _fcpPrettyPrint             :: !Bool
+    , _fcpUserIP                  :: !(Maybe Text)
+    , _fcpProfileId               :: !Int64
+    , _fcpKey                     :: !(Maybe Key)
+    , _fcpId                      :: !Int64
+    , _fcpFloodlightConfiguration :: !FloodlightConfiguration
+    , _fcpOAuthToken              :: !(Maybe OAuthToken)
+    , _fcpFields                  :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightConfigurationsPatch'' with the minimum fields required to make a request.
@@ -85,7 +86,7 @@ data FloodlightConfigurationsPatch' = FloodlightConfigurationsPatch'
 --
 -- * 'fcpPrettyPrint'
 --
--- * 'fcpUserIp'
+-- * 'fcpUserIP'
 --
 -- * 'fcpProfileId'
 --
@@ -93,26 +94,27 @@ data FloodlightConfigurationsPatch' = FloodlightConfigurationsPatch'
 --
 -- * 'fcpId'
 --
--- * 'fcpOauthToken'
+-- * 'fcpFloodlightConfiguration'
+--
+-- * 'fcpOAuthToken'
 --
 -- * 'fcpFields'
---
--- * 'fcpAlt'
 floodlightConfigurationsPatch'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
+    -> FloodlightConfiguration -- ^ 'FloodlightConfiguration'
     -> FloodlightConfigurationsPatch'
-floodlightConfigurationsPatch' pFcpProfileId_ pFcpId_ =
+floodlightConfigurationsPatch' pFcpProfileId_ pFcpId_ pFcpFloodlightConfiguration_ =
     FloodlightConfigurationsPatch'
     { _fcpQuotaUser = Nothing
     , _fcpPrettyPrint = True
-    , _fcpUserIp = Nothing
+    , _fcpUserIP = Nothing
     , _fcpProfileId = pFcpProfileId_
     , _fcpKey = Nothing
     , _fcpId = pFcpId_
-    , _fcpOauthToken = Nothing
+    , _fcpFloodlightConfiguration = pFcpFloodlightConfiguration_
+    , _fcpOAuthToken = Nothing
     , _fcpFields = Nothing
-    , _fcpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -130,9 +132,9 @@ fcpPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-fcpUserIp :: Lens' FloodlightConfigurationsPatch' (Maybe Text)
-fcpUserIp
-  = lens _fcpUserIp (\ s a -> s{_fcpUserIp = a})
+fcpUserIP :: Lens' FloodlightConfigurationsPatch' (Maybe Text)
+fcpUserIP
+  = lens _fcpUserIP (\ s a -> s{_fcpUserIP = a})
 
 -- | User profile ID associated with this request.
 fcpProfileId :: Lens' FloodlightConfigurationsPatch' Int64
@@ -142,27 +144,34 @@ fcpProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fcpKey :: Lens' FloodlightConfigurationsPatch' (Maybe Text)
+fcpKey :: Lens' FloodlightConfigurationsPatch' (Maybe Key)
 fcpKey = lens _fcpKey (\ s a -> s{_fcpKey = a})
 
 -- | Floodlight configuration ID.
 fcpId :: Lens' FloodlightConfigurationsPatch' Int64
 fcpId = lens _fcpId (\ s a -> s{_fcpId = a})
 
+-- | Multipart request metadata.
+fcpFloodlightConfiguration :: Lens' FloodlightConfigurationsPatch' FloodlightConfiguration
+fcpFloodlightConfiguration
+  = lens _fcpFloodlightConfiguration
+      (\ s a -> s{_fcpFloodlightConfiguration = a})
+
 -- | OAuth 2.0 token for the current user.
-fcpOauthToken :: Lens' FloodlightConfigurationsPatch' (Maybe Text)
-fcpOauthToken
-  = lens _fcpOauthToken
-      (\ s a -> s{_fcpOauthToken = a})
+fcpOAuthToken :: Lens' FloodlightConfigurationsPatch' (Maybe OAuthToken)
+fcpOAuthToken
+  = lens _fcpOAuthToken
+      (\ s a -> s{_fcpOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 fcpFields :: Lens' FloodlightConfigurationsPatch' (Maybe Text)
 fcpFields
   = lens _fcpFields (\ s a -> s{_fcpFields = a})
 
--- | Data format for the response.
-fcpAlt :: Lens' FloodlightConfigurationsPatch' Alt
-fcpAlt = lens _fcpAlt (\ s a -> s{_fcpAlt = a})
+instance GoogleAuth FloodlightConfigurationsPatch'
+         where
+        authKey = fcpKey . _Just
+        authToken = fcpOAuthToken . _Just
 
 instance GoogleRequest FloodlightConfigurationsPatch'
          where
@@ -171,13 +180,14 @@ instance GoogleRequest FloodlightConfigurationsPatch'
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u
           FloodlightConfigurationsPatch'{..}
-          = go _fcpQuotaUser (Just _fcpPrettyPrint) _fcpUserIp
+          = go _fcpQuotaUser (Just _fcpPrettyPrint) _fcpUserIP
               _fcpProfileId
               _fcpKey
               (Just _fcpId)
-              _fcpOauthToken
+              _fcpOAuthToken
               _fcpFields
-              (Just _fcpAlt)
+              (Just AltJSON)
+              _fcpFloodlightConfiguration
           where go
                   = clientWithRoute
                       (Proxy ::

@@ -33,13 +33,12 @@ module Network.Google.Resource.Compute.Addresses.Get
     , aggQuotaUser
     , aggPrettyPrint
     , aggProject
-    , aggUserIp
+    , aggUserIP
     , aggAddress
     , aggKey
     , aggRegion
-    , aggOauthToken
+    , aggOAuthToken
     , aggFields
-    , aggAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -56,10 +55,10 @@ type AddressesGetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Get '[JSON] Address
+                           QueryParam "alt" AltJSON :> Get '[JSON] Address
 
 -- | Returns the specified address resource.
 --
@@ -68,13 +67,12 @@ data AddressesGet' = AddressesGet'
     { _aggQuotaUser   :: !(Maybe Text)
     , _aggPrettyPrint :: !Bool
     , _aggProject     :: !Text
-    , _aggUserIp      :: !(Maybe Text)
+    , _aggUserIP      :: !(Maybe Text)
     , _aggAddress     :: !Text
-    , _aggKey         :: !(Maybe Text)
+    , _aggKey         :: !(Maybe Key)
     , _aggRegion      :: !Text
-    , _aggOauthToken  :: !(Maybe Text)
+    , _aggOAuthToken  :: !(Maybe OAuthToken)
     , _aggFields      :: !(Maybe Text)
-    , _aggAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AddressesGet'' with the minimum fields required to make a request.
@@ -87,7 +85,7 @@ data AddressesGet' = AddressesGet'
 --
 -- * 'aggProject'
 --
--- * 'aggUserIp'
+-- * 'aggUserIP'
 --
 -- * 'aggAddress'
 --
@@ -95,11 +93,9 @@ data AddressesGet' = AddressesGet'
 --
 -- * 'aggRegion'
 --
--- * 'aggOauthToken'
+-- * 'aggOAuthToken'
 --
 -- * 'aggFields'
---
--- * 'aggAlt'
 addressesGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'address'
@@ -110,13 +106,12 @@ addressesGet' pAggProject_ pAggAddress_ pAggRegion_ =
     { _aggQuotaUser = Nothing
     , _aggPrettyPrint = True
     , _aggProject = pAggProject_
-    , _aggUserIp = Nothing
+    , _aggUserIP = Nothing
     , _aggAddress = pAggAddress_
     , _aggKey = Nothing
     , _aggRegion = pAggRegion_
-    , _aggOauthToken = Nothing
+    , _aggOAuthToken = Nothing
     , _aggFields = Nothing
-    , _aggAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,9 +134,9 @@ aggProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-aggUserIp :: Lens' AddressesGet' (Maybe Text)
-aggUserIp
-  = lens _aggUserIp (\ s a -> s{_aggUserIp = a})
+aggUserIP :: Lens' AddressesGet' (Maybe Text)
+aggUserIP
+  = lens _aggUserIP (\ s a -> s{_aggUserIP = a})
 
 -- | Name of the address resource to return.
 aggAddress :: Lens' AddressesGet' Text
@@ -151,7 +146,7 @@ aggAddress
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aggKey :: Lens' AddressesGet' (Maybe Text)
+aggKey :: Lens' AddressesGet' (Maybe Key)
 aggKey = lens _aggKey (\ s a -> s{_aggKey = a})
 
 -- | The name of the region for this request.
@@ -160,32 +155,32 @@ aggRegion
   = lens _aggRegion (\ s a -> s{_aggRegion = a})
 
 -- | OAuth 2.0 token for the current user.
-aggOauthToken :: Lens' AddressesGet' (Maybe Text)
-aggOauthToken
-  = lens _aggOauthToken
-      (\ s a -> s{_aggOauthToken = a})
+aggOAuthToken :: Lens' AddressesGet' (Maybe OAuthToken)
+aggOAuthToken
+  = lens _aggOAuthToken
+      (\ s a -> s{_aggOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 aggFields :: Lens' AddressesGet' (Maybe Text)
 aggFields
   = lens _aggFields (\ s a -> s{_aggFields = a})
 
--- | Data format for the response.
-aggAlt :: Lens' AddressesGet' Alt
-aggAlt = lens _aggAlt (\ s a -> s{_aggAlt = a})
+instance GoogleAuth AddressesGet' where
+        authKey = aggKey . _Just
+        authToken = aggOAuthToken . _Just
 
 instance GoogleRequest AddressesGet' where
         type Rs AddressesGet' = Address
         request = requestWithRoute defReq computeURL
         requestWithRoute r u AddressesGet'{..}
           = go _aggQuotaUser (Just _aggPrettyPrint) _aggProject
-              _aggUserIp
+              _aggUserIP
               _aggAddress
               _aggKey
               _aggRegion
-              _aggOauthToken
+              _aggOAuthToken
               _aggFields
-              (Just _aggAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AddressesGetResource)

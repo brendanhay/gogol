@@ -33,15 +33,14 @@ module Network.Google.Resource.Plus.Activities.List
     -- * Request Lenses
     , alQuotaUser
     , alPrettyPrint
-    , alUserIp
+    , alUserIP
     , alCollection
     , alUserId
     , alKey
     , alPageToken
-    , alOauthToken
+    , alOAuthToken
     , alMaxResults
     , alFields
-    , alAlt
     ) where
 
 import           Network.Google.Plus.Types
@@ -57,12 +56,13 @@ type ActivitiesListResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "maxResults" Word32 :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Get '[JSON] ActivityFeed
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] ActivityFeed
 
 -- | List all of the activities in the specified collection for a particular
 -- user.
@@ -71,15 +71,14 @@ type ActivitiesListResource =
 data ActivitiesList' = ActivitiesList'
     { _alQuotaUser   :: !(Maybe Text)
     , _alPrettyPrint :: !Bool
-    , _alUserIp      :: !(Maybe Text)
+    , _alUserIP      :: !(Maybe Text)
     , _alCollection  :: !PlusActivitiesListCollection
     , _alUserId      :: !Text
-    , _alKey         :: !(Maybe Text)
+    , _alKey         :: !(Maybe Key)
     , _alPageToken   :: !(Maybe Text)
-    , _alOauthToken  :: !(Maybe Text)
+    , _alOAuthToken  :: !(Maybe OAuthToken)
     , _alMaxResults  :: !Word32
     , _alFields      :: !(Maybe Text)
-    , _alAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivitiesList'' with the minimum fields required to make a request.
@@ -90,7 +89,7 @@ data ActivitiesList' = ActivitiesList'
 --
 -- * 'alPrettyPrint'
 --
--- * 'alUserIp'
+-- * 'alUserIP'
 --
 -- * 'alCollection'
 --
@@ -100,13 +99,11 @@ data ActivitiesList' = ActivitiesList'
 --
 -- * 'alPageToken'
 --
--- * 'alOauthToken'
+-- * 'alOAuthToken'
 --
 -- * 'alMaxResults'
 --
 -- * 'alFields'
---
--- * 'alAlt'
 activitiesList'
     :: PlusActivitiesListCollection -- ^ 'collection'
     -> Text -- ^ 'userId'
@@ -115,15 +112,14 @@ activitiesList' pAlCollection_ pAlUserId_ =
     ActivitiesList'
     { _alQuotaUser = Nothing
     , _alPrettyPrint = True
-    , _alUserIp = Nothing
+    , _alUserIP = Nothing
     , _alCollection = pAlCollection_
     , _alUserId = pAlUserId_
     , _alKey = Nothing
     , _alPageToken = Nothing
-    , _alOauthToken = Nothing
+    , _alOAuthToken = Nothing
     , _alMaxResults = 20
     , _alFields = Nothing
-    , _alAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -141,8 +137,8 @@ alPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-alUserIp :: Lens' ActivitiesList' (Maybe Text)
-alUserIp = lens _alUserIp (\ s a -> s{_alUserIp = a})
+alUserIP :: Lens' ActivitiesList' (Maybe Text)
+alUserIP = lens _alUserIP (\ s a -> s{_alUserIP = a})
 
 -- | The collection of activities to list.
 alCollection :: Lens' ActivitiesList' PlusActivitiesListCollection
@@ -157,7 +153,7 @@ alUserId = lens _alUserId (\ s a -> s{_alUserId = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-alKey :: Lens' ActivitiesList' (Maybe Text)
+alKey :: Lens' ActivitiesList' (Maybe Key)
 alKey = lens _alKey (\ s a -> s{_alKey = a})
 
 -- | The continuation token, which is used to page through large result sets.
@@ -168,9 +164,9 @@ alPageToken
   = lens _alPageToken (\ s a -> s{_alPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-alOauthToken :: Lens' ActivitiesList' (Maybe Text)
-alOauthToken
-  = lens _alOauthToken (\ s a -> s{_alOauthToken = a})
+alOAuthToken :: Lens' ActivitiesList' (Maybe OAuthToken)
+alOAuthToken
+  = lens _alOAuthToken (\ s a -> s{_alOAuthToken = a})
 
 -- | The maximum number of activities to include in the response, which is
 -- used for paging. For any response, the actual number returned might be
@@ -183,23 +179,23 @@ alMaxResults
 alFields :: Lens' ActivitiesList' (Maybe Text)
 alFields = lens _alFields (\ s a -> s{_alFields = a})
 
--- | Data format for the response.
-alAlt :: Lens' ActivitiesList' Alt
-alAlt = lens _alAlt (\ s a -> s{_alAlt = a})
+instance GoogleAuth ActivitiesList' where
+        authKey = alKey . _Just
+        authToken = alOAuthToken . _Just
 
 instance GoogleRequest ActivitiesList' where
         type Rs ActivitiesList' = ActivityFeed
         request = requestWithRoute defReq plusURL
         requestWithRoute r u ActivitiesList'{..}
-          = go _alQuotaUser (Just _alPrettyPrint) _alUserIp
+          = go _alQuotaUser (Just _alPrettyPrint) _alUserIP
               _alCollection
               _alUserId
               _alKey
               _alPageToken
-              _alOauthToken
+              _alOAuthToken
               (Just _alMaxResults)
               _alFields
-              (Just _alAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ActivitiesListResource)

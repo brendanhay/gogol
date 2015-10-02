@@ -41,13 +41,12 @@ module Network.Google.Resource.Logging.Projects.Logs.List
     , pllKey
     , pllServiceName
     , pllPageToken
-    , pllOauthToken
+    , pllOAuthToken
     , pllServiceIndexPrefix
     , pllProjectsId
     , pllPageSize
     , pllFields
     , pllCallback
-    , pllAlt
     ) where
 
 import           Network.Google.Logging.Types
@@ -68,15 +67,15 @@ type ProjectsLogsListResource =
                        QueryParam "access_token" Text :>
                          QueryParam "uploadType" Text :>
                            QueryParam "bearer_token" Text :>
-                             QueryParam "key" Text :>
+                             QueryParam "key" Key :>
                                QueryParam "serviceName" Text :>
                                  QueryParam "pageToken" Text :>
-                                   QueryParam "oauth_token" Text :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "serviceIndexPrefix" Text :>
                                        QueryParam "pageSize" Int32 :>
                                          QueryParam "fields" Text :>
                                            QueryParam "callback" Text :>
-                                             QueryParam "alt" Text :>
+                                             QueryParam "alt" AltJSON :>
                                                Get '[JSON] ListLogsResponse
 
 -- | Lists the logs in the project. Only logs that have entries are listed.
@@ -91,16 +90,15 @@ data ProjectsLogsList' = ProjectsLogsList'
     , _pllAccessToken        :: !(Maybe Text)
     , _pllUploadType         :: !(Maybe Text)
     , _pllBearerToken        :: !(Maybe Text)
-    , _pllKey                :: !(Maybe Text)
+    , _pllKey                :: !(Maybe Key)
     , _pllServiceName        :: !(Maybe Text)
     , _pllPageToken          :: !(Maybe Text)
-    , _pllOauthToken         :: !(Maybe Text)
+    , _pllOAuthToken         :: !(Maybe OAuthToken)
     , _pllServiceIndexPrefix :: !(Maybe Text)
     , _pllProjectsId         :: !Text
     , _pllPageSize           :: !(Maybe Int32)
     , _pllFields             :: !(Maybe Text)
     , _pllCallback           :: !(Maybe Text)
-    , _pllAlt                :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsLogsList'' with the minimum fields required to make a request.
@@ -129,7 +127,7 @@ data ProjectsLogsList' = ProjectsLogsList'
 --
 -- * 'pllPageToken'
 --
--- * 'pllOauthToken'
+-- * 'pllOAuthToken'
 --
 -- * 'pllServiceIndexPrefix'
 --
@@ -140,8 +138,6 @@ data ProjectsLogsList' = ProjectsLogsList'
 -- * 'pllFields'
 --
 -- * 'pllCallback'
---
--- * 'pllAlt'
 projectsLogsList'
     :: Text -- ^ 'projectsId'
     -> ProjectsLogsList'
@@ -158,13 +154,12 @@ projectsLogsList' pPllProjectsId_ =
     , _pllKey = Nothing
     , _pllServiceName = Nothing
     , _pllPageToken = Nothing
-    , _pllOauthToken = Nothing
+    , _pllOAuthToken = Nothing
     , _pllServiceIndexPrefix = Nothing
     , _pllProjectsId = pPllProjectsId_
     , _pllPageSize = Nothing
     , _pllFields = Nothing
     , _pllCallback = Nothing
-    , _pllAlt = "json"
     }
 
 -- | V1 error format.
@@ -215,7 +210,7 @@ pllBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pllKey :: Lens' ProjectsLogsList' (Maybe Text)
+pllKey :: Lens' ProjectsLogsList' (Maybe Key)
 pllKey = lens _pllKey (\ s a -> s{_pllKey = a})
 
 -- | If not empty, this field must be a log service name such as
@@ -235,10 +230,10 @@ pllPageToken
   = lens _pllPageToken (\ s a -> s{_pllPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-pllOauthToken :: Lens' ProjectsLogsList' (Maybe Text)
-pllOauthToken
-  = lens _pllOauthToken
-      (\ s a -> s{_pllOauthToken = a})
+pllOAuthToken :: Lens' ProjectsLogsList' (Maybe OAuthToken)
+pllOAuthToken
+  = lens _pllOAuthToken
+      (\ s a -> s{_pllOAuthToken = a})
 
 -- | The purpose of this field is to restrict the listed logs to those with
 -- entries of a certain kind. If \`serviceName\` is the name of a log
@@ -276,9 +271,9 @@ pllCallback :: Lens' ProjectsLogsList' (Maybe Text)
 pllCallback
   = lens _pllCallback (\ s a -> s{_pllCallback = a})
 
--- | Data format for response.
-pllAlt :: Lens' ProjectsLogsList' Text
-pllAlt = lens _pllAlt (\ s a -> s{_pllAlt = a})
+instance GoogleAuth ProjectsLogsList' where
+        authKey = pllKey . _Just
+        authToken = pllOAuthToken . _Just
 
 instance GoogleRequest ProjectsLogsList' where
         type Rs ProjectsLogsList' = ListLogsResponse
@@ -293,13 +288,13 @@ instance GoogleRequest ProjectsLogsList' where
               _pllKey
               _pllServiceName
               _pllPageToken
-              _pllOauthToken
+              _pllOAuthToken
               _pllServiceIndexPrefix
               _pllProjectsId
               _pllPageSize
               _pllFields
               _pllCallback
-              (Just _pllAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsLogsListResource)

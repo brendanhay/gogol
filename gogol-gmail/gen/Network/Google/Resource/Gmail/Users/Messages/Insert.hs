@@ -34,14 +34,15 @@ module Network.Google.Resource.Gmail.Users.Messages.Insert
     -- * Request Lenses
     , umiQuotaUser
     , umiPrettyPrint
-    , umiUserIp
+    , umiUserIP
     , umiUserId
+    , umiMedia
     , umiKey
     , umiDeleted
-    , umiOauthToken
+    , umiOAuthToken
+    , umiMessage
     , umiInternalDateSource
     , umiFields
-    , umiAlt
     ) where
 
 import           Network.Google.Gmail.Types
@@ -55,14 +56,16 @@ type UsersMessagesInsertResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
+               QueryParam "key" Key :>
                  QueryParam "deleted" Bool :>
-                   QueryParam "oauth_token" Text :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "internalDateSource"
                        GmailUsersMessagesInsertInternalDateSource
                        :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Post '[JSON] Message
+                         QueryParam "alt" AltJSON :>
+                           MultipartRelated '[JSON] Message Body :>
+                             Post '[JSON] Message
 
 -- | Directly inserts a message into only this user\'s mailbox similar to
 -- IMAP APPEND, bypassing most scanning and classification. Does not send a
@@ -72,14 +75,15 @@ type UsersMessagesInsertResource =
 data UsersMessagesInsert' = UsersMessagesInsert'
     { _umiQuotaUser          :: !(Maybe Text)
     , _umiPrettyPrint        :: !Bool
-    , _umiUserIp             :: !(Maybe Text)
+    , _umiUserIP             :: !(Maybe Text)
     , _umiUserId             :: !Text
-    , _umiKey                :: !(Maybe Text)
+    , _umiMedia              :: !Body
+    , _umiKey                :: !(Maybe Key)
     , _umiDeleted            :: !Bool
-    , _umiOauthToken         :: !(Maybe Text)
+    , _umiOAuthToken         :: !(Maybe OAuthToken)
+    , _umiMessage            :: !Message
     , _umiInternalDateSource :: !GmailUsersMessagesInsertInternalDateSource
     , _umiFields             :: !(Maybe Text)
-    , _umiAlt                :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersMessagesInsert'' with the minimum fields required to make a request.
@@ -90,36 +94,41 @@ data UsersMessagesInsert' = UsersMessagesInsert'
 --
 -- * 'umiPrettyPrint'
 --
--- * 'umiUserIp'
+-- * 'umiUserIP'
 --
 -- * 'umiUserId'
+--
+-- * 'umiMedia'
 --
 -- * 'umiKey'
 --
 -- * 'umiDeleted'
 --
--- * 'umiOauthToken'
+-- * 'umiOAuthToken'
+--
+-- * 'umiMessage'
 --
 -- * 'umiInternalDateSource'
 --
 -- * 'umiFields'
---
--- * 'umiAlt'
 usersMessagesInsert'
-    :: Text
+    :: Text -- ^ 'media'
+    -> Body -- ^ 'Message'
+    -> Message
     -> UsersMessagesInsert'
-usersMessagesInsert' pUmiUserId_ =
+usersMessagesInsert' pUmiUserId_ pUmiMedia_ pUmiMessage_ =
     UsersMessagesInsert'
     { _umiQuotaUser = Nothing
     , _umiPrettyPrint = True
-    , _umiUserIp = Nothing
+    , _umiUserIP = Nothing
     , _umiUserId = pUmiUserId_
+    , _umiMedia = pUmiMedia_
     , _umiKey = Nothing
     , _umiDeleted = False
-    , _umiOauthToken = Nothing
+    , _umiOAuthToken = Nothing
+    , _umiMessage = pUmiMessage_
     , _umiInternalDateSource = ReceivedTime
     , _umiFields = Nothing
-    , _umiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -137,9 +146,9 @@ umiPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-umiUserIp :: Lens' UsersMessagesInsert' (Maybe Text)
-umiUserIp
-  = lens _umiUserIp (\ s a -> s{_umiUserIp = a})
+umiUserIP :: Lens' UsersMessagesInsert' (Maybe Text)
+umiUserIP
+  = lens _umiUserIP (\ s a -> s{_umiUserIP = a})
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
@@ -147,10 +156,13 @@ umiUserId :: Lens' UsersMessagesInsert' Text
 umiUserId
   = lens _umiUserId (\ s a -> s{_umiUserId = a})
 
+umiMedia :: Lens' UsersMessagesInsert' Body
+umiMedia = lens _umiMedia (\ s a -> s{_umiMedia = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-umiKey :: Lens' UsersMessagesInsert' (Maybe Text)
+umiKey :: Lens' UsersMessagesInsert' (Maybe Key)
 umiKey = lens _umiKey (\ s a -> s{_umiKey = a})
 
 -- | Mark the email as permanently deleted (not TRASH) and only visible in
@@ -161,10 +173,15 @@ umiDeleted
   = lens _umiDeleted (\ s a -> s{_umiDeleted = a})
 
 -- | OAuth 2.0 token for the current user.
-umiOauthToken :: Lens' UsersMessagesInsert' (Maybe Text)
-umiOauthToken
-  = lens _umiOauthToken
-      (\ s a -> s{_umiOauthToken = a})
+umiOAuthToken :: Lens' UsersMessagesInsert' (Maybe OAuthToken)
+umiOAuthToken
+  = lens _umiOAuthToken
+      (\ s a -> s{_umiOAuthToken = a})
+
+-- | Multipart request metadata.
+umiMessage :: Lens' UsersMessagesInsert' Message
+umiMessage
+  = lens _umiMessage (\ s a -> s{_umiMessage = a})
 
 -- | Source for Gmail\'s internal date of the message.
 umiInternalDateSource :: Lens' UsersMessagesInsert' GmailUsersMessagesInsertInternalDateSource
@@ -177,22 +194,24 @@ umiFields :: Lens' UsersMessagesInsert' (Maybe Text)
 umiFields
   = lens _umiFields (\ s a -> s{_umiFields = a})
 
--- | Data format for the response.
-umiAlt :: Lens' UsersMessagesInsert' Alt
-umiAlt = lens _umiAlt (\ s a -> s{_umiAlt = a})
+instance GoogleAuth UsersMessagesInsert' where
+        authKey = umiKey . _Just
+        authToken = umiOAuthToken . _Just
 
 instance GoogleRequest UsersMessagesInsert' where
         type Rs UsersMessagesInsert' = Message
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersMessagesInsert'{..}
-          = go _umiQuotaUser (Just _umiPrettyPrint) _umiUserIp
+          = go _umiQuotaUser (Just _umiPrettyPrint) _umiUserIP
               _umiUserId
+              _umiMedia
               _umiKey
               (Just _umiDeleted)
-              _umiOauthToken
+              _umiOAuthToken
               (Just _umiInternalDateSource)
               _umiFields
-              (Just _umiAlt)
+              (Just AltJSON)
+              _umiMessage
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersMessagesInsertResource)

@@ -34,14 +34,13 @@ module Network.Google.Resource.Container.Projects.Zones.Clusters.Delete
     -- * Request Lenses
     , pzcdQuotaUser
     , pzcdPrettyPrint
-    , pzcdUserIp
+    , pzcdUserIP
     , pzcdZoneId
     , pzcdKey
     , pzcdClusterId
     , pzcdProjectId
-    , pzcdOauthToken
+    , pzcdOAuthToken
     , pzcdFields
-    , pzcdAlt
     ) where
 
 import           Network.Google.Container.Types
@@ -58,10 +57,10 @@ type ProjectsZonesClustersDeleteResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Delete '[JSON] Operation
+                           QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the cluster, including the Kubernetes master and all worker
 -- nodes. Firewalls and routes that were configured at cluster creation are
@@ -71,14 +70,13 @@ type ProjectsZonesClustersDeleteResource =
 data ProjectsZonesClustersDelete' = ProjectsZonesClustersDelete'
     { _pzcdQuotaUser   :: !(Maybe Text)
     , _pzcdPrettyPrint :: !Bool
-    , _pzcdUserIp      :: !(Maybe Text)
+    , _pzcdUserIP      :: !(Maybe Text)
     , _pzcdZoneId      :: !Text
-    , _pzcdKey         :: !(Maybe Text)
+    , _pzcdKey         :: !(Maybe Key)
     , _pzcdClusterId   :: !Text
     , _pzcdProjectId   :: !Text
-    , _pzcdOauthToken  :: !(Maybe Text)
+    , _pzcdOAuthToken  :: !(Maybe OAuthToken)
     , _pzcdFields      :: !(Maybe Text)
-    , _pzcdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsZonesClustersDelete'' with the minimum fields required to make a request.
@@ -89,7 +87,7 @@ data ProjectsZonesClustersDelete' = ProjectsZonesClustersDelete'
 --
 -- * 'pzcdPrettyPrint'
 --
--- * 'pzcdUserIp'
+-- * 'pzcdUserIP'
 --
 -- * 'pzcdZoneId'
 --
@@ -99,11 +97,9 @@ data ProjectsZonesClustersDelete' = ProjectsZonesClustersDelete'
 --
 -- * 'pzcdProjectId'
 --
--- * 'pzcdOauthToken'
+-- * 'pzcdOAuthToken'
 --
 -- * 'pzcdFields'
---
--- * 'pzcdAlt'
 projectsZonesClustersDelete'
     :: Text -- ^ 'zoneId'
     -> Text -- ^ 'clusterId'
@@ -113,14 +109,13 @@ projectsZonesClustersDelete' pPzcdZoneId_ pPzcdClusterId_ pPzcdProjectId_ =
     ProjectsZonesClustersDelete'
     { _pzcdQuotaUser = Nothing
     , _pzcdPrettyPrint = True
-    , _pzcdUserIp = Nothing
+    , _pzcdUserIP = Nothing
     , _pzcdZoneId = pPzcdZoneId_
     , _pzcdKey = Nothing
     , _pzcdClusterId = pPzcdClusterId_
     , _pzcdProjectId = pPzcdProjectId_
-    , _pzcdOauthToken = Nothing
+    , _pzcdOAuthToken = Nothing
     , _pzcdFields = Nothing
-    , _pzcdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,9 +134,9 @@ pzcdPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-pzcdUserIp :: Lens' ProjectsZonesClustersDelete' (Maybe Text)
-pzcdUserIp
-  = lens _pzcdUserIp (\ s a -> s{_pzcdUserIp = a})
+pzcdUserIP :: Lens' ProjectsZonesClustersDelete' (Maybe Text)
+pzcdUserIP
+  = lens _pzcdUserIP (\ s a -> s{_pzcdUserIP = a})
 
 -- | The name of the Google Compute Engine zone in which the cluster resides.
 pzcdZoneId :: Lens' ProjectsZonesClustersDelete' Text
@@ -151,7 +146,7 @@ pzcdZoneId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pzcdKey :: Lens' ProjectsZonesClustersDelete' (Maybe Text)
+pzcdKey :: Lens' ProjectsZonesClustersDelete' (Maybe Key)
 pzcdKey = lens _pzcdKey (\ s a -> s{_pzcdKey = a})
 
 -- | The name of the cluster to delete.
@@ -167,19 +162,20 @@ pzcdProjectId
       (\ s a -> s{_pzcdProjectId = a})
 
 -- | OAuth 2.0 token for the current user.
-pzcdOauthToken :: Lens' ProjectsZonesClustersDelete' (Maybe Text)
-pzcdOauthToken
-  = lens _pzcdOauthToken
-      (\ s a -> s{_pzcdOauthToken = a})
+pzcdOAuthToken :: Lens' ProjectsZonesClustersDelete' (Maybe OAuthToken)
+pzcdOAuthToken
+  = lens _pzcdOAuthToken
+      (\ s a -> s{_pzcdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 pzcdFields :: Lens' ProjectsZonesClustersDelete' (Maybe Text)
 pzcdFields
   = lens _pzcdFields (\ s a -> s{_pzcdFields = a})
 
--- | Data format for the response.
-pzcdAlt :: Lens' ProjectsZonesClustersDelete' Alt
-pzcdAlt = lens _pzcdAlt (\ s a -> s{_pzcdAlt = a})
+instance GoogleAuth ProjectsZonesClustersDelete'
+         where
+        authKey = pzcdKey . _Just
+        authToken = pzcdOAuthToken . _Just
 
 instance GoogleRequest ProjectsZonesClustersDelete'
          where
@@ -187,14 +183,14 @@ instance GoogleRequest ProjectsZonesClustersDelete'
         request = requestWithRoute defReq containerURL
         requestWithRoute r u ProjectsZonesClustersDelete'{..}
           = go _pzcdQuotaUser (Just _pzcdPrettyPrint)
-              _pzcdUserIp
+              _pzcdUserIP
               _pzcdZoneId
               _pzcdKey
               _pzcdClusterId
               _pzcdProjectId
-              _pzcdOauthToken
+              _pzcdOAuthToken
               _pzcdFields
-              (Just _pzcdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsZonesClustersDeleteResource)

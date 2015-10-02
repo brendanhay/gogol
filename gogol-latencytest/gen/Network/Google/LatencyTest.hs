@@ -74,9 +74,6 @@ module Network.Google.LatencyTest
     , StatsReply
     , statsReply
     , srTestValue
-
-    -- ** Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.LatencyTest.Types

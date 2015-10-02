@@ -44,10 +44,9 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.Delete
     , badAttachmentName
     , badBearerToken
     , badKey
-    , badOauthToken
+    , badOAuthToken
     , badFields
     , badCallback
-    , badAlt
     ) where
 
 import           Network.Google.Prelude
@@ -66,11 +65,12 @@ type BeaconsAttachmentsDeleteResource =
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
                        QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
                                QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :> Delete '[JSON] Empty
+                                 QueryParam "alt" AltJSON :>
+                                   Delete '[JSON] Empty
 
 -- | Deletes the specified attachment for the given beacon. Each attachment
 -- has a unique attachment name (\`attachmentName\`) which is returned when
@@ -89,11 +89,10 @@ data BeaconsAttachmentsDelete' = BeaconsAttachmentsDelete'
     , _badUploadType     :: !(Maybe Text)
     , _badAttachmentName :: !Text
     , _badBearerToken    :: !(Maybe Text)
-    , _badKey            :: !(Maybe Text)
-    , _badOauthToken     :: !(Maybe Text)
+    , _badKey            :: !(Maybe Key)
+    , _badOAuthToken     :: !(Maybe OAuthToken)
     , _badFields         :: !(Maybe Text)
     , _badCallback       :: !(Maybe Text)
-    , _badAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BeaconsAttachmentsDelete'' with the minimum fields required to make a request.
@@ -120,13 +119,11 @@ data BeaconsAttachmentsDelete' = BeaconsAttachmentsDelete'
 --
 -- * 'badKey'
 --
--- * 'badOauthToken'
+-- * 'badOAuthToken'
 --
 -- * 'badFields'
 --
 -- * 'badCallback'
---
--- * 'badAlt'
 beaconsAttachmentsDelete'
     :: Text -- ^ 'attachmentName'
     -> BeaconsAttachmentsDelete'
@@ -142,10 +139,9 @@ beaconsAttachmentsDelete' pBadAttachmentName_ =
     , _badAttachmentName = pBadAttachmentName_
     , _badBearerToken = Nothing
     , _badKey = Nothing
-    , _badOauthToken = Nothing
+    , _badOAuthToken = Nothing
     , _badFields = Nothing
     , _badCallback = Nothing
-    , _badAlt = "json"
     }
 
 -- | V1 error format.
@@ -205,14 +201,14 @@ badBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-badKey :: Lens' BeaconsAttachmentsDelete' (Maybe Text)
+badKey :: Lens' BeaconsAttachmentsDelete' (Maybe Key)
 badKey = lens _badKey (\ s a -> s{_badKey = a})
 
 -- | OAuth 2.0 token for the current user.
-badOauthToken :: Lens' BeaconsAttachmentsDelete' (Maybe Text)
-badOauthToken
-  = lens _badOauthToken
-      (\ s a -> s{_badOauthToken = a})
+badOAuthToken :: Lens' BeaconsAttachmentsDelete' (Maybe OAuthToken)
+badOAuthToken
+  = lens _badOAuthToken
+      (\ s a -> s{_badOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 badFields :: Lens' BeaconsAttachmentsDelete' (Maybe Text)
@@ -224,9 +220,9 @@ badCallback :: Lens' BeaconsAttachmentsDelete' (Maybe Text)
 badCallback
   = lens _badCallback (\ s a -> s{_badCallback = a})
 
--- | Data format for response.
-badAlt :: Lens' BeaconsAttachmentsDelete' Text
-badAlt = lens _badAlt (\ s a -> s{_badAlt = a})
+instance GoogleAuth BeaconsAttachmentsDelete' where
+        authKey = badKey . _Just
+        authToken = badOAuthToken . _Just
 
 instance GoogleRequest BeaconsAttachmentsDelete'
          where
@@ -241,10 +237,10 @@ instance GoogleRequest BeaconsAttachmentsDelete'
               _badAttachmentName
               _badBearerToken
               _badKey
-              _badOauthToken
+              _badOAuthToken
               _badFields
               _badCallback
-              (Just _badAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy BeaconsAttachmentsDeleteResource)

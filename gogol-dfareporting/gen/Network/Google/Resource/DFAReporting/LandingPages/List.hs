@@ -32,13 +32,12 @@ module Network.Google.Resource.DFAReporting.LandingPages.List
     -- * Request Lenses
     , lplQuotaUser
     , lplPrettyPrint
-    , lplUserIp
+    , lplUserIP
     , lplCampaignId
     , lplProfileId
     , lplKey
-    , lplOauthToken
+    , lplOAuthToken
     , lplFields
-    , lplAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -55,10 +54,10 @@ type LandingPagesListResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :>
+                           QueryParam "alt" AltJSON :>
                              Get '[JSON] LandingPagesListResponse
 
 -- | Retrieves the list of landing pages for the specified campaign.
@@ -67,13 +66,12 @@ type LandingPagesListResource =
 data LandingPagesList' = LandingPagesList'
     { _lplQuotaUser   :: !(Maybe Text)
     , _lplPrettyPrint :: !Bool
-    , _lplUserIp      :: !(Maybe Text)
+    , _lplUserIP      :: !(Maybe Text)
     , _lplCampaignId  :: !Int64
     , _lplProfileId   :: !Int64
-    , _lplKey         :: !(Maybe Text)
-    , _lplOauthToken  :: !(Maybe Text)
+    , _lplKey         :: !(Maybe Key)
+    , _lplOAuthToken  :: !(Maybe OAuthToken)
     , _lplFields      :: !(Maybe Text)
-    , _lplAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LandingPagesList'' with the minimum fields required to make a request.
@@ -84,7 +82,7 @@ data LandingPagesList' = LandingPagesList'
 --
 -- * 'lplPrettyPrint'
 --
--- * 'lplUserIp'
+-- * 'lplUserIP'
 --
 -- * 'lplCampaignId'
 --
@@ -92,11 +90,9 @@ data LandingPagesList' = LandingPagesList'
 --
 -- * 'lplKey'
 --
--- * 'lplOauthToken'
+-- * 'lplOAuthToken'
 --
 -- * 'lplFields'
---
--- * 'lplAlt'
 landingPagesList'
     :: Int64 -- ^ 'campaignId'
     -> Int64 -- ^ 'profileId'
@@ -105,13 +101,12 @@ landingPagesList' pLplCampaignId_ pLplProfileId_ =
     LandingPagesList'
     { _lplQuotaUser = Nothing
     , _lplPrettyPrint = True
-    , _lplUserIp = Nothing
+    , _lplUserIP = Nothing
     , _lplCampaignId = pLplCampaignId_
     , _lplProfileId = pLplProfileId_
     , _lplKey = Nothing
-    , _lplOauthToken = Nothing
+    , _lplOAuthToken = Nothing
     , _lplFields = Nothing
-    , _lplAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -129,9 +124,9 @@ lplPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-lplUserIp :: Lens' LandingPagesList' (Maybe Text)
-lplUserIp
-  = lens _lplUserIp (\ s a -> s{_lplUserIp = a})
+lplUserIP :: Lens' LandingPagesList' (Maybe Text)
+lplUserIP
+  = lens _lplUserIP (\ s a -> s{_lplUserIP = a})
 
 -- | Landing page campaign ID.
 lplCampaignId :: Lens' LandingPagesList' Int64
@@ -147,35 +142,35 @@ lplProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lplKey :: Lens' LandingPagesList' (Maybe Text)
+lplKey :: Lens' LandingPagesList' (Maybe Key)
 lplKey = lens _lplKey (\ s a -> s{_lplKey = a})
 
 -- | OAuth 2.0 token for the current user.
-lplOauthToken :: Lens' LandingPagesList' (Maybe Text)
-lplOauthToken
-  = lens _lplOauthToken
-      (\ s a -> s{_lplOauthToken = a})
+lplOAuthToken :: Lens' LandingPagesList' (Maybe OAuthToken)
+lplOAuthToken
+  = lens _lplOAuthToken
+      (\ s a -> s{_lplOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 lplFields :: Lens' LandingPagesList' (Maybe Text)
 lplFields
   = lens _lplFields (\ s a -> s{_lplFields = a})
 
--- | Data format for the response.
-lplAlt :: Lens' LandingPagesList' Alt
-lplAlt = lens _lplAlt (\ s a -> s{_lplAlt = a})
+instance GoogleAuth LandingPagesList' where
+        authKey = lplKey . _Just
+        authToken = lplOAuthToken . _Just
 
 instance GoogleRequest LandingPagesList' where
         type Rs LandingPagesList' = LandingPagesListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u LandingPagesList'{..}
-          = go _lplQuotaUser (Just _lplPrettyPrint) _lplUserIp
+          = go _lplQuotaUser (Just _lplPrettyPrint) _lplUserIP
               _lplCampaignId
               _lplProfileId
               _lplKey
-              _lplOauthToken
+              _lplOAuthToken
               _lplFields
-              (Just _lplAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy LandingPagesListResource)

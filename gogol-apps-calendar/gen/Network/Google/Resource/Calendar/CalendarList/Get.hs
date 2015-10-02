@@ -33,11 +33,10 @@ module Network.Google.Resource.Calendar.CalendarList.Get
     , clgQuotaUser
     , clgCalendarId
     , clgPrettyPrint
-    , clgUserIp
+    , clgUserIP
     , clgKey
-    , clgOauthToken
+    , clgOAuthToken
     , clgFields
-    , clgAlt
     ) where
 
 import           Network.Google.AppsCalendar.Types
@@ -53,10 +52,11 @@ type CalendarListGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] CalendarListEntry
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] CalendarListEntry
 
 -- | Returns an entry on the user\'s calendar list.
 --
@@ -65,11 +65,10 @@ data CalendarListGet' = CalendarListGet'
     { _clgQuotaUser   :: !(Maybe Text)
     , _clgCalendarId  :: !Text
     , _clgPrettyPrint :: !Bool
-    , _clgUserIp      :: !(Maybe Text)
-    , _clgKey         :: !(Maybe Text)
-    , _clgOauthToken  :: !(Maybe Text)
+    , _clgUserIP      :: !(Maybe Text)
+    , _clgKey         :: !(Maybe Key)
+    , _clgOAuthToken  :: !(Maybe OAuthToken)
     , _clgFields      :: !(Maybe Text)
-    , _clgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CalendarListGet'' with the minimum fields required to make a request.
@@ -82,15 +81,13 @@ data CalendarListGet' = CalendarListGet'
 --
 -- * 'clgPrettyPrint'
 --
--- * 'clgUserIp'
+-- * 'clgUserIP'
 --
 -- * 'clgKey'
 --
--- * 'clgOauthToken'
+-- * 'clgOAuthToken'
 --
 -- * 'clgFields'
---
--- * 'clgAlt'
 calendarListGet'
     :: Text -- ^ 'calendarId'
     -> CalendarListGet'
@@ -99,11 +96,10 @@ calendarListGet' pClgCalendarId_ =
     { _clgQuotaUser = Nothing
     , _clgCalendarId = pClgCalendarId_
     , _clgPrettyPrint = True
-    , _clgUserIp = Nothing
+    , _clgUserIP = Nothing
     , _clgKey = Nothing
-    , _clgOauthToken = Nothing
+    , _clgOAuthToken = Nothing
     , _clgFields = Nothing
-    , _clgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -129,30 +125,30 @@ clgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-clgUserIp :: Lens' CalendarListGet' (Maybe Text)
-clgUserIp
-  = lens _clgUserIp (\ s a -> s{_clgUserIp = a})
+clgUserIP :: Lens' CalendarListGet' (Maybe Text)
+clgUserIP
+  = lens _clgUserIP (\ s a -> s{_clgUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-clgKey :: Lens' CalendarListGet' (Maybe Text)
+clgKey :: Lens' CalendarListGet' (Maybe Key)
 clgKey = lens _clgKey (\ s a -> s{_clgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-clgOauthToken :: Lens' CalendarListGet' (Maybe Text)
-clgOauthToken
-  = lens _clgOauthToken
-      (\ s a -> s{_clgOauthToken = a})
+clgOAuthToken :: Lens' CalendarListGet' (Maybe OAuthToken)
+clgOAuthToken
+  = lens _clgOAuthToken
+      (\ s a -> s{_clgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 clgFields :: Lens' CalendarListGet' (Maybe Text)
 clgFields
   = lens _clgFields (\ s a -> s{_clgFields = a})
 
--- | Data format for the response.
-clgAlt :: Lens' CalendarListGet' Alt
-clgAlt = lens _clgAlt (\ s a -> s{_clgAlt = a})
+instance GoogleAuth CalendarListGet' where
+        authKey = clgKey . _Just
+        authToken = clgOAuthToken . _Just
 
 instance GoogleRequest CalendarListGet' where
         type Rs CalendarListGet' = CalendarListEntry
@@ -160,11 +156,11 @@ instance GoogleRequest CalendarListGet' where
         requestWithRoute r u CalendarListGet'{..}
           = go _clgQuotaUser _clgCalendarId
               (Just _clgPrettyPrint)
-              _clgUserIp
+              _clgUserIP
               _clgKey
-              _clgOauthToken
+              _clgOAuthToken
               _clgFields
-              (Just _clgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CalendarListGetResource)

@@ -33,15 +33,14 @@ module Network.Google.Resource.Reports.CustomerUsageReports.Get
     -- * Request Lenses
     , curgQuotaUser
     , curgPrettyPrint
-    , curgUserIp
+    , curgUserIP
     , curgCustomerId
     , curgDate
     , curgKey
     , curgParameters
     , curgPageToken
-    , curgOauthToken
+    , curgOAuthToken
     , curgFields
-    , curgAlt
     ) where
 
 import           Network.Google.AdminReports.Types
@@ -57,12 +56,13 @@ type CustomerUsageReportsGetResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "customerId" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "parameters" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Get '[JSON] UsageReports
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] UsageReports
 
 -- | Retrieves a report which is a collection of properties \/ statistics for
 -- a specific customer.
@@ -71,15 +71,14 @@ type CustomerUsageReportsGetResource =
 data CustomerUsageReportsGet' = CustomerUsageReportsGet'
     { _curgQuotaUser   :: !(Maybe Text)
     , _curgPrettyPrint :: !Bool
-    , _curgUserIp      :: !(Maybe Text)
+    , _curgUserIP      :: !(Maybe Text)
     , _curgCustomerId  :: !(Maybe Text)
     , _curgDate        :: !Text
-    , _curgKey         :: !(Maybe Text)
+    , _curgKey         :: !(Maybe Key)
     , _curgParameters  :: !(Maybe Text)
     , _curgPageToken   :: !(Maybe Text)
-    , _curgOauthToken  :: !(Maybe Text)
+    , _curgOAuthToken  :: !(Maybe OAuthToken)
     , _curgFields      :: !(Maybe Text)
-    , _curgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CustomerUsageReportsGet'' with the minimum fields required to make a request.
@@ -90,7 +89,7 @@ data CustomerUsageReportsGet' = CustomerUsageReportsGet'
 --
 -- * 'curgPrettyPrint'
 --
--- * 'curgUserIp'
+-- * 'curgUserIP'
 --
 -- * 'curgCustomerId'
 --
@@ -102,11 +101,9 @@ data CustomerUsageReportsGet' = CustomerUsageReportsGet'
 --
 -- * 'curgPageToken'
 --
--- * 'curgOauthToken'
+-- * 'curgOAuthToken'
 --
 -- * 'curgFields'
---
--- * 'curgAlt'
 customerUsageReportsGet'
     :: Text -- ^ 'date'
     -> CustomerUsageReportsGet'
@@ -114,15 +111,14 @@ customerUsageReportsGet' pCurgDate_ =
     CustomerUsageReportsGet'
     { _curgQuotaUser = Nothing
     , _curgPrettyPrint = True
-    , _curgUserIp = Nothing
+    , _curgUserIP = Nothing
     , _curgCustomerId = Nothing
     , _curgDate = pCurgDate_
     , _curgKey = Nothing
     , _curgParameters = Nothing
     , _curgPageToken = Nothing
-    , _curgOauthToken = Nothing
+    , _curgOAuthToken = Nothing
     , _curgFields = Nothing
-    , _curgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -141,9 +137,9 @@ curgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-curgUserIp :: Lens' CustomerUsageReportsGet' (Maybe Text)
-curgUserIp
-  = lens _curgUserIp (\ s a -> s{_curgUserIp = a})
+curgUserIP :: Lens' CustomerUsageReportsGet' (Maybe Text)
+curgUserIP
+  = lens _curgUserIP (\ s a -> s{_curgUserIP = a})
 
 -- | Represents the customer for which the data is to be fetched.
 curgCustomerId :: Lens' CustomerUsageReportsGet' (Maybe Text)
@@ -159,7 +155,7 @@ curgDate = lens _curgDate (\ s a -> s{_curgDate = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-curgKey :: Lens' CustomerUsageReportsGet' (Maybe Text)
+curgKey :: Lens' CustomerUsageReportsGet' (Maybe Key)
 curgKey = lens _curgKey (\ s a -> s{_curgKey = a})
 
 -- | Represents the application name, parameter name pairs to fetch in csv as
@@ -176,34 +172,34 @@ curgPageToken
       (\ s a -> s{_curgPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-curgOauthToken :: Lens' CustomerUsageReportsGet' (Maybe Text)
-curgOauthToken
-  = lens _curgOauthToken
-      (\ s a -> s{_curgOauthToken = a})
+curgOAuthToken :: Lens' CustomerUsageReportsGet' (Maybe OAuthToken)
+curgOAuthToken
+  = lens _curgOAuthToken
+      (\ s a -> s{_curgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 curgFields :: Lens' CustomerUsageReportsGet' (Maybe Text)
 curgFields
   = lens _curgFields (\ s a -> s{_curgFields = a})
 
--- | Data format for the response.
-curgAlt :: Lens' CustomerUsageReportsGet' Alt
-curgAlt = lens _curgAlt (\ s a -> s{_curgAlt = a})
+instance GoogleAuth CustomerUsageReportsGet' where
+        authKey = curgKey . _Just
+        authToken = curgOAuthToken . _Just
 
 instance GoogleRequest CustomerUsageReportsGet' where
         type Rs CustomerUsageReportsGet' = UsageReports
         request = requestWithRoute defReq adminReportsURL
         requestWithRoute r u CustomerUsageReportsGet'{..}
           = go _curgQuotaUser (Just _curgPrettyPrint)
-              _curgUserIp
+              _curgUserIP
               _curgCustomerId
               _curgDate
               _curgKey
               _curgParameters
               _curgPageToken
-              _curgOauthToken
+              _curgOAuthToken
               _curgFields
-              (Just _curgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CustomerUsageReportsGetResource)

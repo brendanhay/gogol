@@ -32,11 +32,11 @@ module Network.Google.Resource.QPXExpress.Trips.Search
     -- * Request Lenses
     , tsQuotaUser
     , tsPrettyPrint
-    , tsUserIp
+    , tsUserIP
     , tsKey
-    , tsOauthToken
+    , tsOAuthToken
+    , tsTripsSearchRequest
     , tsFields
-    , tsAlt
     ) where
 
 import           Network.Google.Prelude
@@ -49,23 +49,24 @@ type TripsSearchResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
-               QueryParam "oauth_token" Text :>
+             QueryParam "key" Key :>
+               QueryParam "oauth_token" OAuthToken :>
                  QueryParam "fields" Text :>
-                   QueryParam "alt" Alt :>
-                     Post '[JSON] TripsSearchResponse
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] TripsSearchRequest :>
+                       Post '[JSON] TripsSearchResponse
 
 -- | Returns a list of flights.
 --
 -- /See:/ 'tripsSearch'' smart constructor.
 data TripsSearch' = TripsSearch'
-    { _tsQuotaUser   :: !(Maybe Text)
-    , _tsPrettyPrint :: !Bool
-    , _tsUserIp      :: !(Maybe Text)
-    , _tsKey         :: !(Maybe Text)
-    , _tsOauthToken  :: !(Maybe Text)
-    , _tsFields      :: !(Maybe Text)
-    , _tsAlt         :: !Alt
+    { _tsQuotaUser          :: !(Maybe Text)
+    , _tsPrettyPrint        :: !Bool
+    , _tsUserIP             :: !(Maybe Text)
+    , _tsKey                :: !(Maybe Key)
+    , _tsOAuthToken         :: !(Maybe OAuthToken)
+    , _tsTripsSearchRequest :: !TripsSearchRequest
+    , _tsFields             :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TripsSearch'' with the minimum fields required to make a request.
@@ -76,26 +77,27 @@ data TripsSearch' = TripsSearch'
 --
 -- * 'tsPrettyPrint'
 --
--- * 'tsUserIp'
+-- * 'tsUserIP'
 --
 -- * 'tsKey'
 --
--- * 'tsOauthToken'
+-- * 'tsOAuthToken'
+--
+-- * 'tsTripsSearchRequest'
 --
 -- * 'tsFields'
---
--- * 'tsAlt'
 tripsSearch'
-    :: TripsSearch'
-tripsSearch' =
+    :: TripsSearchRequest -- ^ 'TripsSearchRequest'
+    -> TripsSearch'
+tripsSearch' pTsTripsSearchRequest_ =
     TripsSearch'
     { _tsQuotaUser = Nothing
     , _tsPrettyPrint = True
-    , _tsUserIp = Nothing
+    , _tsUserIP = Nothing
     , _tsKey = Nothing
-    , _tsOauthToken = Nothing
+    , _tsOAuthToken = Nothing
+    , _tsTripsSearchRequest = pTsTripsSearchRequest_
     , _tsFields = Nothing
-    , _tsAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -113,37 +115,44 @@ tsPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tsUserIp :: Lens' TripsSearch' (Maybe Text)
-tsUserIp = lens _tsUserIp (\ s a -> s{_tsUserIp = a})
+tsUserIP :: Lens' TripsSearch' (Maybe Text)
+tsUserIP = lens _tsUserIP (\ s a -> s{_tsUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tsKey :: Lens' TripsSearch' (Maybe Text)
+tsKey :: Lens' TripsSearch' (Maybe Key)
 tsKey = lens _tsKey (\ s a -> s{_tsKey = a})
 
 -- | OAuth 2.0 token for the current user.
-tsOauthToken :: Lens' TripsSearch' (Maybe Text)
-tsOauthToken
-  = lens _tsOauthToken (\ s a -> s{_tsOauthToken = a})
+tsOAuthToken :: Lens' TripsSearch' (Maybe OAuthToken)
+tsOAuthToken
+  = lens _tsOAuthToken (\ s a -> s{_tsOAuthToken = a})
+
+-- | Multipart request metadata.
+tsTripsSearchRequest :: Lens' TripsSearch' TripsSearchRequest
+tsTripsSearchRequest
+  = lens _tsTripsSearchRequest
+      (\ s a -> s{_tsTripsSearchRequest = a})
 
 -- | Selector specifying which fields to include in a partial response.
 tsFields :: Lens' TripsSearch' (Maybe Text)
 tsFields = lens _tsFields (\ s a -> s{_tsFields = a})
 
--- | Data format for the response.
-tsAlt :: Lens' TripsSearch' Alt
-tsAlt = lens _tsAlt (\ s a -> s{_tsAlt = a})
+instance GoogleAuth TripsSearch' where
+        authKey = tsKey . _Just
+        authToken = tsOAuthToken . _Just
 
 instance GoogleRequest TripsSearch' where
         type Rs TripsSearch' = TripsSearchResponse
         request = requestWithRoute defReq qPXExpressURL
         requestWithRoute r u TripsSearch'{..}
-          = go _tsQuotaUser (Just _tsPrettyPrint) _tsUserIp
+          = go _tsQuotaUser (Just _tsPrettyPrint) _tsUserIP
               _tsKey
-              _tsOauthToken
+              _tsOAuthToken
               _tsFields
-              (Just _tsAlt)
+              (Just AltJSON)
+              _tsTripsSearchRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TripsSearchResource)

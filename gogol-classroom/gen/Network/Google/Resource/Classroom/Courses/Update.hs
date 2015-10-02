@@ -43,11 +43,11 @@ module Network.Google.Resource.Classroom.Courses.Update
     , cuUploadType
     , cuBearerToken
     , cuKey
+    , cuCourse
     , cuId
-    , cuOauthToken
+    , cuOAuthToken
     , cuFields
     , cuCallback
-    , cuAlt
     ) where
 
 import           Network.Google.Classroom.Types
@@ -67,11 +67,13 @@ type CoursesUpdateResource =
                      QueryParam "access_token" Text :>
                        QueryParam "uploadType" Text :>
                          QueryParam "bearer_token" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "fields" Text :>
                                  QueryParam "callback" Text :>
-                                   QueryParam "alt" Text :> Put '[JSON] Course
+                                   QueryParam "alt" AltJSON :>
+                                     ReqBody '[JSON] Course :>
+                                       Put '[JSON] Course
 
 -- | Updates a course. This method returns the following error codes: *
 -- \`PERMISSION_DENIED\` if the requesting user is not permitted to modify
@@ -89,12 +91,12 @@ data CoursesUpdate' = CoursesUpdate'
     , _cuAccessToken    :: !(Maybe Text)
     , _cuUploadType     :: !(Maybe Text)
     , _cuBearerToken    :: !(Maybe Text)
-    , _cuKey            :: !(Maybe Text)
+    , _cuKey            :: !(Maybe Key)
+    , _cuCourse         :: !Course
     , _cuId             :: !Text
-    , _cuOauthToken     :: !(Maybe Text)
+    , _cuOAuthToken     :: !(Maybe OAuthToken)
     , _cuFields         :: !(Maybe Text)
     , _cuCallback       :: !(Maybe Text)
-    , _cuAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CoursesUpdate'' with the minimum fields required to make a request.
@@ -119,19 +121,20 @@ data CoursesUpdate' = CoursesUpdate'
 --
 -- * 'cuKey'
 --
+-- * 'cuCourse'
+--
 -- * 'cuId'
 --
--- * 'cuOauthToken'
+-- * 'cuOAuthToken'
 --
 -- * 'cuFields'
 --
 -- * 'cuCallback'
---
--- * 'cuAlt'
 coursesUpdate'
-    :: Text -- ^ 'id'
+    :: Course -- ^ 'Course'
+    -> Text -- ^ 'id'
     -> CoursesUpdate'
-coursesUpdate' pCuId_ =
+coursesUpdate' pCuCourse_ pCuId_ =
     CoursesUpdate'
     { _cuXgafv = Nothing
     , _cuQuotaUser = Nothing
@@ -142,11 +145,11 @@ coursesUpdate' pCuId_ =
     , _cuUploadType = Nothing
     , _cuBearerToken = Nothing
     , _cuKey = Nothing
+    , _cuCourse = pCuCourse_
     , _cuId = pCuId_
-    , _cuOauthToken = Nothing
+    , _cuOAuthToken = Nothing
     , _cuFields = Nothing
     , _cuCallback = Nothing
-    , _cuAlt = "json"
     }
 
 -- | V1 error format.
@@ -196,8 +199,12 @@ cuBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cuKey :: Lens' CoursesUpdate' (Maybe Text)
+cuKey :: Lens' CoursesUpdate' (Maybe Key)
 cuKey = lens _cuKey (\ s a -> s{_cuKey = a})
+
+-- | Multipart request metadata.
+cuCourse :: Lens' CoursesUpdate' Course
+cuCourse = lens _cuCourse (\ s a -> s{_cuCourse = a})
 
 -- | Identifier of the course to update. This identifier can be either the
 -- Classroom-assigned identifier or an
@@ -206,9 +213,9 @@ cuId :: Lens' CoursesUpdate' Text
 cuId = lens _cuId (\ s a -> s{_cuId = a})
 
 -- | OAuth 2.0 token for the current user.
-cuOauthToken :: Lens' CoursesUpdate' (Maybe Text)
-cuOauthToken
-  = lens _cuOauthToken (\ s a -> s{_cuOauthToken = a})
+cuOAuthToken :: Lens' CoursesUpdate' (Maybe OAuthToken)
+cuOAuthToken
+  = lens _cuOAuthToken (\ s a -> s{_cuOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cuFields :: Lens' CoursesUpdate' (Maybe Text)
@@ -219,9 +226,9 @@ cuCallback :: Lens' CoursesUpdate' (Maybe Text)
 cuCallback
   = lens _cuCallback (\ s a -> s{_cuCallback = a})
 
--- | Data format for response.
-cuAlt :: Lens' CoursesUpdate' Text
-cuAlt = lens _cuAlt (\ s a -> s{_cuAlt = a})
+instance GoogleAuth CoursesUpdate' where
+        authKey = cuKey . _Just
+        authToken = cuOAuthToken . _Just
 
 instance GoogleRequest CoursesUpdate' where
         type Rs CoursesUpdate' = Course
@@ -235,10 +242,11 @@ instance GoogleRequest CoursesUpdate' where
               _cuBearerToken
               _cuKey
               _cuId
-              _cuOauthToken
+              _cuOAuthToken
               _cuFields
               _cuCallback
-              (Just _cuAlt)
+              (Just AltJSON)
+              _cuCourse
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CoursesUpdateResource)

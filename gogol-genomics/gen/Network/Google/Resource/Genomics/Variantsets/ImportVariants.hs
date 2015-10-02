@@ -41,11 +41,11 @@ module Network.Google.Resource.Genomics.Variantsets.ImportVariants
     , vivQuotaUser
     , vivPrettyPrint
     , vivVariantSetId
-    , vivUserIp
+    , vivUserIP
     , vivKey
-    , vivOauthToken
+    , vivImportVariantsRequest
+    , vivOAuthToken
     , vivFields
-    , vivAlt
     ) where
 
 import           Network.Google.Genomics.Types
@@ -60,11 +60,12 @@ type VariantsetsImportVariantsResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :>
-                         Post '[JSON] ImportVariantsResponse
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] ImportVariantsRequest :>
+                           Post '[JSON] ImportVariantsResponse
 
 -- | Creates variant data by asynchronously importing the provided
 -- information. The variants for import will be merged with any existing
@@ -78,14 +79,14 @@ type VariantsetsImportVariantsResource =
 --
 -- /See:/ 'variantsetsImportVariants'' smart constructor.
 data VariantsetsImportVariants' = VariantsetsImportVariants'
-    { _vivQuotaUser    :: !(Maybe Text)
-    , _vivPrettyPrint  :: !Bool
-    , _vivVariantSetId :: !Text
-    , _vivUserIp       :: !(Maybe Text)
-    , _vivKey          :: !(Maybe Text)
-    , _vivOauthToken   :: !(Maybe Text)
-    , _vivFields       :: !(Maybe Text)
-    , _vivAlt          :: !Alt
+    { _vivQuotaUser             :: !(Maybe Text)
+    , _vivPrettyPrint           :: !Bool
+    , _vivVariantSetId          :: !Text
+    , _vivUserIP                :: !(Maybe Text)
+    , _vivKey                   :: !(Maybe Key)
+    , _vivImportVariantsRequest :: !ImportVariantsRequest
+    , _vivOAuthToken            :: !(Maybe OAuthToken)
+    , _vivFields                :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantsetsImportVariants'' with the minimum fields required to make a request.
@@ -98,28 +99,29 @@ data VariantsetsImportVariants' = VariantsetsImportVariants'
 --
 -- * 'vivVariantSetId'
 --
--- * 'vivUserIp'
+-- * 'vivUserIP'
 --
 -- * 'vivKey'
 --
--- * 'vivOauthToken'
+-- * 'vivImportVariantsRequest'
+--
+-- * 'vivOAuthToken'
 --
 -- * 'vivFields'
---
--- * 'vivAlt'
 variantsetsImportVariants'
     :: Text -- ^ 'variantSetId'
+    -> ImportVariantsRequest -- ^ 'ImportVariantsRequest'
     -> VariantsetsImportVariants'
-variantsetsImportVariants' pVivVariantSetId_ =
+variantsetsImportVariants' pVivVariantSetId_ pVivImportVariantsRequest_ =
     VariantsetsImportVariants'
     { _vivQuotaUser = Nothing
     , _vivPrettyPrint = True
     , _vivVariantSetId = pVivVariantSetId_
-    , _vivUserIp = Nothing
+    , _vivUserIP = Nothing
     , _vivKey = Nothing
-    , _vivOauthToken = Nothing
+    , _vivImportVariantsRequest = pVivImportVariantsRequest_
+    , _vivOAuthToken = Nothing
     , _vivFields = Nothing
-    , _vivAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -143,30 +145,36 @@ vivVariantSetId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-vivUserIp :: Lens' VariantsetsImportVariants' (Maybe Text)
-vivUserIp
-  = lens _vivUserIp (\ s a -> s{_vivUserIp = a})
+vivUserIP :: Lens' VariantsetsImportVariants' (Maybe Text)
+vivUserIP
+  = lens _vivUserIP (\ s a -> s{_vivUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vivKey :: Lens' VariantsetsImportVariants' (Maybe Text)
+vivKey :: Lens' VariantsetsImportVariants' (Maybe Key)
 vivKey = lens _vivKey (\ s a -> s{_vivKey = a})
 
+-- | Multipart request metadata.
+vivImportVariantsRequest :: Lens' VariantsetsImportVariants' ImportVariantsRequest
+vivImportVariantsRequest
+  = lens _vivImportVariantsRequest
+      (\ s a -> s{_vivImportVariantsRequest = a})
+
 -- | OAuth 2.0 token for the current user.
-vivOauthToken :: Lens' VariantsetsImportVariants' (Maybe Text)
-vivOauthToken
-  = lens _vivOauthToken
-      (\ s a -> s{_vivOauthToken = a})
+vivOAuthToken :: Lens' VariantsetsImportVariants' (Maybe OAuthToken)
+vivOAuthToken
+  = lens _vivOAuthToken
+      (\ s a -> s{_vivOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 vivFields :: Lens' VariantsetsImportVariants' (Maybe Text)
 vivFields
   = lens _vivFields (\ s a -> s{_vivFields = a})
 
--- | Data format for the response.
-vivAlt :: Lens' VariantsetsImportVariants' Alt
-vivAlt = lens _vivAlt (\ s a -> s{_vivAlt = a})
+instance GoogleAuth VariantsetsImportVariants' where
+        authKey = vivKey . _Just
+        authToken = vivOAuthToken . _Just
 
 instance GoogleRequest VariantsetsImportVariants'
          where
@@ -176,11 +184,12 @@ instance GoogleRequest VariantsetsImportVariants'
         requestWithRoute r u VariantsetsImportVariants'{..}
           = go _vivQuotaUser (Just _vivPrettyPrint)
               _vivVariantSetId
-              _vivUserIp
+              _vivUserIP
               _vivKey
-              _vivOauthToken
+              _vivOAuthToken
               _vivFields
-              (Just _vivAlt)
+              (Just AltJSON)
+              _vivImportVariantsRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy VariantsetsImportVariantsResource)

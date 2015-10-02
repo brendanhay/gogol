@@ -38,12 +38,11 @@ module Network.Google.Resource.Compute.Instances.Stop
     , isQuotaUser
     , isPrettyPrint
     , isProject
-    , isUserIp
+    , isUserIP
     , isZone
     , isKey
-    , isOauthToken
+    , isOAuthToken
     , isFields
-    , isAlt
     , isInstance
     ) where
 
@@ -62,10 +61,10 @@ type InstancesStopResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Post '[JSON] Operation
+                             QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
 -- | This method stops a running instance, shutting it down cleanly, and
 -- allows you to restart the instance at a later time. Stopped instances do
@@ -79,12 +78,11 @@ data InstancesStop' = InstancesStop'
     { _isQuotaUser   :: !(Maybe Text)
     , _isPrettyPrint :: !Bool
     , _isProject     :: !Text
-    , _isUserIp      :: !(Maybe Text)
+    , _isUserIP      :: !(Maybe Text)
     , _isZone        :: !Text
-    , _isKey         :: !(Maybe Text)
-    , _isOauthToken  :: !(Maybe Text)
+    , _isKey         :: !(Maybe Key)
+    , _isOAuthToken  :: !(Maybe OAuthToken)
     , _isFields      :: !(Maybe Text)
-    , _isAlt         :: !Alt
     , _isInstance    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -98,17 +96,15 @@ data InstancesStop' = InstancesStop'
 --
 -- * 'isProject'
 --
--- * 'isUserIp'
+-- * 'isUserIP'
 --
 -- * 'isZone'
 --
 -- * 'isKey'
 --
--- * 'isOauthToken'
+-- * 'isOAuthToken'
 --
 -- * 'isFields'
---
--- * 'isAlt'
 --
 -- * 'isInstance'
 instancesStop'
@@ -121,12 +117,11 @@ instancesStop' pIsProject_ pIsZone_ pIsInstance_ =
     { _isQuotaUser = Nothing
     , _isPrettyPrint = True
     , _isProject = pIsProject_
-    , _isUserIp = Nothing
+    , _isUserIP = Nothing
     , _isZone = pIsZone_
     , _isKey = Nothing
-    , _isOauthToken = Nothing
+    , _isOAuthToken = Nothing
     , _isFields = Nothing
-    , _isAlt = JSON
     , _isInstance = pIsInstance_
     }
 
@@ -150,8 +145,8 @@ isProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-isUserIp :: Lens' InstancesStop' (Maybe Text)
-isUserIp = lens _isUserIp (\ s a -> s{_isUserIp = a})
+isUserIP :: Lens' InstancesStop' (Maybe Text)
+isUserIP = lens _isUserIP (\ s a -> s{_isUserIP = a})
 
 -- | The name of the zone for this request.
 isZone :: Lens' InstancesStop' Text
@@ -160,39 +155,39 @@ isZone = lens _isZone (\ s a -> s{_isZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-isKey :: Lens' InstancesStop' (Maybe Text)
+isKey :: Lens' InstancesStop' (Maybe Key)
 isKey = lens _isKey (\ s a -> s{_isKey = a})
 
 -- | OAuth 2.0 token for the current user.
-isOauthToken :: Lens' InstancesStop' (Maybe Text)
-isOauthToken
-  = lens _isOauthToken (\ s a -> s{_isOauthToken = a})
+isOAuthToken :: Lens' InstancesStop' (Maybe OAuthToken)
+isOAuthToken
+  = lens _isOAuthToken (\ s a -> s{_isOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 isFields :: Lens' InstancesStop' (Maybe Text)
 isFields = lens _isFields (\ s a -> s{_isFields = a})
-
--- | Data format for the response.
-isAlt :: Lens' InstancesStop' Alt
-isAlt = lens _isAlt (\ s a -> s{_isAlt = a})
 
 -- | Name of the instance resource to stop.
 isInstance :: Lens' InstancesStop' Text
 isInstance
   = lens _isInstance (\ s a -> s{_isInstance = a})
 
+instance GoogleAuth InstancesStop' where
+        authKey = isKey . _Just
+        authToken = isOAuthToken . _Just
+
 instance GoogleRequest InstancesStop' where
         type Rs InstancesStop' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstancesStop'{..}
           = go _isQuotaUser (Just _isPrettyPrint) _isProject
-              _isUserIp
+              _isUserIP
               _isZone
               _isKey
-              _isOauthToken
+              _isOAuthToken
               _isFields
-              (Just _isAlt)
               _isInstance
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InstancesStopResource)

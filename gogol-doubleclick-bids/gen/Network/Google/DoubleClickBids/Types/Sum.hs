@@ -52,7 +52,7 @@ instance ToJSON QueryMetadataFormat where
 data ParametersType
     = TypeActiveGrp
       -- ^ @TYPE_ACTIVE_GRP@
-    | TypeAudienceComposition
+    | TypeAudienceComPosition
       -- ^ @TYPE_AUDIENCE_COMPOSITION@
     | TypeAudiencePerformance
       -- ^ @TYPE_AUDIENCE_PERFORMANCE@
@@ -107,7 +107,7 @@ instance Hashable ParametersType
 instance FromText ParametersType where
     fromText = \case
         "TYPE_ACTIVE_GRP" -> Just TypeActiveGrp
-        "TYPE_AUDIENCE_COMPOSITION" -> Just TypeAudienceComposition
+        "TYPE_AUDIENCE_COMPOSITION" -> Just TypeAudienceComPosition
         "TYPE_AUDIENCE_PERFORMANCE" -> Just TypeAudiencePerformance
         "TYPE_CLIENT_SAFE" -> Just TypeClientSafe
         "TYPE_COMSCORE_VCE" -> Just TypeComscoreVce
@@ -136,7 +136,7 @@ instance FromText ParametersType where
 instance ToText ParametersType where
     toText = \case
         TypeActiveGrp -> "TYPE_ACTIVE_GRP"
-        TypeAudienceComposition -> "TYPE_AUDIENCE_COMPOSITION"
+        TypeAudienceComPosition -> "TYPE_AUDIENCE_COMPOSITION"
         TypeAudiencePerformance -> "TYPE_AUDIENCE_PERFORMANCE"
         TypeClientSafe -> "TYPE_CLIENT_SAFE"
         TypeComscoreVce -> "TYPE_COMSCORE_VCE"
@@ -258,7 +258,7 @@ data ParametersGroupBys
       -- ^ @FILTER_NIELSEN_GENDER@
     | FilterOrderId
       -- ^ @FILTER_ORDER_ID@
-    | FilterOs
+    | FilterOS
       -- ^ @FILTER_OS@
     | FilterPageCategory
       -- ^ @FILTER_PAGE_CATEGORY@
@@ -377,7 +377,7 @@ instance FromText ParametersGroupBys where
         "FILTER_NIELSEN_DEVICE_ID" -> Just FilterNielsenDeviceId
         "FILTER_NIELSEN_GENDER" -> Just FilterNielsenGender
         "FILTER_ORDER_ID" -> Just FilterOrderId
-        "FILTER_OS" -> Just FilterOs
+        "FILTER_OS" -> Just FilterOS
         "FILTER_PAGE_CATEGORY" -> Just FilterPageCategory
         "FILTER_PAGE_LAYOUT" -> Just FilterPageLayout
         "FILTER_PARTNER" -> Just FilterPartner
@@ -460,7 +460,7 @@ instance ToText ParametersGroupBys where
         FilterNielsenDeviceId -> "FILTER_NIELSEN_DEVICE_ID"
         FilterNielsenGender -> "FILTER_NIELSEN_GENDER"
         FilterOrderId -> "FILTER_ORDER_ID"
-        FilterOs -> "FILTER_OS"
+        FilterOS -> "FILTER_OS"
         FilterPageCategory -> "FILTER_PAGE_CATEGORY"
         FilterPageLayout -> "FILTER_PAGE_LAYOUT"
         FilterPartner -> "FILTER_PARTNER"
@@ -781,7 +781,7 @@ data FilterPairType
       -- ^ @FILTER_NIELSEN_GENDER@
     | FPTFilterOrderId
       -- ^ @FILTER_ORDER_ID@
-    | FPTFilterOs
+    | FPTFilterOS
       -- ^ @FILTER_OS@
     | FPTFilterPageCategory
       -- ^ @FILTER_PAGE_CATEGORY@
@@ -900,7 +900,7 @@ instance FromText FilterPairType where
         "FILTER_NIELSEN_DEVICE_ID" -> Just FPTFilterNielsenDeviceId
         "FILTER_NIELSEN_GENDER" -> Just FPTFilterNielsenGender
         "FILTER_ORDER_ID" -> Just FPTFilterOrderId
-        "FILTER_OS" -> Just FPTFilterOs
+        "FILTER_OS" -> Just FPTFilterOS
         "FILTER_PAGE_CATEGORY" -> Just FPTFilterPageCategory
         "FILTER_PAGE_LAYOUT" -> Just FPTFilterPageLayout
         "FILTER_PARTNER" -> Just FPTFilterPartner
@@ -983,7 +983,7 @@ instance ToText FilterPairType where
         FPTFilterNielsenDeviceId -> "FILTER_NIELSEN_DEVICE_ID"
         FPTFilterNielsenGender -> "FILTER_NIELSEN_GENDER"
         FPTFilterOrderId -> "FILTER_ORDER_ID"
-        FPTFilterOs -> "FILTER_OS"
+        FPTFilterOS -> "FILTER_OS"
         FPTFilterPageCategory -> "FILTER_PAGE_CATEGORY"
         FPTFilterPageLayout -> "FILTER_PAGE_LAYOUT"
         FPTFilterPartner -> "FILTER_PARTNER"
@@ -1587,7 +1587,7 @@ data ParametersMetrics
       -- ^ @METRIC_TRUEVIEW_CPV_USD@
     | MetricTrueviewEarnedLikes
       -- ^ @METRIC_TRUEVIEW_EARNED_LIKES@
-    | MetricTrueviewEarnedPlaylistAdditions
+    | MetricTrueviewEarnedPlayListAdditions
       -- ^ @METRIC_TRUEVIEW_EARNED_PLAYLIST_ADDITIONS@
     | MetricTrueviewEarnedShares
       -- ^ @METRIC_TRUEVIEW_EARNED_SHARES@
@@ -1851,7 +1851,7 @@ instance FromText ParametersMetrics where
         "METRIC_TRUEVIEW_CPV_PARTNER" -> Just MetricTrueviewCpvPartner
         "METRIC_TRUEVIEW_CPV_USD" -> Just MetricTrueviewCpvUsd
         "METRIC_TRUEVIEW_EARNED_LIKES" -> Just MetricTrueviewEarnedLikes
-        "METRIC_TRUEVIEW_EARNED_PLAYLIST_ADDITIONS" -> Just MetricTrueviewEarnedPlaylistAdditions
+        "METRIC_TRUEVIEW_EARNED_PLAYLIST_ADDITIONS" -> Just MetricTrueviewEarnedPlayListAdditions
         "METRIC_TRUEVIEW_EARNED_SHARES" -> Just MetricTrueviewEarnedShares
         "METRIC_TRUEVIEW_EARNED_SUBSCRIBERS" -> Just MetricTrueviewEarnedSubscribers
         "METRIC_TRUEVIEW_EARNED_VIEWS" -> Just MetricTrueviewEarnedViews
@@ -2094,7 +2094,7 @@ instance ToText ParametersMetrics where
         MetricTrueviewCpvPartner -> "METRIC_TRUEVIEW_CPV_PARTNER"
         MetricTrueviewCpvUsd -> "METRIC_TRUEVIEW_CPV_USD"
         MetricTrueviewEarnedLikes -> "METRIC_TRUEVIEW_EARNED_LIKES"
-        MetricTrueviewEarnedPlaylistAdditions -> "METRIC_TRUEVIEW_EARNED_PLAYLIST_ADDITIONS"
+        MetricTrueviewEarnedPlayListAdditions -> "METRIC_TRUEVIEW_EARNED_PLAYLIST_ADDITIONS"
         MetricTrueviewEarnedShares -> "METRIC_TRUEVIEW_EARNED_SHARES"
         MetricTrueviewEarnedSubscribers -> "METRIC_TRUEVIEW_EARNED_SUBSCRIBERS"
         MetricTrueviewEarnedViews -> "METRIC_TRUEVIEW_EARNED_VIEWS"
@@ -2232,30 +2232,6 @@ instance FromJSON DownloadLineItemsRequestFormat where
     parseJSON = parseJSONText "DownloadLineItemsRequestFormat"
 
 instance ToJSON DownloadLineItemsRequestFormat where
-    toJSON = toJSONText
-
--- | Data format for the response.
-data Alt
-    = JSON
-      -- ^ @json@
-      -- Responses with Content-Type of application\/json
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable Alt
-
-instance FromText Alt where
-    fromText = \case
-        "json" -> Just JSON
-        _ -> Nothing
-
-instance ToText Alt where
-    toText = \case
-        JSON -> "json"
-
-instance FromJSON Alt where
-    parseJSON = parseJSONText "Alt"
-
-instance ToJSON Alt where
     toJSON = toJSONText
 
 -- | The file type of the report.

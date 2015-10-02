@@ -32,12 +32,12 @@ module Network.Google.Resource.DFAReporting.CreativeGroups.Insert
     -- * Request Lenses
     , cgiQuotaUser
     , cgiPrettyPrint
-    , cgiUserIp
+    , cgiUserIP
     , cgiProfileId
+    , cgiCreativeGroup
     , cgiKey
-    , cgiOauthToken
+    , cgiOAuthToken
     , cgiFields
-    , cgiAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,23 +52,25 @@ type CreativeGroupsInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] CreativeGroup
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] CreativeGroup :>
+                           Post '[JSON] CreativeGroup
 
 -- | Inserts a new creative group.
 --
 -- /See:/ 'creativeGroupsInsert'' smart constructor.
 data CreativeGroupsInsert' = CreativeGroupsInsert'
-    { _cgiQuotaUser   :: !(Maybe Text)
-    , _cgiPrettyPrint :: !Bool
-    , _cgiUserIp      :: !(Maybe Text)
-    , _cgiProfileId   :: !Int64
-    , _cgiKey         :: !(Maybe Text)
-    , _cgiOauthToken  :: !(Maybe Text)
-    , _cgiFields      :: !(Maybe Text)
-    , _cgiAlt         :: !Alt
+    { _cgiQuotaUser     :: !(Maybe Text)
+    , _cgiPrettyPrint   :: !Bool
+    , _cgiUserIP        :: !(Maybe Text)
+    , _cgiProfileId     :: !Int64
+    , _cgiCreativeGroup :: !CreativeGroup
+    , _cgiKey           :: !(Maybe Key)
+    , _cgiOAuthToken    :: !(Maybe OAuthToken)
+    , _cgiFields        :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeGroupsInsert'' with the minimum fields required to make a request.
@@ -79,30 +81,31 @@ data CreativeGroupsInsert' = CreativeGroupsInsert'
 --
 -- * 'cgiPrettyPrint'
 --
--- * 'cgiUserIp'
+-- * 'cgiUserIP'
 --
 -- * 'cgiProfileId'
 --
+-- * 'cgiCreativeGroup'
+--
 -- * 'cgiKey'
 --
--- * 'cgiOauthToken'
+-- * 'cgiOAuthToken'
 --
 -- * 'cgiFields'
---
--- * 'cgiAlt'
 creativeGroupsInsert'
     :: Int64 -- ^ 'profileId'
+    -> CreativeGroup -- ^ 'CreativeGroup'
     -> CreativeGroupsInsert'
-creativeGroupsInsert' pCgiProfileId_ =
+creativeGroupsInsert' pCgiProfileId_ pCgiCreativeGroup_ =
     CreativeGroupsInsert'
     { _cgiQuotaUser = Nothing
     , _cgiPrettyPrint = True
-    , _cgiUserIp = Nothing
+    , _cgiUserIP = Nothing
     , _cgiProfileId = pCgiProfileId_
+    , _cgiCreativeGroup = pCgiCreativeGroup_
     , _cgiKey = Nothing
-    , _cgiOauthToken = Nothing
+    , _cgiOAuthToken = Nothing
     , _cgiFields = Nothing
-    , _cgiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,46 +123,53 @@ cgiPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cgiUserIp :: Lens' CreativeGroupsInsert' (Maybe Text)
-cgiUserIp
-  = lens _cgiUserIp (\ s a -> s{_cgiUserIp = a})
+cgiUserIP :: Lens' CreativeGroupsInsert' (Maybe Text)
+cgiUserIP
+  = lens _cgiUserIP (\ s a -> s{_cgiUserIP = a})
 
 -- | User profile ID associated with this request.
 cgiProfileId :: Lens' CreativeGroupsInsert' Int64
 cgiProfileId
   = lens _cgiProfileId (\ s a -> s{_cgiProfileId = a})
 
+-- | Multipart request metadata.
+cgiCreativeGroup :: Lens' CreativeGroupsInsert' CreativeGroup
+cgiCreativeGroup
+  = lens _cgiCreativeGroup
+      (\ s a -> s{_cgiCreativeGroup = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cgiKey :: Lens' CreativeGroupsInsert' (Maybe Text)
+cgiKey :: Lens' CreativeGroupsInsert' (Maybe Key)
 cgiKey = lens _cgiKey (\ s a -> s{_cgiKey = a})
 
 -- | OAuth 2.0 token for the current user.
-cgiOauthToken :: Lens' CreativeGroupsInsert' (Maybe Text)
-cgiOauthToken
-  = lens _cgiOauthToken
-      (\ s a -> s{_cgiOauthToken = a})
+cgiOAuthToken :: Lens' CreativeGroupsInsert' (Maybe OAuthToken)
+cgiOAuthToken
+  = lens _cgiOAuthToken
+      (\ s a -> s{_cgiOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cgiFields :: Lens' CreativeGroupsInsert' (Maybe Text)
 cgiFields
   = lens _cgiFields (\ s a -> s{_cgiFields = a})
 
--- | Data format for the response.
-cgiAlt :: Lens' CreativeGroupsInsert' Alt
-cgiAlt = lens _cgiAlt (\ s a -> s{_cgiAlt = a})
+instance GoogleAuth CreativeGroupsInsert' where
+        authKey = cgiKey . _Just
+        authToken = cgiOAuthToken . _Just
 
 instance GoogleRequest CreativeGroupsInsert' where
         type Rs CreativeGroupsInsert' = CreativeGroup
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativeGroupsInsert'{..}
-          = go _cgiQuotaUser (Just _cgiPrettyPrint) _cgiUserIp
+          = go _cgiQuotaUser (Just _cgiPrettyPrint) _cgiUserIP
               _cgiProfileId
               _cgiKey
-              _cgiOauthToken
+              _cgiOAuthToken
               _cgiFields
-              (Just _cgiAlt)
+              (Just AltJSON)
+              _cgiCreativeGroup
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CreativeGroupsInsertResource)

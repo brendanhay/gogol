@@ -32,12 +32,12 @@ module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Inse
     -- * Request Lenses
     , lciQuotaUser
     , lciPrettyPrint
-    , lciUserIp
+    , lciUserIP
+    , lciLeaderboardConfiguration
     , lciApplicationId
     , lciKey
-    , lciOauthToken
+    , lciOAuthToken
     , lciFields
-    , lciAlt
     ) where
 
 import           Network.Google.GamesConfiguration.Types
@@ -52,24 +52,25 @@ type LeaderboardConfigurationsInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :>
-                         Post '[JSON] LeaderboardConfiguration
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] LeaderboardConfiguration :>
+                           Post '[JSON] LeaderboardConfiguration
 
 -- | Insert a new leaderboard configuration in this application.
 --
 -- /See:/ 'leaderboardConfigurationsInsert'' smart constructor.
 data LeaderboardConfigurationsInsert' = LeaderboardConfigurationsInsert'
-    { _lciQuotaUser     :: !(Maybe Text)
-    , _lciPrettyPrint   :: !Bool
-    , _lciUserIp        :: !(Maybe Text)
-    , _lciApplicationId :: !Text
-    , _lciKey           :: !(Maybe Text)
-    , _lciOauthToken    :: !(Maybe Text)
-    , _lciFields        :: !(Maybe Text)
-    , _lciAlt           :: !Alt
+    { _lciQuotaUser                :: !(Maybe Text)
+    , _lciPrettyPrint              :: !Bool
+    , _lciUserIP                   :: !(Maybe Text)
+    , _lciLeaderboardConfiguration :: !LeaderboardConfiguration
+    , _lciApplicationId            :: !Text
+    , _lciKey                      :: !(Maybe Key)
+    , _lciOAuthToken               :: !(Maybe OAuthToken)
+    , _lciFields                   :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LeaderboardConfigurationsInsert'' with the minimum fields required to make a request.
@@ -80,30 +81,31 @@ data LeaderboardConfigurationsInsert' = LeaderboardConfigurationsInsert'
 --
 -- * 'lciPrettyPrint'
 --
--- * 'lciUserIp'
+-- * 'lciUserIP'
+--
+-- * 'lciLeaderboardConfiguration'
 --
 -- * 'lciApplicationId'
 --
 -- * 'lciKey'
 --
--- * 'lciOauthToken'
+-- * 'lciOAuthToken'
 --
 -- * 'lciFields'
---
--- * 'lciAlt'
 leaderboardConfigurationsInsert'
-    :: Text -- ^ 'applicationId'
+    :: LeaderboardConfiguration -- ^ 'LeaderboardConfiguration'
+    -> Text -- ^ 'applicationId'
     -> LeaderboardConfigurationsInsert'
-leaderboardConfigurationsInsert' pLciApplicationId_ =
+leaderboardConfigurationsInsert' pLciLeaderboardConfiguration_ pLciApplicationId_ =
     LeaderboardConfigurationsInsert'
     { _lciQuotaUser = Nothing
     , _lciPrettyPrint = True
-    , _lciUserIp = Nothing
+    , _lciUserIP = Nothing
+    , _lciLeaderboardConfiguration = pLciLeaderboardConfiguration_
     , _lciApplicationId = pLciApplicationId_
     , _lciKey = Nothing
-    , _lciOauthToken = Nothing
+    , _lciOAuthToken = Nothing
     , _lciFields = Nothing
-    , _lciAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -121,9 +123,15 @@ lciPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-lciUserIp :: Lens' LeaderboardConfigurationsInsert' (Maybe Text)
-lciUserIp
-  = lens _lciUserIp (\ s a -> s{_lciUserIp = a})
+lciUserIP :: Lens' LeaderboardConfigurationsInsert' (Maybe Text)
+lciUserIP
+  = lens _lciUserIP (\ s a -> s{_lciUserIP = a})
+
+-- | Multipart request metadata.
+lciLeaderboardConfiguration :: Lens' LeaderboardConfigurationsInsert' LeaderboardConfiguration
+lciLeaderboardConfiguration
+  = lens _lciLeaderboardConfiguration
+      (\ s a -> s{_lciLeaderboardConfiguration = a})
 
 -- | The application ID from the Google Play developer console.
 lciApplicationId :: Lens' LeaderboardConfigurationsInsert' Text
@@ -134,23 +142,24 @@ lciApplicationId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lciKey :: Lens' LeaderboardConfigurationsInsert' (Maybe Text)
+lciKey :: Lens' LeaderboardConfigurationsInsert' (Maybe Key)
 lciKey = lens _lciKey (\ s a -> s{_lciKey = a})
 
 -- | OAuth 2.0 token for the current user.
-lciOauthToken :: Lens' LeaderboardConfigurationsInsert' (Maybe Text)
-lciOauthToken
-  = lens _lciOauthToken
-      (\ s a -> s{_lciOauthToken = a})
+lciOAuthToken :: Lens' LeaderboardConfigurationsInsert' (Maybe OAuthToken)
+lciOAuthToken
+  = lens _lciOAuthToken
+      (\ s a -> s{_lciOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 lciFields :: Lens' LeaderboardConfigurationsInsert' (Maybe Text)
 lciFields
   = lens _lciFields (\ s a -> s{_lciFields = a})
 
--- | Data format for the response.
-lciAlt :: Lens' LeaderboardConfigurationsInsert' Alt
-lciAlt = lens _lciAlt (\ s a -> s{_lciAlt = a})
+instance GoogleAuth LeaderboardConfigurationsInsert'
+         where
+        authKey = lciKey . _Just
+        authToken = lciOAuthToken . _Just
 
 instance GoogleRequest
          LeaderboardConfigurationsInsert' where
@@ -160,12 +169,13 @@ instance GoogleRequest
           = requestWithRoute defReq gamesConfigurationURL
         requestWithRoute r u
           LeaderboardConfigurationsInsert'{..}
-          = go _lciQuotaUser (Just _lciPrettyPrint) _lciUserIp
+          = go _lciQuotaUser (Just _lciPrettyPrint) _lciUserIP
               _lciApplicationId
               _lciKey
-              _lciOauthToken
+              _lciOAuthToken
               _lciFields
-              (Just _lciAlt)
+              (Just AltJSON)
+              _lciLeaderboardConfiguration
           where go
                   = clientWithRoute
                       (Proxy ::

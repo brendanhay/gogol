@@ -32,13 +32,12 @@ module Network.Google.Resource.DFAReporting.TargetableRemarketingLists.Get
     -- * Request Lenses
     , trlgQuotaUser
     , trlgPrettyPrint
-    , trlgUserIp
+    , trlgUserIP
     , trlgProfileId
     , trlgKey
     , trlgId
-    , trlgOauthToken
+    , trlgOAuthToken
     , trlgFields
-    , trlgAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,10 +53,10 @@ type TargetableRemarketingListsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :>
+                         QueryParam "alt" AltJSON :>
                            Get '[JSON] TargetableRemarketingList
 
 -- | Gets one remarketing list by ID.
@@ -66,13 +65,12 @@ type TargetableRemarketingListsGetResource =
 data TargetableRemarketingListsGet' = TargetableRemarketingListsGet'
     { _trlgQuotaUser   :: !(Maybe Text)
     , _trlgPrettyPrint :: !Bool
-    , _trlgUserIp      :: !(Maybe Text)
+    , _trlgUserIP      :: !(Maybe Text)
     , _trlgProfileId   :: !Int64
-    , _trlgKey         :: !(Maybe Text)
+    , _trlgKey         :: !(Maybe Key)
     , _trlgId          :: !Int64
-    , _trlgOauthToken  :: !(Maybe Text)
+    , _trlgOAuthToken  :: !(Maybe OAuthToken)
     , _trlgFields      :: !(Maybe Text)
-    , _trlgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetableRemarketingListsGet'' with the minimum fields required to make a request.
@@ -83,7 +81,7 @@ data TargetableRemarketingListsGet' = TargetableRemarketingListsGet'
 --
 -- * 'trlgPrettyPrint'
 --
--- * 'trlgUserIp'
+-- * 'trlgUserIP'
 --
 -- * 'trlgProfileId'
 --
@@ -91,11 +89,9 @@ data TargetableRemarketingListsGet' = TargetableRemarketingListsGet'
 --
 -- * 'trlgId'
 --
--- * 'trlgOauthToken'
+-- * 'trlgOAuthToken'
 --
 -- * 'trlgFields'
---
--- * 'trlgAlt'
 targetableRemarketingListsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
@@ -104,13 +100,12 @@ targetableRemarketingListsGet' pTrlgProfileId_ pTrlgId_ =
     TargetableRemarketingListsGet'
     { _trlgQuotaUser = Nothing
     , _trlgPrettyPrint = True
-    , _trlgUserIp = Nothing
+    , _trlgUserIP = Nothing
     , _trlgProfileId = pTrlgProfileId_
     , _trlgKey = Nothing
     , _trlgId = pTrlgId_
-    , _trlgOauthToken = Nothing
+    , _trlgOAuthToken = Nothing
     , _trlgFields = Nothing
-    , _trlgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -129,9 +124,9 @@ trlgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-trlgUserIp :: Lens' TargetableRemarketingListsGet' (Maybe Text)
-trlgUserIp
-  = lens _trlgUserIp (\ s a -> s{_trlgUserIp = a})
+trlgUserIP :: Lens' TargetableRemarketingListsGet' (Maybe Text)
+trlgUserIP
+  = lens _trlgUserIP (\ s a -> s{_trlgUserIP = a})
 
 -- | User profile ID associated with this request.
 trlgProfileId :: Lens' TargetableRemarketingListsGet' Int64
@@ -142,7 +137,7 @@ trlgProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-trlgKey :: Lens' TargetableRemarketingListsGet' (Maybe Text)
+trlgKey :: Lens' TargetableRemarketingListsGet' (Maybe Key)
 trlgKey = lens _trlgKey (\ s a -> s{_trlgKey = a})
 
 -- | Remarketing list ID.
@@ -150,19 +145,20 @@ trlgId :: Lens' TargetableRemarketingListsGet' Int64
 trlgId = lens _trlgId (\ s a -> s{_trlgId = a})
 
 -- | OAuth 2.0 token for the current user.
-trlgOauthToken :: Lens' TargetableRemarketingListsGet' (Maybe Text)
-trlgOauthToken
-  = lens _trlgOauthToken
-      (\ s a -> s{_trlgOauthToken = a})
+trlgOAuthToken :: Lens' TargetableRemarketingListsGet' (Maybe OAuthToken)
+trlgOAuthToken
+  = lens _trlgOAuthToken
+      (\ s a -> s{_trlgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 trlgFields :: Lens' TargetableRemarketingListsGet' (Maybe Text)
 trlgFields
   = lens _trlgFields (\ s a -> s{_trlgFields = a})
 
--- | Data format for the response.
-trlgAlt :: Lens' TargetableRemarketingListsGet' Alt
-trlgAlt = lens _trlgAlt (\ s a -> s{_trlgAlt = a})
+instance GoogleAuth TargetableRemarketingListsGet'
+         where
+        authKey = trlgKey . _Just
+        authToken = trlgOAuthToken . _Just
 
 instance GoogleRequest TargetableRemarketingListsGet'
          where
@@ -172,13 +168,13 @@ instance GoogleRequest TargetableRemarketingListsGet'
         requestWithRoute r u
           TargetableRemarketingListsGet'{..}
           = go _trlgQuotaUser (Just _trlgPrettyPrint)
-              _trlgUserIp
+              _trlgUserIP
               _trlgProfileId
               _trlgKey
               _trlgId
-              _trlgOauthToken
+              _trlgOAuthToken
               _trlgFields
-              (Just _trlgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

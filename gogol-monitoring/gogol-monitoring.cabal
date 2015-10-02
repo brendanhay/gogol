@@ -32,12 +32,12 @@ library
     exposed-modules:
           Network.Google.Monitoring
         , Network.Google.Monitoring.Types
-        , Network.Google.Resource.Cloudmonitoring.MetricDescriptors.Create
-        , Network.Google.Resource.Cloudmonitoring.MetricDescriptors.Delete
-        , Network.Google.Resource.Cloudmonitoring.MetricDescriptors.List
-        , Network.Google.Resource.Cloudmonitoring.Timeseries.List
-        , Network.Google.Resource.Cloudmonitoring.Timeseries.Write
-        , Network.Google.Resource.Cloudmonitoring.TimeseriesDescriptors.List
+        , Network.Google.Resource.CloudMonitoring.MetricDescriptors.Create
+        , Network.Google.Resource.CloudMonitoring.MetricDescriptors.Delete
+        , Network.Google.Resource.CloudMonitoring.MetricDescriptors.List
+        , Network.Google.Resource.CloudMonitoring.Timeseries.List
+        , Network.Google.Resource.CloudMonitoring.Timeseries.Write
+        , Network.Google.Resource.CloudMonitoring.TimeseriesDescriptors.List
 
     other-modules:
           Network.Google.Monitoring.Types.Product

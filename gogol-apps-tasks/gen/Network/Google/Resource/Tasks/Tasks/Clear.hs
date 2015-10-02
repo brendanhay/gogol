@@ -34,12 +34,11 @@ module Network.Google.Resource.Tasks.Tasks.Clear
     -- * Request Lenses
     , tcQuotaUser
     , tcPrettyPrint
-    , tcUserIp
+    , tcUserIP
     , tcKey
-    , tcTasklist
-    , tcOauthToken
+    , tcTaskList
+    , tcOAuthToken
     , tcFields
-    , tcAlt
     ) where
 
 import           Network.Google.AppsTasks.Types
@@ -54,10 +53,10 @@ type TasksClearResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] ()
+                       QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Clears all completed tasks from the specified task list. The affected
 -- tasks will be marked as \'hidden\' and no longer be returned by default
@@ -67,12 +66,11 @@ type TasksClearResource =
 data TasksClear' = TasksClear'
     { _tcQuotaUser   :: !(Maybe Text)
     , _tcPrettyPrint :: !Bool
-    , _tcUserIp      :: !(Maybe Text)
-    , _tcKey         :: !(Maybe Text)
-    , _tcTasklist    :: !Text
-    , _tcOauthToken  :: !(Maybe Text)
+    , _tcUserIP      :: !(Maybe Text)
+    , _tcKey         :: !(Maybe Key)
+    , _tcTaskList    :: !Text
+    , _tcOAuthToken  :: !(Maybe OAuthToken)
     , _tcFields      :: !(Maybe Text)
-    , _tcAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TasksClear'' with the minimum fields required to make a request.
@@ -83,30 +81,27 @@ data TasksClear' = TasksClear'
 --
 -- * 'tcPrettyPrint'
 --
--- * 'tcUserIp'
+-- * 'tcUserIP'
 --
 -- * 'tcKey'
 --
--- * 'tcTasklist'
+-- * 'tcTaskList'
 --
--- * 'tcOauthToken'
+-- * 'tcOAuthToken'
 --
 -- * 'tcFields'
---
--- * 'tcAlt'
 tasksClear'
     :: Text -- ^ 'tasklist'
     -> TasksClear'
-tasksClear' pTcTasklist_ =
+tasksClear' pTcTaskList_ =
     TasksClear'
     { _tcQuotaUser = Nothing
     , _tcPrettyPrint = True
-    , _tcUserIp = Nothing
+    , _tcUserIP = Nothing
     , _tcKey = Nothing
-    , _tcTasklist = pTcTasklist_
-    , _tcOauthToken = Nothing
+    , _tcTaskList = pTcTaskList_
+    , _tcOAuthToken = Nothing
     , _tcFields = Nothing
-    , _tcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -124,43 +119,43 @@ tcPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tcUserIp :: Lens' TasksClear' (Maybe Text)
-tcUserIp = lens _tcUserIp (\ s a -> s{_tcUserIp = a})
+tcUserIP :: Lens' TasksClear' (Maybe Text)
+tcUserIP = lens _tcUserIP (\ s a -> s{_tcUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tcKey :: Lens' TasksClear' (Maybe Text)
+tcKey :: Lens' TasksClear' (Maybe Key)
 tcKey = lens _tcKey (\ s a -> s{_tcKey = a})
 
 -- | Task list identifier.
-tcTasklist :: Lens' TasksClear' Text
-tcTasklist
-  = lens _tcTasklist (\ s a -> s{_tcTasklist = a})
+tcTaskList :: Lens' TasksClear' Text
+tcTaskList
+  = lens _tcTaskList (\ s a -> s{_tcTaskList = a})
 
 -- | OAuth 2.0 token for the current user.
-tcOauthToken :: Lens' TasksClear' (Maybe Text)
-tcOauthToken
-  = lens _tcOauthToken (\ s a -> s{_tcOauthToken = a})
+tcOAuthToken :: Lens' TasksClear' (Maybe OAuthToken)
+tcOAuthToken
+  = lens _tcOAuthToken (\ s a -> s{_tcOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 tcFields :: Lens' TasksClear' (Maybe Text)
 tcFields = lens _tcFields (\ s a -> s{_tcFields = a})
 
--- | Data format for the response.
-tcAlt :: Lens' TasksClear' Alt
-tcAlt = lens _tcAlt (\ s a -> s{_tcAlt = a})
+instance GoogleAuth TasksClear' where
+        authKey = tcKey . _Just
+        authToken = tcOAuthToken . _Just
 
 instance GoogleRequest TasksClear' where
         type Rs TasksClear' = ()
         request = requestWithRoute defReq appsTasksURL
         requestWithRoute r u TasksClear'{..}
-          = go _tcQuotaUser (Just _tcPrettyPrint) _tcUserIp
+          = go _tcQuotaUser (Just _tcPrettyPrint) _tcUserIP
               _tcKey
-              _tcTasklist
-              _tcOauthToken
+              _tcTaskList
+              _tcOAuthToken
               _tcFields
-              (Just _tcAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy TasksClearResource)
                       r

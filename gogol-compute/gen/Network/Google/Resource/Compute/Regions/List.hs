@@ -34,14 +34,13 @@ module Network.Google.Resource.Compute.Regions.List
     , rQuotaUser
     , rPrettyPrint
     , rProject
-    , rUserIp
+    , rUserIP
     , rKey
     , rFilter
     , rPageToken
-    , rOauthToken
+    , rOAuthToken
     , rMaxResults
     , rFields
-    , rAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -55,13 +54,13 @@ type RegionsListResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
+               QueryParam "key" Key :>
                  QueryParam "filter" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "maxResults" Word32 :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Get '[JSON] RegionList
+                           QueryParam "alt" AltJSON :> Get '[JSON] RegionList
 
 -- | Retrieves the list of region resources available to the specified
 -- project.
@@ -71,14 +70,13 @@ data RegionsList' = RegionsList'
     { _rQuotaUser   :: !(Maybe Text)
     , _rPrettyPrint :: !Bool
     , _rProject     :: !Text
-    , _rUserIp      :: !(Maybe Text)
-    , _rKey         :: !(Maybe Text)
+    , _rUserIP      :: !(Maybe Text)
+    , _rKey         :: !(Maybe Key)
     , _rFilter      :: !(Maybe Text)
     , _rPageToken   :: !(Maybe Text)
-    , _rOauthToken  :: !(Maybe Text)
+    , _rOAuthToken  :: !(Maybe OAuthToken)
     , _rMaxResults  :: !Word32
     , _rFields      :: !(Maybe Text)
-    , _rAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RegionsList'' with the minimum fields required to make a request.
@@ -91,7 +89,7 @@ data RegionsList' = RegionsList'
 --
 -- * 'rProject'
 --
--- * 'rUserIp'
+-- * 'rUserIP'
 --
 -- * 'rKey'
 --
@@ -99,13 +97,11 @@ data RegionsList' = RegionsList'
 --
 -- * 'rPageToken'
 --
--- * 'rOauthToken'
+-- * 'rOAuthToken'
 --
 -- * 'rMaxResults'
 --
 -- * 'rFields'
---
--- * 'rAlt'
 regionsList'
     :: Text -- ^ 'project'
     -> RegionsList'
@@ -114,14 +110,13 @@ regionsList' pRProject_ =
     { _rQuotaUser = Nothing
     , _rPrettyPrint = True
     , _rProject = pRProject_
-    , _rUserIp = Nothing
+    , _rUserIP = Nothing
     , _rKey = Nothing
     , _rFilter = Nothing
     , _rPageToken = Nothing
-    , _rOauthToken = Nothing
+    , _rOAuthToken = Nothing
     , _rMaxResults = 500
     , _rFields = Nothing
-    , _rAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -142,13 +137,13 @@ rProject = lens _rProject (\ s a -> s{_rProject = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rUserIp :: Lens' RegionsList' (Maybe Text)
-rUserIp = lens _rUserIp (\ s a -> s{_rUserIp = a})
+rUserIP :: Lens' RegionsList' (Maybe Text)
+rUserIP = lens _rUserIP (\ s a -> s{_rUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rKey :: Lens' RegionsList' (Maybe Text)
+rKey :: Lens' RegionsList' (Maybe Key)
 rKey = lens _rKey (\ s a -> s{_rKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
@@ -173,9 +168,9 @@ rPageToken
   = lens _rPageToken (\ s a -> s{_rPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-rOauthToken :: Lens' RegionsList' (Maybe Text)
-rOauthToken
-  = lens _rOauthToken (\ s a -> s{_rOauthToken = a})
+rOAuthToken :: Lens' RegionsList' (Maybe OAuthToken)
+rOAuthToken
+  = lens _rOAuthToken (\ s a -> s{_rOAuthToken = a})
 
 -- | Maximum count of results to be returned.
 rMaxResults :: Lens' RegionsList' Word32
@@ -186,23 +181,23 @@ rMaxResults
 rFields :: Lens' RegionsList' (Maybe Text)
 rFields = lens _rFields (\ s a -> s{_rFields = a})
 
--- | Data format for the response.
-rAlt :: Lens' RegionsList' Alt
-rAlt = lens _rAlt (\ s a -> s{_rAlt = a})
+instance GoogleAuth RegionsList' where
+        authKey = rKey . _Just
+        authToken = rOAuthToken . _Just
 
 instance GoogleRequest RegionsList' where
         type Rs RegionsList' = RegionList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u RegionsList'{..}
           = go _rQuotaUser (Just _rPrettyPrint) _rProject
-              _rUserIp
+              _rUserIP
               _rKey
               _rFilter
               _rPageToken
-              _rOauthToken
+              _rOAuthToken
               (Just _rMaxResults)
               _rFields
-              (Just _rAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy RegionsListResource)

@@ -32,12 +32,12 @@ module Network.Google.Resource.GamesConfiguration.AchievementConfigurations.Inse
     -- * Request Lenses
     , aciQuotaUser
     , aciPrettyPrint
-    , aciUserIp
+    , aciUserIP
     , aciApplicationId
     , aciKey
-    , aciOauthToken
+    , aciAchievementConfiguration
+    , aciOAuthToken
     , aciFields
-    , aciAlt
     ) where
 
 import           Network.Google.GamesConfiguration.Types
@@ -52,24 +52,25 @@ type AchievementConfigurationsInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :>
-                         Post '[JSON] AchievementConfiguration
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] AchievementConfiguration :>
+                           Post '[JSON] AchievementConfiguration
 
 -- | Insert a new achievement configuration in this application.
 --
 -- /See:/ 'achievementConfigurationsInsert'' smart constructor.
 data AchievementConfigurationsInsert' = AchievementConfigurationsInsert'
-    { _aciQuotaUser     :: !(Maybe Text)
-    , _aciPrettyPrint   :: !Bool
-    , _aciUserIp        :: !(Maybe Text)
-    , _aciApplicationId :: !Text
-    , _aciKey           :: !(Maybe Text)
-    , _aciOauthToken    :: !(Maybe Text)
-    , _aciFields        :: !(Maybe Text)
-    , _aciAlt           :: !Alt
+    { _aciQuotaUser                :: !(Maybe Text)
+    , _aciPrettyPrint              :: !Bool
+    , _aciUserIP                   :: !(Maybe Text)
+    , _aciApplicationId            :: !Text
+    , _aciKey                      :: !(Maybe Key)
+    , _aciAchievementConfiguration :: !AchievementConfiguration
+    , _aciOAuthToken               :: !(Maybe OAuthToken)
+    , _aciFields                   :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementConfigurationsInsert'' with the minimum fields required to make a request.
@@ -80,30 +81,31 @@ data AchievementConfigurationsInsert' = AchievementConfigurationsInsert'
 --
 -- * 'aciPrettyPrint'
 --
--- * 'aciUserIp'
+-- * 'aciUserIP'
 --
 -- * 'aciApplicationId'
 --
 -- * 'aciKey'
 --
--- * 'aciOauthToken'
+-- * 'aciAchievementConfiguration'
+--
+-- * 'aciOAuthToken'
 --
 -- * 'aciFields'
---
--- * 'aciAlt'
 achievementConfigurationsInsert'
     :: Text -- ^ 'applicationId'
+    -> AchievementConfiguration -- ^ 'AchievementConfiguration'
     -> AchievementConfigurationsInsert'
-achievementConfigurationsInsert' pAciApplicationId_ =
+achievementConfigurationsInsert' pAciApplicationId_ pAciAchievementConfiguration_ =
     AchievementConfigurationsInsert'
     { _aciQuotaUser = Nothing
     , _aciPrettyPrint = True
-    , _aciUserIp = Nothing
+    , _aciUserIP = Nothing
     , _aciApplicationId = pAciApplicationId_
     , _aciKey = Nothing
-    , _aciOauthToken = Nothing
+    , _aciAchievementConfiguration = pAciAchievementConfiguration_
+    , _aciOAuthToken = Nothing
     , _aciFields = Nothing
-    , _aciAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -121,9 +123,9 @@ aciPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-aciUserIp :: Lens' AchievementConfigurationsInsert' (Maybe Text)
-aciUserIp
-  = lens _aciUserIp (\ s a -> s{_aciUserIp = a})
+aciUserIP :: Lens' AchievementConfigurationsInsert' (Maybe Text)
+aciUserIP
+  = lens _aciUserIP (\ s a -> s{_aciUserIP = a})
 
 -- | The application ID from the Google Play developer console.
 aciApplicationId :: Lens' AchievementConfigurationsInsert' Text
@@ -134,23 +136,30 @@ aciApplicationId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aciKey :: Lens' AchievementConfigurationsInsert' (Maybe Text)
+aciKey :: Lens' AchievementConfigurationsInsert' (Maybe Key)
 aciKey = lens _aciKey (\ s a -> s{_aciKey = a})
 
+-- | Multipart request metadata.
+aciAchievementConfiguration :: Lens' AchievementConfigurationsInsert' AchievementConfiguration
+aciAchievementConfiguration
+  = lens _aciAchievementConfiguration
+      (\ s a -> s{_aciAchievementConfiguration = a})
+
 -- | OAuth 2.0 token for the current user.
-aciOauthToken :: Lens' AchievementConfigurationsInsert' (Maybe Text)
-aciOauthToken
-  = lens _aciOauthToken
-      (\ s a -> s{_aciOauthToken = a})
+aciOAuthToken :: Lens' AchievementConfigurationsInsert' (Maybe OAuthToken)
+aciOAuthToken
+  = lens _aciOAuthToken
+      (\ s a -> s{_aciOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 aciFields :: Lens' AchievementConfigurationsInsert' (Maybe Text)
 aciFields
   = lens _aciFields (\ s a -> s{_aciFields = a})
 
--- | Data format for the response.
-aciAlt :: Lens' AchievementConfigurationsInsert' Alt
-aciAlt = lens _aciAlt (\ s a -> s{_aciAlt = a})
+instance GoogleAuth AchievementConfigurationsInsert'
+         where
+        authKey = aciKey . _Just
+        authToken = aciOAuthToken . _Just
 
 instance GoogleRequest
          AchievementConfigurationsInsert' where
@@ -160,12 +169,13 @@ instance GoogleRequest
           = requestWithRoute defReq gamesConfigurationURL
         requestWithRoute r u
           AchievementConfigurationsInsert'{..}
-          = go _aciQuotaUser (Just _aciPrettyPrint) _aciUserIp
+          = go _aciQuotaUser (Just _aciPrettyPrint) _aciUserIP
               _aciApplicationId
               _aciKey
-              _aciOauthToken
+              _aciOAuthToken
               _aciFields
-              (Just _aciAlt)
+              (Just AltJSON)
+              _aciAchievementConfiguration
           where go
                   = clientWithRoute
                       (Proxy ::

@@ -26,7 +26,7 @@ data Application = Application
     { _aPackageName :: !(Maybe Text)
     , _aName        :: !(Maybe Text)
     , _aVersion     :: !(Maybe Text)
-    , _aDetailsUrl  :: !(Maybe Text)
+    , _aDetailsURL  :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Application' with the minimum fields required to make a request.
@@ -39,7 +39,7 @@ data Application = Application
 --
 -- * 'aVersion'
 --
--- * 'aDetailsUrl'
+-- * 'aDetailsURL'
 application
     :: Application
 application =
@@ -47,7 +47,7 @@ application =
     { _aPackageName = Nothing
     , _aName = Nothing
     , _aVersion = Nothing
-    , _aDetailsUrl = Nothing
+    , _aDetailsURL = Nothing
     }
 
 -- | Package name for this application. This is used as a unique identifier
@@ -71,9 +71,9 @@ aVersion :: Lens' Application (Maybe Text)
 aVersion = lens _aVersion (\ s a -> s{_aVersion = a})
 
 -- | An optional URI that can be used to link back to the application.
-aDetailsUrl :: Lens' Application (Maybe Text)
-aDetailsUrl
-  = lens _aDetailsUrl (\ s a -> s{_aDetailsUrl = a})
+aDetailsURL :: Lens' Application (Maybe Text)
+aDetailsURL
+  = lens _aDetailsURL (\ s a -> s{_aDetailsURL = a})
 
 instance FromJSON Application where
         parseJSON
@@ -90,7 +90,7 @@ instance ToJSON Application where
               (catMaybes
                  [("packageName" .=) <$> _aPackageName,
                   ("name" .=) <$> _aName, ("version" .=) <$> _aVersion,
-                  ("detailsUrl" .=) <$> _aDetailsUrl])
+                  ("detailsUrl" .=) <$> _aDetailsURL])
 
 -- | The specification of which data to aggregate.
 --
@@ -150,7 +150,7 @@ instance ToJSON AggregateBy where
 --
 -- /See:/ 'aggregateResponse' smart constructor.
 newtype AggregateResponse = AggregateResponse
-    { _arBucket :: Maybe [Maybe AggregateBucket]
+    { _arBucket :: Maybe [AggregateBucket]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AggregateResponse' with the minimum fields required to make a request.
@@ -166,7 +166,7 @@ aggregateResponse =
     }
 
 -- | A list of buckets containing the aggregated data.
-arBucket :: Lens' AggregateResponse [Maybe AggregateBucket]
+arBucket :: Lens' AggregateResponse [AggregateBucket]
 arBucket
   = lens _arBucket (\ s a -> s{_arBucket = a}) .
       _Default
@@ -191,7 +191,7 @@ instance ToJSON AggregateResponse where
 data Dataset = Dataset
     { _dNextPageToken  :: !(Maybe Text)
     , _dDataSourceId   :: !(Maybe Text)
-    , _dPoint          :: !(Maybe [Maybe DataPoint])
+    , _dPoint          :: !(Maybe [DataPoint])
     , _dMinStartTimeNs :: !(Maybe Int64)
     , _dMaxEndTimeNs   :: !(Maybe Int64)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -240,7 +240,7 @@ dDataSourceId
 -- largest endTimeNanos first. This list is considered complete when
 -- retrieving a small dataset and partial when patching a dataset or
 -- retrieving a dataset that is too large to include in a single response.
-dPoint :: Lens' Dataset [Maybe DataPoint]
+dPoint :: Lens' Dataset [DataPoint]
 dPoint
   = lens _dPoint (\ s a -> s{_dPoint = a}) . _Default .
       _Coerce
@@ -285,12 +285,12 @@ instance ToJSON Dataset where
 -- /See:/ 'aggregateRequest' smart constructor.
 data AggregateRequest = AggregateRequest
     { _arEndTimeMillis           :: !(Maybe Int64)
-    , _arAggregateBy             :: !(Maybe [Maybe AggregateBy])
-    , _arBucketBySession         :: !(Maybe (Maybe BucketBySession))
-    , _arBucketByActivityType    :: !(Maybe (Maybe BucketByActivity))
-    , _arBucketByTime            :: !(Maybe (Maybe BucketByTime))
+    , _arAggregateBy             :: !(Maybe [AggregateBy])
+    , _arBucketBySession         :: !(Maybe BucketBySession)
+    , _arBucketByActivityType    :: !(Maybe BucketByActivity)
+    , _arBucketByTime            :: !(Maybe BucketByTime)
     , _arStartTimeMillis         :: !(Maybe Int64)
-    , _arBucketByActivitySegment :: !(Maybe (Maybe BucketByActivity))
+    , _arBucketByActivitySegment :: !(Maybe BucketByActivity)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AggregateRequest' with the minimum fields required to make a request.
@@ -334,7 +334,7 @@ arEndTimeMillis
 -- spec must be provided. All data that is specified will be aggregated
 -- using the same bucketing criteria. There will be one dataset in the
 -- response for every aggregateBy spec.
-arAggregateBy :: Lens' AggregateRequest [Maybe AggregateBy]
+arAggregateBy :: Lens' AggregateRequest [AggregateBy]
 arAggregateBy
   = lens _arAggregateBy
       (\ s a -> s{_arAggregateBy = a})
@@ -344,7 +344,7 @@ arAggregateBy
 -- | Specifies that data be aggregated by user sessions. Data that does not
 -- fall within the time range of a session will not be included in the
 -- response. Mutually exclusive of other bucketing specifications.
-arBucketBySession :: Lens' AggregateRequest (Maybe (Maybe BucketBySession))
+arBucketBySession :: Lens' AggregateRequest (Maybe BucketBySession)
 arBucketBySession
   = lens _arBucketBySession
       (\ s a -> s{_arBucketBySession = a})
@@ -355,14 +355,14 @@ arBucketBySession
 -- into the same bucket. Data that was recorded while the user was not
 -- active will not be included in the response. Mutually exclusive of other
 -- bucketing specifications.
-arBucketByActivityType :: Lens' AggregateRequest (Maybe (Maybe BucketByActivity))
+arBucketByActivityType :: Lens' AggregateRequest (Maybe BucketByActivity)
 arBucketByActivityType
   = lens _arBucketByActivityType
       (\ s a -> s{_arBucketByActivityType = a})
 
 -- | Specifies that data be aggregated by a single time interval. Mutually
 -- exclusive of other bucketing specifications.
-arBucketByTime :: Lens' AggregateRequest (Maybe (Maybe BucketByTime))
+arBucketByTime :: Lens' AggregateRequest (Maybe BucketByTime)
 arBucketByTime
   = lens _arBucketByTime
       (\ s a -> s{_arBucketByTime = a})
@@ -379,7 +379,7 @@ arStartTimeMillis
 -- user. Similar to bucketByActivitySegment, but bucketing is done for each
 -- activity segment rather than all segments of the same type. Mutually
 -- exclusive of other bucketing specifications.
-arBucketByActivitySegment :: Lens' AggregateRequest (Maybe (Maybe BucketByActivity))
+arBucketByActivitySegment :: Lens' AggregateRequest (Maybe BucketByActivity)
 arBucketByActivitySegment
   = lens _arBucketByActivitySegment
       (\ s a -> s{_arBucketByActivitySegment = a})
@@ -595,7 +595,7 @@ instance ToJSON BucketBySession where
 --
 -- /See:/ 'value' smart constructor.
 data Value = Value
-    { _vMapVal    :: !(Maybe [Maybe ValueMapValEntry])
+    { _vMapVal    :: !(Maybe [ValueMapValEntry])
     , _vFpVal     :: !(Maybe Double)
     , _vIntVal    :: !(Maybe Int32)
     , _vStringVal :: !(Maybe Text)
@@ -626,7 +626,7 @@ value =
 -- each entry should be documented as part of the data type definition.
 -- Keys should be kept small whenever possible. Data streams with large
 -- keys and high data frequency may be down sampled.
-vMapVal :: Lens' Value [Maybe ValueMapValEntry]
+vMapVal :: Lens' Value [ValueMapValEntry]
 vMapVal
   = lens _vMapVal (\ s a -> s{_vMapVal = a}) . _Default
       . _Coerce
@@ -667,8 +667,8 @@ instance ToJSON Value where
 -- /See:/ 'listSessionsResponse' smart constructor.
 data ListSessionsResponse = ListSessionsResponse
     { _lsrNextPageToken  :: !(Maybe Text)
-    , _lsrDeletedSession :: !(Maybe [Maybe Session])
-    , _lsrSession        :: !(Maybe [Maybe Session])
+    , _lsrDeletedSession :: !(Maybe [Session])
+    , _lsrSession        :: !(Maybe [Session])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListSessionsResponse' with the minimum fields required to make a request.
@@ -700,7 +700,7 @@ lsrNextPageToken
 -- | If includeDeleted is set to true in the request, this list will contain
 -- sessions deleted with original end times that are within the startTime
 -- and endTime frame.
-lsrDeletedSession :: Lens' ListSessionsResponse [Maybe Session]
+lsrDeletedSession :: Lens' ListSessionsResponse [Session]
 lsrDeletedSession
   = lens _lsrDeletedSession
       (\ s a -> s{_lsrDeletedSession = a})
@@ -709,7 +709,7 @@ lsrDeletedSession
 
 -- | Sessions with an end time that is between startTime and endTime of the
 -- request.
-lsrSession :: Lens' ListSessionsResponse [Maybe Session]
+lsrSession :: Lens' ListSessionsResponse [Session]
 lsrSession
   = lens _lsrSession (\ s a -> s{_lsrSession = a}) .
       _Default
@@ -747,7 +747,7 @@ data DataPoint = DataPoint
     { _dpOriginDataSourceId    :: !(Maybe Text)
     , _dpRawTimestampNanos     :: !(Maybe Int64)
     , _dpDataTypeName          :: !(Maybe Text)
-    , _dpValue                 :: !(Maybe [Maybe Value])
+    , _dpValue                 :: !(Maybe [Value])
     , _dpComputationTimeMillis :: !(Maybe Int64)
     , _dpEndTimeNanos          :: !(Maybe Int64)
     , _dpModifiedTimeMillis    :: !(Maybe Int64)
@@ -812,7 +812,7 @@ dpDataTypeName
 -- order that the field is listed with in the data type specified in a data
 -- source. Only one of integer and floating point fields will be populated,
 -- depending on the format enum value within data source\'s type field.
-dpValue :: Lens' DataPoint [Maybe Value]
+dpValue :: Lens' DataPoint [Value]
 dpValue
   = lens _dpValue (\ s a -> s{_dpValue = a}) . _Default
       . _Coerce
@@ -879,11 +879,11 @@ instance ToJSON DataPoint where
 -- /See:/ 'aggregateBucket' smart constructor.
 data AggregateBucket = AggregateBucket
     { _abEndTimeMillis   :: !(Maybe Int64)
-    , _abDataset         :: !(Maybe [Maybe Dataset])
+    , _abDataset         :: !(Maybe [Dataset])
     , _abActivity        :: !(Maybe Int32)
     , _abType            :: !(Maybe AggregateBucketType)
     , _abStartTimeMillis :: !(Maybe Int64)
-    , _abSession         :: !(Maybe (Maybe Session))
+    , _abSession         :: !(Maybe Session)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AggregateBucket' with the minimum fields required to make a request.
@@ -921,7 +921,7 @@ abEndTimeMillis
       (\ s a -> s{_abEndTimeMillis = a})
 
 -- | There will be one dataset per AggregateBy in the request.
-abDataset :: Lens' AggregateBucket [Maybe Dataset]
+abDataset :: Lens' AggregateBucket [Dataset]
 abDataset
   = lens _abDataset (\ s a -> s{_abDataset = a}) .
       _Default
@@ -945,7 +945,7 @@ abStartTimeMillis
       (\ s a -> s{_abStartTimeMillis = a})
 
 -- | Available for Bucket.Type.SESSION
-abSession :: Lens' AggregateBucket (Maybe (Maybe Session))
+abSession :: Lens' AggregateBucket (Maybe Session)
 abSession
   = lens _abSession (\ s a -> s{_abSession = a})
 
@@ -975,7 +975,7 @@ instance ToJSON AggregateBucket where
 --
 -- /See:/ 'listDataSourcesResponse' smart constructor.
 newtype ListDataSourcesResponse = ListDataSourcesResponse
-    { _ldsrDataSource :: Maybe [Maybe DataSource]
+    { _ldsrDataSource :: Maybe [DataSource]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListDataSourcesResponse' with the minimum fields required to make a request.
@@ -991,7 +991,7 @@ listDataSourcesResponse =
     }
 
 -- | A previously created data source.
-ldsrDataSource :: Lens' ListDataSourcesResponse [Maybe DataSource]
+ldsrDataSource :: Lens' ListDataSourcesResponse [DataSource]
 ldsrDataSource
   = lens _ldsrDataSource
       (\ s a -> s{_ldsrDataSource = a})
@@ -1122,10 +1122,10 @@ instance ToJSON DataTypeField where
 --
 -- /See:/ 'dataSource' smart constructor.
 data DataSource = DataSource
-    { _dsApplication    :: !(Maybe (Maybe Application))
-    , _dsDevice         :: !(Maybe (Maybe Device))
+    { _dsApplication    :: !(Maybe Application)
+    , _dsDevice         :: !(Maybe Device)
     , _dsName           :: !(Maybe Text)
-    , _dsDataType       :: !(Maybe (Maybe DataType))
+    , _dsDataType       :: !(Maybe DataType)
     , _dsType           :: !(Maybe DataSourceType)
     , _dsDataStreamName :: !(Maybe Text)
     , _dsDataStreamId   :: !(Maybe Text)
@@ -1163,14 +1163,14 @@ dataSource =
 
 -- | Information about an application which feeds sensor data into the
 -- platform.
-dsApplication :: Lens' DataSource (Maybe (Maybe Application))
+dsApplication :: Lens' DataSource (Maybe Application)
 dsApplication
   = lens _dsApplication
       (\ s a -> s{_dsApplication = a})
 
 -- | Representation of an integrated device (such as a phone or a wearable)
 -- that can hold sensors.
-dsDevice :: Lens' DataSource (Maybe (Maybe Device))
+dsDevice :: Lens' DataSource (Maybe Device)
 dsDevice = lens _dsDevice (\ s a -> s{_dsDevice = a})
 
 -- | An end-user visible name for this data source.
@@ -1179,7 +1179,7 @@ dsName = lens _dsName (\ s a -> s{_dsName = a})
 
 -- | The data type defines the schema for a stream of data being collected
 -- by, inserted into, or queried from the Fitness API.
-dsDataType :: Lens' DataSource (Maybe (Maybe DataType))
+dsDataType :: Lens' DataSource (Maybe DataType)
 dsDataType
   = lens _dsDataType (\ s a -> s{_dsDataType = a})
 
@@ -1253,7 +1253,7 @@ instance ToJSON DataSource where
 --
 -- /See:/ 'valueMapValEntry' smart constructor.
 data ValueMapValEntry = ValueMapValEntry
-    { _vmveValue :: !(Maybe (Maybe MapValue))
+    { _vmveValue :: !(Maybe MapValue)
     , _vmveKey   :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1272,7 +1272,7 @@ valueMapValEntry =
     , _vmveKey = Nothing
     }
 
-vmveValue :: Lens' ValueMapValEntry (Maybe (Maybe MapValue))
+vmveValue :: Lens' ValueMapValEntry (Maybe MapValue)
 vmveValue
   = lens _vmveValue (\ s a -> s{_vmveValue = a})
 
@@ -1298,7 +1298,7 @@ instance ToJSON ValueMapValEntry where
 --
 -- /See:/ 'dataType' smart constructor.
 data DataType = DataType
-    { _dtField :: !(Maybe [Maybe DataTypeField])
+    { _dtField :: !(Maybe [DataTypeField])
     , _dtName  :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1318,7 +1318,7 @@ dataType =
     }
 
 -- | A field represents one dimension of a data type.
-dtField :: Lens' DataType [Maybe DataTypeField]
+dtField :: Lens' DataType [DataTypeField]
 dtField
   = lens _dtField (\ s a -> s{_dtField = a}) . _Default
       . _Coerce
@@ -1385,7 +1385,7 @@ instance ToJSON BucketByTime where
 data Session = Session
     { _sEndTimeMillis      :: !(Maybe Int64)
     , _sActiveTimeMillis   :: !(Maybe Int64)
-    , _sApplication        :: !(Maybe (Maybe Application))
+    , _sApplication        :: !(Maybe Application)
     , _sActivityType       :: !(Maybe Int32)
     , _sName               :: !(Maybe Text)
     , _sModifiedTimeMillis :: !(Maybe Int64)
@@ -1447,7 +1447,7 @@ sActiveTimeMillis
       (\ s a -> s{_sActiveTimeMillis = a})
 
 -- | The application that created the session.
-sApplication :: Lens' Session (Maybe (Maybe Application))
+sApplication :: Lens' Session (Maybe Application)
 sApplication
   = lens _sApplication (\ s a -> s{_sApplication = a})
 

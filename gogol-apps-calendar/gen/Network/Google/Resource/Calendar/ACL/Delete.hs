@@ -33,12 +33,11 @@ module Network.Google.Resource.Calendar.ACL.Delete
     , adQuotaUser
     , adCalendarId
     , adPrettyPrint
-    , adUserIp
+    , adUserIP
     , adRuleId
     , adKey
-    , adOauthToken
+    , adOAuthToken
     , adFields
-    , adAlt
     ) where
 
 import           Network.Google.AppsCalendar.Types
@@ -54,10 +53,10 @@ type AclDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Delete '[JSON] ()
+                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an access control rule.
 --
@@ -66,12 +65,11 @@ data ACLDelete' = ACLDelete'
     { _adQuotaUser   :: !(Maybe Text)
     , _adCalendarId  :: !Text
     , _adPrettyPrint :: !Bool
-    , _adUserIp      :: !(Maybe Text)
+    , _adUserIP      :: !(Maybe Text)
     , _adRuleId      :: !Text
-    , _adKey         :: !(Maybe Text)
-    , _adOauthToken  :: !(Maybe Text)
+    , _adKey         :: !(Maybe Key)
+    , _adOAuthToken  :: !(Maybe OAuthToken)
     , _adFields      :: !(Maybe Text)
-    , _adAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ACLDelete'' with the minimum fields required to make a request.
@@ -84,17 +82,15 @@ data ACLDelete' = ACLDelete'
 --
 -- * 'adPrettyPrint'
 --
--- * 'adUserIp'
+-- * 'adUserIP'
 --
 -- * 'adRuleId'
 --
 -- * 'adKey'
 --
--- * 'adOauthToken'
+-- * 'adOAuthToken'
 --
 -- * 'adFields'
---
--- * 'adAlt'
 aCLDelete'
     :: Text -- ^ 'calendarId'
     -> Text -- ^ 'ruleId'
@@ -104,12 +100,11 @@ aCLDelete' pAdCalendarId_ pAdRuleId_ =
     { _adQuotaUser = Nothing
     , _adCalendarId = pAdCalendarId_
     , _adPrettyPrint = True
-    , _adUserIp = Nothing
+    , _adUserIP = Nothing
     , _adRuleId = pAdRuleId_
     , _adKey = Nothing
-    , _adOauthToken = Nothing
+    , _adOAuthToken = Nothing
     , _adFields = Nothing
-    , _adAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -134,8 +129,8 @@ adPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-adUserIp :: Lens' ACLDelete' (Maybe Text)
-adUserIp = lens _adUserIp (\ s a -> s{_adUserIp = a})
+adUserIP :: Lens' ACLDelete' (Maybe Text)
+adUserIP = lens _adUserIP (\ s a -> s{_adUserIP = a})
 
 -- | ACL rule identifier.
 adRuleId :: Lens' ACLDelete' Text
@@ -144,33 +139,33 @@ adRuleId = lens _adRuleId (\ s a -> s{_adRuleId = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-adKey :: Lens' ACLDelete' (Maybe Text)
+adKey :: Lens' ACLDelete' (Maybe Key)
 adKey = lens _adKey (\ s a -> s{_adKey = a})
 
 -- | OAuth 2.0 token for the current user.
-adOauthToken :: Lens' ACLDelete' (Maybe Text)
-adOauthToken
-  = lens _adOauthToken (\ s a -> s{_adOauthToken = a})
+adOAuthToken :: Lens' ACLDelete' (Maybe OAuthToken)
+adOAuthToken
+  = lens _adOAuthToken (\ s a -> s{_adOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 adFields :: Lens' ACLDelete' (Maybe Text)
 adFields = lens _adFields (\ s a -> s{_adFields = a})
 
--- | Data format for the response.
-adAlt :: Lens' ACLDelete' Alt
-adAlt = lens _adAlt (\ s a -> s{_adAlt = a})
+instance GoogleAuth ACLDelete' where
+        authKey = adKey . _Just
+        authToken = adOAuthToken . _Just
 
 instance GoogleRequest ACLDelete' where
         type Rs ACLDelete' = ()
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u ACLDelete'{..}
           = go _adQuotaUser _adCalendarId (Just _adPrettyPrint)
-              _adUserIp
+              _adUserIP
               _adRuleId
               _adKey
-              _adOauthToken
+              _adOAuthToken
               _adFields
-              (Just _adAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy AclDeleteResource)
                       r

@@ -26,23 +26,23 @@ module Network.Google.Monitoring
 
     -- * REST Resources
 
-    -- ** CloudmonitoringMetricDescriptorsCreate
-    , module Network.Google.Resource.Cloudmonitoring.MetricDescriptors.Create
+    -- ** CloudMonitoringMetricDescriptorsCreate
+    , module Network.Google.Resource.CloudMonitoring.MetricDescriptors.Create
 
-    -- ** CloudmonitoringMetricDescriptorsDelete
-    , module Network.Google.Resource.Cloudmonitoring.MetricDescriptors.Delete
+    -- ** CloudMonitoringMetricDescriptorsDelete
+    , module Network.Google.Resource.CloudMonitoring.MetricDescriptors.Delete
 
-    -- ** CloudmonitoringMetricDescriptorsList
-    , module Network.Google.Resource.Cloudmonitoring.MetricDescriptors.List
+    -- ** CloudMonitoringMetricDescriptorsList
+    , module Network.Google.Resource.CloudMonitoring.MetricDescriptors.List
 
-    -- ** CloudmonitoringTimeseriesList
-    , module Network.Google.Resource.Cloudmonitoring.Timeseries.List
+    -- ** CloudMonitoringTimeseriesList
+    , module Network.Google.Resource.CloudMonitoring.Timeseries.List
 
-    -- ** CloudmonitoringTimeseriesWrite
-    , module Network.Google.Resource.Cloudmonitoring.Timeseries.Write
+    -- ** CloudMonitoringTimeseriesWrite
+    , module Network.Google.Resource.CloudMonitoring.Timeseries.Write
 
-    -- ** CloudmonitoringTimeseriesDescriptorsList
-    , module Network.Google.Resource.Cloudmonitoring.TimeseriesDescriptors.List
+    -- ** CloudMonitoringTimeseriesDescriptorsList
+    , module Network.Google.Resource.CloudMonitoring.TimeseriesDescriptors.List
 
     -- * Types
 
@@ -120,11 +120,11 @@ module Network.Google.Monitoring
     , pdbCount
     , pdbLowerBound
 
-    -- ** CloudmonitoringTimeseriesListAggregator
-    , CloudmonitoringTimeseriesListAggregator (..)
+    -- ** CloudMonitoringTimeseriesListAggregator
+    , CloudMonitoringTimeseriesListAggregator (..)
 
-    -- ** CloudmonitoringTimeseriesDescriptorsListAggregator
-    , CloudmonitoringTimeseriesDescriptorsListAggregator (..)
+    -- ** CloudMonitoringTimeseriesDescriptorsListAggregator
+    , CloudMonitoringTimeseriesDescriptorsListAggregator (..)
 
     -- ** TimeseriesDescriptorLabel
     , TimeseriesDescriptorLabel
@@ -198,19 +198,16 @@ module Network.Google.Monitoring
     , timeseries
     , tPoints
     , tTimeseriesDesc
-
-    -- ** Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.Monitoring.Types
 import           Network.Google.Prelude
-import           Network.Google.Resource.Cloudmonitoring.MetricDescriptors.Create
-import           Network.Google.Resource.Cloudmonitoring.MetricDescriptors.Delete
-import           Network.Google.Resource.Cloudmonitoring.MetricDescriptors.List
-import           Network.Google.Resource.Cloudmonitoring.Timeseries.List
-import           Network.Google.Resource.Cloudmonitoring.Timeseries.Write
-import           Network.Google.Resource.Cloudmonitoring.TimeseriesDescriptors.List
+import           Network.Google.Resource.CloudMonitoring.MetricDescriptors.Create
+import           Network.Google.Resource.CloudMonitoring.MetricDescriptors.Delete
+import           Network.Google.Resource.CloudMonitoring.MetricDescriptors.List
+import           Network.Google.Resource.CloudMonitoring.Timeseries.List
+import           Network.Google.Resource.CloudMonitoring.Timeseries.Write
+import           Network.Google.Resource.CloudMonitoring.TimeseriesDescriptors.List
 
 {- $resources
 TODO

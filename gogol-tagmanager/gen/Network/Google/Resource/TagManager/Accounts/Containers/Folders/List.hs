@@ -19,7 +19,7 @@
 --
 -- | Lists all GTM Folders of a Container.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersFoldersList@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersFoldersList@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Folders.List
     (
     -- * REST Resource
@@ -33,18 +33,17 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Folders.List
     , acflQuotaUser
     , acflPrettyPrint
     , acflContainerId
-    , acflUserIp
+    , acflUserIP
     , acflAccountId
     , acflKey
-    , acflOauthToken
+    , acflOAuthToken
     , acflFields
-    , acflAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagmanagerAccountsContainersFoldersList@ which the
+-- | A resource alias for @TagManagerAccountsContainersFoldersList@ which the
 -- 'AccountsContainersFoldersList'' request conforms to.
 type AccountsContainersFoldersListResource =
      "accounts" :>
@@ -55,10 +54,10 @@ type AccountsContainersFoldersListResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :>
+                           QueryParam "alt" AltJSON :>
                              Get '[JSON] ListFoldersResponse
 
 -- | Lists all GTM Folders of a Container.
@@ -68,12 +67,11 @@ data AccountsContainersFoldersList' = AccountsContainersFoldersList'
     { _acflQuotaUser   :: !(Maybe Text)
     , _acflPrettyPrint :: !Bool
     , _acflContainerId :: !Text
-    , _acflUserIp      :: !(Maybe Text)
+    , _acflUserIP      :: !(Maybe Text)
     , _acflAccountId   :: !Text
-    , _acflKey         :: !(Maybe Text)
-    , _acflOauthToken  :: !(Maybe Text)
+    , _acflKey         :: !(Maybe Key)
+    , _acflOAuthToken  :: !(Maybe OAuthToken)
     , _acflFields      :: !(Maybe Text)
-    , _acflAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersFoldersList'' with the minimum fields required to make a request.
@@ -86,17 +84,15 @@ data AccountsContainersFoldersList' = AccountsContainersFoldersList'
 --
 -- * 'acflContainerId'
 --
--- * 'acflUserIp'
+-- * 'acflUserIP'
 --
 -- * 'acflAccountId'
 --
 -- * 'acflKey'
 --
--- * 'acflOauthToken'
+-- * 'acflOAuthToken'
 --
 -- * 'acflFields'
---
--- * 'acflAlt'
 accountsContainersFoldersList'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'accountId'
@@ -106,12 +102,11 @@ accountsContainersFoldersList' pAcflContainerId_ pAcflAccountId_ =
     { _acflQuotaUser = Nothing
     , _acflPrettyPrint = True
     , _acflContainerId = pAcflContainerId_
-    , _acflUserIp = Nothing
+    , _acflUserIP = Nothing
     , _acflAccountId = pAcflAccountId_
     , _acflKey = Nothing
-    , _acflOauthToken = Nothing
+    , _acflOAuthToken = Nothing
     , _acflFields = Nothing
-    , _acflAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -136,9 +131,9 @@ acflContainerId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-acflUserIp :: Lens' AccountsContainersFoldersList' (Maybe Text)
-acflUserIp
-  = lens _acflUserIp (\ s a -> s{_acflUserIp = a})
+acflUserIP :: Lens' AccountsContainersFoldersList' (Maybe Text)
+acflUserIP
+  = lens _acflUserIP (\ s a -> s{_acflUserIP = a})
 
 -- | The GTM Account ID.
 acflAccountId :: Lens' AccountsContainersFoldersList' Text
@@ -149,23 +144,24 @@ acflAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-acflKey :: Lens' AccountsContainersFoldersList' (Maybe Text)
+acflKey :: Lens' AccountsContainersFoldersList' (Maybe Key)
 acflKey = lens _acflKey (\ s a -> s{_acflKey = a})
 
 -- | OAuth 2.0 token for the current user.
-acflOauthToken :: Lens' AccountsContainersFoldersList' (Maybe Text)
-acflOauthToken
-  = lens _acflOauthToken
-      (\ s a -> s{_acflOauthToken = a})
+acflOAuthToken :: Lens' AccountsContainersFoldersList' (Maybe OAuthToken)
+acflOAuthToken
+  = lens _acflOAuthToken
+      (\ s a -> s{_acflOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 acflFields :: Lens' AccountsContainersFoldersList' (Maybe Text)
 acflFields
   = lens _acflFields (\ s a -> s{_acflFields = a})
 
--- | Data format for the response.
-acflAlt :: Lens' AccountsContainersFoldersList' Alt
-acflAlt = lens _acflAlt (\ s a -> s{_acflAlt = a})
+instance GoogleAuth AccountsContainersFoldersList'
+         where
+        authKey = acflKey . _Just
+        authToken = acflOAuthToken . _Just
 
 instance GoogleRequest AccountsContainersFoldersList'
          where
@@ -176,12 +172,12 @@ instance GoogleRequest AccountsContainersFoldersList'
           AccountsContainersFoldersList'{..}
           = go _acflQuotaUser (Just _acflPrettyPrint)
               _acflContainerId
-              _acflUserIp
+              _acflUserIP
               _acflAccountId
               _acflKey
-              _acflOauthToken
+              _acflOAuthToken
               _acflFields
-              (Just _acflAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

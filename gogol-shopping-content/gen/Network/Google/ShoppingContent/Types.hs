@@ -157,8 +157,8 @@ module Network.Google.ShoppingContent.Types
     , oslisQuantity
     , oslisLineItemId
 
-    -- * ContentOrdersGettestordertemplateTemplateName
-    , ContentOrdersGettestordertemplateTemplateName (..)
+    -- * ContentOrdersGettestOrdertemplateTemplateName
+    , ContentOrdersGettestOrdertemplateTemplateName (..)
 
     -- * OrdersRefundResponse
     , OrdersRefundResponse
@@ -214,7 +214,7 @@ module Network.Google.ShoppingContent.Types
     , OrderLineItemReturnInfo
     , orderLineItemReturnInfo
     , oliriIsReturnable
-    , oliriPolicyUrl
+    , oliriPolicyURL
     , oliriDaysToReturn
 
     -- * OrdersCancelLineItemRequest
@@ -438,24 +438,24 @@ module Network.Google.ShoppingContent.Types
     -- * Order
     , Order
     , order
-    , ooStatus
-    , ooMerchantId
-    , ooRefunds
-    , ooKind
-    , ooLineItems
-    , ooShipments
-    , ooNetAmount
-    , ooPlacedDate
-    , ooDeliveryDetails
-    , ooShippingOption
-    , ooMerchantOrderId
-    , ooAcknowledged
-    , ooShippingCostTax
-    , ooCustomer
-    , ooId
-    , ooPaymentMethod
-    , ooPaymentStatus
-    , ooShippingCost
+    , ordStatus
+    , ordMerchantId
+    , ordRefunds
+    , ordKind
+    , ordLineItems
+    , ordShipments
+    , ordNetAmount
+    , ordPlacedDate
+    , ordDeliveryDetails
+    , ordShippingOption
+    , ordMerchantOrderId
+    , ordAcknowledged
+    , ordShippingCostTax
+    , ordCustomer
+    , ordId
+    , ordPaymentMethod
+    , ordPaymentStatus
+    , ordShippingCost
 
     -- * OrdersCustomBatchRequestEntryReturnLineItem
     , OrdersCustomBatchRequestEntryReturnLineItem
@@ -478,9 +478,6 @@ module Network.Google.ShoppingContent.Types
     , ocbrerReason
     , ocbrerReasonText
 
-    -- * Alt
-    , Alt (..)
-
     -- * OrderCancellation
     , OrderCancellation
     , orderCancellation
@@ -493,8 +490,8 @@ module Network.Google.ShoppingContent.Types
     -- * OrdersCustomBatchResponse
     , OrdersCustomBatchResponse
     , ordersCustomBatchResponse
-    , ordEntries
-    , ordKind
+    , ocbrcEntries
+    , ocbrcKind
     ) where
 
 import           Network.Google.Prelude

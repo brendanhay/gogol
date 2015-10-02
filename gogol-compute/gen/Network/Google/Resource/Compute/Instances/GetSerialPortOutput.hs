@@ -33,12 +33,11 @@ module Network.Google.Resource.Compute.Instances.GetSerialPortOutput
     , igspoQuotaUser
     , igspoPrettyPrint
     , igspoProject
-    , igspoUserIp
+    , igspoUserIP
     , igspoZone
     , igspoKey
-    , igspoOauthToken
+    , igspoOAuthToken
     , igspoFields
-    , igspoAlt
     , igspoPort
     , igspoInstance
     ) where
@@ -58,10 +57,10 @@ type InstancesGetSerialPortOutputResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :>
+                             QueryParam "alt" AltJSON :>
                                QueryParam "port" Int32 :>
                                  Get '[JSON] SerialPortOutput
 
@@ -72,12 +71,11 @@ data InstancesGetSerialPortOutput' = InstancesGetSerialPortOutput'
     { _igspoQuotaUser   :: !(Maybe Text)
     , _igspoPrettyPrint :: !Bool
     , _igspoProject     :: !Text
-    , _igspoUserIp      :: !(Maybe Text)
+    , _igspoUserIP      :: !(Maybe Text)
     , _igspoZone        :: !Text
-    , _igspoKey         :: !(Maybe Text)
-    , _igspoOauthToken  :: !(Maybe Text)
+    , _igspoKey         :: !(Maybe Key)
+    , _igspoOAuthToken  :: !(Maybe OAuthToken)
     , _igspoFields      :: !(Maybe Text)
-    , _igspoAlt         :: !Alt
     , _igspoPort        :: !Int32
     , _igspoInstance    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -92,17 +90,15 @@ data InstancesGetSerialPortOutput' = InstancesGetSerialPortOutput'
 --
 -- * 'igspoProject'
 --
--- * 'igspoUserIp'
+-- * 'igspoUserIP'
 --
 -- * 'igspoZone'
 --
 -- * 'igspoKey'
 --
--- * 'igspoOauthToken'
+-- * 'igspoOAuthToken'
 --
 -- * 'igspoFields'
---
--- * 'igspoAlt'
 --
 -- * 'igspoPort'
 --
@@ -117,12 +113,11 @@ instancesGetSerialPortOutput' pIgspoProject_ pIgspoZone_ pIgspoInstance_ =
     { _igspoQuotaUser = Nothing
     , _igspoPrettyPrint = True
     , _igspoProject = pIgspoProject_
-    , _igspoUserIp = Nothing
+    , _igspoUserIP = Nothing
     , _igspoZone = pIgspoZone_
     , _igspoKey = Nothing
-    , _igspoOauthToken = Nothing
+    , _igspoOAuthToken = Nothing
     , _igspoFields = Nothing
-    , _igspoAlt = JSON
     , _igspoPort = 1
     , _igspoInstance = pIgspoInstance_
     }
@@ -148,9 +143,9 @@ igspoProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-igspoUserIp :: Lens' InstancesGetSerialPortOutput' (Maybe Text)
-igspoUserIp
-  = lens _igspoUserIp (\ s a -> s{_igspoUserIp = a})
+igspoUserIP :: Lens' InstancesGetSerialPortOutput' (Maybe Text)
+igspoUserIP
+  = lens _igspoUserIP (\ s a -> s{_igspoUserIP = a})
 
 -- | The name of the zone for this request.
 igspoZone :: Lens' InstancesGetSerialPortOutput' Text
@@ -160,23 +155,19 @@ igspoZone
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-igspoKey :: Lens' InstancesGetSerialPortOutput' (Maybe Text)
+igspoKey :: Lens' InstancesGetSerialPortOutput' (Maybe Key)
 igspoKey = lens _igspoKey (\ s a -> s{_igspoKey = a})
 
 -- | OAuth 2.0 token for the current user.
-igspoOauthToken :: Lens' InstancesGetSerialPortOutput' (Maybe Text)
-igspoOauthToken
-  = lens _igspoOauthToken
-      (\ s a -> s{_igspoOauthToken = a})
+igspoOAuthToken :: Lens' InstancesGetSerialPortOutput' (Maybe OAuthToken)
+igspoOAuthToken
+  = lens _igspoOAuthToken
+      (\ s a -> s{_igspoOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 igspoFields :: Lens' InstancesGetSerialPortOutput' (Maybe Text)
 igspoFields
   = lens _igspoFields (\ s a -> s{_igspoFields = a})
-
--- | Data format for the response.
-igspoAlt :: Lens' InstancesGetSerialPortOutput' Alt
-igspoAlt = lens _igspoAlt (\ s a -> s{_igspoAlt = a})
 
 -- | Specifies which COM or serial port to retrieve data from.
 igspoPort :: Lens' InstancesGetSerialPortOutput' Int32
@@ -189,6 +180,11 @@ igspoInstance
   = lens _igspoInstance
       (\ s a -> s{_igspoInstance = a})
 
+instance GoogleAuth InstancesGetSerialPortOutput'
+         where
+        authKey = igspoKey . _Just
+        authToken = igspoOAuthToken . _Just
+
 instance GoogleRequest InstancesGetSerialPortOutput'
          where
         type Rs InstancesGetSerialPortOutput' =
@@ -198,14 +194,14 @@ instance GoogleRequest InstancesGetSerialPortOutput'
           InstancesGetSerialPortOutput'{..}
           = go _igspoQuotaUser (Just _igspoPrettyPrint)
               _igspoProject
-              _igspoUserIp
+              _igspoUserIP
               _igspoZone
               _igspoKey
-              _igspoOauthToken
+              _igspoOAuthToken
               _igspoFields
-              (Just _igspoAlt)
               (Just _igspoPort)
               _igspoInstance
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InstancesGetSerialPortOutputResource)

@@ -32,13 +32,12 @@ module Network.Google.Resource.DFAReporting.ContentCategories.Delete
     -- * Request Lenses
     , ccdQuotaUser
     , ccdPrettyPrint
-    , ccdUserIp
+    , ccdUserIP
     , ccdProfileId
     , ccdKey
     , ccdId
-    , ccdOauthToken
+    , ccdOAuthToken
     , ccdFields
-    , ccdAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,10 +53,10 @@ type ContentCategoriesDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Delete '[JSON] ()
+                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an existing content category.
 --
@@ -65,13 +64,12 @@ type ContentCategoriesDeleteResource =
 data ContentCategoriesDelete' = ContentCategoriesDelete'
     { _ccdQuotaUser   :: !(Maybe Text)
     , _ccdPrettyPrint :: !Bool
-    , _ccdUserIp      :: !(Maybe Text)
+    , _ccdUserIP      :: !(Maybe Text)
     , _ccdProfileId   :: !Int64
-    , _ccdKey         :: !(Maybe Text)
+    , _ccdKey         :: !(Maybe Key)
     , _ccdId          :: !Int64
-    , _ccdOauthToken  :: !(Maybe Text)
+    , _ccdOAuthToken  :: !(Maybe OAuthToken)
     , _ccdFields      :: !(Maybe Text)
-    , _ccdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContentCategoriesDelete'' with the minimum fields required to make a request.
@@ -82,7 +80,7 @@ data ContentCategoriesDelete' = ContentCategoriesDelete'
 --
 -- * 'ccdPrettyPrint'
 --
--- * 'ccdUserIp'
+-- * 'ccdUserIP'
 --
 -- * 'ccdProfileId'
 --
@@ -90,11 +88,9 @@ data ContentCategoriesDelete' = ContentCategoriesDelete'
 --
 -- * 'ccdId'
 --
--- * 'ccdOauthToken'
+-- * 'ccdOAuthToken'
 --
 -- * 'ccdFields'
---
--- * 'ccdAlt'
 contentCategoriesDelete'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
@@ -103,13 +99,12 @@ contentCategoriesDelete' pCcdProfileId_ pCcdId_ =
     ContentCategoriesDelete'
     { _ccdQuotaUser = Nothing
     , _ccdPrettyPrint = True
-    , _ccdUserIp = Nothing
+    , _ccdUserIP = Nothing
     , _ccdProfileId = pCcdProfileId_
     , _ccdKey = Nothing
     , _ccdId = pCcdId_
-    , _ccdOauthToken = Nothing
+    , _ccdOAuthToken = Nothing
     , _ccdFields = Nothing
-    , _ccdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,9 +122,9 @@ ccdPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ccdUserIp :: Lens' ContentCategoriesDelete' (Maybe Text)
-ccdUserIp
-  = lens _ccdUserIp (\ s a -> s{_ccdUserIp = a})
+ccdUserIP :: Lens' ContentCategoriesDelete' (Maybe Text)
+ccdUserIP
+  = lens _ccdUserIP (\ s a -> s{_ccdUserIP = a})
 
 -- | User profile ID associated with this request.
 ccdProfileId :: Lens' ContentCategoriesDelete' Int64
@@ -139,7 +134,7 @@ ccdProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ccdKey :: Lens' ContentCategoriesDelete' (Maybe Text)
+ccdKey :: Lens' ContentCategoriesDelete' (Maybe Key)
 ccdKey = lens _ccdKey (\ s a -> s{_ccdKey = a})
 
 -- | Content category ID.
@@ -147,31 +142,31 @@ ccdId :: Lens' ContentCategoriesDelete' Int64
 ccdId = lens _ccdId (\ s a -> s{_ccdId = a})
 
 -- | OAuth 2.0 token for the current user.
-ccdOauthToken :: Lens' ContentCategoriesDelete' (Maybe Text)
-ccdOauthToken
-  = lens _ccdOauthToken
-      (\ s a -> s{_ccdOauthToken = a})
+ccdOAuthToken :: Lens' ContentCategoriesDelete' (Maybe OAuthToken)
+ccdOAuthToken
+  = lens _ccdOAuthToken
+      (\ s a -> s{_ccdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ccdFields :: Lens' ContentCategoriesDelete' (Maybe Text)
 ccdFields
   = lens _ccdFields (\ s a -> s{_ccdFields = a})
 
--- | Data format for the response.
-ccdAlt :: Lens' ContentCategoriesDelete' Alt
-ccdAlt = lens _ccdAlt (\ s a -> s{_ccdAlt = a})
+instance GoogleAuth ContentCategoriesDelete' where
+        authKey = ccdKey . _Just
+        authToken = ccdOAuthToken . _Just
 
 instance GoogleRequest ContentCategoriesDelete' where
         type Rs ContentCategoriesDelete' = ()
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ContentCategoriesDelete'{..}
-          = go _ccdQuotaUser (Just _ccdPrettyPrint) _ccdUserIp
+          = go _ccdQuotaUser (Just _ccdPrettyPrint) _ccdUserIP
               _ccdProfileId
               _ccdKey
               _ccdId
-              _ccdOauthToken
+              _ccdOAuthToken
               _ccdFields
-              (Just _ccdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ContentCategoriesDeleteResource)

@@ -33,11 +33,10 @@ module Network.Google.Resource.Calendar.CalendarList.Delete
     , cldQuotaUser
     , cldCalendarId
     , cldPrettyPrint
-    , cldUserIp
+    , cldUserIP
     , cldKey
-    , cldOauthToken
+    , cldOAuthToken
     , cldFields
-    , cldAlt
     ) where
 
 import           Network.Google.AppsCalendar.Types
@@ -53,10 +52,10 @@ type CalendarListDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Delete '[JSON] ()
+                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an entry on the user\'s calendar list.
 --
@@ -65,11 +64,10 @@ data CalendarListDelete' = CalendarListDelete'
     { _cldQuotaUser   :: !(Maybe Text)
     , _cldCalendarId  :: !Text
     , _cldPrettyPrint :: !Bool
-    , _cldUserIp      :: !(Maybe Text)
-    , _cldKey         :: !(Maybe Text)
-    , _cldOauthToken  :: !(Maybe Text)
+    , _cldUserIP      :: !(Maybe Text)
+    , _cldKey         :: !(Maybe Key)
+    , _cldOAuthToken  :: !(Maybe OAuthToken)
     , _cldFields      :: !(Maybe Text)
-    , _cldAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CalendarListDelete'' with the minimum fields required to make a request.
@@ -82,15 +80,13 @@ data CalendarListDelete' = CalendarListDelete'
 --
 -- * 'cldPrettyPrint'
 --
--- * 'cldUserIp'
+-- * 'cldUserIP'
 --
 -- * 'cldKey'
 --
--- * 'cldOauthToken'
+-- * 'cldOAuthToken'
 --
 -- * 'cldFields'
---
--- * 'cldAlt'
 calendarListDelete'
     :: Text -- ^ 'calendarId'
     -> CalendarListDelete'
@@ -99,11 +95,10 @@ calendarListDelete' pCldCalendarId_ =
     { _cldQuotaUser = Nothing
     , _cldCalendarId = pCldCalendarId_
     , _cldPrettyPrint = True
-    , _cldUserIp = Nothing
+    , _cldUserIP = Nothing
     , _cldKey = Nothing
-    , _cldOauthToken = Nothing
+    , _cldOAuthToken = Nothing
     , _cldFields = Nothing
-    , _cldAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -129,30 +124,30 @@ cldPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cldUserIp :: Lens' CalendarListDelete' (Maybe Text)
-cldUserIp
-  = lens _cldUserIp (\ s a -> s{_cldUserIp = a})
+cldUserIP :: Lens' CalendarListDelete' (Maybe Text)
+cldUserIP
+  = lens _cldUserIP (\ s a -> s{_cldUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cldKey :: Lens' CalendarListDelete' (Maybe Text)
+cldKey :: Lens' CalendarListDelete' (Maybe Key)
 cldKey = lens _cldKey (\ s a -> s{_cldKey = a})
 
 -- | OAuth 2.0 token for the current user.
-cldOauthToken :: Lens' CalendarListDelete' (Maybe Text)
-cldOauthToken
-  = lens _cldOauthToken
-      (\ s a -> s{_cldOauthToken = a})
+cldOAuthToken :: Lens' CalendarListDelete' (Maybe OAuthToken)
+cldOAuthToken
+  = lens _cldOAuthToken
+      (\ s a -> s{_cldOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cldFields :: Lens' CalendarListDelete' (Maybe Text)
 cldFields
   = lens _cldFields (\ s a -> s{_cldFields = a})
 
--- | Data format for the response.
-cldAlt :: Lens' CalendarListDelete' Alt
-cldAlt = lens _cldAlt (\ s a -> s{_cldAlt = a})
+instance GoogleAuth CalendarListDelete' where
+        authKey = cldKey . _Just
+        authToken = cldOAuthToken . _Just
 
 instance GoogleRequest CalendarListDelete' where
         type Rs CalendarListDelete' = ()
@@ -160,11 +155,11 @@ instance GoogleRequest CalendarListDelete' where
         requestWithRoute r u CalendarListDelete'{..}
           = go _cldQuotaUser _cldCalendarId
               (Just _cldPrettyPrint)
-              _cldUserIp
+              _cldUserIP
               _cldKey
-              _cldOauthToken
+              _cldOAuthToken
               _cldFields
-              (Just _cldAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CalendarListDeleteResource)

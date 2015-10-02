@@ -33,12 +33,12 @@ module Network.Google.Resource.Directory.Members.Update
     , muQuotaUser
     , muMemberKey
     , muPrettyPrint
-    , muUserIp
+    , muUserIP
     , muGroupKey
     , muKey
-    , muOauthToken
+    , muMember
+    , muOAuthToken
     , muFields
-    , muAlt
     ) where
 
 import           Network.Google.AdminDirectory.Types
@@ -54,10 +54,11 @@ type MembersUpdateResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Put '[JSON] Member
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Member :> Put '[JSON] Member
 
 -- | Update membership of a user in the specified group.
 --
@@ -66,12 +67,12 @@ data MembersUpdate' = MembersUpdate'
     { _muQuotaUser   :: !(Maybe Text)
     , _muMemberKey   :: !Text
     , _muPrettyPrint :: !Bool
-    , _muUserIp      :: !(Maybe Text)
+    , _muUserIP      :: !(Maybe Text)
     , _muGroupKey    :: !Text
-    , _muKey         :: !(Maybe Text)
-    , _muOauthToken  :: !(Maybe Text)
+    , _muKey         :: !(Maybe Key)
+    , _muMember      :: !Member
+    , _muOAuthToken  :: !(Maybe OAuthToken)
     , _muFields      :: !(Maybe Text)
-    , _muAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MembersUpdate'' with the minimum fields required to make a request.
@@ -84,32 +85,33 @@ data MembersUpdate' = MembersUpdate'
 --
 -- * 'muPrettyPrint'
 --
--- * 'muUserIp'
+-- * 'muUserIP'
 --
 -- * 'muGroupKey'
 --
 -- * 'muKey'
 --
--- * 'muOauthToken'
+-- * 'muMember'
+--
+-- * 'muOAuthToken'
 --
 -- * 'muFields'
---
--- * 'muAlt'
 membersUpdate'
     :: Text -- ^ 'memberKey'
     -> Text -- ^ 'groupKey'
+    -> Member -- ^ 'Member'
     -> MembersUpdate'
-membersUpdate' pMuMemberKey_ pMuGroupKey_ =
+membersUpdate' pMuMemberKey_ pMuGroupKey_ pMuMember_ =
     MembersUpdate'
     { _muQuotaUser = Nothing
     , _muMemberKey = pMuMemberKey_
     , _muPrettyPrint = True
-    , _muUserIp = Nothing
+    , _muUserIP = Nothing
     , _muGroupKey = pMuGroupKey_
     , _muKey = Nothing
-    , _muOauthToken = Nothing
+    , _muMember = pMuMember_
+    , _muOAuthToken = Nothing
     , _muFields = Nothing
-    , _muAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -133,8 +135,8 @@ muPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-muUserIp :: Lens' MembersUpdate' (Maybe Text)
-muUserIp = lens _muUserIp (\ s a -> s{_muUserIp = a})
+muUserIP :: Lens' MembersUpdate' (Maybe Text)
+muUserIP = lens _muUserIP (\ s a -> s{_muUserIP = a})
 
 -- | Email or immutable Id of the group. If Id, it should match with id of
 -- group object
@@ -145,33 +147,38 @@ muGroupKey
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-muKey :: Lens' MembersUpdate' (Maybe Text)
+muKey :: Lens' MembersUpdate' (Maybe Key)
 muKey = lens _muKey (\ s a -> s{_muKey = a})
 
+-- | Multipart request metadata.
+muMember :: Lens' MembersUpdate' Member
+muMember = lens _muMember (\ s a -> s{_muMember = a})
+
 -- | OAuth 2.0 token for the current user.
-muOauthToken :: Lens' MembersUpdate' (Maybe Text)
-muOauthToken
-  = lens _muOauthToken (\ s a -> s{_muOauthToken = a})
+muOAuthToken :: Lens' MembersUpdate' (Maybe OAuthToken)
+muOAuthToken
+  = lens _muOAuthToken (\ s a -> s{_muOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 muFields :: Lens' MembersUpdate' (Maybe Text)
 muFields = lens _muFields (\ s a -> s{_muFields = a})
 
--- | Data format for the response.
-muAlt :: Lens' MembersUpdate' Alt
-muAlt = lens _muAlt (\ s a -> s{_muAlt = a})
+instance GoogleAuth MembersUpdate' where
+        authKey = muKey . _Just
+        authToken = muOAuthToken . _Just
 
 instance GoogleRequest MembersUpdate' where
         type Rs MembersUpdate' = Member
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u MembersUpdate'{..}
           = go _muQuotaUser _muMemberKey (Just _muPrettyPrint)
-              _muUserIp
+              _muUserIP
               _muGroupKey
               _muKey
-              _muOauthToken
+              _muOAuthToken
               _muFields
-              (Just _muAlt)
+              (Just AltJSON)
+              _muMember
           where go
                   = clientWithRoute
                       (Proxy :: Proxy MembersUpdateResource)

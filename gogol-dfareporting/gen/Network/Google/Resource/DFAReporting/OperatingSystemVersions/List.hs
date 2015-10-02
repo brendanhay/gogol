@@ -32,12 +32,11 @@ module Network.Google.Resource.DFAReporting.OperatingSystemVersions.List
     -- * Request Lenses
     , osvlQuotaUser
     , osvlPrettyPrint
-    , osvlUserIp
+    , osvlUserIP
     , osvlProfileId
     , osvlKey
-    , osvlOauthToken
+    , osvlOAuthToken
     , osvlFields
-    , osvlAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,10 +51,10 @@ type OperatingSystemVersionsListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :>
+                       QueryParam "alt" AltJSON :>
                          Get '[JSON] OperatingSystemVersionsListResponse
 
 -- | Retrieves a list of operating system versions.
@@ -64,12 +63,11 @@ type OperatingSystemVersionsListResource =
 data OperatingSystemVersionsList' = OperatingSystemVersionsList'
     { _osvlQuotaUser   :: !(Maybe Text)
     , _osvlPrettyPrint :: !Bool
-    , _osvlUserIp      :: !(Maybe Text)
+    , _osvlUserIP      :: !(Maybe Text)
     , _osvlProfileId   :: !Int64
-    , _osvlKey         :: !(Maybe Text)
-    , _osvlOauthToken  :: !(Maybe Text)
+    , _osvlKey         :: !(Maybe Key)
+    , _osvlOAuthToken  :: !(Maybe OAuthToken)
     , _osvlFields      :: !(Maybe Text)
-    , _osvlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperatingSystemVersionsList'' with the minimum fields required to make a request.
@@ -80,17 +78,15 @@ data OperatingSystemVersionsList' = OperatingSystemVersionsList'
 --
 -- * 'osvlPrettyPrint'
 --
--- * 'osvlUserIp'
+-- * 'osvlUserIP'
 --
 -- * 'osvlProfileId'
 --
 -- * 'osvlKey'
 --
--- * 'osvlOauthToken'
+-- * 'osvlOAuthToken'
 --
 -- * 'osvlFields'
---
--- * 'osvlAlt'
 operatingSystemVersionsList'
     :: Int64 -- ^ 'profileId'
     -> OperatingSystemVersionsList'
@@ -98,12 +94,11 @@ operatingSystemVersionsList' pOsvlProfileId_ =
     OperatingSystemVersionsList'
     { _osvlQuotaUser = Nothing
     , _osvlPrettyPrint = True
-    , _osvlUserIp = Nothing
+    , _osvlUserIP = Nothing
     , _osvlProfileId = pOsvlProfileId_
     , _osvlKey = Nothing
-    , _osvlOauthToken = Nothing
+    , _osvlOAuthToken = Nothing
     , _osvlFields = Nothing
-    , _osvlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -122,9 +117,9 @@ osvlPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-osvlUserIp :: Lens' OperatingSystemVersionsList' (Maybe Text)
-osvlUserIp
-  = lens _osvlUserIp (\ s a -> s{_osvlUserIp = a})
+osvlUserIP :: Lens' OperatingSystemVersionsList' (Maybe Text)
+osvlUserIP
+  = lens _osvlUserIP (\ s a -> s{_osvlUserIP = a})
 
 -- | User profile ID associated with this request.
 osvlProfileId :: Lens' OperatingSystemVersionsList' Int64
@@ -135,23 +130,24 @@ osvlProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-osvlKey :: Lens' OperatingSystemVersionsList' (Maybe Text)
+osvlKey :: Lens' OperatingSystemVersionsList' (Maybe Key)
 osvlKey = lens _osvlKey (\ s a -> s{_osvlKey = a})
 
 -- | OAuth 2.0 token for the current user.
-osvlOauthToken :: Lens' OperatingSystemVersionsList' (Maybe Text)
-osvlOauthToken
-  = lens _osvlOauthToken
-      (\ s a -> s{_osvlOauthToken = a})
+osvlOAuthToken :: Lens' OperatingSystemVersionsList' (Maybe OAuthToken)
+osvlOAuthToken
+  = lens _osvlOAuthToken
+      (\ s a -> s{_osvlOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 osvlFields :: Lens' OperatingSystemVersionsList' (Maybe Text)
 osvlFields
   = lens _osvlFields (\ s a -> s{_osvlFields = a})
 
--- | Data format for the response.
-osvlAlt :: Lens' OperatingSystemVersionsList' Alt
-osvlAlt = lens _osvlAlt (\ s a -> s{_osvlAlt = a})
+instance GoogleAuth OperatingSystemVersionsList'
+         where
+        authKey = osvlKey . _Just
+        authToken = osvlOAuthToken . _Just
 
 instance GoogleRequest OperatingSystemVersionsList'
          where
@@ -160,12 +156,12 @@ instance GoogleRequest OperatingSystemVersionsList'
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u OperatingSystemVersionsList'{..}
           = go _osvlQuotaUser (Just _osvlPrettyPrint)
-              _osvlUserIp
+              _osvlUserIP
               _osvlProfileId
               _osvlKey
-              _osvlOauthToken
+              _osvlOAuthToken
               _osvlFields
-              (Just _osvlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy OperatingSystemVersionsListResource)

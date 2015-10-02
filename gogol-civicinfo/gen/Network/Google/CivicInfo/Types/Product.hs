@@ -45,16 +45,16 @@ instance ToJSON RepresentativeInfoResponseDivisions
 --
 -- /See:/ 'voterInfoResponse' smart constructor.
 data VoterInfoResponse = VoterInfoResponse
-    { _virOtherElections   :: !(Maybe [Maybe Election])
-    , _virContests         :: !(Maybe [Maybe Contest])
-    , _virState            :: !(Maybe [Maybe AdministrationRegion])
+    { _virOtherElections   :: !(Maybe [Election])
+    , _virContests         :: !(Maybe [Contest])
+    , _virState            :: !(Maybe [AdministrationRegion])
     , _virKind             :: !Text
-    , _virDropOffLocations :: !(Maybe [Maybe PollingLocation])
-    , _virElection         :: !(Maybe (Maybe Election))
-    , _virNormalizedInput  :: !(Maybe (Maybe SimpleAddressType))
+    , _virDropOffLocations :: !(Maybe [PollingLocation])
+    , _virElection         :: !(Maybe Election)
+    , _virNormalizedInput  :: !(Maybe SimpleAddressType)
     , _virMailOnly         :: !(Maybe Bool)
-    , _virEarlyVoteSites   :: !(Maybe [Maybe PollingLocation])
-    , _virPollingLocations :: !(Maybe [Maybe PollingLocation])
+    , _virEarlyVoteSites   :: !(Maybe [PollingLocation])
+    , _virPollingLocations :: !(Maybe [PollingLocation])
     , _virPrecinctId       :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -103,7 +103,7 @@ voterInfoResponse =
 -- | If no election ID was specified in the query, and there was more than
 -- one election with data for the given voter, this will contain
 -- information about the other elections that could apply.
-virOtherElections :: Lens' VoterInfoResponse [Maybe Election]
+virOtherElections :: Lens' VoterInfoResponse [Election]
 virOtherElections
   = lens _virOtherElections
       (\ s a -> s{_virOtherElections = a})
@@ -111,7 +111,7 @@ virOtherElections
       . _Coerce
 
 -- | Contests that will appear on the voter\'s ballot.
-virContests :: Lens' VoterInfoResponse [Maybe Contest]
+virContests :: Lens' VoterInfoResponse [Contest]
 virContests
   = lens _virContests (\ s a -> s{_virContests = a}) .
       _Default
@@ -119,7 +119,7 @@ virContests
 
 -- | Local Election Information for the state that the voter votes in. For
 -- the US, there will only be one element in this array.
-virState :: Lens' VoterInfoResponse [Maybe AdministrationRegion]
+virState :: Lens' VoterInfoResponse [AdministrationRegion]
 virState
   = lens _virState (\ s a -> s{_virState = a}) .
       _Default
@@ -135,7 +135,7 @@ virKind = lens _virKind (\ s a -> s{_virKind = a})
 -- location. The location may not have ballots available on the premises.
 -- These locations could be open on or before election day as indicated in
 -- the pollingHours field.
-virDropOffLocations :: Lens' VoterInfoResponse [Maybe PollingLocation]
+virDropOffLocations :: Lens' VoterInfoResponse [PollingLocation]
 virDropOffLocations
   = lens _virDropOffLocations
       (\ s a -> s{_virDropOffLocations = a})
@@ -143,12 +143,12 @@ virDropOffLocations
       . _Coerce
 
 -- | The election that was queried.
-virElection :: Lens' VoterInfoResponse (Maybe (Maybe Election))
+virElection :: Lens' VoterInfoResponse (Maybe Election)
 virElection
   = lens _virElection (\ s a -> s{_virElection = a})
 
 -- | The normalized version of the requested address
-virNormalizedInput :: Lens' VoterInfoResponse (Maybe (Maybe SimpleAddressType))
+virNormalizedInput :: Lens' VoterInfoResponse (Maybe SimpleAddressType)
 virNormalizedInput
   = lens _virNormalizedInput
       (\ s a -> s{_virNormalizedInput = a})
@@ -162,7 +162,7 @@ virMailOnly
 
 -- | Locations where the voter is eligible to vote early, prior to election
 -- day.
-virEarlyVoteSites :: Lens' VoterInfoResponse [Maybe PollingLocation]
+virEarlyVoteSites :: Lens' VoterInfoResponse [PollingLocation]
 virEarlyVoteSites
   = lens _virEarlyVoteSites
       (\ s a -> s{_virEarlyVoteSites = a})
@@ -170,7 +170,7 @@ virEarlyVoteSites
       . _Coerce
 
 -- | Locations where the voter is eligible to vote on election day.
-virPollingLocations :: Lens' VoterInfoResponse [Maybe PollingLocation]
+virPollingLocations :: Lens' VoterInfoResponse [PollingLocation]
 virPollingLocations
   = lens _virPollingLocations
       (\ s a -> s{_virPollingLocations = a})
@@ -223,8 +223,8 @@ instance ToJSON VoterInfoResponse where
 data PollingLocation = PollingLocation
     { _plVoterServices :: !(Maybe Text)
     , _plEndDate       :: !(Maybe Text)
-    , _plSources       :: !(Maybe [Maybe Source])
-    , _plAddress       :: !(Maybe (Maybe SimpleAddressType))
+    , _plSources       :: !(Maybe [Source])
+    , _plAddress       :: !(Maybe SimpleAddressType)
     , _plStartDate     :: !(Maybe Text)
     , _plPollingHours  :: !(Maybe Text)
     , _plName          :: !(Maybe Text)
@@ -283,14 +283,14 @@ plEndDate
 
 -- | A list of sources for this location. If multiple sources are listed the
 -- data has been aggregated from those sources.
-plSources :: Lens' PollingLocation [Maybe Source]
+plSources :: Lens' PollingLocation [Source]
 plSources
   = lens _plSources (\ s a -> s{_plSources = a}) .
       _Default
       . _Coerce
 
 -- | The address of the location.
-plAddress :: Lens' PollingLocation (Maybe (Maybe SimpleAddressType))
+plAddress :: Lens' PollingLocation (Maybe SimpleAddressType)
 plAddress
   = lens _plAddress (\ s a -> s{_plAddress = a})
 
@@ -427,9 +427,9 @@ instance ToJSON GeographicDivision where
 data Candidate = Candidate
     { _cEmail         :: !(Maybe Text)
     , _cPhone         :: !(Maybe Text)
-    , _cPhotoUrl      :: !(Maybe Text)
-    , _cChannels      :: !(Maybe [Maybe Channel])
-    , _cCandidateUrl  :: !(Maybe Text)
+    , _cPhotoURL      :: !(Maybe Text)
+    , _cChannels      :: !(Maybe [Channel])
+    , _cCandidateURL  :: !(Maybe Text)
     , _cOrderOnBallot :: !(Maybe Int64)
     , _cName          :: !(Maybe Text)
     , _cParty         :: !(Maybe Text)
@@ -443,11 +443,11 @@ data Candidate = Candidate
 --
 -- * 'cPhone'
 --
--- * 'cPhotoUrl'
+-- * 'cPhotoURL'
 --
 -- * 'cChannels'
 --
--- * 'cCandidateUrl'
+-- * 'cCandidateURL'
 --
 -- * 'cOrderOnBallot'
 --
@@ -460,9 +460,9 @@ candidate =
     Candidate
     { _cEmail = Nothing
     , _cPhone = Nothing
-    , _cPhotoUrl = Nothing
+    , _cPhotoURL = Nothing
     , _cChannels = Nothing
-    , _cCandidateUrl = Nothing
+    , _cCandidateURL = Nothing
     , _cOrderOnBallot = Nothing
     , _cName = Nothing
     , _cParty = Nothing
@@ -477,22 +477,22 @@ cPhone :: Lens' Candidate (Maybe Text)
 cPhone = lens _cPhone (\ s a -> s{_cPhone = a})
 
 -- | A URL for a photo of the candidate.
-cPhotoUrl :: Lens' Candidate (Maybe Text)
-cPhotoUrl
-  = lens _cPhotoUrl (\ s a -> s{_cPhotoUrl = a})
+cPhotoURL :: Lens' Candidate (Maybe Text)
+cPhotoURL
+  = lens _cPhotoURL (\ s a -> s{_cPhotoURL = a})
 
 -- | A list of known (social) media channels for this candidate.
-cChannels :: Lens' Candidate [Maybe Channel]
+cChannels :: Lens' Candidate [Channel]
 cChannels
   = lens _cChannels (\ s a -> s{_cChannels = a}) .
       _Default
       . _Coerce
 
 -- | The URL for the candidate\'s campaign web site.
-cCandidateUrl :: Lens' Candidate (Maybe Text)
-cCandidateUrl
-  = lens _cCandidateUrl
-      (\ s a -> s{_cCandidateUrl = a})
+cCandidateURL :: Lens' Candidate (Maybe Text)
+cCandidateURL
+  = lens _cCandidateURL
+      (\ s a -> s{_cCandidateURL = a})
 
 -- | The order the candidate appears on the ballot for this contest.
 cOrderOnBallot :: Lens' Candidate (Maybe Int64)
@@ -526,9 +526,9 @@ instance ToJSON Candidate where
           = object
               (catMaybes
                  [("email" .=) <$> _cEmail, ("phone" .=) <$> _cPhone,
-                  ("photoUrl" .=) <$> _cPhotoUrl,
+                  ("photoUrl" .=) <$> _cPhotoURL,
                   ("channels" .=) <$> _cChannels,
-                  ("candidateUrl" .=) <$> _cCandidateUrl,
+                  ("candidateUrl" .=) <$> _cCandidateURL,
                   ("orderOnBallot" .=) <$> _cOrderOnBallot,
                   ("name" .=) <$> _cName, ("party" .=) <$> _cParty])
 
@@ -539,7 +539,7 @@ data Office = Office
     { _oDivisionId      :: !(Maybe Text)
     , _oRoles           :: !(Maybe [Text])
     , _oOfficialIndices :: !(Maybe [Word32])
-    , _oSources         :: !(Maybe [Maybe Source])
+    , _oSources         :: !(Maybe [Source])
     , _oName            :: !(Maybe Text)
     , _oLevels          :: !(Maybe [Text])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -596,7 +596,7 @@ oOfficialIndices
 
 -- | A list of sources for this office. If multiple sources are listed, the
 -- data has been aggregated from those sources.
-oSources :: Lens' Office [Maybe Source]
+oSources :: Lens' Office [Source]
 oSources
   = lens _oSources (\ s a -> s{_oSources = a}) .
       _Default
@@ -757,10 +757,10 @@ instance ToJSON Channel where
 -- /See:/ 'representativeInfoResponse' smart constructor.
 data RepresentativeInfoResponse = RepresentativeInfoResponse
     { _rirKind            :: !Text
-    , _rirNormalizedInput :: !(Maybe (Maybe SimpleAddressType))
-    , _rirOfficials       :: !(Maybe [Maybe Official])
+    , _rirNormalizedInput :: !(Maybe SimpleAddressType)
+    , _rirOfficials       :: !(Maybe [Official])
     , _rirDivisions       :: !(Maybe RepresentativeInfoResponseDivisions)
-    , _rirOffices         :: !(Maybe [Maybe Office])
+    , _rirOffices         :: !(Maybe [Office])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RepresentativeInfoResponse' with the minimum fields required to make a request.
@@ -793,14 +793,14 @@ rirKind :: Lens' RepresentativeInfoResponse Text
 rirKind = lens _rirKind (\ s a -> s{_rirKind = a})
 
 -- | The normalized version of the requested address
-rirNormalizedInput :: Lens' RepresentativeInfoResponse (Maybe (Maybe SimpleAddressType))
+rirNormalizedInput :: Lens' RepresentativeInfoResponse (Maybe SimpleAddressType)
 rirNormalizedInput
   = lens _rirNormalizedInput
       (\ s a -> s{_rirNormalizedInput = a})
 
 -- | Officials holding the offices listed above. Will only be present if
 -- includeOffices was true in the request.
-rirOfficials :: Lens' RepresentativeInfoResponse [Maybe Official]
+rirOfficials :: Lens' RepresentativeInfoResponse [Official]
 rirOfficials
   = lens _rirOfficials (\ s a -> s{_rirOfficials = a})
       . _Default
@@ -813,7 +813,7 @@ rirDivisions
 
 -- | Elected offices referenced by the divisions listed above. Will only be
 -- present if includeOffices was true in the request.
-rirOffices :: Lens' RepresentativeInfoResponse [Maybe Office]
+rirOffices :: Lens' RepresentativeInfoResponse [Office]
 rirOffices
   = lens _rirOffices (\ s a -> s{_rirOffices = a}) .
       _Default
@@ -910,19 +910,19 @@ instance ToJSON DivisionSearchResult where
 --
 -- /See:/ 'administrativeBody' smart constructor.
 data AdministrativeBody = AdministrativeBody
-    { _abCorrespondenceAddress               :: !(Maybe (Maybe SimpleAddressType))
-    , _abAbsenteeVotingInfoUrl               :: !(Maybe Text)
+    { _abCorrespondenceAddress               :: !(Maybe SimpleAddressType)
+    , _abAbsenteeVotingInfoURL               :: !(Maybe Text)
     , _abHoursOfOperation                    :: !(Maybe Text)
-    , _abBallotInfoUrl                       :: !(Maybe Text)
-    , _abPhysicalAddress                     :: !(Maybe (Maybe SimpleAddressType))
-    , _abElectionRegistrationConfirmationUrl :: !(Maybe Text)
-    , _abElectionInfoUrl                     :: !(Maybe Text)
-    , _abVotingLocationFinderUrl             :: !(Maybe Text)
-    , _abElectionOfficials                   :: !(Maybe [Maybe ElectionOfficial])
+    , _abBallotInfoURL                       :: !(Maybe Text)
+    , _abPhysicalAddress                     :: !(Maybe SimpleAddressType)
+    , _abElectionRegistrationConfirmationURL :: !(Maybe Text)
+    , _abElectionInfoURL                     :: !(Maybe Text)
+    , _abVotingLocationFinderURL             :: !(Maybe Text)
+    , _abElectionOfficials                   :: !(Maybe [ElectionOfficial])
     , _abName                                :: !(Maybe Text)
-    , _abElectionRulesUrl                    :: !(Maybe Text)
+    , _abElectionRulesURL                    :: !(Maybe Text)
     , _abVoterServices                       :: !(Maybe [Text])
-    , _abElectionRegistrationUrl             :: !(Maybe Text)
+    , _abElectionRegistrationURL             :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdministrativeBody' with the minimum fields required to make a request.
@@ -931,60 +931,60 @@ data AdministrativeBody = AdministrativeBody
 --
 -- * 'abCorrespondenceAddress'
 --
--- * 'abAbsenteeVotingInfoUrl'
+-- * 'abAbsenteeVotingInfoURL'
 --
 -- * 'abHoursOfOperation'
 --
--- * 'abBallotInfoUrl'
+-- * 'abBallotInfoURL'
 --
 -- * 'abPhysicalAddress'
 --
--- * 'abElectionRegistrationConfirmationUrl'
+-- * 'abElectionRegistrationConfirmationURL'
 --
--- * 'abElectionInfoUrl'
+-- * 'abElectionInfoURL'
 --
--- * 'abVotingLocationFinderUrl'
+-- * 'abVotingLocationFinderURL'
 --
 -- * 'abElectionOfficials'
 --
 -- * 'abName'
 --
--- * 'abElectionRulesUrl'
+-- * 'abElectionRulesURL'
 --
 -- * 'abVoterServices'
 --
--- * 'abElectionRegistrationUrl'
+-- * 'abElectionRegistrationURL'
 administrativeBody
     :: AdministrativeBody
 administrativeBody =
     AdministrativeBody
     { _abCorrespondenceAddress = Nothing
-    , _abAbsenteeVotingInfoUrl = Nothing
+    , _abAbsenteeVotingInfoURL = Nothing
     , _abHoursOfOperation = Nothing
-    , _abBallotInfoUrl = Nothing
+    , _abBallotInfoURL = Nothing
     , _abPhysicalAddress = Nothing
-    , _abElectionRegistrationConfirmationUrl = Nothing
-    , _abElectionInfoUrl = Nothing
-    , _abVotingLocationFinderUrl = Nothing
+    , _abElectionRegistrationConfirmationURL = Nothing
+    , _abElectionInfoURL = Nothing
+    , _abVotingLocationFinderURL = Nothing
     , _abElectionOfficials = Nothing
     , _abName = Nothing
-    , _abElectionRulesUrl = Nothing
+    , _abElectionRulesURL = Nothing
     , _abVoterServices = Nothing
-    , _abElectionRegistrationUrl = Nothing
+    , _abElectionRegistrationURL = Nothing
     }
 
 -- | The mailing address of this administrative body.
-abCorrespondenceAddress :: Lens' AdministrativeBody (Maybe (Maybe SimpleAddressType))
+abCorrespondenceAddress :: Lens' AdministrativeBody (Maybe SimpleAddressType)
 abCorrespondenceAddress
   = lens _abCorrespondenceAddress
       (\ s a -> s{_abCorrespondenceAddress = a})
 
 -- | A URL provided by this administrative body for information on absentee
 -- voting.
-abAbsenteeVotingInfoUrl :: Lens' AdministrativeBody (Maybe Text)
-abAbsenteeVotingInfoUrl
-  = lens _abAbsenteeVotingInfoUrl
-      (\ s a -> s{_abAbsenteeVotingInfoUrl = a})
+abAbsenteeVotingInfoURL :: Lens' AdministrativeBody (Maybe Text)
+abAbsenteeVotingInfoURL
+  = lens _abAbsenteeVotingInfoURL
+      (\ s a -> s{_abAbsenteeVotingInfoURL = a})
 
 -- | A description of the hours of operation for this administrative body.
 abHoursOfOperation :: Lens' AdministrativeBody (Maybe Text)
@@ -994,40 +994,40 @@ abHoursOfOperation
 
 -- | A URL provided by this administrative body to give contest information
 -- to the voter.
-abBallotInfoUrl :: Lens' AdministrativeBody (Maybe Text)
-abBallotInfoUrl
-  = lens _abBallotInfoUrl
-      (\ s a -> s{_abBallotInfoUrl = a})
+abBallotInfoURL :: Lens' AdministrativeBody (Maybe Text)
+abBallotInfoURL
+  = lens _abBallotInfoURL
+      (\ s a -> s{_abBallotInfoURL = a})
 
 -- | The physical address of this administrative body.
-abPhysicalAddress :: Lens' AdministrativeBody (Maybe (Maybe SimpleAddressType))
+abPhysicalAddress :: Lens' AdministrativeBody (Maybe SimpleAddressType)
 abPhysicalAddress
   = lens _abPhysicalAddress
       (\ s a -> s{_abPhysicalAddress = a})
 
 -- | A URL provided by this administrative body for confirming that the voter
 -- is registered to vote.
-abElectionRegistrationConfirmationUrl :: Lens' AdministrativeBody (Maybe Text)
-abElectionRegistrationConfirmationUrl
-  = lens _abElectionRegistrationConfirmationUrl
+abElectionRegistrationConfirmationURL :: Lens' AdministrativeBody (Maybe Text)
+abElectionRegistrationConfirmationURL
+  = lens _abElectionRegistrationConfirmationURL
       (\ s a ->
-         s{_abElectionRegistrationConfirmationUrl = a})
+         s{_abElectionRegistrationConfirmationURL = a})
 
 -- | A URL provided by this administrative body for looking up general
 -- election information.
-abElectionInfoUrl :: Lens' AdministrativeBody (Maybe Text)
-abElectionInfoUrl
-  = lens _abElectionInfoUrl
-      (\ s a -> s{_abElectionInfoUrl = a})
+abElectionInfoURL :: Lens' AdministrativeBody (Maybe Text)
+abElectionInfoURL
+  = lens _abElectionInfoURL
+      (\ s a -> s{_abElectionInfoURL = a})
 
 -- | A URL provided by this administrative body for looking up where to vote.
-abVotingLocationFinderUrl :: Lens' AdministrativeBody (Maybe Text)
-abVotingLocationFinderUrl
-  = lens _abVotingLocationFinderUrl
-      (\ s a -> s{_abVotingLocationFinderUrl = a})
+abVotingLocationFinderURL :: Lens' AdministrativeBody (Maybe Text)
+abVotingLocationFinderURL
+  = lens _abVotingLocationFinderURL
+      (\ s a -> s{_abVotingLocationFinderURL = a})
 
 -- | The election officials for this election administrative body.
-abElectionOfficials :: Lens' AdministrativeBody [Maybe ElectionOfficial]
+abElectionOfficials :: Lens' AdministrativeBody [ElectionOfficial]
 abElectionOfficials
   = lens _abElectionOfficials
       (\ s a -> s{_abElectionOfficials = a})
@@ -1040,10 +1040,10 @@ abName = lens _abName (\ s a -> s{_abName = a})
 
 -- | A URL provided by this administrative body describing election rules to
 -- the voter.
-abElectionRulesUrl :: Lens' AdministrativeBody (Maybe Text)
-abElectionRulesUrl
-  = lens _abElectionRulesUrl
-      (\ s a -> s{_abElectionRulesUrl = a})
+abElectionRulesURL :: Lens' AdministrativeBody (Maybe Text)
+abElectionRulesURL
+  = lens _abElectionRulesURL
+      (\ s a -> s{_abElectionRulesURL = a})
 
 -- | A description of the services this administrative body may provide.
 abVoterServices :: Lens' AdministrativeBody [Text]
@@ -1055,10 +1055,10 @@ abVoterServices
 
 -- | A URL provided by this administrative body for looking up how to
 -- register to vote.
-abElectionRegistrationUrl :: Lens' AdministrativeBody (Maybe Text)
-abElectionRegistrationUrl
-  = lens _abElectionRegistrationUrl
-      (\ s a -> s{_abElectionRegistrationUrl = a})
+abElectionRegistrationURL :: Lens' AdministrativeBody (Maybe Text)
+abElectionRegistrationURL
+  = lens _abElectionRegistrationURL
+      (\ s a -> s{_abElectionRegistrationURL = a})
 
 instance FromJSON AdministrativeBody where
         parseJSON
@@ -1086,21 +1086,21 @@ instance ToJSON AdministrativeBody where
                  [("correspondenceAddress" .=) <$>
                     _abCorrespondenceAddress,
                   ("absenteeVotingInfoUrl" .=) <$>
-                    _abAbsenteeVotingInfoUrl,
+                    _abAbsenteeVotingInfoURL,
                   ("hoursOfOperation" .=) <$> _abHoursOfOperation,
-                  ("ballotInfoUrl" .=) <$> _abBallotInfoUrl,
+                  ("ballotInfoUrl" .=) <$> _abBallotInfoURL,
                   ("physicalAddress" .=) <$> _abPhysicalAddress,
                   ("electionRegistrationConfirmationUrl" .=) <$>
-                    _abElectionRegistrationConfirmationUrl,
-                  ("electionInfoUrl" .=) <$> _abElectionInfoUrl,
+                    _abElectionRegistrationConfirmationURL,
+                  ("electionInfoUrl" .=) <$> _abElectionInfoURL,
                   ("votingLocationFinderUrl" .=) <$>
-                    _abVotingLocationFinderUrl,
+                    _abVotingLocationFinderURL,
                   ("electionOfficials" .=) <$> _abElectionOfficials,
                   ("name" .=) <$> _abName,
-                  ("electionRulesUrl" .=) <$> _abElectionRulesUrl,
+                  ("electionRulesUrl" .=) <$> _abElectionRulesURL,
                   ("voter_services" .=) <$> _abVoterServices,
                   ("electionRegistrationUrl" .=) <$>
-                    _abElectionRegistrationUrl])
+                    _abElectionRegistrationURL])
 
 -- | Information about a contest that appears on a voter\'s ballot.
 --
@@ -1108,13 +1108,13 @@ instance ToJSON AdministrativeBody where
 data Contest = Contest
     { _conReferendumPassageThreshold :: !(Maybe Text)
     , _conRoles                      :: !(Maybe [Text])
-    , _conReferendumUrl              :: !(Maybe Text)
+    , _conReferendumURL              :: !(Maybe Text)
     , _conReferendumEffectOfAbstain  :: !(Maybe Text)
     , _conReferendumSubtitle         :: !(Maybe Text)
     , _conNumberVotingFor            :: !(Maybe Int64)
     , _conOffice                     :: !(Maybe Text)
     , _conReferendumConStatement     :: !(Maybe Text)
-    , _conSources                    :: !(Maybe [Maybe Source])
+    , _conSources                    :: !(Maybe [Source])
     , _conReferendumProStatement     :: !(Maybe Text)
     , _conReferendumBallotResponses  :: !(Maybe [Text])
     , _conNumberElected              :: !(Maybe Int64)
@@ -1125,9 +1125,9 @@ data Contest = Contest
     , _conType                       :: !(Maybe Text)
     , _conElectorateSpecifications   :: !(Maybe Text)
     , _conReferendumBrief            :: !(Maybe Text)
-    , _conDistrict                   :: !(Maybe (Maybe ElectoralDistrict))
+    , _conDistrict                   :: !(Maybe ElectoralDistrict)
     , _conLevel                      :: !(Maybe [Text])
-    , _conCandidates                 :: !(Maybe [Maybe Candidate])
+    , _conCandidates                 :: !(Maybe [Candidate])
     , _conReferendumTitle            :: !(Maybe Text)
     , _conBallotPlacement            :: !(Maybe Int64)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -1140,7 +1140,7 @@ data Contest = Contest
 --
 -- * 'conRoles'
 --
--- * 'conReferendumUrl'
+-- * 'conReferendumURL'
 --
 -- * 'conReferendumEffectOfAbstain'
 --
@@ -1189,7 +1189,7 @@ contest =
     Contest
     { _conReferendumPassageThreshold = Nothing
     , _conRoles = Nothing
-    , _conReferendumUrl = Nothing
+    , _conReferendumURL = Nothing
     , _conReferendumEffectOfAbstain = Nothing
     , _conReferendumSubtitle = Nothing
     , _conNumberVotingFor = Nothing
@@ -1230,10 +1230,10 @@ conRoles
 
 -- | A link to the referendum. This field is only populated for contests of
 -- type \'Referendum\'.
-conReferendumUrl :: Lens' Contest (Maybe Text)
-conReferendumUrl
-  = lens _conReferendumUrl
-      (\ s a -> s{_conReferendumUrl = a})
+conReferendumURL :: Lens' Contest (Maybe Text)
+conReferendumURL
+  = lens _conReferendumURL
+      (\ s a -> s{_conReferendumURL = a})
 
 -- | Specifies what effect abstaining (not voting) on the proposition will
 -- have (i.e. whether abstaining is considered a vote against it). This
@@ -1271,7 +1271,7 @@ conReferendumConStatement
 
 -- | A list of sources for this contest. If multiple sources are listed, the
 -- data has been aggregated from those sources.
-conSources :: Lens' Contest [Maybe Source]
+conSources :: Lens' Contest [Source]
 conSources
   = lens _conSources (\ s a -> s{_conSources = a}) .
       _Default
@@ -1349,7 +1349,7 @@ conReferendumBrief
       (\ s a -> s{_conReferendumBrief = a})
 
 -- | Information about the electoral district that this contest is in.
-conDistrict :: Lens' Contest (Maybe (Maybe ElectoralDistrict))
+conDistrict :: Lens' Contest (Maybe ElectoralDistrict)
 conDistrict
   = lens _conDistrict (\ s a -> s{_conDistrict = a})
 
@@ -1365,7 +1365,7 @@ conLevel
       . _Coerce
 
 -- | The candidate choices for this contest.
-conCandidates :: Lens' Contest [Maybe Candidate]
+conCandidates :: Lens' Contest [Candidate]
 conCandidates
   = lens _conCandidates
       (\ s a -> s{_conCandidates = a})
@@ -1422,7 +1422,7 @@ instance ToJSON Contest where
                  [("referendumPassageThreshold" .=) <$>
                     _conReferendumPassageThreshold,
                   ("roles" .=) <$> _conRoles,
-                  ("referendumUrl" .=) <$> _conReferendumUrl,
+                  ("referendumUrl" .=) <$> _conReferendumURL,
                   ("referendumEffectOfAbstain" .=) <$>
                     _conReferendumEffectOfAbstain,
                   ("referendumSubtitle" .=) <$> _conReferendumSubtitle,
@@ -1453,7 +1453,7 @@ instance ToJSON Contest where
 --
 -- /See:/ 'divisionSearchResponse' smart constructor.
 data DivisionSearchResponse = DivisionSearchResponse
-    { _dsrResults :: !(Maybe [Maybe DivisionSearchResult])
+    { _dsrResults :: !(Maybe [DivisionSearchResult])
     , _dsrKind    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1472,7 +1472,7 @@ divisionSearchResponse =
     , _dsrKind = "civicinfo#divisionSearchResponse"
     }
 
-dsrResults :: Lens' DivisionSearchResponse [Maybe DivisionSearchResult]
+dsrResults :: Lens' DivisionSearchResponse [DivisionSearchResult]
 dsrResults
   = lens _dsrResults (\ s a -> s{_dsrResults = a}) .
       _Default
@@ -1604,9 +1604,9 @@ instance ToJSON ElectionOfficial where
 --
 -- /See:/ 'representativeInfoData' smart constructor.
 data RepresentativeInfoData = RepresentativeInfoData
-    { _ridOfficials :: !(Maybe [Maybe Official])
+    { _ridOfficials :: !(Maybe [Official])
     , _ridDivisions :: !(Maybe RepresentativeInfoDataDivisions)
-    , _ridOffices   :: !(Maybe [Maybe Office])
+    , _ridOffices   :: !(Maybe [Office])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RepresentativeInfoData' with the minimum fields required to make a request.
@@ -1629,7 +1629,7 @@ representativeInfoData =
 
 -- | Officials holding the offices listed above. Will only be present if
 -- includeOffices was true in the request.
-ridOfficials :: Lens' RepresentativeInfoData [Maybe Official]
+ridOfficials :: Lens' RepresentativeInfoData [Official]
 ridOfficials
   = lens _ridOfficials (\ s a -> s{_ridOfficials = a})
       . _Default
@@ -1642,7 +1642,7 @@ ridDivisions
 
 -- | Elected offices referenced by the divisions listed above. Will only be
 -- present if includeOffices was true in the request.
-ridOffices :: Lens' RepresentativeInfoData [Maybe Office]
+ridOffices :: Lens' RepresentativeInfoData [Office]
 ridOffices
   = lens _ridOffices (\ s a -> s{_ridOffices = a}) .
       _Default
@@ -1868,10 +1868,10 @@ instance ToJSON SimpleAddressType where
 --
 -- /See:/ 'administrationRegion' smart constructor.
 data AdministrationRegion = AdministrationRegion
-    { _arLocalJurisdiction          :: !(Maybe (Maybe AdministrationRegion))
-    , _arSources                    :: !(Maybe [Maybe Source])
+    { _arLocalJurisdiction          :: !(Maybe AdministrationRegion)
+    , _arSources                    :: !(Maybe [Source])
     , _arName                       :: !(Maybe Text)
-    , _arElectionAdministrationBody :: !(Maybe (Maybe AdministrativeBody))
+    , _arElectionAdministrationBody :: !(Maybe AdministrativeBody)
     , _arId                         :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1901,14 +1901,14 @@ administrationRegion =
 
 -- | The city or county that provides election information for this voter.
 -- This object can have the same elements as state.
-arLocalJurisdiction :: Lens' AdministrationRegion (Maybe (Maybe AdministrationRegion))
+arLocalJurisdiction :: Lens' AdministrationRegion (Maybe AdministrationRegion)
 arLocalJurisdiction
   = lens _arLocalJurisdiction
       (\ s a -> s{_arLocalJurisdiction = a})
 
 -- | A list of sources for this area. If multiple sources are listed the data
 -- has been aggregated from those sources.
-arSources :: Lens' AdministrationRegion [Maybe Source]
+arSources :: Lens' AdministrationRegion [Source]
 arSources
   = lens _arSources (\ s a -> s{_arSources = a}) .
       _Default
@@ -1919,7 +1919,7 @@ arName :: Lens' AdministrationRegion (Maybe Text)
 arName = lens _arName (\ s a -> s{_arName = a})
 
 -- | The election administration body for this area.
-arElectionAdministrationBody :: Lens' AdministrationRegion (Maybe (Maybe AdministrativeBody))
+arElectionAdministrationBody :: Lens' AdministrationRegion (Maybe AdministrativeBody)
 arElectionAdministrationBody
   = lens _arElectionAdministrationBody
       (\ s a -> s{_arElectionAdministrationBody = a})
@@ -1957,7 +1957,7 @@ instance ToJSON AdministrationRegion where
 -- /See:/ 'electionsQueryResponse' smart constructor.
 data ElectionsQueryResponse = ElectionsQueryResponse
     { _eqrKind      :: !Text
-    , _eqrElections :: !(Maybe [Maybe Election])
+    , _eqrElections :: !(Maybe [Election])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ElectionsQueryResponse' with the minimum fields required to make a request.
@@ -1981,7 +1981,7 @@ eqrKind :: Lens' ElectionsQueryResponse Text
 eqrKind = lens _eqrKind (\ s a -> s{_eqrKind = a})
 
 -- | A list of available elections
-eqrElections :: Lens' ElectionsQueryResponse [Maybe Election]
+eqrElections :: Lens' ElectionsQueryResponse [Election]
 eqrElections
   = lens _eqrElections (\ s a -> s{_eqrElections = a})
       . _Default
@@ -2006,10 +2006,10 @@ instance ToJSON ElectionsQueryResponse where
 --
 -- /See:/ 'official' smart constructor.
 data Official = Official
-    { _offPhotoUrl :: !(Maybe Text)
-    , _offUrls     :: !(Maybe [Text])
-    , _offChannels :: !(Maybe [Maybe Channel])
-    , _offAddress  :: !(Maybe [Maybe SimpleAddressType])
+    { _offPhotoURL :: !(Maybe Text)
+    , _offURLs     :: !(Maybe [Text])
+    , _offChannels :: !(Maybe [Channel])
+    , _offAddress  :: !(Maybe [SimpleAddressType])
     , _offPhones   :: !(Maybe [Text])
     , _offName     :: !(Maybe Text)
     , _offEmails   :: !(Maybe [Text])
@@ -2020,9 +2020,9 @@ data Official = Official
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'offPhotoUrl'
+-- * 'offPhotoURL'
 --
--- * 'offUrls'
+-- * 'offURLs'
 --
 -- * 'offChannels'
 --
@@ -2039,8 +2039,8 @@ official
     :: Official
 official =
     Official
-    { _offPhotoUrl = Nothing
-    , _offUrls = Nothing
+    { _offPhotoURL = Nothing
+    , _offURLs = Nothing
     , _offChannels = Nothing
     , _offAddress = Nothing
     , _offPhones = Nothing
@@ -2050,25 +2050,25 @@ official =
     }
 
 -- | A URL for a photo of the official.
-offPhotoUrl :: Lens' Official (Maybe Text)
-offPhotoUrl
-  = lens _offPhotoUrl (\ s a -> s{_offPhotoUrl = a})
+offPhotoURL :: Lens' Official (Maybe Text)
+offPhotoURL
+  = lens _offPhotoURL (\ s a -> s{_offPhotoURL = a})
 
 -- | The official\'s public website URLs.
-offUrls :: Lens' Official [Text]
-offUrls
-  = lens _offUrls (\ s a -> s{_offUrls = a}) . _Default
+offURLs :: Lens' Official [Text]
+offURLs
+  = lens _offURLs (\ s a -> s{_offURLs = a}) . _Default
       . _Coerce
 
 -- | A list of known (social) media channels for this official.
-offChannels :: Lens' Official [Maybe Channel]
+offChannels :: Lens' Official [Channel]
 offChannels
   = lens _offChannels (\ s a -> s{_offChannels = a}) .
       _Default
       . _Coerce
 
 -- | Addresses at which to contact the official.
-offAddress :: Lens' Official [Maybe SimpleAddressType]
+offAddress :: Lens' Official [SimpleAddressType]
 offAddress
   = lens _offAddress (\ s a -> s{_offAddress = a}) .
       _Default
@@ -2113,8 +2113,8 @@ instance ToJSON Official where
         toJSON Official{..}
           = object
               (catMaybes
-                 [("photoUrl" .=) <$> _offPhotoUrl,
-                  ("urls" .=) <$> _offUrls,
+                 [("photoUrl" .=) <$> _offPhotoURL,
+                  ("urls" .=) <$> _offURLs,
                   ("channels" .=) <$> _offChannels,
                   ("address" .=) <$> _offAddress,
                   ("phones" .=) <$> _offPhones,

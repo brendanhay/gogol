@@ -32,14 +32,13 @@ module Network.Google.Resource.Blogger.Comments.Delete
     -- * Request Lenses
     , cdQuotaUser
     , cdPrettyPrint
-    , cdUserIp
+    , cdUserIP
     , cdBlogId
     , cdKey
     , cdPostId
-    , cdOauthToken
+    , cdOAuthToken
     , cdCommentId
     , cdFields
-    , cdAlt
     ) where
 
 import           Network.Google.Blogger.Types
@@ -57,10 +56,10 @@ type CommentsDeleteResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Delete '[JSON] ()
+                             QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete a comment by ID.
 --
@@ -68,14 +67,13 @@ type CommentsDeleteResource =
 data CommentsDelete' = CommentsDelete'
     { _cdQuotaUser   :: !(Maybe Text)
     , _cdPrettyPrint :: !Bool
-    , _cdUserIp      :: !(Maybe Text)
+    , _cdUserIP      :: !(Maybe Text)
     , _cdBlogId      :: !Text
-    , _cdKey         :: !(Maybe Text)
+    , _cdKey         :: !(Maybe Key)
     , _cdPostId      :: !Text
-    , _cdOauthToken  :: !(Maybe Text)
+    , _cdOAuthToken  :: !(Maybe OAuthToken)
     , _cdCommentId   :: !Text
     , _cdFields      :: !(Maybe Text)
-    , _cdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsDelete'' with the minimum fields required to make a request.
@@ -86,7 +84,7 @@ data CommentsDelete' = CommentsDelete'
 --
 -- * 'cdPrettyPrint'
 --
--- * 'cdUserIp'
+-- * 'cdUserIP'
 --
 -- * 'cdBlogId'
 --
@@ -94,13 +92,11 @@ data CommentsDelete' = CommentsDelete'
 --
 -- * 'cdPostId'
 --
--- * 'cdOauthToken'
+-- * 'cdOAuthToken'
 --
 -- * 'cdCommentId'
 --
 -- * 'cdFields'
---
--- * 'cdAlt'
 commentsDelete'
     :: Text -- ^ 'blogId'
     -> Text -- ^ 'postId'
@@ -110,14 +106,13 @@ commentsDelete' pCdBlogId_ pCdPostId_ pCdCommentId_ =
     CommentsDelete'
     { _cdQuotaUser = Nothing
     , _cdPrettyPrint = True
-    , _cdUserIp = Nothing
+    , _cdUserIP = Nothing
     , _cdBlogId = pCdBlogId_
     , _cdKey = Nothing
     , _cdPostId = pCdPostId_
-    , _cdOauthToken = Nothing
+    , _cdOAuthToken = Nothing
     , _cdCommentId = pCdCommentId_
     , _cdFields = Nothing
-    , _cdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,8 +130,8 @@ cdPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cdUserIp :: Lens' CommentsDelete' (Maybe Text)
-cdUserIp = lens _cdUserIp (\ s a -> s{_cdUserIp = a})
+cdUserIP :: Lens' CommentsDelete' (Maybe Text)
+cdUserIP = lens _cdUserIP (\ s a -> s{_cdUserIP = a})
 
 -- | The ID of the Blog.
 cdBlogId :: Lens' CommentsDelete' Text
@@ -145,7 +140,7 @@ cdBlogId = lens _cdBlogId (\ s a -> s{_cdBlogId = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cdKey :: Lens' CommentsDelete' (Maybe Text)
+cdKey :: Lens' CommentsDelete' (Maybe Key)
 cdKey = lens _cdKey (\ s a -> s{_cdKey = a})
 
 -- | The ID of the Post.
@@ -153,9 +148,9 @@ cdPostId :: Lens' CommentsDelete' Text
 cdPostId = lens _cdPostId (\ s a -> s{_cdPostId = a})
 
 -- | OAuth 2.0 token for the current user.
-cdOauthToken :: Lens' CommentsDelete' (Maybe Text)
-cdOauthToken
-  = lens _cdOauthToken (\ s a -> s{_cdOauthToken = a})
+cdOAuthToken :: Lens' CommentsDelete' (Maybe OAuthToken)
+cdOAuthToken
+  = lens _cdOAuthToken (\ s a -> s{_cdOAuthToken = a})
 
 -- | The ID of the comment to delete.
 cdCommentId :: Lens' CommentsDelete' Text
@@ -166,22 +161,22 @@ cdCommentId
 cdFields :: Lens' CommentsDelete' (Maybe Text)
 cdFields = lens _cdFields (\ s a -> s{_cdFields = a})
 
--- | Data format for the response.
-cdAlt :: Lens' CommentsDelete' Alt
-cdAlt = lens _cdAlt (\ s a -> s{_cdAlt = a})
+instance GoogleAuth CommentsDelete' where
+        authKey = cdKey . _Just
+        authToken = cdOAuthToken . _Just
 
 instance GoogleRequest CommentsDelete' where
         type Rs CommentsDelete' = ()
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u CommentsDelete'{..}
-          = go _cdQuotaUser (Just _cdPrettyPrint) _cdUserIp
+          = go _cdQuotaUser (Just _cdPrettyPrint) _cdUserIP
               _cdBlogId
               _cdKey
               _cdPostId
-              _cdOauthToken
+              _cdOAuthToken
               _cdCommentId
               _cdFields
-              (Just _cdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CommentsDeleteResource)

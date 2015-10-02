@@ -105,7 +105,7 @@ module Network.Google.GamesManagement.Types
     , Player
     , player
     , pLastPlayedWith
-    , pAvatarImageUrl
+    , pAvatarImageURL
     , pKind
     , pExperienceInfo
     , pName
@@ -120,9 +120,6 @@ module Network.Google.GamesManagement.Types
     , arrKind
     , arrCurrentState
     , arrDefinitionId
-
-    -- * Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.GamesManagement.Types.Product

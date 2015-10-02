@@ -44,10 +44,9 @@ module Network.Google.Resource.PubSub.Projects.Topics.Delete
     , ptdTopic
     , ptdBearerToken
     , ptdKey
-    , ptdOauthToken
+    , ptdOAuthToken
     , ptdFields
     , ptdCallback
-    , ptdAlt
     ) where
 
 import           Network.Google.Prelude
@@ -66,11 +65,12 @@ type ProjectsTopicsDeleteResource =
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
                        QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
                                QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :> Delete '[JSON] Empty
+                                 QueryParam "alt" AltJSON :>
+                                   Delete '[JSON] Empty
 
 -- | Deletes the topic with the given name. Returns NOT_FOUND if the topic
 -- does not exist. After a topic is deleted, a new topic may be created
@@ -89,11 +89,10 @@ data ProjectsTopicsDelete' = ProjectsTopicsDelete'
     , _ptdUploadType     :: !(Maybe Text)
     , _ptdTopic          :: !Text
     , _ptdBearerToken    :: !(Maybe Text)
-    , _ptdKey            :: !(Maybe Text)
-    , _ptdOauthToken     :: !(Maybe Text)
+    , _ptdKey            :: !(Maybe Key)
+    , _ptdOAuthToken     :: !(Maybe OAuthToken)
     , _ptdFields         :: !(Maybe Text)
     , _ptdCallback       :: !(Maybe Text)
-    , _ptdAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsTopicsDelete'' with the minimum fields required to make a request.
@@ -120,13 +119,11 @@ data ProjectsTopicsDelete' = ProjectsTopicsDelete'
 --
 -- * 'ptdKey'
 --
--- * 'ptdOauthToken'
+-- * 'ptdOAuthToken'
 --
 -- * 'ptdFields'
 --
 -- * 'ptdCallback'
---
--- * 'ptdAlt'
 projectsTopicsDelete'
     :: Text -- ^ 'topic'
     -> ProjectsTopicsDelete'
@@ -142,10 +139,9 @@ projectsTopicsDelete' pPtdTopic_ =
     , _ptdTopic = pPtdTopic_
     , _ptdBearerToken = Nothing
     , _ptdKey = Nothing
-    , _ptdOauthToken = Nothing
+    , _ptdOAuthToken = Nothing
     , _ptdFields = Nothing
     , _ptdCallback = Nothing
-    , _ptdAlt = "json"
     }
 
 -- | V1 error format.
@@ -200,14 +196,14 @@ ptdBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ptdKey :: Lens' ProjectsTopicsDelete' (Maybe Text)
+ptdKey :: Lens' ProjectsTopicsDelete' (Maybe Key)
 ptdKey = lens _ptdKey (\ s a -> s{_ptdKey = a})
 
 -- | OAuth 2.0 token for the current user.
-ptdOauthToken :: Lens' ProjectsTopicsDelete' (Maybe Text)
-ptdOauthToken
-  = lens _ptdOauthToken
-      (\ s a -> s{_ptdOauthToken = a})
+ptdOAuthToken :: Lens' ProjectsTopicsDelete' (Maybe OAuthToken)
+ptdOAuthToken
+  = lens _ptdOAuthToken
+      (\ s a -> s{_ptdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ptdFields :: Lens' ProjectsTopicsDelete' (Maybe Text)
@@ -219,9 +215,9 @@ ptdCallback :: Lens' ProjectsTopicsDelete' (Maybe Text)
 ptdCallback
   = lens _ptdCallback (\ s a -> s{_ptdCallback = a})
 
--- | Data format for response.
-ptdAlt :: Lens' ProjectsTopicsDelete' Text
-ptdAlt = lens _ptdAlt (\ s a -> s{_ptdAlt = a})
+instance GoogleAuth ProjectsTopicsDelete' where
+        authKey = ptdKey . _Just
+        authToken = ptdOAuthToken . _Just
 
 instance GoogleRequest ProjectsTopicsDelete' where
         type Rs ProjectsTopicsDelete' = Empty
@@ -235,10 +231,10 @@ instance GoogleRequest ProjectsTopicsDelete' where
               _ptdTopic
               _ptdBearerToken
               _ptdKey
-              _ptdOauthToken
+              _ptdOAuthToken
               _ptdFields
               _ptdCallback
-              (Just _ptdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsTopicsDeleteResource)

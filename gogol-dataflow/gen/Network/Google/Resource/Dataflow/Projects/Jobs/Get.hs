@@ -42,10 +42,9 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.Get
     , pjgKey
     , pjgView
     , pjgProjectId
-    , pjgOauthToken
+    , pjgOAuthToken
     , pjgFields
     , pjgCallback
-    , pjgAlt
     ) where
 
 import           Network.Google.Dataflow.Types
@@ -67,12 +66,12 @@ type ProjectsJobsGetResource =
                          QueryParam "access_token" Text :>
                            QueryParam "uploadType" Text :>
                              QueryParam "bearer_token" Text :>
-                               QueryParam "key" Text :>
+                               QueryParam "key" Key :>
                                  QueryParam "view" Text :>
-                                   QueryParam "oauth_token" Text :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "fields" Text :>
                                        QueryParam "callback" Text :>
-                                         QueryParam "alt" Text :>
+                                         QueryParam "alt" AltJSON :>
                                            Get '[JSON] Job
 
 -- | Gets the state of the specified dataflow job.
@@ -88,13 +87,12 @@ data ProjectsJobsGet' = ProjectsJobsGet'
     , _pjgAccessToken    :: !(Maybe Text)
     , _pjgUploadType     :: !(Maybe Text)
     , _pjgBearerToken    :: !(Maybe Text)
-    , _pjgKey            :: !(Maybe Text)
+    , _pjgKey            :: !(Maybe Key)
     , _pjgView           :: !(Maybe Text)
     , _pjgProjectId      :: !Text
-    , _pjgOauthToken     :: !(Maybe Text)
+    , _pjgOAuthToken     :: !(Maybe OAuthToken)
     , _pjgFields         :: !(Maybe Text)
     , _pjgCallback       :: !(Maybe Text)
-    , _pjgAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsJobsGet'' with the minimum fields required to make a request.
@@ -125,13 +123,11 @@ data ProjectsJobsGet' = ProjectsJobsGet'
 --
 -- * 'pjgProjectId'
 --
--- * 'pjgOauthToken'
+-- * 'pjgOAuthToken'
 --
 -- * 'pjgFields'
 --
 -- * 'pjgCallback'
---
--- * 'pjgAlt'
 projectsJobsGet'
     :: Text -- ^ 'jobId'
     -> Text -- ^ 'projectId'
@@ -150,10 +146,9 @@ projectsJobsGet' pPjgJobId_ pPjgProjectId_ =
     , _pjgKey = Nothing
     , _pjgView = Nothing
     , _pjgProjectId = pPjgProjectId_
-    , _pjgOauthToken = Nothing
+    , _pjgOAuthToken = Nothing
     , _pjgFields = Nothing
     , _pjgCallback = Nothing
-    , _pjgAlt = "json"
     }
 
 -- | V1 error format.
@@ -208,7 +203,7 @@ pjgBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pjgKey :: Lens' ProjectsJobsGet' (Maybe Text)
+pjgKey :: Lens' ProjectsJobsGet' (Maybe Key)
 pjgKey = lens _pjgKey (\ s a -> s{_pjgKey = a})
 
 -- | Level of information requested in response.
@@ -221,10 +216,10 @@ pjgProjectId
   = lens _pjgProjectId (\ s a -> s{_pjgProjectId = a})
 
 -- | OAuth 2.0 token for the current user.
-pjgOauthToken :: Lens' ProjectsJobsGet' (Maybe Text)
-pjgOauthToken
-  = lens _pjgOauthToken
-      (\ s a -> s{_pjgOauthToken = a})
+pjgOAuthToken :: Lens' ProjectsJobsGet' (Maybe OAuthToken)
+pjgOAuthToken
+  = lens _pjgOAuthToken
+      (\ s a -> s{_pjgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 pjgFields :: Lens' ProjectsJobsGet' (Maybe Text)
@@ -236,9 +231,9 @@ pjgCallback :: Lens' ProjectsJobsGet' (Maybe Text)
 pjgCallback
   = lens _pjgCallback (\ s a -> s{_pjgCallback = a})
 
--- | Data format for response.
-pjgAlt :: Lens' ProjectsJobsGet' Text
-pjgAlt = lens _pjgAlt (\ s a -> s{_pjgAlt = a})
+instance GoogleAuth ProjectsJobsGet' where
+        authKey = pjgKey . _Just
+        authToken = pjgOAuthToken . _Just
 
 instance GoogleRequest ProjectsJobsGet' where
         type Rs ProjectsJobsGet' = Job
@@ -254,10 +249,10 @@ instance GoogleRequest ProjectsJobsGet' where
               _pjgKey
               _pjgView
               _pjgProjectId
-              _pjgOauthToken
+              _pjgOAuthToken
               _pjgFields
               _pjgCallback
-              (Just _pjgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsJobsGetResource)

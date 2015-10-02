@@ -33,13 +33,13 @@ module Network.Google.Resource.DFAReporting.PlacementGroups.Patch
     -- * Request Lenses
     , pgpQuotaUser
     , pgpPrettyPrint
-    , pgpUserIp
+    , pgpUserIP
     , pgpProfileId
     , pgpKey
     , pgpId
-    , pgpOauthToken
+    , pgpOAuthToken
+    , pgpPlacementGroup
     , pgpFields
-    , pgpAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,26 +54,28 @@ type PlacementGroupsPatchResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "id" Int64 :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Patch '[JSON] PlacementGroup
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] PlacementGroup :>
+                             Patch '[JSON] PlacementGroup
 
 -- | Updates an existing placement group. This method supports patch
 -- semantics.
 --
 -- /See:/ 'placementGroupsPatch'' smart constructor.
 data PlacementGroupsPatch' = PlacementGroupsPatch'
-    { _pgpQuotaUser   :: !(Maybe Text)
-    , _pgpPrettyPrint :: !Bool
-    , _pgpUserIp      :: !(Maybe Text)
-    , _pgpProfileId   :: !Int64
-    , _pgpKey         :: !(Maybe Text)
-    , _pgpId          :: !Int64
-    , _pgpOauthToken  :: !(Maybe Text)
-    , _pgpFields      :: !(Maybe Text)
-    , _pgpAlt         :: !Alt
+    { _pgpQuotaUser      :: !(Maybe Text)
+    , _pgpPrettyPrint    :: !Bool
+    , _pgpUserIP         :: !(Maybe Text)
+    , _pgpProfileId      :: !Int64
+    , _pgpKey            :: !(Maybe Key)
+    , _pgpId             :: !Int64
+    , _pgpOAuthToken     :: !(Maybe OAuthToken)
+    , _pgpPlacementGroup :: !PlacementGroup
+    , _pgpFields         :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementGroupsPatch'' with the minimum fields required to make a request.
@@ -84,7 +86,7 @@ data PlacementGroupsPatch' = PlacementGroupsPatch'
 --
 -- * 'pgpPrettyPrint'
 --
--- * 'pgpUserIp'
+-- * 'pgpUserIP'
 --
 -- * 'pgpProfileId'
 --
@@ -92,26 +94,27 @@ data PlacementGroupsPatch' = PlacementGroupsPatch'
 --
 -- * 'pgpId'
 --
--- * 'pgpOauthToken'
+-- * 'pgpOAuthToken'
+--
+-- * 'pgpPlacementGroup'
 --
 -- * 'pgpFields'
---
--- * 'pgpAlt'
 placementGroupsPatch'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
+    -> PlacementGroup -- ^ 'PlacementGroup'
     -> PlacementGroupsPatch'
-placementGroupsPatch' pPgpProfileId_ pPgpId_ =
+placementGroupsPatch' pPgpProfileId_ pPgpId_ pPgpPlacementGroup_ =
     PlacementGroupsPatch'
     { _pgpQuotaUser = Nothing
     , _pgpPrettyPrint = True
-    , _pgpUserIp = Nothing
+    , _pgpUserIP = Nothing
     , _pgpProfileId = pPgpProfileId_
     , _pgpKey = Nothing
     , _pgpId = pPgpId_
-    , _pgpOauthToken = Nothing
+    , _pgpOAuthToken = Nothing
+    , _pgpPlacementGroup = pPgpPlacementGroup_
     , _pgpFields = Nothing
-    , _pgpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -129,9 +132,9 @@ pgpPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-pgpUserIp :: Lens' PlacementGroupsPatch' (Maybe Text)
-pgpUserIp
-  = lens _pgpUserIp (\ s a -> s{_pgpUserIp = a})
+pgpUserIP :: Lens' PlacementGroupsPatch' (Maybe Text)
+pgpUserIP
+  = lens _pgpUserIP (\ s a -> s{_pgpUserIP = a})
 
 -- | User profile ID associated with this request.
 pgpProfileId :: Lens' PlacementGroupsPatch' Int64
@@ -141,7 +144,7 @@ pgpProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pgpKey :: Lens' PlacementGroupsPatch' (Maybe Text)
+pgpKey :: Lens' PlacementGroupsPatch' (Maybe Key)
 pgpKey = lens _pgpKey (\ s a -> s{_pgpKey = a})
 
 -- | Placement group ID.
@@ -149,31 +152,38 @@ pgpId :: Lens' PlacementGroupsPatch' Int64
 pgpId = lens _pgpId (\ s a -> s{_pgpId = a})
 
 -- | OAuth 2.0 token for the current user.
-pgpOauthToken :: Lens' PlacementGroupsPatch' (Maybe Text)
-pgpOauthToken
-  = lens _pgpOauthToken
-      (\ s a -> s{_pgpOauthToken = a})
+pgpOAuthToken :: Lens' PlacementGroupsPatch' (Maybe OAuthToken)
+pgpOAuthToken
+  = lens _pgpOAuthToken
+      (\ s a -> s{_pgpOAuthToken = a})
+
+-- | Multipart request metadata.
+pgpPlacementGroup :: Lens' PlacementGroupsPatch' PlacementGroup
+pgpPlacementGroup
+  = lens _pgpPlacementGroup
+      (\ s a -> s{_pgpPlacementGroup = a})
 
 -- | Selector specifying which fields to include in a partial response.
 pgpFields :: Lens' PlacementGroupsPatch' (Maybe Text)
 pgpFields
   = lens _pgpFields (\ s a -> s{_pgpFields = a})
 
--- | Data format for the response.
-pgpAlt :: Lens' PlacementGroupsPatch' Alt
-pgpAlt = lens _pgpAlt (\ s a -> s{_pgpAlt = a})
+instance GoogleAuth PlacementGroupsPatch' where
+        authKey = pgpKey . _Just
+        authToken = pgpOAuthToken . _Just
 
 instance GoogleRequest PlacementGroupsPatch' where
         type Rs PlacementGroupsPatch' = PlacementGroup
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlacementGroupsPatch'{..}
-          = go _pgpQuotaUser (Just _pgpPrettyPrint) _pgpUserIp
+          = go _pgpQuotaUser (Just _pgpPrettyPrint) _pgpUserIP
               _pgpProfileId
               _pgpKey
               (Just _pgpId)
-              _pgpOauthToken
+              _pgpOAuthToken
               _pgpFields
-              (Just _pgpAlt)
+              (Just AltJSON)
+              _pgpPlacementGroup
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PlacementGroupsPatchResource)

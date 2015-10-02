@@ -34,11 +34,10 @@ module Network.Google.Resource.GamesManagement.Events.ResetAll
     -- * Request Lenses
     , eraQuotaUser
     , eraPrettyPrint
-    , eraUserIp
+    , eraUserIP
     , eraKey
-    , eraOauthToken
+    , eraOAuthToken
     , eraFields
-    , eraAlt
     ) where
 
 import           Network.Google.GamesManagement.Types
@@ -52,10 +51,10 @@ type EventsResetAllResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Post '[JSON] ()
+                     QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Resets all player progress on all events for the currently authenticated
 -- player. This method is only accessible to whitelisted tester accounts
@@ -65,11 +64,10 @@ type EventsResetAllResource =
 data EventsResetAll' = EventsResetAll'
     { _eraQuotaUser   :: !(Maybe Text)
     , _eraPrettyPrint :: !Bool
-    , _eraUserIp      :: !(Maybe Text)
-    , _eraKey         :: !(Maybe Text)
-    , _eraOauthToken  :: !(Maybe Text)
+    , _eraUserIP      :: !(Maybe Text)
+    , _eraKey         :: !(Maybe Key)
+    , _eraOAuthToken  :: !(Maybe OAuthToken)
     , _eraFields      :: !(Maybe Text)
-    , _eraAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsResetAll'' with the minimum fields required to make a request.
@@ -80,26 +78,23 @@ data EventsResetAll' = EventsResetAll'
 --
 -- * 'eraPrettyPrint'
 --
--- * 'eraUserIp'
+-- * 'eraUserIP'
 --
 -- * 'eraKey'
 --
--- * 'eraOauthToken'
+-- * 'eraOAuthToken'
 --
 -- * 'eraFields'
---
--- * 'eraAlt'
 eventsResetAll'
     :: EventsResetAll'
 eventsResetAll' =
     EventsResetAll'
     { _eraQuotaUser = Nothing
     , _eraPrettyPrint = True
-    , _eraUserIp = Nothing
+    , _eraUserIP = Nothing
     , _eraKey = Nothing
-    , _eraOauthToken = Nothing
+    , _eraOAuthToken = Nothing
     , _eraFields = Nothing
-    , _eraAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -117,40 +112,40 @@ eraPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-eraUserIp :: Lens' EventsResetAll' (Maybe Text)
-eraUserIp
-  = lens _eraUserIp (\ s a -> s{_eraUserIp = a})
+eraUserIP :: Lens' EventsResetAll' (Maybe Text)
+eraUserIP
+  = lens _eraUserIP (\ s a -> s{_eraUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-eraKey :: Lens' EventsResetAll' (Maybe Text)
+eraKey :: Lens' EventsResetAll' (Maybe Key)
 eraKey = lens _eraKey (\ s a -> s{_eraKey = a})
 
 -- | OAuth 2.0 token for the current user.
-eraOauthToken :: Lens' EventsResetAll' (Maybe Text)
-eraOauthToken
-  = lens _eraOauthToken
-      (\ s a -> s{_eraOauthToken = a})
+eraOAuthToken :: Lens' EventsResetAll' (Maybe OAuthToken)
+eraOAuthToken
+  = lens _eraOAuthToken
+      (\ s a -> s{_eraOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 eraFields :: Lens' EventsResetAll' (Maybe Text)
 eraFields
   = lens _eraFields (\ s a -> s{_eraFields = a})
 
--- | Data format for the response.
-eraAlt :: Lens' EventsResetAll' Alt
-eraAlt = lens _eraAlt (\ s a -> s{_eraAlt = a})
+instance GoogleAuth EventsResetAll' where
+        authKey = eraKey . _Just
+        authToken = eraOAuthToken . _Just
 
 instance GoogleRequest EventsResetAll' where
         type Rs EventsResetAll' = ()
         request = requestWithRoute defReq gamesManagementURL
         requestWithRoute r u EventsResetAll'{..}
-          = go _eraQuotaUser (Just _eraPrettyPrint) _eraUserIp
+          = go _eraQuotaUser (Just _eraPrettyPrint) _eraUserIP
               _eraKey
-              _eraOauthToken
+              _eraOAuthToken
               _eraFields
-              (Just _eraAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy EventsResetAllResource)

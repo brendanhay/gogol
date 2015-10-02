@@ -41,10 +41,9 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.GetIAMPolicy
     , psgipBearerToken
     , psgipKey
     , psgipResource
-    , psgipOauthToken
+    , psgipOAuthToken
     , psgipFields
     , psgipCallback
-    , psgipAlt
     ) where
 
 import           Network.Google.Prelude
@@ -63,11 +62,11 @@ type ProjectsSubscriptionsGetIAMPolicyResource =
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
                        QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
                                QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :> Get '[JSON] Policy
+                                 QueryParam "alt" AltJSON :> Get '[JSON] Policy
 
 -- | Gets the access control policy for a resource. Is empty if the policy or
 -- the resource does not exist.
@@ -82,12 +81,11 @@ data ProjectsSubscriptionsGetIAMPolicy' = ProjectsSubscriptionsGetIAMPolicy'
     , _psgipAccessToken    :: !(Maybe Text)
     , _psgipUploadType     :: !(Maybe Text)
     , _psgipBearerToken    :: !(Maybe Text)
-    , _psgipKey            :: !(Maybe Text)
+    , _psgipKey            :: !(Maybe Key)
     , _psgipResource       :: !Text
-    , _psgipOauthToken     :: !(Maybe Text)
+    , _psgipOAuthToken     :: !(Maybe OAuthToken)
     , _psgipFields         :: !(Maybe Text)
     , _psgipCallback       :: !(Maybe Text)
-    , _psgipAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsSubscriptionsGetIAMPolicy'' with the minimum fields required to make a request.
@@ -114,13 +112,11 @@ data ProjectsSubscriptionsGetIAMPolicy' = ProjectsSubscriptionsGetIAMPolicy'
 --
 -- * 'psgipResource'
 --
--- * 'psgipOauthToken'
+-- * 'psgipOAuthToken'
 --
 -- * 'psgipFields'
 --
 -- * 'psgipCallback'
---
--- * 'psgipAlt'
 projectsSubscriptionsGetIAMPolicy'
     :: Text -- ^ 'resource'
     -> ProjectsSubscriptionsGetIAMPolicy'
@@ -136,10 +132,9 @@ projectsSubscriptionsGetIAMPolicy' pPsgipResource_ =
     , _psgipBearerToken = Nothing
     , _psgipKey = Nothing
     , _psgipResource = pPsgipResource_
-    , _psgipOauthToken = Nothing
+    , _psgipOAuthToken = Nothing
     , _psgipFields = Nothing
     , _psgipCallback = Nothing
-    , _psgipAlt = "json"
     }
 
 -- | V1 error format.
@@ -192,7 +187,7 @@ psgipBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-psgipKey :: Lens' ProjectsSubscriptionsGetIAMPolicy' (Maybe Text)
+psgipKey :: Lens' ProjectsSubscriptionsGetIAMPolicy' (Maybe Key)
 psgipKey = lens _psgipKey (\ s a -> s{_psgipKey = a})
 
 -- | REQUIRED: The resource for which policy is being requested. Resource is
@@ -203,10 +198,10 @@ psgipResource
       (\ s a -> s{_psgipResource = a})
 
 -- | OAuth 2.0 token for the current user.
-psgipOauthToken :: Lens' ProjectsSubscriptionsGetIAMPolicy' (Maybe Text)
-psgipOauthToken
-  = lens _psgipOauthToken
-      (\ s a -> s{_psgipOauthToken = a})
+psgipOAuthToken :: Lens' ProjectsSubscriptionsGetIAMPolicy' (Maybe OAuthToken)
+psgipOAuthToken
+  = lens _psgipOAuthToken
+      (\ s a -> s{_psgipOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 psgipFields :: Lens' ProjectsSubscriptionsGetIAMPolicy' (Maybe Text)
@@ -219,9 +214,10 @@ psgipCallback
   = lens _psgipCallback
       (\ s a -> s{_psgipCallback = a})
 
--- | Data format for response.
-psgipAlt :: Lens' ProjectsSubscriptionsGetIAMPolicy' Text
-psgipAlt = lens _psgipAlt (\ s a -> s{_psgipAlt = a})
+instance GoogleAuth
+         ProjectsSubscriptionsGetIAMPolicy' where
+        authKey = psgipKey . _Just
+        authToken = psgipOAuthToken . _Just
 
 instance GoogleRequest
          ProjectsSubscriptionsGetIAMPolicy' where
@@ -238,10 +234,10 @@ instance GoogleRequest
               _psgipBearerToken
               _psgipKey
               _psgipResource
-              _psgipOauthToken
+              _psgipOAuthToken
               _psgipFields
               _psgipCallback
-              (Just _psgipAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

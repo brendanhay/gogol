@@ -32,13 +32,12 @@ module Network.Google.Resource.DFAReporting.Advertisers.Get
     -- * Request Lenses
     , agQuotaUser
     , agPrettyPrint
-    , agUserIp
+    , agUserIP
     , agProfileId
     , agKey
     , agId
-    , agOauthToken
+    , agOAuthToken
     , agFields
-    , agAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,10 +53,10 @@ type AdvertisersGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] Advertiser
+                         QueryParam "alt" AltJSON :> Get '[JSON] Advertiser
 
 -- | Gets one advertiser by ID.
 --
@@ -65,13 +64,12 @@ type AdvertisersGetResource =
 data AdvertisersGet' = AdvertisersGet'
     { _agQuotaUser   :: !(Maybe Text)
     , _agPrettyPrint :: !Bool
-    , _agUserIp      :: !(Maybe Text)
+    , _agUserIP      :: !(Maybe Text)
     , _agProfileId   :: !Int64
-    , _agKey         :: !(Maybe Text)
+    , _agKey         :: !(Maybe Key)
     , _agId          :: !Int64
-    , _agOauthToken  :: !(Maybe Text)
+    , _agOAuthToken  :: !(Maybe OAuthToken)
     , _agFields      :: !(Maybe Text)
-    , _agAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertisersGet'' with the minimum fields required to make a request.
@@ -82,7 +80,7 @@ data AdvertisersGet' = AdvertisersGet'
 --
 -- * 'agPrettyPrint'
 --
--- * 'agUserIp'
+-- * 'agUserIP'
 --
 -- * 'agProfileId'
 --
@@ -90,11 +88,9 @@ data AdvertisersGet' = AdvertisersGet'
 --
 -- * 'agId'
 --
--- * 'agOauthToken'
+-- * 'agOAuthToken'
 --
 -- * 'agFields'
---
--- * 'agAlt'
 advertisersGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
@@ -103,13 +99,12 @@ advertisersGet' pAgProfileId_ pAgId_ =
     AdvertisersGet'
     { _agQuotaUser = Nothing
     , _agPrettyPrint = True
-    , _agUserIp = Nothing
+    , _agUserIP = Nothing
     , _agProfileId = pAgProfileId_
     , _agKey = Nothing
     , _agId = pAgId_
-    , _agOauthToken = Nothing
+    , _agOAuthToken = Nothing
     , _agFields = Nothing
-    , _agAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,8 +122,8 @@ agPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-agUserIp :: Lens' AdvertisersGet' (Maybe Text)
-agUserIp = lens _agUserIp (\ s a -> s{_agUserIp = a})
+agUserIP :: Lens' AdvertisersGet' (Maybe Text)
+agUserIP = lens _agUserIP (\ s a -> s{_agUserIP = a})
 
 -- | User profile ID associated with this request.
 agProfileId :: Lens' AdvertisersGet' Int64
@@ -138,7 +133,7 @@ agProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-agKey :: Lens' AdvertisersGet' (Maybe Text)
+agKey :: Lens' AdvertisersGet' (Maybe Key)
 agKey = lens _agKey (\ s a -> s{_agKey = a})
 
 -- | Advertiser ID.
@@ -146,29 +141,29 @@ agId :: Lens' AdvertisersGet' Int64
 agId = lens _agId (\ s a -> s{_agId = a})
 
 -- | OAuth 2.0 token for the current user.
-agOauthToken :: Lens' AdvertisersGet' (Maybe Text)
-agOauthToken
-  = lens _agOauthToken (\ s a -> s{_agOauthToken = a})
+agOAuthToken :: Lens' AdvertisersGet' (Maybe OAuthToken)
+agOAuthToken
+  = lens _agOAuthToken (\ s a -> s{_agOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 agFields :: Lens' AdvertisersGet' (Maybe Text)
 agFields = lens _agFields (\ s a -> s{_agFields = a})
 
--- | Data format for the response.
-agAlt :: Lens' AdvertisersGet' Alt
-agAlt = lens _agAlt (\ s a -> s{_agAlt = a})
+instance GoogleAuth AdvertisersGet' where
+        authKey = agKey . _Just
+        authToken = agOAuthToken . _Just
 
 instance GoogleRequest AdvertisersGet' where
         type Rs AdvertisersGet' = Advertiser
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AdvertisersGet'{..}
-          = go _agQuotaUser (Just _agPrettyPrint) _agUserIp
+          = go _agQuotaUser (Just _agPrettyPrint) _agUserIP
               _agProfileId
               _agKey
               _agId
-              _agOauthToken
+              _agOAuthToken
               _agFields
-              (Just _agAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AdvertisersGetResource)

@@ -32,14 +32,14 @@ module Network.Google.Resource.Mirror.Accounts.Insert
     -- * Request Lenses
     , aiQuotaUser
     , aiPrettyPrint
-    , aiUserIp
+    , aiUserIP
     , aiAccountName
+    , aiAccount
     , aiKey
     , aiUserToken
-    , aiOauthToken
+    , aiOAuthToken
     , aiAccountType
     , aiFields
-    , aiAlt
     ) where
 
 import           Network.Google.Mirror.Types
@@ -55,10 +55,11 @@ type AccountsInsertResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Post '[JSON] Account
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Account :> Post '[JSON] Account
 
 -- | Inserts a new account for a user
 --
@@ -66,14 +67,14 @@ type AccountsInsertResource =
 data AccountsInsert' = AccountsInsert'
     { _aiQuotaUser   :: !(Maybe Text)
     , _aiPrettyPrint :: !Bool
-    , _aiUserIp      :: !(Maybe Text)
+    , _aiUserIP      :: !(Maybe Text)
     , _aiAccountName :: !Text
-    , _aiKey         :: !(Maybe Text)
+    , _aiAccount     :: !Account
+    , _aiKey         :: !(Maybe Key)
     , _aiUserToken   :: !Text
-    , _aiOauthToken  :: !(Maybe Text)
+    , _aiOAuthToken  :: !(Maybe OAuthToken)
     , _aiAccountType :: !Text
     , _aiFields      :: !(Maybe Text)
-    , _aiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsInsert'' with the minimum fields required to make a request.
@@ -84,38 +85,39 @@ data AccountsInsert' = AccountsInsert'
 --
 -- * 'aiPrettyPrint'
 --
--- * 'aiUserIp'
+-- * 'aiUserIP'
 --
 -- * 'aiAccountName'
+--
+-- * 'aiAccount'
 --
 -- * 'aiKey'
 --
 -- * 'aiUserToken'
 --
--- * 'aiOauthToken'
+-- * 'aiOAuthToken'
 --
 -- * 'aiAccountType'
 --
 -- * 'aiFields'
---
--- * 'aiAlt'
 accountsInsert'
     :: Text -- ^ 'accountName'
+    -> Account -- ^ 'Account'
     -> Text -- ^ 'userToken'
     -> Text -- ^ 'accountType'
     -> AccountsInsert'
-accountsInsert' pAiAccountName_ pAiUserToken_ pAiAccountType_ =
+accountsInsert' pAiAccountName_ pAiAccount_ pAiUserToken_ pAiAccountType_ =
     AccountsInsert'
     { _aiQuotaUser = Nothing
     , _aiPrettyPrint = True
-    , _aiUserIp = Nothing
+    , _aiUserIP = Nothing
     , _aiAccountName = pAiAccountName_
+    , _aiAccount = pAiAccount_
     , _aiKey = Nothing
     , _aiUserToken = pAiUserToken_
-    , _aiOauthToken = Nothing
+    , _aiOAuthToken = Nothing
     , _aiAccountType = pAiAccountType_
     , _aiFields = Nothing
-    , _aiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -133,8 +135,8 @@ aiPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-aiUserIp :: Lens' AccountsInsert' (Maybe Text)
-aiUserIp = lens _aiUserIp (\ s a -> s{_aiUserIp = a})
+aiUserIP :: Lens' AccountsInsert' (Maybe Text)
+aiUserIP = lens _aiUserIP (\ s a -> s{_aiUserIP = a})
 
 -- | The name of the account to be passed to the Android Account Manager.
 aiAccountName :: Lens' AccountsInsert' Text
@@ -142,10 +144,15 @@ aiAccountName
   = lens _aiAccountName
       (\ s a -> s{_aiAccountName = a})
 
+-- | Multipart request metadata.
+aiAccount :: Lens' AccountsInsert' Account
+aiAccount
+  = lens _aiAccount (\ s a -> s{_aiAccount = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aiKey :: Lens' AccountsInsert' (Maybe Text)
+aiKey :: Lens' AccountsInsert' (Maybe Key)
 aiKey = lens _aiKey (\ s a -> s{_aiKey = a})
 
 -- | The ID for the user.
@@ -154,9 +161,9 @@ aiUserToken
   = lens _aiUserToken (\ s a -> s{_aiUserToken = a})
 
 -- | OAuth 2.0 token for the current user.
-aiOauthToken :: Lens' AccountsInsert' (Maybe Text)
-aiOauthToken
-  = lens _aiOauthToken (\ s a -> s{_aiOauthToken = a})
+aiOAuthToken :: Lens' AccountsInsert' (Maybe OAuthToken)
+aiOAuthToken
+  = lens _aiOAuthToken (\ s a -> s{_aiOAuthToken = a})
 
 -- | Account type to be passed to Android Account Manager.
 aiAccountType :: Lens' AccountsInsert' Text
@@ -168,22 +175,23 @@ aiAccountType
 aiFields :: Lens' AccountsInsert' (Maybe Text)
 aiFields = lens _aiFields (\ s a -> s{_aiFields = a})
 
--- | Data format for the response.
-aiAlt :: Lens' AccountsInsert' Alt
-aiAlt = lens _aiAlt (\ s a -> s{_aiAlt = a})
+instance GoogleAuth AccountsInsert' where
+        authKey = aiKey . _Just
+        authToken = aiOAuthToken . _Just
 
 instance GoogleRequest AccountsInsert' where
         type Rs AccountsInsert' = Account
         request = requestWithRoute defReq mirrorURL
         requestWithRoute r u AccountsInsert'{..}
-          = go _aiQuotaUser (Just _aiPrettyPrint) _aiUserIp
+          = go _aiQuotaUser (Just _aiPrettyPrint) _aiUserIP
               _aiAccountName
               _aiKey
               _aiUserToken
-              _aiOauthToken
+              _aiOAuthToken
               _aiAccountType
               _aiFields
-              (Just _aiAlt)
+              (Just AltJSON)
+              _aiAccount
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountsInsertResource)

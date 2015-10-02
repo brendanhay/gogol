@@ -32,17 +32,16 @@ module Network.Google.Resource.DFAReporting.Reports.Files.List
     -- * Request Lenses
     , rflQuotaUser
     , rflPrettyPrint
-    , rflUserIp
+    , rflUserIP
     , rflReportId
     , rflProfileId
     , rflSortOrder
     , rflKey
     , rflPageToken
     , rflSortField
-    , rflOauthToken
+    , rflOAuthToken
     , rflMaxResults
     , rflFields
-    , rflAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -62,15 +61,16 @@ type ReportsFilesListResource =
                      QueryParam "sortOrder"
                        DfareportingReportsFilesListSortOrder
                        :>
-                       QueryParam "key" Text :>
+                       QueryParam "key" Key :>
                          QueryParam "pageToken" Text :>
                            QueryParam "sortField"
                              DfareportingReportsFilesListSortField
                              :>
-                             QueryParam "oauth_token" Text :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "maxResults" Int32 :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "alt" Alt :> Get '[JSON] FileList
+                                   QueryParam "alt" AltJSON :>
+                                     Get '[JSON] FileList
 
 -- | Lists files for a report.
 --
@@ -78,17 +78,16 @@ type ReportsFilesListResource =
 data ReportsFilesList' = ReportsFilesList'
     { _rflQuotaUser   :: !(Maybe Text)
     , _rflPrettyPrint :: !Bool
-    , _rflUserIp      :: !(Maybe Text)
+    , _rflUserIP      :: !(Maybe Text)
     , _rflReportId    :: !Int64
     , _rflProfileId   :: !Int64
     , _rflSortOrder   :: !DfareportingReportsFilesListSortOrder
-    , _rflKey         :: !(Maybe Text)
+    , _rflKey         :: !(Maybe Key)
     , _rflPageToken   :: !(Maybe Text)
     , _rflSortField   :: !DfareportingReportsFilesListSortField
-    , _rflOauthToken  :: !(Maybe Text)
+    , _rflOAuthToken  :: !(Maybe OAuthToken)
     , _rflMaxResults  :: !(Maybe Int32)
     , _rflFields      :: !(Maybe Text)
-    , _rflAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsFilesList'' with the minimum fields required to make a request.
@@ -99,7 +98,7 @@ data ReportsFilesList' = ReportsFilesList'
 --
 -- * 'rflPrettyPrint'
 --
--- * 'rflUserIp'
+-- * 'rflUserIP'
 --
 -- * 'rflReportId'
 --
@@ -113,13 +112,11 @@ data ReportsFilesList' = ReportsFilesList'
 --
 -- * 'rflSortField'
 --
--- * 'rflOauthToken'
+-- * 'rflOAuthToken'
 --
 -- * 'rflMaxResults'
 --
 -- * 'rflFields'
---
--- * 'rflAlt'
 reportsFilesList'
     :: Int64 -- ^ 'reportId'
     -> Int64 -- ^ 'profileId'
@@ -128,17 +125,16 @@ reportsFilesList' pRflReportId_ pRflProfileId_ =
     ReportsFilesList'
     { _rflQuotaUser = Nothing
     , _rflPrettyPrint = True
-    , _rflUserIp = Nothing
+    , _rflUserIP = Nothing
     , _rflReportId = pRflReportId_
     , _rflProfileId = pRflProfileId_
     , _rflSortOrder = DRFLSODescending
     , _rflKey = Nothing
     , _rflPageToken = Nothing
     , _rflSortField = DRFLSFLastModifiedTime
-    , _rflOauthToken = Nothing
+    , _rflOAuthToken = Nothing
     , _rflMaxResults = Nothing
     , _rflFields = Nothing
-    , _rflAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -156,9 +152,9 @@ rflPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rflUserIp :: Lens' ReportsFilesList' (Maybe Text)
-rflUserIp
-  = lens _rflUserIp (\ s a -> s{_rflUserIp = a})
+rflUserIP :: Lens' ReportsFilesList' (Maybe Text)
+rflUserIP
+  = lens _rflUserIP (\ s a -> s{_rflUserIP = a})
 
 -- | The ID of the parent report.
 rflReportId :: Lens' ReportsFilesList' Int64
@@ -178,7 +174,7 @@ rflSortOrder
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rflKey :: Lens' ReportsFilesList' (Maybe Text)
+rflKey :: Lens' ReportsFilesList' (Maybe Key)
 rflKey = lens _rflKey (\ s a -> s{_rflKey = a})
 
 -- | The value of the nextToken from the previous result page.
@@ -192,10 +188,10 @@ rflSortField
   = lens _rflSortField (\ s a -> s{_rflSortField = a})
 
 -- | OAuth 2.0 token for the current user.
-rflOauthToken :: Lens' ReportsFilesList' (Maybe Text)
-rflOauthToken
-  = lens _rflOauthToken
-      (\ s a -> s{_rflOauthToken = a})
+rflOAuthToken :: Lens' ReportsFilesList' (Maybe OAuthToken)
+rflOAuthToken
+  = lens _rflOAuthToken
+      (\ s a -> s{_rflOAuthToken = a})
 
 -- | Maximum number of results to return.
 rflMaxResults :: Lens' ReportsFilesList' (Maybe Int32)
@@ -208,25 +204,25 @@ rflFields :: Lens' ReportsFilesList' (Maybe Text)
 rflFields
   = lens _rflFields (\ s a -> s{_rflFields = a})
 
--- | Data format for the response.
-rflAlt :: Lens' ReportsFilesList' Alt
-rflAlt = lens _rflAlt (\ s a -> s{_rflAlt = a})
+instance GoogleAuth ReportsFilesList' where
+        authKey = rflKey . _Just
+        authToken = rflOAuthToken . _Just
 
 instance GoogleRequest ReportsFilesList' where
         type Rs ReportsFilesList' = FileList
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ReportsFilesList'{..}
-          = go _rflQuotaUser (Just _rflPrettyPrint) _rflUserIp
+          = go _rflQuotaUser (Just _rflPrettyPrint) _rflUserIP
               _rflReportId
               _rflProfileId
               (Just _rflSortOrder)
               _rflKey
               _rflPageToken
               (Just _rflSortField)
-              _rflOauthToken
+              _rflOAuthToken
               _rflMaxResults
               _rflFields
-              (Just _rflAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ReportsFilesListResource)

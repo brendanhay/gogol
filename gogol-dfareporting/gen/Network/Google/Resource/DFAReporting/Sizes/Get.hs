@@ -30,15 +30,14 @@ module Network.Google.Resource.DFAReporting.Sizes.Get
     , SizesGet'
 
     -- * Request Lenses
-    , sggQuotaUser
-    , sggPrettyPrint
-    , sggUserIp
-    , sggProfileId
-    , sggKey
-    , sggId
-    , sggOauthToken
-    , sggFields
-    , sggAlt
+    , sizQuotaUser
+    , sizPrettyPrint
+    , sizUserIP
+    , sizProfileId
+    , sizKey
+    , sizId
+    , sizOAuthToken
+    , sizFields
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,124 +53,120 @@ type SizesGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] Size
+                         QueryParam "alt" AltJSON :> Get '[JSON] Size
 
 -- | Gets one size by ID.
 --
 -- /See:/ 'sizesGet'' smart constructor.
 data SizesGet' = SizesGet'
-    { _sggQuotaUser   :: !(Maybe Text)
-    , _sggPrettyPrint :: !Bool
-    , _sggUserIp      :: !(Maybe Text)
-    , _sggProfileId   :: !Int64
-    , _sggKey         :: !(Maybe Text)
-    , _sggId          :: !Int64
-    , _sggOauthToken  :: !(Maybe Text)
-    , _sggFields      :: !(Maybe Text)
-    , _sggAlt         :: !Alt
+    { _sizQuotaUser   :: !(Maybe Text)
+    , _sizPrettyPrint :: !Bool
+    , _sizUserIP      :: !(Maybe Text)
+    , _sizProfileId   :: !Int64
+    , _sizKey         :: !(Maybe Key)
+    , _sizId          :: !Int64
+    , _sizOAuthToken  :: !(Maybe OAuthToken)
+    , _sizFields      :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SizesGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sggQuotaUser'
+-- * 'sizQuotaUser'
 --
--- * 'sggPrettyPrint'
+-- * 'sizPrettyPrint'
 --
--- * 'sggUserIp'
+-- * 'sizUserIP'
 --
--- * 'sggProfileId'
+-- * 'sizProfileId'
 --
--- * 'sggKey'
+-- * 'sizKey'
 --
--- * 'sggId'
+-- * 'sizId'
 --
--- * 'sggOauthToken'
+-- * 'sizOAuthToken'
 --
--- * 'sggFields'
---
--- * 'sggAlt'
+-- * 'sizFields'
 sizesGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> SizesGet'
-sizesGet' pSggProfileId_ pSggId_ =
+sizesGet' pSizProfileId_ pSizId_ =
     SizesGet'
-    { _sggQuotaUser = Nothing
-    , _sggPrettyPrint = True
-    , _sggUserIp = Nothing
-    , _sggProfileId = pSggProfileId_
-    , _sggKey = Nothing
-    , _sggId = pSggId_
-    , _sggOauthToken = Nothing
-    , _sggFields = Nothing
-    , _sggAlt = JSON
+    { _sizQuotaUser = Nothing
+    , _sizPrettyPrint = True
+    , _sizUserIP = Nothing
+    , _sizProfileId = pSizProfileId_
+    , _sizKey = Nothing
+    , _sizId = pSizId_
+    , _sizOAuthToken = Nothing
+    , _sizFields = Nothing
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-sggQuotaUser :: Lens' SizesGet' (Maybe Text)
-sggQuotaUser
-  = lens _sggQuotaUser (\ s a -> s{_sggQuotaUser = a})
+sizQuotaUser :: Lens' SizesGet' (Maybe Text)
+sizQuotaUser
+  = lens _sizQuotaUser (\ s a -> s{_sizQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-sggPrettyPrint :: Lens' SizesGet' Bool
-sggPrettyPrint
-  = lens _sggPrettyPrint
-      (\ s a -> s{_sggPrettyPrint = a})
+sizPrettyPrint :: Lens' SizesGet' Bool
+sizPrettyPrint
+  = lens _sizPrettyPrint
+      (\ s a -> s{_sizPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-sggUserIp :: Lens' SizesGet' (Maybe Text)
-sggUserIp
-  = lens _sggUserIp (\ s a -> s{_sggUserIp = a})
+sizUserIP :: Lens' SizesGet' (Maybe Text)
+sizUserIP
+  = lens _sizUserIP (\ s a -> s{_sizUserIP = a})
 
 -- | User profile ID associated with this request.
-sggProfileId :: Lens' SizesGet' Int64
-sggProfileId
-  = lens _sggProfileId (\ s a -> s{_sggProfileId = a})
+sizProfileId :: Lens' SizesGet' Int64
+sizProfileId
+  = lens _sizProfileId (\ s a -> s{_sizProfileId = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-sggKey :: Lens' SizesGet' (Maybe Text)
-sggKey = lens _sggKey (\ s a -> s{_sggKey = a})
+sizKey :: Lens' SizesGet' (Maybe Key)
+sizKey = lens _sizKey (\ s a -> s{_sizKey = a})
 
 -- | Size ID.
-sggId :: Lens' SizesGet' Int64
-sggId = lens _sggId (\ s a -> s{_sggId = a})
+sizId :: Lens' SizesGet' Int64
+sizId = lens _sizId (\ s a -> s{_sizId = a})
 
 -- | OAuth 2.0 token for the current user.
-sggOauthToken :: Lens' SizesGet' (Maybe Text)
-sggOauthToken
-  = lens _sggOauthToken
-      (\ s a -> s{_sggOauthToken = a})
+sizOAuthToken :: Lens' SizesGet' (Maybe OAuthToken)
+sizOAuthToken
+  = lens _sizOAuthToken
+      (\ s a -> s{_sizOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-sggFields :: Lens' SizesGet' (Maybe Text)
-sggFields
-  = lens _sggFields (\ s a -> s{_sggFields = a})
+sizFields :: Lens' SizesGet' (Maybe Text)
+sizFields
+  = lens _sizFields (\ s a -> s{_sizFields = a})
 
--- | Data format for the response.
-sggAlt :: Lens' SizesGet' Alt
-sggAlt = lens _sggAlt (\ s a -> s{_sggAlt = a})
+instance GoogleAuth SizesGet' where
+        authKey = sizKey . _Just
+        authToken = sizOAuthToken . _Just
 
 instance GoogleRequest SizesGet' where
         type Rs SizesGet' = Size
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u SizesGet'{..}
-          = go _sggQuotaUser (Just _sggPrettyPrint) _sggUserIp
-              _sggProfileId
-              _sggKey
-              _sggId
-              _sggOauthToken
-              _sggFields
-              (Just _sggAlt)
+          = go _sizQuotaUser (Just _sizPrettyPrint) _sizUserIP
+              _sizProfileId
+              _sizKey
+              _sizId
+              _sizOAuthToken
+              _sizFields
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy SizesGetResource) r
                       u

@@ -545,7 +545,7 @@ data VideoStatusPrivacyStatus
       -- ^ @private@
     | Public
       -- ^ @public@
-    | Unlisted
+    | UnListed
       -- ^ @unlisted@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -555,14 +555,14 @@ instance FromText VideoStatusPrivacyStatus where
     fromText = \case
         "private" -> Just Private
         "public" -> Just Public
-        "unlisted" -> Just Unlisted
+        "unlisted" -> Just UnListed
         _ -> Nothing
 
 instance ToText VideoStatusPrivacyStatus where
     toText = \case
         Private -> "private"
         Public -> "public"
-        Unlisted -> "unlisted"
+        UnListed -> "unlisted"
 
 instance FromJSON VideoStatusPrivacyStatus where
     parseJSON = parseJSONText "VideoStatusPrivacyStatus"
@@ -830,7 +830,7 @@ data LiveBroadcastStatusPrivacyStatus
       -- ^ @private@
     | LBSPSPublic
       -- ^ @public@
-    | LBSPSUnlisted
+    | LBSPSUnListed
       -- ^ @unlisted@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -840,14 +840,14 @@ instance FromText LiveBroadcastStatusPrivacyStatus where
     fromText = \case
         "private" -> Just LBSPSPrivate
         "public" -> Just LBSPSPublic
-        "unlisted" -> Just LBSPSUnlisted
+        "unlisted" -> Just LBSPSUnListed
         _ -> Nothing
 
 instance ToText LiveBroadcastStatusPrivacyStatus where
     toText = \case
         LBSPSPrivate -> "private"
         LBSPSPublic -> "public"
-        LBSPSUnlisted -> "unlisted"
+        LBSPSUnListed -> "unlisted"
 
 instance FromJSON LiveBroadcastStatusPrivacyStatus where
     parseJSON = parseJSONText "LiveBroadcastStatusPrivacyStatus"
@@ -1128,7 +1128,7 @@ data ChannelStatusPrivacyStatus
       -- ^ @private@
     | CSPSPublic
       -- ^ @public@
-    | CSPSUnlisted
+    | CSPSUnListed
       -- ^ @unlisted@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
@@ -1138,14 +1138,14 @@ instance FromText ChannelStatusPrivacyStatus where
     fromText = \case
         "private" -> Just CSPSPrivate
         "public" -> Just CSPSPublic
-        "unlisted" -> Just CSPSUnlisted
+        "unlisted" -> Just CSPSUnListed
         _ -> Nothing
 
 instance ToText ChannelStatusPrivacyStatus where
     toText = \case
         CSPSPrivate -> "private"
         CSPSPublic -> "public"
-        CSPSUnlisted -> "unlisted"
+        CSPSUnListed -> "unlisted"
 
 instance FromJSON ChannelStatusPrivacyStatus where
     parseJSON = parseJSONText "ChannelStatusPrivacyStatus"
@@ -2872,7 +2872,7 @@ instance ToJSON ContentRatingSmaisRating where
     toJSON = toJSONText
 
 data VideoSuggestionsProcessingWarnings
-    = HasEditlist
+    = HasEditList
       -- ^ @hasEditlist@
     | InconsistentResolution
       -- ^ @inconsistentResolution@
@@ -2892,7 +2892,7 @@ instance Hashable VideoSuggestionsProcessingWarnings
 
 instance FromText VideoSuggestionsProcessingWarnings where
     fromText = \case
-        "hasEditlist" -> Just HasEditlist
+        "hasEditlist" -> Just HasEditList
         "inconsistentResolution" -> Just InconsistentResolution
         "problematicAudioCodec" -> Just ProblematicAudioCodec
         "problematicVideoCodec" -> Just ProblematicVideoCodec
@@ -2903,7 +2903,7 @@ instance FromText VideoSuggestionsProcessingWarnings where
 
 instance ToText VideoSuggestionsProcessingWarnings where
     toText = \case
-        HasEditlist -> "hasEditlist"
+        HasEditList -> "hasEditlist"
         InconsistentResolution -> "inconsistentResolution"
         ProblematicAudioCodec -> "problematicAudioCodec"
         ProblematicVideoCodec -> "problematicVideoCodec"
@@ -3256,13 +3256,13 @@ instance ToJSON ContentRatingSkfilmRating where
 
 -- | The type of the channel section.
 data ChannelSectionSnippetType
-    = AllPlaylists
+    = AllPlayLists
       -- ^ @allPlaylists@
     | ChannelsectionTypeUndefined
       -- ^ @channelsectionTypeUndefined@
     | CompletedEvents
       -- ^ @completedEvents@
-    | LikedPlaylists
+    | LikedPlayLists
       -- ^ @likedPlaylists@
     | Likes
       -- ^ @likes@
@@ -3270,11 +3270,11 @@ data ChannelSectionSnippetType
       -- ^ @liveEvents@
     | MultipleChannels
       -- ^ @multipleChannels@
-    | MultiplePlaylists
+    | MultiplePlayLists
       -- ^ @multiplePlaylists@
     | PopularUploads
       -- ^ @popularUploads@
-    | PostedPlaylists
+    | PostedPlayLists
       -- ^ @postedPlaylists@
     | PostedVideos
       -- ^ @postedVideos@
@@ -3284,7 +3284,7 @@ data ChannelSectionSnippetType
       -- ^ @recentPosts@
     | RecentUploads
       -- ^ @recentUploads@
-    | SinglePlaylist
+    | SinglePlayList
       -- ^ @singlePlaylist@
     | Subscriptions
       -- ^ @subscriptions@
@@ -3296,42 +3296,42 @@ instance Hashable ChannelSectionSnippetType
 
 instance FromText ChannelSectionSnippetType where
     fromText = \case
-        "allPlaylists" -> Just AllPlaylists
+        "allPlaylists" -> Just AllPlayLists
         "channelsectionTypeUndefined" -> Just ChannelsectionTypeUndefined
         "completedEvents" -> Just CompletedEvents
-        "likedPlaylists" -> Just LikedPlaylists
+        "likedPlaylists" -> Just LikedPlayLists
         "likes" -> Just Likes
         "liveEvents" -> Just LiveEvents
         "multipleChannels" -> Just MultipleChannels
-        "multiplePlaylists" -> Just MultiplePlaylists
+        "multiplePlaylists" -> Just MultiplePlayLists
         "popularUploads" -> Just PopularUploads
-        "postedPlaylists" -> Just PostedPlaylists
+        "postedPlaylists" -> Just PostedPlayLists
         "postedVideos" -> Just PostedVideos
         "recentActivity" -> Just RecentActivity
         "recentPosts" -> Just RecentPosts
         "recentUploads" -> Just RecentUploads
-        "singlePlaylist" -> Just SinglePlaylist
+        "singlePlaylist" -> Just SinglePlayList
         "subscriptions" -> Just Subscriptions
         "upcomingEvents" -> Just UpcomingEvents
         _ -> Nothing
 
 instance ToText ChannelSectionSnippetType where
     toText = \case
-        AllPlaylists -> "allPlaylists"
+        AllPlayLists -> "allPlaylists"
         ChannelsectionTypeUndefined -> "channelsectionTypeUndefined"
         CompletedEvents -> "completedEvents"
-        LikedPlaylists -> "likedPlaylists"
+        LikedPlayLists -> "likedPlaylists"
         Likes -> "likes"
         LiveEvents -> "liveEvents"
         MultipleChannels -> "multipleChannels"
-        MultiplePlaylists -> "multiplePlaylists"
+        MultiplePlayLists -> "multiplePlaylists"
         PopularUploads -> "popularUploads"
-        PostedPlaylists -> "postedPlaylists"
+        PostedPlayLists -> "postedPlaylists"
         PostedVideos -> "postedVideos"
         RecentActivity -> "recentActivity"
         RecentPosts -> "recentPosts"
         RecentUploads -> "recentUploads"
-        SinglePlaylist -> "singlePlaylist"
+        SinglePlayList -> "singlePlaylist"
         Subscriptions -> "subscriptions"
         UpcomingEvents -> "upcomingEvents"
 
@@ -3868,34 +3868,34 @@ instance ToJSON ContentRatingResorteviolenciaRating where
     toJSON = toJSONText
 
 -- | This resource\'s privacy status.
-data PlaylistItemStatusPrivacyStatus
-    = PISPSPrivate
+data PlayListItemStatusPrivacyStatus
+    = PLISPSPrivate
       -- ^ @private@
-    | PISPSPublic
+    | PLISPSPublic
       -- ^ @public@
-    | PISPSUnlisted
+    | PLISPSUnListed
       -- ^ @unlisted@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable PlaylistItemStatusPrivacyStatus
+instance Hashable PlayListItemStatusPrivacyStatus
 
-instance FromText PlaylistItemStatusPrivacyStatus where
+instance FromText PlayListItemStatusPrivacyStatus where
     fromText = \case
-        "private" -> Just PISPSPrivate
-        "public" -> Just PISPSPublic
-        "unlisted" -> Just PISPSUnlisted
+        "private" -> Just PLISPSPrivate
+        "public" -> Just PLISPSPublic
+        "unlisted" -> Just PLISPSUnListed
         _ -> Nothing
 
-instance ToText PlaylistItemStatusPrivacyStatus where
+instance ToText PlayListItemStatusPrivacyStatus where
     toText = \case
-        PISPSPrivate -> "private"
-        PISPSPublic -> "public"
-        PISPSUnlisted -> "unlisted"
+        PLISPSPrivate -> "private"
+        PLISPSPublic -> "public"
+        PLISPSUnListed -> "unlisted"
 
-instance FromJSON PlaylistItemStatusPrivacyStatus where
-    parseJSON = parseJSONText "PlaylistItemStatusPrivacyStatus"
+instance FromJSON PlayListItemStatusPrivacyStatus where
+    parseJSON = parseJSONText "PlayListItemStatusPrivacyStatus"
 
-instance ToJSON PlaylistItemStatusPrivacyStatus where
+instance ToJSON PlayListItemStatusPrivacyStatus where
     toJSON = toJSONText
 
 -- | The type of activity this subscription is for (only uploads,
@@ -4476,34 +4476,34 @@ instance ToJSON ContentRatingMocRating where
     toJSON = toJSONText
 
 -- | The playlist\'s privacy status.
-data PlaylistStatusPrivacyStatus
-    = PSPSPrivate
+data PlayListStatusPrivacyStatus
+    = PLSPSPrivate
       -- ^ @private@
-    | PSPSPublic
+    | PLSPSPublic
       -- ^ @public@
-    | PSPSUnlisted
+    | PLSPSUnListed
       -- ^ @unlisted@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable PlaylistStatusPrivacyStatus
+instance Hashable PlayListStatusPrivacyStatus
 
-instance FromText PlaylistStatusPrivacyStatus where
+instance FromText PlayListStatusPrivacyStatus where
     fromText = \case
-        "private" -> Just PSPSPrivate
-        "public" -> Just PSPSPublic
-        "unlisted" -> Just PSPSUnlisted
+        "private" -> Just PLSPSPrivate
+        "public" -> Just PLSPSPublic
+        "unlisted" -> Just PLSPSUnListed
         _ -> Nothing
 
-instance ToText PlaylistStatusPrivacyStatus where
+instance ToText PlayListStatusPrivacyStatus where
     toText = \case
-        PSPSPrivate -> "private"
-        PSPSPublic -> "public"
-        PSPSUnlisted -> "unlisted"
+        PLSPSPrivate -> "private"
+        PLSPSPublic -> "public"
+        PLSPSUnListed -> "unlisted"
 
-instance FromJSON PlaylistStatusPrivacyStatus where
-    parseJSON = parseJSONText "PlaylistStatusPrivacyStatus"
+instance FromJSON PlayListStatusPrivacyStatus where
+    parseJSON = parseJSONText "PlayListStatusPrivacyStatus"
 
-instance ToJSON PlaylistStatusPrivacyStatus where
+instance ToJSON PlayListStatusPrivacyStatus where
     toJSON = toJSONText
 
 -- | The videoDimension parameter lets you restrict a search to only retrieve
@@ -4555,7 +4555,7 @@ data ActivitySnippetType
       -- ^ @favorite@
     | Like
       -- ^ @like@
-    | PlaylistItem
+    | PlayListItem
       -- ^ @playlistItem@
     | PromotedItem
       -- ^ @promotedItem@
@@ -4578,7 +4578,7 @@ instance FromText ActivitySnippetType where
         "comment" -> Just Comment
         "favorite" -> Just Favorite
         "like" -> Just Like
-        "playlistItem" -> Just PlaylistItem
+        "playlistItem" -> Just PlayListItem
         "promotedItem" -> Just PromotedItem
         "recommendation" -> Just Recommendation
         "social" -> Just Social
@@ -4593,7 +4593,7 @@ instance ToText ActivitySnippetType where
         Comment -> "comment"
         Favorite -> "favorite"
         Like -> "like"
-        PlaylistItem -> "playlistItem"
+        PlayListItem -> "playlistItem"
         PromotedItem -> "promotedItem"
         Recommendation -> "recommendation"
         Social -> "social"
@@ -5699,30 +5699,6 @@ instance FromJSON YouTubeCommentsListTextFormat where
     parseJSON = parseJSONText "YouTubeCommentsListTextFormat"
 
 instance ToJSON YouTubeCommentsListTextFormat where
-    toJSON = toJSONText
-
--- | Data format for the response.
-data Alt
-    = JSON
-      -- ^ @json@
-      -- Responses with Content-Type of application\/json
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable Alt
-
-instance FromText Alt where
-    fromText = \case
-        "json" -> Just JSON
-        _ -> Nothing
-
-instance ToText Alt where
-    toText = \case
-        JSON -> "json"
-
-instance FromJSON Alt where
-    parseJSON = parseJSONText "Alt"
-
-instance ToJSON Alt where
     toJSON = toJSONText
 
 -- | Set this parameter to limit the returned comment threads to a particular

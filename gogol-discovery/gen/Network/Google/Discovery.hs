@@ -50,7 +50,7 @@ module Network.Google.Discovery
     , rmSupportsMediaDownload
     , rmParameterOrder
     , rmMediaUpload
-    , rmHttpMethod
+    , rmHTTPMethod
     , rmPath
     , rmResponse
     , rmSupportsMediaUpload
@@ -79,9 +79,9 @@ module Network.Google.Discovery
     , rrResources
     , rrMethods
 
-    -- ** RestDescriptionAuthOauth2Scopes
-    , RestDescriptionAuthOauth2Scopes
-    , restDescriptionAuthOauth2Scopes
+    -- ** RestDescriptionAuthOAuth2Scopes
+    , RestDescriptionAuthOAuth2Scopes
+    , restDescriptionAuthOAuth2Scopes
 
     -- ** DirectoryListItemsIcons
     , DirectoryListItemsIcons
@@ -97,12 +97,12 @@ module Network.Google.Discovery
     , RestMethodMediaUploadProtocolsSimple
     , restMethodMediaUploadProtocolsSimple
     , rmmupsPath
-    , rmmupsMultipart
+    , rmmupsMultiParty
 
-    -- ** RestDescriptionAuthOauth2
-    , RestDescriptionAuthOauth2
-    , restDescriptionAuthOauth2
-    , rdaoScopes
+    -- ** RestDescriptionAuthOAuth2
+    , RestDescriptionAuthOAuth2
+    , restDescriptionAuthOAuth2
+    , rdaoaScopes
 
     -- ** RestResourceMethods
     , RestResourceMethods
@@ -117,7 +117,7 @@ module Network.Google.Discovery
     -- ** RestDescriptionAuth
     , RestDescriptionAuth
     , restDescriptionAuth
-    , rdaOauth2
+    , rdaOAuth2
 
     -- ** RestDescriptionIcons
     , RestDescriptionIcons
@@ -136,7 +136,7 @@ module Network.Google.Discovery
     , rdExponentialBackoffDefault
     , rdAuth
     , rdIcons
-    , rdBaseUrl
+    , rdBaseURL
     , rdProtocol
     , rdOwnerName
     , rdResources
@@ -149,7 +149,7 @@ module Network.Google.Discovery
     , rdVersion
     , rdParameters
     , rdDocumentationLink
-    , rdRootUrl
+    , rdRootURL
     , rdId
     , rdCanonicalName
     , rdLabels
@@ -214,7 +214,7 @@ module Network.Google.Discovery
     , dliLabels
     , dliTitle
     , dliDescription
-    , dliDiscoveryRestUrl
+    , dliDiscoveryRestURL
 
     -- ** JSONSchemaAnnotations
     , JSONSchemaAnnotations
@@ -243,16 +243,13 @@ module Network.Google.Discovery
     , RestMethodMediaUploadProtocolsResumable
     , restMethodMediaUploadProtocolsResumable
     , rmmuprPath
-    , rmmuprMultipart
+    , rmmuprMultiParty
 
     -- ** RestMethodRequest
     , RestMethodRequest
     , restMethodRequest
     , rRef
     , rParameterName
-
-    -- ** Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.Discovery.Types

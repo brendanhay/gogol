@@ -32,13 +32,13 @@ module Network.Google.Resource.DFAReporting.Placements.Patch
     -- * Request Lenses
     , ppQuotaUser
     , ppPrettyPrint
-    , ppUserIp
+    , ppUserIP
     , ppProfileId
     , ppKey
     , ppId
-    , ppOauthToken
+    , ppOAuthToken
+    , ppPlacement
     , ppFields
-    , ppAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -53,11 +53,12 @@ type PlacementsPatchResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "id" Int64 :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Patch '[JSON] Placement
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Placement :> Patch '[JSON] Placement
 
 -- | Updates an existing placement. This method supports patch semantics.
 --
@@ -65,13 +66,13 @@ type PlacementsPatchResource =
 data PlacementsPatch' = PlacementsPatch'
     { _ppQuotaUser   :: !(Maybe Text)
     , _ppPrettyPrint :: !Bool
-    , _ppUserIp      :: !(Maybe Text)
+    , _ppUserIP      :: !(Maybe Text)
     , _ppProfileId   :: !Int64
-    , _ppKey         :: !(Maybe Text)
+    , _ppKey         :: !(Maybe Key)
     , _ppId          :: !Int64
-    , _ppOauthToken  :: !(Maybe Text)
+    , _ppOAuthToken  :: !(Maybe OAuthToken)
+    , _ppPlacement   :: !Placement
     , _ppFields      :: !(Maybe Text)
-    , _ppAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementsPatch'' with the minimum fields required to make a request.
@@ -82,7 +83,7 @@ data PlacementsPatch' = PlacementsPatch'
 --
 -- * 'ppPrettyPrint'
 --
--- * 'ppUserIp'
+-- * 'ppUserIP'
 --
 -- * 'ppProfileId'
 --
@@ -90,26 +91,27 @@ data PlacementsPatch' = PlacementsPatch'
 --
 -- * 'ppId'
 --
--- * 'ppOauthToken'
+-- * 'ppOAuthToken'
+--
+-- * 'ppPlacement'
 --
 -- * 'ppFields'
---
--- * 'ppAlt'
 placementsPatch'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
+    -> Placement -- ^ 'Placement'
     -> PlacementsPatch'
-placementsPatch' pPpProfileId_ pPpId_ =
+placementsPatch' pPpProfileId_ pPpId_ pPpPlacement_ =
     PlacementsPatch'
     { _ppQuotaUser = Nothing
     , _ppPrettyPrint = True
-    , _ppUserIp = Nothing
+    , _ppUserIP = Nothing
     , _ppProfileId = pPpProfileId_
     , _ppKey = Nothing
     , _ppId = pPpId_
-    , _ppOauthToken = Nothing
+    , _ppOAuthToken = Nothing
+    , _ppPlacement = pPpPlacement_
     , _ppFields = Nothing
-    , _ppAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,8 +129,8 @@ ppPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ppUserIp :: Lens' PlacementsPatch' (Maybe Text)
-ppUserIp = lens _ppUserIp (\ s a -> s{_ppUserIp = a})
+ppUserIP :: Lens' PlacementsPatch' (Maybe Text)
+ppUserIP = lens _ppUserIP (\ s a -> s{_ppUserIP = a})
 
 -- | User profile ID associated with this request.
 ppProfileId :: Lens' PlacementsPatch' Int64
@@ -138,7 +140,7 @@ ppProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ppKey :: Lens' PlacementsPatch' (Maybe Text)
+ppKey :: Lens' PlacementsPatch' (Maybe Key)
 ppKey = lens _ppKey (\ s a -> s{_ppKey = a})
 
 -- | Placement ID.
@@ -146,29 +148,35 @@ ppId :: Lens' PlacementsPatch' Int64
 ppId = lens _ppId (\ s a -> s{_ppId = a})
 
 -- | OAuth 2.0 token for the current user.
-ppOauthToken :: Lens' PlacementsPatch' (Maybe Text)
-ppOauthToken
-  = lens _ppOauthToken (\ s a -> s{_ppOauthToken = a})
+ppOAuthToken :: Lens' PlacementsPatch' (Maybe OAuthToken)
+ppOAuthToken
+  = lens _ppOAuthToken (\ s a -> s{_ppOAuthToken = a})
+
+-- | Multipart request metadata.
+ppPlacement :: Lens' PlacementsPatch' Placement
+ppPlacement
+  = lens _ppPlacement (\ s a -> s{_ppPlacement = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ppFields :: Lens' PlacementsPatch' (Maybe Text)
 ppFields = lens _ppFields (\ s a -> s{_ppFields = a})
 
--- | Data format for the response.
-ppAlt :: Lens' PlacementsPatch' Alt
-ppAlt = lens _ppAlt (\ s a -> s{_ppAlt = a})
+instance GoogleAuth PlacementsPatch' where
+        authKey = ppKey . _Just
+        authToken = ppOAuthToken . _Just
 
 instance GoogleRequest PlacementsPatch' where
         type Rs PlacementsPatch' = Placement
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlacementsPatch'{..}
-          = go _ppQuotaUser (Just _ppPrettyPrint) _ppUserIp
+          = go _ppQuotaUser (Just _ppPrettyPrint) _ppUserIP
               _ppProfileId
               _ppKey
               (Just _ppId)
-              _ppOauthToken
+              _ppOAuthToken
               _ppFields
-              (Just _ppAlt)
+              (Just AltJSON)
+              _ppPlacement
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PlacementsPatchResource)

@@ -32,12 +32,11 @@ module Network.Google.Resource.DFAReporting.UserProfiles.Get
     -- * Request Lenses
     , upgQuotaUser
     , upgPrettyPrint
-    , upgUserIp
+    , upgUserIP
     , upgProfileId
     , upgKey
-    , upgOauthToken
+    , upgOAuthToken
     , upgFields
-    , upgAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -51,10 +50,10 @@ type UserProfilesGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Get '[JSON] UserProfile
+                     QueryParam "alt" AltJSON :> Get '[JSON] UserProfile
 
 -- | Gets one user profile by ID.
 --
@@ -62,12 +61,11 @@ type UserProfilesGetResource =
 data UserProfilesGet' = UserProfilesGet'
     { _upgQuotaUser   :: !(Maybe Text)
     , _upgPrettyPrint :: !Bool
-    , _upgUserIp      :: !(Maybe Text)
+    , _upgUserIP      :: !(Maybe Text)
     , _upgProfileId   :: !Int64
-    , _upgKey         :: !(Maybe Text)
-    , _upgOauthToken  :: !(Maybe Text)
+    , _upgKey         :: !(Maybe Key)
+    , _upgOAuthToken  :: !(Maybe OAuthToken)
     , _upgFields      :: !(Maybe Text)
-    , _upgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserProfilesGet'' with the minimum fields required to make a request.
@@ -78,17 +76,15 @@ data UserProfilesGet' = UserProfilesGet'
 --
 -- * 'upgPrettyPrint'
 --
--- * 'upgUserIp'
+-- * 'upgUserIP'
 --
 -- * 'upgProfileId'
 --
 -- * 'upgKey'
 --
--- * 'upgOauthToken'
+-- * 'upgOAuthToken'
 --
 -- * 'upgFields'
---
--- * 'upgAlt'
 userProfilesGet'
     :: Int64 -- ^ 'profileId'
     -> UserProfilesGet'
@@ -96,12 +92,11 @@ userProfilesGet' pUpgProfileId_ =
     UserProfilesGet'
     { _upgQuotaUser = Nothing
     , _upgPrettyPrint = True
-    , _upgUserIp = Nothing
+    , _upgUserIP = Nothing
     , _upgProfileId = pUpgProfileId_
     , _upgKey = Nothing
-    , _upgOauthToken = Nothing
+    , _upgOAuthToken = Nothing
     , _upgFields = Nothing
-    , _upgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -119,9 +114,9 @@ upgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-upgUserIp :: Lens' UserProfilesGet' (Maybe Text)
-upgUserIp
-  = lens _upgUserIp (\ s a -> s{_upgUserIp = a})
+upgUserIP :: Lens' UserProfilesGet' (Maybe Text)
+upgUserIP
+  = lens _upgUserIP (\ s a -> s{_upgUserIP = a})
 
 -- | The user profile ID.
 upgProfileId :: Lens' UserProfilesGet' Int64
@@ -131,34 +126,34 @@ upgProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-upgKey :: Lens' UserProfilesGet' (Maybe Text)
+upgKey :: Lens' UserProfilesGet' (Maybe Key)
 upgKey = lens _upgKey (\ s a -> s{_upgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-upgOauthToken :: Lens' UserProfilesGet' (Maybe Text)
-upgOauthToken
-  = lens _upgOauthToken
-      (\ s a -> s{_upgOauthToken = a})
+upgOAuthToken :: Lens' UserProfilesGet' (Maybe OAuthToken)
+upgOAuthToken
+  = lens _upgOAuthToken
+      (\ s a -> s{_upgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 upgFields :: Lens' UserProfilesGet' (Maybe Text)
 upgFields
   = lens _upgFields (\ s a -> s{_upgFields = a})
 
--- | Data format for the response.
-upgAlt :: Lens' UserProfilesGet' Alt
-upgAlt = lens _upgAlt (\ s a -> s{_upgAlt = a})
+instance GoogleAuth UserProfilesGet' where
+        authKey = upgKey . _Just
+        authToken = upgOAuthToken . _Just
 
 instance GoogleRequest UserProfilesGet' where
         type Rs UserProfilesGet' = UserProfile
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u UserProfilesGet'{..}
-          = go _upgQuotaUser (Just _upgPrettyPrint) _upgUserIp
+          = go _upgQuotaUser (Just _upgPrettyPrint) _upgUserIP
               _upgProfileId
               _upgKey
-              _upgOauthToken
+              _upgOAuthToken
               _upgFields
-              (Just _upgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UserProfilesGetResource)

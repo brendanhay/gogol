@@ -33,15 +33,14 @@ module Network.Google.Resource.BigQuery.Tables.List
     -- * Request Lenses
     , tlQuotaUser
     , tlPrettyPrint
-    , tlUserIp
+    , tlUserIP
     , tlKey
     , tlDatasetId
     , tlPageToken
     , tlProjectId
-    , tlOauthToken
+    , tlOAuthToken
     , tlMaxResults
     , tlFields
-    , tlAlt
     ) where
 
 import           Network.Google.BigQuery.Types
@@ -58,12 +57,12 @@ type TablesListResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
+                     QueryParam "key" Key :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "maxResults" Word32 :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :> Get '[JSON] TableList
+                               QueryParam "alt" AltJSON :> Get '[JSON] TableList
 
 -- | Lists all tables in the specified dataset. Requires the READER dataset
 -- role.
@@ -72,15 +71,14 @@ type TablesListResource =
 data TablesList' = TablesList'
     { _tlQuotaUser   :: !(Maybe Text)
     , _tlPrettyPrint :: !Bool
-    , _tlUserIp      :: !(Maybe Text)
-    , _tlKey         :: !(Maybe Text)
+    , _tlUserIP      :: !(Maybe Text)
+    , _tlKey         :: !(Maybe Key)
     , _tlDatasetId   :: !Text
     , _tlPageToken   :: !(Maybe Text)
     , _tlProjectId   :: !Text
-    , _tlOauthToken  :: !(Maybe Text)
+    , _tlOAuthToken  :: !(Maybe OAuthToken)
     , _tlMaxResults  :: !(Maybe Word32)
     , _tlFields      :: !(Maybe Text)
-    , _tlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesList'' with the minimum fields required to make a request.
@@ -91,7 +89,7 @@ data TablesList' = TablesList'
 --
 -- * 'tlPrettyPrint'
 --
--- * 'tlUserIp'
+-- * 'tlUserIP'
 --
 -- * 'tlKey'
 --
@@ -101,13 +99,11 @@ data TablesList' = TablesList'
 --
 -- * 'tlProjectId'
 --
--- * 'tlOauthToken'
+-- * 'tlOAuthToken'
 --
 -- * 'tlMaxResults'
 --
 -- * 'tlFields'
---
--- * 'tlAlt'
 tablesList'
     :: Text -- ^ 'datasetId'
     -> Text -- ^ 'projectId'
@@ -116,15 +112,14 @@ tablesList' pTlDatasetId_ pTlProjectId_ =
     TablesList'
     { _tlQuotaUser = Nothing
     , _tlPrettyPrint = True
-    , _tlUserIp = Nothing
+    , _tlUserIP = Nothing
     , _tlKey = Nothing
     , _tlDatasetId = pTlDatasetId_
     , _tlPageToken = Nothing
     , _tlProjectId = pTlProjectId_
-    , _tlOauthToken = Nothing
+    , _tlOAuthToken = Nothing
     , _tlMaxResults = Nothing
     , _tlFields = Nothing
-    , _tlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -142,13 +137,13 @@ tlPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tlUserIp :: Lens' TablesList' (Maybe Text)
-tlUserIp = lens _tlUserIp (\ s a -> s{_tlUserIp = a})
+tlUserIP :: Lens' TablesList' (Maybe Text)
+tlUserIP = lens _tlUserIP (\ s a -> s{_tlUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tlKey :: Lens' TablesList' (Maybe Text)
+tlKey :: Lens' TablesList' (Maybe Key)
 tlKey = lens _tlKey (\ s a -> s{_tlKey = a})
 
 -- | Dataset ID of the tables to list
@@ -168,9 +163,9 @@ tlProjectId
   = lens _tlProjectId (\ s a -> s{_tlProjectId = a})
 
 -- | OAuth 2.0 token for the current user.
-tlOauthToken :: Lens' TablesList' (Maybe Text)
-tlOauthToken
-  = lens _tlOauthToken (\ s a -> s{_tlOauthToken = a})
+tlOAuthToken :: Lens' TablesList' (Maybe OAuthToken)
+tlOAuthToken
+  = lens _tlOAuthToken (\ s a -> s{_tlOAuthToken = a})
 
 -- | Maximum number of results to return
 tlMaxResults :: Lens' TablesList' (Maybe Word32)
@@ -181,23 +176,23 @@ tlMaxResults
 tlFields :: Lens' TablesList' (Maybe Text)
 tlFields = lens _tlFields (\ s a -> s{_tlFields = a})
 
--- | Data format for the response.
-tlAlt :: Lens' TablesList' Alt
-tlAlt = lens _tlAlt (\ s a -> s{_tlAlt = a})
+instance GoogleAuth TablesList' where
+        authKey = tlKey . _Just
+        authToken = tlOAuthToken . _Just
 
 instance GoogleRequest TablesList' where
         type Rs TablesList' = TableList
         request = requestWithRoute defReq bigQueryURL
         requestWithRoute r u TablesList'{..}
-          = go _tlQuotaUser (Just _tlPrettyPrint) _tlUserIp
+          = go _tlQuotaUser (Just _tlPrettyPrint) _tlUserIP
               _tlKey
               _tlDatasetId
               _tlPageToken
               _tlProjectId
-              _tlOauthToken
+              _tlOAuthToken
               _tlMaxResults
               _tlFields
-              (Just _tlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy TablesListResource)
                       r

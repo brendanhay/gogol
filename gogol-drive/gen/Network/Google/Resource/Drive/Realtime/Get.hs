@@ -33,13 +33,12 @@ module Network.Google.Resource.Drive.Realtime.Get
     -- * Request Lenses
     , reaQuotaUser
     , reaPrettyPrint
-    , reaUserIp
+    , reaUserIP
     , reaKey
     , reaFileId
-    , reaOauthToken
+    , reaOAuthToken
     , reaRevision
     , reaFields
-    , reaAlt
     ) where
 
 import           Network.Google.Drive.Types
@@ -54,11 +53,23 @@ type RealtimeGetResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "revision" Int32 :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] ()
+                         QueryParam "alt" AltJSON :> Get '[JSON] ()
+       :<|>
+       "files" :>
+         Capture "fileId" Text :>
+           "realtime" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
+                       QueryParam "revision" Int32 :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Media :> Get '[OctetStream] Stream
 
 -- | Exports the contents of the Realtime API data model associated with this
 -- file as JSON.
@@ -67,13 +78,12 @@ type RealtimeGetResource =
 data RealtimeGet' = RealtimeGet'
     { _reaQuotaUser   :: !(Maybe Text)
     , _reaPrettyPrint :: !Bool
-    , _reaUserIp      :: !(Maybe Text)
-    , _reaKey         :: !(Maybe Text)
+    , _reaUserIP      :: !(Maybe Text)
+    , _reaKey         :: !(Maybe Key)
     , _reaFileId      :: !Text
-    , _reaOauthToken  :: !(Maybe Text)
+    , _reaOAuthToken  :: !(Maybe OAuthToken)
     , _reaRevision    :: !(Maybe Int32)
     , _reaFields      :: !(Maybe Text)
-    , _reaAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RealtimeGet'' with the minimum fields required to make a request.
@@ -84,19 +94,17 @@ data RealtimeGet' = RealtimeGet'
 --
 -- * 'reaPrettyPrint'
 --
--- * 'reaUserIp'
+-- * 'reaUserIP'
 --
 -- * 'reaKey'
 --
 -- * 'reaFileId'
 --
--- * 'reaOauthToken'
+-- * 'reaOAuthToken'
 --
 -- * 'reaRevision'
 --
 -- * 'reaFields'
---
--- * 'reaAlt'
 realtimeGet'
     :: Text -- ^ 'fileId'
     -> RealtimeGet'
@@ -104,13 +112,12 @@ realtimeGet' pReaFileId_ =
     RealtimeGet'
     { _reaQuotaUser = Nothing
     , _reaPrettyPrint = True
-    , _reaUserIp = Nothing
+    , _reaUserIP = Nothing
     , _reaKey = Nothing
     , _reaFileId = pReaFileId_
-    , _reaOauthToken = Nothing
+    , _reaOAuthToken = Nothing
     , _reaRevision = Nothing
     , _reaFields = Nothing
-    , _reaAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -128,14 +135,14 @@ reaPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-reaUserIp :: Lens' RealtimeGet' (Maybe Text)
-reaUserIp
-  = lens _reaUserIp (\ s a -> s{_reaUserIp = a})
+reaUserIP :: Lens' RealtimeGet' (Maybe Text)
+reaUserIP
+  = lens _reaUserIP (\ s a -> s{_reaUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-reaKey :: Lens' RealtimeGet' (Maybe Text)
+reaKey :: Lens' RealtimeGet' (Maybe Key)
 reaKey = lens _reaKey (\ s a -> s{_reaKey = a})
 
 -- | The ID of the file that the Realtime API data model is associated with.
@@ -144,10 +151,10 @@ reaFileId
   = lens _reaFileId (\ s a -> s{_reaFileId = a})
 
 -- | OAuth 2.0 token for the current user.
-reaOauthToken :: Lens' RealtimeGet' (Maybe Text)
-reaOauthToken
-  = lens _reaOauthToken
-      (\ s a -> s{_reaOauthToken = a})
+reaOAuthToken :: Lens' RealtimeGet' (Maybe OAuthToken)
+reaOAuthToken
+  = lens _reaOAuthToken
+      (\ s a -> s{_reaOAuthToken = a})
 
 -- | The revision of the Realtime API data model to export. Revisions start
 -- at 1 (the initial empty data model) and are incremented with each
@@ -162,22 +169,39 @@ reaFields :: Lens' RealtimeGet' (Maybe Text)
 reaFields
   = lens _reaFields (\ s a -> s{_reaFields = a})
 
--- | Data format for the response.
-reaAlt :: Lens' RealtimeGet' Alt
-reaAlt = lens _reaAlt (\ s a -> s{_reaAlt = a})
+instance GoogleAuth RealtimeGet' where
+        authKey = reaKey . _Just
+        authToken = reaOAuthToken . _Just
 
 instance GoogleRequest RealtimeGet' where
         type Rs RealtimeGet' = ()
         request = requestWithRoute defReq driveURL
         requestWithRoute r u RealtimeGet'{..}
-          = go _reaQuotaUser (Just _reaPrettyPrint) _reaUserIp
+          = go _reaQuotaUser (Just _reaPrettyPrint) _reaUserIP
               _reaKey
               _reaFileId
-              _reaOauthToken
+              _reaOAuthToken
               _reaRevision
               _reaFields
-              (Just _reaAlt)
-          where go
+              (Just AltJSON)
+          where go :<|> _
+                  = clientWithRoute
+                      (Proxy :: Proxy RealtimeGetResource)
+                      r
+                      u
+
+instance GoogleRequest RealtimeGet' where
+        type Rs (Download RealtimeGet') = Stream
+        request = requestWithRoute defReq driveURL
+        requestWithRoute r u RealtimeGet'{..}
+          = go _reaQuotaUser (Just _reaPrettyPrint) _reaUserIP
+              _reaKey
+              _reaFileId
+              _reaOAuthToken
+              _reaRevision
+              _reaFields
+              (Just Media)
+          where go :<|> _
                   = clientWithRoute
                       (Proxy :: Proxy RealtimeGetResource)
                       r

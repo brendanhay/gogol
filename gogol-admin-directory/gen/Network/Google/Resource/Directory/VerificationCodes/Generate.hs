@@ -32,12 +32,11 @@ module Network.Google.Resource.Directory.VerificationCodes.Generate
     -- * Request Lenses
     , vcgQuotaUser
     , vcgPrettyPrint
-    , vcgUserIp
+    , vcgUserIP
     , vcgKey
-    , vcgOauthToken
+    , vcgOAuthToken
     , vcgUserKey
     , vcgFields
-    , vcgAlt
     ) where
 
 import           Network.Google.AdminDirectory.Types
@@ -53,10 +52,10 @@ type VerificationCodesGenerateResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Post '[JSON] ()
+                         QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Generate new backup verification codes for the user.
 --
@@ -64,12 +63,11 @@ type VerificationCodesGenerateResource =
 data VerificationCodesGenerate' = VerificationCodesGenerate'
     { _vcgQuotaUser   :: !(Maybe Text)
     , _vcgPrettyPrint :: !Bool
-    , _vcgUserIp      :: !(Maybe Text)
-    , _vcgKey         :: !(Maybe Text)
-    , _vcgOauthToken  :: !(Maybe Text)
+    , _vcgUserIP      :: !(Maybe Text)
+    , _vcgKey         :: !(Maybe Key)
+    , _vcgOAuthToken  :: !(Maybe OAuthToken)
     , _vcgUserKey     :: !Text
     , _vcgFields      :: !(Maybe Text)
-    , _vcgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VerificationCodesGenerate'' with the minimum fields required to make a request.
@@ -80,17 +78,15 @@ data VerificationCodesGenerate' = VerificationCodesGenerate'
 --
 -- * 'vcgPrettyPrint'
 --
--- * 'vcgUserIp'
+-- * 'vcgUserIP'
 --
 -- * 'vcgKey'
 --
--- * 'vcgOauthToken'
+-- * 'vcgOAuthToken'
 --
 -- * 'vcgUserKey'
 --
 -- * 'vcgFields'
---
--- * 'vcgAlt'
 verificationCodesGenerate'
     :: Text -- ^ 'userKey'
     -> VerificationCodesGenerate'
@@ -98,12 +94,11 @@ verificationCodesGenerate' pVcgUserKey_ =
     VerificationCodesGenerate'
     { _vcgQuotaUser = Nothing
     , _vcgPrettyPrint = True
-    , _vcgUserIp = Nothing
+    , _vcgUserIP = Nothing
     , _vcgKey = Nothing
-    , _vcgOauthToken = Nothing
+    , _vcgOAuthToken = Nothing
     , _vcgUserKey = pVcgUserKey_
     , _vcgFields = Nothing
-    , _vcgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -121,21 +116,21 @@ vcgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-vcgUserIp :: Lens' VerificationCodesGenerate' (Maybe Text)
-vcgUserIp
-  = lens _vcgUserIp (\ s a -> s{_vcgUserIp = a})
+vcgUserIP :: Lens' VerificationCodesGenerate' (Maybe Text)
+vcgUserIP
+  = lens _vcgUserIP (\ s a -> s{_vcgUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vcgKey :: Lens' VerificationCodesGenerate' (Maybe Text)
+vcgKey :: Lens' VerificationCodesGenerate' (Maybe Key)
 vcgKey = lens _vcgKey (\ s a -> s{_vcgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-vcgOauthToken :: Lens' VerificationCodesGenerate' (Maybe Text)
-vcgOauthToken
-  = lens _vcgOauthToken
-      (\ s a -> s{_vcgOauthToken = a})
+vcgOAuthToken :: Lens' VerificationCodesGenerate' (Maybe OAuthToken)
+vcgOAuthToken
+  = lens _vcgOAuthToken
+      (\ s a -> s{_vcgOAuthToken = a})
 
 -- | Email or immutable Id of the user
 vcgUserKey :: Lens' VerificationCodesGenerate' Text
@@ -147,21 +142,21 @@ vcgFields :: Lens' VerificationCodesGenerate' (Maybe Text)
 vcgFields
   = lens _vcgFields (\ s a -> s{_vcgFields = a})
 
--- | Data format for the response.
-vcgAlt :: Lens' VerificationCodesGenerate' Alt
-vcgAlt = lens _vcgAlt (\ s a -> s{_vcgAlt = a})
+instance GoogleAuth VerificationCodesGenerate' where
+        authKey = vcgKey . _Just
+        authToken = vcgOAuthToken . _Just
 
 instance GoogleRequest VerificationCodesGenerate'
          where
         type Rs VerificationCodesGenerate' = ()
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u VerificationCodesGenerate'{..}
-          = go _vcgQuotaUser (Just _vcgPrettyPrint) _vcgUserIp
+          = go _vcgQuotaUser (Just _vcgPrettyPrint) _vcgUserIP
               _vcgKey
-              _vcgOauthToken
+              _vcgOAuthToken
               _vcgUserKey
               _vcgFields
-              (Just _vcgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy VerificationCodesGenerateResource)

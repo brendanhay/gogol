@@ -32,12 +32,12 @@ module Network.Google.Resource.PlusDomains.Circles.Insert
     -- * Request Lenses
     , cirQuotaUser
     , cirPrettyPrint
-    , cirUserIp
+    , cirCircle
+    , cirUserIP
     , cirUserId
     , cirKey
-    , cirOauthToken
+    , cirOAuthToken
     , cirFields
-    , cirAlt
     ) where
 
 import           Network.Google.PlusDomains.Types
@@ -52,10 +52,11 @@ type CirclesInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] Circle
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Circle :> Post '[JSON] Circle
 
 -- | Create a new circle for the authenticated user.
 --
@@ -63,12 +64,12 @@ type CirclesInsertResource =
 data CirclesInsert' = CirclesInsert'
     { _cirQuotaUser   :: !(Maybe Text)
     , _cirPrettyPrint :: !Bool
-    , _cirUserIp      :: !(Maybe Text)
+    , _cirCircle      :: !Circle
+    , _cirUserIP      :: !(Maybe Text)
     , _cirUserId      :: !Text
-    , _cirKey         :: !(Maybe Text)
-    , _cirOauthToken  :: !(Maybe Text)
+    , _cirKey         :: !(Maybe Key)
+    , _cirOAuthToken  :: !(Maybe OAuthToken)
     , _cirFields      :: !(Maybe Text)
-    , _cirAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CirclesInsert'' with the minimum fields required to make a request.
@@ -79,30 +80,31 @@ data CirclesInsert' = CirclesInsert'
 --
 -- * 'cirPrettyPrint'
 --
--- * 'cirUserIp'
+-- * 'cirCircle'
+--
+-- * 'cirUserIP'
 --
 -- * 'cirUserId'
 --
 -- * 'cirKey'
 --
--- * 'cirOauthToken'
+-- * 'cirOAuthToken'
 --
 -- * 'cirFields'
---
--- * 'cirAlt'
 circlesInsert'
-    :: Text -- ^ 'userId'
+    :: Circle -- ^ 'Circle'
+    -> Text -- ^ 'userId'
     -> CirclesInsert'
-circlesInsert' pCirUserId_ =
+circlesInsert' pCirCircle_ pCirUserId_ =
     CirclesInsert'
     { _cirQuotaUser = Nothing
     , _cirPrettyPrint = True
-    , _cirUserIp = Nothing
+    , _cirCircle = pCirCircle_
+    , _cirUserIP = Nothing
     , _cirUserId = pCirUserId_
     , _cirKey = Nothing
-    , _cirOauthToken = Nothing
+    , _cirOAuthToken = Nothing
     , _cirFields = Nothing
-    , _cirAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -118,11 +120,16 @@ cirPrettyPrint
   = lens _cirPrettyPrint
       (\ s a -> s{_cirPrettyPrint = a})
 
+-- | Multipart request metadata.
+cirCircle :: Lens' CirclesInsert' Circle
+cirCircle
+  = lens _cirCircle (\ s a -> s{_cirCircle = a})
+
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cirUserIp :: Lens' CirclesInsert' (Maybe Text)
-cirUserIp
-  = lens _cirUserIp (\ s a -> s{_cirUserIp = a})
+cirUserIP :: Lens' CirclesInsert' (Maybe Text)
+cirUserIP
+  = lens _cirUserIP (\ s a -> s{_cirUserIP = a})
 
 -- | The ID of the user to create the circle on behalf of. The value \"me\"
 -- can be used to indicate the authenticated user.
@@ -133,34 +140,35 @@ cirUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cirKey :: Lens' CirclesInsert' (Maybe Text)
+cirKey :: Lens' CirclesInsert' (Maybe Key)
 cirKey = lens _cirKey (\ s a -> s{_cirKey = a})
 
 -- | OAuth 2.0 token for the current user.
-cirOauthToken :: Lens' CirclesInsert' (Maybe Text)
-cirOauthToken
-  = lens _cirOauthToken
-      (\ s a -> s{_cirOauthToken = a})
+cirOAuthToken :: Lens' CirclesInsert' (Maybe OAuthToken)
+cirOAuthToken
+  = lens _cirOAuthToken
+      (\ s a -> s{_cirOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cirFields :: Lens' CirclesInsert' (Maybe Text)
 cirFields
   = lens _cirFields (\ s a -> s{_cirFields = a})
 
--- | Data format for the response.
-cirAlt :: Lens' CirclesInsert' Alt
-cirAlt = lens _cirAlt (\ s a -> s{_cirAlt = a})
+instance GoogleAuth CirclesInsert' where
+        authKey = cirKey . _Just
+        authToken = cirOAuthToken . _Just
 
 instance GoogleRequest CirclesInsert' where
         type Rs CirclesInsert' = Circle
         request = requestWithRoute defReq plusDomainsURL
         requestWithRoute r u CirclesInsert'{..}
-          = go _cirQuotaUser (Just _cirPrettyPrint) _cirUserIp
+          = go _cirQuotaUser (Just _cirPrettyPrint) _cirUserIP
               _cirUserId
               _cirKey
-              _cirOauthToken
+              _cirOAuthToken
               _cirFields
-              (Just _cirAlt)
+              (Just AltJSON)
+              _cirCircle
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CirclesInsertResource)

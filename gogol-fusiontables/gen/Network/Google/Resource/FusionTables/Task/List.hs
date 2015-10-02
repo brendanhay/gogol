@@ -32,15 +32,14 @@ module Network.Google.Resource.FusionTables.Task.List
     -- * Request Lenses
     , tlQuotaUser
     , tlPrettyPrint
-    , tlUserIp
+    , tlUserIP
     , tlKey
     , tlPageToken
-    , tlOauthToken
+    , tlOAuthToken
     , tlTableId
     , tlStartIndex
     , tlMaxResults
     , tlFields
-    , tlAlt
     ) where
 
 import           Network.Google.FusionTables.Types
@@ -55,13 +54,13 @@ type TaskListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "startIndex" Word32 :>
                          QueryParam "maxResults" Word32 :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Get '[JSON] TaskList
+                             QueryParam "alt" AltJSON :> Get '[JSON] TaskList
 
 -- | Retrieves a list of tasks.
 --
@@ -69,15 +68,14 @@ type TaskListResource =
 data TaskList' = TaskList'
     { _tlQuotaUser   :: !(Maybe Text)
     , _tlPrettyPrint :: !Bool
-    , _tlUserIp      :: !(Maybe Text)
-    , _tlKey         :: !(Maybe Text)
+    , _tlUserIP      :: !(Maybe Text)
+    , _tlKey         :: !(Maybe Key)
     , _tlPageToken   :: !(Maybe Text)
-    , _tlOauthToken  :: !(Maybe Text)
+    , _tlOAuthToken  :: !(Maybe OAuthToken)
     , _tlTableId     :: !Text
     , _tlStartIndex  :: !(Maybe Word32)
     , _tlMaxResults  :: !(Maybe Word32)
     , _tlFields      :: !(Maybe Text)
-    , _tlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TaskList'' with the minimum fields required to make a request.
@@ -88,13 +86,13 @@ data TaskList' = TaskList'
 --
 -- * 'tlPrettyPrint'
 --
--- * 'tlUserIp'
+-- * 'tlUserIP'
 --
 -- * 'tlKey'
 --
 -- * 'tlPageToken'
 --
--- * 'tlOauthToken'
+-- * 'tlOAuthToken'
 --
 -- * 'tlTableId'
 --
@@ -103,8 +101,6 @@ data TaskList' = TaskList'
 -- * 'tlMaxResults'
 --
 -- * 'tlFields'
---
--- * 'tlAlt'
 taskList'
     :: Text -- ^ 'tableId'
     -> TaskList'
@@ -112,15 +108,14 @@ taskList' pTlTableId_ =
     TaskList'
     { _tlQuotaUser = Nothing
     , _tlPrettyPrint = True
-    , _tlUserIp = Nothing
+    , _tlUserIP = Nothing
     , _tlKey = Nothing
     , _tlPageToken = Nothing
-    , _tlOauthToken = Nothing
+    , _tlOAuthToken = Nothing
     , _tlTableId = pTlTableId_
     , _tlStartIndex = Nothing
     , _tlMaxResults = Nothing
     , _tlFields = Nothing
-    , _tlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -138,13 +133,13 @@ tlPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tlUserIp :: Lens' TaskList' (Maybe Text)
-tlUserIp = lens _tlUserIp (\ s a -> s{_tlUserIp = a})
+tlUserIP :: Lens' TaskList' (Maybe Text)
+tlUserIP = lens _tlUserIP (\ s a -> s{_tlUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tlKey :: Lens' TaskList' (Maybe Text)
+tlKey :: Lens' TaskList' (Maybe Key)
 tlKey = lens _tlKey (\ s a -> s{_tlKey = a})
 
 -- | Continuation token specifying which result page to return.
@@ -153,9 +148,9 @@ tlPageToken
   = lens _tlPageToken (\ s a -> s{_tlPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-tlOauthToken :: Lens' TaskList' (Maybe Text)
-tlOauthToken
-  = lens _tlOauthToken (\ s a -> s{_tlOauthToken = a})
+tlOAuthToken :: Lens' TaskList' (Maybe OAuthToken)
+tlOAuthToken
+  = lens _tlOAuthToken (\ s a -> s{_tlOAuthToken = a})
 
 -- | Table whose tasks are being listed.
 tlTableId :: Lens' TaskList' Text
@@ -176,23 +171,23 @@ tlMaxResults
 tlFields :: Lens' TaskList' (Maybe Text)
 tlFields = lens _tlFields (\ s a -> s{_tlFields = a})
 
--- | Data format for the response.
-tlAlt :: Lens' TaskList' Alt
-tlAlt = lens _tlAlt (\ s a -> s{_tlAlt = a})
+instance GoogleAuth TaskList' where
+        authKey = tlKey . _Just
+        authToken = tlOAuthToken . _Just
 
 instance GoogleRequest TaskList' where
         type Rs TaskList' = TaskList
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u TaskList'{..}
-          = go _tlQuotaUser (Just _tlPrettyPrint) _tlUserIp
+          = go _tlQuotaUser (Just _tlPrettyPrint) _tlUserIP
               _tlKey
               _tlPageToken
-              _tlOauthToken
+              _tlOAuthToken
               _tlTableId
               _tlStartIndex
               _tlMaxResults
               _tlFields
-              (Just _tlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy TaskListResource) r
                       u

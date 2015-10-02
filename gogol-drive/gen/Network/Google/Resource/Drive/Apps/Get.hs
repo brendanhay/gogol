@@ -32,12 +32,11 @@ module Network.Google.Resource.Drive.Apps.Get
     -- * Request Lenses
     , aQuotaUser
     , aPrettyPrint
-    , aUserIp
+    , aUserIP
     , aAppId
     , aKey
-    , aOauthToken
+    , aOAuthToken
     , aFields
-    , aAlt
     ) where
 
 import           Network.Google.Drive.Types
@@ -51,10 +50,10 @@ type AppsGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Get '[JSON] App
+                     QueryParam "alt" AltJSON :> Get '[JSON] App
 
 -- | Gets a specific app.
 --
@@ -62,12 +61,11 @@ type AppsGetResource =
 data AppsGet' = AppsGet'
     { _aQuotaUser   :: !(Maybe Text)
     , _aPrettyPrint :: !Bool
-    , _aUserIp      :: !(Maybe Text)
+    , _aUserIP      :: !(Maybe Text)
     , _aAppId       :: !Text
-    , _aKey         :: !(Maybe Text)
-    , _aOauthToken  :: !(Maybe Text)
+    , _aKey         :: !(Maybe Key)
+    , _aOAuthToken  :: !(Maybe OAuthToken)
     , _aFields      :: !(Maybe Text)
-    , _aAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AppsGet'' with the minimum fields required to make a request.
@@ -78,17 +76,15 @@ data AppsGet' = AppsGet'
 --
 -- * 'aPrettyPrint'
 --
--- * 'aUserIp'
+-- * 'aUserIP'
 --
 -- * 'aAppId'
 --
 -- * 'aKey'
 --
--- * 'aOauthToken'
+-- * 'aOAuthToken'
 --
 -- * 'aFields'
---
--- * 'aAlt'
 appsGet'
     :: Text -- ^ 'appId'
     -> AppsGet'
@@ -96,12 +92,11 @@ appsGet' pAAppId_ =
     AppsGet'
     { _aQuotaUser = Nothing
     , _aPrettyPrint = True
-    , _aUserIp = Nothing
+    , _aUserIP = Nothing
     , _aAppId = pAAppId_
     , _aKey = Nothing
-    , _aOauthToken = Nothing
+    , _aOAuthToken = Nothing
     , _aFields = Nothing
-    , _aAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -118,8 +113,8 @@ aPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-aUserIp :: Lens' AppsGet' (Maybe Text)
-aUserIp = lens _aUserIp (\ s a -> s{_aUserIp = a})
+aUserIP :: Lens' AppsGet' (Maybe Text)
+aUserIP = lens _aUserIP (\ s a -> s{_aUserIP = a})
 
 -- | The ID of the app.
 aAppId :: Lens' AppsGet' Text
@@ -128,32 +123,32 @@ aAppId = lens _aAppId (\ s a -> s{_aAppId = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aKey :: Lens' AppsGet' (Maybe Text)
+aKey :: Lens' AppsGet' (Maybe Key)
 aKey = lens _aKey (\ s a -> s{_aKey = a})
 
 -- | OAuth 2.0 token for the current user.
-aOauthToken :: Lens' AppsGet' (Maybe Text)
-aOauthToken
-  = lens _aOauthToken (\ s a -> s{_aOauthToken = a})
+aOAuthToken :: Lens' AppsGet' (Maybe OAuthToken)
+aOAuthToken
+  = lens _aOAuthToken (\ s a -> s{_aOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 aFields :: Lens' AppsGet' (Maybe Text)
 aFields = lens _aFields (\ s a -> s{_aFields = a})
 
--- | Data format for the response.
-aAlt :: Lens' AppsGet' Alt
-aAlt = lens _aAlt (\ s a -> s{_aAlt = a})
+instance GoogleAuth AppsGet' where
+        authKey = aKey . _Just
+        authToken = aOAuthToken . _Just
 
 instance GoogleRequest AppsGet' where
         type Rs AppsGet' = App
         request = requestWithRoute defReq driveURL
         requestWithRoute r u AppsGet'{..}
-          = go _aQuotaUser (Just _aPrettyPrint) _aUserIp
+          = go _aQuotaUser (Just _aPrettyPrint) _aUserIP
               _aAppId
               _aKey
-              _aOauthToken
+              _aOAuthToken
               _aFields
-              (Just _aAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy AppsGetResource) r
                       u

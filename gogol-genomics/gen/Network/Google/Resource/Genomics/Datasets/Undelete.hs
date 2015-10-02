@@ -34,12 +34,11 @@ module Network.Google.Resource.Genomics.Datasets.Undelete
     -- * Request Lenses
     , duQuotaUser
     , duPrettyPrint
-    , duUserIp
+    , duUserIP
     , duKey
     , duDatasetId
-    , duOauthToken
+    , duOAuthToken
     , duFields
-    , duAlt
     ) where
 
 import           Network.Google.Genomics.Types
@@ -54,10 +53,10 @@ type DatasetsUndeleteResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] Dataset
+                       QueryParam "alt" AltJSON :> Post '[JSON] Dataset
 
 -- | Undeletes a dataset by restoring a dataset which was deleted via this
 -- API. This operation is only possible for a week after the deletion
@@ -67,12 +66,11 @@ type DatasetsUndeleteResource =
 data DatasetsUndelete' = DatasetsUndelete'
     { _duQuotaUser   :: !(Maybe Text)
     , _duPrettyPrint :: !Bool
-    , _duUserIp      :: !(Maybe Text)
-    , _duKey         :: !(Maybe Text)
+    , _duUserIP      :: !(Maybe Text)
+    , _duKey         :: !(Maybe Key)
     , _duDatasetId   :: !Text
-    , _duOauthToken  :: !(Maybe Text)
+    , _duOAuthToken  :: !(Maybe OAuthToken)
     , _duFields      :: !(Maybe Text)
-    , _duAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetsUndelete'' with the minimum fields required to make a request.
@@ -83,17 +81,15 @@ data DatasetsUndelete' = DatasetsUndelete'
 --
 -- * 'duPrettyPrint'
 --
--- * 'duUserIp'
+-- * 'duUserIP'
 --
 -- * 'duKey'
 --
 -- * 'duDatasetId'
 --
--- * 'duOauthToken'
+-- * 'duOAuthToken'
 --
 -- * 'duFields'
---
--- * 'duAlt'
 datasetsUndelete'
     :: Text -- ^ 'datasetId'
     -> DatasetsUndelete'
@@ -101,12 +97,11 @@ datasetsUndelete' pDuDatasetId_ =
     DatasetsUndelete'
     { _duQuotaUser = Nothing
     , _duPrettyPrint = True
-    , _duUserIp = Nothing
+    , _duUserIP = Nothing
     , _duKey = Nothing
     , _duDatasetId = pDuDatasetId_
-    , _duOauthToken = Nothing
+    , _duOAuthToken = Nothing
     , _duFields = Nothing
-    , _duAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -124,13 +119,13 @@ duPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-duUserIp :: Lens' DatasetsUndelete' (Maybe Text)
-duUserIp = lens _duUserIp (\ s a -> s{_duUserIp = a})
+duUserIP :: Lens' DatasetsUndelete' (Maybe Text)
+duUserIP = lens _duUserIP (\ s a -> s{_duUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-duKey :: Lens' DatasetsUndelete' (Maybe Text)
+duKey :: Lens' DatasetsUndelete' (Maybe Key)
 duKey = lens _duKey (\ s a -> s{_duKey = a})
 
 -- | The ID of the dataset to be undeleted.
@@ -139,28 +134,28 @@ duDatasetId
   = lens _duDatasetId (\ s a -> s{_duDatasetId = a})
 
 -- | OAuth 2.0 token for the current user.
-duOauthToken :: Lens' DatasetsUndelete' (Maybe Text)
-duOauthToken
-  = lens _duOauthToken (\ s a -> s{_duOauthToken = a})
+duOAuthToken :: Lens' DatasetsUndelete' (Maybe OAuthToken)
+duOAuthToken
+  = lens _duOAuthToken (\ s a -> s{_duOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 duFields :: Lens' DatasetsUndelete' (Maybe Text)
 duFields = lens _duFields (\ s a -> s{_duFields = a})
 
--- | Data format for the response.
-duAlt :: Lens' DatasetsUndelete' Alt
-duAlt = lens _duAlt (\ s a -> s{_duAlt = a})
+instance GoogleAuth DatasetsUndelete' where
+        authKey = duKey . _Just
+        authToken = duOAuthToken . _Just
 
 instance GoogleRequest DatasetsUndelete' where
         type Rs DatasetsUndelete' = Dataset
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u DatasetsUndelete'{..}
-          = go _duQuotaUser (Just _duPrettyPrint) _duUserIp
+          = go _duQuotaUser (Just _duPrettyPrint) _duUserIP
               _duKey
               _duDatasetId
-              _duOauthToken
+              _duOAuthToken
               _duFields
-              (Just _duAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy DatasetsUndeleteResource)

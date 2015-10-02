@@ -33,7 +33,7 @@ module Network.Google.Resource.Gan.Reports.Get
     , rgStatus
     , rgQuotaUser
     , rgPrettyPrint
-    , rgUserIp
+    , rgUserIP
     , rgAdvertiserId
     , rgEndDate
     , rgRoleId
@@ -43,14 +43,13 @@ module Network.Google.Resource.Gan.Reports.Get
     , rgKey
     , rgCalculateTotals
     , rgLinkId
-    , rgOauthToken
+    , rgOAuthToken
     , rgOrderId
     , rgPublisherId
     , rgReportType
     , rgStartIndex
     , rgMaxResults
     , rgFields
-    , rgAlt
     ) where
 
 import           Network.Google.Affiliates.Types
@@ -71,16 +70,16 @@ type ReportsGetResource =
                        QueryParam "endDate" Text :>
                          QueryParam "eventType" GanReportsGetEventType :>
                            QueryParam "startDate" Text :>
-                             QueryParam "key" Text :>
+                             QueryParam "key" Key :>
                                QueryParam "calculateTotals" Bool :>
                                  QueryParams "linkId" Text :>
-                                   QueryParam "oauth_token" Text :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParams "orderId" Text :>
                                        QueryParams "publisherId" Text :>
                                          QueryParam "startIndex" Word32 :>
                                            QueryParam "maxResults" Word32 :>
                                              QueryParam "fields" Text :>
-                                               QueryParam "alt" Alt :>
+                                               QueryParam "alt" AltJSON :>
                                                  Get '[JSON] Report
 
 -- | Retrieves a report of the specified type.
@@ -90,24 +89,23 @@ data ReportsGet' = ReportsGet'
     { _rgStatus          :: !(Maybe GanReportsGetStatus)
     , _rgQuotaUser       :: !(Maybe Text)
     , _rgPrettyPrint     :: !Bool
-    , _rgUserIp          :: !(Maybe Text)
+    , _rgUserIP          :: !(Maybe Text)
     , _rgAdvertiserId    :: !(Maybe Text)
     , _rgEndDate         :: !(Maybe Text)
     , _rgRoleId          :: !Text
     , _rgRole            :: !GanReportsGetRole
     , _rgEventType       :: !(Maybe GanReportsGetEventType)
     , _rgStartDate       :: !(Maybe Text)
-    , _rgKey             :: !(Maybe Text)
+    , _rgKey             :: !(Maybe Key)
     , _rgCalculateTotals :: !(Maybe Bool)
     , _rgLinkId          :: !(Maybe Text)
-    , _rgOauthToken      :: !(Maybe Text)
+    , _rgOAuthToken      :: !(Maybe OAuthToken)
     , _rgOrderId         :: !(Maybe Text)
     , _rgPublisherId     :: !(Maybe Text)
     , _rgReportType      :: !GanReportsGetReportType
     , _rgStartIndex      :: !(Maybe Word32)
     , _rgMaxResults      :: !(Maybe Word32)
     , _rgFields          :: !(Maybe Text)
-    , _rgAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsGet'' with the minimum fields required to make a request.
@@ -120,7 +118,7 @@ data ReportsGet' = ReportsGet'
 --
 -- * 'rgPrettyPrint'
 --
--- * 'rgUserIp'
+-- * 'rgUserIP'
 --
 -- * 'rgAdvertiserId'
 --
@@ -140,7 +138,7 @@ data ReportsGet' = ReportsGet'
 --
 -- * 'rgLinkId'
 --
--- * 'rgOauthToken'
+-- * 'rgOAuthToken'
 --
 -- * 'rgOrderId'
 --
@@ -153,8 +151,6 @@ data ReportsGet' = ReportsGet'
 -- * 'rgMaxResults'
 --
 -- * 'rgFields'
---
--- * 'rgAlt'
 reportsGet'
     :: Text -- ^ 'roleId'
     -> GanReportsGetRole -- ^ 'role'
@@ -165,7 +161,7 @@ reportsGet' pRgRoleId_ pRgRole_ pRgReportType_ =
     { _rgStatus = Nothing
     , _rgQuotaUser = Nothing
     , _rgPrettyPrint = True
-    , _rgUserIp = Nothing
+    , _rgUserIP = Nothing
     , _rgAdvertiserId = Nothing
     , _rgEndDate = Nothing
     , _rgRoleId = pRgRoleId_
@@ -175,14 +171,13 @@ reportsGet' pRgRoleId_ pRgRole_ pRgReportType_ =
     , _rgKey = Nothing
     , _rgCalculateTotals = Nothing
     , _rgLinkId = Nothing
-    , _rgOauthToken = Nothing
+    , _rgOAuthToken = Nothing
     , _rgOrderId = Nothing
     , _rgPublisherId = Nothing
     , _rgReportType = pRgReportType_
     , _rgStartIndex = Nothing
     , _rgMaxResults = Nothing
     , _rgFields = Nothing
-    , _rgAlt = JSON
     }
 
 -- | Filters out all events that do not have the given status. Valid values:
@@ -205,8 +200,8 @@ rgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rgUserIp :: Lens' ReportsGet' (Maybe Text)
-rgUserIp = lens _rgUserIp (\ s a -> s{_rgUserIp = a})
+rgUserIP :: Lens' ReportsGet' (Maybe Text)
+rgUserIP = lens _rgUserIP (\ s a -> s{_rgUserIP = a})
 
 -- | The IDs of the advertisers to look up, if applicable.
 rgAdvertiserId :: Lens' ReportsGet' (Maybe Text)
@@ -246,7 +241,7 @@ rgStartDate
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rgKey :: Lens' ReportsGet' (Maybe Text)
+rgKey :: Lens' ReportsGet' (Maybe Key)
 rgKey = lens _rgKey (\ s a -> s{_rgKey = a})
 
 -- | Whether or not to calculate totals rows. Optional.
@@ -260,9 +255,9 @@ rgLinkId :: Lens' ReportsGet' (Maybe Text)
 rgLinkId = lens _rgLinkId (\ s a -> s{_rgLinkId = a})
 
 -- | OAuth 2.0 token for the current user.
-rgOauthToken :: Lens' ReportsGet' (Maybe Text)
-rgOauthToken
-  = lens _rgOauthToken (\ s a -> s{_rgOauthToken = a})
+rgOAuthToken :: Lens' ReportsGet' (Maybe OAuthToken)
+rgOAuthToken
+  = lens _rgOAuthToken (\ s a -> s{_rgOAuthToken = a})
 
 -- | Filters to capture one of the given order IDs. Optional.
 rgOrderId :: Lens' ReportsGet' (Maybe Text)
@@ -296,16 +291,16 @@ rgMaxResults
 rgFields :: Lens' ReportsGet' (Maybe Text)
 rgFields = lens _rgFields (\ s a -> s{_rgFields = a})
 
--- | Data format for the response.
-rgAlt :: Lens' ReportsGet' Alt
-rgAlt = lens _rgAlt (\ s a -> s{_rgAlt = a})
+instance GoogleAuth ReportsGet' where
+        authKey = rgKey . _Just
+        authToken = rgOAuthToken . _Just
 
 instance GoogleRequest ReportsGet' where
         type Rs ReportsGet' = Report
         request = requestWithRoute defReq affiliatesURL
         requestWithRoute r u ReportsGet'{..}
           = go _rgStatus _rgQuotaUser (Just _rgPrettyPrint)
-              _rgUserIp
+              _rgUserIP
               _rgAdvertiserId
               _rgEndDate
               _rgRoleId
@@ -315,14 +310,14 @@ instance GoogleRequest ReportsGet' where
               _rgKey
               _rgCalculateTotals
               _rgLinkId
-              _rgOauthToken
+              _rgOAuthToken
               _rgOrderId
               _rgPublisherId
               _rgReportType
               _rgStartIndex
               _rgMaxResults
               _rgFields
-              (Just _rgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy ReportsGetResource)
                       r

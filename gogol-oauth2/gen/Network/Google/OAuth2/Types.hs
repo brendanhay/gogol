@@ -27,41 +27,38 @@ module Network.Google.OAuth2.Types
     , jkE
     , jkKty
 
-    -- * Tokeninfo
-    , Tokeninfo
-    , tokeninfo
-    , tAudience
-    , tEmail
-    , tExpiresIn
-    , tAccessType
-    , tScope
-    , tVerifiedEmail
-    , tUserId
-    , tTokenHandle
-    , tIssuedTo
+    -- * TokenInfo
+    , TokenInfo
+    , tokenInfo
+    , tiAudience
+    , tiEmail
+    , tiExpiresIn
+    , tiAccessType
+    , tiScope
+    , tiVerifiedEmail
+    , tiUserId
+    , tiTokenHandle
+    , tiIssuedTo
 
     -- * Jwk
     , Jwk
     , jwk
     , jwkKeys
 
-    -- * Userinfoplus
-    , Userinfoplus
-    , userinfoplus
-    , uHd
-    , uEmail
-    , uLink
-    , uLocale
-    , uGivenName
-    , uFamilyName
-    , uPicture
-    , uGender
-    , uName
-    , uVerifiedEmail
-    , uId
-
-    -- * Alt
-    , Alt (..)
+    -- * UserInfoplus
+    , UserInfoplus
+    , userInfoplus
+    , uiHd
+    , uiEmail
+    , uiLink
+    , uiLocale
+    , uiGivenName
+    , uiFamilyName
+    , uiPicture
+    , uiGender
+    , uiName
+    , uiVerifiedEmail
+    , uiId
     ) where
 
 import           Network.Google.OAuth2.Types.Product

@@ -32,13 +32,13 @@ module Network.Google.Resource.Drive.Revisions.Patch
     -- * Request Lenses
     , rppQuotaUser
     , rppPrettyPrint
-    , rppUserIp
+    , rppUserIP
     , rppKey
     , rppFileId
-    , rppOauthToken
+    , rppOAuthToken
+    , rppRevision
     , rppRevisionId
     , rppFields
-    , rppAlt
     ) where
 
 import           Network.Google.Drive.Types
@@ -54,10 +54,11 @@ type RevisionsPatchResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Patch '[JSON] Revision
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Revision :> Patch '[JSON] Revision
 
 -- | Updates a revision. This method supports patch semantics.
 --
@@ -65,13 +66,13 @@ type RevisionsPatchResource =
 data RevisionsPatch' = RevisionsPatch'
     { _rppQuotaUser   :: !(Maybe Text)
     , _rppPrettyPrint :: !Bool
-    , _rppUserIp      :: !(Maybe Text)
-    , _rppKey         :: !(Maybe Text)
+    , _rppUserIP      :: !(Maybe Text)
+    , _rppKey         :: !(Maybe Key)
     , _rppFileId      :: !Text
-    , _rppOauthToken  :: !(Maybe Text)
+    , _rppOAuthToken  :: !(Maybe OAuthToken)
+    , _rppRevision    :: !Revision
     , _rppRevisionId  :: !Text
     , _rppFields      :: !(Maybe Text)
-    , _rppAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RevisionsPatch'' with the minimum fields required to make a request.
@@ -82,34 +83,35 @@ data RevisionsPatch' = RevisionsPatch'
 --
 -- * 'rppPrettyPrint'
 --
--- * 'rppUserIp'
+-- * 'rppUserIP'
 --
 -- * 'rppKey'
 --
 -- * 'rppFileId'
 --
--- * 'rppOauthToken'
+-- * 'rppOAuthToken'
+--
+-- * 'rppRevision'
 --
 -- * 'rppRevisionId'
 --
 -- * 'rppFields'
---
--- * 'rppAlt'
 revisionsPatch'
     :: Text -- ^ 'fileId'
+    -> Revision -- ^ 'Revision'
     -> Text -- ^ 'revisionId'
     -> RevisionsPatch'
-revisionsPatch' pRppFileId_ pRppRevisionId_ =
+revisionsPatch' pRppFileId_ pRppRevision_ pRppRevisionId_ =
     RevisionsPatch'
     { _rppQuotaUser = Nothing
     , _rppPrettyPrint = True
-    , _rppUserIp = Nothing
+    , _rppUserIP = Nothing
     , _rppKey = Nothing
     , _rppFileId = pRppFileId_
-    , _rppOauthToken = Nothing
+    , _rppOAuthToken = Nothing
+    , _rppRevision = pRppRevision_
     , _rppRevisionId = pRppRevisionId_
     , _rppFields = Nothing
-    , _rppAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,14 +129,14 @@ rppPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rppUserIp :: Lens' RevisionsPatch' (Maybe Text)
-rppUserIp
-  = lens _rppUserIp (\ s a -> s{_rppUserIp = a})
+rppUserIP :: Lens' RevisionsPatch' (Maybe Text)
+rppUserIP
+  = lens _rppUserIP (\ s a -> s{_rppUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rppKey :: Lens' RevisionsPatch' (Maybe Text)
+rppKey :: Lens' RevisionsPatch' (Maybe Key)
 rppKey = lens _rppKey (\ s a -> s{_rppKey = a})
 
 -- | The ID for the file.
@@ -143,10 +145,15 @@ rppFileId
   = lens _rppFileId (\ s a -> s{_rppFileId = a})
 
 -- | OAuth 2.0 token for the current user.
-rppOauthToken :: Lens' RevisionsPatch' (Maybe Text)
-rppOauthToken
-  = lens _rppOauthToken
-      (\ s a -> s{_rppOauthToken = a})
+rppOAuthToken :: Lens' RevisionsPatch' (Maybe OAuthToken)
+rppOAuthToken
+  = lens _rppOAuthToken
+      (\ s a -> s{_rppOAuthToken = a})
+
+-- | Multipart request metadata.
+rppRevision :: Lens' RevisionsPatch' Revision
+rppRevision
+  = lens _rppRevision (\ s a -> s{_rppRevision = a})
 
 -- | The ID for the revision.
 rppRevisionId :: Lens' RevisionsPatch' Text
@@ -159,21 +166,22 @@ rppFields :: Lens' RevisionsPatch' (Maybe Text)
 rppFields
   = lens _rppFields (\ s a -> s{_rppFields = a})
 
--- | Data format for the response.
-rppAlt :: Lens' RevisionsPatch' Alt
-rppAlt = lens _rppAlt (\ s a -> s{_rppAlt = a})
+instance GoogleAuth RevisionsPatch' where
+        authKey = rppKey . _Just
+        authToken = rppOAuthToken . _Just
 
 instance GoogleRequest RevisionsPatch' where
         type Rs RevisionsPatch' = Revision
         request = requestWithRoute defReq driveURL
         requestWithRoute r u RevisionsPatch'{..}
-          = go _rppQuotaUser (Just _rppPrettyPrint) _rppUserIp
+          = go _rppQuotaUser (Just _rppPrettyPrint) _rppUserIP
               _rppKey
               _rppFileId
-              _rppOauthToken
+              _rppOAuthToken
               _rppRevisionId
               _rppFields
-              (Just _rppAlt)
+              (Just AltJSON)
+              _rppRevision
           where go
                   = clientWithRoute
                       (Proxy :: Proxy RevisionsPatchResource)

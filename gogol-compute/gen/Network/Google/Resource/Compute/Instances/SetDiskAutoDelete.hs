@@ -33,14 +33,13 @@ module Network.Google.Resource.Compute.Instances.SetDiskAutoDelete
     , isdadQuotaUser
     , isdadPrettyPrint
     , isdadProject
-    , isdadUserIp
+    , isdadUserIP
     , isdadAutoDelete
     , isdadZone
     , isdadDeviceName
     , isdadKey
-    , isdadOauthToken
+    , isdadOAuthToken
     , isdadFields
-    , isdadAlt
     , isdadInstance
     ) where
 
@@ -61,10 +60,11 @@ type InstancesSetDiskAutoDeleteResource =
                      QueryParam "userIp" Text :>
                        QueryParam "autoDelete" Bool :>
                          QueryParam "deviceName" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "fields" Text :>
-                                 QueryParam "alt" Alt :> Post '[JSON] Operation
+                                 QueryParam "alt" AltJSON :>
+                                   Post '[JSON] Operation
 
 -- | Sets the auto-delete flag for a disk attached to an instance.
 --
@@ -73,14 +73,13 @@ data InstancesSetDiskAutoDelete' = InstancesSetDiskAutoDelete'
     { _isdadQuotaUser   :: !(Maybe Text)
     , _isdadPrettyPrint :: !Bool
     , _isdadProject     :: !Text
-    , _isdadUserIp      :: !(Maybe Text)
+    , _isdadUserIP      :: !(Maybe Text)
     , _isdadAutoDelete  :: !Bool
     , _isdadZone        :: !Text
     , _isdadDeviceName  :: !Text
-    , _isdadKey         :: !(Maybe Text)
-    , _isdadOauthToken  :: !(Maybe Text)
+    , _isdadKey         :: !(Maybe Key)
+    , _isdadOAuthToken  :: !(Maybe OAuthToken)
     , _isdadFields      :: !(Maybe Text)
-    , _isdadAlt         :: !Alt
     , _isdadInstance    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -94,7 +93,7 @@ data InstancesSetDiskAutoDelete' = InstancesSetDiskAutoDelete'
 --
 -- * 'isdadProject'
 --
--- * 'isdadUserIp'
+-- * 'isdadUserIP'
 --
 -- * 'isdadAutoDelete'
 --
@@ -104,11 +103,9 @@ data InstancesSetDiskAutoDelete' = InstancesSetDiskAutoDelete'
 --
 -- * 'isdadKey'
 --
--- * 'isdadOauthToken'
+-- * 'isdadOAuthToken'
 --
 -- * 'isdadFields'
---
--- * 'isdadAlt'
 --
 -- * 'isdadInstance'
 instancesSetDiskAutoDelete'
@@ -123,14 +120,13 @@ instancesSetDiskAutoDelete' pIsdadProject_ pIsdadAutoDelete_ pIsdadZone_ pIsdadD
     { _isdadQuotaUser = Nothing
     , _isdadPrettyPrint = True
     , _isdadProject = pIsdadProject_
-    , _isdadUserIp = Nothing
+    , _isdadUserIP = Nothing
     , _isdadAutoDelete = pIsdadAutoDelete_
     , _isdadZone = pIsdadZone_
     , _isdadDeviceName = pIsdadDeviceName_
     , _isdadKey = Nothing
-    , _isdadOauthToken = Nothing
+    , _isdadOAuthToken = Nothing
     , _isdadFields = Nothing
-    , _isdadAlt = JSON
     , _isdadInstance = pIsdadInstance_
     }
 
@@ -155,9 +151,9 @@ isdadProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-isdadUserIp :: Lens' InstancesSetDiskAutoDelete' (Maybe Text)
-isdadUserIp
-  = lens _isdadUserIp (\ s a -> s{_isdadUserIp = a})
+isdadUserIP :: Lens' InstancesSetDiskAutoDelete' (Maybe Text)
+isdadUserIP
+  = lens _isdadUserIP (\ s a -> s{_isdadUserIP = a})
 
 -- | Whether to auto-delete the disk when the instance is deleted.
 isdadAutoDelete :: Lens' InstancesSetDiskAutoDelete' Bool
@@ -179,29 +175,29 @@ isdadDeviceName
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-isdadKey :: Lens' InstancesSetDiskAutoDelete' (Maybe Text)
+isdadKey :: Lens' InstancesSetDiskAutoDelete' (Maybe Key)
 isdadKey = lens _isdadKey (\ s a -> s{_isdadKey = a})
 
 -- | OAuth 2.0 token for the current user.
-isdadOauthToken :: Lens' InstancesSetDiskAutoDelete' (Maybe Text)
-isdadOauthToken
-  = lens _isdadOauthToken
-      (\ s a -> s{_isdadOauthToken = a})
+isdadOAuthToken :: Lens' InstancesSetDiskAutoDelete' (Maybe OAuthToken)
+isdadOAuthToken
+  = lens _isdadOAuthToken
+      (\ s a -> s{_isdadOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 isdadFields :: Lens' InstancesSetDiskAutoDelete' (Maybe Text)
 isdadFields
   = lens _isdadFields (\ s a -> s{_isdadFields = a})
 
--- | Data format for the response.
-isdadAlt :: Lens' InstancesSetDiskAutoDelete' Alt
-isdadAlt = lens _isdadAlt (\ s a -> s{_isdadAlt = a})
-
 -- | The instance name.
 isdadInstance :: Lens' InstancesSetDiskAutoDelete' Text
 isdadInstance
   = lens _isdadInstance
       (\ s a -> s{_isdadInstance = a})
+
+instance GoogleAuth InstancesSetDiskAutoDelete' where
+        authKey = isdadKey . _Just
+        authToken = isdadOAuthToken . _Just
 
 instance GoogleRequest InstancesSetDiskAutoDelete'
          where
@@ -210,15 +206,15 @@ instance GoogleRequest InstancesSetDiskAutoDelete'
         requestWithRoute r u InstancesSetDiskAutoDelete'{..}
           = go _isdadQuotaUser (Just _isdadPrettyPrint)
               _isdadProject
-              _isdadUserIp
+              _isdadUserIP
               (Just _isdadAutoDelete)
               _isdadZone
               (Just _isdadDeviceName)
               _isdadKey
-              _isdadOauthToken
+              _isdadOAuthToken
               _isdadFields
-              (Just _isdadAlt)
               _isdadInstance
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InstancesSetDiskAutoDeleteResource)

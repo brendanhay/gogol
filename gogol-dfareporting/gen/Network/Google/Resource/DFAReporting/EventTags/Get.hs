@@ -32,13 +32,12 @@ module Network.Google.Resource.DFAReporting.EventTags.Get
     -- * Request Lenses
     , etgQuotaUser
     , etgPrettyPrint
-    , etgUserIp
+    , etgUserIP
     , etgProfileId
     , etgKey
     , etgId
-    , etgOauthToken
+    , etgOAuthToken
     , etgFields
-    , etgAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,10 +53,10 @@ type EventTagsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] EventTag
+                         QueryParam "alt" AltJSON :> Get '[JSON] EventTag
 
 -- | Gets one event tag by ID.
 --
@@ -65,13 +64,12 @@ type EventTagsGetResource =
 data EventTagsGet' = EventTagsGet'
     { _etgQuotaUser   :: !(Maybe Text)
     , _etgPrettyPrint :: !Bool
-    , _etgUserIp      :: !(Maybe Text)
+    , _etgUserIP      :: !(Maybe Text)
     , _etgProfileId   :: !Int64
-    , _etgKey         :: !(Maybe Text)
+    , _etgKey         :: !(Maybe Key)
     , _etgId          :: !Int64
-    , _etgOauthToken  :: !(Maybe Text)
+    , _etgOAuthToken  :: !(Maybe OAuthToken)
     , _etgFields      :: !(Maybe Text)
-    , _etgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventTagsGet'' with the minimum fields required to make a request.
@@ -82,7 +80,7 @@ data EventTagsGet' = EventTagsGet'
 --
 -- * 'etgPrettyPrint'
 --
--- * 'etgUserIp'
+-- * 'etgUserIP'
 --
 -- * 'etgProfileId'
 --
@@ -90,11 +88,9 @@ data EventTagsGet' = EventTagsGet'
 --
 -- * 'etgId'
 --
--- * 'etgOauthToken'
+-- * 'etgOAuthToken'
 --
 -- * 'etgFields'
---
--- * 'etgAlt'
 eventTagsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
@@ -103,13 +99,12 @@ eventTagsGet' pEtgProfileId_ pEtgId_ =
     EventTagsGet'
     { _etgQuotaUser = Nothing
     , _etgPrettyPrint = True
-    , _etgUserIp = Nothing
+    , _etgUserIP = Nothing
     , _etgProfileId = pEtgProfileId_
     , _etgKey = Nothing
     , _etgId = pEtgId_
-    , _etgOauthToken = Nothing
+    , _etgOAuthToken = Nothing
     , _etgFields = Nothing
-    , _etgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,9 +122,9 @@ etgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-etgUserIp :: Lens' EventTagsGet' (Maybe Text)
-etgUserIp
-  = lens _etgUserIp (\ s a -> s{_etgUserIp = a})
+etgUserIP :: Lens' EventTagsGet' (Maybe Text)
+etgUserIP
+  = lens _etgUserIP (\ s a -> s{_etgUserIP = a})
 
 -- | User profile ID associated with this request.
 etgProfileId :: Lens' EventTagsGet' Int64
@@ -139,7 +134,7 @@ etgProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-etgKey :: Lens' EventTagsGet' (Maybe Text)
+etgKey :: Lens' EventTagsGet' (Maybe Key)
 etgKey = lens _etgKey (\ s a -> s{_etgKey = a})
 
 -- | Event tag ID.
@@ -147,31 +142,31 @@ etgId :: Lens' EventTagsGet' Int64
 etgId = lens _etgId (\ s a -> s{_etgId = a})
 
 -- | OAuth 2.0 token for the current user.
-etgOauthToken :: Lens' EventTagsGet' (Maybe Text)
-etgOauthToken
-  = lens _etgOauthToken
-      (\ s a -> s{_etgOauthToken = a})
+etgOAuthToken :: Lens' EventTagsGet' (Maybe OAuthToken)
+etgOAuthToken
+  = lens _etgOAuthToken
+      (\ s a -> s{_etgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 etgFields :: Lens' EventTagsGet' (Maybe Text)
 etgFields
   = lens _etgFields (\ s a -> s{_etgFields = a})
 
--- | Data format for the response.
-etgAlt :: Lens' EventTagsGet' Alt
-etgAlt = lens _etgAlt (\ s a -> s{_etgAlt = a})
+instance GoogleAuth EventTagsGet' where
+        authKey = etgKey . _Just
+        authToken = etgOAuthToken . _Just
 
 instance GoogleRequest EventTagsGet' where
         type Rs EventTagsGet' = EventTag
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u EventTagsGet'{..}
-          = go _etgQuotaUser (Just _etgPrettyPrint) _etgUserIp
+          = go _etgQuotaUser (Just _etgPrettyPrint) _etgUserIP
               _etgProfileId
               _etgKey
               _etgId
-              _etgOauthToken
+              _etgOAuthToken
               _etgFields
-              (Just _etgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy EventTagsGetResource)

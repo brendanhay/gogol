@@ -44,10 +44,9 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Deactivate
     , beaUploadType
     , beaBearerToken
     , beaKey
-    , beaOauthToken
+    , beaOAuthToken
     , beaFields
     , beaCallback
-    , beaAlt
     ) where
 
 import           Network.Google.Prelude
@@ -66,11 +65,11 @@ type BeaconsDeactivateResource =
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
                        QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
                                QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :> Post '[JSON] Empty
+                                 QueryParam "alt" AltJSON :> Post '[JSON] Empty
 
 -- | Deactivates a beacon. Once deactivated, the API will not return
 -- information nor attachment data for the beacon when queried via
@@ -89,11 +88,10 @@ data BeaconsDeactivate' = BeaconsDeactivate'
     , _beaBeaconName     :: !Text
     , _beaUploadType     :: !(Maybe Text)
     , _beaBearerToken    :: !(Maybe Text)
-    , _beaKey            :: !(Maybe Text)
-    , _beaOauthToken     :: !(Maybe Text)
+    , _beaKey            :: !(Maybe Key)
+    , _beaOAuthToken     :: !(Maybe OAuthToken)
     , _beaFields         :: !(Maybe Text)
     , _beaCallback       :: !(Maybe Text)
-    , _beaAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BeaconsDeactivate'' with the minimum fields required to make a request.
@@ -120,13 +118,11 @@ data BeaconsDeactivate' = BeaconsDeactivate'
 --
 -- * 'beaKey'
 --
--- * 'beaOauthToken'
+-- * 'beaOAuthToken'
 --
 -- * 'beaFields'
 --
 -- * 'beaCallback'
---
--- * 'beaAlt'
 beaconsDeactivate'
     :: Text -- ^ 'beaconName'
     -> BeaconsDeactivate'
@@ -142,10 +138,9 @@ beaconsDeactivate' pBeaBeaconName_ =
     , _beaUploadType = Nothing
     , _beaBearerToken = Nothing
     , _beaKey = Nothing
-    , _beaOauthToken = Nothing
+    , _beaOAuthToken = Nothing
     , _beaFields = Nothing
     , _beaCallback = Nothing
-    , _beaAlt = "json"
     }
 
 -- | V1 error format.
@@ -202,14 +197,14 @@ beaBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-beaKey :: Lens' BeaconsDeactivate' (Maybe Text)
+beaKey :: Lens' BeaconsDeactivate' (Maybe Key)
 beaKey = lens _beaKey (\ s a -> s{_beaKey = a})
 
 -- | OAuth 2.0 token for the current user.
-beaOauthToken :: Lens' BeaconsDeactivate' (Maybe Text)
-beaOauthToken
-  = lens _beaOauthToken
-      (\ s a -> s{_beaOauthToken = a})
+beaOAuthToken :: Lens' BeaconsDeactivate' (Maybe OAuthToken)
+beaOAuthToken
+  = lens _beaOAuthToken
+      (\ s a -> s{_beaOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 beaFields :: Lens' BeaconsDeactivate' (Maybe Text)
@@ -221,9 +216,9 @@ beaCallback :: Lens' BeaconsDeactivate' (Maybe Text)
 beaCallback
   = lens _beaCallback (\ s a -> s{_beaCallback = a})
 
--- | Data format for response.
-beaAlt :: Lens' BeaconsDeactivate' Text
-beaAlt = lens _beaAlt (\ s a -> s{_beaAlt = a})
+instance GoogleAuth BeaconsDeactivate' where
+        authKey = beaKey . _Just
+        authToken = beaOAuthToken . _Just
 
 instance GoogleRequest BeaconsDeactivate' where
         type Rs BeaconsDeactivate' = Empty
@@ -237,10 +232,10 @@ instance GoogleRequest BeaconsDeactivate' where
               _beaUploadType
               _beaBearerToken
               _beaKey
-              _beaOauthToken
+              _beaOAuthToken
               _beaFields
               _beaCallback
-              (Just _beaAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy BeaconsDeactivateResource)

@@ -33,15 +33,14 @@ module Network.Google.Resource.Blogger.Blogs.ListByUser
     , blbuStatus
     , blbuQuotaUser
     , blbuPrettyPrint
-    , blbuUserIp
+    , blbuUserIP
     , blbuFetchUserInfo
     , blbuUserId
     , blbuRole
     , blbuKey
     , blbuView
-    , blbuOauthToken
+    , blbuOAuthToken
     , blbuFields
-    , blbuAlt
     ) where
 
 import           Network.Google.Blogger.Types
@@ -59,11 +58,11 @@ type BlogsListByUserResource =
                  QueryParam "userIp" Text :>
                    QueryParam "fetchUserInfo" Bool :>
                      QueryParams "role" BloggerBlogsListByUserRole :>
-                       QueryParam "key" Text :>
+                       QueryParam "key" Key :>
                          QueryParam "view" BloggerBlogsListByUserView :>
-                           QueryParam "oauth_token" Text :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :> Get '[JSON] BlogList
+                               QueryParam "alt" AltJSON :> Get '[JSON] BlogList
 
 -- | Retrieves a list of blogs, possibly filtered.
 --
@@ -72,15 +71,14 @@ data BlogsListByUser' = BlogsListByUser'
     { _blbuStatus        :: !BloggerBlogsListByUserStatus
     , _blbuQuotaUser     :: !(Maybe Text)
     , _blbuPrettyPrint   :: !Bool
-    , _blbuUserIp        :: !(Maybe Text)
+    , _blbuUserIP        :: !(Maybe Text)
     , _blbuFetchUserInfo :: !(Maybe Bool)
     , _blbuUserId        :: !Text
     , _blbuRole          :: !(Maybe BloggerBlogsListByUserRole)
-    , _blbuKey           :: !(Maybe Text)
+    , _blbuKey           :: !(Maybe Key)
     , _blbuView          :: !(Maybe BloggerBlogsListByUserView)
-    , _blbuOauthToken    :: !(Maybe Text)
+    , _blbuOAuthToken    :: !(Maybe OAuthToken)
     , _blbuFields        :: !(Maybe Text)
-    , _blbuAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BlogsListByUser'' with the minimum fields required to make a request.
@@ -93,7 +91,7 @@ data BlogsListByUser' = BlogsListByUser'
 --
 -- * 'blbuPrettyPrint'
 --
--- * 'blbuUserIp'
+-- * 'blbuUserIP'
 --
 -- * 'blbuFetchUserInfo'
 --
@@ -105,11 +103,9 @@ data BlogsListByUser' = BlogsListByUser'
 --
 -- * 'blbuView'
 --
--- * 'blbuOauthToken'
+-- * 'blbuOAuthToken'
 --
 -- * 'blbuFields'
---
--- * 'blbuAlt'
 blogsListByUser'
     :: Text -- ^ 'userId'
     -> BlogsListByUser'
@@ -118,15 +114,14 @@ blogsListByUser' pBlbuUserId_ =
     { _blbuStatus = BBLBUSLive
     , _blbuQuotaUser = Nothing
     , _blbuPrettyPrint = True
-    , _blbuUserIp = Nothing
+    , _blbuUserIP = Nothing
     , _blbuFetchUserInfo = Nothing
     , _blbuUserId = pBlbuUserId_
     , _blbuRole = Nothing
     , _blbuKey = Nothing
     , _blbuView = Nothing
-    , _blbuOauthToken = Nothing
+    , _blbuOAuthToken = Nothing
     , _blbuFields = Nothing
-    , _blbuAlt = JSON
     }
 
 -- | Blog statuses to include in the result (default: Live blogs only). Note
@@ -151,9 +146,9 @@ blbuPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-blbuUserIp :: Lens' BlogsListByUser' (Maybe Text)
-blbuUserIp
-  = lens _blbuUserIp (\ s a -> s{_blbuUserIp = a})
+blbuUserIP :: Lens' BlogsListByUser' (Maybe Text)
+blbuUserIP
+  = lens _blbuUserIP (\ s a -> s{_blbuUserIP = a})
 
 -- | Whether the response is a list of blogs with per-user information
 -- instead of just blogs.
@@ -177,7 +172,7 @@ blbuRole = lens _blbuRole (\ s a -> s{_blbuRole = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-blbuKey :: Lens' BlogsListByUser' (Maybe Text)
+blbuKey :: Lens' BlogsListByUser' (Maybe Key)
 blbuKey = lens _blbuKey (\ s a -> s{_blbuKey = a})
 
 -- | Access level with which to view the blogs. Note that some fields require
@@ -186,19 +181,19 @@ blbuView :: Lens' BlogsListByUser' (Maybe BloggerBlogsListByUserView)
 blbuView = lens _blbuView (\ s a -> s{_blbuView = a})
 
 -- | OAuth 2.0 token for the current user.
-blbuOauthToken :: Lens' BlogsListByUser' (Maybe Text)
-blbuOauthToken
-  = lens _blbuOauthToken
-      (\ s a -> s{_blbuOauthToken = a})
+blbuOAuthToken :: Lens' BlogsListByUser' (Maybe OAuthToken)
+blbuOAuthToken
+  = lens _blbuOAuthToken
+      (\ s a -> s{_blbuOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 blbuFields :: Lens' BlogsListByUser' (Maybe Text)
 blbuFields
   = lens _blbuFields (\ s a -> s{_blbuFields = a})
 
--- | Data format for the response.
-blbuAlt :: Lens' BlogsListByUser' Alt
-blbuAlt = lens _blbuAlt (\ s a -> s{_blbuAlt = a})
+instance GoogleAuth BlogsListByUser' where
+        authKey = blbuKey . _Just
+        authToken = blbuOAuthToken . _Just
 
 instance GoogleRequest BlogsListByUser' where
         type Rs BlogsListByUser' = BlogList
@@ -206,15 +201,15 @@ instance GoogleRequest BlogsListByUser' where
         requestWithRoute r u BlogsListByUser'{..}
           = go (Just _blbuStatus) _blbuQuotaUser
               (Just _blbuPrettyPrint)
-              _blbuUserIp
+              _blbuUserIP
               _blbuFetchUserInfo
               _blbuUserId
               _blbuRole
               _blbuKey
               _blbuView
-              _blbuOauthToken
+              _blbuOAuthToken
               _blbuFields
-              (Just _blbuAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy BlogsListByUserResource)

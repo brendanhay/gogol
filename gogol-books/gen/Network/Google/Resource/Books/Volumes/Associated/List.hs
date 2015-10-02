@@ -32,15 +32,14 @@ module Network.Google.Resource.Books.Volumes.Associated.List
     -- * Request Lenses
     , valQuotaUser
     , valPrettyPrint
-    , valUserIp
+    , valUserIP
     , valLocale
     , valMaxAllowedMaturityRating
     , valKey
     , valVolumeId
     , valSource
-    , valOauthToken
+    , valOAuthToken
     , valFields
-    , valAlt
     , valAssociation
     ) where
 
@@ -60,11 +59,11 @@ type VolumesAssociatedListResource =
                    QueryParam "maxAllowedMaturityRating"
                      BooksVolumesAssociatedListMaxAllowedMaturityRating
                      :>
-                     QueryParam "key" Text :>
+                     QueryParam "key" Key :>
                        QueryParam "source" Text :>
-                         QueryParam "oauth_token" Text :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :>
+                             QueryParam "alt" AltJSON :>
                                QueryParam "association"
                                  BooksVolumesAssociatedListAssociation
                                  :> Get '[JSON] Volumes
@@ -75,15 +74,14 @@ type VolumesAssociatedListResource =
 data VolumesAssociatedList' = VolumesAssociatedList'
     { _valQuotaUser                :: !(Maybe Text)
     , _valPrettyPrint              :: !Bool
-    , _valUserIp                   :: !(Maybe Text)
+    , _valUserIP                   :: !(Maybe Text)
     , _valLocale                   :: !(Maybe Text)
     , _valMaxAllowedMaturityRating :: !(Maybe BooksVolumesAssociatedListMaxAllowedMaturityRating)
-    , _valKey                      :: !(Maybe Text)
+    , _valKey                      :: !(Maybe Key)
     , _valVolumeId                 :: !Text
     , _valSource                   :: !(Maybe Text)
-    , _valOauthToken               :: !(Maybe Text)
+    , _valOAuthToken               :: !(Maybe OAuthToken)
     , _valFields                   :: !(Maybe Text)
-    , _valAlt                      :: !Alt
     , _valAssociation              :: !(Maybe BooksVolumesAssociatedListAssociation)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -95,7 +93,7 @@ data VolumesAssociatedList' = VolumesAssociatedList'
 --
 -- * 'valPrettyPrint'
 --
--- * 'valUserIp'
+-- * 'valUserIP'
 --
 -- * 'valLocale'
 --
@@ -107,11 +105,9 @@ data VolumesAssociatedList' = VolumesAssociatedList'
 --
 -- * 'valSource'
 --
--- * 'valOauthToken'
+-- * 'valOAuthToken'
 --
 -- * 'valFields'
---
--- * 'valAlt'
 --
 -- * 'valAssociation'
 volumesAssociatedList'
@@ -121,15 +117,14 @@ volumesAssociatedList' pValVolumeId_ =
     VolumesAssociatedList'
     { _valQuotaUser = Nothing
     , _valPrettyPrint = True
-    , _valUserIp = Nothing
+    , _valUserIP = Nothing
     , _valLocale = Nothing
     , _valMaxAllowedMaturityRating = Nothing
     , _valKey = Nothing
     , _valVolumeId = pValVolumeId_
     , _valSource = Nothing
-    , _valOauthToken = Nothing
+    , _valOAuthToken = Nothing
     , _valFields = Nothing
-    , _valAlt = JSON
     , _valAssociation = Nothing
     }
 
@@ -148,9 +143,9 @@ valPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-valUserIp :: Lens' VolumesAssociatedList' (Maybe Text)
-valUserIp
-  = lens _valUserIp (\ s a -> s{_valUserIp = a})
+valUserIP :: Lens' VolumesAssociatedList' (Maybe Text)
+valUserIP
+  = lens _valUserIP (\ s a -> s{_valUserIP = a})
 
 -- | ISO-639-1 language and ISO-3166-1 country code. Ex: \'en_US\'. Used for
 -- generating recommendations.
@@ -168,7 +163,7 @@ valMaxAllowedMaturityRating
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-valKey :: Lens' VolumesAssociatedList' (Maybe Text)
+valKey :: Lens' VolumesAssociatedList' (Maybe Key)
 valKey = lens _valKey (\ s a -> s{_valKey = a})
 
 -- | ID of the source volume.
@@ -182,19 +177,15 @@ valSource
   = lens _valSource (\ s a -> s{_valSource = a})
 
 -- | OAuth 2.0 token for the current user.
-valOauthToken :: Lens' VolumesAssociatedList' (Maybe Text)
-valOauthToken
-  = lens _valOauthToken
-      (\ s a -> s{_valOauthToken = a})
+valOAuthToken :: Lens' VolumesAssociatedList' (Maybe OAuthToken)
+valOAuthToken
+  = lens _valOAuthToken
+      (\ s a -> s{_valOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 valFields :: Lens' VolumesAssociatedList' (Maybe Text)
 valFields
   = lens _valFields (\ s a -> s{_valFields = a})
-
--- | Data format for the response.
-valAlt :: Lens' VolumesAssociatedList' Alt
-valAlt = lens _valAlt (\ s a -> s{_valAlt = a})
 
 -- | Association type.
 valAssociation :: Lens' VolumesAssociatedList' (Maybe BooksVolumesAssociatedListAssociation)
@@ -202,20 +193,24 @@ valAssociation
   = lens _valAssociation
       (\ s a -> s{_valAssociation = a})
 
+instance GoogleAuth VolumesAssociatedList' where
+        authKey = valKey . _Just
+        authToken = valOAuthToken . _Just
+
 instance GoogleRequest VolumesAssociatedList' where
         type Rs VolumesAssociatedList' = Volumes
         request = requestWithRoute defReq booksURL
         requestWithRoute r u VolumesAssociatedList'{..}
-          = go _valQuotaUser (Just _valPrettyPrint) _valUserIp
+          = go _valQuotaUser (Just _valPrettyPrint) _valUserIP
               _valLocale
               _valMaxAllowedMaturityRating
               _valKey
               _valVolumeId
               _valSource
-              _valOauthToken
+              _valOAuthToken
               _valFields
-              (Just _valAlt)
               _valAssociation
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy VolumesAssociatedListResource)

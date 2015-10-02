@@ -33,7 +33,7 @@ module Network.Google.Resource.Blogger.Comments.List
     , clStatus
     , clQuotaUser
     , clPrettyPrint
-    , clUserIp
+    , clUserIP
     , clEndDate
     , clBlogId
     , clStartDate
@@ -42,10 +42,9 @@ module Network.Google.Resource.Blogger.Comments.List
     , clView
     , clPostId
     , clPageToken
-    , clOauthToken
+    , clOAuthToken
     , clMaxResults
     , clFields
-    , clAlt
     ) where
 
 import           Network.Google.Blogger.Types
@@ -65,14 +64,14 @@ type CommentsListResource =
                      QueryParam "userIp" Text :>
                        QueryParam "endDate" UTCTime :>
                          QueryParam "startDate" UTCTime :>
-                           QueryParam "key" Text :>
+                           QueryParam "key" Key :>
                              QueryParam "fetchBodies" Bool :>
                                QueryParam "view" BloggerCommentsListView :>
                                  QueryParam "pageToken" Text :>
-                                   QueryParam "oauth_token" Text :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "maxResults" Word32 :>
                                        QueryParam "fields" Text :>
-                                         QueryParam "alt" Alt :>
+                                         QueryParam "alt" AltJSON :>
                                            Get '[JSON] CommentList
 
 -- | Retrieves the comments for a post, possibly filtered.
@@ -82,19 +81,18 @@ data CommentsList' = CommentsList'
     { _clStatus      :: !(Maybe BloggerCommentsListStatus)
     , _clQuotaUser   :: !(Maybe Text)
     , _clPrettyPrint :: !Bool
-    , _clUserIp      :: !(Maybe Text)
+    , _clUserIP      :: !(Maybe Text)
     , _clEndDate     :: !(Maybe UTCTime)
     , _clBlogId      :: !Text
     , _clStartDate   :: !(Maybe UTCTime)
-    , _clKey         :: !(Maybe Text)
+    , _clKey         :: !(Maybe Key)
     , _clFetchBodies :: !(Maybe Bool)
     , _clView        :: !(Maybe BloggerCommentsListView)
     , _clPostId      :: !Text
     , _clPageToken   :: !(Maybe Text)
-    , _clOauthToken  :: !(Maybe Text)
+    , _clOAuthToken  :: !(Maybe OAuthToken)
     , _clMaxResults  :: !(Maybe Word32)
     , _clFields      :: !(Maybe Text)
-    , _clAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsList'' with the minimum fields required to make a request.
@@ -107,7 +105,7 @@ data CommentsList' = CommentsList'
 --
 -- * 'clPrettyPrint'
 --
--- * 'clUserIp'
+-- * 'clUserIP'
 --
 -- * 'clEndDate'
 --
@@ -125,13 +123,11 @@ data CommentsList' = CommentsList'
 --
 -- * 'clPageToken'
 --
--- * 'clOauthToken'
+-- * 'clOAuthToken'
 --
 -- * 'clMaxResults'
 --
 -- * 'clFields'
---
--- * 'clAlt'
 commentsList'
     :: Text -- ^ 'blogId'
     -> Text -- ^ 'postId'
@@ -141,7 +137,7 @@ commentsList' pClBlogId_ pClPostId_ =
     { _clStatus = Nothing
     , _clQuotaUser = Nothing
     , _clPrettyPrint = True
-    , _clUserIp = Nothing
+    , _clUserIP = Nothing
     , _clEndDate = Nothing
     , _clBlogId = pClBlogId_
     , _clStartDate = Nothing
@@ -150,10 +146,9 @@ commentsList' pClBlogId_ pClPostId_ =
     , _clView = Nothing
     , _clPostId = pClPostId_
     , _clPageToken = Nothing
-    , _clOauthToken = Nothing
+    , _clOAuthToken = Nothing
     , _clMaxResults = Nothing
     , _clFields = Nothing
-    , _clAlt = JSON
     }
 
 clStatus :: Lens' CommentsList' (Maybe BloggerCommentsListStatus)
@@ -174,8 +169,8 @@ clPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-clUserIp :: Lens' CommentsList' (Maybe Text)
-clUserIp = lens _clUserIp (\ s a -> s{_clUserIp = a})
+clUserIP :: Lens' CommentsList' (Maybe Text)
+clUserIP = lens _clUserIP (\ s a -> s{_clUserIP = a})
 
 -- | Latest date of comment to fetch, a date-time with RFC 3339 formatting.
 clEndDate :: Lens' CommentsList' (Maybe UTCTime)
@@ -194,7 +189,7 @@ clStartDate
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-clKey :: Lens' CommentsList' (Maybe Text)
+clKey :: Lens' CommentsList' (Maybe Key)
 clKey = lens _clKey (\ s a -> s{_clKey = a})
 
 -- | Whether the body content of the comments is included.
@@ -218,9 +213,9 @@ clPageToken
   = lens _clPageToken (\ s a -> s{_clPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-clOauthToken :: Lens' CommentsList' (Maybe Text)
-clOauthToken
-  = lens _clOauthToken (\ s a -> s{_clOauthToken = a})
+clOAuthToken :: Lens' CommentsList' (Maybe OAuthToken)
+clOAuthToken
+  = lens _clOAuthToken (\ s a -> s{_clOAuthToken = a})
 
 -- | Maximum number of comments to include in the result.
 clMaxResults :: Lens' CommentsList' (Maybe Word32)
@@ -231,16 +226,16 @@ clMaxResults
 clFields :: Lens' CommentsList' (Maybe Text)
 clFields = lens _clFields (\ s a -> s{_clFields = a})
 
--- | Data format for the response.
-clAlt :: Lens' CommentsList' Alt
-clAlt = lens _clAlt (\ s a -> s{_clAlt = a})
+instance GoogleAuth CommentsList' where
+        authKey = clKey . _Just
+        authToken = clOAuthToken . _Just
 
 instance GoogleRequest CommentsList' where
         type Rs CommentsList' = CommentList
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u CommentsList'{..}
           = go _clStatus _clQuotaUser (Just _clPrettyPrint)
-              _clUserIp
+              _clUserIP
               _clEndDate
               _clBlogId
               _clStartDate
@@ -249,10 +244,10 @@ instance GoogleRequest CommentsList' where
               _clView
               _clPostId
               _clPageToken
-              _clOauthToken
+              _clOAuthToken
               _clMaxResults
               _clFields
-              (Just _clAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CommentsListResource)

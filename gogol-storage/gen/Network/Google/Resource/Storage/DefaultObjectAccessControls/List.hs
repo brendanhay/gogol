@@ -33,13 +33,12 @@ module Network.Google.Resource.Storage.DefaultObjectAccessControls.List
     , doaclQuotaUser
     , doaclIfMetagenerationMatch
     , doaclPrettyPrint
-    , doaclUserIp
+    , doaclUserIP
     , doaclBucket
     , doaclKey
     , doaclIfMetagenerationNotMatch
-    , doaclOauthToken
+    , doaclOAuthToken
     , doaclFields
-    , doaclAlt
     ) where
 
 import           Network.Google.Prelude
@@ -55,11 +54,11 @@ type DefaultObjectAccessControlsListResource =
              QueryParam "ifMetagenerationMatch" Int64 :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "ifMetagenerationNotMatch" Int64 :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :>
+                           QueryParam "alt" AltJSON :>
                              Get '[JSON] ObjectAccessControls
 
 -- | Retrieves default object ACL entries on the specified bucket.
@@ -69,13 +68,12 @@ data DefaultObjectAccessControlsList' = DefaultObjectAccessControlsList'
     { _doaclQuotaUser                :: !(Maybe Text)
     , _doaclIfMetagenerationMatch    :: !(Maybe Int64)
     , _doaclPrettyPrint              :: !Bool
-    , _doaclUserIp                   :: !(Maybe Text)
+    , _doaclUserIP                   :: !(Maybe Text)
     , _doaclBucket                   :: !Text
-    , _doaclKey                      :: !(Maybe Text)
+    , _doaclKey                      :: !(Maybe Key)
     , _doaclIfMetagenerationNotMatch :: !(Maybe Int64)
-    , _doaclOauthToken               :: !(Maybe Text)
+    , _doaclOAuthToken               :: !(Maybe OAuthToken)
     , _doaclFields                   :: !(Maybe Text)
-    , _doaclAlt                      :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DefaultObjectAccessControlsList'' with the minimum fields required to make a request.
@@ -88,7 +86,7 @@ data DefaultObjectAccessControlsList' = DefaultObjectAccessControlsList'
 --
 -- * 'doaclPrettyPrint'
 --
--- * 'doaclUserIp'
+-- * 'doaclUserIP'
 --
 -- * 'doaclBucket'
 --
@@ -96,11 +94,9 @@ data DefaultObjectAccessControlsList' = DefaultObjectAccessControlsList'
 --
 -- * 'doaclIfMetagenerationNotMatch'
 --
--- * 'doaclOauthToken'
+-- * 'doaclOAuthToken'
 --
 -- * 'doaclFields'
---
--- * 'doaclAlt'
 defaultObjectAccessControlsList'
     :: Text -- ^ 'bucket'
     -> DefaultObjectAccessControlsList'
@@ -109,13 +105,12 @@ defaultObjectAccessControlsList' pDoaclBucket_ =
     { _doaclQuotaUser = Nothing
     , _doaclIfMetagenerationMatch = Nothing
     , _doaclPrettyPrint = True
-    , _doaclUserIp = Nothing
+    , _doaclUserIP = Nothing
     , _doaclBucket = pDoaclBucket_
     , _doaclKey = Nothing
     , _doaclIfMetagenerationNotMatch = Nothing
-    , _doaclOauthToken = Nothing
+    , _doaclOAuthToken = Nothing
     , _doaclFields = Nothing
-    , _doaclAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -141,9 +136,9 @@ doaclPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-doaclUserIp :: Lens' DefaultObjectAccessControlsList' (Maybe Text)
-doaclUserIp
-  = lens _doaclUserIp (\ s a -> s{_doaclUserIp = a})
+doaclUserIP :: Lens' DefaultObjectAccessControlsList' (Maybe Text)
+doaclUserIP
+  = lens _doaclUserIP (\ s a -> s{_doaclUserIP = a})
 
 -- | Name of a bucket.
 doaclBucket :: Lens' DefaultObjectAccessControlsList' Text
@@ -153,7 +148,7 @@ doaclBucket
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-doaclKey :: Lens' DefaultObjectAccessControlsList' (Maybe Text)
+doaclKey :: Lens' DefaultObjectAccessControlsList' (Maybe Key)
 doaclKey = lens _doaclKey (\ s a -> s{_doaclKey = a})
 
 -- | If present, only return default ACL listing if the bucket\'s current
@@ -164,19 +159,20 @@ doaclIfMetagenerationNotMatch
       (\ s a -> s{_doaclIfMetagenerationNotMatch = a})
 
 -- | OAuth 2.0 token for the current user.
-doaclOauthToken :: Lens' DefaultObjectAccessControlsList' (Maybe Text)
-doaclOauthToken
-  = lens _doaclOauthToken
-      (\ s a -> s{_doaclOauthToken = a})
+doaclOAuthToken :: Lens' DefaultObjectAccessControlsList' (Maybe OAuthToken)
+doaclOAuthToken
+  = lens _doaclOAuthToken
+      (\ s a -> s{_doaclOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 doaclFields :: Lens' DefaultObjectAccessControlsList' (Maybe Text)
 doaclFields
   = lens _doaclFields (\ s a -> s{_doaclFields = a})
 
--- | Data format for the response.
-doaclAlt :: Lens' DefaultObjectAccessControlsList' Alt
-doaclAlt = lens _doaclAlt (\ s a -> s{_doaclAlt = a})
+instance GoogleAuth DefaultObjectAccessControlsList'
+         where
+        authKey = doaclKey . _Just
+        authToken = doaclOAuthToken . _Just
 
 instance GoogleRequest
          DefaultObjectAccessControlsList' where
@@ -187,13 +183,13 @@ instance GoogleRequest
           DefaultObjectAccessControlsList'{..}
           = go _doaclQuotaUser _doaclIfMetagenerationMatch
               (Just _doaclPrettyPrint)
-              _doaclUserIp
+              _doaclUserIP
               _doaclBucket
               _doaclKey
               _doaclIfMetagenerationNotMatch
-              _doaclOauthToken
+              _doaclOAuthToken
               _doaclFields
-              (Just _doaclAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

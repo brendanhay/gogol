@@ -34,11 +34,10 @@ module Network.Google.Resource.Compute.Snapshots.Get
     , sgQuotaUser
     , sgPrettyPrint
     , sgProject
-    , sgUserIp
+    , sgUserIP
     , sgKey
-    , sgOauthToken
+    , sgOAuthToken
     , sgFields
-    , sgAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -54,10 +53,10 @@ type SnapshotsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] Snapshot
+                         QueryParam "alt" AltJSON :> Get '[JSON] Snapshot
 
 -- | Returns the specified Snapshot resource.
 --
@@ -67,11 +66,10 @@ data SnapshotsGet' = SnapshotsGet'
     , _sgQuotaUser   :: !(Maybe Text)
     , _sgPrettyPrint :: !Bool
     , _sgProject     :: !Text
-    , _sgUserIp      :: !(Maybe Text)
-    , _sgKey         :: !(Maybe Text)
-    , _sgOauthToken  :: !(Maybe Text)
+    , _sgUserIP      :: !(Maybe Text)
+    , _sgKey         :: !(Maybe Key)
+    , _sgOAuthToken  :: !(Maybe OAuthToken)
     , _sgFields      :: !(Maybe Text)
-    , _sgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SnapshotsGet'' with the minimum fields required to make a request.
@@ -86,15 +84,13 @@ data SnapshotsGet' = SnapshotsGet'
 --
 -- * 'sgProject'
 --
--- * 'sgUserIp'
+-- * 'sgUserIP'
 --
 -- * 'sgKey'
 --
--- * 'sgOauthToken'
+-- * 'sgOAuthToken'
 --
 -- * 'sgFields'
---
--- * 'sgAlt'
 snapshotsGet'
     :: Text -- ^ 'snapshot'
     -> Text -- ^ 'project'
@@ -105,11 +101,10 @@ snapshotsGet' pSgSnapshot_ pSgProject_ =
     , _sgQuotaUser = Nothing
     , _sgPrettyPrint = True
     , _sgProject = pSgProject_
-    , _sgUserIp = Nothing
+    , _sgUserIP = Nothing
     , _sgKey = Nothing
-    , _sgOauthToken = Nothing
+    , _sgOAuthToken = Nothing
     , _sgFields = Nothing
-    , _sgAlt = JSON
     }
 
 -- | Name of the Snapshot resource to return.
@@ -137,27 +132,27 @@ sgProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-sgUserIp :: Lens' SnapshotsGet' (Maybe Text)
-sgUserIp = lens _sgUserIp (\ s a -> s{_sgUserIp = a})
+sgUserIP :: Lens' SnapshotsGet' (Maybe Text)
+sgUserIP = lens _sgUserIP (\ s a -> s{_sgUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-sgKey :: Lens' SnapshotsGet' (Maybe Text)
+sgKey :: Lens' SnapshotsGet' (Maybe Key)
 sgKey = lens _sgKey (\ s a -> s{_sgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-sgOauthToken :: Lens' SnapshotsGet' (Maybe Text)
-sgOauthToken
-  = lens _sgOauthToken (\ s a -> s{_sgOauthToken = a})
+sgOAuthToken :: Lens' SnapshotsGet' (Maybe OAuthToken)
+sgOAuthToken
+  = lens _sgOAuthToken (\ s a -> s{_sgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 sgFields :: Lens' SnapshotsGet' (Maybe Text)
 sgFields = lens _sgFields (\ s a -> s{_sgFields = a})
 
--- | Data format for the response.
-sgAlt :: Lens' SnapshotsGet' Alt
-sgAlt = lens _sgAlt (\ s a -> s{_sgAlt = a})
+instance GoogleAuth SnapshotsGet' where
+        authKey = sgKey . _Just
+        authToken = sgOAuthToken . _Just
 
 instance GoogleRequest SnapshotsGet' where
         type Rs SnapshotsGet' = Snapshot
@@ -165,11 +160,11 @@ instance GoogleRequest SnapshotsGet' where
         requestWithRoute r u SnapshotsGet'{..}
           = go _sgSnapshot _sgQuotaUser (Just _sgPrettyPrint)
               _sgProject
-              _sgUserIp
+              _sgUserIP
               _sgKey
-              _sgOauthToken
+              _sgOAuthToken
               _sgFields
-              (Just _sgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy SnapshotsGetResource)

@@ -32,13 +32,12 @@ module Network.Google.Resource.Blogger.Blogs.GetByURL
     -- * Request Lenses
     , bgbuQuotaUser
     , bgbuPrettyPrint
-    , bgbuUserIp
-    , bgbuUrl
+    , bgbuUserIP
+    , bgbuURL
     , bgbuKey
     , bgbuView
-    , bgbuOauthToken
+    , bgbuOAuthToken
     , bgbuFields
-    , bgbuAlt
     ) where
 
 import           Network.Google.Blogger.Types
@@ -53,11 +52,11 @@ type BlogsGetByURLResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "url" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "view" BloggerBlogsGetByURLView :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] Blog
+                         QueryParam "alt" AltJSON :> Get '[JSON] Blog
 
 -- | Retrieve a Blog by URL.
 --
@@ -65,13 +64,12 @@ type BlogsGetByURLResource =
 data BlogsGetByURL' = BlogsGetByURL'
     { _bgbuQuotaUser   :: !(Maybe Text)
     , _bgbuPrettyPrint :: !Bool
-    , _bgbuUserIp      :: !(Maybe Text)
-    , _bgbuUrl         :: !Text
-    , _bgbuKey         :: !(Maybe Text)
+    , _bgbuUserIP      :: !(Maybe Text)
+    , _bgbuURL         :: !Text
+    , _bgbuKey         :: !(Maybe Key)
     , _bgbuView        :: !(Maybe BloggerBlogsGetByURLView)
-    , _bgbuOauthToken  :: !(Maybe Text)
+    , _bgbuOAuthToken  :: !(Maybe OAuthToken)
     , _bgbuFields      :: !(Maybe Text)
-    , _bgbuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BlogsGetByURL'' with the minimum fields required to make a request.
@@ -82,33 +80,30 @@ data BlogsGetByURL' = BlogsGetByURL'
 --
 -- * 'bgbuPrettyPrint'
 --
--- * 'bgbuUserIp'
+-- * 'bgbuUserIP'
 --
--- * 'bgbuUrl'
+-- * 'bgbuURL'
 --
 -- * 'bgbuKey'
 --
 -- * 'bgbuView'
 --
--- * 'bgbuOauthToken'
+-- * 'bgbuOAuthToken'
 --
 -- * 'bgbuFields'
---
--- * 'bgbuAlt'
 blogsGetByURL'
     :: Text -- ^ 'url'
     -> BlogsGetByURL'
-blogsGetByURL' pBgbuUrl_ =
+blogsGetByURL' pBgbuURL_ =
     BlogsGetByURL'
     { _bgbuQuotaUser = Nothing
     , _bgbuPrettyPrint = True
-    , _bgbuUserIp = Nothing
-    , _bgbuUrl = pBgbuUrl_
+    , _bgbuUserIP = Nothing
+    , _bgbuURL = pBgbuURL_
     , _bgbuKey = Nothing
     , _bgbuView = Nothing
-    , _bgbuOauthToken = Nothing
+    , _bgbuOAuthToken = Nothing
     , _bgbuFields = Nothing
-    , _bgbuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,18 +122,18 @@ bgbuPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-bgbuUserIp :: Lens' BlogsGetByURL' (Maybe Text)
-bgbuUserIp
-  = lens _bgbuUserIp (\ s a -> s{_bgbuUserIp = a})
+bgbuUserIP :: Lens' BlogsGetByURL' (Maybe Text)
+bgbuUserIP
+  = lens _bgbuUserIP (\ s a -> s{_bgbuUserIP = a})
 
 -- | The URL of the blog to retrieve.
-bgbuUrl :: Lens' BlogsGetByURL' Text
-bgbuUrl = lens _bgbuUrl (\ s a -> s{_bgbuUrl = a})
+bgbuURL :: Lens' BlogsGetByURL' Text
+bgbuURL = lens _bgbuURL (\ s a -> s{_bgbuURL = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-bgbuKey :: Lens' BlogsGetByURL' (Maybe Text)
+bgbuKey :: Lens' BlogsGetByURL' (Maybe Key)
 bgbuKey = lens _bgbuKey (\ s a -> s{_bgbuKey = a})
 
 -- | Access level with which to view the blog. Note that some fields require
@@ -147,32 +142,32 @@ bgbuView :: Lens' BlogsGetByURL' (Maybe BloggerBlogsGetByURLView)
 bgbuView = lens _bgbuView (\ s a -> s{_bgbuView = a})
 
 -- | OAuth 2.0 token for the current user.
-bgbuOauthToken :: Lens' BlogsGetByURL' (Maybe Text)
-bgbuOauthToken
-  = lens _bgbuOauthToken
-      (\ s a -> s{_bgbuOauthToken = a})
+bgbuOAuthToken :: Lens' BlogsGetByURL' (Maybe OAuthToken)
+bgbuOAuthToken
+  = lens _bgbuOAuthToken
+      (\ s a -> s{_bgbuOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 bgbuFields :: Lens' BlogsGetByURL' (Maybe Text)
 bgbuFields
   = lens _bgbuFields (\ s a -> s{_bgbuFields = a})
 
--- | Data format for the response.
-bgbuAlt :: Lens' BlogsGetByURL' Alt
-bgbuAlt = lens _bgbuAlt (\ s a -> s{_bgbuAlt = a})
+instance GoogleAuth BlogsGetByURL' where
+        authKey = bgbuKey . _Just
+        authToken = bgbuOAuthToken . _Just
 
 instance GoogleRequest BlogsGetByURL' where
         type Rs BlogsGetByURL' = Blog
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u BlogsGetByURL'{..}
           = go _bgbuQuotaUser (Just _bgbuPrettyPrint)
-              _bgbuUserIp
-              (Just _bgbuUrl)
+              _bgbuUserIP
+              (Just _bgbuURL)
               _bgbuKey
               _bgbuView
-              _bgbuOauthToken
+              _bgbuOAuthToken
               _bgbuFields
-              (Just _bgbuAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy BlogsGetByURLResource)

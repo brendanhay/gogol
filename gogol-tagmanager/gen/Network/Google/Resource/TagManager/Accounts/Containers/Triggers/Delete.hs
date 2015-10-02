@@ -19,7 +19,7 @@
 --
 -- | Deletes a GTM Trigger.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersTriggersDelete@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersTriggersDelete@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Triggers.Delete
     (
     -- * REST Resource
@@ -34,18 +34,17 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Triggers.Delete
     , actdPrettyPrint
     , actdContainerId
     , actdTriggerId
-    , actdUserIp
+    , actdUserIP
     , actdAccountId
     , actdKey
-    , actdOauthToken
+    , actdOAuthToken
     , actdFields
-    , actdAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagmanagerAccountsContainersTriggersDelete@ which the
+-- | A resource alias for @TagManagerAccountsContainersTriggersDelete@ which the
 -- 'AccountsContainersTriggersDelete'' request conforms to.
 type AccountsContainersTriggersDeleteResource =
      "accounts" :>
@@ -57,10 +56,10 @@ type AccountsContainersTriggersDeleteResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Delete '[JSON] ()
+                             QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a GTM Trigger.
 --
@@ -70,12 +69,11 @@ data AccountsContainersTriggersDelete' = AccountsContainersTriggersDelete'
     , _actdPrettyPrint :: !Bool
     , _actdContainerId :: !Text
     , _actdTriggerId   :: !Text
-    , _actdUserIp      :: !(Maybe Text)
+    , _actdUserIP      :: !(Maybe Text)
     , _actdAccountId   :: !Text
-    , _actdKey         :: !(Maybe Text)
-    , _actdOauthToken  :: !(Maybe Text)
+    , _actdKey         :: !(Maybe Key)
+    , _actdOAuthToken  :: !(Maybe OAuthToken)
     , _actdFields      :: !(Maybe Text)
-    , _actdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersTriggersDelete'' with the minimum fields required to make a request.
@@ -90,17 +88,15 @@ data AccountsContainersTriggersDelete' = AccountsContainersTriggersDelete'
 --
 -- * 'actdTriggerId'
 --
--- * 'actdUserIp'
+-- * 'actdUserIP'
 --
 -- * 'actdAccountId'
 --
 -- * 'actdKey'
 --
--- * 'actdOauthToken'
+-- * 'actdOAuthToken'
 --
 -- * 'actdFields'
---
--- * 'actdAlt'
 accountsContainersTriggersDelete'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'triggerId'
@@ -112,12 +108,11 @@ accountsContainersTriggersDelete' pActdContainerId_ pActdTriggerId_ pActdAccount
     , _actdPrettyPrint = True
     , _actdContainerId = pActdContainerId_
     , _actdTriggerId = pActdTriggerId_
-    , _actdUserIp = Nothing
+    , _actdUserIP = Nothing
     , _actdAccountId = pActdAccountId_
     , _actdKey = Nothing
-    , _actdOauthToken = Nothing
+    , _actdOAuthToken = Nothing
     , _actdFields = Nothing
-    , _actdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,9 +143,9 @@ actdTriggerId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-actdUserIp :: Lens' AccountsContainersTriggersDelete' (Maybe Text)
-actdUserIp
-  = lens _actdUserIp (\ s a -> s{_actdUserIp = a})
+actdUserIP :: Lens' AccountsContainersTriggersDelete' (Maybe Text)
+actdUserIP
+  = lens _actdUserIP (\ s a -> s{_actdUserIP = a})
 
 -- | The GTM Account ID.
 actdAccountId :: Lens' AccountsContainersTriggersDelete' Text
@@ -161,23 +156,24 @@ actdAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-actdKey :: Lens' AccountsContainersTriggersDelete' (Maybe Text)
+actdKey :: Lens' AccountsContainersTriggersDelete' (Maybe Key)
 actdKey = lens _actdKey (\ s a -> s{_actdKey = a})
 
 -- | OAuth 2.0 token for the current user.
-actdOauthToken :: Lens' AccountsContainersTriggersDelete' (Maybe Text)
-actdOauthToken
-  = lens _actdOauthToken
-      (\ s a -> s{_actdOauthToken = a})
+actdOAuthToken :: Lens' AccountsContainersTriggersDelete' (Maybe OAuthToken)
+actdOAuthToken
+  = lens _actdOAuthToken
+      (\ s a -> s{_actdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 actdFields :: Lens' AccountsContainersTriggersDelete' (Maybe Text)
 actdFields
   = lens _actdFields (\ s a -> s{_actdFields = a})
 
--- | Data format for the response.
-actdAlt :: Lens' AccountsContainersTriggersDelete' Alt
-actdAlt = lens _actdAlt (\ s a -> s{_actdAlt = a})
+instance GoogleAuth AccountsContainersTriggersDelete'
+         where
+        authKey = actdKey . _Just
+        authToken = actdOAuthToken . _Just
 
 instance GoogleRequest
          AccountsContainersTriggersDelete' where
@@ -188,12 +184,12 @@ instance GoogleRequest
           = go _actdQuotaUser (Just _actdPrettyPrint)
               _actdContainerId
               _actdTriggerId
-              _actdUserIp
+              _actdUserIP
               _actdAccountId
               _actdKey
-              _actdOauthToken
+              _actdOAuthToken
               _actdFields
-              (Just _actdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

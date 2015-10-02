@@ -34,11 +34,10 @@ module Network.Google.Resource.Genomics.AnnotationSets.Delete
     , asdQuotaUser
     , asdPrettyPrint
     , asdAnnotationSetId
-    , asdUserIp
+    , asdUserIP
     , asdKey
-    , asdOauthToken
+    , asdOAuthToken
     , asdFields
-    , asdAlt
     ) where
 
 import           Network.Google.Genomics.Types
@@ -52,10 +51,10 @@ type AnnotationSetsDeleteResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Delete '[JSON] ()
+                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an annotation set. Caller must have WRITE permission for the
 -- associated annotation set.
@@ -65,11 +64,10 @@ data AnnotationSetsDelete' = AnnotationSetsDelete'
     { _asdQuotaUser       :: !(Maybe Text)
     , _asdPrettyPrint     :: !Bool
     , _asdAnnotationSetId :: !Text
-    , _asdUserIp          :: !(Maybe Text)
-    , _asdKey             :: !(Maybe Text)
-    , _asdOauthToken      :: !(Maybe Text)
+    , _asdUserIP          :: !(Maybe Text)
+    , _asdKey             :: !(Maybe Key)
+    , _asdOAuthToken      :: !(Maybe OAuthToken)
     , _asdFields          :: !(Maybe Text)
-    , _asdAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnnotationSetsDelete'' with the minimum fields required to make a request.
@@ -82,15 +80,13 @@ data AnnotationSetsDelete' = AnnotationSetsDelete'
 --
 -- * 'asdAnnotationSetId'
 --
--- * 'asdUserIp'
+-- * 'asdUserIP'
 --
 -- * 'asdKey'
 --
--- * 'asdOauthToken'
+-- * 'asdOAuthToken'
 --
 -- * 'asdFields'
---
--- * 'asdAlt'
 annotationSetsDelete'
     :: Text -- ^ 'annotationSetId'
     -> AnnotationSetsDelete'
@@ -99,11 +95,10 @@ annotationSetsDelete' pAsdAnnotationSetId_ =
     { _asdQuotaUser = Nothing
     , _asdPrettyPrint = True
     , _asdAnnotationSetId = pAsdAnnotationSetId_
-    , _asdUserIp = Nothing
+    , _asdUserIP = Nothing
     , _asdKey = Nothing
-    , _asdOauthToken = Nothing
+    , _asdOAuthToken = Nothing
     , _asdFields = Nothing
-    , _asdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,30 +122,30 @@ asdAnnotationSetId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-asdUserIp :: Lens' AnnotationSetsDelete' (Maybe Text)
-asdUserIp
-  = lens _asdUserIp (\ s a -> s{_asdUserIp = a})
+asdUserIP :: Lens' AnnotationSetsDelete' (Maybe Text)
+asdUserIP
+  = lens _asdUserIP (\ s a -> s{_asdUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-asdKey :: Lens' AnnotationSetsDelete' (Maybe Text)
+asdKey :: Lens' AnnotationSetsDelete' (Maybe Key)
 asdKey = lens _asdKey (\ s a -> s{_asdKey = a})
 
 -- | OAuth 2.0 token for the current user.
-asdOauthToken :: Lens' AnnotationSetsDelete' (Maybe Text)
-asdOauthToken
-  = lens _asdOauthToken
-      (\ s a -> s{_asdOauthToken = a})
+asdOAuthToken :: Lens' AnnotationSetsDelete' (Maybe OAuthToken)
+asdOAuthToken
+  = lens _asdOAuthToken
+      (\ s a -> s{_asdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 asdFields :: Lens' AnnotationSetsDelete' (Maybe Text)
 asdFields
   = lens _asdFields (\ s a -> s{_asdFields = a})
 
--- | Data format for the response.
-asdAlt :: Lens' AnnotationSetsDelete' Alt
-asdAlt = lens _asdAlt (\ s a -> s{_asdAlt = a})
+instance GoogleAuth AnnotationSetsDelete' where
+        authKey = asdKey . _Just
+        authToken = asdOAuthToken . _Just
 
 instance GoogleRequest AnnotationSetsDelete' where
         type Rs AnnotationSetsDelete' = ()
@@ -158,11 +153,11 @@ instance GoogleRequest AnnotationSetsDelete' where
         requestWithRoute r u AnnotationSetsDelete'{..}
           = go _asdQuotaUser (Just _asdPrettyPrint)
               _asdAnnotationSetId
-              _asdUserIp
+              _asdUserIP
               _asdKey
-              _asdOauthToken
+              _asdOAuthToken
               _asdFields
-              (Just _asdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AnnotationSetsDeleteResource)

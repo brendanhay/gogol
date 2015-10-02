@@ -38,16 +38,16 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.ModifyPushConfig
     , psmpcQuotaUser
     , psmpcPrettyPrint
     , psmpcUploadProtocol
+    , psmpcModifyPushConfigRequest
     , psmpcPp
     , psmpcAccessToken
     , psmpcUploadType
     , psmpcBearerToken
     , psmpcKey
-    , psmpcOauthToken
+    , psmpcOAuthToken
     , psmpcSubscription
     , psmpcFields
     , psmpcCallback
-    , psmpcAlt
     ) where
 
 import           Network.Google.Prelude
@@ -66,11 +66,13 @@ type ProjectsSubscriptionsModifyPushConfigResource =
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
                        QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
                                QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :> Post '[JSON] Empty
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON] ModifyPushConfigRequest :>
+                                     Post '[JSON] Empty
 
 -- | Modifies the PushConfig for a specified subscription. This may be used
 -- to change a push subscription to a pull one (signified by an empty
@@ -80,20 +82,20 @@ type ProjectsSubscriptionsModifyPushConfigResource =
 --
 -- /See:/ 'projectsSubscriptionsModifyPushConfig'' smart constructor.
 data ProjectsSubscriptionsModifyPushConfig' = ProjectsSubscriptionsModifyPushConfig'
-    { _psmpcXgafv          :: !(Maybe Text)
-    , _psmpcQuotaUser      :: !(Maybe Text)
-    , _psmpcPrettyPrint    :: !Bool
-    , _psmpcUploadProtocol :: !(Maybe Text)
-    , _psmpcPp             :: !Bool
-    , _psmpcAccessToken    :: !(Maybe Text)
-    , _psmpcUploadType     :: !(Maybe Text)
-    , _psmpcBearerToken    :: !(Maybe Text)
-    , _psmpcKey            :: !(Maybe Text)
-    , _psmpcOauthToken     :: !(Maybe Text)
-    , _psmpcSubscription   :: !Text
-    , _psmpcFields         :: !(Maybe Text)
-    , _psmpcCallback       :: !(Maybe Text)
-    , _psmpcAlt            :: !Text
+    { _psmpcXgafv                   :: !(Maybe Text)
+    , _psmpcQuotaUser               :: !(Maybe Text)
+    , _psmpcPrettyPrint             :: !Bool
+    , _psmpcUploadProtocol          :: !(Maybe Text)
+    , _psmpcModifyPushConfigRequest :: !ModifyPushConfigRequest
+    , _psmpcPp                      :: !Bool
+    , _psmpcAccessToken             :: !(Maybe Text)
+    , _psmpcUploadType              :: !(Maybe Text)
+    , _psmpcBearerToken             :: !(Maybe Text)
+    , _psmpcKey                     :: !(Maybe Key)
+    , _psmpcOAuthToken              :: !(Maybe OAuthToken)
+    , _psmpcSubscription            :: !Text
+    , _psmpcFields                  :: !(Maybe Text)
+    , _psmpcCallback                :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsSubscriptionsModifyPushConfig'' with the minimum fields required to make a request.
@@ -108,6 +110,8 @@ data ProjectsSubscriptionsModifyPushConfig' = ProjectsSubscriptionsModifyPushCon
 --
 -- * 'psmpcUploadProtocol'
 --
+-- * 'psmpcModifyPushConfigRequest'
+--
 -- * 'psmpcPp'
 --
 -- * 'psmpcAccessToken'
@@ -118,34 +122,33 @@ data ProjectsSubscriptionsModifyPushConfig' = ProjectsSubscriptionsModifyPushCon
 --
 -- * 'psmpcKey'
 --
--- * 'psmpcOauthToken'
+-- * 'psmpcOAuthToken'
 --
 -- * 'psmpcSubscription'
 --
 -- * 'psmpcFields'
 --
 -- * 'psmpcCallback'
---
--- * 'psmpcAlt'
 projectsSubscriptionsModifyPushConfig'
-    :: Text -- ^ 'subscription'
+    :: ModifyPushConfigRequest -- ^ 'ModifyPushConfigRequest'
+    -> Text -- ^ 'subscription'
     -> ProjectsSubscriptionsModifyPushConfig'
-projectsSubscriptionsModifyPushConfig' pPsmpcSubscription_ =
+projectsSubscriptionsModifyPushConfig' pPsmpcModifyPushConfigRequest_ pPsmpcSubscription_ =
     ProjectsSubscriptionsModifyPushConfig'
     { _psmpcXgafv = Nothing
     , _psmpcQuotaUser = Nothing
     , _psmpcPrettyPrint = True
     , _psmpcUploadProtocol = Nothing
+    , _psmpcModifyPushConfigRequest = pPsmpcModifyPushConfigRequest_
     , _psmpcPp = True
     , _psmpcAccessToken = Nothing
     , _psmpcUploadType = Nothing
     , _psmpcBearerToken = Nothing
     , _psmpcKey = Nothing
-    , _psmpcOauthToken = Nothing
+    , _psmpcOAuthToken = Nothing
     , _psmpcSubscription = pPsmpcSubscription_
     , _psmpcFields = Nothing
     , _psmpcCallback = Nothing
-    , _psmpcAlt = "json"
     }
 
 -- | V1 error format.
@@ -173,6 +176,12 @@ psmpcUploadProtocol
   = lens _psmpcUploadProtocol
       (\ s a -> s{_psmpcUploadProtocol = a})
 
+-- | Multipart request metadata.
+psmpcModifyPushConfigRequest :: Lens' ProjectsSubscriptionsModifyPushConfig' ModifyPushConfigRequest
+psmpcModifyPushConfigRequest
+  = lens _psmpcModifyPushConfigRequest
+      (\ s a -> s{_psmpcModifyPushConfigRequest = a})
+
 -- | Pretty-print response.
 psmpcPp :: Lens' ProjectsSubscriptionsModifyPushConfig' Bool
 psmpcPp = lens _psmpcPp (\ s a -> s{_psmpcPp = a})
@@ -198,14 +207,14 @@ psmpcBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-psmpcKey :: Lens' ProjectsSubscriptionsModifyPushConfig' (Maybe Text)
+psmpcKey :: Lens' ProjectsSubscriptionsModifyPushConfig' (Maybe Key)
 psmpcKey = lens _psmpcKey (\ s a -> s{_psmpcKey = a})
 
 -- | OAuth 2.0 token for the current user.
-psmpcOauthToken :: Lens' ProjectsSubscriptionsModifyPushConfig' (Maybe Text)
-psmpcOauthToken
-  = lens _psmpcOauthToken
-      (\ s a -> s{_psmpcOauthToken = a})
+psmpcOAuthToken :: Lens' ProjectsSubscriptionsModifyPushConfig' (Maybe OAuthToken)
+psmpcOAuthToken
+  = lens _psmpcOAuthToken
+      (\ s a -> s{_psmpcOAuthToken = a})
 
 -- | The name of the subscription.
 psmpcSubscription :: Lens' ProjectsSubscriptionsModifyPushConfig' Text
@@ -224,9 +233,10 @@ psmpcCallback
   = lens _psmpcCallback
       (\ s a -> s{_psmpcCallback = a})
 
--- | Data format for response.
-psmpcAlt :: Lens' ProjectsSubscriptionsModifyPushConfig' Text
-psmpcAlt = lens _psmpcAlt (\ s a -> s{_psmpcAlt = a})
+instance GoogleAuth
+         ProjectsSubscriptionsModifyPushConfig' where
+        authKey = psmpcKey . _Just
+        authToken = psmpcOAuthToken . _Just
 
 instance GoogleRequest
          ProjectsSubscriptionsModifyPushConfig' where
@@ -243,11 +253,12 @@ instance GoogleRequest
               _psmpcUploadType
               _psmpcBearerToken
               _psmpcKey
-              _psmpcOauthToken
+              _psmpcOAuthToken
               _psmpcSubscription
               _psmpcFields
               _psmpcCallback
-              (Just _psmpcAlt)
+              (Just AltJSON)
+              _psmpcModifyPushConfigRequest
           where go
                   = clientWithRoute
                       (Proxy ::

@@ -33,11 +33,10 @@ module Network.Google.Resource.AdExchangeBuyer.BillingInfo.List
     -- * Request Lenses
     , bilQuotaUser
     , bilPrettyPrint
-    , bilUserIp
+    , bilUserIP
     , bilKey
-    , bilOauthToken
+    , bilOAuthToken
     , bilFields
-    , bilAlt
     ) where
 
 import           Network.Google.AdExchangeBuyer.Types
@@ -50,10 +49,11 @@ type BillingInfoListResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
-               QueryParam "oauth_token" Text :>
+             QueryParam "key" Key :>
+               QueryParam "oauth_token" OAuthToken :>
                  QueryParam "fields" Text :>
-                   QueryParam "alt" Alt :> Get '[JSON] BillingInfoList
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] BillingInfoList
 
 -- | Retrieves a list of billing information for all accounts of the
 -- authenticated user.
@@ -62,11 +62,10 @@ type BillingInfoListResource =
 data BillingInfoList' = BillingInfoList'
     { _bilQuotaUser   :: !(Maybe Text)
     , _bilPrettyPrint :: !Bool
-    , _bilUserIp      :: !(Maybe Text)
-    , _bilKey         :: !(Maybe Text)
-    , _bilOauthToken  :: !(Maybe Text)
+    , _bilUserIP      :: !(Maybe Text)
+    , _bilKey         :: !(Maybe Key)
+    , _bilOAuthToken  :: !(Maybe OAuthToken)
     , _bilFields      :: !(Maybe Text)
-    , _bilAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BillingInfoList'' with the minimum fields required to make a request.
@@ -77,26 +76,23 @@ data BillingInfoList' = BillingInfoList'
 --
 -- * 'bilPrettyPrint'
 --
--- * 'bilUserIp'
+-- * 'bilUserIP'
 --
 -- * 'bilKey'
 --
--- * 'bilOauthToken'
+-- * 'bilOAuthToken'
 --
 -- * 'bilFields'
---
--- * 'bilAlt'
 billingInfoList'
     :: BillingInfoList'
 billingInfoList' =
     BillingInfoList'
     { _bilQuotaUser = Nothing
     , _bilPrettyPrint = True
-    , _bilUserIp = Nothing
+    , _bilUserIP = Nothing
     , _bilKey = Nothing
-    , _bilOauthToken = Nothing
+    , _bilOAuthToken = Nothing
     , _bilFields = Nothing
-    , _bilAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -114,40 +110,40 @@ bilPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-bilUserIp :: Lens' BillingInfoList' (Maybe Text)
-bilUserIp
-  = lens _bilUserIp (\ s a -> s{_bilUserIp = a})
+bilUserIP :: Lens' BillingInfoList' (Maybe Text)
+bilUserIP
+  = lens _bilUserIP (\ s a -> s{_bilUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-bilKey :: Lens' BillingInfoList' (Maybe Text)
+bilKey :: Lens' BillingInfoList' (Maybe Key)
 bilKey = lens _bilKey (\ s a -> s{_bilKey = a})
 
 -- | OAuth 2.0 token for the current user.
-bilOauthToken :: Lens' BillingInfoList' (Maybe Text)
-bilOauthToken
-  = lens _bilOauthToken
-      (\ s a -> s{_bilOauthToken = a})
+bilOAuthToken :: Lens' BillingInfoList' (Maybe OAuthToken)
+bilOAuthToken
+  = lens _bilOAuthToken
+      (\ s a -> s{_bilOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 bilFields :: Lens' BillingInfoList' (Maybe Text)
 bilFields
   = lens _bilFields (\ s a -> s{_bilFields = a})
 
--- | Data format for the response.
-bilAlt :: Lens' BillingInfoList' Alt
-bilAlt = lens _bilAlt (\ s a -> s{_bilAlt = a})
+instance GoogleAuth BillingInfoList' where
+        authKey = bilKey . _Just
+        authToken = bilOAuthToken . _Just
 
 instance GoogleRequest BillingInfoList' where
         type Rs BillingInfoList' = BillingInfoList
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u BillingInfoList'{..}
-          = go _bilQuotaUser (Just _bilPrettyPrint) _bilUserIp
+          = go _bilQuotaUser (Just _bilPrettyPrint) _bilUserIP
               _bilKey
-              _bilOauthToken
+              _bilOAuthToken
               _bilFields
-              (Just _bilAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy BillingInfoListResource)

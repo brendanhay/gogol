@@ -32,16 +32,15 @@ module Network.Google.Resource.Language.Translations.List
     -- * Request Lenses
     , tlQuotaUser
     , tlPrettyPrint
-    , tlUserIp
+    , tlUserIP
     , tlFormat
     , tlQ
     , tlKey
     , tlSource
-    , tlOauthToken
+    , tlOAuthToken
     , tlCid
     , tlTarget
     , tlFields
-    , tlAlt
     ) where
 
 import           Network.Google.Prelude
@@ -56,13 +55,13 @@ type TranslationsListResource =
            QueryParam "userIp" Text :>
              QueryParam "format" LanguageTranslationsListFormat :>
                QueryParams "q" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "source" Text :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParams "cid" Text :>
                          QueryParam "target" Text :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :>
+                             QueryParam "alt" AltJSON :>
                                Get '[JSON] TranslationsListResponse
 
 -- | Returns text translations from one language to another.
@@ -71,16 +70,15 @@ type TranslationsListResource =
 data TranslationsList' = TranslationsList'
     { _tlQuotaUser   :: !(Maybe Text)
     , _tlPrettyPrint :: !Bool
-    , _tlUserIp      :: !(Maybe Text)
+    , _tlUserIP      :: !(Maybe Text)
     , _tlFormat      :: !(Maybe LanguageTranslationsListFormat)
     , _tlQ           :: !Text
-    , _tlKey         :: !(Maybe Text)
+    , _tlKey         :: !(Maybe Key)
     , _tlSource      :: !(Maybe Text)
-    , _tlOauthToken  :: !(Maybe Text)
+    , _tlOAuthToken  :: !(Maybe OAuthToken)
     , _tlCid         :: !(Maybe Text)
     , _tlTarget      :: !Text
     , _tlFields      :: !(Maybe Text)
-    , _tlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TranslationsList'' with the minimum fields required to make a request.
@@ -91,7 +89,7 @@ data TranslationsList' = TranslationsList'
 --
 -- * 'tlPrettyPrint'
 --
--- * 'tlUserIp'
+-- * 'tlUserIP'
 --
 -- * 'tlFormat'
 --
@@ -101,15 +99,13 @@ data TranslationsList' = TranslationsList'
 --
 -- * 'tlSource'
 --
--- * 'tlOauthToken'
+-- * 'tlOAuthToken'
 --
 -- * 'tlCid'
 --
 -- * 'tlTarget'
 --
 -- * 'tlFields'
---
--- * 'tlAlt'
 translationsList'
     :: Text -- ^ 'q'
     -> Text -- ^ 'target'
@@ -118,16 +114,15 @@ translationsList' pTlQ_ pTlTarget_ =
     TranslationsList'
     { _tlQuotaUser = Nothing
     , _tlPrettyPrint = True
-    , _tlUserIp = Nothing
+    , _tlUserIP = Nothing
     , _tlFormat = Nothing
     , _tlQ = pTlQ_
     , _tlKey = Nothing
     , _tlSource = Nothing
-    , _tlOauthToken = Nothing
+    , _tlOAuthToken = Nothing
     , _tlCid = Nothing
     , _tlTarget = pTlTarget_
     , _tlFields = Nothing
-    , _tlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -145,8 +140,8 @@ tlPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tlUserIp :: Lens' TranslationsList' (Maybe Text)
-tlUserIp = lens _tlUserIp (\ s a -> s{_tlUserIp = a})
+tlUserIP :: Lens' TranslationsList' (Maybe Text)
+tlUserIP = lens _tlUserIP (\ s a -> s{_tlUserIP = a})
 
 -- | The format of the text
 tlFormat :: Lens' TranslationsList' (Maybe LanguageTranslationsListFormat)
@@ -159,7 +154,7 @@ tlQ = lens _tlQ (\ s a -> s{_tlQ = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tlKey :: Lens' TranslationsList' (Maybe Text)
+tlKey :: Lens' TranslationsList' (Maybe Key)
 tlKey = lens _tlKey (\ s a -> s{_tlKey = a})
 
 -- | The source language of the text
@@ -167,9 +162,9 @@ tlSource :: Lens' TranslationsList' (Maybe Text)
 tlSource = lens _tlSource (\ s a -> s{_tlSource = a})
 
 -- | OAuth 2.0 token for the current user.
-tlOauthToken :: Lens' TranslationsList' (Maybe Text)
-tlOauthToken
-  = lens _tlOauthToken (\ s a -> s{_tlOauthToken = a})
+tlOAuthToken :: Lens' TranslationsList' (Maybe OAuthToken)
+tlOAuthToken
+  = lens _tlOAuthToken (\ s a -> s{_tlOAuthToken = a})
 
 -- | The customization id for translate
 tlCid :: Lens' TranslationsList' (Maybe Text)
@@ -183,24 +178,24 @@ tlTarget = lens _tlTarget (\ s a -> s{_tlTarget = a})
 tlFields :: Lens' TranslationsList' (Maybe Text)
 tlFields = lens _tlFields (\ s a -> s{_tlFields = a})
 
--- | Data format for the response.
-tlAlt :: Lens' TranslationsList' Alt
-tlAlt = lens _tlAlt (\ s a -> s{_tlAlt = a})
+instance GoogleAuth TranslationsList' where
+        authKey = tlKey . _Just
+        authToken = tlOAuthToken . _Just
 
 instance GoogleRequest TranslationsList' where
         type Rs TranslationsList' = TranslationsListResponse
         request = requestWithRoute defReq translateURL
         requestWithRoute r u TranslationsList'{..}
-          = go _tlQuotaUser (Just _tlPrettyPrint) _tlUserIp
+          = go _tlQuotaUser (Just _tlPrettyPrint) _tlUserIP
               _tlFormat
               (Just _tlQ)
               _tlKey
               _tlSource
-              _tlOauthToken
+              _tlOAuthToken
               _tlCid
               (Just _tlTarget)
               _tlFields
-              (Just _tlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TranslationsListResource)

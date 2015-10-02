@@ -19,7 +19,7 @@
 --
 -- | Gets information about a specific manifest.
 --
--- /See:/ <https://developers.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentmanagerManifestsGet@.
+-- /See:/ <https://developers.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerManifestsGet@.
 module Network.Google.Resource.DeploymentManager.Manifests.Get
     (
     -- * REST Resource
@@ -33,19 +33,18 @@ module Network.Google.Resource.DeploymentManager.Manifests.Get
     , mgQuotaUser
     , mgPrettyPrint
     , mgProject
-    , mgUserIp
+    , mgUserIP
     , mgKey
     , mgManifest
-    , mgOauthToken
+    , mgOAuthToken
     , mgFields
-    , mgAlt
     , mgDeployment
     ) where
 
 import           Network.Google.DeploymentManager.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DeploymentmanagerManifestsGet@ which the
+-- | A resource alias for @DeploymentManagerManifestsGet@ which the
 -- 'ManifestsGet'' request conforms to.
 type ManifestsGetResource =
      Capture "project" Text :>
@@ -57,10 +56,10 @@ type ManifestsGetResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Get '[JSON] Manifest
+                             QueryParam "alt" AltJSON :> Get '[JSON] Manifest
 
 -- | Gets information about a specific manifest.
 --
@@ -69,12 +68,11 @@ data ManifestsGet' = ManifestsGet'
     { _mgQuotaUser   :: !(Maybe Text)
     , _mgPrettyPrint :: !Bool
     , _mgProject     :: !Text
-    , _mgUserIp      :: !(Maybe Text)
-    , _mgKey         :: !(Maybe Text)
+    , _mgUserIP      :: !(Maybe Text)
+    , _mgKey         :: !(Maybe Key)
     , _mgManifest    :: !Text
-    , _mgOauthToken  :: !(Maybe Text)
+    , _mgOAuthToken  :: !(Maybe OAuthToken)
     , _mgFields      :: !(Maybe Text)
-    , _mgAlt         :: !Alt
     , _mgDeployment  :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -88,17 +86,15 @@ data ManifestsGet' = ManifestsGet'
 --
 -- * 'mgProject'
 --
--- * 'mgUserIp'
+-- * 'mgUserIP'
 --
 -- * 'mgKey'
 --
 -- * 'mgManifest'
 --
--- * 'mgOauthToken'
+-- * 'mgOAuthToken'
 --
 -- * 'mgFields'
---
--- * 'mgAlt'
 --
 -- * 'mgDeployment'
 manifestsGet'
@@ -111,12 +107,11 @@ manifestsGet' pMgProject_ pMgManifest_ pMgDeployment_ =
     { _mgQuotaUser = Nothing
     , _mgPrettyPrint = True
     , _mgProject = pMgProject_
-    , _mgUserIp = Nothing
+    , _mgUserIP = Nothing
     , _mgKey = Nothing
     , _mgManifest = pMgManifest_
-    , _mgOauthToken = Nothing
+    , _mgOAuthToken = Nothing
     , _mgFields = Nothing
-    , _mgAlt = JSON
     , _mgDeployment = pMgDeployment_
     }
 
@@ -140,13 +135,13 @@ mgProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mgUserIp :: Lens' ManifestsGet' (Maybe Text)
-mgUserIp = lens _mgUserIp (\ s a -> s{_mgUserIp = a})
+mgUserIP :: Lens' ManifestsGet' (Maybe Text)
+mgUserIP = lens _mgUserIP (\ s a -> s{_mgUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mgKey :: Lens' ManifestsGet' (Maybe Text)
+mgKey :: Lens' ManifestsGet' (Maybe Key)
 mgKey = lens _mgKey (\ s a -> s{_mgKey = a})
 
 -- | The name of the manifest for this request.
@@ -155,22 +150,22 @@ mgManifest
   = lens _mgManifest (\ s a -> s{_mgManifest = a})
 
 -- | OAuth 2.0 token for the current user.
-mgOauthToken :: Lens' ManifestsGet' (Maybe Text)
-mgOauthToken
-  = lens _mgOauthToken (\ s a -> s{_mgOauthToken = a})
+mgOAuthToken :: Lens' ManifestsGet' (Maybe OAuthToken)
+mgOAuthToken
+  = lens _mgOAuthToken (\ s a -> s{_mgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 mgFields :: Lens' ManifestsGet' (Maybe Text)
 mgFields = lens _mgFields (\ s a -> s{_mgFields = a})
 
--- | Data format for the response.
-mgAlt :: Lens' ManifestsGet' Alt
-mgAlt = lens _mgAlt (\ s a -> s{_mgAlt = a})
-
 -- | The name of the deployment for this request.
 mgDeployment :: Lens' ManifestsGet' Text
 mgDeployment
   = lens _mgDeployment (\ s a -> s{_mgDeployment = a})
+
+instance GoogleAuth ManifestsGet' where
+        authKey = mgKey . _Just
+        authToken = mgOAuthToken . _Just
 
 instance GoogleRequest ManifestsGet' where
         type Rs ManifestsGet' = Manifest
@@ -178,13 +173,13 @@ instance GoogleRequest ManifestsGet' where
           = requestWithRoute defReq deploymentManagerURL
         requestWithRoute r u ManifestsGet'{..}
           = go _mgQuotaUser (Just _mgPrettyPrint) _mgProject
-              _mgUserIp
+              _mgUserIP
               _mgKey
               _mgManifest
-              _mgOauthToken
+              _mgOAuthToken
               _mgFields
-              (Just _mgAlt)
               _mgDeployment
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ManifestsGetResource)

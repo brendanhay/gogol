@@ -33,14 +33,14 @@ module Network.Google.Resource.Analytics.Management.Experiments.Update
     , meuQuotaUser
     , meuPrettyPrint
     , meuWebPropertyId
-    , meuUserIp
+    , meuUserIP
     , meuProfileId
+    , meuExperiment
     , meuAccountId
     , meuExperimentId
     , meuKey
-    , meuOauthToken
+    , meuOAuthToken
     , meuFields
-    , meuAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -61,11 +61,12 @@ type ManagementExperimentsUpdateResource =
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "alt" Alt :>
-                                     Put '[JSON] Experiment
+                                   QueryParam "alt" AltJSON :>
+                                     ReqBody '[JSON] Experiment :>
+                                       Put '[JSON] Experiment
 
 -- | Update an existing experiment.
 --
@@ -74,14 +75,14 @@ data ManagementExperimentsUpdate' = ManagementExperimentsUpdate'
     { _meuQuotaUser     :: !(Maybe Text)
     , _meuPrettyPrint   :: !Bool
     , _meuWebPropertyId :: !Text
-    , _meuUserIp        :: !(Maybe Text)
+    , _meuUserIP        :: !(Maybe Text)
     , _meuProfileId     :: !Text
+    , _meuExperiment    :: !Experiment
     , _meuAccountId     :: !Text
     , _meuExperimentId  :: !Text
-    , _meuKey           :: !(Maybe Text)
-    , _meuOauthToken    :: !(Maybe Text)
+    , _meuKey           :: !(Maybe Key)
+    , _meuOAuthToken    :: !(Maybe OAuthToken)
     , _meuFields        :: !(Maybe Text)
-    , _meuAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementExperimentsUpdate'' with the minimum fields required to make a request.
@@ -94,9 +95,11 @@ data ManagementExperimentsUpdate' = ManagementExperimentsUpdate'
 --
 -- * 'meuWebPropertyId'
 --
--- * 'meuUserIp'
+-- * 'meuUserIP'
 --
 -- * 'meuProfileId'
+--
+-- * 'meuExperiment'
 --
 -- * 'meuAccountId'
 --
@@ -104,30 +107,29 @@ data ManagementExperimentsUpdate' = ManagementExperimentsUpdate'
 --
 -- * 'meuKey'
 --
--- * 'meuOauthToken'
+-- * 'meuOAuthToken'
 --
 -- * 'meuFields'
---
--- * 'meuAlt'
 managementExperimentsUpdate'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
+    -> Experiment -- ^ 'Experiment'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'experimentId'
     -> ManagementExperimentsUpdate'
-managementExperimentsUpdate' pMeuWebPropertyId_ pMeuProfileId_ pMeuAccountId_ pMeuExperimentId_ =
+managementExperimentsUpdate' pMeuWebPropertyId_ pMeuProfileId_ pMeuExperiment_ pMeuAccountId_ pMeuExperimentId_ =
     ManagementExperimentsUpdate'
     { _meuQuotaUser = Nothing
     , _meuPrettyPrint = False
     , _meuWebPropertyId = pMeuWebPropertyId_
-    , _meuUserIp = Nothing
+    , _meuUserIP = Nothing
     , _meuProfileId = pMeuProfileId_
+    , _meuExperiment = pMeuExperiment_
     , _meuAccountId = pMeuAccountId_
     , _meuExperimentId = pMeuExperimentId_
     , _meuKey = Nothing
-    , _meuOauthToken = Nothing
+    , _meuOAuthToken = Nothing
     , _meuFields = Nothing
-    , _meuAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -151,14 +153,20 @@ meuWebPropertyId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-meuUserIp :: Lens' ManagementExperimentsUpdate' (Maybe Text)
-meuUserIp
-  = lens _meuUserIp (\ s a -> s{_meuUserIp = a})
+meuUserIP :: Lens' ManagementExperimentsUpdate' (Maybe Text)
+meuUserIP
+  = lens _meuUserIP (\ s a -> s{_meuUserIP = a})
 
 -- | View (Profile) ID of the experiment to update.
 meuProfileId :: Lens' ManagementExperimentsUpdate' Text
 meuProfileId
   = lens _meuProfileId (\ s a -> s{_meuProfileId = a})
+
+-- | Multipart request metadata.
+meuExperiment :: Lens' ManagementExperimentsUpdate' Experiment
+meuExperiment
+  = lens _meuExperiment
+      (\ s a -> s{_meuExperiment = a})
 
 -- | Account ID of the experiment to update.
 meuAccountId :: Lens' ManagementExperimentsUpdate' Text
@@ -174,23 +182,24 @@ meuExperimentId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-meuKey :: Lens' ManagementExperimentsUpdate' (Maybe Text)
+meuKey :: Lens' ManagementExperimentsUpdate' (Maybe Key)
 meuKey = lens _meuKey (\ s a -> s{_meuKey = a})
 
 -- | OAuth 2.0 token for the current user.
-meuOauthToken :: Lens' ManagementExperimentsUpdate' (Maybe Text)
-meuOauthToken
-  = lens _meuOauthToken
-      (\ s a -> s{_meuOauthToken = a})
+meuOAuthToken :: Lens' ManagementExperimentsUpdate' (Maybe OAuthToken)
+meuOAuthToken
+  = lens _meuOAuthToken
+      (\ s a -> s{_meuOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 meuFields :: Lens' ManagementExperimentsUpdate' (Maybe Text)
 meuFields
   = lens _meuFields (\ s a -> s{_meuFields = a})
 
--- | Data format for the response.
-meuAlt :: Lens' ManagementExperimentsUpdate' Alt
-meuAlt = lens _meuAlt (\ s a -> s{_meuAlt = a})
+instance GoogleAuth ManagementExperimentsUpdate'
+         where
+        authKey = meuKey . _Just
+        authToken = meuOAuthToken . _Just
 
 instance GoogleRequest ManagementExperimentsUpdate'
          where
@@ -199,14 +208,15 @@ instance GoogleRequest ManagementExperimentsUpdate'
         requestWithRoute r u ManagementExperimentsUpdate'{..}
           = go _meuQuotaUser (Just _meuPrettyPrint)
               _meuWebPropertyId
-              _meuUserIp
+              _meuUserIP
               _meuProfileId
               _meuAccountId
               _meuExperimentId
               _meuKey
-              _meuOauthToken
+              _meuOAuthToken
               _meuFields
-              (Just _meuAlt)
+              (Just AltJSON)
+              _meuExperiment
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ManagementExperimentsUpdateResource)

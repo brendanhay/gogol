@@ -33,13 +33,13 @@ module Network.Google.Resource.Analytics.Management.Experiments.Insert
     , meiQuotaUser
     , meiPrettyPrint
     , meiWebPropertyId
-    , meiUserIp
+    , meiUserIP
     , meiProfileId
+    , meiExperiment
     , meiAccountId
     , meiKey
-    , meiOauthToken
+    , meiOAuthToken
     , meiFields
-    , meiAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -59,10 +59,12 @@ type ManagementExperimentsInsertResource =
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "fields" Text :>
-                                 QueryParam "alt" Alt :> Post '[JSON] Experiment
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON] Experiment :>
+                                     Post '[JSON] Experiment
 
 -- | Create a new experiment.
 --
@@ -71,13 +73,13 @@ data ManagementExperimentsInsert' = ManagementExperimentsInsert'
     { _meiQuotaUser     :: !(Maybe Text)
     , _meiPrettyPrint   :: !Bool
     , _meiWebPropertyId :: !Text
-    , _meiUserIp        :: !(Maybe Text)
+    , _meiUserIP        :: !(Maybe Text)
     , _meiProfileId     :: !Text
+    , _meiExperiment    :: !Experiment
     , _meiAccountId     :: !Text
-    , _meiKey           :: !(Maybe Text)
-    , _meiOauthToken    :: !(Maybe Text)
+    , _meiKey           :: !(Maybe Key)
+    , _meiOAuthToken    :: !(Maybe OAuthToken)
     , _meiFields        :: !(Maybe Text)
-    , _meiAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementExperimentsInsert'' with the minimum fields required to make a request.
@@ -90,36 +92,37 @@ data ManagementExperimentsInsert' = ManagementExperimentsInsert'
 --
 -- * 'meiWebPropertyId'
 --
--- * 'meiUserIp'
+-- * 'meiUserIP'
 --
 -- * 'meiProfileId'
+--
+-- * 'meiExperiment'
 --
 -- * 'meiAccountId'
 --
 -- * 'meiKey'
 --
--- * 'meiOauthToken'
+-- * 'meiOAuthToken'
 --
 -- * 'meiFields'
---
--- * 'meiAlt'
 managementExperimentsInsert'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
+    -> Experiment -- ^ 'Experiment'
     -> Text -- ^ 'accountId'
     -> ManagementExperimentsInsert'
-managementExperimentsInsert' pMeiWebPropertyId_ pMeiProfileId_ pMeiAccountId_ =
+managementExperimentsInsert' pMeiWebPropertyId_ pMeiProfileId_ pMeiExperiment_ pMeiAccountId_ =
     ManagementExperimentsInsert'
     { _meiQuotaUser = Nothing
     , _meiPrettyPrint = False
     , _meiWebPropertyId = pMeiWebPropertyId_
-    , _meiUserIp = Nothing
+    , _meiUserIP = Nothing
     , _meiProfileId = pMeiProfileId_
+    , _meiExperiment = pMeiExperiment_
     , _meiAccountId = pMeiAccountId_
     , _meiKey = Nothing
-    , _meiOauthToken = Nothing
+    , _meiOAuthToken = Nothing
     , _meiFields = Nothing
-    , _meiAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -143,14 +146,20 @@ meiWebPropertyId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-meiUserIp :: Lens' ManagementExperimentsInsert' (Maybe Text)
-meiUserIp
-  = lens _meiUserIp (\ s a -> s{_meiUserIp = a})
+meiUserIP :: Lens' ManagementExperimentsInsert' (Maybe Text)
+meiUserIP
+  = lens _meiUserIP (\ s a -> s{_meiUserIP = a})
 
 -- | View (Profile) ID to create the experiment for.
 meiProfileId :: Lens' ManagementExperimentsInsert' Text
 meiProfileId
   = lens _meiProfileId (\ s a -> s{_meiProfileId = a})
+
+-- | Multipart request metadata.
+meiExperiment :: Lens' ManagementExperimentsInsert' Experiment
+meiExperiment
+  = lens _meiExperiment
+      (\ s a -> s{_meiExperiment = a})
 
 -- | Account ID to create the experiment for.
 meiAccountId :: Lens' ManagementExperimentsInsert' Text
@@ -160,23 +169,24 @@ meiAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-meiKey :: Lens' ManagementExperimentsInsert' (Maybe Text)
+meiKey :: Lens' ManagementExperimentsInsert' (Maybe Key)
 meiKey = lens _meiKey (\ s a -> s{_meiKey = a})
 
 -- | OAuth 2.0 token for the current user.
-meiOauthToken :: Lens' ManagementExperimentsInsert' (Maybe Text)
-meiOauthToken
-  = lens _meiOauthToken
-      (\ s a -> s{_meiOauthToken = a})
+meiOAuthToken :: Lens' ManagementExperimentsInsert' (Maybe OAuthToken)
+meiOAuthToken
+  = lens _meiOAuthToken
+      (\ s a -> s{_meiOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 meiFields :: Lens' ManagementExperimentsInsert' (Maybe Text)
 meiFields
   = lens _meiFields (\ s a -> s{_meiFields = a})
 
--- | Data format for the response.
-meiAlt :: Lens' ManagementExperimentsInsert' Alt
-meiAlt = lens _meiAlt (\ s a -> s{_meiAlt = a})
+instance GoogleAuth ManagementExperimentsInsert'
+         where
+        authKey = meiKey . _Just
+        authToken = meiOAuthToken . _Just
 
 instance GoogleRequest ManagementExperimentsInsert'
          where
@@ -185,13 +195,14 @@ instance GoogleRequest ManagementExperimentsInsert'
         requestWithRoute r u ManagementExperimentsInsert'{..}
           = go _meiQuotaUser (Just _meiPrettyPrint)
               _meiWebPropertyId
-              _meiUserIp
+              _meiUserIP
               _meiProfileId
               _meiAccountId
               _meiKey
-              _meiOauthToken
+              _meiOAuthToken
               _meiFields
-              (Just _meiAlt)
+              (Just AltJSON)
+              _meiExperiment
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ManagementExperimentsInsertResource)

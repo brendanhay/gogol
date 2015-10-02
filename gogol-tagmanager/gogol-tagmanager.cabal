@@ -40,11 +40,11 @@ library
         , Network.Google.Resource.TagManager.Accounts.Containers.Folders.Update
         , Network.Google.Resource.TagManager.Accounts.Containers.Get
         , Network.Google.Resource.TagManager.Accounts.Containers.List
-        , Network.Google.Resource.TagManager.Accounts.Containers.MACros.Create
-        , Network.Google.Resource.TagManager.Accounts.Containers.MACros.Delete
-        , Network.Google.Resource.TagManager.Accounts.Containers.MACros.Get
-        , Network.Google.Resource.TagManager.Accounts.Containers.MACros.List
-        , Network.Google.Resource.TagManager.Accounts.Containers.MACros.Update
+        , Network.Google.Resource.TagManager.Accounts.Containers.Macros.Create
+        , Network.Google.Resource.TagManager.Accounts.Containers.Macros.Delete
+        , Network.Google.Resource.TagManager.Accounts.Containers.Macros.Get
+        , Network.Google.Resource.TagManager.Accounts.Containers.Macros.List
+        , Network.Google.Resource.TagManager.Accounts.Containers.Macros.Update
         , Network.Google.Resource.TagManager.Accounts.Containers.Move_folders.Update
         , Network.Google.Resource.TagManager.Accounts.Containers.Rules.Create
         , Network.Google.Resource.TagManager.Accounts.Containers.Rules.Delete

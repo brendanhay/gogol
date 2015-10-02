@@ -33,12 +33,11 @@ module Network.Google.Resource.AdSense.Alerts.Delete
     -- * Request Lenses
     , adQuotaUser
     , adPrettyPrint
-    , adUserIp
+    , adUserIP
     , adAlertId
     , adKey
-    , adOauthToken
+    , adOAuthToken
     , adFields
-    , adAlt
     ) where
 
 import           Network.Google.AdSense.Types
@@ -52,10 +51,10 @@ type AlertsDeleteResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Delete '[JSON] ()
+                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Dismiss (delete) the specified alert from the publisher\'s AdSense
 -- account.
@@ -64,12 +63,11 @@ type AlertsDeleteResource =
 data AlertsDelete' = AlertsDelete'
     { _adQuotaUser   :: !(Maybe Text)
     , _adPrettyPrint :: !Bool
-    , _adUserIp      :: !(Maybe Text)
+    , _adUserIP      :: !(Maybe Text)
     , _adAlertId     :: !Text
-    , _adKey         :: !(Maybe Text)
-    , _adOauthToken  :: !(Maybe Text)
+    , _adKey         :: !(Maybe Key)
+    , _adOAuthToken  :: !(Maybe OAuthToken)
     , _adFields      :: !(Maybe Text)
-    , _adAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AlertsDelete'' with the minimum fields required to make a request.
@@ -80,17 +78,15 @@ data AlertsDelete' = AlertsDelete'
 --
 -- * 'adPrettyPrint'
 --
--- * 'adUserIp'
+-- * 'adUserIP'
 --
 -- * 'adAlertId'
 --
 -- * 'adKey'
 --
--- * 'adOauthToken'
+-- * 'adOAuthToken'
 --
 -- * 'adFields'
---
--- * 'adAlt'
 alertsDelete'
     :: Text -- ^ 'alertId'
     -> AlertsDelete'
@@ -98,12 +94,11 @@ alertsDelete' pAdAlertId_ =
     AlertsDelete'
     { _adQuotaUser = Nothing
     , _adPrettyPrint = True
-    , _adUserIp = Nothing
+    , _adUserIP = Nothing
     , _adAlertId = pAdAlertId_
     , _adKey = Nothing
-    , _adOauthToken = Nothing
+    , _adOAuthToken = Nothing
     , _adFields = Nothing
-    , _adAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -121,8 +116,8 @@ adPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-adUserIp :: Lens' AlertsDelete' (Maybe Text)
-adUserIp = lens _adUserIp (\ s a -> s{_adUserIp = a})
+adUserIP :: Lens' AlertsDelete' (Maybe Text)
+adUserIP = lens _adUserIP (\ s a -> s{_adUserIP = a})
 
 -- | Alert to delete.
 adAlertId :: Lens' AlertsDelete' Text
@@ -132,32 +127,32 @@ adAlertId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-adKey :: Lens' AlertsDelete' (Maybe Text)
+adKey :: Lens' AlertsDelete' (Maybe Key)
 adKey = lens _adKey (\ s a -> s{_adKey = a})
 
 -- | OAuth 2.0 token for the current user.
-adOauthToken :: Lens' AlertsDelete' (Maybe Text)
-adOauthToken
-  = lens _adOauthToken (\ s a -> s{_adOauthToken = a})
+adOAuthToken :: Lens' AlertsDelete' (Maybe OAuthToken)
+adOAuthToken
+  = lens _adOAuthToken (\ s a -> s{_adOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 adFields :: Lens' AlertsDelete' (Maybe Text)
 adFields = lens _adFields (\ s a -> s{_adFields = a})
 
--- | Data format for the response.
-adAlt :: Lens' AlertsDelete' Alt
-adAlt = lens _adAlt (\ s a -> s{_adAlt = a})
+instance GoogleAuth AlertsDelete' where
+        authKey = adKey . _Just
+        authToken = adOAuthToken . _Just
 
 instance GoogleRequest AlertsDelete' where
         type Rs AlertsDelete' = ()
         request = requestWithRoute defReq adSenseURL
         requestWithRoute r u AlertsDelete'{..}
-          = go _adQuotaUser (Just _adPrettyPrint) _adUserIp
+          = go _adQuotaUser (Just _adPrettyPrint) _adUserIP
               _adAlertId
               _adKey
-              _adOauthToken
+              _adOAuthToken
               _adFields
-              (Just _adAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AlertsDeleteResource)

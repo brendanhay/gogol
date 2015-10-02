@@ -30,7 +30,7 @@ module Network.Google.Plus.Types
     -- * CommentActorImage
     , CommentActorImage
     , commentActorImage
-    , caiUrl
+    , caiURL
 
     -- * ActivityObjectPlusoners
     , ActivityObjectPlusoners
@@ -47,7 +47,7 @@ module Network.Google.Plus.Types
     , aoaFullImage
     , aoaImage
     , aoaObjectType
-    , aoaUrl
+    , aoaURL
     , aoaEmbed
     , aoaContent
     , aoaThumbnails
@@ -58,7 +58,7 @@ module Network.Google.Plus.Types
     , ActivityObjectAttachmentsThumbnailsImage
     , activityObjectAttachmentsThumbnailsImage
     , aoatiHeight
-    , aoatiUrl
+    , aoatiURL
     , aoatiWidth
     , aoatiType
 
@@ -89,9 +89,9 @@ module Network.Google.Plus.Types
     , pCover
     , pKind
     , pRelationshipStatus
-    , pUrls
+    , pURLs
     , pDomain
-    , pUrl
+    , pURL
     , pVerified
     , pBirthday
     , pIsPlusUser
@@ -118,13 +118,13 @@ module Network.Google.Plus.Types
     -- * CommentInReplyTo
     , CommentInReplyTo
     , commentInReplyTo
-    , cirtUrl
+    , cirtURL
     , cirtId
 
     -- * PersonOrganizations
     , PersonOrganizations
     , personOrganizations
-    , poDepartment
+    , poDePartyment
     , poLocation
     , poEndDate
     , poPrimary
@@ -138,7 +138,7 @@ module Network.Google.Plus.Types
     , ActivityObjectAttachmentsImage
     , activityObjectAttachmentsImage
     , aoaiHeight
-    , aoaiUrl
+    , aoaiURL
     , aoaiWidth
     , aoaiType
 
@@ -146,7 +146,7 @@ module Network.Google.Plus.Types
     , CommentActor
     , commentActor
     , caImage
-    , caUrl
+    , caURL
     , caDisplayName
     , caId
     , caVerification
@@ -169,7 +169,7 @@ module Network.Google.Plus.Types
     , aoAttachments
     , aoObjectType
     , aoOriginalContent
-    , aoUrl
+    , aoURL
     , aoActor
     , aoContent
     , aoReplies
@@ -180,7 +180,7 @@ module Network.Google.Plus.Types
     , ActivityObjectActor
     , activityObjectActor
     , aImage
-    , aUrl
+    , aURL
     , aDisplayName
     , aId
     , aVerification
@@ -188,7 +188,7 @@ module Network.Google.Plus.Types
     -- * ActivityActorImage
     , ActivityActorImage
     , activityActorImage
-    , aaiUrl
+    , aaiURL
 
     -- * PeopleFeed
     , PeopleFeed
@@ -204,14 +204,14 @@ module Network.Google.Plus.Types
     -- * ActivityObjectAttachmentsEmbed
     , ActivityObjectAttachmentsEmbed
     , activityObjectAttachmentsEmbed
-    , aoaeUrl
+    , aoaeURL
     , aoaeType
 
     -- * PersonCoverCoverPhoto
     , PersonCoverCoverPhoto
     , personCoverCoverPhoto
     , pccpHeight
-    , pccpUrl
+    , pccpURL
     , pccpWidth
 
     -- * PersonAgeRange
@@ -229,7 +229,7 @@ module Network.Google.Plus.Types
     -- * ActivityObjectActorImage
     , ActivityObjectActorImage
     , activityObjectActorImage
-    , actUrl
+    , actURL
 
     -- * PlusCommentsListSortOrder
     , PlusCommentsListSortOrder (..)
@@ -242,7 +242,7 @@ module Network.Google.Plus.Types
     , isThumbnail
     , isTickerSymbol
     , isHeight
-    , isThumbnailUrl
+    , isThumbnailURL
     , isImage
     , isStreetAddress
     , isWorstRating
@@ -255,7 +255,7 @@ module Network.Google.Plus.Types
     , isEndDate
     , isAssociatedMedia
     , isPlayerType
-    , isUrl
+    , isURL
     , isWidth
     , isCaption
     , isAddress
@@ -272,7 +272,7 @@ module Network.Google.Plus.Types
     , isBestRating
     , isAddressLocality
     , isPartOfTVSeries
-    , isContentUrl
+    , isContentURL
     , isByArtist
     , isAbout
     , isReviewRating
@@ -283,7 +283,7 @@ module Network.Google.Plus.Types
     , isPerformers
     , isAttendeeCount
     , isInAlbum
-    , isEmbedUrl
+    , isEmbedURL
     , isType
     , isContributor
     , isLongitude
@@ -338,7 +338,7 @@ module Network.Google.Plus.Types
     -- * PersonImage
     , PersonImage
     , personImage
-    , piUrl
+    , piURL
     , piIsDefault
 
     -- * PersonName
@@ -360,7 +360,7 @@ module Network.Google.Plus.Types
     , ActivityObjectAttachmentsThumbnails
     , activityObjectAttachmentsThumbnails
     , aoatImage
-    , aoatUrl
+    , aoatURL
     , aoatDescription
 
     -- * PlusMomentsListCollection
@@ -378,7 +378,7 @@ module Network.Google.Plus.Types
     , aaKind
     , aaRadius
     , aaPublished
-    , aaUrl
+    , aaURL
     , aaActor
     , aaAddress
     , aaObject
@@ -443,7 +443,7 @@ module Network.Google.Plus.Types
     , ActivityActor
     , activityActor
     , aaaImage
-    , aaaUrl
+    , aaaURL
     , aaaName
     , aaaDisplayName
     , aaaId
@@ -460,7 +460,7 @@ module Network.Google.Plus.Types
     , ActivityObjectAttachmentsFullImage
     , activityObjectAttachmentsFullImage
     , aoafiHeight
-    , aoafiUrl
+    , aoafiURL
     , aoafiWidth
     , aoafiType
 
@@ -497,9 +497,6 @@ module Network.Google.Plus.Types
     , cfId
     , cfUpdated
     , cfTitle
-
-    -- * Alt
-    , Alt (..)
 
     -- * CommentActorVerification
     , CommentActorVerification

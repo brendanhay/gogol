@@ -36,15 +36,14 @@ module Network.Google.Resource.YouTube.LiveBroadcasts.Bind
     , lbbQuotaUser
     , lbbPart
     , lbbPrettyPrint
-    , lbbUserIp
+    , lbbUserIP
     , lbbOnBehalfOfContentOwner
     , lbbKey
     , lbbOnBehalfOfContentOwnerChannel
     , lbbId
-    , lbbOauthToken
+    , lbbOAuthToken
     , lbbStreamId
     , lbbFields
-    , lbbAlt
     ) where
 
 import           Network.Google.Prelude
@@ -60,13 +59,13 @@ type LiveBroadcastsBindResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "onBehalfOfContentOwner" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "onBehalfOfContentOwnerChannel" Text :>
                        QueryParam "id" Text :>
-                         QueryParam "oauth_token" Text :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "streamId" Text :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :>
+                               QueryParam "alt" AltJSON :>
                                  Post '[JSON] LiveBroadcast
 
 -- | Binds a YouTube broadcast to a stream or removes an existing binding
@@ -79,15 +78,14 @@ data LiveBroadcastsBind' = LiveBroadcastsBind'
     { _lbbQuotaUser                     :: !(Maybe Text)
     , _lbbPart                          :: !Text
     , _lbbPrettyPrint                   :: !Bool
-    , _lbbUserIp                        :: !(Maybe Text)
+    , _lbbUserIP                        :: !(Maybe Text)
     , _lbbOnBehalfOfContentOwner        :: !(Maybe Text)
-    , _lbbKey                           :: !(Maybe Text)
+    , _lbbKey                           :: !(Maybe Key)
     , _lbbOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _lbbId                            :: !Text
-    , _lbbOauthToken                    :: !(Maybe Text)
+    , _lbbOAuthToken                    :: !(Maybe OAuthToken)
     , _lbbStreamId                      :: !(Maybe Text)
     , _lbbFields                        :: !(Maybe Text)
-    , _lbbAlt                           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveBroadcastsBind'' with the minimum fields required to make a request.
@@ -100,7 +98,7 @@ data LiveBroadcastsBind' = LiveBroadcastsBind'
 --
 -- * 'lbbPrettyPrint'
 --
--- * 'lbbUserIp'
+-- * 'lbbUserIP'
 --
 -- * 'lbbOnBehalfOfContentOwner'
 --
@@ -110,13 +108,11 @@ data LiveBroadcastsBind' = LiveBroadcastsBind'
 --
 -- * 'lbbId'
 --
--- * 'lbbOauthToken'
+-- * 'lbbOAuthToken'
 --
 -- * 'lbbStreamId'
 --
 -- * 'lbbFields'
---
--- * 'lbbAlt'
 liveBroadcastsBind'
     :: Text -- ^ 'part'
     -> Text -- ^ 'id'
@@ -126,15 +122,14 @@ liveBroadcastsBind' pLbbPart_ pLbbId_ =
     { _lbbQuotaUser = Nothing
     , _lbbPart = pLbbPart_
     , _lbbPrettyPrint = True
-    , _lbbUserIp = Nothing
+    , _lbbUserIP = Nothing
     , _lbbOnBehalfOfContentOwner = Nothing
     , _lbbKey = Nothing
     , _lbbOnBehalfOfContentOwnerChannel = Nothing
     , _lbbId = pLbbId_
-    , _lbbOauthToken = Nothing
+    , _lbbOAuthToken = Nothing
     , _lbbStreamId = Nothing
     , _lbbFields = Nothing
-    , _lbbAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -159,9 +154,9 @@ lbbPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-lbbUserIp :: Lens' LiveBroadcastsBind' (Maybe Text)
-lbbUserIp
-  = lens _lbbUserIp (\ s a -> s{_lbbUserIp = a})
+lbbUserIP :: Lens' LiveBroadcastsBind' (Maybe Text)
+lbbUserIP
+  = lens _lbbUserIP (\ s a -> s{_lbbUserIP = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
@@ -181,7 +176,7 @@ lbbOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lbbKey :: Lens' LiveBroadcastsBind' (Maybe Text)
+lbbKey :: Lens' LiveBroadcastsBind' (Maybe Key)
 lbbKey = lens _lbbKey (\ s a -> s{_lbbKey = a})
 
 -- | This parameter can only be used in a properly authorized request. Note:
@@ -211,10 +206,10 @@ lbbId :: Lens' LiveBroadcastsBind' Text
 lbbId = lens _lbbId (\ s a -> s{_lbbId = a})
 
 -- | OAuth 2.0 token for the current user.
-lbbOauthToken :: Lens' LiveBroadcastsBind' (Maybe Text)
-lbbOauthToken
-  = lens _lbbOauthToken
-      (\ s a -> s{_lbbOauthToken = a})
+lbbOAuthToken :: Lens' LiveBroadcastsBind' (Maybe OAuthToken)
+lbbOAuthToken
+  = lens _lbbOAuthToken
+      (\ s a -> s{_lbbOAuthToken = a})
 
 -- | The streamId parameter specifies the unique ID of the video stream that
 -- is being bound to a broadcast. If this parameter is omitted, the API
@@ -229,9 +224,9 @@ lbbFields :: Lens' LiveBroadcastsBind' (Maybe Text)
 lbbFields
   = lens _lbbFields (\ s a -> s{_lbbFields = a})
 
--- | Data format for the response.
-lbbAlt :: Lens' LiveBroadcastsBind' Alt
-lbbAlt = lens _lbbAlt (\ s a -> s{_lbbAlt = a})
+instance GoogleAuth LiveBroadcastsBind' where
+        authKey = lbbKey . _Just
+        authToken = lbbOAuthToken . _Just
 
 instance GoogleRequest LiveBroadcastsBind' where
         type Rs LiveBroadcastsBind' = LiveBroadcast
@@ -239,15 +234,15 @@ instance GoogleRequest LiveBroadcastsBind' where
         requestWithRoute r u LiveBroadcastsBind'{..}
           = go _lbbQuotaUser (Just _lbbPart)
               (Just _lbbPrettyPrint)
-              _lbbUserIp
+              _lbbUserIP
               _lbbOnBehalfOfContentOwner
               _lbbKey
               _lbbOnBehalfOfContentOwnerChannel
               (Just _lbbId)
-              _lbbOauthToken
+              _lbbOAuthToken
               _lbbStreamId
               _lbbFields
-              (Just _lbbAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy LiveBroadcastsBindResource)

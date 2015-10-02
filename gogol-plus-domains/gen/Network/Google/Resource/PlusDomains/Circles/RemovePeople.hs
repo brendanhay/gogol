@@ -33,13 +33,12 @@ module Network.Google.Resource.PlusDomains.Circles.RemovePeople
     , crpEmail
     , crpQuotaUser
     , crpPrettyPrint
-    , crpUserIp
+    , crpUserIP
     , crpUserId
     , crpKey
     , crpCircleId
-    , crpOauthToken
+    , crpOAuthToken
     , crpFields
-    , crpAlt
     ) where
 
 import           Network.Google.PlusDomains.Types
@@ -56,10 +55,10 @@ type CirclesRemovePeopleResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParams "userId" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Delete '[JSON] ()
+                           QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Remove a person from a circle.
 --
@@ -68,13 +67,12 @@ data CirclesRemovePeople' = CirclesRemovePeople'
     { _crpEmail       :: !(Maybe Text)
     , _crpQuotaUser   :: !(Maybe Text)
     , _crpPrettyPrint :: !Bool
-    , _crpUserIp      :: !(Maybe Text)
+    , _crpUserIP      :: !(Maybe Text)
     , _crpUserId      :: !(Maybe Text)
-    , _crpKey         :: !(Maybe Text)
+    , _crpKey         :: !(Maybe Key)
     , _crpCircleId    :: !Text
-    , _crpOauthToken  :: !(Maybe Text)
+    , _crpOAuthToken  :: !(Maybe OAuthToken)
     , _crpFields      :: !(Maybe Text)
-    , _crpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CirclesRemovePeople'' with the minimum fields required to make a request.
@@ -87,7 +85,7 @@ data CirclesRemovePeople' = CirclesRemovePeople'
 --
 -- * 'crpPrettyPrint'
 --
--- * 'crpUserIp'
+-- * 'crpUserIP'
 --
 -- * 'crpUserId'
 --
@@ -95,11 +93,9 @@ data CirclesRemovePeople' = CirclesRemovePeople'
 --
 -- * 'crpCircleId'
 --
--- * 'crpOauthToken'
+-- * 'crpOAuthToken'
 --
 -- * 'crpFields'
---
--- * 'crpAlt'
 circlesRemovePeople'
     :: Text -- ^ 'circleId'
     -> CirclesRemovePeople'
@@ -108,13 +104,12 @@ circlesRemovePeople' pCrpCircleId_ =
     { _crpEmail = Nothing
     , _crpQuotaUser = Nothing
     , _crpPrettyPrint = True
-    , _crpUserIp = Nothing
+    , _crpUserIP = Nothing
     , _crpUserId = Nothing
     , _crpKey = Nothing
     , _crpCircleId = pCrpCircleId_
-    , _crpOauthToken = Nothing
+    , _crpOAuthToken = Nothing
     , _crpFields = Nothing
-    , _crpAlt = JSON
     }
 
 -- | Email of the people to add to the circle. Optional, can be repeated.
@@ -136,9 +131,9 @@ crpPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-crpUserIp :: Lens' CirclesRemovePeople' (Maybe Text)
-crpUserIp
-  = lens _crpUserIp (\ s a -> s{_crpUserIp = a})
+crpUserIP :: Lens' CirclesRemovePeople' (Maybe Text)
+crpUserIP
+  = lens _crpUserIP (\ s a -> s{_crpUserIP = a})
 
 -- | IDs of the people to remove from the circle. Optional, can be repeated.
 crpUserId :: Lens' CirclesRemovePeople' (Maybe Text)
@@ -148,7 +143,7 @@ crpUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-crpKey :: Lens' CirclesRemovePeople' (Maybe Text)
+crpKey :: Lens' CirclesRemovePeople' (Maybe Key)
 crpKey = lens _crpKey (\ s a -> s{_crpKey = a})
 
 -- | The ID of the circle to remove the person from.
@@ -157,32 +152,32 @@ crpCircleId
   = lens _crpCircleId (\ s a -> s{_crpCircleId = a})
 
 -- | OAuth 2.0 token for the current user.
-crpOauthToken :: Lens' CirclesRemovePeople' (Maybe Text)
-crpOauthToken
-  = lens _crpOauthToken
-      (\ s a -> s{_crpOauthToken = a})
+crpOAuthToken :: Lens' CirclesRemovePeople' (Maybe OAuthToken)
+crpOAuthToken
+  = lens _crpOAuthToken
+      (\ s a -> s{_crpOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 crpFields :: Lens' CirclesRemovePeople' (Maybe Text)
 crpFields
   = lens _crpFields (\ s a -> s{_crpFields = a})
 
--- | Data format for the response.
-crpAlt :: Lens' CirclesRemovePeople' Alt
-crpAlt = lens _crpAlt (\ s a -> s{_crpAlt = a})
+instance GoogleAuth CirclesRemovePeople' where
+        authKey = crpKey . _Just
+        authToken = crpOAuthToken . _Just
 
 instance GoogleRequest CirclesRemovePeople' where
         type Rs CirclesRemovePeople' = ()
         request = requestWithRoute defReq plusDomainsURL
         requestWithRoute r u CirclesRemovePeople'{..}
           = go _crpEmail _crpQuotaUser (Just _crpPrettyPrint)
-              _crpUserIp
+              _crpUserIP
               _crpUserId
               _crpKey
               _crpCircleId
-              _crpOauthToken
+              _crpOAuthToken
               _crpFields
-              (Just _crpAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CirclesRemovePeopleResource)

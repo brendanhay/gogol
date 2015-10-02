@@ -34,12 +34,11 @@ module Network.Google.Resource.YouTube.I18nLanguages.List
     , illQuotaUser
     , illPart
     , illPrettyPrint
-    , illUserIp
+    , illUserIP
     , illHl
     , illKey
-    , illOauthToken
+    , illOAuthToken
     , illFields
-    , illAlt
     ) where
 
 import           Network.Google.Prelude
@@ -54,10 +53,10 @@ type I18nLanguagesListResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "hl" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :>
+                       QueryParam "alt" AltJSON :>
                          Get '[JSON] I18nLanguageListResponse
 
 -- | Returns a list of application languages that the YouTube website
@@ -68,12 +67,11 @@ data I18nLanguagesList' = I18nLanguagesList'
     { _illQuotaUser   :: !(Maybe Text)
     , _illPart        :: !Text
     , _illPrettyPrint :: !Bool
-    , _illUserIp      :: !(Maybe Text)
+    , _illUserIP      :: !(Maybe Text)
     , _illHl          :: !Text
-    , _illKey         :: !(Maybe Text)
-    , _illOauthToken  :: !(Maybe Text)
+    , _illKey         :: !(Maybe Key)
+    , _illOAuthToken  :: !(Maybe OAuthToken)
     , _illFields      :: !(Maybe Text)
-    , _illAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'I18nLanguagesList'' with the minimum fields required to make a request.
@@ -86,17 +84,15 @@ data I18nLanguagesList' = I18nLanguagesList'
 --
 -- * 'illPrettyPrint'
 --
--- * 'illUserIp'
+-- * 'illUserIP'
 --
 -- * 'illHl'
 --
 -- * 'illKey'
 --
--- * 'illOauthToken'
+-- * 'illOAuthToken'
 --
 -- * 'illFields'
---
--- * 'illAlt'
 i18nLanguagesList'
     :: Text -- ^ 'part'
     -> I18nLanguagesList'
@@ -105,12 +101,11 @@ i18nLanguagesList' pIllPart_ =
     { _illQuotaUser = Nothing
     , _illPart = pIllPart_
     , _illPrettyPrint = True
-    , _illUserIp = Nothing
+    , _illUserIP = Nothing
     , _illHl = "en_US"
     , _illKey = Nothing
-    , _illOauthToken = Nothing
+    , _illOAuthToken = Nothing
     , _illFields = Nothing
-    , _illAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -133,9 +128,9 @@ illPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-illUserIp :: Lens' I18nLanguagesList' (Maybe Text)
-illUserIp
-  = lens _illUserIp (\ s a -> s{_illUserIp = a})
+illUserIP :: Lens' I18nLanguagesList' (Maybe Text)
+illUserIP
+  = lens _illUserIP (\ s a -> s{_illUserIP = a})
 
 -- | The hl parameter specifies the language that should be used for text
 -- values in the API response.
@@ -145,23 +140,23 @@ illHl = lens _illHl (\ s a -> s{_illHl = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-illKey :: Lens' I18nLanguagesList' (Maybe Text)
+illKey :: Lens' I18nLanguagesList' (Maybe Key)
 illKey = lens _illKey (\ s a -> s{_illKey = a})
 
 -- | OAuth 2.0 token for the current user.
-illOauthToken :: Lens' I18nLanguagesList' (Maybe Text)
-illOauthToken
-  = lens _illOauthToken
-      (\ s a -> s{_illOauthToken = a})
+illOAuthToken :: Lens' I18nLanguagesList' (Maybe OAuthToken)
+illOAuthToken
+  = lens _illOAuthToken
+      (\ s a -> s{_illOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 illFields :: Lens' I18nLanguagesList' (Maybe Text)
 illFields
   = lens _illFields (\ s a -> s{_illFields = a})
 
--- | Data format for the response.
-illAlt :: Lens' I18nLanguagesList' Alt
-illAlt = lens _illAlt (\ s a -> s{_illAlt = a})
+instance GoogleAuth I18nLanguagesList' where
+        authKey = illKey . _Just
+        authToken = illOAuthToken . _Just
 
 instance GoogleRequest I18nLanguagesList' where
         type Rs I18nLanguagesList' = I18nLanguageListResponse
@@ -169,12 +164,12 @@ instance GoogleRequest I18nLanguagesList' where
         requestWithRoute r u I18nLanguagesList'{..}
           = go _illQuotaUser (Just _illPart)
               (Just _illPrettyPrint)
-              _illUserIp
+              _illUserIP
               (Just _illHl)
               _illKey
-              _illOauthToken
+              _illOAuthToken
               _illFields
-              (Just _illAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy I18nLanguagesListResource)

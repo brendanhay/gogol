@@ -32,13 +32,13 @@ module Network.Google.Resource.PlusDomains.Activities.Insert
     -- * Request Lenses
     , aiQuotaUser
     , aiPrettyPrint
-    , aiUserIp
+    , aiUserIP
     , aiUserId
     , aiKey
     , aiPreview
-    , aiOauthToken
+    , aiActivity
+    , aiOAuthToken
     , aiFields
-    , aiAlt
     ) where
 
 import           Network.Google.PlusDomains.Types
@@ -53,11 +53,12 @@ type ActivitiesInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "preview" Bool :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Post '[JSON] Activity
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Activity :> Post '[JSON] Activity
 
 -- | Create a new activity for the authenticated user.
 --
@@ -65,13 +66,13 @@ type ActivitiesInsertResource =
 data ActivitiesInsert' = ActivitiesInsert'
     { _aiQuotaUser   :: !(Maybe Text)
     , _aiPrettyPrint :: !Bool
-    , _aiUserIp      :: !(Maybe Text)
+    , _aiUserIP      :: !(Maybe Text)
     , _aiUserId      :: !Text
-    , _aiKey         :: !(Maybe Text)
+    , _aiKey         :: !(Maybe Key)
     , _aiPreview     :: !(Maybe Bool)
-    , _aiOauthToken  :: !(Maybe Text)
+    , _aiActivity    :: !Activity
+    , _aiOAuthToken  :: !(Maybe OAuthToken)
     , _aiFields      :: !(Maybe Text)
-    , _aiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivitiesInsert'' with the minimum fields required to make a request.
@@ -82,7 +83,7 @@ data ActivitiesInsert' = ActivitiesInsert'
 --
 -- * 'aiPrettyPrint'
 --
--- * 'aiUserIp'
+-- * 'aiUserIP'
 --
 -- * 'aiUserId'
 --
@@ -90,25 +91,26 @@ data ActivitiesInsert' = ActivitiesInsert'
 --
 -- * 'aiPreview'
 --
--- * 'aiOauthToken'
+-- * 'aiActivity'
+--
+-- * 'aiOAuthToken'
 --
 -- * 'aiFields'
---
--- * 'aiAlt'
 activitiesInsert'
     :: Text -- ^ 'userId'
+    -> Activity -- ^ 'Activity'
     -> ActivitiesInsert'
-activitiesInsert' pAiUserId_ =
+activitiesInsert' pAiUserId_ pAiActivity_ =
     ActivitiesInsert'
     { _aiQuotaUser = Nothing
     , _aiPrettyPrint = True
-    , _aiUserIp = Nothing
+    , _aiUserIP = Nothing
     , _aiUserId = pAiUserId_
     , _aiKey = Nothing
     , _aiPreview = Nothing
-    , _aiOauthToken = Nothing
+    , _aiActivity = pAiActivity_
+    , _aiOAuthToken = Nothing
     , _aiFields = Nothing
-    , _aiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -126,8 +128,8 @@ aiPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-aiUserIp :: Lens' ActivitiesInsert' (Maybe Text)
-aiUserIp = lens _aiUserIp (\ s a -> s{_aiUserIp = a})
+aiUserIP :: Lens' ActivitiesInsert' (Maybe Text)
+aiUserIP = lens _aiUserIP (\ s a -> s{_aiUserIP = a})
 
 -- | The ID of the user to create the activity on behalf of. Its value should
 -- be \"me\", to indicate the authenticated user.
@@ -137,7 +139,7 @@ aiUserId = lens _aiUserId (\ s a -> s{_aiUserId = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aiKey :: Lens' ActivitiesInsert' (Maybe Text)
+aiKey :: Lens' ActivitiesInsert' (Maybe Key)
 aiKey = lens _aiKey (\ s a -> s{_aiKey = a})
 
 -- | If \"true\", extract the potential media attachments for a URL. The
@@ -147,30 +149,36 @@ aiPreview :: Lens' ActivitiesInsert' (Maybe Bool)
 aiPreview
   = lens _aiPreview (\ s a -> s{_aiPreview = a})
 
+-- | Multipart request metadata.
+aiActivity :: Lens' ActivitiesInsert' Activity
+aiActivity
+  = lens _aiActivity (\ s a -> s{_aiActivity = a})
+
 -- | OAuth 2.0 token for the current user.
-aiOauthToken :: Lens' ActivitiesInsert' (Maybe Text)
-aiOauthToken
-  = lens _aiOauthToken (\ s a -> s{_aiOauthToken = a})
+aiOAuthToken :: Lens' ActivitiesInsert' (Maybe OAuthToken)
+aiOAuthToken
+  = lens _aiOAuthToken (\ s a -> s{_aiOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 aiFields :: Lens' ActivitiesInsert' (Maybe Text)
 aiFields = lens _aiFields (\ s a -> s{_aiFields = a})
 
--- | Data format for the response.
-aiAlt :: Lens' ActivitiesInsert' Alt
-aiAlt = lens _aiAlt (\ s a -> s{_aiAlt = a})
+instance GoogleAuth ActivitiesInsert' where
+        authKey = aiKey . _Just
+        authToken = aiOAuthToken . _Just
 
 instance GoogleRequest ActivitiesInsert' where
         type Rs ActivitiesInsert' = Activity
         request = requestWithRoute defReq plusDomainsURL
         requestWithRoute r u ActivitiesInsert'{..}
-          = go _aiQuotaUser (Just _aiPrettyPrint) _aiUserIp
+          = go _aiQuotaUser (Just _aiPrettyPrint) _aiUserIP
               _aiUserId
               _aiKey
               _aiPreview
-              _aiOauthToken
+              _aiOAuthToken
               _aiFields
-              (Just _aiAlt)
+              (Just AltJSON)
+              _aiActivity
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ActivitiesInsertResource)

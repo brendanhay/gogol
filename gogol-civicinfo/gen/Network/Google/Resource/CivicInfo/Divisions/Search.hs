@@ -19,7 +19,7 @@
 --
 -- | Searches for political divisions by their natural name or OCD ID.
 --
--- /See:/ <https://developers.google.com/civic-information Google Civic Information API Reference> for @CivicinfoDivisionsSearch@.
+-- /See:/ <https://developers.google.com/civic-information Google Civic Information API Reference> for @CivicInfoDivisionsSearch@.
 module Network.Google.Resource.CivicInfo.Divisions.Search
     (
     -- * REST Resource
@@ -32,29 +32,28 @@ module Network.Google.Resource.CivicInfo.Divisions.Search
     -- * Request Lenses
     , dsQuotaUser
     , dsPrettyPrint
-    , dsUserIp
+    , dsUserIP
     , dsKey
     , dsQuery
-    , dsOauthToken
+    , dsOAuthToken
     , dsFields
-    , dsAlt
     ) where
 
 import           Network.Google.CivicInfo.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CivicinfoDivisionsSearch@ which the
+-- | A resource alias for @CivicInfoDivisionsSearch@ which the
 -- 'DivisionsSearch'' request conforms to.
 type DivisionsSearchResource =
      "divisions" :>
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
+             QueryParam "key" Key :>
                QueryParam "query" Text :>
-                 QueryParam "oauth_token" Text :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :>
+                     QueryParam "alt" AltJSON :>
                        Get '[JSON] DivisionSearchResponse
 
 -- | Searches for political divisions by their natural name or OCD ID.
@@ -63,12 +62,11 @@ type DivisionsSearchResource =
 data DivisionsSearch' = DivisionsSearch'
     { _dsQuotaUser   :: !(Maybe Text)
     , _dsPrettyPrint :: !Bool
-    , _dsUserIp      :: !(Maybe Text)
-    , _dsKey         :: !(Maybe Text)
+    , _dsUserIP      :: !(Maybe Text)
+    , _dsKey         :: !(Maybe Key)
     , _dsQuery       :: !(Maybe Text)
-    , _dsOauthToken  :: !(Maybe Text)
+    , _dsOAuthToken  :: !(Maybe OAuthToken)
     , _dsFields      :: !(Maybe Text)
-    , _dsAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DivisionsSearch'' with the minimum fields required to make a request.
@@ -79,29 +77,26 @@ data DivisionsSearch' = DivisionsSearch'
 --
 -- * 'dsPrettyPrint'
 --
--- * 'dsUserIp'
+-- * 'dsUserIP'
 --
 -- * 'dsKey'
 --
 -- * 'dsQuery'
 --
--- * 'dsOauthToken'
+-- * 'dsOAuthToken'
 --
 -- * 'dsFields'
---
--- * 'dsAlt'
 divisionsSearch'
     :: DivisionsSearch'
 divisionsSearch' =
     DivisionsSearch'
     { _dsQuotaUser = Nothing
     , _dsPrettyPrint = True
-    , _dsUserIp = Nothing
+    , _dsUserIP = Nothing
     , _dsKey = Nothing
     , _dsQuery = Nothing
-    , _dsOauthToken = Nothing
+    , _dsOAuthToken = Nothing
     , _dsFields = Nothing
-    , _dsAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -119,13 +114,13 @@ dsPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-dsUserIp :: Lens' DivisionsSearch' (Maybe Text)
-dsUserIp = lens _dsUserIp (\ s a -> s{_dsUserIp = a})
+dsUserIP :: Lens' DivisionsSearch' (Maybe Text)
+dsUserIP = lens _dsUserIP (\ s a -> s{_dsUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dsKey :: Lens' DivisionsSearch' (Maybe Text)
+dsKey :: Lens' DivisionsSearch' (Maybe Key)
 dsKey = lens _dsKey (\ s a -> s{_dsKey = a})
 
 -- | The search query. Queries can cover any parts of a OCD ID or a human
@@ -137,28 +132,28 @@ dsQuery :: Lens' DivisionsSearch' (Maybe Text)
 dsQuery = lens _dsQuery (\ s a -> s{_dsQuery = a})
 
 -- | OAuth 2.0 token for the current user.
-dsOauthToken :: Lens' DivisionsSearch' (Maybe Text)
-dsOauthToken
-  = lens _dsOauthToken (\ s a -> s{_dsOauthToken = a})
+dsOAuthToken :: Lens' DivisionsSearch' (Maybe OAuthToken)
+dsOAuthToken
+  = lens _dsOAuthToken (\ s a -> s{_dsOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 dsFields :: Lens' DivisionsSearch' (Maybe Text)
 dsFields = lens _dsFields (\ s a -> s{_dsFields = a})
 
--- | Data format for the response.
-dsAlt :: Lens' DivisionsSearch' Alt
-dsAlt = lens _dsAlt (\ s a -> s{_dsAlt = a})
+instance GoogleAuth DivisionsSearch' where
+        authKey = dsKey . _Just
+        authToken = dsOAuthToken . _Just
 
 instance GoogleRequest DivisionsSearch' where
         type Rs DivisionsSearch' = DivisionSearchResponse
         request = requestWithRoute defReq civicInfoURL
         requestWithRoute r u DivisionsSearch'{..}
-          = go _dsQuotaUser (Just _dsPrettyPrint) _dsUserIp
+          = go _dsQuotaUser (Just _dsPrettyPrint) _dsUserIP
               _dsKey
               _dsQuery
-              _dsOauthToken
+              _dsOAuthToken
               _dsFields
-              (Just _dsAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy DivisionsSearchResource)

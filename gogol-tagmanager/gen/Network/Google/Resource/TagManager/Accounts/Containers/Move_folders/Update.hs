@@ -19,7 +19,7 @@
 --
 -- | Moves entities to a GTM Folder.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersMove_foldersUpdate@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersMove_foldersUpdate@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Move_folders.Update
     (
     -- * REST Resource
@@ -34,21 +34,20 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Move_folders.Updat
     , acmuPrettyPrint
     , acmuContainerId
     , acmuTriggerId
-    , acmuUserIp
+    , acmuUserIP
     , acmuVariableId
     , acmuFolderId
     , acmuAccountId
     , acmuTagId
     , acmuKey
-    , acmuOauthToken
+    , acmuOAuthToken
     , acmuFields
-    , acmuAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagmanagerAccountsContainersMove_foldersUpdate@ which the
+-- | A resource alias for @TagManagerAccountsContainersMove_foldersUpdate@ which the
 -- 'AccountsContainersMove_foldersUpdate'' request conforms to.
 type AccountsContainersMove_foldersUpdateResource =
      "accounts" :>
@@ -63,10 +62,10 @@ type AccountsContainersMove_foldersUpdateResource =
                        QueryParam "userIp" Text :>
                          QueryParams "variableId" Text :>
                            QueryParams "tagId" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "alt" Alt :> Put '[JSON] ()
+                                   QueryParam "alt" AltJSON :> Put '[JSON] ()
 
 -- | Moves entities to a GTM Folder.
 --
@@ -76,15 +75,14 @@ data AccountsContainersMove_foldersUpdate' = AccountsContainersMove_foldersUpdat
     , _acmuPrettyPrint :: !Bool
     , _acmuContainerId :: !Text
     , _acmuTriggerId   :: !(Maybe Text)
-    , _acmuUserIp      :: !(Maybe Text)
+    , _acmuUserIP      :: !(Maybe Text)
     , _acmuVariableId  :: !(Maybe Text)
     , _acmuFolderId    :: !Text
     , _acmuAccountId   :: !Text
     , _acmuTagId       :: !(Maybe Text)
-    , _acmuKey         :: !(Maybe Text)
-    , _acmuOauthToken  :: !(Maybe Text)
+    , _acmuKey         :: !(Maybe Key)
+    , _acmuOAuthToken  :: !(Maybe OAuthToken)
     , _acmuFields      :: !(Maybe Text)
-    , _acmuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersMove_foldersUpdate'' with the minimum fields required to make a request.
@@ -99,7 +97,7 @@ data AccountsContainersMove_foldersUpdate' = AccountsContainersMove_foldersUpdat
 --
 -- * 'acmuTriggerId'
 --
--- * 'acmuUserIp'
+-- * 'acmuUserIP'
 --
 -- * 'acmuVariableId'
 --
@@ -111,11 +109,9 @@ data AccountsContainersMove_foldersUpdate' = AccountsContainersMove_foldersUpdat
 --
 -- * 'acmuKey'
 --
--- * 'acmuOauthToken'
+-- * 'acmuOAuthToken'
 --
 -- * 'acmuFields'
---
--- * 'acmuAlt'
 accountsContainersMove_foldersUpdate'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'folderId'
@@ -127,15 +123,14 @@ accountsContainersMove_foldersUpdate' pAcmuContainerId_ pAcmuFolderId_ pAcmuAcco
     , _acmuPrettyPrint = True
     , _acmuContainerId = pAcmuContainerId_
     , _acmuTriggerId = Nothing
-    , _acmuUserIp = Nothing
+    , _acmuUserIP = Nothing
     , _acmuVariableId = Nothing
     , _acmuFolderId = pAcmuFolderId_
     , _acmuAccountId = pAcmuAccountId_
     , _acmuTagId = Nothing
     , _acmuKey = Nothing
-    , _acmuOauthToken = Nothing
+    , _acmuOAuthToken = Nothing
     , _acmuFields = Nothing
-    , _acmuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -166,9 +161,9 @@ acmuTriggerId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-acmuUserIp :: Lens' AccountsContainersMove_foldersUpdate' (Maybe Text)
-acmuUserIp
-  = lens _acmuUserIp (\ s a -> s{_acmuUserIp = a})
+acmuUserIP :: Lens' AccountsContainersMove_foldersUpdate' (Maybe Text)
+acmuUserIP
+  = lens _acmuUserIP (\ s a -> s{_acmuUserIP = a})
 
 -- | The variables to be moved to the folder.
 acmuVariableId :: Lens' AccountsContainersMove_foldersUpdate' (Maybe Text)
@@ -195,23 +190,24 @@ acmuTagId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-acmuKey :: Lens' AccountsContainersMove_foldersUpdate' (Maybe Text)
+acmuKey :: Lens' AccountsContainersMove_foldersUpdate' (Maybe Key)
 acmuKey = lens _acmuKey (\ s a -> s{_acmuKey = a})
 
 -- | OAuth 2.0 token for the current user.
-acmuOauthToken :: Lens' AccountsContainersMove_foldersUpdate' (Maybe Text)
-acmuOauthToken
-  = lens _acmuOauthToken
-      (\ s a -> s{_acmuOauthToken = a})
+acmuOAuthToken :: Lens' AccountsContainersMove_foldersUpdate' (Maybe OAuthToken)
+acmuOAuthToken
+  = lens _acmuOAuthToken
+      (\ s a -> s{_acmuOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 acmuFields :: Lens' AccountsContainersMove_foldersUpdate' (Maybe Text)
 acmuFields
   = lens _acmuFields (\ s a -> s{_acmuFields = a})
 
--- | Data format for the response.
-acmuAlt :: Lens' AccountsContainersMove_foldersUpdate' Alt
-acmuAlt = lens _acmuAlt (\ s a -> s{_acmuAlt = a})
+instance GoogleAuth
+         AccountsContainersMove_foldersUpdate' where
+        authKey = acmuKey . _Just
+        authToken = acmuOAuthToken . _Just
 
 instance GoogleRequest
          AccountsContainersMove_foldersUpdate' where
@@ -222,15 +218,15 @@ instance GoogleRequest
           = go _acmuQuotaUser (Just _acmuPrettyPrint)
               _acmuContainerId
               _acmuTriggerId
-              _acmuUserIp
+              _acmuUserIP
               _acmuVariableId
               _acmuFolderId
               _acmuAccountId
               _acmuTagId
               _acmuKey
-              _acmuOauthToken
+              _acmuOAuthToken
               _acmuFields
-              (Just _acmuAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

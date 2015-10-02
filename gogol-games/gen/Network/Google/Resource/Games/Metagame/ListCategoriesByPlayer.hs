@@ -33,16 +33,15 @@ module Network.Google.Resource.Games.Metagame.ListCategoriesByPlayer
     -- * Request Lenses
     , mlcbpQuotaUser
     , mlcbpPrettyPrint
-    , mlcbpUserIp
+    , mlcbpUserIP
     , mlcbpCollection
     , mlcbpKey
     , mlcbpLanguage
     , mlcbpPageToken
-    , mlcbpOauthToken
+    , mlcbpOAuthToken
     , mlcbpPlayerId
     , mlcbpMaxResults
     , mlcbpFields
-    , mlcbpAlt
     ) where
 
 import           Network.Google.Games.Types
@@ -60,13 +59,13 @@ type MetagameListCategoriesByPlayerResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "language" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "maxResults" Int32 :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :>
+                               QueryParam "alt" AltJSON :>
                                  Get '[JSON] CategoryListResponse
 
 -- | List play data aggregated per category for the player corresponding to
@@ -76,16 +75,15 @@ type MetagameListCategoriesByPlayerResource =
 data MetagameListCategoriesByPlayer' = MetagameListCategoriesByPlayer'
     { _mlcbpQuotaUser   :: !(Maybe Text)
     , _mlcbpPrettyPrint :: !Bool
-    , _mlcbpUserIp      :: !(Maybe Text)
+    , _mlcbpUserIP      :: !(Maybe Text)
     , _mlcbpCollection  :: !GamesMetagameListCategoriesByPlayerCollection
-    , _mlcbpKey         :: !(Maybe Text)
+    , _mlcbpKey         :: !(Maybe Key)
     , _mlcbpLanguage    :: !(Maybe Text)
     , _mlcbpPageToken   :: !(Maybe Text)
-    , _mlcbpOauthToken  :: !(Maybe Text)
+    , _mlcbpOAuthToken  :: !(Maybe OAuthToken)
     , _mlcbpPlayerId    :: !Text
     , _mlcbpMaxResults  :: !(Maybe Int32)
     , _mlcbpFields      :: !(Maybe Text)
-    , _mlcbpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MetagameListCategoriesByPlayer'' with the minimum fields required to make a request.
@@ -96,7 +94,7 @@ data MetagameListCategoriesByPlayer' = MetagameListCategoriesByPlayer'
 --
 -- * 'mlcbpPrettyPrint'
 --
--- * 'mlcbpUserIp'
+-- * 'mlcbpUserIP'
 --
 -- * 'mlcbpCollection'
 --
@@ -106,15 +104,13 @@ data MetagameListCategoriesByPlayer' = MetagameListCategoriesByPlayer'
 --
 -- * 'mlcbpPageToken'
 --
--- * 'mlcbpOauthToken'
+-- * 'mlcbpOAuthToken'
 --
 -- * 'mlcbpPlayerId'
 --
 -- * 'mlcbpMaxResults'
 --
 -- * 'mlcbpFields'
---
--- * 'mlcbpAlt'
 metagameListCategoriesByPlayer'
     :: GamesMetagameListCategoriesByPlayerCollection -- ^ 'collection'
     -> Text -- ^ 'playerId'
@@ -123,16 +119,15 @@ metagameListCategoriesByPlayer' pMlcbpCollection_ pMlcbpPlayerId_ =
     MetagameListCategoriesByPlayer'
     { _mlcbpQuotaUser = Nothing
     , _mlcbpPrettyPrint = True
-    , _mlcbpUserIp = Nothing
+    , _mlcbpUserIP = Nothing
     , _mlcbpCollection = pMlcbpCollection_
     , _mlcbpKey = Nothing
     , _mlcbpLanguage = Nothing
     , _mlcbpPageToken = Nothing
-    , _mlcbpOauthToken = Nothing
+    , _mlcbpOAuthToken = Nothing
     , _mlcbpPlayerId = pMlcbpPlayerId_
     , _mlcbpMaxResults = Nothing
     , _mlcbpFields = Nothing
-    , _mlcbpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -151,9 +146,9 @@ mlcbpPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mlcbpUserIp :: Lens' MetagameListCategoriesByPlayer' (Maybe Text)
-mlcbpUserIp
-  = lens _mlcbpUserIp (\ s a -> s{_mlcbpUserIp = a})
+mlcbpUserIP :: Lens' MetagameListCategoriesByPlayer' (Maybe Text)
+mlcbpUserIP
+  = lens _mlcbpUserIP (\ s a -> s{_mlcbpUserIP = a})
 
 -- | The collection of categories for which data will be returned.
 mlcbpCollection :: Lens' MetagameListCategoriesByPlayer' GamesMetagameListCategoriesByPlayerCollection
@@ -164,7 +159,7 @@ mlcbpCollection
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mlcbpKey :: Lens' MetagameListCategoriesByPlayer' (Maybe Text)
+mlcbpKey :: Lens' MetagameListCategoriesByPlayer' (Maybe Key)
 mlcbpKey = lens _mlcbpKey (\ s a -> s{_mlcbpKey = a})
 
 -- | The preferred language to use for strings returned by this method.
@@ -180,10 +175,10 @@ mlcbpPageToken
       (\ s a -> s{_mlcbpPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-mlcbpOauthToken :: Lens' MetagameListCategoriesByPlayer' (Maybe Text)
-mlcbpOauthToken
-  = lens _mlcbpOauthToken
-      (\ s a -> s{_mlcbpOauthToken = a})
+mlcbpOAuthToken :: Lens' MetagameListCategoriesByPlayer' (Maybe OAuthToken)
+mlcbpOAuthToken
+  = lens _mlcbpOAuthToken
+      (\ s a -> s{_mlcbpOAuthToken = a})
 
 -- | A player ID. A value of me may be used in place of the authenticated
 -- player\'s ID.
@@ -205,9 +200,10 @@ mlcbpFields :: Lens' MetagameListCategoriesByPlayer' (Maybe Text)
 mlcbpFields
   = lens _mlcbpFields (\ s a -> s{_mlcbpFields = a})
 
--- | Data format for the response.
-mlcbpAlt :: Lens' MetagameListCategoriesByPlayer' Alt
-mlcbpAlt = lens _mlcbpAlt (\ s a -> s{_mlcbpAlt = a})
+instance GoogleAuth MetagameListCategoriesByPlayer'
+         where
+        authKey = mlcbpKey . _Just
+        authToken = mlcbpOAuthToken . _Just
 
 instance GoogleRequest
          MetagameListCategoriesByPlayer' where
@@ -217,16 +213,16 @@ instance GoogleRequest
         requestWithRoute r u
           MetagameListCategoriesByPlayer'{..}
           = go _mlcbpQuotaUser (Just _mlcbpPrettyPrint)
-              _mlcbpUserIp
+              _mlcbpUserIP
               _mlcbpCollection
               _mlcbpKey
               _mlcbpLanguage
               _mlcbpPageToken
-              _mlcbpOauthToken
+              _mlcbpOAuthToken
               _mlcbpPlayerId
               _mlcbpMaxResults
               _mlcbpFields
-              (Just _mlcbpAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

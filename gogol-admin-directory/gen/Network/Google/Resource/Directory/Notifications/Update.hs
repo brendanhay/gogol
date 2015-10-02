@@ -32,13 +32,13 @@ module Network.Google.Resource.Directory.Notifications.Update
     -- * Request Lenses
     , nuQuotaUser
     , nuPrettyPrint
-    , nuUserIp
+    , nuNotification
+    , nuUserIP
     , nuCustomer
     , nuKey
     , nuNotificationId
-    , nuOauthToken
+    , nuOAuthToken
     , nuFields
-    , nuAlt
     ) where
 
 import           Network.Google.AdminDirectory.Types
@@ -54,10 +54,12 @@ type NotificationsUpdateResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Put '[JSON] Notification
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Notification :>
+                             Put '[JSON] Notification
 
 -- | Updates a notification.
 --
@@ -65,13 +67,13 @@ type NotificationsUpdateResource =
 data NotificationsUpdate' = NotificationsUpdate'
     { _nuQuotaUser      :: !(Maybe Text)
     , _nuPrettyPrint    :: !Bool
-    , _nuUserIp         :: !(Maybe Text)
+    , _nuNotification   :: !Notification
+    , _nuUserIP         :: !(Maybe Text)
     , _nuCustomer       :: !Text
-    , _nuKey            :: !(Maybe Text)
+    , _nuKey            :: !(Maybe Key)
     , _nuNotificationId :: !Text
-    , _nuOauthToken     :: !(Maybe Text)
+    , _nuOAuthToken     :: !(Maybe OAuthToken)
     , _nuFields         :: !(Maybe Text)
-    , _nuAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NotificationsUpdate'' with the minimum fields required to make a request.
@@ -82,7 +84,9 @@ data NotificationsUpdate' = NotificationsUpdate'
 --
 -- * 'nuPrettyPrint'
 --
--- * 'nuUserIp'
+-- * 'nuNotification'
+--
+-- * 'nuUserIP'
 --
 -- * 'nuCustomer'
 --
@@ -90,26 +94,25 @@ data NotificationsUpdate' = NotificationsUpdate'
 --
 -- * 'nuNotificationId'
 --
--- * 'nuOauthToken'
+-- * 'nuOAuthToken'
 --
 -- * 'nuFields'
---
--- * 'nuAlt'
 notificationsUpdate'
-    :: Text -- ^ 'customer'
+    :: Notification -- ^ 'Notification'
+    -> Text -- ^ 'customer'
     -> Text -- ^ 'notificationId'
     -> NotificationsUpdate'
-notificationsUpdate' pNuCustomer_ pNuNotificationId_ =
+notificationsUpdate' pNuNotification_ pNuCustomer_ pNuNotificationId_ =
     NotificationsUpdate'
     { _nuQuotaUser = Nothing
     , _nuPrettyPrint = True
-    , _nuUserIp = Nothing
+    , _nuNotification = pNuNotification_
+    , _nuUserIP = Nothing
     , _nuCustomer = pNuCustomer_
     , _nuKey = Nothing
     , _nuNotificationId = pNuNotificationId_
-    , _nuOauthToken = Nothing
+    , _nuOAuthToken = Nothing
     , _nuFields = Nothing
-    , _nuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -125,10 +128,16 @@ nuPrettyPrint
   = lens _nuPrettyPrint
       (\ s a -> s{_nuPrettyPrint = a})
 
+-- | Multipart request metadata.
+nuNotification :: Lens' NotificationsUpdate' Notification
+nuNotification
+  = lens _nuNotification
+      (\ s a -> s{_nuNotification = a})
+
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-nuUserIp :: Lens' NotificationsUpdate' (Maybe Text)
-nuUserIp = lens _nuUserIp (\ s a -> s{_nuUserIp = a})
+nuUserIP :: Lens' NotificationsUpdate' (Maybe Text)
+nuUserIP = lens _nuUserIP (\ s a -> s{_nuUserIP = a})
 
 -- | The unique ID for the customer\'s Google account.
 nuCustomer :: Lens' NotificationsUpdate' Text
@@ -138,7 +147,7 @@ nuCustomer
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-nuKey :: Lens' NotificationsUpdate' (Maybe Text)
+nuKey :: Lens' NotificationsUpdate' (Maybe Key)
 nuKey = lens _nuKey (\ s a -> s{_nuKey = a})
 
 -- | The unique ID of the notification.
@@ -148,29 +157,30 @@ nuNotificationId
       (\ s a -> s{_nuNotificationId = a})
 
 -- | OAuth 2.0 token for the current user.
-nuOauthToken :: Lens' NotificationsUpdate' (Maybe Text)
-nuOauthToken
-  = lens _nuOauthToken (\ s a -> s{_nuOauthToken = a})
+nuOAuthToken :: Lens' NotificationsUpdate' (Maybe OAuthToken)
+nuOAuthToken
+  = lens _nuOAuthToken (\ s a -> s{_nuOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 nuFields :: Lens' NotificationsUpdate' (Maybe Text)
 nuFields = lens _nuFields (\ s a -> s{_nuFields = a})
 
--- | Data format for the response.
-nuAlt :: Lens' NotificationsUpdate' Alt
-nuAlt = lens _nuAlt (\ s a -> s{_nuAlt = a})
+instance GoogleAuth NotificationsUpdate' where
+        authKey = nuKey . _Just
+        authToken = nuOAuthToken . _Just
 
 instance GoogleRequest NotificationsUpdate' where
         type Rs NotificationsUpdate' = Notification
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u NotificationsUpdate'{..}
-          = go _nuQuotaUser (Just _nuPrettyPrint) _nuUserIp
+          = go _nuQuotaUser (Just _nuPrettyPrint) _nuUserIP
               _nuCustomer
               _nuKey
               _nuNotificationId
-              _nuOauthToken
+              _nuOAuthToken
               _nuFields
-              (Just _nuAlt)
+              (Just AltJSON)
+              _nuNotification
           where go
                   = clientWithRoute
                       (Proxy :: Proxy NotificationsUpdateResource)

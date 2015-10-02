@@ -32,7 +32,7 @@ module Network.Google.Resource.DFAReporting.CreativeFields.List
     -- * Request Lenses
     , cflQuotaUser
     , cflPrettyPrint
-    , cflUserIp
+    , cflUserIP
     , cflSearchString
     , cflIds
     , cflProfileId
@@ -40,11 +40,10 @@ module Network.Google.Resource.DFAReporting.CreativeFields.List
     , cflKey
     , cflPageToken
     , cflSortField
-    , cflOauthToken
+    , cflOAuthToken
     , cflAdvertiserIds
     , cflMaxResults
     , cflFields
-    , cflAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -64,16 +63,16 @@ type CreativeFieldsListResource =
                      QueryParam "sortOrder"
                        DfareportingCreativeFieldsListSortOrder
                        :>
-                       QueryParam "key" Text :>
+                       QueryParam "key" Key :>
                          QueryParam "pageToken" Text :>
                            QueryParam "sortField"
                              DfareportingCreativeFieldsListSortField
                              :>
-                             QueryParam "oauth_token" Text :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParams "advertiserIds" Int64 :>
                                  QueryParam "maxResults" Int32 :>
                                    QueryParam "fields" Text :>
-                                     QueryParam "alt" Alt :>
+                                     QueryParam "alt" AltJSON :>
                                        Get '[JSON] CreativeFieldsListResponse
 
 -- | Retrieves a list of creative fields, possibly filtered.
@@ -82,19 +81,18 @@ type CreativeFieldsListResource =
 data CreativeFieldsList' = CreativeFieldsList'
     { _cflQuotaUser     :: !(Maybe Text)
     , _cflPrettyPrint   :: !Bool
-    , _cflUserIp        :: !(Maybe Text)
+    , _cflUserIP        :: !(Maybe Text)
     , _cflSearchString  :: !(Maybe Text)
     , _cflIds           :: !(Maybe Int64)
     , _cflProfileId     :: !Int64
     , _cflSortOrder     :: !(Maybe DfareportingCreativeFieldsListSortOrder)
-    , _cflKey           :: !(Maybe Text)
+    , _cflKey           :: !(Maybe Key)
     , _cflPageToken     :: !(Maybe Text)
     , _cflSortField     :: !(Maybe DfareportingCreativeFieldsListSortField)
-    , _cflOauthToken    :: !(Maybe Text)
+    , _cflOAuthToken    :: !(Maybe OAuthToken)
     , _cflAdvertiserIds :: !(Maybe Int64)
     , _cflMaxResults    :: !(Maybe Int32)
     , _cflFields        :: !(Maybe Text)
-    , _cflAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeFieldsList'' with the minimum fields required to make a request.
@@ -105,7 +103,7 @@ data CreativeFieldsList' = CreativeFieldsList'
 --
 -- * 'cflPrettyPrint'
 --
--- * 'cflUserIp'
+-- * 'cflUserIP'
 --
 -- * 'cflSearchString'
 --
@@ -121,15 +119,13 @@ data CreativeFieldsList' = CreativeFieldsList'
 --
 -- * 'cflSortField'
 --
--- * 'cflOauthToken'
+-- * 'cflOAuthToken'
 --
 -- * 'cflAdvertiserIds'
 --
 -- * 'cflMaxResults'
 --
 -- * 'cflFields'
---
--- * 'cflAlt'
 creativeFieldsList'
     :: Int64 -- ^ 'profileId'
     -> CreativeFieldsList'
@@ -137,7 +133,7 @@ creativeFieldsList' pCflProfileId_ =
     CreativeFieldsList'
     { _cflQuotaUser = Nothing
     , _cflPrettyPrint = True
-    , _cflUserIp = Nothing
+    , _cflUserIP = Nothing
     , _cflSearchString = Nothing
     , _cflIds = Nothing
     , _cflProfileId = pCflProfileId_
@@ -145,11 +141,10 @@ creativeFieldsList' pCflProfileId_ =
     , _cflKey = Nothing
     , _cflPageToken = Nothing
     , _cflSortField = Nothing
-    , _cflOauthToken = Nothing
+    , _cflOAuthToken = Nothing
     , _cflAdvertiserIds = Nothing
     , _cflMaxResults = Nothing
     , _cflFields = Nothing
-    , _cflAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -167,9 +162,9 @@ cflPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cflUserIp :: Lens' CreativeFieldsList' (Maybe Text)
-cflUserIp
-  = lens _cflUserIp (\ s a -> s{_cflUserIp = a})
+cflUserIP :: Lens' CreativeFieldsList' (Maybe Text)
+cflUserIP
+  = lens _cflUserIP (\ s a -> s{_cflUserIP = a})
 
 -- | Allows searching for creative fields by name or ID. Wildcards (*) are
 -- allowed. For example, \"creativefield*2015\" will return creative fields
@@ -201,7 +196,7 @@ cflSortOrder
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cflKey :: Lens' CreativeFieldsList' (Maybe Text)
+cflKey :: Lens' CreativeFieldsList' (Maybe Key)
 cflKey = lens _cflKey (\ s a -> s{_cflKey = a})
 
 -- | Value of the nextPageToken from the previous result page.
@@ -215,10 +210,10 @@ cflSortField
   = lens _cflSortField (\ s a -> s{_cflSortField = a})
 
 -- | OAuth 2.0 token for the current user.
-cflOauthToken :: Lens' CreativeFieldsList' (Maybe Text)
-cflOauthToken
-  = lens _cflOauthToken
-      (\ s a -> s{_cflOauthToken = a})
+cflOAuthToken :: Lens' CreativeFieldsList' (Maybe OAuthToken)
+cflOAuthToken
+  = lens _cflOAuthToken
+      (\ s a -> s{_cflOAuthToken = a})
 
 -- | Select only creative fields that belong to these advertisers.
 cflAdvertiserIds :: Lens' CreativeFieldsList' (Maybe Int64)
@@ -237,16 +232,16 @@ cflFields :: Lens' CreativeFieldsList' (Maybe Text)
 cflFields
   = lens _cflFields (\ s a -> s{_cflFields = a})
 
--- | Data format for the response.
-cflAlt :: Lens' CreativeFieldsList' Alt
-cflAlt = lens _cflAlt (\ s a -> s{_cflAlt = a})
+instance GoogleAuth CreativeFieldsList' where
+        authKey = cflKey . _Just
+        authToken = cflOAuthToken . _Just
 
 instance GoogleRequest CreativeFieldsList' where
         type Rs CreativeFieldsList' =
              CreativeFieldsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativeFieldsList'{..}
-          = go _cflQuotaUser (Just _cflPrettyPrint) _cflUserIp
+          = go _cflQuotaUser (Just _cflPrettyPrint) _cflUserIP
               _cflSearchString
               _cflIds
               _cflProfileId
@@ -254,11 +249,11 @@ instance GoogleRequest CreativeFieldsList' where
               _cflKey
               _cflPageToken
               _cflSortField
-              _cflOauthToken
+              _cflOAuthToken
               _cflAdvertiserIds
               _cflMaxResults
               _cflFields
-              (Just _cflAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CreativeFieldsListResource)

@@ -91,11 +91,11 @@ module Network.Google.Monitoring.Types
     , pdbCount
     , pdbLowerBound
 
-    -- * CloudmonitoringTimeseriesListAggregator
-    , CloudmonitoringTimeseriesListAggregator (..)
+    -- * CloudMonitoringTimeseriesListAggregator
+    , CloudMonitoringTimeseriesListAggregator (..)
 
-    -- * CloudmonitoringTimeseriesDescriptorsListAggregator
-    , CloudmonitoringTimeseriesDescriptorsListAggregator (..)
+    -- * CloudMonitoringTimeseriesDescriptorsListAggregator
+    , CloudMonitoringTimeseriesDescriptorsListAggregator (..)
 
     -- * TimeseriesDescriptorLabel
     , TimeseriesDescriptorLabel
@@ -169,9 +169,6 @@ module Network.Google.Monitoring.Types
     , timeseries
     , tPoints
     , tTimeseriesDesc
-
-    -- * Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.Monitoring.Types.Product

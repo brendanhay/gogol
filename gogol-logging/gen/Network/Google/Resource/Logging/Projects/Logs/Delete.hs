@@ -41,11 +41,10 @@ module Network.Google.Resource.Logging.Projects.Logs.Delete
     , pldUploadType
     , pldBearerToken
     , pldKey
-    , pldOauthToken
+    , pldOAuthToken
     , pldProjectsId
     , pldFields
     , pldCallback
-    , pldAlt
     ) where
 
 import           Network.Google.Logging.Types
@@ -67,11 +66,11 @@ type ProjectsLogsDeleteResource =
                          QueryParam "access_token" Text :>
                            QueryParam "uploadType" Text :>
                              QueryParam "bearer_token" Text :>
-                               QueryParam "key" Text :>
-                                 QueryParam "oauth_token" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "fields" Text :>
                                      QueryParam "callback" Text :>
-                                       QueryParam "alt" Text :>
+                                       QueryParam "alt" AltJSON :>
                                          Delete '[JSON] Empty
 
 -- | Deletes a log and all its log entries. The log will reappear if it
@@ -88,12 +87,11 @@ data ProjectsLogsDelete' = ProjectsLogsDelete'
     , _pldAccessToken    :: !(Maybe Text)
     , _pldUploadType     :: !(Maybe Text)
     , _pldBearerToken    :: !(Maybe Text)
-    , _pldKey            :: !(Maybe Text)
-    , _pldOauthToken     :: !(Maybe Text)
+    , _pldKey            :: !(Maybe Key)
+    , _pldOAuthToken     :: !(Maybe OAuthToken)
     , _pldProjectsId     :: !Text
     , _pldFields         :: !(Maybe Text)
     , _pldCallback       :: !(Maybe Text)
-    , _pldAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsLogsDelete'' with the minimum fields required to make a request.
@@ -120,15 +118,13 @@ data ProjectsLogsDelete' = ProjectsLogsDelete'
 --
 -- * 'pldKey'
 --
--- * 'pldOauthToken'
+-- * 'pldOAuthToken'
 --
 -- * 'pldProjectsId'
 --
 -- * 'pldFields'
 --
 -- * 'pldCallback'
---
--- * 'pldAlt'
 projectsLogsDelete'
     :: Text -- ^ 'logsId'
     -> Text -- ^ 'projectsId'
@@ -145,11 +141,10 @@ projectsLogsDelete' pPldLogsId_ pPldProjectsId_ =
     , _pldUploadType = Nothing
     , _pldBearerToken = Nothing
     , _pldKey = Nothing
-    , _pldOauthToken = Nothing
+    , _pldOAuthToken = Nothing
     , _pldProjectsId = pPldProjectsId_
     , _pldFields = Nothing
     , _pldCallback = Nothing
-    , _pldAlt = "json"
     }
 
 -- | V1 error format.
@@ -205,14 +200,14 @@ pldBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pldKey :: Lens' ProjectsLogsDelete' (Maybe Text)
+pldKey :: Lens' ProjectsLogsDelete' (Maybe Key)
 pldKey = lens _pldKey (\ s a -> s{_pldKey = a})
 
 -- | OAuth 2.0 token for the current user.
-pldOauthToken :: Lens' ProjectsLogsDelete' (Maybe Text)
-pldOauthToken
-  = lens _pldOauthToken
-      (\ s a -> s{_pldOauthToken = a})
+pldOAuthToken :: Lens' ProjectsLogsDelete' (Maybe OAuthToken)
+pldOAuthToken
+  = lens _pldOAuthToken
+      (\ s a -> s{_pldOAuthToken = a})
 
 -- | Part of \`logName\`. The resource name of the log to be deleted.
 pldProjectsId :: Lens' ProjectsLogsDelete' Text
@@ -230,9 +225,9 @@ pldCallback :: Lens' ProjectsLogsDelete' (Maybe Text)
 pldCallback
   = lens _pldCallback (\ s a -> s{_pldCallback = a})
 
--- | Data format for response.
-pldAlt :: Lens' ProjectsLogsDelete' Text
-pldAlt = lens _pldAlt (\ s a -> s{_pldAlt = a})
+instance GoogleAuth ProjectsLogsDelete' where
+        authKey = pldKey . _Just
+        authToken = pldOAuthToken . _Just
 
 instance GoogleRequest ProjectsLogsDelete' where
         type Rs ProjectsLogsDelete' = Empty
@@ -246,11 +241,11 @@ instance GoogleRequest ProjectsLogsDelete' where
               _pldUploadType
               _pldBearerToken
               _pldKey
-              _pldOauthToken
+              _pldOAuthToken
               _pldProjectsId
               _pldFields
               _pldCallback
-              (Just _pldAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsLogsDeleteResource)

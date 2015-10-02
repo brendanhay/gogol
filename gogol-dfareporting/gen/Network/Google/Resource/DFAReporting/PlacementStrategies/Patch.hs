@@ -33,13 +33,13 @@ module Network.Google.Resource.DFAReporting.PlacementStrategies.Patch
     -- * Request Lenses
     , pspQuotaUser
     , pspPrettyPrint
-    , pspUserIp
+    , pspUserIP
     , pspProfileId
     , pspKey
+    , pspPlacementStrategy
     , pspId
-    , pspOauthToken
+    , pspOAuthToken
     , pspFields
-    , pspAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,27 +54,28 @@ type PlacementStrategiesPatchResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "id" Int64 :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :>
-                           Patch '[JSON] PlacementStrategy
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] PlacementStrategy :>
+                             Patch '[JSON] PlacementStrategy
 
 -- | Updates an existing placement strategy. This method supports patch
 -- semantics.
 --
 -- /See:/ 'placementStrategiesPatch'' smart constructor.
 data PlacementStrategiesPatch' = PlacementStrategiesPatch'
-    { _pspQuotaUser   :: !(Maybe Text)
-    , _pspPrettyPrint :: !Bool
-    , _pspUserIp      :: !(Maybe Text)
-    , _pspProfileId   :: !Int64
-    , _pspKey         :: !(Maybe Text)
-    , _pspId          :: !Int64
-    , _pspOauthToken  :: !(Maybe Text)
-    , _pspFields      :: !(Maybe Text)
-    , _pspAlt         :: !Alt
+    { _pspQuotaUser         :: !(Maybe Text)
+    , _pspPrettyPrint       :: !Bool
+    , _pspUserIP            :: !(Maybe Text)
+    , _pspProfileId         :: !Int64
+    , _pspKey               :: !(Maybe Key)
+    , _pspPlacementStrategy :: !PlacementStrategy
+    , _pspId                :: !Int64
+    , _pspOAuthToken        :: !(Maybe OAuthToken)
+    , _pspFields            :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementStrategiesPatch'' with the minimum fields required to make a request.
@@ -85,34 +86,35 @@ data PlacementStrategiesPatch' = PlacementStrategiesPatch'
 --
 -- * 'pspPrettyPrint'
 --
--- * 'pspUserIp'
+-- * 'pspUserIP'
 --
 -- * 'pspProfileId'
 --
 -- * 'pspKey'
 --
+-- * 'pspPlacementStrategy'
+--
 -- * 'pspId'
 --
--- * 'pspOauthToken'
+-- * 'pspOAuthToken'
 --
 -- * 'pspFields'
---
--- * 'pspAlt'
 placementStrategiesPatch'
     :: Int64 -- ^ 'profileId'
+    -> PlacementStrategy -- ^ 'PlacementStrategy'
     -> Int64 -- ^ 'id'
     -> PlacementStrategiesPatch'
-placementStrategiesPatch' pPspProfileId_ pPspId_ =
+placementStrategiesPatch' pPspProfileId_ pPspPlacementStrategy_ pPspId_ =
     PlacementStrategiesPatch'
     { _pspQuotaUser = Nothing
     , _pspPrettyPrint = True
-    , _pspUserIp = Nothing
+    , _pspUserIP = Nothing
     , _pspProfileId = pPspProfileId_
     , _pspKey = Nothing
+    , _pspPlacementStrategy = pPspPlacementStrategy_
     , _pspId = pPspId_
-    , _pspOauthToken = Nothing
+    , _pspOAuthToken = Nothing
     , _pspFields = Nothing
-    , _pspAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -130,9 +132,9 @@ pspPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-pspUserIp :: Lens' PlacementStrategiesPatch' (Maybe Text)
-pspUserIp
-  = lens _pspUserIp (\ s a -> s{_pspUserIp = a})
+pspUserIP :: Lens' PlacementStrategiesPatch' (Maybe Text)
+pspUserIP
+  = lens _pspUserIP (\ s a -> s{_pspUserIP = a})
 
 -- | User profile ID associated with this request.
 pspProfileId :: Lens' PlacementStrategiesPatch' Int64
@@ -142,40 +144,47 @@ pspProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pspKey :: Lens' PlacementStrategiesPatch' (Maybe Text)
+pspKey :: Lens' PlacementStrategiesPatch' (Maybe Key)
 pspKey = lens _pspKey (\ s a -> s{_pspKey = a})
+
+-- | Multipart request metadata.
+pspPlacementStrategy :: Lens' PlacementStrategiesPatch' PlacementStrategy
+pspPlacementStrategy
+  = lens _pspPlacementStrategy
+      (\ s a -> s{_pspPlacementStrategy = a})
 
 -- | Placement strategy ID.
 pspId :: Lens' PlacementStrategiesPatch' Int64
 pspId = lens _pspId (\ s a -> s{_pspId = a})
 
 -- | OAuth 2.0 token for the current user.
-pspOauthToken :: Lens' PlacementStrategiesPatch' (Maybe Text)
-pspOauthToken
-  = lens _pspOauthToken
-      (\ s a -> s{_pspOauthToken = a})
+pspOAuthToken :: Lens' PlacementStrategiesPatch' (Maybe OAuthToken)
+pspOAuthToken
+  = lens _pspOAuthToken
+      (\ s a -> s{_pspOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 pspFields :: Lens' PlacementStrategiesPatch' (Maybe Text)
 pspFields
   = lens _pspFields (\ s a -> s{_pspFields = a})
 
--- | Data format for the response.
-pspAlt :: Lens' PlacementStrategiesPatch' Alt
-pspAlt = lens _pspAlt (\ s a -> s{_pspAlt = a})
+instance GoogleAuth PlacementStrategiesPatch' where
+        authKey = pspKey . _Just
+        authToken = pspOAuthToken . _Just
 
 instance GoogleRequest PlacementStrategiesPatch'
          where
         type Rs PlacementStrategiesPatch' = PlacementStrategy
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlacementStrategiesPatch'{..}
-          = go _pspQuotaUser (Just _pspPrettyPrint) _pspUserIp
+          = go _pspQuotaUser (Just _pspPrettyPrint) _pspUserIP
               _pspProfileId
               _pspKey
               (Just _pspId)
-              _pspOauthToken
+              _pspOAuthToken
               _pspFields
-              (Just _pspAlt)
+              (Just AltJSON)
+              _pspPlacementStrategy
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PlacementStrategiesPatchResource)

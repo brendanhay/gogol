@@ -1,0 +1,165 @@
+{-# LANGUAGE DataKinds          #-}
+{-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
+{-# LANGUAGE TypeFamilies       #-}
+{-# LANGUAGE TypeOperators      #-}
+
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+
+-- |
+-- Module      : Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Insert
+-- Copyright   : (c) 2015 Brendan Hay
+-- License     : Mozilla Public License, v. 2.0.
+-- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Stability   : auto-generated
+-- Portability : non-portable (GHC extensions)
+--
+-- | Create the given list of orders
+--
+-- /See:/ <https://developers.google.com/ad-exchange/buyer-rest Ad Exchange Buyer API Reference> for @AdexchangebuyerMarketplaceOrdersInsert@.
+module Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Insert
+    (
+    -- * REST Resource
+      MarketplaceOrdersInsertResource
+
+    -- * Creating a Request
+    , marketplaceOrdersInsert'
+    , MarketplaceOrdersInsert'
+
+    -- * Request Lenses
+    , moiQuotaUser
+    , moiPrettyPrint
+    , moiUserIP
+    , moiCreateOrdersRequest
+    , moiKey
+    , moiOAuthToken
+    , moiFields
+    ) where
+
+import           Network.Google.AdExchangeBuyer.Types
+import           Network.Google.Prelude
+
+-- | A resource alias for @AdexchangebuyerMarketplaceOrdersInsert@ which the
+-- 'MarketplaceOrdersInsert'' request conforms to.
+type MarketplaceOrdersInsertResource =
+     "marketplaceOrders" :>
+       "insert" :>
+         QueryParam "quotaUser" Text :>
+           QueryParam "prettyPrint" Bool :>
+             QueryParam "userIp" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
+                   QueryParam "fields" Text :>
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] CreateOrdersRequest :>
+                         Post '[JSON] CreateOrdersResponse
+
+-- | Create the given list of orders
+--
+-- /See:/ 'marketplaceOrdersInsert'' smart constructor.
+data MarketplaceOrdersInsert' = MarketplaceOrdersInsert'
+    { _moiQuotaUser           :: !(Maybe Text)
+    , _moiPrettyPrint         :: !Bool
+    , _moiUserIP              :: !(Maybe Text)
+    , _moiCreateOrdersRequest :: !CreateOrdersRequest
+    , _moiKey                 :: !(Maybe Key)
+    , _moiOAuthToken          :: !(Maybe OAuthToken)
+    , _moiFields              :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'MarketplaceOrdersInsert'' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'moiQuotaUser'
+--
+-- * 'moiPrettyPrint'
+--
+-- * 'moiUserIP'
+--
+-- * 'moiCreateOrdersRequest'
+--
+-- * 'moiKey'
+--
+-- * 'moiOAuthToken'
+--
+-- * 'moiFields'
+marketplaceOrdersInsert'
+    :: CreateOrdersRequest -- ^ 'CreateOrdersRequest'
+    -> MarketplaceOrdersInsert'
+marketplaceOrdersInsert' pMoiCreateOrdersRequest_ =
+    MarketplaceOrdersInsert'
+    { _moiQuotaUser = Nothing
+    , _moiPrettyPrint = True
+    , _moiUserIP = Nothing
+    , _moiCreateOrdersRequest = pMoiCreateOrdersRequest_
+    , _moiKey = Nothing
+    , _moiOAuthToken = Nothing
+    , _moiFields = Nothing
+    }
+
+-- | Available to use for quota purposes for server-side applications. Can be
+-- any arbitrary string assigned to a user, but should not exceed 40
+-- characters. Overrides userIp if both are provided.
+moiQuotaUser :: Lens' MarketplaceOrdersInsert' (Maybe Text)
+moiQuotaUser
+  = lens _moiQuotaUser (\ s a -> s{_moiQuotaUser = a})
+
+-- | Returns response with indentations and line breaks.
+moiPrettyPrint :: Lens' MarketplaceOrdersInsert' Bool
+moiPrettyPrint
+  = lens _moiPrettyPrint
+      (\ s a -> s{_moiPrettyPrint = a})
+
+-- | IP address of the site where the request originates. Use this if you
+-- want to enforce per-user limits.
+moiUserIP :: Lens' MarketplaceOrdersInsert' (Maybe Text)
+moiUserIP
+  = lens _moiUserIP (\ s a -> s{_moiUserIP = a})
+
+-- | Multipart request metadata.
+moiCreateOrdersRequest :: Lens' MarketplaceOrdersInsert' CreateOrdersRequest
+moiCreateOrdersRequest
+  = lens _moiCreateOrdersRequest
+      (\ s a -> s{_moiCreateOrdersRequest = a})
+
+-- | API key. Your API key identifies your project and provides you with API
+-- access, quota, and reports. Required unless you provide an OAuth 2.0
+-- token.
+moiKey :: Lens' MarketplaceOrdersInsert' (Maybe Key)
+moiKey = lens _moiKey (\ s a -> s{_moiKey = a})
+
+-- | OAuth 2.0 token for the current user.
+moiOAuthToken :: Lens' MarketplaceOrdersInsert' (Maybe OAuthToken)
+moiOAuthToken
+  = lens _moiOAuthToken
+      (\ s a -> s{_moiOAuthToken = a})
+
+-- | Selector specifying which fields to include in a partial response.
+moiFields :: Lens' MarketplaceOrdersInsert' (Maybe Text)
+moiFields
+  = lens _moiFields (\ s a -> s{_moiFields = a})
+
+instance GoogleAuth MarketplaceOrdersInsert' where
+        authKey = moiKey . _Just
+        authToken = moiOAuthToken . _Just
+
+instance GoogleRequest MarketplaceOrdersInsert' where
+        type Rs MarketplaceOrdersInsert' =
+             CreateOrdersResponse
+        request = requestWithRoute defReq adExchangeBuyerURL
+        requestWithRoute r u MarketplaceOrdersInsert'{..}
+          = go _moiQuotaUser (Just _moiPrettyPrint) _moiUserIP
+              _moiKey
+              _moiOAuthToken
+              _moiFields
+              (Just AltJSON)
+              _moiCreateOrdersRequest
+          where go
+                  = clientWithRoute
+                      (Proxy :: Proxy MarketplaceOrdersInsertResource)
+                      r
+                      u

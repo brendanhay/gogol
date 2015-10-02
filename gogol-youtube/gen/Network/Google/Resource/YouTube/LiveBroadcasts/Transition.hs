@@ -38,15 +38,14 @@ module Network.Google.Resource.YouTube.LiveBroadcasts.Transition
     , lbtQuotaUser
     , lbtPart
     , lbtPrettyPrint
-    , lbtUserIp
+    , lbtUserIP
     , lbtBroadcastStatus
     , lbtOnBehalfOfContentOwner
     , lbtKey
     , lbtOnBehalfOfContentOwnerChannel
     , lbtId
-    , lbtOauthToken
+    , lbtOAuthToken
     , lbtFields
-    , lbtAlt
     ) where
 
 import           Network.Google.Prelude
@@ -65,12 +64,12 @@ type LiveBroadcastsTransitionResource =
                    YouTubeLiveBroadcastsTransitionBroadcastStatus
                    :>
                    QueryParam "onBehalfOfContentOwner" Text :>
-                     QueryParam "key" Text :>
+                     QueryParam "key" Key :>
                        QueryParam "onBehalfOfContentOwnerChannel" Text :>
                          QueryParam "id" Text :>
-                           QueryParam "oauth_token" Text :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :>
+                               QueryParam "alt" AltJSON :>
                                  Post '[JSON] LiveBroadcast
 
 -- | Changes the status of a YouTube live broadcast and initiates any
@@ -85,15 +84,14 @@ data LiveBroadcastsTransition' = LiveBroadcastsTransition'
     { _lbtQuotaUser                     :: !(Maybe Text)
     , _lbtPart                          :: !Text
     , _lbtPrettyPrint                   :: !Bool
-    , _lbtUserIp                        :: !(Maybe Text)
+    , _lbtUserIP                        :: !(Maybe Text)
     , _lbtBroadcastStatus               :: !YouTubeLiveBroadcastsTransitionBroadcastStatus
     , _lbtOnBehalfOfContentOwner        :: !(Maybe Text)
-    , _lbtKey                           :: !(Maybe Text)
+    , _lbtKey                           :: !(Maybe Key)
     , _lbtOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _lbtId                            :: !Text
-    , _lbtOauthToken                    :: !(Maybe Text)
+    , _lbtOAuthToken                    :: !(Maybe OAuthToken)
     , _lbtFields                        :: !(Maybe Text)
-    , _lbtAlt                           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveBroadcastsTransition'' with the minimum fields required to make a request.
@@ -106,7 +104,7 @@ data LiveBroadcastsTransition' = LiveBroadcastsTransition'
 --
 -- * 'lbtPrettyPrint'
 --
--- * 'lbtUserIp'
+-- * 'lbtUserIP'
 --
 -- * 'lbtBroadcastStatus'
 --
@@ -118,11 +116,9 @@ data LiveBroadcastsTransition' = LiveBroadcastsTransition'
 --
 -- * 'lbtId'
 --
--- * 'lbtOauthToken'
+-- * 'lbtOAuthToken'
 --
 -- * 'lbtFields'
---
--- * 'lbtAlt'
 liveBroadcastsTransition'
     :: Text -- ^ 'part'
     -> YouTubeLiveBroadcastsTransitionBroadcastStatus -- ^ 'broadcastStatus'
@@ -133,15 +129,14 @@ liveBroadcastsTransition' pLbtPart_ pLbtBroadcastStatus_ pLbtId_ =
     { _lbtQuotaUser = Nothing
     , _lbtPart = pLbtPart_
     , _lbtPrettyPrint = True
-    , _lbtUserIp = Nothing
+    , _lbtUserIP = Nothing
     , _lbtBroadcastStatus = pLbtBroadcastStatus_
     , _lbtOnBehalfOfContentOwner = Nothing
     , _lbtKey = Nothing
     , _lbtOnBehalfOfContentOwnerChannel = Nothing
     , _lbtId = pLbtId_
-    , _lbtOauthToken = Nothing
+    , _lbtOAuthToken = Nothing
     , _lbtFields = Nothing
-    , _lbtAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -166,9 +161,9 @@ lbtPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-lbtUserIp :: Lens' LiveBroadcastsTransition' (Maybe Text)
-lbtUserIp
-  = lens _lbtUserIp (\ s a -> s{_lbtUserIp = a})
+lbtUserIP :: Lens' LiveBroadcastsTransition' (Maybe Text)
+lbtUserIP
+  = lens _lbtUserIP (\ s a -> s{_lbtUserIP = a})
 
 -- | The broadcastStatus parameter identifies the state to which the
 -- broadcast is changing. Note that to transition a broadcast to either the
@@ -197,7 +192,7 @@ lbtOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lbtKey :: Lens' LiveBroadcastsTransition' (Maybe Text)
+lbtKey :: Lens' LiveBroadcastsTransition' (Maybe Key)
 lbtKey = lens _lbtKey (\ s a -> s{_lbtKey = a})
 
 -- | This parameter can only be used in a properly authorized request. Note:
@@ -227,19 +222,19 @@ lbtId :: Lens' LiveBroadcastsTransition' Text
 lbtId = lens _lbtId (\ s a -> s{_lbtId = a})
 
 -- | OAuth 2.0 token for the current user.
-lbtOauthToken :: Lens' LiveBroadcastsTransition' (Maybe Text)
-lbtOauthToken
-  = lens _lbtOauthToken
-      (\ s a -> s{_lbtOauthToken = a})
+lbtOAuthToken :: Lens' LiveBroadcastsTransition' (Maybe OAuthToken)
+lbtOAuthToken
+  = lens _lbtOAuthToken
+      (\ s a -> s{_lbtOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 lbtFields :: Lens' LiveBroadcastsTransition' (Maybe Text)
 lbtFields
   = lens _lbtFields (\ s a -> s{_lbtFields = a})
 
--- | Data format for the response.
-lbtAlt :: Lens' LiveBroadcastsTransition' Alt
-lbtAlt = lens _lbtAlt (\ s a -> s{_lbtAlt = a})
+instance GoogleAuth LiveBroadcastsTransition' where
+        authKey = lbtKey . _Just
+        authToken = lbtOAuthToken . _Just
 
 instance GoogleRequest LiveBroadcastsTransition'
          where
@@ -248,15 +243,15 @@ instance GoogleRequest LiveBroadcastsTransition'
         requestWithRoute r u LiveBroadcastsTransition'{..}
           = go _lbtQuotaUser (Just _lbtPart)
               (Just _lbtPrettyPrint)
-              _lbtUserIp
+              _lbtUserIP
               (Just _lbtBroadcastStatus)
               _lbtOnBehalfOfContentOwner
               _lbtKey
               _lbtOnBehalfOfContentOwnerChannel
               (Just _lbtId)
-              _lbtOauthToken
+              _lbtOAuthToken
               _lbtFields
-              (Just _lbtAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy LiveBroadcastsTransitionResource)

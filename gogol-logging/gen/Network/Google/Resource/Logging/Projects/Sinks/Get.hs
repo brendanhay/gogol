@@ -39,12 +39,11 @@ module Network.Google.Resource.Logging.Projects.Sinks.Get
     , psgUploadType
     , psgBearerToken
     , psgKey
-    , psgOauthToken
+    , psgOAuthToken
     , psgProjectsId
     , psgSinksId
     , psgFields
     , psgCallback
-    , psgAlt
     ) where
 
 import           Network.Google.Logging.Types
@@ -66,11 +65,11 @@ type ProjectsSinksGetResource =
                          QueryParam "access_token" Text :>
                            QueryParam "uploadType" Text :>
                              QueryParam "bearer_token" Text :>
-                               QueryParam "key" Text :>
-                                 QueryParam "oauth_token" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "fields" Text :>
                                      QueryParam "callback" Text :>
-                                       QueryParam "alt" Text :>
+                                       QueryParam "alt" AltJSON :>
                                          Get '[JSON] LogSink
 
 -- | Gets a project sink.
@@ -85,13 +84,12 @@ data ProjectsSinksGet' = ProjectsSinksGet'
     , _psgAccessToken    :: !(Maybe Text)
     , _psgUploadType     :: !(Maybe Text)
     , _psgBearerToken    :: !(Maybe Text)
-    , _psgKey            :: !(Maybe Text)
-    , _psgOauthToken     :: !(Maybe Text)
+    , _psgKey            :: !(Maybe Key)
+    , _psgOAuthToken     :: !(Maybe OAuthToken)
     , _psgProjectsId     :: !Text
     , _psgSinksId        :: !Text
     , _psgFields         :: !(Maybe Text)
     , _psgCallback       :: !(Maybe Text)
-    , _psgAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsSinksGet'' with the minimum fields required to make a request.
@@ -116,7 +114,7 @@ data ProjectsSinksGet' = ProjectsSinksGet'
 --
 -- * 'psgKey'
 --
--- * 'psgOauthToken'
+-- * 'psgOAuthToken'
 --
 -- * 'psgProjectsId'
 --
@@ -125,8 +123,6 @@ data ProjectsSinksGet' = ProjectsSinksGet'
 -- * 'psgFields'
 --
 -- * 'psgCallback'
---
--- * 'psgAlt'
 projectsSinksGet'
     :: Text -- ^ 'projectsId'
     -> Text -- ^ 'sinksId'
@@ -142,12 +138,11 @@ projectsSinksGet' pPsgProjectsId_ pPsgSinksId_ =
     , _psgUploadType = Nothing
     , _psgBearerToken = Nothing
     , _psgKey = Nothing
-    , _psgOauthToken = Nothing
+    , _psgOAuthToken = Nothing
     , _psgProjectsId = pPsgProjectsId_
     , _psgSinksId = pPsgSinksId_
     , _psgFields = Nothing
     , _psgCallback = Nothing
-    , _psgAlt = "json"
     }
 
 -- | V1 error format.
@@ -198,14 +193,14 @@ psgBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-psgKey :: Lens' ProjectsSinksGet' (Maybe Text)
+psgKey :: Lens' ProjectsSinksGet' (Maybe Key)
 psgKey = lens _psgKey (\ s a -> s{_psgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-psgOauthToken :: Lens' ProjectsSinksGet' (Maybe Text)
-psgOauthToken
-  = lens _psgOauthToken
-      (\ s a -> s{_psgOauthToken = a})
+psgOAuthToken :: Lens' ProjectsSinksGet' (Maybe OAuthToken)
+psgOAuthToken
+  = lens _psgOAuthToken
+      (\ s a -> s{_psgOAuthToken = a})
 
 -- | Part of \`sinkName\`. The resource name of the project sink to return.
 psgProjectsId :: Lens' ProjectsSinksGet' Text
@@ -228,9 +223,9 @@ psgCallback :: Lens' ProjectsSinksGet' (Maybe Text)
 psgCallback
   = lens _psgCallback (\ s a -> s{_psgCallback = a})
 
--- | Data format for response.
-psgAlt :: Lens' ProjectsSinksGet' Text
-psgAlt = lens _psgAlt (\ s a -> s{_psgAlt = a})
+instance GoogleAuth ProjectsSinksGet' where
+        authKey = psgKey . _Just
+        authToken = psgOAuthToken . _Just
 
 instance GoogleRequest ProjectsSinksGet' where
         type Rs ProjectsSinksGet' = LogSink
@@ -243,12 +238,12 @@ instance GoogleRequest ProjectsSinksGet' where
               _psgUploadType
               _psgBearerToken
               _psgKey
-              _psgOauthToken
+              _psgOAuthToken
               _psgProjectsId
               _psgSinksId
               _psgFields
               _psgCallback
-              (Just _psgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsSinksGetResource)

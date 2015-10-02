@@ -55,7 +55,7 @@ module Network.Google.Debugger.Types
     , gscGerritProject
     , gscAliasName
     , gscRevisionId
-    , gscHostUri
+    , gscHostURI
 
     -- * ProjectRepoId
     , ProjectRepoId
@@ -134,7 +134,7 @@ module Network.Google.Debugger.Types
     -- * GitSourceContext
     , GitSourceContext
     , gitSourceContext
-    , gUrl
+    , gURL
     , gRevisionId
 
     -- * SourceLocation

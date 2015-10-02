@@ -33,13 +33,12 @@ module Network.Google.Resource.DFAReporting.Reports.Run
     , rrQuotaUser
     , rrPrettyPrint
     , rrSynchronous
-    , rrUserIp
+    , rrUserIP
     , rrReportId
     , rrProfileId
     , rrKey
-    , rrOauthToken
+    , rrOAuthToken
     , rrFields
-    , rrAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -57,10 +56,10 @@ type ReportsRunResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "synchronous" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Post '[JSON] File
+                             QueryParam "alt" AltJSON :> Post '[JSON] File
 
 -- | Runs a report.
 --
@@ -69,13 +68,12 @@ data ReportsRun' = ReportsRun'
     { _rrQuotaUser   :: !(Maybe Text)
     , _rrPrettyPrint :: !Bool
     , _rrSynchronous :: !(Maybe Bool)
-    , _rrUserIp      :: !(Maybe Text)
+    , _rrUserIP      :: !(Maybe Text)
     , _rrReportId    :: !Int64
     , _rrProfileId   :: !Int64
-    , _rrKey         :: !(Maybe Text)
-    , _rrOauthToken  :: !(Maybe Text)
+    , _rrKey         :: !(Maybe Key)
+    , _rrOAuthToken  :: !(Maybe OAuthToken)
     , _rrFields      :: !(Maybe Text)
-    , _rrAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsRun'' with the minimum fields required to make a request.
@@ -88,7 +86,7 @@ data ReportsRun' = ReportsRun'
 --
 -- * 'rrSynchronous'
 --
--- * 'rrUserIp'
+-- * 'rrUserIP'
 --
 -- * 'rrReportId'
 --
@@ -96,11 +94,9 @@ data ReportsRun' = ReportsRun'
 --
 -- * 'rrKey'
 --
--- * 'rrOauthToken'
+-- * 'rrOAuthToken'
 --
 -- * 'rrFields'
---
--- * 'rrAlt'
 reportsRun'
     :: Int64 -- ^ 'reportId'
     -> Int64 -- ^ 'profileId'
@@ -110,13 +106,12 @@ reportsRun' pRrReportId_ pRrProfileId_ =
     { _rrQuotaUser = Nothing
     , _rrPrettyPrint = True
     , _rrSynchronous = Nothing
-    , _rrUserIp = Nothing
+    , _rrUserIP = Nothing
     , _rrReportId = pRrReportId_
     , _rrProfileId = pRrProfileId_
     , _rrKey = Nothing
-    , _rrOauthToken = Nothing
+    , _rrOAuthToken = Nothing
     , _rrFields = Nothing
-    , _rrAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -140,8 +135,8 @@ rrSynchronous
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rrUserIp :: Lens' ReportsRun' (Maybe Text)
-rrUserIp = lens _rrUserIp (\ s a -> s{_rrUserIp = a})
+rrUserIP :: Lens' ReportsRun' (Maybe Text)
+rrUserIP = lens _rrUserIP (\ s a -> s{_rrUserIP = a})
 
 -- | The ID of the report.
 rrReportId :: Lens' ReportsRun' Int64
@@ -156,21 +151,21 @@ rrProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rrKey :: Lens' ReportsRun' (Maybe Text)
+rrKey :: Lens' ReportsRun' (Maybe Key)
 rrKey = lens _rrKey (\ s a -> s{_rrKey = a})
 
 -- | OAuth 2.0 token for the current user.
-rrOauthToken :: Lens' ReportsRun' (Maybe Text)
-rrOauthToken
-  = lens _rrOauthToken (\ s a -> s{_rrOauthToken = a})
+rrOAuthToken :: Lens' ReportsRun' (Maybe OAuthToken)
+rrOAuthToken
+  = lens _rrOAuthToken (\ s a -> s{_rrOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 rrFields :: Lens' ReportsRun' (Maybe Text)
 rrFields = lens _rrFields (\ s a -> s{_rrFields = a})
 
--- | Data format for the response.
-rrAlt :: Lens' ReportsRun' Alt
-rrAlt = lens _rrAlt (\ s a -> s{_rrAlt = a})
+instance GoogleAuth ReportsRun' where
+        authKey = rrKey . _Just
+        authToken = rrOAuthToken . _Just
 
 instance GoogleRequest ReportsRun' where
         type Rs ReportsRun' = File
@@ -178,13 +173,13 @@ instance GoogleRequest ReportsRun' where
         requestWithRoute r u ReportsRun'{..}
           = go _rrQuotaUser (Just _rrPrettyPrint)
               _rrSynchronous
-              _rrUserIp
+              _rrUserIP
               _rrReportId
               _rrProfileId
               _rrKey
-              _rrOauthToken
+              _rrOAuthToken
               _rrFields
-              (Just _rrAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy ReportsRunResource)
                       r

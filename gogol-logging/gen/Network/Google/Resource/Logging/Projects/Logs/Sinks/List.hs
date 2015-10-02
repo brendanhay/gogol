@@ -40,11 +40,10 @@ module Network.Google.Resource.Logging.Projects.Logs.Sinks.List
     , pUploadType
     , pBearerToken
     , pKey
-    , pOauthToken
+    , pOAuthToken
     , pProjectsId
     , pFields
     , pCallback
-    , pAlt
     ) where
 
 import           Network.Google.Logging.Types
@@ -67,11 +66,11 @@ type ProjectsLogsSinksListResource =
                            QueryParam "access_token" Text :>
                              QueryParam "uploadType" Text :>
                                QueryParam "bearer_token" Text :>
-                                 QueryParam "key" Text :>
-                                   QueryParam "oauth_token" Text :>
+                                 QueryParam "key" Key :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "fields" Text :>
                                        QueryParam "callback" Text :>
-                                         QueryParam "alt" Text :>
+                                         QueryParam "alt" AltJSON :>
                                            Get '[JSON] ListLogSinksResponse
 
 -- | Lists log sinks associated with a log.
@@ -87,12 +86,11 @@ data ProjectsLogsSinksList' = ProjectsLogsSinksList'
     , _pAccessToken    :: !(Maybe Text)
     , _pUploadType     :: !(Maybe Text)
     , _pBearerToken    :: !(Maybe Text)
-    , _pKey            :: !(Maybe Text)
-    , _pOauthToken     :: !(Maybe Text)
+    , _pKey            :: !(Maybe Key)
+    , _pOAuthToken     :: !(Maybe OAuthToken)
     , _pProjectsId     :: !Text
     , _pFields         :: !(Maybe Text)
     , _pCallback       :: !(Maybe Text)
-    , _pAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsLogsSinksList'' with the minimum fields required to make a request.
@@ -119,15 +117,13 @@ data ProjectsLogsSinksList' = ProjectsLogsSinksList'
 --
 -- * 'pKey'
 --
--- * 'pOauthToken'
+-- * 'pOAuthToken'
 --
 -- * 'pProjectsId'
 --
 -- * 'pFields'
 --
 -- * 'pCallback'
---
--- * 'pAlt'
 projectsLogsSinksList'
     :: Text -- ^ 'logsId'
     -> Text -- ^ 'projectsId'
@@ -144,11 +140,10 @@ projectsLogsSinksList' pPLogsId_ pPProjectsId_ =
     , _pUploadType = Nothing
     , _pBearerToken = Nothing
     , _pKey = Nothing
-    , _pOauthToken = Nothing
+    , _pOAuthToken = Nothing
     , _pProjectsId = pPProjectsId_
     , _pFields = Nothing
     , _pCallback = Nothing
-    , _pAlt = "json"
     }
 
 -- | V1 error format.
@@ -199,13 +194,13 @@ pBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pKey :: Lens' ProjectsLogsSinksList' (Maybe Text)
+pKey :: Lens' ProjectsLogsSinksList' (Maybe Key)
 pKey = lens _pKey (\ s a -> s{_pKey = a})
 
 -- | OAuth 2.0 token for the current user.
-pOauthToken :: Lens' ProjectsLogsSinksList' (Maybe Text)
-pOauthToken
-  = lens _pOauthToken (\ s a -> s{_pOauthToken = a})
+pOAuthToken :: Lens' ProjectsLogsSinksList' (Maybe OAuthToken)
+pOAuthToken
+  = lens _pOAuthToken (\ s a -> s{_pOAuthToken = a})
 
 -- | Part of \`logName\`. The log whose sinks are wanted. For example,
 -- \`\"compute.google.com\/syslog\"\`.
@@ -222,9 +217,9 @@ pCallback :: Lens' ProjectsLogsSinksList' (Maybe Text)
 pCallback
   = lens _pCallback (\ s a -> s{_pCallback = a})
 
--- | Data format for response.
-pAlt :: Lens' ProjectsLogsSinksList' Text
-pAlt = lens _pAlt (\ s a -> s{_pAlt = a})
+instance GoogleAuth ProjectsLogsSinksList' where
+        authKey = pKey . _Just
+        authToken = pOAuthToken . _Just
 
 instance GoogleRequest ProjectsLogsSinksList' where
         type Rs ProjectsLogsSinksList' = ListLogSinksResponse
@@ -238,11 +233,11 @@ instance GoogleRequest ProjectsLogsSinksList' where
               _pUploadType
               _pBearerToken
               _pKey
-              _pOauthToken
+              _pOAuthToken
               _pProjectsId
               _pFields
               _pCallback
-              (Just _pAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsLogsSinksListResource)

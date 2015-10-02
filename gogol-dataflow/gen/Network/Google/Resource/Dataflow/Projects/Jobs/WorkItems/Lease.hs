@@ -37,14 +37,14 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.WorkItems.Lease
     , pjwilUploadProtocol
     , pjwilPp
     , pjwilAccessToken
+    , pjwilLeaseWorkItemRequest
     , pjwilUploadType
     , pjwilBearerToken
     , pjwilKey
     , pjwilProjectId
-    , pjwilOauthToken
+    , pjwilOAuthToken
     , pjwilFields
     , pjwilCallback
-    , pjwilAlt
     ) where
 
 import           Network.Google.Dataflow.Types
@@ -67,32 +67,34 @@ type ProjectsJobsWorkItemsLeaseResource =
                            QueryParam "access_token" Text :>
                              QueryParam "uploadType" Text :>
                                QueryParam "bearer_token" Text :>
-                                 QueryParam "key" Text :>
-                                   QueryParam "oauth_token" Text :>
+                                 QueryParam "key" Key :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "fields" Text :>
                                        QueryParam "callback" Text :>
-                                         QueryParam "alt" Text :>
-                                           Post '[JSON] LeaseWorkItemResponse
+                                         QueryParam "alt" AltJSON :>
+                                           ReqBody '[JSON] LeaseWorkItemRequest
+                                             :>
+                                             Post '[JSON] LeaseWorkItemResponse
 
 -- | Leases a dataflow WorkItem to run.
 --
 -- /See:/ 'projectsJobsWorkItemsLease'' smart constructor.
 data ProjectsJobsWorkItemsLease' = ProjectsJobsWorkItemsLease'
-    { _pjwilXgafv          :: !(Maybe Text)
-    , _pjwilQuotaUser      :: !(Maybe Text)
-    , _pjwilPrettyPrint    :: !Bool
-    , _pjwilJobId          :: !Text
-    , _pjwilUploadProtocol :: !(Maybe Text)
-    , _pjwilPp             :: !Bool
-    , _pjwilAccessToken    :: !(Maybe Text)
-    , _pjwilUploadType     :: !(Maybe Text)
-    , _pjwilBearerToken    :: !(Maybe Text)
-    , _pjwilKey            :: !(Maybe Text)
-    , _pjwilProjectId      :: !Text
-    , _pjwilOauthToken     :: !(Maybe Text)
-    , _pjwilFields         :: !(Maybe Text)
-    , _pjwilCallback       :: !(Maybe Text)
-    , _pjwilAlt            :: !Text
+    { _pjwilXgafv                :: !(Maybe Text)
+    , _pjwilQuotaUser            :: !(Maybe Text)
+    , _pjwilPrettyPrint          :: !Bool
+    , _pjwilJobId                :: !Text
+    , _pjwilUploadProtocol       :: !(Maybe Text)
+    , _pjwilPp                   :: !Bool
+    , _pjwilAccessToken          :: !(Maybe Text)
+    , _pjwilLeaseWorkItemRequest :: !LeaseWorkItemRequest
+    , _pjwilUploadType           :: !(Maybe Text)
+    , _pjwilBearerToken          :: !(Maybe Text)
+    , _pjwilKey                  :: !(Maybe Key)
+    , _pjwilProjectId            :: !Text
+    , _pjwilOAuthToken           :: !(Maybe OAuthToken)
+    , _pjwilFields               :: !(Maybe Text)
+    , _pjwilCallback             :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsJobsWorkItemsLease'' with the minimum fields required to make a request.
@@ -113,6 +115,8 @@ data ProjectsJobsWorkItemsLease' = ProjectsJobsWorkItemsLease'
 --
 -- * 'pjwilAccessToken'
 --
+-- * 'pjwilLeaseWorkItemRequest'
+--
 -- * 'pjwilUploadType'
 --
 -- * 'pjwilBearerToken'
@@ -121,18 +125,17 @@ data ProjectsJobsWorkItemsLease' = ProjectsJobsWorkItemsLease'
 --
 -- * 'pjwilProjectId'
 --
--- * 'pjwilOauthToken'
+-- * 'pjwilOAuthToken'
 --
 -- * 'pjwilFields'
 --
 -- * 'pjwilCallback'
---
--- * 'pjwilAlt'
 projectsJobsWorkItemsLease'
     :: Text -- ^ 'jobId'
+    -> LeaseWorkItemRequest -- ^ 'LeaseWorkItemRequest'
     -> Text -- ^ 'projectId'
     -> ProjectsJobsWorkItemsLease'
-projectsJobsWorkItemsLease' pPjwilJobId_ pPjwilProjectId_ =
+projectsJobsWorkItemsLease' pPjwilJobId_ pPjwilLeaseWorkItemRequest_ pPjwilProjectId_ =
     ProjectsJobsWorkItemsLease'
     { _pjwilXgafv = Nothing
     , _pjwilQuotaUser = Nothing
@@ -141,14 +144,14 @@ projectsJobsWorkItemsLease' pPjwilJobId_ pPjwilProjectId_ =
     , _pjwilUploadProtocol = Nothing
     , _pjwilPp = True
     , _pjwilAccessToken = Nothing
+    , _pjwilLeaseWorkItemRequest = pPjwilLeaseWorkItemRequest_
     , _pjwilUploadType = Nothing
     , _pjwilBearerToken = Nothing
     , _pjwilKey = Nothing
     , _pjwilProjectId = pPjwilProjectId_
-    , _pjwilOauthToken = Nothing
+    , _pjwilOAuthToken = Nothing
     , _pjwilFields = Nothing
     , _pjwilCallback = Nothing
-    , _pjwilAlt = "json"
     }
 
 -- | V1 error format.
@@ -191,6 +194,12 @@ pjwilAccessToken
   = lens _pjwilAccessToken
       (\ s a -> s{_pjwilAccessToken = a})
 
+-- | Multipart request metadata.
+pjwilLeaseWorkItemRequest :: Lens' ProjectsJobsWorkItemsLease' LeaseWorkItemRequest
+pjwilLeaseWorkItemRequest
+  = lens _pjwilLeaseWorkItemRequest
+      (\ s a -> s{_pjwilLeaseWorkItemRequest = a})
+
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
 pjwilUploadType :: Lens' ProjectsJobsWorkItemsLease' (Maybe Text)
 pjwilUploadType
@@ -206,7 +215,7 @@ pjwilBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pjwilKey :: Lens' ProjectsJobsWorkItemsLease' (Maybe Text)
+pjwilKey :: Lens' ProjectsJobsWorkItemsLease' (Maybe Key)
 pjwilKey = lens _pjwilKey (\ s a -> s{_pjwilKey = a})
 
 -- | Identifies the project this worker belongs to.
@@ -216,10 +225,10 @@ pjwilProjectId
       (\ s a -> s{_pjwilProjectId = a})
 
 -- | OAuth 2.0 token for the current user.
-pjwilOauthToken :: Lens' ProjectsJobsWorkItemsLease' (Maybe Text)
-pjwilOauthToken
-  = lens _pjwilOauthToken
-      (\ s a -> s{_pjwilOauthToken = a})
+pjwilOAuthToken :: Lens' ProjectsJobsWorkItemsLease' (Maybe OAuthToken)
+pjwilOAuthToken
+  = lens _pjwilOAuthToken
+      (\ s a -> s{_pjwilOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 pjwilFields :: Lens' ProjectsJobsWorkItemsLease' (Maybe Text)
@@ -232,9 +241,9 @@ pjwilCallback
   = lens _pjwilCallback
       (\ s a -> s{_pjwilCallback = a})
 
--- | Data format for response.
-pjwilAlt :: Lens' ProjectsJobsWorkItemsLease' Text
-pjwilAlt = lens _pjwilAlt (\ s a -> s{_pjwilAlt = a})
+instance GoogleAuth ProjectsJobsWorkItemsLease' where
+        authKey = pjwilKey . _Just
+        authToken = pjwilOAuthToken . _Just
 
 instance GoogleRequest ProjectsJobsWorkItemsLease'
          where
@@ -252,10 +261,11 @@ instance GoogleRequest ProjectsJobsWorkItemsLease'
               _pjwilBearerToken
               _pjwilKey
               _pjwilProjectId
-              _pjwilOauthToken
+              _pjwilOAuthToken
               _pjwilFields
               _pjwilCallback
-              (Just _pjwilAlt)
+              (Just AltJSON)
+              _pjwilLeaseWorkItemRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsJobsWorkItemsLeaseResource)

@@ -32,14 +32,13 @@ module Network.Google.Resource.Container.Projects.Zones.Clusters.Get
     -- * Request Lenses
     , pzcgQuotaUser
     , pzcgPrettyPrint
-    , pzcgUserIp
+    , pzcgUserIP
     , pzcgZoneId
     , pzcgKey
     , pzcgClusterId
     , pzcgProjectId
-    , pzcgOauthToken
+    , pzcgOAuthToken
     , pzcgFields
-    , pzcgAlt
     ) where
 
 import           Network.Google.Container.Types
@@ -56,10 +55,10 @@ type ProjectsZonesClustersGetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Get '[JSON] Cluster
+                           QueryParam "alt" AltJSON :> Get '[JSON] Cluster
 
 -- | Gets a specific cluster.
 --
@@ -67,14 +66,13 @@ type ProjectsZonesClustersGetResource =
 data ProjectsZonesClustersGet' = ProjectsZonesClustersGet'
     { _pzcgQuotaUser   :: !(Maybe Text)
     , _pzcgPrettyPrint :: !Bool
-    , _pzcgUserIp      :: !(Maybe Text)
+    , _pzcgUserIP      :: !(Maybe Text)
     , _pzcgZoneId      :: !Text
-    , _pzcgKey         :: !(Maybe Text)
+    , _pzcgKey         :: !(Maybe Key)
     , _pzcgClusterId   :: !Text
     , _pzcgProjectId   :: !Text
-    , _pzcgOauthToken  :: !(Maybe Text)
+    , _pzcgOAuthToken  :: !(Maybe OAuthToken)
     , _pzcgFields      :: !(Maybe Text)
-    , _pzcgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsZonesClustersGet'' with the minimum fields required to make a request.
@@ -85,7 +83,7 @@ data ProjectsZonesClustersGet' = ProjectsZonesClustersGet'
 --
 -- * 'pzcgPrettyPrint'
 --
--- * 'pzcgUserIp'
+-- * 'pzcgUserIP'
 --
 -- * 'pzcgZoneId'
 --
@@ -95,11 +93,9 @@ data ProjectsZonesClustersGet' = ProjectsZonesClustersGet'
 --
 -- * 'pzcgProjectId'
 --
--- * 'pzcgOauthToken'
+-- * 'pzcgOAuthToken'
 --
 -- * 'pzcgFields'
---
--- * 'pzcgAlt'
 projectsZonesClustersGet'
     :: Text -- ^ 'zoneId'
     -> Text -- ^ 'clusterId'
@@ -109,14 +105,13 @@ projectsZonesClustersGet' pPzcgZoneId_ pPzcgClusterId_ pPzcgProjectId_ =
     ProjectsZonesClustersGet'
     { _pzcgQuotaUser = Nothing
     , _pzcgPrettyPrint = True
-    , _pzcgUserIp = Nothing
+    , _pzcgUserIP = Nothing
     , _pzcgZoneId = pPzcgZoneId_
     , _pzcgKey = Nothing
     , _pzcgClusterId = pPzcgClusterId_
     , _pzcgProjectId = pPzcgProjectId_
-    , _pzcgOauthToken = Nothing
+    , _pzcgOAuthToken = Nothing
     , _pzcgFields = Nothing
-    , _pzcgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,9 +130,9 @@ pzcgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-pzcgUserIp :: Lens' ProjectsZonesClustersGet' (Maybe Text)
-pzcgUserIp
-  = lens _pzcgUserIp (\ s a -> s{_pzcgUserIp = a})
+pzcgUserIP :: Lens' ProjectsZonesClustersGet' (Maybe Text)
+pzcgUserIP
+  = lens _pzcgUserIP (\ s a -> s{_pzcgUserIP = a})
 
 -- | The name of the Google Compute Engine zone in which the cluster resides.
 pzcgZoneId :: Lens' ProjectsZonesClustersGet' Text
@@ -147,7 +142,7 @@ pzcgZoneId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pzcgKey :: Lens' ProjectsZonesClustersGet' (Maybe Text)
+pzcgKey :: Lens' ProjectsZonesClustersGet' (Maybe Key)
 pzcgKey = lens _pzcgKey (\ s a -> s{_pzcgKey = a})
 
 -- | The name of the cluster to retrieve.
@@ -163,19 +158,19 @@ pzcgProjectId
       (\ s a -> s{_pzcgProjectId = a})
 
 -- | OAuth 2.0 token for the current user.
-pzcgOauthToken :: Lens' ProjectsZonesClustersGet' (Maybe Text)
-pzcgOauthToken
-  = lens _pzcgOauthToken
-      (\ s a -> s{_pzcgOauthToken = a})
+pzcgOAuthToken :: Lens' ProjectsZonesClustersGet' (Maybe OAuthToken)
+pzcgOAuthToken
+  = lens _pzcgOAuthToken
+      (\ s a -> s{_pzcgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 pzcgFields :: Lens' ProjectsZonesClustersGet' (Maybe Text)
 pzcgFields
   = lens _pzcgFields (\ s a -> s{_pzcgFields = a})
 
--- | Data format for the response.
-pzcgAlt :: Lens' ProjectsZonesClustersGet' Alt
-pzcgAlt = lens _pzcgAlt (\ s a -> s{_pzcgAlt = a})
+instance GoogleAuth ProjectsZonesClustersGet' where
+        authKey = pzcgKey . _Just
+        authToken = pzcgOAuthToken . _Just
 
 instance GoogleRequest ProjectsZonesClustersGet'
          where
@@ -183,14 +178,14 @@ instance GoogleRequest ProjectsZonesClustersGet'
         request = requestWithRoute defReq containerURL
         requestWithRoute r u ProjectsZonesClustersGet'{..}
           = go _pzcgQuotaUser (Just _pzcgPrettyPrint)
-              _pzcgUserIp
+              _pzcgUserIP
               _pzcgZoneId
               _pzcgKey
               _pzcgClusterId
               _pzcgProjectId
-              _pzcgOauthToken
+              _pzcgOAuthToken
               _pzcgFields
-              (Just _pzcgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsZonesClustersGetResource)

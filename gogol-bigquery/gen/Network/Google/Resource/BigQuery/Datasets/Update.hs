@@ -34,13 +34,13 @@ module Network.Google.Resource.BigQuery.Datasets.Update
     -- * Request Lenses
     , duQuotaUser
     , duPrettyPrint
-    , duUserIp
+    , duDataset
+    , duUserIP
     , duKey
     , duDatasetId
     , duProjectId
-    , duOauthToken
+    , duOAuthToken
     , duFields
-    , duAlt
     ) where
 
 import           Network.Google.BigQuery.Types
@@ -56,10 +56,11 @@ type DatasetsUpdateResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Put '[JSON] Dataset
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Dataset :> Put '[JSON] Dataset
 
 -- | Updates information in an existing dataset. The update method replaces
 -- the entire dataset resource, whereas the patch method only replaces
@@ -69,13 +70,13 @@ type DatasetsUpdateResource =
 data DatasetsUpdate' = DatasetsUpdate'
     { _duQuotaUser   :: !(Maybe Text)
     , _duPrettyPrint :: !Bool
-    , _duUserIp      :: !(Maybe Text)
-    , _duKey         :: !(Maybe Text)
+    , _duDataset     :: !Dataset
+    , _duUserIP      :: !(Maybe Text)
+    , _duKey         :: !(Maybe Key)
     , _duDatasetId   :: !Text
     , _duProjectId   :: !Text
-    , _duOauthToken  :: !(Maybe Text)
+    , _duOAuthToken  :: !(Maybe OAuthToken)
     , _duFields      :: !(Maybe Text)
-    , _duAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetsUpdate'' with the minimum fields required to make a request.
@@ -86,7 +87,9 @@ data DatasetsUpdate' = DatasetsUpdate'
 --
 -- * 'duPrettyPrint'
 --
--- * 'duUserIp'
+-- * 'duDataset'
+--
+-- * 'duUserIP'
 --
 -- * 'duKey'
 --
@@ -94,26 +97,25 @@ data DatasetsUpdate' = DatasetsUpdate'
 --
 -- * 'duProjectId'
 --
--- * 'duOauthToken'
+-- * 'duOAuthToken'
 --
 -- * 'duFields'
---
--- * 'duAlt'
 datasetsUpdate'
-    :: Text -- ^ 'datasetId'
+    :: Dataset -- ^ 'Dataset'
+    -> Text -- ^ 'datasetId'
     -> Text -- ^ 'projectId'
     -> DatasetsUpdate'
-datasetsUpdate' pDuDatasetId_ pDuProjectId_ =
+datasetsUpdate' pDuDataset_ pDuDatasetId_ pDuProjectId_ =
     DatasetsUpdate'
     { _duQuotaUser = Nothing
     , _duPrettyPrint = True
-    , _duUserIp = Nothing
+    , _duDataset = pDuDataset_
+    , _duUserIP = Nothing
     , _duKey = Nothing
     , _duDatasetId = pDuDatasetId_
     , _duProjectId = pDuProjectId_
-    , _duOauthToken = Nothing
+    , _duOAuthToken = Nothing
     , _duFields = Nothing
-    , _duAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -129,15 +131,20 @@ duPrettyPrint
   = lens _duPrettyPrint
       (\ s a -> s{_duPrettyPrint = a})
 
+-- | Multipart request metadata.
+duDataset :: Lens' DatasetsUpdate' Dataset
+duDataset
+  = lens _duDataset (\ s a -> s{_duDataset = a})
+
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-duUserIp :: Lens' DatasetsUpdate' (Maybe Text)
-duUserIp = lens _duUserIp (\ s a -> s{_duUserIp = a})
+duUserIP :: Lens' DatasetsUpdate' (Maybe Text)
+duUserIP = lens _duUserIP (\ s a -> s{_duUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-duKey :: Lens' DatasetsUpdate' (Maybe Text)
+duKey :: Lens' DatasetsUpdate' (Maybe Key)
 duKey = lens _duKey (\ s a -> s{_duKey = a})
 
 -- | Dataset ID of the dataset being updated
@@ -151,29 +158,30 @@ duProjectId
   = lens _duProjectId (\ s a -> s{_duProjectId = a})
 
 -- | OAuth 2.0 token for the current user.
-duOauthToken :: Lens' DatasetsUpdate' (Maybe Text)
-duOauthToken
-  = lens _duOauthToken (\ s a -> s{_duOauthToken = a})
+duOAuthToken :: Lens' DatasetsUpdate' (Maybe OAuthToken)
+duOAuthToken
+  = lens _duOAuthToken (\ s a -> s{_duOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 duFields :: Lens' DatasetsUpdate' (Maybe Text)
 duFields = lens _duFields (\ s a -> s{_duFields = a})
 
--- | Data format for the response.
-duAlt :: Lens' DatasetsUpdate' Alt
-duAlt = lens _duAlt (\ s a -> s{_duAlt = a})
+instance GoogleAuth DatasetsUpdate' where
+        authKey = duKey . _Just
+        authToken = duOAuthToken . _Just
 
 instance GoogleRequest DatasetsUpdate' where
         type Rs DatasetsUpdate' = Dataset
         request = requestWithRoute defReq bigQueryURL
         requestWithRoute r u DatasetsUpdate'{..}
-          = go _duQuotaUser (Just _duPrettyPrint) _duUserIp
+          = go _duQuotaUser (Just _duPrettyPrint) _duUserIP
               _duKey
               _duDatasetId
               _duProjectId
-              _duOauthToken
+              _duOAuthToken
               _duFields
-              (Just _duAlt)
+              (Just AltJSON)
+              _duDataset
           where go
                   = clientWithRoute
                       (Proxy :: Proxy DatasetsUpdateResource)

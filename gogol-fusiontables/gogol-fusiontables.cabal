@@ -38,8 +38,8 @@ library
         , Network.Google.Resource.FusionTables.Column.List
         , Network.Google.Resource.FusionTables.Column.Patch
         , Network.Google.Resource.FusionTables.Column.Update
-        , Network.Google.Resource.FusionTables.Query.Sql
-        , Network.Google.Resource.FusionTables.Query.SqlGet
+        , Network.Google.Resource.FusionTables.Query.SQL
+        , Network.Google.Resource.FusionTables.Query.SQLGet
         , Network.Google.Resource.FusionTables.Style.Delete
         , Network.Google.Resource.FusionTables.Style.Get
         , Network.Google.Resource.FusionTables.Style.Insert

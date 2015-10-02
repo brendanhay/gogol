@@ -34,12 +34,12 @@ module Network.Google.Resource.Spectrum.Paws.NotifySpectrumUse
 
     -- * Request Lenses
     , pnsuQuotaUser
+    , pnsuPawsNotifySpectrumUseRequest
     , pnsuPrettyPrint
-    , pnsuUserIp
+    , pnsuUserIP
     , pnsuKey
-    , pnsuOauthToken
+    , pnsuOAuthToken
     , pnsuFields
-    , pnsuAlt
     ) where
 
 import           Network.Google.Prelude
@@ -52,11 +52,12 @@ type PawsNotifySpectrumUseResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
-               QueryParam "oauth_token" Text :>
+             QueryParam "key" Key :>
+               QueryParam "oauth_token" OAuthToken :>
                  QueryParam "fields" Text :>
-                   QueryParam "alt" Alt :>
-                     Post '[JSON] PawsNotifySpectrumUseResponse
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] PawsNotifySpectrumUseRequest :>
+                       Post '[JSON] PawsNotifySpectrumUseResponse
 
 -- | Notifies the database that the device has selected certain frequency
 -- ranges for transmission. Only to be invoked when required by the
@@ -65,13 +66,13 @@ type PawsNotifySpectrumUseResource =
 --
 -- /See:/ 'pawsNotifySpectrumUse'' smart constructor.
 data PawsNotifySpectrumUse' = PawsNotifySpectrumUse'
-    { _pnsuQuotaUser   :: !(Maybe Text)
-    , _pnsuPrettyPrint :: !Bool
-    , _pnsuUserIp      :: !(Maybe Text)
-    , _pnsuKey         :: !(Maybe Text)
-    , _pnsuOauthToken  :: !(Maybe Text)
-    , _pnsuFields      :: !(Maybe Text)
-    , _pnsuAlt         :: !Alt
+    { _pnsuQuotaUser                    :: !(Maybe Text)
+    , _pnsuPawsNotifySpectrumUseRequest :: !PawsNotifySpectrumUseRequest
+    , _pnsuPrettyPrint                  :: !Bool
+    , _pnsuUserIP                       :: !(Maybe Text)
+    , _pnsuKey                          :: !(Maybe Key)
+    , _pnsuOAuthToken                   :: !(Maybe OAuthToken)
+    , _pnsuFields                       :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PawsNotifySpectrumUse'' with the minimum fields required to make a request.
@@ -80,28 +81,29 @@ data PawsNotifySpectrumUse' = PawsNotifySpectrumUse'
 --
 -- * 'pnsuQuotaUser'
 --
+-- * 'pnsuPawsNotifySpectrumUseRequest'
+--
 -- * 'pnsuPrettyPrint'
 --
--- * 'pnsuUserIp'
+-- * 'pnsuUserIP'
 --
 -- * 'pnsuKey'
 --
--- * 'pnsuOauthToken'
+-- * 'pnsuOAuthToken'
 --
 -- * 'pnsuFields'
---
--- * 'pnsuAlt'
 pawsNotifySpectrumUse'
-    :: PawsNotifySpectrumUse'
-pawsNotifySpectrumUse' =
+    :: PawsNotifySpectrumUseRequest -- ^ 'PawsNotifySpectrumUseRequest'
+    -> PawsNotifySpectrumUse'
+pawsNotifySpectrumUse' pPnsuPawsNotifySpectrumUseRequest_ =
     PawsNotifySpectrumUse'
     { _pnsuQuotaUser = Nothing
+    , _pnsuPawsNotifySpectrumUseRequest = pPnsuPawsNotifySpectrumUseRequest_
     , _pnsuPrettyPrint = True
-    , _pnsuUserIp = Nothing
+    , _pnsuUserIP = Nothing
     , _pnsuKey = Nothing
-    , _pnsuOauthToken = Nothing
+    , _pnsuOAuthToken = Nothing
     , _pnsuFields = Nothing
-    , _pnsuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -112,6 +114,12 @@ pnsuQuotaUser
   = lens _pnsuQuotaUser
       (\ s a -> s{_pnsuQuotaUser = a})
 
+-- | Multipart request metadata.
+pnsuPawsNotifySpectrumUseRequest :: Lens' PawsNotifySpectrumUse' PawsNotifySpectrumUseRequest
+pnsuPawsNotifySpectrumUseRequest
+  = lens _pnsuPawsNotifySpectrumUseRequest
+      (\ s a -> s{_pnsuPawsNotifySpectrumUseRequest = a})
+
 -- | Returns response with indentations and line breaks.
 pnsuPrettyPrint :: Lens' PawsNotifySpectrumUse' Bool
 pnsuPrettyPrint
@@ -120,30 +128,30 @@ pnsuPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-pnsuUserIp :: Lens' PawsNotifySpectrumUse' (Maybe Text)
-pnsuUserIp
-  = lens _pnsuUserIp (\ s a -> s{_pnsuUserIp = a})
+pnsuUserIP :: Lens' PawsNotifySpectrumUse' (Maybe Text)
+pnsuUserIP
+  = lens _pnsuUserIP (\ s a -> s{_pnsuUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pnsuKey :: Lens' PawsNotifySpectrumUse' (Maybe Text)
+pnsuKey :: Lens' PawsNotifySpectrumUse' (Maybe Key)
 pnsuKey = lens _pnsuKey (\ s a -> s{_pnsuKey = a})
 
 -- | OAuth 2.0 token for the current user.
-pnsuOauthToken :: Lens' PawsNotifySpectrumUse' (Maybe Text)
-pnsuOauthToken
-  = lens _pnsuOauthToken
-      (\ s a -> s{_pnsuOauthToken = a})
+pnsuOAuthToken :: Lens' PawsNotifySpectrumUse' (Maybe OAuthToken)
+pnsuOAuthToken
+  = lens _pnsuOAuthToken
+      (\ s a -> s{_pnsuOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 pnsuFields :: Lens' PawsNotifySpectrumUse' (Maybe Text)
 pnsuFields
   = lens _pnsuFields (\ s a -> s{_pnsuFields = a})
 
--- | Data format for the response.
-pnsuAlt :: Lens' PawsNotifySpectrumUse' Alt
-pnsuAlt = lens _pnsuAlt (\ s a -> s{_pnsuAlt = a})
+instance GoogleAuth PawsNotifySpectrumUse' where
+        authKey = pnsuKey . _Just
+        authToken = pnsuOAuthToken . _Just
 
 instance GoogleRequest PawsNotifySpectrumUse' where
         type Rs PawsNotifySpectrumUse' =
@@ -151,11 +159,12 @@ instance GoogleRequest PawsNotifySpectrumUse' where
         request = requestWithRoute defReq spectrumURL
         requestWithRoute r u PawsNotifySpectrumUse'{..}
           = go _pnsuQuotaUser (Just _pnsuPrettyPrint)
-              _pnsuUserIp
+              _pnsuUserIP
               _pnsuKey
-              _pnsuOauthToken
+              _pnsuOAuthToken
               _pnsuFields
-              (Just _pnsuAlt)
+              (Just AltJSON)
+              _pnsuPawsNotifySpectrumUseRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PawsNotifySpectrumUseResource)

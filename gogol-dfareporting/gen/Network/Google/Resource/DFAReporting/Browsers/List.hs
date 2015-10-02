@@ -32,12 +32,11 @@ module Network.Google.Resource.DFAReporting.Browsers.List
     -- * Request Lenses
     , blQuotaUser
     , blPrettyPrint
-    , blUserIp
+    , blUserIP
     , blProfileId
     , blKey
-    , blOauthToken
+    , blOAuthToken
     , blFields
-    , blAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,10 +51,10 @@ type BrowsersListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :>
+                       QueryParam "alt" AltJSON :>
                          Get '[JSON] BrowsersListResponse
 
 -- | Retrieves a list of browsers.
@@ -64,12 +63,11 @@ type BrowsersListResource =
 data BrowsersList' = BrowsersList'
     { _blQuotaUser   :: !(Maybe Text)
     , _blPrettyPrint :: !Bool
-    , _blUserIp      :: !(Maybe Text)
+    , _blUserIP      :: !(Maybe Text)
     , _blProfileId   :: !Int64
-    , _blKey         :: !(Maybe Text)
-    , _blOauthToken  :: !(Maybe Text)
+    , _blKey         :: !(Maybe Key)
+    , _blOAuthToken  :: !(Maybe OAuthToken)
     , _blFields      :: !(Maybe Text)
-    , _blAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BrowsersList'' with the minimum fields required to make a request.
@@ -80,17 +78,15 @@ data BrowsersList' = BrowsersList'
 --
 -- * 'blPrettyPrint'
 --
--- * 'blUserIp'
+-- * 'blUserIP'
 --
 -- * 'blProfileId'
 --
 -- * 'blKey'
 --
--- * 'blOauthToken'
+-- * 'blOAuthToken'
 --
 -- * 'blFields'
---
--- * 'blAlt'
 browsersList'
     :: Int64 -- ^ 'profileId'
     -> BrowsersList'
@@ -98,12 +94,11 @@ browsersList' pBlProfileId_ =
     BrowsersList'
     { _blQuotaUser = Nothing
     , _blPrettyPrint = True
-    , _blUserIp = Nothing
+    , _blUserIP = Nothing
     , _blProfileId = pBlProfileId_
     , _blKey = Nothing
-    , _blOauthToken = Nothing
+    , _blOAuthToken = Nothing
     , _blFields = Nothing
-    , _blAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -121,8 +116,8 @@ blPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-blUserIp :: Lens' BrowsersList' (Maybe Text)
-blUserIp = lens _blUserIp (\ s a -> s{_blUserIp = a})
+blUserIP :: Lens' BrowsersList' (Maybe Text)
+blUserIP = lens _blUserIP (\ s a -> s{_blUserIP = a})
 
 -- | User profile ID associated with this request.
 blProfileId :: Lens' BrowsersList' Int64
@@ -132,32 +127,32 @@ blProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-blKey :: Lens' BrowsersList' (Maybe Text)
+blKey :: Lens' BrowsersList' (Maybe Key)
 blKey = lens _blKey (\ s a -> s{_blKey = a})
 
 -- | OAuth 2.0 token for the current user.
-blOauthToken :: Lens' BrowsersList' (Maybe Text)
-blOauthToken
-  = lens _blOauthToken (\ s a -> s{_blOauthToken = a})
+blOAuthToken :: Lens' BrowsersList' (Maybe OAuthToken)
+blOAuthToken
+  = lens _blOAuthToken (\ s a -> s{_blOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 blFields :: Lens' BrowsersList' (Maybe Text)
 blFields = lens _blFields (\ s a -> s{_blFields = a})
 
--- | Data format for the response.
-blAlt :: Lens' BrowsersList' Alt
-blAlt = lens _blAlt (\ s a -> s{_blAlt = a})
+instance GoogleAuth BrowsersList' where
+        authKey = blKey . _Just
+        authToken = blOAuthToken . _Just
 
 instance GoogleRequest BrowsersList' where
         type Rs BrowsersList' = BrowsersListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u BrowsersList'{..}
-          = go _blQuotaUser (Just _blPrettyPrint) _blUserIp
+          = go _blQuotaUser (Just _blPrettyPrint) _blUserIP
               _blProfileId
               _blKey
-              _blOauthToken
+              _blOAuthToken
               _blFields
-              (Just _blAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy BrowsersListResource)

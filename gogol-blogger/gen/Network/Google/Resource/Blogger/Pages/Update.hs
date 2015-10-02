@@ -32,15 +32,15 @@ module Network.Google.Resource.Blogger.Pages.Update
     -- * Request Lenses
     , puuQuotaUser
     , puuPrettyPrint
-    , puuUserIp
+    , puuUserIP
+    , puuPage
     , puuBlogId
     , puuPageId
     , puuKey
     , puuRevert
-    , puuOauthToken
+    , puuOAuthToken
     , puuPublish
     , puuFields
-    , puuAlt
     ) where
 
 import           Network.Google.Blogger.Types
@@ -56,12 +56,13 @@ type PagesUpdateResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "revert" Bool :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "publish" Bool :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Put '[JSON] Page
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] Page :> Put '[JSON] Page
 
 -- | Update a page.
 --
@@ -69,15 +70,15 @@ type PagesUpdateResource =
 data PagesUpdate' = PagesUpdate'
     { _puuQuotaUser   :: !(Maybe Text)
     , _puuPrettyPrint :: !Bool
-    , _puuUserIp      :: !(Maybe Text)
+    , _puuUserIP      :: !(Maybe Text)
+    , _puuPage        :: !Page
     , _puuBlogId      :: !Text
     , _puuPageId      :: !Text
-    , _puuKey         :: !(Maybe Text)
+    , _puuKey         :: !(Maybe Key)
     , _puuRevert      :: !(Maybe Bool)
-    , _puuOauthToken  :: !(Maybe Text)
+    , _puuOAuthToken  :: !(Maybe OAuthToken)
     , _puuPublish     :: !(Maybe Bool)
     , _puuFields      :: !(Maybe Text)
-    , _puuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PagesUpdate'' with the minimum fields required to make a request.
@@ -88,7 +89,9 @@ data PagesUpdate' = PagesUpdate'
 --
 -- * 'puuPrettyPrint'
 --
--- * 'puuUserIp'
+-- * 'puuUserIP'
+--
+-- * 'puuPage'
 --
 -- * 'puuBlogId'
 --
@@ -98,30 +101,29 @@ data PagesUpdate' = PagesUpdate'
 --
 -- * 'puuRevert'
 --
--- * 'puuOauthToken'
+-- * 'puuOAuthToken'
 --
 -- * 'puuPublish'
 --
 -- * 'puuFields'
---
--- * 'puuAlt'
 pagesUpdate'
-    :: Text -- ^ 'blogId'
+    :: Page -- ^ 'Page'
+    -> Text -- ^ 'blogId'
     -> Text -- ^ 'pageId'
     -> PagesUpdate'
-pagesUpdate' pPuuBlogId_ pPuuPageId_ =
+pagesUpdate' pPuuPage_ pPuuBlogId_ pPuuPageId_ =
     PagesUpdate'
     { _puuQuotaUser = Nothing
     , _puuPrettyPrint = True
-    , _puuUserIp = Nothing
+    , _puuUserIP = Nothing
+    , _puuPage = pPuuPage_
     , _puuBlogId = pPuuBlogId_
     , _puuPageId = pPuuPageId_
     , _puuKey = Nothing
     , _puuRevert = Nothing
-    , _puuOauthToken = Nothing
+    , _puuOAuthToken = Nothing
     , _puuPublish = Nothing
     , _puuFields = Nothing
-    , _puuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,9 +141,13 @@ puuPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-puuUserIp :: Lens' PagesUpdate' (Maybe Text)
-puuUserIp
-  = lens _puuUserIp (\ s a -> s{_puuUserIp = a})
+puuUserIP :: Lens' PagesUpdate' (Maybe Text)
+puuUserIP
+  = lens _puuUserIP (\ s a -> s{_puuUserIP = a})
+
+-- | Multipart request metadata.
+puuPage :: Lens' PagesUpdate' Page
+puuPage = lens _puuPage (\ s a -> s{_puuPage = a})
 
 -- | The ID of the Blog.
 puuBlogId :: Lens' PagesUpdate' Text
@@ -156,7 +162,7 @@ puuPageId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-puuKey :: Lens' PagesUpdate' (Maybe Text)
+puuKey :: Lens' PagesUpdate' (Maybe Key)
 puuKey = lens _puuKey (\ s a -> s{_puuKey = a})
 
 -- | Whether a revert action should be performed when the page is updated
@@ -166,10 +172,10 @@ puuRevert
   = lens _puuRevert (\ s a -> s{_puuRevert = a})
 
 -- | OAuth 2.0 token for the current user.
-puuOauthToken :: Lens' PagesUpdate' (Maybe Text)
-puuOauthToken
-  = lens _puuOauthToken
-      (\ s a -> s{_puuOauthToken = a})
+puuOAuthToken :: Lens' PagesUpdate' (Maybe OAuthToken)
+puuOAuthToken
+  = lens _puuOAuthToken
+      (\ s a -> s{_puuOAuthToken = a})
 
 -- | Whether a publish action should be performed when the page is updated
 -- (default: false).
@@ -182,23 +188,24 @@ puuFields :: Lens' PagesUpdate' (Maybe Text)
 puuFields
   = lens _puuFields (\ s a -> s{_puuFields = a})
 
--- | Data format for the response.
-puuAlt :: Lens' PagesUpdate' Alt
-puuAlt = lens _puuAlt (\ s a -> s{_puuAlt = a})
+instance GoogleAuth PagesUpdate' where
+        authKey = puuKey . _Just
+        authToken = puuOAuthToken . _Just
 
 instance GoogleRequest PagesUpdate' where
         type Rs PagesUpdate' = Page
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PagesUpdate'{..}
-          = go _puuQuotaUser (Just _puuPrettyPrint) _puuUserIp
+          = go _puuQuotaUser (Just _puuPrettyPrint) _puuUserIP
               _puuBlogId
               _puuPageId
               _puuKey
               _puuRevert
-              _puuOauthToken
+              _puuOAuthToken
               _puuPublish
               _puuFields
-              (Just _puuAlt)
+              (Just AltJSON)
+              _puuPage
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PagesUpdateResource)

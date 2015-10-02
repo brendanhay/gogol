@@ -455,7 +455,7 @@ instance ToJSON Avail where
 -- /See:/ 'listAvailsResponse' smart constructor.
 data ListAvailsResponse = ListAvailsResponse
     { _larNextPageToken :: !(Maybe Text)
-    , _larAvails        :: !(Maybe [Maybe Avail])
+    , _larAvails        :: !(Maybe [Avail])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListAvailsResponse' with the minimum fields required to make a request.
@@ -480,7 +480,7 @@ larNextPageToken
       (\ s a -> s{_larNextPageToken = a})
 
 -- | List of Avails that match the request criteria.
-larAvails :: Lens' ListAvailsResponse [Maybe Avail]
+larAvails :: Lens' ListAvailsResponse [Avail]
 larAvails
   = lens _larAvails (\ s a -> s{_larAvails = a}) .
       _Default
@@ -506,7 +506,7 @@ instance ToJSON ListAvailsResponse where
 -- /See:/ 'listOrdersResponse' smart constructor.
 data ListOrdersResponse = ListOrdersResponse
     { _lorNextPageToken :: !(Maybe Text)
-    , _lorOrders        :: !(Maybe [Maybe Order])
+    , _lorOrders        :: !(Maybe [Order])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListOrdersResponse' with the minimum fields required to make a request.
@@ -531,7 +531,7 @@ lorNextPageToken
       (\ s a -> s{_lorNextPageToken = a})
 
 -- | List of Orders that match the request criteria.
-lorOrders :: Lens' ListOrdersResponse [Maybe Order]
+lorOrders :: Lens' ListOrdersResponse [Order]
 lorOrders
   = lens _lorOrders (\ s a -> s{_lorOrders = a}) .
       _Default
@@ -557,7 +557,7 @@ instance ToJSON ListOrdersResponse where
 -- /See:/ 'listExperienceLocalesResponse' smart constructor.
 data ListExperienceLocalesResponse = ListExperienceLocalesResponse
     { _lelrNextPageToken     :: !(Maybe Text)
-    , _lelrExperienceLocales :: !(Maybe [Maybe ExperienceLocale])
+    , _lelrExperienceLocales :: !(Maybe [ExperienceLocale])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListExperienceLocalesResponse' with the minimum fields required to make a request.
@@ -582,7 +582,7 @@ lelrNextPageToken
       (\ s a -> s{_lelrNextPageToken = a})
 
 -- | List of ExperienceLocales that match the request criteria.
-lelrExperienceLocales :: Lens' ListExperienceLocalesResponse [Maybe ExperienceLocale]
+lelrExperienceLocales :: Lens' ListExperienceLocalesResponse [ExperienceLocale]
 lelrExperienceLocales
   = lens _lelrExperienceLocales
       (\ s a -> s{_lelrExperienceLocales = a})
@@ -609,7 +609,7 @@ instance ToJSON ListExperienceLocalesResponse where
 -- /See:/ 'listStoreInfosResponse' smart constructor.
 data ListStoreInfosResponse = ListStoreInfosResponse
     { _lsirNextPageToken :: !(Maybe Text)
-    , _lsirStoreInfos    :: !(Maybe [Maybe StoreInfo])
+    , _lsirStoreInfos    :: !(Maybe [StoreInfo])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListStoreInfosResponse' with the minimum fields required to make a request.
@@ -634,7 +634,7 @@ lsirNextPageToken
       (\ s a -> s{_lsirNextPageToken = a})
 
 -- | List of StoreInfos that match the request criteria.
-lsirStoreInfos :: Lens' ListStoreInfosResponse [Maybe StoreInfo]
+lsirStoreInfos :: Lens' ListStoreInfosResponse [StoreInfo]
 lsirStoreInfos
   = lens _lsirStoreInfos
       (\ s a -> s{_lsirStoreInfos = a})

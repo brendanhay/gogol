@@ -24,7 +24,7 @@ import           Network.Google.Prelude
 -- /See:/ 'changesListResponse' smart constructor.
 data ChangesListResponse = ChangesListResponse
     { _clrNextPageToken :: !(Maybe Text)
-    , _clrChanges       :: !(Maybe [Maybe Change])
+    , _clrChanges       :: !(Maybe [Change])
     , _clrKind          :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -61,7 +61,7 @@ clrNextPageToken
       (\ s a -> s{_clrNextPageToken = a})
 
 -- | The requested changes.
-clrChanges :: Lens' ChangesListResponse [Maybe Change]
+clrChanges :: Lens' ChangesListResponse [Change]
 clrChanges
   = lens _clrChanges (\ s a -> s{_clrChanges = a}) .
       _Default
@@ -97,7 +97,7 @@ data Project = Project
     { _pKind   :: !Text
     , _pId     :: !(Maybe Text)
     , _pNumber :: !(Maybe Word64)
-    , _pQuota  :: !(Maybe (Maybe Quota))
+    , _pQuota  :: !(Maybe Quota)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Project' with the minimum fields required to make a request.
@@ -136,7 +136,7 @@ pNumber :: Lens' Project (Maybe Word64)
 pNumber = lens _pNumber (\ s a -> s{_pNumber = a})
 
 -- | Quotas assigned to this project (output only).
-pQuota :: Lens' Project (Maybe (Maybe Quota))
+pQuota :: Lens' Project (Maybe Quota)
 pQuota = lens _pQuota (\ s a -> s{_pQuota = a})
 
 instance FromJSON Project where
@@ -161,10 +161,10 @@ instance ToJSON Project where
 -- /See:/ 'change' smart constructor.
 data Change = Change
     { _cStatus    :: !(Maybe Text)
-    , _cAdditions :: !(Maybe [Maybe ResourceRecordSet])
+    , _cAdditions :: !(Maybe [ResourceRecordSet])
     , _cStartTime :: !(Maybe Text)
     , _cKind      :: !Text
-    , _cDeletions :: !(Maybe [Maybe ResourceRecordSet])
+    , _cDeletions :: !(Maybe [ResourceRecordSet])
     , _cId        :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -200,7 +200,7 @@ cStatus :: Lens' Change (Maybe Text)
 cStatus = lens _cStatus (\ s a -> s{_cStatus = a})
 
 -- | Which ResourceRecordSets to add?
-cAdditions :: Lens' Change [Maybe ResourceRecordSet]
+cAdditions :: Lens' Change [ResourceRecordSet]
 cAdditions
   = lens _cAdditions (\ s a -> s{_cAdditions = a}) .
       _Default
@@ -218,7 +218,7 @@ cKind :: Lens' Change Text
 cKind = lens _cKind (\ s a -> s{_cKind = a})
 
 -- | Which ResourceRecordSets to remove? Must match existing data exactly.
-cDeletions :: Lens' Change [Maybe ResourceRecordSet]
+cDeletions :: Lens' Change [ResourceRecordSet]
 cDeletions
   = lens _cDeletions (\ s a -> s{_cDeletions = a}) .
       _Default
@@ -255,7 +255,7 @@ instance ToJSON Change where
 data ResourceRecordSetsListResponse = ResourceRecordSetsListResponse
     { _rrslrNextPageToken :: !(Maybe Text)
     , _rrslrKind          :: !Text
-    , _rrslrRrsets        :: !(Maybe [Maybe ResourceRecordSet])
+    , _rrslrRrsets        :: !(Maybe [ResourceRecordSet])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ResourceRecordSetsListResponse' with the minimum fields required to make a request.
@@ -296,7 +296,7 @@ rrslrKind
   = lens _rrslrKind (\ s a -> s{_rrslrKind = a})
 
 -- | The resource record set resources.
-rrslrRrsets :: Lens' ResourceRecordSetsListResponse [Maybe ResourceRecordSet]
+rrslrRrsets :: Lens' ResourceRecordSetsListResponse [ResourceRecordSet]
 rrslrRrsets
   = lens _rrslrRrsets (\ s a -> s{_rrslrRrsets = a}) .
       _Default
@@ -412,7 +412,7 @@ data ManagedZone = ManagedZone
     , _mzNameServerSet :: !(Maybe Text)
     , _mzName          :: !(Maybe Text)
     , _mzId            :: !(Maybe Word64)
-    , _mzDnsName       :: !(Maybe Text)
+    , _mzDNSName       :: !(Maybe Text)
     , _mzDescription   :: !(Maybe Text)
     , _mzNameServers   :: !(Maybe [Text])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -431,7 +431,7 @@ data ManagedZone = ManagedZone
 --
 -- * 'mzId'
 --
--- * 'mzDnsName'
+-- * 'mzDNSName'
 --
 -- * 'mzDescription'
 --
@@ -445,7 +445,7 @@ managedZone =
     , _mzNameServerSet = Nothing
     , _mzName = Nothing
     , _mzId = Nothing
-    , _mzDnsName = Nothing
+    , _mzDNSName = Nothing
     , _mzDescription = Nothing
     , _mzNameServers = Nothing
     }
@@ -482,9 +482,9 @@ mzId :: Lens' ManagedZone (Maybe Word64)
 mzId = lens _mzId (\ s a -> s{_mzId = a})
 
 -- | The DNS name of this managed zone, for instance \"example.com.\".
-mzDnsName :: Lens' ManagedZone (Maybe Text)
-mzDnsName
-  = lens _mzDnsName (\ s a -> s{_mzDnsName = a})
+mzDNSName :: Lens' ManagedZone (Maybe Text)
+mzDNSName
+  = lens _mzDNSName (\ s a -> s{_mzDNSName = a})
 
 -- | A mutable string of at most 1024 characters associated with this
 -- resource for the user\'s convenience. Has no effect on the managed
@@ -525,7 +525,7 @@ instance ToJSON ManagedZone where
                   Just ("kind" .= _mzKind),
                   ("nameServerSet" .=) <$> _mzNameServerSet,
                   ("name" .=) <$> _mzName, ("id" .=) <$> _mzId,
-                  ("dnsName" .=) <$> _mzDnsName,
+                  ("dnsName" .=) <$> _mzDNSName,
                   ("description" .=) <$> _mzDescription,
                   ("nameServers" .=) <$> _mzNameServers])
 
@@ -651,7 +651,7 @@ instance ToJSON Quota where
 data ManagedZonesListResponse = ManagedZonesListResponse
     { _mzlrNextPageToken :: !(Maybe Text)
     , _mzlrKind          :: !Text
-    , _mzlrManagedZones  :: !(Maybe [Maybe ManagedZone])
+    , _mzlrManagedZones  :: !(Maybe [ManagedZone])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagedZonesListResponse' with the minimum fields required to make a request.
@@ -691,7 +691,7 @@ mzlrKind :: Lens' ManagedZonesListResponse Text
 mzlrKind = lens _mzlrKind (\ s a -> s{_mzlrKind = a})
 
 -- | The managed zone resources.
-mzlrManagedZones :: Lens' ManagedZonesListResponse [Maybe ManagedZone]
+mzlrManagedZones :: Lens' ManagedZonesListResponse [ManagedZone]
 mzlrManagedZones
   = lens _mzlrManagedZones
       (\ s a -> s{_mzlrManagedZones = a})

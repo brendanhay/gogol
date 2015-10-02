@@ -40,10 +40,10 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.TestIAMPermissions
     , pstipBearerToken
     , pstipKey
     , pstipResource
-    , pstipOauthToken
+    , pstipTestIAMPermissionsRequest
+    , pstipOAuthToken
     , pstipFields
     , pstipCallback
-    , pstipAlt
     ) where
 
 import           Network.Google.Prelude
@@ -63,31 +63,32 @@ type ProjectsSubscriptionsTestIAMPermissionsResource
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
                        QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
                                QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :>
-                                   Post '[JSON] TestIAMPermissionsResponse
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON] TestIAMPermissionsRequest :>
+                                     Post '[JSON] TestIAMPermissionsResponse
 
 -- | Returns permissions that a caller has on the specified resource.
 --
 -- /See:/ 'projectsSubscriptionsTestIAMPermissions'' smart constructor.
 data ProjectsSubscriptionsTestIAMPermissions' = ProjectsSubscriptionsTestIAMPermissions'
-    { _pstipXgafv          :: !(Maybe Text)
-    , _pstipQuotaUser      :: !(Maybe Text)
-    , _pstipPrettyPrint    :: !Bool
-    , _pstipUploadProtocol :: !(Maybe Text)
-    , _pstipPp             :: !Bool
-    , _pstipAccessToken    :: !(Maybe Text)
-    , _pstipUploadType     :: !(Maybe Text)
-    , _pstipBearerToken    :: !(Maybe Text)
-    , _pstipKey            :: !(Maybe Text)
-    , _pstipResource       :: !Text
-    , _pstipOauthToken     :: !(Maybe Text)
-    , _pstipFields         :: !(Maybe Text)
-    , _pstipCallback       :: !(Maybe Text)
-    , _pstipAlt            :: !Text
+    { _pstipXgafv                     :: !(Maybe Text)
+    , _pstipQuotaUser                 :: !(Maybe Text)
+    , _pstipPrettyPrint               :: !Bool
+    , _pstipUploadProtocol            :: !(Maybe Text)
+    , _pstipPp                        :: !Bool
+    , _pstipAccessToken               :: !(Maybe Text)
+    , _pstipUploadType                :: !(Maybe Text)
+    , _pstipBearerToken               :: !(Maybe Text)
+    , _pstipKey                       :: !(Maybe Key)
+    , _pstipResource                  :: !Text
+    , _pstipTestIAMPermissionsRequest :: !TestIAMPermissionsRequest
+    , _pstipOAuthToken                :: !(Maybe OAuthToken)
+    , _pstipFields                    :: !(Maybe Text)
+    , _pstipCallback                  :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsSubscriptionsTestIAMPermissions'' with the minimum fields required to make a request.
@@ -114,17 +115,18 @@ data ProjectsSubscriptionsTestIAMPermissions' = ProjectsSubscriptionsTestIAMPerm
 --
 -- * 'pstipResource'
 --
--- * 'pstipOauthToken'
+-- * 'pstipTestIAMPermissionsRequest'
+--
+-- * 'pstipOAuthToken'
 --
 -- * 'pstipFields'
 --
 -- * 'pstipCallback'
---
--- * 'pstipAlt'
 projectsSubscriptionsTestIAMPermissions'
     :: Text -- ^ 'resource'
+    -> TestIAMPermissionsRequest -- ^ 'TestIAMPermissionsRequest'
     -> ProjectsSubscriptionsTestIAMPermissions'
-projectsSubscriptionsTestIAMPermissions' pPstipResource_ =
+projectsSubscriptionsTestIAMPermissions' pPstipResource_ pPstipTestIAMPermissionsRequest_ =
     ProjectsSubscriptionsTestIAMPermissions'
     { _pstipXgafv = Nothing
     , _pstipQuotaUser = Nothing
@@ -136,10 +138,10 @@ projectsSubscriptionsTestIAMPermissions' pPstipResource_ =
     , _pstipBearerToken = Nothing
     , _pstipKey = Nothing
     , _pstipResource = pPstipResource_
-    , _pstipOauthToken = Nothing
+    , _pstipTestIAMPermissionsRequest = pPstipTestIAMPermissionsRequest_
+    , _pstipOAuthToken = Nothing
     , _pstipFields = Nothing
     , _pstipCallback = Nothing
-    , _pstipAlt = "json"
     }
 
 -- | V1 error format.
@@ -192,7 +194,7 @@ pstipBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pstipKey :: Lens' ProjectsSubscriptionsTestIAMPermissions' (Maybe Text)
+pstipKey :: Lens' ProjectsSubscriptionsTestIAMPermissions' (Maybe Key)
 pstipKey = lens _pstipKey (\ s a -> s{_pstipKey = a})
 
 -- | REQUIRED: The resource for which policy detail is being requested.
@@ -202,11 +204,17 @@ pstipResource
   = lens _pstipResource
       (\ s a -> s{_pstipResource = a})
 
+-- | Multipart request metadata.
+pstipTestIAMPermissionsRequest :: Lens' ProjectsSubscriptionsTestIAMPermissions' TestIAMPermissionsRequest
+pstipTestIAMPermissionsRequest
+  = lens _pstipTestIAMPermissionsRequest
+      (\ s a -> s{_pstipTestIAMPermissionsRequest = a})
+
 -- | OAuth 2.0 token for the current user.
-pstipOauthToken :: Lens' ProjectsSubscriptionsTestIAMPermissions' (Maybe Text)
-pstipOauthToken
-  = lens _pstipOauthToken
-      (\ s a -> s{_pstipOauthToken = a})
+pstipOAuthToken :: Lens' ProjectsSubscriptionsTestIAMPermissions' (Maybe OAuthToken)
+pstipOAuthToken
+  = lens _pstipOAuthToken
+      (\ s a -> s{_pstipOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 pstipFields :: Lens' ProjectsSubscriptionsTestIAMPermissions' (Maybe Text)
@@ -219,9 +227,10 @@ pstipCallback
   = lens _pstipCallback
       (\ s a -> s{_pstipCallback = a})
 
--- | Data format for response.
-pstipAlt :: Lens' ProjectsSubscriptionsTestIAMPermissions' Text
-pstipAlt = lens _pstipAlt (\ s a -> s{_pstipAlt = a})
+instance GoogleAuth
+         ProjectsSubscriptionsTestIAMPermissions' where
+        authKey = pstipKey . _Just
+        authToken = pstipOAuthToken . _Just
 
 instance GoogleRequest
          ProjectsSubscriptionsTestIAMPermissions' where
@@ -239,10 +248,11 @@ instance GoogleRequest
               _pstipBearerToken
               _pstipKey
               _pstipResource
-              _pstipOauthToken
+              _pstipOAuthToken
               _pstipFields
               _pstipCallback
-              (Just _pstipAlt)
+              (Just AltJSON)
+              _pstipTestIAMPermissionsRequest
           where go
                   = clientWithRoute
                       (Proxy ::

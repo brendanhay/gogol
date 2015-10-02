@@ -38,13 +38,13 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.SetIAMPolicy
     , pssipPp
     , pssipAccessToken
     , pssipUploadType
+    , pssipSetIAMPolicyRequest
     , pssipBearerToken
     , pssipKey
     , pssipResource
-    , pssipOauthToken
+    , pssipOAuthToken
     , pssipFields
     , pssipCallback
-    , pssipAlt
     ) where
 
 import           Network.Google.Prelude
@@ -63,31 +63,33 @@ type ProjectsSubscriptionsSetIAMPolicyResource =
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
                        QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
                                QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :> Post '[JSON] Policy
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON] SetIAMPolicyRequest :>
+                                     Post '[JSON] Policy
 
 -- | Sets the access control policy on the specified resource. Replaces any
 -- existing policy.
 --
 -- /See:/ 'projectsSubscriptionsSetIAMPolicy'' smart constructor.
 data ProjectsSubscriptionsSetIAMPolicy' = ProjectsSubscriptionsSetIAMPolicy'
-    { _pssipXgafv          :: !(Maybe Text)
-    , _pssipQuotaUser      :: !(Maybe Text)
-    , _pssipPrettyPrint    :: !Bool
-    , _pssipUploadProtocol :: !(Maybe Text)
-    , _pssipPp             :: !Bool
-    , _pssipAccessToken    :: !(Maybe Text)
-    , _pssipUploadType     :: !(Maybe Text)
-    , _pssipBearerToken    :: !(Maybe Text)
-    , _pssipKey            :: !(Maybe Text)
-    , _pssipResource       :: !Text
-    , _pssipOauthToken     :: !(Maybe Text)
-    , _pssipFields         :: !(Maybe Text)
-    , _pssipCallback       :: !(Maybe Text)
-    , _pssipAlt            :: !Text
+    { _pssipXgafv               :: !(Maybe Text)
+    , _pssipQuotaUser           :: !(Maybe Text)
+    , _pssipPrettyPrint         :: !Bool
+    , _pssipUploadProtocol      :: !(Maybe Text)
+    , _pssipPp                  :: !Bool
+    , _pssipAccessToken         :: !(Maybe Text)
+    , _pssipUploadType          :: !(Maybe Text)
+    , _pssipSetIAMPolicyRequest :: !SetIAMPolicyRequest
+    , _pssipBearerToken         :: !(Maybe Text)
+    , _pssipKey                 :: !(Maybe Key)
+    , _pssipResource            :: !Text
+    , _pssipOAuthToken          :: !(Maybe OAuthToken)
+    , _pssipFields              :: !(Maybe Text)
+    , _pssipCallback            :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsSubscriptionsSetIAMPolicy'' with the minimum fields required to make a request.
@@ -108,23 +110,24 @@ data ProjectsSubscriptionsSetIAMPolicy' = ProjectsSubscriptionsSetIAMPolicy'
 --
 -- * 'pssipUploadType'
 --
+-- * 'pssipSetIAMPolicyRequest'
+--
 -- * 'pssipBearerToken'
 --
 -- * 'pssipKey'
 --
 -- * 'pssipResource'
 --
--- * 'pssipOauthToken'
+-- * 'pssipOAuthToken'
 --
 -- * 'pssipFields'
 --
 -- * 'pssipCallback'
---
--- * 'pssipAlt'
 projectsSubscriptionsSetIAMPolicy'
-    :: Text -- ^ 'resource'
+    :: SetIAMPolicyRequest -- ^ 'SetIAMPolicyRequest'
+    -> Text -- ^ 'resource'
     -> ProjectsSubscriptionsSetIAMPolicy'
-projectsSubscriptionsSetIAMPolicy' pPssipResource_ =
+projectsSubscriptionsSetIAMPolicy' pPssipSetIAMPolicyRequest_ pPssipResource_ =
     ProjectsSubscriptionsSetIAMPolicy'
     { _pssipXgafv = Nothing
     , _pssipQuotaUser = Nothing
@@ -133,13 +136,13 @@ projectsSubscriptionsSetIAMPolicy' pPssipResource_ =
     , _pssipPp = True
     , _pssipAccessToken = Nothing
     , _pssipUploadType = Nothing
+    , _pssipSetIAMPolicyRequest = pPssipSetIAMPolicyRequest_
     , _pssipBearerToken = Nothing
     , _pssipKey = Nothing
     , _pssipResource = pPssipResource_
-    , _pssipOauthToken = Nothing
+    , _pssipOAuthToken = Nothing
     , _pssipFields = Nothing
     , _pssipCallback = Nothing
-    , _pssipAlt = "json"
     }
 
 -- | V1 error format.
@@ -183,6 +186,12 @@ pssipUploadType
   = lens _pssipUploadType
       (\ s a -> s{_pssipUploadType = a})
 
+-- | Multipart request metadata.
+pssipSetIAMPolicyRequest :: Lens' ProjectsSubscriptionsSetIAMPolicy' SetIAMPolicyRequest
+pssipSetIAMPolicyRequest
+  = lens _pssipSetIAMPolicyRequest
+      (\ s a -> s{_pssipSetIAMPolicyRequest = a})
+
 -- | OAuth bearer token.
 pssipBearerToken :: Lens' ProjectsSubscriptionsSetIAMPolicy' (Maybe Text)
 pssipBearerToken
@@ -192,7 +201,7 @@ pssipBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pssipKey :: Lens' ProjectsSubscriptionsSetIAMPolicy' (Maybe Text)
+pssipKey :: Lens' ProjectsSubscriptionsSetIAMPolicy' (Maybe Key)
 pssipKey = lens _pssipKey (\ s a -> s{_pssipKey = a})
 
 -- | REQUIRED: The resource for which policy is being specified. Resource is
@@ -204,10 +213,10 @@ pssipResource
       (\ s a -> s{_pssipResource = a})
 
 -- | OAuth 2.0 token for the current user.
-pssipOauthToken :: Lens' ProjectsSubscriptionsSetIAMPolicy' (Maybe Text)
-pssipOauthToken
-  = lens _pssipOauthToken
-      (\ s a -> s{_pssipOauthToken = a})
+pssipOAuthToken :: Lens' ProjectsSubscriptionsSetIAMPolicy' (Maybe OAuthToken)
+pssipOAuthToken
+  = lens _pssipOAuthToken
+      (\ s a -> s{_pssipOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 pssipFields :: Lens' ProjectsSubscriptionsSetIAMPolicy' (Maybe Text)
@@ -220,9 +229,10 @@ pssipCallback
   = lens _pssipCallback
       (\ s a -> s{_pssipCallback = a})
 
--- | Data format for response.
-pssipAlt :: Lens' ProjectsSubscriptionsSetIAMPolicy' Text
-pssipAlt = lens _pssipAlt (\ s a -> s{_pssipAlt = a})
+instance GoogleAuth
+         ProjectsSubscriptionsSetIAMPolicy' where
+        authKey = pssipKey . _Just
+        authToken = pssipOAuthToken . _Just
 
 instance GoogleRequest
          ProjectsSubscriptionsSetIAMPolicy' where
@@ -239,10 +249,11 @@ instance GoogleRequest
               _pssipBearerToken
               _pssipKey
               _pssipResource
-              _pssipOauthToken
+              _pssipOAuthToken
               _pssipFields
               _pssipCallback
-              (Just _pssipAlt)
+              (Just AltJSON)
+              _pssipSetIAMPolicyRequest
           where go
                   = clientWithRoute
                       (Proxy ::

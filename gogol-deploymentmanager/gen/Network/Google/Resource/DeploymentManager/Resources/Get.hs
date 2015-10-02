@@ -19,7 +19,7 @@
 --
 -- | Gets information about a single resource.
 --
--- /See:/ <https://developers.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentmanagerResourcesGet@.
+-- /See:/ <https://developers.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerResourcesGet@.
 module Network.Google.Resource.DeploymentManager.Resources.Get
     (
     -- * REST Resource
@@ -33,19 +33,18 @@ module Network.Google.Resource.DeploymentManager.Resources.Get
     , rgQuotaUser
     , rgPrettyPrint
     , rgProject
-    , rgUserIp
+    , rgUserIP
     , rgKey
     , rgResource
-    , rgOauthToken
+    , rgOAuthToken
     , rgFields
-    , rgAlt
     , rgDeployment
     ) where
 
 import           Network.Google.DeploymentManager.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DeploymentmanagerResourcesGet@ which the
+-- | A resource alias for @DeploymentManagerResourcesGet@ which the
 -- 'ResourcesGet'' request conforms to.
 type ResourcesGetResource =
      Capture "project" Text :>
@@ -57,10 +56,10 @@ type ResourcesGetResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Get '[JSON] Resource
+                             QueryParam "alt" AltJSON :> Get '[JSON] Resource
 
 -- | Gets information about a single resource.
 --
@@ -69,12 +68,11 @@ data ResourcesGet' = ResourcesGet'
     { _rgQuotaUser   :: !(Maybe Text)
     , _rgPrettyPrint :: !Bool
     , _rgProject     :: !Text
-    , _rgUserIp      :: !(Maybe Text)
-    , _rgKey         :: !(Maybe Text)
+    , _rgUserIP      :: !(Maybe Text)
+    , _rgKey         :: !(Maybe Key)
     , _rgResource    :: !Text
-    , _rgOauthToken  :: !(Maybe Text)
+    , _rgOAuthToken  :: !(Maybe OAuthToken)
     , _rgFields      :: !(Maybe Text)
-    , _rgAlt         :: !Alt
     , _rgDeployment  :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -88,17 +86,15 @@ data ResourcesGet' = ResourcesGet'
 --
 -- * 'rgProject'
 --
--- * 'rgUserIp'
+-- * 'rgUserIP'
 --
 -- * 'rgKey'
 --
 -- * 'rgResource'
 --
--- * 'rgOauthToken'
+-- * 'rgOAuthToken'
 --
 -- * 'rgFields'
---
--- * 'rgAlt'
 --
 -- * 'rgDeployment'
 resourcesGet'
@@ -111,12 +107,11 @@ resourcesGet' pRgProject_ pRgResource_ pRgDeployment_ =
     { _rgQuotaUser = Nothing
     , _rgPrettyPrint = True
     , _rgProject = pRgProject_
-    , _rgUserIp = Nothing
+    , _rgUserIP = Nothing
     , _rgKey = Nothing
     , _rgResource = pRgResource_
-    , _rgOauthToken = Nothing
+    , _rgOAuthToken = Nothing
     , _rgFields = Nothing
-    , _rgAlt = JSON
     , _rgDeployment = pRgDeployment_
     }
 
@@ -140,13 +135,13 @@ rgProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rgUserIp :: Lens' ResourcesGet' (Maybe Text)
-rgUserIp = lens _rgUserIp (\ s a -> s{_rgUserIp = a})
+rgUserIP :: Lens' ResourcesGet' (Maybe Text)
+rgUserIP = lens _rgUserIP (\ s a -> s{_rgUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rgKey :: Lens' ResourcesGet' (Maybe Text)
+rgKey :: Lens' ResourcesGet' (Maybe Key)
 rgKey = lens _rgKey (\ s a -> s{_rgKey = a})
 
 -- | The name of the resource for this request.
@@ -155,22 +150,22 @@ rgResource
   = lens _rgResource (\ s a -> s{_rgResource = a})
 
 -- | OAuth 2.0 token for the current user.
-rgOauthToken :: Lens' ResourcesGet' (Maybe Text)
-rgOauthToken
-  = lens _rgOauthToken (\ s a -> s{_rgOauthToken = a})
+rgOAuthToken :: Lens' ResourcesGet' (Maybe OAuthToken)
+rgOAuthToken
+  = lens _rgOAuthToken (\ s a -> s{_rgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 rgFields :: Lens' ResourcesGet' (Maybe Text)
 rgFields = lens _rgFields (\ s a -> s{_rgFields = a})
 
--- | Data format for the response.
-rgAlt :: Lens' ResourcesGet' Alt
-rgAlt = lens _rgAlt (\ s a -> s{_rgAlt = a})
-
 -- | The name of the deployment for this request.
 rgDeployment :: Lens' ResourcesGet' Text
 rgDeployment
   = lens _rgDeployment (\ s a -> s{_rgDeployment = a})
+
+instance GoogleAuth ResourcesGet' where
+        authKey = rgKey . _Just
+        authToken = rgOAuthToken . _Just
 
 instance GoogleRequest ResourcesGet' where
         type Rs ResourcesGet' = Resource
@@ -178,13 +173,13 @@ instance GoogleRequest ResourcesGet' where
           = requestWithRoute defReq deploymentManagerURL
         requestWithRoute r u ResourcesGet'{..}
           = go _rgQuotaUser (Just _rgPrettyPrint) _rgProject
-              _rgUserIp
+              _rgUserIP
               _rgKey
               _rgResource
-              _rgOauthToken
+              _rgOAuthToken
               _rgFields
-              (Just _rgAlt)
               _rgDeployment
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ResourcesGetResource)

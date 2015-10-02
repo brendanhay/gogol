@@ -44,10 +44,10 @@ module Network.Google.Resource.Classroom.Courses.Aliases.Create
     , cacUploadType
     , cacBearerToken
     , cacKey
-    , cacOauthToken
+    , cacOAuthToken
+    , cacCourseAlias
     , cacFields
     , cacCallback
-    , cacAlt
     ) where
 
 import           Network.Google.Classroom.Types
@@ -68,12 +68,13 @@ type CoursesAliasesCreateResource =
                        QueryParam "access_token" Text :>
                          QueryParam "uploadType" Text :>
                            QueryParam "bearer_token" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "fields" Text :>
                                    QueryParam "callback" Text :>
-                                     QueryParam "alt" Text :>
-                                       Post '[JSON] CourseAlias
+                                     QueryParam "alt" AltJSON :>
+                                       ReqBody '[JSON] CourseAlias :>
+                                         Post '[JSON] CourseAlias
 
 -- | Creates an alias for a course. This method returns the following error
 -- codes: * \`PERMISSION_DENIED\` if the requesting user is not permitted
@@ -92,11 +93,11 @@ data CoursesAliasesCreate' = CoursesAliasesCreate'
     , _cacAccessToken    :: !(Maybe Text)
     , _cacUploadType     :: !(Maybe Text)
     , _cacBearerToken    :: !(Maybe Text)
-    , _cacKey            :: !(Maybe Text)
-    , _cacOauthToken     :: !(Maybe Text)
+    , _cacKey            :: !(Maybe Key)
+    , _cacOAuthToken     :: !(Maybe OAuthToken)
+    , _cacCourseAlias    :: !CourseAlias
     , _cacFields         :: !(Maybe Text)
     , _cacCallback       :: !(Maybe Text)
-    , _cacAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CoursesAliasesCreate'' with the minimum fields required to make a request.
@@ -123,17 +124,18 @@ data CoursesAliasesCreate' = CoursesAliasesCreate'
 --
 -- * 'cacKey'
 --
--- * 'cacOauthToken'
+-- * 'cacOAuthToken'
+--
+-- * 'cacCourseAlias'
 --
 -- * 'cacFields'
 --
 -- * 'cacCallback'
---
--- * 'cacAlt'
 coursesAliasesCreate'
     :: Text -- ^ 'courseId'
+    -> CourseAlias -- ^ 'CourseAlias'
     -> CoursesAliasesCreate'
-coursesAliasesCreate' pCacCourseId_ =
+coursesAliasesCreate' pCacCourseId_ pCacCourseAlias_ =
     CoursesAliasesCreate'
     { _cacXgafv = Nothing
     , _cacQuotaUser = Nothing
@@ -145,10 +147,10 @@ coursesAliasesCreate' pCacCourseId_ =
     , _cacUploadType = Nothing
     , _cacBearerToken = Nothing
     , _cacKey = Nothing
-    , _cacOauthToken = Nothing
+    , _cacOAuthToken = Nothing
+    , _cacCourseAlias = pCacCourseAlias_
     , _cacFields = Nothing
     , _cacCallback = Nothing
-    , _cacAlt = "json"
     }
 
 -- | V1 error format.
@@ -206,14 +208,20 @@ cacBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cacKey :: Lens' CoursesAliasesCreate' (Maybe Text)
+cacKey :: Lens' CoursesAliasesCreate' (Maybe Key)
 cacKey = lens _cacKey (\ s a -> s{_cacKey = a})
 
 -- | OAuth 2.0 token for the current user.
-cacOauthToken :: Lens' CoursesAliasesCreate' (Maybe Text)
-cacOauthToken
-  = lens _cacOauthToken
-      (\ s a -> s{_cacOauthToken = a})
+cacOAuthToken :: Lens' CoursesAliasesCreate' (Maybe OAuthToken)
+cacOAuthToken
+  = lens _cacOAuthToken
+      (\ s a -> s{_cacOAuthToken = a})
+
+-- | Multipart request metadata.
+cacCourseAlias :: Lens' CoursesAliasesCreate' CourseAlias
+cacCourseAlias
+  = lens _cacCourseAlias
+      (\ s a -> s{_cacCourseAlias = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cacFields :: Lens' CoursesAliasesCreate' (Maybe Text)
@@ -225,9 +233,9 @@ cacCallback :: Lens' CoursesAliasesCreate' (Maybe Text)
 cacCallback
   = lens _cacCallback (\ s a -> s{_cacCallback = a})
 
--- | Data format for response.
-cacAlt :: Lens' CoursesAliasesCreate' Text
-cacAlt = lens _cacAlt (\ s a -> s{_cacAlt = a})
+instance GoogleAuth CoursesAliasesCreate' where
+        authKey = cacKey . _Just
+        authToken = cacOAuthToken . _Just
 
 instance GoogleRequest CoursesAliasesCreate' where
         type Rs CoursesAliasesCreate' = CourseAlias
@@ -241,10 +249,11 @@ instance GoogleRequest CoursesAliasesCreate' where
               _cacUploadType
               _cacBearerToken
               _cacKey
-              _cacOauthToken
+              _cacOAuthToken
               _cacFields
               _cacCallback
-              (Just _cacAlt)
+              (Just AltJSON)
+              _cacCourseAlias
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CoursesAliasesCreateResource)

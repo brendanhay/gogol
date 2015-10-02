@@ -32,13 +32,13 @@ module Network.Google.Resource.BigQuery.Tables.Insert
     -- * Request Lenses
     , tiQuotaUser
     , tiPrettyPrint
-    , tiUserIp
+    , tiUserIP
     , tiKey
     , tiDatasetId
     , tiProjectId
-    , tiOauthToken
+    , tiOAuthToken
+    , tiTable
     , tiFields
-    , tiAlt
     ) where
 
 import           Network.Google.BigQuery.Types
@@ -55,10 +55,11 @@ type TablesInsertResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Post '[JSON] Table
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] Table :> Post '[JSON] Table
 
 -- | Creates a new, empty table in the dataset.
 --
@@ -66,13 +67,13 @@ type TablesInsertResource =
 data TablesInsert' = TablesInsert'
     { _tiQuotaUser   :: !(Maybe Text)
     , _tiPrettyPrint :: !Bool
-    , _tiUserIp      :: !(Maybe Text)
-    , _tiKey         :: !(Maybe Text)
+    , _tiUserIP      :: !(Maybe Text)
+    , _tiKey         :: !(Maybe Key)
     , _tiDatasetId   :: !Text
     , _tiProjectId   :: !Text
-    , _tiOauthToken  :: !(Maybe Text)
+    , _tiOAuthToken  :: !(Maybe OAuthToken)
+    , _tiTable       :: !Table
     , _tiFields      :: !(Maybe Text)
-    , _tiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesInsert'' with the minimum fields required to make a request.
@@ -83,7 +84,7 @@ data TablesInsert' = TablesInsert'
 --
 -- * 'tiPrettyPrint'
 --
--- * 'tiUserIp'
+-- * 'tiUserIP'
 --
 -- * 'tiKey'
 --
@@ -91,26 +92,27 @@ data TablesInsert' = TablesInsert'
 --
 -- * 'tiProjectId'
 --
--- * 'tiOauthToken'
+-- * 'tiOAuthToken'
+--
+-- * 'tiTable'
 --
 -- * 'tiFields'
---
--- * 'tiAlt'
 tablesInsert'
     :: Text -- ^ 'datasetId'
     -> Text -- ^ 'projectId'
+    -> Table -- ^ 'Table'
     -> TablesInsert'
-tablesInsert' pTiDatasetId_ pTiProjectId_ =
+tablesInsert' pTiDatasetId_ pTiProjectId_ pTiTable_ =
     TablesInsert'
     { _tiQuotaUser = Nothing
     , _tiPrettyPrint = True
-    , _tiUserIp = Nothing
+    , _tiUserIP = Nothing
     , _tiKey = Nothing
     , _tiDatasetId = pTiDatasetId_
     , _tiProjectId = pTiProjectId_
-    , _tiOauthToken = Nothing
+    , _tiOAuthToken = Nothing
+    , _tiTable = pTiTable_
     , _tiFields = Nothing
-    , _tiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -128,13 +130,13 @@ tiPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tiUserIp :: Lens' TablesInsert' (Maybe Text)
-tiUserIp = lens _tiUserIp (\ s a -> s{_tiUserIp = a})
+tiUserIP :: Lens' TablesInsert' (Maybe Text)
+tiUserIP = lens _tiUserIP (\ s a -> s{_tiUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tiKey :: Lens' TablesInsert' (Maybe Text)
+tiKey :: Lens' TablesInsert' (Maybe Key)
 tiKey = lens _tiKey (\ s a -> s{_tiKey = a})
 
 -- | Dataset ID of the new table
@@ -148,29 +150,34 @@ tiProjectId
   = lens _tiProjectId (\ s a -> s{_tiProjectId = a})
 
 -- | OAuth 2.0 token for the current user.
-tiOauthToken :: Lens' TablesInsert' (Maybe Text)
-tiOauthToken
-  = lens _tiOauthToken (\ s a -> s{_tiOauthToken = a})
+tiOAuthToken :: Lens' TablesInsert' (Maybe OAuthToken)
+tiOAuthToken
+  = lens _tiOAuthToken (\ s a -> s{_tiOAuthToken = a})
+
+-- | Multipart request metadata.
+tiTable :: Lens' TablesInsert' Table
+tiTable = lens _tiTable (\ s a -> s{_tiTable = a})
 
 -- | Selector specifying which fields to include in a partial response.
 tiFields :: Lens' TablesInsert' (Maybe Text)
 tiFields = lens _tiFields (\ s a -> s{_tiFields = a})
 
--- | Data format for the response.
-tiAlt :: Lens' TablesInsert' Alt
-tiAlt = lens _tiAlt (\ s a -> s{_tiAlt = a})
+instance GoogleAuth TablesInsert' where
+        authKey = tiKey . _Just
+        authToken = tiOAuthToken . _Just
 
 instance GoogleRequest TablesInsert' where
         type Rs TablesInsert' = Table
         request = requestWithRoute defReq bigQueryURL
         requestWithRoute r u TablesInsert'{..}
-          = go _tiQuotaUser (Just _tiPrettyPrint) _tiUserIp
+          = go _tiQuotaUser (Just _tiPrettyPrint) _tiUserIP
               _tiKey
               _tiDatasetId
               _tiProjectId
-              _tiOauthToken
+              _tiOAuthToken
               _tiFields
-              (Just _tiAlt)
+              (Just AltJSON)
+              _tiTable
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TablesInsertResource)

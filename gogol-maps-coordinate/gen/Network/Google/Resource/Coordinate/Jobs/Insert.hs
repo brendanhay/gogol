@@ -33,7 +33,7 @@ module Network.Google.Resource.Coordinate.Jobs.Insert
     , jiQuotaUser
     , jiPrettyPrint
     , jiNote
-    , jiUserIp
+    , jiUserIP
     , jiTeamId
     , jiCustomerPhoneNumber
     , jiCustomerName
@@ -41,12 +41,12 @@ module Network.Google.Resource.Coordinate.Jobs.Insert
     , jiAssignee
     , jiLat
     , jiKey
+    , jiJob
     , jiLng
     , jiTitle
-    , jiOauthToken
+    , jiOAuthToken
     , jiFields
     , jiCustomField
-    , jiAlt
     ) where
 
 import           Network.Google.MapsCoordinate.Types
@@ -67,14 +67,15 @@ type JobsInsertResource =
                        QueryParam "address" Text :>
                          QueryParam "assignee" Text :>
                            QueryParam "lat" Double :>
-                             QueryParam "key" Text :>
+                             QueryParam "key" Key :>
                                QueryParam "lng" Double :>
                                  QueryParam "title" Text :>
-                                   QueryParam "oauth_token" Text :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "fields" Text :>
                                        QueryParams "customField" Text :>
-                                         QueryParam "alt" Alt :>
-                                           Post '[JSON] Job
+                                         QueryParam "alt" AltJSON :>
+                                           ReqBody '[JSON] Job :>
+                                             Post '[JSON] Job
 
 -- | Inserts a new job. Only the state field of the job should be set.
 --
@@ -83,20 +84,20 @@ data JobsInsert' = JobsInsert'
     { _jiQuotaUser           :: !(Maybe Text)
     , _jiPrettyPrint         :: !Bool
     , _jiNote                :: !(Maybe Text)
-    , _jiUserIp              :: !(Maybe Text)
+    , _jiUserIP              :: !(Maybe Text)
     , _jiTeamId              :: !Text
     , _jiCustomerPhoneNumber :: !(Maybe Text)
     , _jiCustomerName        :: !(Maybe Text)
     , _jiAddress             :: !Text
     , _jiAssignee            :: !(Maybe Text)
     , _jiLat                 :: !Double
-    , _jiKey                 :: !(Maybe Text)
+    , _jiKey                 :: !(Maybe Key)
+    , _jiJob                 :: !Job
     , _jiLng                 :: !Double
     , _jiTitle               :: !Text
-    , _jiOauthToken          :: !(Maybe Text)
+    , _jiOAuthToken          :: !(Maybe OAuthToken)
     , _jiFields              :: !(Maybe Text)
     , _jiCustomField         :: !(Maybe Text)
-    , _jiAlt                 :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobsInsert'' with the minimum fields required to make a request.
@@ -109,7 +110,7 @@ data JobsInsert' = JobsInsert'
 --
 -- * 'jiNote'
 --
--- * 'jiUserIp'
+-- * 'jiUserIP'
 --
 -- * 'jiTeamId'
 --
@@ -125,30 +126,31 @@ data JobsInsert' = JobsInsert'
 --
 -- * 'jiKey'
 --
+-- * 'jiJob'
+--
 -- * 'jiLng'
 --
 -- * 'jiTitle'
 --
--- * 'jiOauthToken'
+-- * 'jiOAuthToken'
 --
 -- * 'jiFields'
 --
 -- * 'jiCustomField'
---
--- * 'jiAlt'
 jobsInsert'
     :: Text -- ^ 'teamId'
     -> Text -- ^ 'address'
     -> Double -- ^ 'lat'
+    -> Job -- ^ 'Job'
     -> Double -- ^ 'lng'
     -> Text -- ^ 'title'
     -> JobsInsert'
-jobsInsert' pJiTeamId_ pJiAddress_ pJiLat_ pJiLng_ pJiTitle_ =
+jobsInsert' pJiTeamId_ pJiAddress_ pJiLat_ pJiJob_ pJiLng_ pJiTitle_ =
     JobsInsert'
     { _jiQuotaUser = Nothing
     , _jiPrettyPrint = True
     , _jiNote = Nothing
-    , _jiUserIp = Nothing
+    , _jiUserIP = Nothing
     , _jiTeamId = pJiTeamId_
     , _jiCustomerPhoneNumber = Nothing
     , _jiCustomerName = Nothing
@@ -156,12 +158,12 @@ jobsInsert' pJiTeamId_ pJiAddress_ pJiLat_ pJiLng_ pJiTitle_ =
     , _jiAssignee = Nothing
     , _jiLat = pJiLat_
     , _jiKey = Nothing
+    , _jiJob = pJiJob_
     , _jiLng = pJiLng_
     , _jiTitle = pJiTitle_
-    , _jiOauthToken = Nothing
+    , _jiOAuthToken = Nothing
     , _jiFields = Nothing
     , _jiCustomField = Nothing
-    , _jiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -183,8 +185,8 @@ jiNote = lens _jiNote (\ s a -> s{_jiNote = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-jiUserIp :: Lens' JobsInsert' (Maybe Text)
-jiUserIp = lens _jiUserIp (\ s a -> s{_jiUserIp = a})
+jiUserIP :: Lens' JobsInsert' (Maybe Text)
+jiUserIP = lens _jiUserIP (\ s a -> s{_jiUserIP = a})
 
 -- | Team ID
 jiTeamId :: Lens' JobsInsert' Text
@@ -219,8 +221,12 @@ jiLat = lens _jiLat (\ s a -> s{_jiLat = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-jiKey :: Lens' JobsInsert' (Maybe Text)
+jiKey :: Lens' JobsInsert' (Maybe Key)
 jiKey = lens _jiKey (\ s a -> s{_jiKey = a})
+
+-- | Multipart request metadata.
+jiJob :: Lens' JobsInsert' Job
+jiJob = lens _jiJob (\ s a -> s{_jiJob = a})
 
 -- | The longitude coordinate of this job\'s location.
 jiLng :: Lens' JobsInsert' Double
@@ -231,9 +237,9 @@ jiTitle :: Lens' JobsInsert' Text
 jiTitle = lens _jiTitle (\ s a -> s{_jiTitle = a})
 
 -- | OAuth 2.0 token for the current user.
-jiOauthToken :: Lens' JobsInsert' (Maybe Text)
-jiOauthToken
-  = lens _jiOauthToken (\ s a -> s{_jiOauthToken = a})
+jiOAuthToken :: Lens' JobsInsert' (Maybe OAuthToken)
+jiOAuthToken
+  = lens _jiOAuthToken (\ s a -> s{_jiOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 jiFields :: Lens' JobsInsert' (Maybe Text)
@@ -250,16 +256,16 @@ jiCustomField
   = lens _jiCustomField
       (\ s a -> s{_jiCustomField = a})
 
--- | Data format for the response.
-jiAlt :: Lens' JobsInsert' Alt
-jiAlt = lens _jiAlt (\ s a -> s{_jiAlt = a})
+instance GoogleAuth JobsInsert' where
+        authKey = jiKey . _Just
+        authToken = jiOAuthToken . _Just
 
 instance GoogleRequest JobsInsert' where
         type Rs JobsInsert' = Job
         request = requestWithRoute defReq mapsCoordinateURL
         requestWithRoute r u JobsInsert'{..}
           = go _jiQuotaUser (Just _jiPrettyPrint) _jiNote
-              _jiUserIp
+              _jiUserIP
               _jiTeamId
               _jiCustomerPhoneNumber
               _jiCustomerName
@@ -269,10 +275,11 @@ instance GoogleRequest JobsInsert' where
               _jiKey
               (Just _jiLng)
               (Just _jiTitle)
-              _jiOauthToken
+              _jiOAuthToken
               _jiFields
               _jiCustomField
-              (Just _jiAlt)
+              (Just AltJSON)
+              _jiJob
           where go
                   = clientWithRoute (Proxy :: Proxy JobsInsertResource)
                       r

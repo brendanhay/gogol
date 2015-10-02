@@ -54,7 +54,7 @@ module Network.Google.Partners.Types
     -- * DebugInfo
     , DebugInfo
     , debugInfo
-    , diServiceUrl
+    , diServiceURL
     , diServerTraceInfo
     , diServerInfo
 
@@ -67,8 +67,8 @@ module Network.Google.Partners.Types
     -- * PublicProfile
     , PublicProfile
     , publicProfile
-    , ppUrl
-    , ppDisplayImageUrl
+    , ppURL
+    , ppDisplayImageURL
     , ppDisplayName
     , ppId
 
@@ -141,7 +141,7 @@ module Network.Google.Partners.Types
     -- * UserOverrides
     , UserOverrides
     , userOverrides
-    , uoIpAddress
+    , uoIPAddress
     , uoUserId
 
     -- * LogMessageRequestClientInfo
@@ -163,7 +163,7 @@ module Network.Google.Partners.Types
     , lMinMonthlyBudget
     , lId
     , lComments
-    , lWebsiteUrl
+    , lWebsiteURL
     , lType
     , lGpsMotivations
 
@@ -179,7 +179,7 @@ module Network.Google.Partners.Types
     , cCertificationStatuses
     , cRanks
     , cId
-    , cWebsiteUrl
+    , cWebsiteURL
     , cLocations
     , cServices
 
@@ -193,7 +193,7 @@ module Network.Google.Partners.Types
     , logUserEventRequest
     , luerEventCategory
     , luerRequestMetadata
-    , luerUrl
+    , luerURL
     , luerEventScope
     , luerLead
     , luerEventDatas

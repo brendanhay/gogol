@@ -32,14 +32,13 @@ module Network.Google.Resource.Storage.ObjectAccessControls.List
     -- * Request Lenses
     , oaclQuotaUser
     , oaclPrettyPrint
-    , oaclUserIp
+    , oaclUserIP
     , oaclBucket
     , oaclKey
     , oaclObject
-    , oaclOauthToken
+    , oaclOAuthToken
     , oaclGeneration
     , oaclFields
-    , oaclAlt
     ) where
 
 import           Network.Google.Prelude
@@ -56,11 +55,11 @@ type ObjectAccessControlsListResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "generation" Word64 :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :>
+                             QueryParam "alt" AltJSON :>
                                Get '[JSON] ObjectAccessControls
 
 -- | Retrieves ACL entries on the specified object.
@@ -69,14 +68,13 @@ type ObjectAccessControlsListResource =
 data ObjectAccessControlsList' = ObjectAccessControlsList'
     { _oaclQuotaUser   :: !(Maybe Text)
     , _oaclPrettyPrint :: !Bool
-    , _oaclUserIp      :: !(Maybe Text)
+    , _oaclUserIP      :: !(Maybe Text)
     , _oaclBucket      :: !Text
-    , _oaclKey         :: !(Maybe Text)
+    , _oaclKey         :: !(Maybe Key)
     , _oaclObject      :: !Text
-    , _oaclOauthToken  :: !(Maybe Text)
+    , _oaclOAuthToken  :: !(Maybe OAuthToken)
     , _oaclGeneration  :: !(Maybe Word64)
     , _oaclFields      :: !(Maybe Text)
-    , _oaclAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectAccessControlsList'' with the minimum fields required to make a request.
@@ -87,7 +85,7 @@ data ObjectAccessControlsList' = ObjectAccessControlsList'
 --
 -- * 'oaclPrettyPrint'
 --
--- * 'oaclUserIp'
+-- * 'oaclUserIP'
 --
 -- * 'oaclBucket'
 --
@@ -95,13 +93,11 @@ data ObjectAccessControlsList' = ObjectAccessControlsList'
 --
 -- * 'oaclObject'
 --
--- * 'oaclOauthToken'
+-- * 'oaclOAuthToken'
 --
 -- * 'oaclGeneration'
 --
 -- * 'oaclFields'
---
--- * 'oaclAlt'
 objectAccessControlsList'
     :: Text -- ^ 'bucket'
     -> Text -- ^ 'object'
@@ -110,14 +106,13 @@ objectAccessControlsList' pOaclBucket_ pOaclObject_ =
     ObjectAccessControlsList'
     { _oaclQuotaUser = Nothing
     , _oaclPrettyPrint = True
-    , _oaclUserIp = Nothing
+    , _oaclUserIP = Nothing
     , _oaclBucket = pOaclBucket_
     , _oaclKey = Nothing
     , _oaclObject = pOaclObject_
-    , _oaclOauthToken = Nothing
+    , _oaclOAuthToken = Nothing
     , _oaclGeneration = Nothing
     , _oaclFields = Nothing
-    , _oaclAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -136,9 +131,9 @@ oaclPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-oaclUserIp :: Lens' ObjectAccessControlsList' (Maybe Text)
-oaclUserIp
-  = lens _oaclUserIp (\ s a -> s{_oaclUserIp = a})
+oaclUserIP :: Lens' ObjectAccessControlsList' (Maybe Text)
+oaclUserIP
+  = lens _oaclUserIP (\ s a -> s{_oaclUserIP = a})
 
 -- | Name of a bucket.
 oaclBucket :: Lens' ObjectAccessControlsList' Text
@@ -148,7 +143,7 @@ oaclBucket
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-oaclKey :: Lens' ObjectAccessControlsList' (Maybe Text)
+oaclKey :: Lens' ObjectAccessControlsList' (Maybe Key)
 oaclKey = lens _oaclKey (\ s a -> s{_oaclKey = a})
 
 -- | Name of the object.
@@ -157,10 +152,10 @@ oaclObject
   = lens _oaclObject (\ s a -> s{_oaclObject = a})
 
 -- | OAuth 2.0 token for the current user.
-oaclOauthToken :: Lens' ObjectAccessControlsList' (Maybe Text)
-oaclOauthToken
-  = lens _oaclOauthToken
-      (\ s a -> s{_oaclOauthToken = a})
+oaclOAuthToken :: Lens' ObjectAccessControlsList' (Maybe OAuthToken)
+oaclOAuthToken
+  = lens _oaclOAuthToken
+      (\ s a -> s{_oaclOAuthToken = a})
 
 -- | If present, selects a specific revision of this object (as opposed to
 -- the latest version, the default).
@@ -174,9 +169,9 @@ oaclFields :: Lens' ObjectAccessControlsList' (Maybe Text)
 oaclFields
   = lens _oaclFields (\ s a -> s{_oaclFields = a})
 
--- | Data format for the response.
-oaclAlt :: Lens' ObjectAccessControlsList' Alt
-oaclAlt = lens _oaclAlt (\ s a -> s{_oaclAlt = a})
+instance GoogleAuth ObjectAccessControlsList' where
+        authKey = oaclKey . _Just
+        authToken = oaclOAuthToken . _Just
 
 instance GoogleRequest ObjectAccessControlsList'
          where
@@ -185,14 +180,14 @@ instance GoogleRequest ObjectAccessControlsList'
         request = requestWithRoute defReq storageURL
         requestWithRoute r u ObjectAccessControlsList'{..}
           = go _oaclQuotaUser (Just _oaclPrettyPrint)
-              _oaclUserIp
+              _oaclUserIP
               _oaclBucket
               _oaclKey
               _oaclObject
-              _oaclOauthToken
+              _oaclOAuthToken
               _oaclGeneration
               _oaclFields
-              (Just _oaclAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ObjectAccessControlsListResource)

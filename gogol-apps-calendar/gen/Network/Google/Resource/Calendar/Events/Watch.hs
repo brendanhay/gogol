@@ -38,23 +38,23 @@ module Network.Google.Resource.Calendar.Events.Watch
     , ewOrderBy
     , ewSingleEvents
     , ewPrivateExtendedProperty
-    , ewUserIp
+    , ewUserIP
+    , ewChannel
     , ewShowDeleted
     , ewQ
     , ewSharedExtendedProperty
     , ewMaxAttendees
     , ewKey
-    , ewICalUID
+    , ewICalUId
     , ewUpdatedMin
     , ewPageToken
     , ewTimeZone
-    , ewOauthToken
+    , ewOAuthToken
     , ewShowHiddenInvitations
     , ewMaxResults
     , ewAlwaysIncludeEmail
     , ewTimeMax
     , ewFields
-    , ewAlt
     ) where
 
 import           Network.Google.AppsCalendar.Types
@@ -79,12 +79,14 @@ type EventsWatchResource =
                                QueryParam "q" Text :>
                                  QueryParams "sharedExtendedProperty" Text :>
                                    QueryParam "maxAttendees" Int32 :>
-                                     QueryParam "key" Text :>
+                                     QueryParam "key" Key :>
                                        QueryParam "iCalUID" Text :>
                                          QueryParam "updatedMin" UTCTime :>
                                            QueryParam "pageToken" Text :>
                                              QueryParam "timeZone" Text :>
-                                               QueryParam "oauth_token" Text :>
+                                               QueryParam "oauth_token"
+                                                 OAuthToken
+                                                 :>
                                                  QueryParam
                                                    "showHiddenInvitations"
                                                    Bool
@@ -101,10 +103,14 @@ type EventsWatchResource =
                                                          QueryParam "fields"
                                                            Text
                                                            :>
-                                                           QueryParam "alt" Alt
+                                                           QueryParam "alt"
+                                                             AltJSON
                                                              :>
-                                                             Post '[JSON]
+                                                             ReqBody '[JSON]
                                                                Channel
+                                                               :>
+                                                               Post '[JSON]
+                                                                 Channel
 
 -- | Watch for changes to Events resources.
 --
@@ -118,23 +124,23 @@ data EventsWatch' = EventsWatch'
     , _ewOrderBy                 :: !(Maybe CalendarEventsWatchOrderBy)
     , _ewSingleEvents            :: !(Maybe Bool)
     , _ewPrivateExtendedProperty :: !(Maybe Text)
-    , _ewUserIp                  :: !(Maybe Text)
+    , _ewUserIP                  :: !(Maybe Text)
+    , _ewChannel                 :: !Channel
     , _ewShowDeleted             :: !(Maybe Bool)
     , _ewQ                       :: !(Maybe Text)
     , _ewSharedExtendedProperty  :: !(Maybe Text)
     , _ewMaxAttendees            :: !(Maybe Int32)
-    , _ewKey                     :: !(Maybe Text)
-    , _ewICalUID                 :: !(Maybe Text)
+    , _ewKey                     :: !(Maybe Key)
+    , _ewICalUId                 :: !(Maybe Text)
     , _ewUpdatedMin              :: !(Maybe UTCTime)
     , _ewPageToken               :: !(Maybe Text)
     , _ewTimeZone                :: !(Maybe Text)
-    , _ewOauthToken              :: !(Maybe Text)
+    , _ewOAuthToken              :: !(Maybe OAuthToken)
     , _ewShowHiddenInvitations   :: !(Maybe Bool)
     , _ewMaxResults              :: !(Maybe Int32)
     , _ewAlwaysIncludeEmail      :: !(Maybe Bool)
     , _ewTimeMax                 :: !(Maybe UTCTime)
     , _ewFields                  :: !(Maybe Text)
-    , _ewAlt                     :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsWatch'' with the minimum fields required to make a request.
@@ -157,7 +163,9 @@ data EventsWatch' = EventsWatch'
 --
 -- * 'ewPrivateExtendedProperty'
 --
--- * 'ewUserIp'
+-- * 'ewUserIP'
+--
+-- * 'ewChannel'
 --
 -- * 'ewShowDeleted'
 --
@@ -169,7 +177,7 @@ data EventsWatch' = EventsWatch'
 --
 -- * 'ewKey'
 --
--- * 'ewICalUID'
+-- * 'ewICalUId'
 --
 -- * 'ewUpdatedMin'
 --
@@ -177,7 +185,7 @@ data EventsWatch' = EventsWatch'
 --
 -- * 'ewTimeZone'
 --
--- * 'ewOauthToken'
+-- * 'ewOAuthToken'
 --
 -- * 'ewShowHiddenInvitations'
 --
@@ -188,12 +196,11 @@ data EventsWatch' = EventsWatch'
 -- * 'ewTimeMax'
 --
 -- * 'ewFields'
---
--- * 'ewAlt'
 eventsWatch'
     :: Text -- ^ 'calendarId'
+    -> Channel -- ^ 'Channel'
     -> EventsWatch'
-eventsWatch' pEwCalendarId_ =
+eventsWatch' pEwCalendarId_ pEwChannel_ =
     EventsWatch'
     { _ewSyncToken = Nothing
     , _ewQuotaUser = Nothing
@@ -203,23 +210,23 @@ eventsWatch' pEwCalendarId_ =
     , _ewOrderBy = Nothing
     , _ewSingleEvents = Nothing
     , _ewPrivateExtendedProperty = Nothing
-    , _ewUserIp = Nothing
+    , _ewUserIP = Nothing
+    , _ewChannel = pEwChannel_
     , _ewShowDeleted = Nothing
     , _ewQ = Nothing
     , _ewSharedExtendedProperty = Nothing
     , _ewMaxAttendees = Nothing
     , _ewKey = Nothing
-    , _ewICalUID = Nothing
+    , _ewICalUId = Nothing
     , _ewUpdatedMin = Nothing
     , _ewPageToken = Nothing
     , _ewTimeZone = Nothing
-    , _ewOauthToken = Nothing
+    , _ewOAuthToken = Nothing
     , _ewShowHiddenInvitations = Nothing
     , _ewMaxResults = Nothing
     , _ewAlwaysIncludeEmail = Nothing
     , _ewTimeMax = Nothing
     , _ewFields = Nothing
-    , _ewAlt = JSON
     }
 
 -- | Token obtained from the nextSyncToken field returned on the last page of
@@ -291,8 +298,13 @@ ewPrivateExtendedProperty
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ewUserIp :: Lens' EventsWatch' (Maybe Text)
-ewUserIp = lens _ewUserIp (\ s a -> s{_ewUserIp = a})
+ewUserIP :: Lens' EventsWatch' (Maybe Text)
+ewUserIP = lens _ewUserIP (\ s a -> s{_ewUserIP = a})
+
+-- | Multipart request metadata.
+ewChannel :: Lens' EventsWatch' Channel
+ewChannel
+  = lens _ewChannel (\ s a -> s{_ewChannel = a})
 
 -- | Whether to include deleted events (with status equals \"cancelled\") in
 -- the result. Cancelled instances of recurring events (but not the
@@ -329,14 +341,14 @@ ewMaxAttendees
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ewKey :: Lens' EventsWatch' (Maybe Text)
+ewKey :: Lens' EventsWatch' (Maybe Key)
 ewKey = lens _ewKey (\ s a -> s{_ewKey = a})
 
 -- | Specifies event ID in the iCalendar format to be included in the
 -- response. Optional.
-ewICalUID :: Lens' EventsWatch' (Maybe Text)
-ewICalUID
-  = lens _ewICalUID (\ s a -> s{_ewICalUID = a})
+ewICalUId :: Lens' EventsWatch' (Maybe Text)
+ewICalUId
+  = lens _ewICalUId (\ s a -> s{_ewICalUId = a})
 
 -- | Lower bound for an event\'s last modification time (as a RFC3339
 -- timestamp) to filter by. When specified, entries deleted since this time
@@ -358,9 +370,9 @@ ewTimeZone
   = lens _ewTimeZone (\ s a -> s{_ewTimeZone = a})
 
 -- | OAuth 2.0 token for the current user.
-ewOauthToken :: Lens' EventsWatch' (Maybe Text)
-ewOauthToken
-  = lens _ewOauthToken (\ s a -> s{_ewOauthToken = a})
+ewOAuthToken :: Lens' EventsWatch' (Maybe OAuthToken)
+ewOAuthToken
+  = lens _ewOAuthToken (\ s a -> s{_ewOAuthToken = a})
 
 -- | Whether to include hidden invitations in the result. Optional. The
 -- default is False.
@@ -400,9 +412,9 @@ ewTimeMax
 ewFields :: Lens' EventsWatch' (Maybe Text)
 ewFields = lens _ewFields (\ s a -> s{_ewFields = a})
 
--- | Data format for the response.
-ewAlt :: Lens' EventsWatch' Alt
-ewAlt = lens _ewAlt (\ s a -> s{_ewAlt = a})
+instance GoogleAuth EventsWatch' where
+        authKey = ewKey . _Just
+        authToken = ewOAuthToken . _Just
 
 instance GoogleRequest EventsWatch' where
         type Rs EventsWatch' = Channel
@@ -414,23 +426,24 @@ instance GoogleRequest EventsWatch' where
               _ewOrderBy
               _ewSingleEvents
               _ewPrivateExtendedProperty
-              _ewUserIp
+              _ewUserIP
               _ewShowDeleted
               _ewQ
               _ewSharedExtendedProperty
               _ewMaxAttendees
               _ewKey
-              _ewICalUID
+              _ewICalUId
               _ewUpdatedMin
               _ewPageToken
               _ewTimeZone
-              _ewOauthToken
+              _ewOAuthToken
               _ewShowHiddenInvitations
               _ewMaxResults
               _ewAlwaysIncludeEmail
               _ewTimeMax
               _ewFields
-              (Just _ewAlt)
+              (Just AltJSON)
+              _ewChannel
           where go
                   = clientWithRoute
                       (Proxy :: Proxy EventsWatchResource)

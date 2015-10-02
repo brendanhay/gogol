@@ -33,13 +33,12 @@ module Network.Google.Resource.Gmail.Users.Threads.Delete
     -- * Request Lenses
     , utdQuotaUser
     , utdPrettyPrint
-    , utdUserIp
+    , utdUserIP
     , utdUserId
     , utdKey
     , utdId
-    , utdOauthToken
+    , utdOAuthToken
     , utdFields
-    , utdAlt
     ) where
 
 import           Network.Google.Gmail.Types
@@ -54,10 +53,10 @@ type UsersThreadsDeleteResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Delete '[JSON] ()
+                       QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Immediately and permanently deletes the specified thread. This operation
 -- cannot be undone. Prefer threads.trash instead.
@@ -66,13 +65,12 @@ type UsersThreadsDeleteResource =
 data UsersThreadsDelete' = UsersThreadsDelete'
     { _utdQuotaUser   :: !(Maybe Text)
     , _utdPrettyPrint :: !Bool
-    , _utdUserIp      :: !(Maybe Text)
+    , _utdUserIP      :: !(Maybe Text)
     , _utdUserId      :: !Text
-    , _utdKey         :: !(Maybe Text)
+    , _utdKey         :: !(Maybe Key)
     , _utdId          :: !Text
-    , _utdOauthToken  :: !(Maybe Text)
+    , _utdOAuthToken  :: !(Maybe OAuthToken)
     , _utdFields      :: !(Maybe Text)
-    , _utdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersThreadsDelete'' with the minimum fields required to make a request.
@@ -83,7 +81,7 @@ data UsersThreadsDelete' = UsersThreadsDelete'
 --
 -- * 'utdPrettyPrint'
 --
--- * 'utdUserIp'
+-- * 'utdUserIP'
 --
 -- * 'utdUserId'
 --
@@ -91,11 +89,9 @@ data UsersThreadsDelete' = UsersThreadsDelete'
 --
 -- * 'utdId'
 --
--- * 'utdOauthToken'
+-- * 'utdOAuthToken'
 --
 -- * 'utdFields'
---
--- * 'utdAlt'
 usersThreadsDelete'
     :: Text -- ^ 'id'
     -> Text
@@ -104,13 +100,12 @@ usersThreadsDelete' pUtdUserId_ pUtdId_ =
     UsersThreadsDelete'
     { _utdQuotaUser = Nothing
     , _utdPrettyPrint = True
-    , _utdUserIp = Nothing
+    , _utdUserIP = Nothing
     , _utdUserId = pUtdUserId_
     , _utdKey = Nothing
     , _utdId = pUtdId_
-    , _utdOauthToken = Nothing
+    , _utdOAuthToken = Nothing
     , _utdFields = Nothing
-    , _utdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -128,9 +123,9 @@ utdPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-utdUserIp :: Lens' UsersThreadsDelete' (Maybe Text)
-utdUserIp
-  = lens _utdUserIp (\ s a -> s{_utdUserIp = a})
+utdUserIP :: Lens' UsersThreadsDelete' (Maybe Text)
+utdUserIP
+  = lens _utdUserIP (\ s a -> s{_utdUserIP = a})
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
@@ -141,7 +136,7 @@ utdUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-utdKey :: Lens' UsersThreadsDelete' (Maybe Text)
+utdKey :: Lens' UsersThreadsDelete' (Maybe Key)
 utdKey = lens _utdKey (\ s a -> s{_utdKey = a})
 
 -- | ID of the Thread to delete.
@@ -149,31 +144,31 @@ utdId :: Lens' UsersThreadsDelete' Text
 utdId = lens _utdId (\ s a -> s{_utdId = a})
 
 -- | OAuth 2.0 token for the current user.
-utdOauthToken :: Lens' UsersThreadsDelete' (Maybe Text)
-utdOauthToken
-  = lens _utdOauthToken
-      (\ s a -> s{_utdOauthToken = a})
+utdOAuthToken :: Lens' UsersThreadsDelete' (Maybe OAuthToken)
+utdOAuthToken
+  = lens _utdOAuthToken
+      (\ s a -> s{_utdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 utdFields :: Lens' UsersThreadsDelete' (Maybe Text)
 utdFields
   = lens _utdFields (\ s a -> s{_utdFields = a})
 
--- | Data format for the response.
-utdAlt :: Lens' UsersThreadsDelete' Alt
-utdAlt = lens _utdAlt (\ s a -> s{_utdAlt = a})
+instance GoogleAuth UsersThreadsDelete' where
+        authKey = utdKey . _Just
+        authToken = utdOAuthToken . _Just
 
 instance GoogleRequest UsersThreadsDelete' where
         type Rs UsersThreadsDelete' = ()
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersThreadsDelete'{..}
-          = go _utdQuotaUser (Just _utdPrettyPrint) _utdUserIp
+          = go _utdQuotaUser (Just _utdPrettyPrint) _utdUserIP
               _utdUserId
               _utdKey
               _utdId
-              _utdOauthToken
+              _utdOAuthToken
               _utdFields
-              (Just _utdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersThreadsDeleteResource)

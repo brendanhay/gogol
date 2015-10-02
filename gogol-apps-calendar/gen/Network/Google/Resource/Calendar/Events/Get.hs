@@ -33,15 +33,14 @@ module Network.Google.Resource.Calendar.Events.Get
     , egQuotaUser
     , egCalendarId
     , egPrettyPrint
-    , egUserIp
+    , egUserIP
     , egMaxAttendees
     , egKey
     , egTimeZone
-    , egOauthToken
+    , egOAuthToken
     , egAlwaysIncludeEmail
     , egEventId
     , egFields
-    , egAlt
     ) where
 
 import           Network.Google.AppsCalendar.Types
@@ -58,12 +57,12 @@ type EventsGetResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "maxAttendees" Int32 :>
-                     QueryParam "key" Text :>
+                     QueryParam "key" Key :>
                        QueryParam "timeZone" Text :>
-                         QueryParam "oauth_token" Text :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "alwaysIncludeEmail" Bool :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :> Get '[JSON] Event
+                               QueryParam "alt" AltJSON :> Get '[JSON] Event
 
 -- | Returns an event.
 --
@@ -72,15 +71,14 @@ data EventsGet' = EventsGet'
     { _egQuotaUser          :: !(Maybe Text)
     , _egCalendarId         :: !Text
     , _egPrettyPrint        :: !Bool
-    , _egUserIp             :: !(Maybe Text)
+    , _egUserIP             :: !(Maybe Text)
     , _egMaxAttendees       :: !(Maybe Int32)
-    , _egKey                :: !(Maybe Text)
+    , _egKey                :: !(Maybe Key)
     , _egTimeZone           :: !(Maybe Text)
-    , _egOauthToken         :: !(Maybe Text)
+    , _egOAuthToken         :: !(Maybe OAuthToken)
     , _egAlwaysIncludeEmail :: !(Maybe Bool)
     , _egEventId            :: !Text
     , _egFields             :: !(Maybe Text)
-    , _egAlt                :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsGet'' with the minimum fields required to make a request.
@@ -93,7 +91,7 @@ data EventsGet' = EventsGet'
 --
 -- * 'egPrettyPrint'
 --
--- * 'egUserIp'
+-- * 'egUserIP'
 --
 -- * 'egMaxAttendees'
 --
@@ -101,15 +99,13 @@ data EventsGet' = EventsGet'
 --
 -- * 'egTimeZone'
 --
--- * 'egOauthToken'
+-- * 'egOAuthToken'
 --
 -- * 'egAlwaysIncludeEmail'
 --
 -- * 'egEventId'
 --
 -- * 'egFields'
---
--- * 'egAlt'
 eventsGet'
     :: Text -- ^ 'calendarId'
     -> Text -- ^ 'eventId'
@@ -119,15 +115,14 @@ eventsGet' pEgCalendarId_ pEgEventId_ =
     { _egQuotaUser = Nothing
     , _egCalendarId = pEgCalendarId_
     , _egPrettyPrint = True
-    , _egUserIp = Nothing
+    , _egUserIP = Nothing
     , _egMaxAttendees = Nothing
     , _egKey = Nothing
     , _egTimeZone = Nothing
-    , _egOauthToken = Nothing
+    , _egOAuthToken = Nothing
     , _egAlwaysIncludeEmail = Nothing
     , _egEventId = pEgEventId_
     , _egFields = Nothing
-    , _egAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,8 +147,8 @@ egPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-egUserIp :: Lens' EventsGet' (Maybe Text)
-egUserIp = lens _egUserIp (\ s a -> s{_egUserIp = a})
+egUserIP :: Lens' EventsGet' (Maybe Text)
+egUserIP = lens _egUserIP (\ s a -> s{_egUserIP = a})
 
 -- | The maximum number of attendees to include in the response. If there are
 -- more than the specified number of attendees, only the participant is
@@ -166,7 +161,7 @@ egMaxAttendees
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-egKey :: Lens' EventsGet' (Maybe Text)
+egKey :: Lens' EventsGet' (Maybe Key)
 egKey = lens _egKey (\ s a -> s{_egKey = a})
 
 -- | Time zone used in the response. Optional. The default is the time zone
@@ -176,9 +171,9 @@ egTimeZone
   = lens _egTimeZone (\ s a -> s{_egTimeZone = a})
 
 -- | OAuth 2.0 token for the current user.
-egOauthToken :: Lens' EventsGet' (Maybe Text)
-egOauthToken
-  = lens _egOauthToken (\ s a -> s{_egOauthToken = a})
+egOAuthToken :: Lens' EventsGet' (Maybe OAuthToken)
+egOAuthToken
+  = lens _egOAuthToken (\ s a -> s{_egOAuthToken = a})
 
 -- | Whether to always include a value in the email field for the organizer,
 -- creator and attendees, even if no real email is available (i.e. a
@@ -200,24 +195,24 @@ egEventId
 egFields :: Lens' EventsGet' (Maybe Text)
 egFields = lens _egFields (\ s a -> s{_egFields = a})
 
--- | Data format for the response.
-egAlt :: Lens' EventsGet' Alt
-egAlt = lens _egAlt (\ s a -> s{_egAlt = a})
+instance GoogleAuth EventsGet' where
+        authKey = egKey . _Just
+        authToken = egOAuthToken . _Just
 
 instance GoogleRequest EventsGet' where
         type Rs EventsGet' = Event
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u EventsGet'{..}
           = go _egQuotaUser _egCalendarId (Just _egPrettyPrint)
-              _egUserIp
+              _egUserIP
               _egMaxAttendees
               _egKey
               _egTimeZone
-              _egOauthToken
+              _egOAuthToken
               _egAlwaysIncludeEmail
               _egEventId
               _egFields
-              (Just _egAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy EventsGetResource)
                       r

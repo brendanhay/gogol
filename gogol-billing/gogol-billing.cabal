@@ -33,11 +33,11 @@ library
     exposed-modules:
           Network.Google.Billing
         , Network.Google.Billing.Types
-        , Network.Google.Resource.Cloudbilling.BillingAccounts.Get
-        , Network.Google.Resource.Cloudbilling.BillingAccounts.List
-        , Network.Google.Resource.Cloudbilling.BillingAccounts.Projects.List
-        , Network.Google.Resource.Cloudbilling.Projects.GetBillingInfo
-        , Network.Google.Resource.Cloudbilling.Projects.UpdateBillingInfo
+        , Network.Google.Resource.CloudBilling.BillingAccounts.Get
+        , Network.Google.Resource.CloudBilling.BillingAccounts.List
+        , Network.Google.Resource.CloudBilling.BillingAccounts.Projects.List
+        , Network.Google.Resource.CloudBilling.Projects.GetBillingInfo
+        , Network.Google.Resource.CloudBilling.Projects.UpdateBillingInfo
 
     other-modules:
           Network.Google.Billing.Types.Product

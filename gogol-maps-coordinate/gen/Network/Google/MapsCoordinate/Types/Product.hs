@@ -22,10 +22,10 @@ import           Network.Google.Prelude
 --
 -- /See:/ 'locationListResponse' smart constructor.
 data LocationListResponse = LocationListResponse
-    { _llrTokenPagination :: !(Maybe (Maybe TokenPagination))
+    { _llrTokenPagination :: !(Maybe TokenPagination)
     , _llrNextPageToken   :: !(Maybe Text)
     , _llrKind            :: !Text
-    , _llrItems           :: !(Maybe [Maybe LocationRecord])
+    , _llrItems           :: !(Maybe [LocationRecord])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LocationListResponse' with the minimum fields required to make a request.
@@ -50,7 +50,7 @@ locationListResponse =
     }
 
 -- | Pagination information for token pagination.
-llrTokenPagination :: Lens' LocationListResponse (Maybe (Maybe TokenPagination))
+llrTokenPagination :: Lens' LocationListResponse (Maybe TokenPagination)
 llrTokenPagination
   = lens _llrTokenPagination
       (\ s a -> s{_llrTokenPagination = a})
@@ -66,7 +66,7 @@ llrKind :: Lens' LocationListResponse Text
 llrKind = lens _llrKind (\ s a -> s{_llrKind = a})
 
 -- | Locations in the collection.
-llrItems :: Lens' LocationListResponse [Maybe LocationRecord]
+llrItems :: Lens' LocationListResponse [LocationRecord]
 llrItems
   = lens _llrItems (\ s a -> s{_llrItems = a}) .
       _Default
@@ -95,7 +95,7 @@ instance ToJSON LocationListResponse where
 -- /See:/ 'workerListResponse' smart constructor.
 data WorkerListResponse = WorkerListResponse
     { _wlrKind  :: !Text
-    , _wlrItems :: !(Maybe [Maybe Worker])
+    , _wlrItems :: !(Maybe [Worker])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WorkerListResponse' with the minimum fields required to make a request.
@@ -118,7 +118,7 @@ wlrKind :: Lens' WorkerListResponse Text
 wlrKind = lens _wlrKind (\ s a -> s{_wlrKind = a})
 
 -- | Workers in the collection.
-wlrItems :: Lens' WorkerListResponse [Maybe Worker]
+wlrItems :: Lens' WorkerListResponse [Worker]
 wlrItems
   = lens _wlrItems (\ s a -> s{_wlrItems = a}) .
       _Default
@@ -349,14 +349,14 @@ instance ToJSON Schedule where
 --
 -- /See:/ 'jobState' smart constructor.
 data JobState = JobState
-    { _jsLocation            :: !(Maybe (Maybe Location))
+    { _jsLocation            :: !(Maybe Location)
     , _jsProgress            :: !(Maybe Text)
     , _jsNote                :: !(Maybe [Text])
     , _jsKind                :: !Text
     , _jsCustomerPhoneNumber :: !(Maybe Text)
     , _jsCustomerName        :: !(Maybe Text)
     , _jsAssignee            :: !(Maybe Text)
-    , _jsCustomFields        :: !(Maybe (Maybe CustomFields))
+    , _jsCustomFields        :: !(Maybe CustomFields)
     , _jsTitle               :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -397,7 +397,7 @@ jobState =
     }
 
 -- | Job location.
-jsLocation :: Lens' JobState (Maybe (Maybe Location))
+jsLocation :: Lens' JobState (Maybe Location)
 jsLocation
   = lens _jsLocation (\ s a -> s{_jsLocation = a})
 
@@ -435,7 +435,7 @@ jsAssignee
   = lens _jsAssignee (\ s a -> s{_jsAssignee = a})
 
 -- | Custom fields.
-jsCustomFields :: Lens' JobState (Maybe (Maybe CustomFields))
+jsCustomFields :: Lens' JobState (Maybe CustomFields)
 jsCustomFields
   = lens _jsCustomFields
       (\ s a -> s{_jsCustomFields = a})
@@ -481,7 +481,7 @@ data CustomFieldDef = CustomFieldDef
     , _cfdName                :: !(Maybe Text)
     , _cfdRequiredForCheckout :: !(Maybe Bool)
     , _cfdId                  :: !(Maybe Int64)
-    , _cfdEnumitems           :: !(Maybe [Maybe EnumItemDef])
+    , _cfdEnumitems           :: !(Maybe [EnumItemDef])
     , _cfdType                :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -541,7 +541,7 @@ cfdId = lens _cfdId (\ s a -> s{_cfdId = a})
 -- | List of enum items for this custom field. Populated only if the field
 -- type is enum. Enum fields appear as \'lists\' in the Coordinate web and
 -- mobile UI.
-cfdEnumitems :: Lens' CustomFieldDef [Maybe EnumItemDef]
+cfdEnumitems :: Lens' CustomFieldDef [EnumItemDef]
 cfdEnumitems
   = lens _cfdEnumitems (\ s a -> s{_cfdEnumitems = a})
       . _Default
@@ -582,7 +582,7 @@ instance ToJSON CustomFieldDef where
 data JobListResponse = JobListResponse
     { _jlrNextPageToken :: !(Maybe Text)
     , _jlrKind          :: !Text
-    , _jlrItems         :: !(Maybe [Maybe Job])
+    , _jlrItems         :: !(Maybe [Job])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobListResponse' with the minimum fields required to make a request.
@@ -614,7 +614,7 @@ jlrKind :: Lens' JobListResponse Text
 jlrKind = lens _jlrKind (\ s a -> s{_jlrKind = a})
 
 -- | Jobs in the collection.
-jlrItems :: Lens' JobListResponse [Maybe Job]
+jlrItems :: Lens' JobListResponse [Job]
 jlrItems
   = lens _jlrItems (\ s a -> s{_jlrItems = a}) .
       _Default
@@ -641,7 +641,7 @@ instance ToJSON JobListResponse where
 --
 -- /See:/ 'jobChange' smart constructor.
 data JobChange = JobChange
-    { _jcState     :: !(Maybe (Maybe JobState))
+    { _jcState     :: !(Maybe JobState)
     , _jcKind      :: !Text
     , _jcTimestamp :: !(Maybe Word64)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -665,7 +665,7 @@ jobChange =
     }
 
 -- | Change applied to the job. Only the fields that were changed are set.
-jcState :: Lens' JobChange (Maybe (Maybe JobState))
+jcState :: Lens' JobChange (Maybe JobState)
 jcState = lens _jcState (\ s a -> s{_jcState = a})
 
 -- | Identifies this object as a job change.
@@ -698,7 +698,7 @@ instance ToJSON JobChange where
 -- /See:/ 'teamListResponse' smart constructor.
 data TeamListResponse = TeamListResponse
     { _tlrKind  :: !Text
-    , _tlrItems :: !(Maybe [Maybe Team])
+    , _tlrItems :: !(Maybe [Team])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TeamListResponse' with the minimum fields required to make a request.
@@ -721,7 +721,7 @@ tlrKind :: Lens' TeamListResponse Text
 tlrKind = lens _tlrKind (\ s a -> s{_tlrKind = a})
 
 -- | Teams in the collection.
-tlrItems :: Lens' TeamListResponse [Maybe Team]
+tlrItems :: Lens' TeamListResponse [Team]
 tlrItems
   = lens _tlrItems (\ s a -> s{_tlrItems = a}) .
       _Default
@@ -747,7 +747,7 @@ instance ToJSON TeamListResponse where
 -- /See:/ 'customFieldDefListResponse' smart constructor.
 data CustomFieldDefListResponse = CustomFieldDefListResponse
     { _cfdlrKind  :: !Text
-    , _cfdlrItems :: !(Maybe [Maybe CustomFieldDef])
+    , _cfdlrItems :: !(Maybe [CustomFieldDef])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CustomFieldDefListResponse' with the minimum fields required to make a request.
@@ -772,7 +772,7 @@ cfdlrKind
   = lens _cfdlrKind (\ s a -> s{_cfdlrKind = a})
 
 -- | Collection of custom field definitions in a team.
-cfdlrItems :: Lens' CustomFieldDefListResponse [Maybe CustomFieldDef]
+cfdlrItems :: Lens' CustomFieldDefListResponse [CustomFieldDef]
 cfdlrItems
   = lens _cfdlrItems (\ s a -> s{_cfdlrItems = a}) .
       _Default
@@ -797,9 +797,9 @@ instance ToJSON CustomFieldDefListResponse where
 --
 -- /See:/ 'job' smart constructor.
 data Job = Job
-    { _jobState     :: !(Maybe (Maybe JobState))
+    { _jobState     :: !(Maybe JobState)
     , _jobKind      :: !Text
-    , _jobJobChange :: !(Maybe [Maybe JobChange])
+    , _jobJobChange :: !(Maybe [JobChange])
     , _jobId        :: !(Maybe Word64)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -825,7 +825,7 @@ job =
     }
 
 -- | Current job state.
-jobState :: Lens' Job (Maybe (Maybe JobState))
+jobState :: Lens' Job (Maybe JobState)
 jobState = lens _jobState (\ s a -> s{_jobState = a})
 
 -- | Identifies this object as a job.
@@ -834,7 +834,7 @@ jobKind = lens _jobKind (\ s a -> s{_jobKind = a})
 
 -- | List of job changes since it was created. The first change corresponds
 -- to the state of the job when it was created.
-jobJobChange :: Lens' Job [Maybe JobChange]
+jobJobChange :: Lens' Job [JobChange]
 jobJobChange
   = lens _jobJobChange (\ s a -> s{_jobJobChange = a})
       . _Default
@@ -868,7 +868,7 @@ instance ToJSON Job where
 -- /See:/ 'customFields' smart constructor.
 data CustomFields = CustomFields
     { _cfKind        :: !Text
-    , _cfCustomField :: !(Maybe [Maybe CustomField])
+    , _cfCustomField :: !(Maybe [CustomField])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CustomFields' with the minimum fields required to make a request.
@@ -891,7 +891,7 @@ cfKind :: Lens' CustomFields Text
 cfKind = lens _cfKind (\ s a -> s{_cfKind = a})
 
 -- | Collection of custom fields.
-cfCustomField :: Lens' CustomFields [Maybe CustomField]
+cfCustomField :: Lens' CustomFields [CustomField]
 cfCustomField
   = lens _cfCustomField
       (\ s a -> s{_cfCustomField = a})

@@ -1,7 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE LambdaCase         #-}
+{-# LANGUAGE OverloadedStrings  #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -15,7 +15,7 @@
 --
 module Network.Google.CustomSearch.Types.Sum where
 
-import Network.Google.Prelude
+import           Network.Google.Prelude
 
 -- | Controls whether to include or exclude results from the site named in
 -- the as_sitesearch parameter
@@ -85,7 +85,7 @@ instance ToJSON SearchCseListImgColorType where
 -- | Returns images of a type, which can be one of: clipart, face, lineart,
 -- news, and photo.
 data SearchCseListImgType
-    = Clipart
+    = CliParty
       -- ^ @clipart@
       -- clipart
     | Face
@@ -106,7 +106,7 @@ instance Hashable SearchCseListImgType
 
 instance FromText SearchCseListImgType where
     fromText = \case
-        "clipart" -> Just Clipart
+        "clipart" -> Just CliParty
         "face" -> Just Face
         "lineart" -> Just Lineart
         "news" -> Just News
@@ -115,7 +115,7 @@ instance FromText SearchCseListImgType where
 
 instance ToText SearchCseListImgType where
     toText = \case
-        Clipart -> "clipart"
+        CliParty -> "clipart"
         Face -> "face"
         Lineart -> "lineart"
         News -> "news"
@@ -506,10 +506,10 @@ instance ToJSON SearchCseListSafe where
 
 -- | Controls turning on or off the duplicate content filter.
 data SearchCseListFilter
-    = 0
+    = SCLF0
       -- ^ @0@
       -- Turns off duplicate content filter.
-    | 1
+    | SCLF1
       -- ^ @1@
       -- Turns on duplicate content filter.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
@@ -518,46 +518,17 @@ instance Hashable SearchCseListFilter
 
 instance FromText SearchCseListFilter where
     fromText = \case
-        "0" -> Just 0
-        "1" -> Just 1
+        "0" -> Just SCLF0
+        "1" -> Just SCLF1
         _ -> Nothing
 
 instance ToText SearchCseListFilter where
     toText = \case
-        0 -> "0"
-        1 -> "1"
+        SCLF0 -> "0"
+        SCLF1 -> "1"
 
 instance FromJSON SearchCseListFilter where
     parseJSON = parseJSONText "SearchCseListFilter"
 
 instance ToJSON SearchCseListFilter where
-    toJSON = toJSONText
-
--- | Data format for the response.
-data Alt
-    = Atom
-      -- ^ @atom@
-      -- Responses with Content-Type of application\/atom+xml
-    | JSON
-      -- ^ @json@
-      -- Responses with Content-Type of application\/json
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable Alt
-
-instance FromText Alt where
-    fromText = \case
-        "atom" -> Just Atom
-        "json" -> Just JSON
-        _ -> Nothing
-
-instance ToText Alt where
-    toText = \case
-        Atom -> "atom"
-        JSON -> "json"
-
-instance FromJSON Alt where
-    parseJSON = parseJSONText "Alt"
-
-instance ToJSON Alt where
     toJSON = toJSONText

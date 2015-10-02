@@ -32,11 +32,11 @@ module Network.Google.Resource.Directory.Users.Insert
     -- * Request Lenses
     , uiQuotaUser
     , uiPrettyPrint
-    , uiUserIp
+    , uiUserIP
+    , uiUser
     , uiKey
-    , uiOauthToken
+    , uiOAuthToken
     , uiFields
-    , uiAlt
     ) where
 
 import           Network.Google.AdminDirectory.Types
@@ -49,10 +49,11 @@ type UsersInsertResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
-               QueryParam "oauth_token" Text :>
+             QueryParam "key" Key :>
+               QueryParam "oauth_token" OAuthToken :>
                  QueryParam "fields" Text :>
-                   QueryParam "alt" Alt :> Post '[JSON] User
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] User :> Post '[JSON] User
 
 -- | create user.
 --
@@ -60,11 +61,11 @@ type UsersInsertResource =
 data UsersInsert' = UsersInsert'
     { _uiQuotaUser   :: !(Maybe Text)
     , _uiPrettyPrint :: !Bool
-    , _uiUserIp      :: !(Maybe Text)
-    , _uiKey         :: !(Maybe Text)
-    , _uiOauthToken  :: !(Maybe Text)
+    , _uiUserIP      :: !(Maybe Text)
+    , _uiUser        :: !User
+    , _uiKey         :: !(Maybe Key)
+    , _uiOAuthToken  :: !(Maybe OAuthToken)
     , _uiFields      :: !(Maybe Text)
-    , _uiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersInsert'' with the minimum fields required to make a request.
@@ -75,26 +76,27 @@ data UsersInsert' = UsersInsert'
 --
 -- * 'uiPrettyPrint'
 --
--- * 'uiUserIp'
+-- * 'uiUserIP'
+--
+-- * 'uiUser'
 --
 -- * 'uiKey'
 --
--- * 'uiOauthToken'
+-- * 'uiOAuthToken'
 --
 -- * 'uiFields'
---
--- * 'uiAlt'
 usersInsert'
-    :: UsersInsert'
-usersInsert' =
+    :: User -- ^ 'User'
+    -> UsersInsert'
+usersInsert' pUiUser_ =
     UsersInsert'
     { _uiQuotaUser = Nothing
     , _uiPrettyPrint = True
-    , _uiUserIp = Nothing
+    , _uiUserIP = Nothing
+    , _uiUser = pUiUser_
     , _uiKey = Nothing
-    , _uiOauthToken = Nothing
+    , _uiOAuthToken = Nothing
     , _uiFields = Nothing
-    , _uiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -112,37 +114,42 @@ uiPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-uiUserIp :: Lens' UsersInsert' (Maybe Text)
-uiUserIp = lens _uiUserIp (\ s a -> s{_uiUserIp = a})
+uiUserIP :: Lens' UsersInsert' (Maybe Text)
+uiUserIP = lens _uiUserIP (\ s a -> s{_uiUserIP = a})
+
+-- | Multipart request metadata.
+uiUser :: Lens' UsersInsert' User
+uiUser = lens _uiUser (\ s a -> s{_uiUser = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-uiKey :: Lens' UsersInsert' (Maybe Text)
+uiKey :: Lens' UsersInsert' (Maybe Key)
 uiKey = lens _uiKey (\ s a -> s{_uiKey = a})
 
 -- | OAuth 2.0 token for the current user.
-uiOauthToken :: Lens' UsersInsert' (Maybe Text)
-uiOauthToken
-  = lens _uiOauthToken (\ s a -> s{_uiOauthToken = a})
+uiOAuthToken :: Lens' UsersInsert' (Maybe OAuthToken)
+uiOAuthToken
+  = lens _uiOAuthToken (\ s a -> s{_uiOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 uiFields :: Lens' UsersInsert' (Maybe Text)
 uiFields = lens _uiFields (\ s a -> s{_uiFields = a})
 
--- | Data format for the response.
-uiAlt :: Lens' UsersInsert' Alt
-uiAlt = lens _uiAlt (\ s a -> s{_uiAlt = a})
+instance GoogleAuth UsersInsert' where
+        authKey = uiKey . _Just
+        authToken = uiOAuthToken . _Just
 
 instance GoogleRequest UsersInsert' where
         type Rs UsersInsert' = User
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u UsersInsert'{..}
-          = go _uiQuotaUser (Just _uiPrettyPrint) _uiUserIp
+          = go _uiQuotaUser (Just _uiPrettyPrint) _uiUserIP
               _uiKey
-              _uiOauthToken
+              _uiOAuthToken
               _uiFields
-              (Just _uiAlt)
+              (Just AltJSON)
+              _uiUser
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersInsertResource)

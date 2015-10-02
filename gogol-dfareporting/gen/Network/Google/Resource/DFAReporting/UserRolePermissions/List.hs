@@ -32,13 +32,12 @@ module Network.Google.Resource.DFAReporting.UserRolePermissions.List
     -- * Request Lenses
     , urplQuotaUser
     , urplPrettyPrint
-    , urplUserIp
+    , urplUserIP
     , urplIds
     , urplProfileId
     , urplKey
-    , urplOauthToken
+    , urplOAuthToken
     , urplFields
-    , urplAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,10 +53,10 @@ type UserRolePermissionsListResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParams "ids" Int64 :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :>
+                         QueryParam "alt" AltJSON :>
                            Get '[JSON] UserRolePermissionsListResponse
 
 -- | Gets a list of user role permissions, possibly filtered.
@@ -66,13 +65,12 @@ type UserRolePermissionsListResource =
 data UserRolePermissionsList' = UserRolePermissionsList'
     { _urplQuotaUser   :: !(Maybe Text)
     , _urplPrettyPrint :: !Bool
-    , _urplUserIp      :: !(Maybe Text)
+    , _urplUserIP      :: !(Maybe Text)
     , _urplIds         :: !(Maybe Int64)
     , _urplProfileId   :: !Int64
-    , _urplKey         :: !(Maybe Text)
-    , _urplOauthToken  :: !(Maybe Text)
+    , _urplKey         :: !(Maybe Key)
+    , _urplOAuthToken  :: !(Maybe OAuthToken)
     , _urplFields      :: !(Maybe Text)
-    , _urplAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserRolePermissionsList'' with the minimum fields required to make a request.
@@ -83,7 +81,7 @@ data UserRolePermissionsList' = UserRolePermissionsList'
 --
 -- * 'urplPrettyPrint'
 --
--- * 'urplUserIp'
+-- * 'urplUserIP'
 --
 -- * 'urplIds'
 --
@@ -91,11 +89,9 @@ data UserRolePermissionsList' = UserRolePermissionsList'
 --
 -- * 'urplKey'
 --
--- * 'urplOauthToken'
+-- * 'urplOAuthToken'
 --
 -- * 'urplFields'
---
--- * 'urplAlt'
 userRolePermissionsList'
     :: Int64 -- ^ 'profileId'
     -> UserRolePermissionsList'
@@ -103,13 +99,12 @@ userRolePermissionsList' pUrplProfileId_ =
     UserRolePermissionsList'
     { _urplQuotaUser = Nothing
     , _urplPrettyPrint = True
-    , _urplUserIp = Nothing
+    , _urplUserIP = Nothing
     , _urplIds = Nothing
     , _urplProfileId = pUrplProfileId_
     , _urplKey = Nothing
-    , _urplOauthToken = Nothing
+    , _urplOAuthToken = Nothing
     , _urplFields = Nothing
-    , _urplAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -128,9 +123,9 @@ urplPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-urplUserIp :: Lens' UserRolePermissionsList' (Maybe Text)
-urplUserIp
-  = lens _urplUserIp (\ s a -> s{_urplUserIp = a})
+urplUserIP :: Lens' UserRolePermissionsList' (Maybe Text)
+urplUserIP
+  = lens _urplUserIP (\ s a -> s{_urplUserIP = a})
 
 -- | Select only user role permissions with these IDs.
 urplIds :: Lens' UserRolePermissionsList' (Maybe Int64)
@@ -145,23 +140,23 @@ urplProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-urplKey :: Lens' UserRolePermissionsList' (Maybe Text)
+urplKey :: Lens' UserRolePermissionsList' (Maybe Key)
 urplKey = lens _urplKey (\ s a -> s{_urplKey = a})
 
 -- | OAuth 2.0 token for the current user.
-urplOauthToken :: Lens' UserRolePermissionsList' (Maybe Text)
-urplOauthToken
-  = lens _urplOauthToken
-      (\ s a -> s{_urplOauthToken = a})
+urplOAuthToken :: Lens' UserRolePermissionsList' (Maybe OAuthToken)
+urplOAuthToken
+  = lens _urplOAuthToken
+      (\ s a -> s{_urplOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 urplFields :: Lens' UserRolePermissionsList' (Maybe Text)
 urplFields
   = lens _urplFields (\ s a -> s{_urplFields = a})
 
--- | Data format for the response.
-urplAlt :: Lens' UserRolePermissionsList' Alt
-urplAlt = lens _urplAlt (\ s a -> s{_urplAlt = a})
+instance GoogleAuth UserRolePermissionsList' where
+        authKey = urplKey . _Just
+        authToken = urplOAuthToken . _Just
 
 instance GoogleRequest UserRolePermissionsList' where
         type Rs UserRolePermissionsList' =
@@ -169,13 +164,13 @@ instance GoogleRequest UserRolePermissionsList' where
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u UserRolePermissionsList'{..}
           = go _urplQuotaUser (Just _urplPrettyPrint)
-              _urplUserIp
+              _urplUserIP
               _urplIds
               _urplProfileId
               _urplKey
-              _urplOauthToken
+              _urplOAuthToken
               _urplFields
-              (Just _urplAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UserRolePermissionsListResource)

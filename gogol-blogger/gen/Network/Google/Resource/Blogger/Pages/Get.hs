@@ -32,14 +32,13 @@ module Network.Google.Resource.Blogger.Pages.Get
     -- * Request Lenses
     , pggQuotaUser
     , pggPrettyPrint
-    , pggUserIp
+    , pggUserIP
     , pggBlogId
     , pggPageId
     , pggKey
     , pggView
-    , pggOauthToken
+    , pggOAuthToken
     , pggFields
-    , pggAlt
     ) where
 
 import           Network.Google.Blogger.Types
@@ -55,11 +54,11 @@ type PagesGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "view" BloggerPagesGetView :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Get '[JSON] Page
+                           QueryParam "alt" AltJSON :> Get '[JSON] Page
 
 -- | Gets one blog page by ID.
 --
@@ -67,14 +66,13 @@ type PagesGetResource =
 data PagesGet' = PagesGet'
     { _pggQuotaUser   :: !(Maybe Text)
     , _pggPrettyPrint :: !Bool
-    , _pggUserIp      :: !(Maybe Text)
+    , _pggUserIP      :: !(Maybe Text)
     , _pggBlogId      :: !Text
     , _pggPageId      :: !Text
-    , _pggKey         :: !(Maybe Text)
+    , _pggKey         :: !(Maybe Key)
     , _pggView        :: !(Maybe BloggerPagesGetView)
-    , _pggOauthToken  :: !(Maybe Text)
+    , _pggOAuthToken  :: !(Maybe OAuthToken)
     , _pggFields      :: !(Maybe Text)
-    , _pggAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PagesGet'' with the minimum fields required to make a request.
@@ -85,7 +83,7 @@ data PagesGet' = PagesGet'
 --
 -- * 'pggPrettyPrint'
 --
--- * 'pggUserIp'
+-- * 'pggUserIP'
 --
 -- * 'pggBlogId'
 --
@@ -95,11 +93,9 @@ data PagesGet' = PagesGet'
 --
 -- * 'pggView'
 --
--- * 'pggOauthToken'
+-- * 'pggOAuthToken'
 --
 -- * 'pggFields'
---
--- * 'pggAlt'
 pagesGet'
     :: Text -- ^ 'blogId'
     -> Text -- ^ 'pageId'
@@ -108,14 +104,13 @@ pagesGet' pPggBlogId_ pPggPageId_ =
     PagesGet'
     { _pggQuotaUser = Nothing
     , _pggPrettyPrint = True
-    , _pggUserIp = Nothing
+    , _pggUserIP = Nothing
     , _pggBlogId = pPggBlogId_
     , _pggPageId = pPggPageId_
     , _pggKey = Nothing
     , _pggView = Nothing
-    , _pggOauthToken = Nothing
+    , _pggOAuthToken = Nothing
     , _pggFields = Nothing
-    , _pggAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -133,9 +128,9 @@ pggPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-pggUserIp :: Lens' PagesGet' (Maybe Text)
-pggUserIp
-  = lens _pggUserIp (\ s a -> s{_pggUserIp = a})
+pggUserIP :: Lens' PagesGet' (Maybe Text)
+pggUserIP
+  = lens _pggUserIP (\ s a -> s{_pggUserIP = a})
 
 -- | ID of the blog containing the page.
 pggBlogId :: Lens' PagesGet' Text
@@ -150,39 +145,39 @@ pggPageId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pggKey :: Lens' PagesGet' (Maybe Text)
+pggKey :: Lens' PagesGet' (Maybe Key)
 pggKey = lens _pggKey (\ s a -> s{_pggKey = a})
 
 pggView :: Lens' PagesGet' (Maybe BloggerPagesGetView)
 pggView = lens _pggView (\ s a -> s{_pggView = a})
 
 -- | OAuth 2.0 token for the current user.
-pggOauthToken :: Lens' PagesGet' (Maybe Text)
-pggOauthToken
-  = lens _pggOauthToken
-      (\ s a -> s{_pggOauthToken = a})
+pggOAuthToken :: Lens' PagesGet' (Maybe OAuthToken)
+pggOAuthToken
+  = lens _pggOAuthToken
+      (\ s a -> s{_pggOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 pggFields :: Lens' PagesGet' (Maybe Text)
 pggFields
   = lens _pggFields (\ s a -> s{_pggFields = a})
 
--- | Data format for the response.
-pggAlt :: Lens' PagesGet' Alt
-pggAlt = lens _pggAlt (\ s a -> s{_pggAlt = a})
+instance GoogleAuth PagesGet' where
+        authKey = pggKey . _Just
+        authToken = pggOAuthToken . _Just
 
 instance GoogleRequest PagesGet' where
         type Rs PagesGet' = Page
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PagesGet'{..}
-          = go _pggQuotaUser (Just _pggPrettyPrint) _pggUserIp
+          = go _pggQuotaUser (Just _pggPrettyPrint) _pggUserIP
               _pggBlogId
               _pggPageId
               _pggKey
               _pggView
-              _pggOauthToken
+              _pggOAuthToken
               _pggFields
-              (Just _pggAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy PagesGetResource) r
                       u

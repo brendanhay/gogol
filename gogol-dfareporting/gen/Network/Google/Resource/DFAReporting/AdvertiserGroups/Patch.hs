@@ -33,13 +33,13 @@ module Network.Google.Resource.DFAReporting.AdvertiserGroups.Patch
     -- * Request Lenses
     , agpQuotaUser
     , agpPrettyPrint
-    , agpUserIp
+    , agpAdvertiserGroup
+    , agpUserIP
     , agpProfileId
     , agpKey
     , agpId
-    , agpOauthToken
+    , agpOAuthToken
     , agpFields
-    , agpAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,26 +54,28 @@ type AdvertiserGroupsPatchResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "id" Int64 :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Patch '[JSON] AdvertiserGroup
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] AdvertiserGroup :>
+                             Patch '[JSON] AdvertiserGroup
 
 -- | Updates an existing advertiser group. This method supports patch
 -- semantics.
 --
 -- /See:/ 'advertiserGroupsPatch'' smart constructor.
 data AdvertiserGroupsPatch' = AdvertiserGroupsPatch'
-    { _agpQuotaUser   :: !(Maybe Text)
-    , _agpPrettyPrint :: !Bool
-    , _agpUserIp      :: !(Maybe Text)
-    , _agpProfileId   :: !Int64
-    , _agpKey         :: !(Maybe Text)
-    , _agpId          :: !Int64
-    , _agpOauthToken  :: !(Maybe Text)
-    , _agpFields      :: !(Maybe Text)
-    , _agpAlt         :: !Alt
+    { _agpQuotaUser       :: !(Maybe Text)
+    , _agpPrettyPrint     :: !Bool
+    , _agpAdvertiserGroup :: !AdvertiserGroup
+    , _agpUserIP          :: !(Maybe Text)
+    , _agpProfileId       :: !Int64
+    , _agpKey             :: !(Maybe Key)
+    , _agpId              :: !Int64
+    , _agpOAuthToken      :: !(Maybe OAuthToken)
+    , _agpFields          :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertiserGroupsPatch'' with the minimum fields required to make a request.
@@ -84,7 +86,9 @@ data AdvertiserGroupsPatch' = AdvertiserGroupsPatch'
 --
 -- * 'agpPrettyPrint'
 --
--- * 'agpUserIp'
+-- * 'agpAdvertiserGroup'
+--
+-- * 'agpUserIP'
 --
 -- * 'agpProfileId'
 --
@@ -92,26 +96,25 @@ data AdvertiserGroupsPatch' = AdvertiserGroupsPatch'
 --
 -- * 'agpId'
 --
--- * 'agpOauthToken'
+-- * 'agpOAuthToken'
 --
 -- * 'agpFields'
---
--- * 'agpAlt'
 advertiserGroupsPatch'
-    :: Int64 -- ^ 'profileId'
+    :: AdvertiserGroup -- ^ 'AdvertiserGroup'
+    -> Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> AdvertiserGroupsPatch'
-advertiserGroupsPatch' pAgpProfileId_ pAgpId_ =
+advertiserGroupsPatch' pAgpAdvertiserGroup_ pAgpProfileId_ pAgpId_ =
     AdvertiserGroupsPatch'
     { _agpQuotaUser = Nothing
     , _agpPrettyPrint = True
-    , _agpUserIp = Nothing
+    , _agpAdvertiserGroup = pAgpAdvertiserGroup_
+    , _agpUserIP = Nothing
     , _agpProfileId = pAgpProfileId_
     , _agpKey = Nothing
     , _agpId = pAgpId_
-    , _agpOauthToken = Nothing
+    , _agpOAuthToken = Nothing
     , _agpFields = Nothing
-    , _agpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,11 +130,17 @@ agpPrettyPrint
   = lens _agpPrettyPrint
       (\ s a -> s{_agpPrettyPrint = a})
 
+-- | Multipart request metadata.
+agpAdvertiserGroup :: Lens' AdvertiserGroupsPatch' AdvertiserGroup
+agpAdvertiserGroup
+  = lens _agpAdvertiserGroup
+      (\ s a -> s{_agpAdvertiserGroup = a})
+
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-agpUserIp :: Lens' AdvertiserGroupsPatch' (Maybe Text)
-agpUserIp
-  = lens _agpUserIp (\ s a -> s{_agpUserIp = a})
+agpUserIP :: Lens' AdvertiserGroupsPatch' (Maybe Text)
+agpUserIP
+  = lens _agpUserIP (\ s a -> s{_agpUserIP = a})
 
 -- | User profile ID associated with this request.
 agpProfileId :: Lens' AdvertiserGroupsPatch' Int64
@@ -141,7 +150,7 @@ agpProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-agpKey :: Lens' AdvertiserGroupsPatch' (Maybe Text)
+agpKey :: Lens' AdvertiserGroupsPatch' (Maybe Key)
 agpKey = lens _agpKey (\ s a -> s{_agpKey = a})
 
 -- | Advertiser group ID.
@@ -149,31 +158,32 @@ agpId :: Lens' AdvertiserGroupsPatch' Int64
 agpId = lens _agpId (\ s a -> s{_agpId = a})
 
 -- | OAuth 2.0 token for the current user.
-agpOauthToken :: Lens' AdvertiserGroupsPatch' (Maybe Text)
-agpOauthToken
-  = lens _agpOauthToken
-      (\ s a -> s{_agpOauthToken = a})
+agpOAuthToken :: Lens' AdvertiserGroupsPatch' (Maybe OAuthToken)
+agpOAuthToken
+  = lens _agpOAuthToken
+      (\ s a -> s{_agpOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 agpFields :: Lens' AdvertiserGroupsPatch' (Maybe Text)
 agpFields
   = lens _agpFields (\ s a -> s{_agpFields = a})
 
--- | Data format for the response.
-agpAlt :: Lens' AdvertiserGroupsPatch' Alt
-agpAlt = lens _agpAlt (\ s a -> s{_agpAlt = a})
+instance GoogleAuth AdvertiserGroupsPatch' where
+        authKey = agpKey . _Just
+        authToken = agpOAuthToken . _Just
 
 instance GoogleRequest AdvertiserGroupsPatch' where
         type Rs AdvertiserGroupsPatch' = AdvertiserGroup
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AdvertiserGroupsPatch'{..}
-          = go _agpQuotaUser (Just _agpPrettyPrint) _agpUserIp
+          = go _agpQuotaUser (Just _agpPrettyPrint) _agpUserIP
               _agpProfileId
               _agpKey
               (Just _agpId)
-              _agpOauthToken
+              _agpOAuthToken
               _agpFields
-              (Just _agpAlt)
+              (Just AltJSON)
+              _agpAdvertiserGroup
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AdvertiserGroupsPatchResource)

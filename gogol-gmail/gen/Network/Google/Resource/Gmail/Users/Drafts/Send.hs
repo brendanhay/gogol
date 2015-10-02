@@ -33,12 +33,13 @@ module Network.Google.Resource.Gmail.Users.Drafts.Send
     -- * Request Lenses
     , udsQuotaUser
     , udsPrettyPrint
-    , udsUserIp
+    , udsUserIP
     , udsUserId
+    , udsMedia
     , udsKey
-    , udsOauthToken
+    , udsDraft
+    , udsOAuthToken
     , udsFields
-    , udsAlt
     ) where
 
 import           Network.Google.Gmail.Types
@@ -53,10 +54,12 @@ type UsersDraftsSendResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] Message
+                       QueryParam "alt" AltJSON :>
+                         MultipartRelated '[JSON] Draft Body :>
+                           Post '[JSON] Message
 
 -- | Sends the specified, existing draft to the recipients in the To, Cc, and
 -- Bcc headers.
@@ -65,12 +68,13 @@ type UsersDraftsSendResource =
 data UsersDraftsSend' = UsersDraftsSend'
     { _udsQuotaUser   :: !(Maybe Text)
     , _udsPrettyPrint :: !Bool
-    , _udsUserIp      :: !(Maybe Text)
+    , _udsUserIP      :: !(Maybe Text)
     , _udsUserId      :: !Text
-    , _udsKey         :: !(Maybe Text)
-    , _udsOauthToken  :: !(Maybe Text)
+    , _udsMedia       :: !Body
+    , _udsKey         :: !(Maybe Key)
+    , _udsDraft       :: !Draft
+    , _udsOAuthToken  :: !(Maybe OAuthToken)
     , _udsFields      :: !(Maybe Text)
-    , _udsAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDraftsSend'' with the minimum fields required to make a request.
@@ -81,30 +85,35 @@ data UsersDraftsSend' = UsersDraftsSend'
 --
 -- * 'udsPrettyPrint'
 --
--- * 'udsUserIp'
+-- * 'udsUserIP'
 --
 -- * 'udsUserId'
 --
+-- * 'udsMedia'
+--
 -- * 'udsKey'
 --
--- * 'udsOauthToken'
+-- * 'udsDraft'
+--
+-- * 'udsOAuthToken'
 --
 -- * 'udsFields'
---
--- * 'udsAlt'
 usersDraftsSend'
-    :: Text
+    :: Text -- ^ 'media'
+    -> Body -- ^ 'Draft'
+    -> Draft
     -> UsersDraftsSend'
-usersDraftsSend' pUdsUserId_ =
+usersDraftsSend' pUdsUserId_ pUdsMedia_ pUdsDraft_ =
     UsersDraftsSend'
     { _udsQuotaUser = Nothing
     , _udsPrettyPrint = True
-    , _udsUserIp = Nothing
+    , _udsUserIP = Nothing
     , _udsUserId = pUdsUserId_
+    , _udsMedia = pUdsMedia_
     , _udsKey = Nothing
-    , _udsOauthToken = Nothing
+    , _udsDraft = pUdsDraft_
+    , _udsOAuthToken = Nothing
     , _udsFields = Nothing
-    , _udsAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -122,9 +131,9 @@ udsPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-udsUserIp :: Lens' UsersDraftsSend' (Maybe Text)
-udsUserIp
-  = lens _udsUserIp (\ s a -> s{_udsUserIp = a})
+udsUserIP :: Lens' UsersDraftsSend' (Maybe Text)
+udsUserIP
+  = lens _udsUserIP (\ s a -> s{_udsUserIP = a})
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
@@ -132,37 +141,46 @@ udsUserId :: Lens' UsersDraftsSend' Text
 udsUserId
   = lens _udsUserId (\ s a -> s{_udsUserId = a})
 
+udsMedia :: Lens' UsersDraftsSend' Body
+udsMedia = lens _udsMedia (\ s a -> s{_udsMedia = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-udsKey :: Lens' UsersDraftsSend' (Maybe Text)
+udsKey :: Lens' UsersDraftsSend' (Maybe Key)
 udsKey = lens _udsKey (\ s a -> s{_udsKey = a})
 
+-- | Multipart request metadata.
+udsDraft :: Lens' UsersDraftsSend' Draft
+udsDraft = lens _udsDraft (\ s a -> s{_udsDraft = a})
+
 -- | OAuth 2.0 token for the current user.
-udsOauthToken :: Lens' UsersDraftsSend' (Maybe Text)
-udsOauthToken
-  = lens _udsOauthToken
-      (\ s a -> s{_udsOauthToken = a})
+udsOAuthToken :: Lens' UsersDraftsSend' (Maybe OAuthToken)
+udsOAuthToken
+  = lens _udsOAuthToken
+      (\ s a -> s{_udsOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 udsFields :: Lens' UsersDraftsSend' (Maybe Text)
 udsFields
   = lens _udsFields (\ s a -> s{_udsFields = a})
 
--- | Data format for the response.
-udsAlt :: Lens' UsersDraftsSend' Alt
-udsAlt = lens _udsAlt (\ s a -> s{_udsAlt = a})
+instance GoogleAuth UsersDraftsSend' where
+        authKey = udsKey . _Just
+        authToken = udsOAuthToken . _Just
 
 instance GoogleRequest UsersDraftsSend' where
         type Rs UsersDraftsSend' = Message
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersDraftsSend'{..}
-          = go _udsQuotaUser (Just _udsPrettyPrint) _udsUserIp
+          = go _udsQuotaUser (Just _udsPrettyPrint) _udsUserIP
               _udsUserId
+              _udsMedia
               _udsKey
-              _udsOauthToken
+              _udsOAuthToken
               _udsFields
-              (Just _udsAlt)
+              (Just AltJSON)
+              _udsDraft
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersDraftsSendResource)

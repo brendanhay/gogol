@@ -34,15 +34,14 @@ module Network.Google.Resource.YouTube.ChannelSections.List
     , cslPart
     , cslPrettyPrint
     , cslMine
-    , cslUserIp
+    , cslUserIP
     , cslChannelId
     , cslHl
     , cslOnBehalfOfContentOwner
     , cslKey
     , cslId
-    , cslOauthToken
+    , cslOAuthToken
     , cslFields
-    , cslAlt
     ) where
 
 import           Network.Google.Prelude
@@ -60,11 +59,11 @@ type ChannelSectionsListResource =
                  QueryParam "channelId" Text :>
                    QueryParam "hl" Text :>
                      QueryParam "onBehalfOfContentOwner" Text :>
-                       QueryParam "key" Text :>
+                       QueryParam "key" Key :>
                          QueryParam "id" Text :>
-                           QueryParam "oauth_token" Text :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :>
+                               QueryParam "alt" AltJSON :>
                                  Get '[JSON] ChannelSectionListResponse
 
 -- | Returns channelSection resources that match the API request criteria.
@@ -75,15 +74,14 @@ data ChannelSectionsList' = ChannelSectionsList'
     , _cslPart                   :: !Text
     , _cslPrettyPrint            :: !Bool
     , _cslMine                   :: !(Maybe Bool)
-    , _cslUserIp                 :: !(Maybe Text)
+    , _cslUserIP                 :: !(Maybe Text)
     , _cslChannelId              :: !(Maybe Text)
     , _cslHl                     :: !(Maybe Text)
     , _cslOnBehalfOfContentOwner :: !(Maybe Text)
-    , _cslKey                    :: !(Maybe Text)
+    , _cslKey                    :: !(Maybe Key)
     , _cslId                     :: !(Maybe Text)
-    , _cslOauthToken             :: !(Maybe Text)
+    , _cslOAuthToken             :: !(Maybe OAuthToken)
     , _cslFields                 :: !(Maybe Text)
-    , _cslAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChannelSectionsList'' with the minimum fields required to make a request.
@@ -98,7 +96,7 @@ data ChannelSectionsList' = ChannelSectionsList'
 --
 -- * 'cslMine'
 --
--- * 'cslUserIp'
+-- * 'cslUserIP'
 --
 -- * 'cslChannelId'
 --
@@ -110,11 +108,9 @@ data ChannelSectionsList' = ChannelSectionsList'
 --
 -- * 'cslId'
 --
--- * 'cslOauthToken'
+-- * 'cslOAuthToken'
 --
 -- * 'cslFields'
---
--- * 'cslAlt'
 channelSectionsList'
     :: Text -- ^ 'part'
     -> ChannelSectionsList'
@@ -124,15 +120,14 @@ channelSectionsList' pCslPart_ =
     , _cslPart = pCslPart_
     , _cslPrettyPrint = True
     , _cslMine = Nothing
-    , _cslUserIp = Nothing
+    , _cslUserIP = Nothing
     , _cslChannelId = Nothing
     , _cslHl = Nothing
     , _cslOnBehalfOfContentOwner = Nothing
     , _cslKey = Nothing
     , _cslId = Nothing
-    , _cslOauthToken = Nothing
+    , _cslOAuthToken = Nothing
     , _cslFields = Nothing
-    , _cslAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -167,9 +162,9 @@ cslMine = lens _cslMine (\ s a -> s{_cslMine = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cslUserIp :: Lens' ChannelSectionsList' (Maybe Text)
-cslUserIp
-  = lens _cslUserIp (\ s a -> s{_cslUserIp = a})
+cslUserIP :: Lens' ChannelSectionsList' (Maybe Text)
+cslUserIP
+  = lens _cslUserIP (\ s a -> s{_cslUserIP = a})
 
 -- | The channelId parameter specifies a YouTube channel ID. The API will
 -- only return that channel\'s channelSections.
@@ -206,7 +201,7 @@ cslOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cslKey :: Lens' ChannelSectionsList' (Maybe Text)
+cslKey :: Lens' ChannelSectionsList' (Maybe Key)
 cslKey = lens _cslKey (\ s a -> s{_cslKey = a})
 
 -- | The id parameter specifies a comma-separated list of the YouTube
@@ -217,19 +212,19 @@ cslId :: Lens' ChannelSectionsList' (Maybe Text)
 cslId = lens _cslId (\ s a -> s{_cslId = a})
 
 -- | OAuth 2.0 token for the current user.
-cslOauthToken :: Lens' ChannelSectionsList' (Maybe Text)
-cslOauthToken
-  = lens _cslOauthToken
-      (\ s a -> s{_cslOauthToken = a})
+cslOAuthToken :: Lens' ChannelSectionsList' (Maybe OAuthToken)
+cslOAuthToken
+  = lens _cslOAuthToken
+      (\ s a -> s{_cslOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cslFields :: Lens' ChannelSectionsList' (Maybe Text)
 cslFields
   = lens _cslFields (\ s a -> s{_cslFields = a})
 
--- | Data format for the response.
-cslAlt :: Lens' ChannelSectionsList' Alt
-cslAlt = lens _cslAlt (\ s a -> s{_cslAlt = a})
+instance GoogleAuth ChannelSectionsList' where
+        authKey = cslKey . _Just
+        authToken = cslOAuthToken . _Just
 
 instance GoogleRequest ChannelSectionsList' where
         type Rs ChannelSectionsList' =
@@ -239,15 +234,15 @@ instance GoogleRequest ChannelSectionsList' where
           = go _cslQuotaUser (Just _cslPart)
               (Just _cslPrettyPrint)
               _cslMine
-              _cslUserIp
+              _cslUserIP
               _cslChannelId
               _cslHl
               _cslOnBehalfOfContentOwner
               _cslKey
               _cslId
-              _cslOauthToken
+              _cslOAuthToken
               _cslFields
-              (Just _cslAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ChannelSectionsListResource)

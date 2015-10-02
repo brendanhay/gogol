@@ -19,7 +19,7 @@
 --
 -- | Lists all Container Versions of a GTM Container.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersVersionsList@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersVersionsList@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Versions.List
     (
     -- * REST Resource
@@ -33,19 +33,18 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Versions.List
     , acvlQuotaUser
     , acvlPrettyPrint
     , acvlContainerId
-    , acvlUserIp
+    , acvlUserIP
     , acvlHeaders
     , acvlAccountId
     , acvlKey
-    , acvlOauthToken
+    , acvlOAuthToken
     , acvlFields
-    , acvlAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagmanagerAccountsContainersVersionsList@ which the
+-- | A resource alias for @TagManagerAccountsContainersVersionsList@ which the
 -- 'AccountsContainersVersionsList'' request conforms to.
 type AccountsContainersVersionsListResource =
      "accounts" :>
@@ -57,10 +56,10 @@ type AccountsContainersVersionsListResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "headers" Bool :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :>
+                             QueryParam "alt" AltJSON :>
                                Get '[JSON] ListContainerVersionsResponse
 
 -- | Lists all Container Versions of a GTM Container.
@@ -70,13 +69,12 @@ data AccountsContainersVersionsList' = AccountsContainersVersionsList'
     { _acvlQuotaUser   :: !(Maybe Text)
     , _acvlPrettyPrint :: !Bool
     , _acvlContainerId :: !Text
-    , _acvlUserIp      :: !(Maybe Text)
+    , _acvlUserIP      :: !(Maybe Text)
     , _acvlHeaders     :: !Bool
     , _acvlAccountId   :: !Text
-    , _acvlKey         :: !(Maybe Text)
-    , _acvlOauthToken  :: !(Maybe Text)
+    , _acvlKey         :: !(Maybe Key)
+    , _acvlOAuthToken  :: !(Maybe OAuthToken)
     , _acvlFields      :: !(Maybe Text)
-    , _acvlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersVersionsList'' with the minimum fields required to make a request.
@@ -89,7 +87,7 @@ data AccountsContainersVersionsList' = AccountsContainersVersionsList'
 --
 -- * 'acvlContainerId'
 --
--- * 'acvlUserIp'
+-- * 'acvlUserIP'
 --
 -- * 'acvlHeaders'
 --
@@ -97,11 +95,9 @@ data AccountsContainersVersionsList' = AccountsContainersVersionsList'
 --
 -- * 'acvlKey'
 --
--- * 'acvlOauthToken'
+-- * 'acvlOAuthToken'
 --
 -- * 'acvlFields'
---
--- * 'acvlAlt'
 accountsContainersVersionsList'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'accountId'
@@ -111,13 +107,12 @@ accountsContainersVersionsList' pAcvlContainerId_ pAcvlAccountId_ =
     { _acvlQuotaUser = Nothing
     , _acvlPrettyPrint = True
     , _acvlContainerId = pAcvlContainerId_
-    , _acvlUserIp = Nothing
+    , _acvlUserIP = Nothing
     , _acvlHeaders = False
     , _acvlAccountId = pAcvlAccountId_
     , _acvlKey = Nothing
-    , _acvlOauthToken = Nothing
+    , _acvlOAuthToken = Nothing
     , _acvlFields = Nothing
-    , _acvlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -142,9 +137,9 @@ acvlContainerId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-acvlUserIp :: Lens' AccountsContainersVersionsList' (Maybe Text)
-acvlUserIp
-  = lens _acvlUserIp (\ s a -> s{_acvlUserIp = a})
+acvlUserIP :: Lens' AccountsContainersVersionsList' (Maybe Text)
+acvlUserIP
+  = lens _acvlUserIP (\ s a -> s{_acvlUserIP = a})
 
 -- | Retrieve headers only when true.
 acvlHeaders :: Lens' AccountsContainersVersionsList' Bool
@@ -160,23 +155,24 @@ acvlAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-acvlKey :: Lens' AccountsContainersVersionsList' (Maybe Text)
+acvlKey :: Lens' AccountsContainersVersionsList' (Maybe Key)
 acvlKey = lens _acvlKey (\ s a -> s{_acvlKey = a})
 
 -- | OAuth 2.0 token for the current user.
-acvlOauthToken :: Lens' AccountsContainersVersionsList' (Maybe Text)
-acvlOauthToken
-  = lens _acvlOauthToken
-      (\ s a -> s{_acvlOauthToken = a})
+acvlOAuthToken :: Lens' AccountsContainersVersionsList' (Maybe OAuthToken)
+acvlOAuthToken
+  = lens _acvlOAuthToken
+      (\ s a -> s{_acvlOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 acvlFields :: Lens' AccountsContainersVersionsList' (Maybe Text)
 acvlFields
   = lens _acvlFields (\ s a -> s{_acvlFields = a})
 
--- | Data format for the response.
-acvlAlt :: Lens' AccountsContainersVersionsList' Alt
-acvlAlt = lens _acvlAlt (\ s a -> s{_acvlAlt = a})
+instance GoogleAuth AccountsContainersVersionsList'
+         where
+        authKey = acvlKey . _Just
+        authToken = acvlOAuthToken . _Just
 
 instance GoogleRequest
          AccountsContainersVersionsList' where
@@ -187,13 +183,13 @@ instance GoogleRequest
           AccountsContainersVersionsList'{..}
           = go _acvlQuotaUser (Just _acvlPrettyPrint)
               _acvlContainerId
-              _acvlUserIp
+              _acvlUserIP
               (Just _acvlHeaders)
               _acvlAccountId
               _acvlKey
-              _acvlOauthToken
+              _acvlOAuthToken
               _acvlFields
-              (Just _acvlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

@@ -35,13 +35,12 @@ module Network.Google.Resource.Games.QuestMilestones.Claim
     , qmcRequestId
     , qmcQuotaUser
     , qmcPrettyPrint
-    , qmcUserIp
+    , qmcUserIP
     , qmcMilestoneId
     , qmcKey
-    , qmcOauthToken
+    , qmcOAuthToken
     , qmcQuestId
     , qmcFields
-    , qmcAlt
     ) where
 
 import           Network.Google.Games.Types
@@ -59,10 +58,10 @@ type QuestMilestonesClaimResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Put '[JSON] ()
+                             QueryParam "alt" AltJSON :> Put '[JSON] ()
 
 -- | Report that a reward for the milestone corresponding to milestoneId for
 -- the quest corresponding to questId has been claimed by the currently
@@ -73,13 +72,12 @@ data QuestMilestonesClaim' = QuestMilestonesClaim'
     { _qmcRequestId   :: !Int64
     , _qmcQuotaUser   :: !(Maybe Text)
     , _qmcPrettyPrint :: !Bool
-    , _qmcUserIp      :: !(Maybe Text)
+    , _qmcUserIP      :: !(Maybe Text)
     , _qmcMilestoneId :: !Text
-    , _qmcKey         :: !(Maybe Text)
-    , _qmcOauthToken  :: !(Maybe Text)
+    , _qmcKey         :: !(Maybe Key)
+    , _qmcOAuthToken  :: !(Maybe OAuthToken)
     , _qmcQuestId     :: !Text
     , _qmcFields      :: !(Maybe Text)
-    , _qmcAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QuestMilestonesClaim'' with the minimum fields required to make a request.
@@ -92,19 +90,17 @@ data QuestMilestonesClaim' = QuestMilestonesClaim'
 --
 -- * 'qmcPrettyPrint'
 --
--- * 'qmcUserIp'
+-- * 'qmcUserIP'
 --
 -- * 'qmcMilestoneId'
 --
 -- * 'qmcKey'
 --
--- * 'qmcOauthToken'
+-- * 'qmcOAuthToken'
 --
 -- * 'qmcQuestId'
 --
 -- * 'qmcFields'
---
--- * 'qmcAlt'
 questMilestonesClaim'
     :: Int64 -- ^ 'requestId'
     -> Text -- ^ 'milestoneId'
@@ -115,13 +111,12 @@ questMilestonesClaim' pQmcRequestId_ pQmcMilestoneId_ pQmcQuestId_ =
     { _qmcRequestId = pQmcRequestId_
     , _qmcQuotaUser = Nothing
     , _qmcPrettyPrint = True
-    , _qmcUserIp = Nothing
+    , _qmcUserIP = Nothing
     , _qmcMilestoneId = pQmcMilestoneId_
     , _qmcKey = Nothing
-    , _qmcOauthToken = Nothing
+    , _qmcOAuthToken = Nothing
     , _qmcQuestId = pQmcQuestId_
     , _qmcFields = Nothing
-    , _qmcAlt = JSON
     }
 
 -- | A numeric ID to ensure that the request is handled correctly across
@@ -145,9 +140,9 @@ qmcPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-qmcUserIp :: Lens' QuestMilestonesClaim' (Maybe Text)
-qmcUserIp
-  = lens _qmcUserIp (\ s a -> s{_qmcUserIp = a})
+qmcUserIP :: Lens' QuestMilestonesClaim' (Maybe Text)
+qmcUserIP
+  = lens _qmcUserIP (\ s a -> s{_qmcUserIP = a})
 
 -- | The ID of the milestone.
 qmcMilestoneId :: Lens' QuestMilestonesClaim' Text
@@ -158,14 +153,14 @@ qmcMilestoneId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-qmcKey :: Lens' QuestMilestonesClaim' (Maybe Text)
+qmcKey :: Lens' QuestMilestonesClaim' (Maybe Key)
 qmcKey = lens _qmcKey (\ s a -> s{_qmcKey = a})
 
 -- | OAuth 2.0 token for the current user.
-qmcOauthToken :: Lens' QuestMilestonesClaim' (Maybe Text)
-qmcOauthToken
-  = lens _qmcOauthToken
-      (\ s a -> s{_qmcOauthToken = a})
+qmcOAuthToken :: Lens' QuestMilestonesClaim' (Maybe OAuthToken)
+qmcOAuthToken
+  = lens _qmcOAuthToken
+      (\ s a -> s{_qmcOAuthToken = a})
 
 -- | The ID of the quest.
 qmcQuestId :: Lens' QuestMilestonesClaim' Text
@@ -177,9 +172,9 @@ qmcFields :: Lens' QuestMilestonesClaim' (Maybe Text)
 qmcFields
   = lens _qmcFields (\ s a -> s{_qmcFields = a})
 
--- | Data format for the response.
-qmcAlt :: Lens' QuestMilestonesClaim' Alt
-qmcAlt = lens _qmcAlt (\ s a -> s{_qmcAlt = a})
+instance GoogleAuth QuestMilestonesClaim' where
+        authKey = qmcKey . _Just
+        authToken = qmcOAuthToken . _Just
 
 instance GoogleRequest QuestMilestonesClaim' where
         type Rs QuestMilestonesClaim' = ()
@@ -187,13 +182,13 @@ instance GoogleRequest QuestMilestonesClaim' where
         requestWithRoute r u QuestMilestonesClaim'{..}
           = go (Just _qmcRequestId) _qmcQuotaUser
               (Just _qmcPrettyPrint)
-              _qmcUserIp
+              _qmcUserIP
               _qmcMilestoneId
               _qmcKey
-              _qmcOauthToken
+              _qmcOAuthToken
               _qmcQuestId
               _qmcFields
-              (Just _qmcAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy QuestMilestonesClaimResource)

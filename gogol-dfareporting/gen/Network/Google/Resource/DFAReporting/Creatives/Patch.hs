@@ -32,13 +32,13 @@ module Network.Google.Resource.DFAReporting.Creatives.Patch
     -- * Request Lenses
     , cppQuotaUser
     , cppPrettyPrint
-    , cppUserIp
+    , cppUserIP
+    , cppCreative
     , cppProfileId
     , cppKey
     , cppId
-    , cppOauthToken
+    , cppOAuthToken
     , cppFields
-    , cppAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -53,11 +53,12 @@ type CreativesPatchResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "id" Int64 :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Patch '[JSON] Creative
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Creative :> Patch '[JSON] Creative
 
 -- | Updates an existing creative. This method supports patch semantics.
 --
@@ -65,13 +66,13 @@ type CreativesPatchResource =
 data CreativesPatch' = CreativesPatch'
     { _cppQuotaUser   :: !(Maybe Text)
     , _cppPrettyPrint :: !Bool
-    , _cppUserIp      :: !(Maybe Text)
+    , _cppUserIP      :: !(Maybe Text)
+    , _cppCreative    :: !Creative
     , _cppProfileId   :: !Int64
-    , _cppKey         :: !(Maybe Text)
+    , _cppKey         :: !(Maybe Key)
     , _cppId          :: !Int64
-    , _cppOauthToken  :: !(Maybe Text)
+    , _cppOAuthToken  :: !(Maybe OAuthToken)
     , _cppFields      :: !(Maybe Text)
-    , _cppAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativesPatch'' with the minimum fields required to make a request.
@@ -82,7 +83,9 @@ data CreativesPatch' = CreativesPatch'
 --
 -- * 'cppPrettyPrint'
 --
--- * 'cppUserIp'
+-- * 'cppUserIP'
+--
+-- * 'cppCreative'
 --
 -- * 'cppProfileId'
 --
@@ -90,26 +93,25 @@ data CreativesPatch' = CreativesPatch'
 --
 -- * 'cppId'
 --
--- * 'cppOauthToken'
+-- * 'cppOAuthToken'
 --
 -- * 'cppFields'
---
--- * 'cppAlt'
 creativesPatch'
-    :: Int64 -- ^ 'profileId'
+    :: Creative -- ^ 'Creative'
+    -> Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
     -> CreativesPatch'
-creativesPatch' pCppProfileId_ pCppId_ =
+creativesPatch' pCppCreative_ pCppProfileId_ pCppId_ =
     CreativesPatch'
     { _cppQuotaUser = Nothing
     , _cppPrettyPrint = True
-    , _cppUserIp = Nothing
+    , _cppUserIP = Nothing
+    , _cppCreative = pCppCreative_
     , _cppProfileId = pCppProfileId_
     , _cppKey = Nothing
     , _cppId = pCppId_
-    , _cppOauthToken = Nothing
+    , _cppOAuthToken = Nothing
     , _cppFields = Nothing
-    , _cppAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,9 +129,14 @@ cppPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cppUserIp :: Lens' CreativesPatch' (Maybe Text)
-cppUserIp
-  = lens _cppUserIp (\ s a -> s{_cppUserIp = a})
+cppUserIP :: Lens' CreativesPatch' (Maybe Text)
+cppUserIP
+  = lens _cppUserIP (\ s a -> s{_cppUserIP = a})
+
+-- | Multipart request metadata.
+cppCreative :: Lens' CreativesPatch' Creative
+cppCreative
+  = lens _cppCreative (\ s a -> s{_cppCreative = a})
 
 -- | User profile ID associated with this request.
 cppProfileId :: Lens' CreativesPatch' Int64
@@ -139,7 +146,7 @@ cppProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cppKey :: Lens' CreativesPatch' (Maybe Text)
+cppKey :: Lens' CreativesPatch' (Maybe Key)
 cppKey = lens _cppKey (\ s a -> s{_cppKey = a})
 
 -- | Creative ID.
@@ -147,31 +154,32 @@ cppId :: Lens' CreativesPatch' Int64
 cppId = lens _cppId (\ s a -> s{_cppId = a})
 
 -- | OAuth 2.0 token for the current user.
-cppOauthToken :: Lens' CreativesPatch' (Maybe Text)
-cppOauthToken
-  = lens _cppOauthToken
-      (\ s a -> s{_cppOauthToken = a})
+cppOAuthToken :: Lens' CreativesPatch' (Maybe OAuthToken)
+cppOAuthToken
+  = lens _cppOAuthToken
+      (\ s a -> s{_cppOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cppFields :: Lens' CreativesPatch' (Maybe Text)
 cppFields
   = lens _cppFields (\ s a -> s{_cppFields = a})
 
--- | Data format for the response.
-cppAlt :: Lens' CreativesPatch' Alt
-cppAlt = lens _cppAlt (\ s a -> s{_cppAlt = a})
+instance GoogleAuth CreativesPatch' where
+        authKey = cppKey . _Just
+        authToken = cppOAuthToken . _Just
 
 instance GoogleRequest CreativesPatch' where
         type Rs CreativesPatch' = Creative
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativesPatch'{..}
-          = go _cppQuotaUser (Just _cppPrettyPrint) _cppUserIp
+          = go _cppQuotaUser (Just _cppPrettyPrint) _cppUserIP
               _cppProfileId
               _cppKey
               (Just _cppId)
-              _cppOauthToken
+              _cppOAuthToken
               _cppFields
-              (Just _cppAlt)
+              (Just AltJSON)
+              _cppCreative
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CreativesPatchResource)

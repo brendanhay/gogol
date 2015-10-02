@@ -32,15 +32,15 @@ module Network.Google.Resource.Storage.ObjectAccessControls.Update
     -- * Request Lenses
     , oacuQuotaUser
     , oacuPrettyPrint
-    , oacuUserIp
+    , oacuUserIP
     , oacuBucket
     , oacuKey
     , oacuObject
-    , oacuOauthToken
+    , oacuOAuthToken
     , oacuEntity
+    , oacuObjectAccessControl
     , oacuGeneration
     , oacuFields
-    , oacuAlt
     ) where
 
 import           Network.Google.Prelude
@@ -58,28 +58,29 @@ type ObjectAccessControlsUpdateResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "generation" Word64 :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :>
-                                 Put '[JSON] ObjectAccessControl
+                               QueryParam "alt" AltJSON :>
+                                 ReqBody '[JSON] ObjectAccessControl :>
+                                   Put '[JSON] ObjectAccessControl
 
 -- | Updates an ACL entry on the specified object.
 --
 -- /See:/ 'objectAccessControlsUpdate'' smart constructor.
 data ObjectAccessControlsUpdate' = ObjectAccessControlsUpdate'
-    { _oacuQuotaUser   :: !(Maybe Text)
-    , _oacuPrettyPrint :: !Bool
-    , _oacuUserIp      :: !(Maybe Text)
-    , _oacuBucket      :: !Text
-    , _oacuKey         :: !(Maybe Text)
-    , _oacuObject      :: !Text
-    , _oacuOauthToken  :: !(Maybe Text)
-    , _oacuEntity      :: !Text
-    , _oacuGeneration  :: !(Maybe Word64)
-    , _oacuFields      :: !(Maybe Text)
-    , _oacuAlt         :: !Alt
+    { _oacuQuotaUser           :: !(Maybe Text)
+    , _oacuPrettyPrint         :: !Bool
+    , _oacuUserIP              :: !(Maybe Text)
+    , _oacuBucket              :: !Text
+    , _oacuKey                 :: !(Maybe Key)
+    , _oacuObject              :: !Text
+    , _oacuOAuthToken          :: !(Maybe OAuthToken)
+    , _oacuEntity              :: !Text
+    , _oacuObjectAccessControl :: !ObjectAccessControl
+    , _oacuGeneration          :: !(Maybe Word64)
+    , _oacuFields              :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectAccessControlsUpdate'' with the minimum fields required to make a request.
@@ -90,7 +91,7 @@ data ObjectAccessControlsUpdate' = ObjectAccessControlsUpdate'
 --
 -- * 'oacuPrettyPrint'
 --
--- * 'oacuUserIp'
+-- * 'oacuUserIP'
 --
 -- * 'oacuBucket'
 --
@@ -98,33 +99,34 @@ data ObjectAccessControlsUpdate' = ObjectAccessControlsUpdate'
 --
 -- * 'oacuObject'
 --
--- * 'oacuOauthToken'
+-- * 'oacuOAuthToken'
 --
 -- * 'oacuEntity'
+--
+-- * 'oacuObjectAccessControl'
 --
 -- * 'oacuGeneration'
 --
 -- * 'oacuFields'
---
--- * 'oacuAlt'
 objectAccessControlsUpdate'
     :: Text -- ^ 'bucket'
     -> Text -- ^ 'object'
     -> Text -- ^ 'entity'
+    -> ObjectAccessControl -- ^ 'ObjectAccessControl'
     -> ObjectAccessControlsUpdate'
-objectAccessControlsUpdate' pOacuBucket_ pOacuObject_ pOacuEntity_ =
+objectAccessControlsUpdate' pOacuBucket_ pOacuObject_ pOacuEntity_ pOacuObjectAccessControl_ =
     ObjectAccessControlsUpdate'
     { _oacuQuotaUser = Nothing
     , _oacuPrettyPrint = True
-    , _oacuUserIp = Nothing
+    , _oacuUserIP = Nothing
     , _oacuBucket = pOacuBucket_
     , _oacuKey = Nothing
     , _oacuObject = pOacuObject_
-    , _oacuOauthToken = Nothing
+    , _oacuOAuthToken = Nothing
     , _oacuEntity = pOacuEntity_
+    , _oacuObjectAccessControl = pOacuObjectAccessControl_
     , _oacuGeneration = Nothing
     , _oacuFields = Nothing
-    , _oacuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -143,9 +145,9 @@ oacuPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-oacuUserIp :: Lens' ObjectAccessControlsUpdate' (Maybe Text)
-oacuUserIp
-  = lens _oacuUserIp (\ s a -> s{_oacuUserIp = a})
+oacuUserIP :: Lens' ObjectAccessControlsUpdate' (Maybe Text)
+oacuUserIP
+  = lens _oacuUserIP (\ s a -> s{_oacuUserIP = a})
 
 -- | Name of a bucket.
 oacuBucket :: Lens' ObjectAccessControlsUpdate' Text
@@ -155,7 +157,7 @@ oacuBucket
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-oacuKey :: Lens' ObjectAccessControlsUpdate' (Maybe Text)
+oacuKey :: Lens' ObjectAccessControlsUpdate' (Maybe Key)
 oacuKey = lens _oacuKey (\ s a -> s{_oacuKey = a})
 
 -- | Name of the object.
@@ -164,10 +166,10 @@ oacuObject
   = lens _oacuObject (\ s a -> s{_oacuObject = a})
 
 -- | OAuth 2.0 token for the current user.
-oacuOauthToken :: Lens' ObjectAccessControlsUpdate' (Maybe Text)
-oacuOauthToken
-  = lens _oacuOauthToken
-      (\ s a -> s{_oacuOauthToken = a})
+oacuOAuthToken :: Lens' ObjectAccessControlsUpdate' (Maybe OAuthToken)
+oacuOAuthToken
+  = lens _oacuOAuthToken
+      (\ s a -> s{_oacuOAuthToken = a})
 
 -- | The entity holding the permission. Can be user-userId,
 -- user-emailAddress, group-groupId, group-emailAddress, allUsers, or
@@ -175,6 +177,12 @@ oacuOauthToken
 oacuEntity :: Lens' ObjectAccessControlsUpdate' Text
 oacuEntity
   = lens _oacuEntity (\ s a -> s{_oacuEntity = a})
+
+-- | Multipart request metadata.
+oacuObjectAccessControl :: Lens' ObjectAccessControlsUpdate' ObjectAccessControl
+oacuObjectAccessControl
+  = lens _oacuObjectAccessControl
+      (\ s a -> s{_oacuObjectAccessControl = a})
 
 -- | If present, selects a specific revision of this object (as opposed to
 -- the latest version, the default).
@@ -188,9 +196,9 @@ oacuFields :: Lens' ObjectAccessControlsUpdate' (Maybe Text)
 oacuFields
   = lens _oacuFields (\ s a -> s{_oacuFields = a})
 
--- | Data format for the response.
-oacuAlt :: Lens' ObjectAccessControlsUpdate' Alt
-oacuAlt = lens _oacuAlt (\ s a -> s{_oacuAlt = a})
+instance GoogleAuth ObjectAccessControlsUpdate' where
+        authKey = oacuKey . _Just
+        authToken = oacuOAuthToken . _Just
 
 instance GoogleRequest ObjectAccessControlsUpdate'
          where
@@ -199,15 +207,16 @@ instance GoogleRequest ObjectAccessControlsUpdate'
         request = requestWithRoute defReq storageURL
         requestWithRoute r u ObjectAccessControlsUpdate'{..}
           = go _oacuQuotaUser (Just _oacuPrettyPrint)
-              _oacuUserIp
+              _oacuUserIP
               _oacuBucket
               _oacuKey
               _oacuObject
-              _oacuOauthToken
+              _oacuOAuthToken
               _oacuEntity
               _oacuGeneration
               _oacuFields
-              (Just _oacuAlt)
+              (Just AltJSON)
+              _oacuObjectAccessControl
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ObjectAccessControlsUpdateResource)

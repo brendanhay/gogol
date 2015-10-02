@@ -19,7 +19,7 @@
 --
 -- | Deletes a deployment and all of the resources in the deployment.
 --
--- /See:/ <https://developers.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentmanagerDeploymentsDelete@.
+-- /See:/ <https://developers.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerDeploymentsDelete@.
 module Network.Google.Resource.DeploymentManager.Deployments.Delete
     (
     -- * REST Resource
@@ -33,18 +33,17 @@ module Network.Google.Resource.DeploymentManager.Deployments.Delete
     , ddQuotaUser
     , ddPrettyPrint
     , ddProject
-    , ddUserIp
+    , ddUserIP
     , ddKey
-    , ddOauthToken
+    , ddOAuthToken
     , ddFields
-    , ddAlt
     , ddDeployment
     ) where
 
 import           Network.Google.DeploymentManager.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DeploymentmanagerDeploymentsDelete@ which the
+-- | A resource alias for @DeploymentManagerDeploymentsDelete@ which the
 -- 'DeploymentsDelete'' request conforms to.
 type DeploymentsDeleteResource =
      Capture "project" Text :>
@@ -54,10 +53,10 @@ type DeploymentsDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Delete '[JSON] Operation
+                         QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes a deployment and all of the resources in the deployment.
 --
@@ -66,11 +65,10 @@ data DeploymentsDelete' = DeploymentsDelete'
     { _ddQuotaUser   :: !(Maybe Text)
     , _ddPrettyPrint :: !Bool
     , _ddProject     :: !Text
-    , _ddUserIp      :: !(Maybe Text)
-    , _ddKey         :: !(Maybe Text)
-    , _ddOauthToken  :: !(Maybe Text)
+    , _ddUserIP      :: !(Maybe Text)
+    , _ddKey         :: !(Maybe Key)
+    , _ddOAuthToken  :: !(Maybe OAuthToken)
     , _ddFields      :: !(Maybe Text)
-    , _ddAlt         :: !Alt
     , _ddDeployment  :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -84,15 +82,13 @@ data DeploymentsDelete' = DeploymentsDelete'
 --
 -- * 'ddProject'
 --
--- * 'ddUserIp'
+-- * 'ddUserIP'
 --
 -- * 'ddKey'
 --
--- * 'ddOauthToken'
+-- * 'ddOAuthToken'
 --
 -- * 'ddFields'
---
--- * 'ddAlt'
 --
 -- * 'ddDeployment'
 deploymentsDelete'
@@ -104,11 +100,10 @@ deploymentsDelete' pDdProject_ pDdDeployment_ =
     { _ddQuotaUser = Nothing
     , _ddPrettyPrint = True
     , _ddProject = pDdProject_
-    , _ddUserIp = Nothing
+    , _ddUserIP = Nothing
     , _ddKey = Nothing
-    , _ddOauthToken = Nothing
+    , _ddOAuthToken = Nothing
     , _ddFields = Nothing
-    , _ddAlt = JSON
     , _ddDeployment = pDdDeployment_
     }
 
@@ -132,32 +127,32 @@ ddProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ddUserIp :: Lens' DeploymentsDelete' (Maybe Text)
-ddUserIp = lens _ddUserIp (\ s a -> s{_ddUserIp = a})
+ddUserIP :: Lens' DeploymentsDelete' (Maybe Text)
+ddUserIP = lens _ddUserIP (\ s a -> s{_ddUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ddKey :: Lens' DeploymentsDelete' (Maybe Text)
+ddKey :: Lens' DeploymentsDelete' (Maybe Key)
 ddKey = lens _ddKey (\ s a -> s{_ddKey = a})
 
 -- | OAuth 2.0 token for the current user.
-ddOauthToken :: Lens' DeploymentsDelete' (Maybe Text)
-ddOauthToken
-  = lens _ddOauthToken (\ s a -> s{_ddOauthToken = a})
+ddOAuthToken :: Lens' DeploymentsDelete' (Maybe OAuthToken)
+ddOAuthToken
+  = lens _ddOAuthToken (\ s a -> s{_ddOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ddFields :: Lens' DeploymentsDelete' (Maybe Text)
 ddFields = lens _ddFields (\ s a -> s{_ddFields = a})
 
--- | Data format for the response.
-ddAlt :: Lens' DeploymentsDelete' Alt
-ddAlt = lens _ddAlt (\ s a -> s{_ddAlt = a})
-
 -- | The name of the deployment for this request.
 ddDeployment :: Lens' DeploymentsDelete' Text
 ddDeployment
   = lens _ddDeployment (\ s a -> s{_ddDeployment = a})
+
+instance GoogleAuth DeploymentsDelete' where
+        authKey = ddKey . _Just
+        authToken = ddOAuthToken . _Just
 
 instance GoogleRequest DeploymentsDelete' where
         type Rs DeploymentsDelete' = Operation
@@ -165,12 +160,12 @@ instance GoogleRequest DeploymentsDelete' where
           = requestWithRoute defReq deploymentManagerURL
         requestWithRoute r u DeploymentsDelete'{..}
           = go _ddQuotaUser (Just _ddPrettyPrint) _ddProject
-              _ddUserIp
+              _ddUserIP
               _ddKey
-              _ddOauthToken
+              _ddOAuthToken
               _ddFields
-              (Just _ddAlt)
               _ddDeployment
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy DeploymentsDeleteResource)

@@ -32,13 +32,12 @@ module Network.Google.Resource.FusionTables.Column.Delete
     -- * Request Lenses
     , cdQuotaUser
     , cdPrettyPrint
-    , cdUserIp
+    , cdUserIP
     , cdKey
-    , cdOauthToken
+    , cdOAuthToken
     , cdTableId
     , cdColumnId
     , cdFields
-    , cdAlt
     ) where
 
 import           Network.Google.FusionTables.Types
@@ -54,10 +53,10 @@ type ColumnDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Delete '[JSON] ()
+                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes the specified column.
 --
@@ -65,13 +64,12 @@ type ColumnDeleteResource =
 data ColumnDelete' = ColumnDelete'
     { _cdQuotaUser   :: !(Maybe Text)
     , _cdPrettyPrint :: !Bool
-    , _cdUserIp      :: !(Maybe Text)
-    , _cdKey         :: !(Maybe Text)
-    , _cdOauthToken  :: !(Maybe Text)
+    , _cdUserIP      :: !(Maybe Text)
+    , _cdKey         :: !(Maybe Key)
+    , _cdOAuthToken  :: !(Maybe OAuthToken)
     , _cdTableId     :: !Text
     , _cdColumnId    :: !Text
     , _cdFields      :: !(Maybe Text)
-    , _cdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ColumnDelete'' with the minimum fields required to make a request.
@@ -82,19 +80,17 @@ data ColumnDelete' = ColumnDelete'
 --
 -- * 'cdPrettyPrint'
 --
--- * 'cdUserIp'
+-- * 'cdUserIP'
 --
 -- * 'cdKey'
 --
--- * 'cdOauthToken'
+-- * 'cdOAuthToken'
 --
 -- * 'cdTableId'
 --
 -- * 'cdColumnId'
 --
 -- * 'cdFields'
---
--- * 'cdAlt'
 columnDelete'
     :: Text -- ^ 'tableId'
     -> Text -- ^ 'columnId'
@@ -103,13 +99,12 @@ columnDelete' pCdTableId_ pCdColumnId_ =
     ColumnDelete'
     { _cdQuotaUser = Nothing
     , _cdPrettyPrint = True
-    , _cdUserIp = Nothing
+    , _cdUserIP = Nothing
     , _cdKey = Nothing
-    , _cdOauthToken = Nothing
+    , _cdOAuthToken = Nothing
     , _cdTableId = pCdTableId_
     , _cdColumnId = pCdColumnId_
     , _cdFields = Nothing
-    , _cdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,19 +122,19 @@ cdPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cdUserIp :: Lens' ColumnDelete' (Maybe Text)
-cdUserIp = lens _cdUserIp (\ s a -> s{_cdUserIp = a})
+cdUserIP :: Lens' ColumnDelete' (Maybe Text)
+cdUserIP = lens _cdUserIP (\ s a -> s{_cdUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cdKey :: Lens' ColumnDelete' (Maybe Text)
+cdKey :: Lens' ColumnDelete' (Maybe Key)
 cdKey = lens _cdKey (\ s a -> s{_cdKey = a})
 
 -- | OAuth 2.0 token for the current user.
-cdOauthToken :: Lens' ColumnDelete' (Maybe Text)
-cdOauthToken
-  = lens _cdOauthToken (\ s a -> s{_cdOauthToken = a})
+cdOAuthToken :: Lens' ColumnDelete' (Maybe OAuthToken)
+cdOAuthToken
+  = lens _cdOAuthToken (\ s a -> s{_cdOAuthToken = a})
 
 -- | Table from which the column is being deleted.
 cdTableId :: Lens' ColumnDelete' Text
@@ -155,21 +150,21 @@ cdColumnId
 cdFields :: Lens' ColumnDelete' (Maybe Text)
 cdFields = lens _cdFields (\ s a -> s{_cdFields = a})
 
--- | Data format for the response.
-cdAlt :: Lens' ColumnDelete' Alt
-cdAlt = lens _cdAlt (\ s a -> s{_cdAlt = a})
+instance GoogleAuth ColumnDelete' where
+        authKey = cdKey . _Just
+        authToken = cdOAuthToken . _Just
 
 instance GoogleRequest ColumnDelete' where
         type Rs ColumnDelete' = ()
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u ColumnDelete'{..}
-          = go _cdQuotaUser (Just _cdPrettyPrint) _cdUserIp
+          = go _cdQuotaUser (Just _cdPrettyPrint) _cdUserIP
               _cdKey
-              _cdOauthToken
+              _cdOAuthToken
               _cdTableId
               _cdColumnId
               _cdFields
-              (Just _cdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ColumnDeleteResource)

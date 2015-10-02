@@ -33,11 +33,10 @@ module Network.Google.Resource.Games.Revisions.Check
     , rcQuotaUser
     , rcPrettyPrint
     , rcClientRevision
-    , rcUserIp
+    , rcUserIP
     , rcKey
-    , rcOauthToken
+    , rcOAuthToken
     , rcFields
-    , rcAlt
     ) where
 
 import           Network.Google.Games.Types
@@ -52,10 +51,10 @@ type RevisionsCheckResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "clientRevision" Text :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :>
+                       QueryParam "alt" AltJSON :>
                          Get '[JSON] RevisionCheckResponse
 
 -- | Checks whether the games client is out of date.
@@ -65,11 +64,10 @@ data RevisionsCheck' = RevisionsCheck'
     { _rcQuotaUser      :: !(Maybe Text)
     , _rcPrettyPrint    :: !Bool
     , _rcClientRevision :: !Text
-    , _rcUserIp         :: !(Maybe Text)
-    , _rcKey            :: !(Maybe Text)
-    , _rcOauthToken     :: !(Maybe Text)
+    , _rcUserIP         :: !(Maybe Text)
+    , _rcKey            :: !(Maybe Key)
+    , _rcOAuthToken     :: !(Maybe OAuthToken)
     , _rcFields         :: !(Maybe Text)
-    , _rcAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RevisionsCheck'' with the minimum fields required to make a request.
@@ -82,15 +80,13 @@ data RevisionsCheck' = RevisionsCheck'
 --
 -- * 'rcClientRevision'
 --
--- * 'rcUserIp'
+-- * 'rcUserIP'
 --
 -- * 'rcKey'
 --
--- * 'rcOauthToken'
+-- * 'rcOAuthToken'
 --
 -- * 'rcFields'
---
--- * 'rcAlt'
 revisionsCheck'
     :: Text -- ^ 'clientRevision'
     -> RevisionsCheck'
@@ -99,11 +95,10 @@ revisionsCheck' pRcClientRevision_ =
     { _rcQuotaUser = Nothing
     , _rcPrettyPrint = True
     , _rcClientRevision = pRcClientRevision_
-    , _rcUserIp = Nothing
+    , _rcUserIP = Nothing
     , _rcKey = Nothing
-    , _rcOauthToken = Nothing
+    , _rcOAuthToken = Nothing
     , _rcFields = Nothing
-    , _rcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -130,27 +125,27 @@ rcClientRevision
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rcUserIp :: Lens' RevisionsCheck' (Maybe Text)
-rcUserIp = lens _rcUserIp (\ s a -> s{_rcUserIp = a})
+rcUserIP :: Lens' RevisionsCheck' (Maybe Text)
+rcUserIP = lens _rcUserIP (\ s a -> s{_rcUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rcKey :: Lens' RevisionsCheck' (Maybe Text)
+rcKey :: Lens' RevisionsCheck' (Maybe Key)
 rcKey = lens _rcKey (\ s a -> s{_rcKey = a})
 
 -- | OAuth 2.0 token for the current user.
-rcOauthToken :: Lens' RevisionsCheck' (Maybe Text)
-rcOauthToken
-  = lens _rcOauthToken (\ s a -> s{_rcOauthToken = a})
+rcOAuthToken :: Lens' RevisionsCheck' (Maybe OAuthToken)
+rcOAuthToken
+  = lens _rcOAuthToken (\ s a -> s{_rcOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 rcFields :: Lens' RevisionsCheck' (Maybe Text)
 rcFields = lens _rcFields (\ s a -> s{_rcFields = a})
 
--- | Data format for the response.
-rcAlt :: Lens' RevisionsCheck' Alt
-rcAlt = lens _rcAlt (\ s a -> s{_rcAlt = a})
+instance GoogleAuth RevisionsCheck' where
+        authKey = rcKey . _Just
+        authToken = rcOAuthToken . _Just
 
 instance GoogleRequest RevisionsCheck' where
         type Rs RevisionsCheck' = RevisionCheckResponse
@@ -158,11 +153,11 @@ instance GoogleRequest RevisionsCheck' where
         requestWithRoute r u RevisionsCheck'{..}
           = go _rcQuotaUser (Just _rcPrettyPrint)
               (Just _rcClientRevision)
-              _rcUserIp
+              _rcUserIP
               _rcKey
-              _rcOauthToken
+              _rcOAuthToken
               _rcFields
-              (Just _rcAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy RevisionsCheckResource)

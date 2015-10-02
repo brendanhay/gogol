@@ -32,12 +32,11 @@ module Network.Google.Resource.Gmail.Users.Stop
     -- * Request Lenses
     , usQuotaUser
     , usPrettyPrint
-    , usUserIp
+    , usUserIP
     , usUserId
     , usKey
-    , usOauthToken
+    , usOAuthToken
     , usFields
-    , usAlt
     ) where
 
 import           Network.Google.Gmail.Types
@@ -51,10 +50,10 @@ type UsersStopResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Post '[JSON] ()
+                     QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Stop receiving push notifications for the given user mailbox.
 --
@@ -62,12 +61,11 @@ type UsersStopResource =
 data UsersStop' = UsersStop'
     { _usQuotaUser   :: !(Maybe Text)
     , _usPrettyPrint :: !Bool
-    , _usUserIp      :: !(Maybe Text)
+    , _usUserIP      :: !(Maybe Text)
     , _usUserId      :: !Text
-    , _usKey         :: !(Maybe Text)
-    , _usOauthToken  :: !(Maybe Text)
+    , _usKey         :: !(Maybe Key)
+    , _usOAuthToken  :: !(Maybe OAuthToken)
     , _usFields      :: !(Maybe Text)
-    , _usAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersStop'' with the minimum fields required to make a request.
@@ -78,17 +76,15 @@ data UsersStop' = UsersStop'
 --
 -- * 'usPrettyPrint'
 --
--- * 'usUserIp'
+-- * 'usUserIP'
 --
 -- * 'usUserId'
 --
 -- * 'usKey'
 --
--- * 'usOauthToken'
+-- * 'usOAuthToken'
 --
 -- * 'usFields'
---
--- * 'usAlt'
 usersStop'
     :: Text
     -> UsersStop'
@@ -96,12 +92,11 @@ usersStop' pUsUserId_ =
     UsersStop'
     { _usQuotaUser = Nothing
     , _usPrettyPrint = True
-    , _usUserIp = Nothing
+    , _usUserIP = Nothing
     , _usUserId = pUsUserId_
     , _usKey = Nothing
-    , _usOauthToken = Nothing
+    , _usOAuthToken = Nothing
     , _usFields = Nothing
-    , _usAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -119,8 +114,8 @@ usPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-usUserIp :: Lens' UsersStop' (Maybe Text)
-usUserIp = lens _usUserIp (\ s a -> s{_usUserIp = a})
+usUserIP :: Lens' UsersStop' (Maybe Text)
+usUserIP = lens _usUserIP (\ s a -> s{_usUserIP = a})
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
@@ -130,32 +125,32 @@ usUserId = lens _usUserId (\ s a -> s{_usUserId = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-usKey :: Lens' UsersStop' (Maybe Text)
+usKey :: Lens' UsersStop' (Maybe Key)
 usKey = lens _usKey (\ s a -> s{_usKey = a})
 
 -- | OAuth 2.0 token for the current user.
-usOauthToken :: Lens' UsersStop' (Maybe Text)
-usOauthToken
-  = lens _usOauthToken (\ s a -> s{_usOauthToken = a})
+usOAuthToken :: Lens' UsersStop' (Maybe OAuthToken)
+usOAuthToken
+  = lens _usOAuthToken (\ s a -> s{_usOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 usFields :: Lens' UsersStop' (Maybe Text)
 usFields = lens _usFields (\ s a -> s{_usFields = a})
 
--- | Data format for the response.
-usAlt :: Lens' UsersStop' Alt
-usAlt = lens _usAlt (\ s a -> s{_usAlt = a})
+instance GoogleAuth UsersStop' where
+        authKey = usKey . _Just
+        authToken = usOAuthToken . _Just
 
 instance GoogleRequest UsersStop' where
         type Rs UsersStop' = ()
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersStop'{..}
-          = go _usQuotaUser (Just _usPrettyPrint) _usUserIp
+          = go _usQuotaUser (Just _usPrettyPrint) _usUserIP
               _usUserId
               _usKey
-              _usOauthToken
+              _usOAuthToken
               _usFields
-              (Just _usAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy UsersStopResource)
                       r

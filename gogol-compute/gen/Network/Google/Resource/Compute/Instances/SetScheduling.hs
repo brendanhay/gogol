@@ -33,12 +33,12 @@ module Network.Google.Resource.Compute.Instances.SetScheduling
     , issQuotaUser
     , issPrettyPrint
     , issProject
-    , issUserIp
+    , issUserIP
     , issZone
     , issKey
-    , issOauthToken
+    , issScheduling
+    , issOAuthToken
     , issFields
-    , issAlt
     , issInstance
     ) where
 
@@ -57,10 +57,12 @@ type InstancesSetSchedulingResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Post '[JSON] Operation
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] Scheduling :>
+                                 Post '[JSON] Operation
 
 -- | Sets an instance\'s scheduling options.
 --
@@ -69,12 +71,12 @@ data InstancesSetScheduling' = InstancesSetScheduling'
     { _issQuotaUser   :: !(Maybe Text)
     , _issPrettyPrint :: !Bool
     , _issProject     :: !Text
-    , _issUserIp      :: !(Maybe Text)
+    , _issUserIP      :: !(Maybe Text)
     , _issZone        :: !Text
-    , _issKey         :: !(Maybe Text)
-    , _issOauthToken  :: !(Maybe Text)
+    , _issKey         :: !(Maybe Key)
+    , _issScheduling  :: !Scheduling
+    , _issOAuthToken  :: !(Maybe OAuthToken)
     , _issFields      :: !(Maybe Text)
-    , _issAlt         :: !Alt
     , _issInstance    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -88,35 +90,36 @@ data InstancesSetScheduling' = InstancesSetScheduling'
 --
 -- * 'issProject'
 --
--- * 'issUserIp'
+-- * 'issUserIP'
 --
 -- * 'issZone'
 --
 -- * 'issKey'
 --
--- * 'issOauthToken'
+-- * 'issScheduling'
+--
+-- * 'issOAuthToken'
 --
 -- * 'issFields'
---
--- * 'issAlt'
 --
 -- * 'issInstance'
 instancesSetScheduling'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
+    -> Scheduling -- ^ 'Scheduling'
     -> Text -- ^ 'instance'
     -> InstancesSetScheduling'
-instancesSetScheduling' pIssProject_ pIssZone_ pIssInstance_ =
+instancesSetScheduling' pIssProject_ pIssZone_ pIssScheduling_ pIssInstance_ =
     InstancesSetScheduling'
     { _issQuotaUser = Nothing
     , _issPrettyPrint = True
     , _issProject = pIssProject_
-    , _issUserIp = Nothing
+    , _issUserIP = Nothing
     , _issZone = pIssZone_
     , _issKey = Nothing
-    , _issOauthToken = Nothing
+    , _issScheduling = pIssScheduling_
+    , _issOAuthToken = Nothing
     , _issFields = Nothing
-    , _issAlt = JSON
     , _issInstance = pIssInstance_
     }
 
@@ -140,9 +143,9 @@ issProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-issUserIp :: Lens' InstancesSetScheduling' (Maybe Text)
-issUserIp
-  = lens _issUserIp (\ s a -> s{_issUserIp = a})
+issUserIP :: Lens' InstancesSetScheduling' (Maybe Text)
+issUserIP
+  = lens _issUserIP (\ s a -> s{_issUserIP = a})
 
 -- | The name of the zone for this request.
 issZone :: Lens' InstancesSetScheduling' Text
@@ -151,41 +154,48 @@ issZone = lens _issZone (\ s a -> s{_issZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-issKey :: Lens' InstancesSetScheduling' (Maybe Text)
+issKey :: Lens' InstancesSetScheduling' (Maybe Key)
 issKey = lens _issKey (\ s a -> s{_issKey = a})
 
+-- | Multipart request metadata.
+issScheduling :: Lens' InstancesSetScheduling' Scheduling
+issScheduling
+  = lens _issScheduling
+      (\ s a -> s{_issScheduling = a})
+
 -- | OAuth 2.0 token for the current user.
-issOauthToken :: Lens' InstancesSetScheduling' (Maybe Text)
-issOauthToken
-  = lens _issOauthToken
-      (\ s a -> s{_issOauthToken = a})
+issOAuthToken :: Lens' InstancesSetScheduling' (Maybe OAuthToken)
+issOAuthToken
+  = lens _issOAuthToken
+      (\ s a -> s{_issOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 issFields :: Lens' InstancesSetScheduling' (Maybe Text)
 issFields
   = lens _issFields (\ s a -> s{_issFields = a})
 
--- | Data format for the response.
-issAlt :: Lens' InstancesSetScheduling' Alt
-issAlt = lens _issAlt (\ s a -> s{_issAlt = a})
-
 -- | Instance name.
 issInstance :: Lens' InstancesSetScheduling' Text
 issInstance
   = lens _issInstance (\ s a -> s{_issInstance = a})
+
+instance GoogleAuth InstancesSetScheduling' where
+        authKey = issKey . _Just
+        authToken = issOAuthToken . _Just
 
 instance GoogleRequest InstancesSetScheduling' where
         type Rs InstancesSetScheduling' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstancesSetScheduling'{..}
           = go _issQuotaUser (Just _issPrettyPrint) _issProject
-              _issUserIp
+              _issUserIP
               _issZone
               _issKey
-              _issOauthToken
+              _issOAuthToken
               _issFields
-              (Just _issAlt)
               _issInstance
+              (Just AltJSON)
+              _issScheduling
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InstancesSetSchedulingResource)

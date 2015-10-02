@@ -36,7 +36,7 @@ module Network.Google.Resource.Directory.Users.List
     , ulOrderBy
     , ulViewType
     , ulCustomFieldMask
-    , ulUserIp
+    , ulUserIP
     , ulDomain
     , ulShowDeleted
     , ulSortOrder
@@ -45,10 +45,9 @@ module Network.Google.Resource.Directory.Users.List
     , ulQuery
     , ulProjection
     , ulPageToken
-    , ulOauthToken
+    , ulOAuthToken
     , ulMaxResults
     , ulFields
-    , ulAlt
     ) where
 
 import           Network.Google.AdminDirectory.Types
@@ -69,16 +68,16 @@ type UsersListResource =
                        QueryParam "showDeleted" Text :>
                          QueryParam "sortOrder" DirectoryUsersListSortOrder :>
                            QueryParam "customer" Text :>
-                             QueryParam "key" Text :>
+                             QueryParam "key" Key :>
                                QueryParam "query" Text :>
                                  QueryParam "projection"
                                    DirectoryUsersListProjection
                                    :>
                                    QueryParam "pageToken" Text :>
-                                     QueryParam "oauth_token" Text :>
+                                     QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "maxResults" Int32 :>
                                          QueryParam "fields" Text :>
-                                           QueryParam "alt" Alt :>
+                                           QueryParam "alt" AltJSON :>
                                              Get '[JSON] Users
 
 -- | Retrieve either deleted users or all users in a domain (paginated)
@@ -91,19 +90,18 @@ data UsersList' = UsersList'
     , _ulOrderBy         :: !(Maybe DirectoryUsersListOrderBy)
     , _ulViewType        :: !DirectoryUsersListViewType
     , _ulCustomFieldMask :: !(Maybe Text)
-    , _ulUserIp          :: !(Maybe Text)
+    , _ulUserIP          :: !(Maybe Text)
     , _ulDomain          :: !(Maybe Text)
     , _ulShowDeleted     :: !(Maybe Text)
     , _ulSortOrder       :: !(Maybe DirectoryUsersListSortOrder)
     , _ulCustomer        :: !(Maybe Text)
-    , _ulKey             :: !(Maybe Text)
+    , _ulKey             :: !(Maybe Key)
     , _ulQuery           :: !(Maybe Text)
     , _ulProjection      :: !DirectoryUsersListProjection
     , _ulPageToken       :: !(Maybe Text)
-    , _ulOauthToken      :: !(Maybe Text)
+    , _ulOAuthToken      :: !(Maybe OAuthToken)
     , _ulMaxResults      :: !(Maybe Int32)
     , _ulFields          :: !(Maybe Text)
-    , _ulAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersList'' with the minimum fields required to make a request.
@@ -122,7 +120,7 @@ data UsersList' = UsersList'
 --
 -- * 'ulCustomFieldMask'
 --
--- * 'ulUserIp'
+-- * 'ulUserIP'
 --
 -- * 'ulDomain'
 --
@@ -140,13 +138,11 @@ data UsersList' = UsersList'
 --
 -- * 'ulPageToken'
 --
--- * 'ulOauthToken'
+-- * 'ulOAuthToken'
 --
 -- * 'ulMaxResults'
 --
 -- * 'ulFields'
---
--- * 'ulAlt'
 usersList'
     :: UsersList'
 usersList' =
@@ -157,7 +153,7 @@ usersList' =
     , _ulOrderBy = Nothing
     , _ulViewType = AdminView
     , _ulCustomFieldMask = Nothing
-    , _ulUserIp = Nothing
+    , _ulUserIP = Nothing
     , _ulDomain = Nothing
     , _ulShowDeleted = Nothing
     , _ulSortOrder = Nothing
@@ -166,10 +162,9 @@ usersList' =
     , _ulQuery = Nothing
     , _ulProjection = DULPBasic
     , _ulPageToken = Nothing
-    , _ulOauthToken = Nothing
+    , _ulOAuthToken = Nothing
     , _ulMaxResults = Nothing
     , _ulFields = Nothing
-    , _ulAlt = JSON
     }
 
 -- | Event on which subscription is intended (if subscribing)
@@ -208,8 +203,8 @@ ulCustomFieldMask
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ulUserIp :: Lens' UsersList' (Maybe Text)
-ulUserIp = lens _ulUserIp (\ s a -> s{_ulUserIp = a})
+ulUserIP :: Lens' UsersList' (Maybe Text)
+ulUserIP = lens _ulUserIP (\ s a -> s{_ulUserIP = a})
 
 -- | Name of the domain. Fill this field to get users from only this domain.
 -- To return all users in a multi-domain fill customer field instead.
@@ -236,7 +231,7 @@ ulCustomer
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ulKey :: Lens' UsersList' (Maybe Text)
+ulKey :: Lens' UsersList' (Maybe Key)
 ulKey = lens _ulKey (\ s a -> s{_ulKey = a})
 
 -- | Query string search. Should be of the form \"\". Complete documentation
@@ -256,9 +251,9 @@ ulPageToken
   = lens _ulPageToken (\ s a -> s{_ulPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-ulOauthToken :: Lens' UsersList' (Maybe Text)
-ulOauthToken
-  = lens _ulOauthToken (\ s a -> s{_ulOauthToken = a})
+ulOAuthToken :: Lens' UsersList' (Maybe OAuthToken)
+ulOAuthToken
+  = lens _ulOAuthToken (\ s a -> s{_ulOAuthToken = a})
 
 -- | Maximum number of results to return. Default is 100. Max allowed is 500
 ulMaxResults :: Lens' UsersList' (Maybe Int32)
@@ -269,9 +264,9 @@ ulMaxResults
 ulFields :: Lens' UsersList' (Maybe Text)
 ulFields = lens _ulFields (\ s a -> s{_ulFields = a})
 
--- | Data format for the response.
-ulAlt :: Lens' UsersList' Alt
-ulAlt = lens _ulAlt (\ s a -> s{_ulAlt = a})
+instance GoogleAuth UsersList' where
+        authKey = ulKey . _Just
+        authToken = ulOAuthToken . _Just
 
 instance GoogleRequest UsersList' where
         type Rs UsersList' = Users
@@ -281,7 +276,7 @@ instance GoogleRequest UsersList' where
               _ulOrderBy
               (Just _ulViewType)
               _ulCustomFieldMask
-              _ulUserIp
+              _ulUserIP
               _ulDomain
               _ulShowDeleted
               _ulSortOrder
@@ -290,10 +285,10 @@ instance GoogleRequest UsersList' where
               _ulQuery
               (Just _ulProjection)
               _ulPageToken
-              _ulOauthToken
+              _ulOAuthToken
               _ulMaxResults
               _ulFields
-              (Just _ulAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy UsersListResource)
                       r

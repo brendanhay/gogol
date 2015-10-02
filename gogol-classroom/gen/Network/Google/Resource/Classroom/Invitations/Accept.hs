@@ -46,10 +46,9 @@ module Network.Google.Resource.Classroom.Invitations.Accept
     , iaBearerToken
     , iaKey
     , iaId
-    , iaOauthToken
+    , iaOAuthToken
     , iaFields
     , iaCallback
-    , iaAlt
     ) where
 
 import           Network.Google.Classroom.Types
@@ -69,11 +68,12 @@ type InvitationsAcceptResource =
                      QueryParam "access_token" Text :>
                        QueryParam "uploadType" Text :>
                          QueryParam "bearer_token" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "fields" Text :>
                                  QueryParam "callback" Text :>
-                                   QueryParam "alt" Text :> Post '[JSON] Empty
+                                   QueryParam "alt" AltJSON :>
+                                     Post '[JSON] Empty
 
 -- | Accepts an invitation, removing it and adding the invited user to the
 -- teachers or students (as appropriate) of the specified course. Only the
@@ -93,12 +93,11 @@ data InvitationsAccept' = InvitationsAccept'
     , _iaAccessToken    :: !(Maybe Text)
     , _iaUploadType     :: !(Maybe Text)
     , _iaBearerToken    :: !(Maybe Text)
-    , _iaKey            :: !(Maybe Text)
+    , _iaKey            :: !(Maybe Key)
     , _iaId             :: !Text
-    , _iaOauthToken     :: !(Maybe Text)
+    , _iaOAuthToken     :: !(Maybe OAuthToken)
     , _iaFields         :: !(Maybe Text)
     , _iaCallback       :: !(Maybe Text)
-    , _iaAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InvitationsAccept'' with the minimum fields required to make a request.
@@ -125,13 +124,11 @@ data InvitationsAccept' = InvitationsAccept'
 --
 -- * 'iaId'
 --
--- * 'iaOauthToken'
+-- * 'iaOAuthToken'
 --
 -- * 'iaFields'
 --
 -- * 'iaCallback'
---
--- * 'iaAlt'
 invitationsAccept'
     :: Text -- ^ 'id'
     -> InvitationsAccept'
@@ -147,10 +144,9 @@ invitationsAccept' pIaId_ =
     , _iaBearerToken = Nothing
     , _iaKey = Nothing
     , _iaId = pIaId_
-    , _iaOauthToken = Nothing
+    , _iaOAuthToken = Nothing
     , _iaFields = Nothing
     , _iaCallback = Nothing
-    , _iaAlt = "json"
     }
 
 -- | V1 error format.
@@ -200,7 +196,7 @@ iaBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-iaKey :: Lens' InvitationsAccept' (Maybe Text)
+iaKey :: Lens' InvitationsAccept' (Maybe Key)
 iaKey = lens _iaKey (\ s a -> s{_iaKey = a})
 
 -- | Identifier of the invitation to accept.
@@ -208,9 +204,9 @@ iaId :: Lens' InvitationsAccept' Text
 iaId = lens _iaId (\ s a -> s{_iaId = a})
 
 -- | OAuth 2.0 token for the current user.
-iaOauthToken :: Lens' InvitationsAccept' (Maybe Text)
-iaOauthToken
-  = lens _iaOauthToken (\ s a -> s{_iaOauthToken = a})
+iaOAuthToken :: Lens' InvitationsAccept' (Maybe OAuthToken)
+iaOAuthToken
+  = lens _iaOAuthToken (\ s a -> s{_iaOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 iaFields :: Lens' InvitationsAccept' (Maybe Text)
@@ -221,9 +217,9 @@ iaCallback :: Lens' InvitationsAccept' (Maybe Text)
 iaCallback
   = lens _iaCallback (\ s a -> s{_iaCallback = a})
 
--- | Data format for response.
-iaAlt :: Lens' InvitationsAccept' Text
-iaAlt = lens _iaAlt (\ s a -> s{_iaAlt = a})
+instance GoogleAuth InvitationsAccept' where
+        authKey = iaKey . _Just
+        authToken = iaOAuthToken . _Just
 
 instance GoogleRequest InvitationsAccept' where
         type Rs InvitationsAccept' = Empty
@@ -237,10 +233,10 @@ instance GoogleRequest InvitationsAccept' where
               _iaBearerToken
               _iaKey
               _iaId
-              _iaOauthToken
+              _iaOAuthToken
               _iaFields
               _iaCallback
-              (Just _iaAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InvitationsAcceptResource)

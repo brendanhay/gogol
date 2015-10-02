@@ -1,0 +1,193 @@
+{-# LANGUAGE DataKinds          #-}
+{-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
+{-# LANGUAGE TypeFamilies       #-}
+{-# LANGUAGE TypeOperators      #-}
+
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+
+-- |
+-- Module      : Network.Google.Resource.AdSense.URLChannels.List
+-- Copyright   : (c) 2015 Brendan Hay
+-- License     : Mozilla Public License, v. 2.0.
+-- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Stability   : auto-generated
+-- Portability : non-portable (GHC extensions)
+--
+-- | List all URL channels in the specified ad client for this AdSense
+-- account.
+--
+-- /See:/ <https://developers.google.com/adsense/management/ AdSense Management API Reference> for @AdsenseURLChannelsList@.
+module Network.Google.Resource.AdSense.URLChannels.List
+    (
+    -- * REST Resource
+      UrlChannelsListResource
+
+    -- * Creating a Request
+    , uRLChannelsList'
+    , URLChannelsList'
+
+    -- * Request Lenses
+    , uclQuotaUser
+    , uclPrettyPrint
+    , uclUserIP
+    , uclAdClientId
+    , uclKey
+    , uclPageToken
+    , uclOAuthToken
+    , uclMaxResults
+    , uclFields
+    ) where
+
+import           Network.Google.AdSense.Types
+import           Network.Google.Prelude
+
+-- | A resource alias for @AdsenseURLChannelsList@ which the
+-- 'URLChannelsList'' request conforms to.
+type UrlChannelsListResource =
+     "adclients" :>
+       Capture "adClientId" Text :>
+         "urlchannels" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "pageToken" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
+                       QueryParam "maxResults" Int32 :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" AltJSON :> Get '[JSON] URLChannels
+
+-- | List all URL channels in the specified ad client for this AdSense
+-- account.
+--
+-- /See:/ 'uRLChannelsList'' smart constructor.
+data URLChannelsList' = URLChannelsList'
+    { _uclQuotaUser   :: !(Maybe Text)
+    , _uclPrettyPrint :: !Bool
+    , _uclUserIP      :: !(Maybe Text)
+    , _uclAdClientId  :: !Text
+    , _uclKey         :: !(Maybe Key)
+    , _uclPageToken   :: !(Maybe Text)
+    , _uclOAuthToken  :: !(Maybe OAuthToken)
+    , _uclMaxResults  :: !(Maybe Int32)
+    , _uclFields      :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'URLChannelsList'' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'uclQuotaUser'
+--
+-- * 'uclPrettyPrint'
+--
+-- * 'uclUserIP'
+--
+-- * 'uclAdClientId'
+--
+-- * 'uclKey'
+--
+-- * 'uclPageToken'
+--
+-- * 'uclOAuthToken'
+--
+-- * 'uclMaxResults'
+--
+-- * 'uclFields'
+uRLChannelsList'
+    :: Text -- ^ 'adClientId'
+    -> URLChannelsList'
+uRLChannelsList' pUclAdClientId_ =
+    URLChannelsList'
+    { _uclQuotaUser = Nothing
+    , _uclPrettyPrint = True
+    , _uclUserIP = Nothing
+    , _uclAdClientId = pUclAdClientId_
+    , _uclKey = Nothing
+    , _uclPageToken = Nothing
+    , _uclOAuthToken = Nothing
+    , _uclMaxResults = Nothing
+    , _uclFields = Nothing
+    }
+
+-- | Available to use for quota purposes for server-side applications. Can be
+-- any arbitrary string assigned to a user, but should not exceed 40
+-- characters. Overrides userIp if both are provided.
+uclQuotaUser :: Lens' URLChannelsList' (Maybe Text)
+uclQuotaUser
+  = lens _uclQuotaUser (\ s a -> s{_uclQuotaUser = a})
+
+-- | Returns response with indentations and line breaks.
+uclPrettyPrint :: Lens' URLChannelsList' Bool
+uclPrettyPrint
+  = lens _uclPrettyPrint
+      (\ s a -> s{_uclPrettyPrint = a})
+
+-- | IP address of the site where the request originates. Use this if you
+-- want to enforce per-user limits.
+uclUserIP :: Lens' URLChannelsList' (Maybe Text)
+uclUserIP
+  = lens _uclUserIP (\ s a -> s{_uclUserIP = a})
+
+-- | Ad client for which to list URL channels.
+uclAdClientId :: Lens' URLChannelsList' Text
+uclAdClientId
+  = lens _uclAdClientId
+      (\ s a -> s{_uclAdClientId = a})
+
+-- | API key. Your API key identifies your project and provides you with API
+-- access, quota, and reports. Required unless you provide an OAuth 2.0
+-- token.
+uclKey :: Lens' URLChannelsList' (Maybe Key)
+uclKey = lens _uclKey (\ s a -> s{_uclKey = a})
+
+-- | A continuation token, used to page through URL channels. To retrieve the
+-- next page, set this parameter to the value of \"nextPageToken\" from the
+-- previous response.
+uclPageToken :: Lens' URLChannelsList' (Maybe Text)
+uclPageToken
+  = lens _uclPageToken (\ s a -> s{_uclPageToken = a})
+
+-- | OAuth 2.0 token for the current user.
+uclOAuthToken :: Lens' URLChannelsList' (Maybe OAuthToken)
+uclOAuthToken
+  = lens _uclOAuthToken
+      (\ s a -> s{_uclOAuthToken = a})
+
+-- | The maximum number of URL channels to include in the response, used for
+-- paging.
+uclMaxResults :: Lens' URLChannelsList' (Maybe Int32)
+uclMaxResults
+  = lens _uclMaxResults
+      (\ s a -> s{_uclMaxResults = a})
+
+-- | Selector specifying which fields to include in a partial response.
+uclFields :: Lens' URLChannelsList' (Maybe Text)
+uclFields
+  = lens _uclFields (\ s a -> s{_uclFields = a})
+
+instance GoogleAuth URLChannelsList' where
+        authKey = uclKey . _Just
+        authToken = uclOAuthToken . _Just
+
+instance GoogleRequest URLChannelsList' where
+        type Rs URLChannelsList' = URLChannels
+        request = requestWithRoute defReq adSenseURL
+        requestWithRoute r u URLChannelsList'{..}
+          = go _uclQuotaUser (Just _uclPrettyPrint) _uclUserIP
+              _uclAdClientId
+              _uclKey
+              _uclPageToken
+              _uclOAuthToken
+              _uclMaxResults
+              _uclFields
+              (Just AltJSON)
+          where go
+                  = clientWithRoute
+                      (Proxy :: Proxy UrlChannelsListResource)
+                      r
+                      u

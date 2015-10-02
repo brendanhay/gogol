@@ -36,13 +36,13 @@ module Network.Google.Resource.Fitness.Users.DataSources.Update
     -- * Request Lenses
     , udsuQuotaUser
     , udsuPrettyPrint
-    , udsuUserIp
+    , udsuUserIP
     , udsuDataSourceId
     , udsuUserId
     , udsuKey
-    , udsuOauthToken
+    , udsuDataSource
+    , udsuOAuthToken
     , udsuFields
-    , udsuAlt
     ) where
 
 import           Network.Google.Fitness.Types
@@ -57,10 +57,11 @@ type UsersDataSourcesUpdateResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Put '[JSON] DataSource
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] DataSource :> Put '[JSON] DataSource
 
 -- | Updates a given data source. It is an error to modify the data source\'s
 -- data stream ID, data type, type, stream name or device information apart
@@ -72,13 +73,13 @@ type UsersDataSourcesUpdateResource =
 data UsersDataSourcesUpdate' = UsersDataSourcesUpdate'
     { _udsuQuotaUser    :: !(Maybe Text)
     , _udsuPrettyPrint  :: !Bool
-    , _udsuUserIp       :: !(Maybe Text)
+    , _udsuUserIP       :: !(Maybe Text)
     , _udsuDataSourceId :: !Text
     , _udsuUserId       :: !Text
-    , _udsuKey          :: !(Maybe Text)
-    , _udsuOauthToken   :: !(Maybe Text)
+    , _udsuKey          :: !(Maybe Key)
+    , _udsuDataSource   :: !DataSource
+    , _udsuOAuthToken   :: !(Maybe OAuthToken)
     , _udsuFields       :: !(Maybe Text)
-    , _udsuAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDataSourcesUpdate'' with the minimum fields required to make a request.
@@ -89,7 +90,7 @@ data UsersDataSourcesUpdate' = UsersDataSourcesUpdate'
 --
 -- * 'udsuPrettyPrint'
 --
--- * 'udsuUserIp'
+-- * 'udsuUserIP'
 --
 -- * 'udsuDataSourceId'
 --
@@ -97,26 +98,27 @@ data UsersDataSourcesUpdate' = UsersDataSourcesUpdate'
 --
 -- * 'udsuKey'
 --
--- * 'udsuOauthToken'
+-- * 'udsuDataSource'
+--
+-- * 'udsuOAuthToken'
 --
 -- * 'udsuFields'
---
--- * 'udsuAlt'
 usersDataSourcesUpdate'
     :: Text -- ^ 'dataSourceId'
     -> Text -- ^ 'userId'
+    -> DataSource -- ^ 'DataSource'
     -> UsersDataSourcesUpdate'
-usersDataSourcesUpdate' pUdsuDataSourceId_ pUdsuUserId_ =
+usersDataSourcesUpdate' pUdsuDataSourceId_ pUdsuUserId_ pUdsuDataSource_ =
     UsersDataSourcesUpdate'
     { _udsuQuotaUser = Nothing
     , _udsuPrettyPrint = True
-    , _udsuUserIp = Nothing
+    , _udsuUserIP = Nothing
     , _udsuDataSourceId = pUdsuDataSourceId_
     , _udsuUserId = pUdsuUserId_
     , _udsuKey = Nothing
-    , _udsuOauthToken = Nothing
+    , _udsuDataSource = pUdsuDataSource_
+    , _udsuOAuthToken = Nothing
     , _udsuFields = Nothing
-    , _udsuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,9 +137,9 @@ udsuPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-udsuUserIp :: Lens' UsersDataSourcesUpdate' (Maybe Text)
-udsuUserIp
-  = lens _udsuUserIp (\ s a -> s{_udsuUserIp = a})
+udsuUserIP :: Lens' UsersDataSourcesUpdate' (Maybe Text)
+udsuUserIP
+  = lens _udsuUserIP (\ s a -> s{_udsuUserIP = a})
 
 -- | The data stream ID of the data source to update.
 udsuDataSourceId :: Lens' UsersDataSourcesUpdate' Text
@@ -154,36 +156,43 @@ udsuUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-udsuKey :: Lens' UsersDataSourcesUpdate' (Maybe Text)
+udsuKey :: Lens' UsersDataSourcesUpdate' (Maybe Key)
 udsuKey = lens _udsuKey (\ s a -> s{_udsuKey = a})
 
+-- | Multipart request metadata.
+udsuDataSource :: Lens' UsersDataSourcesUpdate' DataSource
+udsuDataSource
+  = lens _udsuDataSource
+      (\ s a -> s{_udsuDataSource = a})
+
 -- | OAuth 2.0 token for the current user.
-udsuOauthToken :: Lens' UsersDataSourcesUpdate' (Maybe Text)
-udsuOauthToken
-  = lens _udsuOauthToken
-      (\ s a -> s{_udsuOauthToken = a})
+udsuOAuthToken :: Lens' UsersDataSourcesUpdate' (Maybe OAuthToken)
+udsuOAuthToken
+  = lens _udsuOAuthToken
+      (\ s a -> s{_udsuOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 udsuFields :: Lens' UsersDataSourcesUpdate' (Maybe Text)
 udsuFields
   = lens _udsuFields (\ s a -> s{_udsuFields = a})
 
--- | Data format for the response.
-udsuAlt :: Lens' UsersDataSourcesUpdate' Alt
-udsuAlt = lens _udsuAlt (\ s a -> s{_udsuAlt = a})
+instance GoogleAuth UsersDataSourcesUpdate' where
+        authKey = udsuKey . _Just
+        authToken = udsuOAuthToken . _Just
 
 instance GoogleRequest UsersDataSourcesUpdate' where
         type Rs UsersDataSourcesUpdate' = DataSource
         request = requestWithRoute defReq fitnessURL
         requestWithRoute r u UsersDataSourcesUpdate'{..}
           = go _udsuQuotaUser (Just _udsuPrettyPrint)
-              _udsuUserIp
+              _udsuUserIP
               _udsuDataSourceId
               _udsuUserId
               _udsuKey
-              _udsuOauthToken
+              _udsuOAuthToken
               _udsuFields
-              (Just _udsuAlt)
+              (Just AltJSON)
+              _udsuDataSource
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersDataSourcesUpdateResource)

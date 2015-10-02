@@ -33,12 +33,11 @@ module Network.Google.Resource.Compute.Instances.Get
     , igQuotaUser
     , igPrettyPrint
     , igProject
-    , igUserIp
+    , igUserIP
     , igZone
     , igKey
-    , igOauthToken
+    , igOAuthToken
     , igFields
-    , igAlt
     , igInstance
     ) where
 
@@ -56,10 +55,10 @@ type InstancesGetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Get '[JSON] Instance
+                           QueryParam "alt" AltJSON :> Get '[JSON] Instance
 
 -- | Returns the specified instance resource.
 --
@@ -68,12 +67,11 @@ data InstancesGet' = InstancesGet'
     { _igQuotaUser   :: !(Maybe Text)
     , _igPrettyPrint :: !Bool
     , _igProject     :: !Text
-    , _igUserIp      :: !(Maybe Text)
+    , _igUserIP      :: !(Maybe Text)
     , _igZone        :: !Text
-    , _igKey         :: !(Maybe Text)
-    , _igOauthToken  :: !(Maybe Text)
+    , _igKey         :: !(Maybe Key)
+    , _igOAuthToken  :: !(Maybe OAuthToken)
     , _igFields      :: !(Maybe Text)
-    , _igAlt         :: !Alt
     , _igInstance    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -87,17 +85,15 @@ data InstancesGet' = InstancesGet'
 --
 -- * 'igProject'
 --
--- * 'igUserIp'
+-- * 'igUserIP'
 --
 -- * 'igZone'
 --
 -- * 'igKey'
 --
--- * 'igOauthToken'
+-- * 'igOAuthToken'
 --
 -- * 'igFields'
---
--- * 'igAlt'
 --
 -- * 'igInstance'
 instancesGet'
@@ -110,12 +106,11 @@ instancesGet' pIgProject_ pIgZone_ pIgInstance_ =
     { _igQuotaUser = Nothing
     , _igPrettyPrint = True
     , _igProject = pIgProject_
-    , _igUserIp = Nothing
+    , _igUserIP = Nothing
     , _igZone = pIgZone_
     , _igKey = Nothing
-    , _igOauthToken = Nothing
+    , _igOAuthToken = Nothing
     , _igFields = Nothing
-    , _igAlt = JSON
     , _igInstance = pIgInstance_
     }
 
@@ -139,8 +134,8 @@ igProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-igUserIp :: Lens' InstancesGet' (Maybe Text)
-igUserIp = lens _igUserIp (\ s a -> s{_igUserIp = a})
+igUserIP :: Lens' InstancesGet' (Maybe Text)
+igUserIP = lens _igUserIP (\ s a -> s{_igUserIP = a})
 
 -- | The name of the zone for this request.
 igZone :: Lens' InstancesGet' Text
@@ -149,39 +144,39 @@ igZone = lens _igZone (\ s a -> s{_igZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-igKey :: Lens' InstancesGet' (Maybe Text)
+igKey :: Lens' InstancesGet' (Maybe Key)
 igKey = lens _igKey (\ s a -> s{_igKey = a})
 
 -- | OAuth 2.0 token for the current user.
-igOauthToken :: Lens' InstancesGet' (Maybe Text)
-igOauthToken
-  = lens _igOauthToken (\ s a -> s{_igOauthToken = a})
+igOAuthToken :: Lens' InstancesGet' (Maybe OAuthToken)
+igOAuthToken
+  = lens _igOAuthToken (\ s a -> s{_igOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 igFields :: Lens' InstancesGet' (Maybe Text)
 igFields = lens _igFields (\ s a -> s{_igFields = a})
-
--- | Data format for the response.
-igAlt :: Lens' InstancesGet' Alt
-igAlt = lens _igAlt (\ s a -> s{_igAlt = a})
 
 -- | Name of the instance resource to return.
 igInstance :: Lens' InstancesGet' Text
 igInstance
   = lens _igInstance (\ s a -> s{_igInstance = a})
 
+instance GoogleAuth InstancesGet' where
+        authKey = igKey . _Just
+        authToken = igOAuthToken . _Just
+
 instance GoogleRequest InstancesGet' where
         type Rs InstancesGet' = Instance
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstancesGet'{..}
           = go _igQuotaUser (Just _igPrettyPrint) _igProject
-              _igUserIp
+              _igUserIP
               _igZone
               _igKey
-              _igOauthToken
+              _igOAuthToken
               _igFields
-              (Just _igAlt)
               _igInstance
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InstancesGetResource)

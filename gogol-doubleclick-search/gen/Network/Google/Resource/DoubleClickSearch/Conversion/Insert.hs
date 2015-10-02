@@ -19,7 +19,7 @@
 --
 -- | Inserts a batch of new conversions into DoubleClick Search.
 --
--- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @DoubleclicksearchConversionInsert@.
+-- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @DoubleClicksearchConversionInsert@.
 module Network.Google.Resource.DoubleClickSearch.Conversion.Insert
     (
     -- * REST Resource
@@ -32,39 +32,41 @@ module Network.Google.Resource.DoubleClickSearch.Conversion.Insert
     -- * Request Lenses
     , ciQuotaUser
     , ciPrettyPrint
-    , ciUserIp
+    , ciUserIP
     , ciKey
-    , ciOauthToken
+    , ciConversionList
+    , ciOAuthToken
     , ciFields
-    , ciAlt
     ) where
 
 import           Network.Google.DoubleClickSearch.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DoubleclicksearchConversionInsert@ which the
+-- | A resource alias for @DoubleClicksearchConversionInsert@ which the
 -- 'ConversionInsert'' request conforms to.
 type ConversionInsertResource =
      "conversion" :>
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
-               QueryParam "oauth_token" Text :>
+             QueryParam "key" Key :>
+               QueryParam "oauth_token" OAuthToken :>
                  QueryParam "fields" Text :>
-                   QueryParam "alt" Alt :> Post '[JSON] ConversionList
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] ConversionList :>
+                       Post '[JSON] ConversionList
 
 -- | Inserts a batch of new conversions into DoubleClick Search.
 --
 -- /See:/ 'conversionInsert'' smart constructor.
 data ConversionInsert' = ConversionInsert'
-    { _ciQuotaUser   :: !(Maybe Text)
-    , _ciPrettyPrint :: !Bool
-    , _ciUserIp      :: !(Maybe Text)
-    , _ciKey         :: !(Maybe Text)
-    , _ciOauthToken  :: !(Maybe Text)
-    , _ciFields      :: !(Maybe Text)
-    , _ciAlt         :: !Alt
+    { _ciQuotaUser      :: !(Maybe Text)
+    , _ciPrettyPrint    :: !Bool
+    , _ciUserIP         :: !(Maybe Text)
+    , _ciKey            :: !(Maybe Key)
+    , _ciConversionList :: !ConversionList
+    , _ciOAuthToken     :: !(Maybe OAuthToken)
+    , _ciFields         :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ConversionInsert'' with the minimum fields required to make a request.
@@ -75,26 +77,27 @@ data ConversionInsert' = ConversionInsert'
 --
 -- * 'ciPrettyPrint'
 --
--- * 'ciUserIp'
+-- * 'ciUserIP'
 --
 -- * 'ciKey'
 --
--- * 'ciOauthToken'
+-- * 'ciConversionList'
+--
+-- * 'ciOAuthToken'
 --
 -- * 'ciFields'
---
--- * 'ciAlt'
 conversionInsert'
-    :: ConversionInsert'
-conversionInsert' =
+    :: ConversionList -- ^ 'ConversionList'
+    -> ConversionInsert'
+conversionInsert' pCiConversionList_ =
     ConversionInsert'
     { _ciQuotaUser = Nothing
     , _ciPrettyPrint = True
-    , _ciUserIp = Nothing
+    , _ciUserIP = Nothing
     , _ciKey = Nothing
-    , _ciOauthToken = Nothing
+    , _ciConversionList = pCiConversionList_
+    , _ciOAuthToken = Nothing
     , _ciFields = Nothing
-    , _ciAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -112,38 +115,45 @@ ciPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ciUserIp :: Lens' ConversionInsert' (Maybe Text)
-ciUserIp = lens _ciUserIp (\ s a -> s{_ciUserIp = a})
+ciUserIP :: Lens' ConversionInsert' (Maybe Text)
+ciUserIP = lens _ciUserIP (\ s a -> s{_ciUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ciKey :: Lens' ConversionInsert' (Maybe Text)
+ciKey :: Lens' ConversionInsert' (Maybe Key)
 ciKey = lens _ciKey (\ s a -> s{_ciKey = a})
 
+-- | Multipart request metadata.
+ciConversionList :: Lens' ConversionInsert' ConversionList
+ciConversionList
+  = lens _ciConversionList
+      (\ s a -> s{_ciConversionList = a})
+
 -- | OAuth 2.0 token for the current user.
-ciOauthToken :: Lens' ConversionInsert' (Maybe Text)
-ciOauthToken
-  = lens _ciOauthToken (\ s a -> s{_ciOauthToken = a})
+ciOAuthToken :: Lens' ConversionInsert' (Maybe OAuthToken)
+ciOAuthToken
+  = lens _ciOAuthToken (\ s a -> s{_ciOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ciFields :: Lens' ConversionInsert' (Maybe Text)
 ciFields = lens _ciFields (\ s a -> s{_ciFields = a})
 
--- | Data format for the response.
-ciAlt :: Lens' ConversionInsert' Alt
-ciAlt = lens _ciAlt (\ s a -> s{_ciAlt = a})
+instance GoogleAuth ConversionInsert' where
+        authKey = ciKey . _Just
+        authToken = ciOAuthToken . _Just
 
 instance GoogleRequest ConversionInsert' where
         type Rs ConversionInsert' = ConversionList
         request
           = requestWithRoute defReq doubleClickSearchURL
         requestWithRoute r u ConversionInsert'{..}
-          = go _ciQuotaUser (Just _ciPrettyPrint) _ciUserIp
+          = go _ciQuotaUser (Just _ciPrettyPrint) _ciUserIP
               _ciKey
-              _ciOauthToken
+              _ciOAuthToken
               _ciFields
-              (Just _ciAlt)
+              (Just AltJSON)
+              _ciConversionList
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ConversionInsertResource)

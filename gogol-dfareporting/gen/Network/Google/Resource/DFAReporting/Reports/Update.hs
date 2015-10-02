@@ -32,13 +32,13 @@ module Network.Google.Resource.DFAReporting.Reports.Update
     -- * Request Lenses
     , ruQuotaUser
     , ruPrettyPrint
-    , ruUserIp
+    , ruUserIP
     , ruReportId
     , ruProfileId
+    , ruReport
     , ruKey
-    , ruOauthToken
+    , ruOAuthToken
     , ruFields
-    , ruAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,10 +54,11 @@ type ReportsUpdateResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Put '[JSON] Report
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Report :> Put '[JSON] Report
 
 -- | Updates a report.
 --
@@ -65,13 +66,13 @@ type ReportsUpdateResource =
 data ReportsUpdate' = ReportsUpdate'
     { _ruQuotaUser   :: !(Maybe Text)
     , _ruPrettyPrint :: !Bool
-    , _ruUserIp      :: !(Maybe Text)
+    , _ruUserIP      :: !(Maybe Text)
     , _ruReportId    :: !Int64
     , _ruProfileId   :: !Int64
-    , _ruKey         :: !(Maybe Text)
-    , _ruOauthToken  :: !(Maybe Text)
+    , _ruReport      :: !Report
+    , _ruKey         :: !(Maybe Key)
+    , _ruOAuthToken  :: !(Maybe OAuthToken)
     , _ruFields      :: !(Maybe Text)
-    , _ruAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsUpdate'' with the minimum fields required to make a request.
@@ -82,34 +83,35 @@ data ReportsUpdate' = ReportsUpdate'
 --
 -- * 'ruPrettyPrint'
 --
--- * 'ruUserIp'
+-- * 'ruUserIP'
 --
 -- * 'ruReportId'
 --
 -- * 'ruProfileId'
 --
+-- * 'ruReport'
+--
 -- * 'ruKey'
 --
--- * 'ruOauthToken'
+-- * 'ruOAuthToken'
 --
 -- * 'ruFields'
---
--- * 'ruAlt'
 reportsUpdate'
     :: Int64 -- ^ 'reportId'
     -> Int64 -- ^ 'profileId'
+    -> Report -- ^ 'Report'
     -> ReportsUpdate'
-reportsUpdate' pRuReportId_ pRuProfileId_ =
+reportsUpdate' pRuReportId_ pRuProfileId_ pRuReport_ =
     ReportsUpdate'
     { _ruQuotaUser = Nothing
     , _ruPrettyPrint = True
-    , _ruUserIp = Nothing
+    , _ruUserIP = Nothing
     , _ruReportId = pRuReportId_
     , _ruProfileId = pRuProfileId_
+    , _ruReport = pRuReport_
     , _ruKey = Nothing
-    , _ruOauthToken = Nothing
+    , _ruOAuthToken = Nothing
     , _ruFields = Nothing
-    , _ruAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,8 +129,8 @@ ruPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ruUserIp :: Lens' ReportsUpdate' (Maybe Text)
-ruUserIp = lens _ruUserIp (\ s a -> s{_ruUserIp = a})
+ruUserIP :: Lens' ReportsUpdate' (Maybe Text)
+ruUserIP = lens _ruUserIP (\ s a -> s{_ruUserIP = a})
 
 -- | The ID of the report.
 ruReportId :: Lens' ReportsUpdate' Int64
@@ -140,36 +142,41 @@ ruProfileId :: Lens' ReportsUpdate' Int64
 ruProfileId
   = lens _ruProfileId (\ s a -> s{_ruProfileId = a})
 
+-- | Multipart request metadata.
+ruReport :: Lens' ReportsUpdate' Report
+ruReport = lens _ruReport (\ s a -> s{_ruReport = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ruKey :: Lens' ReportsUpdate' (Maybe Text)
+ruKey :: Lens' ReportsUpdate' (Maybe Key)
 ruKey = lens _ruKey (\ s a -> s{_ruKey = a})
 
 -- | OAuth 2.0 token for the current user.
-ruOauthToken :: Lens' ReportsUpdate' (Maybe Text)
-ruOauthToken
-  = lens _ruOauthToken (\ s a -> s{_ruOauthToken = a})
+ruOAuthToken :: Lens' ReportsUpdate' (Maybe OAuthToken)
+ruOAuthToken
+  = lens _ruOAuthToken (\ s a -> s{_ruOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ruFields :: Lens' ReportsUpdate' (Maybe Text)
 ruFields = lens _ruFields (\ s a -> s{_ruFields = a})
 
--- | Data format for the response.
-ruAlt :: Lens' ReportsUpdate' Alt
-ruAlt = lens _ruAlt (\ s a -> s{_ruAlt = a})
+instance GoogleAuth ReportsUpdate' where
+        authKey = ruKey . _Just
+        authToken = ruOAuthToken . _Just
 
 instance GoogleRequest ReportsUpdate' where
         type Rs ReportsUpdate' = Report
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ReportsUpdate'{..}
-          = go _ruQuotaUser (Just _ruPrettyPrint) _ruUserIp
+          = go _ruQuotaUser (Just _ruPrettyPrint) _ruUserIP
               _ruReportId
               _ruProfileId
               _ruKey
-              _ruOauthToken
+              _ruOAuthToken
               _ruFields
-              (Just _ruAlt)
+              (Just AltJSON)
+              _ruReport
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ReportsUpdateResource)

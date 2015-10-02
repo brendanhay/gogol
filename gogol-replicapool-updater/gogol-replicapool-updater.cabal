@@ -31,22 +31,22 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.InstanceGroupsUpdater
-        , Network.Google.InstanceGroupsUpdater.Types
-        , Network.Google.Resource.Replicapoolupdater.RollingUpdates.Cancel
-        , Network.Google.Resource.Replicapoolupdater.RollingUpdates.Get
-        , Network.Google.Resource.Replicapoolupdater.RollingUpdates.Insert
-        , Network.Google.Resource.Replicapoolupdater.RollingUpdates.List
-        , Network.Google.Resource.Replicapoolupdater.RollingUpdates.ListInstanceUpdates
-        , Network.Google.Resource.Replicapoolupdater.RollingUpdates.Pause
-        , Network.Google.Resource.Replicapoolupdater.RollingUpdates.Resume
-        , Network.Google.Resource.Replicapoolupdater.RollingUpdates.Rollback
-        , Network.Google.Resource.Replicapoolupdater.ZoneOperations.Get
-        , Network.Google.Resource.Replicapoolupdater.ZoneOperations.List
+          Network.Google.ReplicaPoolUpdater
+        , Network.Google.ReplicaPoolUpdater.Types
+        , Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Cancel
+        , Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Get
+        , Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Insert
+        , Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.List
+        , Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.ListInstanceUpdates
+        , Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Pause
+        , Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Resume
+        , Network.Google.Resource.ReplicaPoolUpdater.RollingUpdates.Rollback
+        , Network.Google.Resource.ReplicaPoolUpdater.ZoneOperations.Get
+        , Network.Google.Resource.ReplicaPoolUpdater.ZoneOperations.List
 
     other-modules:
-          Network.Google.InstanceGroupsUpdater.Types.Product
-        , Network.Google.InstanceGroupsUpdater.Types.Sum
+          Network.Google.ReplicaPoolUpdater.Types.Product
+        , Network.Google.ReplicaPoolUpdater.Types.Sum
 
     build-depends:
           gogol-core == 0.0.1.*

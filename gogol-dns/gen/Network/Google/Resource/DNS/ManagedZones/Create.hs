@@ -33,11 +33,11 @@ module Network.Google.Resource.DNS.ManagedZones.Create
     , mzcQuotaUser
     , mzcPrettyPrint
     , mzcProject
-    , mzcUserIp
+    , mzcUserIP
     , mzcKey
-    , mzcOauthToken
+    , mzcOAuthToken
+    , mzcManagedZone
     , mzcFields
-    , mzcAlt
     ) where
 
 import           Network.Google.DNS.Types
@@ -51,10 +51,12 @@ type ManagedZonesCreateResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Post '[JSON] ManagedZone
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] ManagedZone :>
+                         Post '[JSON] ManagedZone
 
 -- | Create a new ManagedZone.
 --
@@ -63,11 +65,11 @@ data ManagedZonesCreate' = ManagedZonesCreate'
     { _mzcQuotaUser   :: !(Maybe Text)
     , _mzcPrettyPrint :: !Bool
     , _mzcProject     :: !Text
-    , _mzcUserIp      :: !(Maybe Text)
-    , _mzcKey         :: !(Maybe Text)
-    , _mzcOauthToken  :: !(Maybe Text)
+    , _mzcUserIP      :: !(Maybe Text)
+    , _mzcKey         :: !(Maybe Key)
+    , _mzcOAuthToken  :: !(Maybe OAuthToken)
+    , _mzcManagedZone :: !ManagedZone
     , _mzcFields      :: !(Maybe Text)
-    , _mzcAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagedZonesCreate'' with the minimum fields required to make a request.
@@ -80,28 +82,29 @@ data ManagedZonesCreate' = ManagedZonesCreate'
 --
 -- * 'mzcProject'
 --
--- * 'mzcUserIp'
+-- * 'mzcUserIP'
 --
 -- * 'mzcKey'
 --
--- * 'mzcOauthToken'
+-- * 'mzcOAuthToken'
+--
+-- * 'mzcManagedZone'
 --
 -- * 'mzcFields'
---
--- * 'mzcAlt'
 managedZonesCreate'
     :: Text -- ^ 'project'
+    -> ManagedZone -- ^ 'ManagedZone'
     -> ManagedZonesCreate'
-managedZonesCreate' pMzcProject_ =
+managedZonesCreate' pMzcProject_ pMzcManagedZone_ =
     ManagedZonesCreate'
     { _mzcQuotaUser = Nothing
     , _mzcPrettyPrint = True
     , _mzcProject = pMzcProject_
-    , _mzcUserIp = Nothing
+    , _mzcUserIP = Nothing
     , _mzcKey = Nothing
-    , _mzcOauthToken = Nothing
+    , _mzcOAuthToken = Nothing
+    , _mzcManagedZone = pMzcManagedZone_
     , _mzcFields = Nothing
-    , _mzcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -124,41 +127,48 @@ mzcProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mzcUserIp :: Lens' ManagedZonesCreate' (Maybe Text)
-mzcUserIp
-  = lens _mzcUserIp (\ s a -> s{_mzcUserIp = a})
+mzcUserIP :: Lens' ManagedZonesCreate' (Maybe Text)
+mzcUserIP
+  = lens _mzcUserIP (\ s a -> s{_mzcUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mzcKey :: Lens' ManagedZonesCreate' (Maybe Text)
+mzcKey :: Lens' ManagedZonesCreate' (Maybe Key)
 mzcKey = lens _mzcKey (\ s a -> s{_mzcKey = a})
 
 -- | OAuth 2.0 token for the current user.
-mzcOauthToken :: Lens' ManagedZonesCreate' (Maybe Text)
-mzcOauthToken
-  = lens _mzcOauthToken
-      (\ s a -> s{_mzcOauthToken = a})
+mzcOAuthToken :: Lens' ManagedZonesCreate' (Maybe OAuthToken)
+mzcOAuthToken
+  = lens _mzcOAuthToken
+      (\ s a -> s{_mzcOAuthToken = a})
+
+-- | Multipart request metadata.
+mzcManagedZone :: Lens' ManagedZonesCreate' ManagedZone
+mzcManagedZone
+  = lens _mzcManagedZone
+      (\ s a -> s{_mzcManagedZone = a})
 
 -- | Selector specifying which fields to include in a partial response.
 mzcFields :: Lens' ManagedZonesCreate' (Maybe Text)
 mzcFields
   = lens _mzcFields (\ s a -> s{_mzcFields = a})
 
--- | Data format for the response.
-mzcAlt :: Lens' ManagedZonesCreate' Alt
-mzcAlt = lens _mzcAlt (\ s a -> s{_mzcAlt = a})
+instance GoogleAuth ManagedZonesCreate' where
+        authKey = mzcKey . _Just
+        authToken = mzcOAuthToken . _Just
 
 instance GoogleRequest ManagedZonesCreate' where
         type Rs ManagedZonesCreate' = ManagedZone
         request = requestWithRoute defReq dNSURL
         requestWithRoute r u ManagedZonesCreate'{..}
           = go _mzcQuotaUser (Just _mzcPrettyPrint) _mzcProject
-              _mzcUserIp
+              _mzcUserIP
               _mzcKey
-              _mzcOauthToken
+              _mzcOAuthToken
               _mzcFields
-              (Just _mzcAlt)
+              (Just AltJSON)
+              _mzcManagedZone
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ManagedZonesCreateResource)

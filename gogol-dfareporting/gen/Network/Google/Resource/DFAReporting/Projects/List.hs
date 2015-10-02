@@ -32,7 +32,7 @@ module Network.Google.Resource.DFAReporting.Projects.List
     -- * Request Lenses
     , plQuotaUser
     , plPrettyPrint
-    , plUserIp
+    , plUserIP
     , plSearchString
     , plIds
     , plProfileId
@@ -40,11 +40,10 @@ module Network.Google.Resource.DFAReporting.Projects.List
     , plKey
     , plPageToken
     , plSortField
-    , plOauthToken
+    , plOAuthToken
     , plAdvertiserIds
     , plMaxResults
     , plFields
-    , plAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -64,16 +63,16 @@ type ProjectsListResource =
                      QueryParam "sortOrder"
                        DfareportingProjectsListSortOrder
                        :>
-                       QueryParam "key" Text :>
+                       QueryParam "key" Key :>
                          QueryParam "pageToken" Text :>
                            QueryParam "sortField"
                              DfareportingProjectsListSortField
                              :>
-                             QueryParam "oauth_token" Text :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParams "advertiserIds" Int64 :>
                                  QueryParam "maxResults" Int32 :>
                                    QueryParam "fields" Text :>
-                                     QueryParam "alt" Alt :>
+                                     QueryParam "alt" AltJSON :>
                                        Get '[JSON] ProjectsListResponse
 
 -- | Retrieves a list of projects, possibly filtered.
@@ -82,19 +81,18 @@ type ProjectsListResource =
 data ProjectsList' = ProjectsList'
     { _plQuotaUser     :: !(Maybe Text)
     , _plPrettyPrint   :: !Bool
-    , _plUserIp        :: !(Maybe Text)
+    , _plUserIP        :: !(Maybe Text)
     , _plSearchString  :: !(Maybe Text)
     , _plIds           :: !(Maybe Int64)
     , _plProfileId     :: !Int64
     , _plSortOrder     :: !(Maybe DfareportingProjectsListSortOrder)
-    , _plKey           :: !(Maybe Text)
+    , _plKey           :: !(Maybe Key)
     , _plPageToken     :: !(Maybe Text)
     , _plSortField     :: !(Maybe DfareportingProjectsListSortField)
-    , _plOauthToken    :: !(Maybe Text)
+    , _plOAuthToken    :: !(Maybe OAuthToken)
     , _plAdvertiserIds :: !(Maybe Int64)
     , _plMaxResults    :: !(Maybe Int32)
     , _plFields        :: !(Maybe Text)
-    , _plAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsList'' with the minimum fields required to make a request.
@@ -105,7 +103,7 @@ data ProjectsList' = ProjectsList'
 --
 -- * 'plPrettyPrint'
 --
--- * 'plUserIp'
+-- * 'plUserIP'
 --
 -- * 'plSearchString'
 --
@@ -121,15 +119,13 @@ data ProjectsList' = ProjectsList'
 --
 -- * 'plSortField'
 --
--- * 'plOauthToken'
+-- * 'plOAuthToken'
 --
 -- * 'plAdvertiserIds'
 --
 -- * 'plMaxResults'
 --
 -- * 'plFields'
---
--- * 'plAlt'
 projectsList'
     :: Int64 -- ^ 'profileId'
     -> ProjectsList'
@@ -137,7 +133,7 @@ projectsList' pPlProfileId_ =
     ProjectsList'
     { _plQuotaUser = Nothing
     , _plPrettyPrint = True
-    , _plUserIp = Nothing
+    , _plUserIP = Nothing
     , _plSearchString = Nothing
     , _plIds = Nothing
     , _plProfileId = pPlProfileId_
@@ -145,11 +141,10 @@ projectsList' pPlProfileId_ =
     , _plKey = Nothing
     , _plPageToken = Nothing
     , _plSortField = Nothing
-    , _plOauthToken = Nothing
+    , _plOAuthToken = Nothing
     , _plAdvertiserIds = Nothing
     , _plMaxResults = Nothing
     , _plFields = Nothing
-    , _plAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -167,8 +162,8 @@ plPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-plUserIp :: Lens' ProjectsList' (Maybe Text)
-plUserIp = lens _plUserIp (\ s a -> s{_plUserIp = a})
+plUserIP :: Lens' ProjectsList' (Maybe Text)
+plUserIP = lens _plUserIP (\ s a -> s{_plUserIP = a})
 
 -- | Allows searching for projects by name or ID. Wildcards (*) are allowed.
 -- For example, \"project*2015\" will return projects with names like
@@ -199,7 +194,7 @@ plSortOrder
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-plKey :: Lens' ProjectsList' (Maybe Text)
+plKey :: Lens' ProjectsList' (Maybe Key)
 plKey = lens _plKey (\ s a -> s{_plKey = a})
 
 -- | Value of the nextPageToken from the previous result page.
@@ -213,9 +208,9 @@ plSortField
   = lens _plSortField (\ s a -> s{_plSortField = a})
 
 -- | OAuth 2.0 token for the current user.
-plOauthToken :: Lens' ProjectsList' (Maybe Text)
-plOauthToken
-  = lens _plOauthToken (\ s a -> s{_plOauthToken = a})
+plOAuthToken :: Lens' ProjectsList' (Maybe OAuthToken)
+plOAuthToken
+  = lens _plOAuthToken (\ s a -> s{_plOAuthToken = a})
 
 -- | Select only projects with these advertiser IDs.
 plAdvertiserIds :: Lens' ProjectsList' (Maybe Int64)
@@ -232,15 +227,15 @@ plMaxResults
 plFields :: Lens' ProjectsList' (Maybe Text)
 plFields = lens _plFields (\ s a -> s{_plFields = a})
 
--- | Data format for the response.
-plAlt :: Lens' ProjectsList' Alt
-plAlt = lens _plAlt (\ s a -> s{_plAlt = a})
+instance GoogleAuth ProjectsList' where
+        authKey = plKey . _Just
+        authToken = plOAuthToken . _Just
 
 instance GoogleRequest ProjectsList' where
         type Rs ProjectsList' = ProjectsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ProjectsList'{..}
-          = go _plQuotaUser (Just _plPrettyPrint) _plUserIp
+          = go _plQuotaUser (Just _plPrettyPrint) _plUserIP
               _plSearchString
               _plIds
               _plProfileId
@@ -248,11 +243,11 @@ instance GoogleRequest ProjectsList' where
               _plKey
               _plPageToken
               _plSortField
-              _plOauthToken
+              _plOAuthToken
               _plAdvertiserIds
               _plMaxResults
               _plFields
-              (Just _plAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsListResource)

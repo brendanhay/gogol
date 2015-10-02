@@ -33,13 +33,12 @@ module Network.Google.Resource.Gmail.Users.Labels.Delete
     -- * Request Lenses
     , uldQuotaUser
     , uldPrettyPrint
-    , uldUserIp
+    , uldUserIP
     , uldUserId
     , uldKey
     , uldId
-    , uldOauthToken
+    , uldOAuthToken
     , uldFields
-    , uldAlt
     ) where
 
 import           Network.Google.Gmail.Types
@@ -54,10 +53,10 @@ type UsersLabelsDeleteResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Delete '[JSON] ()
+                       QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Immediately and permanently deletes the specified label and removes it
 -- from any messages and threads that it is applied to.
@@ -66,13 +65,12 @@ type UsersLabelsDeleteResource =
 data UsersLabelsDelete' = UsersLabelsDelete'
     { _uldQuotaUser   :: !(Maybe Text)
     , _uldPrettyPrint :: !Bool
-    , _uldUserIp      :: !(Maybe Text)
+    , _uldUserIP      :: !(Maybe Text)
     , _uldUserId      :: !Text
-    , _uldKey         :: !(Maybe Text)
+    , _uldKey         :: !(Maybe Key)
     , _uldId          :: !Text
-    , _uldOauthToken  :: !(Maybe Text)
+    , _uldOAuthToken  :: !(Maybe OAuthToken)
     , _uldFields      :: !(Maybe Text)
-    , _uldAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersLabelsDelete'' with the minimum fields required to make a request.
@@ -83,7 +81,7 @@ data UsersLabelsDelete' = UsersLabelsDelete'
 --
 -- * 'uldPrettyPrint'
 --
--- * 'uldUserIp'
+-- * 'uldUserIP'
 --
 -- * 'uldUserId'
 --
@@ -91,11 +89,9 @@ data UsersLabelsDelete' = UsersLabelsDelete'
 --
 -- * 'uldId'
 --
--- * 'uldOauthToken'
+-- * 'uldOAuthToken'
 --
 -- * 'uldFields'
---
--- * 'uldAlt'
 usersLabelsDelete'
     :: Text -- ^ 'id'
     -> Text
@@ -104,13 +100,12 @@ usersLabelsDelete' pUldUserId_ pUldId_ =
     UsersLabelsDelete'
     { _uldQuotaUser = Nothing
     , _uldPrettyPrint = True
-    , _uldUserIp = Nothing
+    , _uldUserIP = Nothing
     , _uldUserId = pUldUserId_
     , _uldKey = Nothing
     , _uldId = pUldId_
-    , _uldOauthToken = Nothing
+    , _uldOAuthToken = Nothing
     , _uldFields = Nothing
-    , _uldAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -128,9 +123,9 @@ uldPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-uldUserIp :: Lens' UsersLabelsDelete' (Maybe Text)
-uldUserIp
-  = lens _uldUserIp (\ s a -> s{_uldUserIp = a})
+uldUserIP :: Lens' UsersLabelsDelete' (Maybe Text)
+uldUserIP
+  = lens _uldUserIP (\ s a -> s{_uldUserIP = a})
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
@@ -141,7 +136,7 @@ uldUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-uldKey :: Lens' UsersLabelsDelete' (Maybe Text)
+uldKey :: Lens' UsersLabelsDelete' (Maybe Key)
 uldKey = lens _uldKey (\ s a -> s{_uldKey = a})
 
 -- | The ID of the label to delete.
@@ -149,31 +144,31 @@ uldId :: Lens' UsersLabelsDelete' Text
 uldId = lens _uldId (\ s a -> s{_uldId = a})
 
 -- | OAuth 2.0 token for the current user.
-uldOauthToken :: Lens' UsersLabelsDelete' (Maybe Text)
-uldOauthToken
-  = lens _uldOauthToken
-      (\ s a -> s{_uldOauthToken = a})
+uldOAuthToken :: Lens' UsersLabelsDelete' (Maybe OAuthToken)
+uldOAuthToken
+  = lens _uldOAuthToken
+      (\ s a -> s{_uldOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 uldFields :: Lens' UsersLabelsDelete' (Maybe Text)
 uldFields
   = lens _uldFields (\ s a -> s{_uldFields = a})
 
--- | Data format for the response.
-uldAlt :: Lens' UsersLabelsDelete' Alt
-uldAlt = lens _uldAlt (\ s a -> s{_uldAlt = a})
+instance GoogleAuth UsersLabelsDelete' where
+        authKey = uldKey . _Just
+        authToken = uldOAuthToken . _Just
 
 instance GoogleRequest UsersLabelsDelete' where
         type Rs UsersLabelsDelete' = ()
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersLabelsDelete'{..}
-          = go _uldQuotaUser (Just _uldPrettyPrint) _uldUserIp
+          = go _uldQuotaUser (Just _uldPrettyPrint) _uldUserIP
               _uldUserId
               _uldKey
               _uldId
-              _uldOauthToken
+              _uldOAuthToken
               _uldFields
-              (Just _uldAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersLabelsDeleteResource)

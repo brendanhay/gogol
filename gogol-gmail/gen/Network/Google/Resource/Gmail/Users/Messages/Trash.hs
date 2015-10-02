@@ -32,13 +32,12 @@ module Network.Google.Resource.Gmail.Users.Messages.Trash
     -- * Request Lenses
     , umtQuotaUser
     , umtPrettyPrint
-    , umtUserIp
+    , umtUserIP
     , umtUserId
     , umtKey
     , umtId
-    , umtOauthToken
+    , umtOAuthToken
     , umtFields
-    , umtAlt
     ) where
 
 import           Network.Google.Gmail.Types
@@ -54,10 +53,10 @@ type UsersMessagesTrashResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Post '[JSON] Message
+                         QueryParam "alt" AltJSON :> Post '[JSON] Message
 
 -- | Moves the specified message to the trash.
 --
@@ -65,13 +64,12 @@ type UsersMessagesTrashResource =
 data UsersMessagesTrash' = UsersMessagesTrash'
     { _umtQuotaUser   :: !(Maybe Text)
     , _umtPrettyPrint :: !Bool
-    , _umtUserIp      :: !(Maybe Text)
+    , _umtUserIP      :: !(Maybe Text)
     , _umtUserId      :: !Text
-    , _umtKey         :: !(Maybe Text)
+    , _umtKey         :: !(Maybe Key)
     , _umtId          :: !Text
-    , _umtOauthToken  :: !(Maybe Text)
+    , _umtOAuthToken  :: !(Maybe OAuthToken)
     , _umtFields      :: !(Maybe Text)
-    , _umtAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersMessagesTrash'' with the minimum fields required to make a request.
@@ -82,7 +80,7 @@ data UsersMessagesTrash' = UsersMessagesTrash'
 --
 -- * 'umtPrettyPrint'
 --
--- * 'umtUserIp'
+-- * 'umtUserIP'
 --
 -- * 'umtUserId'
 --
@@ -90,11 +88,9 @@ data UsersMessagesTrash' = UsersMessagesTrash'
 --
 -- * 'umtId'
 --
--- * 'umtOauthToken'
+-- * 'umtOAuthToken'
 --
 -- * 'umtFields'
---
--- * 'umtAlt'
 usersMessagesTrash'
     :: Text -- ^ 'id'
     -> Text
@@ -103,13 +99,12 @@ usersMessagesTrash' pUmtUserId_ pUmtId_ =
     UsersMessagesTrash'
     { _umtQuotaUser = Nothing
     , _umtPrettyPrint = True
-    , _umtUserIp = Nothing
+    , _umtUserIP = Nothing
     , _umtUserId = pUmtUserId_
     , _umtKey = Nothing
     , _umtId = pUmtId_
-    , _umtOauthToken = Nothing
+    , _umtOAuthToken = Nothing
     , _umtFields = Nothing
-    , _umtAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,9 +122,9 @@ umtPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-umtUserIp :: Lens' UsersMessagesTrash' (Maybe Text)
-umtUserIp
-  = lens _umtUserIp (\ s a -> s{_umtUserIp = a})
+umtUserIP :: Lens' UsersMessagesTrash' (Maybe Text)
+umtUserIP
+  = lens _umtUserIP (\ s a -> s{_umtUserIP = a})
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
@@ -140,7 +135,7 @@ umtUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-umtKey :: Lens' UsersMessagesTrash' (Maybe Text)
+umtKey :: Lens' UsersMessagesTrash' (Maybe Key)
 umtKey = lens _umtKey (\ s a -> s{_umtKey = a})
 
 -- | The ID of the message to Trash.
@@ -148,31 +143,31 @@ umtId :: Lens' UsersMessagesTrash' Text
 umtId = lens _umtId (\ s a -> s{_umtId = a})
 
 -- | OAuth 2.0 token for the current user.
-umtOauthToken :: Lens' UsersMessagesTrash' (Maybe Text)
-umtOauthToken
-  = lens _umtOauthToken
-      (\ s a -> s{_umtOauthToken = a})
+umtOAuthToken :: Lens' UsersMessagesTrash' (Maybe OAuthToken)
+umtOAuthToken
+  = lens _umtOAuthToken
+      (\ s a -> s{_umtOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 umtFields :: Lens' UsersMessagesTrash' (Maybe Text)
 umtFields
   = lens _umtFields (\ s a -> s{_umtFields = a})
 
--- | Data format for the response.
-umtAlt :: Lens' UsersMessagesTrash' Alt
-umtAlt = lens _umtAlt (\ s a -> s{_umtAlt = a})
+instance GoogleAuth UsersMessagesTrash' where
+        authKey = umtKey . _Just
+        authToken = umtOAuthToken . _Just
 
 instance GoogleRequest UsersMessagesTrash' where
         type Rs UsersMessagesTrash' = Message
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersMessagesTrash'{..}
-          = go _umtQuotaUser (Just _umtPrettyPrint) _umtUserIp
+          = go _umtQuotaUser (Just _umtPrettyPrint) _umtUserIP
               _umtUserId
               _umtKey
               _umtId
-              _umtOauthToken
+              _umtOAuthToken
               _umtFields
-              (Just _umtAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersMessagesTrashResource)

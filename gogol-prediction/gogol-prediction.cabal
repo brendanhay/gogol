@@ -33,14 +33,14 @@ library
     exposed-modules:
           Network.Google.Prediction
         , Network.Google.Prediction.Types
-        , Network.Google.Resource.Prediction.Hostedmodels.Predict
-        , Network.Google.Resource.Prediction.Trainedmodels.Analyze
-        , Network.Google.Resource.Prediction.Trainedmodels.Delete
-        , Network.Google.Resource.Prediction.Trainedmodels.Get
-        , Network.Google.Resource.Prediction.Trainedmodels.Insert
-        , Network.Google.Resource.Prediction.Trainedmodels.List
-        , Network.Google.Resource.Prediction.Trainedmodels.Predict
-        , Network.Google.Resource.Prediction.Trainedmodels.Update
+        , Network.Google.Resource.Prediction.HostedModels.Predict
+        , Network.Google.Resource.Prediction.TrainedModels.Analyze
+        , Network.Google.Resource.Prediction.TrainedModels.Delete
+        , Network.Google.Resource.Prediction.TrainedModels.Get
+        , Network.Google.Resource.Prediction.TrainedModels.Insert
+        , Network.Google.Resource.Prediction.TrainedModels.List
+        , Network.Google.Resource.Prediction.TrainedModels.Predict
+        , Network.Google.Resource.Prediction.TrainedModels.Update
 
     other-modules:
           Network.Google.Prediction.Types.Product

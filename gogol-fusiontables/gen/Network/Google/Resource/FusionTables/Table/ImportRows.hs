@@ -32,17 +32,17 @@ module Network.Google.Resource.FusionTables.Table.ImportRows
     -- * Request Lenses
     , tirQuotaUser
     , tirPrettyPrint
-    , tirUserIp
+    , tirUserIP
     , tirStartLine
     , tirEndLine
+    , tirMedia
     , tirKey
-    , tirOauthToken
+    , tirOAuthToken
     , tirTableId
     , tirDelimiter
     , tirEncoding
     , tirIsStrict
     , tirFields
-    , tirAlt
     ) where
 
 import           Network.Google.FusionTables.Types
@@ -59,13 +59,13 @@ type TableImportRowsResource =
                QueryParam "userIp" Text :>
                  QueryParam "startLine" Int32 :>
                    QueryParam "endLine" Int32 :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "delimiter" Text :>
                            QueryParam "encoding" Text :>
                              QueryParam "isStrict" Bool :>
                                QueryParam "fields" Text :>
-                                 QueryParam "alt" Alt :> Post '[JSON] Import
+                                 QueryParam "alt" AltJSON :> Post '[JSON] Import
 
 -- | Imports more rows into a table.
 --
@@ -73,17 +73,17 @@ type TableImportRowsResource =
 data TableImportRows' = TableImportRows'
     { _tirQuotaUser   :: !(Maybe Text)
     , _tirPrettyPrint :: !Bool
-    , _tirUserIp      :: !(Maybe Text)
+    , _tirUserIP      :: !(Maybe Text)
     , _tirStartLine   :: !(Maybe Int32)
     , _tirEndLine     :: !(Maybe Int32)
-    , _tirKey         :: !(Maybe Text)
-    , _tirOauthToken  :: !(Maybe Text)
+    , _tirMedia       :: !Body
+    , _tirKey         :: !(Maybe Key)
+    , _tirOAuthToken  :: !(Maybe OAuthToken)
     , _tirTableId     :: !Text
     , _tirDelimiter   :: !(Maybe Text)
     , _tirEncoding    :: !(Maybe Text)
     , _tirIsStrict    :: !(Maybe Bool)
     , _tirFields      :: !(Maybe Text)
-    , _tirAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableImportRows'' with the minimum fields required to make a request.
@@ -94,15 +94,17 @@ data TableImportRows' = TableImportRows'
 --
 -- * 'tirPrettyPrint'
 --
--- * 'tirUserIp'
+-- * 'tirUserIP'
 --
 -- * 'tirStartLine'
 --
 -- * 'tirEndLine'
 --
+-- * 'tirMedia'
+--
 -- * 'tirKey'
 --
--- * 'tirOauthToken'
+-- * 'tirOAuthToken'
 --
 -- * 'tirTableId'
 --
@@ -113,26 +115,25 @@ data TableImportRows' = TableImportRows'
 -- * 'tirIsStrict'
 --
 -- * 'tirFields'
---
--- * 'tirAlt'
 tableImportRows'
-    :: Text -- ^ 'tableId'
+    :: Body -- ^ 'media'
+    -> Text -- ^ 'tableId'
     -> TableImportRows'
-tableImportRows' pTirTableId_ =
+tableImportRows' pTirMedia_ pTirTableId_ =
     TableImportRows'
     { _tirQuotaUser = Nothing
     , _tirPrettyPrint = True
-    , _tirUserIp = Nothing
+    , _tirUserIP = Nothing
     , _tirStartLine = Nothing
     , _tirEndLine = Nothing
+    , _tirMedia = pTirMedia_
     , _tirKey = Nothing
-    , _tirOauthToken = Nothing
+    , _tirOAuthToken = Nothing
     , _tirTableId = pTirTableId_
     , _tirDelimiter = Nothing
     , _tirEncoding = Nothing
     , _tirIsStrict = Nothing
     , _tirFields = Nothing
-    , _tirAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,9 +151,9 @@ tirPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tirUserIp :: Lens' TableImportRows' (Maybe Text)
-tirUserIp
-  = lens _tirUserIp (\ s a -> s{_tirUserIp = a})
+tirUserIP :: Lens' TableImportRows' (Maybe Text)
+tirUserIP
+  = lens _tirUserIP (\ s a -> s{_tirUserIP = a})
 
 -- | The index of the first line from which to start importing, inclusive.
 -- Default is 0.
@@ -168,17 +169,20 @@ tirEndLine :: Lens' TableImportRows' (Maybe Int32)
 tirEndLine
   = lens _tirEndLine (\ s a -> s{_tirEndLine = a})
 
+tirMedia :: Lens' TableImportRows' Body
+tirMedia = lens _tirMedia (\ s a -> s{_tirMedia = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tirKey :: Lens' TableImportRows' (Maybe Text)
+tirKey :: Lens' TableImportRows' (Maybe Key)
 tirKey = lens _tirKey (\ s a -> s{_tirKey = a})
 
 -- | OAuth 2.0 token for the current user.
-tirOauthToken :: Lens' TableImportRows' (Maybe Text)
-tirOauthToken
-  = lens _tirOauthToken
-      (\ s a -> s{_tirOauthToken = a})
+tirOAuthToken :: Lens' TableImportRows' (Maybe OAuthToken)
+tirOAuthToken
+  = lens _tirOAuthToken
+      (\ s a -> s{_tirOAuthToken = a})
 
 -- | The table into which new rows are being imported.
 tirTableId :: Lens' TableImportRows' Text
@@ -209,25 +213,26 @@ tirFields :: Lens' TableImportRows' (Maybe Text)
 tirFields
   = lens _tirFields (\ s a -> s{_tirFields = a})
 
--- | Data format for the response.
-tirAlt :: Lens' TableImportRows' Alt
-tirAlt = lens _tirAlt (\ s a -> s{_tirAlt = a})
+instance GoogleAuth TableImportRows' where
+        authKey = tirKey . _Just
+        authToken = tirOAuthToken . _Just
 
 instance GoogleRequest TableImportRows' where
         type Rs TableImportRows' = Import
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u TableImportRows'{..}
-          = go _tirQuotaUser (Just _tirPrettyPrint) _tirUserIp
+          = go _tirQuotaUser (Just _tirPrettyPrint) _tirUserIP
               _tirStartLine
               _tirEndLine
+              _tirMedia
               _tirKey
-              _tirOauthToken
+              _tirOAuthToken
               _tirTableId
               _tirDelimiter
               _tirEncoding
               _tirIsStrict
               _tirFields
-              (Just _tirAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TableImportRowsResource)

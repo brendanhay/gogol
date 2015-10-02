@@ -166,7 +166,7 @@ instance ToJSON Library where
 -- /See:/ 'listOperationsResponse' smart constructor.
 data ListOperationsResponse = ListOperationsResponse
     { _lorNextPageToken :: !(Maybe Text)
-    , _lorOperations    :: !(Maybe [Maybe Operation])
+    , _lorOperations    :: !(Maybe [Operation])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListOperationsResponse' with the minimum fields required to make a request.
@@ -191,7 +191,7 @@ lorNextPageToken
       (\ s a -> s{_lorNextPageToken = a})
 
 -- | A list of operations that matches the specified filter in the request.
-lorOperations :: Lens' ListOperationsResponse [Maybe Operation]
+lorOperations :: Lens' ListOperationsResponse [Operation]
 lorOperations
   = lens _lorOperations
       (\ s a -> s{_lorOperations = a})
@@ -313,15 +313,15 @@ instance ToJSON ScriptHandler where
 --
 -- /See:/ 'uRLMap' smart constructor.
 data URLMap = URLMap
-    { _umScript                   :: !(Maybe (Maybe ScriptHandler))
+    { _umScript                   :: !(Maybe ScriptHandler)
     , _umSecurityLevel            :: !(Maybe Text)
-    , _umApiEndpoint              :: !(Maybe (Maybe APIEndpointHandler))
-    , _umUrlRegex                 :: !(Maybe Text)
-    , _umRedirectHttpResponseCode :: !(Maybe Text)
+    , _umAPIEndpoint              :: !(Maybe APIEndpointHandler)
+    , _umURLRegex                 :: !(Maybe Text)
+    , _umRedirectHTTPResponseCode :: !(Maybe Text)
     , _umAuthFailAction           :: !(Maybe Text)
-    , _umStaticFiles              :: !(Maybe (Maybe StaticFilesHandler))
+    , _umStaticFiles              :: !(Maybe StaticFilesHandler)
     , _umLogin                    :: !(Maybe Text)
-    , _umStaticDirectory          :: !(Maybe (Maybe StaticDirectoryHandler))
+    , _umStaticDirectory          :: !(Maybe StaticDirectoryHandler)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLMap' with the minimum fields required to make a request.
@@ -332,11 +332,11 @@ data URLMap = URLMap
 --
 -- * 'umSecurityLevel'
 --
--- * 'umApiEndpoint'
+-- * 'umAPIEndpoint'
 --
--- * 'umUrlRegex'
+-- * 'umURLRegex'
 --
--- * 'umRedirectHttpResponseCode'
+-- * 'umRedirectHTTPResponseCode'
 --
 -- * 'umAuthFailAction'
 --
@@ -351,9 +351,9 @@ uRLMap =
     URLMap
     { _umScript = Nothing
     , _umSecurityLevel = Nothing
-    , _umApiEndpoint = Nothing
-    , _umUrlRegex = Nothing
-    , _umRedirectHttpResponseCode = Nothing
+    , _umAPIEndpoint = Nothing
+    , _umURLRegex = Nothing
+    , _umRedirectHTTPResponseCode = Nothing
     , _umAuthFailAction = Nothing
     , _umStaticFiles = Nothing
     , _umLogin = Nothing
@@ -361,7 +361,7 @@ uRLMap =
     }
 
 -- | Executes a script to handle the request that matches the URL pattern.
-umScript :: Lens' URLMap (Maybe (Maybe ScriptHandler))
+umScript :: Lens' URLMap (Maybe ScriptHandler)
 umScript = lens _umScript (\ s a -> s{_umScript = a})
 
 -- | Configures whether security (HTTPS) should be enforced for this URL.
@@ -371,26 +371,26 @@ umSecurityLevel
       (\ s a -> s{_umSecurityLevel = a})
 
 -- | Use API Endpoints to handle requests.
-umApiEndpoint :: Lens' URLMap (Maybe (Maybe APIEndpointHandler))
-umApiEndpoint
-  = lens _umApiEndpoint
-      (\ s a -> s{_umApiEndpoint = a})
+umAPIEndpoint :: Lens' URLMap (Maybe APIEndpointHandler)
+umAPIEndpoint
+  = lens _umAPIEndpoint
+      (\ s a -> s{_umAPIEndpoint = a})
 
 -- | A URL prefix. This value uses regular expression syntax (and so regexp
 -- special characters must be escaped), but it should not contain
 -- groupings. All URLs that begin with this prefix are handled by this
 -- handler, using the portion of the URL after the prefix as part of the
 -- file path. This is always required.
-umUrlRegex :: Lens' URLMap (Maybe Text)
-umUrlRegex
-  = lens _umUrlRegex (\ s a -> s{_umUrlRegex = a})
+umURLRegex :: Lens' URLMap (Maybe Text)
+umURLRegex
+  = lens _umURLRegex (\ s a -> s{_umURLRegex = a})
 
 -- | \`30x\` code to use when performing redirects for the \`secure\` field.
 -- A \`302\` is used by default.
-umRedirectHttpResponseCode :: Lens' URLMap (Maybe Text)
-umRedirectHttpResponseCode
-  = lens _umRedirectHttpResponseCode
-      (\ s a -> s{_umRedirectHttpResponseCode = a})
+umRedirectHTTPResponseCode :: Lens' URLMap (Maybe Text)
+umRedirectHTTPResponseCode
+  = lens _umRedirectHTTPResponseCode
+      (\ s a -> s{_umRedirectHTTPResponseCode = a})
 
 -- | For users not logged in, how to handle access to resources with required
 -- login. Defaults to \"redirect\".
@@ -400,7 +400,7 @@ umAuthFailAction
       (\ s a -> s{_umAuthFailAction = a})
 
 -- | Returns the contents of a file, such as an image, as the response.
-umStaticFiles :: Lens' URLMap (Maybe (Maybe StaticFilesHandler))
+umStaticFiles :: Lens' URLMap (Maybe StaticFilesHandler)
 umStaticFiles
   = lens _umStaticFiles
       (\ s a -> s{_umStaticFiles = a})
@@ -412,7 +412,7 @@ umLogin = lens _umLogin (\ s a -> s{_umLogin = a})
 -- | Serves the entire contents of a directory as static files. This
 -- attribute is deprecated. You can mimic the behavior of static
 -- directories using static files.
-umStaticDirectory :: Lens' URLMap (Maybe (Maybe StaticDirectoryHandler))
+umStaticDirectory :: Lens' URLMap (Maybe StaticDirectoryHandler)
 umStaticDirectory
   = lens _umStaticDirectory
       (\ s a -> s{_umStaticDirectory = a})
@@ -437,10 +437,10 @@ instance ToJSON URLMap where
               (catMaybes
                  [("script" .=) <$> _umScript,
                   ("securityLevel" .=) <$> _umSecurityLevel,
-                  ("apiEndpoint" .=) <$> _umApiEndpoint,
-                  ("urlRegex" .=) <$> _umUrlRegex,
+                  ("apiEndpoint" .=) <$> _umAPIEndpoint,
+                  ("urlRegex" .=) <$> _umURLRegex,
                   ("redirectHttpResponseCode" .=) <$>
-                    _umRedirectHttpResponseCode,
+                    _umRedirectHTTPResponseCode,
                   ("authFailAction" .=) <$> _umAuthFailAction,
                   ("staticFiles" .=) <$> _umStaticFiles,
                   ("login" .=) <$> _umLogin,
@@ -452,7 +452,7 @@ instance ToJSON URLMap where
 data APIConfigHandler = APIConfigHandler
     { _achScript         :: !(Maybe Text)
     , _achSecurityLevel  :: !(Maybe Text)
-    , _achUrl            :: !(Maybe Text)
+    , _achURL            :: !(Maybe Text)
     , _achAuthFailAction :: !(Maybe Text)
     , _achLogin          :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -465,7 +465,7 @@ data APIConfigHandler = APIConfigHandler
 --
 -- * 'achSecurityLevel'
 --
--- * 'achUrl'
+-- * 'achURL'
 --
 -- * 'achAuthFailAction'
 --
@@ -476,7 +476,7 @@ aPIConfigHandler =
     APIConfigHandler
     { _achScript = Nothing
     , _achSecurityLevel = Nothing
-    , _achUrl = Nothing
+    , _achURL = Nothing
     , _achAuthFailAction = Nothing
     , _achLogin = Nothing
     }
@@ -493,8 +493,8 @@ achSecurityLevel
       (\ s a -> s{_achSecurityLevel = a})
 
 -- | URL to serve the endpoint at.
-achUrl :: Lens' APIConfigHandler (Maybe Text)
-achUrl = lens _achUrl (\ s a -> s{_achUrl = a})
+achURL :: Lens' APIConfigHandler (Maybe Text)
+achURL = lens _achURL (\ s a -> s{_achURL = a})
 
 -- | For users not logged in, how to handle access to resources with required
 -- login. Defaults to \"redirect\".
@@ -524,7 +524,7 @@ instance ToJSON APIConfigHandler where
               (catMaybes
                  [("script" .=) <$> _achScript,
                   ("securityLevel" .=) <$> _achSecurityLevel,
-                  ("url" .=) <$> _achUrl,
+                  ("url" .=) <$> _achURL,
                   ("authFailAction" .=) <$> _achAuthFailAction,
                   ("login" .=) <$> _achLogin])
 
@@ -536,7 +536,7 @@ data Application = Application
     { _aLocation      :: !(Maybe Text)
     , _aCodeBucket    :: !(Maybe Text)
     , _aName          :: !(Maybe Text)
-    , _aDispatchRules :: !(Maybe [Maybe URLDispatchRule])
+    , _aDispatchRules :: !(Maybe [URLDispatchRule])
     , _aId            :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -588,7 +588,7 @@ aName = lens _aName (\ s a -> s{_aName = a})
 
 -- | HTTP path dispatch rules for requests to the app that do not explicitly
 -- target a module or version. The rules are order-dependent.
-aDispatchRules :: Lens' Application [Maybe URLDispatchRule]
+aDispatchRules :: Lens' Application [URLDispatchRule]
 aDispatchRules
   = lens _aDispatchRules
       (\ s a -> s{_aDispatchRules = a})
@@ -822,7 +822,7 @@ instance ToJSON URLDispatchRule where
 -- /See:/ 'operation' smart constructor.
 data Operation = Operation
     { _oDone     :: !(Maybe Bool)
-    , _oError    :: !(Maybe (Maybe Status))
+    , _oError    :: !(Maybe Status)
     , _oResponse :: !(Maybe OperationResponse)
     , _oName     :: !(Maybe Text)
     , _oMetadata :: !(Maybe OperationMetadata)
@@ -859,7 +859,7 @@ oDone :: Lens' Operation (Maybe Bool)
 oDone = lens _oDone (\ s a -> s{_oDone = a})
 
 -- | The error result of the operation in case of failure.
-oError :: Lens' Operation (Maybe (Maybe Status))
+oError :: Lens' Operation (Maybe Status)
 oError = lens _oError (\ s a -> s{_oError = a})
 
 -- | The normal response of the operation in case of success. If the original
@@ -957,7 +957,7 @@ instance ToJSON StaticDirectoryHandlerHTTPHeaders
 -- /See:/ 'listVersionsResponse' smart constructor.
 data ListVersionsResponse = ListVersionsResponse
     { _lvrNextPageToken :: !(Maybe Text)
-    , _lvrVersions      :: !(Maybe [Maybe Version])
+    , _lvrVersions      :: !(Maybe [Version])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListVersionsResponse' with the minimum fields required to make a request.
@@ -982,7 +982,7 @@ lvrNextPageToken
       (\ s a -> s{_lvrNextPageToken = a})
 
 -- | The versions belonging to the requested application module.
-lvrVersions :: Lens' ListVersionsResponse [Maybe Version]
+lvrVersions :: Lens' ListVersionsResponse [Version]
 lvrVersions
   = lens _lvrVersions (\ s a -> s{_lvrVersions = a}) .
       _Default
@@ -1008,7 +1008,7 @@ instance ToJSON ListVersionsResponse where
 -- /See:/ 'listModulesResponse' smart constructor.
 data ListModulesResponse = ListModulesResponse
     { _lmrNextPageToken :: !(Maybe Text)
-    , _lmrModules       :: !(Maybe [Maybe Module])
+    , _lmrModules       :: !(Maybe [Module])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListModulesResponse' with the minimum fields required to make a request.
@@ -1033,7 +1033,7 @@ lmrNextPageToken
       (\ s a -> s{_lmrNextPageToken = a})
 
 -- | The modules belonging to the requested application.
-lmrModules :: Lens' ListModulesResponse [Maybe Module]
+lmrModules :: Lens' ListModulesResponse [Module]
 lmrModules
   = lens _lmrModules (\ s a -> s{_lmrModules = a}) .
       _Default
@@ -1060,7 +1060,7 @@ instance ToJSON ListModulesResponse where
 data FileInfo = FileInfo
     { _fiSha1Sum   :: !(Maybe Text)
     , _fiMimeType  :: !(Maybe Text)
-    , _fiSourceUrl :: !(Maybe Text)
+    , _fiSourceURL :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FileInfo' with the minimum fields required to make a request.
@@ -1071,14 +1071,14 @@ data FileInfo = FileInfo
 --
 -- * 'fiMimeType'
 --
--- * 'fiSourceUrl'
+-- * 'fiSourceURL'
 fileInfo
     :: FileInfo
 fileInfo =
     FileInfo
     { _fiSha1Sum = Nothing
     , _fiMimeType = Nothing
-    , _fiSourceUrl = Nothing
+    , _fiSourceURL = Nothing
     }
 
 -- | The SHA1 (160 bits) hash of the file in hex.
@@ -1094,9 +1094,9 @@ fiMimeType
 
 -- | The URL source to use to fetch this file. Must be a URL to a resource in
 -- Google Cloud Storage.
-fiSourceUrl :: Lens' FileInfo (Maybe Text)
-fiSourceUrl
-  = lens _fiSourceUrl (\ s a -> s{_fiSourceUrl = a})
+fiSourceURL :: Lens' FileInfo (Maybe Text)
+fiSourceURL
+  = lens _fiSourceURL (\ s a -> s{_fiSourceURL = a})
 
 instance FromJSON FileInfo where
         parseJSON
@@ -1112,7 +1112,7 @@ instance ToJSON FileInfo where
               (catMaybes
                  [("sha1Sum" .=) <$> _fiSha1Sum,
                   ("mimeType" .=) <$> _fiMimeType,
-                  ("sourceUrl" .=) <$> _fiSourceUrl])
+                  ("sourceUrl" .=) <$> _fiSourceURL])
 
 -- | Automatic scaling is the scaling policy that App Engine has used since
 -- its inception. It is based on request rate, response latencies, and
@@ -1123,7 +1123,7 @@ data AutomaticScaling = AutomaticScaling
     { _asMaxTotalInstances     :: !(Maybe Int32)
     , _asMinIdleInstances      :: !(Maybe Int32)
     , _asMinPendingLatency     :: !(Maybe Text)
-    , _asCpuUtilization        :: !(Maybe (Maybe CPUUtilization))
+    , _asCPUUtilization        :: !(Maybe CPUUtilization)
     , _asMaxIdleInstances      :: !(Maybe Int32)
     , _asMinTotalInstances     :: !(Maybe Int32)
     , _asMaxConcurrentRequests :: !(Maybe Int32)
@@ -1141,7 +1141,7 @@ data AutomaticScaling = AutomaticScaling
 --
 -- * 'asMinPendingLatency'
 --
--- * 'asCpuUtilization'
+-- * 'asCPUUtilization'
 --
 -- * 'asMaxIdleInstances'
 --
@@ -1159,7 +1159,7 @@ automaticScaling =
     { _asMaxTotalInstances = Nothing
     , _asMinIdleInstances = Nothing
     , _asMinPendingLatency = Nothing
-    , _asCpuUtilization = Nothing
+    , _asCPUUtilization = Nothing
     , _asMaxIdleInstances = Nothing
     , _asMinTotalInstances = Nothing
     , _asMaxConcurrentRequests = Nothing
@@ -1189,10 +1189,10 @@ asMinPendingLatency
       (\ s a -> s{_asMinPendingLatency = a})
 
 -- | Target scaling by CPU usage.
-asCpuUtilization :: Lens' AutomaticScaling (Maybe (Maybe CPUUtilization))
-asCpuUtilization
-  = lens _asCpuUtilization
-      (\ s a -> s{_asCpuUtilization = a})
+asCPUUtilization :: Lens' AutomaticScaling (Maybe CPUUtilization)
+asCPUUtilization
+  = lens _asCPUUtilization
+      (\ s a -> s{_asCPUUtilization = a})
 
 -- | The maximum number of idle instances that App Engine should maintain for
 -- this version.
@@ -1253,7 +1253,7 @@ instance ToJSON AutomaticScaling where
                  [("maxTotalInstances" .=) <$> _asMaxTotalInstances,
                   ("minIdleInstances" .=) <$> _asMinIdleInstances,
                   ("minPendingLatency" .=) <$> _asMinPendingLatency,
-                  ("cpuUtilization" .=) <$> _asCpuUtilization,
+                  ("cpuUtilization" .=) <$> _asCPUUtilization,
                   ("maxIdleInstances" .=) <$> _asMaxIdleInstances,
                   ("minTotalInstances" .=) <$> _asMinTotalInstances,
                   ("maxConcurrentRequests" .=) <$>
@@ -1386,7 +1386,7 @@ instance ToJSON Network where
 data Resources = Resources
     { _rMemoryGb :: !(Maybe Double)
     , _rDiskGb   :: !(Maybe Double)
-    , _rCpu      :: !(Maybe Double)
+    , _rCPU      :: !(Maybe Double)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Resources' with the minimum fields required to make a request.
@@ -1397,14 +1397,14 @@ data Resources = Resources
 --
 -- * 'rDiskGb'
 --
--- * 'rCpu'
+-- * 'rCPU'
 resources
     :: Resources
 resources =
     Resources
     { _rMemoryGb = Nothing
     , _rDiskGb = Nothing
-    , _rCpu = Nothing
+    , _rCPU = Nothing
     }
 
 -- | How much memory, in GB, an app version needs.
@@ -1417,8 +1417,8 @@ rDiskGb :: Lens' Resources (Maybe Double)
 rDiskGb = lens _rDiskGb (\ s a -> s{_rDiskGb = a})
 
 -- | How many CPU cores an app version needs.
-rCpu :: Lens' Resources (Maybe Double)
-rCpu = lens _rCpu (\ s a -> s{_rCpu = a})
+rCPU :: Lens' Resources (Maybe Double)
+rCPU = lens _rCPU (\ s a -> s{_rCPU = a})
 
 instance FromJSON Resources where
         parseJSON
@@ -1433,7 +1433,7 @@ instance ToJSON Resources where
           = object
               (catMaybes
                  [("memoryGb" .=) <$> _rMemoryGb,
-                  ("diskGb" .=) <$> _rDiskGb, ("cpu" .=) <$> _rCpu])
+                  ("diskGb" .=) <$> _rDiskGb, ("cpu" .=) <$> _rCPU])
 
 -- | HTTP headers to use for all responses from these URLs.
 --
@@ -1660,27 +1660,27 @@ data Version = Version
     , _vDeployer          :: !(Maybe Text)
     , _vNobuildFilesRegex :: !(Maybe Text)
     , _vInstanceClass     :: !(Maybe Text)
-    , _vHealthCheck       :: !(Maybe (Maybe HealthCheck))
+    , _vHealthCheck       :: !(Maybe HealthCheck)
     , _vEnv               :: !(Maybe Text)
     , _vDefaultExpiration :: !(Maybe Text)
-    , _vAutomaticScaling  :: !(Maybe (Maybe AutomaticScaling))
-    , _vErrorHandlers     :: !(Maybe [Maybe ErrorHandler])
-    , _vVm                :: !(Maybe Bool)
-    , _vHandlers          :: !(Maybe [Maybe URLMap])
+    , _vAutomaticScaling  :: !(Maybe AutomaticScaling)
+    , _vErrorHandlers     :: !(Maybe [ErrorHandler])
+    , _vVM                :: !(Maybe Bool)
+    , _vHandlers          :: !(Maybe [URLMap])
     , _vInboundServices   :: !(Maybe [Text])
-    , _vNetwork           :: !(Maybe (Maybe Network))
-    , _vResources         :: !(Maybe (Maybe Resources))
+    , _vNetwork           :: !(Maybe Network)
+    , _vResources         :: !(Maybe Resources)
     , _vName              :: !(Maybe Text)
     , _vThreadsafe        :: !(Maybe Bool)
     , _vBetaSettings      :: !(Maybe VersionBetaSettings)
-    , _vBasicScaling      :: !(Maybe (Maybe BasicScaling))
-    , _vManualScaling     :: !(Maybe (Maybe ManualScaling))
-    , _vApiConfig         :: !(Maybe (Maybe APIConfigHandler))
+    , _vBasicScaling      :: !(Maybe BasicScaling)
+    , _vManualScaling     :: !(Maybe ManualScaling)
+    , _vAPIConfig         :: !(Maybe APIConfigHandler)
     , _vId                :: !(Maybe Text)
     , _vEnvVariables      :: !(Maybe VersionEnvVariables)
     , _vServingStatus     :: !(Maybe Text)
-    , _vLibraries         :: !(Maybe [Maybe Library])
-    , _vDeployment        :: !(Maybe (Maybe Deployment))
+    , _vLibraries         :: !(Maybe [Library])
+    , _vDeployment        :: !(Maybe Deployment)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Version' with the minimum fields required to make a request.
@@ -1707,7 +1707,7 @@ data Version = Version
 --
 -- * 'vErrorHandlers'
 --
--- * 'vVm'
+-- * 'vVM'
 --
 -- * 'vHandlers'
 --
@@ -1727,7 +1727,7 @@ data Version = Version
 --
 -- * 'vManualScaling'
 --
--- * 'vApiConfig'
+-- * 'vAPIConfig'
 --
 -- * 'vId'
 --
@@ -1752,7 +1752,7 @@ version =
     , _vDefaultExpiration = Nothing
     , _vAutomaticScaling = Nothing
     , _vErrorHandlers = Nothing
-    , _vVm = Nothing
+    , _vVM = Nothing
     , _vHandlers = Nothing
     , _vInboundServices = Nothing
     , _vNetwork = Nothing
@@ -1762,7 +1762,7 @@ version =
     , _vBetaSettings = Nothing
     , _vBasicScaling = Nothing
     , _vManualScaling = Nothing
-    , _vApiConfig = Nothing
+    , _vAPIConfig = Nothing
     , _vId = Nothing
     , _vEnvVariables = Nothing
     , _vServingStatus = Nothing
@@ -1804,7 +1804,7 @@ vInstanceClass
 -- will be stopped and replaced with new instances. Only returned in
 -- \`GET\` requests if \`view=FULL\` is set. May only be set on create
 -- requests; once created, is immutable.
-vHealthCheck :: Lens' Version (Maybe (Maybe HealthCheck))
+vHealthCheck :: Lens' Version (Maybe HealthCheck)
 vHealthCheck
   = lens _vHealthCheck (\ s a -> s{_vHealthCheck = a})
 
@@ -1826,7 +1826,7 @@ vDefaultExpiration
 -- | Automatic scaling is the scaling policy that App Engine has used since
 -- its inception. It is based on request rate, response latencies, and
 -- other application metrics.
-vAutomaticScaling :: Lens' Version (Maybe (Maybe AutomaticScaling))
+vAutomaticScaling :: Lens' Version (Maybe AutomaticScaling)
 vAutomaticScaling
   = lens _vAutomaticScaling
       (\ s a -> s{_vAutomaticScaling = a})
@@ -1834,7 +1834,7 @@ vAutomaticScaling
 -- | Custom static error pages instead of these generic error pages, (limit
 -- 10 KB\/page) Only returned in \`GET\` requests if \`view=FULL\` is set.
 -- May only be set on create requests; once created, is immutable.
-vErrorHandlers :: Lens' Version [Maybe ErrorHandler]
+vErrorHandlers :: Lens' Version [ErrorHandler]
 vErrorHandlers
   = lens _vErrorHandlers
       (\ s a -> s{_vErrorHandlers = a})
@@ -1843,15 +1843,15 @@ vErrorHandlers
 
 -- | Whether to deploy this app in a VM container (deprecated, use
 -- \"env\":\"2\").
-vVm :: Lens' Version (Maybe Bool)
-vVm = lens _vVm (\ s a -> s{_vVm = a})
+vVM :: Lens' Version (Maybe Bool)
+vVM = lens _vVM (\ s a -> s{_vVM = a})
 
 -- | An ordered list of URL Matching patterns that should be applied to
 -- incoming requests. The first matching URL consumes the request, and
 -- subsequent handlers are not attempted. Only returned in \`GET\` requests
 -- if \`view=FULL\` is set. May only be set on create requests; once
 -- created, is immutable.
-vHandlers :: Lens' Version [Maybe URLMap]
+vHandlers :: Lens' Version [URLMap]
 vHandlers
   = lens _vHandlers (\ s a -> s{_vHandlers = a}) .
       _Default
@@ -1867,12 +1867,12 @@ vInboundServices
       . _Coerce
 
 -- | Used to specify extra network settings (for VM runtimes only).
-vNetwork :: Lens' Version (Maybe (Maybe Network))
+vNetwork :: Lens' Version (Maybe Network)
 vNetwork = lens _vNetwork (\ s a -> s{_vNetwork = a})
 
 -- | Used to specify how many machine resources an app version needs (for VM
 -- runtimes only).
-vResources :: Lens' Version (Maybe (Maybe Resources))
+vResources :: Lens' Version (Maybe Resources)
 vResources
   = lens _vResources (\ s a -> s{_vResources = a})
 
@@ -1896,14 +1896,14 @@ vBetaSettings
 -- receives a request. The instance will be turned down when the app
 -- becomes idle. Basic scaling is ideal for work that is intermittent or
 -- driven by user activity.
-vBasicScaling :: Lens' Version (Maybe (Maybe BasicScaling))
+vBasicScaling :: Lens' Version (Maybe BasicScaling)
 vBasicScaling
   = lens _vBasicScaling
       (\ s a -> s{_vBasicScaling = a})
 
 -- | A module with manual scaling runs continuously, allowing you to perform
 -- complex initialization and rely on the state of its memory over time.
-vManualScaling :: Lens' Version (Maybe (Maybe ManualScaling))
+vManualScaling :: Lens' Version (Maybe ManualScaling)
 vManualScaling
   = lens _vManualScaling
       (\ s a -> s{_vManualScaling = a})
@@ -1911,9 +1911,9 @@ vManualScaling
 -- | Serving configuration for Google Cloud Endpoints. Only returned in
 -- \`GET\` requests if \`view=FULL\` is set. May only be set on create
 -- requests; once created, is immutable.
-vApiConfig :: Lens' Version (Maybe (Maybe APIConfigHandler))
-vApiConfig
-  = lens _vApiConfig (\ s a -> s{_vApiConfig = a})
+vAPIConfig :: Lens' Version (Maybe APIConfigHandler)
+vAPIConfig
+  = lens _vAPIConfig (\ s a -> s{_vAPIConfig = a})
 
 -- | The relative name\/path of the Version within the module. Example:
 -- \"v1\". Version specifiers can contain lowercase letters, digits, and
@@ -1942,7 +1942,7 @@ vServingStatus
 -- | Configuration for Python runtime third-party libraries required by the
 -- application. Only returned in \`GET\` requests if \`view=FULL\` is set.
 -- May only be set on create requests; once created, is immutable.
-vLibraries :: Lens' Version [Maybe Library]
+vLibraries :: Lens' Version [Library]
 vLibraries
   = lens _vLibraries (\ s a -> s{_vLibraries = a}) .
       _Default
@@ -1951,7 +1951,7 @@ vLibraries
 -- | Code and application artifacts that make up this version. Only returned
 -- in \`GET\` requests if \`view=FULL\` is set. May only be set on create
 -- requests; once created, is immutable.
-vDeployment :: Lens' Version (Maybe (Maybe Deployment))
+vDeployment :: Lens' Version (Maybe Deployment)
 vDeployment
   = lens _vDeployment (\ s a -> s{_vDeployment = a})
 
@@ -2000,7 +2000,7 @@ instance ToJSON Version where
                   ("defaultExpiration" .=) <$> _vDefaultExpiration,
                   ("automaticScaling" .=) <$> _vAutomaticScaling,
                   ("errorHandlers" .=) <$> _vErrorHandlers,
-                  ("vm" .=) <$> _vVm, ("handlers" .=) <$> _vHandlers,
+                  ("vm" .=) <$> _vVM, ("handlers" .=) <$> _vHandlers,
                   ("inboundServices" .=) <$> _vInboundServices,
                   ("network" .=) <$> _vNetwork,
                   ("resources" .=) <$> _vResources,
@@ -2009,7 +2009,7 @@ instance ToJSON Version where
                   ("betaSettings" .=) <$> _vBetaSettings,
                   ("basicScaling" .=) <$> _vBasicScaling,
                   ("manualScaling" .=) <$> _vManualScaling,
-                  ("apiConfig" .=) <$> _vApiConfig, ("id" .=) <$> _vId,
+                  ("apiConfig" .=) <$> _vAPIConfig, ("id" .=) <$> _vId,
                   ("envVariables" .=) <$> _vEnvVariables,
                   ("servingStatus" .=) <$> _vServingStatus,
                   ("libraries" .=) <$> _vLibraries,
@@ -2021,7 +2021,7 @@ instance ToJSON Version where
 --
 -- /See:/ 'module'' smart constructor.
 data Module = Module
-    { _mSplit :: !(Maybe (Maybe TrafficSplit))
+    { _mSplit :: !(Maybe TrafficSplit)
     , _mName  :: !(Maybe Text)
     , _mId    :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -2046,7 +2046,7 @@ module' =
 
 -- | A mapping that defines fractional HTTP traffic diversion to different
 -- versions within the module.
-mSplit :: Lens' Module (Maybe (Maybe TrafficSplit))
+mSplit :: Lens' Module (Maybe TrafficSplit)
 mSplit = lens _mSplit (\ s a -> s{_mSplit = a})
 
 -- | The full path to the Module resource in the API. Example:
@@ -2080,7 +2080,7 @@ instance ToJSON Module where
 --
 -- /See:/ 'staticFilesHandler' smart constructor.
 data StaticFilesHandler = StaticFilesHandler
-    { _sfhHttpHeaders         :: !(Maybe StaticFilesHandlerHTTPHeaders)
+    { _sfhHTTPHeaders         :: !(Maybe StaticFilesHandlerHTTPHeaders)
     , _sfhPath                :: !(Maybe Text)
     , _sfhRequireMatchingFile :: !(Maybe Bool)
     , _sfhExpiration          :: !(Maybe Text)
@@ -2093,7 +2093,7 @@ data StaticFilesHandler = StaticFilesHandler
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sfhHttpHeaders'
+-- * 'sfhHTTPHeaders'
 --
 -- * 'sfhPath'
 --
@@ -2110,7 +2110,7 @@ staticFilesHandler
     :: StaticFilesHandler
 staticFilesHandler =
     StaticFilesHandler
-    { _sfhHttpHeaders = Nothing
+    { _sfhHTTPHeaders = Nothing
     , _sfhPath = Nothing
     , _sfhRequireMatchingFile = Nothing
     , _sfhExpiration = Nothing
@@ -2120,10 +2120,10 @@ staticFilesHandler =
     }
 
 -- | HTTP headers to use for all responses from these URLs.
-sfhHttpHeaders :: Lens' StaticFilesHandler (Maybe StaticFilesHandlerHTTPHeaders)
-sfhHttpHeaders
-  = lens _sfhHttpHeaders
-      (\ s a -> s{_sfhHttpHeaders = a})
+sfhHTTPHeaders :: Lens' StaticFilesHandler (Maybe StaticFilesHandlerHTTPHeaders)
+sfhHTTPHeaders
+  = lens _sfhHTTPHeaders
+      (\ s a -> s{_sfhHTTPHeaders = a})
 
 -- | The path to the static files matched by the URL pattern, from the
 -- application root directory. The path can refer to text matched in
@@ -2188,7 +2188,7 @@ instance ToJSON StaticFilesHandler where
         toJSON StaticFilesHandler{..}
           = object
               (catMaybes
-                 [("httpHeaders" .=) <$> _sfhHttpHeaders,
+                 [("httpHeaders" .=) <$> _sfhHTTPHeaders,
                   ("path" .=) <$> _sfhPath,
                   ("requireMatchingFile" .=) <$>
                     _sfhRequireMatchingFile,
@@ -2491,9 +2491,9 @@ instance ToJSON ContainerInfo where
 --
 -- /See:/ 'deployment' smart constructor.
 data Deployment = Deployment
-    { _dContainer        :: !(Maybe (Maybe ContainerInfo))
+    { _dContainer        :: !(Maybe ContainerInfo)
     , _dFiles            :: !(Maybe DeploymentFiles)
-    , _dSourceReferences :: !(Maybe [Maybe SourceReference])
+    , _dSourceReferences :: !(Maybe [SourceReference])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Deployment' with the minimum fields required to make a request.
@@ -2516,7 +2516,7 @@ deployment =
 
 -- | If supplied, a docker (container) image which should be used to start
 -- the application. Only applicable to the \'vm\' runtime.
-dContainer :: Lens' Deployment (Maybe (Maybe ContainerInfo))
+dContainer :: Lens' Deployment (Maybe ContainerInfo)
 dContainer
   = lens _dContainer (\ s a -> s{_dContainer = a})
 
@@ -2529,7 +2529,7 @@ dFiles = lens _dFiles (\ s a -> s{_dFiles = a})
 -- | The origin of the source code for this deployment. There can be more
 -- than one source reference per Version if source code is distributed
 -- among multiple repositories.
-dSourceReferences :: Lens' Deployment [Maybe SourceReference]
+dSourceReferences :: Lens' Deployment [SourceReference]
 dSourceReferences
   = lens _dSourceReferences
       (\ s a -> s{_dSourceReferences = a})
@@ -2558,7 +2558,7 @@ instance ToJSON Deployment where
 --
 -- /See:/ 'staticDirectoryHandler' smart constructor.
 data StaticDirectoryHandler = StaticDirectoryHandler
-    { _sdhHttpHeaders         :: !(Maybe StaticDirectoryHandlerHTTPHeaders)
+    { _sdhHTTPHeaders         :: !(Maybe StaticDirectoryHandlerHTTPHeaders)
     , _sdhRequireMatchingFile :: !(Maybe Bool)
     , _sdhExpiration          :: !(Maybe Text)
     , _sdhMimeType            :: !(Maybe Text)
@@ -2570,7 +2570,7 @@ data StaticDirectoryHandler = StaticDirectoryHandler
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sdhHttpHeaders'
+-- * 'sdhHTTPHeaders'
 --
 -- * 'sdhRequireMatchingFile'
 --
@@ -2585,7 +2585,7 @@ staticDirectoryHandler
     :: StaticDirectoryHandler
 staticDirectoryHandler =
     StaticDirectoryHandler
-    { _sdhHttpHeaders = Nothing
+    { _sdhHTTPHeaders = Nothing
     , _sdhRequireMatchingFile = Nothing
     , _sdhExpiration = Nothing
     , _sdhMimeType = Nothing
@@ -2594,10 +2594,10 @@ staticDirectoryHandler =
     }
 
 -- | HTTP headers to use for all responses from these URLs.
-sdhHttpHeaders :: Lens' StaticDirectoryHandler (Maybe StaticDirectoryHandlerHTTPHeaders)
-sdhHttpHeaders
-  = lens _sdhHttpHeaders
-      (\ s a -> s{_sdhHttpHeaders = a})
+sdhHTTPHeaders :: Lens' StaticDirectoryHandler (Maybe StaticDirectoryHandlerHTTPHeaders)
+sdhHTTPHeaders
+  = lens _sdhHTTPHeaders
+      (\ s a -> s{_sdhHTTPHeaders = a})
 
 -- | If true, this UrlMap entry does not match the request unless the file
 -- referenced by the handler also exists. If no such file exists,
@@ -2656,7 +2656,7 @@ instance ToJSON StaticDirectoryHandler where
         toJSON StaticDirectoryHandler{..}
           = object
               (catMaybes
-                 [("httpHeaders" .=) <$> _sdhHttpHeaders,
+                 [("httpHeaders" .=) <$> _sdhHTTPHeaders,
                   ("requireMatchingFile" .=) <$>
                     _sdhRequireMatchingFile,
                   ("expiration" .=) <$> _sdhExpiration,

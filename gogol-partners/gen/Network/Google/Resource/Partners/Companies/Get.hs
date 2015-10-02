@@ -47,14 +47,13 @@ module Network.Google.Resource.Partners.Companies.Get
     , cgRequestMetadataLocale
     , cgView
     , cgRequestMetadataExperimentIds
-    , cgRequestMetadataUserOverridesIpAddress
+    , cgRequestMetadataUserOverridesIPAddress
     , cgRequestMetadataTrafficSourceTrafficSubId
-    , cgOauthToken
+    , cgOAuthToken
     , cgRequestMetadataUserOverridesUserId
     , cgRequestMetadataTrafficSourceTrafficSourceId
     , cgFields
     , cgCallback
-    , cgAlt
     ) where
 
 import           Network.Google.Partners.Types
@@ -80,7 +79,7 @@ type CompaniesGetResource =
                                  Text
                                  :>
                                  QueryParam "bearer_token" Text :>
-                                   QueryParam "key" Text :>
+                                   QueryParam "key" Key :>
                                      QueryParam "requestMetadata.locale" Text :>
                                        QueryParam "view" Text :>
                                          QueryParams
@@ -95,7 +94,9 @@ type CompaniesGetResource =
                                                "requestMetadata.trafficSource.trafficSubId"
                                                Text
                                                :>
-                                               QueryParam "oauth_token" Text :>
+                                               QueryParam "oauth_token"
+                                                 OAuthToken
+                                                 :>
                                                  QueryParam
                                                    "requestMetadata.userOverrides.userId"
                                                    Text
@@ -108,7 +109,8 @@ type CompaniesGetResource =
                                                        QueryParam "callback"
                                                          Text
                                                          :>
-                                                         QueryParam "alt" Text
+                                                         QueryParam "alt"
+                                                           AltJSON
                                                            :>
                                                            Get '[JSON]
                                                              GetCompanyResponse
@@ -130,18 +132,17 @@ data CompaniesGet' = CompaniesGet'
     , _cgAddress                                     :: !(Maybe Text)
     , _cgRequestMetadataPartnersSessionId            :: !(Maybe Text)
     , _cgBearerToken                                 :: !(Maybe Text)
-    , _cgKey                                         :: !(Maybe Text)
+    , _cgKey                                         :: !(Maybe Key)
     , _cgRequestMetadataLocale                       :: !(Maybe Text)
     , _cgView                                        :: !(Maybe Text)
     , _cgRequestMetadataExperimentIds                :: !(Maybe Text)
-    , _cgRequestMetadataUserOverridesIpAddress       :: !(Maybe Text)
+    , _cgRequestMetadataUserOverridesIPAddress       :: !(Maybe Text)
     , _cgRequestMetadataTrafficSourceTrafficSubId    :: !(Maybe Text)
-    , _cgOauthToken                                  :: !(Maybe Text)
+    , _cgOAuthToken                                  :: !(Maybe OAuthToken)
     , _cgRequestMetadataUserOverridesUserId          :: !(Maybe Text)
     , _cgRequestMetadataTrafficSourceTrafficSourceId :: !(Maybe Text)
     , _cgFields                                      :: !(Maybe Text)
     , _cgCallback                                    :: !(Maybe Text)
-    , _cgAlt                                         :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CompaniesGet'' with the minimum fields required to make a request.
@@ -182,11 +183,11 @@ data CompaniesGet' = CompaniesGet'
 --
 -- * 'cgRequestMetadataExperimentIds'
 --
--- * 'cgRequestMetadataUserOverridesIpAddress'
+-- * 'cgRequestMetadataUserOverridesIPAddress'
 --
 -- * 'cgRequestMetadataTrafficSourceTrafficSubId'
 --
--- * 'cgOauthToken'
+-- * 'cgOAuthToken'
 --
 -- * 'cgRequestMetadataUserOverridesUserId'
 --
@@ -195,8 +196,6 @@ data CompaniesGet' = CompaniesGet'
 -- * 'cgFields'
 --
 -- * 'cgCallback'
---
--- * 'cgAlt'
 companiesGet'
     :: Text -- ^ 'companyId'
     -> CompaniesGet'
@@ -219,14 +218,13 @@ companiesGet' pCgCompanyId_ =
     , _cgRequestMetadataLocale = Nothing
     , _cgView = Nothing
     , _cgRequestMetadataExperimentIds = Nothing
-    , _cgRequestMetadataUserOverridesIpAddress = Nothing
+    , _cgRequestMetadataUserOverridesIPAddress = Nothing
     , _cgRequestMetadataTrafficSourceTrafficSubId = Nothing
-    , _cgOauthToken = Nothing
+    , _cgOAuthToken = Nothing
     , _cgRequestMetadataUserOverridesUserId = Nothing
     , _cgRequestMetadataTrafficSourceTrafficSourceId = Nothing
     , _cgFields = Nothing
     , _cgCallback = Nothing
-    , _cgAlt = "json"
     }
 
 -- | V1 error format.
@@ -309,7 +307,7 @@ cgBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cgKey :: Lens' CompaniesGet' (Maybe Text)
+cgKey :: Lens' CompaniesGet' (Maybe Key)
 cgKey = lens _cgKey (\ s a -> s{_cgKey = a})
 
 -- | Locale to use for the current request.
@@ -330,11 +328,11 @@ cgRequestMetadataExperimentIds
       (\ s a -> s{_cgRequestMetadataExperimentIds = a})
 
 -- | IP address to use instead of the user\'s geo-located IP address.
-cgRequestMetadataUserOverridesIpAddress :: Lens' CompaniesGet' (Maybe Text)
-cgRequestMetadataUserOverridesIpAddress
-  = lens _cgRequestMetadataUserOverridesIpAddress
+cgRequestMetadataUserOverridesIPAddress :: Lens' CompaniesGet' (Maybe Text)
+cgRequestMetadataUserOverridesIPAddress
+  = lens _cgRequestMetadataUserOverridesIPAddress
       (\ s a ->
-         s{_cgRequestMetadataUserOverridesIpAddress = a})
+         s{_cgRequestMetadataUserOverridesIPAddress = a})
 
 -- | Second level identifier to indicate where the traffic comes from. An
 -- identifier has multiple letters created by a team which redirected the
@@ -346,9 +344,9 @@ cgRequestMetadataTrafficSourceTrafficSubId
          s{_cgRequestMetadataTrafficSourceTrafficSubId = a})
 
 -- | OAuth 2.0 token for the current user.
-cgOauthToken :: Lens' CompaniesGet' (Maybe Text)
-cgOauthToken
-  = lens _cgOauthToken (\ s a -> s{_cgOauthToken = a})
+cgOAuthToken :: Lens' CompaniesGet' (Maybe OAuthToken)
+cgOAuthToken
+  = lens _cgOAuthToken (\ s a -> s{_cgOAuthToken = a})
 
 -- | Logged-in user ID to impersonate instead of the user\'s ID.
 cgRequestMetadataUserOverridesUserId :: Lens' CompaniesGet' (Maybe Text)
@@ -375,9 +373,9 @@ cgCallback :: Lens' CompaniesGet' (Maybe Text)
 cgCallback
   = lens _cgCallback (\ s a -> s{_cgCallback = a})
 
--- | Data format for response.
-cgAlt :: Lens' CompaniesGet' Text
-cgAlt = lens _cgAlt (\ s a -> s{_cgAlt = a})
+instance GoogleAuth CompaniesGet' where
+        authKey = cgKey . _Just
+        authToken = cgOAuthToken . _Just
 
 instance GoogleRequest CompaniesGet' where
         type Rs CompaniesGet' = GetCompanyResponse
@@ -398,14 +396,14 @@ instance GoogleRequest CompaniesGet' where
               _cgRequestMetadataLocale
               _cgView
               _cgRequestMetadataExperimentIds
-              _cgRequestMetadataUserOverridesIpAddress
+              _cgRequestMetadataUserOverridesIPAddress
               _cgRequestMetadataTrafficSourceTrafficSubId
-              _cgOauthToken
+              _cgOAuthToken
               _cgRequestMetadataUserOverridesUserId
               _cgRequestMetadataTrafficSourceTrafficSourceId
               _cgFields
               _cgCallback
-              (Just _cgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CompaniesGetResource)

@@ -37,7 +37,7 @@ module Network.Google.Resource.Search.Cse.List
     , clSiteSearchFilter
     , clC2coff
     , clOrTerms
-    , clUserIp
+    , clUserIP
     , clStart
     , clRights
     , clExcludeTerms
@@ -56,7 +56,7 @@ module Network.Google.Resource.Search.Cse.List
     , clFilter
     , clDateRestrict
     , clLinkSite
-    , clOauthToken
+    , clOAuthToken
     , clLowRange
     , clImgType
     , clGl
@@ -69,7 +69,6 @@ module Network.Google.Resource.Search.Cse.List
     , clHq
     , clFields
     , clHighRange
-    , clAlt
     ) where
 
 import           Network.Google.CustomSearch.Types
@@ -102,7 +101,7 @@ type CseListResource =
                                      QueryParam "googlehost" Text :>
                                        QueryParam "relatedSite" Text :>
                                          QueryParam "hl" Text :>
-                                           QueryParam "key" Text :>
+                                           QueryParam "key" Key :>
                                              QueryParam "cref" Text :>
                                                QueryParam "sort" Text :>
                                                  QueryParam "siteSearch" Text :>
@@ -117,7 +116,7 @@ type CseListResource =
                                                          :>
                                                          QueryParam
                                                            "oauth_token"
-                                                           Text
+                                                           OAuthToken
                                                            :>
                                                            QueryParam "lowRange"
                                                              Text
@@ -166,7 +165,7 @@ type CseListResource =
                                                                                    :>
                                                                                    QueryParam
                                                                                      "alt"
-                                                                                     Alt
+                                                                                     AltJSON
                                                                                      :>
                                                                                      Get
                                                                                        '[JSON]
@@ -183,7 +182,7 @@ data CseList' = CseList'
     , _clSiteSearchFilter :: !(Maybe SearchCseListSiteSearchFilter)
     , _clC2coff           :: !(Maybe Text)
     , _clOrTerms          :: !(Maybe Text)
-    , _clUserIp           :: !(Maybe Text)
+    , _clUserIP           :: !(Maybe Text)
     , _clStart            :: !(Maybe Word32)
     , _clRights           :: !(Maybe Text)
     , _clExcludeTerms     :: !(Maybe Text)
@@ -195,14 +194,14 @@ data CseList' = CseList'
     , _clGooglehost       :: !(Maybe Text)
     , _clRelatedSite      :: !(Maybe Text)
     , _clHl               :: !(Maybe Text)
-    , _clKey              :: !(Maybe Text)
+    , _clKey              :: !(Maybe Key)
     , _clCref             :: !(Maybe Text)
     , _clSort             :: !(Maybe Text)
     , _clSiteSearch       :: !(Maybe Text)
     , _clFilter           :: !(Maybe SearchCseListFilter)
     , _clDateRestrict     :: !(Maybe Text)
     , _clLinkSite         :: !(Maybe Text)
-    , _clOauthToken       :: !(Maybe Text)
+    , _clOAuthToken       :: !(Maybe OAuthToken)
     , _clLowRange         :: !(Maybe Text)
     , _clImgType          :: !(Maybe SearchCseListImgType)
     , _clGl               :: !(Maybe Text)
@@ -215,7 +214,6 @@ data CseList' = CseList'
     , _clHq               :: !(Maybe Text)
     , _clFields           :: !(Maybe Text)
     , _clHighRange        :: !(Maybe Text)
-    , _clAlt              :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CseList'' with the minimum fields required to make a request.
@@ -234,7 +232,7 @@ data CseList' = CseList'
 --
 -- * 'clOrTerms'
 --
--- * 'clUserIp'
+-- * 'clUserIP'
 --
 -- * 'clStart'
 --
@@ -272,7 +270,7 @@ data CseList' = CseList'
 --
 -- * 'clLinkSite'
 --
--- * 'clOauthToken'
+-- * 'clOAuthToken'
 --
 -- * 'clLowRange'
 --
@@ -297,8 +295,6 @@ data CseList' = CseList'
 -- * 'clFields'
 --
 -- * 'clHighRange'
---
--- * 'clAlt'
 cseList'
     :: Text -- ^ 'q'
     -> CseList'
@@ -310,7 +306,7 @@ cseList' pClQ_ =
     , _clSiteSearchFilter = Nothing
     , _clC2coff = Nothing
     , _clOrTerms = Nothing
-    , _clUserIp = Nothing
+    , _clUserIP = Nothing
     , _clStart = Nothing
     , _clRights = Nothing
     , _clExcludeTerms = Nothing
@@ -329,7 +325,7 @@ cseList' pClQ_ =
     , _clFilter = Nothing
     , _clDateRestrict = Nothing
     , _clLinkSite = Nothing
-    , _clOauthToken = Nothing
+    , _clOAuthToken = Nothing
     , _clLowRange = Nothing
     , _clImgType = Nothing
     , _clGl = Nothing
@@ -342,7 +338,6 @@ cseList' pClQ_ =
     , _clHq = Nothing
     , _clFields = Nothing
     , _clHighRange = Nothing
-    , _clAlt = JSON
     }
 
 -- | Returns images of a specific dominant color: yellow, green, teal, blue,
@@ -385,8 +380,8 @@ clOrTerms
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-clUserIp :: Lens' CseList' (Maybe Text)
-clUserIp = lens _clUserIp (\ s a -> s{_clUserIp = a})
+clUserIP :: Lens' CseList' (Maybe Text)
+clUserIP = lens _clUserIP (\ s a -> s{_clUserIP = a})
 
 -- | The index of the first result to return
 clStart :: Lens' CseList' (Maybe Word32)
@@ -447,7 +442,7 @@ clHl = lens _clHl (\ s a -> s{_clHl = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-clKey :: Lens' CseList' (Maybe Text)
+clKey :: Lens' CseList' (Maybe Key)
 clKey = lens _clKey (\ s a -> s{_clKey = a})
 
 -- | The URL of a linked custom search engine
@@ -480,9 +475,9 @@ clLinkSite
   = lens _clLinkSite (\ s a -> s{_clLinkSite = a})
 
 -- | OAuth 2.0 token for the current user.
-clOauthToken :: Lens' CseList' (Maybe Text)
-clOauthToken
-  = lens _clOauthToken (\ s a -> s{_clOauthToken = a})
+clOAuthToken :: Lens' CseList' (Maybe OAuthToken)
+clOAuthToken
+  = lens _clOAuthToken (\ s a -> s{_clOAuthToken = a})
 
 -- | Creates a range in form as_nlo value..as_nhi value and attempts to
 -- append it to query
@@ -545,9 +540,9 @@ clHighRange :: Lens' CseList' (Maybe Text)
 clHighRange
   = lens _clHighRange (\ s a -> s{_clHighRange = a})
 
--- | Data format for the response.
-clAlt :: Lens' CseList' Alt
-clAlt = lens _clAlt (\ s a -> s{_clAlt = a})
+instance GoogleAuth CseList' where
+        authKey = clKey . _Just
+        authToken = clOAuthToken . _Just
 
 instance GoogleRequest CseList' where
         type Rs CseList' = Search
@@ -558,7 +553,7 @@ instance GoogleRequest CseList' where
               _clSiteSearchFilter
               _clC2coff
               _clOrTerms
-              _clUserIp
+              _clUserIP
               _clStart
               _clRights
               _clExcludeTerms
@@ -577,7 +572,7 @@ instance GoogleRequest CseList' where
               _clFilter
               _clDateRestrict
               _clLinkSite
-              _clOauthToken
+              _clOAuthToken
               _clLowRange
               _clImgType
               _clGl
@@ -590,7 +585,7 @@ instance GoogleRequest CseList' where
               _clHq
               _clFields
               _clHighRange
-              (Just _clAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy CseListResource) r
                       u

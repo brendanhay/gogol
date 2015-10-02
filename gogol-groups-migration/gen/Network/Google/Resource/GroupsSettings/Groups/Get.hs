@@ -32,12 +32,11 @@ module Network.Google.Resource.GroupsSettings.Groups.Get
     -- * Request Lenses
     , ggQuotaUser
     , ggPrettyPrint
-    , ggUserIp
+    , ggUserIP
     , ggKey
-    , ggOauthToken
+    , ggOAuthToken
     , ggGroupUniqueId
     , ggFields
-    , ggAlt
     ) where
 
 import           Network.Google.GroupsSettings.Types
@@ -50,10 +49,10 @@ type GroupsGetResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
-               QueryParam "oauth_token" Text :>
+             QueryParam "key" Key :>
+               QueryParam "oauth_token" OAuthToken :>
                  QueryParam "fields" Text :>
-                   QueryParam "alt" Alt :> Get '[JSON] Groups
+                   QueryParam "alt" AltATOM :> Get '[JSON] Groups
 
 -- | Gets one resource by id.
 --
@@ -61,12 +60,11 @@ type GroupsGetResource =
 data GroupsGet' = GroupsGet'
     { _ggQuotaUser     :: !(Maybe Text)
     , _ggPrettyPrint   :: !Bool
-    , _ggUserIp        :: !(Maybe Text)
-    , _ggKey           :: !(Maybe Text)
-    , _ggOauthToken    :: !(Maybe Text)
+    , _ggUserIP        :: !(Maybe Text)
+    , _ggKey           :: !(Maybe Key)
+    , _ggOAuthToken    :: !(Maybe OAuthToken)
     , _ggGroupUniqueId :: !Text
     , _ggFields        :: !(Maybe Text)
-    , _ggAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupsGet'' with the minimum fields required to make a request.
@@ -77,17 +75,15 @@ data GroupsGet' = GroupsGet'
 --
 -- * 'ggPrettyPrint'
 --
--- * 'ggUserIp'
+-- * 'ggUserIP'
 --
 -- * 'ggKey'
 --
--- * 'ggOauthToken'
+-- * 'ggOAuthToken'
 --
 -- * 'ggGroupUniqueId'
 --
 -- * 'ggFields'
---
--- * 'ggAlt'
 groupsGet'
     :: Text -- ^ 'groupUniqueId'
     -> GroupsGet'
@@ -95,12 +91,11 @@ groupsGet' pGgGroupUniqueId_ =
     GroupsGet'
     { _ggQuotaUser = Nothing
     , _ggPrettyPrint = True
-    , _ggUserIp = Nothing
+    , _ggUserIP = Nothing
     , _ggKey = Nothing
-    , _ggOauthToken = Nothing
+    , _ggOAuthToken = Nothing
     , _ggGroupUniqueId = pGgGroupUniqueId_
     , _ggFields = Nothing
-    , _ggAlt = Atom
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -118,19 +113,19 @@ ggPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ggUserIp :: Lens' GroupsGet' (Maybe Text)
-ggUserIp = lens _ggUserIp (\ s a -> s{_ggUserIp = a})
+ggUserIP :: Lens' GroupsGet' (Maybe Text)
+ggUserIP = lens _ggUserIP (\ s a -> s{_ggUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ggKey :: Lens' GroupsGet' (Maybe Text)
+ggKey :: Lens' GroupsGet' (Maybe Key)
 ggKey = lens _ggKey (\ s a -> s{_ggKey = a})
 
 -- | OAuth 2.0 token for the current user.
-ggOauthToken :: Lens' GroupsGet' (Maybe Text)
-ggOauthToken
-  = lens _ggOauthToken (\ s a -> s{_ggOauthToken = a})
+ggOAuthToken :: Lens' GroupsGet' (Maybe OAuthToken)
+ggOAuthToken
+  = lens _ggOAuthToken (\ s a -> s{_ggOAuthToken = a})
 
 -- | The resource ID
 ggGroupUniqueId :: Lens' GroupsGet' Text
@@ -142,20 +137,20 @@ ggGroupUniqueId
 ggFields :: Lens' GroupsGet' (Maybe Text)
 ggFields = lens _ggFields (\ s a -> s{_ggFields = a})
 
--- | Data format for the response.
-ggAlt :: Lens' GroupsGet' Alt
-ggAlt = lens _ggAlt (\ s a -> s{_ggAlt = a})
+instance GoogleAuth GroupsGet' where
+        authKey = ggKey . _Just
+        authToken = ggOAuthToken . _Just
 
 instance GoogleRequest GroupsGet' where
         type Rs GroupsGet' = Groups
         request = requestWithRoute defReq groupsSettingsURL
         requestWithRoute r u GroupsGet'{..}
-          = go _ggQuotaUser (Just _ggPrettyPrint) _ggUserIp
+          = go _ggQuotaUser (Just _ggPrettyPrint) _ggUserIP
               _ggKey
-              _ggOauthToken
+              _ggOAuthToken
               _ggGroupUniqueId
               _ggFields
-              (Just _ggAlt)
+              (Just AltATOM)
           where go
                   = clientWithRoute (Proxy :: Proxy GroupsGetResource)
                       r

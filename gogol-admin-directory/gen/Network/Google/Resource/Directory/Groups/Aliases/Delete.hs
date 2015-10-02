@@ -32,13 +32,12 @@ module Network.Google.Resource.Directory.Groups.Aliases.Delete
     -- * Request Lenses
     , gadQuotaUser
     , gadPrettyPrint
-    , gadUserIp
+    , gadUserIP
     , gadGroupKey
     , gadAlias
     , gadKey
-    , gadOauthToken
+    , gadOAuthToken
     , gadFields
-    , gadAlt
     ) where
 
 import           Network.Google.AdminDirectory.Types
@@ -54,10 +53,10 @@ type GroupsAliasesDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Delete '[JSON] ()
+                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Remove a alias for the group
 --
@@ -65,13 +64,12 @@ type GroupsAliasesDeleteResource =
 data GroupsAliasesDelete' = GroupsAliasesDelete'
     { _gadQuotaUser   :: !(Maybe Text)
     , _gadPrettyPrint :: !Bool
-    , _gadUserIp      :: !(Maybe Text)
+    , _gadUserIP      :: !(Maybe Text)
     , _gadGroupKey    :: !Text
     , _gadAlias       :: !Text
-    , _gadKey         :: !(Maybe Text)
-    , _gadOauthToken  :: !(Maybe Text)
+    , _gadKey         :: !(Maybe Key)
+    , _gadOAuthToken  :: !(Maybe OAuthToken)
     , _gadFields      :: !(Maybe Text)
-    , _gadAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupsAliasesDelete'' with the minimum fields required to make a request.
@@ -82,7 +80,7 @@ data GroupsAliasesDelete' = GroupsAliasesDelete'
 --
 -- * 'gadPrettyPrint'
 --
--- * 'gadUserIp'
+-- * 'gadUserIP'
 --
 -- * 'gadGroupKey'
 --
@@ -90,11 +88,9 @@ data GroupsAliasesDelete' = GroupsAliasesDelete'
 --
 -- * 'gadKey'
 --
--- * 'gadOauthToken'
+-- * 'gadOAuthToken'
 --
 -- * 'gadFields'
---
--- * 'gadAlt'
 groupsAliasesDelete'
     :: Text -- ^ 'groupKey'
     -> Text -- ^ 'alias'
@@ -103,13 +99,12 @@ groupsAliasesDelete' pGadGroupKey_ pGadAlias_ =
     GroupsAliasesDelete'
     { _gadQuotaUser = Nothing
     , _gadPrettyPrint = True
-    , _gadUserIp = Nothing
+    , _gadUserIP = Nothing
     , _gadGroupKey = pGadGroupKey_
     , _gadAlias = pGadAlias_
     , _gadKey = Nothing
-    , _gadOauthToken = Nothing
+    , _gadOAuthToken = Nothing
     , _gadFields = Nothing
-    , _gadAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,9 +122,9 @@ gadPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-gadUserIp :: Lens' GroupsAliasesDelete' (Maybe Text)
-gadUserIp
-  = lens _gadUserIp (\ s a -> s{_gadUserIp = a})
+gadUserIP :: Lens' GroupsAliasesDelete' (Maybe Text)
+gadUserIP
+  = lens _gadUserIP (\ s a -> s{_gadUserIP = a})
 
 -- | Email or immutable Id of the group
 gadGroupKey :: Lens' GroupsAliasesDelete' Text
@@ -143,35 +138,35 @@ gadAlias = lens _gadAlias (\ s a -> s{_gadAlias = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-gadKey :: Lens' GroupsAliasesDelete' (Maybe Text)
+gadKey :: Lens' GroupsAliasesDelete' (Maybe Key)
 gadKey = lens _gadKey (\ s a -> s{_gadKey = a})
 
 -- | OAuth 2.0 token for the current user.
-gadOauthToken :: Lens' GroupsAliasesDelete' (Maybe Text)
-gadOauthToken
-  = lens _gadOauthToken
-      (\ s a -> s{_gadOauthToken = a})
+gadOAuthToken :: Lens' GroupsAliasesDelete' (Maybe OAuthToken)
+gadOAuthToken
+  = lens _gadOAuthToken
+      (\ s a -> s{_gadOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 gadFields :: Lens' GroupsAliasesDelete' (Maybe Text)
 gadFields
   = lens _gadFields (\ s a -> s{_gadFields = a})
 
--- | Data format for the response.
-gadAlt :: Lens' GroupsAliasesDelete' Alt
-gadAlt = lens _gadAlt (\ s a -> s{_gadAlt = a})
+instance GoogleAuth GroupsAliasesDelete' where
+        authKey = gadKey . _Just
+        authToken = gadOAuthToken . _Just
 
 instance GoogleRequest GroupsAliasesDelete' where
         type Rs GroupsAliasesDelete' = ()
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u GroupsAliasesDelete'{..}
-          = go _gadQuotaUser (Just _gadPrettyPrint) _gadUserIp
+          = go _gadQuotaUser (Just _gadPrettyPrint) _gadUserIP
               _gadGroupKey
               _gadAlias
               _gadKey
-              _gadOauthToken
+              _gadOAuthToken
               _gadFields
-              (Just _gadAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy GroupsAliasesDeleteResource)

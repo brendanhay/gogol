@@ -34,12 +34,11 @@ module Network.Google.Resource.Compute.Disks.Get
     , dgPrettyPrint
     , dgProject
     , dgDisk
-    , dgUserIp
+    , dgUserIP
     , dgZone
     , dgKey
-    , dgOauthToken
+    , dgOAuthToken
     , dgFields
-    , dgAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -56,10 +55,10 @@ type DisksGetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Get '[JSON] Disk
+                           QueryParam "alt" AltJSON :> Get '[JSON] Disk
 
 -- | Returns a specified persistent disk.
 --
@@ -69,12 +68,11 @@ data DisksGet' = DisksGet'
     , _dgPrettyPrint :: !Bool
     , _dgProject     :: !Text
     , _dgDisk        :: !Text
-    , _dgUserIp      :: !(Maybe Text)
+    , _dgUserIP      :: !(Maybe Text)
     , _dgZone        :: !Text
-    , _dgKey         :: !(Maybe Text)
-    , _dgOauthToken  :: !(Maybe Text)
+    , _dgKey         :: !(Maybe Key)
+    , _dgOAuthToken  :: !(Maybe OAuthToken)
     , _dgFields      :: !(Maybe Text)
-    , _dgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DisksGet'' with the minimum fields required to make a request.
@@ -89,17 +87,15 @@ data DisksGet' = DisksGet'
 --
 -- * 'dgDisk'
 --
--- * 'dgUserIp'
+-- * 'dgUserIP'
 --
 -- * 'dgZone'
 --
 -- * 'dgKey'
 --
--- * 'dgOauthToken'
+-- * 'dgOAuthToken'
 --
 -- * 'dgFields'
---
--- * 'dgAlt'
 disksGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'disk'
@@ -111,12 +107,11 @@ disksGet' pDgProject_ pDgDisk_ pDgZone_ =
     , _dgPrettyPrint = True
     , _dgProject = pDgProject_
     , _dgDisk = pDgDisk_
-    , _dgUserIp = Nothing
+    , _dgUserIP = Nothing
     , _dgZone = pDgZone_
     , _dgKey = Nothing
-    , _dgOauthToken = Nothing
+    , _dgOAuthToken = Nothing
     , _dgFields = Nothing
-    , _dgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -143,8 +138,8 @@ dgDisk = lens _dgDisk (\ s a -> s{_dgDisk = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-dgUserIp :: Lens' DisksGet' (Maybe Text)
-dgUserIp = lens _dgUserIp (\ s a -> s{_dgUserIp = a})
+dgUserIP :: Lens' DisksGet' (Maybe Text)
+dgUserIP = lens _dgUserIP (\ s a -> s{_dgUserIP = a})
 
 -- | The name of the zone for this request.
 dgZone :: Lens' DisksGet' Text
@@ -153,21 +148,21 @@ dgZone = lens _dgZone (\ s a -> s{_dgZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dgKey :: Lens' DisksGet' (Maybe Text)
+dgKey :: Lens' DisksGet' (Maybe Key)
 dgKey = lens _dgKey (\ s a -> s{_dgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-dgOauthToken :: Lens' DisksGet' (Maybe Text)
-dgOauthToken
-  = lens _dgOauthToken (\ s a -> s{_dgOauthToken = a})
+dgOAuthToken :: Lens' DisksGet' (Maybe OAuthToken)
+dgOAuthToken
+  = lens _dgOAuthToken (\ s a -> s{_dgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 dgFields :: Lens' DisksGet' (Maybe Text)
 dgFields = lens _dgFields (\ s a -> s{_dgFields = a})
 
--- | Data format for the response.
-dgAlt :: Lens' DisksGet' Alt
-dgAlt = lens _dgAlt (\ s a -> s{_dgAlt = a})
+instance GoogleAuth DisksGet' where
+        authKey = dgKey . _Just
+        authToken = dgOAuthToken . _Just
 
 instance GoogleRequest DisksGet' where
         type Rs DisksGet' = Disk
@@ -175,12 +170,12 @@ instance GoogleRequest DisksGet' where
         requestWithRoute r u DisksGet'{..}
           = go _dgQuotaUser (Just _dgPrettyPrint) _dgProject
               _dgDisk
-              _dgUserIp
+              _dgUserIP
               _dgZone
               _dgKey
-              _dgOauthToken
+              _dgOAuthToken
               _dgFields
-              (Just _dgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy DisksGetResource) r
                       u

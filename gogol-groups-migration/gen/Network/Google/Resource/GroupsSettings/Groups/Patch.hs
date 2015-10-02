@@ -30,14 +30,14 @@ module Network.Google.Resource.GroupsSettings.Groups.Patch
     , GroupsPatch'
 
     -- * Request Lenses
+    , gpGroups
     , gpQuotaUser
     , gpPrettyPrint
-    , gpUserIp
+    , gpUserIP
     , gpKey
-    , gpOauthToken
+    , gpOAuthToken
     , gpGroupUniqueId
     , gpFields
-    , gpAlt
     ) where
 
 import           Network.Google.GroupsSettings.Types
@@ -50,58 +50,64 @@ type GroupsPatchResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
-               QueryParam "oauth_token" Text :>
+             QueryParam "key" Key :>
+               QueryParam "oauth_token" OAuthToken :>
                  QueryParam "fields" Text :>
-                   QueryParam "alt" Alt :> Patch '[JSON] Groups
+                   QueryParam "alt" AltATOM :>
+                     ReqBody '[JSON] Groups :> Patch '[JSON] Groups
 
 -- | Updates an existing resource. This method supports patch semantics.
 --
 -- /See:/ 'groupsPatch'' smart constructor.
 data GroupsPatch' = GroupsPatch'
-    { _gpQuotaUser     :: !(Maybe Text)
+    { _gpGroups        :: !Groups
+    , _gpQuotaUser     :: !(Maybe Text)
     , _gpPrettyPrint   :: !Bool
-    , _gpUserIp        :: !(Maybe Text)
-    , _gpKey           :: !(Maybe Text)
-    , _gpOauthToken    :: !(Maybe Text)
+    , _gpUserIP        :: !(Maybe Text)
+    , _gpKey           :: !(Maybe Key)
+    , _gpOAuthToken    :: !(Maybe OAuthToken)
     , _gpGroupUniqueId :: !Text
     , _gpFields        :: !(Maybe Text)
-    , _gpAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupsPatch'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'gpGroups'
+--
 -- * 'gpQuotaUser'
 --
 -- * 'gpPrettyPrint'
 --
--- * 'gpUserIp'
+-- * 'gpUserIP'
 --
 -- * 'gpKey'
 --
--- * 'gpOauthToken'
+-- * 'gpOAuthToken'
 --
 -- * 'gpGroupUniqueId'
 --
 -- * 'gpFields'
---
--- * 'gpAlt'
 groupsPatch'
-    :: Text -- ^ 'groupUniqueId'
+    :: Groups -- ^ 'Groups'
+    -> Text -- ^ 'groupUniqueId'
     -> GroupsPatch'
-groupsPatch' pGpGroupUniqueId_ =
+groupsPatch' pGpGroups_ pGpGroupUniqueId_ =
     GroupsPatch'
-    { _gpQuotaUser = Nothing
+    { _gpGroups = pGpGroups_
+    , _gpQuotaUser = Nothing
     , _gpPrettyPrint = True
-    , _gpUserIp = Nothing
+    , _gpUserIP = Nothing
     , _gpKey = Nothing
-    , _gpOauthToken = Nothing
+    , _gpOAuthToken = Nothing
     , _gpGroupUniqueId = pGpGroupUniqueId_
     , _gpFields = Nothing
-    , _gpAlt = Atom
     }
+
+-- | Multipart request metadata.
+gpGroups :: Lens' GroupsPatch' Groups
+gpGroups = lens _gpGroups (\ s a -> s{_gpGroups = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -118,19 +124,19 @@ gpPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-gpUserIp :: Lens' GroupsPatch' (Maybe Text)
-gpUserIp = lens _gpUserIp (\ s a -> s{_gpUserIp = a})
+gpUserIP :: Lens' GroupsPatch' (Maybe Text)
+gpUserIP = lens _gpUserIP (\ s a -> s{_gpUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-gpKey :: Lens' GroupsPatch' (Maybe Text)
+gpKey :: Lens' GroupsPatch' (Maybe Key)
 gpKey = lens _gpKey (\ s a -> s{_gpKey = a})
 
 -- | OAuth 2.0 token for the current user.
-gpOauthToken :: Lens' GroupsPatch' (Maybe Text)
-gpOauthToken
-  = lens _gpOauthToken (\ s a -> s{_gpOauthToken = a})
+gpOAuthToken :: Lens' GroupsPatch' (Maybe OAuthToken)
+gpOAuthToken
+  = lens _gpOAuthToken (\ s a -> s{_gpOAuthToken = a})
 
 -- | The resource ID
 gpGroupUniqueId :: Lens' GroupsPatch' Text
@@ -142,20 +148,21 @@ gpGroupUniqueId
 gpFields :: Lens' GroupsPatch' (Maybe Text)
 gpFields = lens _gpFields (\ s a -> s{_gpFields = a})
 
--- | Data format for the response.
-gpAlt :: Lens' GroupsPatch' Alt
-gpAlt = lens _gpAlt (\ s a -> s{_gpAlt = a})
+instance GoogleAuth GroupsPatch' where
+        authKey = gpKey . _Just
+        authToken = gpOAuthToken . _Just
 
 instance GoogleRequest GroupsPatch' where
         type Rs GroupsPatch' = Groups
         request = requestWithRoute defReq groupsSettingsURL
         requestWithRoute r u GroupsPatch'{..}
-          = go _gpQuotaUser (Just _gpPrettyPrint) _gpUserIp
+          = go _gpQuotaUser (Just _gpPrettyPrint) _gpUserIP
               _gpKey
-              _gpOauthToken
+              _gpOAuthToken
               _gpGroupUniqueId
               _gpFields
-              (Just _gpAlt)
+              (Just AltATOM)
+              _gpGroups
           where go
                   = clientWithRoute
                       (Proxy :: Proxy GroupsPatchResource)

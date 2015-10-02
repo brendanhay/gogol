@@ -34,15 +34,14 @@ module Network.Google.Resource.Compute.TargetVPNGateways.List
     , tvglQuotaUser
     , tvglPrettyPrint
     , tvglProject
-    , tvglUserIp
+    , tvglUserIP
     , tvglKey
     , tvglFilter
     , tvglRegion
     , tvglPageToken
-    , tvglOauthToken
+    , tvglOAuthToken
     , tvglMaxResults
     , tvglFields
-    , tvglAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -58,13 +57,13 @@ type TargetVPNGatewaysListResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "filter" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "maxResults" Word32 :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :>
+                               QueryParam "alt" AltJSON :>
                                  Get '[JSON] TargetVPNGatewayList
 
 -- | Retrieves the list of TargetVpnGateway resources available to the
@@ -75,15 +74,14 @@ data TargetVPNGatewaysList' = TargetVPNGatewaysList'
     { _tvglQuotaUser   :: !(Maybe Text)
     , _tvglPrettyPrint :: !Bool
     , _tvglProject     :: !Text
-    , _tvglUserIp      :: !(Maybe Text)
-    , _tvglKey         :: !(Maybe Text)
+    , _tvglUserIP      :: !(Maybe Text)
+    , _tvglKey         :: !(Maybe Key)
     , _tvglFilter      :: !(Maybe Text)
     , _tvglRegion      :: !Text
     , _tvglPageToken   :: !(Maybe Text)
-    , _tvglOauthToken  :: !(Maybe Text)
+    , _tvglOAuthToken  :: !(Maybe OAuthToken)
     , _tvglMaxResults  :: !Word32
     , _tvglFields      :: !(Maybe Text)
-    , _tvglAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetVPNGatewaysList'' with the minimum fields required to make a request.
@@ -96,7 +94,7 @@ data TargetVPNGatewaysList' = TargetVPNGatewaysList'
 --
 -- * 'tvglProject'
 --
--- * 'tvglUserIp'
+-- * 'tvglUserIP'
 --
 -- * 'tvglKey'
 --
@@ -106,13 +104,11 @@ data TargetVPNGatewaysList' = TargetVPNGatewaysList'
 --
 -- * 'tvglPageToken'
 --
--- * 'tvglOauthToken'
+-- * 'tvglOAuthToken'
 --
 -- * 'tvglMaxResults'
 --
 -- * 'tvglFields'
---
--- * 'tvglAlt'
 targetVPNGatewaysList'
     :: Text -- ^ 'project'
     -> Text -- ^ 'region'
@@ -122,15 +118,14 @@ targetVPNGatewaysList' pTvglProject_ pTvglRegion_ =
     { _tvglQuotaUser = Nothing
     , _tvglPrettyPrint = True
     , _tvglProject = pTvglProject_
-    , _tvglUserIp = Nothing
+    , _tvglUserIP = Nothing
     , _tvglKey = Nothing
     , _tvglFilter = Nothing
     , _tvglRegion = pTvglRegion_
     , _tvglPageToken = Nothing
-    , _tvglOauthToken = Nothing
+    , _tvglOAuthToken = Nothing
     , _tvglMaxResults = 500
     , _tvglFields = Nothing
-    , _tvglAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -154,14 +149,14 @@ tvglProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tvglUserIp :: Lens' TargetVPNGatewaysList' (Maybe Text)
-tvglUserIp
-  = lens _tvglUserIp (\ s a -> s{_tvglUserIp = a})
+tvglUserIP :: Lens' TargetVPNGatewaysList' (Maybe Text)
+tvglUserIP
+  = lens _tvglUserIP (\ s a -> s{_tvglUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tvglKey :: Lens' TargetVPNGatewaysList' (Maybe Text)
+tvglKey :: Lens' TargetVPNGatewaysList' (Maybe Key)
 tvglKey = lens _tvglKey (\ s a -> s{_tvglKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
@@ -193,10 +188,10 @@ tvglPageToken
       (\ s a -> s{_tvglPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-tvglOauthToken :: Lens' TargetVPNGatewaysList' (Maybe Text)
-tvglOauthToken
-  = lens _tvglOauthToken
-      (\ s a -> s{_tvglOauthToken = a})
+tvglOAuthToken :: Lens' TargetVPNGatewaysList' (Maybe OAuthToken)
+tvglOAuthToken
+  = lens _tvglOAuthToken
+      (\ s a -> s{_tvglOAuthToken = a})
 
 -- | Maximum count of results to be returned.
 tvglMaxResults :: Lens' TargetVPNGatewaysList' Word32
@@ -209,9 +204,9 @@ tvglFields :: Lens' TargetVPNGatewaysList' (Maybe Text)
 tvglFields
   = lens _tvglFields (\ s a -> s{_tvglFields = a})
 
--- | Data format for the response.
-tvglAlt :: Lens' TargetVPNGatewaysList' Alt
-tvglAlt = lens _tvglAlt (\ s a -> s{_tvglAlt = a})
+instance GoogleAuth TargetVPNGatewaysList' where
+        authKey = tvglKey . _Just
+        authToken = tvglOAuthToken . _Just
 
 instance GoogleRequest TargetVPNGatewaysList' where
         type Rs TargetVPNGatewaysList' = TargetVPNGatewayList
@@ -219,15 +214,15 @@ instance GoogleRequest TargetVPNGatewaysList' where
         requestWithRoute r u TargetVPNGatewaysList'{..}
           = go _tvglQuotaUser (Just _tvglPrettyPrint)
               _tvglProject
-              _tvglUserIp
+              _tvglUserIP
               _tvglKey
               _tvglFilter
               _tvglRegion
               _tvglPageToken
-              _tvglOauthToken
+              _tvglOAuthToken
               (Just _tvglMaxResults)
               _tvglFields
-              (Just _tvglAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TargetVPNGatewaysListResource)

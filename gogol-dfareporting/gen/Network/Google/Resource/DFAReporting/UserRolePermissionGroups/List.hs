@@ -32,12 +32,11 @@ module Network.Google.Resource.DFAReporting.UserRolePermissionGroups.List
     -- * Request Lenses
     , urpglQuotaUser
     , urpglPrettyPrint
-    , urpglUserIp
+    , urpglUserIP
     , urpglProfileId
     , urpglKey
-    , urpglOauthToken
+    , urpglOAuthToken
     , urpglFields
-    , urpglAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,10 +51,10 @@ type UserRolePermissionGroupsListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :>
+                       QueryParam "alt" AltJSON :>
                          Get '[JSON] UserRolePermissionGroupsListResponse
 
 -- | Gets a list of all supported user role permission groups.
@@ -64,12 +63,11 @@ type UserRolePermissionGroupsListResource =
 data UserRolePermissionGroupsList' = UserRolePermissionGroupsList'
     { _urpglQuotaUser   :: !(Maybe Text)
     , _urpglPrettyPrint :: !Bool
-    , _urpglUserIp      :: !(Maybe Text)
+    , _urpglUserIP      :: !(Maybe Text)
     , _urpglProfileId   :: !Int64
-    , _urpglKey         :: !(Maybe Text)
-    , _urpglOauthToken  :: !(Maybe Text)
+    , _urpglKey         :: !(Maybe Key)
+    , _urpglOAuthToken  :: !(Maybe OAuthToken)
     , _urpglFields      :: !(Maybe Text)
-    , _urpglAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserRolePermissionGroupsList'' with the minimum fields required to make a request.
@@ -80,17 +78,15 @@ data UserRolePermissionGroupsList' = UserRolePermissionGroupsList'
 --
 -- * 'urpglPrettyPrint'
 --
--- * 'urpglUserIp'
+-- * 'urpglUserIP'
 --
 -- * 'urpglProfileId'
 --
 -- * 'urpglKey'
 --
--- * 'urpglOauthToken'
+-- * 'urpglOAuthToken'
 --
 -- * 'urpglFields'
---
--- * 'urpglAlt'
 userRolePermissionGroupsList'
     :: Int64 -- ^ 'profileId'
     -> UserRolePermissionGroupsList'
@@ -98,12 +94,11 @@ userRolePermissionGroupsList' pUrpglProfileId_ =
     UserRolePermissionGroupsList'
     { _urpglQuotaUser = Nothing
     , _urpglPrettyPrint = True
-    , _urpglUserIp = Nothing
+    , _urpglUserIP = Nothing
     , _urpglProfileId = pUrpglProfileId_
     , _urpglKey = Nothing
-    , _urpglOauthToken = Nothing
+    , _urpglOAuthToken = Nothing
     , _urpglFields = Nothing
-    , _urpglAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -122,9 +117,9 @@ urpglPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-urpglUserIp :: Lens' UserRolePermissionGroupsList' (Maybe Text)
-urpglUserIp
-  = lens _urpglUserIp (\ s a -> s{_urpglUserIp = a})
+urpglUserIP :: Lens' UserRolePermissionGroupsList' (Maybe Text)
+urpglUserIP
+  = lens _urpglUserIP (\ s a -> s{_urpglUserIP = a})
 
 -- | User profile ID associated with this request.
 urpglProfileId :: Lens' UserRolePermissionGroupsList' Int64
@@ -135,23 +130,24 @@ urpglProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-urpglKey :: Lens' UserRolePermissionGroupsList' (Maybe Text)
+urpglKey :: Lens' UserRolePermissionGroupsList' (Maybe Key)
 urpglKey = lens _urpglKey (\ s a -> s{_urpglKey = a})
 
 -- | OAuth 2.0 token for the current user.
-urpglOauthToken :: Lens' UserRolePermissionGroupsList' (Maybe Text)
-urpglOauthToken
-  = lens _urpglOauthToken
-      (\ s a -> s{_urpglOauthToken = a})
+urpglOAuthToken :: Lens' UserRolePermissionGroupsList' (Maybe OAuthToken)
+urpglOAuthToken
+  = lens _urpglOAuthToken
+      (\ s a -> s{_urpglOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 urpglFields :: Lens' UserRolePermissionGroupsList' (Maybe Text)
 urpglFields
   = lens _urpglFields (\ s a -> s{_urpglFields = a})
 
--- | Data format for the response.
-urpglAlt :: Lens' UserRolePermissionGroupsList' Alt
-urpglAlt = lens _urpglAlt (\ s a -> s{_urpglAlt = a})
+instance GoogleAuth UserRolePermissionGroupsList'
+         where
+        authKey = urpglKey . _Just
+        authToken = urpglOAuthToken . _Just
 
 instance GoogleRequest UserRolePermissionGroupsList'
          where
@@ -161,12 +157,12 @@ instance GoogleRequest UserRolePermissionGroupsList'
         requestWithRoute r u
           UserRolePermissionGroupsList'{..}
           = go _urpglQuotaUser (Just _urpglPrettyPrint)
-              _urpglUserIp
+              _urpglUserIP
               _urpglProfileId
               _urpglKey
-              _urpglOauthToken
+              _urpglOAuthToken
               _urpglFields
-              (Just _urpglAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UserRolePermissionGroupsListResource)

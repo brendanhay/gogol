@@ -33,32 +33,32 @@ library
     exposed-modules:
           Network.Google.AdSenseHost
         , Network.Google.AdSenseHost.Types
-        , Network.Google.Resource.AdSenseHost.Accounts.Adclients.Get
-        , Network.Google.Resource.AdSenseHost.Accounts.Adclients.List
-        , Network.Google.Resource.AdSenseHost.Accounts.Adunits.Delete
-        , Network.Google.Resource.AdSenseHost.Accounts.Adunits.Get
-        , Network.Google.Resource.AdSenseHost.Accounts.Adunits.GetAdCode
-        , Network.Google.Resource.AdSenseHost.Accounts.Adunits.Insert
-        , Network.Google.Resource.AdSenseHost.Accounts.Adunits.List
-        , Network.Google.Resource.AdSenseHost.Accounts.Adunits.Patch
-        , Network.Google.Resource.AdSenseHost.Accounts.Adunits.Update
+        , Network.Google.Resource.AdSenseHost.Accounts.AdClients.Get
+        , Network.Google.Resource.AdSenseHost.Accounts.AdClients.List
+        , Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Delete
+        , Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Get
+        , Network.Google.Resource.AdSenseHost.Accounts.AdUnits.GetAdCode
+        , Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Insert
+        , Network.Google.Resource.AdSenseHost.Accounts.AdUnits.List
+        , Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Patch
+        , Network.Google.Resource.AdSenseHost.Accounts.AdUnits.Update
         , Network.Google.Resource.AdSenseHost.Accounts.Get
         , Network.Google.Resource.AdSenseHost.Accounts.List
         , Network.Google.Resource.AdSenseHost.Accounts.Reports.Generate
-        , Network.Google.Resource.AdSenseHost.Adclients.Get
-        , Network.Google.Resource.AdSenseHost.Adclients.List
+        , Network.Google.Resource.AdSenseHost.AdClients.Get
+        , Network.Google.Resource.AdSenseHost.AdClients.List
         , Network.Google.Resource.AdSenseHost.Associationsessions.Start
         , Network.Google.Resource.AdSenseHost.Associationsessions.Verify
-        , Network.Google.Resource.AdSenseHost.Customchannels.Delete
-        , Network.Google.Resource.AdSenseHost.Customchannels.Get
-        , Network.Google.Resource.AdSenseHost.Customchannels.Insert
-        , Network.Google.Resource.AdSenseHost.Customchannels.List
-        , Network.Google.Resource.AdSenseHost.Customchannels.Patch
-        , Network.Google.Resource.AdSenseHost.Customchannels.Update
+        , Network.Google.Resource.AdSenseHost.CustomChannels.Delete
+        , Network.Google.Resource.AdSenseHost.CustomChannels.Get
+        , Network.Google.Resource.AdSenseHost.CustomChannels.Insert
+        , Network.Google.Resource.AdSenseHost.CustomChannels.List
+        , Network.Google.Resource.AdSenseHost.CustomChannels.Patch
+        , Network.Google.Resource.AdSenseHost.CustomChannels.Update
         , Network.Google.Resource.AdSenseHost.Reports.Generate
-        , Network.Google.Resource.AdSenseHost.URLchannels.Delete
-        , Network.Google.Resource.AdSenseHost.URLchannels.Insert
-        , Network.Google.Resource.AdSenseHost.URLchannels.List
+        , Network.Google.Resource.AdSenseHost.URLChannels.Delete
+        , Network.Google.Resource.AdSenseHost.URLChannels.Insert
+        , Network.Google.Resource.AdSenseHost.URLChannels.List
 
     other-modules:
           Network.Google.AdSenseHost.Types.Product

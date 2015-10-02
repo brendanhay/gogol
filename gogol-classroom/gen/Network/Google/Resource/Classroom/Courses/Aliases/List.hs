@@ -45,11 +45,10 @@ module Network.Google.Resource.Classroom.Courses.Aliases.List
     , calBearerToken
     , calKey
     , calPageToken
-    , calOauthToken
+    , calOAuthToken
     , calPageSize
     , calFields
     , calCallback
-    , calAlt
     ) where
 
 import           Network.Google.Classroom.Types
@@ -70,13 +69,13 @@ type CoursesAliasesListResource =
                        QueryParam "access_token" Text :>
                          QueryParam "uploadType" Text :>
                            QueryParam "bearer_token" Text :>
-                             QueryParam "key" Text :>
+                             QueryParam "key" Key :>
                                QueryParam "pageToken" Text :>
-                                 QueryParam "oauth_token" Text :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "pageSize" Int32 :>
                                      QueryParam "fields" Text :>
                                        QueryParam "callback" Text :>
-                                         QueryParam "alt" Text :>
+                                         QueryParam "alt" AltJSON :>
                                            Get '[JSON] ListCourseAliasesResponse
 
 -- | Returns a list of aliases for a course. This method returns the
@@ -96,13 +95,12 @@ data CoursesAliasesList' = CoursesAliasesList'
     , _calAccessToken    :: !(Maybe Text)
     , _calUploadType     :: !(Maybe Text)
     , _calBearerToken    :: !(Maybe Text)
-    , _calKey            :: !(Maybe Text)
+    , _calKey            :: !(Maybe Key)
     , _calPageToken      :: !(Maybe Text)
-    , _calOauthToken     :: !(Maybe Text)
+    , _calOAuthToken     :: !(Maybe OAuthToken)
     , _calPageSize       :: !(Maybe Int32)
     , _calFields         :: !(Maybe Text)
     , _calCallback       :: !(Maybe Text)
-    , _calAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CoursesAliasesList'' with the minimum fields required to make a request.
@@ -131,15 +129,13 @@ data CoursesAliasesList' = CoursesAliasesList'
 --
 -- * 'calPageToken'
 --
--- * 'calOauthToken'
+-- * 'calOAuthToken'
 --
 -- * 'calPageSize'
 --
 -- * 'calFields'
 --
 -- * 'calCallback'
---
--- * 'calAlt'
 coursesAliasesList'
     :: Text -- ^ 'courseId'
     -> CoursesAliasesList'
@@ -156,11 +152,10 @@ coursesAliasesList' pCalCourseId_ =
     , _calBearerToken = Nothing
     , _calKey = Nothing
     , _calPageToken = Nothing
-    , _calOauthToken = Nothing
+    , _calOAuthToken = Nothing
     , _calPageSize = Nothing
     , _calFields = Nothing
     , _calCallback = Nothing
-    , _calAlt = "json"
     }
 
 -- | V1 error format.
@@ -218,7 +213,7 @@ calBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-calKey :: Lens' CoursesAliasesList' (Maybe Text)
+calKey :: Lens' CoursesAliasesList' (Maybe Key)
 calKey = lens _calKey (\ s a -> s{_calKey = a})
 
 -- | [nextPageToken][google.classroom.v1.ListCourseAliasesResponse.next_page_token]
@@ -232,10 +227,10 @@ calPageToken
   = lens _calPageToken (\ s a -> s{_calPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-calOauthToken :: Lens' CoursesAliasesList' (Maybe Text)
-calOauthToken
-  = lens _calOauthToken
-      (\ s a -> s{_calOauthToken = a})
+calOAuthToken :: Lens' CoursesAliasesList' (Maybe OAuthToken)
+calOAuthToken
+  = lens _calOAuthToken
+      (\ s a -> s{_calOAuthToken = a})
 
 -- | Maximum number of items to return. Zero or unspecified indicates that
 -- the server may assign a maximum. The server may return fewer than the
@@ -254,9 +249,9 @@ calCallback :: Lens' CoursesAliasesList' (Maybe Text)
 calCallback
   = lens _calCallback (\ s a -> s{_calCallback = a})
 
--- | Data format for response.
-calAlt :: Lens' CoursesAliasesList' Text
-calAlt = lens _calAlt (\ s a -> s{_calAlt = a})
+instance GoogleAuth CoursesAliasesList' where
+        authKey = calKey . _Just
+        authToken = calOAuthToken . _Just
 
 instance GoogleRequest CoursesAliasesList' where
         type Rs CoursesAliasesList' =
@@ -272,11 +267,11 @@ instance GoogleRequest CoursesAliasesList' where
               _calBearerToken
               _calKey
               _calPageToken
-              _calOauthToken
+              _calOAuthToken
               _calPageSize
               _calFields
               _calCallback
-              (Just _calAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CoursesAliasesListResource)

@@ -34,12 +34,12 @@ module Network.Google.Resource.Compute.TargetInstances.Insert
     , tiiQuotaUser
     , tiiPrettyPrint
     , tiiProject
-    , tiiUserIp
+    , tiiUserIP
+    , tiiTargetInstance
     , tiiZone
     , tiiKey
-    , tiiOauthToken
+    , tiiOAuthToken
     , tiiFields
-    , tiiAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -55,25 +55,27 @@ type TargetInstancesInsertResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Post '[JSON] Operation
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] TargetInstance :>
+                             Post '[JSON] Operation
 
 -- | Creates a TargetInstance resource in the specified project and zone
 -- using the data included in the request.
 --
 -- /See:/ 'targetInstancesInsert'' smart constructor.
 data TargetInstancesInsert' = TargetInstancesInsert'
-    { _tiiQuotaUser   :: !(Maybe Text)
-    , _tiiPrettyPrint :: !Bool
-    , _tiiProject     :: !Text
-    , _tiiUserIp      :: !(Maybe Text)
-    , _tiiZone        :: !Text
-    , _tiiKey         :: !(Maybe Text)
-    , _tiiOauthToken  :: !(Maybe Text)
-    , _tiiFields      :: !(Maybe Text)
-    , _tiiAlt         :: !Alt
+    { _tiiQuotaUser      :: !(Maybe Text)
+    , _tiiPrettyPrint    :: !Bool
+    , _tiiProject        :: !Text
+    , _tiiUserIP         :: !(Maybe Text)
+    , _tiiTargetInstance :: !TargetInstance
+    , _tiiZone           :: !Text
+    , _tiiKey            :: !(Maybe Key)
+    , _tiiOAuthToken     :: !(Maybe OAuthToken)
+    , _tiiFields         :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetInstancesInsert'' with the minimum fields required to make a request.
@@ -86,32 +88,33 @@ data TargetInstancesInsert' = TargetInstancesInsert'
 --
 -- * 'tiiProject'
 --
--- * 'tiiUserIp'
+-- * 'tiiUserIP'
+--
+-- * 'tiiTargetInstance'
 --
 -- * 'tiiZone'
 --
 -- * 'tiiKey'
 --
--- * 'tiiOauthToken'
+-- * 'tiiOAuthToken'
 --
 -- * 'tiiFields'
---
--- * 'tiiAlt'
 targetInstancesInsert'
     :: Text -- ^ 'project'
+    -> TargetInstance -- ^ 'TargetInstance'
     -> Text -- ^ 'zone'
     -> TargetInstancesInsert'
-targetInstancesInsert' pTiiProject_ pTiiZone_ =
+targetInstancesInsert' pTiiProject_ pTiiTargetInstance_ pTiiZone_ =
     TargetInstancesInsert'
     { _tiiQuotaUser = Nothing
     , _tiiPrettyPrint = True
     , _tiiProject = pTiiProject_
-    , _tiiUserIp = Nothing
+    , _tiiUserIP = Nothing
+    , _tiiTargetInstance = pTiiTargetInstance_
     , _tiiZone = pTiiZone_
     , _tiiKey = Nothing
-    , _tiiOauthToken = Nothing
+    , _tiiOAuthToken = Nothing
     , _tiiFields = Nothing
-    , _tiiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -134,9 +137,15 @@ tiiProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tiiUserIp :: Lens' TargetInstancesInsert' (Maybe Text)
-tiiUserIp
-  = lens _tiiUserIp (\ s a -> s{_tiiUserIp = a})
+tiiUserIP :: Lens' TargetInstancesInsert' (Maybe Text)
+tiiUserIP
+  = lens _tiiUserIP (\ s a -> s{_tiiUserIP = a})
+
+-- | Multipart request metadata.
+tiiTargetInstance :: Lens' TargetInstancesInsert' TargetInstance
+tiiTargetInstance
+  = lens _tiiTargetInstance
+      (\ s a -> s{_tiiTargetInstance = a})
 
 -- | Name of the zone scoping this request.
 tiiZone :: Lens' TargetInstancesInsert' Text
@@ -145,35 +154,36 @@ tiiZone = lens _tiiZone (\ s a -> s{_tiiZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tiiKey :: Lens' TargetInstancesInsert' (Maybe Text)
+tiiKey :: Lens' TargetInstancesInsert' (Maybe Key)
 tiiKey = lens _tiiKey (\ s a -> s{_tiiKey = a})
 
 -- | OAuth 2.0 token for the current user.
-tiiOauthToken :: Lens' TargetInstancesInsert' (Maybe Text)
-tiiOauthToken
-  = lens _tiiOauthToken
-      (\ s a -> s{_tiiOauthToken = a})
+tiiOAuthToken :: Lens' TargetInstancesInsert' (Maybe OAuthToken)
+tiiOAuthToken
+  = lens _tiiOAuthToken
+      (\ s a -> s{_tiiOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 tiiFields :: Lens' TargetInstancesInsert' (Maybe Text)
 tiiFields
   = lens _tiiFields (\ s a -> s{_tiiFields = a})
 
--- | Data format for the response.
-tiiAlt :: Lens' TargetInstancesInsert' Alt
-tiiAlt = lens _tiiAlt (\ s a -> s{_tiiAlt = a})
+instance GoogleAuth TargetInstancesInsert' where
+        authKey = tiiKey . _Just
+        authToken = tiiOAuthToken . _Just
 
 instance GoogleRequest TargetInstancesInsert' where
         type Rs TargetInstancesInsert' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u TargetInstancesInsert'{..}
           = go _tiiQuotaUser (Just _tiiPrettyPrint) _tiiProject
-              _tiiUserIp
+              _tiiUserIP
               _tiiZone
               _tiiKey
-              _tiiOauthToken
+              _tiiOAuthToken
               _tiiFields
-              (Just _tiiAlt)
+              (Just AltJSON)
+              _tiiTargetInstance
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TargetInstancesInsertResource)

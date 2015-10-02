@@ -32,13 +32,12 @@ module Network.Google.Resource.DFAReporting.Placements.Get
     -- * Request Lenses
     , pgQuotaUser
     , pgPrettyPrint
-    , pgUserIp
+    , pgUserIP
     , pgProfileId
     , pgKey
     , pgId
-    , pgOauthToken
+    , pgOAuthToken
     , pgFields
-    , pgAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,10 +53,10 @@ type PlacementsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] Placement
+                         QueryParam "alt" AltJSON :> Get '[JSON] Placement
 
 -- | Gets one placement by ID.
 --
@@ -65,13 +64,12 @@ type PlacementsGetResource =
 data PlacementsGet' = PlacementsGet'
     { _pgQuotaUser   :: !(Maybe Text)
     , _pgPrettyPrint :: !Bool
-    , _pgUserIp      :: !(Maybe Text)
+    , _pgUserIP      :: !(Maybe Text)
     , _pgProfileId   :: !Int64
-    , _pgKey         :: !(Maybe Text)
+    , _pgKey         :: !(Maybe Key)
     , _pgId          :: !Int64
-    , _pgOauthToken  :: !(Maybe Text)
+    , _pgOAuthToken  :: !(Maybe OAuthToken)
     , _pgFields      :: !(Maybe Text)
-    , _pgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementsGet'' with the minimum fields required to make a request.
@@ -82,7 +80,7 @@ data PlacementsGet' = PlacementsGet'
 --
 -- * 'pgPrettyPrint'
 --
--- * 'pgUserIp'
+-- * 'pgUserIP'
 --
 -- * 'pgProfileId'
 --
@@ -90,11 +88,9 @@ data PlacementsGet' = PlacementsGet'
 --
 -- * 'pgId'
 --
--- * 'pgOauthToken'
+-- * 'pgOAuthToken'
 --
 -- * 'pgFields'
---
--- * 'pgAlt'
 placementsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
@@ -103,13 +99,12 @@ placementsGet' pPgProfileId_ pPgId_ =
     PlacementsGet'
     { _pgQuotaUser = Nothing
     , _pgPrettyPrint = True
-    , _pgUserIp = Nothing
+    , _pgUserIP = Nothing
     , _pgProfileId = pPgProfileId_
     , _pgKey = Nothing
     , _pgId = pPgId_
-    , _pgOauthToken = Nothing
+    , _pgOAuthToken = Nothing
     , _pgFields = Nothing
-    , _pgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,8 +122,8 @@ pgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-pgUserIp :: Lens' PlacementsGet' (Maybe Text)
-pgUserIp = lens _pgUserIp (\ s a -> s{_pgUserIp = a})
+pgUserIP :: Lens' PlacementsGet' (Maybe Text)
+pgUserIP = lens _pgUserIP (\ s a -> s{_pgUserIP = a})
 
 -- | User profile ID associated with this request.
 pgProfileId :: Lens' PlacementsGet' Int64
@@ -138,7 +133,7 @@ pgProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pgKey :: Lens' PlacementsGet' (Maybe Text)
+pgKey :: Lens' PlacementsGet' (Maybe Key)
 pgKey = lens _pgKey (\ s a -> s{_pgKey = a})
 
 -- | Placement ID.
@@ -146,29 +141,29 @@ pgId :: Lens' PlacementsGet' Int64
 pgId = lens _pgId (\ s a -> s{_pgId = a})
 
 -- | OAuth 2.0 token for the current user.
-pgOauthToken :: Lens' PlacementsGet' (Maybe Text)
-pgOauthToken
-  = lens _pgOauthToken (\ s a -> s{_pgOauthToken = a})
+pgOAuthToken :: Lens' PlacementsGet' (Maybe OAuthToken)
+pgOAuthToken
+  = lens _pgOAuthToken (\ s a -> s{_pgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 pgFields :: Lens' PlacementsGet' (Maybe Text)
 pgFields = lens _pgFields (\ s a -> s{_pgFields = a})
 
--- | Data format for the response.
-pgAlt :: Lens' PlacementsGet' Alt
-pgAlt = lens _pgAlt (\ s a -> s{_pgAlt = a})
+instance GoogleAuth PlacementsGet' where
+        authKey = pgKey . _Just
+        authToken = pgOAuthToken . _Just
 
 instance GoogleRequest PlacementsGet' where
         type Rs PlacementsGet' = Placement
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlacementsGet'{..}
-          = go _pgQuotaUser (Just _pgPrettyPrint) _pgUserIp
+          = go _pgQuotaUser (Just _pgPrettyPrint) _pgUserIP
               _pgProfileId
               _pgKey
               _pgId
-              _pgOauthToken
+              _pgOAuthToken
               _pgFields
-              (Just _pgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PlacementsGetResource)

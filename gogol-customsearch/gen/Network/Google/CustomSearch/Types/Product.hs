@@ -182,7 +182,7 @@ instance ToJSON SearchURL where
 -- /See:/ 'searchSpelling' smart constructor.
 data SearchSpelling = SearchSpelling
     { _ssCorrectedQuery     :: !(Maybe Text)
-    , _ssHtmlCorrectedQuery :: !(Maybe Text)
+    , _ssHTMLCorrectedQuery :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SearchSpelling' with the minimum fields required to make a request.
@@ -191,13 +191,13 @@ data SearchSpelling = SearchSpelling
 --
 -- * 'ssCorrectedQuery'
 --
--- * 'ssHtmlCorrectedQuery'
+-- * 'ssHTMLCorrectedQuery'
 searchSpelling
     :: SearchSpelling
 searchSpelling =
     SearchSpelling
     { _ssCorrectedQuery = Nothing
-    , _ssHtmlCorrectedQuery = Nothing
+    , _ssHTMLCorrectedQuery = Nothing
     }
 
 ssCorrectedQuery :: Lens' SearchSpelling (Maybe Text)
@@ -205,10 +205,10 @@ ssCorrectedQuery
   = lens _ssCorrectedQuery
       (\ s a -> s{_ssCorrectedQuery = a})
 
-ssHtmlCorrectedQuery :: Lens' SearchSpelling (Maybe Text)
-ssHtmlCorrectedQuery
-  = lens _ssHtmlCorrectedQuery
-      (\ s a -> s{_ssHtmlCorrectedQuery = a})
+ssHTMLCorrectedQuery :: Lens' SearchSpelling (Maybe Text)
+ssHTMLCorrectedQuery
+  = lens _ssHTMLCorrectedQuery
+      (\ s a -> s{_ssHTMLCorrectedQuery = a})
 
 instance FromJSON SearchSpelling where
         parseJSON
@@ -223,7 +223,7 @@ instance ToJSON SearchSpelling where
           = object
               (catMaybes
                  [("correctedQuery" .=) <$> _ssCorrectedQuery,
-                  ("htmlCorrectedQuery" .=) <$> _ssHtmlCorrectedQuery])
+                  ("htmlCorrectedQuery" .=) <$> _ssHTMLCorrectedQuery])
 
 --
 -- /See:/ 'resultPagemap' smart constructor.
@@ -352,11 +352,11 @@ data Result = Result
     , _rSnippet          :: !(Maybe Text)
     , _rKind             :: !Text
     , _rLink             :: !(Maybe Text)
-    , _rHtmlSnippet      :: !(Maybe Text)
-    , _rHtmlFormattedUrl :: !(Maybe Text)
+    , _rHTMLSnippet      :: !(Maybe Text)
+    , _rHTMLFormattedURL :: !(Maybe Text)
     , _rCacheId          :: !(Maybe Text)
-    , _rFormattedUrl     :: !(Maybe Text)
-    , _rHtmlTitle        :: !(Maybe Text)
+    , _rFormattedURL     :: !(Maybe Text)
+    , _rHTMLTitle        :: !(Maybe Text)
     , _rLabels           :: !(Maybe [ResultLabels])
     , _rTitle            :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -381,15 +381,15 @@ data Result = Result
 --
 -- * 'rLink'
 --
--- * 'rHtmlSnippet'
+-- * 'rHTMLSnippet'
 --
--- * 'rHtmlFormattedUrl'
+-- * 'rHTMLFormattedURL'
 --
 -- * 'rCacheId'
 --
--- * 'rFormattedUrl'
+-- * 'rFormattedURL'
 --
--- * 'rHtmlTitle'
+-- * 'rHTMLTitle'
 --
 -- * 'rLabels'
 --
@@ -406,11 +406,11 @@ result =
     , _rSnippet = Nothing
     , _rKind = "customsearch#result"
     , _rLink = Nothing
-    , _rHtmlSnippet = Nothing
-    , _rHtmlFormattedUrl = Nothing
+    , _rHTMLSnippet = Nothing
+    , _rHTMLFormattedURL = Nothing
     , _rCacheId = Nothing
-    , _rFormattedUrl = Nothing
-    , _rHtmlTitle = Nothing
+    , _rFormattedURL = Nothing
+    , _rHTMLTitle = Nothing
     , _rLabels = Nothing
     , _rTitle = Nothing
     }
@@ -441,26 +441,26 @@ rKind = lens _rKind (\ s a -> s{_rKind = a})
 rLink :: Lens' Result (Maybe Text)
 rLink = lens _rLink (\ s a -> s{_rLink = a})
 
-rHtmlSnippet :: Lens' Result (Maybe Text)
-rHtmlSnippet
-  = lens _rHtmlSnippet (\ s a -> s{_rHtmlSnippet = a})
+rHTMLSnippet :: Lens' Result (Maybe Text)
+rHTMLSnippet
+  = lens _rHTMLSnippet (\ s a -> s{_rHTMLSnippet = a})
 
-rHtmlFormattedUrl :: Lens' Result (Maybe Text)
-rHtmlFormattedUrl
-  = lens _rHtmlFormattedUrl
-      (\ s a -> s{_rHtmlFormattedUrl = a})
+rHTMLFormattedURL :: Lens' Result (Maybe Text)
+rHTMLFormattedURL
+  = lens _rHTMLFormattedURL
+      (\ s a -> s{_rHTMLFormattedURL = a})
 
 rCacheId :: Lens' Result (Maybe Text)
 rCacheId = lens _rCacheId (\ s a -> s{_rCacheId = a})
 
-rFormattedUrl :: Lens' Result (Maybe Text)
-rFormattedUrl
-  = lens _rFormattedUrl
-      (\ s a -> s{_rFormattedUrl = a})
+rFormattedURL :: Lens' Result (Maybe Text)
+rFormattedURL
+  = lens _rFormattedURL
+      (\ s a -> s{_rFormattedURL = a})
 
-rHtmlTitle :: Lens' Result (Maybe Text)
-rHtmlTitle
-  = lens _rHtmlTitle (\ s a -> s{_rHtmlTitle = a})
+rHTMLTitle :: Lens' Result (Maybe Text)
+rHTMLTitle
+  = lens _rHTMLTitle (\ s a -> s{_rHTMLTitle = a})
 
 rLabels :: Lens' Result [ResultLabels]
 rLabels
@@ -500,11 +500,11 @@ instance ToJSON Result where
                   ("fileFormat" .=) <$> _rFileFormat,
                   ("snippet" .=) <$> _rSnippet,
                   Just ("kind" .= _rKind), ("link" .=) <$> _rLink,
-                  ("htmlSnippet" .=) <$> _rHtmlSnippet,
-                  ("htmlFormattedUrl" .=) <$> _rHtmlFormattedUrl,
+                  ("htmlSnippet" .=) <$> _rHTMLSnippet,
+                  ("htmlFormattedUrl" .=) <$> _rHTMLFormattedURL,
                   ("cacheId" .=) <$> _rCacheId,
-                  ("formattedUrl" .=) <$> _rFormattedUrl,
-                  ("htmlTitle" .=) <$> _rHtmlTitle,
+                  ("formattedUrl" .=) <$> _rFormattedURL,
+                  ("htmlTitle" .=) <$> _rHTMLTitle,
                   ("labels" .=) <$> _rLabels,
                   ("title" .=) <$> _rTitle])
 
@@ -1027,7 +1027,7 @@ data Promotion = Promotion
     , _pDisplayLink :: !(Maybe Text)
     , _pBodyLines   :: !(Maybe [PromotionBodyLines])
     , _pLink        :: !(Maybe Text)
-    , _pHtmlTitle   :: !(Maybe Text)
+    , _pHTMLTitle   :: !(Maybe Text)
     , _pTitle       :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1043,7 +1043,7 @@ data Promotion = Promotion
 --
 -- * 'pLink'
 --
--- * 'pHtmlTitle'
+-- * 'pHTMLTitle'
 --
 -- * 'pTitle'
 promotion
@@ -1054,7 +1054,7 @@ promotion =
     , _pDisplayLink = Nothing
     , _pBodyLines = Nothing
     , _pLink = Nothing
-    , _pHtmlTitle = Nothing
+    , _pHTMLTitle = Nothing
     , _pTitle = Nothing
     }
 
@@ -1074,9 +1074,9 @@ pBodyLines
 pLink :: Lens' Promotion (Maybe Text)
 pLink = lens _pLink (\ s a -> s{_pLink = a})
 
-pHtmlTitle :: Lens' Promotion (Maybe Text)
-pHtmlTitle
-  = lens _pHtmlTitle (\ s a -> s{_pHtmlTitle = a})
+pHTMLTitle :: Lens' Promotion (Maybe Text)
+pHTMLTitle
+  = lens _pHTMLTitle (\ s a -> s{_pHTMLTitle = a})
 
 pTitle :: Lens' Promotion (Maybe Text)
 pTitle = lens _pTitle (\ s a -> s{_pTitle = a})
@@ -1100,19 +1100,19 @@ instance ToJSON Promotion where
                   ("displayLink" .=) <$> _pDisplayLink,
                   ("bodyLines" .=) <$> _pBodyLines,
                   ("link" .=) <$> _pLink,
-                  ("htmlTitle" .=) <$> _pHtmlTitle,
+                  ("htmlTitle" .=) <$> _pHTMLTitle,
                   ("title" .=) <$> _pTitle])
 
 --
 -- /See:/ 'search' smart constructor.
 data Search = Search
     { _sQueries           :: !(Maybe SearchQueries)
-    , _sContext           :: !(Maybe (Maybe Context))
+    , _sContext           :: !(Maybe Context)
     , _sKind              :: !Text
-    , _sUrl               :: !(Maybe SearchURL)
-    , _sItems             :: !(Maybe [Maybe Result])
+    , _sURL               :: !(Maybe SearchURL)
+    , _sItems             :: !(Maybe [Result])
     , _sSearchInformation :: !(Maybe SearchSearchInformation)
-    , _sPromotions        :: !(Maybe [Maybe Promotion])
+    , _sPromotions        :: !(Maybe [Promotion])
     , _sSpelling          :: !(Maybe SearchSpelling)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1126,7 +1126,7 @@ data Search = Search
 --
 -- * 'sKind'
 --
--- * 'sUrl'
+-- * 'sURL'
 --
 -- * 'sItems'
 --
@@ -1142,7 +1142,7 @@ search =
     { _sQueries = Nothing
     , _sContext = Nothing
     , _sKind = "customsearch#search"
-    , _sUrl = Nothing
+    , _sURL = Nothing
     , _sItems = Nothing
     , _sSearchInformation = Nothing
     , _sPromotions = Nothing
@@ -1152,16 +1152,16 @@ search =
 sQueries :: Lens' Search (Maybe SearchQueries)
 sQueries = lens _sQueries (\ s a -> s{_sQueries = a})
 
-sContext :: Lens' Search (Maybe (Maybe Context))
+sContext :: Lens' Search (Maybe Context)
 sContext = lens _sContext (\ s a -> s{_sContext = a})
 
 sKind :: Lens' Search Text
 sKind = lens _sKind (\ s a -> s{_sKind = a})
 
-sUrl :: Lens' Search (Maybe SearchURL)
-sUrl = lens _sUrl (\ s a -> s{_sUrl = a})
+sURL :: Lens' Search (Maybe SearchURL)
+sURL = lens _sURL (\ s a -> s{_sURL = a})
 
-sItems :: Lens' Search [Maybe Result]
+sItems :: Lens' Search [Result]
 sItems
   = lens _sItems (\ s a -> s{_sItems = a}) . _Default .
       _Coerce
@@ -1171,7 +1171,7 @@ sSearchInformation
   = lens _sSearchInformation
       (\ s a -> s{_sSearchInformation = a})
 
-sPromotions :: Lens' Search [Maybe Promotion]
+sPromotions :: Lens' Search [Promotion]
 sPromotions
   = lens _sPromotions (\ s a -> s{_sPromotions = a}) .
       _Default
@@ -1200,7 +1200,7 @@ instance ToJSON Search where
               (catMaybes
                  [("queries" .=) <$> _sQueries,
                   ("context" .=) <$> _sContext,
-                  Just ("kind" .= _sKind), ("url" .=) <$> _sUrl,
+                  Just ("kind" .= _sKind), ("url" .=) <$> _sURL,
                   ("items" .=) <$> _sItems,
                   ("searchInformation" .=) <$> _sSearchInformation,
                   ("promotions" .=) <$> _sPromotions,
@@ -1210,8 +1210,8 @@ instance ToJSON Search where
 -- /See:/ 'promotionBodyLines' smart constructor.
 data PromotionBodyLines = PromotionBodyLines
     { _pblLink      :: !(Maybe Text)
-    , _pblUrl       :: !(Maybe Text)
-    , _pblHtmlTitle :: !(Maybe Text)
+    , _pblURL       :: !(Maybe Text)
+    , _pblHTMLTitle :: !(Maybe Text)
     , _pblTitle     :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1221,9 +1221,9 @@ data PromotionBodyLines = PromotionBodyLines
 --
 -- * 'pblLink'
 --
--- * 'pblUrl'
+-- * 'pblURL'
 --
--- * 'pblHtmlTitle'
+-- * 'pblHTMLTitle'
 --
 -- * 'pblTitle'
 promotionBodyLines
@@ -1231,20 +1231,20 @@ promotionBodyLines
 promotionBodyLines =
     PromotionBodyLines
     { _pblLink = Nothing
-    , _pblUrl = Nothing
-    , _pblHtmlTitle = Nothing
+    , _pblURL = Nothing
+    , _pblHTMLTitle = Nothing
     , _pblTitle = Nothing
     }
 
 pblLink :: Lens' PromotionBodyLines (Maybe Text)
 pblLink = lens _pblLink (\ s a -> s{_pblLink = a})
 
-pblUrl :: Lens' PromotionBodyLines (Maybe Text)
-pblUrl = lens _pblUrl (\ s a -> s{_pblUrl = a})
+pblURL :: Lens' PromotionBodyLines (Maybe Text)
+pblURL = lens _pblURL (\ s a -> s{_pblURL = a})
 
-pblHtmlTitle :: Lens' PromotionBodyLines (Maybe Text)
-pblHtmlTitle
-  = lens _pblHtmlTitle (\ s a -> s{_pblHtmlTitle = a})
+pblHTMLTitle :: Lens' PromotionBodyLines (Maybe Text)
+pblHTMLTitle
+  = lens _pblHTMLTitle (\ s a -> s{_pblHTMLTitle = a})
 
 pblTitle :: Lens' PromotionBodyLines (Maybe Text)
 pblTitle = lens _pblTitle (\ s a -> s{_pblTitle = a})
@@ -1262,8 +1262,8 @@ instance ToJSON PromotionBodyLines where
         toJSON PromotionBodyLines{..}
           = object
               (catMaybes
-                 [("link" .=) <$> _pblLink, ("url" .=) <$> _pblUrl,
-                  ("htmlTitle" .=) <$> _pblHtmlTitle,
+                 [("link" .=) <$> _pblLink, ("url" .=) <$> _pblURL,
+                  ("htmlTitle" .=) <$> _pblHTMLTitle,
                   ("title" .=) <$> _pblTitle])
 
 --

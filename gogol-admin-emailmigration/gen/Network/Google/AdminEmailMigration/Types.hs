@@ -29,9 +29,6 @@ module Network.Google.AdminEmailMigration.Types
     , miIsInbox
     , miIsTrash
     , miIsSent
-
-    -- * Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.AdminEmailMigration.Types.Product

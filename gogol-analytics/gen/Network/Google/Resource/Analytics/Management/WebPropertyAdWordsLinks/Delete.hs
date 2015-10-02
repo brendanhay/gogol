@@ -33,13 +33,12 @@ module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Dele
     , mwpawldQuotaUser
     , mwpawldPrettyPrint
     , mwpawldWebPropertyId
-    , mwpawldUserIp
+    , mwpawldUserIP
     , mwpawldAccountId
     , mwpawldKey
     , mwpawldWebPropertyAdWordsLinkId
-    , mwpawldOauthToken
+    , mwpawldOAuthToken
     , mwpawldFields
-    , mwpawldAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -59,10 +58,10 @@ type ManagementWebPropertyAdWordsLinksDeleteResource
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :> Delete '[JSON] ()
+                               QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a web property-AdWords link.
 --
@@ -71,13 +70,12 @@ data ManagementWebPropertyAdWordsLinksDelete' = ManagementWebPropertyAdWordsLink
     { _mwpawldQuotaUser                :: !(Maybe Text)
     , _mwpawldPrettyPrint              :: !Bool
     , _mwpawldWebPropertyId            :: !Text
-    , _mwpawldUserIp                   :: !(Maybe Text)
+    , _mwpawldUserIP                   :: !(Maybe Text)
     , _mwpawldAccountId                :: !Text
-    , _mwpawldKey                      :: !(Maybe Text)
+    , _mwpawldKey                      :: !(Maybe Key)
     , _mwpawldWebPropertyAdWordsLinkId :: !Text
-    , _mwpawldOauthToken               :: !(Maybe Text)
+    , _mwpawldOAuthToken               :: !(Maybe OAuthToken)
     , _mwpawldFields                   :: !(Maybe Text)
-    , _mwpawldAlt                      :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementWebPropertyAdWordsLinksDelete'' with the minimum fields required to make a request.
@@ -90,7 +88,7 @@ data ManagementWebPropertyAdWordsLinksDelete' = ManagementWebPropertyAdWordsLink
 --
 -- * 'mwpawldWebPropertyId'
 --
--- * 'mwpawldUserIp'
+-- * 'mwpawldUserIP'
 --
 -- * 'mwpawldAccountId'
 --
@@ -98,11 +96,9 @@ data ManagementWebPropertyAdWordsLinksDelete' = ManagementWebPropertyAdWordsLink
 --
 -- * 'mwpawldWebPropertyAdWordsLinkId'
 --
--- * 'mwpawldOauthToken'
+-- * 'mwpawldOAuthToken'
 --
 -- * 'mwpawldFields'
---
--- * 'mwpawldAlt'
 managementWebPropertyAdWordsLinksDelete'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'accountId'
@@ -113,13 +109,12 @@ managementWebPropertyAdWordsLinksDelete' pMwpawldWebPropertyId_ pMwpawldAccountI
     { _mwpawldQuotaUser = Nothing
     , _mwpawldPrettyPrint = False
     , _mwpawldWebPropertyId = pMwpawldWebPropertyId_
-    , _mwpawldUserIp = Nothing
+    , _mwpawldUserIP = Nothing
     , _mwpawldAccountId = pMwpawldAccountId_
     , _mwpawldKey = Nothing
     , _mwpawldWebPropertyAdWordsLinkId = pMwpawldWebPropertyAdWordsLinkId_
-    , _mwpawldOauthToken = Nothing
+    , _mwpawldOAuthToken = Nothing
     , _mwpawldFields = Nothing
-    , _mwpawldAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -144,10 +139,10 @@ mwpawldWebPropertyId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mwpawldUserIp :: Lens' ManagementWebPropertyAdWordsLinksDelete' (Maybe Text)
-mwpawldUserIp
-  = lens _mwpawldUserIp
-      (\ s a -> s{_mwpawldUserIp = a})
+mwpawldUserIP :: Lens' ManagementWebPropertyAdWordsLinksDelete' (Maybe Text)
+mwpawldUserIP
+  = lens _mwpawldUserIP
+      (\ s a -> s{_mwpawldUserIP = a})
 
 -- | ID of the account which the given web property belongs to.
 mwpawldAccountId :: Lens' ManagementWebPropertyAdWordsLinksDelete' Text
@@ -158,7 +153,7 @@ mwpawldAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mwpawldKey :: Lens' ManagementWebPropertyAdWordsLinksDelete' (Maybe Text)
+mwpawldKey :: Lens' ManagementWebPropertyAdWordsLinksDelete' (Maybe Key)
 mwpawldKey
   = lens _mwpawldKey (\ s a -> s{_mwpawldKey = a})
 
@@ -169,10 +164,10 @@ mwpawldWebPropertyAdWordsLinkId
       (\ s a -> s{_mwpawldWebPropertyAdWordsLinkId = a})
 
 -- | OAuth 2.0 token for the current user.
-mwpawldOauthToken :: Lens' ManagementWebPropertyAdWordsLinksDelete' (Maybe Text)
-mwpawldOauthToken
-  = lens _mwpawldOauthToken
-      (\ s a -> s{_mwpawldOauthToken = a})
+mwpawldOAuthToken :: Lens' ManagementWebPropertyAdWordsLinksDelete' (Maybe OAuthToken)
+mwpawldOAuthToken
+  = lens _mwpawldOAuthToken
+      (\ s a -> s{_mwpawldOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 mwpawldFields :: Lens' ManagementWebPropertyAdWordsLinksDelete' (Maybe Text)
@@ -180,10 +175,10 @@ mwpawldFields
   = lens _mwpawldFields
       (\ s a -> s{_mwpawldFields = a})
 
--- | Data format for the response.
-mwpawldAlt :: Lens' ManagementWebPropertyAdWordsLinksDelete' Alt
-mwpawldAlt
-  = lens _mwpawldAlt (\ s a -> s{_mwpawldAlt = a})
+instance GoogleAuth
+         ManagementWebPropertyAdWordsLinksDelete' where
+        authKey = mwpawldKey . _Just
+        authToken = mwpawldOAuthToken . _Just
 
 instance GoogleRequest
          ManagementWebPropertyAdWordsLinksDelete' where
@@ -193,13 +188,13 @@ instance GoogleRequest
           ManagementWebPropertyAdWordsLinksDelete'{..}
           = go _mwpawldQuotaUser (Just _mwpawldPrettyPrint)
               _mwpawldWebPropertyId
-              _mwpawldUserIp
+              _mwpawldUserIP
               _mwpawldAccountId
               _mwpawldKey
               _mwpawldWebPropertyAdWordsLinkId
-              _mwpawldOauthToken
+              _mwpawldOAuthToken
               _mwpawldFields
-              (Just _mwpawldAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

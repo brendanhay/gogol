@@ -35,13 +35,12 @@ module Network.Google.Resource.YouTubeAnalytics.Groups.List
     , glQuotaUser
     , glPrettyPrint
     , glMine
-    , glUserIp
+    , glUserIP
     , glOnBehalfOfContentOwner
     , glKey
     , glId
-    , glOauthToken
+    , glOAuthToken
     , glFields
-    , glAlt
     ) where
 
 import           Network.Google.Prelude
@@ -56,11 +55,12 @@ type GroupsListResource =
            QueryParam "mine" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "onBehalfOfContentOwner" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "id" Text :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] GroupListResponse
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] GroupListResponse
 
 -- | Returns a collection of groups that match the API request parameters.
 -- For example, you can retrieve all groups that the authenticated user
@@ -71,13 +71,12 @@ data GroupsList' = GroupsList'
     { _glQuotaUser              :: !(Maybe Text)
     , _glPrettyPrint            :: !Bool
     , _glMine                   :: !(Maybe Bool)
-    , _glUserIp                 :: !(Maybe Text)
+    , _glUserIP                 :: !(Maybe Text)
     , _glOnBehalfOfContentOwner :: !(Maybe Text)
-    , _glKey                    :: !(Maybe Text)
+    , _glKey                    :: !(Maybe Key)
     , _glId                     :: !(Maybe Text)
-    , _glOauthToken             :: !(Maybe Text)
+    , _glOAuthToken             :: !(Maybe OAuthToken)
     , _glFields                 :: !(Maybe Text)
-    , _glAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupsList'' with the minimum fields required to make a request.
@@ -90,7 +89,7 @@ data GroupsList' = GroupsList'
 --
 -- * 'glMine'
 --
--- * 'glUserIp'
+-- * 'glUserIP'
 --
 -- * 'glOnBehalfOfContentOwner'
 --
@@ -98,11 +97,9 @@ data GroupsList' = GroupsList'
 --
 -- * 'glId'
 --
--- * 'glOauthToken'
+-- * 'glOAuthToken'
 --
 -- * 'glFields'
---
--- * 'glAlt'
 groupsList'
     :: GroupsList'
 groupsList' =
@@ -110,13 +107,12 @@ groupsList' =
     { _glQuotaUser = Nothing
     , _glPrettyPrint = True
     , _glMine = Nothing
-    , _glUserIp = Nothing
+    , _glUserIP = Nothing
     , _glOnBehalfOfContentOwner = Nothing
     , _glKey = Nothing
     , _glId = Nothing
-    , _glOauthToken = Nothing
+    , _glOAuthToken = Nothing
     , _glFields = Nothing
-    , _glAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,8 +135,8 @@ glMine = lens _glMine (\ s a -> s{_glMine = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-glUserIp :: Lens' GroupsList' (Maybe Text)
-glUserIp = lens _glUserIp (\ s a -> s{_glUserIp = a})
+glUserIP :: Lens' GroupsList' (Maybe Text)
+glUserIP = lens _glUserIP (\ s a -> s{_glUserIP = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
@@ -160,7 +156,7 @@ glOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-glKey :: Lens' GroupsList' (Maybe Text)
+glKey :: Lens' GroupsList' (Maybe Key)
 glKey = lens _glKey (\ s a -> s{_glKey = a})
 
 -- | The id parameter specifies a comma-separated list of the YouTube group
@@ -170,30 +166,30 @@ glId :: Lens' GroupsList' (Maybe Text)
 glId = lens _glId (\ s a -> s{_glId = a})
 
 -- | OAuth 2.0 token for the current user.
-glOauthToken :: Lens' GroupsList' (Maybe Text)
-glOauthToken
-  = lens _glOauthToken (\ s a -> s{_glOauthToken = a})
+glOAuthToken :: Lens' GroupsList' (Maybe OAuthToken)
+glOAuthToken
+  = lens _glOAuthToken (\ s a -> s{_glOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 glFields :: Lens' GroupsList' (Maybe Text)
 glFields = lens _glFields (\ s a -> s{_glFields = a})
 
--- | Data format for the response.
-glAlt :: Lens' GroupsList' Alt
-glAlt = lens _glAlt (\ s a -> s{_glAlt = a})
+instance GoogleAuth GroupsList' where
+        authKey = glKey . _Just
+        authToken = glOAuthToken . _Just
 
 instance GoogleRequest GroupsList' where
         type Rs GroupsList' = GroupListResponse
         request = requestWithRoute defReq youTubeAnalyticsURL
         requestWithRoute r u GroupsList'{..}
           = go _glQuotaUser (Just _glPrettyPrint) _glMine
-              _glUserIp
+              _glUserIP
               _glOnBehalfOfContentOwner
               _glKey
               _glId
-              _glOauthToken
+              _glOAuthToken
               _glFields
-              (Just _glAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy GroupsListResource)
                       r

@@ -32,12 +32,11 @@ module Network.Google.Resource.DFAReporting.MobileCarriers.List
     -- * Request Lenses
     , mclQuotaUser
     , mclPrettyPrint
-    , mclUserIp
+    , mclUserIP
     , mclProfileId
     , mclKey
-    , mclOauthToken
+    , mclOAuthToken
     , mclFields
-    , mclAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,10 +51,10 @@ type MobileCarriersListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :>
+                       QueryParam "alt" AltJSON :>
                          Get '[JSON] MobileCarriersListResponse
 
 -- | Retrieves a list of mobile carriers.
@@ -64,12 +63,11 @@ type MobileCarriersListResource =
 data MobileCarriersList' = MobileCarriersList'
     { _mclQuotaUser   :: !(Maybe Text)
     , _mclPrettyPrint :: !Bool
-    , _mclUserIp      :: !(Maybe Text)
+    , _mclUserIP      :: !(Maybe Text)
     , _mclProfileId   :: !Int64
-    , _mclKey         :: !(Maybe Text)
-    , _mclOauthToken  :: !(Maybe Text)
+    , _mclKey         :: !(Maybe Key)
+    , _mclOAuthToken  :: !(Maybe OAuthToken)
     , _mclFields      :: !(Maybe Text)
-    , _mclAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MobileCarriersList'' with the minimum fields required to make a request.
@@ -80,17 +78,15 @@ data MobileCarriersList' = MobileCarriersList'
 --
 -- * 'mclPrettyPrint'
 --
--- * 'mclUserIp'
+-- * 'mclUserIP'
 --
 -- * 'mclProfileId'
 --
 -- * 'mclKey'
 --
--- * 'mclOauthToken'
+-- * 'mclOAuthToken'
 --
 -- * 'mclFields'
---
--- * 'mclAlt'
 mobileCarriersList'
     :: Int64 -- ^ 'profileId'
     -> MobileCarriersList'
@@ -98,12 +94,11 @@ mobileCarriersList' pMclProfileId_ =
     MobileCarriersList'
     { _mclQuotaUser = Nothing
     , _mclPrettyPrint = True
-    , _mclUserIp = Nothing
+    , _mclUserIP = Nothing
     , _mclProfileId = pMclProfileId_
     , _mclKey = Nothing
-    , _mclOauthToken = Nothing
+    , _mclOAuthToken = Nothing
     , _mclFields = Nothing
-    , _mclAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -121,9 +116,9 @@ mclPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mclUserIp :: Lens' MobileCarriersList' (Maybe Text)
-mclUserIp
-  = lens _mclUserIp (\ s a -> s{_mclUserIp = a})
+mclUserIP :: Lens' MobileCarriersList' (Maybe Text)
+mclUserIP
+  = lens _mclUserIP (\ s a -> s{_mclUserIP = a})
 
 -- | User profile ID associated with this request.
 mclProfileId :: Lens' MobileCarriersList' Int64
@@ -133,35 +128,35 @@ mclProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mclKey :: Lens' MobileCarriersList' (Maybe Text)
+mclKey :: Lens' MobileCarriersList' (Maybe Key)
 mclKey = lens _mclKey (\ s a -> s{_mclKey = a})
 
 -- | OAuth 2.0 token for the current user.
-mclOauthToken :: Lens' MobileCarriersList' (Maybe Text)
-mclOauthToken
-  = lens _mclOauthToken
-      (\ s a -> s{_mclOauthToken = a})
+mclOAuthToken :: Lens' MobileCarriersList' (Maybe OAuthToken)
+mclOAuthToken
+  = lens _mclOAuthToken
+      (\ s a -> s{_mclOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 mclFields :: Lens' MobileCarriersList' (Maybe Text)
 mclFields
   = lens _mclFields (\ s a -> s{_mclFields = a})
 
--- | Data format for the response.
-mclAlt :: Lens' MobileCarriersList' Alt
-mclAlt = lens _mclAlt (\ s a -> s{_mclAlt = a})
+instance GoogleAuth MobileCarriersList' where
+        authKey = mclKey . _Just
+        authToken = mclOAuthToken . _Just
 
 instance GoogleRequest MobileCarriersList' where
         type Rs MobileCarriersList' =
              MobileCarriersListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u MobileCarriersList'{..}
-          = go _mclQuotaUser (Just _mclPrettyPrint) _mclUserIp
+          = go _mclQuotaUser (Just _mclPrettyPrint) _mclUserIP
               _mclProfileId
               _mclKey
-              _mclOauthToken
+              _mclOAuthToken
               _mclFields
-              (Just _mclAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy MobileCarriersListResource)

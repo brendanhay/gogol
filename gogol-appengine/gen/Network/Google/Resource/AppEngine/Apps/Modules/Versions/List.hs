@@ -19,7 +19,7 @@
 --
 -- | Lists the versions of a module.
 --
--- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @AppengineAppsModulesVersionsList@.
+-- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @AppEngineAppsModulesVersionsList@.
 module Network.Google.Resource.AppEngine.Apps.Modules.Versions.List
     (
     -- * REST Resource
@@ -43,17 +43,16 @@ module Network.Google.Resource.AppEngine.Apps.Modules.Versions.List
     , amvlAppsId
     , amvlView
     , amvlPageToken
-    , amvlOauthToken
+    , amvlOAuthToken
     , amvlPageSize
     , amvlFields
     , amvlCallback
-    , amvlAlt
     ) where
 
 import           Network.Google.AppEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AppengineAppsModulesVersionsList@ which the
+-- | A resource alias for @AppEngineAppsModulesVersionsList@ which the
 -- 'AppsModulesVersionsList'' request conforms to.
 type AppsModulesVersionsListResource =
      "v1beta4" :>
@@ -70,14 +69,14 @@ type AppsModulesVersionsListResource =
                            QueryParam "access_token" Text :>
                              QueryParam "uploadType" Text :>
                                QueryParam "bearer_token" Text :>
-                                 QueryParam "key" Text :>
+                                 QueryParam "key" Key :>
                                    QueryParam "view" Text :>
                                      QueryParam "pageToken" Text :>
-                                       QueryParam "oauth_token" Text :>
+                                       QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "pageSize" Int32 :>
                                            QueryParam "fields" Text :>
                                              QueryParam "callback" Text :>
-                                               QueryParam "alt" Text :>
+                                               QueryParam "alt" AltJSON :>
                                                  Get '[JSON]
                                                    ListVersionsResponse
 
@@ -94,15 +93,14 @@ data AppsModulesVersionsList' = AppsModulesVersionsList'
     , _amvlUploadType     :: !(Maybe Text)
     , _amvlModulesId      :: !Text
     , _amvlBearerToken    :: !(Maybe Text)
-    , _amvlKey            :: !(Maybe Text)
+    , _amvlKey            :: !(Maybe Key)
     , _amvlAppsId         :: !Text
     , _amvlView           :: !(Maybe Text)
     , _amvlPageToken      :: !(Maybe Text)
-    , _amvlOauthToken     :: !(Maybe Text)
+    , _amvlOAuthToken     :: !(Maybe OAuthToken)
     , _amvlPageSize       :: !(Maybe Int32)
     , _amvlFields         :: !(Maybe Text)
     , _amvlCallback       :: !(Maybe Text)
-    , _amvlAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AppsModulesVersionsList'' with the minimum fields required to make a request.
@@ -135,15 +133,13 @@ data AppsModulesVersionsList' = AppsModulesVersionsList'
 --
 -- * 'amvlPageToken'
 --
--- * 'amvlOauthToken'
+-- * 'amvlOAuthToken'
 --
 -- * 'amvlPageSize'
 --
 -- * 'amvlFields'
 --
 -- * 'amvlCallback'
---
--- * 'amvlAlt'
 appsModulesVersionsList'
     :: Text -- ^ 'modulesId'
     -> Text -- ^ 'appsId'
@@ -163,11 +159,10 @@ appsModulesVersionsList' pAmvlModulesId_ pAmvlAppsId_ =
     , _amvlAppsId = pAmvlAppsId_
     , _amvlView = Nothing
     , _amvlPageToken = Nothing
-    , _amvlOauthToken = Nothing
+    , _amvlOAuthToken = Nothing
     , _amvlPageSize = Nothing
     , _amvlFields = Nothing
     , _amvlCallback = Nothing
-    , _amvlAlt = "json"
     }
 
 -- | V1 error format.
@@ -226,7 +221,7 @@ amvlBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-amvlKey :: Lens' AppsModulesVersionsList' (Maybe Text)
+amvlKey :: Lens' AppsModulesVersionsList' (Maybe Key)
 amvlKey = lens _amvlKey (\ s a -> s{_amvlKey = a})
 
 -- | Part of \`name\`. Name of the resource requested. For example:
@@ -246,10 +241,10 @@ amvlPageToken
       (\ s a -> s{_amvlPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-amvlOauthToken :: Lens' AppsModulesVersionsList' (Maybe Text)
-amvlOauthToken
-  = lens _amvlOauthToken
-      (\ s a -> s{_amvlOauthToken = a})
+amvlOAuthToken :: Lens' AppsModulesVersionsList' (Maybe OAuthToken)
+amvlOAuthToken
+  = lens _amvlOAuthToken
+      (\ s a -> s{_amvlOAuthToken = a})
 
 -- | Maximum results to return per page.
 amvlPageSize :: Lens' AppsModulesVersionsList' (Maybe Int32)
@@ -266,9 +261,9 @@ amvlCallback :: Lens' AppsModulesVersionsList' (Maybe Text)
 amvlCallback
   = lens _amvlCallback (\ s a -> s{_amvlCallback = a})
 
--- | Data format for response.
-amvlAlt :: Lens' AppsModulesVersionsList' Text
-amvlAlt = lens _amvlAlt (\ s a -> s{_amvlAlt = a})
+instance GoogleAuth AppsModulesVersionsList' where
+        authKey = amvlKey . _Just
+        authToken = amvlOAuthToken . _Just
 
 instance GoogleRequest AppsModulesVersionsList' where
         type Rs AppsModulesVersionsList' =
@@ -287,11 +282,11 @@ instance GoogleRequest AppsModulesVersionsList' where
               _amvlAppsId
               _amvlView
               _amvlPageToken
-              _amvlOauthToken
+              _amvlOAuthToken
               _amvlPageSize
               _amvlFields
               _amvlCallback
-              (Just _amvlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AppsModulesVersionsListResource)

@@ -32,17 +32,16 @@ module Network.Google.Resource.Gmail.Users.Messages.List
     -- * Request Lenses
     , umlQuotaUser
     , umlPrettyPrint
-    , umlUserIp
+    , umlUserIP
     , umlQ
     , umlUserId
     , umlKey
     , umlIncludeSpamTrash
     , umlLabelIds
     , umlPageToken
-    , umlOauthToken
+    , umlOAuthToken
     , umlMaxResults
     , umlFields
-    , umlAlt
     ) where
 
 import           Network.Google.Gmail.Types
@@ -57,14 +56,14 @@ type UsersMessagesListResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "q" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "includeSpamTrash" Bool :>
                      QueryParams "labelIds" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "maxResults" Word32 :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :>
+                               QueryParam "alt" AltJSON :>
                                  Get '[JSON] ListMessagesResponse
 
 -- | Lists the messages in the user\'s mailbox.
@@ -73,17 +72,16 @@ type UsersMessagesListResource =
 data UsersMessagesList' = UsersMessagesList'
     { _umlQuotaUser        :: !(Maybe Text)
     , _umlPrettyPrint      :: !Bool
-    , _umlUserIp           :: !(Maybe Text)
+    , _umlUserIP           :: !(Maybe Text)
     , _umlQ                :: !(Maybe Text)
     , _umlUserId           :: !Text
-    , _umlKey              :: !(Maybe Text)
+    , _umlKey              :: !(Maybe Key)
     , _umlIncludeSpamTrash :: !Bool
     , _umlLabelIds         :: !(Maybe Text)
     , _umlPageToken        :: !(Maybe Text)
-    , _umlOauthToken       :: !(Maybe Text)
+    , _umlOAuthToken       :: !(Maybe OAuthToken)
     , _umlMaxResults       :: !Word32
     , _umlFields           :: !(Maybe Text)
-    , _umlAlt              :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersMessagesList'' with the minimum fields required to make a request.
@@ -94,7 +92,7 @@ data UsersMessagesList' = UsersMessagesList'
 --
 -- * 'umlPrettyPrint'
 --
--- * 'umlUserIp'
+-- * 'umlUserIP'
 --
 -- * 'umlQ'
 --
@@ -108,13 +106,11 @@ data UsersMessagesList' = UsersMessagesList'
 --
 -- * 'umlPageToken'
 --
--- * 'umlOauthToken'
+-- * 'umlOAuthToken'
 --
 -- * 'umlMaxResults'
 --
 -- * 'umlFields'
---
--- * 'umlAlt'
 usersMessagesList'
     :: Text
     -> UsersMessagesList'
@@ -122,17 +118,16 @@ usersMessagesList' pUmlUserId_ =
     UsersMessagesList'
     { _umlQuotaUser = Nothing
     , _umlPrettyPrint = True
-    , _umlUserIp = Nothing
+    , _umlUserIP = Nothing
     , _umlQ = Nothing
     , _umlUserId = pUmlUserId_
     , _umlKey = Nothing
     , _umlIncludeSpamTrash = False
     , _umlLabelIds = Nothing
     , _umlPageToken = Nothing
-    , _umlOauthToken = Nothing
+    , _umlOAuthToken = Nothing
     , _umlMaxResults = 100
     , _umlFields = Nothing
-    , _umlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,9 +145,9 @@ umlPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-umlUserIp :: Lens' UsersMessagesList' (Maybe Text)
-umlUserIp
-  = lens _umlUserIp (\ s a -> s{_umlUserIp = a})
+umlUserIP :: Lens' UsersMessagesList' (Maybe Text)
+umlUserIP
+  = lens _umlUserIP (\ s a -> s{_umlUserIP = a})
 
 -- | Only return messages matching the specified query. Supports the same
 -- query format as the Gmail search box. For example,
@@ -169,7 +164,7 @@ umlUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-umlKey :: Lens' UsersMessagesList' (Maybe Text)
+umlKey :: Lens' UsersMessagesList' (Maybe Key)
 umlKey = lens _umlKey (\ s a -> s{_umlKey = a})
 
 -- | Include messages from SPAM and TRASH in the results.
@@ -190,10 +185,10 @@ umlPageToken
   = lens _umlPageToken (\ s a -> s{_umlPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-umlOauthToken :: Lens' UsersMessagesList' (Maybe Text)
-umlOauthToken
-  = lens _umlOauthToken
-      (\ s a -> s{_umlOauthToken = a})
+umlOAuthToken :: Lens' UsersMessagesList' (Maybe OAuthToken)
+umlOAuthToken
+  = lens _umlOAuthToken
+      (\ s a -> s{_umlOAuthToken = a})
 
 -- | Maximum number of messages to return.
 umlMaxResults :: Lens' UsersMessagesList' Word32
@@ -206,25 +201,25 @@ umlFields :: Lens' UsersMessagesList' (Maybe Text)
 umlFields
   = lens _umlFields (\ s a -> s{_umlFields = a})
 
--- | Data format for the response.
-umlAlt :: Lens' UsersMessagesList' Alt
-umlAlt = lens _umlAlt (\ s a -> s{_umlAlt = a})
+instance GoogleAuth UsersMessagesList' where
+        authKey = umlKey . _Just
+        authToken = umlOAuthToken . _Just
 
 instance GoogleRequest UsersMessagesList' where
         type Rs UsersMessagesList' = ListMessagesResponse
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersMessagesList'{..}
-          = go _umlQuotaUser (Just _umlPrettyPrint) _umlUserIp
+          = go _umlQuotaUser (Just _umlPrettyPrint) _umlUserIP
               _umlQ
               _umlUserId
               _umlKey
               (Just _umlIncludeSpamTrash)
               _umlLabelIds
               _umlPageToken
-              _umlOauthToken
+              _umlOAuthToken
               (Just _umlMaxResults)
               _umlFields
-              (Just _umlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersMessagesListResource)

@@ -32,13 +32,12 @@ module Network.Google.Resource.DFAReporting.ConnectionTypes.Get
     -- * Request Lenses
     , ctgQuotaUser
     , ctgPrettyPrint
-    , ctgUserIp
+    , ctgUserIP
     , ctgProfileId
     , ctgKey
     , ctgId
-    , ctgOauthToken
+    , ctgOAuthToken
     , ctgFields
-    , ctgAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,10 +53,11 @@ type ConnectionTypesGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] ConnectionType
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] ConnectionType
 
 -- | Gets one connection type by ID.
 --
@@ -65,13 +65,12 @@ type ConnectionTypesGetResource =
 data ConnectionTypesGet' = ConnectionTypesGet'
     { _ctgQuotaUser   :: !(Maybe Text)
     , _ctgPrettyPrint :: !Bool
-    , _ctgUserIp      :: !(Maybe Text)
+    , _ctgUserIP      :: !(Maybe Text)
     , _ctgProfileId   :: !Int64
-    , _ctgKey         :: !(Maybe Text)
+    , _ctgKey         :: !(Maybe Key)
     , _ctgId          :: !Int64
-    , _ctgOauthToken  :: !(Maybe Text)
+    , _ctgOAuthToken  :: !(Maybe OAuthToken)
     , _ctgFields      :: !(Maybe Text)
-    , _ctgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ConnectionTypesGet'' with the minimum fields required to make a request.
@@ -82,7 +81,7 @@ data ConnectionTypesGet' = ConnectionTypesGet'
 --
 -- * 'ctgPrettyPrint'
 --
--- * 'ctgUserIp'
+-- * 'ctgUserIP'
 --
 -- * 'ctgProfileId'
 --
@@ -90,11 +89,9 @@ data ConnectionTypesGet' = ConnectionTypesGet'
 --
 -- * 'ctgId'
 --
--- * 'ctgOauthToken'
+-- * 'ctgOAuthToken'
 --
 -- * 'ctgFields'
---
--- * 'ctgAlt'
 connectionTypesGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
@@ -103,13 +100,12 @@ connectionTypesGet' pCtgProfileId_ pCtgId_ =
     ConnectionTypesGet'
     { _ctgQuotaUser = Nothing
     , _ctgPrettyPrint = True
-    , _ctgUserIp = Nothing
+    , _ctgUserIP = Nothing
     , _ctgProfileId = pCtgProfileId_
     , _ctgKey = Nothing
     , _ctgId = pCtgId_
-    , _ctgOauthToken = Nothing
+    , _ctgOAuthToken = Nothing
     , _ctgFields = Nothing
-    , _ctgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,9 +123,9 @@ ctgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ctgUserIp :: Lens' ConnectionTypesGet' (Maybe Text)
-ctgUserIp
-  = lens _ctgUserIp (\ s a -> s{_ctgUserIp = a})
+ctgUserIP :: Lens' ConnectionTypesGet' (Maybe Text)
+ctgUserIP
+  = lens _ctgUserIP (\ s a -> s{_ctgUserIP = a})
 
 -- | User profile ID associated with this request.
 ctgProfileId :: Lens' ConnectionTypesGet' Int64
@@ -139,7 +135,7 @@ ctgProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ctgKey :: Lens' ConnectionTypesGet' (Maybe Text)
+ctgKey :: Lens' ConnectionTypesGet' (Maybe Key)
 ctgKey = lens _ctgKey (\ s a -> s{_ctgKey = a})
 
 -- | Connection type ID.
@@ -147,31 +143,31 @@ ctgId :: Lens' ConnectionTypesGet' Int64
 ctgId = lens _ctgId (\ s a -> s{_ctgId = a})
 
 -- | OAuth 2.0 token for the current user.
-ctgOauthToken :: Lens' ConnectionTypesGet' (Maybe Text)
-ctgOauthToken
-  = lens _ctgOauthToken
-      (\ s a -> s{_ctgOauthToken = a})
+ctgOAuthToken :: Lens' ConnectionTypesGet' (Maybe OAuthToken)
+ctgOAuthToken
+  = lens _ctgOAuthToken
+      (\ s a -> s{_ctgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ctgFields :: Lens' ConnectionTypesGet' (Maybe Text)
 ctgFields
   = lens _ctgFields (\ s a -> s{_ctgFields = a})
 
--- | Data format for the response.
-ctgAlt :: Lens' ConnectionTypesGet' Alt
-ctgAlt = lens _ctgAlt (\ s a -> s{_ctgAlt = a})
+instance GoogleAuth ConnectionTypesGet' where
+        authKey = ctgKey . _Just
+        authToken = ctgOAuthToken . _Just
 
 instance GoogleRequest ConnectionTypesGet' where
         type Rs ConnectionTypesGet' = ConnectionType
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ConnectionTypesGet'{..}
-          = go _ctgQuotaUser (Just _ctgPrettyPrint) _ctgUserIp
+          = go _ctgQuotaUser (Just _ctgPrettyPrint) _ctgUserIP
               _ctgProfileId
               _ctgKey
               _ctgId
-              _ctgOauthToken
+              _ctgOAuthToken
               _ctgFields
-              (Just _ctgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ConnectionTypesGetResource)

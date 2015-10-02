@@ -85,30 +85,30 @@ instance ToJSON ContentOrdersListStatuses where
     toJSON = toJSONText
 
 -- | The name of the template to retrieve.
-data ContentOrdersGettestordertemplateTemplateName
+data ContentOrdersGettestOrdertemplateTemplateName
     = TEMPLATE1
       -- ^ @template1@
     | TEMPLATE2
       -- ^ @template2@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable ContentOrdersGettestordertemplateTemplateName
+instance Hashable ContentOrdersGettestOrdertemplateTemplateName
 
-instance FromText ContentOrdersGettestordertemplateTemplateName where
+instance FromText ContentOrdersGettestOrdertemplateTemplateName where
     fromText = \case
         "template1" -> Just TEMPLATE1
         "template2" -> Just TEMPLATE2
         _ -> Nothing
 
-instance ToText ContentOrdersGettestordertemplateTemplateName where
+instance ToText ContentOrdersGettestOrdertemplateTemplateName where
     toText = \case
         TEMPLATE1 -> "template1"
         TEMPLATE2 -> "template2"
 
-instance FromJSON ContentOrdersGettestordertemplateTemplateName where
-    parseJSON = parseJSONText "ContentOrdersGettestordertemplateTemplateName"
+instance FromJSON ContentOrdersGettestOrdertemplateTemplateName where
+    parseJSON = parseJSONText "ContentOrdersGettestOrdertemplateTemplateName"
 
-instance ToJSON ContentOrdersGettestordertemplateTemplateName where
+instance ToJSON ContentOrdersGettestOrdertemplateTemplateName where
     toJSON = toJSONText
 
 -- | The ordering of the returned list. The only supported value are
@@ -141,28 +141,4 @@ instance FromJSON ContentOrdersListOrderBy where
     parseJSON = parseJSONText "ContentOrdersListOrderBy"
 
 instance ToJSON ContentOrdersListOrderBy where
-    toJSON = toJSONText
-
--- | Data format for the response.
-data Alt
-    = JSON
-      -- ^ @json@
-      -- Responses with Content-Type of application\/json
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable Alt
-
-instance FromText Alt where
-    fromText = \case
-        "json" -> Just JSON
-        _ -> Nothing
-
-instance ToText Alt where
-    toText = \case
-        JSON -> "json"
-
-instance FromJSON Alt where
-    parseJSON = parseJSONText "Alt"
-
-instance ToJSON Alt where
     toJSON = toJSONText

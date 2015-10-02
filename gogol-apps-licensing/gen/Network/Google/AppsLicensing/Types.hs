@@ -39,9 +39,6 @@ module Network.Google.AppsLicensing.Types
     , laUserId
     , laSelfLink
     , laProductId
-
-    -- * Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.AppsLicensing.Types.Product

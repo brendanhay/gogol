@@ -44,10 +44,9 @@ module Network.Google.Resource.Classroom.Invitations.Get
     , igBearerToken
     , igKey
     , igId
-    , igOauthToken
+    , igOAuthToken
     , igFields
     , igCallback
-    , igAlt
     ) where
 
 import           Network.Google.Classroom.Types
@@ -67,11 +66,11 @@ type InvitationsGetResource =
                      QueryParam "access_token" Text :>
                        QueryParam "uploadType" Text :>
                          QueryParam "bearer_token" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "fields" Text :>
                                  QueryParam "callback" Text :>
-                                   QueryParam "alt" Text :>
+                                   QueryParam "alt" AltJSON :>
                                      Get '[JSON] Invitation
 
 -- | Returns an invitation. This method returns the following error codes: *
@@ -90,12 +89,11 @@ data InvitationsGet' = InvitationsGet'
     , _igAccessToken    :: !(Maybe Text)
     , _igUploadType     :: !(Maybe Text)
     , _igBearerToken    :: !(Maybe Text)
-    , _igKey            :: !(Maybe Text)
+    , _igKey            :: !(Maybe Key)
     , _igId             :: !Text
-    , _igOauthToken     :: !(Maybe Text)
+    , _igOAuthToken     :: !(Maybe OAuthToken)
     , _igFields         :: !(Maybe Text)
     , _igCallback       :: !(Maybe Text)
-    , _igAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InvitationsGet'' with the minimum fields required to make a request.
@@ -122,13 +120,11 @@ data InvitationsGet' = InvitationsGet'
 --
 -- * 'igId'
 --
--- * 'igOauthToken'
+-- * 'igOAuthToken'
 --
 -- * 'igFields'
 --
 -- * 'igCallback'
---
--- * 'igAlt'
 invitationsGet'
     :: Text -- ^ 'id'
     -> InvitationsGet'
@@ -144,10 +140,9 @@ invitationsGet' pIgId_ =
     , _igBearerToken = Nothing
     , _igKey = Nothing
     , _igId = pIgId_
-    , _igOauthToken = Nothing
+    , _igOAuthToken = Nothing
     , _igFields = Nothing
     , _igCallback = Nothing
-    , _igAlt = "json"
     }
 
 -- | V1 error format.
@@ -197,7 +192,7 @@ igBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-igKey :: Lens' InvitationsGet' (Maybe Text)
+igKey :: Lens' InvitationsGet' (Maybe Key)
 igKey = lens _igKey (\ s a -> s{_igKey = a})
 
 -- | Identifier of the invitation to return.
@@ -205,9 +200,9 @@ igId :: Lens' InvitationsGet' Text
 igId = lens _igId (\ s a -> s{_igId = a})
 
 -- | OAuth 2.0 token for the current user.
-igOauthToken :: Lens' InvitationsGet' (Maybe Text)
-igOauthToken
-  = lens _igOauthToken (\ s a -> s{_igOauthToken = a})
+igOAuthToken :: Lens' InvitationsGet' (Maybe OAuthToken)
+igOAuthToken
+  = lens _igOAuthToken (\ s a -> s{_igOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 igFields :: Lens' InvitationsGet' (Maybe Text)
@@ -218,9 +213,9 @@ igCallback :: Lens' InvitationsGet' (Maybe Text)
 igCallback
   = lens _igCallback (\ s a -> s{_igCallback = a})
 
--- | Data format for response.
-igAlt :: Lens' InvitationsGet' Text
-igAlt = lens _igAlt (\ s a -> s{_igAlt = a})
+instance GoogleAuth InvitationsGet' where
+        authKey = igKey . _Just
+        authToken = igOAuthToken . _Just
 
 instance GoogleRequest InvitationsGet' where
         type Rs InvitationsGet' = Invitation
@@ -234,10 +229,10 @@ instance GoogleRequest InvitationsGet' where
               _igBearerToken
               _igKey
               _igId
-              _igOauthToken
+              _igOAuthToken
               _igFields
               _igCallback
-              (Just _igAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InvitationsGetResource)

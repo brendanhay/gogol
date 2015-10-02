@@ -33,14 +33,13 @@ module Network.Google.Resource.Analytics.Management.ProfileFilterLinks.Delete
     , mpfldQuotaUser
     , mpfldPrettyPrint
     , mpfldWebPropertyId
-    , mpfldUserIp
+    , mpfldUserIP
     , mpfldProfileId
     , mpfldAccountId
     , mpfldKey
     , mpfldLinkId
-    , mpfldOauthToken
+    , mpfldOAuthToken
     , mpfldFields
-    , mpfldAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -61,10 +60,10 @@ type ManagementProfileFilterLinksDeleteResource =
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "alt" Alt :> Delete '[JSON] ()
+                                   QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete a profile filter link.
 --
@@ -73,14 +72,13 @@ data ManagementProfileFilterLinksDelete' = ManagementProfileFilterLinksDelete'
     { _mpfldQuotaUser     :: !(Maybe Text)
     , _mpfldPrettyPrint   :: !Bool
     , _mpfldWebPropertyId :: !Text
-    , _mpfldUserIp        :: !(Maybe Text)
+    , _mpfldUserIP        :: !(Maybe Text)
     , _mpfldProfileId     :: !Text
     , _mpfldAccountId     :: !Text
-    , _mpfldKey           :: !(Maybe Text)
+    , _mpfldKey           :: !(Maybe Key)
     , _mpfldLinkId        :: !Text
-    , _mpfldOauthToken    :: !(Maybe Text)
+    , _mpfldOAuthToken    :: !(Maybe OAuthToken)
     , _mpfldFields        :: !(Maybe Text)
-    , _mpfldAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProfileFilterLinksDelete'' with the minimum fields required to make a request.
@@ -93,7 +91,7 @@ data ManagementProfileFilterLinksDelete' = ManagementProfileFilterLinksDelete'
 --
 -- * 'mpfldWebPropertyId'
 --
--- * 'mpfldUserIp'
+-- * 'mpfldUserIP'
 --
 -- * 'mpfldProfileId'
 --
@@ -103,11 +101,9 @@ data ManagementProfileFilterLinksDelete' = ManagementProfileFilterLinksDelete'
 --
 -- * 'mpfldLinkId'
 --
--- * 'mpfldOauthToken'
+-- * 'mpfldOAuthToken'
 --
 -- * 'mpfldFields'
---
--- * 'mpfldAlt'
 managementProfileFilterLinksDelete'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
@@ -119,14 +115,13 @@ managementProfileFilterLinksDelete' pMpfldWebPropertyId_ pMpfldProfileId_ pMpfld
     { _mpfldQuotaUser = Nothing
     , _mpfldPrettyPrint = False
     , _mpfldWebPropertyId = pMpfldWebPropertyId_
-    , _mpfldUserIp = Nothing
+    , _mpfldUserIP = Nothing
     , _mpfldProfileId = pMpfldProfileId_
     , _mpfldAccountId = pMpfldAccountId_
     , _mpfldKey = Nothing
     , _mpfldLinkId = pMpfldLinkId_
-    , _mpfldOauthToken = Nothing
+    , _mpfldOAuthToken = Nothing
     , _mpfldFields = Nothing
-    , _mpfldAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -151,9 +146,9 @@ mpfldWebPropertyId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mpfldUserIp :: Lens' ManagementProfileFilterLinksDelete' (Maybe Text)
-mpfldUserIp
-  = lens _mpfldUserIp (\ s a -> s{_mpfldUserIp = a})
+mpfldUserIP :: Lens' ManagementProfileFilterLinksDelete' (Maybe Text)
+mpfldUserIP
+  = lens _mpfldUserIP (\ s a -> s{_mpfldUserIP = a})
 
 -- | Profile ID to which the filter link belongs.
 mpfldProfileId :: Lens' ManagementProfileFilterLinksDelete' Text
@@ -170,7 +165,7 @@ mpfldAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mpfldKey :: Lens' ManagementProfileFilterLinksDelete' (Maybe Text)
+mpfldKey :: Lens' ManagementProfileFilterLinksDelete' (Maybe Key)
 mpfldKey = lens _mpfldKey (\ s a -> s{_mpfldKey = a})
 
 -- | ID of the profile filter link to delete.
@@ -179,19 +174,20 @@ mpfldLinkId
   = lens _mpfldLinkId (\ s a -> s{_mpfldLinkId = a})
 
 -- | OAuth 2.0 token for the current user.
-mpfldOauthToken :: Lens' ManagementProfileFilterLinksDelete' (Maybe Text)
-mpfldOauthToken
-  = lens _mpfldOauthToken
-      (\ s a -> s{_mpfldOauthToken = a})
+mpfldOAuthToken :: Lens' ManagementProfileFilterLinksDelete' (Maybe OAuthToken)
+mpfldOAuthToken
+  = lens _mpfldOAuthToken
+      (\ s a -> s{_mpfldOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 mpfldFields :: Lens' ManagementProfileFilterLinksDelete' (Maybe Text)
 mpfldFields
   = lens _mpfldFields (\ s a -> s{_mpfldFields = a})
 
--- | Data format for the response.
-mpfldAlt :: Lens' ManagementProfileFilterLinksDelete' Alt
-mpfldAlt = lens _mpfldAlt (\ s a -> s{_mpfldAlt = a})
+instance GoogleAuth
+         ManagementProfileFilterLinksDelete' where
+        authKey = mpfldKey . _Just
+        authToken = mpfldOAuthToken . _Just
 
 instance GoogleRequest
          ManagementProfileFilterLinksDelete' where
@@ -201,14 +197,14 @@ instance GoogleRequest
           ManagementProfileFilterLinksDelete'{..}
           = go _mpfldQuotaUser (Just _mpfldPrettyPrint)
               _mpfldWebPropertyId
-              _mpfldUserIp
+              _mpfldUserIP
               _mpfldProfileId
               _mpfldAccountId
               _mpfldKey
               _mpfldLinkId
-              _mpfldOauthToken
+              _mpfldOAuthToken
               _mpfldFields
-              (Just _mpfldAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

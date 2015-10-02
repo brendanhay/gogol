@@ -32,13 +32,12 @@ module Network.Google.Resource.DFAReporting.Files.Get
     -- * Request Lenses
     , fgQuotaUser
     , fgPrettyPrint
-    , fgUserIp
+    , fgUserIP
     , fgReportId
     , fgKey
     , fgFileId
-    , fgOauthToken
+    , fgOAuthToken
     , fgFields
-    , fgAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,10 +53,22 @@ type FilesGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] File
+                         QueryParam "alt" AltJSON :> Get '[JSON] File
+       :<|>
+       "reports" :>
+         Capture "reportId" Int64 :>
+           "files" :>
+             Capture "fileId" Int64 :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Media :> Get '[OctetStream] Stream
 
 -- | Retrieves a report file by its report ID and file ID.
 --
@@ -65,13 +76,12 @@ type FilesGetResource =
 data FilesGet' = FilesGet'
     { _fgQuotaUser   :: !(Maybe Text)
     , _fgPrettyPrint :: !Bool
-    , _fgUserIp      :: !(Maybe Text)
+    , _fgUserIP      :: !(Maybe Text)
     , _fgReportId    :: !Int64
-    , _fgKey         :: !(Maybe Text)
+    , _fgKey         :: !(Maybe Key)
     , _fgFileId      :: !Int64
-    , _fgOauthToken  :: !(Maybe Text)
+    , _fgOAuthToken  :: !(Maybe OAuthToken)
     , _fgFields      :: !(Maybe Text)
-    , _fgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FilesGet'' with the minimum fields required to make a request.
@@ -82,7 +92,7 @@ data FilesGet' = FilesGet'
 --
 -- * 'fgPrettyPrint'
 --
--- * 'fgUserIp'
+-- * 'fgUserIP'
 --
 -- * 'fgReportId'
 --
@@ -90,11 +100,9 @@ data FilesGet' = FilesGet'
 --
 -- * 'fgFileId'
 --
--- * 'fgOauthToken'
+-- * 'fgOAuthToken'
 --
 -- * 'fgFields'
---
--- * 'fgAlt'
 filesGet'
     :: Int64 -- ^ 'reportId'
     -> Int64 -- ^ 'fileId'
@@ -103,13 +111,12 @@ filesGet' pFgReportId_ pFgFileId_ =
     FilesGet'
     { _fgQuotaUser = Nothing
     , _fgPrettyPrint = True
-    , _fgUserIp = Nothing
+    , _fgUserIP = Nothing
     , _fgReportId = pFgReportId_
     , _fgKey = Nothing
     , _fgFileId = pFgFileId_
-    , _fgOauthToken = Nothing
+    , _fgOAuthToken = Nothing
     , _fgFields = Nothing
-    , _fgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,8 +134,8 @@ fgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-fgUserIp :: Lens' FilesGet' (Maybe Text)
-fgUserIp = lens _fgUserIp (\ s a -> s{_fgUserIp = a})
+fgUserIP :: Lens' FilesGet' (Maybe Text)
+fgUserIP = lens _fgUserIP (\ s a -> s{_fgUserIP = a})
 
 -- | The ID of the report.
 fgReportId :: Lens' FilesGet' Int64
@@ -138,7 +145,7 @@ fgReportId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fgKey :: Lens' FilesGet' (Maybe Text)
+fgKey :: Lens' FilesGet' (Maybe Key)
 fgKey = lens _fgKey (\ s a -> s{_fgKey = a})
 
 -- | The ID of the report file.
@@ -146,29 +153,44 @@ fgFileId :: Lens' FilesGet' Int64
 fgFileId = lens _fgFileId (\ s a -> s{_fgFileId = a})
 
 -- | OAuth 2.0 token for the current user.
-fgOauthToken :: Lens' FilesGet' (Maybe Text)
-fgOauthToken
-  = lens _fgOauthToken (\ s a -> s{_fgOauthToken = a})
+fgOAuthToken :: Lens' FilesGet' (Maybe OAuthToken)
+fgOAuthToken
+  = lens _fgOAuthToken (\ s a -> s{_fgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 fgFields :: Lens' FilesGet' (Maybe Text)
 fgFields = lens _fgFields (\ s a -> s{_fgFields = a})
 
--- | Data format for the response.
-fgAlt :: Lens' FilesGet' Alt
-fgAlt = lens _fgAlt (\ s a -> s{_fgAlt = a})
+instance GoogleAuth FilesGet' where
+        authKey = fgKey . _Just
+        authToken = fgOAuthToken . _Just
 
 instance GoogleRequest FilesGet' where
         type Rs FilesGet' = File
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u FilesGet'{..}
-          = go _fgQuotaUser (Just _fgPrettyPrint) _fgUserIp
+          = go _fgQuotaUser (Just _fgPrettyPrint) _fgUserIP
               _fgReportId
               _fgKey
               _fgFileId
-              _fgOauthToken
+              _fgOAuthToken
               _fgFields
-              (Just _fgAlt)
-          where go
+              (Just AltJSON)
+          where go :<|> _
+                  = clientWithRoute (Proxy :: Proxy FilesGetResource) r
+                      u
+
+instance GoogleRequest FilesGet' where
+        type Rs (Download FilesGet') = Stream
+        request = requestWithRoute defReq dFAReportingURL
+        requestWithRoute r u FilesGet'{..}
+          = go _fgQuotaUser (Just _fgPrettyPrint) _fgUserIP
+              _fgReportId
+              _fgKey
+              _fgFileId
+              _fgOAuthToken
+              _fgFields
+              (Just Media)
+          where go :<|> _
                   = clientWithRoute (Proxy :: Proxy FilesGetResource) r
                       u

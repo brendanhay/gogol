@@ -34,15 +34,14 @@ module Network.Google.Resource.Calendar.CalendarList.List
     , cllQuotaUser
     , cllPrettyPrint
     , cllMinAccessRole
-    , cllUserIp
+    , cllUserIP
     , cllShowDeleted
     , cllShowHidden
     , cllKey
     , cllPageToken
-    , cllOauthToken
+    , cllOAuthToken
     , cllMaxResults
     , cllFields
-    , cllAlt
     ) where
 
 import           Network.Google.AppsCalendar.Types
@@ -63,12 +62,12 @@ type CalendarListListResource =
                    QueryParam "userIp" Text :>
                      QueryParam "showDeleted" Bool :>
                        QueryParam "showHidden" Bool :>
-                         QueryParam "key" Text :>
+                         QueryParam "key" Key :>
                            QueryParam "pageToken" Text :>
-                             QueryParam "oauth_token" Text :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "maxResults" Int32 :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "alt" Alt :>
+                                   QueryParam "alt" AltJSON :>
                                      Get '[JSON] CalendarList
 
 -- | Returns entries on the user\'s calendar list.
@@ -79,15 +78,14 @@ data CalendarListList' = CalendarListList'
     , _cllQuotaUser     :: !(Maybe Text)
     , _cllPrettyPrint   :: !Bool
     , _cllMinAccessRole :: !(Maybe CalendarCalendarListListMinAccessRole)
-    , _cllUserIp        :: !(Maybe Text)
+    , _cllUserIP        :: !(Maybe Text)
     , _cllShowDeleted   :: !(Maybe Bool)
     , _cllShowHidden    :: !(Maybe Bool)
-    , _cllKey           :: !(Maybe Text)
+    , _cllKey           :: !(Maybe Key)
     , _cllPageToken     :: !(Maybe Text)
-    , _cllOauthToken    :: !(Maybe Text)
+    , _cllOAuthToken    :: !(Maybe OAuthToken)
     , _cllMaxResults    :: !(Maybe Int32)
     , _cllFields        :: !(Maybe Text)
-    , _cllAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CalendarListList'' with the minimum fields required to make a request.
@@ -102,7 +100,7 @@ data CalendarListList' = CalendarListList'
 --
 -- * 'cllMinAccessRole'
 --
--- * 'cllUserIp'
+-- * 'cllUserIP'
 --
 -- * 'cllShowDeleted'
 --
@@ -112,13 +110,11 @@ data CalendarListList' = CalendarListList'
 --
 -- * 'cllPageToken'
 --
--- * 'cllOauthToken'
+-- * 'cllOAuthToken'
 --
 -- * 'cllMaxResults'
 --
 -- * 'cllFields'
---
--- * 'cllAlt'
 calendarListList'
     :: CalendarListList'
 calendarListList' =
@@ -127,15 +123,14 @@ calendarListList' =
     , _cllQuotaUser = Nothing
     , _cllPrettyPrint = True
     , _cllMinAccessRole = Nothing
-    , _cllUserIp = Nothing
+    , _cllUserIP = Nothing
     , _cllShowDeleted = Nothing
     , _cllShowHidden = Nothing
     , _cllKey = Nothing
     , _cllPageToken = Nothing
-    , _cllOauthToken = Nothing
+    , _cllOAuthToken = Nothing
     , _cllMaxResults = Nothing
     , _cllFields = Nothing
-    , _cllAlt = JSON
     }
 
 -- | Token obtained from the nextSyncToken field returned on the last page of
@@ -177,9 +172,9 @@ cllMinAccessRole
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cllUserIp :: Lens' CalendarListList' (Maybe Text)
-cllUserIp
-  = lens _cllUserIp (\ s a -> s{_cllUserIp = a})
+cllUserIP :: Lens' CalendarListList' (Maybe Text)
+cllUserIP
+  = lens _cllUserIP (\ s a -> s{_cllUserIP = a})
 
 -- | Whether to include deleted calendar list entries in the result.
 -- Optional. The default is False.
@@ -197,7 +192,7 @@ cllShowHidden
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cllKey :: Lens' CalendarListList' (Maybe Text)
+cllKey :: Lens' CalendarListList' (Maybe Key)
 cllKey = lens _cllKey (\ s a -> s{_cllKey = a})
 
 -- | Token specifying which result page to return. Optional.
@@ -206,10 +201,10 @@ cllPageToken
   = lens _cllPageToken (\ s a -> s{_cllPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-cllOauthToken :: Lens' CalendarListList' (Maybe Text)
-cllOauthToken
-  = lens _cllOauthToken
-      (\ s a -> s{_cllOauthToken = a})
+cllOAuthToken :: Lens' CalendarListList' (Maybe OAuthToken)
+cllOAuthToken
+  = lens _cllOAuthToken
+      (\ s a -> s{_cllOAuthToken = a})
 
 -- | Maximum number of entries returned on one result page. By default the
 -- value is 100 entries. The page size can never be larger than 250
@@ -224,9 +219,9 @@ cllFields :: Lens' CalendarListList' (Maybe Text)
 cllFields
   = lens _cllFields (\ s a -> s{_cllFields = a})
 
--- | Data format for the response.
-cllAlt :: Lens' CalendarListList' Alt
-cllAlt = lens _cllAlt (\ s a -> s{_cllAlt = a})
+instance GoogleAuth CalendarListList' where
+        authKey = cllKey . _Just
+        authToken = cllOAuthToken . _Just
 
 instance GoogleRequest CalendarListList' where
         type Rs CalendarListList' = CalendarList
@@ -235,15 +230,15 @@ instance GoogleRequest CalendarListList' where
           = go _cllSyncToken _cllQuotaUser
               (Just _cllPrettyPrint)
               _cllMinAccessRole
-              _cllUserIp
+              _cllUserIP
               _cllShowDeleted
               _cllShowHidden
               _cllKey
               _cllPageToken
-              _cllOauthToken
+              _cllOAuthToken
               _cllMaxResults
               _cllFields
-              (Just _cllAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CalendarListListResource)

@@ -43,10 +43,9 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Activate
     , baUploadType
     , baBearerToken
     , baKey
-    , baOauthToken
+    , baOAuthToken
     , baFields
     , baCallback
-    , baAlt
     ) where
 
 import           Network.Google.Prelude
@@ -65,11 +64,11 @@ type BeaconsActivateResource =
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
                        QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
                                QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :> Post '[JSON] Empty
+                                 QueryParam "alt" AltJSON :> Post '[JSON] Empty
 
 -- | (Re)activates a beacon. A beacon that is active will return information
 -- and attachment data when queried via \`beaconinfo.getforobserved\`.
@@ -87,11 +86,10 @@ data BeaconsActivate' = BeaconsActivate'
     , _baBeaconName     :: !Text
     , _baUploadType     :: !(Maybe Text)
     , _baBearerToken    :: !(Maybe Text)
-    , _baKey            :: !(Maybe Text)
-    , _baOauthToken     :: !(Maybe Text)
+    , _baKey            :: !(Maybe Key)
+    , _baOAuthToken     :: !(Maybe OAuthToken)
     , _baFields         :: !(Maybe Text)
     , _baCallback       :: !(Maybe Text)
-    , _baAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BeaconsActivate'' with the minimum fields required to make a request.
@@ -118,13 +116,11 @@ data BeaconsActivate' = BeaconsActivate'
 --
 -- * 'baKey'
 --
--- * 'baOauthToken'
+-- * 'baOAuthToken'
 --
 -- * 'baFields'
 --
 -- * 'baCallback'
---
--- * 'baAlt'
 beaconsActivate'
     :: Text -- ^ 'beaconName'
     -> BeaconsActivate'
@@ -140,10 +136,9 @@ beaconsActivate' pBaBeaconName_ =
     , _baUploadType = Nothing
     , _baBearerToken = Nothing
     , _baKey = Nothing
-    , _baOauthToken = Nothing
+    , _baOAuthToken = Nothing
     , _baFields = Nothing
     , _baCallback = Nothing
-    , _baAlt = "json"
     }
 
 -- | V1 error format.
@@ -198,13 +193,13 @@ baBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-baKey :: Lens' BeaconsActivate' (Maybe Text)
+baKey :: Lens' BeaconsActivate' (Maybe Key)
 baKey = lens _baKey (\ s a -> s{_baKey = a})
 
 -- | OAuth 2.0 token for the current user.
-baOauthToken :: Lens' BeaconsActivate' (Maybe Text)
-baOauthToken
-  = lens _baOauthToken (\ s a -> s{_baOauthToken = a})
+baOAuthToken :: Lens' BeaconsActivate' (Maybe OAuthToken)
+baOAuthToken
+  = lens _baOAuthToken (\ s a -> s{_baOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 baFields :: Lens' BeaconsActivate' (Maybe Text)
@@ -215,9 +210,9 @@ baCallback :: Lens' BeaconsActivate' (Maybe Text)
 baCallback
   = lens _baCallback (\ s a -> s{_baCallback = a})
 
--- | Data format for response.
-baAlt :: Lens' BeaconsActivate' Text
-baAlt = lens _baAlt (\ s a -> s{_baAlt = a})
+instance GoogleAuth BeaconsActivate' where
+        authKey = baKey . _Just
+        authToken = baOAuthToken . _Just
 
 instance GoogleRequest BeaconsActivate' where
         type Rs BeaconsActivate' = Empty
@@ -231,10 +226,10 @@ instance GoogleRequest BeaconsActivate' where
               _baUploadType
               _baBearerToken
               _baKey
-              _baOauthToken
+              _baOAuthToken
               _baFields
               _baCallback
-              (Just _baAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy BeaconsActivateResource)

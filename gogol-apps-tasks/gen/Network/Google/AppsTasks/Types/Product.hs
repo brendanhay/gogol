@@ -24,7 +24,7 @@ data Tasks = Tasks
     { _tEtag          :: !(Maybe Text)
     , _tNextPageToken :: !(Maybe Text)
     , _tKind          :: !Text
-    , _tItems         :: !(Maybe [Maybe Task])
+    , _tItems         :: !(Maybe [Task])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Tasks' with the minimum fields required to make a request.
@@ -63,7 +63,7 @@ tKind :: Lens' Tasks Text
 tKind = lens _tKind (\ s a -> s{_tKind = a})
 
 -- | Collection of tasks.
-tItems :: Lens' Tasks [Maybe Task]
+tItems :: Lens' Tasks [Task]
 tItems
   = lens _tItems (\ s a -> s{_tItems = a}) . _Default .
       _Coerce
@@ -146,7 +146,7 @@ data TaskLists = TaskLists
     { _tlEtag          :: !(Maybe Text)
     , _tlNextPageToken :: !(Maybe Text)
     , _tlKind          :: !Text
-    , _tlItems         :: !(Maybe [Maybe TaskList])
+    , _tlItems         :: !(Maybe [TaskList])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TaskLists' with the minimum fields required to make a request.
@@ -185,7 +185,7 @@ tlKind :: Lens' TaskLists Text
 tlKind = lens _tlKind (\ s a -> s{_tlKind = a})
 
 -- | Collection of task lists.
-tlItems :: Lens' TaskLists [Maybe TaskList]
+tlItems :: Lens' TaskLists [TaskList]
 tlItems
   = lens _tlItems (\ s a -> s{_tlItems = a}) . _Default
       . _Coerce

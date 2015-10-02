@@ -151,7 +151,7 @@ data AdClients = AdClients
     { _acEtag          :: !(Maybe Text)
     , _acNextPageToken :: !(Maybe Text)
     , _acKind          :: !Text
-    , _acItems         :: !(Maybe [Maybe AdClient])
+    , _acItems         :: !(Maybe [AdClient])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdClients' with the minimum fields required to make a request.
@@ -191,7 +191,7 @@ acKind :: Lens' AdClients Text
 acKind = lens _acKind (\ s a -> s{_acKind = a})
 
 -- | The ad clients returned in this list response.
-acItems :: Lens' AdClients [Maybe AdClient]
+acItems :: Lens' AdClients [AdClient]
 acItems
   = lens _acItems (\ s a -> s{_acItems = a}) . _Default
       . _Coerce
@@ -219,7 +219,7 @@ data Accounts = Accounts
     { _aEtag          :: !(Maybe Text)
     , _aNextPageToken :: !(Maybe Text)
     , _aKind          :: !Text
-    , _aItems         :: !(Maybe [Maybe Account])
+    , _aItems         :: !(Maybe [Account])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Accounts' with the minimum fields required to make a request.
@@ -259,7 +259,7 @@ aKind :: Lens' Accounts Text
 aKind = lens _aKind (\ s a -> s{_aKind = a})
 
 -- | The accounts returned in this list response.
-aItems :: Lens' Accounts [Maybe Account]
+aItems :: Lens' Accounts [Account]
 aItems
   = lens _aItems (\ s a -> s{_aItems = a}) . _Default .
       _Coerce
@@ -367,7 +367,7 @@ instance ToJSON Payment where
 -- /See:/ 'alerts' smart constructor.
 data Alerts = Alerts
     { _aleKind  :: !Text
-    , _aleItems :: !(Maybe [Maybe Alert])
+    , _aleItems :: !(Maybe [Alert])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Alerts' with the minimum fields required to make a request.
@@ -390,7 +390,7 @@ aleKind :: Lens' Alerts Text
 aleKind = lens _aleKind (\ s a -> s{_aleKind = a})
 
 -- | The alerts returned in this list response.
-aleItems :: Lens' Alerts [Maybe Alert]
+aleItems :: Lens' Alerts [Alert]
 aleItems
   = lens _aleItems (\ s a -> s{_aleItems = a}) .
       _Default
@@ -417,7 +417,7 @@ data SavedReports = SavedReports
     { _srEtag          :: !(Maybe Text)
     , _srNextPageToken :: !(Maybe Text)
     , _srKind          :: !Text
-    , _srItems         :: !(Maybe [Maybe SavedReport])
+    , _srItems         :: !(Maybe [SavedReport])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SavedReports' with the minimum fields required to make a request.
@@ -458,7 +458,7 @@ srKind :: Lens' SavedReports Text
 srKind = lens _srKind (\ s a -> s{_srKind = a})
 
 -- | The saved reports returned in this list response.
-srItems :: Lens' SavedReports [Maybe SavedReport]
+srItems :: Lens' SavedReports [SavedReport]
 srItems
   = lens _srItems (\ s a -> s{_srItems = a}) . _Default
       . _Coerce
@@ -486,7 +486,7 @@ data AdUnits = AdUnits
     { _auEtag          :: !(Maybe Text)
     , _auNextPageToken :: !(Maybe Text)
     , _auKind          :: !Text
-    , _auItems         :: !(Maybe [Maybe AdUnit])
+    , _auItems         :: !(Maybe [AdUnit])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdUnits' with the minimum fields required to make a request.
@@ -526,7 +526,7 @@ auKind :: Lens' AdUnits Text
 auKind = lens _auKind (\ s a -> s{_auKind = a})
 
 -- | The ad units returned in this list response.
-auItems :: Lens' AdUnits [Maybe AdUnit]
+auItems :: Lens' AdUnits [AdUnit]
 auItems
   = lens _auItems (\ s a -> s{_auItems = a}) . _Default
       . _Coerce
@@ -555,7 +555,7 @@ data AdUnit = AdUnit
     , _adMobileContentAdsSettings :: !(Maybe AdUnitMobileContentAdsSettings)
     , _adKind                     :: !Text
     , _adFeedAdsSettings          :: !(Maybe AdUnitFeedAdsSettings)
-    , _adCustomStyle              :: !(Maybe (Maybe AdStyle))
+    , _adCustomStyle              :: !(Maybe AdStyle)
     , _adSavedStyleId             :: !(Maybe Text)
     , _adName                     :: !(Maybe Text)
     , _adContentAdsSettings       :: !(Maybe AdUnitContentAdsSettings)
@@ -627,7 +627,7 @@ adFeedAdsSettings
       (\ s a -> s{_adFeedAdsSettings = a})
 
 -- | Custom style information specific to this ad unit.
-adCustomStyle :: Lens' AdUnit (Maybe (Maybe AdStyle))
+adCustomStyle :: Lens' AdUnit (Maybe AdStyle)
 adCustomStyle
   = lens _adCustomStyle
       (\ s a -> s{_adCustomStyle = a})
@@ -749,7 +749,7 @@ data URLChannels = URLChannels
     { _ucEtag          :: !(Maybe Text)
     , _ucNextPageToken :: !(Maybe Text)
     , _ucKind          :: !Text
-    , _ucItems         :: !(Maybe [Maybe URLChannel])
+    , _ucItems         :: !(Maybe [URLChannel])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLChannels' with the minimum fields required to make a request.
@@ -790,7 +790,7 @@ ucKind :: Lens' URLChannels Text
 ucKind = lens _ucKind (\ s a -> s{_ucKind = a})
 
 -- | The URL channels returned in this list response.
-ucItems :: Lens' URLChannels [Maybe URLChannel]
+ucItems :: Lens' URLChannels [URLChannel]
 ucItems
   = lens _ucItems (\ s a -> s{_ucItems = a}) . _Default
       . _Coerce
@@ -818,7 +818,7 @@ data CustomChannels = CustomChannels
     { _ccEtag          :: !(Maybe Text)
     , _ccNextPageToken :: !(Maybe Text)
     , _ccKind          :: !Text
-    , _ccItems         :: !(Maybe [Maybe CustomChannel])
+    , _ccItems         :: !(Maybe [CustomChannel])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CustomChannels' with the minimum fields required to make a request.
@@ -859,7 +859,7 @@ ccKind :: Lens' CustomChannels Text
 ccKind = lens _ccKind (\ s a -> s{_ccKind = a})
 
 -- | The custom channels returned in this list response.
-ccItems :: Lens' CustomChannels [Maybe CustomChannel]
+ccItems :: Lens' CustomChannels [CustomChannel]
 ccItems
   = lens _ccItems (\ s a -> s{_ccItems = a}) . _Default
       . _Coerce
@@ -1098,7 +1098,7 @@ data Account = Account
     , _accName        :: !(Maybe Text)
     , _accId          :: !(Maybe Text)
     , _accTimezone    :: !(Maybe Text)
-    , _accSubAccounts :: !(Maybe [Maybe Account])
+    , _accSubAccounts :: !(Maybe [Account])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Account' with the minimum fields required to make a request.
@@ -1151,7 +1151,7 @@ accTimezone
   = lens _accTimezone (\ s a -> s{_accTimezone = a})
 
 -- | Sub accounts of the this account.
-accSubAccounts :: Lens' Account [Maybe Account]
+accSubAccounts :: Lens' Account [Account]
 accSubAccounts
   = lens _accSubAccounts
       (\ s a -> s{_accSubAccounts = a})
@@ -1187,10 +1187,10 @@ instance ToJSON Account where
 -- /See:/ 'adStyleColors' smart constructor.
 data AdStyleColors = AdStyleColors
     { _ascText       :: !(Maybe Text)
-    , _ascUrl        :: !(Maybe Text)
-    , _ascBorder     :: !(Maybe Text)
+    , _ascURL        :: !(Maybe Text)
+    , _ascBOrder     :: !(Maybe Text)
     , _ascTitle      :: !(Maybe Text)
-    , _ascBackground :: !(Maybe Text)
+    , _ascBackgRound :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdStyleColors' with the minimum fields required to make a request.
@@ -1199,22 +1199,22 @@ data AdStyleColors = AdStyleColors
 --
 -- * 'ascText'
 --
--- * 'ascUrl'
+-- * 'ascURL'
 --
--- * 'ascBorder'
+-- * 'ascBOrder'
 --
 -- * 'ascTitle'
 --
--- * 'ascBackground'
+-- * 'ascBackgRound'
 adStyleColors
     :: AdStyleColors
 adStyleColors =
     AdStyleColors
     { _ascText = Nothing
-    , _ascUrl = Nothing
-    , _ascBorder = Nothing
+    , _ascURL = Nothing
+    , _ascBOrder = Nothing
     , _ascTitle = Nothing
-    , _ascBackground = Nothing
+    , _ascBackgRound = Nothing
     }
 
 -- | The color of the ad text.
@@ -1222,23 +1222,23 @@ ascText :: Lens' AdStyleColors (Maybe Text)
 ascText = lens _ascText (\ s a -> s{_ascText = a})
 
 -- | The color of the ad url.
-ascUrl :: Lens' AdStyleColors (Maybe Text)
-ascUrl = lens _ascUrl (\ s a -> s{_ascUrl = a})
+ascURL :: Lens' AdStyleColors (Maybe Text)
+ascURL = lens _ascURL (\ s a -> s{_ascURL = a})
 
 -- | The color of the ad border.
-ascBorder :: Lens' AdStyleColors (Maybe Text)
-ascBorder
-  = lens _ascBorder (\ s a -> s{_ascBorder = a})
+ascBOrder :: Lens' AdStyleColors (Maybe Text)
+ascBOrder
+  = lens _ascBOrder (\ s a -> s{_ascBOrder = a})
 
 -- | The color of the ad title.
 ascTitle :: Lens' AdStyleColors (Maybe Text)
 ascTitle = lens _ascTitle (\ s a -> s{_ascTitle = a})
 
 -- | The color of the ad background.
-ascBackground :: Lens' AdStyleColors (Maybe Text)
-ascBackground
-  = lens _ascBackground
-      (\ s a -> s{_ascBackground = a})
+ascBackgRound :: Lens' AdStyleColors (Maybe Text)
+ascBackgRound
+  = lens _ascBackgRound
+      (\ s a -> s{_ascBackgRound = a})
 
 instance FromJSON AdStyleColors where
         parseJSON
@@ -1253,10 +1253,10 @@ instance ToJSON AdStyleColors where
         toJSON AdStyleColors{..}
           = object
               (catMaybes
-                 [("text" .=) <$> _ascText, ("url" .=) <$> _ascUrl,
-                  ("border" .=) <$> _ascBorder,
+                 [("text" .=) <$> _ascText, ("url" .=) <$> _ascURL,
+                  ("border" .=) <$> _ascBOrder,
                   ("title" .=) <$> _ascTitle,
-                  ("background" .=) <$> _ascBackground])
+                  ("background" .=) <$> _ascBackgRound])
 
 --
 -- /See:/ 'adClient' smart constructor.
@@ -1357,7 +1357,7 @@ instance ToJSON AdClient where
 -- /See:/ 'adUnitContentAdsSettingsBackupOption' smart constructor.
 data AdUnitContentAdsSettingsBackupOption = AdUnitContentAdsSettingsBackupOption
     { _aucasboColor :: !(Maybe Text)
-    , _aucasboUrl   :: !(Maybe Text)
+    , _aucasboURL   :: !(Maybe Text)
     , _aucasboType  :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1367,7 +1367,7 @@ data AdUnitContentAdsSettingsBackupOption = AdUnitContentAdsSettingsBackupOption
 --
 -- * 'aucasboColor'
 --
--- * 'aucasboUrl'
+-- * 'aucasboURL'
 --
 -- * 'aucasboType'
 adUnitContentAdsSettingsBackupOption
@@ -1375,7 +1375,7 @@ adUnitContentAdsSettingsBackupOption
 adUnitContentAdsSettingsBackupOption =
     AdUnitContentAdsSettingsBackupOption
     { _aucasboColor = Nothing
-    , _aucasboUrl = Nothing
+    , _aucasboURL = Nothing
     , _aucasboType = Nothing
     }
 
@@ -1385,9 +1385,9 @@ aucasboColor
   = lens _aucasboColor (\ s a -> s{_aucasboColor = a})
 
 -- | URL to use when type is set to URL.
-aucasboUrl :: Lens' AdUnitContentAdsSettingsBackupOption (Maybe Text)
-aucasboUrl
-  = lens _aucasboUrl (\ s a -> s{_aucasboUrl = a})
+aucasboURL :: Lens' AdUnitContentAdsSettingsBackupOption (Maybe Text)
+aucasboURL
+  = lens _aucasboURL (\ s a -> s{_aucasboURL = a})
 
 -- | Type of the backup option. Possible values are BLANK, COLOR and URL.
 aucasboType :: Lens' AdUnitContentAdsSettingsBackupOption (Maybe Text)
@@ -1408,7 +1408,7 @@ instance ToJSON AdUnitContentAdsSettingsBackupOption
           = object
               (catMaybes
                  [("color" .=) <$> _aucasboColor,
-                  ("url" .=) <$> _aucasboUrl,
+                  ("url" .=) <$> _aucasboURL,
                   ("type" .=) <$> _aucasboType])
 
 --
@@ -1417,7 +1417,7 @@ data SavedAdStyles = SavedAdStyles
     { _sasEtag          :: !(Maybe Text)
     , _sasNextPageToken :: !(Maybe Text)
     , _sasKind          :: !Text
-    , _sasItems         :: !(Maybe [Maybe SavedAdStyle])
+    , _sasItems         :: !(Maybe [SavedAdStyle])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SavedAdStyles' with the minimum fields required to make a request.
@@ -1457,7 +1457,7 @@ sasKind :: Lens' SavedAdStyles Text
 sasKind = lens _sasKind (\ s a -> s{_sasKind = a})
 
 -- | The saved ad styles returned in this list response.
-sasItems :: Lens' SavedAdStyles [Maybe SavedAdStyle]
+sasItems :: Lens' SavedAdStyles [SavedAdStyle]
 sasItems
   = lens _sasItems (\ s a -> s{_sasItems = a}) .
       _Default
@@ -1563,7 +1563,7 @@ instance ToJSON CustomChannelTargetingInfo where
 data SavedAdStyle = SavedAdStyle
     { _savKind    :: !Text
     , _savName    :: !(Maybe Text)
-    , _savAdStyle :: !(Maybe (Maybe AdStyle))
+    , _savAdStyle :: !(Maybe AdStyle)
     , _savId      :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1597,7 +1597,7 @@ savName :: Lens' SavedAdStyle (Maybe Text)
 savName = lens _savName (\ s a -> s{_savName = a})
 
 -- | The AdStyle itself.
-savAdStyle :: Lens' SavedAdStyle (Maybe (Maybe AdStyle))
+savAdStyle :: Lens' SavedAdStyle (Maybe AdStyle)
 savAdStyle
   = lens _savAdStyle (\ s a -> s{_savAdStyle = a})
 
@@ -1831,7 +1831,7 @@ instance ToJSON AdUnitFeedAdsSettings where
 -- /See:/ 'metadata' smart constructor.
 data Metadata = Metadata
     { _mKind  :: !Text
-    , _mItems :: !(Maybe [Maybe ReportingMetadataEntry])
+    , _mItems :: !(Maybe [ReportingMetadataEntry])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Metadata' with the minimum fields required to make a request.
@@ -1853,7 +1853,7 @@ metadata =
 mKind :: Lens' Metadata Text
 mKind = lens _mKind (\ s a -> s{_mKind = a})
 
-mItems :: Lens' Metadata [Maybe ReportingMetadataEntry]
+mItems :: Lens' Metadata [ReportingMetadataEntry]
 mItems
   = lens _mItems (\ s a -> s{_mItems = a}) . _Default .
       _Coerce
@@ -1954,7 +1954,7 @@ instance ToJSON CustomChannel where
 data URLChannel = URLChannel
     { _urlcKind       :: !Text
     , _urlcId         :: !(Maybe Text)
-    , _urlcUrlPattern :: !(Maybe Text)
+    , _urlcURLPattern :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLChannel' with the minimum fields required to make a request.
@@ -1965,14 +1965,14 @@ data URLChannel = URLChannel
 --
 -- * 'urlcId'
 --
--- * 'urlcUrlPattern'
+-- * 'urlcURLPattern'
 uRLChannel
     :: URLChannel
 uRLChannel =
     URLChannel
     { _urlcKind = "adsense#urlChannel"
     , _urlcId = Nothing
-    , _urlcUrlPattern = Nothing
+    , _urlcURLPattern = Nothing
     }
 
 -- | Kind of resource this is, in this case adsense#urlChannel.
@@ -1987,10 +1987,10 @@ urlcId = lens _urlcId (\ s a -> s{_urlcId = a})
 
 -- | URL Pattern of this URL channel. Does not include \"http:\/\/\" or
 -- \"https:\/\/\". Example: www.example.com\/home
-urlcUrlPattern :: Lens' URLChannel (Maybe Text)
-urlcUrlPattern
-  = lens _urlcUrlPattern
-      (\ s a -> s{_urlcUrlPattern = a})
+urlcURLPattern :: Lens' URLChannel (Maybe Text)
+urlcURLPattern
+  = lens _urlcURLPattern
+      (\ s a -> s{_urlcURLPattern = a})
 
 instance FromJSON URLChannel where
         parseJSON
@@ -2006,7 +2006,7 @@ instance ToJSON URLChannel where
           = object
               (catMaybes
                  [Just ("kind" .= _urlcKind), ("id" .=) <$> _urlcId,
-                  ("urlPattern" .=) <$> _urlcUrlPattern])
+                  ("urlPattern" .=) <$> _urlcURLPattern])
 
 --
 -- /See:/ 'adCode' smart constructor.
@@ -2203,7 +2203,7 @@ instance ToJSON AdsenseReportsGenerateResponse where
 -- /See:/ 'payments' smart constructor.
 data Payments = Payments
     { _payKind  :: !Text
-    , _payItems :: !(Maybe [Maybe Payment])
+    , _payItems :: !(Maybe [Payment])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Payments' with the minimum fields required to make a request.
@@ -2227,7 +2227,7 @@ payKind = lens _payKind (\ s a -> s{_payKind = a})
 
 -- | The list of Payments for the account. One or both of a) the account\'s
 -- most recent payment; and b) the account\'s upcoming payment.
-payItems :: Lens' Payments [Maybe Payment]
+payItems :: Lens' Payments [Payment]
 payItems
   = lens _payItems (\ s a -> s{_payItems = a}) .
       _Default

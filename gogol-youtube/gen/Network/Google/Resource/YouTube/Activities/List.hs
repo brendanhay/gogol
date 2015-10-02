@@ -41,15 +41,14 @@ module Network.Google.Resource.YouTube.Activities.List
     , alHome
     , alMine
     , alRegionCode
-    , alUserIp
+    , alUserIP
     , alChannelId
     , alKey
     , alPageToken
-    , alOauthToken
+    , alOAuthToken
     , alMaxResults
     , alPublishedBefore
     , alFields
-    , alAlt
     ) where
 
 import           Network.Google.Prelude
@@ -68,13 +67,13 @@ type ActivitiesListResource =
                    QueryParam "regionCode" Text :>
                      QueryParam "userIp" Text :>
                        QueryParam "channelId" Text :>
-                         QueryParam "key" Text :>
+                         QueryParam "key" Key :>
                            QueryParam "pageToken" Text :>
-                             QueryParam "oauth_token" Text :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "maxResults" Word32 :>
                                  QueryParam "publishedBefore" UTCTime :>
                                    QueryParam "fields" Text :>
-                                     QueryParam "alt" Alt :>
+                                     QueryParam "alt" AltJSON :>
                                        Get '[JSON] ActivityListResponse
 
 -- | Returns a list of channel activity events that match the request
@@ -92,15 +91,14 @@ data ActivitiesList' = ActivitiesList'
     , _alHome            :: !(Maybe Bool)
     , _alMine            :: !(Maybe Bool)
     , _alRegionCode      :: !(Maybe Text)
-    , _alUserIp          :: !(Maybe Text)
+    , _alUserIP          :: !(Maybe Text)
     , _alChannelId       :: !(Maybe Text)
-    , _alKey             :: !(Maybe Text)
+    , _alKey             :: !(Maybe Key)
     , _alPageToken       :: !(Maybe Text)
-    , _alOauthToken      :: !(Maybe Text)
+    , _alOAuthToken      :: !(Maybe OAuthToken)
     , _alMaxResults      :: !Word32
     , _alPublishedBefore :: !(Maybe UTCTime)
     , _alFields          :: !(Maybe Text)
-    , _alAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivitiesList'' with the minimum fields required to make a request.
@@ -121,7 +119,7 @@ data ActivitiesList' = ActivitiesList'
 --
 -- * 'alRegionCode'
 --
--- * 'alUserIp'
+-- * 'alUserIP'
 --
 -- * 'alChannelId'
 --
@@ -129,15 +127,13 @@ data ActivitiesList' = ActivitiesList'
 --
 -- * 'alPageToken'
 --
--- * 'alOauthToken'
+-- * 'alOAuthToken'
 --
 -- * 'alMaxResults'
 --
 -- * 'alPublishedBefore'
 --
 -- * 'alFields'
---
--- * 'alAlt'
 activitiesList'
     :: Text -- ^ 'part'
     -> ActivitiesList'
@@ -150,15 +146,14 @@ activitiesList' pAlPart_ =
     , _alHome = Nothing
     , _alMine = Nothing
     , _alRegionCode = Nothing
-    , _alUserIp = Nothing
+    , _alUserIP = Nothing
     , _alChannelId = Nothing
     , _alKey = Nothing
     , _alPageToken = Nothing
-    , _alOauthToken = Nothing
+    , _alOAuthToken = Nothing
     , _alMaxResults = 5
     , _alPublishedBefore = Nothing
     , _alFields = Nothing
-    , _alAlt = JSON
     }
 
 -- | The publishedAfter parameter specifies the earliest date and time that
@@ -217,8 +212,8 @@ alRegionCode
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-alUserIp :: Lens' ActivitiesList' (Maybe Text)
-alUserIp = lens _alUserIp (\ s a -> s{_alUserIp = a})
+alUserIP :: Lens' ActivitiesList' (Maybe Text)
+alUserIP = lens _alUserIP (\ s a -> s{_alUserIP = a})
 
 -- | The channelId parameter specifies a unique YouTube channel ID. The API
 -- will then return a list of that channel\'s activities.
@@ -229,7 +224,7 @@ alChannelId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-alKey :: Lens' ActivitiesList' (Maybe Text)
+alKey :: Lens' ActivitiesList' (Maybe Key)
 alKey = lens _alKey (\ s a -> s{_alKey = a})
 
 -- | The pageToken parameter identifies a specific page in the result set
@@ -240,9 +235,9 @@ alPageToken
   = lens _alPageToken (\ s a -> s{_alPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-alOauthToken :: Lens' ActivitiesList' (Maybe Text)
-alOauthToken
-  = lens _alOauthToken (\ s a -> s{_alOauthToken = a})
+alOAuthToken :: Lens' ActivitiesList' (Maybe OAuthToken)
+alOAuthToken
+  = lens _alOAuthToken (\ s a -> s{_alOAuthToken = a})
 
 -- | The maxResults parameter specifies the maximum number of items that
 -- should be returned in the result set.
@@ -265,9 +260,9 @@ alPublishedBefore
 alFields :: Lens' ActivitiesList' (Maybe Text)
 alFields = lens _alFields (\ s a -> s{_alFields = a})
 
--- | Data format for the response.
-alAlt :: Lens' ActivitiesList' Alt
-alAlt = lens _alAlt (\ s a -> s{_alAlt = a})
+instance GoogleAuth ActivitiesList' where
+        authKey = alKey . _Just
+        authToken = alOAuthToken . _Just
 
 instance GoogleRequest ActivitiesList' where
         type Rs ActivitiesList' = ActivityListResponse
@@ -278,15 +273,15 @@ instance GoogleRequest ActivitiesList' where
               _alHome
               _alMine
               _alRegionCode
-              _alUserIp
+              _alUserIP
               _alChannelId
               _alKey
               _alPageToken
-              _alOauthToken
+              _alOAuthToken
               (Just _alMaxResults)
               _alPublishedBefore
               _alFields
-              (Just _alAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ActivitiesListResource)

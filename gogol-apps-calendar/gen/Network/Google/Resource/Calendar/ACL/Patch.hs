@@ -33,12 +33,12 @@ module Network.Google.Resource.Calendar.ACL.Patch
     , apQuotaUser
     , apCalendarId
     , apPrettyPrint
-    , apUserIp
+    , apUserIP
     , apRuleId
     , apKey
-    , apOauthToken
+    , apACLRule
+    , apOAuthToken
     , apFields
-    , apAlt
     ) where
 
 import           Network.Google.AppsCalendar.Types
@@ -54,10 +54,11 @@ type AclPatchResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Patch '[JSON] ACLRule
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] ACLRule :> Patch '[JSON] ACLRule
 
 -- | Updates an access control rule. This method supports patch semantics.
 --
@@ -66,12 +67,12 @@ data ACLPatch' = ACLPatch'
     { _apQuotaUser   :: !(Maybe Text)
     , _apCalendarId  :: !Text
     , _apPrettyPrint :: !Bool
-    , _apUserIp      :: !(Maybe Text)
+    , _apUserIP      :: !(Maybe Text)
     , _apRuleId      :: !Text
-    , _apKey         :: !(Maybe Text)
-    , _apOauthToken  :: !(Maybe Text)
+    , _apKey         :: !(Maybe Key)
+    , _apACLRule     :: !ACLRule
+    , _apOAuthToken  :: !(Maybe OAuthToken)
     , _apFields      :: !(Maybe Text)
-    , _apAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ACLPatch'' with the minimum fields required to make a request.
@@ -84,32 +85,33 @@ data ACLPatch' = ACLPatch'
 --
 -- * 'apPrettyPrint'
 --
--- * 'apUserIp'
+-- * 'apUserIP'
 --
 -- * 'apRuleId'
 --
 -- * 'apKey'
 --
--- * 'apOauthToken'
+-- * 'apACLRule'
+--
+-- * 'apOAuthToken'
 --
 -- * 'apFields'
---
--- * 'apAlt'
 aCLPatch'
     :: Text -- ^ 'calendarId'
     -> Text -- ^ 'ruleId'
+    -> ACLRule -- ^ 'ACLRule'
     -> ACLPatch'
-aCLPatch' pApCalendarId_ pApRuleId_ =
+aCLPatch' pApCalendarId_ pApRuleId_ pApACLRule_ =
     ACLPatch'
     { _apQuotaUser = Nothing
     , _apCalendarId = pApCalendarId_
     , _apPrettyPrint = True
-    , _apUserIp = Nothing
+    , _apUserIP = Nothing
     , _apRuleId = pApRuleId_
     , _apKey = Nothing
-    , _apOauthToken = Nothing
+    , _apACLRule = pApACLRule_
+    , _apOAuthToken = Nothing
     , _apFields = Nothing
-    , _apAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -134,8 +136,8 @@ apPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-apUserIp :: Lens' ACLPatch' (Maybe Text)
-apUserIp = lens _apUserIp (\ s a -> s{_apUserIp = a})
+apUserIP :: Lens' ACLPatch' (Maybe Text)
+apUserIP = lens _apUserIP (\ s a -> s{_apUserIP = a})
 
 -- | ACL rule identifier.
 apRuleId :: Lens' ACLPatch' Text
@@ -144,33 +146,39 @@ apRuleId = lens _apRuleId (\ s a -> s{_apRuleId = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-apKey :: Lens' ACLPatch' (Maybe Text)
+apKey :: Lens' ACLPatch' (Maybe Key)
 apKey = lens _apKey (\ s a -> s{_apKey = a})
 
+-- | Multipart request metadata.
+apACLRule :: Lens' ACLPatch' ACLRule
+apACLRule
+  = lens _apACLRule (\ s a -> s{_apACLRule = a})
+
 -- | OAuth 2.0 token for the current user.
-apOauthToken :: Lens' ACLPatch' (Maybe Text)
-apOauthToken
-  = lens _apOauthToken (\ s a -> s{_apOauthToken = a})
+apOAuthToken :: Lens' ACLPatch' (Maybe OAuthToken)
+apOAuthToken
+  = lens _apOAuthToken (\ s a -> s{_apOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 apFields :: Lens' ACLPatch' (Maybe Text)
 apFields = lens _apFields (\ s a -> s{_apFields = a})
 
--- | Data format for the response.
-apAlt :: Lens' ACLPatch' Alt
-apAlt = lens _apAlt (\ s a -> s{_apAlt = a})
+instance GoogleAuth ACLPatch' where
+        authKey = apKey . _Just
+        authToken = apOAuthToken . _Just
 
 instance GoogleRequest ACLPatch' where
         type Rs ACLPatch' = ACLRule
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u ACLPatch'{..}
           = go _apQuotaUser _apCalendarId (Just _apPrettyPrint)
-              _apUserIp
+              _apUserIP
               _apRuleId
               _apKey
-              _apOauthToken
+              _apOAuthToken
               _apFields
-              (Just _apAlt)
+              (Just AltJSON)
+              _apACLRule
           where go
                   = clientWithRoute (Proxy :: Proxy AclPatchResource) r
                       u

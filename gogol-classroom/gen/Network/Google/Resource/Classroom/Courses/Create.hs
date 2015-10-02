@@ -46,10 +46,10 @@ module Network.Google.Resource.Classroom.Courses.Create
     , ccUploadType
     , ccBearerToken
     , ccKey
-    , ccOauthToken
+    , ccCourse
+    , ccOAuthToken
     , ccFields
     , ccCallback
-    , ccAlt
     ) where
 
 import           Network.Google.Classroom.Types
@@ -68,11 +68,12 @@ type CoursesCreateResource =
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
                        QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
                                QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :> Post '[JSON] Course
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON] Course :> Post '[JSON] Course
 
 -- | Creates a course. The user specified in \`ownerId\` is the owner of the
 -- created course and added as a teacher. This method returns the following
@@ -93,11 +94,11 @@ data CoursesCreate' = CoursesCreate'
     , _ccAccessToken    :: !(Maybe Text)
     , _ccUploadType     :: !(Maybe Text)
     , _ccBearerToken    :: !(Maybe Text)
-    , _ccKey            :: !(Maybe Text)
-    , _ccOauthToken     :: !(Maybe Text)
+    , _ccKey            :: !(Maybe Key)
+    , _ccCourse         :: !Course
+    , _ccOAuthToken     :: !(Maybe OAuthToken)
     , _ccFields         :: !(Maybe Text)
     , _ccCallback       :: !(Maybe Text)
-    , _ccAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CoursesCreate'' with the minimum fields required to make a request.
@@ -122,16 +123,17 @@ data CoursesCreate' = CoursesCreate'
 --
 -- * 'ccKey'
 --
--- * 'ccOauthToken'
+-- * 'ccCourse'
+--
+-- * 'ccOAuthToken'
 --
 -- * 'ccFields'
 --
 -- * 'ccCallback'
---
--- * 'ccAlt'
 coursesCreate'
-    :: CoursesCreate'
-coursesCreate' =
+    :: Course -- ^ 'Course'
+    -> CoursesCreate'
+coursesCreate' pCcCourse_ =
     CoursesCreate'
     { _ccXgafv = Nothing
     , _ccQuotaUser = Nothing
@@ -142,10 +144,10 @@ coursesCreate' =
     , _ccUploadType = Nothing
     , _ccBearerToken = Nothing
     , _ccKey = Nothing
-    , _ccOauthToken = Nothing
+    , _ccCourse = pCcCourse_
+    , _ccOAuthToken = Nothing
     , _ccFields = Nothing
     , _ccCallback = Nothing
-    , _ccAlt = "json"
     }
 
 -- | V1 error format.
@@ -195,13 +197,17 @@ ccBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ccKey :: Lens' CoursesCreate' (Maybe Text)
+ccKey :: Lens' CoursesCreate' (Maybe Key)
 ccKey = lens _ccKey (\ s a -> s{_ccKey = a})
 
+-- | Multipart request metadata.
+ccCourse :: Lens' CoursesCreate' Course
+ccCourse = lens _ccCourse (\ s a -> s{_ccCourse = a})
+
 -- | OAuth 2.0 token for the current user.
-ccOauthToken :: Lens' CoursesCreate' (Maybe Text)
-ccOauthToken
-  = lens _ccOauthToken (\ s a -> s{_ccOauthToken = a})
+ccOAuthToken :: Lens' CoursesCreate' (Maybe OAuthToken)
+ccOAuthToken
+  = lens _ccOAuthToken (\ s a -> s{_ccOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ccFields :: Lens' CoursesCreate' (Maybe Text)
@@ -212,9 +218,9 @@ ccCallback :: Lens' CoursesCreate' (Maybe Text)
 ccCallback
   = lens _ccCallback (\ s a -> s{_ccCallback = a})
 
--- | Data format for response.
-ccAlt :: Lens' CoursesCreate' Text
-ccAlt = lens _ccAlt (\ s a -> s{_ccAlt = a})
+instance GoogleAuth CoursesCreate' where
+        authKey = ccKey . _Just
+        authToken = ccOAuthToken . _Just
 
 instance GoogleRequest CoursesCreate' where
         type Rs CoursesCreate' = Course
@@ -227,10 +233,11 @@ instance GoogleRequest CoursesCreate' where
               _ccUploadType
               _ccBearerToken
               _ccKey
-              _ccOauthToken
+              _ccOAuthToken
               _ccFields
               _ccCallback
-              (Just _ccAlt)
+              (Just AltJSON)
+              _ccCourse
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CoursesCreateResource)

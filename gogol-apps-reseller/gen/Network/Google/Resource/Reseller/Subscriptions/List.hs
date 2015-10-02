@@ -33,16 +33,15 @@ module Network.Google.Resource.Reseller.Subscriptions.List
     -- * Request Lenses
     , slQuotaUser
     , slPrettyPrint
-    , slUserIp
+    , slUserIP
     , slCustomerNamePrefix
     , slCustomerId
     , slKey
     , slCustomerAuthToken
     , slPageToken
-    , slOauthToken
+    , slOAuthToken
     , slMaxResults
     , slFields
-    , slAlt
     ) where
 
 import           Network.Google.AppsReseller.Types
@@ -57,13 +56,14 @@ type SubscriptionsListResource =
            QueryParam "userIp" Text :>
              QueryParam "customerNamePrefix" Text :>
                QueryParam "customerId" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "customerAuthToken" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "maxResults" Word32 :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Get '[JSON] Subscriptions
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] Subscriptions
 
 -- | Lists subscriptions of a reseller, optionally filtered by a customer
 -- name prefix.
@@ -72,16 +72,15 @@ type SubscriptionsListResource =
 data SubscriptionsList' = SubscriptionsList'
     { _slQuotaUser          :: !(Maybe Text)
     , _slPrettyPrint        :: !Bool
-    , _slUserIp             :: !(Maybe Text)
+    , _slUserIP             :: !(Maybe Text)
     , _slCustomerNamePrefix :: !(Maybe Text)
     , _slCustomerId         :: !(Maybe Text)
-    , _slKey                :: !(Maybe Text)
+    , _slKey                :: !(Maybe Key)
     , _slCustomerAuthToken  :: !(Maybe Text)
     , _slPageToken          :: !(Maybe Text)
-    , _slOauthToken         :: !(Maybe Text)
+    , _slOAuthToken         :: !(Maybe OAuthToken)
     , _slMaxResults         :: !(Maybe Word32)
     , _slFields             :: !(Maybe Text)
-    , _slAlt                :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionsList'' with the minimum fields required to make a request.
@@ -92,7 +91,7 @@ data SubscriptionsList' = SubscriptionsList'
 --
 -- * 'slPrettyPrint'
 --
--- * 'slUserIp'
+-- * 'slUserIP'
 --
 -- * 'slCustomerNamePrefix'
 --
@@ -104,29 +103,26 @@ data SubscriptionsList' = SubscriptionsList'
 --
 -- * 'slPageToken'
 --
--- * 'slOauthToken'
+-- * 'slOAuthToken'
 --
 -- * 'slMaxResults'
 --
 -- * 'slFields'
---
--- * 'slAlt'
 subscriptionsList'
     :: SubscriptionsList'
 subscriptionsList' =
     SubscriptionsList'
     { _slQuotaUser = Nothing
     , _slPrettyPrint = True
-    , _slUserIp = Nothing
+    , _slUserIP = Nothing
     , _slCustomerNamePrefix = Nothing
     , _slCustomerId = Nothing
     , _slKey = Nothing
     , _slCustomerAuthToken = Nothing
     , _slPageToken = Nothing
-    , _slOauthToken = Nothing
+    , _slOAuthToken = Nothing
     , _slMaxResults = Nothing
     , _slFields = Nothing
-    , _slAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -144,8 +140,8 @@ slPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-slUserIp :: Lens' SubscriptionsList' (Maybe Text)
-slUserIp = lens _slUserIp (\ s a -> s{_slUserIp = a})
+slUserIP :: Lens' SubscriptionsList' (Maybe Text)
+slUserIP = lens _slUserIP (\ s a -> s{_slUserIP = a})
 
 -- | Prefix of the customer\'s domain name by which the subscriptions should
 -- be filtered. Optional
@@ -162,7 +158,7 @@ slCustomerId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-slKey :: Lens' SubscriptionsList' (Maybe Text)
+slKey :: Lens' SubscriptionsList' (Maybe Key)
 slKey = lens _slKey (\ s a -> s{_slKey = a})
 
 -- | An auth token needed if the customer is not a resold customer of this
@@ -179,9 +175,9 @@ slPageToken
   = lens _slPageToken (\ s a -> s{_slPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-slOauthToken :: Lens' SubscriptionsList' (Maybe Text)
-slOauthToken
-  = lens _slOauthToken (\ s a -> s{_slOauthToken = a})
+slOAuthToken :: Lens' SubscriptionsList' (Maybe OAuthToken)
+slOAuthToken
+  = lens _slOAuthToken (\ s a -> s{_slOAuthToken = a})
 
 -- | Maximum number of results to return
 slMaxResults :: Lens' SubscriptionsList' (Maybe Word32)
@@ -192,24 +188,24 @@ slMaxResults
 slFields :: Lens' SubscriptionsList' (Maybe Text)
 slFields = lens _slFields (\ s a -> s{_slFields = a})
 
--- | Data format for the response.
-slAlt :: Lens' SubscriptionsList' Alt
-slAlt = lens _slAlt (\ s a -> s{_slAlt = a})
+instance GoogleAuth SubscriptionsList' where
+        authKey = slKey . _Just
+        authToken = slOAuthToken . _Just
 
 instance GoogleRequest SubscriptionsList' where
         type Rs SubscriptionsList' = Subscriptions
         request = requestWithRoute defReq appsResellerURL
         requestWithRoute r u SubscriptionsList'{..}
-          = go _slQuotaUser (Just _slPrettyPrint) _slUserIp
+          = go _slQuotaUser (Just _slPrettyPrint) _slUserIP
               _slCustomerNamePrefix
               _slCustomerId
               _slKey
               _slCustomerAuthToken
               _slPageToken
-              _slOauthToken
+              _slOAuthToken
               _slMaxResults
               _slFields
-              (Just _slAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy SubscriptionsListResource)

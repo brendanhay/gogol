@@ -34,11 +34,11 @@ module Network.Google.Resource.Genomics.AnnotationSets.Search
     -- * Request Lenses
     , assQuotaUser
     , assPrettyPrint
-    , assUserIp
+    , assUserIP
+    , assSearchAnnotationSetsRequest
     , assKey
-    , assOauthToken
+    , assOAuthToken
     , assFields
-    , assAlt
     ) where
 
 import           Network.Google.Genomics.Types
@@ -52,11 +52,12 @@ type AnnotationSetsSearchResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :>
-                       Post '[JSON] SearchAnnotationSetsResponse
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] SearchAnnotationSetsRequest :>
+                         Post '[JSON] SearchAnnotationSetsResponse
 
 -- | Searches for annotation sets that match the given criteria. Results are
 -- returned in a deterministic order. Caller must have READ permission for
@@ -64,13 +65,13 @@ type AnnotationSetsSearchResource =
 --
 -- /See:/ 'annotationSetsSearch'' smart constructor.
 data AnnotationSetsSearch' = AnnotationSetsSearch'
-    { _assQuotaUser   :: !(Maybe Text)
-    , _assPrettyPrint :: !Bool
-    , _assUserIp      :: !(Maybe Text)
-    , _assKey         :: !(Maybe Text)
-    , _assOauthToken  :: !(Maybe Text)
-    , _assFields      :: !(Maybe Text)
-    , _assAlt         :: !Alt
+    { _assQuotaUser                   :: !(Maybe Text)
+    , _assPrettyPrint                 :: !Bool
+    , _assUserIP                      :: !(Maybe Text)
+    , _assSearchAnnotationSetsRequest :: !SearchAnnotationSetsRequest
+    , _assKey                         :: !(Maybe Key)
+    , _assOAuthToken                  :: !(Maybe OAuthToken)
+    , _assFields                      :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnnotationSetsSearch'' with the minimum fields required to make a request.
@@ -81,26 +82,27 @@ data AnnotationSetsSearch' = AnnotationSetsSearch'
 --
 -- * 'assPrettyPrint'
 --
--- * 'assUserIp'
+-- * 'assUserIP'
+--
+-- * 'assSearchAnnotationSetsRequest'
 --
 -- * 'assKey'
 --
--- * 'assOauthToken'
+-- * 'assOAuthToken'
 --
 -- * 'assFields'
---
--- * 'assAlt'
 annotationSetsSearch'
-    :: AnnotationSetsSearch'
-annotationSetsSearch' =
+    :: SearchAnnotationSetsRequest -- ^ 'SearchAnnotationSetsRequest'
+    -> AnnotationSetsSearch'
+annotationSetsSearch' pAssSearchAnnotationSetsRequest_ =
     AnnotationSetsSearch'
     { _assQuotaUser = Nothing
     , _assPrettyPrint = True
-    , _assUserIp = Nothing
+    , _assUserIP = Nothing
+    , _assSearchAnnotationSetsRequest = pAssSearchAnnotationSetsRequest_
     , _assKey = Nothing
-    , _assOauthToken = Nothing
+    , _assOAuthToken = Nothing
     , _assFields = Nothing
-    , _assAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -118,41 +120,48 @@ assPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-assUserIp :: Lens' AnnotationSetsSearch' (Maybe Text)
-assUserIp
-  = lens _assUserIp (\ s a -> s{_assUserIp = a})
+assUserIP :: Lens' AnnotationSetsSearch' (Maybe Text)
+assUserIP
+  = lens _assUserIP (\ s a -> s{_assUserIP = a})
+
+-- | Multipart request metadata.
+assSearchAnnotationSetsRequest :: Lens' AnnotationSetsSearch' SearchAnnotationSetsRequest
+assSearchAnnotationSetsRequest
+  = lens _assSearchAnnotationSetsRequest
+      (\ s a -> s{_assSearchAnnotationSetsRequest = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-assKey :: Lens' AnnotationSetsSearch' (Maybe Text)
+assKey :: Lens' AnnotationSetsSearch' (Maybe Key)
 assKey = lens _assKey (\ s a -> s{_assKey = a})
 
 -- | OAuth 2.0 token for the current user.
-assOauthToken :: Lens' AnnotationSetsSearch' (Maybe Text)
-assOauthToken
-  = lens _assOauthToken
-      (\ s a -> s{_assOauthToken = a})
+assOAuthToken :: Lens' AnnotationSetsSearch' (Maybe OAuthToken)
+assOAuthToken
+  = lens _assOAuthToken
+      (\ s a -> s{_assOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 assFields :: Lens' AnnotationSetsSearch' (Maybe Text)
 assFields
   = lens _assFields (\ s a -> s{_assFields = a})
 
--- | Data format for the response.
-assAlt :: Lens' AnnotationSetsSearch' Alt
-assAlt = lens _assAlt (\ s a -> s{_assAlt = a})
+instance GoogleAuth AnnotationSetsSearch' where
+        authKey = assKey . _Just
+        authToken = assOAuthToken . _Just
 
 instance GoogleRequest AnnotationSetsSearch' where
         type Rs AnnotationSetsSearch' =
              SearchAnnotationSetsResponse
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u AnnotationSetsSearch'{..}
-          = go _assQuotaUser (Just _assPrettyPrint) _assUserIp
+          = go _assQuotaUser (Just _assPrettyPrint) _assUserIP
               _assKey
-              _assOauthToken
+              _assOAuthToken
               _assFields
-              (Just _assAlt)
+              (Just AltJSON)
+              _assSearchAnnotationSetsRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AnnotationSetsSearchResource)

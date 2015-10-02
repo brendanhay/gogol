@@ -32,12 +32,12 @@ module Network.Google.Resource.DFAReporting.CreativeGroups.Update
     -- * Request Lenses
     , cguQuotaUser
     , cguPrettyPrint
-    , cguUserIp
+    , cguUserIP
     , cguProfileId
+    , cguCreativeGroup
     , cguKey
-    , cguOauthToken
+    , cguOAuthToken
     , cguFields
-    , cguAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,23 +52,25 @@ type CreativeGroupsUpdateResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Put '[JSON] CreativeGroup
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] CreativeGroup :>
+                           Put '[JSON] CreativeGroup
 
 -- | Updates an existing creative group.
 --
 -- /See:/ 'creativeGroupsUpdate'' smart constructor.
 data CreativeGroupsUpdate' = CreativeGroupsUpdate'
-    { _cguQuotaUser   :: !(Maybe Text)
-    , _cguPrettyPrint :: !Bool
-    , _cguUserIp      :: !(Maybe Text)
-    , _cguProfileId   :: !Int64
-    , _cguKey         :: !(Maybe Text)
-    , _cguOauthToken  :: !(Maybe Text)
-    , _cguFields      :: !(Maybe Text)
-    , _cguAlt         :: !Alt
+    { _cguQuotaUser     :: !(Maybe Text)
+    , _cguPrettyPrint   :: !Bool
+    , _cguUserIP        :: !(Maybe Text)
+    , _cguProfileId     :: !Int64
+    , _cguCreativeGroup :: !CreativeGroup
+    , _cguKey           :: !(Maybe Key)
+    , _cguOAuthToken    :: !(Maybe OAuthToken)
+    , _cguFields        :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeGroupsUpdate'' with the minimum fields required to make a request.
@@ -79,30 +81,31 @@ data CreativeGroupsUpdate' = CreativeGroupsUpdate'
 --
 -- * 'cguPrettyPrint'
 --
--- * 'cguUserIp'
+-- * 'cguUserIP'
 --
 -- * 'cguProfileId'
 --
+-- * 'cguCreativeGroup'
+--
 -- * 'cguKey'
 --
--- * 'cguOauthToken'
+-- * 'cguOAuthToken'
 --
 -- * 'cguFields'
---
--- * 'cguAlt'
 creativeGroupsUpdate'
     :: Int64 -- ^ 'profileId'
+    -> CreativeGroup -- ^ 'CreativeGroup'
     -> CreativeGroupsUpdate'
-creativeGroupsUpdate' pCguProfileId_ =
+creativeGroupsUpdate' pCguProfileId_ pCguCreativeGroup_ =
     CreativeGroupsUpdate'
     { _cguQuotaUser = Nothing
     , _cguPrettyPrint = True
-    , _cguUserIp = Nothing
+    , _cguUserIP = Nothing
     , _cguProfileId = pCguProfileId_
+    , _cguCreativeGroup = pCguCreativeGroup_
     , _cguKey = Nothing
-    , _cguOauthToken = Nothing
+    , _cguOAuthToken = Nothing
     , _cguFields = Nothing
-    , _cguAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,46 +123,53 @@ cguPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cguUserIp :: Lens' CreativeGroupsUpdate' (Maybe Text)
-cguUserIp
-  = lens _cguUserIp (\ s a -> s{_cguUserIp = a})
+cguUserIP :: Lens' CreativeGroupsUpdate' (Maybe Text)
+cguUserIP
+  = lens _cguUserIP (\ s a -> s{_cguUserIP = a})
 
 -- | User profile ID associated with this request.
 cguProfileId :: Lens' CreativeGroupsUpdate' Int64
 cguProfileId
   = lens _cguProfileId (\ s a -> s{_cguProfileId = a})
 
+-- | Multipart request metadata.
+cguCreativeGroup :: Lens' CreativeGroupsUpdate' CreativeGroup
+cguCreativeGroup
+  = lens _cguCreativeGroup
+      (\ s a -> s{_cguCreativeGroup = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cguKey :: Lens' CreativeGroupsUpdate' (Maybe Text)
+cguKey :: Lens' CreativeGroupsUpdate' (Maybe Key)
 cguKey = lens _cguKey (\ s a -> s{_cguKey = a})
 
 -- | OAuth 2.0 token for the current user.
-cguOauthToken :: Lens' CreativeGroupsUpdate' (Maybe Text)
-cguOauthToken
-  = lens _cguOauthToken
-      (\ s a -> s{_cguOauthToken = a})
+cguOAuthToken :: Lens' CreativeGroupsUpdate' (Maybe OAuthToken)
+cguOAuthToken
+  = lens _cguOAuthToken
+      (\ s a -> s{_cguOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cguFields :: Lens' CreativeGroupsUpdate' (Maybe Text)
 cguFields
   = lens _cguFields (\ s a -> s{_cguFields = a})
 
--- | Data format for the response.
-cguAlt :: Lens' CreativeGroupsUpdate' Alt
-cguAlt = lens _cguAlt (\ s a -> s{_cguAlt = a})
+instance GoogleAuth CreativeGroupsUpdate' where
+        authKey = cguKey . _Just
+        authToken = cguOAuthToken . _Just
 
 instance GoogleRequest CreativeGroupsUpdate' where
         type Rs CreativeGroupsUpdate' = CreativeGroup
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativeGroupsUpdate'{..}
-          = go _cguQuotaUser (Just _cguPrettyPrint) _cguUserIp
+          = go _cguQuotaUser (Just _cguPrettyPrint) _cguUserIP
               _cguProfileId
               _cguKey
-              _cguOauthToken
+              _cguOAuthToken
               _cguFields
-              (Just _cguAlt)
+              (Just AltJSON)
+              _cguCreativeGroup
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CreativeGroupsUpdateResource)

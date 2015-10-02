@@ -548,20 +548,20 @@ module Network.Google.DFAReporting
     -- ** DfareportingSizesList
     , module Network.Google.Resource.DFAReporting.Sizes.List
 
-    -- ** DfareportingSubaccountsGet
-    , module Network.Google.Resource.DFAReporting.Subaccounts.Get
+    -- ** DfareportingSubAccountsGet
+    , module Network.Google.Resource.DFAReporting.SubAccounts.Get
 
-    -- ** DfareportingSubaccountsInsert
-    , module Network.Google.Resource.DFAReporting.Subaccounts.Insert
+    -- ** DfareportingSubAccountsInsert
+    , module Network.Google.Resource.DFAReporting.SubAccounts.Insert
 
-    -- ** DfareportingSubaccountsList
-    , module Network.Google.Resource.DFAReporting.Subaccounts.List
+    -- ** DfareportingSubAccountsList
+    , module Network.Google.Resource.DFAReporting.SubAccounts.List
 
-    -- ** DfareportingSubaccountsPatch
-    , module Network.Google.Resource.DFAReporting.Subaccounts.Patch
+    -- ** DfareportingSubAccountsPatch
+    , module Network.Google.Resource.DFAReporting.SubAccounts.Patch
 
-    -- ** DfareportingSubaccountsUpdate
-    , module Network.Google.Resource.DFAReporting.Subaccounts.Update
+    -- ** DfareportingSubAccountsUpdate
+    , module Network.Google.Resource.DFAReporting.SubAccounts.Update
 
     -- ** DfareportingTargetableRemarketingListsGet
     , module Network.Google.Resource.DFAReporting.TargetableRemarketingLists.Get
@@ -687,7 +687,7 @@ module Network.Google.DFAReporting
     , creativeCustomEvent
     , cceAdvertiserCustomEventType
     , cceAdvertiserCustomEventName
-    , cceExitUrl
+    , cceExitURL
     , cceTargetType
     , ccePopupWindowProperties
     , cceVideoReportingId
@@ -745,12 +745,12 @@ module Network.Google.DFAReporting
     -- ** PricingScheduleCapCostOption
     , PricingScheduleCapCostOption (..)
 
-    -- ** SubaccountsListResponse
-    , SubaccountsListResponse
-    , subaccountsListResponse
-    , slrNextPageToken
-    , slrKind
-    , slrSubaccounts
+    -- ** SubAccountsListResponse
+    , SubAccountsListResponse
+    , subAccountsListResponse
+    , salrNextPageToken
+    , salrKind
+    , salrSubAccounts
 
     -- ** UserRolePermissionAvailability
     , UserRolePermissionAvailability (..)
@@ -793,7 +793,7 @@ module Network.Google.DFAReporting
     , dssActiveViewOptOut
     , dssVideoActiveViewOptOut
     , dssInstreamVideoPlacementAccepted
-    , dssNielsenOcrOptOut
+    , dssNielsenOCROptOut
 
     -- ** TagSettings
     , TagSettings
@@ -820,7 +820,7 @@ module Network.Google.DFAReporting
     , iiId
     , iiEstimatedConversionRate
     , iiProjectId
-    , iiSubaccountId
+    , iiSubAccountId
     , iiOrderId
     , iiSiteId
 
@@ -851,8 +851,8 @@ module Network.Google.DFAReporting
     -- ** SizesListResponse
     , SizesListResponse
     , sizesListResponse
-    , sKind
-    , sSizes
+    , slrKind
+    , slrSizes
 
     -- ** DfareportingPlacementStrategiesListSortOrder
     , DfareportingPlacementStrategiesListSortOrder (..)
@@ -864,7 +864,7 @@ module Network.Google.DFAReporting
     , dsSettings
     , dsInterstitialTagFormats
     , dsKind
-    , dsUrl
+    , dsURL
     , dsIdDimensionValue
     , dsInpageTagFormats
     , dsActive
@@ -933,7 +933,7 @@ module Network.Google.DFAReporting
     , paPlacementId
     , paPlacementIdDimensionValue
     , paActive
-    , paSslRequired
+    , paSSLRequired
 
     -- ** DfareportingFilesListSortField
     , DfareportingFilesListSortField (..)
@@ -1002,7 +1002,7 @@ module Network.Google.DFAReporting
     , fagAccountId
     , fagName
     , fagId
-    , fagSubaccountId
+    , fagSubAccountId
     , fagType
     , fagFloodlightConfigurationIdDimensionValue
 
@@ -1072,14 +1072,14 @@ module Network.Google.DFAReporting
     , adSize
     , adStartTime
     , adKind
-    , adClickThroughUrlSuffixProperties
+    , adClickThroughURLSuffixProperties
     , adCampaignIdDimensionValue
     , adAdvertiserId
     , adAdvertiserIdDimensionValue
-    , adSslCompliant
+    , adSSLCompliant
     , adCampaignId
     , adIdDimensionValue
-    , adClickThroughUrl
+    , adClickThroughURL
     , adDeliverySchedule
     , adEventTagOverrides
     , adActive
@@ -1090,9 +1090,9 @@ module Network.Google.DFAReporting
     , adCreateInfo
     , adLastModifiedInfo
     , adId
-    , adSslRequired
+    , adSSLRequired
     , adComments
-    , adSubaccountId
+    , adSubAccountId
     , adType
     , adRemarketingListExpression
     , adDynamicClickTracker
@@ -1130,11 +1130,11 @@ module Network.Google.DFAReporting
     -- ** Size
     , Size
     , size
-    , sizHeight
-    , sizKind
-    , sizWidth
-    , sizIab
-    , sizId
+    , sHeight
+    , sKind
+    , sWidth
+    , sIab
+    , sId
 
     -- ** InventoryItemsListResponse
     , InventoryItemsListResponse
@@ -1179,8 +1179,8 @@ module Network.Google.DFAReporting
     , rcDateRange
     , rcDimensions
 
-    -- ** DfareportingSubaccountsListSortOrder
-    , DfareportingSubaccountsListSortOrder (..)
+    -- ** DfareportingSubAccountsListSortOrder
+    , DfareportingSubAccountsListSortOrder (..)
 
     -- ** ReportScheduleRepeatsOnWeekDays
     , ReportScheduleRepeatsOnWeekDays (..)
@@ -1205,7 +1205,7 @@ module Network.Google.DFAReporting
     , pLastModifiedInfo
     , pId
     , pAudienceAgeGroup
-    , pSubaccountId
+    , pSubAccountId
     , pAudienceGender
     , pClientName
     , pTargetCpaNanos
@@ -1213,14 +1213,14 @@ module Network.Google.DFAReporting
     -- ** DfareportingAdsListSortOrder
     , DfareportingAdsListSortOrder (..)
 
-    -- ** Subaccount
-    , Subaccount
-    , subaccount
-    , subKind
-    , subAvailablePermissionIds
-    , subAccountId
-    , subName
-    , subId
+    -- ** SubAccount
+    , SubAccount
+    , subAccount
+    , saKind
+    , saAvailablePermissionIds
+    , saAccountId
+    , saName
+    , saId
 
     -- ** CreativeAssetDurationType
     , CreativeAssetDurationType (..)
@@ -1292,7 +1292,7 @@ module Network.Google.DFAReporting
     , ClickThroughURLSuffixProperties
     , clickThroughURLSuffixProperties
     , ctuspOverrideInheritedSuffix
-    , ctuspClickThroughUrlSuffix
+    , ctuspClickThroughURLSuffix
 
     -- ** OperatingSystemVersionsListResponse
     , OperatingSystemVersionsListResponse
@@ -1329,7 +1329,7 @@ module Network.Google.DFAReporting
     , couName
     , couCountryCode
     , couDartId
-    , couSslEnabled
+    , couSSLEnabled
 
     -- ** DfareportingCreativeGroupsListSortField
     , DfareportingCreativeGroupsListSortField (..)
@@ -1415,37 +1415,37 @@ module Network.Google.DFAReporting
     -- ** Creative
     , Creative
     , creative
-    , creConvertFlashToHtml5
+    , creConvertFlashToHTML5
     , creBackupImageTargetWindow
     , creRenderingIdDimensionValue
     , creCustomKeyValues
     , creVideoDuration
     , creRenderingId
-    , creThirdPartyBackupImageImpressionsUrl
+    , creThirdPartyBackupImageImpressionsURL
     , creFsCommand
     , creAllowScriptAccess
-    , creHtmlCodeLocked
+    , creHTMLCodeLocked
     , creRequiredFlashPluginVersion
     , creAuthoringTool
     , creSize
-    , creThirdPartyUrls
+    , creThirdPartyURLs
     , creCounterCustomEvents
     , creKind
-    , creSslOverride
-    , creHtmlCode
+    , creSSLOverride
+    , creHTMLCode
     , creAdvertiserId
     , creRequiredFlashVersion
-    , creBackgroundColor
+    , creBackgRoundColor
     , creAdTagKeys
     , creSkippable
-    , creSslCompliant
+    , creSSLCompliant
     , creIdDimensionValue
     , creBackupImageReportingLabel
     , creCommercialId
     , creActive
     , creExitCustomEvents
     , creAccountId
-    , creBackupImageClickThroughUrl
+    , creBackupImageClickThroughURL
     , creName
     , creOverrideCss
     , creVideoDescription
@@ -1453,12 +1453,12 @@ module Network.Google.DFAReporting
     , creAdParameters
     , creVersion
     , creLatestTraffickedCreativeId
-    , creThirdPartyRichMediaImpressionsUrl
+    , creThirdPartyRichMediaImpressionsURL
     , creLastModifiedInfo
     , creId
     , creStudioAdvertiserId
     , creCreativeAssets
-    , creSubaccountId
+    , creSubAccountId
     , creType
     , creTimerCustomEvents
     , creStudioCreativeId
@@ -1469,7 +1469,7 @@ module Network.Google.DFAReporting
     , creCompanionCreatives
     , creTotalFileSize
     , creStudioTraffickedCreativeId
-    , creRedirectUrl
+    , creRedirectURL
     , creAutoAdvanceImages
     , creCreativeFieldAssignments
 
@@ -1526,7 +1526,7 @@ module Network.Google.DFAReporting
     , aupId
     , aupUserAccessType
     , aupComments
-    , aupSubaccountId
+    , aupSubAccountId
     , aupCampaignFilter
 
     -- ** FloodlightConfigurationFirstDayOfWeek
@@ -1625,8 +1625,8 @@ module Network.Google.DFAReporting
     , ClickThroughURL
     , clickThroughURL
     , ctuDefaultLandingPage
-    , ctuComputedClickThroughUrl
-    , ctuCustomClickThroughUrl
+    , ctuComputedClickThroughURL
+    , ctuCustomClickThroughURL
     , ctuLandingPageId
 
     -- ** ContentCategoriesListResponse
@@ -1672,9 +1672,9 @@ module Network.Google.DFAReporting
     , campaign
     , camCreativeOptimizationConfiguration
     , camCreativeGroupIds
-    , camNielsenOcrEnabled
+    , camNielsenOCREnabled
     , camKind
-    , camClickThroughUrlSuffixProperties
+    , camClickThroughURLSuffixProperties
     , camAdvertiserId
     , camEndDate
     , camAdvertiserIdDimensionValue
@@ -1690,7 +1690,7 @@ module Network.Google.DFAReporting
     , camCreateInfo
     , camLastModifiedInfo
     , camId
-    , camSubaccountId
+    , camSubAccountId
     , camAdditionalCreativeOptimizationConfigurations
     , camExternalId
     , camComment
@@ -1774,7 +1774,7 @@ module Network.Google.DFAReporting
     , aaMaximumImageSize
     , aaCurrencyId
     , aaReportsConfiguration
-    , aaNielsenOcrEnabled
+    , aaNielsenOCREnabled
     , aaKind
     , aaLocale
     , aaActive
@@ -1804,7 +1804,7 @@ module Network.Google.DFAReporting
     , rlName
     , rlListSource
     , rlId
-    , rlSubaccountId
+    , rlSubAccountId
     , rlDescription
 
     -- ** AccountUserProfilesListResponse
@@ -1814,8 +1814,8 @@ module Network.Google.DFAReporting
     , auplrAccountUserProfiles
     , auplrKind
 
-    -- ** DfareportingSubaccountsListSortField
-    , DfareportingSubaccountsListSortField (..)
+    -- ** DfareportingSubAccountsListSortField
+    , DfareportingSubAccountsListSortField (..)
 
     -- ** CreativeAssetChildAssetType
     , CreativeAssetChildAssetType (..)
@@ -1880,7 +1880,7 @@ module Network.Google.DFAReporting
     , landingPage
     , lpKind
     , lpDefault
-    , lpUrl
+    , lpURL
     , lpName
     , lpId
 
@@ -1888,7 +1888,7 @@ module Network.Google.DFAReporting
     , TagSetting
     , tagSetting
     , tsKeywordOption
-    , tsIncludeClickThroughUrls
+    , tsIncludeClickThroughURLs
     , tsIncludeClickTracking
     , tsAdditionalKeyValues
 
@@ -1915,7 +1915,7 @@ module Network.Google.DFAReporting
     , cgAccountId
     , cgName
     , cgId
-    , cgSubaccountId
+    , cgSubAccountId
 
     -- ** ConnectionTypesListResponse
     , ConnectionTypesListResponse
@@ -2111,7 +2111,7 @@ module Network.Google.DFAReporting
     , CompanionClickThroughOverride
     , companionClickThroughOverride
     , cctoCreativeId
-    , cctoClickThroughUrl
+    , cctoClickThroughURL
 
     -- ** DfareportingReportsFilesListSortField
     , DfareportingReportsFilesListSortField (..)
@@ -2166,7 +2166,7 @@ module Network.Google.DFAReporting
     , trlName
     , trlListSource
     , trlId
-    , trlSubaccountId
+    , trlSubAccountId
     , trlDescription
 
     -- ** ReportDelivery
@@ -2236,7 +2236,7 @@ module Network.Google.DFAReporting
     , clNewValue
     , clFieldName
     , clId
-    , clSubaccountId
+    , clSubAccountId
     , clChangeTime
 
     -- ** OperatingSystemsListResponse
@@ -2292,14 +2292,14 @@ module Network.Google.DFAReporting
     , faCountingMethod
     , faTagString
     , faSecure
-    , faExpectedUrl
+    , faExpectedURL
     , faFloodlightActivityGroupTagString
     , faFloodlightConfigurationId
     , faKind
     , faImageTagEnabled
     , faAdvertiserId
     , faAdvertiserIdDimensionValue
-    , faSslCompliant
+    , faSSLCompliant
     , faIdDimensionValue
     , faTagFormat
     , faCacheBustingType
@@ -2312,9 +2312,9 @@ module Network.Google.DFAReporting
     , faDefaultTags
     , faFloodlightActivityGroupName
     , faId
-    , faSslRequired
+    , faSSLRequired
     , faUserDefinedVariableTypes
-    , faSubaccountId
+    , faSubAccountId
     , faNotes
     , faFloodlightConfigurationIdDimensionValue
 
@@ -2333,9 +2333,9 @@ module Network.Google.DFAReporting
     , advdAdvertiserGroupId
     , advdDefaultClickThroughEventTagId
     , advdId
-    , advdSubaccountId
+    , advdSubAccountId
     , advdFloodlightConfigurationIdDimensionValue
-    , advdClickThroughUrlSuffix
+    , advdClickThroughURLSuffix
 
     -- ** AccountPermissionGroup
     , AccountPermissionGroup
@@ -2359,7 +2359,7 @@ module Network.Google.DFAReporting
     -- ** TargetWindow
     , TargetWindow
     , targetWindow
-    , twCustomHtml
+    , twCustomHTML
     , twTargetWindowOption
 
     -- ** DfareportingUserRolesListSortOrder
@@ -2401,7 +2401,7 @@ module Network.Google.DFAReporting
     , urName
     , urId
     , urPermissions
-    , urSubaccountId
+    , urSubAccountId
 
     -- ** AdType
     , AdType (..)
@@ -2467,10 +2467,10 @@ module Network.Google.DFAReporting
     , fcLookbackConfiguration
     , fcAccountId
     , fcId
-    , fcSslRequired
-    , fcNaturalSearchConversionAttributionOption
+    , fcSSLRequired
+    , fcNATuralSearchConversionAttributionOption
     , fcUserDefinedVariableConfigurations
-    , fcSubaccountId
+    , fcSubAccountId
     , fcFirstDayOfWeek
     , fcOmnitureSettings
     , fcStandardVariableTypes
@@ -2498,9 +2498,9 @@ module Network.Google.DFAReporting
     -- ** RichMediaExitOverride
     , RichMediaExitOverride
     , richMediaExitOverride
-    , rmeoUseCustomExitUrl
+    , rmeoUseCustomExitURL
     , rmeoExitId
-    , rmeoCustomExitUrl
+    , rmeoCustomExitURL
 
     -- ** CreativeGroupAssignmentCreativeGroupNumber
     , CreativeGroupAssignmentCreativeGroupNumber (..)
@@ -2512,9 +2512,9 @@ module Network.Google.DFAReporting
     , caStartTime
     , caWeight
     , caRichMediaExitOverrides
-    , caSslCompliant
+    , caSSLCompliant
     , caCreativeId
-    , caClickThroughUrl
+    , caClickThroughURL
     , caApplyEventTags
     , caActive
     , caSequence
@@ -2590,18 +2590,18 @@ module Network.Google.DFAReporting
     -- ** Site
     , Site
     , site
-    , sitKind
-    , sitKeyName
-    , sitSiteContacts
-    , sitSiteSettings
-    , sitIdDimensionValue
-    , sitDirectorySiteIdDimensionValue
-    , sitAccountId
-    , sitName
-    , sitDirectorySiteId
-    , sitId
-    , sitSubaccountId
-    , sitApproved
+    , ssKind
+    , ssKeyName
+    , ssSiteContacts
+    , ssSiteSettings
+    , ssIdDimensionValue
+    , ssDirectorySiteIdDimensionValue
+    , ssAccountId
+    , ssName
+    , ssDirectorySiteId
+    , ssId
+    , ssSubAccountId
+    , ssApproved
 
     -- ** AccountPermissionAccountProfiles
     , AccountPermissionAccountProfiles (..)
@@ -2646,15 +2646,15 @@ module Network.Google.DFAReporting
     , cSize
     , cVerticallyLocked
     , cOffset
-    , cStreamingServingUrl
+    , cStreamingServingURL
     , cZipFilesize
     , cTransparency
     , cHideSelectionBoxes
-    , cSslCompliant
+    , cSSLCompliant
     , cFileSize
     , cAssetIdentifier
     , cDurationType
-    , cProgressiveServingUrl
+    , cProgressiveServingURL
     , cActive
     , cRole
     , cMimeType
@@ -2725,7 +2725,7 @@ module Network.Google.DFAReporting
     , plalLastModifiedInfo
     , plalId
     , plalPrimaryPlacementId
-    , plalSubaccountId
+    , plalSubAccountId
     , plalExternalId
     , plalComment
     , plalPrimaryPlacementIdDimensionValue
@@ -2751,16 +2751,16 @@ module Network.Google.DFAReporting
     , etKind
     , etCampaignIdDimensionValue
     , etAdvertiserId
-    , etUrl
+    , etURL
     , etAdvertiserIdDimensionValue
-    , etSslCompliant
+    , etSSLCompliant
     , etCampaignId
     , etAccountId
     , etName
-    , etUrlEscapeLevels
+    , etURLEscapeLevels
     , etSiteIds
     , etId
-    , etSubaccountId
+    , etSubAccountId
     , etType
     , etSiteFilterType
 
@@ -2831,7 +2831,7 @@ module Network.Google.DFAReporting
     , oBuyerInvoiceId
     , oComments
     , oProjectId
-    , oSubaccountId
+    , oSubAccountId
     , oNotes
     , oContacts
     , oSiteId
@@ -2881,8 +2881,8 @@ module Network.Google.DFAReporting
     -- ** FileURLs
     , FileURLs
     , fileURLs
-    , fuBrowserUrl
-    , fuApiUrl
+    , fuBrowserURL
+    , fuAPIURL
 
     -- ** MobileCarriersListResponse
     , MobileCarriersListResponse
@@ -2905,7 +2905,7 @@ module Network.Google.DFAReporting
     , filStatus
     , filEtag
     , filKind
-    , filUrls
+    , filURLs
     , filReportId
     , filDateRange
     , filFormat
@@ -2939,15 +2939,15 @@ module Network.Google.DFAReporting
     -- ** SitesListResponse
     , SitesListResponse
     , sitesListResponse
-    , slrlNextPageToken
-    , slrlKind
-    , slrlSites
+    , sitNextPageToken
+    , sitKind
+    , sitSites
 
     -- ** ThirdPartyTrackingURL
     , ThirdPartyTrackingURL
     , thirdPartyTrackingURL
-    , tptuUrl
-    , tptuThirdPartyUrlType
+    , tptuURL
+    , tptuThirdPartyURLType
 
     -- ** Placement
     , Placement
@@ -2977,8 +2977,8 @@ module Network.Google.DFAReporting
     , p1CreateInfo
     , p1LastModifiedInfo
     , p1Id
-    , p1SslRequired
-    , p1SubaccountId
+    , p1SSLRequired
+    , p1SubAccountId
     , p1PlacementGroupIdDimensionValue
     , p1ExternalId
     , p1PlacementGroupId
@@ -3033,7 +3033,7 @@ module Network.Google.DFAReporting
     , odId
     , odProjectId
     , odTitle
-    , odSubaccountId
+    , odSubAccountId
     , odType
     , odOrderId
     , odCancelled
@@ -3069,7 +3069,7 @@ module Network.Google.DFAReporting
     , cffAccountId
     , cffName
     , cffId
-    , cffSubaccountId
+    , cffSubAccountId
 
     -- ** DefaultClickThroughEventTagProperties
     , DefaultClickThroughEventTagProperties
@@ -3085,9 +3085,6 @@ module Network.Google.DFAReporting
 
     -- ** DfareportingPlacementGroupsListPricingTypes
     , DfareportingPlacementGroupsListPricingTypes (..)
-
-    -- ** Alt
-    , Alt (..)
 
     -- ** DfareportingUserRolesListSortField
     , DfareportingUserRolesListSortField (..)
@@ -3280,11 +3277,11 @@ import           Network.Google.Resource.DFAReporting.Sites.Update
 import           Network.Google.Resource.DFAReporting.Sizes.Get
 import           Network.Google.Resource.DFAReporting.Sizes.Insert
 import           Network.Google.Resource.DFAReporting.Sizes.List
-import           Network.Google.Resource.DFAReporting.Subaccounts.Get
-import           Network.Google.Resource.DFAReporting.Subaccounts.Insert
-import           Network.Google.Resource.DFAReporting.Subaccounts.List
-import           Network.Google.Resource.DFAReporting.Subaccounts.Patch
-import           Network.Google.Resource.DFAReporting.Subaccounts.Update
+import           Network.Google.Resource.DFAReporting.SubAccounts.Get
+import           Network.Google.Resource.DFAReporting.SubAccounts.Insert
+import           Network.Google.Resource.DFAReporting.SubAccounts.List
+import           Network.Google.Resource.DFAReporting.SubAccounts.Patch
+import           Network.Google.Resource.DFAReporting.SubAccounts.Update
 import           Network.Google.Resource.DFAReporting.TargetableRemarketingLists.Get
 import           Network.Google.Resource.DFAReporting.TargetableRemarketingLists.List
 import           Network.Google.Resource.DFAReporting.UserProfiles.Get
@@ -3470,11 +3467,11 @@ type DFAReportingAPI =
        :<|> AdsUpdateResource
        :<|> ProjectsListResource
        :<|> ProjectsGetResource
-       :<|> SubaccountsInsertResource
-       :<|> SubaccountsListResource
-       :<|> SubaccountsPatchResource
-       :<|> SubaccountsGetResource
-       :<|> SubaccountsUpdateResource
+       :<|> SubAccountsInsertResource
+       :<|> SubAccountsListResource
+       :<|> SubAccountsPatchResource
+       :<|> SubAccountsGetResource
+       :<|> SubAccountsUpdateResource
        :<|> AdvertiserGroupsInsertResource
        :<|> AdvertiserGroupsListResource
        :<|> AdvertiserGroupsPatchResource

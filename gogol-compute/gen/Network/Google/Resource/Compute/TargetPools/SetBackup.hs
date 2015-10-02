@@ -32,15 +32,15 @@ module Network.Google.Resource.Compute.TargetPools.SetBackup
     -- * Request Lenses
     , tpsbQuotaUser
     , tpsbPrettyPrint
+    , tpsbTargetReference
     , tpsbProject
     , tpsbTargetPool
-    , tpsbUserIp
+    , tpsbUserIP
     , tpsbKey
     , tpsbFailoverRatio
     , tpsbRegion
-    , tpsbOauthToken
+    , tpsbOAuthToken
     , tpsbFields
-    , tpsbAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -58,27 +58,29 @@ type TargetPoolsSetBackupResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
+                       QueryParam "key" Key :>
                          QueryParam "failoverRatio" Float :>
-                           QueryParam "oauth_token" Text :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :> Post '[JSON] Operation
+                               QueryParam "alt" AltJSON :>
+                                 ReqBody '[JSON] TargetReference :>
+                                   Post '[JSON] Operation
 
 -- | Changes backup pool configurations.
 --
 -- /See:/ 'targetPoolsSetBackup'' smart constructor.
 data TargetPoolsSetBackup' = TargetPoolsSetBackup'
-    { _tpsbQuotaUser     :: !(Maybe Text)
-    , _tpsbPrettyPrint   :: !Bool
-    , _tpsbProject       :: !Text
-    , _tpsbTargetPool    :: !Text
-    , _tpsbUserIp        :: !(Maybe Text)
-    , _tpsbKey           :: !(Maybe Text)
-    , _tpsbFailoverRatio :: !(Maybe Float)
-    , _tpsbRegion        :: !Text
-    , _tpsbOauthToken    :: !(Maybe Text)
-    , _tpsbFields        :: !(Maybe Text)
-    , _tpsbAlt           :: !Alt
+    { _tpsbQuotaUser       :: !(Maybe Text)
+    , _tpsbPrettyPrint     :: !Bool
+    , _tpsbTargetReference :: !TargetReference
+    , _tpsbProject         :: !Text
+    , _tpsbTargetPool      :: !Text
+    , _tpsbUserIP          :: !(Maybe Text)
+    , _tpsbKey             :: !(Maybe Key)
+    , _tpsbFailoverRatio   :: !(Maybe Float)
+    , _tpsbRegion          :: !Text
+    , _tpsbOAuthToken      :: !(Maybe OAuthToken)
+    , _tpsbFields          :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetPoolsSetBackup'' with the minimum fields required to make a request.
@@ -89,11 +91,13 @@ data TargetPoolsSetBackup' = TargetPoolsSetBackup'
 --
 -- * 'tpsbPrettyPrint'
 --
+-- * 'tpsbTargetReference'
+--
 -- * 'tpsbProject'
 --
 -- * 'tpsbTargetPool'
 --
--- * 'tpsbUserIp'
+-- * 'tpsbUserIP'
 --
 -- * 'tpsbKey'
 --
@@ -101,29 +105,28 @@ data TargetPoolsSetBackup' = TargetPoolsSetBackup'
 --
 -- * 'tpsbRegion'
 --
--- * 'tpsbOauthToken'
+-- * 'tpsbOAuthToken'
 --
 -- * 'tpsbFields'
---
--- * 'tpsbAlt'
 targetPoolsSetBackup'
-    :: Text -- ^ 'project'
+    :: TargetReference -- ^ 'TargetReference'
+    -> Text -- ^ 'project'
     -> Text -- ^ 'targetPool'
     -> Text -- ^ 'region'
     -> TargetPoolsSetBackup'
-targetPoolsSetBackup' pTpsbProject_ pTpsbTargetPool_ pTpsbRegion_ =
+targetPoolsSetBackup' pTpsbTargetReference_ pTpsbProject_ pTpsbTargetPool_ pTpsbRegion_ =
     TargetPoolsSetBackup'
     { _tpsbQuotaUser = Nothing
     , _tpsbPrettyPrint = True
+    , _tpsbTargetReference = pTpsbTargetReference_
     , _tpsbProject = pTpsbProject_
     , _tpsbTargetPool = pTpsbTargetPool_
-    , _tpsbUserIp = Nothing
+    , _tpsbUserIP = Nothing
     , _tpsbKey = Nothing
     , _tpsbFailoverRatio = Nothing
     , _tpsbRegion = pTpsbRegion_
-    , _tpsbOauthToken = Nothing
+    , _tpsbOAuthToken = Nothing
     , _tpsbFields = Nothing
-    , _tpsbAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -140,6 +143,12 @@ tpsbPrettyPrint
   = lens _tpsbPrettyPrint
       (\ s a -> s{_tpsbPrettyPrint = a})
 
+-- | Multipart request metadata.
+tpsbTargetReference :: Lens' TargetPoolsSetBackup' TargetReference
+tpsbTargetReference
+  = lens _tpsbTargetReference
+      (\ s a -> s{_tpsbTargetReference = a})
+
 -- | Name of the project scoping this request.
 tpsbProject :: Lens' TargetPoolsSetBackup' Text
 tpsbProject
@@ -153,14 +162,14 @@ tpsbTargetPool
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tpsbUserIp :: Lens' TargetPoolsSetBackup' (Maybe Text)
-tpsbUserIp
-  = lens _tpsbUserIp (\ s a -> s{_tpsbUserIp = a})
+tpsbUserIP :: Lens' TargetPoolsSetBackup' (Maybe Text)
+tpsbUserIP
+  = lens _tpsbUserIP (\ s a -> s{_tpsbUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tpsbKey :: Lens' TargetPoolsSetBackup' (Maybe Text)
+tpsbKey :: Lens' TargetPoolsSetBackup' (Maybe Key)
 tpsbKey = lens _tpsbKey (\ s a -> s{_tpsbKey = a})
 
 -- | New failoverRatio value for the containing target pool.
@@ -175,19 +184,19 @@ tpsbRegion
   = lens _tpsbRegion (\ s a -> s{_tpsbRegion = a})
 
 -- | OAuth 2.0 token for the current user.
-tpsbOauthToken :: Lens' TargetPoolsSetBackup' (Maybe Text)
-tpsbOauthToken
-  = lens _tpsbOauthToken
-      (\ s a -> s{_tpsbOauthToken = a})
+tpsbOAuthToken :: Lens' TargetPoolsSetBackup' (Maybe OAuthToken)
+tpsbOAuthToken
+  = lens _tpsbOAuthToken
+      (\ s a -> s{_tpsbOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 tpsbFields :: Lens' TargetPoolsSetBackup' (Maybe Text)
 tpsbFields
   = lens _tpsbFields (\ s a -> s{_tpsbFields = a})
 
--- | Data format for the response.
-tpsbAlt :: Lens' TargetPoolsSetBackup' Alt
-tpsbAlt = lens _tpsbAlt (\ s a -> s{_tpsbAlt = a})
+instance GoogleAuth TargetPoolsSetBackup' where
+        authKey = tpsbKey . _Just
+        authToken = tpsbOAuthToken . _Just
 
 instance GoogleRequest TargetPoolsSetBackup' where
         type Rs TargetPoolsSetBackup' = Operation
@@ -196,13 +205,14 @@ instance GoogleRequest TargetPoolsSetBackup' where
           = go _tpsbQuotaUser (Just _tpsbPrettyPrint)
               _tpsbProject
               _tpsbTargetPool
-              _tpsbUserIp
+              _tpsbUserIP
               _tpsbKey
               _tpsbFailoverRatio
               _tpsbRegion
-              _tpsbOauthToken
+              _tpsbOAuthToken
               _tpsbFields
-              (Just _tpsbAlt)
+              (Just AltJSON)
+              _tpsbTargetReference
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TargetPoolsSetBackupResource)

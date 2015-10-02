@@ -33,14 +33,14 @@ module Network.Google.Resource.Compute.TargetPools.GetHealth
     -- * Request Lenses
     , tpghQuotaUser
     , tpghPrettyPrint
+    , tpghInstanceReference
     , tpghProject
     , tpghTargetPool
-    , tpghUserIp
+    , tpghUserIP
     , tpghKey
     , tpghRegion
-    , tpghOauthToken
+    , tpghOAuthToken
     , tpghFields
-    , tpghAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -58,27 +58,28 @@ type TargetPoolsGetHealthResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :>
-                               Post '[JSON] TargetPoolInstanceHealth
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] InstanceReference :>
+                                 Post '[JSON] TargetPoolInstanceHealth
 
 -- | Gets the most recent health check results for each IP for the given
 -- instance that is referenced by given TargetPool.
 --
 -- /See:/ 'targetPoolsGetHealth'' smart constructor.
 data TargetPoolsGetHealth' = TargetPoolsGetHealth'
-    { _tpghQuotaUser   :: !(Maybe Text)
-    , _tpghPrettyPrint :: !Bool
-    , _tpghProject     :: !Text
-    , _tpghTargetPool  :: !Text
-    , _tpghUserIp      :: !(Maybe Text)
-    , _tpghKey         :: !(Maybe Text)
-    , _tpghRegion      :: !Text
-    , _tpghOauthToken  :: !(Maybe Text)
-    , _tpghFields      :: !(Maybe Text)
-    , _tpghAlt         :: !Alt
+    { _tpghQuotaUser         :: !(Maybe Text)
+    , _tpghPrettyPrint       :: !Bool
+    , _tpghInstanceReference :: !InstanceReference
+    , _tpghProject           :: !Text
+    , _tpghTargetPool        :: !Text
+    , _tpghUserIP            :: !(Maybe Text)
+    , _tpghKey               :: !(Maybe Key)
+    , _tpghRegion            :: !Text
+    , _tpghOAuthToken        :: !(Maybe OAuthToken)
+    , _tpghFields            :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetPoolsGetHealth'' with the minimum fields required to make a request.
@@ -89,38 +90,39 @@ data TargetPoolsGetHealth' = TargetPoolsGetHealth'
 --
 -- * 'tpghPrettyPrint'
 --
+-- * 'tpghInstanceReference'
+--
 -- * 'tpghProject'
 --
 -- * 'tpghTargetPool'
 --
--- * 'tpghUserIp'
+-- * 'tpghUserIP'
 --
 -- * 'tpghKey'
 --
 -- * 'tpghRegion'
 --
--- * 'tpghOauthToken'
+-- * 'tpghOAuthToken'
 --
 -- * 'tpghFields'
---
--- * 'tpghAlt'
 targetPoolsGetHealth'
-    :: Text -- ^ 'project'
+    :: InstanceReference -- ^ 'InstanceReference'
+    -> Text -- ^ 'project'
     -> Text -- ^ 'targetPool'
     -> Text -- ^ 'region'
     -> TargetPoolsGetHealth'
-targetPoolsGetHealth' pTpghProject_ pTpghTargetPool_ pTpghRegion_ =
+targetPoolsGetHealth' pTpghInstanceReference_ pTpghProject_ pTpghTargetPool_ pTpghRegion_ =
     TargetPoolsGetHealth'
     { _tpghQuotaUser = Nothing
     , _tpghPrettyPrint = True
+    , _tpghInstanceReference = pTpghInstanceReference_
     , _tpghProject = pTpghProject_
     , _tpghTargetPool = pTpghTargetPool_
-    , _tpghUserIp = Nothing
+    , _tpghUserIP = Nothing
     , _tpghKey = Nothing
     , _tpghRegion = pTpghRegion_
-    , _tpghOauthToken = Nothing
+    , _tpghOAuthToken = Nothing
     , _tpghFields = Nothing
-    , _tpghAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -137,6 +139,12 @@ tpghPrettyPrint
   = lens _tpghPrettyPrint
       (\ s a -> s{_tpghPrettyPrint = a})
 
+-- | Multipart request metadata.
+tpghInstanceReference :: Lens' TargetPoolsGetHealth' InstanceReference
+tpghInstanceReference
+  = lens _tpghInstanceReference
+      (\ s a -> s{_tpghInstanceReference = a})
+
 tpghProject :: Lens' TargetPoolsGetHealth' Text
 tpghProject
   = lens _tpghProject (\ s a -> s{_tpghProject = a})
@@ -149,14 +157,14 @@ tpghTargetPool
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tpghUserIp :: Lens' TargetPoolsGetHealth' (Maybe Text)
-tpghUserIp
-  = lens _tpghUserIp (\ s a -> s{_tpghUserIp = a})
+tpghUserIP :: Lens' TargetPoolsGetHealth' (Maybe Text)
+tpghUserIP
+  = lens _tpghUserIP (\ s a -> s{_tpghUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tpghKey :: Lens' TargetPoolsGetHealth' (Maybe Text)
+tpghKey :: Lens' TargetPoolsGetHealth' (Maybe Key)
 tpghKey = lens _tpghKey (\ s a -> s{_tpghKey = a})
 
 -- | Name of the region scoping this request.
@@ -165,19 +173,19 @@ tpghRegion
   = lens _tpghRegion (\ s a -> s{_tpghRegion = a})
 
 -- | OAuth 2.0 token for the current user.
-tpghOauthToken :: Lens' TargetPoolsGetHealth' (Maybe Text)
-tpghOauthToken
-  = lens _tpghOauthToken
-      (\ s a -> s{_tpghOauthToken = a})
+tpghOAuthToken :: Lens' TargetPoolsGetHealth' (Maybe OAuthToken)
+tpghOAuthToken
+  = lens _tpghOAuthToken
+      (\ s a -> s{_tpghOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 tpghFields :: Lens' TargetPoolsGetHealth' (Maybe Text)
 tpghFields
   = lens _tpghFields (\ s a -> s{_tpghFields = a})
 
--- | Data format for the response.
-tpghAlt :: Lens' TargetPoolsGetHealth' Alt
-tpghAlt = lens _tpghAlt (\ s a -> s{_tpghAlt = a})
+instance GoogleAuth TargetPoolsGetHealth' where
+        authKey = tpghKey . _Just
+        authToken = tpghOAuthToken . _Just
 
 instance GoogleRequest TargetPoolsGetHealth' where
         type Rs TargetPoolsGetHealth' =
@@ -187,12 +195,13 @@ instance GoogleRequest TargetPoolsGetHealth' where
           = go _tpghQuotaUser (Just _tpghPrettyPrint)
               _tpghProject
               _tpghTargetPool
-              _tpghUserIp
+              _tpghUserIP
               _tpghKey
               _tpghRegion
-              _tpghOauthToken
+              _tpghOAuthToken
               _tpghFields
-              (Just _tpghAlt)
+              (Just AltJSON)
+              _tpghInstanceReference
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TargetPoolsGetHealthResource)

@@ -39,12 +39,12 @@ module Network.Google.Resource.Fitness.Users.DataSources.Create
     -- * Request Lenses
     , udscQuotaUser
     , udscPrettyPrint
-    , udscUserIp
+    , udscUserIP
     , udscUserId
     , udscKey
-    , udscOauthToken
+    , udscDataSource
+    , udscOAuthToken
     , udscFields
-    , udscAlt
     ) where
 
 import           Network.Google.Fitness.Types
@@ -58,10 +58,11 @@ type UsersDataSourcesCreateResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Post '[JSON] DataSource
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] DataSource :> Post '[JSON] DataSource
 
 -- | Creates a new data source that is unique across all data sources
 -- belonging to this user. The data stream ID field can be omitted and will
@@ -76,12 +77,12 @@ type UsersDataSourcesCreateResource =
 data UsersDataSourcesCreate' = UsersDataSourcesCreate'
     { _udscQuotaUser   :: !(Maybe Text)
     , _udscPrettyPrint :: !Bool
-    , _udscUserIp      :: !(Maybe Text)
+    , _udscUserIP      :: !(Maybe Text)
     , _udscUserId      :: !Text
-    , _udscKey         :: !(Maybe Text)
-    , _udscOauthToken  :: !(Maybe Text)
+    , _udscKey         :: !(Maybe Key)
+    , _udscDataSource  :: !DataSource
+    , _udscOAuthToken  :: !(Maybe OAuthToken)
     , _udscFields      :: !(Maybe Text)
-    , _udscAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDataSourcesCreate'' with the minimum fields required to make a request.
@@ -92,30 +93,31 @@ data UsersDataSourcesCreate' = UsersDataSourcesCreate'
 --
 -- * 'udscPrettyPrint'
 --
--- * 'udscUserIp'
+-- * 'udscUserIP'
 --
 -- * 'udscUserId'
 --
 -- * 'udscKey'
 --
--- * 'udscOauthToken'
+-- * 'udscDataSource'
+--
+-- * 'udscOAuthToken'
 --
 -- * 'udscFields'
---
--- * 'udscAlt'
 usersDataSourcesCreate'
     :: Text -- ^ 'userId'
+    -> DataSource -- ^ 'DataSource'
     -> UsersDataSourcesCreate'
-usersDataSourcesCreate' pUdscUserId_ =
+usersDataSourcesCreate' pUdscUserId_ pUdscDataSource_ =
     UsersDataSourcesCreate'
     { _udscQuotaUser = Nothing
     , _udscPrettyPrint = True
-    , _udscUserIp = Nothing
+    , _udscUserIP = Nothing
     , _udscUserId = pUdscUserId_
     , _udscKey = Nothing
-    , _udscOauthToken = Nothing
+    , _udscDataSource = pUdscDataSource_
+    , _udscOAuthToken = Nothing
     , _udscFields = Nothing
-    , _udscAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -134,9 +136,9 @@ udscPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-udscUserIp :: Lens' UsersDataSourcesCreate' (Maybe Text)
-udscUserIp
-  = lens _udscUserIp (\ s a -> s{_udscUserIp = a})
+udscUserIP :: Lens' UsersDataSourcesCreate' (Maybe Text)
+udscUserIP
+  = lens _udscUserIP (\ s a -> s{_udscUserIP = a})
 
 -- | Create the data source for the person identified. Use me to indicate the
 -- authenticated user. Only me is supported at this time.
@@ -147,35 +149,42 @@ udscUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-udscKey :: Lens' UsersDataSourcesCreate' (Maybe Text)
+udscKey :: Lens' UsersDataSourcesCreate' (Maybe Key)
 udscKey = lens _udscKey (\ s a -> s{_udscKey = a})
 
+-- | Multipart request metadata.
+udscDataSource :: Lens' UsersDataSourcesCreate' DataSource
+udscDataSource
+  = lens _udscDataSource
+      (\ s a -> s{_udscDataSource = a})
+
 -- | OAuth 2.0 token for the current user.
-udscOauthToken :: Lens' UsersDataSourcesCreate' (Maybe Text)
-udscOauthToken
-  = lens _udscOauthToken
-      (\ s a -> s{_udscOauthToken = a})
+udscOAuthToken :: Lens' UsersDataSourcesCreate' (Maybe OAuthToken)
+udscOAuthToken
+  = lens _udscOAuthToken
+      (\ s a -> s{_udscOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 udscFields :: Lens' UsersDataSourcesCreate' (Maybe Text)
 udscFields
   = lens _udscFields (\ s a -> s{_udscFields = a})
 
--- | Data format for the response.
-udscAlt :: Lens' UsersDataSourcesCreate' Alt
-udscAlt = lens _udscAlt (\ s a -> s{_udscAlt = a})
+instance GoogleAuth UsersDataSourcesCreate' where
+        authKey = udscKey . _Just
+        authToken = udscOAuthToken . _Just
 
 instance GoogleRequest UsersDataSourcesCreate' where
         type Rs UsersDataSourcesCreate' = DataSource
         request = requestWithRoute defReq fitnessURL
         requestWithRoute r u UsersDataSourcesCreate'{..}
           = go _udscQuotaUser (Just _udscPrettyPrint)
-              _udscUserIp
+              _udscUserIP
               _udscUserId
               _udscKey
-              _udscOauthToken
+              _udscOAuthToken
               _udscFields
-              (Just _udscAlt)
+              (Just AltJSON)
+              _udscDataSource
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersDataSourcesCreateResource)

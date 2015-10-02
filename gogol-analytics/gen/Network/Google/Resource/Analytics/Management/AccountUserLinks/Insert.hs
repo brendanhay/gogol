@@ -32,12 +32,12 @@ module Network.Google.Resource.Analytics.Management.AccountUserLinks.Insert
     -- * Request Lenses
     , mauliQuotaUser
     , mauliPrettyPrint
-    , mauliUserIp
+    , mauliUserIP
     , mauliAccountId
     , mauliKey
-    , mauliOauthToken
+    , mauliEntityUserLink
+    , mauliOAuthToken
     , mauliFields
-    , mauliAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -53,23 +53,25 @@ type ManagementAccountUserLinksInsertResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Post '[JSON] EntityUserLink
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] EntityUserLink :>
+                             Post '[JSON] EntityUserLink
 
 -- | Adds a new user to the given account.
 --
 -- /See:/ 'managementAccountUserLinksInsert'' smart constructor.
 data ManagementAccountUserLinksInsert' = ManagementAccountUserLinksInsert'
-    { _mauliQuotaUser   :: !(Maybe Text)
-    , _mauliPrettyPrint :: !Bool
-    , _mauliUserIp      :: !(Maybe Text)
-    , _mauliAccountId   :: !Text
-    , _mauliKey         :: !(Maybe Text)
-    , _mauliOauthToken  :: !(Maybe Text)
-    , _mauliFields      :: !(Maybe Text)
-    , _mauliAlt         :: !Alt
+    { _mauliQuotaUser      :: !(Maybe Text)
+    , _mauliPrettyPrint    :: !Bool
+    , _mauliUserIP         :: !(Maybe Text)
+    , _mauliAccountId      :: !Text
+    , _mauliKey            :: !(Maybe Key)
+    , _mauliEntityUserLink :: !EntityUserLink
+    , _mauliOAuthToken     :: !(Maybe OAuthToken)
+    , _mauliFields         :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementAccountUserLinksInsert'' with the minimum fields required to make a request.
@@ -80,30 +82,31 @@ data ManagementAccountUserLinksInsert' = ManagementAccountUserLinksInsert'
 --
 -- * 'mauliPrettyPrint'
 --
--- * 'mauliUserIp'
+-- * 'mauliUserIP'
 --
 -- * 'mauliAccountId'
 --
 -- * 'mauliKey'
 --
--- * 'mauliOauthToken'
+-- * 'mauliEntityUserLink'
+--
+-- * 'mauliOAuthToken'
 --
 -- * 'mauliFields'
---
--- * 'mauliAlt'
 managementAccountUserLinksInsert'
     :: Text -- ^ 'accountId'
+    -> EntityUserLink -- ^ 'EntityUserLink'
     -> ManagementAccountUserLinksInsert'
-managementAccountUserLinksInsert' pMauliAccountId_ =
+managementAccountUserLinksInsert' pMauliAccountId_ pMauliEntityUserLink_ =
     ManagementAccountUserLinksInsert'
     { _mauliQuotaUser = Nothing
     , _mauliPrettyPrint = False
-    , _mauliUserIp = Nothing
+    , _mauliUserIP = Nothing
     , _mauliAccountId = pMauliAccountId_
     , _mauliKey = Nothing
-    , _mauliOauthToken = Nothing
+    , _mauliEntityUserLink = pMauliEntityUserLink_
+    , _mauliOAuthToken = Nothing
     , _mauliFields = Nothing
-    , _mauliAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -122,9 +125,9 @@ mauliPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mauliUserIp :: Lens' ManagementAccountUserLinksInsert' (Maybe Text)
-mauliUserIp
-  = lens _mauliUserIp (\ s a -> s{_mauliUserIp = a})
+mauliUserIP :: Lens' ManagementAccountUserLinksInsert' (Maybe Text)
+mauliUserIP
+  = lens _mauliUserIP (\ s a -> s{_mauliUserIP = a})
 
 -- | Account ID to create the user link for.
 mauliAccountId :: Lens' ManagementAccountUserLinksInsert' Text
@@ -135,23 +138,30 @@ mauliAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mauliKey :: Lens' ManagementAccountUserLinksInsert' (Maybe Text)
+mauliKey :: Lens' ManagementAccountUserLinksInsert' (Maybe Key)
 mauliKey = lens _mauliKey (\ s a -> s{_mauliKey = a})
 
+-- | Multipart request metadata.
+mauliEntityUserLink :: Lens' ManagementAccountUserLinksInsert' EntityUserLink
+mauliEntityUserLink
+  = lens _mauliEntityUserLink
+      (\ s a -> s{_mauliEntityUserLink = a})
+
 -- | OAuth 2.0 token for the current user.
-mauliOauthToken :: Lens' ManagementAccountUserLinksInsert' (Maybe Text)
-mauliOauthToken
-  = lens _mauliOauthToken
-      (\ s a -> s{_mauliOauthToken = a})
+mauliOAuthToken :: Lens' ManagementAccountUserLinksInsert' (Maybe OAuthToken)
+mauliOAuthToken
+  = lens _mauliOAuthToken
+      (\ s a -> s{_mauliOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 mauliFields :: Lens' ManagementAccountUserLinksInsert' (Maybe Text)
 mauliFields
   = lens _mauliFields (\ s a -> s{_mauliFields = a})
 
--- | Data format for the response.
-mauliAlt :: Lens' ManagementAccountUserLinksInsert' Alt
-mauliAlt = lens _mauliAlt (\ s a -> s{_mauliAlt = a})
+instance GoogleAuth ManagementAccountUserLinksInsert'
+         where
+        authKey = mauliKey . _Just
+        authToken = mauliOAuthToken . _Just
 
 instance GoogleRequest
          ManagementAccountUserLinksInsert' where
@@ -161,12 +171,13 @@ instance GoogleRequest
         requestWithRoute r u
           ManagementAccountUserLinksInsert'{..}
           = go _mauliQuotaUser (Just _mauliPrettyPrint)
-              _mauliUserIp
+              _mauliUserIP
               _mauliAccountId
               _mauliKey
-              _mauliOauthToken
+              _mauliOAuthToken
               _mauliFields
-              (Just _mauliAlt)
+              (Just AltJSON)
+              _mauliEntityUserLink
           where go
                   = clientWithRoute
                       (Proxy ::

@@ -32,14 +32,13 @@ module Network.Google.Resource.Games.Leaderboards.List
     -- * Request Lenses
     , llQuotaUser
     , llPrettyPrint
-    , llUserIp
+    , llUserIP
     , llKey
     , llLanguage
     , llPageToken
-    , llOauthToken
+    , llOAuthToken
     , llMaxResults
     , llFields
-    , llAlt
     ) where
 
 import           Network.Google.Games.Types
@@ -52,13 +51,13 @@ type LeaderboardsListResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
+             QueryParam "key" Key :>
                QueryParam "language" Text :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "oauth_token" Text :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "maxResults" Int32 :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :>
+                         QueryParam "alt" AltJSON :>
                            Get '[JSON] LeaderboardListResponse
 
 -- | Lists all the leaderboard metadata for your application.
@@ -67,14 +66,13 @@ type LeaderboardsListResource =
 data LeaderboardsList' = LeaderboardsList'
     { _llQuotaUser   :: !(Maybe Text)
     , _llPrettyPrint :: !Bool
-    , _llUserIp      :: !(Maybe Text)
-    , _llKey         :: !(Maybe Text)
+    , _llUserIP      :: !(Maybe Text)
+    , _llKey         :: !(Maybe Key)
     , _llLanguage    :: !(Maybe Text)
     , _llPageToken   :: !(Maybe Text)
-    , _llOauthToken  :: !(Maybe Text)
+    , _llOAuthToken  :: !(Maybe OAuthToken)
     , _llMaxResults  :: !(Maybe Int32)
     , _llFields      :: !(Maybe Text)
-    , _llAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LeaderboardsList'' with the minimum fields required to make a request.
@@ -85,7 +83,7 @@ data LeaderboardsList' = LeaderboardsList'
 --
 -- * 'llPrettyPrint'
 --
--- * 'llUserIp'
+-- * 'llUserIP'
 --
 -- * 'llKey'
 --
@@ -93,27 +91,24 @@ data LeaderboardsList' = LeaderboardsList'
 --
 -- * 'llPageToken'
 --
--- * 'llOauthToken'
+-- * 'llOAuthToken'
 --
 -- * 'llMaxResults'
 --
 -- * 'llFields'
---
--- * 'llAlt'
 leaderboardsList'
     :: LeaderboardsList'
 leaderboardsList' =
     LeaderboardsList'
     { _llQuotaUser = Nothing
     , _llPrettyPrint = True
-    , _llUserIp = Nothing
+    , _llUserIP = Nothing
     , _llKey = Nothing
     , _llLanguage = Nothing
     , _llPageToken = Nothing
-    , _llOauthToken = Nothing
+    , _llOAuthToken = Nothing
     , _llMaxResults = Nothing
     , _llFields = Nothing
-    , _llAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -131,13 +126,13 @@ llPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-llUserIp :: Lens' LeaderboardsList' (Maybe Text)
-llUserIp = lens _llUserIp (\ s a -> s{_llUserIp = a})
+llUserIP :: Lens' LeaderboardsList' (Maybe Text)
+llUserIP = lens _llUserIP (\ s a -> s{_llUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-llKey :: Lens' LeaderboardsList' (Maybe Text)
+llKey :: Lens' LeaderboardsList' (Maybe Key)
 llKey = lens _llKey (\ s a -> s{_llKey = a})
 
 -- | The preferred language to use for strings returned by this method.
@@ -151,9 +146,9 @@ llPageToken
   = lens _llPageToken (\ s a -> s{_llPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-llOauthToken :: Lens' LeaderboardsList' (Maybe Text)
-llOauthToken
-  = lens _llOauthToken (\ s a -> s{_llOauthToken = a})
+llOAuthToken :: Lens' LeaderboardsList' (Maybe OAuthToken)
+llOAuthToken
+  = lens _llOAuthToken (\ s a -> s{_llOAuthToken = a})
 
 -- | The maximum number of leaderboards to return in the response. For any
 -- response, the actual number of leaderboards returned may be less than
@@ -166,22 +161,22 @@ llMaxResults
 llFields :: Lens' LeaderboardsList' (Maybe Text)
 llFields = lens _llFields (\ s a -> s{_llFields = a})
 
--- | Data format for the response.
-llAlt :: Lens' LeaderboardsList' Alt
-llAlt = lens _llAlt (\ s a -> s{_llAlt = a})
+instance GoogleAuth LeaderboardsList' where
+        authKey = llKey . _Just
+        authToken = llOAuthToken . _Just
 
 instance GoogleRequest LeaderboardsList' where
         type Rs LeaderboardsList' = LeaderboardListResponse
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u LeaderboardsList'{..}
-          = go _llQuotaUser (Just _llPrettyPrint) _llUserIp
+          = go _llQuotaUser (Just _llPrettyPrint) _llUserIP
               _llKey
               _llLanguage
               _llPageToken
-              _llOauthToken
+              _llOAuthToken
               _llMaxResults
               _llFields
-              (Just _llAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy LeaderboardsListResource)

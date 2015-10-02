@@ -34,12 +34,11 @@ module Network.Google.Resource.GamesManagement.Events.ResetForAllPlayers
     -- * Request Lenses
     , erfapQuotaUser
     , erfapPrettyPrint
-    , erfapUserIp
+    , erfapUserIP
     , erfapKey
-    , erfapOauthToken
+    , erfapOAuthToken
     , erfapEventId
     , erfapFields
-    , erfapAlt
     ) where
 
 import           Network.Google.GamesManagement.Types
@@ -54,10 +53,10 @@ type EventsResetForAllPlayersResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] ()
+                       QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Resets the event with the given ID for all players. This method is only
 -- available to user accounts for your developer console. Only draft events
@@ -67,12 +66,11 @@ type EventsResetForAllPlayersResource =
 data EventsResetForAllPlayers' = EventsResetForAllPlayers'
     { _erfapQuotaUser   :: !(Maybe Text)
     , _erfapPrettyPrint :: !Bool
-    , _erfapUserIp      :: !(Maybe Text)
-    , _erfapKey         :: !(Maybe Text)
-    , _erfapOauthToken  :: !(Maybe Text)
+    , _erfapUserIP      :: !(Maybe Text)
+    , _erfapKey         :: !(Maybe Key)
+    , _erfapOAuthToken  :: !(Maybe OAuthToken)
     , _erfapEventId     :: !Text
     , _erfapFields      :: !(Maybe Text)
-    , _erfapAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsResetForAllPlayers'' with the minimum fields required to make a request.
@@ -83,17 +81,15 @@ data EventsResetForAllPlayers' = EventsResetForAllPlayers'
 --
 -- * 'erfapPrettyPrint'
 --
--- * 'erfapUserIp'
+-- * 'erfapUserIP'
 --
 -- * 'erfapKey'
 --
--- * 'erfapOauthToken'
+-- * 'erfapOAuthToken'
 --
 -- * 'erfapEventId'
 --
 -- * 'erfapFields'
---
--- * 'erfapAlt'
 eventsResetForAllPlayers'
     :: Text -- ^ 'eventId'
     -> EventsResetForAllPlayers'
@@ -101,12 +97,11 @@ eventsResetForAllPlayers' pErfapEventId_ =
     EventsResetForAllPlayers'
     { _erfapQuotaUser = Nothing
     , _erfapPrettyPrint = True
-    , _erfapUserIp = Nothing
+    , _erfapUserIP = Nothing
     , _erfapKey = Nothing
-    , _erfapOauthToken = Nothing
+    , _erfapOAuthToken = Nothing
     , _erfapEventId = pErfapEventId_
     , _erfapFields = Nothing
-    , _erfapAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -125,21 +120,21 @@ erfapPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-erfapUserIp :: Lens' EventsResetForAllPlayers' (Maybe Text)
-erfapUserIp
-  = lens _erfapUserIp (\ s a -> s{_erfapUserIp = a})
+erfapUserIP :: Lens' EventsResetForAllPlayers' (Maybe Text)
+erfapUserIP
+  = lens _erfapUserIP (\ s a -> s{_erfapUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-erfapKey :: Lens' EventsResetForAllPlayers' (Maybe Text)
+erfapKey :: Lens' EventsResetForAllPlayers' (Maybe Key)
 erfapKey = lens _erfapKey (\ s a -> s{_erfapKey = a})
 
 -- | OAuth 2.0 token for the current user.
-erfapOauthToken :: Lens' EventsResetForAllPlayers' (Maybe Text)
-erfapOauthToken
-  = lens _erfapOauthToken
-      (\ s a -> s{_erfapOauthToken = a})
+erfapOAuthToken :: Lens' EventsResetForAllPlayers' (Maybe OAuthToken)
+erfapOAuthToken
+  = lens _erfapOAuthToken
+      (\ s a -> s{_erfapOAuthToken = a})
 
 -- | The ID of the event.
 erfapEventId :: Lens' EventsResetForAllPlayers' Text
@@ -151,9 +146,9 @@ erfapFields :: Lens' EventsResetForAllPlayers' (Maybe Text)
 erfapFields
   = lens _erfapFields (\ s a -> s{_erfapFields = a})
 
--- | Data format for the response.
-erfapAlt :: Lens' EventsResetForAllPlayers' Alt
-erfapAlt = lens _erfapAlt (\ s a -> s{_erfapAlt = a})
+instance GoogleAuth EventsResetForAllPlayers' where
+        authKey = erfapKey . _Just
+        authToken = erfapOAuthToken . _Just
 
 instance GoogleRequest EventsResetForAllPlayers'
          where
@@ -161,12 +156,12 @@ instance GoogleRequest EventsResetForAllPlayers'
         request = requestWithRoute defReq gamesManagementURL
         requestWithRoute r u EventsResetForAllPlayers'{..}
           = go _erfapQuotaUser (Just _erfapPrettyPrint)
-              _erfapUserIp
+              _erfapUserIP
               _erfapKey
-              _erfapOauthToken
+              _erfapOAuthToken
               _erfapEventId
               _erfapFields
-              (Just _erfapAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy EventsResetForAllPlayersResource)

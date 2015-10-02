@@ -26,9 +26,9 @@ data CalendarListEntry = CalendarListEntry
     , _cleLocation             :: !(Maybe Text)
     , _cleKind                 :: !Text
     , _cleNotificationSettings :: !(Maybe CalendarListEntryNotificationSettings)
-    , _cleBackgroundColor      :: !(Maybe Text)
-    , _cleForegroundColor      :: !(Maybe Text)
-    , _cleDefaultReminders     :: !(Maybe [Maybe EventReminder])
+    , _cleBackgRoundColor      :: !(Maybe Text)
+    , _cleForegRoundColor      :: !(Maybe Text)
+    , _cleDefaultReminders     :: !(Maybe [EventReminder])
     , _cleSelected             :: !Bool
     , _clePrimary              :: !Bool
     , _cleHidden               :: !Bool
@@ -55,9 +55,9 @@ data CalendarListEntry = CalendarListEntry
 --
 -- * 'cleNotificationSettings'
 --
--- * 'cleBackgroundColor'
+-- * 'cleBackgRoundColor'
 --
--- * 'cleForegroundColor'
+-- * 'cleForegRoundColor'
 --
 -- * 'cleDefaultReminders'
 --
@@ -89,8 +89,8 @@ calendarListEntry =
     , _cleLocation = Nothing
     , _cleKind = "calendar#calendarListEntry"
     , _cleNotificationSettings = Nothing
-    , _cleBackgroundColor = Nothing
-    , _cleForegroundColor = Nothing
+    , _cleBackgRoundColor = Nothing
+    , _cleForegRoundColor = Nothing
     , _cleDefaultReminders = Nothing
     , _cleSelected = False
     , _clePrimary = False
@@ -134,22 +134,22 @@ cleNotificationSettings
 -- This property supersedes the index-based colorId property. To set or
 -- change this property, you need to specify colorRgbFormat=true in the
 -- parameters of the insert, update and patch methods. Optional.
-cleBackgroundColor :: Lens' CalendarListEntry (Maybe Text)
-cleBackgroundColor
-  = lens _cleBackgroundColor
-      (\ s a -> s{_cleBackgroundColor = a})
+cleBackgRoundColor :: Lens' CalendarListEntry (Maybe Text)
+cleBackgRoundColor
+  = lens _cleBackgRoundColor
+      (\ s a -> s{_cleBackgRoundColor = a})
 
 -- | The foreground color of the calendar in the hexadecimal format
 -- \"#ffffff\". This property supersedes the index-based colorId property.
 -- To set or change this property, you need to specify colorRgbFormat=true
 -- in the parameters of the insert, update and patch methods. Optional.
-cleForegroundColor :: Lens' CalendarListEntry (Maybe Text)
-cleForegroundColor
-  = lens _cleForegroundColor
-      (\ s a -> s{_cleForegroundColor = a})
+cleForegRoundColor :: Lens' CalendarListEntry (Maybe Text)
+cleForegRoundColor
+  = lens _cleForegRoundColor
+      (\ s a -> s{_cleForegRoundColor = a})
 
 -- | The default reminders that the authenticated user has for this calendar.
-cleDefaultReminders :: Lens' CalendarListEntry [Maybe EventReminder]
+cleDefaultReminders :: Lens' CalendarListEntry [EventReminder]
 cleDefaultReminders
   = lens _cleDefaultReminders
       (\ s a -> s{_cleDefaultReminders = a})
@@ -258,8 +258,8 @@ instance ToJSON CalendarListEntry where
                   Just ("kind" .= _cleKind),
                   ("notificationSettings" .=) <$>
                     _cleNotificationSettings,
-                  ("backgroundColor" .=) <$> _cleBackgroundColor,
-                  ("foregroundColor" .=) <$> _cleForegroundColor,
+                  ("backgroundColor" .=) <$> _cleBackgRoundColor,
+                  ("foregroundColor" .=) <$> _cleForegRoundColor,
                   ("defaultReminders" .=) <$> _cleDefaultReminders,
                   Just ("selected" .= _cleSelected),
                   Just ("primary" .= _clePrimary),
@@ -276,7 +276,7 @@ instance ToJSON CalendarListEntry where
 --
 -- /See:/ 'calendarListEntryNotificationSettings' smart constructor.
 newtype CalendarListEntryNotificationSettings = CalendarListEntryNotificationSettings
-    { _clensNotifications :: Maybe [Maybe CalendarNotification]
+    { _clensNotifications :: Maybe [CalendarNotification]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CalendarListEntryNotificationSettings' with the minimum fields required to make a request.
@@ -292,7 +292,7 @@ calendarListEntryNotificationSettings =
     }
 
 -- | The list of notifications set for this calendar.
-clensNotifications :: Lens' CalendarListEntryNotificationSettings [Maybe CalendarNotification]
+clensNotifications :: Lens' CalendarListEntryNotificationSettings [CalendarNotification]
 clensNotifications
   = lens _clensNotifications
       (\ s a -> s{_clensNotifications = a})
@@ -318,21 +318,21 @@ instance ToJSON CalendarListEntryNotificationSettings
 -- /See:/ 'event' smart constructor.
 data Event = Event
     { _eSummary                 :: !(Maybe Text)
-    , _eOriginalStartTime       :: !(Maybe (Maybe EventDateTime))
+    , _eOriginalStartTime       :: !(Maybe EventDateTime)
     , _eCreator                 :: !(Maybe EventCreator)
     , _eStatus                  :: !(Maybe Text)
     , _eGuestsCanModify         :: !Bool
     , _eEtag                    :: !(Maybe Text)
-    , _eAttachments             :: !(Maybe [Maybe EventAttachment])
+    , _eAttachments             :: !(Maybe [EventAttachment])
     , _eLocked                  :: !Bool
     , _eLocation                :: !(Maybe Text)
-    , _eAttendees               :: !(Maybe [Maybe EventAttendee])
+    , _eAttendees               :: !(Maybe [EventAttendee])
     , _eReminders               :: !(Maybe EventReminders)
     , _eKind                    :: !Text
     , _eCreated                 :: !(Maybe UTCTime)
     , _eTransparency            :: !Text
     , _eRecurringEventId        :: !(Maybe Text)
-    , _eStart                   :: !(Maybe (Maybe EventDateTime))
+    , _eStart                   :: !(Maybe EventDateTime)
     , _ePrivateCopy             :: !Bool
     , _eEndTimeUnspecified      :: !Bool
     , _eExtendedProperties      :: !(Maybe EventExtendedProperties)
@@ -341,12 +341,12 @@ data Event = Event
     , _eRecurrence              :: !(Maybe [Text])
     , _eGadget                  :: !(Maybe EventGadget)
     , _eSequence                :: !(Maybe Int32)
-    , _eICalUID                 :: !(Maybe Text)
-    , _eEnd                     :: !(Maybe (Maybe EventDateTime))
+    , _eICalUId                 :: !(Maybe Text)
+    , _eEnd                     :: !(Maybe EventDateTime)
     , _eAttendeesOmitted        :: !Bool
     , _eSource                  :: !(Maybe EventSource)
     , _eId                      :: !(Maybe Text)
-    , _eHtmlLink                :: !(Maybe Text)
+    , _eHTMLLink                :: !(Maybe Text)
     , _eUpdated                 :: !(Maybe UTCTime)
     , _eColorId                 :: !(Maybe Text)
     , _eAnyoneCanAddSelf        :: !Bool
@@ -408,7 +408,7 @@ data Event = Event
 --
 -- * 'eSequence'
 --
--- * 'eICalUID'
+-- * 'eICalUId'
 --
 -- * 'eEnd'
 --
@@ -418,7 +418,7 @@ data Event = Event
 --
 -- * 'eId'
 --
--- * 'eHtmlLink'
+-- * 'eHTMLLink'
 --
 -- * 'eUpdated'
 --
@@ -461,12 +461,12 @@ event =
     , _eRecurrence = Nothing
     , _eGadget = Nothing
     , _eSequence = Nothing
-    , _eICalUID = Nothing
+    , _eICalUId = Nothing
     , _eEnd = Nothing
     , _eAttendeesOmitted = False
     , _eSource = Nothing
     , _eId = Nothing
-    , _eHtmlLink = Nothing
+    , _eHTMLLink = Nothing
     , _eUpdated = Nothing
     , _eColorId = Nothing
     , _eAnyoneCanAddSelf = False
@@ -483,7 +483,7 @@ eSummary = lens _eSummary (\ s a -> s{_eSummary = a})
 -- | For an instance of a recurring event, this is the time at which this
 -- event would start according to the recurrence data in the recurring
 -- event identified by recurringEventId. Immutable.
-eOriginalStartTime :: Lens' Event (Maybe (Maybe EventDateTime))
+eOriginalStartTime :: Lens' Event (Maybe EventDateTime)
 eOriginalStartTime
   = lens _eOriginalStartTime
       (\ s a -> s{_eOriginalStartTime = a})
@@ -514,7 +514,7 @@ eEtag = lens _eEtag (\ s a -> s{_eEtag = a})
 -- are supported. In order to modify attachments the supportsAttachments
 -- request parameter should be set to true. There can be at most 25
 -- attachments per event,
-eAttachments :: Lens' Event [Maybe EventAttachment]
+eAttachments :: Lens' Event [EventAttachment]
 eAttachments
   = lens _eAttachments (\ s a -> s{_eAttachments = a})
       . _Default
@@ -533,7 +533,7 @@ eLocation
 
 -- | The attendees of the event. See the Events with attendees guide for more
 -- information on scheduling events with other calendar users.
-eAttendees :: Lens' Event [Maybe EventAttendee]
+eAttendees :: Lens' Event [EventAttendee]
 eAttendees
   = lens _eAttendees (\ s a -> s{_eAttendees = a}) .
       _Default
@@ -570,7 +570,7 @@ eRecurringEventId
 
 -- | The (inclusive) start time of the event. For a recurring event, this is
 -- the start time of the first instance.
-eStart :: Lens' Event (Maybe (Maybe EventDateTime))
+eStart :: Lens' Event (Maybe EventDateTime)
 eStart = lens _eStart (\ s a -> s{_eStart = a})
 
 -- | Whether this is a private event copy where changes are not shared with
@@ -639,12 +639,12 @@ eSequence
 -- creation time. One difference in their semantics is that in recurring
 -- events, all occurrences of one event have different ids while they all
 -- share the same icalUIDs.
-eICalUID :: Lens' Event (Maybe Text)
-eICalUID = lens _eICalUID (\ s a -> s{_eICalUID = a})
+eICalUId :: Lens' Event (Maybe Text)
+eICalUId = lens _eICalUId (\ s a -> s{_eICalUId = a})
 
 -- | The (exclusive) end time of the event. For a recurring event, this is
 -- the end time of the first instance.
-eEnd :: Lens' Event (Maybe (Maybe EventDateTime))
+eEnd :: Lens' Event (Maybe EventDateTime)
 eEnd = lens _eEnd (\ s a -> s{_eEnd = a})
 
 -- | Whether attendees may have been omitted from the event\'s
@@ -681,9 +681,9 @@ eId :: Lens' Event (Maybe Text)
 eId = lens _eId (\ s a -> s{_eId = a})
 
 -- | An absolute link to this event in the Google Calendar Web UI. Read-only.
-eHtmlLink :: Lens' Event (Maybe Text)
-eHtmlLink
-  = lens _eHtmlLink (\ s a -> s{_eHtmlLink = a})
+eHTMLLink :: Lens' Event (Maybe Text)
+eHTMLLink
+  = lens _eHTMLLink (\ s a -> s{_eHTMLLink = a})
 
 -- | Last modification time of the event (as a RFC3339 timestamp). Read-only.
 eUpdated :: Lens' Event (Maybe UTCTime)
@@ -798,10 +798,10 @@ instance ToJSON Event where
                   ("recurrence" .=) <$> _eRecurrence,
                   ("gadget" .=) <$> _eGadget,
                   ("sequence" .=) <$> _eSequence,
-                  ("iCalUID" .=) <$> _eICalUID, ("end" .=) <$> _eEnd,
+                  ("iCalUID" .=) <$> _eICalUId, ("end" .=) <$> _eEnd,
                   Just ("attendeesOmitted" .= _eAttendeesOmitted),
                   ("source" .=) <$> _eSource, ("id" .=) <$> _eId,
-                  ("htmlLink" .=) <$> _eHtmlLink,
+                  ("htmlLink" .=) <$> _eHTMLLink,
                   ("updated" .=) <$> _eUpdated,
                   ("colorId" .=) <$> _eColorId,
                   Just ("anyoneCanAddSelf" .= _eAnyoneCanAddSelf),
@@ -920,7 +920,7 @@ data Settings = Settings
     { _sEtag          :: !(Maybe Text)
     , _sNextPageToken :: !(Maybe Text)
     , _sKind          :: !Text
-    , _sItems         :: !(Maybe [Maybe Setting])
+    , _sItems         :: !(Maybe [Setting])
     , _sNextSyncToken :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -964,7 +964,7 @@ sKind :: Lens' Settings Text
 sKind = lens _sKind (\ s a -> s{_sKind = a})
 
 -- | List of user settings.
-sItems :: Lens' Settings [Maybe Setting]
+sItems :: Lens' Settings [Setting]
 sItems
   = lens _sItems (\ s a -> s{_sItems = a}) . _Default .
       _Coerce
@@ -999,7 +999,7 @@ instance ToJSON Settings where
 --
 -- /See:/ 'eventAttachment' smart constructor.
 data EventAttachment = EventAttachment
-    { _eaFileUrl  :: !(Maybe Text)
+    { _eaFileURL  :: !(Maybe Text)
     , _eaIconLink :: !(Maybe Text)
     , _eaMimeType :: !(Maybe Text)
     , _eaTitle    :: !(Maybe Text)
@@ -1010,7 +1010,7 @@ data EventAttachment = EventAttachment
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'eaFileUrl'
+-- * 'eaFileURL'
 --
 -- * 'eaIconLink'
 --
@@ -1023,7 +1023,7 @@ eventAttachment
     :: EventAttachment
 eventAttachment =
     EventAttachment
-    { _eaFileUrl = Nothing
+    { _eaFileURL = Nothing
     , _eaIconLink = Nothing
     , _eaMimeType = Nothing
     , _eaTitle = Nothing
@@ -1033,9 +1033,9 @@ eventAttachment =
 -- | URL link to the attachment. For adding Google Drive file attachments use
 -- the same format as in alternateLink property of the Files resource in
 -- the Drive API.
-eaFileUrl :: Lens' EventAttachment (Maybe Text)
-eaFileUrl
-  = lens _eaFileUrl (\ s a -> s{_eaFileUrl = a})
+eaFileURL :: Lens' EventAttachment (Maybe Text)
+eaFileURL
+  = lens _eaFileURL (\ s a -> s{_eaFileURL = a})
 
 -- | URL link to the attachment\'s icon. Read-only.
 eaIconLink :: Lens' EventAttachment (Maybe Text)
@@ -1070,7 +1070,7 @@ instance ToJSON EventAttachment where
         toJSON EventAttachment{..}
           = object
               (catMaybes
-                 [("fileUrl" .=) <$> _eaFileUrl,
+                 [("fileUrl" .=) <$> _eaFileURL,
                   ("iconLink" .=) <$> _eaIconLink,
                   ("mimeType" .=) <$> _eaMimeType,
                   ("title" .=) <$> _eaTitle,
@@ -1189,35 +1189,35 @@ instance ToJSON TimePeriod where
 --
 -- /See:/ 'colorDefinition' smart constructor.
 data ColorDefinition = ColorDefinition
-    { _cdForeground :: !(Maybe Text)
-    , _cdBackground :: !(Maybe Text)
+    { _cdForegRound :: !(Maybe Text)
+    , _cdBackgRound :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ColorDefinition' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cdForeground'
+-- * 'cdForegRound'
 --
--- * 'cdBackground'
+-- * 'cdBackgRound'
 colorDefinition
     :: ColorDefinition
 colorDefinition =
     ColorDefinition
-    { _cdForeground = Nothing
-    , _cdBackground = Nothing
+    { _cdForegRound = Nothing
+    , _cdBackgRound = Nothing
     }
 
 -- | The foreground color that can be used to write on top of a background
 -- with \'background\' color.
-cdForeground :: Lens' ColorDefinition (Maybe Text)
-cdForeground
-  = lens _cdForeground (\ s a -> s{_cdForeground = a})
+cdForegRound :: Lens' ColorDefinition (Maybe Text)
+cdForegRound
+  = lens _cdForegRound (\ s a -> s{_cdForegRound = a})
 
 -- | The background color associated with this color definition.
-cdBackground :: Lens' ColorDefinition (Maybe Text)
-cdBackground
-  = lens _cdBackground (\ s a -> s{_cdBackground = a})
+cdBackgRound :: Lens' ColorDefinition (Maybe Text)
+cdBackgRound
+  = lens _cdBackgRound (\ s a -> s{_cdBackgRound = a})
 
 instance FromJSON ColorDefinition where
         parseJSON
@@ -1230,8 +1230,8 @@ instance ToJSON ColorDefinition where
         toJSON ColorDefinition{..}
           = object
               (catMaybes
-                 [("foreground" .=) <$> _cdForeground,
-                  ("background" .=) <$> _cdBackground])
+                 [("foreground" .=) <$> _cdForegRound,
+                  ("background" .=) <$> _cdBackgRound])
 
 --
 -- /See:/ 'error'' smart constructor.
@@ -1286,8 +1286,8 @@ instance ToJSON Error where
 --
 -- /See:/ 'freeBusyCalendar' smart constructor.
 data FreeBusyCalendar = FreeBusyCalendar
-    { _fbcBusy   :: !(Maybe [Maybe TimePeriod])
-    , _fbcErrors :: !(Maybe [Maybe Error])
+    { _fbcBusy   :: !(Maybe [TimePeriod])
+    , _fbcErrors :: !(Maybe [Error])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FreeBusyCalendar' with the minimum fields required to make a request.
@@ -1307,13 +1307,13 @@ freeBusyCalendar =
 
 -- | List of time ranges during which this calendar should be regarded as
 -- busy.
-fbcBusy :: Lens' FreeBusyCalendar [Maybe TimePeriod]
+fbcBusy :: Lens' FreeBusyCalendar [TimePeriod]
 fbcBusy
   = lens _fbcBusy (\ s a -> s{_fbcBusy = a}) . _Default
       . _Coerce
 
 -- | Optional error(s) (if computation for the calendar failed).
-fbcErrors :: Lens' FreeBusyCalendar [Maybe Error]
+fbcErrors :: Lens' FreeBusyCalendar [Error]
 fbcErrors
   = lens _fbcErrors (\ s a -> s{_fbcErrors = a}) .
       _Default
@@ -1337,13 +1337,13 @@ instance ToJSON FreeBusyCalendar where
 --
 -- /See:/ 'channel' smart constructor.
 data Channel = Channel
-    { _cResourceUri :: !(Maybe Text)
+    { _cResourceURI :: !(Maybe Text)
     , _cResourceId  :: !(Maybe Text)
     , _cKind        :: !Text
     , _cExpiration  :: !(Maybe Int64)
     , _cToken       :: !(Maybe Text)
     , _cAddress     :: !(Maybe Text)
-    , _cPayload     :: !(Maybe Bool)
+    , _cPayLoad     :: !(Maybe Bool)
     , _cParams      :: !(Maybe ChannelParams)
     , _cId          :: !(Maybe Text)
     , _cType        :: !(Maybe Text)
@@ -1353,7 +1353,7 @@ data Channel = Channel
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cResourceUri'
+-- * 'cResourceURI'
 --
 -- * 'cResourceId'
 --
@@ -1365,7 +1365,7 @@ data Channel = Channel
 --
 -- * 'cAddress'
 --
--- * 'cPayload'
+-- * 'cPayLoad'
 --
 -- * 'cParams'
 --
@@ -1376,22 +1376,22 @@ channel
     :: Channel
 channel =
     Channel
-    { _cResourceUri = Nothing
+    { _cResourceURI = Nothing
     , _cResourceId = Nothing
     , _cKind = "api#channel"
     , _cExpiration = Nothing
     , _cToken = Nothing
     , _cAddress = Nothing
-    , _cPayload = Nothing
+    , _cPayLoad = Nothing
     , _cParams = Nothing
     , _cId = Nothing
     , _cType = Nothing
     }
 
 -- | A version-specific identifier for the watched resource.
-cResourceUri :: Lens' Channel (Maybe Text)
-cResourceUri
-  = lens _cResourceUri (\ s a -> s{_cResourceUri = a})
+cResourceURI :: Lens' Channel (Maybe Text)
+cResourceURI
+  = lens _cResourceURI (\ s a -> s{_cResourceURI = a})
 
 -- | An opaque ID that identifies the resource being watched on this channel.
 -- Stable across different API versions.
@@ -1420,8 +1420,8 @@ cAddress :: Lens' Channel (Maybe Text)
 cAddress = lens _cAddress (\ s a -> s{_cAddress = a})
 
 -- | A Boolean value to indicate whether payload is wanted. Optional.
-cPayload :: Lens' Channel (Maybe Bool)
-cPayload = lens _cPayload (\ s a -> s{_cPayload = a})
+cPayLoad :: Lens' Channel (Maybe Bool)
+cPayLoad = lens _cPayLoad (\ s a -> s{_cPayLoad = a})
 
 -- | Additional parameters controlling delivery channel behavior. Optional.
 cParams :: Lens' Channel (Maybe ChannelParams)
@@ -1454,13 +1454,13 @@ instance ToJSON Channel where
         toJSON Channel{..}
           = object
               (catMaybes
-                 [("resourceUri" .=) <$> _cResourceUri,
+                 [("resourceUri" .=) <$> _cResourceURI,
                   ("resourceId" .=) <$> _cResourceId,
                   Just ("kind" .= _cKind),
                   ("expiration" .=) <$> _cExpiration,
                   ("token" .=) <$> _cToken,
                   ("address" .=) <$> _cAddress,
-                  ("payload" .=) <$> _cPayload,
+                  ("payload" .=) <$> _cPayLoad,
                   ("params" .=) <$> _cParams, ("id" .=) <$> _cId,
                   ("type" .=) <$> _cType])
 
@@ -1554,7 +1554,7 @@ instance ToJSON Setting where
 --
 -- /See:/ 'eventReminders' smart constructor.
 data EventReminders = EventReminders
-    { _erOverrides  :: !(Maybe [Maybe EventReminder])
+    { _erOverrides  :: !(Maybe [EventReminder])
     , _erUseDefault :: !(Maybe Bool)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1577,7 +1577,7 @@ eventReminders =
 -- reminders specific to the event, or, if not set, indicates that no
 -- reminders are set for this event. The maximum number of override
 -- reminders is 5.
-erOverrides :: Lens' EventReminders [Maybe EventReminder]
+erOverrides :: Lens' EventReminders [EventReminder]
 erOverrides
   = lens _erOverrides (\ s a -> s{_erOverrides = a}) .
       _Default
@@ -1731,8 +1731,8 @@ data Events = Events
     , _eveEtag             :: !(Maybe Text)
     , _eveNextPageToken    :: !(Maybe Text)
     , _eveKind             :: !Text
-    , _eveItems            :: !(Maybe [Maybe Event])
-    , _eveDefaultReminders :: !(Maybe [Maybe EventReminder])
+    , _eveItems            :: !(Maybe [Event])
+    , _eveDefaultReminders :: !(Maybe [EventReminder])
     , _eveUpdated          :: !(Maybe UTCTime)
     , _eveAccessRole       :: !(Maybe Text)
     , _eveTimeZone         :: !(Maybe Text)
@@ -1803,7 +1803,7 @@ eveKind :: Lens' Events Text
 eveKind = lens _eveKind (\ s a -> s{_eveKind = a})
 
 -- | List of events on the calendar.
-eveItems :: Lens' Events [Maybe Event]
+eveItems :: Lens' Events [Event]
 eveItems
   = lens _eveItems (\ s a -> s{_eveItems = a}) .
       _Default
@@ -1812,7 +1812,7 @@ eveItems
 -- | The default reminders on the calendar for the authenticated user. These
 -- reminders apply to all events on this calendar that do not explicitly
 -- override them (i.e. do not have reminders.useDefault set to True).
-eveDefaultReminders :: Lens' Events [Maybe EventReminder]
+eveDefaultReminders :: Lens' Events [EventReminder]
 eveDefaultReminders
   = lens _eveDefaultReminders
       (\ s a -> s{_eveDefaultReminders = a})
@@ -2471,7 +2471,7 @@ data CalendarList = CalendarList
     { _clEtag          :: !(Maybe Text)
     , _clNextPageToken :: !(Maybe Text)
     , _clKind          :: !Text
-    , _clItems         :: !(Maybe [Maybe CalendarListEntry])
+    , _clItems         :: !(Maybe [CalendarListEntry])
     , _clNextSyncToken :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -2515,7 +2515,7 @@ clKind :: Lens' CalendarList Text
 clKind = lens _clKind (\ s a -> s{_clKind = a})
 
 -- | Calendars that are present on the user\'s calendar list.
-clItems :: Lens' CalendarList [Maybe CalendarListEntry]
+clItems :: Lens' CalendarList [CalendarListEntry]
 clItems
   = lens _clItems (\ s a -> s{_clItems = a}) . _Default
       . _Coerce
@@ -2552,7 +2552,7 @@ instance ToJSON CalendarList where
 data FreeBusyRequest = FreeBusyRequest
     { _fCalendarExpansionMax :: !(Maybe Int32)
     , _fTimeMin              :: !(Maybe UTCTime)
-    , _fItems                :: !(Maybe [Maybe FreeBusyRequestItem])
+    , _fItems                :: !(Maybe [FreeBusyRequestItem])
     , _fGroupExpansionMax    :: !(Maybe Int32)
     , _fTimeZone             :: !Text
     , _fTimeMax              :: !(Maybe UTCTime)
@@ -2597,7 +2597,7 @@ fTimeMin :: Lens' FreeBusyRequest (Maybe UTCTime)
 fTimeMin = lens _fTimeMin (\ s a -> s{_fTimeMin = a})
 
 -- | List of calendars and\/or groups to query.
-fItems :: Lens' FreeBusyRequest [Maybe FreeBusyRequestItem]
+fItems :: Lens' FreeBusyRequest [FreeBusyRequestItem]
 fItems
   = lens _fItems (\ s a -> s{_fItems = a}) . _Default .
       _Coerce
@@ -2954,7 +2954,7 @@ instance ToJSON Colors where
 -- /See:/ 'freeBusyGroup' smart constructor.
 data FreeBusyGroup = FreeBusyGroup
     { _fbgCalendars :: !(Maybe [Text])
-    , _fbgErrors    :: !(Maybe [Maybe Error])
+    , _fbgErrors    :: !(Maybe [Error])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FreeBusyGroup' with the minimum fields required to make a request.
@@ -2980,7 +2980,7 @@ fbgCalendars
       . _Coerce
 
 -- | Optional error(s) (if computation for the group failed).
-fbgErrors :: Lens' FreeBusyGroup [Maybe Error]
+fbgErrors :: Lens' FreeBusyGroup [Error]
 fbgErrors
   = lens _fbgErrors (\ s a -> s{_fbgErrors = a}) .
       _Default
@@ -3007,7 +3007,7 @@ data ACL = ACL
     { _aclEtag          :: !(Maybe Text)
     , _aclNextPageToken :: !(Maybe Text)
     , _aclKind          :: !Text
-    , _aclItems         :: !(Maybe [Maybe ACLRule])
+    , _aclItems         :: !(Maybe [ACLRule])
     , _aclNextSyncToken :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -3051,7 +3051,7 @@ aclKind :: Lens' ACL Text
 aclKind = lens _aclKind (\ s a -> s{_aclKind = a})
 
 -- | List of rules on the access control list.
-aclItems :: Lens' ACL [Maybe ACLRule]
+aclItems :: Lens' ACL [ACLRule]
 aclItems
   = lens _aclItems (\ s a -> s{_aclItems = a}) .
       _Default
@@ -3091,7 +3091,7 @@ instance ToJSON ACL where
 --
 -- /See:/ 'eventSource' smart constructor.
 data EventSource = EventSource
-    { _esUrl   :: !(Maybe Text)
+    { _esURL   :: !(Maybe Text)
     , _esTitle :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -3099,21 +3099,21 @@ data EventSource = EventSource
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'esUrl'
+-- * 'esURL'
 --
 -- * 'esTitle'
 eventSource
     :: EventSource
 eventSource =
     EventSource
-    { _esUrl = Nothing
+    { _esURL = Nothing
     , _esTitle = Nothing
     }
 
 -- | URL of the source pointing to a resource. The URL scheme must be HTTP or
 -- HTTPS.
-esUrl :: Lens' EventSource (Maybe Text)
-esUrl = lens _esUrl (\ s a -> s{_esUrl = a})
+esURL :: Lens' EventSource (Maybe Text)
+esURL = lens _esURL (\ s a -> s{_esURL = a})
 
 -- | Title of the source; for example a title of a web page or an email
 -- subject.
@@ -3130,4 +3130,4 @@ instance ToJSON EventSource where
         toJSON EventSource{..}
           = object
               (catMaybes
-                 [("url" .=) <$> _esUrl, ("title" .=) <$> _esTitle])
+                 [("url" .=) <$> _esURL, ("title" .=) <$> _esTitle])

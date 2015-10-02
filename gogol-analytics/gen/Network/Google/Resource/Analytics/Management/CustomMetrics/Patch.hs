@@ -35,12 +35,12 @@ module Network.Google.Resource.Analytics.Management.CustomMetrics.Patch
     , mcmpCustomMetricId
     , mcmpWebPropertyId
     , mcmpIgnoreCustomDataSourceLinks
-    , mcmpUserIp
+    , mcmpUserIP
     , mcmpAccountId
     , mcmpKey
-    , mcmpOauthToken
+    , mcmpCustomMetric
+    , mcmpOAuthToken
     , mcmpFields
-    , mcmpAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -60,11 +60,12 @@ type ManagementCustomMetricsPatchResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "ignoreCustomDataSourceLinks" Bool :>
                          QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "fields" Text :>
-                                 QueryParam "alt" Alt :>
-                                   Patch '[JSON] CustomMetric
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON] CustomMetric :>
+                                     Patch '[JSON] CustomMetric
 
 -- | Updates an existing custom metric. This method supports patch semantics.
 --
@@ -75,12 +76,12 @@ data ManagementCustomMetricsPatch' = ManagementCustomMetricsPatch'
     , _mcmpCustomMetricId              :: !Text
     , _mcmpWebPropertyId               :: !Text
     , _mcmpIgnoreCustomDataSourceLinks :: !Bool
-    , _mcmpUserIp                      :: !(Maybe Text)
+    , _mcmpUserIP                      :: !(Maybe Text)
     , _mcmpAccountId                   :: !Text
-    , _mcmpKey                         :: !(Maybe Text)
-    , _mcmpOauthToken                  :: !(Maybe Text)
+    , _mcmpKey                         :: !(Maybe Key)
+    , _mcmpCustomMetric                :: !CustomMetric
+    , _mcmpOAuthToken                  :: !(Maybe OAuthToken)
     , _mcmpFields                      :: !(Maybe Text)
-    , _mcmpAlt                         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementCustomMetricsPatch'' with the minimum fields required to make a request.
@@ -97,35 +98,36 @@ data ManagementCustomMetricsPatch' = ManagementCustomMetricsPatch'
 --
 -- * 'mcmpIgnoreCustomDataSourceLinks'
 --
--- * 'mcmpUserIp'
+-- * 'mcmpUserIP'
 --
 -- * 'mcmpAccountId'
 --
 -- * 'mcmpKey'
 --
--- * 'mcmpOauthToken'
+-- * 'mcmpCustomMetric'
+--
+-- * 'mcmpOAuthToken'
 --
 -- * 'mcmpFields'
---
--- * 'mcmpAlt'
 managementCustomMetricsPatch'
     :: Text -- ^ 'customMetricId'
     -> Text -- ^ 'webPropertyId'
     -> Text -- ^ 'accountId'
+    -> CustomMetric -- ^ 'CustomMetric'
     -> ManagementCustomMetricsPatch'
-managementCustomMetricsPatch' pMcmpCustomMetricId_ pMcmpWebPropertyId_ pMcmpAccountId_ =
+managementCustomMetricsPatch' pMcmpCustomMetricId_ pMcmpWebPropertyId_ pMcmpAccountId_ pMcmpCustomMetric_ =
     ManagementCustomMetricsPatch'
     { _mcmpQuotaUser = Nothing
     , _mcmpPrettyPrint = False
     , _mcmpCustomMetricId = pMcmpCustomMetricId_
     , _mcmpWebPropertyId = pMcmpWebPropertyId_
     , _mcmpIgnoreCustomDataSourceLinks = False
-    , _mcmpUserIp = Nothing
+    , _mcmpUserIP = Nothing
     , _mcmpAccountId = pMcmpAccountId_
     , _mcmpKey = Nothing
-    , _mcmpOauthToken = Nothing
+    , _mcmpCustomMetric = pMcmpCustomMetric_
+    , _mcmpOAuthToken = Nothing
     , _mcmpFields = Nothing
-    , _mcmpAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -163,9 +165,9 @@ mcmpIgnoreCustomDataSourceLinks
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mcmpUserIp :: Lens' ManagementCustomMetricsPatch' (Maybe Text)
-mcmpUserIp
-  = lens _mcmpUserIp (\ s a -> s{_mcmpUserIp = a})
+mcmpUserIP :: Lens' ManagementCustomMetricsPatch' (Maybe Text)
+mcmpUserIP
+  = lens _mcmpUserIP (\ s a -> s{_mcmpUserIP = a})
 
 -- | Account ID for the custom metric to update.
 mcmpAccountId :: Lens' ManagementCustomMetricsPatch' Text
@@ -176,23 +178,30 @@ mcmpAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mcmpKey :: Lens' ManagementCustomMetricsPatch' (Maybe Text)
+mcmpKey :: Lens' ManagementCustomMetricsPatch' (Maybe Key)
 mcmpKey = lens _mcmpKey (\ s a -> s{_mcmpKey = a})
 
+-- | Multipart request metadata.
+mcmpCustomMetric :: Lens' ManagementCustomMetricsPatch' CustomMetric
+mcmpCustomMetric
+  = lens _mcmpCustomMetric
+      (\ s a -> s{_mcmpCustomMetric = a})
+
 -- | OAuth 2.0 token for the current user.
-mcmpOauthToken :: Lens' ManagementCustomMetricsPatch' (Maybe Text)
-mcmpOauthToken
-  = lens _mcmpOauthToken
-      (\ s a -> s{_mcmpOauthToken = a})
+mcmpOAuthToken :: Lens' ManagementCustomMetricsPatch' (Maybe OAuthToken)
+mcmpOAuthToken
+  = lens _mcmpOAuthToken
+      (\ s a -> s{_mcmpOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 mcmpFields :: Lens' ManagementCustomMetricsPatch' (Maybe Text)
 mcmpFields
   = lens _mcmpFields (\ s a -> s{_mcmpFields = a})
 
--- | Data format for the response.
-mcmpAlt :: Lens' ManagementCustomMetricsPatch' Alt
-mcmpAlt = lens _mcmpAlt (\ s a -> s{_mcmpAlt = a})
+instance GoogleAuth ManagementCustomMetricsPatch'
+         where
+        authKey = mcmpKey . _Just
+        authToken = mcmpOAuthToken . _Just
 
 instance GoogleRequest ManagementCustomMetricsPatch'
          where
@@ -204,12 +213,13 @@ instance GoogleRequest ManagementCustomMetricsPatch'
               _mcmpCustomMetricId
               _mcmpWebPropertyId
               (Just _mcmpIgnoreCustomDataSourceLinks)
-              _mcmpUserIp
+              _mcmpUserIP
               _mcmpAccountId
               _mcmpKey
-              _mcmpOauthToken
+              _mcmpOAuthToken
               _mcmpFields
-              (Just _mcmpAlt)
+              (Just AltJSON)
+              _mcmpCustomMetric
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ManagementCustomMetricsPatchResource)

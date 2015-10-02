@@ -42,14 +42,13 @@ module Network.Google.Resource.Partners.UserStates.List
     , uslKey
     , uslRequestMetadataLocale
     , uslRequestMetadataExperimentIds
-    , uslRequestMetadataUserOverridesIpAddress
+    , uslRequestMetadataUserOverridesIPAddress
     , uslRequestMetadataTrafficSourceTrafficSubId
-    , uslOauthToken
+    , uslOAuthToken
     , uslRequestMetadataUserOverridesUserId
     , uslRequestMetadataTrafficSourceTrafficSourceId
     , uslFields
     , uslCallback
-    , uslAlt
     ) where
 
 import           Network.Google.Partners.Types
@@ -70,7 +69,7 @@ type UserStatesListResource =
                        QueryParam "requestMetadata.partnersSessionId" Text
                          :>
                          QueryParam "bearer_token" Text :>
-                           QueryParam "key" Text :>
+                           QueryParam "key" Key :>
                              QueryParam "requestMetadata.locale" Text :>
                                QueryParams "requestMetadata.experimentIds" Text
                                  :>
@@ -82,7 +81,7 @@ type UserStatesListResource =
                                      "requestMetadata.trafficSource.trafficSubId"
                                      Text
                                      :>
-                                     QueryParam "oauth_token" Text :>
+                                     QueryParam "oauth_token" OAuthToken :>
                                        QueryParam
                                          "requestMetadata.userOverrides.userId"
                                          Text
@@ -93,7 +92,7 @@ type UserStatesListResource =
                                            :>
                                            QueryParam "fields" Text :>
                                              QueryParam "callback" Text :>
-                                               QueryParam "alt" Text :>
+                                               QueryParam "alt" AltJSON :>
                                                  Get '[JSON]
                                                    ListUserStatesResponse
 
@@ -110,17 +109,16 @@ data UserStatesList' = UserStatesList'
     , _uslUploadType                                  :: !(Maybe Text)
     , _uslRequestMetadataPartnersSessionId            :: !(Maybe Text)
     , _uslBearerToken                                 :: !(Maybe Text)
-    , _uslKey                                         :: !(Maybe Text)
+    , _uslKey                                         :: !(Maybe Key)
     , _uslRequestMetadataLocale                       :: !(Maybe Text)
     , _uslRequestMetadataExperimentIds                :: !(Maybe Text)
-    , _uslRequestMetadataUserOverridesIpAddress       :: !(Maybe Text)
+    , _uslRequestMetadataUserOverridesIPAddress       :: !(Maybe Text)
     , _uslRequestMetadataTrafficSourceTrafficSubId    :: !(Maybe Text)
-    , _uslOauthToken                                  :: !(Maybe Text)
+    , _uslOAuthToken                                  :: !(Maybe OAuthToken)
     , _uslRequestMetadataUserOverridesUserId          :: !(Maybe Text)
     , _uslRequestMetadataTrafficSourceTrafficSourceId :: !(Maybe Text)
     , _uslFields                                      :: !(Maybe Text)
     , _uslCallback                                    :: !(Maybe Text)
-    , _uslAlt                                         :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserStatesList'' with the minimum fields required to make a request.
@@ -151,11 +149,11 @@ data UserStatesList' = UserStatesList'
 --
 -- * 'uslRequestMetadataExperimentIds'
 --
--- * 'uslRequestMetadataUserOverridesIpAddress'
+-- * 'uslRequestMetadataUserOverridesIPAddress'
 --
 -- * 'uslRequestMetadataTrafficSourceTrafficSubId'
 --
--- * 'uslOauthToken'
+-- * 'uslOAuthToken'
 --
 -- * 'uslRequestMetadataUserOverridesUserId'
 --
@@ -164,8 +162,6 @@ data UserStatesList' = UserStatesList'
 -- * 'uslFields'
 --
 -- * 'uslCallback'
---
--- * 'uslAlt'
 userStatesList'
     :: UserStatesList'
 userStatesList' =
@@ -182,14 +178,13 @@ userStatesList' =
     , _uslKey = Nothing
     , _uslRequestMetadataLocale = Nothing
     , _uslRequestMetadataExperimentIds = Nothing
-    , _uslRequestMetadataUserOverridesIpAddress = Nothing
+    , _uslRequestMetadataUserOverridesIPAddress = Nothing
     , _uslRequestMetadataTrafficSourceTrafficSubId = Nothing
-    , _uslOauthToken = Nothing
+    , _uslOAuthToken = Nothing
     , _uslRequestMetadataUserOverridesUserId = Nothing
     , _uslRequestMetadataTrafficSourceTrafficSourceId = Nothing
     , _uslFields = Nothing
     , _uslCallback = Nothing
-    , _uslAlt = "json"
     }
 
 -- | V1 error format.
@@ -247,7 +242,7 @@ uslBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-uslKey :: Lens' UserStatesList' (Maybe Text)
+uslKey :: Lens' UserStatesList' (Maybe Key)
 uslKey = lens _uslKey (\ s a -> s{_uslKey = a})
 
 -- | Locale to use for the current request.
@@ -263,11 +258,11 @@ uslRequestMetadataExperimentIds
       (\ s a -> s{_uslRequestMetadataExperimentIds = a})
 
 -- | IP address to use instead of the user\'s geo-located IP address.
-uslRequestMetadataUserOverridesIpAddress :: Lens' UserStatesList' (Maybe Text)
-uslRequestMetadataUserOverridesIpAddress
-  = lens _uslRequestMetadataUserOverridesIpAddress
+uslRequestMetadataUserOverridesIPAddress :: Lens' UserStatesList' (Maybe Text)
+uslRequestMetadataUserOverridesIPAddress
+  = lens _uslRequestMetadataUserOverridesIPAddress
       (\ s a ->
-         s{_uslRequestMetadataUserOverridesIpAddress = a})
+         s{_uslRequestMetadataUserOverridesIPAddress = a})
 
 -- | Second level identifier to indicate where the traffic comes from. An
 -- identifier has multiple letters created by a team which redirected the
@@ -279,10 +274,10 @@ uslRequestMetadataTrafficSourceTrafficSubId
          s{_uslRequestMetadataTrafficSourceTrafficSubId = a})
 
 -- | OAuth 2.0 token for the current user.
-uslOauthToken :: Lens' UserStatesList' (Maybe Text)
-uslOauthToken
-  = lens _uslOauthToken
-      (\ s a -> s{_uslOauthToken = a})
+uslOAuthToken :: Lens' UserStatesList' (Maybe OAuthToken)
+uslOAuthToken
+  = lens _uslOAuthToken
+      (\ s a -> s{_uslOAuthToken = a})
 
 -- | Logged-in user ID to impersonate instead of the user\'s ID.
 uslRequestMetadataUserOverridesUserId :: Lens' UserStatesList' (Maybe Text)
@@ -311,9 +306,9 @@ uslCallback :: Lens' UserStatesList' (Maybe Text)
 uslCallback
   = lens _uslCallback (\ s a -> s{_uslCallback = a})
 
--- | Data format for response.
-uslAlt :: Lens' UserStatesList' Text
-uslAlt = lens _uslAlt (\ s a -> s{_uslAlt = a})
+instance GoogleAuth UserStatesList' where
+        authKey = uslKey . _Just
+        authToken = uslOAuthToken . _Just
 
 instance GoogleRequest UserStatesList' where
         type Rs UserStatesList' = ListUserStatesResponse
@@ -329,14 +324,14 @@ instance GoogleRequest UserStatesList' where
               _uslKey
               _uslRequestMetadataLocale
               _uslRequestMetadataExperimentIds
-              _uslRequestMetadataUserOverridesIpAddress
+              _uslRequestMetadataUserOverridesIPAddress
               _uslRequestMetadataTrafficSourceTrafficSubId
-              _uslOauthToken
+              _uslOAuthToken
               _uslRequestMetadataUserOverridesUserId
               _uslRequestMetadataTrafficSourceTrafficSourceId
               _uslFields
               _uslCallback
-              (Just _uslAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UserStatesListResource)

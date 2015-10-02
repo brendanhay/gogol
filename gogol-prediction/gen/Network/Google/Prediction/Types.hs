@@ -86,7 +86,7 @@ module Network.Google.Prediction.Types
     -- * InputInput
     , InputInput
     , inputInput
-    , iiCsvInstance
+    , iiCSVInstance
 
     -- * Input
     , Input
@@ -151,12 +151,12 @@ module Network.Google.Prediction.Types
     , analyzeModelDescription
     , amdConfusionMatrixRowTotals
     , amdConfusionMatrix
-    , amdModelinfo
+    , amdModelInfo
 
     -- * InsertTrainingInstances
     , InsertTrainingInstances
     , insertTrainingInstances
-    , itiCsvInstance
+    , itiCSVInstance
     , itiOutput
 
     -- * AnalyzeDataDescriptionFeaturesCategoricalValues
@@ -181,11 +181,8 @@ module Network.Google.Prediction.Types
     -- * Update
     , Update
     , update
-    , uCsvInstance
+    , uCSVInstance
     , uOutput
-
-    -- * Alt
-    , Alt (..)
 
     -- * AnalyzeDataDescriptionOutputFeature
     , AnalyzeDataDescriptionOutputFeature

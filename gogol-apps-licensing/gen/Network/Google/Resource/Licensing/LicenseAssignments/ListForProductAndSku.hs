@@ -32,16 +32,15 @@ module Network.Google.Resource.Licensing.LicenseAssignments.ListForProductAndSku
     -- * Request Lenses
     , lalfpasQuotaUser
     , lalfpasPrettyPrint
-    , lalfpasUserIp
+    , lalfpasUserIP
     , lalfpasSkuId
     , lalfpasCustomerId
     , lalfpasKey
     , lalfpasPageToken
-    , lalfpasOauthToken
+    , lalfpasOAuthToken
     , lalfpasProductId
     , lalfpasMaxResults
     , lalfpasFields
-    , lalfpasAlt
     ) where
 
 import           Network.Google.AppsLicensing.Types
@@ -58,12 +57,12 @@ type LicenseAssignmentsListForProductAndSkuResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "customerId" Text :>
-                     QueryParam "key" Text :>
+                     QueryParam "key" Key :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "maxResults" Word32 :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :>
+                               QueryParam "alt" AltJSON :>
                                  Get '[JSON] LicenseAssignmentList
 
 -- | List license assignments for given product and sku of the customer.
@@ -72,16 +71,15 @@ type LicenseAssignmentsListForProductAndSkuResource =
 data LicenseAssignmentsListForProductAndSku' = LicenseAssignmentsListForProductAndSku'
     { _lalfpasQuotaUser   :: !(Maybe Text)
     , _lalfpasPrettyPrint :: !Bool
-    , _lalfpasUserIp      :: !(Maybe Text)
+    , _lalfpasUserIP      :: !(Maybe Text)
     , _lalfpasSkuId       :: !Text
     , _lalfpasCustomerId  :: !Text
-    , _lalfpasKey         :: !(Maybe Text)
+    , _lalfpasKey         :: !(Maybe Key)
     , _lalfpasPageToken   :: !Text
-    , _lalfpasOauthToken  :: !(Maybe Text)
+    , _lalfpasOAuthToken  :: !(Maybe OAuthToken)
     , _lalfpasProductId   :: !Text
     , _lalfpasMaxResults  :: !Word32
     , _lalfpasFields      :: !(Maybe Text)
-    , _lalfpasAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LicenseAssignmentsListForProductAndSku'' with the minimum fields required to make a request.
@@ -92,7 +90,7 @@ data LicenseAssignmentsListForProductAndSku' = LicenseAssignmentsListForProductA
 --
 -- * 'lalfpasPrettyPrint'
 --
--- * 'lalfpasUserIp'
+-- * 'lalfpasUserIP'
 --
 -- * 'lalfpasSkuId'
 --
@@ -102,15 +100,13 @@ data LicenseAssignmentsListForProductAndSku' = LicenseAssignmentsListForProductA
 --
 -- * 'lalfpasPageToken'
 --
--- * 'lalfpasOauthToken'
+-- * 'lalfpasOAuthToken'
 --
 -- * 'lalfpasProductId'
 --
 -- * 'lalfpasMaxResults'
 --
 -- * 'lalfpasFields'
---
--- * 'lalfpasAlt'
 licenseAssignmentsListForProductAndSku'
     :: Text -- ^ 'skuId'
     -> Text -- ^ 'customerId'
@@ -120,16 +116,15 @@ licenseAssignmentsListForProductAndSku' pLalfpasSkuId_ pLalfpasCustomerId_ pLalf
     LicenseAssignmentsListForProductAndSku'
     { _lalfpasQuotaUser = Nothing
     , _lalfpasPrettyPrint = True
-    , _lalfpasUserIp = Nothing
+    , _lalfpasUserIP = Nothing
     , _lalfpasSkuId = pLalfpasSkuId_
     , _lalfpasCustomerId = pLalfpasCustomerId_
     , _lalfpasKey = Nothing
     , _lalfpasPageToken = ""
-    , _lalfpasOauthToken = Nothing
+    , _lalfpasOAuthToken = Nothing
     , _lalfpasProductId = pLalfpasProductId_
     , _lalfpasMaxResults = 100
     , _lalfpasFields = Nothing
-    , _lalfpasAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,10 +143,10 @@ lalfpasPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-lalfpasUserIp :: Lens' LicenseAssignmentsListForProductAndSku' (Maybe Text)
-lalfpasUserIp
-  = lens _lalfpasUserIp
-      (\ s a -> s{_lalfpasUserIp = a})
+lalfpasUserIP :: Lens' LicenseAssignmentsListForProductAndSku' (Maybe Text)
+lalfpasUserIP
+  = lens _lalfpasUserIP
+      (\ s a -> s{_lalfpasUserIP = a})
 
 -- | Name for sku
 lalfpasSkuId :: Lens' LicenseAssignmentsListForProductAndSku' Text
@@ -168,7 +163,7 @@ lalfpasCustomerId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lalfpasKey :: Lens' LicenseAssignmentsListForProductAndSku' (Maybe Text)
+lalfpasKey :: Lens' LicenseAssignmentsListForProductAndSku' (Maybe Key)
 lalfpasKey
   = lens _lalfpasKey (\ s a -> s{_lalfpasKey = a})
 
@@ -180,10 +175,10 @@ lalfpasPageToken
       (\ s a -> s{_lalfpasPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-lalfpasOauthToken :: Lens' LicenseAssignmentsListForProductAndSku' (Maybe Text)
-lalfpasOauthToken
-  = lens _lalfpasOauthToken
-      (\ s a -> s{_lalfpasOauthToken = a})
+lalfpasOAuthToken :: Lens' LicenseAssignmentsListForProductAndSku' (Maybe OAuthToken)
+lalfpasOAuthToken
+  = lens _lalfpasOAuthToken
+      (\ s a -> s{_lalfpasOAuthToken = a})
 
 -- | Name for product
 lalfpasProductId :: Lens' LicenseAssignmentsListForProductAndSku' Text
@@ -204,10 +199,10 @@ lalfpasFields
   = lens _lalfpasFields
       (\ s a -> s{_lalfpasFields = a})
 
--- | Data format for the response.
-lalfpasAlt :: Lens' LicenseAssignmentsListForProductAndSku' Alt
-lalfpasAlt
-  = lens _lalfpasAlt (\ s a -> s{_lalfpasAlt = a})
+instance GoogleAuth
+         LicenseAssignmentsListForProductAndSku' where
+        authKey = lalfpasKey . _Just
+        authToken = lalfpasOAuthToken . _Just
 
 instance GoogleRequest
          LicenseAssignmentsListForProductAndSku' where
@@ -217,16 +212,16 @@ instance GoogleRequest
         requestWithRoute r u
           LicenseAssignmentsListForProductAndSku'{..}
           = go _lalfpasQuotaUser (Just _lalfpasPrettyPrint)
-              _lalfpasUserIp
+              _lalfpasUserIP
               _lalfpasSkuId
               (Just _lalfpasCustomerId)
               _lalfpasKey
               (Just _lalfpasPageToken)
-              _lalfpasOauthToken
+              _lalfpasOAuthToken
               _lalfpasProductId
               (Just _lalfpasMaxResults)
               _lalfpasFields
-              (Just _lalfpasAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

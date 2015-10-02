@@ -32,15 +32,14 @@ module Network.Google.Resource.Licensing.LicenseAssignments.ListForProduct
     -- * Request Lenses
     , lalfpQuotaUser
     , lalfpPrettyPrint
-    , lalfpUserIp
+    , lalfpUserIP
     , lalfpCustomerId
     , lalfpKey
     , lalfpPageToken
-    , lalfpOauthToken
+    , lalfpOAuthToken
     , lalfpProductId
     , lalfpMaxResults
     , lalfpFields
-    , lalfpAlt
     ) where
 
 import           Network.Google.AppsLicensing.Types
@@ -55,12 +54,12 @@ type LicenseAssignmentsListForProductResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "customerId" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "maxResults" Word32 :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :>
+                           QueryParam "alt" AltJSON :>
                              Get '[JSON] LicenseAssignmentList
 
 -- | List license assignments for given product of the customer.
@@ -69,15 +68,14 @@ type LicenseAssignmentsListForProductResource =
 data LicenseAssignmentsListForProduct' = LicenseAssignmentsListForProduct'
     { _lalfpQuotaUser   :: !(Maybe Text)
     , _lalfpPrettyPrint :: !Bool
-    , _lalfpUserIp      :: !(Maybe Text)
+    , _lalfpUserIP      :: !(Maybe Text)
     , _lalfpCustomerId  :: !Text
-    , _lalfpKey         :: !(Maybe Text)
+    , _lalfpKey         :: !(Maybe Key)
     , _lalfpPageToken   :: !Text
-    , _lalfpOauthToken  :: !(Maybe Text)
+    , _lalfpOAuthToken  :: !(Maybe OAuthToken)
     , _lalfpProductId   :: !Text
     , _lalfpMaxResults  :: !Word32
     , _lalfpFields      :: !(Maybe Text)
-    , _lalfpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LicenseAssignmentsListForProduct'' with the minimum fields required to make a request.
@@ -88,7 +86,7 @@ data LicenseAssignmentsListForProduct' = LicenseAssignmentsListForProduct'
 --
 -- * 'lalfpPrettyPrint'
 --
--- * 'lalfpUserIp'
+-- * 'lalfpUserIP'
 --
 -- * 'lalfpCustomerId'
 --
@@ -96,15 +94,13 @@ data LicenseAssignmentsListForProduct' = LicenseAssignmentsListForProduct'
 --
 -- * 'lalfpPageToken'
 --
--- * 'lalfpOauthToken'
+-- * 'lalfpOAuthToken'
 --
 -- * 'lalfpProductId'
 --
 -- * 'lalfpMaxResults'
 --
 -- * 'lalfpFields'
---
--- * 'lalfpAlt'
 licenseAssignmentsListForProduct'
     :: Text -- ^ 'customerId'
     -> Text -- ^ 'productId'
@@ -113,15 +109,14 @@ licenseAssignmentsListForProduct' pLalfpCustomerId_ pLalfpProductId_ =
     LicenseAssignmentsListForProduct'
     { _lalfpQuotaUser = Nothing
     , _lalfpPrettyPrint = True
-    , _lalfpUserIp = Nothing
+    , _lalfpUserIP = Nothing
     , _lalfpCustomerId = pLalfpCustomerId_
     , _lalfpKey = Nothing
     , _lalfpPageToken = ""
-    , _lalfpOauthToken = Nothing
+    , _lalfpOAuthToken = Nothing
     , _lalfpProductId = pLalfpProductId_
     , _lalfpMaxResults = 100
     , _lalfpFields = Nothing
-    , _lalfpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -140,9 +135,9 @@ lalfpPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-lalfpUserIp :: Lens' LicenseAssignmentsListForProduct' (Maybe Text)
-lalfpUserIp
-  = lens _lalfpUserIp (\ s a -> s{_lalfpUserIp = a})
+lalfpUserIP :: Lens' LicenseAssignmentsListForProduct' (Maybe Text)
+lalfpUserIP
+  = lens _lalfpUserIP (\ s a -> s{_lalfpUserIP = a})
 
 -- | CustomerId represents the customer for whom licenseassignments are
 -- queried
@@ -154,7 +149,7 @@ lalfpCustomerId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lalfpKey :: Lens' LicenseAssignmentsListForProduct' (Maybe Text)
+lalfpKey :: Lens' LicenseAssignmentsListForProduct' (Maybe Key)
 lalfpKey = lens _lalfpKey (\ s a -> s{_lalfpKey = a})
 
 -- | Token to fetch the next page.Optional. By default server will return
@@ -165,10 +160,10 @@ lalfpPageToken
       (\ s a -> s{_lalfpPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-lalfpOauthToken :: Lens' LicenseAssignmentsListForProduct' (Maybe Text)
-lalfpOauthToken
-  = lens _lalfpOauthToken
-      (\ s a -> s{_lalfpOauthToken = a})
+lalfpOAuthToken :: Lens' LicenseAssignmentsListForProduct' (Maybe OAuthToken)
+lalfpOAuthToken
+  = lens _lalfpOAuthToken
+      (\ s a -> s{_lalfpOAuthToken = a})
 
 -- | Name for product
 lalfpProductId :: Lens' LicenseAssignmentsListForProduct' Text
@@ -188,9 +183,10 @@ lalfpFields :: Lens' LicenseAssignmentsListForProduct' (Maybe Text)
 lalfpFields
   = lens _lalfpFields (\ s a -> s{_lalfpFields = a})
 
--- | Data format for the response.
-lalfpAlt :: Lens' LicenseAssignmentsListForProduct' Alt
-lalfpAlt = lens _lalfpAlt (\ s a -> s{_lalfpAlt = a})
+instance GoogleAuth LicenseAssignmentsListForProduct'
+         where
+        authKey = lalfpKey . _Just
+        authToken = lalfpOAuthToken . _Just
 
 instance GoogleRequest
          LicenseAssignmentsListForProduct' where
@@ -200,15 +196,15 @@ instance GoogleRequest
         requestWithRoute r u
           LicenseAssignmentsListForProduct'{..}
           = go _lalfpQuotaUser (Just _lalfpPrettyPrint)
-              _lalfpUserIp
+              _lalfpUserIP
               (Just _lalfpCustomerId)
               _lalfpKey
               (Just _lalfpPageToken)
-              _lalfpOauthToken
+              _lalfpOAuthToken
               _lalfpProductId
               (Just _lalfpMaxResults)
               _lalfpFields
-              (Just _lalfpAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

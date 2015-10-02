@@ -32,13 +32,12 @@ module Network.Google.Resource.DFAReporting.FloodlightActivities.Generatetag
     -- * Request Lenses
     , fagQuotaUser
     , fagPrettyPrint
-    , fagUserIp
+    , fagUserIP
     , fagFloodlightActivityId
     , fagProfileId
     , fagKey
-    , fagOauthToken
+    , fagOAuthToken
     , fagFields
-    , fagAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -55,10 +54,10 @@ type FloodlightActivitiesGeneratetagResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "floodlightActivityId" Int64 :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :>
+                           QueryParam "alt" AltJSON :>
                              Post '[JSON]
                                FloodlightActivitiesGenerateTagResponse
 
@@ -68,13 +67,12 @@ type FloodlightActivitiesGeneratetagResource =
 data FloodlightActivitiesGeneratetag' = FloodlightActivitiesGeneratetag'
     { _fagQuotaUser            :: !(Maybe Text)
     , _fagPrettyPrint          :: !Bool
-    , _fagUserIp               :: !(Maybe Text)
+    , _fagUserIP               :: !(Maybe Text)
     , _fagFloodlightActivityId :: !(Maybe Int64)
     , _fagProfileId            :: !Int64
-    , _fagKey                  :: !(Maybe Text)
-    , _fagOauthToken           :: !(Maybe Text)
+    , _fagKey                  :: !(Maybe Key)
+    , _fagOAuthToken           :: !(Maybe OAuthToken)
     , _fagFields               :: !(Maybe Text)
-    , _fagAlt                  :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivitiesGeneratetag'' with the minimum fields required to make a request.
@@ -85,7 +83,7 @@ data FloodlightActivitiesGeneratetag' = FloodlightActivitiesGeneratetag'
 --
 -- * 'fagPrettyPrint'
 --
--- * 'fagUserIp'
+-- * 'fagUserIP'
 --
 -- * 'fagFloodlightActivityId'
 --
@@ -93,11 +91,9 @@ data FloodlightActivitiesGeneratetag' = FloodlightActivitiesGeneratetag'
 --
 -- * 'fagKey'
 --
--- * 'fagOauthToken'
+-- * 'fagOAuthToken'
 --
 -- * 'fagFields'
---
--- * 'fagAlt'
 floodlightActivitiesGeneratetag'
     :: Int64 -- ^ 'profileId'
     -> FloodlightActivitiesGeneratetag'
@@ -105,13 +101,12 @@ floodlightActivitiesGeneratetag' pFagProfileId_ =
     FloodlightActivitiesGeneratetag'
     { _fagQuotaUser = Nothing
     , _fagPrettyPrint = True
-    , _fagUserIp = Nothing
+    , _fagUserIP = Nothing
     , _fagFloodlightActivityId = Nothing
     , _fagProfileId = pFagProfileId_
     , _fagKey = Nothing
-    , _fagOauthToken = Nothing
+    , _fagOAuthToken = Nothing
     , _fagFields = Nothing
-    , _fagAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -129,9 +124,9 @@ fagPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-fagUserIp :: Lens' FloodlightActivitiesGeneratetag' (Maybe Text)
-fagUserIp
-  = lens _fagUserIp (\ s a -> s{_fagUserIp = a})
+fagUserIP :: Lens' FloodlightActivitiesGeneratetag' (Maybe Text)
+fagUserIP
+  = lens _fagUserIP (\ s a -> s{_fagUserIP = a})
 
 -- | Floodlight activity ID for which we want to generate a tag.
 fagFloodlightActivityId :: Lens' FloodlightActivitiesGeneratetag' (Maybe Int64)
@@ -147,23 +142,24 @@ fagProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fagKey :: Lens' FloodlightActivitiesGeneratetag' (Maybe Text)
+fagKey :: Lens' FloodlightActivitiesGeneratetag' (Maybe Key)
 fagKey = lens _fagKey (\ s a -> s{_fagKey = a})
 
 -- | OAuth 2.0 token for the current user.
-fagOauthToken :: Lens' FloodlightActivitiesGeneratetag' (Maybe Text)
-fagOauthToken
-  = lens _fagOauthToken
-      (\ s a -> s{_fagOauthToken = a})
+fagOAuthToken :: Lens' FloodlightActivitiesGeneratetag' (Maybe OAuthToken)
+fagOAuthToken
+  = lens _fagOAuthToken
+      (\ s a -> s{_fagOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 fagFields :: Lens' FloodlightActivitiesGeneratetag' (Maybe Text)
 fagFields
   = lens _fagFields (\ s a -> s{_fagFields = a})
 
--- | Data format for the response.
-fagAlt :: Lens' FloodlightActivitiesGeneratetag' Alt
-fagAlt = lens _fagAlt (\ s a -> s{_fagAlt = a})
+instance GoogleAuth FloodlightActivitiesGeneratetag'
+         where
+        authKey = fagKey . _Just
+        authToken = fagOAuthToken . _Just
 
 instance GoogleRequest
          FloodlightActivitiesGeneratetag' where
@@ -172,13 +168,13 @@ instance GoogleRequest
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u
           FloodlightActivitiesGeneratetag'{..}
-          = go _fagQuotaUser (Just _fagPrettyPrint) _fagUserIp
+          = go _fagQuotaUser (Just _fagPrettyPrint) _fagUserIP
               _fagFloodlightActivityId
               _fagProfileId
               _fagKey
-              _fagOauthToken
+              _fagOAuthToken
               _fagFields
-              (Just _fagAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

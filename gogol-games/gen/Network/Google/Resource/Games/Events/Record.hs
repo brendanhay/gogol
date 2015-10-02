@@ -33,12 +33,12 @@ module Network.Google.Resource.Games.Events.Record
     -- * Request Lenses
     , erQuotaUser
     , erPrettyPrint
-    , erUserIp
+    , erUserIP
     , erKey
     , erLanguage
-    , erOauthToken
+    , erEventRecordRequest
+    , erOAuthToken
     , erFields
-    , erAlt
     ) where
 
 import           Network.Google.Games.Types
@@ -51,26 +51,27 @@ type EventsRecordResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
+             QueryParam "key" Key :>
                QueryParam "language" Text :>
-                 QueryParam "oauth_token" Text :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :>
-                       Post '[JSON] EventUpdateResponse
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] EventRecordRequest :>
+                         Post '[JSON] EventUpdateResponse
 
 -- | Records a batch of changes to the number of times events have occurred
 -- for the currently authenticated user of this application.
 --
 -- /See:/ 'eventsRecord'' smart constructor.
 data EventsRecord' = EventsRecord'
-    { _erQuotaUser   :: !(Maybe Text)
-    , _erPrettyPrint :: !Bool
-    , _erUserIp      :: !(Maybe Text)
-    , _erKey         :: !(Maybe Text)
-    , _erLanguage    :: !(Maybe Text)
-    , _erOauthToken  :: !(Maybe Text)
-    , _erFields      :: !(Maybe Text)
-    , _erAlt         :: !Alt
+    { _erQuotaUser          :: !(Maybe Text)
+    , _erPrettyPrint        :: !Bool
+    , _erUserIP             :: !(Maybe Text)
+    , _erKey                :: !(Maybe Key)
+    , _erLanguage           :: !(Maybe Text)
+    , _erEventRecordRequest :: !EventRecordRequest
+    , _erOAuthToken         :: !(Maybe OAuthToken)
+    , _erFields             :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsRecord'' with the minimum fields required to make a request.
@@ -81,29 +82,30 @@ data EventsRecord' = EventsRecord'
 --
 -- * 'erPrettyPrint'
 --
--- * 'erUserIp'
+-- * 'erUserIP'
 --
 -- * 'erKey'
 --
 -- * 'erLanguage'
 --
--- * 'erOauthToken'
+-- * 'erEventRecordRequest'
+--
+-- * 'erOAuthToken'
 --
 -- * 'erFields'
---
--- * 'erAlt'
 eventsRecord'
-    :: EventsRecord'
-eventsRecord' =
+    :: EventRecordRequest -- ^ 'EventRecordRequest'
+    -> EventsRecord'
+eventsRecord' pErEventRecordRequest_ =
     EventsRecord'
     { _erQuotaUser = Nothing
     , _erPrettyPrint = True
-    , _erUserIp = Nothing
+    , _erUserIP = Nothing
     , _erKey = Nothing
     , _erLanguage = Nothing
-    , _erOauthToken = Nothing
+    , _erEventRecordRequest = pErEventRecordRequest_
+    , _erOAuthToken = Nothing
     , _erFields = Nothing
-    , _erAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -121,13 +123,13 @@ erPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-erUserIp :: Lens' EventsRecord' (Maybe Text)
-erUserIp = lens _erUserIp (\ s a -> s{_erUserIp = a})
+erUserIP :: Lens' EventsRecord' (Maybe Text)
+erUserIP = lens _erUserIP (\ s a -> s{_erUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-erKey :: Lens' EventsRecord' (Maybe Text)
+erKey :: Lens' EventsRecord' (Maybe Key)
 erKey = lens _erKey (\ s a -> s{_erKey = a})
 
 -- | The preferred language to use for strings returned by this method.
@@ -135,29 +137,36 @@ erLanguage :: Lens' EventsRecord' (Maybe Text)
 erLanguage
   = lens _erLanguage (\ s a -> s{_erLanguage = a})
 
+-- | Multipart request metadata.
+erEventRecordRequest :: Lens' EventsRecord' EventRecordRequest
+erEventRecordRequest
+  = lens _erEventRecordRequest
+      (\ s a -> s{_erEventRecordRequest = a})
+
 -- | OAuth 2.0 token for the current user.
-erOauthToken :: Lens' EventsRecord' (Maybe Text)
-erOauthToken
-  = lens _erOauthToken (\ s a -> s{_erOauthToken = a})
+erOAuthToken :: Lens' EventsRecord' (Maybe OAuthToken)
+erOAuthToken
+  = lens _erOAuthToken (\ s a -> s{_erOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 erFields :: Lens' EventsRecord' (Maybe Text)
 erFields = lens _erFields (\ s a -> s{_erFields = a})
 
--- | Data format for the response.
-erAlt :: Lens' EventsRecord' Alt
-erAlt = lens _erAlt (\ s a -> s{_erAlt = a})
+instance GoogleAuth EventsRecord' where
+        authKey = erKey . _Just
+        authToken = erOAuthToken . _Just
 
 instance GoogleRequest EventsRecord' where
         type Rs EventsRecord' = EventUpdateResponse
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u EventsRecord'{..}
-          = go _erQuotaUser (Just _erPrettyPrint) _erUserIp
+          = go _erQuotaUser (Just _erPrettyPrint) _erUserIP
               _erKey
               _erLanguage
-              _erOauthToken
+              _erOAuthToken
               _erFields
-              (Just _erAlt)
+              (Just AltJSON)
+              _erEventRecordRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy EventsRecordResource)

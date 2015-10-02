@@ -38,23 +38,22 @@ module Network.Google.Resource.Calendar.Events.List
     , elOrderBy
     , elSingleEvents
     , elPrivateExtendedProperty
-    , elUserIp
+    , elUserIP
     , elShowDeleted
     , elQ
     , elSharedExtendedProperty
     , elMaxAttendees
     , elKey
-    , elICalUID
+    , elICalUId
     , elUpdatedMin
     , elPageToken
     , elTimeZone
-    , elOauthToken
+    , elOAuthToken
     , elShowHiddenInvitations
     , elMaxResults
     , elAlwaysIncludeEmail
     , elTimeMax
     , elFields
-    , elAlt
     ) where
 
 import           Network.Google.AppsCalendar.Types
@@ -78,12 +77,13 @@ type EventsListResource =
                              QueryParam "q" Text :>
                                QueryParams "sharedExtendedProperty" Text :>
                                  QueryParam "maxAttendees" Int32 :>
-                                   QueryParam "key" Text :>
+                                   QueryParam "key" Key :>
                                      QueryParam "iCalUID" Text :>
                                        QueryParam "updatedMin" UTCTime :>
                                          QueryParam "pageToken" Text :>
                                            QueryParam "timeZone" Text :>
-                                             QueryParam "oauth_token" Text :>
+                                             QueryParam "oauth_token" OAuthToken
+                                               :>
                                                QueryParam
                                                  "showHiddenInvitations"
                                                  Bool
@@ -99,8 +99,9 @@ type EventsListResource =
                                                        :>
                                                        QueryParam "fields" Text
                                                          :>
-                                                         QueryParam "alt" Alt :>
-                                                           Get '[JSON] Events
+                                                         QueryParam "alt"
+                                                           AltJSON
+                                                           :> Get '[JSON] Events
 
 -- | Returns events on the specified calendar.
 --
@@ -114,23 +115,22 @@ data EventsList' = EventsList'
     , _elOrderBy                 :: !(Maybe CalendarEventsListOrderBy)
     , _elSingleEvents            :: !(Maybe Bool)
     , _elPrivateExtendedProperty :: !(Maybe Text)
-    , _elUserIp                  :: !(Maybe Text)
+    , _elUserIP                  :: !(Maybe Text)
     , _elShowDeleted             :: !(Maybe Bool)
     , _elQ                       :: !(Maybe Text)
     , _elSharedExtendedProperty  :: !(Maybe Text)
     , _elMaxAttendees            :: !(Maybe Int32)
-    , _elKey                     :: !(Maybe Text)
-    , _elICalUID                 :: !(Maybe Text)
+    , _elKey                     :: !(Maybe Key)
+    , _elICalUId                 :: !(Maybe Text)
     , _elUpdatedMin              :: !(Maybe UTCTime)
     , _elPageToken               :: !(Maybe Text)
     , _elTimeZone                :: !(Maybe Text)
-    , _elOauthToken              :: !(Maybe Text)
+    , _elOAuthToken              :: !(Maybe OAuthToken)
     , _elShowHiddenInvitations   :: !(Maybe Bool)
     , _elMaxResults              :: !(Maybe Int32)
     , _elAlwaysIncludeEmail      :: !(Maybe Bool)
     , _elTimeMax                 :: !(Maybe UTCTime)
     , _elFields                  :: !(Maybe Text)
-    , _elAlt                     :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsList'' with the minimum fields required to make a request.
@@ -153,7 +153,7 @@ data EventsList' = EventsList'
 --
 -- * 'elPrivateExtendedProperty'
 --
--- * 'elUserIp'
+-- * 'elUserIP'
 --
 -- * 'elShowDeleted'
 --
@@ -165,7 +165,7 @@ data EventsList' = EventsList'
 --
 -- * 'elKey'
 --
--- * 'elICalUID'
+-- * 'elICalUId'
 --
 -- * 'elUpdatedMin'
 --
@@ -173,7 +173,7 @@ data EventsList' = EventsList'
 --
 -- * 'elTimeZone'
 --
--- * 'elOauthToken'
+-- * 'elOAuthToken'
 --
 -- * 'elShowHiddenInvitations'
 --
@@ -184,8 +184,6 @@ data EventsList' = EventsList'
 -- * 'elTimeMax'
 --
 -- * 'elFields'
---
--- * 'elAlt'
 eventsList'
     :: Text -- ^ 'calendarId'
     -> EventsList'
@@ -199,23 +197,22 @@ eventsList' pElCalendarId_ =
     , _elOrderBy = Nothing
     , _elSingleEvents = Nothing
     , _elPrivateExtendedProperty = Nothing
-    , _elUserIp = Nothing
+    , _elUserIP = Nothing
     , _elShowDeleted = Nothing
     , _elQ = Nothing
     , _elSharedExtendedProperty = Nothing
     , _elMaxAttendees = Nothing
     , _elKey = Nothing
-    , _elICalUID = Nothing
+    , _elICalUId = Nothing
     , _elUpdatedMin = Nothing
     , _elPageToken = Nothing
     , _elTimeZone = Nothing
-    , _elOauthToken = Nothing
+    , _elOAuthToken = Nothing
     , _elShowHiddenInvitations = Nothing
     , _elMaxResults = Nothing
     , _elAlwaysIncludeEmail = Nothing
     , _elTimeMax = Nothing
     , _elFields = Nothing
-    , _elAlt = JSON
     }
 
 -- | Token obtained from the nextSyncToken field returned on the last page of
@@ -287,8 +284,8 @@ elPrivateExtendedProperty
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-elUserIp :: Lens' EventsList' (Maybe Text)
-elUserIp = lens _elUserIp (\ s a -> s{_elUserIp = a})
+elUserIP :: Lens' EventsList' (Maybe Text)
+elUserIP = lens _elUserIP (\ s a -> s{_elUserIP = a})
 
 -- | Whether to include deleted events (with status equals \"cancelled\") in
 -- the result. Cancelled instances of recurring events (but not the
@@ -325,14 +322,14 @@ elMaxAttendees
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-elKey :: Lens' EventsList' (Maybe Text)
+elKey :: Lens' EventsList' (Maybe Key)
 elKey = lens _elKey (\ s a -> s{_elKey = a})
 
 -- | Specifies event ID in the iCalendar format to be included in the
 -- response. Optional.
-elICalUID :: Lens' EventsList' (Maybe Text)
-elICalUID
-  = lens _elICalUID (\ s a -> s{_elICalUID = a})
+elICalUId :: Lens' EventsList' (Maybe Text)
+elICalUId
+  = lens _elICalUId (\ s a -> s{_elICalUId = a})
 
 -- | Lower bound for an event\'s last modification time (as a RFC3339
 -- timestamp) to filter by. When specified, entries deleted since this time
@@ -354,9 +351,9 @@ elTimeZone
   = lens _elTimeZone (\ s a -> s{_elTimeZone = a})
 
 -- | OAuth 2.0 token for the current user.
-elOauthToken :: Lens' EventsList' (Maybe Text)
-elOauthToken
-  = lens _elOauthToken (\ s a -> s{_elOauthToken = a})
+elOAuthToken :: Lens' EventsList' (Maybe OAuthToken)
+elOAuthToken
+  = lens _elOAuthToken (\ s a -> s{_elOAuthToken = a})
 
 -- | Whether to include hidden invitations in the result. Optional. The
 -- default is False.
@@ -396,9 +393,9 @@ elTimeMax
 elFields :: Lens' EventsList' (Maybe Text)
 elFields = lens _elFields (\ s a -> s{_elFields = a})
 
--- | Data format for the response.
-elAlt :: Lens' EventsList' Alt
-elAlt = lens _elAlt (\ s a -> s{_elAlt = a})
+instance GoogleAuth EventsList' where
+        authKey = elKey . _Just
+        authToken = elOAuthToken . _Just
 
 instance GoogleRequest EventsList' where
         type Rs EventsList' = Events
@@ -410,23 +407,23 @@ instance GoogleRequest EventsList' where
               _elOrderBy
               _elSingleEvents
               _elPrivateExtendedProperty
-              _elUserIp
+              _elUserIP
               _elShowDeleted
               _elQ
               _elSharedExtendedProperty
               _elMaxAttendees
               _elKey
-              _elICalUID
+              _elICalUId
               _elUpdatedMin
               _elPageToken
               _elTimeZone
-              _elOauthToken
+              _elOAuthToken
               _elShowHiddenInvitations
               _elMaxResults
               _elAlwaysIncludeEmail
               _elTimeMax
               _elFields
-              (Just _elAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy EventsListResource)
                       r

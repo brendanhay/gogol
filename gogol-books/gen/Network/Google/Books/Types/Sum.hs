@@ -18,7 +18,7 @@ module Network.Google.Books.Types.Sum where
 import           Network.Google.Prelude
 
 -- | Action that caused this reading position to be set.
-data BooksMylibraryReadingpositionsSetPositionAction
+data BooksMyLibraryReadingPositionsSetPositionAction
     = Bookmark
       -- ^ @bookmark@
       -- User chose bookmark within volume.
@@ -39,9 +39,9 @@ data BooksMylibraryReadingpositionsSetPositionAction
       -- User chose search results within volume.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable BooksMylibraryReadingpositionsSetPositionAction
+instance Hashable BooksMyLibraryReadingPositionsSetPositionAction
 
-instance FromText BooksMylibraryReadingpositionsSetPositionAction where
+instance FromText BooksMyLibraryReadingPositionsSetPositionAction where
     fromText = \case
         "bookmark" -> Just Bookmark
         "chapter" -> Just Chapter
@@ -51,7 +51,7 @@ instance FromText BooksMylibraryReadingpositionsSetPositionAction where
         "search" -> Just Search
         _ -> Nothing
 
-instance ToText BooksMylibraryReadingpositionsSetPositionAction where
+instance ToText BooksMyLibraryReadingPositionsSetPositionAction where
     toText = \case
         Bookmark -> "bookmark"
         Chapter -> "chapter"
@@ -60,10 +60,10 @@ instance ToText BooksMylibraryReadingpositionsSetPositionAction where
         Scroll -> "scroll"
         Search -> "search"
 
-instance FromJSON BooksMylibraryReadingpositionsSetPositionAction where
-    parseJSON = parseJSONText "BooksMylibraryReadingpositionsSetPositionAction"
+instance FromJSON BooksMyLibraryReadingPositionsSetPositionAction where
+    parseJSON = parseJSONText "BooksMyLibraryReadingPositionsSetPositionAction"
 
-instance ToJSON BooksMylibraryReadingpositionsSetPositionAction where
+instance ToJSON BooksMyLibraryReadingPositionsSetPositionAction where
     toJSON = toJSONText
 
 -- | Restrict to volumes by download availability.
@@ -154,27 +154,27 @@ instance ToJSON BooksVolumesGetProjection where
     toJSON = toJSONText
 
 -- | The reason for which the book is removed from the library.
-data BooksMylibraryBookshelvesRemoveVolumeReason
+data BooksMyLibraryBookshelvesRemoveVolumeReason
     = Onboarding
       -- ^ @ONBOARDING@
       -- Samples removed from the Onboarding flow.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable BooksMylibraryBookshelvesRemoveVolumeReason
+instance Hashable BooksMyLibraryBookshelvesRemoveVolumeReason
 
-instance FromText BooksMylibraryBookshelvesRemoveVolumeReason where
+instance FromText BooksMyLibraryBookshelvesRemoveVolumeReason where
     fromText = \case
         "ONBOARDING" -> Just Onboarding
         _ -> Nothing
 
-instance ToText BooksMylibraryBookshelvesRemoveVolumeReason where
+instance ToText BooksMyLibraryBookshelvesRemoveVolumeReason where
     toText = \case
         Onboarding -> "ONBOARDING"
 
-instance FromJSON BooksMylibraryBookshelvesRemoveVolumeReason where
-    parseJSON = parseJSONText "BooksMylibraryBookshelvesRemoveVolumeReason"
+instance FromJSON BooksMyLibraryBookshelvesRemoveVolumeReason where
+    parseJSON = parseJSONText "BooksMyLibraryBookshelvesRemoveVolumeReason"
 
-instance ToJSON BooksMylibraryBookshelvesRemoveVolumeReason where
+instance ToJSON BooksMyLibraryBookshelvesRemoveVolumeReason where
     toJSON = toJSONText
 
 -- | The maximum allowed maturity rating of returned volumes. Books with a
@@ -370,31 +370,31 @@ instance ToJSON BooksVolumesRecommendedRateRating where
     toJSON = toJSONText
 
 -- | List of features supported by the client, i.e., \'RENTALS\'
-data BooksMyconfigSyncVolumeLicensesFeatures
+data BooksMyConfigSyncVolumeLicensesFeatures
     = Rentals
       -- ^ @RENTALS@
       -- Client supports rentals.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable BooksMyconfigSyncVolumeLicensesFeatures
+instance Hashable BooksMyConfigSyncVolumeLicensesFeatures
 
-instance FromText BooksMyconfigSyncVolumeLicensesFeatures where
+instance FromText BooksMyConfigSyncVolumeLicensesFeatures where
     fromText = \case
         "RENTALS" -> Just Rentals
         _ -> Nothing
 
-instance ToText BooksMyconfigSyncVolumeLicensesFeatures where
+instance ToText BooksMyConfigSyncVolumeLicensesFeatures where
     toText = \case
         Rentals -> "RENTALS"
 
-instance FromJSON BooksMyconfigSyncVolumeLicensesFeatures where
-    parseJSON = parseJSONText "BooksMyconfigSyncVolumeLicensesFeatures"
+instance FromJSON BooksMyConfigSyncVolumeLicensesFeatures where
+    parseJSON = parseJSONText "BooksMyConfigSyncVolumeLicensesFeatures"
 
-instance ToJSON BooksMyconfigSyncVolumeLicensesFeatures where
+instance ToJSON BooksMyConfigSyncVolumeLicensesFeatures where
     toJSON = toJSONText
 
 -- | The processing state of the user uploaded volumes to be returned.
-data BooksVolumesUseruploadedListProcessingState
+data BooksVolumesUserUploadedListProcessingState
     = CompletedFailed
       -- ^ @COMPLETED_FAILED@
       -- The volume processing hase failed.
@@ -406,59 +406,59 @@ data BooksVolumesUseruploadedListProcessingState
       -- The volume processing is not completed.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable BooksVolumesUseruploadedListProcessingState
+instance Hashable BooksVolumesUserUploadedListProcessingState
 
-instance FromText BooksVolumesUseruploadedListProcessingState where
+instance FromText BooksVolumesUserUploadedListProcessingState where
     fromText = \case
         "COMPLETED_FAILED" -> Just CompletedFailed
         "COMPLETED_SUCCESS" -> Just CompletedSuccess
         "RUNNING" -> Just Running
         _ -> Nothing
 
-instance ToText BooksVolumesUseruploadedListProcessingState where
+instance ToText BooksVolumesUserUploadedListProcessingState where
     toText = \case
         CompletedFailed -> "COMPLETED_FAILED"
         CompletedSuccess -> "COMPLETED_SUCCESS"
         Running -> "RUNNING"
 
-instance FromJSON BooksVolumesUseruploadedListProcessingState where
-    parseJSON = parseJSONText "BooksVolumesUseruploadedListProcessingState"
+instance FromJSON BooksVolumesUserUploadedListProcessingState where
+    parseJSON = parseJSONText "BooksVolumesUserUploadedListProcessingState"
 
-instance ToJSON BooksVolumesUseruploadedListProcessingState where
+instance ToJSON BooksVolumesUserUploadedListProcessingState where
     toJSON = toJSONText
 
 -- | The reason for which the book is added to the library.
-data BooksMylibraryBookshelvesAddVolumeReason
-    = BMBAVRIosPrex
+data BooksMyLibraryBookshelvesAddVolumeReason
+    = BMLBAVRIosPrex
       -- ^ @IOS_PREX@
       -- Volumes added from the PREX flow on iOS.
-    | BMBAVRIosSearch
+    | BMLBAVRIosSearch
       -- ^ @IOS_SEARCH@
       -- Volumes added from the Search flow on iOS.
-    | BMBAVROnboarding
+    | BMLBAVROnboarding
       -- ^ @ONBOARDING@
       -- Volumes added from the Onboarding flow.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable BooksMylibraryBookshelvesAddVolumeReason
+instance Hashable BooksMyLibraryBookshelvesAddVolumeReason
 
-instance FromText BooksMylibraryBookshelvesAddVolumeReason where
+instance FromText BooksMyLibraryBookshelvesAddVolumeReason where
     fromText = \case
-        "IOS_PREX" -> Just BMBAVRIosPrex
-        "IOS_SEARCH" -> Just BMBAVRIosSearch
-        "ONBOARDING" -> Just BMBAVROnboarding
+        "IOS_PREX" -> Just BMLBAVRIosPrex
+        "IOS_SEARCH" -> Just BMLBAVRIosSearch
+        "ONBOARDING" -> Just BMLBAVROnboarding
         _ -> Nothing
 
-instance ToText BooksMylibraryBookshelvesAddVolumeReason where
+instance ToText BooksMyLibraryBookshelvesAddVolumeReason where
     toText = \case
-        BMBAVRIosPrex -> "IOS_PREX"
-        BMBAVRIosSearch -> "IOS_SEARCH"
-        BMBAVROnboarding -> "ONBOARDING"
+        BMLBAVRIosPrex -> "IOS_PREX"
+        BMLBAVRIosSearch -> "IOS_SEARCH"
+        BMLBAVROnboarding -> "ONBOARDING"
 
-instance FromJSON BooksMylibraryBookshelvesAddVolumeReason where
-    parseJSON = parseJSONText "BooksMylibraryBookshelvesAddVolumeReason"
+instance FromJSON BooksMyLibraryBookshelvesAddVolumeReason where
+    parseJSON = parseJSONText "BooksMyLibraryBookshelvesAddVolumeReason"
 
-instance ToJSON BooksMylibraryBookshelvesAddVolumeReason where
+instance ToJSON BooksMyLibraryBookshelvesAddVolumeReason where
     toJSON = toJSONText
 
 -- | Restrict to books or magazines.
@@ -497,7 +497,7 @@ instance ToJSON BooksVolumesListPrintType where
 
 -- | How the book was aquired
 data BooksVolumesMybooksListAcquireMethod
-    = Preordered
+    = PreOrdered
       -- ^ @PREORDERED@
       -- Preordered books (not yet available)
     | PreviouslyRented
@@ -524,7 +524,7 @@ instance Hashable BooksVolumesMybooksListAcquireMethod
 
 instance FromText BooksVolumesMybooksListAcquireMethod where
     fromText = \case
-        "PREORDERED" -> Just Preordered
+        "PREORDERED" -> Just PreOrdered
         "PREVIOUSLY_RENTED" -> Just PreviouslyRented
         "PUBLIC_DOMAIN" -> Just PublicDomain
         "PURCHASED" -> Just Purchased
@@ -535,7 +535,7 @@ instance FromText BooksVolumesMybooksListAcquireMethod where
 
 instance ToText BooksVolumesMybooksListAcquireMethod where
     toText = \case
-        Preordered -> "PREORDERED"
+        PreOrdered -> "PREORDERED"
         PreviouslyRented -> "PREVIOUSLY_RENTED"
         PublicDomain -> "PUBLIC_DOMAIN"
         Purchased -> "PURCHASED"
@@ -550,32 +550,32 @@ instance ToJSON BooksVolumesMybooksListAcquireMethod where
     toJSON = toJSONText
 
 -- | Restrict information returned to a set of selected fields.
-data BooksMylibraryBookshelvesVolumesListProjection
-    = BMBVLPFull
+data BooksMyLibraryBookshelvesVolumesListProjection
+    = BMLBVLPFull
       -- ^ @full@
       -- Includes all volume data.
-    | BMBVLPLite
+    | BMLBVLPLite
       -- ^ @lite@
       -- Includes a subset of fields in volumeInfo and accessInfo.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable BooksMylibraryBookshelvesVolumesListProjection
+instance Hashable BooksMyLibraryBookshelvesVolumesListProjection
 
-instance FromText BooksMylibraryBookshelvesVolumesListProjection where
+instance FromText BooksMyLibraryBookshelvesVolumesListProjection where
     fromText = \case
-        "full" -> Just BMBVLPFull
-        "lite" -> Just BMBVLPLite
+        "full" -> Just BMLBVLPFull
+        "lite" -> Just BMLBVLPLite
         _ -> Nothing
 
-instance ToText BooksMylibraryBookshelvesVolumesListProjection where
+instance ToText BooksMyLibraryBookshelvesVolumesListProjection where
     toText = \case
-        BMBVLPFull -> "full"
-        BMBVLPLite -> "lite"
+        BMLBVLPFull -> "full"
+        BMLBVLPLite -> "lite"
 
-instance FromJSON BooksMylibraryBookshelvesVolumesListProjection where
-    parseJSON = parseJSONText "BooksMylibraryBookshelvesVolumesListProjection"
+instance FromJSON BooksMyLibraryBookshelvesVolumesListProjection where
+    parseJSON = parseJSONText "BooksMyLibraryBookshelvesVolumesListProjection"
 
-instance ToJSON BooksMylibraryBookshelvesVolumesListProjection where
+instance ToJSON BooksMyLibraryBookshelvesVolumesListProjection where
     toJSON = toJSONText
 
 -- | Restrict information returned to a set of selected fields.
@@ -673,7 +673,7 @@ instance ToJSON BooksVolumesMybooksListProcessingState where
 
 -- | The type of access license to request. If not specified, the default is
 -- BOTH.
-data BooksMyconfigRequestAccessLicenseTypes
+data BooksMyConfigRequestAccessLicenseTypes
     = Both
       -- ^ @BOTH@
       -- Both concurrent and download licenses.
@@ -685,47 +685,23 @@ data BooksMyconfigRequestAccessLicenseTypes
       -- Offline download access license.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable BooksMyconfigRequestAccessLicenseTypes
+instance Hashable BooksMyConfigRequestAccessLicenseTypes
 
-instance FromText BooksMyconfigRequestAccessLicenseTypes where
+instance FromText BooksMyConfigRequestAccessLicenseTypes where
     fromText = \case
         "BOTH" -> Just Both
         "CONCURRENT" -> Just Concurrent
         "DOWNLOAD" -> Just Download
         _ -> Nothing
 
-instance ToText BooksMyconfigRequestAccessLicenseTypes where
+instance ToText BooksMyConfigRequestAccessLicenseTypes where
     toText = \case
         Both -> "BOTH"
         Concurrent -> "CONCURRENT"
         Download -> "DOWNLOAD"
 
-instance FromJSON BooksMyconfigRequestAccessLicenseTypes where
-    parseJSON = parseJSONText "BooksMyconfigRequestAccessLicenseTypes"
+instance FromJSON BooksMyConfigRequestAccessLicenseTypes where
+    parseJSON = parseJSONText "BooksMyConfigRequestAccessLicenseTypes"
 
-instance ToJSON BooksMyconfigRequestAccessLicenseTypes where
-    toJSON = toJSONText
-
--- | Data format for the response.
-data Alt
-    = JSON
-      -- ^ @json@
-      -- Responses with Content-Type of application\/json
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable Alt
-
-instance FromText Alt where
-    fromText = \case
-        "json" -> Just JSON
-        _ -> Nothing
-
-instance ToText Alt where
-    toText = \case
-        JSON -> "json"
-
-instance FromJSON Alt where
-    parseJSON = parseJSONText "Alt"
-
-instance ToJSON Alt where
+instance ToJSON BooksMyConfigRequestAccessLicenseTypes where
     toJSON = toJSONText

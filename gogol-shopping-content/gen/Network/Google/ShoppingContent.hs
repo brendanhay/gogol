@@ -30,8 +30,8 @@ module Network.Google.ShoppingContent
     -- ** ContentOrdersAcknowledge
     , module Network.Google.Resource.Content.Orders.Acknowledge
 
-    -- ** ContentOrdersAdvancetestorder
-    , module Network.Google.Resource.Content.Orders.Advancetestorder
+    -- ** ContentOrdersAdvancetestOrder
+    , module Network.Google.Resource.Content.Orders.AdvancetestOrder
 
     -- ** ContentOrdersCancel
     , module Network.Google.Resource.Content.Orders.Cancel
@@ -39,8 +39,8 @@ module Network.Google.ShoppingContent
     -- ** ContentOrdersCancellineitem
     , module Network.Google.Resource.Content.Orders.Cancellineitem
 
-    -- ** ContentOrdersCreatetestorder
-    , module Network.Google.Resource.Content.Orders.Createtestorder
+    -- ** ContentOrdersCreatetestOrder
+    , module Network.Google.Resource.Content.Orders.CreatetestOrder
 
     -- ** ContentOrdersCustombatch
     , module Network.Google.Resource.Content.Orders.Custombatch
@@ -48,11 +48,11 @@ module Network.Google.ShoppingContent
     -- ** ContentOrdersGet
     , module Network.Google.Resource.Content.Orders.Get
 
-    -- ** ContentOrdersGetbymerchantorderid
-    , module Network.Google.Resource.Content.Orders.Getbymerchantorderid
+    -- ** ContentOrdersGetbymerchantOrderid
+    , module Network.Google.Resource.Content.Orders.GetbymerchantOrderid
 
-    -- ** ContentOrdersGettestordertemplate
-    , module Network.Google.Resource.Content.Orders.Gettestordertemplate
+    -- ** ContentOrdersGettestOrdertemplate
+    , module Network.Google.Resource.Content.Orders.GettestOrdertemplate
 
     -- ** ContentOrdersList
     , module Network.Google.Resource.Content.Orders.List
@@ -66,8 +66,8 @@ module Network.Google.ShoppingContent
     -- ** ContentOrdersShiplineitems
     , module Network.Google.Resource.Content.Orders.Shiplineitems
 
-    -- ** ContentOrdersUpdatemerchantorderid
-    , module Network.Google.Resource.Content.Orders.Updatemerchantorderid
+    -- ** ContentOrdersUpdatemerchantOrderid
+    , module Network.Google.Resource.Content.Orders.UpdatemerchantOrderid
 
     -- ** ContentOrdersUpdateshipment
     , module Network.Google.Resource.Content.Orders.Updateshipment
@@ -214,8 +214,8 @@ module Network.Google.ShoppingContent
     , oslisQuantity
     , oslisLineItemId
 
-    -- ** ContentOrdersGettestordertemplateTemplateName
-    , ContentOrdersGettestordertemplateTemplateName (..)
+    -- ** ContentOrdersGettestOrdertemplateTemplateName
+    , ContentOrdersGettestOrdertemplateTemplateName (..)
 
     -- ** OrdersRefundResponse
     , OrdersRefundResponse
@@ -271,7 +271,7 @@ module Network.Google.ShoppingContent
     , OrderLineItemReturnInfo
     , orderLineItemReturnInfo
     , oliriIsReturnable
-    , oliriPolicyUrl
+    , oliriPolicyURL
     , oliriDaysToReturn
 
     -- ** OrdersCancelLineItemRequest
@@ -495,24 +495,24 @@ module Network.Google.ShoppingContent
     -- ** Order
     , Order
     , order
-    , ooStatus
-    , ooMerchantId
-    , ooRefunds
-    , ooKind
-    , ooLineItems
-    , ooShipments
-    , ooNetAmount
-    , ooPlacedDate
-    , ooDeliveryDetails
-    , ooShippingOption
-    , ooMerchantOrderId
-    , ooAcknowledged
-    , ooShippingCostTax
-    , ooCustomer
-    , ooId
-    , ooPaymentMethod
-    , ooPaymentStatus
-    , ooShippingCost
+    , ordStatus
+    , ordMerchantId
+    , ordRefunds
+    , ordKind
+    , ordLineItems
+    , ordShipments
+    , ordNetAmount
+    , ordPlacedDate
+    , ordDeliveryDetails
+    , ordShippingOption
+    , ordMerchantOrderId
+    , ordAcknowledged
+    , ordShippingCostTax
+    , ordCustomer
+    , ordId
+    , ordPaymentMethod
+    , ordPaymentStatus
+    , ordShippingCost
 
     -- ** OrdersCustomBatchRequestEntryReturnLineItem
     , OrdersCustomBatchRequestEntryReturnLineItem
@@ -535,9 +535,6 @@ module Network.Google.ShoppingContent
     , ocbrerReason
     , ocbrerReasonText
 
-    -- ** Alt
-    , Alt (..)
-
     -- ** OrderCancellation
     , OrderCancellation
     , orderCancellation
@@ -550,25 +547,25 @@ module Network.Google.ShoppingContent
     -- ** OrdersCustomBatchResponse
     , OrdersCustomBatchResponse
     , ordersCustomBatchResponse
-    , ordEntries
-    , ordKind
+    , ocbrcEntries
+    , ocbrcKind
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.Resource.Content.Orders.Acknowledge
-import           Network.Google.Resource.Content.Orders.Advancetestorder
+import           Network.Google.Resource.Content.Orders.AdvancetestOrder
 import           Network.Google.Resource.Content.Orders.Cancel
 import           Network.Google.Resource.Content.Orders.Cancellineitem
-import           Network.Google.Resource.Content.Orders.Createtestorder
+import           Network.Google.Resource.Content.Orders.CreatetestOrder
 import           Network.Google.Resource.Content.Orders.Custombatch
 import           Network.Google.Resource.Content.Orders.Get
-import           Network.Google.Resource.Content.Orders.Getbymerchantorderid
-import           Network.Google.Resource.Content.Orders.Gettestordertemplate
+import           Network.Google.Resource.Content.Orders.GetbymerchantOrderid
+import           Network.Google.Resource.Content.Orders.GettestOrdertemplate
 import           Network.Google.Resource.Content.Orders.List
 import           Network.Google.Resource.Content.Orders.Refund
 import           Network.Google.Resource.Content.Orders.Returnlineitem
 import           Network.Google.Resource.Content.Orders.Shiplineitems
-import           Network.Google.Resource.Content.Orders.Updatemerchantorderid
+import           Network.Google.Resource.Content.Orders.UpdatemerchantOrderid
 import           Network.Google.Resource.Content.Orders.Updateshipment
 import           Network.Google.ShoppingContent.Types
 
@@ -577,19 +574,19 @@ TODO
 -}
 
 type ShoppingContentAPI =
-     OrdersGetbymerchantorderidResource :<|>
-       OrdersCreatetestorderResource
+     OrdersGetbymerchantOrderidResource :<|>
+       OrdersCreatetestOrderResource
        :<|> OrdersListResource
        :<|> OrdersCancellineitemResource
-       :<|> OrdersUpdatemerchantorderidResource
+       :<|> OrdersUpdatemerchantOrderidResource
        :<|> OrdersAcknowledgeResource
        :<|> OrdersGetResource
        :<|> OrdersRefundResource
-       :<|> OrdersGettestordertemplateResource
+       :<|> OrdersGettestOrdertemplateResource
        :<|> OrdersReturnlineitemResource
        :<|> OrdersUpdateshipmentResource
        :<|> OrdersCustombatchResource
-       :<|> OrdersAdvancetestorderResource
+       :<|> OrdersAdvancetestOrderResource
        :<|> OrdersShiplineitemsResource
        :<|> OrdersCancelResource
 

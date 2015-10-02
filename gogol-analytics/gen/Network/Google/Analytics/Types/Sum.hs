@@ -116,27 +116,3 @@ instance FromJSON AnalyticsDataGaGetSamplingLevel where
 
 instance ToJSON AnalyticsDataGaGetSamplingLevel where
     toJSON = toJSONText
-
--- | Data format for the response.
-data Alt
-    = ALTJSON
-      -- ^ @json@
-      -- Responses with Content-Type of application\/json
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable Alt
-
-instance FromText Alt where
-    fromText = \case
-        "json" -> Just ALTJSON
-        _ -> Nothing
-
-instance ToText Alt where
-    toText = \case
-        ALTJSON -> "json"
-
-instance FromJSON Alt where
-    parseJSON = parseJSONText "Alt"
-
-instance ToJSON Alt where
-    toJSON = toJSONText

@@ -32,12 +32,11 @@ module Network.Google.Resource.Coordinate.Worker.List
     -- * Request Lenses
     , wlQuotaUser
     , wlPrettyPrint
-    , wlUserIp
+    , wlUserIP
     , wlTeamId
     , wlKey
-    , wlOauthToken
+    , wlOAuthToken
     , wlFields
-    , wlAlt
     ) where
 
 import           Network.Google.MapsCoordinate.Types
@@ -52,10 +51,10 @@ type WorkerListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :>
+                       QueryParam "alt" AltJSON :>
                          Get '[JSON] WorkerListResponse
 
 -- | Retrieves a list of workers in a team.
@@ -64,12 +63,11 @@ type WorkerListResource =
 data WorkerList' = WorkerList'
     { _wlQuotaUser   :: !(Maybe Text)
     , _wlPrettyPrint :: !Bool
-    , _wlUserIp      :: !(Maybe Text)
+    , _wlUserIP      :: !(Maybe Text)
     , _wlTeamId      :: !Text
-    , _wlKey         :: !(Maybe Text)
-    , _wlOauthToken  :: !(Maybe Text)
+    , _wlKey         :: !(Maybe Key)
+    , _wlOAuthToken  :: !(Maybe OAuthToken)
     , _wlFields      :: !(Maybe Text)
-    , _wlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WorkerList'' with the minimum fields required to make a request.
@@ -80,17 +78,15 @@ data WorkerList' = WorkerList'
 --
 -- * 'wlPrettyPrint'
 --
--- * 'wlUserIp'
+-- * 'wlUserIP'
 --
 -- * 'wlTeamId'
 --
 -- * 'wlKey'
 --
--- * 'wlOauthToken'
+-- * 'wlOAuthToken'
 --
 -- * 'wlFields'
---
--- * 'wlAlt'
 workerList'
     :: Text -- ^ 'teamId'
     -> WorkerList'
@@ -98,12 +94,11 @@ workerList' pWlTeamId_ =
     WorkerList'
     { _wlQuotaUser = Nothing
     , _wlPrettyPrint = True
-    , _wlUserIp = Nothing
+    , _wlUserIP = Nothing
     , _wlTeamId = pWlTeamId_
     , _wlKey = Nothing
-    , _wlOauthToken = Nothing
+    , _wlOAuthToken = Nothing
     , _wlFields = Nothing
-    , _wlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -121,8 +116,8 @@ wlPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-wlUserIp :: Lens' WorkerList' (Maybe Text)
-wlUserIp = lens _wlUserIp (\ s a -> s{_wlUserIp = a})
+wlUserIP :: Lens' WorkerList' (Maybe Text)
+wlUserIP = lens _wlUserIP (\ s a -> s{_wlUserIP = a})
 
 -- | Team ID
 wlTeamId :: Lens' WorkerList' Text
@@ -131,32 +126,32 @@ wlTeamId = lens _wlTeamId (\ s a -> s{_wlTeamId = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-wlKey :: Lens' WorkerList' (Maybe Text)
+wlKey :: Lens' WorkerList' (Maybe Key)
 wlKey = lens _wlKey (\ s a -> s{_wlKey = a})
 
 -- | OAuth 2.0 token for the current user.
-wlOauthToken :: Lens' WorkerList' (Maybe Text)
-wlOauthToken
-  = lens _wlOauthToken (\ s a -> s{_wlOauthToken = a})
+wlOAuthToken :: Lens' WorkerList' (Maybe OAuthToken)
+wlOAuthToken
+  = lens _wlOAuthToken (\ s a -> s{_wlOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 wlFields :: Lens' WorkerList' (Maybe Text)
 wlFields = lens _wlFields (\ s a -> s{_wlFields = a})
 
--- | Data format for the response.
-wlAlt :: Lens' WorkerList' Alt
-wlAlt = lens _wlAlt (\ s a -> s{_wlAlt = a})
+instance GoogleAuth WorkerList' where
+        authKey = wlKey . _Just
+        authToken = wlOAuthToken . _Just
 
 instance GoogleRequest WorkerList' where
         type Rs WorkerList' = WorkerListResponse
         request = requestWithRoute defReq mapsCoordinateURL
         requestWithRoute r u WorkerList'{..}
-          = go _wlQuotaUser (Just _wlPrettyPrint) _wlUserIp
+          = go _wlQuotaUser (Just _wlPrettyPrint) _wlUserIP
               _wlTeamId
               _wlKey
-              _wlOauthToken
+              _wlOAuthToken
               _wlFields
-              (Just _wlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy WorkerListResource)
                       r

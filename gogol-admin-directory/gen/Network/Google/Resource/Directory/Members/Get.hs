@@ -30,15 +30,14 @@ module Network.Google.Resource.Directory.Members.Get
     , MembersGet'
 
     -- * Request Lenses
-    , memQuotaUser
-    , memMemberKey
-    , memPrettyPrint
-    , memUserIp
-    , memGroupKey
-    , memKey
-    , memOauthToken
-    , memFields
-    , memAlt
+    , mgQuotaUser
+    , mgMemberKey
+    , mgPrettyPrint
+    , mgUserIP
+    , mgGroupKey
+    , mgKey
+    , mgOAuthToken
+    , mgFields
     ) where
 
 import           Network.Google.AdminDirectory.Types
@@ -54,126 +53,118 @@ type MembersGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] Member
+                         QueryParam "alt" AltJSON :> Get '[JSON] Member
 
 -- | Retrieve Group Member
 --
 -- /See:/ 'membersGet'' smart constructor.
 data MembersGet' = MembersGet'
-    { _memQuotaUser   :: !(Maybe Text)
-    , _memMemberKey   :: !Text
-    , _memPrettyPrint :: !Bool
-    , _memUserIp      :: !(Maybe Text)
-    , _memGroupKey    :: !Text
-    , _memKey         :: !(Maybe Text)
-    , _memOauthToken  :: !(Maybe Text)
-    , _memFields      :: !(Maybe Text)
-    , _memAlt         :: !Alt
+    { _mgQuotaUser   :: !(Maybe Text)
+    , _mgMemberKey   :: !Text
+    , _mgPrettyPrint :: !Bool
+    , _mgUserIP      :: !(Maybe Text)
+    , _mgGroupKey    :: !Text
+    , _mgKey         :: !(Maybe Key)
+    , _mgOAuthToken  :: !(Maybe OAuthToken)
+    , _mgFields      :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MembersGet'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'memQuotaUser'
+-- * 'mgQuotaUser'
 --
--- * 'memMemberKey'
+-- * 'mgMemberKey'
 --
--- * 'memPrettyPrint'
+-- * 'mgPrettyPrint'
 --
--- * 'memUserIp'
+-- * 'mgUserIP'
 --
--- * 'memGroupKey'
+-- * 'mgGroupKey'
 --
--- * 'memKey'
+-- * 'mgKey'
 --
--- * 'memOauthToken'
+-- * 'mgOAuthToken'
 --
--- * 'memFields'
---
--- * 'memAlt'
+-- * 'mgFields'
 membersGet'
     :: Text -- ^ 'memberKey'
     -> Text -- ^ 'groupKey'
     -> MembersGet'
-membersGet' pMemMemberKey_ pMemGroupKey_ =
+membersGet' pMgMemberKey_ pMgGroupKey_ =
     MembersGet'
-    { _memQuotaUser = Nothing
-    , _memMemberKey = pMemMemberKey_
-    , _memPrettyPrint = True
-    , _memUserIp = Nothing
-    , _memGroupKey = pMemGroupKey_
-    , _memKey = Nothing
-    , _memOauthToken = Nothing
-    , _memFields = Nothing
-    , _memAlt = JSON
+    { _mgQuotaUser = Nothing
+    , _mgMemberKey = pMgMemberKey_
+    , _mgPrettyPrint = True
+    , _mgUserIP = Nothing
+    , _mgGroupKey = pMgGroupKey_
+    , _mgKey = Nothing
+    , _mgOAuthToken = Nothing
+    , _mgFields = Nothing
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-memQuotaUser :: Lens' MembersGet' (Maybe Text)
-memQuotaUser
-  = lens _memQuotaUser (\ s a -> s{_memQuotaUser = a})
+mgQuotaUser :: Lens' MembersGet' (Maybe Text)
+mgQuotaUser
+  = lens _mgQuotaUser (\ s a -> s{_mgQuotaUser = a})
 
 -- | Email or immutable Id of the member
-memMemberKey :: Lens' MembersGet' Text
-memMemberKey
-  = lens _memMemberKey (\ s a -> s{_memMemberKey = a})
+mgMemberKey :: Lens' MembersGet' Text
+mgMemberKey
+  = lens _mgMemberKey (\ s a -> s{_mgMemberKey = a})
 
 -- | Returns response with indentations and line breaks.
-memPrettyPrint :: Lens' MembersGet' Bool
-memPrettyPrint
-  = lens _memPrettyPrint
-      (\ s a -> s{_memPrettyPrint = a})
+mgPrettyPrint :: Lens' MembersGet' Bool
+mgPrettyPrint
+  = lens _mgPrettyPrint
+      (\ s a -> s{_mgPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-memUserIp :: Lens' MembersGet' (Maybe Text)
-memUserIp
-  = lens _memUserIp (\ s a -> s{_memUserIp = a})
+mgUserIP :: Lens' MembersGet' (Maybe Text)
+mgUserIP = lens _mgUserIP (\ s a -> s{_mgUserIP = a})
 
 -- | Email or immutable Id of the group
-memGroupKey :: Lens' MembersGet' Text
-memGroupKey
-  = lens _memGroupKey (\ s a -> s{_memGroupKey = a})
+mgGroupKey :: Lens' MembersGet' Text
+mgGroupKey
+  = lens _mgGroupKey (\ s a -> s{_mgGroupKey = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-memKey :: Lens' MembersGet' (Maybe Text)
-memKey = lens _memKey (\ s a -> s{_memKey = a})
+mgKey :: Lens' MembersGet' (Maybe Key)
+mgKey = lens _mgKey (\ s a -> s{_mgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-memOauthToken :: Lens' MembersGet' (Maybe Text)
-memOauthToken
-  = lens _memOauthToken
-      (\ s a -> s{_memOauthToken = a})
+mgOAuthToken :: Lens' MembersGet' (Maybe OAuthToken)
+mgOAuthToken
+  = lens _mgOAuthToken (\ s a -> s{_mgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-memFields :: Lens' MembersGet' (Maybe Text)
-memFields
-  = lens _memFields (\ s a -> s{_memFields = a})
+mgFields :: Lens' MembersGet' (Maybe Text)
+mgFields = lens _mgFields (\ s a -> s{_mgFields = a})
 
--- | Data format for the response.
-memAlt :: Lens' MembersGet' Alt
-memAlt = lens _memAlt (\ s a -> s{_memAlt = a})
+instance GoogleAuth MembersGet' where
+        authKey = mgKey . _Just
+        authToken = mgOAuthToken . _Just
 
 instance GoogleRequest MembersGet' where
         type Rs MembersGet' = Member
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u MembersGet'{..}
-          = go _memQuotaUser _memMemberKey
-              (Just _memPrettyPrint)
-              _memUserIp
-              _memGroupKey
-              _memKey
-              _memOauthToken
-              _memFields
-              (Just _memAlt)
+          = go _mgQuotaUser _mgMemberKey (Just _mgPrettyPrint)
+              _mgUserIP
+              _mgGroupKey
+              _mgKey
+              _mgOAuthToken
+              _mgFields
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy MembersGetResource)
                       r

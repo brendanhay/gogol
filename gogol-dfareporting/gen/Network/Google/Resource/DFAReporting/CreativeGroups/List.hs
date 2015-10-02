@@ -32,7 +32,7 @@ module Network.Google.Resource.DFAReporting.CreativeGroups.List
     -- * Request Lenses
     , cglQuotaUser
     , cglPrettyPrint
-    , cglUserIp
+    , cglUserIP
     , cglSearchString
     , cglIds
     , cglProfileId
@@ -41,11 +41,10 @@ module Network.Google.Resource.DFAReporting.CreativeGroups.List
     , cglKey
     , cglPageToken
     , cglSortField
-    , cglOauthToken
+    , cglOAuthToken
     , cglAdvertiserIds
     , cglMaxResults
     , cglFields
-    , cglAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -66,16 +65,16 @@ type CreativeGroupsListResource =
                        DfareportingCreativeGroupsListSortOrder
                        :>
                        QueryParam "groupNumber" Int32 :>
-                         QueryParam "key" Text :>
+                         QueryParam "key" Key :>
                            QueryParam "pageToken" Text :>
                              QueryParam "sortField"
                                DfareportingCreativeGroupsListSortField
                                :>
-                               QueryParam "oauth_token" Text :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParams "advertiserIds" Int64 :>
                                    QueryParam "maxResults" Int32 :>
                                      QueryParam "fields" Text :>
-                                       QueryParam "alt" Alt :>
+                                       QueryParam "alt" AltJSON :>
                                          Get '[JSON] CreativeGroupsListResponse
 
 -- | Retrieves a list of creative groups, possibly filtered.
@@ -84,20 +83,19 @@ type CreativeGroupsListResource =
 data CreativeGroupsList' = CreativeGroupsList'
     { _cglQuotaUser     :: !(Maybe Text)
     , _cglPrettyPrint   :: !Bool
-    , _cglUserIp        :: !(Maybe Text)
+    , _cglUserIP        :: !(Maybe Text)
     , _cglSearchString  :: !(Maybe Text)
     , _cglIds           :: !(Maybe Int64)
     , _cglProfileId     :: !Int64
     , _cglSortOrder     :: !(Maybe DfareportingCreativeGroupsListSortOrder)
     , _cglGroupNumber   :: !(Maybe Int32)
-    , _cglKey           :: !(Maybe Text)
+    , _cglKey           :: !(Maybe Key)
     , _cglPageToken     :: !(Maybe Text)
     , _cglSortField     :: !(Maybe DfareportingCreativeGroupsListSortField)
-    , _cglOauthToken    :: !(Maybe Text)
+    , _cglOAuthToken    :: !(Maybe OAuthToken)
     , _cglAdvertiserIds :: !(Maybe Int64)
     , _cglMaxResults    :: !(Maybe Int32)
     , _cglFields        :: !(Maybe Text)
-    , _cglAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeGroupsList'' with the minimum fields required to make a request.
@@ -108,7 +106,7 @@ data CreativeGroupsList' = CreativeGroupsList'
 --
 -- * 'cglPrettyPrint'
 --
--- * 'cglUserIp'
+-- * 'cglUserIP'
 --
 -- * 'cglSearchString'
 --
@@ -126,15 +124,13 @@ data CreativeGroupsList' = CreativeGroupsList'
 --
 -- * 'cglSortField'
 --
--- * 'cglOauthToken'
+-- * 'cglOAuthToken'
 --
 -- * 'cglAdvertiserIds'
 --
 -- * 'cglMaxResults'
 --
 -- * 'cglFields'
---
--- * 'cglAlt'
 creativeGroupsList'
     :: Int64 -- ^ 'profileId'
     -> CreativeGroupsList'
@@ -142,7 +138,7 @@ creativeGroupsList' pCglProfileId_ =
     CreativeGroupsList'
     { _cglQuotaUser = Nothing
     , _cglPrettyPrint = True
-    , _cglUserIp = Nothing
+    , _cglUserIP = Nothing
     , _cglSearchString = Nothing
     , _cglIds = Nothing
     , _cglProfileId = pCglProfileId_
@@ -151,11 +147,10 @@ creativeGroupsList' pCglProfileId_ =
     , _cglKey = Nothing
     , _cglPageToken = Nothing
     , _cglSortField = Nothing
-    , _cglOauthToken = Nothing
+    , _cglOAuthToken = Nothing
     , _cglAdvertiserIds = Nothing
     , _cglMaxResults = Nothing
     , _cglFields = Nothing
-    , _cglAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -173,9 +168,9 @@ cglPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cglUserIp :: Lens' CreativeGroupsList' (Maybe Text)
-cglUserIp
-  = lens _cglUserIp (\ s a -> s{_cglUserIp = a})
+cglUserIP :: Lens' CreativeGroupsList' (Maybe Text)
+cglUserIP
+  = lens _cglUserIP (\ s a -> s{_cglUserIP = a})
 
 -- | Allows searching for creative groups by name or ID. Wildcards (*) are
 -- allowed. For example, \"creativegroup*2015\" will return creative groups
@@ -213,7 +208,7 @@ cglGroupNumber
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cglKey :: Lens' CreativeGroupsList' (Maybe Text)
+cglKey :: Lens' CreativeGroupsList' (Maybe Key)
 cglKey = lens _cglKey (\ s a -> s{_cglKey = a})
 
 -- | Value of the nextPageToken from the previous result page.
@@ -227,10 +222,10 @@ cglSortField
   = lens _cglSortField (\ s a -> s{_cglSortField = a})
 
 -- | OAuth 2.0 token for the current user.
-cglOauthToken :: Lens' CreativeGroupsList' (Maybe Text)
-cglOauthToken
-  = lens _cglOauthToken
-      (\ s a -> s{_cglOauthToken = a})
+cglOAuthToken :: Lens' CreativeGroupsList' (Maybe OAuthToken)
+cglOAuthToken
+  = lens _cglOAuthToken
+      (\ s a -> s{_cglOAuthToken = a})
 
 -- | Select only creative groups that belong to these advertisers.
 cglAdvertiserIds :: Lens' CreativeGroupsList' (Maybe Int64)
@@ -249,16 +244,16 @@ cglFields :: Lens' CreativeGroupsList' (Maybe Text)
 cglFields
   = lens _cglFields (\ s a -> s{_cglFields = a})
 
--- | Data format for the response.
-cglAlt :: Lens' CreativeGroupsList' Alt
-cglAlt = lens _cglAlt (\ s a -> s{_cglAlt = a})
+instance GoogleAuth CreativeGroupsList' where
+        authKey = cglKey . _Just
+        authToken = cglOAuthToken . _Just
 
 instance GoogleRequest CreativeGroupsList' where
         type Rs CreativeGroupsList' =
              CreativeGroupsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativeGroupsList'{..}
-          = go _cglQuotaUser (Just _cglPrettyPrint) _cglUserIp
+          = go _cglQuotaUser (Just _cglPrettyPrint) _cglUserIP
               _cglSearchString
               _cglIds
               _cglProfileId
@@ -267,11 +262,11 @@ instance GoogleRequest CreativeGroupsList' where
               _cglKey
               _cglPageToken
               _cglSortField
-              _cglOauthToken
+              _cglOAuthToken
               _cglAdvertiserIds
               _cglMaxResults
               _cglFields
-              (Just _cglAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CreativeGroupsListResource)

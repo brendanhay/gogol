@@ -32,15 +32,14 @@ module Network.Google.Resource.Plus.People.Search
     -- * Request Lenses
     , psQuotaUser
     , psPrettyPrint
-    , psUserIp
+    , psUserIP
     , psKey
     , psQuery
     , psLanguage
     , psPageToken
-    , psOauthToken
+    , psOAuthToken
     , psMaxResults
     , psFields
-    , psAlt
     ) where
 
 import           Network.Google.Plus.Types
@@ -53,14 +52,14 @@ type PeopleSearchResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
+             QueryParam "key" Key :>
                QueryParam "query" Text :>
                  QueryParam "language" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "maxResults" Word32 :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Get '[JSON] PeopleFeed
+                           QueryParam "alt" AltJSON :> Get '[JSON] PeopleFeed
 
 -- | Search all public profiles.
 --
@@ -68,15 +67,14 @@ type PeopleSearchResource =
 data PeopleSearch' = PeopleSearch'
     { _psQuotaUser   :: !(Maybe Text)
     , _psPrettyPrint :: !Bool
-    , _psUserIp      :: !(Maybe Text)
-    , _psKey         :: !(Maybe Text)
+    , _psUserIP      :: !(Maybe Text)
+    , _psKey         :: !(Maybe Key)
     , _psQuery       :: !Text
     , _psLanguage    :: !Text
     , _psPageToken   :: !(Maybe Text)
-    , _psOauthToken  :: !(Maybe Text)
+    , _psOAuthToken  :: !(Maybe OAuthToken)
     , _psMaxResults  :: !Word32
     , _psFields      :: !(Maybe Text)
-    , _psAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PeopleSearch'' with the minimum fields required to make a request.
@@ -87,7 +85,7 @@ data PeopleSearch' = PeopleSearch'
 --
 -- * 'psPrettyPrint'
 --
--- * 'psUserIp'
+-- * 'psUserIP'
 --
 -- * 'psKey'
 --
@@ -97,13 +95,11 @@ data PeopleSearch' = PeopleSearch'
 --
 -- * 'psPageToken'
 --
--- * 'psOauthToken'
+-- * 'psOAuthToken'
 --
 -- * 'psMaxResults'
 --
 -- * 'psFields'
---
--- * 'psAlt'
 peopleSearch'
     :: Text -- ^ 'query'
     -> PeopleSearch'
@@ -111,15 +107,14 @@ peopleSearch' pPsQuery_ =
     PeopleSearch'
     { _psQuotaUser = Nothing
     , _psPrettyPrint = True
-    , _psUserIp = Nothing
+    , _psUserIP = Nothing
     , _psKey = Nothing
     , _psQuery = pPsQuery_
     , _psLanguage = "en-US"
     , _psPageToken = Nothing
-    , _psOauthToken = Nothing
+    , _psOAuthToken = Nothing
     , _psMaxResults = 25
     , _psFields = Nothing
-    , _psAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -137,13 +132,13 @@ psPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-psUserIp :: Lens' PeopleSearch' (Maybe Text)
-psUserIp = lens _psUserIp (\ s a -> s{_psUserIp = a})
+psUserIP :: Lens' PeopleSearch' (Maybe Text)
+psUserIP = lens _psUserIP (\ s a -> s{_psUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-psKey :: Lens' PeopleSearch' (Maybe Text)
+psKey :: Lens' PeopleSearch' (Maybe Key)
 psKey = lens _psKey (\ s a -> s{_psKey = a})
 
 -- | Specify a query string for full text search of public text in all
@@ -166,9 +161,9 @@ psPageToken
   = lens _psPageToken (\ s a -> s{_psPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-psOauthToken :: Lens' PeopleSearch' (Maybe Text)
-psOauthToken
-  = lens _psOauthToken (\ s a -> s{_psOauthToken = a})
+psOAuthToken :: Lens' PeopleSearch' (Maybe OAuthToken)
+psOAuthToken
+  = lens _psOAuthToken (\ s a -> s{_psOAuthToken = a})
 
 -- | The maximum number of people to include in the response, which is used
 -- for paging. For any response, the actual number returned might be less
@@ -181,23 +176,23 @@ psMaxResults
 psFields :: Lens' PeopleSearch' (Maybe Text)
 psFields = lens _psFields (\ s a -> s{_psFields = a})
 
--- | Data format for the response.
-psAlt :: Lens' PeopleSearch' Alt
-psAlt = lens _psAlt (\ s a -> s{_psAlt = a})
+instance GoogleAuth PeopleSearch' where
+        authKey = psKey . _Just
+        authToken = psOAuthToken . _Just
 
 instance GoogleRequest PeopleSearch' where
         type Rs PeopleSearch' = PeopleFeed
         request = requestWithRoute defReq plusURL
         requestWithRoute r u PeopleSearch'{..}
-          = go _psQuotaUser (Just _psPrettyPrint) _psUserIp
+          = go _psQuotaUser (Just _psPrettyPrint) _psUserIP
               _psKey
               (Just _psQuery)
               (Just _psLanguage)
               _psPageToken
-              _psOauthToken
+              _psOAuthToken
               (Just _psMaxResults)
               _psFields
-              (Just _psAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PeopleSearchResource)

@@ -32,14 +32,13 @@ module Network.Google.Resource.Drive.Comments.Get
     -- * Request Lenses
     , cgQuotaUser
     , cgPrettyPrint
-    , cgUserIp
+    , cgUserIP
     , cgKey
     , cgFileId
-    , cgOauthToken
+    , cgOAuthToken
     , cgCommentId
     , cgIncludeDeleted
     , cgFields
-    , cgAlt
     ) where
 
 import           Network.Google.Drive.Types
@@ -55,11 +54,11 @@ type CommentsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "includeDeleted" Bool :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Get '[JSON] Comment
+                           QueryParam "alt" AltJSON :> Get '[JSON] Comment
 
 -- | Gets a comment by ID.
 --
@@ -67,14 +66,13 @@ type CommentsGetResource =
 data CommentsGet' = CommentsGet'
     { _cgQuotaUser      :: !(Maybe Text)
     , _cgPrettyPrint    :: !Bool
-    , _cgUserIp         :: !(Maybe Text)
-    , _cgKey            :: !(Maybe Text)
+    , _cgUserIP         :: !(Maybe Text)
+    , _cgKey            :: !(Maybe Key)
     , _cgFileId         :: !Text
-    , _cgOauthToken     :: !(Maybe Text)
+    , _cgOAuthToken     :: !(Maybe OAuthToken)
     , _cgCommentId      :: !Text
     , _cgIncludeDeleted :: !Bool
     , _cgFields         :: !(Maybe Text)
-    , _cgAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsGet'' with the minimum fields required to make a request.
@@ -85,21 +83,19 @@ data CommentsGet' = CommentsGet'
 --
 -- * 'cgPrettyPrint'
 --
--- * 'cgUserIp'
+-- * 'cgUserIP'
 --
 -- * 'cgKey'
 --
 -- * 'cgFileId'
 --
--- * 'cgOauthToken'
+-- * 'cgOAuthToken'
 --
 -- * 'cgCommentId'
 --
 -- * 'cgIncludeDeleted'
 --
 -- * 'cgFields'
---
--- * 'cgAlt'
 commentsGet'
     :: Text -- ^ 'fileId'
     -> Text -- ^ 'commentId'
@@ -108,14 +104,13 @@ commentsGet' pCgFileId_ pCgCommentId_ =
     CommentsGet'
     { _cgQuotaUser = Nothing
     , _cgPrettyPrint = True
-    , _cgUserIp = Nothing
+    , _cgUserIP = Nothing
     , _cgKey = Nothing
     , _cgFileId = pCgFileId_
-    , _cgOauthToken = Nothing
+    , _cgOAuthToken = Nothing
     , _cgCommentId = pCgCommentId_
     , _cgIncludeDeleted = False
     , _cgFields = Nothing
-    , _cgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -133,13 +128,13 @@ cgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cgUserIp :: Lens' CommentsGet' (Maybe Text)
-cgUserIp = lens _cgUserIp (\ s a -> s{_cgUserIp = a})
+cgUserIP :: Lens' CommentsGet' (Maybe Text)
+cgUserIP = lens _cgUserIP (\ s a -> s{_cgUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cgKey :: Lens' CommentsGet' (Maybe Text)
+cgKey :: Lens' CommentsGet' (Maybe Key)
 cgKey = lens _cgKey (\ s a -> s{_cgKey = a})
 
 -- | The ID of the file.
@@ -147,9 +142,9 @@ cgFileId :: Lens' CommentsGet' Text
 cgFileId = lens _cgFileId (\ s a -> s{_cgFileId = a})
 
 -- | OAuth 2.0 token for the current user.
-cgOauthToken :: Lens' CommentsGet' (Maybe Text)
-cgOauthToken
-  = lens _cgOauthToken (\ s a -> s{_cgOauthToken = a})
+cgOAuthToken :: Lens' CommentsGet' (Maybe OAuthToken)
+cgOAuthToken
+  = lens _cgOAuthToken (\ s a -> s{_cgOAuthToken = a})
 
 -- | The ID of the comment.
 cgCommentId :: Lens' CommentsGet' Text
@@ -167,22 +162,22 @@ cgIncludeDeleted
 cgFields :: Lens' CommentsGet' (Maybe Text)
 cgFields = lens _cgFields (\ s a -> s{_cgFields = a})
 
--- | Data format for the response.
-cgAlt :: Lens' CommentsGet' Alt
-cgAlt = lens _cgAlt (\ s a -> s{_cgAlt = a})
+instance GoogleAuth CommentsGet' where
+        authKey = cgKey . _Just
+        authToken = cgOAuthToken . _Just
 
 instance GoogleRequest CommentsGet' where
         type Rs CommentsGet' = Comment
         request = requestWithRoute defReq driveURL
         requestWithRoute r u CommentsGet'{..}
-          = go _cgQuotaUser (Just _cgPrettyPrint) _cgUserIp
+          = go _cgQuotaUser (Just _cgPrettyPrint) _cgUserIP
               _cgKey
               _cgFileId
-              _cgOauthToken
+              _cgOAuthToken
               _cgCommentId
               (Just _cgIncludeDeleted)
               _cgFields
-              (Just _cgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CommentsGetResource)

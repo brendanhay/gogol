@@ -32,14 +32,13 @@ module Network.Google.Resource.Blogger.Comments.Approve
     -- * Request Lenses
     , caQuotaUser
     , caPrettyPrint
-    , caUserIp
+    , caUserIP
     , caBlogId
     , caKey
     , caPostId
-    , caOauthToken
+    , caOAuthToken
     , caCommentId
     , caFields
-    , caAlt
     ) where
 
 import           Network.Google.Blogger.Types
@@ -58,10 +57,10 @@ type CommentsApproveResource =
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :> Post '[JSON] Comment
+                               QueryParam "alt" AltJSON :> Post '[JSON] Comment
 
 -- | Marks a comment as not spam.
 --
@@ -69,14 +68,13 @@ type CommentsApproveResource =
 data CommentsApprove' = CommentsApprove'
     { _caQuotaUser   :: !(Maybe Text)
     , _caPrettyPrint :: !Bool
-    , _caUserIp      :: !(Maybe Text)
+    , _caUserIP      :: !(Maybe Text)
     , _caBlogId      :: !Text
-    , _caKey         :: !(Maybe Text)
+    , _caKey         :: !(Maybe Key)
     , _caPostId      :: !Text
-    , _caOauthToken  :: !(Maybe Text)
+    , _caOAuthToken  :: !(Maybe OAuthToken)
     , _caCommentId   :: !Text
     , _caFields      :: !(Maybe Text)
-    , _caAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsApprove'' with the minimum fields required to make a request.
@@ -87,7 +85,7 @@ data CommentsApprove' = CommentsApprove'
 --
 -- * 'caPrettyPrint'
 --
--- * 'caUserIp'
+-- * 'caUserIP'
 --
 -- * 'caBlogId'
 --
@@ -95,13 +93,11 @@ data CommentsApprove' = CommentsApprove'
 --
 -- * 'caPostId'
 --
--- * 'caOauthToken'
+-- * 'caOAuthToken'
 --
 -- * 'caCommentId'
 --
 -- * 'caFields'
---
--- * 'caAlt'
 commentsApprove'
     :: Text -- ^ 'blogId'
     -> Text -- ^ 'postId'
@@ -111,14 +107,13 @@ commentsApprove' pCaBlogId_ pCaPostId_ pCaCommentId_ =
     CommentsApprove'
     { _caQuotaUser = Nothing
     , _caPrettyPrint = True
-    , _caUserIp = Nothing
+    , _caUserIP = Nothing
     , _caBlogId = pCaBlogId_
     , _caKey = Nothing
     , _caPostId = pCaPostId_
-    , _caOauthToken = Nothing
+    , _caOAuthToken = Nothing
     , _caCommentId = pCaCommentId_
     , _caFields = Nothing
-    , _caAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -136,8 +131,8 @@ caPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-caUserIp :: Lens' CommentsApprove' (Maybe Text)
-caUserIp = lens _caUserIp (\ s a -> s{_caUserIp = a})
+caUserIP :: Lens' CommentsApprove' (Maybe Text)
+caUserIP = lens _caUserIP (\ s a -> s{_caUserIP = a})
 
 -- | The ID of the Blog.
 caBlogId :: Lens' CommentsApprove' Text
@@ -146,7 +141,7 @@ caBlogId = lens _caBlogId (\ s a -> s{_caBlogId = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-caKey :: Lens' CommentsApprove' (Maybe Text)
+caKey :: Lens' CommentsApprove' (Maybe Key)
 caKey = lens _caKey (\ s a -> s{_caKey = a})
 
 -- | The ID of the Post.
@@ -154,9 +149,9 @@ caPostId :: Lens' CommentsApprove' Text
 caPostId = lens _caPostId (\ s a -> s{_caPostId = a})
 
 -- | OAuth 2.0 token for the current user.
-caOauthToken :: Lens' CommentsApprove' (Maybe Text)
-caOauthToken
-  = lens _caOauthToken (\ s a -> s{_caOauthToken = a})
+caOAuthToken :: Lens' CommentsApprove' (Maybe OAuthToken)
+caOAuthToken
+  = lens _caOAuthToken (\ s a -> s{_caOAuthToken = a})
 
 -- | The ID of the comment to mark as not spam.
 caCommentId :: Lens' CommentsApprove' Text
@@ -167,22 +162,22 @@ caCommentId
 caFields :: Lens' CommentsApprove' (Maybe Text)
 caFields = lens _caFields (\ s a -> s{_caFields = a})
 
--- | Data format for the response.
-caAlt :: Lens' CommentsApprove' Alt
-caAlt = lens _caAlt (\ s a -> s{_caAlt = a})
+instance GoogleAuth CommentsApprove' where
+        authKey = caKey . _Just
+        authToken = caOAuthToken . _Just
 
 instance GoogleRequest CommentsApprove' where
         type Rs CommentsApprove' = Comment
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u CommentsApprove'{..}
-          = go _caQuotaUser (Just _caPrettyPrint) _caUserIp
+          = go _caQuotaUser (Just _caPrettyPrint) _caUserIP
               _caBlogId
               _caKey
               _caPostId
-              _caOauthToken
+              _caOAuthToken
               _caCommentId
               _caFields
-              (Just _caAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CommentsApproveResource)

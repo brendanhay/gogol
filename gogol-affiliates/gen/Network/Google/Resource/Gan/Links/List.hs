@@ -35,7 +35,7 @@ module Network.Google.Resource.Gan.Links.List
     , llQuotaUser
     , llPrettyPrint
     , llAssetSize
-    , llUserIp
+    , llUserIP
     , llRelationshipStatus
     , llAdvertiserId
     , llSearchText
@@ -47,11 +47,10 @@ module Network.Google.Resource.Gan.Links.List
     , llLinkType
     , llPageToken
     , llStartDateMax
-    , llOauthToken
+    , llOAuthToken
     , llStartDateMin
     , llMaxResults
     , llFields
-    , llAlt
     ) where
 
 import           Network.Google.Affiliates.Types
@@ -77,16 +76,16 @@ type LinksListResource =
                              QueryParams "promotionType"
                                GanLinksListPromotionType
                                :>
-                               QueryParam "key" Text :>
+                               QueryParam "key" Key :>
                                  QueryParam "createDateMin" Text :>
                                    QueryParam "linkType" GanLinksListLinkType :>
                                      QueryParam "pageToken" Text :>
                                        QueryParam "startDateMax" Text :>
-                                         QueryParam "oauth_token" Text :>
+                                         QueryParam "oauth_token" OAuthToken :>
                                            QueryParam "startDateMin" Text :>
                                              QueryParam "maxResults" Word32 :>
                                                QueryParam "fields" Text :>
-                                                 QueryParam "alt" Alt :>
+                                                 QueryParam "alt" AltJSON :>
                                                    Get '[JSON] Links
 
 -- | Retrieves all links that match the query parameters.
@@ -98,23 +97,22 @@ data LinksList' = LinksList'
     , _llQuotaUser          :: !(Maybe Text)
     , _llPrettyPrint        :: !Bool
     , _llAssetSize          :: !(Maybe Text)
-    , _llUserIp             :: !(Maybe Text)
+    , _llUserIP             :: !(Maybe Text)
     , _llRelationshipStatus :: !(Maybe GanLinksListRelationshipStatus)
     , _llAdvertiserId       :: !(Maybe Int64)
     , _llSearchText         :: !(Maybe Text)
     , _llPromotionType      :: !(Maybe GanLinksListPromotionType)
     , _llRoleId             :: !Text
     , _llRole               :: !GanLinksListRole
-    , _llKey                :: !(Maybe Text)
+    , _llKey                :: !(Maybe Key)
     , _llCreateDateMin      :: !(Maybe Text)
     , _llLinkType           :: !(Maybe GanLinksListLinkType)
     , _llPageToken          :: !(Maybe Text)
     , _llStartDateMax       :: !(Maybe Text)
-    , _llOauthToken         :: !(Maybe Text)
+    , _llOAuthToken         :: !(Maybe OAuthToken)
     , _llStartDateMin       :: !(Maybe Text)
     , _llMaxResults         :: !(Maybe Word32)
     , _llFields             :: !(Maybe Text)
-    , _llAlt                :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LinksList'' with the minimum fields required to make a request.
@@ -131,7 +129,7 @@ data LinksList' = LinksList'
 --
 -- * 'llAssetSize'
 --
--- * 'llUserIp'
+-- * 'llUserIP'
 --
 -- * 'llRelationshipStatus'
 --
@@ -155,15 +153,13 @@ data LinksList' = LinksList'
 --
 -- * 'llStartDateMax'
 --
--- * 'llOauthToken'
+-- * 'llOAuthToken'
 --
 -- * 'llStartDateMin'
 --
 -- * 'llMaxResults'
 --
 -- * 'llFields'
---
--- * 'llAlt'
 linksList'
     :: Text -- ^ 'roleId'
     -> GanLinksListRole -- ^ 'role'
@@ -175,7 +171,7 @@ linksList' pLlRoleId_ pLlRole_ =
     , _llQuotaUser = Nothing
     , _llPrettyPrint = True
     , _llAssetSize = Nothing
-    , _llUserIp = Nothing
+    , _llUserIP = Nothing
     , _llRelationshipStatus = Nothing
     , _llAdvertiserId = Nothing
     , _llSearchText = Nothing
@@ -187,11 +183,10 @@ linksList' pLlRoleId_ pLlRole_ =
     , _llLinkType = Nothing
     , _llPageToken = Nothing
     , _llStartDateMax = Nothing
-    , _llOauthToken = Nothing
+    , _llOAuthToken = Nothing
     , _llStartDateMin = Nothing
     , _llMaxResults = Nothing
     , _llFields = Nothing
-    , _llAlt = JSON
     }
 
 -- | The end of the create date range.
@@ -225,8 +220,8 @@ llAssetSize
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-llUserIp :: Lens' LinksList' (Maybe Text)
-llUserIp = lens _llUserIp (\ s a -> s{_llUserIp = a})
+llUserIP :: Lens' LinksList' (Maybe Text)
+llUserIP = lens _llUserIP (\ s a -> s{_llUserIP = a})
 
 -- | The status of the relationship.
 llRelationshipStatus :: Lens' LinksList' (Maybe GanLinksListRelationshipStatus)
@@ -265,7 +260,7 @@ llRole = lens _llRole (\ s a -> s{_llRole = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-llKey :: Lens' LinksList' (Maybe Text)
+llKey :: Lens' LinksList' (Maybe Key)
 llKey = lens _llKey (\ s a -> s{_llKey = a})
 
 -- | The beginning of the create date range.
@@ -291,9 +286,9 @@ llStartDateMax
       (\ s a -> s{_llStartDateMax = a})
 
 -- | OAuth 2.0 token for the current user.
-llOauthToken :: Lens' LinksList' (Maybe Text)
-llOauthToken
-  = lens _llOauthToken (\ s a -> s{_llOauthToken = a})
+llOAuthToken :: Lens' LinksList' (Maybe OAuthToken)
+llOAuthToken
+  = lens _llOAuthToken (\ s a -> s{_llOAuthToken = a})
 
 -- | The beginning of the start date range.
 llStartDateMin :: Lens' LinksList' (Maybe Text)
@@ -310,9 +305,9 @@ llMaxResults
 llFields :: Lens' LinksList' (Maybe Text)
 llFields = lens _llFields (\ s a -> s{_llFields = a})
 
--- | Data format for the response.
-llAlt :: Lens' LinksList' Alt
-llAlt = lens _llAlt (\ s a -> s{_llAlt = a})
+instance GoogleAuth LinksList' where
+        authKey = llKey . _Just
+        authToken = llOAuthToken . _Just
 
 instance GoogleRequest LinksList' where
         type Rs LinksList' = Links
@@ -321,7 +316,7 @@ instance GoogleRequest LinksList' where
           = go _llCreateDateMax _llAuthorship _llQuotaUser
               (Just _llPrettyPrint)
               _llAssetSize
-              _llUserIp
+              _llUserIP
               _llRelationshipStatus
               _llAdvertiserId
               _llSearchText
@@ -333,11 +328,11 @@ instance GoogleRequest LinksList' where
               _llLinkType
               _llPageToken
               _llStartDateMax
-              _llOauthToken
+              _llOAuthToken
               _llStartDateMin
               _llMaxResults
               _llFields
-              (Just _llAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy LinksListResource)
                       r

@@ -34,15 +34,14 @@ module Network.Google.Resource.Compute.TargetInstances.List
     , tilQuotaUser
     , tilPrettyPrint
     , tilProject
-    , tilUserIp
+    , tilUserIP
     , tilZone
     , tilKey
     , tilFilter
     , tilPageToken
-    , tilOauthToken
+    , tilOAuthToken
     , tilMaxResults
     , tilFields
-    , tilAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -58,13 +57,13 @@ type TargetInstancesListResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "filter" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "maxResults" Word32 :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :>
+                               QueryParam "alt" AltJSON :>
                                  Get '[JSON] TargetInstanceList
 
 -- | Retrieves the list of TargetInstance resources available to the
@@ -75,15 +74,14 @@ data TargetInstancesList' = TargetInstancesList'
     { _tilQuotaUser   :: !(Maybe Text)
     , _tilPrettyPrint :: !Bool
     , _tilProject     :: !Text
-    , _tilUserIp      :: !(Maybe Text)
+    , _tilUserIP      :: !(Maybe Text)
     , _tilZone        :: !Text
-    , _tilKey         :: !(Maybe Text)
+    , _tilKey         :: !(Maybe Key)
     , _tilFilter      :: !(Maybe Text)
     , _tilPageToken   :: !(Maybe Text)
-    , _tilOauthToken  :: !(Maybe Text)
+    , _tilOAuthToken  :: !(Maybe OAuthToken)
     , _tilMaxResults  :: !Word32
     , _tilFields      :: !(Maybe Text)
-    , _tilAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetInstancesList'' with the minimum fields required to make a request.
@@ -96,7 +94,7 @@ data TargetInstancesList' = TargetInstancesList'
 --
 -- * 'tilProject'
 --
--- * 'tilUserIp'
+-- * 'tilUserIP'
 --
 -- * 'tilZone'
 --
@@ -106,13 +104,11 @@ data TargetInstancesList' = TargetInstancesList'
 --
 -- * 'tilPageToken'
 --
--- * 'tilOauthToken'
+-- * 'tilOAuthToken'
 --
 -- * 'tilMaxResults'
 --
 -- * 'tilFields'
---
--- * 'tilAlt'
 targetInstancesList'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
@@ -122,15 +118,14 @@ targetInstancesList' pTilProject_ pTilZone_ =
     { _tilQuotaUser = Nothing
     , _tilPrettyPrint = True
     , _tilProject = pTilProject_
-    , _tilUserIp = Nothing
+    , _tilUserIP = Nothing
     , _tilZone = pTilZone_
     , _tilKey = Nothing
     , _tilFilter = Nothing
     , _tilPageToken = Nothing
-    , _tilOauthToken = Nothing
+    , _tilOAuthToken = Nothing
     , _tilMaxResults = 500
     , _tilFields = Nothing
-    , _tilAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,9 +148,9 @@ tilProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tilUserIp :: Lens' TargetInstancesList' (Maybe Text)
-tilUserIp
-  = lens _tilUserIp (\ s a -> s{_tilUserIp = a})
+tilUserIP :: Lens' TargetInstancesList' (Maybe Text)
+tilUserIP
+  = lens _tilUserIP (\ s a -> s{_tilUserIP = a})
 
 -- | Name of the zone scoping this request.
 tilZone :: Lens' TargetInstancesList' Text
@@ -164,7 +159,7 @@ tilZone = lens _tilZone (\ s a -> s{_tilZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tilKey :: Lens' TargetInstancesList' (Maybe Text)
+tilKey :: Lens' TargetInstancesList' (Maybe Key)
 tilKey = lens _tilKey (\ s a -> s{_tilKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
@@ -190,10 +185,10 @@ tilPageToken
   = lens _tilPageToken (\ s a -> s{_tilPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-tilOauthToken :: Lens' TargetInstancesList' (Maybe Text)
-tilOauthToken
-  = lens _tilOauthToken
-      (\ s a -> s{_tilOauthToken = a})
+tilOAuthToken :: Lens' TargetInstancesList' (Maybe OAuthToken)
+tilOAuthToken
+  = lens _tilOAuthToken
+      (\ s a -> s{_tilOAuthToken = a})
 
 -- | Maximum count of results to be returned.
 tilMaxResults :: Lens' TargetInstancesList' Word32
@@ -206,24 +201,24 @@ tilFields :: Lens' TargetInstancesList' (Maybe Text)
 tilFields
   = lens _tilFields (\ s a -> s{_tilFields = a})
 
--- | Data format for the response.
-tilAlt :: Lens' TargetInstancesList' Alt
-tilAlt = lens _tilAlt (\ s a -> s{_tilAlt = a})
+instance GoogleAuth TargetInstancesList' where
+        authKey = tilKey . _Just
+        authToken = tilOAuthToken . _Just
 
 instance GoogleRequest TargetInstancesList' where
         type Rs TargetInstancesList' = TargetInstanceList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u TargetInstancesList'{..}
           = go _tilQuotaUser (Just _tilPrettyPrint) _tilProject
-              _tilUserIp
+              _tilUserIP
               _tilZone
               _tilKey
               _tilFilter
               _tilPageToken
-              _tilOauthToken
+              _tilOAuthToken
               (Just _tilMaxResults)
               _tilFields
-              (Just _tilAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TargetInstancesListResource)

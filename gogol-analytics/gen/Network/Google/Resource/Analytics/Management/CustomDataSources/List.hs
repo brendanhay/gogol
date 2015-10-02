@@ -33,14 +33,13 @@ module Network.Google.Resource.Analytics.Management.CustomDataSources.List
     , mcdslQuotaUser
     , mcdslPrettyPrint
     , mcdslWebPropertyId
-    , mcdslUserIp
+    , mcdslUserIP
     , mcdslAccountId
     , mcdslKey
-    , mcdslOauthToken
+    , mcdslOAuthToken
     , mcdslStartIndex
     , mcdslMaxResults
     , mcdslFields
-    , mcdslAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -58,12 +57,12 @@ type ManagementCustomDataSourcesListResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "start-index" Int32 :>
                              QueryParam "max-results" Int32 :>
                                QueryParam "fields" Text :>
-                                 QueryParam "alt" Alt :>
+                                 QueryParam "alt" AltJSON :>
                                    Get '[JSON] CustomDataSources
 
 -- | List custom data sources to which the user has access.
@@ -73,14 +72,13 @@ data ManagementCustomDataSourcesList' = ManagementCustomDataSourcesList'
     { _mcdslQuotaUser     :: !(Maybe Text)
     , _mcdslPrettyPrint   :: !Bool
     , _mcdslWebPropertyId :: !Text
-    , _mcdslUserIp        :: !(Maybe Text)
+    , _mcdslUserIP        :: !(Maybe Text)
     , _mcdslAccountId     :: !Text
-    , _mcdslKey           :: !(Maybe Text)
-    , _mcdslOauthToken    :: !(Maybe Text)
+    , _mcdslKey           :: !(Maybe Key)
+    , _mcdslOAuthToken    :: !(Maybe OAuthToken)
     , _mcdslStartIndex    :: !(Maybe Int32)
     , _mcdslMaxResults    :: !(Maybe Int32)
     , _mcdslFields        :: !(Maybe Text)
-    , _mcdslAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementCustomDataSourcesList'' with the minimum fields required to make a request.
@@ -93,21 +91,19 @@ data ManagementCustomDataSourcesList' = ManagementCustomDataSourcesList'
 --
 -- * 'mcdslWebPropertyId'
 --
--- * 'mcdslUserIp'
+-- * 'mcdslUserIP'
 --
 -- * 'mcdslAccountId'
 --
 -- * 'mcdslKey'
 --
--- * 'mcdslOauthToken'
+-- * 'mcdslOAuthToken'
 --
 -- * 'mcdslStartIndex'
 --
 -- * 'mcdslMaxResults'
 --
 -- * 'mcdslFields'
---
--- * 'mcdslAlt'
 managementCustomDataSourcesList'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'accountId'
@@ -117,14 +113,13 @@ managementCustomDataSourcesList' pMcdslWebPropertyId_ pMcdslAccountId_ =
     { _mcdslQuotaUser = Nothing
     , _mcdslPrettyPrint = False
     , _mcdslWebPropertyId = pMcdslWebPropertyId_
-    , _mcdslUserIp = Nothing
+    , _mcdslUserIP = Nothing
     , _mcdslAccountId = pMcdslAccountId_
     , _mcdslKey = Nothing
-    , _mcdslOauthToken = Nothing
+    , _mcdslOAuthToken = Nothing
     , _mcdslStartIndex = Nothing
     , _mcdslMaxResults = Nothing
     , _mcdslFields = Nothing
-    , _mcdslAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -149,9 +144,9 @@ mcdslWebPropertyId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mcdslUserIp :: Lens' ManagementCustomDataSourcesList' (Maybe Text)
-mcdslUserIp
-  = lens _mcdslUserIp (\ s a -> s{_mcdslUserIp = a})
+mcdslUserIP :: Lens' ManagementCustomDataSourcesList' (Maybe Text)
+mcdslUserIP
+  = lens _mcdslUserIP (\ s a -> s{_mcdslUserIP = a})
 
 -- | Account Id for the custom data sources to retrieve.
 mcdslAccountId :: Lens' ManagementCustomDataSourcesList' Text
@@ -162,14 +157,14 @@ mcdslAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mcdslKey :: Lens' ManagementCustomDataSourcesList' (Maybe Text)
+mcdslKey :: Lens' ManagementCustomDataSourcesList' (Maybe Key)
 mcdslKey = lens _mcdslKey (\ s a -> s{_mcdslKey = a})
 
 -- | OAuth 2.0 token for the current user.
-mcdslOauthToken :: Lens' ManagementCustomDataSourcesList' (Maybe Text)
-mcdslOauthToken
-  = lens _mcdslOauthToken
-      (\ s a -> s{_mcdslOauthToken = a})
+mcdslOAuthToken :: Lens' ManagementCustomDataSourcesList' (Maybe OAuthToken)
+mcdslOAuthToken
+  = lens _mcdslOAuthToken
+      (\ s a -> s{_mcdslOAuthToken = a})
 
 -- | A 1-based index of the first custom data source to retrieve. Use this
 -- parameter as a pagination mechanism along with the max-results
@@ -190,9 +185,10 @@ mcdslFields :: Lens' ManagementCustomDataSourcesList' (Maybe Text)
 mcdslFields
   = lens _mcdslFields (\ s a -> s{_mcdslFields = a})
 
--- | Data format for the response.
-mcdslAlt :: Lens' ManagementCustomDataSourcesList' Alt
-mcdslAlt = lens _mcdslAlt (\ s a -> s{_mcdslAlt = a})
+instance GoogleAuth ManagementCustomDataSourcesList'
+         where
+        authKey = mcdslKey . _Just
+        authToken = mcdslOAuthToken . _Just
 
 instance GoogleRequest
          ManagementCustomDataSourcesList' where
@@ -203,14 +199,14 @@ instance GoogleRequest
           ManagementCustomDataSourcesList'{..}
           = go _mcdslQuotaUser (Just _mcdslPrettyPrint)
               _mcdslWebPropertyId
-              _mcdslUserIp
+              _mcdslUserIP
               _mcdslAccountId
               _mcdslKey
-              _mcdslOauthToken
+              _mcdslOAuthToken
               _mcdslStartIndex
               _mcdslMaxResults
               _mcdslFields
-              (Just _mcdslAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

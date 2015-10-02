@@ -34,11 +34,10 @@ module Network.Google.Resource.GamesManagement.Quests.ResetAll
     -- * Request Lenses
     , qraQuotaUser
     , qraPrettyPrint
-    , qraUserIp
+    , qraUserIP
     , qraKey
-    , qraOauthToken
+    , qraOAuthToken
     , qraFields
-    , qraAlt
     ) where
 
 import           Network.Google.GamesManagement.Types
@@ -52,10 +51,10 @@ type QuestsResetAllResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Post '[JSON] ()
+                     QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Resets all player progress on all quests for the currently authenticated
 -- player. This method is only accessible to whitelisted tester accounts
@@ -65,11 +64,10 @@ type QuestsResetAllResource =
 data QuestsResetAll' = QuestsResetAll'
     { _qraQuotaUser   :: !(Maybe Text)
     , _qraPrettyPrint :: !Bool
-    , _qraUserIp      :: !(Maybe Text)
-    , _qraKey         :: !(Maybe Text)
-    , _qraOauthToken  :: !(Maybe Text)
+    , _qraUserIP      :: !(Maybe Text)
+    , _qraKey         :: !(Maybe Key)
+    , _qraOAuthToken  :: !(Maybe OAuthToken)
     , _qraFields      :: !(Maybe Text)
-    , _qraAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QuestsResetAll'' with the minimum fields required to make a request.
@@ -80,26 +78,23 @@ data QuestsResetAll' = QuestsResetAll'
 --
 -- * 'qraPrettyPrint'
 --
--- * 'qraUserIp'
+-- * 'qraUserIP'
 --
 -- * 'qraKey'
 --
--- * 'qraOauthToken'
+-- * 'qraOAuthToken'
 --
 -- * 'qraFields'
---
--- * 'qraAlt'
 questsResetAll'
     :: QuestsResetAll'
 questsResetAll' =
     QuestsResetAll'
     { _qraQuotaUser = Nothing
     , _qraPrettyPrint = True
-    , _qraUserIp = Nothing
+    , _qraUserIP = Nothing
     , _qraKey = Nothing
-    , _qraOauthToken = Nothing
+    , _qraOAuthToken = Nothing
     , _qraFields = Nothing
-    , _qraAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -117,40 +112,40 @@ qraPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-qraUserIp :: Lens' QuestsResetAll' (Maybe Text)
-qraUserIp
-  = lens _qraUserIp (\ s a -> s{_qraUserIp = a})
+qraUserIP :: Lens' QuestsResetAll' (Maybe Text)
+qraUserIP
+  = lens _qraUserIP (\ s a -> s{_qraUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-qraKey :: Lens' QuestsResetAll' (Maybe Text)
+qraKey :: Lens' QuestsResetAll' (Maybe Key)
 qraKey = lens _qraKey (\ s a -> s{_qraKey = a})
 
 -- | OAuth 2.0 token for the current user.
-qraOauthToken :: Lens' QuestsResetAll' (Maybe Text)
-qraOauthToken
-  = lens _qraOauthToken
-      (\ s a -> s{_qraOauthToken = a})
+qraOAuthToken :: Lens' QuestsResetAll' (Maybe OAuthToken)
+qraOAuthToken
+  = lens _qraOAuthToken
+      (\ s a -> s{_qraOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 qraFields :: Lens' QuestsResetAll' (Maybe Text)
 qraFields
   = lens _qraFields (\ s a -> s{_qraFields = a})
 
--- | Data format for the response.
-qraAlt :: Lens' QuestsResetAll' Alt
-qraAlt = lens _qraAlt (\ s a -> s{_qraAlt = a})
+instance GoogleAuth QuestsResetAll' where
+        authKey = qraKey . _Just
+        authToken = qraOAuthToken . _Just
 
 instance GoogleRequest QuestsResetAll' where
         type Rs QuestsResetAll' = ()
         request = requestWithRoute defReq gamesManagementURL
         requestWithRoute r u QuestsResetAll'{..}
-          = go _qraQuotaUser (Just _qraPrettyPrint) _qraUserIp
+          = go _qraQuotaUser (Just _qraPrettyPrint) _qraUserIP
               _qraKey
-              _qraOauthToken
+              _qraOAuthToken
               _qraFields
-              (Just _qraAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy QuestsResetAllResource)

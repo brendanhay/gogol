@@ -30,17 +30,17 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.GamesAppState
-        , Network.Google.GamesAppState.Types
-        , Network.Google.Resource.Appstate.States.Clear
-        , Network.Google.Resource.Appstate.States.Delete
-        , Network.Google.Resource.Appstate.States.Get
-        , Network.Google.Resource.Appstate.States.List
-        , Network.Google.Resource.Appstate.States.Update
+          Network.Google.AppState
+        , Network.Google.AppState.Types
+        , Network.Google.Resource.AppState.States.Clear
+        , Network.Google.Resource.AppState.States.Delete
+        , Network.Google.Resource.AppState.States.Get
+        , Network.Google.Resource.AppState.States.List
+        , Network.Google.Resource.AppState.States.Update
 
     other-modules:
-          Network.Google.GamesAppState.Types.Product
-        , Network.Google.GamesAppState.Types.Sum
+          Network.Google.AppState.Types.Product
+        , Network.Google.AppState.Types.Sum
 
     build-depends:
           gogol-core == 0.0.1.*

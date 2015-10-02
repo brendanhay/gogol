@@ -32,13 +32,12 @@ module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Get
     -- * Request Lenses
     , faggQuotaUser
     , faggPrettyPrint
-    , faggUserIp
+    , faggUserIP
     , faggProfileId
     , faggKey
     , faggId
-    , faggOauthToken
+    , faggOAuthToken
     , faggFields
-    , faggAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,10 +53,10 @@ type FloodlightActivityGroupsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :>
+                         QueryParam "alt" AltJSON :>
                            Get '[JSON] FloodlightActivityGroup
 
 -- | Gets one floodlight activity group by ID.
@@ -66,13 +65,12 @@ type FloodlightActivityGroupsGetResource =
 data FloodlightActivityGroupsGet' = FloodlightActivityGroupsGet'
     { _faggQuotaUser   :: !(Maybe Text)
     , _faggPrettyPrint :: !Bool
-    , _faggUserIp      :: !(Maybe Text)
+    , _faggUserIP      :: !(Maybe Text)
     , _faggProfileId   :: !Int64
-    , _faggKey         :: !(Maybe Text)
+    , _faggKey         :: !(Maybe Key)
     , _faggId          :: !Int64
-    , _faggOauthToken  :: !(Maybe Text)
+    , _faggOAuthToken  :: !(Maybe OAuthToken)
     , _faggFields      :: !(Maybe Text)
-    , _faggAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivityGroupsGet'' with the minimum fields required to make a request.
@@ -83,7 +81,7 @@ data FloodlightActivityGroupsGet' = FloodlightActivityGroupsGet'
 --
 -- * 'faggPrettyPrint'
 --
--- * 'faggUserIp'
+-- * 'faggUserIP'
 --
 -- * 'faggProfileId'
 --
@@ -91,11 +89,9 @@ data FloodlightActivityGroupsGet' = FloodlightActivityGroupsGet'
 --
 -- * 'faggId'
 --
--- * 'faggOauthToken'
+-- * 'faggOAuthToken'
 --
 -- * 'faggFields'
---
--- * 'faggAlt'
 floodlightActivityGroupsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
@@ -104,13 +100,12 @@ floodlightActivityGroupsGet' pFaggProfileId_ pFaggId_ =
     FloodlightActivityGroupsGet'
     { _faggQuotaUser = Nothing
     , _faggPrettyPrint = True
-    , _faggUserIp = Nothing
+    , _faggUserIP = Nothing
     , _faggProfileId = pFaggProfileId_
     , _faggKey = Nothing
     , _faggId = pFaggId_
-    , _faggOauthToken = Nothing
+    , _faggOAuthToken = Nothing
     , _faggFields = Nothing
-    , _faggAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -129,9 +124,9 @@ faggPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-faggUserIp :: Lens' FloodlightActivityGroupsGet' (Maybe Text)
-faggUserIp
-  = lens _faggUserIp (\ s a -> s{_faggUserIp = a})
+faggUserIP :: Lens' FloodlightActivityGroupsGet' (Maybe Text)
+faggUserIP
+  = lens _faggUserIP (\ s a -> s{_faggUserIP = a})
 
 -- | User profile ID associated with this request.
 faggProfileId :: Lens' FloodlightActivityGroupsGet' Int64
@@ -142,7 +137,7 @@ faggProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-faggKey :: Lens' FloodlightActivityGroupsGet' (Maybe Text)
+faggKey :: Lens' FloodlightActivityGroupsGet' (Maybe Key)
 faggKey = lens _faggKey (\ s a -> s{_faggKey = a})
 
 -- | Floodlight activity Group ID.
@@ -150,19 +145,20 @@ faggId :: Lens' FloodlightActivityGroupsGet' Int64
 faggId = lens _faggId (\ s a -> s{_faggId = a})
 
 -- | OAuth 2.0 token for the current user.
-faggOauthToken :: Lens' FloodlightActivityGroupsGet' (Maybe Text)
-faggOauthToken
-  = lens _faggOauthToken
-      (\ s a -> s{_faggOauthToken = a})
+faggOAuthToken :: Lens' FloodlightActivityGroupsGet' (Maybe OAuthToken)
+faggOAuthToken
+  = lens _faggOAuthToken
+      (\ s a -> s{_faggOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 faggFields :: Lens' FloodlightActivityGroupsGet' (Maybe Text)
 faggFields
   = lens _faggFields (\ s a -> s{_faggFields = a})
 
--- | Data format for the response.
-faggAlt :: Lens' FloodlightActivityGroupsGet' Alt
-faggAlt = lens _faggAlt (\ s a -> s{_faggAlt = a})
+instance GoogleAuth FloodlightActivityGroupsGet'
+         where
+        authKey = faggKey . _Just
+        authToken = faggOAuthToken . _Just
 
 instance GoogleRequest FloodlightActivityGroupsGet'
          where
@@ -171,13 +167,13 @@ instance GoogleRequest FloodlightActivityGroupsGet'
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u FloodlightActivityGroupsGet'{..}
           = go _faggQuotaUser (Just _faggPrettyPrint)
-              _faggUserIp
+              _faggUserIP
               _faggProfileId
               _faggKey
               _faggId
-              _faggOauthToken
+              _faggOAuthToken
               _faggFields
-              (Just _faggAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy FloodlightActivityGroupsGetResource)

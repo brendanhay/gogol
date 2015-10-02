@@ -32,12 +32,12 @@ module Network.Google.Resource.DFAReporting.Campaigns.Update
     -- * Request Lenses
     , cuQuotaUser
     , cuPrettyPrint
-    , cuUserIp
+    , cuUserIP
     , cuProfileId
+    , cuCampaign
     , cuKey
-    , cuOauthToken
+    , cuOAuthToken
     , cuFields
-    , cuAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,10 +52,11 @@ type CampaignsUpdateResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Put '[JSON] Campaign
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Campaign :> Put '[JSON] Campaign
 
 -- | Updates an existing campaign.
 --
@@ -63,12 +64,12 @@ type CampaignsUpdateResource =
 data CampaignsUpdate' = CampaignsUpdate'
     { _cuQuotaUser   :: !(Maybe Text)
     , _cuPrettyPrint :: !Bool
-    , _cuUserIp      :: !(Maybe Text)
+    , _cuUserIP      :: !(Maybe Text)
     , _cuProfileId   :: !Int64
-    , _cuKey         :: !(Maybe Text)
-    , _cuOauthToken  :: !(Maybe Text)
+    , _cuCampaign    :: !Campaign
+    , _cuKey         :: !(Maybe Key)
+    , _cuOAuthToken  :: !(Maybe OAuthToken)
     , _cuFields      :: !(Maybe Text)
-    , _cuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CampaignsUpdate'' with the minimum fields required to make a request.
@@ -79,30 +80,31 @@ data CampaignsUpdate' = CampaignsUpdate'
 --
 -- * 'cuPrettyPrint'
 --
--- * 'cuUserIp'
+-- * 'cuUserIP'
 --
 -- * 'cuProfileId'
 --
+-- * 'cuCampaign'
+--
 -- * 'cuKey'
 --
--- * 'cuOauthToken'
+-- * 'cuOAuthToken'
 --
 -- * 'cuFields'
---
--- * 'cuAlt'
 campaignsUpdate'
     :: Int64 -- ^ 'profileId'
+    -> Campaign -- ^ 'Campaign'
     -> CampaignsUpdate'
-campaignsUpdate' pCuProfileId_ =
+campaignsUpdate' pCuProfileId_ pCuCampaign_ =
     CampaignsUpdate'
     { _cuQuotaUser = Nothing
     , _cuPrettyPrint = True
-    , _cuUserIp = Nothing
+    , _cuUserIP = Nothing
     , _cuProfileId = pCuProfileId_
+    , _cuCampaign = pCuCampaign_
     , _cuKey = Nothing
-    , _cuOauthToken = Nothing
+    , _cuOAuthToken = Nothing
     , _cuFields = Nothing
-    , _cuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,43 +122,49 @@ cuPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cuUserIp :: Lens' CampaignsUpdate' (Maybe Text)
-cuUserIp = lens _cuUserIp (\ s a -> s{_cuUserIp = a})
+cuUserIP :: Lens' CampaignsUpdate' (Maybe Text)
+cuUserIP = lens _cuUserIP (\ s a -> s{_cuUserIP = a})
 
 -- | User profile ID associated with this request.
 cuProfileId :: Lens' CampaignsUpdate' Int64
 cuProfileId
   = lens _cuProfileId (\ s a -> s{_cuProfileId = a})
 
+-- | Multipart request metadata.
+cuCampaign :: Lens' CampaignsUpdate' Campaign
+cuCampaign
+  = lens _cuCampaign (\ s a -> s{_cuCampaign = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cuKey :: Lens' CampaignsUpdate' (Maybe Text)
+cuKey :: Lens' CampaignsUpdate' (Maybe Key)
 cuKey = lens _cuKey (\ s a -> s{_cuKey = a})
 
 -- | OAuth 2.0 token for the current user.
-cuOauthToken :: Lens' CampaignsUpdate' (Maybe Text)
-cuOauthToken
-  = lens _cuOauthToken (\ s a -> s{_cuOauthToken = a})
+cuOAuthToken :: Lens' CampaignsUpdate' (Maybe OAuthToken)
+cuOAuthToken
+  = lens _cuOAuthToken (\ s a -> s{_cuOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cuFields :: Lens' CampaignsUpdate' (Maybe Text)
 cuFields = lens _cuFields (\ s a -> s{_cuFields = a})
 
--- | Data format for the response.
-cuAlt :: Lens' CampaignsUpdate' Alt
-cuAlt = lens _cuAlt (\ s a -> s{_cuAlt = a})
+instance GoogleAuth CampaignsUpdate' where
+        authKey = cuKey . _Just
+        authToken = cuOAuthToken . _Just
 
 instance GoogleRequest CampaignsUpdate' where
         type Rs CampaignsUpdate' = Campaign
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CampaignsUpdate'{..}
-          = go _cuQuotaUser (Just _cuPrettyPrint) _cuUserIp
+          = go _cuQuotaUser (Just _cuPrettyPrint) _cuUserIP
               _cuProfileId
               _cuKey
-              _cuOauthToken
+              _cuOAuthToken
               _cuFields
-              (Just _cuAlt)
+              (Just AltJSON)
+              _cuCampaign
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CampaignsUpdateResource)

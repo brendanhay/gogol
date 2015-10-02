@@ -32,13 +32,12 @@ module Network.Google.Resource.FusionTables.Style.Delete
     -- * Request Lenses
     , sdQuotaUser
     , sdPrettyPrint
-    , sdUserIp
+    , sdUserIP
     , sdKey
     , sdStyleId
-    , sdOauthToken
+    , sdOAuthToken
     , sdTableId
     , sdFields
-    , sdAlt
     ) where
 
 import           Network.Google.FusionTables.Types
@@ -54,10 +53,10 @@ type StyleDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Delete '[JSON] ()
+                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a style.
 --
@@ -65,13 +64,12 @@ type StyleDeleteResource =
 data StyleDelete' = StyleDelete'
     { _sdQuotaUser   :: !(Maybe Text)
     , _sdPrettyPrint :: !Bool
-    , _sdUserIp      :: !(Maybe Text)
-    , _sdKey         :: !(Maybe Text)
+    , _sdUserIP      :: !(Maybe Text)
+    , _sdKey         :: !(Maybe Key)
     , _sdStyleId     :: !Int32
-    , _sdOauthToken  :: !(Maybe Text)
+    , _sdOAuthToken  :: !(Maybe OAuthToken)
     , _sdTableId     :: !Text
     , _sdFields      :: !(Maybe Text)
-    , _sdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StyleDelete'' with the minimum fields required to make a request.
@@ -82,19 +80,17 @@ data StyleDelete' = StyleDelete'
 --
 -- * 'sdPrettyPrint'
 --
--- * 'sdUserIp'
+-- * 'sdUserIP'
 --
 -- * 'sdKey'
 --
 -- * 'sdStyleId'
 --
--- * 'sdOauthToken'
+-- * 'sdOAuthToken'
 --
 -- * 'sdTableId'
 --
 -- * 'sdFields'
---
--- * 'sdAlt'
 styleDelete'
     :: Int32 -- ^ 'styleId'
     -> Text -- ^ 'tableId'
@@ -103,13 +99,12 @@ styleDelete' pSdStyleId_ pSdTableId_ =
     StyleDelete'
     { _sdQuotaUser = Nothing
     , _sdPrettyPrint = True
-    , _sdUserIp = Nothing
+    , _sdUserIP = Nothing
     , _sdKey = Nothing
     , _sdStyleId = pSdStyleId_
-    , _sdOauthToken = Nothing
+    , _sdOAuthToken = Nothing
     , _sdTableId = pSdTableId_
     , _sdFields = Nothing
-    , _sdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,13 +122,13 @@ sdPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-sdUserIp :: Lens' StyleDelete' (Maybe Text)
-sdUserIp = lens _sdUserIp (\ s a -> s{_sdUserIp = a})
+sdUserIP :: Lens' StyleDelete' (Maybe Text)
+sdUserIP = lens _sdUserIP (\ s a -> s{_sdUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-sdKey :: Lens' StyleDelete' (Maybe Text)
+sdKey :: Lens' StyleDelete' (Maybe Key)
 sdKey = lens _sdKey (\ s a -> s{_sdKey = a})
 
 -- | Identifier (within a table) for the style being deleted
@@ -142,9 +137,9 @@ sdStyleId
   = lens _sdStyleId (\ s a -> s{_sdStyleId = a})
 
 -- | OAuth 2.0 token for the current user.
-sdOauthToken :: Lens' StyleDelete' (Maybe Text)
-sdOauthToken
-  = lens _sdOauthToken (\ s a -> s{_sdOauthToken = a})
+sdOAuthToken :: Lens' StyleDelete' (Maybe OAuthToken)
+sdOAuthToken
+  = lens _sdOAuthToken (\ s a -> s{_sdOAuthToken = a})
 
 -- | Table from which the style is being deleted
 sdTableId :: Lens' StyleDelete' Text
@@ -155,21 +150,21 @@ sdTableId
 sdFields :: Lens' StyleDelete' (Maybe Text)
 sdFields = lens _sdFields (\ s a -> s{_sdFields = a})
 
--- | Data format for the response.
-sdAlt :: Lens' StyleDelete' Alt
-sdAlt = lens _sdAlt (\ s a -> s{_sdAlt = a})
+instance GoogleAuth StyleDelete' where
+        authKey = sdKey . _Just
+        authToken = sdOAuthToken . _Just
 
 instance GoogleRequest StyleDelete' where
         type Rs StyleDelete' = ()
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u StyleDelete'{..}
-          = go _sdQuotaUser (Just _sdPrettyPrint) _sdUserIp
+          = go _sdQuotaUser (Just _sdPrettyPrint) _sdUserIP
               _sdKey
               _sdStyleId
-              _sdOauthToken
+              _sdOAuthToken
               _sdTableId
               _sdFields
-              (Just _sdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy StyleDeleteResource)

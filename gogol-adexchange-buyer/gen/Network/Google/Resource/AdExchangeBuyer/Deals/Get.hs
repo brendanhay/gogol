@@ -32,12 +32,12 @@ module Network.Google.Resource.AdExchangeBuyer.Deals.Get
     -- * Request Lenses
     , dgQuotaUser
     , dgPrettyPrint
-    , dgUserIp
+    , dgGetFinalizedNegotiationByExternalDealIdRequest
+    , dgUserIP
     , dgDealId
     , dgKey
-    , dgOauthToken
+    , dgOAuthToken
     , dgFields
-    , dgAlt
     ) where
 
 import           Network.Google.AdExchangeBuyer.Types
@@ -51,23 +51,26 @@ type DealsGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Get '[JSON] NegotiationDto
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON]
+                         GetFinalizedNegotiationByExternalDealIdRequest
+                         :> Get '[JSON] NegotiationDto
 
 -- | Gets the requested deal.
 --
 -- /See:/ 'dealsGet'' smart constructor.
 data DealsGet' = DealsGet'
-    { _dgQuotaUser   :: !(Maybe Text)
-    , _dgPrettyPrint :: !Bool
-    , _dgUserIp      :: !(Maybe Text)
-    , _dgDealId      :: !Int64
-    , _dgKey         :: !(Maybe Text)
-    , _dgOauthToken  :: !(Maybe Text)
-    , _dgFields      :: !(Maybe Text)
-    , _dgAlt         :: !Alt
+    { _dgQuotaUser                                      :: !(Maybe Text)
+    , _dgPrettyPrint                                    :: !Bool
+    , _dgGetFinalizedNegotiationByExternalDealIdRequest :: !GetFinalizedNegotiationByExternalDealIdRequest
+    , _dgUserIP                                         :: !(Maybe Text)
+    , _dgDealId                                         :: !Int64
+    , _dgKey                                            :: !(Maybe Key)
+    , _dgOAuthToken                                     :: !(Maybe OAuthToken)
+    , _dgFields                                         :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DealsGet'' with the minimum fields required to make a request.
@@ -78,30 +81,31 @@ data DealsGet' = DealsGet'
 --
 -- * 'dgPrettyPrint'
 --
--- * 'dgUserIp'
+-- * 'dgGetFinalizedNegotiationByExternalDealIdRequest'
+--
+-- * 'dgUserIP'
 --
 -- * 'dgDealId'
 --
 -- * 'dgKey'
 --
--- * 'dgOauthToken'
+-- * 'dgOAuthToken'
 --
 -- * 'dgFields'
---
--- * 'dgAlt'
 dealsGet'
-    :: Int64 -- ^ 'dealId'
+    :: GetFinalizedNegotiationByExternalDealIdRequest -- ^ 'GetFinalizedNegotiationByExternalDealIdRequest'
+    -> Int64 -- ^ 'dealId'
     -> DealsGet'
-dealsGet' pDgDealId_ =
+dealsGet' pDgGetFinalizedNegotiationByExternalDealIdRequest_ pDgDealId_ =
     DealsGet'
     { _dgQuotaUser = Nothing
     , _dgPrettyPrint = True
-    , _dgUserIp = Nothing
+    , _dgGetFinalizedNegotiationByExternalDealIdRequest = pDgGetFinalizedNegotiationByExternalDealIdRequest_
+    , _dgUserIP = Nothing
     , _dgDealId = pDgDealId_
     , _dgKey = Nothing
-    , _dgOauthToken = Nothing
+    , _dgOAuthToken = Nothing
     , _dgFields = Nothing
-    , _dgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -117,10 +121,19 @@ dgPrettyPrint
   = lens _dgPrettyPrint
       (\ s a -> s{_dgPrettyPrint = a})
 
+-- | Multipart request metadata.
+dgGetFinalizedNegotiationByExternalDealIdRequest :: Lens' DealsGet' GetFinalizedNegotiationByExternalDealIdRequest
+dgGetFinalizedNegotiationByExternalDealIdRequest
+  = lens
+      _dgGetFinalizedNegotiationByExternalDealIdRequest
+      (\ s a ->
+         s{_dgGetFinalizedNegotiationByExternalDealIdRequest =
+             a})
+
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-dgUserIp :: Lens' DealsGet' (Maybe Text)
-dgUserIp = lens _dgUserIp (\ s a -> s{_dgUserIp = a})
+dgUserIP :: Lens' DealsGet' (Maybe Text)
+dgUserIP = lens _dgUserIP (\ s a -> s{_dgUserIP = a})
 
 dgDealId :: Lens' DealsGet' Int64
 dgDealId = lens _dgDealId (\ s a -> s{_dgDealId = a})
@@ -128,32 +141,33 @@ dgDealId = lens _dgDealId (\ s a -> s{_dgDealId = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dgKey :: Lens' DealsGet' (Maybe Text)
+dgKey :: Lens' DealsGet' (Maybe Key)
 dgKey = lens _dgKey (\ s a -> s{_dgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-dgOauthToken :: Lens' DealsGet' (Maybe Text)
-dgOauthToken
-  = lens _dgOauthToken (\ s a -> s{_dgOauthToken = a})
+dgOAuthToken :: Lens' DealsGet' (Maybe OAuthToken)
+dgOAuthToken
+  = lens _dgOAuthToken (\ s a -> s{_dgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 dgFields :: Lens' DealsGet' (Maybe Text)
 dgFields = lens _dgFields (\ s a -> s{_dgFields = a})
 
--- | Data format for the response.
-dgAlt :: Lens' DealsGet' Alt
-dgAlt = lens _dgAlt (\ s a -> s{_dgAlt = a})
+instance GoogleAuth DealsGet' where
+        authKey = dgKey . _Just
+        authToken = dgOAuthToken . _Just
 
 instance GoogleRequest DealsGet' where
         type Rs DealsGet' = NegotiationDto
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u DealsGet'{..}
-          = go _dgQuotaUser (Just _dgPrettyPrint) _dgUserIp
+          = go _dgQuotaUser (Just _dgPrettyPrint) _dgUserIP
               _dgDealId
               _dgKey
-              _dgOauthToken
+              _dgOAuthToken
               _dgFields
-              (Just _dgAlt)
+              (Just AltJSON)
+              _dgGetFinalizedNegotiationByExternalDealIdRequest
           where go
                   = clientWithRoute (Proxy :: Proxy DealsGetResource) r
                       u

@@ -33,14 +33,13 @@ module Network.Google.Resource.Compute.TargetInstances.AggregatedList
     , tialQuotaUser
     , tialPrettyPrint
     , tialProject
-    , tialUserIp
+    , tialUserIP
     , tialKey
     , tialFilter
     , tialPageToken
-    , tialOauthToken
+    , tialOAuthToken
     , tialMaxResults
     , tialFields
-    , tialAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -55,13 +54,13 @@ type TargetInstancesAggregatedListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "filter" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "maxResults" Word32 :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :>
+                             QueryParam "alt" AltJSON :>
                                Get '[JSON] TargetInstanceAggregatedList
 
 -- | Retrieves the list of target instances grouped by scope.
@@ -71,14 +70,13 @@ data TargetInstancesAggregatedList' = TargetInstancesAggregatedList'
     { _tialQuotaUser   :: !(Maybe Text)
     , _tialPrettyPrint :: !Bool
     , _tialProject     :: !Text
-    , _tialUserIp      :: !(Maybe Text)
-    , _tialKey         :: !(Maybe Text)
+    , _tialUserIP      :: !(Maybe Text)
+    , _tialKey         :: !(Maybe Key)
     , _tialFilter      :: !(Maybe Text)
     , _tialPageToken   :: !(Maybe Text)
-    , _tialOauthToken  :: !(Maybe Text)
+    , _tialOAuthToken  :: !(Maybe OAuthToken)
     , _tialMaxResults  :: !Word32
     , _tialFields      :: !(Maybe Text)
-    , _tialAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetInstancesAggregatedList'' with the minimum fields required to make a request.
@@ -91,7 +89,7 @@ data TargetInstancesAggregatedList' = TargetInstancesAggregatedList'
 --
 -- * 'tialProject'
 --
--- * 'tialUserIp'
+-- * 'tialUserIP'
 --
 -- * 'tialKey'
 --
@@ -99,13 +97,11 @@ data TargetInstancesAggregatedList' = TargetInstancesAggregatedList'
 --
 -- * 'tialPageToken'
 --
--- * 'tialOauthToken'
+-- * 'tialOAuthToken'
 --
 -- * 'tialMaxResults'
 --
 -- * 'tialFields'
---
--- * 'tialAlt'
 targetInstancesAggregatedList'
     :: Text -- ^ 'project'
     -> TargetInstancesAggregatedList'
@@ -114,14 +110,13 @@ targetInstancesAggregatedList' pTialProject_ =
     { _tialQuotaUser = Nothing
     , _tialPrettyPrint = True
     , _tialProject = pTialProject_
-    , _tialUserIp = Nothing
+    , _tialUserIP = Nothing
     , _tialKey = Nothing
     , _tialFilter = Nothing
     , _tialPageToken = Nothing
-    , _tialOauthToken = Nothing
+    , _tialOAuthToken = Nothing
     , _tialMaxResults = 500
     , _tialFields = Nothing
-    , _tialAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -145,14 +140,14 @@ tialProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tialUserIp :: Lens' TargetInstancesAggregatedList' (Maybe Text)
-tialUserIp
-  = lens _tialUserIp (\ s a -> s{_tialUserIp = a})
+tialUserIP :: Lens' TargetInstancesAggregatedList' (Maybe Text)
+tialUserIP
+  = lens _tialUserIP (\ s a -> s{_tialUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tialKey :: Lens' TargetInstancesAggregatedList' (Maybe Text)
+tialKey :: Lens' TargetInstancesAggregatedList' (Maybe Key)
 tialKey = lens _tialKey (\ s a -> s{_tialKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
@@ -179,10 +174,10 @@ tialPageToken
       (\ s a -> s{_tialPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-tialOauthToken :: Lens' TargetInstancesAggregatedList' (Maybe Text)
-tialOauthToken
-  = lens _tialOauthToken
-      (\ s a -> s{_tialOauthToken = a})
+tialOAuthToken :: Lens' TargetInstancesAggregatedList' (Maybe OAuthToken)
+tialOAuthToken
+  = lens _tialOAuthToken
+      (\ s a -> s{_tialOAuthToken = a})
 
 -- | Maximum count of results to be returned.
 tialMaxResults :: Lens' TargetInstancesAggregatedList' Word32
@@ -195,9 +190,10 @@ tialFields :: Lens' TargetInstancesAggregatedList' (Maybe Text)
 tialFields
   = lens _tialFields (\ s a -> s{_tialFields = a})
 
--- | Data format for the response.
-tialAlt :: Lens' TargetInstancesAggregatedList' Alt
-tialAlt = lens _tialAlt (\ s a -> s{_tialAlt = a})
+instance GoogleAuth TargetInstancesAggregatedList'
+         where
+        authKey = tialKey . _Just
+        authToken = tialOAuthToken . _Just
 
 instance GoogleRequest TargetInstancesAggregatedList'
          where
@@ -208,14 +204,14 @@ instance GoogleRequest TargetInstancesAggregatedList'
           TargetInstancesAggregatedList'{..}
           = go _tialQuotaUser (Just _tialPrettyPrint)
               _tialProject
-              _tialUserIp
+              _tialUserIP
               _tialKey
               _tialFilter
               _tialPageToken
-              _tialOauthToken
+              _tialOAuthToken
               (Just _tialMaxResults)
               _tialFields
-              (Just _tialAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

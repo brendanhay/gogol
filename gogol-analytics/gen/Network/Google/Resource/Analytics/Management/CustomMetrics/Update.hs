@@ -35,12 +35,12 @@ module Network.Google.Resource.Analytics.Management.CustomMetrics.Update
     , mcmuCustomMetricId
     , mcmuWebPropertyId
     , mcmuIgnoreCustomDataSourceLinks
-    , mcmuUserIp
+    , mcmuUserIP
     , mcmuAccountId
     , mcmuKey
-    , mcmuOauthToken
+    , mcmuCustomMetric
+    , mcmuOAuthToken
     , mcmuFields
-    , mcmuAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -60,11 +60,12 @@ type ManagementCustomMetricsUpdateResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "ignoreCustomDataSourceLinks" Bool :>
                          QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "fields" Text :>
-                                 QueryParam "alt" Alt :>
-                                   Put '[JSON] CustomMetric
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON] CustomMetric :>
+                                     Put '[JSON] CustomMetric
 
 -- | Updates an existing custom metric.
 --
@@ -75,12 +76,12 @@ data ManagementCustomMetricsUpdate' = ManagementCustomMetricsUpdate'
     , _mcmuCustomMetricId              :: !Text
     , _mcmuWebPropertyId               :: !Text
     , _mcmuIgnoreCustomDataSourceLinks :: !Bool
-    , _mcmuUserIp                      :: !(Maybe Text)
+    , _mcmuUserIP                      :: !(Maybe Text)
     , _mcmuAccountId                   :: !Text
-    , _mcmuKey                         :: !(Maybe Text)
-    , _mcmuOauthToken                  :: !(Maybe Text)
+    , _mcmuKey                         :: !(Maybe Key)
+    , _mcmuCustomMetric                :: !CustomMetric
+    , _mcmuOAuthToken                  :: !(Maybe OAuthToken)
     , _mcmuFields                      :: !(Maybe Text)
-    , _mcmuAlt                         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementCustomMetricsUpdate'' with the minimum fields required to make a request.
@@ -97,35 +98,36 @@ data ManagementCustomMetricsUpdate' = ManagementCustomMetricsUpdate'
 --
 -- * 'mcmuIgnoreCustomDataSourceLinks'
 --
--- * 'mcmuUserIp'
+-- * 'mcmuUserIP'
 --
 -- * 'mcmuAccountId'
 --
 -- * 'mcmuKey'
 --
--- * 'mcmuOauthToken'
+-- * 'mcmuCustomMetric'
+--
+-- * 'mcmuOAuthToken'
 --
 -- * 'mcmuFields'
---
--- * 'mcmuAlt'
 managementCustomMetricsUpdate'
     :: Text -- ^ 'customMetricId'
     -> Text -- ^ 'webPropertyId'
     -> Text -- ^ 'accountId'
+    -> CustomMetric -- ^ 'CustomMetric'
     -> ManagementCustomMetricsUpdate'
-managementCustomMetricsUpdate' pMcmuCustomMetricId_ pMcmuWebPropertyId_ pMcmuAccountId_ =
+managementCustomMetricsUpdate' pMcmuCustomMetricId_ pMcmuWebPropertyId_ pMcmuAccountId_ pMcmuCustomMetric_ =
     ManagementCustomMetricsUpdate'
     { _mcmuQuotaUser = Nothing
     , _mcmuPrettyPrint = False
     , _mcmuCustomMetricId = pMcmuCustomMetricId_
     , _mcmuWebPropertyId = pMcmuWebPropertyId_
     , _mcmuIgnoreCustomDataSourceLinks = False
-    , _mcmuUserIp = Nothing
+    , _mcmuUserIP = Nothing
     , _mcmuAccountId = pMcmuAccountId_
     , _mcmuKey = Nothing
-    , _mcmuOauthToken = Nothing
+    , _mcmuCustomMetric = pMcmuCustomMetric_
+    , _mcmuOAuthToken = Nothing
     , _mcmuFields = Nothing
-    , _mcmuAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -163,9 +165,9 @@ mcmuIgnoreCustomDataSourceLinks
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mcmuUserIp :: Lens' ManagementCustomMetricsUpdate' (Maybe Text)
-mcmuUserIp
-  = lens _mcmuUserIp (\ s a -> s{_mcmuUserIp = a})
+mcmuUserIP :: Lens' ManagementCustomMetricsUpdate' (Maybe Text)
+mcmuUserIP
+  = lens _mcmuUserIP (\ s a -> s{_mcmuUserIP = a})
 
 -- | Account ID for the custom metric to update.
 mcmuAccountId :: Lens' ManagementCustomMetricsUpdate' Text
@@ -176,23 +178,30 @@ mcmuAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mcmuKey :: Lens' ManagementCustomMetricsUpdate' (Maybe Text)
+mcmuKey :: Lens' ManagementCustomMetricsUpdate' (Maybe Key)
 mcmuKey = lens _mcmuKey (\ s a -> s{_mcmuKey = a})
 
+-- | Multipart request metadata.
+mcmuCustomMetric :: Lens' ManagementCustomMetricsUpdate' CustomMetric
+mcmuCustomMetric
+  = lens _mcmuCustomMetric
+      (\ s a -> s{_mcmuCustomMetric = a})
+
 -- | OAuth 2.0 token for the current user.
-mcmuOauthToken :: Lens' ManagementCustomMetricsUpdate' (Maybe Text)
-mcmuOauthToken
-  = lens _mcmuOauthToken
-      (\ s a -> s{_mcmuOauthToken = a})
+mcmuOAuthToken :: Lens' ManagementCustomMetricsUpdate' (Maybe OAuthToken)
+mcmuOAuthToken
+  = lens _mcmuOAuthToken
+      (\ s a -> s{_mcmuOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 mcmuFields :: Lens' ManagementCustomMetricsUpdate' (Maybe Text)
 mcmuFields
   = lens _mcmuFields (\ s a -> s{_mcmuFields = a})
 
--- | Data format for the response.
-mcmuAlt :: Lens' ManagementCustomMetricsUpdate' Alt
-mcmuAlt = lens _mcmuAlt (\ s a -> s{_mcmuAlt = a})
+instance GoogleAuth ManagementCustomMetricsUpdate'
+         where
+        authKey = mcmuKey . _Just
+        authToken = mcmuOAuthToken . _Just
 
 instance GoogleRequest ManagementCustomMetricsUpdate'
          where
@@ -204,12 +213,13 @@ instance GoogleRequest ManagementCustomMetricsUpdate'
               _mcmuCustomMetricId
               _mcmuWebPropertyId
               (Just _mcmuIgnoreCustomDataSourceLinks)
-              _mcmuUserIp
+              _mcmuUserIP
               _mcmuAccountId
               _mcmuKey
-              _mcmuOauthToken
+              _mcmuOAuthToken
               _mcmuFields
-              (Just _mcmuAlt)
+              (Just AltJSON)
+              _mcmuCustomMetric
           where go
                   = clientWithRoute
                       (Proxy ::

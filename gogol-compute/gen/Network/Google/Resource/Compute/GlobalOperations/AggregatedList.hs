@@ -33,14 +33,13 @@ module Network.Google.Resource.Compute.GlobalOperations.AggregatedList
     , goalQuotaUser
     , goalPrettyPrint
     , goalProject
-    , goalUserIp
+    , goalUserIP
     , goalKey
     , goalFilter
     , goalPageToken
-    , goalOauthToken
+    , goalOAuthToken
     , goalMaxResults
     , goalFields
-    , goalAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -55,13 +54,13 @@ type GlobalOperationsAggregatedListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "filter" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "maxResults" Word32 :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :>
+                             QueryParam "alt" AltJSON :>
                                Get '[JSON] OperationAggregatedList
 
 -- | Retrieves the list of all operations grouped by scope.
@@ -71,14 +70,13 @@ data GlobalOperationsAggregatedList' = GlobalOperationsAggregatedList'
     { _goalQuotaUser   :: !(Maybe Text)
     , _goalPrettyPrint :: !Bool
     , _goalProject     :: !Text
-    , _goalUserIp      :: !(Maybe Text)
-    , _goalKey         :: !(Maybe Text)
+    , _goalUserIP      :: !(Maybe Text)
+    , _goalKey         :: !(Maybe Key)
     , _goalFilter      :: !(Maybe Text)
     , _goalPageToken   :: !(Maybe Text)
-    , _goalOauthToken  :: !(Maybe Text)
+    , _goalOAuthToken  :: !(Maybe OAuthToken)
     , _goalMaxResults  :: !Word32
     , _goalFields      :: !(Maybe Text)
-    , _goalAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GlobalOperationsAggregatedList'' with the minimum fields required to make a request.
@@ -91,7 +89,7 @@ data GlobalOperationsAggregatedList' = GlobalOperationsAggregatedList'
 --
 -- * 'goalProject'
 --
--- * 'goalUserIp'
+-- * 'goalUserIP'
 --
 -- * 'goalKey'
 --
@@ -99,13 +97,11 @@ data GlobalOperationsAggregatedList' = GlobalOperationsAggregatedList'
 --
 -- * 'goalPageToken'
 --
--- * 'goalOauthToken'
+-- * 'goalOAuthToken'
 --
 -- * 'goalMaxResults'
 --
 -- * 'goalFields'
---
--- * 'goalAlt'
 globalOperationsAggregatedList'
     :: Text -- ^ 'project'
     -> GlobalOperationsAggregatedList'
@@ -114,14 +110,13 @@ globalOperationsAggregatedList' pGoalProject_ =
     { _goalQuotaUser = Nothing
     , _goalPrettyPrint = True
     , _goalProject = pGoalProject_
-    , _goalUserIp = Nothing
+    , _goalUserIP = Nothing
     , _goalKey = Nothing
     , _goalFilter = Nothing
     , _goalPageToken = Nothing
-    , _goalOauthToken = Nothing
+    , _goalOAuthToken = Nothing
     , _goalMaxResults = 500
     , _goalFields = Nothing
-    , _goalAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -145,14 +140,14 @@ goalProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-goalUserIp :: Lens' GlobalOperationsAggregatedList' (Maybe Text)
-goalUserIp
-  = lens _goalUserIp (\ s a -> s{_goalUserIp = a})
+goalUserIP :: Lens' GlobalOperationsAggregatedList' (Maybe Text)
+goalUserIP
+  = lens _goalUserIP (\ s a -> s{_goalUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-goalKey :: Lens' GlobalOperationsAggregatedList' (Maybe Text)
+goalKey :: Lens' GlobalOperationsAggregatedList' (Maybe Key)
 goalKey = lens _goalKey (\ s a -> s{_goalKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
@@ -179,10 +174,10 @@ goalPageToken
       (\ s a -> s{_goalPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-goalOauthToken :: Lens' GlobalOperationsAggregatedList' (Maybe Text)
-goalOauthToken
-  = lens _goalOauthToken
-      (\ s a -> s{_goalOauthToken = a})
+goalOAuthToken :: Lens' GlobalOperationsAggregatedList' (Maybe OAuthToken)
+goalOAuthToken
+  = lens _goalOAuthToken
+      (\ s a -> s{_goalOAuthToken = a})
 
 -- | Maximum count of results to be returned.
 goalMaxResults :: Lens' GlobalOperationsAggregatedList' Word32
@@ -195,9 +190,10 @@ goalFields :: Lens' GlobalOperationsAggregatedList' (Maybe Text)
 goalFields
   = lens _goalFields (\ s a -> s{_goalFields = a})
 
--- | Data format for the response.
-goalAlt :: Lens' GlobalOperationsAggregatedList' Alt
-goalAlt = lens _goalAlt (\ s a -> s{_goalAlt = a})
+instance GoogleAuth GlobalOperationsAggregatedList'
+         where
+        authKey = goalKey . _Just
+        authToken = goalOAuthToken . _Just
 
 instance GoogleRequest
          GlobalOperationsAggregatedList' where
@@ -208,14 +204,14 @@ instance GoogleRequest
           GlobalOperationsAggregatedList'{..}
           = go _goalQuotaUser (Just _goalPrettyPrint)
               _goalProject
-              _goalUserIp
+              _goalUserIP
               _goalKey
               _goalFilter
               _goalPageToken
-              _goalOauthToken
+              _goalOAuthToken
               (Just _goalMaxResults)
               _goalFields
-              (Just _goalAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

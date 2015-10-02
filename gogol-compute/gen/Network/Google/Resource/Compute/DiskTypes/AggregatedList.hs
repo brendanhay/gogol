@@ -33,14 +33,13 @@ module Network.Google.Resource.Compute.DiskTypes.AggregatedList
     , dtalQuotaUser
     , dtalPrettyPrint
     , dtalProject
-    , dtalUserIp
+    , dtalUserIP
     , dtalKey
     , dtalFilter
     , dtalPageToken
-    , dtalOauthToken
+    , dtalOAuthToken
     , dtalMaxResults
     , dtalFields
-    , dtalAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -55,13 +54,13 @@ type DiskTypesAggregatedListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "filter" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "maxResults" Word32 :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :>
+                             QueryParam "alt" AltJSON :>
                                Get '[JSON] DiskTypeAggregatedList
 
 -- | Retrieves the list of disk type resources grouped by scope.
@@ -71,14 +70,13 @@ data DiskTypesAggregatedList' = DiskTypesAggregatedList'
     { _dtalQuotaUser   :: !(Maybe Text)
     , _dtalPrettyPrint :: !Bool
     , _dtalProject     :: !Text
-    , _dtalUserIp      :: !(Maybe Text)
-    , _dtalKey         :: !(Maybe Text)
+    , _dtalUserIP      :: !(Maybe Text)
+    , _dtalKey         :: !(Maybe Key)
     , _dtalFilter      :: !(Maybe Text)
     , _dtalPageToken   :: !(Maybe Text)
-    , _dtalOauthToken  :: !(Maybe Text)
+    , _dtalOAuthToken  :: !(Maybe OAuthToken)
     , _dtalMaxResults  :: !Word32
     , _dtalFields      :: !(Maybe Text)
-    , _dtalAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DiskTypesAggregatedList'' with the minimum fields required to make a request.
@@ -91,7 +89,7 @@ data DiskTypesAggregatedList' = DiskTypesAggregatedList'
 --
 -- * 'dtalProject'
 --
--- * 'dtalUserIp'
+-- * 'dtalUserIP'
 --
 -- * 'dtalKey'
 --
@@ -99,13 +97,11 @@ data DiskTypesAggregatedList' = DiskTypesAggregatedList'
 --
 -- * 'dtalPageToken'
 --
--- * 'dtalOauthToken'
+-- * 'dtalOAuthToken'
 --
 -- * 'dtalMaxResults'
 --
 -- * 'dtalFields'
---
--- * 'dtalAlt'
 diskTypesAggregatedList'
     :: Text -- ^ 'project'
     -> DiskTypesAggregatedList'
@@ -114,14 +110,13 @@ diskTypesAggregatedList' pDtalProject_ =
     { _dtalQuotaUser = Nothing
     , _dtalPrettyPrint = True
     , _dtalProject = pDtalProject_
-    , _dtalUserIp = Nothing
+    , _dtalUserIP = Nothing
     , _dtalKey = Nothing
     , _dtalFilter = Nothing
     , _dtalPageToken = Nothing
-    , _dtalOauthToken = Nothing
+    , _dtalOAuthToken = Nothing
     , _dtalMaxResults = 500
     , _dtalFields = Nothing
-    , _dtalAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -145,14 +140,14 @@ dtalProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-dtalUserIp :: Lens' DiskTypesAggregatedList' (Maybe Text)
-dtalUserIp
-  = lens _dtalUserIp (\ s a -> s{_dtalUserIp = a})
+dtalUserIP :: Lens' DiskTypesAggregatedList' (Maybe Text)
+dtalUserIP
+  = lens _dtalUserIP (\ s a -> s{_dtalUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dtalKey :: Lens' DiskTypesAggregatedList' (Maybe Text)
+dtalKey :: Lens' DiskTypesAggregatedList' (Maybe Key)
 dtalKey = lens _dtalKey (\ s a -> s{_dtalKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
@@ -179,10 +174,10 @@ dtalPageToken
       (\ s a -> s{_dtalPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-dtalOauthToken :: Lens' DiskTypesAggregatedList' (Maybe Text)
-dtalOauthToken
-  = lens _dtalOauthToken
-      (\ s a -> s{_dtalOauthToken = a})
+dtalOAuthToken :: Lens' DiskTypesAggregatedList' (Maybe OAuthToken)
+dtalOAuthToken
+  = lens _dtalOAuthToken
+      (\ s a -> s{_dtalOAuthToken = a})
 
 -- | Maximum count of results to be returned.
 dtalMaxResults :: Lens' DiskTypesAggregatedList' Word32
@@ -195,9 +190,9 @@ dtalFields :: Lens' DiskTypesAggregatedList' (Maybe Text)
 dtalFields
   = lens _dtalFields (\ s a -> s{_dtalFields = a})
 
--- | Data format for the response.
-dtalAlt :: Lens' DiskTypesAggregatedList' Alt
-dtalAlt = lens _dtalAlt (\ s a -> s{_dtalAlt = a})
+instance GoogleAuth DiskTypesAggregatedList' where
+        authKey = dtalKey . _Just
+        authToken = dtalOAuthToken . _Just
 
 instance GoogleRequest DiskTypesAggregatedList' where
         type Rs DiskTypesAggregatedList' =
@@ -206,14 +201,14 @@ instance GoogleRequest DiskTypesAggregatedList' where
         requestWithRoute r u DiskTypesAggregatedList'{..}
           = go _dtalQuotaUser (Just _dtalPrettyPrint)
               _dtalProject
-              _dtalUserIp
+              _dtalUserIP
               _dtalKey
               _dtalFilter
               _dtalPageToken
-              _dtalOauthToken
+              _dtalOAuthToken
               (Just _dtalMaxResults)
               _dtalFields
-              (Just _dtalAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy DiskTypesAggregatedListResource)

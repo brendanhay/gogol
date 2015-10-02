@@ -32,14 +32,13 @@ module Network.Google.Resource.AdSense.Accounts.Reports.Saved.List
     -- * Request Lenses
     , arslQuotaUser
     , arslPrettyPrint
-    , arslUserIp
+    , arslUserIP
     , arslAccountId
     , arslKey
     , arslPageToken
-    , arslOauthToken
+    , arslOAuthToken
     , arslMaxResults
     , arslFields
-    , arslAlt
     ) where
 
 import           Network.Google.AdSense.Types
@@ -55,12 +54,13 @@ type AccountsReportsSavedListResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "maxResults" Int32 :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Get '[JSON] SavedReports
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] SavedReports
 
 -- | List all saved reports in the specified AdSense account.
 --
@@ -68,14 +68,13 @@ type AccountsReportsSavedListResource =
 data AccountsReportsSavedList' = AccountsReportsSavedList'
     { _arslQuotaUser   :: !(Maybe Text)
     , _arslPrettyPrint :: !Bool
-    , _arslUserIp      :: !(Maybe Text)
+    , _arslUserIP      :: !(Maybe Text)
     , _arslAccountId   :: !Text
-    , _arslKey         :: !(Maybe Text)
+    , _arslKey         :: !(Maybe Key)
     , _arslPageToken   :: !(Maybe Text)
-    , _arslOauthToken  :: !(Maybe Text)
+    , _arslOAuthToken  :: !(Maybe OAuthToken)
     , _arslMaxResults  :: !(Maybe Int32)
     , _arslFields      :: !(Maybe Text)
-    , _arslAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsReportsSavedList'' with the minimum fields required to make a request.
@@ -86,7 +85,7 @@ data AccountsReportsSavedList' = AccountsReportsSavedList'
 --
 -- * 'arslPrettyPrint'
 --
--- * 'arslUserIp'
+-- * 'arslUserIP'
 --
 -- * 'arslAccountId'
 --
@@ -94,13 +93,11 @@ data AccountsReportsSavedList' = AccountsReportsSavedList'
 --
 -- * 'arslPageToken'
 --
--- * 'arslOauthToken'
+-- * 'arslOAuthToken'
 --
 -- * 'arslMaxResults'
 --
 -- * 'arslFields'
---
--- * 'arslAlt'
 accountsReportsSavedList'
     :: Text -- ^ 'accountId'
     -> AccountsReportsSavedList'
@@ -108,14 +105,13 @@ accountsReportsSavedList' pArslAccountId_ =
     AccountsReportsSavedList'
     { _arslQuotaUser = Nothing
     , _arslPrettyPrint = True
-    , _arslUserIp = Nothing
+    , _arslUserIP = Nothing
     , _arslAccountId = pArslAccountId_
     , _arslKey = Nothing
     , _arslPageToken = Nothing
-    , _arslOauthToken = Nothing
+    , _arslOAuthToken = Nothing
     , _arslMaxResults = Nothing
     , _arslFields = Nothing
-    , _arslAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -134,9 +130,9 @@ arslPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-arslUserIp :: Lens' AccountsReportsSavedList' (Maybe Text)
-arslUserIp
-  = lens _arslUserIp (\ s a -> s{_arslUserIp = a})
+arslUserIP :: Lens' AccountsReportsSavedList' (Maybe Text)
+arslUserIP
+  = lens _arslUserIP (\ s a -> s{_arslUserIP = a})
 
 -- | Account to which the saved reports belong.
 arslAccountId :: Lens' AccountsReportsSavedList' Text
@@ -147,7 +143,7 @@ arslAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-arslKey :: Lens' AccountsReportsSavedList' (Maybe Text)
+arslKey :: Lens' AccountsReportsSavedList' (Maybe Key)
 arslKey = lens _arslKey (\ s a -> s{_arslKey = a})
 
 -- | A continuation token, used to page through saved reports. To retrieve
@@ -159,10 +155,10 @@ arslPageToken
       (\ s a -> s{_arslPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-arslOauthToken :: Lens' AccountsReportsSavedList' (Maybe Text)
-arslOauthToken
-  = lens _arslOauthToken
-      (\ s a -> s{_arslOauthToken = a})
+arslOAuthToken :: Lens' AccountsReportsSavedList' (Maybe OAuthToken)
+arslOAuthToken
+  = lens _arslOAuthToken
+      (\ s a -> s{_arslOAuthToken = a})
 
 -- | The maximum number of saved reports to include in the response, used for
 -- paging.
@@ -176,9 +172,9 @@ arslFields :: Lens' AccountsReportsSavedList' (Maybe Text)
 arslFields
   = lens _arslFields (\ s a -> s{_arslFields = a})
 
--- | Data format for the response.
-arslAlt :: Lens' AccountsReportsSavedList' Alt
-arslAlt = lens _arslAlt (\ s a -> s{_arslAlt = a})
+instance GoogleAuth AccountsReportsSavedList' where
+        authKey = arslKey . _Just
+        authToken = arslOAuthToken . _Just
 
 instance GoogleRequest AccountsReportsSavedList'
          where
@@ -186,14 +182,14 @@ instance GoogleRequest AccountsReportsSavedList'
         request = requestWithRoute defReq adSenseURL
         requestWithRoute r u AccountsReportsSavedList'{..}
           = go _arslQuotaUser (Just _arslPrettyPrint)
-              _arslUserIp
+              _arslUserIP
               _arslAccountId
               _arslKey
               _arslPageToken
-              _arslOauthToken
+              _arslOAuthToken
               _arslMaxResults
               _arslFields
-              (Just _arslAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountsReportsSavedListResource)

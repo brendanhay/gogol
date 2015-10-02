@@ -32,13 +32,13 @@ module Network.Google.Resource.Gmail.Users.Labels.Patch
     -- * Request Lenses
     , ulpQuotaUser
     , ulpPrettyPrint
-    , ulpUserIp
+    , ulpUserIP
     , ulpUserId
     , ulpKey
     , ulpId
-    , ulpOauthToken
+    , ulpOAuthToken
+    , ulpLabel
     , ulpFields
-    , ulpAlt
     ) where
 
 import           Network.Google.Gmail.Types
@@ -53,10 +53,11 @@ type UsersLabelsPatchResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Patch '[JSON] Label
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Label :> Patch '[JSON] Label
 
 -- | Updates the specified label. This method supports patch semantics.
 --
@@ -64,13 +65,13 @@ type UsersLabelsPatchResource =
 data UsersLabelsPatch' = UsersLabelsPatch'
     { _ulpQuotaUser   :: !(Maybe Text)
     , _ulpPrettyPrint :: !Bool
-    , _ulpUserIp      :: !(Maybe Text)
+    , _ulpUserIP      :: !(Maybe Text)
     , _ulpUserId      :: !Text
-    , _ulpKey         :: !(Maybe Text)
+    , _ulpKey         :: !(Maybe Key)
     , _ulpId          :: !Text
-    , _ulpOauthToken  :: !(Maybe Text)
+    , _ulpOAuthToken  :: !(Maybe OAuthToken)
+    , _ulpLabel       :: !Label
     , _ulpFields      :: !(Maybe Text)
-    , _ulpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersLabelsPatch'' with the minimum fields required to make a request.
@@ -81,7 +82,7 @@ data UsersLabelsPatch' = UsersLabelsPatch'
 --
 -- * 'ulpPrettyPrint'
 --
--- * 'ulpUserIp'
+-- * 'ulpUserIP'
 --
 -- * 'ulpUserId'
 --
@@ -89,26 +90,27 @@ data UsersLabelsPatch' = UsersLabelsPatch'
 --
 -- * 'ulpId'
 --
--- * 'ulpOauthToken'
+-- * 'ulpOAuthToken'
+--
+-- * 'ulpLabel'
 --
 -- * 'ulpFields'
---
--- * 'ulpAlt'
 usersLabelsPatch'
     :: Text -- ^ 'id'
-    -> Text
+    -> Text -- ^ 'Label'
+    -> Label
     -> UsersLabelsPatch'
-usersLabelsPatch' pUlpUserId_ pUlpId_ =
+usersLabelsPatch' pUlpUserId_ pUlpId_ pUlpLabel_ =
     UsersLabelsPatch'
     { _ulpQuotaUser = Nothing
     , _ulpPrettyPrint = True
-    , _ulpUserIp = Nothing
+    , _ulpUserIP = Nothing
     , _ulpUserId = pUlpUserId_
     , _ulpKey = Nothing
     , _ulpId = pUlpId_
-    , _ulpOauthToken = Nothing
+    , _ulpOAuthToken = Nothing
+    , _ulpLabel = pUlpLabel_
     , _ulpFields = Nothing
-    , _ulpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -126,9 +128,9 @@ ulpPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ulpUserIp :: Lens' UsersLabelsPatch' (Maybe Text)
-ulpUserIp
-  = lens _ulpUserIp (\ s a -> s{_ulpUserIp = a})
+ulpUserIP :: Lens' UsersLabelsPatch' (Maybe Text)
+ulpUserIP
+  = lens _ulpUserIP (\ s a -> s{_ulpUserIP = a})
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
@@ -139,7 +141,7 @@ ulpUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ulpKey :: Lens' UsersLabelsPatch' (Maybe Text)
+ulpKey :: Lens' UsersLabelsPatch' (Maybe Key)
 ulpKey = lens _ulpKey (\ s a -> s{_ulpKey = a})
 
 -- | The ID of the label to update.
@@ -147,31 +149,36 @@ ulpId :: Lens' UsersLabelsPatch' Text
 ulpId = lens _ulpId (\ s a -> s{_ulpId = a})
 
 -- | OAuth 2.0 token for the current user.
-ulpOauthToken :: Lens' UsersLabelsPatch' (Maybe Text)
-ulpOauthToken
-  = lens _ulpOauthToken
-      (\ s a -> s{_ulpOauthToken = a})
+ulpOAuthToken :: Lens' UsersLabelsPatch' (Maybe OAuthToken)
+ulpOAuthToken
+  = lens _ulpOAuthToken
+      (\ s a -> s{_ulpOAuthToken = a})
+
+-- | Multipart request metadata.
+ulpLabel :: Lens' UsersLabelsPatch' Label
+ulpLabel = lens _ulpLabel (\ s a -> s{_ulpLabel = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ulpFields :: Lens' UsersLabelsPatch' (Maybe Text)
 ulpFields
   = lens _ulpFields (\ s a -> s{_ulpFields = a})
 
--- | Data format for the response.
-ulpAlt :: Lens' UsersLabelsPatch' Alt
-ulpAlt = lens _ulpAlt (\ s a -> s{_ulpAlt = a})
+instance GoogleAuth UsersLabelsPatch' where
+        authKey = ulpKey . _Just
+        authToken = ulpOAuthToken . _Just
 
 instance GoogleRequest UsersLabelsPatch' where
         type Rs UsersLabelsPatch' = Label
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersLabelsPatch'{..}
-          = go _ulpQuotaUser (Just _ulpPrettyPrint) _ulpUserIp
+          = go _ulpQuotaUser (Just _ulpPrettyPrint) _ulpUserIP
               _ulpUserId
               _ulpKey
               _ulpId
-              _ulpOauthToken
+              _ulpOAuthToken
               _ulpFields
-              (Just _ulpAlt)
+              (Just AltJSON)
+              _ulpLabel
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersLabelsPatchResource)

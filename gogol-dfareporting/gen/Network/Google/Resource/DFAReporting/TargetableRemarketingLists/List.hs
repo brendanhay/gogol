@@ -32,7 +32,7 @@ module Network.Google.Resource.DFAReporting.TargetableRemarketingLists.List
     -- * Request Lenses
     , trllQuotaUser
     , trllPrettyPrint
-    , trllUserIp
+    , trllUserIP
     , trllAdvertiserId
     , trllProfileId
     , trllSortOrder
@@ -41,10 +41,9 @@ module Network.Google.Resource.DFAReporting.TargetableRemarketingLists.List
     , trllName
     , trllPageToken
     , trllSortField
-    , trllOauthToken
+    , trllOAuthToken
     , trllMaxResults
     , trllFields
-    , trllAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -64,16 +63,16 @@ type TargetableRemarketingListsListResource =
                      DfareportingTargetableRemarketingListsListSortOrder
                      :>
                      QueryParam "active" Bool :>
-                       QueryParam "key" Text :>
+                       QueryParam "key" Key :>
                          QueryParam "name" Text :>
                            QueryParam "pageToken" Text :>
                              QueryParam "sortField"
                                DfareportingTargetableRemarketingListsListSortField
                                :>
-                               QueryParam "oauth_token" Text :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "maxResults" Int32 :>
                                    QueryParam "fields" Text :>
-                                     QueryParam "alt" Alt :>
+                                     QueryParam "alt" AltJSON :>
                                        Get '[JSON]
                                          TargetableRemarketingListsListResponse
 
@@ -83,19 +82,18 @@ type TargetableRemarketingListsListResource =
 data TargetableRemarketingListsList' = TargetableRemarketingListsList'
     { _trllQuotaUser    :: !(Maybe Text)
     , _trllPrettyPrint  :: !Bool
-    , _trllUserIp       :: !(Maybe Text)
+    , _trllUserIP       :: !(Maybe Text)
     , _trllAdvertiserId :: !Int64
     , _trllProfileId    :: !Int64
     , _trllSortOrder    :: !(Maybe DfareportingTargetableRemarketingListsListSortOrder)
     , _trllActive       :: !(Maybe Bool)
-    , _trllKey          :: !(Maybe Text)
+    , _trllKey          :: !(Maybe Key)
     , _trllName         :: !(Maybe Text)
     , _trllPageToken    :: !(Maybe Text)
     , _trllSortField    :: !(Maybe DfareportingTargetableRemarketingListsListSortField)
-    , _trllOauthToken   :: !(Maybe Text)
+    , _trllOAuthToken   :: !(Maybe OAuthToken)
     , _trllMaxResults   :: !(Maybe Int32)
     , _trllFields       :: !(Maybe Text)
-    , _trllAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetableRemarketingListsList'' with the minimum fields required to make a request.
@@ -106,7 +104,7 @@ data TargetableRemarketingListsList' = TargetableRemarketingListsList'
 --
 -- * 'trllPrettyPrint'
 --
--- * 'trllUserIp'
+-- * 'trllUserIP'
 --
 -- * 'trllAdvertiserId'
 --
@@ -124,13 +122,11 @@ data TargetableRemarketingListsList' = TargetableRemarketingListsList'
 --
 -- * 'trllSortField'
 --
--- * 'trllOauthToken'
+-- * 'trllOAuthToken'
 --
 -- * 'trllMaxResults'
 --
 -- * 'trllFields'
---
--- * 'trllAlt'
 targetableRemarketingListsList'
     :: Int64 -- ^ 'advertiserId'
     -> Int64 -- ^ 'profileId'
@@ -139,7 +135,7 @@ targetableRemarketingListsList' pTrllAdvertiserId_ pTrllProfileId_ =
     TargetableRemarketingListsList'
     { _trllQuotaUser = Nothing
     , _trllPrettyPrint = True
-    , _trllUserIp = Nothing
+    , _trllUserIP = Nothing
     , _trllAdvertiserId = pTrllAdvertiserId_
     , _trllProfileId = pTrllProfileId_
     , _trllSortOrder = Nothing
@@ -148,10 +144,9 @@ targetableRemarketingListsList' pTrllAdvertiserId_ pTrllProfileId_ =
     , _trllName = Nothing
     , _trllPageToken = Nothing
     , _trllSortField = Nothing
-    , _trllOauthToken = Nothing
+    , _trllOAuthToken = Nothing
     , _trllMaxResults = Nothing
     , _trllFields = Nothing
-    , _trllAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -170,9 +165,9 @@ trllPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-trllUserIp :: Lens' TargetableRemarketingListsList' (Maybe Text)
-trllUserIp
-  = lens _trllUserIp (\ s a -> s{_trllUserIp = a})
+trllUserIP :: Lens' TargetableRemarketingListsList' (Maybe Text)
+trllUserIP
+  = lens _trllUserIP (\ s a -> s{_trllUserIP = a})
 
 -- | Select only targetable remarketing lists targetable by these
 -- advertisers.
@@ -201,7 +196,7 @@ trllActive
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-trllKey :: Lens' TargetableRemarketingListsList' (Maybe Text)
+trllKey :: Lens' TargetableRemarketingListsList' (Maybe Key)
 trllKey = lens _trllKey (\ s a -> s{_trllKey = a})
 
 -- | Allows searching for objects by name or ID. Wildcards (*) are allowed.
@@ -228,10 +223,10 @@ trllSortField
       (\ s a -> s{_trllSortField = a})
 
 -- | OAuth 2.0 token for the current user.
-trllOauthToken :: Lens' TargetableRemarketingListsList' (Maybe Text)
-trllOauthToken
-  = lens _trllOauthToken
-      (\ s a -> s{_trllOauthToken = a})
+trllOAuthToken :: Lens' TargetableRemarketingListsList' (Maybe OAuthToken)
+trllOAuthToken
+  = lens _trllOAuthToken
+      (\ s a -> s{_trllOAuthToken = a})
 
 -- | Maximum number of results to return.
 trllMaxResults :: Lens' TargetableRemarketingListsList' (Maybe Int32)
@@ -244,9 +239,10 @@ trllFields :: Lens' TargetableRemarketingListsList' (Maybe Text)
 trllFields
   = lens _trllFields (\ s a -> s{_trllFields = a})
 
--- | Data format for the response.
-trllAlt :: Lens' TargetableRemarketingListsList' Alt
-trllAlt = lens _trllAlt (\ s a -> s{_trllAlt = a})
+instance GoogleAuth TargetableRemarketingListsList'
+         where
+        authKey = trllKey . _Just
+        authToken = trllOAuthToken . _Just
 
 instance GoogleRequest
          TargetableRemarketingListsList' where
@@ -256,7 +252,7 @@ instance GoogleRequest
         requestWithRoute r u
           TargetableRemarketingListsList'{..}
           = go _trllQuotaUser (Just _trllPrettyPrint)
-              _trllUserIp
+              _trllUserIP
               (Just _trllAdvertiserId)
               _trllProfileId
               _trllSortOrder
@@ -265,10 +261,10 @@ instance GoogleRequest
               _trllName
               _trllPageToken
               _trllSortField
-              _trllOauthToken
+              _trllOAuthToken
               _trllMaxResults
               _trllFields
-              (Just _trllAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

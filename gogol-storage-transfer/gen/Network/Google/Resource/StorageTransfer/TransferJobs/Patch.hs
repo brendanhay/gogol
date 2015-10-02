@@ -21,7 +21,7 @@
 -- transfer operations that are running already. Updating the scheduling of
 -- a job is not allowed.
 --
--- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @StoragetransferTransferJobsPatch@.
+-- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @StorageTransferTransferJobsPatch@.
 module Network.Google.Resource.StorageTransfer.TransferJobs.Patch
     (
     -- * REST Resource
@@ -40,18 +40,18 @@ module Network.Google.Resource.StorageTransfer.TransferJobs.Patch
     , tjpAccessToken
     , tjpJobName
     , tjpUploadType
+    , tjpUpdateTransferJobRequest
     , tjpBearerToken
     , tjpKey
-    , tjpOauthToken
+    , tjpOAuthToken
     , tjpFields
     , tjpCallback
-    , tjpAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.StorageTransfer.Types
 
--- | A resource alias for @StoragetransferTransferJobsPatch@ which the
+-- | A resource alias for @StorageTransferTransferJobsPatch@ which the
 -- 'TransferJobsPatch'' request conforms to.
 type TransferJobsPatchResource =
      "v1" :>
@@ -64,12 +64,13 @@ type TransferJobsPatchResource =
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
                        QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
                                QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :>
-                                   Patch '[JSON] TransferJob
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON] UpdateTransferJobRequest :>
+                                     Patch '[JSON] TransferJob
 
 -- | Updates a transfer job. Updating a job\'s transfer spec does not affect
 -- transfer operations that are running already. Updating the scheduling of
@@ -77,20 +78,20 @@ type TransferJobsPatchResource =
 --
 -- /See:/ 'transferJobsPatch'' smart constructor.
 data TransferJobsPatch' = TransferJobsPatch'
-    { _tjpXgafv          :: !(Maybe Text)
-    , _tjpQuotaUser      :: !(Maybe Text)
-    , _tjpPrettyPrint    :: !Bool
-    , _tjpUploadProtocol :: !(Maybe Text)
-    , _tjpPp             :: !Bool
-    , _tjpAccessToken    :: !(Maybe Text)
-    , _tjpJobName        :: !Text
-    , _tjpUploadType     :: !(Maybe Text)
-    , _tjpBearerToken    :: !(Maybe Text)
-    , _tjpKey            :: !(Maybe Text)
-    , _tjpOauthToken     :: !(Maybe Text)
-    , _tjpFields         :: !(Maybe Text)
-    , _tjpCallback       :: !(Maybe Text)
-    , _tjpAlt            :: !Text
+    { _tjpXgafv                    :: !(Maybe Text)
+    , _tjpQuotaUser                :: !(Maybe Text)
+    , _tjpPrettyPrint              :: !Bool
+    , _tjpUploadProtocol           :: !(Maybe Text)
+    , _tjpPp                       :: !Bool
+    , _tjpAccessToken              :: !(Maybe Text)
+    , _tjpJobName                  :: !Text
+    , _tjpUploadType               :: !(Maybe Text)
+    , _tjpUpdateTransferJobRequest :: !UpdateTransferJobRequest
+    , _tjpBearerToken              :: !(Maybe Text)
+    , _tjpKey                      :: !(Maybe Key)
+    , _tjpOAuthToken               :: !(Maybe OAuthToken)
+    , _tjpFields                   :: !(Maybe Text)
+    , _tjpCallback                 :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TransferJobsPatch'' with the minimum fields required to make a request.
@@ -113,21 +114,22 @@ data TransferJobsPatch' = TransferJobsPatch'
 --
 -- * 'tjpUploadType'
 --
+-- * 'tjpUpdateTransferJobRequest'
+--
 -- * 'tjpBearerToken'
 --
 -- * 'tjpKey'
 --
--- * 'tjpOauthToken'
+-- * 'tjpOAuthToken'
 --
 -- * 'tjpFields'
 --
 -- * 'tjpCallback'
---
--- * 'tjpAlt'
 transferJobsPatch'
     :: Text -- ^ 'jobName'
+    -> UpdateTransferJobRequest -- ^ 'UpdateTransferJobRequest'
     -> TransferJobsPatch'
-transferJobsPatch' pTjpJobName_ =
+transferJobsPatch' pTjpJobName_ pTjpUpdateTransferJobRequest_ =
     TransferJobsPatch'
     { _tjpXgafv = Nothing
     , _tjpQuotaUser = Nothing
@@ -137,12 +139,12 @@ transferJobsPatch' pTjpJobName_ =
     , _tjpAccessToken = Nothing
     , _tjpJobName = pTjpJobName_
     , _tjpUploadType = Nothing
+    , _tjpUpdateTransferJobRequest = pTjpUpdateTransferJobRequest_
     , _tjpBearerToken = Nothing
     , _tjpKey = Nothing
-    , _tjpOauthToken = Nothing
+    , _tjpOAuthToken = Nothing
     , _tjpFields = Nothing
     , _tjpCallback = Nothing
-    , _tjpAlt = "json"
     }
 
 -- | V1 error format.
@@ -189,6 +191,12 @@ tjpUploadType
   = lens _tjpUploadType
       (\ s a -> s{_tjpUploadType = a})
 
+-- | Multipart request metadata.
+tjpUpdateTransferJobRequest :: Lens' TransferJobsPatch' UpdateTransferJobRequest
+tjpUpdateTransferJobRequest
+  = lens _tjpUpdateTransferJobRequest
+      (\ s a -> s{_tjpUpdateTransferJobRequest = a})
+
 -- | OAuth bearer token.
 tjpBearerToken :: Lens' TransferJobsPatch' (Maybe Text)
 tjpBearerToken
@@ -198,14 +206,14 @@ tjpBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tjpKey :: Lens' TransferJobsPatch' (Maybe Text)
+tjpKey :: Lens' TransferJobsPatch' (Maybe Key)
 tjpKey = lens _tjpKey (\ s a -> s{_tjpKey = a})
 
 -- | OAuth 2.0 token for the current user.
-tjpOauthToken :: Lens' TransferJobsPatch' (Maybe Text)
-tjpOauthToken
-  = lens _tjpOauthToken
-      (\ s a -> s{_tjpOauthToken = a})
+tjpOAuthToken :: Lens' TransferJobsPatch' (Maybe OAuthToken)
+tjpOAuthToken
+  = lens _tjpOAuthToken
+      (\ s a -> s{_tjpOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 tjpFields :: Lens' TransferJobsPatch' (Maybe Text)
@@ -217,9 +225,9 @@ tjpCallback :: Lens' TransferJobsPatch' (Maybe Text)
 tjpCallback
   = lens _tjpCallback (\ s a -> s{_tjpCallback = a})
 
--- | Data format for response.
-tjpAlt :: Lens' TransferJobsPatch' Text
-tjpAlt = lens _tjpAlt (\ s a -> s{_tjpAlt = a})
+instance GoogleAuth TransferJobsPatch' where
+        authKey = tjpKey . _Just
+        authToken = tjpOAuthToken . _Just
 
 instance GoogleRequest TransferJobsPatch' where
         type Rs TransferJobsPatch' = TransferJob
@@ -233,10 +241,11 @@ instance GoogleRequest TransferJobsPatch' where
               _tjpUploadType
               _tjpBearerToken
               _tjpKey
-              _tjpOauthToken
+              _tjpOAuthToken
               _tjpFields
               _tjpCallback
-              (Just _tjpAlt)
+              (Just AltJSON)
+              _tjpUpdateTransferJobRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TransferJobsPatchResource)

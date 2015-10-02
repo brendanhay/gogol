@@ -40,10 +40,9 @@ module Network.Google.Resource.PubSub.Projects.Topics.Get
     , ptgTopic
     , ptgBearerToken
     , ptgKey
-    , ptgOauthToken
+    , ptgOAuthToken
     , ptgFields
     , ptgCallback
-    , ptgAlt
     ) where
 
 import           Network.Google.Prelude
@@ -62,11 +61,11 @@ type ProjectsTopicsGetResource =
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
                        QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
                                QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :> Get '[JSON] Topic
+                                 QueryParam "alt" AltJSON :> Get '[JSON] Topic
 
 -- | Gets the configuration of a topic.
 --
@@ -81,11 +80,10 @@ data ProjectsTopicsGet' = ProjectsTopicsGet'
     , _ptgUploadType     :: !(Maybe Text)
     , _ptgTopic          :: !Text
     , _ptgBearerToken    :: !(Maybe Text)
-    , _ptgKey            :: !(Maybe Text)
-    , _ptgOauthToken     :: !(Maybe Text)
+    , _ptgKey            :: !(Maybe Key)
+    , _ptgOAuthToken     :: !(Maybe OAuthToken)
     , _ptgFields         :: !(Maybe Text)
     , _ptgCallback       :: !(Maybe Text)
-    , _ptgAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsTopicsGet'' with the minimum fields required to make a request.
@@ -112,13 +110,11 @@ data ProjectsTopicsGet' = ProjectsTopicsGet'
 --
 -- * 'ptgKey'
 --
--- * 'ptgOauthToken'
+-- * 'ptgOAuthToken'
 --
 -- * 'ptgFields'
 --
 -- * 'ptgCallback'
---
--- * 'ptgAlt'
 projectsTopicsGet'
     :: Text -- ^ 'topic'
     -> ProjectsTopicsGet'
@@ -134,10 +130,9 @@ projectsTopicsGet' pPtgTopic_ =
     , _ptgTopic = pPtgTopic_
     , _ptgBearerToken = Nothing
     , _ptgKey = Nothing
-    , _ptgOauthToken = Nothing
+    , _ptgOAuthToken = Nothing
     , _ptgFields = Nothing
     , _ptgCallback = Nothing
-    , _ptgAlt = "json"
     }
 
 -- | V1 error format.
@@ -192,14 +187,14 @@ ptgBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ptgKey :: Lens' ProjectsTopicsGet' (Maybe Text)
+ptgKey :: Lens' ProjectsTopicsGet' (Maybe Key)
 ptgKey = lens _ptgKey (\ s a -> s{_ptgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-ptgOauthToken :: Lens' ProjectsTopicsGet' (Maybe Text)
-ptgOauthToken
-  = lens _ptgOauthToken
-      (\ s a -> s{_ptgOauthToken = a})
+ptgOAuthToken :: Lens' ProjectsTopicsGet' (Maybe OAuthToken)
+ptgOAuthToken
+  = lens _ptgOAuthToken
+      (\ s a -> s{_ptgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ptgFields :: Lens' ProjectsTopicsGet' (Maybe Text)
@@ -211,9 +206,9 @@ ptgCallback :: Lens' ProjectsTopicsGet' (Maybe Text)
 ptgCallback
   = lens _ptgCallback (\ s a -> s{_ptgCallback = a})
 
--- | Data format for response.
-ptgAlt :: Lens' ProjectsTopicsGet' Text
-ptgAlt = lens _ptgAlt (\ s a -> s{_ptgAlt = a})
+instance GoogleAuth ProjectsTopicsGet' where
+        authKey = ptgKey . _Just
+        authToken = ptgOAuthToken . _Just
 
 instance GoogleRequest ProjectsTopicsGet' where
         type Rs ProjectsTopicsGet' = Topic
@@ -227,10 +222,10 @@ instance GoogleRequest ProjectsTopicsGet' where
               _ptgTopic
               _ptgBearerToken
               _ptgKey
-              _ptgOauthToken
+              _ptgOAuthToken
               _ptgFields
               _ptgCallback
-              (Just _ptgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsTopicsGetResource)

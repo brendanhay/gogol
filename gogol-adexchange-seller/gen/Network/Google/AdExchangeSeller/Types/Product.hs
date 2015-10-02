@@ -153,7 +153,7 @@ data AdClients = AdClients
     { _acEtag          :: !(Maybe Text)
     , _acNextPageToken :: !(Maybe Text)
     , _acKind          :: !Text
-    , _acItems         :: !(Maybe [Maybe AdClient])
+    , _acItems         :: !(Maybe [AdClient])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdClients' with the minimum fields required to make a request.
@@ -193,7 +193,7 @@ acKind :: Lens' AdClients Text
 acKind = lens _acKind (\ s a -> s{_acKind = a})
 
 -- | The ad clients returned in this list response.
-acItems :: Lens' AdClients [Maybe AdClient]
+acItems :: Lens' AdClients [AdClient]
 acItems
   = lens _acItems (\ s a -> s{_acItems = a}) . _Default
       . _Coerce
@@ -221,7 +221,7 @@ data Accounts = Accounts
     { _aEtag          :: !(Maybe Text)
     , _aNextPageToken :: !(Maybe Text)
     , _aKind          :: !Text
-    , _aItems         :: !(Maybe [Maybe Account])
+    , _aItems         :: !(Maybe [Account])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Accounts' with the minimum fields required to make a request.
@@ -261,7 +261,7 @@ aKind :: Lens' Accounts Text
 aKind = lens _aKind (\ s a -> s{_aKind = a})
 
 -- | The accounts returned in this list response.
-aItems :: Lens' Accounts [Maybe Account]
+aItems :: Lens' Accounts [Account]
 aItems
   = lens _aItems (\ s a -> s{_aItems = a}) . _Default .
       _Coerce
@@ -344,7 +344,7 @@ instance ToJSON ReportHeaders where
 -- /See:/ 'alerts' smart constructor.
 data Alerts = Alerts
     { _aleKind  :: !Text
-    , _aleItems :: !(Maybe [Maybe Alert])
+    , _aleItems :: !(Maybe [Alert])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Alerts' with the minimum fields required to make a request.
@@ -367,7 +367,7 @@ aleKind :: Lens' Alerts Text
 aleKind = lens _aleKind (\ s a -> s{_aleKind = a})
 
 -- | The alerts returned in this list response.
-aleItems :: Lens' Alerts [Maybe Alert]
+aleItems :: Lens' Alerts [Alert]
 aleItems
   = lens _aleItems (\ s a -> s{_aleItems = a}) .
       _Default
@@ -394,7 +394,7 @@ data SavedReports = SavedReports
     { _srEtag          :: !(Maybe Text)
     , _srNextPageToken :: !(Maybe Text)
     , _srKind          :: !Text
-    , _srItems         :: !(Maybe [Maybe SavedReport])
+    , _srItems         :: !(Maybe [SavedReport])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SavedReports' with the minimum fields required to make a request.
@@ -435,7 +435,7 @@ srKind :: Lens' SavedReports Text
 srKind = lens _srKind (\ s a -> s{_srKind = a})
 
 -- | The saved reports returned in this list response.
-srItems :: Lens' SavedReports [Maybe SavedReport]
+srItems :: Lens' SavedReports [SavedReport]
 srItems
   = lens _srItems (\ s a -> s{_srItems = a}) . _Default
       . _Coerce
@@ -517,7 +517,7 @@ data URLChannels = URLChannels
     { _ucEtag          :: !(Maybe Text)
     , _ucNextPageToken :: !(Maybe Text)
     , _ucKind          :: !Text
-    , _ucItems         :: !(Maybe [Maybe URLChannel])
+    , _ucItems         :: !(Maybe [URLChannel])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLChannels' with the minimum fields required to make a request.
@@ -558,7 +558,7 @@ ucKind :: Lens' URLChannels Text
 ucKind = lens _ucKind (\ s a -> s{_ucKind = a})
 
 -- | The URL channels returned in this list response.
-ucItems :: Lens' URLChannels [Maybe URLChannel]
+ucItems :: Lens' URLChannels [URLChannel]
 ucItems
   = lens _ucItems (\ s a -> s{_ucItems = a}) . _Default
       . _Coerce
@@ -586,7 +586,7 @@ data CustomChannels = CustomChannels
     { _ccEtag          :: !(Maybe Text)
     , _ccNextPageToken :: !(Maybe Text)
     , _ccKind          :: !Text
-    , _ccItems         :: !(Maybe [Maybe CustomChannel])
+    , _ccItems         :: !(Maybe [CustomChannel])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CustomChannels' with the minimum fields required to make a request.
@@ -627,7 +627,7 @@ ccKind :: Lens' CustomChannels Text
 ccKind = lens _ccKind (\ s a -> s{_ccKind = a})
 
 -- | The custom channels returned in this list response.
-ccItems :: Lens' CustomChannels [Maybe CustomChannel]
+ccItems :: Lens' CustomChannels [CustomChannel]
 ccItems
   = lens _ccItems (\ s a -> s{_ccItems = a}) . _Default
       . _Coerce
@@ -1062,7 +1062,7 @@ instance ToJSON CustomChannelTargetingInfo where
 -- /See:/ 'preferredDeals' smart constructor.
 data PreferredDeals = PreferredDeals
     { _pdKind  :: !Text
-    , _pdItems :: !(Maybe [Maybe PreferredDeal])
+    , _pdItems :: !(Maybe [PreferredDeal])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PreferredDeals' with the minimum fields required to make a request.
@@ -1085,7 +1085,7 @@ pdKind :: Lens' PreferredDeals Text
 pdKind = lens _pdKind (\ s a -> s{_pdKind = a})
 
 -- | The preferred deals returned in this list response.
-pdItems :: Lens' PreferredDeals [Maybe PreferredDeal]
+pdItems :: Lens' PreferredDeals [PreferredDeal]
 pdItems
   = lens _pdItems (\ s a -> s{_pdItems = a}) . _Default
       . _Coerce
@@ -1109,7 +1109,7 @@ instance ToJSON PreferredDeals where
 -- /See:/ 'metadata' smart constructor.
 data Metadata = Metadata
     { _mKind  :: !Text
-    , _mItems :: !(Maybe [Maybe ReportingMetadataEntry])
+    , _mItems :: !(Maybe [ReportingMetadataEntry])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Metadata' with the minimum fields required to make a request.
@@ -1131,7 +1131,7 @@ metadata =
 mKind :: Lens' Metadata Text
 mKind = lens _mKind (\ s a -> s{_mKind = a})
 
-mItems :: Lens' Metadata [Maybe ReportingMetadataEntry]
+mItems :: Lens' Metadata [ReportingMetadataEntry]
 mItems
   = lens _mItems (\ s a -> s{_mItems = a}) . _Default .
       _Coerce
@@ -1232,7 +1232,7 @@ instance ToJSON CustomChannel where
 data URLChannel = URLChannel
     { _urlcKind       :: !Text
     , _urlcId         :: !(Maybe Text)
-    , _urlcUrlPattern :: !(Maybe Text)
+    , _urlcURLPattern :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLChannel' with the minimum fields required to make a request.
@@ -1243,14 +1243,14 @@ data URLChannel = URLChannel
 --
 -- * 'urlcId'
 --
--- * 'urlcUrlPattern'
+-- * 'urlcURLPattern'
 uRLChannel
     :: URLChannel
 uRLChannel =
     URLChannel
     { _urlcKind = "adexchangeseller#urlChannel"
     , _urlcId = Nothing
-    , _urlcUrlPattern = Nothing
+    , _urlcURLPattern = Nothing
     }
 
 -- | Kind of resource this is, in this case adexchangeseller#urlChannel.
@@ -1265,10 +1265,10 @@ urlcId = lens _urlcId (\ s a -> s{_urlcId = a})
 
 -- | URL Pattern of this URL channel. Does not include \"http:\/\/\" or
 -- \"https:\/\/\". Example: www.example.com\/home
-urlcUrlPattern :: Lens' URLChannel (Maybe Text)
-urlcUrlPattern
-  = lens _urlcUrlPattern
-      (\ s a -> s{_urlcUrlPattern = a})
+urlcURLPattern :: Lens' URLChannel (Maybe Text)
+urlcURLPattern
+  = lens _urlcURLPattern
+      (\ s a -> s{_urlcURLPattern = a})
 
 instance FromJSON URLChannel where
         parseJSON
@@ -1284,7 +1284,7 @@ instance ToJSON URLChannel where
           = object
               (catMaybes
                  [Just ("kind" .= _urlcKind), ("id" .=) <$> _urlcId,
-                  ("urlPattern" .=) <$> _urlcUrlPattern])
+                  ("urlPattern" .=) <$> _urlcURLPattern])
 
 --
 -- /See:/ 'preferredDeal' smart constructor.

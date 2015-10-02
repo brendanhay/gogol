@@ -32,12 +32,12 @@ module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Upda
     -- * Request Lenses
     , lcuQuotaUser
     , lcuPrettyPrint
-    , lcuUserIp
+    , lcuUserIP
+    , lcuLeaderboardConfiguration
     , lcuLeaderboardId
     , lcuKey
-    , lcuOauthToken
+    , lcuOAuthToken
     , lcuFields
-    , lcuAlt
     ) where
 
 import           Network.Google.GamesConfiguration.Types
@@ -51,24 +51,25 @@ type LeaderboardConfigurationsUpdateResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :>
-                       Put '[JSON] LeaderboardConfiguration
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] LeaderboardConfiguration :>
+                         Put '[JSON] LeaderboardConfiguration
 
 -- | Update the metadata of the leaderboard configuration with the given ID.
 --
 -- /See:/ 'leaderboardConfigurationsUpdate'' smart constructor.
 data LeaderboardConfigurationsUpdate' = LeaderboardConfigurationsUpdate'
-    { _lcuQuotaUser     :: !(Maybe Text)
-    , _lcuPrettyPrint   :: !Bool
-    , _lcuUserIp        :: !(Maybe Text)
-    , _lcuLeaderboardId :: !Text
-    , _lcuKey           :: !(Maybe Text)
-    , _lcuOauthToken    :: !(Maybe Text)
-    , _lcuFields        :: !(Maybe Text)
-    , _lcuAlt           :: !Alt
+    { _lcuQuotaUser                :: !(Maybe Text)
+    , _lcuPrettyPrint              :: !Bool
+    , _lcuUserIP                   :: !(Maybe Text)
+    , _lcuLeaderboardConfiguration :: !LeaderboardConfiguration
+    , _lcuLeaderboardId            :: !Text
+    , _lcuKey                      :: !(Maybe Key)
+    , _lcuOAuthToken               :: !(Maybe OAuthToken)
+    , _lcuFields                   :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LeaderboardConfigurationsUpdate'' with the minimum fields required to make a request.
@@ -79,30 +80,31 @@ data LeaderboardConfigurationsUpdate' = LeaderboardConfigurationsUpdate'
 --
 -- * 'lcuPrettyPrint'
 --
--- * 'lcuUserIp'
+-- * 'lcuUserIP'
+--
+-- * 'lcuLeaderboardConfiguration'
 --
 -- * 'lcuLeaderboardId'
 --
 -- * 'lcuKey'
 --
--- * 'lcuOauthToken'
+-- * 'lcuOAuthToken'
 --
 -- * 'lcuFields'
---
--- * 'lcuAlt'
 leaderboardConfigurationsUpdate'
-    :: Text -- ^ 'leaderboardId'
+    :: LeaderboardConfiguration -- ^ 'LeaderboardConfiguration'
+    -> Text -- ^ 'leaderboardId'
     -> LeaderboardConfigurationsUpdate'
-leaderboardConfigurationsUpdate' pLcuLeaderboardId_ =
+leaderboardConfigurationsUpdate' pLcuLeaderboardConfiguration_ pLcuLeaderboardId_ =
     LeaderboardConfigurationsUpdate'
     { _lcuQuotaUser = Nothing
     , _lcuPrettyPrint = True
-    , _lcuUserIp = Nothing
+    , _lcuUserIP = Nothing
+    , _lcuLeaderboardConfiguration = pLcuLeaderboardConfiguration_
     , _lcuLeaderboardId = pLcuLeaderboardId_
     , _lcuKey = Nothing
-    , _lcuOauthToken = Nothing
+    , _lcuOAuthToken = Nothing
     , _lcuFields = Nothing
-    , _lcuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,9 +122,15 @@ lcuPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-lcuUserIp :: Lens' LeaderboardConfigurationsUpdate' (Maybe Text)
-lcuUserIp
-  = lens _lcuUserIp (\ s a -> s{_lcuUserIp = a})
+lcuUserIP :: Lens' LeaderboardConfigurationsUpdate' (Maybe Text)
+lcuUserIP
+  = lens _lcuUserIP (\ s a -> s{_lcuUserIP = a})
+
+-- | Multipart request metadata.
+lcuLeaderboardConfiguration :: Lens' LeaderboardConfigurationsUpdate' LeaderboardConfiguration
+lcuLeaderboardConfiguration
+  = lens _lcuLeaderboardConfiguration
+      (\ s a -> s{_lcuLeaderboardConfiguration = a})
 
 -- | The ID of the leaderboard.
 lcuLeaderboardId :: Lens' LeaderboardConfigurationsUpdate' Text
@@ -133,23 +141,24 @@ lcuLeaderboardId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lcuKey :: Lens' LeaderboardConfigurationsUpdate' (Maybe Text)
+lcuKey :: Lens' LeaderboardConfigurationsUpdate' (Maybe Key)
 lcuKey = lens _lcuKey (\ s a -> s{_lcuKey = a})
 
 -- | OAuth 2.0 token for the current user.
-lcuOauthToken :: Lens' LeaderboardConfigurationsUpdate' (Maybe Text)
-lcuOauthToken
-  = lens _lcuOauthToken
-      (\ s a -> s{_lcuOauthToken = a})
+lcuOAuthToken :: Lens' LeaderboardConfigurationsUpdate' (Maybe OAuthToken)
+lcuOAuthToken
+  = lens _lcuOAuthToken
+      (\ s a -> s{_lcuOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 lcuFields :: Lens' LeaderboardConfigurationsUpdate' (Maybe Text)
 lcuFields
   = lens _lcuFields (\ s a -> s{_lcuFields = a})
 
--- | Data format for the response.
-lcuAlt :: Lens' LeaderboardConfigurationsUpdate' Alt
-lcuAlt = lens _lcuAlt (\ s a -> s{_lcuAlt = a})
+instance GoogleAuth LeaderboardConfigurationsUpdate'
+         where
+        authKey = lcuKey . _Just
+        authToken = lcuOAuthToken . _Just
 
 instance GoogleRequest
          LeaderboardConfigurationsUpdate' where
@@ -159,12 +168,13 @@ instance GoogleRequest
           = requestWithRoute defReq gamesConfigurationURL
         requestWithRoute r u
           LeaderboardConfigurationsUpdate'{..}
-          = go _lcuQuotaUser (Just _lcuPrettyPrint) _lcuUserIp
+          = go _lcuQuotaUser (Just _lcuPrettyPrint) _lcuUserIP
               _lcuLeaderboardId
               _lcuKey
-              _lcuOauthToken
+              _lcuOAuthToken
               _lcuFields
-              (Just _lcuAlt)
+              (Just AltJSON)
+              _lcuLeaderboardConfiguration
           where go
                   = clientWithRoute
                       (Proxy ::

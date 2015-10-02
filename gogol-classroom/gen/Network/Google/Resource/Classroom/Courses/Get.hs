@@ -44,10 +44,9 @@ module Network.Google.Resource.Classroom.Courses.Get
     , cgBearerToken
     , cgKey
     , cgId
-    , cgOauthToken
+    , cgOAuthToken
     , cgFields
     , cgCallback
-    , cgAlt
     ) where
 
 import           Network.Google.Classroom.Types
@@ -67,11 +66,12 @@ type CoursesGetResource =
                      QueryParam "access_token" Text :>
                        QueryParam "uploadType" Text :>
                          QueryParam "bearer_token" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "fields" Text :>
                                  QueryParam "callback" Text :>
-                                   QueryParam "alt" Text :> Get '[JSON] Course
+                                   QueryParam "alt" AltJSON :>
+                                     Get '[JSON] Course
 
 -- | Returns a course. This method returns the following error codes: *
 -- \`PERMISSION_DENIED\` if the requesting user is not permitted to access
@@ -89,12 +89,11 @@ data CoursesGet' = CoursesGet'
     , _cgAccessToken    :: !(Maybe Text)
     , _cgUploadType     :: !(Maybe Text)
     , _cgBearerToken    :: !(Maybe Text)
-    , _cgKey            :: !(Maybe Text)
+    , _cgKey            :: !(Maybe Key)
     , _cgId             :: !Text
-    , _cgOauthToken     :: !(Maybe Text)
+    , _cgOAuthToken     :: !(Maybe OAuthToken)
     , _cgFields         :: !(Maybe Text)
     , _cgCallback       :: !(Maybe Text)
-    , _cgAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CoursesGet'' with the minimum fields required to make a request.
@@ -121,13 +120,11 @@ data CoursesGet' = CoursesGet'
 --
 -- * 'cgId'
 --
--- * 'cgOauthToken'
+-- * 'cgOAuthToken'
 --
 -- * 'cgFields'
 --
 -- * 'cgCallback'
---
--- * 'cgAlt'
 coursesGet'
     :: Text -- ^ 'id'
     -> CoursesGet'
@@ -143,10 +140,9 @@ coursesGet' pCgId_ =
     , _cgBearerToken = Nothing
     , _cgKey = Nothing
     , _cgId = pCgId_
-    , _cgOauthToken = Nothing
+    , _cgOAuthToken = Nothing
     , _cgFields = Nothing
     , _cgCallback = Nothing
-    , _cgAlt = "json"
     }
 
 -- | V1 error format.
@@ -196,7 +192,7 @@ cgBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cgKey :: Lens' CoursesGet' (Maybe Text)
+cgKey :: Lens' CoursesGet' (Maybe Key)
 cgKey = lens _cgKey (\ s a -> s{_cgKey = a})
 
 -- | Identifier of the course to return. This identifier can be either the
@@ -206,9 +202,9 @@ cgId :: Lens' CoursesGet' Text
 cgId = lens _cgId (\ s a -> s{_cgId = a})
 
 -- | OAuth 2.0 token for the current user.
-cgOauthToken :: Lens' CoursesGet' (Maybe Text)
-cgOauthToken
-  = lens _cgOauthToken (\ s a -> s{_cgOauthToken = a})
+cgOAuthToken :: Lens' CoursesGet' (Maybe OAuthToken)
+cgOAuthToken
+  = lens _cgOAuthToken (\ s a -> s{_cgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cgFields :: Lens' CoursesGet' (Maybe Text)
@@ -219,9 +215,9 @@ cgCallback :: Lens' CoursesGet' (Maybe Text)
 cgCallback
   = lens _cgCallback (\ s a -> s{_cgCallback = a})
 
--- | Data format for response.
-cgAlt :: Lens' CoursesGet' Text
-cgAlt = lens _cgAlt (\ s a -> s{_cgAlt = a})
+instance GoogleAuth CoursesGet' where
+        authKey = cgKey . _Just
+        authToken = cgOAuthToken . _Just
 
 instance GoogleRequest CoursesGet' where
         type Rs CoursesGet' = Course
@@ -235,10 +231,10 @@ instance GoogleRequest CoursesGet' where
               _cgBearerToken
               _cgKey
               _cgId
-              _cgOauthToken
+              _cgOAuthToken
               _cgFields
               _cgCallback
-              (Just _cgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy CoursesGetResource)
                       r

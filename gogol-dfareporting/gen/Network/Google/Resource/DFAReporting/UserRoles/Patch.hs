@@ -32,13 +32,13 @@ module Network.Google.Resource.DFAReporting.UserRoles.Patch
     -- * Request Lenses
     , urpQuotaUser
     , urpPrettyPrint
-    , urpUserIp
+    , urpUserIP
     , urpProfileId
     , urpKey
     , urpId
-    , urpOauthToken
+    , urpUserRole
+    , urpOAuthToken
     , urpFields
-    , urpAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -53,11 +53,12 @@ type UserRolesPatchResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "id" Int64 :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Patch '[JSON] UserRole
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] UserRole :> Patch '[JSON] UserRole
 
 -- | Updates an existing user role. This method supports patch semantics.
 --
@@ -65,13 +66,13 @@ type UserRolesPatchResource =
 data UserRolesPatch' = UserRolesPatch'
     { _urpQuotaUser   :: !(Maybe Text)
     , _urpPrettyPrint :: !Bool
-    , _urpUserIp      :: !(Maybe Text)
+    , _urpUserIP      :: !(Maybe Text)
     , _urpProfileId   :: !Int64
-    , _urpKey         :: !(Maybe Text)
+    , _urpKey         :: !(Maybe Key)
     , _urpId          :: !Int64
-    , _urpOauthToken  :: !(Maybe Text)
+    , _urpUserRole    :: !UserRole
+    , _urpOAuthToken  :: !(Maybe OAuthToken)
     , _urpFields      :: !(Maybe Text)
-    , _urpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserRolesPatch'' with the minimum fields required to make a request.
@@ -82,7 +83,7 @@ data UserRolesPatch' = UserRolesPatch'
 --
 -- * 'urpPrettyPrint'
 --
--- * 'urpUserIp'
+-- * 'urpUserIP'
 --
 -- * 'urpProfileId'
 --
@@ -90,26 +91,27 @@ data UserRolesPatch' = UserRolesPatch'
 --
 -- * 'urpId'
 --
--- * 'urpOauthToken'
+-- * 'urpUserRole'
+--
+-- * 'urpOAuthToken'
 --
 -- * 'urpFields'
---
--- * 'urpAlt'
 userRolesPatch'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
+    -> UserRole -- ^ 'UserRole'
     -> UserRolesPatch'
-userRolesPatch' pUrpProfileId_ pUrpId_ =
+userRolesPatch' pUrpProfileId_ pUrpId_ pUrpUserRole_ =
     UserRolesPatch'
     { _urpQuotaUser = Nothing
     , _urpPrettyPrint = True
-    , _urpUserIp = Nothing
+    , _urpUserIP = Nothing
     , _urpProfileId = pUrpProfileId_
     , _urpKey = Nothing
     , _urpId = pUrpId_
-    , _urpOauthToken = Nothing
+    , _urpUserRole = pUrpUserRole_
+    , _urpOAuthToken = Nothing
     , _urpFields = Nothing
-    , _urpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,9 +129,9 @@ urpPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-urpUserIp :: Lens' UserRolesPatch' (Maybe Text)
-urpUserIp
-  = lens _urpUserIp (\ s a -> s{_urpUserIp = a})
+urpUserIP :: Lens' UserRolesPatch' (Maybe Text)
+urpUserIP
+  = lens _urpUserIP (\ s a -> s{_urpUserIP = a})
 
 -- | User profile ID associated with this request.
 urpProfileId :: Lens' UserRolesPatch' Int64
@@ -139,39 +141,45 @@ urpProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-urpKey :: Lens' UserRolesPatch' (Maybe Text)
+urpKey :: Lens' UserRolesPatch' (Maybe Key)
 urpKey = lens _urpKey (\ s a -> s{_urpKey = a})
 
 -- | User role ID.
 urpId :: Lens' UserRolesPatch' Int64
 urpId = lens _urpId (\ s a -> s{_urpId = a})
 
+-- | Multipart request metadata.
+urpUserRole :: Lens' UserRolesPatch' UserRole
+urpUserRole
+  = lens _urpUserRole (\ s a -> s{_urpUserRole = a})
+
 -- | OAuth 2.0 token for the current user.
-urpOauthToken :: Lens' UserRolesPatch' (Maybe Text)
-urpOauthToken
-  = lens _urpOauthToken
-      (\ s a -> s{_urpOauthToken = a})
+urpOAuthToken :: Lens' UserRolesPatch' (Maybe OAuthToken)
+urpOAuthToken
+  = lens _urpOAuthToken
+      (\ s a -> s{_urpOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 urpFields :: Lens' UserRolesPatch' (Maybe Text)
 urpFields
   = lens _urpFields (\ s a -> s{_urpFields = a})
 
--- | Data format for the response.
-urpAlt :: Lens' UserRolesPatch' Alt
-urpAlt = lens _urpAlt (\ s a -> s{_urpAlt = a})
+instance GoogleAuth UserRolesPatch' where
+        authKey = urpKey . _Just
+        authToken = urpOAuthToken . _Just
 
 instance GoogleRequest UserRolesPatch' where
         type Rs UserRolesPatch' = UserRole
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u UserRolesPatch'{..}
-          = go _urpQuotaUser (Just _urpPrettyPrint) _urpUserIp
+          = go _urpQuotaUser (Just _urpPrettyPrint) _urpUserIP
               _urpProfileId
               _urpKey
               (Just _urpId)
-              _urpOauthToken
+              _urpOAuthToken
               _urpFields
-              (Just _urpAlt)
+              (Just AltJSON)
+              _urpUserRole
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UserRolesPatchResource)

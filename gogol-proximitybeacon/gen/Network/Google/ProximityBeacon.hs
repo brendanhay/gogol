@@ -27,8 +27,8 @@ module Network.Google.ProximityBeacon
 
     -- * REST Resources
 
-    -- ** ProximitybeaconBeaconinfoGetforobserved
-    , module Network.Google.Resource.ProximityBeacon.Beaconinfo.Getforobserved
+    -- ** ProximitybeaconBeaconInfoGetforObserved
+    , module Network.Google.Resource.ProximityBeacon.BeaconInfo.GetforObserved
 
     -- ** ProximitybeaconBeaconsActivate
     , module Network.Google.Resource.ProximityBeacon.Beacons.Activate
@@ -199,7 +199,7 @@ module Network.Google.ProximityBeacon
 
 import           Network.Google.Prelude
 import           Network.Google.ProximityBeacon.Types
-import           Network.Google.Resource.ProximityBeacon.Beaconinfo.Getforobserved
+import           Network.Google.Resource.ProximityBeacon.BeaconInfo.GetforObserved
 import           Network.Google.Resource.ProximityBeacon.Beacons.Activate
 import           Network.Google.Resource.ProximityBeacon.Beacons.Attachments.BatchDelete
 import           Network.Google.Resource.ProximityBeacon.Beacons.Attachments.Create
@@ -232,7 +232,7 @@ type ProximityBeaconAPI =
        :<|> BeaconsDecommissionResource
        :<|> BeaconsUpdateResource
        :<|> NamespacesListResource
-       :<|> BeaconinfoGetforobservedResource
+       :<|> BeaconInfoGetforObservedResource
 
 proximityBeaconAPI :: Proxy ProximityBeaconAPI
 proximityBeaconAPI = Proxy

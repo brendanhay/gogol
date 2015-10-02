@@ -38,16 +38,15 @@ module Network.Google.Resource.Fitness.Users.DataSources.Datasets.Delete
     -- * Request Lenses
     , udsddQuotaUser
     , udsddPrettyPrint
-    , udsddUserIp
+    , udsddUserIP
     , udsddDataSourceId
     , udsddUserId
     , udsddKey
     , udsddDatasetId
     , udsddModifiedTimeMillis
     , udsddCurrentTimeMillis
-    , udsddOauthToken
+    , udsddOAuthToken
     , udsddFields
-    , udsddAlt
     ) where
 
 import           Network.Google.Fitness.Types
@@ -64,12 +63,12 @@ type UsersDataSourcesDatasetsDeleteResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
+                     QueryParam "key" Key :>
                        QueryParam "modifiedTimeMillis" Int64 :>
                          QueryParam "currentTimeMillis" Int64 :>
-                           QueryParam "oauth_token" Text :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :> Delete '[JSON] ()
+                               QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Performs an inclusive delete of all data points whose start and end
 -- times have any overlap with the time range specified by the dataset ID.
@@ -83,16 +82,15 @@ type UsersDataSourcesDatasetsDeleteResource =
 data UsersDataSourcesDatasetsDelete' = UsersDataSourcesDatasetsDelete'
     { _udsddQuotaUser          :: !(Maybe Text)
     , _udsddPrettyPrint        :: !Bool
-    , _udsddUserIp             :: !(Maybe Text)
+    , _udsddUserIP             :: !(Maybe Text)
     , _udsddDataSourceId       :: !Text
     , _udsddUserId             :: !Text
-    , _udsddKey                :: !(Maybe Text)
+    , _udsddKey                :: !(Maybe Key)
     , _udsddDatasetId          :: !Text
     , _udsddModifiedTimeMillis :: !(Maybe Int64)
     , _udsddCurrentTimeMillis  :: !(Maybe Int64)
-    , _udsddOauthToken         :: !(Maybe Text)
+    , _udsddOAuthToken         :: !(Maybe OAuthToken)
     , _udsddFields             :: !(Maybe Text)
-    , _udsddAlt                :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDataSourcesDatasetsDelete'' with the minimum fields required to make a request.
@@ -103,7 +101,7 @@ data UsersDataSourcesDatasetsDelete' = UsersDataSourcesDatasetsDelete'
 --
 -- * 'udsddPrettyPrint'
 --
--- * 'udsddUserIp'
+-- * 'udsddUserIP'
 --
 -- * 'udsddDataSourceId'
 --
@@ -117,11 +115,9 @@ data UsersDataSourcesDatasetsDelete' = UsersDataSourcesDatasetsDelete'
 --
 -- * 'udsddCurrentTimeMillis'
 --
--- * 'udsddOauthToken'
+-- * 'udsddOAuthToken'
 --
 -- * 'udsddFields'
---
--- * 'udsddAlt'
 usersDataSourcesDatasetsDelete'
     :: Text -- ^ 'dataSourceId'
     -> Text -- ^ 'userId'
@@ -131,16 +127,15 @@ usersDataSourcesDatasetsDelete' pUdsddDataSourceId_ pUdsddUserId_ pUdsddDatasetI
     UsersDataSourcesDatasetsDelete'
     { _udsddQuotaUser = Nothing
     , _udsddPrettyPrint = True
-    , _udsddUserIp = Nothing
+    , _udsddUserIP = Nothing
     , _udsddDataSourceId = pUdsddDataSourceId_
     , _udsddUserId = pUdsddUserId_
     , _udsddKey = Nothing
     , _udsddDatasetId = pUdsddDatasetId_
     , _udsddModifiedTimeMillis = Nothing
     , _udsddCurrentTimeMillis = Nothing
-    , _udsddOauthToken = Nothing
+    , _udsddOAuthToken = Nothing
     , _udsddFields = Nothing
-    , _udsddAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -159,9 +154,9 @@ udsddPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-udsddUserIp :: Lens' UsersDataSourcesDatasetsDelete' (Maybe Text)
-udsddUserIp
-  = lens _udsddUserIp (\ s a -> s{_udsddUserIp = a})
+udsddUserIP :: Lens' UsersDataSourcesDatasetsDelete' (Maybe Text)
+udsddUserIP
+  = lens _udsddUserIP (\ s a -> s{_udsddUserIP = a})
 
 -- | The data stream ID of the data source that created the dataset.
 udsddDataSourceId :: Lens' UsersDataSourcesDatasetsDelete' Text
@@ -178,7 +173,7 @@ udsddUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-udsddKey :: Lens' UsersDataSourcesDatasetsDelete' (Maybe Text)
+udsddKey :: Lens' UsersDataSourcesDatasetsDelete' (Maybe Key)
 udsddKey = lens _udsddKey (\ s a -> s{_udsddKey = a})
 
 -- | Dataset identifier that is a composite of the minimum data point start
@@ -203,19 +198,20 @@ udsddCurrentTimeMillis
       (\ s a -> s{_udsddCurrentTimeMillis = a})
 
 -- | OAuth 2.0 token for the current user.
-udsddOauthToken :: Lens' UsersDataSourcesDatasetsDelete' (Maybe Text)
-udsddOauthToken
-  = lens _udsddOauthToken
-      (\ s a -> s{_udsddOauthToken = a})
+udsddOAuthToken :: Lens' UsersDataSourcesDatasetsDelete' (Maybe OAuthToken)
+udsddOAuthToken
+  = lens _udsddOAuthToken
+      (\ s a -> s{_udsddOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 udsddFields :: Lens' UsersDataSourcesDatasetsDelete' (Maybe Text)
 udsddFields
   = lens _udsddFields (\ s a -> s{_udsddFields = a})
 
--- | Data format for the response.
-udsddAlt :: Lens' UsersDataSourcesDatasetsDelete' Alt
-udsddAlt = lens _udsddAlt (\ s a -> s{_udsddAlt = a})
+instance GoogleAuth UsersDataSourcesDatasetsDelete'
+         where
+        authKey = udsddKey . _Just
+        authToken = udsddOAuthToken . _Just
 
 instance GoogleRequest
          UsersDataSourcesDatasetsDelete' where
@@ -224,16 +220,16 @@ instance GoogleRequest
         requestWithRoute r u
           UsersDataSourcesDatasetsDelete'{..}
           = go _udsddQuotaUser (Just _udsddPrettyPrint)
-              _udsddUserIp
+              _udsddUserIP
               _udsddDataSourceId
               _udsddUserId
               _udsddKey
               _udsddDatasetId
               _udsddModifiedTimeMillis
               _udsddCurrentTimeMillis
-              _udsddOauthToken
+              _udsddOAuthToken
               _udsddFields
-              (Just _udsddAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

@@ -19,7 +19,7 @@
 --
 -- | Creates a user\'s Account & Container Permissions.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsPermissionsCreate@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsPermissionsCreate@.
 module Network.Google.Resource.TagManager.Accounts.Permissions.Create
     (
     -- * REST Resource
@@ -32,18 +32,18 @@ module Network.Google.Resource.TagManager.Accounts.Permissions.Create
     -- * Request Lenses
     , apcQuotaUser
     , apcPrettyPrint
-    , apcUserIp
+    , apcUserAccess
+    , apcUserIP
     , apcAccountId
     , apcKey
-    , apcOauthToken
+    , apcOAuthToken
     , apcFields
-    , apcAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagmanagerAccountsPermissionsCreate@ which the
+-- | A resource alias for @TagManagerAccountsPermissionsCreate@ which the
 -- 'AccountsPermissionsCreate'' request conforms to.
 type AccountsPermissionsCreateResource =
      "accounts" :>
@@ -52,10 +52,11 @@ type AccountsPermissionsCreateResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] UserAccess
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] UserAccess :> Post '[JSON] UserAccess
 
 -- | Creates a user\'s Account & Container Permissions.
 --
@@ -63,12 +64,12 @@ type AccountsPermissionsCreateResource =
 data AccountsPermissionsCreate' = AccountsPermissionsCreate'
     { _apcQuotaUser   :: !(Maybe Text)
     , _apcPrettyPrint :: !Bool
-    , _apcUserIp      :: !(Maybe Text)
+    , _apcUserAccess  :: !UserAccess
+    , _apcUserIP      :: !(Maybe Text)
     , _apcAccountId   :: !Text
-    , _apcKey         :: !(Maybe Text)
-    , _apcOauthToken  :: !(Maybe Text)
+    , _apcKey         :: !(Maybe Key)
+    , _apcOAuthToken  :: !(Maybe OAuthToken)
     , _apcFields      :: !(Maybe Text)
-    , _apcAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsPermissionsCreate'' with the minimum fields required to make a request.
@@ -79,30 +80,31 @@ data AccountsPermissionsCreate' = AccountsPermissionsCreate'
 --
 -- * 'apcPrettyPrint'
 --
--- * 'apcUserIp'
+-- * 'apcUserAccess'
+--
+-- * 'apcUserIP'
 --
 -- * 'apcAccountId'
 --
 -- * 'apcKey'
 --
--- * 'apcOauthToken'
+-- * 'apcOAuthToken'
 --
 -- * 'apcFields'
---
--- * 'apcAlt'
 accountsPermissionsCreate'
-    :: Text -- ^ 'accountId'
+    :: UserAccess -- ^ 'UserAccess'
+    -> Text -- ^ 'accountId'
     -> AccountsPermissionsCreate'
-accountsPermissionsCreate' pApcAccountId_ =
+accountsPermissionsCreate' pApcUserAccess_ pApcAccountId_ =
     AccountsPermissionsCreate'
     { _apcQuotaUser = Nothing
     , _apcPrettyPrint = True
-    , _apcUserIp = Nothing
+    , _apcUserAccess = pApcUserAccess_
+    , _apcUserIP = Nothing
     , _apcAccountId = pApcAccountId_
     , _apcKey = Nothing
-    , _apcOauthToken = Nothing
+    , _apcOAuthToken = Nothing
     , _apcFields = Nothing
-    , _apcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -118,11 +120,17 @@ apcPrettyPrint
   = lens _apcPrettyPrint
       (\ s a -> s{_apcPrettyPrint = a})
 
+-- | Multipart request metadata.
+apcUserAccess :: Lens' AccountsPermissionsCreate' UserAccess
+apcUserAccess
+  = lens _apcUserAccess
+      (\ s a -> s{_apcUserAccess = a})
+
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-apcUserIp :: Lens' AccountsPermissionsCreate' (Maybe Text)
-apcUserIp
-  = lens _apcUserIp (\ s a -> s{_apcUserIp = a})
+apcUserIP :: Lens' AccountsPermissionsCreate' (Maybe Text)
+apcUserIP
+  = lens _apcUserIP (\ s a -> s{_apcUserIP = a})
 
 -- | The GTM Account ID.
 apcAccountId :: Lens' AccountsPermissionsCreate' Text
@@ -132,35 +140,36 @@ apcAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-apcKey :: Lens' AccountsPermissionsCreate' (Maybe Text)
+apcKey :: Lens' AccountsPermissionsCreate' (Maybe Key)
 apcKey = lens _apcKey (\ s a -> s{_apcKey = a})
 
 -- | OAuth 2.0 token for the current user.
-apcOauthToken :: Lens' AccountsPermissionsCreate' (Maybe Text)
-apcOauthToken
-  = lens _apcOauthToken
-      (\ s a -> s{_apcOauthToken = a})
+apcOAuthToken :: Lens' AccountsPermissionsCreate' (Maybe OAuthToken)
+apcOAuthToken
+  = lens _apcOAuthToken
+      (\ s a -> s{_apcOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 apcFields :: Lens' AccountsPermissionsCreate' (Maybe Text)
 apcFields
   = lens _apcFields (\ s a -> s{_apcFields = a})
 
--- | Data format for the response.
-apcAlt :: Lens' AccountsPermissionsCreate' Alt
-apcAlt = lens _apcAlt (\ s a -> s{_apcAlt = a})
+instance GoogleAuth AccountsPermissionsCreate' where
+        authKey = apcKey . _Just
+        authToken = apcOAuthToken . _Just
 
 instance GoogleRequest AccountsPermissionsCreate'
          where
         type Rs AccountsPermissionsCreate' = UserAccess
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u AccountsPermissionsCreate'{..}
-          = go _apcQuotaUser (Just _apcPrettyPrint) _apcUserIp
+          = go _apcQuotaUser (Just _apcPrettyPrint) _apcUserIP
               _apcAccountId
               _apcKey
-              _apcOauthToken
+              _apcOAuthToken
               _apcFields
-              (Just _apcAlt)
+              (Just AltJSON)
+              _apcUserAccess
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountsPermissionsCreateResource)

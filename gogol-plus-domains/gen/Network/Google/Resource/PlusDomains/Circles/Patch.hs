@@ -32,12 +32,12 @@ module Network.Google.Resource.PlusDomains.Circles.Patch
     -- * Request Lenses
     , cpQuotaUser
     , cpPrettyPrint
-    , cpUserIp
+    , cpCircle
+    , cpUserIP
     , cpKey
     , cpCircleId
-    , cpOauthToken
+    , cpOAuthToken
     , cpFields
-    , cpAlt
     ) where
 
 import           Network.Google.PlusDomains.Types
@@ -51,10 +51,11 @@ type CirclesPatchResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Patch '[JSON] Circle
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Circle :> Patch '[JSON] Circle
 
 -- | Update a circle\'s description. This method supports patch semantics.
 --
@@ -62,12 +63,12 @@ type CirclesPatchResource =
 data CirclesPatch' = CirclesPatch'
     { _cpQuotaUser   :: !(Maybe Text)
     , _cpPrettyPrint :: !Bool
-    , _cpUserIp      :: !(Maybe Text)
-    , _cpKey         :: !(Maybe Text)
+    , _cpCircle      :: !Circle
+    , _cpUserIP      :: !(Maybe Text)
+    , _cpKey         :: !(Maybe Key)
     , _cpCircleId    :: !Text
-    , _cpOauthToken  :: !(Maybe Text)
+    , _cpOAuthToken  :: !(Maybe OAuthToken)
     , _cpFields      :: !(Maybe Text)
-    , _cpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CirclesPatch'' with the minimum fields required to make a request.
@@ -78,30 +79,31 @@ data CirclesPatch' = CirclesPatch'
 --
 -- * 'cpPrettyPrint'
 --
--- * 'cpUserIp'
+-- * 'cpCircle'
+--
+-- * 'cpUserIP'
 --
 -- * 'cpKey'
 --
 -- * 'cpCircleId'
 --
--- * 'cpOauthToken'
+-- * 'cpOAuthToken'
 --
 -- * 'cpFields'
---
--- * 'cpAlt'
 circlesPatch'
-    :: Text -- ^ 'circleId'
+    :: Circle -- ^ 'Circle'
+    -> Text -- ^ 'circleId'
     -> CirclesPatch'
-circlesPatch' pCpCircleId_ =
+circlesPatch' pCpCircle_ pCpCircleId_ =
     CirclesPatch'
     { _cpQuotaUser = Nothing
     , _cpPrettyPrint = True
-    , _cpUserIp = Nothing
+    , _cpCircle = pCpCircle_
+    , _cpUserIP = Nothing
     , _cpKey = Nothing
     , _cpCircleId = pCpCircleId_
-    , _cpOauthToken = Nothing
+    , _cpOAuthToken = Nothing
     , _cpFields = Nothing
-    , _cpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -117,15 +119,19 @@ cpPrettyPrint
   = lens _cpPrettyPrint
       (\ s a -> s{_cpPrettyPrint = a})
 
+-- | Multipart request metadata.
+cpCircle :: Lens' CirclesPatch' Circle
+cpCircle = lens _cpCircle (\ s a -> s{_cpCircle = a})
+
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cpUserIp :: Lens' CirclesPatch' (Maybe Text)
-cpUserIp = lens _cpUserIp (\ s a -> s{_cpUserIp = a})
+cpUserIP :: Lens' CirclesPatch' (Maybe Text)
+cpUserIP = lens _cpUserIP (\ s a -> s{_cpUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cpKey :: Lens' CirclesPatch' (Maybe Text)
+cpKey :: Lens' CirclesPatch' (Maybe Key)
 cpKey = lens _cpKey (\ s a -> s{_cpKey = a})
 
 -- | The ID of the circle to update.
@@ -134,28 +140,29 @@ cpCircleId
   = lens _cpCircleId (\ s a -> s{_cpCircleId = a})
 
 -- | OAuth 2.0 token for the current user.
-cpOauthToken :: Lens' CirclesPatch' (Maybe Text)
-cpOauthToken
-  = lens _cpOauthToken (\ s a -> s{_cpOauthToken = a})
+cpOAuthToken :: Lens' CirclesPatch' (Maybe OAuthToken)
+cpOAuthToken
+  = lens _cpOAuthToken (\ s a -> s{_cpOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cpFields :: Lens' CirclesPatch' (Maybe Text)
 cpFields = lens _cpFields (\ s a -> s{_cpFields = a})
 
--- | Data format for the response.
-cpAlt :: Lens' CirclesPatch' Alt
-cpAlt = lens _cpAlt (\ s a -> s{_cpAlt = a})
+instance GoogleAuth CirclesPatch' where
+        authKey = cpKey . _Just
+        authToken = cpOAuthToken . _Just
 
 instance GoogleRequest CirclesPatch' where
         type Rs CirclesPatch' = Circle
         request = requestWithRoute defReq plusDomainsURL
         requestWithRoute r u CirclesPatch'{..}
-          = go _cpQuotaUser (Just _cpPrettyPrint) _cpUserIp
+          = go _cpQuotaUser (Just _cpPrettyPrint) _cpUserIP
               _cpKey
               _cpCircleId
-              _cpOauthToken
+              _cpOAuthToken
               _cpFields
-              (Just _cpAlt)
+              (Just AltJSON)
+              _cpCircle
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CirclesPatchResource)

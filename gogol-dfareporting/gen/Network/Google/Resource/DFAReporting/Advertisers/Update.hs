@@ -32,12 +32,12 @@ module Network.Google.Resource.DFAReporting.Advertisers.Update
     -- * Request Lenses
     , advQuotaUser
     , advPrettyPrint
-    , advUserIp
+    , advUserIP
     , advProfileId
     , advKey
-    , advOauthToken
+    , advAdvertiser
+    , advOAuthToken
     , advFields
-    , advAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,10 +52,11 @@ type AdvertisersUpdateResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Put '[JSON] Advertiser
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Advertiser :> Put '[JSON] Advertiser
 
 -- | Updates an existing advertiser.
 --
@@ -63,12 +64,12 @@ type AdvertisersUpdateResource =
 data AdvertisersUpdate' = AdvertisersUpdate'
     { _advQuotaUser   :: !(Maybe Text)
     , _advPrettyPrint :: !Bool
-    , _advUserIp      :: !(Maybe Text)
+    , _advUserIP      :: !(Maybe Text)
     , _advProfileId   :: !Int64
-    , _advKey         :: !(Maybe Text)
-    , _advOauthToken  :: !(Maybe Text)
+    , _advKey         :: !(Maybe Key)
+    , _advAdvertiser  :: !Advertiser
+    , _advOAuthToken  :: !(Maybe OAuthToken)
     , _advFields      :: !(Maybe Text)
-    , _advAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertisersUpdate'' with the minimum fields required to make a request.
@@ -79,30 +80,31 @@ data AdvertisersUpdate' = AdvertisersUpdate'
 --
 -- * 'advPrettyPrint'
 --
--- * 'advUserIp'
+-- * 'advUserIP'
 --
 -- * 'advProfileId'
 --
 -- * 'advKey'
 --
--- * 'advOauthToken'
+-- * 'advAdvertiser'
+--
+-- * 'advOAuthToken'
 --
 -- * 'advFields'
---
--- * 'advAlt'
 advertisersUpdate'
     :: Int64 -- ^ 'profileId'
+    -> Advertiser -- ^ 'Advertiser'
     -> AdvertisersUpdate'
-advertisersUpdate' pAdvProfileId_ =
+advertisersUpdate' pAdvProfileId_ pAdvAdvertiser_ =
     AdvertisersUpdate'
     { _advQuotaUser = Nothing
     , _advPrettyPrint = True
-    , _advUserIp = Nothing
+    , _advUserIP = Nothing
     , _advProfileId = pAdvProfileId_
     , _advKey = Nothing
-    , _advOauthToken = Nothing
+    , _advAdvertiser = pAdvAdvertiser_
+    , _advOAuthToken = Nothing
     , _advFields = Nothing
-    , _advAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,9 +122,9 @@ advPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-advUserIp :: Lens' AdvertisersUpdate' (Maybe Text)
-advUserIp
-  = lens _advUserIp (\ s a -> s{_advUserIp = a})
+advUserIP :: Lens' AdvertisersUpdate' (Maybe Text)
+advUserIP
+  = lens _advUserIP (\ s a -> s{_advUserIP = a})
 
 -- | User profile ID associated with this request.
 advProfileId :: Lens' AdvertisersUpdate' Int64
@@ -132,34 +134,41 @@ advProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-advKey :: Lens' AdvertisersUpdate' (Maybe Text)
+advKey :: Lens' AdvertisersUpdate' (Maybe Key)
 advKey = lens _advKey (\ s a -> s{_advKey = a})
 
+-- | Multipart request metadata.
+advAdvertiser :: Lens' AdvertisersUpdate' Advertiser
+advAdvertiser
+  = lens _advAdvertiser
+      (\ s a -> s{_advAdvertiser = a})
+
 -- | OAuth 2.0 token for the current user.
-advOauthToken :: Lens' AdvertisersUpdate' (Maybe Text)
-advOauthToken
-  = lens _advOauthToken
-      (\ s a -> s{_advOauthToken = a})
+advOAuthToken :: Lens' AdvertisersUpdate' (Maybe OAuthToken)
+advOAuthToken
+  = lens _advOAuthToken
+      (\ s a -> s{_advOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 advFields :: Lens' AdvertisersUpdate' (Maybe Text)
 advFields
   = lens _advFields (\ s a -> s{_advFields = a})
 
--- | Data format for the response.
-advAlt :: Lens' AdvertisersUpdate' Alt
-advAlt = lens _advAlt (\ s a -> s{_advAlt = a})
+instance GoogleAuth AdvertisersUpdate' where
+        authKey = advKey . _Just
+        authToken = advOAuthToken . _Just
 
 instance GoogleRequest AdvertisersUpdate' where
         type Rs AdvertisersUpdate' = Advertiser
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AdvertisersUpdate'{..}
-          = go _advQuotaUser (Just _advPrettyPrint) _advUserIp
+          = go _advQuotaUser (Just _advPrettyPrint) _advUserIP
               _advProfileId
               _advKey
-              _advOauthToken
+              _advOAuthToken
               _advFields
-              (Just _advAlt)
+              (Just AltJSON)
+              _advAdvertiser
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AdvertisersUpdateResource)

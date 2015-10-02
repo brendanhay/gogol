@@ -33,16 +33,15 @@ module Network.Google.Resource.AdSense.Accounts.Reports.Saved.Generate
     -- * Request Lenses
     , arsgQuotaUser
     , arsgPrettyPrint
-    , arsgUserIp
+    , arsgUserIP
     , arsgLocale
     , arsgSavedReportId
     , arsgAccountId
     , arsgKey
-    , arsgOauthToken
+    , arsgOAuthToken
     , arsgStartIndex
     , arsgMaxResults
     , arsgFields
-    , arsgAlt
     ) where
 
 import           Network.Google.AdSense.Types
@@ -59,12 +58,12 @@ type AccountsReportsSavedGenerateResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "locale" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "startIndex" Int32 :>
                            QueryParam "maxResults" Int32 :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :>
+                               QueryParam "alt" AltJSON :>
                                  Get '[JSON] AdsenseReportsGenerateResponse
 
 -- | Generate an AdSense report based on the saved report ID sent in the
@@ -74,16 +73,15 @@ type AccountsReportsSavedGenerateResource =
 data AccountsReportsSavedGenerate' = AccountsReportsSavedGenerate'
     { _arsgQuotaUser     :: !(Maybe Text)
     , _arsgPrettyPrint   :: !Bool
-    , _arsgUserIp        :: !(Maybe Text)
+    , _arsgUserIP        :: !(Maybe Text)
     , _arsgLocale        :: !(Maybe Text)
     , _arsgSavedReportId :: !Text
     , _arsgAccountId     :: !Text
-    , _arsgKey           :: !(Maybe Text)
-    , _arsgOauthToken    :: !(Maybe Text)
+    , _arsgKey           :: !(Maybe Key)
+    , _arsgOAuthToken    :: !(Maybe OAuthToken)
     , _arsgStartIndex    :: !(Maybe Int32)
     , _arsgMaxResults    :: !(Maybe Int32)
     , _arsgFields        :: !(Maybe Text)
-    , _arsgAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsReportsSavedGenerate'' with the minimum fields required to make a request.
@@ -94,7 +92,7 @@ data AccountsReportsSavedGenerate' = AccountsReportsSavedGenerate'
 --
 -- * 'arsgPrettyPrint'
 --
--- * 'arsgUserIp'
+-- * 'arsgUserIP'
 --
 -- * 'arsgLocale'
 --
@@ -104,15 +102,13 @@ data AccountsReportsSavedGenerate' = AccountsReportsSavedGenerate'
 --
 -- * 'arsgKey'
 --
--- * 'arsgOauthToken'
+-- * 'arsgOAuthToken'
 --
 -- * 'arsgStartIndex'
 --
 -- * 'arsgMaxResults'
 --
 -- * 'arsgFields'
---
--- * 'arsgAlt'
 accountsReportsSavedGenerate'
     :: Text -- ^ 'savedReportId'
     -> Text -- ^ 'accountId'
@@ -121,16 +117,15 @@ accountsReportsSavedGenerate' pArsgSavedReportId_ pArsgAccountId_ =
     AccountsReportsSavedGenerate'
     { _arsgQuotaUser = Nothing
     , _arsgPrettyPrint = True
-    , _arsgUserIp = Nothing
+    , _arsgUserIP = Nothing
     , _arsgLocale = Nothing
     , _arsgSavedReportId = pArsgSavedReportId_
     , _arsgAccountId = pArsgAccountId_
     , _arsgKey = Nothing
-    , _arsgOauthToken = Nothing
+    , _arsgOAuthToken = Nothing
     , _arsgStartIndex = Nothing
     , _arsgMaxResults = Nothing
     , _arsgFields = Nothing
-    , _arsgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -149,9 +144,9 @@ arsgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-arsgUserIp :: Lens' AccountsReportsSavedGenerate' (Maybe Text)
-arsgUserIp
-  = lens _arsgUserIp (\ s a -> s{_arsgUserIp = a})
+arsgUserIP :: Lens' AccountsReportsSavedGenerate' (Maybe Text)
+arsgUserIP
+  = lens _arsgUserIP (\ s a -> s{_arsgUserIP = a})
 
 -- | Optional locale to use for translating report output to a local
 -- language. Defaults to \"en_US\" if not specified.
@@ -174,14 +169,14 @@ arsgAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-arsgKey :: Lens' AccountsReportsSavedGenerate' (Maybe Text)
+arsgKey :: Lens' AccountsReportsSavedGenerate' (Maybe Key)
 arsgKey = lens _arsgKey (\ s a -> s{_arsgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-arsgOauthToken :: Lens' AccountsReportsSavedGenerate' (Maybe Text)
-arsgOauthToken
-  = lens _arsgOauthToken
-      (\ s a -> s{_arsgOauthToken = a})
+arsgOAuthToken :: Lens' AccountsReportsSavedGenerate' (Maybe OAuthToken)
+arsgOAuthToken
+  = lens _arsgOAuthToken
+      (\ s a -> s{_arsgOAuthToken = a})
 
 -- | Index of the first row of report data to return.
 arsgStartIndex :: Lens' AccountsReportsSavedGenerate' (Maybe Int32)
@@ -200,9 +195,10 @@ arsgFields :: Lens' AccountsReportsSavedGenerate' (Maybe Text)
 arsgFields
   = lens _arsgFields (\ s a -> s{_arsgFields = a})
 
--- | Data format for the response.
-arsgAlt :: Lens' AccountsReportsSavedGenerate' Alt
-arsgAlt = lens _arsgAlt (\ s a -> s{_arsgAlt = a})
+instance GoogleAuth AccountsReportsSavedGenerate'
+         where
+        authKey = arsgKey . _Just
+        authToken = arsgOAuthToken . _Just
 
 instance GoogleRequest AccountsReportsSavedGenerate'
          where
@@ -212,16 +208,16 @@ instance GoogleRequest AccountsReportsSavedGenerate'
         requestWithRoute r u
           AccountsReportsSavedGenerate'{..}
           = go _arsgQuotaUser (Just _arsgPrettyPrint)
-              _arsgUserIp
+              _arsgUserIP
               _arsgLocale
               _arsgSavedReportId
               _arsgAccountId
               _arsgKey
-              _arsgOauthToken
+              _arsgOAuthToken
               _arsgStartIndex
               _arsgMaxResults
               _arsgFields
-              (Just _arsgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountsReportsSavedGenerateResource)

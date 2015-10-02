@@ -26,7 +26,7 @@ module Network.Google.Fitness.Types
     , aPackageName
     , aName
     , aVersion
-    , aDetailsUrl
+    , aDetailsURL
 
     -- * AggregateBy
     , AggregateBy
@@ -182,9 +182,6 @@ module Network.Google.Fitness.Types
 
     -- * DataTypeFieldFormat
     , DataTypeFieldFormat (..)
-
-    -- * Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.Fitness.Types.Product

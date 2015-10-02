@@ -34,12 +34,11 @@ module Network.Google.Resource.Compute.RegionOperations.Delete
     , rodPrettyPrint
     , rodProject
     , rodOperation
-    , rodUserIp
+    , rodUserIP
     , rodKey
     , rodRegion
-    , rodOauthToken
+    , rodOAuthToken
     , rodFields
-    , rodAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -56,10 +55,10 @@ type RegionOperationsDeleteResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Delete '[JSON] ()
+                           QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes the specified region-specific Operations resource.
 --
@@ -69,12 +68,11 @@ data RegionOperationsDelete' = RegionOperationsDelete'
     , _rodPrettyPrint :: !Bool
     , _rodProject     :: !Text
     , _rodOperation   :: !Text
-    , _rodUserIp      :: !(Maybe Text)
-    , _rodKey         :: !(Maybe Text)
+    , _rodUserIP      :: !(Maybe Text)
+    , _rodKey         :: !(Maybe Key)
     , _rodRegion      :: !Text
-    , _rodOauthToken  :: !(Maybe Text)
+    , _rodOAuthToken  :: !(Maybe OAuthToken)
     , _rodFields      :: !(Maybe Text)
-    , _rodAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RegionOperationsDelete'' with the minimum fields required to make a request.
@@ -89,17 +87,15 @@ data RegionOperationsDelete' = RegionOperationsDelete'
 --
 -- * 'rodOperation'
 --
--- * 'rodUserIp'
+-- * 'rodUserIP'
 --
 -- * 'rodKey'
 --
 -- * 'rodRegion'
 --
--- * 'rodOauthToken'
+-- * 'rodOAuthToken'
 --
 -- * 'rodFields'
---
--- * 'rodAlt'
 regionOperationsDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'operation'
@@ -111,12 +107,11 @@ regionOperationsDelete' pRodProject_ pRodOperation_ pRodRegion_ =
     , _rodPrettyPrint = True
     , _rodProject = pRodProject_
     , _rodOperation = pRodOperation_
-    , _rodUserIp = Nothing
+    , _rodUserIP = Nothing
     , _rodKey = Nothing
     , _rodRegion = pRodRegion_
-    , _rodOauthToken = Nothing
+    , _rodOAuthToken = Nothing
     , _rodFields = Nothing
-    , _rodAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -144,14 +139,14 @@ rodOperation
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rodUserIp :: Lens' RegionOperationsDelete' (Maybe Text)
-rodUserIp
-  = lens _rodUserIp (\ s a -> s{_rodUserIp = a})
+rodUserIP :: Lens' RegionOperationsDelete' (Maybe Text)
+rodUserIP
+  = lens _rodUserIP (\ s a -> s{_rodUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rodKey :: Lens' RegionOperationsDelete' (Maybe Text)
+rodKey :: Lens' RegionOperationsDelete' (Maybe Key)
 rodKey = lens _rodKey (\ s a -> s{_rodKey = a})
 
 -- | Name of the region scoping this request.
@@ -160,19 +155,19 @@ rodRegion
   = lens _rodRegion (\ s a -> s{_rodRegion = a})
 
 -- | OAuth 2.0 token for the current user.
-rodOauthToken :: Lens' RegionOperationsDelete' (Maybe Text)
-rodOauthToken
-  = lens _rodOauthToken
-      (\ s a -> s{_rodOauthToken = a})
+rodOAuthToken :: Lens' RegionOperationsDelete' (Maybe OAuthToken)
+rodOAuthToken
+  = lens _rodOAuthToken
+      (\ s a -> s{_rodOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 rodFields :: Lens' RegionOperationsDelete' (Maybe Text)
 rodFields
   = lens _rodFields (\ s a -> s{_rodFields = a})
 
--- | Data format for the response.
-rodAlt :: Lens' RegionOperationsDelete' Alt
-rodAlt = lens _rodAlt (\ s a -> s{_rodAlt = a})
+instance GoogleAuth RegionOperationsDelete' where
+        authKey = rodKey . _Just
+        authToken = rodOAuthToken . _Just
 
 instance GoogleRequest RegionOperationsDelete' where
         type Rs RegionOperationsDelete' = ()
@@ -180,12 +175,12 @@ instance GoogleRequest RegionOperationsDelete' where
         requestWithRoute r u RegionOperationsDelete'{..}
           = go _rodQuotaUser (Just _rodPrettyPrint) _rodProject
               _rodOperation
-              _rodUserIp
+              _rodUserIP
               _rodKey
               _rodRegion
-              _rodOauthToken
+              _rodOAuthToken
               _rodFields
-              (Just _rodAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy RegionOperationsDeleteResource)

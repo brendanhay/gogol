@@ -33,15 +33,14 @@ module Network.Google.Resource.Analytics.Management.Goals.List
     , mglQuotaUser
     , mglPrettyPrint
     , mglWebPropertyId
-    , mglUserIp
+    , mglUserIP
     , mglProfileId
     , mglAccountId
     , mglKey
-    , mglOauthToken
+    , mglOAuthToken
     , mglStartIndex
     , mglMaxResults
     , mglFields
-    , mglAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -61,12 +60,13 @@ type ManagementGoalsListResource =
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "start-index" Int32 :>
                                  QueryParam "max-results" Int32 :>
                                    QueryParam "fields" Text :>
-                                     QueryParam "alt" Alt :> Get '[JSON] Goals
+                                     QueryParam "alt" AltJSON :>
+                                       Get '[JSON] Goals
 
 -- | Lists goals to which the user has access.
 --
@@ -75,15 +75,14 @@ data ManagementGoalsList' = ManagementGoalsList'
     { _mglQuotaUser     :: !(Maybe Text)
     , _mglPrettyPrint   :: !Bool
     , _mglWebPropertyId :: !Text
-    , _mglUserIp        :: !(Maybe Text)
+    , _mglUserIP        :: !(Maybe Text)
     , _mglProfileId     :: !Text
     , _mglAccountId     :: !Text
-    , _mglKey           :: !(Maybe Text)
-    , _mglOauthToken    :: !(Maybe Text)
+    , _mglKey           :: !(Maybe Key)
+    , _mglOAuthToken    :: !(Maybe OAuthToken)
     , _mglStartIndex    :: !(Maybe Int32)
     , _mglMaxResults    :: !(Maybe Int32)
     , _mglFields        :: !(Maybe Text)
-    , _mglAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementGoalsList'' with the minimum fields required to make a request.
@@ -96,7 +95,7 @@ data ManagementGoalsList' = ManagementGoalsList'
 --
 -- * 'mglWebPropertyId'
 --
--- * 'mglUserIp'
+-- * 'mglUserIP'
 --
 -- * 'mglProfileId'
 --
@@ -104,15 +103,13 @@ data ManagementGoalsList' = ManagementGoalsList'
 --
 -- * 'mglKey'
 --
--- * 'mglOauthToken'
+-- * 'mglOAuthToken'
 --
 -- * 'mglStartIndex'
 --
 -- * 'mglMaxResults'
 --
 -- * 'mglFields'
---
--- * 'mglAlt'
 managementGoalsList'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
@@ -123,15 +120,14 @@ managementGoalsList' pMglWebPropertyId_ pMglProfileId_ pMglAccountId_ =
     { _mglQuotaUser = Nothing
     , _mglPrettyPrint = False
     , _mglWebPropertyId = pMglWebPropertyId_
-    , _mglUserIp = Nothing
+    , _mglUserIP = Nothing
     , _mglProfileId = pMglProfileId_
     , _mglAccountId = pMglAccountId_
     , _mglKey = Nothing
-    , _mglOauthToken = Nothing
+    , _mglOAuthToken = Nothing
     , _mglStartIndex = Nothing
     , _mglMaxResults = Nothing
     , _mglFields = Nothing
-    , _mglAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -157,9 +153,9 @@ mglWebPropertyId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mglUserIp :: Lens' ManagementGoalsList' (Maybe Text)
-mglUserIp
-  = lens _mglUserIp (\ s a -> s{_mglUserIp = a})
+mglUserIP :: Lens' ManagementGoalsList' (Maybe Text)
+mglUserIP
+  = lens _mglUserIP (\ s a -> s{_mglUserIP = a})
 
 -- | View (Profile) ID to retrieve goals for. Can either be a specific view
 -- (profile) ID or \'~all\', which refers to all the views (profiles) that
@@ -177,14 +173,14 @@ mglAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mglKey :: Lens' ManagementGoalsList' (Maybe Text)
+mglKey :: Lens' ManagementGoalsList' (Maybe Key)
 mglKey = lens _mglKey (\ s a -> s{_mglKey = a})
 
 -- | OAuth 2.0 token for the current user.
-mglOauthToken :: Lens' ManagementGoalsList' (Maybe Text)
-mglOauthToken
-  = lens _mglOauthToken
-      (\ s a -> s{_mglOauthToken = a})
+mglOAuthToken :: Lens' ManagementGoalsList' (Maybe OAuthToken)
+mglOAuthToken
+  = lens _mglOAuthToken
+      (\ s a -> s{_mglOAuthToken = a})
 
 -- | An index of the first goal to retrieve. Use this parameter as a
 -- pagination mechanism along with the max-results parameter.
@@ -204,9 +200,9 @@ mglFields :: Lens' ManagementGoalsList' (Maybe Text)
 mglFields
   = lens _mglFields (\ s a -> s{_mglFields = a})
 
--- | Data format for the response.
-mglAlt :: Lens' ManagementGoalsList' Alt
-mglAlt = lens _mglAlt (\ s a -> s{_mglAlt = a})
+instance GoogleAuth ManagementGoalsList' where
+        authKey = mglKey . _Just
+        authToken = mglOAuthToken . _Just
 
 instance GoogleRequest ManagementGoalsList' where
         type Rs ManagementGoalsList' = Goals
@@ -214,15 +210,15 @@ instance GoogleRequest ManagementGoalsList' where
         requestWithRoute r u ManagementGoalsList'{..}
           = go _mglQuotaUser (Just _mglPrettyPrint)
               _mglWebPropertyId
-              _mglUserIp
+              _mglUserIP
               _mglProfileId
               _mglAccountId
               _mglKey
-              _mglOauthToken
+              _mglOAuthToken
               _mglStartIndex
               _mglMaxResults
               _mglFields
-              (Just _mglAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ManagementGoalsListResource)

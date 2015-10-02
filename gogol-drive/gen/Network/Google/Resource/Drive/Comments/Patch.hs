@@ -32,13 +32,13 @@ module Network.Google.Resource.Drive.Comments.Patch
     -- * Request Lenses
     , cpQuotaUser
     , cpPrettyPrint
-    , cpUserIp
+    , cpUserIP
     , cpKey
     , cpFileId
-    , cpOauthToken
+    , cpOAuthToken
+    , cpComment
     , cpCommentId
     , cpFields
-    , cpAlt
     ) where
 
 import           Network.Google.Drive.Types
@@ -54,10 +54,11 @@ type CommentsPatchResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Patch '[JSON] Comment
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Comment :> Patch '[JSON] Comment
 
 -- | Updates an existing comment. This method supports patch semantics.
 --
@@ -65,13 +66,13 @@ type CommentsPatchResource =
 data CommentsPatch' = CommentsPatch'
     { _cpQuotaUser   :: !(Maybe Text)
     , _cpPrettyPrint :: !Bool
-    , _cpUserIp      :: !(Maybe Text)
-    , _cpKey         :: !(Maybe Text)
+    , _cpUserIP      :: !(Maybe Text)
+    , _cpKey         :: !(Maybe Key)
     , _cpFileId      :: !Text
-    , _cpOauthToken  :: !(Maybe Text)
+    , _cpOAuthToken  :: !(Maybe OAuthToken)
+    , _cpComment     :: !Comment
     , _cpCommentId   :: !Text
     , _cpFields      :: !(Maybe Text)
-    , _cpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsPatch'' with the minimum fields required to make a request.
@@ -82,34 +83,35 @@ data CommentsPatch' = CommentsPatch'
 --
 -- * 'cpPrettyPrint'
 --
--- * 'cpUserIp'
+-- * 'cpUserIP'
 --
 -- * 'cpKey'
 --
 -- * 'cpFileId'
 --
--- * 'cpOauthToken'
+-- * 'cpOAuthToken'
+--
+-- * 'cpComment'
 --
 -- * 'cpCommentId'
 --
 -- * 'cpFields'
---
--- * 'cpAlt'
 commentsPatch'
     :: Text -- ^ 'fileId'
+    -> Comment -- ^ 'Comment'
     -> Text -- ^ 'commentId'
     -> CommentsPatch'
-commentsPatch' pCpFileId_ pCpCommentId_ =
+commentsPatch' pCpFileId_ pCpComment_ pCpCommentId_ =
     CommentsPatch'
     { _cpQuotaUser = Nothing
     , _cpPrettyPrint = True
-    , _cpUserIp = Nothing
+    , _cpUserIP = Nothing
     , _cpKey = Nothing
     , _cpFileId = pCpFileId_
-    , _cpOauthToken = Nothing
+    , _cpOAuthToken = Nothing
+    , _cpComment = pCpComment_
     , _cpCommentId = pCpCommentId_
     , _cpFields = Nothing
-    , _cpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,13 +129,13 @@ cpPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cpUserIp :: Lens' CommentsPatch' (Maybe Text)
-cpUserIp = lens _cpUserIp (\ s a -> s{_cpUserIp = a})
+cpUserIP :: Lens' CommentsPatch' (Maybe Text)
+cpUserIP = lens _cpUserIP (\ s a -> s{_cpUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cpKey :: Lens' CommentsPatch' (Maybe Text)
+cpKey :: Lens' CommentsPatch' (Maybe Key)
 cpKey = lens _cpKey (\ s a -> s{_cpKey = a})
 
 -- | The ID of the file.
@@ -141,9 +143,14 @@ cpFileId :: Lens' CommentsPatch' Text
 cpFileId = lens _cpFileId (\ s a -> s{_cpFileId = a})
 
 -- | OAuth 2.0 token for the current user.
-cpOauthToken :: Lens' CommentsPatch' (Maybe Text)
-cpOauthToken
-  = lens _cpOauthToken (\ s a -> s{_cpOauthToken = a})
+cpOAuthToken :: Lens' CommentsPatch' (Maybe OAuthToken)
+cpOAuthToken
+  = lens _cpOAuthToken (\ s a -> s{_cpOAuthToken = a})
+
+-- | Multipart request metadata.
+cpComment :: Lens' CommentsPatch' Comment
+cpComment
+  = lens _cpComment (\ s a -> s{_cpComment = a})
 
 -- | The ID of the comment.
 cpCommentId :: Lens' CommentsPatch' Text
@@ -154,21 +161,22 @@ cpCommentId
 cpFields :: Lens' CommentsPatch' (Maybe Text)
 cpFields = lens _cpFields (\ s a -> s{_cpFields = a})
 
--- | Data format for the response.
-cpAlt :: Lens' CommentsPatch' Alt
-cpAlt = lens _cpAlt (\ s a -> s{_cpAlt = a})
+instance GoogleAuth CommentsPatch' where
+        authKey = cpKey . _Just
+        authToken = cpOAuthToken . _Just
 
 instance GoogleRequest CommentsPatch' where
         type Rs CommentsPatch' = Comment
         request = requestWithRoute defReq driveURL
         requestWithRoute r u CommentsPatch'{..}
-          = go _cpQuotaUser (Just _cpPrettyPrint) _cpUserIp
+          = go _cpQuotaUser (Just _cpPrettyPrint) _cpUserIP
               _cpKey
               _cpFileId
-              _cpOauthToken
+              _cpOAuthToken
               _cpCommentId
               _cpFields
-              (Just _cpAlt)
+              (Just AltJSON)
+              _cpComment
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CommentsPatchResource)

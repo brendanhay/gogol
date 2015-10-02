@@ -34,14 +34,13 @@ module Network.Google.Resource.Compute.TargetHTTPProxies.List
     , thttpplQuotaUser
     , thttpplPrettyPrint
     , thttpplProject
-    , thttpplUserIp
+    , thttpplUserIP
     , thttpplKey
     , thttpplFilter
     , thttpplPageToken
-    , thttpplOauthToken
+    , thttpplOAuthToken
     , thttpplMaxResults
     , thttpplFields
-    , thttpplAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -56,13 +55,13 @@ type TargetHTTPProxiesListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "filter" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "maxResults" Word32 :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :>
+                             QueryParam "alt" AltJSON :>
                                Get '[JSON] TargetHTTPProxyList
 
 -- | Retrieves the list of TargetHttpProxy resources available to the
@@ -73,14 +72,13 @@ data TargetHTTPProxiesList' = TargetHTTPProxiesList'
     { _thttpplQuotaUser   :: !(Maybe Text)
     , _thttpplPrettyPrint :: !Bool
     , _thttpplProject     :: !Text
-    , _thttpplUserIp      :: !(Maybe Text)
-    , _thttpplKey         :: !(Maybe Text)
+    , _thttpplUserIP      :: !(Maybe Text)
+    , _thttpplKey         :: !(Maybe Key)
     , _thttpplFilter      :: !(Maybe Text)
     , _thttpplPageToken   :: !(Maybe Text)
-    , _thttpplOauthToken  :: !(Maybe Text)
+    , _thttpplOAuthToken  :: !(Maybe OAuthToken)
     , _thttpplMaxResults  :: !Word32
     , _thttpplFields      :: !(Maybe Text)
-    , _thttpplAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetHTTPProxiesList'' with the minimum fields required to make a request.
@@ -93,7 +91,7 @@ data TargetHTTPProxiesList' = TargetHTTPProxiesList'
 --
 -- * 'thttpplProject'
 --
--- * 'thttpplUserIp'
+-- * 'thttpplUserIP'
 --
 -- * 'thttpplKey'
 --
@@ -101,13 +99,11 @@ data TargetHTTPProxiesList' = TargetHTTPProxiesList'
 --
 -- * 'thttpplPageToken'
 --
--- * 'thttpplOauthToken'
+-- * 'thttpplOAuthToken'
 --
 -- * 'thttpplMaxResults'
 --
 -- * 'thttpplFields'
---
--- * 'thttpplAlt'
 targetHTTPProxiesList'
     :: Text -- ^ 'project'
     -> TargetHTTPProxiesList'
@@ -116,14 +112,13 @@ targetHTTPProxiesList' pThttpplProject_ =
     { _thttpplQuotaUser = Nothing
     , _thttpplPrettyPrint = True
     , _thttpplProject = pThttpplProject_
-    , _thttpplUserIp = Nothing
+    , _thttpplUserIP = Nothing
     , _thttpplKey = Nothing
     , _thttpplFilter = Nothing
     , _thttpplPageToken = Nothing
-    , _thttpplOauthToken = Nothing
+    , _thttpplOAuthToken = Nothing
     , _thttpplMaxResults = 500
     , _thttpplFields = Nothing
-    , _thttpplAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,15 +143,15 @@ thttpplProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-thttpplUserIp :: Lens' TargetHTTPProxiesList' (Maybe Text)
-thttpplUserIp
-  = lens _thttpplUserIp
-      (\ s a -> s{_thttpplUserIp = a})
+thttpplUserIP :: Lens' TargetHTTPProxiesList' (Maybe Text)
+thttpplUserIP
+  = lens _thttpplUserIP
+      (\ s a -> s{_thttpplUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-thttpplKey :: Lens' TargetHTTPProxiesList' (Maybe Text)
+thttpplKey :: Lens' TargetHTTPProxiesList' (Maybe Key)
 thttpplKey
   = lens _thttpplKey (\ s a -> s{_thttpplKey = a})
 
@@ -185,10 +180,10 @@ thttpplPageToken
       (\ s a -> s{_thttpplPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-thttpplOauthToken :: Lens' TargetHTTPProxiesList' (Maybe Text)
-thttpplOauthToken
-  = lens _thttpplOauthToken
-      (\ s a -> s{_thttpplOauthToken = a})
+thttpplOAuthToken :: Lens' TargetHTTPProxiesList' (Maybe OAuthToken)
+thttpplOAuthToken
+  = lens _thttpplOAuthToken
+      (\ s a -> s{_thttpplOAuthToken = a})
 
 -- | Maximum count of results to be returned.
 thttpplMaxResults :: Lens' TargetHTTPProxiesList' Word32
@@ -202,10 +197,9 @@ thttpplFields
   = lens _thttpplFields
       (\ s a -> s{_thttpplFields = a})
 
--- | Data format for the response.
-thttpplAlt :: Lens' TargetHTTPProxiesList' Alt
-thttpplAlt
-  = lens _thttpplAlt (\ s a -> s{_thttpplAlt = a})
+instance GoogleAuth TargetHTTPProxiesList' where
+        authKey = thttpplKey . _Just
+        authToken = thttpplOAuthToken . _Just
 
 instance GoogleRequest TargetHTTPProxiesList' where
         type Rs TargetHTTPProxiesList' = TargetHTTPProxyList
@@ -213,14 +207,14 @@ instance GoogleRequest TargetHTTPProxiesList' where
         requestWithRoute r u TargetHTTPProxiesList'{..}
           = go _thttpplQuotaUser (Just _thttpplPrettyPrint)
               _thttpplProject
-              _thttpplUserIp
+              _thttpplUserIP
               _thttpplKey
               _thttpplFilter
               _thttpplPageToken
-              _thttpplOauthToken
+              _thttpplOAuthToken
               (Just _thttpplMaxResults)
               _thttpplFields
-              (Just _thttpplAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TargetHTTPProxiesListResource)

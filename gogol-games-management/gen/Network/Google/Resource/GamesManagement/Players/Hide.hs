@@ -34,13 +34,12 @@ module Network.Google.Resource.GamesManagement.Players.Hide
     -- * Request Lenses
     , phQuotaUser
     , phPrettyPrint
-    , phUserIp
+    , phUserIP
     , phApplicationId
     , phKey
-    , phOauthToken
+    , phOAuthToken
     , phPlayerId
     , phFields
-    , phAlt
     ) where
 
 import           Network.Google.GamesManagement.Types
@@ -57,10 +56,10 @@ type PlayersHideResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Post '[JSON] ()
+                           QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Hide the given player\'s leaderboard scores from the given application.
 -- This method is only available to user accounts for your developer
@@ -70,13 +69,12 @@ type PlayersHideResource =
 data PlayersHide' = PlayersHide'
     { _phQuotaUser     :: !(Maybe Text)
     , _phPrettyPrint   :: !Bool
-    , _phUserIp        :: !(Maybe Text)
+    , _phUserIP        :: !(Maybe Text)
     , _phApplicationId :: !Text
-    , _phKey           :: !(Maybe Text)
-    , _phOauthToken    :: !(Maybe Text)
+    , _phKey           :: !(Maybe Key)
+    , _phOAuthToken    :: !(Maybe OAuthToken)
     , _phPlayerId      :: !Text
     , _phFields        :: !(Maybe Text)
-    , _phAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayersHide'' with the minimum fields required to make a request.
@@ -87,19 +85,17 @@ data PlayersHide' = PlayersHide'
 --
 -- * 'phPrettyPrint'
 --
--- * 'phUserIp'
+-- * 'phUserIP'
 --
 -- * 'phApplicationId'
 --
 -- * 'phKey'
 --
--- * 'phOauthToken'
+-- * 'phOAuthToken'
 --
 -- * 'phPlayerId'
 --
 -- * 'phFields'
---
--- * 'phAlt'
 playersHide'
     :: Text -- ^ 'applicationId'
     -> Text -- ^ 'playerId'
@@ -108,13 +104,12 @@ playersHide' pPhApplicationId_ pPhPlayerId_ =
     PlayersHide'
     { _phQuotaUser = Nothing
     , _phPrettyPrint = True
-    , _phUserIp = Nothing
+    , _phUserIP = Nothing
     , _phApplicationId = pPhApplicationId_
     , _phKey = Nothing
-    , _phOauthToken = Nothing
+    , _phOAuthToken = Nothing
     , _phPlayerId = pPhPlayerId_
     , _phFields = Nothing
-    , _phAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -132,8 +127,8 @@ phPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-phUserIp :: Lens' PlayersHide' (Maybe Text)
-phUserIp = lens _phUserIp (\ s a -> s{_phUserIp = a})
+phUserIP :: Lens' PlayersHide' (Maybe Text)
+phUserIP = lens _phUserIP (\ s a -> s{_phUserIP = a})
 
 -- | The application ID from the Google Play developer console.
 phApplicationId :: Lens' PlayersHide' Text
@@ -144,13 +139,13 @@ phApplicationId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-phKey :: Lens' PlayersHide' (Maybe Text)
+phKey :: Lens' PlayersHide' (Maybe Key)
 phKey = lens _phKey (\ s a -> s{_phKey = a})
 
 -- | OAuth 2.0 token for the current user.
-phOauthToken :: Lens' PlayersHide' (Maybe Text)
-phOauthToken
-  = lens _phOauthToken (\ s a -> s{_phOauthToken = a})
+phOAuthToken :: Lens' PlayersHide' (Maybe OAuthToken)
+phOAuthToken
+  = lens _phOAuthToken (\ s a -> s{_phOAuthToken = a})
 
 -- | A player ID. A value of me may be used in place of the authenticated
 -- player\'s ID.
@@ -162,21 +157,21 @@ phPlayerId
 phFields :: Lens' PlayersHide' (Maybe Text)
 phFields = lens _phFields (\ s a -> s{_phFields = a})
 
--- | Data format for the response.
-phAlt :: Lens' PlayersHide' Alt
-phAlt = lens _phAlt (\ s a -> s{_phAlt = a})
+instance GoogleAuth PlayersHide' where
+        authKey = phKey . _Just
+        authToken = phOAuthToken . _Just
 
 instance GoogleRequest PlayersHide' where
         type Rs PlayersHide' = ()
         request = requestWithRoute defReq gamesManagementURL
         requestWithRoute r u PlayersHide'{..}
-          = go _phQuotaUser (Just _phPrettyPrint) _phUserIp
+          = go _phQuotaUser (Just _phPrettyPrint) _phUserIP
               _phApplicationId
               _phKey
-              _phOauthToken
+              _phOAuthToken
               _phPlayerId
               _phFields
-              (Just _phAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PlayersHideResource)

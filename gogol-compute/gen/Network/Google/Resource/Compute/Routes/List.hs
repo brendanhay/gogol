@@ -34,14 +34,13 @@ module Network.Google.Resource.Compute.Routes.List
     , rlQuotaUser
     , rlPrettyPrint
     , rlProject
-    , rlUserIp
+    , rlUserIP
     , rlKey
     , rlFilter
     , rlPageToken
-    , rlOauthToken
+    , rlOAuthToken
     , rlMaxResults
     , rlFields
-    , rlAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -56,13 +55,13 @@ type RoutesListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "filter" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "maxResults" Word32 :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Get '[JSON] RouteList
+                             QueryParam "alt" AltJSON :> Get '[JSON] RouteList
 
 -- | Retrieves the list of route resources available to the specified
 -- project.
@@ -72,14 +71,13 @@ data RoutesList' = RoutesList'
     { _rlQuotaUser   :: !(Maybe Text)
     , _rlPrettyPrint :: !Bool
     , _rlProject     :: !Text
-    , _rlUserIp      :: !(Maybe Text)
-    , _rlKey         :: !(Maybe Text)
+    , _rlUserIP      :: !(Maybe Text)
+    , _rlKey         :: !(Maybe Key)
     , _rlFilter      :: !(Maybe Text)
     , _rlPageToken   :: !(Maybe Text)
-    , _rlOauthToken  :: !(Maybe Text)
+    , _rlOAuthToken  :: !(Maybe OAuthToken)
     , _rlMaxResults  :: !Word32
     , _rlFields      :: !(Maybe Text)
-    , _rlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoutesList'' with the minimum fields required to make a request.
@@ -92,7 +90,7 @@ data RoutesList' = RoutesList'
 --
 -- * 'rlProject'
 --
--- * 'rlUserIp'
+-- * 'rlUserIP'
 --
 -- * 'rlKey'
 --
@@ -100,13 +98,11 @@ data RoutesList' = RoutesList'
 --
 -- * 'rlPageToken'
 --
--- * 'rlOauthToken'
+-- * 'rlOAuthToken'
 --
 -- * 'rlMaxResults'
 --
 -- * 'rlFields'
---
--- * 'rlAlt'
 routesList'
     :: Text -- ^ 'project'
     -> RoutesList'
@@ -115,14 +111,13 @@ routesList' pRlProject_ =
     { _rlQuotaUser = Nothing
     , _rlPrettyPrint = True
     , _rlProject = pRlProject_
-    , _rlUserIp = Nothing
+    , _rlUserIP = Nothing
     , _rlKey = Nothing
     , _rlFilter = Nothing
     , _rlPageToken = Nothing
-    , _rlOauthToken = Nothing
+    , _rlOAuthToken = Nothing
     , _rlMaxResults = 500
     , _rlFields = Nothing
-    , _rlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -145,13 +140,13 @@ rlProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rlUserIp :: Lens' RoutesList' (Maybe Text)
-rlUserIp = lens _rlUserIp (\ s a -> s{_rlUserIp = a})
+rlUserIP :: Lens' RoutesList' (Maybe Text)
+rlUserIP = lens _rlUserIP (\ s a -> s{_rlUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rlKey :: Lens' RoutesList' (Maybe Text)
+rlKey :: Lens' RoutesList' (Maybe Key)
 rlKey = lens _rlKey (\ s a -> s{_rlKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
@@ -176,9 +171,9 @@ rlPageToken
   = lens _rlPageToken (\ s a -> s{_rlPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-rlOauthToken :: Lens' RoutesList' (Maybe Text)
-rlOauthToken
-  = lens _rlOauthToken (\ s a -> s{_rlOauthToken = a})
+rlOAuthToken :: Lens' RoutesList' (Maybe OAuthToken)
+rlOAuthToken
+  = lens _rlOAuthToken (\ s a -> s{_rlOAuthToken = a})
 
 -- | Maximum count of results to be returned.
 rlMaxResults :: Lens' RoutesList' Word32
@@ -189,23 +184,23 @@ rlMaxResults
 rlFields :: Lens' RoutesList' (Maybe Text)
 rlFields = lens _rlFields (\ s a -> s{_rlFields = a})
 
--- | Data format for the response.
-rlAlt :: Lens' RoutesList' Alt
-rlAlt = lens _rlAlt (\ s a -> s{_rlAlt = a})
+instance GoogleAuth RoutesList' where
+        authKey = rlKey . _Just
+        authToken = rlOAuthToken . _Just
 
 instance GoogleRequest RoutesList' where
         type Rs RoutesList' = RouteList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u RoutesList'{..}
           = go _rlQuotaUser (Just _rlPrettyPrint) _rlProject
-              _rlUserIp
+              _rlUserIP
               _rlKey
               _rlFilter
               _rlPageToken
-              _rlOauthToken
+              _rlOAuthToken
               (Just _rlMaxResults)
               _rlFields
-              (Just _rlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy RoutesListResource)
                       r

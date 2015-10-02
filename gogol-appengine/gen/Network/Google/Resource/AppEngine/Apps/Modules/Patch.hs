@@ -19,7 +19,7 @@
 --
 -- | Updates the configuration of the specified module.
 --
--- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @AppengineAppsModulesPatch@.
+-- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @AppEngineAppsModulesPatch@.
 module Network.Google.Resource.AppEngine.Apps.Modules.Patch
     (
     -- * REST Resource
@@ -43,16 +43,16 @@ module Network.Google.Resource.AppEngine.Apps.Modules.Patch
     , ampBearerToken
     , ampKey
     , ampAppsId
-    , ampOauthToken
+    , ampModule
+    , ampOAuthToken
     , ampFields
     , ampCallback
-    , ampAlt
     ) where
 
 import           Network.Google.AppEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AppengineAppsModulesPatch@ which the
+-- | A resource alias for @AppEngineAppsModulesPatch@ which the
 -- 'AppsModulesPatch'' request conforms to.
 type AppsModulesPatchResource =
      "v1beta4" :>
@@ -70,12 +70,13 @@ type AppsModulesPatchResource =
                              QueryParam "migrateTraffic" Bool :>
                                QueryParam "mask" Text :>
                                  QueryParam "bearer_token" Text :>
-                                   QueryParam "key" Text :>
-                                     QueryParam "oauth_token" Text :>
+                                   QueryParam "key" Key :>
+                                     QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "fields" Text :>
                                          QueryParam "callback" Text :>
-                                           QueryParam "alt" Text :>
-                                             Patch '[JSON] Operation
+                                           QueryParam "alt" AltJSON :>
+                                             ReqBody '[JSON] Module :>
+                                               Patch '[JSON] Operation
 
 -- | Updates the configuration of the specified module.
 --
@@ -92,12 +93,12 @@ data AppsModulesPatch' = AppsModulesPatch'
     , _ampMigrateTraffic :: !(Maybe Bool)
     , _ampMask           :: !(Maybe Text)
     , _ampBearerToken    :: !(Maybe Text)
-    , _ampKey            :: !(Maybe Text)
+    , _ampKey            :: !(Maybe Key)
     , _ampAppsId         :: !Text
-    , _ampOauthToken     :: !(Maybe Text)
+    , _ampModule         :: !Module
+    , _ampOAuthToken     :: !(Maybe OAuthToken)
     , _ampFields         :: !(Maybe Text)
     , _ampCallback       :: !(Maybe Text)
-    , _ampAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AppsModulesPatch'' with the minimum fields required to make a request.
@@ -130,18 +131,19 @@ data AppsModulesPatch' = AppsModulesPatch'
 --
 -- * 'ampAppsId'
 --
--- * 'ampOauthToken'
+-- * 'ampModule'
+--
+-- * 'ampOAuthToken'
 --
 -- * 'ampFields'
 --
 -- * 'ampCallback'
---
--- * 'ampAlt'
 appsModulesPatch'
     :: Text -- ^ 'modulesId'
     -> Text -- ^ 'appsId'
+    -> Module -- ^ 'Module'
     -> AppsModulesPatch'
-appsModulesPatch' pAmpModulesId_ pAmpAppsId_ =
+appsModulesPatch' pAmpModulesId_ pAmpAppsId_ pAmpModule_ =
     AppsModulesPatch'
     { _ampXgafv = Nothing
     , _ampQuotaUser = Nothing
@@ -156,10 +158,10 @@ appsModulesPatch' pAmpModulesId_ pAmpAppsId_ =
     , _ampBearerToken = Nothing
     , _ampKey = Nothing
     , _ampAppsId = pAmpAppsId_
-    , _ampOauthToken = Nothing
+    , _ampModule = pAmpModule_
+    , _ampOAuthToken = Nothing
     , _ampFields = Nothing
     , _ampCallback = Nothing
-    , _ampAlt = "json"
     }
 
 -- | V1 error format.
@@ -226,7 +228,7 @@ ampBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ampKey :: Lens' AppsModulesPatch' (Maybe Text)
+ampKey :: Lens' AppsModulesPatch' (Maybe Key)
 ampKey = lens _ampKey (\ s a -> s{_ampKey = a})
 
 -- | Part of \`name\`. Name of the resource to update. For example:
@@ -235,11 +237,16 @@ ampAppsId :: Lens' AppsModulesPatch' Text
 ampAppsId
   = lens _ampAppsId (\ s a -> s{_ampAppsId = a})
 
+-- | Multipart request metadata.
+ampModule :: Lens' AppsModulesPatch' Module
+ampModule
+  = lens _ampModule (\ s a -> s{_ampModule = a})
+
 -- | OAuth 2.0 token for the current user.
-ampOauthToken :: Lens' AppsModulesPatch' (Maybe Text)
-ampOauthToken
-  = lens _ampOauthToken
-      (\ s a -> s{_ampOauthToken = a})
+ampOAuthToken :: Lens' AppsModulesPatch' (Maybe OAuthToken)
+ampOAuthToken
+  = lens _ampOAuthToken
+      (\ s a -> s{_ampOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ampFields :: Lens' AppsModulesPatch' (Maybe Text)
@@ -251,9 +258,9 @@ ampCallback :: Lens' AppsModulesPatch' (Maybe Text)
 ampCallback
   = lens _ampCallback (\ s a -> s{_ampCallback = a})
 
--- | Data format for response.
-ampAlt :: Lens' AppsModulesPatch' Text
-ampAlt = lens _ampAlt (\ s a -> s{_ampAlt = a})
+instance GoogleAuth AppsModulesPatch' where
+        authKey = ampKey . _Just
+        authToken = ampOAuthToken . _Just
 
 instance GoogleRequest AppsModulesPatch' where
         type Rs AppsModulesPatch' = Operation
@@ -270,10 +277,11 @@ instance GoogleRequest AppsModulesPatch' where
               _ampBearerToken
               _ampKey
               _ampAppsId
-              _ampOauthToken
+              _ampOAuthToken
               _ampFields
               _ampCallback
-              (Just _ampAlt)
+              (Just AltJSON)
+              _ampModule
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AppsModulesPatchResource)

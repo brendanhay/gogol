@@ -32,13 +32,12 @@ module Network.Google.Resource.FusionTables.Table.List
     -- * Request Lenses
     , tabQuotaUser
     , tabPrettyPrint
-    , tabUserIp
+    , tabUserIP
     , tabKey
     , tabPageToken
-    , tabOauthToken
+    , tabOAuthToken
     , tabMaxResults
     , tabFields
-    , tabAlt
     ) where
 
 import           Network.Google.FusionTables.Types
@@ -51,12 +50,12 @@ type TableListResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
+             QueryParam "key" Key :>
                QueryParam "pageToken" Text :>
-                 QueryParam "oauth_token" Text :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "maxResults" Word32 :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Get '[JSON] TableList
+                       QueryParam "alt" AltJSON :> Get '[JSON] TableList
 
 -- | Retrieves a list of tables a user owns.
 --
@@ -64,13 +63,12 @@ type TableListResource =
 data TableList' = TableList'
     { _tabQuotaUser   :: !(Maybe Text)
     , _tabPrettyPrint :: !Bool
-    , _tabUserIp      :: !(Maybe Text)
-    , _tabKey         :: !(Maybe Text)
+    , _tabUserIP      :: !(Maybe Text)
+    , _tabKey         :: !(Maybe Key)
     , _tabPageToken   :: !(Maybe Text)
-    , _tabOauthToken  :: !(Maybe Text)
+    , _tabOAuthToken  :: !(Maybe OAuthToken)
     , _tabMaxResults  :: !(Maybe Word32)
     , _tabFields      :: !(Maybe Text)
-    , _tabAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableList'' with the minimum fields required to make a request.
@@ -81,32 +79,29 @@ data TableList' = TableList'
 --
 -- * 'tabPrettyPrint'
 --
--- * 'tabUserIp'
+-- * 'tabUserIP'
 --
 -- * 'tabKey'
 --
 -- * 'tabPageToken'
 --
--- * 'tabOauthToken'
+-- * 'tabOAuthToken'
 --
 -- * 'tabMaxResults'
 --
 -- * 'tabFields'
---
--- * 'tabAlt'
 tableList'
     :: TableList'
 tableList' =
     TableList'
     { _tabQuotaUser = Nothing
     , _tabPrettyPrint = True
-    , _tabUserIp = Nothing
+    , _tabUserIP = Nothing
     , _tabKey = Nothing
     , _tabPageToken = Nothing
-    , _tabOauthToken = Nothing
+    , _tabOAuthToken = Nothing
     , _tabMaxResults = Nothing
     , _tabFields = Nothing
-    , _tabAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -124,14 +119,14 @@ tabPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tabUserIp :: Lens' TableList' (Maybe Text)
-tabUserIp
-  = lens _tabUserIp (\ s a -> s{_tabUserIp = a})
+tabUserIP :: Lens' TableList' (Maybe Text)
+tabUserIP
+  = lens _tabUserIP (\ s a -> s{_tabUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tabKey :: Lens' TableList' (Maybe Text)
+tabKey :: Lens' TableList' (Maybe Key)
 tabKey = lens _tabKey (\ s a -> s{_tabKey = a})
 
 -- | Continuation token specifying which result page to return.
@@ -140,10 +135,10 @@ tabPageToken
   = lens _tabPageToken (\ s a -> s{_tabPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-tabOauthToken :: Lens' TableList' (Maybe Text)
-tabOauthToken
-  = lens _tabOauthToken
-      (\ s a -> s{_tabOauthToken = a})
+tabOAuthToken :: Lens' TableList' (Maybe OAuthToken)
+tabOAuthToken
+  = lens _tabOAuthToken
+      (\ s a -> s{_tabOAuthToken = a})
 
 -- | Maximum number of tables to return. Default is 5.
 tabMaxResults :: Lens' TableList' (Maybe Word32)
@@ -156,21 +151,21 @@ tabFields :: Lens' TableList' (Maybe Text)
 tabFields
   = lens _tabFields (\ s a -> s{_tabFields = a})
 
--- | Data format for the response.
-tabAlt :: Lens' TableList' Alt
-tabAlt = lens _tabAlt (\ s a -> s{_tabAlt = a})
+instance GoogleAuth TableList' where
+        authKey = tabKey . _Just
+        authToken = tabOAuthToken . _Just
 
 instance GoogleRequest TableList' where
         type Rs TableList' = TableList
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u TableList'{..}
-          = go _tabQuotaUser (Just _tabPrettyPrint) _tabUserIp
+          = go _tabQuotaUser (Just _tabPrettyPrint) _tabUserIP
               _tabKey
               _tabPageToken
-              _tabOauthToken
+              _tabOAuthToken
               _tabMaxResults
               _tabFields
-              (Just _tabAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy TableListResource)
                       r

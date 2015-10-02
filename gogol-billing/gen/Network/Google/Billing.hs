@@ -27,20 +27,20 @@ module Network.Google.Billing
 
     -- * REST Resources
 
-    -- ** CloudbillingBillingAccountsGet
-    , module Network.Google.Resource.Cloudbilling.BillingAccounts.Get
+    -- ** CloudBillingBillingAccountsGet
+    , module Network.Google.Resource.CloudBilling.BillingAccounts.Get
 
-    -- ** CloudbillingBillingAccountsList
-    , module Network.Google.Resource.Cloudbilling.BillingAccounts.List
+    -- ** CloudBillingBillingAccountsList
+    , module Network.Google.Resource.CloudBilling.BillingAccounts.List
 
-    -- ** CloudbillingBillingAccountsProjectsList
-    , module Network.Google.Resource.Cloudbilling.BillingAccounts.Projects.List
+    -- ** CloudBillingBillingAccountsProjectsList
+    , module Network.Google.Resource.CloudBilling.BillingAccounts.Projects.List
 
-    -- ** CloudbillingProjectsGetBillingInfo
-    , module Network.Google.Resource.Cloudbilling.Projects.GetBillingInfo
+    -- ** CloudBillingProjectsGetBillingInfo
+    , module Network.Google.Resource.CloudBilling.Projects.GetBillingInfo
 
-    -- ** CloudbillingProjectsUpdateBillingInfo
-    , module Network.Google.Resource.Cloudbilling.Projects.UpdateBillingInfo
+    -- ** CloudBillingProjectsUpdateBillingInfo
+    , module Network.Google.Resource.CloudBilling.Projects.UpdateBillingInfo
 
     -- * Types
 
@@ -74,11 +74,11 @@ module Network.Google.Billing
 
 import           Network.Google.Billing.Types
 import           Network.Google.Prelude
-import           Network.Google.Resource.Cloudbilling.BillingAccounts.Get
-import           Network.Google.Resource.Cloudbilling.BillingAccounts.List
-import           Network.Google.Resource.Cloudbilling.BillingAccounts.Projects.List
-import           Network.Google.Resource.Cloudbilling.Projects.GetBillingInfo
-import           Network.Google.Resource.Cloudbilling.Projects.UpdateBillingInfo
+import           Network.Google.Resource.CloudBilling.BillingAccounts.Get
+import           Network.Google.Resource.CloudBilling.BillingAccounts.List
+import           Network.Google.Resource.CloudBilling.BillingAccounts.Projects.List
+import           Network.Google.Resource.CloudBilling.Projects.GetBillingInfo
+import           Network.Google.Resource.CloudBilling.Projects.UpdateBillingInfo
 
 {- $resources
 TODO

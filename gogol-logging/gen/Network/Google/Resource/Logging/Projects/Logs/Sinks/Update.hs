@@ -37,15 +37,15 @@ module Network.Google.Resource.Logging.Projects.Logs.Sinks.Update
     , plsuLogsId
     , plsuPp
     , plsuAccessToken
+    , plsuLogSink
     , plsuUploadType
     , plsuBearerToken
     , plsuKey
-    , plsuOauthToken
+    , plsuOAuthToken
     , plsuProjectsId
     , plsuSinksId
     , plsuFields
     , plsuCallback
-    , plsuAlt
     ) where
 
 import           Network.Google.Logging.Types
@@ -69,12 +69,13 @@ type ProjectsLogsSinksUpdateResource =
                              QueryParam "access_token" Text :>
                                QueryParam "uploadType" Text :>
                                  QueryParam "bearer_token" Text :>
-                                   QueryParam "key" Text :>
-                                     QueryParam "oauth_token" Text :>
+                                   QueryParam "key" Key :>
+                                     QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "fields" Text :>
                                          QueryParam "callback" Text :>
-                                           QueryParam "alt" Text :>
-                                             Put '[JSON] LogSink
+                                           QueryParam "alt" AltJSON :>
+                                             ReqBody '[JSON] LogSink :>
+                                               Put '[JSON] LogSink
 
 -- | Updates a log sink. If the sink does not exist, it is created.
 --
@@ -87,15 +88,15 @@ data ProjectsLogsSinksUpdate' = ProjectsLogsSinksUpdate'
     , _plsuLogsId         :: !Text
     , _plsuPp             :: !Bool
     , _plsuAccessToken    :: !(Maybe Text)
+    , _plsuLogSink        :: !LogSink
     , _plsuUploadType     :: !(Maybe Text)
     , _plsuBearerToken    :: !(Maybe Text)
-    , _plsuKey            :: !(Maybe Text)
-    , _plsuOauthToken     :: !(Maybe Text)
+    , _plsuKey            :: !(Maybe Key)
+    , _plsuOAuthToken     :: !(Maybe OAuthToken)
     , _plsuProjectsId     :: !Text
     , _plsuSinksId        :: !Text
     , _plsuFields         :: !(Maybe Text)
     , _plsuCallback       :: !(Maybe Text)
-    , _plsuAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsLogsSinksUpdate'' with the minimum fields required to make a request.
@@ -116,13 +117,15 @@ data ProjectsLogsSinksUpdate' = ProjectsLogsSinksUpdate'
 --
 -- * 'plsuAccessToken'
 --
+-- * 'plsuLogSink'
+--
 -- * 'plsuUploadType'
 --
 -- * 'plsuBearerToken'
 --
 -- * 'plsuKey'
 --
--- * 'plsuOauthToken'
+-- * 'plsuOAuthToken'
 --
 -- * 'plsuProjectsId'
 --
@@ -131,14 +134,13 @@ data ProjectsLogsSinksUpdate' = ProjectsLogsSinksUpdate'
 -- * 'plsuFields'
 --
 -- * 'plsuCallback'
---
--- * 'plsuAlt'
 projectsLogsSinksUpdate'
     :: Text -- ^ 'logsId'
+    -> LogSink -- ^ 'LogSink'
     -> Text -- ^ 'projectsId'
     -> Text -- ^ 'sinksId'
     -> ProjectsLogsSinksUpdate'
-projectsLogsSinksUpdate' pPlsuLogsId_ pPlsuProjectsId_ pPlsuSinksId_ =
+projectsLogsSinksUpdate' pPlsuLogsId_ pPlsuLogSink_ pPlsuProjectsId_ pPlsuSinksId_ =
     ProjectsLogsSinksUpdate'
     { _plsuXgafv = Nothing
     , _plsuQuotaUser = Nothing
@@ -147,15 +149,15 @@ projectsLogsSinksUpdate' pPlsuLogsId_ pPlsuProjectsId_ pPlsuSinksId_ =
     , _plsuLogsId = pPlsuLogsId_
     , _plsuPp = True
     , _plsuAccessToken = Nothing
+    , _plsuLogSink = pPlsuLogSink_
     , _plsuUploadType = Nothing
     , _plsuBearerToken = Nothing
     , _plsuKey = Nothing
-    , _plsuOauthToken = Nothing
+    , _plsuOAuthToken = Nothing
     , _plsuProjectsId = pPlsuProjectsId_
     , _plsuSinksId = pPlsuSinksId_
     , _plsuFields = Nothing
     , _plsuCallback = Nothing
-    , _plsuAlt = "json"
     }
 
 -- | V1 error format.
@@ -198,6 +200,11 @@ plsuAccessToken
   = lens _plsuAccessToken
       (\ s a -> s{_plsuAccessToken = a})
 
+-- | Multipart request metadata.
+plsuLogSink :: Lens' ProjectsLogsSinksUpdate' LogSink
+plsuLogSink
+  = lens _plsuLogSink (\ s a -> s{_plsuLogSink = a})
+
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
 plsuUploadType :: Lens' ProjectsLogsSinksUpdate' (Maybe Text)
 plsuUploadType
@@ -213,14 +220,14 @@ plsuBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-plsuKey :: Lens' ProjectsLogsSinksUpdate' (Maybe Text)
+plsuKey :: Lens' ProjectsLogsSinksUpdate' (Maybe Key)
 plsuKey = lens _plsuKey (\ s a -> s{_plsuKey = a})
 
 -- | OAuth 2.0 token for the current user.
-plsuOauthToken :: Lens' ProjectsLogsSinksUpdate' (Maybe Text)
-plsuOauthToken
-  = lens _plsuOauthToken
-      (\ s a -> s{_plsuOauthToken = a})
+plsuOAuthToken :: Lens' ProjectsLogsSinksUpdate' (Maybe OAuthToken)
+plsuOAuthToken
+  = lens _plsuOAuthToken
+      (\ s a -> s{_plsuOAuthToken = a})
 
 -- | Part of \`sinkName\`. The resource name of the sink to update.
 plsuProjectsId :: Lens' ProjectsLogsSinksUpdate' Text
@@ -243,9 +250,9 @@ plsuCallback :: Lens' ProjectsLogsSinksUpdate' (Maybe Text)
 plsuCallback
   = lens _plsuCallback (\ s a -> s{_plsuCallback = a})
 
--- | Data format for response.
-plsuAlt :: Lens' ProjectsLogsSinksUpdate' Text
-plsuAlt = lens _plsuAlt (\ s a -> s{_plsuAlt = a})
+instance GoogleAuth ProjectsLogsSinksUpdate' where
+        authKey = plsuKey . _Just
+        authToken = plsuOAuthToken . _Just
 
 instance GoogleRequest ProjectsLogsSinksUpdate' where
         type Rs ProjectsLogsSinksUpdate' = LogSink
@@ -260,12 +267,13 @@ instance GoogleRequest ProjectsLogsSinksUpdate' where
               _plsuUploadType
               _plsuBearerToken
               _plsuKey
-              _plsuOauthToken
+              _plsuOAuthToken
               _plsuProjectsId
               _plsuSinksId
               _plsuFields
               _plsuCallback
-              (Just _plsuAlt)
+              (Just AltJSON)
+              _plsuLogSink
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsLogsSinksUpdateResource)

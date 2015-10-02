@@ -37,12 +37,12 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.DeleteInstances
     , igmdiPrettyPrint
     , igmdiProject
     , igmdiInstanceGroupManager
-    , igmdiUserIp
+    , igmdiUserIP
     , igmdiZone
+    , igmdiInstanceGroupManagersDeleteInstancesRequest
     , igmdiKey
-    , igmdiOauthToken
+    , igmdiOAuthToken
     , igmdiFields
-    , igmdiAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -60,10 +60,13 @@ type InstanceGroupManagersDeleteInstancesResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Post '[JSON] Operation
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON]
+                                 InstanceGroupManagersDeleteInstancesRequest
+                                 :> Post '[JSON] Operation
 
 -- | Deletes the specified instances. The instances are deleted and removed
 -- from the instance group and any target pools where they are a member.
@@ -72,16 +75,16 @@ type InstanceGroupManagersDeleteInstancesResource =
 --
 -- /See:/ 'instanceGroupManagersDeleteInstances'' smart constructor.
 data InstanceGroupManagersDeleteInstances' = InstanceGroupManagersDeleteInstances'
-    { _igmdiQuotaUser            :: !(Maybe Text)
-    , _igmdiPrettyPrint          :: !Bool
-    , _igmdiProject              :: !Text
-    , _igmdiInstanceGroupManager :: !Text
-    , _igmdiUserIp               :: !(Maybe Text)
-    , _igmdiZone                 :: !Text
-    , _igmdiKey                  :: !(Maybe Text)
-    , _igmdiOauthToken           :: !(Maybe Text)
-    , _igmdiFields               :: !(Maybe Text)
-    , _igmdiAlt                  :: !Alt
+    { _igmdiQuotaUser                                   :: !(Maybe Text)
+    , _igmdiPrettyPrint                                 :: !Bool
+    , _igmdiProject                                     :: !Text
+    , _igmdiInstanceGroupManager                        :: !Text
+    , _igmdiUserIP                                      :: !(Maybe Text)
+    , _igmdiZone                                        :: !Text
+    , _igmdiInstanceGroupManagersDeleteInstancesRequest :: !InstanceGroupManagersDeleteInstancesRequest
+    , _igmdiKey                                         :: !(Maybe Key)
+    , _igmdiOAuthToken                                  :: !(Maybe OAuthToken)
+    , _igmdiFields                                      :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagersDeleteInstances'' with the minimum fields required to make a request.
@@ -96,34 +99,35 @@ data InstanceGroupManagersDeleteInstances' = InstanceGroupManagersDeleteInstance
 --
 -- * 'igmdiInstanceGroupManager'
 --
--- * 'igmdiUserIp'
+-- * 'igmdiUserIP'
 --
 -- * 'igmdiZone'
 --
+-- * 'igmdiInstanceGroupManagersDeleteInstancesRequest'
+--
 -- * 'igmdiKey'
 --
--- * 'igmdiOauthToken'
+-- * 'igmdiOAuthToken'
 --
 -- * 'igmdiFields'
---
--- * 'igmdiAlt'
 instanceGroupManagersDeleteInstances'
     :: Text -- ^ 'project'
     -> Text -- ^ 'instanceGroupManager'
     -> Text -- ^ 'zone'
+    -> InstanceGroupManagersDeleteInstancesRequest -- ^ 'InstanceGroupManagersDeleteInstancesRequest'
     -> InstanceGroupManagersDeleteInstances'
-instanceGroupManagersDeleteInstances' pIgmdiProject_ pIgmdiInstanceGroupManager_ pIgmdiZone_ =
+instanceGroupManagersDeleteInstances' pIgmdiProject_ pIgmdiInstanceGroupManager_ pIgmdiZone_ pIgmdiInstanceGroupManagersDeleteInstancesRequest_ =
     InstanceGroupManagersDeleteInstances'
     { _igmdiQuotaUser = Nothing
     , _igmdiPrettyPrint = True
     , _igmdiProject = pIgmdiProject_
     , _igmdiInstanceGroupManager = pIgmdiInstanceGroupManager_
-    , _igmdiUserIp = Nothing
+    , _igmdiUserIP = Nothing
     , _igmdiZone = pIgmdiZone_
+    , _igmdiInstanceGroupManagersDeleteInstancesRequest = pIgmdiInstanceGroupManagersDeleteInstancesRequest_
     , _igmdiKey = Nothing
-    , _igmdiOauthToken = Nothing
+    , _igmdiOAuthToken = Nothing
     , _igmdiFields = Nothing
-    , _igmdiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,35 +157,45 @@ igmdiInstanceGroupManager
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-igmdiUserIp :: Lens' InstanceGroupManagersDeleteInstances' (Maybe Text)
-igmdiUserIp
-  = lens _igmdiUserIp (\ s a -> s{_igmdiUserIp = a})
+igmdiUserIP :: Lens' InstanceGroupManagersDeleteInstances' (Maybe Text)
+igmdiUserIP
+  = lens _igmdiUserIP (\ s a -> s{_igmdiUserIP = a})
 
 -- | The URL of the zone where the managed instance group is located.
 igmdiZone :: Lens' InstanceGroupManagersDeleteInstances' Text
 igmdiZone
   = lens _igmdiZone (\ s a -> s{_igmdiZone = a})
 
+-- | Multipart request metadata.
+igmdiInstanceGroupManagersDeleteInstancesRequest :: Lens' InstanceGroupManagersDeleteInstances' InstanceGroupManagersDeleteInstancesRequest
+igmdiInstanceGroupManagersDeleteInstancesRequest
+  = lens
+      _igmdiInstanceGroupManagersDeleteInstancesRequest
+      (\ s a ->
+         s{_igmdiInstanceGroupManagersDeleteInstancesRequest =
+             a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-igmdiKey :: Lens' InstanceGroupManagersDeleteInstances' (Maybe Text)
+igmdiKey :: Lens' InstanceGroupManagersDeleteInstances' (Maybe Key)
 igmdiKey = lens _igmdiKey (\ s a -> s{_igmdiKey = a})
 
 -- | OAuth 2.0 token for the current user.
-igmdiOauthToken :: Lens' InstanceGroupManagersDeleteInstances' (Maybe Text)
-igmdiOauthToken
-  = lens _igmdiOauthToken
-      (\ s a -> s{_igmdiOauthToken = a})
+igmdiOAuthToken :: Lens' InstanceGroupManagersDeleteInstances' (Maybe OAuthToken)
+igmdiOAuthToken
+  = lens _igmdiOAuthToken
+      (\ s a -> s{_igmdiOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 igmdiFields :: Lens' InstanceGroupManagersDeleteInstances' (Maybe Text)
 igmdiFields
   = lens _igmdiFields (\ s a -> s{_igmdiFields = a})
 
--- | Data format for the response.
-igmdiAlt :: Lens' InstanceGroupManagersDeleteInstances' Alt
-igmdiAlt = lens _igmdiAlt (\ s a -> s{_igmdiAlt = a})
+instance GoogleAuth
+         InstanceGroupManagersDeleteInstances' where
+        authKey = igmdiKey . _Just
+        authToken = igmdiOAuthToken . _Just
 
 instance GoogleRequest
          InstanceGroupManagersDeleteInstances' where
@@ -193,12 +207,13 @@ instance GoogleRequest
           = go _igmdiQuotaUser (Just _igmdiPrettyPrint)
               _igmdiProject
               _igmdiInstanceGroupManager
-              _igmdiUserIp
+              _igmdiUserIP
               _igmdiZone
               _igmdiKey
-              _igmdiOauthToken
+              _igmdiOAuthToken
               _igmdiFields
-              (Just _igmdiAlt)
+              (Just AltJSON)
+              _igmdiInstanceGroupManagersDeleteInstancesRequest
           where go
                   = clientWithRoute
                       (Proxy ::

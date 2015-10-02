@@ -19,7 +19,7 @@
 --
 -- | Creates a GTM Folder.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersFoldersCreate@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersFoldersCreate@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Folders.Create
     (
     -- * REST Resource
@@ -33,18 +33,18 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Folders.Create
     , acfcQuotaUser
     , acfcPrettyPrint
     , acfcContainerId
-    , acfcUserIp
+    , acfcUserIP
+    , acfcFolder
     , acfcAccountId
     , acfcKey
-    , acfcOauthToken
+    , acfcOAuthToken
     , acfcFields
-    , acfcAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagmanagerAccountsContainersFoldersCreate@ which the
+-- | A resource alias for @TagManagerAccountsContainersFoldersCreate@ which the
 -- 'AccountsContainersFoldersCreate'' request conforms to.
 type AccountsContainersFoldersCreateResource =
      "accounts" :>
@@ -55,10 +55,11 @@ type AccountsContainersFoldersCreateResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Post '[JSON] Folder
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] Folder :> Post '[JSON] Folder
 
 -- | Creates a GTM Folder.
 --
@@ -67,12 +68,12 @@ data AccountsContainersFoldersCreate' = AccountsContainersFoldersCreate'
     { _acfcQuotaUser   :: !(Maybe Text)
     , _acfcPrettyPrint :: !Bool
     , _acfcContainerId :: !Text
-    , _acfcUserIp      :: !(Maybe Text)
+    , _acfcUserIP      :: !(Maybe Text)
+    , _acfcFolder      :: !Folder
     , _acfcAccountId   :: !Text
-    , _acfcKey         :: !(Maybe Text)
-    , _acfcOauthToken  :: !(Maybe Text)
+    , _acfcKey         :: !(Maybe Key)
+    , _acfcOAuthToken  :: !(Maybe OAuthToken)
     , _acfcFields      :: !(Maybe Text)
-    , _acfcAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersFoldersCreate'' with the minimum fields required to make a request.
@@ -85,32 +86,33 @@ data AccountsContainersFoldersCreate' = AccountsContainersFoldersCreate'
 --
 -- * 'acfcContainerId'
 --
--- * 'acfcUserIp'
+-- * 'acfcUserIP'
+--
+-- * 'acfcFolder'
 --
 -- * 'acfcAccountId'
 --
 -- * 'acfcKey'
 --
--- * 'acfcOauthToken'
+-- * 'acfcOAuthToken'
 --
 -- * 'acfcFields'
---
--- * 'acfcAlt'
 accountsContainersFoldersCreate'
     :: Text -- ^ 'containerId'
+    -> Folder -- ^ 'Folder'
     -> Text -- ^ 'accountId'
     -> AccountsContainersFoldersCreate'
-accountsContainersFoldersCreate' pAcfcContainerId_ pAcfcAccountId_ =
+accountsContainersFoldersCreate' pAcfcContainerId_ pAcfcFolder_ pAcfcAccountId_ =
     AccountsContainersFoldersCreate'
     { _acfcQuotaUser = Nothing
     , _acfcPrettyPrint = True
     , _acfcContainerId = pAcfcContainerId_
-    , _acfcUserIp = Nothing
+    , _acfcUserIP = Nothing
+    , _acfcFolder = pAcfcFolder_
     , _acfcAccountId = pAcfcAccountId_
     , _acfcKey = Nothing
-    , _acfcOauthToken = Nothing
+    , _acfcOAuthToken = Nothing
     , _acfcFields = Nothing
-    , _acfcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,9 +137,14 @@ acfcContainerId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-acfcUserIp :: Lens' AccountsContainersFoldersCreate' (Maybe Text)
-acfcUserIp
-  = lens _acfcUserIp (\ s a -> s{_acfcUserIp = a})
+acfcUserIP :: Lens' AccountsContainersFoldersCreate' (Maybe Text)
+acfcUserIP
+  = lens _acfcUserIP (\ s a -> s{_acfcUserIP = a})
+
+-- | Multipart request metadata.
+acfcFolder :: Lens' AccountsContainersFoldersCreate' Folder
+acfcFolder
+  = lens _acfcFolder (\ s a -> s{_acfcFolder = a})
 
 -- | The GTM Account ID.
 acfcAccountId :: Lens' AccountsContainersFoldersCreate' Text
@@ -148,23 +155,24 @@ acfcAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-acfcKey :: Lens' AccountsContainersFoldersCreate' (Maybe Text)
+acfcKey :: Lens' AccountsContainersFoldersCreate' (Maybe Key)
 acfcKey = lens _acfcKey (\ s a -> s{_acfcKey = a})
 
 -- | OAuth 2.0 token for the current user.
-acfcOauthToken :: Lens' AccountsContainersFoldersCreate' (Maybe Text)
-acfcOauthToken
-  = lens _acfcOauthToken
-      (\ s a -> s{_acfcOauthToken = a})
+acfcOAuthToken :: Lens' AccountsContainersFoldersCreate' (Maybe OAuthToken)
+acfcOAuthToken
+  = lens _acfcOAuthToken
+      (\ s a -> s{_acfcOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 acfcFields :: Lens' AccountsContainersFoldersCreate' (Maybe Text)
 acfcFields
   = lens _acfcFields (\ s a -> s{_acfcFields = a})
 
--- | Data format for the response.
-acfcAlt :: Lens' AccountsContainersFoldersCreate' Alt
-acfcAlt = lens _acfcAlt (\ s a -> s{_acfcAlt = a})
+instance GoogleAuth AccountsContainersFoldersCreate'
+         where
+        authKey = acfcKey . _Just
+        authToken = acfcOAuthToken . _Just
 
 instance GoogleRequest
          AccountsContainersFoldersCreate' where
@@ -174,12 +182,13 @@ instance GoogleRequest
           AccountsContainersFoldersCreate'{..}
           = go _acfcQuotaUser (Just _acfcPrettyPrint)
               _acfcContainerId
-              _acfcUserIp
+              _acfcUserIP
               _acfcAccountId
               _acfcKey
-              _acfcOauthToken
+              _acfcOAuthToken
               _acfcFields
-              (Just _acfcAlt)
+              (Just AltJSON)
+              _acfcFolder
           where go
                   = clientWithRoute
                       (Proxy ::

@@ -37,12 +37,11 @@ module Network.Google.Resource.Compute.Disks.Delete
     , ddPrettyPrint
     , ddProject
     , ddDisk
-    , ddUserIp
+    , ddUserIP
     , ddZone
     , ddKey
-    , ddOauthToken
+    , ddOAuthToken
     , ddFields
-    , ddAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -59,10 +58,10 @@ type DisksDeleteResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Delete '[JSON] Operation
+                           QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified persistent disk. Deleting a disk removes its data
 -- permanently and is irreversible. However, deleting a disk does not
@@ -75,12 +74,11 @@ data DisksDelete' = DisksDelete'
     , _ddPrettyPrint :: !Bool
     , _ddProject     :: !Text
     , _ddDisk        :: !Text
-    , _ddUserIp      :: !(Maybe Text)
+    , _ddUserIP      :: !(Maybe Text)
     , _ddZone        :: !Text
-    , _ddKey         :: !(Maybe Text)
-    , _ddOauthToken  :: !(Maybe Text)
+    , _ddKey         :: !(Maybe Key)
+    , _ddOAuthToken  :: !(Maybe OAuthToken)
     , _ddFields      :: !(Maybe Text)
-    , _ddAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DisksDelete'' with the minimum fields required to make a request.
@@ -95,17 +93,15 @@ data DisksDelete' = DisksDelete'
 --
 -- * 'ddDisk'
 --
--- * 'ddUserIp'
+-- * 'ddUserIP'
 --
 -- * 'ddZone'
 --
 -- * 'ddKey'
 --
--- * 'ddOauthToken'
+-- * 'ddOAuthToken'
 --
 -- * 'ddFields'
---
--- * 'ddAlt'
 disksDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'disk'
@@ -117,12 +113,11 @@ disksDelete' pDdProject_ pDdDisk_ pDdZone_ =
     , _ddPrettyPrint = True
     , _ddProject = pDdProject_
     , _ddDisk = pDdDisk_
-    , _ddUserIp = Nothing
+    , _ddUserIP = Nothing
     , _ddZone = pDdZone_
     , _ddKey = Nothing
-    , _ddOauthToken = Nothing
+    , _ddOAuthToken = Nothing
     , _ddFields = Nothing
-    , _ddAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -149,8 +144,8 @@ ddDisk = lens _ddDisk (\ s a -> s{_ddDisk = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ddUserIp :: Lens' DisksDelete' (Maybe Text)
-ddUserIp = lens _ddUserIp (\ s a -> s{_ddUserIp = a})
+ddUserIP :: Lens' DisksDelete' (Maybe Text)
+ddUserIP = lens _ddUserIP (\ s a -> s{_ddUserIP = a})
 
 -- | The name of the zone for this request.
 ddZone :: Lens' DisksDelete' Text
@@ -159,21 +154,21 @@ ddZone = lens _ddZone (\ s a -> s{_ddZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ddKey :: Lens' DisksDelete' (Maybe Text)
+ddKey :: Lens' DisksDelete' (Maybe Key)
 ddKey = lens _ddKey (\ s a -> s{_ddKey = a})
 
 -- | OAuth 2.0 token for the current user.
-ddOauthToken :: Lens' DisksDelete' (Maybe Text)
-ddOauthToken
-  = lens _ddOauthToken (\ s a -> s{_ddOauthToken = a})
+ddOAuthToken :: Lens' DisksDelete' (Maybe OAuthToken)
+ddOAuthToken
+  = lens _ddOAuthToken (\ s a -> s{_ddOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ddFields :: Lens' DisksDelete' (Maybe Text)
 ddFields = lens _ddFields (\ s a -> s{_ddFields = a})
 
--- | Data format for the response.
-ddAlt :: Lens' DisksDelete' Alt
-ddAlt = lens _ddAlt (\ s a -> s{_ddAlt = a})
+instance GoogleAuth DisksDelete' where
+        authKey = ddKey . _Just
+        authToken = ddOAuthToken . _Just
 
 instance GoogleRequest DisksDelete' where
         type Rs DisksDelete' = Operation
@@ -181,12 +176,12 @@ instance GoogleRequest DisksDelete' where
         requestWithRoute r u DisksDelete'{..}
           = go _ddQuotaUser (Just _ddPrettyPrint) _ddProject
               _ddDisk
-              _ddUserIp
+              _ddUserIP
               _ddZone
               _ddKey
-              _ddOauthToken
+              _ddOAuthToken
               _ddFields
-              (Just _ddAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy DisksDeleteResource)

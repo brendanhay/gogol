@@ -35,11 +35,11 @@ module Network.Google.Resource.Compute.Projects.SetUsageExportBucket
     , psuebQuotaUser
     , psuebPrettyPrint
     , psuebProject
-    , psuebUserIp
+    , psuebUserIP
+    , psuebUsageExportLocation
     , psuebKey
-    , psuebOauthToken
+    , psuebOAuthToken
     , psuebFields
-    , psuebAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -53,10 +53,12 @@ type ProjectsSetUsageExportBucketResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Post '[JSON] Operation
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] UsageExportLocation :>
+                         Post '[JSON] Operation
 
 -- | Enables the usage export feature and sets the usage export bucket where
 -- reports are stored. If you provide an empty request body using this
@@ -64,14 +66,14 @@ type ProjectsSetUsageExportBucketResource =
 --
 -- /See:/ 'projectsSetUsageExportBucket'' smart constructor.
 data ProjectsSetUsageExportBucket' = ProjectsSetUsageExportBucket'
-    { _psuebQuotaUser   :: !(Maybe Text)
-    , _psuebPrettyPrint :: !Bool
-    , _psuebProject     :: !Text
-    , _psuebUserIp      :: !(Maybe Text)
-    , _psuebKey         :: !(Maybe Text)
-    , _psuebOauthToken  :: !(Maybe Text)
-    , _psuebFields      :: !(Maybe Text)
-    , _psuebAlt         :: !Alt
+    { _psuebQuotaUser           :: !(Maybe Text)
+    , _psuebPrettyPrint         :: !Bool
+    , _psuebProject             :: !Text
+    , _psuebUserIP              :: !(Maybe Text)
+    , _psuebUsageExportLocation :: !UsageExportLocation
+    , _psuebKey                 :: !(Maybe Key)
+    , _psuebOAuthToken          :: !(Maybe OAuthToken)
+    , _psuebFields              :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsSetUsageExportBucket'' with the minimum fields required to make a request.
@@ -84,28 +86,29 @@ data ProjectsSetUsageExportBucket' = ProjectsSetUsageExportBucket'
 --
 -- * 'psuebProject'
 --
--- * 'psuebUserIp'
+-- * 'psuebUserIP'
+--
+-- * 'psuebUsageExportLocation'
 --
 -- * 'psuebKey'
 --
--- * 'psuebOauthToken'
+-- * 'psuebOAuthToken'
 --
 -- * 'psuebFields'
---
--- * 'psuebAlt'
 projectsSetUsageExportBucket'
     :: Text -- ^ 'project'
+    -> UsageExportLocation -- ^ 'UsageExportLocation'
     -> ProjectsSetUsageExportBucket'
-projectsSetUsageExportBucket' pPsuebProject_ =
+projectsSetUsageExportBucket' pPsuebProject_ pPsuebUsageExportLocation_ =
     ProjectsSetUsageExportBucket'
     { _psuebQuotaUser = Nothing
     , _psuebPrettyPrint = True
     , _psuebProject = pPsuebProject_
-    , _psuebUserIp = Nothing
+    , _psuebUserIP = Nothing
+    , _psuebUsageExportLocation = pPsuebUsageExportLocation_
     , _psuebKey = Nothing
-    , _psuebOauthToken = Nothing
+    , _psuebOAuthToken = Nothing
     , _psuebFields = Nothing
-    , _psuebAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -129,30 +132,37 @@ psuebProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-psuebUserIp :: Lens' ProjectsSetUsageExportBucket' (Maybe Text)
-psuebUserIp
-  = lens _psuebUserIp (\ s a -> s{_psuebUserIp = a})
+psuebUserIP :: Lens' ProjectsSetUsageExportBucket' (Maybe Text)
+psuebUserIP
+  = lens _psuebUserIP (\ s a -> s{_psuebUserIP = a})
+
+-- | Multipart request metadata.
+psuebUsageExportLocation :: Lens' ProjectsSetUsageExportBucket' UsageExportLocation
+psuebUsageExportLocation
+  = lens _psuebUsageExportLocation
+      (\ s a -> s{_psuebUsageExportLocation = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-psuebKey :: Lens' ProjectsSetUsageExportBucket' (Maybe Text)
+psuebKey :: Lens' ProjectsSetUsageExportBucket' (Maybe Key)
 psuebKey = lens _psuebKey (\ s a -> s{_psuebKey = a})
 
 -- | OAuth 2.0 token for the current user.
-psuebOauthToken :: Lens' ProjectsSetUsageExportBucket' (Maybe Text)
-psuebOauthToken
-  = lens _psuebOauthToken
-      (\ s a -> s{_psuebOauthToken = a})
+psuebOAuthToken :: Lens' ProjectsSetUsageExportBucket' (Maybe OAuthToken)
+psuebOAuthToken
+  = lens _psuebOAuthToken
+      (\ s a -> s{_psuebOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 psuebFields :: Lens' ProjectsSetUsageExportBucket' (Maybe Text)
 psuebFields
   = lens _psuebFields (\ s a -> s{_psuebFields = a})
 
--- | Data format for the response.
-psuebAlt :: Lens' ProjectsSetUsageExportBucket' Alt
-psuebAlt = lens _psuebAlt (\ s a -> s{_psuebAlt = a})
+instance GoogleAuth ProjectsSetUsageExportBucket'
+         where
+        authKey = psuebKey . _Just
+        authToken = psuebOAuthToken . _Just
 
 instance GoogleRequest ProjectsSetUsageExportBucket'
          where
@@ -162,11 +172,12 @@ instance GoogleRequest ProjectsSetUsageExportBucket'
           ProjectsSetUsageExportBucket'{..}
           = go _psuebQuotaUser (Just _psuebPrettyPrint)
               _psuebProject
-              _psuebUserIp
+              _psuebUserIP
               _psuebKey
-              _psuebOauthToken
+              _psuebOAuthToken
               _psuebFields
-              (Just _psuebAlt)
+              (Just AltJSON)
+              _psuebUsageExportLocation
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsSetUsageExportBucketResource)

@@ -32,7 +32,7 @@ module Network.Google.Resource.DFAReporting.InventoryItems.List
     -- * Request Lenses
     , iilQuotaUser
     , iilPrettyPrint
-    , iilUserIp
+    , iilUserIP
     , iilIds
     , iilProfileId
     , iilSortOrder
@@ -41,12 +41,11 @@ module Network.Google.Resource.DFAReporting.InventoryItems.List
     , iilPageToken
     , iilProjectId
     , iilSortField
-    , iilOauthToken
+    , iilOAuthToken
     , iilOrderId
     , iilSiteId
     , iilMaxResults
     , iilFields
-    , iilAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -68,17 +67,17 @@ type InventoryItemsListResource =
                          DfareportingInventoryItemsListSortOrder
                          :>
                          QueryParam "inPlan" Bool :>
-                           QueryParam "key" Text :>
+                           QueryParam "key" Key :>
                              QueryParam "pageToken" Text :>
                                QueryParam "sortField"
                                  DfareportingInventoryItemsListSortField
                                  :>
-                                 QueryParam "oauth_token" Text :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParams "orderId" Int64 :>
                                      QueryParams "siteId" Int64 :>
                                        QueryParam "maxResults" Int32 :>
                                          QueryParam "fields" Text :>
-                                           QueryParam "alt" Alt :>
+                                           QueryParam "alt" AltJSON :>
                                              Get '[JSON]
                                                InventoryItemsListResponse
 
@@ -88,21 +87,20 @@ type InventoryItemsListResource =
 data InventoryItemsList' = InventoryItemsList'
     { _iilQuotaUser   :: !(Maybe Text)
     , _iilPrettyPrint :: !Bool
-    , _iilUserIp      :: !(Maybe Text)
+    , _iilUserIP      :: !(Maybe Text)
     , _iilIds         :: !(Maybe Int64)
     , _iilProfileId   :: !Int64
     , _iilSortOrder   :: !(Maybe DfareportingInventoryItemsListSortOrder)
     , _iilInPlan      :: !(Maybe Bool)
-    , _iilKey         :: !(Maybe Text)
+    , _iilKey         :: !(Maybe Key)
     , _iilPageToken   :: !(Maybe Text)
     , _iilProjectId   :: !Int64
     , _iilSortField   :: !(Maybe DfareportingInventoryItemsListSortField)
-    , _iilOauthToken  :: !(Maybe Text)
+    , _iilOAuthToken  :: !(Maybe OAuthToken)
     , _iilOrderId     :: !(Maybe Int64)
     , _iilSiteId      :: !(Maybe Int64)
     , _iilMaxResults  :: !(Maybe Int32)
     , _iilFields      :: !(Maybe Text)
-    , _iilAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InventoryItemsList'' with the minimum fields required to make a request.
@@ -113,7 +111,7 @@ data InventoryItemsList' = InventoryItemsList'
 --
 -- * 'iilPrettyPrint'
 --
--- * 'iilUserIp'
+-- * 'iilUserIP'
 --
 -- * 'iilIds'
 --
@@ -131,7 +129,7 @@ data InventoryItemsList' = InventoryItemsList'
 --
 -- * 'iilSortField'
 --
--- * 'iilOauthToken'
+-- * 'iilOAuthToken'
 --
 -- * 'iilOrderId'
 --
@@ -140,8 +138,6 @@ data InventoryItemsList' = InventoryItemsList'
 -- * 'iilMaxResults'
 --
 -- * 'iilFields'
---
--- * 'iilAlt'
 inventoryItemsList'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'projectId'
@@ -150,7 +146,7 @@ inventoryItemsList' pIilProfileId_ pIilProjectId_ =
     InventoryItemsList'
     { _iilQuotaUser = Nothing
     , _iilPrettyPrint = True
-    , _iilUserIp = Nothing
+    , _iilUserIP = Nothing
     , _iilIds = Nothing
     , _iilProfileId = pIilProfileId_
     , _iilSortOrder = Nothing
@@ -159,12 +155,11 @@ inventoryItemsList' pIilProfileId_ pIilProjectId_ =
     , _iilPageToken = Nothing
     , _iilProjectId = pIilProjectId_
     , _iilSortField = Nothing
-    , _iilOauthToken = Nothing
+    , _iilOAuthToken = Nothing
     , _iilOrderId = Nothing
     , _iilSiteId = Nothing
     , _iilMaxResults = Nothing
     , _iilFields = Nothing
-    , _iilAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -182,9 +177,9 @@ iilPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-iilUserIp :: Lens' InventoryItemsList' (Maybe Text)
-iilUserIp
-  = lens _iilUserIp (\ s a -> s{_iilUserIp = a})
+iilUserIP :: Lens' InventoryItemsList' (Maybe Text)
+iilUserIP
+  = lens _iilUserIP (\ s a -> s{_iilUserIP = a})
 
 -- | Select only inventory items with these IDs.
 iilIds :: Lens' InventoryItemsList' (Maybe Int64)
@@ -208,7 +203,7 @@ iilInPlan
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-iilKey :: Lens' InventoryItemsList' (Maybe Text)
+iilKey :: Lens' InventoryItemsList' (Maybe Key)
 iilKey = lens _iilKey (\ s a -> s{_iilKey = a})
 
 -- | Value of the nextPageToken from the previous result page.
@@ -227,10 +222,10 @@ iilSortField
   = lens _iilSortField (\ s a -> s{_iilSortField = a})
 
 -- | OAuth 2.0 token for the current user.
-iilOauthToken :: Lens' InventoryItemsList' (Maybe Text)
-iilOauthToken
-  = lens _iilOauthToken
-      (\ s a -> s{_iilOauthToken = a})
+iilOAuthToken :: Lens' InventoryItemsList' (Maybe OAuthToken)
+iilOAuthToken
+  = lens _iilOAuthToken
+      (\ s a -> s{_iilOAuthToken = a})
 
 -- | Select only inventory items that belong to specified orders.
 iilOrderId :: Lens' InventoryItemsList' (Maybe Int64)
@@ -253,16 +248,16 @@ iilFields :: Lens' InventoryItemsList' (Maybe Text)
 iilFields
   = lens _iilFields (\ s a -> s{_iilFields = a})
 
--- | Data format for the response.
-iilAlt :: Lens' InventoryItemsList' Alt
-iilAlt = lens _iilAlt (\ s a -> s{_iilAlt = a})
+instance GoogleAuth InventoryItemsList' where
+        authKey = iilKey . _Just
+        authToken = iilOAuthToken . _Just
 
 instance GoogleRequest InventoryItemsList' where
         type Rs InventoryItemsList' =
              InventoryItemsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u InventoryItemsList'{..}
-          = go _iilQuotaUser (Just _iilPrettyPrint) _iilUserIp
+          = go _iilQuotaUser (Just _iilPrettyPrint) _iilUserIP
               _iilIds
               _iilProfileId
               _iilSortOrder
@@ -271,12 +266,12 @@ instance GoogleRequest InventoryItemsList' where
               _iilPageToken
               _iilProjectId
               _iilSortField
-              _iilOauthToken
+              _iilOAuthToken
               _iilOrderId
               _iilSiteId
               _iilMaxResults
               _iilFields
-              (Just _iilAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InventoryItemsListResource)

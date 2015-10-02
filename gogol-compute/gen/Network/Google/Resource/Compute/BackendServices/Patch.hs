@@ -34,11 +34,11 @@ module Network.Google.Resource.Compute.BackendServices.Patch
     , bspQuotaUser
     , bspPrettyPrint
     , bspProject
-    , bspUserIp
+    , bspUserIP
     , bspKey
-    , bspOauthToken
+    , bspOAuthToken
+    , bspBackendService
     , bspFields
-    , bspAlt
     , bspBackendService
     ) where
 
@@ -55,10 +55,12 @@ type BackendServicesPatchResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Patch '[JSON] Operation
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] BackendService :>
+                             Patch '[JSON] Operation
 
 -- | Update the entire content of the BackendService resource. This method
 -- supports patch semantics.
@@ -68,11 +70,11 @@ data BackendServicesPatch' = BackendServicesPatch'
     { _bspQuotaUser      :: !(Maybe Text)
     , _bspPrettyPrint    :: !Bool
     , _bspProject        :: !Text
-    , _bspUserIp         :: !(Maybe Text)
-    , _bspKey            :: !(Maybe Text)
-    , _bspOauthToken     :: !(Maybe Text)
+    , _bspUserIP         :: !(Maybe Text)
+    , _bspKey            :: !(Maybe Key)
+    , _bspOAuthToken     :: !(Maybe OAuthToken)
+    , _bspBackendService :: !BackendService
     , _bspFields         :: !(Maybe Text)
-    , _bspAlt            :: !Alt
     , _bspBackendService :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -86,31 +88,32 @@ data BackendServicesPatch' = BackendServicesPatch'
 --
 -- * 'bspProject'
 --
--- * 'bspUserIp'
+-- * 'bspUserIP'
 --
 -- * 'bspKey'
 --
--- * 'bspOauthToken'
+-- * 'bspOAuthToken'
+--
+-- * 'bspBackendService'
 --
 -- * 'bspFields'
---
--- * 'bspAlt'
 --
 -- * 'bspBackendService'
 backendServicesPatch'
     :: Text -- ^ 'project'
+    -> BackendService -- ^ 'BackendService'
     -> Text -- ^ 'backendService'
     -> BackendServicesPatch'
-backendServicesPatch' pBspProject_ pBspBackendService_ =
+backendServicesPatch' pBspProject_ pBspBackendService_ pBspBackendService_ =
     BackendServicesPatch'
     { _bspQuotaUser = Nothing
     , _bspPrettyPrint = True
     , _bspProject = pBspProject_
-    , _bspUserIp = Nothing
+    , _bspUserIP = Nothing
     , _bspKey = Nothing
-    , _bspOauthToken = Nothing
+    , _bspOAuthToken = Nothing
+    , _bspBackendService = pBspBackendService_
     , _bspFields = Nothing
-    , _bspAlt = JSON
     , _bspBackendService = pBspBackendService_
     }
 
@@ -134,30 +137,32 @@ bspProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-bspUserIp :: Lens' BackendServicesPatch' (Maybe Text)
-bspUserIp
-  = lens _bspUserIp (\ s a -> s{_bspUserIp = a})
+bspUserIP :: Lens' BackendServicesPatch' (Maybe Text)
+bspUserIP
+  = lens _bspUserIP (\ s a -> s{_bspUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-bspKey :: Lens' BackendServicesPatch' (Maybe Text)
+bspKey :: Lens' BackendServicesPatch' (Maybe Key)
 bspKey = lens _bspKey (\ s a -> s{_bspKey = a})
 
 -- | OAuth 2.0 token for the current user.
-bspOauthToken :: Lens' BackendServicesPatch' (Maybe Text)
-bspOauthToken
-  = lens _bspOauthToken
-      (\ s a -> s{_bspOauthToken = a})
+bspOAuthToken :: Lens' BackendServicesPatch' (Maybe OAuthToken)
+bspOAuthToken
+  = lens _bspOAuthToken
+      (\ s a -> s{_bspOAuthToken = a})
+
+-- | Multipart request metadata.
+bspBackendService :: Lens' BackendServicesPatch' BackendService
+bspBackendService
+  = lens _bspBackendService
+      (\ s a -> s{_bspBackendService = a})
 
 -- | Selector specifying which fields to include in a partial response.
 bspFields :: Lens' BackendServicesPatch' (Maybe Text)
 bspFields
   = lens _bspFields (\ s a -> s{_bspFields = a})
-
--- | Data format for the response.
-bspAlt :: Lens' BackendServicesPatch' Alt
-bspAlt = lens _bspAlt (\ s a -> s{_bspAlt = a})
 
 -- | Name of the BackendService resource to update.
 bspBackendService :: Lens' BackendServicesPatch' Text
@@ -165,16 +170,21 @@ bspBackendService
   = lens _bspBackendService
       (\ s a -> s{_bspBackendService = a})
 
+instance GoogleAuth BackendServicesPatch' where
+        authKey = bspKey . _Just
+        authToken = bspOAuthToken . _Just
+
 instance GoogleRequest BackendServicesPatch' where
         type Rs BackendServicesPatch' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u BackendServicesPatch'{..}
           = go _bspQuotaUser (Just _bspPrettyPrint) _bspProject
-              _bspUserIp
+              _bspUserIP
               _bspKey
-              _bspOauthToken
+              _bspOAuthToken
               _bspFields
-              (Just _bspAlt)
+              _bspBackendService
+              (Just AltJSON)
               _bspBackendService
           where go
                   = clientWithRoute

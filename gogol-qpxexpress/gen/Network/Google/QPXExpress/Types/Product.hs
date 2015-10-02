@@ -24,7 +24,7 @@ import           Network.Google.QPXExpress.Types.Sum
 data FreeBaggageAllowance = FreeBaggageAllowance
     { _fbaKind          :: !Text
     , _fbaPounds        :: !(Maybe Int32)
-    , _fbaBagDescriptor :: !(Maybe [Maybe BagDescriptor])
+    , _fbaBagDescriptor :: !(Maybe [BagDescriptor])
     , _fbaKilosPerPiece :: !(Maybe Int32)
     , _fbaKilos         :: !(Maybe Int32)
     , _fbaPieces        :: !(Maybe Int32)
@@ -69,7 +69,7 @@ fbaPounds
 
 -- | A representation of a type of bag, such as an ATPCo subcode, Commercial
 -- Name, or other description.
-fbaBagDescriptor :: Lens' FreeBaggageAllowance [Maybe BagDescriptor]
+fbaBagDescriptor :: Lens' FreeBaggageAllowance [BagDescriptor]
 fbaBagDescriptor
   = lens _fbaBagDescriptor
       (\ s a -> s{_fbaBagDescriptor = a})
@@ -178,8 +178,8 @@ instance ToJSON CarrierData where
 data TripOptionsResponse = TripOptionsResponse
     { _torRequestId  :: !(Maybe Text)
     , _torKind       :: !Text
-    , _torData       :: !(Maybe (Maybe Data))
-    , _torTripOption :: !(Maybe [Maybe TripOption])
+    , _torData       :: !(Maybe Data)
+    , _torTripOption :: !(Maybe [TripOption])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TripOptionsResponse' with the minimum fields required to make a request.
@@ -214,11 +214,11 @@ torKind :: Lens' TripOptionsResponse Text
 torKind = lens _torKind (\ s a -> s{_torKind = a})
 
 -- | Informational data global to list of solutions.
-torData :: Lens' TripOptionsResponse (Maybe (Maybe Data))
+torData :: Lens' TripOptionsResponse (Maybe Data)
 torData = lens _torData (\ s a -> s{_torData = a})
 
 -- | A list of priced itinerary solutions to the QPX Express query.
-torTripOption :: Lens' TripOptionsResponse [Maybe TripOption]
+torTripOption :: Lens' TripOptionsResponse [TripOption]
 torTripOption
   = lens _torTripOption
       (\ s a -> s{_torTripOption = a})
@@ -311,12 +311,12 @@ instance ToJSON TimeOfDayRange where
 --
 -- /See:/ 'data'' smart constructor.
 data Data = Data
-    { _dCarrier  :: !(Maybe [Maybe CarrierData])
+    { _dCarrier  :: !(Maybe [CarrierData])
     , _dKind     :: !Text
-    , _dAircraft :: !(Maybe [Maybe AircraftData])
-    , _dAirport  :: !(Maybe [Maybe AirportData])
-    , _dCity     :: !(Maybe [Maybe CityData])
-    , _dTax      :: !(Maybe [Maybe TaxData])
+    , _dAircraft :: !(Maybe [AircraftData])
+    , _dAirport  :: !(Maybe [AirportData])
+    , _dCity     :: !(Maybe [CityData])
+    , _dTax      :: !(Maybe [TaxData])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Data' with the minimum fields required to make a request.
@@ -348,7 +348,7 @@ data' =
 
 -- | The airline carrier of the aircraft flying between an origin and
 -- destination. Allowed values are IATA carrier codes.
-dCarrier :: Lens' Data [Maybe CarrierData]
+dCarrier :: Lens' Data [CarrierData]
 dCarrier
   = lens _dCarrier (\ s a -> s{_dCarrier = a}) .
       _Default
@@ -361,27 +361,27 @@ dKind :: Lens' Data Text
 dKind = lens _dKind (\ s a -> s{_dKind = a})
 
 -- | The aircraft that is flying between an origin and destination.
-dAircraft :: Lens' Data [Maybe AircraftData]
+dAircraft :: Lens' Data [AircraftData]
 dAircraft
   = lens _dAircraft (\ s a -> s{_dAircraft = a}) .
       _Default
       . _Coerce
 
 -- | The airport of an origin or destination.
-dAirport :: Lens' Data [Maybe AirportData]
+dAirport :: Lens' Data [AirportData]
 dAirport
   = lens _dAirport (\ s a -> s{_dAirport = a}) .
       _Default
       . _Coerce
 
 -- | The city that is either the origin or destination of part of a trip.
-dCity :: Lens' Data [Maybe CityData]
+dCity :: Lens' Data [CityData]
 dCity
   = lens _dCity (\ s a -> s{_dCity = a}) . _Default .
       _Coerce
 
 -- | The taxes due for flying between an origin and a destination.
-dTax :: Lens' Data [Maybe TaxData]
+dTax :: Lens' Data [TaxData]
 dTax
   = lens _dTax (\ s a -> s{_dTax = a}) . _Default .
       _Coerce
@@ -486,7 +486,7 @@ data LegInfo = LegInfo
     , _liConnectionDuration  :: !(Maybe Int32)
     , _liDuration            :: !(Maybe Int32)
     , _liMileage             :: !(Maybe Int32)
-    , _liDepartureTime       :: !(Maybe Text)
+    , _liDePartyureTime      :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LegInfo' with the minimum fields required to make a request.
@@ -525,7 +525,7 @@ data LegInfo = LegInfo
 --
 -- * 'liMileage'
 --
--- * 'liDepartureTime'
+-- * 'liDePartyureTime'
 legInfo
     :: LegInfo
 legInfo =
@@ -546,7 +546,7 @@ legInfo =
     , _liConnectionDuration = Nothing
     , _liDuration = Nothing
     , _liMileage = Nothing
-    , _liDepartureTime = Nothing
+    , _liDePartyureTime = Nothing
     }
 
 -- | The leg destination as a city and airport.
@@ -646,10 +646,10 @@ liMileage
 
 -- | The scheduled departure time of the leg, local to the point of
 -- departure.
-liDepartureTime :: Lens' LegInfo (Maybe Text)
-liDepartureTime
-  = lens _liDepartureTime
-      (\ s a -> s{_liDepartureTime = a})
+liDePartyureTime :: Lens' LegInfo (Maybe Text)
+liDePartyureTime
+  = lens _liDePartyureTime
+      (\ s a -> s{_liDePartyureTime = a})
 
 instance FromJSON LegInfo where
         parseJSON
@@ -694,7 +694,7 @@ instance ToJSON LegInfo where
                   ("connectionDuration" .=) <$> _liConnectionDuration,
                   ("duration" .=) <$> _liDuration,
                   ("mileage" .=) <$> _liMileage,
-                  ("departureTime" .=) <$> _liDepartureTime])
+                  ("departureTime" .=) <$> _liDePartyureTime])
 
 -- | An airport.
 --
@@ -767,7 +767,7 @@ instance ToJSON AirportData where
 --
 -- /See:/ 'segmentPricing' smart constructor.
 data SegmentPricing = SegmentPricing
-    { _spFreeBaggageOption :: !(Maybe [Maybe FreeBaggageAllowance])
+    { _spFreeBaggageOption :: !(Maybe [FreeBaggageAllowance])
     , _spKind              :: !Text
     , _spFareId            :: !(Maybe Text)
     , _spSegmentId         :: !(Maybe Text)
@@ -795,7 +795,7 @@ segmentPricing =
     }
 
 -- | Details of the free baggage allowance on this segment.
-spFreeBaggageOption :: Lens' SegmentPricing [Maybe FreeBaggageAllowance]
+spFreeBaggageOption :: Lens' SegmentPricing [FreeBaggageAllowance]
 spFreeBaggageOption
   = lens _spFreeBaggageOption
       (\ s a -> s{_spFreeBaggageOption = a})
@@ -847,7 +847,7 @@ instance ToJSON SegmentPricing where
 -- /See:/ 'sliceInfo' smart constructor.
 data SliceInfo = SliceInfo
     { _siKind     :: !Text
-    , _siSegment  :: !(Maybe [Maybe SegmentInfo])
+    , _siSegment  :: !(Maybe [SegmentInfo])
     , _siDuration :: !(Maybe Int32)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -878,7 +878,7 @@ siKind :: Lens' SliceInfo Text
 siKind = lens _siKind (\ s a -> s{_siKind = a})
 
 -- | The segment(s) constituting the slice.
-siSegment :: Lens' SliceInfo [Maybe SegmentInfo]
+siSegment :: Lens' SliceInfo [SegmentInfo]
 siSegment
   = lens _siSegment (\ s a -> s{_siSegment = a}) .
       _Default
@@ -910,7 +910,7 @@ instance ToJSON SliceInfo where
 --
 -- /See:/ 'tripsSearchResponse' smart constructor.
 data TripsSearchResponse = TripsSearchResponse
-    { _tsrTrips :: !(Maybe (Maybe TripOptionsResponse))
+    { _tsrTrips :: !(Maybe TripOptionsResponse)
     , _tsrKind  :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -930,7 +930,7 @@ tripsSearchResponse =
     }
 
 -- | All possible solutions to the QPX Express search request.
-tsrTrips :: Lens' TripsSearchResponse (Maybe (Maybe TripOptionsResponse))
+tsrTrips :: Lens' TripsSearchResponse (Maybe TripOptionsResponse)
 tsrTrips = lens _tsrTrips (\ s a -> s{_tsrTrips = a})
 
 -- | Identifies this as a QPX Express API search response resource. Value:
@@ -957,10 +957,10 @@ instance ToJSON TripsSearchResponse where
 --
 -- /See:/ 'tripOption' smart constructor.
 data TripOption = TripOption
-    { _toPricing   :: !(Maybe [Maybe PricingInfo])
+    { _toPricing   :: !(Maybe [PricingInfo])
     , _toKind      :: !Text
     , _toId        :: !(Maybe Text)
-    , _toSlice     :: !(Maybe [Maybe SliceInfo])
+    , _toSlice     :: !(Maybe [SliceInfo])
     , _toSaleTotal :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -989,7 +989,7 @@ tripOption =
     }
 
 -- | Per passenger pricing information.
-toPricing :: Lens' TripOption [Maybe PricingInfo]
+toPricing :: Lens' TripOption [PricingInfo]
 toPricing
   = lens _toPricing (\ s a -> s{_toPricing = a}) .
       _Default
@@ -1005,7 +1005,7 @@ toId :: Lens' TripOption (Maybe Text)
 toId = lens _toId (\ s a -> s{_toId = a})
 
 -- | The slices that make up this trip\'s itinerary.
-toSlice :: Lens' TripOption [Maybe SliceInfo]
+toSlice :: Lens' TripOption [SliceInfo]
 toSlice
   = lens _toSlice (\ s a -> s{_toSlice = a}) . _Default
       . _Coerce
@@ -1298,12 +1298,12 @@ data SegmentInfo = SegmentInfo
     , _sBookingCodeCount            :: !(Maybe Int32)
     , _sSubjectToGovernmentApproval :: !(Maybe Bool)
     , _sKind                        :: !Text
-    , _sFlight                      :: !(Maybe (Maybe FlightInfo))
+    , _sFlight                      :: !(Maybe FlightInfo)
     , _sId                          :: !(Maybe Text)
     , _sMarriedSegmentGroup         :: !(Maybe Text)
     , _sConnectionDuration          :: !(Maybe Int32)
     , _sDuration                    :: !(Maybe Int32)
-    , _sLeg                         :: !(Maybe [Maybe LegInfo])
+    , _sLeg                         :: !(Maybe [LegInfo])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SegmentInfo' with the minimum fields required to make a request.
@@ -1379,7 +1379,7 @@ sKind :: Lens' SegmentInfo Text
 sKind = lens _sKind (\ s a -> s{_sKind = a})
 
 -- | The flight this is a segment of.
-sFlight :: Lens' SegmentInfo (Maybe (Maybe FlightInfo))
+sFlight :: Lens' SegmentInfo (Maybe FlightInfo)
 sFlight = lens _sFlight (\ s a -> s{_sFlight = a})
 
 -- | An id uniquely identifying the segment in the solution.
@@ -1413,7 +1413,7 @@ sDuration
   = lens _sDuration (\ s a -> s{_sDuration = a})
 
 -- | The legs composing this segment.
-sLeg :: Lens' SegmentInfo [Maybe LegInfo]
+sLeg :: Lens' SegmentInfo [LegInfo]
 sLeg
   = lens _sLeg (\ s a -> s{_sLeg = a}) . _Default .
       _Coerce
@@ -1599,7 +1599,7 @@ instance ToJSON TaxInfo where
 --
 -- /See:/ 'tripsSearchRequest' smart constructor.
 newtype TripsSearchRequest = TripsSearchRequest
-    { _tsrRequest :: Maybe (Maybe TripOptionsRequest)
+    { _tsrRequest :: Maybe TripOptionsRequest
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TripsSearchRequest' with the minimum fields required to make a request.
@@ -1616,7 +1616,7 @@ tripsSearchRequest =
 
 -- | A QPX Express search request. Required values are at least one adult or
 -- senior passenger, an origin, a destination, and a date.
-tsrRequest :: Lens' TripsSearchRequest (Maybe (Maybe TripOptionsRequest))
+tsrRequest :: Lens' TripsSearchRequest (Maybe TripOptionsRequest)
 tsrRequest
   = lens _tsrRequest (\ s a -> s{_tsrRequest = a})
 
@@ -1640,13 +1640,13 @@ data PricingInfo = PricingInfo
     , _piRefundable          :: !(Maybe Bool)
     , _piPtc                 :: !(Maybe Text)
     , _piBaseFareTotal       :: !(Maybe Text)
-    , _piFare                :: !(Maybe [Maybe FareInfo])
+    , _piFare                :: !(Maybe [FareInfo])
     , _piKind                :: !Text
-    , _piSegmentPricing      :: !(Maybe [Maybe SegmentPricing])
-    , _piPassengers          :: !(Maybe (Maybe PassengerCounts))
+    , _piSegmentPricing      :: !(Maybe [SegmentPricing])
+    , _piPassengers          :: !(Maybe PassengerCounts)
     , _piFareCalculation     :: !(Maybe Text)
     , _piLatestTicketingTime :: !(Maybe Text)
-    , _piTax                 :: !(Maybe [Maybe TaxInfo])
+    , _piTax                 :: !(Maybe [TaxInfo])
     , _piSaleTotal           :: !(Maybe Text)
     , _piSaleFareTotal       :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -1725,7 +1725,7 @@ piBaseFareTotal
       (\ s a -> s{_piBaseFareTotal = a})
 
 -- | The fare used to price one or more segments.
-piFare :: Lens' PricingInfo [Maybe FareInfo]
+piFare :: Lens' PricingInfo [FareInfo]
 piFare
   = lens _piFare (\ s a -> s{_piFare = a}) . _Default .
       _Coerce
@@ -1736,7 +1736,7 @@ piKind :: Lens' PricingInfo Text
 piKind = lens _piKind (\ s a -> s{_piKind = a})
 
 -- | The per-segment price and baggage information.
-piSegmentPricing :: Lens' PricingInfo [Maybe SegmentPricing]
+piSegmentPricing :: Lens' PricingInfo [SegmentPricing]
 piSegmentPricing
   = lens _piSegmentPricing
       (\ s a -> s{_piSegmentPricing = a})
@@ -1744,7 +1744,7 @@ piSegmentPricing
       . _Coerce
 
 -- | The number of passengers to which this price applies.
-piPassengers :: Lens' PricingInfo (Maybe (Maybe PassengerCounts))
+piPassengers :: Lens' PricingInfo (Maybe PassengerCounts)
 piPassengers
   = lens _piPassengers (\ s a -> s{_piPassengers = a})
 
@@ -1765,7 +1765,7 @@ piLatestTicketingTime
       (\ s a -> s{_piLatestTicketingTime = a})
 
 -- | The taxes used to calculate the tax total per ticket.
-piTax :: Lens' PricingInfo [Maybe TaxInfo]
+piTax :: Lens' PricingInfo [TaxInfo]
 piTax
   = lens _piTax (\ s a -> s{_piTax = a}) . _Default .
       _Coerce
@@ -1976,17 +1976,17 @@ instance ToJSON FareInfo where
 --
 -- /See:/ 'sliceInput' smart constructor.
 data SliceInput = SliceInput
-    { _sliDestination            :: !(Maybe Text)
-    , _sliOrigin                 :: !(Maybe Text)
-    , _sliMaxStops               :: !(Maybe Int32)
-    , _sliKind                   :: !Text
-    , _sliProhibitedCarrier      :: !(Maybe [Text])
-    , _sliDate                   :: !(Maybe Text)
-    , _sliMaxConnectionDuration  :: !(Maybe Int32)
-    , _sliPreferredCabin         :: !(Maybe Text)
-    , _sliPermittedDepartureTime :: !(Maybe (Maybe TimeOfDayRange))
-    , _sliPermittedCarrier       :: !(Maybe [Text])
-    , _sliAlliance               :: !(Maybe Text)
+    { _sliDestination             :: !(Maybe Text)
+    , _sliOrigin                  :: !(Maybe Text)
+    , _sliMaxStops                :: !(Maybe Int32)
+    , _sliKind                    :: !Text
+    , _sliProhibitedCarrier       :: !(Maybe [Text])
+    , _sliDate                    :: !(Maybe Text)
+    , _sliMaxConnectionDuration   :: !(Maybe Int32)
+    , _sliPreferredCabin          :: !(Maybe Text)
+    , _sliPermittedDePartyureTime :: !(Maybe TimeOfDayRange)
+    , _sliPermittedCarrier        :: !(Maybe [Text])
+    , _sliAlliance                :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SliceInput' with the minimum fields required to make a request.
@@ -2009,7 +2009,7 @@ data SliceInput = SliceInput
 --
 -- * 'sliPreferredCabin'
 --
--- * 'sliPermittedDepartureTime'
+-- * 'sliPermittedDePartyureTime'
 --
 -- * 'sliPermittedCarrier'
 --
@@ -2026,7 +2026,7 @@ sliceInput =
     , _sliDate = Nothing
     , _sliMaxConnectionDuration = Nothing
     , _sliPreferredCabin = Nothing
-    , _sliPermittedDepartureTime = Nothing
+    , _sliPermittedDePartyureTime = Nothing
     , _sliPermittedCarrier = Nothing
     , _sliAlliance = Nothing
     }
@@ -2082,10 +2082,10 @@ sliPreferredCabin
 
 -- | Slices must depart in this time of day range, local to the point of
 -- departure.
-sliPermittedDepartureTime :: Lens' SliceInput (Maybe (Maybe TimeOfDayRange))
-sliPermittedDepartureTime
-  = lens _sliPermittedDepartureTime
-      (\ s a -> s{_sliPermittedDepartureTime = a})
+sliPermittedDePartyureTime :: Lens' SliceInput (Maybe TimeOfDayRange)
+sliPermittedDePartyureTime
+  = lens _sliPermittedDePartyureTime
+      (\ s a -> s{_sliPermittedDePartyureTime = a})
 
 -- | A list of 2-letter IATA airline designators. Slices with only these
 -- carriers should be returned.
@@ -2133,7 +2133,7 @@ instance ToJSON SliceInput where
                     _sliMaxConnectionDuration,
                   ("preferredCabin" .=) <$> _sliPreferredCabin,
                   ("permittedDepartureTime" .=) <$>
-                    _sliPermittedDepartureTime,
+                    _sliPermittedDePartyureTime,
                   ("permittedCarrier" .=) <$> _sliPermittedCarrier,
                   ("alliance" .=) <$> _sliAlliance])
 
@@ -2143,9 +2143,9 @@ instance ToJSON SliceInput where
 data TripOptionsRequest = TripOptionsRequest
     { _torRefundable  :: !(Maybe Bool)
     , _torSaleCountry :: !(Maybe Text)
-    , _torPassengers  :: !(Maybe (Maybe PassengerCounts))
+    , _torPassengers  :: !(Maybe PassengerCounts)
     , _torSolutions   :: !(Maybe Int32)
-    , _torSlice       :: !(Maybe [Maybe SliceInput])
+    , _torSlice       :: !(Maybe [SliceInput])
     , _torMaxPrice    :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -2190,7 +2190,7 @@ torSaleCountry
       (\ s a -> s{_torSaleCountry = a})
 
 -- | Counts for each passenger type in the request.
-torPassengers :: Lens' TripOptionsRequest (Maybe (Maybe PassengerCounts))
+torPassengers :: Lens' TripOptionsRequest (Maybe PassengerCounts)
 torPassengers
   = lens _torPassengers
       (\ s a -> s{_torPassengers = a})
@@ -2207,7 +2207,7 @@ torSolutions
 -- of a one slice trip with three segments might be BOS-SYD, SYD-LAX,
 -- LAX-BOS if the traveler only stopped in SYD and LAX just long enough to
 -- change planes.
-torSlice :: Lens' TripOptionsRequest [Maybe SliceInput]
+torSlice :: Lens' TripOptionsRequest [SliceInput]
 torSlice
   = lens _torSlice (\ s a -> s{_torSlice = a}) .
       _Default

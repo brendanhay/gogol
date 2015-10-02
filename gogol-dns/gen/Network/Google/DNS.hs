@@ -108,7 +108,7 @@ module Network.Google.DNS
     , mzNameServerSet
     , mzName
     , mzId
-    , mzDnsName
+    , mzDNSName
     , mzDescription
     , mzNameServers
 
@@ -129,9 +129,6 @@ module Network.Google.DNS
     , mzlrNextPageToken
     , mzlrKind
     , mzlrManagedZones
-
-    -- ** Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.DNS.Types

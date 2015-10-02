@@ -76,12 +76,12 @@ instance ToJSON ModifyThreadRequest where
 --
 -- /See:/ 'history' smart constructor.
 data History = History
-    { _hLabelsRemoved   :: !(Maybe [Maybe HistoryLabelRemoved])
-    , _hMessagesDeleted :: !(Maybe [Maybe HistoryMessageDeleted])
-    , _hMessagesAdded   :: !(Maybe [Maybe HistoryMessageAdded])
-    , _hLabelsAdded     :: !(Maybe [Maybe HistoryLabelAdded])
+    { _hLabelsRemoved   :: !(Maybe [HistoryLabelRemoved])
+    , _hMessagesDeleted :: !(Maybe [HistoryMessageDeleted])
+    , _hMessagesAdded   :: !(Maybe [HistoryMessageAdded])
+    , _hLabelsAdded     :: !(Maybe [HistoryLabelAdded])
     , _hId              :: !(Maybe Word64)
-    , _hMessages        :: !(Maybe [Maybe Message])
+    , _hMessages        :: !(Maybe [Message])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'History' with the minimum fields required to make a request.
@@ -112,7 +112,7 @@ history =
     }
 
 -- | Labels removed from messages in this history record.
-hLabelsRemoved :: Lens' History [Maybe HistoryLabelRemoved]
+hLabelsRemoved :: Lens' History [HistoryLabelRemoved]
 hLabelsRemoved
   = lens _hLabelsRemoved
       (\ s a -> s{_hLabelsRemoved = a})
@@ -120,7 +120,7 @@ hLabelsRemoved
       . _Coerce
 
 -- | Messages deleted (not Trashed) from the mailbox in this history record.
-hMessagesDeleted :: Lens' History [Maybe HistoryMessageDeleted]
+hMessagesDeleted :: Lens' History [HistoryMessageDeleted]
 hMessagesDeleted
   = lens _hMessagesDeleted
       (\ s a -> s{_hMessagesDeleted = a})
@@ -128,7 +128,7 @@ hMessagesDeleted
       . _Coerce
 
 -- | Messages added to the mailbox in this history record.
-hMessagesAdded :: Lens' History [Maybe HistoryMessageAdded]
+hMessagesAdded :: Lens' History [HistoryMessageAdded]
 hMessagesAdded
   = lens _hMessagesAdded
       (\ s a -> s{_hMessagesAdded = a})
@@ -136,7 +136,7 @@ hMessagesAdded
       . _Coerce
 
 -- | Labels added to messages in this history record.
-hLabelsAdded :: Lens' History [Maybe HistoryLabelAdded]
+hLabelsAdded :: Lens' History [HistoryLabelAdded]
 hLabelsAdded
   = lens _hLabelsAdded (\ s a -> s{_hLabelsAdded = a})
       . _Default
@@ -150,7 +150,7 @@ hId = lens _hId (\ s a -> s{_hId = a})
 -- change types, such as messagesAdded may duplicate messages in this
 -- field. We recommend using the specific change-type fields instead of
 -- this.
-hMessages :: Lens' History [Maybe Message]
+hMessages :: Lens' History [Message]
 hMessages
   = lens _hMessages (\ s a -> s{_hMessages = a}) .
       _Default
@@ -235,7 +235,7 @@ instance ToJSON ModifyMessageRequest where
 -- /See:/ 'listHistoryResponse' smart constructor.
 data ListHistoryResponse = ListHistoryResponse
     { _lhrNextPageToken :: !(Maybe Text)
-    , _lhrHistory       :: !(Maybe [Maybe History])
+    , _lhrHistory       :: !(Maybe [History])
     , _lhrHistoryId     :: !(Maybe Word64)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -265,7 +265,7 @@ lhrNextPageToken
 
 -- | List of history records. Any messages contained in the response will
 -- typically only have id and threadId fields populated.
-lhrHistory :: Lens' ListHistoryResponse [Maybe History]
+lhrHistory :: Lens' ListHistoryResponse [History]
 lhrHistory
   = lens _lhrHistory (\ s a -> s{_lhrHistory = a}) .
       _Default
@@ -413,7 +413,7 @@ instance ToJSON Profile where
 --
 -- /See:/ 'historyMessageDeleted' smart constructor.
 newtype HistoryMessageDeleted = HistoryMessageDeleted
-    { _hmdMessage :: Maybe (Maybe Message)
+    { _hmdMessage :: Maybe Message
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'HistoryMessageDeleted' with the minimum fields required to make a request.
@@ -428,7 +428,7 @@ historyMessageDeleted =
     { _hmdMessage = Nothing
     }
 
-hmdMessage :: Lens' HistoryMessageDeleted (Maybe (Maybe Message))
+hmdMessage :: Lens' HistoryMessageDeleted (Maybe Message)
 hmdMessage
   = lens _hmdMessage (\ s a -> s{_hmdMessage = a})
 
@@ -446,7 +446,7 @@ instance ToJSON HistoryMessageDeleted where
 data ListThreadsResponse = ListThreadsResponse
     { _ltrNextPageToken      :: !(Maybe Text)
     , _ltrResultSizeEstimate :: !(Maybe Word32)
-    , _ltrThreads            :: !(Maybe [Maybe Thread])
+    , _ltrThreads            :: !(Maybe [Thread])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListThreadsResponse' with the minimum fields required to make a request.
@@ -480,7 +480,7 @@ ltrResultSizeEstimate
       (\ s a -> s{_ltrResultSizeEstimate = a})
 
 -- | List of threads.
-ltrThreads :: Lens' ListThreadsResponse [Maybe Thread]
+ltrThreads :: Lens' ListThreadsResponse [Thread]
 ltrThreads
   = lens _ltrThreads (\ s a -> s{_ltrThreads = a}) .
       _Default
@@ -507,7 +507,7 @@ instance ToJSON ListThreadsResponse where
 -- /See:/ 'historyLabelAdded' smart constructor.
 data HistoryLabelAdded = HistoryLabelAdded
     { _hlaLabelIds :: !(Maybe [Text])
-    , _hlaMessage  :: !(Maybe (Maybe Message))
+    , _hlaMessage  :: !(Maybe Message)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'HistoryLabelAdded' with the minimum fields required to make a request.
@@ -532,7 +532,7 @@ hlaLabelIds
       _Default
       . _Coerce
 
-hlaMessage :: Lens' HistoryLabelAdded (Maybe (Maybe Message))
+hlaMessage :: Lens' HistoryLabelAdded (Maybe Message)
 hlaMessage
   = lens _hlaMessage (\ s a -> s{_hlaMessage = a})
 
@@ -553,7 +553,7 @@ instance ToJSON HistoryLabelAdded where
 --
 -- /See:/ 'listLabelsResponse' smart constructor.
 newtype ListLabelsResponse = ListLabelsResponse
-    { _llrLabels :: Maybe [Maybe Label]
+    { _llrLabels :: Maybe [Label]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListLabelsResponse' with the minimum fields required to make a request.
@@ -569,7 +569,7 @@ listLabelsResponse =
     }
 
 -- | List of labels.
-llrLabels :: Lens' ListLabelsResponse [Maybe Label]
+llrLabels :: Lens' ListLabelsResponse [Label]
 llrLabels
   = lens _llrLabels (\ s a -> s{_llrLabels = a}) .
       _Default
@@ -589,10 +589,10 @@ instance ToJSON ListLabelsResponse where
 --
 -- /See:/ 'messagePart' smart constructor.
 data MessagePart = MessagePart
-    { _mpParts    :: !(Maybe [Maybe MessagePart])
-    , _mpBody     :: !(Maybe (Maybe MessagePartBody))
+    { _mpParts    :: !(Maybe [MessagePart])
+    , _mpBody     :: !(Maybe MessagePartBody)
     , _mpMimeType :: !(Maybe Text)
-    , _mpHeaders  :: !(Maybe [Maybe MessagePartHeader])
+    , _mpHeaders  :: !(Maybe [MessagePartHeader])
     , _mpPartId   :: !(Maybe Text)
     , _mpFilename :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -628,14 +628,14 @@ messagePart =
 -- container MIME message parts, for example multipart\/*. For non-
 -- container MIME message part types, such as text\/plain, this field is
 -- empty. For more information, see RFC 1521.
-mpParts :: Lens' MessagePart [Maybe MessagePart]
+mpParts :: Lens' MessagePart [MessagePart]
 mpParts
   = lens _mpParts (\ s a -> s{_mpParts = a}) . _Default
       . _Coerce
 
 -- | The message part body for this part, which may be empty for container
 -- MIME message parts.
-mpBody :: Lens' MessagePart (Maybe (Maybe MessagePartBody))
+mpBody :: Lens' MessagePart (Maybe MessagePartBody)
 mpBody = lens _mpBody (\ s a -> s{_mpBody = a})
 
 -- | The MIME type of the message part.
@@ -646,7 +646,7 @@ mpMimeType
 -- | List of headers on this message part. For the top-level message part,
 -- representing the entire message payload, it will contain the standard
 -- RFC 2822 email headers such as To, From, and Subject.
-mpHeaders :: Lens' MessagePart [Maybe MessagePartHeader]
+mpHeaders :: Lens' MessagePart [MessagePartHeader]
 mpHeaders
   = lens _mpHeaders (\ s a -> s{_mpHeaders = a}) .
       _Default
@@ -750,7 +750,7 @@ instance ToJSON MessagePartBody where
 data ListDraftsResponse = ListDraftsResponse
     { _ldrNextPageToken      :: !(Maybe Text)
     , _ldrResultSizeEstimate :: !(Maybe Word32)
-    , _ldrDrafts             :: !(Maybe [Maybe Draft])
+    , _ldrDrafts             :: !(Maybe [Draft])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListDraftsResponse' with the minimum fields required to make a request.
@@ -784,7 +784,7 @@ ldrResultSizeEstimate
       (\ s a -> s{_ldrResultSizeEstimate = a})
 
 -- | List of drafts.
-ldrDrafts :: Lens' ListDraftsResponse [Maybe Draft]
+ldrDrafts :: Lens' ListDraftsResponse [Draft]
 ldrDrafts
   = lens _ldrDrafts (\ s a -> s{_ldrDrafts = a}) .
       _Default
@@ -860,7 +860,7 @@ instance ToJSON WatchResponse where
 -- /See:/ 'draft' smart constructor.
 data Draft = Draft
     { _dId      :: !(Maybe Text)
-    , _dMessage :: !(Maybe (Maybe Message))
+    , _dMessage :: !(Maybe Message)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Draft' with the minimum fields required to make a request.
@@ -883,7 +883,7 @@ dId :: Lens' Draft (Maybe Text)
 dId = lens _dId (\ s a -> s{_dId = a})
 
 -- | The message content of the draft.
-dMessage :: Lens' Draft (Maybe (Maybe Message))
+dMessage :: Lens' Draft (Maybe Message)
 dMessage = lens _dMessage (\ s a -> s{_dMessage = a})
 
 instance FromJSON Draft where
@@ -973,7 +973,7 @@ data Message = Message
     { _mRaw          :: !(Maybe Word8)
     , _mSnippet      :: !(Maybe Text)
     , _mSizeEstimate :: !(Maybe Int32)
-    , _mPayload      :: !(Maybe (Maybe MessagePart))
+    , _mPayLoad      :: !(Maybe MessagePart)
     , _mHistoryId    :: !(Maybe Word64)
     , _mId           :: !(Maybe Text)
     , _mLabelIds     :: !(Maybe [Text])
@@ -991,7 +991,7 @@ data Message = Message
 --
 -- * 'mSizeEstimate'
 --
--- * 'mPayload'
+-- * 'mPayLoad'
 --
 -- * 'mHistoryId'
 --
@@ -1009,7 +1009,7 @@ message =
     { _mRaw = Nothing
     , _mSnippet = Nothing
     , _mSizeEstimate = Nothing
-    , _mPayload = Nothing
+    , _mPayLoad = Nothing
     , _mHistoryId = Nothing
     , _mId = Nothing
     , _mLabelIds = Nothing
@@ -1034,8 +1034,8 @@ mSizeEstimate
       (\ s a -> s{_mSizeEstimate = a})
 
 -- | The parsed email structure in the message parts.
-mPayload :: Lens' Message (Maybe (Maybe MessagePart))
-mPayload = lens _mPayload (\ s a -> s{_mPayload = a})
+mPayLoad :: Lens' Message (Maybe MessagePart)
+mPayLoad = lens _mPayLoad (\ s a -> s{_mPayLoad = a})
 
 -- | The ID of the last history record that modified this message.
 mHistoryId :: Lens' Message (Maybe Word64)
@@ -1093,7 +1093,7 @@ instance ToJSON Message where
               (catMaybes
                  [("raw" .=) <$> _mRaw, ("snippet" .=) <$> _mSnippet,
                   ("sizeEstimate" .=) <$> _mSizeEstimate,
-                  ("payload" .=) <$> _mPayload,
+                  ("payload" .=) <$> _mPayLoad,
                   ("historyId" .=) <$> _mHistoryId, ("id" .=) <$> _mId,
                   ("labelIds" .=) <$> _mLabelIds,
                   ("threadId" .=) <$> _mThreadId,
@@ -1106,7 +1106,7 @@ data Thread = Thread
     { _tSnippet   :: !(Maybe Text)
     , _tHistoryId :: !(Maybe Word64)
     , _tId        :: !(Maybe Text)
-    , _tMessages  :: !(Maybe [Maybe Message])
+    , _tMessages  :: !(Maybe [Message])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Thread' with the minimum fields required to make a request.
@@ -1144,7 +1144,7 @@ tId :: Lens' Thread (Maybe Text)
 tId = lens _tId (\ s a -> s{_tId = a})
 
 -- | The list of messages in the thread.
-tMessages :: Lens' Thread [Maybe Message]
+tMessages :: Lens' Thread [Message]
 tMessages
   = lens _tMessages (\ s a -> s{_tMessages = a}) .
       _Default
@@ -1309,7 +1309,7 @@ instance ToJSON Label where
 -- /See:/ 'historyLabelRemoved' smart constructor.
 data HistoryLabelRemoved = HistoryLabelRemoved
     { _hlrLabelIds :: !(Maybe [Text])
-    , _hlrMessage  :: !(Maybe (Maybe Message))
+    , _hlrMessage  :: !(Maybe Message)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'HistoryLabelRemoved' with the minimum fields required to make a request.
@@ -1334,7 +1334,7 @@ hlrLabelIds
       _Default
       . _Coerce
 
-hlrMessage :: Lens' HistoryLabelRemoved (Maybe (Maybe Message))
+hlrMessage :: Lens' HistoryLabelRemoved (Maybe Message)
 hlrMessage
   = lens _hlrMessage (\ s a -> s{_hlrMessage = a})
 
@@ -1355,7 +1355,7 @@ instance ToJSON HistoryLabelRemoved where
 --
 -- /See:/ 'historyMessageAdded' smart constructor.
 newtype HistoryMessageAdded = HistoryMessageAdded
-    { _hmaMessage :: Maybe (Maybe Message)
+    { _hmaMessage :: Maybe Message
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'HistoryMessageAdded' with the minimum fields required to make a request.
@@ -1370,7 +1370,7 @@ historyMessageAdded =
     { _hmaMessage = Nothing
     }
 
-hmaMessage :: Lens' HistoryMessageAdded (Maybe (Maybe Message))
+hmaMessage :: Lens' HistoryMessageAdded (Maybe Message)
 hmaMessage
   = lens _hmaMessage (\ s a -> s{_hmaMessage = a})
 
@@ -1388,7 +1388,7 @@ instance ToJSON HistoryMessageAdded where
 data ListMessagesResponse = ListMessagesResponse
     { _lmrNextPageToken      :: !(Maybe Text)
     , _lmrResultSizeEstimate :: !(Maybe Word32)
-    , _lmrMessages           :: !(Maybe [Maybe Message])
+    , _lmrMessages           :: !(Maybe [Message])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListMessagesResponse' with the minimum fields required to make a request.
@@ -1422,7 +1422,7 @@ lmrResultSizeEstimate
       (\ s a -> s{_lmrResultSizeEstimate = a})
 
 -- | List of messages.
-lmrMessages :: Lens' ListMessagesResponse [Maybe Message]
+lmrMessages :: Lens' ListMessagesResponse [Message]
 lmrMessages
   = lens _lmrMessages (\ s a -> s{_lmrMessages = a}) .
       _Default

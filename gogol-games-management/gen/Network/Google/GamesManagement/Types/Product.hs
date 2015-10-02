@@ -74,8 +74,8 @@ instance ToJSON PlayerName where
 -- /See:/ 'gamesPlayerExperienceInfoResource' smart constructor.
 data GamesPlayerExperienceInfoResource = GamesPlayerExperienceInfoResource
     { _gpeirCurrentExperiencePoints    :: !(Maybe Int64)
-    , _gpeirCurrentLevel               :: !(Maybe (Maybe GamesPlayerLevelResource))
-    , _gpeirNextLevel                  :: !(Maybe (Maybe GamesPlayerLevelResource))
+    , _gpeirCurrentLevel               :: !(Maybe GamesPlayerLevelResource)
+    , _gpeirNextLevel                  :: !(Maybe GamesPlayerLevelResource)
     , _gpeirLastLevelUpTimestampMillis :: !(Maybe Int64)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -107,14 +107,14 @@ gpeirCurrentExperiencePoints
       (\ s a -> s{_gpeirCurrentExperiencePoints = a})
 
 -- | The current level of the player.
-gpeirCurrentLevel :: Lens' GamesPlayerExperienceInfoResource (Maybe (Maybe GamesPlayerLevelResource))
+gpeirCurrentLevel :: Lens' GamesPlayerExperienceInfoResource (Maybe GamesPlayerLevelResource)
 gpeirCurrentLevel
   = lens _gpeirCurrentLevel
       (\ s a -> s{_gpeirCurrentLevel = a})
 
 -- | The next level of the player. If the current level is the maximum level,
 -- this should be same as the current level.
-gpeirNextLevel :: Lens' GamesPlayerExperienceInfoResource (Maybe (Maybe GamesPlayerLevelResource))
+gpeirNextLevel :: Lens' GamesPlayerExperienceInfoResource (Maybe GamesPlayerLevelResource)
 gpeirNextLevel
   = lens _gpeirNextLevel
       (\ s a -> s{_gpeirNextLevel = a})
@@ -153,7 +153,7 @@ instance ToJSON GamesPlayerExperienceInfoResource
 --
 -- /See:/ 'playerScoreResetAllResponse' smart constructor.
 data PlayerScoreResetAllResponse = PlayerScoreResetAllResponse
-    { _psrarResults :: !(Maybe [Maybe PlayerScoreResetResponse])
+    { _psrarResults :: !(Maybe [PlayerScoreResetResponse])
     , _psrarKind    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -173,7 +173,7 @@ playerScoreResetAllResponse =
     }
 
 -- | The leaderboard reset results.
-psrarResults :: Lens' PlayerScoreResetAllResponse [Maybe PlayerScoreResetResponse]
+psrarResults :: Lens' PlayerScoreResetAllResponse [PlayerScoreResetResponse]
 psrarResults
   = lens _psrarResults (\ s a -> s{_psrarResults = a})
       . _Default
@@ -444,7 +444,7 @@ instance ToJSON ScoresResetMultipleForAllRequest
 data HiddenPlayerList = HiddenPlayerList
     { _hplNextPageToken :: !(Maybe Text)
     , _hplKind          :: !Text
-    , _hplItems         :: !(Maybe [Maybe HiddenPlayer])
+    , _hplItems         :: !(Maybe [HiddenPlayer])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'HiddenPlayerList' with the minimum fields required to make a request.
@@ -477,7 +477,7 @@ hplKind :: Lens' HiddenPlayerList Text
 hplKind = lens _hplKind (\ s a -> s{_hplKind = a})
 
 -- | The players.
-hplItems :: Lens' HiddenPlayerList [Maybe HiddenPlayer]
+hplItems :: Lens' HiddenPlayerList [HiddenPlayer]
 hplItems
   = lens _hplItems (\ s a -> s{_hplItems = a}) .
       _Default
@@ -671,7 +671,7 @@ instance ToJSON AchievementResetMultipleForAllRequest
 data HiddenPlayer = HiddenPlayer
     { _hpKind             :: !Text
     , _hpHiddenTimeMillis :: !(Maybe Int64)
-    , _hpPlayer           :: !(Maybe (Maybe Player))
+    , _hpPlayer           :: !(Maybe Player)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'HiddenPlayer' with the minimum fields required to make a request.
@@ -704,7 +704,7 @@ hpHiddenTimeMillis
       (\ s a -> s{_hpHiddenTimeMillis = a})
 
 -- | The player information.
-hpPlayer :: Lens' HiddenPlayer (Maybe (Maybe Player))
+hpPlayer :: Lens' HiddenPlayer (Maybe Player)
 hpPlayer = lens _hpPlayer (\ s a -> s{_hpPlayer = a})
 
 instance FromJSON HiddenPlayer where
@@ -728,7 +728,7 @@ instance ToJSON HiddenPlayer where
 --
 -- /See:/ 'achievementResetAllResponse' smart constructor.
 data AchievementResetAllResponse = AchievementResetAllResponse
-    { _ararResults :: !(Maybe [Maybe AchievementResetResponse])
+    { _ararResults :: !(Maybe [AchievementResetResponse])
     , _ararKind    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -748,7 +748,7 @@ achievementResetAllResponse =
     }
 
 -- | The achievement reset results.
-ararResults :: Lens' AchievementResetAllResponse [Maybe AchievementResetResponse]
+ararResults :: Lens' AchievementResetAllResponse [AchievementResetResponse]
 ararResults
   = lens _ararResults (\ s a -> s{_ararResults = a}) .
       _Default
@@ -779,10 +779,10 @@ instance ToJSON AchievementResetAllResponse where
 --
 -- /See:/ 'player' smart constructor.
 data Player = Player
-    { _pLastPlayedWith :: !(Maybe (Maybe GamesPlayedResource))
-    , _pAvatarImageUrl :: !(Maybe Text)
+    { _pLastPlayedWith :: !(Maybe GamesPlayedResource)
+    , _pAvatarImageURL :: !(Maybe Text)
     , _pKind           :: !Text
-    , _pExperienceInfo :: !(Maybe (Maybe GamesPlayerExperienceInfoResource))
+    , _pExperienceInfo :: !(Maybe GamesPlayerExperienceInfoResource)
     , _pName           :: !(Maybe PlayerName)
     , _pDisplayName    :: !(Maybe Text)
     , _pTitle          :: !(Maybe Text)
@@ -795,7 +795,7 @@ data Player = Player
 --
 -- * 'pLastPlayedWith'
 --
--- * 'pAvatarImageUrl'
+-- * 'pAvatarImageURL'
 --
 -- * 'pKind'
 --
@@ -813,7 +813,7 @@ player
 player =
     Player
     { _pLastPlayedWith = Nothing
-    , _pAvatarImageUrl = Nothing
+    , _pAvatarImageURL = Nothing
     , _pKind = "gamesManagement#player"
     , _pExperienceInfo = Nothing
     , _pName = Nothing
@@ -825,16 +825,16 @@ player =
 -- | Details about the last time this player played a multiplayer game with
 -- the currently authenticated player. Populated for PLAYED_WITH player
 -- collection members.
-pLastPlayedWith :: Lens' Player (Maybe (Maybe GamesPlayedResource))
+pLastPlayedWith :: Lens' Player (Maybe GamesPlayedResource)
 pLastPlayedWith
   = lens _pLastPlayedWith
       (\ s a -> s{_pLastPlayedWith = a})
 
 -- | The base URL for the image that represents the player.
-pAvatarImageUrl :: Lens' Player (Maybe Text)
-pAvatarImageUrl
-  = lens _pAvatarImageUrl
-      (\ s a -> s{_pAvatarImageUrl = a})
+pAvatarImageURL :: Lens' Player (Maybe Text)
+pAvatarImageURL
+  = lens _pAvatarImageURL
+      (\ s a -> s{_pAvatarImageURL = a})
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string gamesManagement#player.
@@ -842,7 +842,7 @@ pKind :: Lens' Player Text
 pKind = lens _pKind (\ s a -> s{_pKind = a})
 
 -- | An object to represent Play Game experience information for the player.
-pExperienceInfo :: Lens' Player (Maybe (Maybe GamesPlayerExperienceInfoResource))
+pExperienceInfo :: Lens' Player (Maybe GamesPlayerExperienceInfoResource)
 pExperienceInfo
   = lens _pExperienceInfo
       (\ s a -> s{_pExperienceInfo = a})
@@ -884,7 +884,7 @@ instance ToJSON Player where
           = object
               (catMaybes
                  [("lastPlayedWith" .=) <$> _pLastPlayedWith,
-                  ("avatarImageUrl" .=) <$> _pAvatarImageUrl,
+                  ("avatarImageUrl" .=) <$> _pAvatarImageURL,
                   Just ("kind" .= _pKind),
                   ("experienceInfo" .=) <$> _pExperienceInfo,
                   ("name" .=) <$> _pName,

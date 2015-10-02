@@ -33,15 +33,14 @@ module Network.Google.Resource.Plus.Activities.Search
     , asQuotaUser
     , asPrettyPrint
     , asOrderBy
-    , asUserIp
+    , asUserIP
     , asKey
     , asQuery
     , asLanguage
     , asPageToken
-    , asOauthToken
+    , asOAuthToken
     , asMaxResults
     , asFields
-    , asAlt
     ) where
 
 import           Network.Google.Plus.Types
@@ -55,14 +54,15 @@ type ActivitiesSearchResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "orderBy" PlusActivitiesSearchOrderBy :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
+               QueryParam "key" Key :>
                  QueryParam "query" Text :>
                    QueryParam "language" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "maxResults" Word32 :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Get '[JSON] ActivityFeed
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] ActivityFeed
 
 -- | Search public activities.
 --
@@ -71,15 +71,14 @@ data ActivitiesSearch' = ActivitiesSearch'
     { _asQuotaUser   :: !(Maybe Text)
     , _asPrettyPrint :: !Bool
     , _asOrderBy     :: !PlusActivitiesSearchOrderBy
-    , _asUserIp      :: !(Maybe Text)
-    , _asKey         :: !(Maybe Text)
+    , _asUserIP      :: !(Maybe Text)
+    , _asKey         :: !(Maybe Key)
     , _asQuery       :: !Text
     , _asLanguage    :: !Text
     , _asPageToken   :: !(Maybe Text)
-    , _asOauthToken  :: !(Maybe Text)
+    , _asOAuthToken  :: !(Maybe OAuthToken)
     , _asMaxResults  :: !Word32
     , _asFields      :: !(Maybe Text)
-    , _asAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivitiesSearch'' with the minimum fields required to make a request.
@@ -92,7 +91,7 @@ data ActivitiesSearch' = ActivitiesSearch'
 --
 -- * 'asOrderBy'
 --
--- * 'asUserIp'
+-- * 'asUserIP'
 --
 -- * 'asKey'
 --
@@ -102,13 +101,11 @@ data ActivitiesSearch' = ActivitiesSearch'
 --
 -- * 'asPageToken'
 --
--- * 'asOauthToken'
+-- * 'asOAuthToken'
 --
 -- * 'asMaxResults'
 --
 -- * 'asFields'
---
--- * 'asAlt'
 activitiesSearch'
     :: Text -- ^ 'query'
     -> ActivitiesSearch'
@@ -117,15 +114,14 @@ activitiesSearch' pAsQuery_ =
     { _asQuotaUser = Nothing
     , _asPrettyPrint = True
     , _asOrderBy = Recent
-    , _asUserIp = Nothing
+    , _asUserIP = Nothing
     , _asKey = Nothing
     , _asQuery = pAsQuery_
     , _asLanguage = "en-US"
     , _asPageToken = Nothing
-    , _asOauthToken = Nothing
+    , _asOAuthToken = Nothing
     , _asMaxResults = 10
     , _asFields = Nothing
-    , _asAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,13 +144,13 @@ asOrderBy
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-asUserIp :: Lens' ActivitiesSearch' (Maybe Text)
-asUserIp = lens _asUserIp (\ s a -> s{_asUserIp = a})
+asUserIP :: Lens' ActivitiesSearch' (Maybe Text)
+asUserIP = lens _asUserIP (\ s a -> s{_asUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-asKey :: Lens' ActivitiesSearch' (Maybe Text)
+asKey :: Lens' ActivitiesSearch' (Maybe Key)
 asKey = lens _asKey (\ s a -> s{_asKey = a})
 
 -- | Full-text search query string.
@@ -176,9 +172,9 @@ asPageToken
   = lens _asPageToken (\ s a -> s{_asPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-asOauthToken :: Lens' ActivitiesSearch' (Maybe Text)
-asOauthToken
-  = lens _asOauthToken (\ s a -> s{_asOauthToken = a})
+asOAuthToken :: Lens' ActivitiesSearch' (Maybe OAuthToken)
+asOAuthToken
+  = lens _asOAuthToken (\ s a -> s{_asOAuthToken = a})
 
 -- | The maximum number of activities to include in the response, which is
 -- used for paging. For any response, the actual number returned might be
@@ -191,9 +187,9 @@ asMaxResults
 asFields :: Lens' ActivitiesSearch' (Maybe Text)
 asFields = lens _asFields (\ s a -> s{_asFields = a})
 
--- | Data format for the response.
-asAlt :: Lens' ActivitiesSearch' Alt
-asAlt = lens _asAlt (\ s a -> s{_asAlt = a})
+instance GoogleAuth ActivitiesSearch' where
+        authKey = asKey . _Just
+        authToken = asOAuthToken . _Just
 
 instance GoogleRequest ActivitiesSearch' where
         type Rs ActivitiesSearch' = ActivityFeed
@@ -201,15 +197,15 @@ instance GoogleRequest ActivitiesSearch' where
         requestWithRoute r u ActivitiesSearch'{..}
           = go _asQuotaUser (Just _asPrettyPrint)
               (Just _asOrderBy)
-              _asUserIp
+              _asUserIP
               _asKey
               (Just _asQuery)
               (Just _asLanguage)
               _asPageToken
-              _asOauthToken
+              _asOAuthToken
               (Just _asMaxResults)
               _asFields
-              (Just _asAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ActivitiesSearchResource)

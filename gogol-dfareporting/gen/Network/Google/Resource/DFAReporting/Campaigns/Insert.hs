@@ -32,14 +32,14 @@ module Network.Google.Resource.DFAReporting.Campaigns.Insert
     -- * Request Lenses
     , ciQuotaUser
     , ciPrettyPrint
-    , ciUserIp
+    , ciUserIP
     , ciProfileId
-    , ciDefaultLandingPageUrl
+    , ciCampaign
+    , ciDefaultLandingPageURL
     , ciKey
     , ciDefaultLandingPageName
-    , ciOauthToken
+    , ciOAuthToken
     , ciFields
-    , ciAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -55,11 +55,12 @@ type CampaignsInsertResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "defaultLandingPageUrl" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "defaultLandingPageName" Text :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Post '[JSON] Campaign
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] Campaign :> Post '[JSON] Campaign
 
 -- | Inserts a new campaign.
 --
@@ -67,14 +68,14 @@ type CampaignsInsertResource =
 data CampaignsInsert' = CampaignsInsert'
     { _ciQuotaUser              :: !(Maybe Text)
     , _ciPrettyPrint            :: !Bool
-    , _ciUserIp                 :: !(Maybe Text)
+    , _ciUserIP                 :: !(Maybe Text)
     , _ciProfileId              :: !Int64
-    , _ciDefaultLandingPageUrl  :: !Text
-    , _ciKey                    :: !(Maybe Text)
+    , _ciCampaign               :: !Campaign
+    , _ciDefaultLandingPageURL  :: !Text
+    , _ciKey                    :: !(Maybe Key)
     , _ciDefaultLandingPageName :: !Text
-    , _ciOauthToken             :: !(Maybe Text)
+    , _ciOAuthToken             :: !(Maybe OAuthToken)
     , _ciFields                 :: !(Maybe Text)
-    , _ciAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CampaignsInsert'' with the minimum fields required to make a request.
@@ -85,38 +86,39 @@ data CampaignsInsert' = CampaignsInsert'
 --
 -- * 'ciPrettyPrint'
 --
--- * 'ciUserIp'
+-- * 'ciUserIP'
 --
 -- * 'ciProfileId'
 --
--- * 'ciDefaultLandingPageUrl'
+-- * 'ciCampaign'
+--
+-- * 'ciDefaultLandingPageURL'
 --
 -- * 'ciKey'
 --
 -- * 'ciDefaultLandingPageName'
 --
--- * 'ciOauthToken'
+-- * 'ciOAuthToken'
 --
 -- * 'ciFields'
---
--- * 'ciAlt'
 campaignsInsert'
     :: Int64 -- ^ 'profileId'
+    -> Campaign -- ^ 'Campaign'
     -> Text -- ^ 'defaultLandingPageUrl'
     -> Text -- ^ 'defaultLandingPageName'
     -> CampaignsInsert'
-campaignsInsert' pCiProfileId_ pCiDefaultLandingPageUrl_ pCiDefaultLandingPageName_ =
+campaignsInsert' pCiProfileId_ pCiCampaign_ pCiDefaultLandingPageURL_ pCiDefaultLandingPageName_ =
     CampaignsInsert'
     { _ciQuotaUser = Nothing
     , _ciPrettyPrint = True
-    , _ciUserIp = Nothing
+    , _ciUserIP = Nothing
     , _ciProfileId = pCiProfileId_
-    , _ciDefaultLandingPageUrl = pCiDefaultLandingPageUrl_
+    , _ciCampaign = pCiCampaign_
+    , _ciDefaultLandingPageURL = pCiDefaultLandingPageURL_
     , _ciKey = Nothing
     , _ciDefaultLandingPageName = pCiDefaultLandingPageName_
-    , _ciOauthToken = Nothing
+    , _ciOAuthToken = Nothing
     , _ciFields = Nothing
-    , _ciAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -134,24 +136,29 @@ ciPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ciUserIp :: Lens' CampaignsInsert' (Maybe Text)
-ciUserIp = lens _ciUserIp (\ s a -> s{_ciUserIp = a})
+ciUserIP :: Lens' CampaignsInsert' (Maybe Text)
+ciUserIP = lens _ciUserIP (\ s a -> s{_ciUserIP = a})
 
 -- | User profile ID associated with this request.
 ciProfileId :: Lens' CampaignsInsert' Int64
 ciProfileId
   = lens _ciProfileId (\ s a -> s{_ciProfileId = a})
 
+-- | Multipart request metadata.
+ciCampaign :: Lens' CampaignsInsert' Campaign
+ciCampaign
+  = lens _ciCampaign (\ s a -> s{_ciCampaign = a})
+
 -- | Default landing page URL for this new campaign.
-ciDefaultLandingPageUrl :: Lens' CampaignsInsert' Text
-ciDefaultLandingPageUrl
-  = lens _ciDefaultLandingPageUrl
-      (\ s a -> s{_ciDefaultLandingPageUrl = a})
+ciDefaultLandingPageURL :: Lens' CampaignsInsert' Text
+ciDefaultLandingPageURL
+  = lens _ciDefaultLandingPageURL
+      (\ s a -> s{_ciDefaultLandingPageURL = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ciKey :: Lens' CampaignsInsert' (Maybe Text)
+ciKey :: Lens' CampaignsInsert' (Maybe Key)
 ciKey = lens _ciKey (\ s a -> s{_ciKey = a})
 
 -- | Default landing page name for this new campaign. Must be less than 256
@@ -162,30 +169,31 @@ ciDefaultLandingPageName
       (\ s a -> s{_ciDefaultLandingPageName = a})
 
 -- | OAuth 2.0 token for the current user.
-ciOauthToken :: Lens' CampaignsInsert' (Maybe Text)
-ciOauthToken
-  = lens _ciOauthToken (\ s a -> s{_ciOauthToken = a})
+ciOAuthToken :: Lens' CampaignsInsert' (Maybe OAuthToken)
+ciOAuthToken
+  = lens _ciOAuthToken (\ s a -> s{_ciOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ciFields :: Lens' CampaignsInsert' (Maybe Text)
 ciFields = lens _ciFields (\ s a -> s{_ciFields = a})
 
--- | Data format for the response.
-ciAlt :: Lens' CampaignsInsert' Alt
-ciAlt = lens _ciAlt (\ s a -> s{_ciAlt = a})
+instance GoogleAuth CampaignsInsert' where
+        authKey = ciKey . _Just
+        authToken = ciOAuthToken . _Just
 
 instance GoogleRequest CampaignsInsert' where
         type Rs CampaignsInsert' = Campaign
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CampaignsInsert'{..}
-          = go _ciQuotaUser (Just _ciPrettyPrint) _ciUserIp
+          = go _ciQuotaUser (Just _ciPrettyPrint) _ciUserIP
               _ciProfileId
-              (Just _ciDefaultLandingPageUrl)
+              (Just _ciDefaultLandingPageURL)
               _ciKey
               (Just _ciDefaultLandingPageName)
-              _ciOauthToken
+              _ciOAuthToken
               _ciFields
-              (Just _ciAlt)
+              (Just AltJSON)
+              _ciCampaign
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CampaignsInsertResource)

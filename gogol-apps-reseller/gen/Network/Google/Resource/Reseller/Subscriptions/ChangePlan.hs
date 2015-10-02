@@ -32,13 +32,13 @@ module Network.Google.Resource.Reseller.Subscriptions.ChangePlan
     -- * Request Lenses
     , scpQuotaUser
     , scpPrettyPrint
-    , scpUserIp
+    , scpUserIP
     , scpCustomerId
+    , scpChangePlanRequest
     , scpKey
-    , scpOauthToken
+    , scpOAuthToken
     , scpSubscriptionId
     , scpFields
-    , scpAlt
     ) where
 
 import           Network.Google.AppsReseller.Types
@@ -55,24 +55,26 @@ type SubscriptionsChangePlanResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Post '[JSON] Subscription
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] ChangePlanRequest :>
+                               Post '[JSON] Subscription
 
 -- | Changes the plan of a subscription
 --
 -- /See:/ 'subscriptionsChangePlan'' smart constructor.
 data SubscriptionsChangePlan' = SubscriptionsChangePlan'
-    { _scpQuotaUser      :: !(Maybe Text)
-    , _scpPrettyPrint    :: !Bool
-    , _scpUserIp         :: !(Maybe Text)
-    , _scpCustomerId     :: !Text
-    , _scpKey            :: !(Maybe Text)
-    , _scpOauthToken     :: !(Maybe Text)
-    , _scpSubscriptionId :: !Text
-    , _scpFields         :: !(Maybe Text)
-    , _scpAlt            :: !Alt
+    { _scpQuotaUser         :: !(Maybe Text)
+    , _scpPrettyPrint       :: !Bool
+    , _scpUserIP            :: !(Maybe Text)
+    , _scpCustomerId        :: !Text
+    , _scpChangePlanRequest :: !ChangePlanRequest
+    , _scpKey               :: !(Maybe Key)
+    , _scpOAuthToken        :: !(Maybe OAuthToken)
+    , _scpSubscriptionId    :: !Text
+    , _scpFields            :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionsChangePlan'' with the minimum fields required to make a request.
@@ -83,34 +85,35 @@ data SubscriptionsChangePlan' = SubscriptionsChangePlan'
 --
 -- * 'scpPrettyPrint'
 --
--- * 'scpUserIp'
+-- * 'scpUserIP'
 --
 -- * 'scpCustomerId'
 --
+-- * 'scpChangePlanRequest'
+--
 -- * 'scpKey'
 --
--- * 'scpOauthToken'
+-- * 'scpOAuthToken'
 --
 -- * 'scpSubscriptionId'
 --
 -- * 'scpFields'
---
--- * 'scpAlt'
 subscriptionsChangePlan'
     :: Text -- ^ 'customerId'
+    -> ChangePlanRequest -- ^ 'ChangePlanRequest'
     -> Text -- ^ 'subscriptionId'
     -> SubscriptionsChangePlan'
-subscriptionsChangePlan' pScpCustomerId_ pScpSubscriptionId_ =
+subscriptionsChangePlan' pScpCustomerId_ pScpChangePlanRequest_ pScpSubscriptionId_ =
     SubscriptionsChangePlan'
     { _scpQuotaUser = Nothing
     , _scpPrettyPrint = True
-    , _scpUserIp = Nothing
+    , _scpUserIP = Nothing
     , _scpCustomerId = pScpCustomerId_
+    , _scpChangePlanRequest = pScpChangePlanRequest_
     , _scpKey = Nothing
-    , _scpOauthToken = Nothing
+    , _scpOAuthToken = Nothing
     , _scpSubscriptionId = pScpSubscriptionId_
     , _scpFields = Nothing
-    , _scpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -128,9 +131,9 @@ scpPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-scpUserIp :: Lens' SubscriptionsChangePlan' (Maybe Text)
-scpUserIp
-  = lens _scpUserIp (\ s a -> s{_scpUserIp = a})
+scpUserIP :: Lens' SubscriptionsChangePlan' (Maybe Text)
+scpUserIP
+  = lens _scpUserIP (\ s a -> s{_scpUserIP = a})
 
 -- | Id of the Customer
 scpCustomerId :: Lens' SubscriptionsChangePlan' Text
@@ -138,17 +141,23 @@ scpCustomerId
   = lens _scpCustomerId
       (\ s a -> s{_scpCustomerId = a})
 
+-- | Multipart request metadata.
+scpChangePlanRequest :: Lens' SubscriptionsChangePlan' ChangePlanRequest
+scpChangePlanRequest
+  = lens _scpChangePlanRequest
+      (\ s a -> s{_scpChangePlanRequest = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-scpKey :: Lens' SubscriptionsChangePlan' (Maybe Text)
+scpKey :: Lens' SubscriptionsChangePlan' (Maybe Key)
 scpKey = lens _scpKey (\ s a -> s{_scpKey = a})
 
 -- | OAuth 2.0 token for the current user.
-scpOauthToken :: Lens' SubscriptionsChangePlan' (Maybe Text)
-scpOauthToken
-  = lens _scpOauthToken
-      (\ s a -> s{_scpOauthToken = a})
+scpOAuthToken :: Lens' SubscriptionsChangePlan' (Maybe OAuthToken)
+scpOAuthToken
+  = lens _scpOAuthToken
+      (\ s a -> s{_scpOAuthToken = a})
 
 -- | Id of the subscription, which is unique for a customer
 scpSubscriptionId :: Lens' SubscriptionsChangePlan' Text
@@ -161,21 +170,22 @@ scpFields :: Lens' SubscriptionsChangePlan' (Maybe Text)
 scpFields
   = lens _scpFields (\ s a -> s{_scpFields = a})
 
--- | Data format for the response.
-scpAlt :: Lens' SubscriptionsChangePlan' Alt
-scpAlt = lens _scpAlt (\ s a -> s{_scpAlt = a})
+instance GoogleAuth SubscriptionsChangePlan' where
+        authKey = scpKey . _Just
+        authToken = scpOAuthToken . _Just
 
 instance GoogleRequest SubscriptionsChangePlan' where
         type Rs SubscriptionsChangePlan' = Subscription
         request = requestWithRoute defReq appsResellerURL
         requestWithRoute r u SubscriptionsChangePlan'{..}
-          = go _scpQuotaUser (Just _scpPrettyPrint) _scpUserIp
+          = go _scpQuotaUser (Just _scpPrettyPrint) _scpUserIP
               _scpCustomerId
               _scpKey
-              _scpOauthToken
+              _scpOAuthToken
               _scpSubscriptionId
               _scpFields
-              (Just _scpAlt)
+              (Just AltJSON)
+              _scpChangePlanRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy SubscriptionsChangePlanResource)

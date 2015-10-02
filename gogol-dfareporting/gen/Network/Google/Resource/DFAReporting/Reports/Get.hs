@@ -32,13 +32,12 @@ module Network.Google.Resource.DFAReporting.Reports.Get
     -- * Request Lenses
     , rgQuotaUser
     , rgPrettyPrint
-    , rgUserIp
+    , rgUserIP
     , rgReportId
     , rgProfileId
     , rgKey
-    , rgOauthToken
+    , rgOAuthToken
     , rgFields
-    , rgAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,10 +53,10 @@ type ReportsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] Report
+                         QueryParam "alt" AltJSON :> Get '[JSON] Report
 
 -- | Retrieves a report by its ID.
 --
@@ -65,13 +64,12 @@ type ReportsGetResource =
 data ReportsGet' = ReportsGet'
     { _rgQuotaUser   :: !(Maybe Text)
     , _rgPrettyPrint :: !Bool
-    , _rgUserIp      :: !(Maybe Text)
+    , _rgUserIP      :: !(Maybe Text)
     , _rgReportId    :: !Int64
     , _rgProfileId   :: !Int64
-    , _rgKey         :: !(Maybe Text)
-    , _rgOauthToken  :: !(Maybe Text)
+    , _rgKey         :: !(Maybe Key)
+    , _rgOAuthToken  :: !(Maybe OAuthToken)
     , _rgFields      :: !(Maybe Text)
-    , _rgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsGet'' with the minimum fields required to make a request.
@@ -82,7 +80,7 @@ data ReportsGet' = ReportsGet'
 --
 -- * 'rgPrettyPrint'
 --
--- * 'rgUserIp'
+-- * 'rgUserIP'
 --
 -- * 'rgReportId'
 --
@@ -90,11 +88,9 @@ data ReportsGet' = ReportsGet'
 --
 -- * 'rgKey'
 --
--- * 'rgOauthToken'
+-- * 'rgOAuthToken'
 --
 -- * 'rgFields'
---
--- * 'rgAlt'
 reportsGet'
     :: Int64 -- ^ 'reportId'
     -> Int64 -- ^ 'profileId'
@@ -103,13 +99,12 @@ reportsGet' pRgReportId_ pRgProfileId_ =
     ReportsGet'
     { _rgQuotaUser = Nothing
     , _rgPrettyPrint = True
-    , _rgUserIp = Nothing
+    , _rgUserIP = Nothing
     , _rgReportId = pRgReportId_
     , _rgProfileId = pRgProfileId_
     , _rgKey = Nothing
-    , _rgOauthToken = Nothing
+    , _rgOAuthToken = Nothing
     , _rgFields = Nothing
-    , _rgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,8 +122,8 @@ rgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rgUserIp :: Lens' ReportsGet' (Maybe Text)
-rgUserIp = lens _rgUserIp (\ s a -> s{_rgUserIp = a})
+rgUserIP :: Lens' ReportsGet' (Maybe Text)
+rgUserIP = lens _rgUserIP (\ s a -> s{_rgUserIP = a})
 
 -- | The ID of the report.
 rgReportId :: Lens' ReportsGet' Int64
@@ -143,33 +138,33 @@ rgProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rgKey :: Lens' ReportsGet' (Maybe Text)
+rgKey :: Lens' ReportsGet' (Maybe Key)
 rgKey = lens _rgKey (\ s a -> s{_rgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-rgOauthToken :: Lens' ReportsGet' (Maybe Text)
-rgOauthToken
-  = lens _rgOauthToken (\ s a -> s{_rgOauthToken = a})
+rgOAuthToken :: Lens' ReportsGet' (Maybe OAuthToken)
+rgOAuthToken
+  = lens _rgOAuthToken (\ s a -> s{_rgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 rgFields :: Lens' ReportsGet' (Maybe Text)
 rgFields = lens _rgFields (\ s a -> s{_rgFields = a})
 
--- | Data format for the response.
-rgAlt :: Lens' ReportsGet' Alt
-rgAlt = lens _rgAlt (\ s a -> s{_rgAlt = a})
+instance GoogleAuth ReportsGet' where
+        authKey = rgKey . _Just
+        authToken = rgOAuthToken . _Just
 
 instance GoogleRequest ReportsGet' where
         type Rs ReportsGet' = Report
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ReportsGet'{..}
-          = go _rgQuotaUser (Just _rgPrettyPrint) _rgUserIp
+          = go _rgQuotaUser (Just _rgPrettyPrint) _rgUserIP
               _rgReportId
               _rgProfileId
               _rgKey
-              _rgOauthToken
+              _rgOAuthToken
               _rgFields
-              (Just _rgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy ReportsGetResource)
                       r

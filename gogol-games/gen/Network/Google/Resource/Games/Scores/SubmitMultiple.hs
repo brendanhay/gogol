@@ -32,12 +32,12 @@ module Network.Google.Resource.Games.Scores.SubmitMultiple
     -- * Request Lenses
     , ssmQuotaUser
     , ssmPrettyPrint
-    , ssmUserIp
+    , ssmUserIP
     , ssmKey
     , ssmLanguage
-    , ssmOauthToken
+    , ssmOAuthToken
+    , ssmPlayerScoreSubmissionList
     , ssmFields
-    , ssmAlt
     ) where
 
 import           Network.Google.Games.Types
@@ -51,25 +51,26 @@ type ScoresSubmitMultipleResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
+               QueryParam "key" Key :>
                  QueryParam "language" Text :>
-                   QueryParam "oauth_token" Text :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :>
-                         Post '[JSON] PlayerScoreListResponse
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] PlayerScoreSubmissionList :>
+                           Post '[JSON] PlayerScoreListResponse
 
 -- | Submits multiple scores to leaderboards.
 --
 -- /See:/ 'scoresSubmitMultiple'' smart constructor.
 data ScoresSubmitMultiple' = ScoresSubmitMultiple'
-    { _ssmQuotaUser   :: !(Maybe Text)
-    , _ssmPrettyPrint :: !Bool
-    , _ssmUserIp      :: !(Maybe Text)
-    , _ssmKey         :: !(Maybe Text)
-    , _ssmLanguage    :: !(Maybe Text)
-    , _ssmOauthToken  :: !(Maybe Text)
-    , _ssmFields      :: !(Maybe Text)
-    , _ssmAlt         :: !Alt
+    { _ssmQuotaUser                 :: !(Maybe Text)
+    , _ssmPrettyPrint               :: !Bool
+    , _ssmUserIP                    :: !(Maybe Text)
+    , _ssmKey                       :: !(Maybe Key)
+    , _ssmLanguage                  :: !(Maybe Text)
+    , _ssmOAuthToken                :: !(Maybe OAuthToken)
+    , _ssmPlayerScoreSubmissionList :: !PlayerScoreSubmissionList
+    , _ssmFields                    :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ScoresSubmitMultiple'' with the minimum fields required to make a request.
@@ -80,29 +81,30 @@ data ScoresSubmitMultiple' = ScoresSubmitMultiple'
 --
 -- * 'ssmPrettyPrint'
 --
--- * 'ssmUserIp'
+-- * 'ssmUserIP'
 --
 -- * 'ssmKey'
 --
 -- * 'ssmLanguage'
 --
--- * 'ssmOauthToken'
+-- * 'ssmOAuthToken'
+--
+-- * 'ssmPlayerScoreSubmissionList'
 --
 -- * 'ssmFields'
---
--- * 'ssmAlt'
 scoresSubmitMultiple'
-    :: ScoresSubmitMultiple'
-scoresSubmitMultiple' =
+    :: PlayerScoreSubmissionList -- ^ 'PlayerScoreSubmissionList'
+    -> ScoresSubmitMultiple'
+scoresSubmitMultiple' pSsmPlayerScoreSubmissionList_ =
     ScoresSubmitMultiple'
     { _ssmQuotaUser = Nothing
     , _ssmPrettyPrint = True
-    , _ssmUserIp = Nothing
+    , _ssmUserIP = Nothing
     , _ssmKey = Nothing
     , _ssmLanguage = Nothing
-    , _ssmOauthToken = Nothing
+    , _ssmOAuthToken = Nothing
+    , _ssmPlayerScoreSubmissionList = pSsmPlayerScoreSubmissionList_
     , _ssmFields = Nothing
-    , _ssmAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,14 +122,14 @@ ssmPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ssmUserIp :: Lens' ScoresSubmitMultiple' (Maybe Text)
-ssmUserIp
-  = lens _ssmUserIp (\ s a -> s{_ssmUserIp = a})
+ssmUserIP :: Lens' ScoresSubmitMultiple' (Maybe Text)
+ssmUserIP
+  = lens _ssmUserIP (\ s a -> s{_ssmUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ssmKey :: Lens' ScoresSubmitMultiple' (Maybe Text)
+ssmKey :: Lens' ScoresSubmitMultiple' (Maybe Key)
 ssmKey = lens _ssmKey (\ s a -> s{_ssmKey = a})
 
 -- | The preferred language to use for strings returned by this method.
@@ -136,31 +138,38 @@ ssmLanguage
   = lens _ssmLanguage (\ s a -> s{_ssmLanguage = a})
 
 -- | OAuth 2.0 token for the current user.
-ssmOauthToken :: Lens' ScoresSubmitMultiple' (Maybe Text)
-ssmOauthToken
-  = lens _ssmOauthToken
-      (\ s a -> s{_ssmOauthToken = a})
+ssmOAuthToken :: Lens' ScoresSubmitMultiple' (Maybe OAuthToken)
+ssmOAuthToken
+  = lens _ssmOAuthToken
+      (\ s a -> s{_ssmOAuthToken = a})
+
+-- | Multipart request metadata.
+ssmPlayerScoreSubmissionList :: Lens' ScoresSubmitMultiple' PlayerScoreSubmissionList
+ssmPlayerScoreSubmissionList
+  = lens _ssmPlayerScoreSubmissionList
+      (\ s a -> s{_ssmPlayerScoreSubmissionList = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ssmFields :: Lens' ScoresSubmitMultiple' (Maybe Text)
 ssmFields
   = lens _ssmFields (\ s a -> s{_ssmFields = a})
 
--- | Data format for the response.
-ssmAlt :: Lens' ScoresSubmitMultiple' Alt
-ssmAlt = lens _ssmAlt (\ s a -> s{_ssmAlt = a})
+instance GoogleAuth ScoresSubmitMultiple' where
+        authKey = ssmKey . _Just
+        authToken = ssmOAuthToken . _Just
 
 instance GoogleRequest ScoresSubmitMultiple' where
         type Rs ScoresSubmitMultiple' =
              PlayerScoreListResponse
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u ScoresSubmitMultiple'{..}
-          = go _ssmQuotaUser (Just _ssmPrettyPrint) _ssmUserIp
+          = go _ssmQuotaUser (Just _ssmPrettyPrint) _ssmUserIP
               _ssmKey
               _ssmLanguage
-              _ssmOauthToken
+              _ssmOAuthToken
               _ssmFields
-              (Just _ssmAlt)
+              (Just AltJSON)
+              _ssmPlayerScoreSubmissionList
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ScoresSubmitMultipleResource)

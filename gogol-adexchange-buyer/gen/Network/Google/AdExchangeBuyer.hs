@@ -55,23 +55,23 @@ module Network.Google.AdExchangeBuyer
     -- ** AdexchangebuyerBudgetUpdate
     , module Network.Google.Resource.AdExchangeBuyer.Budget.Update
 
-    -- ** AdexchangebuyerClientaccessDelete
-    , module Network.Google.Resource.AdExchangeBuyer.Clientaccess.Delete
+    -- ** AdexchangebuyerClientAccessDelete
+    , module Network.Google.Resource.AdExchangeBuyer.ClientAccess.Delete
 
-    -- ** AdexchangebuyerClientaccessGet
-    , module Network.Google.Resource.AdExchangeBuyer.Clientaccess.Get
+    -- ** AdexchangebuyerClientAccessGet
+    , module Network.Google.Resource.AdExchangeBuyer.ClientAccess.Get
 
-    -- ** AdexchangebuyerClientaccessInsert
-    , module Network.Google.Resource.AdExchangeBuyer.Clientaccess.Insert
+    -- ** AdexchangebuyerClientAccessInsert
+    , module Network.Google.Resource.AdExchangeBuyer.ClientAccess.Insert
 
-    -- ** AdexchangebuyerClientaccessList
-    , module Network.Google.Resource.AdExchangeBuyer.Clientaccess.List
+    -- ** AdexchangebuyerClientAccessList
+    , module Network.Google.Resource.AdExchangeBuyer.ClientAccess.List
 
-    -- ** AdexchangebuyerClientaccessPatch
-    , module Network.Google.Resource.AdExchangeBuyer.Clientaccess.Patch
+    -- ** AdexchangebuyerClientAccessPatch
+    , module Network.Google.Resource.AdExchangeBuyer.ClientAccess.Patch
 
-    -- ** AdexchangebuyerClientaccessUpdate
-    , module Network.Google.Resource.AdExchangeBuyer.Clientaccess.Update
+    -- ** AdexchangebuyerClientAccessUpdate
+    , module Network.Google.Resource.AdExchangeBuyer.ClientAccess.Update
 
     -- ** AdexchangebuyerCreativesGet
     , module Network.Google.Resource.AdExchangeBuyer.Creatives.Get
@@ -85,47 +85,47 @@ module Network.Google.AdExchangeBuyer
     -- ** AdexchangebuyerDealsGet
     , module Network.Google.Resource.AdExchangeBuyer.Deals.Get
 
-    -- ** AdexchangebuyerMarketplacedealsDelete
-    , module Network.Google.Resource.AdExchangeBuyer.Marketplacedeals.Delete
+    -- ** AdexchangebuyerMarketplaceDealsDelete
+    , module Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.Delete
 
-    -- ** AdexchangebuyerMarketplacedealsInsert
-    , module Network.Google.Resource.AdExchangeBuyer.Marketplacedeals.Insert
+    -- ** AdexchangebuyerMarketplaceDealsInsert
+    , module Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.Insert
 
-    -- ** AdexchangebuyerMarketplacedealsList
-    , module Network.Google.Resource.AdExchangeBuyer.Marketplacedeals.List
+    -- ** AdexchangebuyerMarketplaceDealsList
+    , module Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.List
 
-    -- ** AdexchangebuyerMarketplacedealsUpdate
-    , module Network.Google.Resource.AdExchangeBuyer.Marketplacedeals.Update
+    -- ** AdexchangebuyerMarketplaceDealsUpdate
+    , module Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.Update
 
-    -- ** AdexchangebuyerMarketplacenotesInsert
-    , module Network.Google.Resource.AdExchangeBuyer.Marketplacenotes.Insert
+    -- ** AdexchangebuyerMarketplaceNotesInsert
+    , module Network.Google.Resource.AdExchangeBuyer.MarketplaceNotes.Insert
 
-    -- ** AdexchangebuyerMarketplacenotesList
-    , module Network.Google.Resource.AdExchangeBuyer.Marketplacenotes.List
+    -- ** AdexchangebuyerMarketplaceNotesList
+    , module Network.Google.Resource.AdExchangeBuyer.MarketplaceNotes.List
 
-    -- ** AdexchangebuyerMarketplaceoffersGet
-    , module Network.Google.Resource.AdExchangeBuyer.Marketplaceoffers.Get
+    -- ** AdexchangebuyerMarketplaceOffersGet
+    , module Network.Google.Resource.AdExchangeBuyer.MarketplaceOffers.Get
 
-    -- ** AdexchangebuyerMarketplaceoffersSearch
-    , module Network.Google.Resource.AdExchangeBuyer.Marketplaceoffers.Search
+    -- ** AdexchangebuyerMarketplaceOffersSearch
+    , module Network.Google.Resource.AdExchangeBuyer.MarketplaceOffers.Search
 
-    -- ** AdexchangebuyerMarketplaceordersGet
-    , module Network.Google.Resource.AdExchangeBuyer.Marketplaceorders.Get
+    -- ** AdexchangebuyerMarketplaceOrdersGet
+    , module Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Get
 
-    -- ** AdexchangebuyerMarketplaceordersInsert
-    , module Network.Google.Resource.AdExchangeBuyer.Marketplaceorders.Insert
+    -- ** AdexchangebuyerMarketplaceOrdersInsert
+    , module Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Insert
 
-    -- ** AdexchangebuyerMarketplaceordersPatch
-    , module Network.Google.Resource.AdExchangeBuyer.Marketplaceorders.Patch
+    -- ** AdexchangebuyerMarketplaceOrdersPatch
+    , module Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Patch
 
-    -- ** AdexchangebuyerMarketplaceordersSearch
-    , module Network.Google.Resource.AdExchangeBuyer.Marketplaceorders.Search
+    -- ** AdexchangebuyerMarketplaceOrdersSearch
+    , module Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Search
 
-    -- ** AdexchangebuyerMarketplaceordersUpdate
-    , module Network.Google.Resource.AdExchangeBuyer.Marketplaceorders.Update
+    -- ** AdexchangebuyerMarketplaceOrdersUpdate
+    , module Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Update
 
-    -- ** AdexchangebuyerNegotiationroundsInsert
-    , module Network.Google.Resource.AdExchangeBuyer.Negotiationrounds.Insert
+    -- ** AdexchangebuyerNegotiationRoundsInsert
+    , module Network.Google.Resource.AdExchangeBuyer.NegotiationRounds.Insert
 
     -- ** AdexchangebuyerNegotiationsGet
     , module Network.Google.Resource.AdExchangeBuyer.Negotiations.Get
@@ -197,10 +197,10 @@ module Network.Google.AdExchangeBuyer
     , creativeNATiveAd
     , cnataImage
     , cnataAppIcon
-    , cnataClickTrackingUrl
+    , cnataClickTrackingURL
     , cnataBody
     , cnataHeadline
-    , cnataImpressionTrackingUrl
+    , cnataImpressionTrackingURL
     , cnataCallToAction
     , cnataStore
     , cnataPrice
@@ -220,7 +220,7 @@ module Network.Google.AdExchangeBuyer
     , tdFinalizeAutomatically
     , tdBuyerBillingType
     , tdTargetingAllAdSlots
-    , tdUrls
+    , tdURLs
     , tdEndDate
     , tdCpm
     , tdEstimatedSpend
@@ -316,7 +316,7 @@ module Network.Google.AdExchangeBuyer
     -- ** PrivateData
     , PrivateData
     , privateData
-    , pdReferencePayload
+    , pdReferencePayLoad
     , pdReferenceId
 
     -- ** AdSize
@@ -384,7 +384,7 @@ module Network.Google.AdExchangeBuyer
     , Creative
     , creative
     , cAttribute
-    , cNativeAd
+    , cNATiveAd
     , cHeight
     , cBuyerCreativeId
     , cAdvertiserName
@@ -397,20 +397,20 @@ module Network.Google.AdExchangeBuyer
     , cRestrictedCategories
     , cDealsStatus
     , cWidth
-    , cClickThroughUrl
+    , cClickThroughURL
     , cVendorType
     , cAccountId
-    , cImpressionTrackingUrl
+    , cImpressionTrackingURL
     , cFilteringReasons
     , cVersion
     , cSensitiveCategories
     , cVideoURL
-    , cApiUploadTimestamp
+    , cAPIUploadTimestamp
     , cServingRestrictions
     , cOpenAuctionStatus
 
-    -- ** AdexchangebuyerMarketplaceordersUpdateUpdateAction
-    , AdexchangebuyerMarketplaceordersUpdateUpdateAction (..)
+    -- ** AdexchangebuyerMarketplaceOrdersUpdateUpdateAction
+    , AdexchangebuyerMarketplaceOrdersUpdateUpdateAction (..)
 
     -- ** AddOrderDealsResponse
     , AddOrderDealsResponse
@@ -490,7 +490,7 @@ module Network.Google.AdExchangeBuyer
     , account
     , aMaximumTotalQps
     , aKind
-    , aCookieMatchingUrl
+    , aCookieMatchingURL
     , aMaximumActiveCreatives
     , aCookieMatchingNid
     , aNumberActiveCreatives
@@ -520,7 +520,7 @@ module Network.Google.AdExchangeBuyer
     , CreativeNATiveAdLogo
     , creativeNATiveAdLogo
     , cnatalHeight
-    , cnatalUrl
+    , cnatalURL
     , cnatalWidth
 
     -- ** GetOrderDealsResponse
@@ -580,8 +580,8 @@ module Network.Google.AdExchangeBuyer
     , prlKind
     , prlPerformanceReport
 
-    -- ** AdexchangebuyerMarketplaceordersPatchUpdateAction
-    , AdexchangebuyerMarketplaceordersPatchUpdateAction (..)
+    -- ** AdexchangebuyerMarketplaceOrdersPatchUpdateAction
+    , AdexchangebuyerMarketplaceOrdersPatchUpdateAction (..)
 
     -- ** NegotiationDto
     , NegotiationDto
@@ -721,7 +721,7 @@ module Network.Google.AdExchangeBuyer
     , CreativeNATiveAdAppIcon
     , creativeNATiveAdAppIcon
     , cnataaiHeight
-    , cnataaiUrl
+    , cnataaiURL
     , cnataaiWidth
 
     -- ** EditAllOrderDealsRequest
@@ -748,7 +748,7 @@ module Network.Google.AdExchangeBuyer
     , wpdName
     , wpdPropertyCode
     , wpdId
-    , wpdSiteUrls
+    , wpdSiteURLs
     , wpdAllowInterestTargetedAds
 
     -- ** TargetingValueDayPartTargeting
@@ -766,7 +766,7 @@ module Network.Google.AdExchangeBuyer
     , CreativeNATiveAdImage
     , creativeNATiveAdImage
     , cnataiHeight
-    , cnataiUrl
+    , cnataiURL
     , cnataiWidth
 
     -- ** ListClientAccessCapabilitiesRequest
@@ -789,7 +789,7 @@ module Network.Google.AdExchangeBuyer
     , istPositiveLocations
     , istNegativeAdSizes
     , istPositiveOperatingSystems
-    , istPositiveSiteUrls
+    , istPositiveSiteURLs
     , istNegativeInventorySlots
     , istNegativeVideoAdPositionSegments
     , istPositiveAdTypeSegments
@@ -807,7 +807,7 @@ module Network.Google.AdExchangeBuyer
     , istNegativeDeviceCategories
     , istNegativeOperatingSystems
     , istPositiveAdSizes
-    , istNegativeSiteUrls
+    , istNegativeSiteURLs
     , istNegativeAdTypeSegments
     , istPositiveVideoAdPositionSegments
     , istPositiveInventorySlots
@@ -824,7 +824,7 @@ module Network.Google.AdExchangeBuyer
     -- ** AccountBidderLocation
     , AccountBidderLocation
     , accountBidderLocation
-    , ablUrl
+    , ablURL
     , ablMaximumQps
     , ablRegion
 
@@ -849,25 +849,25 @@ module Network.Google.AdExchangeBuyer
     -- ** MarketplaceDeal
     , MarketplaceDeal
     , marketplaceDeal
-    , mddExternalDealId
-    , mddBuyerPrivateData
-    , mddWebPropertyCode
-    , mddCreationTimeMs
-    , mddTerms
-    , mddOfferRevisionNumber
-    , mddLastUpdateTimeMs
-    , mddKind
-    , mddDeliveryControl
-    , mddFlightStartTimeMs
-    , mddSharedTargetings
-    , mddDealId
-    , mddInventoryDescription
-    , mddSyndicationProduct
-    , mddFlightEndTimeMs
-    , mddName
-    , mddSellerContacts
-    , mddOfferId
-    , mddOrderId
+    , mdExternalDealId
+    , mdBuyerPrivateData
+    , mdWebPropertyCode
+    , mdCreationTimeMs
+    , mdTerms
+    , mdOfferRevisionNumber
+    , mdLastUpdateTimeMs
+    , mdKind
+    , mdDeliveryControl
+    , mdFlightStartTimeMs
+    , mdSharedTargetings
+    , mdDealId
+    , mdInventoryDescription
+    , mdSyndicationProduct
+    , mdFlightEndTimeMs
+    , mdName
+    , mdSellerContacts
+    , mdOfferId
+    , mdOrderId
 
     -- ** PretargetingConfigPlacements
     , PretargetingConfigPlacements
@@ -882,7 +882,7 @@ module Network.Google.AdExchangeBuyer
     , nrdKind
     , nrdOriginatorRole
     , nrdAction
-    , nrdDbmPartnerId
+    , nrdDBmPartnerId
     , nrdNotes
     , nrdNegotiationId
     , nrdEditHistory
@@ -953,26 +953,26 @@ module Network.Google.AdExchangeBuyer
     -- ** MarketplaceOrder
     , MarketplaceOrder
     , marketplaceOrder
-    , mooBuyerPrivateData
-    , mooIsSetupComplete
-    , mooBuyerContacts
-    , mooKind
-    , mooOriginatorRole
-    , mooRevisionNumber
-    , mooBilledBuyer
-    , mooIsRenegotiating
-    , mooHasSellerSignedOff
-    , mooSeller
-    , mooOrderState
-    , mooName
-    , mooSellerContacts
-    , mooLastUpdaterRole
-    , mooLabels
-    , mooRevisionTimeMs
-    , mooOrderId
-    , mooLastUpdaterOrCommentorRole
-    , mooHasBuyerSignedOff
-    , mooBuyer
+    , marBuyerPrivateData
+    , marIsSetupComplete
+    , marBuyerContacts
+    , marKind
+    , marOriginatorRole
+    , marRevisionNumber
+    , marBilledBuyer
+    , marIsRenegotiating
+    , marHasSellerSignedOff
+    , marSeller
+    , marOrderState
+    , marName
+    , marSellerContacts
+    , marLastUpdaterRole
+    , marLabels
+    , marRevisionTimeMs
+    , marOrderId
+    , marLastUpdaterOrCommentorRole
+    , marHasBuyerSignedOff
+    , marBuyer
 
     -- ** AddOrderDealsRequest
     , AddOrderDealsRequest
@@ -988,9 +988,6 @@ module Network.Google.AdExchangeBuyer
     , dtNonGuaranteedAuctionTerms
     , dtGuaranteedFixedPriceTerms
     , dtDescription
-
-    -- ** Alt
-    , Alt (..)
 
     -- ** EditHistoryDto
     , EditHistoryDto
@@ -1012,30 +1009,30 @@ import           Network.Google.Resource.AdExchangeBuyer.BillingInfo.List
 import           Network.Google.Resource.AdExchangeBuyer.Budget.Get
 import           Network.Google.Resource.AdExchangeBuyer.Budget.Patch
 import           Network.Google.Resource.AdExchangeBuyer.Budget.Update
-import           Network.Google.Resource.AdExchangeBuyer.Clientaccess.Delete
-import           Network.Google.Resource.AdExchangeBuyer.Clientaccess.Get
-import           Network.Google.Resource.AdExchangeBuyer.Clientaccess.Insert
-import           Network.Google.Resource.AdExchangeBuyer.Clientaccess.List
-import           Network.Google.Resource.AdExchangeBuyer.Clientaccess.Patch
-import           Network.Google.Resource.AdExchangeBuyer.Clientaccess.Update
+import           Network.Google.Resource.AdExchangeBuyer.ClientAccess.Delete
+import           Network.Google.Resource.AdExchangeBuyer.ClientAccess.Get
+import           Network.Google.Resource.AdExchangeBuyer.ClientAccess.Insert
+import           Network.Google.Resource.AdExchangeBuyer.ClientAccess.List
+import           Network.Google.Resource.AdExchangeBuyer.ClientAccess.Patch
+import           Network.Google.Resource.AdExchangeBuyer.ClientAccess.Update
 import           Network.Google.Resource.AdExchangeBuyer.Creatives.Get
 import           Network.Google.Resource.AdExchangeBuyer.Creatives.Insert
 import           Network.Google.Resource.AdExchangeBuyer.Creatives.List
 import           Network.Google.Resource.AdExchangeBuyer.Deals.Get
-import           Network.Google.Resource.AdExchangeBuyer.Marketplacedeals.Delete
-import           Network.Google.Resource.AdExchangeBuyer.Marketplacedeals.Insert
-import           Network.Google.Resource.AdExchangeBuyer.Marketplacedeals.List
-import           Network.Google.Resource.AdExchangeBuyer.Marketplacedeals.Update
-import           Network.Google.Resource.AdExchangeBuyer.Marketplacenotes.Insert
-import           Network.Google.Resource.AdExchangeBuyer.Marketplacenotes.List
-import           Network.Google.Resource.AdExchangeBuyer.Marketplaceoffers.Get
-import           Network.Google.Resource.AdExchangeBuyer.Marketplaceoffers.Search
-import           Network.Google.Resource.AdExchangeBuyer.Marketplaceorders.Get
-import           Network.Google.Resource.AdExchangeBuyer.Marketplaceorders.Insert
-import           Network.Google.Resource.AdExchangeBuyer.Marketplaceorders.Patch
-import           Network.Google.Resource.AdExchangeBuyer.Marketplaceorders.Search
-import           Network.Google.Resource.AdExchangeBuyer.Marketplaceorders.Update
-import           Network.Google.Resource.AdExchangeBuyer.Negotiationrounds.Insert
+import           Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.Delete
+import           Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.Insert
+import           Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.List
+import           Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.Update
+import           Network.Google.Resource.AdExchangeBuyer.MarketplaceNotes.Insert
+import           Network.Google.Resource.AdExchangeBuyer.MarketplaceNotes.List
+import           Network.Google.Resource.AdExchangeBuyer.MarketplaceOffers.Get
+import           Network.Google.Resource.AdExchangeBuyer.MarketplaceOffers.Search
+import           Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Get
+import           Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Insert
+import           Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Patch
+import           Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Search
+import           Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Update
+import           Network.Google.Resource.AdExchangeBuyer.NegotiationRounds.Insert
 import           Network.Google.Resource.AdExchangeBuyer.Negotiations.Get
 import           Network.Google.Resource.AdExchangeBuyer.Negotiations.Insert
 import           Network.Google.Resource.AdExchangeBuyer.Negotiations.List
@@ -1055,10 +1052,10 @@ TODO
 -}
 
 type AdExchangeBuyerAPI =
-     MarketplacenotesInsertResource :<|>
-       MarketplacenotesListResource
+     MarketplaceNotesInsertResource :<|>
+       MarketplaceNotesListResource
        :<|> DealsGetResource
-       :<|> NegotiationroundsInsertResource
+       :<|> NegotiationRoundsInsertResource
        :<|> AccountsListResource
        :<|> AccountsPatchResource
        :<|> AccountsGetResource
@@ -1070,31 +1067,31 @@ type AdExchangeBuyerAPI =
        :<|> CreativesListResource
        :<|> CreativesGetResource
        :<|> PerformanceReportListResource
-       :<|> MarketplaceoffersGetResource
-       :<|> MarketplaceoffersSearchResource
+       :<|> MarketplaceOffersGetResource
+       :<|> MarketplaceOffersSearchResource
        :<|> PretargetingConfigInsertResource
        :<|> PretargetingConfigListResource
        :<|> PretargetingConfigPatchResource
        :<|> PretargetingConfigGetResource
        :<|> PretargetingConfigDeleteResource
        :<|> PretargetingConfigUpdateResource
-       :<|> MarketplaceordersInsertResource
-       :<|> MarketplaceordersPatchResource
-       :<|> MarketplaceordersGetResource
-       :<|> MarketplaceordersSearchResource
-       :<|> MarketplaceordersUpdateResource
-       :<|> ClientaccessInsertResource
-       :<|> ClientaccessListResource
-       :<|> ClientaccessPatchResource
-       :<|> ClientaccessGetResource
-       :<|> ClientaccessDeleteResource
-       :<|> ClientaccessUpdateResource
+       :<|> MarketplaceOrdersInsertResource
+       :<|> MarketplaceOrdersPatchResource
+       :<|> MarketplaceOrdersGetResource
+       :<|> MarketplaceOrdersSearchResource
+       :<|> MarketplaceOrdersUpdateResource
+       :<|> ClientAccessInsertResource
+       :<|> ClientAccessListResource
+       :<|> ClientAccessPatchResource
+       :<|> ClientAccessGetResource
+       :<|> ClientAccessDeleteResource
+       :<|> ClientAccessUpdateResource
        :<|> BillingInfoListResource
        :<|> BillingInfoGetResource
-       :<|> MarketplacedealsInsertResource
-       :<|> MarketplacedealsListResource
-       :<|> MarketplacedealsDeleteResource
-       :<|> MarketplacedealsUpdateResource
+       :<|> MarketplaceDealsInsertResource
+       :<|> MarketplaceDealsListResource
+       :<|> MarketplaceDealsDeleteResource
+       :<|> MarketplaceDealsUpdateResource
        :<|> NegotiationsInsertResource
        :<|> NegotiationsListResource
        :<|> NegotiationsGetResource

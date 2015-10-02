@@ -33,13 +33,13 @@ module Network.Google.Resource.Games.Rooms.Leave
     -- * Request Lenses
     , rlQuotaUser
     , rlPrettyPrint
-    , rlUserIp
+    , rlUserIP
     , rlKey
     , rlRoomId
     , rlLanguage
-    , rlOauthToken
+    , rlRoomLeaveRequest
+    , rlOAuthToken
     , rlFields
-    , rlAlt
     ) where
 
 import           Network.Google.Games.Types
@@ -54,26 +54,27 @@ type RoomsLeaveResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "language" Text :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Post '[JSON] Room
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] RoomLeaveRequest :> Post '[JSON] Room
 
 -- | Leave a room. For internal use by the Games SDK only. Calling this
 -- method directly is unsupported.
 --
 -- /See:/ 'roomsLeave'' smart constructor.
 data RoomsLeave' = RoomsLeave'
-    { _rlQuotaUser   :: !(Maybe Text)
-    , _rlPrettyPrint :: !Bool
-    , _rlUserIp      :: !(Maybe Text)
-    , _rlKey         :: !(Maybe Text)
-    , _rlRoomId      :: !Text
-    , _rlLanguage    :: !(Maybe Text)
-    , _rlOauthToken  :: !(Maybe Text)
-    , _rlFields      :: !(Maybe Text)
-    , _rlAlt         :: !Alt
+    { _rlQuotaUser        :: !(Maybe Text)
+    , _rlPrettyPrint      :: !Bool
+    , _rlUserIP           :: !(Maybe Text)
+    , _rlKey              :: !(Maybe Key)
+    , _rlRoomId           :: !Text
+    , _rlLanguage         :: !(Maybe Text)
+    , _rlRoomLeaveRequest :: !RoomLeaveRequest
+    , _rlOAuthToken       :: !(Maybe OAuthToken)
+    , _rlFields           :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomsLeave'' with the minimum fields required to make a request.
@@ -84,7 +85,7 @@ data RoomsLeave' = RoomsLeave'
 --
 -- * 'rlPrettyPrint'
 --
--- * 'rlUserIp'
+-- * 'rlUserIP'
 --
 -- * 'rlKey'
 --
@@ -92,25 +93,26 @@ data RoomsLeave' = RoomsLeave'
 --
 -- * 'rlLanguage'
 --
--- * 'rlOauthToken'
+-- * 'rlRoomLeaveRequest'
+--
+-- * 'rlOAuthToken'
 --
 -- * 'rlFields'
---
--- * 'rlAlt'
 roomsLeave'
     :: Text -- ^ 'roomId'
+    -> RoomLeaveRequest -- ^ 'RoomLeaveRequest'
     -> RoomsLeave'
-roomsLeave' pRlRoomId_ =
+roomsLeave' pRlRoomId_ pRlRoomLeaveRequest_ =
     RoomsLeave'
     { _rlQuotaUser = Nothing
     , _rlPrettyPrint = True
-    , _rlUserIp = Nothing
+    , _rlUserIP = Nothing
     , _rlKey = Nothing
     , _rlRoomId = pRlRoomId_
     , _rlLanguage = Nothing
-    , _rlOauthToken = Nothing
+    , _rlRoomLeaveRequest = pRlRoomLeaveRequest_
+    , _rlOAuthToken = Nothing
     , _rlFields = Nothing
-    , _rlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -128,13 +130,13 @@ rlPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rlUserIp :: Lens' RoomsLeave' (Maybe Text)
-rlUserIp = lens _rlUserIp (\ s a -> s{_rlUserIp = a})
+rlUserIP :: Lens' RoomsLeave' (Maybe Text)
+rlUserIP = lens _rlUserIP (\ s a -> s{_rlUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rlKey :: Lens' RoomsLeave' (Maybe Text)
+rlKey :: Lens' RoomsLeave' (Maybe Key)
 rlKey = lens _rlKey (\ s a -> s{_rlKey = a})
 
 -- | The ID of the room.
@@ -146,30 +148,37 @@ rlLanguage :: Lens' RoomsLeave' (Maybe Text)
 rlLanguage
   = lens _rlLanguage (\ s a -> s{_rlLanguage = a})
 
+-- | Multipart request metadata.
+rlRoomLeaveRequest :: Lens' RoomsLeave' RoomLeaveRequest
+rlRoomLeaveRequest
+  = lens _rlRoomLeaveRequest
+      (\ s a -> s{_rlRoomLeaveRequest = a})
+
 -- | OAuth 2.0 token for the current user.
-rlOauthToken :: Lens' RoomsLeave' (Maybe Text)
-rlOauthToken
-  = lens _rlOauthToken (\ s a -> s{_rlOauthToken = a})
+rlOAuthToken :: Lens' RoomsLeave' (Maybe OAuthToken)
+rlOAuthToken
+  = lens _rlOAuthToken (\ s a -> s{_rlOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 rlFields :: Lens' RoomsLeave' (Maybe Text)
 rlFields = lens _rlFields (\ s a -> s{_rlFields = a})
 
--- | Data format for the response.
-rlAlt :: Lens' RoomsLeave' Alt
-rlAlt = lens _rlAlt (\ s a -> s{_rlAlt = a})
+instance GoogleAuth RoomsLeave' where
+        authKey = rlKey . _Just
+        authToken = rlOAuthToken . _Just
 
 instance GoogleRequest RoomsLeave' where
         type Rs RoomsLeave' = Room
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u RoomsLeave'{..}
-          = go _rlQuotaUser (Just _rlPrettyPrint) _rlUserIp
+          = go _rlQuotaUser (Just _rlPrettyPrint) _rlUserIP
               _rlKey
               _rlRoomId
               _rlLanguage
-              _rlOauthToken
+              _rlOAuthToken
               _rlFields
-              (Just _rlAlt)
+              (Just AltJSON)
+              _rlRoomLeaveRequest
           where go
                   = clientWithRoute (Proxy :: Proxy RoomsLeaveResource)
                       r

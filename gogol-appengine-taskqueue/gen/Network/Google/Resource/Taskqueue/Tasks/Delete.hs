@@ -34,12 +34,11 @@ module Network.Google.Resource.Taskqueue.Tasks.Delete
     , tdQuotaUser
     , tdPrettyPrint
     , tdProject
-    , tdUserIp
+    , tdUserIP
     , tdKey
     , tdTask
-    , tdOauthToken
+    , tdOAuthToken
     , tdFields
-    , tdAlt
     ) where
 
 import           Network.Google.AppEngineTaskQueue.Types
@@ -56,10 +55,10 @@ type TasksDeleteResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Delete '[JSON] ()
+                           QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete a task from a TaskQueue.
 --
@@ -69,12 +68,11 @@ data TasksDelete' = TasksDelete'
     , _tdQuotaUser   :: !(Maybe Text)
     , _tdPrettyPrint :: !Bool
     , _tdProject     :: !Text
-    , _tdUserIp      :: !(Maybe Text)
-    , _tdKey         :: !(Maybe Text)
+    , _tdUserIP      :: !(Maybe Text)
+    , _tdKey         :: !(Maybe Key)
     , _tdTask        :: !Text
-    , _tdOauthToken  :: !(Maybe Text)
+    , _tdOAuthToken  :: !(Maybe OAuthToken)
     , _tdFields      :: !(Maybe Text)
-    , _tdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TasksDelete'' with the minimum fields required to make a request.
@@ -89,17 +87,15 @@ data TasksDelete' = TasksDelete'
 --
 -- * 'tdProject'
 --
--- * 'tdUserIp'
+-- * 'tdUserIP'
 --
 -- * 'tdKey'
 --
 -- * 'tdTask'
 --
--- * 'tdOauthToken'
+-- * 'tdOAuthToken'
 --
 -- * 'tdFields'
---
--- * 'tdAlt'
 tasksDelete'
     :: Text -- ^ 'taskqueue'
     -> Text -- ^ 'project'
@@ -111,12 +107,11 @@ tasksDelete' pTdTaskqueue_ pTdProject_ pTdTask_ =
     , _tdQuotaUser = Nothing
     , _tdPrettyPrint = True
     , _tdProject = pTdProject_
-    , _tdUserIp = Nothing
+    , _tdUserIP = Nothing
     , _tdKey = Nothing
     , _tdTask = pTdTask_
-    , _tdOauthToken = Nothing
+    , _tdOAuthToken = Nothing
     , _tdFields = Nothing
-    , _tdAlt = JSON
     }
 
 -- | The taskqueue to delete a task from.
@@ -144,13 +139,13 @@ tdProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tdUserIp :: Lens' TasksDelete' (Maybe Text)
-tdUserIp = lens _tdUserIp (\ s a -> s{_tdUserIp = a})
+tdUserIP :: Lens' TasksDelete' (Maybe Text)
+tdUserIP = lens _tdUserIP (\ s a -> s{_tdUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tdKey :: Lens' TasksDelete' (Maybe Text)
+tdKey :: Lens' TasksDelete' (Maybe Key)
 tdKey = lens _tdKey (\ s a -> s{_tdKey = a})
 
 -- | The id of the task to delete.
@@ -158,17 +153,17 @@ tdTask :: Lens' TasksDelete' Text
 tdTask = lens _tdTask (\ s a -> s{_tdTask = a})
 
 -- | OAuth 2.0 token for the current user.
-tdOauthToken :: Lens' TasksDelete' (Maybe Text)
-tdOauthToken
-  = lens _tdOauthToken (\ s a -> s{_tdOauthToken = a})
+tdOAuthToken :: Lens' TasksDelete' (Maybe OAuthToken)
+tdOAuthToken
+  = lens _tdOAuthToken (\ s a -> s{_tdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 tdFields :: Lens' TasksDelete' (Maybe Text)
 tdFields = lens _tdFields (\ s a -> s{_tdFields = a})
 
--- | Data format for the response.
-tdAlt :: Lens' TasksDelete' Alt
-tdAlt = lens _tdAlt (\ s a -> s{_tdAlt = a})
+instance GoogleAuth TasksDelete' where
+        authKey = tdKey . _Just
+        authToken = tdOAuthToken . _Just
 
 instance GoogleRequest TasksDelete' where
         type Rs TasksDelete' = ()
@@ -177,12 +172,12 @@ instance GoogleRequest TasksDelete' where
         requestWithRoute r u TasksDelete'{..}
           = go _tdTaskqueue _tdQuotaUser (Just _tdPrettyPrint)
               _tdProject
-              _tdUserIp
+              _tdUserIP
               _tdKey
               _tdTask
-              _tdOauthToken
+              _tdOAuthToken
               _tdFields
-              (Just _tdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TasksDeleteResource)

@@ -32,14 +32,13 @@ module Network.Google.Resource.DFAReporting.OrderDocuments.Get
     -- * Request Lenses
     , odgQuotaUser
     , odgPrettyPrint
-    , odgUserIp
+    , odgUserIP
     , odgProfileId
     , odgKey
     , odgId
     , odgProjectId
-    , odgOauthToken
+    , odgOAuthToken
     , odgFields
-    , odgAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -57,10 +56,11 @@ type OrderDocumentsGetResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Get '[JSON] OrderDocument
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] OrderDocument
 
 -- | Gets one order document by ID.
 --
@@ -68,14 +68,13 @@ type OrderDocumentsGetResource =
 data OrderDocumentsGet' = OrderDocumentsGet'
     { _odgQuotaUser   :: !(Maybe Text)
     , _odgPrettyPrint :: !Bool
-    , _odgUserIp      :: !(Maybe Text)
+    , _odgUserIP      :: !(Maybe Text)
     , _odgProfileId   :: !Int64
-    , _odgKey         :: !(Maybe Text)
+    , _odgKey         :: !(Maybe Key)
     , _odgId          :: !Int64
     , _odgProjectId   :: !Int64
-    , _odgOauthToken  :: !(Maybe Text)
+    , _odgOAuthToken  :: !(Maybe OAuthToken)
     , _odgFields      :: !(Maybe Text)
-    , _odgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrderDocumentsGet'' with the minimum fields required to make a request.
@@ -86,7 +85,7 @@ data OrderDocumentsGet' = OrderDocumentsGet'
 --
 -- * 'odgPrettyPrint'
 --
--- * 'odgUserIp'
+-- * 'odgUserIP'
 --
 -- * 'odgProfileId'
 --
@@ -96,11 +95,9 @@ data OrderDocumentsGet' = OrderDocumentsGet'
 --
 -- * 'odgProjectId'
 --
--- * 'odgOauthToken'
+-- * 'odgOAuthToken'
 --
 -- * 'odgFields'
---
--- * 'odgAlt'
 orderDocumentsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
@@ -110,14 +107,13 @@ orderDocumentsGet' pOdgProfileId_ pOdgId_ pOdgProjectId_ =
     OrderDocumentsGet'
     { _odgQuotaUser = Nothing
     , _odgPrettyPrint = True
-    , _odgUserIp = Nothing
+    , _odgUserIP = Nothing
     , _odgProfileId = pOdgProfileId_
     , _odgKey = Nothing
     , _odgId = pOdgId_
     , _odgProjectId = pOdgProjectId_
-    , _odgOauthToken = Nothing
+    , _odgOAuthToken = Nothing
     , _odgFields = Nothing
-    , _odgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,9 +131,9 @@ odgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-odgUserIp :: Lens' OrderDocumentsGet' (Maybe Text)
-odgUserIp
-  = lens _odgUserIp (\ s a -> s{_odgUserIp = a})
+odgUserIP :: Lens' OrderDocumentsGet' (Maybe Text)
+odgUserIP
+  = lens _odgUserIP (\ s a -> s{_odgUserIP = a})
 
 -- | User profile ID associated with this request.
 odgProfileId :: Lens' OrderDocumentsGet' Int64
@@ -147,7 +143,7 @@ odgProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-odgKey :: Lens' OrderDocumentsGet' (Maybe Text)
+odgKey :: Lens' OrderDocumentsGet' (Maybe Key)
 odgKey = lens _odgKey (\ s a -> s{_odgKey = a})
 
 -- | Order document ID.
@@ -160,32 +156,32 @@ odgProjectId
   = lens _odgProjectId (\ s a -> s{_odgProjectId = a})
 
 -- | OAuth 2.0 token for the current user.
-odgOauthToken :: Lens' OrderDocumentsGet' (Maybe Text)
-odgOauthToken
-  = lens _odgOauthToken
-      (\ s a -> s{_odgOauthToken = a})
+odgOAuthToken :: Lens' OrderDocumentsGet' (Maybe OAuthToken)
+odgOAuthToken
+  = lens _odgOAuthToken
+      (\ s a -> s{_odgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 odgFields :: Lens' OrderDocumentsGet' (Maybe Text)
 odgFields
   = lens _odgFields (\ s a -> s{_odgFields = a})
 
--- | Data format for the response.
-odgAlt :: Lens' OrderDocumentsGet' Alt
-odgAlt = lens _odgAlt (\ s a -> s{_odgAlt = a})
+instance GoogleAuth OrderDocumentsGet' where
+        authKey = odgKey . _Just
+        authToken = odgOAuthToken . _Just
 
 instance GoogleRequest OrderDocumentsGet' where
         type Rs OrderDocumentsGet' = OrderDocument
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u OrderDocumentsGet'{..}
-          = go _odgQuotaUser (Just _odgPrettyPrint) _odgUserIp
+          = go _odgQuotaUser (Just _odgPrettyPrint) _odgUserIP
               _odgProfileId
               _odgKey
               _odgId
               _odgProjectId
-              _odgOauthToken
+              _odgOAuthToken
               _odgFields
-              (Just _odgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy OrderDocumentsGetResource)

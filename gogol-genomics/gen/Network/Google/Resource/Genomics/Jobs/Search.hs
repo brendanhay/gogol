@@ -32,11 +32,11 @@ module Network.Google.Resource.Genomics.Jobs.Search
     -- * Request Lenses
     , jsQuotaUser
     , jsPrettyPrint
-    , jsUserIp
+    , jsUserIP
+    , jsSearchJobsRequest
     , jsKey
-    , jsOauthToken
+    , jsOAuthToken
     , jsFields
-    , jsAlt
     ) where
 
 import           Network.Google.Genomics.Types
@@ -50,23 +50,24 @@ type JobsSearchResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :>
-                       Post '[JSON] SearchJobsResponse
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] SearchJobsRequest :>
+                         Post '[JSON] SearchJobsResponse
 
 -- | Gets a list of jobs matching the criteria.
 --
 -- /See:/ 'jobsSearch'' smart constructor.
 data JobsSearch' = JobsSearch'
-    { _jsQuotaUser   :: !(Maybe Text)
-    , _jsPrettyPrint :: !Bool
-    , _jsUserIp      :: !(Maybe Text)
-    , _jsKey         :: !(Maybe Text)
-    , _jsOauthToken  :: !(Maybe Text)
-    , _jsFields      :: !(Maybe Text)
-    , _jsAlt         :: !Alt
+    { _jsQuotaUser         :: !(Maybe Text)
+    , _jsPrettyPrint       :: !Bool
+    , _jsUserIP            :: !(Maybe Text)
+    , _jsSearchJobsRequest :: !SearchJobsRequest
+    , _jsKey               :: !(Maybe Key)
+    , _jsOAuthToken        :: !(Maybe OAuthToken)
+    , _jsFields            :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobsSearch'' with the minimum fields required to make a request.
@@ -77,26 +78,27 @@ data JobsSearch' = JobsSearch'
 --
 -- * 'jsPrettyPrint'
 --
--- * 'jsUserIp'
+-- * 'jsUserIP'
+--
+-- * 'jsSearchJobsRequest'
 --
 -- * 'jsKey'
 --
--- * 'jsOauthToken'
+-- * 'jsOAuthToken'
 --
 -- * 'jsFields'
---
--- * 'jsAlt'
 jobsSearch'
-    :: JobsSearch'
-jobsSearch' =
+    :: SearchJobsRequest -- ^ 'SearchJobsRequest'
+    -> JobsSearch'
+jobsSearch' pJsSearchJobsRequest_ =
     JobsSearch'
     { _jsQuotaUser = Nothing
     , _jsPrettyPrint = True
-    , _jsUserIp = Nothing
+    , _jsUserIP = Nothing
+    , _jsSearchJobsRequest = pJsSearchJobsRequest_
     , _jsKey = Nothing
-    , _jsOauthToken = Nothing
+    , _jsOAuthToken = Nothing
     , _jsFields = Nothing
-    , _jsAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -114,37 +116,44 @@ jsPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-jsUserIp :: Lens' JobsSearch' (Maybe Text)
-jsUserIp = lens _jsUserIp (\ s a -> s{_jsUserIp = a})
+jsUserIP :: Lens' JobsSearch' (Maybe Text)
+jsUserIP = lens _jsUserIP (\ s a -> s{_jsUserIP = a})
+
+-- | Multipart request metadata.
+jsSearchJobsRequest :: Lens' JobsSearch' SearchJobsRequest
+jsSearchJobsRequest
+  = lens _jsSearchJobsRequest
+      (\ s a -> s{_jsSearchJobsRequest = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-jsKey :: Lens' JobsSearch' (Maybe Text)
+jsKey :: Lens' JobsSearch' (Maybe Key)
 jsKey = lens _jsKey (\ s a -> s{_jsKey = a})
 
 -- | OAuth 2.0 token for the current user.
-jsOauthToken :: Lens' JobsSearch' (Maybe Text)
-jsOauthToken
-  = lens _jsOauthToken (\ s a -> s{_jsOauthToken = a})
+jsOAuthToken :: Lens' JobsSearch' (Maybe OAuthToken)
+jsOAuthToken
+  = lens _jsOAuthToken (\ s a -> s{_jsOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 jsFields :: Lens' JobsSearch' (Maybe Text)
 jsFields = lens _jsFields (\ s a -> s{_jsFields = a})
 
--- | Data format for the response.
-jsAlt :: Lens' JobsSearch' Alt
-jsAlt = lens _jsAlt (\ s a -> s{_jsAlt = a})
+instance GoogleAuth JobsSearch' where
+        authKey = jsKey . _Just
+        authToken = jsOAuthToken . _Just
 
 instance GoogleRequest JobsSearch' where
         type Rs JobsSearch' = SearchJobsResponse
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u JobsSearch'{..}
-          = go _jsQuotaUser (Just _jsPrettyPrint) _jsUserIp
+          = go _jsQuotaUser (Just _jsPrettyPrint) _jsUserIP
               _jsKey
-              _jsOauthToken
+              _jsOAuthToken
               _jsFields
-              (Just _jsAlt)
+              (Just AltJSON)
+              _jsSearchJobsRequest
           where go
                   = clientWithRoute (Proxy :: Proxy JobsSearchResource)
                       r

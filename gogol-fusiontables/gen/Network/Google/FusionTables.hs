@@ -44,11 +44,11 @@ module Network.Google.FusionTables
     -- ** FusiontablesColumnUpdate
     , module Network.Google.Resource.FusionTables.Column.Update
 
-    -- ** FusiontablesQuerySql
-    , module Network.Google.Resource.FusionTables.Query.Sql
+    -- ** FusiontablesQuerySQL
+    , module Network.Google.Resource.FusionTables.Query.SQL
 
-    -- ** FusiontablesQuerySqlGet
-    , module Network.Google.Resource.FusionTables.Query.SqlGet
+    -- ** FusiontablesQuerySQLGet
+    , module Network.Google.Resource.FusionTables.Query.SQLGet
 
     -- ** FusiontablesStyleDelete
     , module Network.Google.Resource.FusionTables.Style.Delete
@@ -156,12 +156,12 @@ module Network.Google.FusionTables
     , cbcTableIndex
     , cbcColumnId
 
-    -- ** Sqlresponse
-    , Sqlresponse
-    , sqlresponse
-    , sKind
-    , sRows
-    , sColumns
+    -- ** SQLresponse
+    , SQLresponse
+    , sQLresponse
+    , sqlKind
+    , sqlRows
+    , sqlColumns
 
     -- ** StyleSettingList
     , StyleSettingList
@@ -294,14 +294,14 @@ module Network.Google.FusionTables
     , table
     , tabIsExportable
     , tabKind
-    , tabColumnPropertiesJsonSchema
-    , tabTablePropertiesJsonSchema
+    , tabColumnPropertiesJSONSchema
+    , tabTablePropertiesJSONSchema
     , tabName
-    , tabTablePropertiesJson
+    , tabTablePropertiesJSON
     , tabColumns
     , tabBaseTableIds
     , tabTableId
-    , tabSql
+    , tabSQL
     , tabDescription
     , tabAttribution
     , tabAttributionLink
@@ -309,11 +309,11 @@ module Network.Google.FusionTables
     -- ** Column
     , Column
     , column
-    , cColumnJsonSchema
+    , cColumnJSONSchema
     , cGraphPredicate
     , cKind
     , cBaseColumn
-    , cColumnPropertiesJson
+    , cColumnPropertiesJSON
     , cName
     , cType
     , cFormatPattern
@@ -330,9 +330,6 @@ module Network.Google.FusionTables
     , lsStrokeOpacity
     , lsStrokeWeightStyler
     , lsStrokeColor
-
-    -- ** Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.FusionTables.Types
@@ -343,8 +340,8 @@ import           Network.Google.Resource.FusionTables.Column.Insert
 import           Network.Google.Resource.FusionTables.Column.List
 import           Network.Google.Resource.FusionTables.Column.Patch
 import           Network.Google.Resource.FusionTables.Column.Update
-import           Network.Google.Resource.FusionTables.Query.Sql
-import           Network.Google.Resource.FusionTables.Query.SqlGet
+import           Network.Google.Resource.FusionTables.Query.SQL
+import           Network.Google.Resource.FusionTables.Query.SQLGet
 import           Network.Google.Resource.FusionTables.Style.Delete
 import           Network.Google.Resource.FusionTables.Style.Get
 import           Network.Google.Resource.FusionTables.Style.Insert

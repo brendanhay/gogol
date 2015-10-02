@@ -19,7 +19,7 @@
 --
 -- | Lists all GTM Tags of a Container.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersTagsList@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersTagsList@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Tags.List
     (
     -- * REST Resource
@@ -33,18 +33,17 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Tags.List
     , actlcQuotaUser
     , actlcPrettyPrint
     , actlcContainerId
-    , actlcUserIp
+    , actlcUserIP
     , actlcAccountId
     , actlcKey
-    , actlcOauthToken
+    , actlcOAuthToken
     , actlcFields
-    , actlcAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagmanagerAccountsContainersTagsList@ which the
+-- | A resource alias for @TagManagerAccountsContainersTagsList@ which the
 -- 'AccountsContainersTagsList'' request conforms to.
 type AccountsContainersTagsListResource =
      "accounts" :>
@@ -55,10 +54,11 @@ type AccountsContainersTagsListResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Get '[JSON] ListTagsResponse
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] ListTagsResponse
 
 -- | Lists all GTM Tags of a Container.
 --
@@ -67,12 +67,11 @@ data AccountsContainersTagsList' = AccountsContainersTagsList'
     { _actlcQuotaUser   :: !(Maybe Text)
     , _actlcPrettyPrint :: !Bool
     , _actlcContainerId :: !Text
-    , _actlcUserIp      :: !(Maybe Text)
+    , _actlcUserIP      :: !(Maybe Text)
     , _actlcAccountId   :: !Text
-    , _actlcKey         :: !(Maybe Text)
-    , _actlcOauthToken  :: !(Maybe Text)
+    , _actlcKey         :: !(Maybe Key)
+    , _actlcOAuthToken  :: !(Maybe OAuthToken)
     , _actlcFields      :: !(Maybe Text)
-    , _actlcAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersTagsList'' with the minimum fields required to make a request.
@@ -85,17 +84,15 @@ data AccountsContainersTagsList' = AccountsContainersTagsList'
 --
 -- * 'actlcContainerId'
 --
--- * 'actlcUserIp'
+-- * 'actlcUserIP'
 --
 -- * 'actlcAccountId'
 --
 -- * 'actlcKey'
 --
--- * 'actlcOauthToken'
+-- * 'actlcOAuthToken'
 --
 -- * 'actlcFields'
---
--- * 'actlcAlt'
 accountsContainersTagsList'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'accountId'
@@ -105,12 +102,11 @@ accountsContainersTagsList' pActlcContainerId_ pActlcAccountId_ =
     { _actlcQuotaUser = Nothing
     , _actlcPrettyPrint = True
     , _actlcContainerId = pActlcContainerId_
-    , _actlcUserIp = Nothing
+    , _actlcUserIP = Nothing
     , _actlcAccountId = pActlcAccountId_
     , _actlcKey = Nothing
-    , _actlcOauthToken = Nothing
+    , _actlcOAuthToken = Nothing
     , _actlcFields = Nothing
-    , _actlcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,9 +131,9 @@ actlcContainerId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-actlcUserIp :: Lens' AccountsContainersTagsList' (Maybe Text)
-actlcUserIp
-  = lens _actlcUserIp (\ s a -> s{_actlcUserIp = a})
+actlcUserIP :: Lens' AccountsContainersTagsList' (Maybe Text)
+actlcUserIP
+  = lens _actlcUserIP (\ s a -> s{_actlcUserIP = a})
 
 -- | The GTM Account ID.
 actlcAccountId :: Lens' AccountsContainersTagsList' Text
@@ -148,23 +144,23 @@ actlcAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-actlcKey :: Lens' AccountsContainersTagsList' (Maybe Text)
+actlcKey :: Lens' AccountsContainersTagsList' (Maybe Key)
 actlcKey = lens _actlcKey (\ s a -> s{_actlcKey = a})
 
 -- | OAuth 2.0 token for the current user.
-actlcOauthToken :: Lens' AccountsContainersTagsList' (Maybe Text)
-actlcOauthToken
-  = lens _actlcOauthToken
-      (\ s a -> s{_actlcOauthToken = a})
+actlcOAuthToken :: Lens' AccountsContainersTagsList' (Maybe OAuthToken)
+actlcOAuthToken
+  = lens _actlcOAuthToken
+      (\ s a -> s{_actlcOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 actlcFields :: Lens' AccountsContainersTagsList' (Maybe Text)
 actlcFields
   = lens _actlcFields (\ s a -> s{_actlcFields = a})
 
--- | Data format for the response.
-actlcAlt :: Lens' AccountsContainersTagsList' Alt
-actlcAlt = lens _actlcAlt (\ s a -> s{_actlcAlt = a})
+instance GoogleAuth AccountsContainersTagsList' where
+        authKey = actlcKey . _Just
+        authToken = actlcOAuthToken . _Just
 
 instance GoogleRequest AccountsContainersTagsList'
          where
@@ -174,12 +170,12 @@ instance GoogleRequest AccountsContainersTagsList'
         requestWithRoute r u AccountsContainersTagsList'{..}
           = go _actlcQuotaUser (Just _actlcPrettyPrint)
               _actlcContainerId
-              _actlcUserIp
+              _actlcUserIP
               _actlcAccountId
               _actlcKey
-              _actlcOauthToken
+              _actlcOAuthToken
               _actlcFields
-              (Just _actlcAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountsContainersTagsListResource)

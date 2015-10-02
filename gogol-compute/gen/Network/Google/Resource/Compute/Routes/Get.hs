@@ -33,12 +33,11 @@ module Network.Google.Resource.Compute.Routes.Get
     , rouQuotaUser
     , rouPrettyPrint
     , rouProject
-    , rouUserIp
+    , rouUserIP
     , rouRoute
     , rouKey
-    , rouOauthToken
+    , rouOAuthToken
     , rouFields
-    , rouAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -54,10 +53,10 @@ type RoutesGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] Route
+                         QueryParam "alt" AltJSON :> Get '[JSON] Route
 
 -- | Returns the specified route resource.
 --
@@ -66,12 +65,11 @@ data RoutesGet' = RoutesGet'
     { _rouQuotaUser   :: !(Maybe Text)
     , _rouPrettyPrint :: !Bool
     , _rouProject     :: !Text
-    , _rouUserIp      :: !(Maybe Text)
+    , _rouUserIP      :: !(Maybe Text)
     , _rouRoute       :: !Text
-    , _rouKey         :: !(Maybe Text)
-    , _rouOauthToken  :: !(Maybe Text)
+    , _rouKey         :: !(Maybe Key)
+    , _rouOAuthToken  :: !(Maybe OAuthToken)
     , _rouFields      :: !(Maybe Text)
-    , _rouAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoutesGet'' with the minimum fields required to make a request.
@@ -84,17 +82,15 @@ data RoutesGet' = RoutesGet'
 --
 -- * 'rouProject'
 --
--- * 'rouUserIp'
+-- * 'rouUserIP'
 --
 -- * 'rouRoute'
 --
 -- * 'rouKey'
 --
--- * 'rouOauthToken'
+-- * 'rouOAuthToken'
 --
 -- * 'rouFields'
---
--- * 'rouAlt'
 routesGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'route'
@@ -104,12 +100,11 @@ routesGet' pRouProject_ pRouRoute_ =
     { _rouQuotaUser = Nothing
     , _rouPrettyPrint = True
     , _rouProject = pRouProject_
-    , _rouUserIp = Nothing
+    , _rouUserIP = Nothing
     , _rouRoute = pRouRoute_
     , _rouKey = Nothing
-    , _rouOauthToken = Nothing
+    , _rouOAuthToken = Nothing
     , _rouFields = Nothing
-    , _rouAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -132,9 +127,9 @@ rouProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rouUserIp :: Lens' RoutesGet' (Maybe Text)
-rouUserIp
-  = lens _rouUserIp (\ s a -> s{_rouUserIp = a})
+rouUserIP :: Lens' RoutesGet' (Maybe Text)
+rouUserIP
+  = lens _rouUserIP (\ s a -> s{_rouUserIP = a})
 
 -- | Name of the route resource to return.
 rouRoute :: Lens' RoutesGet' Text
@@ -143,35 +138,35 @@ rouRoute = lens _rouRoute (\ s a -> s{_rouRoute = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rouKey :: Lens' RoutesGet' (Maybe Text)
+rouKey :: Lens' RoutesGet' (Maybe Key)
 rouKey = lens _rouKey (\ s a -> s{_rouKey = a})
 
 -- | OAuth 2.0 token for the current user.
-rouOauthToken :: Lens' RoutesGet' (Maybe Text)
-rouOauthToken
-  = lens _rouOauthToken
-      (\ s a -> s{_rouOauthToken = a})
+rouOAuthToken :: Lens' RoutesGet' (Maybe OAuthToken)
+rouOAuthToken
+  = lens _rouOAuthToken
+      (\ s a -> s{_rouOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 rouFields :: Lens' RoutesGet' (Maybe Text)
 rouFields
   = lens _rouFields (\ s a -> s{_rouFields = a})
 
--- | Data format for the response.
-rouAlt :: Lens' RoutesGet' Alt
-rouAlt = lens _rouAlt (\ s a -> s{_rouAlt = a})
+instance GoogleAuth RoutesGet' where
+        authKey = rouKey . _Just
+        authToken = rouOAuthToken . _Just
 
 instance GoogleRequest RoutesGet' where
         type Rs RoutesGet' = Route
         request = requestWithRoute defReq computeURL
         requestWithRoute r u RoutesGet'{..}
           = go _rouQuotaUser (Just _rouPrettyPrint) _rouProject
-              _rouUserIp
+              _rouUserIP
               _rouRoute
               _rouKey
-              _rouOauthToken
+              _rouOAuthToken
               _rouFields
-              (Just _rouAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy RoutesGetResource)
                       r

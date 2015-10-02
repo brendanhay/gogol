@@ -35,12 +35,12 @@ module Network.Google.Resource.DFAReporting.Ads.List
     , adsRemarketingListIds
     , adsLandingPageIds
     , adsCreativeIds
-    , adsUserIp
+    , adsUserIP
     , adsAdvertiserId
     , adsCampaignIds
     , adsSearchString
     , adsSizeIds
-    , adsSslCompliant
+    , adsSSLCompliant
     , adsIds
     , adsProfileId
     , adsSortOrder
@@ -48,19 +48,18 @@ module Network.Google.Resource.DFAReporting.Ads.List
     , adsCreativeOptimizationConfigurationIds
     , adsKey
     , adsPlacementIds
-    , adsSslRequired
+    , adsSSLRequired
     , adsOverriddenEventTagId
     , adsPageToken
     , adsSortField
     , adsType
-    , adsOauthToken
+    , adsOAuthToken
     , adsCreativeType
     , adsDynamicClickTracker
     , adsCompatibility
     , adsArchived
     , adsMaxResults
     , adsFields
-    , adsAlt
     , adsAudienceSegmentIds
     ) where
 
@@ -93,7 +92,7 @@ type AdsListResource =
                                          "creativeOptimizationConfigurationIds"
                                          Int64
                                          :>
-                                         QueryParam "key" Text :>
+                                         QueryParam "key" Key :>
                                            QueryParams "placementIds" Int64 :>
                                              QueryParam "sslRequired" Bool :>
                                                QueryParam "overriddenEventTagId"
@@ -107,7 +106,7 @@ type AdsListResource =
                                                        DfareportingAdsListType
                                                        :>
                                                        QueryParam "oauth_token"
-                                                         Text
+                                                         OAuthToken
                                                          :>
                                                          QueryParam
                                                            "creativeType"
@@ -135,7 +134,7 @@ type AdsListResource =
                                                                      :>
                                                                      QueryParam
                                                                        "alt"
-                                                                       Alt
+                                                                       AltJSON
                                                                        :>
                                                                        QueryParams
                                                                          "audienceSegmentIds"
@@ -154,32 +153,31 @@ data AdsList' = AdsList'
     , _adsRemarketingListIds                   :: !(Maybe Int64)
     , _adsLandingPageIds                       :: !(Maybe Int64)
     , _adsCreativeIds                          :: !(Maybe Int64)
-    , _adsUserIp                               :: !(Maybe Text)
+    , _adsUserIP                               :: !(Maybe Text)
     , _adsAdvertiserId                         :: !(Maybe Int64)
     , _adsCampaignIds                          :: !(Maybe Int64)
     , _adsSearchString                         :: !(Maybe Text)
     , _adsSizeIds                              :: !(Maybe Int64)
-    , _adsSslCompliant                         :: !(Maybe Bool)
+    , _adsSSLCompliant                         :: !(Maybe Bool)
     , _adsIds                                  :: !(Maybe Int64)
     , _adsProfileId                            :: !Int64
     , _adsSortOrder                            :: !(Maybe DfareportingAdsListSortOrder)
     , _adsActive                               :: !(Maybe Bool)
     , _adsCreativeOptimizationConfigurationIds :: !(Maybe Int64)
-    , _adsKey                                  :: !(Maybe Text)
+    , _adsKey                                  :: !(Maybe Key)
     , _adsPlacementIds                         :: !(Maybe Int64)
-    , _adsSslRequired                          :: !(Maybe Bool)
+    , _adsSSLRequired                          :: !(Maybe Bool)
     , _adsOverriddenEventTagId                 :: !(Maybe Int64)
     , _adsPageToken                            :: !(Maybe Text)
     , _adsSortField                            :: !(Maybe DfareportingAdsListSortField)
     , _adsType                                 :: !(Maybe DfareportingAdsListType)
-    , _adsOauthToken                           :: !(Maybe Text)
+    , _adsOAuthToken                           :: !(Maybe OAuthToken)
     , _adsCreativeType                         :: !(Maybe DfareportingAdsListCreativeType)
     , _adsDynamicClickTracker                  :: !(Maybe Bool)
     , _adsCompatibility                        :: !(Maybe DfareportingAdsListCompatibility)
     , _adsArchived                             :: !(Maybe Bool)
     , _adsMaxResults                           :: !(Maybe Int32)
     , _adsFields                               :: !(Maybe Text)
-    , _adsAlt                                  :: !Alt
     , _adsAudienceSegmentIds                   :: !(Maybe Int64)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -197,7 +195,7 @@ data AdsList' = AdsList'
 --
 -- * 'adsCreativeIds'
 --
--- * 'adsUserIp'
+-- * 'adsUserIP'
 --
 -- * 'adsAdvertiserId'
 --
@@ -207,7 +205,7 @@ data AdsList' = AdsList'
 --
 -- * 'adsSizeIds'
 --
--- * 'adsSslCompliant'
+-- * 'adsSSLCompliant'
 --
 -- * 'adsIds'
 --
@@ -223,7 +221,7 @@ data AdsList' = AdsList'
 --
 -- * 'adsPlacementIds'
 --
--- * 'adsSslRequired'
+-- * 'adsSSLRequired'
 --
 -- * 'adsOverriddenEventTagId'
 --
@@ -233,7 +231,7 @@ data AdsList' = AdsList'
 --
 -- * 'adsType'
 --
--- * 'adsOauthToken'
+-- * 'adsOAuthToken'
 --
 -- * 'adsCreativeType'
 --
@@ -247,8 +245,6 @@ data AdsList' = AdsList'
 --
 -- * 'adsFields'
 --
--- * 'adsAlt'
---
 -- * 'adsAudienceSegmentIds'
 adsList'
     :: Int64 -- ^ 'profileId'
@@ -260,12 +256,12 @@ adsList' pAdsProfileId_ =
     , _adsRemarketingListIds = Nothing
     , _adsLandingPageIds = Nothing
     , _adsCreativeIds = Nothing
-    , _adsUserIp = Nothing
+    , _adsUserIP = Nothing
     , _adsAdvertiserId = Nothing
     , _adsCampaignIds = Nothing
     , _adsSearchString = Nothing
     , _adsSizeIds = Nothing
-    , _adsSslCompliant = Nothing
+    , _adsSSLCompliant = Nothing
     , _adsIds = Nothing
     , _adsProfileId = pAdsProfileId_
     , _adsSortOrder = Nothing
@@ -273,19 +269,18 @@ adsList' pAdsProfileId_ =
     , _adsCreativeOptimizationConfigurationIds = Nothing
     , _adsKey = Nothing
     , _adsPlacementIds = Nothing
-    , _adsSslRequired = Nothing
+    , _adsSSLRequired = Nothing
     , _adsOverriddenEventTagId = Nothing
     , _adsPageToken = Nothing
     , _adsSortField = Nothing
     , _adsType = Nothing
-    , _adsOauthToken = Nothing
+    , _adsOAuthToken = Nothing
     , _adsCreativeType = Nothing
     , _adsDynamicClickTracker = Nothing
     , _adsCompatibility = Nothing
     , _adsArchived = Nothing
     , _adsMaxResults = Nothing
     , _adsFields = Nothing
-    , _adsAlt = JSON
     , _adsAudienceSegmentIds = Nothing
     }
 
@@ -323,9 +318,9 @@ adsCreativeIds
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-adsUserIp :: Lens' AdsList' (Maybe Text)
-adsUserIp
-  = lens _adsUserIp (\ s a -> s{_adsUserIp = a})
+adsUserIP :: Lens' AdsList' (Maybe Text)
+adsUserIP
+  = lens _adsUserIP (\ s a -> s{_adsUserIP = a})
 
 -- | Select only ads with this advertiser ID.
 adsAdvertiserId :: Lens' AdsList' (Maybe Int64)
@@ -356,10 +351,10 @@ adsSizeIds
   = lens _adsSizeIds (\ s a -> s{_adsSizeIds = a})
 
 -- | Select only ads that are SSL-compliant.
-adsSslCompliant :: Lens' AdsList' (Maybe Bool)
-adsSslCompliant
-  = lens _adsSslCompliant
-      (\ s a -> s{_adsSslCompliant = a})
+adsSSLCompliant :: Lens' AdsList' (Maybe Bool)
+adsSSLCompliant
+  = lens _adsSSLCompliant
+      (\ s a -> s{_adsSSLCompliant = a})
 
 -- | Select only ads with these IDs.
 adsIds :: Lens' AdsList' (Maybe Int64)
@@ -390,7 +385,7 @@ adsCreativeOptimizationConfigurationIds
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-adsKey :: Lens' AdsList' (Maybe Text)
+adsKey :: Lens' AdsList' (Maybe Key)
 adsKey = lens _adsKey (\ s a -> s{_adsKey = a})
 
 -- | Select only ads with these placement IDs assigned.
@@ -400,10 +395,10 @@ adsPlacementIds
       (\ s a -> s{_adsPlacementIds = a})
 
 -- | Select only ads that require SSL.
-adsSslRequired :: Lens' AdsList' (Maybe Bool)
-adsSslRequired
-  = lens _adsSslRequired
-      (\ s a -> s{_adsSslRequired = a})
+adsSSLRequired :: Lens' AdsList' (Maybe Bool)
+adsSSLRequired
+  = lens _adsSSLRequired
+      (\ s a -> s{_adsSSLRequired = a})
 
 -- | Select only ads with this event tag override ID.
 adsOverriddenEventTagId :: Lens' AdsList' (Maybe Int64)
@@ -426,10 +421,10 @@ adsType :: Lens' AdsList' (Maybe DfareportingAdsListType)
 adsType = lens _adsType (\ s a -> s{_adsType = a})
 
 -- | OAuth 2.0 token for the current user.
-adsOauthToken :: Lens' AdsList' (Maybe Text)
-adsOauthToken
-  = lens _adsOauthToken
-      (\ s a -> s{_adsOauthToken = a})
+adsOAuthToken :: Lens' AdsList' (Maybe OAuthToken)
+adsOAuthToken
+  = lens _adsOAuthToken
+      (\ s a -> s{_adsOAuthToken = a})
 
 -- | Select only ads with the specified creativeType.
 adsCreativeType :: Lens' AdsList' (Maybe DfareportingAdsListCreativeType)
@@ -472,15 +467,15 @@ adsFields :: Lens' AdsList' (Maybe Text)
 adsFields
   = lens _adsFields (\ s a -> s{_adsFields = a})
 
--- | Data format for the response.
-adsAlt :: Lens' AdsList' Alt
-adsAlt = lens _adsAlt (\ s a -> s{_adsAlt = a})
-
 -- | Select only ads with these audience segment IDs.
 adsAudienceSegmentIds :: Lens' AdsList' (Maybe Int64)
 adsAudienceSegmentIds
   = lens _adsAudienceSegmentIds
       (\ s a -> s{_adsAudienceSegmentIds = a})
+
+instance GoogleAuth AdsList' where
+        authKey = adsKey . _Just
+        authToken = adsOAuthToken . _Just
 
 instance GoogleRequest AdsList' where
         type Rs AdsList' = AdsListResponse
@@ -490,12 +485,12 @@ instance GoogleRequest AdsList' where
               _adsRemarketingListIds
               _adsLandingPageIds
               _adsCreativeIds
-              _adsUserIp
+              _adsUserIP
               _adsAdvertiserId
               _adsCampaignIds
               _adsSearchString
               _adsSizeIds
-              _adsSslCompliant
+              _adsSSLCompliant
               _adsIds
               _adsProfileId
               _adsSortOrder
@@ -503,20 +498,20 @@ instance GoogleRequest AdsList' where
               _adsCreativeOptimizationConfigurationIds
               _adsKey
               _adsPlacementIds
-              _adsSslRequired
+              _adsSSLRequired
               _adsOverriddenEventTagId
               _adsPageToken
               _adsSortField
               _adsType
-              _adsOauthToken
+              _adsOAuthToken
               _adsCreativeType
               _adsDynamicClickTracker
               _adsCompatibility
               _adsArchived
               _adsMaxResults
               _adsFields
-              (Just _adsAlt)
               _adsAudienceSegmentIds
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy AdsListResource) r
                       u

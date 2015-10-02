@@ -32,12 +32,12 @@ module Network.Google.Resource.Drive.Properties.Insert
     -- * Request Lenses
     , proQuotaUser
     , proPrettyPrint
-    , proUserIp
+    , proProperty
+    , proUserIP
     , proKey
     , proFileId
-    , proOauthToken
+    , proOAuthToken
     , proFields
-    , proAlt
     ) where
 
 import           Network.Google.Drive.Types
@@ -52,10 +52,11 @@ type PropertiesInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] Property
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Property :> Post '[JSON] Property
 
 -- | Adds a property to a file.
 --
@@ -63,12 +64,12 @@ type PropertiesInsertResource =
 data PropertiesInsert' = PropertiesInsert'
     { _proQuotaUser   :: !(Maybe Text)
     , _proPrettyPrint :: !Bool
-    , _proUserIp      :: !(Maybe Text)
-    , _proKey         :: !(Maybe Text)
+    , _proProperty    :: !Property
+    , _proUserIP      :: !(Maybe Text)
+    , _proKey         :: !(Maybe Key)
     , _proFileId      :: !Text
-    , _proOauthToken  :: !(Maybe Text)
+    , _proOAuthToken  :: !(Maybe OAuthToken)
     , _proFields      :: !(Maybe Text)
-    , _proAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PropertiesInsert'' with the minimum fields required to make a request.
@@ -79,30 +80,31 @@ data PropertiesInsert' = PropertiesInsert'
 --
 -- * 'proPrettyPrint'
 --
--- * 'proUserIp'
+-- * 'proProperty'
+--
+-- * 'proUserIP'
 --
 -- * 'proKey'
 --
 -- * 'proFileId'
 --
--- * 'proOauthToken'
+-- * 'proOAuthToken'
 --
 -- * 'proFields'
---
--- * 'proAlt'
 propertiesInsert'
-    :: Text -- ^ 'fileId'
+    :: Property -- ^ 'Property'
+    -> Text -- ^ 'fileId'
     -> PropertiesInsert'
-propertiesInsert' pProFileId_ =
+propertiesInsert' pProProperty_ pProFileId_ =
     PropertiesInsert'
     { _proQuotaUser = Nothing
     , _proPrettyPrint = True
-    , _proUserIp = Nothing
+    , _proProperty = pProProperty_
+    , _proUserIP = Nothing
     , _proKey = Nothing
     , _proFileId = pProFileId_
-    , _proOauthToken = Nothing
+    , _proOAuthToken = Nothing
     , _proFields = Nothing
-    , _proAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -118,16 +120,21 @@ proPrettyPrint
   = lens _proPrettyPrint
       (\ s a -> s{_proPrettyPrint = a})
 
+-- | Multipart request metadata.
+proProperty :: Lens' PropertiesInsert' Property
+proProperty
+  = lens _proProperty (\ s a -> s{_proProperty = a})
+
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-proUserIp :: Lens' PropertiesInsert' (Maybe Text)
-proUserIp
-  = lens _proUserIp (\ s a -> s{_proUserIp = a})
+proUserIP :: Lens' PropertiesInsert' (Maybe Text)
+proUserIP
+  = lens _proUserIP (\ s a -> s{_proUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-proKey :: Lens' PropertiesInsert' (Maybe Text)
+proKey :: Lens' PropertiesInsert' (Maybe Key)
 proKey = lens _proKey (\ s a -> s{_proKey = a})
 
 -- | The ID of the file.
@@ -136,30 +143,31 @@ proFileId
   = lens _proFileId (\ s a -> s{_proFileId = a})
 
 -- | OAuth 2.0 token for the current user.
-proOauthToken :: Lens' PropertiesInsert' (Maybe Text)
-proOauthToken
-  = lens _proOauthToken
-      (\ s a -> s{_proOauthToken = a})
+proOAuthToken :: Lens' PropertiesInsert' (Maybe OAuthToken)
+proOAuthToken
+  = lens _proOAuthToken
+      (\ s a -> s{_proOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 proFields :: Lens' PropertiesInsert' (Maybe Text)
 proFields
   = lens _proFields (\ s a -> s{_proFields = a})
 
--- | Data format for the response.
-proAlt :: Lens' PropertiesInsert' Alt
-proAlt = lens _proAlt (\ s a -> s{_proAlt = a})
+instance GoogleAuth PropertiesInsert' where
+        authKey = proKey . _Just
+        authToken = proOAuthToken . _Just
 
 instance GoogleRequest PropertiesInsert' where
         type Rs PropertiesInsert' = Property
         request = requestWithRoute defReq driveURL
         requestWithRoute r u PropertiesInsert'{..}
-          = go _proQuotaUser (Just _proPrettyPrint) _proUserIp
+          = go _proQuotaUser (Just _proPrettyPrint) _proUserIP
               _proKey
               _proFileId
-              _proOauthToken
+              _proOAuthToken
               _proFields
-              (Just _proAlt)
+              (Just AltJSON)
+              _proProperty
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PropertiesInsertResource)

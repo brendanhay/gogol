@@ -34,13 +34,13 @@ module Network.Google.Resource.Analytics.Management.Profiles.Patch
     , mppQuotaUser
     , mppPrettyPrint
     , mppWebPropertyId
-    , mppUserIp
+    , mppUserIP
+    , mppProfile
     , mppProfileId
     , mppAccountId
     , mppKey
-    , mppOauthToken
+    , mppOAuthToken
     , mppFields
-    , mppAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -59,10 +59,12 @@ type ManagementProfilesPatchResource =
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :> Patch '[JSON] Profile
+                               QueryParam "alt" AltJSON :>
+                                 ReqBody '[JSON] Profile :>
+                                   Patch '[JSON] Profile
 
 -- | Updates an existing view (profile). This method supports patch
 -- semantics.
@@ -72,13 +74,13 @@ data ManagementProfilesPatch' = ManagementProfilesPatch'
     { _mppQuotaUser     :: !(Maybe Text)
     , _mppPrettyPrint   :: !Bool
     , _mppWebPropertyId :: !Text
-    , _mppUserIp        :: !(Maybe Text)
+    , _mppUserIP        :: !(Maybe Text)
+    , _mppProfile       :: !Profile
     , _mppProfileId     :: !Text
     , _mppAccountId     :: !Text
-    , _mppKey           :: !(Maybe Text)
-    , _mppOauthToken    :: !(Maybe Text)
+    , _mppKey           :: !(Maybe Key)
+    , _mppOAuthToken    :: !(Maybe OAuthToken)
     , _mppFields        :: !(Maybe Text)
-    , _mppAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProfilesPatch'' with the minimum fields required to make a request.
@@ -91,7 +93,9 @@ data ManagementProfilesPatch' = ManagementProfilesPatch'
 --
 -- * 'mppWebPropertyId'
 --
--- * 'mppUserIp'
+-- * 'mppUserIP'
+--
+-- * 'mppProfile'
 --
 -- * 'mppProfileId'
 --
@@ -99,28 +103,27 @@ data ManagementProfilesPatch' = ManagementProfilesPatch'
 --
 -- * 'mppKey'
 --
--- * 'mppOauthToken'
+-- * 'mppOAuthToken'
 --
 -- * 'mppFields'
---
--- * 'mppAlt'
 managementProfilesPatch'
     :: Text -- ^ 'webPropertyId'
+    -> Profile -- ^ 'Profile'
     -> Text -- ^ 'profileId'
     -> Text -- ^ 'accountId'
     -> ManagementProfilesPatch'
-managementProfilesPatch' pMppWebPropertyId_ pMppProfileId_ pMppAccountId_ =
+managementProfilesPatch' pMppWebPropertyId_ pMppProfile_ pMppProfileId_ pMppAccountId_ =
     ManagementProfilesPatch'
     { _mppQuotaUser = Nothing
     , _mppPrettyPrint = False
     , _mppWebPropertyId = pMppWebPropertyId_
-    , _mppUserIp = Nothing
+    , _mppUserIP = Nothing
+    , _mppProfile = pMppProfile_
     , _mppProfileId = pMppProfileId_
     , _mppAccountId = pMppAccountId_
     , _mppKey = Nothing
-    , _mppOauthToken = Nothing
+    , _mppOAuthToken = Nothing
     , _mppFields = Nothing
-    , _mppAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -144,9 +147,14 @@ mppWebPropertyId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mppUserIp :: Lens' ManagementProfilesPatch' (Maybe Text)
-mppUserIp
-  = lens _mppUserIp (\ s a -> s{_mppUserIp = a})
+mppUserIP :: Lens' ManagementProfilesPatch' (Maybe Text)
+mppUserIP
+  = lens _mppUserIP (\ s a -> s{_mppUserIP = a})
+
+-- | Multipart request metadata.
+mppProfile :: Lens' ManagementProfilesPatch' Profile
+mppProfile
+  = lens _mppProfile (\ s a -> s{_mppProfile = a})
 
 -- | ID of the view (profile) to be updated.
 mppProfileId :: Lens' ManagementProfilesPatch' Text
@@ -161,23 +169,23 @@ mppAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mppKey :: Lens' ManagementProfilesPatch' (Maybe Text)
+mppKey :: Lens' ManagementProfilesPatch' (Maybe Key)
 mppKey = lens _mppKey (\ s a -> s{_mppKey = a})
 
 -- | OAuth 2.0 token for the current user.
-mppOauthToken :: Lens' ManagementProfilesPatch' (Maybe Text)
-mppOauthToken
-  = lens _mppOauthToken
-      (\ s a -> s{_mppOauthToken = a})
+mppOAuthToken :: Lens' ManagementProfilesPatch' (Maybe OAuthToken)
+mppOAuthToken
+  = lens _mppOAuthToken
+      (\ s a -> s{_mppOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 mppFields :: Lens' ManagementProfilesPatch' (Maybe Text)
 mppFields
   = lens _mppFields (\ s a -> s{_mppFields = a})
 
--- | Data format for the response.
-mppAlt :: Lens' ManagementProfilesPatch' Alt
-mppAlt = lens _mppAlt (\ s a -> s{_mppAlt = a})
+instance GoogleAuth ManagementProfilesPatch' where
+        authKey = mppKey . _Just
+        authToken = mppOAuthToken . _Just
 
 instance GoogleRequest ManagementProfilesPatch' where
         type Rs ManagementProfilesPatch' = Profile
@@ -185,13 +193,14 @@ instance GoogleRequest ManagementProfilesPatch' where
         requestWithRoute r u ManagementProfilesPatch'{..}
           = go _mppQuotaUser (Just _mppPrettyPrint)
               _mppWebPropertyId
-              _mppUserIp
+              _mppUserIP
               _mppProfileId
               _mppAccountId
               _mppKey
-              _mppOauthToken
+              _mppOAuthToken
               _mppFields
-              (Just _mppAlt)
+              (Just AltJSON)
+              _mppProfile
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ManagementProfilesPatchResource)

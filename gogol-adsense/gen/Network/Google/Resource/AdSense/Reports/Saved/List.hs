@@ -32,13 +32,12 @@ module Network.Google.Resource.AdSense.Reports.Saved.List
     -- * Request Lenses
     , rslQuotaUser
     , rslPrettyPrint
-    , rslUserIp
+    , rslUserIP
     , rslKey
     , rslPageToken
-    , rslOauthToken
+    , rslOAuthToken
     , rslMaxResults
     , rslFields
-    , rslAlt
     ) where
 
 import           Network.Google.AdSense.Types
@@ -52,12 +51,12 @@ type ReportsSavedListResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
+               QueryParam "key" Key :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "oauth_token" Text :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "maxResults" Int32 :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] SavedReports
+                         QueryParam "alt" AltJSON :> Get '[JSON] SavedReports
 
 -- | List all saved reports in this AdSense account.
 --
@@ -65,13 +64,12 @@ type ReportsSavedListResource =
 data ReportsSavedList' = ReportsSavedList'
     { _rslQuotaUser   :: !(Maybe Text)
     , _rslPrettyPrint :: !Bool
-    , _rslUserIp      :: !(Maybe Text)
-    , _rslKey         :: !(Maybe Text)
+    , _rslUserIP      :: !(Maybe Text)
+    , _rslKey         :: !(Maybe Key)
     , _rslPageToken   :: !(Maybe Text)
-    , _rslOauthToken  :: !(Maybe Text)
+    , _rslOAuthToken  :: !(Maybe OAuthToken)
     , _rslMaxResults  :: !(Maybe Int32)
     , _rslFields      :: !(Maybe Text)
-    , _rslAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsSavedList'' with the minimum fields required to make a request.
@@ -82,32 +80,29 @@ data ReportsSavedList' = ReportsSavedList'
 --
 -- * 'rslPrettyPrint'
 --
--- * 'rslUserIp'
+-- * 'rslUserIP'
 --
 -- * 'rslKey'
 --
 -- * 'rslPageToken'
 --
--- * 'rslOauthToken'
+-- * 'rslOAuthToken'
 --
 -- * 'rslMaxResults'
 --
 -- * 'rslFields'
---
--- * 'rslAlt'
 reportsSavedList'
     :: ReportsSavedList'
 reportsSavedList' =
     ReportsSavedList'
     { _rslQuotaUser = Nothing
     , _rslPrettyPrint = True
-    , _rslUserIp = Nothing
+    , _rslUserIP = Nothing
     , _rslKey = Nothing
     , _rslPageToken = Nothing
-    , _rslOauthToken = Nothing
+    , _rslOAuthToken = Nothing
     , _rslMaxResults = Nothing
     , _rslFields = Nothing
-    , _rslAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -125,14 +120,14 @@ rslPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rslUserIp :: Lens' ReportsSavedList' (Maybe Text)
-rslUserIp
-  = lens _rslUserIp (\ s a -> s{_rslUserIp = a})
+rslUserIP :: Lens' ReportsSavedList' (Maybe Text)
+rslUserIP
+  = lens _rslUserIP (\ s a -> s{_rslUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rslKey :: Lens' ReportsSavedList' (Maybe Text)
+rslKey :: Lens' ReportsSavedList' (Maybe Key)
 rslKey = lens _rslKey (\ s a -> s{_rslKey = a})
 
 -- | A continuation token, used to page through saved reports. To retrieve
@@ -143,10 +138,10 @@ rslPageToken
   = lens _rslPageToken (\ s a -> s{_rslPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-rslOauthToken :: Lens' ReportsSavedList' (Maybe Text)
-rslOauthToken
-  = lens _rslOauthToken
-      (\ s a -> s{_rslOauthToken = a})
+rslOAuthToken :: Lens' ReportsSavedList' (Maybe OAuthToken)
+rslOAuthToken
+  = lens _rslOAuthToken
+      (\ s a -> s{_rslOAuthToken = a})
 
 -- | The maximum number of saved reports to include in the response, used for
 -- paging.
@@ -160,21 +155,21 @@ rslFields :: Lens' ReportsSavedList' (Maybe Text)
 rslFields
   = lens _rslFields (\ s a -> s{_rslFields = a})
 
--- | Data format for the response.
-rslAlt :: Lens' ReportsSavedList' Alt
-rslAlt = lens _rslAlt (\ s a -> s{_rslAlt = a})
+instance GoogleAuth ReportsSavedList' where
+        authKey = rslKey . _Just
+        authToken = rslOAuthToken . _Just
 
 instance GoogleRequest ReportsSavedList' where
         type Rs ReportsSavedList' = SavedReports
         request = requestWithRoute defReq adSenseURL
         requestWithRoute r u ReportsSavedList'{..}
-          = go _rslQuotaUser (Just _rslPrettyPrint) _rslUserIp
+          = go _rslQuotaUser (Just _rslPrettyPrint) _rslUserIP
               _rslKey
               _rslPageToken
-              _rslOauthToken
+              _rslOAuthToken
               _rslMaxResults
               _rslFields
-              (Just _rslAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ReportsSavedListResource)

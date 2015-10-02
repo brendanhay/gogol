@@ -30,15 +30,15 @@ module Network.Google.Resource.Content.Orders.Acknowledge
     , OrdersAcknowledge'
 
     -- * Request Lenses
+    , oaOrdersAcknowledgeRequest
     , oaQuotaUser
     , oaMerchantId
     , oaPrettyPrint
-    , oaUserIp
+    , oaUserIP
     , oaKey
-    , oaOauthToken
+    , oaOAuthToken
     , oaOrderId
     , oaFields
-    , oaAlt
     ) where
 
 import           Network.Google.Prelude
@@ -54,30 +54,33 @@ type OrdersAcknowledgeResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :>
-                           Post '[JSON] OrdersAcknowledgeResponse
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] OrdersAcknowledgeRequest :>
+                             Post '[JSON] OrdersAcknowledgeResponse
 
 -- | Marks an order as acknowledged.
 --
 -- /See:/ 'ordersAcknowledge'' smart constructor.
 data OrdersAcknowledge' = OrdersAcknowledge'
-    { _oaQuotaUser   :: !(Maybe Text)
-    , _oaMerchantId  :: !Word64
-    , _oaPrettyPrint :: !Bool
-    , _oaUserIp      :: !(Maybe Text)
-    , _oaKey         :: !(Maybe Text)
-    , _oaOauthToken  :: !(Maybe Text)
-    , _oaOrderId     :: !Text
-    , _oaFields      :: !(Maybe Text)
-    , _oaAlt         :: !Alt
+    { _oaOrdersAcknowledgeRequest :: !OrdersAcknowledgeRequest
+    , _oaQuotaUser                :: !(Maybe Text)
+    , _oaMerchantId               :: !Word64
+    , _oaPrettyPrint              :: !Bool
+    , _oaUserIP                   :: !(Maybe Text)
+    , _oaKey                      :: !(Maybe Key)
+    , _oaOAuthToken               :: !(Maybe OAuthToken)
+    , _oaOrderId                  :: !Text
+    , _oaFields                   :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersAcknowledge'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'oaOrdersAcknowledgeRequest'
 --
 -- * 'oaQuotaUser'
 --
@@ -85,33 +88,38 @@ data OrdersAcknowledge' = OrdersAcknowledge'
 --
 -- * 'oaPrettyPrint'
 --
--- * 'oaUserIp'
+-- * 'oaUserIP'
 --
 -- * 'oaKey'
 --
--- * 'oaOauthToken'
+-- * 'oaOAuthToken'
 --
 -- * 'oaOrderId'
 --
 -- * 'oaFields'
---
--- * 'oaAlt'
 ordersAcknowledge'
-    :: Word64 -- ^ 'merchantId'
+    :: OrdersAcknowledgeRequest -- ^ 'OrdersAcknowledgeRequest'
+    -> Word64 -- ^ 'merchantId'
     -> Text -- ^ 'orderId'
     -> OrdersAcknowledge'
-ordersAcknowledge' pOaMerchantId_ pOaOrderId_ =
+ordersAcknowledge' pOaOrdersAcknowledgeRequest_ pOaMerchantId_ pOaOrderId_ =
     OrdersAcknowledge'
-    { _oaQuotaUser = Nothing
+    { _oaOrdersAcknowledgeRequest = pOaOrdersAcknowledgeRequest_
+    , _oaQuotaUser = Nothing
     , _oaMerchantId = pOaMerchantId_
     , _oaPrettyPrint = True
-    , _oaUserIp = Nothing
+    , _oaUserIP = Nothing
     , _oaKey = Nothing
-    , _oaOauthToken = Nothing
+    , _oaOAuthToken = Nothing
     , _oaOrderId = pOaOrderId_
     , _oaFields = Nothing
-    , _oaAlt = JSON
     }
+
+-- | Multipart request metadata.
+oaOrdersAcknowledgeRequest :: Lens' OrdersAcknowledge' OrdersAcknowledgeRequest
+oaOrdersAcknowledgeRequest
+  = lens _oaOrdersAcknowledgeRequest
+      (\ s a -> s{_oaOrdersAcknowledgeRequest = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -133,19 +141,19 @@ oaPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-oaUserIp :: Lens' OrdersAcknowledge' (Maybe Text)
-oaUserIp = lens _oaUserIp (\ s a -> s{_oaUserIp = a})
+oaUserIP :: Lens' OrdersAcknowledge' (Maybe Text)
+oaUserIP = lens _oaUserIP (\ s a -> s{_oaUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-oaKey :: Lens' OrdersAcknowledge' (Maybe Text)
+oaKey :: Lens' OrdersAcknowledge' (Maybe Key)
 oaKey = lens _oaKey (\ s a -> s{_oaKey = a})
 
 -- | OAuth 2.0 token for the current user.
-oaOauthToken :: Lens' OrdersAcknowledge' (Maybe Text)
-oaOauthToken
-  = lens _oaOauthToken (\ s a -> s{_oaOauthToken = a})
+oaOAuthToken :: Lens' OrdersAcknowledge' (Maybe OAuthToken)
+oaOAuthToken
+  = lens _oaOAuthToken (\ s a -> s{_oaOAuthToken = a})
 
 -- | The ID of the order.
 oaOrderId :: Lens' OrdersAcknowledge' Text
@@ -156,9 +164,9 @@ oaOrderId
 oaFields :: Lens' OrdersAcknowledge' (Maybe Text)
 oaFields = lens _oaFields (\ s a -> s{_oaFields = a})
 
--- | Data format for the response.
-oaAlt :: Lens' OrdersAcknowledge' Alt
-oaAlt = lens _oaAlt (\ s a -> s{_oaAlt = a})
+instance GoogleAuth OrdersAcknowledge' where
+        authKey = oaKey . _Just
+        authToken = oaOAuthToken . _Just
 
 instance GoogleRequest OrdersAcknowledge' where
         type Rs OrdersAcknowledge' =
@@ -166,12 +174,13 @@ instance GoogleRequest OrdersAcknowledge' where
         request = requestWithRoute defReq shoppingContentURL
         requestWithRoute r u OrdersAcknowledge'{..}
           = go _oaQuotaUser _oaMerchantId (Just _oaPrettyPrint)
-              _oaUserIp
+              _oaUserIP
               _oaKey
-              _oaOauthToken
+              _oaOAuthToken
               _oaOrderId
               _oaFields
-              (Just _oaAlt)
+              (Just AltJSON)
+              _oaOrdersAcknowledgeRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy OrdersAcknowledgeResource)

@@ -19,7 +19,7 @@
 --
 -- | Resumes a transfer operation that is paused.
 --
--- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @StoragetransferTransferOperationsResume@.
+-- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @StorageTransferTransferOperationsResume@.
 module Network.Google.Resource.StorageTransfer.TransferOperations.Resume
     (
     -- * REST Resource
@@ -40,16 +40,16 @@ module Network.Google.Resource.StorageTransfer.TransferOperations.Resume
     , torBearerToken
     , torKey
     , torName
-    , torOauthToken
+    , torOAuthToken
+    , torResumeTransferOperationRequest
     , torFields
     , torCallback
-    , torAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.StorageTransfer.Types
 
--- | A resource alias for @StoragetransferTransferOperationsResume@ which the
+-- | A resource alias for @StorageTransferTransferOperationsResume@ which the
 -- 'TransferOperationsResume'' request conforms to.
 type TransferOperationsResumeResource =
      "v1" :>
@@ -62,30 +62,33 @@ type TransferOperationsResumeResource =
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
                        QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
                                QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :> Post '[JSON] Empty
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON]
+                                     ResumeTransferOperationRequest
+                                     :> Post '[JSON] Empty
 
 -- | Resumes a transfer operation that is paused.
 --
 -- /See:/ 'transferOperationsResume'' smart constructor.
 data TransferOperationsResume' = TransferOperationsResume'
-    { _torXgafv          :: !(Maybe Text)
-    , _torQuotaUser      :: !(Maybe Text)
-    , _torPrettyPrint    :: !Bool
-    , _torUploadProtocol :: !(Maybe Text)
-    , _torPp             :: !Bool
-    , _torAccessToken    :: !(Maybe Text)
-    , _torUploadType     :: !(Maybe Text)
-    , _torBearerToken    :: !(Maybe Text)
-    , _torKey            :: !(Maybe Text)
-    , _torName           :: !Text
-    , _torOauthToken     :: !(Maybe Text)
-    , _torFields         :: !(Maybe Text)
-    , _torCallback       :: !(Maybe Text)
-    , _torAlt            :: !Text
+    { _torXgafv                          :: !(Maybe Text)
+    , _torQuotaUser                      :: !(Maybe Text)
+    , _torPrettyPrint                    :: !Bool
+    , _torUploadProtocol                 :: !(Maybe Text)
+    , _torPp                             :: !Bool
+    , _torAccessToken                    :: !(Maybe Text)
+    , _torUploadType                     :: !(Maybe Text)
+    , _torBearerToken                    :: !(Maybe Text)
+    , _torKey                            :: !(Maybe Key)
+    , _torName                           :: !Text
+    , _torOAuthToken                     :: !(Maybe OAuthToken)
+    , _torResumeTransferOperationRequest :: !ResumeTransferOperationRequest
+    , _torFields                         :: !(Maybe Text)
+    , _torCallback                       :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TransferOperationsResume'' with the minimum fields required to make a request.
@@ -112,17 +115,18 @@ data TransferOperationsResume' = TransferOperationsResume'
 --
 -- * 'torName'
 --
--- * 'torOauthToken'
+-- * 'torOAuthToken'
+--
+-- * 'torResumeTransferOperationRequest'
 --
 -- * 'torFields'
 --
 -- * 'torCallback'
---
--- * 'torAlt'
 transferOperationsResume'
     :: Text -- ^ 'name'
+    -> ResumeTransferOperationRequest -- ^ 'ResumeTransferOperationRequest'
     -> TransferOperationsResume'
-transferOperationsResume' pTorName_ =
+transferOperationsResume' pTorName_ pTorResumeTransferOperationRequest_ =
     TransferOperationsResume'
     { _torXgafv = Nothing
     , _torQuotaUser = Nothing
@@ -134,10 +138,10 @@ transferOperationsResume' pTorName_ =
     , _torBearerToken = Nothing
     , _torKey = Nothing
     , _torName = pTorName_
-    , _torOauthToken = Nothing
+    , _torOAuthToken = Nothing
+    , _torResumeTransferOperationRequest = pTorResumeTransferOperationRequest_
     , _torFields = Nothing
     , _torCallback = Nothing
-    , _torAlt = "json"
     }
 
 -- | V1 error format.
@@ -188,7 +192,7 @@ torBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-torKey :: Lens' TransferOperationsResume' (Maybe Text)
+torKey :: Lens' TransferOperationsResume' (Maybe Key)
 torKey = lens _torKey (\ s a -> s{_torKey = a})
 
 -- | The name of the transfer operation. Required.
@@ -196,10 +200,16 @@ torName :: Lens' TransferOperationsResume' Text
 torName = lens _torName (\ s a -> s{_torName = a})
 
 -- | OAuth 2.0 token for the current user.
-torOauthToken :: Lens' TransferOperationsResume' (Maybe Text)
-torOauthToken
-  = lens _torOauthToken
-      (\ s a -> s{_torOauthToken = a})
+torOAuthToken :: Lens' TransferOperationsResume' (Maybe OAuthToken)
+torOAuthToken
+  = lens _torOAuthToken
+      (\ s a -> s{_torOAuthToken = a})
+
+-- | Multipart request metadata.
+torResumeTransferOperationRequest :: Lens' TransferOperationsResume' ResumeTransferOperationRequest
+torResumeTransferOperationRequest
+  = lens _torResumeTransferOperationRequest
+      (\ s a -> s{_torResumeTransferOperationRequest = a})
 
 -- | Selector specifying which fields to include in a partial response.
 torFields :: Lens' TransferOperationsResume' (Maybe Text)
@@ -211,9 +221,9 @@ torCallback :: Lens' TransferOperationsResume' (Maybe Text)
 torCallback
   = lens _torCallback (\ s a -> s{_torCallback = a})
 
--- | Data format for response.
-torAlt :: Lens' TransferOperationsResume' Text
-torAlt = lens _torAlt (\ s a -> s{_torAlt = a})
+instance GoogleAuth TransferOperationsResume' where
+        authKey = torKey . _Just
+        authToken = torOAuthToken . _Just
 
 instance GoogleRequest TransferOperationsResume'
          where
@@ -228,10 +238,11 @@ instance GoogleRequest TransferOperationsResume'
               _torBearerToken
               _torKey
               _torName
-              _torOauthToken
+              _torOAuthToken
               _torFields
               _torCallback
-              (Just _torAlt)
+              (Just AltJSON)
+              _torResumeTransferOperationRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TransferOperationsResumeResource)

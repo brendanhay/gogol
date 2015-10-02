@@ -32,12 +32,12 @@ module Network.Google.Resource.DFAReporting.Placements.Update
     -- * Request Lenses
     , puQuotaUser
     , puPrettyPrint
-    , puUserIp
+    , puUserIP
     , puProfileId
     , puKey
-    , puOauthToken
+    , puOAuthToken
+    , puPlacement
     , puFields
-    , puAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,10 +52,11 @@ type PlacementsUpdateResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Put '[JSON] Placement
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Placement :> Put '[JSON] Placement
 
 -- | Updates an existing placement.
 --
@@ -63,12 +64,12 @@ type PlacementsUpdateResource =
 data PlacementsUpdate' = PlacementsUpdate'
     { _puQuotaUser   :: !(Maybe Text)
     , _puPrettyPrint :: !Bool
-    , _puUserIp      :: !(Maybe Text)
+    , _puUserIP      :: !(Maybe Text)
     , _puProfileId   :: !Int64
-    , _puKey         :: !(Maybe Text)
-    , _puOauthToken  :: !(Maybe Text)
+    , _puKey         :: !(Maybe Key)
+    , _puOAuthToken  :: !(Maybe OAuthToken)
+    , _puPlacement   :: !Placement
     , _puFields      :: !(Maybe Text)
-    , _puAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementsUpdate'' with the minimum fields required to make a request.
@@ -79,30 +80,31 @@ data PlacementsUpdate' = PlacementsUpdate'
 --
 -- * 'puPrettyPrint'
 --
--- * 'puUserIp'
+-- * 'puUserIP'
 --
 -- * 'puProfileId'
 --
 -- * 'puKey'
 --
--- * 'puOauthToken'
+-- * 'puOAuthToken'
+--
+-- * 'puPlacement'
 --
 -- * 'puFields'
---
--- * 'puAlt'
 placementsUpdate'
     :: Int64 -- ^ 'profileId'
+    -> Placement -- ^ 'Placement'
     -> PlacementsUpdate'
-placementsUpdate' pPuProfileId_ =
+placementsUpdate' pPuProfileId_ pPuPlacement_ =
     PlacementsUpdate'
     { _puQuotaUser = Nothing
     , _puPrettyPrint = True
-    , _puUserIp = Nothing
+    , _puUserIP = Nothing
     , _puProfileId = pPuProfileId_
     , _puKey = Nothing
-    , _puOauthToken = Nothing
+    , _puOAuthToken = Nothing
+    , _puPlacement = pPuPlacement_
     , _puFields = Nothing
-    , _puAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,8 +122,8 @@ puPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-puUserIp :: Lens' PlacementsUpdate' (Maybe Text)
-puUserIp = lens _puUserIp (\ s a -> s{_puUserIp = a})
+puUserIP :: Lens' PlacementsUpdate' (Maybe Text)
+puUserIP = lens _puUserIP (\ s a -> s{_puUserIP = a})
 
 -- | User profile ID associated with this request.
 puProfileId :: Lens' PlacementsUpdate' Int64
@@ -131,32 +133,38 @@ puProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-puKey :: Lens' PlacementsUpdate' (Maybe Text)
+puKey :: Lens' PlacementsUpdate' (Maybe Key)
 puKey = lens _puKey (\ s a -> s{_puKey = a})
 
 -- | OAuth 2.0 token for the current user.
-puOauthToken :: Lens' PlacementsUpdate' (Maybe Text)
-puOauthToken
-  = lens _puOauthToken (\ s a -> s{_puOauthToken = a})
+puOAuthToken :: Lens' PlacementsUpdate' (Maybe OAuthToken)
+puOAuthToken
+  = lens _puOAuthToken (\ s a -> s{_puOAuthToken = a})
+
+-- | Multipart request metadata.
+puPlacement :: Lens' PlacementsUpdate' Placement
+puPlacement
+  = lens _puPlacement (\ s a -> s{_puPlacement = a})
 
 -- | Selector specifying which fields to include in a partial response.
 puFields :: Lens' PlacementsUpdate' (Maybe Text)
 puFields = lens _puFields (\ s a -> s{_puFields = a})
 
--- | Data format for the response.
-puAlt :: Lens' PlacementsUpdate' Alt
-puAlt = lens _puAlt (\ s a -> s{_puAlt = a})
+instance GoogleAuth PlacementsUpdate' where
+        authKey = puKey . _Just
+        authToken = puOAuthToken . _Just
 
 instance GoogleRequest PlacementsUpdate' where
         type Rs PlacementsUpdate' = Placement
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlacementsUpdate'{..}
-          = go _puQuotaUser (Just _puPrettyPrint) _puUserIp
+          = go _puQuotaUser (Just _puPrettyPrint) _puUserIP
               _puProfileId
               _puKey
-              _puOauthToken
+              _puOAuthToken
               _puFields
-              (Just _puAlt)
+              (Just AltJSON)
+              _puPlacement
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PlacementsUpdateResource)

@@ -32,13 +32,12 @@ module Network.Google.Resource.Gmail.Users.Labels.Get
     -- * Request Lenses
     , ulgQuotaUser
     , ulgPrettyPrint
-    , ulgUserIp
+    , ulgUserIP
     , ulgUserId
     , ulgKey
     , ulgId
-    , ulgOauthToken
+    , ulgOAuthToken
     , ulgFields
-    , ulgAlt
     ) where
 
 import           Network.Google.Gmail.Types
@@ -53,10 +52,10 @@ type UsersLabelsGetResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Get '[JSON] Label
+                       QueryParam "alt" AltJSON :> Get '[JSON] Label
 
 -- | Gets the specified label.
 --
@@ -64,13 +63,12 @@ type UsersLabelsGetResource =
 data UsersLabelsGet' = UsersLabelsGet'
     { _ulgQuotaUser   :: !(Maybe Text)
     , _ulgPrettyPrint :: !Bool
-    , _ulgUserIp      :: !(Maybe Text)
+    , _ulgUserIP      :: !(Maybe Text)
     , _ulgUserId      :: !Text
-    , _ulgKey         :: !(Maybe Text)
+    , _ulgKey         :: !(Maybe Key)
     , _ulgId          :: !Text
-    , _ulgOauthToken  :: !(Maybe Text)
+    , _ulgOAuthToken  :: !(Maybe OAuthToken)
     , _ulgFields      :: !(Maybe Text)
-    , _ulgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersLabelsGet'' with the minimum fields required to make a request.
@@ -81,7 +79,7 @@ data UsersLabelsGet' = UsersLabelsGet'
 --
 -- * 'ulgPrettyPrint'
 --
--- * 'ulgUserIp'
+-- * 'ulgUserIP'
 --
 -- * 'ulgUserId'
 --
@@ -89,11 +87,9 @@ data UsersLabelsGet' = UsersLabelsGet'
 --
 -- * 'ulgId'
 --
--- * 'ulgOauthToken'
+-- * 'ulgOAuthToken'
 --
 -- * 'ulgFields'
---
--- * 'ulgAlt'
 usersLabelsGet'
     :: Text -- ^ 'id'
     -> Text
@@ -102,13 +98,12 @@ usersLabelsGet' pUlgUserId_ pUlgId_ =
     UsersLabelsGet'
     { _ulgQuotaUser = Nothing
     , _ulgPrettyPrint = True
-    , _ulgUserIp = Nothing
+    , _ulgUserIP = Nothing
     , _ulgUserId = pUlgUserId_
     , _ulgKey = Nothing
     , _ulgId = pUlgId_
-    , _ulgOauthToken = Nothing
+    , _ulgOAuthToken = Nothing
     , _ulgFields = Nothing
-    , _ulgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -126,9 +121,9 @@ ulgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ulgUserIp :: Lens' UsersLabelsGet' (Maybe Text)
-ulgUserIp
-  = lens _ulgUserIp (\ s a -> s{_ulgUserIp = a})
+ulgUserIP :: Lens' UsersLabelsGet' (Maybe Text)
+ulgUserIP
+  = lens _ulgUserIP (\ s a -> s{_ulgUserIP = a})
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
@@ -139,7 +134,7 @@ ulgUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ulgKey :: Lens' UsersLabelsGet' (Maybe Text)
+ulgKey :: Lens' UsersLabelsGet' (Maybe Key)
 ulgKey = lens _ulgKey (\ s a -> s{_ulgKey = a})
 
 -- | The ID of the label to retrieve.
@@ -147,31 +142,31 @@ ulgId :: Lens' UsersLabelsGet' Text
 ulgId = lens _ulgId (\ s a -> s{_ulgId = a})
 
 -- | OAuth 2.0 token for the current user.
-ulgOauthToken :: Lens' UsersLabelsGet' (Maybe Text)
-ulgOauthToken
-  = lens _ulgOauthToken
-      (\ s a -> s{_ulgOauthToken = a})
+ulgOAuthToken :: Lens' UsersLabelsGet' (Maybe OAuthToken)
+ulgOAuthToken
+  = lens _ulgOAuthToken
+      (\ s a -> s{_ulgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ulgFields :: Lens' UsersLabelsGet' (Maybe Text)
 ulgFields
   = lens _ulgFields (\ s a -> s{_ulgFields = a})
 
--- | Data format for the response.
-ulgAlt :: Lens' UsersLabelsGet' Alt
-ulgAlt = lens _ulgAlt (\ s a -> s{_ulgAlt = a})
+instance GoogleAuth UsersLabelsGet' where
+        authKey = ulgKey . _Just
+        authToken = ulgOAuthToken . _Just
 
 instance GoogleRequest UsersLabelsGet' where
         type Rs UsersLabelsGet' = Label
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersLabelsGet'{..}
-          = go _ulgQuotaUser (Just _ulgPrettyPrint) _ulgUserIp
+          = go _ulgQuotaUser (Just _ulgPrettyPrint) _ulgUserIP
               _ulgUserId
               _ulgKey
               _ulgId
-              _ulgOauthToken
+              _ulgOAuthToken
               _ulgFields
-              (Just _ulgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersLabelsGetResource)

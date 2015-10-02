@@ -34,15 +34,14 @@ module Network.Google.Resource.Compute.DiskTypes.List
     , dtlQuotaUser
     , dtlPrettyPrint
     , dtlProject
-    , dtlUserIp
+    , dtlUserIP
     , dtlZone
     , dtlKey
     , dtlFilter
     , dtlPageToken
-    , dtlOauthToken
+    , dtlOAuthToken
     , dtlMaxResults
     , dtlFields
-    , dtlAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -58,13 +57,14 @@ type DiskTypesListResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "filter" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "maxResults" Word32 :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :> Get '[JSON] DiskTypeList
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] DiskTypeList
 
 -- | Retrieves the list of disk type resources available to the specified
 -- project.
@@ -74,15 +74,14 @@ data DiskTypesList' = DiskTypesList'
     { _dtlQuotaUser   :: !(Maybe Text)
     , _dtlPrettyPrint :: !Bool
     , _dtlProject     :: !Text
-    , _dtlUserIp      :: !(Maybe Text)
+    , _dtlUserIP      :: !(Maybe Text)
     , _dtlZone        :: !Text
-    , _dtlKey         :: !(Maybe Text)
+    , _dtlKey         :: !(Maybe Key)
     , _dtlFilter      :: !(Maybe Text)
     , _dtlPageToken   :: !(Maybe Text)
-    , _dtlOauthToken  :: !(Maybe Text)
+    , _dtlOAuthToken  :: !(Maybe OAuthToken)
     , _dtlMaxResults  :: !Word32
     , _dtlFields      :: !(Maybe Text)
-    , _dtlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DiskTypesList'' with the minimum fields required to make a request.
@@ -95,7 +94,7 @@ data DiskTypesList' = DiskTypesList'
 --
 -- * 'dtlProject'
 --
--- * 'dtlUserIp'
+-- * 'dtlUserIP'
 --
 -- * 'dtlZone'
 --
@@ -105,13 +104,11 @@ data DiskTypesList' = DiskTypesList'
 --
 -- * 'dtlPageToken'
 --
--- * 'dtlOauthToken'
+-- * 'dtlOAuthToken'
 --
 -- * 'dtlMaxResults'
 --
 -- * 'dtlFields'
---
--- * 'dtlAlt'
 diskTypesList'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
@@ -121,15 +118,14 @@ diskTypesList' pDtlProject_ pDtlZone_ =
     { _dtlQuotaUser = Nothing
     , _dtlPrettyPrint = True
     , _dtlProject = pDtlProject_
-    , _dtlUserIp = Nothing
+    , _dtlUserIP = Nothing
     , _dtlZone = pDtlZone_
     , _dtlKey = Nothing
     , _dtlFilter = Nothing
     , _dtlPageToken = Nothing
-    , _dtlOauthToken = Nothing
+    , _dtlOAuthToken = Nothing
     , _dtlMaxResults = 500
     , _dtlFields = Nothing
-    , _dtlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,9 +148,9 @@ dtlProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-dtlUserIp :: Lens' DiskTypesList' (Maybe Text)
-dtlUserIp
-  = lens _dtlUserIp (\ s a -> s{_dtlUserIp = a})
+dtlUserIP :: Lens' DiskTypesList' (Maybe Text)
+dtlUserIP
+  = lens _dtlUserIP (\ s a -> s{_dtlUserIP = a})
 
 -- | The name of the zone for this request.
 dtlZone :: Lens' DiskTypesList' Text
@@ -163,7 +159,7 @@ dtlZone = lens _dtlZone (\ s a -> s{_dtlZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dtlKey :: Lens' DiskTypesList' (Maybe Text)
+dtlKey :: Lens' DiskTypesList' (Maybe Key)
 dtlKey = lens _dtlKey (\ s a -> s{_dtlKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
@@ -189,10 +185,10 @@ dtlPageToken
   = lens _dtlPageToken (\ s a -> s{_dtlPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-dtlOauthToken :: Lens' DiskTypesList' (Maybe Text)
-dtlOauthToken
-  = lens _dtlOauthToken
-      (\ s a -> s{_dtlOauthToken = a})
+dtlOAuthToken :: Lens' DiskTypesList' (Maybe OAuthToken)
+dtlOAuthToken
+  = lens _dtlOAuthToken
+      (\ s a -> s{_dtlOAuthToken = a})
 
 -- | Maximum count of results to be returned.
 dtlMaxResults :: Lens' DiskTypesList' Word32
@@ -205,24 +201,24 @@ dtlFields :: Lens' DiskTypesList' (Maybe Text)
 dtlFields
   = lens _dtlFields (\ s a -> s{_dtlFields = a})
 
--- | Data format for the response.
-dtlAlt :: Lens' DiskTypesList' Alt
-dtlAlt = lens _dtlAlt (\ s a -> s{_dtlAlt = a})
+instance GoogleAuth DiskTypesList' where
+        authKey = dtlKey . _Just
+        authToken = dtlOAuthToken . _Just
 
 instance GoogleRequest DiskTypesList' where
         type Rs DiskTypesList' = DiskTypeList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u DiskTypesList'{..}
           = go _dtlQuotaUser (Just _dtlPrettyPrint) _dtlProject
-              _dtlUserIp
+              _dtlUserIP
               _dtlZone
               _dtlKey
               _dtlFilter
               _dtlPageToken
-              _dtlOauthToken
+              _dtlOAuthToken
               (Just _dtlMaxResults)
               _dtlFields
-              (Just _dtlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy DiskTypesListResource)

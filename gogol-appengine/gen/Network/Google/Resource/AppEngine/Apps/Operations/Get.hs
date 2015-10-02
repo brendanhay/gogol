@@ -21,7 +21,7 @@
 -- method to poll the operation result at intervals as recommended by the
 -- API service.
 --
--- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @AppengineAppsOperationsGet@.
+-- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @AppEngineAppsOperationsGet@.
 module Network.Google.Resource.AppEngine.Apps.Operations.Get
     (
     -- * REST Resource
@@ -42,17 +42,16 @@ module Network.Google.Resource.AppEngine.Apps.Operations.Get
     , aogBearerToken
     , aogKey
     , aogAppsId
-    , aogOauthToken
+    , aogOAuthToken
     , aogOperationsId
     , aogFields
     , aogCallback
-    , aogAlt
     ) where
 
 import           Network.Google.AppEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AppengineAppsOperationsGet@ which the
+-- | A resource alias for @AppEngineAppsOperationsGet@ which the
 -- 'AppsOperationsGet'' request conforms to.
 type AppsOperationsGetResource =
      "v1beta4" :>
@@ -68,11 +67,11 @@ type AppsOperationsGetResource =
                          QueryParam "access_token" Text :>
                            QueryParam "uploadType" Text :>
                              QueryParam "bearer_token" Text :>
-                               QueryParam "key" Text :>
-                                 QueryParam "oauth_token" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "fields" Text :>
                                      QueryParam "callback" Text :>
-                                       QueryParam "alt" Text :>
+                                       QueryParam "alt" AltJSON :>
                                          Get '[JSON] Operation
 
 -- | Gets the latest state of a long-running operation. Clients can use this
@@ -89,13 +88,12 @@ data AppsOperationsGet' = AppsOperationsGet'
     , _aogAccessToken    :: !(Maybe Text)
     , _aogUploadType     :: !(Maybe Text)
     , _aogBearerToken    :: !(Maybe Text)
-    , _aogKey            :: !(Maybe Text)
+    , _aogKey            :: !(Maybe Key)
     , _aogAppsId         :: !Text
-    , _aogOauthToken     :: !(Maybe Text)
+    , _aogOAuthToken     :: !(Maybe OAuthToken)
     , _aogOperationsId   :: !Text
     , _aogFields         :: !(Maybe Text)
     , _aogCallback       :: !(Maybe Text)
-    , _aogAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AppsOperationsGet'' with the minimum fields required to make a request.
@@ -122,15 +120,13 @@ data AppsOperationsGet' = AppsOperationsGet'
 --
 -- * 'aogAppsId'
 --
--- * 'aogOauthToken'
+-- * 'aogOAuthToken'
 --
 -- * 'aogOperationsId'
 --
 -- * 'aogFields'
 --
 -- * 'aogCallback'
---
--- * 'aogAlt'
 appsOperationsGet'
     :: Text -- ^ 'appsId'
     -> Text -- ^ 'operationsId'
@@ -147,11 +143,10 @@ appsOperationsGet' pAogAppsId_ pAogOperationsId_ =
     , _aogBearerToken = Nothing
     , _aogKey = Nothing
     , _aogAppsId = pAogAppsId_
-    , _aogOauthToken = Nothing
+    , _aogOAuthToken = Nothing
     , _aogOperationsId = pAogOperationsId_
     , _aogFields = Nothing
     , _aogCallback = Nothing
-    , _aogAlt = "json"
     }
 
 -- | V1 error format.
@@ -202,7 +197,7 @@ aogBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aogKey :: Lens' AppsOperationsGet' (Maybe Text)
+aogKey :: Lens' AppsOperationsGet' (Maybe Key)
 aogKey = lens _aogKey (\ s a -> s{_aogKey = a})
 
 -- | Part of \`name\`. The name of the operation resource.
@@ -211,10 +206,10 @@ aogAppsId
   = lens _aogAppsId (\ s a -> s{_aogAppsId = a})
 
 -- | OAuth 2.0 token for the current user.
-aogOauthToken :: Lens' AppsOperationsGet' (Maybe Text)
-aogOauthToken
-  = lens _aogOauthToken
-      (\ s a -> s{_aogOauthToken = a})
+aogOAuthToken :: Lens' AppsOperationsGet' (Maybe OAuthToken)
+aogOAuthToken
+  = lens _aogOAuthToken
+      (\ s a -> s{_aogOAuthToken = a})
 
 -- | Part of \`name\`. See documentation of \`appsId\`.
 aogOperationsId :: Lens' AppsOperationsGet' Text
@@ -232,9 +227,9 @@ aogCallback :: Lens' AppsOperationsGet' (Maybe Text)
 aogCallback
   = lens _aogCallback (\ s a -> s{_aogCallback = a})
 
--- | Data format for response.
-aogAlt :: Lens' AppsOperationsGet' Text
-aogAlt = lens _aogAlt (\ s a -> s{_aogAlt = a})
+instance GoogleAuth AppsOperationsGet' where
+        authKey = aogKey . _Just
+        authToken = aogOAuthToken . _Just
 
 instance GoogleRequest AppsOperationsGet' where
         type Rs AppsOperationsGet' = Operation
@@ -248,11 +243,11 @@ instance GoogleRequest AppsOperationsGet' where
               _aogBearerToken
               _aogKey
               _aogAppsId
-              _aogOauthToken
+              _aogOAuthToken
               _aogOperationsId
               _aogFields
               _aogCallback
-              (Just _aogAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AppsOperationsGetResource)

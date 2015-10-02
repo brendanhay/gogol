@@ -34,7 +34,7 @@ module Network.Google.Resource.Blogger.Posts.List
     , pllQuotaUser
     , pllPrettyPrint
     , pllOrderBy
-    , pllUserIp
+    , pllUserIP
     , pllFetchImages
     , pllEndDate
     , pllBlogId
@@ -44,10 +44,9 @@ module Network.Google.Resource.Blogger.Posts.List
     , pllView
     , pllLabels
     , pllPageToken
-    , pllOauthToken
+    , pllOAuthToken
     , pllMaxResults
     , pllFields
-    , pllAlt
     ) where
 
 import           Network.Google.Blogger.Types
@@ -67,15 +66,15 @@ type PostsListResource =
                      QueryParam "fetchImages" Bool :>
                        QueryParam "endDate" UTCTime :>
                          QueryParam "startDate" UTCTime :>
-                           QueryParam "key" Text :>
+                           QueryParam "key" Key :>
                              QueryParam "fetchBodies" Bool :>
                                QueryParam "view" BloggerPostsListView :>
                                  QueryParam "labels" Text :>
                                    QueryParam "pageToken" Text :>
-                                     QueryParam "oauth_token" Text :>
+                                     QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "maxResults" Word32 :>
                                          QueryParam "fields" Text :>
-                                           QueryParam "alt" Alt :>
+                                           QueryParam "alt" AltJSON :>
                                              Get '[JSON] PostList
 
 -- | Retrieves a list of posts, possibly filtered.
@@ -86,20 +85,19 @@ data PostsList' = PostsList'
     , _pllQuotaUser   :: !(Maybe Text)
     , _pllPrettyPrint :: !Bool
     , _pllOrderBy     :: !BloggerPostsListOrderBy
-    , _pllUserIp      :: !(Maybe Text)
+    , _pllUserIP      :: !(Maybe Text)
     , _pllFetchImages :: !(Maybe Bool)
     , _pllEndDate     :: !(Maybe UTCTime)
     , _pllBlogId      :: !Text
     , _pllStartDate   :: !(Maybe UTCTime)
-    , _pllKey         :: !(Maybe Text)
+    , _pllKey         :: !(Maybe Key)
     , _pllFetchBodies :: !Bool
     , _pllView        :: !(Maybe BloggerPostsListView)
     , _pllLabels      :: !(Maybe Text)
     , _pllPageToken   :: !(Maybe Text)
-    , _pllOauthToken  :: !(Maybe Text)
+    , _pllOAuthToken  :: !(Maybe OAuthToken)
     , _pllMaxResults  :: !(Maybe Word32)
     , _pllFields      :: !(Maybe Text)
-    , _pllAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostsList'' with the minimum fields required to make a request.
@@ -114,7 +112,7 @@ data PostsList' = PostsList'
 --
 -- * 'pllOrderBy'
 --
--- * 'pllUserIp'
+-- * 'pllUserIP'
 --
 -- * 'pllFetchImages'
 --
@@ -134,13 +132,11 @@ data PostsList' = PostsList'
 --
 -- * 'pllPageToken'
 --
--- * 'pllOauthToken'
+-- * 'pllOAuthToken'
 --
 -- * 'pllMaxResults'
 --
 -- * 'pllFields'
---
--- * 'pllAlt'
 postsList'
     :: Text -- ^ 'blogId'
     -> PostsList'
@@ -150,7 +146,7 @@ postsList' pPllBlogId_ =
     , _pllQuotaUser = Nothing
     , _pllPrettyPrint = True
     , _pllOrderBy = Published
-    , _pllUserIp = Nothing
+    , _pllUserIP = Nothing
     , _pllFetchImages = Nothing
     , _pllEndDate = Nothing
     , _pllBlogId = pPllBlogId_
@@ -160,10 +156,9 @@ postsList' pPllBlogId_ =
     , _pllView = Nothing
     , _pllLabels = Nothing
     , _pllPageToken = Nothing
-    , _pllOauthToken = Nothing
+    , _pllOAuthToken = Nothing
     , _pllMaxResults = Nothing
     , _pllFields = Nothing
-    , _pllAlt = JSON
     }
 
 -- | Statuses to include in the results.
@@ -191,9 +186,9 @@ pllOrderBy
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-pllUserIp :: Lens' PostsList' (Maybe Text)
-pllUserIp
-  = lens _pllUserIp (\ s a -> s{_pllUserIp = a})
+pllUserIP :: Lens' PostsList' (Maybe Text)
+pllUserIP
+  = lens _pllUserIP (\ s a -> s{_pllUserIP = a})
 
 -- | Whether image URL metadata for each post is included.
 pllFetchImages :: Lens' PostsList' (Maybe Bool)
@@ -219,7 +214,7 @@ pllStartDate
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pllKey :: Lens' PostsList' (Maybe Text)
+pllKey :: Lens' PostsList' (Maybe Key)
 pllKey = lens _pllKey (\ s a -> s{_pllKey = a})
 
 -- | Whether the body content of posts is included (default: true). This
@@ -246,10 +241,10 @@ pllPageToken
   = lens _pllPageToken (\ s a -> s{_pllPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-pllOauthToken :: Lens' PostsList' (Maybe Text)
-pllOauthToken
-  = lens _pllOauthToken
-      (\ s a -> s{_pllOauthToken = a})
+pllOAuthToken :: Lens' PostsList' (Maybe OAuthToken)
+pllOAuthToken
+  = lens _pllOAuthToken
+      (\ s a -> s{_pllOAuthToken = a})
 
 -- | Maximum number of posts to fetch.
 pllMaxResults :: Lens' PostsList' (Maybe Word32)
@@ -262,9 +257,9 @@ pllFields :: Lens' PostsList' (Maybe Text)
 pllFields
   = lens _pllFields (\ s a -> s{_pllFields = a})
 
--- | Data format for the response.
-pllAlt :: Lens' PostsList' Alt
-pllAlt = lens _pllAlt (\ s a -> s{_pllAlt = a})
+instance GoogleAuth PostsList' where
+        authKey = pllKey . _Just
+        authToken = pllOAuthToken . _Just
 
 instance GoogleRequest PostsList' where
         type Rs PostsList' = PostList
@@ -272,7 +267,7 @@ instance GoogleRequest PostsList' where
         requestWithRoute r u PostsList'{..}
           = go _pllStatus _pllQuotaUser (Just _pllPrettyPrint)
               (Just _pllOrderBy)
-              _pllUserIp
+              _pllUserIP
               _pllFetchImages
               _pllEndDate
               _pllBlogId
@@ -282,10 +277,10 @@ instance GoogleRequest PostsList' where
               _pllView
               _pllLabels
               _pllPageToken
-              _pllOauthToken
+              _pllOAuthToken
               _pllMaxResults
               _pllFields
-              (Just _pllAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy PostsListResource)
                       r

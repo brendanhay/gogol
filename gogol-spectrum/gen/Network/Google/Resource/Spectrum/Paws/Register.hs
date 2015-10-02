@@ -33,11 +33,11 @@ module Network.Google.Resource.Spectrum.Paws.Register
     -- * Request Lenses
     , prQuotaUser
     , prPrettyPrint
-    , prUserIp
+    , prUserIP
     , prKey
-    , prOauthToken
+    , prPawsRegisterRequest
+    , prOAuthToken
     , prFields
-    , prAlt
     ) where
 
 import           Network.Google.Prelude
@@ -50,24 +50,25 @@ type PawsRegisterResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
-               QueryParam "oauth_token" Text :>
+             QueryParam "key" Key :>
+               QueryParam "oauth_token" OAuthToken :>
                  QueryParam "fields" Text :>
-                   QueryParam "alt" Alt :>
-                     Post '[JSON] PawsRegisterResponse
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] PawsRegisterRequest :>
+                       Post '[JSON] PawsRegisterResponse
 
 -- | The Google Spectrum Database implements registration in the getSpectrum
 -- method. As such this always returns an UNIMPLEMENTED error.
 --
 -- /See:/ 'pawsRegister'' smart constructor.
 data PawsRegister' = PawsRegister'
-    { _prQuotaUser   :: !(Maybe Text)
-    , _prPrettyPrint :: !Bool
-    , _prUserIp      :: !(Maybe Text)
-    , _prKey         :: !(Maybe Text)
-    , _prOauthToken  :: !(Maybe Text)
-    , _prFields      :: !(Maybe Text)
-    , _prAlt         :: !Alt
+    { _prQuotaUser           :: !(Maybe Text)
+    , _prPrettyPrint         :: !Bool
+    , _prUserIP              :: !(Maybe Text)
+    , _prKey                 :: !(Maybe Key)
+    , _prPawsRegisterRequest :: !PawsRegisterRequest
+    , _prOAuthToken          :: !(Maybe OAuthToken)
+    , _prFields              :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PawsRegister'' with the minimum fields required to make a request.
@@ -78,26 +79,27 @@ data PawsRegister' = PawsRegister'
 --
 -- * 'prPrettyPrint'
 --
--- * 'prUserIp'
+-- * 'prUserIP'
 --
 -- * 'prKey'
 --
--- * 'prOauthToken'
+-- * 'prPawsRegisterRequest'
+--
+-- * 'prOAuthToken'
 --
 -- * 'prFields'
---
--- * 'prAlt'
 pawsRegister'
-    :: PawsRegister'
-pawsRegister' =
+    :: PawsRegisterRequest -- ^ 'PawsRegisterRequest'
+    -> PawsRegister'
+pawsRegister' pPrPawsRegisterRequest_ =
     PawsRegister'
     { _prQuotaUser = Nothing
     , _prPrettyPrint = True
-    , _prUserIp = Nothing
+    , _prUserIP = Nothing
     , _prKey = Nothing
-    , _prOauthToken = Nothing
+    , _prPawsRegisterRequest = pPrPawsRegisterRequest_
+    , _prOAuthToken = Nothing
     , _prFields = Nothing
-    , _prAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -115,37 +117,44 @@ prPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-prUserIp :: Lens' PawsRegister' (Maybe Text)
-prUserIp = lens _prUserIp (\ s a -> s{_prUserIp = a})
+prUserIP :: Lens' PawsRegister' (Maybe Text)
+prUserIP = lens _prUserIP (\ s a -> s{_prUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-prKey :: Lens' PawsRegister' (Maybe Text)
+prKey :: Lens' PawsRegister' (Maybe Key)
 prKey = lens _prKey (\ s a -> s{_prKey = a})
 
+-- | Multipart request metadata.
+prPawsRegisterRequest :: Lens' PawsRegister' PawsRegisterRequest
+prPawsRegisterRequest
+  = lens _prPawsRegisterRequest
+      (\ s a -> s{_prPawsRegisterRequest = a})
+
 -- | OAuth 2.0 token for the current user.
-prOauthToken :: Lens' PawsRegister' (Maybe Text)
-prOauthToken
-  = lens _prOauthToken (\ s a -> s{_prOauthToken = a})
+prOAuthToken :: Lens' PawsRegister' (Maybe OAuthToken)
+prOAuthToken
+  = lens _prOAuthToken (\ s a -> s{_prOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 prFields :: Lens' PawsRegister' (Maybe Text)
 prFields = lens _prFields (\ s a -> s{_prFields = a})
 
--- | Data format for the response.
-prAlt :: Lens' PawsRegister' Alt
-prAlt = lens _prAlt (\ s a -> s{_prAlt = a})
+instance GoogleAuth PawsRegister' where
+        authKey = prKey . _Just
+        authToken = prOAuthToken . _Just
 
 instance GoogleRequest PawsRegister' where
         type Rs PawsRegister' = PawsRegisterResponse
         request = requestWithRoute defReq spectrumURL
         requestWithRoute r u PawsRegister'{..}
-          = go _prQuotaUser (Just _prPrettyPrint) _prUserIp
+          = go _prQuotaUser (Just _prPrettyPrint) _prUserIP
               _prKey
-              _prOauthToken
+              _prOAuthToken
               _prFields
-              (Just _prAlt)
+              (Just AltJSON)
+              _prPawsRegisterRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PawsRegisterResource)

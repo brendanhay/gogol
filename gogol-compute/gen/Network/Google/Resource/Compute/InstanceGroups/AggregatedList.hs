@@ -33,14 +33,13 @@ module Network.Google.Resource.Compute.InstanceGroups.AggregatedList
     , igalQuotaUser
     , igalPrettyPrint
     , igalProject
-    , igalUserIp
+    , igalUserIP
     , igalKey
     , igalFilter
     , igalPageToken
-    , igalOauthToken
+    , igalOAuthToken
     , igalMaxResults
     , igalFields
-    , igalAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -55,13 +54,13 @@ type InstanceGroupsAggregatedListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "filter" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "maxResults" Word32 :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :>
+                             QueryParam "alt" AltJSON :>
                                Get '[JSON] InstanceGroupAggregatedList
 
 -- | Retrieves the list of instance groups, and sorts them by zone.
@@ -71,14 +70,13 @@ data InstanceGroupsAggregatedList' = InstanceGroupsAggregatedList'
     { _igalQuotaUser   :: !(Maybe Text)
     , _igalPrettyPrint :: !Bool
     , _igalProject     :: !Text
-    , _igalUserIp      :: !(Maybe Text)
-    , _igalKey         :: !(Maybe Text)
+    , _igalUserIP      :: !(Maybe Text)
+    , _igalKey         :: !(Maybe Key)
     , _igalFilter      :: !(Maybe Text)
     , _igalPageToken   :: !(Maybe Text)
-    , _igalOauthToken  :: !(Maybe Text)
+    , _igalOAuthToken  :: !(Maybe OAuthToken)
     , _igalMaxResults  :: !Word32
     , _igalFields      :: !(Maybe Text)
-    , _igalAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupsAggregatedList'' with the minimum fields required to make a request.
@@ -91,7 +89,7 @@ data InstanceGroupsAggregatedList' = InstanceGroupsAggregatedList'
 --
 -- * 'igalProject'
 --
--- * 'igalUserIp'
+-- * 'igalUserIP'
 --
 -- * 'igalKey'
 --
@@ -99,13 +97,11 @@ data InstanceGroupsAggregatedList' = InstanceGroupsAggregatedList'
 --
 -- * 'igalPageToken'
 --
--- * 'igalOauthToken'
+-- * 'igalOAuthToken'
 --
 -- * 'igalMaxResults'
 --
 -- * 'igalFields'
---
--- * 'igalAlt'
 instanceGroupsAggregatedList'
     :: Text -- ^ 'project'
     -> InstanceGroupsAggregatedList'
@@ -114,14 +110,13 @@ instanceGroupsAggregatedList' pIgalProject_ =
     { _igalQuotaUser = Nothing
     , _igalPrettyPrint = True
     , _igalProject = pIgalProject_
-    , _igalUserIp = Nothing
+    , _igalUserIP = Nothing
     , _igalKey = Nothing
     , _igalFilter = Nothing
     , _igalPageToken = Nothing
-    , _igalOauthToken = Nothing
+    , _igalOAuthToken = Nothing
     , _igalMaxResults = 500
     , _igalFields = Nothing
-    , _igalAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -145,14 +140,14 @@ igalProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-igalUserIp :: Lens' InstanceGroupsAggregatedList' (Maybe Text)
-igalUserIp
-  = lens _igalUserIp (\ s a -> s{_igalUserIp = a})
+igalUserIP :: Lens' InstanceGroupsAggregatedList' (Maybe Text)
+igalUserIP
+  = lens _igalUserIP (\ s a -> s{_igalUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-igalKey :: Lens' InstanceGroupsAggregatedList' (Maybe Text)
+igalKey :: Lens' InstanceGroupsAggregatedList' (Maybe Key)
 igalKey = lens _igalKey (\ s a -> s{_igalKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
@@ -179,10 +174,10 @@ igalPageToken
       (\ s a -> s{_igalPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-igalOauthToken :: Lens' InstanceGroupsAggregatedList' (Maybe Text)
-igalOauthToken
-  = lens _igalOauthToken
-      (\ s a -> s{_igalOauthToken = a})
+igalOAuthToken :: Lens' InstanceGroupsAggregatedList' (Maybe OAuthToken)
+igalOAuthToken
+  = lens _igalOAuthToken
+      (\ s a -> s{_igalOAuthToken = a})
 
 -- | Maximum count of results to be returned.
 igalMaxResults :: Lens' InstanceGroupsAggregatedList' Word32
@@ -195,9 +190,10 @@ igalFields :: Lens' InstanceGroupsAggregatedList' (Maybe Text)
 igalFields
   = lens _igalFields (\ s a -> s{_igalFields = a})
 
--- | Data format for the response.
-igalAlt :: Lens' InstanceGroupsAggregatedList' Alt
-igalAlt = lens _igalAlt (\ s a -> s{_igalAlt = a})
+instance GoogleAuth InstanceGroupsAggregatedList'
+         where
+        authKey = igalKey . _Just
+        authToken = igalOAuthToken . _Just
 
 instance GoogleRequest InstanceGroupsAggregatedList'
          where
@@ -208,14 +204,14 @@ instance GoogleRequest InstanceGroupsAggregatedList'
           InstanceGroupsAggregatedList'{..}
           = go _igalQuotaUser (Just _igalPrettyPrint)
               _igalProject
-              _igalUserIp
+              _igalUserIP
               _igalKey
               _igalFilter
               _igalPageToken
-              _igalOauthToken
+              _igalOAuthToken
               (Just _igalMaxResults)
               _igalFields
-              (Just _igalAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InstanceGroupsAggregatedListResource)

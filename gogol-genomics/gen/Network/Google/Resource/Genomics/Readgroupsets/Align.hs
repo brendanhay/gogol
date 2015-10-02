@@ -34,11 +34,11 @@ module Network.Google.Resource.Genomics.Readgroupsets.Align
     -- * Request Lenses
     , raQuotaUser
     , raPrettyPrint
-    , raUserIp
+    , raUserIP
     , raKey
-    , raOauthToken
+    , raAlignReadGroupSetsRequest
+    , raOAuthToken
     , raFields
-    , raAlt
     ) where
 
 import           Network.Google.Genomics.Types
@@ -52,11 +52,12 @@ type ReadgroupsetsAlignResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :>
-                       Post '[JSON] AlignReadGroupSetsResponse
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] AlignReadGroupSetsRequest :>
+                         Post '[JSON] AlignReadGroupSetsResponse
 
 -- | Aligns read data from existing read group sets or files from Google
 -- Cloud Storage. See the alignment and variant calling documentation for
@@ -64,13 +65,13 @@ type ReadgroupsetsAlignResource =
 --
 -- /See:/ 'readgroupsetsAlign'' smart constructor.
 data ReadgroupsetsAlign' = ReadgroupsetsAlign'
-    { _raQuotaUser   :: !(Maybe Text)
-    , _raPrettyPrint :: !Bool
-    , _raUserIp      :: !(Maybe Text)
-    , _raKey         :: !(Maybe Text)
-    , _raOauthToken  :: !(Maybe Text)
-    , _raFields      :: !(Maybe Text)
-    , _raAlt         :: !Alt
+    { _raQuotaUser                 :: !(Maybe Text)
+    , _raPrettyPrint               :: !Bool
+    , _raUserIP                    :: !(Maybe Text)
+    , _raKey                       :: !(Maybe Key)
+    , _raAlignReadGroupSetsRequest :: !AlignReadGroupSetsRequest
+    , _raOAuthToken                :: !(Maybe OAuthToken)
+    , _raFields                    :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReadgroupsetsAlign'' with the minimum fields required to make a request.
@@ -81,26 +82,27 @@ data ReadgroupsetsAlign' = ReadgroupsetsAlign'
 --
 -- * 'raPrettyPrint'
 --
--- * 'raUserIp'
+-- * 'raUserIP'
 --
 -- * 'raKey'
 --
--- * 'raOauthToken'
+-- * 'raAlignReadGroupSetsRequest'
+--
+-- * 'raOAuthToken'
 --
 -- * 'raFields'
---
--- * 'raAlt'
 readgroupsetsAlign'
-    :: ReadgroupsetsAlign'
-readgroupsetsAlign' =
+    :: AlignReadGroupSetsRequest -- ^ 'AlignReadGroupSetsRequest'
+    -> ReadgroupsetsAlign'
+readgroupsetsAlign' pRaAlignReadGroupSetsRequest_ =
     ReadgroupsetsAlign'
     { _raQuotaUser = Nothing
     , _raPrettyPrint = True
-    , _raUserIp = Nothing
+    , _raUserIP = Nothing
     , _raKey = Nothing
-    , _raOauthToken = Nothing
+    , _raAlignReadGroupSetsRequest = pRaAlignReadGroupSetsRequest_
+    , _raOAuthToken = Nothing
     , _raFields = Nothing
-    , _raAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -118,38 +120,45 @@ raPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-raUserIp :: Lens' ReadgroupsetsAlign' (Maybe Text)
-raUserIp = lens _raUserIp (\ s a -> s{_raUserIp = a})
+raUserIP :: Lens' ReadgroupsetsAlign' (Maybe Text)
+raUserIP = lens _raUserIP (\ s a -> s{_raUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-raKey :: Lens' ReadgroupsetsAlign' (Maybe Text)
+raKey :: Lens' ReadgroupsetsAlign' (Maybe Key)
 raKey = lens _raKey (\ s a -> s{_raKey = a})
 
+-- | Multipart request metadata.
+raAlignReadGroupSetsRequest :: Lens' ReadgroupsetsAlign' AlignReadGroupSetsRequest
+raAlignReadGroupSetsRequest
+  = lens _raAlignReadGroupSetsRequest
+      (\ s a -> s{_raAlignReadGroupSetsRequest = a})
+
 -- | OAuth 2.0 token for the current user.
-raOauthToken :: Lens' ReadgroupsetsAlign' (Maybe Text)
-raOauthToken
-  = lens _raOauthToken (\ s a -> s{_raOauthToken = a})
+raOAuthToken :: Lens' ReadgroupsetsAlign' (Maybe OAuthToken)
+raOAuthToken
+  = lens _raOAuthToken (\ s a -> s{_raOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 raFields :: Lens' ReadgroupsetsAlign' (Maybe Text)
 raFields = lens _raFields (\ s a -> s{_raFields = a})
 
--- | Data format for the response.
-raAlt :: Lens' ReadgroupsetsAlign' Alt
-raAlt = lens _raAlt (\ s a -> s{_raAlt = a})
+instance GoogleAuth ReadgroupsetsAlign' where
+        authKey = raKey . _Just
+        authToken = raOAuthToken . _Just
 
 instance GoogleRequest ReadgroupsetsAlign' where
         type Rs ReadgroupsetsAlign' =
              AlignReadGroupSetsResponse
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u ReadgroupsetsAlign'{..}
-          = go _raQuotaUser (Just _raPrettyPrint) _raUserIp
+          = go _raQuotaUser (Just _raPrettyPrint) _raUserIP
               _raKey
-              _raOauthToken
+              _raOAuthToken
               _raFields
-              (Just _raAlt)
+              (Just AltJSON)
+              _raAlignReadGroupSetsRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ReadgroupsetsAlignResource)

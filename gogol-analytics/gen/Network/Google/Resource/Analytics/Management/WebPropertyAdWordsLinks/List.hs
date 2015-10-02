@@ -33,14 +33,13 @@ module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.List
     , mwpawllQuotaUser
     , mwpawllPrettyPrint
     , mwpawllWebPropertyId
-    , mwpawllUserIp
+    , mwpawllUserIP
     , mwpawllAccountId
     , mwpawllKey
-    , mwpawllOauthToken
+    , mwpawllOAuthToken
     , mwpawllStartIndex
     , mwpawllMaxResults
     , mwpawllFields
-    , mwpawllAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -58,12 +57,12 @@ type ManagementWebPropertyAdWordsLinksListResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "start-index" Int32 :>
                              QueryParam "max-results" Int32 :>
                                QueryParam "fields" Text :>
-                                 QueryParam "alt" Alt :>
+                                 QueryParam "alt" AltJSON :>
                                    Get '[JSON] EntityAdWordsLinks
 
 -- | Lists webProperty-AdWords links for a given web property.
@@ -73,14 +72,13 @@ data ManagementWebPropertyAdWordsLinksList' = ManagementWebPropertyAdWordsLinksL
     { _mwpawllQuotaUser     :: !(Maybe Text)
     , _mwpawllPrettyPrint   :: !Bool
     , _mwpawllWebPropertyId :: !Text
-    , _mwpawllUserIp        :: !(Maybe Text)
+    , _mwpawllUserIP        :: !(Maybe Text)
     , _mwpawllAccountId     :: !Text
-    , _mwpawllKey           :: !(Maybe Text)
-    , _mwpawllOauthToken    :: !(Maybe Text)
+    , _mwpawllKey           :: !(Maybe Key)
+    , _mwpawllOAuthToken    :: !(Maybe OAuthToken)
     , _mwpawllStartIndex    :: !(Maybe Int32)
     , _mwpawllMaxResults    :: !(Maybe Int32)
     , _mwpawllFields        :: !(Maybe Text)
-    , _mwpawllAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementWebPropertyAdWordsLinksList'' with the minimum fields required to make a request.
@@ -93,21 +91,19 @@ data ManagementWebPropertyAdWordsLinksList' = ManagementWebPropertyAdWordsLinksL
 --
 -- * 'mwpawllWebPropertyId'
 --
--- * 'mwpawllUserIp'
+-- * 'mwpawllUserIP'
 --
 -- * 'mwpawllAccountId'
 --
 -- * 'mwpawllKey'
 --
--- * 'mwpawllOauthToken'
+-- * 'mwpawllOAuthToken'
 --
 -- * 'mwpawllStartIndex'
 --
 -- * 'mwpawllMaxResults'
 --
 -- * 'mwpawllFields'
---
--- * 'mwpawllAlt'
 managementWebPropertyAdWordsLinksList'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'accountId'
@@ -117,14 +113,13 @@ managementWebPropertyAdWordsLinksList' pMwpawllWebPropertyId_ pMwpawllAccountId_
     { _mwpawllQuotaUser = Nothing
     , _mwpawllPrettyPrint = False
     , _mwpawllWebPropertyId = pMwpawllWebPropertyId_
-    , _mwpawllUserIp = Nothing
+    , _mwpawllUserIP = Nothing
     , _mwpawllAccountId = pMwpawllAccountId_
     , _mwpawllKey = Nothing
-    , _mwpawllOauthToken = Nothing
+    , _mwpawllOAuthToken = Nothing
     , _mwpawllStartIndex = Nothing
     , _mwpawllMaxResults = Nothing
     , _mwpawllFields = Nothing
-    , _mwpawllAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -149,10 +144,10 @@ mwpawllWebPropertyId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mwpawllUserIp :: Lens' ManagementWebPropertyAdWordsLinksList' (Maybe Text)
-mwpawllUserIp
-  = lens _mwpawllUserIp
-      (\ s a -> s{_mwpawllUserIp = a})
+mwpawllUserIP :: Lens' ManagementWebPropertyAdWordsLinksList' (Maybe Text)
+mwpawllUserIP
+  = lens _mwpawllUserIP
+      (\ s a -> s{_mwpawllUserIP = a})
 
 -- | ID of the account which the given web property belongs to.
 mwpawllAccountId :: Lens' ManagementWebPropertyAdWordsLinksList' Text
@@ -163,15 +158,15 @@ mwpawllAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mwpawllKey :: Lens' ManagementWebPropertyAdWordsLinksList' (Maybe Text)
+mwpawllKey :: Lens' ManagementWebPropertyAdWordsLinksList' (Maybe Key)
 mwpawllKey
   = lens _mwpawllKey (\ s a -> s{_mwpawllKey = a})
 
 -- | OAuth 2.0 token for the current user.
-mwpawllOauthToken :: Lens' ManagementWebPropertyAdWordsLinksList' (Maybe Text)
-mwpawllOauthToken
-  = lens _mwpawllOauthToken
-      (\ s a -> s{_mwpawllOauthToken = a})
+mwpawllOAuthToken :: Lens' ManagementWebPropertyAdWordsLinksList' (Maybe OAuthToken)
+mwpawllOAuthToken
+  = lens _mwpawllOAuthToken
+      (\ s a -> s{_mwpawllOAuthToken = a})
 
 -- | An index of the first webProperty-AdWords link to retrieve. Use this
 -- parameter as a pagination mechanism along with the max-results
@@ -194,10 +189,10 @@ mwpawllFields
   = lens _mwpawllFields
       (\ s a -> s{_mwpawllFields = a})
 
--- | Data format for the response.
-mwpawllAlt :: Lens' ManagementWebPropertyAdWordsLinksList' Alt
-mwpawllAlt
-  = lens _mwpawllAlt (\ s a -> s{_mwpawllAlt = a})
+instance GoogleAuth
+         ManagementWebPropertyAdWordsLinksList' where
+        authKey = mwpawllKey . _Just
+        authToken = mwpawllOAuthToken . _Just
 
 instance GoogleRequest
          ManagementWebPropertyAdWordsLinksList' where
@@ -208,14 +203,14 @@ instance GoogleRequest
           ManagementWebPropertyAdWordsLinksList'{..}
           = go _mwpawllQuotaUser (Just _mwpawllPrettyPrint)
               _mwpawllWebPropertyId
-              _mwpawllUserIp
+              _mwpawllUserIP
               _mwpawllAccountId
               _mwpawllKey
-              _mwpawllOauthToken
+              _mwpawllOAuthToken
               _mwpawllStartIndex
               _mwpawllMaxResults
               _mwpawllFields
-              (Just _mwpawllAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

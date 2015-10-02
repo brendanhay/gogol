@@ -33,13 +33,12 @@ module Network.Google.Resource.DFAReporting.CreativeFieldValues.Delete
     , cfvdCreativeFieldId
     , cfvdQuotaUser
     , cfvdPrettyPrint
-    , cfvdUserIp
+    , cfvdUserIP
     , cfvdProfileId
     , cfvdKey
     , cfvdId
-    , cfvdOauthToken
+    , cfvdOAuthToken
     , cfvdFields
-    , cfvdAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -57,10 +56,10 @@ type CreativeFieldValuesDeleteResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Delete '[JSON] ()
+                             QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an existing creative field value.
 --
@@ -69,13 +68,12 @@ data CreativeFieldValuesDelete' = CreativeFieldValuesDelete'
     { _cfvdCreativeFieldId :: !Int64
     , _cfvdQuotaUser       :: !(Maybe Text)
     , _cfvdPrettyPrint     :: !Bool
-    , _cfvdUserIp          :: !(Maybe Text)
+    , _cfvdUserIP          :: !(Maybe Text)
     , _cfvdProfileId       :: !Int64
-    , _cfvdKey             :: !(Maybe Text)
+    , _cfvdKey             :: !(Maybe Key)
     , _cfvdId              :: !Int64
-    , _cfvdOauthToken      :: !(Maybe Text)
+    , _cfvdOAuthToken      :: !(Maybe OAuthToken)
     , _cfvdFields          :: !(Maybe Text)
-    , _cfvdAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeFieldValuesDelete'' with the minimum fields required to make a request.
@@ -88,7 +86,7 @@ data CreativeFieldValuesDelete' = CreativeFieldValuesDelete'
 --
 -- * 'cfvdPrettyPrint'
 --
--- * 'cfvdUserIp'
+-- * 'cfvdUserIP'
 --
 -- * 'cfvdProfileId'
 --
@@ -96,11 +94,9 @@ data CreativeFieldValuesDelete' = CreativeFieldValuesDelete'
 --
 -- * 'cfvdId'
 --
--- * 'cfvdOauthToken'
+-- * 'cfvdOAuthToken'
 --
 -- * 'cfvdFields'
---
--- * 'cfvdAlt'
 creativeFieldValuesDelete'
     :: Int64 -- ^ 'creativeFieldId'
     -> Int64 -- ^ 'profileId'
@@ -111,13 +107,12 @@ creativeFieldValuesDelete' pCfvdCreativeFieldId_ pCfvdProfileId_ pCfvdId_ =
     { _cfvdCreativeFieldId = pCfvdCreativeFieldId_
     , _cfvdQuotaUser = Nothing
     , _cfvdPrettyPrint = True
-    , _cfvdUserIp = Nothing
+    , _cfvdUserIP = Nothing
     , _cfvdProfileId = pCfvdProfileId_
     , _cfvdKey = Nothing
     , _cfvdId = pCfvdId_
-    , _cfvdOauthToken = Nothing
+    , _cfvdOAuthToken = Nothing
     , _cfvdFields = Nothing
-    , _cfvdAlt = JSON
     }
 
 -- | Creative field ID for this creative field value.
@@ -142,9 +137,9 @@ cfvdPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cfvdUserIp :: Lens' CreativeFieldValuesDelete' (Maybe Text)
-cfvdUserIp
-  = lens _cfvdUserIp (\ s a -> s{_cfvdUserIp = a})
+cfvdUserIP :: Lens' CreativeFieldValuesDelete' (Maybe Text)
+cfvdUserIP
+  = lens _cfvdUserIP (\ s a -> s{_cfvdUserIP = a})
 
 -- | User profile ID associated with this request.
 cfvdProfileId :: Lens' CreativeFieldValuesDelete' Int64
@@ -155,7 +150,7 @@ cfvdProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cfvdKey :: Lens' CreativeFieldValuesDelete' (Maybe Text)
+cfvdKey :: Lens' CreativeFieldValuesDelete' (Maybe Key)
 cfvdKey = lens _cfvdKey (\ s a -> s{_cfvdKey = a})
 
 -- | Creative Field Value ID
@@ -163,19 +158,19 @@ cfvdId :: Lens' CreativeFieldValuesDelete' Int64
 cfvdId = lens _cfvdId (\ s a -> s{_cfvdId = a})
 
 -- | OAuth 2.0 token for the current user.
-cfvdOauthToken :: Lens' CreativeFieldValuesDelete' (Maybe Text)
-cfvdOauthToken
-  = lens _cfvdOauthToken
-      (\ s a -> s{_cfvdOauthToken = a})
+cfvdOAuthToken :: Lens' CreativeFieldValuesDelete' (Maybe OAuthToken)
+cfvdOAuthToken
+  = lens _cfvdOAuthToken
+      (\ s a -> s{_cfvdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cfvdFields :: Lens' CreativeFieldValuesDelete' (Maybe Text)
 cfvdFields
   = lens _cfvdFields (\ s a -> s{_cfvdFields = a})
 
--- | Data format for the response.
-cfvdAlt :: Lens' CreativeFieldValuesDelete' Alt
-cfvdAlt = lens _cfvdAlt (\ s a -> s{_cfvdAlt = a})
+instance GoogleAuth CreativeFieldValuesDelete' where
+        authKey = cfvdKey . _Just
+        authToken = cfvdOAuthToken . _Just
 
 instance GoogleRequest CreativeFieldValuesDelete'
          where
@@ -184,13 +179,13 @@ instance GoogleRequest CreativeFieldValuesDelete'
         requestWithRoute r u CreativeFieldValuesDelete'{..}
           = go _cfvdCreativeFieldId _cfvdQuotaUser
               (Just _cfvdPrettyPrint)
-              _cfvdUserIp
+              _cfvdUserIP
               _cfvdProfileId
               _cfvdKey
               _cfvdId
-              _cfvdOauthToken
+              _cfvdOAuthToken
               _cfvdFields
-              (Just _cfvdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CreativeFieldValuesDeleteResource)

@@ -33,12 +33,11 @@ module Network.Google.Resource.Directory.Asps.Delete
     , adQuotaUser
     , adPrettyPrint
     , adCodeId
-    , adUserIp
+    , adUserIP
     , adKey
-    , adOauthToken
+    , adOAuthToken
     , adUserKey
     , adFields
-    , adAlt
     ) where
 
 import           Network.Google.AdminDirectory.Types
@@ -54,10 +53,10 @@ type AspsDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Delete '[JSON] ()
+                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete an ASP issued by a user.
 --
@@ -66,12 +65,11 @@ data AspsDelete' = AspsDelete'
     { _adQuotaUser   :: !(Maybe Text)
     , _adPrettyPrint :: !Bool
     , _adCodeId      :: !Int32
-    , _adUserIp      :: !(Maybe Text)
-    , _adKey         :: !(Maybe Text)
-    , _adOauthToken  :: !(Maybe Text)
+    , _adUserIP      :: !(Maybe Text)
+    , _adKey         :: !(Maybe Key)
+    , _adOAuthToken  :: !(Maybe OAuthToken)
     , _adUserKey     :: !Text
     , _adFields      :: !(Maybe Text)
-    , _adAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AspsDelete'' with the minimum fields required to make a request.
@@ -84,17 +82,15 @@ data AspsDelete' = AspsDelete'
 --
 -- * 'adCodeId'
 --
--- * 'adUserIp'
+-- * 'adUserIP'
 --
 -- * 'adKey'
 --
--- * 'adOauthToken'
+-- * 'adOAuthToken'
 --
 -- * 'adUserKey'
 --
 -- * 'adFields'
---
--- * 'adAlt'
 aspsDelete'
     :: Int32 -- ^ 'codeId'
     -> Text -- ^ 'userKey'
@@ -104,12 +100,11 @@ aspsDelete' pAdCodeId_ pAdUserKey_ =
     { _adQuotaUser = Nothing
     , _adPrettyPrint = True
     , _adCodeId = pAdCodeId_
-    , _adUserIp = Nothing
+    , _adUserIP = Nothing
     , _adKey = Nothing
-    , _adOauthToken = Nothing
+    , _adOAuthToken = Nothing
     , _adUserKey = pAdUserKey_
     , _adFields = Nothing
-    , _adAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -131,19 +126,19 @@ adCodeId = lens _adCodeId (\ s a -> s{_adCodeId = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-adUserIp :: Lens' AspsDelete' (Maybe Text)
-adUserIp = lens _adUserIp (\ s a -> s{_adUserIp = a})
+adUserIP :: Lens' AspsDelete' (Maybe Text)
+adUserIP = lens _adUserIP (\ s a -> s{_adUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-adKey :: Lens' AspsDelete' (Maybe Text)
+adKey :: Lens' AspsDelete' (Maybe Key)
 adKey = lens _adKey (\ s a -> s{_adKey = a})
 
 -- | OAuth 2.0 token for the current user.
-adOauthToken :: Lens' AspsDelete' (Maybe Text)
-adOauthToken
-  = lens _adOauthToken (\ s a -> s{_adOauthToken = a})
+adOAuthToken :: Lens' AspsDelete' (Maybe OAuthToken)
+adOAuthToken
+  = lens _adOAuthToken (\ s a -> s{_adOAuthToken = a})
 
 -- | Identifies the user in the API request. The value can be the user\'s
 -- primary email address, alias email address, or unique user ID.
@@ -155,21 +150,21 @@ adUserKey
 adFields :: Lens' AspsDelete' (Maybe Text)
 adFields = lens _adFields (\ s a -> s{_adFields = a})
 
--- | Data format for the response.
-adAlt :: Lens' AspsDelete' Alt
-adAlt = lens _adAlt (\ s a -> s{_adAlt = a})
+instance GoogleAuth AspsDelete' where
+        authKey = adKey . _Just
+        authToken = adOAuthToken . _Just
 
 instance GoogleRequest AspsDelete' where
         type Rs AspsDelete' = ()
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u AspsDelete'{..}
           = go _adQuotaUser (Just _adPrettyPrint) _adCodeId
-              _adUserIp
+              _adUserIP
               _adKey
-              _adOauthToken
+              _adOAuthToken
               _adUserKey
               _adFields
-              (Just _adAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy AspsDeleteResource)
                       r

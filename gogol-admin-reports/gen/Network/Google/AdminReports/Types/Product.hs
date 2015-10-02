@@ -81,7 +81,7 @@ instance ToJSON ActivityEvents where
 data UsageReports = UsageReports
     { _urEtag          :: !(Maybe Text)
     , _urNextPageToken :: !(Maybe Text)
-    , _urUsageReports  :: !(Maybe [Maybe UsageReport])
+    , _urUsageReports  :: !(Maybe [UsageReport])
     , _urKind          :: !Text
     , _urWarnings      :: !(Maybe [UsageReportsWarnings])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -121,7 +121,7 @@ urNextPageToken
       (\ s a -> s{_urNextPageToken = a})
 
 -- | Various application parameter records.
-urUsageReports :: Lens' UsageReports [Maybe UsageReport]
+urUsageReports :: Lens' UsageReports [UsageReport]
 urUsageReports
   = lens _urUsageReports
       (\ s a -> s{_urUsageReports = a})
@@ -236,7 +236,7 @@ data Activities = Activities
     { _aEtag          :: !(Maybe Text)
     , _aNextPageToken :: !(Maybe Text)
     , _aKind          :: !Text
-    , _aItems         :: !(Maybe [Maybe Activity])
+    , _aItems         :: !(Maybe [Activity])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Activities' with the minimum fields required to make a request.
@@ -275,7 +275,7 @@ aKind :: Lens' Activities Text
 aKind = lens _aKind (\ s a -> s{_aKind = a})
 
 -- | Each record in read response.
-aItems :: Lens' Activities [Maybe Activity]
+aItems :: Lens' Activities [Activity]
 aItems
   = lens _aItems (\ s a -> s{_aItems = a}) . _Default .
       _Coerce
@@ -399,13 +399,13 @@ instance ToJSON UsageReportParametersMsgValue where
 --
 -- /See:/ 'channel' smart constructor.
 data Channel = Channel
-    { _cResourceUri :: !(Maybe Text)
+    { _cResourceURI :: !(Maybe Text)
     , _cResourceId  :: !(Maybe Text)
     , _cKind        :: !Text
     , _cExpiration  :: !(Maybe Int64)
     , _cToken       :: !(Maybe Text)
     , _cAddress     :: !(Maybe Text)
-    , _cPayload     :: !(Maybe Bool)
+    , _cPayLoad     :: !(Maybe Bool)
     , _cParams      :: !(Maybe ChannelParams)
     , _cId          :: !(Maybe Text)
     , _cType        :: !(Maybe Text)
@@ -415,7 +415,7 @@ data Channel = Channel
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cResourceUri'
+-- * 'cResourceURI'
 --
 -- * 'cResourceId'
 --
@@ -427,7 +427,7 @@ data Channel = Channel
 --
 -- * 'cAddress'
 --
--- * 'cPayload'
+-- * 'cPayLoad'
 --
 -- * 'cParams'
 --
@@ -438,22 +438,22 @@ channel
     :: Channel
 channel =
     Channel
-    { _cResourceUri = Nothing
+    { _cResourceURI = Nothing
     , _cResourceId = Nothing
     , _cKind = "api#channel"
     , _cExpiration = Nothing
     , _cToken = Nothing
     , _cAddress = Nothing
-    , _cPayload = Nothing
+    , _cPayLoad = Nothing
     , _cParams = Nothing
     , _cId = Nothing
     , _cType = Nothing
     }
 
 -- | A version-specific identifier for the watched resource.
-cResourceUri :: Lens' Channel (Maybe Text)
-cResourceUri
-  = lens _cResourceUri (\ s a -> s{_cResourceUri = a})
+cResourceURI :: Lens' Channel (Maybe Text)
+cResourceURI
+  = lens _cResourceURI (\ s a -> s{_cResourceURI = a})
 
 -- | An opaque ID that identifies the resource being watched on this channel.
 -- Stable across different API versions.
@@ -482,8 +482,8 @@ cAddress :: Lens' Channel (Maybe Text)
 cAddress = lens _cAddress (\ s a -> s{_cAddress = a})
 
 -- | A Boolean value to indicate whether payload is wanted. Optional.
-cPayload :: Lens' Channel (Maybe Bool)
-cPayload = lens _cPayload (\ s a -> s{_cPayload = a})
+cPayLoad :: Lens' Channel (Maybe Bool)
+cPayLoad = lens _cPayLoad (\ s a -> s{_cPayLoad = a})
 
 -- | Additional parameters controlling delivery channel behavior. Optional.
 cParams :: Lens' Channel (Maybe ChannelParams)
@@ -516,13 +516,13 @@ instance ToJSON Channel where
         toJSON Channel{..}
           = object
               (catMaybes
-                 [("resourceUri" .=) <$> _cResourceUri,
+                 [("resourceUri" .=) <$> _cResourceURI,
                   ("resourceId" .=) <$> _cResourceId,
                   Just ("kind" .= _cKind),
                   ("expiration" .=) <$> _cExpiration,
                   ("token" .=) <$> _cToken,
                   ("address" .=) <$> _cAddress,
-                  ("payload" .=) <$> _cPayload,
+                  ("payload" .=) <$> _cPayLoad,
                   ("params" .=) <$> _cParams, ("id" .=) <$> _cId,
                   ("type" .=) <$> _cType])
 
@@ -655,7 +655,7 @@ instance ToJSON ChannelParams where
 -- /See:/ 'activity' smart constructor.
 data Activity = Activity
     { _actEtag        :: !(Maybe Text)
-    , _actIpAddress   :: !(Maybe Text)
+    , _actIPAddress   :: !(Maybe Text)
     , _actKind        :: !Text
     , _actActor       :: !(Maybe ActivityActor)
     , _actOwnerDomain :: !(Maybe Text)
@@ -669,7 +669,7 @@ data Activity = Activity
 --
 -- * 'actEtag'
 --
--- * 'actIpAddress'
+-- * 'actIPAddress'
 --
 -- * 'actKind'
 --
@@ -685,7 +685,7 @@ activity
 activity =
     Activity
     { _actEtag = Nothing
-    , _actIpAddress = Nothing
+    , _actIPAddress = Nothing
     , _actKind = "admin#reports#activity"
     , _actActor = Nothing
     , _actOwnerDomain = Nothing
@@ -698,9 +698,9 @@ actEtag :: Lens' Activity (Maybe Text)
 actEtag = lens _actEtag (\ s a -> s{_actEtag = a})
 
 -- | IP Address of the user doing the action.
-actIpAddress :: Lens' Activity (Maybe Text)
-actIpAddress
-  = lens _actIpAddress (\ s a -> s{_actIpAddress = a})
+actIPAddress :: Lens' Activity (Maybe Text)
+actIPAddress
+  = lens _actIPAddress (\ s a -> s{_actIPAddress = a})
 
 -- | Kind of resource this is.
 actKind :: Lens' Activity Text
@@ -744,7 +744,7 @@ instance ToJSON Activity where
           = object
               (catMaybes
                  [("etag" .=) <$> _actEtag,
-                  ("ipAddress" .=) <$> _actIpAddress,
+                  ("ipAddress" .=) <$> _actIPAddress,
                   Just ("kind" .= _actKind),
                   ("actor" .=) <$> _actActor,
                   ("ownerDomain" .=) <$> _actOwnerDomain,

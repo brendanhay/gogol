@@ -19,7 +19,7 @@
 --
 -- | Creates a GTM Trigger.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersTriggersCreate@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersTriggersCreate@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Triggers.Create
     (
     -- * REST Resource
@@ -33,18 +33,18 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Triggers.Create
     , actccQuotaUser
     , actccPrettyPrint
     , actccContainerId
-    , actccUserIp
+    , actccUserIP
     , actccAccountId
     , actccKey
-    , actccOauthToken
+    , actccTrigger
+    , actccOAuthToken
     , actccFields
-    , actccAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagmanagerAccountsContainersTriggersCreate@ which the
+-- | A resource alias for @TagManagerAccountsContainersTriggersCreate@ which the
 -- 'AccountsContainersTriggersCreate'' request conforms to.
 type AccountsContainersTriggersCreateResource =
      "accounts" :>
@@ -55,10 +55,11 @@ type AccountsContainersTriggersCreateResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Post '[JSON] Trigger
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] Trigger :> Post '[JSON] Trigger
 
 -- | Creates a GTM Trigger.
 --
@@ -67,12 +68,12 @@ data AccountsContainersTriggersCreate' = AccountsContainersTriggersCreate'
     { _actccQuotaUser   :: !(Maybe Text)
     , _actccPrettyPrint :: !Bool
     , _actccContainerId :: !Text
-    , _actccUserIp      :: !(Maybe Text)
+    , _actccUserIP      :: !(Maybe Text)
     , _actccAccountId   :: !Text
-    , _actccKey         :: !(Maybe Text)
-    , _actccOauthToken  :: !(Maybe Text)
+    , _actccKey         :: !(Maybe Key)
+    , _actccTrigger     :: !Trigger
+    , _actccOAuthToken  :: !(Maybe OAuthToken)
     , _actccFields      :: !(Maybe Text)
-    , _actccAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersTriggersCreate'' with the minimum fields required to make a request.
@@ -85,32 +86,33 @@ data AccountsContainersTriggersCreate' = AccountsContainersTriggersCreate'
 --
 -- * 'actccContainerId'
 --
--- * 'actccUserIp'
+-- * 'actccUserIP'
 --
 -- * 'actccAccountId'
 --
 -- * 'actccKey'
 --
--- * 'actccOauthToken'
+-- * 'actccTrigger'
+--
+-- * 'actccOAuthToken'
 --
 -- * 'actccFields'
---
--- * 'actccAlt'
 accountsContainersTriggersCreate'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'accountId'
+    -> Trigger -- ^ 'Trigger'
     -> AccountsContainersTriggersCreate'
-accountsContainersTriggersCreate' pActccContainerId_ pActccAccountId_ =
+accountsContainersTriggersCreate' pActccContainerId_ pActccAccountId_ pActccTrigger_ =
     AccountsContainersTriggersCreate'
     { _actccQuotaUser = Nothing
     , _actccPrettyPrint = True
     , _actccContainerId = pActccContainerId_
-    , _actccUserIp = Nothing
+    , _actccUserIP = Nothing
     , _actccAccountId = pActccAccountId_
     , _actccKey = Nothing
-    , _actccOauthToken = Nothing
+    , _actccTrigger = pActccTrigger_
+    , _actccOAuthToken = Nothing
     , _actccFields = Nothing
-    , _actccAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,9 +137,9 @@ actccContainerId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-actccUserIp :: Lens' AccountsContainersTriggersCreate' (Maybe Text)
-actccUserIp
-  = lens _actccUserIp (\ s a -> s{_actccUserIp = a})
+actccUserIP :: Lens' AccountsContainersTriggersCreate' (Maybe Text)
+actccUserIP
+  = lens _actccUserIP (\ s a -> s{_actccUserIP = a})
 
 -- | The GTM Account ID.
 actccAccountId :: Lens' AccountsContainersTriggersCreate' Text
@@ -148,23 +150,29 @@ actccAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-actccKey :: Lens' AccountsContainersTriggersCreate' (Maybe Text)
+actccKey :: Lens' AccountsContainersTriggersCreate' (Maybe Key)
 actccKey = lens _actccKey (\ s a -> s{_actccKey = a})
 
+-- | Multipart request metadata.
+actccTrigger :: Lens' AccountsContainersTriggersCreate' Trigger
+actccTrigger
+  = lens _actccTrigger (\ s a -> s{_actccTrigger = a})
+
 -- | OAuth 2.0 token for the current user.
-actccOauthToken :: Lens' AccountsContainersTriggersCreate' (Maybe Text)
-actccOauthToken
-  = lens _actccOauthToken
-      (\ s a -> s{_actccOauthToken = a})
+actccOAuthToken :: Lens' AccountsContainersTriggersCreate' (Maybe OAuthToken)
+actccOAuthToken
+  = lens _actccOAuthToken
+      (\ s a -> s{_actccOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 actccFields :: Lens' AccountsContainersTriggersCreate' (Maybe Text)
 actccFields
   = lens _actccFields (\ s a -> s{_actccFields = a})
 
--- | Data format for the response.
-actccAlt :: Lens' AccountsContainersTriggersCreate' Alt
-actccAlt = lens _actccAlt (\ s a -> s{_actccAlt = a})
+instance GoogleAuth AccountsContainersTriggersCreate'
+         where
+        authKey = actccKey . _Just
+        authToken = actccOAuthToken . _Just
 
 instance GoogleRequest
          AccountsContainersTriggersCreate' where
@@ -174,12 +182,13 @@ instance GoogleRequest
           AccountsContainersTriggersCreate'{..}
           = go _actccQuotaUser (Just _actccPrettyPrint)
               _actccContainerId
-              _actccUserIp
+              _actccUserIP
               _actccAccountId
               _actccKey
-              _actccOauthToken
+              _actccOAuthToken
               _actccFields
-              (Just _actccAlt)
+              (Just AltJSON)
+              _actccTrigger
           where go
                   = clientWithRoute
                       (Proxy ::

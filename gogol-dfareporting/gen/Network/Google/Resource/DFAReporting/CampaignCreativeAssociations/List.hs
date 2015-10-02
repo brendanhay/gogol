@@ -33,16 +33,15 @@ module Network.Google.Resource.DFAReporting.CampaignCreativeAssociations.List
     -- * Request Lenses
     , ccalQuotaUser
     , ccalPrettyPrint
-    , ccalUserIp
+    , ccalUserIP
     , ccalCampaignId
     , ccalProfileId
     , ccalSortOrder
     , ccalKey
     , ccalPageToken
-    , ccalOauthToken
+    , ccalOAuthToken
     , ccalMaxResults
     , ccalFields
-    , ccalAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -62,12 +61,12 @@ type CampaignCreativeAssociationsListResource =
                      QueryParam "sortOrder"
                        DfareportingCampaignCreativeAssociationsListSortOrder
                        :>
-                       QueryParam "key" Text :>
+                       QueryParam "key" Key :>
                          QueryParam "pageToken" Text :>
-                           QueryParam "oauth_token" Text :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "maxResults" Int32 :>
                                QueryParam "fields" Text :>
-                                 QueryParam "alt" Alt :>
+                                 QueryParam "alt" AltJSON :>
                                    Get '[JSON]
                                      CampaignCreativeAssociationsListResponse
 
@@ -78,16 +77,15 @@ type CampaignCreativeAssociationsListResource =
 data CampaignCreativeAssociationsList' = CampaignCreativeAssociationsList'
     { _ccalQuotaUser   :: !(Maybe Text)
     , _ccalPrettyPrint :: !Bool
-    , _ccalUserIp      :: !(Maybe Text)
+    , _ccalUserIP      :: !(Maybe Text)
     , _ccalCampaignId  :: !Int64
     , _ccalProfileId   :: !Int64
     , _ccalSortOrder   :: !(Maybe DfareportingCampaignCreativeAssociationsListSortOrder)
-    , _ccalKey         :: !(Maybe Text)
+    , _ccalKey         :: !(Maybe Key)
     , _ccalPageToken   :: !(Maybe Text)
-    , _ccalOauthToken  :: !(Maybe Text)
+    , _ccalOAuthToken  :: !(Maybe OAuthToken)
     , _ccalMaxResults  :: !(Maybe Int32)
     , _ccalFields      :: !(Maybe Text)
-    , _ccalAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CampaignCreativeAssociationsList'' with the minimum fields required to make a request.
@@ -98,7 +96,7 @@ data CampaignCreativeAssociationsList' = CampaignCreativeAssociationsList'
 --
 -- * 'ccalPrettyPrint'
 --
--- * 'ccalUserIp'
+-- * 'ccalUserIP'
 --
 -- * 'ccalCampaignId'
 --
@@ -110,13 +108,11 @@ data CampaignCreativeAssociationsList' = CampaignCreativeAssociationsList'
 --
 -- * 'ccalPageToken'
 --
--- * 'ccalOauthToken'
+-- * 'ccalOAuthToken'
 --
 -- * 'ccalMaxResults'
 --
 -- * 'ccalFields'
---
--- * 'ccalAlt'
 campaignCreativeAssociationsList'
     :: Int64 -- ^ 'campaignId'
     -> Int64 -- ^ 'profileId'
@@ -125,16 +121,15 @@ campaignCreativeAssociationsList' pCcalCampaignId_ pCcalProfileId_ =
     CampaignCreativeAssociationsList'
     { _ccalQuotaUser = Nothing
     , _ccalPrettyPrint = True
-    , _ccalUserIp = Nothing
+    , _ccalUserIP = Nothing
     , _ccalCampaignId = pCcalCampaignId_
     , _ccalProfileId = pCcalProfileId_
     , _ccalSortOrder = Nothing
     , _ccalKey = Nothing
     , _ccalPageToken = Nothing
-    , _ccalOauthToken = Nothing
+    , _ccalOAuthToken = Nothing
     , _ccalMaxResults = Nothing
     , _ccalFields = Nothing
-    , _ccalAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,9 +148,9 @@ ccalPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ccalUserIp :: Lens' CampaignCreativeAssociationsList' (Maybe Text)
-ccalUserIp
-  = lens _ccalUserIp (\ s a -> s{_ccalUserIp = a})
+ccalUserIP :: Lens' CampaignCreativeAssociationsList' (Maybe Text)
+ccalUserIP
+  = lens _ccalUserIP (\ s a -> s{_ccalUserIP = a})
 
 -- | Campaign ID in this association.
 ccalCampaignId :: Lens' CampaignCreativeAssociationsList' Int64
@@ -178,7 +173,7 @@ ccalSortOrder
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ccalKey :: Lens' CampaignCreativeAssociationsList' (Maybe Text)
+ccalKey :: Lens' CampaignCreativeAssociationsList' (Maybe Key)
 ccalKey = lens _ccalKey (\ s a -> s{_ccalKey = a})
 
 -- | Value of the nextPageToken from the previous result page.
@@ -188,10 +183,10 @@ ccalPageToken
       (\ s a -> s{_ccalPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-ccalOauthToken :: Lens' CampaignCreativeAssociationsList' (Maybe Text)
-ccalOauthToken
-  = lens _ccalOauthToken
-      (\ s a -> s{_ccalOauthToken = a})
+ccalOAuthToken :: Lens' CampaignCreativeAssociationsList' (Maybe OAuthToken)
+ccalOAuthToken
+  = lens _ccalOAuthToken
+      (\ s a -> s{_ccalOAuthToken = a})
 
 -- | Maximum number of results to return.
 ccalMaxResults :: Lens' CampaignCreativeAssociationsList' (Maybe Int32)
@@ -204,9 +199,10 @@ ccalFields :: Lens' CampaignCreativeAssociationsList' (Maybe Text)
 ccalFields
   = lens _ccalFields (\ s a -> s{_ccalFields = a})
 
--- | Data format for the response.
-ccalAlt :: Lens' CampaignCreativeAssociationsList' Alt
-ccalAlt = lens _ccalAlt (\ s a -> s{_ccalAlt = a})
+instance GoogleAuth CampaignCreativeAssociationsList'
+         where
+        authKey = ccalKey . _Just
+        authToken = ccalOAuthToken . _Just
 
 instance GoogleRequest
          CampaignCreativeAssociationsList' where
@@ -216,16 +212,16 @@ instance GoogleRequest
         requestWithRoute r u
           CampaignCreativeAssociationsList'{..}
           = go _ccalQuotaUser (Just _ccalPrettyPrint)
-              _ccalUserIp
+              _ccalUserIP
               _ccalCampaignId
               _ccalProfileId
               _ccalSortOrder
               _ccalKey
               _ccalPageToken
-              _ccalOauthToken
+              _ccalOAuthToken
               _ccalMaxResults
               _ccalFields
-              (Just _ccalAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

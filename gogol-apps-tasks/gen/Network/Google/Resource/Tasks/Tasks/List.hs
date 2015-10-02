@@ -32,7 +32,7 @@ module Network.Google.Resource.Tasks.Tasks.List
     -- * Request Lenses
     , tlQuotaUser
     , tlPrettyPrint
-    , tlUserIp
+    , tlUserIP
     , tlDueMax
     , tlShowDeleted
     , tlShowCompleted
@@ -41,13 +41,12 @@ module Network.Google.Resource.Tasks.Tasks.List
     , tlCompletedMax
     , tlKey
     , tlUpdatedMin
-    , tlTasklist
+    , tlTaskList
     , tlCompletedMin
     , tlPageToken
-    , tlOauthToken
+    , tlOAuthToken
     , tlMaxResults
     , tlFields
-    , tlAlt
     ) where
 
 import           Network.Google.AppsTasks.Types
@@ -68,14 +67,14 @@ type TasksListResource =
                        QueryParam "dueMin" Text :>
                          QueryParam "showHidden" Bool :>
                            QueryParam "completedMax" Text :>
-                             QueryParam "key" Text :>
+                             QueryParam "key" Key :>
                                QueryParam "updatedMin" Text :>
                                  QueryParam "completedMin" Text :>
                                    QueryParam "pageToken" Text :>
-                                     QueryParam "oauth_token" Text :>
+                                     QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "maxResults" Int64 :>
                                          QueryParam "fields" Text :>
-                                           QueryParam "alt" Alt :>
+                                           QueryParam "alt" AltJSON :>
                                              Get '[JSON] Tasks
 
 -- | Returns all tasks in the specified task list.
@@ -84,22 +83,21 @@ type TasksListResource =
 data TasksList' = TasksList'
     { _tlQuotaUser     :: !(Maybe Text)
     , _tlPrettyPrint   :: !Bool
-    , _tlUserIp        :: !(Maybe Text)
+    , _tlUserIP        :: !(Maybe Text)
     , _tlDueMax        :: !(Maybe Text)
     , _tlShowDeleted   :: !(Maybe Bool)
     , _tlShowCompleted :: !(Maybe Bool)
     , _tlDueMin        :: !(Maybe Text)
     , _tlShowHidden    :: !(Maybe Bool)
     , _tlCompletedMax  :: !(Maybe Text)
-    , _tlKey           :: !(Maybe Text)
+    , _tlKey           :: !(Maybe Key)
     , _tlUpdatedMin    :: !(Maybe Text)
-    , _tlTasklist      :: !Text
+    , _tlTaskList      :: !Text
     , _tlCompletedMin  :: !(Maybe Text)
     , _tlPageToken     :: !(Maybe Text)
-    , _tlOauthToken    :: !(Maybe Text)
+    , _tlOAuthToken    :: !(Maybe OAuthToken)
     , _tlMaxResults    :: !(Maybe Int64)
     , _tlFields        :: !(Maybe Text)
-    , _tlAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TasksList'' with the minimum fields required to make a request.
@@ -110,7 +108,7 @@ data TasksList' = TasksList'
 --
 -- * 'tlPrettyPrint'
 --
--- * 'tlUserIp'
+-- * 'tlUserIP'
 --
 -- * 'tlDueMax'
 --
@@ -128,27 +126,25 @@ data TasksList' = TasksList'
 --
 -- * 'tlUpdatedMin'
 --
--- * 'tlTasklist'
+-- * 'tlTaskList'
 --
 -- * 'tlCompletedMin'
 --
 -- * 'tlPageToken'
 --
--- * 'tlOauthToken'
+-- * 'tlOAuthToken'
 --
 -- * 'tlMaxResults'
 --
 -- * 'tlFields'
---
--- * 'tlAlt'
 tasksList'
     :: Text -- ^ 'tasklist'
     -> TasksList'
-tasksList' pTlTasklist_ =
+tasksList' pTlTaskList_ =
     TasksList'
     { _tlQuotaUser = Nothing
     , _tlPrettyPrint = True
-    , _tlUserIp = Nothing
+    , _tlUserIP = Nothing
     , _tlDueMax = Nothing
     , _tlShowDeleted = Nothing
     , _tlShowCompleted = Nothing
@@ -157,13 +153,12 @@ tasksList' pTlTasklist_ =
     , _tlCompletedMax = Nothing
     , _tlKey = Nothing
     , _tlUpdatedMin = Nothing
-    , _tlTasklist = pTlTasklist_
+    , _tlTaskList = pTlTaskList_
     , _tlCompletedMin = Nothing
     , _tlPageToken = Nothing
-    , _tlOauthToken = Nothing
+    , _tlOAuthToken = Nothing
     , _tlMaxResults = Nothing
     , _tlFields = Nothing
-    , _tlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -181,8 +176,8 @@ tlPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tlUserIp :: Lens' TasksList' (Maybe Text)
-tlUserIp = lens _tlUserIp (\ s a -> s{_tlUserIp = a})
+tlUserIP :: Lens' TasksList' (Maybe Text)
+tlUserIP = lens _tlUserIP (\ s a -> s{_tlUserIP = a})
 
 -- | Upper bound for a task\'s due date (as a RFC 3339 timestamp) to filter
 -- by. Optional. The default is not to filter by due date.
@@ -224,7 +219,7 @@ tlCompletedMax
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tlKey :: Lens' TasksList' (Maybe Text)
+tlKey :: Lens' TasksList' (Maybe Key)
 tlKey = lens _tlKey (\ s a -> s{_tlKey = a})
 
 -- | Lower bound for a task\'s last modification time (as a RFC 3339
@@ -235,9 +230,9 @@ tlUpdatedMin
   = lens _tlUpdatedMin (\ s a -> s{_tlUpdatedMin = a})
 
 -- | Task list identifier.
-tlTasklist :: Lens' TasksList' Text
-tlTasklist
-  = lens _tlTasklist (\ s a -> s{_tlTasklist = a})
+tlTaskList :: Lens' TasksList' Text
+tlTaskList
+  = lens _tlTaskList (\ s a -> s{_tlTaskList = a})
 
 -- | Lower bound for a task\'s completion date (as a RFC 3339 timestamp) to
 -- filter by. Optional. The default is not to filter by completion date.
@@ -252,9 +247,9 @@ tlPageToken
   = lens _tlPageToken (\ s a -> s{_tlPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-tlOauthToken :: Lens' TasksList' (Maybe Text)
-tlOauthToken
-  = lens _tlOauthToken (\ s a -> s{_tlOauthToken = a})
+tlOAuthToken :: Lens' TasksList' (Maybe OAuthToken)
+tlOAuthToken
+  = lens _tlOAuthToken (\ s a -> s{_tlOAuthToken = a})
 
 -- | Maximum number of task lists returned on one page. Optional. The default
 -- is 100.
@@ -266,15 +261,15 @@ tlMaxResults
 tlFields :: Lens' TasksList' (Maybe Text)
 tlFields = lens _tlFields (\ s a -> s{_tlFields = a})
 
--- | Data format for the response.
-tlAlt :: Lens' TasksList' Alt
-tlAlt = lens _tlAlt (\ s a -> s{_tlAlt = a})
+instance GoogleAuth TasksList' where
+        authKey = tlKey . _Just
+        authToken = tlOAuthToken . _Just
 
 instance GoogleRequest TasksList' where
         type Rs TasksList' = Tasks
         request = requestWithRoute defReq appsTasksURL
         requestWithRoute r u TasksList'{..}
-          = go _tlQuotaUser (Just _tlPrettyPrint) _tlUserIp
+          = go _tlQuotaUser (Just _tlPrettyPrint) _tlUserIP
               _tlDueMax
               _tlShowDeleted
               _tlShowCompleted
@@ -283,13 +278,13 @@ instance GoogleRequest TasksList' where
               _tlCompletedMax
               _tlKey
               _tlUpdatedMin
-              _tlTasklist
+              _tlTaskList
               _tlCompletedMin
               _tlPageToken
-              _tlOauthToken
+              _tlOAuthToken
               _tlMaxResults
               _tlFields
-              (Just _tlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy TasksListResource)
                       r

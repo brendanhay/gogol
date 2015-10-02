@@ -33,7 +33,7 @@ module Network.Google.Resource.Books.Layers.VolumeAnnotations.List
     , lvalQuotaUser
     , lvalPrettyPrint
     , lvalStartOffset
-    , lvalUserIp
+    , lvalUserIP
     , lvalLocale
     , lvalContentVersion
     , lvalShowDeleted
@@ -45,13 +45,12 @@ module Network.Google.Resource.Books.Layers.VolumeAnnotations.List
     , lvalVolumeId
     , lvalSource
     , lvalPageToken
-    , lvalOauthToken
+    , lvalOAuthToken
     , lvalEndPosition
     , lvalLayerId
     , lvalMaxResults
     , lvalStartPosition
     , lvalFields
-    , lvalAlt
     ) where
 
 import           Network.Google.Books.Types
@@ -73,18 +72,18 @@ type LayersVolumeAnnotationsListResource =
                          QueryParam "showDeleted" Bool :>
                            QueryParam "volumeAnnotationsVersion" Text :>
                              QueryParam "updatedMax" Text :>
-                               QueryParam "key" Text :>
+                               QueryParam "key" Key :>
                                  QueryParam "updatedMin" Text :>
                                    QueryParam "endOffset" Text :>
                                      QueryParam "source" Text :>
                                        QueryParam "pageToken" Text :>
-                                         QueryParam "oauth_token" Text :>
+                                         QueryParam "oauth_token" OAuthToken :>
                                            QueryParam "endPosition" Text :>
                                              QueryParam "maxResults" Word32 :>
                                                QueryParam "startPosition" Text
                                                  :>
                                                  QueryParam "fields" Text :>
-                                                   QueryParam "alt" Alt :>
+                                                   QueryParam "alt" AltJSON :>
                                                      Get '[JSON]
                                                        Volumeannotations
 
@@ -95,25 +94,24 @@ data LayersVolumeAnnotationsList' = LayersVolumeAnnotationsList'
     { _lvalQuotaUser                :: !(Maybe Text)
     , _lvalPrettyPrint              :: !Bool
     , _lvalStartOffset              :: !(Maybe Text)
-    , _lvalUserIp                   :: !(Maybe Text)
+    , _lvalUserIP                   :: !(Maybe Text)
     , _lvalLocale                   :: !(Maybe Text)
     , _lvalContentVersion           :: !Text
     , _lvalShowDeleted              :: !(Maybe Bool)
     , _lvalVolumeAnnotationsVersion :: !(Maybe Text)
     , _lvalUpdatedMax               :: !(Maybe Text)
-    , _lvalKey                      :: !(Maybe Text)
+    , _lvalKey                      :: !(Maybe Key)
     , _lvalUpdatedMin               :: !(Maybe Text)
     , _lvalEndOffset                :: !(Maybe Text)
     , _lvalVolumeId                 :: !Text
     , _lvalSource                   :: !(Maybe Text)
     , _lvalPageToken                :: !(Maybe Text)
-    , _lvalOauthToken               :: !(Maybe Text)
+    , _lvalOAuthToken               :: !(Maybe OAuthToken)
     , _lvalEndPosition              :: !(Maybe Text)
     , _lvalLayerId                  :: !Text
     , _lvalMaxResults               :: !(Maybe Word32)
     , _lvalStartPosition            :: !(Maybe Text)
     , _lvalFields                   :: !(Maybe Text)
-    , _lvalAlt                      :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersVolumeAnnotationsList'' with the minimum fields required to make a request.
@@ -126,7 +124,7 @@ data LayersVolumeAnnotationsList' = LayersVolumeAnnotationsList'
 --
 -- * 'lvalStartOffset'
 --
--- * 'lvalUserIp'
+-- * 'lvalUserIP'
 --
 -- * 'lvalLocale'
 --
@@ -150,7 +148,7 @@ data LayersVolumeAnnotationsList' = LayersVolumeAnnotationsList'
 --
 -- * 'lvalPageToken'
 --
--- * 'lvalOauthToken'
+-- * 'lvalOAuthToken'
 --
 -- * 'lvalEndPosition'
 --
@@ -161,8 +159,6 @@ data LayersVolumeAnnotationsList' = LayersVolumeAnnotationsList'
 -- * 'lvalStartPosition'
 --
 -- * 'lvalFields'
---
--- * 'lvalAlt'
 layersVolumeAnnotationsList'
     :: Text -- ^ 'contentVersion'
     -> Text -- ^ 'volumeId'
@@ -173,7 +169,7 @@ layersVolumeAnnotationsList' pLvalContentVersion_ pLvalVolumeId_ pLvalLayerId_ =
     { _lvalQuotaUser = Nothing
     , _lvalPrettyPrint = True
     , _lvalStartOffset = Nothing
-    , _lvalUserIp = Nothing
+    , _lvalUserIP = Nothing
     , _lvalLocale = Nothing
     , _lvalContentVersion = pLvalContentVersion_
     , _lvalShowDeleted = Nothing
@@ -185,13 +181,12 @@ layersVolumeAnnotationsList' pLvalContentVersion_ pLvalVolumeId_ pLvalLayerId_ =
     , _lvalVolumeId = pLvalVolumeId_
     , _lvalSource = Nothing
     , _lvalPageToken = Nothing
-    , _lvalOauthToken = Nothing
+    , _lvalOAuthToken = Nothing
     , _lvalEndPosition = Nothing
     , _lvalLayerId = pLvalLayerId_
     , _lvalMaxResults = Nothing
     , _lvalStartPosition = Nothing
     , _lvalFields = Nothing
-    , _lvalAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -216,9 +211,9 @@ lvalStartOffset
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-lvalUserIp :: Lens' LayersVolumeAnnotationsList' (Maybe Text)
-lvalUserIp
-  = lens _lvalUserIp (\ s a -> s{_lvalUserIp = a})
+lvalUserIP :: Lens' LayersVolumeAnnotationsList' (Maybe Text)
+lvalUserIP
+  = lens _lvalUserIP (\ s a -> s{_lvalUserIP = a})
 
 -- | The locale information for the data. ISO-639-1 language and ISO-3166-1
 -- country code. Ex: \'en_US\'.
@@ -255,7 +250,7 @@ lvalUpdatedMax
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lvalKey :: Lens' LayersVolumeAnnotationsList' (Maybe Text)
+lvalKey :: Lens' LayersVolumeAnnotationsList' (Maybe Key)
 lvalKey = lens _lvalKey (\ s a -> s{_lvalKey = a})
 
 -- | RFC 3339 timestamp to restrict to items updated since this timestamp
@@ -288,10 +283,10 @@ lvalPageToken
       (\ s a -> s{_lvalPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-lvalOauthToken :: Lens' LayersVolumeAnnotationsList' (Maybe Text)
-lvalOauthToken
-  = lens _lvalOauthToken
-      (\ s a -> s{_lvalOauthToken = a})
+lvalOAuthToken :: Lens' LayersVolumeAnnotationsList' (Maybe OAuthToken)
+lvalOAuthToken
+  = lens _lvalOAuthToken
+      (\ s a -> s{_lvalOAuthToken = a})
 
 -- | The end position to end retrieving data from.
 lvalEndPosition :: Lens' LayersVolumeAnnotationsList' (Maybe Text)
@@ -321,9 +316,10 @@ lvalFields :: Lens' LayersVolumeAnnotationsList' (Maybe Text)
 lvalFields
   = lens _lvalFields (\ s a -> s{_lvalFields = a})
 
--- | Data format for the response.
-lvalAlt :: Lens' LayersVolumeAnnotationsList' Alt
-lvalAlt = lens _lvalAlt (\ s a -> s{_lvalAlt = a})
+instance GoogleAuth LayersVolumeAnnotationsList'
+         where
+        authKey = lvalKey . _Just
+        authToken = lvalOAuthToken . _Just
 
 instance GoogleRequest LayersVolumeAnnotationsList'
          where
@@ -333,7 +329,7 @@ instance GoogleRequest LayersVolumeAnnotationsList'
         requestWithRoute r u LayersVolumeAnnotationsList'{..}
           = go _lvalQuotaUser (Just _lvalPrettyPrint)
               _lvalStartOffset
-              _lvalUserIp
+              _lvalUserIP
               _lvalLocale
               (Just _lvalContentVersion)
               _lvalShowDeleted
@@ -345,13 +341,13 @@ instance GoogleRequest LayersVolumeAnnotationsList'
               _lvalVolumeId
               _lvalSource
               _lvalPageToken
-              _lvalOauthToken
+              _lvalOAuthToken
               _lvalEndPosition
               _lvalLayerId
               _lvalMaxResults
               _lvalStartPosition
               _lvalFields
-              (Just _lvalAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy LayersVolumeAnnotationsListResource)

@@ -33,13 +33,13 @@ module Network.Google.Resource.Analytics.Management.ProfileUserLinks.Insert
     , mpuliQuotaUser
     , mpuliPrettyPrint
     , mpuliWebPropertyId
-    , mpuliUserIp
+    , mpuliUserIP
     , mpuliProfileId
     , mpuliAccountId
     , mpuliKey
-    , mpuliOauthToken
+    , mpuliEntityUserLink
+    , mpuliOAuthToken
     , mpuliFields
-    , mpuliAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -59,26 +59,27 @@ type ManagementProfileUserLinksInsertResource =
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "fields" Text :>
-                                 QueryParam "alt" Alt :>
-                                   Post '[JSON] EntityUserLink
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON] EntityUserLink :>
+                                     Post '[JSON] EntityUserLink
 
 -- | Adds a new user to the given view (profile).
 --
 -- /See:/ 'managementProfileUserLinksInsert'' smart constructor.
 data ManagementProfileUserLinksInsert' = ManagementProfileUserLinksInsert'
-    { _mpuliQuotaUser     :: !(Maybe Text)
-    , _mpuliPrettyPrint   :: !Bool
-    , _mpuliWebPropertyId :: !Text
-    , _mpuliUserIp        :: !(Maybe Text)
-    , _mpuliProfileId     :: !Text
-    , _mpuliAccountId     :: !Text
-    , _mpuliKey           :: !(Maybe Text)
-    , _mpuliOauthToken    :: !(Maybe Text)
-    , _mpuliFields        :: !(Maybe Text)
-    , _mpuliAlt           :: !Alt
+    { _mpuliQuotaUser      :: !(Maybe Text)
+    , _mpuliPrettyPrint    :: !Bool
+    , _mpuliWebPropertyId  :: !Text
+    , _mpuliUserIP         :: !(Maybe Text)
+    , _mpuliProfileId      :: !Text
+    , _mpuliAccountId      :: !Text
+    , _mpuliKey            :: !(Maybe Key)
+    , _mpuliEntityUserLink :: !EntityUserLink
+    , _mpuliOAuthToken     :: !(Maybe OAuthToken)
+    , _mpuliFields         :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProfileUserLinksInsert'' with the minimum fields required to make a request.
@@ -91,7 +92,7 @@ data ManagementProfileUserLinksInsert' = ManagementProfileUserLinksInsert'
 --
 -- * 'mpuliWebPropertyId'
 --
--- * 'mpuliUserIp'
+-- * 'mpuliUserIP'
 --
 -- * 'mpuliProfileId'
 --
@@ -99,28 +100,29 @@ data ManagementProfileUserLinksInsert' = ManagementProfileUserLinksInsert'
 --
 -- * 'mpuliKey'
 --
--- * 'mpuliOauthToken'
+-- * 'mpuliEntityUserLink'
+--
+-- * 'mpuliOAuthToken'
 --
 -- * 'mpuliFields'
---
--- * 'mpuliAlt'
 managementProfileUserLinksInsert'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
     -> Text -- ^ 'accountId'
+    -> EntityUserLink -- ^ 'EntityUserLink'
     -> ManagementProfileUserLinksInsert'
-managementProfileUserLinksInsert' pMpuliWebPropertyId_ pMpuliProfileId_ pMpuliAccountId_ =
+managementProfileUserLinksInsert' pMpuliWebPropertyId_ pMpuliProfileId_ pMpuliAccountId_ pMpuliEntityUserLink_ =
     ManagementProfileUserLinksInsert'
     { _mpuliQuotaUser = Nothing
     , _mpuliPrettyPrint = False
     , _mpuliWebPropertyId = pMpuliWebPropertyId_
-    , _mpuliUserIp = Nothing
+    , _mpuliUserIP = Nothing
     , _mpuliProfileId = pMpuliProfileId_
     , _mpuliAccountId = pMpuliAccountId_
     , _mpuliKey = Nothing
-    , _mpuliOauthToken = Nothing
+    , _mpuliEntityUserLink = pMpuliEntityUserLink_
+    , _mpuliOAuthToken = Nothing
     , _mpuliFields = Nothing
-    , _mpuliAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -145,9 +147,9 @@ mpuliWebPropertyId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mpuliUserIp :: Lens' ManagementProfileUserLinksInsert' (Maybe Text)
-mpuliUserIp
-  = lens _mpuliUserIp (\ s a -> s{_mpuliUserIp = a})
+mpuliUserIP :: Lens' ManagementProfileUserLinksInsert' (Maybe Text)
+mpuliUserIP
+  = lens _mpuliUserIP (\ s a -> s{_mpuliUserIP = a})
 
 -- | View (Profile) ID to create the user link for.
 mpuliProfileId :: Lens' ManagementProfileUserLinksInsert' Text
@@ -164,23 +166,30 @@ mpuliAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mpuliKey :: Lens' ManagementProfileUserLinksInsert' (Maybe Text)
+mpuliKey :: Lens' ManagementProfileUserLinksInsert' (Maybe Key)
 mpuliKey = lens _mpuliKey (\ s a -> s{_mpuliKey = a})
 
+-- | Multipart request metadata.
+mpuliEntityUserLink :: Lens' ManagementProfileUserLinksInsert' EntityUserLink
+mpuliEntityUserLink
+  = lens _mpuliEntityUserLink
+      (\ s a -> s{_mpuliEntityUserLink = a})
+
 -- | OAuth 2.0 token for the current user.
-mpuliOauthToken :: Lens' ManagementProfileUserLinksInsert' (Maybe Text)
-mpuliOauthToken
-  = lens _mpuliOauthToken
-      (\ s a -> s{_mpuliOauthToken = a})
+mpuliOAuthToken :: Lens' ManagementProfileUserLinksInsert' (Maybe OAuthToken)
+mpuliOAuthToken
+  = lens _mpuliOAuthToken
+      (\ s a -> s{_mpuliOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 mpuliFields :: Lens' ManagementProfileUserLinksInsert' (Maybe Text)
 mpuliFields
   = lens _mpuliFields (\ s a -> s{_mpuliFields = a})
 
--- | Data format for the response.
-mpuliAlt :: Lens' ManagementProfileUserLinksInsert' Alt
-mpuliAlt = lens _mpuliAlt (\ s a -> s{_mpuliAlt = a})
+instance GoogleAuth ManagementProfileUserLinksInsert'
+         where
+        authKey = mpuliKey . _Just
+        authToken = mpuliOAuthToken . _Just
 
 instance GoogleRequest
          ManagementProfileUserLinksInsert' where
@@ -191,13 +200,14 @@ instance GoogleRequest
           ManagementProfileUserLinksInsert'{..}
           = go _mpuliQuotaUser (Just _mpuliPrettyPrint)
               _mpuliWebPropertyId
-              _mpuliUserIp
+              _mpuliUserIP
               _mpuliProfileId
               _mpuliAccountId
               _mpuliKey
-              _mpuliOauthToken
+              _mpuliOAuthToken
               _mpuliFields
-              (Just _mpuliAlt)
+              (Just AltJSON)
+              _mpuliEntityUserLink
           where go
                   = clientWithRoute
                       (Proxy ::

@@ -33,15 +33,14 @@ module Network.Google.Resource.PlusDomains.People.List
     , plQuotaUser
     , plPrettyPrint
     , plOrderBy
-    , plUserIp
+    , plUserIP
     , plCollection
     , plUserId
     , plKey
     , plPageToken
-    , plOauthToken
+    , plOAuthToken
     , plMaxResults
     , plFields
-    , plAlt
     ) where
 
 import           Network.Google.PlusDomains.Types
@@ -59,12 +58,13 @@ type PeopleListResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "orderBy" PlusDomainsPeopleListOrderBy :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
+                     QueryParam "key" Key :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "maxResults" Word32 :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :> Get '[JSON] PeopleFeed
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] PeopleFeed
 
 -- | List all of the people in the specified collection.
 --
@@ -73,15 +73,14 @@ data PeopleList' = PeopleList'
     { _plQuotaUser   :: !(Maybe Text)
     , _plPrettyPrint :: !Bool
     , _plOrderBy     :: !(Maybe PlusDomainsPeopleListOrderBy)
-    , _plUserIp      :: !(Maybe Text)
+    , _plUserIP      :: !(Maybe Text)
     , _plCollection  :: !PlusDomainsPeopleListCollection
     , _plUserId      :: !Text
-    , _plKey         :: !(Maybe Text)
+    , _plKey         :: !(Maybe Key)
     , _plPageToken   :: !(Maybe Text)
-    , _plOauthToken  :: !(Maybe Text)
+    , _plOAuthToken  :: !(Maybe OAuthToken)
     , _plMaxResults  :: !Word32
     , _plFields      :: !(Maybe Text)
-    , _plAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PeopleList'' with the minimum fields required to make a request.
@@ -94,7 +93,7 @@ data PeopleList' = PeopleList'
 --
 -- * 'plOrderBy'
 --
--- * 'plUserIp'
+-- * 'plUserIP'
 --
 -- * 'plCollection'
 --
@@ -104,13 +103,11 @@ data PeopleList' = PeopleList'
 --
 -- * 'plPageToken'
 --
--- * 'plOauthToken'
+-- * 'plOAuthToken'
 --
 -- * 'plMaxResults'
 --
 -- * 'plFields'
---
--- * 'plAlt'
 peopleList'
     :: PlusDomainsPeopleListCollection -- ^ 'collection'
     -> Text -- ^ 'userId'
@@ -120,15 +117,14 @@ peopleList' pPlCollection_ pPlUserId_ =
     { _plQuotaUser = Nothing
     , _plPrettyPrint = True
     , _plOrderBy = Nothing
-    , _plUserIp = Nothing
+    , _plUserIP = Nothing
     , _plCollection = pPlCollection_
     , _plUserId = pPlUserId_
     , _plKey = Nothing
     , _plPageToken = Nothing
-    , _plOauthToken = Nothing
+    , _plOAuthToken = Nothing
     , _plMaxResults = 100
     , _plFields = Nothing
-    , _plAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -151,8 +147,8 @@ plOrderBy
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-plUserIp :: Lens' PeopleList' (Maybe Text)
-plUserIp = lens _plUserIp (\ s a -> s{_plUserIp = a})
+plUserIP :: Lens' PeopleList' (Maybe Text)
+plUserIP = lens _plUserIP (\ s a -> s{_plUserIP = a})
 
 -- | The collection of people to list.
 plCollection :: Lens' PeopleList' PlusDomainsPeopleListCollection
@@ -167,7 +163,7 @@ plUserId = lens _plUserId (\ s a -> s{_plUserId = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-plKey :: Lens' PeopleList' (Maybe Text)
+plKey :: Lens' PeopleList' (Maybe Key)
 plKey = lens _plKey (\ s a -> s{_plKey = a})
 
 -- | The continuation token, which is used to page through large result sets.
@@ -178,9 +174,9 @@ plPageToken
   = lens _plPageToken (\ s a -> s{_plPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-plOauthToken :: Lens' PeopleList' (Maybe Text)
-plOauthToken
-  = lens _plOauthToken (\ s a -> s{_plOauthToken = a})
+plOAuthToken :: Lens' PeopleList' (Maybe OAuthToken)
+plOAuthToken
+  = lens _plOAuthToken (\ s a -> s{_plOAuthToken = a})
 
 -- | The maximum number of people to include in the response, which is used
 -- for paging. For any response, the actual number returned might be less
@@ -193,24 +189,24 @@ plMaxResults
 plFields :: Lens' PeopleList' (Maybe Text)
 plFields = lens _plFields (\ s a -> s{_plFields = a})
 
--- | Data format for the response.
-plAlt :: Lens' PeopleList' Alt
-plAlt = lens _plAlt (\ s a -> s{_plAlt = a})
+instance GoogleAuth PeopleList' where
+        authKey = plKey . _Just
+        authToken = plOAuthToken . _Just
 
 instance GoogleRequest PeopleList' where
         type Rs PeopleList' = PeopleFeed
         request = requestWithRoute defReq plusDomainsURL
         requestWithRoute r u PeopleList'{..}
           = go _plQuotaUser (Just _plPrettyPrint) _plOrderBy
-              _plUserIp
+              _plUserIP
               _plCollection
               _plUserId
               _plKey
               _plPageToken
-              _plOauthToken
+              _plOAuthToken
               (Just _plMaxResults)
               _plFields
-              (Just _plAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy PeopleListResource)
                       r

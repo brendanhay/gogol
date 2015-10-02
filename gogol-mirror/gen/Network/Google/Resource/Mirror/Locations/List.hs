@@ -32,11 +32,10 @@ module Network.Google.Resource.Mirror.Locations.List
     -- * Request Lenses
     , llQuotaUser
     , llPrettyPrint
-    , llUserIp
+    , llUserIP
     , llKey
-    , llOauthToken
+    , llOAuthToken
     , llFields
-    , llAlt
     ) where
 
 import           Network.Google.Mirror.Types
@@ -49,10 +48,10 @@ type LocationsListResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
-               QueryParam "oauth_token" Text :>
+             QueryParam "key" Key :>
+               QueryParam "oauth_token" OAuthToken :>
                  QueryParam "fields" Text :>
-                   QueryParam "alt" Alt :>
+                   QueryParam "alt" AltJSON :>
                      Get '[JSON] LocationsListResponse
 
 -- | Retrieves a list of locations for the user.
@@ -61,11 +60,10 @@ type LocationsListResource =
 data LocationsList' = LocationsList'
     { _llQuotaUser   :: !(Maybe Text)
     , _llPrettyPrint :: !Bool
-    , _llUserIp      :: !(Maybe Text)
-    , _llKey         :: !(Maybe Text)
-    , _llOauthToken  :: !(Maybe Text)
+    , _llUserIP      :: !(Maybe Text)
+    , _llKey         :: !(Maybe Key)
+    , _llOAuthToken  :: !(Maybe OAuthToken)
     , _llFields      :: !(Maybe Text)
-    , _llAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LocationsList'' with the minimum fields required to make a request.
@@ -76,26 +74,23 @@ data LocationsList' = LocationsList'
 --
 -- * 'llPrettyPrint'
 --
--- * 'llUserIp'
+-- * 'llUserIP'
 --
 -- * 'llKey'
 --
--- * 'llOauthToken'
+-- * 'llOAuthToken'
 --
 -- * 'llFields'
---
--- * 'llAlt'
 locationsList'
     :: LocationsList'
 locationsList' =
     LocationsList'
     { _llQuotaUser = Nothing
     , _llPrettyPrint = True
-    , _llUserIp = Nothing
+    , _llUserIP = Nothing
     , _llKey = Nothing
-    , _llOauthToken = Nothing
+    , _llOAuthToken = Nothing
     , _llFields = Nothing
-    , _llAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -113,37 +108,37 @@ llPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-llUserIp :: Lens' LocationsList' (Maybe Text)
-llUserIp = lens _llUserIp (\ s a -> s{_llUserIp = a})
+llUserIP :: Lens' LocationsList' (Maybe Text)
+llUserIP = lens _llUserIP (\ s a -> s{_llUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-llKey :: Lens' LocationsList' (Maybe Text)
+llKey :: Lens' LocationsList' (Maybe Key)
 llKey = lens _llKey (\ s a -> s{_llKey = a})
 
 -- | OAuth 2.0 token for the current user.
-llOauthToken :: Lens' LocationsList' (Maybe Text)
-llOauthToken
-  = lens _llOauthToken (\ s a -> s{_llOauthToken = a})
+llOAuthToken :: Lens' LocationsList' (Maybe OAuthToken)
+llOAuthToken
+  = lens _llOAuthToken (\ s a -> s{_llOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 llFields :: Lens' LocationsList' (Maybe Text)
 llFields = lens _llFields (\ s a -> s{_llFields = a})
 
--- | Data format for the response.
-llAlt :: Lens' LocationsList' Alt
-llAlt = lens _llAlt (\ s a -> s{_llAlt = a})
+instance GoogleAuth LocationsList' where
+        authKey = llKey . _Just
+        authToken = llOAuthToken . _Just
 
 instance GoogleRequest LocationsList' where
         type Rs LocationsList' = LocationsListResponse
         request = requestWithRoute defReq mirrorURL
         requestWithRoute r u LocationsList'{..}
-          = go _llQuotaUser (Just _llPrettyPrint) _llUserIp
+          = go _llQuotaUser (Just _llPrettyPrint) _llUserIP
               _llKey
-              _llOauthToken
+              _llOAuthToken
               _llFields
-              (Just _llAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy LocationsListResource)

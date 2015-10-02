@@ -20,7 +20,7 @@ import           Network.Google.Prelude
 -- | The aggregation function that will reduce the data points in each window
 -- to a single point. This parameter is only valid for non-cumulative
 -- metrics with a value type of INT64 or DOUBLE.
-data CloudmonitoringTimeseriesListAggregator
+data CloudMonitoringTimeseriesListAggregator
     = Max
       -- ^ @max@
     | Mean
@@ -31,9 +31,9 @@ data CloudmonitoringTimeseriesListAggregator
       -- ^ @sum@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable CloudmonitoringTimeseriesListAggregator
+instance Hashable CloudMonitoringTimeseriesListAggregator
 
-instance FromText CloudmonitoringTimeseriesListAggregator where
+instance FromText CloudMonitoringTimeseriesListAggregator where
     fromText = \case
         "max" -> Just Max
         "mean" -> Just Mean
@@ -41,76 +41,52 @@ instance FromText CloudmonitoringTimeseriesListAggregator where
         "sum" -> Just Sum
         _ -> Nothing
 
-instance ToText CloudmonitoringTimeseriesListAggregator where
+instance ToText CloudMonitoringTimeseriesListAggregator where
     toText = \case
         Max -> "max"
         Mean -> "mean"
         Min -> "min"
         Sum -> "sum"
 
-instance FromJSON CloudmonitoringTimeseriesListAggregator where
-    parseJSON = parseJSONText "CloudmonitoringTimeseriesListAggregator"
+instance FromJSON CloudMonitoringTimeseriesListAggregator where
+    parseJSON = parseJSONText "CloudMonitoringTimeseriesListAggregator"
 
-instance ToJSON CloudmonitoringTimeseriesListAggregator where
+instance ToJSON CloudMonitoringTimeseriesListAggregator where
     toJSON = toJSONText
 
 -- | The aggregation function that will reduce the data points in each window
 -- to a single point. This parameter is only valid for non-cumulative
 -- metrics with a value type of INT64 or DOUBLE.
-data CloudmonitoringTimeseriesDescriptorsListAggregator
-    = CTDLAMax
+data CloudMonitoringTimeseriesDescriptorsListAggregator
+    = CMTDLAMax
       -- ^ @max@
-    | CTDLAMean
+    | CMTDLAMean
       -- ^ @mean@
-    | CTDLAMin
+    | CMTDLAMin
       -- ^ @min@
-    | CTDLASum
+    | CMTDLASum
       -- ^ @sum@
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable CloudmonitoringTimeseriesDescriptorsListAggregator
+instance Hashable CloudMonitoringTimeseriesDescriptorsListAggregator
 
-instance FromText CloudmonitoringTimeseriesDescriptorsListAggregator where
+instance FromText CloudMonitoringTimeseriesDescriptorsListAggregator where
     fromText = \case
-        "max" -> Just CTDLAMax
-        "mean" -> Just CTDLAMean
-        "min" -> Just CTDLAMin
-        "sum" -> Just CTDLASum
+        "max" -> Just CMTDLAMax
+        "mean" -> Just CMTDLAMean
+        "min" -> Just CMTDLAMin
+        "sum" -> Just CMTDLASum
         _ -> Nothing
 
-instance ToText CloudmonitoringTimeseriesDescriptorsListAggregator where
+instance ToText CloudMonitoringTimeseriesDescriptorsListAggregator where
     toText = \case
-        CTDLAMax -> "max"
-        CTDLAMean -> "mean"
-        CTDLAMin -> "min"
-        CTDLASum -> "sum"
+        CMTDLAMax -> "max"
+        CMTDLAMean -> "mean"
+        CMTDLAMin -> "min"
+        CMTDLASum -> "sum"
 
-instance FromJSON CloudmonitoringTimeseriesDescriptorsListAggregator where
-    parseJSON = parseJSONText "CloudmonitoringTimeseriesDescriptorsListAggregator"
+instance FromJSON CloudMonitoringTimeseriesDescriptorsListAggregator where
+    parseJSON = parseJSONText "CloudMonitoringTimeseriesDescriptorsListAggregator"
 
-instance ToJSON CloudmonitoringTimeseriesDescriptorsListAggregator where
-    toJSON = toJSONText
-
--- | Data format for the response.
-data Alt
-    = JSON
-      -- ^ @json@
-      -- Responses with Content-Type of application\/json
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable Alt
-
-instance FromText Alt where
-    fromText = \case
-        "json" -> Just JSON
-        _ -> Nothing
-
-instance ToText Alt where
-    toText = \case
-        JSON -> "json"
-
-instance FromJSON Alt where
-    parseJSON = parseJSONText "Alt"
-
-instance ToJSON Alt where
+instance ToJSON CloudMonitoringTimeseriesDescriptorsListAggregator where
     toJSON = toJSONText

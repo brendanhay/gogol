@@ -33,13 +33,12 @@ module Network.Google.Resource.YouTubeAnalytics.GroupItems.List
     -- * Request Lenses
     , gilQuotaUser
     , gilPrettyPrint
-    , gilUserIp
+    , gilUserIP
     , gilOnBehalfOfContentOwner
     , gilKey
     , gilGroupId
-    , gilOauthToken
+    , gilOAuthToken
     , gilFields
-    , gilAlt
     ) where
 
 import           Network.Google.Prelude
@@ -53,11 +52,11 @@ type GroupItemsListResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
              QueryParam "onBehalfOfContentOwner" Text :>
-               QueryParam "key" Text :>
+               QueryParam "key" Key :>
                  QueryParam "groupId" Text :>
-                   QueryParam "oauth_token" Text :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :>
+                       QueryParam "alt" AltJSON :>
                          Get '[JSON] GroupItemListResponse
 
 -- | Returns a collection of group items that match the API request
@@ -67,13 +66,12 @@ type GroupItemsListResource =
 data GroupItemsList' = GroupItemsList'
     { _gilQuotaUser              :: !(Maybe Text)
     , _gilPrettyPrint            :: !Bool
-    , _gilUserIp                 :: !(Maybe Text)
+    , _gilUserIP                 :: !(Maybe Text)
     , _gilOnBehalfOfContentOwner :: !(Maybe Text)
-    , _gilKey                    :: !(Maybe Text)
+    , _gilKey                    :: !(Maybe Key)
     , _gilGroupId                :: !Text
-    , _gilOauthToken             :: !(Maybe Text)
+    , _gilOAuthToken             :: !(Maybe OAuthToken)
     , _gilFields                 :: !(Maybe Text)
-    , _gilAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupItemsList'' with the minimum fields required to make a request.
@@ -84,7 +82,7 @@ data GroupItemsList' = GroupItemsList'
 --
 -- * 'gilPrettyPrint'
 --
--- * 'gilUserIp'
+-- * 'gilUserIP'
 --
 -- * 'gilOnBehalfOfContentOwner'
 --
@@ -92,11 +90,9 @@ data GroupItemsList' = GroupItemsList'
 --
 -- * 'gilGroupId'
 --
--- * 'gilOauthToken'
+-- * 'gilOAuthToken'
 --
 -- * 'gilFields'
---
--- * 'gilAlt'
 groupItemsList'
     :: Text -- ^ 'groupId'
     -> GroupItemsList'
@@ -104,13 +100,12 @@ groupItemsList' pGilGroupId_ =
     GroupItemsList'
     { _gilQuotaUser = Nothing
     , _gilPrettyPrint = True
-    , _gilUserIp = Nothing
+    , _gilUserIP = Nothing
     , _gilOnBehalfOfContentOwner = Nothing
     , _gilKey = Nothing
     , _gilGroupId = pGilGroupId_
-    , _gilOauthToken = Nothing
+    , _gilOAuthToken = Nothing
     , _gilFields = Nothing
-    , _gilAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -128,9 +123,9 @@ gilPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-gilUserIp :: Lens' GroupItemsList' (Maybe Text)
-gilUserIp
-  = lens _gilUserIp (\ s a -> s{_gilUserIp = a})
+gilUserIP :: Lens' GroupItemsList' (Maybe Text)
+gilUserIP
+  = lens _gilUserIP (\ s a -> s{_gilUserIP = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
@@ -150,7 +145,7 @@ gilOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-gilKey :: Lens' GroupItemsList' (Maybe Text)
+gilKey :: Lens' GroupItemsList' (Maybe Key)
 gilKey = lens _gilKey (\ s a -> s{_gilKey = a})
 
 -- | The id parameter specifies the unique ID of the group for which you want
@@ -160,31 +155,31 @@ gilGroupId
   = lens _gilGroupId (\ s a -> s{_gilGroupId = a})
 
 -- | OAuth 2.0 token for the current user.
-gilOauthToken :: Lens' GroupItemsList' (Maybe Text)
-gilOauthToken
-  = lens _gilOauthToken
-      (\ s a -> s{_gilOauthToken = a})
+gilOAuthToken :: Lens' GroupItemsList' (Maybe OAuthToken)
+gilOAuthToken
+  = lens _gilOAuthToken
+      (\ s a -> s{_gilOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 gilFields :: Lens' GroupItemsList' (Maybe Text)
 gilFields
   = lens _gilFields (\ s a -> s{_gilFields = a})
 
--- | Data format for the response.
-gilAlt :: Lens' GroupItemsList' Alt
-gilAlt = lens _gilAlt (\ s a -> s{_gilAlt = a})
+instance GoogleAuth GroupItemsList' where
+        authKey = gilKey . _Just
+        authToken = gilOAuthToken . _Just
 
 instance GoogleRequest GroupItemsList' where
         type Rs GroupItemsList' = GroupItemListResponse
         request = requestWithRoute defReq youTubeAnalyticsURL
         requestWithRoute r u GroupItemsList'{..}
-          = go _gilQuotaUser (Just _gilPrettyPrint) _gilUserIp
+          = go _gilQuotaUser (Just _gilPrettyPrint) _gilUserIP
               _gilOnBehalfOfContentOwner
               _gilKey
               (Just _gilGroupId)
-              _gilOauthToken
+              _gilOAuthToken
               _gilFields
-              (Just _gilAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy GroupItemsListResource)

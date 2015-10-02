@@ -32,12 +32,12 @@ module Network.Google.Resource.DFAReporting.UserRoles.Update
     -- * Request Lenses
     , uruQuotaUser
     , uruPrettyPrint
-    , uruUserIp
+    , uruUserIP
     , uruProfileId
     , uruKey
-    , uruOauthToken
+    , uruUserRole
+    , uruOAuthToken
     , uruFields
-    , uruAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,10 +52,11 @@ type UserRolesUpdateResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Put '[JSON] UserRole
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] UserRole :> Put '[JSON] UserRole
 
 -- | Updates an existing user role.
 --
@@ -63,12 +64,12 @@ type UserRolesUpdateResource =
 data UserRolesUpdate' = UserRolesUpdate'
     { _uruQuotaUser   :: !(Maybe Text)
     , _uruPrettyPrint :: !Bool
-    , _uruUserIp      :: !(Maybe Text)
+    , _uruUserIP      :: !(Maybe Text)
     , _uruProfileId   :: !Int64
-    , _uruKey         :: !(Maybe Text)
-    , _uruOauthToken  :: !(Maybe Text)
+    , _uruKey         :: !(Maybe Key)
+    , _uruUserRole    :: !UserRole
+    , _uruOAuthToken  :: !(Maybe OAuthToken)
     , _uruFields      :: !(Maybe Text)
-    , _uruAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserRolesUpdate'' with the minimum fields required to make a request.
@@ -79,30 +80,31 @@ data UserRolesUpdate' = UserRolesUpdate'
 --
 -- * 'uruPrettyPrint'
 --
--- * 'uruUserIp'
+-- * 'uruUserIP'
 --
 -- * 'uruProfileId'
 --
 -- * 'uruKey'
 --
--- * 'uruOauthToken'
+-- * 'uruUserRole'
+--
+-- * 'uruOAuthToken'
 --
 -- * 'uruFields'
---
--- * 'uruAlt'
 userRolesUpdate'
     :: Int64 -- ^ 'profileId'
+    -> UserRole -- ^ 'UserRole'
     -> UserRolesUpdate'
-userRolesUpdate' pUruProfileId_ =
+userRolesUpdate' pUruProfileId_ pUruUserRole_ =
     UserRolesUpdate'
     { _uruQuotaUser = Nothing
     , _uruPrettyPrint = True
-    , _uruUserIp = Nothing
+    , _uruUserIP = Nothing
     , _uruProfileId = pUruProfileId_
     , _uruKey = Nothing
-    , _uruOauthToken = Nothing
+    , _uruUserRole = pUruUserRole_
+    , _uruOAuthToken = Nothing
     , _uruFields = Nothing
-    , _uruAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,9 +122,9 @@ uruPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-uruUserIp :: Lens' UserRolesUpdate' (Maybe Text)
-uruUserIp
-  = lens _uruUserIp (\ s a -> s{_uruUserIp = a})
+uruUserIP :: Lens' UserRolesUpdate' (Maybe Text)
+uruUserIP
+  = lens _uruUserIP (\ s a -> s{_uruUserIP = a})
 
 -- | User profile ID associated with this request.
 uruProfileId :: Lens' UserRolesUpdate' Int64
@@ -132,34 +134,40 @@ uruProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-uruKey :: Lens' UserRolesUpdate' (Maybe Text)
+uruKey :: Lens' UserRolesUpdate' (Maybe Key)
 uruKey = lens _uruKey (\ s a -> s{_uruKey = a})
 
+-- | Multipart request metadata.
+uruUserRole :: Lens' UserRolesUpdate' UserRole
+uruUserRole
+  = lens _uruUserRole (\ s a -> s{_uruUserRole = a})
+
 -- | OAuth 2.0 token for the current user.
-uruOauthToken :: Lens' UserRolesUpdate' (Maybe Text)
-uruOauthToken
-  = lens _uruOauthToken
-      (\ s a -> s{_uruOauthToken = a})
+uruOAuthToken :: Lens' UserRolesUpdate' (Maybe OAuthToken)
+uruOAuthToken
+  = lens _uruOAuthToken
+      (\ s a -> s{_uruOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 uruFields :: Lens' UserRolesUpdate' (Maybe Text)
 uruFields
   = lens _uruFields (\ s a -> s{_uruFields = a})
 
--- | Data format for the response.
-uruAlt :: Lens' UserRolesUpdate' Alt
-uruAlt = lens _uruAlt (\ s a -> s{_uruAlt = a})
+instance GoogleAuth UserRolesUpdate' where
+        authKey = uruKey . _Just
+        authToken = uruOAuthToken . _Just
 
 instance GoogleRequest UserRolesUpdate' where
         type Rs UserRolesUpdate' = UserRole
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u UserRolesUpdate'{..}
-          = go _uruQuotaUser (Just _uruPrettyPrint) _uruUserIp
+          = go _uruQuotaUser (Just _uruPrettyPrint) _uruUserIP
               _uruProfileId
               _uruKey
-              _uruOauthToken
+              _uruOAuthToken
               _uruFields
-              (Just _uruAlt)
+              (Just AltJSON)
+              _uruUserRole
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UserRolesUpdateResource)

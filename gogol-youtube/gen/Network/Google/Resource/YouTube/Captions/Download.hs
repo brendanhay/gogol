@@ -36,15 +36,14 @@ module Network.Google.Resource.YouTube.Captions.Download
     , capaOnBehalfOf
     , capaQuotaUser
     , capaPrettyPrint
-    , capaUserIp
+    , capaUserIP
     , capaTlang
     , capaOnBehalfOfContentOwner
     , capaKey
     , capaId
     , capaTfmt
-    , capaOauthToken
+    , capaOAuthToken
     , capaFields
-    , capaAlt
     ) where
 
 import           Network.Google.Prelude
@@ -61,11 +60,26 @@ type CaptionsDownloadResource =
                QueryParam "userIp" Text :>
                  QueryParam "tlang" Text :>
                    QueryParam "onBehalfOfContentOwner" Text :>
-                     QueryParam "key" Text :>
+                     QueryParam "key" Key :>
                        QueryParam "tfmt" YouTubeCaptionsDownloadTfmt :>
-                         QueryParam "oauth_token" Text :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Get '[JSON] ()
+                             QueryParam "alt" AltJSON :> Get '[JSON] ()
+       :<|>
+       "captions" :>
+         Capture "id" Text :>
+           QueryParam "onBehalfOf" Text :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "tlang" Text :>
+                     QueryParam "onBehalfOfContentOwner" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "tfmt" YouTubeCaptionsDownloadTfmt :>
+                           QueryParam "oauth_token" OAuthToken :>
+                             QueryParam "fields" Text :>
+                               QueryParam "alt" Media :>
+                                 Get '[OctetStream] Stream
 
 -- | Downloads a caption track. The caption track is returned in its original
 -- format unless the request specifies a value for the tfmt parameter and
@@ -77,15 +91,14 @@ data CaptionsDownload' = CaptionsDownload'
     { _capaOnBehalfOf             :: !(Maybe Text)
     , _capaQuotaUser              :: !(Maybe Text)
     , _capaPrettyPrint            :: !Bool
-    , _capaUserIp                 :: !(Maybe Text)
+    , _capaUserIP                 :: !(Maybe Text)
     , _capaTlang                  :: !(Maybe Text)
     , _capaOnBehalfOfContentOwner :: !(Maybe Text)
-    , _capaKey                    :: !(Maybe Text)
+    , _capaKey                    :: !(Maybe Key)
     , _capaId                     :: !Text
     , _capaTfmt                   :: !(Maybe YouTubeCaptionsDownloadTfmt)
-    , _capaOauthToken             :: !(Maybe Text)
+    , _capaOAuthToken             :: !(Maybe OAuthToken)
     , _capaFields                 :: !(Maybe Text)
-    , _capaAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CaptionsDownload'' with the minimum fields required to make a request.
@@ -98,7 +111,7 @@ data CaptionsDownload' = CaptionsDownload'
 --
 -- * 'capaPrettyPrint'
 --
--- * 'capaUserIp'
+-- * 'capaUserIP'
 --
 -- * 'capaTlang'
 --
@@ -110,11 +123,9 @@ data CaptionsDownload' = CaptionsDownload'
 --
 -- * 'capaTfmt'
 --
--- * 'capaOauthToken'
+-- * 'capaOAuthToken'
 --
 -- * 'capaFields'
---
--- * 'capaAlt'
 captionsDownload'
     :: Text -- ^ 'id'
     -> CaptionsDownload'
@@ -123,15 +134,14 @@ captionsDownload' pCapaId_ =
     { _capaOnBehalfOf = Nothing
     , _capaQuotaUser = Nothing
     , _capaPrettyPrint = True
-    , _capaUserIp = Nothing
+    , _capaUserIP = Nothing
     , _capaTlang = Nothing
     , _capaOnBehalfOfContentOwner = Nothing
     , _capaKey = Nothing
     , _capaId = pCapaId_
     , _capaTfmt = Nothing
-    , _capaOauthToken = Nothing
+    , _capaOAuthToken = Nothing
     , _capaFields = Nothing
-    , _capaAlt = JSON
     }
 
 -- | ID of the Google+ Page for the channel that the request is be on behalf
@@ -157,9 +167,9 @@ capaPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-capaUserIp :: Lens' CaptionsDownload' (Maybe Text)
-capaUserIp
-  = lens _capaUserIp (\ s a -> s{_capaUserIp = a})
+capaUserIP :: Lens' CaptionsDownload' (Maybe Text)
+capaUserIP
+  = lens _capaUserIP (\ s a -> s{_capaUserIP = a})
 
 -- | The tlang parameter specifies that the API response should return a
 -- translation of the specified caption track. The parameter value is an
@@ -188,7 +198,7 @@ capaOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-capaKey :: Lens' CaptionsDownload' (Maybe Text)
+capaKey :: Lens' CaptionsDownload' (Maybe Key)
 capaKey = lens _capaKey (\ s a -> s{_capaKey = a})
 
 -- | The id parameter identifies the caption track that is being retrieved.
@@ -204,19 +214,19 @@ capaTfmt :: Lens' CaptionsDownload' (Maybe YouTubeCaptionsDownloadTfmt)
 capaTfmt = lens _capaTfmt (\ s a -> s{_capaTfmt = a})
 
 -- | OAuth 2.0 token for the current user.
-capaOauthToken :: Lens' CaptionsDownload' (Maybe Text)
-capaOauthToken
-  = lens _capaOauthToken
-      (\ s a -> s{_capaOauthToken = a})
+capaOAuthToken :: Lens' CaptionsDownload' (Maybe OAuthToken)
+capaOAuthToken
+  = lens _capaOAuthToken
+      (\ s a -> s{_capaOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 capaFields :: Lens' CaptionsDownload' (Maybe Text)
 capaFields
   = lens _capaFields (\ s a -> s{_capaFields = a})
 
--- | Data format for the response.
-capaAlt :: Lens' CaptionsDownload' Alt
-capaAlt = lens _capaAlt (\ s a -> s{_capaAlt = a})
+instance GoogleAuth CaptionsDownload' where
+        authKey = capaKey . _Just
+        authToken = capaOAuthToken . _Just
 
 instance GoogleRequest CaptionsDownload' where
         type Rs CaptionsDownload' = ()
@@ -224,16 +234,37 @@ instance GoogleRequest CaptionsDownload' where
         requestWithRoute r u CaptionsDownload'{..}
           = go _capaOnBehalfOf _capaQuotaUser
               (Just _capaPrettyPrint)
-              _capaUserIp
+              _capaUserIP
               _capaTlang
               _capaOnBehalfOfContentOwner
               _capaKey
               _capaId
               _capaTfmt
-              _capaOauthToken
+              _capaOAuthToken
               _capaFields
-              (Just _capaAlt)
-          where go
+              (Just AltJSON)
+          where go :<|> _
+                  = clientWithRoute
+                      (Proxy :: Proxy CaptionsDownloadResource)
+                      r
+                      u
+
+instance GoogleRequest CaptionsDownload' where
+        type Rs (Download CaptionsDownload') = Stream
+        request = requestWithRoute defReq youTubeURL
+        requestWithRoute r u CaptionsDownload'{..}
+          = go _capaOnBehalfOf _capaQuotaUser
+              (Just _capaPrettyPrint)
+              _capaUserIP
+              _capaTlang
+              _capaOnBehalfOfContentOwner
+              _capaKey
+              _capaId
+              _capaTfmt
+              _capaOAuthToken
+              _capaFields
+              (Just Media)
+          where go :<|> _
                   = clientWithRoute
                       (Proxy :: Proxy CaptionsDownloadResource)
                       r

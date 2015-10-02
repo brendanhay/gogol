@@ -34,11 +34,10 @@ module Network.Google.Resource.GamesManagement.Achievements.ResetAll
     -- * Request Lenses
     , araQuotaUser
     , araPrettyPrint
-    , araUserIp
+    , araUserIP
     , araKey
-    , araOauthToken
+    , araOAuthToken
     , araFields
-    , araAlt
     ) where
 
 import           Network.Google.GamesManagement.Types
@@ -52,10 +51,10 @@ type AchievementsResetAllResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :>
+                     QueryParam "alt" AltJSON :>
                        Post '[JSON] AchievementResetAllResponse
 
 -- | Resets all achievements for the currently authenticated player for your
@@ -66,11 +65,10 @@ type AchievementsResetAllResource =
 data AchievementsResetAll' = AchievementsResetAll'
     { _araQuotaUser   :: !(Maybe Text)
     , _araPrettyPrint :: !Bool
-    , _araUserIp      :: !(Maybe Text)
-    , _araKey         :: !(Maybe Text)
-    , _araOauthToken  :: !(Maybe Text)
+    , _araUserIP      :: !(Maybe Text)
+    , _araKey         :: !(Maybe Key)
+    , _araOAuthToken  :: !(Maybe OAuthToken)
     , _araFields      :: !(Maybe Text)
-    , _araAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementsResetAll'' with the minimum fields required to make a request.
@@ -81,26 +79,23 @@ data AchievementsResetAll' = AchievementsResetAll'
 --
 -- * 'araPrettyPrint'
 --
--- * 'araUserIp'
+-- * 'araUserIP'
 --
 -- * 'araKey'
 --
--- * 'araOauthToken'
+-- * 'araOAuthToken'
 --
 -- * 'araFields'
---
--- * 'araAlt'
 achievementsResetAll'
     :: AchievementsResetAll'
 achievementsResetAll' =
     AchievementsResetAll'
     { _araQuotaUser = Nothing
     , _araPrettyPrint = True
-    , _araUserIp = Nothing
+    , _araUserIP = Nothing
     , _araKey = Nothing
-    , _araOauthToken = Nothing
+    , _araOAuthToken = Nothing
     , _araFields = Nothing
-    , _araAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -118,41 +113,41 @@ araPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-araUserIp :: Lens' AchievementsResetAll' (Maybe Text)
-araUserIp
-  = lens _araUserIp (\ s a -> s{_araUserIp = a})
+araUserIP :: Lens' AchievementsResetAll' (Maybe Text)
+araUserIP
+  = lens _araUserIP (\ s a -> s{_araUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-araKey :: Lens' AchievementsResetAll' (Maybe Text)
+araKey :: Lens' AchievementsResetAll' (Maybe Key)
 araKey = lens _araKey (\ s a -> s{_araKey = a})
 
 -- | OAuth 2.0 token for the current user.
-araOauthToken :: Lens' AchievementsResetAll' (Maybe Text)
-araOauthToken
-  = lens _araOauthToken
-      (\ s a -> s{_araOauthToken = a})
+araOAuthToken :: Lens' AchievementsResetAll' (Maybe OAuthToken)
+araOAuthToken
+  = lens _araOAuthToken
+      (\ s a -> s{_araOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 araFields :: Lens' AchievementsResetAll' (Maybe Text)
 araFields
   = lens _araFields (\ s a -> s{_araFields = a})
 
--- | Data format for the response.
-araAlt :: Lens' AchievementsResetAll' Alt
-araAlt = lens _araAlt (\ s a -> s{_araAlt = a})
+instance GoogleAuth AchievementsResetAll' where
+        authKey = araKey . _Just
+        authToken = araOAuthToken . _Just
 
 instance GoogleRequest AchievementsResetAll' where
         type Rs AchievementsResetAll' =
              AchievementResetAllResponse
         request = requestWithRoute defReq gamesManagementURL
         requestWithRoute r u AchievementsResetAll'{..}
-          = go _araQuotaUser (Just _araPrettyPrint) _araUserIp
+          = go _araQuotaUser (Just _araPrettyPrint) _araUserIP
               _araKey
-              _araOauthToken
+              _araOAuthToken
               _araFields
-              (Just _araAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AchievementsResetAllResource)

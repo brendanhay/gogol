@@ -32,12 +32,11 @@ module Network.Google.Resource.Storage.BucketAccessControls.List
     -- * Request Lenses
     , baclQuotaUser
     , baclPrettyPrint
-    , baclUserIp
+    , baclUserIP
     , baclBucket
     , baclKey
-    , baclOauthToken
+    , baclOAuthToken
     , baclFields
-    , baclAlt
     ) where
 
 import           Network.Google.Prelude
@@ -52,10 +51,10 @@ type BucketAccessControlsListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :>
+                       QueryParam "alt" AltJSON :>
                          Get '[JSON] BucketAccessControls
 
 -- | Retrieves ACL entries on the specified bucket.
@@ -64,12 +63,11 @@ type BucketAccessControlsListResource =
 data BucketAccessControlsList' = BucketAccessControlsList'
     { _baclQuotaUser   :: !(Maybe Text)
     , _baclPrettyPrint :: !Bool
-    , _baclUserIp      :: !(Maybe Text)
+    , _baclUserIP      :: !(Maybe Text)
     , _baclBucket      :: !Text
-    , _baclKey         :: !(Maybe Text)
-    , _baclOauthToken  :: !(Maybe Text)
+    , _baclKey         :: !(Maybe Key)
+    , _baclOAuthToken  :: !(Maybe OAuthToken)
     , _baclFields      :: !(Maybe Text)
-    , _baclAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketAccessControlsList'' with the minimum fields required to make a request.
@@ -80,17 +78,15 @@ data BucketAccessControlsList' = BucketAccessControlsList'
 --
 -- * 'baclPrettyPrint'
 --
--- * 'baclUserIp'
+-- * 'baclUserIP'
 --
 -- * 'baclBucket'
 --
 -- * 'baclKey'
 --
--- * 'baclOauthToken'
+-- * 'baclOAuthToken'
 --
 -- * 'baclFields'
---
--- * 'baclAlt'
 bucketAccessControlsList'
     :: Text -- ^ 'bucket'
     -> BucketAccessControlsList'
@@ -98,12 +94,11 @@ bucketAccessControlsList' pBaclBucket_ =
     BucketAccessControlsList'
     { _baclQuotaUser = Nothing
     , _baclPrettyPrint = True
-    , _baclUserIp = Nothing
+    , _baclUserIP = Nothing
     , _baclBucket = pBaclBucket_
     , _baclKey = Nothing
-    , _baclOauthToken = Nothing
+    , _baclOAuthToken = Nothing
     , _baclFields = Nothing
-    , _baclAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -122,9 +117,9 @@ baclPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-baclUserIp :: Lens' BucketAccessControlsList' (Maybe Text)
-baclUserIp
-  = lens _baclUserIp (\ s a -> s{_baclUserIp = a})
+baclUserIP :: Lens' BucketAccessControlsList' (Maybe Text)
+baclUserIP
+  = lens _baclUserIP (\ s a -> s{_baclUserIP = a})
 
 -- | Name of a bucket.
 baclBucket :: Lens' BucketAccessControlsList' Text
@@ -134,23 +129,23 @@ baclBucket
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-baclKey :: Lens' BucketAccessControlsList' (Maybe Text)
+baclKey :: Lens' BucketAccessControlsList' (Maybe Key)
 baclKey = lens _baclKey (\ s a -> s{_baclKey = a})
 
 -- | OAuth 2.0 token for the current user.
-baclOauthToken :: Lens' BucketAccessControlsList' (Maybe Text)
-baclOauthToken
-  = lens _baclOauthToken
-      (\ s a -> s{_baclOauthToken = a})
+baclOAuthToken :: Lens' BucketAccessControlsList' (Maybe OAuthToken)
+baclOAuthToken
+  = lens _baclOAuthToken
+      (\ s a -> s{_baclOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 baclFields :: Lens' BucketAccessControlsList' (Maybe Text)
 baclFields
   = lens _baclFields (\ s a -> s{_baclFields = a})
 
--- | Data format for the response.
-baclAlt :: Lens' BucketAccessControlsList' Alt
-baclAlt = lens _baclAlt (\ s a -> s{_baclAlt = a})
+instance GoogleAuth BucketAccessControlsList' where
+        authKey = baclKey . _Just
+        authToken = baclOAuthToken . _Just
 
 instance GoogleRequest BucketAccessControlsList'
          where
@@ -159,12 +154,12 @@ instance GoogleRequest BucketAccessControlsList'
         request = requestWithRoute defReq storageURL
         requestWithRoute r u BucketAccessControlsList'{..}
           = go _baclQuotaUser (Just _baclPrettyPrint)
-              _baclUserIp
+              _baclUserIP
               _baclBucket
               _baclKey
-              _baclOauthToken
+              _baclOAuthToken
               _baclFields
-              (Just _baclAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy BucketAccessControlsListResource)

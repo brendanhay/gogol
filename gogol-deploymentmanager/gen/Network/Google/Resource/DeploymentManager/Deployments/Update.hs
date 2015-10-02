@@ -20,7 +20,7 @@
 -- | Updates a deployment and all of the resources described by the
 -- deployment manifest.
 --
--- /See:/ <https://developers.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentmanagerDeploymentsUpdate@.
+-- /See:/ <https://developers.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerDeploymentsUpdate@.
 module Network.Google.Resource.DeploymentManager.Deployments.Update
     (
     -- * REST Resource
@@ -35,20 +35,20 @@ module Network.Google.Resource.DeploymentManager.Deployments.Update
     , duQuotaUser
     , duPrettyPrint
     , duProject
-    , duUserIp
+    , duUserIP
     , duUpdatePolicy
     , duDeletePolicy
     , duKey
-    , duOauthToken
+    , duOAuthToken
+    , duDeployment
     , duFields
-    , duAlt
     , duDeployment
     ) where
 
 import           Network.Google.DeploymentManager.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DeploymentmanagerDeploymentsUpdate@ which the
+-- | A resource alias for @DeploymentManagerDeploymentsUpdate@ which the
 -- 'DeploymentsUpdate'' request conforms to.
 type DeploymentsUpdateResource =
      Capture "project" Text :>
@@ -56,38 +56,40 @@ type DeploymentsUpdateResource =
          "deployments" :>
            Capture "deployment" Text :>
              QueryParam "createPolicy"
-               DeploymentmanagerDeploymentsUpdateCreatePolicy
+               DeploymentManagerDeploymentsUpdateCreatePolicy
                :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "updatePolicy"
-                       DeploymentmanagerDeploymentsUpdateUpdatePolicy
+                       DeploymentManagerDeploymentsUpdateUpdatePolicy
                        :>
                        QueryParam "deletePolicy"
-                         DeploymentmanagerDeploymentsUpdateDeletePolicy
+                         DeploymentManagerDeploymentsUpdateDeletePolicy
                          :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :> Put '[JSON] Operation
+                               QueryParam "alt" AltJSON :>
+                                 ReqBody '[JSON] Deployment :>
+                                   Put '[JSON] Operation
 
 -- | Updates a deployment and all of the resources described by the
 -- deployment manifest.
 --
 -- /See:/ 'deploymentsUpdate'' smart constructor.
 data DeploymentsUpdate' = DeploymentsUpdate'
-    { _duCreatePolicy :: !DeploymentmanagerDeploymentsUpdateCreatePolicy
+    { _duCreatePolicy :: !DeploymentManagerDeploymentsUpdateCreatePolicy
     , _duQuotaUser    :: !(Maybe Text)
     , _duPrettyPrint  :: !Bool
     , _duProject      :: !Text
-    , _duUserIp       :: !(Maybe Text)
-    , _duUpdatePolicy :: !DeploymentmanagerDeploymentsUpdateUpdatePolicy
-    , _duDeletePolicy :: !DeploymentmanagerDeploymentsUpdateDeletePolicy
-    , _duKey          :: !(Maybe Text)
-    , _duOauthToken   :: !(Maybe Text)
+    , _duUserIP       :: !(Maybe Text)
+    , _duUpdatePolicy :: !DeploymentManagerDeploymentsUpdateUpdatePolicy
+    , _duDeletePolicy :: !DeploymentManagerDeploymentsUpdateDeletePolicy
+    , _duKey          :: !(Maybe Key)
+    , _duOAuthToken   :: !(Maybe OAuthToken)
+    , _duDeployment   :: !Deployment
     , _duFields       :: !(Maybe Text)
-    , _duAlt          :: !Alt
     , _duDeployment   :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -103,7 +105,7 @@ data DeploymentsUpdate' = DeploymentsUpdate'
 --
 -- * 'duProject'
 --
--- * 'duUserIp'
+-- * 'duUserIP'
 --
 -- * 'duUpdatePolicy'
 --
@@ -111,35 +113,36 @@ data DeploymentsUpdate' = DeploymentsUpdate'
 --
 -- * 'duKey'
 --
--- * 'duOauthToken'
+-- * 'duOAuthToken'
+--
+-- * 'duDeployment'
 --
 -- * 'duFields'
---
--- * 'duAlt'
 --
 -- * 'duDeployment'
 deploymentsUpdate'
     :: Text -- ^ 'project'
+    -> Deployment -- ^ 'Deployment'
     -> Text -- ^ 'deployment'
     -> DeploymentsUpdate'
-deploymentsUpdate' pDuProject_ pDuDeployment_ =
+deploymentsUpdate' pDuProject_ pDuDeployment_ pDuDeployment_ =
     DeploymentsUpdate'
-    { _duCreatePolicy = DDUCPCreateOrAcquire
+    { _duCreatePolicy = DMDUCPCreateOrAcquire
     , _duQuotaUser = Nothing
     , _duPrettyPrint = True
     , _duProject = pDuProject_
-    , _duUserIp = Nothing
-    , _duUpdatePolicy = DDUUPPatch
-    , _duDeletePolicy = DDUDPDelete
+    , _duUserIP = Nothing
+    , _duUpdatePolicy = DMDUUPPatch
+    , _duDeletePolicy = DMDUDPDelete
     , _duKey = Nothing
-    , _duOauthToken = Nothing
+    , _duOAuthToken = Nothing
+    , _duDeployment = pDuDeployment_
     , _duFields = Nothing
-    , _duAlt = JSON
     , _duDeployment = pDuDeployment_
     }
 
 -- | Sets the policy to use for creating new resources.
-duCreatePolicy :: Lens' DeploymentsUpdate' DeploymentmanagerDeploymentsUpdateCreatePolicy
+duCreatePolicy :: Lens' DeploymentsUpdate' DeploymentManagerDeploymentsUpdateCreatePolicy
 duCreatePolicy
   = lens _duCreatePolicy
       (\ s a -> s{_duCreatePolicy = a})
@@ -164,17 +167,17 @@ duProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-duUserIp :: Lens' DeploymentsUpdate' (Maybe Text)
-duUserIp = lens _duUserIp (\ s a -> s{_duUserIp = a})
+duUserIP :: Lens' DeploymentsUpdate' (Maybe Text)
+duUserIP = lens _duUserIP (\ s a -> s{_duUserIP = a})
 
 -- | Sets the policy to use for updating resources.
-duUpdatePolicy :: Lens' DeploymentsUpdate' DeploymentmanagerDeploymentsUpdateUpdatePolicy
+duUpdatePolicy :: Lens' DeploymentsUpdate' DeploymentManagerDeploymentsUpdateUpdatePolicy
 duUpdatePolicy
   = lens _duUpdatePolicy
       (\ s a -> s{_duUpdatePolicy = a})
 
 -- | Sets the policy to use for deleting resources.
-duDeletePolicy :: Lens' DeploymentsUpdate' DeploymentmanagerDeploymentsUpdateDeletePolicy
+duDeletePolicy :: Lens' DeploymentsUpdate' DeploymentManagerDeploymentsUpdateDeletePolicy
 duDeletePolicy
   = lens _duDeletePolicy
       (\ s a -> s{_duDeletePolicy = a})
@@ -182,26 +185,31 @@ duDeletePolicy
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-duKey :: Lens' DeploymentsUpdate' (Maybe Text)
+duKey :: Lens' DeploymentsUpdate' (Maybe Key)
 duKey = lens _duKey (\ s a -> s{_duKey = a})
 
 -- | OAuth 2.0 token for the current user.
-duOauthToken :: Lens' DeploymentsUpdate' (Maybe Text)
-duOauthToken
-  = lens _duOauthToken (\ s a -> s{_duOauthToken = a})
+duOAuthToken :: Lens' DeploymentsUpdate' (Maybe OAuthToken)
+duOAuthToken
+  = lens _duOAuthToken (\ s a -> s{_duOAuthToken = a})
+
+-- | Multipart request metadata.
+duDeployment :: Lens' DeploymentsUpdate' Deployment
+duDeployment
+  = lens _duDeployment (\ s a -> s{_duDeployment = a})
 
 -- | Selector specifying which fields to include in a partial response.
 duFields :: Lens' DeploymentsUpdate' (Maybe Text)
 duFields = lens _duFields (\ s a -> s{_duFields = a})
 
--- | Data format for the response.
-duAlt :: Lens' DeploymentsUpdate' Alt
-duAlt = lens _duAlt (\ s a -> s{_duAlt = a})
-
 -- | The name of the deployment for this request.
 duDeployment :: Lens' DeploymentsUpdate' Text
 duDeployment
   = lens _duDeployment (\ s a -> s{_duDeployment = a})
+
+instance GoogleAuth DeploymentsUpdate' where
+        authKey = duKey . _Just
+        authToken = duOAuthToken . _Just
 
 instance GoogleRequest DeploymentsUpdate' where
         type Rs DeploymentsUpdate' = Operation
@@ -211,13 +219,14 @@ instance GoogleRequest DeploymentsUpdate' where
           = go (Just _duCreatePolicy) _duQuotaUser
               (Just _duPrettyPrint)
               _duProject
-              _duUserIp
+              _duUserIP
               (Just _duUpdatePolicy)
               (Just _duDeletePolicy)
               _duKey
-              _duOauthToken
+              _duOAuthToken
               _duFields
-              (Just _duAlt)
+              _duDeployment
+              (Just AltJSON)
               _duDeployment
           where go
                   = clientWithRoute

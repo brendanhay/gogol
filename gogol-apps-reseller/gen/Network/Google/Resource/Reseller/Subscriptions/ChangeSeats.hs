@@ -32,13 +32,13 @@ module Network.Google.Resource.Reseller.Subscriptions.ChangeSeats
     -- * Request Lenses
     , scsQuotaUser
     , scsPrettyPrint
-    , scsUserIp
+    , scsUserIP
     , scsCustomerId
     , scsKey
-    , scsOauthToken
+    , scsSeats
+    , scsOAuthToken
     , scsSubscriptionId
     , scsFields
-    , scsAlt
     ) where
 
 import           Network.Google.AppsReseller.Types
@@ -55,10 +55,11 @@ type SubscriptionsChangeSeatsResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Post '[JSON] Subscription
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] Seats :> Post '[JSON] Subscription
 
 -- | Changes the seats configuration of a subscription
 --
@@ -66,13 +67,13 @@ type SubscriptionsChangeSeatsResource =
 data SubscriptionsChangeSeats' = SubscriptionsChangeSeats'
     { _scsQuotaUser      :: !(Maybe Text)
     , _scsPrettyPrint    :: !Bool
-    , _scsUserIp         :: !(Maybe Text)
+    , _scsUserIP         :: !(Maybe Text)
     , _scsCustomerId     :: !Text
-    , _scsKey            :: !(Maybe Text)
-    , _scsOauthToken     :: !(Maybe Text)
+    , _scsKey            :: !(Maybe Key)
+    , _scsSeats          :: !Seats
+    , _scsOAuthToken     :: !(Maybe OAuthToken)
     , _scsSubscriptionId :: !Text
     , _scsFields         :: !(Maybe Text)
-    , _scsAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionsChangeSeats'' with the minimum fields required to make a request.
@@ -83,34 +84,35 @@ data SubscriptionsChangeSeats' = SubscriptionsChangeSeats'
 --
 -- * 'scsPrettyPrint'
 --
--- * 'scsUserIp'
+-- * 'scsUserIP'
 --
 -- * 'scsCustomerId'
 --
 -- * 'scsKey'
 --
--- * 'scsOauthToken'
+-- * 'scsSeats'
+--
+-- * 'scsOAuthToken'
 --
 -- * 'scsSubscriptionId'
 --
 -- * 'scsFields'
---
--- * 'scsAlt'
 subscriptionsChangeSeats'
     :: Text -- ^ 'customerId'
+    -> Seats -- ^ 'Seats'
     -> Text -- ^ 'subscriptionId'
     -> SubscriptionsChangeSeats'
-subscriptionsChangeSeats' pScsCustomerId_ pScsSubscriptionId_ =
+subscriptionsChangeSeats' pScsCustomerId_ pScsSeats_ pScsSubscriptionId_ =
     SubscriptionsChangeSeats'
     { _scsQuotaUser = Nothing
     , _scsPrettyPrint = True
-    , _scsUserIp = Nothing
+    , _scsUserIP = Nothing
     , _scsCustomerId = pScsCustomerId_
     , _scsKey = Nothing
-    , _scsOauthToken = Nothing
+    , _scsSeats = pScsSeats_
+    , _scsOAuthToken = Nothing
     , _scsSubscriptionId = pScsSubscriptionId_
     , _scsFields = Nothing
-    , _scsAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -128,9 +130,9 @@ scsPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-scsUserIp :: Lens' SubscriptionsChangeSeats' (Maybe Text)
-scsUserIp
-  = lens _scsUserIp (\ s a -> s{_scsUserIp = a})
+scsUserIP :: Lens' SubscriptionsChangeSeats' (Maybe Text)
+scsUserIP
+  = lens _scsUserIP (\ s a -> s{_scsUserIP = a})
 
 -- | Id of the Customer
 scsCustomerId :: Lens' SubscriptionsChangeSeats' Text
@@ -141,14 +143,18 @@ scsCustomerId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-scsKey :: Lens' SubscriptionsChangeSeats' (Maybe Text)
+scsKey :: Lens' SubscriptionsChangeSeats' (Maybe Key)
 scsKey = lens _scsKey (\ s a -> s{_scsKey = a})
 
+-- | Multipart request metadata.
+scsSeats :: Lens' SubscriptionsChangeSeats' Seats
+scsSeats = lens _scsSeats (\ s a -> s{_scsSeats = a})
+
 -- | OAuth 2.0 token for the current user.
-scsOauthToken :: Lens' SubscriptionsChangeSeats' (Maybe Text)
-scsOauthToken
-  = lens _scsOauthToken
-      (\ s a -> s{_scsOauthToken = a})
+scsOAuthToken :: Lens' SubscriptionsChangeSeats' (Maybe OAuthToken)
+scsOAuthToken
+  = lens _scsOAuthToken
+      (\ s a -> s{_scsOAuthToken = a})
 
 -- | Id of the subscription, which is unique for a customer
 scsSubscriptionId :: Lens' SubscriptionsChangeSeats' Text
@@ -161,22 +167,23 @@ scsFields :: Lens' SubscriptionsChangeSeats' (Maybe Text)
 scsFields
   = lens _scsFields (\ s a -> s{_scsFields = a})
 
--- | Data format for the response.
-scsAlt :: Lens' SubscriptionsChangeSeats' Alt
-scsAlt = lens _scsAlt (\ s a -> s{_scsAlt = a})
+instance GoogleAuth SubscriptionsChangeSeats' where
+        authKey = scsKey . _Just
+        authToken = scsOAuthToken . _Just
 
 instance GoogleRequest SubscriptionsChangeSeats'
          where
         type Rs SubscriptionsChangeSeats' = Subscription
         request = requestWithRoute defReq appsResellerURL
         requestWithRoute r u SubscriptionsChangeSeats'{..}
-          = go _scsQuotaUser (Just _scsPrettyPrint) _scsUserIp
+          = go _scsQuotaUser (Just _scsPrettyPrint) _scsUserIP
               _scsCustomerId
               _scsKey
-              _scsOauthToken
+              _scsOAuthToken
               _scsSubscriptionId
               _scsFields
-              (Just _scsAlt)
+              (Just AltJSON)
+              _scsSeats
           where go
                   = clientWithRoute
                       (Proxy :: Proxy SubscriptionsChangeSeatsResource)

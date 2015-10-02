@@ -32,13 +32,12 @@ module Network.Google.Resource.DFAReporting.EventTags.Delete
     -- * Request Lenses
     , etdQuotaUser
     , etdPrettyPrint
-    , etdUserIp
+    , etdUserIP
     , etdProfileId
     , etdKey
     , etdId
-    , etdOauthToken
+    , etdOAuthToken
     , etdFields
-    , etdAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,10 +53,10 @@ type EventTagsDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Delete '[JSON] ()
+                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an existing event tag.
 --
@@ -65,13 +64,12 @@ type EventTagsDeleteResource =
 data EventTagsDelete' = EventTagsDelete'
     { _etdQuotaUser   :: !(Maybe Text)
     , _etdPrettyPrint :: !Bool
-    , _etdUserIp      :: !(Maybe Text)
+    , _etdUserIP      :: !(Maybe Text)
     , _etdProfileId   :: !Int64
-    , _etdKey         :: !(Maybe Text)
+    , _etdKey         :: !(Maybe Key)
     , _etdId          :: !Int64
-    , _etdOauthToken  :: !(Maybe Text)
+    , _etdOAuthToken  :: !(Maybe OAuthToken)
     , _etdFields      :: !(Maybe Text)
-    , _etdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventTagsDelete'' with the minimum fields required to make a request.
@@ -82,7 +80,7 @@ data EventTagsDelete' = EventTagsDelete'
 --
 -- * 'etdPrettyPrint'
 --
--- * 'etdUserIp'
+-- * 'etdUserIP'
 --
 -- * 'etdProfileId'
 --
@@ -90,11 +88,9 @@ data EventTagsDelete' = EventTagsDelete'
 --
 -- * 'etdId'
 --
--- * 'etdOauthToken'
+-- * 'etdOAuthToken'
 --
 -- * 'etdFields'
---
--- * 'etdAlt'
 eventTagsDelete'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
@@ -103,13 +99,12 @@ eventTagsDelete' pEtdProfileId_ pEtdId_ =
     EventTagsDelete'
     { _etdQuotaUser = Nothing
     , _etdPrettyPrint = True
-    , _etdUserIp = Nothing
+    , _etdUserIP = Nothing
     , _etdProfileId = pEtdProfileId_
     , _etdKey = Nothing
     , _etdId = pEtdId_
-    , _etdOauthToken = Nothing
+    , _etdOAuthToken = Nothing
     , _etdFields = Nothing
-    , _etdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,9 +122,9 @@ etdPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-etdUserIp :: Lens' EventTagsDelete' (Maybe Text)
-etdUserIp
-  = lens _etdUserIp (\ s a -> s{_etdUserIp = a})
+etdUserIP :: Lens' EventTagsDelete' (Maybe Text)
+etdUserIP
+  = lens _etdUserIP (\ s a -> s{_etdUserIP = a})
 
 -- | User profile ID associated with this request.
 etdProfileId :: Lens' EventTagsDelete' Int64
@@ -139,7 +134,7 @@ etdProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-etdKey :: Lens' EventTagsDelete' (Maybe Text)
+etdKey :: Lens' EventTagsDelete' (Maybe Key)
 etdKey = lens _etdKey (\ s a -> s{_etdKey = a})
 
 -- | Event tag ID.
@@ -147,31 +142,31 @@ etdId :: Lens' EventTagsDelete' Int64
 etdId = lens _etdId (\ s a -> s{_etdId = a})
 
 -- | OAuth 2.0 token for the current user.
-etdOauthToken :: Lens' EventTagsDelete' (Maybe Text)
-etdOauthToken
-  = lens _etdOauthToken
-      (\ s a -> s{_etdOauthToken = a})
+etdOAuthToken :: Lens' EventTagsDelete' (Maybe OAuthToken)
+etdOAuthToken
+  = lens _etdOAuthToken
+      (\ s a -> s{_etdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 etdFields :: Lens' EventTagsDelete' (Maybe Text)
 etdFields
   = lens _etdFields (\ s a -> s{_etdFields = a})
 
--- | Data format for the response.
-etdAlt :: Lens' EventTagsDelete' Alt
-etdAlt = lens _etdAlt (\ s a -> s{_etdAlt = a})
+instance GoogleAuth EventTagsDelete' where
+        authKey = etdKey . _Just
+        authToken = etdOAuthToken . _Just
 
 instance GoogleRequest EventTagsDelete' where
         type Rs EventTagsDelete' = ()
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u EventTagsDelete'{..}
-          = go _etdQuotaUser (Just _etdPrettyPrint) _etdUserIp
+          = go _etdQuotaUser (Just _etdPrettyPrint) _etdUserIP
               _etdProfileId
               _etdKey
               _etdId
-              _etdOauthToken
+              _etdOAuthToken
               _etdFields
-              (Just _etdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy EventTagsDeleteResource)

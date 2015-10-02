@@ -34,12 +34,11 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.Get
     , igmgPrettyPrint
     , igmgProject
     , igmgInstanceGroupManager
-    , igmgUserIp
+    , igmgUserIP
     , igmgZone
     , igmgKey
-    , igmgOauthToken
+    , igmgOAuthToken
     , igmgFields
-    , igmgAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -56,10 +55,10 @@ type InstanceGroupManagersGetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :>
+                           QueryParam "alt" AltJSON :>
                              Get '[JSON] InstanceGroupManager
 
 -- | Returns the specified managed instance group resource.
@@ -70,12 +69,11 @@ data InstanceGroupManagersGet' = InstanceGroupManagersGet'
     , _igmgPrettyPrint          :: !Bool
     , _igmgProject              :: !Text
     , _igmgInstanceGroupManager :: !Text
-    , _igmgUserIp               :: !(Maybe Text)
+    , _igmgUserIP               :: !(Maybe Text)
     , _igmgZone                 :: !Text
-    , _igmgKey                  :: !(Maybe Text)
-    , _igmgOauthToken           :: !(Maybe Text)
+    , _igmgKey                  :: !(Maybe Key)
+    , _igmgOAuthToken           :: !(Maybe OAuthToken)
     , _igmgFields               :: !(Maybe Text)
-    , _igmgAlt                  :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagersGet'' with the minimum fields required to make a request.
@@ -90,17 +88,15 @@ data InstanceGroupManagersGet' = InstanceGroupManagersGet'
 --
 -- * 'igmgInstanceGroupManager'
 --
--- * 'igmgUserIp'
+-- * 'igmgUserIP'
 --
 -- * 'igmgZone'
 --
 -- * 'igmgKey'
 --
--- * 'igmgOauthToken'
+-- * 'igmgOAuthToken'
 --
 -- * 'igmgFields'
---
--- * 'igmgAlt'
 instanceGroupManagersGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'instanceGroupManager'
@@ -112,12 +108,11 @@ instanceGroupManagersGet' pIgmgProject_ pIgmgInstanceGroupManager_ pIgmgZone_ =
     , _igmgPrettyPrint = True
     , _igmgProject = pIgmgProject_
     , _igmgInstanceGroupManager = pIgmgInstanceGroupManager_
-    , _igmgUserIp = Nothing
+    , _igmgUserIP = Nothing
     , _igmgZone = pIgmgZone_
     , _igmgKey = Nothing
-    , _igmgOauthToken = Nothing
+    , _igmgOAuthToken = Nothing
     , _igmgFields = Nothing
-    , _igmgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -147,9 +142,9 @@ igmgInstanceGroupManager
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-igmgUserIp :: Lens' InstanceGroupManagersGet' (Maybe Text)
-igmgUserIp
-  = lens _igmgUserIp (\ s a -> s{_igmgUserIp = a})
+igmgUserIP :: Lens' InstanceGroupManagersGet' (Maybe Text)
+igmgUserIP
+  = lens _igmgUserIP (\ s a -> s{_igmgUserIP = a})
 
 -- | The URL of the zone where the managed instance group is located.
 igmgZone :: Lens' InstanceGroupManagersGet' Text
@@ -158,23 +153,23 @@ igmgZone = lens _igmgZone (\ s a -> s{_igmgZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-igmgKey :: Lens' InstanceGroupManagersGet' (Maybe Text)
+igmgKey :: Lens' InstanceGroupManagersGet' (Maybe Key)
 igmgKey = lens _igmgKey (\ s a -> s{_igmgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-igmgOauthToken :: Lens' InstanceGroupManagersGet' (Maybe Text)
-igmgOauthToken
-  = lens _igmgOauthToken
-      (\ s a -> s{_igmgOauthToken = a})
+igmgOAuthToken :: Lens' InstanceGroupManagersGet' (Maybe OAuthToken)
+igmgOAuthToken
+  = lens _igmgOAuthToken
+      (\ s a -> s{_igmgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 igmgFields :: Lens' InstanceGroupManagersGet' (Maybe Text)
 igmgFields
   = lens _igmgFields (\ s a -> s{_igmgFields = a})
 
--- | Data format for the response.
-igmgAlt :: Lens' InstanceGroupManagersGet' Alt
-igmgAlt = lens _igmgAlt (\ s a -> s{_igmgAlt = a})
+instance GoogleAuth InstanceGroupManagersGet' where
+        authKey = igmgKey . _Just
+        authToken = igmgOAuthToken . _Just
 
 instance GoogleRequest InstanceGroupManagersGet'
          where
@@ -185,12 +180,12 @@ instance GoogleRequest InstanceGroupManagersGet'
           = go _igmgQuotaUser (Just _igmgPrettyPrint)
               _igmgProject
               _igmgInstanceGroupManager
-              _igmgUserIp
+              _igmgUserIP
               _igmgZone
               _igmgKey
-              _igmgOauthToken
+              _igmgOAuthToken
               _igmgFields
-              (Just _igmgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InstanceGroupManagersGetResource)

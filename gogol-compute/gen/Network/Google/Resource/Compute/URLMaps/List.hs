@@ -34,14 +34,13 @@ module Network.Google.Resource.Compute.URLMaps.List
     , umlQuotaUser
     , umlPrettyPrint
     , umlProject
-    , umlUserIp
+    , umlUserIP
     , umlKey
     , umlFilter
     , umlPageToken
-    , umlOauthToken
+    , umlOAuthToken
     , umlMaxResults
     , umlFields
-    , umlAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -56,13 +55,13 @@ type UrlMapsListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "filter" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "maxResults" Word32 :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Get '[JSON] URLMapList
+                             QueryParam "alt" AltJSON :> Get '[JSON] URLMapList
 
 -- | Retrieves the list of UrlMap resources available to the specified
 -- project.
@@ -72,14 +71,13 @@ data URLMapsList' = URLMapsList'
     { _umlQuotaUser   :: !(Maybe Text)
     , _umlPrettyPrint :: !Bool
     , _umlProject     :: !Text
-    , _umlUserIp      :: !(Maybe Text)
-    , _umlKey         :: !(Maybe Text)
+    , _umlUserIP      :: !(Maybe Text)
+    , _umlKey         :: !(Maybe Key)
     , _umlFilter      :: !(Maybe Text)
     , _umlPageToken   :: !(Maybe Text)
-    , _umlOauthToken  :: !(Maybe Text)
+    , _umlOAuthToken  :: !(Maybe OAuthToken)
     , _umlMaxResults  :: !Word32
     , _umlFields      :: !(Maybe Text)
-    , _umlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLMapsList'' with the minimum fields required to make a request.
@@ -92,7 +90,7 @@ data URLMapsList' = URLMapsList'
 --
 -- * 'umlProject'
 --
--- * 'umlUserIp'
+-- * 'umlUserIP'
 --
 -- * 'umlKey'
 --
@@ -100,13 +98,11 @@ data URLMapsList' = URLMapsList'
 --
 -- * 'umlPageToken'
 --
--- * 'umlOauthToken'
+-- * 'umlOAuthToken'
 --
 -- * 'umlMaxResults'
 --
 -- * 'umlFields'
---
--- * 'umlAlt'
 uRLMapsList'
     :: Text -- ^ 'project'
     -> URLMapsList'
@@ -115,14 +111,13 @@ uRLMapsList' pUmlProject_ =
     { _umlQuotaUser = Nothing
     , _umlPrettyPrint = True
     , _umlProject = pUmlProject_
-    , _umlUserIp = Nothing
+    , _umlUserIP = Nothing
     , _umlKey = Nothing
     , _umlFilter = Nothing
     , _umlPageToken = Nothing
-    , _umlOauthToken = Nothing
+    , _umlOAuthToken = Nothing
     , _umlMaxResults = 500
     , _umlFields = Nothing
-    , _umlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -145,14 +140,14 @@ umlProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-umlUserIp :: Lens' URLMapsList' (Maybe Text)
-umlUserIp
-  = lens _umlUserIp (\ s a -> s{_umlUserIp = a})
+umlUserIP :: Lens' URLMapsList' (Maybe Text)
+umlUserIP
+  = lens _umlUserIP (\ s a -> s{_umlUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-umlKey :: Lens' URLMapsList' (Maybe Text)
+umlKey :: Lens' URLMapsList' (Maybe Key)
 umlKey = lens _umlKey (\ s a -> s{_umlKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
@@ -178,10 +173,10 @@ umlPageToken
   = lens _umlPageToken (\ s a -> s{_umlPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-umlOauthToken :: Lens' URLMapsList' (Maybe Text)
-umlOauthToken
-  = lens _umlOauthToken
-      (\ s a -> s{_umlOauthToken = a})
+umlOAuthToken :: Lens' URLMapsList' (Maybe OAuthToken)
+umlOAuthToken
+  = lens _umlOAuthToken
+      (\ s a -> s{_umlOAuthToken = a})
 
 -- | Maximum count of results to be returned.
 umlMaxResults :: Lens' URLMapsList' Word32
@@ -194,23 +189,23 @@ umlFields :: Lens' URLMapsList' (Maybe Text)
 umlFields
   = lens _umlFields (\ s a -> s{_umlFields = a})
 
--- | Data format for the response.
-umlAlt :: Lens' URLMapsList' Alt
-umlAlt = lens _umlAlt (\ s a -> s{_umlAlt = a})
+instance GoogleAuth URLMapsList' where
+        authKey = umlKey . _Just
+        authToken = umlOAuthToken . _Just
 
 instance GoogleRequest URLMapsList' where
         type Rs URLMapsList' = URLMapList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u URLMapsList'{..}
           = go _umlQuotaUser (Just _umlPrettyPrint) _umlProject
-              _umlUserIp
+              _umlUserIP
               _umlKey
               _umlFilter
               _umlPageToken
-              _umlOauthToken
+              _umlOAuthToken
               (Just _umlMaxResults)
               _umlFields
-              (Just _umlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UrlMapsListResource)

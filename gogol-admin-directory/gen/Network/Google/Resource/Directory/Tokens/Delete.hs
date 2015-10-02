@@ -33,12 +33,11 @@ module Network.Google.Resource.Directory.Tokens.Delete
     , tdClientId
     , tdQuotaUser
     , tdPrettyPrint
-    , tdUserIp
+    , tdUserIP
     , tdKey
-    , tdOauthToken
+    , tdOAuthToken
     , tdUserKey
     , tdFields
-    , tdAlt
     ) where
 
 import           Network.Google.AdminDirectory.Types
@@ -54,10 +53,10 @@ type TokensDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Delete '[JSON] ()
+                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete all access tokens issued by a user for an application.
 --
@@ -66,12 +65,11 @@ data TokensDelete' = TokensDelete'
     { _tdClientId    :: !Text
     , _tdQuotaUser   :: !(Maybe Text)
     , _tdPrettyPrint :: !Bool
-    , _tdUserIp      :: !(Maybe Text)
-    , _tdKey         :: !(Maybe Text)
-    , _tdOauthToken  :: !(Maybe Text)
+    , _tdUserIP      :: !(Maybe Text)
+    , _tdKey         :: !(Maybe Key)
+    , _tdOAuthToken  :: !(Maybe OAuthToken)
     , _tdUserKey     :: !Text
     , _tdFields      :: !(Maybe Text)
-    , _tdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TokensDelete'' with the minimum fields required to make a request.
@@ -84,17 +82,15 @@ data TokensDelete' = TokensDelete'
 --
 -- * 'tdPrettyPrint'
 --
--- * 'tdUserIp'
+-- * 'tdUserIP'
 --
 -- * 'tdKey'
 --
--- * 'tdOauthToken'
+-- * 'tdOAuthToken'
 --
 -- * 'tdUserKey'
 --
 -- * 'tdFields'
---
--- * 'tdAlt'
 tokensDelete'
     :: Text -- ^ 'clientId'
     -> Text -- ^ 'userKey'
@@ -104,12 +100,11 @@ tokensDelete' pTdClientId_ pTdUserKey_ =
     { _tdClientId = pTdClientId_
     , _tdQuotaUser = Nothing
     , _tdPrettyPrint = True
-    , _tdUserIp = Nothing
+    , _tdUserIP = Nothing
     , _tdKey = Nothing
-    , _tdOauthToken = Nothing
+    , _tdOAuthToken = Nothing
     , _tdUserKey = pTdUserKey_
     , _tdFields = Nothing
-    , _tdAlt = JSON
     }
 
 -- | The Client ID of the application the token is issued to.
@@ -132,19 +127,19 @@ tdPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tdUserIp :: Lens' TokensDelete' (Maybe Text)
-tdUserIp = lens _tdUserIp (\ s a -> s{_tdUserIp = a})
+tdUserIP :: Lens' TokensDelete' (Maybe Text)
+tdUserIP = lens _tdUserIP (\ s a -> s{_tdUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tdKey :: Lens' TokensDelete' (Maybe Text)
+tdKey :: Lens' TokensDelete' (Maybe Key)
 tdKey = lens _tdKey (\ s a -> s{_tdKey = a})
 
 -- | OAuth 2.0 token for the current user.
-tdOauthToken :: Lens' TokensDelete' (Maybe Text)
-tdOauthToken
-  = lens _tdOauthToken (\ s a -> s{_tdOauthToken = a})
+tdOAuthToken :: Lens' TokensDelete' (Maybe OAuthToken)
+tdOAuthToken
+  = lens _tdOAuthToken (\ s a -> s{_tdOAuthToken = a})
 
 -- | Identifies the user in the API request. The value can be the user\'s
 -- primary email address, alias email address, or unique user ID.
@@ -156,21 +151,21 @@ tdUserKey
 tdFields :: Lens' TokensDelete' (Maybe Text)
 tdFields = lens _tdFields (\ s a -> s{_tdFields = a})
 
--- | Data format for the response.
-tdAlt :: Lens' TokensDelete' Alt
-tdAlt = lens _tdAlt (\ s a -> s{_tdAlt = a})
+instance GoogleAuth TokensDelete' where
+        authKey = tdKey . _Just
+        authToken = tdOAuthToken . _Just
 
 instance GoogleRequest TokensDelete' where
         type Rs TokensDelete' = ()
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u TokensDelete'{..}
           = go _tdClientId _tdQuotaUser (Just _tdPrettyPrint)
-              _tdUserIp
+              _tdUserIP
               _tdKey
-              _tdOauthToken
+              _tdOAuthToken
               _tdUserKey
               _tdFields
-              (Just _tdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TokensDeleteResource)

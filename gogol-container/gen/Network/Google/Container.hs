@@ -70,21 +70,21 @@ module Network.Google.Container
     , cStatus
     , cNodeConfig
     , cNumNodes
-    , cClusterApiVersion
+    , cClusterAPIVersion
     , cNetwork
     , cZone
-    , cServicesIpv4Cidr
+    , cServicesIPv4CIdR
     , cMasterAuth
     , cSelfLink
     , cEnableCloudMonitoring
     , cName
     , cStatusMessage
     , cCreationTimestamp
-    , cContainerIpv4Cidr
+    , cContainerIPv4CIdR
     , cEndpoint
     , cEnableCloudLogging
     , cDescription
-    , cInstanceGroupUrls
+    , cInstanceGroupURLs
     , cNodeRoutingPrefixSize
 
     -- ** ListAggregatedOperationsResponse
@@ -145,9 +145,6 @@ module Network.Google.Container
 
     -- ** ClusterStatus
     , ClusterStatus (..)
-
-    -- ** Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.Container.Types

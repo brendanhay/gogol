@@ -34,7 +34,7 @@ module Network.Google.Resource.DFAReporting.ChangeLogs.List
     , cllQuotaUser
     , cllPrettyPrint
     , cllObjectType
-    , cllUserIp
+    , cllUserIP
     , cllSearchString
     , cllIds
     , cllProfileId
@@ -43,11 +43,10 @@ module Network.Google.Resource.DFAReporting.ChangeLogs.List
     , cllKey
     , cllMaxChangeTime
     , cllPageToken
-    , cllOauthToken
+    , cllOAuthToken
     , cllObjectIds
     , cllMaxResults
     , cllFields
-    , cllAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -71,14 +70,14 @@ type ChangeLogsListResource =
                          QueryParam "action" DfareportingChangeLogsListAction
                            :>
                            QueryParam "minChangeTime" Text :>
-                             QueryParam "key" Text :>
+                             QueryParam "key" Key :>
                                QueryParam "maxChangeTime" Text :>
                                  QueryParam "pageToken" Text :>
-                                   QueryParam "oauth_token" Text :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParams "objectIds" Int64 :>
                                        QueryParam "maxResults" Int32 :>
                                          QueryParam "fields" Text :>
-                                           QueryParam "alt" Alt :>
+                                           QueryParam "alt" AltJSON :>
                                              Get '[JSON] ChangeLogsListResponse
 
 -- | Retrieves a list of change logs.
@@ -89,20 +88,19 @@ data ChangeLogsList' = ChangeLogsList'
     , _cllQuotaUser      :: !(Maybe Text)
     , _cllPrettyPrint    :: !Bool
     , _cllObjectType     :: !(Maybe DfareportingChangeLogsListObjectType)
-    , _cllUserIp         :: !(Maybe Text)
+    , _cllUserIP         :: !(Maybe Text)
     , _cllSearchString   :: !(Maybe Text)
     , _cllIds            :: !(Maybe Int64)
     , _cllProfileId      :: !Int64
     , _cllAction         :: !(Maybe DfareportingChangeLogsListAction)
     , _cllMinChangeTime  :: !(Maybe Text)
-    , _cllKey            :: !(Maybe Text)
+    , _cllKey            :: !(Maybe Key)
     , _cllMaxChangeTime  :: !(Maybe Text)
     , _cllPageToken      :: !(Maybe Text)
-    , _cllOauthToken     :: !(Maybe Text)
+    , _cllOAuthToken     :: !(Maybe OAuthToken)
     , _cllObjectIds      :: !(Maybe Int64)
     , _cllMaxResults     :: !(Maybe Int32)
     , _cllFields         :: !(Maybe Text)
-    , _cllAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChangeLogsList'' with the minimum fields required to make a request.
@@ -117,7 +115,7 @@ data ChangeLogsList' = ChangeLogsList'
 --
 -- * 'cllObjectType'
 --
--- * 'cllUserIp'
+-- * 'cllUserIP'
 --
 -- * 'cllSearchString'
 --
@@ -135,15 +133,13 @@ data ChangeLogsList' = ChangeLogsList'
 --
 -- * 'cllPageToken'
 --
--- * 'cllOauthToken'
+-- * 'cllOAuthToken'
 --
 -- * 'cllObjectIds'
 --
 -- * 'cllMaxResults'
 --
 -- * 'cllFields'
---
--- * 'cllAlt'
 changeLogsList'
     :: Int64 -- ^ 'profileId'
     -> ChangeLogsList'
@@ -153,7 +149,7 @@ changeLogsList' pCllProfileId_ =
     , _cllQuotaUser = Nothing
     , _cllPrettyPrint = True
     , _cllObjectType = Nothing
-    , _cllUserIp = Nothing
+    , _cllUserIP = Nothing
     , _cllSearchString = Nothing
     , _cllIds = Nothing
     , _cllProfileId = pCllProfileId_
@@ -162,11 +158,10 @@ changeLogsList' pCllProfileId_ =
     , _cllKey = Nothing
     , _cllMaxChangeTime = Nothing
     , _cllPageToken = Nothing
-    , _cllOauthToken = Nothing
+    , _cllOAuthToken = Nothing
     , _cllObjectIds = Nothing
     , _cllMaxResults = Nothing
     , _cllFields = Nothing
-    , _cllAlt = JSON
     }
 
 -- | Select only change logs with these user profile IDs.
@@ -196,9 +191,9 @@ cllObjectType
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cllUserIp :: Lens' ChangeLogsList' (Maybe Text)
-cllUserIp
-  = lens _cllUserIp (\ s a -> s{_cllUserIp = a})
+cllUserIP :: Lens' ChangeLogsList' (Maybe Text)
+cllUserIP
+  = lens _cllUserIP (\ s a -> s{_cllUserIP = a})
 
 -- | Select only change logs whose object ID, user name, old or new values
 -- match the search string.
@@ -236,7 +231,7 @@ cllMinChangeTime
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cllKey :: Lens' ChangeLogsList' (Maybe Text)
+cllKey :: Lens' ChangeLogsList' (Maybe Key)
 cllKey = lens _cllKey (\ s a -> s{_cllKey = a})
 
 -- | Select only change logs whose change time is before the specified
@@ -257,10 +252,10 @@ cllPageToken
   = lens _cllPageToken (\ s a -> s{_cllPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-cllOauthToken :: Lens' ChangeLogsList' (Maybe Text)
-cllOauthToken
-  = lens _cllOauthToken
-      (\ s a -> s{_cllOauthToken = a})
+cllOAuthToken :: Lens' ChangeLogsList' (Maybe OAuthToken)
+cllOAuthToken
+  = lens _cllOAuthToken
+      (\ s a -> s{_cllOAuthToken = a})
 
 -- | Select only change logs with these object IDs.
 cllObjectIds :: Lens' ChangeLogsList' (Maybe Int64)
@@ -278,9 +273,9 @@ cllFields :: Lens' ChangeLogsList' (Maybe Text)
 cllFields
   = lens _cllFields (\ s a -> s{_cllFields = a})
 
--- | Data format for the response.
-cllAlt :: Lens' ChangeLogsList' Alt
-cllAlt = lens _cllAlt (\ s a -> s{_cllAlt = a})
+instance GoogleAuth ChangeLogsList' where
+        authKey = cllKey . _Just
+        authToken = cllOAuthToken . _Just
 
 instance GoogleRequest ChangeLogsList' where
         type Rs ChangeLogsList' = ChangeLogsListResponse
@@ -289,7 +284,7 @@ instance GoogleRequest ChangeLogsList' where
           = go _cllUserProfileIds _cllQuotaUser
               (Just _cllPrettyPrint)
               _cllObjectType
-              _cllUserIp
+              _cllUserIP
               _cllSearchString
               _cllIds
               _cllProfileId
@@ -298,11 +293,11 @@ instance GoogleRequest ChangeLogsList' where
               _cllKey
               _cllMaxChangeTime
               _cllPageToken
-              _cllOauthToken
+              _cllOAuthToken
               _cllObjectIds
               _cllMaxResults
               _cllFields
-              (Just _cllAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ChangeLogsListResource)

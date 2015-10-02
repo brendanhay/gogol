@@ -32,12 +32,12 @@ module Network.Google.Resource.Directory.Groups.Aliases.Insert
     -- * Request Lenses
     , gaiQuotaUser
     , gaiPrettyPrint
-    , gaiUserIp
+    , gaiUserIP
     , gaiGroupKey
+    , gaiAlias
     , gaiKey
-    , gaiOauthToken
+    , gaiOAuthToken
     , gaiFields
-    , gaiAlt
     ) where
 
 import           Network.Google.AdminDirectory.Types
@@ -52,10 +52,11 @@ type GroupsAliasesInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] Alias
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Alias :> Post '[JSON] Alias
 
 -- | Add a alias for the group
 --
@@ -63,12 +64,12 @@ type GroupsAliasesInsertResource =
 data GroupsAliasesInsert' = GroupsAliasesInsert'
     { _gaiQuotaUser   :: !(Maybe Text)
     , _gaiPrettyPrint :: !Bool
-    , _gaiUserIp      :: !(Maybe Text)
+    , _gaiUserIP      :: !(Maybe Text)
     , _gaiGroupKey    :: !Text
-    , _gaiKey         :: !(Maybe Text)
-    , _gaiOauthToken  :: !(Maybe Text)
+    , _gaiAlias       :: !Alias
+    , _gaiKey         :: !(Maybe Key)
+    , _gaiOAuthToken  :: !(Maybe OAuthToken)
     , _gaiFields      :: !(Maybe Text)
-    , _gaiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupsAliasesInsert'' with the minimum fields required to make a request.
@@ -79,30 +80,31 @@ data GroupsAliasesInsert' = GroupsAliasesInsert'
 --
 -- * 'gaiPrettyPrint'
 --
--- * 'gaiUserIp'
+-- * 'gaiUserIP'
 --
 -- * 'gaiGroupKey'
 --
+-- * 'gaiAlias'
+--
 -- * 'gaiKey'
 --
--- * 'gaiOauthToken'
+-- * 'gaiOAuthToken'
 --
 -- * 'gaiFields'
---
--- * 'gaiAlt'
 groupsAliasesInsert'
     :: Text -- ^ 'groupKey'
+    -> Alias -- ^ 'Alias'
     -> GroupsAliasesInsert'
-groupsAliasesInsert' pGaiGroupKey_ =
+groupsAliasesInsert' pGaiGroupKey_ pGaiAlias_ =
     GroupsAliasesInsert'
     { _gaiQuotaUser = Nothing
     , _gaiPrettyPrint = True
-    , _gaiUserIp = Nothing
+    , _gaiUserIP = Nothing
     , _gaiGroupKey = pGaiGroupKey_
+    , _gaiAlias = pGaiAlias_
     , _gaiKey = Nothing
-    , _gaiOauthToken = Nothing
+    , _gaiOAuthToken = Nothing
     , _gaiFields = Nothing
-    , _gaiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,46 +122,51 @@ gaiPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-gaiUserIp :: Lens' GroupsAliasesInsert' (Maybe Text)
-gaiUserIp
-  = lens _gaiUserIp (\ s a -> s{_gaiUserIp = a})
+gaiUserIP :: Lens' GroupsAliasesInsert' (Maybe Text)
+gaiUserIP
+  = lens _gaiUserIP (\ s a -> s{_gaiUserIP = a})
 
 -- | Email or immutable Id of the group
 gaiGroupKey :: Lens' GroupsAliasesInsert' Text
 gaiGroupKey
   = lens _gaiGroupKey (\ s a -> s{_gaiGroupKey = a})
 
+-- | Multipart request metadata.
+gaiAlias :: Lens' GroupsAliasesInsert' Alias
+gaiAlias = lens _gaiAlias (\ s a -> s{_gaiAlias = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-gaiKey :: Lens' GroupsAliasesInsert' (Maybe Text)
+gaiKey :: Lens' GroupsAliasesInsert' (Maybe Key)
 gaiKey = lens _gaiKey (\ s a -> s{_gaiKey = a})
 
 -- | OAuth 2.0 token for the current user.
-gaiOauthToken :: Lens' GroupsAliasesInsert' (Maybe Text)
-gaiOauthToken
-  = lens _gaiOauthToken
-      (\ s a -> s{_gaiOauthToken = a})
+gaiOAuthToken :: Lens' GroupsAliasesInsert' (Maybe OAuthToken)
+gaiOAuthToken
+  = lens _gaiOAuthToken
+      (\ s a -> s{_gaiOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 gaiFields :: Lens' GroupsAliasesInsert' (Maybe Text)
 gaiFields
   = lens _gaiFields (\ s a -> s{_gaiFields = a})
 
--- | Data format for the response.
-gaiAlt :: Lens' GroupsAliasesInsert' Alt
-gaiAlt = lens _gaiAlt (\ s a -> s{_gaiAlt = a})
+instance GoogleAuth GroupsAliasesInsert' where
+        authKey = gaiKey . _Just
+        authToken = gaiOAuthToken . _Just
 
 instance GoogleRequest GroupsAliasesInsert' where
         type Rs GroupsAliasesInsert' = Alias
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u GroupsAliasesInsert'{..}
-          = go _gaiQuotaUser (Just _gaiPrettyPrint) _gaiUserIp
+          = go _gaiQuotaUser (Just _gaiPrettyPrint) _gaiUserIP
               _gaiGroupKey
               _gaiKey
-              _gaiOauthToken
+              _gaiOAuthToken
               _gaiFields
-              (Just _gaiAlt)
+              (Just AltJSON)
+              _gaiAlias
           where go
                   = clientWithRoute
                       (Proxy :: Proxy GroupsAliasesInsertResource)

@@ -123,7 +123,7 @@ instance ToJSON OperationWarningsData where
 -- /See:/ 'operationsListResponse' smart constructor.
 data OperationsListResponse = OperationsListResponse
     { _olrNextPageToken :: !(Maybe Text)
-    , _olrOperations    :: !(Maybe [Maybe Operation])
+    , _olrOperations    :: !(Maybe [Operation])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperationsListResponse' with the minimum fields required to make a request.
@@ -148,7 +148,7 @@ olrNextPageToken
       (\ s a -> s{_olrNextPageToken = a})
 
 -- | [Output Only] Operations contained in this list response.
-olrOperations :: Lens' OperationsListResponse [Maybe Operation]
+olrOperations :: Lens' OperationsListResponse [Operation]
 olrOperations
   = lens _olrOperations
       (\ s a -> s{_olrOperations = a})
@@ -175,7 +175,7 @@ instance ToJSON OperationsListResponse where
 -- /See:/ 'typesListResponse' smart constructor.
 data TypesListResponse = TypesListResponse
     { _tlrNextPageToken :: !(Maybe Text)
-    , _tlrTypes         :: !(Maybe [Maybe Type])
+    , _tlrTypes         :: !(Maybe [Type])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TypesListResponse' with the minimum fields required to make a request.
@@ -200,7 +200,7 @@ tlrNextPageToken
       (\ s a -> s{_tlrNextPageToken = a})
 
 -- | [Output Only] A list of resource types supported by Deployment Manager.
-tlrTypes :: Lens' TypesListResponse [Maybe Type]
+tlrTypes :: Lens' TypesListResponse [Type]
 tlrTypes
   = lens _tlrTypes (\ s a -> s{_tlrTypes = a}) .
       _Default
@@ -232,10 +232,10 @@ data Operation = Operation
     , _oStartTime           :: !(Maybe Text)
     , _oKind                :: !Text
     , _oError               :: !(Maybe OperationError)
-    , _oHttpErrorMessage    :: !(Maybe Text)
+    , _oHTTPErrorMessage    :: !(Maybe Text)
     , _oZone                :: !(Maybe Text)
     , _oWarnings            :: !(Maybe [OperationWarnings])
-    , _oHttpErrorStatusCode :: !(Maybe Int32)
+    , _oHTTPErrorStatusCode :: !(Maybe Int32)
     , _oUser                :: !(Maybe Text)
     , _oSelfLink            :: !(Maybe Text)
     , _oName                :: !(Maybe Text)
@@ -267,13 +267,13 @@ data Operation = Operation
 --
 -- * 'oError'
 --
--- * 'oHttpErrorMessage'
+-- * 'oHTTPErrorMessage'
 --
 -- * 'oZone'
 --
 -- * 'oWarnings'
 --
--- * 'oHttpErrorStatusCode'
+-- * 'oHTTPErrorStatusCode'
 --
 -- * 'oUser'
 --
@@ -307,10 +307,10 @@ operation =
     , _oStartTime = Nothing
     , _oKind = "deploymentmanager#operation"
     , _oError = Nothing
-    , _oHttpErrorMessage = Nothing
+    , _oHTTPErrorMessage = Nothing
     , _oZone = Nothing
     , _oWarnings = Nothing
-    , _oHttpErrorStatusCode = Nothing
+    , _oHTTPErrorStatusCode = Nothing
     , _oUser = Nothing
     , _oSelfLink = Nothing
     , _oName = Nothing
@@ -368,10 +368,10 @@ oError = lens _oError (\ s a -> s{_oError = a})
 
 -- | [Output Only] If the operation fails, this field contains the HTTP error
 -- message that was returned, such as NOT FOUND.
-oHttpErrorMessage :: Lens' Operation (Maybe Text)
-oHttpErrorMessage
-  = lens _oHttpErrorMessage
-      (\ s a -> s{_oHttpErrorMessage = a})
+oHTTPErrorMessage :: Lens' Operation (Maybe Text)
+oHTTPErrorMessage
+  = lens _oHTTPErrorMessage
+      (\ s a -> s{_oHTTPErrorMessage = a})
 
 -- | [Output Only] URL of the zone where the operation resides.
 oZone :: Lens' Operation (Maybe Text)
@@ -387,10 +387,10 @@ oWarnings
 
 -- | [Output Only] If the operation fails, this field contains the HTTP error
 -- message that was returned, such as 404.
-oHttpErrorStatusCode :: Lens' Operation (Maybe Int32)
-oHttpErrorStatusCode
-  = lens _oHttpErrorStatusCode
-      (\ s a -> s{_oHttpErrorStatusCode = a})
+oHTTPErrorStatusCode :: Lens' Operation (Maybe Int32)
+oHTTPErrorStatusCode
+  = lens _oHTTPErrorStatusCode
+      (\ s a -> s{_oHTTPErrorStatusCode = a})
 
 -- | [Output Only] User who requested the operation, for example:
 -- user\'example.com.
@@ -489,10 +489,10 @@ instance ToJSON Operation where
                   ("progress" .=) <$> _oProgress,
                   ("startTime" .=) <$> _oStartTime,
                   Just ("kind" .= _oKind), ("error" .=) <$> _oError,
-                  ("httpErrorMessage" .=) <$> _oHttpErrorMessage,
+                  ("httpErrorMessage" .=) <$> _oHTTPErrorMessage,
                   ("zone" .=) <$> _oZone,
                   ("warnings" .=) <$> _oWarnings,
-                  ("httpErrorStatusCode" .=) <$> _oHttpErrorStatusCode,
+                  ("httpErrorStatusCode" .=) <$> _oHTTPErrorStatusCode,
                   ("user" .=) <$> _oUser,
                   ("selfLink" .=) <$> _oSelfLink,
                   ("name" .=) <$> _oName,
@@ -510,7 +510,7 @@ instance ToJSON Operation where
 -- /See:/ 'resourcesListResponse' smart constructor.
 data ResourcesListResponse = ResourcesListResponse
     { _rlrNextPageToken :: !(Maybe Text)
-    , _rlrResources     :: !(Maybe [Maybe Resource])
+    , _rlrResources     :: !(Maybe [Resource])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ResourcesListResponse' with the minimum fields required to make a request.
@@ -535,7 +535,7 @@ rlrNextPageToken
       (\ s a -> s{_rlrNextPageToken = a})
 
 -- | Resources contained in this list response.
-rlrResources :: Lens' ResourcesListResponse [Maybe Resource]
+rlrResources :: Lens' ResourcesListResponse [Resource]
 rlrResources
   = lens _rlrResources (\ s a -> s{_rlrResources = a})
       . _Default
@@ -710,7 +710,7 @@ data Manifest = Manifest
     { _mInsertTime      :: !(Maybe Text)
     , _mLayout          :: !(Maybe Text)
     , _mConfig          :: !(Maybe Text)
-    , _mImports         :: !(Maybe [Maybe ImportFile])
+    , _mImports         :: !(Maybe [ImportFile])
     , _mSelfLink        :: !(Maybe Text)
     , _mName            :: !(Maybe Text)
     , _mEvaluatedConfig :: !(Maybe Text)
@@ -765,7 +765,7 @@ mConfig :: Lens' Manifest (Maybe Text)
 mConfig = lens _mConfig (\ s a -> s{_mConfig = a})
 
 -- | [Output Only] The imported files for this manifest.
-mImports :: Lens' Manifest [Maybe ImportFile]
+mImports :: Lens' Manifest [ImportFile]
 mImports
   = lens _mImports (\ s a -> s{_mImports = a}) .
       _Default
@@ -822,14 +822,14 @@ instance ToJSON Manifest where
 -- /See:/ 'resource' smart constructor.
 data Resource = Resource
     { _rInsertTime      :: !(Maybe Text)
-    , _rUrl             :: !(Maybe Text)
+    , _rURL             :: !(Maybe Text)
     , _rUpdateTime      :: !(Maybe Text)
     , _rName            :: !(Maybe Text)
     , _rManifest        :: !(Maybe Text)
     , _rFinalProperties :: !(Maybe Text)
     , _rId              :: !(Maybe Word64)
     , _rType            :: !(Maybe Text)
-    , _rUpdate          :: !(Maybe (Maybe ResourceUpdate))
+    , _rUpdate          :: !(Maybe ResourceUpdate)
     , _rProperties      :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -839,7 +839,7 @@ data Resource = Resource
 --
 -- * 'rInsertTime'
 --
--- * 'rUrl'
+-- * 'rURL'
 --
 -- * 'rUpdateTime'
 --
@@ -861,7 +861,7 @@ resource
 resource =
     Resource
     { _rInsertTime = Nothing
-    , _rUrl = Nothing
+    , _rURL = Nothing
     , _rUpdateTime = Nothing
     , _rName = Nothing
     , _rManifest = Nothing
@@ -879,8 +879,8 @@ rInsertTime
   = lens _rInsertTime (\ s a -> s{_rInsertTime = a})
 
 -- | [Output Only] The URL of the actual resource.
-rUrl :: Lens' Resource (Maybe Text)
-rUrl = lens _rUrl (\ s a -> s{_rUrl = a})
+rURL :: Lens' Resource (Maybe Text)
+rURL = lens _rURL (\ s a -> s{_rURL = a})
 
 -- | [Output Only] Timestamp when the resource was updated, in RFC3339 text
 -- format .
@@ -916,7 +916,7 @@ rType = lens _rType (\ s a -> s{_rType = a})
 
 -- | [Output Only] If Deployment Manager is currently updating or previewing
 -- an update to this resource, the updated configuration appears here.
-rUpdate :: Lens' Resource (Maybe (Maybe ResourceUpdate))
+rUpdate :: Lens' Resource (Maybe ResourceUpdate)
 rUpdate = lens _rUpdate (\ s a -> s{_rUpdate = a})
 
 -- | [Output Only] The current properties of the resource before any
@@ -945,7 +945,7 @@ instance ToJSON Resource where
           = object
               (catMaybes
                  [("insertTime" .=) <$> _rInsertTime,
-                  ("url" .=) <$> _rUrl,
+                  ("url" .=) <$> _rURL,
                   ("updateTime" .=) <$> _rUpdateTime,
                   ("name" .=) <$> _rName,
                   ("manifest" .=) <$> _rManifest,
@@ -998,7 +998,7 @@ instance ToJSON OperationError where
 -- /See:/ 'manifestsListResponse' smart constructor.
 data ManifestsListResponse = ManifestsListResponse
     { _mlrNextPageToken :: !(Maybe Text)
-    , _mlrManifests     :: !(Maybe [Maybe Manifest])
+    , _mlrManifests     :: !(Maybe [Manifest])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManifestsListResponse' with the minimum fields required to make a request.
@@ -1023,7 +1023,7 @@ mlrNextPageToken
       (\ s a -> s{_mlrNextPageToken = a})
 
 -- | [Output Only] Manifests contained in this list response.
-mlrManifests :: Lens' ManifestsListResponse [Maybe Manifest]
+mlrManifests :: Lens' ManifestsListResponse [Manifest]
 mlrManifests
   = lens _mlrManifests (\ s a -> s{_mlrManifests = a})
       . _Default
@@ -1162,7 +1162,7 @@ instance ToJSON ImportFile where
 -- /See:/ 'deploymentsListResponse' smart constructor.
 data DeploymentsListResponse = DeploymentsListResponse
     { _dlrNextPageToken :: !(Maybe Text)
-    , _dlrDeployments   :: !(Maybe [Maybe Deployment])
+    , _dlrDeployments   :: !(Maybe [Deployment])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeploymentsListResponse' with the minimum fields required to make a request.
@@ -1187,7 +1187,7 @@ dlrNextPageToken
       (\ s a -> s{_dlrNextPageToken = a})
 
 -- | [Output Only] The deployments contained in this response.
-dlrDeployments :: Lens' DeploymentsListResponse [Maybe Deployment]
+dlrDeployments :: Lens' DeploymentsListResponse [Deployment]
 dlrDeployments
   = lens _dlrDeployments
       (\ s a -> s{_dlrDeployments = a})
@@ -1279,8 +1279,8 @@ data Deployment = Deployment
     , _dManifest    :: !(Maybe Text)
     , _dId          :: !(Maybe Word64)
     , _dDescription :: !(Maybe Text)
-    , _dUpdate      :: !(Maybe (Maybe DeploymentUpdate))
-    , _dTarget      :: !(Maybe (Maybe TargetConfiguration))
+    , _dUpdate      :: !(Maybe DeploymentUpdate)
+    , _dTarget      :: !(Maybe TargetConfiguration)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Deployment' with the minimum fields required to make a request.
@@ -1401,12 +1401,12 @@ dDescription
 
 -- | [Output Only] If Deployment Manager is currently updating or previewing
 -- an update to this deployment, the updated configuration appears here.
-dUpdate :: Lens' Deployment (Maybe (Maybe DeploymentUpdate))
+dUpdate :: Lens' Deployment (Maybe DeploymentUpdate)
 dUpdate = lens _dUpdate (\ s a -> s{_dUpdate = a})
 
 -- | [Input Only] The parameters that define your deployment, including the
 -- deployment configuration and relevant templates.
-dTarget :: Lens' Deployment (Maybe (Maybe TargetConfiguration))
+dTarget :: Lens' Deployment (Maybe TargetConfiguration)
 dTarget = lens _dTarget (\ s a -> s{_dTarget = a})
 
 instance FromJSON Deployment where
@@ -1445,7 +1445,7 @@ instance ToJSON Deployment where
 -- /See:/ 'targetConfiguration' smart constructor.
 data TargetConfiguration = TargetConfiguration
     { _tcConfig  :: !(Maybe Text)
-    , _tcImports :: !(Maybe [Maybe ImportFile])
+    , _tcImports :: !(Maybe [ImportFile])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetConfiguration' with the minimum fields required to make a request.
@@ -1470,7 +1470,7 @@ tcConfig = lens _tcConfig (\ s a -> s{_tcConfig = a})
 -- | Specifies any files to import for this configuration. This can be used
 -- to import templates or other files. For example, you might import a text
 -- file in order to use the file in a template.
-tcImports :: Lens' TargetConfiguration [Maybe ImportFile]
+tcImports :: Lens' TargetConfiguration [ImportFile]
 tcImports
   = lens _tcImports (\ s a -> s{_tcImports = a}) .
       _Default

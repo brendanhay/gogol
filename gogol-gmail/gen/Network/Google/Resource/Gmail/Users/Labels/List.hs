@@ -32,12 +32,11 @@ module Network.Google.Resource.Gmail.Users.Labels.List
     -- * Request Lenses
     , ullQuotaUser
     , ullPrettyPrint
-    , ullUserIp
+    , ullUserIP
     , ullUserId
     , ullKey
-    , ullOauthToken
+    , ullOAuthToken
     , ullFields
-    , ullAlt
     ) where
 
 import           Network.Google.Gmail.Types
@@ -51,10 +50,10 @@ type UsersLabelsListResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :>
+                     QueryParam "alt" AltJSON :>
                        Get '[JSON] ListLabelsResponse
 
 -- | Lists all labels in the user\'s mailbox.
@@ -63,12 +62,11 @@ type UsersLabelsListResource =
 data UsersLabelsList' = UsersLabelsList'
     { _ullQuotaUser   :: !(Maybe Text)
     , _ullPrettyPrint :: !Bool
-    , _ullUserIp      :: !(Maybe Text)
+    , _ullUserIP      :: !(Maybe Text)
     , _ullUserId      :: !Text
-    , _ullKey         :: !(Maybe Text)
-    , _ullOauthToken  :: !(Maybe Text)
+    , _ullKey         :: !(Maybe Key)
+    , _ullOAuthToken  :: !(Maybe OAuthToken)
     , _ullFields      :: !(Maybe Text)
-    , _ullAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersLabelsList'' with the minimum fields required to make a request.
@@ -79,17 +77,15 @@ data UsersLabelsList' = UsersLabelsList'
 --
 -- * 'ullPrettyPrint'
 --
--- * 'ullUserIp'
+-- * 'ullUserIP'
 --
 -- * 'ullUserId'
 --
 -- * 'ullKey'
 --
--- * 'ullOauthToken'
+-- * 'ullOAuthToken'
 --
 -- * 'ullFields'
---
--- * 'ullAlt'
 usersLabelsList'
     :: Text
     -> UsersLabelsList'
@@ -97,12 +93,11 @@ usersLabelsList' pUllUserId_ =
     UsersLabelsList'
     { _ullQuotaUser = Nothing
     , _ullPrettyPrint = True
-    , _ullUserIp = Nothing
+    , _ullUserIP = Nothing
     , _ullUserId = pUllUserId_
     , _ullKey = Nothing
-    , _ullOauthToken = Nothing
+    , _ullOAuthToken = Nothing
     , _ullFields = Nothing
-    , _ullAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,9 +115,9 @@ ullPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ullUserIp :: Lens' UsersLabelsList' (Maybe Text)
-ullUserIp
-  = lens _ullUserIp (\ s a -> s{_ullUserIp = a})
+ullUserIP :: Lens' UsersLabelsList' (Maybe Text)
+ullUserIP
+  = lens _ullUserIP (\ s a -> s{_ullUserIP = a})
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
@@ -133,34 +128,34 @@ ullUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ullKey :: Lens' UsersLabelsList' (Maybe Text)
+ullKey :: Lens' UsersLabelsList' (Maybe Key)
 ullKey = lens _ullKey (\ s a -> s{_ullKey = a})
 
 -- | OAuth 2.0 token for the current user.
-ullOauthToken :: Lens' UsersLabelsList' (Maybe Text)
-ullOauthToken
-  = lens _ullOauthToken
-      (\ s a -> s{_ullOauthToken = a})
+ullOAuthToken :: Lens' UsersLabelsList' (Maybe OAuthToken)
+ullOAuthToken
+  = lens _ullOAuthToken
+      (\ s a -> s{_ullOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ullFields :: Lens' UsersLabelsList' (Maybe Text)
 ullFields
   = lens _ullFields (\ s a -> s{_ullFields = a})
 
--- | Data format for the response.
-ullAlt :: Lens' UsersLabelsList' Alt
-ullAlt = lens _ullAlt (\ s a -> s{_ullAlt = a})
+instance GoogleAuth UsersLabelsList' where
+        authKey = ullKey . _Just
+        authToken = ullOAuthToken . _Just
 
 instance GoogleRequest UsersLabelsList' where
         type Rs UsersLabelsList' = ListLabelsResponse
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersLabelsList'{..}
-          = go _ullQuotaUser (Just _ullPrettyPrint) _ullUserIp
+          = go _ullQuotaUser (Just _ullPrettyPrint) _ullUserIP
               _ullUserId
               _ullKey
-              _ullOauthToken
+              _ullOAuthToken
               _ullFields
-              (Just _ullAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersLabelsListResource)

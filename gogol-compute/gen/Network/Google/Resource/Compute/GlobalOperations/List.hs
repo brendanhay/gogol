@@ -34,14 +34,13 @@ module Network.Google.Resource.Compute.GlobalOperations.List
     , golQuotaUser
     , golPrettyPrint
     , golProject
-    , golUserIp
+    , golUserIP
     , golKey
     , golFilter
     , golPageToken
-    , golOauthToken
+    , golOAuthToken
     , golMaxResults
     , golFields
-    , golAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -56,13 +55,14 @@ type GlobalOperationsListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "filter" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "maxResults" Word32 :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Get '[JSON] OperationList
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] OperationList
 
 -- | Retrieves the list of Operation resources contained within the specified
 -- project.
@@ -72,14 +72,13 @@ data GlobalOperationsList' = GlobalOperationsList'
     { _golQuotaUser   :: !(Maybe Text)
     , _golPrettyPrint :: !Bool
     , _golProject     :: !Text
-    , _golUserIp      :: !(Maybe Text)
-    , _golKey         :: !(Maybe Text)
+    , _golUserIP      :: !(Maybe Text)
+    , _golKey         :: !(Maybe Key)
     , _golFilter      :: !(Maybe Text)
     , _golPageToken   :: !(Maybe Text)
-    , _golOauthToken  :: !(Maybe Text)
+    , _golOAuthToken  :: !(Maybe OAuthToken)
     , _golMaxResults  :: !Word32
     , _golFields      :: !(Maybe Text)
-    , _golAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GlobalOperationsList'' with the minimum fields required to make a request.
@@ -92,7 +91,7 @@ data GlobalOperationsList' = GlobalOperationsList'
 --
 -- * 'golProject'
 --
--- * 'golUserIp'
+-- * 'golUserIP'
 --
 -- * 'golKey'
 --
@@ -100,13 +99,11 @@ data GlobalOperationsList' = GlobalOperationsList'
 --
 -- * 'golPageToken'
 --
--- * 'golOauthToken'
+-- * 'golOAuthToken'
 --
 -- * 'golMaxResults'
 --
 -- * 'golFields'
---
--- * 'golAlt'
 globalOperationsList'
     :: Text -- ^ 'project'
     -> GlobalOperationsList'
@@ -115,14 +112,13 @@ globalOperationsList' pGolProject_ =
     { _golQuotaUser = Nothing
     , _golPrettyPrint = True
     , _golProject = pGolProject_
-    , _golUserIp = Nothing
+    , _golUserIP = Nothing
     , _golKey = Nothing
     , _golFilter = Nothing
     , _golPageToken = Nothing
-    , _golOauthToken = Nothing
+    , _golOAuthToken = Nothing
     , _golMaxResults = 500
     , _golFields = Nothing
-    , _golAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -145,14 +141,14 @@ golProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-golUserIp :: Lens' GlobalOperationsList' (Maybe Text)
-golUserIp
-  = lens _golUserIp (\ s a -> s{_golUserIp = a})
+golUserIP :: Lens' GlobalOperationsList' (Maybe Text)
+golUserIP
+  = lens _golUserIP (\ s a -> s{_golUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-golKey :: Lens' GlobalOperationsList' (Maybe Text)
+golKey :: Lens' GlobalOperationsList' (Maybe Key)
 golKey = lens _golKey (\ s a -> s{_golKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
@@ -178,10 +174,10 @@ golPageToken
   = lens _golPageToken (\ s a -> s{_golPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-golOauthToken :: Lens' GlobalOperationsList' (Maybe Text)
-golOauthToken
-  = lens _golOauthToken
-      (\ s a -> s{_golOauthToken = a})
+golOAuthToken :: Lens' GlobalOperationsList' (Maybe OAuthToken)
+golOAuthToken
+  = lens _golOAuthToken
+      (\ s a -> s{_golOAuthToken = a})
 
 -- | Maximum count of results to be returned.
 golMaxResults :: Lens' GlobalOperationsList' Word32
@@ -194,23 +190,23 @@ golFields :: Lens' GlobalOperationsList' (Maybe Text)
 golFields
   = lens _golFields (\ s a -> s{_golFields = a})
 
--- | Data format for the response.
-golAlt :: Lens' GlobalOperationsList' Alt
-golAlt = lens _golAlt (\ s a -> s{_golAlt = a})
+instance GoogleAuth GlobalOperationsList' where
+        authKey = golKey . _Just
+        authToken = golOAuthToken . _Just
 
 instance GoogleRequest GlobalOperationsList' where
         type Rs GlobalOperationsList' = OperationList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u GlobalOperationsList'{..}
           = go _golQuotaUser (Just _golPrettyPrint) _golProject
-              _golUserIp
+              _golUserIP
               _golKey
               _golFilter
               _golPageToken
-              _golOauthToken
+              _golOAuthToken
               (Just _golMaxResults)
               _golFields
-              (Just _golAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy GlobalOperationsListResource)

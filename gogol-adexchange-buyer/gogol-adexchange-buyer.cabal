@@ -43,30 +43,30 @@ library
         , Network.Google.Resource.AdExchangeBuyer.Budget.Get
         , Network.Google.Resource.AdExchangeBuyer.Budget.Patch
         , Network.Google.Resource.AdExchangeBuyer.Budget.Update
-        , Network.Google.Resource.AdExchangeBuyer.Clientaccess.Delete
-        , Network.Google.Resource.AdExchangeBuyer.Clientaccess.Get
-        , Network.Google.Resource.AdExchangeBuyer.Clientaccess.Insert
-        , Network.Google.Resource.AdExchangeBuyer.Clientaccess.List
-        , Network.Google.Resource.AdExchangeBuyer.Clientaccess.Patch
-        , Network.Google.Resource.AdExchangeBuyer.Clientaccess.Update
+        , Network.Google.Resource.AdExchangeBuyer.ClientAccess.Delete
+        , Network.Google.Resource.AdExchangeBuyer.ClientAccess.Get
+        , Network.Google.Resource.AdExchangeBuyer.ClientAccess.Insert
+        , Network.Google.Resource.AdExchangeBuyer.ClientAccess.List
+        , Network.Google.Resource.AdExchangeBuyer.ClientAccess.Patch
+        , Network.Google.Resource.AdExchangeBuyer.ClientAccess.Update
         , Network.Google.Resource.AdExchangeBuyer.Creatives.Get
         , Network.Google.Resource.AdExchangeBuyer.Creatives.Insert
         , Network.Google.Resource.AdExchangeBuyer.Creatives.List
         , Network.Google.Resource.AdExchangeBuyer.Deals.Get
-        , Network.Google.Resource.AdExchangeBuyer.Marketplacedeals.Delete
-        , Network.Google.Resource.AdExchangeBuyer.Marketplacedeals.Insert
-        , Network.Google.Resource.AdExchangeBuyer.Marketplacedeals.List
-        , Network.Google.Resource.AdExchangeBuyer.Marketplacedeals.Update
-        , Network.Google.Resource.AdExchangeBuyer.Marketplacenotes.Insert
-        , Network.Google.Resource.AdExchangeBuyer.Marketplacenotes.List
-        , Network.Google.Resource.AdExchangeBuyer.Marketplaceoffers.Get
-        , Network.Google.Resource.AdExchangeBuyer.Marketplaceoffers.Search
-        , Network.Google.Resource.AdExchangeBuyer.Marketplaceorders.Get
-        , Network.Google.Resource.AdExchangeBuyer.Marketplaceorders.Insert
-        , Network.Google.Resource.AdExchangeBuyer.Marketplaceorders.Patch
-        , Network.Google.Resource.AdExchangeBuyer.Marketplaceorders.Search
-        , Network.Google.Resource.AdExchangeBuyer.Marketplaceorders.Update
-        , Network.Google.Resource.AdExchangeBuyer.Negotiationrounds.Insert
+        , Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.Delete
+        , Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.Insert
+        , Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.List
+        , Network.Google.Resource.AdExchangeBuyer.MarketplaceDeals.Update
+        , Network.Google.Resource.AdExchangeBuyer.MarketplaceNotes.Insert
+        , Network.Google.Resource.AdExchangeBuyer.MarketplaceNotes.List
+        , Network.Google.Resource.AdExchangeBuyer.MarketplaceOffers.Get
+        , Network.Google.Resource.AdExchangeBuyer.MarketplaceOffers.Search
+        , Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Get
+        , Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Insert
+        , Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Patch
+        , Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Search
+        , Network.Google.Resource.AdExchangeBuyer.MarketplaceOrders.Update
+        , Network.Google.Resource.AdExchangeBuyer.NegotiationRounds.Insert
         , Network.Google.Resource.AdExchangeBuyer.Negotiations.Get
         , Network.Google.Resource.AdExchangeBuyer.Negotiations.Insert
         , Network.Google.Resource.AdExchangeBuyer.Negotiations.List

@@ -33,14 +33,14 @@ module Network.Google.Resource.DFAReporting.LandingPages.Patch
     -- * Request Lenses
     , lppQuotaUser
     , lppPrettyPrint
-    , lppUserIp
+    , lppUserIP
     , lppCampaignId
     , lppProfileId
+    , lppLandingPage
     , lppKey
     , lppId
-    , lppOauthToken
+    , lppOAuthToken
     , lppFields
-    , lppAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -57,11 +57,13 @@ type LandingPagesPatchResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
+                     QueryParam "key" Key :>
                        QueryParam "id" Int64 :>
-                         QueryParam "oauth_token" Text :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Patch '[JSON] LandingPage
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] LandingPage :>
+                                 Patch '[JSON] LandingPage
 
 -- | Updates an existing campaign landing page. This method supports patch
 -- semantics.
@@ -70,14 +72,14 @@ type LandingPagesPatchResource =
 data LandingPagesPatch' = LandingPagesPatch'
     { _lppQuotaUser   :: !(Maybe Text)
     , _lppPrettyPrint :: !Bool
-    , _lppUserIp      :: !(Maybe Text)
+    , _lppUserIP      :: !(Maybe Text)
     , _lppCampaignId  :: !Int64
     , _lppProfileId   :: !Int64
-    , _lppKey         :: !(Maybe Text)
+    , _lppLandingPage :: !LandingPage
+    , _lppKey         :: !(Maybe Key)
     , _lppId          :: !Int64
-    , _lppOauthToken  :: !(Maybe Text)
+    , _lppOAuthToken  :: !(Maybe OAuthToken)
     , _lppFields      :: !(Maybe Text)
-    , _lppAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LandingPagesPatch'' with the minimum fields required to make a request.
@@ -88,38 +90,39 @@ data LandingPagesPatch' = LandingPagesPatch'
 --
 -- * 'lppPrettyPrint'
 --
--- * 'lppUserIp'
+-- * 'lppUserIP'
 --
 -- * 'lppCampaignId'
 --
 -- * 'lppProfileId'
 --
+-- * 'lppLandingPage'
+--
 -- * 'lppKey'
 --
 -- * 'lppId'
 --
--- * 'lppOauthToken'
+-- * 'lppOAuthToken'
 --
 -- * 'lppFields'
---
--- * 'lppAlt'
 landingPagesPatch'
     :: Int64 -- ^ 'campaignId'
     -> Int64 -- ^ 'profileId'
+    -> LandingPage -- ^ 'LandingPage'
     -> Int64 -- ^ 'id'
     -> LandingPagesPatch'
-landingPagesPatch' pLppCampaignId_ pLppProfileId_ pLppId_ =
+landingPagesPatch' pLppCampaignId_ pLppProfileId_ pLppLandingPage_ pLppId_ =
     LandingPagesPatch'
     { _lppQuotaUser = Nothing
     , _lppPrettyPrint = True
-    , _lppUserIp = Nothing
+    , _lppUserIP = Nothing
     , _lppCampaignId = pLppCampaignId_
     , _lppProfileId = pLppProfileId_
+    , _lppLandingPage = pLppLandingPage_
     , _lppKey = Nothing
     , _lppId = pLppId_
-    , _lppOauthToken = Nothing
+    , _lppOAuthToken = Nothing
     , _lppFields = Nothing
-    , _lppAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -137,9 +140,9 @@ lppPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-lppUserIp :: Lens' LandingPagesPatch' (Maybe Text)
-lppUserIp
-  = lens _lppUserIp (\ s a -> s{_lppUserIp = a})
+lppUserIP :: Lens' LandingPagesPatch' (Maybe Text)
+lppUserIP
+  = lens _lppUserIP (\ s a -> s{_lppUserIP = a})
 
 -- | Landing page campaign ID.
 lppCampaignId :: Lens' LandingPagesPatch' Int64
@@ -152,10 +155,16 @@ lppProfileId :: Lens' LandingPagesPatch' Int64
 lppProfileId
   = lens _lppProfileId (\ s a -> s{_lppProfileId = a})
 
+-- | Multipart request metadata.
+lppLandingPage :: Lens' LandingPagesPatch' LandingPage
+lppLandingPage
+  = lens _lppLandingPage
+      (\ s a -> s{_lppLandingPage = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lppKey :: Lens' LandingPagesPatch' (Maybe Text)
+lppKey :: Lens' LandingPagesPatch' (Maybe Key)
 lppKey = lens _lppKey (\ s a -> s{_lppKey = a})
 
 -- | Landing page ID.
@@ -163,32 +172,33 @@ lppId :: Lens' LandingPagesPatch' Int64
 lppId = lens _lppId (\ s a -> s{_lppId = a})
 
 -- | OAuth 2.0 token for the current user.
-lppOauthToken :: Lens' LandingPagesPatch' (Maybe Text)
-lppOauthToken
-  = lens _lppOauthToken
-      (\ s a -> s{_lppOauthToken = a})
+lppOAuthToken :: Lens' LandingPagesPatch' (Maybe OAuthToken)
+lppOAuthToken
+  = lens _lppOAuthToken
+      (\ s a -> s{_lppOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 lppFields :: Lens' LandingPagesPatch' (Maybe Text)
 lppFields
   = lens _lppFields (\ s a -> s{_lppFields = a})
 
--- | Data format for the response.
-lppAlt :: Lens' LandingPagesPatch' Alt
-lppAlt = lens _lppAlt (\ s a -> s{_lppAlt = a})
+instance GoogleAuth LandingPagesPatch' where
+        authKey = lppKey . _Just
+        authToken = lppOAuthToken . _Just
 
 instance GoogleRequest LandingPagesPatch' where
         type Rs LandingPagesPatch' = LandingPage
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u LandingPagesPatch'{..}
-          = go _lppQuotaUser (Just _lppPrettyPrint) _lppUserIp
+          = go _lppQuotaUser (Just _lppPrettyPrint) _lppUserIP
               _lppCampaignId
               _lppProfileId
               _lppKey
               (Just _lppId)
-              _lppOauthToken
+              _lppOAuthToken
               _lppFields
-              (Just _lppAlt)
+              (Just AltJSON)
+              _lppLandingPage
           where go
                   = clientWithRoute
                       (Proxy :: Proxy LandingPagesPatchResource)

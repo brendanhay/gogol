@@ -34,14 +34,13 @@ module Network.Google.Resource.Webmasters.URLcrawlerrorssamples.MarkAsFixed
     , umafQuotaUser
     , umafPrettyPrint
     , umafPlatform
-    , umafUserIp
+    , umafUserIP
     , umafCategory
-    , umafSiteUrl
-    , umafUrl
+    , umafSiteURL
+    , umafURL
     , umafKey
-    , umafOauthToken
+    , umafOAuthToken
     , umafFields
-    , umafAlt
     ) where
 
 import           Network.Google.Prelude
@@ -63,10 +62,10 @@ type UrlcrawlerrorssamplesMarkAsFixedResource =
                      QueryParam "category"
                        WebmastersURLcrawlerrorssamplesMarkAsFixedCategory
                        :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Delete '[JSON] ()
+                             QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Marks the provided site\'s sample URL as fixed, and removes it from the
 -- samples list.
@@ -76,14 +75,13 @@ data URLcrawlerrorssamplesMarkAsFixed' = URLcrawlerrorssamplesMarkAsFixed'
     { _umafQuotaUser   :: !(Maybe Text)
     , _umafPrettyPrint :: !Bool
     , _umafPlatform    :: !WebmastersURLcrawlerrorssamplesMarkAsFixedPlatform
-    , _umafUserIp      :: !(Maybe Text)
+    , _umafUserIP      :: !(Maybe Text)
     , _umafCategory    :: !WebmastersURLcrawlerrorssamplesMarkAsFixedCategory
-    , _umafSiteUrl     :: !Text
-    , _umafUrl         :: !Text
-    , _umafKey         :: !(Maybe Text)
-    , _umafOauthToken  :: !(Maybe Text)
+    , _umafSiteURL     :: !Text
+    , _umafURL         :: !Text
+    , _umafKey         :: !(Maybe Key)
+    , _umafOAuthToken  :: !(Maybe OAuthToken)
     , _umafFields      :: !(Maybe Text)
-    , _umafAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLcrawlerrorssamplesMarkAsFixed'' with the minimum fields required to make a request.
@@ -96,40 +94,37 @@ data URLcrawlerrorssamplesMarkAsFixed' = URLcrawlerrorssamplesMarkAsFixed'
 --
 -- * 'umafPlatform'
 --
--- * 'umafUserIp'
+-- * 'umafUserIP'
 --
 -- * 'umafCategory'
 --
--- * 'umafSiteUrl'
+-- * 'umafSiteURL'
 --
--- * 'umafUrl'
+-- * 'umafURL'
 --
 -- * 'umafKey'
 --
--- * 'umafOauthToken'
+-- * 'umafOAuthToken'
 --
 -- * 'umafFields'
---
--- * 'umafAlt'
 uRLcrawlerrorssamplesMarkAsFixed'
     :: WebmastersURLcrawlerrorssamplesMarkAsFixedPlatform -- ^ 'platform'
     -> WebmastersURLcrawlerrorssamplesMarkAsFixedCategory -- ^ 'category'
     -> Text -- ^ 'siteUrl'
     -> Text -- ^ 'url'
     -> URLcrawlerrorssamplesMarkAsFixed'
-uRLcrawlerrorssamplesMarkAsFixed' pUmafPlatform_ pUmafCategory_ pUmafSiteUrl_ pUmafUrl_ =
+uRLcrawlerrorssamplesMarkAsFixed' pUmafPlatform_ pUmafCategory_ pUmafSiteURL_ pUmafURL_ =
     URLcrawlerrorssamplesMarkAsFixed'
     { _umafQuotaUser = Nothing
     , _umafPrettyPrint = True
     , _umafPlatform = pUmafPlatform_
-    , _umafUserIp = Nothing
+    , _umafUserIP = Nothing
     , _umafCategory = pUmafCategory_
-    , _umafSiteUrl = pUmafSiteUrl_
-    , _umafUrl = pUmafUrl_
+    , _umafSiteURL = pUmafSiteURL_
+    , _umafURL = pUmafURL_
     , _umafKey = Nothing
-    , _umafOauthToken = Nothing
+    , _umafOAuthToken = Nothing
     , _umafFields = Nothing
-    , _umafAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,9 +148,9 @@ umafPlatform
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-umafUserIp :: Lens' URLcrawlerrorssamplesMarkAsFixed' (Maybe Text)
-umafUserIp
-  = lens _umafUserIp (\ s a -> s{_umafUserIp = a})
+umafUserIP :: Lens' URLcrawlerrorssamplesMarkAsFixed' (Maybe Text)
+umafUserIP
+  = lens _umafUserIP (\ s a -> s{_umafUserIP = a})
 
 -- | The crawl error category. For example: authPermissions
 umafCategory :: Lens' URLcrawlerrorssamplesMarkAsFixed' WebmastersURLcrawlerrorssamplesMarkAsFixedCategory
@@ -164,37 +159,38 @@ umafCategory
 
 -- | The site\'s URL, including protocol. For example:
 -- http:\/\/www.example.com\/
-umafSiteUrl :: Lens' URLcrawlerrorssamplesMarkAsFixed' Text
-umafSiteUrl
-  = lens _umafSiteUrl (\ s a -> s{_umafSiteUrl = a})
+umafSiteURL :: Lens' URLcrawlerrorssamplesMarkAsFixed' Text
+umafSiteURL
+  = lens _umafSiteURL (\ s a -> s{_umafSiteURL = a})
 
 -- | The relative path (without the site) of the sample URL. It must be one
 -- of the URLs returned by list(). For example, for the URL
 -- https:\/\/www.example.com\/pagename on the site
 -- https:\/\/www.example.com\/, the url value is pagename
-umafUrl :: Lens' URLcrawlerrorssamplesMarkAsFixed' Text
-umafUrl = lens _umafUrl (\ s a -> s{_umafUrl = a})
+umafURL :: Lens' URLcrawlerrorssamplesMarkAsFixed' Text
+umafURL = lens _umafURL (\ s a -> s{_umafURL = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-umafKey :: Lens' URLcrawlerrorssamplesMarkAsFixed' (Maybe Text)
+umafKey :: Lens' URLcrawlerrorssamplesMarkAsFixed' (Maybe Key)
 umafKey = lens _umafKey (\ s a -> s{_umafKey = a})
 
 -- | OAuth 2.0 token for the current user.
-umafOauthToken :: Lens' URLcrawlerrorssamplesMarkAsFixed' (Maybe Text)
-umafOauthToken
-  = lens _umafOauthToken
-      (\ s a -> s{_umafOauthToken = a})
+umafOAuthToken :: Lens' URLcrawlerrorssamplesMarkAsFixed' (Maybe OAuthToken)
+umafOAuthToken
+  = lens _umafOAuthToken
+      (\ s a -> s{_umafOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 umafFields :: Lens' URLcrawlerrorssamplesMarkAsFixed' (Maybe Text)
 umafFields
   = lens _umafFields (\ s a -> s{_umafFields = a})
 
--- | Data format for the response.
-umafAlt :: Lens' URLcrawlerrorssamplesMarkAsFixed' Alt
-umafAlt = lens _umafAlt (\ s a -> s{_umafAlt = a})
+instance GoogleAuth URLcrawlerrorssamplesMarkAsFixed'
+         where
+        authKey = umafKey . _Just
+        authToken = umafOAuthToken . _Just
 
 instance GoogleRequest
          URLcrawlerrorssamplesMarkAsFixed' where
@@ -204,14 +200,14 @@ instance GoogleRequest
           URLcrawlerrorssamplesMarkAsFixed'{..}
           = go _umafQuotaUser (Just _umafPrettyPrint)
               (Just _umafPlatform)
-              _umafUserIp
+              _umafUserIP
               (Just _umafCategory)
-              _umafSiteUrl
-              _umafUrl
+              _umafSiteURL
+              _umafURL
               _umafKey
-              _umafOauthToken
+              _umafOAuthToken
               _umafFields
-              (Just _umafAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

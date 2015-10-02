@@ -33,12 +33,11 @@ module Network.Google.Resource.AdSenseHost.Associationsessions.Verify
     -- * Request Lenses
     , avQuotaUser
     , avPrettyPrint
-    , avUserIp
+    , avUserIP
     , avToken
     , avKey
-    , avOauthToken
+    , avOAuthToken
     , avFields
-    , avAlt
     ) where
 
 import           Network.Google.AdSenseHost.Types
@@ -53,10 +52,10 @@ type AssociationsessionsVerifyResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "token" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :>
+                       QueryParam "alt" AltJSON :>
                          Get '[JSON] AssociationSession
 
 -- | Verify an association session after the association callback returns
@@ -66,12 +65,11 @@ type AssociationsessionsVerifyResource =
 data AssociationsessionsVerify' = AssociationsessionsVerify'
     { _avQuotaUser   :: !(Maybe Text)
     , _avPrettyPrint :: !Bool
-    , _avUserIp      :: !(Maybe Text)
+    , _avUserIP      :: !(Maybe Text)
     , _avToken       :: !Text
-    , _avKey         :: !(Maybe Text)
-    , _avOauthToken  :: !(Maybe Text)
+    , _avKey         :: !(Maybe Key)
+    , _avOAuthToken  :: !(Maybe OAuthToken)
     , _avFields      :: !(Maybe Text)
-    , _avAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AssociationsessionsVerify'' with the minimum fields required to make a request.
@@ -82,17 +80,15 @@ data AssociationsessionsVerify' = AssociationsessionsVerify'
 --
 -- * 'avPrettyPrint'
 --
--- * 'avUserIp'
+-- * 'avUserIP'
 --
 -- * 'avToken'
 --
 -- * 'avKey'
 --
--- * 'avOauthToken'
+-- * 'avOAuthToken'
 --
 -- * 'avFields'
---
--- * 'avAlt'
 associationsessionsVerify'
     :: Text -- ^ 'token'
     -> AssociationsessionsVerify'
@@ -100,12 +96,11 @@ associationsessionsVerify' pAvToken_ =
     AssociationsessionsVerify'
     { _avQuotaUser = Nothing
     , _avPrettyPrint = True
-    , _avUserIp = Nothing
+    , _avUserIP = Nothing
     , _avToken = pAvToken_
     , _avKey = Nothing
-    , _avOauthToken = Nothing
+    , _avOAuthToken = Nothing
     , _avFields = Nothing
-    , _avAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -123,8 +118,8 @@ avPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-avUserIp :: Lens' AssociationsessionsVerify' (Maybe Text)
-avUserIp = lens _avUserIp (\ s a -> s{_avUserIp = a})
+avUserIP :: Lens' AssociationsessionsVerify' (Maybe Text)
+avUserIP = lens _avUserIP (\ s a -> s{_avUserIP = a})
 
 -- | The token returned to the association callback URL.
 avToken :: Lens' AssociationsessionsVerify' Text
@@ -133,21 +128,21 @@ avToken = lens _avToken (\ s a -> s{_avToken = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-avKey :: Lens' AssociationsessionsVerify' (Maybe Text)
+avKey :: Lens' AssociationsessionsVerify' (Maybe Key)
 avKey = lens _avKey (\ s a -> s{_avKey = a})
 
 -- | OAuth 2.0 token for the current user.
-avOauthToken :: Lens' AssociationsessionsVerify' (Maybe Text)
-avOauthToken
-  = lens _avOauthToken (\ s a -> s{_avOauthToken = a})
+avOAuthToken :: Lens' AssociationsessionsVerify' (Maybe OAuthToken)
+avOAuthToken
+  = lens _avOAuthToken (\ s a -> s{_avOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 avFields :: Lens' AssociationsessionsVerify' (Maybe Text)
 avFields = lens _avFields (\ s a -> s{_avFields = a})
 
--- | Data format for the response.
-avAlt :: Lens' AssociationsessionsVerify' Alt
-avAlt = lens _avAlt (\ s a -> s{_avAlt = a})
+instance GoogleAuth AssociationsessionsVerify' where
+        authKey = avKey . _Just
+        authToken = avOAuthToken . _Just
 
 instance GoogleRequest AssociationsessionsVerify'
          where
@@ -155,12 +150,12 @@ instance GoogleRequest AssociationsessionsVerify'
              AssociationSession
         request = requestWithRoute defReq adSenseHostURL
         requestWithRoute r u AssociationsessionsVerify'{..}
-          = go _avQuotaUser (Just _avPrettyPrint) _avUserIp
+          = go _avQuotaUser (Just _avPrettyPrint) _avUserIP
               (Just _avToken)
               _avKey
-              _avOauthToken
+              _avOAuthToken
               _avFields
-              (Just _avAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AssociationsessionsVerifyResource)

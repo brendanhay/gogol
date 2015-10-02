@@ -32,11 +32,11 @@ module Network.Google.Resource.Calendar.Calendars.Insert
     -- * Request Lenses
     , ciQuotaUser
     , ciPrettyPrint
-    , ciUserIp
+    , ciUserIP
     , ciKey
-    , ciOauthToken
+    , ciCalendar
+    , ciOAuthToken
     , ciFields
-    , ciAlt
     ) where
 
 import           Network.Google.AppsCalendar.Types
@@ -49,10 +49,11 @@ type CalendarsInsertResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
-               QueryParam "oauth_token" Text :>
+             QueryParam "key" Key :>
+               QueryParam "oauth_token" OAuthToken :>
                  QueryParam "fields" Text :>
-                   QueryParam "alt" Alt :> Post '[JSON] Calendar
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Calendar :> Post '[JSON] Calendar
 
 -- | Creates a secondary calendar.
 --
@@ -60,11 +61,11 @@ type CalendarsInsertResource =
 data CalendarsInsert' = CalendarsInsert'
     { _ciQuotaUser   :: !(Maybe Text)
     , _ciPrettyPrint :: !Bool
-    , _ciUserIp      :: !(Maybe Text)
-    , _ciKey         :: !(Maybe Text)
-    , _ciOauthToken  :: !(Maybe Text)
+    , _ciUserIP      :: !(Maybe Text)
+    , _ciKey         :: !(Maybe Key)
+    , _ciCalendar    :: !Calendar
+    , _ciOAuthToken  :: !(Maybe OAuthToken)
     , _ciFields      :: !(Maybe Text)
-    , _ciAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CalendarsInsert'' with the minimum fields required to make a request.
@@ -75,26 +76,27 @@ data CalendarsInsert' = CalendarsInsert'
 --
 -- * 'ciPrettyPrint'
 --
--- * 'ciUserIp'
+-- * 'ciUserIP'
 --
 -- * 'ciKey'
 --
--- * 'ciOauthToken'
+-- * 'ciCalendar'
+--
+-- * 'ciOAuthToken'
 --
 -- * 'ciFields'
---
--- * 'ciAlt'
 calendarsInsert'
-    :: CalendarsInsert'
-calendarsInsert' =
+    :: Calendar -- ^ 'Calendar'
+    -> CalendarsInsert'
+calendarsInsert' pCiCalendar_ =
     CalendarsInsert'
     { _ciQuotaUser = Nothing
     , _ciPrettyPrint = True
-    , _ciUserIp = Nothing
+    , _ciUserIP = Nothing
     , _ciKey = Nothing
-    , _ciOauthToken = Nothing
+    , _ciCalendar = pCiCalendar_
+    , _ciOAuthToken = Nothing
     , _ciFields = Nothing
-    , _ciAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -112,37 +114,43 @@ ciPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ciUserIp :: Lens' CalendarsInsert' (Maybe Text)
-ciUserIp = lens _ciUserIp (\ s a -> s{_ciUserIp = a})
+ciUserIP :: Lens' CalendarsInsert' (Maybe Text)
+ciUserIP = lens _ciUserIP (\ s a -> s{_ciUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ciKey :: Lens' CalendarsInsert' (Maybe Text)
+ciKey :: Lens' CalendarsInsert' (Maybe Key)
 ciKey = lens _ciKey (\ s a -> s{_ciKey = a})
 
+-- | Multipart request metadata.
+ciCalendar :: Lens' CalendarsInsert' Calendar
+ciCalendar
+  = lens _ciCalendar (\ s a -> s{_ciCalendar = a})
+
 -- | OAuth 2.0 token for the current user.
-ciOauthToken :: Lens' CalendarsInsert' (Maybe Text)
-ciOauthToken
-  = lens _ciOauthToken (\ s a -> s{_ciOauthToken = a})
+ciOAuthToken :: Lens' CalendarsInsert' (Maybe OAuthToken)
+ciOAuthToken
+  = lens _ciOAuthToken (\ s a -> s{_ciOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ciFields :: Lens' CalendarsInsert' (Maybe Text)
 ciFields = lens _ciFields (\ s a -> s{_ciFields = a})
 
--- | Data format for the response.
-ciAlt :: Lens' CalendarsInsert' Alt
-ciAlt = lens _ciAlt (\ s a -> s{_ciAlt = a})
+instance GoogleAuth CalendarsInsert' where
+        authKey = ciKey . _Just
+        authToken = ciOAuthToken . _Just
 
 instance GoogleRequest CalendarsInsert' where
         type Rs CalendarsInsert' = Calendar
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u CalendarsInsert'{..}
-          = go _ciQuotaUser (Just _ciPrettyPrint) _ciUserIp
+          = go _ciQuotaUser (Just _ciPrettyPrint) _ciUserIP
               _ciKey
-              _ciOauthToken
+              _ciOAuthToken
               _ciFields
-              (Just _ciAlt)
+              (Just AltJSON)
+              _ciCalendar
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CalendarsInsertResource)

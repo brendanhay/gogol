@@ -32,12 +32,12 @@ module Network.Google.Resource.DFAReporting.Placements.Insert
     -- * Request Lenses
     , piQuotaUser
     , piPrettyPrint
-    , piUserIp
+    , piUserIP
     , piProfileId
     , piKey
-    , piOauthToken
+    , piOAuthToken
+    , piPlacement
     , piFields
-    , piAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,10 +52,11 @@ type PlacementsInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] Placement
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Placement :> Post '[JSON] Placement
 
 -- | Inserts a new placement.
 --
@@ -63,12 +64,12 @@ type PlacementsInsertResource =
 data PlacementsInsert' = PlacementsInsert'
     { _piQuotaUser   :: !(Maybe Text)
     , _piPrettyPrint :: !Bool
-    , _piUserIp      :: !(Maybe Text)
+    , _piUserIP      :: !(Maybe Text)
     , _piProfileId   :: !Int64
-    , _piKey         :: !(Maybe Text)
-    , _piOauthToken  :: !(Maybe Text)
+    , _piKey         :: !(Maybe Key)
+    , _piOAuthToken  :: !(Maybe OAuthToken)
+    , _piPlacement   :: !Placement
     , _piFields      :: !(Maybe Text)
-    , _piAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementsInsert'' with the minimum fields required to make a request.
@@ -79,30 +80,31 @@ data PlacementsInsert' = PlacementsInsert'
 --
 -- * 'piPrettyPrint'
 --
--- * 'piUserIp'
+-- * 'piUserIP'
 --
 -- * 'piProfileId'
 --
 -- * 'piKey'
 --
--- * 'piOauthToken'
+-- * 'piOAuthToken'
+--
+-- * 'piPlacement'
 --
 -- * 'piFields'
---
--- * 'piAlt'
 placementsInsert'
     :: Int64 -- ^ 'profileId'
+    -> Placement -- ^ 'Placement'
     -> PlacementsInsert'
-placementsInsert' pPiProfileId_ =
+placementsInsert' pPiProfileId_ pPiPlacement_ =
     PlacementsInsert'
     { _piQuotaUser = Nothing
     , _piPrettyPrint = True
-    , _piUserIp = Nothing
+    , _piUserIP = Nothing
     , _piProfileId = pPiProfileId_
     , _piKey = Nothing
-    , _piOauthToken = Nothing
+    , _piOAuthToken = Nothing
+    , _piPlacement = pPiPlacement_
     , _piFields = Nothing
-    , _piAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,8 +122,8 @@ piPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-piUserIp :: Lens' PlacementsInsert' (Maybe Text)
-piUserIp = lens _piUserIp (\ s a -> s{_piUserIp = a})
+piUserIP :: Lens' PlacementsInsert' (Maybe Text)
+piUserIP = lens _piUserIP (\ s a -> s{_piUserIP = a})
 
 -- | User profile ID associated with this request.
 piProfileId :: Lens' PlacementsInsert' Int64
@@ -131,32 +133,38 @@ piProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-piKey :: Lens' PlacementsInsert' (Maybe Text)
+piKey :: Lens' PlacementsInsert' (Maybe Key)
 piKey = lens _piKey (\ s a -> s{_piKey = a})
 
 -- | OAuth 2.0 token for the current user.
-piOauthToken :: Lens' PlacementsInsert' (Maybe Text)
-piOauthToken
-  = lens _piOauthToken (\ s a -> s{_piOauthToken = a})
+piOAuthToken :: Lens' PlacementsInsert' (Maybe OAuthToken)
+piOAuthToken
+  = lens _piOAuthToken (\ s a -> s{_piOAuthToken = a})
+
+-- | Multipart request metadata.
+piPlacement :: Lens' PlacementsInsert' Placement
+piPlacement
+  = lens _piPlacement (\ s a -> s{_piPlacement = a})
 
 -- | Selector specifying which fields to include in a partial response.
 piFields :: Lens' PlacementsInsert' (Maybe Text)
 piFields = lens _piFields (\ s a -> s{_piFields = a})
 
--- | Data format for the response.
-piAlt :: Lens' PlacementsInsert' Alt
-piAlt = lens _piAlt (\ s a -> s{_piAlt = a})
+instance GoogleAuth PlacementsInsert' where
+        authKey = piKey . _Just
+        authToken = piOAuthToken . _Just
 
 instance GoogleRequest PlacementsInsert' where
         type Rs PlacementsInsert' = Placement
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlacementsInsert'{..}
-          = go _piQuotaUser (Just _piPrettyPrint) _piUserIp
+          = go _piQuotaUser (Just _piPrettyPrint) _piUserIP
               _piProfileId
               _piKey
-              _piOauthToken
+              _piOAuthToken
               _piFields
-              (Just _piAlt)
+              (Just AltJSON)
+              _piPlacement
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PlacementsInsertResource)

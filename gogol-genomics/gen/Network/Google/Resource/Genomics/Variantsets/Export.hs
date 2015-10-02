@@ -33,11 +33,11 @@ module Network.Google.Resource.Genomics.Variantsets.Export
     , veQuotaUser
     , vePrettyPrint
     , veVariantSetId
-    , veUserIp
+    , veUserIP
     , veKey
-    , veOauthToken
+    , veExportVariantSetRequest
+    , veOAuthToken
     , veFields
-    , veAlt
     ) where
 
 import           Network.Google.Genomics.Types
@@ -52,24 +52,25 @@ type VariantsetsExportResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :>
-                         Post '[JSON] ExportVariantSetResponse
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] ExportVariantSetRequest :>
+                           Post '[JSON] ExportVariantSetResponse
 
 -- | Exports variant set data to an external destination.
 --
 -- /See:/ 'variantsetsExport'' smart constructor.
 data VariantsetsExport' = VariantsetsExport'
-    { _veQuotaUser    :: !(Maybe Text)
-    , _vePrettyPrint  :: !Bool
-    , _veVariantSetId :: !Text
-    , _veUserIp       :: !(Maybe Text)
-    , _veKey          :: !(Maybe Text)
-    , _veOauthToken   :: !(Maybe Text)
-    , _veFields       :: !(Maybe Text)
-    , _veAlt          :: !Alt
+    { _veQuotaUser               :: !(Maybe Text)
+    , _vePrettyPrint             :: !Bool
+    , _veVariantSetId            :: !Text
+    , _veUserIP                  :: !(Maybe Text)
+    , _veKey                     :: !(Maybe Key)
+    , _veExportVariantSetRequest :: !ExportVariantSetRequest
+    , _veOAuthToken              :: !(Maybe OAuthToken)
+    , _veFields                  :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantsetsExport'' with the minimum fields required to make a request.
@@ -82,28 +83,29 @@ data VariantsetsExport' = VariantsetsExport'
 --
 -- * 'veVariantSetId'
 --
--- * 'veUserIp'
+-- * 'veUserIP'
 --
 -- * 'veKey'
 --
--- * 'veOauthToken'
+-- * 'veExportVariantSetRequest'
+--
+-- * 'veOAuthToken'
 --
 -- * 'veFields'
---
--- * 'veAlt'
 variantsetsExport'
     :: Text -- ^ 'variantSetId'
+    -> ExportVariantSetRequest -- ^ 'ExportVariantSetRequest'
     -> VariantsetsExport'
-variantsetsExport' pVeVariantSetId_ =
+variantsetsExport' pVeVariantSetId_ pVeExportVariantSetRequest_ =
     VariantsetsExport'
     { _veQuotaUser = Nothing
     , _vePrettyPrint = True
     , _veVariantSetId = pVeVariantSetId_
-    , _veUserIp = Nothing
+    , _veUserIP = Nothing
     , _veKey = Nothing
-    , _veOauthToken = Nothing
+    , _veExportVariantSetRequest = pVeExportVariantSetRequest_
+    , _veOAuthToken = Nothing
     , _veFields = Nothing
-    , _veAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -129,27 +131,33 @@ veVariantSetId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-veUserIp :: Lens' VariantsetsExport' (Maybe Text)
-veUserIp = lens _veUserIp (\ s a -> s{_veUserIp = a})
+veUserIP :: Lens' VariantsetsExport' (Maybe Text)
+veUserIP = lens _veUserIP (\ s a -> s{_veUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-veKey :: Lens' VariantsetsExport' (Maybe Text)
+veKey :: Lens' VariantsetsExport' (Maybe Key)
 veKey = lens _veKey (\ s a -> s{_veKey = a})
 
+-- | Multipart request metadata.
+veExportVariantSetRequest :: Lens' VariantsetsExport' ExportVariantSetRequest
+veExportVariantSetRequest
+  = lens _veExportVariantSetRequest
+      (\ s a -> s{_veExportVariantSetRequest = a})
+
 -- | OAuth 2.0 token for the current user.
-veOauthToken :: Lens' VariantsetsExport' (Maybe Text)
-veOauthToken
-  = lens _veOauthToken (\ s a -> s{_veOauthToken = a})
+veOAuthToken :: Lens' VariantsetsExport' (Maybe OAuthToken)
+veOAuthToken
+  = lens _veOAuthToken (\ s a -> s{_veOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 veFields :: Lens' VariantsetsExport' (Maybe Text)
 veFields = lens _veFields (\ s a -> s{_veFields = a})
 
--- | Data format for the response.
-veAlt :: Lens' VariantsetsExport' Alt
-veAlt = lens _veAlt (\ s a -> s{_veAlt = a})
+instance GoogleAuth VariantsetsExport' where
+        authKey = veKey . _Just
+        authToken = veOAuthToken . _Just
 
 instance GoogleRequest VariantsetsExport' where
         type Rs VariantsetsExport' = ExportVariantSetResponse
@@ -157,11 +165,12 @@ instance GoogleRequest VariantsetsExport' where
         requestWithRoute r u VariantsetsExport'{..}
           = go _veQuotaUser (Just _vePrettyPrint)
               _veVariantSetId
-              _veUserIp
+              _veUserIP
               _veKey
-              _veOauthToken
+              _veOAuthToken
               _veFields
-              (Just _veAlt)
+              (Just AltJSON)
+              _veExportVariantSetRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy VariantsetsExportResource)

@@ -34,12 +34,11 @@ module Network.Google.Resource.Analytics.Management.CustomMetrics.Get
     , mcmgPrettyPrint
     , mcmgCustomMetricId
     , mcmgWebPropertyId
-    , mcmgUserIp
+    , mcmgUserIP
     , mcmgAccountId
     , mcmgKey
-    , mcmgOauthToken
+    , mcmgOAuthToken
     , mcmgFields
-    , mcmgAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -58,10 +57,11 @@ type ManagementCustomMetricsGetResource =
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :> Get '[JSON] CustomMetric
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] CustomMetric
 
 -- | Get a custom metric to which the user has access.
 --
@@ -71,12 +71,11 @@ data ManagementCustomMetricsGet' = ManagementCustomMetricsGet'
     , _mcmgPrettyPrint    :: !Bool
     , _mcmgCustomMetricId :: !Text
     , _mcmgWebPropertyId  :: !Text
-    , _mcmgUserIp         :: !(Maybe Text)
+    , _mcmgUserIP         :: !(Maybe Text)
     , _mcmgAccountId      :: !Text
-    , _mcmgKey            :: !(Maybe Text)
-    , _mcmgOauthToken     :: !(Maybe Text)
+    , _mcmgKey            :: !(Maybe Key)
+    , _mcmgOAuthToken     :: !(Maybe OAuthToken)
     , _mcmgFields         :: !(Maybe Text)
-    , _mcmgAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementCustomMetricsGet'' with the minimum fields required to make a request.
@@ -91,17 +90,15 @@ data ManagementCustomMetricsGet' = ManagementCustomMetricsGet'
 --
 -- * 'mcmgWebPropertyId'
 --
--- * 'mcmgUserIp'
+-- * 'mcmgUserIP'
 --
 -- * 'mcmgAccountId'
 --
 -- * 'mcmgKey'
 --
--- * 'mcmgOauthToken'
+-- * 'mcmgOAuthToken'
 --
 -- * 'mcmgFields'
---
--- * 'mcmgAlt'
 managementCustomMetricsGet'
     :: Text -- ^ 'customMetricId'
     -> Text -- ^ 'webPropertyId'
@@ -113,12 +110,11 @@ managementCustomMetricsGet' pMcmgCustomMetricId_ pMcmgWebPropertyId_ pMcmgAccoun
     , _mcmgPrettyPrint = False
     , _mcmgCustomMetricId = pMcmgCustomMetricId_
     , _mcmgWebPropertyId = pMcmgWebPropertyId_
-    , _mcmgUserIp = Nothing
+    , _mcmgUserIP = Nothing
     , _mcmgAccountId = pMcmgAccountId_
     , _mcmgKey = Nothing
-    , _mcmgOauthToken = Nothing
+    , _mcmgOAuthToken = Nothing
     , _mcmgFields = Nothing
-    , _mcmgAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -149,9 +145,9 @@ mcmgWebPropertyId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mcmgUserIp :: Lens' ManagementCustomMetricsGet' (Maybe Text)
-mcmgUserIp
-  = lens _mcmgUserIp (\ s a -> s{_mcmgUserIp = a})
+mcmgUserIP :: Lens' ManagementCustomMetricsGet' (Maybe Text)
+mcmgUserIP
+  = lens _mcmgUserIP (\ s a -> s{_mcmgUserIP = a})
 
 -- | Account ID for the custom metric to retrieve.
 mcmgAccountId :: Lens' ManagementCustomMetricsGet' Text
@@ -162,23 +158,23 @@ mcmgAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mcmgKey :: Lens' ManagementCustomMetricsGet' (Maybe Text)
+mcmgKey :: Lens' ManagementCustomMetricsGet' (Maybe Key)
 mcmgKey = lens _mcmgKey (\ s a -> s{_mcmgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-mcmgOauthToken :: Lens' ManagementCustomMetricsGet' (Maybe Text)
-mcmgOauthToken
-  = lens _mcmgOauthToken
-      (\ s a -> s{_mcmgOauthToken = a})
+mcmgOAuthToken :: Lens' ManagementCustomMetricsGet' (Maybe OAuthToken)
+mcmgOAuthToken
+  = lens _mcmgOAuthToken
+      (\ s a -> s{_mcmgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 mcmgFields :: Lens' ManagementCustomMetricsGet' (Maybe Text)
 mcmgFields
   = lens _mcmgFields (\ s a -> s{_mcmgFields = a})
 
--- | Data format for the response.
-mcmgAlt :: Lens' ManagementCustomMetricsGet' Alt
-mcmgAlt = lens _mcmgAlt (\ s a -> s{_mcmgAlt = a})
+instance GoogleAuth ManagementCustomMetricsGet' where
+        authKey = mcmgKey . _Just
+        authToken = mcmgOAuthToken . _Just
 
 instance GoogleRequest ManagementCustomMetricsGet'
          where
@@ -188,12 +184,12 @@ instance GoogleRequest ManagementCustomMetricsGet'
           = go _mcmgQuotaUser (Just _mcmgPrettyPrint)
               _mcmgCustomMetricId
               _mcmgWebPropertyId
-              _mcmgUserIp
+              _mcmgUserIP
               _mcmgAccountId
               _mcmgKey
-              _mcmgOauthToken
+              _mcmgOAuthToken
               _mcmgFields
-              (Just _mcmgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ManagementCustomMetricsGetResource)

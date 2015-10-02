@@ -24,7 +24,7 @@ import           Network.Google.Prelude
 data ImageConfiguration = ImageConfiguration
     { _icResourceId :: !(Maybe Text)
     , _icKind       :: !Text
-    , _icUrl        :: !(Maybe Text)
+    , _icURL        :: !(Maybe Text)
     , _icImageType  :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -36,7 +36,7 @@ data ImageConfiguration = ImageConfiguration
 --
 -- * 'icKind'
 --
--- * 'icUrl'
+-- * 'icURL'
 --
 -- * 'icImageType'
 imageConfiguration
@@ -45,7 +45,7 @@ imageConfiguration =
     ImageConfiguration
     { _icResourceId = Nothing
     , _icKind = "gamesConfiguration#imageConfiguration"
-    , _icUrl = Nothing
+    , _icURL = Nothing
     , _icImageType = Nothing
     }
 
@@ -60,8 +60,8 @@ icKind :: Lens' ImageConfiguration Text
 icKind = lens _icKind (\ s a -> s{_icKind = a})
 
 -- | The url for this image.
-icUrl :: Lens' ImageConfiguration (Maybe Text)
-icUrl = lens _icUrl (\ s a -> s{_icUrl = a})
+icURL :: Lens' ImageConfiguration (Maybe Text)
+icURL = lens _icURL (\ s a -> s{_icURL = a})
 
 -- | The image type for the image.
 icImageType :: Lens' ImageConfiguration (Maybe Text)
@@ -84,7 +84,7 @@ instance ToJSON ImageConfiguration where
           = object
               (catMaybes
                  [("resourceId" .=) <$> _icResourceId,
-                  Just ("kind" .= _icKind), ("url" .=) <$> _icUrl,
+                  Just ("kind" .= _icKind), ("url" .=) <$> _icURL,
                   ("imageType" .=) <$> _icImageType])
 
 -- | This is a JSON template for a ListConfigurations response.
@@ -93,7 +93,7 @@ instance ToJSON ImageConfiguration where
 data LeaderboardConfigurationListResponse = LeaderboardConfigurationListResponse
     { _lclrNextPageToken :: !(Maybe Text)
     , _lclrKind          :: !Text
-    , _lclrItems         :: !(Maybe [Maybe LeaderboardConfiguration])
+    , _lclrItems         :: !(Maybe [LeaderboardConfiguration])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LeaderboardConfigurationListResponse' with the minimum fields required to make a request.
@@ -126,7 +126,7 @@ lclrKind :: Lens' LeaderboardConfigurationListResponse Text
 lclrKind = lens _lclrKind (\ s a -> s{_lclrKind = a})
 
 -- | The leaderboard configurations.
-lclrItems :: Lens' LeaderboardConfigurationListResponse [Maybe LeaderboardConfiguration]
+lclrItems :: Lens' LeaderboardConfigurationListResponse [LeaderboardConfiguration]
 lclrItems
   = lens _lclrItems (\ s a -> s{_lclrItems = a}) .
       _Default
@@ -156,12 +156,12 @@ instance ToJSON LeaderboardConfigurationListResponse
 --
 -- /See:/ 'gamesNumberAffixConfiguration' smart constructor.
 data GamesNumberAffixConfiguration = GamesNumberAffixConfiguration
-    { _gnacFew   :: !(Maybe (Maybe LocalizedStringBundle))
-    , _gnacOther :: !(Maybe (Maybe LocalizedStringBundle))
-    , _gnacTwo   :: !(Maybe (Maybe LocalizedStringBundle))
-    , _gnacOne   :: !(Maybe (Maybe LocalizedStringBundle))
-    , _gnacZero  :: !(Maybe (Maybe LocalizedStringBundle))
-    , _gnacMany  :: !(Maybe (Maybe LocalizedStringBundle))
+    { _gnacFew   :: !(Maybe LocalizedStringBundle)
+    , _gnacOther :: !(Maybe LocalizedStringBundle)
+    , _gnacTwo   :: !(Maybe LocalizedStringBundle)
+    , _gnacOne   :: !(Maybe LocalizedStringBundle)
+    , _gnacZero  :: !(Maybe LocalizedStringBundle)
+    , _gnacMany  :: !(Maybe LocalizedStringBundle)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GamesNumberAffixConfiguration' with the minimum fields required to make a request.
@@ -194,34 +194,34 @@ gamesNumberAffixConfiguration =
 -- | When the language requires special treatment of \"small\" numbers (as
 -- with 2, 3, and 4 in Czech; or numbers ending 2, 3, or 4 but not 12, 13,
 -- or 14 in Polish).
-gnacFew :: Lens' GamesNumberAffixConfiguration (Maybe (Maybe LocalizedStringBundle))
+gnacFew :: Lens' GamesNumberAffixConfiguration (Maybe LocalizedStringBundle)
 gnacFew = lens _gnacFew (\ s a -> s{_gnacFew = a})
 
 -- | When the language does not require special treatment of the given
 -- quantity (as with all numbers in Chinese, or 42 in English).
-gnacOther :: Lens' GamesNumberAffixConfiguration (Maybe (Maybe LocalizedStringBundle))
+gnacOther :: Lens' GamesNumberAffixConfiguration (Maybe LocalizedStringBundle)
 gnacOther
   = lens _gnacOther (\ s a -> s{_gnacOther = a})
 
 -- | When the language requires special treatment of numbers like two (as
 -- with 2 in Welsh, or 102 in Slovenian).
-gnacTwo :: Lens' GamesNumberAffixConfiguration (Maybe (Maybe LocalizedStringBundle))
+gnacTwo :: Lens' GamesNumberAffixConfiguration (Maybe LocalizedStringBundle)
 gnacTwo = lens _gnacTwo (\ s a -> s{_gnacTwo = a})
 
 -- | When the language requires special treatment of numbers like one (as
 -- with the number 1 in English and most other languages; in Russian, any
 -- number ending in 1 but not ending in 11 is in this class).
-gnacOne :: Lens' GamesNumberAffixConfiguration (Maybe (Maybe LocalizedStringBundle))
+gnacOne :: Lens' GamesNumberAffixConfiguration (Maybe LocalizedStringBundle)
 gnacOne = lens _gnacOne (\ s a -> s{_gnacOne = a})
 
 -- | When the language requires special treatment of the number 0 (as in
 -- Arabic).
-gnacZero :: Lens' GamesNumberAffixConfiguration (Maybe (Maybe LocalizedStringBundle))
+gnacZero :: Lens' GamesNumberAffixConfiguration (Maybe LocalizedStringBundle)
 gnacZero = lens _gnacZero (\ s a -> s{_gnacZero = a})
 
 -- | When the language requires special treatment of \"large\" numbers (as
 -- with numbers ending 11-99 in Maltese).
-gnacMany :: Lens' GamesNumberAffixConfiguration (Maybe (Maybe LocalizedStringBundle))
+gnacMany :: Lens' GamesNumberAffixConfiguration (Maybe LocalizedStringBundle)
 gnacMany = lens _gnacMany (\ s a -> s{_gnacMany = a})
 
 instance FromJSON GamesNumberAffixConfiguration where
@@ -249,7 +249,7 @@ instance ToJSON GamesNumberAffixConfiguration where
 data AchievementConfigurationListResponse = AchievementConfigurationListResponse
     { _aclrNextPageToken :: !(Maybe Text)
     , _aclrKind          :: !Text
-    , _aclrItems         :: !(Maybe [Maybe AchievementConfiguration])
+    , _aclrItems         :: !(Maybe [AchievementConfiguration])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementConfigurationListResponse' with the minimum fields required to make a request.
@@ -282,7 +282,7 @@ aclrKind :: Lens' AchievementConfigurationListResponse Text
 aclrKind = lens _aclrKind (\ s a -> s{_aclrKind = a})
 
 -- | The achievement configurations.
-aclrItems :: Lens' AchievementConfigurationListResponse [Maybe AchievementConfiguration]
+aclrItems :: Lens' AchievementConfigurationListResponse [AchievementConfiguration]
 aclrItems
   = lens _aclrItems (\ s a -> s{_aclrItems = a}) .
       _Default
@@ -314,10 +314,10 @@ instance ToJSON AchievementConfigurationListResponse
 data LeaderboardConfiguration = LeaderboardConfiguration
     { _lcScoreMax   :: !(Maybe Int64)
     , _lcKind       :: !Text
-    , _lcPublished  :: !(Maybe (Maybe LeaderboardConfigurationDetail))
+    , _lcPublished  :: !(Maybe LeaderboardConfigurationDetail)
     , _lcToken      :: !(Maybe Text)
     , _lcScoreMin   :: !(Maybe Int64)
-    , _lcDraft      :: !(Maybe (Maybe LeaderboardConfigurationDetail))
+    , _lcDraft      :: !(Maybe LeaderboardConfigurationDetail)
     , _lcId         :: !(Maybe Text)
     , _lcScoreOrder :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -366,7 +366,7 @@ lcKind :: Lens' LeaderboardConfiguration Text
 lcKind = lens _lcKind (\ s a -> s{_lcKind = a})
 
 -- | The read-only published data of the leaderboard.
-lcPublished :: Lens' LeaderboardConfiguration (Maybe (Maybe LeaderboardConfigurationDetail))
+lcPublished :: Lens' LeaderboardConfiguration (Maybe LeaderboardConfigurationDetail)
 lcPublished
   = lens _lcPublished (\ s a -> s{_lcPublished = a})
 
@@ -380,7 +380,7 @@ lcScoreMin
   = lens _lcScoreMin (\ s a -> s{_lcScoreMin = a})
 
 -- | The draft data of the leaderboard.
-lcDraft :: Lens' LeaderboardConfiguration (Maybe (Maybe LeaderboardConfigurationDetail))
+lcDraft :: Lens' LeaderboardConfiguration (Maybe LeaderboardConfigurationDetail)
 lcDraft = lens _lcDraft (\ s a -> s{_lcDraft = a})
 
 -- | The ID of the leaderboard.
@@ -428,10 +428,10 @@ data AchievementConfiguration = AchievementConfiguration
     { _acAchievementType :: !(Maybe Text)
     , _acStepsToUnlock   :: !(Maybe Int32)
     , _acKind            :: !Text
-    , _acPublished       :: !(Maybe (Maybe AchievementConfigurationDetail))
+    , _acPublished       :: !(Maybe AchievementConfigurationDetail)
     , _acToken           :: !(Maybe Text)
     , _acInitialState    :: !(Maybe Text)
-    , _acDraft           :: !(Maybe (Maybe AchievementConfigurationDetail))
+    , _acDraft           :: !(Maybe AchievementConfigurationDetail)
     , _acId              :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -488,7 +488,7 @@ acKind :: Lens' AchievementConfiguration Text
 acKind = lens _acKind (\ s a -> s{_acKind = a})
 
 -- | The read-only published data of the achievement.
-acPublished :: Lens' AchievementConfiguration (Maybe (Maybe AchievementConfigurationDetail))
+acPublished :: Lens' AchievementConfiguration (Maybe AchievementConfigurationDetail)
 acPublished
   = lens _acPublished (\ s a -> s{_acPublished = a})
 
@@ -505,7 +505,7 @@ acInitialState
       (\ s a -> s{_acInitialState = a})
 
 -- | The draft data of the achievement.
-acDraft :: Lens' AchievementConfiguration (Maybe (Maybe AchievementConfigurationDetail))
+acDraft :: Lens' AchievementConfiguration (Maybe AchievementConfigurationDetail)
 acDraft = lens _acDraft (\ s a -> s{_acDraft = a})
 
 -- | The ID of the achievement.
@@ -601,7 +601,7 @@ instance ToJSON LocalizedString where
 --
 -- /See:/ 'gamesNumberFormatConfiguration' smart constructor.
 data GamesNumberFormatConfiguration = GamesNumberFormatConfiguration
-    { _gnfcSuffix           :: !(Maybe (Maybe GamesNumberAffixConfiguration))
+    { _gnfcSuffix           :: !(Maybe GamesNumberAffixConfiguration)
     , _gnfcCurrencyCode     :: !(Maybe Text)
     , _gnfcNumberFormatType :: !(Maybe Text)
     , _gnfcNumDecimalPlaces :: !(Maybe Int32)
@@ -630,7 +630,7 @@ gamesNumberFormatConfiguration =
 
 -- | An optional suffix for the NUMERIC format type. These strings follow the
 -- same plural rules as all Android string resources.
-gnfcSuffix :: Lens' GamesNumberFormatConfiguration (Maybe (Maybe GamesNumberAffixConfiguration))
+gnfcSuffix :: Lens' GamesNumberFormatConfiguration (Maybe GamesNumberAffixConfiguration)
 gnfcSuffix
   = lens _gnfcSuffix (\ s a -> s{_gnfcSuffix = a})
 
@@ -682,10 +682,10 @@ instance ToJSON GamesNumberFormatConfiguration where
 -- /See:/ 'leaderboardConfigurationDetail' smart constructor.
 data LeaderboardConfigurationDetail = LeaderboardConfigurationDetail
     { _lcdKind        :: !Text
-    , _lcdScoreFormat :: !(Maybe (Maybe GamesNumberFormatConfiguration))
+    , _lcdScoreFormat :: !(Maybe GamesNumberFormatConfiguration)
     , _lcdSortRank    :: !(Maybe Int32)
-    , _lcdName        :: !(Maybe (Maybe LocalizedStringBundle))
-    , _lcdIconUrl     :: !(Maybe Text)
+    , _lcdName        :: !(Maybe LocalizedStringBundle)
+    , _lcdIconURL     :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LeaderboardConfigurationDetail' with the minimum fields required to make a request.
@@ -700,7 +700,7 @@ data LeaderboardConfigurationDetail = LeaderboardConfigurationDetail
 --
 -- * 'lcdName'
 --
--- * 'lcdIconUrl'
+-- * 'lcdIconURL'
 leaderboardConfigurationDetail
     :: LeaderboardConfigurationDetail
 leaderboardConfigurationDetail =
@@ -709,7 +709,7 @@ leaderboardConfigurationDetail =
     , _lcdScoreFormat = Nothing
     , _lcdSortRank = Nothing
     , _lcdName = Nothing
-    , _lcdIconUrl = Nothing
+    , _lcdIconURL = Nothing
     }
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
@@ -718,7 +718,7 @@ lcdKind :: Lens' LeaderboardConfigurationDetail Text
 lcdKind = lens _lcdKind (\ s a -> s{_lcdKind = a})
 
 -- | The score formatting for the leaderboard.
-lcdScoreFormat :: Lens' LeaderboardConfigurationDetail (Maybe (Maybe GamesNumberFormatConfiguration))
+lcdScoreFormat :: Lens' LeaderboardConfigurationDetail (Maybe GamesNumberFormatConfiguration)
 lcdScoreFormat
   = lens _lcdScoreFormat
       (\ s a -> s{_lcdScoreFormat = a})
@@ -729,13 +729,13 @@ lcdSortRank
   = lens _lcdSortRank (\ s a -> s{_lcdSortRank = a})
 
 -- | Localized strings for the leaderboard name.
-lcdName :: Lens' LeaderboardConfigurationDetail (Maybe (Maybe LocalizedStringBundle))
+lcdName :: Lens' LeaderboardConfigurationDetail (Maybe LocalizedStringBundle)
 lcdName = lens _lcdName (\ s a -> s{_lcdName = a})
 
 -- | The icon url of this leaderboard. Writes to this field are ignored.
-lcdIconUrl :: Lens' LeaderboardConfigurationDetail (Maybe Text)
-lcdIconUrl
-  = lens _lcdIconUrl (\ s a -> s{_lcdIconUrl = a})
+lcdIconURL :: Lens' LeaderboardConfigurationDetail (Maybe Text)
+lcdIconURL
+  = lens _lcdIconURL (\ s a -> s{_lcdIconURL = a})
 
 instance FromJSON LeaderboardConfigurationDetail
          where
@@ -758,14 +758,14 @@ instance ToJSON LeaderboardConfigurationDetail where
                   ("scoreFormat" .=) <$> _lcdScoreFormat,
                   ("sortRank" .=) <$> _lcdSortRank,
                   ("name" .=) <$> _lcdName,
-                  ("iconUrl" .=) <$> _lcdIconUrl])
+                  ("iconUrl" .=) <$> _lcdIconURL])
 
 -- | This is a JSON template for a localized string bundle resource.
 --
 -- /See:/ 'localizedStringBundle' smart constructor.
 data LocalizedStringBundle = LocalizedStringBundle
     { _lsbKind         :: !Text
-    , _lsbTranslations :: !(Maybe [Maybe LocalizedString])
+    , _lsbTranslations :: !(Maybe [LocalizedString])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LocalizedStringBundle' with the minimum fields required to make a request.
@@ -789,7 +789,7 @@ lsbKind :: Lens' LocalizedStringBundle Text
 lsbKind = lens _lsbKind (\ s a -> s{_lsbKind = a})
 
 -- | The locale strings.
-lsbTranslations :: Lens' LocalizedStringBundle [Maybe LocalizedString]
+lsbTranslations :: Lens' LocalizedStringBundle [LocalizedString]
 lsbTranslations
   = lens _lsbTranslations
       (\ s a -> s{_lsbTranslations = a})
@@ -818,10 +818,10 @@ instance ToJSON LocalizedStringBundle where
 data AchievementConfigurationDetail = AchievementConfigurationDetail
     { _acdKind        :: !Text
     , _acdSortRank    :: !(Maybe Int32)
-    , _acdName        :: !(Maybe (Maybe LocalizedStringBundle))
+    , _acdName        :: !(Maybe LocalizedStringBundle)
     , _acdPointValue  :: !(Maybe Int32)
-    , _acdIconUrl     :: !(Maybe Text)
-    , _acdDescription :: !(Maybe (Maybe LocalizedStringBundle))
+    , _acdIconURL     :: !(Maybe Text)
+    , _acdDescription :: !(Maybe LocalizedStringBundle)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementConfigurationDetail' with the minimum fields required to make a request.
@@ -836,7 +836,7 @@ data AchievementConfigurationDetail = AchievementConfigurationDetail
 --
 -- * 'acdPointValue'
 --
--- * 'acdIconUrl'
+-- * 'acdIconURL'
 --
 -- * 'acdDescription'
 achievementConfigurationDetail
@@ -847,7 +847,7 @@ achievementConfigurationDetail =
     , _acdSortRank = Nothing
     , _acdName = Nothing
     , _acdPointValue = Nothing
-    , _acdIconUrl = Nothing
+    , _acdIconURL = Nothing
     , _acdDescription = Nothing
     }
 
@@ -862,7 +862,7 @@ acdSortRank
   = lens _acdSortRank (\ s a -> s{_acdSortRank = a})
 
 -- | Localized strings for the achievement name.
-acdName :: Lens' AchievementConfigurationDetail (Maybe (Maybe LocalizedStringBundle))
+acdName :: Lens' AchievementConfigurationDetail (Maybe LocalizedStringBundle)
 acdName = lens _acdName (\ s a -> s{_acdName = a})
 
 -- | Point value for the achievement.
@@ -872,12 +872,12 @@ acdPointValue
       (\ s a -> s{_acdPointValue = a})
 
 -- | The icon url of this achievement. Writes to this field are ignored.
-acdIconUrl :: Lens' AchievementConfigurationDetail (Maybe Text)
-acdIconUrl
-  = lens _acdIconUrl (\ s a -> s{_acdIconUrl = a})
+acdIconURL :: Lens' AchievementConfigurationDetail (Maybe Text)
+acdIconURL
+  = lens _acdIconURL (\ s a -> s{_acdIconURL = a})
 
 -- | Localized strings for the achievement description.
-acdDescription :: Lens' AchievementConfigurationDetail (Maybe (Maybe LocalizedStringBundle))
+acdDescription :: Lens' AchievementConfigurationDetail (Maybe LocalizedStringBundle)
 acdDescription
   = lens _acdDescription
       (\ s a -> s{_acdDescription = a})
@@ -904,5 +904,5 @@ instance ToJSON AchievementConfigurationDetail where
                   ("sortRank" .=) <$> _acdSortRank,
                   ("name" .=) <$> _acdName,
                   ("pointValue" .=) <$> _acdPointValue,
-                  ("iconUrl" .=) <$> _acdIconUrl,
+                  ("iconUrl" .=) <$> _acdIconURL,
                   ("description" .=) <$> _acdDescription])

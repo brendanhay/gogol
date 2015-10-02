@@ -32,13 +32,13 @@ module Network.Google.Resource.Tasks.Tasks.Patch
     -- * Request Lenses
     , tpQuotaUser
     , tpPrettyPrint
-    , tpUserIp
+    , tpUserIP
     , tpKey
-    , tpTasklist
+    , tpTaskList
     , tpTask
-    , tpOauthToken
+    , tpTask
+    , tpOAuthToken
     , tpFields
-    , tpAlt
     ) where
 
 import           Network.Google.AppsTasks.Types
@@ -54,10 +54,11 @@ type TasksPatchResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Patch '[JSON] Task
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Task :> Patch '[JSON] Task
 
 -- | Updates the specified task. This method supports patch semantics.
 --
@@ -65,13 +66,13 @@ type TasksPatchResource =
 data TasksPatch' = TasksPatch'
     { _tpQuotaUser   :: !(Maybe Text)
     , _tpPrettyPrint :: !Bool
-    , _tpUserIp      :: !(Maybe Text)
-    , _tpKey         :: !(Maybe Text)
-    , _tpTasklist    :: !Text
+    , _tpUserIP      :: !(Maybe Text)
+    , _tpKey         :: !(Maybe Key)
+    , _tpTaskList    :: !Text
+    , _tpTask        :: !Task
     , _tpTask        :: !Text
-    , _tpOauthToken  :: !(Maybe Text)
+    , _tpOAuthToken  :: !(Maybe OAuthToken)
     , _tpFields      :: !(Maybe Text)
-    , _tpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TasksPatch'' with the minimum fields required to make a request.
@@ -82,34 +83,35 @@ data TasksPatch' = TasksPatch'
 --
 -- * 'tpPrettyPrint'
 --
--- * 'tpUserIp'
+-- * 'tpUserIP'
 --
 -- * 'tpKey'
 --
--- * 'tpTasklist'
+-- * 'tpTaskList'
 --
 -- * 'tpTask'
 --
--- * 'tpOauthToken'
+-- * 'tpTask'
+--
+-- * 'tpOAuthToken'
 --
 -- * 'tpFields'
---
--- * 'tpAlt'
 tasksPatch'
     :: Text -- ^ 'tasklist'
+    -> Task -- ^ 'Task'
     -> Text -- ^ 'task'
     -> TasksPatch'
-tasksPatch' pTpTasklist_ pTpTask_ =
+tasksPatch' pTpTaskList_ pTpTask_ pTpTask_ =
     TasksPatch'
     { _tpQuotaUser = Nothing
     , _tpPrettyPrint = True
-    , _tpUserIp = Nothing
+    , _tpUserIP = Nothing
     , _tpKey = Nothing
-    , _tpTasklist = pTpTasklist_
+    , _tpTaskList = pTpTaskList_
     , _tpTask = pTpTask_
-    , _tpOauthToken = Nothing
+    , _tpTask = pTpTask_
+    , _tpOAuthToken = Nothing
     , _tpFields = Nothing
-    , _tpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,48 +129,53 @@ tpPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tpUserIp :: Lens' TasksPatch' (Maybe Text)
-tpUserIp = lens _tpUserIp (\ s a -> s{_tpUserIp = a})
+tpUserIP :: Lens' TasksPatch' (Maybe Text)
+tpUserIP = lens _tpUserIP (\ s a -> s{_tpUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tpKey :: Lens' TasksPatch' (Maybe Text)
+tpKey :: Lens' TasksPatch' (Maybe Key)
 tpKey = lens _tpKey (\ s a -> s{_tpKey = a})
 
 -- | Task list identifier.
-tpTasklist :: Lens' TasksPatch' Text
-tpTasklist
-  = lens _tpTasklist (\ s a -> s{_tpTasklist = a})
+tpTaskList :: Lens' TasksPatch' Text
+tpTaskList
+  = lens _tpTaskList (\ s a -> s{_tpTaskList = a})
+
+-- | Multipart request metadata.
+tpTask :: Lens' TasksPatch' Task
+tpTask = lens _tpTask (\ s a -> s{_tpTask = a})
 
 -- | Task identifier.
 tpTask :: Lens' TasksPatch' Text
 tpTask = lens _tpTask (\ s a -> s{_tpTask = a})
 
 -- | OAuth 2.0 token for the current user.
-tpOauthToken :: Lens' TasksPatch' (Maybe Text)
-tpOauthToken
-  = lens _tpOauthToken (\ s a -> s{_tpOauthToken = a})
+tpOAuthToken :: Lens' TasksPatch' (Maybe OAuthToken)
+tpOAuthToken
+  = lens _tpOAuthToken (\ s a -> s{_tpOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 tpFields :: Lens' TasksPatch' (Maybe Text)
 tpFields = lens _tpFields (\ s a -> s{_tpFields = a})
 
--- | Data format for the response.
-tpAlt :: Lens' TasksPatch' Alt
-tpAlt = lens _tpAlt (\ s a -> s{_tpAlt = a})
+instance GoogleAuth TasksPatch' where
+        authKey = tpKey . _Just
+        authToken = tpOAuthToken . _Just
 
 instance GoogleRequest TasksPatch' where
         type Rs TasksPatch' = Task
         request = requestWithRoute defReq appsTasksURL
         requestWithRoute r u TasksPatch'{..}
-          = go _tpQuotaUser (Just _tpPrettyPrint) _tpUserIp
+          = go _tpQuotaUser (Just _tpPrettyPrint) _tpUserIP
               _tpKey
-              _tpTasklist
+              _tpTaskList
               _tpTask
-              _tpOauthToken
+              _tpOAuthToken
               _tpFields
-              (Just _tpAlt)
+              (Just AltJSON)
+              _tpTask
           where go
                   = clientWithRoute (Proxy :: Proxy TasksPatchResource)
                       r

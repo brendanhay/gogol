@@ -33,15 +33,14 @@ module Network.Google.Resource.DFAReporting.Cities.List
     , cQuotaUser
     , cPrettyPrint
     , cRegionDartIds
-    , cUserIp
+    , cUserIP
     , cProfileId
     , cNamePrefix
     , cKey
     , cCountryDartIds
     , cDartIds
-    , cOauthToken
+    , cOAuthToken
     , cFields
-    , cAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -58,12 +57,12 @@ type CitiesListResource =
                QueryParams "regionDartIds" Int64 :>
                  QueryParam "userIp" Text :>
                    QueryParam "namePrefix" Text :>
-                     QueryParam "key" Text :>
+                     QueryParam "key" Key :>
                        QueryParams "countryDartIds" Int64 :>
                          QueryParams "dartIds" Int64 :>
-                           QueryParam "oauth_token" Text :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :>
+                               QueryParam "alt" AltJSON :>
                                  Get '[JSON] CitiesListResponse
 
 -- | Retrieves a list of cities, possibly filtered.
@@ -73,15 +72,14 @@ data CitiesList' = CitiesList'
     { _cQuotaUser      :: !(Maybe Text)
     , _cPrettyPrint    :: !Bool
     , _cRegionDartIds  :: !(Maybe Int64)
-    , _cUserIp         :: !(Maybe Text)
+    , _cUserIP         :: !(Maybe Text)
     , _cProfileId      :: !Int64
     , _cNamePrefix     :: !(Maybe Text)
-    , _cKey            :: !(Maybe Text)
+    , _cKey            :: !(Maybe Key)
     , _cCountryDartIds :: !(Maybe Int64)
     , _cDartIds        :: !(Maybe Int64)
-    , _cOauthToken     :: !(Maybe Text)
+    , _cOAuthToken     :: !(Maybe OAuthToken)
     , _cFields         :: !(Maybe Text)
-    , _cAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CitiesList'' with the minimum fields required to make a request.
@@ -94,7 +92,7 @@ data CitiesList' = CitiesList'
 --
 -- * 'cRegionDartIds'
 --
--- * 'cUserIp'
+-- * 'cUserIP'
 --
 -- * 'cProfileId'
 --
@@ -106,11 +104,9 @@ data CitiesList' = CitiesList'
 --
 -- * 'cDartIds'
 --
--- * 'cOauthToken'
+-- * 'cOAuthToken'
 --
 -- * 'cFields'
---
--- * 'cAlt'
 citiesList'
     :: Int64 -- ^ 'profileId'
     -> CitiesList'
@@ -119,15 +115,14 @@ citiesList' pCProfileId_ =
     { _cQuotaUser = Nothing
     , _cPrettyPrint = True
     , _cRegionDartIds = Nothing
-    , _cUserIp = Nothing
+    , _cUserIP = Nothing
     , _cProfileId = pCProfileId_
     , _cNamePrefix = Nothing
     , _cKey = Nothing
     , _cCountryDartIds = Nothing
     , _cDartIds = Nothing
-    , _cOauthToken = Nothing
+    , _cOAuthToken = Nothing
     , _cFields = Nothing
-    , _cAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,8 +145,8 @@ cRegionDartIds
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cUserIp :: Lens' CitiesList' (Maybe Text)
-cUserIp = lens _cUserIp (\ s a -> s{_cUserIp = a})
+cUserIP :: Lens' CitiesList' (Maybe Text)
+cUserIP = lens _cUserIP (\ s a -> s{_cUserIP = a})
 
 -- | User profile ID associated with this request.
 cProfileId :: Lens' CitiesList' Int64
@@ -166,7 +161,7 @@ cNamePrefix
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cKey :: Lens' CitiesList' (Maybe Text)
+cKey :: Lens' CitiesList' (Maybe Key)
 cKey = lens _cKey (\ s a -> s{_cKey = a})
 
 -- | Select only cities from these countries.
@@ -180,32 +175,32 @@ cDartIds :: Lens' CitiesList' (Maybe Int64)
 cDartIds = lens _cDartIds (\ s a -> s{_cDartIds = a})
 
 -- | OAuth 2.0 token for the current user.
-cOauthToken :: Lens' CitiesList' (Maybe Text)
-cOauthToken
-  = lens _cOauthToken (\ s a -> s{_cOauthToken = a})
+cOAuthToken :: Lens' CitiesList' (Maybe OAuthToken)
+cOAuthToken
+  = lens _cOAuthToken (\ s a -> s{_cOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cFields :: Lens' CitiesList' (Maybe Text)
 cFields = lens _cFields (\ s a -> s{_cFields = a})
 
--- | Data format for the response.
-cAlt :: Lens' CitiesList' Alt
-cAlt = lens _cAlt (\ s a -> s{_cAlt = a})
+instance GoogleAuth CitiesList' where
+        authKey = cKey . _Just
+        authToken = cOAuthToken . _Just
 
 instance GoogleRequest CitiesList' where
         type Rs CitiesList' = CitiesListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CitiesList'{..}
           = go _cQuotaUser (Just _cPrettyPrint) _cRegionDartIds
-              _cUserIp
+              _cUserIP
               _cProfileId
               _cNamePrefix
               _cKey
               _cCountryDartIds
               _cDartIds
-              _cOauthToken
+              _cOAuthToken
               _cFields
-              (Just _cAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy CitiesListResource)
                       r

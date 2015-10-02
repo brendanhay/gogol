@@ -34,13 +34,13 @@ module Network.Google.Resource.FusionTables.Table.Patch
     -- * Request Lenses
     , tppQuotaUser
     , tppPrettyPrint
-    , tppUserIp
+    , tppUserIP
     , tppReplaceViewDefinition
     , tppKey
-    , tppOauthToken
+    , tppOAuthToken
     , tppTableId
+    , tppTable
     , tppFields
-    , tppAlt
     ) where
 
 import           Network.Google.FusionTables.Types
@@ -55,10 +55,11 @@ type TablePatchResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "replaceViewDefinition" Bool :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Patch '[JSON] Table
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Table :> Patch '[JSON] Table
 
 -- | Updates an existing table. Unless explicitly requested, only the name,
 -- description, and attribution will be updated. This method supports patch
@@ -68,13 +69,13 @@ type TablePatchResource =
 data TablePatch' = TablePatch'
     { _tppQuotaUser             :: !(Maybe Text)
     , _tppPrettyPrint           :: !Bool
-    , _tppUserIp                :: !(Maybe Text)
+    , _tppUserIP                :: !(Maybe Text)
     , _tppReplaceViewDefinition :: !(Maybe Bool)
-    , _tppKey                   :: !(Maybe Text)
-    , _tppOauthToken            :: !(Maybe Text)
+    , _tppKey                   :: !(Maybe Key)
+    , _tppOAuthToken            :: !(Maybe OAuthToken)
     , _tppTableId               :: !Text
+    , _tppTable                 :: !Table
     , _tppFields                :: !(Maybe Text)
-    , _tppAlt                   :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablePatch'' with the minimum fields required to make a request.
@@ -85,33 +86,34 @@ data TablePatch' = TablePatch'
 --
 -- * 'tppPrettyPrint'
 --
--- * 'tppUserIp'
+-- * 'tppUserIP'
 --
 -- * 'tppReplaceViewDefinition'
 --
 -- * 'tppKey'
 --
--- * 'tppOauthToken'
+-- * 'tppOAuthToken'
 --
 -- * 'tppTableId'
 --
--- * 'tppFields'
+-- * 'tppTable'
 --
--- * 'tppAlt'
+-- * 'tppFields'
 tablePatch'
     :: Text -- ^ 'tableId'
+    -> Table -- ^ 'Table'
     -> TablePatch'
-tablePatch' pTppTableId_ =
+tablePatch' pTppTableId_ pTppTable_ =
     TablePatch'
     { _tppQuotaUser = Nothing
     , _tppPrettyPrint = True
-    , _tppUserIp = Nothing
+    , _tppUserIP = Nothing
     , _tppReplaceViewDefinition = Nothing
     , _tppKey = Nothing
-    , _tppOauthToken = Nothing
+    , _tppOAuthToken = Nothing
     , _tppTableId = pTppTableId_
+    , _tppTable = pTppTable_
     , _tppFields = Nothing
-    , _tppAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -129,9 +131,9 @@ tppPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tppUserIp :: Lens' TablePatch' (Maybe Text)
-tppUserIp
-  = lens _tppUserIp (\ s a -> s{_tppUserIp = a})
+tppUserIP :: Lens' TablePatch' (Maybe Text)
+tppUserIP
+  = lens _tppUserIP (\ s a -> s{_tppUserIP = a})
 
 -- | Whether the view definition is also updated. The specified view
 -- definition replaces the existing one. Only a view can be updated with a
@@ -144,40 +146,45 @@ tppReplaceViewDefinition
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tppKey :: Lens' TablePatch' (Maybe Text)
+tppKey :: Lens' TablePatch' (Maybe Key)
 tppKey = lens _tppKey (\ s a -> s{_tppKey = a})
 
 -- | OAuth 2.0 token for the current user.
-tppOauthToken :: Lens' TablePatch' (Maybe Text)
-tppOauthToken
-  = lens _tppOauthToken
-      (\ s a -> s{_tppOauthToken = a})
+tppOAuthToken :: Lens' TablePatch' (Maybe OAuthToken)
+tppOAuthToken
+  = lens _tppOAuthToken
+      (\ s a -> s{_tppOAuthToken = a})
 
 -- | ID of the table that is being updated.
 tppTableId :: Lens' TablePatch' Text
 tppTableId
   = lens _tppTableId (\ s a -> s{_tppTableId = a})
 
+-- | Multipart request metadata.
+tppTable :: Lens' TablePatch' Table
+tppTable = lens _tppTable (\ s a -> s{_tppTable = a})
+
 -- | Selector specifying which fields to include in a partial response.
 tppFields :: Lens' TablePatch' (Maybe Text)
 tppFields
   = lens _tppFields (\ s a -> s{_tppFields = a})
 
--- | Data format for the response.
-tppAlt :: Lens' TablePatch' Alt
-tppAlt = lens _tppAlt (\ s a -> s{_tppAlt = a})
+instance GoogleAuth TablePatch' where
+        authKey = tppKey . _Just
+        authToken = tppOAuthToken . _Just
 
 instance GoogleRequest TablePatch' where
         type Rs TablePatch' = Table
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u TablePatch'{..}
-          = go _tppQuotaUser (Just _tppPrettyPrint) _tppUserIp
+          = go _tppQuotaUser (Just _tppPrettyPrint) _tppUserIP
               _tppReplaceViewDefinition
               _tppKey
-              _tppOauthToken
+              _tppOAuthToken
               _tppTableId
               _tppFields
-              (Just _tppAlt)
+              (Just AltJSON)
+              _tppTable
           where go
                   = clientWithRoute (Proxy :: Proxy TablePatchResource)
                       r

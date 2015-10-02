@@ -32,13 +32,13 @@ module Network.Google.Resource.Genomics.Variants.Update
 
     -- * Request Lenses
     , vuQuotaUser
+    , vuVariant
     , vuPrettyPrint
-    , vuUserIp
+    , vuUserIP
     , vuKey
     , vuVariantId
-    , vuOauthToken
+    , vuOAuthToken
     , vuFields
-    , vuAlt
     ) where
 
 import           Network.Google.Genomics.Types
@@ -52,10 +52,11 @@ type VariantsUpdateResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Put '[JSON] Variant
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Variant :> Put '[JSON] Variant
 
 -- | Updates a variant\'s names and info fields. All other modifications are
 -- silently ignored. Returns the modified variant without its calls.
@@ -63,13 +64,13 @@ type VariantsUpdateResource =
 -- /See:/ 'variantsUpdate'' smart constructor.
 data VariantsUpdate' = VariantsUpdate'
     { _vuQuotaUser   :: !(Maybe Text)
+    , _vuVariant     :: !Variant
     , _vuPrettyPrint :: !Bool
-    , _vuUserIp      :: !(Maybe Text)
-    , _vuKey         :: !(Maybe Text)
+    , _vuUserIP      :: !(Maybe Text)
+    , _vuKey         :: !(Maybe Key)
     , _vuVariantId   :: !Text
-    , _vuOauthToken  :: !(Maybe Text)
+    , _vuOAuthToken  :: !(Maybe OAuthToken)
     , _vuFields      :: !(Maybe Text)
-    , _vuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantsUpdate'' with the minimum fields required to make a request.
@@ -78,32 +79,33 @@ data VariantsUpdate' = VariantsUpdate'
 --
 -- * 'vuQuotaUser'
 --
+-- * 'vuVariant'
+--
 -- * 'vuPrettyPrint'
 --
--- * 'vuUserIp'
+-- * 'vuUserIP'
 --
 -- * 'vuKey'
 --
 -- * 'vuVariantId'
 --
--- * 'vuOauthToken'
+-- * 'vuOAuthToken'
 --
 -- * 'vuFields'
---
--- * 'vuAlt'
 variantsUpdate'
-    :: Text -- ^ 'variantId'
+    :: Variant -- ^ 'Variant'
+    -> Text -- ^ 'variantId'
     -> VariantsUpdate'
-variantsUpdate' pVuVariantId_ =
+variantsUpdate' pVuVariant_ pVuVariantId_ =
     VariantsUpdate'
     { _vuQuotaUser = Nothing
+    , _vuVariant = pVuVariant_
     , _vuPrettyPrint = True
-    , _vuUserIp = Nothing
+    , _vuUserIP = Nothing
     , _vuKey = Nothing
     , _vuVariantId = pVuVariantId_
-    , _vuOauthToken = Nothing
+    , _vuOAuthToken = Nothing
     , _vuFields = Nothing
-    , _vuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -113,6 +115,11 @@ vuQuotaUser :: Lens' VariantsUpdate' (Maybe Text)
 vuQuotaUser
   = lens _vuQuotaUser (\ s a -> s{_vuQuotaUser = a})
 
+-- | Multipart request metadata.
+vuVariant :: Lens' VariantsUpdate' Variant
+vuVariant
+  = lens _vuVariant (\ s a -> s{_vuVariant = a})
+
 -- | Returns response with indentations and line breaks.
 vuPrettyPrint :: Lens' VariantsUpdate' Bool
 vuPrettyPrint
@@ -121,13 +128,13 @@ vuPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-vuUserIp :: Lens' VariantsUpdate' (Maybe Text)
-vuUserIp = lens _vuUserIp (\ s a -> s{_vuUserIp = a})
+vuUserIP :: Lens' VariantsUpdate' (Maybe Text)
+vuUserIP = lens _vuUserIP (\ s a -> s{_vuUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vuKey :: Lens' VariantsUpdate' (Maybe Text)
+vuKey :: Lens' VariantsUpdate' (Maybe Key)
 vuKey = lens _vuKey (\ s a -> s{_vuKey = a})
 
 -- | The ID of the variant to be updated.
@@ -136,28 +143,29 @@ vuVariantId
   = lens _vuVariantId (\ s a -> s{_vuVariantId = a})
 
 -- | OAuth 2.0 token for the current user.
-vuOauthToken :: Lens' VariantsUpdate' (Maybe Text)
-vuOauthToken
-  = lens _vuOauthToken (\ s a -> s{_vuOauthToken = a})
+vuOAuthToken :: Lens' VariantsUpdate' (Maybe OAuthToken)
+vuOAuthToken
+  = lens _vuOAuthToken (\ s a -> s{_vuOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 vuFields :: Lens' VariantsUpdate' (Maybe Text)
 vuFields = lens _vuFields (\ s a -> s{_vuFields = a})
 
--- | Data format for the response.
-vuAlt :: Lens' VariantsUpdate' Alt
-vuAlt = lens _vuAlt (\ s a -> s{_vuAlt = a})
+instance GoogleAuth VariantsUpdate' where
+        authKey = vuKey . _Just
+        authToken = vuOAuthToken . _Just
 
 instance GoogleRequest VariantsUpdate' where
         type Rs VariantsUpdate' = Variant
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u VariantsUpdate'{..}
-          = go _vuQuotaUser (Just _vuPrettyPrint) _vuUserIp
+          = go _vuQuotaUser (Just _vuPrettyPrint) _vuUserIP
               _vuKey
               _vuVariantId
-              _vuOauthToken
+              _vuOAuthToken
               _vuFields
-              (Just _vuAlt)
+              (Just AltJSON)
+              _vuVariant
           where go
                   = clientWithRoute
                       (Proxy :: Proxy VariantsUpdateResource)

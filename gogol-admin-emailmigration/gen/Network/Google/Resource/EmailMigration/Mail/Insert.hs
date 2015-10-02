@@ -30,14 +30,15 @@ module Network.Google.Resource.EmailMigration.Mail.Insert
     , MailInsert'
 
     -- * Request Lenses
+    , miMailItem
     , miQuotaUser
     , miPrettyPrint
-    , miUserIp
+    , miUserIP
+    , miMedia
     , miKey
-    , miOauthToken
+    , miOAuthToken
     , miUserKey
     , miFields
-    , miAlt
     ) where
 
 import           Network.Google.AdminEmailMigration.Types
@@ -51,58 +52,71 @@ type MailInsertResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Post '[JSON] ()
+                     QueryParam "alt" AltJSON :>
+                       MultipartRelated '[JSON] MailItem Body :>
+                         Post '[JSON] ()
 
 -- | Insert Mail into Google\'s Gmail backends
 --
 -- /See:/ 'mailInsert'' smart constructor.
 data MailInsert' = MailInsert'
-    { _miQuotaUser   :: !(Maybe Text)
+    { _miMailItem    :: !MailItem
+    , _miQuotaUser   :: !(Maybe Text)
     , _miPrettyPrint :: !Bool
-    , _miUserIp      :: !(Maybe Text)
-    , _miKey         :: !(Maybe Text)
-    , _miOauthToken  :: !(Maybe Text)
+    , _miUserIP      :: !(Maybe Text)
+    , _miMedia       :: !Body
+    , _miKey         :: !(Maybe Key)
+    , _miOAuthToken  :: !(Maybe OAuthToken)
     , _miUserKey     :: !Text
     , _miFields      :: !(Maybe Text)
-    , _miAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MailInsert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
+-- * 'miMailItem'
+--
 -- * 'miQuotaUser'
 --
 -- * 'miPrettyPrint'
 --
--- * 'miUserIp'
+-- * 'miUserIP'
+--
+-- * 'miMedia'
 --
 -- * 'miKey'
 --
--- * 'miOauthToken'
+-- * 'miOAuthToken'
 --
 -- * 'miUserKey'
 --
 -- * 'miFields'
---
--- * 'miAlt'
 mailInsert'
-    :: Text -- ^ 'userKey'
+    :: MailItem -- ^ 'MailItem'
+    -> Body -- ^ 'media'
+    -> Text -- ^ 'userKey'
     -> MailInsert'
-mailInsert' pMiUserKey_ =
+mailInsert' pMiMailItem_ pMiMedia_ pMiUserKey_ =
     MailInsert'
-    { _miQuotaUser = Nothing
+    { _miMailItem = pMiMailItem_
+    , _miQuotaUser = Nothing
     , _miPrettyPrint = True
-    , _miUserIp = Nothing
+    , _miUserIP = Nothing
+    , _miMedia = pMiMedia_
     , _miKey = Nothing
-    , _miOauthToken = Nothing
+    , _miOAuthToken = Nothing
     , _miUserKey = pMiUserKey_
     , _miFields = Nothing
-    , _miAlt = JSON
     }
+
+-- | Multipart request metadata.
+miMailItem :: Lens' MailInsert' MailItem
+miMailItem
+  = lens _miMailItem (\ s a -> s{_miMailItem = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -119,19 +133,22 @@ miPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-miUserIp :: Lens' MailInsert' (Maybe Text)
-miUserIp = lens _miUserIp (\ s a -> s{_miUserIp = a})
+miUserIP :: Lens' MailInsert' (Maybe Text)
+miUserIP = lens _miUserIP (\ s a -> s{_miUserIP = a})
+
+miMedia :: Lens' MailInsert' Body
+miMedia = lens _miMedia (\ s a -> s{_miMedia = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-miKey :: Lens' MailInsert' (Maybe Text)
+miKey :: Lens' MailInsert' (Maybe Key)
 miKey = lens _miKey (\ s a -> s{_miKey = a})
 
 -- | OAuth 2.0 token for the current user.
-miOauthToken :: Lens' MailInsert' (Maybe Text)
-miOauthToken
-  = lens _miOauthToken (\ s a -> s{_miOauthToken = a})
+miOAuthToken :: Lens' MailInsert' (Maybe OAuthToken)
+miOAuthToken
+  = lens _miOAuthToken (\ s a -> s{_miOAuthToken = a})
 
 -- | The email or immutable id of the user
 miUserKey :: Lens' MailInsert' Text
@@ -142,21 +159,23 @@ miUserKey
 miFields :: Lens' MailInsert' (Maybe Text)
 miFields = lens _miFields (\ s a -> s{_miFields = a})
 
--- | Data format for the response.
-miAlt :: Lens' MailInsert' Alt
-miAlt = lens _miAlt (\ s a -> s{_miAlt = a})
+instance GoogleAuth MailInsert' where
+        authKey = miKey . _Just
+        authToken = miOAuthToken . _Just
 
 instance GoogleRequest MailInsert' where
         type Rs MailInsert' = ()
         request
           = requestWithRoute defReq adminEmailMigrationURL
         requestWithRoute r u MailInsert'{..}
-          = go _miQuotaUser (Just _miPrettyPrint) _miUserIp
+          = go _miQuotaUser (Just _miPrettyPrint) _miUserIP
+              _miMedia
               _miKey
-              _miOauthToken
+              _miOAuthToken
               _miUserKey
               _miFields
-              (Just _miAlt)
+              (Just AltJSON)
+              _miMailItem
           where go
                   = clientWithRoute (Proxy :: Proxy MailInsertResource)
                       r

@@ -33,14 +33,13 @@ module Network.Google.Resource.Compute.ForwardingRules.AggregatedList
     , fralQuotaUser
     , fralPrettyPrint
     , fralProject
-    , fralUserIp
+    , fralUserIP
     , fralKey
     , fralFilter
     , fralPageToken
-    , fralOauthToken
+    , fralOAuthToken
     , fralMaxResults
     , fralFields
-    , fralAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -55,13 +54,13 @@ type ForwardingRulesAggregatedListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "filter" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "maxResults" Word32 :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :>
+                             QueryParam "alt" AltJSON :>
                                Get '[JSON] ForwardingRuleAggregatedList
 
 -- | Retrieves the list of forwarding rules grouped by scope.
@@ -71,14 +70,13 @@ data ForwardingRulesAggregatedList' = ForwardingRulesAggregatedList'
     { _fralQuotaUser   :: !(Maybe Text)
     , _fralPrettyPrint :: !Bool
     , _fralProject     :: !Text
-    , _fralUserIp      :: !(Maybe Text)
-    , _fralKey         :: !(Maybe Text)
+    , _fralUserIP      :: !(Maybe Text)
+    , _fralKey         :: !(Maybe Key)
     , _fralFilter      :: !(Maybe Text)
     , _fralPageToken   :: !(Maybe Text)
-    , _fralOauthToken  :: !(Maybe Text)
+    , _fralOAuthToken  :: !(Maybe OAuthToken)
     , _fralMaxResults  :: !Word32
     , _fralFields      :: !(Maybe Text)
-    , _fralAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ForwardingRulesAggregatedList'' with the minimum fields required to make a request.
@@ -91,7 +89,7 @@ data ForwardingRulesAggregatedList' = ForwardingRulesAggregatedList'
 --
 -- * 'fralProject'
 --
--- * 'fralUserIp'
+-- * 'fralUserIP'
 --
 -- * 'fralKey'
 --
@@ -99,13 +97,11 @@ data ForwardingRulesAggregatedList' = ForwardingRulesAggregatedList'
 --
 -- * 'fralPageToken'
 --
--- * 'fralOauthToken'
+-- * 'fralOAuthToken'
 --
 -- * 'fralMaxResults'
 --
 -- * 'fralFields'
---
--- * 'fralAlt'
 forwardingRulesAggregatedList'
     :: Text -- ^ 'project'
     -> ForwardingRulesAggregatedList'
@@ -114,14 +110,13 @@ forwardingRulesAggregatedList' pFralProject_ =
     { _fralQuotaUser = Nothing
     , _fralPrettyPrint = True
     , _fralProject = pFralProject_
-    , _fralUserIp = Nothing
+    , _fralUserIP = Nothing
     , _fralKey = Nothing
     , _fralFilter = Nothing
     , _fralPageToken = Nothing
-    , _fralOauthToken = Nothing
+    , _fralOAuthToken = Nothing
     , _fralMaxResults = 500
     , _fralFields = Nothing
-    , _fralAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -145,14 +140,14 @@ fralProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-fralUserIp :: Lens' ForwardingRulesAggregatedList' (Maybe Text)
-fralUserIp
-  = lens _fralUserIp (\ s a -> s{_fralUserIp = a})
+fralUserIP :: Lens' ForwardingRulesAggregatedList' (Maybe Text)
+fralUserIP
+  = lens _fralUserIP (\ s a -> s{_fralUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fralKey :: Lens' ForwardingRulesAggregatedList' (Maybe Text)
+fralKey :: Lens' ForwardingRulesAggregatedList' (Maybe Key)
 fralKey = lens _fralKey (\ s a -> s{_fralKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
@@ -179,10 +174,10 @@ fralPageToken
       (\ s a -> s{_fralPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-fralOauthToken :: Lens' ForwardingRulesAggregatedList' (Maybe Text)
-fralOauthToken
-  = lens _fralOauthToken
-      (\ s a -> s{_fralOauthToken = a})
+fralOAuthToken :: Lens' ForwardingRulesAggregatedList' (Maybe OAuthToken)
+fralOAuthToken
+  = lens _fralOAuthToken
+      (\ s a -> s{_fralOAuthToken = a})
 
 -- | Maximum count of results to be returned.
 fralMaxResults :: Lens' ForwardingRulesAggregatedList' Word32
@@ -195,9 +190,10 @@ fralFields :: Lens' ForwardingRulesAggregatedList' (Maybe Text)
 fralFields
   = lens _fralFields (\ s a -> s{_fralFields = a})
 
--- | Data format for the response.
-fralAlt :: Lens' ForwardingRulesAggregatedList' Alt
-fralAlt = lens _fralAlt (\ s a -> s{_fralAlt = a})
+instance GoogleAuth ForwardingRulesAggregatedList'
+         where
+        authKey = fralKey . _Just
+        authToken = fralOAuthToken . _Just
 
 instance GoogleRequest ForwardingRulesAggregatedList'
          where
@@ -208,14 +204,14 @@ instance GoogleRequest ForwardingRulesAggregatedList'
           ForwardingRulesAggregatedList'{..}
           = go _fralQuotaUser (Just _fralPrettyPrint)
               _fralProject
-              _fralUserIp
+              _fralUserIP
               _fralKey
               _fralFilter
               _fralPageToken
-              _fralOauthToken
+              _fralOAuthToken
               (Just _fralMaxResults)
               _fralFields
-              (Just _fralAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

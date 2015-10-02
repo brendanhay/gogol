@@ -19,7 +19,7 @@
 --
 -- | Retrieve the list of saved columns for a specified advertiser.
 --
--- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @DoubleclicksearchSavedColumnsList@.
+-- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @DoubleClicksearchSavedColumnsList@.
 module Network.Google.Resource.DoubleClickSearch.SavedColumns.List
     (
     -- * REST Resource
@@ -33,18 +33,17 @@ module Network.Google.Resource.DoubleClickSearch.SavedColumns.List
     , sclQuotaUser
     , sclPrettyPrint
     , sclAgencyId
-    , sclUserIp
+    , sclUserIP
     , sclAdvertiserId
     , sclKey
-    , sclOauthToken
+    , sclOAuthToken
     , sclFields
-    , sclAlt
     ) where
 
 import           Network.Google.DoubleClickSearch.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DoubleclicksearchSavedColumnsList@ which the
+-- | A resource alias for @DoubleClicksearchSavedColumnsList@ which the
 -- 'SavedColumnsList'' request conforms to.
 type SavedColumnsListResource =
      "agency" :>
@@ -55,10 +54,11 @@ type SavedColumnsListResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Get '[JSON] SavedColumnList
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] SavedColumnList
 
 -- | Retrieve the list of saved columns for a specified advertiser.
 --
@@ -67,12 +67,11 @@ data SavedColumnsList' = SavedColumnsList'
     { _sclQuotaUser    :: !(Maybe Text)
     , _sclPrettyPrint  :: !Bool
     , _sclAgencyId     :: !Int64
-    , _sclUserIp       :: !(Maybe Text)
+    , _sclUserIP       :: !(Maybe Text)
     , _sclAdvertiserId :: !Int64
-    , _sclKey          :: !(Maybe Text)
-    , _sclOauthToken   :: !(Maybe Text)
+    , _sclKey          :: !(Maybe Key)
+    , _sclOAuthToken   :: !(Maybe OAuthToken)
     , _sclFields       :: !(Maybe Text)
-    , _sclAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SavedColumnsList'' with the minimum fields required to make a request.
@@ -85,17 +84,15 @@ data SavedColumnsList' = SavedColumnsList'
 --
 -- * 'sclAgencyId'
 --
--- * 'sclUserIp'
+-- * 'sclUserIP'
 --
 -- * 'sclAdvertiserId'
 --
 -- * 'sclKey'
 --
--- * 'sclOauthToken'
+-- * 'sclOAuthToken'
 --
 -- * 'sclFields'
---
--- * 'sclAlt'
 savedColumnsList'
     :: Int64 -- ^ 'agencyId'
     -> Int64 -- ^ 'advertiserId'
@@ -105,12 +102,11 @@ savedColumnsList' pSclAgencyId_ pSclAdvertiserId_ =
     { _sclQuotaUser = Nothing
     , _sclPrettyPrint = True
     , _sclAgencyId = pSclAgencyId_
-    , _sclUserIp = Nothing
+    , _sclUserIP = Nothing
     , _sclAdvertiserId = pSclAdvertiserId_
     , _sclKey = Nothing
-    , _sclOauthToken = Nothing
+    , _sclOAuthToken = Nothing
     , _sclFields = Nothing
-    , _sclAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -133,9 +129,9 @@ sclAgencyId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-sclUserIp :: Lens' SavedColumnsList' (Maybe Text)
-sclUserIp
-  = lens _sclUserIp (\ s a -> s{_sclUserIp = a})
+sclUserIP :: Lens' SavedColumnsList' (Maybe Text)
+sclUserIP
+  = lens _sclUserIP (\ s a -> s{_sclUserIP = a})
 
 -- | DS ID of the advertiser.
 sclAdvertiserId :: Lens' SavedColumnsList' Int64
@@ -146,23 +142,23 @@ sclAdvertiserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-sclKey :: Lens' SavedColumnsList' (Maybe Text)
+sclKey :: Lens' SavedColumnsList' (Maybe Key)
 sclKey = lens _sclKey (\ s a -> s{_sclKey = a})
 
 -- | OAuth 2.0 token for the current user.
-sclOauthToken :: Lens' SavedColumnsList' (Maybe Text)
-sclOauthToken
-  = lens _sclOauthToken
-      (\ s a -> s{_sclOauthToken = a})
+sclOAuthToken :: Lens' SavedColumnsList' (Maybe OAuthToken)
+sclOAuthToken
+  = lens _sclOAuthToken
+      (\ s a -> s{_sclOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 sclFields :: Lens' SavedColumnsList' (Maybe Text)
 sclFields
   = lens _sclFields (\ s a -> s{_sclFields = a})
 
--- | Data format for the response.
-sclAlt :: Lens' SavedColumnsList' Alt
-sclAlt = lens _sclAlt (\ s a -> s{_sclAlt = a})
+instance GoogleAuth SavedColumnsList' where
+        authKey = sclKey . _Just
+        authToken = sclOAuthToken . _Just
 
 instance GoogleRequest SavedColumnsList' where
         type Rs SavedColumnsList' = SavedColumnList
@@ -171,12 +167,12 @@ instance GoogleRequest SavedColumnsList' where
         requestWithRoute r u SavedColumnsList'{..}
           = go _sclQuotaUser (Just _sclPrettyPrint)
               _sclAgencyId
-              _sclUserIp
+              _sclUserIP
               _sclAdvertiserId
               _sclKey
-              _sclOauthToken
+              _sclOAuthToken
               _sclFields
-              (Just _sclAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy SavedColumnsListResource)

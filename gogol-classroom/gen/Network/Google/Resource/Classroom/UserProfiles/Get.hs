@@ -43,10 +43,9 @@ module Network.Google.Resource.Classroom.UserProfiles.Get
     , upgUserId
     , upgBearerToken
     , upgKey
-    , upgOauthToken
+    , upgOAuthToken
     , upgFields
     , upgCallback
-    , upgAlt
     ) where
 
 import           Network.Google.Classroom.Types
@@ -66,11 +65,11 @@ type UserProfilesGetResource =
                      QueryParam "access_token" Text :>
                        QueryParam "uploadType" Text :>
                          QueryParam "bearer_token" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "fields" Text :>
                                  QueryParam "callback" Text :>
-                                   QueryParam "alt" Text :>
+                                   QueryParam "alt" AltJSON :>
                                      Get '[JSON] UserProfile
 
 -- | Returns a user profile. This method returns the following error codes: *
@@ -89,11 +88,10 @@ data UserProfilesGet' = UserProfilesGet'
     , _upgUploadType     :: !(Maybe Text)
     , _upgUserId         :: !Text
     , _upgBearerToken    :: !(Maybe Text)
-    , _upgKey            :: !(Maybe Text)
-    , _upgOauthToken     :: !(Maybe Text)
+    , _upgKey            :: !(Maybe Key)
+    , _upgOAuthToken     :: !(Maybe OAuthToken)
     , _upgFields         :: !(Maybe Text)
     , _upgCallback       :: !(Maybe Text)
-    , _upgAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserProfilesGet'' with the minimum fields required to make a request.
@@ -120,13 +118,11 @@ data UserProfilesGet' = UserProfilesGet'
 --
 -- * 'upgKey'
 --
--- * 'upgOauthToken'
+-- * 'upgOAuthToken'
 --
 -- * 'upgFields'
 --
 -- * 'upgCallback'
---
--- * 'upgAlt'
 userProfilesGet'
     :: Text -- ^ 'userId'
     -> UserProfilesGet'
@@ -142,10 +138,9 @@ userProfilesGet' pUpgUserId_ =
     , _upgUserId = pUpgUserId_
     , _upgBearerToken = Nothing
     , _upgKey = Nothing
-    , _upgOauthToken = Nothing
+    , _upgOAuthToken = Nothing
     , _upgFields = Nothing
     , _upgCallback = Nothing
-    , _upgAlt = "json"
     }
 
 -- | V1 error format.
@@ -203,14 +198,14 @@ upgBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-upgKey :: Lens' UserProfilesGet' (Maybe Text)
+upgKey :: Lens' UserProfilesGet' (Maybe Key)
 upgKey = lens _upgKey (\ s a -> s{_upgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-upgOauthToken :: Lens' UserProfilesGet' (Maybe Text)
-upgOauthToken
-  = lens _upgOauthToken
-      (\ s a -> s{_upgOauthToken = a})
+upgOAuthToken :: Lens' UserProfilesGet' (Maybe OAuthToken)
+upgOAuthToken
+  = lens _upgOAuthToken
+      (\ s a -> s{_upgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 upgFields :: Lens' UserProfilesGet' (Maybe Text)
@@ -222,9 +217,9 @@ upgCallback :: Lens' UserProfilesGet' (Maybe Text)
 upgCallback
   = lens _upgCallback (\ s a -> s{_upgCallback = a})
 
--- | Data format for response.
-upgAlt :: Lens' UserProfilesGet' Text
-upgAlt = lens _upgAlt (\ s a -> s{_upgAlt = a})
+instance GoogleAuth UserProfilesGet' where
+        authKey = upgKey . _Just
+        authToken = upgOAuthToken . _Just
 
 instance GoogleRequest UserProfilesGet' where
         type Rs UserProfilesGet' = UserProfile
@@ -238,10 +233,10 @@ instance GoogleRequest UserProfilesGet' where
               _upgUserId
               _upgBearerToken
               _upgKey
-              _upgOauthToken
+              _upgOAuthToken
               _upgFields
               _upgCallback
-              (Just _upgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UserProfilesGetResource)

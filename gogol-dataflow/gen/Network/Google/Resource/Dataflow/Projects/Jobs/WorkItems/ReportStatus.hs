@@ -33,6 +33,7 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.WorkItems.ReportStatus
     , pjwirsXgafv
     , pjwirsQuotaUser
     , pjwirsPrettyPrint
+    , pjwirsReportWorkItemStatusRequest
     , pjwirsJobId
     , pjwirsUploadProtocol
     , pjwirsPp
@@ -41,10 +42,9 @@ module Network.Google.Resource.Dataflow.Projects.Jobs.WorkItems.ReportStatus
     , pjwirsBearerToken
     , pjwirsKey
     , pjwirsProjectId
-    , pjwirsOauthToken
+    , pjwirsOAuthToken
     , pjwirsFields
     , pjwirsCallback
-    , pjwirsAlt
     ) where
 
 import           Network.Google.Dataflow.Types
@@ -67,33 +67,36 @@ type ProjectsJobsWorkItemsReportStatusResource =
                            QueryParam "access_token" Text :>
                              QueryParam "uploadType" Text :>
                                QueryParam "bearer_token" Text :>
-                                 QueryParam "key" Text :>
-                                   QueryParam "oauth_token" Text :>
+                                 QueryParam "key" Key :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "fields" Text :>
                                        QueryParam "callback" Text :>
-                                         QueryParam "alt" Text :>
-                                           Post '[JSON]
-                                             ReportWorkItemStatusResponse
+                                         QueryParam "alt" AltJSON :>
+                                           ReqBody '[JSON]
+                                             ReportWorkItemStatusRequest
+                                             :>
+                                             Post '[JSON]
+                                               ReportWorkItemStatusResponse
 
 -- | Reports the status of dataflow WorkItems leased by a worker.
 --
 -- /See:/ 'projectsJobsWorkItemsReportStatus'' smart constructor.
 data ProjectsJobsWorkItemsReportStatus' = ProjectsJobsWorkItemsReportStatus'
-    { _pjwirsXgafv          :: !(Maybe Text)
-    , _pjwirsQuotaUser      :: !(Maybe Text)
-    , _pjwirsPrettyPrint    :: !Bool
-    , _pjwirsJobId          :: !Text
-    , _pjwirsUploadProtocol :: !(Maybe Text)
-    , _pjwirsPp             :: !Bool
-    , _pjwirsAccessToken    :: !(Maybe Text)
-    , _pjwirsUploadType     :: !(Maybe Text)
-    , _pjwirsBearerToken    :: !(Maybe Text)
-    , _pjwirsKey            :: !(Maybe Text)
-    , _pjwirsProjectId      :: !Text
-    , _pjwirsOauthToken     :: !(Maybe Text)
-    , _pjwirsFields         :: !(Maybe Text)
-    , _pjwirsCallback       :: !(Maybe Text)
-    , _pjwirsAlt            :: !Text
+    { _pjwirsXgafv                       :: !(Maybe Text)
+    , _pjwirsQuotaUser                   :: !(Maybe Text)
+    , _pjwirsPrettyPrint                 :: !Bool
+    , _pjwirsReportWorkItemStatusRequest :: !ReportWorkItemStatusRequest
+    , _pjwirsJobId                       :: !Text
+    , _pjwirsUploadProtocol              :: !(Maybe Text)
+    , _pjwirsPp                          :: !Bool
+    , _pjwirsAccessToken                 :: !(Maybe Text)
+    , _pjwirsUploadType                  :: !(Maybe Text)
+    , _pjwirsBearerToken                 :: !(Maybe Text)
+    , _pjwirsKey                         :: !(Maybe Key)
+    , _pjwirsProjectId                   :: !Text
+    , _pjwirsOAuthToken                  :: !(Maybe OAuthToken)
+    , _pjwirsFields                      :: !(Maybe Text)
+    , _pjwirsCallback                    :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsJobsWorkItemsReportStatus'' with the minimum fields required to make a request.
@@ -105,6 +108,8 @@ data ProjectsJobsWorkItemsReportStatus' = ProjectsJobsWorkItemsReportStatus'
 -- * 'pjwirsQuotaUser'
 --
 -- * 'pjwirsPrettyPrint'
+--
+-- * 'pjwirsReportWorkItemStatusRequest'
 --
 -- * 'pjwirsJobId'
 --
@@ -122,22 +127,22 @@ data ProjectsJobsWorkItemsReportStatus' = ProjectsJobsWorkItemsReportStatus'
 --
 -- * 'pjwirsProjectId'
 --
--- * 'pjwirsOauthToken'
+-- * 'pjwirsOAuthToken'
 --
 -- * 'pjwirsFields'
 --
 -- * 'pjwirsCallback'
---
--- * 'pjwirsAlt'
 projectsJobsWorkItemsReportStatus'
-    :: Text -- ^ 'jobId'
+    :: ReportWorkItemStatusRequest -- ^ 'ReportWorkItemStatusRequest'
+    -> Text -- ^ 'jobId'
     -> Text -- ^ 'projectId'
     -> ProjectsJobsWorkItemsReportStatus'
-projectsJobsWorkItemsReportStatus' pPjwirsJobId_ pPjwirsProjectId_ =
+projectsJobsWorkItemsReportStatus' pPjwirsReportWorkItemStatusRequest_ pPjwirsJobId_ pPjwirsProjectId_ =
     ProjectsJobsWorkItemsReportStatus'
     { _pjwirsXgafv = Nothing
     , _pjwirsQuotaUser = Nothing
     , _pjwirsPrettyPrint = True
+    , _pjwirsReportWorkItemStatusRequest = pPjwirsReportWorkItemStatusRequest_
     , _pjwirsJobId = pPjwirsJobId_
     , _pjwirsUploadProtocol = Nothing
     , _pjwirsPp = True
@@ -146,10 +151,9 @@ projectsJobsWorkItemsReportStatus' pPjwirsJobId_ pPjwirsProjectId_ =
     , _pjwirsBearerToken = Nothing
     , _pjwirsKey = Nothing
     , _pjwirsProjectId = pPjwirsProjectId_
-    , _pjwirsOauthToken = Nothing
+    , _pjwirsOAuthToken = Nothing
     , _pjwirsFields = Nothing
     , _pjwirsCallback = Nothing
-    , _pjwirsAlt = "json"
     }
 
 -- | V1 error format.
@@ -170,6 +174,12 @@ pjwirsPrettyPrint :: Lens' ProjectsJobsWorkItemsReportStatus' Bool
 pjwirsPrettyPrint
   = lens _pjwirsPrettyPrint
       (\ s a -> s{_pjwirsPrettyPrint = a})
+
+-- | Multipart request metadata.
+pjwirsReportWorkItemStatusRequest :: Lens' ProjectsJobsWorkItemsReportStatus' ReportWorkItemStatusRequest
+pjwirsReportWorkItemStatusRequest
+  = lens _pjwirsReportWorkItemStatusRequest
+      (\ s a -> s{_pjwirsReportWorkItemStatusRequest = a})
 
 -- | The job which the WorkItem is part of.
 pjwirsJobId :: Lens' ProjectsJobsWorkItemsReportStatus' Text
@@ -207,7 +217,7 @@ pjwirsBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pjwirsKey :: Lens' ProjectsJobsWorkItemsReportStatus' (Maybe Text)
+pjwirsKey :: Lens' ProjectsJobsWorkItemsReportStatus' (Maybe Key)
 pjwirsKey
   = lens _pjwirsKey (\ s a -> s{_pjwirsKey = a})
 
@@ -218,10 +228,10 @@ pjwirsProjectId
       (\ s a -> s{_pjwirsProjectId = a})
 
 -- | OAuth 2.0 token for the current user.
-pjwirsOauthToken :: Lens' ProjectsJobsWorkItemsReportStatus' (Maybe Text)
-pjwirsOauthToken
-  = lens _pjwirsOauthToken
-      (\ s a -> s{_pjwirsOauthToken = a})
+pjwirsOAuthToken :: Lens' ProjectsJobsWorkItemsReportStatus' (Maybe OAuthToken)
+pjwirsOAuthToken
+  = lens _pjwirsOAuthToken
+      (\ s a -> s{_pjwirsOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 pjwirsFields :: Lens' ProjectsJobsWorkItemsReportStatus' (Maybe Text)
@@ -234,10 +244,10 @@ pjwirsCallback
   = lens _pjwirsCallback
       (\ s a -> s{_pjwirsCallback = a})
 
--- | Data format for response.
-pjwirsAlt :: Lens' ProjectsJobsWorkItemsReportStatus' Text
-pjwirsAlt
-  = lens _pjwirsAlt (\ s a -> s{_pjwirsAlt = a})
+instance GoogleAuth
+         ProjectsJobsWorkItemsReportStatus' where
+        authKey = pjwirsKey . _Just
+        authToken = pjwirsOAuthToken . _Just
 
 instance GoogleRequest
          ProjectsJobsWorkItemsReportStatus' where
@@ -256,10 +266,11 @@ instance GoogleRequest
               _pjwirsBearerToken
               _pjwirsKey
               _pjwirsProjectId
-              _pjwirsOauthToken
+              _pjwirsOAuthToken
               _pjwirsFields
               _pjwirsCallback
-              (Just _pjwirsAlt)
+              (Just AltJSON)
+              _pjwirsReportWorkItemStatusRequest
           where go
                   = clientWithRoute
                       (Proxy ::

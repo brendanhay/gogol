@@ -34,12 +34,11 @@ module Network.Google.Resource.GamesManagement.Quests.Reset
     -- * Request Lenses
     , qrQuotaUser
     , qrPrettyPrint
-    , qrUserIp
+    , qrUserIP
     , qrKey
-    , qrOauthToken
+    , qrOAuthToken
     , qrQuestId
     , qrFields
-    , qrAlt
     ) where
 
 import           Network.Google.GamesManagement.Types
@@ -54,10 +53,10 @@ type QuestsResetResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] ()
+                       QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Resets all player progress on the quest with the given ID for the
 -- currently authenticated player. This method is only accessible to
@@ -67,12 +66,11 @@ type QuestsResetResource =
 data QuestsReset' = QuestsReset'
     { _qrQuotaUser   :: !(Maybe Text)
     , _qrPrettyPrint :: !Bool
-    , _qrUserIp      :: !(Maybe Text)
-    , _qrKey         :: !(Maybe Text)
-    , _qrOauthToken  :: !(Maybe Text)
+    , _qrUserIP      :: !(Maybe Text)
+    , _qrKey         :: !(Maybe Key)
+    , _qrOAuthToken  :: !(Maybe OAuthToken)
     , _qrQuestId     :: !Text
     , _qrFields      :: !(Maybe Text)
-    , _qrAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QuestsReset'' with the minimum fields required to make a request.
@@ -83,17 +81,15 @@ data QuestsReset' = QuestsReset'
 --
 -- * 'qrPrettyPrint'
 --
--- * 'qrUserIp'
+-- * 'qrUserIP'
 --
 -- * 'qrKey'
 --
--- * 'qrOauthToken'
+-- * 'qrOAuthToken'
 --
 -- * 'qrQuestId'
 --
 -- * 'qrFields'
---
--- * 'qrAlt'
 questsReset'
     :: Text -- ^ 'questId'
     -> QuestsReset'
@@ -101,12 +97,11 @@ questsReset' pQrQuestId_ =
     QuestsReset'
     { _qrQuotaUser = Nothing
     , _qrPrettyPrint = True
-    , _qrUserIp = Nothing
+    , _qrUserIP = Nothing
     , _qrKey = Nothing
-    , _qrOauthToken = Nothing
+    , _qrOAuthToken = Nothing
     , _qrQuestId = pQrQuestId_
     , _qrFields = Nothing
-    , _qrAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -124,19 +119,19 @@ qrPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-qrUserIp :: Lens' QuestsReset' (Maybe Text)
-qrUserIp = lens _qrUserIp (\ s a -> s{_qrUserIp = a})
+qrUserIP :: Lens' QuestsReset' (Maybe Text)
+qrUserIP = lens _qrUserIP (\ s a -> s{_qrUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-qrKey :: Lens' QuestsReset' (Maybe Text)
+qrKey :: Lens' QuestsReset' (Maybe Key)
 qrKey = lens _qrKey (\ s a -> s{_qrKey = a})
 
 -- | OAuth 2.0 token for the current user.
-qrOauthToken :: Lens' QuestsReset' (Maybe Text)
-qrOauthToken
-  = lens _qrOauthToken (\ s a -> s{_qrOauthToken = a})
+qrOAuthToken :: Lens' QuestsReset' (Maybe OAuthToken)
+qrOAuthToken
+  = lens _qrOAuthToken (\ s a -> s{_qrOAuthToken = a})
 
 -- | The ID of the quest.
 qrQuestId :: Lens' QuestsReset' Text
@@ -147,20 +142,20 @@ qrQuestId
 qrFields :: Lens' QuestsReset' (Maybe Text)
 qrFields = lens _qrFields (\ s a -> s{_qrFields = a})
 
--- | Data format for the response.
-qrAlt :: Lens' QuestsReset' Alt
-qrAlt = lens _qrAlt (\ s a -> s{_qrAlt = a})
+instance GoogleAuth QuestsReset' where
+        authKey = qrKey . _Just
+        authToken = qrOAuthToken . _Just
 
 instance GoogleRequest QuestsReset' where
         type Rs QuestsReset' = ()
         request = requestWithRoute defReq gamesManagementURL
         requestWithRoute r u QuestsReset'{..}
-          = go _qrQuotaUser (Just _qrPrettyPrint) _qrUserIp
+          = go _qrQuotaUser (Just _qrPrettyPrint) _qrUserIP
               _qrKey
-              _qrOauthToken
+              _qrOAuthToken
               _qrQuestId
               _qrFields
-              (Just _qrAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy QuestsResetResource)

@@ -33,14 +33,13 @@ module Network.Google.Resource.Compute.GlobalAddresses.List
     , galQuotaUser
     , galPrettyPrint
     , galProject
-    , galUserIp
+    , galUserIP
     , galKey
     , galFilter
     , galPageToken
-    , galOauthToken
+    , galOAuthToken
     , galMaxResults
     , galFields
-    , galAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -55,13 +54,13 @@ type GlobalAddressesListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "filter" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "maxResults" Word32 :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Get '[JSON] AddressList
+                             QueryParam "alt" AltJSON :> Get '[JSON] AddressList
 
 -- | Retrieves the list of global address resources.
 --
@@ -70,14 +69,13 @@ data GlobalAddressesList' = GlobalAddressesList'
     { _galQuotaUser   :: !(Maybe Text)
     , _galPrettyPrint :: !Bool
     , _galProject     :: !Text
-    , _galUserIp      :: !(Maybe Text)
-    , _galKey         :: !(Maybe Text)
+    , _galUserIP      :: !(Maybe Text)
+    , _galKey         :: !(Maybe Key)
     , _galFilter      :: !(Maybe Text)
     , _galPageToken   :: !(Maybe Text)
-    , _galOauthToken  :: !(Maybe Text)
+    , _galOAuthToken  :: !(Maybe OAuthToken)
     , _galMaxResults  :: !Word32
     , _galFields      :: !(Maybe Text)
-    , _galAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GlobalAddressesList'' with the minimum fields required to make a request.
@@ -90,7 +88,7 @@ data GlobalAddressesList' = GlobalAddressesList'
 --
 -- * 'galProject'
 --
--- * 'galUserIp'
+-- * 'galUserIP'
 --
 -- * 'galKey'
 --
@@ -98,13 +96,11 @@ data GlobalAddressesList' = GlobalAddressesList'
 --
 -- * 'galPageToken'
 --
--- * 'galOauthToken'
+-- * 'galOAuthToken'
 --
 -- * 'galMaxResults'
 --
 -- * 'galFields'
---
--- * 'galAlt'
 globalAddressesList'
     :: Text -- ^ 'project'
     -> GlobalAddressesList'
@@ -113,14 +109,13 @@ globalAddressesList' pGalProject_ =
     { _galQuotaUser = Nothing
     , _galPrettyPrint = True
     , _galProject = pGalProject_
-    , _galUserIp = Nothing
+    , _galUserIP = Nothing
     , _galKey = Nothing
     , _galFilter = Nothing
     , _galPageToken = Nothing
-    , _galOauthToken = Nothing
+    , _galOAuthToken = Nothing
     , _galMaxResults = 500
     , _galFields = Nothing
-    , _galAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -143,14 +138,14 @@ galProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-galUserIp :: Lens' GlobalAddressesList' (Maybe Text)
-galUserIp
-  = lens _galUserIp (\ s a -> s{_galUserIp = a})
+galUserIP :: Lens' GlobalAddressesList' (Maybe Text)
+galUserIP
+  = lens _galUserIP (\ s a -> s{_galUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-galKey :: Lens' GlobalAddressesList' (Maybe Text)
+galKey :: Lens' GlobalAddressesList' (Maybe Key)
 galKey = lens _galKey (\ s a -> s{_galKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
@@ -176,10 +171,10 @@ galPageToken
   = lens _galPageToken (\ s a -> s{_galPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-galOauthToken :: Lens' GlobalAddressesList' (Maybe Text)
-galOauthToken
-  = lens _galOauthToken
-      (\ s a -> s{_galOauthToken = a})
+galOAuthToken :: Lens' GlobalAddressesList' (Maybe OAuthToken)
+galOAuthToken
+  = lens _galOAuthToken
+      (\ s a -> s{_galOAuthToken = a})
 
 -- | Maximum count of results to be returned.
 galMaxResults :: Lens' GlobalAddressesList' Word32
@@ -192,23 +187,23 @@ galFields :: Lens' GlobalAddressesList' (Maybe Text)
 galFields
   = lens _galFields (\ s a -> s{_galFields = a})
 
--- | Data format for the response.
-galAlt :: Lens' GlobalAddressesList' Alt
-galAlt = lens _galAlt (\ s a -> s{_galAlt = a})
+instance GoogleAuth GlobalAddressesList' where
+        authKey = galKey . _Just
+        authToken = galOAuthToken . _Just
 
 instance GoogleRequest GlobalAddressesList' where
         type Rs GlobalAddressesList' = AddressList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u GlobalAddressesList'{..}
           = go _galQuotaUser (Just _galPrettyPrint) _galProject
-              _galUserIp
+              _galUserIP
               _galKey
               _galFilter
               _galPageToken
-              _galOauthToken
+              _galOAuthToken
               (Just _galMaxResults)
               _galFields
-              (Just _galAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy GlobalAddressesListResource)

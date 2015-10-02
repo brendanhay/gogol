@@ -33,11 +33,11 @@ module Network.Google.Resource.YouTube.Comments.Update
     , cuQuotaUser
     , cuPart
     , cuPrettyPrint
-    , cuUserIp
+    , cuUserIP
     , cuKey
-    , cuOauthToken
+    , cuOAuthToken
+    , cuComment
     , cuFields
-    , cuAlt
     ) where
 
 import           Network.Google.Prelude
@@ -51,10 +51,11 @@ type CommentsUpdateResource =
          QueryParam "part" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Put '[JSON] Comment
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Comment :> Put '[JSON] Comment
 
 -- | Modifies a comment.
 --
@@ -63,11 +64,11 @@ data CommentsUpdate' = CommentsUpdate'
     { _cuQuotaUser   :: !(Maybe Text)
     , _cuPart        :: !Text
     , _cuPrettyPrint :: !Bool
-    , _cuUserIp      :: !(Maybe Text)
-    , _cuKey         :: !(Maybe Text)
-    , _cuOauthToken  :: !(Maybe Text)
+    , _cuUserIP      :: !(Maybe Text)
+    , _cuKey         :: !(Maybe Key)
+    , _cuOAuthToken  :: !(Maybe OAuthToken)
+    , _cuComment     :: !Comment
     , _cuFields      :: !(Maybe Text)
-    , _cuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsUpdate'' with the minimum fields required to make a request.
@@ -80,28 +81,29 @@ data CommentsUpdate' = CommentsUpdate'
 --
 -- * 'cuPrettyPrint'
 --
--- * 'cuUserIp'
+-- * 'cuUserIP'
 --
 -- * 'cuKey'
 --
--- * 'cuOauthToken'
+-- * 'cuOAuthToken'
+--
+-- * 'cuComment'
 --
 -- * 'cuFields'
---
--- * 'cuAlt'
 commentsUpdate'
     :: Text -- ^ 'part'
+    -> Comment -- ^ 'Comment'
     -> CommentsUpdate'
-commentsUpdate' pCuPart_ =
+commentsUpdate' pCuPart_ pCuComment_ =
     CommentsUpdate'
     { _cuQuotaUser = Nothing
     , _cuPart = pCuPart_
     , _cuPrettyPrint = True
-    , _cuUserIp = Nothing
+    , _cuUserIP = Nothing
     , _cuKey = Nothing
-    , _cuOauthToken = Nothing
+    , _cuOAuthToken = Nothing
+    , _cuComment = pCuComment_
     , _cuFields = Nothing
-    , _cuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -126,27 +128,32 @@ cuPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cuUserIp :: Lens' CommentsUpdate' (Maybe Text)
-cuUserIp = lens _cuUserIp (\ s a -> s{_cuUserIp = a})
+cuUserIP :: Lens' CommentsUpdate' (Maybe Text)
+cuUserIP = lens _cuUserIP (\ s a -> s{_cuUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cuKey :: Lens' CommentsUpdate' (Maybe Text)
+cuKey :: Lens' CommentsUpdate' (Maybe Key)
 cuKey = lens _cuKey (\ s a -> s{_cuKey = a})
 
 -- | OAuth 2.0 token for the current user.
-cuOauthToken :: Lens' CommentsUpdate' (Maybe Text)
-cuOauthToken
-  = lens _cuOauthToken (\ s a -> s{_cuOauthToken = a})
+cuOAuthToken :: Lens' CommentsUpdate' (Maybe OAuthToken)
+cuOAuthToken
+  = lens _cuOAuthToken (\ s a -> s{_cuOAuthToken = a})
+
+-- | Multipart request metadata.
+cuComment :: Lens' CommentsUpdate' Comment
+cuComment
+  = lens _cuComment (\ s a -> s{_cuComment = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cuFields :: Lens' CommentsUpdate' (Maybe Text)
 cuFields = lens _cuFields (\ s a -> s{_cuFields = a})
 
--- | Data format for the response.
-cuAlt :: Lens' CommentsUpdate' Alt
-cuAlt = lens _cuAlt (\ s a -> s{_cuAlt = a})
+instance GoogleAuth CommentsUpdate' where
+        authKey = cuKey . _Just
+        authToken = cuOAuthToken . _Just
 
 instance GoogleRequest CommentsUpdate' where
         type Rs CommentsUpdate' = Comment
@@ -154,11 +161,12 @@ instance GoogleRequest CommentsUpdate' where
         requestWithRoute r u CommentsUpdate'{..}
           = go _cuQuotaUser (Just _cuPart)
               (Just _cuPrettyPrint)
-              _cuUserIp
+              _cuUserIP
               _cuKey
-              _cuOauthToken
+              _cuOAuthToken
               _cuFields
-              (Just _cuAlt)
+              (Just AltJSON)
+              _cuComment
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CommentsUpdateResource)

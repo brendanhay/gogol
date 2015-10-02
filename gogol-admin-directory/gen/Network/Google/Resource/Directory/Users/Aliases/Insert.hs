@@ -32,12 +32,12 @@ module Network.Google.Resource.Directory.Users.Aliases.Insert
     -- * Request Lenses
     , uaiQuotaUser
     , uaiPrettyPrint
-    , uaiUserIp
+    , uaiUserIP
+    , uaiAlias
     , uaiKey
-    , uaiOauthToken
+    , uaiOAuthToken
     , uaiUserKey
     , uaiFields
-    , uaiAlt
     ) where
 
 import           Network.Google.AdminDirectory.Types
@@ -52,10 +52,11 @@ type UsersAliasesInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] Alias
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Alias :> Post '[JSON] Alias
 
 -- | Add a alias for the user
 --
@@ -63,12 +64,12 @@ type UsersAliasesInsertResource =
 data UsersAliasesInsert' = UsersAliasesInsert'
     { _uaiQuotaUser   :: !(Maybe Text)
     , _uaiPrettyPrint :: !Bool
-    , _uaiUserIp      :: !(Maybe Text)
-    , _uaiKey         :: !(Maybe Text)
-    , _uaiOauthToken  :: !(Maybe Text)
+    , _uaiUserIP      :: !(Maybe Text)
+    , _uaiAlias       :: !Alias
+    , _uaiKey         :: !(Maybe Key)
+    , _uaiOAuthToken  :: !(Maybe OAuthToken)
     , _uaiUserKey     :: !Text
     , _uaiFields      :: !(Maybe Text)
-    , _uaiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersAliasesInsert'' with the minimum fields required to make a request.
@@ -79,30 +80,31 @@ data UsersAliasesInsert' = UsersAliasesInsert'
 --
 -- * 'uaiPrettyPrint'
 --
--- * 'uaiUserIp'
+-- * 'uaiUserIP'
+--
+-- * 'uaiAlias'
 --
 -- * 'uaiKey'
 --
--- * 'uaiOauthToken'
+-- * 'uaiOAuthToken'
 --
 -- * 'uaiUserKey'
 --
 -- * 'uaiFields'
---
--- * 'uaiAlt'
 usersAliasesInsert'
-    :: Text -- ^ 'userKey'
+    :: Alias -- ^ 'Alias'
+    -> Text -- ^ 'userKey'
     -> UsersAliasesInsert'
-usersAliasesInsert' pUaiUserKey_ =
+usersAliasesInsert' pUaiAlias_ pUaiUserKey_ =
     UsersAliasesInsert'
     { _uaiQuotaUser = Nothing
     , _uaiPrettyPrint = True
-    , _uaiUserIp = Nothing
+    , _uaiUserIP = Nothing
+    , _uaiAlias = pUaiAlias_
     , _uaiKey = Nothing
-    , _uaiOauthToken = Nothing
+    , _uaiOAuthToken = Nothing
     , _uaiUserKey = pUaiUserKey_
     , _uaiFields = Nothing
-    , _uaiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,21 +122,25 @@ uaiPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-uaiUserIp :: Lens' UsersAliasesInsert' (Maybe Text)
-uaiUserIp
-  = lens _uaiUserIp (\ s a -> s{_uaiUserIp = a})
+uaiUserIP :: Lens' UsersAliasesInsert' (Maybe Text)
+uaiUserIP
+  = lens _uaiUserIP (\ s a -> s{_uaiUserIP = a})
+
+-- | Multipart request metadata.
+uaiAlias :: Lens' UsersAliasesInsert' Alias
+uaiAlias = lens _uaiAlias (\ s a -> s{_uaiAlias = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-uaiKey :: Lens' UsersAliasesInsert' (Maybe Text)
+uaiKey :: Lens' UsersAliasesInsert' (Maybe Key)
 uaiKey = lens _uaiKey (\ s a -> s{_uaiKey = a})
 
 -- | OAuth 2.0 token for the current user.
-uaiOauthToken :: Lens' UsersAliasesInsert' (Maybe Text)
-uaiOauthToken
-  = lens _uaiOauthToken
-      (\ s a -> s{_uaiOauthToken = a})
+uaiOAuthToken :: Lens' UsersAliasesInsert' (Maybe OAuthToken)
+uaiOAuthToken
+  = lens _uaiOAuthToken
+      (\ s a -> s{_uaiOAuthToken = a})
 
 -- | Email or immutable Id of the user
 uaiUserKey :: Lens' UsersAliasesInsert' Text
@@ -146,20 +152,21 @@ uaiFields :: Lens' UsersAliasesInsert' (Maybe Text)
 uaiFields
   = lens _uaiFields (\ s a -> s{_uaiFields = a})
 
--- | Data format for the response.
-uaiAlt :: Lens' UsersAliasesInsert' Alt
-uaiAlt = lens _uaiAlt (\ s a -> s{_uaiAlt = a})
+instance GoogleAuth UsersAliasesInsert' where
+        authKey = uaiKey . _Just
+        authToken = uaiOAuthToken . _Just
 
 instance GoogleRequest UsersAliasesInsert' where
         type Rs UsersAliasesInsert' = Alias
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u UsersAliasesInsert'{..}
-          = go _uaiQuotaUser (Just _uaiPrettyPrint) _uaiUserIp
+          = go _uaiQuotaUser (Just _uaiPrettyPrint) _uaiUserIP
               _uaiKey
-              _uaiOauthToken
+              _uaiOAuthToken
               _uaiUserKey
               _uaiFields
-              (Just _uaiAlt)
+              (Just AltJSON)
+              _uaiAlias
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersAliasesInsertResource)

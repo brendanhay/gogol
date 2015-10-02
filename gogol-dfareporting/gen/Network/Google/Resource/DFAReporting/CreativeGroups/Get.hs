@@ -32,13 +32,12 @@ module Network.Google.Resource.DFAReporting.CreativeGroups.Get
     -- * Request Lenses
     , cggQuotaUser
     , cggPrettyPrint
-    , cggUserIp
+    , cggUserIP
     , cggProfileId
     , cggKey
     , cggId
-    , cggOauthToken
+    , cggOAuthToken
     , cggFields
-    , cggAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,10 +53,10 @@ type CreativeGroupsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] CreativeGroup
+                         QueryParam "alt" AltJSON :> Get '[JSON] CreativeGroup
 
 -- | Gets one creative group by ID.
 --
@@ -65,13 +64,12 @@ type CreativeGroupsGetResource =
 data CreativeGroupsGet' = CreativeGroupsGet'
     { _cggQuotaUser   :: !(Maybe Text)
     , _cggPrettyPrint :: !Bool
-    , _cggUserIp      :: !(Maybe Text)
+    , _cggUserIP      :: !(Maybe Text)
     , _cggProfileId   :: !Int64
-    , _cggKey         :: !(Maybe Text)
+    , _cggKey         :: !(Maybe Key)
     , _cggId          :: !Int64
-    , _cggOauthToken  :: !(Maybe Text)
+    , _cggOAuthToken  :: !(Maybe OAuthToken)
     , _cggFields      :: !(Maybe Text)
-    , _cggAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeGroupsGet'' with the minimum fields required to make a request.
@@ -82,7 +80,7 @@ data CreativeGroupsGet' = CreativeGroupsGet'
 --
 -- * 'cggPrettyPrint'
 --
--- * 'cggUserIp'
+-- * 'cggUserIP'
 --
 -- * 'cggProfileId'
 --
@@ -90,11 +88,9 @@ data CreativeGroupsGet' = CreativeGroupsGet'
 --
 -- * 'cggId'
 --
--- * 'cggOauthToken'
+-- * 'cggOAuthToken'
 --
 -- * 'cggFields'
---
--- * 'cggAlt'
 creativeGroupsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
@@ -103,13 +99,12 @@ creativeGroupsGet' pCggProfileId_ pCggId_ =
     CreativeGroupsGet'
     { _cggQuotaUser = Nothing
     , _cggPrettyPrint = True
-    , _cggUserIp = Nothing
+    , _cggUserIP = Nothing
     , _cggProfileId = pCggProfileId_
     , _cggKey = Nothing
     , _cggId = pCggId_
-    , _cggOauthToken = Nothing
+    , _cggOAuthToken = Nothing
     , _cggFields = Nothing
-    , _cggAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,9 +122,9 @@ cggPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cggUserIp :: Lens' CreativeGroupsGet' (Maybe Text)
-cggUserIp
-  = lens _cggUserIp (\ s a -> s{_cggUserIp = a})
+cggUserIP :: Lens' CreativeGroupsGet' (Maybe Text)
+cggUserIP
+  = lens _cggUserIP (\ s a -> s{_cggUserIP = a})
 
 -- | User profile ID associated with this request.
 cggProfileId :: Lens' CreativeGroupsGet' Int64
@@ -139,7 +134,7 @@ cggProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cggKey :: Lens' CreativeGroupsGet' (Maybe Text)
+cggKey :: Lens' CreativeGroupsGet' (Maybe Key)
 cggKey = lens _cggKey (\ s a -> s{_cggKey = a})
 
 -- | Creative group ID.
@@ -147,31 +142,31 @@ cggId :: Lens' CreativeGroupsGet' Int64
 cggId = lens _cggId (\ s a -> s{_cggId = a})
 
 -- | OAuth 2.0 token for the current user.
-cggOauthToken :: Lens' CreativeGroupsGet' (Maybe Text)
-cggOauthToken
-  = lens _cggOauthToken
-      (\ s a -> s{_cggOauthToken = a})
+cggOAuthToken :: Lens' CreativeGroupsGet' (Maybe OAuthToken)
+cggOAuthToken
+  = lens _cggOAuthToken
+      (\ s a -> s{_cggOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cggFields :: Lens' CreativeGroupsGet' (Maybe Text)
 cggFields
   = lens _cggFields (\ s a -> s{_cggFields = a})
 
--- | Data format for the response.
-cggAlt :: Lens' CreativeGroupsGet' Alt
-cggAlt = lens _cggAlt (\ s a -> s{_cggAlt = a})
+instance GoogleAuth CreativeGroupsGet' where
+        authKey = cggKey . _Just
+        authToken = cggOAuthToken . _Just
 
 instance GoogleRequest CreativeGroupsGet' where
         type Rs CreativeGroupsGet' = CreativeGroup
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativeGroupsGet'{..}
-          = go _cggQuotaUser (Just _cggPrettyPrint) _cggUserIp
+          = go _cggQuotaUser (Just _cggPrettyPrint) _cggUserIP
               _cggProfileId
               _cggKey
               _cggId
-              _cggOauthToken
+              _cggOAuthToken
               _cggFields
-              (Just _cggAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CreativeGroupsGetResource)

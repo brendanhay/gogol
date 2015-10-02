@@ -36,15 +36,14 @@ module Network.Google.Resource.Games.TurnBasedMatches.Sync
     , tbmsMaxCompletedMatches
     , tbmsQuotaUser
     , tbmsPrettyPrint
-    , tbmsUserIp
+    , tbmsUserIP
     , tbmsKey
     , tbmsIncludeMatchData
     , tbmsLanguage
     , tbmsPageToken
-    , tbmsOauthToken
+    , tbmsOAuthToken
     , tbmsMaxResults
     , tbmsFields
-    , tbmsAlt
     ) where
 
 import           Network.Google.Games.Types
@@ -59,14 +58,14 @@ type TurnBasedMatchesSyncResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "includeMatchData" Bool :>
                      QueryParam "language" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "maxResults" Int32 :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :>
+                               QueryParam "alt" AltJSON :>
                                  Get '[JSON] TurnBasedMatchSync
 
 -- | Returns turn-based matches the player is or was involved in that changed
@@ -79,15 +78,14 @@ data TurnBasedMatchesSync' = TurnBasedMatchesSync'
     { _tbmsMaxCompletedMatches :: !(Maybe Int32)
     , _tbmsQuotaUser           :: !(Maybe Text)
     , _tbmsPrettyPrint         :: !Bool
-    , _tbmsUserIp              :: !(Maybe Text)
-    , _tbmsKey                 :: !(Maybe Text)
+    , _tbmsUserIP              :: !(Maybe Text)
+    , _tbmsKey                 :: !(Maybe Key)
     , _tbmsIncludeMatchData    :: !(Maybe Bool)
     , _tbmsLanguage            :: !(Maybe Text)
     , _tbmsPageToken           :: !(Maybe Text)
-    , _tbmsOauthToken          :: !(Maybe Text)
+    , _tbmsOAuthToken          :: !(Maybe OAuthToken)
     , _tbmsMaxResults          :: !(Maybe Int32)
     , _tbmsFields              :: !(Maybe Text)
-    , _tbmsAlt                 :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchesSync'' with the minimum fields required to make a request.
@@ -100,7 +98,7 @@ data TurnBasedMatchesSync' = TurnBasedMatchesSync'
 --
 -- * 'tbmsPrettyPrint'
 --
--- * 'tbmsUserIp'
+-- * 'tbmsUserIP'
 --
 -- * 'tbmsKey'
 --
@@ -110,13 +108,11 @@ data TurnBasedMatchesSync' = TurnBasedMatchesSync'
 --
 -- * 'tbmsPageToken'
 --
--- * 'tbmsOauthToken'
+-- * 'tbmsOAuthToken'
 --
 -- * 'tbmsMaxResults'
 --
 -- * 'tbmsFields'
---
--- * 'tbmsAlt'
 turnBasedMatchesSync'
     :: TurnBasedMatchesSync'
 turnBasedMatchesSync' =
@@ -124,15 +120,14 @@ turnBasedMatchesSync' =
     { _tbmsMaxCompletedMatches = Nothing
     , _tbmsQuotaUser = Nothing
     , _tbmsPrettyPrint = True
-    , _tbmsUserIp = Nothing
+    , _tbmsUserIP = Nothing
     , _tbmsKey = Nothing
     , _tbmsIncludeMatchData = Nothing
     , _tbmsLanguage = Nothing
     , _tbmsPageToken = Nothing
-    , _tbmsOauthToken = Nothing
+    , _tbmsOAuthToken = Nothing
     , _tbmsMaxResults = Nothing
     , _tbmsFields = Nothing
-    , _tbmsAlt = JSON
     }
 
 -- | The maximum number of completed or canceled matches to return in the
@@ -159,14 +154,14 @@ tbmsPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tbmsUserIp :: Lens' TurnBasedMatchesSync' (Maybe Text)
-tbmsUserIp
-  = lens _tbmsUserIp (\ s a -> s{_tbmsUserIp = a})
+tbmsUserIP :: Lens' TurnBasedMatchesSync' (Maybe Text)
+tbmsUserIP
+  = lens _tbmsUserIP (\ s a -> s{_tbmsUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tbmsKey :: Lens' TurnBasedMatchesSync' (Maybe Text)
+tbmsKey :: Lens' TurnBasedMatchesSync' (Maybe Key)
 tbmsKey = lens _tbmsKey (\ s a -> s{_tbmsKey = a})
 
 -- | True if match data should be returned in the response. Note that not all
@@ -191,10 +186,10 @@ tbmsPageToken
       (\ s a -> s{_tbmsPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-tbmsOauthToken :: Lens' TurnBasedMatchesSync' (Maybe Text)
-tbmsOauthToken
-  = lens _tbmsOauthToken
-      (\ s a -> s{_tbmsOauthToken = a})
+tbmsOAuthToken :: Lens' TurnBasedMatchesSync' (Maybe OAuthToken)
+tbmsOAuthToken
+  = lens _tbmsOAuthToken
+      (\ s a -> s{_tbmsOAuthToken = a})
 
 -- | The maximum number of matches to return in the response, used for
 -- paging. For any response, the actual number of matches to return may be
@@ -209,9 +204,9 @@ tbmsFields :: Lens' TurnBasedMatchesSync' (Maybe Text)
 tbmsFields
   = lens _tbmsFields (\ s a -> s{_tbmsFields = a})
 
--- | Data format for the response.
-tbmsAlt :: Lens' TurnBasedMatchesSync' Alt
-tbmsAlt = lens _tbmsAlt (\ s a -> s{_tbmsAlt = a})
+instance GoogleAuth TurnBasedMatchesSync' where
+        authKey = tbmsKey . _Just
+        authToken = tbmsOAuthToken . _Just
 
 instance GoogleRequest TurnBasedMatchesSync' where
         type Rs TurnBasedMatchesSync' = TurnBasedMatchSync
@@ -219,15 +214,15 @@ instance GoogleRequest TurnBasedMatchesSync' where
         requestWithRoute r u TurnBasedMatchesSync'{..}
           = go _tbmsMaxCompletedMatches _tbmsQuotaUser
               (Just _tbmsPrettyPrint)
-              _tbmsUserIp
+              _tbmsUserIP
               _tbmsKey
               _tbmsIncludeMatchData
               _tbmsLanguage
               _tbmsPageToken
-              _tbmsOauthToken
+              _tbmsOAuthToken
               _tbmsMaxResults
               _tbmsFields
-              (Just _tbmsAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TurnBasedMatchesSyncResource)

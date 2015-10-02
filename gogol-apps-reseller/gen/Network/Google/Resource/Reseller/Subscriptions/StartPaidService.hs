@@ -32,13 +32,12 @@ module Network.Google.Resource.Reseller.Subscriptions.StartPaidService
     -- * Request Lenses
     , sspsQuotaUser
     , sspsPrettyPrint
-    , sspsUserIp
+    , sspsUserIP
     , sspsCustomerId
     , sspsKey
-    , sspsOauthToken
+    , sspsOAuthToken
     , sspsSubscriptionId
     , sspsFields
-    , sspsAlt
     ) where
 
 import           Network.Google.AppsReseller.Types
@@ -55,10 +54,10 @@ type SubscriptionsStartPaidServiceResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Post '[JSON] Subscription
+                           QueryParam "alt" AltJSON :> Post '[JSON] Subscription
 
 -- | Starts paid service of a trial subscription
 --
@@ -66,13 +65,12 @@ type SubscriptionsStartPaidServiceResource =
 data SubscriptionsStartPaidService' = SubscriptionsStartPaidService'
     { _sspsQuotaUser      :: !(Maybe Text)
     , _sspsPrettyPrint    :: !Bool
-    , _sspsUserIp         :: !(Maybe Text)
+    , _sspsUserIP         :: !(Maybe Text)
     , _sspsCustomerId     :: !Text
-    , _sspsKey            :: !(Maybe Text)
-    , _sspsOauthToken     :: !(Maybe Text)
+    , _sspsKey            :: !(Maybe Key)
+    , _sspsOAuthToken     :: !(Maybe OAuthToken)
     , _sspsSubscriptionId :: !Text
     , _sspsFields         :: !(Maybe Text)
-    , _sspsAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionsStartPaidService'' with the minimum fields required to make a request.
@@ -83,19 +81,17 @@ data SubscriptionsStartPaidService' = SubscriptionsStartPaidService'
 --
 -- * 'sspsPrettyPrint'
 --
--- * 'sspsUserIp'
+-- * 'sspsUserIP'
 --
 -- * 'sspsCustomerId'
 --
 -- * 'sspsKey'
 --
--- * 'sspsOauthToken'
+-- * 'sspsOAuthToken'
 --
 -- * 'sspsSubscriptionId'
 --
 -- * 'sspsFields'
---
--- * 'sspsAlt'
 subscriptionsStartPaidService'
     :: Text -- ^ 'customerId'
     -> Text -- ^ 'subscriptionId'
@@ -104,13 +100,12 @@ subscriptionsStartPaidService' pSspsCustomerId_ pSspsSubscriptionId_ =
     SubscriptionsStartPaidService'
     { _sspsQuotaUser = Nothing
     , _sspsPrettyPrint = True
-    , _sspsUserIp = Nothing
+    , _sspsUserIP = Nothing
     , _sspsCustomerId = pSspsCustomerId_
     , _sspsKey = Nothing
-    , _sspsOauthToken = Nothing
+    , _sspsOAuthToken = Nothing
     , _sspsSubscriptionId = pSspsSubscriptionId_
     , _sspsFields = Nothing
-    , _sspsAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -129,9 +124,9 @@ sspsPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-sspsUserIp :: Lens' SubscriptionsStartPaidService' (Maybe Text)
-sspsUserIp
-  = lens _sspsUserIp (\ s a -> s{_sspsUserIp = a})
+sspsUserIP :: Lens' SubscriptionsStartPaidService' (Maybe Text)
+sspsUserIP
+  = lens _sspsUserIP (\ s a -> s{_sspsUserIP = a})
 
 -- | Id of the Customer
 sspsCustomerId :: Lens' SubscriptionsStartPaidService' Text
@@ -142,14 +137,14 @@ sspsCustomerId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-sspsKey :: Lens' SubscriptionsStartPaidService' (Maybe Text)
+sspsKey :: Lens' SubscriptionsStartPaidService' (Maybe Key)
 sspsKey = lens _sspsKey (\ s a -> s{_sspsKey = a})
 
 -- | OAuth 2.0 token for the current user.
-sspsOauthToken :: Lens' SubscriptionsStartPaidService' (Maybe Text)
-sspsOauthToken
-  = lens _sspsOauthToken
-      (\ s a -> s{_sspsOauthToken = a})
+sspsOAuthToken :: Lens' SubscriptionsStartPaidService' (Maybe OAuthToken)
+sspsOAuthToken
+  = lens _sspsOAuthToken
+      (\ s a -> s{_sspsOAuthToken = a})
 
 -- | Id of the subscription, which is unique for a customer
 sspsSubscriptionId :: Lens' SubscriptionsStartPaidService' Text
@@ -162,9 +157,10 @@ sspsFields :: Lens' SubscriptionsStartPaidService' (Maybe Text)
 sspsFields
   = lens _sspsFields (\ s a -> s{_sspsFields = a})
 
--- | Data format for the response.
-sspsAlt :: Lens' SubscriptionsStartPaidService' Alt
-sspsAlt = lens _sspsAlt (\ s a -> s{_sspsAlt = a})
+instance GoogleAuth SubscriptionsStartPaidService'
+         where
+        authKey = sspsKey . _Just
+        authToken = sspsOAuthToken . _Just
 
 instance GoogleRequest SubscriptionsStartPaidService'
          where
@@ -173,13 +169,13 @@ instance GoogleRequest SubscriptionsStartPaidService'
         requestWithRoute r u
           SubscriptionsStartPaidService'{..}
           = go _sspsQuotaUser (Just _sspsPrettyPrint)
-              _sspsUserIp
+              _sspsUserIP
               _sspsCustomerId
               _sspsKey
-              _sspsOauthToken
+              _sspsOAuthToken
               _sspsSubscriptionId
               _sspsFields
-              (Just _sspsAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

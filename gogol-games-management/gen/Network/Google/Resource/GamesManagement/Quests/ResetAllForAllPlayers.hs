@@ -33,11 +33,10 @@ module Network.Google.Resource.GamesManagement.Quests.ResetAllForAllPlayers
     -- * Request Lenses
     , qrafapQuotaUser
     , qrafapPrettyPrint
-    , qrafapUserIp
+    , qrafapUserIP
     , qrafapKey
-    , qrafapOauthToken
+    , qrafapOAuthToken
     , qrafapFields
-    , qrafapAlt
     ) where
 
 import           Network.Google.GamesManagement.Types
@@ -51,10 +50,10 @@ type QuestsResetAllForAllPlayersResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Post '[JSON] ()
+                     QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Resets all draft quests for all players. This method is only available
 -- to user accounts for your developer console.
@@ -63,11 +62,10 @@ type QuestsResetAllForAllPlayersResource =
 data QuestsResetAllForAllPlayers' = QuestsResetAllForAllPlayers'
     { _qrafapQuotaUser   :: !(Maybe Text)
     , _qrafapPrettyPrint :: !Bool
-    , _qrafapUserIp      :: !(Maybe Text)
-    , _qrafapKey         :: !(Maybe Text)
-    , _qrafapOauthToken  :: !(Maybe Text)
+    , _qrafapUserIP      :: !(Maybe Text)
+    , _qrafapKey         :: !(Maybe Key)
+    , _qrafapOAuthToken  :: !(Maybe OAuthToken)
     , _qrafapFields      :: !(Maybe Text)
-    , _qrafapAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QuestsResetAllForAllPlayers'' with the minimum fields required to make a request.
@@ -78,26 +76,23 @@ data QuestsResetAllForAllPlayers' = QuestsResetAllForAllPlayers'
 --
 -- * 'qrafapPrettyPrint'
 --
--- * 'qrafapUserIp'
+-- * 'qrafapUserIP'
 --
 -- * 'qrafapKey'
 --
--- * 'qrafapOauthToken'
+-- * 'qrafapOAuthToken'
 --
 -- * 'qrafapFields'
---
--- * 'qrafapAlt'
 questsResetAllForAllPlayers'
     :: QuestsResetAllForAllPlayers'
 questsResetAllForAllPlayers' =
     QuestsResetAllForAllPlayers'
     { _qrafapQuotaUser = Nothing
     , _qrafapPrettyPrint = True
-    , _qrafapUserIp = Nothing
+    , _qrafapUserIP = Nothing
     , _qrafapKey = Nothing
-    , _qrafapOauthToken = Nothing
+    , _qrafapOAuthToken = Nothing
     , _qrafapFields = Nothing
-    , _qrafapAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -116,32 +111,32 @@ qrafapPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-qrafapUserIp :: Lens' QuestsResetAllForAllPlayers' (Maybe Text)
-qrafapUserIp
-  = lens _qrafapUserIp (\ s a -> s{_qrafapUserIp = a})
+qrafapUserIP :: Lens' QuestsResetAllForAllPlayers' (Maybe Text)
+qrafapUserIP
+  = lens _qrafapUserIP (\ s a -> s{_qrafapUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-qrafapKey :: Lens' QuestsResetAllForAllPlayers' (Maybe Text)
+qrafapKey :: Lens' QuestsResetAllForAllPlayers' (Maybe Key)
 qrafapKey
   = lens _qrafapKey (\ s a -> s{_qrafapKey = a})
 
 -- | OAuth 2.0 token for the current user.
-qrafapOauthToken :: Lens' QuestsResetAllForAllPlayers' (Maybe Text)
-qrafapOauthToken
-  = lens _qrafapOauthToken
-      (\ s a -> s{_qrafapOauthToken = a})
+qrafapOAuthToken :: Lens' QuestsResetAllForAllPlayers' (Maybe OAuthToken)
+qrafapOAuthToken
+  = lens _qrafapOAuthToken
+      (\ s a -> s{_qrafapOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 qrafapFields :: Lens' QuestsResetAllForAllPlayers' (Maybe Text)
 qrafapFields
   = lens _qrafapFields (\ s a -> s{_qrafapFields = a})
 
--- | Data format for the response.
-qrafapAlt :: Lens' QuestsResetAllForAllPlayers' Alt
-qrafapAlt
-  = lens _qrafapAlt (\ s a -> s{_qrafapAlt = a})
+instance GoogleAuth QuestsResetAllForAllPlayers'
+         where
+        authKey = qrafapKey . _Just
+        authToken = qrafapOAuthToken . _Just
 
 instance GoogleRequest QuestsResetAllForAllPlayers'
          where
@@ -149,11 +144,11 @@ instance GoogleRequest QuestsResetAllForAllPlayers'
         request = requestWithRoute defReq gamesManagementURL
         requestWithRoute r u QuestsResetAllForAllPlayers'{..}
           = go _qrafapQuotaUser (Just _qrafapPrettyPrint)
-              _qrafapUserIp
+              _qrafapUserIP
               _qrafapKey
-              _qrafapOauthToken
+              _qrafapOAuthToken
               _qrafapFields
-              (Just _qrafapAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy QuestsResetAllForAllPlayersResource)

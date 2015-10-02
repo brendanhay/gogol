@@ -33,12 +33,11 @@ module Network.Google.Resource.Coordinate.Schedule.Get
     , sgQuotaUser
     , sgPrettyPrint
     , sgJobId
-    , sgUserIp
+    , sgUserIP
     , sgTeamId
     , sgKey
-    , sgOauthToken
+    , sgOAuthToken
     , sgFields
-    , sgAlt
     ) where
 
 import           Network.Google.MapsCoordinate.Types
@@ -55,10 +54,10 @@ type ScheduleGetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Get '[JSON] Schedule
+                           QueryParam "alt" AltJSON :> Get '[JSON] Schedule
 
 -- | Retrieves the schedule for a job.
 --
@@ -67,12 +66,11 @@ data ScheduleGet' = ScheduleGet'
     { _sgQuotaUser   :: !(Maybe Text)
     , _sgPrettyPrint :: !Bool
     , _sgJobId       :: !Word64
-    , _sgUserIp      :: !(Maybe Text)
+    , _sgUserIP      :: !(Maybe Text)
     , _sgTeamId      :: !Text
-    , _sgKey         :: !(Maybe Text)
-    , _sgOauthToken  :: !(Maybe Text)
+    , _sgKey         :: !(Maybe Key)
+    , _sgOAuthToken  :: !(Maybe OAuthToken)
     , _sgFields      :: !(Maybe Text)
-    , _sgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ScheduleGet'' with the minimum fields required to make a request.
@@ -85,17 +83,15 @@ data ScheduleGet' = ScheduleGet'
 --
 -- * 'sgJobId'
 --
--- * 'sgUserIp'
+-- * 'sgUserIP'
 --
 -- * 'sgTeamId'
 --
 -- * 'sgKey'
 --
--- * 'sgOauthToken'
+-- * 'sgOAuthToken'
 --
 -- * 'sgFields'
---
--- * 'sgAlt'
 scheduleGet'
     :: Word64 -- ^ 'jobId'
     -> Text -- ^ 'teamId'
@@ -105,12 +101,11 @@ scheduleGet' pSgJobId_ pSgTeamId_ =
     { _sgQuotaUser = Nothing
     , _sgPrettyPrint = True
     , _sgJobId = pSgJobId_
-    , _sgUserIp = Nothing
+    , _sgUserIP = Nothing
     , _sgTeamId = pSgTeamId_
     , _sgKey = Nothing
-    , _sgOauthToken = Nothing
+    , _sgOAuthToken = Nothing
     , _sgFields = Nothing
-    , _sgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -132,8 +127,8 @@ sgJobId = lens _sgJobId (\ s a -> s{_sgJobId = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-sgUserIp :: Lens' ScheduleGet' (Maybe Text)
-sgUserIp = lens _sgUserIp (\ s a -> s{_sgUserIp = a})
+sgUserIP :: Lens' ScheduleGet' (Maybe Text)
+sgUserIP = lens _sgUserIP (\ s a -> s{_sgUserIP = a})
 
 -- | Team ID
 sgTeamId :: Lens' ScheduleGet' Text
@@ -142,33 +137,33 @@ sgTeamId = lens _sgTeamId (\ s a -> s{_sgTeamId = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-sgKey :: Lens' ScheduleGet' (Maybe Text)
+sgKey :: Lens' ScheduleGet' (Maybe Key)
 sgKey = lens _sgKey (\ s a -> s{_sgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-sgOauthToken :: Lens' ScheduleGet' (Maybe Text)
-sgOauthToken
-  = lens _sgOauthToken (\ s a -> s{_sgOauthToken = a})
+sgOAuthToken :: Lens' ScheduleGet' (Maybe OAuthToken)
+sgOAuthToken
+  = lens _sgOAuthToken (\ s a -> s{_sgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 sgFields :: Lens' ScheduleGet' (Maybe Text)
 sgFields = lens _sgFields (\ s a -> s{_sgFields = a})
 
--- | Data format for the response.
-sgAlt :: Lens' ScheduleGet' Alt
-sgAlt = lens _sgAlt (\ s a -> s{_sgAlt = a})
+instance GoogleAuth ScheduleGet' where
+        authKey = sgKey . _Just
+        authToken = sgOAuthToken . _Just
 
 instance GoogleRequest ScheduleGet' where
         type Rs ScheduleGet' = Schedule
         request = requestWithRoute defReq mapsCoordinateURL
         requestWithRoute r u ScheduleGet'{..}
           = go _sgQuotaUser (Just _sgPrettyPrint) _sgJobId
-              _sgUserIp
+              _sgUserIP
               _sgTeamId
               _sgKey
-              _sgOauthToken
+              _sgOAuthToken
               _sgFields
-              (Just _sgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ScheduleGetResource)

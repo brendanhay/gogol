@@ -138,7 +138,7 @@ instance ToJSON Webfont where
 -- /See:/ 'webfontList' smart constructor.
 data WebfontList = WebfontList
     { _wlKind  :: !Text
-    , _wlItems :: !(Maybe [Maybe Webfont])
+    , _wlItems :: !(Maybe [Webfont])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WebfontList' with the minimum fields required to make a request.
@@ -161,7 +161,7 @@ wlKind :: Lens' WebfontList Text
 wlKind = lens _wlKind (\ s a -> s{_wlKind = a})
 
 -- | The list of fonts currently served by the Google Fonts API.
-wlItems :: Lens' WebfontList [Maybe Webfont]
+wlItems :: Lens' WebfontList [Webfont]
 wlItems
   = lens _wlItems (\ s a -> s{_wlItems = a}) . _Default
       . _Coerce

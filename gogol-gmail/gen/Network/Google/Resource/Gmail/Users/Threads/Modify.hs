@@ -32,14 +32,14 @@ module Network.Google.Resource.Gmail.Users.Threads.Modify
 
     -- * Request Lenses
     , utmQuotaUser
+    , utmModifyThreadRequest
     , utmPrettyPrint
-    , utmUserIp
+    , utmUserIP
     , utmUserId
     , utmKey
     , utmId
-    , utmOauthToken
+    , utmOAuthToken
     , utmFields
-    , utmAlt
     ) where
 
 import           Network.Google.Gmail.Types
@@ -55,25 +55,27 @@ type UsersThreadsModifyResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Post '[JSON] Thread
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] ModifyThreadRequest :>
+                             Post '[JSON] Thread
 
 -- | Modifies the labels applied to the thread. This applies to all messages
 -- in the thread.
 --
 -- /See:/ 'usersThreadsModify'' smart constructor.
 data UsersThreadsModify' = UsersThreadsModify'
-    { _utmQuotaUser   :: !(Maybe Text)
-    , _utmPrettyPrint :: !Bool
-    , _utmUserIp      :: !(Maybe Text)
-    , _utmUserId      :: !Text
-    , _utmKey         :: !(Maybe Text)
-    , _utmId          :: !Text
-    , _utmOauthToken  :: !(Maybe Text)
-    , _utmFields      :: !(Maybe Text)
-    , _utmAlt         :: !Alt
+    { _utmQuotaUser           :: !(Maybe Text)
+    , _utmModifyThreadRequest :: !ModifyThreadRequest
+    , _utmPrettyPrint         :: !Bool
+    , _utmUserIP              :: !(Maybe Text)
+    , _utmUserId              :: !Text
+    , _utmKey                 :: !(Maybe Key)
+    , _utmId                  :: !Text
+    , _utmOAuthToken          :: !(Maybe OAuthToken)
+    , _utmFields              :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersThreadsModify'' with the minimum fields required to make a request.
@@ -82,9 +84,11 @@ data UsersThreadsModify' = UsersThreadsModify'
 --
 -- * 'utmQuotaUser'
 --
+-- * 'utmModifyThreadRequest'
+--
 -- * 'utmPrettyPrint'
 --
--- * 'utmUserIp'
+-- * 'utmUserIP'
 --
 -- * 'utmUserId'
 --
@@ -92,26 +96,25 @@ data UsersThreadsModify' = UsersThreadsModify'
 --
 -- * 'utmId'
 --
--- * 'utmOauthToken'
+-- * 'utmOAuthToken'
 --
 -- * 'utmFields'
---
--- * 'utmAlt'
 usersThreadsModify'
-    :: Text -- ^ 'id'
+    :: ModifyThreadRequest -- ^ 'ModifyThreadRequest'
+    -> Text -- ^ 'id'
     -> Text
     -> UsersThreadsModify'
-usersThreadsModify' pUtmUserId_ pUtmId_ =
+usersThreadsModify' pUtmModifyThreadRequest_ pUtmUserId_ pUtmId_ =
     UsersThreadsModify'
     { _utmQuotaUser = Nothing
+    , _utmModifyThreadRequest = pUtmModifyThreadRequest_
     , _utmPrettyPrint = True
-    , _utmUserIp = Nothing
+    , _utmUserIP = Nothing
     , _utmUserId = pUtmUserId_
     , _utmKey = Nothing
     , _utmId = pUtmId_
-    , _utmOauthToken = Nothing
+    , _utmOAuthToken = Nothing
     , _utmFields = Nothing
-    , _utmAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -121,6 +124,12 @@ utmQuotaUser :: Lens' UsersThreadsModify' (Maybe Text)
 utmQuotaUser
   = lens _utmQuotaUser (\ s a -> s{_utmQuotaUser = a})
 
+-- | Multipart request metadata.
+utmModifyThreadRequest :: Lens' UsersThreadsModify' ModifyThreadRequest
+utmModifyThreadRequest
+  = lens _utmModifyThreadRequest
+      (\ s a -> s{_utmModifyThreadRequest = a})
+
 -- | Returns response with indentations and line breaks.
 utmPrettyPrint :: Lens' UsersThreadsModify' Bool
 utmPrettyPrint
@@ -129,9 +138,9 @@ utmPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-utmUserIp :: Lens' UsersThreadsModify' (Maybe Text)
-utmUserIp
-  = lens _utmUserIp (\ s a -> s{_utmUserIp = a})
+utmUserIP :: Lens' UsersThreadsModify' (Maybe Text)
+utmUserIP
+  = lens _utmUserIP (\ s a -> s{_utmUserIP = a})
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
@@ -142,7 +151,7 @@ utmUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-utmKey :: Lens' UsersThreadsModify' (Maybe Text)
+utmKey :: Lens' UsersThreadsModify' (Maybe Key)
 utmKey = lens _utmKey (\ s a -> s{_utmKey = a})
 
 -- | The ID of the thread to modify.
@@ -150,31 +159,32 @@ utmId :: Lens' UsersThreadsModify' Text
 utmId = lens _utmId (\ s a -> s{_utmId = a})
 
 -- | OAuth 2.0 token for the current user.
-utmOauthToken :: Lens' UsersThreadsModify' (Maybe Text)
-utmOauthToken
-  = lens _utmOauthToken
-      (\ s a -> s{_utmOauthToken = a})
+utmOAuthToken :: Lens' UsersThreadsModify' (Maybe OAuthToken)
+utmOAuthToken
+  = lens _utmOAuthToken
+      (\ s a -> s{_utmOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 utmFields :: Lens' UsersThreadsModify' (Maybe Text)
 utmFields
   = lens _utmFields (\ s a -> s{_utmFields = a})
 
--- | Data format for the response.
-utmAlt :: Lens' UsersThreadsModify' Alt
-utmAlt = lens _utmAlt (\ s a -> s{_utmAlt = a})
+instance GoogleAuth UsersThreadsModify' where
+        authKey = utmKey . _Just
+        authToken = utmOAuthToken . _Just
 
 instance GoogleRequest UsersThreadsModify' where
         type Rs UsersThreadsModify' = Thread
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersThreadsModify'{..}
-          = go _utmQuotaUser (Just _utmPrettyPrint) _utmUserIp
+          = go _utmQuotaUser (Just _utmPrettyPrint) _utmUserIP
               _utmUserId
               _utmKey
               _utmId
-              _utmOauthToken
+              _utmOAuthToken
               _utmFields
-              (Just _utmAlt)
+              (Just AltJSON)
+              _utmModifyThreadRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersThreadsModifyResource)

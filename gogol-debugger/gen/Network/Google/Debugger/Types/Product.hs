@@ -22,7 +22,7 @@ import           Network.Google.Prelude
 --
 -- /See:/ 'registerDebuggeeResponse' smart constructor.
 newtype RegisterDebuggeeResponse = RegisterDebuggeeResponse
-    { _rdrDebuggee :: Maybe (Maybe Debuggee)
+    { _rdrDebuggee :: Maybe Debuggee
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RegisterDebuggeeResponse' with the minimum fields required to make a request.
@@ -39,7 +39,7 @@ registerDebuggeeResponse =
 
 -- | The debuggee resource. The field \'id\' is guranteed to be set (in
 -- addition to the echoed fields).
-rdrDebuggee :: Lens' RegisterDebuggeeResponse (Maybe (Maybe Debuggee))
+rdrDebuggee :: Lens' RegisterDebuggeeResponse (Maybe Debuggee)
 rdrDebuggee
   = lens _rdrDebuggee (\ s a -> s{_rdrDebuggee = a})
 
@@ -58,7 +58,7 @@ instance ToJSON RegisterDebuggeeResponse where
 --
 -- /See:/ 'setBreakpointResponse' smart constructor.
 newtype SetBreakpointResponse = SetBreakpointResponse
-    { _sbrBreakpoint :: Maybe (Maybe Breakpoint)
+    { _sbrBreakpoint :: Maybe Breakpoint
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SetBreakpointResponse' with the minimum fields required to make a request.
@@ -75,7 +75,7 @@ setBreakpointResponse =
 
 -- | The breakpoint resource. The field \'id\' is guranteed to be set (in
 -- addition to the echoed fileds).
-sbrBreakpoint :: Lens' SetBreakpointResponse (Maybe (Maybe Breakpoint))
+sbrBreakpoint :: Lens' SetBreakpointResponse (Maybe Breakpoint)
 sbrBreakpoint
   = lens _sbrBreakpoint
       (\ s a -> s{_sbrBreakpoint = a})
@@ -97,10 +97,10 @@ instance ToJSON SetBreakpointResponse where
 --
 -- /See:/ 'sourceContext' smart constructor.
 data SourceContext = SourceContext
-    { _scCloudWorkspace :: !(Maybe (Maybe CloudWorkspaceSourceContext))
-    , _scCloudRepo      :: !(Maybe (Maybe CloudRepoSourceContext))
-    , _scGerrit         :: !(Maybe (Maybe GerritSourceContext))
-    , _scGit            :: !(Maybe (Maybe GitSourceContext))
+    { _scCloudWorkspace :: !(Maybe CloudWorkspaceSourceContext)
+    , _scCloudRepo      :: !(Maybe CloudRepoSourceContext)
+    , _scGerrit         :: !(Maybe GerritSourceContext)
+    , _scGit            :: !(Maybe GitSourceContext)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SourceContext' with the minimum fields required to make a request.
@@ -125,22 +125,22 @@ sourceContext =
     }
 
 -- | A SourceContext referring to a snapshot in a cloud workspace.
-scCloudWorkspace :: Lens' SourceContext (Maybe (Maybe CloudWorkspaceSourceContext))
+scCloudWorkspace :: Lens' SourceContext (Maybe CloudWorkspaceSourceContext)
 scCloudWorkspace
   = lens _scCloudWorkspace
       (\ s a -> s{_scCloudWorkspace = a})
 
 -- | A SourceContext referring to a revision in a cloud repo.
-scCloudRepo :: Lens' SourceContext (Maybe (Maybe CloudRepoSourceContext))
+scCloudRepo :: Lens' SourceContext (Maybe CloudRepoSourceContext)
 scCloudRepo
   = lens _scCloudRepo (\ s a -> s{_scCloudRepo = a})
 
 -- | A SourceContext referring to a Gerrit project.
-scGerrit :: Lens' SourceContext (Maybe (Maybe GerritSourceContext))
+scGerrit :: Lens' SourceContext (Maybe GerritSourceContext)
 scGerrit = lens _scGerrit (\ s a -> s{_scGerrit = a})
 
 -- | A SourceContext referring to any third party Git repo (e.g. GitHub).
-scGit :: Lens' SourceContext (Maybe (Maybe GitSourceContext))
+scGit :: Lens' SourceContext (Maybe GitSourceContext)
 scGit = lens _scGit (\ s a -> s{_scGit = a})
 
 instance FromJSON SourceContext where
@@ -165,7 +165,7 @@ instance ToJSON SourceContext where
 -- /See:/ 'repoId' smart constructor.
 data RepoId = RepoId
     { _riUid           :: !(Maybe Text)
-    , _riProjectRepoId :: !(Maybe (Maybe ProjectRepoId))
+    , _riProjectRepoId :: !(Maybe ProjectRepoId)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RepoId' with the minimum fields required to make a request.
@@ -188,7 +188,7 @@ riUid :: Lens' RepoId (Maybe Text)
 riUid = lens _riUid (\ s a -> s{_riUid = a})
 
 -- | A combination of a project ID and a repo name.
-riProjectRepoId :: Lens' RepoId (Maybe (Maybe ProjectRepoId))
+riProjectRepoId :: Lens' RepoId (Maybe ProjectRepoId)
 riProjectRepoId
   = lens _riProjectRepoId
       (\ s a -> s{_riProjectRepoId = a})
@@ -259,7 +259,7 @@ data GerritSourceContext = GerritSourceContext
     { _gscGerritProject :: !(Maybe Text)
     , _gscAliasName     :: !(Maybe Text)
     , _gscRevisionId    :: !(Maybe Text)
-    , _gscHostUri       :: !(Maybe Text)
+    , _gscHostURI       :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GerritSourceContext' with the minimum fields required to make a request.
@@ -272,7 +272,7 @@ data GerritSourceContext = GerritSourceContext
 --
 -- * 'gscRevisionId'
 --
--- * 'gscHostUri'
+-- * 'gscHostURI'
 gerritSourceContext
     :: GerritSourceContext
 gerritSourceContext =
@@ -280,7 +280,7 @@ gerritSourceContext =
     { _gscGerritProject = Nothing
     , _gscAliasName = Nothing
     , _gscRevisionId = Nothing
-    , _gscHostUri = Nothing
+    , _gscHostURI = Nothing
     }
 
 -- | The full project name within the host. Projects may be nested, so
@@ -303,9 +303,9 @@ gscRevisionId
       (\ s a -> s{_gscRevisionId = a})
 
 -- | The URI of a running Gerrit instance.
-gscHostUri :: Lens' GerritSourceContext (Maybe Text)
-gscHostUri
-  = lens _gscHostUri (\ s a -> s{_gscHostUri = a})
+gscHostURI :: Lens' GerritSourceContext (Maybe Text)
+gscHostURI
+  = lens _gscHostURI (\ s a -> s{_gscHostURI = a})
 
 instance FromJSON GerritSourceContext where
         parseJSON
@@ -323,7 +323,7 @@ instance ToJSON GerritSourceContext where
                  [("gerritProject" .=) <$> _gscGerritProject,
                   ("aliasName" .=) <$> _gscAliasName,
                   ("revisionId" .=) <$> _gscRevisionId,
-                  ("hostUri" .=) <$> _gscHostUri])
+                  ("hostUri" .=) <$> _gscHostURI])
 
 -- | Selects a repo using a Google Cloud Platform project ID (e.g.
 -- winged-cargo-31) and a repo name within that project.
@@ -429,19 +429,19 @@ instance ToJSON FormatMessage where
 --
 -- /See:/ 'breakpoint' smart constructor.
 data Breakpoint = Breakpoint
-    { _bStatus               :: !(Maybe (Maybe StatusMessage))
+    { _bStatus               :: !(Maybe StatusMessage)
     , _bLogLevel             :: !(Maybe Text)
-    , _bLocation             :: !(Maybe (Maybe SourceLocation))
+    , _bLocation             :: !(Maybe SourceLocation)
     , _bAction               :: !(Maybe Text)
     , _bFinalTime            :: !(Maybe Text)
     , _bExpressions          :: !(Maybe [Text])
     , _bLogMessageFormat     :: !(Maybe Text)
     , _bId                   :: !(Maybe Text)
     , _bUserEmail            :: !(Maybe Text)
-    , _bVariableTable        :: !(Maybe [Maybe Variable])
-    , _bStackFrames          :: !(Maybe [Maybe StackFrame])
+    , _bVariableTable        :: !(Maybe [Variable])
+    , _bStackFrames          :: !(Maybe [StackFrame])
     , _bCondition            :: !(Maybe Text)
-    , _bEvaluatedExpressions :: !(Maybe [Maybe Variable])
+    , _bEvaluatedExpressions :: !(Maybe [Variable])
     , _bCreateTime           :: !(Maybe Text)
     , _bIsFinalState         :: !(Maybe Bool)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -508,7 +508,7 @@ breakpoint =
 -- symbols...\' Examples (final state): \'Failed to insert breakpoint\'
 -- referring to breakpoint, \'Field f not found in class C\' referring to
 -- condition, ...
-bStatus :: Lens' Breakpoint (Maybe (Maybe StatusMessage))
+bStatus :: Lens' Breakpoint (Maybe StatusMessage)
 bStatus = lens _bStatus (\ s a -> s{_bStatus = a})
 
 -- | Indicates the severity of the log. Only relevant when action is \"LOG\".
@@ -517,7 +517,7 @@ bLogLevel
   = lens _bLogLevel (\ s a -> s{_bLogLevel = a})
 
 -- | The breakpoint source location.
-bLocation :: Lens' Breakpoint (Maybe (Maybe SourceLocation))
+bLocation :: Lens' Breakpoint (Maybe SourceLocation)
 bLocation
   = lens _bLocation (\ s a -> s{_bLocation = a})
 
@@ -572,7 +572,7 @@ bUserEmail
 -- repeated field. The stored objects are nameless and get their name from
 -- the referencing variable. The effective variable is a merge of the
 -- referencing veariable and the referenced variable.
-bVariableTable :: Lens' Breakpoint [Maybe Variable]
+bVariableTable :: Lens' Breakpoint [Variable]
 bVariableTable
   = lens _bVariableTable
       (\ s a -> s{_bVariableTable = a})
@@ -580,7 +580,7 @@ bVariableTable
       . _Coerce
 
 -- | The stack at breakpoint time.
-bStackFrames :: Lens' Breakpoint [Maybe StackFrame]
+bStackFrames :: Lens' Breakpoint [StackFrame]
 bStackFrames
   = lens _bStackFrames (\ s a -> s{_bStackFrames = a})
       . _Default
@@ -599,7 +599,7 @@ bCondition
 -- text, the \'value\'\/\'members\' field holds the result of the evaluated
 -- expression. If the expression can not be evaluated, an error text is
 -- placed in the value field.
-bEvaluatedExpressions :: Lens' Breakpoint [Maybe Variable]
+bEvaluatedExpressions :: Lens' Breakpoint [Variable]
 bEvaluatedExpressions
   = lens _bEvaluatedExpressions
       (\ s a -> s{_bEvaluatedExpressions = a})
@@ -663,7 +663,7 @@ instance ToJSON Breakpoint where
 --
 -- /See:/ 'getBreakpointResponse' smart constructor.
 newtype GetBreakpointResponse = GetBreakpointResponse
-    { _gbrBreakpoint :: Maybe (Maybe Breakpoint)
+    { _gbrBreakpoint :: Maybe Breakpoint
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GetBreakpointResponse' with the minimum fields required to make a request.
@@ -680,7 +680,7 @@ getBreakpointResponse =
 
 -- | The complete breakpoint state. The fields \'id\' and \'location\' are
 -- guranteed to be set.
-gbrBreakpoint :: Lens' GetBreakpointResponse (Maybe (Maybe Breakpoint))
+gbrBreakpoint :: Lens' GetBreakpointResponse (Maybe Breakpoint)
 gbrBreakpoint
   = lens _gbrBreakpoint
       (\ s a -> s{_gbrBreakpoint = a})
@@ -730,9 +730,9 @@ instance ToJSON GetBreakpointResponse where
 --
 -- /See:/ 'variable' smart constructor.
 data Variable = Variable
-    { _vStatus        :: !(Maybe (Maybe StatusMessage))
+    { _vStatus        :: !(Maybe StatusMessage)
     , _vVarTableIndex :: !(Maybe Int32)
-    , _vMembers       :: !(Maybe [Maybe Variable])
+    , _vMembers       :: !(Maybe [Variable])
     , _vValue         :: !(Maybe Text)
     , _vName          :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -773,7 +773,7 @@ variable =
 -- captured\". Examples of error message applied to value: \"Malformed
 -- string\", \"Field f not found in class C\", \"Null pointer
 -- dereference\".
-vStatus :: Lens' Variable (Maybe (Maybe StatusMessage))
+vStatus :: Lens' Variable (Maybe StatusMessage)
 vStatus = lens _vStatus (\ s a -> s{_vStatus = a})
 
 -- | This is a reference to a variable in the shared variable table. More
@@ -785,7 +785,7 @@ vVarTableIndex
       (\ s a -> s{_vVarTableIndex = a})
 
 -- | The members contained or pointed to by the variable.
-vMembers :: Lens' Variable [Maybe Variable]
+vMembers :: Lens' Variable [Variable]
 vMembers
   = lens _vMembers (\ s a -> s{_vMembers = a}) .
       _Default
@@ -823,7 +823,7 @@ instance ToJSON Variable where
 -- /See:/ 'listBreakpointsResponse' smart constructor.
 data ListBreakpointsResponse = ListBreakpointsResponse
     { _lbrNextWaitToken :: !(Maybe Text)
-    , _lbrBreakpoints   :: !(Maybe [Maybe Breakpoint])
+    , _lbrBreakpoints   :: !(Maybe [Breakpoint])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListBreakpointsResponse' with the minimum fields required to make a request.
@@ -850,7 +850,7 @@ lbrNextWaitToken
 
 -- | List of all breakpoints with complete state. The fields \'id\' and
 -- \'location\' are guranteed to be set on each breakpoint.
-lbrBreakpoints :: Lens' ListBreakpointsResponse [Maybe Breakpoint]
+lbrBreakpoints :: Lens' ListBreakpointsResponse [Breakpoint]
 lbrBreakpoints
   = lens _lbrBreakpoints
       (\ s a -> s{_lbrBreakpoints = a})
@@ -876,7 +876,7 @@ instance ToJSON ListBreakpointsResponse where
 --
 -- /See:/ 'listDebuggeesResponse' smart constructor.
 newtype ListDebuggeesResponse = ListDebuggeesResponse
-    { _ldrDebuggees :: Maybe [Maybe Debuggee]
+    { _ldrDebuggees :: Maybe [Debuggee]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListDebuggeesResponse' with the minimum fields required to make a request.
@@ -895,7 +895,7 @@ listDebuggeesResponse =
 -- description field is the only human readable field that should be
 -- displayed to the user. The fields \'debuggee.id\' and \'description\'
 -- are guranteed to be set on each debuggee.
-ldrDebuggees :: Lens' ListDebuggeesResponse [Maybe Debuggee]
+ldrDebuggees :: Lens' ListDebuggeesResponse [Debuggee]
 ldrDebuggees
   = lens _ldrDebuggees (\ s a -> s{_ldrDebuggees = a})
       . _Default
@@ -917,7 +917,7 @@ instance ToJSON ListDebuggeesResponse where
 --
 -- /See:/ 'updateActiveBreakpointRequest' smart constructor.
 newtype UpdateActiveBreakpointRequest = UpdateActiveBreakpointRequest
-    { _uabrBreakpoint :: Maybe (Maybe Breakpoint)
+    { _uabrBreakpoint :: Maybe Breakpoint
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UpdateActiveBreakpointRequest' with the minimum fields required to make a request.
@@ -933,7 +933,7 @@ updateActiveBreakpointRequest =
     }
 
 -- | The updated breakpoint information. The field \'id\' must be set.
-uabrBreakpoint :: Lens' UpdateActiveBreakpointRequest (Maybe (Maybe Breakpoint))
+uabrBreakpoint :: Lens' UpdateActiveBreakpointRequest (Maybe Breakpoint)
 uabrBreakpoint
   = lens _uabrBreakpoint
       (\ s a -> s{_uabrBreakpoint = a})
@@ -960,7 +960,7 @@ instance ToJSON UpdateActiveBreakpointRequest where
 data StatusMessage = StatusMessage
     { _smRefersTo    :: !(Maybe Text)
     , _smIsError     :: !(Maybe Bool)
-    , _smDescription :: !(Maybe (Maybe FormatMessage))
+    , _smDescription :: !(Maybe FormatMessage)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StatusMessage' with the minimum fields required to make a request.
@@ -992,7 +992,7 @@ smIsError
   = lens _smIsError (\ s a -> s{_smIsError = a})
 
 -- | Status message text.
-smDescription :: Lens' StatusMessage (Maybe (Maybe FormatMessage))
+smDescription :: Lens' StatusMessage (Maybe FormatMessage)
 smDescription
   = lens _smDescription
       (\ s a -> s{_smDescription = a})
@@ -1018,7 +1018,7 @@ instance ToJSON StatusMessage where
 -- /See:/ 'listActiveBreakpointsResponse' smart constructor.
 data ListActiveBreakpointsResponse = ListActiveBreakpointsResponse
     { _labrNextWaitToken :: !(Maybe Text)
-    , _labrBreakpoints   :: !(Maybe [Maybe Breakpoint])
+    , _labrBreakpoints   :: !(Maybe [Breakpoint])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListActiveBreakpointsResponse' with the minimum fields required to make a request.
@@ -1045,7 +1045,7 @@ labrNextWaitToken
 
 -- | List of all active breakpoints. The fields \'id\' and \'location\' are
 -- guranteed to be set on each breakpoint.
-labrBreakpoints :: Lens' ListActiveBreakpointsResponse [Maybe Breakpoint]
+labrBreakpoints :: Lens' ListActiveBreakpointsResponse [Breakpoint]
 labrBreakpoints
   = lens _labrBreakpoints
       (\ s a -> s{_labrBreakpoints = a})
@@ -1072,7 +1072,7 @@ instance ToJSON ListActiveBreakpointsResponse where
 --
 -- /See:/ 'gitSourceContext' smart constructor.
 data GitSourceContext = GitSourceContext
-    { _gUrl        :: !(Maybe Text)
+    { _gURL        :: !(Maybe Text)
     , _gRevisionId :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1080,20 +1080,20 @@ data GitSourceContext = GitSourceContext
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'gUrl'
+-- * 'gURL'
 --
 -- * 'gRevisionId'
 gitSourceContext
     :: GitSourceContext
 gitSourceContext =
     GitSourceContext
-    { _gUrl = Nothing
+    { _gURL = Nothing
     , _gRevisionId = Nothing
     }
 
 -- | Git repository URL.
-gUrl :: Lens' GitSourceContext (Maybe Text)
-gUrl = lens _gUrl (\ s a -> s{_gUrl = a})
+gURL :: Lens' GitSourceContext (Maybe Text)
+gURL = lens _gURL (\ s a -> s{_gURL = a})
 
 -- | Git commit hash. required.
 gRevisionId :: Lens' GitSourceContext (Maybe Text)
@@ -1111,7 +1111,7 @@ instance ToJSON GitSourceContext where
         toJSON GitSourceContext{..}
           = object
               (catMaybes
-                 [("url" .=) <$> _gUrl,
+                 [("url" .=) <$> _gURL,
                   ("revisionId" .=) <$> _gRevisionId])
 
 -- | Represents a location in the source code.
@@ -1163,9 +1163,9 @@ instance ToJSON SourceLocation where
 -- /See:/ 'stackFrame' smart constructor.
 data StackFrame = StackFrame
     { _sfFunction  :: !(Maybe Text)
-    , _sfLocation  :: !(Maybe (Maybe SourceLocation))
-    , _sfArguments :: !(Maybe [Maybe Variable])
-    , _sfLocals    :: !(Maybe [Maybe Variable])
+    , _sfLocation  :: !(Maybe SourceLocation)
+    , _sfArguments :: !(Maybe [Variable])
+    , _sfLocals    :: !(Maybe [Variable])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StackFrame' with the minimum fields required to make a request.
@@ -1195,13 +1195,13 @@ sfFunction
   = lens _sfFunction (\ s a -> s{_sfFunction = a})
 
 -- | The source location of the call site.
-sfLocation :: Lens' StackFrame (Maybe (Maybe SourceLocation))
+sfLocation :: Lens' StackFrame (Maybe SourceLocation)
 sfLocation
   = lens _sfLocation (\ s a -> s{_sfLocation = a})
 
 -- | The set of arguments passed to this function Note that this might not be
 -- populated for all stack frames.
-sfArguments :: Lens' StackFrame [Maybe Variable]
+sfArguments :: Lens' StackFrame [Variable]
 sfArguments
   = lens _sfArguments (\ s a -> s{_sfArguments = a}) .
       _Default
@@ -1209,7 +1209,7 @@ sfArguments
 
 -- | The set of local variables at the stack frame location. Note that this
 -- might not be populated for all stack frames.
-sfLocals :: Lens' StackFrame [Maybe Variable]
+sfLocals :: Lens' StackFrame [Variable]
 sfLocals
   = lens _sfLocals (\ s a -> s{_sfLocals = a}) .
       _Default
@@ -1260,7 +1260,7 @@ instance ToJSON DebuggeeLabels where
 --
 -- /See:/ 'cloudRepoSourceContext' smart constructor.
 data CloudRepoSourceContext = CloudRepoSourceContext
-    { _crscRepoId     :: !(Maybe (Maybe RepoId))
+    { _crscRepoId     :: !(Maybe RepoId)
     , _crscAliasName  :: !(Maybe Text)
     , _crscRevisionId :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -1284,7 +1284,7 @@ cloudRepoSourceContext =
     }
 
 -- | The ID of the repo.
-crscRepoId :: Lens' CloudRepoSourceContext (Maybe (Maybe RepoId))
+crscRepoId :: Lens' CloudRepoSourceContext (Maybe RepoId)
 crscRepoId
   = lens _crscRepoId (\ s a -> s{_crscRepoId = a})
 
@@ -1320,7 +1320,7 @@ instance ToJSON CloudRepoSourceContext where
 --
 -- /See:/ 'registerDebuggeeRequest' smart constructor.
 newtype RegisterDebuggeeRequest = RegisterDebuggeeRequest
-    { _rDebuggee :: Maybe (Maybe Debuggee)
+    { _rDebuggee :: Maybe Debuggee
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RegisterDebuggeeRequest' with the minimum fields required to make a request.
@@ -1338,7 +1338,7 @@ registerDebuggeeRequest =
 -- | The debuggee information to register. The fields \'project\',
 -- \'uniquifier\', \'description\' and \'agent_version\' of the debuggee
 -- must be set.
-rDebuggee :: Lens' RegisterDebuggeeRequest (Maybe (Maybe Debuggee))
+rDebuggee :: Lens' RegisterDebuggeeRequest (Maybe Debuggee)
 rDebuggee
   = lens _rDebuggee (\ s a -> s{_rDebuggee = a})
 
@@ -1357,7 +1357,7 @@ instance ToJSON RegisterDebuggeeRequest where
 --
 -- /See:/ 'cloudWorkspaceSourceContext' smart constructor.
 data CloudWorkspaceSourceContext = CloudWorkspaceSourceContext
-    { _cwscWorkspaceId :: !(Maybe (Maybe CloudWorkspaceId))
+    { _cwscWorkspaceId :: !(Maybe CloudWorkspaceId)
     , _cwscSnapshotId  :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1377,7 +1377,7 @@ cloudWorkspaceSourceContext =
     }
 
 -- | The ID of the workspace.
-cwscWorkspaceId :: Lens' CloudWorkspaceSourceContext (Maybe (Maybe CloudWorkspaceId))
+cwscWorkspaceId :: Lens' CloudWorkspaceSourceContext (Maybe CloudWorkspaceId)
 cwscWorkspaceId
   = lens _cwscWorkspaceId
       (\ s a -> s{_cwscWorkspaceId = a})
@@ -1411,7 +1411,7 @@ instance ToJSON CloudWorkspaceSourceContext where
 --
 -- /See:/ 'debuggee' smart constructor.
 data Debuggee = Debuggee
-    { _dStatus         :: !(Maybe (Maybe StatusMessage))
+    { _dStatus         :: !(Maybe StatusMessage)
     , _dUniquifier     :: !(Maybe Text)
     , _dProject        :: !(Maybe Text)
     , _dAgentVersion   :: !(Maybe Text)
@@ -1420,7 +1420,7 @@ data Debuggee = Debuggee
     , _dLabels         :: !(Maybe DebuggeeLabels)
     , _dDescription    :: !(Maybe Text)
     , _dIsInactive     :: !(Maybe Bool)
-    , _dSourceContexts :: !(Maybe [Maybe SourceContext])
+    , _dSourceContexts :: !(Maybe [SourceContext])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Debuggee' with the minimum fields required to make a request.
@@ -1465,7 +1465,7 @@ debuggee =
 -- | Human readable message to be displayed to the user about this debuggee.
 -- Absense of this field indicates no message. The message can be either
 -- informational or error.
-dStatus :: Lens' Debuggee (Maybe (Maybe StatusMessage))
+dStatus :: Lens' Debuggee (Maybe StatusMessage)
 dStatus = lens _dStatus (\ s a -> s{_dStatus = a})
 
 -- | The debuggee uniqifier within the project. Any string that id the
@@ -1517,7 +1517,7 @@ dIsInactive
   = lens _dIsInactive (\ s a -> s{_dIsInactive = a})
 
 -- | Repository snapshots containing the source code of the project.
-dSourceContexts :: Lens' Debuggee [Maybe SourceContext]
+dSourceContexts :: Lens' Debuggee [SourceContext]
 dSourceContexts
   = lens _dSourceContexts
       (\ s a -> s{_dSourceContexts = a})
@@ -1559,7 +1559,7 @@ instance ToJSON Debuggee where
 --
 -- /See:/ 'cloudWorkspaceId' smart constructor.
 data CloudWorkspaceId = CloudWorkspaceId
-    { _cwiRepoId :: !(Maybe (Maybe RepoId))
+    { _cwiRepoId :: !(Maybe RepoId)
     , _cwiName   :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1579,7 +1579,7 @@ cloudWorkspaceId =
     }
 
 -- | The ID of the repo containing the workspace.
-cwiRepoId :: Lens' CloudWorkspaceId (Maybe (Maybe RepoId))
+cwiRepoId :: Lens' CloudWorkspaceId (Maybe RepoId)
 cwiRepoId
   = lens _cwiRepoId (\ s a -> s{_cwiRepoId = a})
 

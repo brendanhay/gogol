@@ -34,14 +34,13 @@ module Network.Google.Resource.Compute.Images.List
     , ilQuotaUser
     , ilPrettyPrint
     , ilProject
-    , ilUserIp
+    , ilUserIP
     , ilKey
     , ilFilter
     , ilPageToken
-    , ilOauthToken
+    , ilOAuthToken
     , ilMaxResults
     , ilFields
-    , ilAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -56,13 +55,13 @@ type ImagesListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "filter" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "maxResults" Word32 :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Get '[JSON] ImageList
+                             QueryParam "alt" AltJSON :> Get '[JSON] ImageList
 
 -- | Retrieves the list of image resources available to the specified
 -- project.
@@ -72,14 +71,13 @@ data ImagesList' = ImagesList'
     { _ilQuotaUser   :: !(Maybe Text)
     , _ilPrettyPrint :: !Bool
     , _ilProject     :: !Text
-    , _ilUserIp      :: !(Maybe Text)
-    , _ilKey         :: !(Maybe Text)
+    , _ilUserIP      :: !(Maybe Text)
+    , _ilKey         :: !(Maybe Key)
     , _ilFilter      :: !(Maybe Text)
     , _ilPageToken   :: !(Maybe Text)
-    , _ilOauthToken  :: !(Maybe Text)
+    , _ilOAuthToken  :: !(Maybe OAuthToken)
     , _ilMaxResults  :: !Word32
     , _ilFields      :: !(Maybe Text)
-    , _ilAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ImagesList'' with the minimum fields required to make a request.
@@ -92,7 +90,7 @@ data ImagesList' = ImagesList'
 --
 -- * 'ilProject'
 --
--- * 'ilUserIp'
+-- * 'ilUserIP'
 --
 -- * 'ilKey'
 --
@@ -100,13 +98,11 @@ data ImagesList' = ImagesList'
 --
 -- * 'ilPageToken'
 --
--- * 'ilOauthToken'
+-- * 'ilOAuthToken'
 --
 -- * 'ilMaxResults'
 --
 -- * 'ilFields'
---
--- * 'ilAlt'
 imagesList'
     :: Text -- ^ 'project'
     -> ImagesList'
@@ -115,14 +111,13 @@ imagesList' pIlProject_ =
     { _ilQuotaUser = Nothing
     , _ilPrettyPrint = True
     , _ilProject = pIlProject_
-    , _ilUserIp = Nothing
+    , _ilUserIP = Nothing
     , _ilKey = Nothing
     , _ilFilter = Nothing
     , _ilPageToken = Nothing
-    , _ilOauthToken = Nothing
+    , _ilOAuthToken = Nothing
     , _ilMaxResults = 500
     , _ilFields = Nothing
-    , _ilAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -145,13 +140,13 @@ ilProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ilUserIp :: Lens' ImagesList' (Maybe Text)
-ilUserIp = lens _ilUserIp (\ s a -> s{_ilUserIp = a})
+ilUserIP :: Lens' ImagesList' (Maybe Text)
+ilUserIP = lens _ilUserIP (\ s a -> s{_ilUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ilKey :: Lens' ImagesList' (Maybe Text)
+ilKey :: Lens' ImagesList' (Maybe Key)
 ilKey = lens _ilKey (\ s a -> s{_ilKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
@@ -176,9 +171,9 @@ ilPageToken
   = lens _ilPageToken (\ s a -> s{_ilPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-ilOauthToken :: Lens' ImagesList' (Maybe Text)
-ilOauthToken
-  = lens _ilOauthToken (\ s a -> s{_ilOauthToken = a})
+ilOAuthToken :: Lens' ImagesList' (Maybe OAuthToken)
+ilOAuthToken
+  = lens _ilOAuthToken (\ s a -> s{_ilOAuthToken = a})
 
 -- | Maximum count of results to be returned.
 ilMaxResults :: Lens' ImagesList' Word32
@@ -189,23 +184,23 @@ ilMaxResults
 ilFields :: Lens' ImagesList' (Maybe Text)
 ilFields = lens _ilFields (\ s a -> s{_ilFields = a})
 
--- | Data format for the response.
-ilAlt :: Lens' ImagesList' Alt
-ilAlt = lens _ilAlt (\ s a -> s{_ilAlt = a})
+instance GoogleAuth ImagesList' where
+        authKey = ilKey . _Just
+        authToken = ilOAuthToken . _Just
 
 instance GoogleRequest ImagesList' where
         type Rs ImagesList' = ImageList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u ImagesList'{..}
           = go _ilQuotaUser (Just _ilPrettyPrint) _ilProject
-              _ilUserIp
+              _ilUserIP
               _ilKey
               _ilFilter
               _ilPageToken
-              _ilOauthToken
+              _ilOAuthToken
               (Just _ilMaxResults)
               _ilFields
-              (Just _ilAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy ImagesListResource)
                       r

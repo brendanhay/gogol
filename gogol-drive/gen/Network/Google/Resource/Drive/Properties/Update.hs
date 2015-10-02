@@ -32,14 +32,14 @@ module Network.Google.Resource.Drive.Properties.Update
     -- * Request Lenses
     , puQuotaUser
     , puPrettyPrint
+    , puProperty
     , puPropertyKey
-    , puUserIp
+    , puUserIP
     , puVisibility
     , puKey
     , puFileId
-    , puOauthToken
+    , puOAuthToken
     , puFields
-    , puAlt
     ) where
 
 import           Network.Google.Drive.Types
@@ -56,10 +56,11 @@ type PropertiesUpdateResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "visibility" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Put '[JSON] Property
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] Property :> Put '[JSON] Property
 
 -- | Updates a property.
 --
@@ -67,14 +68,14 @@ type PropertiesUpdateResource =
 data PropertiesUpdate' = PropertiesUpdate'
     { _puQuotaUser   :: !(Maybe Text)
     , _puPrettyPrint :: !Bool
+    , _puProperty    :: !Property
     , _puPropertyKey :: !Text
-    , _puUserIp      :: !(Maybe Text)
+    , _puUserIP      :: !(Maybe Text)
     , _puVisibility  :: !Text
-    , _puKey         :: !(Maybe Text)
+    , _puKey         :: !(Maybe Key)
     , _puFileId      :: !Text
-    , _puOauthToken  :: !(Maybe Text)
+    , _puOAuthToken  :: !(Maybe OAuthToken)
     , _puFields      :: !(Maybe Text)
-    , _puAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PropertiesUpdate'' with the minimum fields required to make a request.
@@ -85,9 +86,11 @@ data PropertiesUpdate' = PropertiesUpdate'
 --
 -- * 'puPrettyPrint'
 --
+-- * 'puProperty'
+--
 -- * 'puPropertyKey'
 --
--- * 'puUserIp'
+-- * 'puUserIP'
 --
 -- * 'puVisibility'
 --
@@ -95,27 +98,26 @@ data PropertiesUpdate' = PropertiesUpdate'
 --
 -- * 'puFileId'
 --
--- * 'puOauthToken'
+-- * 'puOAuthToken'
 --
 -- * 'puFields'
---
--- * 'puAlt'
 propertiesUpdate'
-    :: Text -- ^ 'propertyKey'
+    :: Property -- ^ 'Property'
+    -> Text -- ^ 'propertyKey'
     -> Text -- ^ 'fileId'
     -> PropertiesUpdate'
-propertiesUpdate' pPuPropertyKey_ pPuFileId_ =
+propertiesUpdate' pPuProperty_ pPuPropertyKey_ pPuFileId_ =
     PropertiesUpdate'
     { _puQuotaUser = Nothing
     , _puPrettyPrint = True
+    , _puProperty = pPuProperty_
     , _puPropertyKey = pPuPropertyKey_
-    , _puUserIp = Nothing
+    , _puUserIP = Nothing
     , _puVisibility = "private"
     , _puKey = Nothing
     , _puFileId = pPuFileId_
-    , _puOauthToken = Nothing
+    , _puOAuthToken = Nothing
     , _puFields = Nothing
-    , _puAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -131,6 +133,11 @@ puPrettyPrint
   = lens _puPrettyPrint
       (\ s a -> s{_puPrettyPrint = a})
 
+-- | Multipart request metadata.
+puProperty :: Lens' PropertiesUpdate' Property
+puProperty
+  = lens _puProperty (\ s a -> s{_puProperty = a})
+
 -- | The key of the property.
 puPropertyKey :: Lens' PropertiesUpdate' Text
 puPropertyKey
@@ -139,8 +146,8 @@ puPropertyKey
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-puUserIp :: Lens' PropertiesUpdate' (Maybe Text)
-puUserIp = lens _puUserIp (\ s a -> s{_puUserIp = a})
+puUserIP :: Lens' PropertiesUpdate' (Maybe Text)
+puUserIP = lens _puUserIP (\ s a -> s{_puUserIP = a})
 
 -- | The visibility of the property.
 puVisibility :: Lens' PropertiesUpdate' Text
@@ -150,7 +157,7 @@ puVisibility
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-puKey :: Lens' PropertiesUpdate' (Maybe Text)
+puKey :: Lens' PropertiesUpdate' (Maybe Key)
 puKey = lens _puKey (\ s a -> s{_puKey = a})
 
 -- | The ID of the file.
@@ -158,17 +165,17 @@ puFileId :: Lens' PropertiesUpdate' Text
 puFileId = lens _puFileId (\ s a -> s{_puFileId = a})
 
 -- | OAuth 2.0 token for the current user.
-puOauthToken :: Lens' PropertiesUpdate' (Maybe Text)
-puOauthToken
-  = lens _puOauthToken (\ s a -> s{_puOauthToken = a})
+puOAuthToken :: Lens' PropertiesUpdate' (Maybe OAuthToken)
+puOAuthToken
+  = lens _puOAuthToken (\ s a -> s{_puOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 puFields :: Lens' PropertiesUpdate' (Maybe Text)
 puFields = lens _puFields (\ s a -> s{_puFields = a})
 
--- | Data format for the response.
-puAlt :: Lens' PropertiesUpdate' Alt
-puAlt = lens _puAlt (\ s a -> s{_puAlt = a})
+instance GoogleAuth PropertiesUpdate' where
+        authKey = puKey . _Just
+        authToken = puOAuthToken . _Just
 
 instance GoogleRequest PropertiesUpdate' where
         type Rs PropertiesUpdate' = Property
@@ -176,13 +183,14 @@ instance GoogleRequest PropertiesUpdate' where
         requestWithRoute r u PropertiesUpdate'{..}
           = go _puQuotaUser (Just _puPrettyPrint)
               _puPropertyKey
-              _puUserIp
+              _puUserIP
               (Just _puVisibility)
               _puKey
               _puFileId
-              _puOauthToken
+              _puOAuthToken
               _puFields
-              (Just _puAlt)
+              (Just AltJSON)
+              _puProperty
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PropertiesUpdateResource)

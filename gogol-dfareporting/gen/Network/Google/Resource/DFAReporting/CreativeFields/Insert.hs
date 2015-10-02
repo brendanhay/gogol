@@ -32,12 +32,12 @@ module Network.Google.Resource.DFAReporting.CreativeFields.Insert
     -- * Request Lenses
     , cfiQuotaUser
     , cfiPrettyPrint
-    , cfiUserIp
+    , cfiUserIP
     , cfiProfileId
     , cfiKey
-    , cfiOauthToken
+    , cfiOAuthToken
+    , cfiCreativeField
     , cfiFields
-    , cfiAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,23 +52,25 @@ type CreativeFieldsInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] CreativeField
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] CreativeField :>
+                           Post '[JSON] CreativeField
 
 -- | Inserts a new creative field.
 --
 -- /See:/ 'creativeFieldsInsert'' smart constructor.
 data CreativeFieldsInsert' = CreativeFieldsInsert'
-    { _cfiQuotaUser   :: !(Maybe Text)
-    , _cfiPrettyPrint :: !Bool
-    , _cfiUserIp      :: !(Maybe Text)
-    , _cfiProfileId   :: !Int64
-    , _cfiKey         :: !(Maybe Text)
-    , _cfiOauthToken  :: !(Maybe Text)
-    , _cfiFields      :: !(Maybe Text)
-    , _cfiAlt         :: !Alt
+    { _cfiQuotaUser     :: !(Maybe Text)
+    , _cfiPrettyPrint   :: !Bool
+    , _cfiUserIP        :: !(Maybe Text)
+    , _cfiProfileId     :: !Int64
+    , _cfiKey           :: !(Maybe Key)
+    , _cfiOAuthToken    :: !(Maybe OAuthToken)
+    , _cfiCreativeField :: !CreativeField
+    , _cfiFields        :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeFieldsInsert'' with the minimum fields required to make a request.
@@ -79,30 +81,31 @@ data CreativeFieldsInsert' = CreativeFieldsInsert'
 --
 -- * 'cfiPrettyPrint'
 --
--- * 'cfiUserIp'
+-- * 'cfiUserIP'
 --
 -- * 'cfiProfileId'
 --
 -- * 'cfiKey'
 --
--- * 'cfiOauthToken'
+-- * 'cfiOAuthToken'
+--
+-- * 'cfiCreativeField'
 --
 -- * 'cfiFields'
---
--- * 'cfiAlt'
 creativeFieldsInsert'
     :: Int64 -- ^ 'profileId'
+    -> CreativeField -- ^ 'CreativeField'
     -> CreativeFieldsInsert'
-creativeFieldsInsert' pCfiProfileId_ =
+creativeFieldsInsert' pCfiProfileId_ pCfiCreativeField_ =
     CreativeFieldsInsert'
     { _cfiQuotaUser = Nothing
     , _cfiPrettyPrint = True
-    , _cfiUserIp = Nothing
+    , _cfiUserIP = Nothing
     , _cfiProfileId = pCfiProfileId_
     , _cfiKey = Nothing
-    , _cfiOauthToken = Nothing
+    , _cfiOAuthToken = Nothing
+    , _cfiCreativeField = pCfiCreativeField_
     , _cfiFields = Nothing
-    , _cfiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,9 +123,9 @@ cfiPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cfiUserIp :: Lens' CreativeFieldsInsert' (Maybe Text)
-cfiUserIp
-  = lens _cfiUserIp (\ s a -> s{_cfiUserIp = a})
+cfiUserIP :: Lens' CreativeFieldsInsert' (Maybe Text)
+cfiUserIP
+  = lens _cfiUserIP (\ s a -> s{_cfiUserIP = a})
 
 -- | User profile ID associated with this request.
 cfiProfileId :: Lens' CreativeFieldsInsert' Int64
@@ -132,34 +135,41 @@ cfiProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cfiKey :: Lens' CreativeFieldsInsert' (Maybe Text)
+cfiKey :: Lens' CreativeFieldsInsert' (Maybe Key)
 cfiKey = lens _cfiKey (\ s a -> s{_cfiKey = a})
 
 -- | OAuth 2.0 token for the current user.
-cfiOauthToken :: Lens' CreativeFieldsInsert' (Maybe Text)
-cfiOauthToken
-  = lens _cfiOauthToken
-      (\ s a -> s{_cfiOauthToken = a})
+cfiOAuthToken :: Lens' CreativeFieldsInsert' (Maybe OAuthToken)
+cfiOAuthToken
+  = lens _cfiOAuthToken
+      (\ s a -> s{_cfiOAuthToken = a})
+
+-- | Multipart request metadata.
+cfiCreativeField :: Lens' CreativeFieldsInsert' CreativeField
+cfiCreativeField
+  = lens _cfiCreativeField
+      (\ s a -> s{_cfiCreativeField = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cfiFields :: Lens' CreativeFieldsInsert' (Maybe Text)
 cfiFields
   = lens _cfiFields (\ s a -> s{_cfiFields = a})
 
--- | Data format for the response.
-cfiAlt :: Lens' CreativeFieldsInsert' Alt
-cfiAlt = lens _cfiAlt (\ s a -> s{_cfiAlt = a})
+instance GoogleAuth CreativeFieldsInsert' where
+        authKey = cfiKey . _Just
+        authToken = cfiOAuthToken . _Just
 
 instance GoogleRequest CreativeFieldsInsert' where
         type Rs CreativeFieldsInsert' = CreativeField
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativeFieldsInsert'{..}
-          = go _cfiQuotaUser (Just _cfiPrettyPrint) _cfiUserIp
+          = go _cfiQuotaUser (Just _cfiPrettyPrint) _cfiUserIP
               _cfiProfileId
               _cfiKey
-              _cfiOauthToken
+              _cfiOAuthToken
               _cfiFields
-              (Just _cfiAlt)
+              (Just AltJSON)
+              _cfiCreativeField
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CreativeFieldsInsertResource)

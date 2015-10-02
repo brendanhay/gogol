@@ -32,13 +32,13 @@ module Network.Google.Resource.Directory.Schemas.Patch
     -- * Request Lenses
     , spQuotaUser
     , spPrettyPrint
-    , spUserIp
+    , spUserIP
     , spCustomerId
+    , spSchema
     , spKey
-    , spOauthToken
+    , spOAuthToken
     , spSchemaKey
     , spFields
-    , spAlt
     ) where
 
 import           Network.Google.AdminDirectory.Types
@@ -54,10 +54,11 @@ type SchemasPatchResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Patch '[JSON] Schema
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Schema :> Patch '[JSON] Schema
 
 -- | Update schema. This method supports patch semantics.
 --
@@ -65,13 +66,13 @@ type SchemasPatchResource =
 data SchemasPatch' = SchemasPatch'
     { _spQuotaUser   :: !(Maybe Text)
     , _spPrettyPrint :: !Bool
-    , _spUserIp      :: !(Maybe Text)
+    , _spUserIP      :: !(Maybe Text)
     , _spCustomerId  :: !Text
-    , _spKey         :: !(Maybe Text)
-    , _spOauthToken  :: !(Maybe Text)
+    , _spSchema      :: !Schema
+    , _spKey         :: !(Maybe Key)
+    , _spOAuthToken  :: !(Maybe OAuthToken)
     , _spSchemaKey   :: !Text
     , _spFields      :: !(Maybe Text)
-    , _spAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SchemasPatch'' with the minimum fields required to make a request.
@@ -82,34 +83,35 @@ data SchemasPatch' = SchemasPatch'
 --
 -- * 'spPrettyPrint'
 --
--- * 'spUserIp'
+-- * 'spUserIP'
 --
 -- * 'spCustomerId'
 --
+-- * 'spSchema'
+--
 -- * 'spKey'
 --
--- * 'spOauthToken'
+-- * 'spOAuthToken'
 --
 -- * 'spSchemaKey'
 --
 -- * 'spFields'
---
--- * 'spAlt'
 schemasPatch'
     :: Text -- ^ 'customerId'
+    -> Schema -- ^ 'Schema'
     -> Text -- ^ 'schemaKey'
     -> SchemasPatch'
-schemasPatch' pSpCustomerId_ pSpSchemaKey_ =
+schemasPatch' pSpCustomerId_ pSpSchema_ pSpSchemaKey_ =
     SchemasPatch'
     { _spQuotaUser = Nothing
     , _spPrettyPrint = True
-    , _spUserIp = Nothing
+    , _spUserIP = Nothing
     , _spCustomerId = pSpCustomerId_
+    , _spSchema = pSpSchema_
     , _spKey = Nothing
-    , _spOauthToken = Nothing
+    , _spOAuthToken = Nothing
     , _spSchemaKey = pSpSchemaKey_
     , _spFields = Nothing
-    , _spAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,24 +129,28 @@ spPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-spUserIp :: Lens' SchemasPatch' (Maybe Text)
-spUserIp = lens _spUserIp (\ s a -> s{_spUserIp = a})
+spUserIP :: Lens' SchemasPatch' (Maybe Text)
+spUserIP = lens _spUserIP (\ s a -> s{_spUserIP = a})
 
 -- | Immutable id of the Google Apps account
 spCustomerId :: Lens' SchemasPatch' Text
 spCustomerId
   = lens _spCustomerId (\ s a -> s{_spCustomerId = a})
 
+-- | Multipart request metadata.
+spSchema :: Lens' SchemasPatch' Schema
+spSchema = lens _spSchema (\ s a -> s{_spSchema = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-spKey :: Lens' SchemasPatch' (Maybe Text)
+spKey :: Lens' SchemasPatch' (Maybe Key)
 spKey = lens _spKey (\ s a -> s{_spKey = a})
 
 -- | OAuth 2.0 token for the current user.
-spOauthToken :: Lens' SchemasPatch' (Maybe Text)
-spOauthToken
-  = lens _spOauthToken (\ s a -> s{_spOauthToken = a})
+spOAuthToken :: Lens' SchemasPatch' (Maybe OAuthToken)
+spOAuthToken
+  = lens _spOAuthToken (\ s a -> s{_spOAuthToken = a})
 
 -- | Name or immutable Id of the schema.
 spSchemaKey :: Lens' SchemasPatch' Text
@@ -155,21 +161,22 @@ spSchemaKey
 spFields :: Lens' SchemasPatch' (Maybe Text)
 spFields = lens _spFields (\ s a -> s{_spFields = a})
 
--- | Data format for the response.
-spAlt :: Lens' SchemasPatch' Alt
-spAlt = lens _spAlt (\ s a -> s{_spAlt = a})
+instance GoogleAuth SchemasPatch' where
+        authKey = spKey . _Just
+        authToken = spOAuthToken . _Just
 
 instance GoogleRequest SchemasPatch' where
         type Rs SchemasPatch' = Schema
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u SchemasPatch'{..}
-          = go _spQuotaUser (Just _spPrettyPrint) _spUserIp
+          = go _spQuotaUser (Just _spPrettyPrint) _spUserIP
               _spCustomerId
               _spKey
-              _spOauthToken
+              _spOAuthToken
               _spSchemaKey
               _spFields
-              (Just _spAlt)
+              (Just AltJSON)
+              _spSchema
           where go
                   = clientWithRoute
                       (Proxy :: Proxy SchemasPatchResource)

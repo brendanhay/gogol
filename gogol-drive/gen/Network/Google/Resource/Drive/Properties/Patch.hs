@@ -32,14 +32,14 @@ module Network.Google.Resource.Drive.Properties.Patch
     -- * Request Lenses
     , ppQuotaUser
     , ppPrettyPrint
+    , ppProperty
     , ppPropertyKey
-    , ppUserIp
+    , ppUserIP
     , ppVisibility
     , ppKey
     , ppFileId
-    , ppOauthToken
+    , ppOAuthToken
     , ppFields
-    , ppAlt
     ) where
 
 import           Network.Google.Drive.Types
@@ -56,10 +56,11 @@ type PropertiesPatchResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "visibility" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Patch '[JSON] Property
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] Property :> Patch '[JSON] Property
 
 -- | Updates a property. This method supports patch semantics.
 --
@@ -67,14 +68,14 @@ type PropertiesPatchResource =
 data PropertiesPatch' = PropertiesPatch'
     { _ppQuotaUser   :: !(Maybe Text)
     , _ppPrettyPrint :: !Bool
+    , _ppProperty    :: !Property
     , _ppPropertyKey :: !Text
-    , _ppUserIp      :: !(Maybe Text)
+    , _ppUserIP      :: !(Maybe Text)
     , _ppVisibility  :: !Text
-    , _ppKey         :: !(Maybe Text)
+    , _ppKey         :: !(Maybe Key)
     , _ppFileId      :: !Text
-    , _ppOauthToken  :: !(Maybe Text)
+    , _ppOAuthToken  :: !(Maybe OAuthToken)
     , _ppFields      :: !(Maybe Text)
-    , _ppAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PropertiesPatch'' with the minimum fields required to make a request.
@@ -85,9 +86,11 @@ data PropertiesPatch' = PropertiesPatch'
 --
 -- * 'ppPrettyPrint'
 --
+-- * 'ppProperty'
+--
 -- * 'ppPropertyKey'
 --
--- * 'ppUserIp'
+-- * 'ppUserIP'
 --
 -- * 'ppVisibility'
 --
@@ -95,27 +98,26 @@ data PropertiesPatch' = PropertiesPatch'
 --
 -- * 'ppFileId'
 --
--- * 'ppOauthToken'
+-- * 'ppOAuthToken'
 --
 -- * 'ppFields'
---
--- * 'ppAlt'
 propertiesPatch'
-    :: Text -- ^ 'propertyKey'
+    :: Property -- ^ 'Property'
+    -> Text -- ^ 'propertyKey'
     -> Text -- ^ 'fileId'
     -> PropertiesPatch'
-propertiesPatch' pPpPropertyKey_ pPpFileId_ =
+propertiesPatch' pPpProperty_ pPpPropertyKey_ pPpFileId_ =
     PropertiesPatch'
     { _ppQuotaUser = Nothing
     , _ppPrettyPrint = True
+    , _ppProperty = pPpProperty_
     , _ppPropertyKey = pPpPropertyKey_
-    , _ppUserIp = Nothing
+    , _ppUserIP = Nothing
     , _ppVisibility = "private"
     , _ppKey = Nothing
     , _ppFileId = pPpFileId_
-    , _ppOauthToken = Nothing
+    , _ppOAuthToken = Nothing
     , _ppFields = Nothing
-    , _ppAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -131,6 +133,11 @@ ppPrettyPrint
   = lens _ppPrettyPrint
       (\ s a -> s{_ppPrettyPrint = a})
 
+-- | Multipart request metadata.
+ppProperty :: Lens' PropertiesPatch' Property
+ppProperty
+  = lens _ppProperty (\ s a -> s{_ppProperty = a})
+
 -- | The key of the property.
 ppPropertyKey :: Lens' PropertiesPatch' Text
 ppPropertyKey
@@ -139,8 +146,8 @@ ppPropertyKey
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ppUserIp :: Lens' PropertiesPatch' (Maybe Text)
-ppUserIp = lens _ppUserIp (\ s a -> s{_ppUserIp = a})
+ppUserIP :: Lens' PropertiesPatch' (Maybe Text)
+ppUserIP = lens _ppUserIP (\ s a -> s{_ppUserIP = a})
 
 -- | The visibility of the property.
 ppVisibility :: Lens' PropertiesPatch' Text
@@ -150,7 +157,7 @@ ppVisibility
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ppKey :: Lens' PropertiesPatch' (Maybe Text)
+ppKey :: Lens' PropertiesPatch' (Maybe Key)
 ppKey = lens _ppKey (\ s a -> s{_ppKey = a})
 
 -- | The ID of the file.
@@ -158,17 +165,17 @@ ppFileId :: Lens' PropertiesPatch' Text
 ppFileId = lens _ppFileId (\ s a -> s{_ppFileId = a})
 
 -- | OAuth 2.0 token for the current user.
-ppOauthToken :: Lens' PropertiesPatch' (Maybe Text)
-ppOauthToken
-  = lens _ppOauthToken (\ s a -> s{_ppOauthToken = a})
+ppOAuthToken :: Lens' PropertiesPatch' (Maybe OAuthToken)
+ppOAuthToken
+  = lens _ppOAuthToken (\ s a -> s{_ppOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ppFields :: Lens' PropertiesPatch' (Maybe Text)
 ppFields = lens _ppFields (\ s a -> s{_ppFields = a})
 
--- | Data format for the response.
-ppAlt :: Lens' PropertiesPatch' Alt
-ppAlt = lens _ppAlt (\ s a -> s{_ppAlt = a})
+instance GoogleAuth PropertiesPatch' where
+        authKey = ppKey . _Just
+        authToken = ppOAuthToken . _Just
 
 instance GoogleRequest PropertiesPatch' where
         type Rs PropertiesPatch' = Property
@@ -176,13 +183,14 @@ instance GoogleRequest PropertiesPatch' where
         requestWithRoute r u PropertiesPatch'{..}
           = go _ppQuotaUser (Just _ppPrettyPrint)
               _ppPropertyKey
-              _ppUserIp
+              _ppUserIP
               (Just _ppVisibility)
               _ppKey
               _ppFileId
-              _ppOauthToken
+              _ppOAuthToken
               _ppFields
-              (Just _ppAlt)
+              (Just AltJSON)
+              _ppProperty
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PropertiesPatchResource)

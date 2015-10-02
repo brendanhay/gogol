@@ -1,0 +1,175 @@
+{-# LANGUAGE DataKinds          #-}
+{-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
+{-# LANGUAGE TypeFamilies       #-}
+{-# LANGUAGE TypeOperators      #-}
+
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+
+-- |
+-- Module      : Network.Google.Resource.AndroidEnterprise.Collections.Insert
+-- Copyright   : (c) 2015 Brendan Hay
+-- License     : Mozilla Public License, v. 2.0.
+-- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Stability   : auto-generated
+-- Portability : non-portable (GHC extensions)
+--
+-- | Creates a new collection.
+--
+-- /See:/ <https://developers.google.com/play/enterprise Google Play EMM API Reference> for @AndroidEnterpriseCollectionsInsert@.
+module Network.Google.Resource.AndroidEnterprise.Collections.Insert
+    (
+    -- * REST Resource
+      CollectionsInsertResource
+
+    -- * Creating a Request
+    , collectionsInsert'
+    , CollectionsInsert'
+
+    -- * Request Lenses
+    , ciQuotaUser
+    , ciPrettyPrint
+    , ciEnterpriseId
+    , ciUserIP
+    , ciCollection
+    , ciKey
+    , ciOAuthToken
+    , ciFields
+    ) where
+
+import           Network.Google.AndroidEnterprise.Types
+import           Network.Google.Prelude
+
+-- | A resource alias for @AndroidEnterpriseCollectionsInsert@ which the
+-- 'CollectionsInsert'' request conforms to.
+type CollectionsInsertResource =
+     "enterprises" :>
+       Capture "enterpriseId" Text :>
+         "collections" :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "userIp" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
+                     QueryParam "fields" Text :>
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Collection :> Post '[JSON] Collection
+
+-- | Creates a new collection.
+--
+-- /See:/ 'collectionsInsert'' smart constructor.
+data CollectionsInsert' = CollectionsInsert'
+    { _ciQuotaUser    :: !(Maybe Text)
+    , _ciPrettyPrint  :: !Bool
+    , _ciEnterpriseId :: !Text
+    , _ciUserIP       :: !(Maybe Text)
+    , _ciCollection   :: !Collection
+    , _ciKey          :: !(Maybe Key)
+    , _ciOAuthToken   :: !(Maybe OAuthToken)
+    , _ciFields       :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'CollectionsInsert'' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'ciQuotaUser'
+--
+-- * 'ciPrettyPrint'
+--
+-- * 'ciEnterpriseId'
+--
+-- * 'ciUserIP'
+--
+-- * 'ciCollection'
+--
+-- * 'ciKey'
+--
+-- * 'ciOAuthToken'
+--
+-- * 'ciFields'
+collectionsInsert'
+    :: Text -- ^ 'enterpriseId'
+    -> Collection -- ^ 'Collection'
+    -> CollectionsInsert'
+collectionsInsert' pCiEnterpriseId_ pCiCollection_ =
+    CollectionsInsert'
+    { _ciQuotaUser = Nothing
+    , _ciPrettyPrint = True
+    , _ciEnterpriseId = pCiEnterpriseId_
+    , _ciUserIP = Nothing
+    , _ciCollection = pCiCollection_
+    , _ciKey = Nothing
+    , _ciOAuthToken = Nothing
+    , _ciFields = Nothing
+    }
+
+-- | Available to use for quota purposes for server-side applications. Can be
+-- any arbitrary string assigned to a user, but should not exceed 40
+-- characters. Overrides userIp if both are provided.
+ciQuotaUser :: Lens' CollectionsInsert' (Maybe Text)
+ciQuotaUser
+  = lens _ciQuotaUser (\ s a -> s{_ciQuotaUser = a})
+
+-- | Returns response with indentations and line breaks.
+ciPrettyPrint :: Lens' CollectionsInsert' Bool
+ciPrettyPrint
+  = lens _ciPrettyPrint
+      (\ s a -> s{_ciPrettyPrint = a})
+
+-- | The ID of the enterprise.
+ciEnterpriseId :: Lens' CollectionsInsert' Text
+ciEnterpriseId
+  = lens _ciEnterpriseId
+      (\ s a -> s{_ciEnterpriseId = a})
+
+-- | IP address of the site where the request originates. Use this if you
+-- want to enforce per-user limits.
+ciUserIP :: Lens' CollectionsInsert' (Maybe Text)
+ciUserIP = lens _ciUserIP (\ s a -> s{_ciUserIP = a})
+
+-- | Multipart request metadata.
+ciCollection :: Lens' CollectionsInsert' Collection
+ciCollection
+  = lens _ciCollection (\ s a -> s{_ciCollection = a})
+
+-- | API key. Your API key identifies your project and provides you with API
+-- access, quota, and reports. Required unless you provide an OAuth 2.0
+-- token.
+ciKey :: Lens' CollectionsInsert' (Maybe Key)
+ciKey = lens _ciKey (\ s a -> s{_ciKey = a})
+
+-- | OAuth 2.0 token for the current user.
+ciOAuthToken :: Lens' CollectionsInsert' (Maybe OAuthToken)
+ciOAuthToken
+  = lens _ciOAuthToken (\ s a -> s{_ciOAuthToken = a})
+
+-- | Selector specifying which fields to include in a partial response.
+ciFields :: Lens' CollectionsInsert' (Maybe Text)
+ciFields = lens _ciFields (\ s a -> s{_ciFields = a})
+
+instance GoogleAuth CollectionsInsert' where
+        authKey = ciKey . _Just
+        authToken = ciOAuthToken . _Just
+
+instance GoogleRequest CollectionsInsert' where
+        type Rs CollectionsInsert' = Collection
+        request
+          = requestWithRoute defReq androidEnterpriseURL
+        requestWithRoute r u CollectionsInsert'{..}
+          = go _ciQuotaUser (Just _ciPrettyPrint)
+              _ciEnterpriseId
+              _ciUserIP
+              _ciKey
+              _ciOAuthToken
+              _ciFields
+              (Just AltJSON)
+              _ciCollection
+          where go
+                  = clientWithRoute
+                      (Proxy :: Proxy CollectionsInsertResource)
+                      r
+                      u

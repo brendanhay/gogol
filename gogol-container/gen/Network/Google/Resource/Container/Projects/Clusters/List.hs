@@ -32,12 +32,11 @@ module Network.Google.Resource.Container.Projects.Clusters.List
     -- * Request Lenses
     , pclQuotaUser
     , pclPrettyPrint
-    , pclUserIp
+    , pclUserIP
     , pclKey
     , pclProjectId
-    , pclOauthToken
+    , pclOAuthToken
     , pclFields
-    , pclAlt
     ) where
 
 import           Network.Google.Container.Types
@@ -51,10 +50,10 @@ type ProjectsClustersListResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :>
+                     QueryParam "alt" AltJSON :>
                        Get '[JSON] ListAggregatedClustersResponse
 
 -- | Lists all clusters owned by a project across all zones.
@@ -63,12 +62,11 @@ type ProjectsClustersListResource =
 data ProjectsClustersList' = ProjectsClustersList'
     { _pclQuotaUser   :: !(Maybe Text)
     , _pclPrettyPrint :: !Bool
-    , _pclUserIp      :: !(Maybe Text)
-    , _pclKey         :: !(Maybe Text)
+    , _pclUserIP      :: !(Maybe Text)
+    , _pclKey         :: !(Maybe Key)
     , _pclProjectId   :: !Text
-    , _pclOauthToken  :: !(Maybe Text)
+    , _pclOAuthToken  :: !(Maybe OAuthToken)
     , _pclFields      :: !(Maybe Text)
-    , _pclAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsClustersList'' with the minimum fields required to make a request.
@@ -79,17 +77,15 @@ data ProjectsClustersList' = ProjectsClustersList'
 --
 -- * 'pclPrettyPrint'
 --
--- * 'pclUserIp'
+-- * 'pclUserIP'
 --
 -- * 'pclKey'
 --
 -- * 'pclProjectId'
 --
--- * 'pclOauthToken'
+-- * 'pclOAuthToken'
 --
 -- * 'pclFields'
---
--- * 'pclAlt'
 projectsClustersList'
     :: Text -- ^ 'projectId'
     -> ProjectsClustersList'
@@ -97,12 +93,11 @@ projectsClustersList' pPclProjectId_ =
     ProjectsClustersList'
     { _pclQuotaUser = Nothing
     , _pclPrettyPrint = True
-    , _pclUserIp = Nothing
+    , _pclUserIP = Nothing
     , _pclKey = Nothing
     , _pclProjectId = pPclProjectId_
-    , _pclOauthToken = Nothing
+    , _pclOAuthToken = Nothing
     , _pclFields = Nothing
-    , _pclAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,14 +115,14 @@ pclPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-pclUserIp :: Lens' ProjectsClustersList' (Maybe Text)
-pclUserIp
-  = lens _pclUserIp (\ s a -> s{_pclUserIp = a})
+pclUserIP :: Lens' ProjectsClustersList' (Maybe Text)
+pclUserIP
+  = lens _pclUserIP (\ s a -> s{_pclUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pclKey :: Lens' ProjectsClustersList' (Maybe Text)
+pclKey :: Lens' ProjectsClustersList' (Maybe Key)
 pclKey = lens _pclKey (\ s a -> s{_pclKey = a})
 
 -- | The Google Developers Console project ID or project number.
@@ -136,31 +131,31 @@ pclProjectId
   = lens _pclProjectId (\ s a -> s{_pclProjectId = a})
 
 -- | OAuth 2.0 token for the current user.
-pclOauthToken :: Lens' ProjectsClustersList' (Maybe Text)
-pclOauthToken
-  = lens _pclOauthToken
-      (\ s a -> s{_pclOauthToken = a})
+pclOAuthToken :: Lens' ProjectsClustersList' (Maybe OAuthToken)
+pclOAuthToken
+  = lens _pclOAuthToken
+      (\ s a -> s{_pclOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 pclFields :: Lens' ProjectsClustersList' (Maybe Text)
 pclFields
   = lens _pclFields (\ s a -> s{_pclFields = a})
 
--- | Data format for the response.
-pclAlt :: Lens' ProjectsClustersList' Alt
-pclAlt = lens _pclAlt (\ s a -> s{_pclAlt = a})
+instance GoogleAuth ProjectsClustersList' where
+        authKey = pclKey . _Just
+        authToken = pclOAuthToken . _Just
 
 instance GoogleRequest ProjectsClustersList' where
         type Rs ProjectsClustersList' =
              ListAggregatedClustersResponse
         request = requestWithRoute defReq containerURL
         requestWithRoute r u ProjectsClustersList'{..}
-          = go _pclQuotaUser (Just _pclPrettyPrint) _pclUserIp
+          = go _pclQuotaUser (Just _pclPrettyPrint) _pclUserIP
               _pclKey
               _pclProjectId
-              _pclOauthToken
+              _pclOAuthToken
               _pclFields
-              (Just _pclAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsClustersListResource)

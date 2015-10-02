@@ -33,12 +33,11 @@ module Network.Google.Resource.Drive.Files.Trash
     -- * Request Lenses
     , filQuotaUser
     , filPrettyPrint
-    , filUserIp
+    , filUserIP
     , filKey
     , filFileId
-    , filOauthToken
+    , filOAuthToken
     , filFields
-    , filAlt
     ) where
 
 import           Network.Google.Drive.Types
@@ -53,10 +52,10 @@ type FilesTrashResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] File
+                       QueryParam "alt" AltJSON :> Post '[JSON] File
 
 -- | Moves a file to the trash. The currently authenticated user must own the
 -- file.
@@ -65,12 +64,11 @@ type FilesTrashResource =
 data FilesTrash' = FilesTrash'
     { _filQuotaUser   :: !(Maybe Text)
     , _filPrettyPrint :: !Bool
-    , _filUserIp      :: !(Maybe Text)
-    , _filKey         :: !(Maybe Text)
+    , _filUserIP      :: !(Maybe Text)
+    , _filKey         :: !(Maybe Key)
     , _filFileId      :: !Text
-    , _filOauthToken  :: !(Maybe Text)
+    , _filOAuthToken  :: !(Maybe OAuthToken)
     , _filFields      :: !(Maybe Text)
-    , _filAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FilesTrash'' with the minimum fields required to make a request.
@@ -81,17 +79,15 @@ data FilesTrash' = FilesTrash'
 --
 -- * 'filPrettyPrint'
 --
--- * 'filUserIp'
+-- * 'filUserIP'
 --
 -- * 'filKey'
 --
 -- * 'filFileId'
 --
--- * 'filOauthToken'
+-- * 'filOAuthToken'
 --
 -- * 'filFields'
---
--- * 'filAlt'
 filesTrash'
     :: Text -- ^ 'fileId'
     -> FilesTrash'
@@ -99,12 +95,11 @@ filesTrash' pFilFileId_ =
     FilesTrash'
     { _filQuotaUser = Nothing
     , _filPrettyPrint = True
-    , _filUserIp = Nothing
+    , _filUserIP = Nothing
     , _filKey = Nothing
     , _filFileId = pFilFileId_
-    , _filOauthToken = Nothing
+    , _filOAuthToken = Nothing
     , _filFields = Nothing
-    , _filAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -122,14 +117,14 @@ filPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-filUserIp :: Lens' FilesTrash' (Maybe Text)
-filUserIp
-  = lens _filUserIp (\ s a -> s{_filUserIp = a})
+filUserIP :: Lens' FilesTrash' (Maybe Text)
+filUserIP
+  = lens _filUserIP (\ s a -> s{_filUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-filKey :: Lens' FilesTrash' (Maybe Text)
+filKey :: Lens' FilesTrash' (Maybe Key)
 filKey = lens _filKey (\ s a -> s{_filKey = a})
 
 -- | The ID of the file to trash.
@@ -138,30 +133,30 @@ filFileId
   = lens _filFileId (\ s a -> s{_filFileId = a})
 
 -- | OAuth 2.0 token for the current user.
-filOauthToken :: Lens' FilesTrash' (Maybe Text)
-filOauthToken
-  = lens _filOauthToken
-      (\ s a -> s{_filOauthToken = a})
+filOAuthToken :: Lens' FilesTrash' (Maybe OAuthToken)
+filOAuthToken
+  = lens _filOAuthToken
+      (\ s a -> s{_filOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 filFields :: Lens' FilesTrash' (Maybe Text)
 filFields
   = lens _filFields (\ s a -> s{_filFields = a})
 
--- | Data format for the response.
-filAlt :: Lens' FilesTrash' Alt
-filAlt = lens _filAlt (\ s a -> s{_filAlt = a})
+instance GoogleAuth FilesTrash' where
+        authKey = filKey . _Just
+        authToken = filOAuthToken . _Just
 
 instance GoogleRequest FilesTrash' where
         type Rs FilesTrash' = File
         request = requestWithRoute defReq driveURL
         requestWithRoute r u FilesTrash'{..}
-          = go _filQuotaUser (Just _filPrettyPrint) _filUserIp
+          = go _filQuotaUser (Just _filPrettyPrint) _filUserIP
               _filKey
               _filFileId
-              _filOauthToken
+              _filOAuthToken
               _filFields
-              (Just _filAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy FilesTrashResource)
                       r

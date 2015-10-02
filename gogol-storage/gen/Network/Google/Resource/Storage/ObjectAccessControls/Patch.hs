@@ -33,15 +33,15 @@ module Network.Google.Resource.Storage.ObjectAccessControls.Patch
     -- * Request Lenses
     , oacpQuotaUser
     , oacpPrettyPrint
-    , oacpUserIp
+    , oacpUserIP
     , oacpBucket
     , oacpKey
     , oacpObject
-    , oacpOauthToken
+    , oacpOAuthToken
     , oacpEntity
+    , oacpObjectAccessControl
     , oacpGeneration
     , oacpFields
-    , oacpAlt
     ) where
 
 import           Network.Google.Prelude
@@ -59,29 +59,30 @@ type ObjectAccessControlsPatchResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "generation" Word64 :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :>
-                                 Patch '[JSON] ObjectAccessControl
+                               QueryParam "alt" AltJSON :>
+                                 ReqBody '[JSON] ObjectAccessControl :>
+                                   Patch '[JSON] ObjectAccessControl
 
 -- | Updates an ACL entry on the specified object. This method supports patch
 -- semantics.
 --
 -- /See:/ 'objectAccessControlsPatch'' smart constructor.
 data ObjectAccessControlsPatch' = ObjectAccessControlsPatch'
-    { _oacpQuotaUser   :: !(Maybe Text)
-    , _oacpPrettyPrint :: !Bool
-    , _oacpUserIp      :: !(Maybe Text)
-    , _oacpBucket      :: !Text
-    , _oacpKey         :: !(Maybe Text)
-    , _oacpObject      :: !Text
-    , _oacpOauthToken  :: !(Maybe Text)
-    , _oacpEntity      :: !Text
-    , _oacpGeneration  :: !(Maybe Word64)
-    , _oacpFields      :: !(Maybe Text)
-    , _oacpAlt         :: !Alt
+    { _oacpQuotaUser           :: !(Maybe Text)
+    , _oacpPrettyPrint         :: !Bool
+    , _oacpUserIP              :: !(Maybe Text)
+    , _oacpBucket              :: !Text
+    , _oacpKey                 :: !(Maybe Key)
+    , _oacpObject              :: !Text
+    , _oacpOAuthToken          :: !(Maybe OAuthToken)
+    , _oacpEntity              :: !Text
+    , _oacpObjectAccessControl :: !ObjectAccessControl
+    , _oacpGeneration          :: !(Maybe Word64)
+    , _oacpFields              :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectAccessControlsPatch'' with the minimum fields required to make a request.
@@ -92,7 +93,7 @@ data ObjectAccessControlsPatch' = ObjectAccessControlsPatch'
 --
 -- * 'oacpPrettyPrint'
 --
--- * 'oacpUserIp'
+-- * 'oacpUserIP'
 --
 -- * 'oacpBucket'
 --
@@ -100,33 +101,34 @@ data ObjectAccessControlsPatch' = ObjectAccessControlsPatch'
 --
 -- * 'oacpObject'
 --
--- * 'oacpOauthToken'
+-- * 'oacpOAuthToken'
 --
 -- * 'oacpEntity'
+--
+-- * 'oacpObjectAccessControl'
 --
 -- * 'oacpGeneration'
 --
 -- * 'oacpFields'
---
--- * 'oacpAlt'
 objectAccessControlsPatch'
     :: Text -- ^ 'bucket'
     -> Text -- ^ 'object'
     -> Text -- ^ 'entity'
+    -> ObjectAccessControl -- ^ 'ObjectAccessControl'
     -> ObjectAccessControlsPatch'
-objectAccessControlsPatch' pOacpBucket_ pOacpObject_ pOacpEntity_ =
+objectAccessControlsPatch' pOacpBucket_ pOacpObject_ pOacpEntity_ pOacpObjectAccessControl_ =
     ObjectAccessControlsPatch'
     { _oacpQuotaUser = Nothing
     , _oacpPrettyPrint = True
-    , _oacpUserIp = Nothing
+    , _oacpUserIP = Nothing
     , _oacpBucket = pOacpBucket_
     , _oacpKey = Nothing
     , _oacpObject = pOacpObject_
-    , _oacpOauthToken = Nothing
+    , _oacpOAuthToken = Nothing
     , _oacpEntity = pOacpEntity_
+    , _oacpObjectAccessControl = pOacpObjectAccessControl_
     , _oacpGeneration = Nothing
     , _oacpFields = Nothing
-    , _oacpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -145,9 +147,9 @@ oacpPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-oacpUserIp :: Lens' ObjectAccessControlsPatch' (Maybe Text)
-oacpUserIp
-  = lens _oacpUserIp (\ s a -> s{_oacpUserIp = a})
+oacpUserIP :: Lens' ObjectAccessControlsPatch' (Maybe Text)
+oacpUserIP
+  = lens _oacpUserIP (\ s a -> s{_oacpUserIP = a})
 
 -- | Name of a bucket.
 oacpBucket :: Lens' ObjectAccessControlsPatch' Text
@@ -157,7 +159,7 @@ oacpBucket
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-oacpKey :: Lens' ObjectAccessControlsPatch' (Maybe Text)
+oacpKey :: Lens' ObjectAccessControlsPatch' (Maybe Key)
 oacpKey = lens _oacpKey (\ s a -> s{_oacpKey = a})
 
 -- | Name of the object.
@@ -166,10 +168,10 @@ oacpObject
   = lens _oacpObject (\ s a -> s{_oacpObject = a})
 
 -- | OAuth 2.0 token for the current user.
-oacpOauthToken :: Lens' ObjectAccessControlsPatch' (Maybe Text)
-oacpOauthToken
-  = lens _oacpOauthToken
-      (\ s a -> s{_oacpOauthToken = a})
+oacpOAuthToken :: Lens' ObjectAccessControlsPatch' (Maybe OAuthToken)
+oacpOAuthToken
+  = lens _oacpOAuthToken
+      (\ s a -> s{_oacpOAuthToken = a})
 
 -- | The entity holding the permission. Can be user-userId,
 -- user-emailAddress, group-groupId, group-emailAddress, allUsers, or
@@ -177,6 +179,12 @@ oacpOauthToken
 oacpEntity :: Lens' ObjectAccessControlsPatch' Text
 oacpEntity
   = lens _oacpEntity (\ s a -> s{_oacpEntity = a})
+
+-- | Multipart request metadata.
+oacpObjectAccessControl :: Lens' ObjectAccessControlsPatch' ObjectAccessControl
+oacpObjectAccessControl
+  = lens _oacpObjectAccessControl
+      (\ s a -> s{_oacpObjectAccessControl = a})
 
 -- | If present, selects a specific revision of this object (as opposed to
 -- the latest version, the default).
@@ -190,9 +198,9 @@ oacpFields :: Lens' ObjectAccessControlsPatch' (Maybe Text)
 oacpFields
   = lens _oacpFields (\ s a -> s{_oacpFields = a})
 
--- | Data format for the response.
-oacpAlt :: Lens' ObjectAccessControlsPatch' Alt
-oacpAlt = lens _oacpAlt (\ s a -> s{_oacpAlt = a})
+instance GoogleAuth ObjectAccessControlsPatch' where
+        authKey = oacpKey . _Just
+        authToken = oacpOAuthToken . _Just
 
 instance GoogleRequest ObjectAccessControlsPatch'
          where
@@ -201,15 +209,16 @@ instance GoogleRequest ObjectAccessControlsPatch'
         request = requestWithRoute defReq storageURL
         requestWithRoute r u ObjectAccessControlsPatch'{..}
           = go _oacpQuotaUser (Just _oacpPrettyPrint)
-              _oacpUserIp
+              _oacpUserIP
               _oacpBucket
               _oacpKey
               _oacpObject
-              _oacpOauthToken
+              _oacpOAuthToken
               _oacpEntity
               _oacpGeneration
               _oacpFields
-              (Just _oacpAlt)
+              (Just AltJSON)
+              _oacpObjectAccessControl
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ObjectAccessControlsPatchResource)

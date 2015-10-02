@@ -19,7 +19,7 @@
 --
 -- | Deletes a Container.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersDelete@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersDelete@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Delete
     (
     -- * REST Resource
@@ -33,18 +33,17 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Delete
     , acdQuotaUser
     , acdPrettyPrint
     , acdContainerId
-    , acdUserIp
+    , acdUserIP
     , acdAccountId
     , acdKey
-    , acdOauthToken
+    , acdOAuthToken
     , acdFields
-    , acdAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagmanagerAccountsContainersDelete@ which the
+-- | A resource alias for @TagManagerAccountsContainersDelete@ which the
 -- 'AccountsContainersDelete'' request conforms to.
 type AccountsContainersDeleteResource =
      "accounts" :>
@@ -54,10 +53,10 @@ type AccountsContainersDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Delete '[JSON] ()
+                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a Container.
 --
@@ -66,12 +65,11 @@ data AccountsContainersDelete' = AccountsContainersDelete'
     { _acdQuotaUser   :: !(Maybe Text)
     , _acdPrettyPrint :: !Bool
     , _acdContainerId :: !Text
-    , _acdUserIp      :: !(Maybe Text)
+    , _acdUserIP      :: !(Maybe Text)
     , _acdAccountId   :: !Text
-    , _acdKey         :: !(Maybe Text)
-    , _acdOauthToken  :: !(Maybe Text)
+    , _acdKey         :: !(Maybe Key)
+    , _acdOAuthToken  :: !(Maybe OAuthToken)
     , _acdFields      :: !(Maybe Text)
-    , _acdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersDelete'' with the minimum fields required to make a request.
@@ -84,17 +82,15 @@ data AccountsContainersDelete' = AccountsContainersDelete'
 --
 -- * 'acdContainerId'
 --
--- * 'acdUserIp'
+-- * 'acdUserIP'
 --
 -- * 'acdAccountId'
 --
 -- * 'acdKey'
 --
--- * 'acdOauthToken'
+-- * 'acdOAuthToken'
 --
 -- * 'acdFields'
---
--- * 'acdAlt'
 accountsContainersDelete'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'accountId'
@@ -104,12 +100,11 @@ accountsContainersDelete' pAcdContainerId_ pAcdAccountId_ =
     { _acdQuotaUser = Nothing
     , _acdPrettyPrint = True
     , _acdContainerId = pAcdContainerId_
-    , _acdUserIp = Nothing
+    , _acdUserIP = Nothing
     , _acdAccountId = pAcdAccountId_
     , _acdKey = Nothing
-    , _acdOauthToken = Nothing
+    , _acdOAuthToken = Nothing
     , _acdFields = Nothing
-    , _acdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -133,9 +128,9 @@ acdContainerId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-acdUserIp :: Lens' AccountsContainersDelete' (Maybe Text)
-acdUserIp
-  = lens _acdUserIp (\ s a -> s{_acdUserIp = a})
+acdUserIP :: Lens' AccountsContainersDelete' (Maybe Text)
+acdUserIP
+  = lens _acdUserIP (\ s a -> s{_acdUserIP = a})
 
 -- | The GTM Account ID.
 acdAccountId :: Lens' AccountsContainersDelete' Text
@@ -145,23 +140,23 @@ acdAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-acdKey :: Lens' AccountsContainersDelete' (Maybe Text)
+acdKey :: Lens' AccountsContainersDelete' (Maybe Key)
 acdKey = lens _acdKey (\ s a -> s{_acdKey = a})
 
 -- | OAuth 2.0 token for the current user.
-acdOauthToken :: Lens' AccountsContainersDelete' (Maybe Text)
-acdOauthToken
-  = lens _acdOauthToken
-      (\ s a -> s{_acdOauthToken = a})
+acdOAuthToken :: Lens' AccountsContainersDelete' (Maybe OAuthToken)
+acdOAuthToken
+  = lens _acdOAuthToken
+      (\ s a -> s{_acdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 acdFields :: Lens' AccountsContainersDelete' (Maybe Text)
 acdFields
   = lens _acdFields (\ s a -> s{_acdFields = a})
 
--- | Data format for the response.
-acdAlt :: Lens' AccountsContainersDelete' Alt
-acdAlt = lens _acdAlt (\ s a -> s{_acdAlt = a})
+instance GoogleAuth AccountsContainersDelete' where
+        authKey = acdKey . _Just
+        authToken = acdOAuthToken . _Just
 
 instance GoogleRequest AccountsContainersDelete'
          where
@@ -170,12 +165,12 @@ instance GoogleRequest AccountsContainersDelete'
         requestWithRoute r u AccountsContainersDelete'{..}
           = go _acdQuotaUser (Just _acdPrettyPrint)
               _acdContainerId
-              _acdUserIp
+              _acdUserIP
               _acdAccountId
               _acdKey
-              _acdOauthToken
+              _acdOAuthToken
               _acdFields
-              (Just _acdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountsContainersDeleteResource)

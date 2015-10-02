@@ -32,13 +32,12 @@ module Network.Google.Resource.DFAReporting.DirectorySiteContacts.Get
     -- * Request Lenses
     , dscgQuotaUser
     , dscgPrettyPrint
-    , dscgUserIp
+    , dscgUserIP
     , dscgProfileId
     , dscgKey
     , dscgId
-    , dscgOauthToken
+    , dscgOAuthToken
     , dscgFields
-    , dscgAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,10 +53,10 @@ type DirectorySiteContactsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :>
+                         QueryParam "alt" AltJSON :>
                            Get '[JSON] DirectorySiteContact
 
 -- | Gets one directory site contact by ID.
@@ -66,13 +65,12 @@ type DirectorySiteContactsGetResource =
 data DirectorySiteContactsGet' = DirectorySiteContactsGet'
     { _dscgQuotaUser   :: !(Maybe Text)
     , _dscgPrettyPrint :: !Bool
-    , _dscgUserIp      :: !(Maybe Text)
+    , _dscgUserIP      :: !(Maybe Text)
     , _dscgProfileId   :: !Int64
-    , _dscgKey         :: !(Maybe Text)
+    , _dscgKey         :: !(Maybe Key)
     , _dscgId          :: !Int64
-    , _dscgOauthToken  :: !(Maybe Text)
+    , _dscgOAuthToken  :: !(Maybe OAuthToken)
     , _dscgFields      :: !(Maybe Text)
-    , _dscgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DirectorySiteContactsGet'' with the minimum fields required to make a request.
@@ -83,7 +81,7 @@ data DirectorySiteContactsGet' = DirectorySiteContactsGet'
 --
 -- * 'dscgPrettyPrint'
 --
--- * 'dscgUserIp'
+-- * 'dscgUserIP'
 --
 -- * 'dscgProfileId'
 --
@@ -91,11 +89,9 @@ data DirectorySiteContactsGet' = DirectorySiteContactsGet'
 --
 -- * 'dscgId'
 --
--- * 'dscgOauthToken'
+-- * 'dscgOAuthToken'
 --
 -- * 'dscgFields'
---
--- * 'dscgAlt'
 directorySiteContactsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
@@ -104,13 +100,12 @@ directorySiteContactsGet' pDscgProfileId_ pDscgId_ =
     DirectorySiteContactsGet'
     { _dscgQuotaUser = Nothing
     , _dscgPrettyPrint = True
-    , _dscgUserIp = Nothing
+    , _dscgUserIP = Nothing
     , _dscgProfileId = pDscgProfileId_
     , _dscgKey = Nothing
     , _dscgId = pDscgId_
-    , _dscgOauthToken = Nothing
+    , _dscgOAuthToken = Nothing
     , _dscgFields = Nothing
-    , _dscgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -129,9 +124,9 @@ dscgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-dscgUserIp :: Lens' DirectorySiteContactsGet' (Maybe Text)
-dscgUserIp
-  = lens _dscgUserIp (\ s a -> s{_dscgUserIp = a})
+dscgUserIP :: Lens' DirectorySiteContactsGet' (Maybe Text)
+dscgUserIP
+  = lens _dscgUserIP (\ s a -> s{_dscgUserIP = a})
 
 -- | User profile ID associated with this request.
 dscgProfileId :: Lens' DirectorySiteContactsGet' Int64
@@ -142,7 +137,7 @@ dscgProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dscgKey :: Lens' DirectorySiteContactsGet' (Maybe Text)
+dscgKey :: Lens' DirectorySiteContactsGet' (Maybe Key)
 dscgKey = lens _dscgKey (\ s a -> s{_dscgKey = a})
 
 -- | Directory site contact ID.
@@ -150,19 +145,19 @@ dscgId :: Lens' DirectorySiteContactsGet' Int64
 dscgId = lens _dscgId (\ s a -> s{_dscgId = a})
 
 -- | OAuth 2.0 token for the current user.
-dscgOauthToken :: Lens' DirectorySiteContactsGet' (Maybe Text)
-dscgOauthToken
-  = lens _dscgOauthToken
-      (\ s a -> s{_dscgOauthToken = a})
+dscgOAuthToken :: Lens' DirectorySiteContactsGet' (Maybe OAuthToken)
+dscgOAuthToken
+  = lens _dscgOAuthToken
+      (\ s a -> s{_dscgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 dscgFields :: Lens' DirectorySiteContactsGet' (Maybe Text)
 dscgFields
   = lens _dscgFields (\ s a -> s{_dscgFields = a})
 
--- | Data format for the response.
-dscgAlt :: Lens' DirectorySiteContactsGet' Alt
-dscgAlt = lens _dscgAlt (\ s a -> s{_dscgAlt = a})
+instance GoogleAuth DirectorySiteContactsGet' where
+        authKey = dscgKey . _Just
+        authToken = dscgOAuthToken . _Just
 
 instance GoogleRequest DirectorySiteContactsGet'
          where
@@ -171,13 +166,13 @@ instance GoogleRequest DirectorySiteContactsGet'
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u DirectorySiteContactsGet'{..}
           = go _dscgQuotaUser (Just _dscgPrettyPrint)
-              _dscgUserIp
+              _dscgUserIP
               _dscgProfileId
               _dscgKey
               _dscgId
-              _dscgOauthToken
+              _dscgOAuthToken
               _dscgFields
-              (Just _dscgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy DirectorySiteContactsGetResource)

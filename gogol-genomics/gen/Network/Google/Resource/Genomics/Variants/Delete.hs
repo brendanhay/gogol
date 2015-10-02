@@ -32,12 +32,11 @@ module Network.Google.Resource.Genomics.Variants.Delete
     -- * Request Lenses
     , vdQuotaUser
     , vdPrettyPrint
-    , vdUserIp
+    , vdUserIP
     , vdKey
     , vdVariantId
-    , vdOauthToken
+    , vdOAuthToken
     , vdFields
-    , vdAlt
     ) where
 
 import           Network.Google.Genomics.Types
@@ -51,10 +50,10 @@ type VariantsDeleteResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Delete '[JSON] ()
+                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a variant.
 --
@@ -62,12 +61,11 @@ type VariantsDeleteResource =
 data VariantsDelete' = VariantsDelete'
     { _vdQuotaUser   :: !(Maybe Text)
     , _vdPrettyPrint :: !Bool
-    , _vdUserIp      :: !(Maybe Text)
-    , _vdKey         :: !(Maybe Text)
+    , _vdUserIP      :: !(Maybe Text)
+    , _vdKey         :: !(Maybe Key)
     , _vdVariantId   :: !Text
-    , _vdOauthToken  :: !(Maybe Text)
+    , _vdOAuthToken  :: !(Maybe OAuthToken)
     , _vdFields      :: !(Maybe Text)
-    , _vdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantsDelete'' with the minimum fields required to make a request.
@@ -78,17 +76,15 @@ data VariantsDelete' = VariantsDelete'
 --
 -- * 'vdPrettyPrint'
 --
--- * 'vdUserIp'
+-- * 'vdUserIP'
 --
 -- * 'vdKey'
 --
 -- * 'vdVariantId'
 --
--- * 'vdOauthToken'
+-- * 'vdOAuthToken'
 --
 -- * 'vdFields'
---
--- * 'vdAlt'
 variantsDelete'
     :: Text -- ^ 'variantId'
     -> VariantsDelete'
@@ -96,12 +92,11 @@ variantsDelete' pVdVariantId_ =
     VariantsDelete'
     { _vdQuotaUser = Nothing
     , _vdPrettyPrint = True
-    , _vdUserIp = Nothing
+    , _vdUserIP = Nothing
     , _vdKey = Nothing
     , _vdVariantId = pVdVariantId_
-    , _vdOauthToken = Nothing
+    , _vdOAuthToken = Nothing
     , _vdFields = Nothing
-    , _vdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -119,13 +114,13 @@ vdPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-vdUserIp :: Lens' VariantsDelete' (Maybe Text)
-vdUserIp = lens _vdUserIp (\ s a -> s{_vdUserIp = a})
+vdUserIP :: Lens' VariantsDelete' (Maybe Text)
+vdUserIP = lens _vdUserIP (\ s a -> s{_vdUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vdKey :: Lens' VariantsDelete' (Maybe Text)
+vdKey :: Lens' VariantsDelete' (Maybe Key)
 vdKey = lens _vdKey (\ s a -> s{_vdKey = a})
 
 -- | The ID of the variant to be deleted.
@@ -134,28 +129,28 @@ vdVariantId
   = lens _vdVariantId (\ s a -> s{_vdVariantId = a})
 
 -- | OAuth 2.0 token for the current user.
-vdOauthToken :: Lens' VariantsDelete' (Maybe Text)
-vdOauthToken
-  = lens _vdOauthToken (\ s a -> s{_vdOauthToken = a})
+vdOAuthToken :: Lens' VariantsDelete' (Maybe OAuthToken)
+vdOAuthToken
+  = lens _vdOAuthToken (\ s a -> s{_vdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 vdFields :: Lens' VariantsDelete' (Maybe Text)
 vdFields = lens _vdFields (\ s a -> s{_vdFields = a})
 
--- | Data format for the response.
-vdAlt :: Lens' VariantsDelete' Alt
-vdAlt = lens _vdAlt (\ s a -> s{_vdAlt = a})
+instance GoogleAuth VariantsDelete' where
+        authKey = vdKey . _Just
+        authToken = vdOAuthToken . _Just
 
 instance GoogleRequest VariantsDelete' where
         type Rs VariantsDelete' = ()
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u VariantsDelete'{..}
-          = go _vdQuotaUser (Just _vdPrettyPrint) _vdUserIp
+          = go _vdQuotaUser (Just _vdPrettyPrint) _vdUserIP
               _vdKey
               _vdVariantId
-              _vdOauthToken
+              _vdOAuthToken
               _vdFields
-              (Just _vdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy VariantsDeleteResource)

@@ -22,7 +22,7 @@ import           Network.Google.Prelude
 --
 -- /See:/ 'application' smart constructor.
 data Application = Application
-    { _aTransferParams :: !(Maybe [Maybe ApplicationTransferParam])
+    { _aTransferParams :: !(Maybe [ApplicationTransferParam])
     , _aEtag           :: !(Maybe Text)
     , _aKind           :: !Text
     , _aName           :: !(Maybe Text)
@@ -56,7 +56,7 @@ application =
 -- | The list of all possible transfer parameters for this application. These
 -- parameters can be used to select the data of the user in this
 -- application to be transfered.
-aTransferParams :: Lens' Application [Maybe ApplicationTransferParam]
+aTransferParams :: Lens' Application [ApplicationTransferParam]
 aTransferParams
   = lens _aTransferParams
       (\ s a -> s{_aTransferParams = a})
@@ -155,7 +155,7 @@ data ApplicationsListResponse = ApplicationsListResponse
     { _alrEtag          :: !(Maybe Text)
     , _alrNextPageToken :: !(Maybe Text)
     , _alrKind          :: !Text
-    , _alrApplications  :: !(Maybe [Maybe Application])
+    , _alrApplications  :: !(Maybe [Application])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ApplicationsListResponse' with the minimum fields required to make a request.
@@ -195,7 +195,7 @@ alrKind = lens _alrKind (\ s a -> s{_alrKind = a})
 
 -- | List of applications that support data transfer and are also installed
 -- for the customer.
-alrApplications :: Lens' ApplicationsListResponse [Maybe Application]
+alrApplications :: Lens' ApplicationsListResponse [Application]
 alrApplications
   = lens _alrApplications
       (\ s a -> s{_alrApplications = a})
@@ -230,7 +230,7 @@ data DataTransfer = DataTransfer
     , _dtKind                      :: !Text
     , _dtNewOwnerUserId            :: !(Maybe Text)
     , _dtRequestTime               :: !(Maybe UTCTime)
-    , _dtApplicationDataTransfers  :: !(Maybe [Maybe ApplicationDataTransfer])
+    , _dtApplicationDataTransfers  :: !(Maybe [ApplicationDataTransfer])
     , _dtId                        :: !(Maybe Text)
     , _dtOverallTransferStatusCode :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -299,7 +299,7 @@ dtRequestTime
 -- resource. Note that this list is also used to specify the applications
 -- for which data transfer has to be done at the time of the transfer
 -- resource creation.
-dtApplicationDataTransfers :: Lens' DataTransfer [Maybe ApplicationDataTransfer]
+dtApplicationDataTransfers :: Lens' DataTransfer [ApplicationDataTransfer]
 dtApplicationDataTransfers
   = lens _dtApplicationDataTransfers
       (\ s a -> s{_dtApplicationDataTransfers = a})
@@ -351,7 +351,7 @@ data DataTransfersListResponse = DataTransfersListResponse
     { _dtlrEtag          :: !(Maybe Text)
     , _dtlrNextPageToken :: !(Maybe Text)
     , _dtlrKind          :: !Text
-    , _dtlrDataTransfers :: !(Maybe [Maybe DataTransfer])
+    , _dtlrDataTransfers :: !(Maybe [DataTransfer])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DataTransfersListResponse' with the minimum fields required to make a request.
@@ -390,7 +390,7 @@ dtlrKind :: Lens' DataTransfersListResponse Text
 dtlrKind = lens _dtlrKind (\ s a -> s{_dtlrKind = a})
 
 -- | List of data transfer requests.
-dtlrDataTransfers :: Lens' DataTransfersListResponse [Maybe DataTransfer]
+dtlrDataTransfers :: Lens' DataTransfersListResponse [DataTransfer]
 dtlrDataTransfers
   = lens _dtlrDataTransfers
       (\ s a -> s{_dtlrDataTransfers = a})
@@ -420,7 +420,7 @@ instance ToJSON DataTransfersListResponse where
 --
 -- /See:/ 'applicationDataTransfer' smart constructor.
 data ApplicationDataTransfer = ApplicationDataTransfer
-    { _adtApplicationTransferParams :: !(Maybe [Maybe ApplicationTransferParam])
+    { _adtApplicationTransferParams :: !(Maybe [ApplicationTransferParam])
     , _adtApplicationId             :: !(Maybe Int64)
     , _adtApplicationTransferStatus :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -446,7 +446,7 @@ applicationDataTransfer =
 -- | The transfer parameters for the application. These parameters are used
 -- to select the data which will get transfered in context of this
 -- application.
-adtApplicationTransferParams :: Lens' ApplicationDataTransfer [Maybe ApplicationTransferParam]
+adtApplicationTransferParams :: Lens' ApplicationDataTransfer [ApplicationTransferParam]
 adtApplicationTransferParams
   = lens _adtApplicationTransferParams
       (\ s a -> s{_adtApplicationTransferParams = a})

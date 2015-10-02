@@ -34,15 +34,14 @@ module Network.Google.Resource.Compute.Disks.List
     , dlQuotaUser
     , dlPrettyPrint
     , dlProject
-    , dlUserIp
+    , dlUserIP
     , dlZone
     , dlKey
     , dlFilter
     , dlPageToken
-    , dlOauthToken
+    , dlOAuthToken
     , dlMaxResults
     , dlFields
-    , dlAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -58,13 +57,13 @@ type DisksListResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "filter" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "maxResults" Word32 :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :> Get '[JSON] DiskList
+                               QueryParam "alt" AltJSON :> Get '[JSON] DiskList
 
 -- | Retrieves the list of persistent disks contained within the specified
 -- zone.
@@ -74,15 +73,14 @@ data DisksList' = DisksList'
     { _dlQuotaUser   :: !(Maybe Text)
     , _dlPrettyPrint :: !Bool
     , _dlProject     :: !Text
-    , _dlUserIp      :: !(Maybe Text)
+    , _dlUserIP      :: !(Maybe Text)
     , _dlZone        :: !Text
-    , _dlKey         :: !(Maybe Text)
+    , _dlKey         :: !(Maybe Key)
     , _dlFilter      :: !(Maybe Text)
     , _dlPageToken   :: !(Maybe Text)
-    , _dlOauthToken  :: !(Maybe Text)
+    , _dlOAuthToken  :: !(Maybe OAuthToken)
     , _dlMaxResults  :: !Word32
     , _dlFields      :: !(Maybe Text)
-    , _dlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DisksList'' with the minimum fields required to make a request.
@@ -95,7 +93,7 @@ data DisksList' = DisksList'
 --
 -- * 'dlProject'
 --
--- * 'dlUserIp'
+-- * 'dlUserIP'
 --
 -- * 'dlZone'
 --
@@ -105,13 +103,11 @@ data DisksList' = DisksList'
 --
 -- * 'dlPageToken'
 --
--- * 'dlOauthToken'
+-- * 'dlOAuthToken'
 --
 -- * 'dlMaxResults'
 --
 -- * 'dlFields'
---
--- * 'dlAlt'
 disksList'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
@@ -121,15 +117,14 @@ disksList' pDlProject_ pDlZone_ =
     { _dlQuotaUser = Nothing
     , _dlPrettyPrint = True
     , _dlProject = pDlProject_
-    , _dlUserIp = Nothing
+    , _dlUserIP = Nothing
     , _dlZone = pDlZone_
     , _dlKey = Nothing
     , _dlFilter = Nothing
     , _dlPageToken = Nothing
-    , _dlOauthToken = Nothing
+    , _dlOAuthToken = Nothing
     , _dlMaxResults = 500
     , _dlFields = Nothing
-    , _dlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,8 +147,8 @@ dlProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-dlUserIp :: Lens' DisksList' (Maybe Text)
-dlUserIp = lens _dlUserIp (\ s a -> s{_dlUserIp = a})
+dlUserIP :: Lens' DisksList' (Maybe Text)
+dlUserIP = lens _dlUserIP (\ s a -> s{_dlUserIP = a})
 
 -- | The name of the zone for this request.
 dlZone :: Lens' DisksList' Text
@@ -162,7 +157,7 @@ dlZone = lens _dlZone (\ s a -> s{_dlZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dlKey :: Lens' DisksList' (Maybe Text)
+dlKey :: Lens' DisksList' (Maybe Key)
 dlKey = lens _dlKey (\ s a -> s{_dlKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
@@ -187,9 +182,9 @@ dlPageToken
   = lens _dlPageToken (\ s a -> s{_dlPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-dlOauthToken :: Lens' DisksList' (Maybe Text)
-dlOauthToken
-  = lens _dlOauthToken (\ s a -> s{_dlOauthToken = a})
+dlOAuthToken :: Lens' DisksList' (Maybe OAuthToken)
+dlOAuthToken
+  = lens _dlOAuthToken (\ s a -> s{_dlOAuthToken = a})
 
 -- | Maximum count of results to be returned.
 dlMaxResults :: Lens' DisksList' Word32
@@ -200,24 +195,24 @@ dlMaxResults
 dlFields :: Lens' DisksList' (Maybe Text)
 dlFields = lens _dlFields (\ s a -> s{_dlFields = a})
 
--- | Data format for the response.
-dlAlt :: Lens' DisksList' Alt
-dlAlt = lens _dlAlt (\ s a -> s{_dlAlt = a})
+instance GoogleAuth DisksList' where
+        authKey = dlKey . _Just
+        authToken = dlOAuthToken . _Just
 
 instance GoogleRequest DisksList' where
         type Rs DisksList' = DiskList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u DisksList'{..}
           = go _dlQuotaUser (Just _dlPrettyPrint) _dlProject
-              _dlUserIp
+              _dlUserIP
               _dlZone
               _dlKey
               _dlFilter
               _dlPageToken
-              _dlOauthToken
+              _dlOAuthToken
               (Just _dlMaxResults)
               _dlFields
-              (Just _dlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy DisksListResource)
                       r

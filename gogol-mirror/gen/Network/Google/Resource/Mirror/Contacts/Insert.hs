@@ -32,11 +32,11 @@ module Network.Google.Resource.Mirror.Contacts.Insert
     -- * Request Lenses
     , ciQuotaUser
     , ciPrettyPrint
-    , ciUserIp
+    , ciContact
+    , ciUserIP
     , ciKey
-    , ciOauthToken
+    , ciOAuthToken
     , ciFields
-    , ciAlt
     ) where
 
 import           Network.Google.Mirror.Types
@@ -49,10 +49,11 @@ type ContactsInsertResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
-               QueryParam "oauth_token" Text :>
+             QueryParam "key" Key :>
+               QueryParam "oauth_token" OAuthToken :>
                  QueryParam "fields" Text :>
-                   QueryParam "alt" Alt :> Post '[JSON] Contact
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Contact :> Post '[JSON] Contact
 
 -- | Inserts a new contact.
 --
@@ -60,11 +61,11 @@ type ContactsInsertResource =
 data ContactsInsert' = ContactsInsert'
     { _ciQuotaUser   :: !(Maybe Text)
     , _ciPrettyPrint :: !Bool
-    , _ciUserIp      :: !(Maybe Text)
-    , _ciKey         :: !(Maybe Text)
-    , _ciOauthToken  :: !(Maybe Text)
+    , _ciContact     :: !Contact
+    , _ciUserIP      :: !(Maybe Text)
+    , _ciKey         :: !(Maybe Key)
+    , _ciOAuthToken  :: !(Maybe OAuthToken)
     , _ciFields      :: !(Maybe Text)
-    , _ciAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContactsInsert'' with the minimum fields required to make a request.
@@ -75,26 +76,27 @@ data ContactsInsert' = ContactsInsert'
 --
 -- * 'ciPrettyPrint'
 --
--- * 'ciUserIp'
+-- * 'ciContact'
+--
+-- * 'ciUserIP'
 --
 -- * 'ciKey'
 --
--- * 'ciOauthToken'
+-- * 'ciOAuthToken'
 --
 -- * 'ciFields'
---
--- * 'ciAlt'
 contactsInsert'
-    :: ContactsInsert'
-contactsInsert' =
+    :: Contact -- ^ 'Contact'
+    -> ContactsInsert'
+contactsInsert' pCiContact_ =
     ContactsInsert'
     { _ciQuotaUser = Nothing
     , _ciPrettyPrint = True
-    , _ciUserIp = Nothing
+    , _ciContact = pCiContact_
+    , _ciUserIP = Nothing
     , _ciKey = Nothing
-    , _ciOauthToken = Nothing
+    , _ciOAuthToken = Nothing
     , _ciFields = Nothing
-    , _ciAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -110,39 +112,45 @@ ciPrettyPrint
   = lens _ciPrettyPrint
       (\ s a -> s{_ciPrettyPrint = a})
 
+-- | Multipart request metadata.
+ciContact :: Lens' ContactsInsert' Contact
+ciContact
+  = lens _ciContact (\ s a -> s{_ciContact = a})
+
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ciUserIp :: Lens' ContactsInsert' (Maybe Text)
-ciUserIp = lens _ciUserIp (\ s a -> s{_ciUserIp = a})
+ciUserIP :: Lens' ContactsInsert' (Maybe Text)
+ciUserIP = lens _ciUserIP (\ s a -> s{_ciUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ciKey :: Lens' ContactsInsert' (Maybe Text)
+ciKey :: Lens' ContactsInsert' (Maybe Key)
 ciKey = lens _ciKey (\ s a -> s{_ciKey = a})
 
 -- | OAuth 2.0 token for the current user.
-ciOauthToken :: Lens' ContactsInsert' (Maybe Text)
-ciOauthToken
-  = lens _ciOauthToken (\ s a -> s{_ciOauthToken = a})
+ciOAuthToken :: Lens' ContactsInsert' (Maybe OAuthToken)
+ciOAuthToken
+  = lens _ciOAuthToken (\ s a -> s{_ciOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ciFields :: Lens' ContactsInsert' (Maybe Text)
 ciFields = lens _ciFields (\ s a -> s{_ciFields = a})
 
--- | Data format for the response.
-ciAlt :: Lens' ContactsInsert' Alt
-ciAlt = lens _ciAlt (\ s a -> s{_ciAlt = a})
+instance GoogleAuth ContactsInsert' where
+        authKey = ciKey . _Just
+        authToken = ciOAuthToken . _Just
 
 instance GoogleRequest ContactsInsert' where
         type Rs ContactsInsert' = Contact
         request = requestWithRoute defReq mirrorURL
         requestWithRoute r u ContactsInsert'{..}
-          = go _ciQuotaUser (Just _ciPrettyPrint) _ciUserIp
+          = go _ciQuotaUser (Just _ciPrettyPrint) _ciUserIP
               _ciKey
-              _ciOauthToken
+              _ciOAuthToken
               _ciFields
-              (Just _ciAlt)
+              (Just AltJSON)
+              _ciContact
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ContactsInsertResource)

@@ -19,7 +19,7 @@
 --
 -- | Updates a GTM Variable.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersVariablesUpdate@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersVariablesUpdate@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Variables.Update
     (
     -- * REST Resource
@@ -33,20 +33,20 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Variables.Update
     , aQuotaUser
     , aPrettyPrint
     , aContainerId
-    , aUserIp
+    , aUserIP
     , aFingerprint
     , aVariableId
+    , aVariable
     , aAccountId
     , aKey
-    , aOauthToken
+    , aOAuthToken
     , aFields
-    , aAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagmanagerAccountsContainersVariablesUpdate@ which the
+-- | A resource alias for @TagManagerAccountsContainersVariablesUpdate@ which the
 -- 'AccountsContainersVariablesUpdate'' request conforms to.
 type AccountsContainersVariablesUpdateResource =
      "accounts" :>
@@ -59,10 +59,12 @@ type AccountsContainersVariablesUpdateResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fingerprint" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :> Put '[JSON] Variable
+                               QueryParam "alt" AltJSON :>
+                                 ReqBody '[JSON] Variable :>
+                                   Put '[JSON] Variable
 
 -- | Updates a GTM Variable.
 --
@@ -71,14 +73,14 @@ data AccountsContainersVariablesUpdate' = AccountsContainersVariablesUpdate'
     { _aQuotaUser   :: !(Maybe Text)
     , _aPrettyPrint :: !Bool
     , _aContainerId :: !Text
-    , _aUserIp      :: !(Maybe Text)
+    , _aUserIP      :: !(Maybe Text)
     , _aFingerprint :: !(Maybe Text)
     , _aVariableId  :: !Text
+    , _aVariable    :: !Variable
     , _aAccountId   :: !Text
-    , _aKey         :: !(Maybe Text)
-    , _aOauthToken  :: !(Maybe Text)
+    , _aKey         :: !(Maybe Key)
+    , _aOAuthToken  :: !(Maybe OAuthToken)
     , _aFields      :: !(Maybe Text)
-    , _aAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersVariablesUpdate'' with the minimum fields required to make a request.
@@ -91,39 +93,40 @@ data AccountsContainersVariablesUpdate' = AccountsContainersVariablesUpdate'
 --
 -- * 'aContainerId'
 --
--- * 'aUserIp'
+-- * 'aUserIP'
 --
 -- * 'aFingerprint'
 --
 -- * 'aVariableId'
 --
+-- * 'aVariable'
+--
 -- * 'aAccountId'
 --
 -- * 'aKey'
 --
--- * 'aOauthToken'
+-- * 'aOAuthToken'
 --
 -- * 'aFields'
---
--- * 'aAlt'
 accountsContainersVariablesUpdate'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'variableId'
+    -> Variable -- ^ 'Variable'
     -> Text -- ^ 'accountId'
     -> AccountsContainersVariablesUpdate'
-accountsContainersVariablesUpdate' pAContainerId_ pAVariableId_ pAAccountId_ =
+accountsContainersVariablesUpdate' pAContainerId_ pAVariableId_ pAVariable_ pAAccountId_ =
     AccountsContainersVariablesUpdate'
     { _aQuotaUser = Nothing
     , _aPrettyPrint = True
     , _aContainerId = pAContainerId_
-    , _aUserIp = Nothing
+    , _aUserIP = Nothing
     , _aFingerprint = Nothing
     , _aVariableId = pAVariableId_
+    , _aVariable = pAVariable_
     , _aAccountId = pAAccountId_
     , _aKey = Nothing
-    , _aOauthToken = Nothing
+    , _aOAuthToken = Nothing
     , _aFields = Nothing
-    , _aAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -145,8 +148,8 @@ aContainerId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-aUserIp :: Lens' AccountsContainersVariablesUpdate' (Maybe Text)
-aUserIp = lens _aUserIp (\ s a -> s{_aUserIp = a})
+aUserIP :: Lens' AccountsContainersVariablesUpdate' (Maybe Text)
+aUserIP = lens _aUserIP (\ s a -> s{_aUserIP = a})
 
 -- | When provided, this fingerprint must match the fingerprint of the
 -- variable in storage.
@@ -159,6 +162,11 @@ aVariableId :: Lens' AccountsContainersVariablesUpdate' Text
 aVariableId
   = lens _aVariableId (\ s a -> s{_aVariableId = a})
 
+-- | Multipart request metadata.
+aVariable :: Lens' AccountsContainersVariablesUpdate' Variable
+aVariable
+  = lens _aVariable (\ s a -> s{_aVariable = a})
+
 -- | The GTM Account ID.
 aAccountId :: Lens' AccountsContainersVariablesUpdate' Text
 aAccountId
@@ -167,21 +175,22 @@ aAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aKey :: Lens' AccountsContainersVariablesUpdate' (Maybe Text)
+aKey :: Lens' AccountsContainersVariablesUpdate' (Maybe Key)
 aKey = lens _aKey (\ s a -> s{_aKey = a})
 
 -- | OAuth 2.0 token for the current user.
-aOauthToken :: Lens' AccountsContainersVariablesUpdate' (Maybe Text)
-aOauthToken
-  = lens _aOauthToken (\ s a -> s{_aOauthToken = a})
+aOAuthToken :: Lens' AccountsContainersVariablesUpdate' (Maybe OAuthToken)
+aOAuthToken
+  = lens _aOAuthToken (\ s a -> s{_aOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 aFields :: Lens' AccountsContainersVariablesUpdate' (Maybe Text)
 aFields = lens _aFields (\ s a -> s{_aFields = a})
 
--- | Data format for the response.
-aAlt :: Lens' AccountsContainersVariablesUpdate' Alt
-aAlt = lens _aAlt (\ s a -> s{_aAlt = a})
+instance GoogleAuth
+         AccountsContainersVariablesUpdate' where
+        authKey = aKey . _Just
+        authToken = aOAuthToken . _Just
 
 instance GoogleRequest
          AccountsContainersVariablesUpdate' where
@@ -190,14 +199,15 @@ instance GoogleRequest
         requestWithRoute r u
           AccountsContainersVariablesUpdate'{..}
           = go _aQuotaUser (Just _aPrettyPrint) _aContainerId
-              _aUserIp
+              _aUserIP
               _aFingerprint
               _aVariableId
               _aAccountId
               _aKey
-              _aOauthToken
+              _aOAuthToken
               _aFields
-              (Just _aAlt)
+              (Just AltJSON)
+              _aVariable
           where go
                   = clientWithRoute
                       (Proxy ::

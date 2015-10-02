@@ -32,11 +32,10 @@ module Network.Google.Resource.AdSense.Payments.List
     -- * Request Lenses
     , plQuotaUser
     , plPrettyPrint
-    , plUserIp
+    , plUserIP
     , plKey
-    , plOauthToken
+    , plOAuthToken
     , plFields
-    , plAlt
     ) where
 
 import           Network.Google.AdSense.Types
@@ -49,10 +48,10 @@ type PaymentsListResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
-               QueryParam "oauth_token" Text :>
+             QueryParam "key" Key :>
+               QueryParam "oauth_token" OAuthToken :>
                  QueryParam "fields" Text :>
-                   QueryParam "alt" Alt :> Get '[JSON] Payments
+                   QueryParam "alt" AltJSON :> Get '[JSON] Payments
 
 -- | List the payments for this AdSense account.
 --
@@ -60,11 +59,10 @@ type PaymentsListResource =
 data PaymentsList' = PaymentsList'
     { _plQuotaUser   :: !(Maybe Text)
     , _plPrettyPrint :: !Bool
-    , _plUserIp      :: !(Maybe Text)
-    , _plKey         :: !(Maybe Text)
-    , _plOauthToken  :: !(Maybe Text)
+    , _plUserIP      :: !(Maybe Text)
+    , _plKey         :: !(Maybe Key)
+    , _plOAuthToken  :: !(Maybe OAuthToken)
     , _plFields      :: !(Maybe Text)
-    , _plAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PaymentsList'' with the minimum fields required to make a request.
@@ -75,26 +73,23 @@ data PaymentsList' = PaymentsList'
 --
 -- * 'plPrettyPrint'
 --
--- * 'plUserIp'
+-- * 'plUserIP'
 --
 -- * 'plKey'
 --
--- * 'plOauthToken'
+-- * 'plOAuthToken'
 --
 -- * 'plFields'
---
--- * 'plAlt'
 paymentsList'
     :: PaymentsList'
 paymentsList' =
     PaymentsList'
     { _plQuotaUser = Nothing
     , _plPrettyPrint = True
-    , _plUserIp = Nothing
+    , _plUserIP = Nothing
     , _plKey = Nothing
-    , _plOauthToken = Nothing
+    , _plOAuthToken = Nothing
     , _plFields = Nothing
-    , _plAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -112,37 +107,37 @@ plPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-plUserIp :: Lens' PaymentsList' (Maybe Text)
-plUserIp = lens _plUserIp (\ s a -> s{_plUserIp = a})
+plUserIP :: Lens' PaymentsList' (Maybe Text)
+plUserIP = lens _plUserIP (\ s a -> s{_plUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-plKey :: Lens' PaymentsList' (Maybe Text)
+plKey :: Lens' PaymentsList' (Maybe Key)
 plKey = lens _plKey (\ s a -> s{_plKey = a})
 
 -- | OAuth 2.0 token for the current user.
-plOauthToken :: Lens' PaymentsList' (Maybe Text)
-plOauthToken
-  = lens _plOauthToken (\ s a -> s{_plOauthToken = a})
+plOAuthToken :: Lens' PaymentsList' (Maybe OAuthToken)
+plOAuthToken
+  = lens _plOAuthToken (\ s a -> s{_plOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 plFields :: Lens' PaymentsList' (Maybe Text)
 plFields = lens _plFields (\ s a -> s{_plFields = a})
 
--- | Data format for the response.
-plAlt :: Lens' PaymentsList' Alt
-plAlt = lens _plAlt (\ s a -> s{_plAlt = a})
+instance GoogleAuth PaymentsList' where
+        authKey = plKey . _Just
+        authToken = plOAuthToken . _Just
 
 instance GoogleRequest PaymentsList' where
         type Rs PaymentsList' = Payments
         request = requestWithRoute defReq adSenseURL
         requestWithRoute r u PaymentsList'{..}
-          = go _plQuotaUser (Just _plPrettyPrint) _plUserIp
+          = go _plQuotaUser (Just _plPrettyPrint) _plUserIP
               _plKey
-              _plOauthToken
+              _plOAuthToken
               _plFields
-              (Just _plAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PaymentsListResource)

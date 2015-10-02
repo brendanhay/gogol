@@ -32,13 +32,12 @@ module Network.Google.Resource.DFAReporting.Creatives.Get
     -- * Request Lenses
     , crerQuotaUser
     , crerPrettyPrint
-    , crerUserIp
+    , crerUserIP
     , crerProfileId
     , crerKey
     , crerId
-    , crerOauthToken
+    , crerOAuthToken
     , crerFields
-    , crerAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,10 +53,10 @@ type CreativesGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] Creative
+                         QueryParam "alt" AltJSON :> Get '[JSON] Creative
 
 -- | Gets one creative by ID.
 --
@@ -65,13 +64,12 @@ type CreativesGetResource =
 data CreativesGet' = CreativesGet'
     { _crerQuotaUser   :: !(Maybe Text)
     , _crerPrettyPrint :: !Bool
-    , _crerUserIp      :: !(Maybe Text)
+    , _crerUserIP      :: !(Maybe Text)
     , _crerProfileId   :: !Int64
-    , _crerKey         :: !(Maybe Text)
+    , _crerKey         :: !(Maybe Key)
     , _crerId          :: !Int64
-    , _crerOauthToken  :: !(Maybe Text)
+    , _crerOAuthToken  :: !(Maybe OAuthToken)
     , _crerFields      :: !(Maybe Text)
-    , _crerAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativesGet'' with the minimum fields required to make a request.
@@ -82,7 +80,7 @@ data CreativesGet' = CreativesGet'
 --
 -- * 'crerPrettyPrint'
 --
--- * 'crerUserIp'
+-- * 'crerUserIP'
 --
 -- * 'crerProfileId'
 --
@@ -90,11 +88,9 @@ data CreativesGet' = CreativesGet'
 --
 -- * 'crerId'
 --
--- * 'crerOauthToken'
+-- * 'crerOAuthToken'
 --
 -- * 'crerFields'
---
--- * 'crerAlt'
 creativesGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
@@ -103,13 +99,12 @@ creativesGet' pCrerProfileId_ pCrerId_ =
     CreativesGet'
     { _crerQuotaUser = Nothing
     , _crerPrettyPrint = True
-    , _crerUserIp = Nothing
+    , _crerUserIP = Nothing
     , _crerProfileId = pCrerProfileId_
     , _crerKey = Nothing
     , _crerId = pCrerId_
-    , _crerOauthToken = Nothing
+    , _crerOAuthToken = Nothing
     , _crerFields = Nothing
-    , _crerAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -128,9 +123,9 @@ crerPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-crerUserIp :: Lens' CreativesGet' (Maybe Text)
-crerUserIp
-  = lens _crerUserIp (\ s a -> s{_crerUserIp = a})
+crerUserIP :: Lens' CreativesGet' (Maybe Text)
+crerUserIP
+  = lens _crerUserIP (\ s a -> s{_crerUserIP = a})
 
 -- | User profile ID associated with this request.
 crerProfileId :: Lens' CreativesGet' Int64
@@ -141,7 +136,7 @@ crerProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-crerKey :: Lens' CreativesGet' (Maybe Text)
+crerKey :: Lens' CreativesGet' (Maybe Key)
 crerKey = lens _crerKey (\ s a -> s{_crerKey = a})
 
 -- | Creative ID.
@@ -149,32 +144,32 @@ crerId :: Lens' CreativesGet' Int64
 crerId = lens _crerId (\ s a -> s{_crerId = a})
 
 -- | OAuth 2.0 token for the current user.
-crerOauthToken :: Lens' CreativesGet' (Maybe Text)
-crerOauthToken
-  = lens _crerOauthToken
-      (\ s a -> s{_crerOauthToken = a})
+crerOAuthToken :: Lens' CreativesGet' (Maybe OAuthToken)
+crerOAuthToken
+  = lens _crerOAuthToken
+      (\ s a -> s{_crerOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 crerFields :: Lens' CreativesGet' (Maybe Text)
 crerFields
   = lens _crerFields (\ s a -> s{_crerFields = a})
 
--- | Data format for the response.
-crerAlt :: Lens' CreativesGet' Alt
-crerAlt = lens _crerAlt (\ s a -> s{_crerAlt = a})
+instance GoogleAuth CreativesGet' where
+        authKey = crerKey . _Just
+        authToken = crerOAuthToken . _Just
 
 instance GoogleRequest CreativesGet' where
         type Rs CreativesGet' = Creative
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativesGet'{..}
           = go _crerQuotaUser (Just _crerPrettyPrint)
-              _crerUserIp
+              _crerUserIP
               _crerProfileId
               _crerKey
               _crerId
-              _crerOauthToken
+              _crerOAuthToken
               _crerFields
-              (Just _crerAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CreativesGetResource)

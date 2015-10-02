@@ -43,10 +43,9 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Decommission
     , bdUploadType
     , bdBearerToken
     , bdKey
-    , bdOauthToken
+    , bdOAuthToken
     , bdFields
     , bdCallback
-    , bdAlt
     ) where
 
 import           Network.Google.Prelude
@@ -65,11 +64,11 @@ type BeaconsDecommissionResource =
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
                        QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
                                QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :> Post '[JSON] Empty
+                                 QueryParam "alt" AltJSON :> Post '[JSON] Empty
 
 -- | Decommissions the specified beacon in the service. This beacon will no
 -- longer be returned from \`beaconinfo.getforobserved\`. This operation is
@@ -87,11 +86,10 @@ data BeaconsDecommission' = BeaconsDecommission'
     , _bdBeaconName     :: !Text
     , _bdUploadType     :: !(Maybe Text)
     , _bdBearerToken    :: !(Maybe Text)
-    , _bdKey            :: !(Maybe Text)
-    , _bdOauthToken     :: !(Maybe Text)
+    , _bdKey            :: !(Maybe Key)
+    , _bdOAuthToken     :: !(Maybe OAuthToken)
     , _bdFields         :: !(Maybe Text)
     , _bdCallback       :: !(Maybe Text)
-    , _bdAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BeaconsDecommission'' with the minimum fields required to make a request.
@@ -118,13 +116,11 @@ data BeaconsDecommission' = BeaconsDecommission'
 --
 -- * 'bdKey'
 --
--- * 'bdOauthToken'
+-- * 'bdOAuthToken'
 --
 -- * 'bdFields'
 --
 -- * 'bdCallback'
---
--- * 'bdAlt'
 beaconsDecommission'
     :: Text -- ^ 'beaconName'
     -> BeaconsDecommission'
@@ -140,10 +136,9 @@ beaconsDecommission' pBdBeaconName_ =
     , _bdUploadType = Nothing
     , _bdBearerToken = Nothing
     , _bdKey = Nothing
-    , _bdOauthToken = Nothing
+    , _bdOAuthToken = Nothing
     , _bdFields = Nothing
     , _bdCallback = Nothing
-    , _bdAlt = "json"
     }
 
 -- | V1 error format.
@@ -198,13 +193,13 @@ bdBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-bdKey :: Lens' BeaconsDecommission' (Maybe Text)
+bdKey :: Lens' BeaconsDecommission' (Maybe Key)
 bdKey = lens _bdKey (\ s a -> s{_bdKey = a})
 
 -- | OAuth 2.0 token for the current user.
-bdOauthToken :: Lens' BeaconsDecommission' (Maybe Text)
-bdOauthToken
-  = lens _bdOauthToken (\ s a -> s{_bdOauthToken = a})
+bdOAuthToken :: Lens' BeaconsDecommission' (Maybe OAuthToken)
+bdOAuthToken
+  = lens _bdOAuthToken (\ s a -> s{_bdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 bdFields :: Lens' BeaconsDecommission' (Maybe Text)
@@ -215,9 +210,9 @@ bdCallback :: Lens' BeaconsDecommission' (Maybe Text)
 bdCallback
   = lens _bdCallback (\ s a -> s{_bdCallback = a})
 
--- | Data format for response.
-bdAlt :: Lens' BeaconsDecommission' Text
-bdAlt = lens _bdAlt (\ s a -> s{_bdAlt = a})
+instance GoogleAuth BeaconsDecommission' where
+        authKey = bdKey . _Just
+        authToken = bdOAuthToken . _Just
 
 instance GoogleRequest BeaconsDecommission' where
         type Rs BeaconsDecommission' = Empty
@@ -231,10 +226,10 @@ instance GoogleRequest BeaconsDecommission' where
               _bdUploadType
               _bdBearerToken
               _bdKey
-              _bdOauthToken
+              _bdOAuthToken
               _bdFields
               _bdCallback
-              (Just _bdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy BeaconsDecommissionResource)

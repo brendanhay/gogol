@@ -25,7 +25,7 @@
 -- Service. This service account is created and owned by Storage Transfer
 -- Service and can only be used by Storage Transfer Service.
 --
--- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @StoragetransferGetGoogleServiceAccount@.
+-- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @StorageTransferGetGoogleServiceAccount@.
 module Network.Google.Resource.StorageTransfer.GetGoogleServiceAccount
     (
     -- * REST Resource
@@ -46,16 +46,15 @@ module Network.Google.Resource.StorageTransfer.GetGoogleServiceAccount
     , ggsaBearerToken
     , ggsaKey
     , ggsaProjectId
-    , ggsaOauthToken
+    , ggsaOAuthToken
     , ggsaFields
     , ggsaCallback
-    , ggsaAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.StorageTransfer.Types
 
--- | A resource alias for @StoragetransferGetGoogleServiceAccount@ which the
+-- | A resource alias for @StorageTransferGetGoogleServiceAccount@ which the
 -- 'GetGoogleServiceAccount'' request conforms to.
 type GetGoogleServiceAccountResource =
      "v1:getGoogleServiceAccount" :>
@@ -67,12 +66,12 @@ type GetGoogleServiceAccountResource =
                  QueryParam "access_token" Text :>
                    QueryParam "uploadType" Text :>
                      QueryParam "bearer_token" Text :>
-                       QueryParam "key" Text :>
+                       QueryParam "key" Key :>
                          QueryParam "projectId" Text :>
-                           QueryParam "oauth_token" Text :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
                                QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :>
+                                 QueryParam "alt" AltJSON :>
                                    Get '[JSON] GoogleServiceAccount
 
 -- | Returns the Google service account that is used by Storage Transfer
@@ -93,12 +92,11 @@ data GetGoogleServiceAccount' = GetGoogleServiceAccount'
     , _ggsaAccessToken    :: !(Maybe Text)
     , _ggsaUploadType     :: !(Maybe Text)
     , _ggsaBearerToken    :: !(Maybe Text)
-    , _ggsaKey            :: !(Maybe Text)
+    , _ggsaKey            :: !(Maybe Key)
     , _ggsaProjectId      :: !(Maybe Text)
-    , _ggsaOauthToken     :: !(Maybe Text)
+    , _ggsaOAuthToken     :: !(Maybe OAuthToken)
     , _ggsaFields         :: !(Maybe Text)
     , _ggsaCallback       :: !(Maybe Text)
-    , _ggsaAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GetGoogleServiceAccount'' with the minimum fields required to make a request.
@@ -125,13 +123,11 @@ data GetGoogleServiceAccount' = GetGoogleServiceAccount'
 --
 -- * 'ggsaProjectId'
 --
--- * 'ggsaOauthToken'
+-- * 'ggsaOAuthToken'
 --
 -- * 'ggsaFields'
 --
 -- * 'ggsaCallback'
---
--- * 'ggsaAlt'
 getGoogleServiceAccount'
     :: GetGoogleServiceAccount'
 getGoogleServiceAccount' =
@@ -146,10 +142,9 @@ getGoogleServiceAccount' =
     , _ggsaBearerToken = Nothing
     , _ggsaKey = Nothing
     , _ggsaProjectId = Nothing
-    , _ggsaOauthToken = Nothing
+    , _ggsaOAuthToken = Nothing
     , _ggsaFields = Nothing
     , _ggsaCallback = Nothing
-    , _ggsaAlt = "json"
     }
 
 -- | V1 error format.
@@ -202,7 +197,7 @@ ggsaBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ggsaKey :: Lens' GetGoogleServiceAccount' (Maybe Text)
+ggsaKey :: Lens' GetGoogleServiceAccount' (Maybe Key)
 ggsaKey = lens _ggsaKey (\ s a -> s{_ggsaKey = a})
 
 -- | The ID of the Google Developers Console project that the Google service
@@ -213,10 +208,10 @@ ggsaProjectId
       (\ s a -> s{_ggsaProjectId = a})
 
 -- | OAuth 2.0 token for the current user.
-ggsaOauthToken :: Lens' GetGoogleServiceAccount' (Maybe Text)
-ggsaOauthToken
-  = lens _ggsaOauthToken
-      (\ s a -> s{_ggsaOauthToken = a})
+ggsaOAuthToken :: Lens' GetGoogleServiceAccount' (Maybe OAuthToken)
+ggsaOAuthToken
+  = lens _ggsaOAuthToken
+      (\ s a -> s{_ggsaOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ggsaFields :: Lens' GetGoogleServiceAccount' (Maybe Text)
@@ -228,9 +223,9 @@ ggsaCallback :: Lens' GetGoogleServiceAccount' (Maybe Text)
 ggsaCallback
   = lens _ggsaCallback (\ s a -> s{_ggsaCallback = a})
 
--- | Data format for response.
-ggsaAlt :: Lens' GetGoogleServiceAccount' Text
-ggsaAlt = lens _ggsaAlt (\ s a -> s{_ggsaAlt = a})
+instance GoogleAuth GetGoogleServiceAccount' where
+        authKey = ggsaKey . _Just
+        authToken = ggsaOAuthToken . _Just
 
 instance GoogleRequest GetGoogleServiceAccount' where
         type Rs GetGoogleServiceAccount' =
@@ -246,10 +241,10 @@ instance GoogleRequest GetGoogleServiceAccount' where
               _ggsaBearerToken
               _ggsaKey
               _ggsaProjectId
-              _ggsaOauthToken
+              _ggsaOAuthToken
               _ggsaFields
               _ggsaCallback
-              (Just _ggsaAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy GetGoogleServiceAccountResource)

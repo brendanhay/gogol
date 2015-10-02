@@ -33,11 +33,11 @@ module Network.Google.Resource.YouTube.CommentThreads.Update
     , ctuQuotaUser
     , ctuPart
     , ctuPrettyPrint
-    , ctuUserIp
+    , ctuUserIP
     , ctuKey
-    , ctuOauthToken
+    , ctuCommentThread
+    , ctuOAuthToken
     , ctuFields
-    , ctuAlt
     ) where
 
 import           Network.Google.Prelude
@@ -51,23 +51,25 @@ type CommentThreadsUpdateResource =
          QueryParam "part" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Put '[JSON] CommentThread
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] CommentThread :>
+                         Put '[JSON] CommentThread
 
 -- | Modifies the top-level comment in a comment thread.
 --
 -- /See:/ 'commentThreadsUpdate'' smart constructor.
 data CommentThreadsUpdate' = CommentThreadsUpdate'
-    { _ctuQuotaUser   :: !(Maybe Text)
-    , _ctuPart        :: !Text
-    , _ctuPrettyPrint :: !Bool
-    , _ctuUserIp      :: !(Maybe Text)
-    , _ctuKey         :: !(Maybe Text)
-    , _ctuOauthToken  :: !(Maybe Text)
-    , _ctuFields      :: !(Maybe Text)
-    , _ctuAlt         :: !Alt
+    { _ctuQuotaUser     :: !(Maybe Text)
+    , _ctuPart          :: !Text
+    , _ctuPrettyPrint   :: !Bool
+    , _ctuUserIP        :: !(Maybe Text)
+    , _ctuKey           :: !(Maybe Key)
+    , _ctuCommentThread :: !CommentThread
+    , _ctuOAuthToken    :: !(Maybe OAuthToken)
+    , _ctuFields        :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentThreadsUpdate'' with the minimum fields required to make a request.
@@ -80,28 +82,29 @@ data CommentThreadsUpdate' = CommentThreadsUpdate'
 --
 -- * 'ctuPrettyPrint'
 --
--- * 'ctuUserIp'
+-- * 'ctuUserIP'
 --
 -- * 'ctuKey'
 --
--- * 'ctuOauthToken'
+-- * 'ctuCommentThread'
+--
+-- * 'ctuOAuthToken'
 --
 -- * 'ctuFields'
---
--- * 'ctuAlt'
 commentThreadsUpdate'
     :: Text -- ^ 'part'
+    -> CommentThread -- ^ 'CommentThread'
     -> CommentThreadsUpdate'
-commentThreadsUpdate' pCtuPart_ =
+commentThreadsUpdate' pCtuPart_ pCtuCommentThread_ =
     CommentThreadsUpdate'
     { _ctuQuotaUser = Nothing
     , _ctuPart = pCtuPart_
     , _ctuPrettyPrint = True
-    , _ctuUserIp = Nothing
+    , _ctuUserIP = Nothing
     , _ctuKey = Nothing
-    , _ctuOauthToken = Nothing
+    , _ctuCommentThread = pCtuCommentThread_
+    , _ctuOAuthToken = Nothing
     , _ctuFields = Nothing
-    , _ctuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -126,30 +129,36 @@ ctuPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ctuUserIp :: Lens' CommentThreadsUpdate' (Maybe Text)
-ctuUserIp
-  = lens _ctuUserIp (\ s a -> s{_ctuUserIp = a})
+ctuUserIP :: Lens' CommentThreadsUpdate' (Maybe Text)
+ctuUserIP
+  = lens _ctuUserIP (\ s a -> s{_ctuUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ctuKey :: Lens' CommentThreadsUpdate' (Maybe Text)
+ctuKey :: Lens' CommentThreadsUpdate' (Maybe Key)
 ctuKey = lens _ctuKey (\ s a -> s{_ctuKey = a})
 
+-- | Multipart request metadata.
+ctuCommentThread :: Lens' CommentThreadsUpdate' CommentThread
+ctuCommentThread
+  = lens _ctuCommentThread
+      (\ s a -> s{_ctuCommentThread = a})
+
 -- | OAuth 2.0 token for the current user.
-ctuOauthToken :: Lens' CommentThreadsUpdate' (Maybe Text)
-ctuOauthToken
-  = lens _ctuOauthToken
-      (\ s a -> s{_ctuOauthToken = a})
+ctuOAuthToken :: Lens' CommentThreadsUpdate' (Maybe OAuthToken)
+ctuOAuthToken
+  = lens _ctuOAuthToken
+      (\ s a -> s{_ctuOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ctuFields :: Lens' CommentThreadsUpdate' (Maybe Text)
 ctuFields
   = lens _ctuFields (\ s a -> s{_ctuFields = a})
 
--- | Data format for the response.
-ctuAlt :: Lens' CommentThreadsUpdate' Alt
-ctuAlt = lens _ctuAlt (\ s a -> s{_ctuAlt = a})
+instance GoogleAuth CommentThreadsUpdate' where
+        authKey = ctuKey . _Just
+        authToken = ctuOAuthToken . _Just
 
 instance GoogleRequest CommentThreadsUpdate' where
         type Rs CommentThreadsUpdate' = CommentThread
@@ -157,11 +166,12 @@ instance GoogleRequest CommentThreadsUpdate' where
         requestWithRoute r u CommentThreadsUpdate'{..}
           = go _ctuQuotaUser (Just _ctuPart)
               (Just _ctuPrettyPrint)
-              _ctuUserIp
+              _ctuUserIP
               _ctuKey
-              _ctuOauthToken
+              _ctuOAuthToken
               _ctuFields
-              (Just _ctuAlt)
+              (Just AltJSON)
+              _ctuCommentThread
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CommentThreadsUpdateResource)

@@ -94,106 +94,107 @@ instance ToJSON JwkKeys where
                   ("e" .=) <$> _jkE, Just ("kty" .= _jkKty)])
 
 --
--- /See:/ 'tokeninfo' smart constructor.
-data Tokeninfo = Tokeninfo
-    { _tAudience      :: !(Maybe Text)
-    , _tEmail         :: !(Maybe Text)
-    , _tExpiresIn     :: !(Maybe Int32)
-    , _tAccessType    :: !(Maybe Text)
-    , _tScope         :: !(Maybe Text)
-    , _tVerifiedEmail :: !(Maybe Bool)
-    , _tUserId        :: !(Maybe Text)
-    , _tTokenHandle   :: !(Maybe Text)
-    , _tIssuedTo      :: !(Maybe Text)
+-- /See:/ 'tokenInfo' smart constructor.
+data TokenInfo = TokenInfo
+    { _tiAudience      :: !(Maybe Text)
+    , _tiEmail         :: !(Maybe Text)
+    , _tiExpiresIn     :: !(Maybe Int32)
+    , _tiAccessType    :: !(Maybe Text)
+    , _tiScope         :: !(Maybe Text)
+    , _tiVerifiedEmail :: !(Maybe Bool)
+    , _tiUserId        :: !(Maybe Text)
+    , _tiTokenHandle   :: !(Maybe Text)
+    , _tiIssuedTo      :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Tokeninfo' with the minimum fields required to make a request.
+-- | Creates a value of 'TokenInfo' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tAudience'
+-- * 'tiAudience'
 --
--- * 'tEmail'
+-- * 'tiEmail'
 --
--- * 'tExpiresIn'
+-- * 'tiExpiresIn'
 --
--- * 'tAccessType'
+-- * 'tiAccessType'
 --
--- * 'tScope'
+-- * 'tiScope'
 --
--- * 'tVerifiedEmail'
+-- * 'tiVerifiedEmail'
 --
--- * 'tUserId'
+-- * 'tiUserId'
 --
--- * 'tTokenHandle'
+-- * 'tiTokenHandle'
 --
--- * 'tIssuedTo'
-tokeninfo
-    :: Tokeninfo
-tokeninfo =
-    Tokeninfo
-    { _tAudience = Nothing
-    , _tEmail = Nothing
-    , _tExpiresIn = Nothing
-    , _tAccessType = Nothing
-    , _tScope = Nothing
-    , _tVerifiedEmail = Nothing
-    , _tUserId = Nothing
-    , _tTokenHandle = Nothing
-    , _tIssuedTo = Nothing
+-- * 'tiIssuedTo'
+tokenInfo
+    :: TokenInfo
+tokenInfo =
+    TokenInfo
+    { _tiAudience = Nothing
+    , _tiEmail = Nothing
+    , _tiExpiresIn = Nothing
+    , _tiAccessType = Nothing
+    , _tiScope = Nothing
+    , _tiVerifiedEmail = Nothing
+    , _tiUserId = Nothing
+    , _tiTokenHandle = Nothing
+    , _tiIssuedTo = Nothing
     }
 
 -- | Who is the intended audience for this token. In general the same as
 -- issued_to.
-tAudience :: Lens' Tokeninfo (Maybe Text)
-tAudience
-  = lens _tAudience (\ s a -> s{_tAudience = a})
+tiAudience :: Lens' TokenInfo (Maybe Text)
+tiAudience
+  = lens _tiAudience (\ s a -> s{_tiAudience = a})
 
 -- | The email address of the user. Present only if the email scope is
 -- present in the request.
-tEmail :: Lens' Tokeninfo (Maybe Text)
-tEmail = lens _tEmail (\ s a -> s{_tEmail = a})
+tiEmail :: Lens' TokenInfo (Maybe Text)
+tiEmail = lens _tiEmail (\ s a -> s{_tiEmail = a})
 
 -- | The expiry time of the token, as number of seconds left until expiry.
-tExpiresIn :: Lens' Tokeninfo (Maybe Int32)
-tExpiresIn
-  = lens _tExpiresIn (\ s a -> s{_tExpiresIn = a})
+tiExpiresIn :: Lens' TokenInfo (Maybe Int32)
+tiExpiresIn
+  = lens _tiExpiresIn (\ s a -> s{_tiExpiresIn = a})
 
 -- | The access type granted with this token. It can be offline or online.
-tAccessType :: Lens' Tokeninfo (Maybe Text)
-tAccessType
-  = lens _tAccessType (\ s a -> s{_tAccessType = a})
+tiAccessType :: Lens' TokenInfo (Maybe Text)
+tiAccessType
+  = lens _tiAccessType (\ s a -> s{_tiAccessType = a})
 
 -- | The space separated list of scopes granted to this token.
-tScope :: Lens' Tokeninfo (Maybe Text)
-tScope = lens _tScope (\ s a -> s{_tScope = a})
+tiScope :: Lens' TokenInfo (Maybe Text)
+tiScope = lens _tiScope (\ s a -> s{_tiScope = a})
 
 -- | Boolean flag which is true if the email address is verified. Present
 -- only if the email scope is present in the request.
-tVerifiedEmail :: Lens' Tokeninfo (Maybe Bool)
-tVerifiedEmail
-  = lens _tVerifiedEmail
-      (\ s a -> s{_tVerifiedEmail = a})
+tiVerifiedEmail :: Lens' TokenInfo (Maybe Bool)
+tiVerifiedEmail
+  = lens _tiVerifiedEmail
+      (\ s a -> s{_tiVerifiedEmail = a})
 
 -- | The obfuscated user id.
-tUserId :: Lens' Tokeninfo (Maybe Text)
-tUserId = lens _tUserId (\ s a -> s{_tUserId = a})
+tiUserId :: Lens' TokenInfo (Maybe Text)
+tiUserId = lens _tiUserId (\ s a -> s{_tiUserId = a})
 
 -- | The token handle associated with this token.
-tTokenHandle :: Lens' Tokeninfo (Maybe Text)
-tTokenHandle
-  = lens _tTokenHandle (\ s a -> s{_tTokenHandle = a})
+tiTokenHandle :: Lens' TokenInfo (Maybe Text)
+tiTokenHandle
+  = lens _tiTokenHandle
+      (\ s a -> s{_tiTokenHandle = a})
 
 -- | To whom was the token issued to. In general the same as audience.
-tIssuedTo :: Lens' Tokeninfo (Maybe Text)
-tIssuedTo
-  = lens _tIssuedTo (\ s a -> s{_tIssuedTo = a})
+tiIssuedTo :: Lens' TokenInfo (Maybe Text)
+tiIssuedTo
+  = lens _tiIssuedTo (\ s a -> s{_tiIssuedTo = a})
 
-instance FromJSON Tokeninfo where
+instance FromJSON TokenInfo where
         parseJSON
-          = withObject "Tokeninfo"
+          = withObject "TokenInfo"
               (\ o ->
-                 Tokeninfo <$>
+                 TokenInfo <$>
                    (o .:? "audience") <*> (o .:? "email") <*>
                      (o .:? "expires_in")
                      <*> (o .:? "access_type")
@@ -203,19 +204,19 @@ instance FromJSON Tokeninfo where
                      <*> (o .:? "token_handle")
                      <*> (o .:? "issued_to"))
 
-instance ToJSON Tokeninfo where
-        toJSON Tokeninfo{..}
+instance ToJSON TokenInfo where
+        toJSON TokenInfo{..}
           = object
               (catMaybes
-                 [("audience" .=) <$> _tAudience,
-                  ("email" .=) <$> _tEmail,
-                  ("expires_in" .=) <$> _tExpiresIn,
-                  ("access_type" .=) <$> _tAccessType,
-                  ("scope" .=) <$> _tScope,
-                  ("verified_email" .=) <$> _tVerifiedEmail,
-                  ("user_id" .=) <$> _tUserId,
-                  ("token_handle" .=) <$> _tTokenHandle,
-                  ("issued_to" .=) <$> _tIssuedTo])
+                 [("audience" .=) <$> _tiAudience,
+                  ("email" .=) <$> _tiEmail,
+                  ("expires_in" .=) <$> _tiExpiresIn,
+                  ("access_type" .=) <$> _tiAccessType,
+                  ("scope" .=) <$> _tiScope,
+                  ("verified_email" .=) <$> _tiVerifiedEmail,
+                  ("user_id" .=) <$> _tiUserId,
+                  ("token_handle" .=) <$> _tiTokenHandle,
+                  ("issued_to" .=) <$> _tiIssuedTo])
 
 --
 -- /See:/ 'jwk' smart constructor.
@@ -250,117 +251,118 @@ instance ToJSON Jwk where
           = object (catMaybes [("keys" .=) <$> _jwkKeys])
 
 --
--- /See:/ 'userinfoplus' smart constructor.
-data Userinfoplus = Userinfoplus
-    { _uHd            :: !(Maybe Text)
-    , _uEmail         :: !(Maybe Text)
-    , _uLink          :: !(Maybe Text)
-    , _uLocale        :: !(Maybe Text)
-    , _uGivenName     :: !(Maybe Text)
-    , _uFamilyName    :: !(Maybe Text)
-    , _uPicture       :: !(Maybe Text)
-    , _uGender        :: !(Maybe Text)
-    , _uName          :: !(Maybe Text)
-    , _uVerifiedEmail :: !Bool
-    , _uId            :: !(Maybe Text)
+-- /See:/ 'userInfoplus' smart constructor.
+data UserInfoplus = UserInfoplus
+    { _uiHd            :: !(Maybe Text)
+    , _uiEmail         :: !(Maybe Text)
+    , _uiLink          :: !(Maybe Text)
+    , _uiLocale        :: !(Maybe Text)
+    , _uiGivenName     :: !(Maybe Text)
+    , _uiFamilyName    :: !(Maybe Text)
+    , _uiPicture       :: !(Maybe Text)
+    , _uiGender        :: !(Maybe Text)
+    , _uiName          :: !(Maybe Text)
+    , _uiVerifiedEmail :: !Bool
+    , _uiId            :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Userinfoplus' with the minimum fields required to make a request.
+-- | Creates a value of 'UserInfoplus' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'uHd'
+-- * 'uiHd'
 --
--- * 'uEmail'
+-- * 'uiEmail'
 --
--- * 'uLink'
+-- * 'uiLink'
 --
--- * 'uLocale'
+-- * 'uiLocale'
 --
--- * 'uGivenName'
+-- * 'uiGivenName'
 --
--- * 'uFamilyName'
+-- * 'uiFamilyName'
 --
--- * 'uPicture'
+-- * 'uiPicture'
 --
--- * 'uGender'
+-- * 'uiGender'
 --
--- * 'uName'
+-- * 'uiName'
 --
--- * 'uVerifiedEmail'
+-- * 'uiVerifiedEmail'
 --
--- * 'uId'
-userinfoplus
-    :: Userinfoplus
-userinfoplus =
-    Userinfoplus
-    { _uHd = Nothing
-    , _uEmail = Nothing
-    , _uLink = Nothing
-    , _uLocale = Nothing
-    , _uGivenName = Nothing
-    , _uFamilyName = Nothing
-    , _uPicture = Nothing
-    , _uGender = Nothing
-    , _uName = Nothing
-    , _uVerifiedEmail = True
-    , _uId = Nothing
+-- * 'uiId'
+userInfoplus
+    :: UserInfoplus
+userInfoplus =
+    UserInfoplus
+    { _uiHd = Nothing
+    , _uiEmail = Nothing
+    , _uiLink = Nothing
+    , _uiLocale = Nothing
+    , _uiGivenName = Nothing
+    , _uiFamilyName = Nothing
+    , _uiPicture = Nothing
+    , _uiGender = Nothing
+    , _uiName = Nothing
+    , _uiVerifiedEmail = True
+    , _uiId = Nothing
     }
 
 -- | The hosted domain e.g. example.com if the user is Google apps user.
-uHd :: Lens' Userinfoplus (Maybe Text)
-uHd = lens _uHd (\ s a -> s{_uHd = a})
+uiHd :: Lens' UserInfoplus (Maybe Text)
+uiHd = lens _uiHd (\ s a -> s{_uiHd = a})
 
 -- | The user\'s email address.
-uEmail :: Lens' Userinfoplus (Maybe Text)
-uEmail = lens _uEmail (\ s a -> s{_uEmail = a})
+uiEmail :: Lens' UserInfoplus (Maybe Text)
+uiEmail = lens _uiEmail (\ s a -> s{_uiEmail = a})
 
 -- | URL of the profile page.
-uLink :: Lens' Userinfoplus (Maybe Text)
-uLink = lens _uLink (\ s a -> s{_uLink = a})
+uiLink :: Lens' UserInfoplus (Maybe Text)
+uiLink = lens _uiLink (\ s a -> s{_uiLink = a})
 
 -- | The user\'s preferred locale.
-uLocale :: Lens' Userinfoplus (Maybe Text)
-uLocale = lens _uLocale (\ s a -> s{_uLocale = a})
+uiLocale :: Lens' UserInfoplus (Maybe Text)
+uiLocale = lens _uiLocale (\ s a -> s{_uiLocale = a})
 
 -- | The user\'s first name.
-uGivenName :: Lens' Userinfoplus (Maybe Text)
-uGivenName
-  = lens _uGivenName (\ s a -> s{_uGivenName = a})
+uiGivenName :: Lens' UserInfoplus (Maybe Text)
+uiGivenName
+  = lens _uiGivenName (\ s a -> s{_uiGivenName = a})
 
 -- | The user\'s last name.
-uFamilyName :: Lens' Userinfoplus (Maybe Text)
-uFamilyName
-  = lens _uFamilyName (\ s a -> s{_uFamilyName = a})
+uiFamilyName :: Lens' UserInfoplus (Maybe Text)
+uiFamilyName
+  = lens _uiFamilyName (\ s a -> s{_uiFamilyName = a})
 
 -- | URL of the user\'s picture image.
-uPicture :: Lens' Userinfoplus (Maybe Text)
-uPicture = lens _uPicture (\ s a -> s{_uPicture = a})
+uiPicture :: Lens' UserInfoplus (Maybe Text)
+uiPicture
+  = lens _uiPicture (\ s a -> s{_uiPicture = a})
 
 -- | The user\'s gender.
-uGender :: Lens' Userinfoplus (Maybe Text)
-uGender = lens _uGender (\ s a -> s{_uGender = a})
+uiGender :: Lens' UserInfoplus (Maybe Text)
+uiGender = lens _uiGender (\ s a -> s{_uiGender = a})
 
 -- | The user\'s full name.
-uName :: Lens' Userinfoplus (Maybe Text)
-uName = lens _uName (\ s a -> s{_uName = a})
+uiName :: Lens' UserInfoplus (Maybe Text)
+uiName = lens _uiName (\ s a -> s{_uiName = a})
 
 -- | Boolean flag which is true if the email address is verified. Always
 -- verified because we only return the user\'s primary email address.
-uVerifiedEmail :: Lens' Userinfoplus Bool
-uVerifiedEmail
-  = lens _uVerifiedEmail
-      (\ s a -> s{_uVerifiedEmail = a})
+uiVerifiedEmail :: Lens' UserInfoplus Bool
+uiVerifiedEmail
+  = lens _uiVerifiedEmail
+      (\ s a -> s{_uiVerifiedEmail = a})
 
 -- | The obfuscated ID of the user.
-uId :: Lens' Userinfoplus (Maybe Text)
-uId = lens _uId (\ s a -> s{_uId = a})
+uiId :: Lens' UserInfoplus (Maybe Text)
+uiId = lens _uiId (\ s a -> s{_uiId = a})
 
-instance FromJSON Userinfoplus where
+instance FromJSON UserInfoplus where
         parseJSON
-          = withObject "Userinfoplus"
+          = withObject "UserInfoplus"
               (\ o ->
-                 Userinfoplus <$>
+                 UserInfoplus <$>
                    (o .:? "hd") <*> (o .:? "email") <*> (o .:? "link")
                      <*> (o .:? "locale")
                      <*> (o .:? "given_name")
@@ -371,15 +373,15 @@ instance FromJSON Userinfoplus where
                      <*> (o .:? "verified_email" .!= True)
                      <*> (o .:? "id"))
 
-instance ToJSON Userinfoplus where
-        toJSON Userinfoplus{..}
+instance ToJSON UserInfoplus where
+        toJSON UserInfoplus{..}
           = object
               (catMaybes
-                 [("hd" .=) <$> _uHd, ("email" .=) <$> _uEmail,
-                  ("link" .=) <$> _uLink, ("locale" .=) <$> _uLocale,
-                  ("given_name" .=) <$> _uGivenName,
-                  ("family_name" .=) <$> _uFamilyName,
-                  ("picture" .=) <$> _uPicture,
-                  ("gender" .=) <$> _uGender, ("name" .=) <$> _uName,
-                  Just ("verified_email" .= _uVerifiedEmail),
-                  ("id" .=) <$> _uId])
+                 [("hd" .=) <$> _uiHd, ("email" .=) <$> _uiEmail,
+                  ("link" .=) <$> _uiLink, ("locale" .=) <$> _uiLocale,
+                  ("given_name" .=) <$> _uiGivenName,
+                  ("family_name" .=) <$> _uiFamilyName,
+                  ("picture" .=) <$> _uiPicture,
+                  ("gender" .=) <$> _uiGender, ("name" .=) <$> _uiName,
+                  Just ("verified_email" .= _uiVerifiedEmail),
+                  ("id" .=) <$> _uiId])

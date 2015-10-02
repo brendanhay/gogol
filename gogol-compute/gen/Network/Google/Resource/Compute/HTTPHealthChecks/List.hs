@@ -34,14 +34,13 @@ module Network.Google.Resource.Compute.HTTPHealthChecks.List
     , httphclQuotaUser
     , httphclPrettyPrint
     , httphclProject
-    , httphclUserIp
+    , httphclUserIP
     , httphclKey
     , httphclFilter
     , httphclPageToken
-    , httphclOauthToken
+    , httphclOAuthToken
     , httphclMaxResults
     , httphclFields
-    , httphclAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -56,13 +55,13 @@ type HttpHealthChecksListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "filter" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "maxResults" Word32 :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :>
+                             QueryParam "alt" AltJSON :>
                                Get '[JSON] HTTPHealthCheckList
 
 -- | Retrieves the list of HttpHealthCheck resources available to the
@@ -73,14 +72,13 @@ data HTTPHealthChecksList' = HTTPHealthChecksList'
     { _httphclQuotaUser   :: !(Maybe Text)
     , _httphclPrettyPrint :: !Bool
     , _httphclProject     :: !Text
-    , _httphclUserIp      :: !(Maybe Text)
-    , _httphclKey         :: !(Maybe Text)
+    , _httphclUserIP      :: !(Maybe Text)
+    , _httphclKey         :: !(Maybe Key)
     , _httphclFilter      :: !(Maybe Text)
     , _httphclPageToken   :: !(Maybe Text)
-    , _httphclOauthToken  :: !(Maybe Text)
+    , _httphclOAuthToken  :: !(Maybe OAuthToken)
     , _httphclMaxResults  :: !Word32
     , _httphclFields      :: !(Maybe Text)
-    , _httphclAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'HTTPHealthChecksList'' with the minimum fields required to make a request.
@@ -93,7 +91,7 @@ data HTTPHealthChecksList' = HTTPHealthChecksList'
 --
 -- * 'httphclProject'
 --
--- * 'httphclUserIp'
+-- * 'httphclUserIP'
 --
 -- * 'httphclKey'
 --
@@ -101,13 +99,11 @@ data HTTPHealthChecksList' = HTTPHealthChecksList'
 --
 -- * 'httphclPageToken'
 --
--- * 'httphclOauthToken'
+-- * 'httphclOAuthToken'
 --
 -- * 'httphclMaxResults'
 --
 -- * 'httphclFields'
---
--- * 'httphclAlt'
 hTTPHealthChecksList'
     :: Text -- ^ 'project'
     -> HTTPHealthChecksList'
@@ -116,14 +112,13 @@ hTTPHealthChecksList' pHttphclProject_ =
     { _httphclQuotaUser = Nothing
     , _httphclPrettyPrint = True
     , _httphclProject = pHttphclProject_
-    , _httphclUserIp = Nothing
+    , _httphclUserIP = Nothing
     , _httphclKey = Nothing
     , _httphclFilter = Nothing
     , _httphclPageToken = Nothing
-    , _httphclOauthToken = Nothing
+    , _httphclOAuthToken = Nothing
     , _httphclMaxResults = 500
     , _httphclFields = Nothing
-    , _httphclAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,15 +143,15 @@ httphclProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-httphclUserIp :: Lens' HTTPHealthChecksList' (Maybe Text)
-httphclUserIp
-  = lens _httphclUserIp
-      (\ s a -> s{_httphclUserIp = a})
+httphclUserIP :: Lens' HTTPHealthChecksList' (Maybe Text)
+httphclUserIP
+  = lens _httphclUserIP
+      (\ s a -> s{_httphclUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-httphclKey :: Lens' HTTPHealthChecksList' (Maybe Text)
+httphclKey :: Lens' HTTPHealthChecksList' (Maybe Key)
 httphclKey
   = lens _httphclKey (\ s a -> s{_httphclKey = a})
 
@@ -185,10 +180,10 @@ httphclPageToken
       (\ s a -> s{_httphclPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-httphclOauthToken :: Lens' HTTPHealthChecksList' (Maybe Text)
-httphclOauthToken
-  = lens _httphclOauthToken
-      (\ s a -> s{_httphclOauthToken = a})
+httphclOAuthToken :: Lens' HTTPHealthChecksList' (Maybe OAuthToken)
+httphclOAuthToken
+  = lens _httphclOAuthToken
+      (\ s a -> s{_httphclOAuthToken = a})
 
 -- | Maximum count of results to be returned.
 httphclMaxResults :: Lens' HTTPHealthChecksList' Word32
@@ -202,10 +197,9 @@ httphclFields
   = lens _httphclFields
       (\ s a -> s{_httphclFields = a})
 
--- | Data format for the response.
-httphclAlt :: Lens' HTTPHealthChecksList' Alt
-httphclAlt
-  = lens _httphclAlt (\ s a -> s{_httphclAlt = a})
+instance GoogleAuth HTTPHealthChecksList' where
+        authKey = httphclKey . _Just
+        authToken = httphclOAuthToken . _Just
 
 instance GoogleRequest HTTPHealthChecksList' where
         type Rs HTTPHealthChecksList' = HTTPHealthCheckList
@@ -213,14 +207,14 @@ instance GoogleRequest HTTPHealthChecksList' where
         requestWithRoute r u HTTPHealthChecksList'{..}
           = go _httphclQuotaUser (Just _httphclPrettyPrint)
               _httphclProject
-              _httphclUserIp
+              _httphclUserIP
               _httphclKey
               _httphclFilter
               _httphclPageToken
-              _httphclOauthToken
+              _httphclOAuthToken
               (Just _httphclMaxResults)
               _httphclFields
-              (Just _httphclAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy HttpHealthChecksListResource)

@@ -32,12 +32,12 @@ module Network.Google.Resource.Mirror.Timeline.Attachments.Insert
     -- * Request Lenses
     , taiQuotaUser
     , taiPrettyPrint
-    , taiUserIp
+    , taiUserIP
     , taiItemId
+    , taiMedia
     , taiKey
-    , taiOauthToken
+    , taiOAuthToken
     , taiFields
-    , taiAlt
     ) where
 
 import           Network.Google.Mirror.Types
@@ -52,10 +52,10 @@ type TimelineAttachmentsInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] Attachment
+                       QueryParam "alt" AltJSON :> Post '[JSON] Attachment
 
 -- | Adds a new attachment to a timeline item.
 --
@@ -63,12 +63,12 @@ type TimelineAttachmentsInsertResource =
 data TimelineAttachmentsInsert' = TimelineAttachmentsInsert'
     { _taiQuotaUser   :: !(Maybe Text)
     , _taiPrettyPrint :: !Bool
-    , _taiUserIp      :: !(Maybe Text)
+    , _taiUserIP      :: !(Maybe Text)
     , _taiItemId      :: !Text
-    , _taiKey         :: !(Maybe Text)
-    , _taiOauthToken  :: !(Maybe Text)
+    , _taiMedia       :: !Body
+    , _taiKey         :: !(Maybe Key)
+    , _taiOAuthToken  :: !(Maybe OAuthToken)
     , _taiFields      :: !(Maybe Text)
-    , _taiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TimelineAttachmentsInsert'' with the minimum fields required to make a request.
@@ -79,30 +79,31 @@ data TimelineAttachmentsInsert' = TimelineAttachmentsInsert'
 --
 -- * 'taiPrettyPrint'
 --
--- * 'taiUserIp'
+-- * 'taiUserIP'
 --
 -- * 'taiItemId'
 --
+-- * 'taiMedia'
+--
 -- * 'taiKey'
 --
--- * 'taiOauthToken'
+-- * 'taiOAuthToken'
 --
 -- * 'taiFields'
---
--- * 'taiAlt'
 timelineAttachmentsInsert'
     :: Text -- ^ 'itemId'
+    -> Body -- ^ 'media'
     -> TimelineAttachmentsInsert'
-timelineAttachmentsInsert' pTaiItemId_ =
+timelineAttachmentsInsert' pTaiItemId_ pTaiMedia_ =
     TimelineAttachmentsInsert'
     { _taiQuotaUser = Nothing
     , _taiPrettyPrint = True
-    , _taiUserIp = Nothing
+    , _taiUserIP = Nothing
     , _taiItemId = pTaiItemId_
+    , _taiMedia = pTaiMedia_
     , _taiKey = Nothing
-    , _taiOauthToken = Nothing
+    , _taiOAuthToken = Nothing
     , _taiFields = Nothing
-    , _taiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,47 +121,51 @@ taiPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-taiUserIp :: Lens' TimelineAttachmentsInsert' (Maybe Text)
-taiUserIp
-  = lens _taiUserIp (\ s a -> s{_taiUserIp = a})
+taiUserIP :: Lens' TimelineAttachmentsInsert' (Maybe Text)
+taiUserIP
+  = lens _taiUserIP (\ s a -> s{_taiUserIP = a})
 
 -- | The ID of the timeline item the attachment belongs to.
 taiItemId :: Lens' TimelineAttachmentsInsert' Text
 taiItemId
   = lens _taiItemId (\ s a -> s{_taiItemId = a})
 
+taiMedia :: Lens' TimelineAttachmentsInsert' Body
+taiMedia = lens _taiMedia (\ s a -> s{_taiMedia = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-taiKey :: Lens' TimelineAttachmentsInsert' (Maybe Text)
+taiKey :: Lens' TimelineAttachmentsInsert' (Maybe Key)
 taiKey = lens _taiKey (\ s a -> s{_taiKey = a})
 
 -- | OAuth 2.0 token for the current user.
-taiOauthToken :: Lens' TimelineAttachmentsInsert' (Maybe Text)
-taiOauthToken
-  = lens _taiOauthToken
-      (\ s a -> s{_taiOauthToken = a})
+taiOAuthToken :: Lens' TimelineAttachmentsInsert' (Maybe OAuthToken)
+taiOAuthToken
+  = lens _taiOAuthToken
+      (\ s a -> s{_taiOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 taiFields :: Lens' TimelineAttachmentsInsert' (Maybe Text)
 taiFields
   = lens _taiFields (\ s a -> s{_taiFields = a})
 
--- | Data format for the response.
-taiAlt :: Lens' TimelineAttachmentsInsert' Alt
-taiAlt = lens _taiAlt (\ s a -> s{_taiAlt = a})
+instance GoogleAuth TimelineAttachmentsInsert' where
+        authKey = taiKey . _Just
+        authToken = taiOAuthToken . _Just
 
 instance GoogleRequest TimelineAttachmentsInsert'
          where
         type Rs TimelineAttachmentsInsert' = Attachment
         request = requestWithRoute defReq mirrorURL
         requestWithRoute r u TimelineAttachmentsInsert'{..}
-          = go _taiQuotaUser (Just _taiPrettyPrint) _taiUserIp
+          = go _taiQuotaUser (Just _taiPrettyPrint) _taiUserIP
               _taiItemId
+              _taiMedia
               _taiKey
-              _taiOauthToken
+              _taiOAuthToken
               _taiFields
-              (Just _taiAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TimelineAttachmentsInsertResource)

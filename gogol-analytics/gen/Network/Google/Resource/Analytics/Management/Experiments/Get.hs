@@ -33,14 +33,13 @@ module Network.Google.Resource.Analytics.Management.Experiments.Get
     , megQuotaUser
     , megPrettyPrint
     , megWebPropertyId
-    , megUserIp
+    , megUserIP
     , megProfileId
     , megAccountId
     , megExperimentId
     , megKey
-    , megOauthToken
+    , megOAuthToken
     , megFields
-    , megAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -61,10 +60,10 @@ type ManagementExperimentsGetResource =
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "alt" Alt :>
+                                   QueryParam "alt" AltJSON :>
                                      Get '[JSON] Experiment
 
 -- | Returns an experiment to which the user has access.
@@ -74,14 +73,13 @@ data ManagementExperimentsGet' = ManagementExperimentsGet'
     { _megQuotaUser     :: !(Maybe Text)
     , _megPrettyPrint   :: !Bool
     , _megWebPropertyId :: !Text
-    , _megUserIp        :: !(Maybe Text)
+    , _megUserIP        :: !(Maybe Text)
     , _megProfileId     :: !Text
     , _megAccountId     :: !Text
     , _megExperimentId  :: !Text
-    , _megKey           :: !(Maybe Text)
-    , _megOauthToken    :: !(Maybe Text)
+    , _megKey           :: !(Maybe Key)
+    , _megOAuthToken    :: !(Maybe OAuthToken)
     , _megFields        :: !(Maybe Text)
-    , _megAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementExperimentsGet'' with the minimum fields required to make a request.
@@ -94,7 +92,7 @@ data ManagementExperimentsGet' = ManagementExperimentsGet'
 --
 -- * 'megWebPropertyId'
 --
--- * 'megUserIp'
+-- * 'megUserIP'
 --
 -- * 'megProfileId'
 --
@@ -104,11 +102,9 @@ data ManagementExperimentsGet' = ManagementExperimentsGet'
 --
 -- * 'megKey'
 --
--- * 'megOauthToken'
+-- * 'megOAuthToken'
 --
 -- * 'megFields'
---
--- * 'megAlt'
 managementExperimentsGet'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
@@ -120,14 +116,13 @@ managementExperimentsGet' pMegWebPropertyId_ pMegProfileId_ pMegAccountId_ pMegE
     { _megQuotaUser = Nothing
     , _megPrettyPrint = False
     , _megWebPropertyId = pMegWebPropertyId_
-    , _megUserIp = Nothing
+    , _megUserIP = Nothing
     , _megProfileId = pMegProfileId_
     , _megAccountId = pMegAccountId_
     , _megExperimentId = pMegExperimentId_
     , _megKey = Nothing
-    , _megOauthToken = Nothing
+    , _megOAuthToken = Nothing
     , _megFields = Nothing
-    , _megAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -151,9 +146,9 @@ megWebPropertyId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-megUserIp :: Lens' ManagementExperimentsGet' (Maybe Text)
-megUserIp
-  = lens _megUserIp (\ s a -> s{_megUserIp = a})
+megUserIP :: Lens' ManagementExperimentsGet' (Maybe Text)
+megUserIP
+  = lens _megUserIP (\ s a -> s{_megUserIP = a})
 
 -- | View (Profile) ID to retrieve the experiment for.
 megProfileId :: Lens' ManagementExperimentsGet' Text
@@ -174,23 +169,23 @@ megExperimentId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-megKey :: Lens' ManagementExperimentsGet' (Maybe Text)
+megKey :: Lens' ManagementExperimentsGet' (Maybe Key)
 megKey = lens _megKey (\ s a -> s{_megKey = a})
 
 -- | OAuth 2.0 token for the current user.
-megOauthToken :: Lens' ManagementExperimentsGet' (Maybe Text)
-megOauthToken
-  = lens _megOauthToken
-      (\ s a -> s{_megOauthToken = a})
+megOAuthToken :: Lens' ManagementExperimentsGet' (Maybe OAuthToken)
+megOAuthToken
+  = lens _megOAuthToken
+      (\ s a -> s{_megOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 megFields :: Lens' ManagementExperimentsGet' (Maybe Text)
 megFields
   = lens _megFields (\ s a -> s{_megFields = a})
 
--- | Data format for the response.
-megAlt :: Lens' ManagementExperimentsGet' Alt
-megAlt = lens _megAlt (\ s a -> s{_megAlt = a})
+instance GoogleAuth ManagementExperimentsGet' where
+        authKey = megKey . _Just
+        authToken = megOAuthToken . _Just
 
 instance GoogleRequest ManagementExperimentsGet'
          where
@@ -199,14 +194,14 @@ instance GoogleRequest ManagementExperimentsGet'
         requestWithRoute r u ManagementExperimentsGet'{..}
           = go _megQuotaUser (Just _megPrettyPrint)
               _megWebPropertyId
-              _megUserIp
+              _megUserIP
               _megProfileId
               _megAccountId
               _megExperimentId
               _megKey
-              _megOauthToken
+              _megOAuthToken
               _megFields
-              (Just _megAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ManagementExperimentsGetResource)

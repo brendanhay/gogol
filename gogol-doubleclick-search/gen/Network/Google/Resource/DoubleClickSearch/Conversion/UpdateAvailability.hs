@@ -20,7 +20,7 @@
 -- | Updates the availabilities of a batch of floodlight activities in
 -- DoubleClick Search.
 --
--- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @DoubleclicksearchConversionUpdateAvailability@.
+-- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @DoubleClicksearchConversionUpdateAvailability@.
 module Network.Google.Resource.DoubleClickSearch.Conversion.UpdateAvailability
     (
     -- * REST Resource
@@ -33,17 +33,17 @@ module Network.Google.Resource.DoubleClickSearch.Conversion.UpdateAvailability
     -- * Request Lenses
     , cuaQuotaUser
     , cuaPrettyPrint
-    , cuaUserIp
+    , cuaUserIP
+    , cuaUpdateAvailabilityRequest
     , cuaKey
-    , cuaOauthToken
+    , cuaOAuthToken
     , cuaFields
-    , cuaAlt
     ) where
 
 import           Network.Google.DoubleClickSearch.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DoubleclicksearchConversionUpdateAvailability@ which the
+-- | A resource alias for @DoubleClicksearchConversionUpdateAvailability@ which the
 -- 'ConversionUpdateAvailability'' request conforms to.
 type ConversionUpdateAvailabilityResource =
      "conversion" :>
@@ -51,24 +51,25 @@ type ConversionUpdateAvailabilityResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :>
-                       Post '[JSON] UpdateAvailabilityResponse
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] UpdateAvailabilityRequest :>
+                         Post '[JSON] UpdateAvailabilityResponse
 
 -- | Updates the availabilities of a batch of floodlight activities in
 -- DoubleClick Search.
 --
 -- /See:/ 'conversionUpdateAvailability'' smart constructor.
 data ConversionUpdateAvailability' = ConversionUpdateAvailability'
-    { _cuaQuotaUser   :: !(Maybe Text)
-    , _cuaPrettyPrint :: !Bool
-    , _cuaUserIp      :: !(Maybe Text)
-    , _cuaKey         :: !(Maybe Text)
-    , _cuaOauthToken  :: !(Maybe Text)
-    , _cuaFields      :: !(Maybe Text)
-    , _cuaAlt         :: !Alt
+    { _cuaQuotaUser                 :: !(Maybe Text)
+    , _cuaPrettyPrint               :: !Bool
+    , _cuaUserIP                    :: !(Maybe Text)
+    , _cuaUpdateAvailabilityRequest :: !UpdateAvailabilityRequest
+    , _cuaKey                       :: !(Maybe Key)
+    , _cuaOAuthToken                :: !(Maybe OAuthToken)
+    , _cuaFields                    :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ConversionUpdateAvailability'' with the minimum fields required to make a request.
@@ -79,26 +80,27 @@ data ConversionUpdateAvailability' = ConversionUpdateAvailability'
 --
 -- * 'cuaPrettyPrint'
 --
--- * 'cuaUserIp'
+-- * 'cuaUserIP'
+--
+-- * 'cuaUpdateAvailabilityRequest'
 --
 -- * 'cuaKey'
 --
--- * 'cuaOauthToken'
+-- * 'cuaOAuthToken'
 --
 -- * 'cuaFields'
---
--- * 'cuaAlt'
 conversionUpdateAvailability'
-    :: ConversionUpdateAvailability'
-conversionUpdateAvailability' =
+    :: UpdateAvailabilityRequest -- ^ 'UpdateAvailabilityRequest'
+    -> ConversionUpdateAvailability'
+conversionUpdateAvailability' pCuaUpdateAvailabilityRequest_ =
     ConversionUpdateAvailability'
     { _cuaQuotaUser = Nothing
     , _cuaPrettyPrint = True
-    , _cuaUserIp = Nothing
+    , _cuaUserIP = Nothing
+    , _cuaUpdateAvailabilityRequest = pCuaUpdateAvailabilityRequest_
     , _cuaKey = Nothing
-    , _cuaOauthToken = Nothing
+    , _cuaOAuthToken = Nothing
     , _cuaFields = Nothing
-    , _cuaAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -116,30 +118,37 @@ cuaPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cuaUserIp :: Lens' ConversionUpdateAvailability' (Maybe Text)
-cuaUserIp
-  = lens _cuaUserIp (\ s a -> s{_cuaUserIp = a})
+cuaUserIP :: Lens' ConversionUpdateAvailability' (Maybe Text)
+cuaUserIP
+  = lens _cuaUserIP (\ s a -> s{_cuaUserIP = a})
+
+-- | Multipart request metadata.
+cuaUpdateAvailabilityRequest :: Lens' ConversionUpdateAvailability' UpdateAvailabilityRequest
+cuaUpdateAvailabilityRequest
+  = lens _cuaUpdateAvailabilityRequest
+      (\ s a -> s{_cuaUpdateAvailabilityRequest = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cuaKey :: Lens' ConversionUpdateAvailability' (Maybe Text)
+cuaKey :: Lens' ConversionUpdateAvailability' (Maybe Key)
 cuaKey = lens _cuaKey (\ s a -> s{_cuaKey = a})
 
 -- | OAuth 2.0 token for the current user.
-cuaOauthToken :: Lens' ConversionUpdateAvailability' (Maybe Text)
-cuaOauthToken
-  = lens _cuaOauthToken
-      (\ s a -> s{_cuaOauthToken = a})
+cuaOAuthToken :: Lens' ConversionUpdateAvailability' (Maybe OAuthToken)
+cuaOAuthToken
+  = lens _cuaOAuthToken
+      (\ s a -> s{_cuaOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cuaFields :: Lens' ConversionUpdateAvailability' (Maybe Text)
 cuaFields
   = lens _cuaFields (\ s a -> s{_cuaFields = a})
 
--- | Data format for the response.
-cuaAlt :: Lens' ConversionUpdateAvailability' Alt
-cuaAlt = lens _cuaAlt (\ s a -> s{_cuaAlt = a})
+instance GoogleAuth ConversionUpdateAvailability'
+         where
+        authKey = cuaKey . _Just
+        authToken = cuaOAuthToken . _Just
 
 instance GoogleRequest ConversionUpdateAvailability'
          where
@@ -149,11 +158,12 @@ instance GoogleRequest ConversionUpdateAvailability'
           = requestWithRoute defReq doubleClickSearchURL
         requestWithRoute r u
           ConversionUpdateAvailability'{..}
-          = go _cuaQuotaUser (Just _cuaPrettyPrint) _cuaUserIp
+          = go _cuaQuotaUser (Just _cuaPrettyPrint) _cuaUserIP
               _cuaKey
-              _cuaOauthToken
+              _cuaOAuthToken
               _cuaFields
-              (Just _cuaAlt)
+              (Just AltJSON)
+              _cuaUpdateAvailabilityRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ConversionUpdateAvailabilityResource)

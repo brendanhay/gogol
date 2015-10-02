@@ -32,15 +32,14 @@ module Network.Google.Resource.Drive.Replies.Get
     -- * Request Lenses
     , rgQuotaUser
     , rgPrettyPrint
-    , rgUserIp
+    , rgUserIP
     , rgKey
     , rgReplyId
     , rgFileId
-    , rgOauthToken
+    , rgOAuthToken
     , rgCommentId
     , rgIncludeDeleted
     , rgFields
-    , rgAlt
     ) where
 
 import           Network.Google.Drive.Types
@@ -58,11 +57,12 @@ type RepliesGetResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "includeDeleted" Bool :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :> Get '[JSON] CommentReply
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] CommentReply
 
 -- | Gets a reply.
 --
@@ -70,15 +70,14 @@ type RepliesGetResource =
 data RepliesGet' = RepliesGet'
     { _rgQuotaUser      :: !(Maybe Text)
     , _rgPrettyPrint    :: !Bool
-    , _rgUserIp         :: !(Maybe Text)
-    , _rgKey            :: !(Maybe Text)
+    , _rgUserIP         :: !(Maybe Text)
+    , _rgKey            :: !(Maybe Key)
     , _rgReplyId        :: !Text
     , _rgFileId         :: !Text
-    , _rgOauthToken     :: !(Maybe Text)
+    , _rgOAuthToken     :: !(Maybe OAuthToken)
     , _rgCommentId      :: !Text
     , _rgIncludeDeleted :: !Bool
     , _rgFields         :: !(Maybe Text)
-    , _rgAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RepliesGet'' with the minimum fields required to make a request.
@@ -89,7 +88,7 @@ data RepliesGet' = RepliesGet'
 --
 -- * 'rgPrettyPrint'
 --
--- * 'rgUserIp'
+-- * 'rgUserIP'
 --
 -- * 'rgKey'
 --
@@ -97,15 +96,13 @@ data RepliesGet' = RepliesGet'
 --
 -- * 'rgFileId'
 --
--- * 'rgOauthToken'
+-- * 'rgOAuthToken'
 --
 -- * 'rgCommentId'
 --
 -- * 'rgIncludeDeleted'
 --
 -- * 'rgFields'
---
--- * 'rgAlt'
 repliesGet'
     :: Text -- ^ 'replyId'
     -> Text -- ^ 'fileId'
@@ -115,15 +112,14 @@ repliesGet' pRgReplyId_ pRgFileId_ pRgCommentId_ =
     RepliesGet'
     { _rgQuotaUser = Nothing
     , _rgPrettyPrint = True
-    , _rgUserIp = Nothing
+    , _rgUserIP = Nothing
     , _rgKey = Nothing
     , _rgReplyId = pRgReplyId_
     , _rgFileId = pRgFileId_
-    , _rgOauthToken = Nothing
+    , _rgOAuthToken = Nothing
     , _rgCommentId = pRgCommentId_
     , _rgIncludeDeleted = False
     , _rgFields = Nothing
-    , _rgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -141,13 +137,13 @@ rgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rgUserIp :: Lens' RepliesGet' (Maybe Text)
-rgUserIp = lens _rgUserIp (\ s a -> s{_rgUserIp = a})
+rgUserIP :: Lens' RepliesGet' (Maybe Text)
+rgUserIP = lens _rgUserIP (\ s a -> s{_rgUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rgKey :: Lens' RepliesGet' (Maybe Text)
+rgKey :: Lens' RepliesGet' (Maybe Key)
 rgKey = lens _rgKey (\ s a -> s{_rgKey = a})
 
 -- | The ID of the reply.
@@ -160,9 +156,9 @@ rgFileId :: Lens' RepliesGet' Text
 rgFileId = lens _rgFileId (\ s a -> s{_rgFileId = a})
 
 -- | OAuth 2.0 token for the current user.
-rgOauthToken :: Lens' RepliesGet' (Maybe Text)
-rgOauthToken
-  = lens _rgOauthToken (\ s a -> s{_rgOauthToken = a})
+rgOAuthToken :: Lens' RepliesGet' (Maybe OAuthToken)
+rgOAuthToken
+  = lens _rgOAuthToken (\ s a -> s{_rgOAuthToken = a})
 
 -- | The ID of the comment.
 rgCommentId :: Lens' RepliesGet' Text
@@ -179,23 +175,23 @@ rgIncludeDeleted
 rgFields :: Lens' RepliesGet' (Maybe Text)
 rgFields = lens _rgFields (\ s a -> s{_rgFields = a})
 
--- | Data format for the response.
-rgAlt :: Lens' RepliesGet' Alt
-rgAlt = lens _rgAlt (\ s a -> s{_rgAlt = a})
+instance GoogleAuth RepliesGet' where
+        authKey = rgKey . _Just
+        authToken = rgOAuthToken . _Just
 
 instance GoogleRequest RepliesGet' where
         type Rs RepliesGet' = CommentReply
         request = requestWithRoute defReq driveURL
         requestWithRoute r u RepliesGet'{..}
-          = go _rgQuotaUser (Just _rgPrettyPrint) _rgUserIp
+          = go _rgQuotaUser (Just _rgPrettyPrint) _rgUserIP
               _rgKey
               _rgReplyId
               _rgFileId
-              _rgOauthToken
+              _rgOAuthToken
               _rgCommentId
               (Just _rgIncludeDeleted)
               _rgFields
-              (Just _rgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy RepliesGetResource)
                       r

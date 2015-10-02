@@ -33,14 +33,13 @@ module Network.Google.Resource.Compute.Disks.AggregatedList
     , dalQuotaUser
     , dalPrettyPrint
     , dalProject
-    , dalUserIp
+    , dalUserIP
     , dalKey
     , dalFilter
     , dalPageToken
-    , dalOauthToken
+    , dalOAuthToken
     , dalMaxResults
     , dalFields
-    , dalAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -55,13 +54,13 @@ type DisksAggregatedListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "filter" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "maxResults" Word32 :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :>
+                             QueryParam "alt" AltJSON :>
                                Get '[JSON] DiskAggregatedList
 
 -- | Retrieves the list of disks grouped by scope.
@@ -71,14 +70,13 @@ data DisksAggregatedList' = DisksAggregatedList'
     { _dalQuotaUser   :: !(Maybe Text)
     , _dalPrettyPrint :: !Bool
     , _dalProject     :: !Text
-    , _dalUserIp      :: !(Maybe Text)
-    , _dalKey         :: !(Maybe Text)
+    , _dalUserIP      :: !(Maybe Text)
+    , _dalKey         :: !(Maybe Key)
     , _dalFilter      :: !(Maybe Text)
     , _dalPageToken   :: !(Maybe Text)
-    , _dalOauthToken  :: !(Maybe Text)
+    , _dalOAuthToken  :: !(Maybe OAuthToken)
     , _dalMaxResults  :: !Word32
     , _dalFields      :: !(Maybe Text)
-    , _dalAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DisksAggregatedList'' with the minimum fields required to make a request.
@@ -91,7 +89,7 @@ data DisksAggregatedList' = DisksAggregatedList'
 --
 -- * 'dalProject'
 --
--- * 'dalUserIp'
+-- * 'dalUserIP'
 --
 -- * 'dalKey'
 --
@@ -99,13 +97,11 @@ data DisksAggregatedList' = DisksAggregatedList'
 --
 -- * 'dalPageToken'
 --
--- * 'dalOauthToken'
+-- * 'dalOAuthToken'
 --
 -- * 'dalMaxResults'
 --
 -- * 'dalFields'
---
--- * 'dalAlt'
 disksAggregatedList'
     :: Text -- ^ 'project'
     -> DisksAggregatedList'
@@ -114,14 +110,13 @@ disksAggregatedList' pDalProject_ =
     { _dalQuotaUser = Nothing
     , _dalPrettyPrint = True
     , _dalProject = pDalProject_
-    , _dalUserIp = Nothing
+    , _dalUserIP = Nothing
     , _dalKey = Nothing
     , _dalFilter = Nothing
     , _dalPageToken = Nothing
-    , _dalOauthToken = Nothing
+    , _dalOAuthToken = Nothing
     , _dalMaxResults = 500
     , _dalFields = Nothing
-    , _dalAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -144,14 +139,14 @@ dalProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-dalUserIp :: Lens' DisksAggregatedList' (Maybe Text)
-dalUserIp
-  = lens _dalUserIp (\ s a -> s{_dalUserIp = a})
+dalUserIP :: Lens' DisksAggregatedList' (Maybe Text)
+dalUserIP
+  = lens _dalUserIP (\ s a -> s{_dalUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dalKey :: Lens' DisksAggregatedList' (Maybe Text)
+dalKey :: Lens' DisksAggregatedList' (Maybe Key)
 dalKey = lens _dalKey (\ s a -> s{_dalKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
@@ -177,10 +172,10 @@ dalPageToken
   = lens _dalPageToken (\ s a -> s{_dalPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-dalOauthToken :: Lens' DisksAggregatedList' (Maybe Text)
-dalOauthToken
-  = lens _dalOauthToken
-      (\ s a -> s{_dalOauthToken = a})
+dalOAuthToken :: Lens' DisksAggregatedList' (Maybe OAuthToken)
+dalOAuthToken
+  = lens _dalOAuthToken
+      (\ s a -> s{_dalOAuthToken = a})
 
 -- | Maximum count of results to be returned.
 dalMaxResults :: Lens' DisksAggregatedList' Word32
@@ -193,23 +188,23 @@ dalFields :: Lens' DisksAggregatedList' (Maybe Text)
 dalFields
   = lens _dalFields (\ s a -> s{_dalFields = a})
 
--- | Data format for the response.
-dalAlt :: Lens' DisksAggregatedList' Alt
-dalAlt = lens _dalAlt (\ s a -> s{_dalAlt = a})
+instance GoogleAuth DisksAggregatedList' where
+        authKey = dalKey . _Just
+        authToken = dalOAuthToken . _Just
 
 instance GoogleRequest DisksAggregatedList' where
         type Rs DisksAggregatedList' = DiskAggregatedList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u DisksAggregatedList'{..}
           = go _dalQuotaUser (Just _dalPrettyPrint) _dalProject
-              _dalUserIp
+              _dalUserIP
               _dalKey
               _dalFilter
               _dalPageToken
-              _dalOauthToken
+              _dalOAuthToken
               (Just _dalMaxResults)
               _dalFields
-              (Just _dalAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy DisksAggregatedListResource)

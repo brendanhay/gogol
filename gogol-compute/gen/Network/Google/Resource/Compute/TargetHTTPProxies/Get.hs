@@ -33,12 +33,11 @@ module Network.Google.Resource.Compute.TargetHTTPProxies.Get
     , thttppgQuotaUser
     , thttppgPrettyPrint
     , thttppgProject
-    , thttppgUserIp
+    , thttppgUserIP
     , thttppgKey
-    , thttppgTargetHttpProxy
-    , thttppgOauthToken
+    , thttppgTargetHTTPProxy
+    , thttppgOAuthToken
     , thttppgFields
-    , thttppgAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -54,10 +53,11 @@ type TargetHTTPProxiesGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] TargetHTTPProxy
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] TargetHTTPProxy
 
 -- | Returns the specified TargetHttpProxy resource.
 --
@@ -66,12 +66,11 @@ data TargetHTTPProxiesGet' = TargetHTTPProxiesGet'
     { _thttppgQuotaUser       :: !(Maybe Text)
     , _thttppgPrettyPrint     :: !Bool
     , _thttppgProject         :: !Text
-    , _thttppgUserIp          :: !(Maybe Text)
-    , _thttppgKey             :: !(Maybe Text)
-    , _thttppgTargetHttpProxy :: !Text
-    , _thttppgOauthToken      :: !(Maybe Text)
+    , _thttppgUserIP          :: !(Maybe Text)
+    , _thttppgKey             :: !(Maybe Key)
+    , _thttppgTargetHTTPProxy :: !Text
+    , _thttppgOAuthToken      :: !(Maybe OAuthToken)
     , _thttppgFields          :: !(Maybe Text)
-    , _thttppgAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetHTTPProxiesGet'' with the minimum fields required to make a request.
@@ -84,32 +83,29 @@ data TargetHTTPProxiesGet' = TargetHTTPProxiesGet'
 --
 -- * 'thttppgProject'
 --
--- * 'thttppgUserIp'
+-- * 'thttppgUserIP'
 --
 -- * 'thttppgKey'
 --
--- * 'thttppgTargetHttpProxy'
+-- * 'thttppgTargetHTTPProxy'
 --
--- * 'thttppgOauthToken'
+-- * 'thttppgOAuthToken'
 --
 -- * 'thttppgFields'
---
--- * 'thttppgAlt'
 targetHTTPProxiesGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'targetHttpProxy'
     -> TargetHTTPProxiesGet'
-targetHTTPProxiesGet' pThttppgProject_ pThttppgTargetHttpProxy_ =
+targetHTTPProxiesGet' pThttppgProject_ pThttppgTargetHTTPProxy_ =
     TargetHTTPProxiesGet'
     { _thttppgQuotaUser = Nothing
     , _thttppgPrettyPrint = True
     , _thttppgProject = pThttppgProject_
-    , _thttppgUserIp = Nothing
+    , _thttppgUserIP = Nothing
     , _thttppgKey = Nothing
-    , _thttppgTargetHttpProxy = pThttppgTargetHttpProxy_
-    , _thttppgOauthToken = Nothing
+    , _thttppgTargetHTTPProxy = pThttppgTargetHTTPProxy_
+    , _thttppgOAuthToken = Nothing
     , _thttppgFields = Nothing
-    , _thttppgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -134,29 +130,29 @@ thttppgProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-thttppgUserIp :: Lens' TargetHTTPProxiesGet' (Maybe Text)
-thttppgUserIp
-  = lens _thttppgUserIp
-      (\ s a -> s{_thttppgUserIp = a})
+thttppgUserIP :: Lens' TargetHTTPProxiesGet' (Maybe Text)
+thttppgUserIP
+  = lens _thttppgUserIP
+      (\ s a -> s{_thttppgUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-thttppgKey :: Lens' TargetHTTPProxiesGet' (Maybe Text)
+thttppgKey :: Lens' TargetHTTPProxiesGet' (Maybe Key)
 thttppgKey
   = lens _thttppgKey (\ s a -> s{_thttppgKey = a})
 
 -- | Name of the TargetHttpProxy resource to return.
-thttppgTargetHttpProxy :: Lens' TargetHTTPProxiesGet' Text
-thttppgTargetHttpProxy
-  = lens _thttppgTargetHttpProxy
-      (\ s a -> s{_thttppgTargetHttpProxy = a})
+thttppgTargetHTTPProxy :: Lens' TargetHTTPProxiesGet' Text
+thttppgTargetHTTPProxy
+  = lens _thttppgTargetHTTPProxy
+      (\ s a -> s{_thttppgTargetHTTPProxy = a})
 
 -- | OAuth 2.0 token for the current user.
-thttppgOauthToken :: Lens' TargetHTTPProxiesGet' (Maybe Text)
-thttppgOauthToken
-  = lens _thttppgOauthToken
-      (\ s a -> s{_thttppgOauthToken = a})
+thttppgOAuthToken :: Lens' TargetHTTPProxiesGet' (Maybe OAuthToken)
+thttppgOAuthToken
+  = lens _thttppgOAuthToken
+      (\ s a -> s{_thttppgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 thttppgFields :: Lens' TargetHTTPProxiesGet' (Maybe Text)
@@ -164,10 +160,9 @@ thttppgFields
   = lens _thttppgFields
       (\ s a -> s{_thttppgFields = a})
 
--- | Data format for the response.
-thttppgAlt :: Lens' TargetHTTPProxiesGet' Alt
-thttppgAlt
-  = lens _thttppgAlt (\ s a -> s{_thttppgAlt = a})
+instance GoogleAuth TargetHTTPProxiesGet' where
+        authKey = thttppgKey . _Just
+        authToken = thttppgOAuthToken . _Just
 
 instance GoogleRequest TargetHTTPProxiesGet' where
         type Rs TargetHTTPProxiesGet' = TargetHTTPProxy
@@ -175,12 +170,12 @@ instance GoogleRequest TargetHTTPProxiesGet' where
         requestWithRoute r u TargetHTTPProxiesGet'{..}
           = go _thttppgQuotaUser (Just _thttppgPrettyPrint)
               _thttppgProject
-              _thttppgUserIp
+              _thttppgUserIP
               _thttppgKey
-              _thttppgTargetHttpProxy
-              _thttppgOauthToken
+              _thttppgTargetHTTPProxy
+              _thttppgOAuthToken
               _thttppgFields
-              (Just _thttppgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TargetHTTPProxiesGetResource)

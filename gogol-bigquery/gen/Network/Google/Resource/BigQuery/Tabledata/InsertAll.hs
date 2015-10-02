@@ -33,14 +33,14 @@ module Network.Google.Resource.BigQuery.Tabledata.InsertAll
     -- * Request Lenses
     , tiaQuotaUser
     , tiaPrettyPrint
-    , tiaUserIp
+    , tiaUserIP
+    , tiaTableDataInsertAllRequest
     , tiaKey
     , tiaDatasetId
     , tiaProjectId
-    , tiaOauthToken
+    , tiaOAuthToken
     , tiaTableId
     , tiaFields
-    , tiaAlt
     ) where
 
 import           Network.Google.BigQuery.Types
@@ -59,27 +59,28 @@ type TabledataInsertAllResource =
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :>
-                                 Post '[JSON] TableDataInsertAllResponse
+                               QueryParam "alt" AltJSON :>
+                                 ReqBody '[JSON] TableDataInsertAllRequest :>
+                                   Post '[JSON] TableDataInsertAllResponse
 
 -- | Streams data into BigQuery one record at a time without needing to run a
 -- load job. Requires the WRITER dataset role.
 --
 -- /See:/ 'tabledataInsertAll'' smart constructor.
 data TabledataInsertAll' = TabledataInsertAll'
-    { _tiaQuotaUser   :: !(Maybe Text)
-    , _tiaPrettyPrint :: !Bool
-    , _tiaUserIp      :: !(Maybe Text)
-    , _tiaKey         :: !(Maybe Text)
-    , _tiaDatasetId   :: !Text
-    , _tiaProjectId   :: !Text
-    , _tiaOauthToken  :: !(Maybe Text)
-    , _tiaTableId     :: !Text
-    , _tiaFields      :: !(Maybe Text)
-    , _tiaAlt         :: !Alt
+    { _tiaQuotaUser                 :: !(Maybe Text)
+    , _tiaPrettyPrint               :: !Bool
+    , _tiaUserIP                    :: !(Maybe Text)
+    , _tiaTableDataInsertAllRequest :: !TableDataInsertAllRequest
+    , _tiaKey                       :: !(Maybe Key)
+    , _tiaDatasetId                 :: !Text
+    , _tiaProjectId                 :: !Text
+    , _tiaOAuthToken                :: !(Maybe OAuthToken)
+    , _tiaTableId                   :: !Text
+    , _tiaFields                    :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TabledataInsertAll'' with the minimum fields required to make a request.
@@ -90,7 +91,9 @@ data TabledataInsertAll' = TabledataInsertAll'
 --
 -- * 'tiaPrettyPrint'
 --
--- * 'tiaUserIp'
+-- * 'tiaUserIP'
+--
+-- * 'tiaTableDataInsertAllRequest'
 --
 -- * 'tiaKey'
 --
@@ -98,30 +101,29 @@ data TabledataInsertAll' = TabledataInsertAll'
 --
 -- * 'tiaProjectId'
 --
--- * 'tiaOauthToken'
+-- * 'tiaOAuthToken'
 --
 -- * 'tiaTableId'
 --
 -- * 'tiaFields'
---
--- * 'tiaAlt'
 tabledataInsertAll'
-    :: Text -- ^ 'datasetId'
+    :: TableDataInsertAllRequest -- ^ 'TableDataInsertAllRequest'
+    -> Text -- ^ 'datasetId'
     -> Text -- ^ 'projectId'
     -> Text -- ^ 'tableId'
     -> TabledataInsertAll'
-tabledataInsertAll' pTiaDatasetId_ pTiaProjectId_ pTiaTableId_ =
+tabledataInsertAll' pTiaTableDataInsertAllRequest_ pTiaDatasetId_ pTiaProjectId_ pTiaTableId_ =
     TabledataInsertAll'
     { _tiaQuotaUser = Nothing
     , _tiaPrettyPrint = True
-    , _tiaUserIp = Nothing
+    , _tiaUserIP = Nothing
+    , _tiaTableDataInsertAllRequest = pTiaTableDataInsertAllRequest_
     , _tiaKey = Nothing
     , _tiaDatasetId = pTiaDatasetId_
     , _tiaProjectId = pTiaProjectId_
-    , _tiaOauthToken = Nothing
+    , _tiaOAuthToken = Nothing
     , _tiaTableId = pTiaTableId_
     , _tiaFields = Nothing
-    , _tiaAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,14 +141,20 @@ tiaPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tiaUserIp :: Lens' TabledataInsertAll' (Maybe Text)
-tiaUserIp
-  = lens _tiaUserIp (\ s a -> s{_tiaUserIp = a})
+tiaUserIP :: Lens' TabledataInsertAll' (Maybe Text)
+tiaUserIP
+  = lens _tiaUserIP (\ s a -> s{_tiaUserIP = a})
+
+-- | Multipart request metadata.
+tiaTableDataInsertAllRequest :: Lens' TabledataInsertAll' TableDataInsertAllRequest
+tiaTableDataInsertAllRequest
+  = lens _tiaTableDataInsertAllRequest
+      (\ s a -> s{_tiaTableDataInsertAllRequest = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tiaKey :: Lens' TabledataInsertAll' (Maybe Text)
+tiaKey :: Lens' TabledataInsertAll' (Maybe Key)
 tiaKey = lens _tiaKey (\ s a -> s{_tiaKey = a})
 
 -- | Dataset ID of the destination table.
@@ -160,10 +168,10 @@ tiaProjectId
   = lens _tiaProjectId (\ s a -> s{_tiaProjectId = a})
 
 -- | OAuth 2.0 token for the current user.
-tiaOauthToken :: Lens' TabledataInsertAll' (Maybe Text)
-tiaOauthToken
-  = lens _tiaOauthToken
-      (\ s a -> s{_tiaOauthToken = a})
+tiaOAuthToken :: Lens' TabledataInsertAll' (Maybe OAuthToken)
+tiaOAuthToken
+  = lens _tiaOAuthToken
+      (\ s a -> s{_tiaOAuthToken = a})
 
 -- | Table ID of the destination table.
 tiaTableId :: Lens' TabledataInsertAll' Text
@@ -175,23 +183,24 @@ tiaFields :: Lens' TabledataInsertAll' (Maybe Text)
 tiaFields
   = lens _tiaFields (\ s a -> s{_tiaFields = a})
 
--- | Data format for the response.
-tiaAlt :: Lens' TabledataInsertAll' Alt
-tiaAlt = lens _tiaAlt (\ s a -> s{_tiaAlt = a})
+instance GoogleAuth TabledataInsertAll' where
+        authKey = tiaKey . _Just
+        authToken = tiaOAuthToken . _Just
 
 instance GoogleRequest TabledataInsertAll' where
         type Rs TabledataInsertAll' =
              TableDataInsertAllResponse
         request = requestWithRoute defReq bigQueryURL
         requestWithRoute r u TabledataInsertAll'{..}
-          = go _tiaQuotaUser (Just _tiaPrettyPrint) _tiaUserIp
+          = go _tiaQuotaUser (Just _tiaPrettyPrint) _tiaUserIP
               _tiaKey
               _tiaDatasetId
               _tiaProjectId
-              _tiaOauthToken
+              _tiaOAuthToken
               _tiaTableId
               _tiaFields
-              (Just _tiaAlt)
+              (Just AltJSON)
+              _tiaTableDataInsertAllRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TabledataInsertAllResource)

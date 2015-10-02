@@ -34,12 +34,12 @@ module Network.Google.Resource.Compute.TargetPools.AddHealthCheck
     , tpahcPrettyPrint
     , tpahcProject
     , tpahcTargetPool
-    , tpahcUserIp
+    , tpahcUserIP
+    , tpahcTargetPoolsAddHealthCheckRequest
     , tpahcKey
     , tpahcRegion
-    , tpahcOauthToken
+    , tpahcOAuthToken
     , tpahcFields
-    , tpahcAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -57,25 +57,27 @@ type TargetPoolsAddHealthCheckResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Post '[JSON] Operation
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] TargetPoolsAddHealthCheckRequest
+                                 :> Post '[JSON] Operation
 
 -- | Adds health check URL to targetPool.
 --
 -- /See:/ 'targetPoolsAddHealthCheck'' smart constructor.
 data TargetPoolsAddHealthCheck' = TargetPoolsAddHealthCheck'
-    { _tpahcQuotaUser   :: !(Maybe Text)
-    , _tpahcPrettyPrint :: !Bool
-    , _tpahcProject     :: !Text
-    , _tpahcTargetPool  :: !Text
-    , _tpahcUserIp      :: !(Maybe Text)
-    , _tpahcKey         :: !(Maybe Text)
-    , _tpahcRegion      :: !Text
-    , _tpahcOauthToken  :: !(Maybe Text)
-    , _tpahcFields      :: !(Maybe Text)
-    , _tpahcAlt         :: !Alt
+    { _tpahcQuotaUser                        :: !(Maybe Text)
+    , _tpahcPrettyPrint                      :: !Bool
+    , _tpahcProject                          :: !Text
+    , _tpahcTargetPool                       :: !Text
+    , _tpahcUserIP                           :: !(Maybe Text)
+    , _tpahcTargetPoolsAddHealthCheckRequest :: !TargetPoolsAddHealthCheckRequest
+    , _tpahcKey                              :: !(Maybe Key)
+    , _tpahcRegion                           :: !Text
+    , _tpahcOAuthToken                       :: !(Maybe OAuthToken)
+    , _tpahcFields                           :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetPoolsAddHealthCheck'' with the minimum fields required to make a request.
@@ -90,34 +92,35 @@ data TargetPoolsAddHealthCheck' = TargetPoolsAddHealthCheck'
 --
 -- * 'tpahcTargetPool'
 --
--- * 'tpahcUserIp'
+-- * 'tpahcUserIP'
+--
+-- * 'tpahcTargetPoolsAddHealthCheckRequest'
 --
 -- * 'tpahcKey'
 --
 -- * 'tpahcRegion'
 --
--- * 'tpahcOauthToken'
+-- * 'tpahcOAuthToken'
 --
 -- * 'tpahcFields'
---
--- * 'tpahcAlt'
 targetPoolsAddHealthCheck'
     :: Text -- ^ 'project'
     -> Text -- ^ 'targetPool'
+    -> TargetPoolsAddHealthCheckRequest -- ^ 'TargetPoolsAddHealthCheckRequest'
     -> Text -- ^ 'region'
     -> TargetPoolsAddHealthCheck'
-targetPoolsAddHealthCheck' pTpahcProject_ pTpahcTargetPool_ pTpahcRegion_ =
+targetPoolsAddHealthCheck' pTpahcProject_ pTpahcTargetPool_ pTpahcTargetPoolsAddHealthCheckRequest_ pTpahcRegion_ =
     TargetPoolsAddHealthCheck'
     { _tpahcQuotaUser = Nothing
     , _tpahcPrettyPrint = True
     , _tpahcProject = pTpahcProject_
     , _tpahcTargetPool = pTpahcTargetPool_
-    , _tpahcUserIp = Nothing
+    , _tpahcUserIP = Nothing
+    , _tpahcTargetPoolsAddHealthCheckRequest = pTpahcTargetPoolsAddHealthCheckRequest_
     , _tpahcKey = Nothing
     , _tpahcRegion = pTpahcRegion_
-    , _tpahcOauthToken = Nothing
+    , _tpahcOAuthToken = Nothing
     , _tpahcFields = Nothing
-    , _tpahcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -147,14 +150,21 @@ tpahcTargetPool
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tpahcUserIp :: Lens' TargetPoolsAddHealthCheck' (Maybe Text)
-tpahcUserIp
-  = lens _tpahcUserIp (\ s a -> s{_tpahcUserIp = a})
+tpahcUserIP :: Lens' TargetPoolsAddHealthCheck' (Maybe Text)
+tpahcUserIP
+  = lens _tpahcUserIP (\ s a -> s{_tpahcUserIP = a})
+
+-- | Multipart request metadata.
+tpahcTargetPoolsAddHealthCheckRequest :: Lens' TargetPoolsAddHealthCheck' TargetPoolsAddHealthCheckRequest
+tpahcTargetPoolsAddHealthCheckRequest
+  = lens _tpahcTargetPoolsAddHealthCheckRequest
+      (\ s a ->
+         s{_tpahcTargetPoolsAddHealthCheckRequest = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tpahcKey :: Lens' TargetPoolsAddHealthCheck' (Maybe Text)
+tpahcKey :: Lens' TargetPoolsAddHealthCheck' (Maybe Key)
 tpahcKey = lens _tpahcKey (\ s a -> s{_tpahcKey = a})
 
 -- | Name of the region scoping this request.
@@ -163,19 +173,19 @@ tpahcRegion
   = lens _tpahcRegion (\ s a -> s{_tpahcRegion = a})
 
 -- | OAuth 2.0 token for the current user.
-tpahcOauthToken :: Lens' TargetPoolsAddHealthCheck' (Maybe Text)
-tpahcOauthToken
-  = lens _tpahcOauthToken
-      (\ s a -> s{_tpahcOauthToken = a})
+tpahcOAuthToken :: Lens' TargetPoolsAddHealthCheck' (Maybe OAuthToken)
+tpahcOAuthToken
+  = lens _tpahcOAuthToken
+      (\ s a -> s{_tpahcOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 tpahcFields :: Lens' TargetPoolsAddHealthCheck' (Maybe Text)
 tpahcFields
   = lens _tpahcFields (\ s a -> s{_tpahcFields = a})
 
--- | Data format for the response.
-tpahcAlt :: Lens' TargetPoolsAddHealthCheck' Alt
-tpahcAlt = lens _tpahcAlt (\ s a -> s{_tpahcAlt = a})
+instance GoogleAuth TargetPoolsAddHealthCheck' where
+        authKey = tpahcKey . _Just
+        authToken = tpahcOAuthToken . _Just
 
 instance GoogleRequest TargetPoolsAddHealthCheck'
          where
@@ -185,12 +195,13 @@ instance GoogleRequest TargetPoolsAddHealthCheck'
           = go _tpahcQuotaUser (Just _tpahcPrettyPrint)
               _tpahcProject
               _tpahcTargetPool
-              _tpahcUserIp
+              _tpahcUserIP
               _tpahcKey
               _tpahcRegion
-              _tpahcOauthToken
+              _tpahcOAuthToken
               _tpahcFields
-              (Just _tpahcAlt)
+              (Just AltJSON)
+              _tpahcTargetPoolsAddHealthCheckRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TargetPoolsAddHealthCheckResource)

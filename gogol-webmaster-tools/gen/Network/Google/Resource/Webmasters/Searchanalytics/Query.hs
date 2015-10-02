@@ -37,12 +37,12 @@ module Network.Google.Resource.Webmasters.Searchanalytics.Query
     -- * Request Lenses
     , sqQuotaUser
     , sqPrettyPrint
-    , sqUserIp
-    , sqSiteUrl
+    , sqUserIP
+    , sqSiteURL
     , sqKey
-    , sqOauthToken
+    , sqOAuthToken
+    , sqSearchAnalyticsQueryRequest
     , sqFields
-    , sqAlt
     ) where
 
 import           Network.Google.Prelude
@@ -58,11 +58,12 @@ type SearchanalyticsQueryResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :>
-                           Post '[JSON] SearchAnalyticsQueryResponse
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] SearchAnalyticsQueryRequest :>
+                             Post '[JSON] SearchAnalyticsQueryResponse
 
 -- | Query your data with filters and parameters that you define. Returns
 -- zero or more rows grouped by the row keys that you define. You must
@@ -73,14 +74,14 @@ type SearchanalyticsQueryResource =
 --
 -- /See:/ 'searchanalyticsQuery'' smart constructor.
 data SearchanalyticsQuery' = SearchanalyticsQuery'
-    { _sqQuotaUser   :: !(Maybe Text)
-    , _sqPrettyPrint :: !Bool
-    , _sqUserIp      :: !(Maybe Text)
-    , _sqSiteUrl     :: !Text
-    , _sqKey         :: !(Maybe Text)
-    , _sqOauthToken  :: !(Maybe Text)
-    , _sqFields      :: !(Maybe Text)
-    , _sqAlt         :: !Alt
+    { _sqQuotaUser                   :: !(Maybe Text)
+    , _sqPrettyPrint                 :: !Bool
+    , _sqUserIP                      :: !(Maybe Text)
+    , _sqSiteURL                     :: !Text
+    , _sqKey                         :: !(Maybe Key)
+    , _sqOAuthToken                  :: !(Maybe OAuthToken)
+    , _sqSearchAnalyticsQueryRequest :: !SearchAnalyticsQueryRequest
+    , _sqFields                      :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SearchanalyticsQuery'' with the minimum fields required to make a request.
@@ -91,30 +92,31 @@ data SearchanalyticsQuery' = SearchanalyticsQuery'
 --
 -- * 'sqPrettyPrint'
 --
--- * 'sqUserIp'
+-- * 'sqUserIP'
 --
--- * 'sqSiteUrl'
+-- * 'sqSiteURL'
 --
 -- * 'sqKey'
 --
--- * 'sqOauthToken'
+-- * 'sqOAuthToken'
+--
+-- * 'sqSearchAnalyticsQueryRequest'
 --
 -- * 'sqFields'
---
--- * 'sqAlt'
 searchanalyticsQuery'
     :: Text -- ^ 'siteUrl'
+    -> SearchAnalyticsQueryRequest -- ^ 'SearchAnalyticsQueryRequest'
     -> SearchanalyticsQuery'
-searchanalyticsQuery' pSqSiteUrl_ =
+searchanalyticsQuery' pSqSiteURL_ pSqSearchAnalyticsQueryRequest_ =
     SearchanalyticsQuery'
     { _sqQuotaUser = Nothing
     , _sqPrettyPrint = True
-    , _sqUserIp = Nothing
-    , _sqSiteUrl = pSqSiteUrl_
+    , _sqUserIP = Nothing
+    , _sqSiteURL = pSqSiteURL_
     , _sqKey = Nothing
-    , _sqOauthToken = Nothing
+    , _sqOAuthToken = Nothing
+    , _sqSearchAnalyticsQueryRequest = pSqSearchAnalyticsQueryRequest_
     , _sqFields = Nothing
-    , _sqAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -132,45 +134,52 @@ sqPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-sqUserIp :: Lens' SearchanalyticsQuery' (Maybe Text)
-sqUserIp = lens _sqUserIp (\ s a -> s{_sqUserIp = a})
+sqUserIP :: Lens' SearchanalyticsQuery' (Maybe Text)
+sqUserIP = lens _sqUserIP (\ s a -> s{_sqUserIP = a})
 
 -- | The site\'s URL, including protocol. For example:
 -- http:\/\/www.example.com\/
-sqSiteUrl :: Lens' SearchanalyticsQuery' Text
-sqSiteUrl
-  = lens _sqSiteUrl (\ s a -> s{_sqSiteUrl = a})
+sqSiteURL :: Lens' SearchanalyticsQuery' Text
+sqSiteURL
+  = lens _sqSiteURL (\ s a -> s{_sqSiteURL = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-sqKey :: Lens' SearchanalyticsQuery' (Maybe Text)
+sqKey :: Lens' SearchanalyticsQuery' (Maybe Key)
 sqKey = lens _sqKey (\ s a -> s{_sqKey = a})
 
 -- | OAuth 2.0 token for the current user.
-sqOauthToken :: Lens' SearchanalyticsQuery' (Maybe Text)
-sqOauthToken
-  = lens _sqOauthToken (\ s a -> s{_sqOauthToken = a})
+sqOAuthToken :: Lens' SearchanalyticsQuery' (Maybe OAuthToken)
+sqOAuthToken
+  = lens _sqOAuthToken (\ s a -> s{_sqOAuthToken = a})
+
+-- | Multipart request metadata.
+sqSearchAnalyticsQueryRequest :: Lens' SearchanalyticsQuery' SearchAnalyticsQueryRequest
+sqSearchAnalyticsQueryRequest
+  = lens _sqSearchAnalyticsQueryRequest
+      (\ s a -> s{_sqSearchAnalyticsQueryRequest = a})
 
 -- | Selector specifying which fields to include in a partial response.
 sqFields :: Lens' SearchanalyticsQuery' (Maybe Text)
 sqFields = lens _sqFields (\ s a -> s{_sqFields = a})
 
--- | Data format for the response.
-sqAlt :: Lens' SearchanalyticsQuery' Alt
-sqAlt = lens _sqAlt (\ s a -> s{_sqAlt = a})
+instance GoogleAuth SearchanalyticsQuery' where
+        authKey = sqKey . _Just
+        authToken = sqOAuthToken . _Just
 
 instance GoogleRequest SearchanalyticsQuery' where
         type Rs SearchanalyticsQuery' =
              SearchAnalyticsQueryResponse
         request = requestWithRoute defReq webmasterToolsURL
         requestWithRoute r u SearchanalyticsQuery'{..}
-          = go _sqQuotaUser (Just _sqPrettyPrint) _sqUserIp
-              _sqSiteUrl
+          = go _sqQuotaUser (Just _sqPrettyPrint) _sqUserIP
+              _sqSiteURL
               _sqKey
-              _sqOauthToken
+              _sqOAuthToken
               _sqFields
-              (Just _sqAlt)
+              (Just AltJSON)
+              _sqSearchAnalyticsQueryRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy SearchanalyticsQueryResource)

@@ -33,16 +33,15 @@ module Network.Google.Resource.Analytics.Data.Realtime.Get
     , drgQuotaUser
     , drgMetrics
     , drgPrettyPrint
-    , drgUserIp
+    , drgUserIP
     , drgFilters
     , drgIds
     , drgKey
     , drgSort
     , drgDimensions
-    , drgOauthToken
+    , drgOAuthToken
     , drgMaxResults
     , drgFields
-    , drgAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -59,13 +58,13 @@ type DataRealtimeGetResource =
                QueryParam "userIp" Text :>
                  QueryParam "filters" Text :>
                    QueryParam "ids" Text :>
-                     QueryParam "key" Text :>
+                     QueryParam "key" Key :>
                        QueryParam "sort" Text :>
                          QueryParam "dimensions" Text :>
-                           QueryParam "oauth_token" Text :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "max-results" Int32 :>
                                QueryParam "fields" Text :>
-                                 QueryParam "alt" Alt :>
+                                 QueryParam "alt" AltJSON :>
                                    Get '[JSON] RealtimeData
 
 -- | Returns real time data for a view (profile).
@@ -75,16 +74,15 @@ data DataRealtimeGet' = DataRealtimeGet'
     { _drgQuotaUser   :: !(Maybe Text)
     , _drgMetrics     :: !Text
     , _drgPrettyPrint :: !Bool
-    , _drgUserIp      :: !(Maybe Text)
+    , _drgUserIP      :: !(Maybe Text)
     , _drgFilters     :: !(Maybe Text)
     , _drgIds         :: !Text
-    , _drgKey         :: !(Maybe Text)
+    , _drgKey         :: !(Maybe Key)
     , _drgSort        :: !(Maybe Text)
     , _drgDimensions  :: !(Maybe Text)
-    , _drgOauthToken  :: !(Maybe Text)
+    , _drgOAuthToken  :: !(Maybe OAuthToken)
     , _drgMaxResults  :: !(Maybe Int32)
     , _drgFields      :: !(Maybe Text)
-    , _drgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DataRealtimeGet'' with the minimum fields required to make a request.
@@ -97,7 +95,7 @@ data DataRealtimeGet' = DataRealtimeGet'
 --
 -- * 'drgPrettyPrint'
 --
--- * 'drgUserIp'
+-- * 'drgUserIP'
 --
 -- * 'drgFilters'
 --
@@ -109,13 +107,11 @@ data DataRealtimeGet' = DataRealtimeGet'
 --
 -- * 'drgDimensions'
 --
--- * 'drgOauthToken'
+-- * 'drgOAuthToken'
 --
 -- * 'drgMaxResults'
 --
 -- * 'drgFields'
---
--- * 'drgAlt'
 dataRealtimeGet'
     :: Text -- ^ 'metrics'
     -> Text -- ^ 'ids'
@@ -125,16 +121,15 @@ dataRealtimeGet' pDrgMetrics_ pDrgIds_ =
     { _drgQuotaUser = Nothing
     , _drgMetrics = pDrgMetrics_
     , _drgPrettyPrint = False
-    , _drgUserIp = Nothing
+    , _drgUserIP = Nothing
     , _drgFilters = Nothing
     , _drgIds = pDrgIds_
     , _drgKey = Nothing
     , _drgSort = Nothing
     , _drgDimensions = Nothing
-    , _drgOauthToken = Nothing
+    , _drgOAuthToken = Nothing
     , _drgMaxResults = Nothing
     , _drgFields = Nothing
-    , _drgAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -158,9 +153,9 @@ drgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-drgUserIp :: Lens' DataRealtimeGet' (Maybe Text)
-drgUserIp
-  = lens _drgUserIp (\ s a -> s{_drgUserIp = a})
+drgUserIP :: Lens' DataRealtimeGet' (Maybe Text)
+drgUserIP
+  = lens _drgUserIP (\ s a -> s{_drgUserIP = a})
 
 -- | A comma-separated list of dimension or metric filters to be applied to
 -- real time data.
@@ -176,7 +171,7 @@ drgIds = lens _drgIds (\ s a -> s{_drgIds = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-drgKey :: Lens' DataRealtimeGet' (Maybe Text)
+drgKey :: Lens' DataRealtimeGet' (Maybe Key)
 drgKey = lens _drgKey (\ s a -> s{_drgKey = a})
 
 -- | A comma-separated list of dimensions or metrics that determine the sort
@@ -192,10 +187,10 @@ drgDimensions
       (\ s a -> s{_drgDimensions = a})
 
 -- | OAuth 2.0 token for the current user.
-drgOauthToken :: Lens' DataRealtimeGet' (Maybe Text)
-drgOauthToken
-  = lens _drgOauthToken
-      (\ s a -> s{_drgOauthToken = a})
+drgOAuthToken :: Lens' DataRealtimeGet' (Maybe OAuthToken)
+drgOAuthToken
+  = lens _drgOAuthToken
+      (\ s a -> s{_drgOAuthToken = a})
 
 -- | The maximum number of entries to include in this feed.
 drgMaxResults :: Lens' DataRealtimeGet' (Maybe Int32)
@@ -208,9 +203,9 @@ drgFields :: Lens' DataRealtimeGet' (Maybe Text)
 drgFields
   = lens _drgFields (\ s a -> s{_drgFields = a})
 
--- | Data format for the response.
-drgAlt :: Lens' DataRealtimeGet' Alt
-drgAlt = lens _drgAlt (\ s a -> s{_drgAlt = a})
+instance GoogleAuth DataRealtimeGet' where
+        authKey = drgKey . _Just
+        authToken = drgOAuthToken . _Just
 
 instance GoogleRequest DataRealtimeGet' where
         type Rs DataRealtimeGet' = RealtimeData
@@ -218,16 +213,16 @@ instance GoogleRequest DataRealtimeGet' where
         requestWithRoute r u DataRealtimeGet'{..}
           = go _drgQuotaUser (Just _drgMetrics)
               (Just _drgPrettyPrint)
-              _drgUserIp
+              _drgUserIP
               _drgFilters
               (Just _drgIds)
               _drgKey
               _drgSort
               _drgDimensions
-              _drgOauthToken
+              _drgOAuthToken
               _drgMaxResults
               _drgFields
-              (Just _drgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy DataRealtimeGetResource)

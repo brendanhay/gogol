@@ -34,11 +34,10 @@ module Network.Google.Resource.GamesManagement.Scores.ResetAll
     -- * Request Lenses
     , sraQuotaUser
     , sraPrettyPrint
-    , sraUserIp
+    , sraUserIP
     , sraKey
-    , sraOauthToken
+    , sraOAuthToken
     , sraFields
-    , sraAlt
     ) where
 
 import           Network.Google.GamesManagement.Types
@@ -52,10 +51,10 @@ type ScoresResetAllResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :>
+                     QueryParam "alt" AltJSON :>
                        Post '[JSON] PlayerScoreResetAllResponse
 
 -- | Resets all scores for all leaderboards for the currently authenticated
@@ -66,11 +65,10 @@ type ScoresResetAllResource =
 data ScoresResetAll' = ScoresResetAll'
     { _sraQuotaUser   :: !(Maybe Text)
     , _sraPrettyPrint :: !Bool
-    , _sraUserIp      :: !(Maybe Text)
-    , _sraKey         :: !(Maybe Text)
-    , _sraOauthToken  :: !(Maybe Text)
+    , _sraUserIP      :: !(Maybe Text)
+    , _sraKey         :: !(Maybe Key)
+    , _sraOAuthToken  :: !(Maybe OAuthToken)
     , _sraFields      :: !(Maybe Text)
-    , _sraAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ScoresResetAll'' with the minimum fields required to make a request.
@@ -81,26 +79,23 @@ data ScoresResetAll' = ScoresResetAll'
 --
 -- * 'sraPrettyPrint'
 --
--- * 'sraUserIp'
+-- * 'sraUserIP'
 --
 -- * 'sraKey'
 --
--- * 'sraOauthToken'
+-- * 'sraOAuthToken'
 --
 -- * 'sraFields'
---
--- * 'sraAlt'
 scoresResetAll'
     :: ScoresResetAll'
 scoresResetAll' =
     ScoresResetAll'
     { _sraQuotaUser = Nothing
     , _sraPrettyPrint = True
-    , _sraUserIp = Nothing
+    , _sraUserIP = Nothing
     , _sraKey = Nothing
-    , _sraOauthToken = Nothing
+    , _sraOAuthToken = Nothing
     , _sraFields = Nothing
-    , _sraAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -118,40 +113,40 @@ sraPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-sraUserIp :: Lens' ScoresResetAll' (Maybe Text)
-sraUserIp
-  = lens _sraUserIp (\ s a -> s{_sraUserIp = a})
+sraUserIP :: Lens' ScoresResetAll' (Maybe Text)
+sraUserIP
+  = lens _sraUserIP (\ s a -> s{_sraUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-sraKey :: Lens' ScoresResetAll' (Maybe Text)
+sraKey :: Lens' ScoresResetAll' (Maybe Key)
 sraKey = lens _sraKey (\ s a -> s{_sraKey = a})
 
 -- | OAuth 2.0 token for the current user.
-sraOauthToken :: Lens' ScoresResetAll' (Maybe Text)
-sraOauthToken
-  = lens _sraOauthToken
-      (\ s a -> s{_sraOauthToken = a})
+sraOAuthToken :: Lens' ScoresResetAll' (Maybe OAuthToken)
+sraOAuthToken
+  = lens _sraOAuthToken
+      (\ s a -> s{_sraOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 sraFields :: Lens' ScoresResetAll' (Maybe Text)
 sraFields
   = lens _sraFields (\ s a -> s{_sraFields = a})
 
--- | Data format for the response.
-sraAlt :: Lens' ScoresResetAll' Alt
-sraAlt = lens _sraAlt (\ s a -> s{_sraAlt = a})
+instance GoogleAuth ScoresResetAll' where
+        authKey = sraKey . _Just
+        authToken = sraOAuthToken . _Just
 
 instance GoogleRequest ScoresResetAll' where
         type Rs ScoresResetAll' = PlayerScoreResetAllResponse
         request = requestWithRoute defReq gamesManagementURL
         requestWithRoute r u ScoresResetAll'{..}
-          = go _sraQuotaUser (Just _sraPrettyPrint) _sraUserIp
+          = go _sraQuotaUser (Just _sraPrettyPrint) _sraUserIP
               _sraKey
-              _sraOauthToken
+              _sraOAuthToken
               _sraFields
-              (Just _sraAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ScoresResetAllResource)

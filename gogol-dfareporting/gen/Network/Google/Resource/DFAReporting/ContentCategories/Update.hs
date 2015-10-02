@@ -32,12 +32,12 @@ module Network.Google.Resource.DFAReporting.ContentCategories.Update
     -- * Request Lenses
     , ccuQuotaUser
     , ccuPrettyPrint
-    , ccuUserIp
+    , ccuUserIP
     , ccuProfileId
+    , ccuContentCategory
     , ccuKey
-    , ccuOauthToken
+    , ccuOAuthToken
     , ccuFields
-    , ccuAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,23 +52,25 @@ type ContentCategoriesUpdateResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Put '[JSON] ContentCategory
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] ContentCategory :>
+                           Put '[JSON] ContentCategory
 
 -- | Updates an existing content category.
 --
 -- /See:/ 'contentCategoriesUpdate'' smart constructor.
 data ContentCategoriesUpdate' = ContentCategoriesUpdate'
-    { _ccuQuotaUser   :: !(Maybe Text)
-    , _ccuPrettyPrint :: !Bool
-    , _ccuUserIp      :: !(Maybe Text)
-    , _ccuProfileId   :: !Int64
-    , _ccuKey         :: !(Maybe Text)
-    , _ccuOauthToken  :: !(Maybe Text)
-    , _ccuFields      :: !(Maybe Text)
-    , _ccuAlt         :: !Alt
+    { _ccuQuotaUser       :: !(Maybe Text)
+    , _ccuPrettyPrint     :: !Bool
+    , _ccuUserIP          :: !(Maybe Text)
+    , _ccuProfileId       :: !Int64
+    , _ccuContentCategory :: !ContentCategory
+    , _ccuKey             :: !(Maybe Key)
+    , _ccuOAuthToken      :: !(Maybe OAuthToken)
+    , _ccuFields          :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContentCategoriesUpdate'' with the minimum fields required to make a request.
@@ -79,30 +81,31 @@ data ContentCategoriesUpdate' = ContentCategoriesUpdate'
 --
 -- * 'ccuPrettyPrint'
 --
--- * 'ccuUserIp'
+-- * 'ccuUserIP'
 --
 -- * 'ccuProfileId'
 --
+-- * 'ccuContentCategory'
+--
 -- * 'ccuKey'
 --
--- * 'ccuOauthToken'
+-- * 'ccuOAuthToken'
 --
 -- * 'ccuFields'
---
--- * 'ccuAlt'
 contentCategoriesUpdate'
     :: Int64 -- ^ 'profileId'
+    -> ContentCategory -- ^ 'ContentCategory'
     -> ContentCategoriesUpdate'
-contentCategoriesUpdate' pCcuProfileId_ =
+contentCategoriesUpdate' pCcuProfileId_ pCcuContentCategory_ =
     ContentCategoriesUpdate'
     { _ccuQuotaUser = Nothing
     , _ccuPrettyPrint = True
-    , _ccuUserIp = Nothing
+    , _ccuUserIP = Nothing
     , _ccuProfileId = pCcuProfileId_
+    , _ccuContentCategory = pCcuContentCategory_
     , _ccuKey = Nothing
-    , _ccuOauthToken = Nothing
+    , _ccuOAuthToken = Nothing
     , _ccuFields = Nothing
-    , _ccuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,46 +123,53 @@ ccuPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ccuUserIp :: Lens' ContentCategoriesUpdate' (Maybe Text)
-ccuUserIp
-  = lens _ccuUserIp (\ s a -> s{_ccuUserIp = a})
+ccuUserIP :: Lens' ContentCategoriesUpdate' (Maybe Text)
+ccuUserIP
+  = lens _ccuUserIP (\ s a -> s{_ccuUserIP = a})
 
 -- | User profile ID associated with this request.
 ccuProfileId :: Lens' ContentCategoriesUpdate' Int64
 ccuProfileId
   = lens _ccuProfileId (\ s a -> s{_ccuProfileId = a})
 
+-- | Multipart request metadata.
+ccuContentCategory :: Lens' ContentCategoriesUpdate' ContentCategory
+ccuContentCategory
+  = lens _ccuContentCategory
+      (\ s a -> s{_ccuContentCategory = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ccuKey :: Lens' ContentCategoriesUpdate' (Maybe Text)
+ccuKey :: Lens' ContentCategoriesUpdate' (Maybe Key)
 ccuKey = lens _ccuKey (\ s a -> s{_ccuKey = a})
 
 -- | OAuth 2.0 token for the current user.
-ccuOauthToken :: Lens' ContentCategoriesUpdate' (Maybe Text)
-ccuOauthToken
-  = lens _ccuOauthToken
-      (\ s a -> s{_ccuOauthToken = a})
+ccuOAuthToken :: Lens' ContentCategoriesUpdate' (Maybe OAuthToken)
+ccuOAuthToken
+  = lens _ccuOAuthToken
+      (\ s a -> s{_ccuOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ccuFields :: Lens' ContentCategoriesUpdate' (Maybe Text)
 ccuFields
   = lens _ccuFields (\ s a -> s{_ccuFields = a})
 
--- | Data format for the response.
-ccuAlt :: Lens' ContentCategoriesUpdate' Alt
-ccuAlt = lens _ccuAlt (\ s a -> s{_ccuAlt = a})
+instance GoogleAuth ContentCategoriesUpdate' where
+        authKey = ccuKey . _Just
+        authToken = ccuOAuthToken . _Just
 
 instance GoogleRequest ContentCategoriesUpdate' where
         type Rs ContentCategoriesUpdate' = ContentCategory
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ContentCategoriesUpdate'{..}
-          = go _ccuQuotaUser (Just _ccuPrettyPrint) _ccuUserIp
+          = go _ccuQuotaUser (Just _ccuPrettyPrint) _ccuUserIP
               _ccuProfileId
               _ccuKey
-              _ccuOauthToken
+              _ccuOAuthToken
               _ccuFields
-              (Just _ccuAlt)
+              (Just AltJSON)
+              _ccuContentCategory
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ContentCategoriesUpdateResource)

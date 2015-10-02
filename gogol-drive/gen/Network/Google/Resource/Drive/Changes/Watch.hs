@@ -32,17 +32,17 @@ module Network.Google.Resource.Drive.Changes.Watch
     -- * Request Lenses
     , cwQuotaUser
     , cwPrettyPrint
-    , cwUserIp
+    , cwUserIP
     , cwIncludeSubscribed
     , cwStartChangeId
+    , cwChannel
     , cwKey
     , cwSpaces
     , cwPageToken
-    , cwOauthToken
+    , cwOAuthToken
     , cwMaxResults
     , cwIncludeDeleted
     , cwFields
-    , cwAlt
     ) where
 
 import           Network.Google.Drive.Types
@@ -58,14 +58,16 @@ type ChangesWatchResource =
              QueryParam "userIp" Text :>
                QueryParam "includeSubscribed" Bool :>
                  QueryParam "startChangeId" Int64 :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "spaces" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "maxResults" Int32 :>
                              QueryParam "includeDeleted" Bool :>
                                QueryParam "fields" Text :>
-                                 QueryParam "alt" Alt :> Post '[JSON] Channel
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON] Channel :>
+                                     Post '[JSON] Channel
 
 -- | Subscribe to changes for a user.
 --
@@ -73,17 +75,17 @@ type ChangesWatchResource =
 data ChangesWatch' = ChangesWatch'
     { _cwQuotaUser         :: !(Maybe Text)
     , _cwPrettyPrint       :: !Bool
-    , _cwUserIp            :: !(Maybe Text)
+    , _cwUserIP            :: !(Maybe Text)
     , _cwIncludeSubscribed :: !Bool
     , _cwStartChangeId     :: !(Maybe Int64)
-    , _cwKey               :: !(Maybe Text)
+    , _cwChannel           :: !Channel
+    , _cwKey               :: !(Maybe Key)
     , _cwSpaces            :: !(Maybe Text)
     , _cwPageToken         :: !(Maybe Text)
-    , _cwOauthToken        :: !(Maybe Text)
+    , _cwOAuthToken        :: !(Maybe OAuthToken)
     , _cwMaxResults        :: !Int32
     , _cwIncludeDeleted    :: !Bool
     , _cwFields            :: !(Maybe Text)
-    , _cwAlt               :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChangesWatch'' with the minimum fields required to make a request.
@@ -94,11 +96,13 @@ data ChangesWatch' = ChangesWatch'
 --
 -- * 'cwPrettyPrint'
 --
--- * 'cwUserIp'
+-- * 'cwUserIP'
 --
 -- * 'cwIncludeSubscribed'
 --
 -- * 'cwStartChangeId'
+--
+-- * 'cwChannel'
 --
 -- * 'cwKey'
 --
@@ -106,32 +110,31 @@ data ChangesWatch' = ChangesWatch'
 --
 -- * 'cwPageToken'
 --
--- * 'cwOauthToken'
+-- * 'cwOAuthToken'
 --
 -- * 'cwMaxResults'
 --
 -- * 'cwIncludeDeleted'
 --
 -- * 'cwFields'
---
--- * 'cwAlt'
 changesWatch'
-    :: ChangesWatch'
-changesWatch' =
+    :: Channel -- ^ 'Channel'
+    -> ChangesWatch'
+changesWatch' pCwChannel_ =
     ChangesWatch'
     { _cwQuotaUser = Nothing
     , _cwPrettyPrint = True
-    , _cwUserIp = Nothing
+    , _cwUserIP = Nothing
     , _cwIncludeSubscribed = True
     , _cwStartChangeId = Nothing
+    , _cwChannel = pCwChannel_
     , _cwKey = Nothing
     , _cwSpaces = Nothing
     , _cwPageToken = Nothing
-    , _cwOauthToken = Nothing
+    , _cwOAuthToken = Nothing
     , _cwMaxResults = 100
     , _cwIncludeDeleted = True
     , _cwFields = Nothing
-    , _cwAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -149,8 +152,8 @@ cwPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cwUserIp :: Lens' ChangesWatch' (Maybe Text)
-cwUserIp = lens _cwUserIp (\ s a -> s{_cwUserIp = a})
+cwUserIP :: Lens' ChangesWatch' (Maybe Text)
+cwUserIP = lens _cwUserIP (\ s a -> s{_cwUserIP = a})
 
 -- | Whether to include public files the user has opened and shared files.
 -- When set to false, the list only includes owned files plus any shared or
@@ -166,10 +169,15 @@ cwStartChangeId
   = lens _cwStartChangeId
       (\ s a -> s{_cwStartChangeId = a})
 
+-- | Multipart request metadata.
+cwChannel :: Lens' ChangesWatch' Channel
+cwChannel
+  = lens _cwChannel (\ s a -> s{_cwChannel = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cwKey :: Lens' ChangesWatch' (Maybe Text)
+cwKey :: Lens' ChangesWatch' (Maybe Key)
 cwKey = lens _cwKey (\ s a -> s{_cwKey = a})
 
 -- | A comma-separated list of spaces to query. Supported values are
@@ -183,9 +191,9 @@ cwPageToken
   = lens _cwPageToken (\ s a -> s{_cwPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-cwOauthToken :: Lens' ChangesWatch' (Maybe Text)
-cwOauthToken
-  = lens _cwOauthToken (\ s a -> s{_cwOauthToken = a})
+cwOAuthToken :: Lens' ChangesWatch' (Maybe OAuthToken)
+cwOAuthToken
+  = lens _cwOAuthToken (\ s a -> s{_cwOAuthToken = a})
 
 -- | Maximum number of changes to return.
 cwMaxResults :: Lens' ChangesWatch' Int32
@@ -202,25 +210,26 @@ cwIncludeDeleted
 cwFields :: Lens' ChangesWatch' (Maybe Text)
 cwFields = lens _cwFields (\ s a -> s{_cwFields = a})
 
--- | Data format for the response.
-cwAlt :: Lens' ChangesWatch' Alt
-cwAlt = lens _cwAlt (\ s a -> s{_cwAlt = a})
+instance GoogleAuth ChangesWatch' where
+        authKey = cwKey . _Just
+        authToken = cwOAuthToken . _Just
 
 instance GoogleRequest ChangesWatch' where
         type Rs ChangesWatch' = Channel
         request = requestWithRoute defReq driveURL
         requestWithRoute r u ChangesWatch'{..}
-          = go _cwQuotaUser (Just _cwPrettyPrint) _cwUserIp
+          = go _cwQuotaUser (Just _cwPrettyPrint) _cwUserIP
               (Just _cwIncludeSubscribed)
               _cwStartChangeId
               _cwKey
               _cwSpaces
               _cwPageToken
-              _cwOauthToken
+              _cwOAuthToken
               (Just _cwMaxResults)
               (Just _cwIncludeDeleted)
               _cwFields
-              (Just _cwAlt)
+              (Just AltJSON)
+              _cwChannel
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ChangesWatchResource)

@@ -32,14 +32,13 @@ module Network.Google.Resource.DFAReporting.Orders.Get
     -- * Request Lenses
     , ogQuotaUser
     , ogPrettyPrint
-    , ogUserIp
+    , ogUserIP
     , ogProfileId
     , ogKey
     , ogId
     , ogProjectId
-    , ogOauthToken
+    , ogOAuthToken
     , ogFields
-    , ogAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -57,10 +56,10 @@ type OrdersGetResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Get '[JSON] Order
+                             QueryParam "alt" AltJSON :> Get '[JSON] Order
 
 -- | Gets one order by ID.
 --
@@ -68,14 +67,13 @@ type OrdersGetResource =
 data OrdersGet' = OrdersGet'
     { _ogQuotaUser   :: !(Maybe Text)
     , _ogPrettyPrint :: !Bool
-    , _ogUserIp      :: !(Maybe Text)
+    , _ogUserIP      :: !(Maybe Text)
     , _ogProfileId   :: !Int64
-    , _ogKey         :: !(Maybe Text)
+    , _ogKey         :: !(Maybe Key)
     , _ogId          :: !Int64
     , _ogProjectId   :: !Int64
-    , _ogOauthToken  :: !(Maybe Text)
+    , _ogOAuthToken  :: !(Maybe OAuthToken)
     , _ogFields      :: !(Maybe Text)
-    , _ogAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersGet'' with the minimum fields required to make a request.
@@ -86,7 +84,7 @@ data OrdersGet' = OrdersGet'
 --
 -- * 'ogPrettyPrint'
 --
--- * 'ogUserIp'
+-- * 'ogUserIP'
 --
 -- * 'ogProfileId'
 --
@@ -96,11 +94,9 @@ data OrdersGet' = OrdersGet'
 --
 -- * 'ogProjectId'
 --
--- * 'ogOauthToken'
+-- * 'ogOAuthToken'
 --
 -- * 'ogFields'
---
--- * 'ogAlt'
 ordersGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
@@ -110,14 +106,13 @@ ordersGet' pOgProfileId_ pOgId_ pOgProjectId_ =
     OrdersGet'
     { _ogQuotaUser = Nothing
     , _ogPrettyPrint = True
-    , _ogUserIp = Nothing
+    , _ogUserIP = Nothing
     , _ogProfileId = pOgProfileId_
     , _ogKey = Nothing
     , _ogId = pOgId_
     , _ogProjectId = pOgProjectId_
-    , _ogOauthToken = Nothing
+    , _ogOAuthToken = Nothing
     , _ogFields = Nothing
-    , _ogAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,8 +130,8 @@ ogPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ogUserIp :: Lens' OrdersGet' (Maybe Text)
-ogUserIp = lens _ogUserIp (\ s a -> s{_ogUserIp = a})
+ogUserIP :: Lens' OrdersGet' (Maybe Text)
+ogUserIP = lens _ogUserIP (\ s a -> s{_ogUserIP = a})
 
 -- | User profile ID associated with this request.
 ogProfileId :: Lens' OrdersGet' Int64
@@ -146,7 +141,7 @@ ogProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ogKey :: Lens' OrdersGet' (Maybe Text)
+ogKey :: Lens' OrdersGet' (Maybe Key)
 ogKey = lens _ogKey (\ s a -> s{_ogKey = a})
 
 -- | Order ID.
@@ -159,30 +154,30 @@ ogProjectId
   = lens _ogProjectId (\ s a -> s{_ogProjectId = a})
 
 -- | OAuth 2.0 token for the current user.
-ogOauthToken :: Lens' OrdersGet' (Maybe Text)
-ogOauthToken
-  = lens _ogOauthToken (\ s a -> s{_ogOauthToken = a})
+ogOAuthToken :: Lens' OrdersGet' (Maybe OAuthToken)
+ogOAuthToken
+  = lens _ogOAuthToken (\ s a -> s{_ogOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ogFields :: Lens' OrdersGet' (Maybe Text)
 ogFields = lens _ogFields (\ s a -> s{_ogFields = a})
 
--- | Data format for the response.
-ogAlt :: Lens' OrdersGet' Alt
-ogAlt = lens _ogAlt (\ s a -> s{_ogAlt = a})
+instance GoogleAuth OrdersGet' where
+        authKey = ogKey . _Just
+        authToken = ogOAuthToken . _Just
 
 instance GoogleRequest OrdersGet' where
         type Rs OrdersGet' = Order
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u OrdersGet'{..}
-          = go _ogQuotaUser (Just _ogPrettyPrint) _ogUserIp
+          = go _ogQuotaUser (Just _ogPrettyPrint) _ogUserIP
               _ogProfileId
               _ogKey
               _ogId
               _ogProjectId
-              _ogOauthToken
+              _ogOAuthToken
               _ogFields
-              (Just _ogAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy OrdersGetResource)
                       r

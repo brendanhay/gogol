@@ -34,12 +34,12 @@ module Network.Google.Resource.Compute.TargetPools.RemoveHealthCheck
     , tprhcPrettyPrint
     , tprhcProject
     , tprhcTargetPool
-    , tprhcUserIp
+    , tprhcUserIP
+    , tprhcTargetPoolsRemoveHealthCheckRequest
     , tprhcKey
     , tprhcRegion
-    , tprhcOauthToken
+    , tprhcOAuthToken
     , tprhcFields
-    , tprhcAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -57,25 +57,28 @@ type TargetPoolsRemoveHealthCheckResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Post '[JSON] Operation
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON]
+                                 TargetPoolsRemoveHealthCheckRequest
+                                 :> Post '[JSON] Operation
 
 -- | Removes health check URL from targetPool.
 --
 -- /See:/ 'targetPoolsRemoveHealthCheck'' smart constructor.
 data TargetPoolsRemoveHealthCheck' = TargetPoolsRemoveHealthCheck'
-    { _tprhcQuotaUser   :: !(Maybe Text)
-    , _tprhcPrettyPrint :: !Bool
-    , _tprhcProject     :: !Text
-    , _tprhcTargetPool  :: !Text
-    , _tprhcUserIp      :: !(Maybe Text)
-    , _tprhcKey         :: !(Maybe Text)
-    , _tprhcRegion      :: !Text
-    , _tprhcOauthToken  :: !(Maybe Text)
-    , _tprhcFields      :: !(Maybe Text)
-    , _tprhcAlt         :: !Alt
+    { _tprhcQuotaUser                           :: !(Maybe Text)
+    , _tprhcPrettyPrint                         :: !Bool
+    , _tprhcProject                             :: !Text
+    , _tprhcTargetPool                          :: !Text
+    , _tprhcUserIP                              :: !(Maybe Text)
+    , _tprhcTargetPoolsRemoveHealthCheckRequest :: !TargetPoolsRemoveHealthCheckRequest
+    , _tprhcKey                                 :: !(Maybe Key)
+    , _tprhcRegion                              :: !Text
+    , _tprhcOAuthToken                          :: !(Maybe OAuthToken)
+    , _tprhcFields                              :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetPoolsRemoveHealthCheck'' with the minimum fields required to make a request.
@@ -90,34 +93,35 @@ data TargetPoolsRemoveHealthCheck' = TargetPoolsRemoveHealthCheck'
 --
 -- * 'tprhcTargetPool'
 --
--- * 'tprhcUserIp'
+-- * 'tprhcUserIP'
+--
+-- * 'tprhcTargetPoolsRemoveHealthCheckRequest'
 --
 -- * 'tprhcKey'
 --
 -- * 'tprhcRegion'
 --
--- * 'tprhcOauthToken'
+-- * 'tprhcOAuthToken'
 --
 -- * 'tprhcFields'
---
--- * 'tprhcAlt'
 targetPoolsRemoveHealthCheck'
     :: Text -- ^ 'project'
     -> Text -- ^ 'targetPool'
+    -> TargetPoolsRemoveHealthCheckRequest -- ^ 'TargetPoolsRemoveHealthCheckRequest'
     -> Text -- ^ 'region'
     -> TargetPoolsRemoveHealthCheck'
-targetPoolsRemoveHealthCheck' pTprhcProject_ pTprhcTargetPool_ pTprhcRegion_ =
+targetPoolsRemoveHealthCheck' pTprhcProject_ pTprhcTargetPool_ pTprhcTargetPoolsRemoveHealthCheckRequest_ pTprhcRegion_ =
     TargetPoolsRemoveHealthCheck'
     { _tprhcQuotaUser = Nothing
     , _tprhcPrettyPrint = True
     , _tprhcProject = pTprhcProject_
     , _tprhcTargetPool = pTprhcTargetPool_
-    , _tprhcUserIp = Nothing
+    , _tprhcUserIP = Nothing
+    , _tprhcTargetPoolsRemoveHealthCheckRequest = pTprhcTargetPoolsRemoveHealthCheckRequest_
     , _tprhcKey = Nothing
     , _tprhcRegion = pTprhcRegion_
-    , _tprhcOauthToken = Nothing
+    , _tprhcOAuthToken = Nothing
     , _tprhcFields = Nothing
-    , _tprhcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -147,14 +151,21 @@ tprhcTargetPool
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tprhcUserIp :: Lens' TargetPoolsRemoveHealthCheck' (Maybe Text)
-tprhcUserIp
-  = lens _tprhcUserIp (\ s a -> s{_tprhcUserIp = a})
+tprhcUserIP :: Lens' TargetPoolsRemoveHealthCheck' (Maybe Text)
+tprhcUserIP
+  = lens _tprhcUserIP (\ s a -> s{_tprhcUserIP = a})
+
+-- | Multipart request metadata.
+tprhcTargetPoolsRemoveHealthCheckRequest :: Lens' TargetPoolsRemoveHealthCheck' TargetPoolsRemoveHealthCheckRequest
+tprhcTargetPoolsRemoveHealthCheckRequest
+  = lens _tprhcTargetPoolsRemoveHealthCheckRequest
+      (\ s a ->
+         s{_tprhcTargetPoolsRemoveHealthCheckRequest = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tprhcKey :: Lens' TargetPoolsRemoveHealthCheck' (Maybe Text)
+tprhcKey :: Lens' TargetPoolsRemoveHealthCheck' (Maybe Key)
 tprhcKey = lens _tprhcKey (\ s a -> s{_tprhcKey = a})
 
 -- | Name of the region scoping this request.
@@ -163,19 +174,20 @@ tprhcRegion
   = lens _tprhcRegion (\ s a -> s{_tprhcRegion = a})
 
 -- | OAuth 2.0 token for the current user.
-tprhcOauthToken :: Lens' TargetPoolsRemoveHealthCheck' (Maybe Text)
-tprhcOauthToken
-  = lens _tprhcOauthToken
-      (\ s a -> s{_tprhcOauthToken = a})
+tprhcOAuthToken :: Lens' TargetPoolsRemoveHealthCheck' (Maybe OAuthToken)
+tprhcOAuthToken
+  = lens _tprhcOAuthToken
+      (\ s a -> s{_tprhcOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 tprhcFields :: Lens' TargetPoolsRemoveHealthCheck' (Maybe Text)
 tprhcFields
   = lens _tprhcFields (\ s a -> s{_tprhcFields = a})
 
--- | Data format for the response.
-tprhcAlt :: Lens' TargetPoolsRemoveHealthCheck' Alt
-tprhcAlt = lens _tprhcAlt (\ s a -> s{_tprhcAlt = a})
+instance GoogleAuth TargetPoolsRemoveHealthCheck'
+         where
+        authKey = tprhcKey . _Just
+        authToken = tprhcOAuthToken . _Just
 
 instance GoogleRequest TargetPoolsRemoveHealthCheck'
          where
@@ -186,12 +198,13 @@ instance GoogleRequest TargetPoolsRemoveHealthCheck'
           = go _tprhcQuotaUser (Just _tprhcPrettyPrint)
               _tprhcProject
               _tprhcTargetPool
-              _tprhcUserIp
+              _tprhcUserIP
               _tprhcKey
               _tprhcRegion
-              _tprhcOauthToken
+              _tprhcOAuthToken
               _tprhcFields
-              (Just _tprhcAlt)
+              (Just AltJSON)
+              _tprhcTargetPoolsRemoveHealthCheckRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TargetPoolsRemoveHealthCheckResource)

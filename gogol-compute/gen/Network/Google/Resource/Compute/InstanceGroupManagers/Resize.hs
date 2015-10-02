@@ -38,12 +38,11 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.Resize
     , igmrProject
     , igmrSize
     , igmrInstanceGroupManager
-    , igmrUserIp
+    , igmrUserIP
     , igmrZone
     , igmrKey
-    , igmrOauthToken
+    , igmrOAuthToken
     , igmrFields
-    , igmrAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -62,10 +61,11 @@ type InstanceGroupManagersResizeResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "size" Int32 :>
                        QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :> Post '[JSON] Operation
+                               QueryParam "alt" AltJSON :>
+                                 Post '[JSON] Operation
 
 -- | Resizes the managed instance group. If you increase the size, the group
 -- creates new instances using the current instance template. If you
@@ -79,12 +79,11 @@ data InstanceGroupManagersResize' = InstanceGroupManagersResize'
     , _igmrProject              :: !Text
     , _igmrSize                 :: !Int32
     , _igmrInstanceGroupManager :: !Text
-    , _igmrUserIp               :: !(Maybe Text)
+    , _igmrUserIP               :: !(Maybe Text)
     , _igmrZone                 :: !Text
-    , _igmrKey                  :: !(Maybe Text)
-    , _igmrOauthToken           :: !(Maybe Text)
+    , _igmrKey                  :: !(Maybe Key)
+    , _igmrOAuthToken           :: !(Maybe OAuthToken)
     , _igmrFields               :: !(Maybe Text)
-    , _igmrAlt                  :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagersResize'' with the minimum fields required to make a request.
@@ -101,17 +100,15 @@ data InstanceGroupManagersResize' = InstanceGroupManagersResize'
 --
 -- * 'igmrInstanceGroupManager'
 --
--- * 'igmrUserIp'
+-- * 'igmrUserIP'
 --
 -- * 'igmrZone'
 --
 -- * 'igmrKey'
 --
--- * 'igmrOauthToken'
+-- * 'igmrOAuthToken'
 --
 -- * 'igmrFields'
---
--- * 'igmrAlt'
 instanceGroupManagersResize'
     :: Text -- ^ 'project'
     -> Int32 -- ^ 'size'
@@ -125,12 +122,11 @@ instanceGroupManagersResize' pIgmrProject_ pIgmrSize_ pIgmrInstanceGroupManager_
     , _igmrProject = pIgmrProject_
     , _igmrSize = pIgmrSize_
     , _igmrInstanceGroupManager = pIgmrInstanceGroupManager_
-    , _igmrUserIp = Nothing
+    , _igmrUserIP = Nothing
     , _igmrZone = pIgmrZone_
     , _igmrKey = Nothing
-    , _igmrOauthToken = Nothing
+    , _igmrOAuthToken = Nothing
     , _igmrFields = Nothing
-    , _igmrAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -167,9 +163,9 @@ igmrInstanceGroupManager
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-igmrUserIp :: Lens' InstanceGroupManagersResize' (Maybe Text)
-igmrUserIp
-  = lens _igmrUserIp (\ s a -> s{_igmrUserIp = a})
+igmrUserIP :: Lens' InstanceGroupManagersResize' (Maybe Text)
+igmrUserIP
+  = lens _igmrUserIP (\ s a -> s{_igmrUserIP = a})
 
 -- | The URL of the zone where the managed instance group is located.
 igmrZone :: Lens' InstanceGroupManagersResize' Text
@@ -178,23 +174,24 @@ igmrZone = lens _igmrZone (\ s a -> s{_igmrZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-igmrKey :: Lens' InstanceGroupManagersResize' (Maybe Text)
+igmrKey :: Lens' InstanceGroupManagersResize' (Maybe Key)
 igmrKey = lens _igmrKey (\ s a -> s{_igmrKey = a})
 
 -- | OAuth 2.0 token for the current user.
-igmrOauthToken :: Lens' InstanceGroupManagersResize' (Maybe Text)
-igmrOauthToken
-  = lens _igmrOauthToken
-      (\ s a -> s{_igmrOauthToken = a})
+igmrOAuthToken :: Lens' InstanceGroupManagersResize' (Maybe OAuthToken)
+igmrOAuthToken
+  = lens _igmrOAuthToken
+      (\ s a -> s{_igmrOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 igmrFields :: Lens' InstanceGroupManagersResize' (Maybe Text)
 igmrFields
   = lens _igmrFields (\ s a -> s{_igmrFields = a})
 
--- | Data format for the response.
-igmrAlt :: Lens' InstanceGroupManagersResize' Alt
-igmrAlt = lens _igmrAlt (\ s a -> s{_igmrAlt = a})
+instance GoogleAuth InstanceGroupManagersResize'
+         where
+        authKey = igmrKey . _Just
+        authToken = igmrOAuthToken . _Just
 
 instance GoogleRequest InstanceGroupManagersResize'
          where
@@ -205,12 +202,12 @@ instance GoogleRequest InstanceGroupManagersResize'
               _igmrProject
               (Just _igmrSize)
               _igmrInstanceGroupManager
-              _igmrUserIp
+              _igmrUserIP
               _igmrZone
               _igmrKey
-              _igmrOauthToken
+              _igmrOAuthToken
               _igmrFields
-              (Just _igmrAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InstanceGroupManagersResizeResource)

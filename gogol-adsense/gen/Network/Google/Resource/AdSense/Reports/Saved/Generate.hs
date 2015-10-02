@@ -33,15 +33,14 @@ module Network.Google.Resource.AdSense.Reports.Saved.Generate
     -- * Request Lenses
     , rsgQuotaUser
     , rsgPrettyPrint
-    , rsgUserIp
+    , rsgUserIP
     , rsgLocale
     , rsgSavedReportId
     , rsgKey
-    , rsgOauthToken
+    , rsgOAuthToken
     , rsgStartIndex
     , rsgMaxResults
     , rsgFields
-    , rsgAlt
     ) where
 
 import           Network.Google.AdSense.Types
@@ -56,12 +55,12 @@ type ReportsSavedGenerateResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "locale" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "startIndex" Int32 :>
                        QueryParam "maxResults" Int32 :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :>
+                           QueryParam "alt" AltJSON :>
                              Get '[JSON] AdsenseReportsGenerateResponse
 
 -- | Generate an AdSense report based on the saved report ID sent in the
@@ -71,15 +70,14 @@ type ReportsSavedGenerateResource =
 data ReportsSavedGenerate' = ReportsSavedGenerate'
     { _rsgQuotaUser     :: !(Maybe Text)
     , _rsgPrettyPrint   :: !Bool
-    , _rsgUserIp        :: !(Maybe Text)
+    , _rsgUserIP        :: !(Maybe Text)
     , _rsgLocale        :: !(Maybe Text)
     , _rsgSavedReportId :: !Text
-    , _rsgKey           :: !(Maybe Text)
-    , _rsgOauthToken    :: !(Maybe Text)
+    , _rsgKey           :: !(Maybe Key)
+    , _rsgOAuthToken    :: !(Maybe OAuthToken)
     , _rsgStartIndex    :: !(Maybe Int32)
     , _rsgMaxResults    :: !(Maybe Int32)
     , _rsgFields        :: !(Maybe Text)
-    , _rsgAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsSavedGenerate'' with the minimum fields required to make a request.
@@ -90,7 +88,7 @@ data ReportsSavedGenerate' = ReportsSavedGenerate'
 --
 -- * 'rsgPrettyPrint'
 --
--- * 'rsgUserIp'
+-- * 'rsgUserIP'
 --
 -- * 'rsgLocale'
 --
@@ -98,15 +96,13 @@ data ReportsSavedGenerate' = ReportsSavedGenerate'
 --
 -- * 'rsgKey'
 --
--- * 'rsgOauthToken'
+-- * 'rsgOAuthToken'
 --
 -- * 'rsgStartIndex'
 --
 -- * 'rsgMaxResults'
 --
 -- * 'rsgFields'
---
--- * 'rsgAlt'
 reportsSavedGenerate'
     :: Text -- ^ 'savedReportId'
     -> ReportsSavedGenerate'
@@ -114,15 +110,14 @@ reportsSavedGenerate' pRsgSavedReportId_ =
     ReportsSavedGenerate'
     { _rsgQuotaUser = Nothing
     , _rsgPrettyPrint = True
-    , _rsgUserIp = Nothing
+    , _rsgUserIP = Nothing
     , _rsgLocale = Nothing
     , _rsgSavedReportId = pRsgSavedReportId_
     , _rsgKey = Nothing
-    , _rsgOauthToken = Nothing
+    , _rsgOAuthToken = Nothing
     , _rsgStartIndex = Nothing
     , _rsgMaxResults = Nothing
     , _rsgFields = Nothing
-    , _rsgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -140,9 +135,9 @@ rsgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rsgUserIp :: Lens' ReportsSavedGenerate' (Maybe Text)
-rsgUserIp
-  = lens _rsgUserIp (\ s a -> s{_rsgUserIp = a})
+rsgUserIP :: Lens' ReportsSavedGenerate' (Maybe Text)
+rsgUserIP
+  = lens _rsgUserIP (\ s a -> s{_rsgUserIP = a})
 
 -- | Optional locale to use for translating report output to a local
 -- language. Defaults to \"en_US\" if not specified.
@@ -159,14 +154,14 @@ rsgSavedReportId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rsgKey :: Lens' ReportsSavedGenerate' (Maybe Text)
+rsgKey :: Lens' ReportsSavedGenerate' (Maybe Key)
 rsgKey = lens _rsgKey (\ s a -> s{_rsgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-rsgOauthToken :: Lens' ReportsSavedGenerate' (Maybe Text)
-rsgOauthToken
-  = lens _rsgOauthToken
-      (\ s a -> s{_rsgOauthToken = a})
+rsgOAuthToken :: Lens' ReportsSavedGenerate' (Maybe OAuthToken)
+rsgOAuthToken
+  = lens _rsgOAuthToken
+      (\ s a -> s{_rsgOAuthToken = a})
 
 -- | Index of the first row of report data to return.
 rsgStartIndex :: Lens' ReportsSavedGenerate' (Maybe Int32)
@@ -185,24 +180,24 @@ rsgFields :: Lens' ReportsSavedGenerate' (Maybe Text)
 rsgFields
   = lens _rsgFields (\ s a -> s{_rsgFields = a})
 
--- | Data format for the response.
-rsgAlt :: Lens' ReportsSavedGenerate' Alt
-rsgAlt = lens _rsgAlt (\ s a -> s{_rsgAlt = a})
+instance GoogleAuth ReportsSavedGenerate' where
+        authKey = rsgKey . _Just
+        authToken = rsgOAuthToken . _Just
 
 instance GoogleRequest ReportsSavedGenerate' where
         type Rs ReportsSavedGenerate' =
              AdsenseReportsGenerateResponse
         request = requestWithRoute defReq adSenseURL
         requestWithRoute r u ReportsSavedGenerate'{..}
-          = go _rsgQuotaUser (Just _rsgPrettyPrint) _rsgUserIp
+          = go _rsgQuotaUser (Just _rsgPrettyPrint) _rsgUserIP
               _rsgLocale
               _rsgSavedReportId
               _rsgKey
-              _rsgOauthToken
+              _rsgOAuthToken
               _rsgStartIndex
               _rsgMaxResults
               _rsgFields
-              (Just _rsgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ReportsSavedGenerateResource)

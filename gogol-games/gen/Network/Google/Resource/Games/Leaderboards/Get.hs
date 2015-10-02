@@ -32,13 +32,12 @@ module Network.Google.Resource.Games.Leaderboards.Get
     -- * Request Lenses
     , lgQuotaUser
     , lgPrettyPrint
-    , lgUserIp
+    , lgUserIP
     , lgLeaderboardId
     , lgKey
     , lgLanguage
-    , lgOauthToken
+    , lgOAuthToken
     , lgFields
-    , lgAlt
     ) where
 
 import           Network.Google.Games.Types
@@ -52,11 +51,11 @@ type LeaderboardsGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
+               QueryParam "key" Key :>
                  QueryParam "language" Text :>
-                   QueryParam "oauth_token" Text :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Get '[JSON] Leaderboard
+                       QueryParam "alt" AltJSON :> Get '[JSON] Leaderboard
 
 -- | Retrieves the metadata of the leaderboard with the given ID.
 --
@@ -64,13 +63,12 @@ type LeaderboardsGetResource =
 data LeaderboardsGet' = LeaderboardsGet'
     { _lgQuotaUser     :: !(Maybe Text)
     , _lgPrettyPrint   :: !Bool
-    , _lgUserIp        :: !(Maybe Text)
+    , _lgUserIP        :: !(Maybe Text)
     , _lgLeaderboardId :: !Text
-    , _lgKey           :: !(Maybe Text)
+    , _lgKey           :: !(Maybe Key)
     , _lgLanguage      :: !(Maybe Text)
-    , _lgOauthToken    :: !(Maybe Text)
+    , _lgOAuthToken    :: !(Maybe OAuthToken)
     , _lgFields        :: !(Maybe Text)
-    , _lgAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LeaderboardsGet'' with the minimum fields required to make a request.
@@ -81,7 +79,7 @@ data LeaderboardsGet' = LeaderboardsGet'
 --
 -- * 'lgPrettyPrint'
 --
--- * 'lgUserIp'
+-- * 'lgUserIP'
 --
 -- * 'lgLeaderboardId'
 --
@@ -89,11 +87,9 @@ data LeaderboardsGet' = LeaderboardsGet'
 --
 -- * 'lgLanguage'
 --
--- * 'lgOauthToken'
+-- * 'lgOAuthToken'
 --
 -- * 'lgFields'
---
--- * 'lgAlt'
 leaderboardsGet'
     :: Text -- ^ 'leaderboardId'
     -> LeaderboardsGet'
@@ -101,13 +97,12 @@ leaderboardsGet' pLgLeaderboardId_ =
     LeaderboardsGet'
     { _lgQuotaUser = Nothing
     , _lgPrettyPrint = True
-    , _lgUserIp = Nothing
+    , _lgUserIP = Nothing
     , _lgLeaderboardId = pLgLeaderboardId_
     , _lgKey = Nothing
     , _lgLanguage = Nothing
-    , _lgOauthToken = Nothing
+    , _lgOAuthToken = Nothing
     , _lgFields = Nothing
-    , _lgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -125,8 +120,8 @@ lgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-lgUserIp :: Lens' LeaderboardsGet' (Maybe Text)
-lgUserIp = lens _lgUserIp (\ s a -> s{_lgUserIp = a})
+lgUserIP :: Lens' LeaderboardsGet' (Maybe Text)
+lgUserIP = lens _lgUserIP (\ s a -> s{_lgUserIP = a})
 
 -- | The ID of the leaderboard.
 lgLeaderboardId :: Lens' LeaderboardsGet' Text
@@ -137,7 +132,7 @@ lgLeaderboardId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lgKey :: Lens' LeaderboardsGet' (Maybe Text)
+lgKey :: Lens' LeaderboardsGet' (Maybe Key)
 lgKey = lens _lgKey (\ s a -> s{_lgKey = a})
 
 -- | The preferred language to use for strings returned by this method.
@@ -146,29 +141,29 @@ lgLanguage
   = lens _lgLanguage (\ s a -> s{_lgLanguage = a})
 
 -- | OAuth 2.0 token for the current user.
-lgOauthToken :: Lens' LeaderboardsGet' (Maybe Text)
-lgOauthToken
-  = lens _lgOauthToken (\ s a -> s{_lgOauthToken = a})
+lgOAuthToken :: Lens' LeaderboardsGet' (Maybe OAuthToken)
+lgOAuthToken
+  = lens _lgOAuthToken (\ s a -> s{_lgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 lgFields :: Lens' LeaderboardsGet' (Maybe Text)
 lgFields = lens _lgFields (\ s a -> s{_lgFields = a})
 
--- | Data format for the response.
-lgAlt :: Lens' LeaderboardsGet' Alt
-lgAlt = lens _lgAlt (\ s a -> s{_lgAlt = a})
+instance GoogleAuth LeaderboardsGet' where
+        authKey = lgKey . _Just
+        authToken = lgOAuthToken . _Just
 
 instance GoogleRequest LeaderboardsGet' where
         type Rs LeaderboardsGet' = Leaderboard
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u LeaderboardsGet'{..}
-          = go _lgQuotaUser (Just _lgPrettyPrint) _lgUserIp
+          = go _lgQuotaUser (Just _lgPrettyPrint) _lgUserIP
               _lgLeaderboardId
               _lgKey
               _lgLanguage
-              _lgOauthToken
+              _lgOAuthToken
               _lgFields
-              (Just _lgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy LeaderboardsGetResource)

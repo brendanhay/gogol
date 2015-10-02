@@ -44,7 +44,7 @@ module Network.Google.AppsActivity
     -- ** Photo
     , Photo
     , photo
-    , pUrl
+    , pURL
 
     -- ** Event
     , Event
@@ -110,9 +110,6 @@ module Network.Google.AppsActivity
     , pName
     , pType
     , pPermissionId
-
-    -- ** Alt
-    , Alt (..)
 
     -- ** Move
     , Move

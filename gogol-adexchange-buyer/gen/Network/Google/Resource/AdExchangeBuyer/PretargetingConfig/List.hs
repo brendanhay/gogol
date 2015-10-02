@@ -33,12 +33,11 @@ module Network.Google.Resource.AdExchangeBuyer.PretargetingConfig.List
     -- * Request Lenses
     , pclQuotaUser
     , pclPrettyPrint
-    , pclUserIp
+    , pclUserIP
     , pclAccountId
     , pclKey
-    , pclOauthToken
+    , pclOAuthToken
     , pclFields
-    , pclAlt
     ) where
 
 import           Network.Google.AdExchangeBuyer.Types
@@ -52,10 +51,10 @@ type PretargetingConfigListResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :>
+                     QueryParam "alt" AltJSON :>
                        Get '[JSON] PretargetingConfigList
 
 -- | Retrieves a list of the authenticated user\'s pretargeting
@@ -65,12 +64,11 @@ type PretargetingConfigListResource =
 data PretargetingConfigList' = PretargetingConfigList'
     { _pclQuotaUser   :: !(Maybe Text)
     , _pclPrettyPrint :: !Bool
-    , _pclUserIp      :: !(Maybe Text)
+    , _pclUserIP      :: !(Maybe Text)
     , _pclAccountId   :: !Int64
-    , _pclKey         :: !(Maybe Text)
-    , _pclOauthToken  :: !(Maybe Text)
+    , _pclKey         :: !(Maybe Key)
+    , _pclOAuthToken  :: !(Maybe OAuthToken)
     , _pclFields      :: !(Maybe Text)
-    , _pclAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PretargetingConfigList'' with the minimum fields required to make a request.
@@ -81,17 +79,15 @@ data PretargetingConfigList' = PretargetingConfigList'
 --
 -- * 'pclPrettyPrint'
 --
--- * 'pclUserIp'
+-- * 'pclUserIP'
 --
 -- * 'pclAccountId'
 --
 -- * 'pclKey'
 --
--- * 'pclOauthToken'
+-- * 'pclOAuthToken'
 --
 -- * 'pclFields'
---
--- * 'pclAlt'
 pretargetingConfigList'
     :: Int64 -- ^ 'accountId'
     -> PretargetingConfigList'
@@ -99,12 +95,11 @@ pretargetingConfigList' pPclAccountId_ =
     PretargetingConfigList'
     { _pclQuotaUser = Nothing
     , _pclPrettyPrint = True
-    , _pclUserIp = Nothing
+    , _pclUserIP = Nothing
     , _pclAccountId = pPclAccountId_
     , _pclKey = Nothing
-    , _pclOauthToken = Nothing
+    , _pclOAuthToken = Nothing
     , _pclFields = Nothing
-    , _pclAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -122,9 +117,9 @@ pclPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-pclUserIp :: Lens' PretargetingConfigList' (Maybe Text)
-pclUserIp
-  = lens _pclUserIp (\ s a -> s{_pclUserIp = a})
+pclUserIP :: Lens' PretargetingConfigList' (Maybe Text)
+pclUserIP
+  = lens _pclUserIP (\ s a -> s{_pclUserIP = a})
 
 -- | The account id to get the pretargeting configs for.
 pclAccountId :: Lens' PretargetingConfigList' Int64
@@ -134,35 +129,35 @@ pclAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pclKey :: Lens' PretargetingConfigList' (Maybe Text)
+pclKey :: Lens' PretargetingConfigList' (Maybe Key)
 pclKey = lens _pclKey (\ s a -> s{_pclKey = a})
 
 -- | OAuth 2.0 token for the current user.
-pclOauthToken :: Lens' PretargetingConfigList' (Maybe Text)
-pclOauthToken
-  = lens _pclOauthToken
-      (\ s a -> s{_pclOauthToken = a})
+pclOAuthToken :: Lens' PretargetingConfigList' (Maybe OAuthToken)
+pclOAuthToken
+  = lens _pclOAuthToken
+      (\ s a -> s{_pclOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 pclFields :: Lens' PretargetingConfigList' (Maybe Text)
 pclFields
   = lens _pclFields (\ s a -> s{_pclFields = a})
 
--- | Data format for the response.
-pclAlt :: Lens' PretargetingConfigList' Alt
-pclAlt = lens _pclAlt (\ s a -> s{_pclAlt = a})
+instance GoogleAuth PretargetingConfigList' where
+        authKey = pclKey . _Just
+        authToken = pclOAuthToken . _Just
 
 instance GoogleRequest PretargetingConfigList' where
         type Rs PretargetingConfigList' =
              PretargetingConfigList
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u PretargetingConfigList'{..}
-          = go _pclQuotaUser (Just _pclPrettyPrint) _pclUserIp
+          = go _pclQuotaUser (Just _pclPrettyPrint) _pclUserIP
               _pclAccountId
               _pclKey
-              _pclOauthToken
+              _pclOAuthToken
               _pclFields
-              (Just _pclAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PretargetingConfigListResource)

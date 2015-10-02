@@ -33,11 +33,11 @@ module Network.Google.Resource.Genomics.Callsets.Search
     -- * Request Lenses
     , csQuotaUser
     , csPrettyPrint
-    , csUserIp
+    , csUserIP
+    , csSearchCallSetsRequest
     , csKey
-    , csOauthToken
+    , csOAuthToken
     , csFields
-    , csAlt
     ) where
 
 import           Network.Google.Genomics.Types
@@ -51,24 +51,25 @@ type CallsetsSearchResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :>
-                       Post '[JSON] SearchCallSetsResponse
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] SearchCallSetsRequest :>
+                         Post '[JSON] SearchCallSetsResponse
 
 -- | Gets a list of call sets matching the criteria. Implements
 -- GlobalAllianceApi.searchCallSets.
 --
 -- /See:/ 'callsetsSearch'' smart constructor.
 data CallsetsSearch' = CallsetsSearch'
-    { _csQuotaUser   :: !(Maybe Text)
-    , _csPrettyPrint :: !Bool
-    , _csUserIp      :: !(Maybe Text)
-    , _csKey         :: !(Maybe Text)
-    , _csOauthToken  :: !(Maybe Text)
-    , _csFields      :: !(Maybe Text)
-    , _csAlt         :: !Alt
+    { _csQuotaUser             :: !(Maybe Text)
+    , _csPrettyPrint           :: !Bool
+    , _csUserIP                :: !(Maybe Text)
+    , _csSearchCallSetsRequest :: !SearchCallSetsRequest
+    , _csKey                   :: !(Maybe Key)
+    , _csOAuthToken            :: !(Maybe OAuthToken)
+    , _csFields                :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CallsetsSearch'' with the minimum fields required to make a request.
@@ -79,26 +80,27 @@ data CallsetsSearch' = CallsetsSearch'
 --
 -- * 'csPrettyPrint'
 --
--- * 'csUserIp'
+-- * 'csUserIP'
+--
+-- * 'csSearchCallSetsRequest'
 --
 -- * 'csKey'
 --
--- * 'csOauthToken'
+-- * 'csOAuthToken'
 --
 -- * 'csFields'
---
--- * 'csAlt'
 callsetsSearch'
-    :: CallsetsSearch'
-callsetsSearch' =
+    :: SearchCallSetsRequest -- ^ 'SearchCallSetsRequest'
+    -> CallsetsSearch'
+callsetsSearch' pCsSearchCallSetsRequest_ =
     CallsetsSearch'
     { _csQuotaUser = Nothing
     , _csPrettyPrint = True
-    , _csUserIp = Nothing
+    , _csUserIP = Nothing
+    , _csSearchCallSetsRequest = pCsSearchCallSetsRequest_
     , _csKey = Nothing
-    , _csOauthToken = Nothing
+    , _csOAuthToken = Nothing
     , _csFields = Nothing
-    , _csAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -116,37 +118,44 @@ csPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-csUserIp :: Lens' CallsetsSearch' (Maybe Text)
-csUserIp = lens _csUserIp (\ s a -> s{_csUserIp = a})
+csUserIP :: Lens' CallsetsSearch' (Maybe Text)
+csUserIP = lens _csUserIP (\ s a -> s{_csUserIP = a})
+
+-- | Multipart request metadata.
+csSearchCallSetsRequest :: Lens' CallsetsSearch' SearchCallSetsRequest
+csSearchCallSetsRequest
+  = lens _csSearchCallSetsRequest
+      (\ s a -> s{_csSearchCallSetsRequest = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-csKey :: Lens' CallsetsSearch' (Maybe Text)
+csKey :: Lens' CallsetsSearch' (Maybe Key)
 csKey = lens _csKey (\ s a -> s{_csKey = a})
 
 -- | OAuth 2.0 token for the current user.
-csOauthToken :: Lens' CallsetsSearch' (Maybe Text)
-csOauthToken
-  = lens _csOauthToken (\ s a -> s{_csOauthToken = a})
+csOAuthToken :: Lens' CallsetsSearch' (Maybe OAuthToken)
+csOAuthToken
+  = lens _csOAuthToken (\ s a -> s{_csOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 csFields :: Lens' CallsetsSearch' (Maybe Text)
 csFields = lens _csFields (\ s a -> s{_csFields = a})
 
--- | Data format for the response.
-csAlt :: Lens' CallsetsSearch' Alt
-csAlt = lens _csAlt (\ s a -> s{_csAlt = a})
+instance GoogleAuth CallsetsSearch' where
+        authKey = csKey . _Just
+        authToken = csOAuthToken . _Just
 
 instance GoogleRequest CallsetsSearch' where
         type Rs CallsetsSearch' = SearchCallSetsResponse
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u CallsetsSearch'{..}
-          = go _csQuotaUser (Just _csPrettyPrint) _csUserIp
+          = go _csQuotaUser (Just _csPrettyPrint) _csUserIP
               _csKey
-              _csOauthToken
+              _csOAuthToken
               _csFields
-              (Just _csAlt)
+              (Just AltJSON)
+              _csSearchCallSetsRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CallsetsSearchResource)

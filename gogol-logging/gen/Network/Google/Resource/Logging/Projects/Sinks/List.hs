@@ -39,11 +39,10 @@ module Network.Google.Resource.Logging.Projects.Sinks.List
     , pslUploadType
     , pslBearerToken
     , pslKey
-    , pslOauthToken
+    , pslOAuthToken
     , pslProjectsId
     , pslFields
     , pslCallback
-    , pslAlt
     ) where
 
 import           Network.Google.Logging.Types
@@ -64,11 +63,11 @@ type ProjectsSinksListResource =
                        QueryParam "access_token" Text :>
                          QueryParam "uploadType" Text :>
                            QueryParam "bearer_token" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "fields" Text :>
                                    QueryParam "callback" Text :>
-                                     QueryParam "alt" Text :>
+                                     QueryParam "alt" AltJSON :>
                                        Get '[JSON] ListSinksResponse
 
 -- | Lists project sinks associated with a project.
@@ -83,12 +82,11 @@ data ProjectsSinksList' = ProjectsSinksList'
     , _pslAccessToken    :: !(Maybe Text)
     , _pslUploadType     :: !(Maybe Text)
     , _pslBearerToken    :: !(Maybe Text)
-    , _pslKey            :: !(Maybe Text)
-    , _pslOauthToken     :: !(Maybe Text)
+    , _pslKey            :: !(Maybe Key)
+    , _pslOAuthToken     :: !(Maybe OAuthToken)
     , _pslProjectsId     :: !Text
     , _pslFields         :: !(Maybe Text)
     , _pslCallback       :: !(Maybe Text)
-    , _pslAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsSinksList'' with the minimum fields required to make a request.
@@ -113,15 +111,13 @@ data ProjectsSinksList' = ProjectsSinksList'
 --
 -- * 'pslKey'
 --
--- * 'pslOauthToken'
+-- * 'pslOAuthToken'
 --
 -- * 'pslProjectsId'
 --
 -- * 'pslFields'
 --
 -- * 'pslCallback'
---
--- * 'pslAlt'
 projectsSinksList'
     :: Text -- ^ 'projectsId'
     -> ProjectsSinksList'
@@ -136,11 +132,10 @@ projectsSinksList' pPslProjectsId_ =
     , _pslUploadType = Nothing
     , _pslBearerToken = Nothing
     , _pslKey = Nothing
-    , _pslOauthToken = Nothing
+    , _pslOAuthToken = Nothing
     , _pslProjectsId = pPslProjectsId_
     , _pslFields = Nothing
     , _pslCallback = Nothing
-    , _pslAlt = "json"
     }
 
 -- | V1 error format.
@@ -191,14 +186,14 @@ pslBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pslKey :: Lens' ProjectsSinksList' (Maybe Text)
+pslKey :: Lens' ProjectsSinksList' (Maybe Key)
 pslKey = lens _pslKey (\ s a -> s{_pslKey = a})
 
 -- | OAuth 2.0 token for the current user.
-pslOauthToken :: Lens' ProjectsSinksList' (Maybe Text)
-pslOauthToken
-  = lens _pslOauthToken
-      (\ s a -> s{_pslOauthToken = a})
+pslOAuthToken :: Lens' ProjectsSinksList' (Maybe OAuthToken)
+pslOAuthToken
+  = lens _pslOAuthToken
+      (\ s a -> s{_pslOAuthToken = a})
 
 -- | Part of \`projectName\`. The project whose sinks are wanted.
 pslProjectsId :: Lens' ProjectsSinksList' Text
@@ -216,9 +211,9 @@ pslCallback :: Lens' ProjectsSinksList' (Maybe Text)
 pslCallback
   = lens _pslCallback (\ s a -> s{_pslCallback = a})
 
--- | Data format for response.
-pslAlt :: Lens' ProjectsSinksList' Text
-pslAlt = lens _pslAlt (\ s a -> s{_pslAlt = a})
+instance GoogleAuth ProjectsSinksList' where
+        authKey = pslKey . _Just
+        authToken = pslOAuthToken . _Just
 
 instance GoogleRequest ProjectsSinksList' where
         type Rs ProjectsSinksList' = ListSinksResponse
@@ -231,11 +226,11 @@ instance GoogleRequest ProjectsSinksList' where
               _pslUploadType
               _pslBearerToken
               _pslKey
-              _pslOauthToken
+              _pslOAuthToken
               _pslProjectsId
               _pslFields
               _pslCallback
-              (Just _pslAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsSinksListResource)

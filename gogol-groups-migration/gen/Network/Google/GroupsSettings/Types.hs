@@ -48,9 +48,6 @@ module Network.Google.GroupsSettings.Types
     , gDescription
     , gDefaultMessageDenyNotificationText
     , gAllowWebPosting
-
-    -- * Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.GroupsSettings.Types.Product

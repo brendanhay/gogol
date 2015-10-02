@@ -34,13 +34,13 @@ module Network.Google.Resource.DFAReporting.CampaignCreativeAssociations.Insert
     -- * Request Lenses
     , ccaiQuotaUser
     , ccaiPrettyPrint
-    , ccaiUserIp
+    , ccaiUserIP
     , ccaiCampaignId
     , ccaiProfileId
+    , ccaiCampaignCreativeAssociation
     , ccaiKey
-    , ccaiOauthToken
+    , ccaiOAuthToken
     , ccaiFields
-    , ccaiAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -57,11 +57,12 @@ type CampaignCreativeAssociationsInsertResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :>
-                             Post '[JSON] CampaignCreativeAssociation
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] CampaignCreativeAssociation :>
+                               Post '[JSON] CampaignCreativeAssociation
 
 -- | Associates a creative with the specified campaign. This method creates a
 -- default ad with dimensions matching the creative in the campaign if such
@@ -69,15 +70,15 @@ type CampaignCreativeAssociationsInsertResource =
 --
 -- /See:/ 'campaignCreativeAssociationsInsert'' smart constructor.
 data CampaignCreativeAssociationsInsert' = CampaignCreativeAssociationsInsert'
-    { _ccaiQuotaUser   :: !(Maybe Text)
-    , _ccaiPrettyPrint :: !Bool
-    , _ccaiUserIp      :: !(Maybe Text)
-    , _ccaiCampaignId  :: !Int64
-    , _ccaiProfileId   :: !Int64
-    , _ccaiKey         :: !(Maybe Text)
-    , _ccaiOauthToken  :: !(Maybe Text)
-    , _ccaiFields      :: !(Maybe Text)
-    , _ccaiAlt         :: !Alt
+    { _ccaiQuotaUser                   :: !(Maybe Text)
+    , _ccaiPrettyPrint                 :: !Bool
+    , _ccaiUserIP                      :: !(Maybe Text)
+    , _ccaiCampaignId                  :: !Int64
+    , _ccaiProfileId                   :: !Int64
+    , _ccaiCampaignCreativeAssociation :: !CampaignCreativeAssociation
+    , _ccaiKey                         :: !(Maybe Key)
+    , _ccaiOAuthToken                  :: !(Maybe OAuthToken)
+    , _ccaiFields                      :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CampaignCreativeAssociationsInsert'' with the minimum fields required to make a request.
@@ -88,34 +89,35 @@ data CampaignCreativeAssociationsInsert' = CampaignCreativeAssociationsInsert'
 --
 -- * 'ccaiPrettyPrint'
 --
--- * 'ccaiUserIp'
+-- * 'ccaiUserIP'
 --
 -- * 'ccaiCampaignId'
 --
 -- * 'ccaiProfileId'
 --
+-- * 'ccaiCampaignCreativeAssociation'
+--
 -- * 'ccaiKey'
 --
--- * 'ccaiOauthToken'
+-- * 'ccaiOAuthToken'
 --
 -- * 'ccaiFields'
---
--- * 'ccaiAlt'
 campaignCreativeAssociationsInsert'
     :: Int64 -- ^ 'campaignId'
     -> Int64 -- ^ 'profileId'
+    -> CampaignCreativeAssociation -- ^ 'CampaignCreativeAssociation'
     -> CampaignCreativeAssociationsInsert'
-campaignCreativeAssociationsInsert' pCcaiCampaignId_ pCcaiProfileId_ =
+campaignCreativeAssociationsInsert' pCcaiCampaignId_ pCcaiProfileId_ pCcaiCampaignCreativeAssociation_ =
     CampaignCreativeAssociationsInsert'
     { _ccaiQuotaUser = Nothing
     , _ccaiPrettyPrint = True
-    , _ccaiUserIp = Nothing
+    , _ccaiUserIP = Nothing
     , _ccaiCampaignId = pCcaiCampaignId_
     , _ccaiProfileId = pCcaiProfileId_
+    , _ccaiCampaignCreativeAssociation = pCcaiCampaignCreativeAssociation_
     , _ccaiKey = Nothing
-    , _ccaiOauthToken = Nothing
+    , _ccaiOAuthToken = Nothing
     , _ccaiFields = Nothing
-    , _ccaiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -134,9 +136,9 @@ ccaiPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ccaiUserIp :: Lens' CampaignCreativeAssociationsInsert' (Maybe Text)
-ccaiUserIp
-  = lens _ccaiUserIp (\ s a -> s{_ccaiUserIp = a})
+ccaiUserIP :: Lens' CampaignCreativeAssociationsInsert' (Maybe Text)
+ccaiUserIP
+  = lens _ccaiUserIP (\ s a -> s{_ccaiUserIP = a})
 
 -- | Campaign ID in this association.
 ccaiCampaignId :: Lens' CampaignCreativeAssociationsInsert' Int64
@@ -150,26 +152,33 @@ ccaiProfileId
   = lens _ccaiProfileId
       (\ s a -> s{_ccaiProfileId = a})
 
+-- | Multipart request metadata.
+ccaiCampaignCreativeAssociation :: Lens' CampaignCreativeAssociationsInsert' CampaignCreativeAssociation
+ccaiCampaignCreativeAssociation
+  = lens _ccaiCampaignCreativeAssociation
+      (\ s a -> s{_ccaiCampaignCreativeAssociation = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ccaiKey :: Lens' CampaignCreativeAssociationsInsert' (Maybe Text)
+ccaiKey :: Lens' CampaignCreativeAssociationsInsert' (Maybe Key)
 ccaiKey = lens _ccaiKey (\ s a -> s{_ccaiKey = a})
 
 -- | OAuth 2.0 token for the current user.
-ccaiOauthToken :: Lens' CampaignCreativeAssociationsInsert' (Maybe Text)
-ccaiOauthToken
-  = lens _ccaiOauthToken
-      (\ s a -> s{_ccaiOauthToken = a})
+ccaiOAuthToken :: Lens' CampaignCreativeAssociationsInsert' (Maybe OAuthToken)
+ccaiOAuthToken
+  = lens _ccaiOAuthToken
+      (\ s a -> s{_ccaiOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ccaiFields :: Lens' CampaignCreativeAssociationsInsert' (Maybe Text)
 ccaiFields
   = lens _ccaiFields (\ s a -> s{_ccaiFields = a})
 
--- | Data format for the response.
-ccaiAlt :: Lens' CampaignCreativeAssociationsInsert' Alt
-ccaiAlt = lens _ccaiAlt (\ s a -> s{_ccaiAlt = a})
+instance GoogleAuth
+         CampaignCreativeAssociationsInsert' where
+        authKey = ccaiKey . _Just
+        authToken = ccaiOAuthToken . _Just
 
 instance GoogleRequest
          CampaignCreativeAssociationsInsert' where
@@ -179,13 +188,14 @@ instance GoogleRequest
         requestWithRoute r u
           CampaignCreativeAssociationsInsert'{..}
           = go _ccaiQuotaUser (Just _ccaiPrettyPrint)
-              _ccaiUserIp
+              _ccaiUserIP
               _ccaiCampaignId
               _ccaiProfileId
               _ccaiKey
-              _ccaiOauthToken
+              _ccaiOAuthToken
               _ccaiFields
-              (Just _ccaiAlt)
+              (Just AltJSON)
+              _ccaiCampaignCreativeAssociation
           where go
                   = clientWithRoute
                       (Proxy ::

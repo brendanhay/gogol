@@ -33,11 +33,11 @@ library
     exposed-modules:
           Network.Google.AdminDataTransfer
         , Network.Google.AdminDataTransfer.Types
-        , Network.Google.Resource.Datatransfer.Applications.Get
-        , Network.Google.Resource.Datatransfer.Applications.List
-        , Network.Google.Resource.Datatransfer.Transfers.Get
-        , Network.Google.Resource.Datatransfer.Transfers.Insert
-        , Network.Google.Resource.Datatransfer.Transfers.List
+        , Network.Google.Resource.DataTransfer.Applications.Get
+        , Network.Google.Resource.DataTransfer.Applications.List
+        , Network.Google.Resource.DataTransfer.Transfers.Get
+        , Network.Google.Resource.DataTransfer.Transfers.Insert
+        , Network.Google.Resource.DataTransfer.Transfers.List
 
     other-modules:
           Network.Google.AdminDataTransfer.Types.Product

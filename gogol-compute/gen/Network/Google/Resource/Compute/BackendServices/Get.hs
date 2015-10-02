@@ -33,11 +33,10 @@ module Network.Google.Resource.Compute.BackendServices.Get
     , bsgQuotaUser
     , bsgPrettyPrint
     , bsgProject
-    , bsgUserIp
+    , bsgUserIP
     , bsgKey
-    , bsgOauthToken
+    , bsgOAuthToken
     , bsgFields
-    , bsgAlt
     , bsgBackendService
     ) where
 
@@ -54,10 +53,11 @@ type BackendServicesGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] BackendService
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] BackendService
 
 -- | Returns the specified BackendService resource.
 --
@@ -66,11 +66,10 @@ data BackendServicesGet' = BackendServicesGet'
     { _bsgQuotaUser      :: !(Maybe Text)
     , _bsgPrettyPrint    :: !Bool
     , _bsgProject        :: !Text
-    , _bsgUserIp         :: !(Maybe Text)
-    , _bsgKey            :: !(Maybe Text)
-    , _bsgOauthToken     :: !(Maybe Text)
+    , _bsgUserIP         :: !(Maybe Text)
+    , _bsgKey            :: !(Maybe Key)
+    , _bsgOAuthToken     :: !(Maybe OAuthToken)
     , _bsgFields         :: !(Maybe Text)
-    , _bsgAlt            :: !Alt
     , _bsgBackendService :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -84,15 +83,13 @@ data BackendServicesGet' = BackendServicesGet'
 --
 -- * 'bsgProject'
 --
--- * 'bsgUserIp'
+-- * 'bsgUserIP'
 --
 -- * 'bsgKey'
 --
--- * 'bsgOauthToken'
+-- * 'bsgOAuthToken'
 --
 -- * 'bsgFields'
---
--- * 'bsgAlt'
 --
 -- * 'bsgBackendService'
 backendServicesGet'
@@ -104,11 +101,10 @@ backendServicesGet' pBsgProject_ pBsgBackendService_ =
     { _bsgQuotaUser = Nothing
     , _bsgPrettyPrint = True
     , _bsgProject = pBsgProject_
-    , _bsgUserIp = Nothing
+    , _bsgUserIP = Nothing
     , _bsgKey = Nothing
-    , _bsgOauthToken = Nothing
+    , _bsgOAuthToken = Nothing
     , _bsgFields = Nothing
-    , _bsgAlt = JSON
     , _bsgBackendService = pBsgBackendService_
     }
 
@@ -132,30 +128,26 @@ bsgProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-bsgUserIp :: Lens' BackendServicesGet' (Maybe Text)
-bsgUserIp
-  = lens _bsgUserIp (\ s a -> s{_bsgUserIp = a})
+bsgUserIP :: Lens' BackendServicesGet' (Maybe Text)
+bsgUserIP
+  = lens _bsgUserIP (\ s a -> s{_bsgUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-bsgKey :: Lens' BackendServicesGet' (Maybe Text)
+bsgKey :: Lens' BackendServicesGet' (Maybe Key)
 bsgKey = lens _bsgKey (\ s a -> s{_bsgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-bsgOauthToken :: Lens' BackendServicesGet' (Maybe Text)
-bsgOauthToken
-  = lens _bsgOauthToken
-      (\ s a -> s{_bsgOauthToken = a})
+bsgOAuthToken :: Lens' BackendServicesGet' (Maybe OAuthToken)
+bsgOAuthToken
+  = lens _bsgOAuthToken
+      (\ s a -> s{_bsgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 bsgFields :: Lens' BackendServicesGet' (Maybe Text)
 bsgFields
   = lens _bsgFields (\ s a -> s{_bsgFields = a})
-
--- | Data format for the response.
-bsgAlt :: Lens' BackendServicesGet' Alt
-bsgAlt = lens _bsgAlt (\ s a -> s{_bsgAlt = a})
 
 -- | Name of the BackendService resource to return.
 bsgBackendService :: Lens' BackendServicesGet' Text
@@ -163,17 +155,21 @@ bsgBackendService
   = lens _bsgBackendService
       (\ s a -> s{_bsgBackendService = a})
 
+instance GoogleAuth BackendServicesGet' where
+        authKey = bsgKey . _Just
+        authToken = bsgOAuthToken . _Just
+
 instance GoogleRequest BackendServicesGet' where
         type Rs BackendServicesGet' = BackendService
         request = requestWithRoute defReq computeURL
         requestWithRoute r u BackendServicesGet'{..}
           = go _bsgQuotaUser (Just _bsgPrettyPrint) _bsgProject
-              _bsgUserIp
+              _bsgUserIP
               _bsgKey
-              _bsgOauthToken
+              _bsgOAuthToken
               _bsgFields
-              (Just _bsgAlt)
               _bsgBackendService
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy BackendServicesGetResource)

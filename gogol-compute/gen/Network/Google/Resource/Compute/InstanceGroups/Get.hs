@@ -33,13 +33,12 @@ module Network.Google.Resource.Compute.InstanceGroups.Get
     , iggQuotaUser
     , iggPrettyPrint
     , iggProject
-    , iggUserIp
+    , iggUserIP
     , iggZone
     , iggKey
-    , iggOauthToken
+    , iggOAuthToken
     , iggInstanceGroup
     , iggFields
-    , iggAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -56,10 +55,10 @@ type InstanceGroupsGetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Get '[JSON] InstanceGroup
+                           QueryParam "alt" AltJSON :> Get '[JSON] InstanceGroup
 
 -- | Returns the specified instance group resource.
 --
@@ -68,13 +67,12 @@ data InstanceGroupsGet' = InstanceGroupsGet'
     { _iggQuotaUser     :: !(Maybe Text)
     , _iggPrettyPrint   :: !Bool
     , _iggProject       :: !Text
-    , _iggUserIp        :: !(Maybe Text)
+    , _iggUserIP        :: !(Maybe Text)
     , _iggZone          :: !Text
-    , _iggKey           :: !(Maybe Text)
-    , _iggOauthToken    :: !(Maybe Text)
+    , _iggKey           :: !(Maybe Key)
+    , _iggOAuthToken    :: !(Maybe OAuthToken)
     , _iggInstanceGroup :: !Text
     , _iggFields        :: !(Maybe Text)
-    , _iggAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupsGet'' with the minimum fields required to make a request.
@@ -87,19 +85,17 @@ data InstanceGroupsGet' = InstanceGroupsGet'
 --
 -- * 'iggProject'
 --
--- * 'iggUserIp'
+-- * 'iggUserIP'
 --
 -- * 'iggZone'
 --
 -- * 'iggKey'
 --
--- * 'iggOauthToken'
+-- * 'iggOAuthToken'
 --
 -- * 'iggInstanceGroup'
 --
 -- * 'iggFields'
---
--- * 'iggAlt'
 instanceGroupsGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
@@ -110,13 +106,12 @@ instanceGroupsGet' pIggProject_ pIggZone_ pIggInstanceGroup_ =
     { _iggQuotaUser = Nothing
     , _iggPrettyPrint = True
     , _iggProject = pIggProject_
-    , _iggUserIp = Nothing
+    , _iggUserIP = Nothing
     , _iggZone = pIggZone_
     , _iggKey = Nothing
-    , _iggOauthToken = Nothing
+    , _iggOAuthToken = Nothing
     , _iggInstanceGroup = pIggInstanceGroup_
     , _iggFields = Nothing
-    , _iggAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,9 +134,9 @@ iggProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-iggUserIp :: Lens' InstanceGroupsGet' (Maybe Text)
-iggUserIp
-  = lens _iggUserIp (\ s a -> s{_iggUserIp = a})
+iggUserIP :: Lens' InstanceGroupsGet' (Maybe Text)
+iggUserIP
+  = lens _iggUserIP (\ s a -> s{_iggUserIP = a})
 
 -- | The URL of the zone where the instance group is located.
 iggZone :: Lens' InstanceGroupsGet' Text
@@ -150,14 +145,14 @@ iggZone = lens _iggZone (\ s a -> s{_iggZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-iggKey :: Lens' InstanceGroupsGet' (Maybe Text)
+iggKey :: Lens' InstanceGroupsGet' (Maybe Key)
 iggKey = lens _iggKey (\ s a -> s{_iggKey = a})
 
 -- | OAuth 2.0 token for the current user.
-iggOauthToken :: Lens' InstanceGroupsGet' (Maybe Text)
-iggOauthToken
-  = lens _iggOauthToken
-      (\ s a -> s{_iggOauthToken = a})
+iggOAuthToken :: Lens' InstanceGroupsGet' (Maybe OAuthToken)
+iggOAuthToken
+  = lens _iggOAuthToken
+      (\ s a -> s{_iggOAuthToken = a})
 
 -- | The name of the instance group.
 iggInstanceGroup :: Lens' InstanceGroupsGet' Text
@@ -170,22 +165,22 @@ iggFields :: Lens' InstanceGroupsGet' (Maybe Text)
 iggFields
   = lens _iggFields (\ s a -> s{_iggFields = a})
 
--- | Data format for the response.
-iggAlt :: Lens' InstanceGroupsGet' Alt
-iggAlt = lens _iggAlt (\ s a -> s{_iggAlt = a})
+instance GoogleAuth InstanceGroupsGet' where
+        authKey = iggKey . _Just
+        authToken = iggOAuthToken . _Just
 
 instance GoogleRequest InstanceGroupsGet' where
         type Rs InstanceGroupsGet' = InstanceGroup
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstanceGroupsGet'{..}
           = go _iggQuotaUser (Just _iggPrettyPrint) _iggProject
-              _iggUserIp
+              _iggUserIP
               _iggZone
               _iggKey
-              _iggOauthToken
+              _iggOAuthToken
               _iggInstanceGroup
               _iggFields
-              (Just _iggAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InstanceGroupsGetResource)

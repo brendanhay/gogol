@@ -32,12 +32,11 @@ module Network.Google.Resource.Directory.VerificationCodes.Invalidate
     -- * Request Lenses
     , vciQuotaUser
     , vciPrettyPrint
-    , vciUserIp
+    , vciUserIP
     , vciKey
-    , vciOauthToken
+    , vciOAuthToken
     , vciUserKey
     , vciFields
-    , vciAlt
     ) where
 
 import           Network.Google.AdminDirectory.Types
@@ -53,10 +52,10 @@ type VerificationCodesInvalidateResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Post '[JSON] ()
+                         QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Invalidate the current backup verification codes for the user.
 --
@@ -64,12 +63,11 @@ type VerificationCodesInvalidateResource =
 data VerificationCodesInvalidate' = VerificationCodesInvalidate'
     { _vciQuotaUser   :: !(Maybe Text)
     , _vciPrettyPrint :: !Bool
-    , _vciUserIp      :: !(Maybe Text)
-    , _vciKey         :: !(Maybe Text)
-    , _vciOauthToken  :: !(Maybe Text)
+    , _vciUserIP      :: !(Maybe Text)
+    , _vciKey         :: !(Maybe Key)
+    , _vciOAuthToken  :: !(Maybe OAuthToken)
     , _vciUserKey     :: !Text
     , _vciFields      :: !(Maybe Text)
-    , _vciAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VerificationCodesInvalidate'' with the minimum fields required to make a request.
@@ -80,17 +78,15 @@ data VerificationCodesInvalidate' = VerificationCodesInvalidate'
 --
 -- * 'vciPrettyPrint'
 --
--- * 'vciUserIp'
+-- * 'vciUserIP'
 --
 -- * 'vciKey'
 --
--- * 'vciOauthToken'
+-- * 'vciOAuthToken'
 --
 -- * 'vciUserKey'
 --
 -- * 'vciFields'
---
--- * 'vciAlt'
 verificationCodesInvalidate'
     :: Text -- ^ 'userKey'
     -> VerificationCodesInvalidate'
@@ -98,12 +94,11 @@ verificationCodesInvalidate' pVciUserKey_ =
     VerificationCodesInvalidate'
     { _vciQuotaUser = Nothing
     , _vciPrettyPrint = True
-    , _vciUserIp = Nothing
+    , _vciUserIP = Nothing
     , _vciKey = Nothing
-    , _vciOauthToken = Nothing
+    , _vciOAuthToken = Nothing
     , _vciUserKey = pVciUserKey_
     , _vciFields = Nothing
-    , _vciAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -121,21 +116,21 @@ vciPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-vciUserIp :: Lens' VerificationCodesInvalidate' (Maybe Text)
-vciUserIp
-  = lens _vciUserIp (\ s a -> s{_vciUserIp = a})
+vciUserIP :: Lens' VerificationCodesInvalidate' (Maybe Text)
+vciUserIP
+  = lens _vciUserIP (\ s a -> s{_vciUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vciKey :: Lens' VerificationCodesInvalidate' (Maybe Text)
+vciKey :: Lens' VerificationCodesInvalidate' (Maybe Key)
 vciKey = lens _vciKey (\ s a -> s{_vciKey = a})
 
 -- | OAuth 2.0 token for the current user.
-vciOauthToken :: Lens' VerificationCodesInvalidate' (Maybe Text)
-vciOauthToken
-  = lens _vciOauthToken
-      (\ s a -> s{_vciOauthToken = a})
+vciOAuthToken :: Lens' VerificationCodesInvalidate' (Maybe OAuthToken)
+vciOAuthToken
+  = lens _vciOAuthToken
+      (\ s a -> s{_vciOAuthToken = a})
 
 -- | Email or immutable Id of the user
 vciUserKey :: Lens' VerificationCodesInvalidate' Text
@@ -147,21 +142,22 @@ vciFields :: Lens' VerificationCodesInvalidate' (Maybe Text)
 vciFields
   = lens _vciFields (\ s a -> s{_vciFields = a})
 
--- | Data format for the response.
-vciAlt :: Lens' VerificationCodesInvalidate' Alt
-vciAlt = lens _vciAlt (\ s a -> s{_vciAlt = a})
+instance GoogleAuth VerificationCodesInvalidate'
+         where
+        authKey = vciKey . _Just
+        authToken = vciOAuthToken . _Just
 
 instance GoogleRequest VerificationCodesInvalidate'
          where
         type Rs VerificationCodesInvalidate' = ()
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u VerificationCodesInvalidate'{..}
-          = go _vciQuotaUser (Just _vciPrettyPrint) _vciUserIp
+          = go _vciQuotaUser (Just _vciPrettyPrint) _vciUserIP
               _vciKey
-              _vciOauthToken
+              _vciOAuthToken
               _vciUserKey
               _vciFields
-              (Just _vciAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy VerificationCodesInvalidateResource)

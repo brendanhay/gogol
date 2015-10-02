@@ -85,7 +85,7 @@ module Network.Google.QPXExpress.Types
     , liConnectionDuration
     , liDuration
     , liMileage
-    , liDepartureTime
+    , liDePartyureTime
 
     -- * AirportData
     , AirportData
@@ -234,7 +234,7 @@ module Network.Google.QPXExpress.Types
     , sliDate
     , sliMaxConnectionDuration
     , sliPreferredCabin
-    , sliPermittedDepartureTime
+    , sliPermittedDePartyureTime
     , sliPermittedCarrier
     , sliAlliance
 
@@ -247,9 +247,6 @@ module Network.Google.QPXExpress.Types
     , torSolutions
     , torSlice
     , torMaxPrice
-
-    -- * Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.Prelude

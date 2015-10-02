@@ -32,13 +32,13 @@ module Network.Google.Resource.FusionTables.Style.Update
     -- * Request Lenses
     , suQuotaUser
     , suPrettyPrint
-    , suUserIp
+    , suUserIP
+    , suStyleSetting
     , suKey
     , suStyleId
-    , suOauthToken
+    , suOAuthToken
     , suTableId
     , suFields
-    , suAlt
     ) where
 
 import           Network.Google.FusionTables.Types
@@ -54,24 +54,26 @@ type StyleUpdateResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Put '[JSON] StyleSetting
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] StyleSetting :>
+                             Put '[JSON] StyleSetting
 
 -- | Updates an existing style.
 --
 -- /See:/ 'styleUpdate'' smart constructor.
 data StyleUpdate' = StyleUpdate'
-    { _suQuotaUser   :: !(Maybe Text)
-    , _suPrettyPrint :: !Bool
-    , _suUserIp      :: !(Maybe Text)
-    , _suKey         :: !(Maybe Text)
-    , _suStyleId     :: !Int32
-    , _suOauthToken  :: !(Maybe Text)
-    , _suTableId     :: !Text
-    , _suFields      :: !(Maybe Text)
-    , _suAlt         :: !Alt
+    { _suQuotaUser    :: !(Maybe Text)
+    , _suPrettyPrint  :: !Bool
+    , _suUserIP       :: !(Maybe Text)
+    , _suStyleSetting :: !StyleSetting
+    , _suKey          :: !(Maybe Key)
+    , _suStyleId      :: !Int32
+    , _suOAuthToken   :: !(Maybe OAuthToken)
+    , _suTableId      :: !Text
+    , _suFields       :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StyleUpdate'' with the minimum fields required to make a request.
@@ -82,34 +84,35 @@ data StyleUpdate' = StyleUpdate'
 --
 -- * 'suPrettyPrint'
 --
--- * 'suUserIp'
+-- * 'suUserIP'
+--
+-- * 'suStyleSetting'
 --
 -- * 'suKey'
 --
 -- * 'suStyleId'
 --
--- * 'suOauthToken'
+-- * 'suOAuthToken'
 --
 -- * 'suTableId'
 --
 -- * 'suFields'
---
--- * 'suAlt'
 styleUpdate'
-    :: Int32 -- ^ 'styleId'
+    :: StyleSetting -- ^ 'StyleSetting'
+    -> Int32 -- ^ 'styleId'
     -> Text -- ^ 'tableId'
     -> StyleUpdate'
-styleUpdate' pSuStyleId_ pSuTableId_ =
+styleUpdate' pSuStyleSetting_ pSuStyleId_ pSuTableId_ =
     StyleUpdate'
     { _suQuotaUser = Nothing
     , _suPrettyPrint = True
-    , _suUserIp = Nothing
+    , _suUserIP = Nothing
+    , _suStyleSetting = pSuStyleSetting_
     , _suKey = Nothing
     , _suStyleId = pSuStyleId_
-    , _suOauthToken = Nothing
+    , _suOAuthToken = Nothing
     , _suTableId = pSuTableId_
     , _suFields = Nothing
-    , _suAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,13 +130,19 @@ suPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-suUserIp :: Lens' StyleUpdate' (Maybe Text)
-suUserIp = lens _suUserIp (\ s a -> s{_suUserIp = a})
+suUserIP :: Lens' StyleUpdate' (Maybe Text)
+suUserIP = lens _suUserIP (\ s a -> s{_suUserIP = a})
+
+-- | Multipart request metadata.
+suStyleSetting :: Lens' StyleUpdate' StyleSetting
+suStyleSetting
+  = lens _suStyleSetting
+      (\ s a -> s{_suStyleSetting = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-suKey :: Lens' StyleUpdate' (Maybe Text)
+suKey :: Lens' StyleUpdate' (Maybe Key)
 suKey = lens _suKey (\ s a -> s{_suKey = a})
 
 -- | Identifier (within a table) for the style being updated.
@@ -142,9 +151,9 @@ suStyleId
   = lens _suStyleId (\ s a -> s{_suStyleId = a})
 
 -- | OAuth 2.0 token for the current user.
-suOauthToken :: Lens' StyleUpdate' (Maybe Text)
-suOauthToken
-  = lens _suOauthToken (\ s a -> s{_suOauthToken = a})
+suOAuthToken :: Lens' StyleUpdate' (Maybe OAuthToken)
+suOAuthToken
+  = lens _suOAuthToken (\ s a -> s{_suOAuthToken = a})
 
 -- | Table whose style is being updated.
 suTableId :: Lens' StyleUpdate' Text
@@ -155,21 +164,22 @@ suTableId
 suFields :: Lens' StyleUpdate' (Maybe Text)
 suFields = lens _suFields (\ s a -> s{_suFields = a})
 
--- | Data format for the response.
-suAlt :: Lens' StyleUpdate' Alt
-suAlt = lens _suAlt (\ s a -> s{_suAlt = a})
+instance GoogleAuth StyleUpdate' where
+        authKey = suKey . _Just
+        authToken = suOAuthToken . _Just
 
 instance GoogleRequest StyleUpdate' where
         type Rs StyleUpdate' = StyleSetting
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u StyleUpdate'{..}
-          = go _suQuotaUser (Just _suPrettyPrint) _suUserIp
+          = go _suQuotaUser (Just _suPrettyPrint) _suUserIP
               _suKey
               _suStyleId
-              _suOauthToken
+              _suOAuthToken
               _suTableId
               _suFields
-              (Just _suAlt)
+              (Just AltJSON)
+              _suStyleSetting
           where go
                   = clientWithRoute
                       (Proxy :: Proxy StyleUpdateResource)

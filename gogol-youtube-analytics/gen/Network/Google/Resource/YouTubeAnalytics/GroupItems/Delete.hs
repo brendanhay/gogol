@@ -32,13 +32,12 @@ module Network.Google.Resource.YouTubeAnalytics.GroupItems.Delete
     -- * Request Lenses
     , gidQuotaUser
     , gidPrettyPrint
-    , gidUserIp
+    , gidUserIP
     , gidOnBehalfOfContentOwner
     , gidKey
     , gidId
-    , gidOauthToken
+    , gidOAuthToken
     , gidFields
-    , gidAlt
     ) where
 
 import           Network.Google.Prelude
@@ -52,11 +51,11 @@ type GroupItemsDeleteResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
              QueryParam "onBehalfOfContentOwner" Text :>
-               QueryParam "key" Text :>
+               QueryParam "key" Key :>
                  QueryParam "id" Text :>
-                   QueryParam "oauth_token" Text :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Delete '[JSON] ()
+                       QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Removes an item from a group.
 --
@@ -64,13 +63,12 @@ type GroupItemsDeleteResource =
 data GroupItemsDelete' = GroupItemsDelete'
     { _gidQuotaUser              :: !(Maybe Text)
     , _gidPrettyPrint            :: !Bool
-    , _gidUserIp                 :: !(Maybe Text)
+    , _gidUserIP                 :: !(Maybe Text)
     , _gidOnBehalfOfContentOwner :: !(Maybe Text)
-    , _gidKey                    :: !(Maybe Text)
+    , _gidKey                    :: !(Maybe Key)
     , _gidId                     :: !Text
-    , _gidOauthToken             :: !(Maybe Text)
+    , _gidOAuthToken             :: !(Maybe OAuthToken)
     , _gidFields                 :: !(Maybe Text)
-    , _gidAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupItemsDelete'' with the minimum fields required to make a request.
@@ -81,7 +79,7 @@ data GroupItemsDelete' = GroupItemsDelete'
 --
 -- * 'gidPrettyPrint'
 --
--- * 'gidUserIp'
+-- * 'gidUserIP'
 --
 -- * 'gidOnBehalfOfContentOwner'
 --
@@ -89,11 +87,9 @@ data GroupItemsDelete' = GroupItemsDelete'
 --
 -- * 'gidId'
 --
--- * 'gidOauthToken'
+-- * 'gidOAuthToken'
 --
 -- * 'gidFields'
---
--- * 'gidAlt'
 groupItemsDelete'
     :: Text -- ^ 'id'
     -> GroupItemsDelete'
@@ -101,13 +97,12 @@ groupItemsDelete' pGidId_ =
     GroupItemsDelete'
     { _gidQuotaUser = Nothing
     , _gidPrettyPrint = True
-    , _gidUserIp = Nothing
+    , _gidUserIP = Nothing
     , _gidOnBehalfOfContentOwner = Nothing
     , _gidKey = Nothing
     , _gidId = pGidId_
-    , _gidOauthToken = Nothing
+    , _gidOAuthToken = Nothing
     , _gidFields = Nothing
-    , _gidAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -125,9 +120,9 @@ gidPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-gidUserIp :: Lens' GroupItemsDelete' (Maybe Text)
-gidUserIp
-  = lens _gidUserIp (\ s a -> s{_gidUserIp = a})
+gidUserIP :: Lens' GroupItemsDelete' (Maybe Text)
+gidUserIP
+  = lens _gidUserIP (\ s a -> s{_gidUserIP = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
@@ -147,7 +142,7 @@ gidOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-gidKey :: Lens' GroupItemsDelete' (Maybe Text)
+gidKey :: Lens' GroupItemsDelete' (Maybe Key)
 gidKey = lens _gidKey (\ s a -> s{_gidKey = a})
 
 -- | The id parameter specifies the YouTube group item ID for the group that
@@ -156,31 +151,31 @@ gidId :: Lens' GroupItemsDelete' Text
 gidId = lens _gidId (\ s a -> s{_gidId = a})
 
 -- | OAuth 2.0 token for the current user.
-gidOauthToken :: Lens' GroupItemsDelete' (Maybe Text)
-gidOauthToken
-  = lens _gidOauthToken
-      (\ s a -> s{_gidOauthToken = a})
+gidOAuthToken :: Lens' GroupItemsDelete' (Maybe OAuthToken)
+gidOAuthToken
+  = lens _gidOAuthToken
+      (\ s a -> s{_gidOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 gidFields :: Lens' GroupItemsDelete' (Maybe Text)
 gidFields
   = lens _gidFields (\ s a -> s{_gidFields = a})
 
--- | Data format for the response.
-gidAlt :: Lens' GroupItemsDelete' Alt
-gidAlt = lens _gidAlt (\ s a -> s{_gidAlt = a})
+instance GoogleAuth GroupItemsDelete' where
+        authKey = gidKey . _Just
+        authToken = gidOAuthToken . _Just
 
 instance GoogleRequest GroupItemsDelete' where
         type Rs GroupItemsDelete' = ()
         request = requestWithRoute defReq youTubeAnalyticsURL
         requestWithRoute r u GroupItemsDelete'{..}
-          = go _gidQuotaUser (Just _gidPrettyPrint) _gidUserIp
+          = go _gidQuotaUser (Just _gidPrettyPrint) _gidUserIP
               _gidOnBehalfOfContentOwner
               _gidKey
               (Just _gidId)
-              _gidOauthToken
+              _gidOAuthToken
               _gidFields
-              (Just _gidAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy GroupItemsDeleteResource)

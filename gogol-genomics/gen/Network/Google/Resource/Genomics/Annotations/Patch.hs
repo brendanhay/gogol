@@ -34,13 +34,13 @@ module Network.Google.Resource.Genomics.Annotations.Patch
 
     -- * Request Lenses
     , apQuotaUser
+    , apAnnotation
     , apPrettyPrint
-    , apUserIp
+    , apUserIP
     , apKey
     , apAnnotationId
-    , apOauthToken
+    , apOAuthToken
     , apFields
-    , apAlt
     ) where
 
 import           Network.Google.Genomics.Types
@@ -54,10 +54,12 @@ type AnnotationsPatchResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Patch '[JSON] Annotation
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Annotation :>
+                         Patch '[JSON] Annotation
 
 -- | Updates an annotation. The update must respect all mutability
 -- restrictions and other invariants described on the annotation resource.
@@ -67,13 +69,13 @@ type AnnotationsPatchResource =
 -- /See:/ 'annotationsPatch'' smart constructor.
 data AnnotationsPatch' = AnnotationsPatch'
     { _apQuotaUser    :: !(Maybe Text)
+    , _apAnnotation   :: !Annotation
     , _apPrettyPrint  :: !Bool
-    , _apUserIp       :: !(Maybe Text)
-    , _apKey          :: !(Maybe Text)
+    , _apUserIP       :: !(Maybe Text)
+    , _apKey          :: !(Maybe Key)
     , _apAnnotationId :: !Text
-    , _apOauthToken   :: !(Maybe Text)
+    , _apOAuthToken   :: !(Maybe OAuthToken)
     , _apFields       :: !(Maybe Text)
-    , _apAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnnotationsPatch'' with the minimum fields required to make a request.
@@ -82,32 +84,33 @@ data AnnotationsPatch' = AnnotationsPatch'
 --
 -- * 'apQuotaUser'
 --
+-- * 'apAnnotation'
+--
 -- * 'apPrettyPrint'
 --
--- * 'apUserIp'
+-- * 'apUserIP'
 --
 -- * 'apKey'
 --
 -- * 'apAnnotationId'
 --
--- * 'apOauthToken'
+-- * 'apOAuthToken'
 --
 -- * 'apFields'
---
--- * 'apAlt'
 annotationsPatch'
-    :: Text -- ^ 'annotationId'
+    :: Annotation -- ^ 'Annotation'
+    -> Text -- ^ 'annotationId'
     -> AnnotationsPatch'
-annotationsPatch' pApAnnotationId_ =
+annotationsPatch' pApAnnotation_ pApAnnotationId_ =
     AnnotationsPatch'
     { _apQuotaUser = Nothing
+    , _apAnnotation = pApAnnotation_
     , _apPrettyPrint = True
-    , _apUserIp = Nothing
+    , _apUserIP = Nothing
     , _apKey = Nothing
     , _apAnnotationId = pApAnnotationId_
-    , _apOauthToken = Nothing
+    , _apOAuthToken = Nothing
     , _apFields = Nothing
-    , _apAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -117,6 +120,11 @@ apQuotaUser :: Lens' AnnotationsPatch' (Maybe Text)
 apQuotaUser
   = lens _apQuotaUser (\ s a -> s{_apQuotaUser = a})
 
+-- | Multipart request metadata.
+apAnnotation :: Lens' AnnotationsPatch' Annotation
+apAnnotation
+  = lens _apAnnotation (\ s a -> s{_apAnnotation = a})
+
 -- | Returns response with indentations and line breaks.
 apPrettyPrint :: Lens' AnnotationsPatch' Bool
 apPrettyPrint
@@ -125,13 +133,13 @@ apPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-apUserIp :: Lens' AnnotationsPatch' (Maybe Text)
-apUserIp = lens _apUserIp (\ s a -> s{_apUserIp = a})
+apUserIP :: Lens' AnnotationsPatch' (Maybe Text)
+apUserIP = lens _apUserIP (\ s a -> s{_apUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-apKey :: Lens' AnnotationsPatch' (Maybe Text)
+apKey :: Lens' AnnotationsPatch' (Maybe Key)
 apKey = lens _apKey (\ s a -> s{_apKey = a})
 
 -- | The ID of the annotation set to be updated.
@@ -141,28 +149,29 @@ apAnnotationId
       (\ s a -> s{_apAnnotationId = a})
 
 -- | OAuth 2.0 token for the current user.
-apOauthToken :: Lens' AnnotationsPatch' (Maybe Text)
-apOauthToken
-  = lens _apOauthToken (\ s a -> s{_apOauthToken = a})
+apOAuthToken :: Lens' AnnotationsPatch' (Maybe OAuthToken)
+apOAuthToken
+  = lens _apOAuthToken (\ s a -> s{_apOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 apFields :: Lens' AnnotationsPatch' (Maybe Text)
 apFields = lens _apFields (\ s a -> s{_apFields = a})
 
--- | Data format for the response.
-apAlt :: Lens' AnnotationsPatch' Alt
-apAlt = lens _apAlt (\ s a -> s{_apAlt = a})
+instance GoogleAuth AnnotationsPatch' where
+        authKey = apKey . _Just
+        authToken = apOAuthToken . _Just
 
 instance GoogleRequest AnnotationsPatch' where
         type Rs AnnotationsPatch' = Annotation
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u AnnotationsPatch'{..}
-          = go _apQuotaUser (Just _apPrettyPrint) _apUserIp
+          = go _apQuotaUser (Just _apPrettyPrint) _apUserIP
               _apKey
               _apAnnotationId
-              _apOauthToken
+              _apOAuthToken
               _apFields
-              (Just _apAlt)
+              (Just AltJSON)
+              _apAnnotation
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AnnotationsPatchResource)

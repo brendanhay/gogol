@@ -32,14 +32,13 @@ module Network.Google.Resource.DFAReporting.LandingPages.Delete
     -- * Request Lenses
     , lpdQuotaUser
     , lpdPrettyPrint
-    , lpdUserIp
+    , lpdUserIP
     , lpdCampaignId
     , lpdProfileId
     , lpdKey
     , lpdId
-    , lpdOauthToken
+    , lpdOAuthToken
     , lpdFields
-    , lpdAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -57,10 +56,10 @@ type LandingPagesDeleteResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Delete '[JSON] ()
+                             QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an existing campaign landing page.
 --
@@ -68,14 +67,13 @@ type LandingPagesDeleteResource =
 data LandingPagesDelete' = LandingPagesDelete'
     { _lpdQuotaUser   :: !(Maybe Text)
     , _lpdPrettyPrint :: !Bool
-    , _lpdUserIp      :: !(Maybe Text)
+    , _lpdUserIP      :: !(Maybe Text)
     , _lpdCampaignId  :: !Int64
     , _lpdProfileId   :: !Int64
-    , _lpdKey         :: !(Maybe Text)
+    , _lpdKey         :: !(Maybe Key)
     , _lpdId          :: !Int64
-    , _lpdOauthToken  :: !(Maybe Text)
+    , _lpdOAuthToken  :: !(Maybe OAuthToken)
     , _lpdFields      :: !(Maybe Text)
-    , _lpdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LandingPagesDelete'' with the minimum fields required to make a request.
@@ -86,7 +84,7 @@ data LandingPagesDelete' = LandingPagesDelete'
 --
 -- * 'lpdPrettyPrint'
 --
--- * 'lpdUserIp'
+-- * 'lpdUserIP'
 --
 -- * 'lpdCampaignId'
 --
@@ -96,11 +94,9 @@ data LandingPagesDelete' = LandingPagesDelete'
 --
 -- * 'lpdId'
 --
--- * 'lpdOauthToken'
+-- * 'lpdOAuthToken'
 --
 -- * 'lpdFields'
---
--- * 'lpdAlt'
 landingPagesDelete'
     :: Int64 -- ^ 'campaignId'
     -> Int64 -- ^ 'profileId'
@@ -110,14 +106,13 @@ landingPagesDelete' pLpdCampaignId_ pLpdProfileId_ pLpdId_ =
     LandingPagesDelete'
     { _lpdQuotaUser = Nothing
     , _lpdPrettyPrint = True
-    , _lpdUserIp = Nothing
+    , _lpdUserIP = Nothing
     , _lpdCampaignId = pLpdCampaignId_
     , _lpdProfileId = pLpdProfileId_
     , _lpdKey = Nothing
     , _lpdId = pLpdId_
-    , _lpdOauthToken = Nothing
+    , _lpdOAuthToken = Nothing
     , _lpdFields = Nothing
-    , _lpdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,9 +130,9 @@ lpdPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-lpdUserIp :: Lens' LandingPagesDelete' (Maybe Text)
-lpdUserIp
-  = lens _lpdUserIp (\ s a -> s{_lpdUserIp = a})
+lpdUserIP :: Lens' LandingPagesDelete' (Maybe Text)
+lpdUserIP
+  = lens _lpdUserIP (\ s a -> s{_lpdUserIP = a})
 
 -- | Landing page campaign ID.
 lpdCampaignId :: Lens' LandingPagesDelete' Int64
@@ -153,7 +148,7 @@ lpdProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lpdKey :: Lens' LandingPagesDelete' (Maybe Text)
+lpdKey :: Lens' LandingPagesDelete' (Maybe Key)
 lpdKey = lens _lpdKey (\ s a -> s{_lpdKey = a})
 
 -- | Landing page ID.
@@ -161,32 +156,32 @@ lpdId :: Lens' LandingPagesDelete' Int64
 lpdId = lens _lpdId (\ s a -> s{_lpdId = a})
 
 -- | OAuth 2.0 token for the current user.
-lpdOauthToken :: Lens' LandingPagesDelete' (Maybe Text)
-lpdOauthToken
-  = lens _lpdOauthToken
-      (\ s a -> s{_lpdOauthToken = a})
+lpdOAuthToken :: Lens' LandingPagesDelete' (Maybe OAuthToken)
+lpdOAuthToken
+  = lens _lpdOAuthToken
+      (\ s a -> s{_lpdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 lpdFields :: Lens' LandingPagesDelete' (Maybe Text)
 lpdFields
   = lens _lpdFields (\ s a -> s{_lpdFields = a})
 
--- | Data format for the response.
-lpdAlt :: Lens' LandingPagesDelete' Alt
-lpdAlt = lens _lpdAlt (\ s a -> s{_lpdAlt = a})
+instance GoogleAuth LandingPagesDelete' where
+        authKey = lpdKey . _Just
+        authToken = lpdOAuthToken . _Just
 
 instance GoogleRequest LandingPagesDelete' where
         type Rs LandingPagesDelete' = ()
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u LandingPagesDelete'{..}
-          = go _lpdQuotaUser (Just _lpdPrettyPrint) _lpdUserIp
+          = go _lpdQuotaUser (Just _lpdPrettyPrint) _lpdUserIP
               _lpdCampaignId
               _lpdProfileId
               _lpdKey
               _lpdId
-              _lpdOauthToken
+              _lpdOAuthToken
               _lpdFields
-              (Just _lpdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy LandingPagesDeleteResource)

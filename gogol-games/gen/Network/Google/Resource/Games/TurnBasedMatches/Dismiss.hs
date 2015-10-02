@@ -33,12 +33,11 @@ module Network.Google.Resource.Games.TurnBasedMatches.Dismiss
     -- * Request Lenses
     , tbmdQuotaUser
     , tbmdPrettyPrint
-    , tbmdUserIp
+    , tbmdUserIP
     , tbmdKey
-    , tbmdOauthToken
+    , tbmdOAuthToken
     , tbmdMatchId
     , tbmdFields
-    , tbmdAlt
     ) where
 
 import           Network.Google.Games.Types
@@ -53,10 +52,10 @@ type TurnBasedMatchesDismissResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Put '[JSON] ()
+                       QueryParam "alt" AltJSON :> Put '[JSON] ()
 
 -- | Dismiss a turn-based match from the match list. The match will no longer
 -- show up in the list and will not generate notifications.
@@ -65,12 +64,11 @@ type TurnBasedMatchesDismissResource =
 data TurnBasedMatchesDismiss' = TurnBasedMatchesDismiss'
     { _tbmdQuotaUser   :: !(Maybe Text)
     , _tbmdPrettyPrint :: !Bool
-    , _tbmdUserIp      :: !(Maybe Text)
-    , _tbmdKey         :: !(Maybe Text)
-    , _tbmdOauthToken  :: !(Maybe Text)
+    , _tbmdUserIP      :: !(Maybe Text)
+    , _tbmdKey         :: !(Maybe Key)
+    , _tbmdOAuthToken  :: !(Maybe OAuthToken)
     , _tbmdMatchId     :: !Text
     , _tbmdFields      :: !(Maybe Text)
-    , _tbmdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchesDismiss'' with the minimum fields required to make a request.
@@ -81,17 +79,15 @@ data TurnBasedMatchesDismiss' = TurnBasedMatchesDismiss'
 --
 -- * 'tbmdPrettyPrint'
 --
--- * 'tbmdUserIp'
+-- * 'tbmdUserIP'
 --
 -- * 'tbmdKey'
 --
--- * 'tbmdOauthToken'
+-- * 'tbmdOAuthToken'
 --
 -- * 'tbmdMatchId'
 --
 -- * 'tbmdFields'
---
--- * 'tbmdAlt'
 turnBasedMatchesDismiss'
     :: Text -- ^ 'matchId'
     -> TurnBasedMatchesDismiss'
@@ -99,12 +95,11 @@ turnBasedMatchesDismiss' pTbmdMatchId_ =
     TurnBasedMatchesDismiss'
     { _tbmdQuotaUser = Nothing
     , _tbmdPrettyPrint = True
-    , _tbmdUserIp = Nothing
+    , _tbmdUserIP = Nothing
     , _tbmdKey = Nothing
-    , _tbmdOauthToken = Nothing
+    , _tbmdOAuthToken = Nothing
     , _tbmdMatchId = pTbmdMatchId_
     , _tbmdFields = Nothing
-    , _tbmdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -123,21 +118,21 @@ tbmdPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tbmdUserIp :: Lens' TurnBasedMatchesDismiss' (Maybe Text)
-tbmdUserIp
-  = lens _tbmdUserIp (\ s a -> s{_tbmdUserIp = a})
+tbmdUserIP :: Lens' TurnBasedMatchesDismiss' (Maybe Text)
+tbmdUserIP
+  = lens _tbmdUserIP (\ s a -> s{_tbmdUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tbmdKey :: Lens' TurnBasedMatchesDismiss' (Maybe Text)
+tbmdKey :: Lens' TurnBasedMatchesDismiss' (Maybe Key)
 tbmdKey = lens _tbmdKey (\ s a -> s{_tbmdKey = a})
 
 -- | OAuth 2.0 token for the current user.
-tbmdOauthToken :: Lens' TurnBasedMatchesDismiss' (Maybe Text)
-tbmdOauthToken
-  = lens _tbmdOauthToken
-      (\ s a -> s{_tbmdOauthToken = a})
+tbmdOAuthToken :: Lens' TurnBasedMatchesDismiss' (Maybe OAuthToken)
+tbmdOAuthToken
+  = lens _tbmdOAuthToken
+      (\ s a -> s{_tbmdOAuthToken = a})
 
 -- | The ID of the match.
 tbmdMatchId :: Lens' TurnBasedMatchesDismiss' Text
@@ -149,21 +144,21 @@ tbmdFields :: Lens' TurnBasedMatchesDismiss' (Maybe Text)
 tbmdFields
   = lens _tbmdFields (\ s a -> s{_tbmdFields = a})
 
--- | Data format for the response.
-tbmdAlt :: Lens' TurnBasedMatchesDismiss' Alt
-tbmdAlt = lens _tbmdAlt (\ s a -> s{_tbmdAlt = a})
+instance GoogleAuth TurnBasedMatchesDismiss' where
+        authKey = tbmdKey . _Just
+        authToken = tbmdOAuthToken . _Just
 
 instance GoogleRequest TurnBasedMatchesDismiss' where
         type Rs TurnBasedMatchesDismiss' = ()
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u TurnBasedMatchesDismiss'{..}
           = go _tbmdQuotaUser (Just _tbmdPrettyPrint)
-              _tbmdUserIp
+              _tbmdUserIP
               _tbmdKey
-              _tbmdOauthToken
+              _tbmdOAuthToken
               _tbmdMatchId
               _tbmdFields
-              (Just _tbmdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TurnBasedMatchesDismissResource)

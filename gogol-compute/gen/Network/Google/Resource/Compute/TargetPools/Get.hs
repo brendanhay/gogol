@@ -34,12 +34,11 @@ module Network.Google.Resource.Compute.TargetPools.Get
     , tpgPrettyPrint
     , tpgProject
     , tpgTargetPool
-    , tpgUserIp
+    , tpgUserIP
     , tpgKey
     , tpgRegion
-    , tpgOauthToken
+    , tpgOAuthToken
     , tpgFields
-    , tpgAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -56,10 +55,10 @@ type TargetPoolsGetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Get '[JSON] TargetPool
+                           QueryParam "alt" AltJSON :> Get '[JSON] TargetPool
 
 -- | Returns the specified TargetPool resource.
 --
@@ -69,12 +68,11 @@ data TargetPoolsGet' = TargetPoolsGet'
     , _tpgPrettyPrint :: !Bool
     , _tpgProject     :: !Text
     , _tpgTargetPool  :: !Text
-    , _tpgUserIp      :: !(Maybe Text)
-    , _tpgKey         :: !(Maybe Text)
+    , _tpgUserIP      :: !(Maybe Text)
+    , _tpgKey         :: !(Maybe Key)
     , _tpgRegion      :: !Text
-    , _tpgOauthToken  :: !(Maybe Text)
+    , _tpgOAuthToken  :: !(Maybe OAuthToken)
     , _tpgFields      :: !(Maybe Text)
-    , _tpgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetPoolsGet'' with the minimum fields required to make a request.
@@ -89,17 +87,15 @@ data TargetPoolsGet' = TargetPoolsGet'
 --
 -- * 'tpgTargetPool'
 --
--- * 'tpgUserIp'
+-- * 'tpgUserIP'
 --
 -- * 'tpgKey'
 --
 -- * 'tpgRegion'
 --
--- * 'tpgOauthToken'
+-- * 'tpgOAuthToken'
 --
 -- * 'tpgFields'
---
--- * 'tpgAlt'
 targetPoolsGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'targetPool'
@@ -111,12 +107,11 @@ targetPoolsGet' pTpgProject_ pTpgTargetPool_ pTpgRegion_ =
     , _tpgPrettyPrint = True
     , _tpgProject = pTpgProject_
     , _tpgTargetPool = pTpgTargetPool_
-    , _tpgUserIp = Nothing
+    , _tpgUserIP = Nothing
     , _tpgKey = Nothing
     , _tpgRegion = pTpgRegion_
-    , _tpgOauthToken = Nothing
+    , _tpgOAuthToken = Nothing
     , _tpgFields = Nothing
-    , _tpgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -145,14 +140,14 @@ tpgTargetPool
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tpgUserIp :: Lens' TargetPoolsGet' (Maybe Text)
-tpgUserIp
-  = lens _tpgUserIp (\ s a -> s{_tpgUserIp = a})
+tpgUserIP :: Lens' TargetPoolsGet' (Maybe Text)
+tpgUserIP
+  = lens _tpgUserIP (\ s a -> s{_tpgUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tpgKey :: Lens' TargetPoolsGet' (Maybe Text)
+tpgKey :: Lens' TargetPoolsGet' (Maybe Key)
 tpgKey = lens _tpgKey (\ s a -> s{_tpgKey = a})
 
 -- | Name of the region scoping this request.
@@ -161,19 +156,19 @@ tpgRegion
   = lens _tpgRegion (\ s a -> s{_tpgRegion = a})
 
 -- | OAuth 2.0 token for the current user.
-tpgOauthToken :: Lens' TargetPoolsGet' (Maybe Text)
-tpgOauthToken
-  = lens _tpgOauthToken
-      (\ s a -> s{_tpgOauthToken = a})
+tpgOAuthToken :: Lens' TargetPoolsGet' (Maybe OAuthToken)
+tpgOAuthToken
+  = lens _tpgOAuthToken
+      (\ s a -> s{_tpgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 tpgFields :: Lens' TargetPoolsGet' (Maybe Text)
 tpgFields
   = lens _tpgFields (\ s a -> s{_tpgFields = a})
 
--- | Data format for the response.
-tpgAlt :: Lens' TargetPoolsGet' Alt
-tpgAlt = lens _tpgAlt (\ s a -> s{_tpgAlt = a})
+instance GoogleAuth TargetPoolsGet' where
+        authKey = tpgKey . _Just
+        authToken = tpgOAuthToken . _Just
 
 instance GoogleRequest TargetPoolsGet' where
         type Rs TargetPoolsGet' = TargetPool
@@ -181,12 +176,12 @@ instance GoogleRequest TargetPoolsGet' where
         requestWithRoute r u TargetPoolsGet'{..}
           = go _tpgQuotaUser (Just _tpgPrettyPrint) _tpgProject
               _tpgTargetPool
-              _tpgUserIp
+              _tpgUserIP
               _tpgKey
               _tpgRegion
-              _tpgOauthToken
+              _tpgOAuthToken
               _tpgFields
-              (Just _tpgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TargetPoolsGetResource)

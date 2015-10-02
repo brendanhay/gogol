@@ -25,7 +25,7 @@ data TaskQueue = TaskQueue
     , _tqStats     :: !(Maybe TaskQueueStats)
     , _tqMaxLeases :: !(Maybe Int32)
     , _tqId        :: !(Maybe Text)
-    , _tqAcl       :: !(Maybe TaskQueueACL)
+    , _tqACL       :: !(Maybe TaskQueueACL)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TaskQueue' with the minimum fields required to make a request.
@@ -40,7 +40,7 @@ data TaskQueue = TaskQueue
 --
 -- * 'tqId'
 --
--- * 'tqAcl'
+-- * 'tqACL'
 taskQueue
     :: TaskQueue
 taskQueue =
@@ -49,7 +49,7 @@ taskQueue =
     , _tqStats = Nothing
     , _tqMaxLeases = Nothing
     , _tqId = Nothing
-    , _tqAcl = Nothing
+    , _tqACL = Nothing
     }
 
 -- | The kind of REST object returned, in this case taskqueue.
@@ -71,8 +71,8 @@ tqId :: Lens' TaskQueue (Maybe Text)
 tqId = lens _tqId (\ s a -> s{_tqId = a})
 
 -- | ACLs that are applicable to this TaskQueue object.
-tqAcl :: Lens' TaskQueue (Maybe TaskQueueACL)
-tqAcl = lens _tqAcl (\ s a -> s{_tqAcl = a})
+tqACL :: Lens' TaskQueue (Maybe TaskQueueACL)
+tqACL = lens _tqACL (\ s a -> s{_tqACL = a})
 
 instance FromJSON TaskQueue where
         parseJSON
@@ -91,13 +91,13 @@ instance ToJSON TaskQueue where
               (catMaybes
                  [Just ("kind" .= _tqKind), ("stats" .=) <$> _tqStats,
                   ("maxLeases" .=) <$> _tqMaxLeases,
-                  ("id" .=) <$> _tqId, ("acl" .=) <$> _tqAcl])
+                  ("id" .=) <$> _tqId, ("acl" .=) <$> _tqACL])
 
 --
 -- /See:/ 'tasks2' smart constructor.
 data Tasks2 = Tasks2
     { _tKind  :: !Text
-    , _tItems :: !(Maybe [Maybe Task])
+    , _tItems :: !(Maybe [Task])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Tasks2' with the minimum fields required to make a request.
@@ -120,7 +120,7 @@ tKind :: Lens' Tasks2 Text
 tKind = lens _tKind (\ s a -> s{_tKind = a})
 
 -- | The actual list of tasks currently active in the TaskQueue.
-tItems :: Lens' Tasks2 [Maybe Task]
+tItems :: Lens' Tasks2 [Task]
 tItems
   = lens _tItems (\ s a -> s{_tItems = a}) . _Default .
       _Coerce
@@ -288,7 +288,7 @@ instance ToJSON TaskQueueStats where
 -- /See:/ 'tasks' smart constructor.
 data Tasks = Tasks
     { _tasKind  :: !Text
-    , _tasItems :: !(Maybe [Maybe Task])
+    , _tasItems :: !(Maybe [Task])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Tasks' with the minimum fields required to make a request.
@@ -311,7 +311,7 @@ tasKind :: Lens' Tasks Text
 tasKind = lens _tasKind (\ s a -> s{_tasKind = a})
 
 -- | The actual list of tasks returned as a result of the lease operation.
-tasItems :: Lens' Tasks [Maybe Task]
+tasItems :: Lens' Tasks [Task]
 tasItems
   = lens _tasItems (\ s a -> s{_tasItems = a}) .
       _Default
@@ -340,7 +340,7 @@ data Task = Task
     , _ttTag              :: !(Maybe Text)
     , _ttKind             :: !Text
     , _ttQueueName        :: !(Maybe Text)
-    , _ttPayloadBase64    :: !(Maybe Text)
+    , _ttPayLoadBase64    :: !(Maybe Text)
     , _ttId               :: !(Maybe Text)
     , _ttLeaseTimestamp   :: !(Maybe Int64)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -359,7 +359,7 @@ data Task = Task
 --
 -- * 'ttQueueName'
 --
--- * 'ttPayloadBase64'
+-- * 'ttPayLoadBase64'
 --
 -- * 'ttId'
 --
@@ -373,7 +373,7 @@ task =
     , _ttTag = Nothing
     , _ttKind = "taskqueues#task"
     , _ttQueueName = Nothing
-    , _ttPayloadBase64 = Nothing
+    , _ttPayLoadBase64 = Nothing
     , _ttId = Nothing
     , _ttLeaseTimestamp = Nothing
     }
@@ -405,10 +405,10 @@ ttQueueName
 
 -- | A bag of bytes which is the task payload. The payload on the JSON side
 -- is always Base64 encoded.
-ttPayloadBase64 :: Lens' Task (Maybe Text)
-ttPayloadBase64
-  = lens _ttPayloadBase64
-      (\ s a -> s{_ttPayloadBase64 = a})
+ttPayLoadBase64 :: Lens' Task (Maybe Text)
+ttPayLoadBase64
+  = lens _ttPayLoadBase64
+      (\ s a -> s{_ttPayLoadBase64 = a})
 
 -- | Name of the task.
 ttId :: Lens' Task (Maybe Text)
@@ -442,6 +442,6 @@ instance ToJSON Task where
                   ("enqueueTimestamp" .=) <$> _ttEnqueueTimestamp,
                   ("tag" .=) <$> _ttTag, Just ("kind" .= _ttKind),
                   ("queueName" .=) <$> _ttQueueName,
-                  ("payloadBase64" .=) <$> _ttPayloadBase64,
+                  ("payloadBase64" .=) <$> _ttPayLoadBase64,
                   ("id" .=) <$> _ttId,
                   ("leaseTimestamp" .=) <$> _ttLeaseTimestamp])

@@ -41,11 +41,10 @@ module Network.Google.Resource.PubSub.Projects.Topics.Subscriptions.List
     , ptslBearerToken
     , ptslKey
     , ptslPageToken
-    , ptslOauthToken
+    , ptslOAuthToken
     , ptslPageSize
     , ptslFields
     , ptslCallback
-    , ptslAlt
     ) where
 
 import           Network.Google.Prelude
@@ -65,13 +64,13 @@ type ProjectsTopicsSubscriptionsListResource =
                      QueryParam "access_token" Text :>
                        QueryParam "uploadType" Text :>
                          QueryParam "bearer_token" Text :>
-                           QueryParam "key" Text :>
+                           QueryParam "key" Key :>
                              QueryParam "pageToken" Text :>
-                               QueryParam "oauth_token" Text :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "pageSize" Int32 :>
                                    QueryParam "fields" Text :>
                                      QueryParam "callback" Text :>
-                                       QueryParam "alt" Text :>
+                                       QueryParam "alt" AltJSON :>
                                          Get '[JSON]
                                            ListTopicSubscriptionsResponse
 
@@ -88,13 +87,12 @@ data ProjectsTopicsSubscriptionsList' = ProjectsTopicsSubscriptionsList'
     , _ptslUploadType     :: !(Maybe Text)
     , _ptslTopic          :: !Text
     , _ptslBearerToken    :: !(Maybe Text)
-    , _ptslKey            :: !(Maybe Text)
+    , _ptslKey            :: !(Maybe Key)
     , _ptslPageToken      :: !(Maybe Text)
-    , _ptslOauthToken     :: !(Maybe Text)
+    , _ptslOAuthToken     :: !(Maybe OAuthToken)
     , _ptslPageSize       :: !(Maybe Int32)
     , _ptslFields         :: !(Maybe Text)
     , _ptslCallback       :: !(Maybe Text)
-    , _ptslAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsTopicsSubscriptionsList'' with the minimum fields required to make a request.
@@ -123,15 +121,13 @@ data ProjectsTopicsSubscriptionsList' = ProjectsTopicsSubscriptionsList'
 --
 -- * 'ptslPageToken'
 --
--- * 'ptslOauthToken'
+-- * 'ptslOAuthToken'
 --
 -- * 'ptslPageSize'
 --
 -- * 'ptslFields'
 --
 -- * 'ptslCallback'
---
--- * 'ptslAlt'
 projectsTopicsSubscriptionsList'
     :: Text -- ^ 'topic'
     -> ProjectsTopicsSubscriptionsList'
@@ -148,11 +144,10 @@ projectsTopicsSubscriptionsList' pPtslTopic_ =
     , _ptslBearerToken = Nothing
     , _ptslKey = Nothing
     , _ptslPageToken = Nothing
-    , _ptslOauthToken = Nothing
+    , _ptslOAuthToken = Nothing
     , _ptslPageSize = Nothing
     , _ptslFields = Nothing
     , _ptslCallback = Nothing
-    , _ptslAlt = "json"
     }
 
 -- | V1 error format.
@@ -210,7 +205,7 @@ ptslBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ptslKey :: Lens' ProjectsTopicsSubscriptionsList' (Maybe Text)
+ptslKey :: Lens' ProjectsTopicsSubscriptionsList' (Maybe Key)
 ptslKey = lens _ptslKey (\ s a -> s{_ptslKey = a})
 
 -- | The value returned by the last ListTopicSubscriptionsResponse; indicates
@@ -222,10 +217,10 @@ ptslPageToken
       (\ s a -> s{_ptslPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-ptslOauthToken :: Lens' ProjectsTopicsSubscriptionsList' (Maybe Text)
-ptslOauthToken
-  = lens _ptslOauthToken
-      (\ s a -> s{_ptslOauthToken = a})
+ptslOAuthToken :: Lens' ProjectsTopicsSubscriptionsList' (Maybe OAuthToken)
+ptslOAuthToken
+  = lens _ptslOAuthToken
+      (\ s a -> s{_ptslOAuthToken = a})
 
 -- | Maximum number of subscription names to return.
 ptslPageSize :: Lens' ProjectsTopicsSubscriptionsList' (Maybe Int32)
@@ -242,9 +237,10 @@ ptslCallback :: Lens' ProjectsTopicsSubscriptionsList' (Maybe Text)
 ptslCallback
   = lens _ptslCallback (\ s a -> s{_ptslCallback = a})
 
--- | Data format for response.
-ptslAlt :: Lens' ProjectsTopicsSubscriptionsList' Text
-ptslAlt = lens _ptslAlt (\ s a -> s{_ptslAlt = a})
+instance GoogleAuth ProjectsTopicsSubscriptionsList'
+         where
+        authKey = ptslKey . _Just
+        authToken = ptslOAuthToken . _Just
 
 instance GoogleRequest
          ProjectsTopicsSubscriptionsList' where
@@ -263,11 +259,11 @@ instance GoogleRequest
               _ptslBearerToken
               _ptslKey
               _ptslPageToken
-              _ptslOauthToken
+              _ptslOAuthToken
               _ptslPageSize
               _ptslFields
               _ptslCallback
-              (Just _ptslAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

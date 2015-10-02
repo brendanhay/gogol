@@ -32,12 +32,11 @@ module Network.Google.Resource.FusionTables.Table.Get
     -- * Request Lenses
     , ttQuotaUser
     , ttPrettyPrint
-    , ttUserIp
+    , ttUserIP
     , ttKey
-    , ttOauthToken
+    , ttOAuthToken
     , ttTableId
     , ttFields
-    , ttAlt
     ) where
 
 import           Network.Google.FusionTables.Types
@@ -51,10 +50,10 @@ type TableGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Get '[JSON] Table
+                     QueryParam "alt" AltJSON :> Get '[JSON] Table
 
 -- | Retrieves a specific table by its ID.
 --
@@ -62,12 +61,11 @@ type TableGetResource =
 data TableGet' = TableGet'
     { _ttQuotaUser   :: !(Maybe Text)
     , _ttPrettyPrint :: !Bool
-    , _ttUserIp      :: !(Maybe Text)
-    , _ttKey         :: !(Maybe Text)
-    , _ttOauthToken  :: !(Maybe Text)
+    , _ttUserIP      :: !(Maybe Text)
+    , _ttKey         :: !(Maybe Key)
+    , _ttOAuthToken  :: !(Maybe OAuthToken)
     , _ttTableId     :: !Text
     , _ttFields      :: !(Maybe Text)
-    , _ttAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableGet'' with the minimum fields required to make a request.
@@ -78,17 +76,15 @@ data TableGet' = TableGet'
 --
 -- * 'ttPrettyPrint'
 --
--- * 'ttUserIp'
+-- * 'ttUserIP'
 --
 -- * 'ttKey'
 --
--- * 'ttOauthToken'
+-- * 'ttOAuthToken'
 --
 -- * 'ttTableId'
 --
 -- * 'ttFields'
---
--- * 'ttAlt'
 tableGet'
     :: Text -- ^ 'tableId'
     -> TableGet'
@@ -96,12 +92,11 @@ tableGet' pTtTableId_ =
     TableGet'
     { _ttQuotaUser = Nothing
     , _ttPrettyPrint = True
-    , _ttUserIp = Nothing
+    , _ttUserIP = Nothing
     , _ttKey = Nothing
-    , _ttOauthToken = Nothing
+    , _ttOAuthToken = Nothing
     , _ttTableId = pTtTableId_
     , _ttFields = Nothing
-    , _ttAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -119,19 +114,19 @@ ttPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ttUserIp :: Lens' TableGet' (Maybe Text)
-ttUserIp = lens _ttUserIp (\ s a -> s{_ttUserIp = a})
+ttUserIP :: Lens' TableGet' (Maybe Text)
+ttUserIP = lens _ttUserIP (\ s a -> s{_ttUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ttKey :: Lens' TableGet' (Maybe Text)
+ttKey :: Lens' TableGet' (Maybe Key)
 ttKey = lens _ttKey (\ s a -> s{_ttKey = a})
 
 -- | OAuth 2.0 token for the current user.
-ttOauthToken :: Lens' TableGet' (Maybe Text)
-ttOauthToken
-  = lens _ttOauthToken (\ s a -> s{_ttOauthToken = a})
+ttOAuthToken :: Lens' TableGet' (Maybe OAuthToken)
+ttOAuthToken
+  = lens _ttOAuthToken (\ s a -> s{_ttOAuthToken = a})
 
 -- | Identifier for the table being requested.
 ttTableId :: Lens' TableGet' Text
@@ -142,20 +137,20 @@ ttTableId
 ttFields :: Lens' TableGet' (Maybe Text)
 ttFields = lens _ttFields (\ s a -> s{_ttFields = a})
 
--- | Data format for the response.
-ttAlt :: Lens' TableGet' Alt
-ttAlt = lens _ttAlt (\ s a -> s{_ttAlt = a})
+instance GoogleAuth TableGet' where
+        authKey = ttKey . _Just
+        authToken = ttOAuthToken . _Just
 
 instance GoogleRequest TableGet' where
         type Rs TableGet' = Table
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u TableGet'{..}
-          = go _ttQuotaUser (Just _ttPrettyPrint) _ttUserIp
+          = go _ttQuotaUser (Just _ttPrettyPrint) _ttUserIP
               _ttKey
-              _ttOauthToken
+              _ttOAuthToken
               _ttTableId
               _ttFields
-              (Just _ttAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy TableGetResource) r
                       u

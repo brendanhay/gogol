@@ -27,43 +27,43 @@ module Network.Google.DeploymentManager
 
     -- * REST Resources
 
-    -- ** DeploymentmanagerDeploymentsDelete
+    -- ** DeploymentManagerDeploymentsDelete
     , module Network.Google.Resource.DeploymentManager.Deployments.Delete
 
-    -- ** DeploymentmanagerDeploymentsGet
+    -- ** DeploymentManagerDeploymentsGet
     , module Network.Google.Resource.DeploymentManager.Deployments.Get
 
-    -- ** DeploymentmanagerDeploymentsInsert
+    -- ** DeploymentManagerDeploymentsInsert
     , module Network.Google.Resource.DeploymentManager.Deployments.Insert
 
-    -- ** DeploymentmanagerDeploymentsList
+    -- ** DeploymentManagerDeploymentsList
     , module Network.Google.Resource.DeploymentManager.Deployments.List
 
-    -- ** DeploymentmanagerDeploymentsPatch
+    -- ** DeploymentManagerDeploymentsPatch
     , module Network.Google.Resource.DeploymentManager.Deployments.Patch
 
-    -- ** DeploymentmanagerDeploymentsUpdate
+    -- ** DeploymentManagerDeploymentsUpdate
     , module Network.Google.Resource.DeploymentManager.Deployments.Update
 
-    -- ** DeploymentmanagerManifestsGet
+    -- ** DeploymentManagerManifestsGet
     , module Network.Google.Resource.DeploymentManager.Manifests.Get
 
-    -- ** DeploymentmanagerManifestsList
+    -- ** DeploymentManagerManifestsList
     , module Network.Google.Resource.DeploymentManager.Manifests.List
 
-    -- ** DeploymentmanagerOperationsGet
+    -- ** DeploymentManagerOperationsGet
     , module Network.Google.Resource.DeploymentManager.Operations.Get
 
-    -- ** DeploymentmanagerOperationsList
+    -- ** DeploymentManagerOperationsList
     , module Network.Google.Resource.DeploymentManager.Operations.List
 
-    -- ** DeploymentmanagerResourcesGet
+    -- ** DeploymentManagerResourcesGet
     , module Network.Google.Resource.DeploymentManager.Resources.Get
 
-    -- ** DeploymentmanagerResourcesList
+    -- ** DeploymentManagerResourcesList
     , module Network.Google.Resource.DeploymentManager.Resources.List
 
-    -- ** DeploymentmanagerTypesList
+    -- ** DeploymentManagerTypesList
     , module Network.Google.Resource.DeploymentManager.Types.List
 
     -- * Types
@@ -81,11 +81,11 @@ module Network.Google.DeploymentManager
     , owdValue
     , owdKey
 
-    -- ** DeploymentmanagerDeploymentsPatchDeletePolicy
-    , DeploymentmanagerDeploymentsPatchDeletePolicy (..)
+    -- ** DeploymentManagerDeploymentsPatchDeletePolicy
+    , DeploymentManagerDeploymentsPatchDeletePolicy (..)
 
-    -- ** DeploymentmanagerDeploymentsPatchUpdatePolicy
-    , DeploymentmanagerDeploymentsPatchUpdatePolicy (..)
+    -- ** DeploymentManagerDeploymentsPatchUpdatePolicy
+    , DeploymentManagerDeploymentsPatchUpdatePolicy (..)
 
     -- ** OperationsListResponse
     , OperationsListResponse
@@ -99,11 +99,11 @@ module Network.Google.DeploymentManager
     , tlrNextPageToken
     , tlrTypes
 
-    -- ** DeploymentmanagerDeploymentsPatchCreatePolicy
-    , DeploymentmanagerDeploymentsPatchCreatePolicy (..)
+    -- ** DeploymentManagerDeploymentsPatchCreatePolicy
+    , DeploymentManagerDeploymentsPatchCreatePolicy (..)
 
-    -- ** DeploymentmanagerDeploymentsUpdateCreatePolicy
-    , DeploymentmanagerDeploymentsUpdateCreatePolicy (..)
+    -- ** DeploymentManagerDeploymentsUpdateCreatePolicy
+    , DeploymentManagerDeploymentsUpdateCreatePolicy (..)
 
     -- ** Operation
     , Operation
@@ -115,10 +115,10 @@ module Network.Google.DeploymentManager
     , oStartTime
     , oKind
     , oError
-    , oHttpErrorMessage
+    , oHTTPErrorMessage
     , oZone
     , oWarnings
-    , oHttpErrorStatusCode
+    , oHTTPErrorStatusCode
     , oUser
     , oSelfLink
     , oName
@@ -137,11 +137,11 @@ module Network.Google.DeploymentManager
     , rlrNextPageToken
     , rlrResources
 
-    -- ** DeploymentmanagerDeploymentsUpdateUpdatePolicy
-    , DeploymentmanagerDeploymentsUpdateUpdatePolicy (..)
+    -- ** DeploymentManagerDeploymentsUpdateUpdatePolicy
+    , DeploymentManagerDeploymentsUpdateUpdatePolicy (..)
 
-    -- ** DeploymentmanagerDeploymentsUpdateDeletePolicy
-    , DeploymentmanagerDeploymentsUpdateDeletePolicy (..)
+    -- ** DeploymentManagerDeploymentsUpdateDeletePolicy
+    , DeploymentManagerDeploymentsUpdateDeletePolicy (..)
 
     -- ** DeploymentUpdate
     , DeploymentUpdate
@@ -175,7 +175,7 @@ module Network.Google.DeploymentManager
     , Resource
     , resource
     , rInsertTime
-    , rUrl
+    , rURL
     , rUpdateTime
     , rName
     , rManifest
@@ -243,9 +243,6 @@ module Network.Google.DeploymentManager
     , targetConfiguration
     , tcConfig
     , tcImports
-
-    -- ** Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.DeploymentManager.Types

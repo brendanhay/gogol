@@ -33,12 +33,12 @@ module Network.Google.Resource.Directory.Users.Aliases.Watch
     , uawEvent
     , uawQuotaUser
     , uawPrettyPrint
-    , uawUserIp
+    , uawUserIP
+    , uawChannel
     , uawKey
-    , uawOauthToken
+    , uawOAuthToken
     , uawUserKey
     , uawFields
-    , uawAlt
     ) where
 
 import           Network.Google.AdminDirectory.Types
@@ -55,10 +55,11 @@ type UsersAliasesWatchResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Post '[JSON] Channel
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] Channel :> Post '[JSON] Channel
 
 -- | Watch for changes in user aliases list
 --
@@ -67,12 +68,12 @@ data UsersAliasesWatch' = UsersAliasesWatch'
     { _uawEvent       :: !(Maybe DirectoryUsersAliasesWatchEvent)
     , _uawQuotaUser   :: !(Maybe Text)
     , _uawPrettyPrint :: !Bool
-    , _uawUserIp      :: !(Maybe Text)
-    , _uawKey         :: !(Maybe Text)
-    , _uawOauthToken  :: !(Maybe Text)
+    , _uawUserIP      :: !(Maybe Text)
+    , _uawChannel     :: !Channel
+    , _uawKey         :: !(Maybe Key)
+    , _uawOAuthToken  :: !(Maybe OAuthToken)
     , _uawUserKey     :: !Text
     , _uawFields      :: !(Maybe Text)
-    , _uawAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersAliasesWatch'' with the minimum fields required to make a request.
@@ -85,31 +86,32 @@ data UsersAliasesWatch' = UsersAliasesWatch'
 --
 -- * 'uawPrettyPrint'
 --
--- * 'uawUserIp'
+-- * 'uawUserIP'
+--
+-- * 'uawChannel'
 --
 -- * 'uawKey'
 --
--- * 'uawOauthToken'
+-- * 'uawOAuthToken'
 --
 -- * 'uawUserKey'
 --
 -- * 'uawFields'
---
--- * 'uawAlt'
 usersAliasesWatch'
-    :: Text -- ^ 'userKey'
+    :: Channel -- ^ 'Channel'
+    -> Text -- ^ 'userKey'
     -> UsersAliasesWatch'
-usersAliasesWatch' pUawUserKey_ =
+usersAliasesWatch' pUawChannel_ pUawUserKey_ =
     UsersAliasesWatch'
     { _uawEvent = Nothing
     , _uawQuotaUser = Nothing
     , _uawPrettyPrint = True
-    , _uawUserIp = Nothing
+    , _uawUserIP = Nothing
+    , _uawChannel = pUawChannel_
     , _uawKey = Nothing
-    , _uawOauthToken = Nothing
+    , _uawOAuthToken = Nothing
     , _uawUserKey = pUawUserKey_
     , _uawFields = Nothing
-    , _uawAlt = JSON
     }
 
 -- | Event on which subscription is intended (if subscribing)
@@ -131,21 +133,26 @@ uawPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-uawUserIp :: Lens' UsersAliasesWatch' (Maybe Text)
-uawUserIp
-  = lens _uawUserIp (\ s a -> s{_uawUserIp = a})
+uawUserIP :: Lens' UsersAliasesWatch' (Maybe Text)
+uawUserIP
+  = lens _uawUserIP (\ s a -> s{_uawUserIP = a})
+
+-- | Multipart request metadata.
+uawChannel :: Lens' UsersAliasesWatch' Channel
+uawChannel
+  = lens _uawChannel (\ s a -> s{_uawChannel = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-uawKey :: Lens' UsersAliasesWatch' (Maybe Text)
+uawKey :: Lens' UsersAliasesWatch' (Maybe Key)
 uawKey = lens _uawKey (\ s a -> s{_uawKey = a})
 
 -- | OAuth 2.0 token for the current user.
-uawOauthToken :: Lens' UsersAliasesWatch' (Maybe Text)
-uawOauthToken
-  = lens _uawOauthToken
-      (\ s a -> s{_uawOauthToken = a})
+uawOAuthToken :: Lens' UsersAliasesWatch' (Maybe OAuthToken)
+uawOAuthToken
+  = lens _uawOAuthToken
+      (\ s a -> s{_uawOAuthToken = a})
 
 -- | Email or immutable Id of the user
 uawUserKey :: Lens' UsersAliasesWatch' Text
@@ -157,21 +164,22 @@ uawFields :: Lens' UsersAliasesWatch' (Maybe Text)
 uawFields
   = lens _uawFields (\ s a -> s{_uawFields = a})
 
--- | Data format for the response.
-uawAlt :: Lens' UsersAliasesWatch' Alt
-uawAlt = lens _uawAlt (\ s a -> s{_uawAlt = a})
+instance GoogleAuth UsersAliasesWatch' where
+        authKey = uawKey . _Just
+        authToken = uawOAuthToken . _Just
 
 instance GoogleRequest UsersAliasesWatch' where
         type Rs UsersAliasesWatch' = Channel
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u UsersAliasesWatch'{..}
           = go _uawEvent _uawQuotaUser (Just _uawPrettyPrint)
-              _uawUserIp
+              _uawUserIP
               _uawKey
-              _uawOauthToken
+              _uawOAuthToken
               _uawUserKey
               _uawFields
-              (Just _uawAlt)
+              (Just AltJSON)
+              _uawChannel
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersAliasesWatchResource)

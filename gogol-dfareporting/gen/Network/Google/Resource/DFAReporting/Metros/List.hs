@@ -32,12 +32,11 @@ module Network.Google.Resource.DFAReporting.Metros.List
     -- * Request Lenses
     , mlQuotaUser
     , mlPrettyPrint
-    , mlUserIp
+    , mlUserIP
     , mlProfileId
     , mlKey
-    , mlOauthToken
+    , mlOAuthToken
     , mlFields
-    , mlAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,10 +51,10 @@ type MetrosListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :>
+                       QueryParam "alt" AltJSON :>
                          Get '[JSON] MetrosListResponse
 
 -- | Retrieves a list of metros.
@@ -64,12 +63,11 @@ type MetrosListResource =
 data MetrosList' = MetrosList'
     { _mlQuotaUser   :: !(Maybe Text)
     , _mlPrettyPrint :: !Bool
-    , _mlUserIp      :: !(Maybe Text)
+    , _mlUserIP      :: !(Maybe Text)
     , _mlProfileId   :: !Int64
-    , _mlKey         :: !(Maybe Text)
-    , _mlOauthToken  :: !(Maybe Text)
+    , _mlKey         :: !(Maybe Key)
+    , _mlOAuthToken  :: !(Maybe OAuthToken)
     , _mlFields      :: !(Maybe Text)
-    , _mlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MetrosList'' with the minimum fields required to make a request.
@@ -80,17 +78,15 @@ data MetrosList' = MetrosList'
 --
 -- * 'mlPrettyPrint'
 --
--- * 'mlUserIp'
+-- * 'mlUserIP'
 --
 -- * 'mlProfileId'
 --
 -- * 'mlKey'
 --
--- * 'mlOauthToken'
+-- * 'mlOAuthToken'
 --
 -- * 'mlFields'
---
--- * 'mlAlt'
 metrosList'
     :: Int64 -- ^ 'profileId'
     -> MetrosList'
@@ -98,12 +94,11 @@ metrosList' pMlProfileId_ =
     MetrosList'
     { _mlQuotaUser = Nothing
     , _mlPrettyPrint = True
-    , _mlUserIp = Nothing
+    , _mlUserIP = Nothing
     , _mlProfileId = pMlProfileId_
     , _mlKey = Nothing
-    , _mlOauthToken = Nothing
+    , _mlOAuthToken = Nothing
     , _mlFields = Nothing
-    , _mlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -121,8 +116,8 @@ mlPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mlUserIp :: Lens' MetrosList' (Maybe Text)
-mlUserIp = lens _mlUserIp (\ s a -> s{_mlUserIp = a})
+mlUserIP :: Lens' MetrosList' (Maybe Text)
+mlUserIP = lens _mlUserIP (\ s a -> s{_mlUserIP = a})
 
 -- | User profile ID associated with this request.
 mlProfileId :: Lens' MetrosList' Int64
@@ -132,32 +127,32 @@ mlProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mlKey :: Lens' MetrosList' (Maybe Text)
+mlKey :: Lens' MetrosList' (Maybe Key)
 mlKey = lens _mlKey (\ s a -> s{_mlKey = a})
 
 -- | OAuth 2.0 token for the current user.
-mlOauthToken :: Lens' MetrosList' (Maybe Text)
-mlOauthToken
-  = lens _mlOauthToken (\ s a -> s{_mlOauthToken = a})
+mlOAuthToken :: Lens' MetrosList' (Maybe OAuthToken)
+mlOAuthToken
+  = lens _mlOAuthToken (\ s a -> s{_mlOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 mlFields :: Lens' MetrosList' (Maybe Text)
 mlFields = lens _mlFields (\ s a -> s{_mlFields = a})
 
--- | Data format for the response.
-mlAlt :: Lens' MetrosList' Alt
-mlAlt = lens _mlAlt (\ s a -> s{_mlAlt = a})
+instance GoogleAuth MetrosList' where
+        authKey = mlKey . _Just
+        authToken = mlOAuthToken . _Just
 
 instance GoogleRequest MetrosList' where
         type Rs MetrosList' = MetrosListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u MetrosList'{..}
-          = go _mlQuotaUser (Just _mlPrettyPrint) _mlUserIp
+          = go _mlQuotaUser (Just _mlPrettyPrint) _mlUserIP
               _mlProfileId
               _mlKey
-              _mlOauthToken
+              _mlOAuthToken
               _mlFields
-              (Just _mlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy MetrosListResource)
                       r

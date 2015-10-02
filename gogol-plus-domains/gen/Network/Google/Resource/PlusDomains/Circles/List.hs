@@ -32,14 +32,13 @@ module Network.Google.Resource.PlusDomains.Circles.List
     -- * Request Lenses
     , clQuotaUser
     , clPrettyPrint
-    , clUserIp
+    , clUserIP
     , clUserId
     , clKey
     , clPageToken
-    , clOauthToken
+    , clOAuthToken
     , clMaxResults
     , clFields
-    , clAlt
     ) where
 
 import           Network.Google.PlusDomains.Types
@@ -54,12 +53,12 @@ type CirclesListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "maxResults" Word32 :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Get '[JSON] CircleFeed
+                           QueryParam "alt" AltJSON :> Get '[JSON] CircleFeed
 
 -- | List all of the circles for a user.
 --
@@ -67,14 +66,13 @@ type CirclesListResource =
 data CirclesList' = CirclesList'
     { _clQuotaUser   :: !(Maybe Text)
     , _clPrettyPrint :: !Bool
-    , _clUserIp      :: !(Maybe Text)
+    , _clUserIP      :: !(Maybe Text)
     , _clUserId      :: !Text
-    , _clKey         :: !(Maybe Text)
+    , _clKey         :: !(Maybe Key)
     , _clPageToken   :: !(Maybe Text)
-    , _clOauthToken  :: !(Maybe Text)
+    , _clOAuthToken  :: !(Maybe OAuthToken)
     , _clMaxResults  :: !Word32
     , _clFields      :: !(Maybe Text)
-    , _clAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CirclesList'' with the minimum fields required to make a request.
@@ -85,7 +83,7 @@ data CirclesList' = CirclesList'
 --
 -- * 'clPrettyPrint'
 --
--- * 'clUserIp'
+-- * 'clUserIP'
 --
 -- * 'clUserId'
 --
@@ -93,13 +91,11 @@ data CirclesList' = CirclesList'
 --
 -- * 'clPageToken'
 --
--- * 'clOauthToken'
+-- * 'clOAuthToken'
 --
 -- * 'clMaxResults'
 --
 -- * 'clFields'
---
--- * 'clAlt'
 circlesList'
     :: Text -- ^ 'userId'
     -> CirclesList'
@@ -107,14 +103,13 @@ circlesList' pClUserId_ =
     CirclesList'
     { _clQuotaUser = Nothing
     , _clPrettyPrint = True
-    , _clUserIp = Nothing
+    , _clUserIP = Nothing
     , _clUserId = pClUserId_
     , _clKey = Nothing
     , _clPageToken = Nothing
-    , _clOauthToken = Nothing
+    , _clOAuthToken = Nothing
     , _clMaxResults = 20
     , _clFields = Nothing
-    , _clAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -132,8 +127,8 @@ clPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-clUserIp :: Lens' CirclesList' (Maybe Text)
-clUserIp = lens _clUserIp (\ s a -> s{_clUserIp = a})
+clUserIP :: Lens' CirclesList' (Maybe Text)
+clUserIP = lens _clUserIP (\ s a -> s{_clUserIP = a})
 
 -- | The ID of the user to get circles for. The special value \"me\" can be
 -- used to indicate the authenticated user.
@@ -143,7 +138,7 @@ clUserId = lens _clUserId (\ s a -> s{_clUserId = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-clKey :: Lens' CirclesList' (Maybe Text)
+clKey :: Lens' CirclesList' (Maybe Key)
 clKey = lens _clKey (\ s a -> s{_clKey = a})
 
 -- | The continuation token, which is used to page through large result sets.
@@ -154,9 +149,9 @@ clPageToken
   = lens _clPageToken (\ s a -> s{_clPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-clOauthToken :: Lens' CirclesList' (Maybe Text)
-clOauthToken
-  = lens _clOauthToken (\ s a -> s{_clOauthToken = a})
+clOAuthToken :: Lens' CirclesList' (Maybe OAuthToken)
+clOAuthToken
+  = lens _clOAuthToken (\ s a -> s{_clOAuthToken = a})
 
 -- | The maximum number of circles to include in the response, which is used
 -- for paging. For any response, the actual number returned might be less
@@ -169,22 +164,22 @@ clMaxResults
 clFields :: Lens' CirclesList' (Maybe Text)
 clFields = lens _clFields (\ s a -> s{_clFields = a})
 
--- | Data format for the response.
-clAlt :: Lens' CirclesList' Alt
-clAlt = lens _clAlt (\ s a -> s{_clAlt = a})
+instance GoogleAuth CirclesList' where
+        authKey = clKey . _Just
+        authToken = clOAuthToken . _Just
 
 instance GoogleRequest CirclesList' where
         type Rs CirclesList' = CircleFeed
         request = requestWithRoute defReq plusDomainsURL
         requestWithRoute r u CirclesList'{..}
-          = go _clQuotaUser (Just _clPrettyPrint) _clUserIp
+          = go _clQuotaUser (Just _clPrettyPrint) _clUserIP
               _clUserId
               _clKey
               _clPageToken
-              _clOauthToken
+              _clOAuthToken
               (Just _clMaxResults)
               _clFields
-              (Just _clAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CirclesListResource)

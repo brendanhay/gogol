@@ -25,7 +25,7 @@ data ColumnList = ColumnList
     { _clTotalItems    :: !(Maybe Int32)
     , _clNextPageToken :: !(Maybe Text)
     , _clKind          :: !Text
-    , _clItems         :: !(Maybe [Maybe Column])
+    , _clItems         :: !(Maybe [Column])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ColumnList' with the minimum fields required to make a request.
@@ -67,7 +67,7 @@ clKind :: Lens' ColumnList Text
 clKind = lens _clKind (\ s a -> s{_clKind = a})
 
 -- | List of all requested columns.
-clItems :: Lens' ColumnList [Maybe Column]
+clItems :: Lens' ColumnList [Column]
 clItems
   = lens _clItems (\ s a -> s{_clItems = a}) . _Default
       . _Coerce
@@ -95,7 +95,7 @@ instance ToJSON ColumnList where
 data TableList = TableList
     { _tlNextPageToken :: !(Maybe Text)
     , _tlKind          :: !Text
-    , _tlItems         :: !(Maybe [Maybe Table])
+    , _tlItems         :: !(Maybe [Table])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableList' with the minimum fields required to make a request.
@@ -129,7 +129,7 @@ tlKind :: Lens' TableList Text
 tlKind = lens _tlKind (\ s a -> s{_tlKind = a})
 
 -- | List of all requested tables.
-tlItems :: Lens' TableList [Maybe Table]
+tlItems :: Lens' TableList [Table]
 tlItems
   = lens _tlItems (\ s a -> s{_tlItems = a}) . _Default
       . _Coerce
@@ -154,7 +154,7 @@ instance ToJSON TableList where
 --
 -- /See:/ 'styleFunction' smart constructor.
 data StyleFunction = StyleFunction
-    { _sfBuckets    :: !(Maybe [Maybe Bucket])
+    { _sfBuckets    :: !(Maybe [Bucket])
     , _sfKind       :: !(Maybe Text)
     , _sfGradient   :: !(Maybe StyleFunctionGradient)
     , _sfColumnName :: !(Maybe Text)
@@ -183,7 +183,7 @@ styleFunction =
 
 -- | Bucket function that assigns a style based on the range a column value
 -- falls into.
-sfBuckets :: Lens' StyleFunction [Maybe Bucket]
+sfBuckets :: Lens' StyleFunction [Bucket]
 sfBuckets
   = lens _sfBuckets (\ s a -> s{_sfBuckets = a}) .
       _Default
@@ -280,66 +280,66 @@ instance ToJSON ColumnBaseColumn where
 
 -- | Represents a response to a SQL statement.
 --
--- /See:/ 'sqlresponse' smart constructor.
-data Sqlresponse = Sqlresponse
-    { _sKind    :: !Text
-    , _sRows    :: !(Maybe [[JSONValue]])
-    , _sColumns :: !(Maybe [Text])
+-- /See:/ 'sQLresponse' smart constructor.
+data SQLresponse = SQLresponse
+    { _sqlKind    :: !Text
+    , _sqlRows    :: !(Maybe [[JSONValue]])
+    , _sqlColumns :: !(Maybe [Text])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Sqlresponse' with the minimum fields required to make a request.
+-- | Creates a value of 'SQLresponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sKind'
+-- * 'sqlKind'
 --
--- * 'sRows'
+-- * 'sqlRows'
 --
--- * 'sColumns'
-sqlresponse
-    :: Sqlresponse
-sqlresponse =
-    Sqlresponse
-    { _sKind = "fusiontables#sqlresponse"
-    , _sRows = Nothing
-    , _sColumns = Nothing
+-- * 'sqlColumns'
+sQLresponse
+    :: SQLresponse
+sQLresponse =
+    SQLresponse
+    { _sqlKind = "fusiontables#sqlresponse"
+    , _sqlRows = Nothing
+    , _sqlColumns = Nothing
     }
 
 -- | The kind of item this is. For responses to SQL queries, this is always
 -- fusiontables#sqlresponse.
-sKind :: Lens' Sqlresponse Text
-sKind = lens _sKind (\ s a -> s{_sKind = a})
+sqlKind :: Lens' SQLresponse Text
+sqlKind = lens _sqlKind (\ s a -> s{_sqlKind = a})
 
 -- | The rows in the table. For each cell we print out whatever cell value
 -- (e.g., numeric, string) exists. Thus it is important that each cell
 -- contains only one value.
-sRows :: Lens' Sqlresponse [[JSONValue]]
-sRows
-  = lens _sRows (\ s a -> s{_sRows = a}) . _Default .
-      _Coerce
+sqlRows :: Lens' SQLresponse [[JSONValue]]
+sqlRows
+  = lens _sqlRows (\ s a -> s{_sqlRows = a}) . _Default
+      . _Coerce
 
 -- | Columns in the table.
-sColumns :: Lens' Sqlresponse [Text]
-sColumns
-  = lens _sColumns (\ s a -> s{_sColumns = a}) .
+sqlColumns :: Lens' SQLresponse [Text]
+sqlColumns
+  = lens _sqlColumns (\ s a -> s{_sqlColumns = a}) .
       _Default
       . _Coerce
 
-instance FromJSON Sqlresponse where
+instance FromJSON SQLresponse where
         parseJSON
-          = withObject "Sqlresponse"
+          = withObject "SQLresponse"
               (\ o ->
-                 Sqlresponse <$>
+                 SQLresponse <$>
                    (o .:? "kind" .!= "fusiontables#sqlresponse") <*>
                      (o .:? "rows" .!= mempty)
                      <*> (o .:? "columns" .!= mempty))
 
-instance ToJSON Sqlresponse where
-        toJSON Sqlresponse{..}
+instance ToJSON SQLresponse where
+        toJSON SQLresponse{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _sKind), ("rows" .=) <$> _sRows,
-                  ("columns" .=) <$> _sColumns])
+                 [Just ("kind" .= _sqlKind), ("rows" .=) <$> _sqlRows,
+                  ("columns" .=) <$> _sqlColumns])
 
 -- | Represents a list of styles for a given table.
 --
@@ -348,7 +348,7 @@ data StyleSettingList = StyleSettingList
     { _sslTotalItems    :: !(Maybe Int32)
     , _sslNextPageToken :: !(Maybe Text)
     , _sslKind          :: !Text
-    , _sslItems         :: !(Maybe [Maybe StyleSetting])
+    , _sslItems         :: !(Maybe [StyleSetting])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StyleSettingList' with the minimum fields required to make a request.
@@ -391,7 +391,7 @@ sslKind :: Lens' StyleSettingList Text
 sslKind = lens _sslKind (\ s a -> s{_sslKind = a})
 
 -- | All requested style settings.
-sslItems :: Lens' StyleSettingList [Maybe StyleSetting]
+sslItems :: Lens' StyleSettingList [StyleSetting]
 sslItems
   = lens _sslItems (\ s a -> s{_sslItems = a}) .
       _Default
@@ -554,9 +554,9 @@ instance ToJSON Line where
 --
 -- /See:/ 'styleSetting' smart constructor.
 data StyleSetting = StyleSetting
-    { _ssPolylineOptions :: !(Maybe (Maybe LineStyle))
-    , _ssPolygonOptions  :: !(Maybe (Maybe PolygonStyle))
-    , _ssMarkerOptions   :: !(Maybe (Maybe PointStyle))
+    { _ssPolylineOptions :: !(Maybe LineStyle)
+    , _ssPolygonOptions  :: !(Maybe PolygonStyle)
+    , _ssMarkerOptions   :: !(Maybe PointStyle)
     , _ssKind            :: !Text
     , _ssName            :: !(Maybe Text)
     , _ssStyleId         :: !(Maybe Int32)
@@ -594,19 +594,19 @@ styleSetting =
     }
 
 -- | Style definition for lines in the table.
-ssPolylineOptions :: Lens' StyleSetting (Maybe (Maybe LineStyle))
+ssPolylineOptions :: Lens' StyleSetting (Maybe LineStyle)
 ssPolylineOptions
   = lens _ssPolylineOptions
       (\ s a -> s{_ssPolylineOptions = a})
 
 -- | Style definition for polygons in the table.
-ssPolygonOptions :: Lens' StyleSetting (Maybe (Maybe PolygonStyle))
+ssPolygonOptions :: Lens' StyleSetting (Maybe PolygonStyle)
 ssPolygonOptions
   = lens _ssPolygonOptions
       (\ s a -> s{_ssPolygonOptions = a})
 
 -- | Style definition for points in the table.
-ssMarkerOptions :: Lens' StyleSetting (Maybe (Maybe PointStyle))
+ssMarkerOptions :: Lens' StyleSetting (Maybe PointStyle)
 ssMarkerOptions
   = lens _ssMarkerOptions
       (\ s a -> s{_ssMarkerOptions = a})
@@ -762,7 +762,7 @@ data TaskList = TaskList
     { _tTotalItems    :: !(Maybe Int32)
     , _tNextPageToken :: !(Maybe Text)
     , _tKind          :: !Text
-    , _tItems         :: !(Maybe [Maybe Task])
+    , _tItems         :: !(Maybe [Task])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TaskList' with the minimum fields required to make a request.
@@ -803,7 +803,7 @@ tKind :: Lens' TaskList Text
 tKind = lens _tKind (\ s a -> s{_tKind = a})
 
 -- | List of all requested tasks.
-tItems :: Lens' TaskList [Maybe Task]
+tItems :: Lens' TaskList [Task]
 tItems
   = lens _tItems (\ s a -> s{_tItems = a}) . _Default .
       _Coerce
@@ -832,7 +832,7 @@ data TemplateList = TemplateList
     { _temTotalItems    :: !(Maybe Int32)
     , _temNextPageToken :: !(Maybe Text)
     , _temKind          :: !Text
-    , _temItems         :: !(Maybe [Maybe Template])
+    , _temItems         :: !(Maybe [Template])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TemplateList' with the minimum fields required to make a request.
@@ -875,7 +875,7 @@ temKind :: Lens' TemplateList Text
 temKind = lens _temKind (\ s a -> s{_temKind = a})
 
 -- | List of all requested templates.
-temItems :: Lens' TemplateList [Maybe Template]
+temItems :: Lens' TemplateList [Template]
 temItems
   = lens _temItems (\ s a -> s{_temItems = a}) .
       _Default
@@ -1236,7 +1236,7 @@ instance ToJSON Template where
 -- /See:/ 'pointStyle' smart constructor.
 data PointStyle = PointStyle
     { _psIconName   :: !(Maybe Text)
-    , _psIconStyler :: !(Maybe (Maybe StyleFunction))
+    , _psIconStyler :: !(Maybe StyleFunction)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PointStyle' with the minimum fields required to make a request.
@@ -1261,7 +1261,7 @@ psIconName
   = lens _psIconName (\ s a -> s{_psIconName = a})
 
 -- | Column or a bucket value from which the icon name is to be determined.
-psIconStyler :: Lens' PointStyle (Maybe (Maybe StyleFunction))
+psIconStyler :: Lens' PointStyle (Maybe StyleFunction)
 psIconStyler
   = lens _psIconStyler (\ s a -> s{_psIconStyler = a})
 
@@ -1283,13 +1283,13 @@ instance ToJSON PointStyle where
 --
 -- /See:/ 'polygonStyle' smart constructor.
 data PolygonStyle = PolygonStyle
-    { _psFillColorStyler    :: !(Maybe (Maybe StyleFunction))
+    { _psFillColorStyler    :: !(Maybe StyleFunction)
     , _psFillColor          :: !(Maybe Text)
-    , _psStrokeColorStyler  :: !(Maybe (Maybe StyleFunction))
+    , _psStrokeColorStyler  :: !(Maybe StyleFunction)
     , _psStrokeWeight       :: !(Maybe Int32)
     , _psStrokeOpacity      :: !(Maybe Double)
     , _psFillOpacity        :: !(Maybe Double)
-    , _psStrokeWeightStyler :: !(Maybe (Maybe StyleFunction))
+    , _psStrokeWeightStyler :: !(Maybe StyleFunction)
     , _psStrokeColor        :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1328,7 +1328,7 @@ polygonStyle =
 
 -- | Column-value, gradient, or bucket styler that is used to determine the
 -- interior color and opacity of the polygon.
-psFillColorStyler :: Lens' PolygonStyle (Maybe (Maybe StyleFunction))
+psFillColorStyler :: Lens' PolygonStyle (Maybe StyleFunction)
 psFillColorStyler
   = lens _psFillColorStyler
       (\ s a -> s{_psFillColorStyler = a})
@@ -1340,7 +1340,7 @@ psFillColor
 
 -- | Column-value, gradient or buckets styler that is used to determine the
 -- border color and opacity.
-psStrokeColorStyler :: Lens' PolygonStyle (Maybe (Maybe StyleFunction))
+psStrokeColorStyler :: Lens' PolygonStyle (Maybe StyleFunction)
 psStrokeColorStyler
   = lens _psStrokeColorStyler
       (\ s a -> s{_psStrokeColorStyler = a})
@@ -1366,7 +1366,7 @@ psFillOpacity
 
 -- | Column-value or bucket styler that is used to determine the width of the
 -- polygon border.
-psStrokeWeightStyler :: Lens' PolygonStyle (Maybe (Maybe StyleFunction))
+psStrokeWeightStyler :: Lens' PolygonStyle (Maybe StyleFunction)
 psStrokeWeightStyler
   = lens _psStrokeWeightStyler
       (\ s a -> s{_psStrokeWeightStyler = a})
@@ -1469,14 +1469,14 @@ instance ToJSON StyleFunctionGradient where
 data Table = Table
     { _tabIsExportable               :: !(Maybe Bool)
     , _tabKind                       :: !Text
-    , _tabColumnPropertiesJsonSchema :: !(Maybe Text)
-    , _tabTablePropertiesJsonSchema  :: !(Maybe Text)
+    , _tabColumnPropertiesJSONSchema :: !(Maybe Text)
+    , _tabTablePropertiesJSONSchema  :: !(Maybe Text)
     , _tabName                       :: !(Maybe Text)
-    , _tabTablePropertiesJson        :: !(Maybe Text)
-    , _tabColumns                    :: !(Maybe [Maybe Column])
+    , _tabTablePropertiesJSON        :: !(Maybe Text)
+    , _tabColumns                    :: !(Maybe [Column])
     , _tabBaseTableIds               :: !(Maybe [Text])
     , _tabTableId                    :: !(Maybe Text)
-    , _tabSql                        :: !(Maybe Text)
+    , _tabSQL                        :: !(Maybe Text)
     , _tabDescription                :: !(Maybe Text)
     , _tabAttribution                :: !(Maybe Text)
     , _tabAttributionLink            :: !(Maybe Text)
@@ -1490,13 +1490,13 @@ data Table = Table
 --
 -- * 'tabKind'
 --
--- * 'tabColumnPropertiesJsonSchema'
+-- * 'tabColumnPropertiesJSONSchema'
 --
--- * 'tabTablePropertiesJsonSchema'
+-- * 'tabTablePropertiesJSONSchema'
 --
 -- * 'tabName'
 --
--- * 'tabTablePropertiesJson'
+-- * 'tabTablePropertiesJSON'
 --
 -- * 'tabColumns'
 --
@@ -1504,7 +1504,7 @@ data Table = Table
 --
 -- * 'tabTableId'
 --
--- * 'tabSql'
+-- * 'tabSQL'
 --
 -- * 'tabDescription'
 --
@@ -1517,14 +1517,14 @@ table =
     Table
     { _tabIsExportable = Nothing
     , _tabKind = "fusiontables#table"
-    , _tabColumnPropertiesJsonSchema = Nothing
-    , _tabTablePropertiesJsonSchema = Nothing
+    , _tabColumnPropertiesJSONSchema = Nothing
+    , _tabTablePropertiesJSONSchema = Nothing
     , _tabName = Nothing
-    , _tabTablePropertiesJson = Nothing
+    , _tabTablePropertiesJSON = Nothing
     , _tabColumns = Nothing
     , _tabBaseTableIds = Nothing
     , _tabTableId = Nothing
-    , _tabSql = Nothing
+    , _tabSQL = Nothing
     , _tabDescription = Nothing
     , _tabAttribution = Nothing
     , _tabAttributionLink = Nothing
@@ -1542,29 +1542,29 @@ tabKind :: Lens' Table Text
 tabKind = lens _tabKind (\ s a -> s{_tabKind = a})
 
 -- | Default JSON schema for validating all JSON column properties.
-tabColumnPropertiesJsonSchema :: Lens' Table (Maybe Text)
-tabColumnPropertiesJsonSchema
-  = lens _tabColumnPropertiesJsonSchema
-      (\ s a -> s{_tabColumnPropertiesJsonSchema = a})
+tabColumnPropertiesJSONSchema :: Lens' Table (Maybe Text)
+tabColumnPropertiesJSONSchema
+  = lens _tabColumnPropertiesJSONSchema
+      (\ s a -> s{_tabColumnPropertiesJSONSchema = a})
 
 -- | JSON schema for validating the JSON table properties.
-tabTablePropertiesJsonSchema :: Lens' Table (Maybe Text)
-tabTablePropertiesJsonSchema
-  = lens _tabTablePropertiesJsonSchema
-      (\ s a -> s{_tabTablePropertiesJsonSchema = a})
+tabTablePropertiesJSONSchema :: Lens' Table (Maybe Text)
+tabTablePropertiesJSONSchema
+  = lens _tabTablePropertiesJSONSchema
+      (\ s a -> s{_tabTablePropertiesJSONSchema = a})
 
 -- | Name assigned to a table.
 tabName :: Lens' Table (Maybe Text)
 tabName = lens _tabName (\ s a -> s{_tabName = a})
 
 -- | JSON object containing custom table properties.
-tabTablePropertiesJson :: Lens' Table (Maybe Text)
-tabTablePropertiesJson
-  = lens _tabTablePropertiesJson
-      (\ s a -> s{_tabTablePropertiesJson = a})
+tabTablePropertiesJSON :: Lens' Table (Maybe Text)
+tabTablePropertiesJSON
+  = lens _tabTablePropertiesJSON
+      (\ s a -> s{_tabTablePropertiesJSON = a})
 
 -- | Columns in the table.
-tabColumns :: Lens' Table [Maybe Column]
+tabColumns :: Lens' Table [Column]
 tabColumns
   = lens _tabColumns (\ s a -> s{_tabColumns = a}) .
       _Default
@@ -1584,8 +1584,8 @@ tabTableId
   = lens _tabTableId (\ s a -> s{_tabTableId = a})
 
 -- | SQL that encodes the table definition for derived tables.
-tabSql :: Lens' Table (Maybe Text)
-tabSql = lens _tabSql (\ s a -> s{_tabSql = a})
+tabSQL :: Lens' Table (Maybe Text)
+tabSQL = lens _tabSQL (\ s a -> s{_tabSQL = a})
 
 -- | Description assigned to the table.
 tabDescription :: Lens' Table (Maybe Text)
@@ -1631,16 +1631,16 @@ instance ToJSON Table where
                  [("isExportable" .=) <$> _tabIsExportable,
                   Just ("kind" .= _tabKind),
                   ("columnPropertiesJsonSchema" .=) <$>
-                    _tabColumnPropertiesJsonSchema,
+                    _tabColumnPropertiesJSONSchema,
                   ("tablePropertiesJsonSchema" .=) <$>
-                    _tabTablePropertiesJsonSchema,
+                    _tabTablePropertiesJSONSchema,
                   ("name" .=) <$> _tabName,
                   ("tablePropertiesJson" .=) <$>
-                    _tabTablePropertiesJson,
+                    _tabTablePropertiesJSON,
                   ("columns" .=) <$> _tabColumns,
                   ("baseTableIds" .=) <$> _tabBaseTableIds,
                   ("tableId" .=) <$> _tabTableId,
-                  ("sql" .=) <$> _tabSql,
+                  ("sql" .=) <$> _tabSQL,
                   ("description" .=) <$> _tabDescription,
                   ("attribution" .=) <$> _tabAttribution,
                   ("attributionLink" .=) <$> _tabAttributionLink])
@@ -1649,11 +1649,11 @@ instance ToJSON Table where
 --
 -- /See:/ 'column' smart constructor.
 data Column = Column
-    { _cColumnJsonSchema     :: !(Maybe Text)
+    { _cColumnJSONSchema     :: !(Maybe Text)
     , _cGraphPredicate       :: !(Maybe Text)
     , _cKind                 :: !Text
     , _cBaseColumn           :: !(Maybe ColumnBaseColumn)
-    , _cColumnPropertiesJson :: !(Maybe Text)
+    , _cColumnPropertiesJSON :: !(Maybe Text)
     , _cName                 :: !(Maybe Text)
     , _cType                 :: !(Maybe Text)
     , _cFormatPattern        :: !(Maybe Text)
@@ -1667,7 +1667,7 @@ data Column = Column
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cColumnJsonSchema'
+-- * 'cColumnJSONSchema'
 --
 -- * 'cGraphPredicate'
 --
@@ -1675,7 +1675,7 @@ data Column = Column
 --
 -- * 'cBaseColumn'
 --
--- * 'cColumnPropertiesJson'
+-- * 'cColumnPropertiesJSON'
 --
 -- * 'cName'
 --
@@ -1694,11 +1694,11 @@ column
     :: Column
 column =
     Column
-    { _cColumnJsonSchema = Nothing
+    { _cColumnJSONSchema = Nothing
     , _cGraphPredicate = Nothing
     , _cKind = "fusiontables#column"
     , _cBaseColumn = Nothing
-    , _cColumnPropertiesJson = Nothing
+    , _cColumnPropertiesJSON = Nothing
     , _cName = Nothing
     , _cType = Nothing
     , _cFormatPattern = Nothing
@@ -1709,10 +1709,10 @@ column =
     }
 
 -- | JSON schema for interpreting JSON in this column.
-cColumnJsonSchema :: Lens' Column (Maybe Text)
-cColumnJsonSchema
-  = lens _cColumnJsonSchema
-      (\ s a -> s{_cColumnJsonSchema = a})
+cColumnJSONSchema :: Lens' Column (Maybe Text)
+cColumnJSONSchema
+  = lens _cColumnJSONSchema
+      (\ s a -> s{_cColumnJSONSchema = a})
 
 -- | Column graph predicate. Used to map table to graph data model
 -- (subject,predicate,object) See W3C Graph-based Data Model.
@@ -1733,10 +1733,10 @@ cBaseColumn
   = lens _cBaseColumn (\ s a -> s{_cBaseColumn = a})
 
 -- | JSON object containing custom column properties.
-cColumnPropertiesJson :: Lens' Column (Maybe Text)
-cColumnPropertiesJson
-  = lens _cColumnPropertiesJson
-      (\ s a -> s{_cColumnPropertiesJson = a})
+cColumnPropertiesJSON :: Lens' Column (Maybe Text)
+cColumnPropertiesJSON
+  = lens _cColumnPropertiesJSON
+      (\ s a -> s{_cColumnPropertiesJSON = a})
 
 -- | Name of the column.
 cName :: Lens' Column (Maybe Text)
@@ -1822,12 +1822,12 @@ instance ToJSON Column where
         toJSON Column{..}
           = object
               (catMaybes
-                 [("columnJsonSchema" .=) <$> _cColumnJsonSchema,
+                 [("columnJsonSchema" .=) <$> _cColumnJSONSchema,
                   ("graphPredicate" .=) <$> _cGraphPredicate,
                   Just ("kind" .= _cKind),
                   ("baseColumn" .=) <$> _cBaseColumn,
                   ("columnPropertiesJson" .=) <$>
-                    _cColumnPropertiesJson,
+                    _cColumnPropertiesJSON,
                   ("name" .=) <$> _cName, ("type" .=) <$> _cType,
                   ("formatPattern" .=) <$> _cFormatPattern,
                   ("columnId" .=) <$> _cColumnId,
@@ -1839,10 +1839,10 @@ instance ToJSON Column where
 --
 -- /See:/ 'lineStyle' smart constructor.
 data LineStyle = LineStyle
-    { _lsStrokeColorStyler  :: !(Maybe (Maybe StyleFunction))
+    { _lsStrokeColorStyler  :: !(Maybe StyleFunction)
     , _lsStrokeWeight       :: !(Maybe Int32)
     , _lsStrokeOpacity      :: !(Maybe Double)
-    , _lsStrokeWeightStyler :: !(Maybe (Maybe StyleFunction))
+    , _lsStrokeWeightStyler :: !(Maybe StyleFunction)
     , _lsStrokeColor        :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1872,7 +1872,7 @@ lineStyle =
 
 -- | Column-value, gradient or buckets styler that is used to determine the
 -- line color and opacity.
-lsStrokeColorStyler :: Lens' LineStyle (Maybe (Maybe StyleFunction))
+lsStrokeColorStyler :: Lens' LineStyle (Maybe StyleFunction)
 lsStrokeColorStyler
   = lens _lsStrokeColorStyler
       (\ s a -> s{_lsStrokeColorStyler = a})
@@ -1891,7 +1891,7 @@ lsStrokeOpacity
 
 -- | Column-value or bucket styler that is used to determine the width of the
 -- line.
-lsStrokeWeightStyler :: Lens' LineStyle (Maybe (Maybe StyleFunction))
+lsStrokeWeightStyler :: Lens' LineStyle (Maybe StyleFunction)
 lsStrokeWeightStyler
   = lens _lsStrokeWeightStyler
       (\ s a -> s{_lsStrokeWeightStyler = a})

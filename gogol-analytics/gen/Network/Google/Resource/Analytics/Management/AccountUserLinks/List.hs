@@ -32,14 +32,13 @@ module Network.Google.Resource.Analytics.Management.AccountUserLinks.List
     -- * Request Lenses
     , maullQuotaUser
     , maullPrettyPrint
-    , maullUserIp
+    , maullUserIP
     , maullAccountId
     , maullKey
-    , maullOauthToken
+    , maullOAuthToken
     , maullStartIndex
     , maullMaxResults
     , maullFields
-    , maullAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -55,12 +54,13 @@ type ManagementAccountUserLinksListResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "start-index" Int32 :>
                          QueryParam "max-results" Int32 :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Get '[JSON] EntityUserLinks
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] EntityUserLinks
 
 -- | Lists account-user links for a given account.
 --
@@ -68,14 +68,13 @@ type ManagementAccountUserLinksListResource =
 data ManagementAccountUserLinksList' = ManagementAccountUserLinksList'
     { _maullQuotaUser   :: !(Maybe Text)
     , _maullPrettyPrint :: !Bool
-    , _maullUserIp      :: !(Maybe Text)
+    , _maullUserIP      :: !(Maybe Text)
     , _maullAccountId   :: !Text
-    , _maullKey         :: !(Maybe Text)
-    , _maullOauthToken  :: !(Maybe Text)
+    , _maullKey         :: !(Maybe Key)
+    , _maullOAuthToken  :: !(Maybe OAuthToken)
     , _maullStartIndex  :: !(Maybe Int32)
     , _maullMaxResults  :: !(Maybe Int32)
     , _maullFields      :: !(Maybe Text)
-    , _maullAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementAccountUserLinksList'' with the minimum fields required to make a request.
@@ -86,21 +85,19 @@ data ManagementAccountUserLinksList' = ManagementAccountUserLinksList'
 --
 -- * 'maullPrettyPrint'
 --
--- * 'maullUserIp'
+-- * 'maullUserIP'
 --
 -- * 'maullAccountId'
 --
 -- * 'maullKey'
 --
--- * 'maullOauthToken'
+-- * 'maullOAuthToken'
 --
 -- * 'maullStartIndex'
 --
 -- * 'maullMaxResults'
 --
 -- * 'maullFields'
---
--- * 'maullAlt'
 managementAccountUserLinksList'
     :: Text -- ^ 'accountId'
     -> ManagementAccountUserLinksList'
@@ -108,14 +105,13 @@ managementAccountUserLinksList' pMaullAccountId_ =
     ManagementAccountUserLinksList'
     { _maullQuotaUser = Nothing
     , _maullPrettyPrint = False
-    , _maullUserIp = Nothing
+    , _maullUserIP = Nothing
     , _maullAccountId = pMaullAccountId_
     , _maullKey = Nothing
-    , _maullOauthToken = Nothing
+    , _maullOAuthToken = Nothing
     , _maullStartIndex = Nothing
     , _maullMaxResults = Nothing
     , _maullFields = Nothing
-    , _maullAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -134,9 +130,9 @@ maullPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-maullUserIp :: Lens' ManagementAccountUserLinksList' (Maybe Text)
-maullUserIp
-  = lens _maullUserIp (\ s a -> s{_maullUserIp = a})
+maullUserIP :: Lens' ManagementAccountUserLinksList' (Maybe Text)
+maullUserIP
+  = lens _maullUserIP (\ s a -> s{_maullUserIP = a})
 
 -- | Account ID to retrieve the user links for.
 maullAccountId :: Lens' ManagementAccountUserLinksList' Text
@@ -147,14 +143,14 @@ maullAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-maullKey :: Lens' ManagementAccountUserLinksList' (Maybe Text)
+maullKey :: Lens' ManagementAccountUserLinksList' (Maybe Key)
 maullKey = lens _maullKey (\ s a -> s{_maullKey = a})
 
 -- | OAuth 2.0 token for the current user.
-maullOauthToken :: Lens' ManagementAccountUserLinksList' (Maybe Text)
-maullOauthToken
-  = lens _maullOauthToken
-      (\ s a -> s{_maullOauthToken = a})
+maullOAuthToken :: Lens' ManagementAccountUserLinksList' (Maybe OAuthToken)
+maullOAuthToken
+  = lens _maullOAuthToken
+      (\ s a -> s{_maullOAuthToken = a})
 
 -- | An index of the first account-user link to retrieve. Use this parameter
 -- as a pagination mechanism along with the max-results parameter.
@@ -174,9 +170,10 @@ maullFields :: Lens' ManagementAccountUserLinksList' (Maybe Text)
 maullFields
   = lens _maullFields (\ s a -> s{_maullFields = a})
 
--- | Data format for the response.
-maullAlt :: Lens' ManagementAccountUserLinksList' Alt
-maullAlt = lens _maullAlt (\ s a -> s{_maullAlt = a})
+instance GoogleAuth ManagementAccountUserLinksList'
+         where
+        authKey = maullKey . _Just
+        authToken = maullOAuthToken . _Just
 
 instance GoogleRequest
          ManagementAccountUserLinksList' where
@@ -186,14 +183,14 @@ instance GoogleRequest
         requestWithRoute r u
           ManagementAccountUserLinksList'{..}
           = go _maullQuotaUser (Just _maullPrettyPrint)
-              _maullUserIp
+              _maullUserIP
               _maullAccountId
               _maullKey
-              _maullOauthToken
+              _maullOAuthToken
               _maullStartIndex
               _maullMaxResults
               _maullFields
-              (Just _maullAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

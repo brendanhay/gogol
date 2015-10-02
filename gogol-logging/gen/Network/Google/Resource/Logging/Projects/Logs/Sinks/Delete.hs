@@ -41,12 +41,11 @@ module Network.Google.Resource.Logging.Projects.Logs.Sinks.Delete
     , plsdUploadType
     , plsdBearerToken
     , plsdKey
-    , plsdOauthToken
+    , plsdOAuthToken
     , plsdProjectsId
     , plsdSinksId
     , plsdFields
     , plsdCallback
-    , plsdAlt
     ) where
 
 import           Network.Google.Logging.Types
@@ -70,11 +69,11 @@ type ProjectsLogsSinksDeleteResource =
                              QueryParam "access_token" Text :>
                                QueryParam "uploadType" Text :>
                                  QueryParam "bearer_token" Text :>
-                                   QueryParam "key" Text :>
-                                     QueryParam "oauth_token" Text :>
+                                   QueryParam "key" Key :>
+                                     QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "fields" Text :>
                                          QueryParam "callback" Text :>
-                                           QueryParam "alt" Text :>
+                                           QueryParam "alt" AltJSON :>
                                              Delete '[JSON] Empty
 
 -- | Deletes a log sink. After deletion, no new log entries are written to
@@ -91,13 +90,12 @@ data ProjectsLogsSinksDelete' = ProjectsLogsSinksDelete'
     , _plsdAccessToken    :: !(Maybe Text)
     , _plsdUploadType     :: !(Maybe Text)
     , _plsdBearerToken    :: !(Maybe Text)
-    , _plsdKey            :: !(Maybe Text)
-    , _plsdOauthToken     :: !(Maybe Text)
+    , _plsdKey            :: !(Maybe Key)
+    , _plsdOAuthToken     :: !(Maybe OAuthToken)
     , _plsdProjectsId     :: !Text
     , _plsdSinksId        :: !Text
     , _plsdFields         :: !(Maybe Text)
     , _plsdCallback       :: !(Maybe Text)
-    , _plsdAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsLogsSinksDelete'' with the minimum fields required to make a request.
@@ -124,7 +122,7 @@ data ProjectsLogsSinksDelete' = ProjectsLogsSinksDelete'
 --
 -- * 'plsdKey'
 --
--- * 'plsdOauthToken'
+-- * 'plsdOAuthToken'
 --
 -- * 'plsdProjectsId'
 --
@@ -133,8 +131,6 @@ data ProjectsLogsSinksDelete' = ProjectsLogsSinksDelete'
 -- * 'plsdFields'
 --
 -- * 'plsdCallback'
---
--- * 'plsdAlt'
 projectsLogsSinksDelete'
     :: Text -- ^ 'logsId'
     -> Text -- ^ 'projectsId'
@@ -152,12 +148,11 @@ projectsLogsSinksDelete' pPlsdLogsId_ pPlsdProjectsId_ pPlsdSinksId_ =
     , _plsdUploadType = Nothing
     , _plsdBearerToken = Nothing
     , _plsdKey = Nothing
-    , _plsdOauthToken = Nothing
+    , _plsdOAuthToken = Nothing
     , _plsdProjectsId = pPlsdProjectsId_
     , _plsdSinksId = pPlsdSinksId_
     , _plsdFields = Nothing
     , _plsdCallback = Nothing
-    , _plsdAlt = "json"
     }
 
 -- | V1 error format.
@@ -215,14 +210,14 @@ plsdBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-plsdKey :: Lens' ProjectsLogsSinksDelete' (Maybe Text)
+plsdKey :: Lens' ProjectsLogsSinksDelete' (Maybe Key)
 plsdKey = lens _plsdKey (\ s a -> s{_plsdKey = a})
 
 -- | OAuth 2.0 token for the current user.
-plsdOauthToken :: Lens' ProjectsLogsSinksDelete' (Maybe Text)
-plsdOauthToken
-  = lens _plsdOauthToken
-      (\ s a -> s{_plsdOauthToken = a})
+plsdOAuthToken :: Lens' ProjectsLogsSinksDelete' (Maybe OAuthToken)
+plsdOAuthToken
+  = lens _plsdOAuthToken
+      (\ s a -> s{_plsdOAuthToken = a})
 
 -- | Part of \`sinkName\`. The resource name of the log sink to delete.
 plsdProjectsId :: Lens' ProjectsLogsSinksDelete' Text
@@ -245,9 +240,9 @@ plsdCallback :: Lens' ProjectsLogsSinksDelete' (Maybe Text)
 plsdCallback
   = lens _plsdCallback (\ s a -> s{_plsdCallback = a})
 
--- | Data format for response.
-plsdAlt :: Lens' ProjectsLogsSinksDelete' Text
-plsdAlt = lens _plsdAlt (\ s a -> s{_plsdAlt = a})
+instance GoogleAuth ProjectsLogsSinksDelete' where
+        authKey = plsdKey . _Just
+        authToken = plsdOAuthToken . _Just
 
 instance GoogleRequest ProjectsLogsSinksDelete' where
         type Rs ProjectsLogsSinksDelete' = Empty
@@ -262,12 +257,12 @@ instance GoogleRequest ProjectsLogsSinksDelete' where
               _plsdUploadType
               _plsdBearerToken
               _plsdKey
-              _plsdOauthToken
+              _plsdOAuthToken
               _plsdProjectsId
               _plsdSinksId
               _plsdFields
               _plsdCallback
-              (Just _plsdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsLogsSinksDeleteResource)

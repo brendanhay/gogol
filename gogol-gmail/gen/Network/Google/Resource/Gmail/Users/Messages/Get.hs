@@ -32,15 +32,14 @@ module Network.Google.Resource.Gmail.Users.Messages.Get
     -- * Request Lenses
     , umgQuotaUser
     , umgPrettyPrint
-    , umgUserIp
+    , umgUserIP
     , umgFormat
     , umgUserId
     , umgKey
     , umgId
-    , umgOauthToken
+    , umgOAuthToken
     , umgMetadataHeaders
     , umgFields
-    , umgAlt
     ) where
 
 import           Network.Google.Gmail.Types
@@ -56,11 +55,11 @@ type UsersMessagesGetResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "format" GmailUsersMessagesGetFormat :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParams "metadataHeaders" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Get '[JSON] Message
+                           QueryParam "alt" AltJSON :> Get '[JSON] Message
 
 -- | Gets the specified message.
 --
@@ -68,15 +67,14 @@ type UsersMessagesGetResource =
 data UsersMessagesGet' = UsersMessagesGet'
     { _umgQuotaUser       :: !(Maybe Text)
     , _umgPrettyPrint     :: !Bool
-    , _umgUserIp          :: !(Maybe Text)
+    , _umgUserIP          :: !(Maybe Text)
     , _umgFormat          :: !GmailUsersMessagesGetFormat
     , _umgUserId          :: !Text
-    , _umgKey             :: !(Maybe Text)
+    , _umgKey             :: !(Maybe Key)
     , _umgId              :: !Text
-    , _umgOauthToken      :: !(Maybe Text)
+    , _umgOAuthToken      :: !(Maybe OAuthToken)
     , _umgMetadataHeaders :: !(Maybe Text)
     , _umgFields          :: !(Maybe Text)
-    , _umgAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersMessagesGet'' with the minimum fields required to make a request.
@@ -87,7 +85,7 @@ data UsersMessagesGet' = UsersMessagesGet'
 --
 -- * 'umgPrettyPrint'
 --
--- * 'umgUserIp'
+-- * 'umgUserIP'
 --
 -- * 'umgFormat'
 --
@@ -97,13 +95,11 @@ data UsersMessagesGet' = UsersMessagesGet'
 --
 -- * 'umgId'
 --
--- * 'umgOauthToken'
+-- * 'umgOAuthToken'
 --
 -- * 'umgMetadataHeaders'
 --
 -- * 'umgFields'
---
--- * 'umgAlt'
 usersMessagesGet'
     :: Text -- ^ 'id'
     -> Text
@@ -112,15 +108,14 @@ usersMessagesGet' pUmgUserId_ pUmgId_ =
     UsersMessagesGet'
     { _umgQuotaUser = Nothing
     , _umgPrettyPrint = True
-    , _umgUserIp = Nothing
+    , _umgUserIP = Nothing
     , _umgFormat = GUMGFFull
     , _umgUserId = pUmgUserId_
     , _umgKey = Nothing
     , _umgId = pUmgId_
-    , _umgOauthToken = Nothing
+    , _umgOAuthToken = Nothing
     , _umgMetadataHeaders = Nothing
     , _umgFields = Nothing
-    , _umgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -138,9 +133,9 @@ umgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-umgUserIp :: Lens' UsersMessagesGet' (Maybe Text)
-umgUserIp
-  = lens _umgUserIp (\ s a -> s{_umgUserIp = a})
+umgUserIP :: Lens' UsersMessagesGet' (Maybe Text)
+umgUserIP
+  = lens _umgUserIP (\ s a -> s{_umgUserIP = a})
 
 -- | The format to return the message in.
 umgFormat :: Lens' UsersMessagesGet' GmailUsersMessagesGetFormat
@@ -156,7 +151,7 @@ umgUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-umgKey :: Lens' UsersMessagesGet' (Maybe Text)
+umgKey :: Lens' UsersMessagesGet' (Maybe Key)
 umgKey = lens _umgKey (\ s a -> s{_umgKey = a})
 
 -- | The ID of the message to retrieve.
@@ -164,10 +159,10 @@ umgId :: Lens' UsersMessagesGet' Text
 umgId = lens _umgId (\ s a -> s{_umgId = a})
 
 -- | OAuth 2.0 token for the current user.
-umgOauthToken :: Lens' UsersMessagesGet' (Maybe Text)
-umgOauthToken
-  = lens _umgOauthToken
-      (\ s a -> s{_umgOauthToken = a})
+umgOAuthToken :: Lens' UsersMessagesGet' (Maybe OAuthToken)
+umgOAuthToken
+  = lens _umgOAuthToken
+      (\ s a -> s{_umgOAuthToken = a})
 
 -- | When given and format is METADATA, only include headers specified.
 umgMetadataHeaders :: Lens' UsersMessagesGet' (Maybe Text)
@@ -180,23 +175,23 @@ umgFields :: Lens' UsersMessagesGet' (Maybe Text)
 umgFields
   = lens _umgFields (\ s a -> s{_umgFields = a})
 
--- | Data format for the response.
-umgAlt :: Lens' UsersMessagesGet' Alt
-umgAlt = lens _umgAlt (\ s a -> s{_umgAlt = a})
+instance GoogleAuth UsersMessagesGet' where
+        authKey = umgKey . _Just
+        authToken = umgOAuthToken . _Just
 
 instance GoogleRequest UsersMessagesGet' where
         type Rs UsersMessagesGet' = Message
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersMessagesGet'{..}
-          = go _umgQuotaUser (Just _umgPrettyPrint) _umgUserIp
+          = go _umgQuotaUser (Just _umgPrettyPrint) _umgUserIP
               (Just _umgFormat)
               _umgUserId
               _umgKey
               _umgId
-              _umgOauthToken
+              _umgOAuthToken
               _umgMetadataHeaders
               _umgFields
-              (Just _umgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersMessagesGetResource)

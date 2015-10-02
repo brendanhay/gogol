@@ -32,14 +32,13 @@ module Network.Google.Resource.Analytics.Management.Filters.List
     -- * Request Lenses
     , mflQuotaUser
     , mflPrettyPrint
-    , mflUserIp
+    , mflUserIP
     , mflAccountId
     , mflKey
-    , mflOauthToken
+    , mflOAuthToken
     , mflStartIndex
     , mflMaxResults
     , mflFields
-    , mflAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -55,12 +54,12 @@ type ManagementFiltersListResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "start-index" Int32 :>
                          QueryParam "max-results" Int32 :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Get '[JSON] Filters
+                             QueryParam "alt" AltJSON :> Get '[JSON] Filters
 
 -- | Lists all filters for an account
 --
@@ -68,14 +67,13 @@ type ManagementFiltersListResource =
 data ManagementFiltersList' = ManagementFiltersList'
     { _mflQuotaUser   :: !(Maybe Text)
     , _mflPrettyPrint :: !Bool
-    , _mflUserIp      :: !(Maybe Text)
+    , _mflUserIP      :: !(Maybe Text)
     , _mflAccountId   :: !Text
-    , _mflKey         :: !(Maybe Text)
-    , _mflOauthToken  :: !(Maybe Text)
+    , _mflKey         :: !(Maybe Key)
+    , _mflOAuthToken  :: !(Maybe OAuthToken)
     , _mflStartIndex  :: !(Maybe Int32)
     , _mflMaxResults  :: !(Maybe Int32)
     , _mflFields      :: !(Maybe Text)
-    , _mflAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementFiltersList'' with the minimum fields required to make a request.
@@ -86,21 +84,19 @@ data ManagementFiltersList' = ManagementFiltersList'
 --
 -- * 'mflPrettyPrint'
 --
--- * 'mflUserIp'
+-- * 'mflUserIP'
 --
 -- * 'mflAccountId'
 --
 -- * 'mflKey'
 --
--- * 'mflOauthToken'
+-- * 'mflOAuthToken'
 --
 -- * 'mflStartIndex'
 --
 -- * 'mflMaxResults'
 --
 -- * 'mflFields'
---
--- * 'mflAlt'
 managementFiltersList'
     :: Text -- ^ 'accountId'
     -> ManagementFiltersList'
@@ -108,14 +104,13 @@ managementFiltersList' pMflAccountId_ =
     ManagementFiltersList'
     { _mflQuotaUser = Nothing
     , _mflPrettyPrint = False
-    , _mflUserIp = Nothing
+    , _mflUserIP = Nothing
     , _mflAccountId = pMflAccountId_
     , _mflKey = Nothing
-    , _mflOauthToken = Nothing
+    , _mflOAuthToken = Nothing
     , _mflStartIndex = Nothing
     , _mflMaxResults = Nothing
     , _mflFields = Nothing
-    , _mflAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -133,9 +128,9 @@ mflPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mflUserIp :: Lens' ManagementFiltersList' (Maybe Text)
-mflUserIp
-  = lens _mflUserIp (\ s a -> s{_mflUserIp = a})
+mflUserIP :: Lens' ManagementFiltersList' (Maybe Text)
+mflUserIP
+  = lens _mflUserIP (\ s a -> s{_mflUserIP = a})
 
 -- | Account ID to retrieve filters for.
 mflAccountId :: Lens' ManagementFiltersList' Text
@@ -145,14 +140,14 @@ mflAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mflKey :: Lens' ManagementFiltersList' (Maybe Text)
+mflKey :: Lens' ManagementFiltersList' (Maybe Key)
 mflKey = lens _mflKey (\ s a -> s{_mflKey = a})
 
 -- | OAuth 2.0 token for the current user.
-mflOauthToken :: Lens' ManagementFiltersList' (Maybe Text)
-mflOauthToken
-  = lens _mflOauthToken
-      (\ s a -> s{_mflOauthToken = a})
+mflOAuthToken :: Lens' ManagementFiltersList' (Maybe OAuthToken)
+mflOAuthToken
+  = lens _mflOAuthToken
+      (\ s a -> s{_mflOAuthToken = a})
 
 -- | An index of the first entity to retrieve. Use this parameter as a
 -- pagination mechanism along with the max-results parameter.
@@ -172,22 +167,22 @@ mflFields :: Lens' ManagementFiltersList' (Maybe Text)
 mflFields
   = lens _mflFields (\ s a -> s{_mflFields = a})
 
--- | Data format for the response.
-mflAlt :: Lens' ManagementFiltersList' Alt
-mflAlt = lens _mflAlt (\ s a -> s{_mflAlt = a})
+instance GoogleAuth ManagementFiltersList' where
+        authKey = mflKey . _Just
+        authToken = mflOAuthToken . _Just
 
 instance GoogleRequest ManagementFiltersList' where
         type Rs ManagementFiltersList' = Filters
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementFiltersList'{..}
-          = go _mflQuotaUser (Just _mflPrettyPrint) _mflUserIp
+          = go _mflQuotaUser (Just _mflPrettyPrint) _mflUserIP
               _mflAccountId
               _mflKey
-              _mflOauthToken
+              _mflOAuthToken
               _mflStartIndex
               _mflMaxResults
               _mflFields
-              (Just _mflAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ManagementFiltersListResource)

@@ -25,9 +25,9 @@ import           Network.Google.Spectrum.Types.Sum
 data PawsInitResponse = PawsInitResponse
     { _pirKind           :: !Text
     , _pirVersion        :: !(Maybe Text)
-    , _pirRulesetInfo    :: !(Maybe (Maybe RulesetInfo))
+    , _pirRulesetInfo    :: !(Maybe RulesetInfo)
     , _pirType           :: !(Maybe Text)
-    , _pirDatabaseChange :: !(Maybe (Maybe DBUpdateSpec))
+    , _pirDatabaseChange :: !(Maybe DBUpdateSpec)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PawsInitResponse' with the minimum fields required to make a request.
@@ -69,7 +69,7 @@ pirVersion
 -- that domain. The database must include the authority field, which
 -- defines the regulatory domain for the location specified in the INIT_REQ
 -- message.
-pirRulesetInfo :: Lens' PawsInitResponse (Maybe (Maybe RulesetInfo))
+pirRulesetInfo :: Lens' PawsInitResponse (Maybe RulesetInfo)
 pirRulesetInfo
   = lens _pirRulesetInfo
       (\ s a -> s{_pirRulesetInfo = a})
@@ -84,7 +84,7 @@ pirType = lens _pirType (\ s a -> s{_pirType = a})
 -- database URIs. The device should use this information to update its list
 -- of pre-configured databases by (only) replacing its entry for the
 -- responding database with the list of alternate URIs.
-pirDatabaseChange :: Lens' PawsInitResponse (Maybe (Maybe DBUpdateSpec))
+pirDatabaseChange :: Lens' PawsInitResponse (Maybe DBUpdateSpec)
 pirDatabaseChange
   = lens _pirDatabaseChange
       (\ s a -> s{_pirDatabaseChange = a})
@@ -165,7 +165,7 @@ instance ToJSON GeoLocationPoint where
 --
 -- /See:/ 'geoLocationPolygon' smart constructor.
 newtype GeoLocationPolygon = GeoLocationPolygon
-    { _glpExterior :: Maybe [Maybe GeoLocationPoint]
+    { _glpExterior :: Maybe [GeoLocationPoint]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GeoLocationPolygon' with the minimum fields required to make a request.
@@ -192,7 +192,7 @@ geoLocationPolygon =
 -- km. - All vertices are assumed to be at the same altitude. - Polygon
 -- shapes should be restricted to a maximum of 15 vertices (16 points that
 -- include the repeated vertex).
-glpExterior :: Lens' GeoLocationPolygon [Maybe GeoLocationPoint]
+glpExterior :: Lens' GeoLocationPolygon [GeoLocationPoint]
 glpExterior
   = lens _glpExterior (\ s a -> s{_glpExterior = a}) .
       _Default
@@ -217,7 +217,7 @@ data PawsRegisterResponse = PawsRegisterResponse
     { _prrKind           :: !Text
     , _prrVersion        :: !(Maybe Text)
     , _prrType           :: !(Maybe Text)
-    , _prrDatabaseChange :: !(Maybe (Maybe DBUpdateSpec))
+    , _prrDatabaseChange :: !(Maybe DBUpdateSpec)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PawsRegisterResponse' with the minimum fields required to make a request.
@@ -261,7 +261,7 @@ prrType = lens _prrType (\ s a -> s{_prrType = a})
 -- database URIs. The device should use this information to update its list
 -- of pre-configured databases by (only) replacing its entry for the
 -- responding database with the list of alternate URIs.
-prrDatabaseChange :: Lens' PawsRegisterResponse (Maybe (Maybe DBUpdateSpec))
+prrDatabaseChange :: Lens' PawsRegisterResponse (Maybe DBUpdateSpec)
 prrDatabaseChange
   = lens _prrDatabaseChange
       (\ s a -> s{_prrDatabaseChange = a})
@@ -290,11 +290,11 @@ instance ToJSON PawsRegisterResponse where
 --
 -- /See:/ 'pawsNotifySpectrumUseRequest' smart constructor.
 data PawsNotifySpectrumUseRequest = PawsNotifySpectrumUseRequest
-    { _pnsurSpectra    :: !(Maybe [Maybe SpectrumMessage])
-    , _pnsurLocation   :: !(Maybe (Maybe GeoLocation))
+    { _pnsurSpectra    :: !(Maybe [SpectrumMessage])
+    , _pnsurLocation   :: !(Maybe GeoLocation)
     , _pnsurVersion    :: !(Maybe Text)
     , _pnsurType       :: !(Maybe Text)
-    , _pnsurDeviceDesc :: !(Maybe (Maybe DeviceDescriptor))
+    , _pnsurDeviceDesc :: !(Maybe DeviceDescriptor)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PawsNotifySpectrumUseRequest' with the minimum fields required to make a request.
@@ -335,7 +335,7 @@ pawsNotifySpectrumUseRequest =
 -- spectral density in terms of maximum power over any 100 kHz band, then
 -- the psdBandwidthHz value should be set to 100 kHz, even though the
 -- actual bandwidth used can be 20 kHz.
-pnsurSpectra :: Lens' PawsNotifySpectrumUseRequest [Maybe SpectrumMessage]
+pnsurSpectra :: Lens' PawsNotifySpectrumUseRequest [SpectrumMessage]
 pnsurSpectra
   = lens _pnsurSpectra (\ s a -> s{_pnsurSpectra = a})
       . _Default
@@ -344,7 +344,7 @@ pnsurSpectra
 -- | The geolocation of the master device (the device that is sending the
 -- spectrum-use notification) to the database is required in the
 -- spectrum-use notification message.
-pnsurLocation :: Lens' PawsNotifySpectrumUseRequest (Maybe (Maybe GeoLocation))
+pnsurLocation :: Lens' PawsNotifySpectrumUseRequest (Maybe GeoLocation)
 pnsurLocation
   = lens _pnsurLocation
       (\ s a -> s{_pnsurLocation = a})
@@ -362,7 +362,7 @@ pnsurType
 
 -- | Device descriptor information is required in the spectrum-use
 -- notification message.
-pnsurDeviceDesc :: Lens' PawsNotifySpectrumUseRequest (Maybe (Maybe DeviceDescriptor))
+pnsurDeviceDesc :: Lens' PawsNotifySpectrumUseRequest (Maybe DeviceDescriptor)
 pnsurDeviceDesc
   = lens _pnsurDeviceDesc
       (\ s a -> s{_pnsurDeviceDesc = a})
@@ -393,10 +393,10 @@ instance ToJSON PawsNotifySpectrumUseRequest where
 --
 -- /See:/ 'vcard' smart constructor.
 data Vcard = Vcard
-    { _vEmail :: !(Maybe (Maybe VcardTypedText))
-    , _vAdr   :: !(Maybe (Maybe VcardAddress))
-    , _vOrg   :: !(Maybe (Maybe VcardTypedText))
-    , _vTel   :: !(Maybe (Maybe VcardTelephone))
+    { _vEmail :: !(Maybe VcardTypedText)
+    , _vAdr   :: !(Maybe VcardAddress)
+    , _vOrg   :: !(Maybe VcardTypedText)
+    , _vTel   :: !(Maybe VcardTelephone)
     , _vFn    :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -425,19 +425,19 @@ vcard =
     }
 
 -- | An email address that can be used to reach the contact.
-vEmail :: Lens' Vcard (Maybe (Maybe VcardTypedText))
+vEmail :: Lens' Vcard (Maybe VcardTypedText)
 vEmail = lens _vEmail (\ s a -> s{_vEmail = a})
 
 -- | The street address of the entity.
-vAdr :: Lens' Vcard (Maybe (Maybe VcardAddress))
+vAdr :: Lens' Vcard (Maybe VcardAddress)
 vAdr = lens _vAdr (\ s a -> s{_vAdr = a})
 
 -- | The organization associated with the registering entity.
-vOrg :: Lens' Vcard (Maybe (Maybe VcardTypedText))
+vOrg :: Lens' Vcard (Maybe VcardTypedText)
 vOrg = lens _vOrg (\ s a -> s{_vOrg = a})
 
 -- | A telephone number that can be used to call the contact.
-vTel :: Lens' Vcard (Maybe (Maybe VcardTelephone))
+vTel :: Lens' Vcard (Maybe VcardTelephone)
 vTel = lens _vTel (\ s a -> s{_vTel = a})
 
 -- | The full name of the contact person. For example: John A. Smith.
@@ -466,7 +466,7 @@ instance ToJSON Vcard where
 --
 -- /See:/ 'dBUpdateSpec' smart constructor.
 newtype DBUpdateSpec = DBUpdateSpec
-    { _dusDatabases :: Maybe [Maybe DatabaseSpec]
+    { _dusDatabases :: Maybe [DatabaseSpec]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DBUpdateSpec' with the minimum fields required to make a request.
@@ -484,7 +484,7 @@ dBUpdateSpec =
 -- | A required list of one or more databases. A device should update its
 -- preconfigured list of databases to replace (only) the database that
 -- provided the response with the specified entries.
-dusDatabases :: Lens' DBUpdateSpec [Maybe DatabaseSpec]
+dusDatabases :: Lens' DBUpdateSpec [DatabaseSpec]
 dusDatabases
   = lens _dusDatabases (\ s a -> s{_dusDatabases = a})
       . _Default
@@ -505,15 +505,15 @@ instance ToJSON DBUpdateSpec where
 --
 -- /See:/ 'pawsGetSpectrumBatchRequest' smart constructor.
 data PawsGetSpectrumBatchRequest = PawsGetSpectrumBatchRequest
-    { _pgsbrAntenna          :: !(Maybe (Maybe AntennaCharacteristics))
-    , _pgsbrMasterDeviceDesc :: !(Maybe (Maybe DeviceDescriptor))
-    , _pgsbrOwner            :: !(Maybe (Maybe DeviceOwner))
+    { _pgsbrAntenna          :: !(Maybe AntennaCharacteristics)
+    , _pgsbrMasterDeviceDesc :: !(Maybe DeviceDescriptor)
+    , _pgsbrOwner            :: !(Maybe DeviceOwner)
     , _pgsbrRequestType      :: !(Maybe Text)
     , _pgsbrVersion          :: !(Maybe Text)
     , _pgsbrType             :: !(Maybe Text)
-    , _pgsbrLocations        :: !(Maybe [Maybe GeoLocation])
-    , _pgsbrCapabilities     :: !(Maybe (Maybe DeviceCapabilities))
-    , _pgsbrDeviceDesc       :: !(Maybe (Maybe DeviceDescriptor))
+    , _pgsbrLocations        :: !(Maybe [GeoLocation])
+    , _pgsbrCapabilities     :: !(Maybe DeviceCapabilities)
+    , _pgsbrDeviceDesc       :: !(Maybe DeviceDescriptor)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PawsGetSpectrumBatchRequest' with the minimum fields required to make a request.
@@ -554,7 +554,7 @@ pawsGetSpectrumBatchRequest =
 
 -- | Depending on device type and regulatory domain, antenna characteristics
 -- may be required.
-pgsbrAntenna :: Lens' PawsGetSpectrumBatchRequest (Maybe (Maybe AntennaCharacteristics))
+pgsbrAntenna :: Lens' PawsGetSpectrumBatchRequest (Maybe AntennaCharacteristics)
 pgsbrAntenna
   = lens _pgsbrAntenna (\ s a -> s{_pgsbrAntenna = a})
 
@@ -564,7 +564,7 @@ pgsbrAntenna
 -- regulatory domain may require the master device to provide its own
 -- device descriptor information (in addition to device descriptor
 -- information for the slave device in a separate parameter).
-pgsbrMasterDeviceDesc :: Lens' PawsGetSpectrumBatchRequest (Maybe (Maybe DeviceDescriptor))
+pgsbrMasterDeviceDesc :: Lens' PawsGetSpectrumBatchRequest (Maybe DeviceDescriptor)
 pgsbrMasterDeviceDesc
   = lens _pgsbrMasterDeviceDesc
       (\ s a -> s{_pgsbrMasterDeviceDesc = a})
@@ -573,7 +573,7 @@ pgsbrMasterDeviceDesc
 -- may be included in an available spectrum batch request. This allows the
 -- device to register and get spectrum-availability information in a single
 -- request.
-pgsbrOwner :: Lens' PawsGetSpectrumBatchRequest (Maybe (Maybe DeviceOwner))
+pgsbrOwner :: Lens' PawsGetSpectrumBatchRequest (Maybe DeviceOwner)
 pgsbrOwner
   = lens _pgsbrOwner (\ s a -> s{_pgsbrOwner = a})
 
@@ -615,7 +615,7 @@ pgsbrType
 -- geolocation capability that makes an available spectrum batch request),
 -- whether the master device is making the request on its own behalf or on
 -- behalf of a slave device (one without geolocation capability).
-pgsbrLocations :: Lens' PawsGetSpectrumBatchRequest [Maybe GeoLocation]
+pgsbrLocations :: Lens' PawsGetSpectrumBatchRequest [GeoLocation]
 pgsbrLocations
   = lens _pgsbrLocations
       (\ s a -> s{_pgsbrLocations = a})
@@ -626,7 +626,7 @@ pgsbrLocations
 -- available-spectrum batch response to the spectrum that is compatible
 -- with its capabilities. The database should not return spectrum that is
 -- incompatible with the specified capabilities.
-pgsbrCapabilities :: Lens' PawsGetSpectrumBatchRequest (Maybe (Maybe DeviceCapabilities))
+pgsbrCapabilities :: Lens' PawsGetSpectrumBatchRequest (Maybe DeviceCapabilities)
 pgsbrCapabilities
   = lens _pgsbrCapabilities
       (\ s a -> s{_pgsbrCapabilities = a})
@@ -637,7 +637,7 @@ pgsbrCapabilities
 -- the requestType parameter must be empty). When a requestType value is
 -- specified, device descriptor information may be optional or required
 -- according to the rules of the applicable regulatory domain.
-pgsbrDeviceDesc :: Lens' PawsGetSpectrumBatchRequest (Maybe (Maybe DeviceDescriptor))
+pgsbrDeviceDesc :: Lens' PawsGetSpectrumBatchRequest (Maybe DeviceDescriptor)
 pgsbrDeviceDesc
   = lens _pgsbrDeviceDesc
       (\ s a -> s{_pgsbrDeviceDesc = a})
@@ -707,8 +707,8 @@ instance ToJSON VcardTypedText where
 --
 -- /See:/ 'geoSpectrumSchedule' smart constructor.
 data GeoSpectrumSchedule = GeoSpectrumSchedule
-    { _gssLocation          :: !(Maybe (Maybe GeoLocation))
-    , _gssSpectrumSchedules :: !(Maybe [Maybe SpectrumSchedule])
+    { _gssLocation          :: !(Maybe GeoLocation)
+    , _gssSpectrumSchedules :: !(Maybe [SpectrumSchedule])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GeoSpectrumSchedule' with the minimum fields required to make a request.
@@ -728,7 +728,7 @@ geoSpectrumSchedule =
 
 -- | The geolocation identifies the location at which the spectrum schedule
 -- applies. It will always be present.
-gssLocation :: Lens' GeoSpectrumSchedule (Maybe (Maybe GeoLocation))
+gssLocation :: Lens' GeoSpectrumSchedule (Maybe GeoLocation)
 gssLocation
   = lens _gssLocation (\ s a -> s{_gssLocation = a})
 
@@ -736,7 +736,7 @@ gssLocation
 -- always be present, and at least one schedule must be included (though it
 -- may be empty if there is no available spectrum). More than one schedule
 -- may be included to represent future changes to the available spectrum.
-gssSpectrumSchedules :: Lens' GeoSpectrumSchedule [Maybe SpectrumSchedule]
+gssSpectrumSchedules :: Lens' GeoSpectrumSchedule [SpectrumSchedule]
 gssSpectrumSchedules
   = lens _gssSpectrumSchedules
       (\ s a -> s{_gssSpectrumSchedules = a})
@@ -763,8 +763,8 @@ instance ToJSON GeoSpectrumSchedule where
 --
 -- /See:/ 'spectrumSchedule' smart constructor.
 data SpectrumSchedule = SpectrumSchedule
-    { _ssSpectra   :: !(Maybe [Maybe SpectrumMessage])
-    , _ssEventTime :: !(Maybe (Maybe EventTime))
+    { _ssSpectra   :: !(Maybe [SpectrumMessage])
+    , _ssEventTime :: !(Maybe EventTime)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SpectrumSchedule' with the minimum fields required to make a request.
@@ -784,7 +784,7 @@ spectrumSchedule =
 
 -- | A list of spectrum messages representing the usable profile. It will
 -- always be present, but may be empty when there is no available spectrum.
-ssSpectra :: Lens' SpectrumSchedule [Maybe SpectrumMessage]
+ssSpectra :: Lens' SpectrumSchedule [SpectrumMessage]
 ssSpectra
   = lens _ssSpectra (\ s a -> s{_ssSpectra = a}) .
       _Default
@@ -792,7 +792,7 @@ ssSpectra
 
 -- | The event time expresses when the spectrum profile is valid. It will
 -- always be present.
-ssEventTime :: Lens' SpectrumSchedule (Maybe (Maybe EventTime))
+ssEventTime :: Lens' SpectrumSchedule (Maybe EventTime)
 ssEventTime
   = lens _ssEventTime (\ s a -> s{_ssEventTime = a})
 
@@ -814,24 +814,24 @@ instance ToJSON SpectrumSchedule where
 --
 -- /See:/ 'vcardTelephone' smart constructor.
 newtype VcardTelephone = VcardTelephone
-    { _vtUri :: Maybe Text
+    { _vtURI :: Maybe Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VcardTelephone' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'vtUri'
+-- * 'vtURI'
 vcardTelephone
     :: VcardTelephone
 vcardTelephone =
     VcardTelephone
-    { _vtUri = Nothing
+    { _vtURI = Nothing
     }
 
 -- | A nested telephone URI of the form: tel:+1-123-456-7890.
-vtUri :: Lens' VcardTelephone (Maybe Text)
-vtUri = lens _vtUri (\ s a -> s{_vtUri = a})
+vtURI :: Lens' VcardTelephone (Maybe Text)
+vtURI = lens _vtURI (\ s a -> s{_vtURI = a})
 
 instance FromJSON VcardTelephone where
         parseJSON
@@ -840,7 +840,7 @@ instance FromJSON VcardTelephone where
 
 instance ToJSON VcardTelephone where
         toJSON VcardTelephone{..}
-          = object (catMaybes [("uri" .=) <$> _vtUri])
+          = object (catMaybes [("uri" .=) <$> _vtURI])
 
 -- | This parameter contains device-owner information required as part of
 -- device registration. The regulatory domains may require additional
@@ -853,8 +853,8 @@ instance ToJSON VcardTelephone where
 --
 -- /See:/ 'deviceOwner' smart constructor.
 data DeviceOwner = DeviceOwner
-    { _doOperator :: !(Maybe (Maybe Vcard))
-    , _doOwner    :: !(Maybe (Maybe Vcard))
+    { _doOperator :: !(Maybe Vcard)
+    , _doOwner    :: !(Maybe Vcard)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeviceOwner' with the minimum fields required to make a request.
@@ -874,13 +874,13 @@ deviceOwner =
 
 -- | The vCard contact information for the device operator is optional, but
 -- may be required by specific regulatory domains.
-doOperator :: Lens' DeviceOwner (Maybe (Maybe Vcard))
+doOperator :: Lens' DeviceOwner (Maybe Vcard)
 doOperator
   = lens _doOperator (\ s a -> s{_doOperator = a})
 
 -- | The vCard contact information for the individual or business that owns
 -- the device is required.
-doOwner :: Lens' DeviceOwner (Maybe (Maybe Vcard))
+doOwner :: Lens' DeviceOwner (Maybe Vcard)
 doOwner = lens _doOwner (\ s a -> s{_doOwner = a})
 
 instance FromJSON DeviceOwner where
@@ -967,11 +967,11 @@ instance ToJSON AntennaCharacteristics where
 --
 -- /See:/ 'pawsVerifyDeviceResponse' smart constructor.
 data PawsVerifyDeviceResponse = PawsVerifyDeviceResponse
-    { _pvdrDeviceValidities :: !(Maybe [Maybe DeviceValidity])
+    { _pvdrDeviceValidities :: !(Maybe [DeviceValidity])
     , _pvdrKind             :: !Text
     , _pvdrVersion          :: !(Maybe Text)
     , _pvdrType             :: !(Maybe Text)
-    , _pvdrDatabaseChange   :: !(Maybe (Maybe DBUpdateSpec))
+    , _pvdrDatabaseChange   :: !(Maybe DBUpdateSpec)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PawsVerifyDeviceResponse' with the minimum fields required to make a request.
@@ -1002,7 +1002,7 @@ pawsVerifyDeviceResponse =
 -- to report whether each slave device listed in a previous device
 -- validation request is valid. The number of entries must match the number
 -- of device descriptors listed in the previous device validation request.
-pvdrDeviceValidities :: Lens' PawsVerifyDeviceResponse [Maybe DeviceValidity]
+pvdrDeviceValidities :: Lens' PawsVerifyDeviceResponse [DeviceValidity]
 pvdrDeviceValidities
   = lens _pvdrDeviceValidities
       (\ s a -> s{_pvdrDeviceValidities = a})
@@ -1029,7 +1029,7 @@ pvdrType = lens _pvdrType (\ s a -> s{_pvdrType = a})
 -- database URIs. The device should use this information to update its list
 -- of pre-configured databases by (only) replacing its entry for the
 -- responding database with the list of alternate URIs.
-pvdrDatabaseChange :: Lens' PawsVerifyDeviceResponse (Maybe (Maybe DBUpdateSpec))
+pvdrDatabaseChange :: Lens' PawsVerifyDeviceResponse (Maybe DBUpdateSpec)
 pvdrDatabaseChange
   = lens _pvdrDatabaseChange
       (\ s a -> s{_pvdrDatabaseChange = a})
@@ -1061,15 +1061,15 @@ instance ToJSON PawsVerifyDeviceResponse where
 --
 -- /See:/ 'pawsGetSpectrumRequest' smart constructor.
 data PawsGetSpectrumRequest = PawsGetSpectrumRequest
-    { _pgsrAntenna          :: !(Maybe (Maybe AntennaCharacteristics))
-    , _pgsrMasterDeviceDesc :: !(Maybe (Maybe DeviceDescriptor))
-    , _pgsrLocation         :: !(Maybe (Maybe GeoLocation))
-    , _pgsrOwner            :: !(Maybe (Maybe DeviceOwner))
+    { _pgsrAntenna          :: !(Maybe AntennaCharacteristics)
+    , _pgsrMasterDeviceDesc :: !(Maybe DeviceDescriptor)
+    , _pgsrLocation         :: !(Maybe GeoLocation)
+    , _pgsrOwner            :: !(Maybe DeviceOwner)
     , _pgsrRequestType      :: !(Maybe Text)
     , _pgsrVersion          :: !(Maybe Text)
     , _pgsrType             :: !(Maybe Text)
-    , _pgsrCapabilities     :: !(Maybe (Maybe DeviceCapabilities))
-    , _pgsrDeviceDesc       :: !(Maybe (Maybe DeviceDescriptor))
+    , _pgsrCapabilities     :: !(Maybe DeviceCapabilities)
+    , _pgsrDeviceDesc       :: !(Maybe DeviceDescriptor)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PawsGetSpectrumRequest' with the minimum fields required to make a request.
@@ -1110,7 +1110,7 @@ pawsGetSpectrumRequest =
 
 -- | Depending on device type and regulatory domain, the characteristics of
 -- the antenna may be required.
-pgsrAntenna :: Lens' PawsGetSpectrumRequest (Maybe (Maybe AntennaCharacteristics))
+pgsrAntenna :: Lens' PawsGetSpectrumRequest (Maybe AntennaCharacteristics)
 pgsrAntenna
   = lens _pgsrAntenna (\ s a -> s{_pgsrAntenna = a})
 
@@ -1121,7 +1121,7 @@ pgsrAntenna
 -- device descriptor information (in addition to device descriptor
 -- information for the slave device, which is provided in a separate
 -- parameter).
-pgsrMasterDeviceDesc :: Lens' PawsGetSpectrumRequest (Maybe (Maybe DeviceDescriptor))
+pgsrMasterDeviceDesc :: Lens' PawsGetSpectrumRequest (Maybe DeviceDescriptor)
 pgsrMasterDeviceDesc
   = lens _pgsrMasterDeviceDesc
       (\ s a -> s{_pgsrMasterDeviceDesc = a})
@@ -1136,7 +1136,7 @@ pgsrMasterDeviceDesc
 -- location specifies a region, rather than a point, the database may
 -- return an UNIMPLEMENTED error code if it does not support query by
 -- region.
-pgsrLocation :: Lens' PawsGetSpectrumRequest (Maybe (Maybe GeoLocation))
+pgsrLocation :: Lens' PawsGetSpectrumRequest (Maybe GeoLocation)
 pgsrLocation
   = lens _pgsrLocation (\ s a -> s{_pgsrLocation = a})
 
@@ -1144,7 +1144,7 @@ pgsrLocation
 -- may be included in an available spectrum request. This allows the device
 -- to register and get spectrum-availability information in a single
 -- request.
-pgsrOwner :: Lens' PawsGetSpectrumRequest (Maybe (Maybe DeviceOwner))
+pgsrOwner :: Lens' PawsGetSpectrumRequest (Maybe DeviceOwner)
 pgsrOwner
   = lens _pgsrOwner (\ s a -> s{_pgsrOwner = a})
 
@@ -1174,7 +1174,7 @@ pgsrType = lens _pgsrType (\ s a -> s{_pgsrType = a})
 -- available-spectrum response to the spectrum that is compatible with its
 -- capabilities. The database should not return spectrum that is
 -- incompatible with the specified capabilities.
-pgsrCapabilities :: Lens' PawsGetSpectrumRequest (Maybe (Maybe DeviceCapabilities))
+pgsrCapabilities :: Lens' PawsGetSpectrumRequest (Maybe DeviceCapabilities)
 pgsrCapabilities
   = lens _pgsrCapabilities
       (\ s a -> s{_pgsrCapabilities = a})
@@ -1185,7 +1185,7 @@ pgsrCapabilities
 -- be empty). When a requestType value is specified, device descriptor
 -- information may be optional or required according to the rules of the
 -- applicable regulatory domain.
-pgsrDeviceDesc :: Lens' PawsGetSpectrumRequest (Maybe (Maybe DeviceDescriptor))
+pgsrDeviceDesc :: Lens' PawsGetSpectrumRequest (Maybe DeviceDescriptor)
 pgsrDeviceDesc
   = lens _pgsrDeviceDesc
       (\ s a -> s{_pgsrDeviceDesc = a})
@@ -1363,14 +1363,14 @@ instance ToJSON VcardAddress where
 data PawsGetSpectrumBatchResponse = PawsGetSpectrumBatchResponse
     { _pNeedsSpectrumReport  :: !(Maybe Bool)
     , _pKind                 :: !Text
-    , _pGeoSpectrumSchedules :: !(Maybe [Maybe GeoSpectrumSchedule])
+    , _pGeoSpectrumSchedules :: !(Maybe [GeoSpectrumSchedule])
     , _pMaxContiguousBwHz    :: !(Maybe Double)
     , _pVersion              :: !(Maybe Text)
-    , _pRulesetInfo          :: !(Maybe (Maybe RulesetInfo))
+    , _pRulesetInfo          :: !(Maybe RulesetInfo)
     , _pType                 :: !(Maybe Text)
-    , _pDatabaseChange       :: !(Maybe (Maybe DBUpdateSpec))
+    , _pDatabaseChange       :: !(Maybe DBUpdateSpec)
     , _pTimestamp            :: !(Maybe Text)
-    , _pDeviceDesc           :: !(Maybe (Maybe DeviceDescriptor))
+    , _pDeviceDesc           :: !(Maybe DeviceDescriptor)
     , _pMaxTotalBwHz         :: !(Maybe Double)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1442,7 +1442,7 @@ pKind = lens _pKind (\ s a -> s{_pKind = a})
 -- requested. The device must not make assumptions about the order of the
 -- entries in the list, and must use the geolocation value in each
 -- geo-spectrum schedule entry to match available spectrum to a location.
-pGeoSpectrumSchedules :: Lens' PawsGetSpectrumBatchResponse [Maybe GeoSpectrumSchedule]
+pGeoSpectrumSchedules :: Lens' PawsGetSpectrumBatchResponse [GeoSpectrumSchedule]
 pGeoSpectrumSchedules
   = lens _pGeoSpectrumSchedules
       (\ s a -> s{_pGeoSpectrumSchedules = a})
@@ -1471,7 +1471,7 @@ pVersion = lens _pVersion (\ s a -> s{_pVersion = a})
 -- ruleset information, such as maxLocationChange, take precedence over any
 -- conflicting values provided in the ruleset information returned in a
 -- prior initialization response sent by the database to the device.
-pRulesetInfo :: Lens' PawsGetSpectrumBatchResponse (Maybe (Maybe RulesetInfo))
+pRulesetInfo :: Lens' PawsGetSpectrumBatchResponse (Maybe RulesetInfo)
 pRulesetInfo
   = lens _pRulesetInfo (\ s a -> s{_pRulesetInfo = a})
 
@@ -1485,7 +1485,7 @@ pType = lens _pType (\ s a -> s{_pType = a})
 -- database URIs. The device should use this information to update its list
 -- of pre-configured databases by (only) replacing its entry for the
 -- responding database with the list of alternate URIs.
-pDatabaseChange :: Lens' PawsGetSpectrumBatchResponse (Maybe (Maybe DBUpdateSpec))
+pDatabaseChange :: Lens' PawsGetSpectrumBatchResponse (Maybe DBUpdateSpec)
 pDatabaseChange
   = lens _pDatabaseChange
       (\ s a -> s{_pDatabaseChange = a})
@@ -1501,7 +1501,7 @@ pTimestamp
 -- | The database must return in its available spectrum response the device
 -- descriptor information it received in the master device\'s available
 -- spectrum batch request.
-pDeviceDesc :: Lens' PawsGetSpectrumBatchResponse (Maybe (Maybe DeviceDescriptor))
+pDeviceDesc :: Lens' PawsGetSpectrumBatchResponse (Maybe DeviceDescriptor)
 pDeviceDesc
   = lens _pDeviceDesc (\ s a -> s{_pDeviceDesc = a})
 
@@ -1557,7 +1557,7 @@ instance ToJSON PawsGetSpectrumBatchResponse where
 -- /See:/ 'geoLocationEllipse' smart constructor.
 data GeoLocationEllipse = GeoLocationEllipse
     { _gleSemiMajorAxis :: !(Maybe Double)
-    , _gleCenter        :: !(Maybe (Maybe GeoLocationPoint))
+    , _gleCenter        :: !(Maybe GeoLocationPoint)
     , _gleOrientation   :: !(Maybe Double)
     , _gleSemiMinorAxis :: !(Maybe Double)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -1592,7 +1592,7 @@ gleSemiMajorAxis
       (\ s a -> s{_gleSemiMajorAxis = a})
 
 -- | A required geo-spatial point representing the center of the ellipse.
-gleCenter :: Lens' GeoLocationEllipse (Maybe (Maybe GeoLocationPoint))
+gleCenter :: Lens' GeoLocationEllipse (Maybe GeoLocationPoint)
 gleCenter
   = lens _gleCenter (\ s a -> s{_gleCenter = a})
 
@@ -1641,7 +1641,7 @@ instance ToJSON GeoLocationEllipse where
 data DeviceValidity = DeviceValidity
     { _dvIsValid    :: !(Maybe Bool)
     , _dvReason     :: !(Maybe Text)
-    , _dvDeviceDesc :: !(Maybe (Maybe DeviceDescriptor))
+    , _dvDeviceDesc :: !(Maybe DeviceDescriptor)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeviceValidity' with the minimum fields required to make a request.
@@ -1676,7 +1676,7 @@ dvReason = lens _dvReason (\ s a -> s{_dvReason = a})
 
 -- | The descriptor of the device for which the validity check was requested.
 -- It will always be present.
-dvDeviceDesc :: Lens' DeviceValidity (Maybe (Maybe DeviceDescriptor))
+dvDeviceDesc :: Lens' DeviceValidity (Maybe DeviceDescriptor)
 dvDeviceDesc
   = lens _dvDeviceDesc (\ s a -> s{_dvDeviceDesc = a})
 
@@ -1862,12 +1862,12 @@ instance ToJSON PawsNotifySpectrumUseResponse where
 --
 -- /See:/ 'pawsRegisterRequest' smart constructor.
 data PawsRegisterRequest = PawsRegisterRequest
-    { _prrrAntenna     :: !(Maybe (Maybe AntennaCharacteristics))
-    , _prrrLocation    :: !(Maybe (Maybe GeoLocation))
-    , _prrrDeviceOwner :: !(Maybe (Maybe DeviceOwner))
+    { _prrrAntenna     :: !(Maybe AntennaCharacteristics)
+    , _prrrLocation    :: !(Maybe GeoLocation)
+    , _prrrDeviceOwner :: !(Maybe DeviceOwner)
     , _prrrVersion     :: !(Maybe Text)
     , _prrrType        :: !(Maybe Text)
-    , _prrrDeviceDesc  :: !(Maybe (Maybe DeviceDescriptor))
+    , _prrrDeviceDesc  :: !(Maybe DeviceDescriptor)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PawsRegisterRequest' with the minimum fields required to make a request.
@@ -1898,17 +1898,17 @@ pawsRegisterRequest =
     }
 
 -- | Antenna characteristics, including its height and height type.
-prrrAntenna :: Lens' PawsRegisterRequest (Maybe (Maybe AntennaCharacteristics))
+prrrAntenna :: Lens' PawsRegisterRequest (Maybe AntennaCharacteristics)
 prrrAntenna
   = lens _prrrAntenna (\ s a -> s{_prrrAntenna = a})
 
 -- | A device\'s geolocation is required.
-prrrLocation :: Lens' PawsRegisterRequest (Maybe (Maybe GeoLocation))
+prrrLocation :: Lens' PawsRegisterRequest (Maybe GeoLocation)
 prrrLocation
   = lens _prrrLocation (\ s a -> s{_prrrLocation = a})
 
 -- | Device owner information is required.
-prrrDeviceOwner :: Lens' PawsRegisterRequest (Maybe (Maybe DeviceOwner))
+prrrDeviceOwner :: Lens' PawsRegisterRequest (Maybe DeviceOwner)
 prrrDeviceOwner
   = lens _prrrDeviceOwner
       (\ s a -> s{_prrrDeviceOwner = a})
@@ -1924,7 +1924,7 @@ prrrType :: Lens' PawsRegisterRequest (Maybe Text)
 prrrType = lens _prrrType (\ s a -> s{_prrrType = a})
 
 -- | A DeviceDescriptor is required.
-prrrDeviceDesc :: Lens' PawsRegisterRequest (Maybe (Maybe DeviceDescriptor))
+prrrDeviceDesc :: Lens' PawsRegisterRequest (Maybe DeviceDescriptor)
 prrrDeviceDesc
   = lens _prrrDeviceDesc
       (\ s a -> s{_prrrDeviceDesc = a})
@@ -1955,7 +1955,7 @@ instance ToJSON PawsRegisterRequest where
 --
 -- /See:/ 'databaseSpec' smart constructor.
 data DatabaseSpec = DatabaseSpec
-    { _dsUri  :: !(Maybe Text)
+    { _dsURI  :: !(Maybe Text)
     , _dsName :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1963,20 +1963,20 @@ data DatabaseSpec = DatabaseSpec
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'dsUri'
+-- * 'dsURI'
 --
 -- * 'dsName'
 databaseSpec
     :: DatabaseSpec
 databaseSpec =
     DatabaseSpec
-    { _dsUri = Nothing
+    { _dsURI = Nothing
     , _dsName = Nothing
     }
 
 -- | The corresponding URI of the database.
-dsUri :: Lens' DatabaseSpec (Maybe Text)
-dsUri = lens _dsUri (\ s a -> s{_dsUri = a})
+dsURI :: Lens' DatabaseSpec (Maybe Text)
+dsURI = lens _dsURI (\ s a -> s{_dsURI = a})
 
 -- | The display name for a database.
 dsName :: Lens' DatabaseSpec (Maybe Text)
@@ -1992,7 +1992,7 @@ instance ToJSON DatabaseSpec where
         toJSON DatabaseSpec{..}
           = object
               (catMaybes
-                 [("uri" .=) <$> _dsUri, ("name" .=) <$> _dsName])
+                 [("uri" .=) <$> _dsURI, ("name" .=) <$> _dsName])
 
 -- | Available spectrum can be logically characterized by a list of frequency
 -- ranges and permissible power levels for each range.
@@ -2000,7 +2000,7 @@ instance ToJSON DatabaseSpec where
 -- /See:/ 'spectrumMessage' smart constructor.
 data SpectrumMessage = SpectrumMessage
     { _smBandwidth       :: !(Maybe Double)
-    , _smFrequencyRanges :: !(Maybe [Maybe FrequencyRange])
+    , _smFrequencyRanges :: !(Maybe [FrequencyRange])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SpectrumMessage' with the minimum fields required to make a request.
@@ -2030,7 +2030,7 @@ smBandwidth
 -- | The list of frequency ranges and permissible power levels. The list may
 -- be empty if there is no available spectrum, otherwise it will be
 -- present.
-smFrequencyRanges :: Lens' SpectrumMessage [Maybe FrequencyRange]
+smFrequencyRanges :: Lens' SpectrumMessage [FrequencyRange]
 smFrequencyRanges
   = lens _smFrequencyRanges
       (\ s a -> s{_smFrequencyRanges = a})
@@ -2057,8 +2057,8 @@ instance ToJSON SpectrumMessage where
 -- /See:/ 'geoLocation' smart constructor.
 data GeoLocation = GeoLocation
     { _glConfidence :: !(Maybe Int32)
-    , _glPoint      :: !(Maybe (Maybe GeoLocationEllipse))
-    , _glRegion     :: !(Maybe (Maybe GeoLocationPolygon))
+    , _glPoint      :: !(Maybe GeoLocationEllipse)
+    , _glRegion     :: !(Maybe GeoLocationPolygon)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GeoLocation' with the minimum fields required to make a request.
@@ -2094,12 +2094,12 @@ glConfidence
 -- center represents the location of the point and the distances along the
 -- major and minor axes represent the uncertainty. The uncertainty values
 -- may be required, depending on the regulatory domain.
-glPoint :: Lens' GeoLocation (Maybe (Maybe GeoLocationEllipse))
+glPoint :: Lens' GeoLocation (Maybe GeoLocationEllipse)
 glPoint = lens _glPoint (\ s a -> s{_glPoint = a})
 
 -- | If present, indicates that the geolocation represents a region. Database
 -- support for regions is optional.
-glRegion :: Lens' GeoLocation (Maybe (Maybe GeoLocationPolygon))
+glRegion :: Lens' GeoLocation (Maybe GeoLocationPolygon)
 glRegion = lens _glRegion (\ s a -> s{_glRegion = a})
 
 instance FromJSON GeoLocation where
@@ -2202,7 +2202,7 @@ instance ToJSON FrequencyRange where
 -- /See:/ 'pawsVerifyDeviceRequest' smart constructor.
 data PawsVerifyDeviceRequest = PawsVerifyDeviceRequest
     { _pvdrvVersion     :: !(Maybe Text)
-    , _pvdrvDeviceDescs :: !(Maybe [Maybe DeviceDescriptor])
+    , _pvdrvDeviceDescs :: !(Maybe [DeviceDescriptor])
     , _pvdrvType        :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -2231,7 +2231,7 @@ pvdrvVersion
 
 -- | A list of device descriptors, which specifies the slave devices to be
 -- validated, is required.
-pvdrvDeviceDescs :: Lens' PawsVerifyDeviceRequest [Maybe DeviceDescriptor]
+pvdrvDeviceDescs :: Lens' PawsVerifyDeviceRequest [DeviceDescriptor]
 pvdrvDeviceDescs
   = lens _pvdrvDeviceDescs
       (\ s a -> s{_pvdrvDeviceDescs = a})
@@ -2441,15 +2441,15 @@ instance ToJSON DeviceDescriptor where
 -- /See:/ 'pawsGetSpectrumResponse' smart constructor.
 data PawsGetSpectrumResponse = PawsGetSpectrumResponse
     { _pgsrgNeedsSpectrumReport :: !(Maybe Bool)
-    , _pgsrgSpectrumSchedules   :: !(Maybe [Maybe SpectrumSchedule])
+    , _pgsrgSpectrumSchedules   :: !(Maybe [SpectrumSchedule])
     , _pgsrgKind                :: !Text
     , _pgsrgMaxContiguousBwHz   :: !(Maybe Double)
     , _pgsrgVersion             :: !(Maybe Text)
-    , _pgsrgRulesetInfo         :: !(Maybe (Maybe RulesetInfo))
+    , _pgsrgRulesetInfo         :: !(Maybe RulesetInfo)
     , _pgsrgType                :: !(Maybe Text)
-    , _pgsrgDatabaseChange      :: !(Maybe (Maybe DBUpdateSpec))
+    , _pgsrgDatabaseChange      :: !(Maybe DBUpdateSpec)
     , _pgsrgTimestamp           :: !(Maybe Text)
-    , _pgsrgDeviceDesc          :: !(Maybe (Maybe DeviceDescriptor))
+    , _pgsrgDeviceDesc          :: !(Maybe DeviceDescriptor)
     , _pgsrgMaxTotalBwHz        :: !(Maybe Double)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -2511,7 +2511,7 @@ pgsrgNeedsSpectrumReport
 -- return more than one spectrum schedule to represent future changes to
 -- the available spectrum. How far in advance a schedule may be provided
 -- depends on the applicable regulatory domain.
-pgsrgSpectrumSchedules :: Lens' PawsGetSpectrumResponse [Maybe SpectrumSchedule]
+pgsrgSpectrumSchedules :: Lens' PawsGetSpectrumResponse [SpectrumSchedule]
 pgsrgSpectrumSchedules
   = lens _pgsrgSpectrumSchedules
       (\ s a -> s{_pgsrgSpectrumSchedules = a})
@@ -2547,7 +2547,7 @@ pgsrgVersion
 -- information, such as maxLocationChange, take precedence over any
 -- conflicting values provided in the ruleset information returned in a
 -- prior initialization response sent by the database to the device.
-pgsrgRulesetInfo :: Lens' PawsGetSpectrumResponse (Maybe (Maybe RulesetInfo))
+pgsrgRulesetInfo :: Lens' PawsGetSpectrumResponse (Maybe RulesetInfo)
 pgsrgRulesetInfo
   = lens _pgsrgRulesetInfo
       (\ s a -> s{_pgsrgRulesetInfo = a})
@@ -2563,7 +2563,7 @@ pgsrgType
 -- database URIs. The device should use this information to update its list
 -- of pre-configured databases by (only) replacing its entry for the
 -- responding database with the list of alternate URIs.
-pgsrgDatabaseChange :: Lens' PawsGetSpectrumResponse (Maybe (Maybe DBUpdateSpec))
+pgsrgDatabaseChange :: Lens' PawsGetSpectrumResponse (Maybe DBUpdateSpec)
 pgsrgDatabaseChange
   = lens _pgsrgDatabaseChange
       (\ s a -> s{_pgsrgDatabaseChange = a})
@@ -2580,7 +2580,7 @@ pgsrgTimestamp
 -- | The database must return, in its available spectrum response, the device
 -- descriptor information it received in the master device\'s available
 -- spectrum request.
-pgsrgDeviceDesc :: Lens' PawsGetSpectrumResponse (Maybe (Maybe DeviceDescriptor))
+pgsrgDeviceDesc :: Lens' PawsGetSpectrumResponse (Maybe DeviceDescriptor)
 pgsrgDeviceDesc
   = lens _pgsrgDeviceDesc
       (\ s a -> s{_pgsrgDeviceDesc = a})
@@ -2636,10 +2636,10 @@ instance ToJSON PawsGetSpectrumResponse where
 --
 -- /See:/ 'pawsInitRequest' smart constructor.
 data PawsInitRequest = PawsInitRequest
-    { _piriLocation   :: !(Maybe (Maybe GeoLocation))
+    { _piriLocation   :: !(Maybe GeoLocation)
     , _piriVersion    :: !(Maybe Text)
     , _piriType       :: !(Maybe Text)
-    , _piriDeviceDesc :: !(Maybe (Maybe DeviceDescriptor))
+    , _piriDeviceDesc :: !(Maybe DeviceDescriptor)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PawsInitRequest' with the minimum fields required to make a request.
@@ -2664,7 +2664,7 @@ pawsInitRequest =
     }
 
 -- | A device\'s geolocation is required.
-piriLocation :: Lens' PawsInitRequest (Maybe (Maybe GeoLocation))
+piriLocation :: Lens' PawsInitRequest (Maybe GeoLocation)
 piriLocation
   = lens _piriLocation (\ s a -> s{_piriLocation = a})
 
@@ -2682,7 +2682,7 @@ piriType = lens _piriType (\ s a -> s{_piriType = a})
 -- support the device or any of the rulesets specified in the device
 -- descriptor, it must return an UNSUPPORTED error code in the error
 -- response.
-piriDeviceDesc :: Lens' PawsInitRequest (Maybe (Maybe DeviceDescriptor))
+piriDeviceDesc :: Lens' PawsInitRequest (Maybe DeviceDescriptor)
 piriDeviceDesc
   = lens _piriDeviceDesc
       (\ s a -> s{_piriDeviceDesc = a})
@@ -2712,7 +2712,7 @@ instance ToJSON PawsInitRequest where
 --
 -- /See:/ 'deviceCapabilities' smart constructor.
 newtype DeviceCapabilities = DeviceCapabilities
-    { _dcFrequencyRanges :: Maybe [Maybe FrequencyRange]
+    { _dcFrequencyRanges :: Maybe [FrequencyRange]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeviceCapabilities' with the minimum fields required to make a request.
@@ -2732,7 +2732,7 @@ deviceCapabilities =
 -- operate. Channel identifiers are optional. When specified, the database
 -- should not return available spectrum that falls outside these ranges or
 -- channel IDs.
-dcFrequencyRanges :: Lens' DeviceCapabilities [Maybe FrequencyRange]
+dcFrequencyRanges :: Lens' DeviceCapabilities [FrequencyRange]
 dcFrequencyRanges
   = lens _dcFrequencyRanges
       (\ s a -> s{_dcFrequencyRanges = a})

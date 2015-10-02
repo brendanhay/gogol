@@ -34,14 +34,13 @@ module Network.Google.Resource.Compute.GlobalForwardingRules.List
     , gfrlQuotaUser
     , gfrlPrettyPrint
     , gfrlProject
-    , gfrlUserIp
+    , gfrlUserIP
     , gfrlKey
     , gfrlFilter
     , gfrlPageToken
-    , gfrlOauthToken
+    , gfrlOAuthToken
     , gfrlMaxResults
     , gfrlFields
-    , gfrlAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -56,13 +55,13 @@ type GlobalForwardingRulesListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "filter" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "maxResults" Word32 :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :>
+                             QueryParam "alt" AltJSON :>
                                Get '[JSON] ForwardingRuleList
 
 -- | Retrieves the list of ForwardingRule resources available to the
@@ -73,14 +72,13 @@ data GlobalForwardingRulesList' = GlobalForwardingRulesList'
     { _gfrlQuotaUser   :: !(Maybe Text)
     , _gfrlPrettyPrint :: !Bool
     , _gfrlProject     :: !Text
-    , _gfrlUserIp      :: !(Maybe Text)
-    , _gfrlKey         :: !(Maybe Text)
+    , _gfrlUserIP      :: !(Maybe Text)
+    , _gfrlKey         :: !(Maybe Key)
     , _gfrlFilter      :: !(Maybe Text)
     , _gfrlPageToken   :: !(Maybe Text)
-    , _gfrlOauthToken  :: !(Maybe Text)
+    , _gfrlOAuthToken  :: !(Maybe OAuthToken)
     , _gfrlMaxResults  :: !Word32
     , _gfrlFields      :: !(Maybe Text)
-    , _gfrlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GlobalForwardingRulesList'' with the minimum fields required to make a request.
@@ -93,7 +91,7 @@ data GlobalForwardingRulesList' = GlobalForwardingRulesList'
 --
 -- * 'gfrlProject'
 --
--- * 'gfrlUserIp'
+-- * 'gfrlUserIP'
 --
 -- * 'gfrlKey'
 --
@@ -101,13 +99,11 @@ data GlobalForwardingRulesList' = GlobalForwardingRulesList'
 --
 -- * 'gfrlPageToken'
 --
--- * 'gfrlOauthToken'
+-- * 'gfrlOAuthToken'
 --
 -- * 'gfrlMaxResults'
 --
 -- * 'gfrlFields'
---
--- * 'gfrlAlt'
 globalForwardingRulesList'
     :: Text -- ^ 'project'
     -> GlobalForwardingRulesList'
@@ -116,14 +112,13 @@ globalForwardingRulesList' pGfrlProject_ =
     { _gfrlQuotaUser = Nothing
     , _gfrlPrettyPrint = True
     , _gfrlProject = pGfrlProject_
-    , _gfrlUserIp = Nothing
+    , _gfrlUserIP = Nothing
     , _gfrlKey = Nothing
     , _gfrlFilter = Nothing
     , _gfrlPageToken = Nothing
-    , _gfrlOauthToken = Nothing
+    , _gfrlOAuthToken = Nothing
     , _gfrlMaxResults = 500
     , _gfrlFields = Nothing
-    , _gfrlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -147,14 +142,14 @@ gfrlProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-gfrlUserIp :: Lens' GlobalForwardingRulesList' (Maybe Text)
-gfrlUserIp
-  = lens _gfrlUserIp (\ s a -> s{_gfrlUserIp = a})
+gfrlUserIP :: Lens' GlobalForwardingRulesList' (Maybe Text)
+gfrlUserIP
+  = lens _gfrlUserIP (\ s a -> s{_gfrlUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-gfrlKey :: Lens' GlobalForwardingRulesList' (Maybe Text)
+gfrlKey :: Lens' GlobalForwardingRulesList' (Maybe Key)
 gfrlKey = lens _gfrlKey (\ s a -> s{_gfrlKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
@@ -181,10 +176,10 @@ gfrlPageToken
       (\ s a -> s{_gfrlPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-gfrlOauthToken :: Lens' GlobalForwardingRulesList' (Maybe Text)
-gfrlOauthToken
-  = lens _gfrlOauthToken
-      (\ s a -> s{_gfrlOauthToken = a})
+gfrlOAuthToken :: Lens' GlobalForwardingRulesList' (Maybe OAuthToken)
+gfrlOAuthToken
+  = lens _gfrlOAuthToken
+      (\ s a -> s{_gfrlOAuthToken = a})
 
 -- | Maximum count of results to be returned.
 gfrlMaxResults :: Lens' GlobalForwardingRulesList' Word32
@@ -197,9 +192,9 @@ gfrlFields :: Lens' GlobalForwardingRulesList' (Maybe Text)
 gfrlFields
   = lens _gfrlFields (\ s a -> s{_gfrlFields = a})
 
--- | Data format for the response.
-gfrlAlt :: Lens' GlobalForwardingRulesList' Alt
-gfrlAlt = lens _gfrlAlt (\ s a -> s{_gfrlAlt = a})
+instance GoogleAuth GlobalForwardingRulesList' where
+        authKey = gfrlKey . _Just
+        authToken = gfrlOAuthToken . _Just
 
 instance GoogleRequest GlobalForwardingRulesList'
          where
@@ -209,14 +204,14 @@ instance GoogleRequest GlobalForwardingRulesList'
         requestWithRoute r u GlobalForwardingRulesList'{..}
           = go _gfrlQuotaUser (Just _gfrlPrettyPrint)
               _gfrlProject
-              _gfrlUserIp
+              _gfrlUserIP
               _gfrlKey
               _gfrlFilter
               _gfrlPageToken
-              _gfrlOauthToken
+              _gfrlOAuthToken
               (Just _gfrlMaxResults)
               _gfrlFields
-              (Just _gfrlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy GlobalForwardingRulesListResource)

@@ -32,14 +32,13 @@ module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.List
     -- * Request Lenses
     , lclQuotaUser
     , lclPrettyPrint
-    , lclUserIp
+    , lclUserIP
     , lclApplicationId
     , lclKey
     , lclPageToken
-    , lclOauthToken
+    , lclOAuthToken
     , lclMaxResults
     , lclFields
-    , lclAlt
     ) where
 
 import           Network.Google.GamesConfiguration.Types
@@ -54,12 +53,12 @@ type LeaderboardConfigurationsListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "maxResults" Int32 :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :>
+                           QueryParam "alt" AltJSON :>
                              Get '[JSON] LeaderboardConfigurationListResponse
 
 -- | Returns a list of the leaderboard configurations in this application.
@@ -68,14 +67,13 @@ type LeaderboardConfigurationsListResource =
 data LeaderboardConfigurationsList' = LeaderboardConfigurationsList'
     { _lclQuotaUser     :: !(Maybe Text)
     , _lclPrettyPrint   :: !Bool
-    , _lclUserIp        :: !(Maybe Text)
+    , _lclUserIP        :: !(Maybe Text)
     , _lclApplicationId :: !Text
-    , _lclKey           :: !(Maybe Text)
+    , _lclKey           :: !(Maybe Key)
     , _lclPageToken     :: !(Maybe Text)
-    , _lclOauthToken    :: !(Maybe Text)
+    , _lclOAuthToken    :: !(Maybe OAuthToken)
     , _lclMaxResults    :: !(Maybe Int32)
     , _lclFields        :: !(Maybe Text)
-    , _lclAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LeaderboardConfigurationsList'' with the minimum fields required to make a request.
@@ -86,7 +84,7 @@ data LeaderboardConfigurationsList' = LeaderboardConfigurationsList'
 --
 -- * 'lclPrettyPrint'
 --
--- * 'lclUserIp'
+-- * 'lclUserIP'
 --
 -- * 'lclApplicationId'
 --
@@ -94,13 +92,11 @@ data LeaderboardConfigurationsList' = LeaderboardConfigurationsList'
 --
 -- * 'lclPageToken'
 --
--- * 'lclOauthToken'
+-- * 'lclOAuthToken'
 --
 -- * 'lclMaxResults'
 --
 -- * 'lclFields'
---
--- * 'lclAlt'
 leaderboardConfigurationsList'
     :: Text -- ^ 'applicationId'
     -> LeaderboardConfigurationsList'
@@ -108,14 +104,13 @@ leaderboardConfigurationsList' pLclApplicationId_ =
     LeaderboardConfigurationsList'
     { _lclQuotaUser = Nothing
     , _lclPrettyPrint = True
-    , _lclUserIp = Nothing
+    , _lclUserIP = Nothing
     , _lclApplicationId = pLclApplicationId_
     , _lclKey = Nothing
     , _lclPageToken = Nothing
-    , _lclOauthToken = Nothing
+    , _lclOAuthToken = Nothing
     , _lclMaxResults = Nothing
     , _lclFields = Nothing
-    , _lclAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -133,9 +128,9 @@ lclPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-lclUserIp :: Lens' LeaderboardConfigurationsList' (Maybe Text)
-lclUserIp
-  = lens _lclUserIp (\ s a -> s{_lclUserIp = a})
+lclUserIP :: Lens' LeaderboardConfigurationsList' (Maybe Text)
+lclUserIP
+  = lens _lclUserIP (\ s a -> s{_lclUserIP = a})
 
 -- | The application ID from the Google Play developer console.
 lclApplicationId :: Lens' LeaderboardConfigurationsList' Text
@@ -146,7 +141,7 @@ lclApplicationId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lclKey :: Lens' LeaderboardConfigurationsList' (Maybe Text)
+lclKey :: Lens' LeaderboardConfigurationsList' (Maybe Key)
 lclKey = lens _lclKey (\ s a -> s{_lclKey = a})
 
 -- | The token returned by the previous request.
@@ -155,10 +150,10 @@ lclPageToken
   = lens _lclPageToken (\ s a -> s{_lclPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-lclOauthToken :: Lens' LeaderboardConfigurationsList' (Maybe Text)
-lclOauthToken
-  = lens _lclOauthToken
-      (\ s a -> s{_lclOauthToken = a})
+lclOAuthToken :: Lens' LeaderboardConfigurationsList' (Maybe OAuthToken)
+lclOAuthToken
+  = lens _lclOAuthToken
+      (\ s a -> s{_lclOAuthToken = a})
 
 -- | The maximum number of resource configurations to return in the response,
 -- used for paging. For any response, the actual number of resources
@@ -173,9 +168,10 @@ lclFields :: Lens' LeaderboardConfigurationsList' (Maybe Text)
 lclFields
   = lens _lclFields (\ s a -> s{_lclFields = a})
 
--- | Data format for the response.
-lclAlt :: Lens' LeaderboardConfigurationsList' Alt
-lclAlt = lens _lclAlt (\ s a -> s{_lclAlt = a})
+instance GoogleAuth LeaderboardConfigurationsList'
+         where
+        authKey = lclKey . _Just
+        authToken = lclOAuthToken . _Just
 
 instance GoogleRequest LeaderboardConfigurationsList'
          where
@@ -185,14 +181,14 @@ instance GoogleRequest LeaderboardConfigurationsList'
           = requestWithRoute defReq gamesConfigurationURL
         requestWithRoute r u
           LeaderboardConfigurationsList'{..}
-          = go _lclQuotaUser (Just _lclPrettyPrint) _lclUserIp
+          = go _lclQuotaUser (Just _lclPrettyPrint) _lclUserIP
               _lclApplicationId
               _lclKey
               _lclPageToken
-              _lclOauthToken
+              _lclOAuthToken
               _lclMaxResults
               _lclFields
-              (Just _lclAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

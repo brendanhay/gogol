@@ -32,15 +32,14 @@ module Network.Google.Resource.Gmail.Users.Threads.Get
     -- * Request Lenses
     , utgQuotaUser
     , utgPrettyPrint
-    , utgUserIp
+    , utgUserIP
     , utgFormat
     , utgUserId
     , utgKey
     , utgId
-    , utgOauthToken
+    , utgOAuthToken
     , utgMetadataHeaders
     , utgFields
-    , utgAlt
     ) where
 
 import           Network.Google.Gmail.Types
@@ -56,11 +55,11 @@ type UsersThreadsGetResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "format" GmailUsersThreadsGetFormat :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParams "metadataHeaders" Text :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Get '[JSON] Thread
+                           QueryParam "alt" AltJSON :> Get '[JSON] Thread
 
 -- | Gets the specified thread.
 --
@@ -68,15 +67,14 @@ type UsersThreadsGetResource =
 data UsersThreadsGet' = UsersThreadsGet'
     { _utgQuotaUser       :: !(Maybe Text)
     , _utgPrettyPrint     :: !Bool
-    , _utgUserIp          :: !(Maybe Text)
+    , _utgUserIP          :: !(Maybe Text)
     , _utgFormat          :: !GmailUsersThreadsGetFormat
     , _utgUserId          :: !Text
-    , _utgKey             :: !(Maybe Text)
+    , _utgKey             :: !(Maybe Key)
     , _utgId              :: !Text
-    , _utgOauthToken      :: !(Maybe Text)
+    , _utgOAuthToken      :: !(Maybe OAuthToken)
     , _utgMetadataHeaders :: !(Maybe Text)
     , _utgFields          :: !(Maybe Text)
-    , _utgAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersThreadsGet'' with the minimum fields required to make a request.
@@ -87,7 +85,7 @@ data UsersThreadsGet' = UsersThreadsGet'
 --
 -- * 'utgPrettyPrint'
 --
--- * 'utgUserIp'
+-- * 'utgUserIP'
 --
 -- * 'utgFormat'
 --
@@ -97,13 +95,11 @@ data UsersThreadsGet' = UsersThreadsGet'
 --
 -- * 'utgId'
 --
--- * 'utgOauthToken'
+-- * 'utgOAuthToken'
 --
 -- * 'utgMetadataHeaders'
 --
 -- * 'utgFields'
---
--- * 'utgAlt'
 usersThreadsGet'
     :: Text -- ^ 'id'
     -> Text
@@ -112,15 +108,14 @@ usersThreadsGet' pUtgUserId_ pUtgId_ =
     UsersThreadsGet'
     { _utgQuotaUser = Nothing
     , _utgPrettyPrint = True
-    , _utgUserIp = Nothing
+    , _utgUserIP = Nothing
     , _utgFormat = Full
     , _utgUserId = pUtgUserId_
     , _utgKey = Nothing
     , _utgId = pUtgId_
-    , _utgOauthToken = Nothing
+    , _utgOAuthToken = Nothing
     , _utgMetadataHeaders = Nothing
     , _utgFields = Nothing
-    , _utgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -138,9 +133,9 @@ utgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-utgUserIp :: Lens' UsersThreadsGet' (Maybe Text)
-utgUserIp
-  = lens _utgUserIp (\ s a -> s{_utgUserIp = a})
+utgUserIP :: Lens' UsersThreadsGet' (Maybe Text)
+utgUserIP
+  = lens _utgUserIP (\ s a -> s{_utgUserIP = a})
 
 -- | The format to return the messages in.
 utgFormat :: Lens' UsersThreadsGet' GmailUsersThreadsGetFormat
@@ -156,7 +151,7 @@ utgUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-utgKey :: Lens' UsersThreadsGet' (Maybe Text)
+utgKey :: Lens' UsersThreadsGet' (Maybe Key)
 utgKey = lens _utgKey (\ s a -> s{_utgKey = a})
 
 -- | The ID of the thread to retrieve.
@@ -164,10 +159,10 @@ utgId :: Lens' UsersThreadsGet' Text
 utgId = lens _utgId (\ s a -> s{_utgId = a})
 
 -- | OAuth 2.0 token for the current user.
-utgOauthToken :: Lens' UsersThreadsGet' (Maybe Text)
-utgOauthToken
-  = lens _utgOauthToken
-      (\ s a -> s{_utgOauthToken = a})
+utgOAuthToken :: Lens' UsersThreadsGet' (Maybe OAuthToken)
+utgOAuthToken
+  = lens _utgOAuthToken
+      (\ s a -> s{_utgOAuthToken = a})
 
 -- | When given and format is METADATA, only include headers specified.
 utgMetadataHeaders :: Lens' UsersThreadsGet' (Maybe Text)
@@ -180,23 +175,23 @@ utgFields :: Lens' UsersThreadsGet' (Maybe Text)
 utgFields
   = lens _utgFields (\ s a -> s{_utgFields = a})
 
--- | Data format for the response.
-utgAlt :: Lens' UsersThreadsGet' Alt
-utgAlt = lens _utgAlt (\ s a -> s{_utgAlt = a})
+instance GoogleAuth UsersThreadsGet' where
+        authKey = utgKey . _Just
+        authToken = utgOAuthToken . _Just
 
 instance GoogleRequest UsersThreadsGet' where
         type Rs UsersThreadsGet' = Thread
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersThreadsGet'{..}
-          = go _utgQuotaUser (Just _utgPrettyPrint) _utgUserIp
+          = go _utgQuotaUser (Just _utgPrettyPrint) _utgUserIP
               (Just _utgFormat)
               _utgUserId
               _utgKey
               _utgId
-              _utgOauthToken
+              _utgOAuthToken
               _utgMetadataHeaders
               _utgFields
-              (Just _utgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersThreadsGetResource)

@@ -33,11 +33,11 @@ module Network.Google.Resource.Genomics.Readgroupsets.Update
     , ruQuotaUser
     , ruPrettyPrint
     , ruReadGroupSetId
-    , ruUserIp
+    , ruUserIP
     , ruKey
-    , ruOauthToken
+    , ruReadGroupSet
+    , ruOAuthToken
     , ruFields
-    , ruAlt
     ) where
 
 import           Network.Google.Genomics.Types
@@ -51,10 +51,12 @@ type ReadgroupsetsUpdateResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Put '[JSON] ReadGroupSet
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] ReadGroupSet :>
+                         Put '[JSON] ReadGroupSet
 
 -- | Updates a read group set.
 --
@@ -63,11 +65,11 @@ data ReadgroupsetsUpdate' = ReadgroupsetsUpdate'
     { _ruQuotaUser      :: !(Maybe Text)
     , _ruPrettyPrint    :: !Bool
     , _ruReadGroupSetId :: !Text
-    , _ruUserIp         :: !(Maybe Text)
-    , _ruKey            :: !(Maybe Text)
-    , _ruOauthToken     :: !(Maybe Text)
+    , _ruUserIP         :: !(Maybe Text)
+    , _ruKey            :: !(Maybe Key)
+    , _ruReadGroupSet   :: !ReadGroupSet
+    , _ruOAuthToken     :: !(Maybe OAuthToken)
     , _ruFields         :: !(Maybe Text)
-    , _ruAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReadgroupsetsUpdate'' with the minimum fields required to make a request.
@@ -80,28 +82,29 @@ data ReadgroupsetsUpdate' = ReadgroupsetsUpdate'
 --
 -- * 'ruReadGroupSetId'
 --
--- * 'ruUserIp'
+-- * 'ruUserIP'
 --
 -- * 'ruKey'
 --
--- * 'ruOauthToken'
+-- * 'ruReadGroupSet'
+--
+-- * 'ruOAuthToken'
 --
 -- * 'ruFields'
---
--- * 'ruAlt'
 readgroupsetsUpdate'
     :: Text -- ^ 'readGroupSetId'
+    -> ReadGroupSet -- ^ 'ReadGroupSet'
     -> ReadgroupsetsUpdate'
-readgroupsetsUpdate' pRuReadGroupSetId_ =
+readgroupsetsUpdate' pRuReadGroupSetId_ pRuReadGroupSet_ =
     ReadgroupsetsUpdate'
     { _ruQuotaUser = Nothing
     , _ruPrettyPrint = True
     , _ruReadGroupSetId = pRuReadGroupSetId_
-    , _ruUserIp = Nothing
+    , _ruUserIP = Nothing
     , _ruKey = Nothing
-    , _ruOauthToken = Nothing
+    , _ruReadGroupSet = pRuReadGroupSet_
+    , _ruOAuthToken = Nothing
     , _ruFields = Nothing
-    , _ruAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -126,27 +129,33 @@ ruReadGroupSetId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ruUserIp :: Lens' ReadgroupsetsUpdate' (Maybe Text)
-ruUserIp = lens _ruUserIp (\ s a -> s{_ruUserIp = a})
+ruUserIP :: Lens' ReadgroupsetsUpdate' (Maybe Text)
+ruUserIP = lens _ruUserIP (\ s a -> s{_ruUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ruKey :: Lens' ReadgroupsetsUpdate' (Maybe Text)
+ruKey :: Lens' ReadgroupsetsUpdate' (Maybe Key)
 ruKey = lens _ruKey (\ s a -> s{_ruKey = a})
 
+-- | Multipart request metadata.
+ruReadGroupSet :: Lens' ReadgroupsetsUpdate' ReadGroupSet
+ruReadGroupSet
+  = lens _ruReadGroupSet
+      (\ s a -> s{_ruReadGroupSet = a})
+
 -- | OAuth 2.0 token for the current user.
-ruOauthToken :: Lens' ReadgroupsetsUpdate' (Maybe Text)
-ruOauthToken
-  = lens _ruOauthToken (\ s a -> s{_ruOauthToken = a})
+ruOAuthToken :: Lens' ReadgroupsetsUpdate' (Maybe OAuthToken)
+ruOAuthToken
+  = lens _ruOAuthToken (\ s a -> s{_ruOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ruFields :: Lens' ReadgroupsetsUpdate' (Maybe Text)
 ruFields = lens _ruFields (\ s a -> s{_ruFields = a})
 
--- | Data format for the response.
-ruAlt :: Lens' ReadgroupsetsUpdate' Alt
-ruAlt = lens _ruAlt (\ s a -> s{_ruAlt = a})
+instance GoogleAuth ReadgroupsetsUpdate' where
+        authKey = ruKey . _Just
+        authToken = ruOAuthToken . _Just
 
 instance GoogleRequest ReadgroupsetsUpdate' where
         type Rs ReadgroupsetsUpdate' = ReadGroupSet
@@ -154,11 +163,12 @@ instance GoogleRequest ReadgroupsetsUpdate' where
         requestWithRoute r u ReadgroupsetsUpdate'{..}
           = go _ruQuotaUser (Just _ruPrettyPrint)
               _ruReadGroupSetId
-              _ruUserIp
+              _ruUserIP
               _ruKey
-              _ruOauthToken
+              _ruOAuthToken
               _ruFields
-              (Just _ruAlt)
+              (Just AltJSON)
+              _ruReadGroupSet
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ReadgroupsetsUpdateResource)

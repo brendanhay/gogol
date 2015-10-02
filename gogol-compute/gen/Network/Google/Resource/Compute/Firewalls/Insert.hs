@@ -34,11 +34,11 @@ module Network.Google.Resource.Compute.Firewalls.Insert
     , fiQuotaUser
     , fiPrettyPrint
     , fiProject
-    , fiUserIp
+    , fiUserIP
     , fiKey
-    , fiOauthToken
+    , fiOAuthToken
+    , fiFirewall
     , fiFields
-    , fiAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -53,10 +53,11 @@ type FirewallsInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] Operation
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Firewall :> Post '[JSON] Operation
 
 -- | Creates a firewall resource in the specified project using the data
 -- included in the request.
@@ -66,11 +67,11 @@ data FirewallsInsert' = FirewallsInsert'
     { _fiQuotaUser   :: !(Maybe Text)
     , _fiPrettyPrint :: !Bool
     , _fiProject     :: !Text
-    , _fiUserIp      :: !(Maybe Text)
-    , _fiKey         :: !(Maybe Text)
-    , _fiOauthToken  :: !(Maybe Text)
+    , _fiUserIP      :: !(Maybe Text)
+    , _fiKey         :: !(Maybe Key)
+    , _fiOAuthToken  :: !(Maybe OAuthToken)
+    , _fiFirewall    :: !Firewall
     , _fiFields      :: !(Maybe Text)
-    , _fiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FirewallsInsert'' with the minimum fields required to make a request.
@@ -83,28 +84,29 @@ data FirewallsInsert' = FirewallsInsert'
 --
 -- * 'fiProject'
 --
--- * 'fiUserIp'
+-- * 'fiUserIP'
 --
 -- * 'fiKey'
 --
--- * 'fiOauthToken'
+-- * 'fiOAuthToken'
+--
+-- * 'fiFirewall'
 --
 -- * 'fiFields'
---
--- * 'fiAlt'
 firewallsInsert'
     :: Text -- ^ 'project'
+    -> Firewall -- ^ 'Firewall'
     -> FirewallsInsert'
-firewallsInsert' pFiProject_ =
+firewallsInsert' pFiProject_ pFiFirewall_ =
     FirewallsInsert'
     { _fiQuotaUser = Nothing
     , _fiPrettyPrint = True
     , _fiProject = pFiProject_
-    , _fiUserIp = Nothing
+    , _fiUserIP = Nothing
     , _fiKey = Nothing
-    , _fiOauthToken = Nothing
+    , _fiOAuthToken = Nothing
+    , _fiFirewall = pFiFirewall_
     , _fiFields = Nothing
-    , _fiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,38 +129,44 @@ fiProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-fiUserIp :: Lens' FirewallsInsert' (Maybe Text)
-fiUserIp = lens _fiUserIp (\ s a -> s{_fiUserIp = a})
+fiUserIP :: Lens' FirewallsInsert' (Maybe Text)
+fiUserIP = lens _fiUserIP (\ s a -> s{_fiUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fiKey :: Lens' FirewallsInsert' (Maybe Text)
+fiKey :: Lens' FirewallsInsert' (Maybe Key)
 fiKey = lens _fiKey (\ s a -> s{_fiKey = a})
 
 -- | OAuth 2.0 token for the current user.
-fiOauthToken :: Lens' FirewallsInsert' (Maybe Text)
-fiOauthToken
-  = lens _fiOauthToken (\ s a -> s{_fiOauthToken = a})
+fiOAuthToken :: Lens' FirewallsInsert' (Maybe OAuthToken)
+fiOAuthToken
+  = lens _fiOAuthToken (\ s a -> s{_fiOAuthToken = a})
+
+-- | Multipart request metadata.
+fiFirewall :: Lens' FirewallsInsert' Firewall
+fiFirewall
+  = lens _fiFirewall (\ s a -> s{_fiFirewall = a})
 
 -- | Selector specifying which fields to include in a partial response.
 fiFields :: Lens' FirewallsInsert' (Maybe Text)
 fiFields = lens _fiFields (\ s a -> s{_fiFields = a})
 
--- | Data format for the response.
-fiAlt :: Lens' FirewallsInsert' Alt
-fiAlt = lens _fiAlt (\ s a -> s{_fiAlt = a})
+instance GoogleAuth FirewallsInsert' where
+        authKey = fiKey . _Just
+        authToken = fiOAuthToken . _Just
 
 instance GoogleRequest FirewallsInsert' where
         type Rs FirewallsInsert' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u FirewallsInsert'{..}
           = go _fiQuotaUser (Just _fiPrettyPrint) _fiProject
-              _fiUserIp
+              _fiUserIP
               _fiKey
-              _fiOauthToken
+              _fiOAuthToken
               _fiFields
-              (Just _fiAlt)
+              (Just AltJSON)
+              _fiFirewall
           where go
                   = clientWithRoute
                       (Proxy :: Proxy FirewallsInsertResource)

@@ -34,14 +34,14 @@ module Network.Google.Resource.BigQuery.Tables.Update
     -- * Request Lenses
     , tuQuotaUser
     , tuPrettyPrint
-    , tuUserIp
+    , tuUserIP
     , tuKey
     , tuDatasetId
     , tuProjectId
-    , tuOauthToken
+    , tuOAuthToken
     , tuTableId
+    , tuTable
     , tuFields
-    , tuAlt
     ) where
 
 import           Network.Google.BigQuery.Types
@@ -59,10 +59,11 @@ type TablesUpdateResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Put '[JSON] Table
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] Table :> Put '[JSON] Table
 
 -- | Updates information in an existing table. The update method replaces the
 -- entire table resource, whereas the patch method only replaces fields
@@ -72,14 +73,14 @@ type TablesUpdateResource =
 data TablesUpdate' = TablesUpdate'
     { _tuQuotaUser   :: !(Maybe Text)
     , _tuPrettyPrint :: !Bool
-    , _tuUserIp      :: !(Maybe Text)
-    , _tuKey         :: !(Maybe Text)
+    , _tuUserIP      :: !(Maybe Text)
+    , _tuKey         :: !(Maybe Key)
     , _tuDatasetId   :: !Text
     , _tuProjectId   :: !Text
-    , _tuOauthToken  :: !(Maybe Text)
+    , _tuOAuthToken  :: !(Maybe OAuthToken)
     , _tuTableId     :: !Text
+    , _tuTable       :: !Table
     , _tuFields      :: !(Maybe Text)
-    , _tuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesUpdate'' with the minimum fields required to make a request.
@@ -90,7 +91,7 @@ data TablesUpdate' = TablesUpdate'
 --
 -- * 'tuPrettyPrint'
 --
--- * 'tuUserIp'
+-- * 'tuUserIP'
 --
 -- * 'tuKey'
 --
@@ -98,30 +99,31 @@ data TablesUpdate' = TablesUpdate'
 --
 -- * 'tuProjectId'
 --
--- * 'tuOauthToken'
+-- * 'tuOAuthToken'
 --
 -- * 'tuTableId'
 --
--- * 'tuFields'
+-- * 'tuTable'
 --
--- * 'tuAlt'
+-- * 'tuFields'
 tablesUpdate'
     :: Text -- ^ 'datasetId'
     -> Text -- ^ 'projectId'
     -> Text -- ^ 'tableId'
+    -> Table -- ^ 'Table'
     -> TablesUpdate'
-tablesUpdate' pTuDatasetId_ pTuProjectId_ pTuTableId_ =
+tablesUpdate' pTuDatasetId_ pTuProjectId_ pTuTableId_ pTuTable_ =
     TablesUpdate'
     { _tuQuotaUser = Nothing
     , _tuPrettyPrint = True
-    , _tuUserIp = Nothing
+    , _tuUserIP = Nothing
     , _tuKey = Nothing
     , _tuDatasetId = pTuDatasetId_
     , _tuProjectId = pTuProjectId_
-    , _tuOauthToken = Nothing
+    , _tuOAuthToken = Nothing
     , _tuTableId = pTuTableId_
+    , _tuTable = pTuTable_
     , _tuFields = Nothing
-    , _tuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,13 +141,13 @@ tuPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tuUserIp :: Lens' TablesUpdate' (Maybe Text)
-tuUserIp = lens _tuUserIp (\ s a -> s{_tuUserIp = a})
+tuUserIP :: Lens' TablesUpdate' (Maybe Text)
+tuUserIP = lens _tuUserIP (\ s a -> s{_tuUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tuKey :: Lens' TablesUpdate' (Maybe Text)
+tuKey :: Lens' TablesUpdate' (Maybe Key)
 tuKey = lens _tuKey (\ s a -> s{_tuKey = a})
 
 -- | Dataset ID of the table to update
@@ -159,35 +161,40 @@ tuProjectId
   = lens _tuProjectId (\ s a -> s{_tuProjectId = a})
 
 -- | OAuth 2.0 token for the current user.
-tuOauthToken :: Lens' TablesUpdate' (Maybe Text)
-tuOauthToken
-  = lens _tuOauthToken (\ s a -> s{_tuOauthToken = a})
+tuOAuthToken :: Lens' TablesUpdate' (Maybe OAuthToken)
+tuOAuthToken
+  = lens _tuOAuthToken (\ s a -> s{_tuOAuthToken = a})
 
 -- | Table ID of the table to update
 tuTableId :: Lens' TablesUpdate' Text
 tuTableId
   = lens _tuTableId (\ s a -> s{_tuTableId = a})
 
+-- | Multipart request metadata.
+tuTable :: Lens' TablesUpdate' Table
+tuTable = lens _tuTable (\ s a -> s{_tuTable = a})
+
 -- | Selector specifying which fields to include in a partial response.
 tuFields :: Lens' TablesUpdate' (Maybe Text)
 tuFields = lens _tuFields (\ s a -> s{_tuFields = a})
 
--- | Data format for the response.
-tuAlt :: Lens' TablesUpdate' Alt
-tuAlt = lens _tuAlt (\ s a -> s{_tuAlt = a})
+instance GoogleAuth TablesUpdate' where
+        authKey = tuKey . _Just
+        authToken = tuOAuthToken . _Just
 
 instance GoogleRequest TablesUpdate' where
         type Rs TablesUpdate' = Table
         request = requestWithRoute defReq bigQueryURL
         requestWithRoute r u TablesUpdate'{..}
-          = go _tuQuotaUser (Just _tuPrettyPrint) _tuUserIp
+          = go _tuQuotaUser (Just _tuPrettyPrint) _tuUserIP
               _tuKey
               _tuDatasetId
               _tuProjectId
-              _tuOauthToken
+              _tuOAuthToken
               _tuTableId
               _tuFields
-              (Just _tuAlt)
+              (Just AltJSON)
+              _tuTable
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TablesUpdateResource)

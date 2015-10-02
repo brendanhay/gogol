@@ -32,14 +32,13 @@ module Network.Google.Resource.Blogger.BlogUserInfos.Get
     -- * Request Lenses
     , buigQuotaUser
     , buigPrettyPrint
-    , buigUserIp
+    , buigUserIP
     , buigBlogId
     , buigUserId
     , buigKey
     , buigMaxPosts
-    , buigOauthToken
+    , buigOAuthToken
     , buigFields
-    , buigAlt
     ) where
 
 import           Network.Google.Blogger.Types
@@ -55,11 +54,11 @@ type BlogUserInfosGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "maxPosts" Word32 :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Get '[JSON] BlogUserInfo
+                           QueryParam "alt" AltJSON :> Get '[JSON] BlogUserInfo
 
 -- | Gets one blog and user info pair by blogId and userId.
 --
@@ -67,14 +66,13 @@ type BlogUserInfosGetResource =
 data BlogUserInfosGet' = BlogUserInfosGet'
     { _buigQuotaUser   :: !(Maybe Text)
     , _buigPrettyPrint :: !Bool
-    , _buigUserIp      :: !(Maybe Text)
+    , _buigUserIP      :: !(Maybe Text)
     , _buigBlogId      :: !Text
     , _buigUserId      :: !Text
-    , _buigKey         :: !(Maybe Text)
+    , _buigKey         :: !(Maybe Key)
     , _buigMaxPosts    :: !(Maybe Word32)
-    , _buigOauthToken  :: !(Maybe Text)
+    , _buigOAuthToken  :: !(Maybe OAuthToken)
     , _buigFields      :: !(Maybe Text)
-    , _buigAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BlogUserInfosGet'' with the minimum fields required to make a request.
@@ -85,7 +83,7 @@ data BlogUserInfosGet' = BlogUserInfosGet'
 --
 -- * 'buigPrettyPrint'
 --
--- * 'buigUserIp'
+-- * 'buigUserIP'
 --
 -- * 'buigBlogId'
 --
@@ -95,11 +93,9 @@ data BlogUserInfosGet' = BlogUserInfosGet'
 --
 -- * 'buigMaxPosts'
 --
--- * 'buigOauthToken'
+-- * 'buigOAuthToken'
 --
 -- * 'buigFields'
---
--- * 'buigAlt'
 blogUserInfosGet'
     :: Text -- ^ 'blogId'
     -> Text -- ^ 'userId'
@@ -108,14 +104,13 @@ blogUserInfosGet' pBuigBlogId_ pBuigUserId_ =
     BlogUserInfosGet'
     { _buigQuotaUser = Nothing
     , _buigPrettyPrint = True
-    , _buigUserIp = Nothing
+    , _buigUserIP = Nothing
     , _buigBlogId = pBuigBlogId_
     , _buigUserId = pBuigUserId_
     , _buigKey = Nothing
     , _buigMaxPosts = Nothing
-    , _buigOauthToken = Nothing
+    , _buigOAuthToken = Nothing
     , _buigFields = Nothing
-    , _buigAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -134,9 +129,9 @@ buigPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-buigUserIp :: Lens' BlogUserInfosGet' (Maybe Text)
-buigUserIp
-  = lens _buigUserIp (\ s a -> s{_buigUserIp = a})
+buigUserIP :: Lens' BlogUserInfosGet' (Maybe Text)
+buigUserIP
+  = lens _buigUserIP (\ s a -> s{_buigUserIP = a})
 
 -- | The ID of the blog to get.
 buigBlogId :: Lens' BlogUserInfosGet' Text
@@ -152,7 +147,7 @@ buigUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-buigKey :: Lens' BlogUserInfosGet' (Maybe Text)
+buigKey :: Lens' BlogUserInfosGet' (Maybe Key)
 buigKey = lens _buigKey (\ s a -> s{_buigKey = a})
 
 -- | Maximum number of posts to pull back with the blog.
@@ -161,33 +156,33 @@ buigMaxPosts
   = lens _buigMaxPosts (\ s a -> s{_buigMaxPosts = a})
 
 -- | OAuth 2.0 token for the current user.
-buigOauthToken :: Lens' BlogUserInfosGet' (Maybe Text)
-buigOauthToken
-  = lens _buigOauthToken
-      (\ s a -> s{_buigOauthToken = a})
+buigOAuthToken :: Lens' BlogUserInfosGet' (Maybe OAuthToken)
+buigOAuthToken
+  = lens _buigOAuthToken
+      (\ s a -> s{_buigOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 buigFields :: Lens' BlogUserInfosGet' (Maybe Text)
 buigFields
   = lens _buigFields (\ s a -> s{_buigFields = a})
 
--- | Data format for the response.
-buigAlt :: Lens' BlogUserInfosGet' Alt
-buigAlt = lens _buigAlt (\ s a -> s{_buigAlt = a})
+instance GoogleAuth BlogUserInfosGet' where
+        authKey = buigKey . _Just
+        authToken = buigOAuthToken . _Just
 
 instance GoogleRequest BlogUserInfosGet' where
         type Rs BlogUserInfosGet' = BlogUserInfo
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u BlogUserInfosGet'{..}
           = go _buigQuotaUser (Just _buigPrettyPrint)
-              _buigUserIp
+              _buigUserIP
               _buigBlogId
               _buigUserId
               _buigKey
               _buigMaxPosts
-              _buigOauthToken
+              _buigOAuthToken
               _buigFields
-              (Just _buigAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy BlogUserInfosGetResource)

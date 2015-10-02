@@ -46,10 +46,9 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.BatchDelete
     , babdBearerToken
     , babdNamespacedType
     , babdKey
-    , babdOauthToken
+    , babdOAuthToken
     , babdFields
     , babdCallback
-    , babdAlt
     ) where
 
 import           Network.Google.Prelude
@@ -70,11 +69,11 @@ type BeaconsAttachmentsBatchDeleteResource =
                        QueryParam "uploadType" Text :>
                          QueryParam "bearer_token" Text :>
                            QueryParam "namespacedType" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "fields" Text :>
                                    QueryParam "callback" Text :>
-                                     QueryParam "alt" Text :>
+                                     QueryParam "alt" AltJSON :>
                                        Post '[JSON] DeleteAttachmentsResponse
 
 -- | Deletes multiple attachments on a given beacon. This operation is
@@ -96,11 +95,10 @@ data BeaconsAttachmentsBatchDelete' = BeaconsAttachmentsBatchDelete'
     , _babdUploadType     :: !(Maybe Text)
     , _babdBearerToken    :: !(Maybe Text)
     , _babdNamespacedType :: !(Maybe Text)
-    , _babdKey            :: !(Maybe Text)
-    , _babdOauthToken     :: !(Maybe Text)
+    , _babdKey            :: !(Maybe Key)
+    , _babdOAuthToken     :: !(Maybe OAuthToken)
     , _babdFields         :: !(Maybe Text)
     , _babdCallback       :: !(Maybe Text)
-    , _babdAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BeaconsAttachmentsBatchDelete'' with the minimum fields required to make a request.
@@ -129,13 +127,11 @@ data BeaconsAttachmentsBatchDelete' = BeaconsAttachmentsBatchDelete'
 --
 -- * 'babdKey'
 --
--- * 'babdOauthToken'
+-- * 'babdOAuthToken'
 --
 -- * 'babdFields'
 --
 -- * 'babdCallback'
---
--- * 'babdAlt'
 beaconsAttachmentsBatchDelete'
     :: Text -- ^ 'beaconName'
     -> BeaconsAttachmentsBatchDelete'
@@ -152,10 +148,9 @@ beaconsAttachmentsBatchDelete' pBabdBeaconName_ =
     , _babdBearerToken = Nothing
     , _babdNamespacedType = Nothing
     , _babdKey = Nothing
-    , _babdOauthToken = Nothing
+    , _babdOAuthToken = Nothing
     , _babdFields = Nothing
     , _babdCallback = Nothing
-    , _babdAlt = "json"
     }
 
 -- | V1 error format.
@@ -222,14 +217,14 @@ babdNamespacedType
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-babdKey :: Lens' BeaconsAttachmentsBatchDelete' (Maybe Text)
+babdKey :: Lens' BeaconsAttachmentsBatchDelete' (Maybe Key)
 babdKey = lens _babdKey (\ s a -> s{_babdKey = a})
 
 -- | OAuth 2.0 token for the current user.
-babdOauthToken :: Lens' BeaconsAttachmentsBatchDelete' (Maybe Text)
-babdOauthToken
-  = lens _babdOauthToken
-      (\ s a -> s{_babdOauthToken = a})
+babdOAuthToken :: Lens' BeaconsAttachmentsBatchDelete' (Maybe OAuthToken)
+babdOAuthToken
+  = lens _babdOAuthToken
+      (\ s a -> s{_babdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 babdFields :: Lens' BeaconsAttachmentsBatchDelete' (Maybe Text)
@@ -241,9 +236,10 @@ babdCallback :: Lens' BeaconsAttachmentsBatchDelete' (Maybe Text)
 babdCallback
   = lens _babdCallback (\ s a -> s{_babdCallback = a})
 
--- | Data format for response.
-babdAlt :: Lens' BeaconsAttachmentsBatchDelete' Text
-babdAlt = lens _babdAlt (\ s a -> s{_babdAlt = a})
+instance GoogleAuth BeaconsAttachmentsBatchDelete'
+         where
+        authKey = babdKey . _Just
+        authToken = babdOAuthToken . _Just
 
 instance GoogleRequest BeaconsAttachmentsBatchDelete'
          where
@@ -262,10 +258,10 @@ instance GoogleRequest BeaconsAttachmentsBatchDelete'
               _babdBearerToken
               _babdNamespacedType
               _babdKey
-              _babdOauthToken
+              _babdOAuthToken
               _babdFields
               _babdCallback
-              (Just _babdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

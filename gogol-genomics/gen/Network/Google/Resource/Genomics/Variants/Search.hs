@@ -33,11 +33,11 @@ module Network.Google.Resource.Genomics.Variants.Search
     -- * Request Lenses
     , vsQuotaUser
     , vsPrettyPrint
-    , vsUserIp
+    , vsUserIP
     , vsKey
-    , vsOauthToken
+    , vsOAuthToken
+    , vsSearchVariantsRequest
     , vsFields
-    , vsAlt
     ) where
 
 import           Network.Google.Genomics.Types
@@ -51,24 +51,25 @@ type VariantsSearchResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :>
-                       Post '[JSON] SearchVariantsResponse
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] SearchVariantsRequest :>
+                         Post '[JSON] SearchVariantsResponse
 
 -- | Gets a list of variants matching the criteria. Implements
 -- GlobalAllianceApi.searchVariants.
 --
 -- /See:/ 'variantsSearch'' smart constructor.
 data VariantsSearch' = VariantsSearch'
-    { _vsQuotaUser   :: !(Maybe Text)
-    , _vsPrettyPrint :: !Bool
-    , _vsUserIp      :: !(Maybe Text)
-    , _vsKey         :: !(Maybe Text)
-    , _vsOauthToken  :: !(Maybe Text)
-    , _vsFields      :: !(Maybe Text)
-    , _vsAlt         :: !Alt
+    { _vsQuotaUser             :: !(Maybe Text)
+    , _vsPrettyPrint           :: !Bool
+    , _vsUserIP                :: !(Maybe Text)
+    , _vsKey                   :: !(Maybe Key)
+    , _vsOAuthToken            :: !(Maybe OAuthToken)
+    , _vsSearchVariantsRequest :: !SearchVariantsRequest
+    , _vsFields                :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantsSearch'' with the minimum fields required to make a request.
@@ -79,26 +80,27 @@ data VariantsSearch' = VariantsSearch'
 --
 -- * 'vsPrettyPrint'
 --
--- * 'vsUserIp'
+-- * 'vsUserIP'
 --
 -- * 'vsKey'
 --
--- * 'vsOauthToken'
+-- * 'vsOAuthToken'
+--
+-- * 'vsSearchVariantsRequest'
 --
 -- * 'vsFields'
---
--- * 'vsAlt'
 variantsSearch'
-    :: VariantsSearch'
-variantsSearch' =
+    :: SearchVariantsRequest -- ^ 'SearchVariantsRequest'
+    -> VariantsSearch'
+variantsSearch' pVsSearchVariantsRequest_ =
     VariantsSearch'
     { _vsQuotaUser = Nothing
     , _vsPrettyPrint = True
-    , _vsUserIp = Nothing
+    , _vsUserIP = Nothing
     , _vsKey = Nothing
-    , _vsOauthToken = Nothing
+    , _vsOAuthToken = Nothing
+    , _vsSearchVariantsRequest = pVsSearchVariantsRequest_
     , _vsFields = Nothing
-    , _vsAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -116,37 +118,44 @@ vsPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-vsUserIp :: Lens' VariantsSearch' (Maybe Text)
-vsUserIp = lens _vsUserIp (\ s a -> s{_vsUserIp = a})
+vsUserIP :: Lens' VariantsSearch' (Maybe Text)
+vsUserIP = lens _vsUserIP (\ s a -> s{_vsUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vsKey :: Lens' VariantsSearch' (Maybe Text)
+vsKey :: Lens' VariantsSearch' (Maybe Key)
 vsKey = lens _vsKey (\ s a -> s{_vsKey = a})
 
 -- | OAuth 2.0 token for the current user.
-vsOauthToken :: Lens' VariantsSearch' (Maybe Text)
-vsOauthToken
-  = lens _vsOauthToken (\ s a -> s{_vsOauthToken = a})
+vsOAuthToken :: Lens' VariantsSearch' (Maybe OAuthToken)
+vsOAuthToken
+  = lens _vsOAuthToken (\ s a -> s{_vsOAuthToken = a})
+
+-- | Multipart request metadata.
+vsSearchVariantsRequest :: Lens' VariantsSearch' SearchVariantsRequest
+vsSearchVariantsRequest
+  = lens _vsSearchVariantsRequest
+      (\ s a -> s{_vsSearchVariantsRequest = a})
 
 -- | Selector specifying which fields to include in a partial response.
 vsFields :: Lens' VariantsSearch' (Maybe Text)
 vsFields = lens _vsFields (\ s a -> s{_vsFields = a})
 
--- | Data format for the response.
-vsAlt :: Lens' VariantsSearch' Alt
-vsAlt = lens _vsAlt (\ s a -> s{_vsAlt = a})
+instance GoogleAuth VariantsSearch' where
+        authKey = vsKey . _Just
+        authToken = vsOAuthToken . _Just
 
 instance GoogleRequest VariantsSearch' where
         type Rs VariantsSearch' = SearchVariantsResponse
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u VariantsSearch'{..}
-          = go _vsQuotaUser (Just _vsPrettyPrint) _vsUserIp
+          = go _vsQuotaUser (Just _vsPrettyPrint) _vsUserIP
               _vsKey
-              _vsOauthToken
+              _vsOAuthToken
               _vsFields
-              (Just _vsAlt)
+              (Just AltJSON)
+              _vsSearchVariantsRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy VariantsSearchResource)

@@ -40,10 +40,9 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Get
     , bgUploadType
     , bgBearerToken
     , bgKey
-    , bgOauthToken
+    , bgOAuthToken
     , bgFields
     , bgCallback
-    , bgAlt
     ) where
 
 import           Network.Google.Prelude
@@ -62,11 +61,11 @@ type BeaconsGetResource =
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
                        QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
                                QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :> Get '[JSON] Beacon
+                                 QueryParam "alt" AltJSON :> Get '[JSON] Beacon
 
 -- | Returns detailed information about the specified beacon.
 --
@@ -81,11 +80,10 @@ data BeaconsGet' = BeaconsGet'
     , _bgBeaconName     :: !Text
     , _bgUploadType     :: !(Maybe Text)
     , _bgBearerToken    :: !(Maybe Text)
-    , _bgKey            :: !(Maybe Text)
-    , _bgOauthToken     :: !(Maybe Text)
+    , _bgKey            :: !(Maybe Key)
+    , _bgOAuthToken     :: !(Maybe OAuthToken)
     , _bgFields         :: !(Maybe Text)
     , _bgCallback       :: !(Maybe Text)
-    , _bgAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BeaconsGet'' with the minimum fields required to make a request.
@@ -112,13 +110,11 @@ data BeaconsGet' = BeaconsGet'
 --
 -- * 'bgKey'
 --
--- * 'bgOauthToken'
+-- * 'bgOAuthToken'
 --
 -- * 'bgFields'
 --
 -- * 'bgCallback'
---
--- * 'bgAlt'
 beaconsGet'
     :: Text -- ^ 'beaconName'
     -> BeaconsGet'
@@ -134,10 +130,9 @@ beaconsGet' pBgBeaconName_ =
     , _bgUploadType = Nothing
     , _bgBearerToken = Nothing
     , _bgKey = Nothing
-    , _bgOauthToken = Nothing
+    , _bgOAuthToken = Nothing
     , _bgFields = Nothing
     , _bgCallback = Nothing
-    , _bgAlt = "json"
     }
 
 -- | V1 error format.
@@ -192,13 +187,13 @@ bgBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-bgKey :: Lens' BeaconsGet' (Maybe Text)
+bgKey :: Lens' BeaconsGet' (Maybe Key)
 bgKey = lens _bgKey (\ s a -> s{_bgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-bgOauthToken :: Lens' BeaconsGet' (Maybe Text)
-bgOauthToken
-  = lens _bgOauthToken (\ s a -> s{_bgOauthToken = a})
+bgOAuthToken :: Lens' BeaconsGet' (Maybe OAuthToken)
+bgOAuthToken
+  = lens _bgOAuthToken (\ s a -> s{_bgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 bgFields :: Lens' BeaconsGet' (Maybe Text)
@@ -209,9 +204,9 @@ bgCallback :: Lens' BeaconsGet' (Maybe Text)
 bgCallback
   = lens _bgCallback (\ s a -> s{_bgCallback = a})
 
--- | Data format for response.
-bgAlt :: Lens' BeaconsGet' Text
-bgAlt = lens _bgAlt (\ s a -> s{_bgAlt = a})
+instance GoogleAuth BeaconsGet' where
+        authKey = bgKey . _Just
+        authToken = bgOAuthToken . _Just
 
 instance GoogleRequest BeaconsGet' where
         type Rs BeaconsGet' = Beacon
@@ -225,10 +220,10 @@ instance GoogleRequest BeaconsGet' where
               _bgUploadType
               _bgBearerToken
               _bgKey
-              _bgOauthToken
+              _bgOAuthToken
               _bgFields
               _bgCallback
-              (Just _bgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy BeaconsGetResource)
                       r

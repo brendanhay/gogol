@@ -32,13 +32,14 @@ module Network.Google.Resource.DFAReporting.CreativeAssets.Insert
     -- * Request Lenses
     , caiQuotaUser
     , caiPrettyPrint
-    , caiUserIp
+    , caiUserIP
     , caiAdvertiserId
     , caiProfileId
+    , caiMedia
     , caiKey
-    , caiOauthToken
+    , caiOAuthToken
+    , caiCreativeAssetMetadata
     , caiFields
-    , caiAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -55,25 +56,27 @@ type CreativeAssetsInsertResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :>
-                             Post '[JSON] CreativeAssetMetadata
+                           QueryParam "alt" AltJSON :>
+                             MultipartRelated '[JSON] CreativeAssetMetadata Body
+                               :> Post '[JSON] CreativeAssetMetadata
 
 -- | Inserts a new creative asset.
 --
 -- /See:/ 'creativeAssetsInsert'' smart constructor.
 data CreativeAssetsInsert' = CreativeAssetsInsert'
-    { _caiQuotaUser    :: !(Maybe Text)
-    , _caiPrettyPrint  :: !Bool
-    , _caiUserIp       :: !(Maybe Text)
-    , _caiAdvertiserId :: !Int64
-    , _caiProfileId    :: !Int64
-    , _caiKey          :: !(Maybe Text)
-    , _caiOauthToken   :: !(Maybe Text)
-    , _caiFields       :: !(Maybe Text)
-    , _caiAlt          :: !Alt
+    { _caiQuotaUser             :: !(Maybe Text)
+    , _caiPrettyPrint           :: !Bool
+    , _caiUserIP                :: !(Maybe Text)
+    , _caiAdvertiserId          :: !Int64
+    , _caiProfileId             :: !Int64
+    , _caiMedia                 :: !Body
+    , _caiKey                   :: !(Maybe Key)
+    , _caiOAuthToken            :: !(Maybe OAuthToken)
+    , _caiCreativeAssetMetadata :: !CreativeAssetMetadata
+    , _caiFields                :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeAssetsInsert'' with the minimum fields required to make a request.
@@ -84,34 +87,39 @@ data CreativeAssetsInsert' = CreativeAssetsInsert'
 --
 -- * 'caiPrettyPrint'
 --
--- * 'caiUserIp'
+-- * 'caiUserIP'
 --
 -- * 'caiAdvertiserId'
 --
 -- * 'caiProfileId'
 --
+-- * 'caiMedia'
+--
 -- * 'caiKey'
 --
--- * 'caiOauthToken'
+-- * 'caiOAuthToken'
+--
+-- * 'caiCreativeAssetMetadata'
 --
 -- * 'caiFields'
---
--- * 'caiAlt'
 creativeAssetsInsert'
     :: Int64 -- ^ 'advertiserId'
     -> Int64 -- ^ 'profileId'
+    -> Body -- ^ 'media'
+    -> CreativeAssetMetadata -- ^ 'CreativeAssetMetadata'
     -> CreativeAssetsInsert'
-creativeAssetsInsert' pCaiAdvertiserId_ pCaiProfileId_ =
+creativeAssetsInsert' pCaiAdvertiserId_ pCaiProfileId_ pCaiMedia_ pCaiCreativeAssetMetadata_ =
     CreativeAssetsInsert'
     { _caiQuotaUser = Nothing
     , _caiPrettyPrint = True
-    , _caiUserIp = Nothing
+    , _caiUserIP = Nothing
     , _caiAdvertiserId = pCaiAdvertiserId_
     , _caiProfileId = pCaiProfileId_
+    , _caiMedia = pCaiMedia_
     , _caiKey = Nothing
-    , _caiOauthToken = Nothing
+    , _caiOAuthToken = Nothing
+    , _caiCreativeAssetMetadata = pCaiCreativeAssetMetadata_
     , _caiFields = Nothing
-    , _caiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -129,9 +137,9 @@ caiPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-caiUserIp :: Lens' CreativeAssetsInsert' (Maybe Text)
-caiUserIp
-  = lens _caiUserIp (\ s a -> s{_caiUserIp = a})
+caiUserIP :: Lens' CreativeAssetsInsert' (Maybe Text)
+caiUserIP
+  = lens _caiUserIP (\ s a -> s{_caiUserIP = a})
 
 -- | Advertiser ID of this creative. This is a required field.
 caiAdvertiserId :: Lens' CreativeAssetsInsert' Int64
@@ -144,38 +152,49 @@ caiProfileId :: Lens' CreativeAssetsInsert' Int64
 caiProfileId
   = lens _caiProfileId (\ s a -> s{_caiProfileId = a})
 
+caiMedia :: Lens' CreativeAssetsInsert' Body
+caiMedia = lens _caiMedia (\ s a -> s{_caiMedia = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-caiKey :: Lens' CreativeAssetsInsert' (Maybe Text)
+caiKey :: Lens' CreativeAssetsInsert' (Maybe Key)
 caiKey = lens _caiKey (\ s a -> s{_caiKey = a})
 
 -- | OAuth 2.0 token for the current user.
-caiOauthToken :: Lens' CreativeAssetsInsert' (Maybe Text)
-caiOauthToken
-  = lens _caiOauthToken
-      (\ s a -> s{_caiOauthToken = a})
+caiOAuthToken :: Lens' CreativeAssetsInsert' (Maybe OAuthToken)
+caiOAuthToken
+  = lens _caiOAuthToken
+      (\ s a -> s{_caiOAuthToken = a})
+
+-- | Multipart request metadata.
+caiCreativeAssetMetadata :: Lens' CreativeAssetsInsert' CreativeAssetMetadata
+caiCreativeAssetMetadata
+  = lens _caiCreativeAssetMetadata
+      (\ s a -> s{_caiCreativeAssetMetadata = a})
 
 -- | Selector specifying which fields to include in a partial response.
 caiFields :: Lens' CreativeAssetsInsert' (Maybe Text)
 caiFields
   = lens _caiFields (\ s a -> s{_caiFields = a})
 
--- | Data format for the response.
-caiAlt :: Lens' CreativeAssetsInsert' Alt
-caiAlt = lens _caiAlt (\ s a -> s{_caiAlt = a})
+instance GoogleAuth CreativeAssetsInsert' where
+        authKey = caiKey . _Just
+        authToken = caiOAuthToken . _Just
 
 instance GoogleRequest CreativeAssetsInsert' where
         type Rs CreativeAssetsInsert' = CreativeAssetMetadata
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativeAssetsInsert'{..}
-          = go _caiQuotaUser (Just _caiPrettyPrint) _caiUserIp
+          = go _caiQuotaUser (Just _caiPrettyPrint) _caiUserIP
               _caiAdvertiserId
               _caiProfileId
+              _caiMedia
               _caiKey
-              _caiOauthToken
+              _caiOAuthToken
               _caiFields
-              (Just _caiAlt)
+              (Just AltJSON)
+              _caiCreativeAssetMetadata
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CreativeAssetsInsertResource)

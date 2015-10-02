@@ -32,12 +32,12 @@ module Network.Google.Resource.DFAReporting.EventTags.Insert
     -- * Request Lenses
     , etiQuotaUser
     , etiPrettyPrint
-    , etiUserIp
+    , etiUserIP
     , etiProfileId
     , etiKey
-    , etiOauthToken
+    , etiOAuthToken
+    , etiEventTag
     , etiFields
-    , etiAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,10 +52,11 @@ type EventTagsInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] EventTag
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] EventTag :> Post '[JSON] EventTag
 
 -- | Inserts a new event tag.
 --
@@ -63,12 +64,12 @@ type EventTagsInsertResource =
 data EventTagsInsert' = EventTagsInsert'
     { _etiQuotaUser   :: !(Maybe Text)
     , _etiPrettyPrint :: !Bool
-    , _etiUserIp      :: !(Maybe Text)
+    , _etiUserIP      :: !(Maybe Text)
     , _etiProfileId   :: !Int64
-    , _etiKey         :: !(Maybe Text)
-    , _etiOauthToken  :: !(Maybe Text)
+    , _etiKey         :: !(Maybe Key)
+    , _etiOAuthToken  :: !(Maybe OAuthToken)
+    , _etiEventTag    :: !EventTag
     , _etiFields      :: !(Maybe Text)
-    , _etiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventTagsInsert'' with the minimum fields required to make a request.
@@ -79,30 +80,31 @@ data EventTagsInsert' = EventTagsInsert'
 --
 -- * 'etiPrettyPrint'
 --
--- * 'etiUserIp'
+-- * 'etiUserIP'
 --
 -- * 'etiProfileId'
 --
 -- * 'etiKey'
 --
--- * 'etiOauthToken'
+-- * 'etiOAuthToken'
+--
+-- * 'etiEventTag'
 --
 -- * 'etiFields'
---
--- * 'etiAlt'
 eventTagsInsert'
     :: Int64 -- ^ 'profileId'
+    -> EventTag -- ^ 'EventTag'
     -> EventTagsInsert'
-eventTagsInsert' pEtiProfileId_ =
+eventTagsInsert' pEtiProfileId_ pEtiEventTag_ =
     EventTagsInsert'
     { _etiQuotaUser = Nothing
     , _etiPrettyPrint = True
-    , _etiUserIp = Nothing
+    , _etiUserIP = Nothing
     , _etiProfileId = pEtiProfileId_
     , _etiKey = Nothing
-    , _etiOauthToken = Nothing
+    , _etiOAuthToken = Nothing
+    , _etiEventTag = pEtiEventTag_
     , _etiFields = Nothing
-    , _etiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,9 +122,9 @@ etiPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-etiUserIp :: Lens' EventTagsInsert' (Maybe Text)
-etiUserIp
-  = lens _etiUserIp (\ s a -> s{_etiUserIp = a})
+etiUserIP :: Lens' EventTagsInsert' (Maybe Text)
+etiUserIP
+  = lens _etiUserIP (\ s a -> s{_etiUserIP = a})
 
 -- | User profile ID associated with this request.
 etiProfileId :: Lens' EventTagsInsert' Int64
@@ -132,34 +134,40 @@ etiProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-etiKey :: Lens' EventTagsInsert' (Maybe Text)
+etiKey :: Lens' EventTagsInsert' (Maybe Key)
 etiKey = lens _etiKey (\ s a -> s{_etiKey = a})
 
 -- | OAuth 2.0 token for the current user.
-etiOauthToken :: Lens' EventTagsInsert' (Maybe Text)
-etiOauthToken
-  = lens _etiOauthToken
-      (\ s a -> s{_etiOauthToken = a})
+etiOAuthToken :: Lens' EventTagsInsert' (Maybe OAuthToken)
+etiOAuthToken
+  = lens _etiOAuthToken
+      (\ s a -> s{_etiOAuthToken = a})
+
+-- | Multipart request metadata.
+etiEventTag :: Lens' EventTagsInsert' EventTag
+etiEventTag
+  = lens _etiEventTag (\ s a -> s{_etiEventTag = a})
 
 -- | Selector specifying which fields to include in a partial response.
 etiFields :: Lens' EventTagsInsert' (Maybe Text)
 etiFields
   = lens _etiFields (\ s a -> s{_etiFields = a})
 
--- | Data format for the response.
-etiAlt :: Lens' EventTagsInsert' Alt
-etiAlt = lens _etiAlt (\ s a -> s{_etiAlt = a})
+instance GoogleAuth EventTagsInsert' where
+        authKey = etiKey . _Just
+        authToken = etiOAuthToken . _Just
 
 instance GoogleRequest EventTagsInsert' where
         type Rs EventTagsInsert' = EventTag
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u EventTagsInsert'{..}
-          = go _etiQuotaUser (Just _etiPrettyPrint) _etiUserIp
+          = go _etiQuotaUser (Just _etiPrettyPrint) _etiUserIP
               _etiProfileId
               _etiKey
-              _etiOauthToken
+              _etiOAuthToken
               _etiFields
-              (Just _etiAlt)
+              (Just AltJSON)
+              _etiEventTag
           where go
                   = clientWithRoute
                       (Proxy :: Proxy EventTagsInsertResource)

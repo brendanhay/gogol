@@ -33,7 +33,7 @@ module Network.Google.Resource.DFAReporting.Advertisers.List
     , allStatus
     , allQuotaUser
     , allPrettyPrint
-    , allUserIp
+    , allUserIP
     , allOnlyParent
     , allSearchString
     , allIds
@@ -44,12 +44,11 @@ module Network.Google.Resource.DFAReporting.Advertisers.List
     , allKey
     , allPageToken
     , allSortField
-    , allSubaccountId
-    , allOauthToken
+    , allSubAccountId
+    , allOAuthToken
     , allFloodlightConfigurationIds
     , allMaxResults
     , allFields
-    , allAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -75,20 +74,20 @@ type AdvertisersListResource =
                              DfareportingAdvertisersListSortOrder
                              :>
                              QueryParams "advertiserGroupIds" Int64 :>
-                               QueryParam "key" Text :>
+                               QueryParam "key" Key :>
                                  QueryParam "pageToken" Text :>
                                    QueryParam "sortField"
                                      DfareportingAdvertisersListSortField
                                      :>
                                      QueryParam "subaccountId" Int64 :>
-                                       QueryParam "oauth_token" Text :>
+                                       QueryParam "oauth_token" OAuthToken :>
                                          QueryParams
                                            "floodlightConfigurationIds"
                                            Int64
                                            :>
                                            QueryParam "maxResults" Int32 :>
                                              QueryParam "fields" Text :>
-                                               QueryParam "alt" Alt :>
+                                               QueryParam "alt" AltJSON :>
                                                  Get '[JSON]
                                                    AdvertisersListResponse
 
@@ -99,7 +98,7 @@ data AdvertisersList' = AdvertisersList'
     { _allStatus                              :: !(Maybe DfareportingAdvertisersListStatus)
     , _allQuotaUser                           :: !(Maybe Text)
     , _allPrettyPrint                         :: !Bool
-    , _allUserIp                              :: !(Maybe Text)
+    , _allUserIP                              :: !(Maybe Text)
     , _allOnlyParent                          :: !(Maybe Bool)
     , _allSearchString                        :: !(Maybe Text)
     , _allIds                                 :: !(Maybe Int64)
@@ -107,15 +106,14 @@ data AdvertisersList' = AdvertisersList'
     , _allProfileId                           :: !Int64
     , _allSortOrder                           :: !(Maybe DfareportingAdvertisersListSortOrder)
     , _allAdvertiserGroupIds                  :: !(Maybe Int64)
-    , _allKey                                 :: !(Maybe Text)
+    , _allKey                                 :: !(Maybe Key)
     , _allPageToken                           :: !(Maybe Text)
     , _allSortField                           :: !(Maybe DfareportingAdvertisersListSortField)
-    , _allSubaccountId                        :: !(Maybe Int64)
-    , _allOauthToken                          :: !(Maybe Text)
+    , _allSubAccountId                        :: !(Maybe Int64)
+    , _allOAuthToken                          :: !(Maybe OAuthToken)
     , _allFloodlightConfigurationIds          :: !(Maybe Int64)
     , _allMaxResults                          :: !(Maybe Int32)
     , _allFields                              :: !(Maybe Text)
-    , _allAlt                                 :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertisersList'' with the minimum fields required to make a request.
@@ -128,7 +126,7 @@ data AdvertisersList' = AdvertisersList'
 --
 -- * 'allPrettyPrint'
 --
--- * 'allUserIp'
+-- * 'allUserIP'
 --
 -- * 'allOnlyParent'
 --
@@ -150,17 +148,15 @@ data AdvertisersList' = AdvertisersList'
 --
 -- * 'allSortField'
 --
--- * 'allSubaccountId'
+-- * 'allSubAccountId'
 --
--- * 'allOauthToken'
+-- * 'allOAuthToken'
 --
 -- * 'allFloodlightConfigurationIds'
 --
 -- * 'allMaxResults'
 --
 -- * 'allFields'
---
--- * 'allAlt'
 advertisersList'
     :: Int64 -- ^ 'profileId'
     -> AdvertisersList'
@@ -169,7 +165,7 @@ advertisersList' pAllProfileId_ =
     { _allStatus = Nothing
     , _allQuotaUser = Nothing
     , _allPrettyPrint = True
-    , _allUserIp = Nothing
+    , _allUserIP = Nothing
     , _allOnlyParent = Nothing
     , _allSearchString = Nothing
     , _allIds = Nothing
@@ -180,12 +176,11 @@ advertisersList' pAllProfileId_ =
     , _allKey = Nothing
     , _allPageToken = Nothing
     , _allSortField = Nothing
-    , _allSubaccountId = Nothing
-    , _allOauthToken = Nothing
+    , _allSubAccountId = Nothing
+    , _allOAuthToken = Nothing
     , _allFloodlightConfigurationIds = Nothing
     , _allMaxResults = Nothing
     , _allFields = Nothing
-    , _allAlt = JSON
     }
 
 -- | Select only advertisers with the specified status.
@@ -208,9 +203,9 @@ allPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-allUserIp :: Lens' AdvertisersList' (Maybe Text)
-allUserIp
-  = lens _allUserIp (\ s a -> s{_allUserIp = a})
+allUserIP :: Lens' AdvertisersList' (Maybe Text)
+allUserIP
+  = lens _allUserIP (\ s a -> s{_allUserIP = a})
 
 -- | Select only advertisers which use another advertiser\'s floodlight
 -- configuration.
@@ -261,7 +256,7 @@ allAdvertiserGroupIds
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-allKey :: Lens' AdvertisersList' (Maybe Text)
+allKey :: Lens' AdvertisersList' (Maybe Key)
 allKey = lens _allKey (\ s a -> s{_allKey = a})
 
 -- | Value of the nextPageToken from the previous result page.
@@ -275,16 +270,16 @@ allSortField
   = lens _allSortField (\ s a -> s{_allSortField = a})
 
 -- | Select only advertisers with these subaccount IDs.
-allSubaccountId :: Lens' AdvertisersList' (Maybe Int64)
-allSubaccountId
-  = lens _allSubaccountId
-      (\ s a -> s{_allSubaccountId = a})
+allSubAccountId :: Lens' AdvertisersList' (Maybe Int64)
+allSubAccountId
+  = lens _allSubAccountId
+      (\ s a -> s{_allSubAccountId = a})
 
 -- | OAuth 2.0 token for the current user.
-allOauthToken :: Lens' AdvertisersList' (Maybe Text)
-allOauthToken
-  = lens _allOauthToken
-      (\ s a -> s{_allOauthToken = a})
+allOAuthToken :: Lens' AdvertisersList' (Maybe OAuthToken)
+allOAuthToken
+  = lens _allOAuthToken
+      (\ s a -> s{_allOAuthToken = a})
 
 -- | Select only advertisers with these floodlight configuration IDs.
 allFloodlightConfigurationIds :: Lens' AdvertisersList' (Maybe Int64)
@@ -303,16 +298,16 @@ allFields :: Lens' AdvertisersList' (Maybe Text)
 allFields
   = lens _allFields (\ s a -> s{_allFields = a})
 
--- | Data format for the response.
-allAlt :: Lens' AdvertisersList' Alt
-allAlt = lens _allAlt (\ s a -> s{_allAlt = a})
+instance GoogleAuth AdvertisersList' where
+        authKey = allKey . _Just
+        authToken = allOAuthToken . _Just
 
 instance GoogleRequest AdvertisersList' where
         type Rs AdvertisersList' = AdvertisersListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AdvertisersList'{..}
           = go _allStatus _allQuotaUser (Just _allPrettyPrint)
-              _allUserIp
+              _allUserIP
               _allOnlyParent
               _allSearchString
               _allIds
@@ -323,12 +318,12 @@ instance GoogleRequest AdvertisersList' where
               _allKey
               _allPageToken
               _allSortField
-              _allSubaccountId
-              _allOauthToken
+              _allSubAccountId
+              _allOAuthToken
               _allFloodlightConfigurationIds
               _allMaxResults
               _allFields
-              (Just _allAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AdvertisersListResource)

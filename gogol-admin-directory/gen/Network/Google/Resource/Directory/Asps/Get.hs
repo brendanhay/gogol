@@ -33,12 +33,11 @@ module Network.Google.Resource.Directory.Asps.Get
     , agQuotaUser
     , agPrettyPrint
     , agCodeId
-    , agUserIp
+    , agUserIP
     , agKey
-    , agOauthToken
+    , agOAuthToken
     , agUserKey
     , agFields
-    , agAlt
     ) where
 
 import           Network.Google.AdminDirectory.Types
@@ -54,10 +53,10 @@ type AspsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] Asp
+                         QueryParam "alt" AltJSON :> Get '[JSON] Asp
 
 -- | Get information about an ASP issued by a user.
 --
@@ -66,12 +65,11 @@ data AspsGet' = AspsGet'
     { _agQuotaUser   :: !(Maybe Text)
     , _agPrettyPrint :: !Bool
     , _agCodeId      :: !Int32
-    , _agUserIp      :: !(Maybe Text)
-    , _agKey         :: !(Maybe Text)
-    , _agOauthToken  :: !(Maybe Text)
+    , _agUserIP      :: !(Maybe Text)
+    , _agKey         :: !(Maybe Key)
+    , _agOAuthToken  :: !(Maybe OAuthToken)
     , _agUserKey     :: !Text
     , _agFields      :: !(Maybe Text)
-    , _agAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AspsGet'' with the minimum fields required to make a request.
@@ -84,17 +82,15 @@ data AspsGet' = AspsGet'
 --
 -- * 'agCodeId'
 --
--- * 'agUserIp'
+-- * 'agUserIP'
 --
 -- * 'agKey'
 --
--- * 'agOauthToken'
+-- * 'agOAuthToken'
 --
 -- * 'agUserKey'
 --
 -- * 'agFields'
---
--- * 'agAlt'
 aspsGet'
     :: Int32 -- ^ 'codeId'
     -> Text -- ^ 'userKey'
@@ -104,12 +100,11 @@ aspsGet' pAgCodeId_ pAgUserKey_ =
     { _agQuotaUser = Nothing
     , _agPrettyPrint = True
     , _agCodeId = pAgCodeId_
-    , _agUserIp = Nothing
+    , _agUserIP = Nothing
     , _agKey = Nothing
-    , _agOauthToken = Nothing
+    , _agOAuthToken = Nothing
     , _agUserKey = pAgUserKey_
     , _agFields = Nothing
-    , _agAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -131,19 +126,19 @@ agCodeId = lens _agCodeId (\ s a -> s{_agCodeId = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-agUserIp :: Lens' AspsGet' (Maybe Text)
-agUserIp = lens _agUserIp (\ s a -> s{_agUserIp = a})
+agUserIP :: Lens' AspsGet' (Maybe Text)
+agUserIP = lens _agUserIP (\ s a -> s{_agUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-agKey :: Lens' AspsGet' (Maybe Text)
+agKey :: Lens' AspsGet' (Maybe Key)
 agKey = lens _agKey (\ s a -> s{_agKey = a})
 
 -- | OAuth 2.0 token for the current user.
-agOauthToken :: Lens' AspsGet' (Maybe Text)
-agOauthToken
-  = lens _agOauthToken (\ s a -> s{_agOauthToken = a})
+agOAuthToken :: Lens' AspsGet' (Maybe OAuthToken)
+agOAuthToken
+  = lens _agOAuthToken (\ s a -> s{_agOAuthToken = a})
 
 -- | Identifies the user in the API request. The value can be the user\'s
 -- primary email address, alias email address, or unique user ID.
@@ -155,21 +150,21 @@ agUserKey
 agFields :: Lens' AspsGet' (Maybe Text)
 agFields = lens _agFields (\ s a -> s{_agFields = a})
 
--- | Data format for the response.
-agAlt :: Lens' AspsGet' Alt
-agAlt = lens _agAlt (\ s a -> s{_agAlt = a})
+instance GoogleAuth AspsGet' where
+        authKey = agKey . _Just
+        authToken = agOAuthToken . _Just
 
 instance GoogleRequest AspsGet' where
         type Rs AspsGet' = Asp
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u AspsGet'{..}
           = go _agQuotaUser (Just _agPrettyPrint) _agCodeId
-              _agUserIp
+              _agUserIP
               _agKey
-              _agOauthToken
+              _agOAuthToken
               _agUserKey
               _agFields
-              (Just _agAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy AspsGetResource) r
                       u

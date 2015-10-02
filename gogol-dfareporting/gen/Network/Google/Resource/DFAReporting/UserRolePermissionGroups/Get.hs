@@ -32,13 +32,12 @@ module Network.Google.Resource.DFAReporting.UserRolePermissionGroups.Get
     -- * Request Lenses
     , urpggQuotaUser
     , urpggPrettyPrint
-    , urpggUserIp
+    , urpggUserIP
     , urpggProfileId
     , urpggKey
     , urpggId
-    , urpggOauthToken
+    , urpggOAuthToken
     , urpggFields
-    , urpggAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,10 +53,10 @@ type UserRolePermissionGroupsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :>
+                         QueryParam "alt" AltJSON :>
                            Get '[JSON] UserRolePermissionGroup
 
 -- | Gets one user role permission group by ID.
@@ -66,13 +65,12 @@ type UserRolePermissionGroupsGetResource =
 data UserRolePermissionGroupsGet' = UserRolePermissionGroupsGet'
     { _urpggQuotaUser   :: !(Maybe Text)
     , _urpggPrettyPrint :: !Bool
-    , _urpggUserIp      :: !(Maybe Text)
+    , _urpggUserIP      :: !(Maybe Text)
     , _urpggProfileId   :: !Int64
-    , _urpggKey         :: !(Maybe Text)
+    , _urpggKey         :: !(Maybe Key)
     , _urpggId          :: !Int64
-    , _urpggOauthToken  :: !(Maybe Text)
+    , _urpggOAuthToken  :: !(Maybe OAuthToken)
     , _urpggFields      :: !(Maybe Text)
-    , _urpggAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserRolePermissionGroupsGet'' with the minimum fields required to make a request.
@@ -83,7 +81,7 @@ data UserRolePermissionGroupsGet' = UserRolePermissionGroupsGet'
 --
 -- * 'urpggPrettyPrint'
 --
--- * 'urpggUserIp'
+-- * 'urpggUserIP'
 --
 -- * 'urpggProfileId'
 --
@@ -91,11 +89,9 @@ data UserRolePermissionGroupsGet' = UserRolePermissionGroupsGet'
 --
 -- * 'urpggId'
 --
--- * 'urpggOauthToken'
+-- * 'urpggOAuthToken'
 --
 -- * 'urpggFields'
---
--- * 'urpggAlt'
 userRolePermissionGroupsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
@@ -104,13 +100,12 @@ userRolePermissionGroupsGet' pUrpggProfileId_ pUrpggId_ =
     UserRolePermissionGroupsGet'
     { _urpggQuotaUser = Nothing
     , _urpggPrettyPrint = True
-    , _urpggUserIp = Nothing
+    , _urpggUserIP = Nothing
     , _urpggProfileId = pUrpggProfileId_
     , _urpggKey = Nothing
     , _urpggId = pUrpggId_
-    , _urpggOauthToken = Nothing
+    , _urpggOAuthToken = Nothing
     , _urpggFields = Nothing
-    , _urpggAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -129,9 +124,9 @@ urpggPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-urpggUserIp :: Lens' UserRolePermissionGroupsGet' (Maybe Text)
-urpggUserIp
-  = lens _urpggUserIp (\ s a -> s{_urpggUserIp = a})
+urpggUserIP :: Lens' UserRolePermissionGroupsGet' (Maybe Text)
+urpggUserIP
+  = lens _urpggUserIP (\ s a -> s{_urpggUserIP = a})
 
 -- | User profile ID associated with this request.
 urpggProfileId :: Lens' UserRolePermissionGroupsGet' Int64
@@ -142,7 +137,7 @@ urpggProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-urpggKey :: Lens' UserRolePermissionGroupsGet' (Maybe Text)
+urpggKey :: Lens' UserRolePermissionGroupsGet' (Maybe Key)
 urpggKey = lens _urpggKey (\ s a -> s{_urpggKey = a})
 
 -- | User role permission group ID.
@@ -150,19 +145,20 @@ urpggId :: Lens' UserRolePermissionGroupsGet' Int64
 urpggId = lens _urpggId (\ s a -> s{_urpggId = a})
 
 -- | OAuth 2.0 token for the current user.
-urpggOauthToken :: Lens' UserRolePermissionGroupsGet' (Maybe Text)
-urpggOauthToken
-  = lens _urpggOauthToken
-      (\ s a -> s{_urpggOauthToken = a})
+urpggOAuthToken :: Lens' UserRolePermissionGroupsGet' (Maybe OAuthToken)
+urpggOAuthToken
+  = lens _urpggOAuthToken
+      (\ s a -> s{_urpggOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 urpggFields :: Lens' UserRolePermissionGroupsGet' (Maybe Text)
 urpggFields
   = lens _urpggFields (\ s a -> s{_urpggFields = a})
 
--- | Data format for the response.
-urpggAlt :: Lens' UserRolePermissionGroupsGet' Alt
-urpggAlt = lens _urpggAlt (\ s a -> s{_urpggAlt = a})
+instance GoogleAuth UserRolePermissionGroupsGet'
+         where
+        authKey = urpggKey . _Just
+        authToken = urpggOAuthToken . _Just
 
 instance GoogleRequest UserRolePermissionGroupsGet'
          where
@@ -171,13 +167,13 @@ instance GoogleRequest UserRolePermissionGroupsGet'
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u UserRolePermissionGroupsGet'{..}
           = go _urpggQuotaUser (Just _urpggPrettyPrint)
-              _urpggUserIp
+              _urpggUserIP
               _urpggProfileId
               _urpggKey
               _urpggId
-              _urpggOauthToken
+              _urpggOAuthToken
               _urpggFields
-              (Just _urpggAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UserRolePermissionGroupsGetResource)

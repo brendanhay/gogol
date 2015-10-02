@@ -40,17 +40,16 @@ module Network.Google.Resource.Genomics.Readgroupsets.Coveragebuckets.List
     , rclQuotaUser
     , rclPrettyPrint
     , rclReadGroupSetId
-    , rclUserIp
+    , rclUserIP
     , rclRangeEnd
     , rclRangeStart
     , rclTargetBucketWidth
     , rclKey
     , rclRangeReferenceName
     , rclPageToken
-    , rclOauthToken
+    , rclOAuthToken
     , rclPageSize
     , rclFields
-    , rclAlt
     ) where
 
 import           Network.Google.Genomics.Types
@@ -68,13 +67,13 @@ type ReadgroupsetsCoveragebucketsListResource =
                  QueryParam "range.end" Int64 :>
                    QueryParam "range.start" Int64 :>
                      QueryParam "targetBucketWidth" Int64 :>
-                       QueryParam "key" Text :>
+                       QueryParam "key" Key :>
                          QueryParam "range.referenceName" Text :>
                            QueryParam "pageToken" Text :>
-                             QueryParam "oauth_token" Text :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "pageSize" Int32 :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "alt" Alt :>
+                                   QueryParam "alt" AltJSON :>
                                      Get '[JSON] ListCoverageBucketsResponse
 
 -- | Lists fixed width coverage buckets for a read group set, each of which
@@ -91,17 +90,16 @@ data ReadgroupsetsCoveragebucketsList' = ReadgroupsetsCoveragebucketsList'
     { _rclQuotaUser          :: !(Maybe Text)
     , _rclPrettyPrint        :: !Bool
     , _rclReadGroupSetId     :: !Text
-    , _rclUserIp             :: !(Maybe Text)
+    , _rclUserIP             :: !(Maybe Text)
     , _rclRangeEnd           :: !(Maybe Int64)
     , _rclRangeStart         :: !(Maybe Int64)
     , _rclTargetBucketWidth  :: !(Maybe Int64)
-    , _rclKey                :: !(Maybe Text)
+    , _rclKey                :: !(Maybe Key)
     , _rclRangeReferenceName :: !(Maybe Text)
     , _rclPageToken          :: !(Maybe Text)
-    , _rclOauthToken         :: !(Maybe Text)
+    , _rclOAuthToken         :: !(Maybe OAuthToken)
     , _rclPageSize           :: !(Maybe Int32)
     , _rclFields             :: !(Maybe Text)
-    , _rclAlt                :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReadgroupsetsCoveragebucketsList'' with the minimum fields required to make a request.
@@ -114,7 +112,7 @@ data ReadgroupsetsCoveragebucketsList' = ReadgroupsetsCoveragebucketsList'
 --
 -- * 'rclReadGroupSetId'
 --
--- * 'rclUserIp'
+-- * 'rclUserIP'
 --
 -- * 'rclRangeEnd'
 --
@@ -128,13 +126,11 @@ data ReadgroupsetsCoveragebucketsList' = ReadgroupsetsCoveragebucketsList'
 --
 -- * 'rclPageToken'
 --
--- * 'rclOauthToken'
+-- * 'rclOAuthToken'
 --
 -- * 'rclPageSize'
 --
 -- * 'rclFields'
---
--- * 'rclAlt'
 readgroupsetsCoveragebucketsList'
     :: Text -- ^ 'readGroupSetId'
     -> ReadgroupsetsCoveragebucketsList'
@@ -143,17 +139,16 @@ readgroupsetsCoveragebucketsList' pRclReadGroupSetId_ =
     { _rclQuotaUser = Nothing
     , _rclPrettyPrint = True
     , _rclReadGroupSetId = pRclReadGroupSetId_
-    , _rclUserIp = Nothing
+    , _rclUserIP = Nothing
     , _rclRangeEnd = Nothing
     , _rclRangeStart = Nothing
     , _rclTargetBucketWidth = Nothing
     , _rclKey = Nothing
     , _rclRangeReferenceName = Nothing
     , _rclPageToken = Nothing
-    , _rclOauthToken = Nothing
+    , _rclOAuthToken = Nothing
     , _rclPageSize = Nothing
     , _rclFields = Nothing
-    , _rclAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -177,9 +172,9 @@ rclReadGroupSetId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rclUserIp :: Lens' ReadgroupsetsCoveragebucketsList' (Maybe Text)
-rclUserIp
-  = lens _rclUserIp (\ s a -> s{_rclUserIp = a})
+rclUserIP :: Lens' ReadgroupsetsCoveragebucketsList' (Maybe Text)
+rclUserIP
+  = lens _rclUserIP (\ s a -> s{_rclUserIP = a})
 
 -- | The end position of the range on the reference, 0-based exclusive. If
 -- specified, referenceName must also be specified.
@@ -208,7 +203,7 @@ rclTargetBucketWidth
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rclKey :: Lens' ReadgroupsetsCoveragebucketsList' (Maybe Text)
+rclKey :: Lens' ReadgroupsetsCoveragebucketsList' (Maybe Key)
 rclKey = lens _rclKey (\ s a -> s{_rclKey = a})
 
 -- | The reference sequence name, for example chr1, 1, or chrX.
@@ -225,10 +220,10 @@ rclPageToken
   = lens _rclPageToken (\ s a -> s{_rclPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-rclOauthToken :: Lens' ReadgroupsetsCoveragebucketsList' (Maybe Text)
-rclOauthToken
-  = lens _rclOauthToken
-      (\ s a -> s{_rclOauthToken = a})
+rclOAuthToken :: Lens' ReadgroupsetsCoveragebucketsList' (Maybe OAuthToken)
+rclOAuthToken
+  = lens _rclOAuthToken
+      (\ s a -> s{_rclOAuthToken = a})
 
 -- | The maximum number of results to return in a single page. If
 -- unspecified, defaults to 1024. The maximum value is 2048.
@@ -241,9 +236,10 @@ rclFields :: Lens' ReadgroupsetsCoveragebucketsList' (Maybe Text)
 rclFields
   = lens _rclFields (\ s a -> s{_rclFields = a})
 
--- | Data format for the response.
-rclAlt :: Lens' ReadgroupsetsCoveragebucketsList' Alt
-rclAlt = lens _rclAlt (\ s a -> s{_rclAlt = a})
+instance GoogleAuth ReadgroupsetsCoveragebucketsList'
+         where
+        authKey = rclKey . _Just
+        authToken = rclOAuthToken . _Just
 
 instance GoogleRequest
          ReadgroupsetsCoveragebucketsList' where
@@ -254,17 +250,17 @@ instance GoogleRequest
           ReadgroupsetsCoveragebucketsList'{..}
           = go _rclQuotaUser (Just _rclPrettyPrint)
               _rclReadGroupSetId
-              _rclUserIp
+              _rclUserIP
               _rclRangeEnd
               _rclRangeStart
               _rclTargetBucketWidth
               _rclKey
               _rclRangeReferenceName
               _rclPageToken
-              _rclOauthToken
+              _rclOAuthToken
               _rclPageSize
               _rclFields
-              (Just _rclAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

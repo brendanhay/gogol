@@ -19,7 +19,7 @@
 --
 -- | Deletes a Container Version.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersVersionsDelete@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersVersionsDelete@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Delete
     (
     -- * REST Resource
@@ -33,19 +33,18 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Versions.Delete
     , acvdcQuotaUser
     , acvdcPrettyPrint
     , acvdcContainerId
-    , acvdcUserIp
+    , acvdcUserIP
     , acvdcContainerVersionId
     , acvdcAccountId
     , acvdcKey
-    , acvdcOauthToken
+    , acvdcOAuthToken
     , acvdcFields
-    , acvdcAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagmanagerAccountsContainersVersionsDelete@ which the
+-- | A resource alias for @TagManagerAccountsContainersVersionsDelete@ which the
 -- 'AccountsContainersVersionsDelete'' request conforms to.
 type AccountsContainersVersionsDeleteResource =
      "accounts" :>
@@ -57,10 +56,10 @@ type AccountsContainersVersionsDeleteResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Delete '[JSON] ()
+                             QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a Container Version.
 --
@@ -69,13 +68,12 @@ data AccountsContainersVersionsDelete' = AccountsContainersVersionsDelete'
     { _acvdcQuotaUser          :: !(Maybe Text)
     , _acvdcPrettyPrint        :: !Bool
     , _acvdcContainerId        :: !Text
-    , _acvdcUserIp             :: !(Maybe Text)
+    , _acvdcUserIP             :: !(Maybe Text)
     , _acvdcContainerVersionId :: !Text
     , _acvdcAccountId          :: !Text
-    , _acvdcKey                :: !(Maybe Text)
-    , _acvdcOauthToken         :: !(Maybe Text)
+    , _acvdcKey                :: !(Maybe Key)
+    , _acvdcOAuthToken         :: !(Maybe OAuthToken)
     , _acvdcFields             :: !(Maybe Text)
-    , _acvdcAlt                :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersVersionsDelete'' with the minimum fields required to make a request.
@@ -88,7 +86,7 @@ data AccountsContainersVersionsDelete' = AccountsContainersVersionsDelete'
 --
 -- * 'acvdcContainerId'
 --
--- * 'acvdcUserIp'
+-- * 'acvdcUserIP'
 --
 -- * 'acvdcContainerVersionId'
 --
@@ -96,11 +94,9 @@ data AccountsContainersVersionsDelete' = AccountsContainersVersionsDelete'
 --
 -- * 'acvdcKey'
 --
--- * 'acvdcOauthToken'
+-- * 'acvdcOAuthToken'
 --
 -- * 'acvdcFields'
---
--- * 'acvdcAlt'
 accountsContainersVersionsDelete'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'containerVersionId'
@@ -111,13 +107,12 @@ accountsContainersVersionsDelete' pAcvdcContainerId_ pAcvdcContainerVersionId_ p
     { _acvdcQuotaUser = Nothing
     , _acvdcPrettyPrint = True
     , _acvdcContainerId = pAcvdcContainerId_
-    , _acvdcUserIp = Nothing
+    , _acvdcUserIP = Nothing
     , _acvdcContainerVersionId = pAcvdcContainerVersionId_
     , _acvdcAccountId = pAcvdcAccountId_
     , _acvdcKey = Nothing
-    , _acvdcOauthToken = Nothing
+    , _acvdcOAuthToken = Nothing
     , _acvdcFields = Nothing
-    , _acvdcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -142,9 +137,9 @@ acvdcContainerId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-acvdcUserIp :: Lens' AccountsContainersVersionsDelete' (Maybe Text)
-acvdcUserIp
-  = lens _acvdcUserIp (\ s a -> s{_acvdcUserIp = a})
+acvdcUserIP :: Lens' AccountsContainersVersionsDelete' (Maybe Text)
+acvdcUserIP
+  = lens _acvdcUserIP (\ s a -> s{_acvdcUserIP = a})
 
 -- | The GTM Container Version ID.
 acvdcContainerVersionId :: Lens' AccountsContainersVersionsDelete' Text
@@ -161,23 +156,24 @@ acvdcAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-acvdcKey :: Lens' AccountsContainersVersionsDelete' (Maybe Text)
+acvdcKey :: Lens' AccountsContainersVersionsDelete' (Maybe Key)
 acvdcKey = lens _acvdcKey (\ s a -> s{_acvdcKey = a})
 
 -- | OAuth 2.0 token for the current user.
-acvdcOauthToken :: Lens' AccountsContainersVersionsDelete' (Maybe Text)
-acvdcOauthToken
-  = lens _acvdcOauthToken
-      (\ s a -> s{_acvdcOauthToken = a})
+acvdcOAuthToken :: Lens' AccountsContainersVersionsDelete' (Maybe OAuthToken)
+acvdcOAuthToken
+  = lens _acvdcOAuthToken
+      (\ s a -> s{_acvdcOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 acvdcFields :: Lens' AccountsContainersVersionsDelete' (Maybe Text)
 acvdcFields
   = lens _acvdcFields (\ s a -> s{_acvdcFields = a})
 
--- | Data format for the response.
-acvdcAlt :: Lens' AccountsContainersVersionsDelete' Alt
-acvdcAlt = lens _acvdcAlt (\ s a -> s{_acvdcAlt = a})
+instance GoogleAuth AccountsContainersVersionsDelete'
+         where
+        authKey = acvdcKey . _Just
+        authToken = acvdcOAuthToken . _Just
 
 instance GoogleRequest
          AccountsContainersVersionsDelete' where
@@ -187,13 +183,13 @@ instance GoogleRequest
           AccountsContainersVersionsDelete'{..}
           = go _acvdcQuotaUser (Just _acvdcPrettyPrint)
               _acvdcContainerId
-              _acvdcUserIp
+              _acvdcUserIP
               _acvdcContainerVersionId
               _acvdcAccountId
               _acvdcKey
-              _acvdcOauthToken
+              _acvdcOAuthToken
               _acvdcFields
-              (Just _acvdcAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

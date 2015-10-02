@@ -42,7 +42,7 @@ module Network.Google.DoubleClickSearch.Types
     -- * ReportFiles
     , ReportFiles
     , reportFiles
-    , rfUrl
+    , rfURL
     , rfByteCount
 
     -- * Report
@@ -190,9 +190,6 @@ module Network.Google.DoubleClickSearch.Types
     , savedColumnList
     , sclKind
     , sclItems
-
-    -- * Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.DoubleClickSearch.Types.Product

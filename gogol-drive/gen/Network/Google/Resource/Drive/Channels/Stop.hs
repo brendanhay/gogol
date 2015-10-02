@@ -32,11 +32,11 @@ module Network.Google.Resource.Drive.Channels.Stop
     -- * Request Lenses
     , csQuotaUser
     , csPrettyPrint
-    , csUserIp
+    , csUserIP
+    , csChannel
     , csKey
-    , csOauthToken
+    , csOAuthToken
     , csFields
-    , csAlt
     ) where
 
 import           Network.Google.Drive.Types
@@ -50,10 +50,11 @@ type ChannelsStopResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Post '[JSON] ()
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Channel :> Post '[JSON] ()
 
 -- | Stop watching resources through this channel
 --
@@ -61,11 +62,11 @@ type ChannelsStopResource =
 data ChannelsStop' = ChannelsStop'
     { _csQuotaUser   :: !(Maybe Text)
     , _csPrettyPrint :: !Bool
-    , _csUserIp      :: !(Maybe Text)
-    , _csKey         :: !(Maybe Text)
-    , _csOauthToken  :: !(Maybe Text)
+    , _csUserIP      :: !(Maybe Text)
+    , _csChannel     :: !Channel
+    , _csKey         :: !(Maybe Key)
+    , _csOAuthToken  :: !(Maybe OAuthToken)
     , _csFields      :: !(Maybe Text)
-    , _csAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChannelsStop'' with the minimum fields required to make a request.
@@ -76,26 +77,27 @@ data ChannelsStop' = ChannelsStop'
 --
 -- * 'csPrettyPrint'
 --
--- * 'csUserIp'
+-- * 'csUserIP'
+--
+-- * 'csChannel'
 --
 -- * 'csKey'
 --
--- * 'csOauthToken'
+-- * 'csOAuthToken'
 --
 -- * 'csFields'
---
--- * 'csAlt'
 channelsStop'
-    :: ChannelsStop'
-channelsStop' =
+    :: Channel -- ^ 'Channel'
+    -> ChannelsStop'
+channelsStop' pCsChannel_ =
     ChannelsStop'
     { _csQuotaUser = Nothing
     , _csPrettyPrint = True
-    , _csUserIp = Nothing
+    , _csUserIP = Nothing
+    , _csChannel = pCsChannel_
     , _csKey = Nothing
-    , _csOauthToken = Nothing
+    , _csOAuthToken = Nothing
     , _csFields = Nothing
-    , _csAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -113,37 +115,43 @@ csPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-csUserIp :: Lens' ChannelsStop' (Maybe Text)
-csUserIp = lens _csUserIp (\ s a -> s{_csUserIp = a})
+csUserIP :: Lens' ChannelsStop' (Maybe Text)
+csUserIP = lens _csUserIP (\ s a -> s{_csUserIP = a})
+
+-- | Multipart request metadata.
+csChannel :: Lens' ChannelsStop' Channel
+csChannel
+  = lens _csChannel (\ s a -> s{_csChannel = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-csKey :: Lens' ChannelsStop' (Maybe Text)
+csKey :: Lens' ChannelsStop' (Maybe Key)
 csKey = lens _csKey (\ s a -> s{_csKey = a})
 
 -- | OAuth 2.0 token for the current user.
-csOauthToken :: Lens' ChannelsStop' (Maybe Text)
-csOauthToken
-  = lens _csOauthToken (\ s a -> s{_csOauthToken = a})
+csOAuthToken :: Lens' ChannelsStop' (Maybe OAuthToken)
+csOAuthToken
+  = lens _csOAuthToken (\ s a -> s{_csOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 csFields :: Lens' ChannelsStop' (Maybe Text)
 csFields = lens _csFields (\ s a -> s{_csFields = a})
 
--- | Data format for the response.
-csAlt :: Lens' ChannelsStop' Alt
-csAlt = lens _csAlt (\ s a -> s{_csAlt = a})
+instance GoogleAuth ChannelsStop' where
+        authKey = csKey . _Just
+        authToken = csOAuthToken . _Just
 
 instance GoogleRequest ChannelsStop' where
         type Rs ChannelsStop' = ()
         request = requestWithRoute defReq driveURL
         requestWithRoute r u ChannelsStop'{..}
-          = go _csQuotaUser (Just _csPrettyPrint) _csUserIp
+          = go _csQuotaUser (Just _csPrettyPrint) _csUserIP
               _csKey
-              _csOauthToken
+              _csOAuthToken
               _csFields
-              (Just _csAlt)
+              (Just AltJSON)
+              _csChannel
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ChannelsStopResource)

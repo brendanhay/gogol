@@ -32,13 +32,12 @@ module Network.Google.Resource.Books.Bookshelves.List
     -- * Request Lenses
     , blQuotaUser
     , blPrettyPrint
-    , blUserIp
+    , blUserIP
     , blUserId
     , blKey
     , blSource
-    , blOauthToken
+    , blOAuthToken
     , blFields
-    , blAlt
     ) where
 
 import           Network.Google.Books.Types
@@ -53,11 +52,11 @@ type BookshelvesListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "source" Text :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] Bookshelves
+                         QueryParam "alt" AltJSON :> Get '[JSON] Bookshelves
 
 -- | Retrieves a list of public bookshelves for the specified user.
 --
@@ -65,13 +64,12 @@ type BookshelvesListResource =
 data BookshelvesList' = BookshelvesList'
     { _blQuotaUser   :: !(Maybe Text)
     , _blPrettyPrint :: !Bool
-    , _blUserIp      :: !(Maybe Text)
+    , _blUserIP      :: !(Maybe Text)
     , _blUserId      :: !Text
-    , _blKey         :: !(Maybe Text)
+    , _blKey         :: !(Maybe Key)
     , _blSource      :: !(Maybe Text)
-    , _blOauthToken  :: !(Maybe Text)
+    , _blOAuthToken  :: !(Maybe OAuthToken)
     , _blFields      :: !(Maybe Text)
-    , _blAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BookshelvesList'' with the minimum fields required to make a request.
@@ -82,7 +80,7 @@ data BookshelvesList' = BookshelvesList'
 --
 -- * 'blPrettyPrint'
 --
--- * 'blUserIp'
+-- * 'blUserIP'
 --
 -- * 'blUserId'
 --
@@ -90,11 +88,9 @@ data BookshelvesList' = BookshelvesList'
 --
 -- * 'blSource'
 --
--- * 'blOauthToken'
+-- * 'blOAuthToken'
 --
 -- * 'blFields'
---
--- * 'blAlt'
 bookshelvesList'
     :: Text -- ^ 'userId'
     -> BookshelvesList'
@@ -102,13 +98,12 @@ bookshelvesList' pBlUserId_ =
     BookshelvesList'
     { _blQuotaUser = Nothing
     , _blPrettyPrint = True
-    , _blUserIp = Nothing
+    , _blUserIP = Nothing
     , _blUserId = pBlUserId_
     , _blKey = Nothing
     , _blSource = Nothing
-    , _blOauthToken = Nothing
+    , _blOAuthToken = Nothing
     , _blFields = Nothing
-    , _blAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -126,8 +121,8 @@ blPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-blUserIp :: Lens' BookshelvesList' (Maybe Text)
-blUserIp = lens _blUserIp (\ s a -> s{_blUserIp = a})
+blUserIP :: Lens' BookshelvesList' (Maybe Text)
+blUserIP = lens _blUserIP (\ s a -> s{_blUserIP = a})
 
 -- | ID of user for whom to retrieve bookshelves.
 blUserId :: Lens' BookshelvesList' Text
@@ -136,7 +131,7 @@ blUserId = lens _blUserId (\ s a -> s{_blUserId = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-blKey :: Lens' BookshelvesList' (Maybe Text)
+blKey :: Lens' BookshelvesList' (Maybe Key)
 blKey = lens _blKey (\ s a -> s{_blKey = a})
 
 -- | String to identify the originator of this request.
@@ -144,29 +139,29 @@ blSource :: Lens' BookshelvesList' (Maybe Text)
 blSource = lens _blSource (\ s a -> s{_blSource = a})
 
 -- | OAuth 2.0 token for the current user.
-blOauthToken :: Lens' BookshelvesList' (Maybe Text)
-blOauthToken
-  = lens _blOauthToken (\ s a -> s{_blOauthToken = a})
+blOAuthToken :: Lens' BookshelvesList' (Maybe OAuthToken)
+blOAuthToken
+  = lens _blOAuthToken (\ s a -> s{_blOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 blFields :: Lens' BookshelvesList' (Maybe Text)
 blFields = lens _blFields (\ s a -> s{_blFields = a})
 
--- | Data format for the response.
-blAlt :: Lens' BookshelvesList' Alt
-blAlt = lens _blAlt (\ s a -> s{_blAlt = a})
+instance GoogleAuth BookshelvesList' where
+        authKey = blKey . _Just
+        authToken = blOAuthToken . _Just
 
 instance GoogleRequest BookshelvesList' where
         type Rs BookshelvesList' = Bookshelves
         request = requestWithRoute defReq booksURL
         requestWithRoute r u BookshelvesList'{..}
-          = go _blQuotaUser (Just _blPrettyPrint) _blUserIp
+          = go _blQuotaUser (Just _blPrettyPrint) _blUserIP
               _blUserId
               _blKey
               _blSource
-              _blOauthToken
+              _blOAuthToken
               _blFields
-              (Just _blAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy BookshelvesListResource)

@@ -32,13 +32,12 @@ module Network.Google.Resource.Drive.Permissions.Get
     -- * Request Lenses
     , pggQuotaUser
     , pggPrettyPrint
-    , pggUserIp
+    , pggUserIP
     , pggKey
     , pggFileId
-    , pggOauthToken
+    , pggOAuthToken
     , pggPermissionId
     , pggFields
-    , pggAlt
     ) where
 
 import           Network.Google.Drive.Types
@@ -54,10 +53,10 @@ type PermissionsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] Permission
+                         QueryParam "alt" AltJSON :> Get '[JSON] Permission
 
 -- | Gets a permission by ID.
 --
@@ -65,13 +64,12 @@ type PermissionsGetResource =
 data PermissionsGet' = PermissionsGet'
     { _pggQuotaUser    :: !(Maybe Text)
     , _pggPrettyPrint  :: !Bool
-    , _pggUserIp       :: !(Maybe Text)
-    , _pggKey          :: !(Maybe Text)
+    , _pggUserIP       :: !(Maybe Text)
+    , _pggKey          :: !(Maybe Key)
     , _pggFileId       :: !Text
-    , _pggOauthToken   :: !(Maybe Text)
+    , _pggOAuthToken   :: !(Maybe OAuthToken)
     , _pggPermissionId :: !Text
     , _pggFields       :: !(Maybe Text)
-    , _pggAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PermissionsGet'' with the minimum fields required to make a request.
@@ -82,19 +80,17 @@ data PermissionsGet' = PermissionsGet'
 --
 -- * 'pggPrettyPrint'
 --
--- * 'pggUserIp'
+-- * 'pggUserIP'
 --
 -- * 'pggKey'
 --
 -- * 'pggFileId'
 --
--- * 'pggOauthToken'
+-- * 'pggOAuthToken'
 --
 -- * 'pggPermissionId'
 --
 -- * 'pggFields'
---
--- * 'pggAlt'
 permissionsGet'
     :: Text -- ^ 'fileId'
     -> Text -- ^ 'permissionId'
@@ -103,13 +99,12 @@ permissionsGet' pPggFileId_ pPggPermissionId_ =
     PermissionsGet'
     { _pggQuotaUser = Nothing
     , _pggPrettyPrint = True
-    , _pggUserIp = Nothing
+    , _pggUserIP = Nothing
     , _pggKey = Nothing
     , _pggFileId = pPggFileId_
-    , _pggOauthToken = Nothing
+    , _pggOAuthToken = Nothing
     , _pggPermissionId = pPggPermissionId_
     , _pggFields = Nothing
-    , _pggAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,14 +122,14 @@ pggPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-pggUserIp :: Lens' PermissionsGet' (Maybe Text)
-pggUserIp
-  = lens _pggUserIp (\ s a -> s{_pggUserIp = a})
+pggUserIP :: Lens' PermissionsGet' (Maybe Text)
+pggUserIP
+  = lens _pggUserIP (\ s a -> s{_pggUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pggKey :: Lens' PermissionsGet' (Maybe Text)
+pggKey :: Lens' PermissionsGet' (Maybe Key)
 pggKey = lens _pggKey (\ s a -> s{_pggKey = a})
 
 -- | The ID for the file.
@@ -143,10 +138,10 @@ pggFileId
   = lens _pggFileId (\ s a -> s{_pggFileId = a})
 
 -- | OAuth 2.0 token for the current user.
-pggOauthToken :: Lens' PermissionsGet' (Maybe Text)
-pggOauthToken
-  = lens _pggOauthToken
-      (\ s a -> s{_pggOauthToken = a})
+pggOAuthToken :: Lens' PermissionsGet' (Maybe OAuthToken)
+pggOAuthToken
+  = lens _pggOAuthToken
+      (\ s a -> s{_pggOAuthToken = a})
 
 -- | The ID for the permission.
 pggPermissionId :: Lens' PermissionsGet' Text
@@ -159,21 +154,21 @@ pggFields :: Lens' PermissionsGet' (Maybe Text)
 pggFields
   = lens _pggFields (\ s a -> s{_pggFields = a})
 
--- | Data format for the response.
-pggAlt :: Lens' PermissionsGet' Alt
-pggAlt = lens _pggAlt (\ s a -> s{_pggAlt = a})
+instance GoogleAuth PermissionsGet' where
+        authKey = pggKey . _Just
+        authToken = pggOAuthToken . _Just
 
 instance GoogleRequest PermissionsGet' where
         type Rs PermissionsGet' = Permission
         request = requestWithRoute defReq driveURL
         requestWithRoute r u PermissionsGet'{..}
-          = go _pggQuotaUser (Just _pggPrettyPrint) _pggUserIp
+          = go _pggQuotaUser (Just _pggPrettyPrint) _pggUserIP
               _pggKey
               _pggFileId
-              _pggOauthToken
+              _pggOAuthToken
               _pggPermissionId
               _pggFields
-              (Just _pggAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PermissionsGetResource)

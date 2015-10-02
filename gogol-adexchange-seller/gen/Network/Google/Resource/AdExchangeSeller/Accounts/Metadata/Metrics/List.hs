@@ -32,12 +32,11 @@ module Network.Google.Resource.AdExchangeSeller.Accounts.Metadata.Metrics.List
     -- * Request Lenses
     , ammlQuotaUser
     , ammlPrettyPrint
-    , ammlUserIp
+    , ammlUserIP
     , ammlAccountId
     , ammlKey
-    , ammlOauthToken
+    , ammlOAuthToken
     , ammlFields
-    , ammlAlt
     ) where
 
 import           Network.Google.AdExchangeSeller.Types
@@ -53,10 +52,10 @@ type AccountsMetadataMetricsListResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] Metadata
+                         QueryParam "alt" AltJSON :> Get '[JSON] Metadata
 
 -- | List the metadata for the metrics available to this AdExchange account.
 --
@@ -64,12 +63,11 @@ type AccountsMetadataMetricsListResource =
 data AccountsMetadataMetricsList' = AccountsMetadataMetricsList'
     { _ammlQuotaUser   :: !(Maybe Text)
     , _ammlPrettyPrint :: !Bool
-    , _ammlUserIp      :: !(Maybe Text)
+    , _ammlUserIP      :: !(Maybe Text)
     , _ammlAccountId   :: !Text
-    , _ammlKey         :: !(Maybe Text)
-    , _ammlOauthToken  :: !(Maybe Text)
+    , _ammlKey         :: !(Maybe Key)
+    , _ammlOAuthToken  :: !(Maybe OAuthToken)
     , _ammlFields      :: !(Maybe Text)
-    , _ammlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsMetadataMetricsList'' with the minimum fields required to make a request.
@@ -80,17 +78,15 @@ data AccountsMetadataMetricsList' = AccountsMetadataMetricsList'
 --
 -- * 'ammlPrettyPrint'
 --
--- * 'ammlUserIp'
+-- * 'ammlUserIP'
 --
 -- * 'ammlAccountId'
 --
 -- * 'ammlKey'
 --
--- * 'ammlOauthToken'
+-- * 'ammlOAuthToken'
 --
 -- * 'ammlFields'
---
--- * 'ammlAlt'
 accountsMetadataMetricsList'
     :: Text -- ^ 'accountId'
     -> AccountsMetadataMetricsList'
@@ -98,12 +94,11 @@ accountsMetadataMetricsList' pAmmlAccountId_ =
     AccountsMetadataMetricsList'
     { _ammlQuotaUser = Nothing
     , _ammlPrettyPrint = True
-    , _ammlUserIp = Nothing
+    , _ammlUserIP = Nothing
     , _ammlAccountId = pAmmlAccountId_
     , _ammlKey = Nothing
-    , _ammlOauthToken = Nothing
+    , _ammlOAuthToken = Nothing
     , _ammlFields = Nothing
-    , _ammlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -122,9 +117,9 @@ ammlPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ammlUserIp :: Lens' AccountsMetadataMetricsList' (Maybe Text)
-ammlUserIp
-  = lens _ammlUserIp (\ s a -> s{_ammlUserIp = a})
+ammlUserIP :: Lens' AccountsMetadataMetricsList' (Maybe Text)
+ammlUserIP
+  = lens _ammlUserIP (\ s a -> s{_ammlUserIP = a})
 
 -- | Account with visibility to the metrics.
 ammlAccountId :: Lens' AccountsMetadataMetricsList' Text
@@ -135,23 +130,24 @@ ammlAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ammlKey :: Lens' AccountsMetadataMetricsList' (Maybe Text)
+ammlKey :: Lens' AccountsMetadataMetricsList' (Maybe Key)
 ammlKey = lens _ammlKey (\ s a -> s{_ammlKey = a})
 
 -- | OAuth 2.0 token for the current user.
-ammlOauthToken :: Lens' AccountsMetadataMetricsList' (Maybe Text)
-ammlOauthToken
-  = lens _ammlOauthToken
-      (\ s a -> s{_ammlOauthToken = a})
+ammlOAuthToken :: Lens' AccountsMetadataMetricsList' (Maybe OAuthToken)
+ammlOAuthToken
+  = lens _ammlOAuthToken
+      (\ s a -> s{_ammlOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ammlFields :: Lens' AccountsMetadataMetricsList' (Maybe Text)
 ammlFields
   = lens _ammlFields (\ s a -> s{_ammlFields = a})
 
--- | Data format for the response.
-ammlAlt :: Lens' AccountsMetadataMetricsList' Alt
-ammlAlt = lens _ammlAlt (\ s a -> s{_ammlAlt = a})
+instance GoogleAuth AccountsMetadataMetricsList'
+         where
+        authKey = ammlKey . _Just
+        authToken = ammlOAuthToken . _Just
 
 instance GoogleRequest AccountsMetadataMetricsList'
          where
@@ -159,12 +155,12 @@ instance GoogleRequest AccountsMetadataMetricsList'
         request = requestWithRoute defReq adExchangeSellerURL
         requestWithRoute r u AccountsMetadataMetricsList'{..}
           = go _ammlQuotaUser (Just _ammlPrettyPrint)
-              _ammlUserIp
+              _ammlUserIP
               _ammlAccountId
               _ammlKey
-              _ammlOauthToken
+              _ammlOAuthToken
               _ammlFields
-              (Just _ammlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountsMetadataMetricsListResource)

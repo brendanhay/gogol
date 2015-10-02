@@ -33,15 +33,14 @@ module Network.Google.Resource.Plus.People.ListByActivity
     -- * Request Lenses
     , plbaQuotaUser
     , plbaPrettyPrint
-    , plbaUserIp
+    , plbaUserIP
     , plbaActivityId
     , plbaCollection
     , plbaKey
     , plbaPageToken
-    , plbaOauthToken
+    , plbaOAuthToken
     , plbaMaxResults
     , plbaFields
-    , plbaAlt
     ) where
 
 import           Network.Google.Plus.Types
@@ -59,12 +58,12 @@ type PeopleListByActivityResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "maxResults" Word32 :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Get '[JSON] PeopleFeed
+                             QueryParam "alt" AltJSON :> Get '[JSON] PeopleFeed
 
 -- | List all of the people in the specified collection for a particular
 -- activity.
@@ -73,15 +72,14 @@ type PeopleListByActivityResource =
 data PeopleListByActivity' = PeopleListByActivity'
     { _plbaQuotaUser   :: !(Maybe Text)
     , _plbaPrettyPrint :: !Bool
-    , _plbaUserIp      :: !(Maybe Text)
+    , _plbaUserIP      :: !(Maybe Text)
     , _plbaActivityId  :: !Text
     , _plbaCollection  :: !PlusPeopleListByActivityCollection
-    , _plbaKey         :: !(Maybe Text)
+    , _plbaKey         :: !(Maybe Key)
     , _plbaPageToken   :: !(Maybe Text)
-    , _plbaOauthToken  :: !(Maybe Text)
+    , _plbaOAuthToken  :: !(Maybe OAuthToken)
     , _plbaMaxResults  :: !Word32
     , _plbaFields      :: !(Maybe Text)
-    , _plbaAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PeopleListByActivity'' with the minimum fields required to make a request.
@@ -92,7 +90,7 @@ data PeopleListByActivity' = PeopleListByActivity'
 --
 -- * 'plbaPrettyPrint'
 --
--- * 'plbaUserIp'
+-- * 'plbaUserIP'
 --
 -- * 'plbaActivityId'
 --
@@ -102,13 +100,11 @@ data PeopleListByActivity' = PeopleListByActivity'
 --
 -- * 'plbaPageToken'
 --
--- * 'plbaOauthToken'
+-- * 'plbaOAuthToken'
 --
 -- * 'plbaMaxResults'
 --
 -- * 'plbaFields'
---
--- * 'plbaAlt'
 peopleListByActivity'
     :: Text -- ^ 'activityId'
     -> PlusPeopleListByActivityCollection -- ^ 'collection'
@@ -117,15 +113,14 @@ peopleListByActivity' pPlbaActivityId_ pPlbaCollection_ =
     PeopleListByActivity'
     { _plbaQuotaUser = Nothing
     , _plbaPrettyPrint = True
-    , _plbaUserIp = Nothing
+    , _plbaUserIP = Nothing
     , _plbaActivityId = pPlbaActivityId_
     , _plbaCollection = pPlbaCollection_
     , _plbaKey = Nothing
     , _plbaPageToken = Nothing
-    , _plbaOauthToken = Nothing
+    , _plbaOAuthToken = Nothing
     , _plbaMaxResults = 20
     , _plbaFields = Nothing
-    , _plbaAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -144,9 +139,9 @@ plbaPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-plbaUserIp :: Lens' PeopleListByActivity' (Maybe Text)
-plbaUserIp
-  = lens _plbaUserIp (\ s a -> s{_plbaUserIp = a})
+plbaUserIP :: Lens' PeopleListByActivity' (Maybe Text)
+plbaUserIP
+  = lens _plbaUserIP (\ s a -> s{_plbaUserIP = a})
 
 -- | The ID of the activity to get the list of people for.
 plbaActivityId :: Lens' PeopleListByActivity' Text
@@ -163,7 +158,7 @@ plbaCollection
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-plbaKey :: Lens' PeopleListByActivity' (Maybe Text)
+plbaKey :: Lens' PeopleListByActivity' (Maybe Key)
 plbaKey = lens _plbaKey (\ s a -> s{_plbaKey = a})
 
 -- | The continuation token, which is used to page through large result sets.
@@ -175,10 +170,10 @@ plbaPageToken
       (\ s a -> s{_plbaPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-plbaOauthToken :: Lens' PeopleListByActivity' (Maybe Text)
-plbaOauthToken
-  = lens _plbaOauthToken
-      (\ s a -> s{_plbaOauthToken = a})
+plbaOAuthToken :: Lens' PeopleListByActivity' (Maybe OAuthToken)
+plbaOAuthToken
+  = lens _plbaOAuthToken
+      (\ s a -> s{_plbaOAuthToken = a})
 
 -- | The maximum number of people to include in the response, which is used
 -- for paging. For any response, the actual number returned might be less
@@ -193,24 +188,24 @@ plbaFields :: Lens' PeopleListByActivity' (Maybe Text)
 plbaFields
   = lens _plbaFields (\ s a -> s{_plbaFields = a})
 
--- | Data format for the response.
-plbaAlt :: Lens' PeopleListByActivity' Alt
-plbaAlt = lens _plbaAlt (\ s a -> s{_plbaAlt = a})
+instance GoogleAuth PeopleListByActivity' where
+        authKey = plbaKey . _Just
+        authToken = plbaOAuthToken . _Just
 
 instance GoogleRequest PeopleListByActivity' where
         type Rs PeopleListByActivity' = PeopleFeed
         request = requestWithRoute defReq plusURL
         requestWithRoute r u PeopleListByActivity'{..}
           = go _plbaQuotaUser (Just _plbaPrettyPrint)
-              _plbaUserIp
+              _plbaUserIP
               _plbaActivityId
               _plbaCollection
               _plbaKey
               _plbaPageToken
-              _plbaOauthToken
+              _plbaOAuthToken
               (Just _plbaMaxResults)
               _plbaFields
-              (Just _plbaAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PeopleListByActivityResource)

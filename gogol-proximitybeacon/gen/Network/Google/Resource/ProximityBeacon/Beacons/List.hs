@@ -43,11 +43,10 @@ module Network.Google.Resource.ProximityBeacon.Beacons.List
     , blBearerToken
     , blKey
     , blPageToken
-    , blOauthToken
+    , blOAuthToken
     , blPageSize
     , blFields
     , blCallback
-    , blAlt
     ) where
 
 import           Network.Google.Prelude
@@ -67,13 +66,13 @@ type BeaconsListResource =
                      QueryParam "uploadType" Text :>
                        QueryParam "q" Text :>
                          QueryParam "bearer_token" Text :>
-                           QueryParam "key" Text :>
+                           QueryParam "key" Key :>
                              QueryParam "pageToken" Text :>
-                               QueryParam "oauth_token" Text :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "pageSize" Int32 :>
                                    QueryParam "fields" Text :>
                                      QueryParam "callback" Text :>
-                                       QueryParam "alt" Text :>
+                                       QueryParam "alt" AltJSON :>
                                          Get '[JSON] ListBeaconsResponse
 
 -- | Searches the beacon registry for beacons that match the given search
@@ -91,13 +90,12 @@ data BeaconsList' = BeaconsList'
     , _blUploadType     :: !(Maybe Text)
     , _blQ              :: !(Maybe Text)
     , _blBearerToken    :: !(Maybe Text)
-    , _blKey            :: !(Maybe Text)
+    , _blKey            :: !(Maybe Key)
     , _blPageToken      :: !(Maybe Text)
-    , _blOauthToken     :: !(Maybe Text)
+    , _blOAuthToken     :: !(Maybe OAuthToken)
     , _blPageSize       :: !(Maybe Int32)
     , _blFields         :: !(Maybe Text)
     , _blCallback       :: !(Maybe Text)
-    , _blAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BeaconsList'' with the minimum fields required to make a request.
@@ -126,15 +124,13 @@ data BeaconsList' = BeaconsList'
 --
 -- * 'blPageToken'
 --
--- * 'blOauthToken'
+-- * 'blOAuthToken'
 --
 -- * 'blPageSize'
 --
 -- * 'blFields'
 --
 -- * 'blCallback'
---
--- * 'blAlt'
 beaconsList'
     :: BeaconsList'
 beaconsList' =
@@ -150,11 +146,10 @@ beaconsList' =
     , _blBearerToken = Nothing
     , _blKey = Nothing
     , _blPageToken = Nothing
-    , _blOauthToken = Nothing
+    , _blOAuthToken = Nothing
     , _blPageSize = Nothing
     , _blFields = Nothing
     , _blCallback = Nothing
-    , _blAlt = "json"
     }
 
 -- | V1 error format.
@@ -253,7 +248,7 @@ blBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-blKey :: Lens' BeaconsList' (Maybe Text)
+blKey :: Lens' BeaconsList' (Maybe Key)
 blKey = lens _blKey (\ s a -> s{_blKey = a})
 
 -- | A pagination token obtained from a previous request to list beacons.
@@ -262,9 +257,9 @@ blPageToken
   = lens _blPageToken (\ s a -> s{_blPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-blOauthToken :: Lens' BeaconsList' (Maybe Text)
-blOauthToken
-  = lens _blOauthToken (\ s a -> s{_blOauthToken = a})
+blOAuthToken :: Lens' BeaconsList' (Maybe OAuthToken)
+blOAuthToken
+  = lens _blOAuthToken (\ s a -> s{_blOAuthToken = a})
 
 -- | The maximum number of records to return for this request, up to a
 -- server-defined upper limit.
@@ -281,9 +276,9 @@ blCallback :: Lens' BeaconsList' (Maybe Text)
 blCallback
   = lens _blCallback (\ s a -> s{_blCallback = a})
 
--- | Data format for response.
-blAlt :: Lens' BeaconsList' Text
-blAlt = lens _blAlt (\ s a -> s{_blAlt = a})
+instance GoogleAuth BeaconsList' where
+        authKey = blKey . _Just
+        authToken = blOAuthToken . _Just
 
 instance GoogleRequest BeaconsList' where
         type Rs BeaconsList' = ListBeaconsResponse
@@ -298,11 +293,11 @@ instance GoogleRequest BeaconsList' where
               _blBearerToken
               _blKey
               _blPageToken
-              _blOauthToken
+              _blOAuthToken
               _blPageSize
               _blFields
               _blCallback
-              (Just _blAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy BeaconsListResource)

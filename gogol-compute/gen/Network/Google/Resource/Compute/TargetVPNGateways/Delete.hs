@@ -33,13 +33,12 @@ module Network.Google.Resource.Compute.TargetVPNGateways.Delete
     , tvgdQuotaUser
     , tvgdPrettyPrint
     , tvgdProject
-    , tvgdUserIp
-    , tvgdTargetVpnGateway
+    , tvgdUserIP
+    , tvgdTargetVPNGateway
     , tvgdKey
     , tvgdRegion
-    , tvgdOauthToken
+    , tvgdOAuthToken
     , tvgdFields
-    , tvgdAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -56,10 +55,10 @@ type TargetVPNGatewaysDeleteResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Delete '[JSON] Operation
+                           QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified TargetVpnGateway resource.
 --
@@ -68,13 +67,12 @@ data TargetVPNGatewaysDelete' = TargetVPNGatewaysDelete'
     { _tvgdQuotaUser        :: !(Maybe Text)
     , _tvgdPrettyPrint      :: !Bool
     , _tvgdProject          :: !Text
-    , _tvgdUserIp           :: !(Maybe Text)
-    , _tvgdTargetVpnGateway :: !Text
-    , _tvgdKey              :: !(Maybe Text)
+    , _tvgdUserIP           :: !(Maybe Text)
+    , _tvgdTargetVPNGateway :: !Text
+    , _tvgdKey              :: !(Maybe Key)
     , _tvgdRegion           :: !Text
-    , _tvgdOauthToken       :: !(Maybe Text)
+    , _tvgdOAuthToken       :: !(Maybe OAuthToken)
     , _tvgdFields           :: !(Maybe Text)
-    , _tvgdAlt              :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetVPNGatewaysDelete'' with the minimum fields required to make a request.
@@ -87,36 +85,33 @@ data TargetVPNGatewaysDelete' = TargetVPNGatewaysDelete'
 --
 -- * 'tvgdProject'
 --
--- * 'tvgdUserIp'
+-- * 'tvgdUserIP'
 --
--- * 'tvgdTargetVpnGateway'
+-- * 'tvgdTargetVPNGateway'
 --
 -- * 'tvgdKey'
 --
 -- * 'tvgdRegion'
 --
--- * 'tvgdOauthToken'
+-- * 'tvgdOAuthToken'
 --
 -- * 'tvgdFields'
---
--- * 'tvgdAlt'
 targetVPNGatewaysDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'targetVpnGateway'
     -> Text -- ^ 'region'
     -> TargetVPNGatewaysDelete'
-targetVPNGatewaysDelete' pTvgdProject_ pTvgdTargetVpnGateway_ pTvgdRegion_ =
+targetVPNGatewaysDelete' pTvgdProject_ pTvgdTargetVPNGateway_ pTvgdRegion_ =
     TargetVPNGatewaysDelete'
     { _tvgdQuotaUser = Nothing
     , _tvgdPrettyPrint = True
     , _tvgdProject = pTvgdProject_
-    , _tvgdUserIp = Nothing
-    , _tvgdTargetVpnGateway = pTvgdTargetVpnGateway_
+    , _tvgdUserIP = Nothing
+    , _tvgdTargetVPNGateway = pTvgdTargetVPNGateway_
     , _tvgdKey = Nothing
     , _tvgdRegion = pTvgdRegion_
-    , _tvgdOauthToken = Nothing
+    , _tvgdOAuthToken = Nothing
     , _tvgdFields = Nothing
-    , _tvgdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -140,20 +135,20 @@ tvgdProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tvgdUserIp :: Lens' TargetVPNGatewaysDelete' (Maybe Text)
-tvgdUserIp
-  = lens _tvgdUserIp (\ s a -> s{_tvgdUserIp = a})
+tvgdUserIP :: Lens' TargetVPNGatewaysDelete' (Maybe Text)
+tvgdUserIP
+  = lens _tvgdUserIP (\ s a -> s{_tvgdUserIP = a})
 
 -- | Name of the TargetVpnGateway resource to delete.
-tvgdTargetVpnGateway :: Lens' TargetVPNGatewaysDelete' Text
-tvgdTargetVpnGateway
-  = lens _tvgdTargetVpnGateway
-      (\ s a -> s{_tvgdTargetVpnGateway = a})
+tvgdTargetVPNGateway :: Lens' TargetVPNGatewaysDelete' Text
+tvgdTargetVPNGateway
+  = lens _tvgdTargetVPNGateway
+      (\ s a -> s{_tvgdTargetVPNGateway = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tvgdKey :: Lens' TargetVPNGatewaysDelete' (Maybe Text)
+tvgdKey :: Lens' TargetVPNGatewaysDelete' (Maybe Key)
 tvgdKey = lens _tvgdKey (\ s a -> s{_tvgdKey = a})
 
 -- | The name of the region for this request.
@@ -162,19 +157,19 @@ tvgdRegion
   = lens _tvgdRegion (\ s a -> s{_tvgdRegion = a})
 
 -- | OAuth 2.0 token for the current user.
-tvgdOauthToken :: Lens' TargetVPNGatewaysDelete' (Maybe Text)
-tvgdOauthToken
-  = lens _tvgdOauthToken
-      (\ s a -> s{_tvgdOauthToken = a})
+tvgdOAuthToken :: Lens' TargetVPNGatewaysDelete' (Maybe OAuthToken)
+tvgdOAuthToken
+  = lens _tvgdOAuthToken
+      (\ s a -> s{_tvgdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 tvgdFields :: Lens' TargetVPNGatewaysDelete' (Maybe Text)
 tvgdFields
   = lens _tvgdFields (\ s a -> s{_tvgdFields = a})
 
--- | Data format for the response.
-tvgdAlt :: Lens' TargetVPNGatewaysDelete' Alt
-tvgdAlt = lens _tvgdAlt (\ s a -> s{_tvgdAlt = a})
+instance GoogleAuth TargetVPNGatewaysDelete' where
+        authKey = tvgdKey . _Just
+        authToken = tvgdOAuthToken . _Just
 
 instance GoogleRequest TargetVPNGatewaysDelete' where
         type Rs TargetVPNGatewaysDelete' = Operation
@@ -182,13 +177,13 @@ instance GoogleRequest TargetVPNGatewaysDelete' where
         requestWithRoute r u TargetVPNGatewaysDelete'{..}
           = go _tvgdQuotaUser (Just _tvgdPrettyPrint)
               _tvgdProject
-              _tvgdUserIp
-              _tvgdTargetVpnGateway
+              _tvgdUserIP
+              _tvgdTargetVPNGateway
               _tvgdKey
               _tvgdRegion
-              _tvgdOauthToken
+              _tvgdOAuthToken
               _tvgdFields
-              (Just _tvgdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TargetVPNGatewaysDeleteResource)

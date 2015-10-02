@@ -33,12 +33,11 @@ module Network.Google.Resource.Directory.Members.Delete
     , mdQuotaUser
     , mdMemberKey
     , mdPrettyPrint
-    , mdUserIp
+    , mdUserIP
     , mdGroupKey
     , mdKey
-    , mdOauthToken
+    , mdOAuthToken
     , mdFields
-    , mdAlt
     ) where
 
 import           Network.Google.AdminDirectory.Types
@@ -54,10 +53,10 @@ type MembersDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Delete '[JSON] ()
+                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Remove membership.
 --
@@ -66,12 +65,11 @@ data MembersDelete' = MembersDelete'
     { _mdQuotaUser   :: !(Maybe Text)
     , _mdMemberKey   :: !Text
     , _mdPrettyPrint :: !Bool
-    , _mdUserIp      :: !(Maybe Text)
+    , _mdUserIP      :: !(Maybe Text)
     , _mdGroupKey    :: !Text
-    , _mdKey         :: !(Maybe Text)
-    , _mdOauthToken  :: !(Maybe Text)
+    , _mdKey         :: !(Maybe Key)
+    , _mdOAuthToken  :: !(Maybe OAuthToken)
     , _mdFields      :: !(Maybe Text)
-    , _mdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MembersDelete'' with the minimum fields required to make a request.
@@ -84,17 +82,15 @@ data MembersDelete' = MembersDelete'
 --
 -- * 'mdPrettyPrint'
 --
--- * 'mdUserIp'
+-- * 'mdUserIP'
 --
 -- * 'mdGroupKey'
 --
 -- * 'mdKey'
 --
--- * 'mdOauthToken'
+-- * 'mdOAuthToken'
 --
 -- * 'mdFields'
---
--- * 'mdAlt'
 membersDelete'
     :: Text -- ^ 'memberKey'
     -> Text -- ^ 'groupKey'
@@ -104,12 +100,11 @@ membersDelete' pMdMemberKey_ pMdGroupKey_ =
     { _mdQuotaUser = Nothing
     , _mdMemberKey = pMdMemberKey_
     , _mdPrettyPrint = True
-    , _mdUserIp = Nothing
+    , _mdUserIP = Nothing
     , _mdGroupKey = pMdGroupKey_
     , _mdKey = Nothing
-    , _mdOauthToken = Nothing
+    , _mdOAuthToken = Nothing
     , _mdFields = Nothing
-    , _mdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -132,8 +127,8 @@ mdPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mdUserIp :: Lens' MembersDelete' (Maybe Text)
-mdUserIp = lens _mdUserIp (\ s a -> s{_mdUserIp = a})
+mdUserIP :: Lens' MembersDelete' (Maybe Text)
+mdUserIP = lens _mdUserIP (\ s a -> s{_mdUserIP = a})
 
 -- | Email or immutable Id of the group
 mdGroupKey :: Lens' MembersDelete' Text
@@ -143,33 +138,33 @@ mdGroupKey
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mdKey :: Lens' MembersDelete' (Maybe Text)
+mdKey :: Lens' MembersDelete' (Maybe Key)
 mdKey = lens _mdKey (\ s a -> s{_mdKey = a})
 
 -- | OAuth 2.0 token for the current user.
-mdOauthToken :: Lens' MembersDelete' (Maybe Text)
-mdOauthToken
-  = lens _mdOauthToken (\ s a -> s{_mdOauthToken = a})
+mdOAuthToken :: Lens' MembersDelete' (Maybe OAuthToken)
+mdOAuthToken
+  = lens _mdOAuthToken (\ s a -> s{_mdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 mdFields :: Lens' MembersDelete' (Maybe Text)
 mdFields = lens _mdFields (\ s a -> s{_mdFields = a})
 
--- | Data format for the response.
-mdAlt :: Lens' MembersDelete' Alt
-mdAlt = lens _mdAlt (\ s a -> s{_mdAlt = a})
+instance GoogleAuth MembersDelete' where
+        authKey = mdKey . _Just
+        authToken = mdOAuthToken . _Just
 
 instance GoogleRequest MembersDelete' where
         type Rs MembersDelete' = ()
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u MembersDelete'{..}
           = go _mdQuotaUser _mdMemberKey (Just _mdPrettyPrint)
-              _mdUserIp
+              _mdUserIP
               _mdGroupKey
               _mdKey
-              _mdOauthToken
+              _mdOAuthToken
               _mdFields
-              (Just _mdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy MembersDeleteResource)

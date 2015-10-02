@@ -32,12 +32,12 @@ module Network.Google.Resource.Mirror.Contacts.Patch
     -- * Request Lenses
     , cpQuotaUser
     , cpPrettyPrint
-    , cpUserIp
+    , cpContact
+    , cpUserIP
     , cpKey
     , cpId
-    , cpOauthToken
+    , cpOAuthToken
     , cpFields
-    , cpAlt
     ) where
 
 import           Network.Google.Mirror.Types
@@ -51,10 +51,11 @@ type ContactsPatchResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Patch '[JSON] Contact
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Contact :> Patch '[JSON] Contact
 
 -- | Updates a contact in place. This method supports patch semantics.
 --
@@ -62,12 +63,12 @@ type ContactsPatchResource =
 data ContactsPatch' = ContactsPatch'
     { _cpQuotaUser   :: !(Maybe Text)
     , _cpPrettyPrint :: !Bool
-    , _cpUserIp      :: !(Maybe Text)
-    , _cpKey         :: !(Maybe Text)
+    , _cpContact     :: !Contact
+    , _cpUserIP      :: !(Maybe Text)
+    , _cpKey         :: !(Maybe Key)
     , _cpId          :: !Text
-    , _cpOauthToken  :: !(Maybe Text)
+    , _cpOAuthToken  :: !(Maybe OAuthToken)
     , _cpFields      :: !(Maybe Text)
-    , _cpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContactsPatch'' with the minimum fields required to make a request.
@@ -78,30 +79,31 @@ data ContactsPatch' = ContactsPatch'
 --
 -- * 'cpPrettyPrint'
 --
--- * 'cpUserIp'
+-- * 'cpContact'
+--
+-- * 'cpUserIP'
 --
 -- * 'cpKey'
 --
 -- * 'cpId'
 --
--- * 'cpOauthToken'
+-- * 'cpOAuthToken'
 --
 -- * 'cpFields'
---
--- * 'cpAlt'
 contactsPatch'
-    :: Text -- ^ 'id'
+    :: Contact -- ^ 'Contact'
+    -> Text -- ^ 'id'
     -> ContactsPatch'
-contactsPatch' pCpId_ =
+contactsPatch' pCpContact_ pCpId_ =
     ContactsPatch'
     { _cpQuotaUser = Nothing
     , _cpPrettyPrint = True
-    , _cpUserIp = Nothing
+    , _cpContact = pCpContact_
+    , _cpUserIP = Nothing
     , _cpKey = Nothing
     , _cpId = pCpId_
-    , _cpOauthToken = Nothing
+    , _cpOAuthToken = Nothing
     , _cpFields = Nothing
-    , _cpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -117,15 +119,20 @@ cpPrettyPrint
   = lens _cpPrettyPrint
       (\ s a -> s{_cpPrettyPrint = a})
 
+-- | Multipart request metadata.
+cpContact :: Lens' ContactsPatch' Contact
+cpContact
+  = lens _cpContact (\ s a -> s{_cpContact = a})
+
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cpUserIp :: Lens' ContactsPatch' (Maybe Text)
-cpUserIp = lens _cpUserIp (\ s a -> s{_cpUserIp = a})
+cpUserIP :: Lens' ContactsPatch' (Maybe Text)
+cpUserIP = lens _cpUserIP (\ s a -> s{_cpUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cpKey :: Lens' ContactsPatch' (Maybe Text)
+cpKey :: Lens' ContactsPatch' (Maybe Key)
 cpKey = lens _cpKey (\ s a -> s{_cpKey = a})
 
 -- | The ID of the contact.
@@ -133,28 +140,29 @@ cpId :: Lens' ContactsPatch' Text
 cpId = lens _cpId (\ s a -> s{_cpId = a})
 
 -- | OAuth 2.0 token for the current user.
-cpOauthToken :: Lens' ContactsPatch' (Maybe Text)
-cpOauthToken
-  = lens _cpOauthToken (\ s a -> s{_cpOauthToken = a})
+cpOAuthToken :: Lens' ContactsPatch' (Maybe OAuthToken)
+cpOAuthToken
+  = lens _cpOAuthToken (\ s a -> s{_cpOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cpFields :: Lens' ContactsPatch' (Maybe Text)
 cpFields = lens _cpFields (\ s a -> s{_cpFields = a})
 
--- | Data format for the response.
-cpAlt :: Lens' ContactsPatch' Alt
-cpAlt = lens _cpAlt (\ s a -> s{_cpAlt = a})
+instance GoogleAuth ContactsPatch' where
+        authKey = cpKey . _Just
+        authToken = cpOAuthToken . _Just
 
 instance GoogleRequest ContactsPatch' where
         type Rs ContactsPatch' = Contact
         request = requestWithRoute defReq mirrorURL
         requestWithRoute r u ContactsPatch'{..}
-          = go _cpQuotaUser (Just _cpPrettyPrint) _cpUserIp
+          = go _cpQuotaUser (Just _cpPrettyPrint) _cpUserIP
               _cpKey
               _cpId
-              _cpOauthToken
+              _cpOAuthToken
               _cpFields
-              (Just _cpAlt)
+              (Just AltJSON)
+              _cpContact
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ContactsPatchResource)

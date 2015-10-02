@@ -34,11 +34,11 @@ module Network.Google.Resource.Spectrum.Paws.VerifyDevice
     -- * Request Lenses
     , pvdQuotaUser
     , pvdPrettyPrint
-    , pvdUserIp
+    , pvdUserIP
     , pvdKey
-    , pvdOauthToken
+    , pvdOAuthToken
+    , pvdPawsVerifyDeviceRequest
     , pvdFields
-    , pvdAlt
     ) where
 
 import           Network.Google.Prelude
@@ -51,11 +51,12 @@ type PawsVerifyDeviceResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
-               QueryParam "oauth_token" Text :>
+             QueryParam "key" Key :>
+               QueryParam "oauth_token" OAuthToken :>
                  QueryParam "fields" Text :>
-                   QueryParam "alt" Alt :>
-                     Post '[JSON] PawsVerifyDeviceResponse
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] PawsVerifyDeviceRequest :>
+                       Post '[JSON] PawsVerifyDeviceResponse
 
 -- | Validates a device for white space use in accordance with regulatory
 -- rules. The Google Spectrum Database does not support master\/slave
@@ -63,13 +64,13 @@ type PawsVerifyDeviceResource =
 --
 -- /See:/ 'pawsVerifyDevice'' smart constructor.
 data PawsVerifyDevice' = PawsVerifyDevice'
-    { _pvdQuotaUser   :: !(Maybe Text)
-    , _pvdPrettyPrint :: !Bool
-    , _pvdUserIp      :: !(Maybe Text)
-    , _pvdKey         :: !(Maybe Text)
-    , _pvdOauthToken  :: !(Maybe Text)
-    , _pvdFields      :: !(Maybe Text)
-    , _pvdAlt         :: !Alt
+    { _pvdQuotaUser               :: !(Maybe Text)
+    , _pvdPrettyPrint             :: !Bool
+    , _pvdUserIP                  :: !(Maybe Text)
+    , _pvdKey                     :: !(Maybe Key)
+    , _pvdOAuthToken              :: !(Maybe OAuthToken)
+    , _pvdPawsVerifyDeviceRequest :: !PawsVerifyDeviceRequest
+    , _pvdFields                  :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PawsVerifyDevice'' with the minimum fields required to make a request.
@@ -80,26 +81,27 @@ data PawsVerifyDevice' = PawsVerifyDevice'
 --
 -- * 'pvdPrettyPrint'
 --
--- * 'pvdUserIp'
+-- * 'pvdUserIP'
 --
 -- * 'pvdKey'
 --
--- * 'pvdOauthToken'
+-- * 'pvdOAuthToken'
+--
+-- * 'pvdPawsVerifyDeviceRequest'
 --
 -- * 'pvdFields'
---
--- * 'pvdAlt'
 pawsVerifyDevice'
-    :: PawsVerifyDevice'
-pawsVerifyDevice' =
+    :: PawsVerifyDeviceRequest -- ^ 'PawsVerifyDeviceRequest'
+    -> PawsVerifyDevice'
+pawsVerifyDevice' pPvdPawsVerifyDeviceRequest_ =
     PawsVerifyDevice'
     { _pvdQuotaUser = Nothing
     , _pvdPrettyPrint = True
-    , _pvdUserIp = Nothing
+    , _pvdUserIP = Nothing
     , _pvdKey = Nothing
-    , _pvdOauthToken = Nothing
+    , _pvdOAuthToken = Nothing
+    , _pvdPawsVerifyDeviceRequest = pPvdPawsVerifyDeviceRequest_
     , _pvdFields = Nothing
-    , _pvdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -117,40 +119,47 @@ pvdPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-pvdUserIp :: Lens' PawsVerifyDevice' (Maybe Text)
-pvdUserIp
-  = lens _pvdUserIp (\ s a -> s{_pvdUserIp = a})
+pvdUserIP :: Lens' PawsVerifyDevice' (Maybe Text)
+pvdUserIP
+  = lens _pvdUserIP (\ s a -> s{_pvdUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pvdKey :: Lens' PawsVerifyDevice' (Maybe Text)
+pvdKey :: Lens' PawsVerifyDevice' (Maybe Key)
 pvdKey = lens _pvdKey (\ s a -> s{_pvdKey = a})
 
 -- | OAuth 2.0 token for the current user.
-pvdOauthToken :: Lens' PawsVerifyDevice' (Maybe Text)
-pvdOauthToken
-  = lens _pvdOauthToken
-      (\ s a -> s{_pvdOauthToken = a})
+pvdOAuthToken :: Lens' PawsVerifyDevice' (Maybe OAuthToken)
+pvdOAuthToken
+  = lens _pvdOAuthToken
+      (\ s a -> s{_pvdOAuthToken = a})
+
+-- | Multipart request metadata.
+pvdPawsVerifyDeviceRequest :: Lens' PawsVerifyDevice' PawsVerifyDeviceRequest
+pvdPawsVerifyDeviceRequest
+  = lens _pvdPawsVerifyDeviceRequest
+      (\ s a -> s{_pvdPawsVerifyDeviceRequest = a})
 
 -- | Selector specifying which fields to include in a partial response.
 pvdFields :: Lens' PawsVerifyDevice' (Maybe Text)
 pvdFields
   = lens _pvdFields (\ s a -> s{_pvdFields = a})
 
--- | Data format for the response.
-pvdAlt :: Lens' PawsVerifyDevice' Alt
-pvdAlt = lens _pvdAlt (\ s a -> s{_pvdAlt = a})
+instance GoogleAuth PawsVerifyDevice' where
+        authKey = pvdKey . _Just
+        authToken = pvdOAuthToken . _Just
 
 instance GoogleRequest PawsVerifyDevice' where
         type Rs PawsVerifyDevice' = PawsVerifyDeviceResponse
         request = requestWithRoute defReq spectrumURL
         requestWithRoute r u PawsVerifyDevice'{..}
-          = go _pvdQuotaUser (Just _pvdPrettyPrint) _pvdUserIp
+          = go _pvdQuotaUser (Just _pvdPrettyPrint) _pvdUserIP
               _pvdKey
-              _pvdOauthToken
+              _pvdOAuthToken
               _pvdFields
-              (Just _pvdAlt)
+              (Just AltJSON)
+              _pvdPawsVerifyDeviceRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PawsVerifyDeviceResource)

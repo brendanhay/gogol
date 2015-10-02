@@ -38,22 +38,22 @@ module Network.Google.TagManager.Types
     , pcvrCompilerError
     , pcvrContainerVersion
 
-    -- * MACro
-    , MACro
-    , mACro
-    , macScheduleEndMs
-    , macParentFolderId
-    , macContainerId
-    , macDisablingRuleId
-    , macFingerprint
-    , macAccountId
-    , macName
-    , macEnablingRuleId
-    , macMacroId
-    , macType
-    , macScheduleStartMs
-    , macNotes
-    , macParameter
+    -- * Macro
+    , Macro
+    , macro
+    , mScheduleEndMs
+    , mParentFolderId
+    , mContainerId
+    , mDisablingRuleId
+    , mFingerprint
+    , mAccountId
+    , mName
+    , mEnablingRuleId
+    , mMacroId
+    , mType
+    , mScheduleStartMs
+    , mNotes
+    , mParameter
 
     -- * Tag
     , Tag
@@ -265,10 +265,10 @@ module Network.Google.TagManager.Types
     , listTagsResponse
     , ltrTags
 
-    -- * ListMACrosResponse
-    , ListMACrosResponse
-    , listMACrosResponse
-    , lmacrMacros
+    -- * ListMacrosResponse
+    , ListMacrosResponse
+    , listMacrosResponse
+    , lmrMacros
 
     -- * Trigger
     , Trigger
@@ -320,9 +320,6 @@ module Network.Google.TagManager.Types
     , pMap
     , pKey
     , pType
-
-    -- * Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.Prelude

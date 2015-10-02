@@ -19,7 +19,7 @@
 --
 -- | Deletes a module and all enclosed versions.
 --
--- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @AppengineAppsModulesDelete@.
+-- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @AppEngineAppsModulesDelete@.
 module Network.Google.Resource.AppEngine.Apps.Modules.Delete
     (
     -- * REST Resource
@@ -41,16 +41,15 @@ module Network.Google.Resource.AppEngine.Apps.Modules.Delete
     , amdBearerToken
     , amdKey
     , amdAppsId
-    , amdOauthToken
+    , amdOAuthToken
     , amdFields
     , amdCallback
-    , amdAlt
     ) where
 
 import           Network.Google.AppEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AppengineAppsModulesDelete@ which the
+-- | A resource alias for @AppEngineAppsModulesDelete@ which the
 -- 'AppsModulesDelete'' request conforms to.
 type AppsModulesDeleteResource =
      "v1beta4" :>
@@ -66,11 +65,11 @@ type AppsModulesDeleteResource =
                          QueryParam "access_token" Text :>
                            QueryParam "uploadType" Text :>
                              QueryParam "bearer_token" Text :>
-                               QueryParam "key" Text :>
-                                 QueryParam "oauth_token" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "fields" Text :>
                                      QueryParam "callback" Text :>
-                                       QueryParam "alt" Text :>
+                                       QueryParam "alt" AltJSON :>
                                          Delete '[JSON] Operation
 
 -- | Deletes a module and all enclosed versions.
@@ -86,12 +85,11 @@ data AppsModulesDelete' = AppsModulesDelete'
     , _amdUploadType     :: !(Maybe Text)
     , _amdModulesId      :: !Text
     , _amdBearerToken    :: !(Maybe Text)
-    , _amdKey            :: !(Maybe Text)
+    , _amdKey            :: !(Maybe Key)
     , _amdAppsId         :: !Text
-    , _amdOauthToken     :: !(Maybe Text)
+    , _amdOAuthToken     :: !(Maybe OAuthToken)
     , _amdFields         :: !(Maybe Text)
     , _amdCallback       :: !(Maybe Text)
-    , _amdAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AppsModulesDelete'' with the minimum fields required to make a request.
@@ -120,13 +118,11 @@ data AppsModulesDelete' = AppsModulesDelete'
 --
 -- * 'amdAppsId'
 --
--- * 'amdOauthToken'
+-- * 'amdOAuthToken'
 --
 -- * 'amdFields'
 --
 -- * 'amdCallback'
---
--- * 'amdAlt'
 appsModulesDelete'
     :: Text -- ^ 'modulesId'
     -> Text -- ^ 'appsId'
@@ -144,10 +140,9 @@ appsModulesDelete' pAmdModulesId_ pAmdAppsId_ =
     , _amdBearerToken = Nothing
     , _amdKey = Nothing
     , _amdAppsId = pAmdAppsId_
-    , _amdOauthToken = Nothing
+    , _amdOAuthToken = Nothing
     , _amdFields = Nothing
     , _amdCallback = Nothing
-    , _amdAlt = "json"
     }
 
 -- | V1 error format.
@@ -203,7 +198,7 @@ amdBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-amdKey :: Lens' AppsModulesDelete' (Maybe Text)
+amdKey :: Lens' AppsModulesDelete' (Maybe Key)
 amdKey = lens _amdKey (\ s a -> s{_amdKey = a})
 
 -- | Part of \`name\`. Name of the resource requested. For example:
@@ -213,10 +208,10 @@ amdAppsId
   = lens _amdAppsId (\ s a -> s{_amdAppsId = a})
 
 -- | OAuth 2.0 token for the current user.
-amdOauthToken :: Lens' AppsModulesDelete' (Maybe Text)
-amdOauthToken
-  = lens _amdOauthToken
-      (\ s a -> s{_amdOauthToken = a})
+amdOAuthToken :: Lens' AppsModulesDelete' (Maybe OAuthToken)
+amdOAuthToken
+  = lens _amdOAuthToken
+      (\ s a -> s{_amdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 amdFields :: Lens' AppsModulesDelete' (Maybe Text)
@@ -228,9 +223,9 @@ amdCallback :: Lens' AppsModulesDelete' (Maybe Text)
 amdCallback
   = lens _amdCallback (\ s a -> s{_amdCallback = a})
 
--- | Data format for response.
-amdAlt :: Lens' AppsModulesDelete' Text
-amdAlt = lens _amdAlt (\ s a -> s{_amdAlt = a})
+instance GoogleAuth AppsModulesDelete' where
+        authKey = amdKey . _Just
+        authToken = amdOAuthToken . _Just
 
 instance GoogleRequest AppsModulesDelete' where
         type Rs AppsModulesDelete' = Operation
@@ -245,10 +240,10 @@ instance GoogleRequest AppsModulesDelete' where
               _amdBearerToken
               _amdKey
               _amdAppsId
-              _amdOauthToken
+              _amdOAuthToken
               _amdFields
               _amdCallback
-              (Just _amdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AppsModulesDeleteResource)

@@ -32,15 +32,14 @@ module Network.Google.Resource.Directory.Notifications.List
     -- * Request Lenses
     , nlQuotaUser
     , nlPrettyPrint
-    , nlUserIp
+    , nlUserIP
     , nlCustomer
     , nlKey
     , nlLanguage
     , nlPageToken
-    , nlOauthToken
+    , nlOAuthToken
     , nlMaxResults
     , nlFields
-    , nlAlt
     ) where
 
 import           Network.Google.AdminDirectory.Types
@@ -55,13 +54,14 @@ type NotificationsListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "language" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "maxResults" Word32 :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Get '[JSON] Notifications
+                             QueryParam "alt" AltJSON :>
+                               Get '[JSON] Notifications
 
 -- | Retrieves a list of notifications.
 --
@@ -69,15 +69,14 @@ type NotificationsListResource =
 data NotificationsList' = NotificationsList'
     { _nlQuotaUser   :: !(Maybe Text)
     , _nlPrettyPrint :: !Bool
-    , _nlUserIp      :: !(Maybe Text)
+    , _nlUserIP      :: !(Maybe Text)
     , _nlCustomer    :: !Text
-    , _nlKey         :: !(Maybe Text)
+    , _nlKey         :: !(Maybe Key)
     , _nlLanguage    :: !(Maybe Text)
     , _nlPageToken   :: !(Maybe Text)
-    , _nlOauthToken  :: !(Maybe Text)
+    , _nlOAuthToken  :: !(Maybe OAuthToken)
     , _nlMaxResults  :: !(Maybe Word32)
     , _nlFields      :: !(Maybe Text)
-    , _nlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NotificationsList'' with the minimum fields required to make a request.
@@ -88,7 +87,7 @@ data NotificationsList' = NotificationsList'
 --
 -- * 'nlPrettyPrint'
 --
--- * 'nlUserIp'
+-- * 'nlUserIP'
 --
 -- * 'nlCustomer'
 --
@@ -98,13 +97,11 @@ data NotificationsList' = NotificationsList'
 --
 -- * 'nlPageToken'
 --
--- * 'nlOauthToken'
+-- * 'nlOAuthToken'
 --
 -- * 'nlMaxResults'
 --
 -- * 'nlFields'
---
--- * 'nlAlt'
 notificationsList'
     :: Text -- ^ 'customer'
     -> NotificationsList'
@@ -112,15 +109,14 @@ notificationsList' pNlCustomer_ =
     NotificationsList'
     { _nlQuotaUser = Nothing
     , _nlPrettyPrint = True
-    , _nlUserIp = Nothing
+    , _nlUserIP = Nothing
     , _nlCustomer = pNlCustomer_
     , _nlKey = Nothing
     , _nlLanguage = Nothing
     , _nlPageToken = Nothing
-    , _nlOauthToken = Nothing
+    , _nlOAuthToken = Nothing
     , _nlMaxResults = Nothing
     , _nlFields = Nothing
-    , _nlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -138,8 +134,8 @@ nlPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-nlUserIp :: Lens' NotificationsList' (Maybe Text)
-nlUserIp = lens _nlUserIp (\ s a -> s{_nlUserIp = a})
+nlUserIP :: Lens' NotificationsList' (Maybe Text)
+nlUserIP = lens _nlUserIP (\ s a -> s{_nlUserIP = a})
 
 -- | The unique ID for the customer\'s Google account.
 nlCustomer :: Lens' NotificationsList' Text
@@ -149,7 +145,7 @@ nlCustomer
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-nlKey :: Lens' NotificationsList' (Maybe Text)
+nlKey :: Lens' NotificationsList' (Maybe Key)
 nlKey = lens _nlKey (\ s a -> s{_nlKey = a})
 
 -- | The ISO 639-1 code of the language notifications are returned in. The
@@ -164,9 +160,9 @@ nlPageToken
   = lens _nlPageToken (\ s a -> s{_nlPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-nlOauthToken :: Lens' NotificationsList' (Maybe Text)
-nlOauthToken
-  = lens _nlOauthToken (\ s a -> s{_nlOauthToken = a})
+nlOAuthToken :: Lens' NotificationsList' (Maybe OAuthToken)
+nlOAuthToken
+  = lens _nlOAuthToken (\ s a -> s{_nlOAuthToken = a})
 
 -- | Maximum number of notifications to return per page. The default is 100.
 nlMaxResults :: Lens' NotificationsList' (Maybe Word32)
@@ -177,23 +173,23 @@ nlMaxResults
 nlFields :: Lens' NotificationsList' (Maybe Text)
 nlFields = lens _nlFields (\ s a -> s{_nlFields = a})
 
--- | Data format for the response.
-nlAlt :: Lens' NotificationsList' Alt
-nlAlt = lens _nlAlt (\ s a -> s{_nlAlt = a})
+instance GoogleAuth NotificationsList' where
+        authKey = nlKey . _Just
+        authToken = nlOAuthToken . _Just
 
 instance GoogleRequest NotificationsList' where
         type Rs NotificationsList' = Notifications
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u NotificationsList'{..}
-          = go _nlQuotaUser (Just _nlPrettyPrint) _nlUserIp
+          = go _nlQuotaUser (Just _nlPrettyPrint) _nlUserIP
               _nlCustomer
               _nlKey
               _nlLanguage
               _nlPageToken
-              _nlOauthToken
+              _nlOAuthToken
               _nlMaxResults
               _nlFields
-              (Just _nlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy NotificationsListResource)

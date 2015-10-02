@@ -34,12 +34,12 @@ module Network.Google.Resource.Compute.Instances.SetMetadata
     , ismQuotaUser
     , ismPrettyPrint
     , ismProject
-    , ismUserIp
+    , ismUserIP
     , ismZone
     , ismKey
-    , ismOauthToken
+    , ismMetadata
+    , ismOAuthToken
     , ismFields
-    , ismAlt
     , ismInstance
     ) where
 
@@ -58,10 +58,12 @@ type InstancesSetMetadataResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Post '[JSON] Operation
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] Metadata :>
+                                 Post '[JSON] Operation
 
 -- | Sets metadata for the specified instance to the data included in the
 -- request.
@@ -71,12 +73,12 @@ data InstancesSetMetadata' = InstancesSetMetadata'
     { _ismQuotaUser   :: !(Maybe Text)
     , _ismPrettyPrint :: !Bool
     , _ismProject     :: !Text
-    , _ismUserIp      :: !(Maybe Text)
+    , _ismUserIP      :: !(Maybe Text)
     , _ismZone        :: !Text
-    , _ismKey         :: !(Maybe Text)
-    , _ismOauthToken  :: !(Maybe Text)
+    , _ismKey         :: !(Maybe Key)
+    , _ismMetadata    :: !Metadata
+    , _ismOAuthToken  :: !(Maybe OAuthToken)
     , _ismFields      :: !(Maybe Text)
-    , _ismAlt         :: !Alt
     , _ismInstance    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -90,35 +92,36 @@ data InstancesSetMetadata' = InstancesSetMetadata'
 --
 -- * 'ismProject'
 --
--- * 'ismUserIp'
+-- * 'ismUserIP'
 --
 -- * 'ismZone'
 --
 -- * 'ismKey'
 --
--- * 'ismOauthToken'
+-- * 'ismMetadata'
+--
+-- * 'ismOAuthToken'
 --
 -- * 'ismFields'
---
--- * 'ismAlt'
 --
 -- * 'ismInstance'
 instancesSetMetadata'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
+    -> Metadata -- ^ 'Metadata'
     -> Text -- ^ 'instance'
     -> InstancesSetMetadata'
-instancesSetMetadata' pIsmProject_ pIsmZone_ pIsmInstance_ =
+instancesSetMetadata' pIsmProject_ pIsmZone_ pIsmMetadata_ pIsmInstance_ =
     InstancesSetMetadata'
     { _ismQuotaUser = Nothing
     , _ismPrettyPrint = True
     , _ismProject = pIsmProject_
-    , _ismUserIp = Nothing
+    , _ismUserIP = Nothing
     , _ismZone = pIsmZone_
     , _ismKey = Nothing
-    , _ismOauthToken = Nothing
+    , _ismMetadata = pIsmMetadata_
+    , _ismOAuthToken = Nothing
     , _ismFields = Nothing
-    , _ismAlt = JSON
     , _ismInstance = pIsmInstance_
     }
 
@@ -142,9 +145,9 @@ ismProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ismUserIp :: Lens' InstancesSetMetadata' (Maybe Text)
-ismUserIp
-  = lens _ismUserIp (\ s a -> s{_ismUserIp = a})
+ismUserIP :: Lens' InstancesSetMetadata' (Maybe Text)
+ismUserIP
+  = lens _ismUserIP (\ s a -> s{_ismUserIP = a})
 
 -- | The name of the zone for this request.
 ismZone :: Lens' InstancesSetMetadata' Text
@@ -153,41 +156,47 @@ ismZone = lens _ismZone (\ s a -> s{_ismZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ismKey :: Lens' InstancesSetMetadata' (Maybe Text)
+ismKey :: Lens' InstancesSetMetadata' (Maybe Key)
 ismKey = lens _ismKey (\ s a -> s{_ismKey = a})
 
+-- | Multipart request metadata.
+ismMetadata :: Lens' InstancesSetMetadata' Metadata
+ismMetadata
+  = lens _ismMetadata (\ s a -> s{_ismMetadata = a})
+
 -- | OAuth 2.0 token for the current user.
-ismOauthToken :: Lens' InstancesSetMetadata' (Maybe Text)
-ismOauthToken
-  = lens _ismOauthToken
-      (\ s a -> s{_ismOauthToken = a})
+ismOAuthToken :: Lens' InstancesSetMetadata' (Maybe OAuthToken)
+ismOAuthToken
+  = lens _ismOAuthToken
+      (\ s a -> s{_ismOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ismFields :: Lens' InstancesSetMetadata' (Maybe Text)
 ismFields
   = lens _ismFields (\ s a -> s{_ismFields = a})
 
--- | Data format for the response.
-ismAlt :: Lens' InstancesSetMetadata' Alt
-ismAlt = lens _ismAlt (\ s a -> s{_ismAlt = a})
-
 -- | Name of the instance scoping this request.
 ismInstance :: Lens' InstancesSetMetadata' Text
 ismInstance
   = lens _ismInstance (\ s a -> s{_ismInstance = a})
+
+instance GoogleAuth InstancesSetMetadata' where
+        authKey = ismKey . _Just
+        authToken = ismOAuthToken . _Just
 
 instance GoogleRequest InstancesSetMetadata' where
         type Rs InstancesSetMetadata' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstancesSetMetadata'{..}
           = go _ismQuotaUser (Just _ismPrettyPrint) _ismProject
-              _ismUserIp
+              _ismUserIP
               _ismZone
               _ismKey
-              _ismOauthToken
+              _ismOAuthToken
               _ismFields
-              (Just _ismAlt)
               _ismInstance
+              (Just AltJSON)
+              _ismMetadata
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InstancesSetMetadataResource)

@@ -33,15 +33,14 @@ module Network.Google.Resource.DNS.Changes.List
     , clQuotaUser
     , clPrettyPrint
     , clProject
-    , clUserIp
+    , clUserIP
     , clSortOrder
     , clKey
     , clPageToken
-    , clOauthToken
+    , clOAuthToken
     , clManagedZone
     , clMaxResults
     , clFields
-    , clAlt
     , clSortBy
     ) where
 
@@ -59,12 +58,12 @@ type ChangesListResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "sortOrder" Text :>
-                     QueryParam "key" Text :>
+                     QueryParam "key" Key :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "maxResults" Int32 :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :>
+                               QueryParam "alt" AltJSON :>
                                  QueryParam "sortBy" DNSChangesListSortBy :>
                                    Get '[JSON] ChangesListResponse
 
@@ -75,15 +74,14 @@ data ChangesList' = ChangesList'
     { _clQuotaUser   :: !(Maybe Text)
     , _clPrettyPrint :: !Bool
     , _clProject     :: !Text
-    , _clUserIp      :: !(Maybe Text)
+    , _clUserIP      :: !(Maybe Text)
     , _clSortOrder   :: !(Maybe Text)
-    , _clKey         :: !(Maybe Text)
+    , _clKey         :: !(Maybe Key)
     , _clPageToken   :: !(Maybe Text)
-    , _clOauthToken  :: !(Maybe Text)
+    , _clOAuthToken  :: !(Maybe OAuthToken)
     , _clManagedZone :: !Text
     , _clMaxResults  :: !(Maybe Int32)
     , _clFields      :: !(Maybe Text)
-    , _clAlt         :: !Alt
     , _clSortBy      :: !DNSChangesListSortBy
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -97,7 +95,7 @@ data ChangesList' = ChangesList'
 --
 -- * 'clProject'
 --
--- * 'clUserIp'
+-- * 'clUserIP'
 --
 -- * 'clSortOrder'
 --
@@ -105,15 +103,13 @@ data ChangesList' = ChangesList'
 --
 -- * 'clPageToken'
 --
--- * 'clOauthToken'
+-- * 'clOAuthToken'
 --
 -- * 'clManagedZone'
 --
 -- * 'clMaxResults'
 --
 -- * 'clFields'
---
--- * 'clAlt'
 --
 -- * 'clSortBy'
 changesList'
@@ -125,15 +121,14 @@ changesList' pClProject_ pClManagedZone_ =
     { _clQuotaUser = Nothing
     , _clPrettyPrint = True
     , _clProject = pClProject_
-    , _clUserIp = Nothing
+    , _clUserIP = Nothing
     , _clSortOrder = Nothing
     , _clKey = Nothing
     , _clPageToken = Nothing
-    , _clOauthToken = Nothing
+    , _clOAuthToken = Nothing
     , _clManagedZone = pClManagedZone_
     , _clMaxResults = Nothing
     , _clFields = Nothing
-    , _clAlt = JSON
     , _clSortBy = ChangeSequence
     }
 
@@ -157,8 +152,8 @@ clProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-clUserIp :: Lens' ChangesList' (Maybe Text)
-clUserIp = lens _clUserIp (\ s a -> s{_clUserIp = a})
+clUserIP :: Lens' ChangesList' (Maybe Text)
+clUserIP = lens _clUserIP (\ s a -> s{_clUserIP = a})
 
 -- | Sorting order direction: \'ascending\' or \'descending\'.
 clSortOrder :: Lens' ChangesList' (Maybe Text)
@@ -168,7 +163,7 @@ clSortOrder
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-clKey :: Lens' ChangesList' (Maybe Text)
+clKey :: Lens' ChangesList' (Maybe Key)
 clKey = lens _clKey (\ s a -> s{_clKey = a})
 
 -- | Optional. A tag returned by a previous list request that was truncated.
@@ -178,9 +173,9 @@ clPageToken
   = lens _clPageToken (\ s a -> s{_clPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-clOauthToken :: Lens' ChangesList' (Maybe Text)
-clOauthToken
-  = lens _clOauthToken (\ s a -> s{_clOauthToken = a})
+clOAuthToken :: Lens' ChangesList' (Maybe OAuthToken)
+clOAuthToken
+  = lens _clOAuthToken (\ s a -> s{_clOAuthToken = a})
 
 -- | Identifies the managed zone addressed by this request. Can be the
 -- managed zone name or id.
@@ -199,29 +194,29 @@ clMaxResults
 clFields :: Lens' ChangesList' (Maybe Text)
 clFields = lens _clFields (\ s a -> s{_clFields = a})
 
--- | Data format for the response.
-clAlt :: Lens' ChangesList' Alt
-clAlt = lens _clAlt (\ s a -> s{_clAlt = a})
-
 -- | Sorting criterion. The only supported value is change sequence.
 clSortBy :: Lens' ChangesList' DNSChangesListSortBy
 clSortBy = lens _clSortBy (\ s a -> s{_clSortBy = a})
+
+instance GoogleAuth ChangesList' where
+        authKey = clKey . _Just
+        authToken = clOAuthToken . _Just
 
 instance GoogleRequest ChangesList' where
         type Rs ChangesList' = ChangesListResponse
         request = requestWithRoute defReq dNSURL
         requestWithRoute r u ChangesList'{..}
           = go _clQuotaUser (Just _clPrettyPrint) _clProject
-              _clUserIp
+              _clUserIP
               _clSortOrder
               _clKey
               _clPageToken
-              _clOauthToken
+              _clOAuthToken
               _clManagedZone
               _clMaxResults
               _clFields
-              (Just _clAlt)
               (Just _clSortBy)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ChangesListResource)

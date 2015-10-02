@@ -33,12 +33,12 @@ module Network.Google.Resource.Compute.URLMaps.Insert
     -- * Request Lenses
     , umiQuotaUser
     , umiPrettyPrint
+    , umiURLMap
     , umiProject
-    , umiUserIp
+    , umiUserIP
     , umiKey
-    , umiOauthToken
+    , umiOAuthToken
     , umiFields
-    , umiAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -53,10 +53,11 @@ type UrlMapsInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] Operation
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] URLMap :> Post '[JSON] Operation
 
 -- | Creates a UrlMap resource in the specified project using the data
 -- included in the request.
@@ -65,12 +66,12 @@ type UrlMapsInsertResource =
 data URLMapsInsert' = URLMapsInsert'
     { _umiQuotaUser   :: !(Maybe Text)
     , _umiPrettyPrint :: !Bool
+    , _umiURLMap      :: !URLMap
     , _umiProject     :: !Text
-    , _umiUserIp      :: !(Maybe Text)
-    , _umiKey         :: !(Maybe Text)
-    , _umiOauthToken  :: !(Maybe Text)
+    , _umiUserIP      :: !(Maybe Text)
+    , _umiKey         :: !(Maybe Key)
+    , _umiOAuthToken  :: !(Maybe OAuthToken)
     , _umiFields      :: !(Maybe Text)
-    , _umiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLMapsInsert'' with the minimum fields required to make a request.
@@ -81,30 +82,31 @@ data URLMapsInsert' = URLMapsInsert'
 --
 -- * 'umiPrettyPrint'
 --
+-- * 'umiURLMap'
+--
 -- * 'umiProject'
 --
--- * 'umiUserIp'
+-- * 'umiUserIP'
 --
 -- * 'umiKey'
 --
--- * 'umiOauthToken'
+-- * 'umiOAuthToken'
 --
 -- * 'umiFields'
---
--- * 'umiAlt'
 uRLMapsInsert'
-    :: Text -- ^ 'project'
+    :: URLMap -- ^ 'URLMap'
+    -> Text -- ^ 'project'
     -> URLMapsInsert'
-uRLMapsInsert' pUmiProject_ =
+uRLMapsInsert' pUmiURLMap_ pUmiProject_ =
     URLMapsInsert'
     { _umiQuotaUser = Nothing
     , _umiPrettyPrint = True
+    , _umiURLMap = pUmiURLMap_
     , _umiProject = pUmiProject_
-    , _umiUserIp = Nothing
+    , _umiUserIP = Nothing
     , _umiKey = Nothing
-    , _umiOauthToken = Nothing
+    , _umiOAuthToken = Nothing
     , _umiFields = Nothing
-    , _umiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,6 +122,11 @@ umiPrettyPrint
   = lens _umiPrettyPrint
       (\ s a -> s{_umiPrettyPrint = a})
 
+-- | Multipart request metadata.
+umiURLMap :: Lens' URLMapsInsert' URLMap
+umiURLMap
+  = lens _umiURLMap (\ s a -> s{_umiURLMap = a})
+
 -- | Name of the project scoping this request.
 umiProject :: Lens' URLMapsInsert' Text
 umiProject
@@ -127,41 +134,42 @@ umiProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-umiUserIp :: Lens' URLMapsInsert' (Maybe Text)
-umiUserIp
-  = lens _umiUserIp (\ s a -> s{_umiUserIp = a})
+umiUserIP :: Lens' URLMapsInsert' (Maybe Text)
+umiUserIP
+  = lens _umiUserIP (\ s a -> s{_umiUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-umiKey :: Lens' URLMapsInsert' (Maybe Text)
+umiKey :: Lens' URLMapsInsert' (Maybe Key)
 umiKey = lens _umiKey (\ s a -> s{_umiKey = a})
 
 -- | OAuth 2.0 token for the current user.
-umiOauthToken :: Lens' URLMapsInsert' (Maybe Text)
-umiOauthToken
-  = lens _umiOauthToken
-      (\ s a -> s{_umiOauthToken = a})
+umiOAuthToken :: Lens' URLMapsInsert' (Maybe OAuthToken)
+umiOAuthToken
+  = lens _umiOAuthToken
+      (\ s a -> s{_umiOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 umiFields :: Lens' URLMapsInsert' (Maybe Text)
 umiFields
   = lens _umiFields (\ s a -> s{_umiFields = a})
 
--- | Data format for the response.
-umiAlt :: Lens' URLMapsInsert' Alt
-umiAlt = lens _umiAlt (\ s a -> s{_umiAlt = a})
+instance GoogleAuth URLMapsInsert' where
+        authKey = umiKey . _Just
+        authToken = umiOAuthToken . _Just
 
 instance GoogleRequest URLMapsInsert' where
         type Rs URLMapsInsert' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u URLMapsInsert'{..}
           = go _umiQuotaUser (Just _umiPrettyPrint) _umiProject
-              _umiUserIp
+              _umiUserIP
               _umiKey
-              _umiOauthToken
+              _umiOAuthToken
               _umiFields
-              (Just _umiAlt)
+              (Just AltJSON)
+              _umiURLMap
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UrlMapsInsertResource)

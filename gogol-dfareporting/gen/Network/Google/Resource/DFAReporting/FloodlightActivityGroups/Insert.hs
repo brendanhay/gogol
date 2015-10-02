@@ -32,12 +32,12 @@ module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Insert
     -- * Request Lenses
     , fagiQuotaUser
     , fagiPrettyPrint
-    , fagiUserIp
+    , fagiFloodlightActivityGroup
+    , fagiUserIP
     , fagiProfileId
     , fagiKey
-    , fagiOauthToken
+    , fagiOAuthToken
     , fagiFields
-    , fagiAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,24 +52,25 @@ type FloodlightActivityGroupsInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :>
-                         Post '[JSON] FloodlightActivityGroup
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] FloodlightActivityGroup :>
+                           Post '[JSON] FloodlightActivityGroup
 
 -- | Inserts a new floodlight activity group.
 --
 -- /See:/ 'floodlightActivityGroupsInsert'' smart constructor.
 data FloodlightActivityGroupsInsert' = FloodlightActivityGroupsInsert'
-    { _fagiQuotaUser   :: !(Maybe Text)
-    , _fagiPrettyPrint :: !Bool
-    , _fagiUserIp      :: !(Maybe Text)
-    , _fagiProfileId   :: !Int64
-    , _fagiKey         :: !(Maybe Text)
-    , _fagiOauthToken  :: !(Maybe Text)
-    , _fagiFields      :: !(Maybe Text)
-    , _fagiAlt         :: !Alt
+    { _fagiQuotaUser               :: !(Maybe Text)
+    , _fagiPrettyPrint             :: !Bool
+    , _fagiFloodlightActivityGroup :: !FloodlightActivityGroup
+    , _fagiUserIP                  :: !(Maybe Text)
+    , _fagiProfileId               :: !Int64
+    , _fagiKey                     :: !(Maybe Key)
+    , _fagiOAuthToken              :: !(Maybe OAuthToken)
+    , _fagiFields                  :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivityGroupsInsert'' with the minimum fields required to make a request.
@@ -80,30 +81,31 @@ data FloodlightActivityGroupsInsert' = FloodlightActivityGroupsInsert'
 --
 -- * 'fagiPrettyPrint'
 --
--- * 'fagiUserIp'
+-- * 'fagiFloodlightActivityGroup'
+--
+-- * 'fagiUserIP'
 --
 -- * 'fagiProfileId'
 --
 -- * 'fagiKey'
 --
--- * 'fagiOauthToken'
+-- * 'fagiOAuthToken'
 --
 -- * 'fagiFields'
---
--- * 'fagiAlt'
 floodlightActivityGroupsInsert'
-    :: Int64 -- ^ 'profileId'
+    :: FloodlightActivityGroup -- ^ 'FloodlightActivityGroup'
+    -> Int64 -- ^ 'profileId'
     -> FloodlightActivityGroupsInsert'
-floodlightActivityGroupsInsert' pFagiProfileId_ =
+floodlightActivityGroupsInsert' pFagiFloodlightActivityGroup_ pFagiProfileId_ =
     FloodlightActivityGroupsInsert'
     { _fagiQuotaUser = Nothing
     , _fagiPrettyPrint = True
-    , _fagiUserIp = Nothing
+    , _fagiFloodlightActivityGroup = pFagiFloodlightActivityGroup_
+    , _fagiUserIP = Nothing
     , _fagiProfileId = pFagiProfileId_
     , _fagiKey = Nothing
-    , _fagiOauthToken = Nothing
+    , _fagiOAuthToken = Nothing
     , _fagiFields = Nothing
-    , _fagiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,11 +122,17 @@ fagiPrettyPrint
   = lens _fagiPrettyPrint
       (\ s a -> s{_fagiPrettyPrint = a})
 
+-- | Multipart request metadata.
+fagiFloodlightActivityGroup :: Lens' FloodlightActivityGroupsInsert' FloodlightActivityGroup
+fagiFloodlightActivityGroup
+  = lens _fagiFloodlightActivityGroup
+      (\ s a -> s{_fagiFloodlightActivityGroup = a})
+
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-fagiUserIp :: Lens' FloodlightActivityGroupsInsert' (Maybe Text)
-fagiUserIp
-  = lens _fagiUserIp (\ s a -> s{_fagiUserIp = a})
+fagiUserIP :: Lens' FloodlightActivityGroupsInsert' (Maybe Text)
+fagiUserIP
+  = lens _fagiUserIP (\ s a -> s{_fagiUserIP = a})
 
 -- | User profile ID associated with this request.
 fagiProfileId :: Lens' FloodlightActivityGroupsInsert' Int64
@@ -135,23 +143,24 @@ fagiProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fagiKey :: Lens' FloodlightActivityGroupsInsert' (Maybe Text)
+fagiKey :: Lens' FloodlightActivityGroupsInsert' (Maybe Key)
 fagiKey = lens _fagiKey (\ s a -> s{_fagiKey = a})
 
 -- | OAuth 2.0 token for the current user.
-fagiOauthToken :: Lens' FloodlightActivityGroupsInsert' (Maybe Text)
-fagiOauthToken
-  = lens _fagiOauthToken
-      (\ s a -> s{_fagiOauthToken = a})
+fagiOAuthToken :: Lens' FloodlightActivityGroupsInsert' (Maybe OAuthToken)
+fagiOAuthToken
+  = lens _fagiOAuthToken
+      (\ s a -> s{_fagiOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 fagiFields :: Lens' FloodlightActivityGroupsInsert' (Maybe Text)
 fagiFields
   = lens _fagiFields (\ s a -> s{_fagiFields = a})
 
--- | Data format for the response.
-fagiAlt :: Lens' FloodlightActivityGroupsInsert' Alt
-fagiAlt = lens _fagiAlt (\ s a -> s{_fagiAlt = a})
+instance GoogleAuth FloodlightActivityGroupsInsert'
+         where
+        authKey = fagiKey . _Just
+        authToken = fagiOAuthToken . _Just
 
 instance GoogleRequest
          FloodlightActivityGroupsInsert' where
@@ -161,12 +170,13 @@ instance GoogleRequest
         requestWithRoute r u
           FloodlightActivityGroupsInsert'{..}
           = go _fagiQuotaUser (Just _fagiPrettyPrint)
-              _fagiUserIp
+              _fagiUserIP
               _fagiProfileId
               _fagiKey
-              _fagiOauthToken
+              _fagiOAuthToken
               _fagiFields
-              (Just _fagiAlt)
+              (Just AltJSON)
+              _fagiFloodlightActivityGroup
           where go
                   = clientWithRoute
                       (Proxy ::

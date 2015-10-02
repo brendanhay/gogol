@@ -38,11 +38,10 @@ module Network.Google.Resource.Compute.Snapshots.Delete
     , sdQuotaUser
     , sdPrettyPrint
     , sdProject
-    , sdUserIp
+    , sdUserIP
     , sdKey
-    , sdOauthToken
+    , sdOAuthToken
     , sdFields
-    , sdAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -58,10 +57,10 @@ type SnapshotsDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Delete '[JSON] Operation
+                         QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified Snapshot resource. Keep in mind that deleting a
 -- single snapshot might not necessarily delete all the data on that
@@ -75,11 +74,10 @@ data SnapshotsDelete' = SnapshotsDelete'
     , _sdQuotaUser   :: !(Maybe Text)
     , _sdPrettyPrint :: !Bool
     , _sdProject     :: !Text
-    , _sdUserIp      :: !(Maybe Text)
-    , _sdKey         :: !(Maybe Text)
-    , _sdOauthToken  :: !(Maybe Text)
+    , _sdUserIP      :: !(Maybe Text)
+    , _sdKey         :: !(Maybe Key)
+    , _sdOAuthToken  :: !(Maybe OAuthToken)
     , _sdFields      :: !(Maybe Text)
-    , _sdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SnapshotsDelete'' with the minimum fields required to make a request.
@@ -94,15 +92,13 @@ data SnapshotsDelete' = SnapshotsDelete'
 --
 -- * 'sdProject'
 --
--- * 'sdUserIp'
+-- * 'sdUserIP'
 --
 -- * 'sdKey'
 --
--- * 'sdOauthToken'
+-- * 'sdOAuthToken'
 --
 -- * 'sdFields'
---
--- * 'sdAlt'
 snapshotsDelete'
     :: Text -- ^ 'snapshot'
     -> Text -- ^ 'project'
@@ -113,11 +109,10 @@ snapshotsDelete' pSdSnapshot_ pSdProject_ =
     , _sdQuotaUser = Nothing
     , _sdPrettyPrint = True
     , _sdProject = pSdProject_
-    , _sdUserIp = Nothing
+    , _sdUserIP = Nothing
     , _sdKey = Nothing
-    , _sdOauthToken = Nothing
+    , _sdOAuthToken = Nothing
     , _sdFields = Nothing
-    , _sdAlt = JSON
     }
 
 -- | Name of the Snapshot resource to delete.
@@ -145,27 +140,27 @@ sdProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-sdUserIp :: Lens' SnapshotsDelete' (Maybe Text)
-sdUserIp = lens _sdUserIp (\ s a -> s{_sdUserIp = a})
+sdUserIP :: Lens' SnapshotsDelete' (Maybe Text)
+sdUserIP = lens _sdUserIP (\ s a -> s{_sdUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-sdKey :: Lens' SnapshotsDelete' (Maybe Text)
+sdKey :: Lens' SnapshotsDelete' (Maybe Key)
 sdKey = lens _sdKey (\ s a -> s{_sdKey = a})
 
 -- | OAuth 2.0 token for the current user.
-sdOauthToken :: Lens' SnapshotsDelete' (Maybe Text)
-sdOauthToken
-  = lens _sdOauthToken (\ s a -> s{_sdOauthToken = a})
+sdOAuthToken :: Lens' SnapshotsDelete' (Maybe OAuthToken)
+sdOAuthToken
+  = lens _sdOAuthToken (\ s a -> s{_sdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 sdFields :: Lens' SnapshotsDelete' (Maybe Text)
 sdFields = lens _sdFields (\ s a -> s{_sdFields = a})
 
--- | Data format for the response.
-sdAlt :: Lens' SnapshotsDelete' Alt
-sdAlt = lens _sdAlt (\ s a -> s{_sdAlt = a})
+instance GoogleAuth SnapshotsDelete' where
+        authKey = sdKey . _Just
+        authToken = sdOAuthToken . _Just
 
 instance GoogleRequest SnapshotsDelete' where
         type Rs SnapshotsDelete' = Operation
@@ -173,11 +168,11 @@ instance GoogleRequest SnapshotsDelete' where
         requestWithRoute r u SnapshotsDelete'{..}
           = go _sdSnapshot _sdQuotaUser (Just _sdPrettyPrint)
               _sdProject
-              _sdUserIp
+              _sdUserIP
               _sdKey
-              _sdOauthToken
+              _sdOAuthToken
               _sdFields
-              (Just _sdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy SnapshotsDeleteResource)

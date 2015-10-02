@@ -33,13 +33,12 @@ module Network.Google.Resource.YouTube.Captions.Delete
     , cddOnBehalfOf
     , cddQuotaUser
     , cddPrettyPrint
-    , cddUserIp
+    , cddUserIP
     , cddOnBehalfOfContentOwner
     , cddKey
     , cddId
-    , cddOauthToken
+    , cddOAuthToken
     , cddFields
-    , cddAlt
     ) where
 
 import           Network.Google.Prelude
@@ -54,11 +53,11 @@ type CaptionsDeleteResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "onBehalfOfContentOwner" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "id" Text :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Delete '[JSON] ()
+                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a specified caption track.
 --
@@ -67,13 +66,12 @@ data CaptionsDelete' = CaptionsDelete'
     { _cddOnBehalfOf             :: !(Maybe Text)
     , _cddQuotaUser              :: !(Maybe Text)
     , _cddPrettyPrint            :: !Bool
-    , _cddUserIp                 :: !(Maybe Text)
+    , _cddUserIP                 :: !(Maybe Text)
     , _cddOnBehalfOfContentOwner :: !(Maybe Text)
-    , _cddKey                    :: !(Maybe Text)
+    , _cddKey                    :: !(Maybe Key)
     , _cddId                     :: !Text
-    , _cddOauthToken             :: !(Maybe Text)
+    , _cddOAuthToken             :: !(Maybe OAuthToken)
     , _cddFields                 :: !(Maybe Text)
-    , _cddAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CaptionsDelete'' with the minimum fields required to make a request.
@@ -86,7 +84,7 @@ data CaptionsDelete' = CaptionsDelete'
 --
 -- * 'cddPrettyPrint'
 --
--- * 'cddUserIp'
+-- * 'cddUserIP'
 --
 -- * 'cddOnBehalfOfContentOwner'
 --
@@ -94,11 +92,9 @@ data CaptionsDelete' = CaptionsDelete'
 --
 -- * 'cddId'
 --
--- * 'cddOauthToken'
+-- * 'cddOAuthToken'
 --
 -- * 'cddFields'
---
--- * 'cddAlt'
 captionsDelete'
     :: Text -- ^ 'id'
     -> CaptionsDelete'
@@ -107,13 +103,12 @@ captionsDelete' pCddId_ =
     { _cddOnBehalfOf = Nothing
     , _cddQuotaUser = Nothing
     , _cddPrettyPrint = True
-    , _cddUserIp = Nothing
+    , _cddUserIP = Nothing
     , _cddOnBehalfOfContentOwner = Nothing
     , _cddKey = Nothing
     , _cddId = pCddId_
-    , _cddOauthToken = Nothing
+    , _cddOAuthToken = Nothing
     , _cddFields = Nothing
-    , _cddAlt = JSON
     }
 
 -- | ID of the Google+ Page for the channel that the request is be on behalf
@@ -138,9 +133,9 @@ cddPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cddUserIp :: Lens' CaptionsDelete' (Maybe Text)
-cddUserIp
-  = lens _cddUserIp (\ s a -> s{_cddUserIp = a})
+cddUserIP :: Lens' CaptionsDelete' (Maybe Text)
+cddUserIP
+  = lens _cddUserIP (\ s a -> s{_cddUserIP = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
@@ -160,7 +155,7 @@ cddOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cddKey :: Lens' CaptionsDelete' (Maybe Text)
+cddKey :: Lens' CaptionsDelete' (Maybe Key)
 cddKey = lens _cddKey (\ s a -> s{_cddKey = a})
 
 -- | The id parameter identifies the caption track that is being deleted. The
@@ -170,19 +165,19 @@ cddId :: Lens' CaptionsDelete' Text
 cddId = lens _cddId (\ s a -> s{_cddId = a})
 
 -- | OAuth 2.0 token for the current user.
-cddOauthToken :: Lens' CaptionsDelete' (Maybe Text)
-cddOauthToken
-  = lens _cddOauthToken
-      (\ s a -> s{_cddOauthToken = a})
+cddOAuthToken :: Lens' CaptionsDelete' (Maybe OAuthToken)
+cddOAuthToken
+  = lens _cddOAuthToken
+      (\ s a -> s{_cddOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cddFields :: Lens' CaptionsDelete' (Maybe Text)
 cddFields
   = lens _cddFields (\ s a -> s{_cddFields = a})
 
--- | Data format for the response.
-cddAlt :: Lens' CaptionsDelete' Alt
-cddAlt = lens _cddAlt (\ s a -> s{_cddAlt = a})
+instance GoogleAuth CaptionsDelete' where
+        authKey = cddKey . _Just
+        authToken = cddOAuthToken . _Just
 
 instance GoogleRequest CaptionsDelete' where
         type Rs CaptionsDelete' = ()
@@ -190,13 +185,13 @@ instance GoogleRequest CaptionsDelete' where
         requestWithRoute r u CaptionsDelete'{..}
           = go _cddOnBehalfOf _cddQuotaUser
               (Just _cddPrettyPrint)
-              _cddUserIp
+              _cddUserIP
               _cddOnBehalfOfContentOwner
               _cddKey
               (Just _cddId)
-              _cddOauthToken
+              _cddOAuthToken
               _cddFields
-              (Just _cddAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CaptionsDeleteResource)

@@ -39,11 +39,11 @@ module Network.Google.Resource.YouTube.Activities.Insert
     , aiQuotaUser
     , aiPart
     , aiPrettyPrint
-    , aiUserIp
+    , aiUserIP
     , aiKey
-    , aiOauthToken
+    , aiActivity
+    , aiOAuthToken
     , aiFields
-    , aiAlt
     ) where
 
 import           Network.Google.Prelude
@@ -57,10 +57,11 @@ type ActivitiesInsertResource =
          QueryParam "part" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Post '[JSON] Activity
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Activity :> Post '[JSON] Activity
 
 -- | Posts a bulletin for a specific channel. (The user submitting the
 -- request must be authorized to act on the channel\'s behalf.) Note: Even
@@ -75,11 +76,11 @@ data ActivitiesInsert' = ActivitiesInsert'
     { _aiQuotaUser   :: !(Maybe Text)
     , _aiPart        :: !Text
     , _aiPrettyPrint :: !Bool
-    , _aiUserIp      :: !(Maybe Text)
-    , _aiKey         :: !(Maybe Text)
-    , _aiOauthToken  :: !(Maybe Text)
+    , _aiUserIP      :: !(Maybe Text)
+    , _aiKey         :: !(Maybe Key)
+    , _aiActivity    :: !Activity
+    , _aiOAuthToken  :: !(Maybe OAuthToken)
     , _aiFields      :: !(Maybe Text)
-    , _aiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivitiesInsert'' with the minimum fields required to make a request.
@@ -92,28 +93,29 @@ data ActivitiesInsert' = ActivitiesInsert'
 --
 -- * 'aiPrettyPrint'
 --
--- * 'aiUserIp'
+-- * 'aiUserIP'
 --
 -- * 'aiKey'
 --
--- * 'aiOauthToken'
+-- * 'aiActivity'
+--
+-- * 'aiOAuthToken'
 --
 -- * 'aiFields'
---
--- * 'aiAlt'
 activitiesInsert'
     :: Text -- ^ 'part'
+    -> Activity -- ^ 'Activity'
     -> ActivitiesInsert'
-activitiesInsert' pAiPart_ =
+activitiesInsert' pAiPart_ pAiActivity_ =
     ActivitiesInsert'
     { _aiQuotaUser = Nothing
     , _aiPart = pAiPart_
     , _aiPrettyPrint = True
-    , _aiUserIp = Nothing
+    , _aiUserIP = Nothing
     , _aiKey = Nothing
-    , _aiOauthToken = Nothing
+    , _aiActivity = pAiActivity_
+    , _aiOAuthToken = Nothing
     , _aiFields = Nothing
-    , _aiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -137,27 +139,32 @@ aiPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-aiUserIp :: Lens' ActivitiesInsert' (Maybe Text)
-aiUserIp = lens _aiUserIp (\ s a -> s{_aiUserIp = a})
+aiUserIP :: Lens' ActivitiesInsert' (Maybe Text)
+aiUserIP = lens _aiUserIP (\ s a -> s{_aiUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aiKey :: Lens' ActivitiesInsert' (Maybe Text)
+aiKey :: Lens' ActivitiesInsert' (Maybe Key)
 aiKey = lens _aiKey (\ s a -> s{_aiKey = a})
 
+-- | Multipart request metadata.
+aiActivity :: Lens' ActivitiesInsert' Activity
+aiActivity
+  = lens _aiActivity (\ s a -> s{_aiActivity = a})
+
 -- | OAuth 2.0 token for the current user.
-aiOauthToken :: Lens' ActivitiesInsert' (Maybe Text)
-aiOauthToken
-  = lens _aiOauthToken (\ s a -> s{_aiOauthToken = a})
+aiOAuthToken :: Lens' ActivitiesInsert' (Maybe OAuthToken)
+aiOAuthToken
+  = lens _aiOAuthToken (\ s a -> s{_aiOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 aiFields :: Lens' ActivitiesInsert' (Maybe Text)
 aiFields = lens _aiFields (\ s a -> s{_aiFields = a})
 
--- | Data format for the response.
-aiAlt :: Lens' ActivitiesInsert' Alt
-aiAlt = lens _aiAlt (\ s a -> s{_aiAlt = a})
+instance GoogleAuth ActivitiesInsert' where
+        authKey = aiKey . _Just
+        authToken = aiOAuthToken . _Just
 
 instance GoogleRequest ActivitiesInsert' where
         type Rs ActivitiesInsert' = Activity
@@ -165,11 +172,12 @@ instance GoogleRequest ActivitiesInsert' where
         requestWithRoute r u ActivitiesInsert'{..}
           = go _aiQuotaUser (Just _aiPart)
               (Just _aiPrettyPrint)
-              _aiUserIp
+              _aiUserIP
               _aiKey
-              _aiOauthToken
+              _aiOAuthToken
               _aiFields
-              (Just _aiAlt)
+              (Just AltJSON)
+              _aiActivity
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ActivitiesInsertResource)

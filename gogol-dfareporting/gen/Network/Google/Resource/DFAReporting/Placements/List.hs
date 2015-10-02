@@ -35,7 +35,7 @@ module Network.Google.Resource.DFAReporting.Placements.List
     , plaPrettyPrint
     , plaContentCategoryIds
     , plaMaxEndDate
-    , plaUserIp
+    , plaUserIP
     , plaCampaignIds
     , plaPricingTypes
     , plaSearchString
@@ -52,14 +52,13 @@ module Network.Google.Resource.DFAReporting.Placements.List
     , plaSortField
     , plaCompatibilities
     , plaMaxStartDate
-    , plaOauthToken
+    , plaOAuthToken
     , plaAdvertiserIds
     , plaMinStartDate
     , plaArchived
     , plaMaxResults
     , plaMinEndDate
     , plaFields
-    , plaAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -92,7 +91,7 @@ type PlacementsListResource =
                                        QueryParam "paymentSource"
                                          DfareportingPlacementsListPaymentSource
                                          :>
-                                         QueryParam "key" Text :>
+                                         QueryParam "key" Key :>
                                            QueryParams "siteIds" Int64 :>
                                              QueryParam "pageToken" Text :>
                                                QueryParam "sortField"
@@ -105,7 +104,7 @@ type PlacementsListResource =
                                                      Text
                                                      :>
                                                      QueryParam "oauth_token"
-                                                       Text
+                                                       OAuthToken
                                                        :>
                                                        QueryParams
                                                          "advertiserIds"
@@ -132,7 +131,7 @@ type PlacementsListResource =
                                                                    :>
                                                                    QueryParam
                                                                      "alt"
-                                                                     Alt
+                                                                     AltJSON
                                                                      :>
                                                                      Get '[JSON]
                                                                        PlacementsListResponse
@@ -146,7 +145,7 @@ data PlacementsList' = PlacementsList'
     , _plaPrettyPrint          :: !Bool
     , _plaContentCategoryIds   :: !(Maybe Int64)
     , _plaMaxEndDate           :: !(Maybe Text)
-    , _plaUserIp               :: !(Maybe Text)
+    , _plaUserIP               :: !(Maybe Text)
     , _plaCampaignIds          :: !(Maybe Int64)
     , _plaPricingTypes         :: !(Maybe DfareportingPlacementsListPricingTypes)
     , _plaSearchString         :: !(Maybe Text)
@@ -157,20 +156,19 @@ data PlacementsList' = PlacementsList'
     , _plaDirectorySiteIds     :: !(Maybe Int64)
     , _plaSortOrder            :: !(Maybe DfareportingPlacementsListSortOrder)
     , _plaPaymentSource        :: !(Maybe DfareportingPlacementsListPaymentSource)
-    , _plaKey                  :: !(Maybe Text)
+    , _plaKey                  :: !(Maybe Key)
     , _plaSiteIds              :: !(Maybe Int64)
     , _plaPageToken            :: !(Maybe Text)
     , _plaSortField            :: !(Maybe DfareportingPlacementsListSortField)
     , _plaCompatibilities      :: !(Maybe DfareportingPlacementsListCompatibilities)
     , _plaMaxStartDate         :: !(Maybe Text)
-    , _plaOauthToken           :: !(Maybe Text)
+    , _plaOAuthToken           :: !(Maybe OAuthToken)
     , _plaAdvertiserIds        :: !(Maybe Int64)
     , _plaMinStartDate         :: !(Maybe Text)
     , _plaArchived             :: !(Maybe Bool)
     , _plaMaxResults           :: !(Maybe Int32)
     , _plaMinEndDate           :: !(Maybe Text)
     , _plaFields               :: !(Maybe Text)
-    , _plaAlt                  :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementsList'' with the minimum fields required to make a request.
@@ -187,7 +185,7 @@ data PlacementsList' = PlacementsList'
 --
 -- * 'plaMaxEndDate'
 --
--- * 'plaUserIp'
+-- * 'plaUserIP'
 --
 -- * 'plaCampaignIds'
 --
@@ -221,7 +219,7 @@ data PlacementsList' = PlacementsList'
 --
 -- * 'plaMaxStartDate'
 --
--- * 'plaOauthToken'
+-- * 'plaOAuthToken'
 --
 -- * 'plaAdvertiserIds'
 --
@@ -234,8 +232,6 @@ data PlacementsList' = PlacementsList'
 -- * 'plaMinEndDate'
 --
 -- * 'plaFields'
---
--- * 'plaAlt'
 placementsList'
     :: Int64 -- ^ 'profileId'
     -> PlacementsList'
@@ -246,7 +242,7 @@ placementsList' pPlaProfileId_ =
     , _plaPrettyPrint = True
     , _plaContentCategoryIds = Nothing
     , _plaMaxEndDate = Nothing
-    , _plaUserIp = Nothing
+    , _plaUserIP = Nothing
     , _plaCampaignIds = Nothing
     , _plaPricingTypes = Nothing
     , _plaSearchString = Nothing
@@ -263,14 +259,13 @@ placementsList' pPlaProfileId_ =
     , _plaSortField = Nothing
     , _plaCompatibilities = Nothing
     , _plaMaxStartDate = Nothing
-    , _plaOauthToken = Nothing
+    , _plaOAuthToken = Nothing
     , _plaAdvertiserIds = Nothing
     , _plaMinStartDate = Nothing
     , _plaArchived = Nothing
     , _plaMaxResults = Nothing
     , _plaMinEndDate = Nothing
     , _plaFields = Nothing
-    , _plaAlt = JSON
     }
 
 -- | Select only placements that are associated with these placement
@@ -310,9 +305,9 @@ plaMaxEndDate
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-plaUserIp :: Lens' PlacementsList' (Maybe Text)
-plaUserIp
-  = lens _plaUserIp (\ s a -> s{_plaUserIp = a})
+plaUserIP :: Lens' PlacementsList' (Maybe Text)
+plaUserIP
+  = lens _plaUserIP (\ s a -> s{_plaUserIP = a})
 
 -- | Select only placements that belong to these campaigns.
 plaCampaignIds :: Lens' PlacementsList' (Maybe Int64)
@@ -377,7 +372,7 @@ plaPaymentSource
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-plaKey :: Lens' PlacementsList' (Maybe Text)
+plaKey :: Lens' PlacementsList' (Maybe Key)
 plaKey = lens _plaKey (\ s a -> s{_plaKey = a})
 
 -- | Select only placements that are associated with these sites.
@@ -414,10 +409,10 @@ plaMaxStartDate
       (\ s a -> s{_plaMaxStartDate = a})
 
 -- | OAuth 2.0 token for the current user.
-plaOauthToken :: Lens' PlacementsList' (Maybe Text)
-plaOauthToken
-  = lens _plaOauthToken
-      (\ s a -> s{_plaOauthToken = a})
+plaOAuthToken :: Lens' PlacementsList' (Maybe OAuthToken)
+plaOAuthToken
+  = lens _plaOAuthToken
+      (\ s a -> s{_plaOAuthToken = a})
 
 -- | Select only placements that belong to these advertisers.
 plaAdvertiserIds :: Lens' PlacementsList' (Maybe Int64)
@@ -458,9 +453,9 @@ plaFields :: Lens' PlacementsList' (Maybe Text)
 plaFields
   = lens _plaFields (\ s a -> s{_plaFields = a})
 
--- | Data format for the response.
-plaAlt :: Lens' PlacementsList' Alt
-plaAlt = lens _plaAlt (\ s a -> s{_plaAlt = a})
+instance GoogleAuth PlacementsList' where
+        authKey = plaKey . _Just
+        authToken = plaOAuthToken . _Just
 
 instance GoogleRequest PlacementsList' where
         type Rs PlacementsList' = PlacementsListResponse
@@ -470,7 +465,7 @@ instance GoogleRequest PlacementsList' where
               (Just _plaPrettyPrint)
               _plaContentCategoryIds
               _plaMaxEndDate
-              _plaUserIp
+              _plaUserIP
               _plaCampaignIds
               _plaPricingTypes
               _plaSearchString
@@ -487,14 +482,14 @@ instance GoogleRequest PlacementsList' where
               _plaSortField
               _plaCompatibilities
               _plaMaxStartDate
-              _plaOauthToken
+              _plaOAuthToken
               _plaAdvertiserIds
               _plaMinStartDate
               _plaArchived
               _plaMaxResults
               _plaMinEndDate
               _plaFields
-              (Just _plaAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PlacementsListResource)

@@ -32,14 +32,13 @@ module Network.Google.Resource.Games.TurnBasedMatches.Get
     -- * Request Lenses
     , tbmgQuotaUser
     , tbmgPrettyPrint
-    , tbmgUserIp
+    , tbmgUserIP
     , tbmgKey
     , tbmgIncludeMatchData
     , tbmgLanguage
-    , tbmgOauthToken
+    , tbmgOAuthToken
     , tbmgMatchId
     , tbmgFields
-    , tbmgAlt
     ) where
 
 import           Network.Google.Games.Types
@@ -53,12 +52,13 @@ type TurnBasedMatchesGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
+               QueryParam "key" Key :>
                  QueryParam "includeMatchData" Bool :>
                    QueryParam "language" Text :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] TurnBasedMatch
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] TurnBasedMatch
 
 -- | Get the data for a turn-based match.
 --
@@ -66,14 +66,13 @@ type TurnBasedMatchesGetResource =
 data TurnBasedMatchesGet' = TurnBasedMatchesGet'
     { _tbmgQuotaUser        :: !(Maybe Text)
     , _tbmgPrettyPrint      :: !Bool
-    , _tbmgUserIp           :: !(Maybe Text)
-    , _tbmgKey              :: !(Maybe Text)
+    , _tbmgUserIP           :: !(Maybe Text)
+    , _tbmgKey              :: !(Maybe Key)
     , _tbmgIncludeMatchData :: !(Maybe Bool)
     , _tbmgLanguage         :: !(Maybe Text)
-    , _tbmgOauthToken       :: !(Maybe Text)
+    , _tbmgOAuthToken       :: !(Maybe OAuthToken)
     , _tbmgMatchId          :: !Text
     , _tbmgFields           :: !(Maybe Text)
-    , _tbmgAlt              :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchesGet'' with the minimum fields required to make a request.
@@ -84,7 +83,7 @@ data TurnBasedMatchesGet' = TurnBasedMatchesGet'
 --
 -- * 'tbmgPrettyPrint'
 --
--- * 'tbmgUserIp'
+-- * 'tbmgUserIP'
 --
 -- * 'tbmgKey'
 --
@@ -92,13 +91,11 @@ data TurnBasedMatchesGet' = TurnBasedMatchesGet'
 --
 -- * 'tbmgLanguage'
 --
--- * 'tbmgOauthToken'
+-- * 'tbmgOAuthToken'
 --
 -- * 'tbmgMatchId'
 --
 -- * 'tbmgFields'
---
--- * 'tbmgAlt'
 turnBasedMatchesGet'
     :: Text -- ^ 'matchId'
     -> TurnBasedMatchesGet'
@@ -106,14 +103,13 @@ turnBasedMatchesGet' pTbmgMatchId_ =
     TurnBasedMatchesGet'
     { _tbmgQuotaUser = Nothing
     , _tbmgPrettyPrint = True
-    , _tbmgUserIp = Nothing
+    , _tbmgUserIP = Nothing
     , _tbmgKey = Nothing
     , _tbmgIncludeMatchData = Nothing
     , _tbmgLanguage = Nothing
-    , _tbmgOauthToken = Nothing
+    , _tbmgOAuthToken = Nothing
     , _tbmgMatchId = pTbmgMatchId_
     , _tbmgFields = Nothing
-    , _tbmgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -132,14 +128,14 @@ tbmgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tbmgUserIp :: Lens' TurnBasedMatchesGet' (Maybe Text)
-tbmgUserIp
-  = lens _tbmgUserIp (\ s a -> s{_tbmgUserIp = a})
+tbmgUserIP :: Lens' TurnBasedMatchesGet' (Maybe Text)
+tbmgUserIP
+  = lens _tbmgUserIP (\ s a -> s{_tbmgUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tbmgKey :: Lens' TurnBasedMatchesGet' (Maybe Text)
+tbmgKey :: Lens' TurnBasedMatchesGet' (Maybe Key)
 tbmgKey = lens _tbmgKey (\ s a -> s{_tbmgKey = a})
 
 -- | Get match data along with metadata.
@@ -154,10 +150,10 @@ tbmgLanguage
   = lens _tbmgLanguage (\ s a -> s{_tbmgLanguage = a})
 
 -- | OAuth 2.0 token for the current user.
-tbmgOauthToken :: Lens' TurnBasedMatchesGet' (Maybe Text)
-tbmgOauthToken
-  = lens _tbmgOauthToken
-      (\ s a -> s{_tbmgOauthToken = a})
+tbmgOAuthToken :: Lens' TurnBasedMatchesGet' (Maybe OAuthToken)
+tbmgOAuthToken
+  = lens _tbmgOAuthToken
+      (\ s a -> s{_tbmgOAuthToken = a})
 
 -- | The ID of the match.
 tbmgMatchId :: Lens' TurnBasedMatchesGet' Text
@@ -169,23 +165,23 @@ tbmgFields :: Lens' TurnBasedMatchesGet' (Maybe Text)
 tbmgFields
   = lens _tbmgFields (\ s a -> s{_tbmgFields = a})
 
--- | Data format for the response.
-tbmgAlt :: Lens' TurnBasedMatchesGet' Alt
-tbmgAlt = lens _tbmgAlt (\ s a -> s{_tbmgAlt = a})
+instance GoogleAuth TurnBasedMatchesGet' where
+        authKey = tbmgKey . _Just
+        authToken = tbmgOAuthToken . _Just
 
 instance GoogleRequest TurnBasedMatchesGet' where
         type Rs TurnBasedMatchesGet' = TurnBasedMatch
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u TurnBasedMatchesGet'{..}
           = go _tbmgQuotaUser (Just _tbmgPrettyPrint)
-              _tbmgUserIp
+              _tbmgUserIP
               _tbmgKey
               _tbmgIncludeMatchData
               _tbmgLanguage
-              _tbmgOauthToken
+              _tbmgOAuthToken
               _tbmgMatchId
               _tbmgFields
-              (Just _tbmgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TurnBasedMatchesGetResource)

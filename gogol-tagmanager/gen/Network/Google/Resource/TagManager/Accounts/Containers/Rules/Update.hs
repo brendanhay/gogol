@@ -19,7 +19,7 @@
 --
 -- | Updates a GTM Rule.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersRulesUpdate@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersRulesUpdate@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Rules.Update
     (
     -- * REST Resource
@@ -33,20 +33,20 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Rules.Update
     , acruQuotaUser
     , acruPrettyPrint
     , acruContainerId
-    , acruUserIp
+    , acruUserIP
     , acruFingerprint
     , acruRuleId
+    , acruRule
     , acruAccountId
     , acruKey
-    , acruOauthToken
+    , acruOAuthToken
     , acruFields
-    , acruAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagmanagerAccountsContainersRulesUpdate@ which the
+-- | A resource alias for @TagManagerAccountsContainersRulesUpdate@ which the
 -- 'AccountsContainersRulesUpdate'' request conforms to.
 type AccountsContainersRulesUpdateResource =
      "accounts" :>
@@ -59,10 +59,11 @@ type AccountsContainersRulesUpdateResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fingerprint" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :> Put '[JSON] Rule
+                               QueryParam "alt" AltJSON :>
+                                 ReqBody '[JSON] Rule :> Put '[JSON] Rule
 
 -- | Updates a GTM Rule.
 --
@@ -71,14 +72,14 @@ data AccountsContainersRulesUpdate' = AccountsContainersRulesUpdate'
     { _acruQuotaUser   :: !(Maybe Text)
     , _acruPrettyPrint :: !Bool
     , _acruContainerId :: !Text
-    , _acruUserIp      :: !(Maybe Text)
+    , _acruUserIP      :: !(Maybe Text)
     , _acruFingerprint :: !(Maybe Text)
     , _acruRuleId      :: !Text
+    , _acruRule        :: !Rule
     , _acruAccountId   :: !Text
-    , _acruKey         :: !(Maybe Text)
-    , _acruOauthToken  :: !(Maybe Text)
+    , _acruKey         :: !(Maybe Key)
+    , _acruOAuthToken  :: !(Maybe OAuthToken)
     , _acruFields      :: !(Maybe Text)
-    , _acruAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersRulesUpdate'' with the minimum fields required to make a request.
@@ -91,39 +92,40 @@ data AccountsContainersRulesUpdate' = AccountsContainersRulesUpdate'
 --
 -- * 'acruContainerId'
 --
--- * 'acruUserIp'
+-- * 'acruUserIP'
 --
 -- * 'acruFingerprint'
 --
 -- * 'acruRuleId'
 --
+-- * 'acruRule'
+--
 -- * 'acruAccountId'
 --
 -- * 'acruKey'
 --
--- * 'acruOauthToken'
+-- * 'acruOAuthToken'
 --
 -- * 'acruFields'
---
--- * 'acruAlt'
 accountsContainersRulesUpdate'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'ruleId'
+    -> Rule -- ^ 'Rule'
     -> Text -- ^ 'accountId'
     -> AccountsContainersRulesUpdate'
-accountsContainersRulesUpdate' pAcruContainerId_ pAcruRuleId_ pAcruAccountId_ =
+accountsContainersRulesUpdate' pAcruContainerId_ pAcruRuleId_ pAcruRule_ pAcruAccountId_ =
     AccountsContainersRulesUpdate'
     { _acruQuotaUser = Nothing
     , _acruPrettyPrint = True
     , _acruContainerId = pAcruContainerId_
-    , _acruUserIp = Nothing
+    , _acruUserIP = Nothing
     , _acruFingerprint = Nothing
     , _acruRuleId = pAcruRuleId_
+    , _acruRule = pAcruRule_
     , _acruAccountId = pAcruAccountId_
     , _acruKey = Nothing
-    , _acruOauthToken = Nothing
+    , _acruOAuthToken = Nothing
     , _acruFields = Nothing
-    , _acruAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -148,9 +150,9 @@ acruContainerId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-acruUserIp :: Lens' AccountsContainersRulesUpdate' (Maybe Text)
-acruUserIp
-  = lens _acruUserIp (\ s a -> s{_acruUserIp = a})
+acruUserIP :: Lens' AccountsContainersRulesUpdate' (Maybe Text)
+acruUserIP
+  = lens _acruUserIP (\ s a -> s{_acruUserIP = a})
 
 -- | When provided, this fingerprint must match the fingerprint of the rule
 -- in storage.
@@ -164,6 +166,10 @@ acruRuleId :: Lens' AccountsContainersRulesUpdate' Text
 acruRuleId
   = lens _acruRuleId (\ s a -> s{_acruRuleId = a})
 
+-- | Multipart request metadata.
+acruRule :: Lens' AccountsContainersRulesUpdate' Rule
+acruRule = lens _acruRule (\ s a -> s{_acruRule = a})
+
 -- | The GTM Account ID.
 acruAccountId :: Lens' AccountsContainersRulesUpdate' Text
 acruAccountId
@@ -173,23 +179,24 @@ acruAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-acruKey :: Lens' AccountsContainersRulesUpdate' (Maybe Text)
+acruKey :: Lens' AccountsContainersRulesUpdate' (Maybe Key)
 acruKey = lens _acruKey (\ s a -> s{_acruKey = a})
 
 -- | OAuth 2.0 token for the current user.
-acruOauthToken :: Lens' AccountsContainersRulesUpdate' (Maybe Text)
-acruOauthToken
-  = lens _acruOauthToken
-      (\ s a -> s{_acruOauthToken = a})
+acruOAuthToken :: Lens' AccountsContainersRulesUpdate' (Maybe OAuthToken)
+acruOAuthToken
+  = lens _acruOAuthToken
+      (\ s a -> s{_acruOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 acruFields :: Lens' AccountsContainersRulesUpdate' (Maybe Text)
 acruFields
   = lens _acruFields (\ s a -> s{_acruFields = a})
 
--- | Data format for the response.
-acruAlt :: Lens' AccountsContainersRulesUpdate' Alt
-acruAlt = lens _acruAlt (\ s a -> s{_acruAlt = a})
+instance GoogleAuth AccountsContainersRulesUpdate'
+         where
+        authKey = acruKey . _Just
+        authToken = acruOAuthToken . _Just
 
 instance GoogleRequest AccountsContainersRulesUpdate'
          where
@@ -199,14 +206,15 @@ instance GoogleRequest AccountsContainersRulesUpdate'
           AccountsContainersRulesUpdate'{..}
           = go _acruQuotaUser (Just _acruPrettyPrint)
               _acruContainerId
-              _acruUserIp
+              _acruUserIP
               _acruFingerprint
               _acruRuleId
               _acruAccountId
               _acruKey
-              _acruOauthToken
+              _acruOAuthToken
               _acruFields
-              (Just _acruAlt)
+              (Just AltJSON)
+              _acruRule
           where go
                   = clientWithRoute
                       (Proxy ::

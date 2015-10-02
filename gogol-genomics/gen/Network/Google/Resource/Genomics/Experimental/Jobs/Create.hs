@@ -33,11 +33,11 @@ module Network.Google.Resource.Genomics.Experimental.Jobs.Create
     -- * Request Lenses
     , ejcQuotaUser
     , ejcPrettyPrint
-    , ejcUserIp
+    , ejcUserIP
+    , ejcExperimentalCreateJobRequest
     , ejcKey
-    , ejcOauthToken
+    , ejcOAuthToken
     , ejcFields
-    , ejcAlt
     ) where
 
 import           Network.Google.Genomics.Types
@@ -52,24 +52,25 @@ type ExperimentalJobsCreateResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :>
-                         Post '[JSON] ExperimentalCreateJobResponse
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] ExperimentalCreateJobRequest :>
+                           Post '[JSON] ExperimentalCreateJobResponse
 
 -- | Creates and asynchronously runs an ad-hoc job. This is an experimental
 -- call and may be removed or changed at any time.
 --
 -- /See:/ 'experimentalJobsCreate'' smart constructor.
 data ExperimentalJobsCreate' = ExperimentalJobsCreate'
-    { _ejcQuotaUser   :: !(Maybe Text)
-    , _ejcPrettyPrint :: !Bool
-    , _ejcUserIp      :: !(Maybe Text)
-    , _ejcKey         :: !(Maybe Text)
-    , _ejcOauthToken  :: !(Maybe Text)
-    , _ejcFields      :: !(Maybe Text)
-    , _ejcAlt         :: !Alt
+    { _ejcQuotaUser                    :: !(Maybe Text)
+    , _ejcPrettyPrint                  :: !Bool
+    , _ejcUserIP                       :: !(Maybe Text)
+    , _ejcExperimentalCreateJobRequest :: !ExperimentalCreateJobRequest
+    , _ejcKey                          :: !(Maybe Key)
+    , _ejcOAuthToken                   :: !(Maybe OAuthToken)
+    , _ejcFields                       :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ExperimentalJobsCreate'' with the minimum fields required to make a request.
@@ -80,26 +81,27 @@ data ExperimentalJobsCreate' = ExperimentalJobsCreate'
 --
 -- * 'ejcPrettyPrint'
 --
--- * 'ejcUserIp'
+-- * 'ejcUserIP'
+--
+-- * 'ejcExperimentalCreateJobRequest'
 --
 -- * 'ejcKey'
 --
--- * 'ejcOauthToken'
+-- * 'ejcOAuthToken'
 --
 -- * 'ejcFields'
---
--- * 'ejcAlt'
 experimentalJobsCreate'
-    :: ExperimentalJobsCreate'
-experimentalJobsCreate' =
+    :: ExperimentalCreateJobRequest -- ^ 'ExperimentalCreateJobRequest'
+    -> ExperimentalJobsCreate'
+experimentalJobsCreate' pEjcExperimentalCreateJobRequest_ =
     ExperimentalJobsCreate'
     { _ejcQuotaUser = Nothing
     , _ejcPrettyPrint = True
-    , _ejcUserIp = Nothing
+    , _ejcUserIP = Nothing
+    , _ejcExperimentalCreateJobRequest = pEjcExperimentalCreateJobRequest_
     , _ejcKey = Nothing
-    , _ejcOauthToken = Nothing
+    , _ejcOAuthToken = Nothing
     , _ejcFields = Nothing
-    , _ejcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -117,41 +119,48 @@ ejcPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ejcUserIp :: Lens' ExperimentalJobsCreate' (Maybe Text)
-ejcUserIp
-  = lens _ejcUserIp (\ s a -> s{_ejcUserIp = a})
+ejcUserIP :: Lens' ExperimentalJobsCreate' (Maybe Text)
+ejcUserIP
+  = lens _ejcUserIP (\ s a -> s{_ejcUserIP = a})
+
+-- | Multipart request metadata.
+ejcExperimentalCreateJobRequest :: Lens' ExperimentalJobsCreate' ExperimentalCreateJobRequest
+ejcExperimentalCreateJobRequest
+  = lens _ejcExperimentalCreateJobRequest
+      (\ s a -> s{_ejcExperimentalCreateJobRequest = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ejcKey :: Lens' ExperimentalJobsCreate' (Maybe Text)
+ejcKey :: Lens' ExperimentalJobsCreate' (Maybe Key)
 ejcKey = lens _ejcKey (\ s a -> s{_ejcKey = a})
 
 -- | OAuth 2.0 token for the current user.
-ejcOauthToken :: Lens' ExperimentalJobsCreate' (Maybe Text)
-ejcOauthToken
-  = lens _ejcOauthToken
-      (\ s a -> s{_ejcOauthToken = a})
+ejcOAuthToken :: Lens' ExperimentalJobsCreate' (Maybe OAuthToken)
+ejcOAuthToken
+  = lens _ejcOAuthToken
+      (\ s a -> s{_ejcOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ejcFields :: Lens' ExperimentalJobsCreate' (Maybe Text)
 ejcFields
   = lens _ejcFields (\ s a -> s{_ejcFields = a})
 
--- | Data format for the response.
-ejcAlt :: Lens' ExperimentalJobsCreate' Alt
-ejcAlt = lens _ejcAlt (\ s a -> s{_ejcAlt = a})
+instance GoogleAuth ExperimentalJobsCreate' where
+        authKey = ejcKey . _Just
+        authToken = ejcOAuthToken . _Just
 
 instance GoogleRequest ExperimentalJobsCreate' where
         type Rs ExperimentalJobsCreate' =
              ExperimentalCreateJobResponse
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u ExperimentalJobsCreate'{..}
-          = go _ejcQuotaUser (Just _ejcPrettyPrint) _ejcUserIp
+          = go _ejcQuotaUser (Just _ejcPrettyPrint) _ejcUserIP
               _ejcKey
-              _ejcOauthToken
+              _ejcOAuthToken
               _ejcFields
-              (Just _ejcAlt)
+              (Just AltJSON)
+              _ejcExperimentalCreateJobRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ExperimentalJobsCreateResource)

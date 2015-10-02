@@ -32,19 +32,19 @@ library
 
     exposed-modules:
           Network.Google.Resource.Content.Orders.Acknowledge
-        , Network.Google.Resource.Content.Orders.Advancetestorder
+        , Network.Google.Resource.Content.Orders.AdvancetestOrder
         , Network.Google.Resource.Content.Orders.Cancel
         , Network.Google.Resource.Content.Orders.Cancellineitem
-        , Network.Google.Resource.Content.Orders.Createtestorder
+        , Network.Google.Resource.Content.Orders.CreatetestOrder
         , Network.Google.Resource.Content.Orders.Custombatch
         , Network.Google.Resource.Content.Orders.Get
-        , Network.Google.Resource.Content.Orders.Getbymerchantorderid
-        , Network.Google.Resource.Content.Orders.Gettestordertemplate
+        , Network.Google.Resource.Content.Orders.GetbymerchantOrderid
+        , Network.Google.Resource.Content.Orders.GettestOrdertemplate
         , Network.Google.Resource.Content.Orders.List
         , Network.Google.Resource.Content.Orders.Refund
         , Network.Google.Resource.Content.Orders.Returnlineitem
         , Network.Google.Resource.Content.Orders.Shiplineitems
-        , Network.Google.Resource.Content.Orders.Updatemerchantorderid
+        , Network.Google.Resource.Content.Orders.UpdatemerchantOrderid
         , Network.Google.Resource.Content.Orders.Updateshipment
         , Network.Google.ShoppingContent
         , Network.Google.ShoppingContent.Types

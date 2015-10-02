@@ -140,7 +140,7 @@ instance ToJSON LatLng where
 data CertificationStatus = CertificationStatus
     { _csIsCertified  :: !(Maybe Bool)
     , _csType         :: !(Maybe Text)
-    , _csExamStatuses :: !(Maybe [Maybe CertificationExamStatus])
+    , _csExamStatuses :: !(Maybe [CertificationExamStatus])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CertificationStatus' with the minimum fields required to make a request.
@@ -172,7 +172,7 @@ csType :: Lens' CertificationStatus (Maybe Text)
 csType = lens _csType (\ s a -> s{_csType = a})
 
 -- | List of certification exam statuses.
-csExamStatuses :: Lens' CertificationStatus [Maybe CertificationExamStatus]
+csExamStatuses :: Lens' CertificationStatus [CertificationExamStatus]
 csExamStatuses
   = lens _csExamStatuses
       (\ s a -> s{_csExamStatuses = a})
@@ -200,9 +200,9 @@ instance ToJSON CertificationStatus where
 -- /See:/ 'requestMetadata' smart constructor.
 data RequestMetadata = RequestMetadata
     { _rmExperimentIds     :: !(Maybe [Text])
-    , _rmTrafficSource     :: !(Maybe (Maybe TrafficSource))
+    , _rmTrafficSource     :: !(Maybe TrafficSource)
     , _rmLocale            :: !(Maybe Text)
-    , _rmUserOverrides     :: !(Maybe (Maybe UserOverrides))
+    , _rmUserOverrides     :: !(Maybe UserOverrides)
     , _rmPartnersSessionId :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -239,7 +239,7 @@ rmExperimentIds
       . _Coerce
 
 -- | Source of traffic for the current request.
-rmTrafficSource :: Lens' RequestMetadata (Maybe (Maybe TrafficSource))
+rmTrafficSource :: Lens' RequestMetadata (Maybe TrafficSource)
 rmTrafficSource
   = lens _rmTrafficSource
       (\ s a -> s{_rmTrafficSource = a})
@@ -250,7 +250,7 @@ rmLocale = lens _rmLocale (\ s a -> s{_rmLocale = a})
 
 -- | Values to use instead of the user\'s respective defaults for the current
 -- request. These are only honored by whitelisted products.
-rmUserOverrides :: Lens' RequestMetadata (Maybe (Maybe UserOverrides))
+rmUserOverrides :: Lens' RequestMetadata (Maybe UserOverrides)
 rmUserOverrides
   = lens _rmUserOverrides
       (\ s a -> s{_rmUserOverrides = a})
@@ -287,7 +287,7 @@ instance ToJSON RequestMetadata where
 -- /See:/ 'listUserStatesResponse' smart constructor.
 data ListUserStatesResponse = ListUserStatesResponse
     { _lusrUserStates       :: !(Maybe [Text])
-    , _lusrResponseMetadata :: !(Maybe (Maybe ResponseMetadata))
+    , _lusrResponseMetadata :: !(Maybe ResponseMetadata)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListUserStatesResponse' with the minimum fields required to make a request.
@@ -314,7 +314,7 @@ lusrUserStates
       . _Coerce
 
 -- | Current response metadata.
-lusrResponseMetadata :: Lens' ListUserStatesResponse (Maybe (Maybe ResponseMetadata))
+lusrResponseMetadata :: Lens' ListUserStatesResponse (Maybe ResponseMetadata)
 lusrResponseMetadata
   = lens _lusrResponseMetadata
       (\ s a -> s{_lusrResponseMetadata = a})
@@ -338,7 +338,7 @@ instance ToJSON ListUserStatesResponse where
 --
 -- /See:/ 'debugInfo' smart constructor.
 data DebugInfo = DebugInfo
-    { _diServiceUrl      :: !(Maybe Text)
+    { _diServiceURL      :: !(Maybe Text)
     , _diServerTraceInfo :: !(Maybe Text)
     , _diServerInfo      :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -347,7 +347,7 @@ data DebugInfo = DebugInfo
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'diServiceUrl'
+-- * 'diServiceURL'
 --
 -- * 'diServerTraceInfo'
 --
@@ -356,15 +356,15 @@ debugInfo
     :: DebugInfo
 debugInfo =
     DebugInfo
-    { _diServiceUrl = Nothing
+    { _diServiceURL = Nothing
     , _diServerTraceInfo = Nothing
     , _diServerInfo = Nothing
     }
 
 -- | URL of the service that handled this request.
-diServiceUrl :: Lens' DebugInfo (Maybe Text)
-diServiceUrl
-  = lens _diServiceUrl (\ s a -> s{_diServiceUrl = a})
+diServiceURL :: Lens' DebugInfo (Maybe Text)
+diServiceURL
+  = lens _diServiceURL (\ s a -> s{_diServiceURL = a})
 
 -- | Server-side debug stack trace.
 diServerTraceInfo :: Lens' DebugInfo (Maybe Text)
@@ -389,7 +389,7 @@ instance ToJSON DebugInfo where
         toJSON DebugInfo{..}
           = object
               (catMaybes
-                 [("serviceUrl" .=) <$> _diServiceUrl,
+                 [("serviceUrl" .=) <$> _diServiceURL,
                   ("serverTraceInfo" .=) <$> _diServerTraceInfo,
                   ("serverInfo" .=) <$> _diServerInfo])
 
@@ -397,8 +397,8 @@ instance ToJSON DebugInfo where
 --
 -- /See:/ 'getCompanyResponse' smart constructor.
 data GetCompanyResponse = GetCompanyResponse
-    { _gcrResponseMetadata :: !(Maybe (Maybe ResponseMetadata))
-    , _gcrCompany          :: !(Maybe (Maybe Company))
+    { _gcrResponseMetadata :: !(Maybe ResponseMetadata)
+    , _gcrCompany          :: !(Maybe Company)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GetCompanyResponse' with the minimum fields required to make a request.
@@ -417,13 +417,13 @@ getCompanyResponse =
     }
 
 -- | Current response metadata.
-gcrResponseMetadata :: Lens' GetCompanyResponse (Maybe (Maybe ResponseMetadata))
+gcrResponseMetadata :: Lens' GetCompanyResponse (Maybe ResponseMetadata)
 gcrResponseMetadata
   = lens _gcrResponseMetadata
       (\ s a -> s{_gcrResponseMetadata = a})
 
 -- | The company.
-gcrCompany :: Lens' GetCompanyResponse (Maybe (Maybe Company))
+gcrCompany :: Lens' GetCompanyResponse (Maybe Company)
 gcrCompany
   = lens _gcrCompany (\ s a -> s{_gcrCompany = a})
 
@@ -445,8 +445,8 @@ instance ToJSON GetCompanyResponse where
 --
 -- /See:/ 'publicProfile' smart constructor.
 data PublicProfile = PublicProfile
-    { _ppUrl             :: !(Maybe Text)
-    , _ppDisplayImageUrl :: !(Maybe Text)
+    { _ppURL             :: !(Maybe Text)
+    , _ppDisplayImageURL :: !(Maybe Text)
     , _ppDisplayName     :: !(Maybe Text)
     , _ppId              :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -455,9 +455,9 @@ data PublicProfile = PublicProfile
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ppUrl'
+-- * 'ppURL'
 --
--- * 'ppDisplayImageUrl'
+-- * 'ppDisplayImageURL'
 --
 -- * 'ppDisplayName'
 --
@@ -466,21 +466,21 @@ publicProfile
     :: PublicProfile
 publicProfile =
     PublicProfile
-    { _ppUrl = Nothing
-    , _ppDisplayImageUrl = Nothing
+    { _ppURL = Nothing
+    , _ppDisplayImageURL = Nothing
     , _ppDisplayName = Nothing
     , _ppId = Nothing
     }
 
 -- | The URL of the public profile.
-ppUrl :: Lens' PublicProfile (Maybe Text)
-ppUrl = lens _ppUrl (\ s a -> s{_ppUrl = a})
+ppURL :: Lens' PublicProfile (Maybe Text)
+ppURL = lens _ppURL (\ s a -> s{_ppURL = a})
 
 -- | The URL to the main display image of the public profile.
-ppDisplayImageUrl :: Lens' PublicProfile (Maybe Text)
-ppDisplayImageUrl
-  = lens _ppDisplayImageUrl
-      (\ s a -> s{_ppDisplayImageUrl = a})
+ppDisplayImageURL :: Lens' PublicProfile (Maybe Text)
+ppDisplayImageURL
+  = lens _ppDisplayImageURL
+      (\ s a -> s{_ppDisplayImageURL = a})
 
 -- | The display name of the public profile.
 ppDisplayName :: Lens' PublicProfile (Maybe Text)
@@ -506,8 +506,8 @@ instance ToJSON PublicProfile where
         toJSON PublicProfile{..}
           = object
               (catMaybes
-                 [("url" .=) <$> _ppUrl,
-                  ("displayImageUrl" .=) <$> _ppDisplayImageUrl,
+                 [("url" .=) <$> _ppURL,
+                  ("displayImageUrl" .=) <$> _ppDisplayImageURL,
                   ("displayName" .=) <$> _ppDisplayName,
                   ("id" .=) <$> _ppId])
 
@@ -515,7 +515,7 @@ instance ToJSON PublicProfile where
 --
 -- /See:/ 'location' smart constructor.
 data Location = Location
-    { _lLatLng  :: !(Maybe (Maybe LatLng))
+    { _lLatLng  :: !(Maybe LatLng)
     , _lAddress :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -535,7 +535,7 @@ location =
     }
 
 -- | The latitude and longitude of the location, in degrees.
-lLatLng :: Lens' Location (Maybe (Maybe LatLng))
+lLatLng :: Lens' Location (Maybe LatLng)
 lLatLng = lens _lLatLng (\ s a -> s{_lLatLng = a})
 
 -- | The complete address of the location.
@@ -767,8 +767,8 @@ instance ToJSON RecaptchaChallenge where
 -- /See:/ 'listCompaniesResponse' smart constructor.
 data ListCompaniesResponse = ListCompaniesResponse
     { _lcrNextPageToken    :: !(Maybe Text)
-    , _lcrResponseMetadata :: !(Maybe (Maybe ResponseMetadata))
-    , _lcrCompanies        :: !(Maybe [Maybe Company])
+    , _lcrResponseMetadata :: !(Maybe ResponseMetadata)
+    , _lcrCompanies        :: !(Maybe [Company])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListCompaniesResponse' with the minimum fields required to make a request.
@@ -798,13 +798,13 @@ lcrNextPageToken
       (\ s a -> s{_lcrNextPageToken = a})
 
 -- | Current response metadata.
-lcrResponseMetadata :: Lens' ListCompaniesResponse (Maybe (Maybe ResponseMetadata))
+lcrResponseMetadata :: Lens' ListCompaniesResponse (Maybe ResponseMetadata)
 lcrResponseMetadata
   = lens _lcrResponseMetadata
       (\ s a -> s{_lcrResponseMetadata = a})
 
 -- | The list of companies.
-lcrCompanies :: Lens' ListCompaniesResponse [Maybe Company]
+lcrCompanies :: Lens' ListCompaniesResponse [Company]
 lcrCompanies
   = lens _lcrCompanies (\ s a -> s{_lcrCompanies = a})
       . _Default
@@ -832,8 +832,8 @@ instance ToJSON ListCompaniesResponse where
 -- /See:/ 'createLeadResponse' smart constructor.
 data CreateLeadResponse = CreateLeadResponse
     { _clrRecaptchaStatus  :: !(Maybe Text)
-    , _clrResponseMetadata :: !(Maybe (Maybe ResponseMetadata))
-    , _clrLead             :: !(Maybe (Maybe Lead))
+    , _clrResponseMetadata :: !(Maybe ResponseMetadata)
+    , _clrLead             :: !(Maybe Lead)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreateLeadResponse' with the minimum fields required to make a request.
@@ -861,13 +861,13 @@ clrRecaptchaStatus
       (\ s a -> s{_clrRecaptchaStatus = a})
 
 -- | Current response metadata.
-clrResponseMetadata :: Lens' CreateLeadResponse (Maybe (Maybe ResponseMetadata))
+clrResponseMetadata :: Lens' CreateLeadResponse (Maybe ResponseMetadata)
 clrResponseMetadata
   = lens _clrResponseMetadata
       (\ s a -> s{_clrResponseMetadata = a})
 
 -- | Lead that was created depending on the outcome of reCaptcha validation.
-clrLead :: Lens' CreateLeadResponse (Maybe (Maybe Lead))
+clrLead :: Lens' CreateLeadResponse (Maybe Lead)
 clrLead = lens _clrLead (\ s a -> s{_clrLead = a})
 
 instance FromJSON CreateLeadResponse where
@@ -967,7 +967,7 @@ instance ToJSON LocalizedCompanyInfo where
 --
 -- /See:/ 'responseMetadata' smart constructor.
 newtype ResponseMetadata = ResponseMetadata
-    { _rmDebugInfo :: Maybe (Maybe DebugInfo)
+    { _rmDebugInfo :: Maybe DebugInfo
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ResponseMetadata' with the minimum fields required to make a request.
@@ -983,7 +983,7 @@ responseMetadata =
     }
 
 -- | Debug information about this request.
-rmDebugInfo :: Lens' ResponseMetadata (Maybe (Maybe DebugInfo))
+rmDebugInfo :: Lens' ResponseMetadata (Maybe DebugInfo)
 rmDebugInfo
   = lens _rmDebugInfo (\ s a -> s{_rmDebugInfo = a})
 
@@ -1001,7 +1001,7 @@ instance ToJSON ResponseMetadata where
 --
 -- /See:/ 'logMessageRequest' smart constructor.
 data LogMessageRequest = LogMessageRequest
-    { _lmrRequestMetadata :: !(Maybe (Maybe RequestMetadata))
+    { _lmrRequestMetadata :: !(Maybe RequestMetadata)
     , _lmrClientInfo      :: !(Maybe LogMessageRequestClientInfo)
     , _lmrDetails         :: !(Maybe Text)
     , _lmrLevel           :: !(Maybe Text)
@@ -1029,7 +1029,7 @@ logMessageRequest =
     }
 
 -- | Current request metadata.
-lmrRequestMetadata :: Lens' LogMessageRequest (Maybe (Maybe RequestMetadata))
+lmrRequestMetadata :: Lens' LogMessageRequest (Maybe RequestMetadata)
 lmrRequestMetadata
   = lens _lmrRequestMetadata
       (\ s a -> s{_lmrRequestMetadata = a})
@@ -1073,7 +1073,7 @@ instance ToJSON LogMessageRequest where
 --
 -- /See:/ 'userOverrides' smart constructor.
 data UserOverrides = UserOverrides
-    { _uoIpAddress :: !(Maybe Text)
+    { _uoIPAddress :: !(Maybe Text)
     , _uoUserId    :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1081,21 +1081,21 @@ data UserOverrides = UserOverrides
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'uoIpAddress'
+-- * 'uoIPAddress'
 --
 -- * 'uoUserId'
 userOverrides
     :: UserOverrides
 userOverrides =
     UserOverrides
-    { _uoIpAddress = Nothing
+    { _uoIPAddress = Nothing
     , _uoUserId = Nothing
     }
 
 -- | IP address to use instead of the user\'s geo-located IP address.
-uoIpAddress :: Lens' UserOverrides (Maybe Text)
-uoIpAddress
-  = lens _uoIpAddress (\ s a -> s{_uoIpAddress = a})
+uoIPAddress :: Lens' UserOverrides (Maybe Text)
+uoIPAddress
+  = lens _uoIPAddress (\ s a -> s{_uoIPAddress = a})
 
 -- | Logged-in user ID to impersonate instead of the user\'s ID.
 uoUserId :: Lens' UserOverrides (Maybe Text)
@@ -1112,7 +1112,7 @@ instance ToJSON UserOverrides where
         toJSON UserOverrides{..}
           = object
               (catMaybes
-                 [("ipAddress" .=) <$> _uoIpAddress,
+                 [("ipAddress" .=) <$> _uoIPAddress,
                   ("userId" .=) <$> _uoUserId])
 
 -- | Map of client info, such as URL, browser navigator, browser platform,
@@ -1141,7 +1141,7 @@ instance ToJSON LogMessageRequestClientInfo where
 --
 -- /See:/ 'logMessageResponse' smart constructor.
 newtype LogMessageResponse = LogMessageResponse
-    { _lmrResponseMetadata :: Maybe (Maybe ResponseMetadata)
+    { _lmrResponseMetadata :: Maybe ResponseMetadata
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LogMessageResponse' with the minimum fields required to make a request.
@@ -1157,7 +1157,7 @@ logMessageResponse =
     }
 
 -- | Current response metadata.
-lmrResponseMetadata :: Lens' LogMessageResponse (Maybe (Maybe ResponseMetadata))
+lmrResponseMetadata :: Lens' LogMessageResponse (Maybe ResponseMetadata)
 lmrResponseMetadata
   = lens _lmrResponseMetadata
       (\ s a -> s{_lmrResponseMetadata = a})
@@ -1184,10 +1184,10 @@ data Lead = Lead
     , _lEmail            :: !(Maybe Text)
     , _lFamilyName       :: !(Maybe Text)
     , _lPhoneNumber      :: !(Maybe Text)
-    , _lMinMonthlyBudget :: !(Maybe (Maybe Money))
+    , _lMinMonthlyBudget :: !(Maybe Money)
     , _lId               :: !(Maybe Text)
     , _lComments         :: !(Maybe Text)
-    , _lWebsiteUrl       :: !(Maybe Text)
+    , _lWebsiteURL       :: !(Maybe Text)
     , _lType             :: !(Maybe Text)
     , _lGpsMotivations   :: !(Maybe [Text])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -1210,7 +1210,7 @@ data Lead = Lead
 --
 -- * 'lComments'
 --
--- * 'lWebsiteUrl'
+-- * 'lWebsiteURL'
 --
 -- * 'lType'
 --
@@ -1226,7 +1226,7 @@ lead =
     , _lMinMonthlyBudget = Nothing
     , _lId = Nothing
     , _lComments = Nothing
-    , _lWebsiteUrl = Nothing
+    , _lWebsiteURL = Nothing
     , _lType = Nothing
     , _lGpsMotivations = Nothing
     }
@@ -1251,7 +1251,7 @@ lPhoneNumber
   = lens _lPhoneNumber (\ s a -> s{_lPhoneNumber = a})
 
 -- | The minimum monthly budget lead source is willing to spend.
-lMinMonthlyBudget :: Lens' Lead (Maybe (Maybe Money))
+lMinMonthlyBudget :: Lens' Lead (Maybe Money)
 lMinMonthlyBudget
   = lens _lMinMonthlyBudget
       (\ s a -> s{_lMinMonthlyBudget = a})
@@ -1266,9 +1266,9 @@ lComments
   = lens _lComments (\ s a -> s{_lComments = a})
 
 -- | Website URL of lead source.
-lWebsiteUrl :: Lens' Lead (Maybe Text)
-lWebsiteUrl
-  = lens _lWebsiteUrl (\ s a -> s{_lWebsiteUrl = a})
+lWebsiteURL :: Lens' Lead (Maybe Text)
+lWebsiteURL
+  = lens _lWebsiteURL (\ s a -> s{_lWebsiteURL = a})
 
 -- | Type of lead.
 lType :: Lens' Lead (Maybe Text)
@@ -1307,7 +1307,7 @@ instance ToJSON Lead where
                   ("phoneNumber" .=) <$> _lPhoneNumber,
                   ("minMonthlyBudget" .=) <$> _lMinMonthlyBudget,
                   ("id" .=) <$> _lId, ("comments" .=) <$> _lComments,
-                  ("websiteUrl" .=) <$> _lWebsiteUrl,
+                  ("websiteUrl" .=) <$> _lWebsiteURL,
                   ("type" .=) <$> _lType,
                   ("gpsMotivations" .=) <$> _lGpsMotivations])
 
@@ -1316,17 +1316,17 @@ instance ToJSON Lead where
 --
 -- /See:/ 'company' smart constructor.
 data Company = Company
-    { _cPublicProfile             :: !(Maybe (Maybe PublicProfile))
-    , _cOriginalMinMonthlyBudget  :: !(Maybe (Maybe Money))
+    { _cPublicProfile             :: !(Maybe PublicProfile)
+    , _cOriginalMinMonthlyBudget  :: !(Maybe Money)
     , _cIndustries                :: !(Maybe [Text])
-    , _cConvertedMinMonthlyBudget :: !(Maybe (Maybe Money))
+    , _cConvertedMinMonthlyBudget :: !(Maybe Money)
     , _cName                      :: !(Maybe Text)
-    , _cLocalizedInfos            :: !(Maybe [Maybe LocalizedCompanyInfo])
-    , _cCertificationStatuses     :: !(Maybe [Maybe CertificationStatus])
-    , _cRanks                     :: !(Maybe [Maybe Rank])
+    , _cLocalizedInfos            :: !(Maybe [LocalizedCompanyInfo])
+    , _cCertificationStatuses     :: !(Maybe [CertificationStatus])
+    , _cRanks                     :: !(Maybe [Rank])
     , _cId                        :: !(Maybe Text)
-    , _cWebsiteUrl                :: !(Maybe Text)
-    , _cLocations                 :: !(Maybe [Maybe Location])
+    , _cWebsiteURL                :: !(Maybe Text)
+    , _cLocations                 :: !(Maybe [Location])
     , _cServices                  :: !(Maybe [Text])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1352,7 +1352,7 @@ data Company = Company
 --
 -- * 'cId'
 --
--- * 'cWebsiteUrl'
+-- * 'cWebsiteURL'
 --
 -- * 'cLocations'
 --
@@ -1370,20 +1370,20 @@ company =
     , _cCertificationStatuses = Nothing
     , _cRanks = Nothing
     , _cId = Nothing
-    , _cWebsiteUrl = Nothing
+    , _cWebsiteURL = Nothing
     , _cLocations = Nothing
     , _cServices = Nothing
     }
 
 -- | Basic information from the company\'s public profile.
-cPublicProfile :: Lens' Company (Maybe (Maybe PublicProfile))
+cPublicProfile :: Lens' Company (Maybe PublicProfile)
 cPublicProfile
   = lens _cPublicProfile
       (\ s a -> s{_cPublicProfile = a})
 
 -- | The unconverted minimum monthly budget that the company accepts for
 -- partner business.
-cOriginalMinMonthlyBudget :: Lens' Company (Maybe (Maybe Money))
+cOriginalMinMonthlyBudget :: Lens' Company (Maybe Money)
 cOriginalMinMonthlyBudget
   = lens _cOriginalMinMonthlyBudget
       (\ s a -> s{_cOriginalMinMonthlyBudget = a})
@@ -1397,7 +1397,7 @@ cIndustries
 
 -- | The minimum monthly budget that the company accepts for partner
 -- business, converted to the requested currency code.
-cConvertedMinMonthlyBudget :: Lens' Company (Maybe (Maybe Money))
+cConvertedMinMonthlyBudget :: Lens' Company (Maybe Money)
 cConvertedMinMonthlyBudget
   = lens _cConvertedMinMonthlyBudget
       (\ s a -> s{_cConvertedMinMonthlyBudget = a})
@@ -1407,7 +1407,7 @@ cName :: Lens' Company (Maybe Text)
 cName = lens _cName (\ s a -> s{_cName = a})
 
 -- | The list of localized info for the company.
-cLocalizedInfos :: Lens' Company [Maybe LocalizedCompanyInfo]
+cLocalizedInfos :: Lens' Company [LocalizedCompanyInfo]
 cLocalizedInfos
   = lens _cLocalizedInfos
       (\ s a -> s{_cLocalizedInfos = a})
@@ -1415,7 +1415,7 @@ cLocalizedInfos
       . _Coerce
 
 -- | The list of Google Partners certification statuses for the company.
-cCertificationStatuses :: Lens' Company [Maybe CertificationStatus]
+cCertificationStatuses :: Lens' Company [CertificationStatus]
 cCertificationStatuses
   = lens _cCertificationStatuses
       (\ s a -> s{_cCertificationStatuses = a})
@@ -1424,7 +1424,7 @@ cCertificationStatuses
 
 -- | Information related to the ranking of the company within the list of
 -- companies.
-cRanks :: Lens' Company [Maybe Rank]
+cRanks :: Lens' Company [Rank]
 cRanks
   = lens _cRanks (\ s a -> s{_cRanks = a}) . _Default .
       _Coerce
@@ -1434,12 +1434,12 @@ cId :: Lens' Company (Maybe Text)
 cId = lens _cId (\ s a -> s{_cId = a})
 
 -- | URL of the company\'s website.
-cWebsiteUrl :: Lens' Company (Maybe Text)
-cWebsiteUrl
-  = lens _cWebsiteUrl (\ s a -> s{_cWebsiteUrl = a})
+cWebsiteURL :: Lens' Company (Maybe Text)
+cWebsiteURL
+  = lens _cWebsiteURL (\ s a -> s{_cWebsiteURL = a})
 
 -- | The list of company locations.
-cLocations :: Lens' Company [Maybe Location]
+cLocations :: Lens' Company [Location]
 cLocations
   = lens _cLocations (\ s a -> s{_cLocations = a}) .
       _Default
@@ -1485,7 +1485,7 @@ instance ToJSON Company where
                   ("certificationStatuses" .=) <$>
                     _cCertificationStatuses,
                   ("ranks" .=) <$> _cRanks, ("id" .=) <$> _cId,
-                  ("websiteUrl" .=) <$> _cWebsiteUrl,
+                  ("websiteUrl" .=) <$> _cWebsiteURL,
                   ("locations" .=) <$> _cLocations,
                   ("services" .=) <$> _cServices])
 
@@ -1493,7 +1493,7 @@ instance ToJSON Company where
 --
 -- /See:/ 'logUserEventResponse' smart constructor.
 newtype LogUserEventResponse = LogUserEventResponse
-    { _luerResponseMetadata :: Maybe (Maybe ResponseMetadata)
+    { _luerResponseMetadata :: Maybe ResponseMetadata
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LogUserEventResponse' with the minimum fields required to make a request.
@@ -1509,7 +1509,7 @@ logUserEventResponse =
     }
 
 -- | Current response metadata.
-luerResponseMetadata :: Lens' LogUserEventResponse (Maybe (Maybe ResponseMetadata))
+luerResponseMetadata :: Lens' LogUserEventResponse (Maybe ResponseMetadata)
 luerResponseMetadata
   = lens _luerResponseMetadata
       (\ s a -> s{_luerResponseMetadata = a})
@@ -1531,11 +1531,11 @@ instance ToJSON LogUserEventResponse where
 -- /See:/ 'logUserEventRequest' smart constructor.
 data LogUserEventRequest = LogUserEventRequest
     { _luerEventCategory   :: !(Maybe Text)
-    , _luerRequestMetadata :: !(Maybe (Maybe RequestMetadata))
-    , _luerUrl             :: !(Maybe Text)
+    , _luerRequestMetadata :: !(Maybe RequestMetadata)
+    , _luerURL             :: !(Maybe Text)
     , _luerEventScope      :: !(Maybe Text)
-    , _luerLead            :: !(Maybe (Maybe Lead))
-    , _luerEventDatas      :: !(Maybe [Maybe EventData])
+    , _luerLead            :: !(Maybe Lead)
+    , _luerEventDatas      :: !(Maybe [EventData])
     , _luerEventAction     :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1547,7 +1547,7 @@ data LogUserEventRequest = LogUserEventRequest
 --
 -- * 'luerRequestMetadata'
 --
--- * 'luerUrl'
+-- * 'luerURL'
 --
 -- * 'luerEventScope'
 --
@@ -1562,7 +1562,7 @@ logUserEventRequest =
     LogUserEventRequest
     { _luerEventCategory = Nothing
     , _luerRequestMetadata = Nothing
-    , _luerUrl = Nothing
+    , _luerURL = Nothing
     , _luerEventScope = Nothing
     , _luerLead = Nothing
     , _luerEventDatas = Nothing
@@ -1576,14 +1576,14 @@ luerEventCategory
       (\ s a -> s{_luerEventCategory = a})
 
 -- | Current request metadata.
-luerRequestMetadata :: Lens' LogUserEventRequest (Maybe (Maybe RequestMetadata))
+luerRequestMetadata :: Lens' LogUserEventRequest (Maybe RequestMetadata)
 luerRequestMetadata
   = lens _luerRequestMetadata
       (\ s a -> s{_luerRequestMetadata = a})
 
 -- | The URL where the event occurred.
-luerUrl :: Lens' LogUserEventRequest (Maybe Text)
-luerUrl = lens _luerUrl (\ s a -> s{_luerUrl = a})
+luerURL :: Lens' LogUserEventRequest (Maybe Text)
+luerURL = lens _luerURL (\ s a -> s{_luerURL = a})
 
 -- | The scope of the event.
 luerEventScope :: Lens' LogUserEventRequest (Maybe Text)
@@ -1592,11 +1592,11 @@ luerEventScope
       (\ s a -> s{_luerEventScope = a})
 
 -- | Advertiser lead information.
-luerLead :: Lens' LogUserEventRequest (Maybe (Maybe Lead))
+luerLead :: Lens' LogUserEventRequest (Maybe Lead)
 luerLead = lens _luerLead (\ s a -> s{_luerLead = a})
 
 -- | List of event data for the event.
-luerEventDatas :: Lens' LogUserEventRequest [Maybe EventData]
+luerEventDatas :: Lens' LogUserEventRequest [EventData]
 luerEventDatas
   = lens _luerEventDatas
       (\ s a -> s{_luerEventDatas = a})
@@ -1627,7 +1627,7 @@ instance ToJSON LogUserEventRequest where
               (catMaybes
                  [("eventCategory" .=) <$> _luerEventCategory,
                   ("requestMetadata" .=) <$> _luerRequestMetadata,
-                  ("url" .=) <$> _luerUrl,
+                  ("url" .=) <$> _luerURL,
                   ("eventScope" .=) <$> _luerEventScope,
                   ("lead" .=) <$> _luerLead,
                   ("eventDatas" .=) <$> _luerEventDatas,
@@ -1679,9 +1679,9 @@ instance ToJSON Rank where
 --
 -- /See:/ 'createLeadRequest' smart constructor.
 data CreateLeadRequest = CreateLeadRequest
-    { _cRequestMetadata    :: !(Maybe (Maybe RequestMetadata))
-    , _cRecaptchaChallenge :: !(Maybe (Maybe RecaptchaChallenge))
-    , _cLead               :: !(Maybe (Maybe Lead))
+    { _cRequestMetadata    :: !(Maybe RequestMetadata)
+    , _cRecaptchaChallenge :: !(Maybe RecaptchaChallenge)
+    , _cLead               :: !(Maybe Lead)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreateLeadRequest' with the minimum fields required to make a request.
@@ -1703,13 +1703,13 @@ createLeadRequest =
     }
 
 -- | Current request metadata.
-cRequestMetadata :: Lens' CreateLeadRequest (Maybe (Maybe RequestMetadata))
+cRequestMetadata :: Lens' CreateLeadRequest (Maybe RequestMetadata)
 cRequestMetadata
   = lens _cRequestMetadata
       (\ s a -> s{_cRequestMetadata = a})
 
 -- | reCaptcha challenge info.
-cRecaptchaChallenge :: Lens' CreateLeadRequest (Maybe (Maybe RecaptchaChallenge))
+cRecaptchaChallenge :: Lens' CreateLeadRequest (Maybe RecaptchaChallenge)
 cRecaptchaChallenge
   = lens _cRecaptchaChallenge
       (\ s a -> s{_cRecaptchaChallenge = a})
@@ -1717,7 +1717,7 @@ cRecaptchaChallenge
 -- | The lead resource. The \`LeadType\` must not be
 -- \`LEAD_TYPE_UNSPECIFIED\` and either \`email\` or \`phone_number\` must
 -- be provided.
-cLead :: Lens' CreateLeadRequest (Maybe (Maybe Lead))
+cLead :: Lens' CreateLeadRequest (Maybe Lead)
 cLead = lens _cLead (\ s a -> s{_cLead = a})
 
 instance FromJSON CreateLeadRequest where

@@ -32,12 +32,12 @@ module Network.Google.Resource.PlusDomains.Comments.Insert
     -- * Request Lenses
     , ciQuotaUser
     , ciPrettyPrint
-    , ciUserIp
+    , ciUserIP
     , ciActivityId
     , ciKey
-    , ciOauthToken
+    , ciOAuthToken
+    , ciComment
     , ciFields
-    , ciAlt
     ) where
 
 import           Network.Google.PlusDomains.Types
@@ -52,10 +52,11 @@ type CommentsInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] Comment
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Comment :> Post '[JSON] Comment
 
 -- | Create a new comment in reply to an activity.
 --
@@ -63,12 +64,12 @@ type CommentsInsertResource =
 data CommentsInsert' = CommentsInsert'
     { _ciQuotaUser   :: !(Maybe Text)
     , _ciPrettyPrint :: !Bool
-    , _ciUserIp      :: !(Maybe Text)
+    , _ciUserIP      :: !(Maybe Text)
     , _ciActivityId  :: !Text
-    , _ciKey         :: !(Maybe Text)
-    , _ciOauthToken  :: !(Maybe Text)
+    , _ciKey         :: !(Maybe Key)
+    , _ciOAuthToken  :: !(Maybe OAuthToken)
+    , _ciComment     :: !Comment
     , _ciFields      :: !(Maybe Text)
-    , _ciAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsInsert'' with the minimum fields required to make a request.
@@ -79,30 +80,31 @@ data CommentsInsert' = CommentsInsert'
 --
 -- * 'ciPrettyPrint'
 --
--- * 'ciUserIp'
+-- * 'ciUserIP'
 --
 -- * 'ciActivityId'
 --
 -- * 'ciKey'
 --
--- * 'ciOauthToken'
+-- * 'ciOAuthToken'
+--
+-- * 'ciComment'
 --
 -- * 'ciFields'
---
--- * 'ciAlt'
 commentsInsert'
     :: Text -- ^ 'activityId'
+    -> Comment -- ^ 'Comment'
     -> CommentsInsert'
-commentsInsert' pCiActivityId_ =
+commentsInsert' pCiActivityId_ pCiComment_ =
     CommentsInsert'
     { _ciQuotaUser = Nothing
     , _ciPrettyPrint = True
-    , _ciUserIp = Nothing
+    , _ciUserIP = Nothing
     , _ciActivityId = pCiActivityId_
     , _ciKey = Nothing
-    , _ciOauthToken = Nothing
+    , _ciOAuthToken = Nothing
+    , _ciComment = pCiComment_
     , _ciFields = Nothing
-    , _ciAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,8 +122,8 @@ ciPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ciUserIp :: Lens' CommentsInsert' (Maybe Text)
-ciUserIp = lens _ciUserIp (\ s a -> s{_ciUserIp = a})
+ciUserIP :: Lens' CommentsInsert' (Maybe Text)
+ciUserIP = lens _ciUserIP (\ s a -> s{_ciUserIP = a})
 
 -- | The ID of the activity to reply to.
 ciActivityId :: Lens' CommentsInsert' Text
@@ -131,32 +133,38 @@ ciActivityId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ciKey :: Lens' CommentsInsert' (Maybe Text)
+ciKey :: Lens' CommentsInsert' (Maybe Key)
 ciKey = lens _ciKey (\ s a -> s{_ciKey = a})
 
 -- | OAuth 2.0 token for the current user.
-ciOauthToken :: Lens' CommentsInsert' (Maybe Text)
-ciOauthToken
-  = lens _ciOauthToken (\ s a -> s{_ciOauthToken = a})
+ciOAuthToken :: Lens' CommentsInsert' (Maybe OAuthToken)
+ciOAuthToken
+  = lens _ciOAuthToken (\ s a -> s{_ciOAuthToken = a})
+
+-- | Multipart request metadata.
+ciComment :: Lens' CommentsInsert' Comment
+ciComment
+  = lens _ciComment (\ s a -> s{_ciComment = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ciFields :: Lens' CommentsInsert' (Maybe Text)
 ciFields = lens _ciFields (\ s a -> s{_ciFields = a})
 
--- | Data format for the response.
-ciAlt :: Lens' CommentsInsert' Alt
-ciAlt = lens _ciAlt (\ s a -> s{_ciAlt = a})
+instance GoogleAuth CommentsInsert' where
+        authKey = ciKey . _Just
+        authToken = ciOAuthToken . _Just
 
 instance GoogleRequest CommentsInsert' where
         type Rs CommentsInsert' = Comment
         request = requestWithRoute defReq plusDomainsURL
         requestWithRoute r u CommentsInsert'{..}
-          = go _ciQuotaUser (Just _ciPrettyPrint) _ciUserIp
+          = go _ciQuotaUser (Just _ciPrettyPrint) _ciUserIP
               _ciActivityId
               _ciKey
-              _ciOauthToken
+              _ciOAuthToken
               _ciFields
-              (Just _ciAlt)
+              (Just AltJSON)
+              _ciComment
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CommentsInsertResource)

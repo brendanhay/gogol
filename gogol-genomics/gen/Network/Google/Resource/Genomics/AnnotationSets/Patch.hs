@@ -36,11 +36,11 @@ module Network.Google.Resource.Genomics.AnnotationSets.Patch
     , aspQuotaUser
     , aspPrettyPrint
     , aspAnnotationSetId
-    , aspUserIp
+    , aspUserIP
     , aspKey
-    , aspOauthToken
+    , aspAnnotationSet
+    , aspOAuthToken
     , aspFields
-    , aspAlt
     ) where
 
 import           Network.Google.Genomics.Types
@@ -54,10 +54,12 @@ type AnnotationSetsPatchResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Patch '[JSON] AnnotationSet
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] AnnotationSet :>
+                         Patch '[JSON] AnnotationSet
 
 -- | Updates an annotation set. The update must respect all mutability
 -- restrictions and other invariants described on the annotation set
@@ -69,11 +71,11 @@ data AnnotationSetsPatch' = AnnotationSetsPatch'
     { _aspQuotaUser       :: !(Maybe Text)
     , _aspPrettyPrint     :: !Bool
     , _aspAnnotationSetId :: !Text
-    , _aspUserIp          :: !(Maybe Text)
-    , _aspKey             :: !(Maybe Text)
-    , _aspOauthToken      :: !(Maybe Text)
+    , _aspUserIP          :: !(Maybe Text)
+    , _aspKey             :: !(Maybe Key)
+    , _aspAnnotationSet   :: !AnnotationSet
+    , _aspOAuthToken      :: !(Maybe OAuthToken)
     , _aspFields          :: !(Maybe Text)
-    , _aspAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnnotationSetsPatch'' with the minimum fields required to make a request.
@@ -86,28 +88,29 @@ data AnnotationSetsPatch' = AnnotationSetsPatch'
 --
 -- * 'aspAnnotationSetId'
 --
--- * 'aspUserIp'
+-- * 'aspUserIP'
 --
 -- * 'aspKey'
 --
--- * 'aspOauthToken'
+-- * 'aspAnnotationSet'
+--
+-- * 'aspOAuthToken'
 --
 -- * 'aspFields'
---
--- * 'aspAlt'
 annotationSetsPatch'
     :: Text -- ^ 'annotationSetId'
+    -> AnnotationSet -- ^ 'AnnotationSet'
     -> AnnotationSetsPatch'
-annotationSetsPatch' pAspAnnotationSetId_ =
+annotationSetsPatch' pAspAnnotationSetId_ pAspAnnotationSet_ =
     AnnotationSetsPatch'
     { _aspQuotaUser = Nothing
     , _aspPrettyPrint = True
     , _aspAnnotationSetId = pAspAnnotationSetId_
-    , _aspUserIp = Nothing
+    , _aspUserIP = Nothing
     , _aspKey = Nothing
-    , _aspOauthToken = Nothing
+    , _aspAnnotationSet = pAspAnnotationSet_
+    , _aspOAuthToken = Nothing
     , _aspFields = Nothing
-    , _aspAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -131,30 +134,36 @@ aspAnnotationSetId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-aspUserIp :: Lens' AnnotationSetsPatch' (Maybe Text)
-aspUserIp
-  = lens _aspUserIp (\ s a -> s{_aspUserIp = a})
+aspUserIP :: Lens' AnnotationSetsPatch' (Maybe Text)
+aspUserIP
+  = lens _aspUserIP (\ s a -> s{_aspUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aspKey :: Lens' AnnotationSetsPatch' (Maybe Text)
+aspKey :: Lens' AnnotationSetsPatch' (Maybe Key)
 aspKey = lens _aspKey (\ s a -> s{_aspKey = a})
 
+-- | Multipart request metadata.
+aspAnnotationSet :: Lens' AnnotationSetsPatch' AnnotationSet
+aspAnnotationSet
+  = lens _aspAnnotationSet
+      (\ s a -> s{_aspAnnotationSet = a})
+
 -- | OAuth 2.0 token for the current user.
-aspOauthToken :: Lens' AnnotationSetsPatch' (Maybe Text)
-aspOauthToken
-  = lens _aspOauthToken
-      (\ s a -> s{_aspOauthToken = a})
+aspOAuthToken :: Lens' AnnotationSetsPatch' (Maybe OAuthToken)
+aspOAuthToken
+  = lens _aspOAuthToken
+      (\ s a -> s{_aspOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 aspFields :: Lens' AnnotationSetsPatch' (Maybe Text)
 aspFields
   = lens _aspFields (\ s a -> s{_aspFields = a})
 
--- | Data format for the response.
-aspAlt :: Lens' AnnotationSetsPatch' Alt
-aspAlt = lens _aspAlt (\ s a -> s{_aspAlt = a})
+instance GoogleAuth AnnotationSetsPatch' where
+        authKey = aspKey . _Just
+        authToken = aspOAuthToken . _Just
 
 instance GoogleRequest AnnotationSetsPatch' where
         type Rs AnnotationSetsPatch' = AnnotationSet
@@ -162,11 +171,12 @@ instance GoogleRequest AnnotationSetsPatch' where
         requestWithRoute r u AnnotationSetsPatch'{..}
           = go _aspQuotaUser (Just _aspPrettyPrint)
               _aspAnnotationSetId
-              _aspUserIp
+              _aspUserIP
               _aspKey
-              _aspOauthToken
+              _aspOAuthToken
               _aspFields
-              (Just _aspAlt)
+              (Just AltJSON)
+              _aspAnnotationSet
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AnnotationSetsPatchResource)

@@ -19,7 +19,7 @@
 --
 -- | Updates a GTM Trigger.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersTriggersUpdate@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersTriggersUpdate@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Triggers.Update
     (
     -- * REST Resource
@@ -34,19 +34,19 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Triggers.Update
     , actuPrettyPrint
     , actuContainerId
     , actuTriggerId
-    , actuUserIp
+    , actuUserIP
     , actuFingerprint
     , actuAccountId
     , actuKey
-    , actuOauthToken
+    , actuTrigger
+    , actuOAuthToken
     , actuFields
-    , actuAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagmanagerAccountsContainersTriggersUpdate@ which the
+-- | A resource alias for @TagManagerAccountsContainersTriggersUpdate@ which the
 -- 'AccountsContainersTriggersUpdate'' request conforms to.
 type AccountsContainersTriggersUpdateResource =
      "accounts" :>
@@ -59,10 +59,11 @@ type AccountsContainersTriggersUpdateResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "fingerprint" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :> Put '[JSON] Trigger
+                               QueryParam "alt" AltJSON :>
+                                 ReqBody '[JSON] Trigger :> Put '[JSON] Trigger
 
 -- | Updates a GTM Trigger.
 --
@@ -72,13 +73,13 @@ data AccountsContainersTriggersUpdate' = AccountsContainersTriggersUpdate'
     , _actuPrettyPrint :: !Bool
     , _actuContainerId :: !Text
     , _actuTriggerId   :: !Text
-    , _actuUserIp      :: !(Maybe Text)
+    , _actuUserIP      :: !(Maybe Text)
     , _actuFingerprint :: !(Maybe Text)
     , _actuAccountId   :: !Text
-    , _actuKey         :: !(Maybe Text)
-    , _actuOauthToken  :: !(Maybe Text)
+    , _actuKey         :: !(Maybe Key)
+    , _actuTrigger     :: !Trigger
+    , _actuOAuthToken  :: !(Maybe OAuthToken)
     , _actuFields      :: !(Maybe Text)
-    , _actuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersTriggersUpdate'' with the minimum fields required to make a request.
@@ -93,7 +94,7 @@ data AccountsContainersTriggersUpdate' = AccountsContainersTriggersUpdate'
 --
 -- * 'actuTriggerId'
 --
--- * 'actuUserIp'
+-- * 'actuUserIP'
 --
 -- * 'actuFingerprint'
 --
@@ -101,29 +102,30 @@ data AccountsContainersTriggersUpdate' = AccountsContainersTriggersUpdate'
 --
 -- * 'actuKey'
 --
--- * 'actuOauthToken'
+-- * 'actuTrigger'
+--
+-- * 'actuOAuthToken'
 --
 -- * 'actuFields'
---
--- * 'actuAlt'
 accountsContainersTriggersUpdate'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'triggerId'
     -> Text -- ^ 'accountId'
+    -> Trigger -- ^ 'Trigger'
     -> AccountsContainersTriggersUpdate'
-accountsContainersTriggersUpdate' pActuContainerId_ pActuTriggerId_ pActuAccountId_ =
+accountsContainersTriggersUpdate' pActuContainerId_ pActuTriggerId_ pActuAccountId_ pActuTrigger_ =
     AccountsContainersTriggersUpdate'
     { _actuQuotaUser = Nothing
     , _actuPrettyPrint = True
     , _actuContainerId = pActuContainerId_
     , _actuTriggerId = pActuTriggerId_
-    , _actuUserIp = Nothing
+    , _actuUserIP = Nothing
     , _actuFingerprint = Nothing
     , _actuAccountId = pActuAccountId_
     , _actuKey = Nothing
-    , _actuOauthToken = Nothing
+    , _actuTrigger = pActuTrigger_
+    , _actuOAuthToken = Nothing
     , _actuFields = Nothing
-    , _actuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -154,9 +156,9 @@ actuTriggerId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-actuUserIp :: Lens' AccountsContainersTriggersUpdate' (Maybe Text)
-actuUserIp
-  = lens _actuUserIp (\ s a -> s{_actuUserIp = a})
+actuUserIP :: Lens' AccountsContainersTriggersUpdate' (Maybe Text)
+actuUserIP
+  = lens _actuUserIP (\ s a -> s{_actuUserIP = a})
 
 -- | When provided, this fingerprint must match the fingerprint of the
 -- trigger in storage.
@@ -174,23 +176,29 @@ actuAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-actuKey :: Lens' AccountsContainersTriggersUpdate' (Maybe Text)
+actuKey :: Lens' AccountsContainersTriggersUpdate' (Maybe Key)
 actuKey = lens _actuKey (\ s a -> s{_actuKey = a})
 
+-- | Multipart request metadata.
+actuTrigger :: Lens' AccountsContainersTriggersUpdate' Trigger
+actuTrigger
+  = lens _actuTrigger (\ s a -> s{_actuTrigger = a})
+
 -- | OAuth 2.0 token for the current user.
-actuOauthToken :: Lens' AccountsContainersTriggersUpdate' (Maybe Text)
-actuOauthToken
-  = lens _actuOauthToken
-      (\ s a -> s{_actuOauthToken = a})
+actuOAuthToken :: Lens' AccountsContainersTriggersUpdate' (Maybe OAuthToken)
+actuOAuthToken
+  = lens _actuOAuthToken
+      (\ s a -> s{_actuOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 actuFields :: Lens' AccountsContainersTriggersUpdate' (Maybe Text)
 actuFields
   = lens _actuFields (\ s a -> s{_actuFields = a})
 
--- | Data format for the response.
-actuAlt :: Lens' AccountsContainersTriggersUpdate' Alt
-actuAlt = lens _actuAlt (\ s a -> s{_actuAlt = a})
+instance GoogleAuth AccountsContainersTriggersUpdate'
+         where
+        authKey = actuKey . _Just
+        authToken = actuOAuthToken . _Just
 
 instance GoogleRequest
          AccountsContainersTriggersUpdate' where
@@ -201,13 +209,14 @@ instance GoogleRequest
           = go _actuQuotaUser (Just _actuPrettyPrint)
               _actuContainerId
               _actuTriggerId
-              _actuUserIp
+              _actuUserIP
               _actuFingerprint
               _actuAccountId
               _actuKey
-              _actuOauthToken
+              _actuOAuthToken
               _actuFields
-              (Just _actuAlt)
+              (Just AltJSON)
+              _actuTrigger
           where go
                   = clientWithRoute
                       (Proxy ::

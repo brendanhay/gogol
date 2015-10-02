@@ -32,14 +32,14 @@ module Network.Google.Resource.Drive.Replies.Patch
     -- * Request Lenses
     , rpQuotaUser
     , rpPrettyPrint
-    , rpUserIp
+    , rpUserIP
+    , rpCommentReply
     , rpKey
     , rpReplyId
     , rpFileId
-    , rpOauthToken
+    , rpOAuthToken
     , rpCommentId
     , rpFields
-    , rpAlt
     ) where
 
 import           Network.Google.Drive.Types
@@ -57,25 +57,27 @@ type RepliesPatchResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Patch '[JSON] CommentReply
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] CommentReply :>
+                                 Patch '[JSON] CommentReply
 
 -- | Updates an existing reply. This method supports patch semantics.
 --
 -- /See:/ 'repliesPatch'' smart constructor.
 data RepliesPatch' = RepliesPatch'
-    { _rpQuotaUser   :: !(Maybe Text)
-    , _rpPrettyPrint :: !Bool
-    , _rpUserIp      :: !(Maybe Text)
-    , _rpKey         :: !(Maybe Text)
-    , _rpReplyId     :: !Text
-    , _rpFileId      :: !Text
-    , _rpOauthToken  :: !(Maybe Text)
-    , _rpCommentId   :: !Text
-    , _rpFields      :: !(Maybe Text)
-    , _rpAlt         :: !Alt
+    { _rpQuotaUser    :: !(Maybe Text)
+    , _rpPrettyPrint  :: !Bool
+    , _rpUserIP       :: !(Maybe Text)
+    , _rpCommentReply :: !CommentReply
+    , _rpKey          :: !(Maybe Key)
+    , _rpReplyId      :: !Text
+    , _rpFileId       :: !Text
+    , _rpOAuthToken   :: !(Maybe OAuthToken)
+    , _rpCommentId    :: !Text
+    , _rpFields       :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RepliesPatch'' with the minimum fields required to make a request.
@@ -86,7 +88,9 @@ data RepliesPatch' = RepliesPatch'
 --
 -- * 'rpPrettyPrint'
 --
--- * 'rpUserIp'
+-- * 'rpUserIP'
+--
+-- * 'rpCommentReply'
 --
 -- * 'rpKey'
 --
@@ -94,30 +98,29 @@ data RepliesPatch' = RepliesPatch'
 --
 -- * 'rpFileId'
 --
--- * 'rpOauthToken'
+-- * 'rpOAuthToken'
 --
 -- * 'rpCommentId'
 --
 -- * 'rpFields'
---
--- * 'rpAlt'
 repliesPatch'
-    :: Text -- ^ 'replyId'
+    :: CommentReply -- ^ 'CommentReply'
+    -> Text -- ^ 'replyId'
     -> Text -- ^ 'fileId'
     -> Text -- ^ 'commentId'
     -> RepliesPatch'
-repliesPatch' pRpReplyId_ pRpFileId_ pRpCommentId_ =
+repliesPatch' pRpCommentReply_ pRpReplyId_ pRpFileId_ pRpCommentId_ =
     RepliesPatch'
     { _rpQuotaUser = Nothing
     , _rpPrettyPrint = True
-    , _rpUserIp = Nothing
+    , _rpUserIP = Nothing
+    , _rpCommentReply = pRpCommentReply_
     , _rpKey = Nothing
     , _rpReplyId = pRpReplyId_
     , _rpFileId = pRpFileId_
-    , _rpOauthToken = Nothing
+    , _rpOAuthToken = Nothing
     , _rpCommentId = pRpCommentId_
     , _rpFields = Nothing
-    , _rpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,13 +138,19 @@ rpPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rpUserIp :: Lens' RepliesPatch' (Maybe Text)
-rpUserIp = lens _rpUserIp (\ s a -> s{_rpUserIp = a})
+rpUserIP :: Lens' RepliesPatch' (Maybe Text)
+rpUserIP = lens _rpUserIP (\ s a -> s{_rpUserIP = a})
+
+-- | Multipart request metadata.
+rpCommentReply :: Lens' RepliesPatch' CommentReply
+rpCommentReply
+  = lens _rpCommentReply
+      (\ s a -> s{_rpCommentReply = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rpKey :: Lens' RepliesPatch' (Maybe Text)
+rpKey :: Lens' RepliesPatch' (Maybe Key)
 rpKey = lens _rpKey (\ s a -> s{_rpKey = a})
 
 -- | The ID of the reply.
@@ -154,9 +163,9 @@ rpFileId :: Lens' RepliesPatch' Text
 rpFileId = lens _rpFileId (\ s a -> s{_rpFileId = a})
 
 -- | OAuth 2.0 token for the current user.
-rpOauthToken :: Lens' RepliesPatch' (Maybe Text)
-rpOauthToken
-  = lens _rpOauthToken (\ s a -> s{_rpOauthToken = a})
+rpOAuthToken :: Lens' RepliesPatch' (Maybe OAuthToken)
+rpOAuthToken
+  = lens _rpOAuthToken (\ s a -> s{_rpOAuthToken = a})
 
 -- | The ID of the comment.
 rpCommentId :: Lens' RepliesPatch' Text
@@ -167,22 +176,23 @@ rpCommentId
 rpFields :: Lens' RepliesPatch' (Maybe Text)
 rpFields = lens _rpFields (\ s a -> s{_rpFields = a})
 
--- | Data format for the response.
-rpAlt :: Lens' RepliesPatch' Alt
-rpAlt = lens _rpAlt (\ s a -> s{_rpAlt = a})
+instance GoogleAuth RepliesPatch' where
+        authKey = rpKey . _Just
+        authToken = rpOAuthToken . _Just
 
 instance GoogleRequest RepliesPatch' where
         type Rs RepliesPatch' = CommentReply
         request = requestWithRoute defReq driveURL
         requestWithRoute r u RepliesPatch'{..}
-          = go _rpQuotaUser (Just _rpPrettyPrint) _rpUserIp
+          = go _rpQuotaUser (Just _rpPrettyPrint) _rpUserIP
               _rpKey
               _rpReplyId
               _rpFileId
-              _rpOauthToken
+              _rpOAuthToken
               _rpCommentId
               _rpFields
-              (Just _rpAlt)
+              (Just AltJSON)
+              _rpCommentReply
           where go
                   = clientWithRoute
                       (Proxy :: Proxy RepliesPatchResource)

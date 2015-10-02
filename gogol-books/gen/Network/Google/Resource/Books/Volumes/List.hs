@@ -33,7 +33,7 @@ module Network.Google.Resource.Books.Volumes.List
     , vlQuotaUser
     , vlPrettyPrint
     , vlOrderBy
-    , vlUserIp
+    , vlUserIP
     , vlLibraryRestrict
     , vlPartner
     , vlQ
@@ -43,13 +43,12 @@ module Network.Google.Resource.Books.Volumes.List
     , vlProjection
     , vlFilter
     , vlLangRestrict
-    , vlOauthToken
+    , vlOAuthToken
     , vlStartIndex
     , vlMaxResults
-    , vlShowPreorders
+    , vlShowPreOrders
     , vlPrintType
     , vlFields
-    , vlAlt
     ) where
 
 import           Network.Google.Books.Types
@@ -69,12 +68,12 @@ type VolumesListResource =
                  QueryParam "partner" Text :>
                    QueryParam "q" Text :>
                      QueryParam "download" BooksVolumesListDownload :>
-                       QueryParam "key" Text :>
+                       QueryParam "key" Key :>
                          QueryParam "source" Text :>
                            QueryParam "projection" BooksVolumesListProjection :>
                              QueryParam "filter" BooksVolumesListFilter :>
                                QueryParam "langRestrict" Text :>
-                                 QueryParam "oauth_token" Text :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "startIndex" Word32 :>
                                      QueryParam "maxResults" Word32 :>
                                        QueryParam "showPreorders" Bool :>
@@ -82,7 +81,7 @@ type VolumesListResource =
                                            BooksVolumesListPrintType
                                            :>
                                            QueryParam "fields" Text :>
-                                             QueryParam "alt" Alt :>
+                                             QueryParam "alt" AltJSON :>
                                                Get '[JSON] Volumes
 
 -- | Performs a book search.
@@ -92,23 +91,22 @@ data VolumesList' = VolumesList'
     { _vlQuotaUser       :: !(Maybe Text)
     , _vlPrettyPrint     :: !Bool
     , _vlOrderBy         :: !(Maybe BooksVolumesListOrderBy)
-    , _vlUserIp          :: !(Maybe Text)
+    , _vlUserIP          :: !(Maybe Text)
     , _vlLibraryRestrict :: !(Maybe BooksVolumesListLibraryRestrict)
     , _vlPartner         :: !(Maybe Text)
     , _vlQ               :: !Text
     , _vlDownload        :: !(Maybe BooksVolumesListDownload)
-    , _vlKey             :: !(Maybe Text)
+    , _vlKey             :: !(Maybe Key)
     , _vlSource          :: !(Maybe Text)
     , _vlProjection      :: !(Maybe BooksVolumesListProjection)
     , _vlFilter          :: !(Maybe BooksVolumesListFilter)
     , _vlLangRestrict    :: !(Maybe Text)
-    , _vlOauthToken      :: !(Maybe Text)
+    , _vlOAuthToken      :: !(Maybe OAuthToken)
     , _vlStartIndex      :: !(Maybe Word32)
     , _vlMaxResults      :: !(Maybe Word32)
-    , _vlShowPreorders   :: !(Maybe Bool)
+    , _vlShowPreOrders   :: !(Maybe Bool)
     , _vlPrintType       :: !(Maybe BooksVolumesListPrintType)
     , _vlFields          :: !(Maybe Text)
-    , _vlAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VolumesList'' with the minimum fields required to make a request.
@@ -121,7 +119,7 @@ data VolumesList' = VolumesList'
 --
 -- * 'vlOrderBy'
 --
--- * 'vlUserIp'
+-- * 'vlUserIP'
 --
 -- * 'vlLibraryRestrict'
 --
@@ -141,19 +139,17 @@ data VolumesList' = VolumesList'
 --
 -- * 'vlLangRestrict'
 --
--- * 'vlOauthToken'
+-- * 'vlOAuthToken'
 --
 -- * 'vlStartIndex'
 --
 -- * 'vlMaxResults'
 --
--- * 'vlShowPreorders'
+-- * 'vlShowPreOrders'
 --
 -- * 'vlPrintType'
 --
 -- * 'vlFields'
---
--- * 'vlAlt'
 volumesList'
     :: Text -- ^ 'q'
     -> VolumesList'
@@ -162,7 +158,7 @@ volumesList' pVlQ_ =
     { _vlQuotaUser = Nothing
     , _vlPrettyPrint = True
     , _vlOrderBy = Nothing
-    , _vlUserIp = Nothing
+    , _vlUserIP = Nothing
     , _vlLibraryRestrict = Nothing
     , _vlPartner = Nothing
     , _vlQ = pVlQ_
@@ -172,13 +168,12 @@ volumesList' pVlQ_ =
     , _vlProjection = Nothing
     , _vlFilter = Nothing
     , _vlLangRestrict = Nothing
-    , _vlOauthToken = Nothing
+    , _vlOAuthToken = Nothing
     , _vlStartIndex = Nothing
     , _vlMaxResults = Nothing
-    , _vlShowPreorders = Nothing
+    , _vlShowPreOrders = Nothing
     , _vlPrintType = Nothing
     , _vlFields = Nothing
-    , _vlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -201,8 +196,8 @@ vlOrderBy
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-vlUserIp :: Lens' VolumesList' (Maybe Text)
-vlUserIp = lens _vlUserIp (\ s a -> s{_vlUserIp = a})
+vlUserIP :: Lens' VolumesList' (Maybe Text)
+vlUserIP = lens _vlUserIP (\ s a -> s{_vlUserIP = a})
 
 -- | Restrict search to this user\'s library.
 vlLibraryRestrict :: Lens' VolumesList' (Maybe BooksVolumesListLibraryRestrict)
@@ -227,7 +222,7 @@ vlDownload
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vlKey :: Lens' VolumesList' (Maybe Text)
+vlKey :: Lens' VolumesList' (Maybe Key)
 vlKey = lens _vlKey (\ s a -> s{_vlKey = a})
 
 -- | String to identify the originator of this request.
@@ -250,9 +245,9 @@ vlLangRestrict
       (\ s a -> s{_vlLangRestrict = a})
 
 -- | OAuth 2.0 token for the current user.
-vlOauthToken :: Lens' VolumesList' (Maybe Text)
-vlOauthToken
-  = lens _vlOauthToken (\ s a -> s{_vlOauthToken = a})
+vlOAuthToken :: Lens' VolumesList' (Maybe OAuthToken)
+vlOAuthToken
+  = lens _vlOAuthToken (\ s a -> s{_vlOAuthToken = a})
 
 -- | Index of the first result to return (starts at 0)
 vlStartIndex :: Lens' VolumesList' (Maybe Word32)
@@ -265,10 +260,10 @@ vlMaxResults
   = lens _vlMaxResults (\ s a -> s{_vlMaxResults = a})
 
 -- | Set to true to show books available for preorder. Defaults to false.
-vlShowPreorders :: Lens' VolumesList' (Maybe Bool)
-vlShowPreorders
-  = lens _vlShowPreorders
-      (\ s a -> s{_vlShowPreorders = a})
+vlShowPreOrders :: Lens' VolumesList' (Maybe Bool)
+vlShowPreOrders
+  = lens _vlShowPreOrders
+      (\ s a -> s{_vlShowPreOrders = a})
 
 -- | Restrict to books or magazines.
 vlPrintType :: Lens' VolumesList' (Maybe BooksVolumesListPrintType)
@@ -279,16 +274,16 @@ vlPrintType
 vlFields :: Lens' VolumesList' (Maybe Text)
 vlFields = lens _vlFields (\ s a -> s{_vlFields = a})
 
--- | Data format for the response.
-vlAlt :: Lens' VolumesList' Alt
-vlAlt = lens _vlAlt (\ s a -> s{_vlAlt = a})
+instance GoogleAuth VolumesList' where
+        authKey = vlKey . _Just
+        authToken = vlOAuthToken . _Just
 
 instance GoogleRequest VolumesList' where
         type Rs VolumesList' = Volumes
         request = requestWithRoute defReq booksURL
         requestWithRoute r u VolumesList'{..}
           = go _vlQuotaUser (Just _vlPrettyPrint) _vlOrderBy
-              _vlUserIp
+              _vlUserIP
               _vlLibraryRestrict
               _vlPartner
               (Just _vlQ)
@@ -298,13 +293,13 @@ instance GoogleRequest VolumesList' where
               _vlProjection
               _vlFilter
               _vlLangRestrict
-              _vlOauthToken
+              _vlOAuthToken
               _vlStartIndex
               _vlMaxResults
-              _vlShowPreorders
+              _vlShowPreOrders
               _vlPrintType
               _vlFields
-              (Just _vlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy VolumesListResource)

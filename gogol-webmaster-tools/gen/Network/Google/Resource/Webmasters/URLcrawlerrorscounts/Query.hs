@@ -34,14 +34,13 @@ module Network.Google.Resource.Webmasters.URLcrawlerrorscounts.Query
     , uqQuotaUser
     , uqPrettyPrint
     , uqPlatform
-    , uqUserIp
+    , uqUserIP
     , uqCategory
-    , uqSiteUrl
+    , uqSiteURL
     , uqKey
     , uqLatestCountsOnly
-    , uqOauthToken
+    , uqOAuthToken
     , uqFields
-    , uqAlt
     ) where
 
 import           Network.Google.Prelude
@@ -63,11 +62,11 @@ type UrlcrawlerrorscountsQueryResource =
                      QueryParam "category"
                        WebmastersURLcrawlerrorscountsQueryCategory
                        :>
-                       QueryParam "key" Text :>
+                       QueryParam "key" Key :>
                          QueryParam "latestCountsOnly" Bool :>
-                           QueryParam "oauth_token" Text :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :>
+                               QueryParam "alt" AltJSON :>
                                  Get '[JSON] URLCrawlErrorsCountsQueryResponse
 
 -- | Retrieves a time series of the number of URL crawl errors per error
@@ -78,14 +77,13 @@ data URLcrawlerrorscountsQuery' = URLcrawlerrorscountsQuery'
     { _uqQuotaUser        :: !(Maybe Text)
     , _uqPrettyPrint      :: !Bool
     , _uqPlatform         :: !(Maybe WebmastersURLcrawlerrorscountsQueryPlatform)
-    , _uqUserIp           :: !(Maybe Text)
+    , _uqUserIP           :: !(Maybe Text)
     , _uqCategory         :: !(Maybe WebmastersURLcrawlerrorscountsQueryCategory)
-    , _uqSiteUrl          :: !Text
-    , _uqKey              :: !(Maybe Text)
+    , _uqSiteURL          :: !Text
+    , _uqKey              :: !(Maybe Key)
     , _uqLatestCountsOnly :: !Bool
-    , _uqOauthToken       :: !(Maybe Text)
+    , _uqOAuthToken       :: !(Maybe OAuthToken)
     , _uqFields           :: !(Maybe Text)
-    , _uqAlt              :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLcrawlerrorscountsQuery'' with the minimum fields required to make a request.
@@ -98,37 +96,34 @@ data URLcrawlerrorscountsQuery' = URLcrawlerrorscountsQuery'
 --
 -- * 'uqPlatform'
 --
--- * 'uqUserIp'
+-- * 'uqUserIP'
 --
 -- * 'uqCategory'
 --
--- * 'uqSiteUrl'
+-- * 'uqSiteURL'
 --
 -- * 'uqKey'
 --
 -- * 'uqLatestCountsOnly'
 --
--- * 'uqOauthToken'
+-- * 'uqOAuthToken'
 --
 -- * 'uqFields'
---
--- * 'uqAlt'
 uRLcrawlerrorscountsQuery'
     :: Text -- ^ 'siteUrl'
     -> URLcrawlerrorscountsQuery'
-uRLcrawlerrorscountsQuery' pUqSiteUrl_ =
+uRLcrawlerrorscountsQuery' pUqSiteURL_ =
     URLcrawlerrorscountsQuery'
     { _uqQuotaUser = Nothing
     , _uqPrettyPrint = True
     , _uqPlatform = Nothing
-    , _uqUserIp = Nothing
+    , _uqUserIP = Nothing
     , _uqCategory = Nothing
-    , _uqSiteUrl = pUqSiteUrl_
+    , _uqSiteURL = pUqSiteURL_
     , _uqKey = Nothing
     , _uqLatestCountsOnly = True
-    , _uqOauthToken = Nothing
+    , _uqOAuthToken = Nothing
     , _uqFields = Nothing
-    , _uqAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,8 +147,8 @@ uqPlatform
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-uqUserIp :: Lens' URLcrawlerrorscountsQuery' (Maybe Text)
-uqUserIp = lens _uqUserIp (\ s a -> s{_uqUserIp = a})
+uqUserIP :: Lens' URLcrawlerrorscountsQuery' (Maybe Text)
+uqUserIP = lens _uqUserIP (\ s a -> s{_uqUserIP = a})
 
 -- | The crawl error category. For example: serverError. If not specified,
 -- returns results for all categories.
@@ -163,14 +158,14 @@ uqCategory
 
 -- | The site\'s URL, including protocol. For example:
 -- http:\/\/www.example.com\/
-uqSiteUrl :: Lens' URLcrawlerrorscountsQuery' Text
-uqSiteUrl
-  = lens _uqSiteUrl (\ s a -> s{_uqSiteUrl = a})
+uqSiteURL :: Lens' URLcrawlerrorscountsQuery' Text
+uqSiteURL
+  = lens _uqSiteURL (\ s a -> s{_uqSiteURL = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-uqKey :: Lens' URLcrawlerrorscountsQuery' (Maybe Text)
+uqKey :: Lens' URLcrawlerrorscountsQuery' (Maybe Key)
 uqKey = lens _uqKey (\ s a -> s{_uqKey = a})
 
 -- | If true, returns only the latest crawl error counts.
@@ -180,17 +175,17 @@ uqLatestCountsOnly
       (\ s a -> s{_uqLatestCountsOnly = a})
 
 -- | OAuth 2.0 token for the current user.
-uqOauthToken :: Lens' URLcrawlerrorscountsQuery' (Maybe Text)
-uqOauthToken
-  = lens _uqOauthToken (\ s a -> s{_uqOauthToken = a})
+uqOAuthToken :: Lens' URLcrawlerrorscountsQuery' (Maybe OAuthToken)
+uqOAuthToken
+  = lens _uqOAuthToken (\ s a -> s{_uqOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 uqFields :: Lens' URLcrawlerrorscountsQuery' (Maybe Text)
 uqFields = lens _uqFields (\ s a -> s{_uqFields = a})
 
--- | Data format for the response.
-uqAlt :: Lens' URLcrawlerrorscountsQuery' Alt
-uqAlt = lens _uqAlt (\ s a -> s{_uqAlt = a})
+instance GoogleAuth URLcrawlerrorscountsQuery' where
+        authKey = uqKey . _Just
+        authToken = uqOAuthToken . _Just
 
 instance GoogleRequest URLcrawlerrorscountsQuery'
          where
@@ -199,14 +194,14 @@ instance GoogleRequest URLcrawlerrorscountsQuery'
         request = requestWithRoute defReq webmasterToolsURL
         requestWithRoute r u URLcrawlerrorscountsQuery'{..}
           = go _uqQuotaUser (Just _uqPrettyPrint) _uqPlatform
-              _uqUserIp
+              _uqUserIP
               _uqCategory
-              _uqSiteUrl
+              _uqSiteURL
               _uqKey
               (Just _uqLatestCountsOnly)
-              _uqOauthToken
+              _uqOAuthToken
               _uqFields
-              (Just _uqAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UrlcrawlerrorscountsQueryResource)

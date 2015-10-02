@@ -34,11 +34,11 @@ module Network.Google.Resource.GamesManagement.Scores.ResetMultipleForAllPlayers
     -- * Request Lenses
     , srmfapQuotaUser
     , srmfapPrettyPrint
-    , srmfapUserIp
+    , srmfapScoresResetMultipleForAllRequest
+    , srmfapUserIP
     , srmfapKey
-    , srmfapOauthToken
+    , srmfapOAuthToken
     , srmfapFields
-    , srmfapAlt
     ) where
 
 import           Network.Google.GamesManagement.Types
@@ -52,10 +52,12 @@ type ScoresResetMultipleForAllPlayersResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Post '[JSON] ()
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] ScoresResetMultipleForAllRequest :>
+                         Post '[JSON] ()
 
 -- | Resets scores for the leaderboards with the given IDs for all players.
 -- This method is only available to user accounts for your developer
@@ -63,13 +65,13 @@ type ScoresResetMultipleForAllPlayersResource =
 --
 -- /See:/ 'scoresResetMultipleForAllPlayers'' smart constructor.
 data ScoresResetMultipleForAllPlayers' = ScoresResetMultipleForAllPlayers'
-    { _srmfapQuotaUser   :: !(Maybe Text)
-    , _srmfapPrettyPrint :: !Bool
-    , _srmfapUserIp      :: !(Maybe Text)
-    , _srmfapKey         :: !(Maybe Text)
-    , _srmfapOauthToken  :: !(Maybe Text)
-    , _srmfapFields      :: !(Maybe Text)
-    , _srmfapAlt         :: !Alt
+    { _srmfapQuotaUser                        :: !(Maybe Text)
+    , _srmfapPrettyPrint                      :: !Bool
+    , _srmfapScoresResetMultipleForAllRequest :: !ScoresResetMultipleForAllRequest
+    , _srmfapUserIP                           :: !(Maybe Text)
+    , _srmfapKey                              :: !(Maybe Key)
+    , _srmfapOAuthToken                       :: !(Maybe OAuthToken)
+    , _srmfapFields                           :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ScoresResetMultipleForAllPlayers'' with the minimum fields required to make a request.
@@ -80,26 +82,27 @@ data ScoresResetMultipleForAllPlayers' = ScoresResetMultipleForAllPlayers'
 --
 -- * 'srmfapPrettyPrint'
 --
--- * 'srmfapUserIp'
+-- * 'srmfapScoresResetMultipleForAllRequest'
+--
+-- * 'srmfapUserIP'
 --
 -- * 'srmfapKey'
 --
--- * 'srmfapOauthToken'
+-- * 'srmfapOAuthToken'
 --
 -- * 'srmfapFields'
---
--- * 'srmfapAlt'
 scoresResetMultipleForAllPlayers'
-    :: ScoresResetMultipleForAllPlayers'
-scoresResetMultipleForAllPlayers' =
+    :: ScoresResetMultipleForAllRequest -- ^ 'ScoresResetMultipleForAllRequest'
+    -> ScoresResetMultipleForAllPlayers'
+scoresResetMultipleForAllPlayers' pSrmfapScoresResetMultipleForAllRequest_ =
     ScoresResetMultipleForAllPlayers'
     { _srmfapQuotaUser = Nothing
     , _srmfapPrettyPrint = True
-    , _srmfapUserIp = Nothing
+    , _srmfapScoresResetMultipleForAllRequest = pSrmfapScoresResetMultipleForAllRequest_
+    , _srmfapUserIP = Nothing
     , _srmfapKey = Nothing
-    , _srmfapOauthToken = Nothing
+    , _srmfapOAuthToken = Nothing
     , _srmfapFields = Nothing
-    , _srmfapAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -116,34 +119,41 @@ srmfapPrettyPrint
   = lens _srmfapPrettyPrint
       (\ s a -> s{_srmfapPrettyPrint = a})
 
+-- | Multipart request metadata.
+srmfapScoresResetMultipleForAllRequest :: Lens' ScoresResetMultipleForAllPlayers' ScoresResetMultipleForAllRequest
+srmfapScoresResetMultipleForAllRequest
+  = lens _srmfapScoresResetMultipleForAllRequest
+      (\ s a ->
+         s{_srmfapScoresResetMultipleForAllRequest = a})
+
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-srmfapUserIp :: Lens' ScoresResetMultipleForAllPlayers' (Maybe Text)
-srmfapUserIp
-  = lens _srmfapUserIp (\ s a -> s{_srmfapUserIp = a})
+srmfapUserIP :: Lens' ScoresResetMultipleForAllPlayers' (Maybe Text)
+srmfapUserIP
+  = lens _srmfapUserIP (\ s a -> s{_srmfapUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-srmfapKey :: Lens' ScoresResetMultipleForAllPlayers' (Maybe Text)
+srmfapKey :: Lens' ScoresResetMultipleForAllPlayers' (Maybe Key)
 srmfapKey
   = lens _srmfapKey (\ s a -> s{_srmfapKey = a})
 
 -- | OAuth 2.0 token for the current user.
-srmfapOauthToken :: Lens' ScoresResetMultipleForAllPlayers' (Maybe Text)
-srmfapOauthToken
-  = lens _srmfapOauthToken
-      (\ s a -> s{_srmfapOauthToken = a})
+srmfapOAuthToken :: Lens' ScoresResetMultipleForAllPlayers' (Maybe OAuthToken)
+srmfapOAuthToken
+  = lens _srmfapOAuthToken
+      (\ s a -> s{_srmfapOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 srmfapFields :: Lens' ScoresResetMultipleForAllPlayers' (Maybe Text)
 srmfapFields
   = lens _srmfapFields (\ s a -> s{_srmfapFields = a})
 
--- | Data format for the response.
-srmfapAlt :: Lens' ScoresResetMultipleForAllPlayers' Alt
-srmfapAlt
-  = lens _srmfapAlt (\ s a -> s{_srmfapAlt = a})
+instance GoogleAuth ScoresResetMultipleForAllPlayers'
+         where
+        authKey = srmfapKey . _Just
+        authToken = srmfapOAuthToken . _Just
 
 instance GoogleRequest
          ScoresResetMultipleForAllPlayers' where
@@ -152,11 +162,12 @@ instance GoogleRequest
         requestWithRoute r u
           ScoresResetMultipleForAllPlayers'{..}
           = go _srmfapQuotaUser (Just _srmfapPrettyPrint)
-              _srmfapUserIp
+              _srmfapUserIP
               _srmfapKey
-              _srmfapOauthToken
+              _srmfapOAuthToken
               _srmfapFields
-              (Just _srmfapAlt)
+              (Just AltJSON)
+              _srmfapScoresResetMultipleForAllRequest
           where go
                   = clientWithRoute
                       (Proxy ::

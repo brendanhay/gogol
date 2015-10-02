@@ -37,15 +37,15 @@ module Network.Google.Resource.Logging.Projects.Sinks.Update
     , psuUploadProtocol
     , psuPp
     , psuAccessToken
+    , psuLogSink
     , psuUploadType
     , psuBearerToken
     , psuKey
-    , psuOauthToken
+    , psuOAuthToken
     , psuProjectsId
     , psuSinksId
     , psuFields
     , psuCallback
-    , psuAlt
     ) where
 
 import           Network.Google.Logging.Types
@@ -67,12 +67,13 @@ type ProjectsSinksUpdateResource =
                          QueryParam "access_token" Text :>
                            QueryParam "uploadType" Text :>
                              QueryParam "bearer_token" Text :>
-                               QueryParam "key" Text :>
-                                 QueryParam "oauth_token" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "fields" Text :>
                                      QueryParam "callback" Text :>
-                                       QueryParam "alt" Text :>
-                                         Put '[JSON] LogSink
+                                       QueryParam "alt" AltJSON :>
+                                         ReqBody '[JSON] LogSink :>
+                                           Put '[JSON] LogSink
 
 -- | Updates a project sink. If the sink does not exist, it is created. The
 -- destination, filter, or both may be updated.
@@ -85,15 +86,15 @@ data ProjectsSinksUpdate' = ProjectsSinksUpdate'
     , _psuUploadProtocol :: !(Maybe Text)
     , _psuPp             :: !Bool
     , _psuAccessToken    :: !(Maybe Text)
+    , _psuLogSink        :: !LogSink
     , _psuUploadType     :: !(Maybe Text)
     , _psuBearerToken    :: !(Maybe Text)
-    , _psuKey            :: !(Maybe Text)
-    , _psuOauthToken     :: !(Maybe Text)
+    , _psuKey            :: !(Maybe Key)
+    , _psuOAuthToken     :: !(Maybe OAuthToken)
     , _psuProjectsId     :: !Text
     , _psuSinksId        :: !Text
     , _psuFields         :: !(Maybe Text)
     , _psuCallback       :: !(Maybe Text)
-    , _psuAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsSinksUpdate'' with the minimum fields required to make a request.
@@ -112,13 +113,15 @@ data ProjectsSinksUpdate' = ProjectsSinksUpdate'
 --
 -- * 'psuAccessToken'
 --
+-- * 'psuLogSink'
+--
 -- * 'psuUploadType'
 --
 -- * 'psuBearerToken'
 --
 -- * 'psuKey'
 --
--- * 'psuOauthToken'
+-- * 'psuOAuthToken'
 --
 -- * 'psuProjectsId'
 --
@@ -127,13 +130,12 @@ data ProjectsSinksUpdate' = ProjectsSinksUpdate'
 -- * 'psuFields'
 --
 -- * 'psuCallback'
---
--- * 'psuAlt'
 projectsSinksUpdate'
-    :: Text -- ^ 'projectsId'
+    :: LogSink -- ^ 'LogSink'
+    -> Text -- ^ 'projectsId'
     -> Text -- ^ 'sinksId'
     -> ProjectsSinksUpdate'
-projectsSinksUpdate' pPsuProjectsId_ pPsuSinksId_ =
+projectsSinksUpdate' pPsuLogSink_ pPsuProjectsId_ pPsuSinksId_ =
     ProjectsSinksUpdate'
     { _psuXgafv = Nothing
     , _psuQuotaUser = Nothing
@@ -141,15 +143,15 @@ projectsSinksUpdate' pPsuProjectsId_ pPsuSinksId_ =
     , _psuUploadProtocol = Nothing
     , _psuPp = True
     , _psuAccessToken = Nothing
+    , _psuLogSink = pPsuLogSink_
     , _psuUploadType = Nothing
     , _psuBearerToken = Nothing
     , _psuKey = Nothing
-    , _psuOauthToken = Nothing
+    , _psuOAuthToken = Nothing
     , _psuProjectsId = pPsuProjectsId_
     , _psuSinksId = pPsuSinksId_
     , _psuFields = Nothing
     , _psuCallback = Nothing
-    , _psuAlt = "json"
     }
 
 -- | V1 error format.
@@ -185,6 +187,11 @@ psuAccessToken
   = lens _psuAccessToken
       (\ s a -> s{_psuAccessToken = a})
 
+-- | Multipart request metadata.
+psuLogSink :: Lens' ProjectsSinksUpdate' LogSink
+psuLogSink
+  = lens _psuLogSink (\ s a -> s{_psuLogSink = a})
+
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
 psuUploadType :: Lens' ProjectsSinksUpdate' (Maybe Text)
 psuUploadType
@@ -200,14 +207,14 @@ psuBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-psuKey :: Lens' ProjectsSinksUpdate' (Maybe Text)
+psuKey :: Lens' ProjectsSinksUpdate' (Maybe Key)
 psuKey = lens _psuKey (\ s a -> s{_psuKey = a})
 
 -- | OAuth 2.0 token for the current user.
-psuOauthToken :: Lens' ProjectsSinksUpdate' (Maybe Text)
-psuOauthToken
-  = lens _psuOauthToken
-      (\ s a -> s{_psuOauthToken = a})
+psuOAuthToken :: Lens' ProjectsSinksUpdate' (Maybe OAuthToken)
+psuOAuthToken
+  = lens _psuOAuthToken
+      (\ s a -> s{_psuOAuthToken = a})
 
 -- | Part of \`sinkName\`. The resource name of the project sink to update.
 psuProjectsId :: Lens' ProjectsSinksUpdate' Text
@@ -230,9 +237,9 @@ psuCallback :: Lens' ProjectsSinksUpdate' (Maybe Text)
 psuCallback
   = lens _psuCallback (\ s a -> s{_psuCallback = a})
 
--- | Data format for response.
-psuAlt :: Lens' ProjectsSinksUpdate' Text
-psuAlt = lens _psuAlt (\ s a -> s{_psuAlt = a})
+instance GoogleAuth ProjectsSinksUpdate' where
+        authKey = psuKey . _Just
+        authToken = psuOAuthToken . _Just
 
 instance GoogleRequest ProjectsSinksUpdate' where
         type Rs ProjectsSinksUpdate' = LogSink
@@ -245,12 +252,13 @@ instance GoogleRequest ProjectsSinksUpdate' where
               _psuUploadType
               _psuBearerToken
               _psuKey
-              _psuOauthToken
+              _psuOAuthToken
               _psuProjectsId
               _psuSinksId
               _psuFields
               _psuCallback
-              (Just _psuAlt)
+              (Just AltJSON)
+              _psuLogSink
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsSinksUpdateResource)

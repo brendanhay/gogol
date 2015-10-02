@@ -32,13 +32,12 @@ module Network.Google.Resource.DFAReporting.OperatingSystemVersions.Get
     -- * Request Lenses
     , osvgQuotaUser
     , osvgPrettyPrint
-    , osvgUserIp
+    , osvgUserIP
     , osvgProfileId
     , osvgKey
     , osvgId
-    , osvgOauthToken
+    , osvgOAuthToken
     , osvgFields
-    , osvgAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,10 +53,10 @@ type OperatingSystemVersionsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :>
+                         QueryParam "alt" AltJSON :>
                            Get '[JSON] OperatingSystemVersion
 
 -- | Gets one operating system version by ID.
@@ -66,13 +65,12 @@ type OperatingSystemVersionsGetResource =
 data OperatingSystemVersionsGet' = OperatingSystemVersionsGet'
     { _osvgQuotaUser   :: !(Maybe Text)
     , _osvgPrettyPrint :: !Bool
-    , _osvgUserIp      :: !(Maybe Text)
+    , _osvgUserIP      :: !(Maybe Text)
     , _osvgProfileId   :: !Int64
-    , _osvgKey         :: !(Maybe Text)
+    , _osvgKey         :: !(Maybe Key)
     , _osvgId          :: !Int64
-    , _osvgOauthToken  :: !(Maybe Text)
+    , _osvgOAuthToken  :: !(Maybe OAuthToken)
     , _osvgFields      :: !(Maybe Text)
-    , _osvgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperatingSystemVersionsGet'' with the minimum fields required to make a request.
@@ -83,7 +81,7 @@ data OperatingSystemVersionsGet' = OperatingSystemVersionsGet'
 --
 -- * 'osvgPrettyPrint'
 --
--- * 'osvgUserIp'
+-- * 'osvgUserIP'
 --
 -- * 'osvgProfileId'
 --
@@ -91,11 +89,9 @@ data OperatingSystemVersionsGet' = OperatingSystemVersionsGet'
 --
 -- * 'osvgId'
 --
--- * 'osvgOauthToken'
+-- * 'osvgOAuthToken'
 --
 -- * 'osvgFields'
---
--- * 'osvgAlt'
 operatingSystemVersionsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
@@ -104,13 +100,12 @@ operatingSystemVersionsGet' pOsvgProfileId_ pOsvgId_ =
     OperatingSystemVersionsGet'
     { _osvgQuotaUser = Nothing
     , _osvgPrettyPrint = True
-    , _osvgUserIp = Nothing
+    , _osvgUserIP = Nothing
     , _osvgProfileId = pOsvgProfileId_
     , _osvgKey = Nothing
     , _osvgId = pOsvgId_
-    , _osvgOauthToken = Nothing
+    , _osvgOAuthToken = Nothing
     , _osvgFields = Nothing
-    , _osvgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -129,9 +124,9 @@ osvgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-osvgUserIp :: Lens' OperatingSystemVersionsGet' (Maybe Text)
-osvgUserIp
-  = lens _osvgUserIp (\ s a -> s{_osvgUserIp = a})
+osvgUserIP :: Lens' OperatingSystemVersionsGet' (Maybe Text)
+osvgUserIP
+  = lens _osvgUserIP (\ s a -> s{_osvgUserIP = a})
 
 -- | User profile ID associated with this request.
 osvgProfileId :: Lens' OperatingSystemVersionsGet' Int64
@@ -142,7 +137,7 @@ osvgProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-osvgKey :: Lens' OperatingSystemVersionsGet' (Maybe Text)
+osvgKey :: Lens' OperatingSystemVersionsGet' (Maybe Key)
 osvgKey = lens _osvgKey (\ s a -> s{_osvgKey = a})
 
 -- | Operating system version ID.
@@ -150,19 +145,19 @@ osvgId :: Lens' OperatingSystemVersionsGet' Int64
 osvgId = lens _osvgId (\ s a -> s{_osvgId = a})
 
 -- | OAuth 2.0 token for the current user.
-osvgOauthToken :: Lens' OperatingSystemVersionsGet' (Maybe Text)
-osvgOauthToken
-  = lens _osvgOauthToken
-      (\ s a -> s{_osvgOauthToken = a})
+osvgOAuthToken :: Lens' OperatingSystemVersionsGet' (Maybe OAuthToken)
+osvgOAuthToken
+  = lens _osvgOAuthToken
+      (\ s a -> s{_osvgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 osvgFields :: Lens' OperatingSystemVersionsGet' (Maybe Text)
 osvgFields
   = lens _osvgFields (\ s a -> s{_osvgFields = a})
 
--- | Data format for the response.
-osvgAlt :: Lens' OperatingSystemVersionsGet' Alt
-osvgAlt = lens _osvgAlt (\ s a -> s{_osvgAlt = a})
+instance GoogleAuth OperatingSystemVersionsGet' where
+        authKey = osvgKey . _Just
+        authToken = osvgOAuthToken . _Just
 
 instance GoogleRequest OperatingSystemVersionsGet'
          where
@@ -171,13 +166,13 @@ instance GoogleRequest OperatingSystemVersionsGet'
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u OperatingSystemVersionsGet'{..}
           = go _osvgQuotaUser (Just _osvgPrettyPrint)
-              _osvgUserIp
+              _osvgUserIP
               _osvgProfileId
               _osvgKey
               _osvgId
-              _osvgOauthToken
+              _osvgOAuthToken
               _osvgFields
-              (Just _osvgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy OperatingSystemVersionsGetResource)

@@ -35,14 +35,13 @@ module Network.Google.Resource.Taskqueue.Tasks.Lease
     , tlPrettyPrint
     , tlTag
     , tlProject
-    , tlUserIp
+    , tlUserIP
     , tlNumTasks
     , tlKey
     , tlLeaseSecs
-    , tlOauthToken
+    , tlOAuthToken
     , tlGroupByTag
     , tlFields
-    , tlAlt
     ) where
 
 import           Network.Google.AppEngineTaskQueue.Types
@@ -61,12 +60,13 @@ type TasksLeaseResource =
                    QueryParam "tag" Text :>
                      QueryParam "userIp" Text :>
                        QueryParam "numTasks" Int32 :>
-                         QueryParam "key" Text :>
+                         QueryParam "key" Key :>
                            QueryParam "leaseSecs" Int32 :>
-                             QueryParam "oauth_token" Text :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "groupByTag" Bool :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "alt" Alt :> Post '[JSON] Tasks
+                                   QueryParam "alt" AltJSON :>
+                                     Post '[JSON] Tasks
 
 -- | Lease 1 or more tasks from a TaskQueue.
 --
@@ -77,14 +77,13 @@ data TasksLease' = TasksLease'
     , _tlPrettyPrint :: !Bool
     , _tlTag         :: !(Maybe Text)
     , _tlProject     :: !Text
-    , _tlUserIp      :: !(Maybe Text)
+    , _tlUserIP      :: !(Maybe Text)
     , _tlNumTasks    :: !Int32
-    , _tlKey         :: !(Maybe Text)
+    , _tlKey         :: !(Maybe Key)
     , _tlLeaseSecs   :: !Int32
-    , _tlOauthToken  :: !(Maybe Text)
+    , _tlOAuthToken  :: !(Maybe OAuthToken)
     , _tlGroupByTag  :: !(Maybe Bool)
     , _tlFields      :: !(Maybe Text)
-    , _tlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TasksLease'' with the minimum fields required to make a request.
@@ -101,7 +100,7 @@ data TasksLease' = TasksLease'
 --
 -- * 'tlProject'
 --
--- * 'tlUserIp'
+-- * 'tlUserIP'
 --
 -- * 'tlNumTasks'
 --
@@ -109,13 +108,11 @@ data TasksLease' = TasksLease'
 --
 -- * 'tlLeaseSecs'
 --
--- * 'tlOauthToken'
+-- * 'tlOAuthToken'
 --
 -- * 'tlGroupByTag'
 --
 -- * 'tlFields'
---
--- * 'tlAlt'
 tasksLease'
     :: Text -- ^ 'taskqueue'
     -> Text -- ^ 'project'
@@ -129,14 +126,13 @@ tasksLease' pTlTaskqueue_ pTlProject_ pTlNumTasks_ pTlLeaseSecs_ =
     , _tlPrettyPrint = True
     , _tlTag = Nothing
     , _tlProject = pTlProject_
-    , _tlUserIp = Nothing
+    , _tlUserIP = Nothing
     , _tlNumTasks = pTlNumTasks_
     , _tlKey = Nothing
     , _tlLeaseSecs = pTlLeaseSecs_
-    , _tlOauthToken = Nothing
+    , _tlOAuthToken = Nothing
     , _tlGroupByTag = Nothing
     , _tlFields = Nothing
-    , _tlAlt = JSON
     }
 
 -- | The taskqueue to lease a task from.
@@ -171,8 +167,8 @@ tlProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tlUserIp :: Lens' TasksLease' (Maybe Text)
-tlUserIp = lens _tlUserIp (\ s a -> s{_tlUserIp = a})
+tlUserIP :: Lens' TasksLease' (Maybe Text)
+tlUserIP = lens _tlUserIP (\ s a -> s{_tlUserIP = a})
 
 -- | The number of tasks to lease.
 tlNumTasks :: Lens' TasksLease' Int32
@@ -182,7 +178,7 @@ tlNumTasks
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tlKey :: Lens' TasksLease' (Maybe Text)
+tlKey :: Lens' TasksLease' (Maybe Key)
 tlKey = lens _tlKey (\ s a -> s{_tlKey = a})
 
 -- | The lease in seconds.
@@ -191,9 +187,9 @@ tlLeaseSecs
   = lens _tlLeaseSecs (\ s a -> s{_tlLeaseSecs = a})
 
 -- | OAuth 2.0 token for the current user.
-tlOauthToken :: Lens' TasksLease' (Maybe Text)
-tlOauthToken
-  = lens _tlOauthToken (\ s a -> s{_tlOauthToken = a})
+tlOAuthToken :: Lens' TasksLease' (Maybe OAuthToken)
+tlOAuthToken
+  = lens _tlOAuthToken (\ s a -> s{_tlOAuthToken = a})
 
 -- | When true, all returned tasks will have the same tag
 tlGroupByTag :: Lens' TasksLease' (Maybe Bool)
@@ -204,9 +200,9 @@ tlGroupByTag
 tlFields :: Lens' TasksLease' (Maybe Text)
 tlFields = lens _tlFields (\ s a -> s{_tlFields = a})
 
--- | Data format for the response.
-tlAlt :: Lens' TasksLease' Alt
-tlAlt = lens _tlAlt (\ s a -> s{_tlAlt = a})
+instance GoogleAuth TasksLease' where
+        authKey = tlKey . _Just
+        authToken = tlOAuthToken . _Just
 
 instance GoogleRequest TasksLease' where
         type Rs TasksLease' = Tasks
@@ -216,14 +212,14 @@ instance GoogleRequest TasksLease' where
           = go _tlTaskqueue _tlQuotaUser (Just _tlPrettyPrint)
               _tlTag
               _tlProject
-              _tlUserIp
+              _tlUserIP
               (Just _tlNumTasks)
               _tlKey
               (Just _tlLeaseSecs)
-              _tlOauthToken
+              _tlOAuthToken
               _tlGroupByTag
               _tlFields
-              (Just _tlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy TasksLeaseResource)
                       r

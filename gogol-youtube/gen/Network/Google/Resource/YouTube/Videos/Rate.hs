@@ -33,12 +33,11 @@ module Network.Google.Resource.YouTube.Videos.Rate
     , vrQuotaUser
     , vrRating
     , vrPrettyPrint
-    , vrUserIp
+    , vrUserIP
     , vrKey
     , vrId
-    , vrOauthToken
+    , vrOAuthToken
     , vrFields
-    , vrAlt
     ) where
 
 import           Network.Google.Prelude
@@ -53,11 +52,11 @@ type VideosRateResource =
            QueryParam "rating" YouTubeVideosRateRating :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "id" Text :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Post '[JSON] ()
+                         QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Add a like or dislike rating to a video or remove a rating from a video.
 --
@@ -66,12 +65,11 @@ data VideosRate' = VideosRate'
     { _vrQuotaUser   :: !(Maybe Text)
     , _vrRating      :: !YouTubeVideosRateRating
     , _vrPrettyPrint :: !Bool
-    , _vrUserIp      :: !(Maybe Text)
-    , _vrKey         :: !(Maybe Text)
+    , _vrUserIP      :: !(Maybe Text)
+    , _vrKey         :: !(Maybe Key)
     , _vrId          :: !Text
-    , _vrOauthToken  :: !(Maybe Text)
+    , _vrOAuthToken  :: !(Maybe OAuthToken)
     , _vrFields      :: !(Maybe Text)
-    , _vrAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideosRate'' with the minimum fields required to make a request.
@@ -84,17 +82,15 @@ data VideosRate' = VideosRate'
 --
 -- * 'vrPrettyPrint'
 --
--- * 'vrUserIp'
+-- * 'vrUserIP'
 --
 -- * 'vrKey'
 --
 -- * 'vrId'
 --
--- * 'vrOauthToken'
+-- * 'vrOAuthToken'
 --
 -- * 'vrFields'
---
--- * 'vrAlt'
 videosRate'
     :: YouTubeVideosRateRating -- ^ 'rating'
     -> Text -- ^ 'id'
@@ -104,12 +100,11 @@ videosRate' pVrRating_ pVrId_ =
     { _vrQuotaUser = Nothing
     , _vrRating = pVrRating_
     , _vrPrettyPrint = True
-    , _vrUserIp = Nothing
+    , _vrUserIP = Nothing
     , _vrKey = Nothing
     , _vrId = pVrId_
-    , _vrOauthToken = Nothing
+    , _vrOAuthToken = Nothing
     , _vrFields = Nothing
-    , _vrAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -131,13 +126,13 @@ vrPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-vrUserIp :: Lens' VideosRate' (Maybe Text)
-vrUserIp = lens _vrUserIp (\ s a -> s{_vrUserIp = a})
+vrUserIP :: Lens' VideosRate' (Maybe Text)
+vrUserIP = lens _vrUserIP (\ s a -> s{_vrUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vrKey :: Lens' VideosRate' (Maybe Text)
+vrKey :: Lens' VideosRate' (Maybe Key)
 vrKey = lens _vrKey (\ s a -> s{_vrKey = a})
 
 -- | The id parameter specifies the YouTube video ID of the video that is
@@ -146,17 +141,17 @@ vrId :: Lens' VideosRate' Text
 vrId = lens _vrId (\ s a -> s{_vrId = a})
 
 -- | OAuth 2.0 token for the current user.
-vrOauthToken :: Lens' VideosRate' (Maybe Text)
-vrOauthToken
-  = lens _vrOauthToken (\ s a -> s{_vrOauthToken = a})
+vrOAuthToken :: Lens' VideosRate' (Maybe OAuthToken)
+vrOAuthToken
+  = lens _vrOAuthToken (\ s a -> s{_vrOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 vrFields :: Lens' VideosRate' (Maybe Text)
 vrFields = lens _vrFields (\ s a -> s{_vrFields = a})
 
--- | Data format for the response.
-vrAlt :: Lens' VideosRate' Alt
-vrAlt = lens _vrAlt (\ s a -> s{_vrAlt = a})
+instance GoogleAuth VideosRate' where
+        authKey = vrKey . _Just
+        authToken = vrOAuthToken . _Just
 
 instance GoogleRequest VideosRate' where
         type Rs VideosRate' = ()
@@ -164,12 +159,12 @@ instance GoogleRequest VideosRate' where
         requestWithRoute r u VideosRate'{..}
           = go _vrQuotaUser (Just _vrRating)
               (Just _vrPrettyPrint)
-              _vrUserIp
+              _vrUserIP
               _vrKey
               (Just _vrId)
-              _vrOauthToken
+              _vrOAuthToken
               _vrFields
-              (Just _vrAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy VideosRateResource)
                       r

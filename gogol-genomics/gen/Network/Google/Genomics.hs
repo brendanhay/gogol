@@ -250,7 +250,7 @@ module Network.Google.Genomics
     , InterleavedFastqSource
     , interleavedFastqSource
     , ifsMetadata
-    , ifsSourceUris
+    , ifsSourceURIs
 
     -- ** Annotation
     , Annotation
@@ -298,7 +298,7 @@ module Network.Google.Genomics
     , callReadGroupSetsRequest
     , crgsrReadGroupSetId
     , crgsrDatasetId
-    , crgsrSourceUris
+    , crgsrSourceURIs
 
     -- ** Read
     , Read
@@ -386,7 +386,7 @@ module Network.Google.Genomics
     -- ** SearchReferenceSetsRequest
     , SearchReferenceSetsRequest
     , searchReferenceSetsRequest
-    , srsrMd5checksums
+    , srsrMD5checksums
     , srsrAccessions
     , srsrPageToken
     , srsrAssemblyId
@@ -450,7 +450,7 @@ module Network.Google.Genomics
     , reference
     , refLength
     , refSourceAccessions
-    , refMd5checksum
+    , refMD5checksum
     , refName
     , refNcbiTaxonId
     , refId
@@ -504,8 +504,8 @@ module Network.Google.Genomics
     , ecjrGcsOutputPath
     , ecjrProjectNumber
     , ecjrAlign
-    , ecjrSourceUris
-    , ecjrPairedSourceUris
+    , ecjrSourceURIs
+    , ecjrPairedSourceURIs
     , ecjrCallVariants
 
     -- ** ReadGroupProgram
@@ -562,7 +562,7 @@ module Network.Google.Genomics
     , exportReadGroupSetsRequest
     , ergsrReferenceNames
     , ergsrProjectNumber
-    , ergsrExportUri
+    , ergsrExportURI
     , ergsrReadGroupSetIds
 
     -- ** Int32Value
@@ -632,15 +632,15 @@ module Network.Google.Genomics
     -- ** PairedFastqSource
     , PairedFastqSource
     , pairedFastqSource
-    , pfsFirstSourceUris
+    , pfsFirstSourceURIs
     , pfsMetadata
-    , pfsSecondSourceUris
+    , pfsSecondSourceURIs
 
     -- ** SearchReferencesRequest
     , SearchReferencesRequest
     , searchReferencesRequest
     , sReferenceSetId
-    , sMd5checksums
+    , sMD5checksums
     , sAccessions
     , sPageToken
     , sPageSize
@@ -698,7 +698,7 @@ module Network.Google.Genomics
     , asDatasetId
     , asId
     , asType
-    , asSourceUri
+    , asSourceURI
     , asInfo
 
     -- ** Metadata
@@ -732,7 +732,7 @@ module Network.Google.Genomics
     , alignReadGroupSetsRequest
     , argsrInterleavedFastqSource
     , argsrReadGroupSetId
-    , argsrBamSourceUris
+    , argsrBamSourceURIs
     , argsrPairedFastqSource
     , argsrDatasetId
 
@@ -750,7 +750,7 @@ module Network.Google.Genomics
     , importVariantsRequest
     , ivrFormat
     , ivrNormalizeReferenceNames
-    , ivrSourceUris
+    , ivrSourceURIs
 
     -- ** ExternalId
     , ExternalId
@@ -763,7 +763,7 @@ module Network.Google.Genomics
     , importReadGroupSetsRequest
     , irgsrReferenceSetId
     , irgsrDatasetId
-    , irgsrSourceUris
+    , irgsrSourceURIs
     , irgsrPartitionStrategy
 
     -- ** VariantAnnotationType
@@ -896,15 +896,12 @@ module Network.Google.Genomics
     , ReadGroupSetInfo
     , readGroupSetInfo
 
-    -- ** Alt
-    , Alt (..)
-
     -- ** ReferenceSet
     , ReferenceSet
     , referenceSet
     , rsSourceAccessions
     , rsReferenceIds
-    , rsMd5checksum
+    , rsMD5checksum
     , rsNcbiTaxonId
     , rsId
     , rsAssemblyId

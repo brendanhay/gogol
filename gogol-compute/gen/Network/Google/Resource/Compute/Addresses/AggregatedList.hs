@@ -33,14 +33,13 @@ module Network.Google.Resource.Compute.Addresses.AggregatedList
     , aalQuotaUser
     , aalPrettyPrint
     , aalProject
-    , aalUserIp
+    , aalUserIP
     , aalKey
     , aalFilter
     , aalPageToken
-    , aalOauthToken
+    , aalOAuthToken
     , aalMaxResults
     , aalFields
-    , aalAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -55,13 +54,13 @@ type AddressesAggregatedListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "filter" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "maxResults" Word32 :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :>
+                             QueryParam "alt" AltJSON :>
                                Get '[JSON] AddressAggregatedList
 
 -- | Retrieves the list of addresses grouped by scope.
@@ -71,14 +70,13 @@ data AddressesAggregatedList' = AddressesAggregatedList'
     { _aalQuotaUser   :: !(Maybe Text)
     , _aalPrettyPrint :: !Bool
     , _aalProject     :: !Text
-    , _aalUserIp      :: !(Maybe Text)
-    , _aalKey         :: !(Maybe Text)
+    , _aalUserIP      :: !(Maybe Text)
+    , _aalKey         :: !(Maybe Key)
     , _aalFilter      :: !(Maybe Text)
     , _aalPageToken   :: !(Maybe Text)
-    , _aalOauthToken  :: !(Maybe Text)
+    , _aalOAuthToken  :: !(Maybe OAuthToken)
     , _aalMaxResults  :: !Word32
     , _aalFields      :: !(Maybe Text)
-    , _aalAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AddressesAggregatedList'' with the minimum fields required to make a request.
@@ -91,7 +89,7 @@ data AddressesAggregatedList' = AddressesAggregatedList'
 --
 -- * 'aalProject'
 --
--- * 'aalUserIp'
+-- * 'aalUserIP'
 --
 -- * 'aalKey'
 --
@@ -99,13 +97,11 @@ data AddressesAggregatedList' = AddressesAggregatedList'
 --
 -- * 'aalPageToken'
 --
--- * 'aalOauthToken'
+-- * 'aalOAuthToken'
 --
 -- * 'aalMaxResults'
 --
 -- * 'aalFields'
---
--- * 'aalAlt'
 addressesAggregatedList'
     :: Text -- ^ 'project'
     -> AddressesAggregatedList'
@@ -114,14 +110,13 @@ addressesAggregatedList' pAalProject_ =
     { _aalQuotaUser = Nothing
     , _aalPrettyPrint = True
     , _aalProject = pAalProject_
-    , _aalUserIp = Nothing
+    , _aalUserIP = Nothing
     , _aalKey = Nothing
     , _aalFilter = Nothing
     , _aalPageToken = Nothing
-    , _aalOauthToken = Nothing
+    , _aalOAuthToken = Nothing
     , _aalMaxResults = 500
     , _aalFields = Nothing
-    , _aalAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -144,14 +139,14 @@ aalProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-aalUserIp :: Lens' AddressesAggregatedList' (Maybe Text)
-aalUserIp
-  = lens _aalUserIp (\ s a -> s{_aalUserIp = a})
+aalUserIP :: Lens' AddressesAggregatedList' (Maybe Text)
+aalUserIP
+  = lens _aalUserIP (\ s a -> s{_aalUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aalKey :: Lens' AddressesAggregatedList' (Maybe Text)
+aalKey :: Lens' AddressesAggregatedList' (Maybe Key)
 aalKey = lens _aalKey (\ s a -> s{_aalKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
@@ -177,10 +172,10 @@ aalPageToken
   = lens _aalPageToken (\ s a -> s{_aalPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-aalOauthToken :: Lens' AddressesAggregatedList' (Maybe Text)
-aalOauthToken
-  = lens _aalOauthToken
-      (\ s a -> s{_aalOauthToken = a})
+aalOAuthToken :: Lens' AddressesAggregatedList' (Maybe OAuthToken)
+aalOAuthToken
+  = lens _aalOAuthToken
+      (\ s a -> s{_aalOAuthToken = a})
 
 -- | Maximum count of results to be returned.
 aalMaxResults :: Lens' AddressesAggregatedList' Word32
@@ -193,9 +188,9 @@ aalFields :: Lens' AddressesAggregatedList' (Maybe Text)
 aalFields
   = lens _aalFields (\ s a -> s{_aalFields = a})
 
--- | Data format for the response.
-aalAlt :: Lens' AddressesAggregatedList' Alt
-aalAlt = lens _aalAlt (\ s a -> s{_aalAlt = a})
+instance GoogleAuth AddressesAggregatedList' where
+        authKey = aalKey . _Just
+        authToken = aalOAuthToken . _Just
 
 instance GoogleRequest AddressesAggregatedList' where
         type Rs AddressesAggregatedList' =
@@ -203,14 +198,14 @@ instance GoogleRequest AddressesAggregatedList' where
         request = requestWithRoute defReq computeURL
         requestWithRoute r u AddressesAggregatedList'{..}
           = go _aalQuotaUser (Just _aalPrettyPrint) _aalProject
-              _aalUserIp
+              _aalUserIP
               _aalKey
               _aalFilter
               _aalPageToken
-              _aalOauthToken
+              _aalOAuthToken
               (Just _aalMaxResults)
               _aalFields
-              (Just _aalAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AddressesAggregatedListResource)

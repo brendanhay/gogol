@@ -43,11 +43,11 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.Acknowledge
     , psaUploadType
     , psaBearerToken
     , psaKey
-    , psaOauthToken
+    , psaOAuthToken
     , psaSubscription
     , psaFields
     , psaCallback
-    , psaAlt
+    , psaAcknowledgeRequest
     ) where
 
 import           Network.Google.Prelude
@@ -66,11 +66,13 @@ type ProjectsSubscriptionsAcknowledgeResource =
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
                        QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
                                QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :> Post '[JSON] Empty
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON] AcknowledgeRequest :>
+                                     Post '[JSON] Empty
 
 -- | Acknowledges the messages associated with the ack tokens in the
 -- AcknowledgeRequest. The Pub\/Sub system can remove the relevant messages
@@ -80,20 +82,20 @@ type ProjectsSubscriptionsAcknowledgeResource =
 --
 -- /See:/ 'projectsSubscriptionsAcknowledge'' smart constructor.
 data ProjectsSubscriptionsAcknowledge' = ProjectsSubscriptionsAcknowledge'
-    { _psaXgafv          :: !(Maybe Text)
-    , _psaQuotaUser      :: !(Maybe Text)
-    , _psaPrettyPrint    :: !Bool
-    , _psaUploadProtocol :: !(Maybe Text)
-    , _psaPp             :: !Bool
-    , _psaAccessToken    :: !(Maybe Text)
-    , _psaUploadType     :: !(Maybe Text)
-    , _psaBearerToken    :: !(Maybe Text)
-    , _psaKey            :: !(Maybe Text)
-    , _psaOauthToken     :: !(Maybe Text)
-    , _psaSubscription   :: !Text
-    , _psaFields         :: !(Maybe Text)
-    , _psaCallback       :: !(Maybe Text)
-    , _psaAlt            :: !Text
+    { _psaXgafv              :: !(Maybe Text)
+    , _psaQuotaUser          :: !(Maybe Text)
+    , _psaPrettyPrint        :: !Bool
+    , _psaUploadProtocol     :: !(Maybe Text)
+    , _psaPp                 :: !Bool
+    , _psaAccessToken        :: !(Maybe Text)
+    , _psaUploadType         :: !(Maybe Text)
+    , _psaBearerToken        :: !(Maybe Text)
+    , _psaKey                :: !(Maybe Key)
+    , _psaOAuthToken         :: !(Maybe OAuthToken)
+    , _psaSubscription       :: !Text
+    , _psaFields             :: !(Maybe Text)
+    , _psaCallback           :: !(Maybe Text)
+    , _psaAcknowledgeRequest :: !AcknowledgeRequest
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsSubscriptionsAcknowledge'' with the minimum fields required to make a request.
@@ -118,7 +120,7 @@ data ProjectsSubscriptionsAcknowledge' = ProjectsSubscriptionsAcknowledge'
 --
 -- * 'psaKey'
 --
--- * 'psaOauthToken'
+-- * 'psaOAuthToken'
 --
 -- * 'psaSubscription'
 --
@@ -126,11 +128,12 @@ data ProjectsSubscriptionsAcknowledge' = ProjectsSubscriptionsAcknowledge'
 --
 -- * 'psaCallback'
 --
--- * 'psaAlt'
+-- * 'psaAcknowledgeRequest'
 projectsSubscriptionsAcknowledge'
     :: Text -- ^ 'subscription'
+    -> AcknowledgeRequest -- ^ 'AcknowledgeRequest'
     -> ProjectsSubscriptionsAcknowledge'
-projectsSubscriptionsAcknowledge' pPsaSubscription_ =
+projectsSubscriptionsAcknowledge' pPsaSubscription_ pPsaAcknowledgeRequest_ =
     ProjectsSubscriptionsAcknowledge'
     { _psaXgafv = Nothing
     , _psaQuotaUser = Nothing
@@ -141,11 +144,11 @@ projectsSubscriptionsAcknowledge' pPsaSubscription_ =
     , _psaUploadType = Nothing
     , _psaBearerToken = Nothing
     , _psaKey = Nothing
-    , _psaOauthToken = Nothing
+    , _psaOAuthToken = Nothing
     , _psaSubscription = pPsaSubscription_
     , _psaFields = Nothing
     , _psaCallback = Nothing
-    , _psaAlt = "json"
+    , _psaAcknowledgeRequest = pPsaAcknowledgeRequest_
     }
 
 -- | V1 error format.
@@ -196,14 +199,14 @@ psaBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-psaKey :: Lens' ProjectsSubscriptionsAcknowledge' (Maybe Text)
+psaKey :: Lens' ProjectsSubscriptionsAcknowledge' (Maybe Key)
 psaKey = lens _psaKey (\ s a -> s{_psaKey = a})
 
 -- | OAuth 2.0 token for the current user.
-psaOauthToken :: Lens' ProjectsSubscriptionsAcknowledge' (Maybe Text)
-psaOauthToken
-  = lens _psaOauthToken
-      (\ s a -> s{_psaOauthToken = a})
+psaOAuthToken :: Lens' ProjectsSubscriptionsAcknowledge' (Maybe OAuthToken)
+psaOAuthToken
+  = lens _psaOAuthToken
+      (\ s a -> s{_psaOAuthToken = a})
 
 -- | The subscription whose message is being acknowledged.
 psaSubscription :: Lens' ProjectsSubscriptionsAcknowledge' Text
@@ -221,9 +224,16 @@ psaCallback :: Lens' ProjectsSubscriptionsAcknowledge' (Maybe Text)
 psaCallback
   = lens _psaCallback (\ s a -> s{_psaCallback = a})
 
--- | Data format for response.
-psaAlt :: Lens' ProjectsSubscriptionsAcknowledge' Text
-psaAlt = lens _psaAlt (\ s a -> s{_psaAlt = a})
+-- | Multipart request metadata.
+psaAcknowledgeRequest :: Lens' ProjectsSubscriptionsAcknowledge' AcknowledgeRequest
+psaAcknowledgeRequest
+  = lens _psaAcknowledgeRequest
+      (\ s a -> s{_psaAcknowledgeRequest = a})
+
+instance GoogleAuth ProjectsSubscriptionsAcknowledge'
+         where
+        authKey = psaKey . _Just
+        authToken = psaOAuthToken . _Just
 
 instance GoogleRequest
          ProjectsSubscriptionsAcknowledge' where
@@ -238,11 +248,12 @@ instance GoogleRequest
               _psaUploadType
               _psaBearerToken
               _psaKey
-              _psaOauthToken
+              _psaOAuthToken
               _psaSubscription
               _psaFields
               _psaCallback
-              (Just _psaAlt)
+              (Just AltJSON)
+              _psaAcknowledgeRequest
           where go
                   = clientWithRoute
                       (Proxy ::

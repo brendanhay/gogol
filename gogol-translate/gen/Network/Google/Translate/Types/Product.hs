@@ -71,7 +71,7 @@ instance ToJSON TranslationsResource where
 --
 -- /See:/ 'detectionsListResponse' smart constructor.
 newtype DetectionsListResponse = DetectionsListResponse
-    { _dlrDetections :: Maybe [Maybe [DetectionsResource]]
+    { _dlrDetections :: Maybe [[DetectionsResource]]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DetectionsListResponse' with the minimum fields required to make a request.
@@ -109,7 +109,7 @@ instance ToJSON DetectionsListResponse where
 --
 -- /See:/ 'languagesListResponse' smart constructor.
 newtype LanguagesListResponse = LanguagesListResponse
-    { _llrLanguages :: Maybe [Maybe LanguagesResource]
+    { _llrLanguages :: Maybe [LanguagesResource]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LanguagesListResponse' with the minimum fields required to make a request.
@@ -129,7 +129,7 @@ languagesListResponse =
 -- point order of the language code. If target parameter is specified, the
 -- list is sorted by the collation order of the language name in the target
 -- language.
-llrLanguages :: Lens' LanguagesListResponse [Maybe LanguagesResource]
+llrLanguages :: Lens' LanguagesListResponse [LanguagesResource]
 llrLanguages
   = lens _llrLanguages (\ s a -> s{_llrLanguages = a})
       . _Default
@@ -252,7 +252,7 @@ instance ToJSON LanguagesResource where
 --
 -- /See:/ 'translationsListResponse' smart constructor.
 newtype TranslationsListResponse = TranslationsListResponse
-    { _tlrTranslations :: Maybe [Maybe TranslationsResource]
+    { _tlrTranslations :: Maybe [TranslationsResource]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TranslationsListResponse' with the minimum fields required to make a request.
@@ -268,7 +268,7 @@ translationsListResponse =
     }
 
 -- | Translations contains list of translation results of given text
-tlrTranslations :: Lens' TranslationsListResponse [Maybe TranslationsResource]
+tlrTranslations :: Lens' TranslationsListResponse [TranslationsResource]
 tlrTranslations
   = lens _tlrTranslations
       (\ s a -> s{_tlrTranslations = a})

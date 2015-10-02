@@ -27,29 +27,29 @@ module Network.Google.Debugger
 
     -- * REST Resources
 
-    -- ** ClouddebuggerControllerDebuggeesBreakpointsList
-    , module Network.Google.Resource.Clouddebugger.Controller.Debuggees.Breakpoints.List
+    -- ** CloudDebuggerControllerDebuggeesBreakpointsList
+    , module Network.Google.Resource.CloudDebugger.Controller.Debuggees.Breakpoints.List
 
-    -- ** ClouddebuggerControllerDebuggeesBreakpointsUpdate
-    , module Network.Google.Resource.Clouddebugger.Controller.Debuggees.Breakpoints.Update
+    -- ** CloudDebuggerControllerDebuggeesBreakpointsUpdate
+    , module Network.Google.Resource.CloudDebugger.Controller.Debuggees.Breakpoints.Update
 
-    -- ** ClouddebuggerControllerDebuggeesRegister
-    , module Network.Google.Resource.Clouddebugger.Controller.Debuggees.Register
+    -- ** CloudDebuggerControllerDebuggeesRegister
+    , module Network.Google.Resource.CloudDebugger.Controller.Debuggees.Register
 
-    -- ** ClouddebuggerDebuggerDebuggeesBreakpointsDelete
-    , module Network.Google.Resource.Clouddebugger.Debugger.Debuggees.Breakpoints.Delete
+    -- ** CloudDebuggerDebuggerDebuggeesBreakpointsDelete
+    , module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.Delete
 
-    -- ** ClouddebuggerDebuggerDebuggeesBreakpointsGet
-    , module Network.Google.Resource.Clouddebugger.Debugger.Debuggees.Breakpoints.Get
+    -- ** CloudDebuggerDebuggerDebuggeesBreakpointsGet
+    , module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.Get
 
-    -- ** ClouddebuggerDebuggerDebuggeesBreakpointsList
-    , module Network.Google.Resource.Clouddebugger.Debugger.Debuggees.Breakpoints.List
+    -- ** CloudDebuggerDebuggerDebuggeesBreakpointsList
+    , module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.List
 
-    -- ** ClouddebuggerDebuggerDebuggeesBreakpointsSet
-    , module Network.Google.Resource.Clouddebugger.Debugger.Debuggees.Breakpoints.Set
+    -- ** CloudDebuggerDebuggerDebuggeesBreakpointsSet
+    , module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.Set
 
-    -- ** ClouddebuggerDebuggerDebuggeesList
-    , module Network.Google.Resource.Clouddebugger.Debugger.Debuggees.List
+    -- ** CloudDebuggerDebuggerDebuggeesList
+    , module Network.Google.Resource.CloudDebugger.Debugger.Debuggees.List
 
     -- * Types
 
@@ -91,7 +91,7 @@ module Network.Google.Debugger
     , gscGerritProject
     , gscAliasName
     , gscRevisionId
-    , gscHostUri
+    , gscHostURI
 
     -- ** ProjectRepoId
     , ProjectRepoId
@@ -170,7 +170,7 @@ module Network.Google.Debugger
     -- ** GitSourceContext
     , GitSourceContext
     , gitSourceContext
-    , gUrl
+    , gURL
     , gRevisionId
 
     -- ** SourceLocation
@@ -232,14 +232,14 @@ module Network.Google.Debugger
 
 import           Network.Google.Debugger.Types
 import           Network.Google.Prelude
-import           Network.Google.Resource.Clouddebugger.Controller.Debuggees.Breakpoints.List
-import           Network.Google.Resource.Clouddebugger.Controller.Debuggees.Breakpoints.Update
-import           Network.Google.Resource.Clouddebugger.Controller.Debuggees.Register
-import           Network.Google.Resource.Clouddebugger.Debugger.Debuggees.Breakpoints.Delete
-import           Network.Google.Resource.Clouddebugger.Debugger.Debuggees.Breakpoints.Get
-import           Network.Google.Resource.Clouddebugger.Debugger.Debuggees.Breakpoints.List
-import           Network.Google.Resource.Clouddebugger.Debugger.Debuggees.Breakpoints.Set
-import           Network.Google.Resource.Clouddebugger.Debugger.Debuggees.List
+import           Network.Google.Resource.CloudDebugger.Controller.Debuggees.Breakpoints.List
+import           Network.Google.Resource.CloudDebugger.Controller.Debuggees.Breakpoints.Update
+import           Network.Google.Resource.CloudDebugger.Controller.Debuggees.Register
+import           Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.Delete
+import           Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.Get
+import           Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.List
+import           Network.Google.Resource.CloudDebugger.Debugger.Debuggees.Breakpoints.Set
+import           Network.Google.Resource.CloudDebugger.Debugger.Debuggees.List
 
 {- $resources
 TODO

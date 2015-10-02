@@ -33,13 +33,13 @@ module Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Upda
     , mwpawluQuotaUser
     , mwpawluPrettyPrint
     , mwpawluWebPropertyId
-    , mwpawluUserIp
+    , mwpawluUserIP
+    , mwpawluEntityAdWordsLink
     , mwpawluAccountId
     , mwpawluKey
     , mwpawluWebPropertyAdWordsLinkId
-    , mwpawluOauthToken
+    , mwpawluOAuthToken
     , mwpawluFields
-    , mwpawluAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -59,11 +59,12 @@ type ManagementWebPropertyAdWordsLinksUpdateResource
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :>
-                                 Put '[JSON] EntityAdWordsLink
+                               QueryParam "alt" AltJSON :>
+                                 ReqBody '[JSON] EntityAdWordsLink :>
+                                   Put '[JSON] EntityAdWordsLink
 
 -- | Updates an existing webProperty-AdWords link.
 --
@@ -72,13 +73,13 @@ data ManagementWebPropertyAdWordsLinksUpdate' = ManagementWebPropertyAdWordsLink
     { _mwpawluQuotaUser                :: !(Maybe Text)
     , _mwpawluPrettyPrint              :: !Bool
     , _mwpawluWebPropertyId            :: !Text
-    , _mwpawluUserIp                   :: !(Maybe Text)
+    , _mwpawluUserIP                   :: !(Maybe Text)
+    , _mwpawluEntityAdWordsLink        :: !EntityAdWordsLink
     , _mwpawluAccountId                :: !Text
-    , _mwpawluKey                      :: !(Maybe Text)
+    , _mwpawluKey                      :: !(Maybe Key)
     , _mwpawluWebPropertyAdWordsLinkId :: !Text
-    , _mwpawluOauthToken               :: !(Maybe Text)
+    , _mwpawluOAuthToken               :: !(Maybe OAuthToken)
     , _mwpawluFields                   :: !(Maybe Text)
-    , _mwpawluAlt                      :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementWebPropertyAdWordsLinksUpdate'' with the minimum fields required to make a request.
@@ -91,7 +92,9 @@ data ManagementWebPropertyAdWordsLinksUpdate' = ManagementWebPropertyAdWordsLink
 --
 -- * 'mwpawluWebPropertyId'
 --
--- * 'mwpawluUserIp'
+-- * 'mwpawluUserIP'
+--
+-- * 'mwpawluEntityAdWordsLink'
 --
 -- * 'mwpawluAccountId'
 --
@@ -99,28 +102,27 @@ data ManagementWebPropertyAdWordsLinksUpdate' = ManagementWebPropertyAdWordsLink
 --
 -- * 'mwpawluWebPropertyAdWordsLinkId'
 --
--- * 'mwpawluOauthToken'
+-- * 'mwpawluOAuthToken'
 --
 -- * 'mwpawluFields'
---
--- * 'mwpawluAlt'
 managementWebPropertyAdWordsLinksUpdate'
     :: Text -- ^ 'webPropertyId'
+    -> EntityAdWordsLink -- ^ 'EntityAdWordsLink'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'webPropertyAdWordsLinkId'
     -> ManagementWebPropertyAdWordsLinksUpdate'
-managementWebPropertyAdWordsLinksUpdate' pMwpawluWebPropertyId_ pMwpawluAccountId_ pMwpawluWebPropertyAdWordsLinkId_ =
+managementWebPropertyAdWordsLinksUpdate' pMwpawluWebPropertyId_ pMwpawluEntityAdWordsLink_ pMwpawluAccountId_ pMwpawluWebPropertyAdWordsLinkId_ =
     ManagementWebPropertyAdWordsLinksUpdate'
     { _mwpawluQuotaUser = Nothing
     , _mwpawluPrettyPrint = False
     , _mwpawluWebPropertyId = pMwpawluWebPropertyId_
-    , _mwpawluUserIp = Nothing
+    , _mwpawluUserIP = Nothing
+    , _mwpawluEntityAdWordsLink = pMwpawluEntityAdWordsLink_
     , _mwpawluAccountId = pMwpawluAccountId_
     , _mwpawluKey = Nothing
     , _mwpawluWebPropertyAdWordsLinkId = pMwpawluWebPropertyAdWordsLinkId_
-    , _mwpawluOauthToken = Nothing
+    , _mwpawluOAuthToken = Nothing
     , _mwpawluFields = Nothing
-    , _mwpawluAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -145,10 +147,16 @@ mwpawluWebPropertyId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mwpawluUserIp :: Lens' ManagementWebPropertyAdWordsLinksUpdate' (Maybe Text)
-mwpawluUserIp
-  = lens _mwpawluUserIp
-      (\ s a -> s{_mwpawluUserIp = a})
+mwpawluUserIP :: Lens' ManagementWebPropertyAdWordsLinksUpdate' (Maybe Text)
+mwpawluUserIP
+  = lens _mwpawluUserIP
+      (\ s a -> s{_mwpawluUserIP = a})
+
+-- | Multipart request metadata.
+mwpawluEntityAdWordsLink :: Lens' ManagementWebPropertyAdWordsLinksUpdate' EntityAdWordsLink
+mwpawluEntityAdWordsLink
+  = lens _mwpawluEntityAdWordsLink
+      (\ s a -> s{_mwpawluEntityAdWordsLink = a})
 
 -- | ID of the account which the given web property belongs to.
 mwpawluAccountId :: Lens' ManagementWebPropertyAdWordsLinksUpdate' Text
@@ -159,7 +167,7 @@ mwpawluAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mwpawluKey :: Lens' ManagementWebPropertyAdWordsLinksUpdate' (Maybe Text)
+mwpawluKey :: Lens' ManagementWebPropertyAdWordsLinksUpdate' (Maybe Key)
 mwpawluKey
   = lens _mwpawluKey (\ s a -> s{_mwpawluKey = a})
 
@@ -170,10 +178,10 @@ mwpawluWebPropertyAdWordsLinkId
       (\ s a -> s{_mwpawluWebPropertyAdWordsLinkId = a})
 
 -- | OAuth 2.0 token for the current user.
-mwpawluOauthToken :: Lens' ManagementWebPropertyAdWordsLinksUpdate' (Maybe Text)
-mwpawluOauthToken
-  = lens _mwpawluOauthToken
-      (\ s a -> s{_mwpawluOauthToken = a})
+mwpawluOAuthToken :: Lens' ManagementWebPropertyAdWordsLinksUpdate' (Maybe OAuthToken)
+mwpawluOAuthToken
+  = lens _mwpawluOAuthToken
+      (\ s a -> s{_mwpawluOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 mwpawluFields :: Lens' ManagementWebPropertyAdWordsLinksUpdate' (Maybe Text)
@@ -181,10 +189,10 @@ mwpawluFields
   = lens _mwpawluFields
       (\ s a -> s{_mwpawluFields = a})
 
--- | Data format for the response.
-mwpawluAlt :: Lens' ManagementWebPropertyAdWordsLinksUpdate' Alt
-mwpawluAlt
-  = lens _mwpawluAlt (\ s a -> s{_mwpawluAlt = a})
+instance GoogleAuth
+         ManagementWebPropertyAdWordsLinksUpdate' where
+        authKey = mwpawluKey . _Just
+        authToken = mwpawluOAuthToken . _Just
 
 instance GoogleRequest
          ManagementWebPropertyAdWordsLinksUpdate' where
@@ -195,13 +203,14 @@ instance GoogleRequest
           ManagementWebPropertyAdWordsLinksUpdate'{..}
           = go _mwpawluQuotaUser (Just _mwpawluPrettyPrint)
               _mwpawluWebPropertyId
-              _mwpawluUserIp
+              _mwpawluUserIP
               _mwpawluAccountId
               _mwpawluKey
               _mwpawluWebPropertyAdWordsLinkId
-              _mwpawluOauthToken
+              _mwpawluOAuthToken
               _mwpawluFields
-              (Just _mwpawluAlt)
+              (Just AltJSON)
+              _mwpawluEntityAdWordsLink
           where go
                   = clientWithRoute
                       (Proxy ::

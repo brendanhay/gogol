@@ -34,11 +34,11 @@ module Network.Google.Resource.Compute.GlobalAddresses.Insert
     , gaiQuotaUser
     , gaiPrettyPrint
     , gaiProject
-    , gaiUserIp
+    , gaiUserIP
+    , gaiAddress
     , gaiKey
-    , gaiOauthToken
+    , gaiOAuthToken
     , gaiFields
-    , gaiAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -53,10 +53,11 @@ type GlobalAddressesInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] Operation
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Address :> Post '[JSON] Operation
 
 -- | Creates an address resource in the specified project using the data
 -- included in the request.
@@ -66,11 +67,11 @@ data GlobalAddressesInsert' = GlobalAddressesInsert'
     { _gaiQuotaUser   :: !(Maybe Text)
     , _gaiPrettyPrint :: !Bool
     , _gaiProject     :: !Text
-    , _gaiUserIp      :: !(Maybe Text)
-    , _gaiKey         :: !(Maybe Text)
-    , _gaiOauthToken  :: !(Maybe Text)
+    , _gaiUserIP      :: !(Maybe Text)
+    , _gaiAddress     :: !Address
+    , _gaiKey         :: !(Maybe Key)
+    , _gaiOAuthToken  :: !(Maybe OAuthToken)
     , _gaiFields      :: !(Maybe Text)
-    , _gaiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GlobalAddressesInsert'' with the minimum fields required to make a request.
@@ -83,28 +84,29 @@ data GlobalAddressesInsert' = GlobalAddressesInsert'
 --
 -- * 'gaiProject'
 --
--- * 'gaiUserIp'
+-- * 'gaiUserIP'
+--
+-- * 'gaiAddress'
 --
 -- * 'gaiKey'
 --
--- * 'gaiOauthToken'
+-- * 'gaiOAuthToken'
 --
 -- * 'gaiFields'
---
--- * 'gaiAlt'
 globalAddressesInsert'
     :: Text -- ^ 'project'
+    -> Address -- ^ 'Address'
     -> GlobalAddressesInsert'
-globalAddressesInsert' pGaiProject_ =
+globalAddressesInsert' pGaiProject_ pGaiAddress_ =
     GlobalAddressesInsert'
     { _gaiQuotaUser = Nothing
     , _gaiPrettyPrint = True
     , _gaiProject = pGaiProject_
-    , _gaiUserIp = Nothing
+    , _gaiUserIP = Nothing
+    , _gaiAddress = pGaiAddress_
     , _gaiKey = Nothing
-    , _gaiOauthToken = Nothing
+    , _gaiOAuthToken = Nothing
     , _gaiFields = Nothing
-    , _gaiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,41 +129,47 @@ gaiProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-gaiUserIp :: Lens' GlobalAddressesInsert' (Maybe Text)
-gaiUserIp
-  = lens _gaiUserIp (\ s a -> s{_gaiUserIp = a})
+gaiUserIP :: Lens' GlobalAddressesInsert' (Maybe Text)
+gaiUserIP
+  = lens _gaiUserIP (\ s a -> s{_gaiUserIP = a})
+
+-- | Multipart request metadata.
+gaiAddress :: Lens' GlobalAddressesInsert' Address
+gaiAddress
+  = lens _gaiAddress (\ s a -> s{_gaiAddress = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-gaiKey :: Lens' GlobalAddressesInsert' (Maybe Text)
+gaiKey :: Lens' GlobalAddressesInsert' (Maybe Key)
 gaiKey = lens _gaiKey (\ s a -> s{_gaiKey = a})
 
 -- | OAuth 2.0 token for the current user.
-gaiOauthToken :: Lens' GlobalAddressesInsert' (Maybe Text)
-gaiOauthToken
-  = lens _gaiOauthToken
-      (\ s a -> s{_gaiOauthToken = a})
+gaiOAuthToken :: Lens' GlobalAddressesInsert' (Maybe OAuthToken)
+gaiOAuthToken
+  = lens _gaiOAuthToken
+      (\ s a -> s{_gaiOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 gaiFields :: Lens' GlobalAddressesInsert' (Maybe Text)
 gaiFields
   = lens _gaiFields (\ s a -> s{_gaiFields = a})
 
--- | Data format for the response.
-gaiAlt :: Lens' GlobalAddressesInsert' Alt
-gaiAlt = lens _gaiAlt (\ s a -> s{_gaiAlt = a})
+instance GoogleAuth GlobalAddressesInsert' where
+        authKey = gaiKey . _Just
+        authToken = gaiOAuthToken . _Just
 
 instance GoogleRequest GlobalAddressesInsert' where
         type Rs GlobalAddressesInsert' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u GlobalAddressesInsert'{..}
           = go _gaiQuotaUser (Just _gaiPrettyPrint) _gaiProject
-              _gaiUserIp
+              _gaiUserIP
               _gaiKey
-              _gaiOauthToken
+              _gaiOAuthToken
               _gaiFields
-              (Just _gaiAlt)
+              (Just AltJSON)
+              _gaiAddress
           where go
                   = clientWithRoute
                       (Proxy :: Proxy GlobalAddressesInsertResource)

@@ -32,12 +32,11 @@ module Network.Google.Resource.Analytics.Metadata.Columns.List
     -- * Request Lenses
     , mclQuotaUser
     , mclPrettyPrint
-    , mclUserIp
+    , mclUserIP
     , mclKey
-    , mclOauthToken
+    , mclOAuthToken
     , mclReportType
     , mclFields
-    , mclAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -52,10 +51,10 @@ type MetadataColumnsListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Get '[JSON] Columns
+                       QueryParam "alt" AltJSON :> Get '[JSON] Columns
 
 -- | Lists all columns for a report type
 --
@@ -63,12 +62,11 @@ type MetadataColumnsListResource =
 data MetadataColumnsList' = MetadataColumnsList'
     { _mclQuotaUser   :: !(Maybe Text)
     , _mclPrettyPrint :: !Bool
-    , _mclUserIp      :: !(Maybe Text)
-    , _mclKey         :: !(Maybe Text)
-    , _mclOauthToken  :: !(Maybe Text)
+    , _mclUserIP      :: !(Maybe Text)
+    , _mclKey         :: !(Maybe Key)
+    , _mclOAuthToken  :: !(Maybe OAuthToken)
     , _mclReportType  :: !Text
     , _mclFields      :: !(Maybe Text)
-    , _mclAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MetadataColumnsList'' with the minimum fields required to make a request.
@@ -79,17 +77,15 @@ data MetadataColumnsList' = MetadataColumnsList'
 --
 -- * 'mclPrettyPrint'
 --
--- * 'mclUserIp'
+-- * 'mclUserIP'
 --
 -- * 'mclKey'
 --
--- * 'mclOauthToken'
+-- * 'mclOAuthToken'
 --
 -- * 'mclReportType'
 --
 -- * 'mclFields'
---
--- * 'mclAlt'
 metadataColumnsList'
     :: Text -- ^ 'reportType'
     -> MetadataColumnsList'
@@ -97,12 +93,11 @@ metadataColumnsList' pMclReportType_ =
     MetadataColumnsList'
     { _mclQuotaUser = Nothing
     , _mclPrettyPrint = False
-    , _mclUserIp = Nothing
+    , _mclUserIP = Nothing
     , _mclKey = Nothing
-    , _mclOauthToken = Nothing
+    , _mclOAuthToken = Nothing
     , _mclReportType = pMclReportType_
     , _mclFields = Nothing
-    , _mclAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,21 +115,21 @@ mclPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mclUserIp :: Lens' MetadataColumnsList' (Maybe Text)
-mclUserIp
-  = lens _mclUserIp (\ s a -> s{_mclUserIp = a})
+mclUserIP :: Lens' MetadataColumnsList' (Maybe Text)
+mclUserIP
+  = lens _mclUserIP (\ s a -> s{_mclUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mclKey :: Lens' MetadataColumnsList' (Maybe Text)
+mclKey :: Lens' MetadataColumnsList' (Maybe Key)
 mclKey = lens _mclKey (\ s a -> s{_mclKey = a})
 
 -- | OAuth 2.0 token for the current user.
-mclOauthToken :: Lens' MetadataColumnsList' (Maybe Text)
-mclOauthToken
-  = lens _mclOauthToken
-      (\ s a -> s{_mclOauthToken = a})
+mclOAuthToken :: Lens' MetadataColumnsList' (Maybe OAuthToken)
+mclOAuthToken
+  = lens _mclOAuthToken
+      (\ s a -> s{_mclOAuthToken = a})
 
 -- | Report type. Allowed Values: \'ga\'. Where \'ga\' corresponds to the
 -- Core Reporting API
@@ -148,20 +143,20 @@ mclFields :: Lens' MetadataColumnsList' (Maybe Text)
 mclFields
   = lens _mclFields (\ s a -> s{_mclFields = a})
 
--- | Data format for the response.
-mclAlt :: Lens' MetadataColumnsList' Alt
-mclAlt = lens _mclAlt (\ s a -> s{_mclAlt = a})
+instance GoogleAuth MetadataColumnsList' where
+        authKey = mclKey . _Just
+        authToken = mclOAuthToken . _Just
 
 instance GoogleRequest MetadataColumnsList' where
         type Rs MetadataColumnsList' = Columns
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u MetadataColumnsList'{..}
-          = go _mclQuotaUser (Just _mclPrettyPrint) _mclUserIp
+          = go _mclQuotaUser (Just _mclPrettyPrint) _mclUserIP
               _mclKey
-              _mclOauthToken
+              _mclOAuthToken
               _mclReportType
               _mclFields
-              (Just _mclAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy MetadataColumnsListResource)

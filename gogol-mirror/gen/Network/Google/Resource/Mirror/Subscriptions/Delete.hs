@@ -32,12 +32,11 @@ module Network.Google.Resource.Mirror.Subscriptions.Delete
     -- * Request Lenses
     , sdQuotaUser
     , sdPrettyPrint
-    , sdUserIp
+    , sdUserIP
     , sdKey
     , sdId
-    , sdOauthToken
+    , sdOAuthToken
     , sdFields
-    , sdAlt
     ) where
 
 import           Network.Google.Mirror.Types
@@ -51,10 +50,10 @@ type SubscriptionsDeleteResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Delete '[JSON] ()
+                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a subscription.
 --
@@ -62,12 +61,11 @@ type SubscriptionsDeleteResource =
 data SubscriptionsDelete' = SubscriptionsDelete'
     { _sdQuotaUser   :: !(Maybe Text)
     , _sdPrettyPrint :: !Bool
-    , _sdUserIp      :: !(Maybe Text)
-    , _sdKey         :: !(Maybe Text)
+    , _sdUserIP      :: !(Maybe Text)
+    , _sdKey         :: !(Maybe Key)
     , _sdId          :: !Text
-    , _sdOauthToken  :: !(Maybe Text)
+    , _sdOAuthToken  :: !(Maybe OAuthToken)
     , _sdFields      :: !(Maybe Text)
-    , _sdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionsDelete'' with the minimum fields required to make a request.
@@ -78,17 +76,15 @@ data SubscriptionsDelete' = SubscriptionsDelete'
 --
 -- * 'sdPrettyPrint'
 --
--- * 'sdUserIp'
+-- * 'sdUserIP'
 --
 -- * 'sdKey'
 --
 -- * 'sdId'
 --
--- * 'sdOauthToken'
+-- * 'sdOAuthToken'
 --
 -- * 'sdFields'
---
--- * 'sdAlt'
 subscriptionsDelete'
     :: Text -- ^ 'id'
     -> SubscriptionsDelete'
@@ -96,12 +92,11 @@ subscriptionsDelete' pSdId_ =
     SubscriptionsDelete'
     { _sdQuotaUser = Nothing
     , _sdPrettyPrint = True
-    , _sdUserIp = Nothing
+    , _sdUserIP = Nothing
     , _sdKey = Nothing
     , _sdId = pSdId_
-    , _sdOauthToken = Nothing
+    , _sdOAuthToken = Nothing
     , _sdFields = Nothing
-    , _sdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -119,13 +114,13 @@ sdPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-sdUserIp :: Lens' SubscriptionsDelete' (Maybe Text)
-sdUserIp = lens _sdUserIp (\ s a -> s{_sdUserIp = a})
+sdUserIP :: Lens' SubscriptionsDelete' (Maybe Text)
+sdUserIP = lens _sdUserIP (\ s a -> s{_sdUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-sdKey :: Lens' SubscriptionsDelete' (Maybe Text)
+sdKey :: Lens' SubscriptionsDelete' (Maybe Key)
 sdKey = lens _sdKey (\ s a -> s{_sdKey = a})
 
 -- | The ID of the subscription.
@@ -133,28 +128,28 @@ sdId :: Lens' SubscriptionsDelete' Text
 sdId = lens _sdId (\ s a -> s{_sdId = a})
 
 -- | OAuth 2.0 token for the current user.
-sdOauthToken :: Lens' SubscriptionsDelete' (Maybe Text)
-sdOauthToken
-  = lens _sdOauthToken (\ s a -> s{_sdOauthToken = a})
+sdOAuthToken :: Lens' SubscriptionsDelete' (Maybe OAuthToken)
+sdOAuthToken
+  = lens _sdOAuthToken (\ s a -> s{_sdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 sdFields :: Lens' SubscriptionsDelete' (Maybe Text)
 sdFields = lens _sdFields (\ s a -> s{_sdFields = a})
 
--- | Data format for the response.
-sdAlt :: Lens' SubscriptionsDelete' Alt
-sdAlt = lens _sdAlt (\ s a -> s{_sdAlt = a})
+instance GoogleAuth SubscriptionsDelete' where
+        authKey = sdKey . _Just
+        authToken = sdOAuthToken . _Just
 
 instance GoogleRequest SubscriptionsDelete' where
         type Rs SubscriptionsDelete' = ()
         request = requestWithRoute defReq mirrorURL
         requestWithRoute r u SubscriptionsDelete'{..}
-          = go _sdQuotaUser (Just _sdPrettyPrint) _sdUserIp
+          = go _sdQuotaUser (Just _sdPrettyPrint) _sdUserIP
               _sdKey
               _sdId
-              _sdOauthToken
+              _sdOAuthToken
               _sdFields
-              (Just _sdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy SubscriptionsDeleteResource)

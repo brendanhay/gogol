@@ -86,7 +86,7 @@ instance ToJSON PushConfig where
 -- /See:/ 'receivedMessage' smart constructor.
 data ReceivedMessage = ReceivedMessage
     { _rmAckId   :: !(Maybe Text)
-    , _rmMessage :: !(Maybe (Maybe PubsubMessage))
+    , _rmMessage :: !(Maybe PubsubMessage)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReceivedMessage' with the minimum fields required to make a request.
@@ -109,7 +109,7 @@ rmAckId :: Lens' ReceivedMessage (Maybe Text)
 rmAckId = lens _rmAckId (\ s a -> s{_rmAckId = a})
 
 -- | The message.
-rmMessage :: Lens' ReceivedMessage (Maybe (Maybe PubsubMessage))
+rmMessage :: Lens' ReceivedMessage (Maybe PubsubMessage)
 rmMessage
   = lens _rmMessage (\ s a -> s{_rmMessage = a})
 
@@ -198,7 +198,7 @@ instance ToJSON ModifyAckDeadlineRequest where
 --
 -- /See:/ 'modifyPushConfigRequest' smart constructor.
 newtype ModifyPushConfigRequest = ModifyPushConfigRequest
-    { _mpcrPushConfig :: Maybe (Maybe PushConfig)
+    { _mpcrPushConfig :: Maybe PushConfig
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ModifyPushConfigRequest' with the minimum fields required to make a request.
@@ -217,7 +217,7 @@ modifyPushConfigRequest =
 -- indicates that the Pub\/Sub system should stop pushing messages from the
 -- given subscription and allow messages to be pulled and acknowledged -
 -- effectively pausing the subscription if Pull is not called.
-mpcrPushConfig :: Lens' ModifyPushConfigRequest (Maybe (Maybe PushConfig))
+mpcrPushConfig :: Lens' ModifyPushConfigRequest (Maybe PushConfig)
 mpcrPushConfig
   = lens _mpcrPushConfig
       (\ s a -> s{_mpcrPushConfig = a})
@@ -379,7 +379,7 @@ instance ToJSON PubsubMessage where
 -- /See:/ 'listTopicsResponse' smart constructor.
 data ListTopicsResponse = ListTopicsResponse
     { _ltrNextPageToken :: !(Maybe Text)
-    , _ltrTopics        :: !(Maybe [Maybe Topic])
+    , _ltrTopics        :: !(Maybe [Topic])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListTopicsResponse' with the minimum fields required to make a request.
@@ -405,7 +405,7 @@ ltrNextPageToken
       (\ s a -> s{_ltrNextPageToken = a})
 
 -- | The resulting topics.
-ltrTopics :: Lens' ListTopicsResponse [Maybe Topic]
+ltrTopics :: Lens' ListTopicsResponse [Topic]
 ltrTopics
   = lens _ltrTopics (\ s a -> s{_ltrTopics = a}) .
       _Default
@@ -430,7 +430,7 @@ instance ToJSON ListTopicsResponse where
 --
 -- /See:/ 'pullResponse' smart constructor.
 newtype PullResponse = PullResponse
-    { _prReceivedMessages :: Maybe [Maybe ReceivedMessage]
+    { _prReceivedMessages :: Maybe [ReceivedMessage]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PullResponse' with the minimum fields required to make a request.
@@ -449,7 +449,7 @@ pullResponse =
 -- messages if there are no more available in the backlog. The Pub\/Sub
 -- system may return fewer than the maxMessages requested even if there are
 -- more messages available in the backlog.
-prReceivedMessages :: Lens' PullResponse [Maybe ReceivedMessage]
+prReceivedMessages :: Lens' PullResponse [ReceivedMessage]
 prReceivedMessages
   = lens _prReceivedMessages
       (\ s a -> s{_prReceivedMessages = a})
@@ -473,7 +473,7 @@ instance ToJSON PullResponse where
 --
 -- /See:/ 'setIAMPolicyRequest' smart constructor.
 newtype SetIAMPolicyRequest = SetIAMPolicyRequest
-    { _siprPolicy :: Maybe (Maybe Policy)
+    { _siprPolicy :: Maybe Policy
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SetIAMPolicyRequest' with the minimum fields required to make a request.
@@ -492,7 +492,7 @@ setIAMPolicyRequest =
 -- size of the policy is limited to a few 10s of KB. An empty policy is in
 -- general a valid policy but certain services (like Projects) might reject
 -- them.
-siprPolicy :: Lens' SetIAMPolicyRequest (Maybe (Maybe Policy))
+siprPolicy :: Lens' SetIAMPolicyRequest (Maybe Policy)
 siprPolicy
   = lens _siprPolicy (\ s a -> s{_siprPolicy = a})
 
@@ -743,7 +743,7 @@ instance ToJSON TestIAMPermissionsResponse where
 --
 -- /See:/ 'publishRequest' smart constructor.
 newtype PublishRequest = PublishRequest
-    { _prMessages :: Maybe [Maybe PubsubMessage]
+    { _prMessages :: Maybe [PubsubMessage]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PublishRequest' with the minimum fields required to make a request.
@@ -759,7 +759,7 @@ publishRequest =
     }
 
 -- | The messages to publish.
-prMessages :: Lens' PublishRequest [Maybe PubsubMessage]
+prMessages :: Lens' PublishRequest [PubsubMessage]
 prMessages
   = lens _prMessages (\ s a -> s{_prMessages = a}) .
       _Default
@@ -797,7 +797,7 @@ instance ToJSON PublishRequest where
 data Policy = Policy
     { _pEtag     :: !(Maybe Word8)
     , _pVersion  :: !(Maybe Int32)
-    , _pBindings :: !(Maybe [Maybe Binding])
+    , _pBindings :: !(Maybe [Binding])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Policy' with the minimum fields required to make a request.
@@ -829,7 +829,7 @@ pVersion = lens _pVersion (\ s a -> s{_pVersion = a})
 
 -- | It is an error to specify multiple bindings for the same role. It is an
 -- error to specify a binding with no members.
-pBindings :: Lens' Policy [Maybe Binding]
+pBindings :: Lens' Policy [Binding]
 pBindings
   = lens _pBindings (\ s a -> s{_pBindings = a}) .
       _Default
@@ -855,7 +855,7 @@ instance ToJSON Policy where
 --
 -- /See:/ 'subscription' smart constructor.
 data Subscription = Subscription
-    { _sPushConfig         :: !(Maybe (Maybe PushConfig))
+    { _sPushConfig         :: !(Maybe PushConfig)
     , _sTopic              :: !(Maybe Text)
     , _sName               :: !(Maybe Text)
     , _sAckDeadlineSeconds :: !(Maybe Int32)
@@ -885,7 +885,7 @@ subscription =
 -- | If push delivery is used with this subscription, this field is used to
 -- configure it. An empty pushConfig signifies that the subscriber will
 -- pull and ack messages using API methods.
-sPushConfig :: Lens' Subscription (Maybe (Maybe PushConfig))
+sPushConfig :: Lens' Subscription (Maybe PushConfig)
 sPushConfig
   = lens _sPushConfig (\ s a -> s{_sPushConfig = a})
 
@@ -1072,7 +1072,7 @@ instance ToJSON AcknowledgeRequest where
 -- /See:/ 'listSubscriptionsResponse' smart constructor.
 data ListSubscriptionsResponse = ListSubscriptionsResponse
     { _lsrNextPageToken :: !(Maybe Text)
-    , _lsrSubscriptions :: !(Maybe [Maybe Subscription])
+    , _lsrSubscriptions :: !(Maybe [Subscription])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListSubscriptionsResponse' with the minimum fields required to make a request.
@@ -1099,7 +1099,7 @@ lsrNextPageToken
       (\ s a -> s{_lsrNextPageToken = a})
 
 -- | The subscriptions that match the request.
-lsrSubscriptions :: Lens' ListSubscriptionsResponse [Maybe Subscription]
+lsrSubscriptions :: Lens' ListSubscriptionsResponse [Subscription]
 lsrSubscriptions
   = lens _lsrSubscriptions
       (\ s a -> s{_lsrSubscriptions = a})

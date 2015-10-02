@@ -33,18 +33,17 @@ module Network.Google.Resource.Reports.UserUsageReport.Get
     -- * Request Lenses
     , uurgQuotaUser
     , uurgPrettyPrint
-    , uurgUserIp
+    , uurgUserIP
     , uurgFilters
     , uurgCustomerId
     , uurgDate
     , uurgKey
     , uurgParameters
     , uurgPageToken
-    , uurgOauthToken
+    , uurgOAuthToken
     , uurgUserKey
     , uurgMaxResults
     , uurgFields
-    , uurgAlt
     ) where
 
 import           Network.Google.AdminReports.Types
@@ -63,13 +62,13 @@ type UserUsageReportGetResource =
                    QueryParam "userIp" Text :>
                      QueryParam "filters" Text :>
                        QueryParam "customerId" Text :>
-                         QueryParam "key" Text :>
+                         QueryParam "key" Key :>
                            QueryParam "parameters" Text :>
                              QueryParam "pageToken" Text :>
-                               QueryParam "oauth_token" Text :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "maxResults" Word32 :>
                                    QueryParam "fields" Text :>
-                                     QueryParam "alt" Alt :>
+                                     QueryParam "alt" AltJSON :>
                                        Get '[JSON] UsageReports
 
 -- | Retrieves a report which is a collection of properties \/ statistics for
@@ -79,18 +78,17 @@ type UserUsageReportGetResource =
 data UserUsageReportGet' = UserUsageReportGet'
     { _uurgQuotaUser   :: !(Maybe Text)
     , _uurgPrettyPrint :: !Bool
-    , _uurgUserIp      :: !(Maybe Text)
+    , _uurgUserIP      :: !(Maybe Text)
     , _uurgFilters     :: !(Maybe Text)
     , _uurgCustomerId  :: !(Maybe Text)
     , _uurgDate        :: !Text
-    , _uurgKey         :: !(Maybe Text)
+    , _uurgKey         :: !(Maybe Key)
     , _uurgParameters  :: !(Maybe Text)
     , _uurgPageToken   :: !(Maybe Text)
-    , _uurgOauthToken  :: !(Maybe Text)
+    , _uurgOAuthToken  :: !(Maybe OAuthToken)
     , _uurgUserKey     :: !Text
     , _uurgMaxResults  :: !(Maybe Word32)
     , _uurgFields      :: !(Maybe Text)
-    , _uurgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserUsageReportGet'' with the minimum fields required to make a request.
@@ -101,7 +99,7 @@ data UserUsageReportGet' = UserUsageReportGet'
 --
 -- * 'uurgPrettyPrint'
 --
--- * 'uurgUserIp'
+-- * 'uurgUserIP'
 --
 -- * 'uurgFilters'
 --
@@ -115,15 +113,13 @@ data UserUsageReportGet' = UserUsageReportGet'
 --
 -- * 'uurgPageToken'
 --
--- * 'uurgOauthToken'
+-- * 'uurgOAuthToken'
 --
 -- * 'uurgUserKey'
 --
 -- * 'uurgMaxResults'
 --
 -- * 'uurgFields'
---
--- * 'uurgAlt'
 userUsageReportGet'
     :: Text -- ^ 'date'
     -> Text -- ^ 'userKey'
@@ -132,18 +128,17 @@ userUsageReportGet' pUurgDate_ pUurgUserKey_ =
     UserUsageReportGet'
     { _uurgQuotaUser = Nothing
     , _uurgPrettyPrint = True
-    , _uurgUserIp = Nothing
+    , _uurgUserIP = Nothing
     , _uurgFilters = Nothing
     , _uurgCustomerId = Nothing
     , _uurgDate = pUurgDate_
     , _uurgKey = Nothing
     , _uurgParameters = Nothing
     , _uurgPageToken = Nothing
-    , _uurgOauthToken = Nothing
+    , _uurgOAuthToken = Nothing
     , _uurgUserKey = pUurgUserKey_
     , _uurgMaxResults = Nothing
     , _uurgFields = Nothing
-    , _uurgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -162,9 +157,9 @@ uurgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-uurgUserIp :: Lens' UserUsageReportGet' (Maybe Text)
-uurgUserIp
-  = lens _uurgUserIp (\ s a -> s{_uurgUserIp = a})
+uurgUserIP :: Lens' UserUsageReportGet' (Maybe Text)
+uurgUserIP
+  = lens _uurgUserIP (\ s a -> s{_uurgUserIP = a})
 
 -- | Represents the set of filters including parameter operator value.
 uurgFilters :: Lens' UserUsageReportGet' (Maybe Text)
@@ -185,7 +180,7 @@ uurgDate = lens _uurgDate (\ s a -> s{_uurgDate = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-uurgKey :: Lens' UserUsageReportGet' (Maybe Text)
+uurgKey :: Lens' UserUsageReportGet' (Maybe Key)
 uurgKey = lens _uurgKey (\ s a -> s{_uurgKey = a})
 
 -- | Represents the application name, parameter name pairs to fetch in csv as
@@ -202,10 +197,10 @@ uurgPageToken
       (\ s a -> s{_uurgPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-uurgOauthToken :: Lens' UserUsageReportGet' (Maybe Text)
-uurgOauthToken
-  = lens _uurgOauthToken
-      (\ s a -> s{_uurgOauthToken = a})
+uurgOAuthToken :: Lens' UserUsageReportGet' (Maybe OAuthToken)
+uurgOAuthToken
+  = lens _uurgOAuthToken
+      (\ s a -> s{_uurgOAuthToken = a})
 
 -- | Represents the profile id or the user email for which the data should be
 -- filtered.
@@ -224,27 +219,27 @@ uurgFields :: Lens' UserUsageReportGet' (Maybe Text)
 uurgFields
   = lens _uurgFields (\ s a -> s{_uurgFields = a})
 
--- | Data format for the response.
-uurgAlt :: Lens' UserUsageReportGet' Alt
-uurgAlt = lens _uurgAlt (\ s a -> s{_uurgAlt = a})
+instance GoogleAuth UserUsageReportGet' where
+        authKey = uurgKey . _Just
+        authToken = uurgOAuthToken . _Just
 
 instance GoogleRequest UserUsageReportGet' where
         type Rs UserUsageReportGet' = UsageReports
         request = requestWithRoute defReq adminReportsURL
         requestWithRoute r u UserUsageReportGet'{..}
           = go _uurgQuotaUser (Just _uurgPrettyPrint)
-              _uurgUserIp
+              _uurgUserIP
               _uurgFilters
               _uurgCustomerId
               _uurgDate
               _uurgKey
               _uurgParameters
               _uurgPageToken
-              _uurgOauthToken
+              _uurgOAuthToken
               _uurgUserKey
               _uurgMaxResults
               _uurgFields
-              (Just _uurgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UserUsageReportGetResource)

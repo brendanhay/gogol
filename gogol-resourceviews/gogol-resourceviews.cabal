@@ -31,23 +31,23 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.InstanceGroups
-        , Network.Google.InstanceGroups.Types
-        , Network.Google.Resource.Resourceviews.ZoneOperations.Get
-        , Network.Google.Resource.Resourceviews.ZoneOperations.List
-        , Network.Google.Resource.Resourceviews.ZoneViews.AddResources
-        , Network.Google.Resource.Resourceviews.ZoneViews.Delete
-        , Network.Google.Resource.Resourceviews.ZoneViews.Get
-        , Network.Google.Resource.Resourceviews.ZoneViews.GetService
-        , Network.Google.Resource.Resourceviews.ZoneViews.Insert
-        , Network.Google.Resource.Resourceviews.ZoneViews.List
-        , Network.Google.Resource.Resourceviews.ZoneViews.ListResources
-        , Network.Google.Resource.Resourceviews.ZoneViews.RemoveResources
-        , Network.Google.Resource.Resourceviews.ZoneViews.SetService
+          Network.Google.Resource.ResourceViews.ZoneOperations.Get
+        , Network.Google.Resource.ResourceViews.ZoneOperations.List
+        , Network.Google.Resource.ResourceViews.ZoneViews.AddResources
+        , Network.Google.Resource.ResourceViews.ZoneViews.Delete
+        , Network.Google.Resource.ResourceViews.ZoneViews.Get
+        , Network.Google.Resource.ResourceViews.ZoneViews.GetService
+        , Network.Google.Resource.ResourceViews.ZoneViews.Insert
+        , Network.Google.Resource.ResourceViews.ZoneViews.List
+        , Network.Google.Resource.ResourceViews.ZoneViews.ListResources
+        , Network.Google.Resource.ResourceViews.ZoneViews.RemoveResources
+        , Network.Google.Resource.ResourceViews.ZoneViews.SetService
+        , Network.Google.ResourceViews
+        , Network.Google.ResourceViews.Types
 
     other-modules:
-          Network.Google.InstanceGroups.Types.Product
-        , Network.Google.InstanceGroups.Types.Sum
+          Network.Google.ResourceViews.Types.Product
+        , Network.Google.ResourceViews.Types.Sum
 
     build-depends:
           gogol-core == 0.0.1.*

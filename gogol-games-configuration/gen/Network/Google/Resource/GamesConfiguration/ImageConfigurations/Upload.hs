@@ -33,12 +33,12 @@ module Network.Google.Resource.GamesConfiguration.ImageConfigurations.Upload
     , icuQuotaUser
     , icuResourceId
     , icuPrettyPrint
-    , icuUserIp
+    , icuUserIP
+    , icuMedia
     , icuImageType
     , icuKey
-    , icuOauthToken
+    , icuOAuthToken
     , icuFields
-    , icuAlt
     ) where
 
 import           Network.Google.GamesConfiguration.Types
@@ -56,10 +56,10 @@ type ImageConfigurationsUploadResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :>
+                         QueryParam "alt" AltJSON :>
                            Post '[JSON] ImageConfiguration
 
 -- | Uploads an image for a resource with the given ID and image type.
@@ -69,12 +69,12 @@ data ImageConfigurationsUpload' = ImageConfigurationsUpload'
     { _icuQuotaUser   :: !(Maybe Text)
     , _icuResourceId  :: !Text
     , _icuPrettyPrint :: !Bool
-    , _icuUserIp      :: !(Maybe Text)
+    , _icuUserIP      :: !(Maybe Text)
+    , _icuMedia       :: !Body
     , _icuImageType   :: !GamesConfigurationImageConfigurationsUploadImageType
-    , _icuKey         :: !(Maybe Text)
-    , _icuOauthToken  :: !(Maybe Text)
+    , _icuKey         :: !(Maybe Key)
+    , _icuOAuthToken  :: !(Maybe OAuthToken)
     , _icuFields      :: !(Maybe Text)
-    , _icuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ImageConfigurationsUpload'' with the minimum fields required to make a request.
@@ -87,32 +87,33 @@ data ImageConfigurationsUpload' = ImageConfigurationsUpload'
 --
 -- * 'icuPrettyPrint'
 --
--- * 'icuUserIp'
+-- * 'icuUserIP'
+--
+-- * 'icuMedia'
 --
 -- * 'icuImageType'
 --
 -- * 'icuKey'
 --
--- * 'icuOauthToken'
+-- * 'icuOAuthToken'
 --
 -- * 'icuFields'
---
--- * 'icuAlt'
 imageConfigurationsUpload'
     :: Text -- ^ 'resourceId'
+    -> Body -- ^ 'media'
     -> GamesConfigurationImageConfigurationsUploadImageType -- ^ 'imageType'
     -> ImageConfigurationsUpload'
-imageConfigurationsUpload' pIcuResourceId_ pIcuImageType_ =
+imageConfigurationsUpload' pIcuResourceId_ pIcuMedia_ pIcuImageType_ =
     ImageConfigurationsUpload'
     { _icuQuotaUser = Nothing
     , _icuResourceId = pIcuResourceId_
     , _icuPrettyPrint = True
-    , _icuUserIp = Nothing
+    , _icuUserIP = Nothing
+    , _icuMedia = pIcuMedia_
     , _icuImageType = pIcuImageType_
     , _icuKey = Nothing
-    , _icuOauthToken = Nothing
+    , _icuOAuthToken = Nothing
     , _icuFields = Nothing
-    , _icuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -136,9 +137,12 @@ icuPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-icuUserIp :: Lens' ImageConfigurationsUpload' (Maybe Text)
-icuUserIp
-  = lens _icuUserIp (\ s a -> s{_icuUserIp = a})
+icuUserIP :: Lens' ImageConfigurationsUpload' (Maybe Text)
+icuUserIP
+  = lens _icuUserIP (\ s a -> s{_icuUserIP = a})
+
+icuMedia :: Lens' ImageConfigurationsUpload' Body
+icuMedia = lens _icuMedia (\ s a -> s{_icuMedia = a})
 
 -- | Selects which image in a resource for this method.
 icuImageType :: Lens' ImageConfigurationsUpload' GamesConfigurationImageConfigurationsUploadImageType
@@ -148,23 +152,23 @@ icuImageType
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-icuKey :: Lens' ImageConfigurationsUpload' (Maybe Text)
+icuKey :: Lens' ImageConfigurationsUpload' (Maybe Key)
 icuKey = lens _icuKey (\ s a -> s{_icuKey = a})
 
 -- | OAuth 2.0 token for the current user.
-icuOauthToken :: Lens' ImageConfigurationsUpload' (Maybe Text)
-icuOauthToken
-  = lens _icuOauthToken
-      (\ s a -> s{_icuOauthToken = a})
+icuOAuthToken :: Lens' ImageConfigurationsUpload' (Maybe OAuthToken)
+icuOAuthToken
+  = lens _icuOAuthToken
+      (\ s a -> s{_icuOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 icuFields :: Lens' ImageConfigurationsUpload' (Maybe Text)
 icuFields
   = lens _icuFields (\ s a -> s{_icuFields = a})
 
--- | Data format for the response.
-icuAlt :: Lens' ImageConfigurationsUpload' Alt
-icuAlt = lens _icuAlt (\ s a -> s{_icuAlt = a})
+instance GoogleAuth ImageConfigurationsUpload' where
+        authKey = icuKey . _Just
+        authToken = icuOAuthToken . _Just
 
 instance GoogleRequest ImageConfigurationsUpload'
          where
@@ -175,12 +179,13 @@ instance GoogleRequest ImageConfigurationsUpload'
         requestWithRoute r u ImageConfigurationsUpload'{..}
           = go _icuQuotaUser _icuResourceId
               (Just _icuPrettyPrint)
-              _icuUserIp
+              _icuUserIP
+              _icuMedia
               _icuImageType
               _icuKey
-              _icuOauthToken
+              _icuOAuthToken
               _icuFields
-              (Just _icuAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ImageConfigurationsUploadResource)

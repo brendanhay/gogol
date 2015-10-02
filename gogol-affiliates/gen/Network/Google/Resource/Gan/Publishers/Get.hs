@@ -35,14 +35,13 @@ module Network.Google.Resource.Gan.Publishers.Get
     -- * Request Lenses
     , pgQuotaUser
     , pgPrettyPrint
-    , pgUserIp
+    , pgUserIP
     , pgRoleId
     , pgRole
     , pgKey
-    , pgOauthToken
+    , pgOAuthToken
     , pgPublisherId
     , pgFields
-    , pgAlt
     ) where
 
 import           Network.Google.Affiliates.Types
@@ -57,11 +56,11 @@ type PublishersGetResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "publisherId" Text :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] Publisher
+                         QueryParam "alt" AltJSON :> Get '[JSON] Publisher
 
 -- | Retrieves data about a single advertiser if that the requesting
 -- advertiser\/publisher has access to it. Only advertisers can look up
@@ -72,14 +71,13 @@ type PublishersGetResource =
 data PublishersGet' = PublishersGet'
     { _pgQuotaUser   :: !(Maybe Text)
     , _pgPrettyPrint :: !Bool
-    , _pgUserIp      :: !(Maybe Text)
+    , _pgUserIP      :: !(Maybe Text)
     , _pgRoleId      :: !Text
     , _pgRole        :: !GanPublishersGetRole
-    , _pgKey         :: !(Maybe Text)
-    , _pgOauthToken  :: !(Maybe Text)
+    , _pgKey         :: !(Maybe Key)
+    , _pgOAuthToken  :: !(Maybe OAuthToken)
     , _pgPublisherId :: !(Maybe Text)
     , _pgFields      :: !(Maybe Text)
-    , _pgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PublishersGet'' with the minimum fields required to make a request.
@@ -90,7 +88,7 @@ data PublishersGet' = PublishersGet'
 --
 -- * 'pgPrettyPrint'
 --
--- * 'pgUserIp'
+-- * 'pgUserIP'
 --
 -- * 'pgRoleId'
 --
@@ -98,13 +96,11 @@ data PublishersGet' = PublishersGet'
 --
 -- * 'pgKey'
 --
--- * 'pgOauthToken'
+-- * 'pgOAuthToken'
 --
 -- * 'pgPublisherId'
 --
 -- * 'pgFields'
---
--- * 'pgAlt'
 publishersGet'
     :: Text -- ^ 'roleId'
     -> GanPublishersGetRole -- ^ 'role'
@@ -113,14 +109,13 @@ publishersGet' pPgRoleId_ pPgRole_ =
     PublishersGet'
     { _pgQuotaUser = Nothing
     , _pgPrettyPrint = True
-    , _pgUserIp = Nothing
+    , _pgUserIP = Nothing
     , _pgRoleId = pPgRoleId_
     , _pgRole = pPgRole_
     , _pgKey = Nothing
-    , _pgOauthToken = Nothing
+    , _pgOAuthToken = Nothing
     , _pgPublisherId = Nothing
     , _pgFields = Nothing
-    , _pgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -138,8 +133,8 @@ pgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-pgUserIp :: Lens' PublishersGet' (Maybe Text)
-pgUserIp = lens _pgUserIp (\ s a -> s{_pgUserIp = a})
+pgUserIP :: Lens' PublishersGet' (Maybe Text)
+pgUserIP = lens _pgUserIP (\ s a -> s{_pgUserIP = a})
 
 -- | The ID of the requesting advertiser or publisher.
 pgRoleId :: Lens' PublishersGet' Text
@@ -153,13 +148,13 @@ pgRole = lens _pgRole (\ s a -> s{_pgRole = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pgKey :: Lens' PublishersGet' (Maybe Text)
+pgKey :: Lens' PublishersGet' (Maybe Key)
 pgKey = lens _pgKey (\ s a -> s{_pgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-pgOauthToken :: Lens' PublishersGet' (Maybe Text)
-pgOauthToken
-  = lens _pgOauthToken (\ s a -> s{_pgOauthToken = a})
+pgOAuthToken :: Lens' PublishersGet' (Maybe OAuthToken)
+pgOAuthToken
+  = lens _pgOAuthToken (\ s a -> s{_pgOAuthToken = a})
 
 -- | The ID of the publisher to look up. Optional.
 pgPublisherId :: Lens' PublishersGet' (Maybe Text)
@@ -171,22 +166,22 @@ pgPublisherId
 pgFields :: Lens' PublishersGet' (Maybe Text)
 pgFields = lens _pgFields (\ s a -> s{_pgFields = a})
 
--- | Data format for the response.
-pgAlt :: Lens' PublishersGet' Alt
-pgAlt = lens _pgAlt (\ s a -> s{_pgAlt = a})
+instance GoogleAuth PublishersGet' where
+        authKey = pgKey . _Just
+        authToken = pgOAuthToken . _Just
 
 instance GoogleRequest PublishersGet' where
         type Rs PublishersGet' = Publisher
         request = requestWithRoute defReq affiliatesURL
         requestWithRoute r u PublishersGet'{..}
-          = go _pgQuotaUser (Just _pgPrettyPrint) _pgUserIp
+          = go _pgQuotaUser (Just _pgPrettyPrint) _pgUserIP
               _pgRoleId
               _pgRole
               _pgKey
-              _pgOauthToken
+              _pgOAuthToken
               _pgPublisherId
               _pgFields
-              (Just _pgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PublishersGetResource)

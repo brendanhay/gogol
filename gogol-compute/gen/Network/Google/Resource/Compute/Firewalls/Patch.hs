@@ -34,12 +34,12 @@ module Network.Google.Resource.Compute.Firewalls.Patch
     , fpQuotaUser
     , fpPrettyPrint
     , fpProject
-    , fpUserIp
+    , fpUserIP
     , fpKey
-    , fpOauthToken
+    , fpOAuthToken
+    , fpFirewall
     , fpFirewall
     , fpFields
-    , fpAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -55,10 +55,11 @@ type FirewallsPatchResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Patch '[JSON] Operation
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Firewall :> Patch '[JSON] Operation
 
 -- | Updates the specified firewall resource with the data included in the
 -- request. This method supports patch semantics.
@@ -68,12 +69,12 @@ data FirewallsPatch' = FirewallsPatch'
     { _fpQuotaUser   :: !(Maybe Text)
     , _fpPrettyPrint :: !Bool
     , _fpProject     :: !Text
-    , _fpUserIp      :: !(Maybe Text)
-    , _fpKey         :: !(Maybe Text)
-    , _fpOauthToken  :: !(Maybe Text)
+    , _fpUserIP      :: !(Maybe Text)
+    , _fpKey         :: !(Maybe Key)
+    , _fpOAuthToken  :: !(Maybe OAuthToken)
     , _fpFirewall    :: !Text
+    , _fpFirewall    :: !Firewall
     , _fpFields      :: !(Maybe Text)
-    , _fpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FirewallsPatch'' with the minimum fields required to make a request.
@@ -86,32 +87,33 @@ data FirewallsPatch' = FirewallsPatch'
 --
 -- * 'fpProject'
 --
--- * 'fpUserIp'
+-- * 'fpUserIP'
 --
 -- * 'fpKey'
 --
--- * 'fpOauthToken'
+-- * 'fpOAuthToken'
+--
+-- * 'fpFirewall'
 --
 -- * 'fpFirewall'
 --
 -- * 'fpFields'
---
--- * 'fpAlt'
 firewallsPatch'
     :: Text -- ^ 'project'
     -> Text -- ^ 'firewall'
+    -> Firewall -- ^ 'Firewall'
     -> FirewallsPatch'
-firewallsPatch' pFpProject_ pFpFirewall_ =
+firewallsPatch' pFpProject_ pFpFirewall_ pFpFirewall_ =
     FirewallsPatch'
     { _fpQuotaUser = Nothing
     , _fpPrettyPrint = True
     , _fpProject = pFpProject_
-    , _fpUserIp = Nothing
+    , _fpUserIP = Nothing
     , _fpKey = Nothing
-    , _fpOauthToken = Nothing
+    , _fpOAuthToken = Nothing
+    , _fpFirewall = pFpFirewall_
     , _fpFirewall = pFpFirewall_
     , _fpFields = Nothing
-    , _fpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -134,22 +136,27 @@ fpProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-fpUserIp :: Lens' FirewallsPatch' (Maybe Text)
-fpUserIp = lens _fpUserIp (\ s a -> s{_fpUserIp = a})
+fpUserIP :: Lens' FirewallsPatch' (Maybe Text)
+fpUserIP = lens _fpUserIP (\ s a -> s{_fpUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fpKey :: Lens' FirewallsPatch' (Maybe Text)
+fpKey :: Lens' FirewallsPatch' (Maybe Key)
 fpKey = lens _fpKey (\ s a -> s{_fpKey = a})
 
 -- | OAuth 2.0 token for the current user.
-fpOauthToken :: Lens' FirewallsPatch' (Maybe Text)
-fpOauthToken
-  = lens _fpOauthToken (\ s a -> s{_fpOauthToken = a})
+fpOAuthToken :: Lens' FirewallsPatch' (Maybe OAuthToken)
+fpOAuthToken
+  = lens _fpOAuthToken (\ s a -> s{_fpOAuthToken = a})
 
 -- | Name of the firewall resource to update.
 fpFirewall :: Lens' FirewallsPatch' Text
+fpFirewall
+  = lens _fpFirewall (\ s a -> s{_fpFirewall = a})
+
+-- | Multipart request metadata.
+fpFirewall :: Lens' FirewallsPatch' Firewall
 fpFirewall
   = lens _fpFirewall (\ s a -> s{_fpFirewall = a})
 
@@ -157,21 +164,22 @@ fpFirewall
 fpFields :: Lens' FirewallsPatch' (Maybe Text)
 fpFields = lens _fpFields (\ s a -> s{_fpFields = a})
 
--- | Data format for the response.
-fpAlt :: Lens' FirewallsPatch' Alt
-fpAlt = lens _fpAlt (\ s a -> s{_fpAlt = a})
+instance GoogleAuth FirewallsPatch' where
+        authKey = fpKey . _Just
+        authToken = fpOAuthToken . _Just
 
 instance GoogleRequest FirewallsPatch' where
         type Rs FirewallsPatch' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u FirewallsPatch'{..}
           = go _fpQuotaUser (Just _fpPrettyPrint) _fpProject
-              _fpUserIp
+              _fpUserIP
               _fpKey
-              _fpOauthToken
+              _fpOAuthToken
               _fpFirewall
               _fpFields
-              (Just _fpAlt)
+              (Just AltJSON)
+              _fpFirewall
           where go
                   = clientWithRoute
                       (Proxy :: Proxy FirewallsPatchResource)

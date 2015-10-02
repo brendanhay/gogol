@@ -32,13 +32,12 @@ module Network.Google.Resource.Games.TurnBasedMatches.Join
     -- * Request Lenses
     , tbmjQuotaUser
     , tbmjPrettyPrint
-    , tbmjUserIp
+    , tbmjUserIP
     , tbmjKey
     , tbmjLanguage
-    , tbmjOauthToken
+    , tbmjOAuthToken
     , tbmjMatchId
     , tbmjFields
-    , tbmjAlt
     ) where
 
 import           Network.Google.Games.Types
@@ -53,11 +52,12 @@ type TurnBasedMatchesJoinResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "language" Text :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Put '[JSON] TurnBasedMatch
+                         QueryParam "alt" AltJSON :>
+                           Put '[JSON] TurnBasedMatch
 
 -- | Join a turn-based match.
 --
@@ -65,13 +65,12 @@ type TurnBasedMatchesJoinResource =
 data TurnBasedMatchesJoin' = TurnBasedMatchesJoin'
     { _tbmjQuotaUser   :: !(Maybe Text)
     , _tbmjPrettyPrint :: !Bool
-    , _tbmjUserIp      :: !(Maybe Text)
-    , _tbmjKey         :: !(Maybe Text)
+    , _tbmjUserIP      :: !(Maybe Text)
+    , _tbmjKey         :: !(Maybe Key)
     , _tbmjLanguage    :: !(Maybe Text)
-    , _tbmjOauthToken  :: !(Maybe Text)
+    , _tbmjOAuthToken  :: !(Maybe OAuthToken)
     , _tbmjMatchId     :: !Text
     , _tbmjFields      :: !(Maybe Text)
-    , _tbmjAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchesJoin'' with the minimum fields required to make a request.
@@ -82,19 +81,17 @@ data TurnBasedMatchesJoin' = TurnBasedMatchesJoin'
 --
 -- * 'tbmjPrettyPrint'
 --
--- * 'tbmjUserIp'
+-- * 'tbmjUserIP'
 --
 -- * 'tbmjKey'
 --
 -- * 'tbmjLanguage'
 --
--- * 'tbmjOauthToken'
+-- * 'tbmjOAuthToken'
 --
 -- * 'tbmjMatchId'
 --
 -- * 'tbmjFields'
---
--- * 'tbmjAlt'
 turnBasedMatchesJoin'
     :: Text -- ^ 'matchId'
     -> TurnBasedMatchesJoin'
@@ -102,13 +99,12 @@ turnBasedMatchesJoin' pTbmjMatchId_ =
     TurnBasedMatchesJoin'
     { _tbmjQuotaUser = Nothing
     , _tbmjPrettyPrint = True
-    , _tbmjUserIp = Nothing
+    , _tbmjUserIP = Nothing
     , _tbmjKey = Nothing
     , _tbmjLanguage = Nothing
-    , _tbmjOauthToken = Nothing
+    , _tbmjOAuthToken = Nothing
     , _tbmjMatchId = pTbmjMatchId_
     , _tbmjFields = Nothing
-    , _tbmjAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,14 +123,14 @@ tbmjPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tbmjUserIp :: Lens' TurnBasedMatchesJoin' (Maybe Text)
-tbmjUserIp
-  = lens _tbmjUserIp (\ s a -> s{_tbmjUserIp = a})
+tbmjUserIP :: Lens' TurnBasedMatchesJoin' (Maybe Text)
+tbmjUserIP
+  = lens _tbmjUserIP (\ s a -> s{_tbmjUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tbmjKey :: Lens' TurnBasedMatchesJoin' (Maybe Text)
+tbmjKey :: Lens' TurnBasedMatchesJoin' (Maybe Key)
 tbmjKey = lens _tbmjKey (\ s a -> s{_tbmjKey = a})
 
 -- | The preferred language to use for strings returned by this method.
@@ -143,10 +139,10 @@ tbmjLanguage
   = lens _tbmjLanguage (\ s a -> s{_tbmjLanguage = a})
 
 -- | OAuth 2.0 token for the current user.
-tbmjOauthToken :: Lens' TurnBasedMatchesJoin' (Maybe Text)
-tbmjOauthToken
-  = lens _tbmjOauthToken
-      (\ s a -> s{_tbmjOauthToken = a})
+tbmjOAuthToken :: Lens' TurnBasedMatchesJoin' (Maybe OAuthToken)
+tbmjOAuthToken
+  = lens _tbmjOAuthToken
+      (\ s a -> s{_tbmjOAuthToken = a})
 
 -- | The ID of the match.
 tbmjMatchId :: Lens' TurnBasedMatchesJoin' Text
@@ -158,22 +154,22 @@ tbmjFields :: Lens' TurnBasedMatchesJoin' (Maybe Text)
 tbmjFields
   = lens _tbmjFields (\ s a -> s{_tbmjFields = a})
 
--- | Data format for the response.
-tbmjAlt :: Lens' TurnBasedMatchesJoin' Alt
-tbmjAlt = lens _tbmjAlt (\ s a -> s{_tbmjAlt = a})
+instance GoogleAuth TurnBasedMatchesJoin' where
+        authKey = tbmjKey . _Just
+        authToken = tbmjOAuthToken . _Just
 
 instance GoogleRequest TurnBasedMatchesJoin' where
         type Rs TurnBasedMatchesJoin' = TurnBasedMatch
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u TurnBasedMatchesJoin'{..}
           = go _tbmjQuotaUser (Just _tbmjPrettyPrint)
-              _tbmjUserIp
+              _tbmjUserIP
               _tbmjKey
               _tbmjLanguage
-              _tbmjOauthToken
+              _tbmjOAuthToken
               _tbmjMatchId
               _tbmjFields
-              (Just _tbmjAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TurnBasedMatchesJoinResource)

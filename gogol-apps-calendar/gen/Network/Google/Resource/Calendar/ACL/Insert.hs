@@ -33,11 +33,11 @@ module Network.Google.Resource.Calendar.ACL.Insert
     , aiQuotaUser
     , aiCalendarId
     , aiPrettyPrint
-    , aiUserIp
+    , aiUserIP
     , aiKey
-    , aiOauthToken
+    , aiACLRule
+    , aiOAuthToken
     , aiFields
-    , aiAlt
     ) where
 
 import           Network.Google.AppsCalendar.Types
@@ -52,10 +52,11 @@ type AclInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] ACLRule
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] ACLRule :> Post '[JSON] ACLRule
 
 -- | Creates an access control rule.
 --
@@ -64,11 +65,11 @@ data ACLInsert' = ACLInsert'
     { _aiQuotaUser   :: !(Maybe Text)
     , _aiCalendarId  :: !Text
     , _aiPrettyPrint :: !Bool
-    , _aiUserIp      :: !(Maybe Text)
-    , _aiKey         :: !(Maybe Text)
-    , _aiOauthToken  :: !(Maybe Text)
+    , _aiUserIP      :: !(Maybe Text)
+    , _aiKey         :: !(Maybe Key)
+    , _aiACLRule     :: !ACLRule
+    , _aiOAuthToken  :: !(Maybe OAuthToken)
     , _aiFields      :: !(Maybe Text)
-    , _aiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ACLInsert'' with the minimum fields required to make a request.
@@ -81,28 +82,29 @@ data ACLInsert' = ACLInsert'
 --
 -- * 'aiPrettyPrint'
 --
--- * 'aiUserIp'
+-- * 'aiUserIP'
 --
 -- * 'aiKey'
 --
--- * 'aiOauthToken'
+-- * 'aiACLRule'
+--
+-- * 'aiOAuthToken'
 --
 -- * 'aiFields'
---
--- * 'aiAlt'
 aCLInsert'
     :: Text -- ^ 'calendarId'
+    -> ACLRule -- ^ 'ACLRule'
     -> ACLInsert'
-aCLInsert' pAiCalendarId_ =
+aCLInsert' pAiCalendarId_ pAiACLRule_ =
     ACLInsert'
     { _aiQuotaUser = Nothing
     , _aiCalendarId = pAiCalendarId_
     , _aiPrettyPrint = True
-    , _aiUserIp = Nothing
+    , _aiUserIP = Nothing
     , _aiKey = Nothing
-    , _aiOauthToken = Nothing
+    , _aiACLRule = pAiACLRule_
+    , _aiOAuthToken = Nothing
     , _aiFields = Nothing
-    , _aiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,38 +129,44 @@ aiPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-aiUserIp :: Lens' ACLInsert' (Maybe Text)
-aiUserIp = lens _aiUserIp (\ s a -> s{_aiUserIp = a})
+aiUserIP :: Lens' ACLInsert' (Maybe Text)
+aiUserIP = lens _aiUserIP (\ s a -> s{_aiUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aiKey :: Lens' ACLInsert' (Maybe Text)
+aiKey :: Lens' ACLInsert' (Maybe Key)
 aiKey = lens _aiKey (\ s a -> s{_aiKey = a})
 
+-- | Multipart request metadata.
+aiACLRule :: Lens' ACLInsert' ACLRule
+aiACLRule
+  = lens _aiACLRule (\ s a -> s{_aiACLRule = a})
+
 -- | OAuth 2.0 token for the current user.
-aiOauthToken :: Lens' ACLInsert' (Maybe Text)
-aiOauthToken
-  = lens _aiOauthToken (\ s a -> s{_aiOauthToken = a})
+aiOAuthToken :: Lens' ACLInsert' (Maybe OAuthToken)
+aiOAuthToken
+  = lens _aiOAuthToken (\ s a -> s{_aiOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 aiFields :: Lens' ACLInsert' (Maybe Text)
 aiFields = lens _aiFields (\ s a -> s{_aiFields = a})
 
--- | Data format for the response.
-aiAlt :: Lens' ACLInsert' Alt
-aiAlt = lens _aiAlt (\ s a -> s{_aiAlt = a})
+instance GoogleAuth ACLInsert' where
+        authKey = aiKey . _Just
+        authToken = aiOAuthToken . _Just
 
 instance GoogleRequest ACLInsert' where
         type Rs ACLInsert' = ACLRule
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u ACLInsert'{..}
           = go _aiQuotaUser _aiCalendarId (Just _aiPrettyPrint)
-              _aiUserIp
+              _aiUserIP
               _aiKey
-              _aiOauthToken
+              _aiOAuthToken
               _aiFields
-              (Just _aiAlt)
+              (Just AltJSON)
+              _aiACLRule
           where go
                   = clientWithRoute (Proxy :: Proxy AclInsertResource)
                       r

@@ -72,7 +72,7 @@ module Network.Google.GamesConfiguration
     , imageConfiguration
     , icResourceId
     , icKind
-    , icUrl
+    , icURL
     , icImageType
 
     -- ** LeaderboardConfigurationListResponse
@@ -148,7 +148,7 @@ module Network.Google.GamesConfiguration
     , lcdScoreFormat
     , lcdSortRank
     , lcdName
-    , lcdIconUrl
+    , lcdIconURL
 
     -- ** LocalizedStringBundle
     , LocalizedStringBundle
@@ -163,11 +163,8 @@ module Network.Google.GamesConfiguration
     , acdSortRank
     , acdName
     , acdPointValue
-    , acdIconUrl
+    , acdIconURL
     , acdDescription
-
-    -- ** Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.GamesConfiguration.Types

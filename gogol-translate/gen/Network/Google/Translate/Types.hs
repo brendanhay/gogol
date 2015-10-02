@@ -53,9 +53,6 @@ module Network.Google.Translate.Types
     , TranslationsListResponse
     , translationsListResponse
     , tlrTranslations
-
-    -- * Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.Prelude

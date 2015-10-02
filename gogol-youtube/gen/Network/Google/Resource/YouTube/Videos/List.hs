@@ -35,7 +35,7 @@ module Network.Google.Resource.YouTube.Videos.List
     , vlPart
     , vlPrettyPrint
     , vlRegionCode
-    , vlUserIp
+    , vlUserIP
     , vlLocale
     , vlMyRating
     , vlHl
@@ -44,10 +44,9 @@ module Network.Google.Resource.YouTube.Videos.List
     , vlKey
     , vlId
     , vlPageToken
-    , vlOauthToken
+    , vlOAuthToken
     , vlMaxResults
     , vlFields
-    , vlAlt
     ) where
 
 import           Network.Google.Prelude
@@ -68,13 +67,13 @@ type VideosListResource =
                        QueryParam "hl" Text :>
                          QueryParam "onBehalfOfContentOwner" Text :>
                            QueryParam "videoCategoryId" Text :>
-                             QueryParam "key" Text :>
+                             QueryParam "key" Key :>
                                QueryParam "id" Text :>
                                  QueryParam "pageToken" Text :>
-                                   QueryParam "oauth_token" Text :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "maxResults" Word32 :>
                                        QueryParam "fields" Text :>
-                                         QueryParam "alt" Alt :>
+                                         QueryParam "alt" AltJSON :>
                                            Get '[JSON] VideoListResponse
 
 -- | Returns a list of videos that match the API request parameters.
@@ -86,19 +85,18 @@ data VideosList' = VideosList'
     , _vlPart                   :: !Text
     , _vlPrettyPrint            :: !Bool
     , _vlRegionCode             :: !(Maybe Text)
-    , _vlUserIp                 :: !(Maybe Text)
+    , _vlUserIP                 :: !(Maybe Text)
     , _vlLocale                 :: !(Maybe Text)
     , _vlMyRating               :: !(Maybe YouTubeVideosListMyRating)
     , _vlHl                     :: !(Maybe Text)
     , _vlOnBehalfOfContentOwner :: !(Maybe Text)
     , _vlVideoCategoryId        :: !Text
-    , _vlKey                    :: !(Maybe Text)
+    , _vlKey                    :: !(Maybe Key)
     , _vlId                     :: !(Maybe Text)
     , _vlPageToken              :: !(Maybe Text)
-    , _vlOauthToken             :: !(Maybe Text)
+    , _vlOAuthToken             :: !(Maybe OAuthToken)
     , _vlMaxResults             :: !Word32
     , _vlFields                 :: !(Maybe Text)
-    , _vlAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideosList'' with the minimum fields required to make a request.
@@ -115,7 +113,7 @@ data VideosList' = VideosList'
 --
 -- * 'vlRegionCode'
 --
--- * 'vlUserIp'
+-- * 'vlUserIP'
 --
 -- * 'vlLocale'
 --
@@ -133,13 +131,11 @@ data VideosList' = VideosList'
 --
 -- * 'vlPageToken'
 --
--- * 'vlOauthToken'
+-- * 'vlOAuthToken'
 --
 -- * 'vlMaxResults'
 --
 -- * 'vlFields'
---
--- * 'vlAlt'
 videosList'
     :: Text -- ^ 'part'
     -> VideosList'
@@ -150,7 +146,7 @@ videosList' pVlPart_ =
     , _vlPart = pVlPart_
     , _vlPrettyPrint = True
     , _vlRegionCode = Nothing
-    , _vlUserIp = Nothing
+    , _vlUserIP = Nothing
     , _vlLocale = Nothing
     , _vlMyRating = Nothing
     , _vlHl = Nothing
@@ -159,10 +155,9 @@ videosList' pVlPart_ =
     , _vlKey = Nothing
     , _vlId = Nothing
     , _vlPageToken = Nothing
-    , _vlOauthToken = Nothing
+    , _vlOAuthToken = Nothing
     , _vlMaxResults = 5
     , _vlFields = Nothing
-    , _vlAlt = JSON
     }
 
 -- | The chart parameter identifies the chart that you want to retrieve.
@@ -202,8 +197,8 @@ vlRegionCode
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-vlUserIp :: Lens' VideosList' (Maybe Text)
-vlUserIp = lens _vlUserIp (\ s a -> s{_vlUserIp = a})
+vlUserIP :: Lens' VideosList' (Maybe Text)
+vlUserIP = lens _vlUserIP (\ s a -> s{_vlUserIP = a})
 
 -- | DEPRECATED
 vlLocale :: Lens' VideosList' (Maybe Text)
@@ -253,7 +248,7 @@ vlVideoCategoryId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vlKey :: Lens' VideosList' (Maybe Text)
+vlKey :: Lens' VideosList' (Maybe Key)
 vlKey = lens _vlKey (\ s a -> s{_vlKey = a})
 
 -- | The id parameter specifies a comma-separated list of the YouTube video
@@ -273,9 +268,9 @@ vlPageToken
   = lens _vlPageToken (\ s a -> s{_vlPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-vlOauthToken :: Lens' VideosList' (Maybe Text)
-vlOauthToken
-  = lens _vlOauthToken (\ s a -> s{_vlOauthToken = a})
+vlOAuthToken :: Lens' VideosList' (Maybe OAuthToken)
+vlOAuthToken
+  = lens _vlOAuthToken (\ s a -> s{_vlOAuthToken = a})
 
 -- | The maxResults parameter specifies the maximum number of items that
 -- should be returned in the result set. Note: This parameter is supported
@@ -289,9 +284,9 @@ vlMaxResults
 vlFields :: Lens' VideosList' (Maybe Text)
 vlFields = lens _vlFields (\ s a -> s{_vlFields = a})
 
--- | Data format for the response.
-vlAlt :: Lens' VideosList' Alt
-vlAlt = lens _vlAlt (\ s a -> s{_vlAlt = a})
+instance GoogleAuth VideosList' where
+        authKey = vlKey . _Just
+        authToken = vlOAuthToken . _Just
 
 instance GoogleRequest VideosList' where
         type Rs VideosList' = VideoListResponse
@@ -300,7 +295,7 @@ instance GoogleRequest VideosList' where
           = go _vlChart _vlQuotaUser (Just _vlPart)
               (Just _vlPrettyPrint)
               _vlRegionCode
-              _vlUserIp
+              _vlUserIP
               _vlLocale
               _vlMyRating
               _vlHl
@@ -309,10 +304,10 @@ instance GoogleRequest VideosList' where
               _vlKey
               _vlId
               _vlPageToken
-              _vlOauthToken
+              _vlOAuthToken
               (Just _vlMaxResults)
               _vlFields
-              (Just _vlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy VideosListResource)
                       r

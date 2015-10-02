@@ -32,13 +32,12 @@ module Network.Google.Resource.DFAReporting.FloodlightActivityGroups.Delete
     -- * Request Lenses
     , fagdQuotaUser
     , fagdPrettyPrint
-    , fagdUserIp
+    , fagdUserIP
     , fagdProfileId
     , fagdKey
     , fagdId
-    , fagdOauthToken
+    , fagdOAuthToken
     , fagdFields
-    , fagdAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,10 +53,10 @@ type FloodlightActivityGroupsDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Delete '[JSON] ()
+                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an existing floodlight activity group.
 --
@@ -65,13 +64,12 @@ type FloodlightActivityGroupsDeleteResource =
 data FloodlightActivityGroupsDelete' = FloodlightActivityGroupsDelete'
     { _fagdQuotaUser   :: !(Maybe Text)
     , _fagdPrettyPrint :: !Bool
-    , _fagdUserIp      :: !(Maybe Text)
+    , _fagdUserIP      :: !(Maybe Text)
     , _fagdProfileId   :: !Int64
-    , _fagdKey         :: !(Maybe Text)
+    , _fagdKey         :: !(Maybe Key)
     , _fagdId          :: !Int64
-    , _fagdOauthToken  :: !(Maybe Text)
+    , _fagdOAuthToken  :: !(Maybe OAuthToken)
     , _fagdFields      :: !(Maybe Text)
-    , _fagdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivityGroupsDelete'' with the minimum fields required to make a request.
@@ -82,7 +80,7 @@ data FloodlightActivityGroupsDelete' = FloodlightActivityGroupsDelete'
 --
 -- * 'fagdPrettyPrint'
 --
--- * 'fagdUserIp'
+-- * 'fagdUserIP'
 --
 -- * 'fagdProfileId'
 --
@@ -90,11 +88,9 @@ data FloodlightActivityGroupsDelete' = FloodlightActivityGroupsDelete'
 --
 -- * 'fagdId'
 --
--- * 'fagdOauthToken'
+-- * 'fagdOAuthToken'
 --
 -- * 'fagdFields'
---
--- * 'fagdAlt'
 floodlightActivityGroupsDelete'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
@@ -103,13 +99,12 @@ floodlightActivityGroupsDelete' pFagdProfileId_ pFagdId_ =
     FloodlightActivityGroupsDelete'
     { _fagdQuotaUser = Nothing
     , _fagdPrettyPrint = True
-    , _fagdUserIp = Nothing
+    , _fagdUserIP = Nothing
     , _fagdProfileId = pFagdProfileId_
     , _fagdKey = Nothing
     , _fagdId = pFagdId_
-    , _fagdOauthToken = Nothing
+    , _fagdOAuthToken = Nothing
     , _fagdFields = Nothing
-    , _fagdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -128,9 +123,9 @@ fagdPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-fagdUserIp :: Lens' FloodlightActivityGroupsDelete' (Maybe Text)
-fagdUserIp
-  = lens _fagdUserIp (\ s a -> s{_fagdUserIp = a})
+fagdUserIP :: Lens' FloodlightActivityGroupsDelete' (Maybe Text)
+fagdUserIP
+  = lens _fagdUserIP (\ s a -> s{_fagdUserIP = a})
 
 -- | User profile ID associated with this request.
 fagdProfileId :: Lens' FloodlightActivityGroupsDelete' Int64
@@ -141,7 +136,7 @@ fagdProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fagdKey :: Lens' FloodlightActivityGroupsDelete' (Maybe Text)
+fagdKey :: Lens' FloodlightActivityGroupsDelete' (Maybe Key)
 fagdKey = lens _fagdKey (\ s a -> s{_fagdKey = a})
 
 -- | Floodlight activity Group ID.
@@ -149,19 +144,20 @@ fagdId :: Lens' FloodlightActivityGroupsDelete' Int64
 fagdId = lens _fagdId (\ s a -> s{_fagdId = a})
 
 -- | OAuth 2.0 token for the current user.
-fagdOauthToken :: Lens' FloodlightActivityGroupsDelete' (Maybe Text)
-fagdOauthToken
-  = lens _fagdOauthToken
-      (\ s a -> s{_fagdOauthToken = a})
+fagdOAuthToken :: Lens' FloodlightActivityGroupsDelete' (Maybe OAuthToken)
+fagdOAuthToken
+  = lens _fagdOAuthToken
+      (\ s a -> s{_fagdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 fagdFields :: Lens' FloodlightActivityGroupsDelete' (Maybe Text)
 fagdFields
   = lens _fagdFields (\ s a -> s{_fagdFields = a})
 
--- | Data format for the response.
-fagdAlt :: Lens' FloodlightActivityGroupsDelete' Alt
-fagdAlt = lens _fagdAlt (\ s a -> s{_fagdAlt = a})
+instance GoogleAuth FloodlightActivityGroupsDelete'
+         where
+        authKey = fagdKey . _Just
+        authToken = fagdOAuthToken . _Just
 
 instance GoogleRequest
          FloodlightActivityGroupsDelete' where
@@ -170,13 +166,13 @@ instance GoogleRequest
         requestWithRoute r u
           FloodlightActivityGroupsDelete'{..}
           = go _fagdQuotaUser (Just _fagdPrettyPrint)
-              _fagdUserIp
+              _fagdUserIP
               _fagdProfileId
               _fagdKey
               _fagdId
-              _fagdOauthToken
+              _fagdOAuthToken
               _fagdFields
-              (Just _fagdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

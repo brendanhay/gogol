@@ -34,15 +34,14 @@ module Network.Google.Resource.Compute.RegionOperations.List
     , rolQuotaUser
     , rolPrettyPrint
     , rolProject
-    , rolUserIp
+    , rolUserIP
     , rolKey
     , rolFilter
     , rolRegion
     , rolPageToken
-    , rolOauthToken
+    , rolOAuthToken
     , rolMaxResults
     , rolFields
-    , rolAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -58,13 +57,14 @@ type RegionOperationsListResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "filter" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "maxResults" Word32 :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :> Get '[JSON] OperationList
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] OperationList
 
 -- | Retrieves the list of Operation resources contained within the specified
 -- region.
@@ -74,15 +74,14 @@ data RegionOperationsList' = RegionOperationsList'
     { _rolQuotaUser   :: !(Maybe Text)
     , _rolPrettyPrint :: !Bool
     , _rolProject     :: !Text
-    , _rolUserIp      :: !(Maybe Text)
-    , _rolKey         :: !(Maybe Text)
+    , _rolUserIP      :: !(Maybe Text)
+    , _rolKey         :: !(Maybe Key)
     , _rolFilter      :: !(Maybe Text)
     , _rolRegion      :: !Text
     , _rolPageToken   :: !(Maybe Text)
-    , _rolOauthToken  :: !(Maybe Text)
+    , _rolOAuthToken  :: !(Maybe OAuthToken)
     , _rolMaxResults  :: !Word32
     , _rolFields      :: !(Maybe Text)
-    , _rolAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RegionOperationsList'' with the minimum fields required to make a request.
@@ -95,7 +94,7 @@ data RegionOperationsList' = RegionOperationsList'
 --
 -- * 'rolProject'
 --
--- * 'rolUserIp'
+-- * 'rolUserIP'
 --
 -- * 'rolKey'
 --
@@ -105,13 +104,11 @@ data RegionOperationsList' = RegionOperationsList'
 --
 -- * 'rolPageToken'
 --
--- * 'rolOauthToken'
+-- * 'rolOAuthToken'
 --
 -- * 'rolMaxResults'
 --
 -- * 'rolFields'
---
--- * 'rolAlt'
 regionOperationsList'
     :: Text -- ^ 'project'
     -> Text -- ^ 'region'
@@ -121,15 +118,14 @@ regionOperationsList' pRolProject_ pRolRegion_ =
     { _rolQuotaUser = Nothing
     , _rolPrettyPrint = True
     , _rolProject = pRolProject_
-    , _rolUserIp = Nothing
+    , _rolUserIP = Nothing
     , _rolKey = Nothing
     , _rolFilter = Nothing
     , _rolRegion = pRolRegion_
     , _rolPageToken = Nothing
-    , _rolOauthToken = Nothing
+    , _rolOAuthToken = Nothing
     , _rolMaxResults = 500
     , _rolFields = Nothing
-    , _rolAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,14 +148,14 @@ rolProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rolUserIp :: Lens' RegionOperationsList' (Maybe Text)
-rolUserIp
-  = lens _rolUserIp (\ s a -> s{_rolUserIp = a})
+rolUserIP :: Lens' RegionOperationsList' (Maybe Text)
+rolUserIP
+  = lens _rolUserIP (\ s a -> s{_rolUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rolKey :: Lens' RegionOperationsList' (Maybe Text)
+rolKey :: Lens' RegionOperationsList' (Maybe Key)
 rolKey = lens _rolKey (\ s a -> s{_rolKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
@@ -190,10 +186,10 @@ rolPageToken
   = lens _rolPageToken (\ s a -> s{_rolPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-rolOauthToken :: Lens' RegionOperationsList' (Maybe Text)
-rolOauthToken
-  = lens _rolOauthToken
-      (\ s a -> s{_rolOauthToken = a})
+rolOAuthToken :: Lens' RegionOperationsList' (Maybe OAuthToken)
+rolOAuthToken
+  = lens _rolOAuthToken
+      (\ s a -> s{_rolOAuthToken = a})
 
 -- | Maximum count of results to be returned.
 rolMaxResults :: Lens' RegionOperationsList' Word32
@@ -206,24 +202,24 @@ rolFields :: Lens' RegionOperationsList' (Maybe Text)
 rolFields
   = lens _rolFields (\ s a -> s{_rolFields = a})
 
--- | Data format for the response.
-rolAlt :: Lens' RegionOperationsList' Alt
-rolAlt = lens _rolAlt (\ s a -> s{_rolAlt = a})
+instance GoogleAuth RegionOperationsList' where
+        authKey = rolKey . _Just
+        authToken = rolOAuthToken . _Just
 
 instance GoogleRequest RegionOperationsList' where
         type Rs RegionOperationsList' = OperationList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u RegionOperationsList'{..}
           = go _rolQuotaUser (Just _rolPrettyPrint) _rolProject
-              _rolUserIp
+              _rolUserIP
               _rolKey
               _rolFilter
               _rolRegion
               _rolPageToken
-              _rolOauthToken
+              _rolOAuthToken
               (Just _rolMaxResults)
               _rolFields
-              (Just _rolAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy RegionOperationsListResource)

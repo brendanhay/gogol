@@ -32,13 +32,13 @@ module Network.Google.Resource.Directory.Schemas.Update
     -- * Request Lenses
     , suQuotaUser
     , suPrettyPrint
-    , suUserIp
+    , suUserIP
     , suCustomerId
+    , suSchema
     , suKey
-    , suOauthToken
+    , suOAuthToken
     , suSchemaKey
     , suFields
-    , suAlt
     ) where
 
 import           Network.Google.AdminDirectory.Types
@@ -54,10 +54,11 @@ type SchemasUpdateResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Put '[JSON] Schema
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Schema :> Put '[JSON] Schema
 
 -- | Update schema
 --
@@ -65,13 +66,13 @@ type SchemasUpdateResource =
 data SchemasUpdate' = SchemasUpdate'
     { _suQuotaUser   :: !(Maybe Text)
     , _suPrettyPrint :: !Bool
-    , _suUserIp      :: !(Maybe Text)
+    , _suUserIP      :: !(Maybe Text)
     , _suCustomerId  :: !Text
-    , _suKey         :: !(Maybe Text)
-    , _suOauthToken  :: !(Maybe Text)
+    , _suSchema      :: !Schema
+    , _suKey         :: !(Maybe Key)
+    , _suOAuthToken  :: !(Maybe OAuthToken)
     , _suSchemaKey   :: !Text
     , _suFields      :: !(Maybe Text)
-    , _suAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SchemasUpdate'' with the minimum fields required to make a request.
@@ -82,34 +83,35 @@ data SchemasUpdate' = SchemasUpdate'
 --
 -- * 'suPrettyPrint'
 --
--- * 'suUserIp'
+-- * 'suUserIP'
 --
 -- * 'suCustomerId'
 --
+-- * 'suSchema'
+--
 -- * 'suKey'
 --
--- * 'suOauthToken'
+-- * 'suOAuthToken'
 --
 -- * 'suSchemaKey'
 --
 -- * 'suFields'
---
--- * 'suAlt'
 schemasUpdate'
     :: Text -- ^ 'customerId'
+    -> Schema -- ^ 'Schema'
     -> Text -- ^ 'schemaKey'
     -> SchemasUpdate'
-schemasUpdate' pSuCustomerId_ pSuSchemaKey_ =
+schemasUpdate' pSuCustomerId_ pSuSchema_ pSuSchemaKey_ =
     SchemasUpdate'
     { _suQuotaUser = Nothing
     , _suPrettyPrint = True
-    , _suUserIp = Nothing
+    , _suUserIP = Nothing
     , _suCustomerId = pSuCustomerId_
+    , _suSchema = pSuSchema_
     , _suKey = Nothing
-    , _suOauthToken = Nothing
+    , _suOAuthToken = Nothing
     , _suSchemaKey = pSuSchemaKey_
     , _suFields = Nothing
-    , _suAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,24 +129,28 @@ suPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-suUserIp :: Lens' SchemasUpdate' (Maybe Text)
-suUserIp = lens _suUserIp (\ s a -> s{_suUserIp = a})
+suUserIP :: Lens' SchemasUpdate' (Maybe Text)
+suUserIP = lens _suUserIP (\ s a -> s{_suUserIP = a})
 
 -- | Immutable id of the Google Apps account
 suCustomerId :: Lens' SchemasUpdate' Text
 suCustomerId
   = lens _suCustomerId (\ s a -> s{_suCustomerId = a})
 
+-- | Multipart request metadata.
+suSchema :: Lens' SchemasUpdate' Schema
+suSchema = lens _suSchema (\ s a -> s{_suSchema = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-suKey :: Lens' SchemasUpdate' (Maybe Text)
+suKey :: Lens' SchemasUpdate' (Maybe Key)
 suKey = lens _suKey (\ s a -> s{_suKey = a})
 
 -- | OAuth 2.0 token for the current user.
-suOauthToken :: Lens' SchemasUpdate' (Maybe Text)
-suOauthToken
-  = lens _suOauthToken (\ s a -> s{_suOauthToken = a})
+suOAuthToken :: Lens' SchemasUpdate' (Maybe OAuthToken)
+suOAuthToken
+  = lens _suOAuthToken (\ s a -> s{_suOAuthToken = a})
 
 -- | Name or immutable Id of the schema.
 suSchemaKey :: Lens' SchemasUpdate' Text
@@ -155,21 +161,22 @@ suSchemaKey
 suFields :: Lens' SchemasUpdate' (Maybe Text)
 suFields = lens _suFields (\ s a -> s{_suFields = a})
 
--- | Data format for the response.
-suAlt :: Lens' SchemasUpdate' Alt
-suAlt = lens _suAlt (\ s a -> s{_suAlt = a})
+instance GoogleAuth SchemasUpdate' where
+        authKey = suKey . _Just
+        authToken = suOAuthToken . _Just
 
 instance GoogleRequest SchemasUpdate' where
         type Rs SchemasUpdate' = Schema
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u SchemasUpdate'{..}
-          = go _suQuotaUser (Just _suPrettyPrint) _suUserIp
+          = go _suQuotaUser (Just _suPrettyPrint) _suUserIP
               _suCustomerId
               _suKey
-              _suOauthToken
+              _suOAuthToken
               _suSchemaKey
               _suFields
-              (Just _suAlt)
+              (Just AltJSON)
+              _suSchema
           where go
                   = clientWithRoute
                       (Proxy :: Proxy SchemasUpdateResource)

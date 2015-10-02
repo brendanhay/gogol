@@ -33,13 +33,12 @@ module Network.Google.Resource.Compute.MachineTypes.Get
     , mtgQuotaUser
     , mtgPrettyPrint
     , mtgProject
-    , mtgUserIp
+    , mtgUserIP
     , mtgZone
     , mtgKey
     , mtgMachineType
-    , mtgOauthToken
+    , mtgOAuthToken
     , mtgFields
-    , mtgAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -56,10 +55,10 @@ type MachineTypesGetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Get '[JSON] MachineType
+                           QueryParam "alt" AltJSON :> Get '[JSON] MachineType
 
 -- | Returns the specified machine type resource.
 --
@@ -68,13 +67,12 @@ data MachineTypesGet' = MachineTypesGet'
     { _mtgQuotaUser   :: !(Maybe Text)
     , _mtgPrettyPrint :: !Bool
     , _mtgProject     :: !Text
-    , _mtgUserIp      :: !(Maybe Text)
+    , _mtgUserIP      :: !(Maybe Text)
     , _mtgZone        :: !Text
-    , _mtgKey         :: !(Maybe Text)
+    , _mtgKey         :: !(Maybe Key)
     , _mtgMachineType :: !Text
-    , _mtgOauthToken  :: !(Maybe Text)
+    , _mtgOAuthToken  :: !(Maybe OAuthToken)
     , _mtgFields      :: !(Maybe Text)
-    , _mtgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MachineTypesGet'' with the minimum fields required to make a request.
@@ -87,7 +85,7 @@ data MachineTypesGet' = MachineTypesGet'
 --
 -- * 'mtgProject'
 --
--- * 'mtgUserIp'
+-- * 'mtgUserIP'
 --
 -- * 'mtgZone'
 --
@@ -95,11 +93,9 @@ data MachineTypesGet' = MachineTypesGet'
 --
 -- * 'mtgMachineType'
 --
--- * 'mtgOauthToken'
+-- * 'mtgOAuthToken'
 --
 -- * 'mtgFields'
---
--- * 'mtgAlt'
 machineTypesGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
@@ -110,13 +106,12 @@ machineTypesGet' pMtgProject_ pMtgZone_ pMtgMachineType_ =
     { _mtgQuotaUser = Nothing
     , _mtgPrettyPrint = True
     , _mtgProject = pMtgProject_
-    , _mtgUserIp = Nothing
+    , _mtgUserIP = Nothing
     , _mtgZone = pMtgZone_
     , _mtgKey = Nothing
     , _mtgMachineType = pMtgMachineType_
-    , _mtgOauthToken = Nothing
+    , _mtgOAuthToken = Nothing
     , _mtgFields = Nothing
-    , _mtgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,9 +134,9 @@ mtgProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mtgUserIp :: Lens' MachineTypesGet' (Maybe Text)
-mtgUserIp
-  = lens _mtgUserIp (\ s a -> s{_mtgUserIp = a})
+mtgUserIP :: Lens' MachineTypesGet' (Maybe Text)
+mtgUserIP
+  = lens _mtgUserIP (\ s a -> s{_mtgUserIP = a})
 
 -- | The name of the zone for this request.
 mtgZone :: Lens' MachineTypesGet' Text
@@ -150,7 +145,7 @@ mtgZone = lens _mtgZone (\ s a -> s{_mtgZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mtgKey :: Lens' MachineTypesGet' (Maybe Text)
+mtgKey :: Lens' MachineTypesGet' (Maybe Key)
 mtgKey = lens _mtgKey (\ s a -> s{_mtgKey = a})
 
 -- | Name of the machine type resource to return.
@@ -160,32 +155,32 @@ mtgMachineType
       (\ s a -> s{_mtgMachineType = a})
 
 -- | OAuth 2.0 token for the current user.
-mtgOauthToken :: Lens' MachineTypesGet' (Maybe Text)
-mtgOauthToken
-  = lens _mtgOauthToken
-      (\ s a -> s{_mtgOauthToken = a})
+mtgOAuthToken :: Lens' MachineTypesGet' (Maybe OAuthToken)
+mtgOAuthToken
+  = lens _mtgOAuthToken
+      (\ s a -> s{_mtgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 mtgFields :: Lens' MachineTypesGet' (Maybe Text)
 mtgFields
   = lens _mtgFields (\ s a -> s{_mtgFields = a})
 
--- | Data format for the response.
-mtgAlt :: Lens' MachineTypesGet' Alt
-mtgAlt = lens _mtgAlt (\ s a -> s{_mtgAlt = a})
+instance GoogleAuth MachineTypesGet' where
+        authKey = mtgKey . _Just
+        authToken = mtgOAuthToken . _Just
 
 instance GoogleRequest MachineTypesGet' where
         type Rs MachineTypesGet' = MachineType
         request = requestWithRoute defReq computeURL
         requestWithRoute r u MachineTypesGet'{..}
           = go _mtgQuotaUser (Just _mtgPrettyPrint) _mtgProject
-              _mtgUserIp
+              _mtgUserIP
               _mtgZone
               _mtgKey
               _mtgMachineType
-              _mtgOauthToken
+              _mtgOAuthToken
               _mtgFields
-              (Just _mtgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy MachineTypesGetResource)

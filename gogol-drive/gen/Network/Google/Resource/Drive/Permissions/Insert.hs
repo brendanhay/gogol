@@ -32,14 +32,14 @@ module Network.Google.Resource.Drive.Permissions.Insert
     -- * Request Lenses
     , piQuotaUser
     , piPrettyPrint
-    , piUserIp
+    , piUserIP
     , piKey
     , piEmailMessage
     , piFileId
-    , piOauthToken
+    , piOAuthToken
+    , piPermission
     , piSendNotificationEmails
     , piFields
-    , piAlt
     ) where
 
 import           Network.Google.Drive.Types
@@ -54,12 +54,14 @@ type PermissionsInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "emailMessage" Text :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "sendNotificationEmails" Bool :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Post '[JSON] Permission
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] Permission :>
+                               Post '[JSON] Permission
 
 -- | Inserts a permission for a file.
 --
@@ -67,14 +69,14 @@ type PermissionsInsertResource =
 data PermissionsInsert' = PermissionsInsert'
     { _piQuotaUser              :: !(Maybe Text)
     , _piPrettyPrint            :: !Bool
-    , _piUserIp                 :: !(Maybe Text)
-    , _piKey                    :: !(Maybe Text)
+    , _piUserIP                 :: !(Maybe Text)
+    , _piKey                    :: !(Maybe Key)
     , _piEmailMessage           :: !(Maybe Text)
     , _piFileId                 :: !Text
-    , _piOauthToken             :: !(Maybe Text)
+    , _piOAuthToken             :: !(Maybe OAuthToken)
+    , _piPermission             :: !Permission
     , _piSendNotificationEmails :: !Bool
     , _piFields                 :: !(Maybe Text)
-    , _piAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PermissionsInsert'' with the minimum fields required to make a request.
@@ -85,7 +87,7 @@ data PermissionsInsert' = PermissionsInsert'
 --
 -- * 'piPrettyPrint'
 --
--- * 'piUserIp'
+-- * 'piUserIP'
 --
 -- * 'piKey'
 --
@@ -93,28 +95,29 @@ data PermissionsInsert' = PermissionsInsert'
 --
 -- * 'piFileId'
 --
--- * 'piOauthToken'
+-- * 'piOAuthToken'
+--
+-- * 'piPermission'
 --
 -- * 'piSendNotificationEmails'
 --
 -- * 'piFields'
---
--- * 'piAlt'
 permissionsInsert'
     :: Text -- ^ 'fileId'
+    -> Permission -- ^ 'Permission'
     -> PermissionsInsert'
-permissionsInsert' pPiFileId_ =
+permissionsInsert' pPiFileId_ pPiPermission_ =
     PermissionsInsert'
     { _piQuotaUser = Nothing
     , _piPrettyPrint = True
-    , _piUserIp = Nothing
+    , _piUserIP = Nothing
     , _piKey = Nothing
     , _piEmailMessage = Nothing
     , _piFileId = pPiFileId_
-    , _piOauthToken = Nothing
+    , _piOAuthToken = Nothing
+    , _piPermission = pPiPermission_
     , _piSendNotificationEmails = True
     , _piFields = Nothing
-    , _piAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -132,13 +135,13 @@ piPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-piUserIp :: Lens' PermissionsInsert' (Maybe Text)
-piUserIp = lens _piUserIp (\ s a -> s{_piUserIp = a})
+piUserIP :: Lens' PermissionsInsert' (Maybe Text)
+piUserIP = lens _piUserIP (\ s a -> s{_piUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-piKey :: Lens' PermissionsInsert' (Maybe Text)
+piKey :: Lens' PermissionsInsert' (Maybe Key)
 piKey = lens _piKey (\ s a -> s{_piKey = a})
 
 -- | A custom message to include in notification emails.
@@ -152,9 +155,14 @@ piFileId :: Lens' PermissionsInsert' Text
 piFileId = lens _piFileId (\ s a -> s{_piFileId = a})
 
 -- | OAuth 2.0 token for the current user.
-piOauthToken :: Lens' PermissionsInsert' (Maybe Text)
-piOauthToken
-  = lens _piOauthToken (\ s a -> s{_piOauthToken = a})
+piOAuthToken :: Lens' PermissionsInsert' (Maybe OAuthToken)
+piOAuthToken
+  = lens _piOAuthToken (\ s a -> s{_piOAuthToken = a})
+
+-- | Multipart request metadata.
+piPermission :: Lens' PermissionsInsert' Permission
+piPermission
+  = lens _piPermission (\ s a -> s{_piPermission = a})
 
 -- | Whether to send notification emails when sharing to users or groups.
 -- This parameter is ignored and an email is sent if the role is owner.
@@ -167,22 +175,23 @@ piSendNotificationEmails
 piFields :: Lens' PermissionsInsert' (Maybe Text)
 piFields = lens _piFields (\ s a -> s{_piFields = a})
 
--- | Data format for the response.
-piAlt :: Lens' PermissionsInsert' Alt
-piAlt = lens _piAlt (\ s a -> s{_piAlt = a})
+instance GoogleAuth PermissionsInsert' where
+        authKey = piKey . _Just
+        authToken = piOAuthToken . _Just
 
 instance GoogleRequest PermissionsInsert' where
         type Rs PermissionsInsert' = Permission
         request = requestWithRoute defReq driveURL
         requestWithRoute r u PermissionsInsert'{..}
-          = go _piQuotaUser (Just _piPrettyPrint) _piUserIp
+          = go _piQuotaUser (Just _piPrettyPrint) _piUserIP
               _piKey
               _piEmailMessage
               _piFileId
-              _piOauthToken
+              _piOAuthToken
               (Just _piSendNotificationEmails)
               _piFields
-              (Just _piAlt)
+              (Just AltJSON)
+              _piPermission
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PermissionsInsertResource)

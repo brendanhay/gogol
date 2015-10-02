@@ -200,13 +200,13 @@ module Network.Google.Storage
     -- ** Channel
     , Channel
     , channel
-    , cResourceUri
+    , cResourceURI
     , cResourceId
     , cKind
     , cExpiration
     , cToken
     , cAddress
-    , cPayload
+    , cPayLoad
     , cParams
     , cId
     , cType
@@ -224,13 +224,13 @@ module Network.Google.Storage
     , bucName
     , bucStorageClass
     , bucVersioning
-    , bucCors
+    , bucCORS
     , bucTimeCreated
     , bucId
-    , bucDefaultObjectAcl
+    , bucDefaultObjectACL
     , bucMetageneration
     , bucLogging
-    , bucAcl
+    , bucACL
 
     -- ** BucketAccessControls
     , BucketAccessControls
@@ -339,9 +339,9 @@ module Network.Google.Storage
     , objCacheControl
     , objMetageneration
     , objGeneration
-    , objAcl
-    , objContentDisposition
-    , objMd5Hash
+    , objACL
+    , objContentDisPosition
+    , objMD5Hash
     , objContentType
 
     -- ** ComposeRequestSourceObjectsObjectPreconditions
@@ -373,9 +373,6 @@ module Network.Google.Storage
 
     -- ** StorageBucketsInsertProjection
     , StorageBucketsInsertProjection (..)
-
-    -- ** Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.Prelude

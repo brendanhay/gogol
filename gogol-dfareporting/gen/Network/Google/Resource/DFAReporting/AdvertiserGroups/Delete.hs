@@ -32,13 +32,12 @@ module Network.Google.Resource.DFAReporting.AdvertiserGroups.Delete
     -- * Request Lenses
     , agdQuotaUser
     , agdPrettyPrint
-    , agdUserIp
+    , agdUserIP
     , agdProfileId
     , agdKey
     , agdId
-    , agdOauthToken
+    , agdOAuthToken
     , agdFields
-    , agdAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,10 +53,10 @@ type AdvertiserGroupsDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Delete '[JSON] ()
+                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an existing advertiser group.
 --
@@ -65,13 +64,12 @@ type AdvertiserGroupsDeleteResource =
 data AdvertiserGroupsDelete' = AdvertiserGroupsDelete'
     { _agdQuotaUser   :: !(Maybe Text)
     , _agdPrettyPrint :: !Bool
-    , _agdUserIp      :: !(Maybe Text)
+    , _agdUserIP      :: !(Maybe Text)
     , _agdProfileId   :: !Int64
-    , _agdKey         :: !(Maybe Text)
+    , _agdKey         :: !(Maybe Key)
     , _agdId          :: !Int64
-    , _agdOauthToken  :: !(Maybe Text)
+    , _agdOAuthToken  :: !(Maybe OAuthToken)
     , _agdFields      :: !(Maybe Text)
-    , _agdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertiserGroupsDelete'' with the minimum fields required to make a request.
@@ -82,7 +80,7 @@ data AdvertiserGroupsDelete' = AdvertiserGroupsDelete'
 --
 -- * 'agdPrettyPrint'
 --
--- * 'agdUserIp'
+-- * 'agdUserIP'
 --
 -- * 'agdProfileId'
 --
@@ -90,11 +88,9 @@ data AdvertiserGroupsDelete' = AdvertiserGroupsDelete'
 --
 -- * 'agdId'
 --
--- * 'agdOauthToken'
+-- * 'agdOAuthToken'
 --
 -- * 'agdFields'
---
--- * 'agdAlt'
 advertiserGroupsDelete'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
@@ -103,13 +99,12 @@ advertiserGroupsDelete' pAgdProfileId_ pAgdId_ =
     AdvertiserGroupsDelete'
     { _agdQuotaUser = Nothing
     , _agdPrettyPrint = True
-    , _agdUserIp = Nothing
+    , _agdUserIP = Nothing
     , _agdProfileId = pAgdProfileId_
     , _agdKey = Nothing
     , _agdId = pAgdId_
-    , _agdOauthToken = Nothing
+    , _agdOAuthToken = Nothing
     , _agdFields = Nothing
-    , _agdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,9 +122,9 @@ agdPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-agdUserIp :: Lens' AdvertiserGroupsDelete' (Maybe Text)
-agdUserIp
-  = lens _agdUserIp (\ s a -> s{_agdUserIp = a})
+agdUserIP :: Lens' AdvertiserGroupsDelete' (Maybe Text)
+agdUserIP
+  = lens _agdUserIP (\ s a -> s{_agdUserIP = a})
 
 -- | User profile ID associated with this request.
 agdProfileId :: Lens' AdvertiserGroupsDelete' Int64
@@ -139,7 +134,7 @@ agdProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-agdKey :: Lens' AdvertiserGroupsDelete' (Maybe Text)
+agdKey :: Lens' AdvertiserGroupsDelete' (Maybe Key)
 agdKey = lens _agdKey (\ s a -> s{_agdKey = a})
 
 -- | Advertiser group ID.
@@ -147,31 +142,31 @@ agdId :: Lens' AdvertiserGroupsDelete' Int64
 agdId = lens _agdId (\ s a -> s{_agdId = a})
 
 -- | OAuth 2.0 token for the current user.
-agdOauthToken :: Lens' AdvertiserGroupsDelete' (Maybe Text)
-agdOauthToken
-  = lens _agdOauthToken
-      (\ s a -> s{_agdOauthToken = a})
+agdOAuthToken :: Lens' AdvertiserGroupsDelete' (Maybe OAuthToken)
+agdOAuthToken
+  = lens _agdOAuthToken
+      (\ s a -> s{_agdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 agdFields :: Lens' AdvertiserGroupsDelete' (Maybe Text)
 agdFields
   = lens _agdFields (\ s a -> s{_agdFields = a})
 
--- | Data format for the response.
-agdAlt :: Lens' AdvertiserGroupsDelete' Alt
-agdAlt = lens _agdAlt (\ s a -> s{_agdAlt = a})
+instance GoogleAuth AdvertiserGroupsDelete' where
+        authKey = agdKey . _Just
+        authToken = agdOAuthToken . _Just
 
 instance GoogleRequest AdvertiserGroupsDelete' where
         type Rs AdvertiserGroupsDelete' = ()
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AdvertiserGroupsDelete'{..}
-          = go _agdQuotaUser (Just _agdPrettyPrint) _agdUserIp
+          = go _agdQuotaUser (Just _agdPrettyPrint) _agdUserIP
               _agdProfileId
               _agdKey
               _agdId
-              _agdOauthToken
+              _agdOAuthToken
               _agdFields
-              (Just _agdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AdvertiserGroupsDeleteResource)

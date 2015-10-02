@@ -149,7 +149,7 @@ module Network.Google.Classroom
     -- ** UserProfile
     , UserProfile
     , userProfile
-    , upPhotoUrl
+    , upPhotoURL
     , upName
     , upEmailAddress
     , upId

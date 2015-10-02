@@ -33,20 +33,19 @@ module Network.Google.Resource.Reports.Activities.List
     , alQuotaUser
     , alPrettyPrint
     , alStartTime
-    , alUserIp
+    , alUserIP
     , alFilters
     , alCustomerId
-    , alActorIpAddress
+    , alActorIPAddress
     , alKey
     , alEndTime
     , alApplicationName
     , alPageToken
-    , alOauthToken
+    , alOAuthToken
     , alEventName
     , alUserKey
     , alMaxResults
     , alFields
-    , alAlt
     ) where
 
 import           Network.Google.AdminReports.Types
@@ -67,14 +66,14 @@ type ActivitiesListResource =
                        QueryParam "filters" Text :>
                          QueryParam "customerId" Text :>
                            QueryParam "actorIpAddress" Text :>
-                             QueryParam "key" Text :>
+                             QueryParam "key" Key :>
                                QueryParam "endTime" Text :>
                                  QueryParam "pageToken" Text :>
-                                   QueryParam "oauth_token" Text :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "eventName" Text :>
                                        QueryParam "maxResults" Int32 :>
                                          QueryParam "fields" Text :>
-                                           QueryParam "alt" Alt :>
+                                           QueryParam "alt" AltJSON :>
                                              Get '[JSON] Activities
 
 -- | Retrieves a list of activities for a specific customer and application.
@@ -84,20 +83,19 @@ data ActivitiesList' = ActivitiesList'
     { _alQuotaUser       :: !(Maybe Text)
     , _alPrettyPrint     :: !Bool
     , _alStartTime       :: !(Maybe Text)
-    , _alUserIp          :: !(Maybe Text)
+    , _alUserIP          :: !(Maybe Text)
     , _alFilters         :: !(Maybe Text)
     , _alCustomerId      :: !(Maybe Text)
-    , _alActorIpAddress  :: !(Maybe Text)
-    , _alKey             :: !(Maybe Text)
+    , _alActorIPAddress  :: !(Maybe Text)
+    , _alKey             :: !(Maybe Key)
     , _alEndTime         :: !(Maybe Text)
     , _alApplicationName :: !Text
     , _alPageToken       :: !(Maybe Text)
-    , _alOauthToken      :: !(Maybe Text)
+    , _alOAuthToken      :: !(Maybe OAuthToken)
     , _alEventName       :: !(Maybe Text)
     , _alUserKey         :: !Text
     , _alMaxResults      :: !(Maybe Int32)
     , _alFields          :: !(Maybe Text)
-    , _alAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivitiesList'' with the minimum fields required to make a request.
@@ -110,13 +108,13 @@ data ActivitiesList' = ActivitiesList'
 --
 -- * 'alStartTime'
 --
--- * 'alUserIp'
+-- * 'alUserIP'
 --
 -- * 'alFilters'
 --
 -- * 'alCustomerId'
 --
--- * 'alActorIpAddress'
+-- * 'alActorIPAddress'
 --
 -- * 'alKey'
 --
@@ -126,7 +124,7 @@ data ActivitiesList' = ActivitiesList'
 --
 -- * 'alPageToken'
 --
--- * 'alOauthToken'
+-- * 'alOAuthToken'
 --
 -- * 'alEventName'
 --
@@ -135,8 +133,6 @@ data ActivitiesList' = ActivitiesList'
 -- * 'alMaxResults'
 --
 -- * 'alFields'
---
--- * 'alAlt'
 activitiesList'
     :: Text -- ^ 'applicationName'
     -> Text -- ^ 'userKey'
@@ -146,20 +142,19 @@ activitiesList' pAlApplicationName_ pAlUserKey_ =
     { _alQuotaUser = Nothing
     , _alPrettyPrint = True
     , _alStartTime = Nothing
-    , _alUserIp = Nothing
+    , _alUserIP = Nothing
     , _alFilters = Nothing
     , _alCustomerId = Nothing
-    , _alActorIpAddress = Nothing
+    , _alActorIPAddress = Nothing
     , _alKey = Nothing
     , _alEndTime = Nothing
     , _alApplicationName = pAlApplicationName_
     , _alPageToken = Nothing
-    , _alOauthToken = Nothing
+    , _alOAuthToken = Nothing
     , _alEventName = Nothing
     , _alUserKey = pAlUserKey_
     , _alMaxResults = Nothing
     , _alFields = Nothing
-    , _alAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -182,8 +177,8 @@ alStartTime
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-alUserIp :: Lens' ActivitiesList' (Maybe Text)
-alUserIp = lens _alUserIp (\ s a -> s{_alUserIp = a})
+alUserIP :: Lens' ActivitiesList' (Maybe Text)
+alUserIP = lens _alUserIP (\ s a -> s{_alUserIP = a})
 
 -- | Event parameters in the form [parameter1 name][operator][parameter1
 -- value],[parameter2 name][operator][parameter2 value],...
@@ -198,15 +193,15 @@ alCustomerId
 
 -- | IP Address of host where the event was performed. Supports both IPv4 and
 -- IPv6 addresses.
-alActorIpAddress :: Lens' ActivitiesList' (Maybe Text)
-alActorIpAddress
-  = lens _alActorIpAddress
-      (\ s a -> s{_alActorIpAddress = a})
+alActorIPAddress :: Lens' ActivitiesList' (Maybe Text)
+alActorIPAddress
+  = lens _alActorIPAddress
+      (\ s a -> s{_alActorIPAddress = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-alKey :: Lens' ActivitiesList' (Maybe Text)
+alKey :: Lens' ActivitiesList' (Maybe Key)
 alKey = lens _alKey (\ s a -> s{_alKey = a})
 
 -- | Return events which occured at or before this time.
@@ -226,9 +221,9 @@ alPageToken
   = lens _alPageToken (\ s a -> s{_alPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-alOauthToken :: Lens' ActivitiesList' (Maybe Text)
-alOauthToken
-  = lens _alOauthToken (\ s a -> s{_alOauthToken = a})
+alOAuthToken :: Lens' ActivitiesList' (Maybe OAuthToken)
+alOAuthToken
+  = lens _alOAuthToken (\ s a -> s{_alOAuthToken = a})
 
 -- | Name of the event being queried.
 alEventName :: Lens' ActivitiesList' (Maybe Text)
@@ -251,29 +246,29 @@ alMaxResults
 alFields :: Lens' ActivitiesList' (Maybe Text)
 alFields = lens _alFields (\ s a -> s{_alFields = a})
 
--- | Data format for the response.
-alAlt :: Lens' ActivitiesList' Alt
-alAlt = lens _alAlt (\ s a -> s{_alAlt = a})
+instance GoogleAuth ActivitiesList' where
+        authKey = alKey . _Just
+        authToken = alOAuthToken . _Just
 
 instance GoogleRequest ActivitiesList' where
         type Rs ActivitiesList' = Activities
         request = requestWithRoute defReq adminReportsURL
         requestWithRoute r u ActivitiesList'{..}
           = go _alQuotaUser (Just _alPrettyPrint) _alStartTime
-              _alUserIp
+              _alUserIP
               _alFilters
               _alCustomerId
-              _alActorIpAddress
+              _alActorIPAddress
               _alKey
               _alEndTime
               _alApplicationName
               _alPageToken
-              _alOauthToken
+              _alOAuthToken
               _alEventName
               _alUserKey
               _alMaxResults
               _alFields
-              (Just _alAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ActivitiesListResource)

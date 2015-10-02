@@ -32,17 +32,16 @@ module Network.Google.Resource.Plus.Moments.List
     -- * Request Lenses
     , mlQuotaUser
     , mlPrettyPrint
-    , mlTargetUrl
-    , mlUserIp
+    , mlTargetURL
+    , mlUserIP
     , mlCollection
     , mlUserId
     , mlKey
     , mlPageToken
     , mlType
-    , mlOauthToken
+    , mlOAuthToken
     , mlMaxResults
     , mlFields
-    , mlAlt
     ) where
 
 import           Network.Google.Plus.Types
@@ -59,13 +58,14 @@ type MomentsListResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "targetUrl" Text :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
+                     QueryParam "key" Key :>
                        QueryParam "pageToken" Text :>
                          QueryParam "type" Text :>
-                           QueryParam "oauth_token" Text :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "maxResults" Word32 :>
                                QueryParam "fields" Text :>
-                                 QueryParam "alt" Alt :> Get '[JSON] MomentsFeed
+                                 QueryParam "alt" AltJSON :>
+                                   Get '[JSON] MomentsFeed
 
 -- | List all of the moments for a particular user.
 --
@@ -73,17 +73,16 @@ type MomentsListResource =
 data MomentsList' = MomentsList'
     { _mlQuotaUser   :: !(Maybe Text)
     , _mlPrettyPrint :: !Bool
-    , _mlTargetUrl   :: !(Maybe Text)
-    , _mlUserIp      :: !(Maybe Text)
+    , _mlTargetURL   :: !(Maybe Text)
+    , _mlUserIP      :: !(Maybe Text)
     , _mlCollection  :: !PlusMomentsListCollection
     , _mlUserId      :: !Text
-    , _mlKey         :: !(Maybe Text)
+    , _mlKey         :: !(Maybe Key)
     , _mlPageToken   :: !(Maybe Text)
     , _mlType        :: !(Maybe Text)
-    , _mlOauthToken  :: !(Maybe Text)
+    , _mlOAuthToken  :: !(Maybe OAuthToken)
     , _mlMaxResults  :: !Word32
     , _mlFields      :: !(Maybe Text)
-    , _mlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MomentsList'' with the minimum fields required to make a request.
@@ -94,9 +93,9 @@ data MomentsList' = MomentsList'
 --
 -- * 'mlPrettyPrint'
 --
--- * 'mlTargetUrl'
+-- * 'mlTargetURL'
 --
--- * 'mlUserIp'
+-- * 'mlUserIP'
 --
 -- * 'mlCollection'
 --
@@ -108,13 +107,11 @@ data MomentsList' = MomentsList'
 --
 -- * 'mlType'
 --
--- * 'mlOauthToken'
+-- * 'mlOAuthToken'
 --
 -- * 'mlMaxResults'
 --
 -- * 'mlFields'
---
--- * 'mlAlt'
 momentsList'
     :: PlusMomentsListCollection -- ^ 'collection'
     -> Text -- ^ 'userId'
@@ -123,17 +120,16 @@ momentsList' pMlCollection_ pMlUserId_ =
     MomentsList'
     { _mlQuotaUser = Nothing
     , _mlPrettyPrint = True
-    , _mlTargetUrl = Nothing
-    , _mlUserIp = Nothing
+    , _mlTargetURL = Nothing
+    , _mlUserIP = Nothing
     , _mlCollection = pMlCollection_
     , _mlUserId = pMlUserId_
     , _mlKey = Nothing
     , _mlPageToken = Nothing
     , _mlType = Nothing
-    , _mlOauthToken = Nothing
+    , _mlOAuthToken = Nothing
     , _mlMaxResults = 20
     , _mlFields = Nothing
-    , _mlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,14 +146,14 @@ mlPrettyPrint
       (\ s a -> s{_mlPrettyPrint = a})
 
 -- | Only moments containing this targetUrl will be returned.
-mlTargetUrl :: Lens' MomentsList' (Maybe Text)
-mlTargetUrl
-  = lens _mlTargetUrl (\ s a -> s{_mlTargetUrl = a})
+mlTargetURL :: Lens' MomentsList' (Maybe Text)
+mlTargetURL
+  = lens _mlTargetURL (\ s a -> s{_mlTargetURL = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mlUserIp :: Lens' MomentsList' (Maybe Text)
-mlUserIp = lens _mlUserIp (\ s a -> s{_mlUserIp = a})
+mlUserIP :: Lens' MomentsList' (Maybe Text)
+mlUserIP = lens _mlUserIP (\ s a -> s{_mlUserIP = a})
 
 -- | The collection of moments to list.
 mlCollection :: Lens' MomentsList' PlusMomentsListCollection
@@ -172,7 +168,7 @@ mlUserId = lens _mlUserId (\ s a -> s{_mlUserId = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mlKey :: Lens' MomentsList' (Maybe Text)
+mlKey :: Lens' MomentsList' (Maybe Key)
 mlKey = lens _mlKey (\ s a -> s{_mlKey = a})
 
 -- | The continuation token, which is used to page through large result sets.
@@ -187,9 +183,9 @@ mlType :: Lens' MomentsList' (Maybe Text)
 mlType = lens _mlType (\ s a -> s{_mlType = a})
 
 -- | OAuth 2.0 token for the current user.
-mlOauthToken :: Lens' MomentsList' (Maybe Text)
-mlOauthToken
-  = lens _mlOauthToken (\ s a -> s{_mlOauthToken = a})
+mlOAuthToken :: Lens' MomentsList' (Maybe OAuthToken)
+mlOAuthToken
+  = lens _mlOAuthToken (\ s a -> s{_mlOAuthToken = a})
 
 -- | The maximum number of moments to include in the response, which is used
 -- for paging. For any response, the actual number returned might be less
@@ -202,25 +198,25 @@ mlMaxResults
 mlFields :: Lens' MomentsList' (Maybe Text)
 mlFields = lens _mlFields (\ s a -> s{_mlFields = a})
 
--- | Data format for the response.
-mlAlt :: Lens' MomentsList' Alt
-mlAlt = lens _mlAlt (\ s a -> s{_mlAlt = a})
+instance GoogleAuth MomentsList' where
+        authKey = mlKey . _Just
+        authToken = mlOAuthToken . _Just
 
 instance GoogleRequest MomentsList' where
         type Rs MomentsList' = MomentsFeed
         request = requestWithRoute defReq plusURL
         requestWithRoute r u MomentsList'{..}
-          = go _mlQuotaUser (Just _mlPrettyPrint) _mlTargetUrl
-              _mlUserIp
+          = go _mlQuotaUser (Just _mlPrettyPrint) _mlTargetURL
+              _mlUserIP
               _mlCollection
               _mlUserId
               _mlKey
               _mlPageToken
               _mlType
-              _mlOauthToken
+              _mlOAuthToken
               (Just _mlMaxResults)
               _mlFields
-              (Just _mlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy MomentsListResource)

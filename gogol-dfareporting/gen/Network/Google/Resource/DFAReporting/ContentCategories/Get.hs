@@ -32,13 +32,12 @@ module Network.Google.Resource.DFAReporting.ContentCategories.Get
     -- * Request Lenses
     , ccgQuotaUser
     , ccgPrettyPrint
-    , ccgUserIp
+    , ccgUserIP
     , ccgProfileId
     , ccgKey
     , ccgId
-    , ccgOauthToken
+    , ccgOAuthToken
     , ccgFields
-    , ccgAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,10 +53,11 @@ type ContentCategoriesGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] ContentCategory
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] ContentCategory
 
 -- | Gets one content category by ID.
 --
@@ -65,13 +65,12 @@ type ContentCategoriesGetResource =
 data ContentCategoriesGet' = ContentCategoriesGet'
     { _ccgQuotaUser   :: !(Maybe Text)
     , _ccgPrettyPrint :: !Bool
-    , _ccgUserIp      :: !(Maybe Text)
+    , _ccgUserIP      :: !(Maybe Text)
     , _ccgProfileId   :: !Int64
-    , _ccgKey         :: !(Maybe Text)
+    , _ccgKey         :: !(Maybe Key)
     , _ccgId          :: !Int64
-    , _ccgOauthToken  :: !(Maybe Text)
+    , _ccgOAuthToken  :: !(Maybe OAuthToken)
     , _ccgFields      :: !(Maybe Text)
-    , _ccgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContentCategoriesGet'' with the minimum fields required to make a request.
@@ -82,7 +81,7 @@ data ContentCategoriesGet' = ContentCategoriesGet'
 --
 -- * 'ccgPrettyPrint'
 --
--- * 'ccgUserIp'
+-- * 'ccgUserIP'
 --
 -- * 'ccgProfileId'
 --
@@ -90,11 +89,9 @@ data ContentCategoriesGet' = ContentCategoriesGet'
 --
 -- * 'ccgId'
 --
--- * 'ccgOauthToken'
+-- * 'ccgOAuthToken'
 --
 -- * 'ccgFields'
---
--- * 'ccgAlt'
 contentCategoriesGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
@@ -103,13 +100,12 @@ contentCategoriesGet' pCcgProfileId_ pCcgId_ =
     ContentCategoriesGet'
     { _ccgQuotaUser = Nothing
     , _ccgPrettyPrint = True
-    , _ccgUserIp = Nothing
+    , _ccgUserIP = Nothing
     , _ccgProfileId = pCcgProfileId_
     , _ccgKey = Nothing
     , _ccgId = pCcgId_
-    , _ccgOauthToken = Nothing
+    , _ccgOAuthToken = Nothing
     , _ccgFields = Nothing
-    , _ccgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,9 +123,9 @@ ccgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ccgUserIp :: Lens' ContentCategoriesGet' (Maybe Text)
-ccgUserIp
-  = lens _ccgUserIp (\ s a -> s{_ccgUserIp = a})
+ccgUserIP :: Lens' ContentCategoriesGet' (Maybe Text)
+ccgUserIP
+  = lens _ccgUserIP (\ s a -> s{_ccgUserIP = a})
 
 -- | User profile ID associated with this request.
 ccgProfileId :: Lens' ContentCategoriesGet' Int64
@@ -139,7 +135,7 @@ ccgProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ccgKey :: Lens' ContentCategoriesGet' (Maybe Text)
+ccgKey :: Lens' ContentCategoriesGet' (Maybe Key)
 ccgKey = lens _ccgKey (\ s a -> s{_ccgKey = a})
 
 -- | Content category ID.
@@ -147,31 +143,31 @@ ccgId :: Lens' ContentCategoriesGet' Int64
 ccgId = lens _ccgId (\ s a -> s{_ccgId = a})
 
 -- | OAuth 2.0 token for the current user.
-ccgOauthToken :: Lens' ContentCategoriesGet' (Maybe Text)
-ccgOauthToken
-  = lens _ccgOauthToken
-      (\ s a -> s{_ccgOauthToken = a})
+ccgOAuthToken :: Lens' ContentCategoriesGet' (Maybe OAuthToken)
+ccgOAuthToken
+  = lens _ccgOAuthToken
+      (\ s a -> s{_ccgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ccgFields :: Lens' ContentCategoriesGet' (Maybe Text)
 ccgFields
   = lens _ccgFields (\ s a -> s{_ccgFields = a})
 
--- | Data format for the response.
-ccgAlt :: Lens' ContentCategoriesGet' Alt
-ccgAlt = lens _ccgAlt (\ s a -> s{_ccgAlt = a})
+instance GoogleAuth ContentCategoriesGet' where
+        authKey = ccgKey . _Just
+        authToken = ccgOAuthToken . _Just
 
 instance GoogleRequest ContentCategoriesGet' where
         type Rs ContentCategoriesGet' = ContentCategory
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ContentCategoriesGet'{..}
-          = go _ccgQuotaUser (Just _ccgPrettyPrint) _ccgUserIp
+          = go _ccgQuotaUser (Just _ccgPrettyPrint) _ccgUserIP
               _ccgProfileId
               _ccgKey
               _ccgId
-              _ccgOauthToken
+              _ccgOAuthToken
               _ccgFields
-              (Just _ccgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ContentCategoriesGetResource)

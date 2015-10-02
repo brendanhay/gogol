@@ -285,16 +285,16 @@ instance ToJSON OrderReturn where
 -- /See:/ 'ordersCustomBatchRequestEntry' smart constructor.
 data OrdersCustomBatchRequestEntry = OrdersCustomBatchRequestEntry
     { _ocbreMerchantId      :: !(Maybe Word64)
-    , _ocbreCancelLineItem  :: !(Maybe (Maybe OrdersCustomBatchRequestEntryCancelLineItem))
-    , _ocbreRefund          :: !(Maybe (Maybe OrdersCustomBatchRequestEntryRefund))
-    , _ocbreUpdateShipment  :: !(Maybe (Maybe OrdersCustomBatchRequestEntryUpdateShipment))
-    , _ocbreReturnLineItem  :: !(Maybe (Maybe OrdersCustomBatchRequestEntryReturnLineItem))
+    , _ocbreCancelLineItem  :: !(Maybe OrdersCustomBatchRequestEntryCancelLineItem)
+    , _ocbreRefund          :: !(Maybe OrdersCustomBatchRequestEntryRefund)
+    , _ocbreUpdateShipment  :: !(Maybe OrdersCustomBatchRequestEntryUpdateShipment)
+    , _ocbreReturnLineItem  :: !(Maybe OrdersCustomBatchRequestEntryReturnLineItem)
     , _ocbreMerchantOrderId :: !(Maybe Text)
     , _ocbreMethod          :: !(Maybe Text)
-    , _ocbreShipLineItems   :: !(Maybe (Maybe OrdersCustomBatchRequestEntryShipLineItems))
+    , _ocbreShipLineItems   :: !(Maybe OrdersCustomBatchRequestEntryShipLineItems)
     , _ocbreOperationId     :: !(Maybe Text)
     , _ocbreOrderId         :: !(Maybe Text)
-    , _ocbreCancel          :: !(Maybe (Maybe OrdersCustomBatchRequestEntryCancel))
+    , _ocbreCancel          :: !(Maybe OrdersCustomBatchRequestEntryCancel)
     , _ocbreBatchId         :: !(Maybe Word32)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -350,24 +350,24 @@ ocbreMerchantId
       (\ s a -> s{_ocbreMerchantId = a})
 
 -- | Required for cancelLineItem method.
-ocbreCancelLineItem :: Lens' OrdersCustomBatchRequestEntry (Maybe (Maybe OrdersCustomBatchRequestEntryCancelLineItem))
+ocbreCancelLineItem :: Lens' OrdersCustomBatchRequestEntry (Maybe OrdersCustomBatchRequestEntryCancelLineItem)
 ocbreCancelLineItem
   = lens _ocbreCancelLineItem
       (\ s a -> s{_ocbreCancelLineItem = a})
 
 -- | Required for refund method.
-ocbreRefund :: Lens' OrdersCustomBatchRequestEntry (Maybe (Maybe OrdersCustomBatchRequestEntryRefund))
+ocbreRefund :: Lens' OrdersCustomBatchRequestEntry (Maybe OrdersCustomBatchRequestEntryRefund)
 ocbreRefund
   = lens _ocbreRefund (\ s a -> s{_ocbreRefund = a})
 
 -- | Required for updateShipment method.
-ocbreUpdateShipment :: Lens' OrdersCustomBatchRequestEntry (Maybe (Maybe OrdersCustomBatchRequestEntryUpdateShipment))
+ocbreUpdateShipment :: Lens' OrdersCustomBatchRequestEntry (Maybe OrdersCustomBatchRequestEntryUpdateShipment)
 ocbreUpdateShipment
   = lens _ocbreUpdateShipment
       (\ s a -> s{_ocbreUpdateShipment = a})
 
 -- | Required for returnLineItem method.
-ocbreReturnLineItem :: Lens' OrdersCustomBatchRequestEntry (Maybe (Maybe OrdersCustomBatchRequestEntryReturnLineItem))
+ocbreReturnLineItem :: Lens' OrdersCustomBatchRequestEntry (Maybe OrdersCustomBatchRequestEntryReturnLineItem)
 ocbreReturnLineItem
   = lens _ocbreReturnLineItem
       (\ s a -> s{_ocbreReturnLineItem = a})
@@ -385,7 +385,7 @@ ocbreMethod
   = lens _ocbreMethod (\ s a -> s{_ocbreMethod = a})
 
 -- | Required for shipLineItems method.
-ocbreShipLineItems :: Lens' OrdersCustomBatchRequestEntry (Maybe (Maybe OrdersCustomBatchRequestEntryShipLineItems))
+ocbreShipLineItems :: Lens' OrdersCustomBatchRequestEntry (Maybe OrdersCustomBatchRequestEntryShipLineItems)
 ocbreShipLineItems
   = lens _ocbreShipLineItems
       (\ s a -> s{_ocbreShipLineItems = a})
@@ -404,7 +404,7 @@ ocbreOrderId
   = lens _ocbreOrderId (\ s a -> s{_ocbreOrderId = a})
 
 -- | Required for cancel method.
-ocbreCancel :: Lens' OrdersCustomBatchRequestEntry (Maybe (Maybe OrdersCustomBatchRequestEntryCancel))
+ocbreCancel :: Lens' OrdersCustomBatchRequestEntry (Maybe OrdersCustomBatchRequestEntryCancel)
 ocbreCancel
   = lens _ocbreCancel (\ s a -> s{_ocbreCancel = a})
 
@@ -573,7 +573,7 @@ instance ToJSON OrdersCreateTestOrderResponse where
 --
 -- /See:/ 'ordersRefundRequest' smart constructor.
 data OrdersRefundRequest = OrdersRefundRequest
-    { _orrAmount      :: !(Maybe (Maybe Price))
+    { _orrAmount      :: !(Maybe Price)
     , _orrReason      :: !(Maybe Text)
     , _orrOperationId :: !(Maybe Text)
     , _orrReasonText  :: !(Maybe Text)
@@ -601,7 +601,7 @@ ordersRefundRequest =
     }
 
 -- | The amount that is refunded.
-orrAmount :: Lens' OrdersRefundRequest (Maybe (Maybe Price))
+orrAmount :: Lens' OrdersRefundRequest (Maybe Price)
 orrAmount
   = lens _orrAmount (\ s a -> s{_orrAmount = a})
 
@@ -972,7 +972,7 @@ data OrdersCustomBatchRequestEntryShipLineItems = OrdersCustomBatchRequestEntryS
     { _ocbresliCarrier    :: !(Maybe Text)
     , _ocbresliTrackingId :: !(Maybe Text)
     , _ocbresliShipmentId :: !(Maybe Text)
-    , _ocbresliLineItems  :: !(Maybe [Maybe OrderShipmentLineItemShipment])
+    , _ocbresliLineItems  :: !(Maybe [OrderShipmentLineItemShipment])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersCustomBatchRequestEntryShipLineItems' with the minimum fields required to make a request.
@@ -1015,7 +1015,7 @@ ocbresliShipmentId
       (\ s a -> s{_ocbresliShipmentId = a})
 
 -- | Line items to ship.
-ocbresliLineItems :: Lens' OrdersCustomBatchRequestEntryShipLineItems [Maybe OrderShipmentLineItemShipment]
+ocbresliLineItems :: Lens' OrdersCustomBatchRequestEntryShipLineItems [OrderShipmentLineItemShipment]
 ocbresliLineItems
   = lens _ocbresliLineItems
       (\ s a -> s{_ocbresliLineItems = a})
@@ -1047,19 +1047,19 @@ instance ToJSON
 -- /See:/ 'orderLineItem' smart constructor.
 data OrderLineItem = OrderLineItem
     { _oliQuantityOrdered   :: !(Maybe Word32)
-    , _oliReturnInfo        :: !(Maybe (Maybe OrderLineItemReturnInfo))
+    , _oliReturnInfo        :: !(Maybe OrderLineItemReturnInfo)
     , _oliQuantityDelivered :: !(Maybe Word32)
-    , _oliShippingDetails   :: !(Maybe (Maybe OrderLineItemShippingDetails))
+    , _oliShippingDetails   :: !(Maybe OrderLineItemShippingDetails)
     , _oliQuantityPending   :: !(Maybe Word32)
-    , _oliCancellations     :: !(Maybe [Maybe OrderCancellation])
+    , _oliCancellations     :: !(Maybe [OrderCancellation])
     , _oliQuantityCanceled  :: !(Maybe Word32)
     , _oliId                :: !(Maybe Text)
-    , _oliTax               :: !(Maybe (Maybe Price))
-    , _oliPrice             :: !(Maybe (Maybe Price))
+    , _oliTax               :: !(Maybe Price)
+    , _oliPrice             :: !(Maybe Price)
     , _oliQuantityShipped   :: !(Maybe Word32)
     , _oliQuantityReturned  :: !(Maybe Word32)
-    , _oliProduct           :: !(Maybe (Maybe OrderLineItemProduct))
-    , _oliReturns           :: !(Maybe [Maybe OrderReturn])
+    , _oliProduct           :: !(Maybe OrderLineItemProduct)
+    , _oliReturns           :: !(Maybe [OrderReturn])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrderLineItem' with the minimum fields required to make a request.
@@ -1120,7 +1120,7 @@ oliQuantityOrdered
       (\ s a -> s{_oliQuantityOrdered = a})
 
 -- | Details of the return policy for the line item.
-oliReturnInfo :: Lens' OrderLineItem (Maybe (Maybe OrderLineItemReturnInfo))
+oliReturnInfo :: Lens' OrderLineItem (Maybe OrderLineItemReturnInfo)
 oliReturnInfo
   = lens _oliReturnInfo
       (\ s a -> s{_oliReturnInfo = a})
@@ -1132,7 +1132,7 @@ oliQuantityDelivered
       (\ s a -> s{_oliQuantityDelivered = a})
 
 -- | Details of the requested shipping for the line item.
-oliShippingDetails :: Lens' OrderLineItem (Maybe (Maybe OrderLineItemShippingDetails))
+oliShippingDetails :: Lens' OrderLineItem (Maybe OrderLineItemShippingDetails)
 oliShippingDetails
   = lens _oliShippingDetails
       (\ s a -> s{_oliShippingDetails = a})
@@ -1144,7 +1144,7 @@ oliQuantityPending
       (\ s a -> s{_oliQuantityPending = a})
 
 -- | Cancellations of the line item.
-oliCancellations :: Lens' OrderLineItem [Maybe OrderCancellation]
+oliCancellations :: Lens' OrderLineItem [OrderCancellation]
 oliCancellations
   = lens _oliCancellations
       (\ s a -> s{_oliCancellations = a})
@@ -1164,12 +1164,12 @@ oliId = lens _oliId (\ s a -> s{_oliId = a})
 -- | Total tax amount for the line item. For example, if two items are
 -- purchased, and each have a cost tax of $2, the total tax amount will be
 -- $4.
-oliTax :: Lens' OrderLineItem (Maybe (Maybe Price))
+oliTax :: Lens' OrderLineItem (Maybe Price)
 oliTax = lens _oliTax (\ s a -> s{_oliTax = a})
 
 -- | Total price for the line item. For example, if two items for $10 are
 -- purchased, the total price will be $20.
-oliPrice :: Lens' OrderLineItem (Maybe (Maybe Price))
+oliPrice :: Lens' OrderLineItem (Maybe Price)
 oliPrice = lens _oliPrice (\ s a -> s{_oliPrice = a})
 
 -- | Number of items shipped.
@@ -1185,12 +1185,12 @@ oliQuantityReturned
       (\ s a -> s{_oliQuantityReturned = a})
 
 -- | Product data from the time of the order placement.
-oliProduct :: Lens' OrderLineItem (Maybe (Maybe OrderLineItemProduct))
+oliProduct :: Lens' OrderLineItem (Maybe OrderLineItemProduct)
 oliProduct
   = lens _oliProduct (\ s a -> s{_oliProduct = a})
 
 -- | Returns of the line item.
-oliReturns :: Lens' OrderLineItem [Maybe OrderReturn]
+oliReturns :: Lens' OrderLineItem [OrderReturn]
 oliReturns
   = lens _oliReturns (\ s a -> s{_oliReturns = a}) .
       _Default
@@ -1333,7 +1333,7 @@ instance ToJSON OrdersRefundResponse where
 -- /See:/ 'ordersCreateTestOrderRequest' smart constructor.
 data OrdersCreateTestOrderRequest = OrdersCreateTestOrderRequest
     { _octorTemplateName :: !(Maybe Text)
-    , _octorTestOrder    :: !(Maybe (Maybe TestOrder))
+    , _octorTestOrder    :: !(Maybe TestOrder)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersCreateTestOrderRequest' with the minimum fields required to make a request.
@@ -1360,7 +1360,7 @@ octorTemplateName
       (\ s a -> s{_octorTemplateName = a})
 
 -- | The test order to create.
-octorTestOrder :: Lens' OrdersCreateTestOrderRequest (Maybe (Maybe TestOrder))
+octorTestOrder :: Lens' OrdersCreateTestOrderRequest (Maybe TestOrder)
 octorTestOrder
   = lens _octorTestOrder
       (\ s a -> s{_octorTestOrder = a})
@@ -1383,7 +1383,7 @@ instance ToJSON OrdersCreateTestOrderRequest where
 -- /See:/ 'ordersGetTestOrderTemplateResponse' smart constructor.
 data OrdersGetTestOrderTemplateResponse = OrdersGetTestOrderTemplateResponse
     { _ogtotrKind     :: !Text
-    , _ogtotrTemplate :: !(Maybe (Maybe TestOrder))
+    , _ogtotrTemplate :: !(Maybe TestOrder)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersGetTestOrderTemplateResponse' with the minimum fields required to make a request.
@@ -1408,7 +1408,7 @@ ogtotrKind
   = lens _ogtotrKind (\ s a -> s{_ogtotrKind = a})
 
 -- | The requested test order template.
-ogtotrTemplate :: Lens' OrdersGetTestOrderTemplateResponse (Maybe (Maybe TestOrder))
+ogtotrTemplate :: Lens' OrdersGetTestOrderTemplateResponse (Maybe TestOrder)
 ogtotrTemplate
   = lens _ogtotrTemplate
       (\ s a -> s{_ogtotrTemplate = a})
@@ -1489,7 +1489,7 @@ instance ToJSON Error where
 --
 -- /See:/ 'ordersCustomBatchRequest' smart constructor.
 newtype OrdersCustomBatchRequest = OrdersCustomBatchRequest
-    { _ocbrEntries :: Maybe [Maybe OrdersCustomBatchRequestEntry]
+    { _ocbrEntries :: Maybe [OrdersCustomBatchRequestEntry]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersCustomBatchRequest' with the minimum fields required to make a request.
@@ -1505,7 +1505,7 @@ ordersCustomBatchRequest =
     }
 
 -- | The request entries to be processed in the batch.
-ocbrEntries :: Lens' OrdersCustomBatchRequest [Maybe OrdersCustomBatchRequestEntry]
+ocbrEntries :: Lens' OrdersCustomBatchRequest [OrdersCustomBatchRequestEntry]
 ocbrEntries
   = lens _ocbrEntries (\ s a -> s{_ocbrEntries = a}) .
       _Default
@@ -1529,7 +1529,7 @@ data OrdersShipLineItemsRequest = OrdersShipLineItemsRequest
     { _oslirCarrier     :: !(Maybe Text)
     , _oslirTrackingId  :: !(Maybe Text)
     , _oslirShipmentId  :: !(Maybe Text)
-    , _oslirLineItems   :: !(Maybe [Maybe OrderShipmentLineItemShipment])
+    , _oslirLineItems   :: !(Maybe [OrderShipmentLineItemShipment])
     , _oslirOperationId :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1575,7 +1575,7 @@ oslirShipmentId
       (\ s a -> s{_oslirShipmentId = a})
 
 -- | Line items to ship.
-oslirLineItems :: Lens' OrdersShipLineItemsRequest [Maybe OrderShipmentLineItemShipment]
+oslirLineItems :: Lens' OrdersShipLineItemsRequest [OrderShipmentLineItemShipment]
 oslirLineItems
   = lens _oslirLineItems
       (\ s a -> s{_oslirLineItems = a})
@@ -1614,7 +1614,7 @@ data OrderShipment = OrderShipment
     { _osCarrier      :: !(Maybe Text)
     , _osStatus       :: !(Maybe Text)
     , _osTrackingId   :: !(Maybe Text)
-    , _osLineItems    :: !(Maybe [Maybe OrderShipmentLineItemShipment])
+    , _osLineItems    :: !(Maybe [OrderShipmentLineItemShipment])
     , _osId           :: !(Maybe Text)
     , _osCreationDate :: !(Maybe Text)
     , _osDeliveryDate :: !(Maybe Text)
@@ -1665,7 +1665,7 @@ osTrackingId
   = lens _osTrackingId (\ s a -> s{_osTrackingId = a})
 
 -- | The line items that are shipped.
-osLineItems :: Lens' OrderShipment [Maybe OrderShipmentLineItemShipment]
+osLineItems :: Lens' OrderShipment [OrderShipmentLineItemShipment]
 osLineItems
   = lens _osLineItems (\ s a -> s{_osLineItems = a}) .
       _Default
@@ -1716,7 +1716,7 @@ instance ToJSON OrderShipment where
 -- /See:/ 'orderLineItemReturnInfo' smart constructor.
 data OrderLineItemReturnInfo = OrderLineItemReturnInfo
     { _oliriIsReturnable :: !(Maybe Bool)
-    , _oliriPolicyUrl    :: !(Maybe Text)
+    , _oliriPolicyURL    :: !(Maybe Text)
     , _oliriDaysToReturn :: !(Maybe Int32)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1726,7 +1726,7 @@ data OrderLineItemReturnInfo = OrderLineItemReturnInfo
 --
 -- * 'oliriIsReturnable'
 --
--- * 'oliriPolicyUrl'
+-- * 'oliriPolicyURL'
 --
 -- * 'oliriDaysToReturn'
 orderLineItemReturnInfo
@@ -1734,7 +1734,7 @@ orderLineItemReturnInfo
 orderLineItemReturnInfo =
     OrderLineItemReturnInfo
     { _oliriIsReturnable = Nothing
-    , _oliriPolicyUrl = Nothing
+    , _oliriPolicyURL = Nothing
     , _oliriDaysToReturn = Nothing
     }
 
@@ -1745,10 +1745,10 @@ oliriIsReturnable
       (\ s a -> s{_oliriIsReturnable = a})
 
 -- | URL of the item return policy.
-oliriPolicyUrl :: Lens' OrderLineItemReturnInfo (Maybe Text)
-oliriPolicyUrl
-  = lens _oliriPolicyUrl
-      (\ s a -> s{_oliriPolicyUrl = a})
+oliriPolicyURL :: Lens' OrderLineItemReturnInfo (Maybe Text)
+oliriPolicyURL
+  = lens _oliriPolicyURL
+      (\ s a -> s{_oliriPolicyURL = a})
 
 -- | How many days later the item can be returned.
 oliriDaysToReturn :: Lens' OrderLineItemReturnInfo (Maybe Int32)
@@ -1769,7 +1769,7 @@ instance ToJSON OrderLineItemReturnInfo where
           = object
               (catMaybes
                  [("isReturnable" .=) <$> _oliriIsReturnable,
-                  ("policyUrl" .=) <$> _oliriPolicyUrl,
+                  ("policyUrl" .=) <$> _oliriPolicyURL,
                   ("daysToReturn" .=) <$> _oliriDaysToReturn])
 
 --
@@ -1959,7 +1959,7 @@ instance ToJSON OrdersShipLineItemsResponse where
 data OrdersListResponse = OrdersListResponse
     { _olrNextPageToken :: !(Maybe Text)
     , _olrKind          :: !Text
-    , _olrResources     :: !(Maybe [Maybe Order])
+    , _olrResources     :: !(Maybe [Order])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersListResponse' with the minimum fields required to make a request.
@@ -1991,7 +1991,7 @@ olrNextPageToken
 olrKind :: Lens' OrdersListResponse Text
 olrKind = lens _olrKind (\ s a -> s{_olrKind = a})
 
-olrResources :: Lens' OrdersListResponse [Maybe Order]
+olrResources :: Lens' OrdersListResponse [Order]
 olrResources
   = lens _olrResources (\ s a -> s{_olrResources = a})
       . _Default
@@ -2238,7 +2238,7 @@ instance ToJSON OrderCustomer where
 -- /See:/ 'ordersGetByMerchantOrderIdResponse' smart constructor.
 data OrdersGetByMerchantOrderIdResponse = OrdersGetByMerchantOrderIdResponse
     { _ogbmoirKind  :: !Text
-    , _ogbmoirOrder :: !(Maybe (Maybe Order))
+    , _ogbmoirOrder :: !(Maybe Order)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersGetByMerchantOrderIdResponse' with the minimum fields required to make a request.
@@ -2263,7 +2263,7 @@ ogbmoirKind
   = lens _ogbmoirKind (\ s a -> s{_ogbmoirKind = a})
 
 -- | The requested order.
-ogbmoirOrder :: Lens' OrdersGetByMerchantOrderIdResponse (Maybe (Maybe Order))
+ogbmoirOrder :: Lens' OrdersGetByMerchantOrderIdResponse (Maybe Order)
 ogbmoirOrder
   = lens _ogbmoirOrder (\ s a -> s{_ogbmoirOrder = a})
 
@@ -2289,7 +2289,7 @@ instance ToJSON OrdersGetByMerchantOrderIdResponse
 -- /See:/ 'orderLineItemShippingDetails' smart constructor.
 data OrderLineItemShippingDetails = OrderLineItemShippingDetails
     { _olisdShipByDate    :: !(Maybe Text)
-    , _olisdMethod        :: !(Maybe (Maybe OrderLineItemShippingDetailsMethod))
+    , _olisdMethod        :: !(Maybe OrderLineItemShippingDetailsMethod)
     , _olisdDeliverByDate :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -2318,7 +2318,7 @@ olisdShipByDate
       (\ s a -> s{_olisdShipByDate = a})
 
 -- | Details of the shipping method.
-olisdMethod :: Lens' OrderLineItemShippingDetails (Maybe (Maybe OrderLineItemShippingDetailsMethod))
+olisdMethod :: Lens' OrderLineItemShippingDetails (Maybe OrderLineItemShippingDetailsMethod)
 olisdMethod
   = lens _olisdMethod (\ s a -> s{_olisdMethod = a})
 
@@ -2442,8 +2442,8 @@ instance ToJSON OrderLineItemProductVariantAttribute
 data OrdersCustomBatchResponseEntry = OrdersCustomBatchResponseEntry
     { _oKind            :: !Text
     , _oExecutionStatus :: !(Maybe Text)
-    , _oErrors          :: !(Maybe (Maybe Errors))
-    , _oOrder           :: !(Maybe (Maybe Order))
+    , _oErrors          :: !(Maybe Errors)
+    , _oOrder           :: !(Maybe Order)
     , _oBatchId         :: !(Maybe Word32)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -2484,12 +2484,12 @@ oExecutionStatus
       (\ s a -> s{_oExecutionStatus = a})
 
 -- | A list of errors defined if and only if the request failed.
-oErrors :: Lens' OrdersCustomBatchResponseEntry (Maybe (Maybe Errors))
+oErrors :: Lens' OrdersCustomBatchResponseEntry (Maybe Errors)
 oErrors = lens _oErrors (\ s a -> s{_oErrors = a})
 
 -- | The retrieved order. Only defined if the method is get and if the
 -- request was successful.
-oOrder :: Lens' OrdersCustomBatchResponseEntry (Maybe (Maybe Order))
+oOrder :: Lens' OrdersCustomBatchResponseEntry (Maybe Order)
 oOrder = lens _oOrder (\ s a -> s{_oOrder = a})
 
 -- | The ID of the request entry this entry responds to.
@@ -2528,8 +2528,8 @@ data TestOrderLineItemProduct = TestOrderLineItemProduct
     , _tolipGtin              :: !(Maybe Text)
     , _tolipItemGroupId       :: !(Maybe Text)
     , _tolipOfferId           :: !(Maybe Text)
-    , _tolipPrice             :: !(Maybe (Maybe Price))
-    , _tolipVariantAttributes :: !(Maybe [Maybe OrderLineItemProductVariantAttribute])
+    , _tolipPrice             :: !(Maybe Price)
+    , _tolipVariantAttributes :: !(Maybe [OrderLineItemProductVariantAttribute])
     , _tolipTitle             :: !(Maybe Text)
     , _tolipContentLanguage   :: !(Maybe Text)
     , _tolipMpn               :: !(Maybe Text)
@@ -2623,12 +2623,12 @@ tolipOfferId
   = lens _tolipOfferId (\ s a -> s{_tolipOfferId = a})
 
 -- | The price for the product.
-tolipPrice :: Lens' TestOrderLineItemProduct (Maybe (Maybe Price))
+tolipPrice :: Lens' TestOrderLineItemProduct (Maybe Price)
 tolipPrice
   = lens _tolipPrice (\ s a -> s{_tolipPrice = a})
 
 -- | Variant attributes for the item. Optional.
-tolipVariantAttributes :: Lens' TestOrderLineItemProduct [Maybe OrderLineItemProductVariantAttribute]
+tolipVariantAttributes :: Lens' TestOrderLineItemProduct [OrderLineItemProductVariantAttribute]
 tolipVariantAttributes
   = lens _tolipVariantAttributes
       (\ s a -> s{_tolipVariantAttributes = a})
@@ -2696,13 +2696,13 @@ instance ToJSON TestOrderLineItemProduct where
 -- /See:/ 'testOrder' smart constructor.
 data TestOrder = TestOrder
     { _toKind                      :: !Text
-    , _toLineItems                 :: !(Maybe [Maybe TestOrderLineItem])
+    , _toLineItems                 :: !(Maybe [TestOrderLineItem])
     , _toShippingOption            :: !(Maybe Text)
     , _toPredefinedDeliveryAddress :: !(Maybe Text)
-    , _toShippingCostTax           :: !(Maybe (Maybe Price))
-    , _toCustomer                  :: !(Maybe (Maybe TestOrderCustomer))
-    , _toPaymentMethod             :: !(Maybe (Maybe TestOrderPaymentMethod))
-    , _toShippingCost              :: !(Maybe (Maybe Price))
+    , _toShippingCostTax           :: !(Maybe Price)
+    , _toCustomer                  :: !(Maybe TestOrderCustomer)
+    , _toPaymentMethod             :: !(Maybe TestOrderPaymentMethod)
+    , _toShippingCost              :: !(Maybe Price)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TestOrder' with the minimum fields required to make a request.
@@ -2744,7 +2744,7 @@ toKind :: Lens' TestOrder Text
 toKind = lens _toKind (\ s a -> s{_toKind = a})
 
 -- | Line items that are ordered. At least one line item must be provided.
-toLineItems :: Lens' TestOrder [Maybe TestOrderLineItem]
+toLineItems :: Lens' TestOrder [TestOrderLineItem]
 toLineItems
   = lens _toLineItems (\ s a -> s{_toLineItems = a}) .
       _Default
@@ -2763,24 +2763,24 @@ toPredefinedDeliveryAddress
       (\ s a -> s{_toPredefinedDeliveryAddress = a})
 
 -- | The tax for the total shipping cost.
-toShippingCostTax :: Lens' TestOrder (Maybe (Maybe Price))
+toShippingCostTax :: Lens' TestOrder (Maybe Price)
 toShippingCostTax
   = lens _toShippingCostTax
       (\ s a -> s{_toShippingCostTax = a})
 
 -- | The details of the customer who placed the order.
-toCustomer :: Lens' TestOrder (Maybe (Maybe TestOrderCustomer))
+toCustomer :: Lens' TestOrder (Maybe TestOrderCustomer)
 toCustomer
   = lens _toCustomer (\ s a -> s{_toCustomer = a})
 
 -- | The details of the payment method.
-toPaymentMethod :: Lens' TestOrder (Maybe (Maybe TestOrderPaymentMethod))
+toPaymentMethod :: Lens' TestOrder (Maybe TestOrderPaymentMethod)
 toPaymentMethod
   = lens _toPaymentMethod
       (\ s a -> s{_toPaymentMethod = a})
 
 -- | The total cost of shipping for all items.
-toShippingCost :: Lens' TestOrder (Maybe (Maybe Price))
+toShippingCost :: Lens' TestOrder (Maybe Price)
 toShippingCost
   = lens _toShippingCost
       (\ s a -> s{_toShippingCost = a})
@@ -2816,7 +2816,7 @@ instance ToJSON TestOrder where
 --
 -- /See:/ 'orderRefund' smart constructor.
 data OrderRefund = OrderRefund
-    { _oAmount       :: !(Maybe (Maybe Price))
+    { _oAmount       :: !(Maybe Price)
     , _oActor        :: !(Maybe Text)
     , _oReason       :: !(Maybe Text)
     , _oCreationDate :: !(Maybe Text)
@@ -2848,7 +2848,7 @@ orderRefund =
     }
 
 -- | The amount that is refunded.
-oAmount :: Lens' OrderRefund (Maybe (Maybe Price))
+oAmount :: Lens' OrderRefund (Maybe Price)
 oAmount = lens _oAmount (\ s a -> s{_oAmount = a})
 
 -- | The actor that created the refund.
@@ -2892,7 +2892,7 @@ instance ToJSON OrderRefund where
 --
 -- /See:/ 'orderDeliveryDetails' smart constructor.
 data OrderDeliveryDetails = OrderDeliveryDetails
-    { _oddAddress     :: !(Maybe (Maybe OrderAddress))
+    { _oddAddress     :: !(Maybe OrderAddress)
     , _oddPhoneNumber :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -2912,7 +2912,7 @@ orderDeliveryDetails =
     }
 
 -- | The delivery address
-oddAddress :: Lens' OrderDeliveryDetails (Maybe (Maybe OrderAddress))
+oddAddress :: Lens' OrderDeliveryDetails (Maybe OrderAddress)
 oddAddress
   = lens _oddAddress (\ s a -> s{_oddAddress = a})
 
@@ -3111,10 +3111,10 @@ instance ToJSON OrdersCancelResponse where
 -- /See:/ 'testOrderLineItem' smart constructor.
 data TestOrderLineItem = TestOrderLineItem
     { _toliQuantityOrdered :: !(Maybe Word32)
-    , _toliReturnInfo      :: !(Maybe (Maybe OrderLineItemReturnInfo))
-    , _toliShippingDetails :: !(Maybe (Maybe OrderLineItemShippingDetails))
-    , _toliProduct         :: !(Maybe (Maybe TestOrderLineItemProduct))
-    , _toliUnitTax         :: !(Maybe (Maybe Price))
+    , _toliReturnInfo      :: !(Maybe OrderLineItemReturnInfo)
+    , _toliShippingDetails :: !(Maybe OrderLineItemShippingDetails)
+    , _toliProduct         :: !(Maybe TestOrderLineItemProduct)
+    , _toliUnitTax         :: !(Maybe Price)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TestOrderLineItem' with the minimum fields required to make a request.
@@ -3148,24 +3148,24 @@ toliQuantityOrdered
       (\ s a -> s{_toliQuantityOrdered = a})
 
 -- | Details of the return policy for the line item.
-toliReturnInfo :: Lens' TestOrderLineItem (Maybe (Maybe OrderLineItemReturnInfo))
+toliReturnInfo :: Lens' TestOrderLineItem (Maybe OrderLineItemReturnInfo)
 toliReturnInfo
   = lens _toliReturnInfo
       (\ s a -> s{_toliReturnInfo = a})
 
 -- | Details of the requested shipping for the line item.
-toliShippingDetails :: Lens' TestOrderLineItem (Maybe (Maybe OrderLineItemShippingDetails))
+toliShippingDetails :: Lens' TestOrderLineItem (Maybe OrderLineItemShippingDetails)
 toliShippingDetails
   = lens _toliShippingDetails
       (\ s a -> s{_toliShippingDetails = a})
 
 -- | Product data from the time of the order placement.
-toliProduct :: Lens' TestOrderLineItem (Maybe (Maybe TestOrderLineItemProduct))
+toliProduct :: Lens' TestOrderLineItem (Maybe TestOrderLineItemProduct)
 toliProduct
   = lens _toliProduct (\ s a -> s{_toliProduct = a})
 
 -- | Unit tax for the line item.
-toliUnitTax :: Lens' TestOrderLineItem (Maybe (Maybe Price))
+toliUnitTax :: Lens' TestOrderLineItem (Maybe Price)
 toliUnitTax
   = lens _toliUnitTax (\ s a -> s{_toliUnitTax = a})
 
@@ -3195,7 +3195,7 @@ data OrderPaymentMethod = OrderPaymentMethod
     { _opmExpirationMonth :: !(Maybe Int32)
     , _opmExpirationYear  :: !(Maybe Int32)
     , _opmPhoneNumber     :: !(Maybe Text)
-    , _opmBillingAddress  :: !(Maybe (Maybe OrderAddress))
+    , _opmBillingAddress  :: !(Maybe OrderAddress)
     , _opmLastFourDigits  :: !(Maybe Text)
     , _opmType            :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -3246,7 +3246,7 @@ opmPhoneNumber
       (\ s a -> s{_opmPhoneNumber = a})
 
 -- | The billing address.
-opmBillingAddress :: Lens' OrderPaymentMethod (Maybe (Maybe OrderAddress))
+opmBillingAddress :: Lens' OrderPaymentMethod (Maybe OrderAddress)
 opmBillingAddress
   = lens _opmBillingAddress
       (\ s a -> s{_opmBillingAddress = a})
@@ -3290,7 +3290,7 @@ instance ToJSON OrderPaymentMethod where
 data Errors = Errors
     { _errCode    :: !(Maybe Word32)
     , _errMessage :: !(Maybe Text)
-    , _errErrors  :: !(Maybe [Maybe Error])
+    , _errErrors  :: !(Maybe [Error])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Errors' with the minimum fields required to make a request.
@@ -3321,7 +3321,7 @@ errMessage
   = lens _errMessage (\ s a -> s{_errMessage = a})
 
 -- | A list of errors.
-errErrors :: Lens' Errors [Maybe Error]
+errErrors :: Lens' Errors [Error]
 errErrors
   = lens _errErrors (\ s a -> s{_errErrors = a}) .
       _Default
@@ -3481,8 +3481,8 @@ data OrderLineItemProduct = OrderLineItemProduct
     , _olipItemGroupId       :: !(Maybe Text)
     , _olipOfferId           :: !(Maybe Text)
     , _olipId                :: !(Maybe Text)
-    , _olipPrice             :: !(Maybe (Maybe Price))
-    , _olipVariantAttributes :: !(Maybe [Maybe OrderLineItemProductVariantAttribute])
+    , _olipPrice             :: !(Maybe Price)
+    , _olipVariantAttributes :: !(Maybe [OrderLineItemProductVariantAttribute])
     , _olipTitle             :: !(Maybe Text)
     , _olipContentLanguage   :: !(Maybe Text)
     , _olipMpn               :: !(Maybe Text)
@@ -3591,14 +3591,14 @@ olipId :: Lens' OrderLineItemProduct (Maybe Text)
 olipId = lens _olipId (\ s a -> s{_olipId = a})
 
 -- | Price of the item.
-olipPrice :: Lens' OrderLineItemProduct (Maybe (Maybe Price))
+olipPrice :: Lens' OrderLineItemProduct (Maybe Price)
 olipPrice
   = lens _olipPrice (\ s a -> s{_olipPrice = a})
 
 -- | Variant attributes for the item. These are dimensions of the product,
 -- such as color, gender, material, pattern, and size. You can find a
 -- comprehensive list of variant attributes here.
-olipVariantAttributes :: Lens' OrderLineItemProduct [Maybe OrderLineItemProductVariantAttribute]
+olipVariantAttributes :: Lens' OrderLineItemProduct [OrderLineItemProductVariantAttribute]
 olipVariantAttributes
   = lens _olipVariantAttributes
       (\ s a -> s{_olipVariantAttributes = a})
@@ -3717,191 +3717,194 @@ instance ToJSON OrdersAcknowledgeResponse where
 --
 -- /See:/ 'order' smart constructor.
 data Order = Order
-    { _ooStatus          :: !(Maybe Text)
-    , _ooMerchantId      :: !(Maybe Word64)
-    , _ooRefunds         :: !(Maybe [Maybe OrderRefund])
-    , _ooKind            :: !Text
-    , _ooLineItems       :: !(Maybe [Maybe OrderLineItem])
-    , _ooShipments       :: !(Maybe [Maybe OrderShipment])
-    , _ooNetAmount       :: !(Maybe (Maybe Price))
-    , _ooPlacedDate      :: !(Maybe Text)
-    , _ooDeliveryDetails :: !(Maybe (Maybe OrderDeliveryDetails))
-    , _ooShippingOption  :: !(Maybe Text)
-    , _ooMerchantOrderId :: !(Maybe Text)
-    , _ooAcknowledged    :: !(Maybe Bool)
-    , _ooShippingCostTax :: !(Maybe (Maybe Price))
-    , _ooCustomer        :: !(Maybe (Maybe OrderCustomer))
-    , _ooId              :: !(Maybe Text)
-    , _ooPaymentMethod   :: !(Maybe (Maybe OrderPaymentMethod))
-    , _ooPaymentStatus   :: !(Maybe Text)
-    , _ooShippingCost    :: !(Maybe (Maybe Price))
+    { _ordStatus          :: !(Maybe Text)
+    , _ordMerchantId      :: !(Maybe Word64)
+    , _ordRefunds         :: !(Maybe [OrderRefund])
+    , _ordKind            :: !Text
+    , _ordLineItems       :: !(Maybe [OrderLineItem])
+    , _ordShipments       :: !(Maybe [OrderShipment])
+    , _ordNetAmount       :: !(Maybe Price)
+    , _ordPlacedDate      :: !(Maybe Text)
+    , _ordDeliveryDetails :: !(Maybe OrderDeliveryDetails)
+    , _ordShippingOption  :: !(Maybe Text)
+    , _ordMerchantOrderId :: !(Maybe Text)
+    , _ordAcknowledged    :: !(Maybe Bool)
+    , _ordShippingCostTax :: !(Maybe Price)
+    , _ordCustomer        :: !(Maybe OrderCustomer)
+    , _ordId              :: !(Maybe Text)
+    , _ordPaymentMethod   :: !(Maybe OrderPaymentMethod)
+    , _ordPaymentStatus   :: !(Maybe Text)
+    , _ordShippingCost    :: !(Maybe Price)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Order' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ooStatus'
+-- * 'ordStatus'
 --
--- * 'ooMerchantId'
+-- * 'ordMerchantId'
 --
--- * 'ooRefunds'
+-- * 'ordRefunds'
 --
--- * 'ooKind'
+-- * 'ordKind'
 --
--- * 'ooLineItems'
+-- * 'ordLineItems'
 --
--- * 'ooShipments'
+-- * 'ordShipments'
 --
--- * 'ooNetAmount'
+-- * 'ordNetAmount'
 --
--- * 'ooPlacedDate'
+-- * 'ordPlacedDate'
 --
--- * 'ooDeliveryDetails'
+-- * 'ordDeliveryDetails'
 --
--- * 'ooShippingOption'
+-- * 'ordShippingOption'
 --
--- * 'ooMerchantOrderId'
+-- * 'ordMerchantOrderId'
 --
--- * 'ooAcknowledged'
+-- * 'ordAcknowledged'
 --
--- * 'ooShippingCostTax'
+-- * 'ordShippingCostTax'
 --
--- * 'ooCustomer'
+-- * 'ordCustomer'
 --
--- * 'ooId'
+-- * 'ordId'
 --
--- * 'ooPaymentMethod'
+-- * 'ordPaymentMethod'
 --
--- * 'ooPaymentStatus'
+-- * 'ordPaymentStatus'
 --
--- * 'ooShippingCost'
+-- * 'ordShippingCost'
 order
     :: Order
 order =
     Order
-    { _ooStatus = Nothing
-    , _ooMerchantId = Nothing
-    , _ooRefunds = Nothing
-    , _ooKind = "content#order"
-    , _ooLineItems = Nothing
-    , _ooShipments = Nothing
-    , _ooNetAmount = Nothing
-    , _ooPlacedDate = Nothing
-    , _ooDeliveryDetails = Nothing
-    , _ooShippingOption = Nothing
-    , _ooMerchantOrderId = Nothing
-    , _ooAcknowledged = Nothing
-    , _ooShippingCostTax = Nothing
-    , _ooCustomer = Nothing
-    , _ooId = Nothing
-    , _ooPaymentMethod = Nothing
-    , _ooPaymentStatus = Nothing
-    , _ooShippingCost = Nothing
+    { _ordStatus = Nothing
+    , _ordMerchantId = Nothing
+    , _ordRefunds = Nothing
+    , _ordKind = "content#order"
+    , _ordLineItems = Nothing
+    , _ordShipments = Nothing
+    , _ordNetAmount = Nothing
+    , _ordPlacedDate = Nothing
+    , _ordDeliveryDetails = Nothing
+    , _ordShippingOption = Nothing
+    , _ordMerchantOrderId = Nothing
+    , _ordAcknowledged = Nothing
+    , _ordShippingCostTax = Nothing
+    , _ordCustomer = Nothing
+    , _ordId = Nothing
+    , _ordPaymentMethod = Nothing
+    , _ordPaymentStatus = Nothing
+    , _ordShippingCost = Nothing
     }
 
 -- | The status of the order.
-ooStatus :: Lens' Order (Maybe Text)
-ooStatus = lens _ooStatus (\ s a -> s{_ooStatus = a})
+ordStatus :: Lens' Order (Maybe Text)
+ordStatus
+  = lens _ordStatus (\ s a -> s{_ordStatus = a})
 
-ooMerchantId :: Lens' Order (Maybe Word64)
-ooMerchantId
-  = lens _ooMerchantId (\ s a -> s{_ooMerchantId = a})
+ordMerchantId :: Lens' Order (Maybe Word64)
+ordMerchantId
+  = lens _ordMerchantId
+      (\ s a -> s{_ordMerchantId = a})
 
 -- | Refunds for the order.
-ooRefunds :: Lens' Order [Maybe OrderRefund]
-ooRefunds
-  = lens _ooRefunds (\ s a -> s{_ooRefunds = a}) .
+ordRefunds :: Lens' Order [OrderRefund]
+ordRefunds
+  = lens _ordRefunds (\ s a -> s{_ordRefunds = a}) .
       _Default
       . _Coerce
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#order\".
-ooKind :: Lens' Order Text
-ooKind = lens _ooKind (\ s a -> s{_ooKind = a})
+ordKind :: Lens' Order Text
+ordKind = lens _ordKind (\ s a -> s{_ordKind = a})
 
 -- | Line items that are ordered.
-ooLineItems :: Lens' Order [Maybe OrderLineItem]
-ooLineItems
-  = lens _ooLineItems (\ s a -> s{_ooLineItems = a}) .
-      _Default
+ordLineItems :: Lens' Order [OrderLineItem]
+ordLineItems
+  = lens _ordLineItems (\ s a -> s{_ordLineItems = a})
+      . _Default
       . _Coerce
 
 -- | Shipments of the order.
-ooShipments :: Lens' Order [Maybe OrderShipment]
-ooShipments
-  = lens _ooShipments (\ s a -> s{_ooShipments = a}) .
-      _Default
+ordShipments :: Lens' Order [OrderShipment]
+ordShipments
+  = lens _ordShipments (\ s a -> s{_ordShipments = a})
+      . _Default
       . _Coerce
 
 -- | The net amount for the order. For example, if an order was originally
 -- for a grand total of $100 and a refund was issued for $20, the net
 -- amount will be $80.
-ooNetAmount :: Lens' Order (Maybe (Maybe Price))
-ooNetAmount
-  = lens _ooNetAmount (\ s a -> s{_ooNetAmount = a})
+ordNetAmount :: Lens' Order (Maybe Price)
+ordNetAmount
+  = lens _ordNetAmount (\ s a -> s{_ordNetAmount = a})
 
 -- | The date when the order was placed, in ISO 8601 format.
-ooPlacedDate :: Lens' Order (Maybe Text)
-ooPlacedDate
-  = lens _ooPlacedDate (\ s a -> s{_ooPlacedDate = a})
+ordPlacedDate :: Lens' Order (Maybe Text)
+ordPlacedDate
+  = lens _ordPlacedDate
+      (\ s a -> s{_ordPlacedDate = a})
 
 -- | The details for the delivery.
-ooDeliveryDetails :: Lens' Order (Maybe (Maybe OrderDeliveryDetails))
-ooDeliveryDetails
-  = lens _ooDeliveryDetails
-      (\ s a -> s{_ooDeliveryDetails = a})
+ordDeliveryDetails :: Lens' Order (Maybe OrderDeliveryDetails)
+ordDeliveryDetails
+  = lens _ordDeliveryDetails
+      (\ s a -> s{_ordDeliveryDetails = a})
 
 -- | The requested shipping option.
-ooShippingOption :: Lens' Order (Maybe Text)
-ooShippingOption
-  = lens _ooShippingOption
-      (\ s a -> s{_ooShippingOption = a})
+ordShippingOption :: Lens' Order (Maybe Text)
+ordShippingOption
+  = lens _ordShippingOption
+      (\ s a -> s{_ordShippingOption = a})
 
 -- | Merchant-provided id of the order.
-ooMerchantOrderId :: Lens' Order (Maybe Text)
-ooMerchantOrderId
-  = lens _ooMerchantOrderId
-      (\ s a -> s{_ooMerchantOrderId = a})
+ordMerchantOrderId :: Lens' Order (Maybe Text)
+ordMerchantOrderId
+  = lens _ordMerchantOrderId
+      (\ s a -> s{_ordMerchantOrderId = a})
 
 -- | Whether the order was acknowledged.
-ooAcknowledged :: Lens' Order (Maybe Bool)
-ooAcknowledged
-  = lens _ooAcknowledged
-      (\ s a -> s{_ooAcknowledged = a})
+ordAcknowledged :: Lens' Order (Maybe Bool)
+ordAcknowledged
+  = lens _ordAcknowledged
+      (\ s a -> s{_ordAcknowledged = a})
 
 -- | The tax for the total shipping cost.
-ooShippingCostTax :: Lens' Order (Maybe (Maybe Price))
-ooShippingCostTax
-  = lens _ooShippingCostTax
-      (\ s a -> s{_ooShippingCostTax = a})
+ordShippingCostTax :: Lens' Order (Maybe Price)
+ordShippingCostTax
+  = lens _ordShippingCostTax
+      (\ s a -> s{_ordShippingCostTax = a})
 
 -- | The details of the customer who placed the order.
-ooCustomer :: Lens' Order (Maybe (Maybe OrderCustomer))
-ooCustomer
-  = lens _ooCustomer (\ s a -> s{_ooCustomer = a})
+ordCustomer :: Lens' Order (Maybe OrderCustomer)
+ordCustomer
+  = lens _ordCustomer (\ s a -> s{_ordCustomer = a})
 
 -- | The REST id of the order. Globally unique.
-ooId :: Lens' Order (Maybe Text)
-ooId = lens _ooId (\ s a -> s{_ooId = a})
+ordId :: Lens' Order (Maybe Text)
+ordId = lens _ordId (\ s a -> s{_ordId = a})
 
 -- | The details of the payment method.
-ooPaymentMethod :: Lens' Order (Maybe (Maybe OrderPaymentMethod))
-ooPaymentMethod
-  = lens _ooPaymentMethod
-      (\ s a -> s{_ooPaymentMethod = a})
+ordPaymentMethod :: Lens' Order (Maybe OrderPaymentMethod)
+ordPaymentMethod
+  = lens _ordPaymentMethod
+      (\ s a -> s{_ordPaymentMethod = a})
 
 -- | The status of the payment.
-ooPaymentStatus :: Lens' Order (Maybe Text)
-ooPaymentStatus
-  = lens _ooPaymentStatus
-      (\ s a -> s{_ooPaymentStatus = a})
+ordPaymentStatus :: Lens' Order (Maybe Text)
+ordPaymentStatus
+  = lens _ordPaymentStatus
+      (\ s a -> s{_ordPaymentStatus = a})
 
 -- | The total cost of shipping for all items.
-ooShippingCost :: Lens' Order (Maybe (Maybe Price))
-ooShippingCost
-  = lens _ooShippingCost
-      (\ s a -> s{_ooShippingCost = a})
+ordShippingCost :: Lens' Order (Maybe Price)
+ordShippingCost
+  = lens _ordShippingCost
+      (\ s a -> s{_ordShippingCost = a})
 
 instance FromJSON Order where
         parseJSON
@@ -3930,23 +3933,24 @@ instance ToJSON Order where
         toJSON Order{..}
           = object
               (catMaybes
-                 [("status" .=) <$> _ooStatus,
-                  ("merchantId" .=) <$> _ooMerchantId,
-                  ("refunds" .=) <$> _ooRefunds,
-                  Just ("kind" .= _ooKind),
-                  ("lineItems" .=) <$> _ooLineItems,
-                  ("shipments" .=) <$> _ooShipments,
-                  ("netAmount" .=) <$> _ooNetAmount,
-                  ("placedDate" .=) <$> _ooPlacedDate,
-                  ("deliveryDetails" .=) <$> _ooDeliveryDetails,
-                  ("shippingOption" .=) <$> _ooShippingOption,
-                  ("merchantOrderId" .=) <$> _ooMerchantOrderId,
-                  ("acknowledged" .=) <$> _ooAcknowledged,
-                  ("shippingCostTax" .=) <$> _ooShippingCostTax,
-                  ("customer" .=) <$> _ooCustomer, ("id" .=) <$> _ooId,
-                  ("paymentMethod" .=) <$> _ooPaymentMethod,
-                  ("paymentStatus" .=) <$> _ooPaymentStatus,
-                  ("shippingCost" .=) <$> _ooShippingCost])
+                 [("status" .=) <$> _ordStatus,
+                  ("merchantId" .=) <$> _ordMerchantId,
+                  ("refunds" .=) <$> _ordRefunds,
+                  Just ("kind" .= _ordKind),
+                  ("lineItems" .=) <$> _ordLineItems,
+                  ("shipments" .=) <$> _ordShipments,
+                  ("netAmount" .=) <$> _ordNetAmount,
+                  ("placedDate" .=) <$> _ordPlacedDate,
+                  ("deliveryDetails" .=) <$> _ordDeliveryDetails,
+                  ("shippingOption" .=) <$> _ordShippingOption,
+                  ("merchantOrderId" .=) <$> _ordMerchantOrderId,
+                  ("acknowledged" .=) <$> _ordAcknowledged,
+                  ("shippingCostTax" .=) <$> _ordShippingCostTax,
+                  ("customer" .=) <$> _ordCustomer,
+                  ("id" .=) <$> _ordId,
+                  ("paymentMethod" .=) <$> _ordPaymentMethod,
+                  ("paymentStatus" .=) <$> _ordPaymentStatus,
+                  ("shippingCost" .=) <$> _ordShippingCost])
 
 --
 -- /See:/ 'ordersCustomBatchRequestEntryReturnLineItem' smart constructor.
@@ -4079,7 +4083,7 @@ instance ToJSON OrdersUpdateMerchantOrderIdResponse
 --
 -- /See:/ 'ordersCustomBatchRequestEntryRefund' smart constructor.
 data OrdersCustomBatchRequestEntryRefund = OrdersCustomBatchRequestEntryRefund
-    { _ocbrerAmount     :: !(Maybe (Maybe Price))
+    { _ocbrerAmount     :: !(Maybe Price)
     , _ocbrerReason     :: !(Maybe Text)
     , _ocbrerReasonText :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -4103,7 +4107,7 @@ ordersCustomBatchRequestEntryRefund =
     }
 
 -- | The amount that is refunded.
-ocbrerAmount :: Lens' OrdersCustomBatchRequestEntryRefund (Maybe (Maybe Price))
+ocbrerAmount :: Lens' OrdersCustomBatchRequestEntryRefund (Maybe Price)
 ocbrerAmount
   = lens _ocbrerAmount (\ s a -> s{_ocbrerAmount = a})
 
@@ -4217,36 +4221,37 @@ instance ToJSON OrderCancellation where
 --
 -- /See:/ 'ordersCustomBatchResponse' smart constructor.
 data OrdersCustomBatchResponse = OrdersCustomBatchResponse
-    { _ordEntries :: !(Maybe [Maybe OrdersCustomBatchResponseEntry])
-    , _ordKind    :: !Text
+    { _ocbrcEntries :: !(Maybe [OrdersCustomBatchResponseEntry])
+    , _ocbrcKind    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersCustomBatchResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ordEntries'
+-- * 'ocbrcEntries'
 --
--- * 'ordKind'
+-- * 'ocbrcKind'
 ordersCustomBatchResponse
     :: OrdersCustomBatchResponse
 ordersCustomBatchResponse =
     OrdersCustomBatchResponse
-    { _ordEntries = Nothing
-    , _ordKind = "content#ordersCustomBatchResponse"
+    { _ocbrcEntries = Nothing
+    , _ocbrcKind = "content#ordersCustomBatchResponse"
     }
 
 -- | The result of the execution of the batch requests.
-ordEntries :: Lens' OrdersCustomBatchResponse [Maybe OrdersCustomBatchResponseEntry]
-ordEntries
-  = lens _ordEntries (\ s a -> s{_ordEntries = a}) .
-      _Default
+ocbrcEntries :: Lens' OrdersCustomBatchResponse [OrdersCustomBatchResponseEntry]
+ocbrcEntries
+  = lens _ocbrcEntries (\ s a -> s{_ocbrcEntries = a})
+      . _Default
       . _Coerce
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"content#ordersCustomBatchResponse\".
-ordKind :: Lens' OrdersCustomBatchResponse Text
-ordKind = lens _ordKind (\ s a -> s{_ordKind = a})
+ocbrcKind :: Lens' OrdersCustomBatchResponse Text
+ocbrcKind
+  = lens _ocbrcKind (\ s a -> s{_ocbrcKind = a})
 
 instance FromJSON OrdersCustomBatchResponse where
         parseJSON
@@ -4261,5 +4266,5 @@ instance ToJSON OrdersCustomBatchResponse where
         toJSON OrdersCustomBatchResponse{..}
           = object
               (catMaybes
-                 [("entries" .=) <$> _ordEntries,
-                  Just ("kind" .= _ordKind)])
+                 [("entries" .=) <$> _ocbrcEntries,
+                  Just ("kind" .= _ocbrcKind)])

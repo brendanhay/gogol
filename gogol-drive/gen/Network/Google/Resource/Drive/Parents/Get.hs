@@ -32,13 +32,12 @@ module Network.Google.Resource.Drive.Parents.Get
     -- * Request Lenses
     , paraQuotaUser
     , paraPrettyPrint
-    , paraUserIp
+    , paraUserIP
     , paraKey
     , paraFileId
-    , paraOauthToken
+    , paraOAuthToken
     , paraParentId
     , paraFields
-    , paraAlt
     ) where
 
 import           Network.Google.Drive.Types
@@ -54,10 +53,11 @@ type ParentsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] ParentReference
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] ParentReference
 
 -- | Gets a specific parent reference.
 --
@@ -65,13 +65,12 @@ type ParentsGetResource =
 data ParentsGet' = ParentsGet'
     { _paraQuotaUser   :: !(Maybe Text)
     , _paraPrettyPrint :: !Bool
-    , _paraUserIp      :: !(Maybe Text)
-    , _paraKey         :: !(Maybe Text)
+    , _paraUserIP      :: !(Maybe Text)
+    , _paraKey         :: !(Maybe Key)
     , _paraFileId      :: !Text
-    , _paraOauthToken  :: !(Maybe Text)
+    , _paraOAuthToken  :: !(Maybe OAuthToken)
     , _paraParentId    :: !Text
     , _paraFields      :: !(Maybe Text)
-    , _paraAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ParentsGet'' with the minimum fields required to make a request.
@@ -82,19 +81,17 @@ data ParentsGet' = ParentsGet'
 --
 -- * 'paraPrettyPrint'
 --
--- * 'paraUserIp'
+-- * 'paraUserIP'
 --
 -- * 'paraKey'
 --
 -- * 'paraFileId'
 --
--- * 'paraOauthToken'
+-- * 'paraOAuthToken'
 --
 -- * 'paraParentId'
 --
 -- * 'paraFields'
---
--- * 'paraAlt'
 parentsGet'
     :: Text -- ^ 'fileId'
     -> Text -- ^ 'parentId'
@@ -103,13 +100,12 @@ parentsGet' pParaFileId_ pParaParentId_ =
     ParentsGet'
     { _paraQuotaUser = Nothing
     , _paraPrettyPrint = True
-    , _paraUserIp = Nothing
+    , _paraUserIP = Nothing
     , _paraKey = Nothing
     , _paraFileId = pParaFileId_
-    , _paraOauthToken = Nothing
+    , _paraOAuthToken = Nothing
     , _paraParentId = pParaParentId_
     , _paraFields = Nothing
-    , _paraAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -128,14 +124,14 @@ paraPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-paraUserIp :: Lens' ParentsGet' (Maybe Text)
-paraUserIp
-  = lens _paraUserIp (\ s a -> s{_paraUserIp = a})
+paraUserIP :: Lens' ParentsGet' (Maybe Text)
+paraUserIP
+  = lens _paraUserIP (\ s a -> s{_paraUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-paraKey :: Lens' ParentsGet' (Maybe Text)
+paraKey :: Lens' ParentsGet' (Maybe Key)
 paraKey = lens _paraKey (\ s a -> s{_paraKey = a})
 
 -- | The ID of the file.
@@ -144,10 +140,10 @@ paraFileId
   = lens _paraFileId (\ s a -> s{_paraFileId = a})
 
 -- | OAuth 2.0 token for the current user.
-paraOauthToken :: Lens' ParentsGet' (Maybe Text)
-paraOauthToken
-  = lens _paraOauthToken
-      (\ s a -> s{_paraOauthToken = a})
+paraOAuthToken :: Lens' ParentsGet' (Maybe OAuthToken)
+paraOAuthToken
+  = lens _paraOAuthToken
+      (\ s a -> s{_paraOAuthToken = a})
 
 -- | The ID of the parent.
 paraParentId :: Lens' ParentsGet' Text
@@ -159,22 +155,22 @@ paraFields :: Lens' ParentsGet' (Maybe Text)
 paraFields
   = lens _paraFields (\ s a -> s{_paraFields = a})
 
--- | Data format for the response.
-paraAlt :: Lens' ParentsGet' Alt
-paraAlt = lens _paraAlt (\ s a -> s{_paraAlt = a})
+instance GoogleAuth ParentsGet' where
+        authKey = paraKey . _Just
+        authToken = paraOAuthToken . _Just
 
 instance GoogleRequest ParentsGet' where
         type Rs ParentsGet' = ParentReference
         request = requestWithRoute defReq driveURL
         requestWithRoute r u ParentsGet'{..}
           = go _paraQuotaUser (Just _paraPrettyPrint)
-              _paraUserIp
+              _paraUserIP
               _paraKey
               _paraFileId
-              _paraOauthToken
+              _paraOAuthToken
               _paraParentId
               _paraFields
-              (Just _paraAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy ParentsGetResource)
                       r

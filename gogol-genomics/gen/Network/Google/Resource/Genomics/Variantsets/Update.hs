@@ -34,11 +34,11 @@ module Network.Google.Resource.Genomics.Variantsets.Update
     , vuuQuotaUser
     , vuuPrettyPrint
     , vuuVariantSetId
-    , vuuUserIp
+    , vuuUserIP
     , vuuKey
-    , vuuOauthToken
+    , vuuVariantSet
+    , vuuOAuthToken
     , vuuFields
-    , vuuAlt
     ) where
 
 import           Network.Google.Genomics.Types
@@ -52,10 +52,11 @@ type VariantsetsUpdateResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Put '[JSON] VariantSet
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] VariantSet :> Put '[JSON] VariantSet
 
 -- | Updates a variant set\'s metadata. All other modifications are silently
 -- ignored.
@@ -65,11 +66,11 @@ data VariantsetsUpdate' = VariantsetsUpdate'
     { _vuuQuotaUser    :: !(Maybe Text)
     , _vuuPrettyPrint  :: !Bool
     , _vuuVariantSetId :: !Text
-    , _vuuUserIp       :: !(Maybe Text)
-    , _vuuKey          :: !(Maybe Text)
-    , _vuuOauthToken   :: !(Maybe Text)
+    , _vuuUserIP       :: !(Maybe Text)
+    , _vuuKey          :: !(Maybe Key)
+    , _vuuVariantSet   :: !VariantSet
+    , _vuuOAuthToken   :: !(Maybe OAuthToken)
     , _vuuFields       :: !(Maybe Text)
-    , _vuuAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantsetsUpdate'' with the minimum fields required to make a request.
@@ -82,28 +83,29 @@ data VariantsetsUpdate' = VariantsetsUpdate'
 --
 -- * 'vuuVariantSetId'
 --
--- * 'vuuUserIp'
+-- * 'vuuUserIP'
 --
 -- * 'vuuKey'
 --
--- * 'vuuOauthToken'
+-- * 'vuuVariantSet'
+--
+-- * 'vuuOAuthToken'
 --
 -- * 'vuuFields'
---
--- * 'vuuAlt'
 variantsetsUpdate'
     :: Text -- ^ 'variantSetId'
+    -> VariantSet -- ^ 'VariantSet'
     -> VariantsetsUpdate'
-variantsetsUpdate' pVuuVariantSetId_ =
+variantsetsUpdate' pVuuVariantSetId_ pVuuVariantSet_ =
     VariantsetsUpdate'
     { _vuuQuotaUser = Nothing
     , _vuuPrettyPrint = True
     , _vuuVariantSetId = pVuuVariantSetId_
-    , _vuuUserIp = Nothing
+    , _vuuUserIP = Nothing
     , _vuuKey = Nothing
-    , _vuuOauthToken = Nothing
+    , _vuuVariantSet = pVuuVariantSet_
+    , _vuuOAuthToken = Nothing
     , _vuuFields = Nothing
-    , _vuuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,30 +129,36 @@ vuuVariantSetId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-vuuUserIp :: Lens' VariantsetsUpdate' (Maybe Text)
-vuuUserIp
-  = lens _vuuUserIp (\ s a -> s{_vuuUserIp = a})
+vuuUserIP :: Lens' VariantsetsUpdate' (Maybe Text)
+vuuUserIP
+  = lens _vuuUserIP (\ s a -> s{_vuuUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vuuKey :: Lens' VariantsetsUpdate' (Maybe Text)
+vuuKey :: Lens' VariantsetsUpdate' (Maybe Key)
 vuuKey = lens _vuuKey (\ s a -> s{_vuuKey = a})
 
+-- | Multipart request metadata.
+vuuVariantSet :: Lens' VariantsetsUpdate' VariantSet
+vuuVariantSet
+  = lens _vuuVariantSet
+      (\ s a -> s{_vuuVariantSet = a})
+
 -- | OAuth 2.0 token for the current user.
-vuuOauthToken :: Lens' VariantsetsUpdate' (Maybe Text)
-vuuOauthToken
-  = lens _vuuOauthToken
-      (\ s a -> s{_vuuOauthToken = a})
+vuuOAuthToken :: Lens' VariantsetsUpdate' (Maybe OAuthToken)
+vuuOAuthToken
+  = lens _vuuOAuthToken
+      (\ s a -> s{_vuuOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 vuuFields :: Lens' VariantsetsUpdate' (Maybe Text)
 vuuFields
   = lens _vuuFields (\ s a -> s{_vuuFields = a})
 
--- | Data format for the response.
-vuuAlt :: Lens' VariantsetsUpdate' Alt
-vuuAlt = lens _vuuAlt (\ s a -> s{_vuuAlt = a})
+instance GoogleAuth VariantsetsUpdate' where
+        authKey = vuuKey . _Just
+        authToken = vuuOAuthToken . _Just
 
 instance GoogleRequest VariantsetsUpdate' where
         type Rs VariantsetsUpdate' = VariantSet
@@ -158,11 +166,12 @@ instance GoogleRequest VariantsetsUpdate' where
         requestWithRoute r u VariantsetsUpdate'{..}
           = go _vuuQuotaUser (Just _vuuPrettyPrint)
               _vuuVariantSetId
-              _vuuUserIp
+              _vuuUserIP
               _vuuKey
-              _vuuOauthToken
+              _vuuOAuthToken
               _vuuFields
-              (Just _vuuAlt)
+              (Just AltJSON)
+              _vuuVariantSet
           where go
                   = clientWithRoute
                       (Proxy :: Proxy VariantsetsUpdateResource)

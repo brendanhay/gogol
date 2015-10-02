@@ -19,7 +19,7 @@
 --
 -- | Deletes an existing version.
 --
--- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @AppengineAppsModulesVersionsDelete@.
+-- /See:/ <https://developers.google.com/appengine/ Google App Engine Admin API Reference> for @AppEngineAppsModulesVersionsDelete@.
 module Network.Google.Resource.AppEngine.Apps.Modules.Versions.Delete
     (
     -- * REST Resource
@@ -42,16 +42,15 @@ module Network.Google.Resource.AppEngine.Apps.Modules.Versions.Delete
     , amvdBearerToken
     , amvdKey
     , amvdAppsId
-    , amvdOauthToken
+    , amvdOAuthToken
     , amvdFields
     , amvdCallback
-    , amvdAlt
     ) where
 
 import           Network.Google.AppEngine.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @AppengineAppsModulesVersionsDelete@ which the
+-- | A resource alias for @AppEngineAppsModulesVersionsDelete@ which the
 -- 'AppsModulesVersionsDelete'' request conforms to.
 type AppsModulesVersionsDeleteResource =
      "v1beta4" :>
@@ -69,11 +68,11 @@ type AppsModulesVersionsDeleteResource =
                              QueryParam "access_token" Text :>
                                QueryParam "uploadType" Text :>
                                  QueryParam "bearer_token" Text :>
-                                   QueryParam "key" Text :>
-                                     QueryParam "oauth_token" Text :>
+                                   QueryParam "key" Key :>
+                                     QueryParam "oauth_token" OAuthToken :>
                                        QueryParam "fields" Text :>
                                          QueryParam "callback" Text :>
-                                           QueryParam "alt" Text :>
+                                           QueryParam "alt" AltJSON :>
                                              Delete '[JSON] Operation
 
 -- | Deletes an existing version.
@@ -90,12 +89,11 @@ data AppsModulesVersionsDelete' = AppsModulesVersionsDelete'
     , _amvdVersionsId     :: !Text
     , _amvdModulesId      :: !Text
     , _amvdBearerToken    :: !(Maybe Text)
-    , _amvdKey            :: !(Maybe Text)
+    , _amvdKey            :: !(Maybe Key)
     , _amvdAppsId         :: !Text
-    , _amvdOauthToken     :: !(Maybe Text)
+    , _amvdOAuthToken     :: !(Maybe OAuthToken)
     , _amvdFields         :: !(Maybe Text)
     , _amvdCallback       :: !(Maybe Text)
-    , _amvdAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AppsModulesVersionsDelete'' with the minimum fields required to make a request.
@@ -126,13 +124,11 @@ data AppsModulesVersionsDelete' = AppsModulesVersionsDelete'
 --
 -- * 'amvdAppsId'
 --
--- * 'amvdOauthToken'
+-- * 'amvdOAuthToken'
 --
 -- * 'amvdFields'
 --
 -- * 'amvdCallback'
---
--- * 'amvdAlt'
 appsModulesVersionsDelete'
     :: Text -- ^ 'versionsId'
     -> Text -- ^ 'modulesId'
@@ -152,10 +148,9 @@ appsModulesVersionsDelete' pAmvdVersionsId_ pAmvdModulesId_ pAmvdAppsId_ =
     , _amvdBearerToken = Nothing
     , _amvdKey = Nothing
     , _amvdAppsId = pAmvdAppsId_
-    , _amvdOauthToken = Nothing
+    , _amvdOAuthToken = Nothing
     , _amvdFields = Nothing
     , _amvdCallback = Nothing
-    , _amvdAlt = "json"
     }
 
 -- | V1 error format.
@@ -220,7 +215,7 @@ amvdBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-amvdKey :: Lens' AppsModulesVersionsDelete' (Maybe Text)
+amvdKey :: Lens' AppsModulesVersionsDelete' (Maybe Key)
 amvdKey = lens _amvdKey (\ s a -> s{_amvdKey = a})
 
 -- | Part of \`name\`. Name of the resource requested. For example:
@@ -230,10 +225,10 @@ amvdAppsId
   = lens _amvdAppsId (\ s a -> s{_amvdAppsId = a})
 
 -- | OAuth 2.0 token for the current user.
-amvdOauthToken :: Lens' AppsModulesVersionsDelete' (Maybe Text)
-amvdOauthToken
-  = lens _amvdOauthToken
-      (\ s a -> s{_amvdOauthToken = a})
+amvdOAuthToken :: Lens' AppsModulesVersionsDelete' (Maybe OAuthToken)
+amvdOAuthToken
+  = lens _amvdOAuthToken
+      (\ s a -> s{_amvdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 amvdFields :: Lens' AppsModulesVersionsDelete' (Maybe Text)
@@ -245,9 +240,9 @@ amvdCallback :: Lens' AppsModulesVersionsDelete' (Maybe Text)
 amvdCallback
   = lens _amvdCallback (\ s a -> s{_amvdCallback = a})
 
--- | Data format for response.
-amvdAlt :: Lens' AppsModulesVersionsDelete' Text
-amvdAlt = lens _amvdAlt (\ s a -> s{_amvdAlt = a})
+instance GoogleAuth AppsModulesVersionsDelete' where
+        authKey = amvdKey . _Just
+        authToken = amvdOAuthToken . _Just
 
 instance GoogleRequest AppsModulesVersionsDelete'
          where
@@ -265,10 +260,10 @@ instance GoogleRequest AppsModulesVersionsDelete'
               _amvdBearerToken
               _amvdKey
               _amvdAppsId
-              _amvdOauthToken
+              _amvdOAuthToken
               _amvdFields
               _amvdCallback
-              (Just _amvdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AppsModulesVersionsDeleteResource)

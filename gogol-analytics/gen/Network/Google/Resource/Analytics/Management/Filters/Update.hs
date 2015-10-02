@@ -33,12 +33,12 @@ module Network.Google.Resource.Analytics.Management.Filters.Update
     , mfuQuotaUser
     , mfuPrettyPrint
     , mfuFilterId
-    , mfuUserIp
+    , mfuUserIP
     , mfuAccountId
     , mfuKey
-    , mfuOauthToken
+    , mfuFilter
+    , mfuOAuthToken
     , mfuFields
-    , mfuAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -55,10 +55,11 @@ type ManagementFiltersUpdateResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Put '[JSON] Filter
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] Filter :> Put '[JSON] Filter
 
 -- | Updates an existing filter.
 --
@@ -67,12 +68,12 @@ data ManagementFiltersUpdate' = ManagementFiltersUpdate'
     { _mfuQuotaUser   :: !(Maybe Text)
     , _mfuPrettyPrint :: !Bool
     , _mfuFilterId    :: !Text
-    , _mfuUserIp      :: !(Maybe Text)
+    , _mfuUserIP      :: !(Maybe Text)
     , _mfuAccountId   :: !Text
-    , _mfuKey         :: !(Maybe Text)
-    , _mfuOauthToken  :: !(Maybe Text)
+    , _mfuKey         :: !(Maybe Key)
+    , _mfuFilter      :: !Filter
+    , _mfuOAuthToken  :: !(Maybe OAuthToken)
     , _mfuFields      :: !(Maybe Text)
-    , _mfuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementFiltersUpdate'' with the minimum fields required to make a request.
@@ -85,32 +86,33 @@ data ManagementFiltersUpdate' = ManagementFiltersUpdate'
 --
 -- * 'mfuFilterId'
 --
--- * 'mfuUserIp'
+-- * 'mfuUserIP'
 --
 -- * 'mfuAccountId'
 --
 -- * 'mfuKey'
 --
--- * 'mfuOauthToken'
+-- * 'mfuFilter'
+--
+-- * 'mfuOAuthToken'
 --
 -- * 'mfuFields'
---
--- * 'mfuAlt'
 managementFiltersUpdate'
     :: Text -- ^ 'filterId'
     -> Text -- ^ 'accountId'
+    -> Filter -- ^ 'Filter'
     -> ManagementFiltersUpdate'
-managementFiltersUpdate' pMfuFilterId_ pMfuAccountId_ =
+managementFiltersUpdate' pMfuFilterId_ pMfuAccountId_ pMfuFilter_ =
     ManagementFiltersUpdate'
     { _mfuQuotaUser = Nothing
     , _mfuPrettyPrint = False
     , _mfuFilterId = pMfuFilterId_
-    , _mfuUserIp = Nothing
+    , _mfuUserIP = Nothing
     , _mfuAccountId = pMfuAccountId_
     , _mfuKey = Nothing
-    , _mfuOauthToken = Nothing
+    , _mfuFilter = pMfuFilter_
+    , _mfuOAuthToken = Nothing
     , _mfuFields = Nothing
-    , _mfuAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -133,9 +135,9 @@ mfuFilterId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mfuUserIp :: Lens' ManagementFiltersUpdate' (Maybe Text)
-mfuUserIp
-  = lens _mfuUserIp (\ s a -> s{_mfuUserIp = a})
+mfuUserIP :: Lens' ManagementFiltersUpdate' (Maybe Text)
+mfuUserIP
+  = lens _mfuUserIP (\ s a -> s{_mfuUserIP = a})
 
 -- | Account ID to which the filter belongs.
 mfuAccountId :: Lens' ManagementFiltersUpdate' Text
@@ -145,23 +147,28 @@ mfuAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mfuKey :: Lens' ManagementFiltersUpdate' (Maybe Text)
+mfuKey :: Lens' ManagementFiltersUpdate' (Maybe Key)
 mfuKey = lens _mfuKey (\ s a -> s{_mfuKey = a})
 
+-- | Multipart request metadata.
+mfuFilter :: Lens' ManagementFiltersUpdate' Filter
+mfuFilter
+  = lens _mfuFilter (\ s a -> s{_mfuFilter = a})
+
 -- | OAuth 2.0 token for the current user.
-mfuOauthToken :: Lens' ManagementFiltersUpdate' (Maybe Text)
-mfuOauthToken
-  = lens _mfuOauthToken
-      (\ s a -> s{_mfuOauthToken = a})
+mfuOAuthToken :: Lens' ManagementFiltersUpdate' (Maybe OAuthToken)
+mfuOAuthToken
+  = lens _mfuOAuthToken
+      (\ s a -> s{_mfuOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 mfuFields :: Lens' ManagementFiltersUpdate' (Maybe Text)
 mfuFields
   = lens _mfuFields (\ s a -> s{_mfuFields = a})
 
--- | Data format for the response.
-mfuAlt :: Lens' ManagementFiltersUpdate' Alt
-mfuAlt = lens _mfuAlt (\ s a -> s{_mfuAlt = a})
+instance GoogleAuth ManagementFiltersUpdate' where
+        authKey = mfuKey . _Just
+        authToken = mfuOAuthToken . _Just
 
 instance GoogleRequest ManagementFiltersUpdate' where
         type Rs ManagementFiltersUpdate' = Filter
@@ -169,12 +176,13 @@ instance GoogleRequest ManagementFiltersUpdate' where
         requestWithRoute r u ManagementFiltersUpdate'{..}
           = go _mfuQuotaUser (Just _mfuPrettyPrint)
               _mfuFilterId
-              _mfuUserIp
+              _mfuUserIP
               _mfuAccountId
               _mfuKey
-              _mfuOauthToken
+              _mfuOAuthToken
               _mfuFields
-              (Just _mfuAlt)
+              (Just AltJSON)
+              _mfuFilter
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ManagementFiltersUpdateResource)

@@ -32,16 +32,15 @@ module Network.Google.Resource.Coordinate.Jobs.List
     -- * Request Lenses
     , jlQuotaUser
     , jlPrettyPrint
-    , jlUserIp
+    , jlUserIP
     , jlTeamId
     , jlMinModifiedTimestampMs
     , jlKey
     , jlOmitJobChanges
     , jlPageToken
-    , jlOauthToken
+    , jlOAuthToken
     , jlMaxResults
     , jlFields
-    , jlAlt
     ) where
 
 import           Network.Google.MapsCoordinate.Types
@@ -57,13 +56,13 @@ type JobsListResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "minModifiedTimestampMs" Word64 :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "omitJobChanges" Bool :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "maxResults" Word32 :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :>
+                               QueryParam "alt" AltJSON :>
                                  Get '[JSON] JobListResponse
 
 -- | Retrieves jobs created or modified since the given timestamp.
@@ -72,16 +71,15 @@ type JobsListResource =
 data JobsList' = JobsList'
     { _jlQuotaUser              :: !(Maybe Text)
     , _jlPrettyPrint            :: !Bool
-    , _jlUserIp                 :: !(Maybe Text)
+    , _jlUserIP                 :: !(Maybe Text)
     , _jlTeamId                 :: !Text
     , _jlMinModifiedTimestampMs :: !(Maybe Word64)
-    , _jlKey                    :: !(Maybe Text)
+    , _jlKey                    :: !(Maybe Key)
     , _jlOmitJobChanges         :: !(Maybe Bool)
     , _jlPageToken              :: !(Maybe Text)
-    , _jlOauthToken             :: !(Maybe Text)
+    , _jlOAuthToken             :: !(Maybe OAuthToken)
     , _jlMaxResults             :: !(Maybe Word32)
     , _jlFields                 :: !(Maybe Text)
-    , _jlAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobsList'' with the minimum fields required to make a request.
@@ -92,7 +90,7 @@ data JobsList' = JobsList'
 --
 -- * 'jlPrettyPrint'
 --
--- * 'jlUserIp'
+-- * 'jlUserIP'
 --
 -- * 'jlTeamId'
 --
@@ -104,13 +102,11 @@ data JobsList' = JobsList'
 --
 -- * 'jlPageToken'
 --
--- * 'jlOauthToken'
+-- * 'jlOAuthToken'
 --
 -- * 'jlMaxResults'
 --
 -- * 'jlFields'
---
--- * 'jlAlt'
 jobsList'
     :: Text -- ^ 'teamId'
     -> JobsList'
@@ -118,16 +114,15 @@ jobsList' pJlTeamId_ =
     JobsList'
     { _jlQuotaUser = Nothing
     , _jlPrettyPrint = True
-    , _jlUserIp = Nothing
+    , _jlUserIP = Nothing
     , _jlTeamId = pJlTeamId_
     , _jlMinModifiedTimestampMs = Nothing
     , _jlKey = Nothing
     , _jlOmitJobChanges = Nothing
     , _jlPageToken = Nothing
-    , _jlOauthToken = Nothing
+    , _jlOAuthToken = Nothing
     , _jlMaxResults = Nothing
     , _jlFields = Nothing
-    , _jlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -145,8 +140,8 @@ jlPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-jlUserIp :: Lens' JobsList' (Maybe Text)
-jlUserIp = lens _jlUserIp (\ s a -> s{_jlUserIp = a})
+jlUserIP :: Lens' JobsList' (Maybe Text)
+jlUserIP = lens _jlUserIP (\ s a -> s{_jlUserIP = a})
 
 -- | Team ID
 jlTeamId :: Lens' JobsList' Text
@@ -161,7 +156,7 @@ jlMinModifiedTimestampMs
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-jlKey :: Lens' JobsList' (Maybe Text)
+jlKey :: Lens' JobsList' (Maybe Key)
 jlKey = lens _jlKey (\ s a -> s{_jlKey = a})
 
 -- | Whether to omit detail job history information.
@@ -176,9 +171,9 @@ jlPageToken
   = lens _jlPageToken (\ s a -> s{_jlPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-jlOauthToken :: Lens' JobsList' (Maybe Text)
-jlOauthToken
-  = lens _jlOauthToken (\ s a -> s{_jlOauthToken = a})
+jlOAuthToken :: Lens' JobsList' (Maybe OAuthToken)
+jlOAuthToken
+  = lens _jlOAuthToken (\ s a -> s{_jlOAuthToken = a})
 
 -- | Maximum number of results to return in one page.
 jlMaxResults :: Lens' JobsList' (Maybe Word32)
@@ -189,24 +184,24 @@ jlMaxResults
 jlFields :: Lens' JobsList' (Maybe Text)
 jlFields = lens _jlFields (\ s a -> s{_jlFields = a})
 
--- | Data format for the response.
-jlAlt :: Lens' JobsList' Alt
-jlAlt = lens _jlAlt (\ s a -> s{_jlAlt = a})
+instance GoogleAuth JobsList' where
+        authKey = jlKey . _Just
+        authToken = jlOAuthToken . _Just
 
 instance GoogleRequest JobsList' where
         type Rs JobsList' = JobListResponse
         request = requestWithRoute defReq mapsCoordinateURL
         requestWithRoute r u JobsList'{..}
-          = go _jlQuotaUser (Just _jlPrettyPrint) _jlUserIp
+          = go _jlQuotaUser (Just _jlPrettyPrint) _jlUserIP
               _jlTeamId
               _jlMinModifiedTimestampMs
               _jlKey
               _jlOmitJobChanges
               _jlPageToken
-              _jlOauthToken
+              _jlOAuthToken
               _jlMaxResults
               _jlFields
-              (Just _jlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy JobsListResource) r
                       u

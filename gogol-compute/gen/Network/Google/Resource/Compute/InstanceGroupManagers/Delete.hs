@@ -34,12 +34,11 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.Delete
     , igmdPrettyPrint
     , igmdProject
     , igmdInstanceGroupManager
-    , igmdUserIp
+    , igmdUserIP
     , igmdZone
     , igmdKey
-    , igmdOauthToken
+    , igmdOAuthToken
     , igmdFields
-    , igmdAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -56,10 +55,10 @@ type InstanceGroupManagersDeleteResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Delete '[JSON] Operation
+                           QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified managed instance group resource.
 --
@@ -69,12 +68,11 @@ data InstanceGroupManagersDelete' = InstanceGroupManagersDelete'
     , _igmdPrettyPrint          :: !Bool
     , _igmdProject              :: !Text
     , _igmdInstanceGroupManager :: !Text
-    , _igmdUserIp               :: !(Maybe Text)
+    , _igmdUserIP               :: !(Maybe Text)
     , _igmdZone                 :: !Text
-    , _igmdKey                  :: !(Maybe Text)
-    , _igmdOauthToken           :: !(Maybe Text)
+    , _igmdKey                  :: !(Maybe Key)
+    , _igmdOAuthToken           :: !(Maybe OAuthToken)
     , _igmdFields               :: !(Maybe Text)
-    , _igmdAlt                  :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagersDelete'' with the minimum fields required to make a request.
@@ -89,17 +87,15 @@ data InstanceGroupManagersDelete' = InstanceGroupManagersDelete'
 --
 -- * 'igmdInstanceGroupManager'
 --
--- * 'igmdUserIp'
+-- * 'igmdUserIP'
 --
 -- * 'igmdZone'
 --
 -- * 'igmdKey'
 --
--- * 'igmdOauthToken'
+-- * 'igmdOAuthToken'
 --
 -- * 'igmdFields'
---
--- * 'igmdAlt'
 instanceGroupManagersDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'instanceGroupManager'
@@ -111,12 +107,11 @@ instanceGroupManagersDelete' pIgmdProject_ pIgmdInstanceGroupManager_ pIgmdZone_
     , _igmdPrettyPrint = True
     , _igmdProject = pIgmdProject_
     , _igmdInstanceGroupManager = pIgmdInstanceGroupManager_
-    , _igmdUserIp = Nothing
+    , _igmdUserIP = Nothing
     , _igmdZone = pIgmdZone_
     , _igmdKey = Nothing
-    , _igmdOauthToken = Nothing
+    , _igmdOAuthToken = Nothing
     , _igmdFields = Nothing
-    , _igmdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -146,9 +141,9 @@ igmdInstanceGroupManager
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-igmdUserIp :: Lens' InstanceGroupManagersDelete' (Maybe Text)
-igmdUserIp
-  = lens _igmdUserIp (\ s a -> s{_igmdUserIp = a})
+igmdUserIP :: Lens' InstanceGroupManagersDelete' (Maybe Text)
+igmdUserIP
+  = lens _igmdUserIP (\ s a -> s{_igmdUserIP = a})
 
 -- | The URL of the zone where the managed instance group is located.
 igmdZone :: Lens' InstanceGroupManagersDelete' Text
@@ -157,23 +152,24 @@ igmdZone = lens _igmdZone (\ s a -> s{_igmdZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-igmdKey :: Lens' InstanceGroupManagersDelete' (Maybe Text)
+igmdKey :: Lens' InstanceGroupManagersDelete' (Maybe Key)
 igmdKey = lens _igmdKey (\ s a -> s{_igmdKey = a})
 
 -- | OAuth 2.0 token for the current user.
-igmdOauthToken :: Lens' InstanceGroupManagersDelete' (Maybe Text)
-igmdOauthToken
-  = lens _igmdOauthToken
-      (\ s a -> s{_igmdOauthToken = a})
+igmdOAuthToken :: Lens' InstanceGroupManagersDelete' (Maybe OAuthToken)
+igmdOAuthToken
+  = lens _igmdOAuthToken
+      (\ s a -> s{_igmdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 igmdFields :: Lens' InstanceGroupManagersDelete' (Maybe Text)
 igmdFields
   = lens _igmdFields (\ s a -> s{_igmdFields = a})
 
--- | Data format for the response.
-igmdAlt :: Lens' InstanceGroupManagersDelete' Alt
-igmdAlt = lens _igmdAlt (\ s a -> s{_igmdAlt = a})
+instance GoogleAuth InstanceGroupManagersDelete'
+         where
+        authKey = igmdKey . _Just
+        authToken = igmdOAuthToken . _Just
 
 instance GoogleRequest InstanceGroupManagersDelete'
          where
@@ -183,12 +179,12 @@ instance GoogleRequest InstanceGroupManagersDelete'
           = go _igmdQuotaUser (Just _igmdPrettyPrint)
               _igmdProject
               _igmdInstanceGroupManager
-              _igmdUserIp
+              _igmdUserIP
               _igmdZone
               _igmdKey
-              _igmdOauthToken
+              _igmdOAuthToken
               _igmdFields
-              (Just _igmdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InstanceGroupManagersDeleteResource)

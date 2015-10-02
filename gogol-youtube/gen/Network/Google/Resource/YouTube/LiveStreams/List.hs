@@ -34,16 +34,15 @@ module Network.Google.Resource.YouTube.LiveStreams.List
     , lslPart
     , lslPrettyPrint
     , lslMine
-    , lslUserIp
+    , lslUserIP
     , lslOnBehalfOfContentOwner
     , lslKey
     , lslOnBehalfOfContentOwnerChannel
     , lslId
     , lslPageToken
-    , lslOauthToken
+    , lslOAuthToken
     , lslMaxResults
     , lslFields
-    , lslAlt
     ) where
 
 import           Network.Google.Prelude
@@ -59,14 +58,14 @@ type LiveStreamsListResource =
              QueryParam "mine" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "onBehalfOfContentOwner" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "onBehalfOfContentOwnerChannel" Text :>
                        QueryParam "id" Text :>
                          QueryParam "pageToken" Text :>
-                           QueryParam "oauth_token" Text :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "maxResults" Word32 :>
                                QueryParam "fields" Text :>
-                                 QueryParam "alt" Alt :>
+                                 QueryParam "alt" AltJSON :>
                                    Get '[JSON] LiveStreamListResponse
 
 -- | Returns a list of video streams that match the API request parameters.
@@ -77,16 +76,15 @@ data LiveStreamsList' = LiveStreamsList'
     , _lslPart                          :: !Text
     , _lslPrettyPrint                   :: !Bool
     , _lslMine                          :: !(Maybe Bool)
-    , _lslUserIp                        :: !(Maybe Text)
+    , _lslUserIP                        :: !(Maybe Text)
     , _lslOnBehalfOfContentOwner        :: !(Maybe Text)
-    , _lslKey                           :: !(Maybe Text)
+    , _lslKey                           :: !(Maybe Key)
     , _lslOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _lslId                            :: !(Maybe Text)
     , _lslPageToken                     :: !(Maybe Text)
-    , _lslOauthToken                    :: !(Maybe Text)
+    , _lslOAuthToken                    :: !(Maybe OAuthToken)
     , _lslMaxResults                    :: !Word32
     , _lslFields                        :: !(Maybe Text)
-    , _lslAlt                           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LiveStreamsList'' with the minimum fields required to make a request.
@@ -101,7 +99,7 @@ data LiveStreamsList' = LiveStreamsList'
 --
 -- * 'lslMine'
 --
--- * 'lslUserIp'
+-- * 'lslUserIP'
 --
 -- * 'lslOnBehalfOfContentOwner'
 --
@@ -113,13 +111,11 @@ data LiveStreamsList' = LiveStreamsList'
 --
 -- * 'lslPageToken'
 --
--- * 'lslOauthToken'
+-- * 'lslOAuthToken'
 --
 -- * 'lslMaxResults'
 --
 -- * 'lslFields'
---
--- * 'lslAlt'
 liveStreamsList'
     :: Text -- ^ 'part'
     -> LiveStreamsList'
@@ -129,16 +125,15 @@ liveStreamsList' pLslPart_ =
     , _lslPart = pLslPart_
     , _lslPrettyPrint = True
     , _lslMine = Nothing
-    , _lslUserIp = Nothing
+    , _lslUserIP = Nothing
     , _lslOnBehalfOfContentOwner = Nothing
     , _lslKey = Nothing
     , _lslOnBehalfOfContentOwnerChannel = Nothing
     , _lslId = Nothing
     , _lslPageToken = Nothing
-    , _lslOauthToken = Nothing
+    , _lslOAuthToken = Nothing
     , _lslMaxResults = 5
     , _lslFields = Nothing
-    , _lslAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -169,9 +164,9 @@ lslMine = lens _lslMine (\ s a -> s{_lslMine = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-lslUserIp :: Lens' LiveStreamsList' (Maybe Text)
-lslUserIp
-  = lens _lslUserIp (\ s a -> s{_lslUserIp = a})
+lslUserIP :: Lens' LiveStreamsList' (Maybe Text)
+lslUserIP
+  = lens _lslUserIP (\ s a -> s{_lslUserIP = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
@@ -191,7 +186,7 @@ lslOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lslKey :: Lens' LiveStreamsList' (Maybe Text)
+lslKey :: Lens' LiveStreamsList' (Maybe Key)
 lslKey = lens _lslKey (\ s a -> s{_lslKey = a})
 
 -- | This parameter can only be used in a properly authorized request. Note:
@@ -229,10 +224,10 @@ lslPageToken
   = lens _lslPageToken (\ s a -> s{_lslPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-lslOauthToken :: Lens' LiveStreamsList' (Maybe Text)
-lslOauthToken
-  = lens _lslOauthToken
-      (\ s a -> s{_lslOauthToken = a})
+lslOAuthToken :: Lens' LiveStreamsList' (Maybe OAuthToken)
+lslOAuthToken
+  = lens _lslOAuthToken
+      (\ s a -> s{_lslOAuthToken = a})
 
 -- | The maxResults parameter specifies the maximum number of items that
 -- should be returned in the result set.
@@ -246,9 +241,9 @@ lslFields :: Lens' LiveStreamsList' (Maybe Text)
 lslFields
   = lens _lslFields (\ s a -> s{_lslFields = a})
 
--- | Data format for the response.
-lslAlt :: Lens' LiveStreamsList' Alt
-lslAlt = lens _lslAlt (\ s a -> s{_lslAlt = a})
+instance GoogleAuth LiveStreamsList' where
+        authKey = lslKey . _Just
+        authToken = lslOAuthToken . _Just
 
 instance GoogleRequest LiveStreamsList' where
         type Rs LiveStreamsList' = LiveStreamListResponse
@@ -257,16 +252,16 @@ instance GoogleRequest LiveStreamsList' where
           = go _lslQuotaUser (Just _lslPart)
               (Just _lslPrettyPrint)
               _lslMine
-              _lslUserIp
+              _lslUserIP
               _lslOnBehalfOfContentOwner
               _lslKey
               _lslOnBehalfOfContentOwnerChannel
               _lslId
               _lslPageToken
-              _lslOauthToken
+              _lslOAuthToken
               (Just _lslMaxResults)
               _lslFields
-              (Just _lslAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy LiveStreamsListResource)

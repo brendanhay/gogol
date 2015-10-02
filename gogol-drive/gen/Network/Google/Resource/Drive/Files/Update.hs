@@ -33,24 +33,25 @@ module Network.Google.Resource.Drive.Files.Update
     , fuQuotaUser
     , fuNewRevision
     , fuPrettyPrint
-    , fuUserIp
+    , fuUserIP
     , fuPinned
     , fuTimedTextLanguage
     , fuUpdateViewedDate
     , fuRemoveParents
     , fuModifiedDateBehavior
     , fuUseContentAsIndexableText
+    , fuMedia
     , fuTimedTextTrackName
-    , fuOcrLanguage
+    , fuOCRLanguage
     , fuKey
     , fuConvert
     , fuSetModifiedDate
     , fuFileId
-    , fuOauthToken
+    , fuOAuthToken
     , fuAddParents
-    , fuOcr
+    , fuOCR
+    , fuFile
     , fuFields
-    , fuAlt
     ) where
 
 import           Network.Google.Drive.Types
@@ -75,15 +76,17 @@ type FilesUpdateResource =
                            QueryParam "useContentAsIndexableText" Bool :>
                              QueryParam "timedTextTrackName" Text :>
                                QueryParam "ocrLanguage" Text :>
-                                 QueryParam "key" Text :>
+                                 QueryParam "key" Key :>
                                    QueryParam "convert" Bool :>
                                      QueryParam "setModifiedDate" Bool :>
-                                       QueryParam "oauth_token" Text :>
+                                       QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "addParents" Text :>
                                            QueryParam "ocr" Bool :>
                                              QueryParam "fields" Text :>
-                                               QueryParam "alt" Alt :>
-                                                 Put '[JSON] File
+                                               QueryParam "alt" AltJSON :>
+                                                 MultipartRelated '[JSON] File
+                                                   Body
+                                                   :> Put '[JSON] File
 
 -- | Updates file metadata and\/or content.
 --
@@ -92,24 +95,25 @@ data FilesUpdate' = FilesUpdate'
     { _fuQuotaUser                 :: !(Maybe Text)
     , _fuNewRevision               :: !Bool
     , _fuPrettyPrint               :: !Bool
-    , _fuUserIp                    :: !(Maybe Text)
+    , _fuUserIP                    :: !(Maybe Text)
     , _fuPinned                    :: !Bool
     , _fuTimedTextLanguage         :: !(Maybe Text)
     , _fuUpdateViewedDate          :: !Bool
     , _fuRemoveParents             :: !(Maybe Text)
     , _fuModifiedDateBehavior      :: !(Maybe DriveFilesUpdateModifiedDateBehavior)
     , _fuUseContentAsIndexableText :: !Bool
+    , _fuMedia                     :: !Body
     , _fuTimedTextTrackName        :: !(Maybe Text)
-    , _fuOcrLanguage               :: !(Maybe Text)
-    , _fuKey                       :: !(Maybe Text)
+    , _fuOCRLanguage               :: !(Maybe Text)
+    , _fuKey                       :: !(Maybe Key)
     , _fuConvert                   :: !Bool
     , _fuSetModifiedDate           :: !Bool
     , _fuFileId                    :: !Text
-    , _fuOauthToken                :: !(Maybe Text)
+    , _fuOAuthToken                :: !(Maybe OAuthToken)
     , _fuAddParents                :: !(Maybe Text)
-    , _fuOcr                       :: !Bool
+    , _fuOCR                       :: !Bool
+    , _fuFile                      :: !File
     , _fuFields                    :: !(Maybe Text)
-    , _fuAlt                       :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FilesUpdate'' with the minimum fields required to make a request.
@@ -122,7 +126,7 @@ data FilesUpdate' = FilesUpdate'
 --
 -- * 'fuPrettyPrint'
 --
--- * 'fuUserIp'
+-- * 'fuUserIP'
 --
 -- * 'fuPinned'
 --
@@ -136,9 +140,11 @@ data FilesUpdate' = FilesUpdate'
 --
 -- * 'fuUseContentAsIndexableText'
 --
+-- * 'fuMedia'
+--
 -- * 'fuTimedTextTrackName'
 --
--- * 'fuOcrLanguage'
+-- * 'fuOCRLanguage'
 --
 -- * 'fuKey'
 --
@@ -148,41 +154,44 @@ data FilesUpdate' = FilesUpdate'
 --
 -- * 'fuFileId'
 --
--- * 'fuOauthToken'
+-- * 'fuOAuthToken'
 --
 -- * 'fuAddParents'
 --
--- * 'fuOcr'
+-- * 'fuOCR'
+--
+-- * 'fuFile'
 --
 -- * 'fuFields'
---
--- * 'fuAlt'
 filesUpdate'
-    :: Text -- ^ 'fileId'
+    :: Body -- ^ 'media'
+    -> Text -- ^ 'fileId'
+    -> File -- ^ 'File'
     -> FilesUpdate'
-filesUpdate' pFuFileId_ =
+filesUpdate' pFuMedia_ pFuFileId_ pFuFile_ =
     FilesUpdate'
     { _fuQuotaUser = Nothing
     , _fuNewRevision = True
     , _fuPrettyPrint = True
-    , _fuUserIp = Nothing
+    , _fuUserIP = Nothing
     , _fuPinned = False
     , _fuTimedTextLanguage = Nothing
     , _fuUpdateViewedDate = True
     , _fuRemoveParents = Nothing
     , _fuModifiedDateBehavior = Nothing
     , _fuUseContentAsIndexableText = False
+    , _fuMedia = pFuMedia_
     , _fuTimedTextTrackName = Nothing
-    , _fuOcrLanguage = Nothing
+    , _fuOCRLanguage = Nothing
     , _fuKey = Nothing
     , _fuConvert = False
     , _fuSetModifiedDate = False
     , _fuFileId = pFuFileId_
-    , _fuOauthToken = Nothing
+    , _fuOAuthToken = Nothing
     , _fuAddParents = Nothing
-    , _fuOcr = False
+    , _fuOCR = False
+    , _fuFile = pFuFile_
     , _fuFields = Nothing
-    , _fuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -212,8 +221,8 @@ fuPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-fuUserIp :: Lens' FilesUpdate' (Maybe Text)
-fuUserIp = lens _fuUserIp (\ s a -> s{_fuUserIp = a})
+fuUserIP :: Lens' FilesUpdate' (Maybe Text)
+fuUserIP = lens _fuUserIP (\ s a -> s{_fuUserIP = a})
 
 -- | Whether to pin the new revision. A file can have a maximum of 200 pinned
 -- revisions.
@@ -251,6 +260,9 @@ fuUseContentAsIndexableText
   = lens _fuUseContentAsIndexableText
       (\ s a -> s{_fuUseContentAsIndexableText = a})
 
+fuMedia :: Lens' FilesUpdate' Body
+fuMedia = lens _fuMedia (\ s a -> s{_fuMedia = a})
+
 -- | The timed text track name.
 fuTimedTextTrackName :: Lens' FilesUpdate' (Maybe Text)
 fuTimedTextTrackName
@@ -259,15 +271,15 @@ fuTimedTextTrackName
 
 -- | If ocr is true, hints at the language to use. Valid values are BCP 47
 -- codes.
-fuOcrLanguage :: Lens' FilesUpdate' (Maybe Text)
-fuOcrLanguage
-  = lens _fuOcrLanguage
-      (\ s a -> s{_fuOcrLanguage = a})
+fuOCRLanguage :: Lens' FilesUpdate' (Maybe Text)
+fuOCRLanguage
+  = lens _fuOCRLanguage
+      (\ s a -> s{_fuOCRLanguage = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fuKey :: Lens' FilesUpdate' (Maybe Text)
+fuKey :: Lens' FilesUpdate' (Maybe Key)
 fuKey = lens _fuKey (\ s a -> s{_fuKey = a})
 
 -- | This parameter is deprecated and has no function.
@@ -286,9 +298,9 @@ fuFileId :: Lens' FilesUpdate' Text
 fuFileId = lens _fuFileId (\ s a -> s{_fuFileId = a})
 
 -- | OAuth 2.0 token for the current user.
-fuOauthToken :: Lens' FilesUpdate' (Maybe Text)
-fuOauthToken
-  = lens _fuOauthToken (\ s a -> s{_fuOauthToken = a})
+fuOAuthToken :: Lens' FilesUpdate' (Maybe OAuthToken)
+fuOAuthToken
+  = lens _fuOAuthToken (\ s a -> s{_fuOAuthToken = a})
 
 -- | Comma-separated list of parent IDs to add.
 fuAddParents :: Lens' FilesUpdate' (Maybe Text)
@@ -296,16 +308,20 @@ fuAddParents
   = lens _fuAddParents (\ s a -> s{_fuAddParents = a})
 
 -- | Whether to attempt OCR on .jpg, .png, .gif, or .pdf uploads.
-fuOcr :: Lens' FilesUpdate' Bool
-fuOcr = lens _fuOcr (\ s a -> s{_fuOcr = a})
+fuOCR :: Lens' FilesUpdate' Bool
+fuOCR = lens _fuOCR (\ s a -> s{_fuOCR = a})
+
+-- | Multipart request metadata.
+fuFile :: Lens' FilesUpdate' File
+fuFile = lens _fuFile (\ s a -> s{_fuFile = a})
 
 -- | Selector specifying which fields to include in a partial response.
 fuFields :: Lens' FilesUpdate' (Maybe Text)
 fuFields = lens _fuFields (\ s a -> s{_fuFields = a})
 
--- | Data format for the response.
-fuAlt :: Lens' FilesUpdate' Alt
-fuAlt = lens _fuAlt (\ s a -> s{_fuAlt = a})
+instance GoogleAuth FilesUpdate' where
+        authKey = fuKey . _Just
+        authToken = fuOAuthToken . _Just
 
 instance GoogleRequest FilesUpdate' where
         type Rs FilesUpdate' = File
@@ -313,24 +329,26 @@ instance GoogleRequest FilesUpdate' where
         requestWithRoute r u FilesUpdate'{..}
           = go _fuQuotaUser (Just _fuNewRevision)
               (Just _fuPrettyPrint)
-              _fuUserIp
+              _fuUserIP
               (Just _fuPinned)
               _fuTimedTextLanguage
               (Just _fuUpdateViewedDate)
               _fuRemoveParents
               _fuModifiedDateBehavior
               (Just _fuUseContentAsIndexableText)
+              _fuMedia
               _fuTimedTextTrackName
-              _fuOcrLanguage
+              _fuOCRLanguage
               _fuKey
               (Just _fuConvert)
               (Just _fuSetModifiedDate)
               _fuFileId
-              _fuOauthToken
+              _fuOAuthToken
               _fuAddParents
-              (Just _fuOcr)
+              (Just _fuOCR)
               _fuFields
-              (Just _fuAlt)
+              (Just AltJSON)
+              _fuFile
           where go
                   = clientWithRoute
                       (Proxy :: Proxy FilesUpdateResource)

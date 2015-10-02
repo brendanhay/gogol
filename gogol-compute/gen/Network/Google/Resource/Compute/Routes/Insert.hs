@@ -34,11 +34,11 @@ module Network.Google.Resource.Compute.Routes.Insert
     , riQuotaUser
     , riPrettyPrint
     , riProject
-    , riUserIp
+    , riUserIP
+    , riRoute
     , riKey
-    , riOauthToken
+    , riOAuthToken
     , riFields
-    , riAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -53,10 +53,11 @@ type RoutesInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] Operation
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Route :> Post '[JSON] Operation
 
 -- | Creates a route resource in the specified project using the data
 -- included in the request.
@@ -66,11 +67,11 @@ data RoutesInsert' = RoutesInsert'
     { _riQuotaUser   :: !(Maybe Text)
     , _riPrettyPrint :: !Bool
     , _riProject     :: !Text
-    , _riUserIp      :: !(Maybe Text)
-    , _riKey         :: !(Maybe Text)
-    , _riOauthToken  :: !(Maybe Text)
+    , _riUserIP      :: !(Maybe Text)
+    , _riRoute       :: !Route
+    , _riKey         :: !(Maybe Key)
+    , _riOAuthToken  :: !(Maybe OAuthToken)
     , _riFields      :: !(Maybe Text)
-    , _riAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoutesInsert'' with the minimum fields required to make a request.
@@ -83,28 +84,29 @@ data RoutesInsert' = RoutesInsert'
 --
 -- * 'riProject'
 --
--- * 'riUserIp'
+-- * 'riUserIP'
+--
+-- * 'riRoute'
 --
 -- * 'riKey'
 --
--- * 'riOauthToken'
+-- * 'riOAuthToken'
 --
 -- * 'riFields'
---
--- * 'riAlt'
 routesInsert'
     :: Text -- ^ 'project'
+    -> Route -- ^ 'Route'
     -> RoutesInsert'
-routesInsert' pRiProject_ =
+routesInsert' pRiProject_ pRiRoute_ =
     RoutesInsert'
     { _riQuotaUser = Nothing
     , _riPrettyPrint = True
     , _riProject = pRiProject_
-    , _riUserIp = Nothing
+    , _riUserIP = Nothing
+    , _riRoute = pRiRoute_
     , _riKey = Nothing
-    , _riOauthToken = Nothing
+    , _riOAuthToken = Nothing
     , _riFields = Nothing
-    , _riAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,38 +129,43 @@ riProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-riUserIp :: Lens' RoutesInsert' (Maybe Text)
-riUserIp = lens _riUserIp (\ s a -> s{_riUserIp = a})
+riUserIP :: Lens' RoutesInsert' (Maybe Text)
+riUserIP = lens _riUserIP (\ s a -> s{_riUserIP = a})
+
+-- | Multipart request metadata.
+riRoute :: Lens' RoutesInsert' Route
+riRoute = lens _riRoute (\ s a -> s{_riRoute = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-riKey :: Lens' RoutesInsert' (Maybe Text)
+riKey :: Lens' RoutesInsert' (Maybe Key)
 riKey = lens _riKey (\ s a -> s{_riKey = a})
 
 -- | OAuth 2.0 token for the current user.
-riOauthToken :: Lens' RoutesInsert' (Maybe Text)
-riOauthToken
-  = lens _riOauthToken (\ s a -> s{_riOauthToken = a})
+riOAuthToken :: Lens' RoutesInsert' (Maybe OAuthToken)
+riOAuthToken
+  = lens _riOAuthToken (\ s a -> s{_riOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 riFields :: Lens' RoutesInsert' (Maybe Text)
 riFields = lens _riFields (\ s a -> s{_riFields = a})
 
--- | Data format for the response.
-riAlt :: Lens' RoutesInsert' Alt
-riAlt = lens _riAlt (\ s a -> s{_riAlt = a})
+instance GoogleAuth RoutesInsert' where
+        authKey = riKey . _Just
+        authToken = riOAuthToken . _Just
 
 instance GoogleRequest RoutesInsert' where
         type Rs RoutesInsert' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u RoutesInsert'{..}
           = go _riQuotaUser (Just _riPrettyPrint) _riProject
-              _riUserIp
+              _riUserIP
               _riKey
-              _riOauthToken
+              _riOAuthToken
               _riFields
-              (Just _riAlt)
+              (Just AltJSON)
+              _riRoute
           where go
                   = clientWithRoute
                       (Proxy :: Proxy RoutesInsertResource)

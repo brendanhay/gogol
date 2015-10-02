@@ -27,37 +27,37 @@ module Network.Google.AppEngine
 
     -- * REST Resources
 
-    -- ** AppengineAppsGet
+    -- ** AppEngineAppsGet
     , module Network.Google.Resource.AppEngine.Apps.Get
 
-    -- ** AppengineAppsModulesDelete
+    -- ** AppEngineAppsModulesDelete
     , module Network.Google.Resource.AppEngine.Apps.Modules.Delete
 
-    -- ** AppengineAppsModulesGet
+    -- ** AppEngineAppsModulesGet
     , module Network.Google.Resource.AppEngine.Apps.Modules.Get
 
-    -- ** AppengineAppsModulesList
+    -- ** AppEngineAppsModulesList
     , module Network.Google.Resource.AppEngine.Apps.Modules.List
 
-    -- ** AppengineAppsModulesPatch
+    -- ** AppEngineAppsModulesPatch
     , module Network.Google.Resource.AppEngine.Apps.Modules.Patch
 
-    -- ** AppengineAppsModulesVersionsCreate
+    -- ** AppEngineAppsModulesVersionsCreate
     , module Network.Google.Resource.AppEngine.Apps.Modules.Versions.Create
 
-    -- ** AppengineAppsModulesVersionsDelete
+    -- ** AppEngineAppsModulesVersionsDelete
     , module Network.Google.Resource.AppEngine.Apps.Modules.Versions.Delete
 
-    -- ** AppengineAppsModulesVersionsGet
+    -- ** AppEngineAppsModulesVersionsGet
     , module Network.Google.Resource.AppEngine.Apps.Modules.Versions.Get
 
-    -- ** AppengineAppsModulesVersionsList
+    -- ** AppEngineAppsModulesVersionsList
     , module Network.Google.Resource.AppEngine.Apps.Modules.Versions.List
 
-    -- ** AppengineAppsOperationsGet
+    -- ** AppEngineAppsOperationsGet
     , module Network.Google.Resource.AppEngine.Apps.Operations.Get
 
-    -- ** AppengineAppsOperationsList
+    -- ** AppEngineAppsOperationsList
     , module Network.Google.Resource.AppEngine.Apps.Operations.List
 
     -- * Types
@@ -97,9 +97,9 @@ module Network.Google.AppEngine
     , uRLMap
     , umScript
     , umSecurityLevel
-    , umApiEndpoint
-    , umUrlRegex
-    , umRedirectHttpResponseCode
+    , umAPIEndpoint
+    , umURLRegex
+    , umRedirectHTTPResponseCode
     , umAuthFailAction
     , umStaticFiles
     , umLogin
@@ -110,7 +110,7 @@ module Network.Google.AppEngine
     , aPIConfigHandler
     , achScript
     , achSecurityLevel
-    , achUrl
+    , achURL
     , achAuthFailAction
     , achLogin
 
@@ -179,7 +179,7 @@ module Network.Google.AppEngine
     , fileInfo
     , fiSha1Sum
     , fiMimeType
-    , fiSourceUrl
+    , fiSourceURL
 
     -- ** AutomaticScaling
     , AutomaticScaling
@@ -187,7 +187,7 @@ module Network.Google.AppEngine
     , asMaxTotalInstances
     , asMinIdleInstances
     , asMinPendingLatency
-    , asCpuUtilization
+    , asCPUUtilization
     , asMaxIdleInstances
     , asMinTotalInstances
     , asMaxConcurrentRequests
@@ -215,7 +215,7 @@ module Network.Google.AppEngine
     , resources
     , rMemoryGb
     , rDiskGb
-    , rCpu
+    , rCPU
 
     -- ** StaticFilesHandlerHTTPHeaders
     , StaticFilesHandlerHTTPHeaders
@@ -259,7 +259,7 @@ module Network.Google.AppEngine
     , vDefaultExpiration
     , vAutomaticScaling
     , vErrorHandlers
-    , vVm
+    , vVM
     , vHandlers
     , vInboundServices
     , vNetwork
@@ -269,7 +269,7 @@ module Network.Google.AppEngine
     , vBetaSettings
     , vBasicScaling
     , vManualScaling
-    , vApiConfig
+    , vAPIConfig
     , vId
     , vEnvVariables
     , vServingStatus
@@ -286,7 +286,7 @@ module Network.Google.AppEngine
     -- ** StaticFilesHandler
     , StaticFilesHandler
     , staticFilesHandler
-    , sfhHttpHeaders
+    , sfhHTTPHeaders
     , sfhPath
     , sfhRequireMatchingFile
     , sfhExpiration
@@ -340,7 +340,7 @@ module Network.Google.AppEngine
     -- ** StaticDirectoryHandler
     , StaticDirectoryHandler
     , staticDirectoryHandler
-    , sdhHttpHeaders
+    , sdhHTTPHeaders
     , sdhRequireMatchingFile
     , sdhExpiration
     , sdhMimeType

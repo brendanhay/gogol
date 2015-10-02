@@ -33,13 +33,12 @@ module Network.Google.Resource.Storage.BucketAccessControls.Delete
     -- * Request Lenses
     , bacdQuotaUser
     , bacdPrettyPrint
-    , bacdUserIp
+    , bacdUserIP
     , bacdBucket
     , bacdKey
-    , bacdOauthToken
+    , bacdOAuthToken
     , bacdEntity
     , bacdFields
-    , bacdAlt
     ) where
 
 import           Network.Google.Prelude
@@ -55,10 +54,10 @@ type BucketAccessControlsDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Delete '[JSON] ()
+                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Permanently deletes the ACL entry for the specified entity on the
 -- specified bucket.
@@ -67,13 +66,12 @@ type BucketAccessControlsDeleteResource =
 data BucketAccessControlsDelete' = BucketAccessControlsDelete'
     { _bacdQuotaUser   :: !(Maybe Text)
     , _bacdPrettyPrint :: !Bool
-    , _bacdUserIp      :: !(Maybe Text)
+    , _bacdUserIP      :: !(Maybe Text)
     , _bacdBucket      :: !Text
-    , _bacdKey         :: !(Maybe Text)
-    , _bacdOauthToken  :: !(Maybe Text)
+    , _bacdKey         :: !(Maybe Key)
+    , _bacdOAuthToken  :: !(Maybe OAuthToken)
     , _bacdEntity      :: !Text
     , _bacdFields      :: !(Maybe Text)
-    , _bacdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketAccessControlsDelete'' with the minimum fields required to make a request.
@@ -84,19 +82,17 @@ data BucketAccessControlsDelete' = BucketAccessControlsDelete'
 --
 -- * 'bacdPrettyPrint'
 --
--- * 'bacdUserIp'
+-- * 'bacdUserIP'
 --
 -- * 'bacdBucket'
 --
 -- * 'bacdKey'
 --
--- * 'bacdOauthToken'
+-- * 'bacdOAuthToken'
 --
 -- * 'bacdEntity'
 --
 -- * 'bacdFields'
---
--- * 'bacdAlt'
 bucketAccessControlsDelete'
     :: Text -- ^ 'bucket'
     -> Text -- ^ 'entity'
@@ -105,13 +101,12 @@ bucketAccessControlsDelete' pBacdBucket_ pBacdEntity_ =
     BucketAccessControlsDelete'
     { _bacdQuotaUser = Nothing
     , _bacdPrettyPrint = True
-    , _bacdUserIp = Nothing
+    , _bacdUserIP = Nothing
     , _bacdBucket = pBacdBucket_
     , _bacdKey = Nothing
-    , _bacdOauthToken = Nothing
+    , _bacdOAuthToken = Nothing
     , _bacdEntity = pBacdEntity_
     , _bacdFields = Nothing
-    , _bacdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -130,9 +125,9 @@ bacdPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-bacdUserIp :: Lens' BucketAccessControlsDelete' (Maybe Text)
-bacdUserIp
-  = lens _bacdUserIp (\ s a -> s{_bacdUserIp = a})
+bacdUserIP :: Lens' BucketAccessControlsDelete' (Maybe Text)
+bacdUserIP
+  = lens _bacdUserIP (\ s a -> s{_bacdUserIP = a})
 
 -- | Name of a bucket.
 bacdBucket :: Lens' BucketAccessControlsDelete' Text
@@ -142,14 +137,14 @@ bacdBucket
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-bacdKey :: Lens' BucketAccessControlsDelete' (Maybe Text)
+bacdKey :: Lens' BucketAccessControlsDelete' (Maybe Key)
 bacdKey = lens _bacdKey (\ s a -> s{_bacdKey = a})
 
 -- | OAuth 2.0 token for the current user.
-bacdOauthToken :: Lens' BucketAccessControlsDelete' (Maybe Text)
-bacdOauthToken
-  = lens _bacdOauthToken
-      (\ s a -> s{_bacdOauthToken = a})
+bacdOAuthToken :: Lens' BucketAccessControlsDelete' (Maybe OAuthToken)
+bacdOAuthToken
+  = lens _bacdOAuthToken
+      (\ s a -> s{_bacdOAuthToken = a})
 
 -- | The entity holding the permission. Can be user-userId,
 -- user-emailAddress, group-groupId, group-emailAddress, allUsers, or
@@ -163,9 +158,9 @@ bacdFields :: Lens' BucketAccessControlsDelete' (Maybe Text)
 bacdFields
   = lens _bacdFields (\ s a -> s{_bacdFields = a})
 
--- | Data format for the response.
-bacdAlt :: Lens' BucketAccessControlsDelete' Alt
-bacdAlt = lens _bacdAlt (\ s a -> s{_bacdAlt = a})
+instance GoogleAuth BucketAccessControlsDelete' where
+        authKey = bacdKey . _Just
+        authToken = bacdOAuthToken . _Just
 
 instance GoogleRequest BucketAccessControlsDelete'
          where
@@ -173,13 +168,13 @@ instance GoogleRequest BucketAccessControlsDelete'
         request = requestWithRoute defReq storageURL
         requestWithRoute r u BucketAccessControlsDelete'{..}
           = go _bacdQuotaUser (Just _bacdPrettyPrint)
-              _bacdUserIp
+              _bacdUserIP
               _bacdBucket
               _bacdKey
-              _bacdOauthToken
+              _bacdOAuthToken
               _bacdEntity
               _bacdFields
-              (Just _bacdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy BucketAccessControlsDeleteResource)

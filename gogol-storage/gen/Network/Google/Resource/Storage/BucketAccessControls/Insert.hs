@@ -32,12 +32,12 @@ module Network.Google.Resource.Storage.BucketAccessControls.Insert
     -- * Request Lenses
     , baciQuotaUser
     , baciPrettyPrint
-    , baciUserIp
+    , baciUserIP
     , baciBucket
     , baciKey
-    , baciOauthToken
+    , baciBucketAccessControl
+    , baciOAuthToken
     , baciFields
-    , baciAlt
     ) where
 
 import           Network.Google.Prelude
@@ -52,24 +52,25 @@ type BucketAccessControlsInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :>
-                         Post '[JSON] BucketAccessControl
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] BucketAccessControl :>
+                           Post '[JSON] BucketAccessControl
 
 -- | Creates a new ACL entry on the specified bucket.
 --
 -- /See:/ 'bucketAccessControlsInsert'' smart constructor.
 data BucketAccessControlsInsert' = BucketAccessControlsInsert'
-    { _baciQuotaUser   :: !(Maybe Text)
-    , _baciPrettyPrint :: !Bool
-    , _baciUserIp      :: !(Maybe Text)
-    , _baciBucket      :: !Text
-    , _baciKey         :: !(Maybe Text)
-    , _baciOauthToken  :: !(Maybe Text)
-    , _baciFields      :: !(Maybe Text)
-    , _baciAlt         :: !Alt
+    { _baciQuotaUser           :: !(Maybe Text)
+    , _baciPrettyPrint         :: !Bool
+    , _baciUserIP              :: !(Maybe Text)
+    , _baciBucket              :: !Text
+    , _baciKey                 :: !(Maybe Key)
+    , _baciBucketAccessControl :: !BucketAccessControl
+    , _baciOAuthToken          :: !(Maybe OAuthToken)
+    , _baciFields              :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketAccessControlsInsert'' with the minimum fields required to make a request.
@@ -80,30 +81,31 @@ data BucketAccessControlsInsert' = BucketAccessControlsInsert'
 --
 -- * 'baciPrettyPrint'
 --
--- * 'baciUserIp'
+-- * 'baciUserIP'
 --
 -- * 'baciBucket'
 --
 -- * 'baciKey'
 --
--- * 'baciOauthToken'
+-- * 'baciBucketAccessControl'
+--
+-- * 'baciOAuthToken'
 --
 -- * 'baciFields'
---
--- * 'baciAlt'
 bucketAccessControlsInsert'
     :: Text -- ^ 'bucket'
+    -> BucketAccessControl -- ^ 'BucketAccessControl'
     -> BucketAccessControlsInsert'
-bucketAccessControlsInsert' pBaciBucket_ =
+bucketAccessControlsInsert' pBaciBucket_ pBaciBucketAccessControl_ =
     BucketAccessControlsInsert'
     { _baciQuotaUser = Nothing
     , _baciPrettyPrint = True
-    , _baciUserIp = Nothing
+    , _baciUserIP = Nothing
     , _baciBucket = pBaciBucket_
     , _baciKey = Nothing
-    , _baciOauthToken = Nothing
+    , _baciBucketAccessControl = pBaciBucketAccessControl_
+    , _baciOAuthToken = Nothing
     , _baciFields = Nothing
-    , _baciAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -122,9 +124,9 @@ baciPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-baciUserIp :: Lens' BucketAccessControlsInsert' (Maybe Text)
-baciUserIp
-  = lens _baciUserIp (\ s a -> s{_baciUserIp = a})
+baciUserIP :: Lens' BucketAccessControlsInsert' (Maybe Text)
+baciUserIP
+  = lens _baciUserIP (\ s a -> s{_baciUserIP = a})
 
 -- | Name of a bucket.
 baciBucket :: Lens' BucketAccessControlsInsert' Text
@@ -134,23 +136,29 @@ baciBucket
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-baciKey :: Lens' BucketAccessControlsInsert' (Maybe Text)
+baciKey :: Lens' BucketAccessControlsInsert' (Maybe Key)
 baciKey = lens _baciKey (\ s a -> s{_baciKey = a})
 
+-- | Multipart request metadata.
+baciBucketAccessControl :: Lens' BucketAccessControlsInsert' BucketAccessControl
+baciBucketAccessControl
+  = lens _baciBucketAccessControl
+      (\ s a -> s{_baciBucketAccessControl = a})
+
 -- | OAuth 2.0 token for the current user.
-baciOauthToken :: Lens' BucketAccessControlsInsert' (Maybe Text)
-baciOauthToken
-  = lens _baciOauthToken
-      (\ s a -> s{_baciOauthToken = a})
+baciOAuthToken :: Lens' BucketAccessControlsInsert' (Maybe OAuthToken)
+baciOAuthToken
+  = lens _baciOAuthToken
+      (\ s a -> s{_baciOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 baciFields :: Lens' BucketAccessControlsInsert' (Maybe Text)
 baciFields
   = lens _baciFields (\ s a -> s{_baciFields = a})
 
--- | Data format for the response.
-baciAlt :: Lens' BucketAccessControlsInsert' Alt
-baciAlt = lens _baciAlt (\ s a -> s{_baciAlt = a})
+instance GoogleAuth BucketAccessControlsInsert' where
+        authKey = baciKey . _Just
+        authToken = baciOAuthToken . _Just
 
 instance GoogleRequest BucketAccessControlsInsert'
          where
@@ -159,12 +167,13 @@ instance GoogleRequest BucketAccessControlsInsert'
         request = requestWithRoute defReq storageURL
         requestWithRoute r u BucketAccessControlsInsert'{..}
           = go _baciQuotaUser (Just _baciPrettyPrint)
-              _baciUserIp
+              _baciUserIP
               _baciBucket
               _baciKey
-              _baciOauthToken
+              _baciOAuthToken
               _baciFields
-              (Just _baciAlt)
+              (Just AltJSON)
+              _baciBucketAccessControl
           where go
                   = clientWithRoute
                       (Proxy :: Proxy BucketAccessControlsInsertResource)

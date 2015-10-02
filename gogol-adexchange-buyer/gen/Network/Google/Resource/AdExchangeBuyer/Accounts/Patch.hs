@@ -32,12 +32,12 @@ module Network.Google.Resource.AdExchangeBuyer.Accounts.Patch
     -- * Request Lenses
     , apQuotaUser
     , apPrettyPrint
-    , apUserIp
+    , apUserIP
+    , apAccount
     , apKey
     , apId
-    , apOauthToken
+    , apOAuthToken
     , apFields
-    , apAlt
     ) where
 
 import           Network.Google.AdExchangeBuyer.Types
@@ -51,10 +51,11 @@ type AccountsPatchResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Patch '[JSON] Account
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Account :> Patch '[JSON] Account
 
 -- | Updates an existing account. This method supports patch semantics.
 --
@@ -62,12 +63,12 @@ type AccountsPatchResource =
 data AccountsPatch' = AccountsPatch'
     { _apQuotaUser   :: !(Maybe Text)
     , _apPrettyPrint :: !Bool
-    , _apUserIp      :: !(Maybe Text)
-    , _apKey         :: !(Maybe Text)
+    , _apUserIP      :: !(Maybe Text)
+    , _apAccount     :: !Account
+    , _apKey         :: !(Maybe Key)
     , _apId          :: !Int32
-    , _apOauthToken  :: !(Maybe Text)
+    , _apOAuthToken  :: !(Maybe OAuthToken)
     , _apFields      :: !(Maybe Text)
-    , _apAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsPatch'' with the minimum fields required to make a request.
@@ -78,30 +79,31 @@ data AccountsPatch' = AccountsPatch'
 --
 -- * 'apPrettyPrint'
 --
--- * 'apUserIp'
+-- * 'apUserIP'
+--
+-- * 'apAccount'
 --
 -- * 'apKey'
 --
 -- * 'apId'
 --
--- * 'apOauthToken'
+-- * 'apOAuthToken'
 --
 -- * 'apFields'
---
--- * 'apAlt'
 accountsPatch'
-    :: Int32 -- ^ 'id'
+    :: Account -- ^ 'Account'
+    -> Int32 -- ^ 'id'
     -> AccountsPatch'
-accountsPatch' pApId_ =
+accountsPatch' pApAccount_ pApId_ =
     AccountsPatch'
     { _apQuotaUser = Nothing
     , _apPrettyPrint = True
-    , _apUserIp = Nothing
+    , _apUserIP = Nothing
+    , _apAccount = pApAccount_
     , _apKey = Nothing
     , _apId = pApId_
-    , _apOauthToken = Nothing
+    , _apOAuthToken = Nothing
     , _apFields = Nothing
-    , _apAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -119,13 +121,18 @@ apPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-apUserIp :: Lens' AccountsPatch' (Maybe Text)
-apUserIp = lens _apUserIp (\ s a -> s{_apUserIp = a})
+apUserIP :: Lens' AccountsPatch' (Maybe Text)
+apUserIP = lens _apUserIP (\ s a -> s{_apUserIP = a})
+
+-- | Multipart request metadata.
+apAccount :: Lens' AccountsPatch' Account
+apAccount
+  = lens _apAccount (\ s a -> s{_apAccount = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-apKey :: Lens' AccountsPatch' (Maybe Text)
+apKey :: Lens' AccountsPatch' (Maybe Key)
 apKey = lens _apKey (\ s a -> s{_apKey = a})
 
 -- | The account id
@@ -133,28 +140,29 @@ apId :: Lens' AccountsPatch' Int32
 apId = lens _apId (\ s a -> s{_apId = a})
 
 -- | OAuth 2.0 token for the current user.
-apOauthToken :: Lens' AccountsPatch' (Maybe Text)
-apOauthToken
-  = lens _apOauthToken (\ s a -> s{_apOauthToken = a})
+apOAuthToken :: Lens' AccountsPatch' (Maybe OAuthToken)
+apOAuthToken
+  = lens _apOAuthToken (\ s a -> s{_apOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 apFields :: Lens' AccountsPatch' (Maybe Text)
 apFields = lens _apFields (\ s a -> s{_apFields = a})
 
--- | Data format for the response.
-apAlt :: Lens' AccountsPatch' Alt
-apAlt = lens _apAlt (\ s a -> s{_apAlt = a})
+instance GoogleAuth AccountsPatch' where
+        authKey = apKey . _Just
+        authToken = apOAuthToken . _Just
 
 instance GoogleRequest AccountsPatch' where
         type Rs AccountsPatch' = Account
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u AccountsPatch'{..}
-          = go _apQuotaUser (Just _apPrettyPrint) _apUserIp
+          = go _apQuotaUser (Just _apPrettyPrint) _apUserIP
               _apKey
               _apId
-              _apOauthToken
+              _apOAuthToken
               _apFields
-              (Just _apAlt)
+              (Just AltJSON)
+              _apAccount
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountsPatchResource)

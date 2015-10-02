@@ -32,13 +32,12 @@ module Network.Google.Resource.Drive.Revisions.Get
     -- * Request Lenses
     , revQuotaUser
     , revPrettyPrint
-    , revUserIp
+    , revUserIP
     , revKey
     , revFileId
-    , revOauthToken
+    , revOAuthToken
     , revRevisionId
     , revFields
-    , revAlt
     ) where
 
 import           Network.Google.Drive.Types
@@ -54,10 +53,10 @@ type RevisionsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] Revision
+                         QueryParam "alt" AltJSON :> Get '[JSON] Revision
 
 -- | Gets a specific revision.
 --
@@ -65,13 +64,12 @@ type RevisionsGetResource =
 data RevisionsGet' = RevisionsGet'
     { _revQuotaUser   :: !(Maybe Text)
     , _revPrettyPrint :: !Bool
-    , _revUserIp      :: !(Maybe Text)
-    , _revKey         :: !(Maybe Text)
+    , _revUserIP      :: !(Maybe Text)
+    , _revKey         :: !(Maybe Key)
     , _revFileId      :: !Text
-    , _revOauthToken  :: !(Maybe Text)
+    , _revOAuthToken  :: !(Maybe OAuthToken)
     , _revRevisionId  :: !Text
     , _revFields      :: !(Maybe Text)
-    , _revAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RevisionsGet'' with the minimum fields required to make a request.
@@ -82,19 +80,17 @@ data RevisionsGet' = RevisionsGet'
 --
 -- * 'revPrettyPrint'
 --
--- * 'revUserIp'
+-- * 'revUserIP'
 --
 -- * 'revKey'
 --
 -- * 'revFileId'
 --
--- * 'revOauthToken'
+-- * 'revOAuthToken'
 --
 -- * 'revRevisionId'
 --
 -- * 'revFields'
---
--- * 'revAlt'
 revisionsGet'
     :: Text -- ^ 'fileId'
     -> Text -- ^ 'revisionId'
@@ -103,13 +99,12 @@ revisionsGet' pRevFileId_ pRevRevisionId_ =
     RevisionsGet'
     { _revQuotaUser = Nothing
     , _revPrettyPrint = True
-    , _revUserIp = Nothing
+    , _revUserIP = Nothing
     , _revKey = Nothing
     , _revFileId = pRevFileId_
-    , _revOauthToken = Nothing
+    , _revOAuthToken = Nothing
     , _revRevisionId = pRevRevisionId_
     , _revFields = Nothing
-    , _revAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,14 +122,14 @@ revPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-revUserIp :: Lens' RevisionsGet' (Maybe Text)
-revUserIp
-  = lens _revUserIp (\ s a -> s{_revUserIp = a})
+revUserIP :: Lens' RevisionsGet' (Maybe Text)
+revUserIP
+  = lens _revUserIP (\ s a -> s{_revUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-revKey :: Lens' RevisionsGet' (Maybe Text)
+revKey :: Lens' RevisionsGet' (Maybe Key)
 revKey = lens _revKey (\ s a -> s{_revKey = a})
 
 -- | The ID of the file.
@@ -143,10 +138,10 @@ revFileId
   = lens _revFileId (\ s a -> s{_revFileId = a})
 
 -- | OAuth 2.0 token for the current user.
-revOauthToken :: Lens' RevisionsGet' (Maybe Text)
-revOauthToken
-  = lens _revOauthToken
-      (\ s a -> s{_revOauthToken = a})
+revOAuthToken :: Lens' RevisionsGet' (Maybe OAuthToken)
+revOAuthToken
+  = lens _revOAuthToken
+      (\ s a -> s{_revOAuthToken = a})
 
 -- | The ID of the revision.
 revRevisionId :: Lens' RevisionsGet' Text
@@ -159,21 +154,21 @@ revFields :: Lens' RevisionsGet' (Maybe Text)
 revFields
   = lens _revFields (\ s a -> s{_revFields = a})
 
--- | Data format for the response.
-revAlt :: Lens' RevisionsGet' Alt
-revAlt = lens _revAlt (\ s a -> s{_revAlt = a})
+instance GoogleAuth RevisionsGet' where
+        authKey = revKey . _Just
+        authToken = revOAuthToken . _Just
 
 instance GoogleRequest RevisionsGet' where
         type Rs RevisionsGet' = Revision
         request = requestWithRoute defReq driveURL
         requestWithRoute r u RevisionsGet'{..}
-          = go _revQuotaUser (Just _revPrettyPrint) _revUserIp
+          = go _revQuotaUser (Just _revPrettyPrint) _revUserIP
               _revKey
               _revFileId
-              _revOauthToken
+              _revOAuthToken
               _revRevisionId
               _revFields
-              (Just _revAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy RevisionsGetResource)

@@ -34,11 +34,11 @@ module Network.Google.Resource.Compute.GlobalForwardingRules.Insert
     , gfriQuotaUser
     , gfriPrettyPrint
     , gfriProject
-    , gfriUserIp
+    , gfriForwardingRule
+    , gfriUserIP
     , gfriKey
-    , gfriOauthToken
+    , gfriOAuthToken
     , gfriFields
-    , gfriAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -53,24 +53,26 @@ type GlobalForwardingRulesInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] Operation
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] ForwardingRule :>
+                           Post '[JSON] Operation
 
 -- | Creates a ForwardingRule resource in the specified project and region
 -- using the data included in the request.
 --
 -- /See:/ 'globalForwardingRulesInsert'' smart constructor.
 data GlobalForwardingRulesInsert' = GlobalForwardingRulesInsert'
-    { _gfriQuotaUser   :: !(Maybe Text)
-    , _gfriPrettyPrint :: !Bool
-    , _gfriProject     :: !Text
-    , _gfriUserIp      :: !(Maybe Text)
-    , _gfriKey         :: !(Maybe Text)
-    , _gfriOauthToken  :: !(Maybe Text)
-    , _gfriFields      :: !(Maybe Text)
-    , _gfriAlt         :: !Alt
+    { _gfriQuotaUser      :: !(Maybe Text)
+    , _gfriPrettyPrint    :: !Bool
+    , _gfriProject        :: !Text
+    , _gfriForwardingRule :: !ForwardingRule
+    , _gfriUserIP         :: !(Maybe Text)
+    , _gfriKey            :: !(Maybe Key)
+    , _gfriOAuthToken     :: !(Maybe OAuthToken)
+    , _gfriFields         :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GlobalForwardingRulesInsert'' with the minimum fields required to make a request.
@@ -83,28 +85,29 @@ data GlobalForwardingRulesInsert' = GlobalForwardingRulesInsert'
 --
 -- * 'gfriProject'
 --
--- * 'gfriUserIp'
+-- * 'gfriForwardingRule'
+--
+-- * 'gfriUserIP'
 --
 -- * 'gfriKey'
 --
--- * 'gfriOauthToken'
+-- * 'gfriOAuthToken'
 --
 -- * 'gfriFields'
---
--- * 'gfriAlt'
 globalForwardingRulesInsert'
     :: Text -- ^ 'project'
+    -> ForwardingRule -- ^ 'ForwardingRule'
     -> GlobalForwardingRulesInsert'
-globalForwardingRulesInsert' pGfriProject_ =
+globalForwardingRulesInsert' pGfriProject_ pGfriForwardingRule_ =
     GlobalForwardingRulesInsert'
     { _gfriQuotaUser = Nothing
     , _gfriPrettyPrint = True
     , _gfriProject = pGfriProject_
-    , _gfriUserIp = Nothing
+    , _gfriForwardingRule = pGfriForwardingRule_
+    , _gfriUserIP = Nothing
     , _gfriKey = Nothing
-    , _gfriOauthToken = Nothing
+    , _gfriOAuthToken = Nothing
     , _gfriFields = Nothing
-    , _gfriAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -126,32 +129,39 @@ gfriProject :: Lens' GlobalForwardingRulesInsert' Text
 gfriProject
   = lens _gfriProject (\ s a -> s{_gfriProject = a})
 
+-- | Multipart request metadata.
+gfriForwardingRule :: Lens' GlobalForwardingRulesInsert' ForwardingRule
+gfriForwardingRule
+  = lens _gfriForwardingRule
+      (\ s a -> s{_gfriForwardingRule = a})
+
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-gfriUserIp :: Lens' GlobalForwardingRulesInsert' (Maybe Text)
-gfriUserIp
-  = lens _gfriUserIp (\ s a -> s{_gfriUserIp = a})
+gfriUserIP :: Lens' GlobalForwardingRulesInsert' (Maybe Text)
+gfriUserIP
+  = lens _gfriUserIP (\ s a -> s{_gfriUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-gfriKey :: Lens' GlobalForwardingRulesInsert' (Maybe Text)
+gfriKey :: Lens' GlobalForwardingRulesInsert' (Maybe Key)
 gfriKey = lens _gfriKey (\ s a -> s{_gfriKey = a})
 
 -- | OAuth 2.0 token for the current user.
-gfriOauthToken :: Lens' GlobalForwardingRulesInsert' (Maybe Text)
-gfriOauthToken
-  = lens _gfriOauthToken
-      (\ s a -> s{_gfriOauthToken = a})
+gfriOAuthToken :: Lens' GlobalForwardingRulesInsert' (Maybe OAuthToken)
+gfriOAuthToken
+  = lens _gfriOAuthToken
+      (\ s a -> s{_gfriOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 gfriFields :: Lens' GlobalForwardingRulesInsert' (Maybe Text)
 gfriFields
   = lens _gfriFields (\ s a -> s{_gfriFields = a})
 
--- | Data format for the response.
-gfriAlt :: Lens' GlobalForwardingRulesInsert' Alt
-gfriAlt = lens _gfriAlt (\ s a -> s{_gfriAlt = a})
+instance GoogleAuth GlobalForwardingRulesInsert'
+         where
+        authKey = gfriKey . _Just
+        authToken = gfriOAuthToken . _Just
 
 instance GoogleRequest GlobalForwardingRulesInsert'
          where
@@ -160,11 +170,12 @@ instance GoogleRequest GlobalForwardingRulesInsert'
         requestWithRoute r u GlobalForwardingRulesInsert'{..}
           = go _gfriQuotaUser (Just _gfriPrettyPrint)
               _gfriProject
-              _gfriUserIp
+              _gfriUserIP
               _gfriKey
-              _gfriOauthToken
+              _gfriOAuthToken
               _gfriFields
-              (Just _gfriAlt)
+              (Just AltJSON)
+              _gfriForwardingRule
           where go
                   = clientWithRoute
                       (Proxy :: Proxy GlobalForwardingRulesInsertResource)

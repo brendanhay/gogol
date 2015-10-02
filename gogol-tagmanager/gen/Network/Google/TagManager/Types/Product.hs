@@ -22,7 +22,7 @@ import           Network.Google.TagManager.Types.Sum
 --
 -- /See:/ 'listFoldersResponse' smart constructor.
 newtype ListFoldersResponse = ListFoldersResponse
-    { _lfrFolders :: Maybe [Maybe Folder]
+    { _lfrFolders :: Maybe [Folder]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListFoldersResponse' with the minimum fields required to make a request.
@@ -38,7 +38,7 @@ listFoldersResponse =
     }
 
 -- | All GTM Folders of a GTM Container.
-lfrFolders :: Lens' ListFoldersResponse [Maybe Folder]
+lfrFolders :: Lens' ListFoldersResponse [Folder]
 lfrFolders
   = lens _lfrFolders (\ s a -> s{_lfrFolders = a}) .
       _Default
@@ -58,7 +58,7 @@ instance ToJSON ListFoldersResponse where
 --
 -- /See:/ 'listVariablesResponse' smart constructor.
 newtype ListVariablesResponse = ListVariablesResponse
-    { _lvrVariables :: Maybe [Maybe Variable]
+    { _lvrVariables :: Maybe [Variable]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListVariablesResponse' with the minimum fields required to make a request.
@@ -74,7 +74,7 @@ listVariablesResponse =
     }
 
 -- | All GTM Variables of a GTM Container.
-lvrVariables :: Lens' ListVariablesResponse [Maybe Variable]
+lvrVariables :: Lens' ListVariablesResponse [Variable]
 lvrVariables
   = lens _lvrVariables (\ s a -> s{_lvrVariables = a})
       . _Default
@@ -96,7 +96,7 @@ instance ToJSON ListVariablesResponse where
 --
 -- /See:/ 'listRulesResponse' smart constructor.
 newtype ListRulesResponse = ListRulesResponse
-    { _lrrRules :: Maybe [Maybe Rule]
+    { _lrrRules :: Maybe [Rule]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListRulesResponse' with the minimum fields required to make a request.
@@ -112,7 +112,7 @@ listRulesResponse =
     }
 
 -- | All GTM Rules of a GTM Container.
-lrrRules :: Lens' ListRulesResponse [Maybe Rule]
+lrrRules :: Lens' ListRulesResponse [Rule]
 lrrRules
   = lens _lrrRules (\ s a -> s{_lrrRules = a}) .
       _Default
@@ -133,7 +133,7 @@ instance ToJSON ListRulesResponse where
 -- /See:/ 'publishContainerVersionResponse' smart constructor.
 data PublishContainerVersionResponse = PublishContainerVersionResponse
     { _pcvrCompilerError    :: !(Maybe Bool)
-    , _pcvrContainerVersion :: !(Maybe (Maybe ContainerVersion))
+    , _pcvrContainerVersion :: !(Maybe ContainerVersion)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PublishContainerVersionResponse' with the minimum fields required to make a request.
@@ -158,7 +158,7 @@ pcvrCompilerError
       (\ s a -> s{_pcvrCompilerError = a})
 
 -- | The container version created.
-pcvrContainerVersion :: Lens' PublishContainerVersionResponse (Maybe (Maybe ContainerVersion))
+pcvrContainerVersion :: Lens' PublishContainerVersionResponse (Maybe ContainerVersion)
 pcvrContainerVersion
   = lens _pcvrContainerVersion
       (\ s a -> s{_pcvrContainerVersion = a})
@@ -181,156 +181,153 @@ instance ToJSON PublishContainerVersionResponse where
 
 -- | Represents a Google Tag Manager Macro.
 --
--- /See:/ 'mACro' smart constructor.
-data MACro = MACro
-    { _macScheduleEndMs   :: !(Maybe Int64)
-    , _macParentFolderId  :: !(Maybe Text)
-    , _macContainerId     :: !(Maybe Text)
-    , _macDisablingRuleId :: !(Maybe [Text])
-    , _macFingerprint     :: !(Maybe Text)
-    , _macAccountId       :: !(Maybe Text)
-    , _macName            :: !(Maybe Text)
-    , _macEnablingRuleId  :: !(Maybe [Text])
-    , _macMacroId         :: !(Maybe Text)
-    , _macType            :: !(Maybe Text)
-    , _macScheduleStartMs :: !(Maybe Int64)
-    , _macNotes           :: !(Maybe Text)
-    , _macParameter       :: !(Maybe [Maybe Parameter])
+-- /See:/ 'macro' smart constructor.
+data Macro = Macro
+    { _mScheduleEndMs   :: !(Maybe Int64)
+    , _mParentFolderId  :: !(Maybe Text)
+    , _mContainerId     :: !(Maybe Text)
+    , _mDisablingRuleId :: !(Maybe [Text])
+    , _mFingerprint     :: !(Maybe Text)
+    , _mAccountId       :: !(Maybe Text)
+    , _mName            :: !(Maybe Text)
+    , _mEnablingRuleId  :: !(Maybe [Text])
+    , _mMacroId         :: !(Maybe Text)
+    , _mType            :: !(Maybe Text)
+    , _mScheduleStartMs :: !(Maybe Int64)
+    , _mNotes           :: !(Maybe Text)
+    , _mParameter       :: !(Maybe [Parameter])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'MACro' with the minimum fields required to make a request.
+-- | Creates a value of 'Macro' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'macScheduleEndMs'
+-- * 'mScheduleEndMs'
 --
--- * 'macParentFolderId'
+-- * 'mParentFolderId'
 --
--- * 'macContainerId'
+-- * 'mContainerId'
 --
--- * 'macDisablingRuleId'
+-- * 'mDisablingRuleId'
 --
--- * 'macFingerprint'
+-- * 'mFingerprint'
 --
--- * 'macAccountId'
+-- * 'mAccountId'
 --
--- * 'macName'
+-- * 'mName'
 --
--- * 'macEnablingRuleId'
+-- * 'mEnablingRuleId'
 --
--- * 'macMacroId'
+-- * 'mMacroId'
 --
--- * 'macType'
+-- * 'mType'
 --
--- * 'macScheduleStartMs'
+-- * 'mScheduleStartMs'
 --
--- * 'macNotes'
+-- * 'mNotes'
 --
--- * 'macParameter'
-mACro
-    :: MACro
-mACro =
-    MACro
-    { _macScheduleEndMs = Nothing
-    , _macParentFolderId = Nothing
-    , _macContainerId = Nothing
-    , _macDisablingRuleId = Nothing
-    , _macFingerprint = Nothing
-    , _macAccountId = Nothing
-    , _macName = Nothing
-    , _macEnablingRuleId = Nothing
-    , _macMacroId = Nothing
-    , _macType = Nothing
-    , _macScheduleStartMs = Nothing
-    , _macNotes = Nothing
-    , _macParameter = Nothing
+-- * 'mParameter'
+macro
+    :: Macro
+macro =
+    Macro
+    { _mScheduleEndMs = Nothing
+    , _mParentFolderId = Nothing
+    , _mContainerId = Nothing
+    , _mDisablingRuleId = Nothing
+    , _mFingerprint = Nothing
+    , _mAccountId = Nothing
+    , _mName = Nothing
+    , _mEnablingRuleId = Nothing
+    , _mMacroId = Nothing
+    , _mType = Nothing
+    , _mScheduleStartMs = Nothing
+    , _mNotes = Nothing
+    , _mParameter = Nothing
     }
 
 -- | The end timestamp in milliseconds to schedule a macro.
-macScheduleEndMs :: Lens' MACro (Maybe Int64)
-macScheduleEndMs
-  = lens _macScheduleEndMs
-      (\ s a -> s{_macScheduleEndMs = a})
+mScheduleEndMs :: Lens' Macro (Maybe Int64)
+mScheduleEndMs
+  = lens _mScheduleEndMs
+      (\ s a -> s{_mScheduleEndMs = a})
 
 -- | Parent folder id.
-macParentFolderId :: Lens' MACro (Maybe Text)
-macParentFolderId
-  = lens _macParentFolderId
-      (\ s a -> s{_macParentFolderId = a})
+mParentFolderId :: Lens' Macro (Maybe Text)
+mParentFolderId
+  = lens _mParentFolderId
+      (\ s a -> s{_mParentFolderId = a})
 
 -- | GTM Container ID.
-macContainerId :: Lens' MACro (Maybe Text)
-macContainerId
-  = lens _macContainerId
-      (\ s a -> s{_macContainerId = a})
+mContainerId :: Lens' Macro (Maybe Text)
+mContainerId
+  = lens _mContainerId (\ s a -> s{_mContainerId = a})
 
 -- | For mobile containers only: A list of rule IDs for disabling conditional
 -- macros; the macro is enabled if one of the enabling rules is true while
 -- all the disabling rules are false. Treated as an unordered set.
-macDisablingRuleId :: Lens' MACro [Text]
-macDisablingRuleId
-  = lens _macDisablingRuleId
-      (\ s a -> s{_macDisablingRuleId = a})
+mDisablingRuleId :: Lens' Macro [Text]
+mDisablingRuleId
+  = lens _mDisablingRuleId
+      (\ s a -> s{_mDisablingRuleId = a})
       . _Default
       . _Coerce
 
 -- | The fingerprint of the GTM Macro as computed at storage time. This value
 -- is recomputed whenever the macro is modified.
-macFingerprint :: Lens' MACro (Maybe Text)
-macFingerprint
-  = lens _macFingerprint
-      (\ s a -> s{_macFingerprint = a})
+mFingerprint :: Lens' Macro (Maybe Text)
+mFingerprint
+  = lens _mFingerprint (\ s a -> s{_mFingerprint = a})
 
 -- | GTM Account ID.
-macAccountId :: Lens' MACro (Maybe Text)
-macAccountId
-  = lens _macAccountId (\ s a -> s{_macAccountId = a})
+mAccountId :: Lens' Macro (Maybe Text)
+mAccountId
+  = lens _mAccountId (\ s a -> s{_mAccountId = a})
 
 -- | Macro display name.
-macName :: Lens' MACro (Maybe Text)
-macName = lens _macName (\ s a -> s{_macName = a})
+mName :: Lens' Macro (Maybe Text)
+mName = lens _mName (\ s a -> s{_mName = a})
 
 -- | For mobile containers only: A list of rule IDs for enabling conditional
 -- macros; the macro is enabled if one of the enabling rules is true while
 -- all the disabling rules are false. Treated as an unordered set.
-macEnablingRuleId :: Lens' MACro [Text]
-macEnablingRuleId
-  = lens _macEnablingRuleId
-      (\ s a -> s{_macEnablingRuleId = a})
+mEnablingRuleId :: Lens' Macro [Text]
+mEnablingRuleId
+  = lens _mEnablingRuleId
+      (\ s a -> s{_mEnablingRuleId = a})
       . _Default
       . _Coerce
 
 -- | The Macro ID uniquely identifies the GTM Macro.
-macMacroId :: Lens' MACro (Maybe Text)
-macMacroId
-  = lens _macMacroId (\ s a -> s{_macMacroId = a})
+mMacroId :: Lens' Macro (Maybe Text)
+mMacroId = lens _mMacroId (\ s a -> s{_mMacroId = a})
 
 -- | GTM Macro Type.
-macType :: Lens' MACro (Maybe Text)
-macType = lens _macType (\ s a -> s{_macType = a})
+mType :: Lens' Macro (Maybe Text)
+mType = lens _mType (\ s a -> s{_mType = a})
 
 -- | The start timestamp in milliseconds to schedule a macro.
-macScheduleStartMs :: Lens' MACro (Maybe Int64)
-macScheduleStartMs
-  = lens _macScheduleStartMs
-      (\ s a -> s{_macScheduleStartMs = a})
+mScheduleStartMs :: Lens' Macro (Maybe Int64)
+mScheduleStartMs
+  = lens _mScheduleStartMs
+      (\ s a -> s{_mScheduleStartMs = a})
 
 -- | User notes on how to apply this macro in the container.
-macNotes :: Lens' MACro (Maybe Text)
-macNotes = lens _macNotes (\ s a -> s{_macNotes = a})
+mNotes :: Lens' Macro (Maybe Text)
+mNotes = lens _mNotes (\ s a -> s{_mNotes = a})
 
 -- | The macro\'s parameters.
-macParameter :: Lens' MACro [Maybe Parameter]
-macParameter
-  = lens _macParameter (\ s a -> s{_macParameter = a})
-      . _Default
+mParameter :: Lens' Macro [Parameter]
+mParameter
+  = lens _mParameter (\ s a -> s{_mParameter = a}) .
+      _Default
       . _Coerce
 
-instance FromJSON MACro where
+instance FromJSON Macro where
         parseJSON
-          = withObject "MACro"
+          = withObject "Macro"
               (\ o ->
-                 MACro <$>
+                 Macro <$>
                    (o .:? "scheduleEndMs") <*> (o .:? "parentFolderId")
                      <*> (o .:? "containerId")
                      <*> (o .:? "disablingRuleId" .!= mempty)
@@ -344,23 +341,22 @@ instance FromJSON MACro where
                      <*> (o .:? "notes")
                      <*> (o .:? "parameter" .!= mempty))
 
-instance ToJSON MACro where
-        toJSON MACro{..}
+instance ToJSON Macro where
+        toJSON Macro{..}
           = object
               (catMaybes
-                 [("scheduleEndMs" .=) <$> _macScheduleEndMs,
-                  ("parentFolderId" .=) <$> _macParentFolderId,
-                  ("containerId" .=) <$> _macContainerId,
-                  ("disablingRuleId" .=) <$> _macDisablingRuleId,
-                  ("fingerprint" .=) <$> _macFingerprint,
-                  ("accountId" .=) <$> _macAccountId,
-                  ("name" .=) <$> _macName,
-                  ("enablingRuleId" .=) <$> _macEnablingRuleId,
-                  ("macroId" .=) <$> _macMacroId,
-                  ("type" .=) <$> _macType,
-                  ("scheduleStartMs" .=) <$> _macScheduleStartMs,
-                  ("notes" .=) <$> _macNotes,
-                  ("parameter" .=) <$> _macParameter])
+                 [("scheduleEndMs" .=) <$> _mScheduleEndMs,
+                  ("parentFolderId" .=) <$> _mParentFolderId,
+                  ("containerId" .=) <$> _mContainerId,
+                  ("disablingRuleId" .=) <$> _mDisablingRuleId,
+                  ("fingerprint" .=) <$> _mFingerprint,
+                  ("accountId" .=) <$> _mAccountId,
+                  ("name" .=) <$> _mName,
+                  ("enablingRuleId" .=) <$> _mEnablingRuleId,
+                  ("macroId" .=) <$> _mMacroId, ("type" .=) <$> _mType,
+                  ("scheduleStartMs" .=) <$> _mScheduleStartMs,
+                  ("notes" .=) <$> _mNotes,
+                  ("parameter" .=) <$> _mParameter])
 
 -- | Represents a Google Tag Manager Tag.
 --
@@ -371,21 +367,21 @@ data Tag = Tag
     , _tagParentFolderId    :: !(Maybe Text)
     , _tagLiveOnly          :: !(Maybe Bool)
     , _tagContainerId       :: !(Maybe Text)
-    , _tagPriority          :: !(Maybe (Maybe Parameter))
-    , _tagTeardownTag       :: !(Maybe [Maybe TeardownTag])
+    , _tagPriority          :: !(Maybe Parameter)
+    , _tagTeardownTag       :: !(Maybe [TeardownTag])
     , _tagFingerprint       :: !(Maybe Text)
     , _tagTagFiringOption   :: !(Maybe TagTagFiringOption)
     , _tagAccountId         :: !(Maybe Text)
     , _tagTagId             :: !(Maybe Text)
     , _tagName              :: !(Maybe Text)
     , _tagBlockingRuleId    :: !(Maybe [Text])
-    , _tagSetupTag          :: !(Maybe [Maybe SetupTag])
+    , _tagSetupTag          :: !(Maybe [SetupTag])
     , _tagFiringTriggerId   :: !(Maybe [Text])
     , _tagType              :: !(Maybe Text)
     , _tagScheduleStartMs   :: !(Maybe Int64)
     , _tagNotes             :: !(Maybe Text)
     , _tagFiringRuleId      :: !(Maybe [Text])
-    , _tagParameter         :: !(Maybe [Maybe Parameter])
+    , _tagParameter         :: !(Maybe [Parameter])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Tag' with the minimum fields required to make a request.
@@ -494,12 +490,12 @@ tagContainerId
 -- in order of priority. Tags with higher numeric value fire first. A
 -- tag\'s priority can be a positive or negative value. The default value
 -- is 0.
-tagPriority :: Lens' Tag (Maybe (Maybe Parameter))
+tagPriority :: Lens' Tag (Maybe Parameter)
 tagPriority
   = lens _tagPriority (\ s a -> s{_tagPriority = a})
 
 -- | The list of teardown tags. Currently we only allow one.
-tagTeardownTag :: Lens' Tag [Maybe TeardownTag]
+tagTeardownTag :: Lens' Tag [TeardownTag]
 tagTeardownTag
   = lens _tagTeardownTag
       (\ s a -> s{_tagTeardownTag = a})
@@ -542,7 +538,7 @@ tagBlockingRuleId
       . _Coerce
 
 -- | The list of setup tags. Currently we only allow one.
-tagSetupTag :: Lens' Tag [Maybe SetupTag]
+tagSetupTag :: Lens' Tag [SetupTag]
 tagSetupTag
   = lens _tagSetupTag (\ s a -> s{_tagSetupTag = a}) .
       _Default
@@ -581,7 +577,7 @@ tagFiringRuleId
       . _Coerce
 
 -- | The tag\'s parameters.
-tagParameter :: Lens' Tag [Maybe Parameter]
+tagParameter :: Lens' Tag [Parameter]
 tagParameter
   = lens _tagParameter (\ s a -> s{_tagParameter = a})
       . _Default
@@ -693,7 +689,7 @@ instance ToJSON TeardownTag where
 -- /See:/ 'createContainerVersionResponse' smart constructor.
 data CreateContainerVersionResponse = CreateContainerVersionResponse
     { _ccvrCompilerError    :: !(Maybe Bool)
-    , _ccvrContainerVersion :: !(Maybe (Maybe ContainerVersion))
+    , _ccvrContainerVersion :: !(Maybe ContainerVersion)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreateContainerVersionResponse' with the minimum fields required to make a request.
@@ -718,7 +714,7 @@ ccvrCompilerError
       (\ s a -> s{_ccvrCompilerError = a})
 
 -- | The container version created.
-ccvrContainerVersion :: Lens' CreateContainerVersionResponse (Maybe (Maybe ContainerVersion))
+ccvrContainerVersion :: Lens' CreateContainerVersionResponse (Maybe ContainerVersion)
 ccvrContainerVersion
   = lens _ccvrContainerVersion
       (\ s a -> s{_ccvrContainerVersion = a})
@@ -743,7 +739,7 @@ instance ToJSON CreateContainerVersionResponse where
 --
 -- /See:/ 'listTriggersResponse' smart constructor.
 newtype ListTriggersResponse = ListTriggersResponse
-    { _ltrTriggers :: Maybe [Maybe Trigger]
+    { _ltrTriggers :: Maybe [Trigger]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListTriggersResponse' with the minimum fields required to make a request.
@@ -759,7 +755,7 @@ listTriggersResponse =
     }
 
 -- | All GTM Triggers of a GTM Container.
-ltrTriggers :: Lens' ListTriggersResponse [Maybe Trigger]
+ltrTriggers :: Lens' ListTriggersResponse [Trigger]
 ltrTriggers
   = lens _ltrTriggers (\ s a -> s{_ltrTriggers = a}) .
       _Default
@@ -1021,10 +1017,10 @@ instance ToJSON AccountAccess where
 --
 -- /See:/ 'userAccess' smart constructor.
 data UserAccess = UserAccess
-    { _uaAccountAccess   :: !(Maybe (Maybe AccountAccess))
+    { _uaAccountAccess   :: !(Maybe AccountAccess)
     , _uaAccountId       :: !(Maybe Text)
     , _uaEmailAddress    :: !(Maybe Text)
-    , _uaContainerAccess :: !(Maybe [Maybe ContainerAccess])
+    , _uaContainerAccess :: !(Maybe [ContainerAccess])
     , _uaPermissionId    :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1053,7 +1049,7 @@ userAccess =
     }
 
 -- | GTM Account access permissions.
-uaAccountAccess :: Lens' UserAccess (Maybe (Maybe AccountAccess))
+uaAccountAccess :: Lens' UserAccess (Maybe AccountAccess)
 uaAccountAccess
   = lens _uaAccountAccess
       (\ s a -> s{_uaAccountAccess = a})
@@ -1070,7 +1066,7 @@ uaEmailAddress
       (\ s a -> s{_uaEmailAddress = a})
 
 -- | GTM Container access permissions.
-uaContainerAccess :: Lens' UserAccess [Maybe ContainerAccess]
+uaContainerAccess :: Lens' UserAccess [ContainerAccess]
 uaContainerAccess
   = lens _uaContainerAccess
       (\ s a -> s{_uaContainerAccess = a})
@@ -1107,7 +1103,7 @@ instance ToJSON UserAccess where
 --
 -- /See:/ 'listAccountsResponse' smart constructor.
 newtype ListAccountsResponse = ListAccountsResponse
-    { _larAccounts :: Maybe [Maybe Account]
+    { _larAccounts :: Maybe [Account]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListAccountsResponse' with the minimum fields required to make a request.
@@ -1123,7 +1119,7 @@ listAccountsResponse =
     }
 
 -- | List of GTM Accounts that a user has access to.
-larAccounts :: Lens' ListAccountsResponse [Maybe Account]
+larAccounts :: Lens' ListAccountsResponse [Account]
 larAccounts
   = lens _larAccounts (\ s a -> s{_larAccounts = a}) .
       _Default
@@ -1157,7 +1153,7 @@ data Variable = Variable
     , _vScheduleStartMs    :: !(Maybe Int64)
     , _vNotes              :: !(Maybe Text)
     , _vEnablingTriggerId  :: !(Maybe [Text])
-    , _vParameter          :: !(Maybe [Maybe Parameter])
+    , _vParameter          :: !(Maybe [Parameter])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Variable' with the minimum fields required to make a request.
@@ -1282,7 +1278,7 @@ vEnablingTriggerId
       . _Coerce
 
 -- | The variable\'s parameters.
-vParameter :: Lens' Variable [Maybe Parameter]
+vParameter :: Lens' Variable [Parameter]
 vParameter
   = lens _vParameter (\ s a -> s{_vParameter = a}) .
       _Default
@@ -1333,7 +1329,7 @@ data Rule = Rule
     , _rAccountId   :: !(Maybe Text)
     , _rName        :: !(Maybe Text)
     , _rNotes       :: !(Maybe Text)
-    , _rCondition   :: !(Maybe [Maybe Condition])
+    , _rCondition   :: !(Maybe [Condition])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Rule' with the minimum fields required to make a request.
@@ -1396,7 +1392,7 @@ rNotes = lens _rNotes (\ s a -> s{_rNotes = a})
 
 -- | The list of conditions that make up this rule (implicit AND between
 -- them).
-rCondition :: Lens' Rule [Maybe Condition]
+rCondition :: Lens' Rule [Condition]
 rCondition
   = lens _rCondition (\ s a -> s{_rCondition = a}) .
       _Default
@@ -1579,8 +1575,8 @@ instance ToJSON Account where
 --
 -- /See:/ 'listContainerVersionsResponse' smart constructor.
 data ListContainerVersionsResponse = ListContainerVersionsResponse
-    { _lcvrContainerVersionHeader :: !(Maybe [Maybe ContainerVersionHeader])
-    , _lcvrContainerVersion       :: !(Maybe [Maybe ContainerVersion])
+    { _lcvrContainerVersionHeader :: !(Maybe [ContainerVersionHeader])
+    , _lcvrContainerVersion       :: !(Maybe [ContainerVersion])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListContainerVersionsResponse' with the minimum fields required to make a request.
@@ -1599,7 +1595,7 @@ listContainerVersionsResponse =
     }
 
 -- | All container version headers of a GTM Container.
-lcvrContainerVersionHeader :: Lens' ListContainerVersionsResponse [Maybe ContainerVersionHeader]
+lcvrContainerVersionHeader :: Lens' ListContainerVersionsResponse [ContainerVersionHeader]
 lcvrContainerVersionHeader
   = lens _lcvrContainerVersionHeader
       (\ s a -> s{_lcvrContainerVersionHeader = a})
@@ -1607,7 +1603,7 @@ lcvrContainerVersionHeader
       . _Coerce
 
 -- | All versions of a GTM Container.
-lcvrContainerVersion :: Lens' ListContainerVersionsResponse [Maybe ContainerVersion]
+lcvrContainerVersion :: Lens' ListContainerVersionsResponse [ContainerVersion]
 lcvrContainerVersion
   = lens _lcvrContainerVersion
       (\ s a -> s{_lcvrContainerVersion = a})
@@ -1796,7 +1792,7 @@ instance ToJSON Container where
 --
 -- /See:/ 'listAccountUsersResponse' smart constructor.
 newtype ListAccountUsersResponse = ListAccountUsersResponse
-    { _laurUserAccess :: Maybe [Maybe UserAccess]
+    { _laurUserAccess :: Maybe [UserAccess]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListAccountUsersResponse' with the minimum fields required to make a request.
@@ -1812,7 +1808,7 @@ listAccountUsersResponse =
     }
 
 -- | All GTM AccountUsers of a GTM Account.
-laurUserAccess :: Lens' ListAccountUsersResponse [Maybe UserAccess]
+laurUserAccess :: Lens' ListAccountUsersResponse [UserAccess]
 laurUserAccess
   = lens _laurUserAccess
       (\ s a -> s{_laurUserAccess = a})
@@ -1835,7 +1831,7 @@ instance ToJSON ListAccountUsersResponse where
 --
 -- /See:/ 'listContainersResponse' smart constructor.
 newtype ListContainersResponse = ListContainersResponse
-    { _lcrContainers :: Maybe [Maybe Container]
+    { _lcrContainers :: Maybe [Container]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListContainersResponse' with the minimum fields required to make a request.
@@ -1851,7 +1847,7 @@ listContainersResponse =
     }
 
 -- | All Containers of a GTM Account.
-lcrContainers :: Lens' ListContainersResponse [Maybe Container]
+lcrContainers :: Lens' ListContainersResponse [Container]
 lcrContainers
   = lens _lcrContainers
       (\ s a -> s{_lcrContainers = a})
@@ -1923,19 +1919,19 @@ instance ToJSON SetupTag where
 --
 -- /See:/ 'containerVersion' smart constructor.
 data ContainerVersion = ContainerVersion
-    { _cvMacro              :: !(Maybe [Maybe MACro])
-    , _cvTag                :: !(Maybe [Maybe Tag])
+    { _cvMacro              :: !(Maybe [Macro])
+    , _cvTag                :: !(Maybe [Tag])
     , _cvContainerId        :: !(Maybe Text)
     , _cvFingerprint        :: !(Maybe Text)
     , _cvContainerVersionId :: !(Maybe Text)
-    , _cvRule               :: !(Maybe [Maybe Rule])
-    , _cvFolder             :: !(Maybe [Maybe Folder])
-    , _cvVariable           :: !(Maybe [Maybe Variable])
+    , _cvRule               :: !(Maybe [Rule])
+    , _cvFolder             :: !(Maybe [Folder])
+    , _cvVariable           :: !(Maybe [Variable])
     , _cvAccountId          :: !(Maybe Text)
     , _cvName               :: !(Maybe Text)
-    , _cvContainer          :: !(Maybe (Maybe Container))
+    , _cvContainer          :: !(Maybe Container)
     , _cvDeleted            :: !(Maybe Bool)
-    , _cvTrigger            :: !(Maybe [Maybe Trigger])
+    , _cvTrigger            :: !(Maybe [Trigger])
     , _cvNotes              :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1991,13 +1987,13 @@ containerVersion =
     }
 
 -- | The macros in the container that this version was taken from.
-cvMacro :: Lens' ContainerVersion [Maybe MACro]
+cvMacro :: Lens' ContainerVersion [Macro]
 cvMacro
   = lens _cvMacro (\ s a -> s{_cvMacro = a}) . _Default
       . _Coerce
 
 -- | The tags in the container that this version was taken from.
-cvTag :: Lens' ContainerVersion [Maybe Tag]
+cvTag :: Lens' ContainerVersion [Tag]
 cvTag
   = lens _cvTag (\ s a -> s{_cvTag = a}) . _Default .
       _Coerce
@@ -2023,20 +2019,20 @@ cvContainerVersionId
       (\ s a -> s{_cvContainerVersionId = a})
 
 -- | The rules in the container that this version was taken from.
-cvRule :: Lens' ContainerVersion [Maybe Rule]
+cvRule :: Lens' ContainerVersion [Rule]
 cvRule
   = lens _cvRule (\ s a -> s{_cvRule = a}) . _Default .
       _Coerce
 
 -- | The folders in the container that this version was taken from.
-cvFolder :: Lens' ContainerVersion [Maybe Folder]
+cvFolder :: Lens' ContainerVersion [Folder]
 cvFolder
   = lens _cvFolder (\ s a -> s{_cvFolder = a}) .
       _Default
       . _Coerce
 
 -- | The variables in the container that this version was taken from.
-cvVariable :: Lens' ContainerVersion [Maybe Variable]
+cvVariable :: Lens' ContainerVersion [Variable]
 cvVariable
   = lens _cvVariable (\ s a -> s{_cvVariable = a}) .
       _Default
@@ -2052,7 +2048,7 @@ cvName :: Lens' ContainerVersion (Maybe Text)
 cvName = lens _cvName (\ s a -> s{_cvName = a})
 
 -- | The container that this version was taken from.
-cvContainer :: Lens' ContainerVersion (Maybe (Maybe Container))
+cvContainer :: Lens' ContainerVersion (Maybe Container)
 cvContainer
   = lens _cvContainer (\ s a -> s{_cvContainer = a})
 
@@ -2062,7 +2058,7 @@ cvDeleted
   = lens _cvDeleted (\ s a -> s{_cvDeleted = a})
 
 -- | The triggers in the container that this version was taken from.
-cvTrigger :: Lens' ContainerVersion [Maybe Trigger]
+cvTrigger :: Lens' ContainerVersion [Trigger]
 cvTrigger
   = lens _cvTrigger (\ s a -> s{_cvTrigger = a}) .
       _Default
@@ -2113,7 +2109,7 @@ instance ToJSON ContainerVersion where
 --
 -- /See:/ 'listTagsResponse' smart constructor.
 newtype ListTagsResponse = ListTagsResponse
-    { _ltrTags :: Maybe [Maybe Tag]
+    { _ltrTags :: Maybe [Tag]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListTagsResponse' with the minimum fields required to make a request.
@@ -2129,7 +2125,7 @@ listTagsResponse =
     }
 
 -- | All GTM Tags of a GTM Container.
-ltrTags :: Lens' ListTagsResponse [Maybe Tag]
+ltrTags :: Lens' ListTagsResponse [Tag]
 ltrTags
   = lens _ltrTags (\ s a -> s{_ltrTags = a}) . _Default
       . _Coerce
@@ -2146,63 +2142,63 @@ instance ToJSON ListTagsResponse where
 
 -- | List Macros Response.
 --
--- /See:/ 'listMACrosResponse' smart constructor.
-newtype ListMACrosResponse = ListMACrosResponse
-    { _lmacrMacros :: Maybe [Maybe MACro]
+-- /See:/ 'listMacrosResponse' smart constructor.
+newtype ListMacrosResponse = ListMacrosResponse
+    { _lmrMacros :: Maybe [Macro]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'ListMACrosResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'ListMacrosResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'lmacrMacros'
-listMACrosResponse
-    :: ListMACrosResponse
-listMACrosResponse =
-    ListMACrosResponse
-    { _lmacrMacros = Nothing
+-- * 'lmrMacros'
+listMacrosResponse
+    :: ListMacrosResponse
+listMacrosResponse =
+    ListMacrosResponse
+    { _lmrMacros = Nothing
     }
 
 -- | All GTM Macros of a GTM Container.
-lmacrMacros :: Lens' ListMACrosResponse [Maybe MACro]
-lmacrMacros
-  = lens _lmacrMacros (\ s a -> s{_lmacrMacros = a}) .
+lmrMacros :: Lens' ListMacrosResponse [Macro]
+lmrMacros
+  = lens _lmrMacros (\ s a -> s{_lmrMacros = a}) .
       _Default
       . _Coerce
 
-instance FromJSON ListMACrosResponse where
+instance FromJSON ListMacrosResponse where
         parseJSON
-          = withObject "ListMACrosResponse"
+          = withObject "ListMacrosResponse"
               (\ o ->
-                 ListMACrosResponse <$> (o .:? "macros" .!= mempty))
+                 ListMacrosResponse <$> (o .:? "macros" .!= mempty))
 
-instance ToJSON ListMACrosResponse where
-        toJSON ListMACrosResponse{..}
-          = object (catMaybes [("macros" .=) <$> _lmacrMacros])
+instance ToJSON ListMacrosResponse where
+        toJSON ListMacrosResponse{..}
+          = object (catMaybes [("macros" .=) <$> _lmrMacros])
 
 -- | Represents a Google Tag Manager Trigger
 --
 -- /See:/ 'trigger' smart constructor.
 data Trigger = Trigger
-    { _tCustomEventFilter   :: !(Maybe [Maybe Condition])
+    { _tCustomEventFilter   :: !(Maybe [Condition])
     , _tParentFolderId      :: !(Maybe Text)
     , _tContainerId         :: !(Maybe Text)
     , _tTriggerId           :: !(Maybe Text)
-    , _tCheckValidation     :: !(Maybe (Maybe Parameter))
+    , _tCheckValidation     :: !(Maybe Parameter)
     , _tFingerprint         :: !(Maybe Text)
-    , _tAutoEventFilter     :: !(Maybe [Maybe Condition])
-    , _tUniqueTriggerId     :: !(Maybe (Maybe Parameter))
+    , _tAutoEventFilter     :: !(Maybe [Condition])
+    , _tUniqueTriggerId     :: !(Maybe Parameter)
     , _tAccountId           :: !(Maybe Text)
     , _tName                :: !(Maybe Text)
-    , _tInterval            :: !(Maybe (Maybe Parameter))
-    , _tEnableAllVideos     :: !(Maybe (Maybe Parameter))
-    , _tWaitForTagsTimeout  :: !(Maybe (Maybe Parameter))
-    , _tLimit               :: !(Maybe (Maybe Parameter))
-    , _tFilter              :: !(Maybe [Maybe Condition])
+    , _tInterval            :: !(Maybe Parameter)
+    , _tEnableAllVideos     :: !(Maybe Parameter)
+    , _tWaitForTagsTimeout  :: !(Maybe Parameter)
+    , _tLimit               :: !(Maybe Parameter)
+    , _tFilter              :: !(Maybe [Condition])
     , _tType                :: !(Maybe TriggerType)
-    , _tVideoPercentageList :: !(Maybe (Maybe Parameter))
-    , _tEventName           :: !(Maybe (Maybe Parameter))
-    , _tWaitForTags         :: !(Maybe (Maybe Parameter))
+    , _tVideoPercentageList :: !(Maybe Parameter)
+    , _tEventName           :: !(Maybe Parameter)
+    , _tWaitForTags         :: !(Maybe Parameter)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Trigger' with the minimum fields required to make a request.
@@ -2273,7 +2269,7 @@ trigger =
 
 -- | Used in the case of custom event, which is fired iff all Conditions are
 -- true.
-tCustomEventFilter :: Lens' Trigger [Maybe Condition]
+tCustomEventFilter :: Lens' Trigger [Condition]
 tCustomEventFilter
   = lens _tCustomEventFilter
       (\ s a -> s{_tCustomEventFilter = a})
@@ -2299,7 +2295,7 @@ tTriggerId
 -- | Whether or not we should only fire tags if the form submit or link click
 -- event is not cancelled by some other event handler (e.g. because of
 -- validation). Only valid for Form Submission and Link Click triggers.
-tCheckValidation :: Lens' Trigger (Maybe (Maybe Parameter))
+tCheckValidation :: Lens' Trigger (Maybe Parameter)
 tCheckValidation
   = lens _tCheckValidation
       (\ s a -> s{_tCheckValidation = a})
@@ -2311,7 +2307,7 @@ tFingerprint
   = lens _tFingerprint (\ s a -> s{_tFingerprint = a})
 
 -- | Used in the case of auto event tracking.
-tAutoEventFilter :: Lens' Trigger [Maybe Condition]
+tAutoEventFilter :: Lens' Trigger [Condition]
 tAutoEventFilter
   = lens _tAutoEventFilter
       (\ s a -> s{_tAutoEventFilter = a})
@@ -2324,7 +2320,7 @@ tAutoEventFilter
 -- This value is populated during output generation since the tags implied
 -- by triggers don\'t exist until then. Only valid for Form Submit, Link
 -- Click and Timer triggers.
-tUniqueTriggerId :: Lens' Trigger (Maybe (Maybe Parameter))
+tUniqueTriggerId :: Lens' Trigger (Maybe Parameter)
 tUniqueTriggerId
   = lens _tUniqueTriggerId
       (\ s a -> s{_tUniqueTriggerId = a})
@@ -2340,14 +2336,14 @@ tName = lens _tName (\ s a -> s{_tName = a})
 
 -- | Time between triggering recurring Timer Events (in milliseconds). Only
 -- valid for Timer triggers.
-tInterval :: Lens' Trigger (Maybe (Maybe Parameter))
+tInterval :: Lens' Trigger (Maybe Parameter)
 tInterval
   = lens _tInterval (\ s a -> s{_tInterval = a})
 
 -- | Reloads the videos in the page that don\'t already have the YT API
 -- enabled. If false, only capture events from videos that already have the
 -- API enabled. Only valid for YouTube triggers.
-tEnableAllVideos :: Lens' Trigger (Maybe (Maybe Parameter))
+tEnableAllVideos :: Lens' Trigger (Maybe Parameter)
 tEnableAllVideos
   = lens _tEnableAllVideos
       (\ s a -> s{_tEnableAllVideos = a})
@@ -2355,7 +2351,7 @@ tEnableAllVideos
 -- | How long to wait (in milliseconds) for tags to fire when
 -- \'waits_for_tags\' above evaluates to true. Only valid for Form
 -- Submission and Link Click triggers.
-tWaitForTagsTimeout :: Lens' Trigger (Maybe (Maybe Parameter))
+tWaitForTagsTimeout :: Lens' Trigger (Maybe Parameter)
 tWaitForTagsTimeout
   = lens _tWaitForTagsTimeout
       (\ s a -> s{_tWaitForTagsTimeout = a})
@@ -2363,11 +2359,11 @@ tWaitForTagsTimeout
 -- | Limit of the number of GTM events this Timer Trigger will fire. If no
 -- limit is set, we will continue to fire GTM events until the user leaves
 -- the page. Only valid for Timer triggers.
-tLimit :: Lens' Trigger (Maybe (Maybe Parameter))
+tLimit :: Lens' Trigger (Maybe Parameter)
 tLimit = lens _tLimit (\ s a -> s{_tLimit = a})
 
 -- | The trigger will only fire iff all Conditions are true.
-tFilter :: Lens' Trigger [Maybe Condition]
+tFilter :: Lens' Trigger [Condition]
 tFilter
   = lens _tFilter (\ s a -> s{_tFilter = a}) . _Default
       . _Coerce
@@ -2379,13 +2375,13 @@ tType = lens _tType (\ s a -> s{_tType = a})
 -- | List of integer percentage values. The trigger will fire as each
 -- percentage is reached in any instrumented videos. Only valid for YouTube
 -- triggers.
-tVideoPercentageList :: Lens' Trigger (Maybe (Maybe Parameter))
+tVideoPercentageList :: Lens' Trigger (Maybe Parameter)
 tVideoPercentageList
   = lens _tVideoPercentageList
       (\ s a -> s{_tVideoPercentageList = a})
 
 -- | Name of the GTM event that is fired. Only valid for Timer triggers.
-tEventName :: Lens' Trigger (Maybe (Maybe Parameter))
+tEventName :: Lens' Trigger (Maybe Parameter)
 tEventName
   = lens _tEventName (\ s a -> s{_tEventName = a})
 
@@ -2393,7 +2389,7 @@ tEventName
 -- until all of the tags have fired (by preventing the default action and
 -- later simulating the default action). Only valid for Form Submission and
 -- Link Click triggers.
-tWaitForTags :: Lens' Trigger (Maybe (Maybe Parameter))
+tWaitForTags :: Lens' Trigger (Maybe Parameter)
 tWaitForTags
   = lens _tWaitForTags (\ s a -> s{_tWaitForTags = a})
 
@@ -2450,7 +2446,7 @@ instance ToJSON Trigger where
 -- /See:/ 'condition' smart constructor.
 data Condition = Condition
     { _cType      :: !(Maybe ConditionType)
-    , _cParameter :: !(Maybe [Maybe Parameter])
+    , _cParameter :: !(Maybe [Parameter])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Condition' with the minimum fields required to make a request.
@@ -2481,7 +2477,7 @@ cType = lens _cType (\ s a -> s{_cType = a})
 -- value, the matching will be case sensitive. - To negate an operator,
 -- include a boolean parameter named negate boolean parameter that is set
 -- to true.
-cParameter :: Lens' Condition [Maybe Parameter]
+cParameter :: Lens' Condition [Parameter]
 cParameter
   = lens _cParameter (\ s a -> s{_cParameter = a}) .
       _Default
@@ -2505,9 +2501,9 @@ instance ToJSON Condition where
 --
 -- /See:/ 'folderEntities' smart constructor.
 data FolderEntities = FolderEntities
-    { _feTag      :: !(Maybe [Maybe Tag])
-    , _feVariable :: !(Maybe [Maybe Variable])
-    , _feTrigger  :: !(Maybe [Maybe Trigger])
+    { _feTag      :: !(Maybe [Tag])
+    , _feVariable :: !(Maybe [Variable])
+    , _feTrigger  :: !(Maybe [Trigger])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FolderEntities' with the minimum fields required to make a request.
@@ -2529,20 +2525,20 @@ folderEntities =
     }
 
 -- | The list of tags inside the folder.
-feTag :: Lens' FolderEntities [Maybe Tag]
+feTag :: Lens' FolderEntities [Tag]
 feTag
   = lens _feTag (\ s a -> s{_feTag = a}) . _Default .
       _Coerce
 
 -- | The list of variables inside the folder.
-feVariable :: Lens' FolderEntities [Maybe Variable]
+feVariable :: Lens' FolderEntities [Variable]
 feVariable
   = lens _feVariable (\ s a -> s{_feVariable = a}) .
       _Default
       . _Coerce
 
 -- | The list of triggers inside the folder.
-feTrigger :: Lens' FolderEntities [Maybe Trigger]
+feTrigger :: Lens' FolderEntities [Trigger]
 feTrigger
   = lens _feTrigger (\ s a -> s{_feTrigger = a}) .
       _Default
@@ -2621,9 +2617,9 @@ instance ToJSON ContainerAccess where
 --
 -- /See:/ 'parameter' smart constructor.
 data Parameter = Parameter
-    { _pList  :: !(Maybe [Maybe Parameter])
+    { _pList  :: !(Maybe [Parameter])
     , _pValue :: !(Maybe Text)
-    , _pMap   :: !(Maybe [Maybe Parameter])
+    , _pMap   :: !(Maybe [Parameter])
     , _pKey   :: !(Maybe Text)
     , _pType  :: !(Maybe ParameterType)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -2653,7 +2649,7 @@ parameter =
     }
 
 -- | This list parameter\'s parameters (keys will be ignored).
-pList :: Lens' Parameter [Maybe Parameter]
+pList :: Lens' Parameter [Parameter]
 pList
   = lens _pList (\ s a -> s{_pList = a}) . _Default .
       _Coerce
@@ -2664,7 +2660,7 @@ pValue :: Lens' Parameter (Maybe Text)
 pValue = lens _pValue (\ s a -> s{_pValue = a})
 
 -- | This map parameter\'s parameters (must have keys; keys must be unique).
-pMap :: Lens' Parameter [Maybe Parameter]
+pMap :: Lens' Parameter [Parameter]
 pMap
   = lens _pMap (\ s a -> s{_pMap = a}) . _Default .
       _Coerce

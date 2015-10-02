@@ -33,15 +33,14 @@ module Network.Google.Resource.Analytics.Management.ProfileUserLinks.List
     , mpullQuotaUser
     , mpullPrettyPrint
     , mpullWebPropertyId
-    , mpullUserIp
+    , mpullUserIP
     , mpullProfileId
     , mpullAccountId
     , mpullKey
-    , mpullOauthToken
+    , mpullOAuthToken
     , mpullStartIndex
     , mpullMaxResults
     , mpullFields
-    , mpullAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -61,12 +60,12 @@ type ManagementProfileUserLinksListResource =
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "start-index" Int32 :>
                                  QueryParam "max-results" Int32 :>
                                    QueryParam "fields" Text :>
-                                     QueryParam "alt" Alt :>
+                                     QueryParam "alt" AltJSON :>
                                        Get '[JSON] EntityUserLinks
 
 -- | Lists profile-user links for a given view (profile).
@@ -76,15 +75,14 @@ data ManagementProfileUserLinksList' = ManagementProfileUserLinksList'
     { _mpullQuotaUser     :: !(Maybe Text)
     , _mpullPrettyPrint   :: !Bool
     , _mpullWebPropertyId :: !Text
-    , _mpullUserIp        :: !(Maybe Text)
+    , _mpullUserIP        :: !(Maybe Text)
     , _mpullProfileId     :: !Text
     , _mpullAccountId     :: !Text
-    , _mpullKey           :: !(Maybe Text)
-    , _mpullOauthToken    :: !(Maybe Text)
+    , _mpullKey           :: !(Maybe Key)
+    , _mpullOAuthToken    :: !(Maybe OAuthToken)
     , _mpullStartIndex    :: !(Maybe Int32)
     , _mpullMaxResults    :: !(Maybe Int32)
     , _mpullFields        :: !(Maybe Text)
-    , _mpullAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProfileUserLinksList'' with the minimum fields required to make a request.
@@ -97,7 +95,7 @@ data ManagementProfileUserLinksList' = ManagementProfileUserLinksList'
 --
 -- * 'mpullWebPropertyId'
 --
--- * 'mpullUserIp'
+-- * 'mpullUserIP'
 --
 -- * 'mpullProfileId'
 --
@@ -105,15 +103,13 @@ data ManagementProfileUserLinksList' = ManagementProfileUserLinksList'
 --
 -- * 'mpullKey'
 --
--- * 'mpullOauthToken'
+-- * 'mpullOAuthToken'
 --
 -- * 'mpullStartIndex'
 --
 -- * 'mpullMaxResults'
 --
 -- * 'mpullFields'
---
--- * 'mpullAlt'
 managementProfileUserLinksList'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
@@ -124,15 +120,14 @@ managementProfileUserLinksList' pMpullWebPropertyId_ pMpullProfileId_ pMpullAcco
     { _mpullQuotaUser = Nothing
     , _mpullPrettyPrint = False
     , _mpullWebPropertyId = pMpullWebPropertyId_
-    , _mpullUserIp = Nothing
+    , _mpullUserIP = Nothing
     , _mpullProfileId = pMpullProfileId_
     , _mpullAccountId = pMpullAccountId_
     , _mpullKey = Nothing
-    , _mpullOauthToken = Nothing
+    , _mpullOAuthToken = Nothing
     , _mpullStartIndex = Nothing
     , _mpullMaxResults = Nothing
     , _mpullFields = Nothing
-    , _mpullAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -159,9 +154,9 @@ mpullWebPropertyId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mpullUserIp :: Lens' ManagementProfileUserLinksList' (Maybe Text)
-mpullUserIp
-  = lens _mpullUserIp (\ s a -> s{_mpullUserIp = a})
+mpullUserIP :: Lens' ManagementProfileUserLinksList' (Maybe Text)
+mpullUserIP
+  = lens _mpullUserIP (\ s a -> s{_mpullUserIP = a})
 
 -- | View (Profile) ID to retrieve the profile-user links for. Can either be
 -- a specific profile ID or \'~all\', which refers to all the profiles that
@@ -180,14 +175,14 @@ mpullAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mpullKey :: Lens' ManagementProfileUserLinksList' (Maybe Text)
+mpullKey :: Lens' ManagementProfileUserLinksList' (Maybe Key)
 mpullKey = lens _mpullKey (\ s a -> s{_mpullKey = a})
 
 -- | OAuth 2.0 token for the current user.
-mpullOauthToken :: Lens' ManagementProfileUserLinksList' (Maybe Text)
-mpullOauthToken
-  = lens _mpullOauthToken
-      (\ s a -> s{_mpullOauthToken = a})
+mpullOAuthToken :: Lens' ManagementProfileUserLinksList' (Maybe OAuthToken)
+mpullOAuthToken
+  = lens _mpullOAuthToken
+      (\ s a -> s{_mpullOAuthToken = a})
 
 -- | An index of the first profile-user link to retrieve. Use this parameter
 -- as a pagination mechanism along with the max-results parameter.
@@ -207,9 +202,10 @@ mpullFields :: Lens' ManagementProfileUserLinksList' (Maybe Text)
 mpullFields
   = lens _mpullFields (\ s a -> s{_mpullFields = a})
 
--- | Data format for the response.
-mpullAlt :: Lens' ManagementProfileUserLinksList' Alt
-mpullAlt = lens _mpullAlt (\ s a -> s{_mpullAlt = a})
+instance GoogleAuth ManagementProfileUserLinksList'
+         where
+        authKey = mpullKey . _Just
+        authToken = mpullOAuthToken . _Just
 
 instance GoogleRequest
          ManagementProfileUserLinksList' where
@@ -220,15 +216,15 @@ instance GoogleRequest
           ManagementProfileUserLinksList'{..}
           = go _mpullQuotaUser (Just _mpullPrettyPrint)
               _mpullWebPropertyId
-              _mpullUserIp
+              _mpullUserIP
               _mpullProfileId
               _mpullAccountId
               _mpullKey
-              _mpullOauthToken
+              _mpullOAuthToken
               _mpullStartIndex
               _mpullMaxResults
               _mpullFields
-              (Just _mpullAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

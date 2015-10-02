@@ -33,16 +33,15 @@ module Network.Google.Resource.Books.Volumes.Get
     , vgQuotaUser
     , vgPrettyPrint
     , vgCountry
-    , vgUserIp
+    , vgUserIP
     , vgPartner
     , vgKey
     , vgVolumeId
     , vgSource
     , vgProjection
-    , vgOauthToken
+    , vgOAuthToken
     , vgUserLibraryConsistentRead
     , vgFields
-    , vgAlt
     ) where
 
 import           Network.Google.Books.Types
@@ -58,13 +57,13 @@ type VolumesGetResource =
              QueryParam "country" Text :>
                QueryParam "userIp" Text :>
                  QueryParam "partner" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "source" Text :>
                        QueryParam "projection" BooksVolumesGetProjection :>
-                         QueryParam "oauth_token" Text :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "user_library_consistent_read" Bool :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :> Get '[JSON] Volume
+                               QueryParam "alt" AltJSON :> Get '[JSON] Volume
 
 -- | Gets volume information for a single volume.
 --
@@ -73,16 +72,15 @@ data VolumesGet' = VolumesGet'
     { _vgQuotaUser                 :: !(Maybe Text)
     , _vgPrettyPrint               :: !Bool
     , _vgCountry                   :: !(Maybe Text)
-    , _vgUserIp                    :: !(Maybe Text)
+    , _vgUserIP                    :: !(Maybe Text)
     , _vgPartner                   :: !(Maybe Text)
-    , _vgKey                       :: !(Maybe Text)
+    , _vgKey                       :: !(Maybe Key)
     , _vgVolumeId                  :: !Text
     , _vgSource                    :: !(Maybe Text)
     , _vgProjection                :: !(Maybe BooksVolumesGetProjection)
-    , _vgOauthToken                :: !(Maybe Text)
+    , _vgOAuthToken                :: !(Maybe OAuthToken)
     , _vgUserLibraryConsistentRead :: !(Maybe Bool)
     , _vgFields                    :: !(Maybe Text)
-    , _vgAlt                       :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VolumesGet'' with the minimum fields required to make a request.
@@ -95,7 +93,7 @@ data VolumesGet' = VolumesGet'
 --
 -- * 'vgCountry'
 --
--- * 'vgUserIp'
+-- * 'vgUserIP'
 --
 -- * 'vgPartner'
 --
@@ -107,13 +105,11 @@ data VolumesGet' = VolumesGet'
 --
 -- * 'vgProjection'
 --
--- * 'vgOauthToken'
+-- * 'vgOAuthToken'
 --
 -- * 'vgUserLibraryConsistentRead'
 --
 -- * 'vgFields'
---
--- * 'vgAlt'
 volumesGet'
     :: Text -- ^ 'volumeId'
     -> VolumesGet'
@@ -122,16 +118,15 @@ volumesGet' pVgVolumeId_ =
     { _vgQuotaUser = Nothing
     , _vgPrettyPrint = True
     , _vgCountry = Nothing
-    , _vgUserIp = Nothing
+    , _vgUserIP = Nothing
     , _vgPartner = Nothing
     , _vgKey = Nothing
     , _vgVolumeId = pVgVolumeId_
     , _vgSource = Nothing
     , _vgProjection = Nothing
-    , _vgOauthToken = Nothing
+    , _vgOAuthToken = Nothing
     , _vgUserLibraryConsistentRead = Nothing
     , _vgFields = Nothing
-    , _vgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -154,8 +149,8 @@ vgCountry
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-vgUserIp :: Lens' VolumesGet' (Maybe Text)
-vgUserIp = lens _vgUserIp (\ s a -> s{_vgUserIp = a})
+vgUserIP :: Lens' VolumesGet' (Maybe Text)
+vgUserIP = lens _vgUserIP (\ s a -> s{_vgUserIP = a})
 
 -- | Brand results for partner ID.
 vgPartner :: Lens' VolumesGet' (Maybe Text)
@@ -165,7 +160,7 @@ vgPartner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vgKey :: Lens' VolumesGet' (Maybe Text)
+vgKey :: Lens' VolumesGet' (Maybe Key)
 vgKey = lens _vgKey (\ s a -> s{_vgKey = a})
 
 -- | ID of volume to retrieve.
@@ -183,9 +178,9 @@ vgProjection
   = lens _vgProjection (\ s a -> s{_vgProjection = a})
 
 -- | OAuth 2.0 token for the current user.
-vgOauthToken :: Lens' VolumesGet' (Maybe Text)
-vgOauthToken
-  = lens _vgOauthToken (\ s a -> s{_vgOauthToken = a})
+vgOAuthToken :: Lens' VolumesGet' (Maybe OAuthToken)
+vgOAuthToken
+  = lens _vgOAuthToken (\ s a -> s{_vgOAuthToken = a})
 
 vgUserLibraryConsistentRead :: Lens' VolumesGet' (Maybe Bool)
 vgUserLibraryConsistentRead
@@ -196,25 +191,25 @@ vgUserLibraryConsistentRead
 vgFields :: Lens' VolumesGet' (Maybe Text)
 vgFields = lens _vgFields (\ s a -> s{_vgFields = a})
 
--- | Data format for the response.
-vgAlt :: Lens' VolumesGet' Alt
-vgAlt = lens _vgAlt (\ s a -> s{_vgAlt = a})
+instance GoogleAuth VolumesGet' where
+        authKey = vgKey . _Just
+        authToken = vgOAuthToken . _Just
 
 instance GoogleRequest VolumesGet' where
         type Rs VolumesGet' = Volume
         request = requestWithRoute defReq booksURL
         requestWithRoute r u VolumesGet'{..}
           = go _vgQuotaUser (Just _vgPrettyPrint) _vgCountry
-              _vgUserIp
+              _vgUserIP
               _vgPartner
               _vgKey
               _vgVolumeId
               _vgSource
               _vgProjection
-              _vgOauthToken
+              _vgOAuthToken
               _vgUserLibraryConsistentRead
               _vgFields
-              (Just _vgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy VolumesGetResource)
                       r

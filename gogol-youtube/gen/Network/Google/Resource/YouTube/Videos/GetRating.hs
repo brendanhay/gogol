@@ -33,13 +33,12 @@ module Network.Google.Resource.YouTube.Videos.GetRating
     -- * Request Lenses
     , vgrQuotaUser
     , vgrPrettyPrint
-    , vgrUserIp
+    , vgrUserIP
     , vgrOnBehalfOfContentOwner
     , vgrKey
     , vgrId
-    , vgrOauthToken
+    , vgrOAuthToken
     , vgrFields
-    , vgrAlt
     ) where
 
 import           Network.Google.Prelude
@@ -54,11 +53,11 @@ type VideosGetRatingResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "onBehalfOfContentOwner" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "id" Text :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :>
+                         QueryParam "alt" AltJSON :>
                            Get '[JSON] VideoGetRatingResponse
 
 -- | Retrieves the ratings that the authorized user gave to a list of
@@ -68,13 +67,12 @@ type VideosGetRatingResource =
 data VideosGetRating' = VideosGetRating'
     { _vgrQuotaUser              :: !(Maybe Text)
     , _vgrPrettyPrint            :: !Bool
-    , _vgrUserIp                 :: !(Maybe Text)
+    , _vgrUserIP                 :: !(Maybe Text)
     , _vgrOnBehalfOfContentOwner :: !(Maybe Text)
-    , _vgrKey                    :: !(Maybe Text)
+    , _vgrKey                    :: !(Maybe Key)
     , _vgrId                     :: !Text
-    , _vgrOauthToken             :: !(Maybe Text)
+    , _vgrOAuthToken             :: !(Maybe OAuthToken)
     , _vgrFields                 :: !(Maybe Text)
-    , _vgrAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideosGetRating'' with the minimum fields required to make a request.
@@ -85,7 +83,7 @@ data VideosGetRating' = VideosGetRating'
 --
 -- * 'vgrPrettyPrint'
 --
--- * 'vgrUserIp'
+-- * 'vgrUserIP'
 --
 -- * 'vgrOnBehalfOfContentOwner'
 --
@@ -93,11 +91,9 @@ data VideosGetRating' = VideosGetRating'
 --
 -- * 'vgrId'
 --
--- * 'vgrOauthToken'
+-- * 'vgrOAuthToken'
 --
 -- * 'vgrFields'
---
--- * 'vgrAlt'
 videosGetRating'
     :: Text -- ^ 'id'
     -> VideosGetRating'
@@ -105,13 +101,12 @@ videosGetRating' pVgrId_ =
     VideosGetRating'
     { _vgrQuotaUser = Nothing
     , _vgrPrettyPrint = True
-    , _vgrUserIp = Nothing
+    , _vgrUserIP = Nothing
     , _vgrOnBehalfOfContentOwner = Nothing
     , _vgrKey = Nothing
     , _vgrId = pVgrId_
-    , _vgrOauthToken = Nothing
+    , _vgrOAuthToken = Nothing
     , _vgrFields = Nothing
-    , _vgrAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -129,9 +124,9 @@ vgrPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-vgrUserIp :: Lens' VideosGetRating' (Maybe Text)
-vgrUserIp
-  = lens _vgrUserIp (\ s a -> s{_vgrUserIp = a})
+vgrUserIP :: Lens' VideosGetRating' (Maybe Text)
+vgrUserIP
+  = lens _vgrUserIP (\ s a -> s{_vgrUserIP = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
@@ -151,7 +146,7 @@ vgrOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vgrKey :: Lens' VideosGetRating' (Maybe Text)
+vgrKey :: Lens' VideosGetRating' (Maybe Key)
 vgrKey = lens _vgrKey (\ s a -> s{_vgrKey = a})
 
 -- | The id parameter specifies a comma-separated list of the YouTube video
@@ -161,31 +156,31 @@ vgrId :: Lens' VideosGetRating' Text
 vgrId = lens _vgrId (\ s a -> s{_vgrId = a})
 
 -- | OAuth 2.0 token for the current user.
-vgrOauthToken :: Lens' VideosGetRating' (Maybe Text)
-vgrOauthToken
-  = lens _vgrOauthToken
-      (\ s a -> s{_vgrOauthToken = a})
+vgrOAuthToken :: Lens' VideosGetRating' (Maybe OAuthToken)
+vgrOAuthToken
+  = lens _vgrOAuthToken
+      (\ s a -> s{_vgrOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 vgrFields :: Lens' VideosGetRating' (Maybe Text)
 vgrFields
   = lens _vgrFields (\ s a -> s{_vgrFields = a})
 
--- | Data format for the response.
-vgrAlt :: Lens' VideosGetRating' Alt
-vgrAlt = lens _vgrAlt (\ s a -> s{_vgrAlt = a})
+instance GoogleAuth VideosGetRating' where
+        authKey = vgrKey . _Just
+        authToken = vgrOAuthToken . _Just
 
 instance GoogleRequest VideosGetRating' where
         type Rs VideosGetRating' = VideoGetRatingResponse
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u VideosGetRating'{..}
-          = go _vgrQuotaUser (Just _vgrPrettyPrint) _vgrUserIp
+          = go _vgrQuotaUser (Just _vgrPrettyPrint) _vgrUserIP
               _vgrOnBehalfOfContentOwner
               _vgrKey
               (Just _vgrId)
-              _vgrOauthToken
+              _vgrOAuthToken
               _vgrFields
-              (Just _vgrAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy VideosGetRatingResource)

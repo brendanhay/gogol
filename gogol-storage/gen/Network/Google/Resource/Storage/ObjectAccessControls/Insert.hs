@@ -32,14 +32,14 @@ module Network.Google.Resource.Storage.ObjectAccessControls.Insert
     -- * Request Lenses
     , oaciQuotaUser
     , oaciPrettyPrint
-    , oaciUserIp
+    , oaciUserIP
     , oaciBucket
     , oaciKey
     , oaciObject
-    , oaciOauthToken
+    , oaciOAuthToken
+    , oaciObjectAccessControl
     , oaciGeneration
     , oaciFields
-    , oaciAlt
     ) where
 
 import           Network.Google.Prelude
@@ -56,27 +56,28 @@ type ObjectAccessControlsInsertResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "generation" Word64 :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :>
-                               Post '[JSON] ObjectAccessControl
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] ObjectAccessControl :>
+                                 Post '[JSON] ObjectAccessControl
 
 -- | Creates a new ACL entry on the specified object.
 --
 -- /See:/ 'objectAccessControlsInsert'' smart constructor.
 data ObjectAccessControlsInsert' = ObjectAccessControlsInsert'
-    { _oaciQuotaUser   :: !(Maybe Text)
-    , _oaciPrettyPrint :: !Bool
-    , _oaciUserIp      :: !(Maybe Text)
-    , _oaciBucket      :: !Text
-    , _oaciKey         :: !(Maybe Text)
-    , _oaciObject      :: !Text
-    , _oaciOauthToken  :: !(Maybe Text)
-    , _oaciGeneration  :: !(Maybe Word64)
-    , _oaciFields      :: !(Maybe Text)
-    , _oaciAlt         :: !Alt
+    { _oaciQuotaUser           :: !(Maybe Text)
+    , _oaciPrettyPrint         :: !Bool
+    , _oaciUserIP              :: !(Maybe Text)
+    , _oaciBucket              :: !Text
+    , _oaciKey                 :: !(Maybe Key)
+    , _oaciObject              :: !Text
+    , _oaciOAuthToken          :: !(Maybe OAuthToken)
+    , _oaciObjectAccessControl :: !ObjectAccessControl
+    , _oaciGeneration          :: !(Maybe Word64)
+    , _oaciFields              :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectAccessControlsInsert'' with the minimum fields required to make a request.
@@ -87,7 +88,7 @@ data ObjectAccessControlsInsert' = ObjectAccessControlsInsert'
 --
 -- * 'oaciPrettyPrint'
 --
--- * 'oaciUserIp'
+-- * 'oaciUserIP'
 --
 -- * 'oaciBucket'
 --
@@ -95,29 +96,30 @@ data ObjectAccessControlsInsert' = ObjectAccessControlsInsert'
 --
 -- * 'oaciObject'
 --
--- * 'oaciOauthToken'
+-- * 'oaciOAuthToken'
+--
+-- * 'oaciObjectAccessControl'
 --
 -- * 'oaciGeneration'
 --
 -- * 'oaciFields'
---
--- * 'oaciAlt'
 objectAccessControlsInsert'
     :: Text -- ^ 'bucket'
     -> Text -- ^ 'object'
+    -> ObjectAccessControl -- ^ 'ObjectAccessControl'
     -> ObjectAccessControlsInsert'
-objectAccessControlsInsert' pOaciBucket_ pOaciObject_ =
+objectAccessControlsInsert' pOaciBucket_ pOaciObject_ pOaciObjectAccessControl_ =
     ObjectAccessControlsInsert'
     { _oaciQuotaUser = Nothing
     , _oaciPrettyPrint = True
-    , _oaciUserIp = Nothing
+    , _oaciUserIP = Nothing
     , _oaciBucket = pOaciBucket_
     , _oaciKey = Nothing
     , _oaciObject = pOaciObject_
-    , _oaciOauthToken = Nothing
+    , _oaciOAuthToken = Nothing
+    , _oaciObjectAccessControl = pOaciObjectAccessControl_
     , _oaciGeneration = Nothing
     , _oaciFields = Nothing
-    , _oaciAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -136,9 +138,9 @@ oaciPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-oaciUserIp :: Lens' ObjectAccessControlsInsert' (Maybe Text)
-oaciUserIp
-  = lens _oaciUserIp (\ s a -> s{_oaciUserIp = a})
+oaciUserIP :: Lens' ObjectAccessControlsInsert' (Maybe Text)
+oaciUserIP
+  = lens _oaciUserIP (\ s a -> s{_oaciUserIP = a})
 
 -- | Name of a bucket.
 oaciBucket :: Lens' ObjectAccessControlsInsert' Text
@@ -148,7 +150,7 @@ oaciBucket
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-oaciKey :: Lens' ObjectAccessControlsInsert' (Maybe Text)
+oaciKey :: Lens' ObjectAccessControlsInsert' (Maybe Key)
 oaciKey = lens _oaciKey (\ s a -> s{_oaciKey = a})
 
 -- | Name of the object.
@@ -157,10 +159,16 @@ oaciObject
   = lens _oaciObject (\ s a -> s{_oaciObject = a})
 
 -- | OAuth 2.0 token for the current user.
-oaciOauthToken :: Lens' ObjectAccessControlsInsert' (Maybe Text)
-oaciOauthToken
-  = lens _oaciOauthToken
-      (\ s a -> s{_oaciOauthToken = a})
+oaciOAuthToken :: Lens' ObjectAccessControlsInsert' (Maybe OAuthToken)
+oaciOAuthToken
+  = lens _oaciOAuthToken
+      (\ s a -> s{_oaciOAuthToken = a})
+
+-- | Multipart request metadata.
+oaciObjectAccessControl :: Lens' ObjectAccessControlsInsert' ObjectAccessControl
+oaciObjectAccessControl
+  = lens _oaciObjectAccessControl
+      (\ s a -> s{_oaciObjectAccessControl = a})
 
 -- | If present, selects a specific revision of this object (as opposed to
 -- the latest version, the default).
@@ -174,9 +182,9 @@ oaciFields :: Lens' ObjectAccessControlsInsert' (Maybe Text)
 oaciFields
   = lens _oaciFields (\ s a -> s{_oaciFields = a})
 
--- | Data format for the response.
-oaciAlt :: Lens' ObjectAccessControlsInsert' Alt
-oaciAlt = lens _oaciAlt (\ s a -> s{_oaciAlt = a})
+instance GoogleAuth ObjectAccessControlsInsert' where
+        authKey = oaciKey . _Just
+        authToken = oaciOAuthToken . _Just
 
 instance GoogleRequest ObjectAccessControlsInsert'
          where
@@ -185,14 +193,15 @@ instance GoogleRequest ObjectAccessControlsInsert'
         request = requestWithRoute defReq storageURL
         requestWithRoute r u ObjectAccessControlsInsert'{..}
           = go _oaciQuotaUser (Just _oaciPrettyPrint)
-              _oaciUserIp
+              _oaciUserIP
               _oaciBucket
               _oaciKey
               _oaciObject
-              _oaciOauthToken
+              _oaciOAuthToken
               _oaciGeneration
               _oaciFields
-              (Just _oaciAlt)
+              (Just AltJSON)
+              _oaciObjectAccessControl
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ObjectAccessControlsInsertResource)

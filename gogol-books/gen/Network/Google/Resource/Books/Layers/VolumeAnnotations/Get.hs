@@ -32,16 +32,15 @@ module Network.Google.Resource.Books.Layers.VolumeAnnotations.Get
     -- * Request Lenses
     , lvagQuotaUser
     , lvagPrettyPrint
-    , lvagUserIp
+    , lvagUserIP
     , lvagLocale
     , lvagKey
     , lvagAnnotationId
     , lvagVolumeId
     , lvagSource
-    , lvagOauthToken
+    , lvagOAuthToken
     , lvagLayerId
     , lvagFields
-    , lvagAlt
     ) where
 
 import           Network.Google.Books.Types
@@ -60,11 +59,11 @@ type LayersVolumeAnnotationsGetResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "locale" Text :>
-                         QueryParam "key" Text :>
+                         QueryParam "key" Key :>
                            QueryParam "source" Text :>
-                             QueryParam "oauth_token" Text :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "fields" Text :>
-                                 QueryParam "alt" Alt :>
+                                 QueryParam "alt" AltJSON :>
                                    Get '[JSON] Volumeannotation
 
 -- | Gets the volume annotation.
@@ -73,16 +72,15 @@ type LayersVolumeAnnotationsGetResource =
 data LayersVolumeAnnotationsGet' = LayersVolumeAnnotationsGet'
     { _lvagQuotaUser    :: !(Maybe Text)
     , _lvagPrettyPrint  :: !Bool
-    , _lvagUserIp       :: !(Maybe Text)
+    , _lvagUserIP       :: !(Maybe Text)
     , _lvagLocale       :: !(Maybe Text)
-    , _lvagKey          :: !(Maybe Text)
+    , _lvagKey          :: !(Maybe Key)
     , _lvagAnnotationId :: !Text
     , _lvagVolumeId     :: !Text
     , _lvagSource       :: !(Maybe Text)
-    , _lvagOauthToken   :: !(Maybe Text)
+    , _lvagOAuthToken   :: !(Maybe OAuthToken)
     , _lvagLayerId      :: !Text
     , _lvagFields       :: !(Maybe Text)
-    , _lvagAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersVolumeAnnotationsGet'' with the minimum fields required to make a request.
@@ -93,7 +91,7 @@ data LayersVolumeAnnotationsGet' = LayersVolumeAnnotationsGet'
 --
 -- * 'lvagPrettyPrint'
 --
--- * 'lvagUserIp'
+-- * 'lvagUserIP'
 --
 -- * 'lvagLocale'
 --
@@ -105,13 +103,11 @@ data LayersVolumeAnnotationsGet' = LayersVolumeAnnotationsGet'
 --
 -- * 'lvagSource'
 --
--- * 'lvagOauthToken'
+-- * 'lvagOAuthToken'
 --
 -- * 'lvagLayerId'
 --
 -- * 'lvagFields'
---
--- * 'lvagAlt'
 layersVolumeAnnotationsGet'
     :: Text -- ^ 'annotationId'
     -> Text -- ^ 'volumeId'
@@ -121,16 +117,15 @@ layersVolumeAnnotationsGet' pLvagAnnotationId_ pLvagVolumeId_ pLvagLayerId_ =
     LayersVolumeAnnotationsGet'
     { _lvagQuotaUser = Nothing
     , _lvagPrettyPrint = True
-    , _lvagUserIp = Nothing
+    , _lvagUserIP = Nothing
     , _lvagLocale = Nothing
     , _lvagKey = Nothing
     , _lvagAnnotationId = pLvagAnnotationId_
     , _lvagVolumeId = pLvagVolumeId_
     , _lvagSource = Nothing
-    , _lvagOauthToken = Nothing
+    , _lvagOAuthToken = Nothing
     , _lvagLayerId = pLvagLayerId_
     , _lvagFields = Nothing
-    , _lvagAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -149,9 +144,9 @@ lvagPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-lvagUserIp :: Lens' LayersVolumeAnnotationsGet' (Maybe Text)
-lvagUserIp
-  = lens _lvagUserIp (\ s a -> s{_lvagUserIp = a})
+lvagUserIP :: Lens' LayersVolumeAnnotationsGet' (Maybe Text)
+lvagUserIP
+  = lens _lvagUserIP (\ s a -> s{_lvagUserIP = a})
 
 -- | The locale information for the data. ISO-639-1 language and ISO-3166-1
 -- country code. Ex: \'en_US\'.
@@ -162,7 +157,7 @@ lvagLocale
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lvagKey :: Lens' LayersVolumeAnnotationsGet' (Maybe Text)
+lvagKey :: Lens' LayersVolumeAnnotationsGet' (Maybe Key)
 lvagKey = lens _lvagKey (\ s a -> s{_lvagKey = a})
 
 -- | The ID of the volume annotation to retrieve.
@@ -182,10 +177,10 @@ lvagSource
   = lens _lvagSource (\ s a -> s{_lvagSource = a})
 
 -- | OAuth 2.0 token for the current user.
-lvagOauthToken :: Lens' LayersVolumeAnnotationsGet' (Maybe Text)
-lvagOauthToken
-  = lens _lvagOauthToken
-      (\ s a -> s{_lvagOauthToken = a})
+lvagOAuthToken :: Lens' LayersVolumeAnnotationsGet' (Maybe OAuthToken)
+lvagOAuthToken
+  = lens _lvagOAuthToken
+      (\ s a -> s{_lvagOAuthToken = a})
 
 -- | The ID for the layer to get the annotations.
 lvagLayerId :: Lens' LayersVolumeAnnotationsGet' Text
@@ -197,9 +192,9 @@ lvagFields :: Lens' LayersVolumeAnnotationsGet' (Maybe Text)
 lvagFields
   = lens _lvagFields (\ s a -> s{_lvagFields = a})
 
--- | Data format for the response.
-lvagAlt :: Lens' LayersVolumeAnnotationsGet' Alt
-lvagAlt = lens _lvagAlt (\ s a -> s{_lvagAlt = a})
+instance GoogleAuth LayersVolumeAnnotationsGet' where
+        authKey = lvagKey . _Just
+        authToken = lvagOAuthToken . _Just
 
 instance GoogleRequest LayersVolumeAnnotationsGet'
          where
@@ -208,16 +203,16 @@ instance GoogleRequest LayersVolumeAnnotationsGet'
         request = requestWithRoute defReq booksURL
         requestWithRoute r u LayersVolumeAnnotationsGet'{..}
           = go _lvagQuotaUser (Just _lvagPrettyPrint)
-              _lvagUserIp
+              _lvagUserIP
               _lvagLocale
               _lvagKey
               _lvagAnnotationId
               _lvagVolumeId
               _lvagSource
-              _lvagOauthToken
+              _lvagOAuthToken
               _lvagLayerId
               _lvagFields
-              (Just _lvagAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy LayersVolumeAnnotationsGetResource)

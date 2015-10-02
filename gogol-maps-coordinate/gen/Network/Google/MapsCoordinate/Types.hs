@@ -154,9 +154,6 @@ module Network.Google.MapsCoordinate.Types
     , cKind
     , cValue
 
-    -- * Alt
-    , Alt (..)
-
     -- * EnumItemDef
     , EnumItemDef
     , enumItemDef

@@ -33,13 +33,12 @@ module Network.Google.Resource.Analytics.Management.Profiles.Delete
     , mpdQuotaUser
     , mpdPrettyPrint
     , mpdWebPropertyId
-    , mpdUserIp
+    , mpdUserIP
     , mpdProfileId
     , mpdAccountId
     , mpdKey
-    , mpdOauthToken
+    , mpdOAuthToken
     , mpdFields
-    , mpdAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -58,10 +57,10 @@ type ManagementProfilesDeleteResource =
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :> Delete '[JSON] ()
+                               QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a view (profile).
 --
@@ -70,13 +69,12 @@ data ManagementProfilesDelete' = ManagementProfilesDelete'
     { _mpdQuotaUser     :: !(Maybe Text)
     , _mpdPrettyPrint   :: !Bool
     , _mpdWebPropertyId :: !Text
-    , _mpdUserIp        :: !(Maybe Text)
+    , _mpdUserIP        :: !(Maybe Text)
     , _mpdProfileId     :: !Text
     , _mpdAccountId     :: !Text
-    , _mpdKey           :: !(Maybe Text)
-    , _mpdOauthToken    :: !(Maybe Text)
+    , _mpdKey           :: !(Maybe Key)
+    , _mpdOAuthToken    :: !(Maybe OAuthToken)
     , _mpdFields        :: !(Maybe Text)
-    , _mpdAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProfilesDelete'' with the minimum fields required to make a request.
@@ -89,7 +87,7 @@ data ManagementProfilesDelete' = ManagementProfilesDelete'
 --
 -- * 'mpdWebPropertyId'
 --
--- * 'mpdUserIp'
+-- * 'mpdUserIP'
 --
 -- * 'mpdProfileId'
 --
@@ -97,11 +95,9 @@ data ManagementProfilesDelete' = ManagementProfilesDelete'
 --
 -- * 'mpdKey'
 --
--- * 'mpdOauthToken'
+-- * 'mpdOAuthToken'
 --
 -- * 'mpdFields'
---
--- * 'mpdAlt'
 managementProfilesDelete'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
@@ -112,13 +108,12 @@ managementProfilesDelete' pMpdWebPropertyId_ pMpdProfileId_ pMpdAccountId_ =
     { _mpdQuotaUser = Nothing
     , _mpdPrettyPrint = False
     , _mpdWebPropertyId = pMpdWebPropertyId_
-    , _mpdUserIp = Nothing
+    , _mpdUserIP = Nothing
     , _mpdProfileId = pMpdProfileId_
     , _mpdAccountId = pMpdAccountId_
     , _mpdKey = Nothing
-    , _mpdOauthToken = Nothing
+    , _mpdOAuthToken = Nothing
     , _mpdFields = Nothing
-    , _mpdAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -142,9 +137,9 @@ mpdWebPropertyId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mpdUserIp :: Lens' ManagementProfilesDelete' (Maybe Text)
-mpdUserIp
-  = lens _mpdUserIp (\ s a -> s{_mpdUserIp = a})
+mpdUserIP :: Lens' ManagementProfilesDelete' (Maybe Text)
+mpdUserIP
+  = lens _mpdUserIP (\ s a -> s{_mpdUserIP = a})
 
 -- | ID of the view (profile) to be deleted.
 mpdProfileId :: Lens' ManagementProfilesDelete' Text
@@ -159,23 +154,23 @@ mpdAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mpdKey :: Lens' ManagementProfilesDelete' (Maybe Text)
+mpdKey :: Lens' ManagementProfilesDelete' (Maybe Key)
 mpdKey = lens _mpdKey (\ s a -> s{_mpdKey = a})
 
 -- | OAuth 2.0 token for the current user.
-mpdOauthToken :: Lens' ManagementProfilesDelete' (Maybe Text)
-mpdOauthToken
-  = lens _mpdOauthToken
-      (\ s a -> s{_mpdOauthToken = a})
+mpdOAuthToken :: Lens' ManagementProfilesDelete' (Maybe OAuthToken)
+mpdOAuthToken
+  = lens _mpdOAuthToken
+      (\ s a -> s{_mpdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 mpdFields :: Lens' ManagementProfilesDelete' (Maybe Text)
 mpdFields
   = lens _mpdFields (\ s a -> s{_mpdFields = a})
 
--- | Data format for the response.
-mpdAlt :: Lens' ManagementProfilesDelete' Alt
-mpdAlt = lens _mpdAlt (\ s a -> s{_mpdAlt = a})
+instance GoogleAuth ManagementProfilesDelete' where
+        authKey = mpdKey . _Just
+        authToken = mpdOAuthToken . _Just
 
 instance GoogleRequest ManagementProfilesDelete'
          where
@@ -184,13 +179,13 @@ instance GoogleRequest ManagementProfilesDelete'
         requestWithRoute r u ManagementProfilesDelete'{..}
           = go _mpdQuotaUser (Just _mpdPrettyPrint)
               _mpdWebPropertyId
-              _mpdUserIp
+              _mpdUserIP
               _mpdProfileId
               _mpdAccountId
               _mpdKey
-              _mpdOauthToken
+              _mpdOAuthToken
               _mpdFields
-              (Just _mpdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ManagementProfilesDeleteResource)

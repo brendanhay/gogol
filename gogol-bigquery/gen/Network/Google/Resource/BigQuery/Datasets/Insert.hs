@@ -32,12 +32,12 @@ module Network.Google.Resource.BigQuery.Datasets.Insert
     -- * Request Lenses
     , diQuotaUser
     , diPrettyPrint
-    , diUserIp
+    , diDataset
+    , diUserIP
     , diKey
     , diProjectId
-    , diOauthToken
+    , diOAuthToken
     , diFields
-    , diAlt
     ) where
 
 import           Network.Google.BigQuery.Types
@@ -52,10 +52,11 @@ type DatasetsInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] Dataset
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Dataset :> Post '[JSON] Dataset
 
 -- | Creates a new empty dataset.
 --
@@ -63,12 +64,12 @@ type DatasetsInsertResource =
 data DatasetsInsert' = DatasetsInsert'
     { _diQuotaUser   :: !(Maybe Text)
     , _diPrettyPrint :: !Bool
-    , _diUserIp      :: !(Maybe Text)
-    , _diKey         :: !(Maybe Text)
+    , _diDataset     :: !Dataset
+    , _diUserIP      :: !(Maybe Text)
+    , _diKey         :: !(Maybe Key)
     , _diProjectId   :: !Text
-    , _diOauthToken  :: !(Maybe Text)
+    , _diOAuthToken  :: !(Maybe OAuthToken)
     , _diFields      :: !(Maybe Text)
-    , _diAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetsInsert'' with the minimum fields required to make a request.
@@ -79,30 +80,31 @@ data DatasetsInsert' = DatasetsInsert'
 --
 -- * 'diPrettyPrint'
 --
--- * 'diUserIp'
+-- * 'diDataset'
+--
+-- * 'diUserIP'
 --
 -- * 'diKey'
 --
 -- * 'diProjectId'
 --
--- * 'diOauthToken'
+-- * 'diOAuthToken'
 --
 -- * 'diFields'
---
--- * 'diAlt'
 datasetsInsert'
-    :: Text -- ^ 'projectId'
+    :: Dataset -- ^ 'Dataset'
+    -> Text -- ^ 'projectId'
     -> DatasetsInsert'
-datasetsInsert' pDiProjectId_ =
+datasetsInsert' pDiDataset_ pDiProjectId_ =
     DatasetsInsert'
     { _diQuotaUser = Nothing
     , _diPrettyPrint = True
-    , _diUserIp = Nothing
+    , _diDataset = pDiDataset_
+    , _diUserIP = Nothing
     , _diKey = Nothing
     , _diProjectId = pDiProjectId_
-    , _diOauthToken = Nothing
+    , _diOAuthToken = Nothing
     , _diFields = Nothing
-    , _diAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -118,15 +120,20 @@ diPrettyPrint
   = lens _diPrettyPrint
       (\ s a -> s{_diPrettyPrint = a})
 
+-- | Multipart request metadata.
+diDataset :: Lens' DatasetsInsert' Dataset
+diDataset
+  = lens _diDataset (\ s a -> s{_diDataset = a})
+
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-diUserIp :: Lens' DatasetsInsert' (Maybe Text)
-diUserIp = lens _diUserIp (\ s a -> s{_diUserIp = a})
+diUserIP :: Lens' DatasetsInsert' (Maybe Text)
+diUserIP = lens _diUserIP (\ s a -> s{_diUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-diKey :: Lens' DatasetsInsert' (Maybe Text)
+diKey :: Lens' DatasetsInsert' (Maybe Key)
 diKey = lens _diKey (\ s a -> s{_diKey = a})
 
 -- | Project ID of the new dataset
@@ -135,28 +142,29 @@ diProjectId
   = lens _diProjectId (\ s a -> s{_diProjectId = a})
 
 -- | OAuth 2.0 token for the current user.
-diOauthToken :: Lens' DatasetsInsert' (Maybe Text)
-diOauthToken
-  = lens _diOauthToken (\ s a -> s{_diOauthToken = a})
+diOAuthToken :: Lens' DatasetsInsert' (Maybe OAuthToken)
+diOAuthToken
+  = lens _diOAuthToken (\ s a -> s{_diOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 diFields :: Lens' DatasetsInsert' (Maybe Text)
 diFields = lens _diFields (\ s a -> s{_diFields = a})
 
--- | Data format for the response.
-diAlt :: Lens' DatasetsInsert' Alt
-diAlt = lens _diAlt (\ s a -> s{_diAlt = a})
+instance GoogleAuth DatasetsInsert' where
+        authKey = diKey . _Just
+        authToken = diOAuthToken . _Just
 
 instance GoogleRequest DatasetsInsert' where
         type Rs DatasetsInsert' = Dataset
         request = requestWithRoute defReq bigQueryURL
         requestWithRoute r u DatasetsInsert'{..}
-          = go _diQuotaUser (Just _diPrettyPrint) _diUserIp
+          = go _diQuotaUser (Just _diPrettyPrint) _diUserIP
               _diKey
               _diProjectId
-              _diOauthToken
+              _diOAuthToken
               _diFields
-              (Just _diAlt)
+              (Just AltJSON)
+              _diDataset
           where go
                   = clientWithRoute
                       (Proxy :: Proxy DatasetsInsertResource)

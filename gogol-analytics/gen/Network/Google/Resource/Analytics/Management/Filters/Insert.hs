@@ -32,12 +32,12 @@ module Network.Google.Resource.Analytics.Management.Filters.Insert
     -- * Request Lenses
     , mfiQuotaUser
     , mfiPrettyPrint
-    , mfiUserIp
+    , mfiUserIP
     , mfiAccountId
     , mfiKey
-    , mfiOauthToken
+    , mfiFilter
+    , mfiOAuthToken
     , mfiFields
-    , mfiAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -53,10 +53,11 @@ type ManagementFiltersInsertResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Post '[JSON] Filter
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Filter :> Post '[JSON] Filter
 
 -- | Create a new filter.
 --
@@ -64,12 +65,12 @@ type ManagementFiltersInsertResource =
 data ManagementFiltersInsert' = ManagementFiltersInsert'
     { _mfiQuotaUser   :: !(Maybe Text)
     , _mfiPrettyPrint :: !Bool
-    , _mfiUserIp      :: !(Maybe Text)
+    , _mfiUserIP      :: !(Maybe Text)
     , _mfiAccountId   :: !Text
-    , _mfiKey         :: !(Maybe Text)
-    , _mfiOauthToken  :: !(Maybe Text)
+    , _mfiKey         :: !(Maybe Key)
+    , _mfiFilter      :: !Filter
+    , _mfiOAuthToken  :: !(Maybe OAuthToken)
     , _mfiFields      :: !(Maybe Text)
-    , _mfiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementFiltersInsert'' with the minimum fields required to make a request.
@@ -80,30 +81,31 @@ data ManagementFiltersInsert' = ManagementFiltersInsert'
 --
 -- * 'mfiPrettyPrint'
 --
--- * 'mfiUserIp'
+-- * 'mfiUserIP'
 --
 -- * 'mfiAccountId'
 --
 -- * 'mfiKey'
 --
--- * 'mfiOauthToken'
+-- * 'mfiFilter'
+--
+-- * 'mfiOAuthToken'
 --
 -- * 'mfiFields'
---
--- * 'mfiAlt'
 managementFiltersInsert'
     :: Text -- ^ 'accountId'
+    -> Filter -- ^ 'Filter'
     -> ManagementFiltersInsert'
-managementFiltersInsert' pMfiAccountId_ =
+managementFiltersInsert' pMfiAccountId_ pMfiFilter_ =
     ManagementFiltersInsert'
     { _mfiQuotaUser = Nothing
     , _mfiPrettyPrint = False
-    , _mfiUserIp = Nothing
+    , _mfiUserIP = Nothing
     , _mfiAccountId = pMfiAccountId_
     , _mfiKey = Nothing
-    , _mfiOauthToken = Nothing
+    , _mfiFilter = pMfiFilter_
+    , _mfiOAuthToken = Nothing
     , _mfiFields = Nothing
-    , _mfiAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -121,9 +123,9 @@ mfiPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mfiUserIp :: Lens' ManagementFiltersInsert' (Maybe Text)
-mfiUserIp
-  = lens _mfiUserIp (\ s a -> s{_mfiUserIp = a})
+mfiUserIP :: Lens' ManagementFiltersInsert' (Maybe Text)
+mfiUserIP
+  = lens _mfiUserIP (\ s a -> s{_mfiUserIP = a})
 
 -- | Account ID to create filter for.
 mfiAccountId :: Lens' ManagementFiltersInsert' Text
@@ -133,34 +135,40 @@ mfiAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mfiKey :: Lens' ManagementFiltersInsert' (Maybe Text)
+mfiKey :: Lens' ManagementFiltersInsert' (Maybe Key)
 mfiKey = lens _mfiKey (\ s a -> s{_mfiKey = a})
 
+-- | Multipart request metadata.
+mfiFilter :: Lens' ManagementFiltersInsert' Filter
+mfiFilter
+  = lens _mfiFilter (\ s a -> s{_mfiFilter = a})
+
 -- | OAuth 2.0 token for the current user.
-mfiOauthToken :: Lens' ManagementFiltersInsert' (Maybe Text)
-mfiOauthToken
-  = lens _mfiOauthToken
-      (\ s a -> s{_mfiOauthToken = a})
+mfiOAuthToken :: Lens' ManagementFiltersInsert' (Maybe OAuthToken)
+mfiOAuthToken
+  = lens _mfiOAuthToken
+      (\ s a -> s{_mfiOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 mfiFields :: Lens' ManagementFiltersInsert' (Maybe Text)
 mfiFields
   = lens _mfiFields (\ s a -> s{_mfiFields = a})
 
--- | Data format for the response.
-mfiAlt :: Lens' ManagementFiltersInsert' Alt
-mfiAlt = lens _mfiAlt (\ s a -> s{_mfiAlt = a})
+instance GoogleAuth ManagementFiltersInsert' where
+        authKey = mfiKey . _Just
+        authToken = mfiOAuthToken . _Just
 
 instance GoogleRequest ManagementFiltersInsert' where
         type Rs ManagementFiltersInsert' = Filter
         request = requestWithRoute defReq analyticsURL
         requestWithRoute r u ManagementFiltersInsert'{..}
-          = go _mfiQuotaUser (Just _mfiPrettyPrint) _mfiUserIp
+          = go _mfiQuotaUser (Just _mfiPrettyPrint) _mfiUserIP
               _mfiAccountId
               _mfiKey
-              _mfiOauthToken
+              _mfiOAuthToken
               _mfiFields
-              (Just _mfiAlt)
+              (Just AltJSON)
+              _mfiFilter
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ManagementFiltersInsertResource)

@@ -33,13 +33,12 @@ module Network.Google.Resource.Games.Rooms.Decline
     -- * Request Lenses
     , rdQuotaUser
     , rdPrettyPrint
-    , rdUserIp
+    , rdUserIP
     , rdKey
     , rdRoomId
     , rdLanguage
-    , rdOauthToken
+    , rdOAuthToken
     , rdFields
-    , rdAlt
     ) where
 
 import           Network.Google.Games.Types
@@ -54,11 +53,11 @@ type RoomsDeclineResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "language" Text :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Post '[JSON] Room
+                         QueryParam "alt" AltJSON :> Post '[JSON] Room
 
 -- | Decline an invitation to join a room. For internal use by the Games SDK
 -- only. Calling this method directly is unsupported.
@@ -67,13 +66,12 @@ type RoomsDeclineResource =
 data RoomsDecline' = RoomsDecline'
     { _rdQuotaUser   :: !(Maybe Text)
     , _rdPrettyPrint :: !Bool
-    , _rdUserIp      :: !(Maybe Text)
-    , _rdKey         :: !(Maybe Text)
+    , _rdUserIP      :: !(Maybe Text)
+    , _rdKey         :: !(Maybe Key)
     , _rdRoomId      :: !Text
     , _rdLanguage    :: !(Maybe Text)
-    , _rdOauthToken  :: !(Maybe Text)
+    , _rdOAuthToken  :: !(Maybe OAuthToken)
     , _rdFields      :: !(Maybe Text)
-    , _rdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomsDecline'' with the minimum fields required to make a request.
@@ -84,7 +82,7 @@ data RoomsDecline' = RoomsDecline'
 --
 -- * 'rdPrettyPrint'
 --
--- * 'rdUserIp'
+-- * 'rdUserIP'
 --
 -- * 'rdKey'
 --
@@ -92,11 +90,9 @@ data RoomsDecline' = RoomsDecline'
 --
 -- * 'rdLanguage'
 --
--- * 'rdOauthToken'
+-- * 'rdOAuthToken'
 --
 -- * 'rdFields'
---
--- * 'rdAlt'
 roomsDecline'
     :: Text -- ^ 'roomId'
     -> RoomsDecline'
@@ -104,13 +100,12 @@ roomsDecline' pRdRoomId_ =
     RoomsDecline'
     { _rdQuotaUser = Nothing
     , _rdPrettyPrint = True
-    , _rdUserIp = Nothing
+    , _rdUserIP = Nothing
     , _rdKey = Nothing
     , _rdRoomId = pRdRoomId_
     , _rdLanguage = Nothing
-    , _rdOauthToken = Nothing
+    , _rdOAuthToken = Nothing
     , _rdFields = Nothing
-    , _rdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -128,13 +123,13 @@ rdPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rdUserIp :: Lens' RoomsDecline' (Maybe Text)
-rdUserIp = lens _rdUserIp (\ s a -> s{_rdUserIp = a})
+rdUserIP :: Lens' RoomsDecline' (Maybe Text)
+rdUserIP = lens _rdUserIP (\ s a -> s{_rdUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rdKey :: Lens' RoomsDecline' (Maybe Text)
+rdKey :: Lens' RoomsDecline' (Maybe Key)
 rdKey = lens _rdKey (\ s a -> s{_rdKey = a})
 
 -- | The ID of the room.
@@ -147,29 +142,29 @@ rdLanguage
   = lens _rdLanguage (\ s a -> s{_rdLanguage = a})
 
 -- | OAuth 2.0 token for the current user.
-rdOauthToken :: Lens' RoomsDecline' (Maybe Text)
-rdOauthToken
-  = lens _rdOauthToken (\ s a -> s{_rdOauthToken = a})
+rdOAuthToken :: Lens' RoomsDecline' (Maybe OAuthToken)
+rdOAuthToken
+  = lens _rdOAuthToken (\ s a -> s{_rdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 rdFields :: Lens' RoomsDecline' (Maybe Text)
 rdFields = lens _rdFields (\ s a -> s{_rdFields = a})
 
--- | Data format for the response.
-rdAlt :: Lens' RoomsDecline' Alt
-rdAlt = lens _rdAlt (\ s a -> s{_rdAlt = a})
+instance GoogleAuth RoomsDecline' where
+        authKey = rdKey . _Just
+        authToken = rdOAuthToken . _Just
 
 instance GoogleRequest RoomsDecline' where
         type Rs RoomsDecline' = Room
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u RoomsDecline'{..}
-          = go _rdQuotaUser (Just _rdPrettyPrint) _rdUserIp
+          = go _rdQuotaUser (Just _rdPrettyPrint) _rdUserIP
               _rdKey
               _rdRoomId
               _rdLanguage
-              _rdOauthToken
+              _rdOAuthToken
               _rdFields
-              (Just _rdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy RoomsDeclineResource)

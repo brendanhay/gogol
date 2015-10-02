@@ -32,7 +32,7 @@ module Network.Google.Resource.DFAReporting.AdvertiserGroups.List
     -- * Request Lenses
     , aglQuotaUser
     , aglPrettyPrint
-    , aglUserIp
+    , aglUserIP
     , aglSearchString
     , aglIds
     , aglProfileId
@@ -40,10 +40,9 @@ module Network.Google.Resource.DFAReporting.AdvertiserGroups.List
     , aglKey
     , aglPageToken
     , aglSortField
-    , aglOauthToken
+    , aglOAuthToken
     , aglMaxResults
     , aglFields
-    , aglAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -63,15 +62,15 @@ type AdvertiserGroupsListResource =
                      QueryParam "sortOrder"
                        DfareportingAdvertiserGroupsListSortOrder
                        :>
-                       QueryParam "key" Text :>
+                       QueryParam "key" Key :>
                          QueryParam "pageToken" Text :>
                            QueryParam "sortField"
                              DfareportingAdvertiserGroupsListSortField
                              :>
-                             QueryParam "oauth_token" Text :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "maxResults" Int32 :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "alt" Alt :>
+                                   QueryParam "alt" AltJSON :>
                                      Get '[JSON] AdvertiserGroupsListResponse
 
 -- | Retrieves a list of advertiser groups, possibly filtered.
@@ -80,18 +79,17 @@ type AdvertiserGroupsListResource =
 data AdvertiserGroupsList' = AdvertiserGroupsList'
     { _aglQuotaUser    :: !(Maybe Text)
     , _aglPrettyPrint  :: !Bool
-    , _aglUserIp       :: !(Maybe Text)
+    , _aglUserIP       :: !(Maybe Text)
     , _aglSearchString :: !(Maybe Text)
     , _aglIds          :: !(Maybe Int64)
     , _aglProfileId    :: !Int64
     , _aglSortOrder    :: !(Maybe DfareportingAdvertiserGroupsListSortOrder)
-    , _aglKey          :: !(Maybe Text)
+    , _aglKey          :: !(Maybe Key)
     , _aglPageToken    :: !(Maybe Text)
     , _aglSortField    :: !(Maybe DfareportingAdvertiserGroupsListSortField)
-    , _aglOauthToken   :: !(Maybe Text)
+    , _aglOAuthToken   :: !(Maybe OAuthToken)
     , _aglMaxResults   :: !(Maybe Int32)
     , _aglFields       :: !(Maybe Text)
-    , _aglAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertiserGroupsList'' with the minimum fields required to make a request.
@@ -102,7 +100,7 @@ data AdvertiserGroupsList' = AdvertiserGroupsList'
 --
 -- * 'aglPrettyPrint'
 --
--- * 'aglUserIp'
+-- * 'aglUserIP'
 --
 -- * 'aglSearchString'
 --
@@ -118,13 +116,11 @@ data AdvertiserGroupsList' = AdvertiserGroupsList'
 --
 -- * 'aglSortField'
 --
--- * 'aglOauthToken'
+-- * 'aglOAuthToken'
 --
 -- * 'aglMaxResults'
 --
 -- * 'aglFields'
---
--- * 'aglAlt'
 advertiserGroupsList'
     :: Int64 -- ^ 'profileId'
     -> AdvertiserGroupsList'
@@ -132,7 +128,7 @@ advertiserGroupsList' pAglProfileId_ =
     AdvertiserGroupsList'
     { _aglQuotaUser = Nothing
     , _aglPrettyPrint = True
-    , _aglUserIp = Nothing
+    , _aglUserIP = Nothing
     , _aglSearchString = Nothing
     , _aglIds = Nothing
     , _aglProfileId = pAglProfileId_
@@ -140,10 +136,9 @@ advertiserGroupsList' pAglProfileId_ =
     , _aglKey = Nothing
     , _aglPageToken = Nothing
     , _aglSortField = Nothing
-    , _aglOauthToken = Nothing
+    , _aglOAuthToken = Nothing
     , _aglMaxResults = Nothing
     , _aglFields = Nothing
-    , _aglAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -161,9 +156,9 @@ aglPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-aglUserIp :: Lens' AdvertiserGroupsList' (Maybe Text)
-aglUserIp
-  = lens _aglUserIp (\ s a -> s{_aglUserIp = a})
+aglUserIP :: Lens' AdvertiserGroupsList' (Maybe Text)
+aglUserIP
+  = lens _aglUserIP (\ s a -> s{_aglUserIP = a})
 
 -- | Allows searching for objects by name or ID. Wildcards (*) are allowed.
 -- For example, \"advertiser*2015\" will return objects with names like
@@ -195,7 +190,7 @@ aglSortOrder
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aglKey :: Lens' AdvertiserGroupsList' (Maybe Text)
+aglKey :: Lens' AdvertiserGroupsList' (Maybe Key)
 aglKey = lens _aglKey (\ s a -> s{_aglKey = a})
 
 -- | Value of the nextPageToken from the previous result page.
@@ -209,10 +204,10 @@ aglSortField
   = lens _aglSortField (\ s a -> s{_aglSortField = a})
 
 -- | OAuth 2.0 token for the current user.
-aglOauthToken :: Lens' AdvertiserGroupsList' (Maybe Text)
-aglOauthToken
-  = lens _aglOauthToken
-      (\ s a -> s{_aglOauthToken = a})
+aglOAuthToken :: Lens' AdvertiserGroupsList' (Maybe OAuthToken)
+aglOAuthToken
+  = lens _aglOAuthToken
+      (\ s a -> s{_aglOAuthToken = a})
 
 -- | Maximum number of results to return.
 aglMaxResults :: Lens' AdvertiserGroupsList' (Maybe Int32)
@@ -225,16 +220,16 @@ aglFields :: Lens' AdvertiserGroupsList' (Maybe Text)
 aglFields
   = lens _aglFields (\ s a -> s{_aglFields = a})
 
--- | Data format for the response.
-aglAlt :: Lens' AdvertiserGroupsList' Alt
-aglAlt = lens _aglAlt (\ s a -> s{_aglAlt = a})
+instance GoogleAuth AdvertiserGroupsList' where
+        authKey = aglKey . _Just
+        authToken = aglOAuthToken . _Just
 
 instance GoogleRequest AdvertiserGroupsList' where
         type Rs AdvertiserGroupsList' =
              AdvertiserGroupsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AdvertiserGroupsList'{..}
-          = go _aglQuotaUser (Just _aglPrettyPrint) _aglUserIp
+          = go _aglQuotaUser (Just _aglPrettyPrint) _aglUserIP
               _aglSearchString
               _aglIds
               _aglProfileId
@@ -242,10 +237,10 @@ instance GoogleRequest AdvertiserGroupsList' where
               _aglKey
               _aglPageToken
               _aglSortField
-              _aglOauthToken
+              _aglOAuthToken
               _aglMaxResults
               _aglFields
-              (Just _aglAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AdvertiserGroupsListResource)

@@ -32,12 +32,11 @@ module Network.Google.Resource.Drive.Changes.Get
     -- * Request Lenses
     , chaQuotaUser
     , chaPrettyPrint
-    , chaUserIp
+    , chaUserIP
     , chaChangeId
     , chaKey
-    , chaOauthToken
+    , chaOAuthToken
     , chaFields
-    , chaAlt
     ) where
 
 import           Network.Google.Drive.Types
@@ -51,10 +50,10 @@ type ChangesGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Get '[JSON] Change
+                     QueryParam "alt" AltJSON :> Get '[JSON] Change
 
 -- | Gets a specific change.
 --
@@ -62,12 +61,11 @@ type ChangesGetResource =
 data ChangesGet' = ChangesGet'
     { _chaQuotaUser   :: !(Maybe Text)
     , _chaPrettyPrint :: !Bool
-    , _chaUserIp      :: !(Maybe Text)
+    , _chaUserIP      :: !(Maybe Text)
     , _chaChangeId    :: !Text
-    , _chaKey         :: !(Maybe Text)
-    , _chaOauthToken  :: !(Maybe Text)
+    , _chaKey         :: !(Maybe Key)
+    , _chaOAuthToken  :: !(Maybe OAuthToken)
     , _chaFields      :: !(Maybe Text)
-    , _chaAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChangesGet'' with the minimum fields required to make a request.
@@ -78,17 +76,15 @@ data ChangesGet' = ChangesGet'
 --
 -- * 'chaPrettyPrint'
 --
--- * 'chaUserIp'
+-- * 'chaUserIP'
 --
 -- * 'chaChangeId'
 --
 -- * 'chaKey'
 --
--- * 'chaOauthToken'
+-- * 'chaOAuthToken'
 --
 -- * 'chaFields'
---
--- * 'chaAlt'
 changesGet'
     :: Text -- ^ 'changeId'
     -> ChangesGet'
@@ -96,12 +92,11 @@ changesGet' pChaChangeId_ =
     ChangesGet'
     { _chaQuotaUser = Nothing
     , _chaPrettyPrint = True
-    , _chaUserIp = Nothing
+    , _chaUserIP = Nothing
     , _chaChangeId = pChaChangeId_
     , _chaKey = Nothing
-    , _chaOauthToken = Nothing
+    , _chaOAuthToken = Nothing
     , _chaFields = Nothing
-    , _chaAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -119,9 +114,9 @@ chaPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-chaUserIp :: Lens' ChangesGet' (Maybe Text)
-chaUserIp
-  = lens _chaUserIp (\ s a -> s{_chaUserIp = a})
+chaUserIP :: Lens' ChangesGet' (Maybe Text)
+chaUserIP
+  = lens _chaUserIP (\ s a -> s{_chaUserIP = a})
 
 -- | The ID of the change.
 chaChangeId :: Lens' ChangesGet' Text
@@ -131,34 +126,34 @@ chaChangeId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-chaKey :: Lens' ChangesGet' (Maybe Text)
+chaKey :: Lens' ChangesGet' (Maybe Key)
 chaKey = lens _chaKey (\ s a -> s{_chaKey = a})
 
 -- | OAuth 2.0 token for the current user.
-chaOauthToken :: Lens' ChangesGet' (Maybe Text)
-chaOauthToken
-  = lens _chaOauthToken
-      (\ s a -> s{_chaOauthToken = a})
+chaOAuthToken :: Lens' ChangesGet' (Maybe OAuthToken)
+chaOAuthToken
+  = lens _chaOAuthToken
+      (\ s a -> s{_chaOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 chaFields :: Lens' ChangesGet' (Maybe Text)
 chaFields
   = lens _chaFields (\ s a -> s{_chaFields = a})
 
--- | Data format for the response.
-chaAlt :: Lens' ChangesGet' Alt
-chaAlt = lens _chaAlt (\ s a -> s{_chaAlt = a})
+instance GoogleAuth ChangesGet' where
+        authKey = chaKey . _Just
+        authToken = chaOAuthToken . _Just
 
 instance GoogleRequest ChangesGet' where
         type Rs ChangesGet' = Change
         request = requestWithRoute defReq driveURL
         requestWithRoute r u ChangesGet'{..}
-          = go _chaQuotaUser (Just _chaPrettyPrint) _chaUserIp
+          = go _chaQuotaUser (Just _chaPrettyPrint) _chaUserIP
               _chaChangeId
               _chaKey
-              _chaOauthToken
+              _chaOAuthToken
               _chaFields
-              (Just _chaAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy ChangesGetResource)
                       r

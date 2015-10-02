@@ -32,12 +32,12 @@ module Network.Google.Resource.Gmail.Users.Labels.Create
     -- * Request Lenses
     , ulcQuotaUser
     , ulcPrettyPrint
-    , ulcUserIp
+    , ulcUserIP
     , ulcUserId
     , ulcKey
-    , ulcOauthToken
+    , ulcOAuthToken
+    , ulcLabel
     , ulcFields
-    , ulcAlt
     ) where
 
 import           Network.Google.Gmail.Types
@@ -51,10 +51,11 @@ type UsersLabelsCreateResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Post '[JSON] Label
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Label :> Post '[JSON] Label
 
 -- | Creates a new label.
 --
@@ -62,12 +63,12 @@ type UsersLabelsCreateResource =
 data UsersLabelsCreate' = UsersLabelsCreate'
     { _ulcQuotaUser   :: !(Maybe Text)
     , _ulcPrettyPrint :: !Bool
-    , _ulcUserIp      :: !(Maybe Text)
+    , _ulcUserIP      :: !(Maybe Text)
     , _ulcUserId      :: !Text
-    , _ulcKey         :: !(Maybe Text)
-    , _ulcOauthToken  :: !(Maybe Text)
+    , _ulcKey         :: !(Maybe Key)
+    , _ulcOAuthToken  :: !(Maybe OAuthToken)
+    , _ulcLabel       :: !Label
     , _ulcFields      :: !(Maybe Text)
-    , _ulcAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersLabelsCreate'' with the minimum fields required to make a request.
@@ -78,30 +79,31 @@ data UsersLabelsCreate' = UsersLabelsCreate'
 --
 -- * 'ulcPrettyPrint'
 --
--- * 'ulcUserIp'
+-- * 'ulcUserIP'
 --
 -- * 'ulcUserId'
 --
 -- * 'ulcKey'
 --
--- * 'ulcOauthToken'
+-- * 'ulcOAuthToken'
+--
+-- * 'ulcLabel'
 --
 -- * 'ulcFields'
---
--- * 'ulcAlt'
 usersLabelsCreate'
-    :: Text
+    :: Text -- ^ 'Label'
+    -> Label
     -> UsersLabelsCreate'
-usersLabelsCreate' pUlcUserId_ =
+usersLabelsCreate' pUlcUserId_ pUlcLabel_ =
     UsersLabelsCreate'
     { _ulcQuotaUser = Nothing
     , _ulcPrettyPrint = True
-    , _ulcUserIp = Nothing
+    , _ulcUserIP = Nothing
     , _ulcUserId = pUlcUserId_
     , _ulcKey = Nothing
-    , _ulcOauthToken = Nothing
+    , _ulcOAuthToken = Nothing
+    , _ulcLabel = pUlcLabel_
     , _ulcFields = Nothing
-    , _ulcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -119,9 +121,9 @@ ulcPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ulcUserIp :: Lens' UsersLabelsCreate' (Maybe Text)
-ulcUserIp
-  = lens _ulcUserIp (\ s a -> s{_ulcUserIp = a})
+ulcUserIP :: Lens' UsersLabelsCreate' (Maybe Text)
+ulcUserIP
+  = lens _ulcUserIP (\ s a -> s{_ulcUserIP = a})
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
@@ -132,34 +134,39 @@ ulcUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ulcKey :: Lens' UsersLabelsCreate' (Maybe Text)
+ulcKey :: Lens' UsersLabelsCreate' (Maybe Key)
 ulcKey = lens _ulcKey (\ s a -> s{_ulcKey = a})
 
 -- | OAuth 2.0 token for the current user.
-ulcOauthToken :: Lens' UsersLabelsCreate' (Maybe Text)
-ulcOauthToken
-  = lens _ulcOauthToken
-      (\ s a -> s{_ulcOauthToken = a})
+ulcOAuthToken :: Lens' UsersLabelsCreate' (Maybe OAuthToken)
+ulcOAuthToken
+  = lens _ulcOAuthToken
+      (\ s a -> s{_ulcOAuthToken = a})
+
+-- | Multipart request metadata.
+ulcLabel :: Lens' UsersLabelsCreate' Label
+ulcLabel = lens _ulcLabel (\ s a -> s{_ulcLabel = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ulcFields :: Lens' UsersLabelsCreate' (Maybe Text)
 ulcFields
   = lens _ulcFields (\ s a -> s{_ulcFields = a})
 
--- | Data format for the response.
-ulcAlt :: Lens' UsersLabelsCreate' Alt
-ulcAlt = lens _ulcAlt (\ s a -> s{_ulcAlt = a})
+instance GoogleAuth UsersLabelsCreate' where
+        authKey = ulcKey . _Just
+        authToken = ulcOAuthToken . _Just
 
 instance GoogleRequest UsersLabelsCreate' where
         type Rs UsersLabelsCreate' = Label
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersLabelsCreate'{..}
-          = go _ulcQuotaUser (Just _ulcPrettyPrint) _ulcUserIp
+          = go _ulcQuotaUser (Just _ulcPrettyPrint) _ulcUserIP
               _ulcUserId
               _ulcKey
-              _ulcOauthToken
+              _ulcOAuthToken
               _ulcFields
-              (Just _ulcAlt)
+              (Just AltJSON)
+              _ulcLabel
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersLabelsCreateResource)

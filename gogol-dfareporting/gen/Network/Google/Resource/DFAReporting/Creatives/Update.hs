@@ -32,12 +32,12 @@ module Network.Google.Resource.DFAReporting.Creatives.Update
     -- * Request Lenses
     , cuuQuotaUser
     , cuuPrettyPrint
-    , cuuUserIp
+    , cuuUserIP
+    , cuuCreative
     , cuuProfileId
     , cuuKey
-    , cuuOauthToken
+    , cuuOAuthToken
     , cuuFields
-    , cuuAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,10 +52,11 @@ type CreativesUpdateResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Put '[JSON] Creative
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Creative :> Put '[JSON] Creative
 
 -- | Updates an existing creative.
 --
@@ -63,12 +64,12 @@ type CreativesUpdateResource =
 data CreativesUpdate' = CreativesUpdate'
     { _cuuQuotaUser   :: !(Maybe Text)
     , _cuuPrettyPrint :: !Bool
-    , _cuuUserIp      :: !(Maybe Text)
+    , _cuuUserIP      :: !(Maybe Text)
+    , _cuuCreative    :: !Creative
     , _cuuProfileId   :: !Int64
-    , _cuuKey         :: !(Maybe Text)
-    , _cuuOauthToken  :: !(Maybe Text)
+    , _cuuKey         :: !(Maybe Key)
+    , _cuuOAuthToken  :: !(Maybe OAuthToken)
     , _cuuFields      :: !(Maybe Text)
-    , _cuuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativesUpdate'' with the minimum fields required to make a request.
@@ -79,30 +80,31 @@ data CreativesUpdate' = CreativesUpdate'
 --
 -- * 'cuuPrettyPrint'
 --
--- * 'cuuUserIp'
+-- * 'cuuUserIP'
+--
+-- * 'cuuCreative'
 --
 -- * 'cuuProfileId'
 --
 -- * 'cuuKey'
 --
--- * 'cuuOauthToken'
+-- * 'cuuOAuthToken'
 --
 -- * 'cuuFields'
---
--- * 'cuuAlt'
 creativesUpdate'
-    :: Int64 -- ^ 'profileId'
+    :: Creative -- ^ 'Creative'
+    -> Int64 -- ^ 'profileId'
     -> CreativesUpdate'
-creativesUpdate' pCuuProfileId_ =
+creativesUpdate' pCuuCreative_ pCuuProfileId_ =
     CreativesUpdate'
     { _cuuQuotaUser = Nothing
     , _cuuPrettyPrint = True
-    , _cuuUserIp = Nothing
+    , _cuuUserIP = Nothing
+    , _cuuCreative = pCuuCreative_
     , _cuuProfileId = pCuuProfileId_
     , _cuuKey = Nothing
-    , _cuuOauthToken = Nothing
+    , _cuuOAuthToken = Nothing
     , _cuuFields = Nothing
-    , _cuuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,9 +122,14 @@ cuuPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cuuUserIp :: Lens' CreativesUpdate' (Maybe Text)
-cuuUserIp
-  = lens _cuuUserIp (\ s a -> s{_cuuUserIp = a})
+cuuUserIP :: Lens' CreativesUpdate' (Maybe Text)
+cuuUserIP
+  = lens _cuuUserIP (\ s a -> s{_cuuUserIP = a})
+
+-- | Multipart request metadata.
+cuuCreative :: Lens' CreativesUpdate' Creative
+cuuCreative
+  = lens _cuuCreative (\ s a -> s{_cuuCreative = a})
 
 -- | User profile ID associated with this request.
 cuuProfileId :: Lens' CreativesUpdate' Int64
@@ -132,34 +139,35 @@ cuuProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cuuKey :: Lens' CreativesUpdate' (Maybe Text)
+cuuKey :: Lens' CreativesUpdate' (Maybe Key)
 cuuKey = lens _cuuKey (\ s a -> s{_cuuKey = a})
 
 -- | OAuth 2.0 token for the current user.
-cuuOauthToken :: Lens' CreativesUpdate' (Maybe Text)
-cuuOauthToken
-  = lens _cuuOauthToken
-      (\ s a -> s{_cuuOauthToken = a})
+cuuOAuthToken :: Lens' CreativesUpdate' (Maybe OAuthToken)
+cuuOAuthToken
+  = lens _cuuOAuthToken
+      (\ s a -> s{_cuuOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cuuFields :: Lens' CreativesUpdate' (Maybe Text)
 cuuFields
   = lens _cuuFields (\ s a -> s{_cuuFields = a})
 
--- | Data format for the response.
-cuuAlt :: Lens' CreativesUpdate' Alt
-cuuAlt = lens _cuuAlt (\ s a -> s{_cuuAlt = a})
+instance GoogleAuth CreativesUpdate' where
+        authKey = cuuKey . _Just
+        authToken = cuuOAuthToken . _Just
 
 instance GoogleRequest CreativesUpdate' where
         type Rs CreativesUpdate' = Creative
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativesUpdate'{..}
-          = go _cuuQuotaUser (Just _cuuPrettyPrint) _cuuUserIp
+          = go _cuuQuotaUser (Just _cuuPrettyPrint) _cuuUserIP
               _cuuProfileId
               _cuuKey
-              _cuuOauthToken
+              _cuuOAuthToken
               _cuuFields
-              (Just _cuuAlt)
+              (Just AltJSON)
+              _cuuCreative
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CreativesUpdateResource)

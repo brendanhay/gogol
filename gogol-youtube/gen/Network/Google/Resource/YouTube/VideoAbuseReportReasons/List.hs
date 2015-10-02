@@ -34,12 +34,11 @@ module Network.Google.Resource.YouTube.VideoAbuseReportReasons.List
     , varrlQuotaUser
     , varrlPart
     , varrlPrettyPrint
-    , varrlUserIp
+    , varrlUserIP
     , varrlHl
     , varrlKey
-    , varrlOauthToken
+    , varrlOAuthToken
     , varrlFields
-    , varrlAlt
     ) where
 
 import           Network.Google.Prelude
@@ -54,10 +53,10 @@ type VideoAbuseReportReasonsListResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "hl" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :>
+                       QueryParam "alt" AltJSON :>
                          Get '[JSON] VideoAbuseReportReasonListResponse
 
 -- | Returns a list of abuse reasons that can be used for reporting abusive
@@ -68,12 +67,11 @@ data VideoAbuseReportReasonsList' = VideoAbuseReportReasonsList'
     { _varrlQuotaUser   :: !(Maybe Text)
     , _varrlPart        :: !Text
     , _varrlPrettyPrint :: !Bool
-    , _varrlUserIp      :: !(Maybe Text)
+    , _varrlUserIP      :: !(Maybe Text)
     , _varrlHl          :: !Text
-    , _varrlKey         :: !(Maybe Text)
-    , _varrlOauthToken  :: !(Maybe Text)
+    , _varrlKey         :: !(Maybe Key)
+    , _varrlOAuthToken  :: !(Maybe OAuthToken)
     , _varrlFields      :: !(Maybe Text)
-    , _varrlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideoAbuseReportReasonsList'' with the minimum fields required to make a request.
@@ -86,17 +84,15 @@ data VideoAbuseReportReasonsList' = VideoAbuseReportReasonsList'
 --
 -- * 'varrlPrettyPrint'
 --
--- * 'varrlUserIp'
+-- * 'varrlUserIP'
 --
 -- * 'varrlHl'
 --
 -- * 'varrlKey'
 --
--- * 'varrlOauthToken'
+-- * 'varrlOAuthToken'
 --
 -- * 'varrlFields'
---
--- * 'varrlAlt'
 videoAbuseReportReasonsList'
     :: Text -- ^ 'part'
     -> VideoAbuseReportReasonsList'
@@ -105,12 +101,11 @@ videoAbuseReportReasonsList' pVarrlPart_ =
     { _varrlQuotaUser = Nothing
     , _varrlPart = pVarrlPart_
     , _varrlPrettyPrint = True
-    , _varrlUserIp = Nothing
+    , _varrlUserIP = Nothing
     , _varrlHl = "en_US"
     , _varrlKey = Nothing
-    , _varrlOauthToken = Nothing
+    , _varrlOAuthToken = Nothing
     , _varrlFields = Nothing
-    , _varrlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,9 +130,9 @@ varrlPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-varrlUserIp :: Lens' VideoAbuseReportReasonsList' (Maybe Text)
-varrlUserIp
-  = lens _varrlUserIp (\ s a -> s{_varrlUserIp = a})
+varrlUserIP :: Lens' VideoAbuseReportReasonsList' (Maybe Text)
+varrlUserIP
+  = lens _varrlUserIP (\ s a -> s{_varrlUserIP = a})
 
 -- | The hl parameter specifies the language that should be used for text
 -- values in the API response.
@@ -147,23 +142,24 @@ varrlHl = lens _varrlHl (\ s a -> s{_varrlHl = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-varrlKey :: Lens' VideoAbuseReportReasonsList' (Maybe Text)
+varrlKey :: Lens' VideoAbuseReportReasonsList' (Maybe Key)
 varrlKey = lens _varrlKey (\ s a -> s{_varrlKey = a})
 
 -- | OAuth 2.0 token for the current user.
-varrlOauthToken :: Lens' VideoAbuseReportReasonsList' (Maybe Text)
-varrlOauthToken
-  = lens _varrlOauthToken
-      (\ s a -> s{_varrlOauthToken = a})
+varrlOAuthToken :: Lens' VideoAbuseReportReasonsList' (Maybe OAuthToken)
+varrlOAuthToken
+  = lens _varrlOAuthToken
+      (\ s a -> s{_varrlOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 varrlFields :: Lens' VideoAbuseReportReasonsList' (Maybe Text)
 varrlFields
   = lens _varrlFields (\ s a -> s{_varrlFields = a})
 
--- | Data format for the response.
-varrlAlt :: Lens' VideoAbuseReportReasonsList' Alt
-varrlAlt = lens _varrlAlt (\ s a -> s{_varrlAlt = a})
+instance GoogleAuth VideoAbuseReportReasonsList'
+         where
+        authKey = varrlKey . _Just
+        authToken = varrlOAuthToken . _Just
 
 instance GoogleRequest VideoAbuseReportReasonsList'
          where
@@ -173,12 +169,12 @@ instance GoogleRequest VideoAbuseReportReasonsList'
         requestWithRoute r u VideoAbuseReportReasonsList'{..}
           = go _varrlQuotaUser (Just _varrlPart)
               (Just _varrlPrettyPrint)
-              _varrlUserIp
+              _varrlUserIP
               (Just _varrlHl)
               _varrlKey
-              _varrlOauthToken
+              _varrlOAuthToken
               _varrlFields
-              (Just _varrlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy VideoAbuseReportReasonsListResource)

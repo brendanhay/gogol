@@ -32,12 +32,12 @@ module Network.Google.Resource.DFAReporting.RemarketingLists.Insert
     -- * Request Lenses
     , rliQuotaUser
     , rliPrettyPrint
-    , rliUserIp
+    , rliUserIP
     , rliProfileId
+    , rliRemarketingList
     , rliKey
-    , rliOauthToken
+    , rliOAuthToken
     , rliFields
-    , rliAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,23 +52,25 @@ type RemarketingListsInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] RemarketingList
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] RemarketingList :>
+                           Post '[JSON] RemarketingList
 
 -- | Inserts a new remarketing list.
 --
 -- /See:/ 'remarketingListsInsert'' smart constructor.
 data RemarketingListsInsert' = RemarketingListsInsert'
-    { _rliQuotaUser   :: !(Maybe Text)
-    , _rliPrettyPrint :: !Bool
-    , _rliUserIp      :: !(Maybe Text)
-    , _rliProfileId   :: !Int64
-    , _rliKey         :: !(Maybe Text)
-    , _rliOauthToken  :: !(Maybe Text)
-    , _rliFields      :: !(Maybe Text)
-    , _rliAlt         :: !Alt
+    { _rliQuotaUser       :: !(Maybe Text)
+    , _rliPrettyPrint     :: !Bool
+    , _rliUserIP          :: !(Maybe Text)
+    , _rliProfileId       :: !Int64
+    , _rliRemarketingList :: !RemarketingList
+    , _rliKey             :: !(Maybe Key)
+    , _rliOAuthToken      :: !(Maybe OAuthToken)
+    , _rliFields          :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RemarketingListsInsert'' with the minimum fields required to make a request.
@@ -79,30 +81,31 @@ data RemarketingListsInsert' = RemarketingListsInsert'
 --
 -- * 'rliPrettyPrint'
 --
--- * 'rliUserIp'
+-- * 'rliUserIP'
 --
 -- * 'rliProfileId'
 --
+-- * 'rliRemarketingList'
+--
 -- * 'rliKey'
 --
--- * 'rliOauthToken'
+-- * 'rliOAuthToken'
 --
 -- * 'rliFields'
---
--- * 'rliAlt'
 remarketingListsInsert'
     :: Int64 -- ^ 'profileId'
+    -> RemarketingList -- ^ 'RemarketingList'
     -> RemarketingListsInsert'
-remarketingListsInsert' pRliProfileId_ =
+remarketingListsInsert' pRliProfileId_ pRliRemarketingList_ =
     RemarketingListsInsert'
     { _rliQuotaUser = Nothing
     , _rliPrettyPrint = True
-    , _rliUserIp = Nothing
+    , _rliUserIP = Nothing
     , _rliProfileId = pRliProfileId_
+    , _rliRemarketingList = pRliRemarketingList_
     , _rliKey = Nothing
-    , _rliOauthToken = Nothing
+    , _rliOAuthToken = Nothing
     , _rliFields = Nothing
-    , _rliAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,46 +123,53 @@ rliPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rliUserIp :: Lens' RemarketingListsInsert' (Maybe Text)
-rliUserIp
-  = lens _rliUserIp (\ s a -> s{_rliUserIp = a})
+rliUserIP :: Lens' RemarketingListsInsert' (Maybe Text)
+rliUserIP
+  = lens _rliUserIP (\ s a -> s{_rliUserIP = a})
 
 -- | User profile ID associated with this request.
 rliProfileId :: Lens' RemarketingListsInsert' Int64
 rliProfileId
   = lens _rliProfileId (\ s a -> s{_rliProfileId = a})
 
+-- | Multipart request metadata.
+rliRemarketingList :: Lens' RemarketingListsInsert' RemarketingList
+rliRemarketingList
+  = lens _rliRemarketingList
+      (\ s a -> s{_rliRemarketingList = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rliKey :: Lens' RemarketingListsInsert' (Maybe Text)
+rliKey :: Lens' RemarketingListsInsert' (Maybe Key)
 rliKey = lens _rliKey (\ s a -> s{_rliKey = a})
 
 -- | OAuth 2.0 token for the current user.
-rliOauthToken :: Lens' RemarketingListsInsert' (Maybe Text)
-rliOauthToken
-  = lens _rliOauthToken
-      (\ s a -> s{_rliOauthToken = a})
+rliOAuthToken :: Lens' RemarketingListsInsert' (Maybe OAuthToken)
+rliOAuthToken
+  = lens _rliOAuthToken
+      (\ s a -> s{_rliOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 rliFields :: Lens' RemarketingListsInsert' (Maybe Text)
 rliFields
   = lens _rliFields (\ s a -> s{_rliFields = a})
 
--- | Data format for the response.
-rliAlt :: Lens' RemarketingListsInsert' Alt
-rliAlt = lens _rliAlt (\ s a -> s{_rliAlt = a})
+instance GoogleAuth RemarketingListsInsert' where
+        authKey = rliKey . _Just
+        authToken = rliOAuthToken . _Just
 
 instance GoogleRequest RemarketingListsInsert' where
         type Rs RemarketingListsInsert' = RemarketingList
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u RemarketingListsInsert'{..}
-          = go _rliQuotaUser (Just _rliPrettyPrint) _rliUserIp
+          = go _rliQuotaUser (Just _rliPrettyPrint) _rliUserIP
               _rliProfileId
               _rliKey
-              _rliOauthToken
+              _rliOAuthToken
               _rliFields
-              (Just _rliAlt)
+              (Just AltJSON)
+              _rliRemarketingList
           where go
                   = clientWithRoute
                       (Proxy :: Proxy RemarketingListsInsertResource)

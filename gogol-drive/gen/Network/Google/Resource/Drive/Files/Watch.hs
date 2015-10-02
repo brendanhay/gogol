@@ -32,16 +32,16 @@ module Network.Google.Resource.Drive.Files.Watch
     -- * Request Lenses
     , fwQuotaUser
     , fwPrettyPrint
-    , fwUserIp
+    , fwUserIP
+    , fwChannel
     , fwUpdateViewedDate
     , fwKey
     , fwProjection
     , fwAcknowledgeAbuse
     , fwFileId
-    , fwOauthToken
+    , fwOAuthToken
     , fwRevisionId
     , fwFields
-    , fwAlt
     ) where
 
 import           Network.Google.Drive.Types
@@ -57,13 +57,31 @@ type FilesWatchResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "updateViewedDate" Bool :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "projection" DriveFilesWatchProjection :>
                        QueryParam "acknowledgeAbuse" Bool :>
-                         QueryParam "oauth_token" Text :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "revisionId" Text :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :> Post '[JSON] Channel
+                               QueryParam "alt" AltJSON :>
+                                 ReqBody '[JSON] Channel :> Post '[JSON] Channel
+       :<|>
+       "files" :>
+         Capture "fileId" Text :>
+           "watch" :>
+             QueryParam "quotaUser" Text :>
+               QueryParam "prettyPrint" Bool :>
+                 QueryParam "userIp" Text :>
+                   QueryParam "updateViewedDate" Bool :>
+                     QueryParam "key" Key :>
+                       QueryParam "projection" DriveFilesWatchProjection :>
+                         QueryParam "acknowledgeAbuse" Bool :>
+                           QueryParam "oauth_token" OAuthToken :>
+                             QueryParam "revisionId" Text :>
+                               QueryParam "fields" Text :>
+                                 QueryParam "alt" Media :>
+                                   ReqBody '[JSON] Channel :>
+                                     Post '[OctetStream] Stream
 
 -- | Subscribe to changes on a file
 --
@@ -71,16 +89,16 @@ type FilesWatchResource =
 data FilesWatch' = FilesWatch'
     { _fwQuotaUser        :: !(Maybe Text)
     , _fwPrettyPrint      :: !Bool
-    , _fwUserIp           :: !(Maybe Text)
+    , _fwUserIP           :: !(Maybe Text)
+    , _fwChannel          :: !Channel
     , _fwUpdateViewedDate :: !Bool
-    , _fwKey              :: !(Maybe Text)
+    , _fwKey              :: !(Maybe Key)
     , _fwProjection       :: !(Maybe DriveFilesWatchProjection)
     , _fwAcknowledgeAbuse :: !Bool
     , _fwFileId           :: !Text
-    , _fwOauthToken       :: !(Maybe Text)
+    , _fwOAuthToken       :: !(Maybe OAuthToken)
     , _fwRevisionId       :: !(Maybe Text)
     , _fwFields           :: !(Maybe Text)
-    , _fwAlt              :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FilesWatch'' with the minimum fields required to make a request.
@@ -91,7 +109,9 @@ data FilesWatch' = FilesWatch'
 --
 -- * 'fwPrettyPrint'
 --
--- * 'fwUserIp'
+-- * 'fwUserIP'
+--
+-- * 'fwChannel'
 --
 -- * 'fwUpdateViewedDate'
 --
@@ -103,30 +123,29 @@ data FilesWatch' = FilesWatch'
 --
 -- * 'fwFileId'
 --
--- * 'fwOauthToken'
+-- * 'fwOAuthToken'
 --
 -- * 'fwRevisionId'
 --
 -- * 'fwFields'
---
--- * 'fwAlt'
 filesWatch'
-    :: Text -- ^ 'fileId'
+    :: Channel -- ^ 'Channel'
+    -> Text -- ^ 'fileId'
     -> FilesWatch'
-filesWatch' pFwFileId_ =
+filesWatch' pFwChannel_ pFwFileId_ =
     FilesWatch'
     { _fwQuotaUser = Nothing
     , _fwPrettyPrint = True
-    , _fwUserIp = Nothing
+    , _fwUserIP = Nothing
+    , _fwChannel = pFwChannel_
     , _fwUpdateViewedDate = False
     , _fwKey = Nothing
     , _fwProjection = Nothing
     , _fwAcknowledgeAbuse = False
     , _fwFileId = pFwFileId_
-    , _fwOauthToken = Nothing
+    , _fwOAuthToken = Nothing
     , _fwRevisionId = Nothing
     , _fwFields = Nothing
-    , _fwAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -144,8 +163,13 @@ fwPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-fwUserIp :: Lens' FilesWatch' (Maybe Text)
-fwUserIp = lens _fwUserIp (\ s a -> s{_fwUserIp = a})
+fwUserIP :: Lens' FilesWatch' (Maybe Text)
+fwUserIP = lens _fwUserIP (\ s a -> s{_fwUserIP = a})
+
+-- | Multipart request metadata.
+fwChannel :: Lens' FilesWatch' Channel
+fwChannel
+  = lens _fwChannel (\ s a -> s{_fwChannel = a})
 
 -- | Deprecated: Use files.update with modifiedDateBehavior=noChange,
 -- updateViewedDate=true and an empty request body.
@@ -157,7 +181,7 @@ fwUpdateViewedDate
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fwKey :: Lens' FilesWatch' (Maybe Text)
+fwKey :: Lens' FilesWatch' (Maybe Key)
 fwKey = lens _fwKey (\ s a -> s{_fwKey = a})
 
 -- | This parameter is deprecated and has no function.
@@ -177,9 +201,9 @@ fwFileId :: Lens' FilesWatch' Text
 fwFileId = lens _fwFileId (\ s a -> s{_fwFileId = a})
 
 -- | OAuth 2.0 token for the current user.
-fwOauthToken :: Lens' FilesWatch' (Maybe Text)
-fwOauthToken
-  = lens _fwOauthToken (\ s a -> s{_fwOauthToken = a})
+fwOAuthToken :: Lens' FilesWatch' (Maybe OAuthToken)
+fwOAuthToken
+  = lens _fwOAuthToken (\ s a -> s{_fwOAuthToken = a})
 
 -- | Specifies the Revision ID that should be downloaded. Ignored unless
 -- alt=media is specified.
@@ -191,25 +215,46 @@ fwRevisionId
 fwFields :: Lens' FilesWatch' (Maybe Text)
 fwFields = lens _fwFields (\ s a -> s{_fwFields = a})
 
--- | Data format for the response.
-fwAlt :: Lens' FilesWatch' Alt
-fwAlt = lens _fwAlt (\ s a -> s{_fwAlt = a})
+instance GoogleAuth FilesWatch' where
+        authKey = fwKey . _Just
+        authToken = fwOAuthToken . _Just
 
 instance GoogleRequest FilesWatch' where
         type Rs FilesWatch' = Channel
         request = requestWithRoute defReq driveURL
         requestWithRoute r u FilesWatch'{..}
-          = go _fwQuotaUser (Just _fwPrettyPrint) _fwUserIp
+          = go _fwQuotaUser (Just _fwPrettyPrint) _fwUserIP
               (Just _fwUpdateViewedDate)
               _fwKey
               _fwProjection
               (Just _fwAcknowledgeAbuse)
               _fwFileId
-              _fwOauthToken
+              _fwOAuthToken
               _fwRevisionId
               _fwFields
-              (Just _fwAlt)
-          where go
+              (Just AltJSON)
+              _fwChannel
+          where go :<|> _
+                  = clientWithRoute (Proxy :: Proxy FilesWatchResource)
+                      r
+                      u
+
+instance GoogleRequest FilesWatch' where
+        type Rs (Download FilesWatch') = Stream
+        request = requestWithRoute defReq driveURL
+        requestWithRoute r u FilesWatch'{..}
+          = go _fwQuotaUser (Just _fwPrettyPrint) _fwUserIP
+              (Just _fwUpdateViewedDate)
+              _fwKey
+              _fwProjection
+              (Just _fwAcknowledgeAbuse)
+              _fwFileId
+              _fwOAuthToken
+              _fwRevisionId
+              _fwFields
+              (Just Media)
+              _fwChannel
+          where go :<|> _
                   = clientWithRoute (Proxy :: Proxy FilesWatchResource)
                       r
                       u

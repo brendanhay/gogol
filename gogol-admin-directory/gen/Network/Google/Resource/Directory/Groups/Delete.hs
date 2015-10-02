@@ -32,12 +32,11 @@ module Network.Google.Resource.Directory.Groups.Delete
     -- * Request Lenses
     , gdQuotaUser
     , gdPrettyPrint
-    , gdUserIp
+    , gdUserIP
     , gdGroupKey
     , gdKey
-    , gdOauthToken
+    , gdOAuthToken
     , gdFields
-    , gdAlt
     ) where
 
 import           Network.Google.AdminDirectory.Types
@@ -51,10 +50,10 @@ type GroupsDeleteResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Delete '[JSON] ()
+                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete Group
 --
@@ -62,12 +61,11 @@ type GroupsDeleteResource =
 data GroupsDelete' = GroupsDelete'
     { _gdQuotaUser   :: !(Maybe Text)
     , _gdPrettyPrint :: !Bool
-    , _gdUserIp      :: !(Maybe Text)
+    , _gdUserIP      :: !(Maybe Text)
     , _gdGroupKey    :: !Text
-    , _gdKey         :: !(Maybe Text)
-    , _gdOauthToken  :: !(Maybe Text)
+    , _gdKey         :: !(Maybe Key)
+    , _gdOAuthToken  :: !(Maybe OAuthToken)
     , _gdFields      :: !(Maybe Text)
-    , _gdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupsDelete'' with the minimum fields required to make a request.
@@ -78,17 +76,15 @@ data GroupsDelete' = GroupsDelete'
 --
 -- * 'gdPrettyPrint'
 --
--- * 'gdUserIp'
+-- * 'gdUserIP'
 --
 -- * 'gdGroupKey'
 --
 -- * 'gdKey'
 --
--- * 'gdOauthToken'
+-- * 'gdOAuthToken'
 --
 -- * 'gdFields'
---
--- * 'gdAlt'
 groupsDelete'
     :: Text -- ^ 'groupKey'
     -> GroupsDelete'
@@ -96,12 +92,11 @@ groupsDelete' pGdGroupKey_ =
     GroupsDelete'
     { _gdQuotaUser = Nothing
     , _gdPrettyPrint = True
-    , _gdUserIp = Nothing
+    , _gdUserIP = Nothing
     , _gdGroupKey = pGdGroupKey_
     , _gdKey = Nothing
-    , _gdOauthToken = Nothing
+    , _gdOAuthToken = Nothing
     , _gdFields = Nothing
-    , _gdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -119,8 +114,8 @@ gdPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-gdUserIp :: Lens' GroupsDelete' (Maybe Text)
-gdUserIp = lens _gdUserIp (\ s a -> s{_gdUserIp = a})
+gdUserIP :: Lens' GroupsDelete' (Maybe Text)
+gdUserIP = lens _gdUserIP (\ s a -> s{_gdUserIP = a})
 
 -- | Email or immutable Id of the group
 gdGroupKey :: Lens' GroupsDelete' Text
@@ -130,32 +125,32 @@ gdGroupKey
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-gdKey :: Lens' GroupsDelete' (Maybe Text)
+gdKey :: Lens' GroupsDelete' (Maybe Key)
 gdKey = lens _gdKey (\ s a -> s{_gdKey = a})
 
 -- | OAuth 2.0 token for the current user.
-gdOauthToken :: Lens' GroupsDelete' (Maybe Text)
-gdOauthToken
-  = lens _gdOauthToken (\ s a -> s{_gdOauthToken = a})
+gdOAuthToken :: Lens' GroupsDelete' (Maybe OAuthToken)
+gdOAuthToken
+  = lens _gdOAuthToken (\ s a -> s{_gdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 gdFields :: Lens' GroupsDelete' (Maybe Text)
 gdFields = lens _gdFields (\ s a -> s{_gdFields = a})
 
--- | Data format for the response.
-gdAlt :: Lens' GroupsDelete' Alt
-gdAlt = lens _gdAlt (\ s a -> s{_gdAlt = a})
+instance GoogleAuth GroupsDelete' where
+        authKey = gdKey . _Just
+        authToken = gdOAuthToken . _Just
 
 instance GoogleRequest GroupsDelete' where
         type Rs GroupsDelete' = ()
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u GroupsDelete'{..}
-          = go _gdQuotaUser (Just _gdPrettyPrint) _gdUserIp
+          = go _gdQuotaUser (Just _gdPrettyPrint) _gdUserIP
               _gdGroupKey
               _gdKey
-              _gdOauthToken
+              _gdOAuthToken
               _gdFields
-              (Just _gdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy GroupsDeleteResource)

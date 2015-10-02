@@ -32,12 +32,11 @@ module Network.Google.Resource.FusionTables.Table.Delete
     -- * Request Lenses
     , tdQuotaUser
     , tdPrettyPrint
-    , tdUserIp
+    , tdUserIP
     , tdKey
-    , tdOauthToken
+    , tdOAuthToken
     , tdTableId
     , tdFields
-    , tdAlt
     ) where
 
 import           Network.Google.FusionTables.Types
@@ -51,10 +50,10 @@ type TableDeleteResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Delete '[JSON] ()
+                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a table.
 --
@@ -62,12 +61,11 @@ type TableDeleteResource =
 data TableDelete' = TableDelete'
     { _tdQuotaUser   :: !(Maybe Text)
     , _tdPrettyPrint :: !Bool
-    , _tdUserIp      :: !(Maybe Text)
-    , _tdKey         :: !(Maybe Text)
-    , _tdOauthToken  :: !(Maybe Text)
+    , _tdUserIP      :: !(Maybe Text)
+    , _tdKey         :: !(Maybe Key)
+    , _tdOAuthToken  :: !(Maybe OAuthToken)
     , _tdTableId     :: !Text
     , _tdFields      :: !(Maybe Text)
-    , _tdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableDelete'' with the minimum fields required to make a request.
@@ -78,17 +76,15 @@ data TableDelete' = TableDelete'
 --
 -- * 'tdPrettyPrint'
 --
--- * 'tdUserIp'
+-- * 'tdUserIP'
 --
 -- * 'tdKey'
 --
--- * 'tdOauthToken'
+-- * 'tdOAuthToken'
 --
 -- * 'tdTableId'
 --
 -- * 'tdFields'
---
--- * 'tdAlt'
 tableDelete'
     :: Text -- ^ 'tableId'
     -> TableDelete'
@@ -96,12 +92,11 @@ tableDelete' pTdTableId_ =
     TableDelete'
     { _tdQuotaUser = Nothing
     , _tdPrettyPrint = True
-    , _tdUserIp = Nothing
+    , _tdUserIP = Nothing
     , _tdKey = Nothing
-    , _tdOauthToken = Nothing
+    , _tdOAuthToken = Nothing
     , _tdTableId = pTdTableId_
     , _tdFields = Nothing
-    , _tdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -119,19 +114,19 @@ tdPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tdUserIp :: Lens' TableDelete' (Maybe Text)
-tdUserIp = lens _tdUserIp (\ s a -> s{_tdUserIp = a})
+tdUserIP :: Lens' TableDelete' (Maybe Text)
+tdUserIP = lens _tdUserIP (\ s a -> s{_tdUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tdKey :: Lens' TableDelete' (Maybe Text)
+tdKey :: Lens' TableDelete' (Maybe Key)
 tdKey = lens _tdKey (\ s a -> s{_tdKey = a})
 
 -- | OAuth 2.0 token for the current user.
-tdOauthToken :: Lens' TableDelete' (Maybe Text)
-tdOauthToken
-  = lens _tdOauthToken (\ s a -> s{_tdOauthToken = a})
+tdOAuthToken :: Lens' TableDelete' (Maybe OAuthToken)
+tdOAuthToken
+  = lens _tdOAuthToken (\ s a -> s{_tdOAuthToken = a})
 
 -- | ID of the table to be deleted.
 tdTableId :: Lens' TableDelete' Text
@@ -142,20 +137,20 @@ tdTableId
 tdFields :: Lens' TableDelete' (Maybe Text)
 tdFields = lens _tdFields (\ s a -> s{_tdFields = a})
 
--- | Data format for the response.
-tdAlt :: Lens' TableDelete' Alt
-tdAlt = lens _tdAlt (\ s a -> s{_tdAlt = a})
+instance GoogleAuth TableDelete' where
+        authKey = tdKey . _Just
+        authToken = tdOAuthToken . _Just
 
 instance GoogleRequest TableDelete' where
         type Rs TableDelete' = ()
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u TableDelete'{..}
-          = go _tdQuotaUser (Just _tdPrettyPrint) _tdUserIp
+          = go _tdQuotaUser (Just _tdPrettyPrint) _tdUserIP
               _tdKey
-              _tdOauthToken
+              _tdOAuthToken
               _tdTableId
               _tdFields
-              (Just _tdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TableDeleteResource)

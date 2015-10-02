@@ -1,0 +1,186 @@
+{-# LANGUAGE DataKinds          #-}
+{-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DeriveGeneric      #-}
+{-# LANGUAGE OverloadedStrings  #-}
+{-# LANGUAGE RecordWildCards    #-}
+{-# LANGUAGE TypeFamilies       #-}
+{-# LANGUAGE TypeOperators      #-}
+
+{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+
+-- |
+-- Module      : Network.Google.Resource.Autoscaler.Autoscalers.Delete
+-- Copyright   : (c) 2015 Brendan Hay
+-- License     : Mozilla Public License, v. 2.0.
+-- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Stability   : auto-generated
+-- Portability : non-portable (GHC extensions)
+--
+-- | Deletes the specified Autoscaler resource.
+--
+-- /See:/ <http://developers.google.com/compute/docs/autoscaler Google Compute Engine Autoscaler API Reference> for @AutoscalerAutoscalersDelete@.
+module Network.Google.Resource.Autoscaler.Autoscalers.Delete
+    (
+    -- * REST Resource
+      AutoscalersDeleteResource
+
+    -- * Creating a Request
+    , autoscalersDelete'
+    , AutoscalersDelete'
+
+    -- * Request Lenses
+    , adQuotaUser
+    , adPrettyPrint
+    , adProject
+    , adUserIP
+    , adZone
+    , adKey
+    , adAutoscaler
+    , adOAuthToken
+    , adFields
+    ) where
+
+import           Network.Google.Autoscaler.Types
+import           Network.Google.Prelude
+
+-- | A resource alias for @AutoscalerAutoscalersDelete@ which the
+-- 'AutoscalersDelete'' request conforms to.
+type AutoscalersDeleteResource =
+     "projects" :>
+       Capture "project" Text :>
+         "zones" :>
+           Capture "zone" Text :>
+             "autoscalers" :>
+               Capture "autoscaler" Text :>
+                 QueryParam "quotaUser" Text :>
+                   QueryParam "prettyPrint" Bool :>
+                     QueryParam "userIp" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
+                           QueryParam "fields" Text :>
+                             QueryParam "alt" AltJSON :>
+                               Delete '[JSON] Operation
+
+-- | Deletes the specified Autoscaler resource.
+--
+-- /See:/ 'autoscalersDelete'' smart constructor.
+data AutoscalersDelete' = AutoscalersDelete'
+    { _adQuotaUser   :: !(Maybe Text)
+    , _adPrettyPrint :: !Bool
+    , _adProject     :: !Text
+    , _adUserIP      :: !(Maybe Text)
+    , _adZone        :: !Text
+    , _adKey         :: !(Maybe Key)
+    , _adAutoscaler  :: !Text
+    , _adOAuthToken  :: !(Maybe OAuthToken)
+    , _adFields      :: !(Maybe Text)
+    } deriving (Eq,Read,Show,Data,Typeable,Generic)
+
+-- | Creates a value of 'AutoscalersDelete'' with the minimum fields required to make a request.
+--
+-- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'adQuotaUser'
+--
+-- * 'adPrettyPrint'
+--
+-- * 'adProject'
+--
+-- * 'adUserIP'
+--
+-- * 'adZone'
+--
+-- * 'adKey'
+--
+-- * 'adAutoscaler'
+--
+-- * 'adOAuthToken'
+--
+-- * 'adFields'
+autoscalersDelete'
+    :: Text -- ^ 'project'
+    -> Text -- ^ 'zone'
+    -> Text -- ^ 'autoscaler'
+    -> AutoscalersDelete'
+autoscalersDelete' pAdProject_ pAdZone_ pAdAutoscaler_ =
+    AutoscalersDelete'
+    { _adQuotaUser = Nothing
+    , _adPrettyPrint = True
+    , _adProject = pAdProject_
+    , _adUserIP = Nothing
+    , _adZone = pAdZone_
+    , _adKey = Nothing
+    , _adAutoscaler = pAdAutoscaler_
+    , _adOAuthToken = Nothing
+    , _adFields = Nothing
+    }
+
+-- | Available to use for quota purposes for server-side applications. Can be
+-- any arbitrary string assigned to a user, but should not exceed 40
+-- characters. Overrides userIp if both are provided.
+adQuotaUser :: Lens' AutoscalersDelete' (Maybe Text)
+adQuotaUser
+  = lens _adQuotaUser (\ s a -> s{_adQuotaUser = a})
+
+-- | Returns response with indentations and line breaks.
+adPrettyPrint :: Lens' AutoscalersDelete' Bool
+adPrettyPrint
+  = lens _adPrettyPrint
+      (\ s a -> s{_adPrettyPrint = a})
+
+-- | Project ID of Autoscaler resource.
+adProject :: Lens' AutoscalersDelete' Text
+adProject
+  = lens _adProject (\ s a -> s{_adProject = a})
+
+-- | IP address of the site where the request originates. Use this if you
+-- want to enforce per-user limits.
+adUserIP :: Lens' AutoscalersDelete' (Maybe Text)
+adUserIP = lens _adUserIP (\ s a -> s{_adUserIP = a})
+
+-- | Zone name of Autoscaler resource.
+adZone :: Lens' AutoscalersDelete' Text
+adZone = lens _adZone (\ s a -> s{_adZone = a})
+
+-- | API key. Your API key identifies your project and provides you with API
+-- access, quota, and reports. Required unless you provide an OAuth 2.0
+-- token.
+adKey :: Lens' AutoscalersDelete' (Maybe Key)
+adKey = lens _adKey (\ s a -> s{_adKey = a})
+
+-- | Name of the Autoscaler resource.
+adAutoscaler :: Lens' AutoscalersDelete' Text
+adAutoscaler
+  = lens _adAutoscaler (\ s a -> s{_adAutoscaler = a})
+
+-- | OAuth 2.0 token for the current user.
+adOAuthToken :: Lens' AutoscalersDelete' (Maybe OAuthToken)
+adOAuthToken
+  = lens _adOAuthToken (\ s a -> s{_adOAuthToken = a})
+
+-- | Selector specifying which fields to include in a partial response.
+adFields :: Lens' AutoscalersDelete' (Maybe Text)
+adFields = lens _adFields (\ s a -> s{_adFields = a})
+
+instance GoogleAuth AutoscalersDelete' where
+        authKey = adKey . _Just
+        authToken = adOAuthToken . _Just
+
+instance GoogleRequest AutoscalersDelete' where
+        type Rs AutoscalersDelete' = Operation
+        request = requestWithRoute defReq autoscalerURL
+        requestWithRoute r u AutoscalersDelete'{..}
+          = go _adQuotaUser (Just _adPrettyPrint) _adProject
+              _adUserIP
+              _adZone
+              _adKey
+              _adAutoscaler
+              _adOAuthToken
+              _adFields
+              (Just AltJSON)
+          where go
+                  = clientWithRoute
+                      (Proxy :: Proxy AutoscalersDeleteResource)
+                      r
+                      u

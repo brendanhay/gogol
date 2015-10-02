@@ -38,14 +38,14 @@ module Network.Google.Resource.Logging.Projects.Logs.Sinks.Create
     , plscLogsId
     , plscPp
     , plscAccessToken
+    , plscLogSink
     , plscUploadType
     , plscBearerToken
     , plscKey
-    , plscOauthToken
+    , plscOAuthToken
     , plscProjectsId
     , plscFields
     , plscCallback
-    , plscAlt
     ) where
 
 import           Network.Google.Logging.Types
@@ -68,12 +68,13 @@ type ProjectsLogsSinksCreateResource =
                            QueryParam "access_token" Text :>
                              QueryParam "uploadType" Text :>
                                QueryParam "bearer_token" Text :>
-                                 QueryParam "key" Text :>
-                                   QueryParam "oauth_token" Text :>
+                                 QueryParam "key" Key :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "fields" Text :>
                                        QueryParam "callback" Text :>
-                                         QueryParam "alt" Text :>
-                                           Post '[JSON] LogSink
+                                         QueryParam "alt" AltJSON :>
+                                           ReqBody '[JSON] LogSink :>
+                                             Post '[JSON] LogSink
 
 -- | Creates a log sink. All log entries for a specified log are written to
 -- the destination.
@@ -87,14 +88,14 @@ data ProjectsLogsSinksCreate' = ProjectsLogsSinksCreate'
     , _plscLogsId         :: !Text
     , _plscPp             :: !Bool
     , _plscAccessToken    :: !(Maybe Text)
+    , _plscLogSink        :: !LogSink
     , _plscUploadType     :: !(Maybe Text)
     , _plscBearerToken    :: !(Maybe Text)
-    , _plscKey            :: !(Maybe Text)
-    , _plscOauthToken     :: !(Maybe Text)
+    , _plscKey            :: !(Maybe Key)
+    , _plscOAuthToken     :: !(Maybe OAuthToken)
     , _plscProjectsId     :: !Text
     , _plscFields         :: !(Maybe Text)
     , _plscCallback       :: !(Maybe Text)
-    , _plscAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsLogsSinksCreate'' with the minimum fields required to make a request.
@@ -115,26 +116,27 @@ data ProjectsLogsSinksCreate' = ProjectsLogsSinksCreate'
 --
 -- * 'plscAccessToken'
 --
+-- * 'plscLogSink'
+--
 -- * 'plscUploadType'
 --
 -- * 'plscBearerToken'
 --
 -- * 'plscKey'
 --
--- * 'plscOauthToken'
+-- * 'plscOAuthToken'
 --
 -- * 'plscProjectsId'
 --
 -- * 'plscFields'
 --
 -- * 'plscCallback'
---
--- * 'plscAlt'
 projectsLogsSinksCreate'
     :: Text -- ^ 'logsId'
+    -> LogSink -- ^ 'LogSink'
     -> Text -- ^ 'projectsId'
     -> ProjectsLogsSinksCreate'
-projectsLogsSinksCreate' pPlscLogsId_ pPlscProjectsId_ =
+projectsLogsSinksCreate' pPlscLogsId_ pPlscLogSink_ pPlscProjectsId_ =
     ProjectsLogsSinksCreate'
     { _plscXgafv = Nothing
     , _plscQuotaUser = Nothing
@@ -143,14 +145,14 @@ projectsLogsSinksCreate' pPlscLogsId_ pPlscProjectsId_ =
     , _plscLogsId = pPlscLogsId_
     , _plscPp = True
     , _plscAccessToken = Nothing
+    , _plscLogSink = pPlscLogSink_
     , _plscUploadType = Nothing
     , _plscBearerToken = Nothing
     , _plscKey = Nothing
-    , _plscOauthToken = Nothing
+    , _plscOAuthToken = Nothing
     , _plscProjectsId = pPlscProjectsId_
     , _plscFields = Nothing
     , _plscCallback = Nothing
-    , _plscAlt = "json"
     }
 
 -- | V1 error format.
@@ -193,6 +195,11 @@ plscAccessToken
   = lens _plscAccessToken
       (\ s a -> s{_plscAccessToken = a})
 
+-- | Multipart request metadata.
+plscLogSink :: Lens' ProjectsLogsSinksCreate' LogSink
+plscLogSink
+  = lens _plscLogSink (\ s a -> s{_plscLogSink = a})
+
 -- | Legacy upload protocol for media (e.g. \"media\", \"multipart\").
 plscUploadType :: Lens' ProjectsLogsSinksCreate' (Maybe Text)
 plscUploadType
@@ -208,14 +215,14 @@ plscBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-plscKey :: Lens' ProjectsLogsSinksCreate' (Maybe Text)
+plscKey :: Lens' ProjectsLogsSinksCreate' (Maybe Key)
 plscKey = lens _plscKey (\ s a -> s{_plscKey = a})
 
 -- | OAuth 2.0 token for the current user.
-plscOauthToken :: Lens' ProjectsLogsSinksCreate' (Maybe Text)
-plscOauthToken
-  = lens _plscOauthToken
-      (\ s a -> s{_plscOauthToken = a})
+plscOAuthToken :: Lens' ProjectsLogsSinksCreate' (Maybe OAuthToken)
+plscOAuthToken
+  = lens _plscOAuthToken
+      (\ s a -> s{_plscOAuthToken = a})
 
 -- | Part of \`logName\`. The resource name of the log to which to the sink
 -- is bound.
@@ -234,9 +241,9 @@ plscCallback :: Lens' ProjectsLogsSinksCreate' (Maybe Text)
 plscCallback
   = lens _plscCallback (\ s a -> s{_plscCallback = a})
 
--- | Data format for response.
-plscAlt :: Lens' ProjectsLogsSinksCreate' Text
-plscAlt = lens _plscAlt (\ s a -> s{_plscAlt = a})
+instance GoogleAuth ProjectsLogsSinksCreate' where
+        authKey = plscKey . _Just
+        authToken = plscOAuthToken . _Just
 
 instance GoogleRequest ProjectsLogsSinksCreate' where
         type Rs ProjectsLogsSinksCreate' = LogSink
@@ -251,11 +258,12 @@ instance GoogleRequest ProjectsLogsSinksCreate' where
               _plscUploadType
               _plscBearerToken
               _plscKey
-              _plscOauthToken
+              _plscOAuthToken
               _plscProjectsId
               _plscFields
               _plscCallback
-              (Just _plscAlt)
+              (Just AltJSON)
+              _plscLogSink
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsLogsSinksCreateResource)

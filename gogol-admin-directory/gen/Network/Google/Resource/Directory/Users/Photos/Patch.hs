@@ -32,12 +32,12 @@ module Network.Google.Resource.Directory.Users.Photos.Patch
     -- * Request Lenses
     , uppQuotaUser
     , uppPrettyPrint
-    , uppUserIp
+    , uppUserIP
     , uppKey
-    , uppOauthToken
+    , uppUserPhoto
+    , uppOAuthToken
     , uppUserKey
     , uppFields
-    , uppAlt
     ) where
 
 import           Network.Google.AdminDirectory.Types
@@ -53,10 +53,11 @@ type UsersPhotosPatchResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Patch '[JSON] UserPhoto
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] UserPhoto :> Patch '[JSON] UserPhoto
 
 -- | Add a photo for the user. This method supports patch semantics.
 --
@@ -64,12 +65,12 @@ type UsersPhotosPatchResource =
 data UsersPhotosPatch' = UsersPhotosPatch'
     { _uppQuotaUser   :: !(Maybe Text)
     , _uppPrettyPrint :: !Bool
-    , _uppUserIp      :: !(Maybe Text)
-    , _uppKey         :: !(Maybe Text)
-    , _uppOauthToken  :: !(Maybe Text)
+    , _uppUserIP      :: !(Maybe Text)
+    , _uppKey         :: !(Maybe Key)
+    , _uppUserPhoto   :: !UserPhoto
+    , _uppOAuthToken  :: !(Maybe OAuthToken)
     , _uppUserKey     :: !Text
     , _uppFields      :: !(Maybe Text)
-    , _uppAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersPhotosPatch'' with the minimum fields required to make a request.
@@ -80,30 +81,31 @@ data UsersPhotosPatch' = UsersPhotosPatch'
 --
 -- * 'uppPrettyPrint'
 --
--- * 'uppUserIp'
+-- * 'uppUserIP'
 --
 -- * 'uppKey'
 --
--- * 'uppOauthToken'
+-- * 'uppUserPhoto'
+--
+-- * 'uppOAuthToken'
 --
 -- * 'uppUserKey'
 --
 -- * 'uppFields'
---
--- * 'uppAlt'
 usersPhotosPatch'
-    :: Text -- ^ 'userKey'
+    :: UserPhoto -- ^ 'UserPhoto'
+    -> Text -- ^ 'userKey'
     -> UsersPhotosPatch'
-usersPhotosPatch' pUppUserKey_ =
+usersPhotosPatch' pUppUserPhoto_ pUppUserKey_ =
     UsersPhotosPatch'
     { _uppQuotaUser = Nothing
     , _uppPrettyPrint = True
-    , _uppUserIp = Nothing
+    , _uppUserIP = Nothing
     , _uppKey = Nothing
-    , _uppOauthToken = Nothing
+    , _uppUserPhoto = pUppUserPhoto_
+    , _uppOAuthToken = Nothing
     , _uppUserKey = pUppUserKey_
     , _uppFields = Nothing
-    , _uppAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -121,21 +123,26 @@ uppPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-uppUserIp :: Lens' UsersPhotosPatch' (Maybe Text)
-uppUserIp
-  = lens _uppUserIp (\ s a -> s{_uppUserIp = a})
+uppUserIP :: Lens' UsersPhotosPatch' (Maybe Text)
+uppUserIP
+  = lens _uppUserIP (\ s a -> s{_uppUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-uppKey :: Lens' UsersPhotosPatch' (Maybe Text)
+uppKey :: Lens' UsersPhotosPatch' (Maybe Key)
 uppKey = lens _uppKey (\ s a -> s{_uppKey = a})
 
+-- | Multipart request metadata.
+uppUserPhoto :: Lens' UsersPhotosPatch' UserPhoto
+uppUserPhoto
+  = lens _uppUserPhoto (\ s a -> s{_uppUserPhoto = a})
+
 -- | OAuth 2.0 token for the current user.
-uppOauthToken :: Lens' UsersPhotosPatch' (Maybe Text)
-uppOauthToken
-  = lens _uppOauthToken
-      (\ s a -> s{_uppOauthToken = a})
+uppOAuthToken :: Lens' UsersPhotosPatch' (Maybe OAuthToken)
+uppOAuthToken
+  = lens _uppOAuthToken
+      (\ s a -> s{_uppOAuthToken = a})
 
 -- | Email or immutable Id of the user
 uppUserKey :: Lens' UsersPhotosPatch' Text
@@ -147,20 +154,21 @@ uppFields :: Lens' UsersPhotosPatch' (Maybe Text)
 uppFields
   = lens _uppFields (\ s a -> s{_uppFields = a})
 
--- | Data format for the response.
-uppAlt :: Lens' UsersPhotosPatch' Alt
-uppAlt = lens _uppAlt (\ s a -> s{_uppAlt = a})
+instance GoogleAuth UsersPhotosPatch' where
+        authKey = uppKey . _Just
+        authToken = uppOAuthToken . _Just
 
 instance GoogleRequest UsersPhotosPatch' where
         type Rs UsersPhotosPatch' = UserPhoto
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u UsersPhotosPatch'{..}
-          = go _uppQuotaUser (Just _uppPrettyPrint) _uppUserIp
+          = go _uppQuotaUser (Just _uppPrettyPrint) _uppUserIP
               _uppKey
-              _uppOauthToken
+              _uppOAuthToken
               _uppUserKey
               _uppFields
-              (Just _uppAlt)
+              (Just AltJSON)
+              _uppUserPhoto
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersPhotosPatchResource)

@@ -34,11 +34,11 @@ module Network.Google.Resource.YouTube.Comments.Insert
     , cQuotaUser
     , cPart
     , cPrettyPrint
-    , cUserIp
+    , cUserIP
     , cKey
-    , cOauthToken
+    , cOAuthToken
+    , cComment
     , cFields
-    , cAlt
     ) where
 
 import           Network.Google.Prelude
@@ -52,10 +52,11 @@ type CommentsInsertResource =
          QueryParam "part" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Post '[JSON] Comment
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Comment :> Post '[JSON] Comment
 
 -- | Creates a reply to an existing comment. Note: To create a top-level
 -- comment, use the commentThreads.insert method.
@@ -65,11 +66,11 @@ data CommentsInsert' = CommentsInsert'
     { _cQuotaUser   :: !(Maybe Text)
     , _cPart        :: !Text
     , _cPrettyPrint :: !Bool
-    , _cUserIp      :: !(Maybe Text)
-    , _cKey         :: !(Maybe Text)
-    , _cOauthToken  :: !(Maybe Text)
+    , _cUserIP      :: !(Maybe Text)
+    , _cKey         :: !(Maybe Key)
+    , _cOAuthToken  :: !(Maybe OAuthToken)
+    , _cComment     :: !Comment
     , _cFields      :: !(Maybe Text)
-    , _cAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsInsert'' with the minimum fields required to make a request.
@@ -82,28 +83,29 @@ data CommentsInsert' = CommentsInsert'
 --
 -- * 'cPrettyPrint'
 --
--- * 'cUserIp'
+-- * 'cUserIP'
 --
 -- * 'cKey'
 --
--- * 'cOauthToken'
+-- * 'cOAuthToken'
+--
+-- * 'cComment'
 --
 -- * 'cFields'
---
--- * 'cAlt'
 commentsInsert'
     :: Text -- ^ 'part'
+    -> Comment -- ^ 'Comment'
     -> CommentsInsert'
-commentsInsert' pCPart_ =
+commentsInsert' pCPart_ pCComment_ =
     CommentsInsert'
     { _cQuotaUser = Nothing
     , _cPart = pCPart_
     , _cPrettyPrint = True
-    , _cUserIp = Nothing
+    , _cUserIP = Nothing
     , _cKey = Nothing
-    , _cOauthToken = Nothing
+    , _cOAuthToken = Nothing
+    , _cComment = pCComment_
     , _cFields = Nothing
-    , _cAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -126,38 +128,43 @@ cPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cUserIp :: Lens' CommentsInsert' (Maybe Text)
-cUserIp = lens _cUserIp (\ s a -> s{_cUserIp = a})
+cUserIP :: Lens' CommentsInsert' (Maybe Text)
+cUserIP = lens _cUserIP (\ s a -> s{_cUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cKey :: Lens' CommentsInsert' (Maybe Text)
+cKey :: Lens' CommentsInsert' (Maybe Key)
 cKey = lens _cKey (\ s a -> s{_cKey = a})
 
 -- | OAuth 2.0 token for the current user.
-cOauthToken :: Lens' CommentsInsert' (Maybe Text)
-cOauthToken
-  = lens _cOauthToken (\ s a -> s{_cOauthToken = a})
+cOAuthToken :: Lens' CommentsInsert' (Maybe OAuthToken)
+cOAuthToken
+  = lens _cOAuthToken (\ s a -> s{_cOAuthToken = a})
+
+-- | Multipart request metadata.
+cComment :: Lens' CommentsInsert' Comment
+cComment = lens _cComment (\ s a -> s{_cComment = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cFields :: Lens' CommentsInsert' (Maybe Text)
 cFields = lens _cFields (\ s a -> s{_cFields = a})
 
--- | Data format for the response.
-cAlt :: Lens' CommentsInsert' Alt
-cAlt = lens _cAlt (\ s a -> s{_cAlt = a})
+instance GoogleAuth CommentsInsert' where
+        authKey = cKey . _Just
+        authToken = cOAuthToken . _Just
 
 instance GoogleRequest CommentsInsert' where
         type Rs CommentsInsert' = Comment
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u CommentsInsert'{..}
           = go _cQuotaUser (Just _cPart) (Just _cPrettyPrint)
-              _cUserIp
+              _cUserIP
               _cKey
-              _cOauthToken
+              _cOAuthToken
               _cFields
-              (Just _cAlt)
+              (Just AltJSON)
+              _cComment
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CommentsInsertResource)

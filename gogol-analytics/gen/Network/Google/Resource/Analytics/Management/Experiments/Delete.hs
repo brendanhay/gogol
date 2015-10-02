@@ -33,14 +33,13 @@ module Network.Google.Resource.Analytics.Management.Experiments.Delete
     , medQuotaUser
     , medPrettyPrint
     , medWebPropertyId
-    , medUserIp
+    , medUserIP
     , medProfileId
     , medAccountId
     , medExperimentId
     , medKey
-    , medOauthToken
+    , medOAuthToken
     , medFields
-    , medAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -61,10 +60,10 @@ type ManagementExperimentsDeleteResource =
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "alt" Alt :> Delete '[JSON] ()
+                                   QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Delete an experiment.
 --
@@ -73,14 +72,13 @@ data ManagementExperimentsDelete' = ManagementExperimentsDelete'
     { _medQuotaUser     :: !(Maybe Text)
     , _medPrettyPrint   :: !Bool
     , _medWebPropertyId :: !Text
-    , _medUserIp        :: !(Maybe Text)
+    , _medUserIP        :: !(Maybe Text)
     , _medProfileId     :: !Text
     , _medAccountId     :: !Text
     , _medExperimentId  :: !Text
-    , _medKey           :: !(Maybe Text)
-    , _medOauthToken    :: !(Maybe Text)
+    , _medKey           :: !(Maybe Key)
+    , _medOAuthToken    :: !(Maybe OAuthToken)
     , _medFields        :: !(Maybe Text)
-    , _medAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementExperimentsDelete'' with the minimum fields required to make a request.
@@ -93,7 +91,7 @@ data ManagementExperimentsDelete' = ManagementExperimentsDelete'
 --
 -- * 'medWebPropertyId'
 --
--- * 'medUserIp'
+-- * 'medUserIP'
 --
 -- * 'medProfileId'
 --
@@ -103,11 +101,9 @@ data ManagementExperimentsDelete' = ManagementExperimentsDelete'
 --
 -- * 'medKey'
 --
--- * 'medOauthToken'
+-- * 'medOAuthToken'
 --
 -- * 'medFields'
---
--- * 'medAlt'
 managementExperimentsDelete'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
@@ -119,14 +115,13 @@ managementExperimentsDelete' pMedWebPropertyId_ pMedProfileId_ pMedAccountId_ pM
     { _medQuotaUser = Nothing
     , _medPrettyPrint = False
     , _medWebPropertyId = pMedWebPropertyId_
-    , _medUserIp = Nothing
+    , _medUserIP = Nothing
     , _medProfileId = pMedProfileId_
     , _medAccountId = pMedAccountId_
     , _medExperimentId = pMedExperimentId_
     , _medKey = Nothing
-    , _medOauthToken = Nothing
+    , _medOAuthToken = Nothing
     , _medFields = Nothing
-    , _medAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,9 +145,9 @@ medWebPropertyId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-medUserIp :: Lens' ManagementExperimentsDelete' (Maybe Text)
-medUserIp
-  = lens _medUserIp (\ s a -> s{_medUserIp = a})
+medUserIP :: Lens' ManagementExperimentsDelete' (Maybe Text)
+medUserIP
+  = lens _medUserIP (\ s a -> s{_medUserIP = a})
 
 -- | View (Profile) ID to which the experiment belongs
 medProfileId :: Lens' ManagementExperimentsDelete' Text
@@ -173,23 +168,24 @@ medExperimentId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-medKey :: Lens' ManagementExperimentsDelete' (Maybe Text)
+medKey :: Lens' ManagementExperimentsDelete' (Maybe Key)
 medKey = lens _medKey (\ s a -> s{_medKey = a})
 
 -- | OAuth 2.0 token for the current user.
-medOauthToken :: Lens' ManagementExperimentsDelete' (Maybe Text)
-medOauthToken
-  = lens _medOauthToken
-      (\ s a -> s{_medOauthToken = a})
+medOAuthToken :: Lens' ManagementExperimentsDelete' (Maybe OAuthToken)
+medOAuthToken
+  = lens _medOAuthToken
+      (\ s a -> s{_medOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 medFields :: Lens' ManagementExperimentsDelete' (Maybe Text)
 medFields
   = lens _medFields (\ s a -> s{_medFields = a})
 
--- | Data format for the response.
-medAlt :: Lens' ManagementExperimentsDelete' Alt
-medAlt = lens _medAlt (\ s a -> s{_medAlt = a})
+instance GoogleAuth ManagementExperimentsDelete'
+         where
+        authKey = medKey . _Just
+        authToken = medOAuthToken . _Just
 
 instance GoogleRequest ManagementExperimentsDelete'
          where
@@ -198,14 +194,14 @@ instance GoogleRequest ManagementExperimentsDelete'
         requestWithRoute r u ManagementExperimentsDelete'{..}
           = go _medQuotaUser (Just _medPrettyPrint)
               _medWebPropertyId
-              _medUserIp
+              _medUserIP
               _medProfileId
               _medAccountId
               _medExperimentId
               _medKey
-              _medOauthToken
+              _medOAuthToken
               _medFields
-              (Just _medAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ManagementExperimentsDeleteResource)

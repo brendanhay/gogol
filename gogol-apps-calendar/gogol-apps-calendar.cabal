@@ -65,7 +65,7 @@ library
         , Network.Google.Resource.Calendar.Events.QuickAdd
         , Network.Google.Resource.Calendar.Events.Update
         , Network.Google.Resource.Calendar.Events.Watch
-        , Network.Google.Resource.Calendar.Freebusy.Query
+        , Network.Google.Resource.Calendar.FreeBusy.Query
         , Network.Google.Resource.Calendar.Settings.Get
         , Network.Google.Resource.Calendar.Settings.List
         , Network.Google.Resource.Calendar.Settings.Watch

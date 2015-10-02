@@ -27,29 +27,29 @@ module Network.Google.Prediction
 
     -- * REST Resources
 
-    -- ** PredictionHostedmodelsPredict
-    , module Network.Google.Resource.Prediction.Hostedmodels.Predict
+    -- ** PredictionHostedModelsPredict
+    , module Network.Google.Resource.Prediction.HostedModels.Predict
 
-    -- ** PredictionTrainedmodelsAnalyze
-    , module Network.Google.Resource.Prediction.Trainedmodels.Analyze
+    -- ** PredictionTrainedModelsAnalyze
+    , module Network.Google.Resource.Prediction.TrainedModels.Analyze
 
-    -- ** PredictionTrainedmodelsDelete
-    , module Network.Google.Resource.Prediction.Trainedmodels.Delete
+    -- ** PredictionTrainedModelsDelete
+    , module Network.Google.Resource.Prediction.TrainedModels.Delete
 
-    -- ** PredictionTrainedmodelsGet
-    , module Network.Google.Resource.Prediction.Trainedmodels.Get
+    -- ** PredictionTrainedModelsGet
+    , module Network.Google.Resource.Prediction.TrainedModels.Get
 
-    -- ** PredictionTrainedmodelsInsert
-    , module Network.Google.Resource.Prediction.Trainedmodels.Insert
+    -- ** PredictionTrainedModelsInsert
+    , module Network.Google.Resource.Prediction.TrainedModels.Insert
 
-    -- ** PredictionTrainedmodelsList
-    , module Network.Google.Resource.Prediction.Trainedmodels.List
+    -- ** PredictionTrainedModelsList
+    , module Network.Google.Resource.Prediction.TrainedModels.List
 
-    -- ** PredictionTrainedmodelsPredict
-    , module Network.Google.Resource.Prediction.Trainedmodels.Predict
+    -- ** PredictionTrainedModelsPredict
+    , module Network.Google.Resource.Prediction.TrainedModels.Predict
 
-    -- ** PredictionTrainedmodelsUpdate
-    , module Network.Google.Resource.Prediction.Trainedmodels.Update
+    -- ** PredictionTrainedModelsUpdate
+    , module Network.Google.Resource.Prediction.TrainedModels.Update
 
     -- * Types
 
@@ -122,7 +122,7 @@ module Network.Google.Prediction
     -- ** InputInput
     , InputInput
     , inputInput
-    , iiCsvInstance
+    , iiCSVInstance
 
     -- ** Input
     , Input
@@ -187,12 +187,12 @@ module Network.Google.Prediction
     , analyzeModelDescription
     , amdConfusionMatrixRowTotals
     , amdConfusionMatrix
-    , amdModelinfo
+    , amdModelInfo
 
     -- ** InsertTrainingInstances
     , InsertTrainingInstances
     , insertTrainingInstances
-    , itiCsvInstance
+    , itiCSVInstance
     , itiOutput
 
     -- ** AnalyzeDataDescriptionFeaturesCategoricalValues
@@ -217,11 +217,8 @@ module Network.Google.Prediction
     -- ** Update
     , Update
     , update
-    , uCsvInstance
+    , uCSVInstance
     , uOutput
-
-    -- ** Alt
-    , Alt (..)
 
     -- ** AnalyzeDataDescriptionOutputFeature
     , AnalyzeDataDescriptionOutputFeature
@@ -232,28 +229,28 @@ module Network.Google.Prediction
 
 import           Network.Google.Prediction.Types
 import           Network.Google.Prelude
-import           Network.Google.Resource.Prediction.Hostedmodels.Predict
-import           Network.Google.Resource.Prediction.Trainedmodels.Analyze
-import           Network.Google.Resource.Prediction.Trainedmodels.Delete
-import           Network.Google.Resource.Prediction.Trainedmodels.Get
-import           Network.Google.Resource.Prediction.Trainedmodels.Insert
-import           Network.Google.Resource.Prediction.Trainedmodels.List
-import           Network.Google.Resource.Prediction.Trainedmodels.Predict
-import           Network.Google.Resource.Prediction.Trainedmodels.Update
+import           Network.Google.Resource.Prediction.HostedModels.Predict
+import           Network.Google.Resource.Prediction.TrainedModels.Analyze
+import           Network.Google.Resource.Prediction.TrainedModels.Delete
+import           Network.Google.Resource.Prediction.TrainedModels.Get
+import           Network.Google.Resource.Prediction.TrainedModels.Insert
+import           Network.Google.Resource.Prediction.TrainedModels.List
+import           Network.Google.Resource.Prediction.TrainedModels.Predict
+import           Network.Google.Resource.Prediction.TrainedModels.Update
 
 {- $resources
 TODO
 -}
 
 type PredictionAPI =
-     TrainedmodelsInsertResource :<|>
-       TrainedmodelsListResource
-       :<|> TrainedmodelsGetResource
-       :<|> TrainedmodelsAnalyzeResource
-       :<|> TrainedmodelsPredictResource
-       :<|> TrainedmodelsDeleteResource
-       :<|> TrainedmodelsUpdateResource
-       :<|> HostedmodelsPredictResource
+     TrainedModelsInsertResource :<|>
+       TrainedModelsListResource
+       :<|> TrainedModelsGetResource
+       :<|> TrainedModelsAnalyzeResource
+       :<|> TrainedModelsPredictResource
+       :<|> TrainedModelsDeleteResource
+       :<|> TrainedModelsUpdateResource
+       :<|> HostedModelsPredictResource
 
 predictionAPI :: Proxy PredictionAPI
 predictionAPI = Proxy

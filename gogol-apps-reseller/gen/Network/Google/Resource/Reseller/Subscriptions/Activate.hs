@@ -32,13 +32,12 @@ module Network.Google.Resource.Reseller.Subscriptions.Activate
     -- * Request Lenses
     , saQuotaUser
     , saPrettyPrint
-    , saUserIp
+    , saUserIP
     , saCustomerId
     , saKey
-    , saOauthToken
+    , saOAuthToken
     , saSubscriptionId
     , saFields
-    , saAlt
     ) where
 
 import           Network.Google.AppsReseller.Types
@@ -55,10 +54,10 @@ type SubscriptionsActivateResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Post '[JSON] Subscription
+                           QueryParam "alt" AltJSON :> Post '[JSON] Subscription
 
 -- | Activates a subscription previously suspended by the reseller
 --
@@ -66,13 +65,12 @@ type SubscriptionsActivateResource =
 data SubscriptionsActivate' = SubscriptionsActivate'
     { _saQuotaUser      :: !(Maybe Text)
     , _saPrettyPrint    :: !Bool
-    , _saUserIp         :: !(Maybe Text)
+    , _saUserIP         :: !(Maybe Text)
     , _saCustomerId     :: !Text
-    , _saKey            :: !(Maybe Text)
-    , _saOauthToken     :: !(Maybe Text)
+    , _saKey            :: !(Maybe Key)
+    , _saOAuthToken     :: !(Maybe OAuthToken)
     , _saSubscriptionId :: !Text
     , _saFields         :: !(Maybe Text)
-    , _saAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionsActivate'' with the minimum fields required to make a request.
@@ -83,19 +81,17 @@ data SubscriptionsActivate' = SubscriptionsActivate'
 --
 -- * 'saPrettyPrint'
 --
--- * 'saUserIp'
+-- * 'saUserIP'
 --
 -- * 'saCustomerId'
 --
 -- * 'saKey'
 --
--- * 'saOauthToken'
+-- * 'saOAuthToken'
 --
 -- * 'saSubscriptionId'
 --
 -- * 'saFields'
---
--- * 'saAlt'
 subscriptionsActivate'
     :: Text -- ^ 'customerId'
     -> Text -- ^ 'subscriptionId'
@@ -104,13 +100,12 @@ subscriptionsActivate' pSaCustomerId_ pSaSubscriptionId_ =
     SubscriptionsActivate'
     { _saQuotaUser = Nothing
     , _saPrettyPrint = True
-    , _saUserIp = Nothing
+    , _saUserIP = Nothing
     , _saCustomerId = pSaCustomerId_
     , _saKey = Nothing
-    , _saOauthToken = Nothing
+    , _saOAuthToken = Nothing
     , _saSubscriptionId = pSaSubscriptionId_
     , _saFields = Nothing
-    , _saAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -128,8 +123,8 @@ saPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-saUserIp :: Lens' SubscriptionsActivate' (Maybe Text)
-saUserIp = lens _saUserIp (\ s a -> s{_saUserIp = a})
+saUserIP :: Lens' SubscriptionsActivate' (Maybe Text)
+saUserIP = lens _saUserIP (\ s a -> s{_saUserIP = a})
 
 -- | Id of the Customer
 saCustomerId :: Lens' SubscriptionsActivate' Text
@@ -139,13 +134,13 @@ saCustomerId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-saKey :: Lens' SubscriptionsActivate' (Maybe Text)
+saKey :: Lens' SubscriptionsActivate' (Maybe Key)
 saKey = lens _saKey (\ s a -> s{_saKey = a})
 
 -- | OAuth 2.0 token for the current user.
-saOauthToken :: Lens' SubscriptionsActivate' (Maybe Text)
-saOauthToken
-  = lens _saOauthToken (\ s a -> s{_saOauthToken = a})
+saOAuthToken :: Lens' SubscriptionsActivate' (Maybe OAuthToken)
+saOAuthToken
+  = lens _saOAuthToken (\ s a -> s{_saOAuthToken = a})
 
 -- | Id of the subscription, which is unique for a customer
 saSubscriptionId :: Lens' SubscriptionsActivate' Text
@@ -157,21 +152,21 @@ saSubscriptionId
 saFields :: Lens' SubscriptionsActivate' (Maybe Text)
 saFields = lens _saFields (\ s a -> s{_saFields = a})
 
--- | Data format for the response.
-saAlt :: Lens' SubscriptionsActivate' Alt
-saAlt = lens _saAlt (\ s a -> s{_saAlt = a})
+instance GoogleAuth SubscriptionsActivate' where
+        authKey = saKey . _Just
+        authToken = saOAuthToken . _Just
 
 instance GoogleRequest SubscriptionsActivate' where
         type Rs SubscriptionsActivate' = Subscription
         request = requestWithRoute defReq appsResellerURL
         requestWithRoute r u SubscriptionsActivate'{..}
-          = go _saQuotaUser (Just _saPrettyPrint) _saUserIp
+          = go _saQuotaUser (Just _saPrettyPrint) _saUserIP
               _saCustomerId
               _saKey
-              _saOauthToken
+              _saOAuthToken
               _saSubscriptionId
               _saFields
-              (Just _saAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy SubscriptionsActivateResource)

@@ -21,7 +21,7 @@
 -- method to poll the operation result at intervals as recommended by the
 -- API service.
 --
--- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @StoragetransferTransferOperationsGet@.
+-- /See:/ <https://cloud.google.com/storage/transfer Google Storage Transfer API Reference> for @StorageTransferTransferOperationsGet@.
 module Network.Google.Resource.StorageTransfer.TransferOperations.Get
     (
     -- * REST Resource
@@ -42,16 +42,15 @@ module Network.Google.Resource.StorageTransfer.TransferOperations.Get
     , togBearerToken
     , togKey
     , togName
-    , togOauthToken
+    , togOAuthToken
     , togFields
     , togCallback
-    , togAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.StorageTransfer.Types
 
--- | A resource alias for @StoragetransferTransferOperationsGet@ which the
+-- | A resource alias for @StorageTransferTransferOperationsGet@ which the
 -- 'TransferOperationsGet'' request conforms to.
 type TransferOperationsGetResource =
      "v1" :>
@@ -64,11 +63,12 @@ type TransferOperationsGetResource =
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
                        QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
                                QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :> Get '[JSON] Operation
+                                 QueryParam "alt" AltJSON :>
+                                   Get '[JSON] Operation
 
 -- | Gets the latest state of a long-running operation. Clients can use this
 -- method to poll the operation result at intervals as recommended by the
@@ -84,12 +84,11 @@ data TransferOperationsGet' = TransferOperationsGet'
     , _togAccessToken    :: !(Maybe Text)
     , _togUploadType     :: !(Maybe Text)
     , _togBearerToken    :: !(Maybe Text)
-    , _togKey            :: !(Maybe Text)
+    , _togKey            :: !(Maybe Key)
     , _togName           :: !Text
-    , _togOauthToken     :: !(Maybe Text)
+    , _togOAuthToken     :: !(Maybe OAuthToken)
     , _togFields         :: !(Maybe Text)
     , _togCallback       :: !(Maybe Text)
-    , _togAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TransferOperationsGet'' with the minimum fields required to make a request.
@@ -116,13 +115,11 @@ data TransferOperationsGet' = TransferOperationsGet'
 --
 -- * 'togName'
 --
--- * 'togOauthToken'
+-- * 'togOAuthToken'
 --
 -- * 'togFields'
 --
 -- * 'togCallback'
---
--- * 'togAlt'
 transferOperationsGet'
     :: Text -- ^ 'name'
     -> TransferOperationsGet'
@@ -138,10 +135,9 @@ transferOperationsGet' pTogName_ =
     , _togBearerToken = Nothing
     , _togKey = Nothing
     , _togName = pTogName_
-    , _togOauthToken = Nothing
+    , _togOAuthToken = Nothing
     , _togFields = Nothing
     , _togCallback = Nothing
-    , _togAlt = "json"
     }
 
 -- | V1 error format.
@@ -192,7 +188,7 @@ togBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-togKey :: Lens' TransferOperationsGet' (Maybe Text)
+togKey :: Lens' TransferOperationsGet' (Maybe Key)
 togKey = lens _togKey (\ s a -> s{_togKey = a})
 
 -- | The name of the operation resource.
@@ -200,10 +196,10 @@ togName :: Lens' TransferOperationsGet' Text
 togName = lens _togName (\ s a -> s{_togName = a})
 
 -- | OAuth 2.0 token for the current user.
-togOauthToken :: Lens' TransferOperationsGet' (Maybe Text)
-togOauthToken
-  = lens _togOauthToken
-      (\ s a -> s{_togOauthToken = a})
+togOAuthToken :: Lens' TransferOperationsGet' (Maybe OAuthToken)
+togOAuthToken
+  = lens _togOAuthToken
+      (\ s a -> s{_togOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 togFields :: Lens' TransferOperationsGet' (Maybe Text)
@@ -215,9 +211,9 @@ togCallback :: Lens' TransferOperationsGet' (Maybe Text)
 togCallback
   = lens _togCallback (\ s a -> s{_togCallback = a})
 
--- | Data format for response.
-togAlt :: Lens' TransferOperationsGet' Text
-togAlt = lens _togAlt (\ s a -> s{_togAlt = a})
+instance GoogleAuth TransferOperationsGet' where
+        authKey = togKey . _Just
+        authToken = togOAuthToken . _Just
 
 instance GoogleRequest TransferOperationsGet' where
         type Rs TransferOperationsGet' = Operation
@@ -231,10 +227,10 @@ instance GoogleRequest TransferOperationsGet' where
               _togBearerToken
               _togKey
               _togName
-              _togOauthToken
+              _togOAuthToken
               _togFields
               _togCallback
-              (Just _togAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TransferOperationsGetResource)

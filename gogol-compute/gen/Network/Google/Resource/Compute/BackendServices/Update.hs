@@ -33,11 +33,11 @@ module Network.Google.Resource.Compute.BackendServices.Update
     , bsuQuotaUser
     , bsuPrettyPrint
     , bsuProject
-    , bsuUserIp
+    , bsuUserIP
     , bsuKey
-    , bsuOauthToken
+    , bsuOAuthToken
+    , bsuBackendService
     , bsuFields
-    , bsuAlt
     , bsuBackendService
     ) where
 
@@ -54,10 +54,12 @@ type BackendServicesUpdateResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Put '[JSON] Operation
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] BackendService :>
+                             Put '[JSON] Operation
 
 -- | Update the entire content of the BackendService resource.
 --
@@ -66,11 +68,11 @@ data BackendServicesUpdate' = BackendServicesUpdate'
     { _bsuQuotaUser      :: !(Maybe Text)
     , _bsuPrettyPrint    :: !Bool
     , _bsuProject        :: !Text
-    , _bsuUserIp         :: !(Maybe Text)
-    , _bsuKey            :: !(Maybe Text)
-    , _bsuOauthToken     :: !(Maybe Text)
+    , _bsuUserIP         :: !(Maybe Text)
+    , _bsuKey            :: !(Maybe Key)
+    , _bsuOAuthToken     :: !(Maybe OAuthToken)
+    , _bsuBackendService :: !BackendService
     , _bsuFields         :: !(Maybe Text)
-    , _bsuAlt            :: !Alt
     , _bsuBackendService :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -84,31 +86,32 @@ data BackendServicesUpdate' = BackendServicesUpdate'
 --
 -- * 'bsuProject'
 --
--- * 'bsuUserIp'
+-- * 'bsuUserIP'
 --
 -- * 'bsuKey'
 --
--- * 'bsuOauthToken'
+-- * 'bsuOAuthToken'
+--
+-- * 'bsuBackendService'
 --
 -- * 'bsuFields'
---
--- * 'bsuAlt'
 --
 -- * 'bsuBackendService'
 backendServicesUpdate'
     :: Text -- ^ 'project'
+    -> BackendService -- ^ 'BackendService'
     -> Text -- ^ 'backendService'
     -> BackendServicesUpdate'
-backendServicesUpdate' pBsuProject_ pBsuBackendService_ =
+backendServicesUpdate' pBsuProject_ pBsuBackendService_ pBsuBackendService_ =
     BackendServicesUpdate'
     { _bsuQuotaUser = Nothing
     , _bsuPrettyPrint = True
     , _bsuProject = pBsuProject_
-    , _bsuUserIp = Nothing
+    , _bsuUserIP = Nothing
     , _bsuKey = Nothing
-    , _bsuOauthToken = Nothing
+    , _bsuOAuthToken = Nothing
+    , _bsuBackendService = pBsuBackendService_
     , _bsuFields = Nothing
-    , _bsuAlt = JSON
     , _bsuBackendService = pBsuBackendService_
     }
 
@@ -132,30 +135,32 @@ bsuProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-bsuUserIp :: Lens' BackendServicesUpdate' (Maybe Text)
-bsuUserIp
-  = lens _bsuUserIp (\ s a -> s{_bsuUserIp = a})
+bsuUserIP :: Lens' BackendServicesUpdate' (Maybe Text)
+bsuUserIP
+  = lens _bsuUserIP (\ s a -> s{_bsuUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-bsuKey :: Lens' BackendServicesUpdate' (Maybe Text)
+bsuKey :: Lens' BackendServicesUpdate' (Maybe Key)
 bsuKey = lens _bsuKey (\ s a -> s{_bsuKey = a})
 
 -- | OAuth 2.0 token for the current user.
-bsuOauthToken :: Lens' BackendServicesUpdate' (Maybe Text)
-bsuOauthToken
-  = lens _bsuOauthToken
-      (\ s a -> s{_bsuOauthToken = a})
+bsuOAuthToken :: Lens' BackendServicesUpdate' (Maybe OAuthToken)
+bsuOAuthToken
+  = lens _bsuOAuthToken
+      (\ s a -> s{_bsuOAuthToken = a})
+
+-- | Multipart request metadata.
+bsuBackendService :: Lens' BackendServicesUpdate' BackendService
+bsuBackendService
+  = lens _bsuBackendService
+      (\ s a -> s{_bsuBackendService = a})
 
 -- | Selector specifying which fields to include in a partial response.
 bsuFields :: Lens' BackendServicesUpdate' (Maybe Text)
 bsuFields
   = lens _bsuFields (\ s a -> s{_bsuFields = a})
-
--- | Data format for the response.
-bsuAlt :: Lens' BackendServicesUpdate' Alt
-bsuAlt = lens _bsuAlt (\ s a -> s{_bsuAlt = a})
 
 -- | Name of the BackendService resource to update.
 bsuBackendService :: Lens' BackendServicesUpdate' Text
@@ -163,16 +168,21 @@ bsuBackendService
   = lens _bsuBackendService
       (\ s a -> s{_bsuBackendService = a})
 
+instance GoogleAuth BackendServicesUpdate' where
+        authKey = bsuKey . _Just
+        authToken = bsuOAuthToken . _Just
+
 instance GoogleRequest BackendServicesUpdate' where
         type Rs BackendServicesUpdate' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u BackendServicesUpdate'{..}
           = go _bsuQuotaUser (Just _bsuPrettyPrint) _bsuProject
-              _bsuUserIp
+              _bsuUserIP
               _bsuKey
-              _bsuOauthToken
+              _bsuOAuthToken
               _bsuFields
-              (Just _bsuAlt)
+              _bsuBackendService
+              (Just AltJSON)
               _bsuBackendService
           where go
                   = clientWithRoute

@@ -33,17 +33,16 @@ module Network.Google.Resource.BigQuery.Tabledata.List
     -- * Request Lenses
     , tQuotaUser
     , tPrettyPrint
-    , tUserIp
+    , tUserIP
     , tKey
     , tDatasetId
     , tPageToken
     , tProjectId
-    , tOauthToken
+    , tOAuthToken
     , tTableId
     , tStartIndex
     , tMaxResults
     , tFields
-    , tAlt
     ) where
 
 import           Network.Google.BigQuery.Types
@@ -62,13 +61,13 @@ type TabledataListResource =
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
+                         QueryParam "key" Key :>
                            QueryParam "pageToken" Text :>
-                             QueryParam "oauth_token" Text :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "startIndex" Word64 :>
                                  QueryParam "maxResults" Word32 :>
                                    QueryParam "fields" Text :>
-                                     QueryParam "alt" Alt :>
+                                     QueryParam "alt" AltJSON :>
                                        Get '[JSON] TableDataList
 
 -- | Retrieves table data from a specified set of rows. Requires the READER
@@ -78,17 +77,16 @@ type TabledataListResource =
 data TabledataList' = TabledataList'
     { _tQuotaUser   :: !(Maybe Text)
     , _tPrettyPrint :: !Bool
-    , _tUserIp      :: !(Maybe Text)
-    , _tKey         :: !(Maybe Text)
+    , _tUserIP      :: !(Maybe Text)
+    , _tKey         :: !(Maybe Key)
     , _tDatasetId   :: !Text
     , _tPageToken   :: !(Maybe Text)
     , _tProjectId   :: !Text
-    , _tOauthToken  :: !(Maybe Text)
+    , _tOAuthToken  :: !(Maybe OAuthToken)
     , _tTableId     :: !Text
     , _tStartIndex  :: !(Maybe Word64)
     , _tMaxResults  :: !(Maybe Word32)
     , _tFields      :: !(Maybe Text)
-    , _tAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TabledataList'' with the minimum fields required to make a request.
@@ -99,7 +97,7 @@ data TabledataList' = TabledataList'
 --
 -- * 'tPrettyPrint'
 --
--- * 'tUserIp'
+-- * 'tUserIP'
 --
 -- * 'tKey'
 --
@@ -109,7 +107,7 @@ data TabledataList' = TabledataList'
 --
 -- * 'tProjectId'
 --
--- * 'tOauthToken'
+-- * 'tOAuthToken'
 --
 -- * 'tTableId'
 --
@@ -118,8 +116,6 @@ data TabledataList' = TabledataList'
 -- * 'tMaxResults'
 --
 -- * 'tFields'
---
--- * 'tAlt'
 tabledataList'
     :: Text -- ^ 'datasetId'
     -> Text -- ^ 'projectId'
@@ -129,17 +125,16 @@ tabledataList' pTDatasetId_ pTProjectId_ pTTableId_ =
     TabledataList'
     { _tQuotaUser = Nothing
     , _tPrettyPrint = True
-    , _tUserIp = Nothing
+    , _tUserIP = Nothing
     , _tKey = Nothing
     , _tDatasetId = pTDatasetId_
     , _tPageToken = Nothing
     , _tProjectId = pTProjectId_
-    , _tOauthToken = Nothing
+    , _tOAuthToken = Nothing
     , _tTableId = pTTableId_
     , _tStartIndex = Nothing
     , _tMaxResults = Nothing
     , _tFields = Nothing
-    , _tAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -156,13 +151,13 @@ tPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tUserIp :: Lens' TabledataList' (Maybe Text)
-tUserIp = lens _tUserIp (\ s a -> s{_tUserIp = a})
+tUserIP :: Lens' TabledataList' (Maybe Text)
+tUserIP = lens _tUserIP (\ s a -> s{_tUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tKey :: Lens' TabledataList' (Maybe Text)
+tKey :: Lens' TabledataList' (Maybe Key)
 tKey = lens _tKey (\ s a -> s{_tKey = a})
 
 -- | Dataset ID of the table to read
@@ -181,9 +176,9 @@ tProjectId
   = lens _tProjectId (\ s a -> s{_tProjectId = a})
 
 -- | OAuth 2.0 token for the current user.
-tOauthToken :: Lens' TabledataList' (Maybe Text)
-tOauthToken
-  = lens _tOauthToken (\ s a -> s{_tOauthToken = a})
+tOAuthToken :: Lens' TabledataList' (Maybe OAuthToken)
+tOAuthToken
+  = lens _tOAuthToken (\ s a -> s{_tOAuthToken = a})
 
 -- | Table ID of the table to read
 tTableId :: Lens' TabledataList' Text
@@ -203,24 +198,24 @@ tMaxResults
 tFields :: Lens' TabledataList' (Maybe Text)
 tFields = lens _tFields (\ s a -> s{_tFields = a})
 
--- | Data format for the response.
-tAlt :: Lens' TabledataList' Alt
-tAlt = lens _tAlt (\ s a -> s{_tAlt = a})
+instance GoogleAuth TabledataList' where
+        authKey = tKey . _Just
+        authToken = tOAuthToken . _Just
 
 instance GoogleRequest TabledataList' where
         type Rs TabledataList' = TableDataList
         request = requestWithRoute defReq bigQueryURL
         requestWithRoute r u TabledataList'{..}
-          = go _tQuotaUser (Just _tPrettyPrint) _tUserIp _tKey
+          = go _tQuotaUser (Just _tPrettyPrint) _tUserIP _tKey
               _tDatasetId
               _tPageToken
               _tProjectId
-              _tOauthToken
+              _tOAuthToken
               _tTableId
               _tStartIndex
               _tMaxResults
               _tFields
-              (Just _tAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TabledataListResource)

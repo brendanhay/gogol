@@ -34,16 +34,15 @@ module Network.Google.Resource.Mirror.Timeline.List
     , tlQuotaUser
     , tlPrettyPrint
     , tlOrderBy
-    , tlUserIp
+    , tlUserIP
     , tlBundleId
     , tlKey
     , tlSourceItemId
     , tlPageToken
-    , tlOauthToken
+    , tlOAuthToken
     , tlMaxResults
     , tlIncludeDeleted
     , tlFields
-    , tlAlt
     ) where
 
 import           Network.Google.Mirror.Types
@@ -59,14 +58,14 @@ type TimelineListResource =
              QueryParam "orderBy" MirrorTimelineListOrderBy :>
                QueryParam "userIp" Text :>
                  QueryParam "bundleId" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "sourceItemId" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "maxResults" Word32 :>
                              QueryParam "includeDeleted" Bool :>
                                QueryParam "fields" Text :>
-                                 QueryParam "alt" Alt :>
+                                 QueryParam "alt" AltJSON :>
                                    Get '[JSON] TimelineListResponse
 
 -- | Retrieves a list of timeline items for the authenticated user.
@@ -77,16 +76,15 @@ data TimelineList' = TimelineList'
     , _tlQuotaUser      :: !(Maybe Text)
     , _tlPrettyPrint    :: !Bool
     , _tlOrderBy        :: !(Maybe MirrorTimelineListOrderBy)
-    , _tlUserIp         :: !(Maybe Text)
+    , _tlUserIP         :: !(Maybe Text)
     , _tlBundleId       :: !(Maybe Text)
-    , _tlKey            :: !(Maybe Text)
+    , _tlKey            :: !(Maybe Key)
     , _tlSourceItemId   :: !(Maybe Text)
     , _tlPageToken      :: !(Maybe Text)
-    , _tlOauthToken     :: !(Maybe Text)
+    , _tlOAuthToken     :: !(Maybe OAuthToken)
     , _tlMaxResults     :: !(Maybe Word32)
     , _tlIncludeDeleted :: !(Maybe Bool)
     , _tlFields         :: !(Maybe Text)
-    , _tlAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TimelineList'' with the minimum fields required to make a request.
@@ -101,7 +99,7 @@ data TimelineList' = TimelineList'
 --
 -- * 'tlOrderBy'
 --
--- * 'tlUserIp'
+-- * 'tlUserIP'
 --
 -- * 'tlBundleId'
 --
@@ -111,15 +109,13 @@ data TimelineList' = TimelineList'
 --
 -- * 'tlPageToken'
 --
--- * 'tlOauthToken'
+-- * 'tlOAuthToken'
 --
 -- * 'tlMaxResults'
 --
 -- * 'tlIncludeDeleted'
 --
 -- * 'tlFields'
---
--- * 'tlAlt'
 timelineList'
     :: TimelineList'
 timelineList' =
@@ -128,16 +124,15 @@ timelineList' =
     , _tlQuotaUser = Nothing
     , _tlPrettyPrint = True
     , _tlOrderBy = Nothing
-    , _tlUserIp = Nothing
+    , _tlUserIP = Nothing
     , _tlBundleId = Nothing
     , _tlKey = Nothing
     , _tlSourceItemId = Nothing
     , _tlPageToken = Nothing
-    , _tlOauthToken = Nothing
+    , _tlOAuthToken = Nothing
     , _tlMaxResults = Nothing
     , _tlIncludeDeleted = Nothing
     , _tlFields = Nothing
-    , _tlAlt = JSON
     }
 
 -- | If true, only pinned items will be returned.
@@ -165,8 +160,8 @@ tlOrderBy
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tlUserIp :: Lens' TimelineList' (Maybe Text)
-tlUserIp = lens _tlUserIp (\ s a -> s{_tlUserIp = a})
+tlUserIP :: Lens' TimelineList' (Maybe Text)
+tlUserIP = lens _tlUserIP (\ s a -> s{_tlUserIP = a})
 
 -- | If provided, only items with the given bundleId will be returned.
 tlBundleId :: Lens' TimelineList' (Maybe Text)
@@ -176,7 +171,7 @@ tlBundleId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tlKey :: Lens' TimelineList' (Maybe Text)
+tlKey :: Lens' TimelineList' (Maybe Key)
 tlKey = lens _tlKey (\ s a -> s{_tlKey = a})
 
 -- | If provided, only items with the given sourceItemId will be returned.
@@ -191,9 +186,9 @@ tlPageToken
   = lens _tlPageToken (\ s a -> s{_tlPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-tlOauthToken :: Lens' TimelineList' (Maybe Text)
-tlOauthToken
-  = lens _tlOauthToken (\ s a -> s{_tlOauthToken = a})
+tlOAuthToken :: Lens' TimelineList' (Maybe OAuthToken)
+tlOAuthToken
+  = lens _tlOAuthToken (\ s a -> s{_tlOAuthToken = a})
 
 -- | The maximum number of items to include in the response, used for paging.
 tlMaxResults :: Lens' TimelineList' (Maybe Word32)
@@ -210,9 +205,9 @@ tlIncludeDeleted
 tlFields :: Lens' TimelineList' (Maybe Text)
 tlFields = lens _tlFields (\ s a -> s{_tlFields = a})
 
--- | Data format for the response.
-tlAlt :: Lens' TimelineList' Alt
-tlAlt = lens _tlAlt (\ s a -> s{_tlAlt = a})
+instance GoogleAuth TimelineList' where
+        authKey = tlKey . _Just
+        authToken = tlOAuthToken . _Just
 
 instance GoogleRequest TimelineList' where
         type Rs TimelineList' = TimelineListResponse
@@ -220,16 +215,16 @@ instance GoogleRequest TimelineList' where
         requestWithRoute r u TimelineList'{..}
           = go _tlPinnedOnly _tlQuotaUser (Just _tlPrettyPrint)
               _tlOrderBy
-              _tlUserIp
+              _tlUserIP
               _tlBundleId
               _tlKey
               _tlSourceItemId
               _tlPageToken
-              _tlOauthToken
+              _tlOAuthToken
               _tlMaxResults
               _tlIncludeDeleted
               _tlFields
-              (Just _tlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TimelineListResource)

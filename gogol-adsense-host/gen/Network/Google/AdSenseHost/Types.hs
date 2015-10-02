@@ -27,8 +27,8 @@ module Network.Google.AdSenseHost.Types
     , asAccountId
     , asProductCodes
     , asId
-    , asWebsiteUrl
-    , asRedirectUrl
+    , asWebsiteURL
+    , asRedirectURL
 
     -- * AdClients
     , AdClients
@@ -128,10 +128,10 @@ module Network.Google.AdSenseHost.Types
     , AdStyleColors
     , adStyleColors
     , ascText
-    , ascUrl
-    , ascBorder
+    , ascURL
+    , ascBOrder
     , ascTitle
-    , ascBackground
+    , ascBackgRound
 
     -- * AdClient
     , AdClient
@@ -146,7 +146,7 @@ module Network.Google.AdSenseHost.Types
     , AdUnitContentAdsSettingsBackupOption
     , adUnitContentAdsSettingsBackupOption
     , aucasboColor
-    , aucasboUrl
+    , aucasboURL
     , aucasboType
 
     -- * AdStyle
@@ -170,7 +170,7 @@ module Network.Google.AdSenseHost.Types
     , uRLChannel
     , urlcKind
     , urlcId
-    , urlcUrlPattern
+    , urlcURLPattern
 
     -- * AdCode
     , AdCode
@@ -184,9 +184,6 @@ module Network.Google.AdSenseHost.Types
     , aucasBackupOption
     , aucasSize
     , aucasType
-
-    -- * Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.AdSenseHost.Types.Product

@@ -19,7 +19,7 @@
 --
 -- | Creates a Container.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersCreate@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersCreate@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Create
     (
     -- * REST Resource
@@ -32,18 +32,18 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Create
     -- * Request Lenses
     , accQuotaUser
     , accPrettyPrint
-    , accUserIp
+    , accUserIP
     , accAccountId
     , accKey
-    , accOauthToken
+    , accContainer
+    , accOAuthToken
     , accFields
-    , accAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagmanagerAccountsContainersCreate@ which the
+-- | A resource alias for @TagManagerAccountsContainersCreate@ which the
 -- 'AccountsContainersCreate'' request conforms to.
 type AccountsContainersCreateResource =
      "accounts" :>
@@ -52,10 +52,11 @@ type AccountsContainersCreateResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] Container
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Container :> Post '[JSON] Container
 
 -- | Creates a Container.
 --
@@ -63,12 +64,12 @@ type AccountsContainersCreateResource =
 data AccountsContainersCreate' = AccountsContainersCreate'
     { _accQuotaUser   :: !(Maybe Text)
     , _accPrettyPrint :: !Bool
-    , _accUserIp      :: !(Maybe Text)
+    , _accUserIP      :: !(Maybe Text)
     , _accAccountId   :: !Text
-    , _accKey         :: !(Maybe Text)
-    , _accOauthToken  :: !(Maybe Text)
+    , _accKey         :: !(Maybe Key)
+    , _accContainer   :: !Container
+    , _accOAuthToken  :: !(Maybe OAuthToken)
     , _accFields      :: !(Maybe Text)
-    , _accAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersCreate'' with the minimum fields required to make a request.
@@ -79,30 +80,31 @@ data AccountsContainersCreate' = AccountsContainersCreate'
 --
 -- * 'accPrettyPrint'
 --
--- * 'accUserIp'
+-- * 'accUserIP'
 --
 -- * 'accAccountId'
 --
 -- * 'accKey'
 --
--- * 'accOauthToken'
+-- * 'accContainer'
+--
+-- * 'accOAuthToken'
 --
 -- * 'accFields'
---
--- * 'accAlt'
 accountsContainersCreate'
     :: Text -- ^ 'accountId'
+    -> Container -- ^ 'Container'
     -> AccountsContainersCreate'
-accountsContainersCreate' pAccAccountId_ =
+accountsContainersCreate' pAccAccountId_ pAccContainer_ =
     AccountsContainersCreate'
     { _accQuotaUser = Nothing
     , _accPrettyPrint = True
-    , _accUserIp = Nothing
+    , _accUserIP = Nothing
     , _accAccountId = pAccAccountId_
     , _accKey = Nothing
-    , _accOauthToken = Nothing
+    , _accContainer = pAccContainer_
+    , _accOAuthToken = Nothing
     , _accFields = Nothing
-    , _accAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,9 +122,9 @@ accPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-accUserIp :: Lens' AccountsContainersCreate' (Maybe Text)
-accUserIp
-  = lens _accUserIp (\ s a -> s{_accUserIp = a})
+accUserIP :: Lens' AccountsContainersCreate' (Maybe Text)
+accUserIP
+  = lens _accUserIP (\ s a -> s{_accUserIP = a})
 
 -- | The GTM Account ID.
 accAccountId :: Lens' AccountsContainersCreate' Text
@@ -132,35 +134,41 @@ accAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-accKey :: Lens' AccountsContainersCreate' (Maybe Text)
+accKey :: Lens' AccountsContainersCreate' (Maybe Key)
 accKey = lens _accKey (\ s a -> s{_accKey = a})
 
+-- | Multipart request metadata.
+accContainer :: Lens' AccountsContainersCreate' Container
+accContainer
+  = lens _accContainer (\ s a -> s{_accContainer = a})
+
 -- | OAuth 2.0 token for the current user.
-accOauthToken :: Lens' AccountsContainersCreate' (Maybe Text)
-accOauthToken
-  = lens _accOauthToken
-      (\ s a -> s{_accOauthToken = a})
+accOAuthToken :: Lens' AccountsContainersCreate' (Maybe OAuthToken)
+accOAuthToken
+  = lens _accOAuthToken
+      (\ s a -> s{_accOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 accFields :: Lens' AccountsContainersCreate' (Maybe Text)
 accFields
   = lens _accFields (\ s a -> s{_accFields = a})
 
--- | Data format for the response.
-accAlt :: Lens' AccountsContainersCreate' Alt
-accAlt = lens _accAlt (\ s a -> s{_accAlt = a})
+instance GoogleAuth AccountsContainersCreate' where
+        authKey = accKey . _Just
+        authToken = accOAuthToken . _Just
 
 instance GoogleRequest AccountsContainersCreate'
          where
         type Rs AccountsContainersCreate' = Container
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u AccountsContainersCreate'{..}
-          = go _accQuotaUser (Just _accPrettyPrint) _accUserIp
+          = go _accQuotaUser (Just _accPrettyPrint) _accUserIP
               _accAccountId
               _accKey
-              _accOauthToken
+              _accOAuthToken
               _accFields
-              (Just _accAlt)
+              (Just AltJSON)
+              _accContainer
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountsContainersCreateResource)

@@ -21,7 +21,7 @@
 -- Authorization rules_ and _List methods rules_ for more information about
 -- this method.
 --
--- /See:/ <https://developers.google.com/playmoviespartner/ Google Play Movies Partner API Reference> for @PlaymoviespartnerAccountsStoreInfosList@.
+-- /See:/ <https://developers.google.com/playmoviespartner/ Google Play Movies Partner API Reference> for @PlaymoviesPartynerAccountsStoreInfosList@.
 module Network.Google.Resource.PlayMoviesPartner.Accounts.StoreInfos.List
     (
     -- * REST Resource
@@ -49,17 +49,16 @@ module Network.Google.Resource.PlayMoviesPartner.Accounts.StoreInfos.List
     , asilKey
     , asilName
     , asilPageToken
-    , asilOauthToken
+    , asilOAuthToken
     , asilPageSize
     , asilFields
     , asilCallback
-    , asilAlt
     ) where
 
 import           Network.Google.PlayMoviesPartner.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlaymoviespartnerAccountsStoreInfosList@ which the
+-- | A resource alias for @PlaymoviesPartynerAccountsStoreInfosList@ which the
 -- 'AccountsStoreInfosList'' request conforms to.
 type AccountsStoreInfosListResource =
      "v1" :>
@@ -79,14 +78,15 @@ type AccountsStoreInfosListResource =
                                  QueryParams "countries" Text :>
                                    QueryParam "videoId" Text :>
                                      QueryParam "bearer_token" Text :>
-                                       QueryParam "key" Text :>
+                                       QueryParam "key" Key :>
                                          QueryParam "name" Text :>
                                            QueryParam "pageToken" Text :>
-                                             QueryParam "oauth_token" Text :>
+                                             QueryParam "oauth_token" OAuthToken
+                                               :>
                                                QueryParam "pageSize" Int32 :>
                                                  QueryParam "fields" Text :>
                                                    QueryParam "callback" Text :>
-                                                     QueryParam "alt" Text :>
+                                                     QueryParam "alt" AltJSON :>
                                                        Get '[JSON]
                                                          ListStoreInfosResponse
 
@@ -110,14 +110,13 @@ data AccountsStoreInfosList' = AccountsStoreInfosList'
     , _asilVideoId        :: !(Maybe Text)
     , _asilAccountId      :: !Text
     , _asilBearerToken    :: !(Maybe Text)
-    , _asilKey            :: !(Maybe Text)
+    , _asilKey            :: !(Maybe Key)
     , _asilName           :: !(Maybe Text)
     , _asilPageToken      :: !(Maybe Text)
-    , _asilOauthToken     :: !(Maybe Text)
+    , _asilOAuthToken     :: !(Maybe OAuthToken)
     , _asilPageSize       :: !(Maybe Int32)
     , _asilFields         :: !(Maybe Text)
     , _asilCallback       :: !(Maybe Text)
-    , _asilAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsStoreInfosList'' with the minimum fields required to make a request.
@@ -158,15 +157,13 @@ data AccountsStoreInfosList' = AccountsStoreInfosList'
 --
 -- * 'asilPageToken'
 --
--- * 'asilOauthToken'
+-- * 'asilOAuthToken'
 --
 -- * 'asilPageSize'
 --
 -- * 'asilFields'
 --
 -- * 'asilCallback'
---
--- * 'asilAlt'
 accountsStoreInfosList'
     :: Text -- ^ 'accountId'
     -> AccountsStoreInfosList'
@@ -189,11 +186,10 @@ accountsStoreInfosList' pAsilAccountId_ =
     , _asilKey = Nothing
     , _asilName = Nothing
     , _asilPageToken = Nothing
-    , _asilOauthToken = Nothing
+    , _asilOAuthToken = Nothing
     , _asilPageSize = Nothing
     , _asilFields = Nothing
     , _asilCallback = Nothing
-    , _asilAlt = "json"
     }
 
 -- | See _List methods rules_ for info about this field.
@@ -283,7 +279,7 @@ asilBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-asilKey :: Lens' AccountsStoreInfosList' (Maybe Text)
+asilKey :: Lens' AccountsStoreInfosList' (Maybe Key)
 asilKey = lens _asilKey (\ s a -> s{_asilKey = a})
 
 -- | Filter StoreInfos that match a case-insensitive substring of the default
@@ -298,10 +294,10 @@ asilPageToken
       (\ s a -> s{_asilPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-asilOauthToken :: Lens' AccountsStoreInfosList' (Maybe Text)
-asilOauthToken
-  = lens _asilOauthToken
-      (\ s a -> s{_asilOauthToken = a})
+asilOAuthToken :: Lens' AccountsStoreInfosList' (Maybe OAuthToken)
+asilOAuthToken
+  = lens _asilOAuthToken
+      (\ s a -> s{_asilOAuthToken = a})
 
 -- | See _List methods rules_ for info about this field.
 asilPageSize :: Lens' AccountsStoreInfosList' (Maybe Int32)
@@ -318,9 +314,9 @@ asilCallback :: Lens' AccountsStoreInfosList' (Maybe Text)
 asilCallback
   = lens _asilCallback (\ s a -> s{_asilCallback = a})
 
--- | Data format for response.
-asilAlt :: Lens' AccountsStoreInfosList' Text
-asilAlt = lens _asilAlt (\ s a -> s{_asilAlt = a})
+instance GoogleAuth AccountsStoreInfosList' where
+        authKey = asilKey . _Just
+        authToken = asilOAuthToken . _Just
 
 instance GoogleRequest AccountsStoreInfosList' where
         type Rs AccountsStoreInfosList' =
@@ -343,11 +339,11 @@ instance GoogleRequest AccountsStoreInfosList' where
               _asilKey
               _asilName
               _asilPageToken
-              _asilOauthToken
+              _asilOAuthToken
               _asilPageSize
               _asilFields
               _asilCallback
-              (Just _asilAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountsStoreInfosListResource)

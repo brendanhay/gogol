@@ -32,14 +32,13 @@ module Network.Google.Resource.Games.Events.ListDefinitions
     -- * Request Lenses
     , eldQuotaUser
     , eldPrettyPrint
-    , eldUserIp
+    , eldUserIP
     , eldKey
     , eldLanguage
     , eldPageToken
-    , eldOauthToken
+    , eldOAuthToken
     , eldMaxResults
     , eldFields
-    , eldAlt
     ) where
 
 import           Network.Google.Games.Types
@@ -52,13 +51,13 @@ type EventsListDefinitionsResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
+             QueryParam "key" Key :>
                QueryParam "language" Text :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "oauth_token" Text :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "maxResults" Int32 :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :>
+                         QueryParam "alt" AltJSON :>
                            Get '[JSON] EventDefinitionListResponse
 
 -- | Returns a list of the event definitions in this application.
@@ -67,14 +66,13 @@ type EventsListDefinitionsResource =
 data EventsListDefinitions' = EventsListDefinitions'
     { _eldQuotaUser   :: !(Maybe Text)
     , _eldPrettyPrint :: !Bool
-    , _eldUserIp      :: !(Maybe Text)
-    , _eldKey         :: !(Maybe Text)
+    , _eldUserIP      :: !(Maybe Text)
+    , _eldKey         :: !(Maybe Key)
     , _eldLanguage    :: !(Maybe Text)
     , _eldPageToken   :: !(Maybe Text)
-    , _eldOauthToken  :: !(Maybe Text)
+    , _eldOAuthToken  :: !(Maybe OAuthToken)
     , _eldMaxResults  :: !(Maybe Int32)
     , _eldFields      :: !(Maybe Text)
-    , _eldAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsListDefinitions'' with the minimum fields required to make a request.
@@ -85,7 +83,7 @@ data EventsListDefinitions' = EventsListDefinitions'
 --
 -- * 'eldPrettyPrint'
 --
--- * 'eldUserIp'
+-- * 'eldUserIP'
 --
 -- * 'eldKey'
 --
@@ -93,27 +91,24 @@ data EventsListDefinitions' = EventsListDefinitions'
 --
 -- * 'eldPageToken'
 --
--- * 'eldOauthToken'
+-- * 'eldOAuthToken'
 --
 -- * 'eldMaxResults'
 --
 -- * 'eldFields'
---
--- * 'eldAlt'
 eventsListDefinitions'
     :: EventsListDefinitions'
 eventsListDefinitions' =
     EventsListDefinitions'
     { _eldQuotaUser = Nothing
     , _eldPrettyPrint = True
-    , _eldUserIp = Nothing
+    , _eldUserIP = Nothing
     , _eldKey = Nothing
     , _eldLanguage = Nothing
     , _eldPageToken = Nothing
-    , _eldOauthToken = Nothing
+    , _eldOAuthToken = Nothing
     , _eldMaxResults = Nothing
     , _eldFields = Nothing
-    , _eldAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -131,14 +126,14 @@ eldPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-eldUserIp :: Lens' EventsListDefinitions' (Maybe Text)
-eldUserIp
-  = lens _eldUserIp (\ s a -> s{_eldUserIp = a})
+eldUserIP :: Lens' EventsListDefinitions' (Maybe Text)
+eldUserIP
+  = lens _eldUserIP (\ s a -> s{_eldUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-eldKey :: Lens' EventsListDefinitions' (Maybe Text)
+eldKey :: Lens' EventsListDefinitions' (Maybe Key)
 eldKey = lens _eldKey (\ s a -> s{_eldKey = a})
 
 -- | The preferred language to use for strings returned by this method.
@@ -152,10 +147,10 @@ eldPageToken
   = lens _eldPageToken (\ s a -> s{_eldPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-eldOauthToken :: Lens' EventsListDefinitions' (Maybe Text)
-eldOauthToken
-  = lens _eldOauthToken
-      (\ s a -> s{_eldOauthToken = a})
+eldOAuthToken :: Lens' EventsListDefinitions' (Maybe OAuthToken)
+eldOAuthToken
+  = lens _eldOAuthToken
+      (\ s a -> s{_eldOAuthToken = a})
 
 -- | The maximum number of event definitions to return in the response, used
 -- for paging. For any response, the actual number of event definitions to
@@ -170,23 +165,23 @@ eldFields :: Lens' EventsListDefinitions' (Maybe Text)
 eldFields
   = lens _eldFields (\ s a -> s{_eldFields = a})
 
--- | Data format for the response.
-eldAlt :: Lens' EventsListDefinitions' Alt
-eldAlt = lens _eldAlt (\ s a -> s{_eldAlt = a})
+instance GoogleAuth EventsListDefinitions' where
+        authKey = eldKey . _Just
+        authToken = eldOAuthToken . _Just
 
 instance GoogleRequest EventsListDefinitions' where
         type Rs EventsListDefinitions' =
              EventDefinitionListResponse
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u EventsListDefinitions'{..}
-          = go _eldQuotaUser (Just _eldPrettyPrint) _eldUserIp
+          = go _eldQuotaUser (Just _eldPrettyPrint) _eldUserIP
               _eldKey
               _eldLanguage
               _eldPageToken
-              _eldOauthToken
+              _eldOAuthToken
               _eldMaxResults
               _eldFields
-              (Just _eldAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy EventsListDefinitionsResource)

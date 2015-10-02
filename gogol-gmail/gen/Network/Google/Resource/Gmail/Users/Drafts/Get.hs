@@ -32,14 +32,13 @@ module Network.Google.Resource.Gmail.Users.Drafts.Get
     -- * Request Lenses
     , udgQuotaUser
     , udgPrettyPrint
-    , udgUserIp
+    , udgUserIP
     , udgFormat
     , udgUserId
     , udgKey
     , udgId
-    , udgOauthToken
+    , udgOAuthToken
     , udgFields
-    , udgAlt
     ) where
 
 import           Network.Google.Gmail.Types
@@ -55,10 +54,10 @@ type UsersDraftsGetResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "format" GmailUsersDraftsGetFormat :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] Draft
+                         QueryParam "alt" AltJSON :> Get '[JSON] Draft
 
 -- | Gets the specified draft.
 --
@@ -66,14 +65,13 @@ type UsersDraftsGetResource =
 data UsersDraftsGet' = UsersDraftsGet'
     { _udgQuotaUser   :: !(Maybe Text)
     , _udgPrettyPrint :: !Bool
-    , _udgUserIp      :: !(Maybe Text)
+    , _udgUserIP      :: !(Maybe Text)
     , _udgFormat      :: !GmailUsersDraftsGetFormat
     , _udgUserId      :: !Text
-    , _udgKey         :: !(Maybe Text)
+    , _udgKey         :: !(Maybe Key)
     , _udgId          :: !Text
-    , _udgOauthToken  :: !(Maybe Text)
+    , _udgOAuthToken  :: !(Maybe OAuthToken)
     , _udgFields      :: !(Maybe Text)
-    , _udgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDraftsGet'' with the minimum fields required to make a request.
@@ -84,7 +82,7 @@ data UsersDraftsGet' = UsersDraftsGet'
 --
 -- * 'udgPrettyPrint'
 --
--- * 'udgUserIp'
+-- * 'udgUserIP'
 --
 -- * 'udgFormat'
 --
@@ -94,11 +92,9 @@ data UsersDraftsGet' = UsersDraftsGet'
 --
 -- * 'udgId'
 --
--- * 'udgOauthToken'
+-- * 'udgOAuthToken'
 --
 -- * 'udgFields'
---
--- * 'udgAlt'
 usersDraftsGet'
     :: Text -- ^ 'id'
     -> Text
@@ -107,14 +103,13 @@ usersDraftsGet' pUdgUserId_ pUdgId_ =
     UsersDraftsGet'
     { _udgQuotaUser = Nothing
     , _udgPrettyPrint = True
-    , _udgUserIp = Nothing
+    , _udgUserIP = Nothing
     , _udgFormat = GUDGFFull
     , _udgUserId = pUdgUserId_
     , _udgKey = Nothing
     , _udgId = pUdgId_
-    , _udgOauthToken = Nothing
+    , _udgOAuthToken = Nothing
     , _udgFields = Nothing
-    , _udgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -132,9 +127,9 @@ udgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-udgUserIp :: Lens' UsersDraftsGet' (Maybe Text)
-udgUserIp
-  = lens _udgUserIp (\ s a -> s{_udgUserIp = a})
+udgUserIP :: Lens' UsersDraftsGet' (Maybe Text)
+udgUserIP
+  = lens _udgUserIP (\ s a -> s{_udgUserIP = a})
 
 -- | The format to return the draft in.
 udgFormat :: Lens' UsersDraftsGet' GmailUsersDraftsGetFormat
@@ -150,7 +145,7 @@ udgUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-udgKey :: Lens' UsersDraftsGet' (Maybe Text)
+udgKey :: Lens' UsersDraftsGet' (Maybe Key)
 udgKey = lens _udgKey (\ s a -> s{_udgKey = a})
 
 -- | The ID of the draft to retrieve.
@@ -158,32 +153,32 @@ udgId :: Lens' UsersDraftsGet' Text
 udgId = lens _udgId (\ s a -> s{_udgId = a})
 
 -- | OAuth 2.0 token for the current user.
-udgOauthToken :: Lens' UsersDraftsGet' (Maybe Text)
-udgOauthToken
-  = lens _udgOauthToken
-      (\ s a -> s{_udgOauthToken = a})
+udgOAuthToken :: Lens' UsersDraftsGet' (Maybe OAuthToken)
+udgOAuthToken
+  = lens _udgOAuthToken
+      (\ s a -> s{_udgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 udgFields :: Lens' UsersDraftsGet' (Maybe Text)
 udgFields
   = lens _udgFields (\ s a -> s{_udgFields = a})
 
--- | Data format for the response.
-udgAlt :: Lens' UsersDraftsGet' Alt
-udgAlt = lens _udgAlt (\ s a -> s{_udgAlt = a})
+instance GoogleAuth UsersDraftsGet' where
+        authKey = udgKey . _Just
+        authToken = udgOAuthToken . _Just
 
 instance GoogleRequest UsersDraftsGet' where
         type Rs UsersDraftsGet' = Draft
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersDraftsGet'{..}
-          = go _udgQuotaUser (Just _udgPrettyPrint) _udgUserIp
+          = go _udgQuotaUser (Just _udgPrettyPrint) _udgUserIP
               (Just _udgFormat)
               _udgUserId
               _udgKey
               _udgId
-              _udgOauthToken
+              _udgOAuthToken
               _udgFields
-              (Just _udgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersDraftsGetResource)

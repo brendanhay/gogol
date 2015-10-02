@@ -33,13 +33,12 @@ module Network.Google.Resource.Analytics.Management.AccountSummaries.List
     -- * Request Lenses
     , maslQuotaUser
     , maslPrettyPrint
-    , maslUserIp
+    , maslUserIP
     , maslKey
-    , maslOauthToken
+    , maslOAuthToken
     , maslStartIndex
     , maslMaxResults
     , maslFields
-    , maslAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -53,12 +52,13 @@ type ManagementAccountSummariesListResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "start-index" Int32 :>
                      QueryParam "max-results" Int32 :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] AccountSummaries
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] AccountSummaries
 
 -- | Lists account summaries (lightweight tree comprised of
 -- accounts\/properties\/profiles) to which the user has access.
@@ -67,13 +67,12 @@ type ManagementAccountSummariesListResource =
 data ManagementAccountSummariesList' = ManagementAccountSummariesList'
     { _maslQuotaUser   :: !(Maybe Text)
     , _maslPrettyPrint :: !Bool
-    , _maslUserIp      :: !(Maybe Text)
-    , _maslKey         :: !(Maybe Text)
-    , _maslOauthToken  :: !(Maybe Text)
+    , _maslUserIP      :: !(Maybe Text)
+    , _maslKey         :: !(Maybe Key)
+    , _maslOAuthToken  :: !(Maybe OAuthToken)
     , _maslStartIndex  :: !(Maybe Int32)
     , _maslMaxResults  :: !(Maybe Int32)
     , _maslFields      :: !(Maybe Text)
-    , _maslAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementAccountSummariesList'' with the minimum fields required to make a request.
@@ -84,32 +83,29 @@ data ManagementAccountSummariesList' = ManagementAccountSummariesList'
 --
 -- * 'maslPrettyPrint'
 --
--- * 'maslUserIp'
+-- * 'maslUserIP'
 --
 -- * 'maslKey'
 --
--- * 'maslOauthToken'
+-- * 'maslOAuthToken'
 --
 -- * 'maslStartIndex'
 --
 -- * 'maslMaxResults'
 --
 -- * 'maslFields'
---
--- * 'maslAlt'
 managementAccountSummariesList'
     :: ManagementAccountSummariesList'
 managementAccountSummariesList' =
     ManagementAccountSummariesList'
     { _maslQuotaUser = Nothing
     , _maslPrettyPrint = False
-    , _maslUserIp = Nothing
+    , _maslUserIP = Nothing
     , _maslKey = Nothing
-    , _maslOauthToken = Nothing
+    , _maslOAuthToken = Nothing
     , _maslStartIndex = Nothing
     , _maslMaxResults = Nothing
     , _maslFields = Nothing
-    , _maslAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -128,21 +124,21 @@ maslPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-maslUserIp :: Lens' ManagementAccountSummariesList' (Maybe Text)
-maslUserIp
-  = lens _maslUserIp (\ s a -> s{_maslUserIp = a})
+maslUserIP :: Lens' ManagementAccountSummariesList' (Maybe Text)
+maslUserIP
+  = lens _maslUserIP (\ s a -> s{_maslUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-maslKey :: Lens' ManagementAccountSummariesList' (Maybe Text)
+maslKey :: Lens' ManagementAccountSummariesList' (Maybe Key)
 maslKey = lens _maslKey (\ s a -> s{_maslKey = a})
 
 -- | OAuth 2.0 token for the current user.
-maslOauthToken :: Lens' ManagementAccountSummariesList' (Maybe Text)
-maslOauthToken
-  = lens _maslOauthToken
-      (\ s a -> s{_maslOauthToken = a})
+maslOAuthToken :: Lens' ManagementAccountSummariesList' (Maybe OAuthToken)
+maslOAuthToken
+  = lens _maslOAuthToken
+      (\ s a -> s{_maslOAuthToken = a})
 
 -- | An index of the first entity to retrieve. Use this parameter as a
 -- pagination mechanism along with the max-results parameter.
@@ -163,9 +159,10 @@ maslFields :: Lens' ManagementAccountSummariesList' (Maybe Text)
 maslFields
   = lens _maslFields (\ s a -> s{_maslFields = a})
 
--- | Data format for the response.
-maslAlt :: Lens' ManagementAccountSummariesList' Alt
-maslAlt = lens _maslAlt (\ s a -> s{_maslAlt = a})
+instance GoogleAuth ManagementAccountSummariesList'
+         where
+        authKey = maslKey . _Just
+        authToken = maslOAuthToken . _Just
 
 instance GoogleRequest
          ManagementAccountSummariesList' where
@@ -175,13 +172,13 @@ instance GoogleRequest
         requestWithRoute r u
           ManagementAccountSummariesList'{..}
           = go _maslQuotaUser (Just _maslPrettyPrint)
-              _maslUserIp
+              _maslUserIP
               _maslKey
-              _maslOauthToken
+              _maslOAuthToken
               _maslStartIndex
               _maslMaxResults
               _maslFields
-              (Just _maslAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

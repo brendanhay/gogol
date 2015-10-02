@@ -147,7 +147,7 @@ module Network.Google.Mirror
     , contact
     , conAcceptCommands
     , conSharingFeatures
-    , conImageUrls
+    , conImageURLs
     , conPriority
     , conKind
     , conAcceptTypes
@@ -176,7 +176,7 @@ module Network.Google.Mirror
     , miValues
     , miRemoveWhenSelected
     , miAction
-    , miPayload
+    , miPayLoad
     , miContextualCommand
     , miId
 
@@ -198,7 +198,7 @@ module Network.Google.Mirror
     -- ** Attachment
     , Attachment
     , attachment
-    , aContentUrl
+    , aContentURL
     , aId
     , aIsProcessingContent
     , aContentType
@@ -212,7 +212,7 @@ module Network.Google.Mirror
     -- ** UserAction
     , UserAction
     , userAction
-    , uaPayload
+    , uaPayLoad
     , uaType
 
     -- ** ContactsListResponse
@@ -233,12 +233,12 @@ module Network.Google.Mirror
     , menuValue
     , mvState
     , mvDisplayName
-    , mvIconUrl
+    , mvIconURL
 
     -- ** Subscription
     , Subscription
     , subscription
-    , subCallbackUrl
+    , subCallbackURL
     , subOperation
     , subNotification
     , subKind
@@ -267,12 +267,12 @@ module Network.Google.Mirror
     , tiIsBundleCover
     , tiSpeakableType
     , tiBundleId
-    , tiCanonicalUrl
+    , tiCanonicalURL
     , tiSelfLink
     , tiIsPinned
     , tiSourceItemId
     , tiId
-    , tiHtml
+    , tiHTML
     , tiUpdated
     , tiRecipients
     , tiTitle
@@ -283,9 +283,6 @@ module Network.Google.Mirror
     , subscriptionsListResponse
     , slrKind
     , slrItems
-
-    -- ** Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.Mirror.Types

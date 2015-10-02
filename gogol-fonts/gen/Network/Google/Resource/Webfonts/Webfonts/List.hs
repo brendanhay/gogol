@@ -33,12 +33,11 @@ module Network.Google.Resource.Webfonts.Webfonts.List
     -- * Request Lenses
     , wlQuotaUser
     , wlPrettyPrint
-    , wlUserIp
+    , wlUserIP
     , wlKey
     , wlSort
-    , wlOauthToken
+    , wlOAuthToken
     , wlFields
-    , wlAlt
     ) where
 
 import           Network.Google.Fonts.Types
@@ -51,11 +50,11 @@ type WebfontsListResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
+             QueryParam "key" Key :>
                QueryParam "sort" WebfontsWebfontsListSort :>
-                 QueryParam "oauth_token" Text :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Get '[JSON] WebfontList
+                     QueryParam "alt" AltJSON :> Get '[JSON] WebfontList
 
 -- | Retrieves the list of fonts currently served by the Google Fonts
 -- Developer API
@@ -64,12 +63,11 @@ type WebfontsListResource =
 data WebfontsList' = WebfontsList'
     { _wlQuotaUser   :: !(Maybe Text)
     , _wlPrettyPrint :: !Bool
-    , _wlUserIp      :: !(Maybe Text)
-    , _wlKey         :: !(Maybe Text)
+    , _wlUserIP      :: !(Maybe Text)
+    , _wlKey         :: !(Maybe Key)
     , _wlSort        :: !(Maybe WebfontsWebfontsListSort)
-    , _wlOauthToken  :: !(Maybe Text)
+    , _wlOAuthToken  :: !(Maybe OAuthToken)
     , _wlFields      :: !(Maybe Text)
-    , _wlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WebfontsList'' with the minimum fields required to make a request.
@@ -80,29 +78,26 @@ data WebfontsList' = WebfontsList'
 --
 -- * 'wlPrettyPrint'
 --
--- * 'wlUserIp'
+-- * 'wlUserIP'
 --
 -- * 'wlKey'
 --
 -- * 'wlSort'
 --
--- * 'wlOauthToken'
+-- * 'wlOAuthToken'
 --
 -- * 'wlFields'
---
--- * 'wlAlt'
 webfontsList'
     :: WebfontsList'
 webfontsList' =
     WebfontsList'
     { _wlQuotaUser = Nothing
     , _wlPrettyPrint = True
-    , _wlUserIp = Nothing
+    , _wlUserIP = Nothing
     , _wlKey = Nothing
     , _wlSort = Nothing
-    , _wlOauthToken = Nothing
+    , _wlOAuthToken = Nothing
     , _wlFields = Nothing
-    , _wlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,13 +115,13 @@ wlPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-wlUserIp :: Lens' WebfontsList' (Maybe Text)
-wlUserIp = lens _wlUserIp (\ s a -> s{_wlUserIp = a})
+wlUserIP :: Lens' WebfontsList' (Maybe Text)
+wlUserIP = lens _wlUserIP (\ s a -> s{_wlUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-wlKey :: Lens' WebfontsList' (Maybe Text)
+wlKey :: Lens' WebfontsList' (Maybe Key)
 wlKey = lens _wlKey (\ s a -> s{_wlKey = a})
 
 -- | Enables sorting of the list
@@ -134,28 +129,28 @@ wlSort :: Lens' WebfontsList' (Maybe WebfontsWebfontsListSort)
 wlSort = lens _wlSort (\ s a -> s{_wlSort = a})
 
 -- | OAuth 2.0 token for the current user.
-wlOauthToken :: Lens' WebfontsList' (Maybe Text)
-wlOauthToken
-  = lens _wlOauthToken (\ s a -> s{_wlOauthToken = a})
+wlOAuthToken :: Lens' WebfontsList' (Maybe OAuthToken)
+wlOAuthToken
+  = lens _wlOAuthToken (\ s a -> s{_wlOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 wlFields :: Lens' WebfontsList' (Maybe Text)
 wlFields = lens _wlFields (\ s a -> s{_wlFields = a})
 
--- | Data format for the response.
-wlAlt :: Lens' WebfontsList' Alt
-wlAlt = lens _wlAlt (\ s a -> s{_wlAlt = a})
+instance GoogleAuth WebfontsList' where
+        authKey = wlKey . _Just
+        authToken = wlOAuthToken . _Just
 
 instance GoogleRequest WebfontsList' where
         type Rs WebfontsList' = WebfontList
         request = requestWithRoute defReq fontsURL
         requestWithRoute r u WebfontsList'{..}
-          = go _wlQuotaUser (Just _wlPrettyPrint) _wlUserIp
+          = go _wlQuotaUser (Just _wlPrettyPrint) _wlUserIP
               _wlKey
               _wlSort
-              _wlOauthToken
+              _wlOAuthToken
               _wlFields
-              (Just _wlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy WebfontsListResource)

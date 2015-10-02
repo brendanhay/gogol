@@ -32,14 +32,13 @@ module Network.Google.Resource.FusionTables.Template.List
     -- * Request Lenses
     , tllQuotaUser
     , tllPrettyPrint
-    , tllUserIp
+    , tllUserIP
     , tllKey
     , tllPageToken
-    , tllOauthToken
+    , tllOAuthToken
     , tllTableId
     , tllMaxResults
     , tllFields
-    , tllAlt
     ) where
 
 import           Network.Google.FusionTables.Types
@@ -54,12 +53,12 @@ type TemplateListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "maxResults" Word32 :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Get '[JSON] TemplateList
+                           QueryParam "alt" AltJSON :> Get '[JSON] TemplateList
 
 -- | Retrieves a list of templates.
 --
@@ -67,14 +66,13 @@ type TemplateListResource =
 data TemplateList' = TemplateList'
     { _tllQuotaUser   :: !(Maybe Text)
     , _tllPrettyPrint :: !Bool
-    , _tllUserIp      :: !(Maybe Text)
-    , _tllKey         :: !(Maybe Text)
+    , _tllUserIP      :: !(Maybe Text)
+    , _tllKey         :: !(Maybe Key)
     , _tllPageToken   :: !(Maybe Text)
-    , _tllOauthToken  :: !(Maybe Text)
+    , _tllOAuthToken  :: !(Maybe OAuthToken)
     , _tllTableId     :: !Text
     , _tllMaxResults  :: !(Maybe Word32)
     , _tllFields      :: !(Maybe Text)
-    , _tllAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TemplateList'' with the minimum fields required to make a request.
@@ -85,21 +83,19 @@ data TemplateList' = TemplateList'
 --
 -- * 'tllPrettyPrint'
 --
--- * 'tllUserIp'
+-- * 'tllUserIP'
 --
 -- * 'tllKey'
 --
 -- * 'tllPageToken'
 --
--- * 'tllOauthToken'
+-- * 'tllOAuthToken'
 --
 -- * 'tllTableId'
 --
 -- * 'tllMaxResults'
 --
 -- * 'tllFields'
---
--- * 'tllAlt'
 templateList'
     :: Text -- ^ 'tableId'
     -> TemplateList'
@@ -107,14 +103,13 @@ templateList' pTllTableId_ =
     TemplateList'
     { _tllQuotaUser = Nothing
     , _tllPrettyPrint = True
-    , _tllUserIp = Nothing
+    , _tllUserIP = Nothing
     , _tllKey = Nothing
     , _tllPageToken = Nothing
-    , _tllOauthToken = Nothing
+    , _tllOAuthToken = Nothing
     , _tllTableId = pTllTableId_
     , _tllMaxResults = Nothing
     , _tllFields = Nothing
-    , _tllAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -132,14 +127,14 @@ tllPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tllUserIp :: Lens' TemplateList' (Maybe Text)
-tllUserIp
-  = lens _tllUserIp (\ s a -> s{_tllUserIp = a})
+tllUserIP :: Lens' TemplateList' (Maybe Text)
+tllUserIP
+  = lens _tllUserIP (\ s a -> s{_tllUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tllKey :: Lens' TemplateList' (Maybe Text)
+tllKey :: Lens' TemplateList' (Maybe Key)
 tllKey = lens _tllKey (\ s a -> s{_tllKey = a})
 
 -- | Continuation token specifying which results page to return. Optional.
@@ -148,10 +143,10 @@ tllPageToken
   = lens _tllPageToken (\ s a -> s{_tllPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-tllOauthToken :: Lens' TemplateList' (Maybe Text)
-tllOauthToken
-  = lens _tllOauthToken
-      (\ s a -> s{_tllOauthToken = a})
+tllOAuthToken :: Lens' TemplateList' (Maybe OAuthToken)
+tllOAuthToken
+  = lens _tllOAuthToken
+      (\ s a -> s{_tllOAuthToken = a})
 
 -- | Identifier for the table whose templates are being requested
 tllTableId :: Lens' TemplateList' Text
@@ -169,22 +164,22 @@ tllFields :: Lens' TemplateList' (Maybe Text)
 tllFields
   = lens _tllFields (\ s a -> s{_tllFields = a})
 
--- | Data format for the response.
-tllAlt :: Lens' TemplateList' Alt
-tllAlt = lens _tllAlt (\ s a -> s{_tllAlt = a})
+instance GoogleAuth TemplateList' where
+        authKey = tllKey . _Just
+        authToken = tllOAuthToken . _Just
 
 instance GoogleRequest TemplateList' where
         type Rs TemplateList' = TemplateList
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u TemplateList'{..}
-          = go _tllQuotaUser (Just _tllPrettyPrint) _tllUserIp
+          = go _tllQuotaUser (Just _tllPrettyPrint) _tllUserIP
               _tllKey
               _tllPageToken
-              _tllOauthToken
+              _tllOAuthToken
               _tllTableId
               _tllMaxResults
               _tllFields
-              (Just _tllAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TemplateListResource)

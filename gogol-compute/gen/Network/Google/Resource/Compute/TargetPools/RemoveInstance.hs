@@ -34,12 +34,12 @@ module Network.Google.Resource.Compute.TargetPools.RemoveInstance
     , tpriPrettyPrint
     , tpriProject
     , tpriTargetPool
-    , tpriUserIp
+    , tpriTargetPoolsRemoveInstanceRequest
+    , tpriUserIP
     , tpriKey
     , tpriRegion
-    , tpriOauthToken
+    , tpriOAuthToken
     , tpriFields
-    , tpriAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -57,25 +57,27 @@ type TargetPoolsRemoveInstanceResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Post '[JSON] Operation
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] TargetPoolsRemoveInstanceRequest
+                                 :> Post '[JSON] Operation
 
 -- | Removes instance URL from targetPool.
 --
 -- /See:/ 'targetPoolsRemoveInstance'' smart constructor.
 data TargetPoolsRemoveInstance' = TargetPoolsRemoveInstance'
-    { _tpriQuotaUser   :: !(Maybe Text)
-    , _tpriPrettyPrint :: !Bool
-    , _tpriProject     :: !Text
-    , _tpriTargetPool  :: !Text
-    , _tpriUserIp      :: !(Maybe Text)
-    , _tpriKey         :: !(Maybe Text)
-    , _tpriRegion      :: !Text
-    , _tpriOauthToken  :: !(Maybe Text)
-    , _tpriFields      :: !(Maybe Text)
-    , _tpriAlt         :: !Alt
+    { _tpriQuotaUser                        :: !(Maybe Text)
+    , _tpriPrettyPrint                      :: !Bool
+    , _tpriProject                          :: !Text
+    , _tpriTargetPool                       :: !Text
+    , _tpriTargetPoolsRemoveInstanceRequest :: !TargetPoolsRemoveInstanceRequest
+    , _tpriUserIP                           :: !(Maybe Text)
+    , _tpriKey                              :: !(Maybe Key)
+    , _tpriRegion                           :: !Text
+    , _tpriOAuthToken                       :: !(Maybe OAuthToken)
+    , _tpriFields                           :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetPoolsRemoveInstance'' with the minimum fields required to make a request.
@@ -90,34 +92,35 @@ data TargetPoolsRemoveInstance' = TargetPoolsRemoveInstance'
 --
 -- * 'tpriTargetPool'
 --
--- * 'tpriUserIp'
+-- * 'tpriTargetPoolsRemoveInstanceRequest'
+--
+-- * 'tpriUserIP'
 --
 -- * 'tpriKey'
 --
 -- * 'tpriRegion'
 --
--- * 'tpriOauthToken'
+-- * 'tpriOAuthToken'
 --
 -- * 'tpriFields'
---
--- * 'tpriAlt'
 targetPoolsRemoveInstance'
     :: Text -- ^ 'project'
     -> Text -- ^ 'targetPool'
+    -> TargetPoolsRemoveInstanceRequest -- ^ 'TargetPoolsRemoveInstanceRequest'
     -> Text -- ^ 'region'
     -> TargetPoolsRemoveInstance'
-targetPoolsRemoveInstance' pTpriProject_ pTpriTargetPool_ pTpriRegion_ =
+targetPoolsRemoveInstance' pTpriProject_ pTpriTargetPool_ pTpriTargetPoolsRemoveInstanceRequest_ pTpriRegion_ =
     TargetPoolsRemoveInstance'
     { _tpriQuotaUser = Nothing
     , _tpriPrettyPrint = True
     , _tpriProject = pTpriProject_
     , _tpriTargetPool = pTpriTargetPool_
-    , _tpriUserIp = Nothing
+    , _tpriTargetPoolsRemoveInstanceRequest = pTpriTargetPoolsRemoveInstanceRequest_
+    , _tpriUserIP = Nothing
     , _tpriKey = Nothing
     , _tpriRegion = pTpriRegion_
-    , _tpriOauthToken = Nothing
+    , _tpriOAuthToken = Nothing
     , _tpriFields = Nothing
-    , _tpriAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -144,16 +147,23 @@ tpriTargetPool
   = lens _tpriTargetPool
       (\ s a -> s{_tpriTargetPool = a})
 
+-- | Multipart request metadata.
+tpriTargetPoolsRemoveInstanceRequest :: Lens' TargetPoolsRemoveInstance' TargetPoolsRemoveInstanceRequest
+tpriTargetPoolsRemoveInstanceRequest
+  = lens _tpriTargetPoolsRemoveInstanceRequest
+      (\ s a ->
+         s{_tpriTargetPoolsRemoveInstanceRequest = a})
+
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tpriUserIp :: Lens' TargetPoolsRemoveInstance' (Maybe Text)
-tpriUserIp
-  = lens _tpriUserIp (\ s a -> s{_tpriUserIp = a})
+tpriUserIP :: Lens' TargetPoolsRemoveInstance' (Maybe Text)
+tpriUserIP
+  = lens _tpriUserIP (\ s a -> s{_tpriUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tpriKey :: Lens' TargetPoolsRemoveInstance' (Maybe Text)
+tpriKey :: Lens' TargetPoolsRemoveInstance' (Maybe Key)
 tpriKey = lens _tpriKey (\ s a -> s{_tpriKey = a})
 
 -- | Name of the region scoping this request.
@@ -162,19 +172,19 @@ tpriRegion
   = lens _tpriRegion (\ s a -> s{_tpriRegion = a})
 
 -- | OAuth 2.0 token for the current user.
-tpriOauthToken :: Lens' TargetPoolsRemoveInstance' (Maybe Text)
-tpriOauthToken
-  = lens _tpriOauthToken
-      (\ s a -> s{_tpriOauthToken = a})
+tpriOAuthToken :: Lens' TargetPoolsRemoveInstance' (Maybe OAuthToken)
+tpriOAuthToken
+  = lens _tpriOAuthToken
+      (\ s a -> s{_tpriOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 tpriFields :: Lens' TargetPoolsRemoveInstance' (Maybe Text)
 tpriFields
   = lens _tpriFields (\ s a -> s{_tpriFields = a})
 
--- | Data format for the response.
-tpriAlt :: Lens' TargetPoolsRemoveInstance' Alt
-tpriAlt = lens _tpriAlt (\ s a -> s{_tpriAlt = a})
+instance GoogleAuth TargetPoolsRemoveInstance' where
+        authKey = tpriKey . _Just
+        authToken = tpriOAuthToken . _Just
 
 instance GoogleRequest TargetPoolsRemoveInstance'
          where
@@ -184,12 +194,13 @@ instance GoogleRequest TargetPoolsRemoveInstance'
           = go _tpriQuotaUser (Just _tpriPrettyPrint)
               _tpriProject
               _tpriTargetPool
-              _tpriUserIp
+              _tpriUserIP
               _tpriKey
               _tpriRegion
-              _tpriOauthToken
+              _tpriOAuthToken
               _tpriFields
-              (Just _tpriAlt)
+              (Just AltJSON)
+              _tpriTargetPoolsRemoveInstanceRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TargetPoolsRemoveInstanceResource)

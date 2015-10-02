@@ -21,7 +21,7 @@ module Network.Google.YouTube.Types
     , Thumbnail
     , thumbnail
     , tHeight
-    , tUrl
+    , tURL
     , tWidth
 
     -- * CaptionSnippetTrackKind
@@ -63,7 +63,7 @@ module Network.Google.YouTube.Types
     , cadContentIdClaimsGoodStanding
     , cadOverallGoodStanding
     , cadCopyrightStrikesGoodStanding
-    , cadCommunityGuidelinesGoodStanding
+    , cadCommUnityGuidelinesGoodStanding
 
     -- * ContentRatingCceRating
     , ContentRatingCceRating (..)
@@ -108,18 +108,18 @@ module Network.Google.YouTube.Types
     -- * VideoStatusPrivacyStatus
     , VideoStatusPrivacyStatus (..)
 
-    -- * PlaylistListResponse
-    , PlaylistListResponse
-    , playlistListResponse
-    , plrEtag
-    , plrTokenPagination
-    , plrNextPageToken
-    , plrPageInfo
-    , plrKind
-    , plrItems
-    , plrVisitorId
-    , plrEventId
-    , plrPrevPageToken
+    -- * PlayListListResponse
+    , PlayListListResponse
+    , playListListResponse
+    , pllrEtag
+    , pllrTokenPagination
+    , pllrNextPageToken
+    , pllrPageInfo
+    , pllrKind
+    , pllrItems
+    , pllrVisitorId
+    , pllrEventId
+    , pllrPrevPageToken
 
     -- * ContentRatingFskRating
     , ContentRatingFskRating (..)
@@ -166,7 +166,7 @@ module Network.Google.YouTube.Types
     , riKind
     , riChannelId
     , riVideoId
-    , riPlaylistId
+    , riPlayListId
 
     -- * SearchResult
     , SearchResult
@@ -198,10 +198,10 @@ module Network.Google.YouTube.Types
     , lssTitle
     , lssDescription
 
-    -- * PlaylistStatus
-    , PlaylistStatus
-    , playlistStatus
-    , psPrivacyStatus
+    -- * PlayListStatus
+    , PlayListStatus
+    , playListStatus
+    , plsPrivacyStatus
 
     -- * YouTubeSearchListChannelType
     , YouTubeSearchListChannelType (..)
@@ -209,14 +209,14 @@ module Network.Google.YouTube.Types
     -- * CaptionSnippetAudioTrackType
     , CaptionSnippetAudioTrackType (..)
 
-    -- * ChannelContentDetailsRelatedPlaylists
-    , ChannelContentDetailsRelatedPlaylists
-    , channelContentDetailsRelatedPlaylists
-    , ccdrpFavorites
-    , ccdrpWatchHistory
-    , ccdrpWatchLater
-    , ccdrpUploads
-    , ccdrpLikes
+    -- * ChannelContentDetailsRelatedPlayLists
+    , ChannelContentDetailsRelatedPlayLists
+    , channelContentDetailsRelatedPlayLists
+    , ccdrplFavorites
+    , ccdrplWatchHistory
+    , ccdrplWatchLater
+    , ccdrplUploads
+    , ccdrplLikes
 
     -- * VideoContentDetails
     , VideoContentDetails
@@ -321,28 +321,28 @@ module Network.Google.YouTube.Types
     -- * ImageSettings
     , ImageSettings
     , imageSettings
-    , isBannerMobileLowImageUrl
-    , isBannerTabletExtraHdImageUrl
+    , isBannerMobileLowImageURL
+    , isBannerTabletExtraHdImageURL
     , isSmallBrandedBannerImageImapScript
-    , isBannerTvHighImageUrl
-    , isBannerMobileHdImageUrl
-    , isBannerTvMediumImageUrl
-    , isBannerTvImageUrl
-    , isBannerTabletImageUrl
-    , isBannerMobileImageUrl
-    , isTrackingImageUrl
-    , isBannerMobileMediumHdImageUrl
-    , isLargeBrandedBannerImageUrl
-    , isBannerExternalUrl
-    , isBackgroundImageUrl
-    , isSmallBrandedBannerImageUrl
-    , isBannerImageUrl
-    , isWatchIconImageUrl
-    , isBannerTvLowImageUrl
-    , isBannerMobileExtraHdImageUrl
+    , isBannerTvHighImageURL
+    , isBannerMobileHdImageURL
+    , isBannerTvMediumImageURL
+    , isBannerTvImageURL
+    , isBannerTabletImageURL
+    , isBannerMobileImageURL
+    , isTrackingImageURL
+    , isBannerMobileMediumHdImageURL
+    , isLargeBrandedBannerImageURL
+    , isBannerExternalURL
+    , isBackgRoundImageURL
+    , isSmallBrandedBannerImageURL
+    , isBannerImageURL
+    , isWatchIconImageURL
+    , isBannerTvLowImageURL
+    , isBannerMobileExtraHdImageURL
     , isLargeBrandedBannerImageImapScript
-    , isBannerTabletLowImageUrl
-    , isBannerTabletHdImageUrl
+    , isBannerTabletLowImageURL
+    , isBannerTabletHdImageURL
 
     -- * ChannelStatusPrivacyStatus
     , ChannelStatusPrivacyStatus (..)
@@ -367,18 +367,18 @@ module Network.Google.YouTube.Types
     , activityContentDetailsUpload
     , acduVideoId
 
-    -- * PlaylistContentDetails
-    , PlaylistContentDetails
-    , playlistContentDetails
-    , pcdItemCount
+    -- * PlayListContentDetails
+    , PlayListContentDetails
+    , playListContentDetails
+    , plcdItemCount
 
     -- * ActivityContentDetailsSocial
     , ActivityContentDetailsSocial
     , activityContentDetailsSocial
     , acdsResourceId
-    , acdsImageUrl
+    , acdsImageURL
     , acdsAuthor
-    , acdsReferenceUrl
+    , acdsReferenceURL
     , acdsType
 
     -- * ActivityContentDetailsSubscription
@@ -436,12 +436,12 @@ module Network.Google.YouTube.Types
     -- * VideoSuggestionsProcessingHints
     , VideoSuggestionsProcessingHints (..)
 
-    -- * ActivityContentDetailsPlaylistItem
-    , ActivityContentDetailsPlaylistItem
-    , activityContentDetailsPlaylistItem
-    , acdpiResourceId
-    , acdpiPlaylistId
-    , acdpiPlaylistItemId
+    -- * ActivityContentDetailsPlayListItem
+    , ActivityContentDetailsPlayListItem
+    , activityContentDetailsPlayListItem
+    , acdpliResourceId
+    , acdpliPlayListId
+    , acdpliPlayListItemId
 
     -- * VideoStatus
     , VideoStatus
@@ -509,7 +509,7 @@ module Network.Google.YouTube.Types
     -- * ChannelContentDetails
     , ChannelContentDetails
     , channelContentDetails
-    , ccdRelatedPlaylists
+    , ccdRelatedPlayLists
     , ccdGooglePlusUserId
 
     -- * YouTubeSearchListVideoType
@@ -636,18 +636,18 @@ module Network.Google.YouTube.Types
     , cslrVisitorId
     , cslrEventId
 
-    -- * PlaylistSnippet
-    , PlaylistSnippet
-    , playlistSnippet
-    , psPublishedAt
-    , psChannelTitle
-    , psChannelId
-    , psThumbnails
-    , psLocalized
-    , psTitle
-    , psDescription
-    , psTags
-    , psDefaultLanguage
+    -- * PlayListSnippet
+    , PlayListSnippet
+    , playListSnippet
+    , plsPublishedAt
+    , plsChannelTitle
+    , plsChannelId
+    , plsThumbnails
+    , plsLocalized
+    , plsTitle
+    , plsDescription
+    , plsTags
+    , plsDefaultLanguage
 
     -- * Channel
     , Channel
@@ -717,7 +717,7 @@ module Network.Google.YouTube.Types
     , acdComment
     , acdSocial
     , acdSubscription
-    , acdPlaylistItem
+    , acdPlayListItem
     , acdLike
     , acdRecommendation
 
@@ -791,9 +791,9 @@ module Network.Google.YouTube.Types
     -- * ContentRatingNbcRating
     , ContentRatingNbcRating (..)
 
-    -- * PlaylistLocalizations
-    , PlaylistLocalizations
-    , playlistLocalizations
+    -- * PlayListLocalizations
+    , PlayListLocalizations
+    , playListLocalizations
 
     -- * YouTubeLiveBroadcastsListBroadcastStatus
     , YouTubeLiveBroadcastsListBroadcastStatus (..)
@@ -805,7 +805,7 @@ module Network.Google.YouTube.Types
     , MonitorStreamInfo
     , monitorStreamInfo
     , msiBroadcastStreamDelayMs
-    , msiEmbedHtml
+    , msiEmbedHTML
     , msiEnableMonitorStream
 
     -- * ContentRatingRussiaRating
@@ -857,7 +857,7 @@ module Network.Google.YouTube.Types
     , ChannelSectionContentDetails
     , channelSectionContentDetails
     , cscdChannels
-    , cscdPlaylists
+    , cscdPlayLists
 
     -- * ChannelStatusLongUploadsStatus
     , ChannelStatusLongUploadsStatus (..)
@@ -895,7 +895,7 @@ module Network.Google.YouTube.Types
     -- * LiveStreamContentDetails
     , LiveStreamContentDetails
     , liveStreamContentDetails
-    , lscdClosedCaptionsIngestionUrl
+    , lscdClosedCaptionsIngestionURL
     , lscdIsReusable
 
     -- * VideoCategorySnippet
@@ -946,8 +946,8 @@ module Network.Google.YouTube.Types
     -- * WatchSettings
     , WatchSettings
     , watchSettings
-    , wsFeaturedPlaylistId
-    , wsBackgroundColor
+    , wsFeaturedPlayListId
+    , wsBackgRoundColor
     , wsTextColor
 
     -- * ContentRatingSmaisRating
@@ -1055,10 +1055,10 @@ module Network.Google.YouTube.Types
     , irlrVisitorId
     , irlrEventId
 
-    -- * PlaylistItemStatus
-    , PlaylistItemStatus
-    , playlistItemStatus
-    , pisPrivacyStatus
+    -- * PlayListItemStatus
+    , PlayListItemStatus
+    , playListItemStatus
+    , plisPrivacyStatus
 
     -- * YouTubeSearchListOrder
     , YouTubeSearchListOrder (..)
@@ -1135,7 +1135,7 @@ module Network.Google.YouTube.Types
     , promotedItemId
     , piiRecentlyUploadedBy
     , piiVideoId
-    , piiWebsiteUrl
+    , piiWebsiteURL
     , piiType
 
     -- * SearchResultSnippet
@@ -1173,18 +1173,18 @@ module Network.Google.YouTube.Types
     , vlTitle
     , vlDescription
 
-    -- * PlaylistItemListResponse
-    , PlaylistItemListResponse
-    , playlistItemListResponse
-    , pilrEtag
-    , pilrTokenPagination
-    , pilrNextPageToken
-    , pilrPageInfo
-    , pilrKind
-    , pilrItems
-    , pilrVisitorId
-    , pilrEventId
-    , pilrPrevPageToken
+    -- * PlayListItemListResponse
+    , PlayListItemListResponse
+    , playListItemListResponse
+    , plilrEtag
+    , plilrTokenPagination
+    , plilrNextPageToken
+    , plilrPageInfo
+    , plilrKind
+    , plilrItems
+    , plilrVisitorId
+    , plilrEventId
+    , plilrPrevPageToken
 
     -- * LiveStreamHealthStatus
     , LiveStreamHealthStatus
@@ -1208,7 +1208,7 @@ module Network.Google.YouTube.Types
     -- * VideoPlayer
     , VideoPlayer
     , videoPlayer
-    , vpEmbedHtml
+    , vpEmbedHTML
 
     -- * LocalizedString
     , LocalizedString
@@ -1258,8 +1258,8 @@ module Network.Google.YouTube.Types
     -- * ContentRatingResorteviolenciaRating
     , ContentRatingResorteviolenciaRating (..)
 
-    -- * PlaylistItemStatusPrivacyStatus
-    , PlaylistItemStatusPrivacyStatus (..)
+    -- * PlayListItemStatusPrivacyStatus
+    , PlayListItemStatusPrivacyStatus (..)
 
     -- * SubscriptionContentDetailsActivityType
     , SubscriptionContentDetailsActivityType (..)
@@ -1267,7 +1267,7 @@ module Network.Google.YouTube.Types
     -- * InvideoBranding
     , InvideoBranding
     , invideoBranding
-    , ibImageUrl
+    , ibImageURL
     , ibTargetChannelId
     , ibTiming
     , ibImageBytes
@@ -1292,10 +1292,10 @@ module Network.Google.YouTube.Types
     , ipDefaultTiming
     , ipPosition
 
-    -- * PlaylistPlayer
-    , PlaylistPlayer
-    , playlistPlayer
-    , ppEmbedHtml
+    -- * PlayListPlayer
+    , PlayListPlayer
+    , playListPlayer
+    , plpEmbedHTML
 
     -- * CommentThread
     , CommentThread
@@ -1318,11 +1318,11 @@ module Network.Google.YouTube.Types
     -- * ActivityContentDetailsSocialType
     , ActivityContentDetailsSocialType (..)
 
-    -- * PlaylistLocalization
-    , PlaylistLocalization
-    , playlistLocalization
-    , plTitle
-    , plDescription
+    -- * PlayListLocalization
+    , PlayListLocalization
+    , playListLocalization
+    , pllTitle
+    , pllDescription
 
     -- * ContentRatingEgfilmRating
     , ContentRatingEgfilmRating (..)
@@ -1344,7 +1344,7 @@ module Network.Google.YouTube.Types
     , channelBannerResource
     , cbrEtag
     , cbrKind
-    , cbrUrl
+    , cbrURL
 
     -- * LiveBroadcastTopicSnippet
     , LiveBroadcastTopicSnippet
@@ -1366,13 +1366,13 @@ module Network.Google.YouTube.Types
     , channelConversionPings
     , ccpPings
 
-    -- * PlaylistItemContentDetails
-    , PlaylistItemContentDetails
-    , playlistItemContentDetails
-    , picdStartAt
-    , picdNote
-    , picdVideoId
-    , picdEndAt
+    -- * PlayListItemContentDetails
+    , PlayListItemContentDetails
+    , playListItemContentDetails
+    , plicdStartAt
+    , plicdNote
+    , plicdVideoId
+    , plicdEndAt
 
     -- * ChannelLocalization
     , ChannelLocalization
@@ -1422,8 +1422,8 @@ module Network.Google.YouTube.Types
     , scdTotalItemCount
     , scdNewItemCount
 
-    -- * PlaylistStatusPrivacyStatus
-    , PlaylistStatusPrivacyStatus (..)
+    -- * PlayListStatusPrivacyStatus
+    , PlayListStatusPrivacyStatus (..)
 
     -- * YouTubeSearchListVideoDimension
     , YouTubeSearchListVideoDimension (..)
@@ -1446,21 +1446,21 @@ module Network.Google.YouTube.Types
     -- * ContentRatingCsaRating
     , ContentRatingCsaRating (..)
 
-    -- * PlaylistItem
-    , PlaylistItem
-    , playlistItem
-    , pStatus
-    , pEtag
-    , pSnippet
-    , pKind
-    , pContentDetails
-    , pId
+    -- * PlayListItem
+    , PlayListItem
+    , playListItem
+    , pliStatus
+    , pliEtag
+    , pliSnippet
+    , pliKind
+    , pliContentDetails
+    , pliId
 
     -- * ChannelConversionPing
     , ChannelConversionPing
     , channelConversionPing
     , ccpContext
-    , ccpConversionUrl
+    , ccpConversionURL
 
     -- * GuideCategoryListResponse
     , GuideCategoryListResponse
@@ -1543,18 +1543,18 @@ module Network.Google.YouTube.Types
     -- * VideoSuggestionsProcessingErrors
     , VideoSuggestionsProcessingErrors (..)
 
-    -- * PlaylistItemSnippet
-    , PlaylistItemSnippet
-    , playlistItemSnippet
-    , pisResourceId
-    , pisPublishedAt
-    , pisChannelTitle
-    , pisChannelId
-    , pisThumbnails
-    , pisTitle
-    , pisPlaylistId
-    , pisDescription
-    , pisPosition
+    -- * PlayListItemSnippet
+    , PlayListItemSnippet
+    , playListItemSnippet
+    , plisResourceId
+    , plisPublishedAt
+    , plisChannelTitle
+    , plisChannelId
+    , plisThumbnails
+    , plisTitle
+    , plisPlayListId
+    , plisDescription
+    , plisPosition
 
     -- * VideoRating
     , VideoRating
@@ -1582,17 +1582,17 @@ module Network.Google.YouTube.Types
     , vsProcessingWarnings
     , vsTagSuggestions
 
-    -- * Playlist
-    , Playlist
-    , playlist
-    , plaStatus
-    , plaEtag
-    , plaSnippet
-    , plaKind
-    , plaContentDetails
-    , plaId
-    , plaLocalizations
-    , plaPlayer
+    -- * PlayList
+    , PlayList
+    , playList
+    , plStatus
+    , plEtag
+    , plSnippet
+    , plKind
+    , plContentDetails
+    , plId
+    , plLocalizations
+    , plPlayer
 
     -- * ContentRating
     , ContentRating
@@ -1658,7 +1658,7 @@ module Network.Google.YouTube.Types
     , crFpbRating
     , crLsfRating
     , crBfvcRating
-    , crCncRating
+    , crCNCRating
     , crSkfilmRating
     , crOflcRating
     , crKmrbRating
@@ -1674,19 +1674,19 @@ module Network.Google.YouTube.Types
     , commentSnippet
     , cViewerRating
     , cPublishedAt
-    , cAuthorChannelUrl
+    , cAuthorChannelURL
     , cModerationStatus
     , cLikeCount
     , cChannelId
     , cTextOriginal
     , cVideoId
     , cTextDisplay
-    , cAuthorProfileImageUrl
+    , cAuthorProfileImageURL
     , cAuthorDisplayName
     , cUpdatedAt
     , cAuthorChannelId
     , cCanRate
-    , cAuthorGoogleplusProfileUrl
+    , cAuthorGoogleplusProfileURL
     , cParentId
 
     -- * ContentRatingNfvcbRating
@@ -1714,7 +1714,7 @@ module Network.Google.YouTube.Types
     , cKeywords
     , cUnsubscribedTrailer
     , cTrackingAnalyticsAccountId
-    , cFeaturedChannelsUrls
+    , cFeaturedChannelsURLs
     , cShowBrowseView
     , cTitle
     , cDescription
@@ -1777,15 +1777,15 @@ module Network.Google.YouTube.Types
     -- * ActivityContentDetailsPromotedItem
     , ActivityContentDetailsPromotedItem
     , activityContentDetailsPromotedItem
-    , acdpiDestinationUrl
-    , acdpiClickTrackingUrl
-    , acdpiForecastingUrl
+    , acdpiDestinationURL
+    , acdpiClickTrackingURL
+    , acdpiForecastingURL
     , acdpiDescriptionText
     , acdpiCtaType
     , acdpiVideoId
     , acdpiAdTag
-    , acdpiCreativeViewUrl
-    , acdpiImpressionUrl
+    , acdpiCreativeViewURL
+    , acdpiImpressionURL
     , acdpiCustomCtaButtonText
 
     -- * GeoPoint
@@ -1816,9 +1816,6 @@ module Network.Google.YouTube.Types
     -- * YouTubeCommentsListTextFormat
     , YouTubeCommentsListTextFormat (..)
 
-    -- * Alt
-    , Alt (..)
-
     -- * YouTubeCommentThreadsListModerationStatus
     , YouTubeCommentThreadsListModerationStatus (..)
 
@@ -1829,7 +1826,7 @@ module Network.Google.YouTube.Types
     , VideoConversionPing
     , videoConversionPing
     , vcpContext
-    , vcpConversionUrl
+    , vcpConversionURL
 
     -- * ChannelContentOwnerDetails
     , ChannelContentOwnerDetails

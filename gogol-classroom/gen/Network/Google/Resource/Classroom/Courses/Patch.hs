@@ -45,11 +45,11 @@ module Network.Google.Resource.Classroom.Courses.Patch
     , cpUploadType
     , cpBearerToken
     , cpKey
+    , cpCourse
     , cpId
-    , cpOauthToken
+    , cpOAuthToken
     , cpFields
     , cpCallback
-    , cpAlt
     ) where
 
 import           Network.Google.Classroom.Types
@@ -70,12 +70,13 @@ type CoursesPatchResource =
                        QueryParam "access_token" Text :>
                          QueryParam "uploadType" Text :>
                            QueryParam "bearer_token" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "fields" Text :>
                                    QueryParam "callback" Text :>
-                                     QueryParam "alt" Text :>
-                                       Patch '[JSON] Course
+                                     QueryParam "alt" AltJSON :>
+                                       ReqBody '[JSON] Course :>
+                                         Patch '[JSON] Course
 
 -- | Updates one or more fields in a course. This method returns the
 -- following error codes: * \`PERMISSION_DENIED\` if the requesting user is
@@ -95,12 +96,12 @@ data CoursesPatch' = CoursesPatch'
     , _cpAccessToken    :: !(Maybe Text)
     , _cpUploadType     :: !(Maybe Text)
     , _cpBearerToken    :: !(Maybe Text)
-    , _cpKey            :: !(Maybe Text)
+    , _cpKey            :: !(Maybe Key)
+    , _cpCourse         :: !Course
     , _cpId             :: !Text
-    , _cpOauthToken     :: !(Maybe Text)
+    , _cpOAuthToken     :: !(Maybe OAuthToken)
     , _cpFields         :: !(Maybe Text)
     , _cpCallback       :: !(Maybe Text)
-    , _cpAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CoursesPatch'' with the minimum fields required to make a request.
@@ -127,19 +128,20 @@ data CoursesPatch' = CoursesPatch'
 --
 -- * 'cpKey'
 --
+-- * 'cpCourse'
+--
 -- * 'cpId'
 --
--- * 'cpOauthToken'
+-- * 'cpOAuthToken'
 --
 -- * 'cpFields'
 --
 -- * 'cpCallback'
---
--- * 'cpAlt'
 coursesPatch'
-    :: Text -- ^ 'id'
+    :: Course -- ^ 'Course'
+    -> Text -- ^ 'id'
     -> CoursesPatch'
-coursesPatch' pCpId_ =
+coursesPatch' pCpCourse_ pCpId_ =
     CoursesPatch'
     { _cpXgafv = Nothing
     , _cpQuotaUser = Nothing
@@ -151,11 +153,11 @@ coursesPatch' pCpId_ =
     , _cpUploadType = Nothing
     , _cpBearerToken = Nothing
     , _cpKey = Nothing
+    , _cpCourse = pCpCourse_
     , _cpId = pCpId_
-    , _cpOauthToken = Nothing
+    , _cpOAuthToken = Nothing
     , _cpFields = Nothing
     , _cpCallback = Nothing
-    , _cpAlt = "json"
     }
 
 -- | V1 error format.
@@ -215,8 +217,12 @@ cpBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cpKey :: Lens' CoursesPatch' (Maybe Text)
+cpKey :: Lens' CoursesPatch' (Maybe Key)
 cpKey = lens _cpKey (\ s a -> s{_cpKey = a})
+
+-- | Multipart request metadata.
+cpCourse :: Lens' CoursesPatch' Course
+cpCourse = lens _cpCourse (\ s a -> s{_cpCourse = a})
 
 -- | Identifier of the course to update. This identifier can be either the
 -- Classroom-assigned identifier or an
@@ -225,9 +231,9 @@ cpId :: Lens' CoursesPatch' Text
 cpId = lens _cpId (\ s a -> s{_cpId = a})
 
 -- | OAuth 2.0 token for the current user.
-cpOauthToken :: Lens' CoursesPatch' (Maybe Text)
-cpOauthToken
-  = lens _cpOauthToken (\ s a -> s{_cpOauthToken = a})
+cpOAuthToken :: Lens' CoursesPatch' (Maybe OAuthToken)
+cpOAuthToken
+  = lens _cpOAuthToken (\ s a -> s{_cpOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cpFields :: Lens' CoursesPatch' (Maybe Text)
@@ -238,9 +244,9 @@ cpCallback :: Lens' CoursesPatch' (Maybe Text)
 cpCallback
   = lens _cpCallback (\ s a -> s{_cpCallback = a})
 
--- | Data format for response.
-cpAlt :: Lens' CoursesPatch' Text
-cpAlt = lens _cpAlt (\ s a -> s{_cpAlt = a})
+instance GoogleAuth CoursesPatch' where
+        authKey = cpKey . _Just
+        authToken = cpOAuthToken . _Just
 
 instance GoogleRequest CoursesPatch' where
         type Rs CoursesPatch' = Course
@@ -255,10 +261,11 @@ instance GoogleRequest CoursesPatch' where
               _cpBearerToken
               _cpKey
               _cpId
-              _cpOauthToken
+              _cpOAuthToken
               _cpFields
               _cpCallback
-              (Just _cpAlt)
+              (Just AltJSON)
+              _cpCourse
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CoursesPatchResource)

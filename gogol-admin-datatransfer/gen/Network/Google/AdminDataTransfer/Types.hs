@@ -60,9 +60,6 @@ module Network.Google.AdminDataTransfer.Types
     , dtlrKind
     , dtlrDataTransfers
 
-    -- * Alt
-    , Alt (..)
-
     -- * ApplicationDataTransfer
     , ApplicationDataTransfer
     , applicationDataTransfer

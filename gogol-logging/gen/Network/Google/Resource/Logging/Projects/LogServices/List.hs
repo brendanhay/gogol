@@ -41,12 +41,11 @@ module Network.Google.Resource.Logging.Projects.LogServices.List
     , plslBearerToken
     , plslKey
     , plslPageToken
-    , plslOauthToken
+    , plslOAuthToken
     , plslProjectsId
     , plslPageSize
     , plslFields
     , plslCallback
-    , plslAlt
     ) where
 
 import           Network.Google.Logging.Types
@@ -68,13 +67,13 @@ type ProjectsLogServicesListResource =
                          QueryParam "access_token" Text :>
                            QueryParam "uploadType" Text :>
                              QueryParam "bearer_token" Text :>
-                               QueryParam "key" Text :>
+                               QueryParam "key" Key :>
                                  QueryParam "pageToken" Text :>
-                                   QueryParam "oauth_token" Text :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "pageSize" Int32 :>
                                        QueryParam "fields" Text :>
                                          QueryParam "callback" Text :>
-                                           QueryParam "alt" Text :>
+                                           QueryParam "alt" AltJSON :>
                                              Get '[JSON] ListLogServicesResponse
 
 -- | Lists the log services that have log entries in this project.
@@ -90,14 +89,13 @@ data ProjectsLogServicesList' = ProjectsLogServicesList'
     , _plslAccessToken    :: !(Maybe Text)
     , _plslUploadType     :: !(Maybe Text)
     , _plslBearerToken    :: !(Maybe Text)
-    , _plslKey            :: !(Maybe Text)
+    , _plslKey            :: !(Maybe Key)
     , _plslPageToken      :: !(Maybe Text)
-    , _plslOauthToken     :: !(Maybe Text)
+    , _plslOAuthToken     :: !(Maybe OAuthToken)
     , _plslProjectsId     :: !Text
     , _plslPageSize       :: !(Maybe Int32)
     , _plslFields         :: !(Maybe Text)
     , _plslCallback       :: !(Maybe Text)
-    , _plslAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsLogServicesList'' with the minimum fields required to make a request.
@@ -126,7 +124,7 @@ data ProjectsLogServicesList' = ProjectsLogServicesList'
 --
 -- * 'plslPageToken'
 --
--- * 'plslOauthToken'
+-- * 'plslOAuthToken'
 --
 -- * 'plslProjectsId'
 --
@@ -135,8 +133,6 @@ data ProjectsLogServicesList' = ProjectsLogServicesList'
 -- * 'plslFields'
 --
 -- * 'plslCallback'
---
--- * 'plslAlt'
 projectsLogServicesList'
     :: Text -- ^ 'projectsId'
     -> ProjectsLogServicesList'
@@ -153,12 +149,11 @@ projectsLogServicesList' pPlslProjectsId_ =
     , _plslBearerToken = Nothing
     , _plslKey = Nothing
     , _plslPageToken = Nothing
-    , _plslOauthToken = Nothing
+    , _plslOAuthToken = Nothing
     , _plslProjectsId = pPlslProjectsId_
     , _plslPageSize = Nothing
     , _plslFields = Nothing
     , _plslCallback = Nothing
-    , _plslAlt = "json"
     }
 
 -- | If empty, all log services contributing log entries to the project are
@@ -220,7 +215,7 @@ plslBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-plslKey :: Lens' ProjectsLogServicesList' (Maybe Text)
+plslKey :: Lens' ProjectsLogServicesList' (Maybe Key)
 plslKey = lens _plslKey (\ s a -> s{_plslKey = a})
 
 -- | An opaque token, returned as \`nextPageToken\` by a prior
@@ -233,10 +228,10 @@ plslPageToken
       (\ s a -> s{_plslPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-plslOauthToken :: Lens' ProjectsLogServicesList' (Maybe Text)
-plslOauthToken
-  = lens _plslOauthToken
-      (\ s a -> s{_plslOauthToken = a})
+plslOAuthToken :: Lens' ProjectsLogServicesList' (Maybe OAuthToken)
+plslOAuthToken
+  = lens _plslOAuthToken
+      (\ s a -> s{_plslOAuthToken = a})
 
 -- | Part of \`projectName\`. The resource name of the project whose services
 -- are to be listed.
@@ -260,9 +255,9 @@ plslCallback :: Lens' ProjectsLogServicesList' (Maybe Text)
 plslCallback
   = lens _plslCallback (\ s a -> s{_plslCallback = a})
 
--- | Data format for response.
-plslAlt :: Lens' ProjectsLogServicesList' Text
-plslAlt = lens _plslAlt (\ s a -> s{_plslAlt = a})
+instance GoogleAuth ProjectsLogServicesList' where
+        authKey = plslKey . _Just
+        authToken = plslOAuthToken . _Just
 
 instance GoogleRequest ProjectsLogServicesList' where
         type Rs ProjectsLogServicesList' =
@@ -278,12 +273,12 @@ instance GoogleRequest ProjectsLogServicesList' where
               _plslBearerToken
               _plslKey
               _plslPageToken
-              _plslOauthToken
+              _plslOAuthToken
               _plslProjectsId
               _plslPageSize
               _plslFields
               _plslCallback
-              (Just _plslAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsLogServicesListResource)

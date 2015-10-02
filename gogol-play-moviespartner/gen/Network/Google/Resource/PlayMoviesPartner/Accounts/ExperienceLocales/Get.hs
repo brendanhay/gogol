@@ -21,7 +21,7 @@
 -- Authorization rules_ and _Get methods rules_ for more information about
 -- this method.
 --
--- /See:/ <https://developers.google.com/playmoviespartner/ Google Play Movies Partner API Reference> for @PlaymoviespartnerAccountsExperienceLocalesGet@.
+-- /See:/ <https://developers.google.com/playmoviespartner/ Google Play Movies Partner API Reference> for @PlaymoviesPartynerAccountsExperienceLocalesGet@.
 module Network.Google.Resource.PlayMoviesPartner.Accounts.ExperienceLocales.Get
     (
     -- * REST Resource
@@ -43,16 +43,15 @@ module Network.Google.Resource.PlayMoviesPartner.Accounts.ExperienceLocales.Get
     , aelgAccountId
     , aelgBearerToken
     , aelgKey
-    , aelgOauthToken
+    , aelgOAuthToken
     , aelgFields
     , aelgCallback
-    , aelgAlt
     ) where
 
 import           Network.Google.PlayMoviesPartner.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlaymoviespartnerAccountsExperienceLocalesGet@ which the
+-- | A resource alias for @PlaymoviesPartynerAccountsExperienceLocalesGet@ which the
 -- 'AccountsExperienceLocalesGet'' request conforms to.
 type AccountsExperienceLocalesGetResource =
      "v1" :>
@@ -68,11 +67,11 @@ type AccountsExperienceLocalesGetResource =
                          QueryParam "access_token" Text :>
                            QueryParam "uploadType" Text :>
                              QueryParam "bearer_token" Text :>
-                               QueryParam "key" Text :>
-                                 QueryParam "oauth_token" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "fields" Text :>
                                      QueryParam "callback" Text :>
-                                       QueryParam "alt" Text :>
+                                       QueryParam "alt" AltJSON :>
                                          Get '[JSON] ExperienceLocale
 
 -- | Get an ExperienceLocale given its id. See _Authentication and
@@ -91,11 +90,10 @@ data AccountsExperienceLocalesGet' = AccountsExperienceLocalesGet'
     , _aelgElId           :: !Text
     , _aelgAccountId      :: !Text
     , _aelgBearerToken    :: !(Maybe Text)
-    , _aelgKey            :: !(Maybe Text)
-    , _aelgOauthToken     :: !(Maybe Text)
+    , _aelgKey            :: !(Maybe Key)
+    , _aelgOAuthToken     :: !(Maybe OAuthToken)
     , _aelgFields         :: !(Maybe Text)
     , _aelgCallback       :: !(Maybe Text)
-    , _aelgAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsExperienceLocalesGet'' with the minimum fields required to make a request.
@@ -124,13 +122,11 @@ data AccountsExperienceLocalesGet' = AccountsExperienceLocalesGet'
 --
 -- * 'aelgKey'
 --
--- * 'aelgOauthToken'
+-- * 'aelgOAuthToken'
 --
 -- * 'aelgFields'
 --
 -- * 'aelgCallback'
---
--- * 'aelgAlt'
 accountsExperienceLocalesGet'
     :: Text -- ^ 'elId'
     -> Text -- ^ 'accountId'
@@ -148,10 +144,9 @@ accountsExperienceLocalesGet' pAelgElId_ pAelgAccountId_ =
     , _aelgAccountId = pAelgAccountId_
     , _aelgBearerToken = Nothing
     , _aelgKey = Nothing
-    , _aelgOauthToken = Nothing
+    , _aelgOAuthToken = Nothing
     , _aelgFields = Nothing
     , _aelgCallback = Nothing
-    , _aelgAlt = "json"
     }
 
 -- | V1 error format.
@@ -214,14 +209,14 @@ aelgBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aelgKey :: Lens' AccountsExperienceLocalesGet' (Maybe Text)
+aelgKey :: Lens' AccountsExperienceLocalesGet' (Maybe Key)
 aelgKey = lens _aelgKey (\ s a -> s{_aelgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-aelgOauthToken :: Lens' AccountsExperienceLocalesGet' (Maybe Text)
-aelgOauthToken
-  = lens _aelgOauthToken
-      (\ s a -> s{_aelgOauthToken = a})
+aelgOAuthToken :: Lens' AccountsExperienceLocalesGet' (Maybe OAuthToken)
+aelgOAuthToken
+  = lens _aelgOAuthToken
+      (\ s a -> s{_aelgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 aelgFields :: Lens' AccountsExperienceLocalesGet' (Maybe Text)
@@ -233,9 +228,10 @@ aelgCallback :: Lens' AccountsExperienceLocalesGet' (Maybe Text)
 aelgCallback
   = lens _aelgCallback (\ s a -> s{_aelgCallback = a})
 
--- | Data format for response.
-aelgAlt :: Lens' AccountsExperienceLocalesGet' Text
-aelgAlt = lens _aelgAlt (\ s a -> s{_aelgAlt = a})
+instance GoogleAuth AccountsExperienceLocalesGet'
+         where
+        authKey = aelgKey . _Just
+        authToken = aelgOAuthToken . _Just
 
 instance GoogleRequest AccountsExperienceLocalesGet'
          where
@@ -255,10 +251,10 @@ instance GoogleRequest AccountsExperienceLocalesGet'
               _aelgAccountId
               _aelgBearerToken
               _aelgKey
-              _aelgOauthToken
+              _aelgOAuthToken
               _aelgFields
               _aelgCallback
-              (Just _aelgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountsExperienceLocalesGetResource)

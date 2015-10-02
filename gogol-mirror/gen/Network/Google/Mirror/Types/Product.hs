@@ -60,7 +60,7 @@ instance ToJSON Command where
 -- /See:/ 'locationsListResponse' smart constructor.
 data LocationsListResponse = LocationsListResponse
     { _llrKind  :: !Text
-    , _llrItems :: !(Maybe [Maybe Location])
+    , _llrItems :: !(Maybe [Location])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LocationsListResponse' with the minimum fields required to make a request.
@@ -83,7 +83,7 @@ llrKind :: Lens' LocationsListResponse Text
 llrKind = lens _llrKind (\ s a -> s{_llrKind = a})
 
 -- | The list of locations.
-llrItems :: Lens' LocationsListResponse [Maybe Location]
+llrItems :: Lens' LocationsListResponse [Location]
 llrItems
   = lens _llrItems (\ s a -> s{_llrItems = a}) .
       _Default
@@ -273,7 +273,7 @@ data Notification = Notification
     { _nOperation   :: !(Maybe Text)
     , _nItemId      :: !(Maybe Text)
     , _nCollection  :: !(Maybe Text)
-    , _nUserActions :: !(Maybe [Maybe UserAction])
+    , _nUserActions :: !(Maybe [UserAction])
     , _nVerifyToken :: !(Maybe Text)
     , _nUserToken   :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -320,7 +320,7 @@ nCollection
   = lens _nCollection (\ s a -> s{_nCollection = a})
 
 -- | A list of actions taken by the user that triggered the notification.
-nUserActions :: Lens' Notification [Maybe UserAction]
+nUserActions :: Lens' Notification [UserAction]
 nUserActions
   = lens _nUserActions (\ s a -> s{_nUserActions = a})
       . _Default
@@ -364,9 +364,9 @@ instance ToJSON Notification where
 --
 -- /See:/ 'contact' smart constructor.
 data Contact = Contact
-    { _conAcceptCommands  :: !(Maybe [Maybe Command])
+    { _conAcceptCommands  :: !(Maybe [Command])
     , _conSharingFeatures :: !(Maybe [Text])
-    , _conImageUrls       :: !(Maybe [Text])
+    , _conImageURLs       :: !(Maybe [Text])
     , _conPriority        :: !(Maybe Word32)
     , _conKind            :: !Text
     , _conAcceptTypes     :: !(Maybe [Text])
@@ -386,7 +386,7 @@ data Contact = Contact
 --
 -- * 'conSharingFeatures'
 --
--- * 'conImageUrls'
+-- * 'conImageURLs'
 --
 -- * 'conPriority'
 --
@@ -411,7 +411,7 @@ contact =
     Contact
     { _conAcceptCommands = Nothing
     , _conSharingFeatures = Nothing
-    , _conImageUrls = Nothing
+    , _conImageURLs = Nothing
     , _conPriority = Nothing
     , _conKind = "mirror#contact"
     , _conAcceptTypes = Nothing
@@ -427,7 +427,7 @@ contact =
 -- to three contacts for each voice menu command. If there are more than
 -- that, the three contacts with the highest priority are shown for that
 -- particular command.
-conAcceptCommands :: Lens' Contact [Maybe Command]
+conAcceptCommands :: Lens' Contact [Command]
 conAcceptCommands
   = lens _conAcceptCommands
       (\ s a -> s{_conAcceptCommands = a})
@@ -446,9 +446,9 @@ conSharingFeatures
 -- | Set of image URLs to display for a contact. Most contacts will have a
 -- single image, but a \"group\" contact may include up to 8 image URLs and
 -- they will be resized and cropped into a mosaic on the client.
-conImageUrls :: Lens' Contact [Text]
-conImageUrls
-  = lens _conImageUrls (\ s a -> s{_conImageUrls = a})
+conImageURLs :: Lens' Contact [Text]
+conImageURLs
+  = lens _conImageURLs (\ s a -> s{_conImageURLs = a})
       . _Default
       . _Coerce
 
@@ -538,7 +538,7 @@ instance ToJSON Contact where
               (catMaybes
                  [("acceptCommands" .=) <$> _conAcceptCommands,
                   ("sharingFeatures" .=) <$> _conSharingFeatures,
-                  ("imageUrls" .=) <$> _conImageUrls,
+                  ("imageUrls" .=) <$> _conImageURLs,
                   ("priority" .=) <$> _conPriority,
                   Just ("kind" .= _conKind),
                   ("acceptTypes" .=) <$> _conAcceptTypes,
@@ -596,7 +596,7 @@ instance ToJSON AuthToken where
 -- /See:/ 'attachmentsListResponse' smart constructor.
 data AttachmentsListResponse = AttachmentsListResponse
     { _alrKind  :: !Text
-    , _alrItems :: !(Maybe [Maybe Attachment])
+    , _alrItems :: !(Maybe [Attachment])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AttachmentsListResponse' with the minimum fields required to make a request.
@@ -619,7 +619,7 @@ alrKind :: Lens' AttachmentsListResponse Text
 alrKind = lens _alrKind (\ s a -> s{_alrKind = a})
 
 -- | The list of attachments.
-alrItems :: Lens' AttachmentsListResponse [Maybe Attachment]
+alrItems :: Lens' AttachmentsListResponse [Attachment]
 alrItems
   = lens _alrItems (\ s a -> s{_alrItems = a}) .
       _Default
@@ -644,10 +644,10 @@ instance ToJSON AttachmentsListResponse where
 --
 -- /See:/ 'menuItem' smart constructor.
 data MenuItem = MenuItem
-    { _miValues             :: !(Maybe [Maybe MenuValue])
+    { _miValues             :: !(Maybe [MenuValue])
     , _miRemoveWhenSelected :: !(Maybe Bool)
     , _miAction             :: !(Maybe Text)
-    , _miPayload            :: !(Maybe Text)
+    , _miPayLoad            :: !(Maybe Text)
     , _miContextualCommand  :: !(Maybe Text)
     , _miId                 :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -662,7 +662,7 @@ data MenuItem = MenuItem
 --
 -- * 'miAction'
 --
--- * 'miPayload'
+-- * 'miPayLoad'
 --
 -- * 'miContextualCommand'
 --
@@ -674,7 +674,7 @@ menuItem =
     { _miValues = Nothing
     , _miRemoveWhenSelected = Nothing
     , _miAction = Nothing
-    , _miPayload = Nothing
+    , _miPayLoad = Nothing
     , _miContextualCommand = Nothing
     , _miId = Nothing
     }
@@ -683,7 +683,7 @@ menuItem =
 -- menu item in each of its states. A value for the DEFAULT state must be
 -- provided. If the PENDING or CONFIRMED states are missing, they will not
 -- be shown.
-miValues :: Lens' MenuItem [Maybe MenuValue]
+miValues :: Lens' MenuItem [MenuValue]
 miValues
   = lens _miValues (\ s a -> s{_miValues = a}) .
       _Default
@@ -731,9 +731,9 @@ miAction = lens _miAction (\ s a -> s{_miAction = a})
 -- website to view. - When the action is PLAY_VIDEO, the payload is the
 -- streaming URL of the video - When the action is GET_MEDIA_INPUT, the
 -- payload is the text transcription of a user\'s speech input
-miPayload :: Lens' MenuItem (Maybe Text)
-miPayload
-  = lens _miPayload (\ s a -> s{_miPayload = a})
+miPayLoad :: Lens' MenuItem (Maybe Text)
+miPayLoad
+  = lens _miPayLoad (\ s a -> s{_miPayLoad = a})
 
 -- | The ContextualMenus.Command associated with this MenuItem (e.g.
 -- READ_ALOUD). The voice label for this command will be displayed in the
@@ -770,7 +770,7 @@ instance ToJSON MenuItem where
                  [("values" .=) <$> _miValues,
                   ("removeWhenSelected" .=) <$> _miRemoveWhenSelected,
                   ("action" .=) <$> _miAction,
-                  ("payload" .=) <$> _miPayload,
+                  ("payload" .=) <$> _miPayLoad,
                   ("contextual_command" .=) <$> _miContextualCommand,
                   ("id" .=) <$> _miId])
 
@@ -837,8 +837,8 @@ instance ToJSON Setting where
 --
 -- /See:/ 'account' smart constructor.
 data Account = Account
-    { _aAuthTokens :: !(Maybe [Maybe AuthToken])
-    , _aUserData   :: !(Maybe [Maybe UserData])
+    { _aAuthTokens :: !(Maybe [AuthToken])
+    , _aUserData   :: !(Maybe [UserData])
     , _aPassword   :: !(Maybe Text)
     , _aFeatures   :: !(Maybe [Text])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -864,13 +864,13 @@ account =
     , _aFeatures = Nothing
     }
 
-aAuthTokens :: Lens' Account [Maybe AuthToken]
+aAuthTokens :: Lens' Account [AuthToken]
 aAuthTokens
   = lens _aAuthTokens (\ s a -> s{_aAuthTokens = a}) .
       _Default
       . _Coerce
 
-aUserData :: Lens' Account [Maybe UserData]
+aUserData :: Lens' Account [UserData]
 aUserData
   = lens _aUserData (\ s a -> s{_aUserData = a}) .
       _Default
@@ -910,7 +910,7 @@ instance ToJSON Account where
 --
 -- /See:/ 'attachment' smart constructor.
 data Attachment = Attachment
-    { _aContentUrl          :: !(Maybe Text)
+    { _aContentURL          :: !(Maybe Text)
     , _aId                  :: !(Maybe Text)
     , _aIsProcessingContent :: !(Maybe Bool)
     , _aContentType         :: !(Maybe Text)
@@ -920,7 +920,7 @@ data Attachment = Attachment
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'aContentUrl'
+-- * 'aContentURL'
 --
 -- * 'aId'
 --
@@ -931,16 +931,16 @@ attachment
     :: Attachment
 attachment =
     Attachment
-    { _aContentUrl = Nothing
+    { _aContentURL = Nothing
     , _aId = Nothing
     , _aIsProcessingContent = Nothing
     , _aContentType = Nothing
     }
 
 -- | The URL for the content.
-aContentUrl :: Lens' Attachment (Maybe Text)
-aContentUrl
-  = lens _aContentUrl (\ s a -> s{_aContentUrl = a})
+aContentURL :: Lens' Attachment (Maybe Text)
+aContentURL
+  = lens _aContentURL (\ s a -> s{_aContentURL = a})
 
 -- | The ID of the attachment.
 aId :: Lens' Attachment (Maybe Text)
@@ -972,7 +972,7 @@ instance ToJSON Attachment where
         toJSON Attachment{..}
           = object
               (catMaybes
-                 [("contentUrl" .=) <$> _aContentUrl,
+                 [("contentUrl" .=) <$> _aContentURL,
                   ("id" .=) <$> _aId,
                   ("isProcessingContent" .=) <$> _aIsProcessingContent,
                   ("contentType" .=) <$> _aContentType])
@@ -1021,7 +1021,7 @@ instance ToJSON UserData where
 --
 -- /See:/ 'userAction' smart constructor.
 data UserAction = UserAction
-    { _uaPayload :: !(Maybe Text)
+    { _uaPayLoad :: !(Maybe Text)
     , _uaType    :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1029,22 +1029,22 @@ data UserAction = UserAction
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'uaPayload'
+-- * 'uaPayLoad'
 --
 -- * 'uaType'
 userAction
     :: UserAction
 userAction =
     UserAction
-    { _uaPayload = Nothing
+    { _uaPayLoad = Nothing
     , _uaType = Nothing
     }
 
 -- | An optional payload for the action. For actions of type CUSTOM, this is
 -- the ID of the custom menu item that was selected.
-uaPayload :: Lens' UserAction (Maybe Text)
-uaPayload
-  = lens _uaPayload (\ s a -> s{_uaPayload = a})
+uaPayLoad :: Lens' UserAction (Maybe Text)
+uaPayLoad
+  = lens _uaPayLoad (\ s a -> s{_uaPayLoad = a})
 
 -- | The type of action. The value of this can be: - SHARE - the user shared
 -- an item. - REPLY - the user replied to an item. - REPLY_ALL - the user
@@ -1067,7 +1067,7 @@ instance ToJSON UserAction where
         toJSON UserAction{..}
           = object
               (catMaybes
-                 [("payload" .=) <$> _uaPayload,
+                 [("payload" .=) <$> _uaPayLoad,
                   ("type" .=) <$> _uaType])
 
 -- | A list of Contacts representing contacts. This is the response from the
@@ -1076,7 +1076,7 @@ instance ToJSON UserAction where
 -- /See:/ 'contactsListResponse' smart constructor.
 data ContactsListResponse = ContactsListResponse
     { _clrKind  :: !Text
-    , _clrItems :: !(Maybe [Maybe Contact])
+    , _clrItems :: !(Maybe [Contact])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContactsListResponse' with the minimum fields required to make a request.
@@ -1099,7 +1099,7 @@ clrKind :: Lens' ContactsListResponse Text
 clrKind = lens _clrKind (\ s a -> s{_clrKind = a})
 
 -- | Contact list.
-clrItems :: Lens' ContactsListResponse [Maybe Contact]
+clrItems :: Lens' ContactsListResponse [Contact]
 clrItems
   = lens _clrItems (\ s a -> s{_clrItems = a}) .
       _Default
@@ -1127,7 +1127,7 @@ instance ToJSON ContactsListResponse where
 data TimelineListResponse = TimelineListResponse
     { _tlrNextPageToken :: !(Maybe Text)
     , _tlrKind          :: !Text
-    , _tlrItems         :: !(Maybe [Maybe TimelineItem])
+    , _tlrItems         :: !(Maybe [TimelineItem])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TimelineListResponse' with the minimum fields required to make a request.
@@ -1160,7 +1160,7 @@ tlrKind :: Lens' TimelineListResponse Text
 tlrKind = lens _tlrKind (\ s a -> s{_tlrKind = a})
 
 -- | Items in the timeline.
-tlrItems :: Lens' TimelineListResponse [Maybe TimelineItem]
+tlrItems :: Lens' TimelineListResponse [TimelineItem]
 tlrItems
   = lens _tlrItems (\ s a -> s{_tlrItems = a}) .
       _Default
@@ -1189,7 +1189,7 @@ instance ToJSON TimelineListResponse where
 data MenuValue = MenuValue
     { _mvState       :: !(Maybe Text)
     , _mvDisplayName :: !(Maybe Text)
-    , _mvIconUrl     :: !(Maybe Text)
+    , _mvIconURL     :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MenuValue' with the minimum fields required to make a request.
@@ -1200,14 +1200,14 @@ data MenuValue = MenuValue
 --
 -- * 'mvDisplayName'
 --
--- * 'mvIconUrl'
+-- * 'mvIconURL'
 menuValue
     :: MenuValue
 menuValue =
     MenuValue
     { _mvState = Nothing
     , _mvDisplayName = Nothing
-    , _mvIconUrl = Nothing
+    , _mvIconURL = Nothing
     }
 
 -- | The state that this value applies to. Allowed values are: - DEFAULT -
@@ -1227,9 +1227,9 @@ mvDisplayName
       (\ s a -> s{_mvDisplayName = a})
 
 -- | URL of an icon to display with the menu item.
-mvIconUrl :: Lens' MenuValue (Maybe Text)
-mvIconUrl
-  = lens _mvIconUrl (\ s a -> s{_mvIconUrl = a})
+mvIconURL :: Lens' MenuValue (Maybe Text)
+mvIconURL
+  = lens _mvIconURL (\ s a -> s{_mvIconURL = a})
 
 instance FromJSON MenuValue where
         parseJSON
@@ -1245,15 +1245,15 @@ instance ToJSON MenuValue where
               (catMaybes
                  [("state" .=) <$> _mvState,
                   ("displayName" .=) <$> _mvDisplayName,
-                  ("iconUrl" .=) <$> _mvIconUrl])
+                  ("iconUrl" .=) <$> _mvIconURL])
 
 -- | A subscription to events on a collection.
 --
 -- /See:/ 'subscription' smart constructor.
 data Subscription = Subscription
-    { _subCallbackUrl  :: !(Maybe Text)
+    { _subCallbackURL  :: !(Maybe Text)
     , _subOperation    :: !(Maybe [Text])
-    , _subNotification :: !(Maybe (Maybe Notification))
+    , _subNotification :: !(Maybe Notification)
     , _subKind         :: !Text
     , _subCollection   :: !(Maybe Text)
     , _subVerifyToken  :: !(Maybe Text)
@@ -1266,7 +1266,7 @@ data Subscription = Subscription
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'subCallbackUrl'
+-- * 'subCallbackURL'
 --
 -- * 'subOperation'
 --
@@ -1287,7 +1287,7 @@ subscription
     :: Subscription
 subscription =
     Subscription
-    { _subCallbackUrl = Nothing
+    { _subCallbackURL = Nothing
     , _subOperation = Nothing
     , _subNotification = Nothing
     , _subKind = "mirror#subscription"
@@ -1300,10 +1300,10 @@ subscription =
 
 -- | The URL where notifications should be delivered (must start with
 -- https:\/\/).
-subCallbackUrl :: Lens' Subscription (Maybe Text)
-subCallbackUrl
-  = lens _subCallbackUrl
-      (\ s a -> s{_subCallbackUrl = a})
+subCallbackURL :: Lens' Subscription (Maybe Text)
+subCallbackURL
+  = lens _subCallbackURL
+      (\ s a -> s{_subCallbackURL = a})
 
 -- | A list of operations that should be subscribed to. An empty list
 -- indicates that all operations on the collection should be subscribed to.
@@ -1318,7 +1318,7 @@ subOperation
 
 -- | Container object for notifications. This is not populated in the
 -- Subscription resource.
-subNotification :: Lens' Subscription (Maybe (Maybe Notification))
+subNotification :: Lens' Subscription (Maybe Notification)
 subNotification
   = lens _subNotification
       (\ s a -> s{_subNotification = a})
@@ -1377,7 +1377,7 @@ instance ToJSON Subscription where
         toJSON Subscription{..}
           = object
               (catMaybes
-                 [("callbackUrl" .=) <$> _subCallbackUrl,
+                 [("callbackUrl" .=) <$> _subCallbackURL,
                   ("operation" .=) <$> _subOperation,
                   ("notification" .=) <$> _subNotification,
                   Just ("kind" .= _subKind),
@@ -1392,15 +1392,15 @@ instance ToJSON Subscription where
 --
 -- /See:/ 'timelineItem' smart constructor.
 data TimelineItem = TimelineItem
-    { _tiCreator       :: !(Maybe (Maybe Contact))
+    { _tiCreator       :: !(Maybe Contact)
     , _tiDisplayTime   :: !(Maybe UTCTime)
     , _tiEtag          :: !(Maybe Text)
     , _tiIsDeleted     :: !(Maybe Bool)
     , _tiPinScore      :: !(Maybe Int32)
-    , _tiAttachments   :: !(Maybe [Maybe Attachment])
-    , _tiLocation      :: !(Maybe (Maybe Location))
-    , _tiMenuItems     :: !(Maybe [Maybe MenuItem])
-    , _tiNotification  :: !(Maybe (Maybe NotificationConfig))
+    , _tiAttachments   :: !(Maybe [Attachment])
+    , _tiLocation      :: !(Maybe Location)
+    , _tiMenuItems     :: !(Maybe [MenuItem])
+    , _tiNotification  :: !(Maybe NotificationConfig)
     , _tiText          :: !(Maybe Text)
     , _tiKind          :: !Text
     , _tiCreated       :: !(Maybe UTCTime)
@@ -1408,14 +1408,14 @@ data TimelineItem = TimelineItem
     , _tiIsBundleCover :: !(Maybe Bool)
     , _tiSpeakableType :: !(Maybe Text)
     , _tiBundleId      :: !(Maybe Text)
-    , _tiCanonicalUrl  :: !(Maybe Text)
+    , _tiCanonicalURL  :: !(Maybe Text)
     , _tiSelfLink      :: !(Maybe Text)
     , _tiIsPinned      :: !(Maybe Bool)
     , _tiSourceItemId  :: !(Maybe Text)
     , _tiId            :: !(Maybe Text)
-    , _tiHtml          :: !(Maybe Text)
+    , _tiHTML          :: !(Maybe Text)
     , _tiUpdated       :: !(Maybe UTCTime)
-    , _tiRecipients    :: !(Maybe [Maybe Contact])
+    , _tiRecipients    :: !(Maybe [Contact])
     , _tiTitle         :: !(Maybe Text)
     , _tiInReplyTo     :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -1456,7 +1456,7 @@ data TimelineItem = TimelineItem
 --
 -- * 'tiBundleId'
 --
--- * 'tiCanonicalUrl'
+-- * 'tiCanonicalURL'
 --
 -- * 'tiSelfLink'
 --
@@ -1466,7 +1466,7 @@ data TimelineItem = TimelineItem
 --
 -- * 'tiId'
 --
--- * 'tiHtml'
+-- * 'tiHTML'
 --
 -- * 'tiUpdated'
 --
@@ -1495,12 +1495,12 @@ timelineItem =
     , _tiIsBundleCover = Nothing
     , _tiSpeakableType = Nothing
     , _tiBundleId = Nothing
-    , _tiCanonicalUrl = Nothing
+    , _tiCanonicalURL = Nothing
     , _tiSelfLink = Nothing
     , _tiIsPinned = Nothing
     , _tiSourceItemId = Nothing
     , _tiId = Nothing
-    , _tiHtml = Nothing
+    , _tiHTML = Nothing
     , _tiUpdated = Nothing
     , _tiRecipients = Nothing
     , _tiTitle = Nothing
@@ -1508,7 +1508,7 @@ timelineItem =
     }
 
 -- | The user or group that created this item.
-tiCreator :: Lens' TimelineItem (Maybe (Maybe Contact))
+tiCreator :: Lens' TimelineItem (Maybe Contact)
 tiCreator
   = lens _tiCreator (\ s a -> s{_tiCreator = a})
 
@@ -1545,7 +1545,7 @@ tiPinScore
 -- <<attachment:attachment_index >> where attachment_index is the 0-based
 -- index of this array. - cid: <<cid:attachment_id >> where attachment_id
 -- is the ID of the attachment.
-tiAttachments :: Lens' TimelineItem [Maybe Attachment]
+tiAttachments :: Lens' TimelineItem [Attachment]
 tiAttachments
   = lens _tiAttachments
       (\ s a -> s{_tiAttachments = a})
@@ -1553,13 +1553,13 @@ tiAttachments
       . _Coerce
 
 -- | The geographic location associated with this item.
-tiLocation :: Lens' TimelineItem (Maybe (Maybe Location))
+tiLocation :: Lens' TimelineItem (Maybe Location)
 tiLocation
   = lens _tiLocation (\ s a -> s{_tiLocation = a})
 
 -- | A list of menu items that will be presented to the user when this item
 -- is selected in the timeline.
-tiMenuItems :: Lens' TimelineItem [Maybe MenuItem]
+tiMenuItems :: Lens' TimelineItem [MenuItem]
 tiMenuItems
   = lens _tiMenuItems (\ s a -> s{_tiMenuItems = a}) .
       _Default
@@ -1567,7 +1567,7 @@ tiMenuItems
 
 -- | Controls how notifications for this item are presented on the device. If
 -- this is missing, no notification will be generated.
-tiNotification :: Lens' TimelineItem (Maybe (Maybe NotificationConfig))
+tiNotification :: Lens' TimelineItem (Maybe NotificationConfig)
 tiNotification
   = lens _tiNotification
       (\ s a -> s{_tiNotification = a})
@@ -1633,10 +1633,10 @@ tiBundleId
 
 -- | A canonical URL pointing to the canonical\/high quality version of the
 -- data represented by the timeline item.
-tiCanonicalUrl :: Lens' TimelineItem (Maybe Text)
-tiCanonicalUrl
-  = lens _tiCanonicalUrl
-      (\ s a -> s{_tiCanonicalUrl = a})
+tiCanonicalURL :: Lens' TimelineItem (Maybe Text)
+tiCanonicalURL
+  = lens _tiCanonicalURL
+      (\ s a -> s{_tiCanonicalURL = a})
 
 -- | A URL that can be used to retrieve this item.
 tiSelfLink :: Lens' TimelineItem (Maybe Text)
@@ -1676,8 +1676,8 @@ tiId = lens _tiId (\ s a -> s{_tiId = a})
 -- object, source, video - Frames: frame, frameset - Scripting: applet,
 -- script Other elements: Any elements that aren\'t listed are removed, but
 -- their contents are preserved.
-tiHtml :: Lens' TimelineItem (Maybe Text)
-tiHtml = lens _tiHtml (\ s a -> s{_tiHtml = a})
+tiHTML :: Lens' TimelineItem (Maybe Text)
+tiHTML = lens _tiHTML (\ s a -> s{_tiHTML = a})
 
 -- | The time at which this item was last modified, formatted according to
 -- RFC 3339.
@@ -1686,7 +1686,7 @@ tiUpdated
   = lens _tiUpdated (\ s a -> s{_tiUpdated = a})
 
 -- | A list of users or groups that this item has been shared with.
-tiRecipients :: Lens' TimelineItem [Maybe Contact]
+tiRecipients :: Lens' TimelineItem [Contact]
 tiRecipients
   = lens _tiRecipients (\ s a -> s{_tiRecipients = a})
       . _Default
@@ -1753,11 +1753,11 @@ instance ToJSON TimelineItem where
                   ("isBundleCover" .=) <$> _tiIsBundleCover,
                   ("speakableType" .=) <$> _tiSpeakableType,
                   ("bundleId" .=) <$> _tiBundleId,
-                  ("canonicalUrl" .=) <$> _tiCanonicalUrl,
+                  ("canonicalUrl" .=) <$> _tiCanonicalURL,
                   ("selfLink" .=) <$> _tiSelfLink,
                   ("isPinned" .=) <$> _tiIsPinned,
                   ("sourceItemId" .=) <$> _tiSourceItemId,
-                  ("id" .=) <$> _tiId, ("html" .=) <$> _tiHtml,
+                  ("id" .=) <$> _tiId, ("html" .=) <$> _tiHTML,
                   ("updated" .=) <$> _tiUpdated,
                   ("recipients" .=) <$> _tiRecipients,
                   ("title" .=) <$> _tiTitle,
@@ -1769,7 +1769,7 @@ instance ToJSON TimelineItem where
 -- /See:/ 'subscriptionsListResponse' smart constructor.
 data SubscriptionsListResponse = SubscriptionsListResponse
     { _slrKind  :: !Text
-    , _slrItems :: !(Maybe [Maybe Subscription])
+    , _slrItems :: !(Maybe [Subscription])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionsListResponse' with the minimum fields required to make a request.
@@ -1792,7 +1792,7 @@ slrKind :: Lens' SubscriptionsListResponse Text
 slrKind = lens _slrKind (\ s a -> s{_slrKind = a})
 
 -- | The list of subscriptions.
-slrItems :: Lens' SubscriptionsListResponse [Maybe Subscription]
+slrItems :: Lens' SubscriptionsListResponse [Subscription]
 slrItems
   = lens _slrItems (\ s a -> s{_slrItems = a}) .
       _Default

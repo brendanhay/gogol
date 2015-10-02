@@ -40,11 +40,10 @@ module Network.Google.Resource.Logging.Projects.LogServices.Sinks.List
     , plsslBearerToken
     , plsslKey
     , plsslLogServicesId
-    , plsslOauthToken
+    , plsslOAuthToken
     , plsslProjectsId
     , plsslFields
     , plsslCallback
-    , plsslAlt
     ) where
 
 import           Network.Google.Logging.Types
@@ -67,11 +66,11 @@ type ProjectsLogServicesSinksListResource =
                            QueryParam "access_token" Text :>
                              QueryParam "uploadType" Text :>
                                QueryParam "bearer_token" Text :>
-                                 QueryParam "key" Text :>
-                                   QueryParam "oauth_token" Text :>
+                                 QueryParam "key" Key :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "fields" Text :>
                                        QueryParam "callback" Text :>
-                                         QueryParam "alt" Text :>
+                                         QueryParam "alt" AltJSON :>
                                            Get '[JSON]
                                              ListLogServiceSinksResponse
 
@@ -87,13 +86,12 @@ data ProjectsLogServicesSinksList' = ProjectsLogServicesSinksList'
     , _plsslAccessToken    :: !(Maybe Text)
     , _plsslUploadType     :: !(Maybe Text)
     , _plsslBearerToken    :: !(Maybe Text)
-    , _plsslKey            :: !(Maybe Text)
+    , _plsslKey            :: !(Maybe Key)
     , _plsslLogServicesId  :: !Text
-    , _plsslOauthToken     :: !(Maybe Text)
+    , _plsslOAuthToken     :: !(Maybe OAuthToken)
     , _plsslProjectsId     :: !Text
     , _plsslFields         :: !(Maybe Text)
     , _plsslCallback       :: !(Maybe Text)
-    , _plsslAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsLogServicesSinksList'' with the minimum fields required to make a request.
@@ -120,15 +118,13 @@ data ProjectsLogServicesSinksList' = ProjectsLogServicesSinksList'
 --
 -- * 'plsslLogServicesId'
 --
--- * 'plsslOauthToken'
+-- * 'plsslOAuthToken'
 --
 -- * 'plsslProjectsId'
 --
 -- * 'plsslFields'
 --
 -- * 'plsslCallback'
---
--- * 'plsslAlt'
 projectsLogServicesSinksList'
     :: Text -- ^ 'logServicesId'
     -> Text -- ^ 'projectsId'
@@ -145,11 +141,10 @@ projectsLogServicesSinksList' pPlsslLogServicesId_ pPlsslProjectsId_ =
     , _plsslBearerToken = Nothing
     , _plsslKey = Nothing
     , _plsslLogServicesId = pPlsslLogServicesId_
-    , _plsslOauthToken = Nothing
+    , _plsslOAuthToken = Nothing
     , _plsslProjectsId = pPlsslProjectsId_
     , _plsslFields = Nothing
     , _plsslCallback = Nothing
-    , _plsslAlt = "json"
     }
 
 -- | V1 error format.
@@ -202,7 +197,7 @@ plsslBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-plsslKey :: Lens' ProjectsLogServicesSinksList' (Maybe Text)
+plsslKey :: Lens' ProjectsLogServicesSinksList' (Maybe Key)
 plsslKey = lens _plsslKey (\ s a -> s{_plsslKey = a})
 
 -- | Part of \`serviceName\`. See documentation of \`projectsId\`.
@@ -212,10 +207,10 @@ plsslLogServicesId
       (\ s a -> s{_plsslLogServicesId = a})
 
 -- | OAuth 2.0 token for the current user.
-plsslOauthToken :: Lens' ProjectsLogServicesSinksList' (Maybe Text)
-plsslOauthToken
-  = lens _plsslOauthToken
-      (\ s a -> s{_plsslOauthToken = a})
+plsslOAuthToken :: Lens' ProjectsLogServicesSinksList' (Maybe OAuthToken)
+plsslOAuthToken
+  = lens _plsslOAuthToken
+      (\ s a -> s{_plsslOAuthToken = a})
 
 -- | Part of \`serviceName\`. The log service whose sinks are wanted.
 plsslProjectsId :: Lens' ProjectsLogServicesSinksList' Text
@@ -234,9 +229,10 @@ plsslCallback
   = lens _plsslCallback
       (\ s a -> s{_plsslCallback = a})
 
--- | Data format for response.
-plsslAlt :: Lens' ProjectsLogServicesSinksList' Text
-plsslAlt = lens _plsslAlt (\ s a -> s{_plsslAlt = a})
+instance GoogleAuth ProjectsLogServicesSinksList'
+         where
+        authKey = plsslKey . _Just
+        authToken = plsslOAuthToken . _Just
 
 instance GoogleRequest ProjectsLogServicesSinksList'
          where
@@ -254,11 +250,11 @@ instance GoogleRequest ProjectsLogServicesSinksList'
               _plsslBearerToken
               _plsslKey
               _plsslLogServicesId
-              _plsslOauthToken
+              _plsslOAuthToken
               _plsslProjectsId
               _plsslFields
               _plsslCallback
-              (Just _plsslAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsLogServicesSinksListResource)

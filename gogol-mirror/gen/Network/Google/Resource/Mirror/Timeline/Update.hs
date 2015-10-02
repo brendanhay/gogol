@@ -32,12 +32,13 @@ module Network.Google.Resource.Mirror.Timeline.Update
     -- * Request Lenses
     , tuQuotaUser
     , tuPrettyPrint
-    , tuUserIp
+    , tuUserIP
+    , tuMedia
     , tuKey
     , tuId
-    , tuOauthToken
+    , tuOAuthToken
+    , tuTimelineItem
     , tuFields
-    , tuAlt
     ) where
 
 import           Network.Google.Mirror.Types
@@ -51,23 +52,26 @@ type TimelineUpdateResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Put '[JSON] TimelineItem
+                     QueryParam "alt" AltJSON :>
+                       MultipartRelated '[JSON] TimelineItem Body :>
+                         Put '[JSON] TimelineItem
 
 -- | Updates a timeline item in place.
 --
 -- /See:/ 'timelineUpdate'' smart constructor.
 data TimelineUpdate' = TimelineUpdate'
-    { _tuQuotaUser   :: !(Maybe Text)
-    , _tuPrettyPrint :: !Bool
-    , _tuUserIp      :: !(Maybe Text)
-    , _tuKey         :: !(Maybe Text)
-    , _tuId          :: !Text
-    , _tuOauthToken  :: !(Maybe Text)
-    , _tuFields      :: !(Maybe Text)
-    , _tuAlt         :: !Alt
+    { _tuQuotaUser    :: !(Maybe Text)
+    , _tuPrettyPrint  :: !Bool
+    , _tuUserIP       :: !(Maybe Text)
+    , _tuMedia        :: !Body
+    , _tuKey          :: !(Maybe Key)
+    , _tuId           :: !Text
+    , _tuOAuthToken   :: !(Maybe OAuthToken)
+    , _tuTimelineItem :: !TimelineItem
+    , _tuFields       :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TimelineUpdate'' with the minimum fields required to make a request.
@@ -78,30 +82,35 @@ data TimelineUpdate' = TimelineUpdate'
 --
 -- * 'tuPrettyPrint'
 --
--- * 'tuUserIp'
+-- * 'tuUserIP'
+--
+-- * 'tuMedia'
 --
 -- * 'tuKey'
 --
 -- * 'tuId'
 --
--- * 'tuOauthToken'
+-- * 'tuOAuthToken'
+--
+-- * 'tuTimelineItem'
 --
 -- * 'tuFields'
---
--- * 'tuAlt'
 timelineUpdate'
-    :: Text -- ^ 'id'
+    :: Body -- ^ 'media'
+    -> Text -- ^ 'id'
+    -> TimelineItem -- ^ 'TimelineItem'
     -> TimelineUpdate'
-timelineUpdate' pTuId_ =
+timelineUpdate' pTuMedia_ pTuId_ pTuTimelineItem_ =
     TimelineUpdate'
     { _tuQuotaUser = Nothing
     , _tuPrettyPrint = True
-    , _tuUserIp = Nothing
+    , _tuUserIP = Nothing
+    , _tuMedia = pTuMedia_
     , _tuKey = Nothing
     , _tuId = pTuId_
-    , _tuOauthToken = Nothing
+    , _tuOAuthToken = Nothing
+    , _tuTimelineItem = pTuTimelineItem_
     , _tuFields = Nothing
-    , _tuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -119,13 +128,16 @@ tuPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tuUserIp :: Lens' TimelineUpdate' (Maybe Text)
-tuUserIp = lens _tuUserIp (\ s a -> s{_tuUserIp = a})
+tuUserIP :: Lens' TimelineUpdate' (Maybe Text)
+tuUserIP = lens _tuUserIP (\ s a -> s{_tuUserIP = a})
+
+tuMedia :: Lens' TimelineUpdate' Body
+tuMedia = lens _tuMedia (\ s a -> s{_tuMedia = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tuKey :: Lens' TimelineUpdate' (Maybe Text)
+tuKey :: Lens' TimelineUpdate' (Maybe Key)
 tuKey = lens _tuKey (\ s a -> s{_tuKey = a})
 
 -- | The ID of the timeline item.
@@ -133,28 +145,36 @@ tuId :: Lens' TimelineUpdate' Text
 tuId = lens _tuId (\ s a -> s{_tuId = a})
 
 -- | OAuth 2.0 token for the current user.
-tuOauthToken :: Lens' TimelineUpdate' (Maybe Text)
-tuOauthToken
-  = lens _tuOauthToken (\ s a -> s{_tuOauthToken = a})
+tuOAuthToken :: Lens' TimelineUpdate' (Maybe OAuthToken)
+tuOAuthToken
+  = lens _tuOAuthToken (\ s a -> s{_tuOAuthToken = a})
+
+-- | Multipart request metadata.
+tuTimelineItem :: Lens' TimelineUpdate' TimelineItem
+tuTimelineItem
+  = lens _tuTimelineItem
+      (\ s a -> s{_tuTimelineItem = a})
 
 -- | Selector specifying which fields to include in a partial response.
 tuFields :: Lens' TimelineUpdate' (Maybe Text)
 tuFields = lens _tuFields (\ s a -> s{_tuFields = a})
 
--- | Data format for the response.
-tuAlt :: Lens' TimelineUpdate' Alt
-tuAlt = lens _tuAlt (\ s a -> s{_tuAlt = a})
+instance GoogleAuth TimelineUpdate' where
+        authKey = tuKey . _Just
+        authToken = tuOAuthToken . _Just
 
 instance GoogleRequest TimelineUpdate' where
         type Rs TimelineUpdate' = TimelineItem
         request = requestWithRoute defReq mirrorURL
         requestWithRoute r u TimelineUpdate'{..}
-          = go _tuQuotaUser (Just _tuPrettyPrint) _tuUserIp
+          = go _tuQuotaUser (Just _tuPrettyPrint) _tuUserIP
+              _tuMedia
               _tuKey
               _tuId
-              _tuOauthToken
+              _tuOAuthToken
               _tuFields
-              (Just _tuAlt)
+              (Just AltJSON)
+              _tuTimelineItem
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TimelineUpdateResource)

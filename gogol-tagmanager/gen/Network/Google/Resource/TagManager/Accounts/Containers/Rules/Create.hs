@@ -19,7 +19,7 @@
 --
 -- | Creates a GTM Rule.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersRulesCreate@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersRulesCreate@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Rules.Create
     (
     -- * REST Resource
@@ -33,18 +33,18 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Rules.Create
     , acrcQuotaUser
     , acrcPrettyPrint
     , acrcContainerId
-    , acrcUserIp
+    , acrcUserIP
+    , acrcRule
     , acrcAccountId
     , acrcKey
-    , acrcOauthToken
+    , acrcOAuthToken
     , acrcFields
-    , acrcAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagmanagerAccountsContainersRulesCreate@ which the
+-- | A resource alias for @TagManagerAccountsContainersRulesCreate@ which the
 -- 'AccountsContainersRulesCreate'' request conforms to.
 type AccountsContainersRulesCreateResource =
      "accounts" :>
@@ -55,10 +55,11 @@ type AccountsContainersRulesCreateResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Post '[JSON] Rule
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] Rule :> Post '[JSON] Rule
 
 -- | Creates a GTM Rule.
 --
@@ -67,12 +68,12 @@ data AccountsContainersRulesCreate' = AccountsContainersRulesCreate'
     { _acrcQuotaUser   :: !(Maybe Text)
     , _acrcPrettyPrint :: !Bool
     , _acrcContainerId :: !Text
-    , _acrcUserIp      :: !(Maybe Text)
+    , _acrcUserIP      :: !(Maybe Text)
+    , _acrcRule        :: !Rule
     , _acrcAccountId   :: !Text
-    , _acrcKey         :: !(Maybe Text)
-    , _acrcOauthToken  :: !(Maybe Text)
+    , _acrcKey         :: !(Maybe Key)
+    , _acrcOAuthToken  :: !(Maybe OAuthToken)
     , _acrcFields      :: !(Maybe Text)
-    , _acrcAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersRulesCreate'' with the minimum fields required to make a request.
@@ -85,32 +86,33 @@ data AccountsContainersRulesCreate' = AccountsContainersRulesCreate'
 --
 -- * 'acrcContainerId'
 --
--- * 'acrcUserIp'
+-- * 'acrcUserIP'
+--
+-- * 'acrcRule'
 --
 -- * 'acrcAccountId'
 --
 -- * 'acrcKey'
 --
--- * 'acrcOauthToken'
+-- * 'acrcOAuthToken'
 --
 -- * 'acrcFields'
---
--- * 'acrcAlt'
 accountsContainersRulesCreate'
     :: Text -- ^ 'containerId'
+    -> Rule -- ^ 'Rule'
     -> Text -- ^ 'accountId'
     -> AccountsContainersRulesCreate'
-accountsContainersRulesCreate' pAcrcContainerId_ pAcrcAccountId_ =
+accountsContainersRulesCreate' pAcrcContainerId_ pAcrcRule_ pAcrcAccountId_ =
     AccountsContainersRulesCreate'
     { _acrcQuotaUser = Nothing
     , _acrcPrettyPrint = True
     , _acrcContainerId = pAcrcContainerId_
-    , _acrcUserIp = Nothing
+    , _acrcUserIP = Nothing
+    , _acrcRule = pAcrcRule_
     , _acrcAccountId = pAcrcAccountId_
     , _acrcKey = Nothing
-    , _acrcOauthToken = Nothing
+    , _acrcOAuthToken = Nothing
     , _acrcFields = Nothing
-    , _acrcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,9 +137,13 @@ acrcContainerId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-acrcUserIp :: Lens' AccountsContainersRulesCreate' (Maybe Text)
-acrcUserIp
-  = lens _acrcUserIp (\ s a -> s{_acrcUserIp = a})
+acrcUserIP :: Lens' AccountsContainersRulesCreate' (Maybe Text)
+acrcUserIP
+  = lens _acrcUserIP (\ s a -> s{_acrcUserIP = a})
+
+-- | Multipart request metadata.
+acrcRule :: Lens' AccountsContainersRulesCreate' Rule
+acrcRule = lens _acrcRule (\ s a -> s{_acrcRule = a})
 
 -- | The GTM Account ID.
 acrcAccountId :: Lens' AccountsContainersRulesCreate' Text
@@ -148,23 +154,24 @@ acrcAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-acrcKey :: Lens' AccountsContainersRulesCreate' (Maybe Text)
+acrcKey :: Lens' AccountsContainersRulesCreate' (Maybe Key)
 acrcKey = lens _acrcKey (\ s a -> s{_acrcKey = a})
 
 -- | OAuth 2.0 token for the current user.
-acrcOauthToken :: Lens' AccountsContainersRulesCreate' (Maybe Text)
-acrcOauthToken
-  = lens _acrcOauthToken
-      (\ s a -> s{_acrcOauthToken = a})
+acrcOAuthToken :: Lens' AccountsContainersRulesCreate' (Maybe OAuthToken)
+acrcOAuthToken
+  = lens _acrcOAuthToken
+      (\ s a -> s{_acrcOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 acrcFields :: Lens' AccountsContainersRulesCreate' (Maybe Text)
 acrcFields
   = lens _acrcFields (\ s a -> s{_acrcFields = a})
 
--- | Data format for the response.
-acrcAlt :: Lens' AccountsContainersRulesCreate' Alt
-acrcAlt = lens _acrcAlt (\ s a -> s{_acrcAlt = a})
+instance GoogleAuth AccountsContainersRulesCreate'
+         where
+        authKey = acrcKey . _Just
+        authToken = acrcOAuthToken . _Just
 
 instance GoogleRequest AccountsContainersRulesCreate'
          where
@@ -174,12 +181,13 @@ instance GoogleRequest AccountsContainersRulesCreate'
           AccountsContainersRulesCreate'{..}
           = go _acrcQuotaUser (Just _acrcPrettyPrint)
               _acrcContainerId
-              _acrcUserIp
+              _acrcUserIP
               _acrcAccountId
               _acrcKey
-              _acrcOauthToken
+              _acrcOAuthToken
               _acrcFields
-              (Just _acrcAlt)
+              (Just AltJSON)
+              _acrcRule
           where go
                   = clientWithRoute
                       (Proxy ::

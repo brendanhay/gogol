@@ -47,10 +47,10 @@ module Network.Google.Resource.Classroom.Courses.Students.Create
     , cscEnrollmentCode
     , cscBearerToken
     , cscKey
-    , cscOauthToken
+    , cscOAuthToken
     , cscFields
     , cscCallback
-    , cscAlt
+    , cscStudent
     ) where
 
 import           Network.Google.Classroom.Types
@@ -72,12 +72,13 @@ type CoursesStudentsCreateResource =
                          QueryParam "uploadType" Text :>
                            QueryParam "enrollmentCode" Text :>
                              QueryParam "bearer_token" Text :>
-                               QueryParam "key" Text :>
-                                 QueryParam "oauth_token" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "fields" Text :>
                                      QueryParam "callback" Text :>
-                                       QueryParam "alt" Text :>
-                                         Post '[JSON] Student
+                                       QueryParam "alt" AltJSON :>
+                                         ReqBody '[JSON] Student :>
+                                           Post '[JSON] Student
 
 -- | Adds a user as a student of a course. This method returns the following
 -- error codes: * \`PERMISSION_DENIED\` if the requesting user is not
@@ -99,11 +100,11 @@ data CoursesStudentsCreate' = CoursesStudentsCreate'
     , _cscUploadType     :: !(Maybe Text)
     , _cscEnrollmentCode :: !(Maybe Text)
     , _cscBearerToken    :: !(Maybe Text)
-    , _cscKey            :: !(Maybe Text)
-    , _cscOauthToken     :: !(Maybe Text)
+    , _cscKey            :: !(Maybe Key)
+    , _cscOAuthToken     :: !(Maybe OAuthToken)
     , _cscFields         :: !(Maybe Text)
     , _cscCallback       :: !(Maybe Text)
-    , _cscAlt            :: !Text
+    , _cscStudent        :: !Student
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CoursesStudentsCreate'' with the minimum fields required to make a request.
@@ -132,17 +133,18 @@ data CoursesStudentsCreate' = CoursesStudentsCreate'
 --
 -- * 'cscKey'
 --
--- * 'cscOauthToken'
+-- * 'cscOAuthToken'
 --
 -- * 'cscFields'
 --
 -- * 'cscCallback'
 --
--- * 'cscAlt'
+-- * 'cscStudent'
 coursesStudentsCreate'
     :: Text -- ^ 'courseId'
+    -> Student -- ^ 'Student'
     -> CoursesStudentsCreate'
-coursesStudentsCreate' pCscCourseId_ =
+coursesStudentsCreate' pCscCourseId_ pCscStudent_ =
     CoursesStudentsCreate'
     { _cscXgafv = Nothing
     , _cscQuotaUser = Nothing
@@ -155,10 +157,10 @@ coursesStudentsCreate' pCscCourseId_ =
     , _cscEnrollmentCode = Nothing
     , _cscBearerToken = Nothing
     , _cscKey = Nothing
-    , _cscOauthToken = Nothing
+    , _cscOAuthToken = Nothing
     , _cscFields = Nothing
     , _cscCallback = Nothing
-    , _cscAlt = "json"
+    , _cscStudent = pCscStudent_
     }
 
 -- | V1 error format.
@@ -225,14 +227,14 @@ cscBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cscKey :: Lens' CoursesStudentsCreate' (Maybe Text)
+cscKey :: Lens' CoursesStudentsCreate' (Maybe Key)
 cscKey = lens _cscKey (\ s a -> s{_cscKey = a})
 
 -- | OAuth 2.0 token for the current user.
-cscOauthToken :: Lens' CoursesStudentsCreate' (Maybe Text)
-cscOauthToken
-  = lens _cscOauthToken
-      (\ s a -> s{_cscOauthToken = a})
+cscOAuthToken :: Lens' CoursesStudentsCreate' (Maybe OAuthToken)
+cscOAuthToken
+  = lens _cscOAuthToken
+      (\ s a -> s{_cscOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cscFields :: Lens' CoursesStudentsCreate' (Maybe Text)
@@ -244,9 +246,14 @@ cscCallback :: Lens' CoursesStudentsCreate' (Maybe Text)
 cscCallback
   = lens _cscCallback (\ s a -> s{_cscCallback = a})
 
--- | Data format for response.
-cscAlt :: Lens' CoursesStudentsCreate' Text
-cscAlt = lens _cscAlt (\ s a -> s{_cscAlt = a})
+-- | Multipart request metadata.
+cscStudent :: Lens' CoursesStudentsCreate' Student
+cscStudent
+  = lens _cscStudent (\ s a -> s{_cscStudent = a})
+
+instance GoogleAuth CoursesStudentsCreate' where
+        authKey = cscKey . _Just
+        authToken = cscOAuthToken . _Just
 
 instance GoogleRequest CoursesStudentsCreate' where
         type Rs CoursesStudentsCreate' = Student
@@ -261,10 +268,11 @@ instance GoogleRequest CoursesStudentsCreate' where
               _cscEnrollmentCode
               _cscBearerToken
               _cscKey
-              _cscOauthToken
+              _cscOAuthToken
               _cscFields
               _cscCallback
-              (Just _cscAlt)
+              (Just AltJSON)
+              _cscStudent
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CoursesStudentsCreateResource)

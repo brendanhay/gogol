@@ -21,7 +21,7 @@
 -- _Authentication and Authorization rules_ and _List methods rules_ for
 -- more information about this method.
 --
--- /See:/ <https://developers.google.com/playmoviespartner/ Google Play Movies Partner API Reference> for @PlaymoviespartnerAccountsExperienceLocalesList@.
+-- /See:/ <https://developers.google.com/playmoviespartner/ Google Play Movies Partner API Reference> for @PlaymoviesPartynerAccountsExperienceLocalesList@.
 module Network.Google.Resource.PlayMoviesPartner.Accounts.ExperienceLocales.List
     (
     -- * REST Resource
@@ -50,17 +50,16 @@ module Network.Google.Resource.PlayMoviesPartner.Accounts.ExperienceLocales.List
     , aellKey
     , aellEditLevelEidr
     , aellPageToken
-    , aellOauthToken
+    , aellOAuthToken
     , aellPageSize
     , aellFields
     , aellCallback
-    , aellAlt
     ) where
 
 import           Network.Google.PlayMoviesPartner.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlaymoviespartnerAccountsExperienceLocalesList@ which the
+-- | A resource alias for @PlaymoviesPartynerAccountsExperienceLocalesList@ which the
 -- 'AccountsExperienceLocalesList'' request conforms to.
 type AccountsExperienceLocalesListResource =
      "v1" :>
@@ -81,15 +80,18 @@ type AccountsExperienceLocalesListResource =
                                    QueryParam "altCutId" Text :>
                                      QueryParam "customId" Text :>
                                        QueryParam "bearer_token" Text :>
-                                         QueryParam "key" Text :>
+                                         QueryParam "key" Key :>
                                            QueryParam "editLevelEidr" Text :>
                                              QueryParam "pageToken" Text :>
-                                               QueryParam "oauth_token" Text :>
+                                               QueryParam "oauth_token"
+                                                 OAuthToken
+                                                 :>
                                                  QueryParam "pageSize" Int32 :>
                                                    QueryParam "fields" Text :>
                                                      QueryParam "callback" Text
                                                        :>
-                                                       QueryParam "alt" Text :>
+                                                       QueryParam "alt" AltJSON
+                                                         :>
                                                          Get '[JSON]
                                                            ListExperienceLocalesResponse
 
@@ -114,14 +116,13 @@ data AccountsExperienceLocalesList' = AccountsExperienceLocalesList'
     , _aellCustomId       :: !(Maybe Text)
     , _aellAccountId      :: !Text
     , _aellBearerToken    :: !(Maybe Text)
-    , _aellKey            :: !(Maybe Text)
+    , _aellKey            :: !(Maybe Key)
     , _aellEditLevelEidr  :: !(Maybe Text)
     , _aellPageToken      :: !(Maybe Text)
-    , _aellOauthToken     :: !(Maybe Text)
+    , _aellOAuthToken     :: !(Maybe OAuthToken)
     , _aellPageSize       :: !(Maybe Int32)
     , _aellFields         :: !(Maybe Text)
     , _aellCallback       :: !(Maybe Text)
-    , _aellAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsExperienceLocalesList'' with the minimum fields required to make a request.
@@ -164,15 +165,13 @@ data AccountsExperienceLocalesList' = AccountsExperienceLocalesList'
 --
 -- * 'aellPageToken'
 --
--- * 'aellOauthToken'
+-- * 'aellOAuthToken'
 --
 -- * 'aellPageSize'
 --
 -- * 'aellFields'
 --
 -- * 'aellCallback'
---
--- * 'aellAlt'
 accountsExperienceLocalesList'
     :: Text -- ^ 'accountId'
     -> AccountsExperienceLocalesList'
@@ -196,11 +195,10 @@ accountsExperienceLocalesList' pAellAccountId_ =
     , _aellKey = Nothing
     , _aellEditLevelEidr = Nothing
     , _aellPageToken = Nothing
-    , _aellOauthToken = Nothing
+    , _aellOAuthToken = Nothing
     , _aellPageSize = Nothing
     , _aellFields = Nothing
     , _aellCallback = Nothing
-    , _aellAlt = "json"
     }
 
 -- | Filter ExperienceLocales that match a given title-level EIDR.
@@ -293,7 +291,7 @@ aellBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aellKey :: Lens' AccountsExperienceLocalesList' (Maybe Text)
+aellKey :: Lens' AccountsExperienceLocalesList' (Maybe Key)
 aellKey = lens _aellKey (\ s a -> s{_aellKey = a})
 
 -- | Filter ExperienceLocales that match a given edit-level EIDR.
@@ -309,10 +307,10 @@ aellPageToken
       (\ s a -> s{_aellPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-aellOauthToken :: Lens' AccountsExperienceLocalesList' (Maybe Text)
-aellOauthToken
-  = lens _aellOauthToken
-      (\ s a -> s{_aellOauthToken = a})
+aellOAuthToken :: Lens' AccountsExperienceLocalesList' (Maybe OAuthToken)
+aellOAuthToken
+  = lens _aellOAuthToken
+      (\ s a -> s{_aellOAuthToken = a})
 
 -- | See _List methods rules_ for info about this field.
 aellPageSize :: Lens' AccountsExperienceLocalesList' (Maybe Int32)
@@ -329,9 +327,10 @@ aellCallback :: Lens' AccountsExperienceLocalesList' (Maybe Text)
 aellCallback
   = lens _aellCallback (\ s a -> s{_aellCallback = a})
 
--- | Data format for response.
-aellAlt :: Lens' AccountsExperienceLocalesList' Text
-aellAlt = lens _aellAlt (\ s a -> s{_aellAlt = a})
+instance GoogleAuth AccountsExperienceLocalesList'
+         where
+        authKey = aellKey . _Just
+        authToken = aellOAuthToken . _Just
 
 instance GoogleRequest AccountsExperienceLocalesList'
          where
@@ -357,11 +356,11 @@ instance GoogleRequest AccountsExperienceLocalesList'
               _aellKey
               _aellEditLevelEidr
               _aellPageToken
-              _aellOauthToken
+              _aellOAuthToken
               _aellPageSize
               _aellFields
               _aellCallback
-              (Just _aellAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

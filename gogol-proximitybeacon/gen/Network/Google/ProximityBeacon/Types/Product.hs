@@ -279,7 +279,7 @@ instance ToJSON Namespace where
 --
 -- /See:/ 'getInfoForObservedBeaconsRequest' smart constructor.
 data GetInfoForObservedBeaconsRequest = GetInfoForObservedBeaconsRequest
-    { _gifobrObservations    :: !(Maybe [Maybe Observation])
+    { _gifobrObservations    :: !(Maybe [Observation])
     , _gifobrNamespacedTypes :: !(Maybe [Text])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -299,7 +299,7 @@ getInfoForObservedBeaconsRequest =
     }
 
 -- | The beacons that the client has encountered. At least one must be given.
-gifobrObservations :: Lens' GetInfoForObservedBeaconsRequest [Maybe Observation]
+gifobrObservations :: Lens' GetInfoForObservedBeaconsRequest [Observation]
 gifobrObservations
   = lens _gifobrObservations
       (\ s a -> s{_gifobrObservations = a})
@@ -340,7 +340,7 @@ instance ToJSON GetInfoForObservedBeaconsRequest
 --
 -- /See:/ 'listNamespacesResponse' smart constructor.
 newtype ListNamespacesResponse = ListNamespacesResponse
-    { _lnrNamespaces :: Maybe [Maybe Namespace]
+    { _lnrNamespaces :: Maybe [Namespace]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListNamespacesResponse' with the minimum fields required to make a request.
@@ -356,7 +356,7 @@ listNamespacesResponse =
     }
 
 -- | The attachments that corresponded to the request params.
-lnrNamespaces :: Lens' ListNamespacesResponse [Maybe Namespace]
+lnrNamespaces :: Lens' ListNamespacesResponse [Namespace]
 lnrNamespaces
   = lens _lnrNamespaces
       (\ s a -> s{_lnrNamespaces = a})
@@ -381,7 +381,7 @@ instance ToJSON ListNamespacesResponse where
 data Diagnostics = Diagnostics
     { _dAlerts                  :: !(Maybe [Text])
     , _dBeaconName              :: !(Maybe Text)
-    , _dEstimatedLowBatteryDate :: !(Maybe (Maybe Date))
+    , _dEstimatedLowBatteryDate :: !(Maybe Date)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Diagnostics' with the minimum fields required to make a request.
@@ -416,7 +416,7 @@ dBeaconName
 -- | The date when the battery is expected to be low. If the value is missing
 -- then there is no estimate for when the battery will be low. This value
 -- is only an estimate, not an exact date.
-dEstimatedLowBatteryDate :: Lens' Diagnostics (Maybe (Maybe Date))
+dEstimatedLowBatteryDate :: Lens' Diagnostics (Maybe Date)
 dEstimatedLowBatteryDate
   = lens _dEstimatedLowBatteryDate
       (\ s a -> s{_dEstimatedLowBatteryDate = a})
@@ -503,14 +503,14 @@ instance ToJSON Date where
 --
 -- /See:/ 'beacon' smart constructor.
 data Beacon = Beacon
-    { _bLatLng            :: !(Maybe (Maybe LatLng))
+    { _bLatLng            :: !(Maybe LatLng)
     , _bStatus            :: !(Maybe Text)
     , _bBeaconName        :: !(Maybe Text)
-    , _bIndoorLevel       :: !(Maybe (Maybe IndoorLevel))
+    , _bIndoorLevel       :: !(Maybe IndoorLevel)
     , _bExpectedStability :: !(Maybe Text)
     , _bDescription       :: !(Maybe Text)
     , _bPlaceId           :: !(Maybe Text)
-    , _bAdvertisedId      :: !(Maybe (Maybe AdvertisedId))
+    , _bAdvertisedId      :: !(Maybe AdvertisedId)
     , _bProperties        :: !(Maybe BeaconProperties)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -554,7 +554,7 @@ beacon =
 -- This location is given when the beacon is registered or updated. It does
 -- not necessarily indicate the actual current location of the beacon.
 -- Optional.
-bLatLng :: Lens' Beacon (Maybe (Maybe LatLng))
+bLatLng :: Lens' Beacon (Maybe LatLng)
 bLatLng = lens _bLatLng (\ s a -> s{_bLatLng = a})
 
 -- | Current status of the beacon. Required.
@@ -573,7 +573,7 @@ bBeaconName
 
 -- | The indoor level information for this beacon, if known. As returned by
 -- the Google Maps API. Optional.
-bIndoorLevel :: Lens' Beacon (Maybe (Maybe IndoorLevel))
+bIndoorLevel :: Lens' Beacon (Maybe IndoorLevel)
 bIndoorLevel
   = lens _bIndoorLevel (\ s a -> s{_bIndoorLevel = a})
 
@@ -599,7 +599,7 @@ bPlaceId = lens _bPlaceId (\ s a -> s{_bPlaceId = a})
 -- | The identifier of a beacon as advertised by it. This field must be
 -- populated when registering. It may be empty when updating a beacon
 -- record because it is ignored in updates.
-bAdvertisedId :: Lens' Beacon (Maybe (Maybe AdvertisedId))
+bAdvertisedId :: Lens' Beacon (Maybe AdvertisedId)
 bAdvertisedId
   = lens _bAdvertisedId
       (\ s a -> s{_bAdvertisedId = a})
@@ -643,7 +643,7 @@ instance ToJSON Beacon where
 --
 -- /See:/ 'listBeaconAttachmentsResponse' smart constructor.
 newtype ListBeaconAttachmentsResponse = ListBeaconAttachmentsResponse
-    { _lbarAttachments :: Maybe [Maybe BeaconAttachment]
+    { _lbarAttachments :: Maybe [BeaconAttachment]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListBeaconAttachmentsResponse' with the minimum fields required to make a request.
@@ -659,7 +659,7 @@ listBeaconAttachmentsResponse =
     }
 
 -- | The attachments that corresponded to the request params.
-lbarAttachments :: Lens' ListBeaconAttachmentsResponse [Maybe BeaconAttachment]
+lbarAttachments :: Lens' ListBeaconAttachmentsResponse [BeaconAttachment]
 lbarAttachments
   = lens _lbarAttachments
       (\ s a -> s{_lbarAttachments = a})
@@ -717,7 +717,7 @@ instance ToJSON IndoorLevel where
 data Observation = Observation
     { _oTelemetry    :: !(Maybe Word8)
     , _oTimestampMs  :: !(Maybe Text)
-    , _oAdvertisedId :: !(Maybe (Maybe AdvertisedId))
+    , _oAdvertisedId :: !(Maybe AdvertisedId)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Observation' with the minimum fields required to make a request.
@@ -752,7 +752,7 @@ oTimestampMs
   = lens _oTimestampMs (\ s a -> s{_oTimestampMs = a})
 
 -- | The ID advertised by the beacon the client has encountered. Required.
-oAdvertisedId :: Lens' Observation (Maybe (Maybe AdvertisedId))
+oAdvertisedId :: Lens' Observation (Maybe AdvertisedId)
 oAdvertisedId
   = lens _oAdvertisedId
       (\ s a -> s{_oAdvertisedId = a})
@@ -779,10 +779,10 @@ instance ToJSON Observation where
 --
 -- /See:/ 'beaconInfo' smart constructor.
 data BeaconInfo = BeaconInfo
-    { _biAttachments  :: !(Maybe [Maybe AttachmentInfo])
+    { _biAttachments  :: !(Maybe [AttachmentInfo])
     , _biBeaconName   :: !(Maybe Text)
     , _biDescription  :: !(Maybe Text)
-    , _biAdvertisedId :: !(Maybe (Maybe AdvertisedId))
+    , _biAdvertisedId :: !(Maybe AdvertisedId)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BeaconInfo' with the minimum fields required to make a request.
@@ -808,7 +808,7 @@ beaconInfo =
 
 -- | Attachments matching the type(s) requested. May be empty if no
 -- attachment types were requested, or if none matched.
-biAttachments :: Lens' BeaconInfo [Maybe AttachmentInfo]
+biAttachments :: Lens' BeaconInfo [AttachmentInfo]
 biAttachments
   = lens _biAttachments
       (\ s a -> s{_biAttachments = a})
@@ -829,7 +829,7 @@ biDescription
       (\ s a -> s{_biDescription = a})
 
 -- | The ID advertised by the beacon.
-biAdvertisedId :: Lens' BeaconInfo (Maybe (Maybe AdvertisedId))
+biAdvertisedId :: Lens' BeaconInfo (Maybe AdvertisedId)
 biAdvertisedId
   = lens _biAdvertisedId
       (\ s a -> s{_biAdvertisedId = a})
@@ -926,7 +926,7 @@ instance ToJSON BeaconAttachment where
 -- /See:/ 'listDiagnosticsResponse' smart constructor.
 data ListDiagnosticsResponse = ListDiagnosticsResponse
     { _ldrNextPageToken :: !(Maybe Text)
-    , _ldrDiagnostics   :: !(Maybe [Maybe Diagnostics])
+    , _ldrDiagnostics   :: !(Maybe [Diagnostics])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListDiagnosticsResponse' with the minimum fields required to make a request.
@@ -952,7 +952,7 @@ ldrNextPageToken
       (\ s a -> s{_ldrNextPageToken = a})
 
 -- | The diagnostics matching the given request.
-ldrDiagnostics :: Lens' ListDiagnosticsResponse [Maybe Diagnostics]
+ldrDiagnostics :: Lens' ListDiagnosticsResponse [Diagnostics]
 ldrDiagnostics
   = lens _ldrDiagnostics
       (\ s a -> s{_ldrDiagnostics = a})
@@ -1026,7 +1026,7 @@ instance ToJSON AdvertisedId where
 -- /See:/ 'listBeaconsResponse' smart constructor.
 data ListBeaconsResponse = ListBeaconsResponse
     { _lbrNextPageToken :: !(Maybe Text)
-    , _lbrBeacons       :: !(Maybe [Maybe Beacon])
+    , _lbrBeacons       :: !(Maybe [Beacon])
     , _lbrTotalCount    :: !(Maybe Int64)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1056,7 +1056,7 @@ lbrNextPageToken
       (\ s a -> s{_lbrNextPageToken = a})
 
 -- | The beacons that matched the search criteria.
-lbrBeacons :: Lens' ListBeaconsResponse [Maybe Beacon]
+lbrBeacons :: Lens' ListBeaconsResponse [Beacon]
 lbrBeacons
   = lens _lbrBeacons (\ s a -> s{_lbrBeacons = a}) .
       _Default
@@ -1091,7 +1091,7 @@ instance ToJSON ListBeaconsResponse where
 --
 -- /See:/ 'getInfoForObservedBeaconsResponse' smart constructor.
 newtype GetInfoForObservedBeaconsResponse = GetInfoForObservedBeaconsResponse
-    { _gifobrBeacons :: Maybe [Maybe BeaconInfo]
+    { _gifobrBeacons :: Maybe [BeaconInfo]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GetInfoForObservedBeaconsResponse' with the minimum fields required to make a request.
@@ -1108,7 +1108,7 @@ getInfoForObservedBeaconsResponse =
 
 -- | Public information about beacons. May be empty if the request matched no
 -- beacons.
-gifobrBeacons :: Lens' GetInfoForObservedBeaconsResponse [Maybe BeaconInfo]
+gifobrBeacons :: Lens' GetInfoForObservedBeaconsResponse [BeaconInfo]
 gifobrBeacons
   = lens _gifobrBeacons
       (\ s a -> s{_gifobrBeacons = a})

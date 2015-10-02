@@ -168,11 +168,11 @@ module Network.Google.Analytics.Types
     , unsampledReportDriveDownloadDetails
     , urdddDocumentId
 
-    -- * WebpropertyChildLink
-    , WebpropertyChildLink
-    , webpropertyChildLink
-    , wclHref
-    , wclType
+    -- * WebPropertyChildLink
+    , WebPropertyChildLink
+    , webPropertyChildLink
+    , wpclHref
+    , wpclType
 
     -- * McfDataProfileInfo
     , McfDataProfileInfo
@@ -289,7 +289,7 @@ module Network.Google.Analytics.Types
     , wpsName
     , wpsInternalWebPropertyId
     , wpsId
-    , wpsWebsiteUrl
+    , wpsWebsiteURL
     , wpsLevel
 
     -- * GoalEventDetails
@@ -350,7 +350,7 @@ module Network.Google.Analytics.Types
     , proId
     , proUpdated
     , proPermissions
-    , proWebsiteUrl
+    , proWebsiteURL
     , proType
     , proStripSiteSearchCategoryParameters
     , proTimezone
@@ -426,17 +426,17 @@ module Network.Google.Analytics.Types
     -- * AnalyticsDataGaGetOutput
     , AnalyticsDataGaGetOutput (..)
 
-    -- * Webproperties
-    , Webproperties
-    , webproperties
-    , wNextLink
-    , wItemsPerPage
-    , wKind
-    , wUsername
-    , wItems
-    , wTotalResults
-    , wStartIndex
-    , wPreviousLink
+    -- * WebProperties
+    , WebProperties
+    , webProperties
+    , wpNextLink
+    , wpItemsPerPage
+    , wpKind
+    , wpUsername
+    , wpItems
+    , wpTotalResults
+    , wpStartIndex
+    , wpPreviousLink
 
     -- * McfDataRows
     , McfDataRows
@@ -516,7 +516,7 @@ module Network.Google.Analytics.Types
     , expInternalWebPropertyId
     , expId
     , expUpdated
-    , expRewriteVariationUrlsAsOriginal
+    , expRewriteVariationURLsAsOriginal
     , expObjectiveMetric
     , expWinnerConfidenceLevel
     , expServingFramework
@@ -586,25 +586,25 @@ module Network.Google.Analytics.Types
     , cdplHref
     , cdplType
 
-    -- * Webproperty
-    , Webproperty
-    , webproperty
-    , webParentLink
-    , webChildLink
-    , webDefaultProfileId
-    , webKind
-    , webCreated
-    , webSelfLink
-    , webAccountId
-    , webName
-    , webInternalWebPropertyId
-    , webId
-    , webUpdated
-    , webProfileCount
-    , webPermissions
-    , webWebsiteUrl
-    , webIndustryVertical
-    , webLevel
+    -- * WebProperty
+    , WebProperty
+    , webProperty
+    , wParentLink
+    , wChildLink
+    , wDefaultProfileId
+    , wKind
+    , wCreated
+    , wSelfLink
+    , wAccountId
+    , wName
+    , wInternalWebPropertyId
+    , wId
+    , wUpdated
+    , wProfileCount
+    , wPermissions
+    , wWebsiteURL
+    , wIndustryVertical
+    , wLevel
 
     -- * CustomMetric
     , CustomMetric
@@ -625,10 +625,10 @@ module Network.Google.Analytics.Types
     , cusType
     , cusIndex
 
-    -- * WebpropertyPermissions
-    , WebpropertyPermissions
-    , webpropertyPermissions
-    , wpEffective
+    -- * WebPropertyPermissions
+    , WebPropertyPermissions
+    , webPropertyPermissions
+    , wppEffective
 
     -- * RealtimeData
     , RealtimeData
@@ -703,11 +703,11 @@ module Network.Google.Analytics.Types
     -- * AccountTicket
     , AccountTicket
     , accountTicket
-    , atRedirectUri
+    , atRedirectURI
     , atKind
     , atProfile
     , atAccount
-    , atWebproperty
+    , atWebProperty
     , atId
 
     -- * RealtimeDataQuery
@@ -752,7 +752,7 @@ module Network.Google.Analytics.Types
     , goaName
     , goaInternalWebPropertyId
     , goaId
-    , goaUrlDestinationDetails
+    , goaURLDestinationDetails
     , goaVisitNumPagesDetails
     , goaUpdated
     , goaType
@@ -803,7 +803,7 @@ module Network.Google.Analytics.Types
     -- * GoalURLDestinationDetails
     , GoalURLDestinationDetails
     , goalURLDestinationDetails
-    , guddUrl
+    , guddURL
     , guddMatchType
     , guddSteps
     , guddCaseSensitive
@@ -882,7 +882,7 @@ module Network.Google.Analytics.Types
     , experimentVariations
     , evStatus
     , evWeight
-    , evUrl
+    , evURL
     , evWon
     , evName
 
@@ -921,11 +921,11 @@ module Network.Google.Analytics.Types
     -- * AnalyticsDataGaGetSamplingLevel
     , AnalyticsDataGaGetSamplingLevel (..)
 
-    -- * WebpropertyParentLink
-    , WebpropertyParentLink
-    , webpropertyParentLink
-    , wplHref
-    , wplType
+    -- * WebPropertyParentLink
+    , WebPropertyParentLink
+    , webPropertyParentLink
+    , wpplHref
+    , wpplType
 
     -- * Upload
     , Upload
@@ -974,16 +974,13 @@ module Network.Google.Analytics.Types
     -- * GoalURLDestinationDetailsSteps
     , GoalURLDestinationDetailsSteps
     , goalURLDestinationDetailsSteps
-    , guddsUrl
+    , guddsURL
     , guddsName
     , guddsNumber
 
     -- * ColumnAttributes
     , ColumnAttributes
     , columnAttributes
-
-    -- * Alt
-    , Alt (..)
 
     -- * ProfileChildLink
     , ProfileChildLink

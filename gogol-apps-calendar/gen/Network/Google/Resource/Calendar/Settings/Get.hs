@@ -32,12 +32,11 @@ module Network.Google.Resource.Calendar.Settings.Get
     -- * Request Lenses
     , sgQuotaUser
     , sgPrettyPrint
-    , sgUserIp
+    , sgUserIP
     , sgSetting
     , sgKey
-    , sgOauthToken
+    , sgOAuthToken
     , sgFields
-    , sgAlt
     ) where
 
 import           Network.Google.AppsCalendar.Types
@@ -53,10 +52,10 @@ type SettingsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] Setting
+                         QueryParam "alt" AltJSON :> Get '[JSON] Setting
 
 -- | Returns a single user setting.
 --
@@ -64,12 +63,11 @@ type SettingsGetResource =
 data SettingsGet' = SettingsGet'
     { _sgQuotaUser   :: !(Maybe Text)
     , _sgPrettyPrint :: !Bool
-    , _sgUserIp      :: !(Maybe Text)
+    , _sgUserIP      :: !(Maybe Text)
     , _sgSetting     :: !Text
-    , _sgKey         :: !(Maybe Text)
-    , _sgOauthToken  :: !(Maybe Text)
+    , _sgKey         :: !(Maybe Key)
+    , _sgOAuthToken  :: !(Maybe OAuthToken)
     , _sgFields      :: !(Maybe Text)
-    , _sgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SettingsGet'' with the minimum fields required to make a request.
@@ -80,17 +78,15 @@ data SettingsGet' = SettingsGet'
 --
 -- * 'sgPrettyPrint'
 --
--- * 'sgUserIp'
+-- * 'sgUserIP'
 --
 -- * 'sgSetting'
 --
 -- * 'sgKey'
 --
--- * 'sgOauthToken'
+-- * 'sgOAuthToken'
 --
 -- * 'sgFields'
---
--- * 'sgAlt'
 settingsGet'
     :: Text -- ^ 'setting'
     -> SettingsGet'
@@ -98,12 +94,11 @@ settingsGet' pSgSetting_ =
     SettingsGet'
     { _sgQuotaUser = Nothing
     , _sgPrettyPrint = True
-    , _sgUserIp = Nothing
+    , _sgUserIP = Nothing
     , _sgSetting = pSgSetting_
     , _sgKey = Nothing
-    , _sgOauthToken = Nothing
+    , _sgOAuthToken = Nothing
     , _sgFields = Nothing
-    , _sgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -121,8 +116,8 @@ sgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-sgUserIp :: Lens' SettingsGet' (Maybe Text)
-sgUserIp = lens _sgUserIp (\ s a -> s{_sgUserIp = a})
+sgUserIP :: Lens' SettingsGet' (Maybe Text)
+sgUserIP = lens _sgUserIP (\ s a -> s{_sgUserIP = a})
 
 -- | The id of the user setting.
 sgSetting :: Lens' SettingsGet' Text
@@ -132,32 +127,32 @@ sgSetting
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-sgKey :: Lens' SettingsGet' (Maybe Text)
+sgKey :: Lens' SettingsGet' (Maybe Key)
 sgKey = lens _sgKey (\ s a -> s{_sgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-sgOauthToken :: Lens' SettingsGet' (Maybe Text)
-sgOauthToken
-  = lens _sgOauthToken (\ s a -> s{_sgOauthToken = a})
+sgOAuthToken :: Lens' SettingsGet' (Maybe OAuthToken)
+sgOAuthToken
+  = lens _sgOAuthToken (\ s a -> s{_sgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 sgFields :: Lens' SettingsGet' (Maybe Text)
 sgFields = lens _sgFields (\ s a -> s{_sgFields = a})
 
--- | Data format for the response.
-sgAlt :: Lens' SettingsGet' Alt
-sgAlt = lens _sgAlt (\ s a -> s{_sgAlt = a})
+instance GoogleAuth SettingsGet' where
+        authKey = sgKey . _Just
+        authToken = sgOAuthToken . _Just
 
 instance GoogleRequest SettingsGet' where
         type Rs SettingsGet' = Setting
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u SettingsGet'{..}
-          = go _sgQuotaUser (Just _sgPrettyPrint) _sgUserIp
+          = go _sgQuotaUser (Just _sgPrettyPrint) _sgUserIP
               _sgSetting
               _sgKey
-              _sgOauthToken
+              _sgOAuthToken
               _sgFields
-              (Just _sgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy SettingsGetResource)

@@ -33,13 +33,12 @@ module Network.Google.Resource.Compute.Instances.DetachDisk
     , iddQuotaUser
     , iddPrettyPrint
     , iddProject
-    , iddUserIp
+    , iddUserIP
     , iddZone
     , iddDeviceName
     , iddKey
-    , iddOauthToken
+    , iddOAuthToken
     , iddFields
-    , iddAlt
     , iddInstance
     ) where
 
@@ -59,10 +58,11 @@ type InstancesDetachDiskResource =
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
                        QueryParam "deviceName" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :> Post '[JSON] Operation
+                               QueryParam "alt" AltJSON :>
+                                 Post '[JSON] Operation
 
 -- | Detaches a disk from an instance.
 --
@@ -71,13 +71,12 @@ data InstancesDetachDisk' = InstancesDetachDisk'
     { _iddQuotaUser   :: !(Maybe Text)
     , _iddPrettyPrint :: !Bool
     , _iddProject     :: !Text
-    , _iddUserIp      :: !(Maybe Text)
+    , _iddUserIP      :: !(Maybe Text)
     , _iddZone        :: !Text
     , _iddDeviceName  :: !Text
-    , _iddKey         :: !(Maybe Text)
-    , _iddOauthToken  :: !(Maybe Text)
+    , _iddKey         :: !(Maybe Key)
+    , _iddOAuthToken  :: !(Maybe OAuthToken)
     , _iddFields      :: !(Maybe Text)
-    , _iddAlt         :: !Alt
     , _iddInstance    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -91,7 +90,7 @@ data InstancesDetachDisk' = InstancesDetachDisk'
 --
 -- * 'iddProject'
 --
--- * 'iddUserIp'
+-- * 'iddUserIP'
 --
 -- * 'iddZone'
 --
@@ -99,11 +98,9 @@ data InstancesDetachDisk' = InstancesDetachDisk'
 --
 -- * 'iddKey'
 --
--- * 'iddOauthToken'
+-- * 'iddOAuthToken'
 --
 -- * 'iddFields'
---
--- * 'iddAlt'
 --
 -- * 'iddInstance'
 instancesDetachDisk'
@@ -117,13 +114,12 @@ instancesDetachDisk' pIddProject_ pIddZone_ pIddDeviceName_ pIddInstance_ =
     { _iddQuotaUser = Nothing
     , _iddPrettyPrint = True
     , _iddProject = pIddProject_
-    , _iddUserIp = Nothing
+    , _iddUserIP = Nothing
     , _iddZone = pIddZone_
     , _iddDeviceName = pIddDeviceName_
     , _iddKey = Nothing
-    , _iddOauthToken = Nothing
+    , _iddOAuthToken = Nothing
     , _iddFields = Nothing
-    , _iddAlt = JSON
     , _iddInstance = pIddInstance_
     }
 
@@ -147,9 +143,9 @@ iddProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-iddUserIp :: Lens' InstancesDetachDisk' (Maybe Text)
-iddUserIp
-  = lens _iddUserIp (\ s a -> s{_iddUserIp = a})
+iddUserIP :: Lens' InstancesDetachDisk' (Maybe Text)
+iddUserIP
+  = lens _iddUserIP (\ s a -> s{_iddUserIP = a})
 
 -- | The name of the zone for this request.
 iddZone :: Lens' InstancesDetachDisk' Text
@@ -164,42 +160,42 @@ iddDeviceName
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-iddKey :: Lens' InstancesDetachDisk' (Maybe Text)
+iddKey :: Lens' InstancesDetachDisk' (Maybe Key)
 iddKey = lens _iddKey (\ s a -> s{_iddKey = a})
 
 -- | OAuth 2.0 token for the current user.
-iddOauthToken :: Lens' InstancesDetachDisk' (Maybe Text)
-iddOauthToken
-  = lens _iddOauthToken
-      (\ s a -> s{_iddOauthToken = a})
+iddOAuthToken :: Lens' InstancesDetachDisk' (Maybe OAuthToken)
+iddOAuthToken
+  = lens _iddOAuthToken
+      (\ s a -> s{_iddOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 iddFields :: Lens' InstancesDetachDisk' (Maybe Text)
 iddFields
   = lens _iddFields (\ s a -> s{_iddFields = a})
 
--- | Data format for the response.
-iddAlt :: Lens' InstancesDetachDisk' Alt
-iddAlt = lens _iddAlt (\ s a -> s{_iddAlt = a})
-
 -- | Instance name.
 iddInstance :: Lens' InstancesDetachDisk' Text
 iddInstance
   = lens _iddInstance (\ s a -> s{_iddInstance = a})
+
+instance GoogleAuth InstancesDetachDisk' where
+        authKey = iddKey . _Just
+        authToken = iddOAuthToken . _Just
 
 instance GoogleRequest InstancesDetachDisk' where
         type Rs InstancesDetachDisk' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstancesDetachDisk'{..}
           = go _iddQuotaUser (Just _iddPrettyPrint) _iddProject
-              _iddUserIp
+              _iddUserIP
               _iddZone
               (Just _iddDeviceName)
               _iddKey
-              _iddOauthToken
+              _iddOAuthToken
               _iddFields
-              (Just _iddAlt)
               _iddInstance
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InstancesDetachDiskResource)

@@ -34,11 +34,10 @@ module Network.Google.Resource.Genomics.Variantsets.Delete
     , vddQuotaUser
     , vddPrettyPrint
     , vddVariantSetId
-    , vddUserIp
+    , vddUserIP
     , vddKey
-    , vddOauthToken
+    , vddOAuthToken
     , vddFields
-    , vddAlt
     ) where
 
 import           Network.Google.Genomics.Types
@@ -52,10 +51,10 @@ type VariantsetsDeleteResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Delete '[JSON] ()
+                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes the contents of a variant set. The variant set object is not
 -- deleted.
@@ -65,11 +64,10 @@ data VariantsetsDelete' = VariantsetsDelete'
     { _vddQuotaUser    :: !(Maybe Text)
     , _vddPrettyPrint  :: !Bool
     , _vddVariantSetId :: !Text
-    , _vddUserIp       :: !(Maybe Text)
-    , _vddKey          :: !(Maybe Text)
-    , _vddOauthToken   :: !(Maybe Text)
+    , _vddUserIP       :: !(Maybe Text)
+    , _vddKey          :: !(Maybe Key)
+    , _vddOAuthToken   :: !(Maybe OAuthToken)
     , _vddFields       :: !(Maybe Text)
-    , _vddAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VariantsetsDelete'' with the minimum fields required to make a request.
@@ -82,15 +80,13 @@ data VariantsetsDelete' = VariantsetsDelete'
 --
 -- * 'vddVariantSetId'
 --
--- * 'vddUserIp'
+-- * 'vddUserIP'
 --
 -- * 'vddKey'
 --
--- * 'vddOauthToken'
+-- * 'vddOAuthToken'
 --
 -- * 'vddFields'
---
--- * 'vddAlt'
 variantsetsDelete'
     :: Text -- ^ 'variantSetId'
     -> VariantsetsDelete'
@@ -99,11 +95,10 @@ variantsetsDelete' pVddVariantSetId_ =
     { _vddQuotaUser = Nothing
     , _vddPrettyPrint = True
     , _vddVariantSetId = pVddVariantSetId_
-    , _vddUserIp = Nothing
+    , _vddUserIP = Nothing
     , _vddKey = Nothing
-    , _vddOauthToken = Nothing
+    , _vddOAuthToken = Nothing
     , _vddFields = Nothing
-    , _vddAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,30 +122,30 @@ vddVariantSetId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-vddUserIp :: Lens' VariantsetsDelete' (Maybe Text)
-vddUserIp
-  = lens _vddUserIp (\ s a -> s{_vddUserIp = a})
+vddUserIP :: Lens' VariantsetsDelete' (Maybe Text)
+vddUserIP
+  = lens _vddUserIP (\ s a -> s{_vddUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vddKey :: Lens' VariantsetsDelete' (Maybe Text)
+vddKey :: Lens' VariantsetsDelete' (Maybe Key)
 vddKey = lens _vddKey (\ s a -> s{_vddKey = a})
 
 -- | OAuth 2.0 token for the current user.
-vddOauthToken :: Lens' VariantsetsDelete' (Maybe Text)
-vddOauthToken
-  = lens _vddOauthToken
-      (\ s a -> s{_vddOauthToken = a})
+vddOAuthToken :: Lens' VariantsetsDelete' (Maybe OAuthToken)
+vddOAuthToken
+  = lens _vddOAuthToken
+      (\ s a -> s{_vddOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 vddFields :: Lens' VariantsetsDelete' (Maybe Text)
 vddFields
   = lens _vddFields (\ s a -> s{_vddFields = a})
 
--- | Data format for the response.
-vddAlt :: Lens' VariantsetsDelete' Alt
-vddAlt = lens _vddAlt (\ s a -> s{_vddAlt = a})
+instance GoogleAuth VariantsetsDelete' where
+        authKey = vddKey . _Just
+        authToken = vddOAuthToken . _Just
 
 instance GoogleRequest VariantsetsDelete' where
         type Rs VariantsetsDelete' = ()
@@ -158,11 +153,11 @@ instance GoogleRequest VariantsetsDelete' where
         requestWithRoute r u VariantsetsDelete'{..}
           = go _vddQuotaUser (Just _vddPrettyPrint)
               _vddVariantSetId
-              _vddUserIp
+              _vddUserIP
               _vddKey
-              _vddOauthToken
+              _vddOAuthToken
               _vddFields
-              (Just _vddAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy VariantsetsDeleteResource)

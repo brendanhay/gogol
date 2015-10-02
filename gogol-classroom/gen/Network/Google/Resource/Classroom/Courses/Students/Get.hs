@@ -45,10 +45,9 @@ module Network.Google.Resource.Classroom.Courses.Students.Get
     , csgUserId
     , csgBearerToken
     , csgKey
-    , csgOauthToken
+    , csgOAuthToken
     , csgFields
     , csgCallback
-    , csgAlt
     ) where
 
 import           Network.Google.Classroom.Types
@@ -70,11 +69,11 @@ type CoursesStudentsGetResource =
                          QueryParam "access_token" Text :>
                            QueryParam "uploadType" Text :>
                              QueryParam "bearer_token" Text :>
-                               QueryParam "key" Text :>
-                                 QueryParam "oauth_token" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "fields" Text :>
                                      QueryParam "callback" Text :>
-                                       QueryParam "alt" Text :>
+                                       QueryParam "alt" AltJSON :>
                                          Get '[JSON] Student
 
 -- | Returns a student of a course. This method returns the following error
@@ -95,11 +94,10 @@ data CoursesStudentsGet' = CoursesStudentsGet'
     , _csgUploadType     :: !(Maybe Text)
     , _csgUserId         :: !Text
     , _csgBearerToken    :: !(Maybe Text)
-    , _csgKey            :: !(Maybe Text)
-    , _csgOauthToken     :: !(Maybe Text)
+    , _csgKey            :: !(Maybe Key)
+    , _csgOAuthToken     :: !(Maybe OAuthToken)
     , _csgFields         :: !(Maybe Text)
     , _csgCallback       :: !(Maybe Text)
-    , _csgAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CoursesStudentsGet'' with the minimum fields required to make a request.
@@ -128,13 +126,11 @@ data CoursesStudentsGet' = CoursesStudentsGet'
 --
 -- * 'csgKey'
 --
--- * 'csgOauthToken'
+-- * 'csgOAuthToken'
 --
 -- * 'csgFields'
 --
 -- * 'csgCallback'
---
--- * 'csgAlt'
 coursesStudentsGet'
     :: Text -- ^ 'courseId'
     -> Text -- ^ 'userId'
@@ -152,10 +148,9 @@ coursesStudentsGet' pCsgCourseId_ pCsgUserId_ =
     , _csgUserId = pCsgUserId_
     , _csgBearerToken = Nothing
     , _csgKey = Nothing
-    , _csgOauthToken = Nothing
+    , _csgOAuthToken = Nothing
     , _csgFields = Nothing
     , _csgCallback = Nothing
-    , _csgAlt = "json"
     }
 
 -- | V1 error format.
@@ -220,14 +215,14 @@ csgBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-csgKey :: Lens' CoursesStudentsGet' (Maybe Text)
+csgKey :: Lens' CoursesStudentsGet' (Maybe Key)
 csgKey = lens _csgKey (\ s a -> s{_csgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-csgOauthToken :: Lens' CoursesStudentsGet' (Maybe Text)
-csgOauthToken
-  = lens _csgOauthToken
-      (\ s a -> s{_csgOauthToken = a})
+csgOAuthToken :: Lens' CoursesStudentsGet' (Maybe OAuthToken)
+csgOAuthToken
+  = lens _csgOAuthToken
+      (\ s a -> s{_csgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 csgFields :: Lens' CoursesStudentsGet' (Maybe Text)
@@ -239,9 +234,9 @@ csgCallback :: Lens' CoursesStudentsGet' (Maybe Text)
 csgCallback
   = lens _csgCallback (\ s a -> s{_csgCallback = a})
 
--- | Data format for response.
-csgAlt :: Lens' CoursesStudentsGet' Text
-csgAlt = lens _csgAlt (\ s a -> s{_csgAlt = a})
+instance GoogleAuth CoursesStudentsGet' where
+        authKey = csgKey . _Just
+        authToken = csgOAuthToken . _Just
 
 instance GoogleRequest CoursesStudentsGet' where
         type Rs CoursesStudentsGet' = Student
@@ -256,10 +251,10 @@ instance GoogleRequest CoursesStudentsGet' where
               _csgUserId
               _csgBearerToken
               _csgKey
-              _csgOauthToken
+              _csgOAuthToken
               _csgFields
               _csgCallback
-              (Just _csgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CoursesStudentsGetResource)

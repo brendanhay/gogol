@@ -33,12 +33,11 @@ module Network.Google.Resource.Compute.Zones.Get
     , zgQuotaUser
     , zgPrettyPrint
     , zgProject
-    , zgUserIp
+    , zgUserIP
     , zgZone
     , zgKey
-    , zgOauthToken
+    , zgOAuthToken
     , zgFields
-    , zgAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -53,10 +52,10 @@ type ZonesGetResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Get '[JSON] Zone
+                       QueryParam "alt" AltJSON :> Get '[JSON] Zone
 
 -- | Returns the specified zone resource.
 --
@@ -65,12 +64,11 @@ data ZonesGet' = ZonesGet'
     { _zgQuotaUser   :: !(Maybe Text)
     , _zgPrettyPrint :: !Bool
     , _zgProject     :: !Text
-    , _zgUserIp      :: !(Maybe Text)
+    , _zgUserIP      :: !(Maybe Text)
     , _zgZone        :: !Text
-    , _zgKey         :: !(Maybe Text)
-    , _zgOauthToken  :: !(Maybe Text)
+    , _zgKey         :: !(Maybe Key)
+    , _zgOAuthToken  :: !(Maybe OAuthToken)
     , _zgFields      :: !(Maybe Text)
-    , _zgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ZonesGet'' with the minimum fields required to make a request.
@@ -83,17 +81,15 @@ data ZonesGet' = ZonesGet'
 --
 -- * 'zgProject'
 --
--- * 'zgUserIp'
+-- * 'zgUserIP'
 --
 -- * 'zgZone'
 --
 -- * 'zgKey'
 --
--- * 'zgOauthToken'
+-- * 'zgOAuthToken'
 --
 -- * 'zgFields'
---
--- * 'zgAlt'
 zonesGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
@@ -103,12 +99,11 @@ zonesGet' pZgProject_ pZgZone_ =
     { _zgQuotaUser = Nothing
     , _zgPrettyPrint = True
     , _zgProject = pZgProject_
-    , _zgUserIp = Nothing
+    , _zgUserIP = Nothing
     , _zgZone = pZgZone_
     , _zgKey = Nothing
-    , _zgOauthToken = Nothing
+    , _zgOAuthToken = Nothing
     , _zgFields = Nothing
-    , _zgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -131,8 +126,8 @@ zgProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-zgUserIp :: Lens' ZonesGet' (Maybe Text)
-zgUserIp = lens _zgUserIp (\ s a -> s{_zgUserIp = a})
+zgUserIP :: Lens' ZonesGet' (Maybe Text)
+zgUserIP = lens _zgUserIP (\ s a -> s{_zgUserIP = a})
 
 -- | Name of the zone resource to return.
 zgZone :: Lens' ZonesGet' Text
@@ -141,33 +136,33 @@ zgZone = lens _zgZone (\ s a -> s{_zgZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-zgKey :: Lens' ZonesGet' (Maybe Text)
+zgKey :: Lens' ZonesGet' (Maybe Key)
 zgKey = lens _zgKey (\ s a -> s{_zgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-zgOauthToken :: Lens' ZonesGet' (Maybe Text)
-zgOauthToken
-  = lens _zgOauthToken (\ s a -> s{_zgOauthToken = a})
+zgOAuthToken :: Lens' ZonesGet' (Maybe OAuthToken)
+zgOAuthToken
+  = lens _zgOAuthToken (\ s a -> s{_zgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 zgFields :: Lens' ZonesGet' (Maybe Text)
 zgFields = lens _zgFields (\ s a -> s{_zgFields = a})
 
--- | Data format for the response.
-zgAlt :: Lens' ZonesGet' Alt
-zgAlt = lens _zgAlt (\ s a -> s{_zgAlt = a})
+instance GoogleAuth ZonesGet' where
+        authKey = zgKey . _Just
+        authToken = zgOAuthToken . _Just
 
 instance GoogleRequest ZonesGet' where
         type Rs ZonesGet' = Zone
         request = requestWithRoute defReq computeURL
         requestWithRoute r u ZonesGet'{..}
           = go _zgQuotaUser (Just _zgPrettyPrint) _zgProject
-              _zgUserIp
+              _zgUserIP
               _zgZone
               _zgKey
-              _zgOauthToken
+              _zgOAuthToken
               _zgFields
-              (Just _zgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy ZonesGetResource) r
                       u

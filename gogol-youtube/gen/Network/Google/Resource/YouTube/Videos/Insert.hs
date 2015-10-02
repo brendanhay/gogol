@@ -34,15 +34,16 @@ module Network.Google.Resource.YouTube.Videos.Insert
     , viPart
     , viPrettyPrint
     , viStabilize
-    , viUserIp
+    , viUserIP
+    , viVideo
+    , viMedia
     , viOnBehalfOfContentOwner
     , viKey
     , viOnBehalfOfContentOwnerChannel
     , viNotifySubscribers
     , viAutoLevels
-    , viOauthToken
+    , viOAuthToken
     , viFields
-    , viAlt
     ) where
 
 import           Network.Google.Prelude
@@ -58,13 +59,15 @@ type VideosInsertResource =
              QueryParam "stabilize" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "onBehalfOfContentOwner" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "onBehalfOfContentOwnerChannel" Text :>
                        QueryParam "notifySubscribers" Bool :>
                          QueryParam "autoLevels" Bool :>
-                           QueryParam "oauth_token" Text :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :> Post '[JSON] Video
+                               QueryParam "alt" AltJSON :>
+                                 MultipartRelated '[JSON] Video Body :>
+                                   Post '[JSON] Video
 
 -- | Uploads a video to YouTube and optionally sets the video\'s metadata.
 --
@@ -74,15 +77,16 @@ data VideosInsert' = VideosInsert'
     , _viPart                          :: !Text
     , _viPrettyPrint                   :: !Bool
     , _viStabilize                     :: !(Maybe Bool)
-    , _viUserIp                        :: !(Maybe Text)
+    , _viUserIP                        :: !(Maybe Text)
+    , _viVideo                         :: !Video
+    , _viMedia                         :: !Body
     , _viOnBehalfOfContentOwner        :: !(Maybe Text)
-    , _viKey                           :: !(Maybe Text)
+    , _viKey                           :: !(Maybe Key)
     , _viOnBehalfOfContentOwnerChannel :: !(Maybe Text)
     , _viNotifySubscribers             :: !Bool
     , _viAutoLevels                    :: !(Maybe Bool)
-    , _viOauthToken                    :: !(Maybe Text)
+    , _viOAuthToken                    :: !(Maybe OAuthToken)
     , _viFields                        :: !(Maybe Text)
-    , _viAlt                           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideosInsert'' with the minimum fields required to make a request.
@@ -97,7 +101,11 @@ data VideosInsert' = VideosInsert'
 --
 -- * 'viStabilize'
 --
--- * 'viUserIp'
+-- * 'viUserIP'
+--
+-- * 'viVideo'
+--
+-- * 'viMedia'
 --
 -- * 'viOnBehalfOfContentOwner'
 --
@@ -109,29 +117,30 @@ data VideosInsert' = VideosInsert'
 --
 -- * 'viAutoLevels'
 --
--- * 'viOauthToken'
+-- * 'viOAuthToken'
 --
 -- * 'viFields'
---
--- * 'viAlt'
 videosInsert'
     :: Text -- ^ 'part'
+    -> Video -- ^ 'Video'
+    -> Body -- ^ 'media'
     -> VideosInsert'
-videosInsert' pViPart_ =
+videosInsert' pViPart_ pViVideo_ pViMedia_ =
     VideosInsert'
     { _viQuotaUser = Nothing
     , _viPart = pViPart_
     , _viPrettyPrint = True
     , _viStabilize = Nothing
-    , _viUserIp = Nothing
+    , _viUserIP = Nothing
+    , _viVideo = pViVideo_
+    , _viMedia = pViMedia_
     , _viOnBehalfOfContentOwner = Nothing
     , _viKey = Nothing
     , _viOnBehalfOfContentOwnerChannel = Nothing
     , _viNotifySubscribers = True
     , _viAutoLevels = Nothing
-    , _viOauthToken = Nothing
+    , _viOAuthToken = Nothing
     , _viFields = Nothing
-    , _viAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -166,8 +175,15 @@ viStabilize
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-viUserIp :: Lens' VideosInsert' (Maybe Text)
-viUserIp = lens _viUserIp (\ s a -> s{_viUserIp = a})
+viUserIP :: Lens' VideosInsert' (Maybe Text)
+viUserIP = lens _viUserIP (\ s a -> s{_viUserIP = a})
+
+-- | Multipart request metadata.
+viVideo :: Lens' VideosInsert' Video
+viVideo = lens _viVideo (\ s a -> s{_viVideo = a})
+
+viMedia :: Lens' VideosInsert' Body
+viMedia = lens _viMedia (\ s a -> s{_viMedia = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
@@ -187,7 +203,7 @@ viOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-viKey :: Lens' VideosInsert' (Maybe Text)
+viKey :: Lens' VideosInsert' (Maybe Key)
 viKey = lens _viKey (\ s a -> s{_viKey = a})
 
 -- | This parameter can only be used in a properly authorized request. Note:
@@ -230,17 +246,17 @@ viAutoLevels
   = lens _viAutoLevels (\ s a -> s{_viAutoLevels = a})
 
 -- | OAuth 2.0 token for the current user.
-viOauthToken :: Lens' VideosInsert' (Maybe Text)
-viOauthToken
-  = lens _viOauthToken (\ s a -> s{_viOauthToken = a})
+viOAuthToken :: Lens' VideosInsert' (Maybe OAuthToken)
+viOAuthToken
+  = lens _viOAuthToken (\ s a -> s{_viOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 viFields :: Lens' VideosInsert' (Maybe Text)
 viFields = lens _viFields (\ s a -> s{_viFields = a})
 
--- | Data format for the response.
-viAlt :: Lens' VideosInsert' Alt
-viAlt = lens _viAlt (\ s a -> s{_viAlt = a})
+instance GoogleAuth VideosInsert' where
+        authKey = viKey . _Just
+        authToken = viOAuthToken . _Just
 
 instance GoogleRequest VideosInsert' where
         type Rs VideosInsert' = Video
@@ -249,15 +265,17 @@ instance GoogleRequest VideosInsert' where
           = go _viQuotaUser (Just _viPart)
               (Just _viPrettyPrint)
               _viStabilize
-              _viUserIp
+              _viUserIP
+              _viMedia
               _viOnBehalfOfContentOwner
               _viKey
               _viOnBehalfOfContentOwnerChannel
               (Just _viNotifySubscribers)
               _viAutoLevels
-              _viOauthToken
+              _viOAuthToken
               _viFields
-              (Just _viAlt)
+              (Just AltJSON)
+              _viVideo
           where go
                   = clientWithRoute
                       (Proxy :: Proxy VideosInsertResource)

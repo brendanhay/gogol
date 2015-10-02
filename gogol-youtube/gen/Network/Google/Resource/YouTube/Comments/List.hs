@@ -33,16 +33,15 @@ module Network.Google.Resource.YouTube.Comments.List
     , comQuotaUser
     , comPart
     , comPrettyPrint
-    , comUserIp
+    , comUserIP
     , comKey
     , comId
     , comPageToken
-    , comOauthToken
+    , comOAuthToken
     , comTextFormat
     , comMaxResults
     , comParentId
     , comFields
-    , comAlt
     ) where
 
 import           Network.Google.Prelude
@@ -56,16 +55,16 @@ type CommentsListResource =
          QueryParam "part" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
+               QueryParam "key" Key :>
                  QueryParam "id" Text :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "textFormat" YouTubeCommentsListTextFormat
                          :>
                          QueryParam "maxResults" Word32 :>
                            QueryParam "parentId" Text :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :>
+                               QueryParam "alt" AltJSON :>
                                  Get '[JSON] CommentListResponse
 
 -- | Returns a list of comments that match the API request parameters.
@@ -75,16 +74,15 @@ data CommentsList' = CommentsList'
     { _comQuotaUser   :: !(Maybe Text)
     , _comPart        :: !Text
     , _comPrettyPrint :: !Bool
-    , _comUserIp      :: !(Maybe Text)
-    , _comKey         :: !(Maybe Text)
+    , _comUserIP      :: !(Maybe Text)
+    , _comKey         :: !(Maybe Key)
     , _comId          :: !(Maybe Text)
     , _comPageToken   :: !(Maybe Text)
-    , _comOauthToken  :: !(Maybe Text)
+    , _comOAuthToken  :: !(Maybe OAuthToken)
     , _comTextFormat  :: !YouTubeCommentsListTextFormat
     , _comMaxResults  :: !Word32
     , _comParentId    :: !(Maybe Text)
     , _comFields      :: !(Maybe Text)
-    , _comAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsList'' with the minimum fields required to make a request.
@@ -97,7 +95,7 @@ data CommentsList' = CommentsList'
 --
 -- * 'comPrettyPrint'
 --
--- * 'comUserIp'
+-- * 'comUserIP'
 --
 -- * 'comKey'
 --
@@ -105,7 +103,7 @@ data CommentsList' = CommentsList'
 --
 -- * 'comPageToken'
 --
--- * 'comOauthToken'
+-- * 'comOAuthToken'
 --
 -- * 'comTextFormat'
 --
@@ -114,8 +112,6 @@ data CommentsList' = CommentsList'
 -- * 'comParentId'
 --
 -- * 'comFields'
---
--- * 'comAlt'
 commentsList'
     :: Text -- ^ 'part'
     -> CommentsList'
@@ -124,16 +120,15 @@ commentsList' pComPart_ =
     { _comQuotaUser = Nothing
     , _comPart = pComPart_
     , _comPrettyPrint = True
-    , _comUserIp = Nothing
+    , _comUserIP = Nothing
     , _comKey = Nothing
     , _comId = Nothing
     , _comPageToken = Nothing
-    , _comOauthToken = Nothing
+    , _comOAuthToken = Nothing
     , _comTextFormat = YTCLTFFormatHTML
     , _comMaxResults = 20
     , _comParentId = Nothing
     , _comFields = Nothing
-    , _comAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -156,14 +151,14 @@ comPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-comUserIp :: Lens' CommentsList' (Maybe Text)
-comUserIp
-  = lens _comUserIp (\ s a -> s{_comUserIp = a})
+comUserIP :: Lens' CommentsList' (Maybe Text)
+comUserIP
+  = lens _comUserIP (\ s a -> s{_comUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-comKey :: Lens' CommentsList' (Maybe Text)
+comKey :: Lens' CommentsList' (Maybe Key)
 comKey = lens _comKey (\ s a -> s{_comKey = a})
 
 -- | The id parameter specifies a comma-separated list of comment IDs for the
@@ -181,10 +176,10 @@ comPageToken
   = lens _comPageToken (\ s a -> s{_comPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-comOauthToken :: Lens' CommentsList' (Maybe Text)
-comOauthToken
-  = lens _comOauthToken
-      (\ s a -> s{_comOauthToken = a})
+comOAuthToken :: Lens' CommentsList' (Maybe OAuthToken)
+comOAuthToken
+  = lens _comOAuthToken
+      (\ s a -> s{_comOAuthToken = a})
 
 -- | This parameter indicates whether the API should return comments
 -- formatted as HTML or as plain text.
@@ -214,9 +209,9 @@ comFields :: Lens' CommentsList' (Maybe Text)
 comFields
   = lens _comFields (\ s a -> s{_comFields = a})
 
--- | Data format for the response.
-comAlt :: Lens' CommentsList' Alt
-comAlt = lens _comAlt (\ s a -> s{_comAlt = a})
+instance GoogleAuth CommentsList' where
+        authKey = comKey . _Just
+        authToken = comOAuthToken . _Just
 
 instance GoogleRequest CommentsList' where
         type Rs CommentsList' = CommentListResponse
@@ -224,16 +219,16 @@ instance GoogleRequest CommentsList' where
         requestWithRoute r u CommentsList'{..}
           = go _comQuotaUser (Just _comPart)
               (Just _comPrettyPrint)
-              _comUserIp
+              _comUserIP
               _comKey
               _comId
               _comPageToken
-              _comOauthToken
+              _comOAuthToken
               (Just _comTextFormat)
               (Just _comMaxResults)
               _comParentId
               _comFields
-              (Just _comAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CommentsListResource)

@@ -34,14 +34,13 @@ module Network.Google.Resource.Compute.BackendServices.List
     , bslQuotaUser
     , bslPrettyPrint
     , bslProject
-    , bslUserIp
+    , bslUserIP
     , bslKey
     , bslFilter
     , bslPageToken
-    , bslOauthToken
+    , bslOAuthToken
     , bslMaxResults
     , bslFields
-    , bslAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -56,13 +55,13 @@ type BackendServicesListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "filter" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "maxResults" Word32 :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :>
+                             QueryParam "alt" AltJSON :>
                                Get '[JSON] BackendServiceList
 
 -- | Retrieves the list of BackendService resources available to the
@@ -73,14 +72,13 @@ data BackendServicesList' = BackendServicesList'
     { _bslQuotaUser   :: !(Maybe Text)
     , _bslPrettyPrint :: !Bool
     , _bslProject     :: !Text
-    , _bslUserIp      :: !(Maybe Text)
-    , _bslKey         :: !(Maybe Text)
+    , _bslUserIP      :: !(Maybe Text)
+    , _bslKey         :: !(Maybe Key)
     , _bslFilter      :: !(Maybe Text)
     , _bslPageToken   :: !(Maybe Text)
-    , _bslOauthToken  :: !(Maybe Text)
+    , _bslOAuthToken  :: !(Maybe OAuthToken)
     , _bslMaxResults  :: !Word32
     , _bslFields      :: !(Maybe Text)
-    , _bslAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BackendServicesList'' with the minimum fields required to make a request.
@@ -93,7 +91,7 @@ data BackendServicesList' = BackendServicesList'
 --
 -- * 'bslProject'
 --
--- * 'bslUserIp'
+-- * 'bslUserIP'
 --
 -- * 'bslKey'
 --
@@ -101,13 +99,11 @@ data BackendServicesList' = BackendServicesList'
 --
 -- * 'bslPageToken'
 --
--- * 'bslOauthToken'
+-- * 'bslOAuthToken'
 --
 -- * 'bslMaxResults'
 --
 -- * 'bslFields'
---
--- * 'bslAlt'
 backendServicesList'
     :: Text -- ^ 'project'
     -> BackendServicesList'
@@ -116,14 +112,13 @@ backendServicesList' pBslProject_ =
     { _bslQuotaUser = Nothing
     , _bslPrettyPrint = True
     , _bslProject = pBslProject_
-    , _bslUserIp = Nothing
+    , _bslUserIP = Nothing
     , _bslKey = Nothing
     , _bslFilter = Nothing
     , _bslPageToken = Nothing
-    , _bslOauthToken = Nothing
+    , _bslOAuthToken = Nothing
     , _bslMaxResults = 500
     , _bslFields = Nothing
-    , _bslAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -146,14 +141,14 @@ bslProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-bslUserIp :: Lens' BackendServicesList' (Maybe Text)
-bslUserIp
-  = lens _bslUserIp (\ s a -> s{_bslUserIp = a})
+bslUserIP :: Lens' BackendServicesList' (Maybe Text)
+bslUserIP
+  = lens _bslUserIP (\ s a -> s{_bslUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-bslKey :: Lens' BackendServicesList' (Maybe Text)
+bslKey :: Lens' BackendServicesList' (Maybe Key)
 bslKey = lens _bslKey (\ s a -> s{_bslKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
@@ -179,10 +174,10 @@ bslPageToken
   = lens _bslPageToken (\ s a -> s{_bslPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-bslOauthToken :: Lens' BackendServicesList' (Maybe Text)
-bslOauthToken
-  = lens _bslOauthToken
-      (\ s a -> s{_bslOauthToken = a})
+bslOAuthToken :: Lens' BackendServicesList' (Maybe OAuthToken)
+bslOAuthToken
+  = lens _bslOAuthToken
+      (\ s a -> s{_bslOAuthToken = a})
 
 -- | Maximum count of results to be returned.
 bslMaxResults :: Lens' BackendServicesList' Word32
@@ -195,23 +190,23 @@ bslFields :: Lens' BackendServicesList' (Maybe Text)
 bslFields
   = lens _bslFields (\ s a -> s{_bslFields = a})
 
--- | Data format for the response.
-bslAlt :: Lens' BackendServicesList' Alt
-bslAlt = lens _bslAlt (\ s a -> s{_bslAlt = a})
+instance GoogleAuth BackendServicesList' where
+        authKey = bslKey . _Just
+        authToken = bslOAuthToken . _Just
 
 instance GoogleRequest BackendServicesList' where
         type Rs BackendServicesList' = BackendServiceList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u BackendServicesList'{..}
           = go _bslQuotaUser (Just _bslPrettyPrint) _bslProject
-              _bslUserIp
+              _bslUserIP
               _bslKey
               _bslFilter
               _bslPageToken
-              _bslOauthToken
+              _bslOAuthToken
               (Just _bslMaxResults)
               _bslFields
-              (Just _bslAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy BackendServicesListResource)

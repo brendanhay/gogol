@@ -33,12 +33,11 @@ module Network.Google.Resource.Genomics.Annotations.Delete
     -- * Request Lenses
     , adQuotaUser
     , adPrettyPrint
-    , adUserIp
+    , adUserIP
     , adKey
     , adAnnotationId
-    , adOauthToken
+    , adOAuthToken
     , adFields
-    , adAlt
     ) where
 
 import           Network.Google.Genomics.Types
@@ -52,10 +51,10 @@ type AnnotationsDeleteResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Delete '[JSON] ()
+                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an annotation. Caller must have WRITE permission for the
 -- associated annotation set.
@@ -64,12 +63,11 @@ type AnnotationsDeleteResource =
 data AnnotationsDelete' = AnnotationsDelete'
     { _adQuotaUser    :: !(Maybe Text)
     , _adPrettyPrint  :: !Bool
-    , _adUserIp       :: !(Maybe Text)
-    , _adKey          :: !(Maybe Text)
+    , _adUserIP       :: !(Maybe Text)
+    , _adKey          :: !(Maybe Key)
     , _adAnnotationId :: !Text
-    , _adOauthToken   :: !(Maybe Text)
+    , _adOAuthToken   :: !(Maybe OAuthToken)
     , _adFields       :: !(Maybe Text)
-    , _adAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnnotationsDelete'' with the minimum fields required to make a request.
@@ -80,17 +78,15 @@ data AnnotationsDelete' = AnnotationsDelete'
 --
 -- * 'adPrettyPrint'
 --
--- * 'adUserIp'
+-- * 'adUserIP'
 --
 -- * 'adKey'
 --
 -- * 'adAnnotationId'
 --
--- * 'adOauthToken'
+-- * 'adOAuthToken'
 --
 -- * 'adFields'
---
--- * 'adAlt'
 annotationsDelete'
     :: Text -- ^ 'annotationId'
     -> AnnotationsDelete'
@@ -98,12 +94,11 @@ annotationsDelete' pAdAnnotationId_ =
     AnnotationsDelete'
     { _adQuotaUser = Nothing
     , _adPrettyPrint = True
-    , _adUserIp = Nothing
+    , _adUserIP = Nothing
     , _adKey = Nothing
     , _adAnnotationId = pAdAnnotationId_
-    , _adOauthToken = Nothing
+    , _adOAuthToken = Nothing
     , _adFields = Nothing
-    , _adAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -121,13 +116,13 @@ adPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-adUserIp :: Lens' AnnotationsDelete' (Maybe Text)
-adUserIp = lens _adUserIp (\ s a -> s{_adUserIp = a})
+adUserIP :: Lens' AnnotationsDelete' (Maybe Text)
+adUserIP = lens _adUserIP (\ s a -> s{_adUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-adKey :: Lens' AnnotationsDelete' (Maybe Text)
+adKey :: Lens' AnnotationsDelete' (Maybe Key)
 adKey = lens _adKey (\ s a -> s{_adKey = a})
 
 -- | The ID of the annotation set to be deleted.
@@ -137,28 +132,28 @@ adAnnotationId
       (\ s a -> s{_adAnnotationId = a})
 
 -- | OAuth 2.0 token for the current user.
-adOauthToken :: Lens' AnnotationsDelete' (Maybe Text)
-adOauthToken
-  = lens _adOauthToken (\ s a -> s{_adOauthToken = a})
+adOAuthToken :: Lens' AnnotationsDelete' (Maybe OAuthToken)
+adOAuthToken
+  = lens _adOAuthToken (\ s a -> s{_adOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 adFields :: Lens' AnnotationsDelete' (Maybe Text)
 adFields = lens _adFields (\ s a -> s{_adFields = a})
 
--- | Data format for the response.
-adAlt :: Lens' AnnotationsDelete' Alt
-adAlt = lens _adAlt (\ s a -> s{_adAlt = a})
+instance GoogleAuth AnnotationsDelete' where
+        authKey = adKey . _Just
+        authToken = adOAuthToken . _Just
 
 instance GoogleRequest AnnotationsDelete' where
         type Rs AnnotationsDelete' = ()
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u AnnotationsDelete'{..}
-          = go _adQuotaUser (Just _adPrettyPrint) _adUserIp
+          = go _adQuotaUser (Just _adPrettyPrint) _adUserIP
               _adKey
               _adAnnotationId
-              _adOauthToken
+              _adOAuthToken
               _adFields
-              (Just _adAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AnnotationsDeleteResource)

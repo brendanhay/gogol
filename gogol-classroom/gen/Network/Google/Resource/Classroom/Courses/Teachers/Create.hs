@@ -44,12 +44,12 @@ module Network.Google.Resource.Classroom.Courses.Teachers.Create
     , ctcCourseId
     , ctcAccessToken
     , ctcUploadType
+    , ctcTeacher
     , ctcBearerToken
     , ctcKey
-    , ctcOauthToken
+    , ctcOAuthToken
     , ctcFields
     , ctcCallback
-    , ctcAlt
     ) where
 
 import           Network.Google.Classroom.Types
@@ -70,12 +70,13 @@ type CoursesTeachersCreateResource =
                        QueryParam "access_token" Text :>
                          QueryParam "uploadType" Text :>
                            QueryParam "bearer_token" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "fields" Text :>
                                    QueryParam "callback" Text :>
-                                     QueryParam "alt" Text :>
-                                       Post '[JSON] Teacher
+                                     QueryParam "alt" AltJSON :>
+                                       ReqBody '[JSON] Teacher :>
+                                         Post '[JSON] Teacher
 
 -- | Creates a teacher of a course. This method returns the following error
 -- codes: * \`PERMISSION_DENIED\` if the requesting user is not permitted
@@ -95,12 +96,12 @@ data CoursesTeachersCreate' = CoursesTeachersCreate'
     , _ctcCourseId       :: !Text
     , _ctcAccessToken    :: !(Maybe Text)
     , _ctcUploadType     :: !(Maybe Text)
+    , _ctcTeacher        :: !Teacher
     , _ctcBearerToken    :: !(Maybe Text)
-    , _ctcKey            :: !(Maybe Text)
-    , _ctcOauthToken     :: !(Maybe Text)
+    , _ctcKey            :: !(Maybe Key)
+    , _ctcOAuthToken     :: !(Maybe OAuthToken)
     , _ctcFields         :: !(Maybe Text)
     , _ctcCallback       :: !(Maybe Text)
-    , _ctcAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CoursesTeachersCreate'' with the minimum fields required to make a request.
@@ -123,21 +124,22 @@ data CoursesTeachersCreate' = CoursesTeachersCreate'
 --
 -- * 'ctcUploadType'
 --
+-- * 'ctcTeacher'
+--
 -- * 'ctcBearerToken'
 --
 -- * 'ctcKey'
 --
--- * 'ctcOauthToken'
+-- * 'ctcOAuthToken'
 --
 -- * 'ctcFields'
 --
 -- * 'ctcCallback'
---
--- * 'ctcAlt'
 coursesTeachersCreate'
     :: Text -- ^ 'courseId'
+    -> Teacher -- ^ 'Teacher'
     -> CoursesTeachersCreate'
-coursesTeachersCreate' pCtcCourseId_ =
+coursesTeachersCreate' pCtcCourseId_ pCtcTeacher_ =
     CoursesTeachersCreate'
     { _ctcXgafv = Nothing
     , _ctcQuotaUser = Nothing
@@ -147,12 +149,12 @@ coursesTeachersCreate' pCtcCourseId_ =
     , _ctcCourseId = pCtcCourseId_
     , _ctcAccessToken = Nothing
     , _ctcUploadType = Nothing
+    , _ctcTeacher = pCtcTeacher_
     , _ctcBearerToken = Nothing
     , _ctcKey = Nothing
-    , _ctcOauthToken = Nothing
+    , _ctcOAuthToken = Nothing
     , _ctcFields = Nothing
     , _ctcCallback = Nothing
-    , _ctcAlt = "json"
     }
 
 -- | V1 error format.
@@ -201,6 +203,11 @@ ctcUploadType
   = lens _ctcUploadType
       (\ s a -> s{_ctcUploadType = a})
 
+-- | Multipart request metadata.
+ctcTeacher :: Lens' CoursesTeachersCreate' Teacher
+ctcTeacher
+  = lens _ctcTeacher (\ s a -> s{_ctcTeacher = a})
+
 -- | OAuth bearer token.
 ctcBearerToken :: Lens' CoursesTeachersCreate' (Maybe Text)
 ctcBearerToken
@@ -210,14 +217,14 @@ ctcBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ctcKey :: Lens' CoursesTeachersCreate' (Maybe Text)
+ctcKey :: Lens' CoursesTeachersCreate' (Maybe Key)
 ctcKey = lens _ctcKey (\ s a -> s{_ctcKey = a})
 
 -- | OAuth 2.0 token for the current user.
-ctcOauthToken :: Lens' CoursesTeachersCreate' (Maybe Text)
-ctcOauthToken
-  = lens _ctcOauthToken
-      (\ s a -> s{_ctcOauthToken = a})
+ctcOAuthToken :: Lens' CoursesTeachersCreate' (Maybe OAuthToken)
+ctcOAuthToken
+  = lens _ctcOAuthToken
+      (\ s a -> s{_ctcOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ctcFields :: Lens' CoursesTeachersCreate' (Maybe Text)
@@ -229,9 +236,9 @@ ctcCallback :: Lens' CoursesTeachersCreate' (Maybe Text)
 ctcCallback
   = lens _ctcCallback (\ s a -> s{_ctcCallback = a})
 
--- | Data format for response.
-ctcAlt :: Lens' CoursesTeachersCreate' Text
-ctcAlt = lens _ctcAlt (\ s a -> s{_ctcAlt = a})
+instance GoogleAuth CoursesTeachersCreate' where
+        authKey = ctcKey . _Just
+        authToken = ctcOAuthToken . _Just
 
 instance GoogleRequest CoursesTeachersCreate' where
         type Rs CoursesTeachersCreate' = Teacher
@@ -245,10 +252,11 @@ instance GoogleRequest CoursesTeachersCreate' where
               _ctcUploadType
               _ctcBearerToken
               _ctcKey
-              _ctcOauthToken
+              _ctcOAuthToken
               _ctcFields
               _ctcCallback
-              (Just _ctcAlt)
+              (Just AltJSON)
+              _ctcTeacher
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CoursesTeachersCreateResource)

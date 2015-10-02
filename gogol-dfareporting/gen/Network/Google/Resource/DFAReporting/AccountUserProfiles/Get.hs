@@ -32,13 +32,12 @@ module Network.Google.Resource.DFAReporting.AccountUserProfiles.Get
     -- * Request Lenses
     , aupgQuotaUser
     , aupgPrettyPrint
-    , aupgUserIp
+    , aupgUserIP
     , aupgProfileId
     , aupgKey
     , aupgId
-    , aupgOauthToken
+    , aupgOAuthToken
     , aupgFields
-    , aupgAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,10 +53,10 @@ type AccountUserProfilesGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :>
+                         QueryParam "alt" AltJSON :>
                            Get '[JSON] AccountUserProfile
 
 -- | Gets one account user profile by ID.
@@ -66,13 +65,12 @@ type AccountUserProfilesGetResource =
 data AccountUserProfilesGet' = AccountUserProfilesGet'
     { _aupgQuotaUser   :: !(Maybe Text)
     , _aupgPrettyPrint :: !Bool
-    , _aupgUserIp      :: !(Maybe Text)
+    , _aupgUserIP      :: !(Maybe Text)
     , _aupgProfileId   :: !Int64
-    , _aupgKey         :: !(Maybe Text)
+    , _aupgKey         :: !(Maybe Key)
     , _aupgId          :: !Int64
-    , _aupgOauthToken  :: !(Maybe Text)
+    , _aupgOAuthToken  :: !(Maybe OAuthToken)
     , _aupgFields      :: !(Maybe Text)
-    , _aupgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountUserProfilesGet'' with the minimum fields required to make a request.
@@ -83,7 +81,7 @@ data AccountUserProfilesGet' = AccountUserProfilesGet'
 --
 -- * 'aupgPrettyPrint'
 --
--- * 'aupgUserIp'
+-- * 'aupgUserIP'
 --
 -- * 'aupgProfileId'
 --
@@ -91,11 +89,9 @@ data AccountUserProfilesGet' = AccountUserProfilesGet'
 --
 -- * 'aupgId'
 --
--- * 'aupgOauthToken'
+-- * 'aupgOAuthToken'
 --
 -- * 'aupgFields'
---
--- * 'aupgAlt'
 accountUserProfilesGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
@@ -104,13 +100,12 @@ accountUserProfilesGet' pAupgProfileId_ pAupgId_ =
     AccountUserProfilesGet'
     { _aupgQuotaUser = Nothing
     , _aupgPrettyPrint = True
-    , _aupgUserIp = Nothing
+    , _aupgUserIP = Nothing
     , _aupgProfileId = pAupgProfileId_
     , _aupgKey = Nothing
     , _aupgId = pAupgId_
-    , _aupgOauthToken = Nothing
+    , _aupgOAuthToken = Nothing
     , _aupgFields = Nothing
-    , _aupgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -129,9 +124,9 @@ aupgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-aupgUserIp :: Lens' AccountUserProfilesGet' (Maybe Text)
-aupgUserIp
-  = lens _aupgUserIp (\ s a -> s{_aupgUserIp = a})
+aupgUserIP :: Lens' AccountUserProfilesGet' (Maybe Text)
+aupgUserIP
+  = lens _aupgUserIP (\ s a -> s{_aupgUserIP = a})
 
 -- | User profile ID associated with this request.
 aupgProfileId :: Lens' AccountUserProfilesGet' Int64
@@ -142,7 +137,7 @@ aupgProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aupgKey :: Lens' AccountUserProfilesGet' (Maybe Text)
+aupgKey :: Lens' AccountUserProfilesGet' (Maybe Key)
 aupgKey = lens _aupgKey (\ s a -> s{_aupgKey = a})
 
 -- | User profile ID.
@@ -150,32 +145,32 @@ aupgId :: Lens' AccountUserProfilesGet' Int64
 aupgId = lens _aupgId (\ s a -> s{_aupgId = a})
 
 -- | OAuth 2.0 token for the current user.
-aupgOauthToken :: Lens' AccountUserProfilesGet' (Maybe Text)
-aupgOauthToken
-  = lens _aupgOauthToken
-      (\ s a -> s{_aupgOauthToken = a})
+aupgOAuthToken :: Lens' AccountUserProfilesGet' (Maybe OAuthToken)
+aupgOAuthToken
+  = lens _aupgOAuthToken
+      (\ s a -> s{_aupgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 aupgFields :: Lens' AccountUserProfilesGet' (Maybe Text)
 aupgFields
   = lens _aupgFields (\ s a -> s{_aupgFields = a})
 
--- | Data format for the response.
-aupgAlt :: Lens' AccountUserProfilesGet' Alt
-aupgAlt = lens _aupgAlt (\ s a -> s{_aupgAlt = a})
+instance GoogleAuth AccountUserProfilesGet' where
+        authKey = aupgKey . _Just
+        authToken = aupgOAuthToken . _Just
 
 instance GoogleRequest AccountUserProfilesGet' where
         type Rs AccountUserProfilesGet' = AccountUserProfile
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AccountUserProfilesGet'{..}
           = go _aupgQuotaUser (Just _aupgPrettyPrint)
-              _aupgUserIp
+              _aupgUserIP
               _aupgProfileId
               _aupgKey
               _aupgId
-              _aupgOauthToken
+              _aupgOAuthToken
               _aupgFields
-              (Just _aupgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountUserProfilesGetResource)

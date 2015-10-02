@@ -34,14 +34,14 @@ module Network.Google.Resource.Analytics.Management.ProfileFilterLinks.Patch
     , mpflpQuotaUser
     , mpflpPrettyPrint
     , mpflpWebPropertyId
-    , mpflpUserIp
+    , mpflpUserIP
     , mpflpProfileId
     , mpflpAccountId
     , mpflpKey
     , mpflpLinkId
-    , mpflpOauthToken
+    , mpflpOAuthToken
+    , mpflpProfileFilterLink
     , mpflpFields
-    , mpflpAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -62,28 +62,29 @@ type ManagementProfileFilterLinksPatchResource =
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "alt" Alt :>
-                                     Patch '[JSON] ProfileFilterLink
+                                   QueryParam "alt" AltJSON :>
+                                     ReqBody '[JSON] ProfileFilterLink :>
+                                       Patch '[JSON] ProfileFilterLink
 
 -- | Update an existing profile filter link. This method supports patch
 -- semantics.
 --
 -- /See:/ 'managementProfileFilterLinksPatch'' smart constructor.
 data ManagementProfileFilterLinksPatch' = ManagementProfileFilterLinksPatch'
-    { _mpflpQuotaUser     :: !(Maybe Text)
-    , _mpflpPrettyPrint   :: !Bool
-    , _mpflpWebPropertyId :: !Text
-    , _mpflpUserIp        :: !(Maybe Text)
-    , _mpflpProfileId     :: !Text
-    , _mpflpAccountId     :: !Text
-    , _mpflpKey           :: !(Maybe Text)
-    , _mpflpLinkId        :: !Text
-    , _mpflpOauthToken    :: !(Maybe Text)
-    , _mpflpFields        :: !(Maybe Text)
-    , _mpflpAlt           :: !Alt
+    { _mpflpQuotaUser         :: !(Maybe Text)
+    , _mpflpPrettyPrint       :: !Bool
+    , _mpflpWebPropertyId     :: !Text
+    , _mpflpUserIP            :: !(Maybe Text)
+    , _mpflpProfileId         :: !Text
+    , _mpflpAccountId         :: !Text
+    , _mpflpKey               :: !(Maybe Key)
+    , _mpflpLinkId            :: !Text
+    , _mpflpOAuthToken        :: !(Maybe OAuthToken)
+    , _mpflpProfileFilterLink :: !ProfileFilterLink
+    , _mpflpFields            :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProfileFilterLinksPatch'' with the minimum fields required to make a request.
@@ -96,7 +97,7 @@ data ManagementProfileFilterLinksPatch' = ManagementProfileFilterLinksPatch'
 --
 -- * 'mpflpWebPropertyId'
 --
--- * 'mpflpUserIp'
+-- * 'mpflpUserIP'
 --
 -- * 'mpflpProfileId'
 --
@@ -106,30 +107,31 @@ data ManagementProfileFilterLinksPatch' = ManagementProfileFilterLinksPatch'
 --
 -- * 'mpflpLinkId'
 --
--- * 'mpflpOauthToken'
+-- * 'mpflpOAuthToken'
+--
+-- * 'mpflpProfileFilterLink'
 --
 -- * 'mpflpFields'
---
--- * 'mpflpAlt'
 managementProfileFilterLinksPatch'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'linkId'
+    -> ProfileFilterLink -- ^ 'ProfileFilterLink'
     -> ManagementProfileFilterLinksPatch'
-managementProfileFilterLinksPatch' pMpflpWebPropertyId_ pMpflpProfileId_ pMpflpAccountId_ pMpflpLinkId_ =
+managementProfileFilterLinksPatch' pMpflpWebPropertyId_ pMpflpProfileId_ pMpflpAccountId_ pMpflpLinkId_ pMpflpProfileFilterLink_ =
     ManagementProfileFilterLinksPatch'
     { _mpflpQuotaUser = Nothing
     , _mpflpPrettyPrint = False
     , _mpflpWebPropertyId = pMpflpWebPropertyId_
-    , _mpflpUserIp = Nothing
+    , _mpflpUserIP = Nothing
     , _mpflpProfileId = pMpflpProfileId_
     , _mpflpAccountId = pMpflpAccountId_
     , _mpflpKey = Nothing
     , _mpflpLinkId = pMpflpLinkId_
-    , _mpflpOauthToken = Nothing
+    , _mpflpOAuthToken = Nothing
+    , _mpflpProfileFilterLink = pMpflpProfileFilterLink_
     , _mpflpFields = Nothing
-    , _mpflpAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -154,9 +156,9 @@ mpflpWebPropertyId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mpflpUserIp :: Lens' ManagementProfileFilterLinksPatch' (Maybe Text)
-mpflpUserIp
-  = lens _mpflpUserIp (\ s a -> s{_mpflpUserIp = a})
+mpflpUserIP :: Lens' ManagementProfileFilterLinksPatch' (Maybe Text)
+mpflpUserIP
+  = lens _mpflpUserIP (\ s a -> s{_mpflpUserIP = a})
 
 -- | Profile ID to which filter link belongs
 mpflpProfileId :: Lens' ManagementProfileFilterLinksPatch' Text
@@ -173,7 +175,7 @@ mpflpAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mpflpKey :: Lens' ManagementProfileFilterLinksPatch' (Maybe Text)
+mpflpKey :: Lens' ManagementProfileFilterLinksPatch' (Maybe Key)
 mpflpKey = lens _mpflpKey (\ s a -> s{_mpflpKey = a})
 
 -- | ID of the profile filter link to be updated.
@@ -182,19 +184,26 @@ mpflpLinkId
   = lens _mpflpLinkId (\ s a -> s{_mpflpLinkId = a})
 
 -- | OAuth 2.0 token for the current user.
-mpflpOauthToken :: Lens' ManagementProfileFilterLinksPatch' (Maybe Text)
-mpflpOauthToken
-  = lens _mpflpOauthToken
-      (\ s a -> s{_mpflpOauthToken = a})
+mpflpOAuthToken :: Lens' ManagementProfileFilterLinksPatch' (Maybe OAuthToken)
+mpflpOAuthToken
+  = lens _mpflpOAuthToken
+      (\ s a -> s{_mpflpOAuthToken = a})
+
+-- | Multipart request metadata.
+mpflpProfileFilterLink :: Lens' ManagementProfileFilterLinksPatch' ProfileFilterLink
+mpflpProfileFilterLink
+  = lens _mpflpProfileFilterLink
+      (\ s a -> s{_mpflpProfileFilterLink = a})
 
 -- | Selector specifying which fields to include in a partial response.
 mpflpFields :: Lens' ManagementProfileFilterLinksPatch' (Maybe Text)
 mpflpFields
   = lens _mpflpFields (\ s a -> s{_mpflpFields = a})
 
--- | Data format for the response.
-mpflpAlt :: Lens' ManagementProfileFilterLinksPatch' Alt
-mpflpAlt = lens _mpflpAlt (\ s a -> s{_mpflpAlt = a})
+instance GoogleAuth
+         ManagementProfileFilterLinksPatch' where
+        authKey = mpflpKey . _Just
+        authToken = mpflpOAuthToken . _Just
 
 instance GoogleRequest
          ManagementProfileFilterLinksPatch' where
@@ -205,14 +214,15 @@ instance GoogleRequest
           ManagementProfileFilterLinksPatch'{..}
           = go _mpflpQuotaUser (Just _mpflpPrettyPrint)
               _mpflpWebPropertyId
-              _mpflpUserIp
+              _mpflpUserIP
               _mpflpProfileId
               _mpflpAccountId
               _mpflpKey
               _mpflpLinkId
-              _mpflpOauthToken
+              _mpflpOAuthToken
               _mpflpFields
-              (Just _mpflpAlt)
+              (Just AltJSON)
+              _mpflpProfileFilterLink
           where go
                   = clientWithRoute
                       (Proxy ::

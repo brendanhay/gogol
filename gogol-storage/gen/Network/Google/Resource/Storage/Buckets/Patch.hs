@@ -33,14 +33,14 @@ module Network.Google.Resource.Storage.Buckets.Patch
     , bpQuotaUser
     , bpIfMetagenerationMatch
     , bpPrettyPrint
-    , bpUserIp
+    , bpUserIP
+    , bpBucket
     , bpBucket
     , bpKey
     , bpIfMetagenerationNotMatch
     , bpProjection
-    , bpOauthToken
+    , bpOAuthToken
     , bpFields
-    , bpAlt
     ) where
 
 import           Network.Google.Prelude
@@ -55,13 +55,14 @@ type BucketsPatchResource =
            QueryParam "ifMetagenerationMatch" Word64 :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "ifMetagenerationNotMatch" Word64 :>
                      QueryParam "projection" StorageBucketsPatchProjection
                        :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Patch '[JSON] Bucket
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] Bucket :> Patch '[JSON] Bucket
 
 -- | Updates a bucket. This method supports patch semantics.
 --
@@ -70,14 +71,14 @@ data BucketsPatch' = BucketsPatch'
     { _bpQuotaUser                :: !(Maybe Text)
     , _bpIfMetagenerationMatch    :: !(Maybe Word64)
     , _bpPrettyPrint              :: !Bool
-    , _bpUserIp                   :: !(Maybe Text)
+    , _bpUserIP                   :: !(Maybe Text)
+    , _bpBucket                   :: !Bucket
     , _bpBucket                   :: !Text
-    , _bpKey                      :: !(Maybe Text)
+    , _bpKey                      :: !(Maybe Key)
     , _bpIfMetagenerationNotMatch :: !(Maybe Word64)
     , _bpProjection               :: !(Maybe StorageBucketsPatchProjection)
-    , _bpOauthToken               :: !(Maybe Text)
+    , _bpOAuthToken               :: !(Maybe OAuthToken)
     , _bpFields                   :: !(Maybe Text)
-    , _bpAlt                      :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketsPatch'' with the minimum fields required to make a request.
@@ -90,7 +91,9 @@ data BucketsPatch' = BucketsPatch'
 --
 -- * 'bpPrettyPrint'
 --
--- * 'bpUserIp'
+-- * 'bpUserIP'
+--
+-- * 'bpBucket'
 --
 -- * 'bpBucket'
 --
@@ -100,27 +103,26 @@ data BucketsPatch' = BucketsPatch'
 --
 -- * 'bpProjection'
 --
--- * 'bpOauthToken'
+-- * 'bpOAuthToken'
 --
 -- * 'bpFields'
---
--- * 'bpAlt'
 bucketsPatch'
-    :: Text -- ^ 'bucket'
+    :: Bucket -- ^ 'Bucket'
+    -> Text -- ^ 'bucket'
     -> BucketsPatch'
-bucketsPatch' pBpBucket_ =
+bucketsPatch' pBpBucket_ pBpBucket_ =
     BucketsPatch'
     { _bpQuotaUser = Nothing
     , _bpIfMetagenerationMatch = Nothing
     , _bpPrettyPrint = True
-    , _bpUserIp = Nothing
+    , _bpUserIP = Nothing
+    , _bpBucket = pBpBucket_
     , _bpBucket = pBpBucket_
     , _bpKey = Nothing
     , _bpIfMetagenerationNotMatch = Nothing
     , _bpProjection = Nothing
-    , _bpOauthToken = Nothing
+    , _bpOAuthToken = Nothing
     , _bpFields = Nothing
-    , _bpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -145,8 +147,12 @@ bpPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-bpUserIp :: Lens' BucketsPatch' (Maybe Text)
-bpUserIp = lens _bpUserIp (\ s a -> s{_bpUserIp = a})
+bpUserIP :: Lens' BucketsPatch' (Maybe Text)
+bpUserIP = lens _bpUserIP (\ s a -> s{_bpUserIP = a})
+
+-- | Multipart request metadata.
+bpBucket :: Lens' BucketsPatch' Bucket
+bpBucket = lens _bpBucket (\ s a -> s{_bpBucket = a})
 
 -- | Name of a bucket.
 bpBucket :: Lens' BucketsPatch' Text
@@ -155,7 +161,7 @@ bpBucket = lens _bpBucket (\ s a -> s{_bpBucket = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-bpKey :: Lens' BucketsPatch' (Maybe Text)
+bpKey :: Lens' BucketsPatch' (Maybe Key)
 bpKey = lens _bpKey (\ s a -> s{_bpKey = a})
 
 -- | Makes the return of the bucket metadata conditional on whether the
@@ -171,17 +177,17 @@ bpProjection
   = lens _bpProjection (\ s a -> s{_bpProjection = a})
 
 -- | OAuth 2.0 token for the current user.
-bpOauthToken :: Lens' BucketsPatch' (Maybe Text)
-bpOauthToken
-  = lens _bpOauthToken (\ s a -> s{_bpOauthToken = a})
+bpOAuthToken :: Lens' BucketsPatch' (Maybe OAuthToken)
+bpOAuthToken
+  = lens _bpOAuthToken (\ s a -> s{_bpOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 bpFields :: Lens' BucketsPatch' (Maybe Text)
 bpFields = lens _bpFields (\ s a -> s{_bpFields = a})
 
--- | Data format for the response.
-bpAlt :: Lens' BucketsPatch' Alt
-bpAlt = lens _bpAlt (\ s a -> s{_bpAlt = a})
+instance GoogleAuth BucketsPatch' where
+        authKey = bpKey . _Just
+        authToken = bpOAuthToken . _Just
 
 instance GoogleRequest BucketsPatch' where
         type Rs BucketsPatch' = Bucket
@@ -189,14 +195,15 @@ instance GoogleRequest BucketsPatch' where
         requestWithRoute r u BucketsPatch'{..}
           = go _bpQuotaUser _bpIfMetagenerationMatch
               (Just _bpPrettyPrint)
-              _bpUserIp
+              _bpUserIP
               _bpBucket
               _bpKey
               _bpIfMetagenerationNotMatch
               _bpProjection
-              _bpOauthToken
+              _bpOAuthToken
               _bpFields
-              (Just _bpAlt)
+              (Just AltJSON)
+              _bpBucket
           where go
                   = clientWithRoute
                       (Proxy :: Proxy BucketsPatchResource)

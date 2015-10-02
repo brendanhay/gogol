@@ -32,16 +32,15 @@ module Network.Google.Resource.Books.Onboarding.ListCategoryVolumes
     -- * Request Lenses
     , olcvQuotaUser
     , olcvPrettyPrint
-    , olcvUserIp
+    , olcvUserIP
     , olcvLocale
     , olcvMaxAllowedMaturityRating
     , olcvKey
     , olcvCategoryId
     , olcvPageToken
-    , olcvOauthToken
+    , olcvOAuthToken
     , olcvPageSize
     , olcvFields
-    , olcvAlt
     ) where
 
 import           Network.Google.Books.Types
@@ -59,13 +58,13 @@ type OnboardingListCategoryVolumesResource =
                  QueryParam "maxAllowedMaturityRating"
                    BooksOnboardingListCategoryVolumesMaxAllowedMaturityRating
                    :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParams "categoryId" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "pageSize" Word32 :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :> Get '[JSON] Volume2
+                               QueryParam "alt" AltJSON :> Get '[JSON] Volume2
 
 -- | List available volumes under categories for onboarding experience.
 --
@@ -73,16 +72,15 @@ type OnboardingListCategoryVolumesResource =
 data OnboardingListCategoryVolumes' = OnboardingListCategoryVolumes'
     { _olcvQuotaUser                :: !(Maybe Text)
     , _olcvPrettyPrint              :: !Bool
-    , _olcvUserIp                   :: !(Maybe Text)
+    , _olcvUserIP                   :: !(Maybe Text)
     , _olcvLocale                   :: !(Maybe Text)
     , _olcvMaxAllowedMaturityRating :: !(Maybe BooksOnboardingListCategoryVolumesMaxAllowedMaturityRating)
-    , _olcvKey                      :: !(Maybe Text)
+    , _olcvKey                      :: !(Maybe Key)
     , _olcvCategoryId               :: !(Maybe Text)
     , _olcvPageToken                :: !(Maybe Text)
-    , _olcvOauthToken               :: !(Maybe Text)
+    , _olcvOAuthToken               :: !(Maybe OAuthToken)
     , _olcvPageSize                 :: !(Maybe Word32)
     , _olcvFields                   :: !(Maybe Text)
-    , _olcvAlt                      :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OnboardingListCategoryVolumes'' with the minimum fields required to make a request.
@@ -93,7 +91,7 @@ data OnboardingListCategoryVolumes' = OnboardingListCategoryVolumes'
 --
 -- * 'olcvPrettyPrint'
 --
--- * 'olcvUserIp'
+-- * 'olcvUserIP'
 --
 -- * 'olcvLocale'
 --
@@ -105,29 +103,26 @@ data OnboardingListCategoryVolumes' = OnboardingListCategoryVolumes'
 --
 -- * 'olcvPageToken'
 --
--- * 'olcvOauthToken'
+-- * 'olcvOAuthToken'
 --
 -- * 'olcvPageSize'
 --
 -- * 'olcvFields'
---
--- * 'olcvAlt'
 onboardingListCategoryVolumes'
     :: OnboardingListCategoryVolumes'
 onboardingListCategoryVolumes' =
     OnboardingListCategoryVolumes'
     { _olcvQuotaUser = Nothing
     , _olcvPrettyPrint = True
-    , _olcvUserIp = Nothing
+    , _olcvUserIP = Nothing
     , _olcvLocale = Nothing
     , _olcvMaxAllowedMaturityRating = Nothing
     , _olcvKey = Nothing
     , _olcvCategoryId = Nothing
     , _olcvPageToken = Nothing
-    , _olcvOauthToken = Nothing
+    , _olcvOAuthToken = Nothing
     , _olcvPageSize = Nothing
     , _olcvFields = Nothing
-    , _olcvAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -146,9 +141,9 @@ olcvPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-olcvUserIp :: Lens' OnboardingListCategoryVolumes' (Maybe Text)
-olcvUserIp
-  = lens _olcvUserIp (\ s a -> s{_olcvUserIp = a})
+olcvUserIP :: Lens' OnboardingListCategoryVolumes' (Maybe Text)
+olcvUserIP
+  = lens _olcvUserIP (\ s a -> s{_olcvUserIP = a})
 
 -- | ISO-639-1 language and ISO-3166-1 country code. Default is en-US if
 -- unset.
@@ -166,7 +161,7 @@ olcvMaxAllowedMaturityRating
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-olcvKey :: Lens' OnboardingListCategoryVolumes' (Maybe Text)
+olcvKey :: Lens' OnboardingListCategoryVolumes' (Maybe Key)
 olcvKey = lens _olcvKey (\ s a -> s{_olcvKey = a})
 
 -- | List of category ids requested.
@@ -182,10 +177,10 @@ olcvPageToken
       (\ s a -> s{_olcvPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-olcvOauthToken :: Lens' OnboardingListCategoryVolumes' (Maybe Text)
-olcvOauthToken
-  = lens _olcvOauthToken
-      (\ s a -> s{_olcvOauthToken = a})
+olcvOAuthToken :: Lens' OnboardingListCategoryVolumes' (Maybe OAuthToken)
+olcvOAuthToken
+  = lens _olcvOAuthToken
+      (\ s a -> s{_olcvOAuthToken = a})
 
 -- | Number of maximum results per page to be included in the response.
 olcvPageSize :: Lens' OnboardingListCategoryVolumes' (Maybe Word32)
@@ -197,9 +192,10 @@ olcvFields :: Lens' OnboardingListCategoryVolumes' (Maybe Text)
 olcvFields
   = lens _olcvFields (\ s a -> s{_olcvFields = a})
 
--- | Data format for the response.
-olcvAlt :: Lens' OnboardingListCategoryVolumes' Alt
-olcvAlt = lens _olcvAlt (\ s a -> s{_olcvAlt = a})
+instance GoogleAuth OnboardingListCategoryVolumes'
+         where
+        authKey = olcvKey . _Just
+        authToken = olcvOAuthToken . _Just
 
 instance GoogleRequest OnboardingListCategoryVolumes'
          where
@@ -208,16 +204,16 @@ instance GoogleRequest OnboardingListCategoryVolumes'
         requestWithRoute r u
           OnboardingListCategoryVolumes'{..}
           = go _olcvQuotaUser (Just _olcvPrettyPrint)
-              _olcvUserIp
+              _olcvUserIP
               _olcvLocale
               _olcvMaxAllowedMaturityRating
               _olcvKey
               _olcvCategoryId
               _olcvPageToken
-              _olcvOauthToken
+              _olcvOAuthToken
               _olcvPageSize
               _olcvFields
-              (Just _olcvAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

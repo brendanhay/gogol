@@ -34,12 +34,11 @@ module Network.Google.Resource.Compute.TargetPools.Delete
     , tpdPrettyPrint
     , tpdProject
     , tpdTargetPool
-    , tpdUserIp
+    , tpdUserIP
     , tpdKey
     , tpdRegion
-    , tpdOauthToken
+    , tpdOAuthToken
     , tpdFields
-    , tpdAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -56,10 +55,10 @@ type TargetPoolsDeleteResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Delete '[JSON] Operation
+                           QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified TargetPool resource.
 --
@@ -69,12 +68,11 @@ data TargetPoolsDelete' = TargetPoolsDelete'
     , _tpdPrettyPrint :: !Bool
     , _tpdProject     :: !Text
     , _tpdTargetPool  :: !Text
-    , _tpdUserIp      :: !(Maybe Text)
-    , _tpdKey         :: !(Maybe Text)
+    , _tpdUserIP      :: !(Maybe Text)
+    , _tpdKey         :: !(Maybe Key)
     , _tpdRegion      :: !Text
-    , _tpdOauthToken  :: !(Maybe Text)
+    , _tpdOAuthToken  :: !(Maybe OAuthToken)
     , _tpdFields      :: !(Maybe Text)
-    , _tpdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetPoolsDelete'' with the minimum fields required to make a request.
@@ -89,17 +87,15 @@ data TargetPoolsDelete' = TargetPoolsDelete'
 --
 -- * 'tpdTargetPool'
 --
--- * 'tpdUserIp'
+-- * 'tpdUserIP'
 --
 -- * 'tpdKey'
 --
 -- * 'tpdRegion'
 --
--- * 'tpdOauthToken'
+-- * 'tpdOAuthToken'
 --
 -- * 'tpdFields'
---
--- * 'tpdAlt'
 targetPoolsDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'targetPool'
@@ -111,12 +107,11 @@ targetPoolsDelete' pTpdProject_ pTpdTargetPool_ pTpdRegion_ =
     , _tpdPrettyPrint = True
     , _tpdProject = pTpdProject_
     , _tpdTargetPool = pTpdTargetPool_
-    , _tpdUserIp = Nothing
+    , _tpdUserIP = Nothing
     , _tpdKey = Nothing
     , _tpdRegion = pTpdRegion_
-    , _tpdOauthToken = Nothing
+    , _tpdOAuthToken = Nothing
     , _tpdFields = Nothing
-    , _tpdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -145,14 +140,14 @@ tpdTargetPool
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tpdUserIp :: Lens' TargetPoolsDelete' (Maybe Text)
-tpdUserIp
-  = lens _tpdUserIp (\ s a -> s{_tpdUserIp = a})
+tpdUserIP :: Lens' TargetPoolsDelete' (Maybe Text)
+tpdUserIP
+  = lens _tpdUserIP (\ s a -> s{_tpdUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tpdKey :: Lens' TargetPoolsDelete' (Maybe Text)
+tpdKey :: Lens' TargetPoolsDelete' (Maybe Key)
 tpdKey = lens _tpdKey (\ s a -> s{_tpdKey = a})
 
 -- | Name of the region scoping this request.
@@ -161,19 +156,19 @@ tpdRegion
   = lens _tpdRegion (\ s a -> s{_tpdRegion = a})
 
 -- | OAuth 2.0 token for the current user.
-tpdOauthToken :: Lens' TargetPoolsDelete' (Maybe Text)
-tpdOauthToken
-  = lens _tpdOauthToken
-      (\ s a -> s{_tpdOauthToken = a})
+tpdOAuthToken :: Lens' TargetPoolsDelete' (Maybe OAuthToken)
+tpdOAuthToken
+  = lens _tpdOAuthToken
+      (\ s a -> s{_tpdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 tpdFields :: Lens' TargetPoolsDelete' (Maybe Text)
 tpdFields
   = lens _tpdFields (\ s a -> s{_tpdFields = a})
 
--- | Data format for the response.
-tpdAlt :: Lens' TargetPoolsDelete' Alt
-tpdAlt = lens _tpdAlt (\ s a -> s{_tpdAlt = a})
+instance GoogleAuth TargetPoolsDelete' where
+        authKey = tpdKey . _Just
+        authToken = tpdOAuthToken . _Just
 
 instance GoogleRequest TargetPoolsDelete' where
         type Rs TargetPoolsDelete' = Operation
@@ -181,12 +176,12 @@ instance GoogleRequest TargetPoolsDelete' where
         requestWithRoute r u TargetPoolsDelete'{..}
           = go _tpdQuotaUser (Just _tpdPrettyPrint) _tpdProject
               _tpdTargetPool
-              _tpdUserIp
+              _tpdUserIP
               _tpdKey
               _tpdRegion
-              _tpdOauthToken
+              _tpdOAuthToken
               _tpdFields
-              (Just _tpdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TargetPoolsDeleteResource)

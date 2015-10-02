@@ -34,7 +34,7 @@ module Network.Google.Resource.Books.Layers.AnnotationData.Get
     , ladgW
     , ladgPrettyPrint
     , ladgScale
-    , ladgUserIp
+    , ladgUserIP
     , ladgLocale
     , ladgContentVersion
     , ladgKey
@@ -43,10 +43,9 @@ module Network.Google.Resource.Books.Layers.AnnotationData.Get
     , ladgVolumeId
     , ladgSource
     , ladgH
-    , ladgOauthToken
+    , ladgOAuthToken
     , ladgLayerId
     , ladgFields
-    , ladgAlt
     ) where
 
 import           Network.Google.Books.Types
@@ -68,13 +67,13 @@ type LayersAnnotationDataGetResource =
                          QueryParam "userIp" Text :>
                            QueryParam "locale" Text :>
                              QueryParam "contentVersion" Text :>
-                               QueryParam "key" Text :>
+                               QueryParam "key" Key :>
                                  QueryParam "allowWebDefinitions" Bool :>
                                    QueryParam "source" Text :>
                                      QueryParam "h" Int32 :>
-                                       QueryParam "oauth_token" Text :>
+                                       QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "fields" Text :>
-                                           QueryParam "alt" Alt :>
+                                           QueryParam "alt" AltJSON :>
                                              Get '[JSON] Annotationdata
 
 -- | Gets the annotation data.
@@ -85,19 +84,18 @@ data LayersAnnotationDataGet' = LayersAnnotationDataGet'
     , _ladgW                   :: !(Maybe Int32)
     , _ladgPrettyPrint         :: !Bool
     , _ladgScale               :: !(Maybe Int32)
-    , _ladgUserIp              :: !(Maybe Text)
+    , _ladgUserIP              :: !(Maybe Text)
     , _ladgLocale              :: !(Maybe Text)
     , _ladgContentVersion      :: !Text
-    , _ladgKey                 :: !(Maybe Text)
+    , _ladgKey                 :: !(Maybe Key)
     , _ladgAllowWebDefinitions :: !(Maybe Bool)
     , _ladgAnnotationDataId    :: !Text
     , _ladgVolumeId            :: !Text
     , _ladgSource              :: !(Maybe Text)
     , _ladgH                   :: !(Maybe Int32)
-    , _ladgOauthToken          :: !(Maybe Text)
+    , _ladgOAuthToken          :: !(Maybe OAuthToken)
     , _ladgLayerId             :: !Text
     , _ladgFields              :: !(Maybe Text)
-    , _ladgAlt                 :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersAnnotationDataGet'' with the minimum fields required to make a request.
@@ -112,7 +110,7 @@ data LayersAnnotationDataGet' = LayersAnnotationDataGet'
 --
 -- * 'ladgScale'
 --
--- * 'ladgUserIp'
+-- * 'ladgUserIP'
 --
 -- * 'ladgLocale'
 --
@@ -130,13 +128,11 @@ data LayersAnnotationDataGet' = LayersAnnotationDataGet'
 --
 -- * 'ladgH'
 --
--- * 'ladgOauthToken'
+-- * 'ladgOAuthToken'
 --
 -- * 'ladgLayerId'
 --
 -- * 'ladgFields'
---
--- * 'ladgAlt'
 layersAnnotationDataGet'
     :: Text -- ^ 'contentVersion'
     -> Text -- ^ 'annotationDataId'
@@ -149,7 +145,7 @@ layersAnnotationDataGet' pLadgContentVersion_ pLadgAnnotationDataId_ pLadgVolume
     , _ladgW = Nothing
     , _ladgPrettyPrint = True
     , _ladgScale = Nothing
-    , _ladgUserIp = Nothing
+    , _ladgUserIP = Nothing
     , _ladgLocale = Nothing
     , _ladgContentVersion = pLadgContentVersion_
     , _ladgKey = Nothing
@@ -158,10 +154,9 @@ layersAnnotationDataGet' pLadgContentVersion_ pLadgAnnotationDataId_ pLadgVolume
     , _ladgVolumeId = pLadgVolumeId_
     , _ladgSource = Nothing
     , _ladgH = Nothing
-    , _ladgOauthToken = Nothing
+    , _ladgOAuthToken = Nothing
     , _ladgLayerId = pLadgLayerId_
     , _ladgFields = Nothing
-    , _ladgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -190,9 +185,9 @@ ladgScale
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ladgUserIp :: Lens' LayersAnnotationDataGet' (Maybe Text)
-ladgUserIp
-  = lens _ladgUserIp (\ s a -> s{_ladgUserIp = a})
+ladgUserIP :: Lens' LayersAnnotationDataGet' (Maybe Text)
+ladgUserIP
+  = lens _ladgUserIP (\ s a -> s{_ladgUserIP = a})
 
 -- | The locale information for the data. ISO-639-1 language and ISO-3166-1
 -- country code. Ex: \'en_US\'.
@@ -209,7 +204,7 @@ ladgContentVersion
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ladgKey :: Lens' LayersAnnotationDataGet' (Maybe Text)
+ladgKey :: Lens' LayersAnnotationDataGet' (Maybe Key)
 ladgKey = lens _ladgKey (\ s a -> s{_ladgKey = a})
 
 -- | For the dictionary layer. Whether or not to allow web definitions.
@@ -240,10 +235,10 @@ ladgH :: Lens' LayersAnnotationDataGet' (Maybe Int32)
 ladgH = lens _ladgH (\ s a -> s{_ladgH = a})
 
 -- | OAuth 2.0 token for the current user.
-ladgOauthToken :: Lens' LayersAnnotationDataGet' (Maybe Text)
-ladgOauthToken
-  = lens _ladgOauthToken
-      (\ s a -> s{_ladgOauthToken = a})
+ladgOAuthToken :: Lens' LayersAnnotationDataGet' (Maybe OAuthToken)
+ladgOAuthToken
+  = lens _ladgOAuthToken
+      (\ s a -> s{_ladgOAuthToken = a})
 
 -- | The ID for the layer to get the annotations.
 ladgLayerId :: Lens' LayersAnnotationDataGet' Text
@@ -255,9 +250,9 @@ ladgFields :: Lens' LayersAnnotationDataGet' (Maybe Text)
 ladgFields
   = lens _ladgFields (\ s a -> s{_ladgFields = a})
 
--- | Data format for the response.
-ladgAlt :: Lens' LayersAnnotationDataGet' Alt
-ladgAlt = lens _ladgAlt (\ s a -> s{_ladgAlt = a})
+instance GoogleAuth LayersAnnotationDataGet' where
+        authKey = ladgKey . _Just
+        authToken = ladgOAuthToken . _Just
 
 instance GoogleRequest LayersAnnotationDataGet' where
         type Rs LayersAnnotationDataGet' = Annotationdata
@@ -265,7 +260,7 @@ instance GoogleRequest LayersAnnotationDataGet' where
         requestWithRoute r u LayersAnnotationDataGet'{..}
           = go _ladgQuotaUser _ladgW (Just _ladgPrettyPrint)
               _ladgScale
-              _ladgUserIp
+              _ladgUserIP
               _ladgLocale
               (Just _ladgContentVersion)
               _ladgKey
@@ -274,10 +269,10 @@ instance GoogleRequest LayersAnnotationDataGet' where
               _ladgVolumeId
               _ladgSource
               _ladgH
-              _ladgOauthToken
+              _ladgOAuthToken
               _ladgLayerId
               _ladgFields
-              (Just _ladgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy LayersAnnotationDataGetResource)

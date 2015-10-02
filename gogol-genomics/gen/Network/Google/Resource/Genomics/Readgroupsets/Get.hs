@@ -33,11 +33,10 @@ module Network.Google.Resource.Genomics.Readgroupsets.Get
     , rgQuotaUser
     , rgPrettyPrint
     , rgReadGroupSetId
-    , rgUserIp
+    , rgUserIP
     , rgKey
-    , rgOauthToken
+    , rgOAuthToken
     , rgFields
-    , rgAlt
     ) where
 
 import           Network.Google.Genomics.Types
@@ -51,10 +50,10 @@ type ReadgroupsetsGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Get '[JSON] ReadGroupSet
+                     QueryParam "alt" AltJSON :> Get '[JSON] ReadGroupSet
 
 -- | Gets a read group set by ID.
 --
@@ -63,11 +62,10 @@ data ReadgroupsetsGet' = ReadgroupsetsGet'
     { _rgQuotaUser      :: !(Maybe Text)
     , _rgPrettyPrint    :: !Bool
     , _rgReadGroupSetId :: !Text
-    , _rgUserIp         :: !(Maybe Text)
-    , _rgKey            :: !(Maybe Text)
-    , _rgOauthToken     :: !(Maybe Text)
+    , _rgUserIP         :: !(Maybe Text)
+    , _rgKey            :: !(Maybe Key)
+    , _rgOAuthToken     :: !(Maybe OAuthToken)
     , _rgFields         :: !(Maybe Text)
-    , _rgAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReadgroupsetsGet'' with the minimum fields required to make a request.
@@ -80,15 +78,13 @@ data ReadgroupsetsGet' = ReadgroupsetsGet'
 --
 -- * 'rgReadGroupSetId'
 --
--- * 'rgUserIp'
+-- * 'rgUserIP'
 --
 -- * 'rgKey'
 --
--- * 'rgOauthToken'
+-- * 'rgOAuthToken'
 --
 -- * 'rgFields'
---
--- * 'rgAlt'
 readgroupsetsGet'
     :: Text -- ^ 'readGroupSetId'
     -> ReadgroupsetsGet'
@@ -97,11 +93,10 @@ readgroupsetsGet' pRgReadGroupSetId_ =
     { _rgQuotaUser = Nothing
     , _rgPrettyPrint = True
     , _rgReadGroupSetId = pRgReadGroupSetId_
-    , _rgUserIp = Nothing
+    , _rgUserIP = Nothing
     , _rgKey = Nothing
-    , _rgOauthToken = Nothing
+    , _rgOAuthToken = Nothing
     , _rgFields = Nothing
-    , _rgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -125,27 +120,27 @@ rgReadGroupSetId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rgUserIp :: Lens' ReadgroupsetsGet' (Maybe Text)
-rgUserIp = lens _rgUserIp (\ s a -> s{_rgUserIp = a})
+rgUserIP :: Lens' ReadgroupsetsGet' (Maybe Text)
+rgUserIP = lens _rgUserIP (\ s a -> s{_rgUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rgKey :: Lens' ReadgroupsetsGet' (Maybe Text)
+rgKey :: Lens' ReadgroupsetsGet' (Maybe Key)
 rgKey = lens _rgKey (\ s a -> s{_rgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-rgOauthToken :: Lens' ReadgroupsetsGet' (Maybe Text)
-rgOauthToken
-  = lens _rgOauthToken (\ s a -> s{_rgOauthToken = a})
+rgOAuthToken :: Lens' ReadgroupsetsGet' (Maybe OAuthToken)
+rgOAuthToken
+  = lens _rgOAuthToken (\ s a -> s{_rgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 rgFields :: Lens' ReadgroupsetsGet' (Maybe Text)
 rgFields = lens _rgFields (\ s a -> s{_rgFields = a})
 
--- | Data format for the response.
-rgAlt :: Lens' ReadgroupsetsGet' Alt
-rgAlt = lens _rgAlt (\ s a -> s{_rgAlt = a})
+instance GoogleAuth ReadgroupsetsGet' where
+        authKey = rgKey . _Just
+        authToken = rgOAuthToken . _Just
 
 instance GoogleRequest ReadgroupsetsGet' where
         type Rs ReadgroupsetsGet' = ReadGroupSet
@@ -153,11 +148,11 @@ instance GoogleRequest ReadgroupsetsGet' where
         requestWithRoute r u ReadgroupsetsGet'{..}
           = go _rgQuotaUser (Just _rgPrettyPrint)
               _rgReadGroupSetId
-              _rgUserIp
+              _rgUserIP
               _rgKey
-              _rgOauthToken
+              _rgOAuthToken
               _rgFields
-              (Just _rgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ReadgroupsetsGetResource)

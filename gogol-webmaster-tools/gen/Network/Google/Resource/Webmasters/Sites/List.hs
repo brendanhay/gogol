@@ -32,11 +32,10 @@ module Network.Google.Resource.Webmasters.Sites.List
     -- * Request Lenses
     , slQuotaUser
     , slPrettyPrint
-    , slUserIp
+    , slUserIP
     , slKey
-    , slOauthToken
+    , slOAuthToken
     , slFields
-    , slAlt
     ) where
 
 import           Network.Google.Prelude
@@ -49,10 +48,11 @@ type SitesListResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
-               QueryParam "oauth_token" Text :>
+             QueryParam "key" Key :>
+               QueryParam "oauth_token" OAuthToken :>
                  QueryParam "fields" Text :>
-                   QueryParam "alt" Alt :> Get '[JSON] SitesListResponse
+                   QueryParam "alt" AltJSON :>
+                     Get '[JSON] SitesListResponse
 
 -- | Lists the user\'s Webmaster Tools sites.
 --
@@ -60,11 +60,10 @@ type SitesListResource =
 data SitesList' = SitesList'
     { _slQuotaUser   :: !(Maybe Text)
     , _slPrettyPrint :: !Bool
-    , _slUserIp      :: !(Maybe Text)
-    , _slKey         :: !(Maybe Text)
-    , _slOauthToken  :: !(Maybe Text)
+    , _slUserIP      :: !(Maybe Text)
+    , _slKey         :: !(Maybe Key)
+    , _slOAuthToken  :: !(Maybe OAuthToken)
     , _slFields      :: !(Maybe Text)
-    , _slAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SitesList'' with the minimum fields required to make a request.
@@ -75,26 +74,23 @@ data SitesList' = SitesList'
 --
 -- * 'slPrettyPrint'
 --
--- * 'slUserIp'
+-- * 'slUserIP'
 --
 -- * 'slKey'
 --
--- * 'slOauthToken'
+-- * 'slOAuthToken'
 --
 -- * 'slFields'
---
--- * 'slAlt'
 sitesList'
     :: SitesList'
 sitesList' =
     SitesList'
     { _slQuotaUser = Nothing
     , _slPrettyPrint = True
-    , _slUserIp = Nothing
+    , _slUserIP = Nothing
     , _slKey = Nothing
-    , _slOauthToken = Nothing
+    , _slOAuthToken = Nothing
     , _slFields = Nothing
-    , _slAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -112,37 +108,37 @@ slPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-slUserIp :: Lens' SitesList' (Maybe Text)
-slUserIp = lens _slUserIp (\ s a -> s{_slUserIp = a})
+slUserIP :: Lens' SitesList' (Maybe Text)
+slUserIP = lens _slUserIP (\ s a -> s{_slUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-slKey :: Lens' SitesList' (Maybe Text)
+slKey :: Lens' SitesList' (Maybe Key)
 slKey = lens _slKey (\ s a -> s{_slKey = a})
 
 -- | OAuth 2.0 token for the current user.
-slOauthToken :: Lens' SitesList' (Maybe Text)
-slOauthToken
-  = lens _slOauthToken (\ s a -> s{_slOauthToken = a})
+slOAuthToken :: Lens' SitesList' (Maybe OAuthToken)
+slOAuthToken
+  = lens _slOAuthToken (\ s a -> s{_slOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 slFields :: Lens' SitesList' (Maybe Text)
 slFields = lens _slFields (\ s a -> s{_slFields = a})
 
--- | Data format for the response.
-slAlt :: Lens' SitesList' Alt
-slAlt = lens _slAlt (\ s a -> s{_slAlt = a})
+instance GoogleAuth SitesList' where
+        authKey = slKey . _Just
+        authToken = slOAuthToken . _Just
 
 instance GoogleRequest SitesList' where
         type Rs SitesList' = SitesListResponse
         request = requestWithRoute defReq webmasterToolsURL
         requestWithRoute r u SitesList'{..}
-          = go _slQuotaUser (Just _slPrettyPrint) _slUserIp
+          = go _slQuotaUser (Just _slPrettyPrint) _slUserIP
               _slKey
-              _slOauthToken
+              _slOAuthToken
               _slFields
-              (Just _slAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy SitesListResource)
                       r

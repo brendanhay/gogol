@@ -31,21 +31,21 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.Resource.Cloudresourcemanager.Organizations.Get
-        , Network.Google.Resource.Cloudresourcemanager.Organizations.GetIAMPolicy
-        , Network.Google.Resource.Cloudresourcemanager.Organizations.List
-        , Network.Google.Resource.Cloudresourcemanager.Organizations.SetIAMPolicy
-        , Network.Google.Resource.Cloudresourcemanager.Organizations.TestIAMPermissions
-        , Network.Google.Resource.Cloudresourcemanager.Organizations.Update
-        , Network.Google.Resource.Cloudresourcemanager.Projects.Create
-        , Network.Google.Resource.Cloudresourcemanager.Projects.Delete
-        , Network.Google.Resource.Cloudresourcemanager.Projects.Get
-        , Network.Google.Resource.Cloudresourcemanager.Projects.GetIAMPolicy
-        , Network.Google.Resource.Cloudresourcemanager.Projects.List
-        , Network.Google.Resource.Cloudresourcemanager.Projects.SetIAMPolicy
-        , Network.Google.Resource.Cloudresourcemanager.Projects.TestIAMPermissions
-        , Network.Google.Resource.Cloudresourcemanager.Projects.Undelete
-        , Network.Google.Resource.Cloudresourcemanager.Projects.Update
+          Network.Google.Resource.CloudResourceManager.Organizations.Get
+        , Network.Google.Resource.CloudResourceManager.Organizations.GetIAMPolicy
+        , Network.Google.Resource.CloudResourceManager.Organizations.List
+        , Network.Google.Resource.CloudResourceManager.Organizations.SetIAMPolicy
+        , Network.Google.Resource.CloudResourceManager.Organizations.TestIAMPermissions
+        , Network.Google.Resource.CloudResourceManager.Organizations.Update
+        , Network.Google.Resource.CloudResourceManager.Projects.Create
+        , Network.Google.Resource.CloudResourceManager.Projects.Delete
+        , Network.Google.Resource.CloudResourceManager.Projects.Get
+        , Network.Google.Resource.CloudResourceManager.Projects.GetIAMPolicy
+        , Network.Google.Resource.CloudResourceManager.Projects.List
+        , Network.Google.Resource.CloudResourceManager.Projects.SetIAMPolicy
+        , Network.Google.Resource.CloudResourceManager.Projects.TestIAMPermissions
+        , Network.Google.Resource.CloudResourceManager.Projects.Undelete
+        , Network.Google.Resource.CloudResourceManager.Projects.Update
         , Network.Google.ResourceManager
         , Network.Google.ResourceManager.Types
 

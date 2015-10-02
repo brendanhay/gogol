@@ -32,12 +32,11 @@ module Network.Google.Resource.Directory.Users.Photos.Get
     -- * Request Lenses
     , upgQuotaUser
     , upgPrettyPrint
-    , upgUserIp
+    , upgUserIP
     , upgKey
-    , upgOauthToken
+    , upgOAuthToken
     , upgUserKey
     , upgFields
-    , upgAlt
     ) where
 
 import           Network.Google.AdminDirectory.Types
@@ -53,10 +52,10 @@ type UsersPhotosGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] UserPhoto
+                         QueryParam "alt" AltJSON :> Get '[JSON] UserPhoto
 
 -- | Retrieve photo of a user
 --
@@ -64,12 +63,11 @@ type UsersPhotosGetResource =
 data UsersPhotosGet' = UsersPhotosGet'
     { _upgQuotaUser   :: !(Maybe Text)
     , _upgPrettyPrint :: !Bool
-    , _upgUserIp      :: !(Maybe Text)
-    , _upgKey         :: !(Maybe Text)
-    , _upgOauthToken  :: !(Maybe Text)
+    , _upgUserIP      :: !(Maybe Text)
+    , _upgKey         :: !(Maybe Key)
+    , _upgOAuthToken  :: !(Maybe OAuthToken)
     , _upgUserKey     :: !Text
     , _upgFields      :: !(Maybe Text)
-    , _upgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersPhotosGet'' with the minimum fields required to make a request.
@@ -80,17 +78,15 @@ data UsersPhotosGet' = UsersPhotosGet'
 --
 -- * 'upgPrettyPrint'
 --
--- * 'upgUserIp'
+-- * 'upgUserIP'
 --
 -- * 'upgKey'
 --
--- * 'upgOauthToken'
+-- * 'upgOAuthToken'
 --
 -- * 'upgUserKey'
 --
 -- * 'upgFields'
---
--- * 'upgAlt'
 usersPhotosGet'
     :: Text -- ^ 'userKey'
     -> UsersPhotosGet'
@@ -98,12 +94,11 @@ usersPhotosGet' pUpgUserKey_ =
     UsersPhotosGet'
     { _upgQuotaUser = Nothing
     , _upgPrettyPrint = True
-    , _upgUserIp = Nothing
+    , _upgUserIP = Nothing
     , _upgKey = Nothing
-    , _upgOauthToken = Nothing
+    , _upgOAuthToken = Nothing
     , _upgUserKey = pUpgUserKey_
     , _upgFields = Nothing
-    , _upgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -121,21 +116,21 @@ upgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-upgUserIp :: Lens' UsersPhotosGet' (Maybe Text)
-upgUserIp
-  = lens _upgUserIp (\ s a -> s{_upgUserIp = a})
+upgUserIP :: Lens' UsersPhotosGet' (Maybe Text)
+upgUserIP
+  = lens _upgUserIP (\ s a -> s{_upgUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-upgKey :: Lens' UsersPhotosGet' (Maybe Text)
+upgKey :: Lens' UsersPhotosGet' (Maybe Key)
 upgKey = lens _upgKey (\ s a -> s{_upgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-upgOauthToken :: Lens' UsersPhotosGet' (Maybe Text)
-upgOauthToken
-  = lens _upgOauthToken
-      (\ s a -> s{_upgOauthToken = a})
+upgOAuthToken :: Lens' UsersPhotosGet' (Maybe OAuthToken)
+upgOAuthToken
+  = lens _upgOAuthToken
+      (\ s a -> s{_upgOAuthToken = a})
 
 -- | Email or immutable Id of the user
 upgUserKey :: Lens' UsersPhotosGet' Text
@@ -147,20 +142,20 @@ upgFields :: Lens' UsersPhotosGet' (Maybe Text)
 upgFields
   = lens _upgFields (\ s a -> s{_upgFields = a})
 
--- | Data format for the response.
-upgAlt :: Lens' UsersPhotosGet' Alt
-upgAlt = lens _upgAlt (\ s a -> s{_upgAlt = a})
+instance GoogleAuth UsersPhotosGet' where
+        authKey = upgKey . _Just
+        authToken = upgOAuthToken . _Just
 
 instance GoogleRequest UsersPhotosGet' where
         type Rs UsersPhotosGet' = UserPhoto
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u UsersPhotosGet'{..}
-          = go _upgQuotaUser (Just _upgPrettyPrint) _upgUserIp
+          = go _upgQuotaUser (Just _upgPrettyPrint) _upgUserIP
               _upgKey
-              _upgOauthToken
+              _upgOAuthToken
               _upgUserKey
               _upgFields
-              (Just _upgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersPhotosGetResource)

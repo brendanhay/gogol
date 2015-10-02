@@ -35,7 +35,7 @@ module Network.Google.Method.Freebase.Search
     , sPrettyPrint
     , sCursor
     , sWith
-    , sUserIp
+    , sUserIP
     , sDomain
     , sFormat
     , sHelp
@@ -51,7 +51,7 @@ module Network.Google.Method.Freebase.Search
     , sMid
     , sType
     , sStemmed
-    , sOauthToken
+    , sOAuthToken
     , sExact
     , sSpell
     , sAsOfTime
@@ -59,7 +59,6 @@ module Network.Google.Method.Freebase.Search
     , sPrefixed
     , sFields
     , sCallback
-    , sAlt
     ) where
 
 import           Network.Google.FreebaseSearch.Types
@@ -80,7 +79,7 @@ type SearchMethod =
                        QueryParam "help" FreebaseSearchHelp :>
                          QueryParams "lang" Text :>
                            QueryParam "indent" Bool :>
-                             QueryParam "key" Text :>
+                             QueryParam "key" Key :>
                                QueryParam "output" Text :>
                                  QueryParam "query" Text :>
                                    QueryParam "scoring" FreebaseSearchScoring :>
@@ -90,7 +89,8 @@ type SearchMethod =
                                            QueryParams "mid" Text :>
                                              QueryParams "type" Text :>
                                                QueryParam "stemmed" Bool :>
-                                                 QueryParam "oauth_token" Text
+                                                 QueryParam "oauth_token"
+                                                   OAuthToken
                                                    :>
                                                    QueryParam "exact" Bool :>
                                                      QueryParam "spell"
@@ -114,10 +114,66 @@ type SearchMethod =
                                                                  :>
                                                                  QueryParam
                                                                    "alt"
-                                                                   Alt
+                                                                   AltJSON
                                                                    :>
                                                                    Get '[JSON]
                                                                      ()
+       :<|>
+       "search" :>
+         QueryParams "without" Text :>
+           QueryParam "quotaUser" Text :>
+             QueryParam "prettyPrint" Bool :>
+               QueryParam "cursor" Int32 :>
+                 QueryParams "with" Text :>
+                   QueryParam "userIp" Text :>
+                     QueryParams "domain" Text :>
+                       QueryParam "format" FreebaseSearchFormat :>
+                         QueryParam "help" FreebaseSearchHelp :>
+                           QueryParams "lang" Text :>
+                             QueryParam "indent" Bool :>
+                               QueryParam "key" Key :>
+                                 QueryParam "output" Text :>
+                                   QueryParam "query" Text :>
+                                     QueryParam "scoring" FreebaseSearchScoring
+                                       :>
+                                       QueryParam "limit" Int32 :>
+                                         QueryParams "filter" Text :>
+                                           QueryParam "mql_output" Text :>
+                                             QueryParams "mid" Text :>
+                                               QueryParams "type" Text :>
+                                                 QueryParam "stemmed" Bool :>
+                                                   QueryParam "oauth_token"
+                                                     OAuthToken
+                                                     :>
+                                                     QueryParam "exact" Bool :>
+                                                       QueryParam "spell"
+                                                         FreebaseSearchSpell
+                                                         :>
+                                                         QueryParam "as_of_time"
+                                                           Text
+                                                           :>
+                                                           QueryParam "encode"
+                                                             FreebaseSearchEncode
+                                                             :>
+                                                             QueryParam
+                                                               "prefixed"
+                                                               Bool
+                                                               :>
+                                                               QueryParam
+                                                                 "fields"
+                                                                 Text
+                                                                 :>
+                                                                 QueryParam
+                                                                   "callback"
+                                                                   Text
+                                                                   :>
+                                                                   QueryParam
+                                                                     "alt"
+                                                                     Media
+                                                                     :>
+                                                                     Get
+                                                                       '[OctetStream]
+                                                                       Stream
 
 -- | Search Freebase open data.
 --
@@ -128,13 +184,13 @@ data Search' = Search'
     , _sPrettyPrint :: !Bool
     , _sCursor      :: !(Maybe Int32)
     , _sWith        :: !(Maybe Text)
-    , _sUserIp      :: !(Maybe Text)
+    , _sUserIP      :: !(Maybe Text)
     , _sDomain      :: !(Maybe Text)
     , _sFormat      :: !FreebaseSearchFormat
     , _sHelp        :: !(Maybe FreebaseSearchHelp)
     , _sLang        :: !(Maybe Text)
     , _sIndent      :: !(Maybe Bool)
-    , _sKey         :: !(Maybe Text)
+    , _sKey         :: !(Maybe Key)
     , _sOutput      :: !(Maybe Text)
     , _sQuery       :: !(Maybe Text)
     , _sScoring     :: !FreebaseSearchScoring
@@ -144,7 +200,7 @@ data Search' = Search'
     , _sMid         :: !(Maybe Text)
     , _sType        :: !(Maybe Text)
     , _sStemmed     :: !(Maybe Bool)
-    , _sOauthToken  :: !(Maybe Text)
+    , _sOAuthToken  :: !(Maybe OAuthToken)
     , _sExact       :: !(Maybe Bool)
     , _sSpell       :: !FreebaseSearchSpell
     , _sAsOfTime    :: !(Maybe Text)
@@ -152,7 +208,6 @@ data Search' = Search'
     , _sPrefixed    :: !(Maybe Bool)
     , _sFields      :: !(Maybe Text)
     , _sCallback    :: !(Maybe Text)
-    , _sAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Search'' with the minimum fields required to make a request.
@@ -169,7 +224,7 @@ data Search' = Search'
 --
 -- * 'sWith'
 --
--- * 'sUserIp'
+-- * 'sUserIP'
 --
 -- * 'sDomain'
 --
@@ -201,7 +256,7 @@ data Search' = Search'
 --
 -- * 'sStemmed'
 --
--- * 'sOauthToken'
+-- * 'sOAuthToken'
 --
 -- * 'sExact'
 --
@@ -216,8 +271,6 @@ data Search' = Search'
 -- * 'sFields'
 --
 -- * 'sCallback'
---
--- * 'sAlt'
 search'
     :: Search'
 search' =
@@ -227,7 +280,7 @@ search' =
     , _sPrettyPrint = True
     , _sCursor = Nothing
     , _sWith = Nothing
-    , _sUserIp = Nothing
+    , _sUserIP = Nothing
     , _sDomain = Nothing
     , _sFormat = Entity
     , _sHelp = Nothing
@@ -243,7 +296,7 @@ search' =
     , _sMid = Nothing
     , _sType = Nothing
     , _sStemmed = Nothing
-    , _sOauthToken = Nothing
+    , _sOAuthToken = Nothing
     , _sExact = Nothing
     , _sSpell = NoSpelling
     , _sAsOfTime = Nothing
@@ -251,7 +304,6 @@ search' =
     , _sPrefixed = Nothing
     , _sFields = Nothing
     , _sCallback = Nothing
-    , _sAlt = JSON
     }
 
 -- | A rule to not match against.
@@ -280,8 +332,8 @@ sWith = lens _sWith (\ s a -> s{_sWith = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-sUserIp :: Lens' Search' (Maybe Text)
-sUserIp = lens _sUserIp (\ s a -> s{_sUserIp = a})
+sUserIP :: Lens' Search' (Maybe Text)
+sUserIP = lens _sUserIP (\ s a -> s{_sUserIP = a})
 
 -- | Restrict to topics with this Freebase domain id.
 sDomain :: Lens' Search' (Maybe Text)
@@ -306,7 +358,7 @@ sIndent = lens _sIndent (\ s a -> s{_sIndent = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-sKey :: Lens' Search' (Maybe Text)
+sKey :: Lens' Search' (Maybe Key)
 sKey = lens _sKey (\ s a -> s{_sKey = a})
 
 -- | An output expression to request data from matches.
@@ -347,9 +399,9 @@ sStemmed :: Lens' Search' (Maybe Bool)
 sStemmed = lens _sStemmed (\ s a -> s{_sStemmed = a})
 
 -- | OAuth 2.0 token for the current user.
-sOauthToken :: Lens' Search' (Maybe Text)
-sOauthToken
-  = lens _sOauthToken (\ s a -> s{_sOauthToken = a})
+sOAuthToken :: Lens' Search' (Maybe OAuthToken)
+sOAuthToken
+  = lens _sOAuthToken (\ s a -> s{_sOAuthToken = a})
 
 -- | Query on exact name and keys only.
 sExact :: Lens' Search' (Maybe Bool)
@@ -383,9 +435,9 @@ sCallback :: Lens' Search' (Maybe Text)
 sCallback
   = lens _sCallback (\ s a -> s{_sCallback = a})
 
--- | Data format for the response.
-sAlt :: Lens' Search' Alt
-sAlt = lens _sAlt (\ s a -> s{_sAlt = a})
+instance GoogleAuth Search' where
+        authKey = sKey . _Just
+        authToken = sOAuthToken . _Just
 
 instance GoogleRequest Search' where
         type Rs Search' = ()
@@ -394,7 +446,7 @@ instance GoogleRequest Search' where
           = go _sWithout _sQuotaUser (Just _sPrettyPrint)
               _sCursor
               _sWith
-              _sUserIp
+              _sUserIP
               _sDomain
               (Just _sFormat)
               _sHelp
@@ -410,7 +462,7 @@ instance GoogleRequest Search' where
               _sMid
               _sType
               _sStemmed
-              _sOauthToken
+              _sOAuthToken
               _sExact
               (Just _sSpell)
               _sAsOfTime
@@ -418,6 +470,41 @@ instance GoogleRequest Search' where
               _sPrefixed
               _sFields
               _sCallback
-              (Just _sAlt)
-          where go
+              (Just AltJSON)
+          where go :<|> _
+                  = clientWithRoute (Proxy :: Proxy SearchMethod) r u
+
+instance GoogleRequest Search' where
+        type Rs (Download Search') = Stream
+        request = requestWithRoute defReq freebaseSearchURL
+        requestWithRoute r u Search'{..}
+          = go _sWithout _sQuotaUser (Just _sPrettyPrint)
+              _sCursor
+              _sWith
+              _sUserIP
+              _sDomain
+              (Just _sFormat)
+              _sHelp
+              _sLang
+              _sIndent
+              _sKey
+              _sOutput
+              _sQuery
+              (Just _sScoring)
+              (Just _sLimit)
+              _sFilter
+              _sMqlOutput
+              _sMid
+              _sType
+              _sStemmed
+              _sOAuthToken
+              _sExact
+              (Just _sSpell)
+              _sAsOfTime
+              (Just _sEncode)
+              _sPrefixed
+              _sFields
+              _sCallback
+              (Just Media)
+          where go :<|> _
                   = clientWithRoute (Proxy :: Proxy SearchMethod) r u

@@ -32,13 +32,14 @@ module Network.Google.Resource.YouTube.Watermarks.Set
     -- * Request Lenses
     , wsQuotaUser
     , wsPrettyPrint
-    , wsUserIp
+    , wsUserIP
     , wsChannelId
+    , wsMedia
     , wsOnBehalfOfContentOwner
     , wsKey
-    , wsOauthToken
+    , wsInvideoBranding
+    , wsOAuthToken
     , wsFields
-    , wsAlt
     ) where
 
 import           Network.Google.Prelude
@@ -54,10 +55,12 @@ type WatermarksSetResource =
              QueryParam "userIp" Text :>
                QueryParam "channelId" Text :>
                  QueryParam "onBehalfOfContentOwner" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Post '[JSON] ()
+                         QueryParam "alt" AltJSON :>
+                           MultipartRelated '[JSON] InvideoBranding Body :>
+                             Post '[JSON] ()
 
 -- | Uploads a watermark image to YouTube and sets it for a channel.
 --
@@ -65,13 +68,14 @@ type WatermarksSetResource =
 data WatermarksSet' = WatermarksSet'
     { _wsQuotaUser              :: !(Maybe Text)
     , _wsPrettyPrint            :: !Bool
-    , _wsUserIp                 :: !(Maybe Text)
+    , _wsUserIP                 :: !(Maybe Text)
     , _wsChannelId              :: !Text
+    , _wsMedia                  :: !Body
     , _wsOnBehalfOfContentOwner :: !(Maybe Text)
-    , _wsKey                    :: !(Maybe Text)
-    , _wsOauthToken             :: !(Maybe Text)
+    , _wsKey                    :: !(Maybe Key)
+    , _wsInvideoBranding        :: !InvideoBranding
+    , _wsOAuthToken             :: !(Maybe OAuthToken)
     , _wsFields                 :: !(Maybe Text)
-    , _wsAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WatermarksSet'' with the minimum fields required to make a request.
@@ -82,33 +86,38 @@ data WatermarksSet' = WatermarksSet'
 --
 -- * 'wsPrettyPrint'
 --
--- * 'wsUserIp'
+-- * 'wsUserIP'
 --
 -- * 'wsChannelId'
+--
+-- * 'wsMedia'
 --
 -- * 'wsOnBehalfOfContentOwner'
 --
 -- * 'wsKey'
 --
--- * 'wsOauthToken'
+-- * 'wsInvideoBranding'
+--
+-- * 'wsOAuthToken'
 --
 -- * 'wsFields'
---
--- * 'wsAlt'
 watermarksSet'
     :: Text -- ^ 'channelId'
+    -> Body -- ^ 'media'
+    -> InvideoBranding -- ^ 'InvideoBranding'
     -> WatermarksSet'
-watermarksSet' pWsChannelId_ =
+watermarksSet' pWsChannelId_ pWsMedia_ pWsInvideoBranding_ =
     WatermarksSet'
     { _wsQuotaUser = Nothing
     , _wsPrettyPrint = True
-    , _wsUserIp = Nothing
+    , _wsUserIP = Nothing
     , _wsChannelId = pWsChannelId_
+    , _wsMedia = pWsMedia_
     , _wsOnBehalfOfContentOwner = Nothing
     , _wsKey = Nothing
-    , _wsOauthToken = Nothing
+    , _wsInvideoBranding = pWsInvideoBranding_
+    , _wsOAuthToken = Nothing
     , _wsFields = Nothing
-    , _wsAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -126,14 +135,17 @@ wsPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-wsUserIp :: Lens' WatermarksSet' (Maybe Text)
-wsUserIp = lens _wsUserIp (\ s a -> s{_wsUserIp = a})
+wsUserIP :: Lens' WatermarksSet' (Maybe Text)
+wsUserIP = lens _wsUserIP (\ s a -> s{_wsUserIP = a})
 
 -- | The channelId parameter specifies the YouTube channel ID for which the
 -- watermark is being provided.
 wsChannelId :: Lens' WatermarksSet' Text
 wsChannelId
   = lens _wsChannelId (\ s a -> s{_wsChannelId = a})
+
+wsMedia :: Lens' WatermarksSet' Body
+wsMedia = lens _wsMedia (\ s a -> s{_wsMedia = a})
 
 -- | Note: This parameter is intended exclusively for YouTube content
 -- partners. The onBehalfOfContentOwner parameter indicates that the
@@ -153,33 +165,41 @@ wsOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-wsKey :: Lens' WatermarksSet' (Maybe Text)
+wsKey :: Lens' WatermarksSet' (Maybe Key)
 wsKey = lens _wsKey (\ s a -> s{_wsKey = a})
 
+-- | Multipart request metadata.
+wsInvideoBranding :: Lens' WatermarksSet' InvideoBranding
+wsInvideoBranding
+  = lens _wsInvideoBranding
+      (\ s a -> s{_wsInvideoBranding = a})
+
 -- | OAuth 2.0 token for the current user.
-wsOauthToken :: Lens' WatermarksSet' (Maybe Text)
-wsOauthToken
-  = lens _wsOauthToken (\ s a -> s{_wsOauthToken = a})
+wsOAuthToken :: Lens' WatermarksSet' (Maybe OAuthToken)
+wsOAuthToken
+  = lens _wsOAuthToken (\ s a -> s{_wsOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 wsFields :: Lens' WatermarksSet' (Maybe Text)
 wsFields = lens _wsFields (\ s a -> s{_wsFields = a})
 
--- | Data format for the response.
-wsAlt :: Lens' WatermarksSet' Alt
-wsAlt = lens _wsAlt (\ s a -> s{_wsAlt = a})
+instance GoogleAuth WatermarksSet' where
+        authKey = wsKey . _Just
+        authToken = wsOAuthToken . _Just
 
 instance GoogleRequest WatermarksSet' where
         type Rs WatermarksSet' = ()
         request = requestWithRoute defReq youTubeURL
         requestWithRoute r u WatermarksSet'{..}
-          = go _wsQuotaUser (Just _wsPrettyPrint) _wsUserIp
+          = go _wsQuotaUser (Just _wsPrettyPrint) _wsUserIP
               (Just _wsChannelId)
+              _wsMedia
               _wsOnBehalfOfContentOwner
               _wsKey
-              _wsOauthToken
+              _wsOAuthToken
               _wsFields
-              (Just _wsAlt)
+              (Just AltJSON)
+              _wsInvideoBranding
           where go
                   = clientWithRoute
                       (Proxy :: Proxy WatermarksSetResource)

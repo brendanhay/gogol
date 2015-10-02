@@ -40,17 +40,17 @@ module Network.Google.AdminDirectory
     -- ** DirectoryAspsList
     , module Network.Google.Resource.Directory.Asps.List
 
-    -- ** DirectoryChromeosdevicesGet
-    , module Network.Google.Resource.Directory.Chromeosdevices.Get
+    -- ** DirectoryChromeosDevicesGet
+    , module Network.Google.Resource.Directory.ChromeosDevices.Get
 
-    -- ** DirectoryChromeosdevicesList
-    , module Network.Google.Resource.Directory.Chromeosdevices.List
+    -- ** DirectoryChromeosDevicesList
+    , module Network.Google.Resource.Directory.ChromeosDevices.List
 
-    -- ** DirectoryChromeosdevicesPatch
-    , module Network.Google.Resource.Directory.Chromeosdevices.Patch
+    -- ** DirectoryChromeosDevicesPatch
+    , module Network.Google.Resource.Directory.ChromeosDevices.Patch
 
-    -- ** DirectoryChromeosdevicesUpdate
-    , module Network.Google.Resource.Directory.Chromeosdevices.Update
+    -- ** DirectoryChromeosDevicesUpdate
+    , module Network.Google.Resource.Directory.ChromeosDevices.Update
 
     -- ** DirectoryGroupsAliasesDelete
     , module Network.Google.Resource.Directory.Groups.Aliases.Delete
@@ -97,17 +97,17 @@ module Network.Google.AdminDirectory
     -- ** DirectoryMembersUpdate
     , module Network.Google.Resource.Directory.Members.Update
 
-    -- ** DirectoryMobiledevicesAction
-    , module Network.Google.Resource.Directory.Mobiledevices.Action
+    -- ** DirectoryMobileDevicesAction
+    , module Network.Google.Resource.Directory.MobileDevices.Action
 
-    -- ** DirectoryMobiledevicesDelete
-    , module Network.Google.Resource.Directory.Mobiledevices.Delete
+    -- ** DirectoryMobileDevicesDelete
+    , module Network.Google.Resource.Directory.MobileDevices.Delete
 
-    -- ** DirectoryMobiledevicesGet
-    , module Network.Google.Resource.Directory.Mobiledevices.Get
+    -- ** DirectoryMobileDevicesGet
+    , module Network.Google.Resource.Directory.MobileDevices.Get
 
-    -- ** DirectoryMobiledevicesList
-    , module Network.Google.Resource.Directory.Mobiledevices.List
+    -- ** DirectoryMobileDevicesList
+    , module Network.Google.Resource.Directory.MobileDevices.List
 
     -- ** DirectoryNotificationsDelete
     , module Network.Google.Resource.Directory.Notifications.Delete
@@ -124,23 +124,23 @@ module Network.Google.AdminDirectory
     -- ** DirectoryNotificationsUpdate
     , module Network.Google.Resource.Directory.Notifications.Update
 
-    -- ** DirectoryOrgunitsDelete
-    , module Network.Google.Resource.Directory.Orgunits.Delete
+    -- ** DirectoryOrgUnitsDelete
+    , module Network.Google.Resource.Directory.OrgUnits.Delete
 
-    -- ** DirectoryOrgunitsGet
-    , module Network.Google.Resource.Directory.Orgunits.Get
+    -- ** DirectoryOrgUnitsGet
+    , module Network.Google.Resource.Directory.OrgUnits.Get
 
-    -- ** DirectoryOrgunitsInsert
-    , module Network.Google.Resource.Directory.Orgunits.Insert
+    -- ** DirectoryOrgUnitsInsert
+    , module Network.Google.Resource.Directory.OrgUnits.Insert
 
-    -- ** DirectoryOrgunitsList
-    , module Network.Google.Resource.Directory.Orgunits.List
+    -- ** DirectoryOrgUnitsList
+    , module Network.Google.Resource.Directory.OrgUnits.List
 
-    -- ** DirectoryOrgunitsPatch
-    , module Network.Google.Resource.Directory.Orgunits.Patch
+    -- ** DirectoryOrgUnitsPatch
+    , module Network.Google.Resource.Directory.OrgUnits.Patch
 
-    -- ** DirectoryOrgunitsUpdate
-    , module Network.Google.Resource.Directory.Orgunits.Update
+    -- ** DirectoryOrgUnitsUpdate
+    , module Network.Google.Resource.Directory.OrgUnits.Update
 
     -- ** DirectorySchemasDelete
     , module Network.Google.Resource.Directory.Schemas.Delete
@@ -274,8 +274,8 @@ module Network.Google.AdminDirectory
     -- ** DirectoryUsersListViewType
     , DirectoryUsersListViewType (..)
 
-    -- ** DirectoryChromeosdevicesListProjection
-    , DirectoryChromeosdevicesListProjection (..)
+    -- ** DirectoryChromeosDevicesListProjection
+    , DirectoryChromeosDevicesListProjection (..)
 
     -- ** UserAddress
     , UserAddress
@@ -311,9 +311,9 @@ module Network.Google.AdminDirectory
     , groId
     , groDescription
 
-    -- ** ChromeOsDeviceActiveTimeRanges
-    , ChromeOsDeviceActiveTimeRanges
-    , chromeOsDeviceActiveTimeRanges
+    -- ** ChromeOSDeviceActiveTimeRanges
+    , ChromeOSDeviceActiveTimeRanges
+    , chromeOSDeviceActiveTimeRanges
     , codatrDate
     , codatrActiveTime
 
@@ -338,9 +338,9 @@ module Network.Google.AdminDirectory
     , sSchemas
     , sKind
 
-    -- ** ChromeOsDevice
-    , ChromeOsDevice
-    , chromeOsDevice
+    -- ** ChromeOSDevice
+    , ChromeOSDevice
+    , chromeOSDevice
     , codStatus
     , codEtag
     , codAnnotatedUser
@@ -348,10 +348,10 @@ module Network.Google.AdminDirectory
     , codLastSync
     , codActiveTimeRanges
     , codKind
-    , codEthernetMacAddress
+    , codEthernetMACAddress
     , codLastEnrollmentTime
     , codAnnotatedLocation
-    , codMacAddress
+    , codMACAddress
     , codOrgUnitPath
     , codRecentUsers
     , codSupportEndDate
@@ -365,7 +365,7 @@ module Network.Google.AdminDirectory
     , codNotes
     , codSerialNumber
     , codFirmwareVersion
-    , codOsVersion
+    , codOSVersion
 
     -- ** Users
     , Users
@@ -386,8 +386,8 @@ module Network.Google.AdminDirectory
     , uiType
     , uiCustomType
 
-    -- ** DirectoryMobiledevicesListOrderBy
-    , DirectoryMobiledevicesListOrderBy (..)
+    -- ** DirectoryMobileDevicesListOrderBy
+    , DirectoryMobileDevicesListOrderBy (..)
 
     -- ** Notification
     , Notification
@@ -436,13 +436,13 @@ module Network.Google.AdminDirectory
     , tokDisplayText
     , tokKind
     , tokScopes
-    , tokNativeApp
+    , tokNATiveApp
     , tokAnonymous
     , tokUserKey
 
-    -- ** ChromeOsDeviceRecentUsers
-    , ChromeOsDeviceRecentUsers
-    , chromeOsDeviceRecentUsers
+    -- ** ChromeOSDeviceRecentUsers
+    , ChromeOSDeviceRecentUsers
+    , chromeOSDeviceRecentUsers
     , codruEmail
     , codruType
 
@@ -457,7 +457,7 @@ module Network.Google.AdminDirectory
     , mdEtag
     , mdNextPageToken
     , mdKind
-    , mdMobiledevices
+    , mdMobileDevices
 
     -- ** Members
     , Members
@@ -470,13 +470,13 @@ module Network.Google.AdminDirectory
     -- ** Channel
     , Channel
     , channel
-    , cResourceUri
+    , cResourceURI
     , cResourceId
     , cKind
     , cExpiration
     , cToken
     , cAddress
-    , cPayload
+    , cPayLoad
     , cParams
     , cId
     , cType
@@ -503,8 +503,8 @@ module Network.Google.AdminDirectory
     -- ** DirectoryUsersWatchSortOrder
     , DirectoryUsersWatchSortOrder (..)
 
-    -- ** DirectoryMobiledevicesGetProjection
-    , DirectoryMobiledevicesGetProjection (..)
+    -- ** DirectoryMobileDevicesGetProjection
+    , DirectoryMobileDevicesGetProjection (..)
 
     -- ** MobileDeviceApplications
     , MobileDeviceApplications
@@ -522,7 +522,7 @@ module Network.Google.AdminDirectory
     , useLastLoginTime
     , useThumbnailPhotoEtag
     , useEtag
-    , useIpWhitelisted
+    , useIPWhiteListed
     , useRelations
     , useHashFunction
     , useKind
@@ -530,7 +530,7 @@ module Network.Google.AdminDirectory
     , useWebsites
     , useAddresses
     , useAliases
-    , useThumbnailPhotoUrl
+    , useThumbnailPhotoURL
     , useExternalIds
     , useSuspended
     , useAgreedToTerms
@@ -563,20 +563,20 @@ module Network.Google.AdminDirectory
     , schSchemaId
     , schFields
 
-    -- ** DirectoryMobiledevicesListSortOrder
-    , DirectoryMobiledevicesListSortOrder (..)
+    -- ** DirectoryMobileDevicesListSortOrder
+    , DirectoryMobileDevicesListSortOrder (..)
 
     -- ** DirectoryUsersListOrderBy
     , DirectoryUsersListOrderBy (..)
 
-    -- ** DirectoryOrgunitsListType
-    , DirectoryOrgunitsListType (..)
+    -- ** DirectoryOrgUnitsListType
+    , DirectoryOrgUnitsListType (..)
 
     -- ** DirectoryUsersListProjection
     , DirectoryUsersListProjection (..)
 
-    -- ** DirectoryChromeosdevicesUpdateProjection
-    , DirectoryChromeosdevicesUpdateProjection (..)
+    -- ** DirectoryChromeosDevicesUpdateProjection
+    , DirectoryChromeosDevicesUpdateProjection (..)
 
     -- ** DirectoryUsersWatchProjection
     , DirectoryUsersWatchProjection (..)
@@ -606,8 +606,8 @@ module Network.Google.AdminDirectory
     , urType
     , urCustomType
 
-    -- ** DirectoryChromeosdevicesListOrderBy
-    , DirectoryChromeosdevicesListOrderBy (..)
+    -- ** DirectoryChromeosDevicesListOrderBy
+    , DirectoryChromeosDevicesListOrderBy (..)
 
     -- ** UserWebsite
     , UserWebsite
@@ -620,7 +620,7 @@ module Network.Google.AdminDirectory
     -- ** UserOrganization
     , UserOrganization
     , userOrganization
-    , uoDepartment
+    , uoDePartyment
     , uoLocation
     , uoCostCenter
     , uoDomain
@@ -655,8 +655,8 @@ module Network.Google.AdminDirectory
     -- ** DirectoryUsersListEvent
     , DirectoryUsersListEvent (..)
 
-    -- ** DirectoryMobiledevicesListProjection
-    , DirectoryMobiledevicesListProjection (..)
+    -- ** DirectoryMobileDevicesListProjection
+    , DirectoryMobileDevicesListProjection (..)
 
     -- ** UserEmail
     , UserEmail
@@ -682,43 +682,43 @@ module Network.Google.AdminDirectory
     -- ** MobileDevice
     , MobileDevice
     , mobileDevice
-    , mddEmail
-    , mddStatus
-    , mddEtag
-    , mddResourceId
-    , mddBuildNumber
-    , mddManagedAccountIsOnOwnerProfile
-    , mddLastSync
-    , mddOtherAccountsInfo
-    , mddKind
-    , mddAdbStatus
-    , mddNetworkOperator
-    , mddKernelVersion
-    , mddOs
-    , mddName
-    , mddModel
-    , mddDeveloperOptionsStatus
-    , mddUnknownSourcesStatus
-    , mddMeid
-    , mddDeviceId
-    , mddFirstSync
-    , mddUserAgent
-    , mddImei
-    , mddType
-    , mddWifiMacAddress
-    , mddSerialNumber
-    , mddHardwareId
-    , mddBasebandVersion
-    , mddSupportsWorkProfile
-    , mddDeviceCompromisedStatus
-    , mddApplications
-    , mddDefaultLanguage
+    , mobEmail
+    , mobStatus
+    , mobEtag
+    , mobResourceId
+    , mobBuildNumber
+    , mobManagedAccountIsOnOwnerProfile
+    , mobLastSync
+    , mobOtherAccountsInfo
+    , mobKind
+    , mobAdbStatus
+    , mobNetworkOperator
+    , mobKernelVersion
+    , mobOS
+    , mobName
+    , mobModel
+    , mobDeveloperOptionsStatus
+    , mobUnknownSourcesStatus
+    , mobMeid
+    , mobDeviceId
+    , mobFirstSync
+    , mobUserAgent
+    , mobImei
+    , mobType
+    , mobWifiMACAddress
+    , mobSerialNumber
+    , mobHardwareId
+    , mobBasebandVersion
+    , mobSupportsWorkProfile
+    , mobDeviceCompromisedStatus
+    , mobApplications
+    , mobDefaultLanguage
 
-    -- ** DirectoryChromeosdevicesGetProjection
-    , DirectoryChromeosdevicesGetProjection (..)
+    -- ** DirectoryChromeosDevicesGetProjection
+    , DirectoryChromeosDevicesGetProjection (..)
 
-    -- ** DirectoryChromeosdevicesPatchProjection
-    , DirectoryChromeosdevicesPatchProjection (..)
+    -- ** DirectoryChromeosDevicesPatchProjection
+    , DirectoryChromeosDevicesPatchProjection (..)
 
     -- ** UserCustomProperties
     , UserCustomProperties
@@ -760,8 +760,8 @@ module Network.Google.AdminDirectory
     , notItems
     , notUnreadNotificationsCount
 
-    -- ** DirectoryChromeosdevicesListSortOrder
-    , DirectoryChromeosdevicesListSortOrder (..)
+    -- ** DirectoryChromeosDevicesListSortOrder
+    , DirectoryChromeosDevicesListSortOrder (..)
 
     -- ** UserExternalId
     , UserExternalId
@@ -777,16 +777,13 @@ module Network.Google.AdminDirectory
     , aaKind
     , aaItems
 
-    -- ** Alt
-    , Alt (..)
-
-    -- ** ChromeOsDevices
-    , ChromeOsDevices
-    , chromeOsDevices
-    , codsEtag
-    , codsNextPageToken
-    , codsKind
-    , codsChromeosdevices
+    -- ** ChromeOSDevices
+    , ChromeOSDevices
+    , chromeOSDevices
+    , cosdEtag
+    , cosdNextPageToken
+    , cosdKind
+    , cosdChromeosDevices
     ) where
 
 import           Network.Google.AdminDirectory.Types
@@ -795,10 +792,10 @@ import           Network.Google.Resource.Admin.Channels.Stop
 import           Network.Google.Resource.Directory.Asps.Delete
 import           Network.Google.Resource.Directory.Asps.Get
 import           Network.Google.Resource.Directory.Asps.List
-import           Network.Google.Resource.Directory.Chromeosdevices.Get
-import           Network.Google.Resource.Directory.Chromeosdevices.List
-import           Network.Google.Resource.Directory.Chromeosdevices.Patch
-import           Network.Google.Resource.Directory.Chromeosdevices.Update
+import           Network.Google.Resource.Directory.ChromeosDevices.Get
+import           Network.Google.Resource.Directory.ChromeosDevices.List
+import           Network.Google.Resource.Directory.ChromeosDevices.Patch
+import           Network.Google.Resource.Directory.ChromeosDevices.Update
 import           Network.Google.Resource.Directory.Groups.Aliases.Delete
 import           Network.Google.Resource.Directory.Groups.Aliases.Insert
 import           Network.Google.Resource.Directory.Groups.Aliases.List
@@ -814,21 +811,21 @@ import           Network.Google.Resource.Directory.Members.Insert
 import           Network.Google.Resource.Directory.Members.List
 import           Network.Google.Resource.Directory.Members.Patch
 import           Network.Google.Resource.Directory.Members.Update
-import           Network.Google.Resource.Directory.Mobiledevices.Action
-import           Network.Google.Resource.Directory.Mobiledevices.Delete
-import           Network.Google.Resource.Directory.Mobiledevices.Get
-import           Network.Google.Resource.Directory.Mobiledevices.List
+import           Network.Google.Resource.Directory.MobileDevices.Action
+import           Network.Google.Resource.Directory.MobileDevices.Delete
+import           Network.Google.Resource.Directory.MobileDevices.Get
+import           Network.Google.Resource.Directory.MobileDevices.List
 import           Network.Google.Resource.Directory.Notifications.Delete
 import           Network.Google.Resource.Directory.Notifications.Get
 import           Network.Google.Resource.Directory.Notifications.List
 import           Network.Google.Resource.Directory.Notifications.Patch
 import           Network.Google.Resource.Directory.Notifications.Update
-import           Network.Google.Resource.Directory.Orgunits.Delete
-import           Network.Google.Resource.Directory.Orgunits.Get
-import           Network.Google.Resource.Directory.Orgunits.Insert
-import           Network.Google.Resource.Directory.Orgunits.List
-import           Network.Google.Resource.Directory.Orgunits.Patch
-import           Network.Google.Resource.Directory.Orgunits.Update
+import           Network.Google.Resource.Directory.OrgUnits.Delete
+import           Network.Google.Resource.Directory.OrgUnits.Get
+import           Network.Google.Resource.Directory.OrgUnits.Insert
+import           Network.Google.Resource.Directory.OrgUnits.List
+import           Network.Google.Resource.Directory.OrgUnits.Patch
+import           Network.Google.Resource.Directory.OrgUnits.Update
 import           Network.Google.Resource.Directory.Schemas.Delete
 import           Network.Google.Resource.Directory.Schemas.Get
 import           Network.Google.Resource.Directory.Schemas.Insert
@@ -906,16 +903,16 @@ type AdminDirectoryAPI =
        :<|> MembersGetResource
        :<|> MembersDeleteResource
        :<|> MembersUpdateResource
-       :<|> MobiledevicesListResource
-       :<|> MobiledevicesGetResource
-       :<|> MobiledevicesActionResource
-       :<|> MobiledevicesDeleteResource
-       :<|> OrgunitsInsertResource
-       :<|> OrgunitsListResource
-       :<|> OrgunitsPatchResource
-       :<|> OrgunitsGetResource
-       :<|> OrgunitsDeleteResource
-       :<|> OrgunitsUpdateResource
+       :<|> MobileDevicesListResource
+       :<|> MobileDevicesGetResource
+       :<|> MobileDevicesActionResource
+       :<|> MobileDevicesDeleteResource
+       :<|> OrgUnitsInsertResource
+       :<|> OrgUnitsListResource
+       :<|> OrgUnitsPatchResource
+       :<|> OrgUnitsGetResource
+       :<|> OrgUnitsDeleteResource
+       :<|> OrgUnitsUpdateResource
        :<|> VerificationCodesListResource
        :<|> VerificationCodesGenerateResource
        :<|> VerificationCodesInvalidateResource
@@ -924,10 +921,10 @@ type AdminDirectoryAPI =
        :<|> NotificationsGetResource
        :<|> NotificationsDeleteResource
        :<|> NotificationsUpdateResource
-       :<|> ChromeosdevicesListResource
-       :<|> ChromeosdevicesPatchResource
-       :<|> ChromeosdevicesGetResource
-       :<|> ChromeosdevicesUpdateResource
+       :<|> ChromeosDevicesListResource
+       :<|> ChromeosDevicesPatchResource
+       :<|> ChromeosDevicesGetResource
+       :<|> ChromeosDevicesUpdateResource
        :<|> AspsListResource
        :<|> AspsGetResource
        :<|> AspsDeleteResource

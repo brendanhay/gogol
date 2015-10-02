@@ -34,11 +34,11 @@ module Network.Google.Resource.Taskqueue.Tasks.Insert
     , tiQuotaUser
     , tiPrettyPrint
     , tiProject
-    , tiUserIp
+    , tiUserIP
     , tiKey
-    , tiOauthToken
+    , tiTask
+    , tiOAuthToken
     , tiFields
-    , tiAlt
     ) where
 
 import           Network.Google.AppEngineTaskQueue.Types
@@ -54,10 +54,11 @@ type TasksInsertResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Post '[JSON] Task
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Task :> Post '[JSON] Task
 
 -- | Insert a new task in a TaskQueue
 --
@@ -67,11 +68,11 @@ data TasksInsert' = TasksInsert'
     , _tiQuotaUser   :: !(Maybe Text)
     , _tiPrettyPrint :: !Bool
     , _tiProject     :: !Text
-    , _tiUserIp      :: !(Maybe Text)
-    , _tiKey         :: !(Maybe Text)
-    , _tiOauthToken  :: !(Maybe Text)
+    , _tiUserIP      :: !(Maybe Text)
+    , _tiKey         :: !(Maybe Key)
+    , _tiTask        :: !Task
+    , _tiOAuthToken  :: !(Maybe OAuthToken)
     , _tiFields      :: !(Maybe Text)
-    , _tiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TasksInsert'' with the minimum fields required to make a request.
@@ -86,30 +87,31 @@ data TasksInsert' = TasksInsert'
 --
 -- * 'tiProject'
 --
--- * 'tiUserIp'
+-- * 'tiUserIP'
 --
 -- * 'tiKey'
 --
--- * 'tiOauthToken'
+-- * 'tiTask'
+--
+-- * 'tiOAuthToken'
 --
 -- * 'tiFields'
---
--- * 'tiAlt'
 tasksInsert'
     :: Text -- ^ 'taskqueue'
     -> Text -- ^ 'project'
+    -> Task -- ^ 'Task'
     -> TasksInsert'
-tasksInsert' pTiTaskqueue_ pTiProject_ =
+tasksInsert' pTiTaskqueue_ pTiProject_ pTiTask_ =
     TasksInsert'
     { _tiTaskqueue = pTiTaskqueue_
     , _tiQuotaUser = Nothing
     , _tiPrettyPrint = True
     , _tiProject = pTiProject_
-    , _tiUserIp = Nothing
+    , _tiUserIP = Nothing
     , _tiKey = Nothing
-    , _tiOauthToken = Nothing
+    , _tiTask = pTiTask_
+    , _tiOAuthToken = Nothing
     , _tiFields = Nothing
-    , _tiAlt = JSON
     }
 
 -- | The taskqueue to insert the task into
@@ -137,27 +139,31 @@ tiProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tiUserIp :: Lens' TasksInsert' (Maybe Text)
-tiUserIp = lens _tiUserIp (\ s a -> s{_tiUserIp = a})
+tiUserIP :: Lens' TasksInsert' (Maybe Text)
+tiUserIP = lens _tiUserIP (\ s a -> s{_tiUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tiKey :: Lens' TasksInsert' (Maybe Text)
+tiKey :: Lens' TasksInsert' (Maybe Key)
 tiKey = lens _tiKey (\ s a -> s{_tiKey = a})
 
+-- | Multipart request metadata.
+tiTask :: Lens' TasksInsert' Task
+tiTask = lens _tiTask (\ s a -> s{_tiTask = a})
+
 -- | OAuth 2.0 token for the current user.
-tiOauthToken :: Lens' TasksInsert' (Maybe Text)
-tiOauthToken
-  = lens _tiOauthToken (\ s a -> s{_tiOauthToken = a})
+tiOAuthToken :: Lens' TasksInsert' (Maybe OAuthToken)
+tiOAuthToken
+  = lens _tiOAuthToken (\ s a -> s{_tiOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 tiFields :: Lens' TasksInsert' (Maybe Text)
 tiFields = lens _tiFields (\ s a -> s{_tiFields = a})
 
--- | Data format for the response.
-tiAlt :: Lens' TasksInsert' Alt
-tiAlt = lens _tiAlt (\ s a -> s{_tiAlt = a})
+instance GoogleAuth TasksInsert' where
+        authKey = tiKey . _Just
+        authToken = tiOAuthToken . _Just
 
 instance GoogleRequest TasksInsert' where
         type Rs TasksInsert' = Task
@@ -166,11 +172,12 @@ instance GoogleRequest TasksInsert' where
         requestWithRoute r u TasksInsert'{..}
           = go _tiTaskqueue _tiQuotaUser (Just _tiPrettyPrint)
               _tiProject
-              _tiUserIp
+              _tiUserIP
               _tiKey
-              _tiOauthToken
+              _tiOAuthToken
               _tiFields
-              (Just _tiAlt)
+              (Just AltJSON)
+              _tiTask
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TasksInsertResource)

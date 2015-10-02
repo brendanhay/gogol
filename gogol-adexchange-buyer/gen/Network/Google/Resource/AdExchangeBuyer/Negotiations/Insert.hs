@@ -32,11 +32,11 @@ module Network.Google.Resource.AdExchangeBuyer.Negotiations.Insert
     -- * Request Lenses
     , niQuotaUser
     , niPrettyPrint
-    , niUserIp
+    , niUserIP
+    , niNegotiationDto
     , niKey
-    , niOauthToken
+    , niOAuthToken
     , niFields
-    , niAlt
     ) where
 
 import           Network.Google.AdExchangeBuyer.Types
@@ -49,22 +49,24 @@ type NegotiationsInsertResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
-               QueryParam "oauth_token" Text :>
+             QueryParam "key" Key :>
+               QueryParam "oauth_token" OAuthToken :>
                  QueryParam "fields" Text :>
-                   QueryParam "alt" Alt :> Post '[JSON] NegotiationDto
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] NegotiationDto :>
+                       Post '[JSON] NegotiationDto
 
 -- | Creates or updates the requested negotiation.
 --
 -- /See:/ 'negotiationsInsert'' smart constructor.
 data NegotiationsInsert' = NegotiationsInsert'
-    { _niQuotaUser   :: !(Maybe Text)
-    , _niPrettyPrint :: !Bool
-    , _niUserIp      :: !(Maybe Text)
-    , _niKey         :: !(Maybe Text)
-    , _niOauthToken  :: !(Maybe Text)
-    , _niFields      :: !(Maybe Text)
-    , _niAlt         :: !Alt
+    { _niQuotaUser      :: !(Maybe Text)
+    , _niPrettyPrint    :: !Bool
+    , _niUserIP         :: !(Maybe Text)
+    , _niNegotiationDto :: !NegotiationDto
+    , _niKey            :: !(Maybe Key)
+    , _niOAuthToken     :: !(Maybe OAuthToken)
+    , _niFields         :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NegotiationsInsert'' with the minimum fields required to make a request.
@@ -75,26 +77,27 @@ data NegotiationsInsert' = NegotiationsInsert'
 --
 -- * 'niPrettyPrint'
 --
--- * 'niUserIp'
+-- * 'niUserIP'
+--
+-- * 'niNegotiationDto'
 --
 -- * 'niKey'
 --
--- * 'niOauthToken'
+-- * 'niOAuthToken'
 --
 -- * 'niFields'
---
--- * 'niAlt'
 negotiationsInsert'
-    :: NegotiationsInsert'
-negotiationsInsert' =
+    :: NegotiationDto -- ^ 'NegotiationDto'
+    -> NegotiationsInsert'
+negotiationsInsert' pNiNegotiationDto_ =
     NegotiationsInsert'
     { _niQuotaUser = Nothing
     , _niPrettyPrint = True
-    , _niUserIp = Nothing
+    , _niUserIP = Nothing
+    , _niNegotiationDto = pNiNegotiationDto_
     , _niKey = Nothing
-    , _niOauthToken = Nothing
+    , _niOAuthToken = Nothing
     , _niFields = Nothing
-    , _niAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -112,37 +115,44 @@ niPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-niUserIp :: Lens' NegotiationsInsert' (Maybe Text)
-niUserIp = lens _niUserIp (\ s a -> s{_niUserIp = a})
+niUserIP :: Lens' NegotiationsInsert' (Maybe Text)
+niUserIP = lens _niUserIP (\ s a -> s{_niUserIP = a})
+
+-- | Multipart request metadata.
+niNegotiationDto :: Lens' NegotiationsInsert' NegotiationDto
+niNegotiationDto
+  = lens _niNegotiationDto
+      (\ s a -> s{_niNegotiationDto = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-niKey :: Lens' NegotiationsInsert' (Maybe Text)
+niKey :: Lens' NegotiationsInsert' (Maybe Key)
 niKey = lens _niKey (\ s a -> s{_niKey = a})
 
 -- | OAuth 2.0 token for the current user.
-niOauthToken :: Lens' NegotiationsInsert' (Maybe Text)
-niOauthToken
-  = lens _niOauthToken (\ s a -> s{_niOauthToken = a})
+niOAuthToken :: Lens' NegotiationsInsert' (Maybe OAuthToken)
+niOAuthToken
+  = lens _niOAuthToken (\ s a -> s{_niOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 niFields :: Lens' NegotiationsInsert' (Maybe Text)
 niFields = lens _niFields (\ s a -> s{_niFields = a})
 
--- | Data format for the response.
-niAlt :: Lens' NegotiationsInsert' Alt
-niAlt = lens _niAlt (\ s a -> s{_niAlt = a})
+instance GoogleAuth NegotiationsInsert' where
+        authKey = niKey . _Just
+        authToken = niOAuthToken . _Just
 
 instance GoogleRequest NegotiationsInsert' where
         type Rs NegotiationsInsert' = NegotiationDto
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u NegotiationsInsert'{..}
-          = go _niQuotaUser (Just _niPrettyPrint) _niUserIp
+          = go _niQuotaUser (Just _niPrettyPrint) _niUserIP
               _niKey
-              _niOauthToken
+              _niOAuthToken
               _niFields
-              (Just _niAlt)
+              (Just AltJSON)
+              _niNegotiationDto
           where go
                   = clientWithRoute
                       (Proxy :: Proxy NegotiationsInsertResource)

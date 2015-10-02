@@ -52,9 +52,9 @@ module Network.Google.AppEngine.Types
     , uRLMap
     , umScript
     , umSecurityLevel
-    , umApiEndpoint
-    , umUrlRegex
-    , umRedirectHttpResponseCode
+    , umAPIEndpoint
+    , umURLRegex
+    , umRedirectHTTPResponseCode
     , umAuthFailAction
     , umStaticFiles
     , umLogin
@@ -65,7 +65,7 @@ module Network.Google.AppEngine.Types
     , aPIConfigHandler
     , achScript
     , achSecurityLevel
-    , achUrl
+    , achURL
     , achAuthFailAction
     , achLogin
 
@@ -134,7 +134,7 @@ module Network.Google.AppEngine.Types
     , fileInfo
     , fiSha1Sum
     , fiMimeType
-    , fiSourceUrl
+    , fiSourceURL
 
     -- * AutomaticScaling
     , AutomaticScaling
@@ -142,7 +142,7 @@ module Network.Google.AppEngine.Types
     , asMaxTotalInstances
     , asMinIdleInstances
     , asMinPendingLatency
-    , asCpuUtilization
+    , asCPUUtilization
     , asMaxIdleInstances
     , asMinTotalInstances
     , asMaxConcurrentRequests
@@ -170,7 +170,7 @@ module Network.Google.AppEngine.Types
     , resources
     , rMemoryGb
     , rDiskGb
-    , rCpu
+    , rCPU
 
     -- * StaticFilesHandlerHTTPHeaders
     , StaticFilesHandlerHTTPHeaders
@@ -214,7 +214,7 @@ module Network.Google.AppEngine.Types
     , vDefaultExpiration
     , vAutomaticScaling
     , vErrorHandlers
-    , vVm
+    , vVM
     , vHandlers
     , vInboundServices
     , vNetwork
@@ -224,7 +224,7 @@ module Network.Google.AppEngine.Types
     , vBetaSettings
     , vBasicScaling
     , vManualScaling
-    , vApiConfig
+    , vAPIConfig
     , vId
     , vEnvVariables
     , vServingStatus
@@ -241,7 +241,7 @@ module Network.Google.AppEngine.Types
     -- * StaticFilesHandler
     , StaticFilesHandler
     , staticFilesHandler
-    , sfhHttpHeaders
+    , sfhHTTPHeaders
     , sfhPath
     , sfhRequireMatchingFile
     , sfhExpiration
@@ -295,7 +295,7 @@ module Network.Google.AppEngine.Types
     -- * StaticDirectoryHandler
     , StaticDirectoryHandler
     , staticDirectoryHandler
-    , sdhHttpHeaders
+    , sdhHTTPHeaders
     , sdhRequireMatchingFile
     , sdhExpiration
     , sdhMimeType

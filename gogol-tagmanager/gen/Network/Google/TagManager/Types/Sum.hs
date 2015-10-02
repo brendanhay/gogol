@@ -370,7 +370,7 @@ data ContainerEnabledBuiltInVariable
       -- ^ @oldHistoryFragment@
     | OldHistoryState
       -- ^ @oldHistoryState@
-    | OsVersion
+    | OSVersion
       -- ^ @osVersion@
     | PageHostname
       -- ^ @pageHostname@
@@ -427,7 +427,7 @@ instance FromText ContainerEnabledBuiltInVariable where
         "newHistoryState" -> Just NewHistoryState
         "oldHistoryFragment" -> Just OldHistoryFragment
         "oldHistoryState" -> Just OldHistoryState
-        "osVersion" -> Just OsVersion
+        "osVersion" -> Just OSVersion
         "pageHostname" -> Just PageHostname
         "pagePath" -> Just PagePath
         "pageUrl" -> Just PageURL
@@ -473,7 +473,7 @@ instance ToText ContainerEnabledBuiltInVariable where
         NewHistoryState -> "newHistoryState"
         OldHistoryFragment -> "oldHistoryFragment"
         OldHistoryState -> "oldHistoryState"
-        OsVersion -> "osVersion"
+        OSVersion -> "osVersion"
         PageHostname -> "pageHostname"
         PagePath -> "pagePath"
         PageURL -> "pageUrl"
@@ -517,28 +517,4 @@ instance FromJSON ContainerUsageContext where
     parseJSON = parseJSONText "ContainerUsageContext"
 
 instance ToJSON ContainerUsageContext where
-    toJSON = toJSONText
-
--- | Data format for the response.
-data Alt
-    = JSON
-      -- ^ @json@
-      -- Responses with Content-Type of application\/json
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable Alt
-
-instance FromText Alt where
-    fromText = \case
-        "json" -> Just JSON
-        _ -> Nothing
-
-instance ToText Alt where
-    toText = \case
-        JSON -> "json"
-
-instance FromJSON Alt where
-    parseJSON = parseJSONText "Alt"
-
-instance ToJSON Alt where
     toJSON = toJSONText

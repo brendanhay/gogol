@@ -32,13 +32,13 @@ module Network.Google.Resource.FusionTables.Column.Update
     -- * Request Lenses
     , cuQuotaUser
     , cuPrettyPrint
-    , cuUserIp
+    , cuUserIP
     , cuKey
-    , cuOauthToken
+    , cuOAuthToken
     , cuTableId
     , cuColumnId
+    , cuColumn
     , cuFields
-    , cuAlt
     ) where
 
 import           Network.Google.FusionTables.Types
@@ -54,10 +54,11 @@ type ColumnUpdateResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Put '[JSON] Column
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Column :> Put '[JSON] Column
 
 -- | Updates the name or type of an existing column.
 --
@@ -65,13 +66,13 @@ type ColumnUpdateResource =
 data ColumnUpdate' = ColumnUpdate'
     { _cuQuotaUser   :: !(Maybe Text)
     , _cuPrettyPrint :: !Bool
-    , _cuUserIp      :: !(Maybe Text)
-    , _cuKey         :: !(Maybe Text)
-    , _cuOauthToken  :: !(Maybe Text)
+    , _cuUserIP      :: !(Maybe Text)
+    , _cuKey         :: !(Maybe Key)
+    , _cuOAuthToken  :: !(Maybe OAuthToken)
     , _cuTableId     :: !Text
     , _cuColumnId    :: !Text
+    , _cuColumn      :: !Column
     , _cuFields      :: !(Maybe Text)
-    , _cuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ColumnUpdate'' with the minimum fields required to make a request.
@@ -82,34 +83,35 @@ data ColumnUpdate' = ColumnUpdate'
 --
 -- * 'cuPrettyPrint'
 --
--- * 'cuUserIp'
+-- * 'cuUserIP'
 --
 -- * 'cuKey'
 --
--- * 'cuOauthToken'
+-- * 'cuOAuthToken'
 --
 -- * 'cuTableId'
 --
 -- * 'cuColumnId'
 --
--- * 'cuFields'
+-- * 'cuColumn'
 --
--- * 'cuAlt'
+-- * 'cuFields'
 columnUpdate'
     :: Text -- ^ 'tableId'
     -> Text -- ^ 'columnId'
+    -> Column -- ^ 'Column'
     -> ColumnUpdate'
-columnUpdate' pCuTableId_ pCuColumnId_ =
+columnUpdate' pCuTableId_ pCuColumnId_ pCuColumn_ =
     ColumnUpdate'
     { _cuQuotaUser = Nothing
     , _cuPrettyPrint = True
-    , _cuUserIp = Nothing
+    , _cuUserIP = Nothing
     , _cuKey = Nothing
-    , _cuOauthToken = Nothing
+    , _cuOAuthToken = Nothing
     , _cuTableId = pCuTableId_
     , _cuColumnId = pCuColumnId_
+    , _cuColumn = pCuColumn_
     , _cuFields = Nothing
-    , _cuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,19 +129,19 @@ cuPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cuUserIp :: Lens' ColumnUpdate' (Maybe Text)
-cuUserIp = lens _cuUserIp (\ s a -> s{_cuUserIp = a})
+cuUserIP :: Lens' ColumnUpdate' (Maybe Text)
+cuUserIP = lens _cuUserIP (\ s a -> s{_cuUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cuKey :: Lens' ColumnUpdate' (Maybe Text)
+cuKey :: Lens' ColumnUpdate' (Maybe Key)
 cuKey = lens _cuKey (\ s a -> s{_cuKey = a})
 
 -- | OAuth 2.0 token for the current user.
-cuOauthToken :: Lens' ColumnUpdate' (Maybe Text)
-cuOauthToken
-  = lens _cuOauthToken (\ s a -> s{_cuOauthToken = a})
+cuOAuthToken :: Lens' ColumnUpdate' (Maybe OAuthToken)
+cuOAuthToken
+  = lens _cuOAuthToken (\ s a -> s{_cuOAuthToken = a})
 
 -- | Table for which the column is being updated.
 cuTableId :: Lens' ColumnUpdate' Text
@@ -151,25 +153,30 @@ cuColumnId :: Lens' ColumnUpdate' Text
 cuColumnId
   = lens _cuColumnId (\ s a -> s{_cuColumnId = a})
 
+-- | Multipart request metadata.
+cuColumn :: Lens' ColumnUpdate' Column
+cuColumn = lens _cuColumn (\ s a -> s{_cuColumn = a})
+
 -- | Selector specifying which fields to include in a partial response.
 cuFields :: Lens' ColumnUpdate' (Maybe Text)
 cuFields = lens _cuFields (\ s a -> s{_cuFields = a})
 
--- | Data format for the response.
-cuAlt :: Lens' ColumnUpdate' Alt
-cuAlt = lens _cuAlt (\ s a -> s{_cuAlt = a})
+instance GoogleAuth ColumnUpdate' where
+        authKey = cuKey . _Just
+        authToken = cuOAuthToken . _Just
 
 instance GoogleRequest ColumnUpdate' where
         type Rs ColumnUpdate' = Column
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u ColumnUpdate'{..}
-          = go _cuQuotaUser (Just _cuPrettyPrint) _cuUserIp
+          = go _cuQuotaUser (Just _cuPrettyPrint) _cuUserIP
               _cuKey
-              _cuOauthToken
+              _cuOAuthToken
               _cuTableId
               _cuColumnId
               _cuFields
-              (Just _cuAlt)
+              (Just AltJSON)
+              _cuColumn
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ColumnUpdateResource)

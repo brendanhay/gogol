@@ -34,13 +34,13 @@ module Network.Google.Resource.Taskqueue.Tasks.Update
     , tuQuotaUser
     , tuPrettyPrint
     , tuProject
-    , tuUserIp
+    , tuUserIP
     , tuKey
     , tuTask
-    , tuOauthToken
+    , tuTask
+    , tuOAuthToken
     , tuNewLeaseSeconds
     , tuFields
-    , tuAlt
     ) where
 
 import           Network.Google.AppEngineTaskQueue.Types
@@ -57,11 +57,12 @@ type TasksUpdateResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "newLeaseSeconds" Int32 :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Post '[JSON] Task
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] Task :> Post '[JSON] Task
 
 -- | Update tasks that are leased out of a TaskQueue.
 --
@@ -71,13 +72,13 @@ data TasksUpdate' = TasksUpdate'
     , _tuQuotaUser       :: !(Maybe Text)
     , _tuPrettyPrint     :: !Bool
     , _tuProject         :: !Text
-    , _tuUserIp          :: !(Maybe Text)
-    , _tuKey             :: !(Maybe Text)
+    , _tuUserIP          :: !(Maybe Text)
+    , _tuKey             :: !(Maybe Key)
+    , _tuTask            :: !Task
     , _tuTask            :: !Text
-    , _tuOauthToken      :: !(Maybe Text)
+    , _tuOAuthToken      :: !(Maybe OAuthToken)
     , _tuNewLeaseSeconds :: !Int32
     , _tuFields          :: !(Maybe Text)
-    , _tuAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TasksUpdate'' with the minimum fields required to make a request.
@@ -92,38 +93,39 @@ data TasksUpdate' = TasksUpdate'
 --
 -- * 'tuProject'
 --
--- * 'tuUserIp'
+-- * 'tuUserIP'
 --
 -- * 'tuKey'
 --
 -- * 'tuTask'
 --
--- * 'tuOauthToken'
+-- * 'tuTask'
+--
+-- * 'tuOAuthToken'
 --
 -- * 'tuNewLeaseSeconds'
 --
 -- * 'tuFields'
---
--- * 'tuAlt'
 tasksUpdate'
     :: Text -- ^ 'taskqueue'
     -> Text -- ^ 'project'
+    -> Task -- ^ 'Task'
     -> Text -- ^ 'task'
     -> Int32 -- ^ 'newLeaseSeconds'
     -> TasksUpdate'
-tasksUpdate' pTuTaskqueue_ pTuProject_ pTuTask_ pTuNewLeaseSeconds_ =
+tasksUpdate' pTuTaskqueue_ pTuProject_ pTuTask_ pTuTask_ pTuNewLeaseSeconds_ =
     TasksUpdate'
     { _tuTaskqueue = pTuTaskqueue_
     , _tuQuotaUser = Nothing
     , _tuPrettyPrint = True
     , _tuProject = pTuProject_
-    , _tuUserIp = Nothing
+    , _tuUserIP = Nothing
     , _tuKey = Nothing
     , _tuTask = pTuTask_
-    , _tuOauthToken = Nothing
+    , _tuTask = pTuTask_
+    , _tuOAuthToken = Nothing
     , _tuNewLeaseSeconds = pTuNewLeaseSeconds_
     , _tuFields = Nothing
-    , _tuAlt = JSON
     }
 
 tuTaskqueue :: Lens' TasksUpdate' Text
@@ -150,22 +152,26 @@ tuProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tuUserIp :: Lens' TasksUpdate' (Maybe Text)
-tuUserIp = lens _tuUserIp (\ s a -> s{_tuUserIp = a})
+tuUserIP :: Lens' TasksUpdate' (Maybe Text)
+tuUserIP = lens _tuUserIP (\ s a -> s{_tuUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tuKey :: Lens' TasksUpdate' (Maybe Text)
+tuKey :: Lens' TasksUpdate' (Maybe Key)
 tuKey = lens _tuKey (\ s a -> s{_tuKey = a})
+
+-- | Multipart request metadata.
+tuTask :: Lens' TasksUpdate' Task
+tuTask = lens _tuTask (\ s a -> s{_tuTask = a})
 
 tuTask :: Lens' TasksUpdate' Text
 tuTask = lens _tuTask (\ s a -> s{_tuTask = a})
 
 -- | OAuth 2.0 token for the current user.
-tuOauthToken :: Lens' TasksUpdate' (Maybe Text)
-tuOauthToken
-  = lens _tuOauthToken (\ s a -> s{_tuOauthToken = a})
+tuOAuthToken :: Lens' TasksUpdate' (Maybe OAuthToken)
+tuOAuthToken
+  = lens _tuOAuthToken (\ s a -> s{_tuOAuthToken = a})
 
 -- | The new lease in seconds.
 tuNewLeaseSeconds :: Lens' TasksUpdate' Int32
@@ -177,9 +183,9 @@ tuNewLeaseSeconds
 tuFields :: Lens' TasksUpdate' (Maybe Text)
 tuFields = lens _tuFields (\ s a -> s{_tuFields = a})
 
--- | Data format for the response.
-tuAlt :: Lens' TasksUpdate' Alt
-tuAlt = lens _tuAlt (\ s a -> s{_tuAlt = a})
+instance GoogleAuth TasksUpdate' where
+        authKey = tuKey . _Just
+        authToken = tuOAuthToken . _Just
 
 instance GoogleRequest TasksUpdate' where
         type Rs TasksUpdate' = Task
@@ -188,13 +194,14 @@ instance GoogleRequest TasksUpdate' where
         requestWithRoute r u TasksUpdate'{..}
           = go _tuTaskqueue _tuQuotaUser (Just _tuPrettyPrint)
               _tuProject
-              _tuUserIp
+              _tuUserIP
               _tuKey
               _tuTask
-              _tuOauthToken
+              _tuOAuthToken
               (Just _tuNewLeaseSeconds)
               _tuFields
-              (Just _tuAlt)
+              (Just AltJSON)
+              _tuTask
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TasksUpdateResource)

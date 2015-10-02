@@ -32,11 +32,11 @@ module Network.Google.Resource.AdExchangeBuyer.Offers.Insert
     -- * Request Lenses
     , oiQuotaUser
     , oiPrettyPrint
-    , oiUserIp
+    , oiUserIP
     , oiKey
-    , oiOauthToken
+    , oiOfferDto
+    , oiOAuthToken
     , oiFields
-    , oiAlt
     ) where
 
 import           Network.Google.AdExchangeBuyer.Types
@@ -49,10 +49,11 @@ type OffersInsertResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
-               QueryParam "oauth_token" Text :>
+             QueryParam "key" Key :>
+               QueryParam "oauth_token" OAuthToken :>
                  QueryParam "fields" Text :>
-                   QueryParam "alt" Alt :> Post '[JSON] OfferDto
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] OfferDto :> Post '[JSON] OfferDto
 
 -- | Creates or updates the requested offer.
 --
@@ -60,11 +61,11 @@ type OffersInsertResource =
 data OffersInsert' = OffersInsert'
     { _oiQuotaUser   :: !(Maybe Text)
     , _oiPrettyPrint :: !Bool
-    , _oiUserIp      :: !(Maybe Text)
-    , _oiKey         :: !(Maybe Text)
-    , _oiOauthToken  :: !(Maybe Text)
+    , _oiUserIP      :: !(Maybe Text)
+    , _oiKey         :: !(Maybe Key)
+    , _oiOfferDto    :: !OfferDto
+    , _oiOAuthToken  :: !(Maybe OAuthToken)
     , _oiFields      :: !(Maybe Text)
-    , _oiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OffersInsert'' with the minimum fields required to make a request.
@@ -75,26 +76,27 @@ data OffersInsert' = OffersInsert'
 --
 -- * 'oiPrettyPrint'
 --
--- * 'oiUserIp'
+-- * 'oiUserIP'
 --
 -- * 'oiKey'
 --
--- * 'oiOauthToken'
+-- * 'oiOfferDto'
+--
+-- * 'oiOAuthToken'
 --
 -- * 'oiFields'
---
--- * 'oiAlt'
 offersInsert'
-    :: OffersInsert'
-offersInsert' =
+    :: OfferDto -- ^ 'OfferDto'
+    -> OffersInsert'
+offersInsert' pOiOfferDto_ =
     OffersInsert'
     { _oiQuotaUser = Nothing
     , _oiPrettyPrint = True
-    , _oiUserIp = Nothing
+    , _oiUserIP = Nothing
     , _oiKey = Nothing
-    , _oiOauthToken = Nothing
+    , _oiOfferDto = pOiOfferDto_
+    , _oiOAuthToken = Nothing
     , _oiFields = Nothing
-    , _oiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -112,37 +114,43 @@ oiPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-oiUserIp :: Lens' OffersInsert' (Maybe Text)
-oiUserIp = lens _oiUserIp (\ s a -> s{_oiUserIp = a})
+oiUserIP :: Lens' OffersInsert' (Maybe Text)
+oiUserIP = lens _oiUserIP (\ s a -> s{_oiUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-oiKey :: Lens' OffersInsert' (Maybe Text)
+oiKey :: Lens' OffersInsert' (Maybe Key)
 oiKey = lens _oiKey (\ s a -> s{_oiKey = a})
 
+-- | Multipart request metadata.
+oiOfferDto :: Lens' OffersInsert' OfferDto
+oiOfferDto
+  = lens _oiOfferDto (\ s a -> s{_oiOfferDto = a})
+
 -- | OAuth 2.0 token for the current user.
-oiOauthToken :: Lens' OffersInsert' (Maybe Text)
-oiOauthToken
-  = lens _oiOauthToken (\ s a -> s{_oiOauthToken = a})
+oiOAuthToken :: Lens' OffersInsert' (Maybe OAuthToken)
+oiOAuthToken
+  = lens _oiOAuthToken (\ s a -> s{_oiOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 oiFields :: Lens' OffersInsert' (Maybe Text)
 oiFields = lens _oiFields (\ s a -> s{_oiFields = a})
 
--- | Data format for the response.
-oiAlt :: Lens' OffersInsert' Alt
-oiAlt = lens _oiAlt (\ s a -> s{_oiAlt = a})
+instance GoogleAuth OffersInsert' where
+        authKey = oiKey . _Just
+        authToken = oiOAuthToken . _Just
 
 instance GoogleRequest OffersInsert' where
         type Rs OffersInsert' = OfferDto
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u OffersInsert'{..}
-          = go _oiQuotaUser (Just _oiPrettyPrint) _oiUserIp
+          = go _oiQuotaUser (Just _oiPrettyPrint) _oiUserIP
               _oiKey
-              _oiOauthToken
+              _oiOAuthToken
               _oiFields
-              (Just _oiAlt)
+              (Just AltJSON)
+              _oiOfferDto
           where go
                   = clientWithRoute
                       (Proxy :: Proxy OffersInsertResource)

@@ -32,13 +32,12 @@ module Network.Google.Resource.BigQuery.Datasets.Get
     -- * Request Lenses
     , dgQuotaUser
     , dgPrettyPrint
-    , dgUserIp
+    , dgUserIP
     , dgKey
     , dgDatasetId
     , dgProjectId
-    , dgOauthToken
+    , dgOAuthToken
     , dgFields
-    , dgAlt
     ) where
 
 import           Network.Google.BigQuery.Types
@@ -54,10 +53,10 @@ type DatasetsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] Dataset
+                         QueryParam "alt" AltJSON :> Get '[JSON] Dataset
 
 -- | Returns the dataset specified by datasetID.
 --
@@ -65,13 +64,12 @@ type DatasetsGetResource =
 data DatasetsGet' = DatasetsGet'
     { _dgQuotaUser   :: !(Maybe Text)
     , _dgPrettyPrint :: !Bool
-    , _dgUserIp      :: !(Maybe Text)
-    , _dgKey         :: !(Maybe Text)
+    , _dgUserIP      :: !(Maybe Text)
+    , _dgKey         :: !(Maybe Key)
     , _dgDatasetId   :: !Text
     , _dgProjectId   :: !Text
-    , _dgOauthToken  :: !(Maybe Text)
+    , _dgOAuthToken  :: !(Maybe OAuthToken)
     , _dgFields      :: !(Maybe Text)
-    , _dgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetsGet'' with the minimum fields required to make a request.
@@ -82,7 +80,7 @@ data DatasetsGet' = DatasetsGet'
 --
 -- * 'dgPrettyPrint'
 --
--- * 'dgUserIp'
+-- * 'dgUserIP'
 --
 -- * 'dgKey'
 --
@@ -90,11 +88,9 @@ data DatasetsGet' = DatasetsGet'
 --
 -- * 'dgProjectId'
 --
--- * 'dgOauthToken'
+-- * 'dgOAuthToken'
 --
 -- * 'dgFields'
---
--- * 'dgAlt'
 datasetsGet'
     :: Text -- ^ 'datasetId'
     -> Text -- ^ 'projectId'
@@ -103,13 +99,12 @@ datasetsGet' pDgDatasetId_ pDgProjectId_ =
     DatasetsGet'
     { _dgQuotaUser = Nothing
     , _dgPrettyPrint = True
-    , _dgUserIp = Nothing
+    , _dgUserIP = Nothing
     , _dgKey = Nothing
     , _dgDatasetId = pDgDatasetId_
     , _dgProjectId = pDgProjectId_
-    , _dgOauthToken = Nothing
+    , _dgOAuthToken = Nothing
     , _dgFields = Nothing
-    , _dgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,13 +122,13 @@ dgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-dgUserIp :: Lens' DatasetsGet' (Maybe Text)
-dgUserIp = lens _dgUserIp (\ s a -> s{_dgUserIp = a})
+dgUserIP :: Lens' DatasetsGet' (Maybe Text)
+dgUserIP = lens _dgUserIP (\ s a -> s{_dgUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dgKey :: Lens' DatasetsGet' (Maybe Text)
+dgKey :: Lens' DatasetsGet' (Maybe Key)
 dgKey = lens _dgKey (\ s a -> s{_dgKey = a})
 
 -- | Dataset ID of the requested dataset
@@ -147,29 +142,29 @@ dgProjectId
   = lens _dgProjectId (\ s a -> s{_dgProjectId = a})
 
 -- | OAuth 2.0 token for the current user.
-dgOauthToken :: Lens' DatasetsGet' (Maybe Text)
-dgOauthToken
-  = lens _dgOauthToken (\ s a -> s{_dgOauthToken = a})
+dgOAuthToken :: Lens' DatasetsGet' (Maybe OAuthToken)
+dgOAuthToken
+  = lens _dgOAuthToken (\ s a -> s{_dgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 dgFields :: Lens' DatasetsGet' (Maybe Text)
 dgFields = lens _dgFields (\ s a -> s{_dgFields = a})
 
--- | Data format for the response.
-dgAlt :: Lens' DatasetsGet' Alt
-dgAlt = lens _dgAlt (\ s a -> s{_dgAlt = a})
+instance GoogleAuth DatasetsGet' where
+        authKey = dgKey . _Just
+        authToken = dgOAuthToken . _Just
 
 instance GoogleRequest DatasetsGet' where
         type Rs DatasetsGet' = Dataset
         request = requestWithRoute defReq bigQueryURL
         requestWithRoute r u DatasetsGet'{..}
-          = go _dgQuotaUser (Just _dgPrettyPrint) _dgUserIp
+          = go _dgQuotaUser (Just _dgPrettyPrint) _dgUserIP
               _dgKey
               _dgDatasetId
               _dgProjectId
-              _dgOauthToken
+              _dgOAuthToken
               _dgFields
-              (Just _dgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy DatasetsGetResource)

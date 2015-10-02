@@ -33,15 +33,14 @@ module Network.Google.Resource.Drive.Children.List
     , clQuotaUser
     , clPrettyPrint
     , clOrderBy
-    , clUserIp
+    , clUserIP
     , clFolderId
     , clQ
     , clKey
     , clPageToken
-    , clOauthToken
+    , clOAuthToken
     , clMaxResults
     , clFields
-    , clAlt
     ) where
 
 import           Network.Google.Drive.Types
@@ -58,12 +57,12 @@ type ChildrenListResource =
                QueryParam "orderBy" Text :>
                  QueryParam "userIp" Text :>
                    QueryParam "q" Text :>
-                     QueryParam "key" Text :>
+                     QueryParam "key" Key :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "maxResults" Int32 :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :> Get '[JSON] ChildList
+                               QueryParam "alt" AltJSON :> Get '[JSON] ChildList
 
 -- | Lists a folder\'s children.
 --
@@ -72,15 +71,14 @@ data ChildrenList' = ChildrenList'
     { _clQuotaUser   :: !(Maybe Text)
     , _clPrettyPrint :: !Bool
     , _clOrderBy     :: !(Maybe Text)
-    , _clUserIp      :: !(Maybe Text)
+    , _clUserIP      :: !(Maybe Text)
     , _clFolderId    :: !Text
     , _clQ           :: !(Maybe Text)
-    , _clKey         :: !(Maybe Text)
+    , _clKey         :: !(Maybe Key)
     , _clPageToken   :: !(Maybe Text)
-    , _clOauthToken  :: !(Maybe Text)
+    , _clOAuthToken  :: !(Maybe OAuthToken)
     , _clMaxResults  :: !Int32
     , _clFields      :: !(Maybe Text)
-    , _clAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChildrenList'' with the minimum fields required to make a request.
@@ -93,7 +91,7 @@ data ChildrenList' = ChildrenList'
 --
 -- * 'clOrderBy'
 --
--- * 'clUserIp'
+-- * 'clUserIP'
 --
 -- * 'clFolderId'
 --
@@ -103,13 +101,11 @@ data ChildrenList' = ChildrenList'
 --
 -- * 'clPageToken'
 --
--- * 'clOauthToken'
+-- * 'clOAuthToken'
 --
 -- * 'clMaxResults'
 --
 -- * 'clFields'
---
--- * 'clAlt'
 childrenList'
     :: Text -- ^ 'folderId'
     -> ChildrenList'
@@ -118,15 +114,14 @@ childrenList' pClFolderId_ =
     { _clQuotaUser = Nothing
     , _clPrettyPrint = True
     , _clOrderBy = Nothing
-    , _clUserIp = Nothing
+    , _clUserIP = Nothing
     , _clFolderId = pClFolderId_
     , _clQ = Nothing
     , _clKey = Nothing
     , _clPageToken = Nothing
-    , _clOauthToken = Nothing
+    , _clOAuthToken = Nothing
     , _clMaxResults = 100
     , _clFields = Nothing
-    , _clAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -156,8 +151,8 @@ clOrderBy
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-clUserIp :: Lens' ChildrenList' (Maybe Text)
-clUserIp = lens _clUserIp (\ s a -> s{_clUserIp = a})
+clUserIP :: Lens' ChildrenList' (Maybe Text)
+clUserIP = lens _clUserIP (\ s a -> s{_clUserIP = a})
 
 -- | The ID of the folder.
 clFolderId :: Lens' ChildrenList' Text
@@ -171,7 +166,7 @@ clQ = lens _clQ (\ s a -> s{_clQ = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-clKey :: Lens' ChildrenList' (Maybe Text)
+clKey :: Lens' ChildrenList' (Maybe Key)
 clKey = lens _clKey (\ s a -> s{_clKey = a})
 
 -- | Page token for children.
@@ -180,9 +175,9 @@ clPageToken
   = lens _clPageToken (\ s a -> s{_clPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-clOauthToken :: Lens' ChildrenList' (Maybe Text)
-clOauthToken
-  = lens _clOauthToken (\ s a -> s{_clOauthToken = a})
+clOAuthToken :: Lens' ChildrenList' (Maybe OAuthToken)
+clOAuthToken
+  = lens _clOAuthToken (\ s a -> s{_clOAuthToken = a})
 
 -- | Maximum number of children to return.
 clMaxResults :: Lens' ChildrenList' Int32
@@ -193,24 +188,24 @@ clMaxResults
 clFields :: Lens' ChildrenList' (Maybe Text)
 clFields = lens _clFields (\ s a -> s{_clFields = a})
 
--- | Data format for the response.
-clAlt :: Lens' ChildrenList' Alt
-clAlt = lens _clAlt (\ s a -> s{_clAlt = a})
+instance GoogleAuth ChildrenList' where
+        authKey = clKey . _Just
+        authToken = clOAuthToken . _Just
 
 instance GoogleRequest ChildrenList' where
         type Rs ChildrenList' = ChildList
         request = requestWithRoute defReq driveURL
         requestWithRoute r u ChildrenList'{..}
           = go _clQuotaUser (Just _clPrettyPrint) _clOrderBy
-              _clUserIp
+              _clUserIP
               _clFolderId
               _clQ
               _clKey
               _clPageToken
-              _clOauthToken
+              _clOAuthToken
               (Just _clMaxResults)
               _clFields
-              (Just _clAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ChildrenListResource)

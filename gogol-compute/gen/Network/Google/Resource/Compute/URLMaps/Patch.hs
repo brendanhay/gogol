@@ -32,14 +32,14 @@ module Network.Google.Resource.Compute.URLMaps.Patch
 
     -- * Request Lenses
     , umpQuotaUser
-    , umpUrlMap
+    , umpURLMap
     , umpPrettyPrint
+    , umpURLMap
     , umpProject
-    , umpUserIp
+    , umpUserIP
     , umpKey
-    , umpOauthToken
+    , umpOAuthToken
     , umpFields
-    , umpAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -55,10 +55,11 @@ type UrlMapsPatchResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Patch '[JSON] Operation
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] URLMap :> Patch '[JSON] Operation
 
 -- | Update the entire content of the UrlMap resource. This method supports
 -- patch semantics.
@@ -66,14 +67,14 @@ type UrlMapsPatchResource =
 -- /See:/ 'uRLMapsPatch'' smart constructor.
 data URLMapsPatch' = URLMapsPatch'
     { _umpQuotaUser   :: !(Maybe Text)
-    , _umpUrlMap      :: !Text
+    , _umpURLMap      :: !Text
     , _umpPrettyPrint :: !Bool
+    , _umpURLMap      :: !URLMap
     , _umpProject     :: !Text
-    , _umpUserIp      :: !(Maybe Text)
-    , _umpKey         :: !(Maybe Text)
-    , _umpOauthToken  :: !(Maybe Text)
+    , _umpUserIP      :: !(Maybe Text)
+    , _umpKey         :: !(Maybe Key)
+    , _umpOAuthToken  :: !(Maybe OAuthToken)
     , _umpFields      :: !(Maybe Text)
-    , _umpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLMapsPatch'' with the minimum fields required to make a request.
@@ -82,36 +83,37 @@ data URLMapsPatch' = URLMapsPatch'
 --
 -- * 'umpQuotaUser'
 --
--- * 'umpUrlMap'
+-- * 'umpURLMap'
 --
 -- * 'umpPrettyPrint'
 --
+-- * 'umpURLMap'
+--
 -- * 'umpProject'
 --
--- * 'umpUserIp'
+-- * 'umpUserIP'
 --
 -- * 'umpKey'
 --
--- * 'umpOauthToken'
+-- * 'umpOAuthToken'
 --
 -- * 'umpFields'
---
--- * 'umpAlt'
 uRLMapsPatch'
     :: Text -- ^ 'urlMap'
+    -> URLMap -- ^ 'URLMap'
     -> Text -- ^ 'project'
     -> URLMapsPatch'
-uRLMapsPatch' pUmpUrlMap_ pUmpProject_ =
+uRLMapsPatch' pUmpURLMap_ pUmpURLMap_ pUmpProject_ =
     URLMapsPatch'
     { _umpQuotaUser = Nothing
-    , _umpUrlMap = pUmpUrlMap_
+    , _umpURLMap = pUmpURLMap_
     , _umpPrettyPrint = True
+    , _umpURLMap = pUmpURLMap_
     , _umpProject = pUmpProject_
-    , _umpUserIp = Nothing
+    , _umpUserIP = Nothing
     , _umpKey = Nothing
-    , _umpOauthToken = Nothing
+    , _umpOAuthToken = Nothing
     , _umpFields = Nothing
-    , _umpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -122,15 +124,20 @@ umpQuotaUser
   = lens _umpQuotaUser (\ s a -> s{_umpQuotaUser = a})
 
 -- | Name of the UrlMap resource to update.
-umpUrlMap :: Lens' URLMapsPatch' Text
-umpUrlMap
-  = lens _umpUrlMap (\ s a -> s{_umpUrlMap = a})
+umpURLMap :: Lens' URLMapsPatch' Text
+umpURLMap
+  = lens _umpURLMap (\ s a -> s{_umpURLMap = a})
 
 -- | Returns response with indentations and line breaks.
 umpPrettyPrint :: Lens' URLMapsPatch' Bool
 umpPrettyPrint
   = lens _umpPrettyPrint
       (\ s a -> s{_umpPrettyPrint = a})
+
+-- | Multipart request metadata.
+umpURLMap :: Lens' URLMapsPatch' URLMap
+umpURLMap
+  = lens _umpURLMap (\ s a -> s{_umpURLMap = a})
 
 -- | Name of the project scoping this request.
 umpProject :: Lens' URLMapsPatch' Text
@@ -139,42 +146,43 @@ umpProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-umpUserIp :: Lens' URLMapsPatch' (Maybe Text)
-umpUserIp
-  = lens _umpUserIp (\ s a -> s{_umpUserIp = a})
+umpUserIP :: Lens' URLMapsPatch' (Maybe Text)
+umpUserIP
+  = lens _umpUserIP (\ s a -> s{_umpUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-umpKey :: Lens' URLMapsPatch' (Maybe Text)
+umpKey :: Lens' URLMapsPatch' (Maybe Key)
 umpKey = lens _umpKey (\ s a -> s{_umpKey = a})
 
 -- | OAuth 2.0 token for the current user.
-umpOauthToken :: Lens' URLMapsPatch' (Maybe Text)
-umpOauthToken
-  = lens _umpOauthToken
-      (\ s a -> s{_umpOauthToken = a})
+umpOAuthToken :: Lens' URLMapsPatch' (Maybe OAuthToken)
+umpOAuthToken
+  = lens _umpOAuthToken
+      (\ s a -> s{_umpOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 umpFields :: Lens' URLMapsPatch' (Maybe Text)
 umpFields
   = lens _umpFields (\ s a -> s{_umpFields = a})
 
--- | Data format for the response.
-umpAlt :: Lens' URLMapsPatch' Alt
-umpAlt = lens _umpAlt (\ s a -> s{_umpAlt = a})
+instance GoogleAuth URLMapsPatch' where
+        authKey = umpKey . _Just
+        authToken = umpOAuthToken . _Just
 
 instance GoogleRequest URLMapsPatch' where
         type Rs URLMapsPatch' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u URLMapsPatch'{..}
-          = go _umpQuotaUser _umpUrlMap (Just _umpPrettyPrint)
+          = go _umpQuotaUser _umpURLMap (Just _umpPrettyPrint)
               _umpProject
-              _umpUserIp
+              _umpUserIP
               _umpKey
-              _umpOauthToken
+              _umpOAuthToken
               _umpFields
-              (Just _umpAlt)
+              (Just AltJSON)
+              _umpURLMap
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UrlMapsPatchResource)

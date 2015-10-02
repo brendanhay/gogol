@@ -32,13 +32,12 @@ module Network.Google.Resource.Mirror.Timeline.Attachments.Delete
     -- * Request Lenses
     , tadQuotaUser
     , tadPrettyPrint
-    , tadUserIp
+    , tadUserIP
     , tadItemId
     , tadAttachmentId
     , tadKey
-    , tadOauthToken
+    , tadOAuthToken
     , tadFields
-    , tadAlt
     ) where
 
 import           Network.Google.Mirror.Types
@@ -54,10 +53,10 @@ type TimelineAttachmentsDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Delete '[JSON] ()
+                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an attachment from a timeline item.
 --
@@ -65,13 +64,12 @@ type TimelineAttachmentsDeleteResource =
 data TimelineAttachmentsDelete' = TimelineAttachmentsDelete'
     { _tadQuotaUser    :: !(Maybe Text)
     , _tadPrettyPrint  :: !Bool
-    , _tadUserIp       :: !(Maybe Text)
+    , _tadUserIP       :: !(Maybe Text)
     , _tadItemId       :: !Text
     , _tadAttachmentId :: !Text
-    , _tadKey          :: !(Maybe Text)
-    , _tadOauthToken   :: !(Maybe Text)
+    , _tadKey          :: !(Maybe Key)
+    , _tadOAuthToken   :: !(Maybe OAuthToken)
     , _tadFields       :: !(Maybe Text)
-    , _tadAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TimelineAttachmentsDelete'' with the minimum fields required to make a request.
@@ -82,7 +80,7 @@ data TimelineAttachmentsDelete' = TimelineAttachmentsDelete'
 --
 -- * 'tadPrettyPrint'
 --
--- * 'tadUserIp'
+-- * 'tadUserIP'
 --
 -- * 'tadItemId'
 --
@@ -90,11 +88,9 @@ data TimelineAttachmentsDelete' = TimelineAttachmentsDelete'
 --
 -- * 'tadKey'
 --
--- * 'tadOauthToken'
+-- * 'tadOAuthToken'
 --
 -- * 'tadFields'
---
--- * 'tadAlt'
 timelineAttachmentsDelete'
     :: Text -- ^ 'itemId'
     -> Text -- ^ 'attachmentId'
@@ -103,13 +99,12 @@ timelineAttachmentsDelete' pTadItemId_ pTadAttachmentId_ =
     TimelineAttachmentsDelete'
     { _tadQuotaUser = Nothing
     , _tadPrettyPrint = True
-    , _tadUserIp = Nothing
+    , _tadUserIP = Nothing
     , _tadItemId = pTadItemId_
     , _tadAttachmentId = pTadAttachmentId_
     , _tadKey = Nothing
-    , _tadOauthToken = Nothing
+    , _tadOAuthToken = Nothing
     , _tadFields = Nothing
-    , _tadAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,9 +122,9 @@ tadPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tadUserIp :: Lens' TimelineAttachmentsDelete' (Maybe Text)
-tadUserIp
-  = lens _tadUserIp (\ s a -> s{_tadUserIp = a})
+tadUserIP :: Lens' TimelineAttachmentsDelete' (Maybe Text)
+tadUserIP
+  = lens _tadUserIP (\ s a -> s{_tadUserIP = a})
 
 -- | The ID of the timeline item the attachment belongs to.
 tadItemId :: Lens' TimelineAttachmentsDelete' Text
@@ -145,36 +140,36 @@ tadAttachmentId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tadKey :: Lens' TimelineAttachmentsDelete' (Maybe Text)
+tadKey :: Lens' TimelineAttachmentsDelete' (Maybe Key)
 tadKey = lens _tadKey (\ s a -> s{_tadKey = a})
 
 -- | OAuth 2.0 token for the current user.
-tadOauthToken :: Lens' TimelineAttachmentsDelete' (Maybe Text)
-tadOauthToken
-  = lens _tadOauthToken
-      (\ s a -> s{_tadOauthToken = a})
+tadOAuthToken :: Lens' TimelineAttachmentsDelete' (Maybe OAuthToken)
+tadOAuthToken
+  = lens _tadOAuthToken
+      (\ s a -> s{_tadOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 tadFields :: Lens' TimelineAttachmentsDelete' (Maybe Text)
 tadFields
   = lens _tadFields (\ s a -> s{_tadFields = a})
 
--- | Data format for the response.
-tadAlt :: Lens' TimelineAttachmentsDelete' Alt
-tadAlt = lens _tadAlt (\ s a -> s{_tadAlt = a})
+instance GoogleAuth TimelineAttachmentsDelete' where
+        authKey = tadKey . _Just
+        authToken = tadOAuthToken . _Just
 
 instance GoogleRequest TimelineAttachmentsDelete'
          where
         type Rs TimelineAttachmentsDelete' = ()
         request = requestWithRoute defReq mirrorURL
         requestWithRoute r u TimelineAttachmentsDelete'{..}
-          = go _tadQuotaUser (Just _tadPrettyPrint) _tadUserIp
+          = go _tadQuotaUser (Just _tadPrettyPrint) _tadUserIP
               _tadItemId
               _tadAttachmentId
               _tadKey
-              _tadOauthToken
+              _tadOAuthToken
               _tadFields
-              (Just _tadAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TimelineAttachmentsDeleteResource)

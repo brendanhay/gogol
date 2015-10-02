@@ -33,15 +33,14 @@ module Network.Google.Resource.Coordinate.Location.List
     , llQuotaUser
     , llPrettyPrint
     , llWorkerEmail
-    , llUserIp
+    , llUserIP
     , llStartTimestampMs
     , llTeamId
     , llKey
     , llPageToken
-    , llOauthToken
+    , llOAuthToken
     , llMaxResults
     , llFields
-    , llAlt
     ) where
 
 import           Network.Google.MapsCoordinate.Types
@@ -59,12 +58,12 @@ type LocationListResource =
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "startTimestampMs" Word64 :>
-                       QueryParam "key" Text :>
+                       QueryParam "key" Key :>
                          QueryParam "pageToken" Text :>
-                           QueryParam "oauth_token" Text :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "maxResults" Word32 :>
                                QueryParam "fields" Text :>
-                                 QueryParam "alt" Alt :>
+                                 QueryParam "alt" AltJSON :>
                                    Get '[JSON] LocationListResponse
 
 -- | Retrieves a list of locations for a worker.
@@ -74,15 +73,14 @@ data LocationList' = LocationList'
     { _llQuotaUser        :: !(Maybe Text)
     , _llPrettyPrint      :: !Bool
     , _llWorkerEmail      :: !Text
-    , _llUserIp           :: !(Maybe Text)
+    , _llUserIP           :: !(Maybe Text)
     , _llStartTimestampMs :: !Word64
     , _llTeamId           :: !Text
-    , _llKey              :: !(Maybe Text)
+    , _llKey              :: !(Maybe Key)
     , _llPageToken        :: !(Maybe Text)
-    , _llOauthToken       :: !(Maybe Text)
+    , _llOAuthToken       :: !(Maybe OAuthToken)
     , _llMaxResults       :: !(Maybe Word32)
     , _llFields           :: !(Maybe Text)
-    , _llAlt              :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LocationList'' with the minimum fields required to make a request.
@@ -95,7 +93,7 @@ data LocationList' = LocationList'
 --
 -- * 'llWorkerEmail'
 --
--- * 'llUserIp'
+-- * 'llUserIP'
 --
 -- * 'llStartTimestampMs'
 --
@@ -105,13 +103,11 @@ data LocationList' = LocationList'
 --
 -- * 'llPageToken'
 --
--- * 'llOauthToken'
+-- * 'llOAuthToken'
 --
 -- * 'llMaxResults'
 --
 -- * 'llFields'
---
--- * 'llAlt'
 locationList'
     :: Text -- ^ 'workerEmail'
     -> Word64 -- ^ 'startTimestampMs'
@@ -122,15 +118,14 @@ locationList' pLlWorkerEmail_ pLlStartTimestampMs_ pLlTeamId_ =
     { _llQuotaUser = Nothing
     , _llPrettyPrint = True
     , _llWorkerEmail = pLlWorkerEmail_
-    , _llUserIp = Nothing
+    , _llUserIP = Nothing
     , _llStartTimestampMs = pLlStartTimestampMs_
     , _llTeamId = pLlTeamId_
     , _llKey = Nothing
     , _llPageToken = Nothing
-    , _llOauthToken = Nothing
+    , _llOAuthToken = Nothing
     , _llMaxResults = Nothing
     , _llFields = Nothing
-    , _llAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -154,8 +149,8 @@ llWorkerEmail
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-llUserIp :: Lens' LocationList' (Maybe Text)
-llUserIp = lens _llUserIp (\ s a -> s{_llUserIp = a})
+llUserIP :: Lens' LocationList' (Maybe Text)
+llUserIP = lens _llUserIP (\ s a -> s{_llUserIP = a})
 
 -- | Start timestamp in milliseconds since the epoch.
 llStartTimestampMs :: Lens' LocationList' Word64
@@ -170,7 +165,7 @@ llTeamId = lens _llTeamId (\ s a -> s{_llTeamId = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-llKey :: Lens' LocationList' (Maybe Text)
+llKey :: Lens' LocationList' (Maybe Key)
 llKey = lens _llKey (\ s a -> s{_llKey = a})
 
 -- | Continuation token
@@ -179,9 +174,9 @@ llPageToken
   = lens _llPageToken (\ s a -> s{_llPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-llOauthToken :: Lens' LocationList' (Maybe Text)
-llOauthToken
-  = lens _llOauthToken (\ s a -> s{_llOauthToken = a})
+llOAuthToken :: Lens' LocationList' (Maybe OAuthToken)
+llOAuthToken
+  = lens _llOAuthToken (\ s a -> s{_llOAuthToken = a})
 
 -- | Maximum number of results to return in one page.
 llMaxResults :: Lens' LocationList' (Maybe Word32)
@@ -192,9 +187,9 @@ llMaxResults
 llFields :: Lens' LocationList' (Maybe Text)
 llFields = lens _llFields (\ s a -> s{_llFields = a})
 
--- | Data format for the response.
-llAlt :: Lens' LocationList' Alt
-llAlt = lens _llAlt (\ s a -> s{_llAlt = a})
+instance GoogleAuth LocationList' where
+        authKey = llKey . _Just
+        authToken = llOAuthToken . _Just
 
 instance GoogleRequest LocationList' where
         type Rs LocationList' = LocationListResponse
@@ -202,15 +197,15 @@ instance GoogleRequest LocationList' where
         requestWithRoute r u LocationList'{..}
           = go _llQuotaUser (Just _llPrettyPrint)
               _llWorkerEmail
-              _llUserIp
+              _llUserIP
               (Just _llStartTimestampMs)
               _llTeamId
               _llKey
               _llPageToken
-              _llOauthToken
+              _llOAuthToken
               _llMaxResults
               _llFields
-              (Just _llAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy LocationListResource)

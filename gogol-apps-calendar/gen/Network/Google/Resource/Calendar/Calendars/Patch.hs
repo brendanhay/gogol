@@ -33,11 +33,11 @@ module Network.Google.Resource.Calendar.Calendars.Patch
     , cpQuotaUser
     , cpCalendarId
     , cpPrettyPrint
-    , cpUserIp
+    , cpUserIP
     , cpKey
-    , cpOauthToken
+    , cpCalendar
+    , cpOAuthToken
     , cpFields
-    , cpAlt
     ) where
 
 import           Network.Google.AppsCalendar.Types
@@ -51,10 +51,11 @@ type CalendarsPatchResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Patch '[JSON] Calendar
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Calendar :> Patch '[JSON] Calendar
 
 -- | Updates metadata for a calendar. This method supports patch semantics.
 --
@@ -63,11 +64,11 @@ data CalendarsPatch' = CalendarsPatch'
     { _cpQuotaUser   :: !(Maybe Text)
     , _cpCalendarId  :: !Text
     , _cpPrettyPrint :: !Bool
-    , _cpUserIp      :: !(Maybe Text)
-    , _cpKey         :: !(Maybe Text)
-    , _cpOauthToken  :: !(Maybe Text)
+    , _cpUserIP      :: !(Maybe Text)
+    , _cpKey         :: !(Maybe Key)
+    , _cpCalendar    :: !Calendar
+    , _cpOAuthToken  :: !(Maybe OAuthToken)
     , _cpFields      :: !(Maybe Text)
-    , _cpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CalendarsPatch'' with the minimum fields required to make a request.
@@ -80,28 +81,29 @@ data CalendarsPatch' = CalendarsPatch'
 --
 -- * 'cpPrettyPrint'
 --
--- * 'cpUserIp'
+-- * 'cpUserIP'
 --
 -- * 'cpKey'
 --
--- * 'cpOauthToken'
+-- * 'cpCalendar'
+--
+-- * 'cpOAuthToken'
 --
 -- * 'cpFields'
---
--- * 'cpAlt'
 calendarsPatch'
     :: Text -- ^ 'calendarId'
+    -> Calendar -- ^ 'Calendar'
     -> CalendarsPatch'
-calendarsPatch' pCpCalendarId_ =
+calendarsPatch' pCpCalendarId_ pCpCalendar_ =
     CalendarsPatch'
     { _cpQuotaUser = Nothing
     , _cpCalendarId = pCpCalendarId_
     , _cpPrettyPrint = True
-    , _cpUserIp = Nothing
+    , _cpUserIP = Nothing
     , _cpKey = Nothing
-    , _cpOauthToken = Nothing
+    , _cpCalendar = pCpCalendar_
+    , _cpOAuthToken = Nothing
     , _cpFields = Nothing
-    , _cpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -126,38 +128,44 @@ cpPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cpUserIp :: Lens' CalendarsPatch' (Maybe Text)
-cpUserIp = lens _cpUserIp (\ s a -> s{_cpUserIp = a})
+cpUserIP :: Lens' CalendarsPatch' (Maybe Text)
+cpUserIP = lens _cpUserIP (\ s a -> s{_cpUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cpKey :: Lens' CalendarsPatch' (Maybe Text)
+cpKey :: Lens' CalendarsPatch' (Maybe Key)
 cpKey = lens _cpKey (\ s a -> s{_cpKey = a})
 
+-- | Multipart request metadata.
+cpCalendar :: Lens' CalendarsPatch' Calendar
+cpCalendar
+  = lens _cpCalendar (\ s a -> s{_cpCalendar = a})
+
 -- | OAuth 2.0 token for the current user.
-cpOauthToken :: Lens' CalendarsPatch' (Maybe Text)
-cpOauthToken
-  = lens _cpOauthToken (\ s a -> s{_cpOauthToken = a})
+cpOAuthToken :: Lens' CalendarsPatch' (Maybe OAuthToken)
+cpOAuthToken
+  = lens _cpOAuthToken (\ s a -> s{_cpOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cpFields :: Lens' CalendarsPatch' (Maybe Text)
 cpFields = lens _cpFields (\ s a -> s{_cpFields = a})
 
--- | Data format for the response.
-cpAlt :: Lens' CalendarsPatch' Alt
-cpAlt = lens _cpAlt (\ s a -> s{_cpAlt = a})
+instance GoogleAuth CalendarsPatch' where
+        authKey = cpKey . _Just
+        authToken = cpOAuthToken . _Just
 
 instance GoogleRequest CalendarsPatch' where
         type Rs CalendarsPatch' = Calendar
         request = requestWithRoute defReq appsCalendarURL
         requestWithRoute r u CalendarsPatch'{..}
           = go _cpQuotaUser _cpCalendarId (Just _cpPrettyPrint)
-              _cpUserIp
+              _cpUserIP
               _cpKey
-              _cpOauthToken
+              _cpOAuthToken
               _cpFields
-              (Just _cpAlt)
+              (Just AltJSON)
+              _cpCalendar
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CalendarsPatchResource)

@@ -41,11 +41,10 @@ module Network.Google.Resource.PubSub.Projects.Topics.List
     , ptlBearerToken
     , ptlKey
     , ptlPageToken
-    , ptlOauthToken
+    , ptlOAuthToken
     , ptlPageSize
     , ptlFields
     , ptlCallback
-    , ptlAlt
     ) where
 
 import           Network.Google.Prelude
@@ -65,13 +64,13 @@ type ProjectsTopicsListResource =
                      QueryParam "access_token" Text :>
                        QueryParam "uploadType" Text :>
                          QueryParam "bearer_token" Text :>
-                           QueryParam "key" Text :>
+                           QueryParam "key" Key :>
                              QueryParam "pageToken" Text :>
-                               QueryParam "oauth_token" Text :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "pageSize" Int32 :>
                                    QueryParam "fields" Text :>
                                      QueryParam "callback" Text :>
-                                       QueryParam "alt" Text :>
+                                       QueryParam "alt" AltJSON :>
                                          Get '[JSON] ListTopicsResponse
 
 -- | Lists matching topics.
@@ -87,13 +86,12 @@ data ProjectsTopicsList' = ProjectsTopicsList'
     , _ptlAccessToken    :: !(Maybe Text)
     , _ptlUploadType     :: !(Maybe Text)
     , _ptlBearerToken    :: !(Maybe Text)
-    , _ptlKey            :: !(Maybe Text)
+    , _ptlKey            :: !(Maybe Key)
     , _ptlPageToken      :: !(Maybe Text)
-    , _ptlOauthToken     :: !(Maybe Text)
+    , _ptlOAuthToken     :: !(Maybe OAuthToken)
     , _ptlPageSize       :: !(Maybe Int32)
     , _ptlFields         :: !(Maybe Text)
     , _ptlCallback       :: !(Maybe Text)
-    , _ptlAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsTopicsList'' with the minimum fields required to make a request.
@@ -122,15 +120,13 @@ data ProjectsTopicsList' = ProjectsTopicsList'
 --
 -- * 'ptlPageToken'
 --
--- * 'ptlOauthToken'
+-- * 'ptlOAuthToken'
 --
 -- * 'ptlPageSize'
 --
 -- * 'ptlFields'
 --
 -- * 'ptlCallback'
---
--- * 'ptlAlt'
 projectsTopicsList'
     :: Text -- ^ 'project'
     -> ProjectsTopicsList'
@@ -147,11 +143,10 @@ projectsTopicsList' pPtlProject_ =
     , _ptlBearerToken = Nothing
     , _ptlKey = Nothing
     , _ptlPageToken = Nothing
-    , _ptlOauthToken = Nothing
+    , _ptlOAuthToken = Nothing
     , _ptlPageSize = Nothing
     , _ptlFields = Nothing
     , _ptlCallback = Nothing
-    , _ptlAlt = "json"
     }
 
 -- | V1 error format.
@@ -207,7 +202,7 @@ ptlBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ptlKey :: Lens' ProjectsTopicsList' (Maybe Text)
+ptlKey :: Lens' ProjectsTopicsList' (Maybe Key)
 ptlKey = lens _ptlKey (\ s a -> s{_ptlKey = a})
 
 -- | The value returned by the last ListTopicsResponse; indicates that this
@@ -218,10 +213,10 @@ ptlPageToken
   = lens _ptlPageToken (\ s a -> s{_ptlPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-ptlOauthToken :: Lens' ProjectsTopicsList' (Maybe Text)
-ptlOauthToken
-  = lens _ptlOauthToken
-      (\ s a -> s{_ptlOauthToken = a})
+ptlOAuthToken :: Lens' ProjectsTopicsList' (Maybe OAuthToken)
+ptlOAuthToken
+  = lens _ptlOAuthToken
+      (\ s a -> s{_ptlOAuthToken = a})
 
 -- | Maximum number of topics to return.
 ptlPageSize :: Lens' ProjectsTopicsList' (Maybe Int32)
@@ -238,9 +233,9 @@ ptlCallback :: Lens' ProjectsTopicsList' (Maybe Text)
 ptlCallback
   = lens _ptlCallback (\ s a -> s{_ptlCallback = a})
 
--- | Data format for response.
-ptlAlt :: Lens' ProjectsTopicsList' Text
-ptlAlt = lens _ptlAlt (\ s a -> s{_ptlAlt = a})
+instance GoogleAuth ProjectsTopicsList' where
+        authKey = ptlKey . _Just
+        authToken = ptlOAuthToken . _Just
 
 instance GoogleRequest ProjectsTopicsList' where
         type Rs ProjectsTopicsList' = ListTopicsResponse
@@ -255,11 +250,11 @@ instance GoogleRequest ProjectsTopicsList' where
               _ptlBearerToken
               _ptlKey
               _ptlPageToken
-              _ptlOauthToken
+              _ptlOAuthToken
               _ptlPageSize
               _ptlFields
               _ptlCallback
-              (Just _ptlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsTopicsListResource)

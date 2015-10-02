@@ -19,7 +19,7 @@
 --
 -- | Lists all GTM Triggers of a Container.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsContainersTriggersList@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsContainersTriggersList@.
 module Network.Google.Resource.TagManager.Accounts.Containers.Triggers.List
     (
     -- * REST Resource
@@ -33,18 +33,17 @@ module Network.Google.Resource.TagManager.Accounts.Containers.Triggers.List
     , actlQuotaUser
     , actlPrettyPrint
     , actlContainerId
-    , actlUserIp
+    , actlUserIP
     , actlAccountId
     , actlKey
-    , actlOauthToken
+    , actlOAuthToken
     , actlFields
-    , actlAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagmanagerAccountsContainersTriggersList@ which the
+-- | A resource alias for @TagManagerAccountsContainersTriggersList@ which the
 -- 'AccountsContainersTriggersList'' request conforms to.
 type AccountsContainersTriggersListResource =
      "accounts" :>
@@ -55,10 +54,10 @@ type AccountsContainersTriggersListResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :>
+                           QueryParam "alt" AltJSON :>
                              Get '[JSON] ListTriggersResponse
 
 -- | Lists all GTM Triggers of a Container.
@@ -68,12 +67,11 @@ data AccountsContainersTriggersList' = AccountsContainersTriggersList'
     { _actlQuotaUser   :: !(Maybe Text)
     , _actlPrettyPrint :: !Bool
     , _actlContainerId :: !Text
-    , _actlUserIp      :: !(Maybe Text)
+    , _actlUserIP      :: !(Maybe Text)
     , _actlAccountId   :: !Text
-    , _actlKey         :: !(Maybe Text)
-    , _actlOauthToken  :: !(Maybe Text)
+    , _actlKey         :: !(Maybe Key)
+    , _actlOAuthToken  :: !(Maybe OAuthToken)
     , _actlFields      :: !(Maybe Text)
-    , _actlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsContainersTriggersList'' with the minimum fields required to make a request.
@@ -86,17 +84,15 @@ data AccountsContainersTriggersList' = AccountsContainersTriggersList'
 --
 -- * 'actlContainerId'
 --
--- * 'actlUserIp'
+-- * 'actlUserIP'
 --
 -- * 'actlAccountId'
 --
 -- * 'actlKey'
 --
--- * 'actlOauthToken'
+-- * 'actlOAuthToken'
 --
 -- * 'actlFields'
---
--- * 'actlAlt'
 accountsContainersTriggersList'
     :: Text -- ^ 'containerId'
     -> Text -- ^ 'accountId'
@@ -106,12 +102,11 @@ accountsContainersTriggersList' pActlContainerId_ pActlAccountId_ =
     { _actlQuotaUser = Nothing
     , _actlPrettyPrint = True
     , _actlContainerId = pActlContainerId_
-    , _actlUserIp = Nothing
+    , _actlUserIP = Nothing
     , _actlAccountId = pActlAccountId_
     , _actlKey = Nothing
-    , _actlOauthToken = Nothing
+    , _actlOAuthToken = Nothing
     , _actlFields = Nothing
-    , _actlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -136,9 +131,9 @@ actlContainerId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-actlUserIp :: Lens' AccountsContainersTriggersList' (Maybe Text)
-actlUserIp
-  = lens _actlUserIp (\ s a -> s{_actlUserIp = a})
+actlUserIP :: Lens' AccountsContainersTriggersList' (Maybe Text)
+actlUserIP
+  = lens _actlUserIP (\ s a -> s{_actlUserIP = a})
 
 -- | The GTM Account ID.
 actlAccountId :: Lens' AccountsContainersTriggersList' Text
@@ -149,23 +144,24 @@ actlAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-actlKey :: Lens' AccountsContainersTriggersList' (Maybe Text)
+actlKey :: Lens' AccountsContainersTriggersList' (Maybe Key)
 actlKey = lens _actlKey (\ s a -> s{_actlKey = a})
 
 -- | OAuth 2.0 token for the current user.
-actlOauthToken :: Lens' AccountsContainersTriggersList' (Maybe Text)
-actlOauthToken
-  = lens _actlOauthToken
-      (\ s a -> s{_actlOauthToken = a})
+actlOAuthToken :: Lens' AccountsContainersTriggersList' (Maybe OAuthToken)
+actlOAuthToken
+  = lens _actlOAuthToken
+      (\ s a -> s{_actlOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 actlFields :: Lens' AccountsContainersTriggersList' (Maybe Text)
 actlFields
   = lens _actlFields (\ s a -> s{_actlFields = a})
 
--- | Data format for the response.
-actlAlt :: Lens' AccountsContainersTriggersList' Alt
-actlAlt = lens _actlAlt (\ s a -> s{_actlAlt = a})
+instance GoogleAuth AccountsContainersTriggersList'
+         where
+        authKey = actlKey . _Just
+        authToken = actlOAuthToken . _Just
 
 instance GoogleRequest
          AccountsContainersTriggersList' where
@@ -176,12 +172,12 @@ instance GoogleRequest
           AccountsContainersTriggersList'{..}
           = go _actlQuotaUser (Just _actlPrettyPrint)
               _actlContainerId
-              _actlUserIp
+              _actlUserIP
               _actlAccountId
               _actlKey
-              _actlOauthToken
+              _actlOAuthToken
               _actlFields
-              (Just _actlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

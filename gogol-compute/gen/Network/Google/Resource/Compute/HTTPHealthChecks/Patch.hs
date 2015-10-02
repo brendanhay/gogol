@@ -34,12 +34,12 @@ module Network.Google.Resource.Compute.HTTPHealthChecks.Patch
     , httphcpQuotaUser
     , httphcpPrettyPrint
     , httphcpProject
-    , httphcpUserIp
+    , httphcpUserIP
     , httphcpKey
-    , httphcpHttpHealthCheck
-    , httphcpOauthToken
+    , httphcpHTTPHealthCheck
+    , httphcpHTTPHealthCheck
+    , httphcpOAuthToken
     , httphcpFields
-    , httphcpAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -55,10 +55,12 @@ type HttpHealthChecksPatchResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Patch '[JSON] Operation
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] HTTPHealthCheck :>
+                             Patch '[JSON] Operation
 
 -- | Updates a HttpHealthCheck resource in the specified project using the
 -- data included in the request. This method supports patch semantics.
@@ -68,12 +70,12 @@ data HTTPHealthChecksPatch' = HTTPHealthChecksPatch'
     { _httphcpQuotaUser       :: !(Maybe Text)
     , _httphcpPrettyPrint     :: !Bool
     , _httphcpProject         :: !Text
-    , _httphcpUserIp          :: !(Maybe Text)
-    , _httphcpKey             :: !(Maybe Text)
-    , _httphcpHttpHealthCheck :: !Text
-    , _httphcpOauthToken      :: !(Maybe Text)
+    , _httphcpUserIP          :: !(Maybe Text)
+    , _httphcpKey             :: !(Maybe Key)
+    , _httphcpHTTPHealthCheck :: !HTTPHealthCheck
+    , _httphcpHTTPHealthCheck :: !Text
+    , _httphcpOAuthToken      :: !(Maybe OAuthToken)
     , _httphcpFields          :: !(Maybe Text)
-    , _httphcpAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'HTTPHealthChecksPatch'' with the minimum fields required to make a request.
@@ -86,32 +88,33 @@ data HTTPHealthChecksPatch' = HTTPHealthChecksPatch'
 --
 -- * 'httphcpProject'
 --
--- * 'httphcpUserIp'
+-- * 'httphcpUserIP'
 --
 -- * 'httphcpKey'
 --
--- * 'httphcpHttpHealthCheck'
+-- * 'httphcpHTTPHealthCheck'
 --
--- * 'httphcpOauthToken'
+-- * 'httphcpHTTPHealthCheck'
+--
+-- * 'httphcpOAuthToken'
 --
 -- * 'httphcpFields'
---
--- * 'httphcpAlt'
 hTTPHealthChecksPatch'
     :: Text -- ^ 'project'
+    -> HTTPHealthCheck -- ^ 'HTTPHealthCheck'
     -> Text -- ^ 'httpHealthCheck'
     -> HTTPHealthChecksPatch'
-hTTPHealthChecksPatch' pHttphcpProject_ pHttphcpHttpHealthCheck_ =
+hTTPHealthChecksPatch' pHttphcpProject_ pHttphcpHTTPHealthCheck_ pHttphcpHTTPHealthCheck_ =
     HTTPHealthChecksPatch'
     { _httphcpQuotaUser = Nothing
     , _httphcpPrettyPrint = True
     , _httphcpProject = pHttphcpProject_
-    , _httphcpUserIp = Nothing
+    , _httphcpUserIP = Nothing
     , _httphcpKey = Nothing
-    , _httphcpHttpHealthCheck = pHttphcpHttpHealthCheck_
-    , _httphcpOauthToken = Nothing
+    , _httphcpHTTPHealthCheck = pHttphcpHTTPHealthCheck_
+    , _httphcpHTTPHealthCheck = pHttphcpHTTPHealthCheck_
+    , _httphcpOAuthToken = Nothing
     , _httphcpFields = Nothing
-    , _httphcpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -136,29 +139,35 @@ httphcpProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-httphcpUserIp :: Lens' HTTPHealthChecksPatch' (Maybe Text)
-httphcpUserIp
-  = lens _httphcpUserIp
-      (\ s a -> s{_httphcpUserIp = a})
+httphcpUserIP :: Lens' HTTPHealthChecksPatch' (Maybe Text)
+httphcpUserIP
+  = lens _httphcpUserIP
+      (\ s a -> s{_httphcpUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-httphcpKey :: Lens' HTTPHealthChecksPatch' (Maybe Text)
+httphcpKey :: Lens' HTTPHealthChecksPatch' (Maybe Key)
 httphcpKey
   = lens _httphcpKey (\ s a -> s{_httphcpKey = a})
 
+-- | Multipart request metadata.
+httphcpHTTPHealthCheck :: Lens' HTTPHealthChecksPatch' HTTPHealthCheck
+httphcpHTTPHealthCheck
+  = lens _httphcpHTTPHealthCheck
+      (\ s a -> s{_httphcpHTTPHealthCheck = a})
+
 -- | Name of the HttpHealthCheck resource to update.
-httphcpHttpHealthCheck :: Lens' HTTPHealthChecksPatch' Text
-httphcpHttpHealthCheck
-  = lens _httphcpHttpHealthCheck
-      (\ s a -> s{_httphcpHttpHealthCheck = a})
+httphcpHTTPHealthCheck :: Lens' HTTPHealthChecksPatch' Text
+httphcpHTTPHealthCheck
+  = lens _httphcpHTTPHealthCheck
+      (\ s a -> s{_httphcpHTTPHealthCheck = a})
 
 -- | OAuth 2.0 token for the current user.
-httphcpOauthToken :: Lens' HTTPHealthChecksPatch' (Maybe Text)
-httphcpOauthToken
-  = lens _httphcpOauthToken
-      (\ s a -> s{_httphcpOauthToken = a})
+httphcpOAuthToken :: Lens' HTTPHealthChecksPatch' (Maybe OAuthToken)
+httphcpOAuthToken
+  = lens _httphcpOAuthToken
+      (\ s a -> s{_httphcpOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 httphcpFields :: Lens' HTTPHealthChecksPatch' (Maybe Text)
@@ -166,10 +175,9 @@ httphcpFields
   = lens _httphcpFields
       (\ s a -> s{_httphcpFields = a})
 
--- | Data format for the response.
-httphcpAlt :: Lens' HTTPHealthChecksPatch' Alt
-httphcpAlt
-  = lens _httphcpAlt (\ s a -> s{_httphcpAlt = a})
+instance GoogleAuth HTTPHealthChecksPatch' where
+        authKey = httphcpKey . _Just
+        authToken = httphcpOAuthToken . _Just
 
 instance GoogleRequest HTTPHealthChecksPatch' where
         type Rs HTTPHealthChecksPatch' = Operation
@@ -177,12 +185,13 @@ instance GoogleRequest HTTPHealthChecksPatch' where
         requestWithRoute r u HTTPHealthChecksPatch'{..}
           = go _httphcpQuotaUser (Just _httphcpPrettyPrint)
               _httphcpProject
-              _httphcpUserIp
+              _httphcpUserIP
               _httphcpKey
-              _httphcpHttpHealthCheck
-              _httphcpOauthToken
+              _httphcpHTTPHealthCheck
+              _httphcpOAuthToken
               _httphcpFields
-              (Just _httphcpAlt)
+              (Just AltJSON)
+              _httphcpHTTPHealthCheck
           where go
                   = clientWithRoute
                       (Proxy :: Proxy HttpHealthChecksPatchResource)

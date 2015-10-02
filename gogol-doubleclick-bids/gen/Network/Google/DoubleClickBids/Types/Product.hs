@@ -22,7 +22,7 @@ import           Network.Google.Prelude
 --
 -- /See:/ 'listReportsResponse' smart constructor.
 data ListReportsResponse = ListReportsResponse
-    { _lrrReports :: !(Maybe [Maybe Report])
+    { _lrrReports :: !(Maybe [Report])
     , _lrrKind    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -42,7 +42,7 @@ listReportsResponse =
     }
 
 -- | Retrieved reports.
-lrrReports :: Lens' ListReportsResponse [Maybe Report]
+lrrReports :: Lens' ListReportsResponse [Report]
 lrrReports
   = lens _lrrReports (\ s a -> s{_lrrReports = a}) .
       _Default
@@ -419,7 +419,7 @@ instance ToJSON RunQueryRequest where
 --
 -- /See:/ 'listQueriesResponse' smart constructor.
 data ListQueriesResponse = ListQueriesResponse
-    { _lqrQueries :: !(Maybe [Maybe Query])
+    { _lqrQueries :: !(Maybe [Query])
     , _lqrKind    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -439,7 +439,7 @@ listQueriesResponse =
     }
 
 -- | Retrieved queries.
-lqrQueries :: Lens' ListQueriesResponse [Maybe Query]
+lqrQueries :: Lens' ListQueriesResponse [Query]
 lqrQueries
   = lens _lqrQueries (\ s a -> s{_lqrQueries = a}) .
       _Default
@@ -533,7 +533,7 @@ instance ToJSON DownloadLineItemsRequest where
 --
 -- /See:/ 'uploadLineItemsResponse' smart constructor.
 newtype UploadLineItemsResponse = UploadLineItemsResponse
-    { _ulirUploadStatus :: Maybe (Maybe UploadStatus)
+    { _ulirUploadStatus :: Maybe UploadStatus
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UploadLineItemsResponse' with the minimum fields required to make a request.
@@ -549,7 +549,7 @@ uploadLineItemsResponse =
     }
 
 -- | Status of upload.
-ulirUploadStatus :: Lens' UploadLineItemsResponse (Maybe (Maybe UploadStatus))
+ulirUploadStatus :: Lens' UploadLineItemsResponse (Maybe UploadStatus)
 ulirUploadStatus
   = lens _ulirUploadStatus
       (\ s a -> s{_ulirUploadStatus = a})
@@ -570,7 +570,7 @@ instance ToJSON UploadLineItemsResponse where
 --
 -- /See:/ 'reportMetadata' smart constructor.
 data ReportMetadata = ReportMetadata
-    { _rmStatus                 :: !(Maybe (Maybe ReportStatus))
+    { _rmStatus                 :: !(Maybe ReportStatus)
     , _rmReportDataEndTimeMs    :: !(Maybe Int64)
     , _rmGoogleCloudStoragePath :: !(Maybe Text)
     , _rmReportDataStartTimeMs  :: !(Maybe Int64)
@@ -598,7 +598,7 @@ reportMetadata =
     }
 
 -- | Report status.
-rmStatus :: Lens' ReportMetadata (Maybe (Maybe ReportStatus))
+rmStatus :: Lens' ReportMetadata (Maybe ReportStatus)
 rmStatus = lens _rmStatus (\ s a -> s{_rmStatus = a})
 
 -- | The ending time for the data that is shown in the report.
@@ -645,9 +645,9 @@ instance ToJSON ReportMetadata where
 --
 -- /See:/ 'report' smart constructor.
 data Report = Report
-    { _rParams   :: !(Maybe (Maybe Parameters))
-    , _rKey      :: !(Maybe (Maybe ReportKey))
-    , _rMetadata :: !(Maybe (Maybe ReportMetadata))
+    { _rParams   :: !(Maybe Parameters)
+    , _rKey      :: !(Maybe ReportKey)
+    , _rMetadata :: !(Maybe ReportMetadata)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Report' with the minimum fields required to make a request.
@@ -669,15 +669,15 @@ report =
     }
 
 -- | Report parameters.
-rParams :: Lens' Report (Maybe (Maybe Parameters))
+rParams :: Lens' Report (Maybe Parameters)
 rParams = lens _rParams (\ s a -> s{_rParams = a})
 
 -- | Key used to identify a report.
-rKey :: Lens' Report (Maybe (Maybe ReportKey))
+rKey :: Lens' Report (Maybe ReportKey)
 rKey = lens _rKey (\ s a -> s{_rKey = a})
 
 -- | Report metadata.
-rMetadata :: Lens' Report (Maybe (Maybe ReportMetadata))
+rMetadata :: Lens' Report (Maybe ReportMetadata)
 rMetadata
   = lens _rMetadata (\ s a -> s{_rMetadata = a})
 
@@ -840,7 +840,7 @@ instance ToJSON ReportKey where
 --
 -- /See:/ 'uploadStatus' smart constructor.
 data UploadStatus = UploadStatus
-    { _usRowStatus :: !(Maybe [Maybe RowStatus])
+    { _usRowStatus :: !(Maybe [RowStatus])
     , _usErrors    :: !(Maybe [Text])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -860,7 +860,7 @@ uploadStatus =
     }
 
 -- | Per-row upload status.
-usRowStatus :: Lens' UploadStatus [Maybe RowStatus]
+usRowStatus :: Lens' UploadStatus [RowStatus]
 usRowStatus
   = lens _usRowStatus (\ s a -> s{_usRowStatus = a}) .
       _Default
@@ -1007,7 +1007,7 @@ data ReportStatus = ReportStatus
     { _rsState        :: !(Maybe ReportStatusState)
     , _rsFinishTimeMs :: !(Maybe Int64)
     , _rsFormat       :: !(Maybe ReportStatusFormat)
-    , _rsFailure      :: !(Maybe (Maybe ReportFailure))
+    , _rsFailure      :: !(Maybe ReportFailure)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportStatus' with the minimum fields required to make a request.
@@ -1046,7 +1046,7 @@ rsFormat :: Lens' ReportStatus (Maybe ReportStatusFormat)
 rsFormat = lens _rsFormat (\ s a -> s{_rsFormat = a})
 
 -- | If the report failed, this records the cause.
-rsFailure :: Lens' ReportStatus (Maybe (Maybe ReportFailure))
+rsFailure :: Lens' ReportStatus (Maybe ReportFailure)
 rsFailure
   = lens _rsFailure (\ s a -> s{_rsFailure = a})
 
@@ -1074,10 +1074,10 @@ instance ToJSON ReportStatus where
 data Query = Query
     { _qQueryId               :: !(Maybe Int64)
     , _qReportDataEndTimeMs   :: !(Maybe Int64)
-    , _qSchedule              :: !(Maybe (Maybe QuerySchedule))
+    , _qSchedule              :: !(Maybe QuerySchedule)
     , _qKind                  :: !Text
-    , _qParams                :: !(Maybe (Maybe Parameters))
-    , _qMetadata              :: !(Maybe (Maybe QueryMetadata))
+    , _qParams                :: !(Maybe Parameters)
+    , _qMetadata              :: !(Maybe QueryMetadata)
     , _qReportDataStartTimeMs :: !(Maybe Int64)
     , _qTimezoneCode          :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -1128,7 +1128,7 @@ qReportDataEndTimeMs
       (\ s a -> s{_qReportDataEndTimeMs = a})
 
 -- | Information on how often and when to run a query.
-qSchedule :: Lens' Query (Maybe (Maybe QuerySchedule))
+qSchedule :: Lens' Query (Maybe QuerySchedule)
 qSchedule
   = lens _qSchedule (\ s a -> s{_qSchedule = a})
 
@@ -1138,11 +1138,11 @@ qKind :: Lens' Query Text
 qKind = lens _qKind (\ s a -> s{_qKind = a})
 
 -- | Query parameters.
-qParams :: Lens' Query (Maybe (Maybe Parameters))
+qParams :: Lens' Query (Maybe Parameters)
 qParams = lens _qParams (\ s a -> s{_qParams = a})
 
 -- | Query metadata.
-qMetadata :: Lens' Query (Maybe (Maybe QueryMetadata))
+qMetadata :: Lens' Query (Maybe QueryMetadata)
 qMetadata
   = lens _qMetadata (\ s a -> s{_qMetadata = a})
 
@@ -1193,7 +1193,7 @@ instance ToJSON Query where
 data Parameters = Parameters
     { _pMetrics           :: !(Maybe [ParametersMetrics])
     , _pIncludeInviteData :: !(Maybe Bool)
-    , _pFilters           :: !(Maybe [Maybe FilterPair])
+    , _pFilters           :: !(Maybe [FilterPair])
     , _pGroupBys          :: !(Maybe [ParametersGroupBys])
     , _pType              :: !(Maybe ParametersType)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -1236,7 +1236,7 @@ pIncludeInviteData
       (\ s a -> s{_pIncludeInviteData = a})
 
 -- | Filters used to match traffic data in your report.
-pFilters :: Lens' Parameters [Maybe FilterPair]
+pFilters :: Lens' Parameters [FilterPair]
 pFilters
   = lens _pFilters (\ s a -> s{_pFilters = a}) .
       _Default

@@ -32,12 +32,11 @@ module Network.Google.Resource.Drive.Permissions.List
     -- * Request Lenses
     , pllQuotaUser
     , pllPrettyPrint
-    , pllUserIp
+    , pllUserIP
     , pllKey
     , pllFileId
-    , pllOauthToken
+    , pllOAuthToken
     , pllFields
-    , pllAlt
     ) where
 
 import           Network.Google.Drive.Types
@@ -52,10 +51,11 @@ type PermissionsListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Get '[JSON] PermissionList
+                       QueryParam "alt" AltJSON :>
+                         Get '[JSON] PermissionList
 
 -- | Lists a file\'s permissions.
 --
@@ -63,12 +63,11 @@ type PermissionsListResource =
 data PermissionsList' = PermissionsList'
     { _pllQuotaUser   :: !(Maybe Text)
     , _pllPrettyPrint :: !Bool
-    , _pllUserIp      :: !(Maybe Text)
-    , _pllKey         :: !(Maybe Text)
+    , _pllUserIP      :: !(Maybe Text)
+    , _pllKey         :: !(Maybe Key)
     , _pllFileId      :: !Text
-    , _pllOauthToken  :: !(Maybe Text)
+    , _pllOAuthToken  :: !(Maybe OAuthToken)
     , _pllFields      :: !(Maybe Text)
-    , _pllAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PermissionsList'' with the minimum fields required to make a request.
@@ -79,17 +78,15 @@ data PermissionsList' = PermissionsList'
 --
 -- * 'pllPrettyPrint'
 --
--- * 'pllUserIp'
+-- * 'pllUserIP'
 --
 -- * 'pllKey'
 --
 -- * 'pllFileId'
 --
--- * 'pllOauthToken'
+-- * 'pllOAuthToken'
 --
 -- * 'pllFields'
---
--- * 'pllAlt'
 permissionsList'
     :: Text -- ^ 'fileId'
     -> PermissionsList'
@@ -97,12 +94,11 @@ permissionsList' pPllFileId_ =
     PermissionsList'
     { _pllQuotaUser = Nothing
     , _pllPrettyPrint = True
-    , _pllUserIp = Nothing
+    , _pllUserIP = Nothing
     , _pllKey = Nothing
     , _pllFileId = pPllFileId_
-    , _pllOauthToken = Nothing
+    , _pllOAuthToken = Nothing
     , _pllFields = Nothing
-    , _pllAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,14 +116,14 @@ pllPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-pllUserIp :: Lens' PermissionsList' (Maybe Text)
-pllUserIp
-  = lens _pllUserIp (\ s a -> s{_pllUserIp = a})
+pllUserIP :: Lens' PermissionsList' (Maybe Text)
+pllUserIP
+  = lens _pllUserIP (\ s a -> s{_pllUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pllKey :: Lens' PermissionsList' (Maybe Text)
+pllKey :: Lens' PermissionsList' (Maybe Key)
 pllKey = lens _pllKey (\ s a -> s{_pllKey = a})
 
 -- | The ID for the file.
@@ -136,30 +132,30 @@ pllFileId
   = lens _pllFileId (\ s a -> s{_pllFileId = a})
 
 -- | OAuth 2.0 token for the current user.
-pllOauthToken :: Lens' PermissionsList' (Maybe Text)
-pllOauthToken
-  = lens _pllOauthToken
-      (\ s a -> s{_pllOauthToken = a})
+pllOAuthToken :: Lens' PermissionsList' (Maybe OAuthToken)
+pllOAuthToken
+  = lens _pllOAuthToken
+      (\ s a -> s{_pllOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 pllFields :: Lens' PermissionsList' (Maybe Text)
 pllFields
   = lens _pllFields (\ s a -> s{_pllFields = a})
 
--- | Data format for the response.
-pllAlt :: Lens' PermissionsList' Alt
-pllAlt = lens _pllAlt (\ s a -> s{_pllAlt = a})
+instance GoogleAuth PermissionsList' where
+        authKey = pllKey . _Just
+        authToken = pllOAuthToken . _Just
 
 instance GoogleRequest PermissionsList' where
         type Rs PermissionsList' = PermissionList
         request = requestWithRoute defReq driveURL
         requestWithRoute r u PermissionsList'{..}
-          = go _pllQuotaUser (Just _pllPrettyPrint) _pllUserIp
+          = go _pllQuotaUser (Just _pllPrettyPrint) _pllUserIP
               _pllKey
               _pllFileId
-              _pllOauthToken
+              _pllOAuthToken
               _pllFields
-              (Just _pllAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PermissionsListResource)

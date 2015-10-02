@@ -22,9 +22,6 @@ module Network.Google.GroupsMigration.Types
     , groups
     , gKind
     , gResponseCode
-
-    -- * Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.GroupsMigration.Types.Product

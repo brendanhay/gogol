@@ -34,13 +34,13 @@ module Network.Google.Resource.Compute.Autoscalers.Patch
     , apQuotaUser
     , apPrettyPrint
     , apProject
-    , apUserIp
+    , apUserIP
     , apZone
     , apKey
     , apAutoscaler
-    , apOauthToken
+    , apAutoscaler
+    , apOAuthToken
     , apFields
-    , apAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -56,11 +56,13 @@ type AutoscalersPatchResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "autoscaler" Text :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Patch '[JSON] Operation
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] Autoscaler :>
+                               Patch '[JSON] Operation
 
 -- | Updates an autoscaler resource in the specified project using the data
 -- included in the request. This method supports patch semantics.
@@ -70,13 +72,13 @@ data AutoscalersPatch' = AutoscalersPatch'
     { _apQuotaUser   :: !(Maybe Text)
     , _apPrettyPrint :: !Bool
     , _apProject     :: !Text
-    , _apUserIp      :: !(Maybe Text)
+    , _apUserIP      :: !(Maybe Text)
     , _apZone        :: !Text
-    , _apKey         :: !(Maybe Text)
+    , _apKey         :: !(Maybe Key)
+    , _apAutoscaler  :: !Autoscaler
     , _apAutoscaler  :: !Text
-    , _apOauthToken  :: !(Maybe Text)
+    , _apOAuthToken  :: !(Maybe OAuthToken)
     , _apFields      :: !(Maybe Text)
-    , _apAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AutoscalersPatch'' with the minimum fields required to make a request.
@@ -89,7 +91,7 @@ data AutoscalersPatch' = AutoscalersPatch'
 --
 -- * 'apProject'
 --
--- * 'apUserIp'
+-- * 'apUserIP'
 --
 -- * 'apZone'
 --
@@ -97,28 +99,29 @@ data AutoscalersPatch' = AutoscalersPatch'
 --
 -- * 'apAutoscaler'
 --
--- * 'apOauthToken'
+-- * 'apAutoscaler'
+--
+-- * 'apOAuthToken'
 --
 -- * 'apFields'
---
--- * 'apAlt'
 autoscalersPatch'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
+    -> Autoscaler -- ^ 'Autoscaler'
     -> Text -- ^ 'autoscaler'
     -> AutoscalersPatch'
-autoscalersPatch' pApProject_ pApZone_ pApAutoscaler_ =
+autoscalersPatch' pApProject_ pApZone_ pApAutoscaler_ pApAutoscaler_ =
     AutoscalersPatch'
     { _apQuotaUser = Nothing
     , _apPrettyPrint = True
     , _apProject = pApProject_
-    , _apUserIp = Nothing
+    , _apUserIP = Nothing
     , _apZone = pApZone_
     , _apKey = Nothing
     , _apAutoscaler = pApAutoscaler_
-    , _apOauthToken = Nothing
+    , _apAutoscaler = pApAutoscaler_
+    , _apOAuthToken = Nothing
     , _apFields = Nothing
-    , _apAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -141,8 +144,8 @@ apProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-apUserIp :: Lens' AutoscalersPatch' (Maybe Text)
-apUserIp = lens _apUserIp (\ s a -> s{_apUserIp = a})
+apUserIP :: Lens' AutoscalersPatch' (Maybe Text)
+apUserIP = lens _apUserIP (\ s a -> s{_apUserIP = a})
 
 -- | Name of the zone scoping this request.
 apZone :: Lens' AutoscalersPatch' Text
@@ -151,8 +154,13 @@ apZone = lens _apZone (\ s a -> s{_apZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-apKey :: Lens' AutoscalersPatch' (Maybe Text)
+apKey :: Lens' AutoscalersPatch' (Maybe Key)
 apKey = lens _apKey (\ s a -> s{_apKey = a})
+
+-- | Multipart request metadata.
+apAutoscaler :: Lens' AutoscalersPatch' Autoscaler
+apAutoscaler
+  = lens _apAutoscaler (\ s a -> s{_apAutoscaler = a})
 
 -- | Name of the autoscaler resource to update.
 apAutoscaler :: Lens' AutoscalersPatch' Text
@@ -160,30 +168,31 @@ apAutoscaler
   = lens _apAutoscaler (\ s a -> s{_apAutoscaler = a})
 
 -- | OAuth 2.0 token for the current user.
-apOauthToken :: Lens' AutoscalersPatch' (Maybe Text)
-apOauthToken
-  = lens _apOauthToken (\ s a -> s{_apOauthToken = a})
+apOAuthToken :: Lens' AutoscalersPatch' (Maybe OAuthToken)
+apOAuthToken
+  = lens _apOAuthToken (\ s a -> s{_apOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 apFields :: Lens' AutoscalersPatch' (Maybe Text)
 apFields = lens _apFields (\ s a -> s{_apFields = a})
 
--- | Data format for the response.
-apAlt :: Lens' AutoscalersPatch' Alt
-apAlt = lens _apAlt (\ s a -> s{_apAlt = a})
+instance GoogleAuth AutoscalersPatch' where
+        authKey = apKey . _Just
+        authToken = apOAuthToken . _Just
 
 instance GoogleRequest AutoscalersPatch' where
         type Rs AutoscalersPatch' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u AutoscalersPatch'{..}
           = go _apQuotaUser (Just _apPrettyPrint) _apProject
-              _apUserIp
+              _apUserIP
               _apZone
               _apKey
               (Just _apAutoscaler)
-              _apOauthToken
+              _apOAuthToken
               _apFields
-              (Just _apAlt)
+              (Just AltJSON)
+              _apAutoscaler
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AutoscalersPatchResource)

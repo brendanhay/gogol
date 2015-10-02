@@ -33,12 +33,11 @@ module Network.Google.Resource.Drive.Files.Delete
     -- * Request Lenses
     , fdQuotaUser
     , fdPrettyPrint
-    , fdUserIp
+    , fdUserIP
     , fdKey
     , fdFileId
-    , fdOauthToken
+    , fdOAuthToken
     , fdFields
-    , fdAlt
     ) where
 
 import           Network.Google.Drive.Types
@@ -52,10 +51,10 @@ type FilesDeleteResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Delete '[JSON] ()
+                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Permanently deletes a file by ID. Skips the trash. The currently
 -- authenticated user must own the file.
@@ -64,12 +63,11 @@ type FilesDeleteResource =
 data FilesDelete' = FilesDelete'
     { _fdQuotaUser   :: !(Maybe Text)
     , _fdPrettyPrint :: !Bool
-    , _fdUserIp      :: !(Maybe Text)
-    , _fdKey         :: !(Maybe Text)
+    , _fdUserIP      :: !(Maybe Text)
+    , _fdKey         :: !(Maybe Key)
     , _fdFileId      :: !Text
-    , _fdOauthToken  :: !(Maybe Text)
+    , _fdOAuthToken  :: !(Maybe OAuthToken)
     , _fdFields      :: !(Maybe Text)
-    , _fdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FilesDelete'' with the minimum fields required to make a request.
@@ -80,17 +78,15 @@ data FilesDelete' = FilesDelete'
 --
 -- * 'fdPrettyPrint'
 --
--- * 'fdUserIp'
+-- * 'fdUserIP'
 --
 -- * 'fdKey'
 --
 -- * 'fdFileId'
 --
--- * 'fdOauthToken'
+-- * 'fdOAuthToken'
 --
 -- * 'fdFields'
---
--- * 'fdAlt'
 filesDelete'
     :: Text -- ^ 'fileId'
     -> FilesDelete'
@@ -98,12 +94,11 @@ filesDelete' pFdFileId_ =
     FilesDelete'
     { _fdQuotaUser = Nothing
     , _fdPrettyPrint = True
-    , _fdUserIp = Nothing
+    , _fdUserIP = Nothing
     , _fdKey = Nothing
     , _fdFileId = pFdFileId_
-    , _fdOauthToken = Nothing
+    , _fdOAuthToken = Nothing
     , _fdFields = Nothing
-    , _fdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -121,13 +116,13 @@ fdPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-fdUserIp :: Lens' FilesDelete' (Maybe Text)
-fdUserIp = lens _fdUserIp (\ s a -> s{_fdUserIp = a})
+fdUserIP :: Lens' FilesDelete' (Maybe Text)
+fdUserIP = lens _fdUserIP (\ s a -> s{_fdUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fdKey :: Lens' FilesDelete' (Maybe Text)
+fdKey :: Lens' FilesDelete' (Maybe Key)
 fdKey = lens _fdKey (\ s a -> s{_fdKey = a})
 
 -- | The ID of the file to delete.
@@ -135,28 +130,28 @@ fdFileId :: Lens' FilesDelete' Text
 fdFileId = lens _fdFileId (\ s a -> s{_fdFileId = a})
 
 -- | OAuth 2.0 token for the current user.
-fdOauthToken :: Lens' FilesDelete' (Maybe Text)
-fdOauthToken
-  = lens _fdOauthToken (\ s a -> s{_fdOauthToken = a})
+fdOAuthToken :: Lens' FilesDelete' (Maybe OAuthToken)
+fdOAuthToken
+  = lens _fdOAuthToken (\ s a -> s{_fdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 fdFields :: Lens' FilesDelete' (Maybe Text)
 fdFields = lens _fdFields (\ s a -> s{_fdFields = a})
 
--- | Data format for the response.
-fdAlt :: Lens' FilesDelete' Alt
-fdAlt = lens _fdAlt (\ s a -> s{_fdAlt = a})
+instance GoogleAuth FilesDelete' where
+        authKey = fdKey . _Just
+        authToken = fdOAuthToken . _Just
 
 instance GoogleRequest FilesDelete' where
         type Rs FilesDelete' = ()
         request = requestWithRoute defReq driveURL
         requestWithRoute r u FilesDelete'{..}
-          = go _fdQuotaUser (Just _fdPrettyPrint) _fdUserIp
+          = go _fdQuotaUser (Just _fdPrettyPrint) _fdUserIP
               _fdKey
               _fdFileId
-              _fdOauthToken
+              _fdOAuthToken
               _fdFields
-              (Just _fdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy FilesDeleteResource)

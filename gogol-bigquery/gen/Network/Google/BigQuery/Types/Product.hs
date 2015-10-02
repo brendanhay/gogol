@@ -150,7 +150,7 @@ instance ToJSON TableList where
 data TableDataList = TableDataList
     { _tdlEtag      :: !(Maybe Text)
     , _tdlKind      :: !Text
-    , _tdlRows      :: !(Maybe [Maybe TableRow])
+    , _tdlRows      :: !(Maybe [TableRow])
     , _tdlPageToken :: !(Maybe Text)
     , _tdlTotalRows :: !(Maybe Int64)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -188,7 +188,7 @@ tdlKind :: Lens' TableDataList Text
 tdlKind = lens _tdlKind (\ s a -> s{_tdlKind = a})
 
 -- | Rows of results.
-tdlRows :: Lens' TableDataList [Maybe TableRow]
+tdlRows :: Lens' TableDataList [TableRow]
 tdlRows
   = lens _tdlRows (\ s a -> s{_tdlRows = a}) . _Default
       . _Coerce
@@ -228,11 +228,11 @@ instance ToJSON TableDataList where
 --
 -- /See:/ 'jobConfigurationTableCopy' smart constructor.
 data JobConfigurationTableCopy = JobConfigurationTableCopy
-    { _jctcDestinationTable  :: !(Maybe (Maybe TableReference))
-    , _jctcWriteDisposition  :: !(Maybe Text)
-    , _jctcSourceTables      :: !(Maybe [Maybe TableReference])
-    , _jctcCreateDisposition :: !(Maybe Text)
-    , _jctcSourceTable       :: !(Maybe (Maybe TableReference))
+    { _jctcDestinationTable  :: !(Maybe TableReference)
+    , _jctcWriteDisPosition  :: !(Maybe Text)
+    , _jctcSourceTables      :: !(Maybe [TableReference])
+    , _jctcCreateDisPosition :: !(Maybe Text)
+    , _jctcSourceTable       :: !(Maybe TableReference)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobConfigurationTableCopy' with the minimum fields required to make a request.
@@ -241,11 +241,11 @@ data JobConfigurationTableCopy = JobConfigurationTableCopy
 --
 -- * 'jctcDestinationTable'
 --
--- * 'jctcWriteDisposition'
+-- * 'jctcWriteDisPosition'
 --
 -- * 'jctcSourceTables'
 --
--- * 'jctcCreateDisposition'
+-- * 'jctcCreateDisPosition'
 --
 -- * 'jctcSourceTable'
 jobConfigurationTableCopy
@@ -253,14 +253,14 @@ jobConfigurationTableCopy
 jobConfigurationTableCopy =
     JobConfigurationTableCopy
     { _jctcDestinationTable = Nothing
-    , _jctcWriteDisposition = Nothing
+    , _jctcWriteDisPosition = Nothing
     , _jctcSourceTables = Nothing
-    , _jctcCreateDisposition = Nothing
+    , _jctcCreateDisPosition = Nothing
     , _jctcSourceTable = Nothing
     }
 
 -- | [Required] The destination table
-jctcDestinationTable :: Lens' JobConfigurationTableCopy (Maybe (Maybe TableReference))
+jctcDestinationTable :: Lens' JobConfigurationTableCopy (Maybe TableReference)
 jctcDestinationTable
   = lens _jctcDestinationTable
       (\ s a -> s{_jctcDestinationTable = a})
@@ -274,13 +274,13 @@ jctcDestinationTable
 -- WRITE_EMPTY. Each action is atomic and only occurs if BigQuery is able
 -- to complete the job successfully. Creation, truncation and append
 -- actions occur as one atomic update upon job completion.
-jctcWriteDisposition :: Lens' JobConfigurationTableCopy (Maybe Text)
-jctcWriteDisposition
-  = lens _jctcWriteDisposition
-      (\ s a -> s{_jctcWriteDisposition = a})
+jctcWriteDisPosition :: Lens' JobConfigurationTableCopy (Maybe Text)
+jctcWriteDisPosition
+  = lens _jctcWriteDisPosition
+      (\ s a -> s{_jctcWriteDisPosition = a})
 
 -- | [Pick one] Source tables to copy.
-jctcSourceTables :: Lens' JobConfigurationTableCopy [Maybe TableReference]
+jctcSourceTables :: Lens' JobConfigurationTableCopy [TableReference]
 jctcSourceTables
   = lens _jctcSourceTables
       (\ s a -> s{_jctcSourceTables = a})
@@ -293,13 +293,13 @@ jctcSourceTables
 -- already exist. If it does not, a \'notFound\' error is returned in the
 -- job result. The default value is CREATE_IF_NEEDED. Creation, truncation
 -- and append actions occur as one atomic update upon job completion.
-jctcCreateDisposition :: Lens' JobConfigurationTableCopy (Maybe Text)
-jctcCreateDisposition
-  = lens _jctcCreateDisposition
-      (\ s a -> s{_jctcCreateDisposition = a})
+jctcCreateDisPosition :: Lens' JobConfigurationTableCopy (Maybe Text)
+jctcCreateDisPosition
+  = lens _jctcCreateDisPosition
+      (\ s a -> s{_jctcCreateDisPosition = a})
 
 -- | [Pick one] Source table to copy.
-jctcSourceTable :: Lens' JobConfigurationTableCopy (Maybe (Maybe TableReference))
+jctcSourceTable :: Lens' JobConfigurationTableCopy (Maybe TableReference)
 jctcSourceTable
   = lens _jctcSourceTable
       (\ s a -> s{_jctcSourceTable = a})
@@ -320,15 +320,15 @@ instance ToJSON JobConfigurationTableCopy where
           = object
               (catMaybes
                  [("destinationTable" .=) <$> _jctcDestinationTable,
-                  ("writeDisposition" .=) <$> _jctcWriteDisposition,
+                  ("writeDisposition" .=) <$> _jctcWriteDisPosition,
                   ("sourceTables" .=) <$> _jctcSourceTables,
-                  ("createDisposition" .=) <$> _jctcCreateDisposition,
+                  ("createDisposition" .=) <$> _jctcCreateDisPosition,
                   ("sourceTable" .=) <$> _jctcSourceTable])
 
 --
 -- /See:/ 'tableSchema' smart constructor.
 newtype TableSchema = TableSchema
-    { _tsFields :: Maybe [Maybe TableFieldSchema]
+    { _tsFields :: Maybe [TableFieldSchema]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableSchema' with the minimum fields required to make a request.
@@ -344,7 +344,7 @@ tableSchema =
     }
 
 -- | Describes the fields in a table.
-tsFields :: Lens' TableSchema [Maybe TableFieldSchema]
+tsFields :: Lens' TableSchema [TableFieldSchema]
 tsFields
   = lens _tsFields (\ s a -> s{_tsFields = a}) .
       _Default
@@ -362,7 +362,7 @@ instance ToJSON TableSchema where
 --
 -- /See:/ 'tableDataInsertAllResponseInsertErrors' smart constructor.
 data TableDataInsertAllResponseInsertErrors = TableDataInsertAllResponseInsertErrors
-    { _tdiarieErrors :: !(Maybe [Maybe ErrorProto])
+    { _tdiarieErrors :: !(Maybe [ErrorProto])
     , _tdiarieIndex  :: !(Maybe Word32)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -382,7 +382,7 @@ tableDataInsertAllResponseInsertErrors =
     }
 
 -- | Error information for the row indicated by the index property.
-tdiarieErrors :: Lens' TableDataInsertAllResponseInsertErrors [Maybe ErrorProto]
+tdiarieErrors :: Lens' TableDataInsertAllResponseInsertErrors [ErrorProto]
 tdiarieErrors
   = lens _tdiarieErrors
       (\ s a -> s{_tdiarieErrors = a})
@@ -495,11 +495,11 @@ instance ToJSON ProjectList where
 data JobStatistics = JobStatistics
     { _jsCreationTime        :: !(Maybe Int64)
     , _jsStartTime           :: !(Maybe Int64)
-    , _jsLoad                :: !(Maybe (Maybe JobStatistics3))
+    , _jsLoad                :: !(Maybe JobStatistics3)
     , _jsTotalBytesProcessed :: !(Maybe Int64)
     , _jsEndTime             :: !(Maybe Int64)
-    , _jsQuery               :: !(Maybe (Maybe JobStatistics2))
-    , _jsExtract             :: !(Maybe (Maybe JobStatistics4))
+    , _jsQuery               :: !(Maybe JobStatistics2)
+    , _jsExtract             :: !(Maybe JobStatistics4)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobStatistics' with the minimum fields required to make a request.
@@ -547,7 +547,7 @@ jsStartTime
   = lens _jsStartTime (\ s a -> s{_jsStartTime = a})
 
 -- | [Output-only] Statistics for a load job.
-jsLoad :: Lens' JobStatistics (Maybe (Maybe JobStatistics3))
+jsLoad :: Lens' JobStatistics (Maybe JobStatistics3)
 jsLoad = lens _jsLoad (\ s a -> s{_jsLoad = a})
 
 -- | [Output-only] [Deprecated] Use the bytes processed in the query
@@ -564,11 +564,11 @@ jsEndTime
   = lens _jsEndTime (\ s a -> s{_jsEndTime = a})
 
 -- | [Output-only] Statistics for a query job.
-jsQuery :: Lens' JobStatistics (Maybe (Maybe JobStatistics2))
+jsQuery :: Lens' JobStatistics (Maybe JobStatistics2)
 jsQuery = lens _jsQuery (\ s a -> s{_jsQuery = a})
 
 -- | [Output-only] Statistics for an extract job.
-jsExtract :: Lens' JobStatistics (Maybe (Maybe JobStatistics4))
+jsExtract :: Lens' JobStatistics (Maybe JobStatistics4)
 jsExtract
   = lens _jsExtract (\ s a -> s{_jsExtract = a})
 
@@ -607,7 +607,7 @@ data Dataset = Dataset
     , _dFriendlyName             :: !(Maybe Text)
     , _dKind                     :: !Text
     , _dLastModifiedTime         :: !(Maybe Int64)
-    , _dDatasetReference         :: !(Maybe (Maybe DatasetReference))
+    , _dDatasetReference         :: !(Maybe DatasetReference)
     , _dSelfLink                 :: !(Maybe Text)
     , _dId                       :: !(Maybe Text)
     , _dDefaultTableExpirationMs :: !(Maybe Int64)
@@ -707,7 +707,7 @@ dLastModifiedTime
       (\ s a -> s{_dLastModifiedTime = a})
 
 -- | [Required] A reference that identifies the dataset.
-dDatasetReference :: Lens' Dataset (Maybe (Maybe DatasetReference))
+dDatasetReference :: Lens' Dataset (Maybe DatasetReference)
 dDatasetReference
   = lens _dDatasetReference
       (\ s a -> s{_dDatasetReference = a})
@@ -845,7 +845,7 @@ data TableFieldSchema = TableFieldSchema
     , _tfsName        :: !(Maybe Text)
     , _tfsType        :: !(Maybe Text)
     , _tfsDescription :: !(Maybe Text)
-    , _tfsFields      :: !(Maybe [Maybe TableFieldSchema])
+    , _tfsFields      :: !(Maybe [TableFieldSchema])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableFieldSchema' with the minimum fields required to make a request.
@@ -897,7 +897,7 @@ tfsDescription
 
 -- | [Optional] Describes the nested schema fields if the type property is
 -- set to RECORD.
-tfsFields :: Lens' TableFieldSchema [Maybe TableFieldSchema]
+tfsFields :: Lens' TableFieldSchema [TableFieldSchema]
 tfsFields
   = lens _tfsFields (\ s a -> s{_tfsFields = a}) .
       _Default
@@ -927,10 +927,10 @@ data ExternalDataConfiguration = ExternalDataConfiguration
     { _edcIgnoreUnknownValues :: !(Maybe Bool)
     , _edcCompression         :: !(Maybe Text)
     , _edcSourceFormat        :: !(Maybe Text)
-    , _edcSchema              :: !(Maybe (Maybe TableSchema))
+    , _edcSchema              :: !(Maybe TableSchema)
     , _edcMaxBadRecords       :: !(Maybe Int32)
-    , _edcSourceUris          :: !(Maybe [Text])
-    , _edcCsvOptions          :: !(Maybe (Maybe CSVOptions))
+    , _edcSourceURIs          :: !(Maybe [Text])
+    , _edcCSVOptions          :: !(Maybe CSVOptions)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ExternalDataConfiguration' with the minimum fields required to make a request.
@@ -947,9 +947,9 @@ data ExternalDataConfiguration = ExternalDataConfiguration
 --
 -- * 'edcMaxBadRecords'
 --
--- * 'edcSourceUris'
+-- * 'edcSourceURIs'
 --
--- * 'edcCsvOptions'
+-- * 'edcCSVOptions'
 externalDataConfiguration
     :: ExternalDataConfiguration
 externalDataConfiguration =
@@ -959,8 +959,8 @@ externalDataConfiguration =
     , _edcSourceFormat = Nothing
     , _edcSchema = Nothing
     , _edcMaxBadRecords = Nothing
-    , _edcSourceUris = Nothing
-    , _edcCsvOptions = Nothing
+    , _edcSourceURIs = Nothing
+    , _edcCSVOptions = Nothing
     }
 
 -- | [Optional] Indicates if BigQuery should allow extra values that are not
@@ -990,7 +990,7 @@ edcSourceFormat
       (\ s a -> s{_edcSourceFormat = a})
 
 -- | [Required] The schema for the data.
-edcSchema :: Lens' ExternalDataConfiguration (Maybe (Maybe TableSchema))
+edcSchema :: Lens' ExternalDataConfiguration (Maybe TableSchema)
 edcSchema
   = lens _edcSchema (\ s a -> s{_edcSchema = a})
 
@@ -1008,18 +1008,18 @@ edcMaxBadRecords
 -- must come after the \'bucket\' name. Size limits related to load jobs
 -- apply to external data sources, plus an additional limit of 10 GB
 -- maximum size across all URIs.
-edcSourceUris :: Lens' ExternalDataConfiguration [Text]
-edcSourceUris
-  = lens _edcSourceUris
-      (\ s a -> s{_edcSourceUris = a})
+edcSourceURIs :: Lens' ExternalDataConfiguration [Text]
+edcSourceURIs
+  = lens _edcSourceURIs
+      (\ s a -> s{_edcSourceURIs = a})
       . _Default
       . _Coerce
 
 -- | Additional properties to set if sourceFormat is set to CSV.
-edcCsvOptions :: Lens' ExternalDataConfiguration (Maybe (Maybe CSVOptions))
-edcCsvOptions
-  = lens _edcCsvOptions
-      (\ s a -> s{_edcCsvOptions = a})
+edcCSVOptions :: Lens' ExternalDataConfiguration (Maybe CSVOptions)
+edcCSVOptions
+  = lens _edcCSVOptions
+      (\ s a -> s{_edcCSVOptions = a})
 
 instance FromJSON ExternalDataConfiguration where
         parseJSON
@@ -1044,21 +1044,21 @@ instance ToJSON ExternalDataConfiguration where
                   ("sourceFormat" .=) <$> _edcSourceFormat,
                   ("schema" .=) <$> _edcSchema,
                   ("maxBadRecords" .=) <$> _edcMaxBadRecords,
-                  ("sourceUris" .=) <$> _edcSourceUris,
-                  ("csvOptions" .=) <$> _edcCsvOptions])
+                  ("sourceUris" .=) <$> _edcSourceURIs,
+                  ("csvOptions" .=) <$> _edcCSVOptions])
 
 --
 -- /See:/ 'getQueryResultsResponse' smart constructor.
 data GetQueryResultsResponse = GetQueryResultsResponse
-    { _gqrrJobReference        :: !(Maybe (Maybe JobReference))
+    { _gqrrJobReference        :: !(Maybe JobReference)
     , _gqrrEtag                :: !(Maybe Text)
     , _gqrrKind                :: !Text
-    , _gqrrSchema              :: !(Maybe (Maybe TableSchema))
+    , _gqrrSchema              :: !(Maybe TableSchema)
     , _gqrrTotalBytesProcessed :: !(Maybe Int64)
-    , _gqrrRows                :: !(Maybe [Maybe TableRow])
+    , _gqrrRows                :: !(Maybe [TableRow])
     , _gqrrPageToken           :: !(Maybe Text)
     , _gqrrTotalRows           :: !(Maybe Word64)
-    , _gqrrErrors              :: !(Maybe [Maybe ErrorProto])
+    , _gqrrErrors              :: !(Maybe [ErrorProto])
     , _gqrrJobComplete         :: !(Maybe Bool)
     , _gqrrCacheHit            :: !(Maybe Bool)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -1111,7 +1111,7 @@ getQueryResultsResponse =
 -- completed. Since this API only returns the first page of results,
 -- subsequent pages can be fetched via the same mechanism
 -- (GetQueryResults).
-gqrrJobReference :: Lens' GetQueryResultsResponse (Maybe (Maybe JobReference))
+gqrrJobReference :: Lens' GetQueryResultsResponse (Maybe JobReference)
 gqrrJobReference
   = lens _gqrrJobReference
       (\ s a -> s{_gqrrJobReference = a})
@@ -1126,7 +1126,7 @@ gqrrKind = lens _gqrrKind (\ s a -> s{_gqrrKind = a})
 
 -- | The schema of the results. Present only when the query completes
 -- successfully.
-gqrrSchema :: Lens' GetQueryResultsResponse (Maybe (Maybe TableSchema))
+gqrrSchema :: Lens' GetQueryResultsResponse (Maybe TableSchema)
 gqrrSchema
   = lens _gqrrSchema (\ s a -> s{_gqrrSchema = a})
 
@@ -1140,7 +1140,7 @@ gqrrTotalBytesProcessed
 -- permitted reply size. To get any additional rows, you can call
 -- GetQueryResults and specify the jobReference returned above. Present
 -- only when the query completes successfully.
-gqrrRows :: Lens' GetQueryResultsResponse [Maybe TableRow]
+gqrrRows :: Lens' GetQueryResultsResponse [TableRow]
 gqrrRows
   = lens _gqrrRows (\ s a -> s{_gqrrRows = a}) .
       _Default
@@ -1163,7 +1163,7 @@ gqrrTotalRows
 -- | [Output-only] All errors and warnings encountered during the running of
 -- the job. Errors here do not necessarily mean that the job has completed
 -- or was unsuccessful.
-gqrrErrors :: Lens' GetQueryResultsResponse [Maybe ErrorProto]
+gqrrErrors :: Lens' GetQueryResultsResponse [ErrorProto]
 gqrrErrors
   = lens _gqrrErrors (\ s a -> s{_gqrrErrors = a}) .
       _Default
@@ -1293,7 +1293,7 @@ instance ToJSON DatasetList where
 --
 -- /See:/ 'tableDataInsertAllRequestRows' smart constructor.
 data TableDataInsertAllRequestRows = TableDataInsertAllRequestRows
-    { _tdiarrJson     :: !(Maybe (Maybe JSONObject))
+    { _tdiarrJSON     :: !(Maybe JSONObject)
     , _tdiarrInsertId :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1301,22 +1301,22 @@ data TableDataInsertAllRequestRows = TableDataInsertAllRequestRows
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tdiarrJson'
+-- * 'tdiarrJSON'
 --
 -- * 'tdiarrInsertId'
 tableDataInsertAllRequestRows
     :: TableDataInsertAllRequestRows
 tableDataInsertAllRequestRows =
     TableDataInsertAllRequestRows
-    { _tdiarrJson = Nothing
+    { _tdiarrJSON = Nothing
     , _tdiarrInsertId = Nothing
     }
 
 -- | [Required] A JSON object that contains a row of data. The object\'s
 -- properties and values must match the destination table\'s schema.
-tdiarrJson :: Lens' TableDataInsertAllRequestRows (Maybe (Maybe JSONObject))
-tdiarrJson
-  = lens _tdiarrJson (\ s a -> s{_tdiarrJson = a})
+tdiarrJSON :: Lens' TableDataInsertAllRequestRows (Maybe JSONObject)
+tdiarrJSON
+  = lens _tdiarrJSON (\ s a -> s{_tdiarrJSON = a})
 
 -- | [Optional] A unique ID for each row. BigQuery uses this property to
 -- detect duplicate insertion requests on a best-effort basis.
@@ -1336,7 +1336,7 @@ instance ToJSON TableDataInsertAllRequestRows where
         toJSON TableDataInsertAllRequestRows{..}
           = object
               (catMaybes
-                 [("json" .=) <$> _tdiarrJson,
+                 [("json" .=) <$> _tdiarrJSON,
                   ("insertId" .=) <$> _tdiarrInsertId])
 
 --
@@ -1349,7 +1349,7 @@ data QueryRequest = QueryRequest
     , _qrTimeoutMs      :: !(Maybe Word32)
     , _qrDryRun         :: !(Maybe Bool)
     , _qrMaxResults     :: !(Maybe Word32)
-    , _qrDefaultDataset :: !(Maybe (Maybe DatasetReference))
+    , _qrDefaultDataset :: !(Maybe DatasetReference)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QueryRequest' with the minimum fields required to make a request.
@@ -1440,7 +1440,7 @@ qrMaxResults
 -- | [Optional] Specifies the default datasetId and projectId to assume for
 -- any unqualified table names in the query. If not set, all table names in
 -- the query string must be qualified in the format \'datasetId.tableId\'.
-qrDefaultDataset :: Lens' QueryRequest (Maybe (Maybe DatasetReference))
+qrDefaultDataset :: Lens' QueryRequest (Maybe DatasetReference)
 qrDefaultDataset
   = lens _qrDefaultDataset
       (\ s a -> s{_qrDefaultDataset = a})
@@ -1474,28 +1474,28 @@ instance ToJSON QueryRequest where
 --
 -- /See:/ 'jobStatistics4' smart constructor.
 newtype JobStatistics4 = JobStatistics4
-    { _jsDestinationUriFileCounts :: Maybe [Int64]
+    { _jsDestinationURIFileCounts :: Maybe [Int64]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobStatistics4' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'jsDestinationUriFileCounts'
+-- * 'jsDestinationURIFileCounts'
 jobStatistics4
     :: JobStatistics4
 jobStatistics4 =
     JobStatistics4
-    { _jsDestinationUriFileCounts = Nothing
+    { _jsDestinationURIFileCounts = Nothing
     }
 
 -- | [Output-only] Number of files per destination URI or URI pattern
 -- specified in the extract configuration. These values will be in the same
 -- order as the URIs specified in the \'destinationUris\' field.
-jsDestinationUriFileCounts :: Lens' JobStatistics4 [Int64]
-jsDestinationUriFileCounts
-  = lens _jsDestinationUriFileCounts
-      (\ s a -> s{_jsDestinationUriFileCounts = a})
+jsDestinationURIFileCounts :: Lens' JobStatistics4 [Int64]
+jsDestinationURIFileCounts
+  = lens _jsDestinationURIFileCounts
+      (\ s a -> s{_jsDestinationURIFileCounts = a})
       . _Default
       . _Coerce
 
@@ -1511,7 +1511,7 @@ instance ToJSON JobStatistics4 where
           = object
               (catMaybes
                  [("destinationUriFileCounts" .=) <$>
-                    _jsDestinationUriFileCounts])
+                    _jsDestinationURIFileCounts])
 
 --
 -- /See:/ 'projectReference' smart constructor.
@@ -1631,7 +1631,7 @@ instance ToJSON TableDataInsertAllRequest where
 data ProjectListProjects = ProjectListProjects
     { _plpFriendlyName     :: !(Maybe Text)
     , _plpKind             :: !Text
-    , _plpProjectReference :: !(Maybe (Maybe ProjectReference))
+    , _plpProjectReference :: !(Maybe ProjectReference)
     , _plpId               :: !(Maybe Text)
     , _plpNumericId        :: !(Maybe Word64)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -1671,7 +1671,7 @@ plpKind :: Lens' ProjectListProjects Text
 plpKind = lens _plpKind (\ s a -> s{_plpKind = a})
 
 -- | A unique reference to this project.
-plpProjectReference :: Lens' ProjectListProjects (Maybe (Maybe ProjectReference))
+plpProjectReference :: Lens' ProjectListProjects (Maybe ProjectReference)
 plpProjectReference
   = lens _plpProjectReference
       (\ s a -> s{_plpProjectReference = a})
@@ -1711,19 +1711,19 @@ instance ToJSON ProjectListProjects where
 data JobConfigurationLoad = JobConfigurationLoad
     { _jclSkipLeadingRows     :: !(Maybe Int32)
     , _jclProjectionFields    :: !(Maybe [Text])
-    , _jclDestinationTable    :: !(Maybe (Maybe TableReference))
-    , _jclWriteDisposition    :: !(Maybe Text)
+    , _jclDestinationTable    :: !(Maybe TableReference)
+    , _jclWriteDisPosition    :: !(Maybe Text)
     , _jclAllowJaggedRows     :: !(Maybe Bool)
     , _jclSchemaInline        :: !(Maybe Text)
     , _jclIgnoreUnknownValues :: !(Maybe Bool)
-    , _jclCreateDisposition   :: !(Maybe Text)
+    , _jclCreateDisPosition   :: !(Maybe Text)
     , _jclSchemaInlineFormat  :: !(Maybe Text)
     , _jclAllowQuotedNewlines :: !(Maybe Bool)
     , _jclSourceFormat        :: !(Maybe Text)
-    , _jclSchema              :: !(Maybe (Maybe TableSchema))
+    , _jclSchema              :: !(Maybe TableSchema)
     , _jclQuote               :: !Text
     , _jclMaxBadRecords       :: !(Maybe Int32)
-    , _jclSourceUris          :: !(Maybe [Text])
+    , _jclSourceURIs          :: !(Maybe [Text])
     , _jclEncoding            :: !(Maybe Text)
     , _jclFieldDelimiter      :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -1738,7 +1738,7 @@ data JobConfigurationLoad = JobConfigurationLoad
 --
 -- * 'jclDestinationTable'
 --
--- * 'jclWriteDisposition'
+-- * 'jclWriteDisPosition'
 --
 -- * 'jclAllowJaggedRows'
 --
@@ -1746,7 +1746,7 @@ data JobConfigurationLoad = JobConfigurationLoad
 --
 -- * 'jclIgnoreUnknownValues'
 --
--- * 'jclCreateDisposition'
+-- * 'jclCreateDisPosition'
 --
 -- * 'jclSchemaInlineFormat'
 --
@@ -1760,7 +1760,7 @@ data JobConfigurationLoad = JobConfigurationLoad
 --
 -- * 'jclMaxBadRecords'
 --
--- * 'jclSourceUris'
+-- * 'jclSourceURIs'
 --
 -- * 'jclEncoding'
 --
@@ -1772,18 +1772,18 @@ jobConfigurationLoad =
     { _jclSkipLeadingRows = Nothing
     , _jclProjectionFields = Nothing
     , _jclDestinationTable = Nothing
-    , _jclWriteDisposition = Nothing
+    , _jclWriteDisPosition = Nothing
     , _jclAllowJaggedRows = Nothing
     , _jclSchemaInline = Nothing
     , _jclIgnoreUnknownValues = Nothing
-    , _jclCreateDisposition = Nothing
+    , _jclCreateDisPosition = Nothing
     , _jclSchemaInlineFormat = Nothing
     , _jclAllowQuotedNewlines = Nothing
     , _jclSourceFormat = Nothing
     , _jclSchema = Nothing
     , _jclQuote = "\""
     , _jclMaxBadRecords = Nothing
-    , _jclSourceUris = Nothing
+    , _jclSourceURIs = Nothing
     , _jclEncoding = Nothing
     , _jclFieldDelimiter = Nothing
     }
@@ -1810,7 +1810,7 @@ jclProjectionFields
       . _Coerce
 
 -- | [Required] The destination table to load the data into.
-jclDestinationTable :: Lens' JobConfigurationLoad (Maybe (Maybe TableReference))
+jclDestinationTable :: Lens' JobConfigurationLoad (Maybe TableReference)
 jclDestinationTable
   = lens _jclDestinationTable
       (\ s a -> s{_jclDestinationTable = a})
@@ -1824,10 +1824,10 @@ jclDestinationTable
 -- WRITE_APPEND. Each action is atomic and only occurs if BigQuery is able
 -- to complete the job successfully. Creation, truncation and append
 -- actions occur as one atomic update upon job completion.
-jclWriteDisposition :: Lens' JobConfigurationLoad (Maybe Text)
-jclWriteDisposition
-  = lens _jclWriteDisposition
-      (\ s a -> s{_jclWriteDisposition = a})
+jclWriteDisPosition :: Lens' JobConfigurationLoad (Maybe Text)
+jclWriteDisPosition
+  = lens _jclWriteDisPosition
+      (\ s a -> s{_jclWriteDisPosition = a})
 
 -- | [Optional] Accept rows that are missing trailing optional columns. The
 -- missing values are treated as nulls. If false, records with missing
@@ -1865,10 +1865,10 @@ jclIgnoreUnknownValues
 -- already exist. If it does not, a \'notFound\' error is returned in the
 -- job result. The default value is CREATE_IF_NEEDED. Creation, truncation
 -- and append actions occur as one atomic update upon job completion.
-jclCreateDisposition :: Lens' JobConfigurationLoad (Maybe Text)
-jclCreateDisposition
-  = lens _jclCreateDisposition
-      (\ s a -> s{_jclCreateDisposition = a})
+jclCreateDisPosition :: Lens' JobConfigurationLoad (Maybe Text)
+jclCreateDisPosition
+  = lens _jclCreateDisPosition
+      (\ s a -> s{_jclCreateDisPosition = a})
 
 -- | [Deprecated] The format of the schemaInline property.
 jclSchemaInlineFormat :: Lens' JobConfigurationLoad (Maybe Text)
@@ -1895,7 +1895,7 @@ jclSourceFormat
 -- | [Optional] The schema for the destination table. The schema can be
 -- omitted if the destination table already exists or if the schema can be
 -- inferred from the loaded data.
-jclSchema :: Lens' JobConfigurationLoad (Maybe (Maybe TableSchema))
+jclSchema :: Lens' JobConfigurationLoad (Maybe TableSchema)
 jclSchema
   = lens _jclSchema (\ s a -> s{_jclSchema = a})
 
@@ -1921,10 +1921,10 @@ jclMaxBadRecords
 -- | [Required] The fully-qualified URIs that point to your data in Google
 -- Cloud Storage. Each URI can contain one \'*\' wildcard character and it
 -- must come after the \'bucket\' name.
-jclSourceUris :: Lens' JobConfigurationLoad [Text]
-jclSourceUris
-  = lens _jclSourceUris
-      (\ s a -> s{_jclSourceUris = a})
+jclSourceURIs :: Lens' JobConfigurationLoad [Text]
+jclSourceURIs
+  = lens _jclSourceURIs
+      (\ s a -> s{_jclSourceURIs = a})
       . _Default
       . _Coerce
 
@@ -1976,12 +1976,12 @@ instance ToJSON JobConfigurationLoad where
                  [("skipLeadingRows" .=) <$> _jclSkipLeadingRows,
                   ("projectionFields" .=) <$> _jclProjectionFields,
                   ("destinationTable" .=) <$> _jclDestinationTable,
-                  ("writeDisposition" .=) <$> _jclWriteDisposition,
+                  ("writeDisposition" .=) <$> _jclWriteDisPosition,
                   ("allowJaggedRows" .=) <$> _jclAllowJaggedRows,
                   ("schemaInline" .=) <$> _jclSchemaInline,
                   ("ignoreUnknownValues" .=) <$>
                     _jclIgnoreUnknownValues,
-                  ("createDisposition" .=) <$> _jclCreateDisposition,
+                  ("createDisposition" .=) <$> _jclCreateDisPosition,
                   ("schemaInlineFormat" .=) <$> _jclSchemaInlineFormat,
                   ("allowQuotedNewlines" .=) <$>
                     _jclAllowQuotedNewlines,
@@ -1989,7 +1989,7 @@ instance ToJSON JobConfigurationLoad where
                   ("schema" .=) <$> _jclSchema,
                   Just ("quote" .= _jclQuote),
                   ("maxBadRecords" .=) <$> _jclMaxBadRecords,
-                  ("sourceUris" .=) <$> _jclSourceUris,
+                  ("sourceUris" .=) <$> _jclSourceURIs,
                   ("encoding" .=) <$> _jclEncoding,
                   ("fieldDelimiter" .=) <$> _jclFieldDelimiter])
 
@@ -2044,15 +2044,15 @@ instance ToJSON DatasetReference where
 --
 -- /See:/ 'jobListJobs' smart constructor.
 data JobListJobs = JobListJobs
-    { _jljJobReference  :: !(Maybe (Maybe JobReference))
-    , _jljStatus        :: !(Maybe (Maybe JobStatus))
+    { _jljJobReference  :: !(Maybe JobReference)
+    , _jljStatus        :: !(Maybe JobStatus)
     , _jljState         :: !(Maybe Text)
     , _jljUserEmail     :: !(Maybe Text)
     , _jljKind          :: !Text
-    , _jljErrorResult   :: !(Maybe (Maybe ErrorProto))
+    , _jljErrorResult   :: !(Maybe ErrorProto)
     , _jljId            :: !(Maybe Text)
-    , _jljStatistics    :: !(Maybe (Maybe JobStatistics))
-    , _jljConfiguration :: !(Maybe (Maybe JobConfiguration))
+    , _jljStatistics    :: !(Maybe JobStatistics)
+    , _jljConfiguration :: !(Maybe JobConfiguration)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobListJobs' with the minimum fields required to make a request.
@@ -2092,13 +2092,13 @@ jobListJobs =
     }
 
 -- | Job reference uniquely identifying the job.
-jljJobReference :: Lens' JobListJobs (Maybe (Maybe JobReference))
+jljJobReference :: Lens' JobListJobs (Maybe JobReference)
 jljJobReference
   = lens _jljJobReference
       (\ s a -> s{_jljJobReference = a})
 
 -- | [Full-projection-only] Describes the state of the job.
-jljStatus :: Lens' JobListJobs (Maybe (Maybe JobStatus))
+jljStatus :: Lens' JobListJobs (Maybe JobStatus)
 jljStatus
   = lens _jljStatus (\ s a -> s{_jljStatus = a})
 
@@ -2117,7 +2117,7 @@ jljKind :: Lens' JobListJobs Text
 jljKind = lens _jljKind (\ s a -> s{_jljKind = a})
 
 -- | A result object that will be present only if the job has failed.
-jljErrorResult :: Lens' JobListJobs (Maybe (Maybe ErrorProto))
+jljErrorResult :: Lens' JobListJobs (Maybe ErrorProto)
 jljErrorResult
   = lens _jljErrorResult
       (\ s a -> s{_jljErrorResult = a})
@@ -2128,13 +2128,13 @@ jljId = lens _jljId (\ s a -> s{_jljId = a})
 
 -- | [Output-only] Information about the job, including starting time and
 -- ending time of the job.
-jljStatistics :: Lens' JobListJobs (Maybe (Maybe JobStatistics))
+jljStatistics :: Lens' JobListJobs (Maybe JobStatistics)
 jljStatistics
   = lens _jljStatistics
       (\ s a -> s{_jljStatistics = a})
 
 -- | [Full-projection-only] Specifies the job configuration.
-jljConfiguration :: Lens' JobListJobs (Maybe (Maybe JobConfiguration))
+jljConfiguration :: Lens' JobListJobs (Maybe JobConfiguration)
 jljConfiguration
   = lens _jljConfiguration
       (\ s a -> s{_jljConfiguration = a})
@@ -2170,7 +2170,7 @@ instance ToJSON JobListJobs where
 --
 -- /See:/ 'tableRow' smart constructor.
 newtype TableRow = TableRow
-    { _trF :: Maybe [Maybe TableCell]
+    { _trF :: Maybe [TableCell]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableRow' with the minimum fields required to make a request.
@@ -2187,7 +2187,7 @@ tableRow =
 
 -- | Represents a single row in the result set, consisting of one or more
 -- fields.
-trF :: Lens' TableRow [Maybe TableCell]
+trF :: Lens' TableRow [TableCell]
 trF
   = lens _trF (\ s a -> s{_trF = a}) . _Default .
       _Coerce
@@ -2269,15 +2269,15 @@ instance ToJSON Streamingbuffer where
 --
 -- /See:/ 'job' smart constructor.
 data Job = Job
-    { _jobJobReference  :: !(Maybe (Maybe JobReference))
-    , _jobStatus        :: !(Maybe (Maybe JobStatus))
+    { _jobJobReference  :: !(Maybe JobReference)
+    , _jobStatus        :: !(Maybe JobStatus)
     , _jobEtag          :: !(Maybe Text)
     , _jobUserEmail     :: !(Maybe Text)
     , _jobKind          :: !Text
     , _jobSelfLink      :: !(Maybe Text)
     , _jobId            :: !(Maybe Text)
-    , _jobStatistics    :: !(Maybe (Maybe JobStatistics))
-    , _jobConfiguration :: !(Maybe (Maybe JobConfiguration))
+    , _jobStatistics    :: !(Maybe JobStatistics)
+    , _jobConfiguration :: !(Maybe JobConfiguration)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Job' with the minimum fields required to make a request.
@@ -2317,14 +2317,14 @@ job =
     }
 
 -- | [Optional] Reference describing the unique-per-user name of the job.
-jobJobReference :: Lens' Job (Maybe (Maybe JobReference))
+jobJobReference :: Lens' Job (Maybe JobReference)
 jobJobReference
   = lens _jobJobReference
       (\ s a -> s{_jobJobReference = a})
 
 -- | [Output-only] The status of this job. Examine this value when polling an
 -- asynchronous job to see if the job is complete.
-jobStatus :: Lens' Job (Maybe (Maybe JobStatus))
+jobStatus :: Lens' Job (Maybe JobStatus)
 jobStatus
   = lens _jobStatus (\ s a -> s{_jobStatus = a})
 
@@ -2352,13 +2352,13 @@ jobId = lens _jobId (\ s a -> s{_jobId = a})
 
 -- | [Output-only] Information about the job, including starting time and
 -- ending time of the job.
-jobStatistics :: Lens' Job (Maybe (Maybe JobStatistics))
+jobStatistics :: Lens' Job (Maybe JobStatistics)
 jobStatistics
   = lens _jobStatistics
       (\ s a -> s{_jobStatistics = a})
 
 -- | [Required] Describes the job configuration.
-jobConfiguration :: Lens' Job (Maybe (Maybe JobConfiguration))
+jobConfiguration :: Lens' Job (Maybe JobConfiguration)
 jobConfiguration
   = lens _jobConfiguration
       (\ s a -> s{_jobConfiguration = a})
@@ -2394,10 +2394,10 @@ instance ToJSON Job where
 --
 -- /See:/ 'jobConfigurationLink' smart constructor.
 data JobConfigurationLink = JobConfigurationLink
-    { _jDestinationTable  :: !(Maybe (Maybe TableReference))
-    , _jWriteDisposition  :: !(Maybe Text)
-    , _jCreateDisposition :: !(Maybe Text)
-    , _jSourceUri         :: !(Maybe [Text])
+    { _jDestinationTable  :: !(Maybe TableReference)
+    , _jWriteDisPosition  :: !(Maybe Text)
+    , _jCreateDisPosition :: !(Maybe Text)
+    , _jSourceURI         :: !(Maybe [Text])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobConfigurationLink' with the minimum fields required to make a request.
@@ -2406,23 +2406,23 @@ data JobConfigurationLink = JobConfigurationLink
 --
 -- * 'jDestinationTable'
 --
--- * 'jWriteDisposition'
+-- * 'jWriteDisPosition'
 --
--- * 'jCreateDisposition'
+-- * 'jCreateDisPosition'
 --
--- * 'jSourceUri'
+-- * 'jSourceURI'
 jobConfigurationLink
     :: JobConfigurationLink
 jobConfigurationLink =
     JobConfigurationLink
     { _jDestinationTable = Nothing
-    , _jWriteDisposition = Nothing
-    , _jCreateDisposition = Nothing
-    , _jSourceUri = Nothing
+    , _jWriteDisPosition = Nothing
+    , _jCreateDisPosition = Nothing
+    , _jSourceURI = Nothing
     }
 
 -- | [Required] The destination table of the link job.
-jDestinationTable :: Lens' JobConfigurationLink (Maybe (Maybe TableReference))
+jDestinationTable :: Lens' JobConfigurationLink (Maybe TableReference)
 jDestinationTable
   = lens _jDestinationTable
       (\ s a -> s{_jDestinationTable = a})
@@ -2436,10 +2436,10 @@ jDestinationTable
 -- WRITE_EMPTY. Each action is atomic and only occurs if BigQuery is able
 -- to complete the job successfully. Creation, truncation and append
 -- actions occur as one atomic update upon job completion.
-jWriteDisposition :: Lens' JobConfigurationLink (Maybe Text)
-jWriteDisposition
-  = lens _jWriteDisposition
-      (\ s a -> s{_jWriteDisposition = a})
+jWriteDisPosition :: Lens' JobConfigurationLink (Maybe Text)
+jWriteDisPosition
+  = lens _jWriteDisPosition
+      (\ s a -> s{_jWriteDisPosition = a})
 
 -- | [Optional] Specifies whether the job is allowed to create new tables.
 -- The following values are supported: CREATE_IF_NEEDED: If the table does
@@ -2447,15 +2447,15 @@ jWriteDisposition
 -- already exist. If it does not, a \'notFound\' error is returned in the
 -- job result. The default value is CREATE_IF_NEEDED. Creation, truncation
 -- and append actions occur as one atomic update upon job completion.
-jCreateDisposition :: Lens' JobConfigurationLink (Maybe Text)
-jCreateDisposition
-  = lens _jCreateDisposition
-      (\ s a -> s{_jCreateDisposition = a})
+jCreateDisPosition :: Lens' JobConfigurationLink (Maybe Text)
+jCreateDisPosition
+  = lens _jCreateDisPosition
+      (\ s a -> s{_jCreateDisPosition = a})
 
 -- | [Required] URI of source table to link.
-jSourceUri :: Lens' JobConfigurationLink [Text]
-jSourceUri
-  = lens _jSourceUri (\ s a -> s{_jSourceUri = a}) .
+jSourceURI :: Lens' JobConfigurationLink [Text]
+jSourceURI
+  = lens _jSourceURI (\ s a -> s{_jSourceURI = a}) .
       _Default
       . _Coerce
 
@@ -2474,18 +2474,18 @@ instance ToJSON JobConfigurationLink where
           = object
               (catMaybes
                  [("destinationTable" .=) <$> _jDestinationTable,
-                  ("writeDisposition" .=) <$> _jWriteDisposition,
-                  ("createDisposition" .=) <$> _jCreateDisposition,
-                  ("sourceUri" .=) <$> _jSourceUri])
+                  ("writeDisposition" .=) <$> _jWriteDisPosition,
+                  ("createDisposition" .=) <$> _jCreateDisPosition,
+                  ("sourceUri" .=) <$> _jSourceURI])
 
 --
 -- /See:/ 'jobConfiguration' smart constructor.
 data JobConfiguration = JobConfiguration
-    { _jcCopy    :: !(Maybe (Maybe JobConfigurationTableCopy))
-    , _jcLink    :: !(Maybe (Maybe JobConfigurationLink))
-    , _jcLoad    :: !(Maybe (Maybe JobConfigurationLoad))
-    , _jcQuery   :: !(Maybe (Maybe JobConfigurationQuery))
-    , _jcExtract :: !(Maybe (Maybe JobConfigurationExtract))
+    { _jcCopy    :: !(Maybe JobConfigurationTableCopy)
+    , _jcLink    :: !(Maybe JobConfigurationLink)
+    , _jcLoad    :: !(Maybe JobConfigurationLoad)
+    , _jcQuery   :: !(Maybe JobConfigurationQuery)
+    , _jcExtract :: !(Maybe JobConfigurationExtract)
     , _jcDryRun  :: !(Maybe Bool)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -2517,23 +2517,23 @@ jobConfiguration =
     }
 
 -- | [Pick one] Copies a table.
-jcCopy :: Lens' JobConfiguration (Maybe (Maybe JobConfigurationTableCopy))
+jcCopy :: Lens' JobConfiguration (Maybe JobConfigurationTableCopy)
 jcCopy = lens _jcCopy (\ s a -> s{_jcCopy = a})
 
 -- | [Pick one] Configures a link job.
-jcLink :: Lens' JobConfiguration (Maybe (Maybe JobConfigurationLink))
+jcLink :: Lens' JobConfiguration (Maybe JobConfigurationLink)
 jcLink = lens _jcLink (\ s a -> s{_jcLink = a})
 
 -- | [Pick one] Configures a load job.
-jcLoad :: Lens' JobConfiguration (Maybe (Maybe JobConfigurationLoad))
+jcLoad :: Lens' JobConfiguration (Maybe JobConfigurationLoad)
 jcLoad = lens _jcLoad (\ s a -> s{_jcLoad = a})
 
 -- | [Pick one] Configures a query job.
-jcQuery :: Lens' JobConfiguration (Maybe (Maybe JobConfigurationQuery))
+jcQuery :: Lens' JobConfiguration (Maybe JobConfigurationQuery)
 jcQuery = lens _jcQuery (\ s a -> s{_jcQuery = a})
 
 -- | [Pick one] Configures an extract job.
-jcExtract :: Lens' JobConfiguration (Maybe (Maybe JobConfigurationExtract))
+jcExtract :: Lens' JobConfiguration (Maybe JobConfigurationExtract)
 jcExtract
   = lens _jcExtract (\ s a -> s{_jcExtract = a})
 
@@ -2567,7 +2567,7 @@ instance ToJSON JobConfiguration where
 -- /See:/ 'jobCancelResponse' smart constructor.
 data JobCancelResponse = JobCancelResponse
     { _jcrKind :: !Text
-    , _jcrJob  :: !(Maybe (Maybe Job))
+    , _jcrJob  :: !(Maybe Job)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobCancelResponse' with the minimum fields required to make a request.
@@ -2590,7 +2590,7 @@ jcrKind :: Lens' JobCancelResponse Text
 jcrKind = lens _jcrKind (\ s a -> s{_jcrKind = a})
 
 -- | The final state of the job.
-jcrJob :: Lens' JobCancelResponse (Maybe (Maybe Job))
+jcrJob :: Lens' JobCancelResponse (Maybe Job)
 jcrJob = lens _jcrJob (\ s a -> s{_jcrJob = a})
 
 instance FromJSON JobCancelResponse where
@@ -2611,11 +2611,11 @@ instance ToJSON JobCancelResponse where
 -- /See:/ 'jobConfigurationExtract' smart constructor.
 data JobConfigurationExtract = JobConfigurationExtract
     { _jceDestinationFormat :: !(Maybe Text)
-    , _jceSourceTable       :: !(Maybe (Maybe TableReference))
+    , _jceSourceTable       :: !(Maybe TableReference)
     , _jcePrintHeader       :: !Bool
     , _jceCompression       :: !(Maybe Text)
-    , _jceDestinationUris   :: !(Maybe [Text])
-    , _jceDestinationUri    :: !(Maybe Text)
+    , _jceDestinationURIs   :: !(Maybe [Text])
+    , _jceDestinationURI    :: !(Maybe Text)
     , _jceFieldDelimiter    :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -2631,9 +2631,9 @@ data JobConfigurationExtract = JobConfigurationExtract
 --
 -- * 'jceCompression'
 --
--- * 'jceDestinationUris'
+-- * 'jceDestinationURIs'
 --
--- * 'jceDestinationUri'
+-- * 'jceDestinationURI'
 --
 -- * 'jceFieldDelimiter'
 jobConfigurationExtract
@@ -2644,8 +2644,8 @@ jobConfigurationExtract =
     , _jceSourceTable = Nothing
     , _jcePrintHeader = True
     , _jceCompression = Nothing
-    , _jceDestinationUris = Nothing
-    , _jceDestinationUri = Nothing
+    , _jceDestinationURIs = Nothing
+    , _jceDestinationURI = Nothing
     , _jceFieldDelimiter = Nothing
     }
 
@@ -2658,7 +2658,7 @@ jceDestinationFormat
       (\ s a -> s{_jceDestinationFormat = a})
 
 -- | [Required] A reference to the table being exported.
-jceSourceTable :: Lens' JobConfigurationExtract (Maybe (Maybe TableReference))
+jceSourceTable :: Lens' JobConfigurationExtract (Maybe TableReference)
 jceSourceTable
   = lens _jceSourceTable
       (\ s a -> s{_jceSourceTable = a})
@@ -2679,20 +2679,20 @@ jceCompression
 
 -- | [Pick one] A list of fully-qualified Google Cloud Storage URIs where the
 -- extracted table should be written.
-jceDestinationUris :: Lens' JobConfigurationExtract [Text]
-jceDestinationUris
-  = lens _jceDestinationUris
-      (\ s a -> s{_jceDestinationUris = a})
+jceDestinationURIs :: Lens' JobConfigurationExtract [Text]
+jceDestinationURIs
+  = lens _jceDestinationURIs
+      (\ s a -> s{_jceDestinationURIs = a})
       . _Default
       . _Coerce
 
 -- | [Pick one] DEPRECATED: Use destinationUris instead, passing only one URI
 -- as necessary. The fully-qualified Google Cloud Storage URI where the
 -- extracted table should be written.
-jceDestinationUri :: Lens' JobConfigurationExtract (Maybe Text)
-jceDestinationUri
-  = lens _jceDestinationUri
-      (\ s a -> s{_jceDestinationUri = a})
+jceDestinationURI :: Lens' JobConfigurationExtract (Maybe Text)
+jceDestinationURI
+  = lens _jceDestinationURI
+      (\ s a -> s{_jceDestinationURI = a})
 
 -- | [Optional] Delimiter to use between fields in the exported data. Default
 -- is \',\'
@@ -2721,8 +2721,8 @@ instance ToJSON JobConfigurationExtract where
                   ("sourceTable" .=) <$> _jceSourceTable,
                   Just ("printHeader" .= _jcePrintHeader),
                   ("compression" .=) <$> _jceCompression,
-                  ("destinationUris" .=) <$> _jceDestinationUris,
-                  ("destinationUri" .=) <$> _jceDestinationUri,
+                  ("destinationUris" .=) <$> _jceDestinationURIs,
+                  ("destinationUri" .=) <$> _jceDestinationURI,
                   ("fieldDelimiter" .=) <$> _jceFieldDelimiter])
 
 -- | Represents a single JSON object.
@@ -2774,18 +2774,18 @@ instance ToJSON JobConfigurationQueryTableDefinitions
 --
 -- /See:/ 'jobConfigurationQuery' smart constructor.
 data JobConfigurationQuery = JobConfigurationQuery
-    { _jcqDestinationTable             :: !(Maybe (Maybe TableReference))
-    , _jcqWriteDisposition             :: !(Maybe Text)
+    { _jcqDestinationTable             :: !(Maybe TableReference)
+    , _jcqWriteDisPosition             :: !(Maybe Text)
     , _jcqPriority                     :: !(Maybe Text)
     , _jcqUseQueryCache                :: !Bool
     , _jcqPreserveNulls                :: !(Maybe Bool)
     , _jcqTableDefinitions             :: !(Maybe JobConfigurationQueryTableDefinitions)
-    , _jcqCreateDisposition            :: !(Maybe Text)
-    , _jcqUserDefinedFunctionResources :: !(Maybe [Maybe UserDefinedFunctionResource])
+    , _jcqCreateDisPosition            :: !(Maybe Text)
+    , _jcqUserDefinedFunctionResources :: !(Maybe [UserDefinedFunctionResource])
     , _jcqAllowLargeResults            :: !(Maybe Bool)
     , _jcqQuery                        :: !(Maybe Text)
     , _jcqFlattenResults               :: !Bool
-    , _jcqDefaultDataset               :: !(Maybe (Maybe DatasetReference))
+    , _jcqDefaultDataset               :: !(Maybe DatasetReference)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobConfigurationQuery' with the minimum fields required to make a request.
@@ -2794,7 +2794,7 @@ data JobConfigurationQuery = JobConfigurationQuery
 --
 -- * 'jcqDestinationTable'
 --
--- * 'jcqWriteDisposition'
+-- * 'jcqWriteDisPosition'
 --
 -- * 'jcqPriority'
 --
@@ -2804,7 +2804,7 @@ data JobConfigurationQuery = JobConfigurationQuery
 --
 -- * 'jcqTableDefinitions'
 --
--- * 'jcqCreateDisposition'
+-- * 'jcqCreateDisPosition'
 --
 -- * 'jcqUserDefinedFunctionResources'
 --
@@ -2820,12 +2820,12 @@ jobConfigurationQuery
 jobConfigurationQuery =
     JobConfigurationQuery
     { _jcqDestinationTable = Nothing
-    , _jcqWriteDisposition = Nothing
+    , _jcqWriteDisPosition = Nothing
     , _jcqPriority = Nothing
     , _jcqUseQueryCache = True
     , _jcqPreserveNulls = Nothing
     , _jcqTableDefinitions = Nothing
-    , _jcqCreateDisposition = Nothing
+    , _jcqCreateDisPosition = Nothing
     , _jcqUserDefinedFunctionResources = Nothing
     , _jcqAllowLargeResults = Nothing
     , _jcqQuery = Nothing
@@ -2835,7 +2835,7 @@ jobConfigurationQuery =
 
 -- | [Optional] Describes the table where the query results should be stored.
 -- If not present, a new table will be created to store the results.
-jcqDestinationTable :: Lens' JobConfigurationQuery (Maybe (Maybe TableReference))
+jcqDestinationTable :: Lens' JobConfigurationQuery (Maybe TableReference)
 jcqDestinationTable
   = lens _jcqDestinationTable
       (\ s a -> s{_jcqDestinationTable = a})
@@ -2849,10 +2849,10 @@ jcqDestinationTable
 -- WRITE_EMPTY. Each action is atomic and only occurs if BigQuery is able
 -- to complete the job successfully. Creation, truncation and append
 -- actions occur as one atomic update upon job completion.
-jcqWriteDisposition :: Lens' JobConfigurationQuery (Maybe Text)
-jcqWriteDisposition
-  = lens _jcqWriteDisposition
-      (\ s a -> s{_jcqWriteDisposition = a})
+jcqWriteDisPosition :: Lens' JobConfigurationQuery (Maybe Text)
+jcqWriteDisPosition
+  = lens _jcqWriteDisPosition
+      (\ s a -> s{_jcqWriteDisPosition = a})
 
 -- | [Optional] Specifies a priority for the query. Possible values include
 -- INTERACTIVE and BATCH. The default value is INTERACTIVE.
@@ -2891,14 +2891,14 @@ jcqTableDefinitions
 -- already exist. If it does not, a \'notFound\' error is returned in the
 -- job result. The default value is CREATE_IF_NEEDED. Creation, truncation
 -- and append actions occur as one atomic update upon job completion.
-jcqCreateDisposition :: Lens' JobConfigurationQuery (Maybe Text)
-jcqCreateDisposition
-  = lens _jcqCreateDisposition
-      (\ s a -> s{_jcqCreateDisposition = a})
+jcqCreateDisPosition :: Lens' JobConfigurationQuery (Maybe Text)
+jcqCreateDisPosition
+  = lens _jcqCreateDisPosition
+      (\ s a -> s{_jcqCreateDisPosition = a})
 
 -- | [Experimental] Describes user-defined function resources used in the
 -- query.
-jcqUserDefinedFunctionResources :: Lens' JobConfigurationQuery [Maybe UserDefinedFunctionResource]
+jcqUserDefinedFunctionResources :: Lens' JobConfigurationQuery [UserDefinedFunctionResource]
 jcqUserDefinedFunctionResources
   = lens _jcqUserDefinedFunctionResources
       (\ s a -> s{_jcqUserDefinedFunctionResources = a})
@@ -2926,7 +2926,7 @@ jcqFlattenResults
 
 -- | [Optional] Specifies the default dataset to use for unqualified table
 -- names in the query.
-jcqDefaultDataset :: Lens' JobConfigurationQuery (Maybe (Maybe DatasetReference))
+jcqDefaultDataset :: Lens' JobConfigurationQuery (Maybe DatasetReference)
 jcqDefaultDataset
   = lens _jcqDefaultDataset
       (\ s a -> s{_jcqDefaultDataset = a})
@@ -2954,12 +2954,12 @@ instance ToJSON JobConfigurationQuery where
           = object
               (catMaybes
                  [("destinationTable" .=) <$> _jcqDestinationTable,
-                  ("writeDisposition" .=) <$> _jcqWriteDisposition,
+                  ("writeDisposition" .=) <$> _jcqWriteDisPosition,
                   ("priority" .=) <$> _jcqPriority,
                   Just ("useQueryCache" .= _jcqUseQueryCache),
                   ("preserveNulls" .=) <$> _jcqPreserveNulls,
                   ("tableDefinitions" .=) <$> _jcqTableDefinitions,
-                  ("createDisposition" .=) <$> _jcqCreateDisposition,
+                  ("createDisposition" .=) <$> _jcqCreateDisPosition,
                   ("userDefinedFunctionResources" .=) <$>
                     _jcqUserDefinedFunctionResources,
                   ("allowLargeResults" .=) <$> _jcqAllowLargeResults,
@@ -3067,7 +3067,7 @@ instance ToJSON TableCell where
 --
 -- /See:/ 'userDefinedFunctionResource' smart constructor.
 data UserDefinedFunctionResource = UserDefinedFunctionResource
-    { _udfrResourceUri :: !(Maybe Text)
+    { _udfrResourceURI :: !(Maybe Text)
     , _udfrInlineCode  :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -3075,23 +3075,23 @@ data UserDefinedFunctionResource = UserDefinedFunctionResource
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'udfrResourceUri'
+-- * 'udfrResourceURI'
 --
 -- * 'udfrInlineCode'
 userDefinedFunctionResource
     :: UserDefinedFunctionResource
 userDefinedFunctionResource =
     UserDefinedFunctionResource
-    { _udfrResourceUri = Nothing
+    { _udfrResourceURI = Nothing
     , _udfrInlineCode = Nothing
     }
 
 -- | [Pick one] A code resource to load from a Google Cloud Storage URI
 -- (gs:\/\/bucket\/path).
-udfrResourceUri :: Lens' UserDefinedFunctionResource (Maybe Text)
-udfrResourceUri
-  = lens _udfrResourceUri
-      (\ s a -> s{_udfrResourceUri = a})
+udfrResourceURI :: Lens' UserDefinedFunctionResource (Maybe Text)
+udfrResourceURI
+  = lens _udfrResourceURI
+      (\ s a -> s{_udfrResourceURI = a})
 
 -- | [Pick one] An inline resource that contains code for a user-defined
 -- function (UDF). Providing a inline code resource is equivalent to
@@ -3112,7 +3112,7 @@ instance ToJSON UserDefinedFunctionResource where
         toJSON UserDefinedFunctionResource{..}
           = object
               (catMaybes
-                 [("resourceUri" .=) <$> _udfrResourceUri,
+                 [("resourceUri" .=) <$> _udfrResourceURI,
                   ("inlineCode" .=) <$> _udfrInlineCode])
 
 --
@@ -3222,8 +3222,8 @@ instance ToJSON JobStatistics2 where
 -- /See:/ 'jobStatus' smart constructor.
 data JobStatus = JobStatus
     { _jsState       :: !(Maybe Text)
-    , _jsErrorResult :: !(Maybe (Maybe ErrorProto))
-    , _jsErrors      :: !(Maybe [Maybe ErrorProto])
+    , _jsErrorResult :: !(Maybe ErrorProto)
+    , _jsErrors      :: !(Maybe [ErrorProto])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobStatus' with the minimum fields required to make a request.
@@ -3250,7 +3250,7 @@ jsState = lens _jsState (\ s a -> s{_jsState = a})
 
 -- | [Output-only] Final error result of the job. If present, indicates that
 -- the job has completed and was unsuccessful.
-jsErrorResult :: Lens' JobStatus (Maybe (Maybe ErrorProto))
+jsErrorResult :: Lens' JobStatus (Maybe ErrorProto)
 jsErrorResult
   = lens _jsErrorResult
       (\ s a -> s{_jsErrorResult = a})
@@ -3258,7 +3258,7 @@ jsErrorResult
 -- | [Output-only] All errors encountered during the running of the job.
 -- Errors here do not necessarily mean that the job has completed or was
 -- unsuccessful.
-jsErrors :: Lens' JobStatus [Maybe ErrorProto]
+jsErrors :: Lens' JobStatus [ErrorProto]
 jsErrors
   = lens _jsErrors (\ s a -> s{_jsErrors = a}) .
       _Default
@@ -3337,7 +3337,7 @@ data DatasetAccess = DatasetAccess
     , _daDomain       :: !(Maybe Text)
     , _daSpecialGroup :: !(Maybe Text)
     , _daRole         :: !(Maybe Text)
-    , _daView         :: !(Maybe (Maybe TableReference))
+    , _daView         :: !(Maybe TableReference)
     , _daUserByEmail  :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -3400,7 +3400,7 @@ daRole = lens _daRole (\ s a -> s{_daRole = a})
 -- dataset. The role field is not required when this field is set. If that
 -- view is updated by any user, access to the view needs to be granted
 -- again via an update operation.
-daView :: Lens' DatasetAccess (Maybe (Maybe TableReference))
+daView :: Lens' DatasetAccess (Maybe TableReference)
 daView = lens _daView (\ s a -> s{_daView = a})
 
 -- | [Pick one] An email address of a user to grant access to. For example:
@@ -3437,17 +3437,17 @@ data Table = Table
     { _tabCreationTime              :: !(Maybe Int64)
     , _tabEtag                      :: !(Maybe Text)
     , _tabNumBytes                  :: !(Maybe Int64)
-    , _tabExternalDataConfiguration :: !(Maybe (Maybe ExternalDataConfiguration))
+    , _tabExternalDataConfiguration :: !(Maybe ExternalDataConfiguration)
     , _tabLocation                  :: !(Maybe Text)
-    , _tabTableReference            :: !(Maybe (Maybe TableReference))
+    , _tabTableReference            :: !(Maybe TableReference)
     , _tabFriendlyName              :: !(Maybe Text)
     , _tabKind                      :: !Text
     , _tabLastModifiedTime          :: !(Maybe Word64)
-    , _tabSchema                    :: !(Maybe (Maybe TableSchema))
-    , _tabStreamingBuffer           :: !(Maybe (Maybe Streamingbuffer))
+    , _tabSchema                    :: !(Maybe TableSchema)
+    , _tabStreamingBuffer           :: !(Maybe Streamingbuffer)
     , _tabSelfLink                  :: !(Maybe Text)
     , _tabNumRows                   :: !(Maybe Word64)
-    , _tabView                      :: !(Maybe (Maybe ViewDefinition))
+    , _tabView                      :: !(Maybe ViewDefinition)
     , _tabId                        :: !(Maybe Text)
     , _tabType                      :: !(Maybe Text)
     , _tabExpirationTime            :: !(Maybe Int64)
@@ -3537,7 +3537,7 @@ tabNumBytes
 -- | [Experimental] Describes the data format, location, and other properties
 -- of a table stored outside of BigQuery. By defining these properties, the
 -- data source can then be queried as if it were a standard BigQuery table.
-tabExternalDataConfiguration :: Lens' Table (Maybe (Maybe ExternalDataConfiguration))
+tabExternalDataConfiguration :: Lens' Table (Maybe ExternalDataConfiguration)
 tabExternalDataConfiguration
   = lens _tabExternalDataConfiguration
       (\ s a -> s{_tabExternalDataConfiguration = a})
@@ -3549,7 +3549,7 @@ tabLocation
   = lens _tabLocation (\ s a -> s{_tabLocation = a})
 
 -- | [Required] Reference describing the ID of this table.
-tabTableReference :: Lens' Table (Maybe (Maybe TableReference))
+tabTableReference :: Lens' Table (Maybe TableReference)
 tabTableReference
   = lens _tabTableReference
       (\ s a -> s{_tabTableReference = a})
@@ -3572,14 +3572,14 @@ tabLastModifiedTime
       (\ s a -> s{_tabLastModifiedTime = a})
 
 -- | [Optional] Describes the schema of this table.
-tabSchema :: Lens' Table (Maybe (Maybe TableSchema))
+tabSchema :: Lens' Table (Maybe TableSchema)
 tabSchema
   = lens _tabSchema (\ s a -> s{_tabSchema = a})
 
 -- | [Output-only] Contains information regarding this table\'s streaming
 -- buffer, if one is present. This field will be absent if the table is not
 -- being streamed to or if there is no data in the streaming buffer.
-tabStreamingBuffer :: Lens' Table (Maybe (Maybe Streamingbuffer))
+tabStreamingBuffer :: Lens' Table (Maybe Streamingbuffer)
 tabStreamingBuffer
   = lens _tabStreamingBuffer
       (\ s a -> s{_tabStreamingBuffer = a})
@@ -3596,7 +3596,7 @@ tabNumRows
   = lens _tabNumRows (\ s a -> s{_tabNumRows = a})
 
 -- | [Optional] The view definition.
-tabView :: Lens' Table (Maybe (Maybe ViewDefinition))
+tabView :: Lens' Table (Maybe ViewDefinition)
 tabView = lens _tabView (\ s a -> s{_tabView = a})
 
 -- | [Output-only] An opaque ID uniquely identifying the table.
@@ -3929,7 +3929,7 @@ instance ToJSON JobStatistics3 where
 data DatasetListDatasets = DatasetListDatasets
     { _dldFriendlyName     :: !(Maybe Text)
     , _dldKind             :: !Text
-    , _dldDatasetReference :: !(Maybe (Maybe DatasetReference))
+    , _dldDatasetReference :: !(Maybe DatasetReference)
     , _dldId               :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -3967,7 +3967,7 @@ dldKind = lens _dldKind (\ s a -> s{_dldKind = a})
 
 -- | The dataset reference. Use this property to access specific parts of the
 -- dataset\'s ID, such as project ID or dataset ID.
-dldDatasetReference :: Lens' DatasetListDatasets (Maybe (Maybe DatasetReference))
+dldDatasetReference :: Lens' DatasetListDatasets (Maybe DatasetReference)
 dldDatasetReference
   = lens _dldDatasetReference
       (\ s a -> s{_dldDatasetReference = a})
@@ -3998,14 +3998,14 @@ instance ToJSON DatasetListDatasets where
 --
 -- /See:/ 'queryResponse' smart constructor.
 data QueryResponse = QueryResponse
-    { _qJobReference        :: !(Maybe (Maybe JobReference))
+    { _qJobReference        :: !(Maybe JobReference)
     , _qKind                :: !Text
-    , _qSchema              :: !(Maybe (Maybe TableSchema))
+    , _qSchema              :: !(Maybe TableSchema)
     , _qTotalBytesProcessed :: !(Maybe Int64)
-    , _qRows                :: !(Maybe [Maybe TableRow])
+    , _qRows                :: !(Maybe [TableRow])
     , _qPageToken           :: !(Maybe Text)
     , _qTotalRows           :: !(Maybe Word64)
-    , _qErrors              :: !(Maybe [Maybe ErrorProto])
+    , _qErrors              :: !(Maybe [ErrorProto])
     , _qJobComplete         :: !(Maybe Bool)
     , _qCacheHit            :: !(Maybe Bool)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -4055,7 +4055,7 @@ queryResponse =
 -- completed. Since this API only returns the first page of results,
 -- subsequent pages can be fetched via the same mechanism
 -- (GetQueryResults).
-qJobReference :: Lens' QueryResponse (Maybe (Maybe JobReference))
+qJobReference :: Lens' QueryResponse (Maybe JobReference)
 qJobReference
   = lens _qJobReference
       (\ s a -> s{_qJobReference = a})
@@ -4066,7 +4066,7 @@ qKind = lens _qKind (\ s a -> s{_qKind = a})
 
 -- | The schema of the results. Present only when the query completes
 -- successfully.
-qSchema :: Lens' QueryResponse (Maybe (Maybe TableSchema))
+qSchema :: Lens' QueryResponse (Maybe TableSchema)
 qSchema = lens _qSchema (\ s a -> s{_qSchema = a})
 
 -- | The total number of bytes processed for this query. If this query was a
@@ -4080,7 +4080,7 @@ qTotalBytesProcessed
 -- | An object with as many results as can be contained within the maximum
 -- permitted reply size. To get any additional rows, you can call
 -- GetQueryResults and specify the jobReference returned above.
-qRows :: Lens' QueryResponse [Maybe TableRow]
+qRows :: Lens' QueryResponse [TableRow]
 qRows
   = lens _qRows (\ s a -> s{_qRows = a}) . _Default .
       _Coerce
@@ -4099,7 +4099,7 @@ qTotalRows
 -- | [Output-only] All errors and warnings encountered during the running of
 -- the job. Errors here do not necessarily mean that the job has completed
 -- or was unsuccessful.
-qErrors :: Lens' QueryResponse [Maybe ErrorProto]
+qErrors :: Lens' QueryResponse [ErrorProto]
 qErrors
   = lens _qErrors (\ s a -> s{_qErrors = a}) . _Default
       . _Coerce
@@ -4149,7 +4149,7 @@ instance ToJSON QueryResponse where
 --
 -- /See:/ 'tableListTables' smart constructor.
 data TableListTables = TableListTables
-    { _tltTableReference :: !(Maybe (Maybe TableReference))
+    { _tltTableReference :: !(Maybe TableReference)
     , _tltFriendlyName   :: !(Maybe Text)
     , _tltKind           :: !Text
     , _tltId             :: !(Maybe Text)
@@ -4181,7 +4181,7 @@ tableListTables =
     }
 
 -- | A reference uniquely identifying the table.
-tltTableReference :: Lens' TableListTables (Maybe (Maybe TableReference))
+tltTableReference :: Lens' TableListTables (Maybe TableReference)
 tltTableReference
   = lens _tltTableReference
       (\ s a -> s{_tltTableReference = a})

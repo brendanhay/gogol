@@ -33,12 +33,12 @@ module Network.Google.Resource.SiteVerification.WebResource.Patch
     -- * Request Lenses
     , wrpQuotaUser
     , wrpPrettyPrint
-    , wrpUserIp
+    , wrpUserIP
     , wrpKey
+    , wrpSiteVerificationWebResourceResource
     , wrpId
-    , wrpOauthToken
+    , wrpOAuthToken
     , wrpFields
-    , wrpAlt
     ) where
 
 import           Network.Google.Prelude
@@ -52,25 +52,26 @@ type WebResourcePatchResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :>
-                       Patch '[JSON] SiteVerificationWebResourceResource
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] SiteVerificationWebResourceResource
+                         :> Patch '[JSON] SiteVerificationWebResourceResource
 
 -- | Modify the list of owners for your website or domain. This method
 -- supports patch semantics.
 --
 -- /See:/ 'webResourcePatch'' smart constructor.
 data WebResourcePatch' = WebResourcePatch'
-    { _wrpQuotaUser   :: !(Maybe Text)
-    , _wrpPrettyPrint :: !Bool
-    , _wrpUserIp      :: !(Maybe Text)
-    , _wrpKey         :: !(Maybe Text)
-    , _wrpId          :: !Text
-    , _wrpOauthToken  :: !(Maybe Text)
-    , _wrpFields      :: !(Maybe Text)
-    , _wrpAlt         :: !Alt
+    { _wrpQuotaUser                           :: !(Maybe Text)
+    , _wrpPrettyPrint                         :: !Bool
+    , _wrpUserIP                              :: !(Maybe Text)
+    , _wrpKey                                 :: !(Maybe Key)
+    , _wrpSiteVerificationWebResourceResource :: !SiteVerificationWebResourceResource
+    , _wrpId                                  :: !Text
+    , _wrpOAuthToken                          :: !(Maybe OAuthToken)
+    , _wrpFields                              :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WebResourcePatch'' with the minimum fields required to make a request.
@@ -81,30 +82,31 @@ data WebResourcePatch' = WebResourcePatch'
 --
 -- * 'wrpPrettyPrint'
 --
--- * 'wrpUserIp'
+-- * 'wrpUserIP'
 --
 -- * 'wrpKey'
 --
+-- * 'wrpSiteVerificationWebResourceResource'
+--
 -- * 'wrpId'
 --
--- * 'wrpOauthToken'
+-- * 'wrpOAuthToken'
 --
 -- * 'wrpFields'
---
--- * 'wrpAlt'
 webResourcePatch'
-    :: Text -- ^ 'id'
+    :: SiteVerificationWebResourceResource -- ^ 'SiteVerificationWebResourceResource'
+    -> Text -- ^ 'id'
     -> WebResourcePatch'
-webResourcePatch' pWrpId_ =
+webResourcePatch' pWrpSiteVerificationWebResourceResource_ pWrpId_ =
     WebResourcePatch'
     { _wrpQuotaUser = Nothing
     , _wrpPrettyPrint = False
-    , _wrpUserIp = Nothing
+    , _wrpUserIP = Nothing
     , _wrpKey = Nothing
+    , _wrpSiteVerificationWebResourceResource = pWrpSiteVerificationWebResourceResource_
     , _wrpId = pWrpId_
-    , _wrpOauthToken = Nothing
+    , _wrpOAuthToken = Nothing
     , _wrpFields = Nothing
-    , _wrpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -122,46 +124,54 @@ wrpPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-wrpUserIp :: Lens' WebResourcePatch' (Maybe Text)
-wrpUserIp
-  = lens _wrpUserIp (\ s a -> s{_wrpUserIp = a})
+wrpUserIP :: Lens' WebResourcePatch' (Maybe Text)
+wrpUserIP
+  = lens _wrpUserIP (\ s a -> s{_wrpUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-wrpKey :: Lens' WebResourcePatch' (Maybe Text)
+wrpKey :: Lens' WebResourcePatch' (Maybe Key)
 wrpKey = lens _wrpKey (\ s a -> s{_wrpKey = a})
+
+-- | Multipart request metadata.
+wrpSiteVerificationWebResourceResource :: Lens' WebResourcePatch' SiteVerificationWebResourceResource
+wrpSiteVerificationWebResourceResource
+  = lens _wrpSiteVerificationWebResourceResource
+      (\ s a ->
+         s{_wrpSiteVerificationWebResourceResource = a})
 
 -- | The id of a verified site or domain.
 wrpId :: Lens' WebResourcePatch' Text
 wrpId = lens _wrpId (\ s a -> s{_wrpId = a})
 
 -- | OAuth 2.0 token for the current user.
-wrpOauthToken :: Lens' WebResourcePatch' (Maybe Text)
-wrpOauthToken
-  = lens _wrpOauthToken
-      (\ s a -> s{_wrpOauthToken = a})
+wrpOAuthToken :: Lens' WebResourcePatch' (Maybe OAuthToken)
+wrpOAuthToken
+  = lens _wrpOAuthToken
+      (\ s a -> s{_wrpOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 wrpFields :: Lens' WebResourcePatch' (Maybe Text)
 wrpFields
   = lens _wrpFields (\ s a -> s{_wrpFields = a})
 
--- | Data format for the response.
-wrpAlt :: Lens' WebResourcePatch' Alt
-wrpAlt = lens _wrpAlt (\ s a -> s{_wrpAlt = a})
+instance GoogleAuth WebResourcePatch' where
+        authKey = wrpKey . _Just
+        authToken = wrpOAuthToken . _Just
 
 instance GoogleRequest WebResourcePatch' where
         type Rs WebResourcePatch' =
              SiteVerificationWebResourceResource
         request = requestWithRoute defReq siteVerificationURL
         requestWithRoute r u WebResourcePatch'{..}
-          = go _wrpQuotaUser (Just _wrpPrettyPrint) _wrpUserIp
+          = go _wrpQuotaUser (Just _wrpPrettyPrint) _wrpUserIP
               _wrpKey
               _wrpId
-              _wrpOauthToken
+              _wrpOAuthToken
               _wrpFields
-              (Just _wrpAlt)
+              (Just AltJSON)
+              _wrpSiteVerificationWebResourceResource
           where go
                   = clientWithRoute
                       (Proxy :: Proxy WebResourcePatchResource)

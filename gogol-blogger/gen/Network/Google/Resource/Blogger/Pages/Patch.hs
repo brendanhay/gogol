@@ -32,15 +32,15 @@ module Network.Google.Resource.Blogger.Pages.Patch
     -- * Request Lenses
     , pagaQuotaUser
     , pagaPrettyPrint
-    , pagaUserIp
+    , pagaUserIP
+    , pagaPage
     , pagaBlogId
     , pagaPageId
     , pagaKey
     , pagaRevert
-    , pagaOauthToken
+    , pagaOAuthToken
     , pagaPublish
     , pagaFields
-    , pagaAlt
     ) where
 
 import           Network.Google.Blogger.Types
@@ -56,12 +56,13 @@ type PagesPatchResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "revert" Bool :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "publish" Bool :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Patch '[JSON] Page
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] Page :> Patch '[JSON] Page
 
 -- | Update a page. This method supports patch semantics.
 --
@@ -69,15 +70,15 @@ type PagesPatchResource =
 data PagesPatch' = PagesPatch'
     { _pagaQuotaUser   :: !(Maybe Text)
     , _pagaPrettyPrint :: !Bool
-    , _pagaUserIp      :: !(Maybe Text)
+    , _pagaUserIP      :: !(Maybe Text)
+    , _pagaPage        :: !Page
     , _pagaBlogId      :: !Text
     , _pagaPageId      :: !Text
-    , _pagaKey         :: !(Maybe Text)
+    , _pagaKey         :: !(Maybe Key)
     , _pagaRevert      :: !(Maybe Bool)
-    , _pagaOauthToken  :: !(Maybe Text)
+    , _pagaOAuthToken  :: !(Maybe OAuthToken)
     , _pagaPublish     :: !(Maybe Bool)
     , _pagaFields      :: !(Maybe Text)
-    , _pagaAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PagesPatch'' with the minimum fields required to make a request.
@@ -88,7 +89,9 @@ data PagesPatch' = PagesPatch'
 --
 -- * 'pagaPrettyPrint'
 --
--- * 'pagaUserIp'
+-- * 'pagaUserIP'
+--
+-- * 'pagaPage'
 --
 -- * 'pagaBlogId'
 --
@@ -98,30 +101,29 @@ data PagesPatch' = PagesPatch'
 --
 -- * 'pagaRevert'
 --
--- * 'pagaOauthToken'
+-- * 'pagaOAuthToken'
 --
 -- * 'pagaPublish'
 --
 -- * 'pagaFields'
---
--- * 'pagaAlt'
 pagesPatch'
-    :: Text -- ^ 'blogId'
+    :: Page -- ^ 'Page'
+    -> Text -- ^ 'blogId'
     -> Text -- ^ 'pageId'
     -> PagesPatch'
-pagesPatch' pPagaBlogId_ pPagaPageId_ =
+pagesPatch' pPagaPage_ pPagaBlogId_ pPagaPageId_ =
     PagesPatch'
     { _pagaQuotaUser = Nothing
     , _pagaPrettyPrint = True
-    , _pagaUserIp = Nothing
+    , _pagaUserIP = Nothing
+    , _pagaPage = pPagaPage_
     , _pagaBlogId = pPagaBlogId_
     , _pagaPageId = pPagaPageId_
     , _pagaKey = Nothing
     , _pagaRevert = Nothing
-    , _pagaOauthToken = Nothing
+    , _pagaOAuthToken = Nothing
     , _pagaPublish = Nothing
     , _pagaFields = Nothing
-    , _pagaAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -140,9 +142,13 @@ pagaPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-pagaUserIp :: Lens' PagesPatch' (Maybe Text)
-pagaUserIp
-  = lens _pagaUserIp (\ s a -> s{_pagaUserIp = a})
+pagaUserIP :: Lens' PagesPatch' (Maybe Text)
+pagaUserIP
+  = lens _pagaUserIP (\ s a -> s{_pagaUserIP = a})
+
+-- | Multipart request metadata.
+pagaPage :: Lens' PagesPatch' Page
+pagaPage = lens _pagaPage (\ s a -> s{_pagaPage = a})
 
 -- | The ID of the Blog.
 pagaBlogId :: Lens' PagesPatch' Text
@@ -157,7 +163,7 @@ pagaPageId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pagaKey :: Lens' PagesPatch' (Maybe Text)
+pagaKey :: Lens' PagesPatch' (Maybe Key)
 pagaKey = lens _pagaKey (\ s a -> s{_pagaKey = a})
 
 -- | Whether a revert action should be performed when the page is updated
@@ -167,10 +173,10 @@ pagaRevert
   = lens _pagaRevert (\ s a -> s{_pagaRevert = a})
 
 -- | OAuth 2.0 token for the current user.
-pagaOauthToken :: Lens' PagesPatch' (Maybe Text)
-pagaOauthToken
-  = lens _pagaOauthToken
-      (\ s a -> s{_pagaOauthToken = a})
+pagaOAuthToken :: Lens' PagesPatch' (Maybe OAuthToken)
+pagaOAuthToken
+  = lens _pagaOAuthToken
+      (\ s a -> s{_pagaOAuthToken = a})
 
 -- | Whether a publish action should be performed when the page is updated
 -- (default: false).
@@ -183,24 +189,25 @@ pagaFields :: Lens' PagesPatch' (Maybe Text)
 pagaFields
   = lens _pagaFields (\ s a -> s{_pagaFields = a})
 
--- | Data format for the response.
-pagaAlt :: Lens' PagesPatch' Alt
-pagaAlt = lens _pagaAlt (\ s a -> s{_pagaAlt = a})
+instance GoogleAuth PagesPatch' where
+        authKey = pagaKey . _Just
+        authToken = pagaOAuthToken . _Just
 
 instance GoogleRequest PagesPatch' where
         type Rs PagesPatch' = Page
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PagesPatch'{..}
           = go _pagaQuotaUser (Just _pagaPrettyPrint)
-              _pagaUserIp
+              _pagaUserIP
               _pagaBlogId
               _pagaPageId
               _pagaKey
               _pagaRevert
-              _pagaOauthToken
+              _pagaOAuthToken
               _pagaPublish
               _pagaFields
-              (Just _pagaAlt)
+              (Just AltJSON)
+              _pagaPage
           where go
                   = clientWithRoute (Proxy :: Proxy PagesPatchResource)
                       r

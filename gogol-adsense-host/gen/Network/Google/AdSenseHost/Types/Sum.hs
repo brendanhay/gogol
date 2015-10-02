@@ -60,32 +60,3 @@ instance FromJSON AdsensehostAssociationsessionsStartProductCode where
 
 instance ToJSON AdsensehostAssociationsessionsStartProductCode where
     toJSON = toJSONText
-
--- | Data format for the response.
-data Alt
-    = CSV
-      -- ^ @csv@
-      -- Responses with Content-Type of text\/csv
-    | JSON
-      -- ^ @json@
-      -- Responses with Content-Type of application\/json
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable Alt
-
-instance FromText Alt where
-    fromText = \case
-        "csv" -> Just CSV
-        "json" -> Just JSON
-        _ -> Nothing
-
-instance ToText Alt where
-    toText = \case
-        CSV -> "csv"
-        JSON -> "json"
-
-instance FromJSON Alt where
-    parseJSON = parseJSONText "Alt"
-
-instance ToJSON Alt where
-    toJSON = toJSONText

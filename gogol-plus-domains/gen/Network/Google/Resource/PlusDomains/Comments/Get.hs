@@ -32,12 +32,11 @@ module Network.Google.Resource.PlusDomains.Comments.Get
     -- * Request Lenses
     , cQuotaUser
     , cPrettyPrint
-    , cUserIp
+    , cUserIP
     , cKey
-    , cOauthToken
+    , cOAuthToken
     , cCommentId
     , cFields
-    , cAlt
     ) where
 
 import           Network.Google.PlusDomains.Types
@@ -51,10 +50,10 @@ type CommentsGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Get '[JSON] Comment
+                     QueryParam "alt" AltJSON :> Get '[JSON] Comment
 
 -- | Get a comment.
 --
@@ -62,12 +61,11 @@ type CommentsGetResource =
 data CommentsGet' = CommentsGet'
     { _cQuotaUser   :: !(Maybe Text)
     , _cPrettyPrint :: !Bool
-    , _cUserIp      :: !(Maybe Text)
-    , _cKey         :: !(Maybe Text)
-    , _cOauthToken  :: !(Maybe Text)
+    , _cUserIP      :: !(Maybe Text)
+    , _cKey         :: !(Maybe Key)
+    , _cOAuthToken  :: !(Maybe OAuthToken)
     , _cCommentId   :: !Text
     , _cFields      :: !(Maybe Text)
-    , _cAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsGet'' with the minimum fields required to make a request.
@@ -78,17 +76,15 @@ data CommentsGet' = CommentsGet'
 --
 -- * 'cPrettyPrint'
 --
--- * 'cUserIp'
+-- * 'cUserIP'
 --
 -- * 'cKey'
 --
--- * 'cOauthToken'
+-- * 'cOAuthToken'
 --
 -- * 'cCommentId'
 --
 -- * 'cFields'
---
--- * 'cAlt'
 commentsGet'
     :: Text -- ^ 'commentId'
     -> CommentsGet'
@@ -96,12 +92,11 @@ commentsGet' pCCommentId_ =
     CommentsGet'
     { _cQuotaUser = Nothing
     , _cPrettyPrint = True
-    , _cUserIp = Nothing
+    , _cUserIP = Nothing
     , _cKey = Nothing
-    , _cOauthToken = Nothing
+    , _cOAuthToken = Nothing
     , _cCommentId = pCCommentId_
     , _cFields = Nothing
-    , _cAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -118,19 +113,19 @@ cPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cUserIp :: Lens' CommentsGet' (Maybe Text)
-cUserIp = lens _cUserIp (\ s a -> s{_cUserIp = a})
+cUserIP :: Lens' CommentsGet' (Maybe Text)
+cUserIP = lens _cUserIP (\ s a -> s{_cUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cKey :: Lens' CommentsGet' (Maybe Text)
+cKey :: Lens' CommentsGet' (Maybe Key)
 cKey = lens _cKey (\ s a -> s{_cKey = a})
 
 -- | OAuth 2.0 token for the current user.
-cOauthToken :: Lens' CommentsGet' (Maybe Text)
-cOauthToken
-  = lens _cOauthToken (\ s a -> s{_cOauthToken = a})
+cOAuthToken :: Lens' CommentsGet' (Maybe OAuthToken)
+cOAuthToken
+  = lens _cOAuthToken (\ s a -> s{_cOAuthToken = a})
 
 -- | The ID of the comment to get.
 cCommentId :: Lens' CommentsGet' Text
@@ -141,19 +136,19 @@ cCommentId
 cFields :: Lens' CommentsGet' (Maybe Text)
 cFields = lens _cFields (\ s a -> s{_cFields = a})
 
--- | Data format for the response.
-cAlt :: Lens' CommentsGet' Alt
-cAlt = lens _cAlt (\ s a -> s{_cAlt = a})
+instance GoogleAuth CommentsGet' where
+        authKey = cKey . _Just
+        authToken = cOAuthToken . _Just
 
 instance GoogleRequest CommentsGet' where
         type Rs CommentsGet' = Comment
         request = requestWithRoute defReq plusDomainsURL
         requestWithRoute r u CommentsGet'{..}
-          = go _cQuotaUser (Just _cPrettyPrint) _cUserIp _cKey
-              _cOauthToken
+          = go _cQuotaUser (Just _cPrettyPrint) _cUserIP _cKey
+              _cOAuthToken
               _cCommentId
               _cFields
-              (Just _cAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CommentsGetResource)

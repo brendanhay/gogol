@@ -40,10 +40,10 @@ module Network.Google.Resource.Partners.Companies.Leads.Create
     , clcUploadType
     , clcBearerToken
     , clcKey
-    , clcOauthToken
+    , clcOAuthToken
+    , clcCreateLeadRequest
     , clcFields
     , clcCallback
-    , clcAlt
     ) where
 
 import           Network.Google.Partners.Types
@@ -64,31 +64,32 @@ type CompaniesLeadsCreateResource =
                        QueryParam "access_token" Text :>
                          QueryParam "uploadType" Text :>
                            QueryParam "bearer_token" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "fields" Text :>
                                    QueryParam "callback" Text :>
-                                     QueryParam "alt" Text :>
-                                       Post '[JSON] CreateLeadResponse
+                                     QueryParam "alt" AltJSON :>
+                                       ReqBody '[JSON] CreateLeadRequest :>
+                                         Post '[JSON] CreateLeadResponse
 
 -- | Creates an advertiser lead for the given company ID.
 --
 -- /See:/ 'companiesLeadsCreate'' smart constructor.
 data CompaniesLeadsCreate' = CompaniesLeadsCreate'
-    { _clcXgafv          :: !(Maybe Text)
-    , _clcQuotaUser      :: !(Maybe Text)
-    , _clcPrettyPrint    :: !Bool
-    , _clcUploadProtocol :: !(Maybe Text)
-    , _clcCompanyId      :: !Text
-    , _clcPp             :: !Bool
-    , _clcAccessToken    :: !(Maybe Text)
-    , _clcUploadType     :: !(Maybe Text)
-    , _clcBearerToken    :: !(Maybe Text)
-    , _clcKey            :: !(Maybe Text)
-    , _clcOauthToken     :: !(Maybe Text)
-    , _clcFields         :: !(Maybe Text)
-    , _clcCallback       :: !(Maybe Text)
-    , _clcAlt            :: !Text
+    { _clcXgafv             :: !(Maybe Text)
+    , _clcQuotaUser         :: !(Maybe Text)
+    , _clcPrettyPrint       :: !Bool
+    , _clcUploadProtocol    :: !(Maybe Text)
+    , _clcCompanyId         :: !Text
+    , _clcPp                :: !Bool
+    , _clcAccessToken       :: !(Maybe Text)
+    , _clcUploadType        :: !(Maybe Text)
+    , _clcBearerToken       :: !(Maybe Text)
+    , _clcKey               :: !(Maybe Key)
+    , _clcOAuthToken        :: !(Maybe OAuthToken)
+    , _clcCreateLeadRequest :: !CreateLeadRequest
+    , _clcFields            :: !(Maybe Text)
+    , _clcCallback          :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CompaniesLeadsCreate'' with the minimum fields required to make a request.
@@ -115,17 +116,18 @@ data CompaniesLeadsCreate' = CompaniesLeadsCreate'
 --
 -- * 'clcKey'
 --
--- * 'clcOauthToken'
+-- * 'clcOAuthToken'
+--
+-- * 'clcCreateLeadRequest'
 --
 -- * 'clcFields'
 --
 -- * 'clcCallback'
---
--- * 'clcAlt'
 companiesLeadsCreate'
     :: Text -- ^ 'companyId'
+    -> CreateLeadRequest -- ^ 'CreateLeadRequest'
     -> CompaniesLeadsCreate'
-companiesLeadsCreate' pClcCompanyId_ =
+companiesLeadsCreate' pClcCompanyId_ pClcCreateLeadRequest_ =
     CompaniesLeadsCreate'
     { _clcXgafv = Nothing
     , _clcQuotaUser = Nothing
@@ -137,10 +139,10 @@ companiesLeadsCreate' pClcCompanyId_ =
     , _clcUploadType = Nothing
     , _clcBearerToken = Nothing
     , _clcKey = Nothing
-    , _clcOauthToken = Nothing
+    , _clcOAuthToken = Nothing
+    , _clcCreateLeadRequest = pClcCreateLeadRequest_
     , _clcFields = Nothing
     , _clcCallback = Nothing
-    , _clcAlt = "json"
     }
 
 -- | V1 error format.
@@ -196,14 +198,20 @@ clcBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-clcKey :: Lens' CompaniesLeadsCreate' (Maybe Text)
+clcKey :: Lens' CompaniesLeadsCreate' (Maybe Key)
 clcKey = lens _clcKey (\ s a -> s{_clcKey = a})
 
 -- | OAuth 2.0 token for the current user.
-clcOauthToken :: Lens' CompaniesLeadsCreate' (Maybe Text)
-clcOauthToken
-  = lens _clcOauthToken
-      (\ s a -> s{_clcOauthToken = a})
+clcOAuthToken :: Lens' CompaniesLeadsCreate' (Maybe OAuthToken)
+clcOAuthToken
+  = lens _clcOAuthToken
+      (\ s a -> s{_clcOAuthToken = a})
+
+-- | Multipart request metadata.
+clcCreateLeadRequest :: Lens' CompaniesLeadsCreate' CreateLeadRequest
+clcCreateLeadRequest
+  = lens _clcCreateLeadRequest
+      (\ s a -> s{_clcCreateLeadRequest = a})
 
 -- | Selector specifying which fields to include in a partial response.
 clcFields :: Lens' CompaniesLeadsCreate' (Maybe Text)
@@ -215,9 +223,9 @@ clcCallback :: Lens' CompaniesLeadsCreate' (Maybe Text)
 clcCallback
   = lens _clcCallback (\ s a -> s{_clcCallback = a})
 
--- | Data format for response.
-clcAlt :: Lens' CompaniesLeadsCreate' Text
-clcAlt = lens _clcAlt (\ s a -> s{_clcAlt = a})
+instance GoogleAuth CompaniesLeadsCreate' where
+        authKey = clcKey . _Just
+        authToken = clcOAuthToken . _Just
 
 instance GoogleRequest CompaniesLeadsCreate' where
         type Rs CompaniesLeadsCreate' = CreateLeadResponse
@@ -231,10 +239,11 @@ instance GoogleRequest CompaniesLeadsCreate' where
               _clcUploadType
               _clcBearerToken
               _clcKey
-              _clcOauthToken
+              _clcOAuthToken
               _clcFields
               _clcCallback
-              (Just _clcAlt)
+              (Just AltJSON)
+              _clcCreateLeadRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CompaniesLeadsCreateResource)

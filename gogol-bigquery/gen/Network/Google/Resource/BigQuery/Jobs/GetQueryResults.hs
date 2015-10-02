@@ -33,16 +33,15 @@ module Network.Google.Resource.BigQuery.Jobs.GetQueryResults
     , jgqrQuotaUser
     , jgqrPrettyPrint
     , jgqrJobId
-    , jgqrUserIp
+    , jgqrUserIP
     , jgqrKey
     , jgqrTimeoutMs
     , jgqrPageToken
     , jgqrProjectId
-    , jgqrOauthToken
+    , jgqrOAuthToken
     , jgqrStartIndex
     , jgqrMaxResults
     , jgqrFields
-    , jgqrAlt
     ) where
 
 import           Network.Google.BigQuery.Types
@@ -58,14 +57,14 @@ type JobsGetQueryResultsResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "timeoutMs" Word32 :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "startIndex" Word64 :>
                              QueryParam "maxResults" Word32 :>
                                QueryParam "fields" Text :>
-                                 QueryParam "alt" Alt :>
+                                 QueryParam "alt" AltJSON :>
                                    Get '[JSON] GetQueryResultsResponse
 
 -- | Retrieves the results of a query job.
@@ -75,16 +74,15 @@ data JobsGetQueryResults' = JobsGetQueryResults'
     { _jgqrQuotaUser   :: !(Maybe Text)
     , _jgqrPrettyPrint :: !Bool
     , _jgqrJobId       :: !Text
-    , _jgqrUserIp      :: !(Maybe Text)
-    , _jgqrKey         :: !(Maybe Text)
+    , _jgqrUserIP      :: !(Maybe Text)
+    , _jgqrKey         :: !(Maybe Key)
     , _jgqrTimeoutMs   :: !(Maybe Word32)
     , _jgqrPageToken   :: !(Maybe Text)
     , _jgqrProjectId   :: !Text
-    , _jgqrOauthToken  :: !(Maybe Text)
+    , _jgqrOAuthToken  :: !(Maybe OAuthToken)
     , _jgqrStartIndex  :: !(Maybe Word64)
     , _jgqrMaxResults  :: !(Maybe Word32)
     , _jgqrFields      :: !(Maybe Text)
-    , _jgqrAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobsGetQueryResults'' with the minimum fields required to make a request.
@@ -97,7 +95,7 @@ data JobsGetQueryResults' = JobsGetQueryResults'
 --
 -- * 'jgqrJobId'
 --
--- * 'jgqrUserIp'
+-- * 'jgqrUserIP'
 --
 -- * 'jgqrKey'
 --
@@ -107,15 +105,13 @@ data JobsGetQueryResults' = JobsGetQueryResults'
 --
 -- * 'jgqrProjectId'
 --
--- * 'jgqrOauthToken'
+-- * 'jgqrOAuthToken'
 --
 -- * 'jgqrStartIndex'
 --
 -- * 'jgqrMaxResults'
 --
 -- * 'jgqrFields'
---
--- * 'jgqrAlt'
 jobsGetQueryResults'
     :: Text -- ^ 'jobId'
     -> Text -- ^ 'projectId'
@@ -125,16 +121,15 @@ jobsGetQueryResults' pJgqrJobId_ pJgqrProjectId_ =
     { _jgqrQuotaUser = Nothing
     , _jgqrPrettyPrint = True
     , _jgqrJobId = pJgqrJobId_
-    , _jgqrUserIp = Nothing
+    , _jgqrUserIP = Nothing
     , _jgqrKey = Nothing
     , _jgqrTimeoutMs = Nothing
     , _jgqrPageToken = Nothing
     , _jgqrProjectId = pJgqrProjectId_
-    , _jgqrOauthToken = Nothing
+    , _jgqrOAuthToken = Nothing
     , _jgqrStartIndex = Nothing
     , _jgqrMaxResults = Nothing
     , _jgqrFields = Nothing
-    , _jgqrAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -158,14 +153,14 @@ jgqrJobId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-jgqrUserIp :: Lens' JobsGetQueryResults' (Maybe Text)
-jgqrUserIp
-  = lens _jgqrUserIp (\ s a -> s{_jgqrUserIp = a})
+jgqrUserIP :: Lens' JobsGetQueryResults' (Maybe Text)
+jgqrUserIP
+  = lens _jgqrUserIP (\ s a -> s{_jgqrUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-jgqrKey :: Lens' JobsGetQueryResults' (Maybe Text)
+jgqrKey :: Lens' JobsGetQueryResults' (Maybe Key)
 jgqrKey = lens _jgqrKey (\ s a -> s{_jgqrKey = a})
 
 -- | How long to wait for the query to complete, in milliseconds, before
@@ -190,10 +185,10 @@ jgqrProjectId
       (\ s a -> s{_jgqrProjectId = a})
 
 -- | OAuth 2.0 token for the current user.
-jgqrOauthToken :: Lens' JobsGetQueryResults' (Maybe Text)
-jgqrOauthToken
-  = lens _jgqrOauthToken
-      (\ s a -> s{_jgqrOauthToken = a})
+jgqrOAuthToken :: Lens' JobsGetQueryResults' (Maybe OAuthToken)
+jgqrOAuthToken
+  = lens _jgqrOAuthToken
+      (\ s a -> s{_jgqrOAuthToken = a})
 
 -- | Zero-based index of the starting row
 jgqrStartIndex :: Lens' JobsGetQueryResults' (Maybe Word64)
@@ -212,9 +207,9 @@ jgqrFields :: Lens' JobsGetQueryResults' (Maybe Text)
 jgqrFields
   = lens _jgqrFields (\ s a -> s{_jgqrFields = a})
 
--- | Data format for the response.
-jgqrAlt :: Lens' JobsGetQueryResults' Alt
-jgqrAlt = lens _jgqrAlt (\ s a -> s{_jgqrAlt = a})
+instance GoogleAuth JobsGetQueryResults' where
+        authKey = jgqrKey . _Just
+        authToken = jgqrOAuthToken . _Just
 
 instance GoogleRequest JobsGetQueryResults' where
         type Rs JobsGetQueryResults' =
@@ -223,16 +218,16 @@ instance GoogleRequest JobsGetQueryResults' where
         requestWithRoute r u JobsGetQueryResults'{..}
           = go _jgqrQuotaUser (Just _jgqrPrettyPrint)
               _jgqrJobId
-              _jgqrUserIp
+              _jgqrUserIP
               _jgqrKey
               _jgqrTimeoutMs
               _jgqrPageToken
               _jgqrProjectId
-              _jgqrOauthToken
+              _jgqrOAuthToken
               _jgqrStartIndex
               _jgqrMaxResults
               _jgqrFields
-              (Just _jgqrAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy JobsGetQueryResultsResource)

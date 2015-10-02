@@ -32,12 +32,11 @@ module Network.Google.Resource.Mirror.Timeline.Delete
     -- * Request Lenses
     , tdQuotaUser
     , tdPrettyPrint
-    , tdUserIp
+    , tdUserIP
     , tdKey
     , tdId
-    , tdOauthToken
+    , tdOAuthToken
     , tdFields
-    , tdAlt
     ) where
 
 import           Network.Google.Mirror.Types
@@ -51,10 +50,10 @@ type TimelineDeleteResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Delete '[JSON] ()
+                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a timeline item.
 --
@@ -62,12 +61,11 @@ type TimelineDeleteResource =
 data TimelineDelete' = TimelineDelete'
     { _tdQuotaUser   :: !(Maybe Text)
     , _tdPrettyPrint :: !Bool
-    , _tdUserIp      :: !(Maybe Text)
-    , _tdKey         :: !(Maybe Text)
+    , _tdUserIP      :: !(Maybe Text)
+    , _tdKey         :: !(Maybe Key)
     , _tdId          :: !Text
-    , _tdOauthToken  :: !(Maybe Text)
+    , _tdOAuthToken  :: !(Maybe OAuthToken)
     , _tdFields      :: !(Maybe Text)
-    , _tdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TimelineDelete'' with the minimum fields required to make a request.
@@ -78,17 +76,15 @@ data TimelineDelete' = TimelineDelete'
 --
 -- * 'tdPrettyPrint'
 --
--- * 'tdUserIp'
+-- * 'tdUserIP'
 --
 -- * 'tdKey'
 --
 -- * 'tdId'
 --
--- * 'tdOauthToken'
+-- * 'tdOAuthToken'
 --
 -- * 'tdFields'
---
--- * 'tdAlt'
 timelineDelete'
     :: Text -- ^ 'id'
     -> TimelineDelete'
@@ -96,12 +92,11 @@ timelineDelete' pTdId_ =
     TimelineDelete'
     { _tdQuotaUser = Nothing
     , _tdPrettyPrint = True
-    , _tdUserIp = Nothing
+    , _tdUserIP = Nothing
     , _tdKey = Nothing
     , _tdId = pTdId_
-    , _tdOauthToken = Nothing
+    , _tdOAuthToken = Nothing
     , _tdFields = Nothing
-    , _tdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -119,13 +114,13 @@ tdPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tdUserIp :: Lens' TimelineDelete' (Maybe Text)
-tdUserIp = lens _tdUserIp (\ s a -> s{_tdUserIp = a})
+tdUserIP :: Lens' TimelineDelete' (Maybe Text)
+tdUserIP = lens _tdUserIP (\ s a -> s{_tdUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tdKey :: Lens' TimelineDelete' (Maybe Text)
+tdKey :: Lens' TimelineDelete' (Maybe Key)
 tdKey = lens _tdKey (\ s a -> s{_tdKey = a})
 
 -- | The ID of the timeline item.
@@ -133,28 +128,28 @@ tdId :: Lens' TimelineDelete' Text
 tdId = lens _tdId (\ s a -> s{_tdId = a})
 
 -- | OAuth 2.0 token for the current user.
-tdOauthToken :: Lens' TimelineDelete' (Maybe Text)
-tdOauthToken
-  = lens _tdOauthToken (\ s a -> s{_tdOauthToken = a})
+tdOAuthToken :: Lens' TimelineDelete' (Maybe OAuthToken)
+tdOAuthToken
+  = lens _tdOAuthToken (\ s a -> s{_tdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 tdFields :: Lens' TimelineDelete' (Maybe Text)
 tdFields = lens _tdFields (\ s a -> s{_tdFields = a})
 
--- | Data format for the response.
-tdAlt :: Lens' TimelineDelete' Alt
-tdAlt = lens _tdAlt (\ s a -> s{_tdAlt = a})
+instance GoogleAuth TimelineDelete' where
+        authKey = tdKey . _Just
+        authToken = tdOAuthToken . _Just
 
 instance GoogleRequest TimelineDelete' where
         type Rs TimelineDelete' = ()
         request = requestWithRoute defReq mirrorURL
         requestWithRoute r u TimelineDelete'{..}
-          = go _tdQuotaUser (Just _tdPrettyPrint) _tdUserIp
+          = go _tdQuotaUser (Just _tdPrettyPrint) _tdUserIP
               _tdKey
               _tdId
-              _tdOauthToken
+              _tdOAuthToken
               _tdFields
-              (Just _tdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TimelineDeleteResource)

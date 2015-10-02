@@ -34,20 +34,19 @@ module Network.Google.Resource.Calendar.Events.Instances
     , eiCalendarId
     , eiPrettyPrint
     , eiTimeMin
-    , eiUserIp
+    , eiUserIP
     , eiShowDeleted
     , eiOriginalStart
     , eiMaxAttendees
     , eiKey
     , eiPageToken
     , eiTimeZone
-    , eiOauthToken
+    , eiOAuthToken
     , eiMaxResults
     , eiAlwaysIncludeEmail
     , eiTimeMax
     , eiEventId
     , eiFields
-    , eiAlt
     ) where
 
 import           Network.Google.AppsCalendar.Types
@@ -68,15 +67,15 @@ type EventsInstancesResource =
                        QueryParam "showDeleted" Bool :>
                          QueryParam "originalStart" Text :>
                            QueryParam "maxAttendees" Int32 :>
-                             QueryParam "key" Text :>
+                             QueryParam "key" Key :>
                                QueryParam "pageToken" Text :>
                                  QueryParam "timeZone" Text :>
-                                   QueryParam "oauth_token" Text :>
+                                   QueryParam "oauth_token" OAuthToken :>
                                      QueryParam "maxResults" Int32 :>
                                        QueryParam "alwaysIncludeEmail" Bool :>
                                          QueryParam "timeMax" UTCTime :>
                                            QueryParam "fields" Text :>
-                                             QueryParam "alt" Alt :>
+                                             QueryParam "alt" AltJSON :>
                                                Get '[JSON] Events
 
 -- | Returns instances of the specified recurring event.
@@ -87,20 +86,19 @@ data EventsInstances' = EventsInstances'
     , _eiCalendarId         :: !Text
     , _eiPrettyPrint        :: !Bool
     , _eiTimeMin            :: !(Maybe UTCTime)
-    , _eiUserIp             :: !(Maybe Text)
+    , _eiUserIP             :: !(Maybe Text)
     , _eiShowDeleted        :: !(Maybe Bool)
     , _eiOriginalStart      :: !(Maybe Text)
     , _eiMaxAttendees       :: !(Maybe Int32)
-    , _eiKey                :: !(Maybe Text)
+    , _eiKey                :: !(Maybe Key)
     , _eiPageToken          :: !(Maybe Text)
     , _eiTimeZone           :: !(Maybe Text)
-    , _eiOauthToken         :: !(Maybe Text)
+    , _eiOAuthToken         :: !(Maybe OAuthToken)
     , _eiMaxResults         :: !(Maybe Int32)
     , _eiAlwaysIncludeEmail :: !(Maybe Bool)
     , _eiTimeMax            :: !(Maybe UTCTime)
     , _eiEventId            :: !Text
     , _eiFields             :: !(Maybe Text)
-    , _eiAlt                :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsInstances'' with the minimum fields required to make a request.
@@ -115,7 +113,7 @@ data EventsInstances' = EventsInstances'
 --
 -- * 'eiTimeMin'
 --
--- * 'eiUserIp'
+-- * 'eiUserIP'
 --
 -- * 'eiShowDeleted'
 --
@@ -129,7 +127,7 @@ data EventsInstances' = EventsInstances'
 --
 -- * 'eiTimeZone'
 --
--- * 'eiOauthToken'
+-- * 'eiOAuthToken'
 --
 -- * 'eiMaxResults'
 --
@@ -140,8 +138,6 @@ data EventsInstances' = EventsInstances'
 -- * 'eiEventId'
 --
 -- * 'eiFields'
---
--- * 'eiAlt'
 eventsInstances'
     :: Text -- ^ 'calendarId'
     -> Text -- ^ 'eventId'
@@ -152,20 +148,19 @@ eventsInstances' pEiCalendarId_ pEiEventId_ =
     , _eiCalendarId = pEiCalendarId_
     , _eiPrettyPrint = True
     , _eiTimeMin = Nothing
-    , _eiUserIp = Nothing
+    , _eiUserIP = Nothing
     , _eiShowDeleted = Nothing
     , _eiOriginalStart = Nothing
     , _eiMaxAttendees = Nothing
     , _eiKey = Nothing
     , _eiPageToken = Nothing
     , _eiTimeZone = Nothing
-    , _eiOauthToken = Nothing
+    , _eiOAuthToken = Nothing
     , _eiMaxResults = Nothing
     , _eiAlwaysIncludeEmail = Nothing
     , _eiTimeMax = Nothing
     , _eiEventId = pEiEventId_
     , _eiFields = Nothing
-    , _eiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -197,8 +192,8 @@ eiTimeMin
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-eiUserIp :: Lens' EventsInstances' (Maybe Text)
-eiUserIp = lens _eiUserIp (\ s a -> s{_eiUserIp = a})
+eiUserIP :: Lens' EventsInstances' (Maybe Text)
+eiUserIP = lens _eiUserIP (\ s a -> s{_eiUserIP = a})
 
 -- | Whether to include deleted events (with status equals \"cancelled\") in
 -- the result. Cancelled instances of recurring events will still be
@@ -225,7 +220,7 @@ eiMaxAttendees
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-eiKey :: Lens' EventsInstances' (Maybe Text)
+eiKey :: Lens' EventsInstances' (Maybe Key)
 eiKey = lens _eiKey (\ s a -> s{_eiKey = a})
 
 -- | Token specifying which result page to return. Optional.
@@ -240,9 +235,9 @@ eiTimeZone
   = lens _eiTimeZone (\ s a -> s{_eiTimeZone = a})
 
 -- | OAuth 2.0 token for the current user.
-eiOauthToken :: Lens' EventsInstances' (Maybe Text)
-eiOauthToken
-  = lens _eiOauthToken (\ s a -> s{_eiOauthToken = a})
+eiOAuthToken :: Lens' EventsInstances' (Maybe OAuthToken)
+eiOAuthToken
+  = lens _eiOAuthToken (\ s a -> s{_eiOAuthToken = a})
 
 -- | Maximum number of events returned on one result page. By default the
 -- value is 250 events. The page size can never be larger than 2500 events.
@@ -278,9 +273,9 @@ eiEventId
 eiFields :: Lens' EventsInstances' (Maybe Text)
 eiFields = lens _eiFields (\ s a -> s{_eiFields = a})
 
--- | Data format for the response.
-eiAlt :: Lens' EventsInstances' Alt
-eiAlt = lens _eiAlt (\ s a -> s{_eiAlt = a})
+instance GoogleAuth EventsInstances' where
+        authKey = eiKey . _Just
+        authToken = eiOAuthToken . _Just
 
 instance GoogleRequest EventsInstances' where
         type Rs EventsInstances' = Events
@@ -288,20 +283,20 @@ instance GoogleRequest EventsInstances' where
         requestWithRoute r u EventsInstances'{..}
           = go _eiQuotaUser _eiCalendarId (Just _eiPrettyPrint)
               _eiTimeMin
-              _eiUserIp
+              _eiUserIP
               _eiShowDeleted
               _eiOriginalStart
               _eiMaxAttendees
               _eiKey
               _eiPageToken
               _eiTimeZone
-              _eiOauthToken
+              _eiOAuthToken
               _eiMaxResults
               _eiAlwaysIncludeEmail
               _eiTimeMax
               _eiEventId
               _eiFields
-              (Just _eiAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy EventsInstancesResource)

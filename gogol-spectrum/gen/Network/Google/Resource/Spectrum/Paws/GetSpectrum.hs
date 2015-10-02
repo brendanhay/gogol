@@ -34,11 +34,11 @@ module Network.Google.Resource.Spectrum.Paws.GetSpectrum
     -- * Request Lenses
     , pgsQuotaUser
     , pgsPrettyPrint
-    , pgsUserIp
+    , pgsUserIP
+    , pgsPawsGetSpectrumRequest
     , pgsKey
-    , pgsOauthToken
+    , pgsOAuthToken
     , pgsFields
-    , pgsAlt
     ) where
 
 import           Network.Google.Prelude
@@ -51,11 +51,12 @@ type PawsGetSpectrumResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
-               QueryParam "oauth_token" Text :>
+             QueryParam "key" Key :>
+               QueryParam "oauth_token" OAuthToken :>
                  QueryParam "fields" Text :>
-                   QueryParam "alt" Alt :>
-                     Post '[JSON] PawsGetSpectrumResponse
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] PawsGetSpectrumRequest :>
+                       Post '[JSON] PawsGetSpectrumResponse
 
 -- | Requests information about the available spectrum for a device at a
 -- location. Requests from a fixed-mode device must include owner
@@ -63,13 +64,13 @@ type PawsGetSpectrumResource =
 --
 -- /See:/ 'pawsGetSpectrum'' smart constructor.
 data PawsGetSpectrum' = PawsGetSpectrum'
-    { _pgsQuotaUser   :: !(Maybe Text)
-    , _pgsPrettyPrint :: !Bool
-    , _pgsUserIp      :: !(Maybe Text)
-    , _pgsKey         :: !(Maybe Text)
-    , _pgsOauthToken  :: !(Maybe Text)
-    , _pgsFields      :: !(Maybe Text)
-    , _pgsAlt         :: !Alt
+    { _pgsQuotaUser              :: !(Maybe Text)
+    , _pgsPrettyPrint            :: !Bool
+    , _pgsUserIP                 :: !(Maybe Text)
+    , _pgsPawsGetSpectrumRequest :: !PawsGetSpectrumRequest
+    , _pgsKey                    :: !(Maybe Key)
+    , _pgsOAuthToken             :: !(Maybe OAuthToken)
+    , _pgsFields                 :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PawsGetSpectrum'' with the minimum fields required to make a request.
@@ -80,26 +81,27 @@ data PawsGetSpectrum' = PawsGetSpectrum'
 --
 -- * 'pgsPrettyPrint'
 --
--- * 'pgsUserIp'
+-- * 'pgsUserIP'
+--
+-- * 'pgsPawsGetSpectrumRequest'
 --
 -- * 'pgsKey'
 --
--- * 'pgsOauthToken'
+-- * 'pgsOAuthToken'
 --
 -- * 'pgsFields'
---
--- * 'pgsAlt'
 pawsGetSpectrum'
-    :: PawsGetSpectrum'
-pawsGetSpectrum' =
+    :: PawsGetSpectrumRequest -- ^ 'PawsGetSpectrumRequest'
+    -> PawsGetSpectrum'
+pawsGetSpectrum' pPgsPawsGetSpectrumRequest_ =
     PawsGetSpectrum'
     { _pgsQuotaUser = Nothing
     , _pgsPrettyPrint = True
-    , _pgsUserIp = Nothing
+    , _pgsUserIP = Nothing
+    , _pgsPawsGetSpectrumRequest = pPgsPawsGetSpectrumRequest_
     , _pgsKey = Nothing
-    , _pgsOauthToken = Nothing
+    , _pgsOAuthToken = Nothing
     , _pgsFields = Nothing
-    , _pgsAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -117,40 +119,47 @@ pgsPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-pgsUserIp :: Lens' PawsGetSpectrum' (Maybe Text)
-pgsUserIp
-  = lens _pgsUserIp (\ s a -> s{_pgsUserIp = a})
+pgsUserIP :: Lens' PawsGetSpectrum' (Maybe Text)
+pgsUserIP
+  = lens _pgsUserIP (\ s a -> s{_pgsUserIP = a})
+
+-- | Multipart request metadata.
+pgsPawsGetSpectrumRequest :: Lens' PawsGetSpectrum' PawsGetSpectrumRequest
+pgsPawsGetSpectrumRequest
+  = lens _pgsPawsGetSpectrumRequest
+      (\ s a -> s{_pgsPawsGetSpectrumRequest = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pgsKey :: Lens' PawsGetSpectrum' (Maybe Text)
+pgsKey :: Lens' PawsGetSpectrum' (Maybe Key)
 pgsKey = lens _pgsKey (\ s a -> s{_pgsKey = a})
 
 -- | OAuth 2.0 token for the current user.
-pgsOauthToken :: Lens' PawsGetSpectrum' (Maybe Text)
-pgsOauthToken
-  = lens _pgsOauthToken
-      (\ s a -> s{_pgsOauthToken = a})
+pgsOAuthToken :: Lens' PawsGetSpectrum' (Maybe OAuthToken)
+pgsOAuthToken
+  = lens _pgsOAuthToken
+      (\ s a -> s{_pgsOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 pgsFields :: Lens' PawsGetSpectrum' (Maybe Text)
 pgsFields
   = lens _pgsFields (\ s a -> s{_pgsFields = a})
 
--- | Data format for the response.
-pgsAlt :: Lens' PawsGetSpectrum' Alt
-pgsAlt = lens _pgsAlt (\ s a -> s{_pgsAlt = a})
+instance GoogleAuth PawsGetSpectrum' where
+        authKey = pgsKey . _Just
+        authToken = pgsOAuthToken . _Just
 
 instance GoogleRequest PawsGetSpectrum' where
         type Rs PawsGetSpectrum' = PawsGetSpectrumResponse
         request = requestWithRoute defReq spectrumURL
         requestWithRoute r u PawsGetSpectrum'{..}
-          = go _pgsQuotaUser (Just _pgsPrettyPrint) _pgsUserIp
+          = go _pgsQuotaUser (Just _pgsPrettyPrint) _pgsUserIP
               _pgsKey
-              _pgsOauthToken
+              _pgsOAuthToken
               _pgsFields
-              (Just _pgsAlt)
+              (Just AltJSON)
+              _pgsPawsGetSpectrumRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PawsGetSpectrumResource)

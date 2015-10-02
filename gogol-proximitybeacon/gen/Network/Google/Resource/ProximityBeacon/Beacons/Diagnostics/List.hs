@@ -43,12 +43,11 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Diagnostics.List
     , bdlBearerToken
     , bdlKey
     , bdlPageToken
-    , bdlOauthToken
+    , bdlOAuthToken
     , bdlPageSize
     , bdlAlertFilter
     , bdlFields
     , bdlCallback
-    , bdlAlt
     ) where
 
 import           Network.Google.Prelude
@@ -68,14 +67,14 @@ type BeaconsDiagnosticsListResource =
                      QueryParam "access_token" Text :>
                        QueryParam "uploadType" Text :>
                          QueryParam "bearer_token" Text :>
-                           QueryParam "key" Text :>
+                           QueryParam "key" Key :>
                              QueryParam "pageToken" Text :>
-                               QueryParam "oauth_token" Text :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "pageSize" Int32 :>
                                    QueryParam "alertFilter" Text :>
                                      QueryParam "fields" Text :>
                                        QueryParam "callback" Text :>
-                                         QueryParam "alt" Text :>
+                                         QueryParam "alt" AltJSON :>
                                            Get '[JSON] ListDiagnosticsResponse
 
 -- | List the diagnostics for a single beacon. You can also list diagnostics
@@ -93,14 +92,13 @@ data BeaconsDiagnosticsList' = BeaconsDiagnosticsList'
     , _bdlBeaconName     :: !Text
     , _bdlUploadType     :: !(Maybe Text)
     , _bdlBearerToken    :: !(Maybe Text)
-    , _bdlKey            :: !(Maybe Text)
+    , _bdlKey            :: !(Maybe Key)
     , _bdlPageToken      :: !(Maybe Text)
-    , _bdlOauthToken     :: !(Maybe Text)
+    , _bdlOAuthToken     :: !(Maybe OAuthToken)
     , _bdlPageSize       :: !(Maybe Int32)
     , _bdlAlertFilter    :: !(Maybe Text)
     , _bdlFields         :: !(Maybe Text)
     , _bdlCallback       :: !(Maybe Text)
-    , _bdlAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BeaconsDiagnosticsList'' with the minimum fields required to make a request.
@@ -129,7 +127,7 @@ data BeaconsDiagnosticsList' = BeaconsDiagnosticsList'
 --
 -- * 'bdlPageToken'
 --
--- * 'bdlOauthToken'
+-- * 'bdlOAuthToken'
 --
 -- * 'bdlPageSize'
 --
@@ -138,8 +136,6 @@ data BeaconsDiagnosticsList' = BeaconsDiagnosticsList'
 -- * 'bdlFields'
 --
 -- * 'bdlCallback'
---
--- * 'bdlAlt'
 beaconsDiagnosticsList'
     :: Text -- ^ 'beaconName'
     -> BeaconsDiagnosticsList'
@@ -156,12 +152,11 @@ beaconsDiagnosticsList' pBdlBeaconName_ =
     , _bdlBearerToken = Nothing
     , _bdlKey = Nothing
     , _bdlPageToken = Nothing
-    , _bdlOauthToken = Nothing
+    , _bdlOAuthToken = Nothing
     , _bdlPageSize = Nothing
     , _bdlAlertFilter = Nothing
     , _bdlFields = Nothing
     , _bdlCallback = Nothing
-    , _bdlAlt = "json"
     }
 
 -- | V1 error format.
@@ -218,7 +213,7 @@ bdlBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-bdlKey :: Lens' BeaconsDiagnosticsList' (Maybe Text)
+bdlKey :: Lens' BeaconsDiagnosticsList' (Maybe Key)
 bdlKey = lens _bdlKey (\ s a -> s{_bdlKey = a})
 
 -- | Requests results that occur after the \`page_token\`, obtained from the
@@ -228,10 +223,10 @@ bdlPageToken
   = lens _bdlPageToken (\ s a -> s{_bdlPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-bdlOauthToken :: Lens' BeaconsDiagnosticsList' (Maybe Text)
-bdlOauthToken
-  = lens _bdlOauthToken
-      (\ s a -> s{_bdlOauthToken = a})
+bdlOAuthToken :: Lens' BeaconsDiagnosticsList' (Maybe OAuthToken)
+bdlOAuthToken
+  = lens _bdlOAuthToken
+      (\ s a -> s{_bdlOAuthToken = a})
 
 -- | Specifies the maximum number of results to return. Defaults to 10.
 -- Maximum 1000. Optional.
@@ -256,9 +251,9 @@ bdlCallback :: Lens' BeaconsDiagnosticsList' (Maybe Text)
 bdlCallback
   = lens _bdlCallback (\ s a -> s{_bdlCallback = a})
 
--- | Data format for response.
-bdlAlt :: Lens' BeaconsDiagnosticsList' Text
-bdlAlt = lens _bdlAlt (\ s a -> s{_bdlAlt = a})
+instance GoogleAuth BeaconsDiagnosticsList' where
+        authKey = bdlKey . _Just
+        authToken = bdlOAuthToken . _Just
 
 instance GoogleRequest BeaconsDiagnosticsList' where
         type Rs BeaconsDiagnosticsList' =
@@ -274,12 +269,12 @@ instance GoogleRequest BeaconsDiagnosticsList' where
               _bdlBearerToken
               _bdlKey
               _bdlPageToken
-              _bdlOauthToken
+              _bdlOAuthToken
               _bdlPageSize
               _bdlAlertFilter
               _bdlFields
               _bdlCallback
-              (Just _bdlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy BeaconsDiagnosticsListResource)

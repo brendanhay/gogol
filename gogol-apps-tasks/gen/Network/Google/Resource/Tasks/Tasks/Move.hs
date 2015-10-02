@@ -35,14 +35,13 @@ module Network.Google.Resource.Tasks.Tasks.Move
     , tmParent
     , tmQuotaUser
     , tmPrettyPrint
-    , tmUserIp
+    , tmUserIP
     , tmKey
-    , tmTasklist
+    , tmTaskList
     , tmTask
-    , tmOauthToken
+    , tmOAuthToken
     , tmFields
     , tmPrevious
-    , tmAlt
     ) where
 
 import           Network.Google.AppsTasks.Types
@@ -60,11 +59,11 @@ type TasksMoveResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
                              QueryParam "previous" Text :>
-                               QueryParam "alt" Alt :> Post '[JSON] Task
+                               QueryParam "alt" AltJSON :> Post '[JSON] Task
 
 -- | Moves the specified task to another position in the task list. This can
 -- include putting it as a child task under a new parent and\/or move it to
@@ -75,14 +74,13 @@ data TasksMove' = TasksMove'
     { _tmParent      :: !(Maybe Text)
     , _tmQuotaUser   :: !(Maybe Text)
     , _tmPrettyPrint :: !Bool
-    , _tmUserIp      :: !(Maybe Text)
-    , _tmKey         :: !(Maybe Text)
-    , _tmTasklist    :: !Text
+    , _tmUserIP      :: !(Maybe Text)
+    , _tmKey         :: !(Maybe Key)
+    , _tmTaskList    :: !Text
     , _tmTask        :: !Text
-    , _tmOauthToken  :: !(Maybe Text)
+    , _tmOAuthToken  :: !(Maybe OAuthToken)
     , _tmFields      :: !(Maybe Text)
     , _tmPrevious    :: !(Maybe Text)
-    , _tmAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TasksMove'' with the minimum fields required to make a request.
@@ -95,38 +93,35 @@ data TasksMove' = TasksMove'
 --
 -- * 'tmPrettyPrint'
 --
--- * 'tmUserIp'
+-- * 'tmUserIP'
 --
 -- * 'tmKey'
 --
--- * 'tmTasklist'
+-- * 'tmTaskList'
 --
 -- * 'tmTask'
 --
--- * 'tmOauthToken'
+-- * 'tmOAuthToken'
 --
 -- * 'tmFields'
 --
 -- * 'tmPrevious'
---
--- * 'tmAlt'
 tasksMove'
     :: Text -- ^ 'tasklist'
     -> Text -- ^ 'task'
     -> TasksMove'
-tasksMove' pTmTasklist_ pTmTask_ =
+tasksMove' pTmTaskList_ pTmTask_ =
     TasksMove'
     { _tmParent = Nothing
     , _tmQuotaUser = Nothing
     , _tmPrettyPrint = True
-    , _tmUserIp = Nothing
+    , _tmUserIP = Nothing
     , _tmKey = Nothing
-    , _tmTasklist = pTmTasklist_
+    , _tmTaskList = pTmTaskList_
     , _tmTask = pTmTask_
-    , _tmOauthToken = Nothing
+    , _tmOAuthToken = Nothing
     , _tmFields = Nothing
     , _tmPrevious = Nothing
-    , _tmAlt = JSON
     }
 
 -- | New parent task identifier. If the task is moved to the top level, this
@@ -149,28 +144,28 @@ tmPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tmUserIp :: Lens' TasksMove' (Maybe Text)
-tmUserIp = lens _tmUserIp (\ s a -> s{_tmUserIp = a})
+tmUserIP :: Lens' TasksMove' (Maybe Text)
+tmUserIP = lens _tmUserIP (\ s a -> s{_tmUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tmKey :: Lens' TasksMove' (Maybe Text)
+tmKey :: Lens' TasksMove' (Maybe Key)
 tmKey = lens _tmKey (\ s a -> s{_tmKey = a})
 
 -- | Task list identifier.
-tmTasklist :: Lens' TasksMove' Text
-tmTasklist
-  = lens _tmTasklist (\ s a -> s{_tmTasklist = a})
+tmTaskList :: Lens' TasksMove' Text
+tmTaskList
+  = lens _tmTaskList (\ s a -> s{_tmTaskList = a})
 
 -- | Task identifier.
 tmTask :: Lens' TasksMove' Text
 tmTask = lens _tmTask (\ s a -> s{_tmTask = a})
 
 -- | OAuth 2.0 token for the current user.
-tmOauthToken :: Lens' TasksMove' (Maybe Text)
-tmOauthToken
-  = lens _tmOauthToken (\ s a -> s{_tmOauthToken = a})
+tmOAuthToken :: Lens' TasksMove' (Maybe OAuthToken)
+tmOAuthToken
+  = lens _tmOAuthToken (\ s a -> s{_tmOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 tmFields :: Lens' TasksMove' (Maybe Text)
@@ -182,23 +177,23 @@ tmPrevious :: Lens' TasksMove' (Maybe Text)
 tmPrevious
   = lens _tmPrevious (\ s a -> s{_tmPrevious = a})
 
--- | Data format for the response.
-tmAlt :: Lens' TasksMove' Alt
-tmAlt = lens _tmAlt (\ s a -> s{_tmAlt = a})
+instance GoogleAuth TasksMove' where
+        authKey = tmKey . _Just
+        authToken = tmOAuthToken . _Just
 
 instance GoogleRequest TasksMove' where
         type Rs TasksMove' = Task
         request = requestWithRoute defReq appsTasksURL
         requestWithRoute r u TasksMove'{..}
           = go _tmParent _tmQuotaUser (Just _tmPrettyPrint)
-              _tmUserIp
+              _tmUserIP
               _tmKey
-              _tmTasklist
+              _tmTaskList
               _tmTask
-              _tmOauthToken
+              _tmOAuthToken
               _tmFields
               _tmPrevious
-              (Just _tmAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy TasksMoveResource)
                       r

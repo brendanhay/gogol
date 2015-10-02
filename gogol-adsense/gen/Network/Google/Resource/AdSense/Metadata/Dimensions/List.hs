@@ -32,11 +32,10 @@ module Network.Google.Resource.AdSense.Metadata.Dimensions.List
     -- * Request Lenses
     , mdlQuotaUser
     , mdlPrettyPrint
-    , mdlUserIp
+    , mdlUserIP
     , mdlKey
-    , mdlOauthToken
+    , mdlOAuthToken
     , mdlFields
-    , mdlAlt
     ) where
 
 import           Network.Google.AdSense.Types
@@ -50,10 +49,10 @@ type MetadataDimensionsListResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Get '[JSON] Metadata
+                     QueryParam "alt" AltJSON :> Get '[JSON] Metadata
 
 -- | List the metadata for the dimensions available to this AdSense account.
 --
@@ -61,11 +60,10 @@ type MetadataDimensionsListResource =
 data MetadataDimensionsList' = MetadataDimensionsList'
     { _mdlQuotaUser   :: !(Maybe Text)
     , _mdlPrettyPrint :: !Bool
-    , _mdlUserIp      :: !(Maybe Text)
-    , _mdlKey         :: !(Maybe Text)
-    , _mdlOauthToken  :: !(Maybe Text)
+    , _mdlUserIP      :: !(Maybe Text)
+    , _mdlKey         :: !(Maybe Key)
+    , _mdlOAuthToken  :: !(Maybe OAuthToken)
     , _mdlFields      :: !(Maybe Text)
-    , _mdlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MetadataDimensionsList'' with the minimum fields required to make a request.
@@ -76,26 +74,23 @@ data MetadataDimensionsList' = MetadataDimensionsList'
 --
 -- * 'mdlPrettyPrint'
 --
--- * 'mdlUserIp'
+-- * 'mdlUserIP'
 --
 -- * 'mdlKey'
 --
--- * 'mdlOauthToken'
+-- * 'mdlOAuthToken'
 --
 -- * 'mdlFields'
---
--- * 'mdlAlt'
 metadataDimensionsList'
     :: MetadataDimensionsList'
 metadataDimensionsList' =
     MetadataDimensionsList'
     { _mdlQuotaUser = Nothing
     , _mdlPrettyPrint = True
-    , _mdlUserIp = Nothing
+    , _mdlUserIP = Nothing
     , _mdlKey = Nothing
-    , _mdlOauthToken = Nothing
+    , _mdlOAuthToken = Nothing
     , _mdlFields = Nothing
-    , _mdlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -113,40 +108,40 @@ mdlPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mdlUserIp :: Lens' MetadataDimensionsList' (Maybe Text)
-mdlUserIp
-  = lens _mdlUserIp (\ s a -> s{_mdlUserIp = a})
+mdlUserIP :: Lens' MetadataDimensionsList' (Maybe Text)
+mdlUserIP
+  = lens _mdlUserIP (\ s a -> s{_mdlUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mdlKey :: Lens' MetadataDimensionsList' (Maybe Text)
+mdlKey :: Lens' MetadataDimensionsList' (Maybe Key)
 mdlKey = lens _mdlKey (\ s a -> s{_mdlKey = a})
 
 -- | OAuth 2.0 token for the current user.
-mdlOauthToken :: Lens' MetadataDimensionsList' (Maybe Text)
-mdlOauthToken
-  = lens _mdlOauthToken
-      (\ s a -> s{_mdlOauthToken = a})
+mdlOAuthToken :: Lens' MetadataDimensionsList' (Maybe OAuthToken)
+mdlOAuthToken
+  = lens _mdlOAuthToken
+      (\ s a -> s{_mdlOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 mdlFields :: Lens' MetadataDimensionsList' (Maybe Text)
 mdlFields
   = lens _mdlFields (\ s a -> s{_mdlFields = a})
 
--- | Data format for the response.
-mdlAlt :: Lens' MetadataDimensionsList' Alt
-mdlAlt = lens _mdlAlt (\ s a -> s{_mdlAlt = a})
+instance GoogleAuth MetadataDimensionsList' where
+        authKey = mdlKey . _Just
+        authToken = mdlOAuthToken . _Just
 
 instance GoogleRequest MetadataDimensionsList' where
         type Rs MetadataDimensionsList' = Metadata
         request = requestWithRoute defReq adSenseURL
         requestWithRoute r u MetadataDimensionsList'{..}
-          = go _mdlQuotaUser (Just _mdlPrettyPrint) _mdlUserIp
+          = go _mdlQuotaUser (Just _mdlPrettyPrint) _mdlUserIP
               _mdlKey
-              _mdlOauthToken
+              _mdlOAuthToken
               _mdlFields
-              (Just _mdlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy MetadataDimensionsListResource)

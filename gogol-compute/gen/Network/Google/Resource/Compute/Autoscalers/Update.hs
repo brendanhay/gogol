@@ -34,13 +34,13 @@ module Network.Google.Resource.Compute.Autoscalers.Update
     , auQuotaUser
     , auPrettyPrint
     , auProject
-    , auUserIp
+    , auUserIP
     , auZone
     , auKey
     , auAutoscaler
-    , auOauthToken
+    , auAutoscaler
+    , auOAuthToken
     , auFields
-    , auAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -56,11 +56,12 @@ type AutoscalersUpdateResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "autoscaler" Text :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Put '[JSON] Operation
+                           QueryParam "alt" AltJSON :>
+                             ReqBody '[JSON] Autoscaler :> Put '[JSON] Operation
 
 -- | Updates an autoscaler resource in the specified project using the data
 -- included in the request.
@@ -70,13 +71,13 @@ data AutoscalersUpdate' = AutoscalersUpdate'
     { _auQuotaUser   :: !(Maybe Text)
     , _auPrettyPrint :: !Bool
     , _auProject     :: !Text
-    , _auUserIp      :: !(Maybe Text)
+    , _auUserIP      :: !(Maybe Text)
     , _auZone        :: !Text
-    , _auKey         :: !(Maybe Text)
+    , _auKey         :: !(Maybe Key)
+    , _auAutoscaler  :: !Autoscaler
     , _auAutoscaler  :: !(Maybe Text)
-    , _auOauthToken  :: !(Maybe Text)
+    , _auOAuthToken  :: !(Maybe OAuthToken)
     , _auFields      :: !(Maybe Text)
-    , _auAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AutoscalersUpdate'' with the minimum fields required to make a request.
@@ -89,7 +90,7 @@ data AutoscalersUpdate' = AutoscalersUpdate'
 --
 -- * 'auProject'
 --
--- * 'auUserIp'
+-- * 'auUserIP'
 --
 -- * 'auZone'
 --
@@ -97,27 +98,28 @@ data AutoscalersUpdate' = AutoscalersUpdate'
 --
 -- * 'auAutoscaler'
 --
--- * 'auOauthToken'
+-- * 'auAutoscaler'
+--
+-- * 'auOAuthToken'
 --
 -- * 'auFields'
---
--- * 'auAlt'
 autoscalersUpdate'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
+    -> Autoscaler -- ^ 'Autoscaler'
     -> AutoscalersUpdate'
-autoscalersUpdate' pAuProject_ pAuZone_ =
+autoscalersUpdate' pAuProject_ pAuZone_ pAuAutoscaler_ =
     AutoscalersUpdate'
     { _auQuotaUser = Nothing
     , _auPrettyPrint = True
     , _auProject = pAuProject_
-    , _auUserIp = Nothing
+    , _auUserIP = Nothing
     , _auZone = pAuZone_
     , _auKey = Nothing
+    , _auAutoscaler = pAuAutoscaler_
     , _auAutoscaler = Nothing
-    , _auOauthToken = Nothing
+    , _auOAuthToken = Nothing
     , _auFields = Nothing
-    , _auAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -140,8 +142,8 @@ auProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-auUserIp :: Lens' AutoscalersUpdate' (Maybe Text)
-auUserIp = lens _auUserIp (\ s a -> s{_auUserIp = a})
+auUserIP :: Lens' AutoscalersUpdate' (Maybe Text)
+auUserIP = lens _auUserIP (\ s a -> s{_auUserIP = a})
 
 -- | Name of the zone scoping this request.
 auZone :: Lens' AutoscalersUpdate' Text
@@ -150,8 +152,13 @@ auZone = lens _auZone (\ s a -> s{_auZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-auKey :: Lens' AutoscalersUpdate' (Maybe Text)
+auKey :: Lens' AutoscalersUpdate' (Maybe Key)
 auKey = lens _auKey (\ s a -> s{_auKey = a})
+
+-- | Multipart request metadata.
+auAutoscaler :: Lens' AutoscalersUpdate' Autoscaler
+auAutoscaler
+  = lens _auAutoscaler (\ s a -> s{_auAutoscaler = a})
 
 -- | Name of the autoscaler resource to update.
 auAutoscaler :: Lens' AutoscalersUpdate' (Maybe Text)
@@ -159,30 +166,31 @@ auAutoscaler
   = lens _auAutoscaler (\ s a -> s{_auAutoscaler = a})
 
 -- | OAuth 2.0 token for the current user.
-auOauthToken :: Lens' AutoscalersUpdate' (Maybe Text)
-auOauthToken
-  = lens _auOauthToken (\ s a -> s{_auOauthToken = a})
+auOAuthToken :: Lens' AutoscalersUpdate' (Maybe OAuthToken)
+auOAuthToken
+  = lens _auOAuthToken (\ s a -> s{_auOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 auFields :: Lens' AutoscalersUpdate' (Maybe Text)
 auFields = lens _auFields (\ s a -> s{_auFields = a})
 
--- | Data format for the response.
-auAlt :: Lens' AutoscalersUpdate' Alt
-auAlt = lens _auAlt (\ s a -> s{_auAlt = a})
+instance GoogleAuth AutoscalersUpdate' where
+        authKey = auKey . _Just
+        authToken = auOAuthToken . _Just
 
 instance GoogleRequest AutoscalersUpdate' where
         type Rs AutoscalersUpdate' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u AutoscalersUpdate'{..}
           = go _auQuotaUser (Just _auPrettyPrint) _auProject
-              _auUserIp
+              _auUserIP
               _auZone
               _auKey
               _auAutoscaler
-              _auOauthToken
+              _auOAuthToken
               _auFields
-              (Just _auAlt)
+              (Just AltJSON)
+              _auAutoscaler
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AutoscalersUpdateResource)

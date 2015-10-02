@@ -27,25 +27,25 @@ module Network.Google.PlayMoviesPartner
 
     -- * REST Resources
 
-    -- ** PlaymoviespartnerAccountsAvailsList
+    -- ** PlaymoviesPartynerAccountsAvailsList
     , module Network.Google.Resource.PlayMoviesPartner.Accounts.Avails.List
 
-    -- ** PlaymoviespartnerAccountsExperienceLocalesGet
+    -- ** PlaymoviesPartynerAccountsExperienceLocalesGet
     , module Network.Google.Resource.PlayMoviesPartner.Accounts.ExperienceLocales.Get
 
-    -- ** PlaymoviespartnerAccountsExperienceLocalesList
+    -- ** PlaymoviesPartynerAccountsExperienceLocalesList
     , module Network.Google.Resource.PlayMoviesPartner.Accounts.ExperienceLocales.List
 
-    -- ** PlaymoviespartnerAccountsOrdersGet
+    -- ** PlaymoviesPartynerAccountsOrdersGet
     , module Network.Google.Resource.PlayMoviesPartner.Accounts.Orders.Get
 
-    -- ** PlaymoviespartnerAccountsOrdersList
+    -- ** PlaymoviesPartynerAccountsOrdersList
     , module Network.Google.Resource.PlayMoviesPartner.Accounts.Orders.List
 
-    -- ** PlaymoviespartnerAccountsStoreInfosCountryGet
+    -- ** PlaymoviesPartynerAccountsStoreInfosCountryGet
     , module Network.Google.Resource.PlayMoviesPartner.Accounts.StoreInfos.Country.Get
 
-    -- ** PlaymoviespartnerAccountsStoreInfosList
+    -- ** PlaymoviesPartynerAccountsStoreInfosList
     , module Network.Google.Resource.PlayMoviesPartner.Accounts.StoreInfos.List
 
     -- * Types

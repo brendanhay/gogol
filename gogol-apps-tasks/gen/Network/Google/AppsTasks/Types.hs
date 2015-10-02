@@ -68,9 +68,6 @@ module Network.Google.AppsTasks.Types
     , ttLinks
     , ttNotes
     , ttPosition
-
-    -- * Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.AppsTasks.Types.Product

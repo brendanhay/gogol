@@ -34,7 +34,7 @@ module Network.Google.Resource.Drive.Files.Patch
     , fpQuotaUser
     , fpNewRevision
     , fpPrettyPrint
-    , fpUserIp
+    , fpUserIP
     , fpPinned
     , fpTimedTextLanguage
     , fpUpdateViewedDate
@@ -42,16 +42,16 @@ module Network.Google.Resource.Drive.Files.Patch
     , fpModifiedDateBehavior
     , fpUseContentAsIndexableText
     , fpTimedTextTrackName
-    , fpOcrLanguage
+    , fpOCRLanguage
     , fpKey
     , fpConvert
     , fpSetModifiedDate
     , fpFileId
-    , fpOauthToken
+    , fpOAuthToken
     , fpAddParents
-    , fpOcr
+    , fpOCR
+    , fpFile
     , fpFields
-    , fpAlt
     ) where
 
 import           Network.Google.Drive.Types
@@ -76,15 +76,16 @@ type FilesPatchResource =
                            QueryParam "useContentAsIndexableText" Bool :>
                              QueryParam "timedTextTrackName" Text :>
                                QueryParam "ocrLanguage" Text :>
-                                 QueryParam "key" Text :>
+                                 QueryParam "key" Key :>
                                    QueryParam "convert" Bool :>
                                      QueryParam "setModifiedDate" Bool :>
-                                       QueryParam "oauth_token" Text :>
+                                       QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "addParents" Text :>
                                            QueryParam "ocr" Bool :>
                                              QueryParam "fields" Text :>
-                                               QueryParam "alt" Alt :>
-                                                 Patch '[JSON] File
+                                               QueryParam "alt" AltJSON :>
+                                                 ReqBody '[JSON] File :>
+                                                   Patch '[JSON] File
 
 -- | Updates file metadata and\/or content. This method supports patch
 -- semantics.
@@ -94,7 +95,7 @@ data FilesPatch' = FilesPatch'
     { _fpQuotaUser                 :: !(Maybe Text)
     , _fpNewRevision               :: !Bool
     , _fpPrettyPrint               :: !Bool
-    , _fpUserIp                    :: !(Maybe Text)
+    , _fpUserIP                    :: !(Maybe Text)
     , _fpPinned                    :: !Bool
     , _fpTimedTextLanguage         :: !(Maybe Text)
     , _fpUpdateViewedDate          :: !Bool
@@ -102,16 +103,16 @@ data FilesPatch' = FilesPatch'
     , _fpModifiedDateBehavior      :: !(Maybe DriveFilesPatchModifiedDateBehavior)
     , _fpUseContentAsIndexableText :: !Bool
     , _fpTimedTextTrackName        :: !(Maybe Text)
-    , _fpOcrLanguage               :: !(Maybe Text)
-    , _fpKey                       :: !(Maybe Text)
+    , _fpOCRLanguage               :: !(Maybe Text)
+    , _fpKey                       :: !(Maybe Key)
     , _fpConvert                   :: !Bool
     , _fpSetModifiedDate           :: !Bool
     , _fpFileId                    :: !Text
-    , _fpOauthToken                :: !(Maybe Text)
+    , _fpOAuthToken                :: !(Maybe OAuthToken)
     , _fpAddParents                :: !(Maybe Text)
-    , _fpOcr                       :: !Bool
+    , _fpOCR                       :: !Bool
+    , _fpFile                      :: !File
     , _fpFields                    :: !(Maybe Text)
-    , _fpAlt                       :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FilesPatch'' with the minimum fields required to make a request.
@@ -124,7 +125,7 @@ data FilesPatch' = FilesPatch'
 --
 -- * 'fpPrettyPrint'
 --
--- * 'fpUserIp'
+-- * 'fpUserIP'
 --
 -- * 'fpPinned'
 --
@@ -140,7 +141,7 @@ data FilesPatch' = FilesPatch'
 --
 -- * 'fpTimedTextTrackName'
 --
--- * 'fpOcrLanguage'
+-- * 'fpOCRLanguage'
 --
 -- * 'fpKey'
 --
@@ -150,24 +151,25 @@ data FilesPatch' = FilesPatch'
 --
 -- * 'fpFileId'
 --
--- * 'fpOauthToken'
+-- * 'fpOAuthToken'
 --
 -- * 'fpAddParents'
 --
--- * 'fpOcr'
+-- * 'fpOCR'
+--
+-- * 'fpFile'
 --
 -- * 'fpFields'
---
--- * 'fpAlt'
 filesPatch'
     :: Text -- ^ 'fileId'
+    -> File -- ^ 'File'
     -> FilesPatch'
-filesPatch' pFpFileId_ =
+filesPatch' pFpFileId_ pFpFile_ =
     FilesPatch'
     { _fpQuotaUser = Nothing
     , _fpNewRevision = True
     , _fpPrettyPrint = True
-    , _fpUserIp = Nothing
+    , _fpUserIP = Nothing
     , _fpPinned = False
     , _fpTimedTextLanguage = Nothing
     , _fpUpdateViewedDate = True
@@ -175,16 +177,16 @@ filesPatch' pFpFileId_ =
     , _fpModifiedDateBehavior = Nothing
     , _fpUseContentAsIndexableText = False
     , _fpTimedTextTrackName = Nothing
-    , _fpOcrLanguage = Nothing
+    , _fpOCRLanguage = Nothing
     , _fpKey = Nothing
     , _fpConvert = False
     , _fpSetModifiedDate = False
     , _fpFileId = pFpFileId_
-    , _fpOauthToken = Nothing
+    , _fpOAuthToken = Nothing
     , _fpAddParents = Nothing
-    , _fpOcr = False
+    , _fpOCR = False
+    , _fpFile = pFpFile_
     , _fpFields = Nothing
-    , _fpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -214,8 +216,8 @@ fpPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-fpUserIp :: Lens' FilesPatch' (Maybe Text)
-fpUserIp = lens _fpUserIp (\ s a -> s{_fpUserIp = a})
+fpUserIP :: Lens' FilesPatch' (Maybe Text)
+fpUserIP = lens _fpUserIP (\ s a -> s{_fpUserIP = a})
 
 -- | Whether to pin the new revision. A file can have a maximum of 200 pinned
 -- revisions.
@@ -261,15 +263,15 @@ fpTimedTextTrackName
 
 -- | If ocr is true, hints at the language to use. Valid values are BCP 47
 -- codes.
-fpOcrLanguage :: Lens' FilesPatch' (Maybe Text)
-fpOcrLanguage
-  = lens _fpOcrLanguage
-      (\ s a -> s{_fpOcrLanguage = a})
+fpOCRLanguage :: Lens' FilesPatch' (Maybe Text)
+fpOCRLanguage
+  = lens _fpOCRLanguage
+      (\ s a -> s{_fpOCRLanguage = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fpKey :: Lens' FilesPatch' (Maybe Text)
+fpKey :: Lens' FilesPatch' (Maybe Key)
 fpKey = lens _fpKey (\ s a -> s{_fpKey = a})
 
 -- | This parameter is deprecated and has no function.
@@ -288,9 +290,9 @@ fpFileId :: Lens' FilesPatch' Text
 fpFileId = lens _fpFileId (\ s a -> s{_fpFileId = a})
 
 -- | OAuth 2.0 token for the current user.
-fpOauthToken :: Lens' FilesPatch' (Maybe Text)
-fpOauthToken
-  = lens _fpOauthToken (\ s a -> s{_fpOauthToken = a})
+fpOAuthToken :: Lens' FilesPatch' (Maybe OAuthToken)
+fpOAuthToken
+  = lens _fpOAuthToken (\ s a -> s{_fpOAuthToken = a})
 
 -- | Comma-separated list of parent IDs to add.
 fpAddParents :: Lens' FilesPatch' (Maybe Text)
@@ -298,16 +300,20 @@ fpAddParents
   = lens _fpAddParents (\ s a -> s{_fpAddParents = a})
 
 -- | Whether to attempt OCR on .jpg, .png, .gif, or .pdf uploads.
-fpOcr :: Lens' FilesPatch' Bool
-fpOcr = lens _fpOcr (\ s a -> s{_fpOcr = a})
+fpOCR :: Lens' FilesPatch' Bool
+fpOCR = lens _fpOCR (\ s a -> s{_fpOCR = a})
+
+-- | Multipart request metadata.
+fpFile :: Lens' FilesPatch' File
+fpFile = lens _fpFile (\ s a -> s{_fpFile = a})
 
 -- | Selector specifying which fields to include in a partial response.
 fpFields :: Lens' FilesPatch' (Maybe Text)
 fpFields = lens _fpFields (\ s a -> s{_fpFields = a})
 
--- | Data format for the response.
-fpAlt :: Lens' FilesPatch' Alt
-fpAlt = lens _fpAlt (\ s a -> s{_fpAlt = a})
+instance GoogleAuth FilesPatch' where
+        authKey = fpKey . _Just
+        authToken = fpOAuthToken . _Just
 
 instance GoogleRequest FilesPatch' where
         type Rs FilesPatch' = File
@@ -315,7 +321,7 @@ instance GoogleRequest FilesPatch' where
         requestWithRoute r u FilesPatch'{..}
           = go _fpQuotaUser (Just _fpNewRevision)
               (Just _fpPrettyPrint)
-              _fpUserIp
+              _fpUserIP
               (Just _fpPinned)
               _fpTimedTextLanguage
               (Just _fpUpdateViewedDate)
@@ -323,16 +329,17 @@ instance GoogleRequest FilesPatch' where
               _fpModifiedDateBehavior
               (Just _fpUseContentAsIndexableText)
               _fpTimedTextTrackName
-              _fpOcrLanguage
+              _fpOCRLanguage
               _fpKey
               (Just _fpConvert)
               (Just _fpSetModifiedDate)
               _fpFileId
-              _fpOauthToken
+              _fpOAuthToken
               _fpAddParents
-              (Just _fpOcr)
+              (Just _fpOCR)
               _fpFields
-              (Just _fpAlt)
+              (Just AltJSON)
+              _fpFile
           where go
                   = clientWithRoute (Proxy :: Proxy FilesPatchResource)
                       r

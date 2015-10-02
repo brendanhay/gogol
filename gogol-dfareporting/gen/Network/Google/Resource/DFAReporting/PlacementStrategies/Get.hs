@@ -32,13 +32,12 @@ module Network.Google.Resource.DFAReporting.PlacementStrategies.Get
     -- * Request Lenses
     , psgQuotaUser
     , psgPrettyPrint
-    , psgUserIp
+    , psgUserIP
     , psgProfileId
     , psgKey
     , psgId
-    , psgOauthToken
+    , psgOAuthToken
     , psgFields
-    , psgAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,10 +53,11 @@ type PlacementStrategiesGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] PlacementStrategy
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] PlacementStrategy
 
 -- | Gets one placement strategy by ID.
 --
@@ -65,13 +65,12 @@ type PlacementStrategiesGetResource =
 data PlacementStrategiesGet' = PlacementStrategiesGet'
     { _psgQuotaUser   :: !(Maybe Text)
     , _psgPrettyPrint :: !Bool
-    , _psgUserIp      :: !(Maybe Text)
+    , _psgUserIP      :: !(Maybe Text)
     , _psgProfileId   :: !Int64
-    , _psgKey         :: !(Maybe Text)
+    , _psgKey         :: !(Maybe Key)
     , _psgId          :: !Int64
-    , _psgOauthToken  :: !(Maybe Text)
+    , _psgOAuthToken  :: !(Maybe OAuthToken)
     , _psgFields      :: !(Maybe Text)
-    , _psgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementStrategiesGet'' with the minimum fields required to make a request.
@@ -82,7 +81,7 @@ data PlacementStrategiesGet' = PlacementStrategiesGet'
 --
 -- * 'psgPrettyPrint'
 --
--- * 'psgUserIp'
+-- * 'psgUserIP'
 --
 -- * 'psgProfileId'
 --
@@ -90,11 +89,9 @@ data PlacementStrategiesGet' = PlacementStrategiesGet'
 --
 -- * 'psgId'
 --
--- * 'psgOauthToken'
+-- * 'psgOAuthToken'
 --
 -- * 'psgFields'
---
--- * 'psgAlt'
 placementStrategiesGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
@@ -103,13 +100,12 @@ placementStrategiesGet' pPsgProfileId_ pPsgId_ =
     PlacementStrategiesGet'
     { _psgQuotaUser = Nothing
     , _psgPrettyPrint = True
-    , _psgUserIp = Nothing
+    , _psgUserIP = Nothing
     , _psgProfileId = pPsgProfileId_
     , _psgKey = Nothing
     , _psgId = pPsgId_
-    , _psgOauthToken = Nothing
+    , _psgOAuthToken = Nothing
     , _psgFields = Nothing
-    , _psgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,9 +123,9 @@ psgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-psgUserIp :: Lens' PlacementStrategiesGet' (Maybe Text)
-psgUserIp
-  = lens _psgUserIp (\ s a -> s{_psgUserIp = a})
+psgUserIP :: Lens' PlacementStrategiesGet' (Maybe Text)
+psgUserIP
+  = lens _psgUserIP (\ s a -> s{_psgUserIP = a})
 
 -- | User profile ID associated with this request.
 psgProfileId :: Lens' PlacementStrategiesGet' Int64
@@ -139,7 +135,7 @@ psgProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-psgKey :: Lens' PlacementStrategiesGet' (Maybe Text)
+psgKey :: Lens' PlacementStrategiesGet' (Maybe Key)
 psgKey = lens _psgKey (\ s a -> s{_psgKey = a})
 
 -- | Placement strategy ID.
@@ -147,31 +143,31 @@ psgId :: Lens' PlacementStrategiesGet' Int64
 psgId = lens _psgId (\ s a -> s{_psgId = a})
 
 -- | OAuth 2.0 token for the current user.
-psgOauthToken :: Lens' PlacementStrategiesGet' (Maybe Text)
-psgOauthToken
-  = lens _psgOauthToken
-      (\ s a -> s{_psgOauthToken = a})
+psgOAuthToken :: Lens' PlacementStrategiesGet' (Maybe OAuthToken)
+psgOAuthToken
+  = lens _psgOAuthToken
+      (\ s a -> s{_psgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 psgFields :: Lens' PlacementStrategiesGet' (Maybe Text)
 psgFields
   = lens _psgFields (\ s a -> s{_psgFields = a})
 
--- | Data format for the response.
-psgAlt :: Lens' PlacementStrategiesGet' Alt
-psgAlt = lens _psgAlt (\ s a -> s{_psgAlt = a})
+instance GoogleAuth PlacementStrategiesGet' where
+        authKey = psgKey . _Just
+        authToken = psgOAuthToken . _Just
 
 instance GoogleRequest PlacementStrategiesGet' where
         type Rs PlacementStrategiesGet' = PlacementStrategy
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlacementStrategiesGet'{..}
-          = go _psgQuotaUser (Just _psgPrettyPrint) _psgUserIp
+          = go _psgQuotaUser (Just _psgPrettyPrint) _psgUserIP
               _psgProfileId
               _psgKey
               _psgId
-              _psgOauthToken
+              _psgOAuthToken
               _psgFields
-              (Just _psgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PlacementStrategiesGetResource)

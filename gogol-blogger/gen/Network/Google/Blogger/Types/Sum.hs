@@ -1,7 +1,7 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE LambdaCase         #-}
+{-# LANGUAGE OverloadedStrings  #-}
 
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
@@ -15,7 +15,7 @@
 --
 module Network.Google.Blogger.Types.Sum where
 
-import Network.Google.Prelude
+import           Network.Google.Prelude
 
 data BloggerPostUserInfosListStatus
     = Draft
@@ -116,13 +116,13 @@ instance ToJSON BloggerPostsListView where
     toJSON = toJSONText
 
 data BloggerPageViewsGetRange
-    = 30DAYS
+    = BPVGR30DAYS
       -- ^ @30DAYS@
       -- Page view counts from the last thirty days.
-    | 7DAYS
+    | BPVGR7DAYS
       -- ^ @7DAYS@
       -- Page view counts from the last seven days.
-    | All
+    | BPVGRAll
       -- ^ @all@
       -- Total page view counts from all time.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
@@ -131,16 +131,16 @@ instance Hashable BloggerPageViewsGetRange
 
 instance FromText BloggerPageViewsGetRange where
     fromText = \case
-        "30DAYS" -> Just 30DAYS
-        "7DAYS" -> Just 7DAYS
-        "all" -> Just All
+        "30DAYS" -> Just BPVGR30DAYS
+        "7DAYS" -> Just BPVGR7DAYS
+        "all" -> Just BPVGRAll
         _ -> Nothing
 
 instance ToText BloggerPageViewsGetRange where
     toText = \case
-        30DAYS -> "30DAYS"
-        7DAYS -> "7DAYS"
-        All -> "all"
+        BPVGR30DAYS -> "30DAYS"
+        BPVGR7DAYS -> "7DAYS"
+        BPVGRAll -> "all"
 
 instance FromJSON BloggerPageViewsGetRange where
     parseJSON = parseJSONText "BloggerPageViewsGetRange"
@@ -723,30 +723,6 @@ instance FromJSON BloggerPostsSearchOrderBy where
     parseJSON = parseJSONText "BloggerPostsSearchOrderBy"
 
 instance ToJSON BloggerPostsSearchOrderBy where
-    toJSON = toJSONText
-
--- | Data format for the response.
-data Alt
-    = JSON
-      -- ^ @json@
-      -- Responses with Content-Type of application\/json
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable Alt
-
-instance FromText Alt where
-    fromText = \case
-        "json" -> Just JSON
-        _ -> Nothing
-
-instance ToText Alt where
-    toText = \case
-        JSON -> "json"
-
-instance FromJSON Alt where
-    parseJSON = parseJSONText "Alt"
-
-instance ToJSON Alt where
     toJSON = toJSONText
 
 -- | Access level with which to view the returned result. Note that some

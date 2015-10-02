@@ -33,13 +33,13 @@ module Network.Google.Resource.FusionTables.Table.Update
     -- * Request Lenses
     , tuQuotaUser
     , tuPrettyPrint
-    , tuUserIp
+    , tuUserIP
     , tuReplaceViewDefinition
     , tuKey
-    , tuOauthToken
+    , tuOAuthToken
     , tuTableId
+    , tuTable
     , tuFields
-    , tuAlt
     ) where
 
 import           Network.Google.FusionTables.Types
@@ -54,10 +54,11 @@ type TableUpdateResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "replaceViewDefinition" Bool :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Put '[JSON] Table
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Table :> Put '[JSON] Table
 
 -- | Updates an existing table. Unless explicitly requested, only the name,
 -- description, and attribution will be updated.
@@ -66,13 +67,13 @@ type TableUpdateResource =
 data TableUpdate' = TableUpdate'
     { _tuQuotaUser             :: !(Maybe Text)
     , _tuPrettyPrint           :: !Bool
-    , _tuUserIp                :: !(Maybe Text)
+    , _tuUserIP                :: !(Maybe Text)
     , _tuReplaceViewDefinition :: !(Maybe Bool)
-    , _tuKey                   :: !(Maybe Text)
-    , _tuOauthToken            :: !(Maybe Text)
+    , _tuKey                   :: !(Maybe Key)
+    , _tuOAuthToken            :: !(Maybe OAuthToken)
     , _tuTableId               :: !Text
+    , _tuTable                 :: !Table
     , _tuFields                :: !(Maybe Text)
-    , _tuAlt                   :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TableUpdate'' with the minimum fields required to make a request.
@@ -83,33 +84,34 @@ data TableUpdate' = TableUpdate'
 --
 -- * 'tuPrettyPrint'
 --
--- * 'tuUserIp'
+-- * 'tuUserIP'
 --
 -- * 'tuReplaceViewDefinition'
 --
 -- * 'tuKey'
 --
--- * 'tuOauthToken'
+-- * 'tuOAuthToken'
 --
 -- * 'tuTableId'
 --
--- * 'tuFields'
+-- * 'tuTable'
 --
--- * 'tuAlt'
+-- * 'tuFields'
 tableUpdate'
     :: Text -- ^ 'tableId'
+    -> Table -- ^ 'Table'
     -> TableUpdate'
-tableUpdate' pTuTableId_ =
+tableUpdate' pTuTableId_ pTuTable_ =
     TableUpdate'
     { _tuQuotaUser = Nothing
     , _tuPrettyPrint = True
-    , _tuUserIp = Nothing
+    , _tuUserIP = Nothing
     , _tuReplaceViewDefinition = Nothing
     , _tuKey = Nothing
-    , _tuOauthToken = Nothing
+    , _tuOAuthToken = Nothing
     , _tuTableId = pTuTableId_
+    , _tuTable = pTuTable_
     , _tuFields = Nothing
-    , _tuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,8 +129,8 @@ tuPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tuUserIp :: Lens' TableUpdate' (Maybe Text)
-tuUserIp = lens _tuUserIp (\ s a -> s{_tuUserIp = a})
+tuUserIP :: Lens' TableUpdate' (Maybe Text)
+tuUserIP = lens _tuUserIP (\ s a -> s{_tuUserIP = a})
 
 -- | Whether the view definition is also updated. The specified view
 -- definition replaces the existing one. Only a view can be updated with a
@@ -141,38 +143,43 @@ tuReplaceViewDefinition
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tuKey :: Lens' TableUpdate' (Maybe Text)
+tuKey :: Lens' TableUpdate' (Maybe Key)
 tuKey = lens _tuKey (\ s a -> s{_tuKey = a})
 
 -- | OAuth 2.0 token for the current user.
-tuOauthToken :: Lens' TableUpdate' (Maybe Text)
-tuOauthToken
-  = lens _tuOauthToken (\ s a -> s{_tuOauthToken = a})
+tuOAuthToken :: Lens' TableUpdate' (Maybe OAuthToken)
+tuOAuthToken
+  = lens _tuOAuthToken (\ s a -> s{_tuOAuthToken = a})
 
 -- | ID of the table that is being updated.
 tuTableId :: Lens' TableUpdate' Text
 tuTableId
   = lens _tuTableId (\ s a -> s{_tuTableId = a})
 
+-- | Multipart request metadata.
+tuTable :: Lens' TableUpdate' Table
+tuTable = lens _tuTable (\ s a -> s{_tuTable = a})
+
 -- | Selector specifying which fields to include in a partial response.
 tuFields :: Lens' TableUpdate' (Maybe Text)
 tuFields = lens _tuFields (\ s a -> s{_tuFields = a})
 
--- | Data format for the response.
-tuAlt :: Lens' TableUpdate' Alt
-tuAlt = lens _tuAlt (\ s a -> s{_tuAlt = a})
+instance GoogleAuth TableUpdate' where
+        authKey = tuKey . _Just
+        authToken = tuOAuthToken . _Just
 
 instance GoogleRequest TableUpdate' where
         type Rs TableUpdate' = Table
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u TableUpdate'{..}
-          = go _tuQuotaUser (Just _tuPrettyPrint) _tuUserIp
+          = go _tuQuotaUser (Just _tuPrettyPrint) _tuUserIP
               _tuReplaceViewDefinition
               _tuKey
-              _tuOauthToken
+              _tuOAuthToken
               _tuTableId
               _tuFields
-              (Just _tuAlt)
+              (Just AltJSON)
+              _tuTable
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TableUpdateResource)

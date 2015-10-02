@@ -35,15 +35,15 @@ module Network.Google.Resource.Fitness.Users.DataSources.Datasets.Patch
     -- * Request Lenses
     , udsdpQuotaUser
     , udsdpPrettyPrint
-    , udsdpUserIp
+    , udsdpDataset
+    , udsdpUserIP
     , udsdpDataSourceId
     , udsdpUserId
     , udsdpKey
     , udsdpDatasetId
     , udsdpCurrentTimeMillis
-    , udsdpOauthToken
+    , udsdpOAuthToken
     , udsdpFields
-    , udsdpAlt
     ) where
 
 import           Network.Google.Fitness.Types
@@ -60,11 +60,12 @@ type UsersDataSourcesDatasetsPatchResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
+                     QueryParam "key" Key :>
                        QueryParam "currentTimeMillis" Int64 :>
-                         QueryParam "oauth_token" Text :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Patch '[JSON] Dataset
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] Dataset :> Patch '[JSON] Dataset
 
 -- | Adds data points to a dataset. The dataset need not be previously
 -- created. All points within the given dataset will be returned with
@@ -75,15 +76,15 @@ type UsersDataSourcesDatasetsPatchResource =
 data UsersDataSourcesDatasetsPatch' = UsersDataSourcesDatasetsPatch'
     { _udsdpQuotaUser         :: !(Maybe Text)
     , _udsdpPrettyPrint       :: !Bool
-    , _udsdpUserIp            :: !(Maybe Text)
+    , _udsdpDataset           :: !Dataset
+    , _udsdpUserIP            :: !(Maybe Text)
     , _udsdpDataSourceId      :: !Text
     , _udsdpUserId            :: !Text
-    , _udsdpKey               :: !(Maybe Text)
+    , _udsdpKey               :: !(Maybe Key)
     , _udsdpDatasetId         :: !Text
     , _udsdpCurrentTimeMillis :: !(Maybe Int64)
-    , _udsdpOauthToken        :: !(Maybe Text)
+    , _udsdpOAuthToken        :: !(Maybe OAuthToken)
     , _udsdpFields            :: !(Maybe Text)
-    , _udsdpAlt               :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDataSourcesDatasetsPatch'' with the minimum fields required to make a request.
@@ -94,7 +95,9 @@ data UsersDataSourcesDatasetsPatch' = UsersDataSourcesDatasetsPatch'
 --
 -- * 'udsdpPrettyPrint'
 --
--- * 'udsdpUserIp'
+-- * 'udsdpDataset'
+--
+-- * 'udsdpUserIP'
 --
 -- * 'udsdpDataSourceId'
 --
@@ -106,29 +109,28 @@ data UsersDataSourcesDatasetsPatch' = UsersDataSourcesDatasetsPatch'
 --
 -- * 'udsdpCurrentTimeMillis'
 --
--- * 'udsdpOauthToken'
+-- * 'udsdpOAuthToken'
 --
 -- * 'udsdpFields'
---
--- * 'udsdpAlt'
 usersDataSourcesDatasetsPatch'
-    :: Text -- ^ 'dataSourceId'
+    :: Dataset -- ^ 'Dataset'
+    -> Text -- ^ 'dataSourceId'
     -> Text -- ^ 'userId'
     -> Text -- ^ 'datasetId'
     -> UsersDataSourcesDatasetsPatch'
-usersDataSourcesDatasetsPatch' pUdsdpDataSourceId_ pUdsdpUserId_ pUdsdpDatasetId_ =
+usersDataSourcesDatasetsPatch' pUdsdpDataset_ pUdsdpDataSourceId_ pUdsdpUserId_ pUdsdpDatasetId_ =
     UsersDataSourcesDatasetsPatch'
     { _udsdpQuotaUser = Nothing
     , _udsdpPrettyPrint = True
-    , _udsdpUserIp = Nothing
+    , _udsdpDataset = pUdsdpDataset_
+    , _udsdpUserIP = Nothing
     , _udsdpDataSourceId = pUdsdpDataSourceId_
     , _udsdpUserId = pUdsdpUserId_
     , _udsdpKey = Nothing
     , _udsdpDatasetId = pUdsdpDatasetId_
     , _udsdpCurrentTimeMillis = Nothing
-    , _udsdpOauthToken = Nothing
+    , _udsdpOAuthToken = Nothing
     , _udsdpFields = Nothing
-    , _udsdpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -145,11 +147,16 @@ udsdpPrettyPrint
   = lens _udsdpPrettyPrint
       (\ s a -> s{_udsdpPrettyPrint = a})
 
+-- | Multipart request metadata.
+udsdpDataset :: Lens' UsersDataSourcesDatasetsPatch' Dataset
+udsdpDataset
+  = lens _udsdpDataset (\ s a -> s{_udsdpDataset = a})
+
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-udsdpUserIp :: Lens' UsersDataSourcesDatasetsPatch' (Maybe Text)
-udsdpUserIp
-  = lens _udsdpUserIp (\ s a -> s{_udsdpUserIp = a})
+udsdpUserIP :: Lens' UsersDataSourcesDatasetsPatch' (Maybe Text)
+udsdpUserIP
+  = lens _udsdpUserIP (\ s a -> s{_udsdpUserIP = a})
 
 -- | The data stream ID of the data source that created the dataset.
 udsdpDataSourceId :: Lens' UsersDataSourcesDatasetsPatch' Text
@@ -166,7 +173,7 @@ udsdpUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-udsdpKey :: Lens' UsersDataSourcesDatasetsPatch' (Maybe Text)
+udsdpKey :: Lens' UsersDataSourcesDatasetsPatch' (Maybe Key)
 udsdpKey = lens _udsdpKey (\ s a -> s{_udsdpKey = a})
 
 -- | Dataset identifier that is a composite of the minimum data point start
@@ -187,19 +194,20 @@ udsdpCurrentTimeMillis
       (\ s a -> s{_udsdpCurrentTimeMillis = a})
 
 -- | OAuth 2.0 token for the current user.
-udsdpOauthToken :: Lens' UsersDataSourcesDatasetsPatch' (Maybe Text)
-udsdpOauthToken
-  = lens _udsdpOauthToken
-      (\ s a -> s{_udsdpOauthToken = a})
+udsdpOAuthToken :: Lens' UsersDataSourcesDatasetsPatch' (Maybe OAuthToken)
+udsdpOAuthToken
+  = lens _udsdpOAuthToken
+      (\ s a -> s{_udsdpOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 udsdpFields :: Lens' UsersDataSourcesDatasetsPatch' (Maybe Text)
 udsdpFields
   = lens _udsdpFields (\ s a -> s{_udsdpFields = a})
 
--- | Data format for the response.
-udsdpAlt :: Lens' UsersDataSourcesDatasetsPatch' Alt
-udsdpAlt = lens _udsdpAlt (\ s a -> s{_udsdpAlt = a})
+instance GoogleAuth UsersDataSourcesDatasetsPatch'
+         where
+        authKey = udsdpKey . _Just
+        authToken = udsdpOAuthToken . _Just
 
 instance GoogleRequest UsersDataSourcesDatasetsPatch'
          where
@@ -208,15 +216,16 @@ instance GoogleRequest UsersDataSourcesDatasetsPatch'
         requestWithRoute r u
           UsersDataSourcesDatasetsPatch'{..}
           = go _udsdpQuotaUser (Just _udsdpPrettyPrint)
-              _udsdpUserIp
+              _udsdpUserIP
               _udsdpDataSourceId
               _udsdpUserId
               _udsdpKey
               _udsdpDatasetId
               _udsdpCurrentTimeMillis
-              _udsdpOauthToken
+              _udsdpOAuthToken
               _udsdpFields
-              (Just _udsdpAlt)
+              (Just AltJSON)
+              _udsdpDataset
           where go
                   = clientWithRoute
                       (Proxy ::

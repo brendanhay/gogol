@@ -34,13 +34,13 @@ module Network.Google.Resource.Analytics.Management.CustomDimensions.Update
     , mcduPrettyPrint
     , mcduWebPropertyId
     , mcduIgnoreCustomDataSourceLinks
-    , mcduUserIp
+    , mcduUserIP
     , mcduAccountId
     , mcduKey
-    , mcduOauthToken
+    , mcduOAuthToken
+    , mcduCustomDimension
     , mcduCustomDimensionId
     , mcduFields
-    , mcduAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -60,11 +60,12 @@ type ManagementCustomDimensionsUpdateResource =
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "ignoreCustomDataSourceLinks" Bool :>
                          QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "fields" Text :>
-                                 QueryParam "alt" Alt :>
-                                   Put '[JSON] CustomDimension
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON] CustomDimension :>
+                                     Put '[JSON] CustomDimension
 
 -- | Updates an existing custom dimension.
 --
@@ -74,13 +75,13 @@ data ManagementCustomDimensionsUpdate' = ManagementCustomDimensionsUpdate'
     , _mcduPrettyPrint                 :: !Bool
     , _mcduWebPropertyId               :: !Text
     , _mcduIgnoreCustomDataSourceLinks :: !Bool
-    , _mcduUserIp                      :: !(Maybe Text)
+    , _mcduUserIP                      :: !(Maybe Text)
     , _mcduAccountId                   :: !Text
-    , _mcduKey                         :: !(Maybe Text)
-    , _mcduOauthToken                  :: !(Maybe Text)
+    , _mcduKey                         :: !(Maybe Key)
+    , _mcduOAuthToken                  :: !(Maybe OAuthToken)
+    , _mcduCustomDimension             :: !CustomDimension
     , _mcduCustomDimensionId           :: !Text
     , _mcduFields                      :: !(Maybe Text)
-    , _mcduAlt                         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementCustomDimensionsUpdate'' with the minimum fields required to make a request.
@@ -95,37 +96,38 @@ data ManagementCustomDimensionsUpdate' = ManagementCustomDimensionsUpdate'
 --
 -- * 'mcduIgnoreCustomDataSourceLinks'
 --
--- * 'mcduUserIp'
+-- * 'mcduUserIP'
 --
 -- * 'mcduAccountId'
 --
 -- * 'mcduKey'
 --
--- * 'mcduOauthToken'
+-- * 'mcduOAuthToken'
+--
+-- * 'mcduCustomDimension'
 --
 -- * 'mcduCustomDimensionId'
 --
 -- * 'mcduFields'
---
--- * 'mcduAlt'
 managementCustomDimensionsUpdate'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'accountId'
+    -> CustomDimension -- ^ 'CustomDimension'
     -> Text -- ^ 'customDimensionId'
     -> ManagementCustomDimensionsUpdate'
-managementCustomDimensionsUpdate' pMcduWebPropertyId_ pMcduAccountId_ pMcduCustomDimensionId_ =
+managementCustomDimensionsUpdate' pMcduWebPropertyId_ pMcduAccountId_ pMcduCustomDimension_ pMcduCustomDimensionId_ =
     ManagementCustomDimensionsUpdate'
     { _mcduQuotaUser = Nothing
     , _mcduPrettyPrint = False
     , _mcduWebPropertyId = pMcduWebPropertyId_
     , _mcduIgnoreCustomDataSourceLinks = False
-    , _mcduUserIp = Nothing
+    , _mcduUserIP = Nothing
     , _mcduAccountId = pMcduAccountId_
     , _mcduKey = Nothing
-    , _mcduOauthToken = Nothing
+    , _mcduOAuthToken = Nothing
+    , _mcduCustomDimension = pMcduCustomDimension_
     , _mcduCustomDimensionId = pMcduCustomDimensionId_
     , _mcduFields = Nothing
-    , _mcduAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -157,9 +159,9 @@ mcduIgnoreCustomDataSourceLinks
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mcduUserIp :: Lens' ManagementCustomDimensionsUpdate' (Maybe Text)
-mcduUserIp
-  = lens _mcduUserIp (\ s a -> s{_mcduUserIp = a})
+mcduUserIP :: Lens' ManagementCustomDimensionsUpdate' (Maybe Text)
+mcduUserIP
+  = lens _mcduUserIP (\ s a -> s{_mcduUserIP = a})
 
 -- | Account ID for the custom dimension to update.
 mcduAccountId :: Lens' ManagementCustomDimensionsUpdate' Text
@@ -170,14 +172,20 @@ mcduAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mcduKey :: Lens' ManagementCustomDimensionsUpdate' (Maybe Text)
+mcduKey :: Lens' ManagementCustomDimensionsUpdate' (Maybe Key)
 mcduKey = lens _mcduKey (\ s a -> s{_mcduKey = a})
 
 -- | OAuth 2.0 token for the current user.
-mcduOauthToken :: Lens' ManagementCustomDimensionsUpdate' (Maybe Text)
-mcduOauthToken
-  = lens _mcduOauthToken
-      (\ s a -> s{_mcduOauthToken = a})
+mcduOAuthToken :: Lens' ManagementCustomDimensionsUpdate' (Maybe OAuthToken)
+mcduOAuthToken
+  = lens _mcduOAuthToken
+      (\ s a -> s{_mcduOAuthToken = a})
+
+-- | Multipart request metadata.
+mcduCustomDimension :: Lens' ManagementCustomDimensionsUpdate' CustomDimension
+mcduCustomDimension
+  = lens _mcduCustomDimension
+      (\ s a -> s{_mcduCustomDimension = a})
 
 -- | Custom dimension ID for the custom dimension to update.
 mcduCustomDimensionId :: Lens' ManagementCustomDimensionsUpdate' Text
@@ -190,9 +198,10 @@ mcduFields :: Lens' ManagementCustomDimensionsUpdate' (Maybe Text)
 mcduFields
   = lens _mcduFields (\ s a -> s{_mcduFields = a})
 
--- | Data format for the response.
-mcduAlt :: Lens' ManagementCustomDimensionsUpdate' Alt
-mcduAlt = lens _mcduAlt (\ s a -> s{_mcduAlt = a})
+instance GoogleAuth ManagementCustomDimensionsUpdate'
+         where
+        authKey = mcduKey . _Just
+        authToken = mcduOAuthToken . _Just
 
 instance GoogleRequest
          ManagementCustomDimensionsUpdate' where
@@ -204,13 +213,14 @@ instance GoogleRequest
           = go _mcduQuotaUser (Just _mcduPrettyPrint)
               _mcduWebPropertyId
               (Just _mcduIgnoreCustomDataSourceLinks)
-              _mcduUserIp
+              _mcduUserIP
               _mcduAccountId
               _mcduKey
-              _mcduOauthToken
+              _mcduOAuthToken
               _mcduCustomDimensionId
               _mcduFields
-              (Just _mcduAlt)
+              (Just AltJSON)
+              _mcduCustomDimension
           where go
                   = clientWithRoute
                       (Proxy ::

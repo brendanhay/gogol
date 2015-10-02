@@ -31,14 +31,14 @@ module Network.Google.Resource.Compute.URLMaps.Update
 
     -- * Request Lenses
     , umuQuotaUser
-    , umuUrlMap
+    , umuURLMap
     , umuPrettyPrint
+    , umuURLMap
     , umuProject
-    , umuUserIp
+    , umuUserIP
     , umuKey
-    , umuOauthToken
+    , umuOAuthToken
     , umuFields
-    , umuAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -54,24 +54,25 @@ type UrlMapsUpdateResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Put '[JSON] Operation
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] URLMap :> Put '[JSON] Operation
 
 -- | Update the entire content of the UrlMap resource.
 --
 -- /See:/ 'uRLMapsUpdate'' smart constructor.
 data URLMapsUpdate' = URLMapsUpdate'
     { _umuQuotaUser   :: !(Maybe Text)
-    , _umuUrlMap      :: !Text
+    , _umuURLMap      :: !Text
     , _umuPrettyPrint :: !Bool
+    , _umuURLMap      :: !URLMap
     , _umuProject     :: !Text
-    , _umuUserIp      :: !(Maybe Text)
-    , _umuKey         :: !(Maybe Text)
-    , _umuOauthToken  :: !(Maybe Text)
+    , _umuUserIP      :: !(Maybe Text)
+    , _umuKey         :: !(Maybe Key)
+    , _umuOAuthToken  :: !(Maybe OAuthToken)
     , _umuFields      :: !(Maybe Text)
-    , _umuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'URLMapsUpdate'' with the minimum fields required to make a request.
@@ -80,36 +81,37 @@ data URLMapsUpdate' = URLMapsUpdate'
 --
 -- * 'umuQuotaUser'
 --
--- * 'umuUrlMap'
+-- * 'umuURLMap'
 --
 -- * 'umuPrettyPrint'
 --
+-- * 'umuURLMap'
+--
 -- * 'umuProject'
 --
--- * 'umuUserIp'
+-- * 'umuUserIP'
 --
 -- * 'umuKey'
 --
--- * 'umuOauthToken'
+-- * 'umuOAuthToken'
 --
 -- * 'umuFields'
---
--- * 'umuAlt'
 uRLMapsUpdate'
     :: Text -- ^ 'urlMap'
+    -> URLMap -- ^ 'URLMap'
     -> Text -- ^ 'project'
     -> URLMapsUpdate'
-uRLMapsUpdate' pUmuUrlMap_ pUmuProject_ =
+uRLMapsUpdate' pUmuURLMap_ pUmuURLMap_ pUmuProject_ =
     URLMapsUpdate'
     { _umuQuotaUser = Nothing
-    , _umuUrlMap = pUmuUrlMap_
+    , _umuURLMap = pUmuURLMap_
     , _umuPrettyPrint = True
+    , _umuURLMap = pUmuURLMap_
     , _umuProject = pUmuProject_
-    , _umuUserIp = Nothing
+    , _umuUserIP = Nothing
     , _umuKey = Nothing
-    , _umuOauthToken = Nothing
+    , _umuOAuthToken = Nothing
     , _umuFields = Nothing
-    , _umuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,15 +122,20 @@ umuQuotaUser
   = lens _umuQuotaUser (\ s a -> s{_umuQuotaUser = a})
 
 -- | Name of the UrlMap resource to update.
-umuUrlMap :: Lens' URLMapsUpdate' Text
-umuUrlMap
-  = lens _umuUrlMap (\ s a -> s{_umuUrlMap = a})
+umuURLMap :: Lens' URLMapsUpdate' Text
+umuURLMap
+  = lens _umuURLMap (\ s a -> s{_umuURLMap = a})
 
 -- | Returns response with indentations and line breaks.
 umuPrettyPrint :: Lens' URLMapsUpdate' Bool
 umuPrettyPrint
   = lens _umuPrettyPrint
       (\ s a -> s{_umuPrettyPrint = a})
+
+-- | Multipart request metadata.
+umuURLMap :: Lens' URLMapsUpdate' URLMap
+umuURLMap
+  = lens _umuURLMap (\ s a -> s{_umuURLMap = a})
 
 -- | Name of the project scoping this request.
 umuProject :: Lens' URLMapsUpdate' Text
@@ -137,42 +144,43 @@ umuProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-umuUserIp :: Lens' URLMapsUpdate' (Maybe Text)
-umuUserIp
-  = lens _umuUserIp (\ s a -> s{_umuUserIp = a})
+umuUserIP :: Lens' URLMapsUpdate' (Maybe Text)
+umuUserIP
+  = lens _umuUserIP (\ s a -> s{_umuUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-umuKey :: Lens' URLMapsUpdate' (Maybe Text)
+umuKey :: Lens' URLMapsUpdate' (Maybe Key)
 umuKey = lens _umuKey (\ s a -> s{_umuKey = a})
 
 -- | OAuth 2.0 token for the current user.
-umuOauthToken :: Lens' URLMapsUpdate' (Maybe Text)
-umuOauthToken
-  = lens _umuOauthToken
-      (\ s a -> s{_umuOauthToken = a})
+umuOAuthToken :: Lens' URLMapsUpdate' (Maybe OAuthToken)
+umuOAuthToken
+  = lens _umuOAuthToken
+      (\ s a -> s{_umuOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 umuFields :: Lens' URLMapsUpdate' (Maybe Text)
 umuFields
   = lens _umuFields (\ s a -> s{_umuFields = a})
 
--- | Data format for the response.
-umuAlt :: Lens' URLMapsUpdate' Alt
-umuAlt = lens _umuAlt (\ s a -> s{_umuAlt = a})
+instance GoogleAuth URLMapsUpdate' where
+        authKey = umuKey . _Just
+        authToken = umuOAuthToken . _Just
 
 instance GoogleRequest URLMapsUpdate' where
         type Rs URLMapsUpdate' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u URLMapsUpdate'{..}
-          = go _umuQuotaUser _umuUrlMap (Just _umuPrettyPrint)
+          = go _umuQuotaUser _umuURLMap (Just _umuPrettyPrint)
               _umuProject
-              _umuUserIp
+              _umuUserIP
               _umuKey
-              _umuOauthToken
+              _umuOAuthToken
               _umuFields
-              (Just _umuAlt)
+              (Just AltJSON)
+              _umuURLMap
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UrlMapsUpdateResource)

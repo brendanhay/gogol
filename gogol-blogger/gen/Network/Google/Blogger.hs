@@ -130,7 +130,7 @@ module Network.Google.Blogger
     -- ** PostImages
     , PostImages
     , postImages
-    , piUrl
+    , piURL
 
     -- ** BloggerPostUserInfosListStatus
     , BloggerPostUserInfosListStatus (..)
@@ -151,7 +151,7 @@ module Network.Google.Blogger
     -- ** PostAuthorImage
     , PostAuthorImage
     , postAuthorImage
-    , paiUrl
+    , paiURL
 
     -- ** BloggerPageViewsGetRange
     , BloggerPageViewsGetRange (..)
@@ -230,7 +230,7 @@ module Network.Google.Blogger
     , posLocation
     , posKind
     , posPublished
-    , posUrl
+    , posURL
     , posBlog
     , posCustomMetaData
     , posContent
@@ -250,7 +250,7 @@ module Network.Google.Blogger
     , pagEtag
     , pagKind
     , pagPublished
-    , pagUrl
+    , pagURL
     , pagBlog
     , pagContent
     , pagSelfLink
@@ -278,7 +278,7 @@ module Network.Google.Blogger
     , PageAuthor
     , pageAuthor
     , paImage
-    , paUrl
+    , paURL
     , paDisplayName
     , paId
 
@@ -290,7 +290,7 @@ module Network.Google.Blogger
     , bPages
     , bLocale
     , bPublished
-    , bUrl
+    , bURL
     , bCustomMetaData
     , bSelfLink
     , bName
@@ -308,7 +308,7 @@ module Network.Google.Blogger
     -- ** CommentAuthorImage
     , CommentAuthorImage
     , commentAuthorImage
-    , caiUrl
+    , caiURL
 
     -- ** BloggerCommentsListView
     , BloggerCommentsListView (..)
@@ -328,7 +328,7 @@ module Network.Google.Blogger
     , uKind
     , uCreated
     , uLocale
-    , uUrl
+    , uURL
     , uSelfLink
     , uAbout
     , uDisplayName
@@ -370,7 +370,7 @@ module Network.Google.Blogger
     , PostAuthor
     , postAuthor
     , pImage
-    , pUrl
+    , pURL
     , pDisplayName
     , pId
 
@@ -427,7 +427,7 @@ module Network.Google.Blogger
     , CommentAuthor
     , commentAuthor
     , caImage
-    , caUrl
+    , caURL
     , caDisplayName
     , caId
 
@@ -466,10 +466,7 @@ module Network.Google.Blogger
     -- ** PageAuthorImage
     , PageAuthorImage
     , pageAuthorImage
-    , paiaUrl
-
-    -- ** Alt
-    , Alt (..)
+    , paiaURL
 
     -- ** BloggerPagesListView
     , BloggerPagesListView (..)

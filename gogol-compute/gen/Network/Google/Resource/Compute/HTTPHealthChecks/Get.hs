@@ -33,12 +33,11 @@ module Network.Google.Resource.Compute.HTTPHealthChecks.Get
     , httphcgQuotaUser
     , httphcgPrettyPrint
     , httphcgProject
-    , httphcgUserIp
+    , httphcgUserIP
     , httphcgKey
-    , httphcgHttpHealthCheck
-    , httphcgOauthToken
+    , httphcgHTTPHealthCheck
+    , httphcgOAuthToken
     , httphcgFields
-    , httphcgAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -54,10 +53,11 @@ type HttpHealthChecksGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] HTTPHealthCheck
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] HTTPHealthCheck
 
 -- | Returns the specified HttpHealthCheck resource.
 --
@@ -66,12 +66,11 @@ data HTTPHealthChecksGet' = HTTPHealthChecksGet'
     { _httphcgQuotaUser       :: !(Maybe Text)
     , _httphcgPrettyPrint     :: !Bool
     , _httphcgProject         :: !Text
-    , _httphcgUserIp          :: !(Maybe Text)
-    , _httphcgKey             :: !(Maybe Text)
-    , _httphcgHttpHealthCheck :: !Text
-    , _httphcgOauthToken      :: !(Maybe Text)
+    , _httphcgUserIP          :: !(Maybe Text)
+    , _httphcgKey             :: !(Maybe Key)
+    , _httphcgHTTPHealthCheck :: !Text
+    , _httphcgOAuthToken      :: !(Maybe OAuthToken)
     , _httphcgFields          :: !(Maybe Text)
-    , _httphcgAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'HTTPHealthChecksGet'' with the minimum fields required to make a request.
@@ -84,32 +83,29 @@ data HTTPHealthChecksGet' = HTTPHealthChecksGet'
 --
 -- * 'httphcgProject'
 --
--- * 'httphcgUserIp'
+-- * 'httphcgUserIP'
 --
 -- * 'httphcgKey'
 --
--- * 'httphcgHttpHealthCheck'
+-- * 'httphcgHTTPHealthCheck'
 --
--- * 'httphcgOauthToken'
+-- * 'httphcgOAuthToken'
 --
 -- * 'httphcgFields'
---
--- * 'httphcgAlt'
 hTTPHealthChecksGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'httpHealthCheck'
     -> HTTPHealthChecksGet'
-hTTPHealthChecksGet' pHttphcgProject_ pHttphcgHttpHealthCheck_ =
+hTTPHealthChecksGet' pHttphcgProject_ pHttphcgHTTPHealthCheck_ =
     HTTPHealthChecksGet'
     { _httphcgQuotaUser = Nothing
     , _httphcgPrettyPrint = True
     , _httphcgProject = pHttphcgProject_
-    , _httphcgUserIp = Nothing
+    , _httphcgUserIP = Nothing
     , _httphcgKey = Nothing
-    , _httphcgHttpHealthCheck = pHttphcgHttpHealthCheck_
-    , _httphcgOauthToken = Nothing
+    , _httphcgHTTPHealthCheck = pHttphcgHTTPHealthCheck_
+    , _httphcgOAuthToken = Nothing
     , _httphcgFields = Nothing
-    , _httphcgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -134,29 +130,29 @@ httphcgProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-httphcgUserIp :: Lens' HTTPHealthChecksGet' (Maybe Text)
-httphcgUserIp
-  = lens _httphcgUserIp
-      (\ s a -> s{_httphcgUserIp = a})
+httphcgUserIP :: Lens' HTTPHealthChecksGet' (Maybe Text)
+httphcgUserIP
+  = lens _httphcgUserIP
+      (\ s a -> s{_httphcgUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-httphcgKey :: Lens' HTTPHealthChecksGet' (Maybe Text)
+httphcgKey :: Lens' HTTPHealthChecksGet' (Maybe Key)
 httphcgKey
   = lens _httphcgKey (\ s a -> s{_httphcgKey = a})
 
 -- | Name of the HttpHealthCheck resource to return.
-httphcgHttpHealthCheck :: Lens' HTTPHealthChecksGet' Text
-httphcgHttpHealthCheck
-  = lens _httphcgHttpHealthCheck
-      (\ s a -> s{_httphcgHttpHealthCheck = a})
+httphcgHTTPHealthCheck :: Lens' HTTPHealthChecksGet' Text
+httphcgHTTPHealthCheck
+  = lens _httphcgHTTPHealthCheck
+      (\ s a -> s{_httphcgHTTPHealthCheck = a})
 
 -- | OAuth 2.0 token for the current user.
-httphcgOauthToken :: Lens' HTTPHealthChecksGet' (Maybe Text)
-httphcgOauthToken
-  = lens _httphcgOauthToken
-      (\ s a -> s{_httphcgOauthToken = a})
+httphcgOAuthToken :: Lens' HTTPHealthChecksGet' (Maybe OAuthToken)
+httphcgOAuthToken
+  = lens _httphcgOAuthToken
+      (\ s a -> s{_httphcgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 httphcgFields :: Lens' HTTPHealthChecksGet' (Maybe Text)
@@ -164,10 +160,9 @@ httphcgFields
   = lens _httphcgFields
       (\ s a -> s{_httphcgFields = a})
 
--- | Data format for the response.
-httphcgAlt :: Lens' HTTPHealthChecksGet' Alt
-httphcgAlt
-  = lens _httphcgAlt (\ s a -> s{_httphcgAlt = a})
+instance GoogleAuth HTTPHealthChecksGet' where
+        authKey = httphcgKey . _Just
+        authToken = httphcgOAuthToken . _Just
 
 instance GoogleRequest HTTPHealthChecksGet' where
         type Rs HTTPHealthChecksGet' = HTTPHealthCheck
@@ -175,12 +170,12 @@ instance GoogleRequest HTTPHealthChecksGet' where
         requestWithRoute r u HTTPHealthChecksGet'{..}
           = go _httphcgQuotaUser (Just _httphcgPrettyPrint)
               _httphcgProject
-              _httphcgUserIp
+              _httphcgUserIP
               _httphcgKey
-              _httphcgHttpHealthCheck
-              _httphcgOauthToken
+              _httphcgHTTPHealthCheck
+              _httphcgOAuthToken
               _httphcgFields
-              (Just _httphcgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy HttpHealthChecksGetResource)

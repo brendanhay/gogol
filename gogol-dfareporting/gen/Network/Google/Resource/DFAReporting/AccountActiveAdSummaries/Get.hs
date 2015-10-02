@@ -32,13 +32,12 @@ module Network.Google.Resource.DFAReporting.AccountActiveAdSummaries.Get
     -- * Request Lenses
     , aaasgQuotaUser
     , aaasgPrettyPrint
-    , aaasgUserIp
+    , aaasgUserIP
     , aaasgProfileId
     , aaasgKey
     , aaasgSummaryAccountId
-    , aaasgOauthToken
+    , aaasgOAuthToken
     , aaasgFields
-    , aaasgAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,10 +53,10 @@ type AccountActiveAdSummariesGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :>
+                         QueryParam "alt" AltJSON :>
                            Get '[JSON] AccountActiveAdSummary
 
 -- | Gets the account\'s active ad summary by account ID.
@@ -66,13 +65,12 @@ type AccountActiveAdSummariesGetResource =
 data AccountActiveAdSummariesGet' = AccountActiveAdSummariesGet'
     { _aaasgQuotaUser        :: !(Maybe Text)
     , _aaasgPrettyPrint      :: !Bool
-    , _aaasgUserIp           :: !(Maybe Text)
+    , _aaasgUserIP           :: !(Maybe Text)
     , _aaasgProfileId        :: !Int64
-    , _aaasgKey              :: !(Maybe Text)
+    , _aaasgKey              :: !(Maybe Key)
     , _aaasgSummaryAccountId :: !Int64
-    , _aaasgOauthToken       :: !(Maybe Text)
+    , _aaasgOAuthToken       :: !(Maybe OAuthToken)
     , _aaasgFields           :: !(Maybe Text)
-    , _aaasgAlt              :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountActiveAdSummariesGet'' with the minimum fields required to make a request.
@@ -83,7 +81,7 @@ data AccountActiveAdSummariesGet' = AccountActiveAdSummariesGet'
 --
 -- * 'aaasgPrettyPrint'
 --
--- * 'aaasgUserIp'
+-- * 'aaasgUserIP'
 --
 -- * 'aaasgProfileId'
 --
@@ -91,11 +89,9 @@ data AccountActiveAdSummariesGet' = AccountActiveAdSummariesGet'
 --
 -- * 'aaasgSummaryAccountId'
 --
--- * 'aaasgOauthToken'
+-- * 'aaasgOAuthToken'
 --
 -- * 'aaasgFields'
---
--- * 'aaasgAlt'
 accountActiveAdSummariesGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'summaryAccountId'
@@ -104,13 +100,12 @@ accountActiveAdSummariesGet' pAaasgProfileId_ pAaasgSummaryAccountId_ =
     AccountActiveAdSummariesGet'
     { _aaasgQuotaUser = Nothing
     , _aaasgPrettyPrint = True
-    , _aaasgUserIp = Nothing
+    , _aaasgUserIP = Nothing
     , _aaasgProfileId = pAaasgProfileId_
     , _aaasgKey = Nothing
     , _aaasgSummaryAccountId = pAaasgSummaryAccountId_
-    , _aaasgOauthToken = Nothing
+    , _aaasgOAuthToken = Nothing
     , _aaasgFields = Nothing
-    , _aaasgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -129,9 +124,9 @@ aaasgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-aaasgUserIp :: Lens' AccountActiveAdSummariesGet' (Maybe Text)
-aaasgUserIp
-  = lens _aaasgUserIp (\ s a -> s{_aaasgUserIp = a})
+aaasgUserIP :: Lens' AccountActiveAdSummariesGet' (Maybe Text)
+aaasgUserIP
+  = lens _aaasgUserIP (\ s a -> s{_aaasgUserIP = a})
 
 -- | User profile ID associated with this request.
 aaasgProfileId :: Lens' AccountActiveAdSummariesGet' Int64
@@ -142,7 +137,7 @@ aaasgProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aaasgKey :: Lens' AccountActiveAdSummariesGet' (Maybe Text)
+aaasgKey :: Lens' AccountActiveAdSummariesGet' (Maybe Key)
 aaasgKey = lens _aaasgKey (\ s a -> s{_aaasgKey = a})
 
 -- | Account ID.
@@ -152,19 +147,20 @@ aaasgSummaryAccountId
       (\ s a -> s{_aaasgSummaryAccountId = a})
 
 -- | OAuth 2.0 token for the current user.
-aaasgOauthToken :: Lens' AccountActiveAdSummariesGet' (Maybe Text)
-aaasgOauthToken
-  = lens _aaasgOauthToken
-      (\ s a -> s{_aaasgOauthToken = a})
+aaasgOAuthToken :: Lens' AccountActiveAdSummariesGet' (Maybe OAuthToken)
+aaasgOAuthToken
+  = lens _aaasgOAuthToken
+      (\ s a -> s{_aaasgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 aaasgFields :: Lens' AccountActiveAdSummariesGet' (Maybe Text)
 aaasgFields
   = lens _aaasgFields (\ s a -> s{_aaasgFields = a})
 
--- | Data format for the response.
-aaasgAlt :: Lens' AccountActiveAdSummariesGet' Alt
-aaasgAlt = lens _aaasgAlt (\ s a -> s{_aaasgAlt = a})
+instance GoogleAuth AccountActiveAdSummariesGet'
+         where
+        authKey = aaasgKey . _Just
+        authToken = aaasgOAuthToken . _Just
 
 instance GoogleRequest AccountActiveAdSummariesGet'
          where
@@ -173,13 +169,13 @@ instance GoogleRequest AccountActiveAdSummariesGet'
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AccountActiveAdSummariesGet'{..}
           = go _aaasgQuotaUser (Just _aaasgPrettyPrint)
-              _aaasgUserIp
+              _aaasgUserIP
               _aaasgProfileId
               _aaasgKey
               _aaasgSummaryAccountId
-              _aaasgOauthToken
+              _aaasgOAuthToken
               _aaasgFields
-              (Just _aaasgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountActiveAdSummariesGetResource)

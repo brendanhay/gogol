@@ -33,11 +33,11 @@ module Network.Google.Resource.Games.Pushtokens.Remove
     -- * Request Lenses
     , prQuotaUser
     , prPrettyPrint
-    , prUserIp
+    , prUserIP
     , prKey
-    , prOauthToken
+    , prPushTokenId
+    , prOAuthToken
     , prFields
-    , prAlt
     ) where
 
 import           Network.Google.Games.Types
@@ -51,10 +51,11 @@ type PushtokensRemoveResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Post '[JSON] ()
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] PushTokenId :> Post '[JSON] ()
 
 -- | Removes a push token for the current user and application. Removing a
 -- non-existent push token will report success.
@@ -63,11 +64,11 @@ type PushtokensRemoveResource =
 data PushtokensRemove' = PushtokensRemove'
     { _prQuotaUser   :: !(Maybe Text)
     , _prPrettyPrint :: !Bool
-    , _prUserIp      :: !(Maybe Text)
-    , _prKey         :: !(Maybe Text)
-    , _prOauthToken  :: !(Maybe Text)
+    , _prUserIP      :: !(Maybe Text)
+    , _prKey         :: !(Maybe Key)
+    , _prPushTokenId :: !PushTokenId
+    , _prOAuthToken  :: !(Maybe OAuthToken)
     , _prFields      :: !(Maybe Text)
-    , _prAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PushtokensRemove'' with the minimum fields required to make a request.
@@ -78,26 +79,27 @@ data PushtokensRemove' = PushtokensRemove'
 --
 -- * 'prPrettyPrint'
 --
--- * 'prUserIp'
+-- * 'prUserIP'
 --
 -- * 'prKey'
 --
--- * 'prOauthToken'
+-- * 'prPushTokenId'
+--
+-- * 'prOAuthToken'
 --
 -- * 'prFields'
---
--- * 'prAlt'
 pushtokensRemove'
-    :: PushtokensRemove'
-pushtokensRemove' =
+    :: PushTokenId -- ^ 'PushTokenId'
+    -> PushtokensRemove'
+pushtokensRemove' pPrPushTokenId_ =
     PushtokensRemove'
     { _prQuotaUser = Nothing
     , _prPrettyPrint = True
-    , _prUserIp = Nothing
+    , _prUserIP = Nothing
     , _prKey = Nothing
-    , _prOauthToken = Nothing
+    , _prPushTokenId = pPrPushTokenId_
+    , _prOAuthToken = Nothing
     , _prFields = Nothing
-    , _prAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -115,37 +117,44 @@ prPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-prUserIp :: Lens' PushtokensRemove' (Maybe Text)
-prUserIp = lens _prUserIp (\ s a -> s{_prUserIp = a})
+prUserIP :: Lens' PushtokensRemove' (Maybe Text)
+prUserIP = lens _prUserIP (\ s a -> s{_prUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-prKey :: Lens' PushtokensRemove' (Maybe Text)
+prKey :: Lens' PushtokensRemove' (Maybe Key)
 prKey = lens _prKey (\ s a -> s{_prKey = a})
 
+-- | Multipart request metadata.
+prPushTokenId :: Lens' PushtokensRemove' PushTokenId
+prPushTokenId
+  = lens _prPushTokenId
+      (\ s a -> s{_prPushTokenId = a})
+
 -- | OAuth 2.0 token for the current user.
-prOauthToken :: Lens' PushtokensRemove' (Maybe Text)
-prOauthToken
-  = lens _prOauthToken (\ s a -> s{_prOauthToken = a})
+prOAuthToken :: Lens' PushtokensRemove' (Maybe OAuthToken)
+prOAuthToken
+  = lens _prOAuthToken (\ s a -> s{_prOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 prFields :: Lens' PushtokensRemove' (Maybe Text)
 prFields = lens _prFields (\ s a -> s{_prFields = a})
 
--- | Data format for the response.
-prAlt :: Lens' PushtokensRemove' Alt
-prAlt = lens _prAlt (\ s a -> s{_prAlt = a})
+instance GoogleAuth PushtokensRemove' where
+        authKey = prKey . _Just
+        authToken = prOAuthToken . _Just
 
 instance GoogleRequest PushtokensRemove' where
         type Rs PushtokensRemove' = ()
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u PushtokensRemove'{..}
-          = go _prQuotaUser (Just _prPrettyPrint) _prUserIp
+          = go _prQuotaUser (Just _prPrettyPrint) _prUserIP
               _prKey
-              _prOauthToken
+              _prOAuthToken
               _prFields
-              (Just _prAlt)
+              (Just AltJSON)
+              _prPushTokenId
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PushtokensRemoveResource)

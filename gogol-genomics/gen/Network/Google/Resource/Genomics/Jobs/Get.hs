@@ -33,11 +33,10 @@ module Network.Google.Resource.Genomics.Jobs.Get
     , jgQuotaUser
     , jgPrettyPrint
     , jgJobId
-    , jgUserIp
+    , jgUserIP
     , jgKey
-    , jgOauthToken
+    , jgOAuthToken
     , jgFields
-    , jgAlt
     ) where
 
 import           Network.Google.Genomics.Types
@@ -51,10 +50,10 @@ type JobsGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Get '[JSON] Job
+                     QueryParam "alt" AltJSON :> Get '[JSON] Job
 
 -- | Gets a job by ID.
 --
@@ -63,11 +62,10 @@ data JobsGet' = JobsGet'
     { _jgQuotaUser   :: !(Maybe Text)
     , _jgPrettyPrint :: !Bool
     , _jgJobId       :: !Text
-    , _jgUserIp      :: !(Maybe Text)
-    , _jgKey         :: !(Maybe Text)
-    , _jgOauthToken  :: !(Maybe Text)
+    , _jgUserIP      :: !(Maybe Text)
+    , _jgKey         :: !(Maybe Key)
+    , _jgOAuthToken  :: !(Maybe OAuthToken)
     , _jgFields      :: !(Maybe Text)
-    , _jgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobsGet'' with the minimum fields required to make a request.
@@ -80,15 +78,13 @@ data JobsGet' = JobsGet'
 --
 -- * 'jgJobId'
 --
--- * 'jgUserIp'
+-- * 'jgUserIP'
 --
 -- * 'jgKey'
 --
--- * 'jgOauthToken'
+-- * 'jgOAuthToken'
 --
 -- * 'jgFields'
---
--- * 'jgAlt'
 jobsGet'
     :: Text -- ^ 'jobId'
     -> JobsGet'
@@ -97,11 +93,10 @@ jobsGet' pJgJobId_ =
     { _jgQuotaUser = Nothing
     , _jgPrettyPrint = True
     , _jgJobId = pJgJobId_
-    , _jgUserIp = Nothing
+    , _jgUserIP = Nothing
     , _jgKey = Nothing
-    , _jgOauthToken = Nothing
+    , _jgOAuthToken = Nothing
     , _jgFields = Nothing
-    , _jgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -123,38 +118,38 @@ jgJobId = lens _jgJobId (\ s a -> s{_jgJobId = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-jgUserIp :: Lens' JobsGet' (Maybe Text)
-jgUserIp = lens _jgUserIp (\ s a -> s{_jgUserIp = a})
+jgUserIP :: Lens' JobsGet' (Maybe Text)
+jgUserIP = lens _jgUserIP (\ s a -> s{_jgUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-jgKey :: Lens' JobsGet' (Maybe Text)
+jgKey :: Lens' JobsGet' (Maybe Key)
 jgKey = lens _jgKey (\ s a -> s{_jgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-jgOauthToken :: Lens' JobsGet' (Maybe Text)
-jgOauthToken
-  = lens _jgOauthToken (\ s a -> s{_jgOauthToken = a})
+jgOAuthToken :: Lens' JobsGet' (Maybe OAuthToken)
+jgOAuthToken
+  = lens _jgOAuthToken (\ s a -> s{_jgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 jgFields :: Lens' JobsGet' (Maybe Text)
 jgFields = lens _jgFields (\ s a -> s{_jgFields = a})
 
--- | Data format for the response.
-jgAlt :: Lens' JobsGet' Alt
-jgAlt = lens _jgAlt (\ s a -> s{_jgAlt = a})
+instance GoogleAuth JobsGet' where
+        authKey = jgKey . _Just
+        authToken = jgOAuthToken . _Just
 
 instance GoogleRequest JobsGet' where
         type Rs JobsGet' = Job
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u JobsGet'{..}
           = go _jgQuotaUser (Just _jgPrettyPrint) _jgJobId
-              _jgUserIp
+              _jgUserIP
               _jgKey
-              _jgOauthToken
+              _jgOAuthToken
               _jgFields
-              (Just _jgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy JobsGetResource) r
                       u

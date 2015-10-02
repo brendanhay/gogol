@@ -46,10 +46,9 @@ module Network.Google.Resource.ProximityBeacon.Beacons.Attachments.List
     , balBearerToken
     , balNamespacedType
     , balKey
-    , balOauthToken
+    , balOAuthToken
     , balFields
     , balCallback
-    , balAlt
     ) where
 
 import           Network.Google.Prelude
@@ -70,11 +69,11 @@ type BeaconsAttachmentsListResource =
                        QueryParam "uploadType" Text :>
                          QueryParam "bearer_token" Text :>
                            QueryParam "namespacedType" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "fields" Text :>
                                    QueryParam "callback" Text :>
-                                     QueryParam "alt" Text :>
+                                     QueryParam "alt" AltJSON :>
                                        Get '[JSON] ListBeaconAttachmentsResponse
 
 -- | Returns the attachments for the specified beacon that match the
@@ -96,11 +95,10 @@ data BeaconsAttachmentsList' = BeaconsAttachmentsList'
     , _balUploadType     :: !(Maybe Text)
     , _balBearerToken    :: !(Maybe Text)
     , _balNamespacedType :: !(Maybe Text)
-    , _balKey            :: !(Maybe Text)
-    , _balOauthToken     :: !(Maybe Text)
+    , _balKey            :: !(Maybe Key)
+    , _balOAuthToken     :: !(Maybe OAuthToken)
     , _balFields         :: !(Maybe Text)
     , _balCallback       :: !(Maybe Text)
-    , _balAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BeaconsAttachmentsList'' with the minimum fields required to make a request.
@@ -129,13 +127,11 @@ data BeaconsAttachmentsList' = BeaconsAttachmentsList'
 --
 -- * 'balKey'
 --
--- * 'balOauthToken'
+-- * 'balOAuthToken'
 --
 -- * 'balFields'
 --
 -- * 'balCallback'
---
--- * 'balAlt'
 beaconsAttachmentsList'
     :: Text -- ^ 'beaconName'
     -> BeaconsAttachmentsList'
@@ -152,10 +148,9 @@ beaconsAttachmentsList' pBalBeaconName_ =
     , _balBearerToken = Nothing
     , _balNamespacedType = Nothing
     , _balKey = Nothing
-    , _balOauthToken = Nothing
+    , _balOAuthToken = Nothing
     , _balFields = Nothing
     , _balCallback = Nothing
-    , _balAlt = "json"
     }
 
 -- | V1 error format.
@@ -220,14 +215,14 @@ balNamespacedType
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-balKey :: Lens' BeaconsAttachmentsList' (Maybe Text)
+balKey :: Lens' BeaconsAttachmentsList' (Maybe Key)
 balKey = lens _balKey (\ s a -> s{_balKey = a})
 
 -- | OAuth 2.0 token for the current user.
-balOauthToken :: Lens' BeaconsAttachmentsList' (Maybe Text)
-balOauthToken
-  = lens _balOauthToken
-      (\ s a -> s{_balOauthToken = a})
+balOAuthToken :: Lens' BeaconsAttachmentsList' (Maybe OAuthToken)
+balOAuthToken
+  = lens _balOAuthToken
+      (\ s a -> s{_balOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 balFields :: Lens' BeaconsAttachmentsList' (Maybe Text)
@@ -239,9 +234,9 @@ balCallback :: Lens' BeaconsAttachmentsList' (Maybe Text)
 balCallback
   = lens _balCallback (\ s a -> s{_balCallback = a})
 
--- | Data format for response.
-balAlt :: Lens' BeaconsAttachmentsList' Text
-balAlt = lens _balAlt (\ s a -> s{_balAlt = a})
+instance GoogleAuth BeaconsAttachmentsList' where
+        authKey = balKey . _Just
+        authToken = balOAuthToken . _Just
 
 instance GoogleRequest BeaconsAttachmentsList' where
         type Rs BeaconsAttachmentsList' =
@@ -257,10 +252,10 @@ instance GoogleRequest BeaconsAttachmentsList' where
               _balBearerToken
               _balNamespacedType
               _balKey
-              _balOauthToken
+              _balOAuthToken
               _balFields
               _balCallback
-              (Just _balAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy BeaconsAttachmentsListResource)

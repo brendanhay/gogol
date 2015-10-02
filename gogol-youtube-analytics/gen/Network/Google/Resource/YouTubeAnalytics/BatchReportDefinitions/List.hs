@@ -32,12 +32,11 @@ module Network.Google.Resource.YouTubeAnalytics.BatchReportDefinitions.List
     -- * Request Lenses
     , brdlQuotaUser
     , brdlPrettyPrint
-    , brdlUserIp
+    , brdlUserIP
     , brdlOnBehalfOfContentOwner
     , brdlKey
-    , brdlOauthToken
+    , brdlOAuthToken
     , brdlFields
-    , brdlAlt
     ) where
 
 import           Network.Google.Prelude
@@ -51,10 +50,10 @@ type BatchReportDefinitionsListResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
              QueryParam "onBehalfOfContentOwner" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :>
+                     QueryParam "alt" AltJSON :>
                        Get '[JSON] BatchReportDefinitionList
 
 -- | Retrieves a list of available batch report definitions.
@@ -63,12 +62,11 @@ type BatchReportDefinitionsListResource =
 data BatchReportDefinitionsList' = BatchReportDefinitionsList'
     { _brdlQuotaUser              :: !(Maybe Text)
     , _brdlPrettyPrint            :: !Bool
-    , _brdlUserIp                 :: !(Maybe Text)
+    , _brdlUserIP                 :: !(Maybe Text)
     , _brdlOnBehalfOfContentOwner :: !Text
-    , _brdlKey                    :: !(Maybe Text)
-    , _brdlOauthToken             :: !(Maybe Text)
+    , _brdlKey                    :: !(Maybe Key)
+    , _brdlOAuthToken             :: !(Maybe OAuthToken)
     , _brdlFields                 :: !(Maybe Text)
-    , _brdlAlt                    :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BatchReportDefinitionsList'' with the minimum fields required to make a request.
@@ -79,17 +77,15 @@ data BatchReportDefinitionsList' = BatchReportDefinitionsList'
 --
 -- * 'brdlPrettyPrint'
 --
--- * 'brdlUserIp'
+-- * 'brdlUserIP'
 --
 -- * 'brdlOnBehalfOfContentOwner'
 --
 -- * 'brdlKey'
 --
--- * 'brdlOauthToken'
+-- * 'brdlOAuthToken'
 --
 -- * 'brdlFields'
---
--- * 'brdlAlt'
 batchReportDefinitionsList'
     :: Text -- ^ 'onBehalfOfContentOwner'
     -> BatchReportDefinitionsList'
@@ -97,12 +93,11 @@ batchReportDefinitionsList' pBrdlOnBehalfOfContentOwner_ =
     BatchReportDefinitionsList'
     { _brdlQuotaUser = Nothing
     , _brdlPrettyPrint = True
-    , _brdlUserIp = Nothing
+    , _brdlUserIP = Nothing
     , _brdlOnBehalfOfContentOwner = pBrdlOnBehalfOfContentOwner_
     , _brdlKey = Nothing
-    , _brdlOauthToken = Nothing
+    , _brdlOAuthToken = Nothing
     , _brdlFields = Nothing
-    , _brdlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -121,9 +116,9 @@ brdlPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-brdlUserIp :: Lens' BatchReportDefinitionsList' (Maybe Text)
-brdlUserIp
-  = lens _brdlUserIp (\ s a -> s{_brdlUserIp = a})
+brdlUserIP :: Lens' BatchReportDefinitionsList' (Maybe Text)
+brdlUserIP
+  = lens _brdlUserIP (\ s a -> s{_brdlUserIP = a})
 
 -- | The onBehalfOfContentOwner parameter identifies the content owner that
 -- the user is acting on behalf of.
@@ -135,23 +130,23 @@ brdlOnBehalfOfContentOwner
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-brdlKey :: Lens' BatchReportDefinitionsList' (Maybe Text)
+brdlKey :: Lens' BatchReportDefinitionsList' (Maybe Key)
 brdlKey = lens _brdlKey (\ s a -> s{_brdlKey = a})
 
 -- | OAuth 2.0 token for the current user.
-brdlOauthToken :: Lens' BatchReportDefinitionsList' (Maybe Text)
-brdlOauthToken
-  = lens _brdlOauthToken
-      (\ s a -> s{_brdlOauthToken = a})
+brdlOAuthToken :: Lens' BatchReportDefinitionsList' (Maybe OAuthToken)
+brdlOAuthToken
+  = lens _brdlOAuthToken
+      (\ s a -> s{_brdlOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 brdlFields :: Lens' BatchReportDefinitionsList' (Maybe Text)
 brdlFields
   = lens _brdlFields (\ s a -> s{_brdlFields = a})
 
--- | Data format for the response.
-brdlAlt :: Lens' BatchReportDefinitionsList' Alt
-brdlAlt = lens _brdlAlt (\ s a -> s{_brdlAlt = a})
+instance GoogleAuth BatchReportDefinitionsList' where
+        authKey = brdlKey . _Just
+        authToken = brdlOAuthToken . _Just
 
 instance GoogleRequest BatchReportDefinitionsList'
          where
@@ -160,12 +155,12 @@ instance GoogleRequest BatchReportDefinitionsList'
         request = requestWithRoute defReq youTubeAnalyticsURL
         requestWithRoute r u BatchReportDefinitionsList'{..}
           = go _brdlQuotaUser (Just _brdlPrettyPrint)
-              _brdlUserIp
+              _brdlUserIP
               (Just _brdlOnBehalfOfContentOwner)
               _brdlKey
-              _brdlOauthToken
+              _brdlOAuthToken
               _brdlFields
-              (Just _brdlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy BatchReportDefinitionsListResource)

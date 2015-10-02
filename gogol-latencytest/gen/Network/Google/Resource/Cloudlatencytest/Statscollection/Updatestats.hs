@@ -32,11 +32,11 @@ module Network.Google.Resource.Cloudlatencytest.Statscollection.Updatestats
     -- * Request Lenses
     , sQuotaUser
     , sPrettyPrint
-    , sUserIp
+    , sUserIP
+    , sStats
     , sKey
-    , sOauthToken
+    , sOAuthToken
     , sFields
-    , sAlt
     ) where
 
 import           Network.Google.LatencyTest.Types
@@ -49,10 +49,11 @@ type StatscollectionUpdatestatsResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
-               QueryParam "oauth_token" Text :>
+             QueryParam "key" Key :>
+               QueryParam "oauth_token" OAuthToken :>
                  QueryParam "fields" Text :>
-                   QueryParam "alt" Alt :> Post '[JSON] StatsReply
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Stats :> Post '[JSON] StatsReply
 
 -- | RPC to update the new TCP stats.
 --
@@ -60,11 +61,11 @@ type StatscollectionUpdatestatsResource =
 data StatscollectionUpdatestats' = StatscollectionUpdatestats'
     { _sQuotaUser   :: !(Maybe Text)
     , _sPrettyPrint :: !Bool
-    , _sUserIp      :: !(Maybe Text)
-    , _sKey         :: !(Maybe Text)
-    , _sOauthToken  :: !(Maybe Text)
+    , _sUserIP      :: !(Maybe Text)
+    , _sStats       :: !Stats
+    , _sKey         :: !(Maybe Key)
+    , _sOAuthToken  :: !(Maybe OAuthToken)
     , _sFields      :: !(Maybe Text)
-    , _sAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StatscollectionUpdatestats'' with the minimum fields required to make a request.
@@ -75,26 +76,27 @@ data StatscollectionUpdatestats' = StatscollectionUpdatestats'
 --
 -- * 'sPrettyPrint'
 --
--- * 'sUserIp'
+-- * 'sUserIP'
+--
+-- * 'sStats'
 --
 -- * 'sKey'
 --
--- * 'sOauthToken'
+-- * 'sOAuthToken'
 --
 -- * 'sFields'
---
--- * 'sAlt'
 statscollectionUpdatestats'
-    :: StatscollectionUpdatestats'
-statscollectionUpdatestats' =
+    :: Stats -- ^ 'Stats'
+    -> StatscollectionUpdatestats'
+statscollectionUpdatestats' pSStats_ =
     StatscollectionUpdatestats'
     { _sQuotaUser = Nothing
     , _sPrettyPrint = True
-    , _sUserIp = Nothing
+    , _sUserIP = Nothing
+    , _sStats = pSStats_
     , _sKey = Nothing
-    , _sOauthToken = Nothing
+    , _sOAuthToken = Nothing
     , _sFields = Nothing
-    , _sAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -111,37 +113,42 @@ sPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-sUserIp :: Lens' StatscollectionUpdatestats' (Maybe Text)
-sUserIp = lens _sUserIp (\ s a -> s{_sUserIp = a})
+sUserIP :: Lens' StatscollectionUpdatestats' (Maybe Text)
+sUserIP = lens _sUserIP (\ s a -> s{_sUserIP = a})
+
+-- | Multipart request metadata.
+sStats :: Lens' StatscollectionUpdatestats' Stats
+sStats = lens _sStats (\ s a -> s{_sStats = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-sKey :: Lens' StatscollectionUpdatestats' (Maybe Text)
+sKey :: Lens' StatscollectionUpdatestats' (Maybe Key)
 sKey = lens _sKey (\ s a -> s{_sKey = a})
 
 -- | OAuth 2.0 token for the current user.
-sOauthToken :: Lens' StatscollectionUpdatestats' (Maybe Text)
-sOauthToken
-  = lens _sOauthToken (\ s a -> s{_sOauthToken = a})
+sOAuthToken :: Lens' StatscollectionUpdatestats' (Maybe OAuthToken)
+sOAuthToken
+  = lens _sOAuthToken (\ s a -> s{_sOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 sFields :: Lens' StatscollectionUpdatestats' (Maybe Text)
 sFields = lens _sFields (\ s a -> s{_sFields = a})
 
--- | Data format for the response.
-sAlt :: Lens' StatscollectionUpdatestats' Alt
-sAlt = lens _sAlt (\ s a -> s{_sAlt = a})
+instance GoogleAuth StatscollectionUpdatestats' where
+        authKey = sKey . _Just
+        authToken = sOAuthToken . _Just
 
 instance GoogleRequest StatscollectionUpdatestats'
          where
         type Rs StatscollectionUpdatestats' = StatsReply
         request = requestWithRoute defReq latencyTestURL
         requestWithRoute r u StatscollectionUpdatestats'{..}
-          = go _sQuotaUser (Just _sPrettyPrint) _sUserIp _sKey
-              _sOauthToken
+          = go _sQuotaUser (Just _sPrettyPrint) _sUserIP _sKey
+              _sOAuthToken
               _sFields
-              (Just _sAlt)
+              (Just AltJSON)
+              _sStats
           where go
                   = clientWithRoute
                       (Proxy :: Proxy StatscollectionUpdatestatsResource)

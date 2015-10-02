@@ -33,12 +33,11 @@ module Network.Google.Resource.Discovery.APIs.List
     , alQuotaUser
     , alPrettyPrint
     , alPreferred
-    , alUserIp
+    , alUserIP
     , alKey
     , alName
-    , alOauthToken
+    , alOAuthToken
     , alFields
-    , alAlt
     ) where
 
 import           Network.Google.Discovery.Types
@@ -52,11 +51,11 @@ type ApisListResource =
          QueryParam "prettyPrint" Bool :>
            QueryParam "preferred" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
+               QueryParam "key" Key :>
                  QueryParam "name" Text :>
-                   QueryParam "oauth_token" Text :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Get '[JSON] DirectoryList
+                       QueryParam "alt" AltJSON :> Get '[JSON] DirectoryList
 
 -- | Retrieve the list of APIs supported at this endpoint.
 --
@@ -65,12 +64,11 @@ data APIsList' = APIsList'
     { _alQuotaUser   :: !(Maybe Text)
     , _alPrettyPrint :: !Bool
     , _alPreferred   :: !Bool
-    , _alUserIp      :: !(Maybe Text)
-    , _alKey         :: !(Maybe Text)
+    , _alUserIP      :: !(Maybe Text)
+    , _alKey         :: !(Maybe Key)
     , _alName        :: !(Maybe Text)
-    , _alOauthToken  :: !(Maybe Text)
+    , _alOAuthToken  :: !(Maybe OAuthToken)
     , _alFields      :: !(Maybe Text)
-    , _alAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'APIsList'' with the minimum fields required to make a request.
@@ -83,17 +81,15 @@ data APIsList' = APIsList'
 --
 -- * 'alPreferred'
 --
--- * 'alUserIp'
+-- * 'alUserIP'
 --
 -- * 'alKey'
 --
 -- * 'alName'
 --
--- * 'alOauthToken'
+-- * 'alOAuthToken'
 --
 -- * 'alFields'
---
--- * 'alAlt'
 aPIsList'
     :: APIsList'
 aPIsList' =
@@ -101,12 +97,11 @@ aPIsList' =
     { _alQuotaUser = Nothing
     , _alPrettyPrint = True
     , _alPreferred = False
-    , _alUserIp = Nothing
+    , _alUserIP = Nothing
     , _alKey = Nothing
     , _alName = Nothing
-    , _alOauthToken = Nothing
+    , _alOAuthToken = Nothing
     , _alFields = Nothing
-    , _alAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -129,13 +124,13 @@ alPreferred
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-alUserIp :: Lens' APIsList' (Maybe Text)
-alUserIp = lens _alUserIp (\ s a -> s{_alUserIp = a})
+alUserIP :: Lens' APIsList' (Maybe Text)
+alUserIP = lens _alUserIP (\ s a -> s{_alUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-alKey :: Lens' APIsList' (Maybe Text)
+alKey :: Lens' APIsList' (Maybe Key)
 alKey = lens _alKey (\ s a -> s{_alKey = a})
 
 -- | Only include APIs with the given name.
@@ -143,17 +138,17 @@ alName :: Lens' APIsList' (Maybe Text)
 alName = lens _alName (\ s a -> s{_alName = a})
 
 -- | OAuth 2.0 token for the current user.
-alOauthToken :: Lens' APIsList' (Maybe Text)
-alOauthToken
-  = lens _alOauthToken (\ s a -> s{_alOauthToken = a})
+alOAuthToken :: Lens' APIsList' (Maybe OAuthToken)
+alOAuthToken
+  = lens _alOAuthToken (\ s a -> s{_alOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 alFields :: Lens' APIsList' (Maybe Text)
 alFields = lens _alFields (\ s a -> s{_alFields = a})
 
--- | Data format for the response.
-alAlt :: Lens' APIsList' Alt
-alAlt = lens _alAlt (\ s a -> s{_alAlt = a})
+instance GoogleAuth APIsList' where
+        authKey = alKey . _Just
+        authToken = alOAuthToken . _Just
 
 instance GoogleRequest APIsList' where
         type Rs APIsList' = DirectoryList
@@ -161,12 +156,12 @@ instance GoogleRequest APIsList' where
         requestWithRoute r u APIsList'{..}
           = go _alQuotaUser (Just _alPrettyPrint)
               (Just _alPreferred)
-              _alUserIp
+              _alUserIP
               _alKey
               _alName
-              _alOauthToken
+              _alOAuthToken
               _alFields
-              (Just _alAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy ApisListResource) r
                       u

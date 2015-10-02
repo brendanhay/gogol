@@ -33,14 +33,13 @@ module Network.Google.Resource.DFAReporting.Placements.Generatetags
     , pQuotaUser
     , pPrettyPrint
     , pTagFormats
-    , pUserIp
+    , pUserIP
     , pCampaignId
     , pProfileId
     , pKey
     , pPlacementIds
-    , pOauthToken
+    , pOAuthToken
     , pFields
-    , pAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -60,11 +59,11 @@ type PlacementsGeneratetagsResource =
                    :>
                    QueryParam "userIp" Text :>
                      QueryParam "campaignId" Int64 :>
-                       QueryParam "key" Text :>
+                       QueryParam "key" Key :>
                          QueryParams "placementIds" Int64 :>
-                           QueryParam "oauth_token" Text :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :>
+                               QueryParam "alt" AltJSON :>
                                  Post '[JSON] PlacementsGenerateTagsResponse
 
 -- | Generates tags for a placement.
@@ -74,14 +73,13 @@ data PlacementsGeneratetags' = PlacementsGeneratetags'
     { _pQuotaUser    :: !(Maybe Text)
     , _pPrettyPrint  :: !Bool
     , _pTagFormats   :: !(Maybe DfareportingPlacementsGeneratetagsTagFormats)
-    , _pUserIp       :: !(Maybe Text)
+    , _pUserIP       :: !(Maybe Text)
     , _pCampaignId   :: !(Maybe Int64)
     , _pProfileId    :: !Int64
-    , _pKey          :: !(Maybe Text)
+    , _pKey          :: !(Maybe Key)
     , _pPlacementIds :: !(Maybe Int64)
-    , _pOauthToken   :: !(Maybe Text)
+    , _pOAuthToken   :: !(Maybe OAuthToken)
     , _pFields       :: !(Maybe Text)
-    , _pAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementsGeneratetags'' with the minimum fields required to make a request.
@@ -94,7 +92,7 @@ data PlacementsGeneratetags' = PlacementsGeneratetags'
 --
 -- * 'pTagFormats'
 --
--- * 'pUserIp'
+-- * 'pUserIP'
 --
 -- * 'pCampaignId'
 --
@@ -104,11 +102,9 @@ data PlacementsGeneratetags' = PlacementsGeneratetags'
 --
 -- * 'pPlacementIds'
 --
--- * 'pOauthToken'
+-- * 'pOAuthToken'
 --
 -- * 'pFields'
---
--- * 'pAlt'
 placementsGeneratetags'
     :: Int64 -- ^ 'profileId'
     -> PlacementsGeneratetags'
@@ -117,14 +113,13 @@ placementsGeneratetags' pPProfileId_ =
     { _pQuotaUser = Nothing
     , _pPrettyPrint = True
     , _pTagFormats = Nothing
-    , _pUserIp = Nothing
+    , _pUserIP = Nothing
     , _pCampaignId = Nothing
     , _pProfileId = pPProfileId_
     , _pKey = Nothing
     , _pPlacementIds = Nothing
-    , _pOauthToken = Nothing
+    , _pOAuthToken = Nothing
     , _pFields = Nothing
-    , _pAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -146,8 +141,8 @@ pTagFormats
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-pUserIp :: Lens' PlacementsGeneratetags' (Maybe Text)
-pUserIp = lens _pUserIp (\ s a -> s{_pUserIp = a})
+pUserIP :: Lens' PlacementsGeneratetags' (Maybe Text)
+pUserIP = lens _pUserIP (\ s a -> s{_pUserIP = a})
 
 -- | Generate placements belonging to this campaign. This is a required
 -- field.
@@ -163,7 +158,7 @@ pProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pKey :: Lens' PlacementsGeneratetags' (Maybe Text)
+pKey :: Lens' PlacementsGeneratetags' (Maybe Key)
 pKey = lens _pKey (\ s a -> s{_pKey = a})
 
 -- | Generate tags for these placements.
@@ -173,17 +168,17 @@ pPlacementIds
       (\ s a -> s{_pPlacementIds = a})
 
 -- | OAuth 2.0 token for the current user.
-pOauthToken :: Lens' PlacementsGeneratetags' (Maybe Text)
-pOauthToken
-  = lens _pOauthToken (\ s a -> s{_pOauthToken = a})
+pOAuthToken :: Lens' PlacementsGeneratetags' (Maybe OAuthToken)
+pOAuthToken
+  = lens _pOAuthToken (\ s a -> s{_pOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 pFields :: Lens' PlacementsGeneratetags' (Maybe Text)
 pFields = lens _pFields (\ s a -> s{_pFields = a})
 
--- | Data format for the response.
-pAlt :: Lens' PlacementsGeneratetags' Alt
-pAlt = lens _pAlt (\ s a -> s{_pAlt = a})
+instance GoogleAuth PlacementsGeneratetags' where
+        authKey = pKey . _Just
+        authToken = pOAuthToken . _Just
 
 instance GoogleRequest PlacementsGeneratetags' where
         type Rs PlacementsGeneratetags' =
@@ -191,14 +186,14 @@ instance GoogleRequest PlacementsGeneratetags' where
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlacementsGeneratetags'{..}
           = go _pQuotaUser (Just _pPrettyPrint) _pTagFormats
-              _pUserIp
+              _pUserIP
               _pCampaignId
               _pProfileId
               _pKey
               _pPlacementIds
-              _pOauthToken
+              _pOAuthToken
               _pFields
-              (Just _pAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PlacementsGeneratetagsResource)

@@ -32,12 +32,11 @@ module Network.Google.Resource.DFAReporting.OperatingSystems.List
     -- * Request Lenses
     , oslQuotaUser
     , oslPrettyPrint
-    , oslUserIp
+    , oslUserIP
     , oslProfileId
     , oslKey
-    , oslOauthToken
+    , oslOAuthToken
     , oslFields
-    , oslAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,10 +51,10 @@ type OperatingSystemsListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :>
+                       QueryParam "alt" AltJSON :>
                          Get '[JSON] OperatingSystemsListResponse
 
 -- | Retrieves a list of operating systems.
@@ -64,12 +63,11 @@ type OperatingSystemsListResource =
 data OperatingSystemsList' = OperatingSystemsList'
     { _oslQuotaUser   :: !(Maybe Text)
     , _oslPrettyPrint :: !Bool
-    , _oslUserIp      :: !(Maybe Text)
+    , _oslUserIP      :: !(Maybe Text)
     , _oslProfileId   :: !Int64
-    , _oslKey         :: !(Maybe Text)
-    , _oslOauthToken  :: !(Maybe Text)
+    , _oslKey         :: !(Maybe Key)
+    , _oslOAuthToken  :: !(Maybe OAuthToken)
     , _oslFields      :: !(Maybe Text)
-    , _oslAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperatingSystemsList'' with the minimum fields required to make a request.
@@ -80,17 +78,15 @@ data OperatingSystemsList' = OperatingSystemsList'
 --
 -- * 'oslPrettyPrint'
 --
--- * 'oslUserIp'
+-- * 'oslUserIP'
 --
 -- * 'oslProfileId'
 --
 -- * 'oslKey'
 --
--- * 'oslOauthToken'
+-- * 'oslOAuthToken'
 --
 -- * 'oslFields'
---
--- * 'oslAlt'
 operatingSystemsList'
     :: Int64 -- ^ 'profileId'
     -> OperatingSystemsList'
@@ -98,12 +94,11 @@ operatingSystemsList' pOslProfileId_ =
     OperatingSystemsList'
     { _oslQuotaUser = Nothing
     , _oslPrettyPrint = True
-    , _oslUserIp = Nothing
+    , _oslUserIP = Nothing
     , _oslProfileId = pOslProfileId_
     , _oslKey = Nothing
-    , _oslOauthToken = Nothing
+    , _oslOAuthToken = Nothing
     , _oslFields = Nothing
-    , _oslAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -121,9 +116,9 @@ oslPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-oslUserIp :: Lens' OperatingSystemsList' (Maybe Text)
-oslUserIp
-  = lens _oslUserIp (\ s a -> s{_oslUserIp = a})
+oslUserIP :: Lens' OperatingSystemsList' (Maybe Text)
+oslUserIP
+  = lens _oslUserIP (\ s a -> s{_oslUserIP = a})
 
 -- | User profile ID associated with this request.
 oslProfileId :: Lens' OperatingSystemsList' Int64
@@ -133,35 +128,35 @@ oslProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-oslKey :: Lens' OperatingSystemsList' (Maybe Text)
+oslKey :: Lens' OperatingSystemsList' (Maybe Key)
 oslKey = lens _oslKey (\ s a -> s{_oslKey = a})
 
 -- | OAuth 2.0 token for the current user.
-oslOauthToken :: Lens' OperatingSystemsList' (Maybe Text)
-oslOauthToken
-  = lens _oslOauthToken
-      (\ s a -> s{_oslOauthToken = a})
+oslOAuthToken :: Lens' OperatingSystemsList' (Maybe OAuthToken)
+oslOAuthToken
+  = lens _oslOAuthToken
+      (\ s a -> s{_oslOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 oslFields :: Lens' OperatingSystemsList' (Maybe Text)
 oslFields
   = lens _oslFields (\ s a -> s{_oslFields = a})
 
--- | Data format for the response.
-oslAlt :: Lens' OperatingSystemsList' Alt
-oslAlt = lens _oslAlt (\ s a -> s{_oslAlt = a})
+instance GoogleAuth OperatingSystemsList' where
+        authKey = oslKey . _Just
+        authToken = oslOAuthToken . _Just
 
 instance GoogleRequest OperatingSystemsList' where
         type Rs OperatingSystemsList' =
              OperatingSystemsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u OperatingSystemsList'{..}
-          = go _oslQuotaUser (Just _oslPrettyPrint) _oslUserIp
+          = go _oslQuotaUser (Just _oslPrettyPrint) _oslUserIP
               _oslProfileId
               _oslKey
-              _oslOauthToken
+              _oslOAuthToken
               _oslFields
-              (Just _oslAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy OperatingSystemsListResource)

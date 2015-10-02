@@ -33,15 +33,14 @@ module Network.Google.Resource.Fitness.Users.Sessions.List
     , uslQuotaUser
     , uslPrettyPrint
     , uslStartTime
-    , uslUserIp
+    , uslUserIP
     , uslUserId
     , uslKey
     , uslEndTime
     , uslPageToken
-    , uslOauthToken
+    , uslOAuthToken
     , uslIncludeDeleted
     , uslFields
-    , uslAlt
     ) where
 
 import           Network.Google.Fitness.Types
@@ -56,13 +55,13 @@ type UsersSessionsListResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "startTime" Text :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "endTime" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "includeDeleted" Bool :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :>
+                             QueryParam "alt" AltJSON :>
                                Get '[JSON] ListSessionsResponse
 
 -- | Lists sessions previously created.
@@ -72,15 +71,14 @@ data UsersSessionsList' = UsersSessionsList'
     { _uslQuotaUser      :: !(Maybe Text)
     , _uslPrettyPrint    :: !Bool
     , _uslStartTime      :: !(Maybe Text)
-    , _uslUserIp         :: !(Maybe Text)
+    , _uslUserIP         :: !(Maybe Text)
     , _uslUserId         :: !Text
-    , _uslKey            :: !(Maybe Text)
+    , _uslKey            :: !(Maybe Key)
     , _uslEndTime        :: !(Maybe Text)
     , _uslPageToken      :: !(Maybe Text)
-    , _uslOauthToken     :: !(Maybe Text)
+    , _uslOAuthToken     :: !(Maybe OAuthToken)
     , _uslIncludeDeleted :: !(Maybe Bool)
     , _uslFields         :: !(Maybe Text)
-    , _uslAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersSessionsList'' with the minimum fields required to make a request.
@@ -93,7 +91,7 @@ data UsersSessionsList' = UsersSessionsList'
 --
 -- * 'uslStartTime'
 --
--- * 'uslUserIp'
+-- * 'uslUserIP'
 --
 -- * 'uslUserId'
 --
@@ -103,13 +101,11 @@ data UsersSessionsList' = UsersSessionsList'
 --
 -- * 'uslPageToken'
 --
--- * 'uslOauthToken'
+-- * 'uslOAuthToken'
 --
 -- * 'uslIncludeDeleted'
 --
 -- * 'uslFields'
---
--- * 'uslAlt'
 usersSessionsList'
     :: Text -- ^ 'userId'
     -> UsersSessionsList'
@@ -118,15 +114,14 @@ usersSessionsList' pUslUserId_ =
     { _uslQuotaUser = Nothing
     , _uslPrettyPrint = True
     , _uslStartTime = Nothing
-    , _uslUserIp = Nothing
+    , _uslUserIP = Nothing
     , _uslUserId = pUslUserId_
     , _uslKey = Nothing
     , _uslEndTime = Nothing
     , _uslPageToken = Nothing
-    , _uslOauthToken = Nothing
+    , _uslOAuthToken = Nothing
     , _uslIncludeDeleted = Nothing
     , _uslFields = Nothing
-    , _uslAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -150,9 +145,9 @@ uslStartTime
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-uslUserIp :: Lens' UsersSessionsList' (Maybe Text)
-uslUserIp
-  = lens _uslUserIp (\ s a -> s{_uslUserIp = a})
+uslUserIP :: Lens' UsersSessionsList' (Maybe Text)
+uslUserIP
+  = lens _uslUserIP (\ s a -> s{_uslUserIP = a})
 
 -- | List sessions for the person identified. Use me to indicate the
 -- authenticated user. Only me is supported at this time.
@@ -163,7 +158,7 @@ uslUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-uslKey :: Lens' UsersSessionsList' (Maybe Text)
+uslKey :: Lens' UsersSessionsList' (Maybe Key)
 uslKey = lens _uslKey (\ s a -> s{_uslKey = a})
 
 -- | An RFC3339 timestamp. Only sessions ending between the start and end
@@ -180,10 +175,10 @@ uslPageToken
   = lens _uslPageToken (\ s a -> s{_uslPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-uslOauthToken :: Lens' UsersSessionsList' (Maybe Text)
-uslOauthToken
-  = lens _uslOauthToken
-      (\ s a -> s{_uslOauthToken = a})
+uslOAuthToken :: Lens' UsersSessionsList' (Maybe OAuthToken)
+uslOAuthToken
+  = lens _uslOAuthToken
+      (\ s a -> s{_uslOAuthToken = a})
 
 -- | If true, deleted sessions will be returned. When set to true, sessions
 -- returned in this response will only have an ID and will not have any
@@ -198,9 +193,9 @@ uslFields :: Lens' UsersSessionsList' (Maybe Text)
 uslFields
   = lens _uslFields (\ s a -> s{_uslFields = a})
 
--- | Data format for the response.
-uslAlt :: Lens' UsersSessionsList' Alt
-uslAlt = lens _uslAlt (\ s a -> s{_uslAlt = a})
+instance GoogleAuth UsersSessionsList' where
+        authKey = uslKey . _Just
+        authToken = uslOAuthToken . _Just
 
 instance GoogleRequest UsersSessionsList' where
         type Rs UsersSessionsList' = ListSessionsResponse
@@ -208,15 +203,15 @@ instance GoogleRequest UsersSessionsList' where
         requestWithRoute r u UsersSessionsList'{..}
           = go _uslQuotaUser (Just _uslPrettyPrint)
               _uslStartTime
-              _uslUserIp
+              _uslUserIP
               _uslUserId
               _uslKey
               _uslEndTime
               _uslPageToken
-              _uslOauthToken
+              _uslOAuthToken
               _uslIncludeDeleted
               _uslFields
-              (Just _uslAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersSessionsListResource)

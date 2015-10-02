@@ -33,14 +33,13 @@ module Network.Google.Resource.Compute.MachineTypes.AggregatedList
     , mtalQuotaUser
     , mtalPrettyPrint
     , mtalProject
-    , mtalUserIp
+    , mtalUserIP
     , mtalKey
     , mtalFilter
     , mtalPageToken
-    , mtalOauthToken
+    , mtalOAuthToken
     , mtalMaxResults
     , mtalFields
-    , mtalAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -55,13 +54,13 @@ type MachineTypesAggregatedListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "filter" Text :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "maxResults" Word32 :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :>
+                             QueryParam "alt" AltJSON :>
                                Get '[JSON] MachineTypeAggregatedList
 
 -- | Retrieves the list of machine type resources grouped by scope.
@@ -71,14 +70,13 @@ data MachineTypesAggregatedList' = MachineTypesAggregatedList'
     { _mtalQuotaUser   :: !(Maybe Text)
     , _mtalPrettyPrint :: !Bool
     , _mtalProject     :: !Text
-    , _mtalUserIp      :: !(Maybe Text)
-    , _mtalKey         :: !(Maybe Text)
+    , _mtalUserIP      :: !(Maybe Text)
+    , _mtalKey         :: !(Maybe Key)
     , _mtalFilter      :: !(Maybe Text)
     , _mtalPageToken   :: !(Maybe Text)
-    , _mtalOauthToken  :: !(Maybe Text)
+    , _mtalOAuthToken  :: !(Maybe OAuthToken)
     , _mtalMaxResults  :: !Word32
     , _mtalFields      :: !(Maybe Text)
-    , _mtalAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MachineTypesAggregatedList'' with the minimum fields required to make a request.
@@ -91,7 +89,7 @@ data MachineTypesAggregatedList' = MachineTypesAggregatedList'
 --
 -- * 'mtalProject'
 --
--- * 'mtalUserIp'
+-- * 'mtalUserIP'
 --
 -- * 'mtalKey'
 --
@@ -99,13 +97,11 @@ data MachineTypesAggregatedList' = MachineTypesAggregatedList'
 --
 -- * 'mtalPageToken'
 --
--- * 'mtalOauthToken'
+-- * 'mtalOAuthToken'
 --
 -- * 'mtalMaxResults'
 --
 -- * 'mtalFields'
---
--- * 'mtalAlt'
 machineTypesAggregatedList'
     :: Text -- ^ 'project'
     -> MachineTypesAggregatedList'
@@ -114,14 +110,13 @@ machineTypesAggregatedList' pMtalProject_ =
     { _mtalQuotaUser = Nothing
     , _mtalPrettyPrint = True
     , _mtalProject = pMtalProject_
-    , _mtalUserIp = Nothing
+    , _mtalUserIP = Nothing
     , _mtalKey = Nothing
     , _mtalFilter = Nothing
     , _mtalPageToken = Nothing
-    , _mtalOauthToken = Nothing
+    , _mtalOAuthToken = Nothing
     , _mtalMaxResults = 500
     , _mtalFields = Nothing
-    , _mtalAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -145,14 +140,14 @@ mtalProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mtalUserIp :: Lens' MachineTypesAggregatedList' (Maybe Text)
-mtalUserIp
-  = lens _mtalUserIp (\ s a -> s{_mtalUserIp = a})
+mtalUserIP :: Lens' MachineTypesAggregatedList' (Maybe Text)
+mtalUserIP
+  = lens _mtalUserIP (\ s a -> s{_mtalUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mtalKey :: Lens' MachineTypesAggregatedList' (Maybe Text)
+mtalKey :: Lens' MachineTypesAggregatedList' (Maybe Key)
 mtalKey = lens _mtalKey (\ s a -> s{_mtalKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
@@ -179,10 +174,10 @@ mtalPageToken
       (\ s a -> s{_mtalPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-mtalOauthToken :: Lens' MachineTypesAggregatedList' (Maybe Text)
-mtalOauthToken
-  = lens _mtalOauthToken
-      (\ s a -> s{_mtalOauthToken = a})
+mtalOAuthToken :: Lens' MachineTypesAggregatedList' (Maybe OAuthToken)
+mtalOAuthToken
+  = lens _mtalOAuthToken
+      (\ s a -> s{_mtalOAuthToken = a})
 
 -- | Maximum count of results to be returned.
 mtalMaxResults :: Lens' MachineTypesAggregatedList' Word32
@@ -195,9 +190,9 @@ mtalFields :: Lens' MachineTypesAggregatedList' (Maybe Text)
 mtalFields
   = lens _mtalFields (\ s a -> s{_mtalFields = a})
 
--- | Data format for the response.
-mtalAlt :: Lens' MachineTypesAggregatedList' Alt
-mtalAlt = lens _mtalAlt (\ s a -> s{_mtalAlt = a})
+instance GoogleAuth MachineTypesAggregatedList' where
+        authKey = mtalKey . _Just
+        authToken = mtalOAuthToken . _Just
 
 instance GoogleRequest MachineTypesAggregatedList'
          where
@@ -207,14 +202,14 @@ instance GoogleRequest MachineTypesAggregatedList'
         requestWithRoute r u MachineTypesAggregatedList'{..}
           = go _mtalQuotaUser (Just _mtalPrettyPrint)
               _mtalProject
-              _mtalUserIp
+              _mtalUserIP
               _mtalKey
               _mtalFilter
               _mtalPageToken
-              _mtalOauthToken
+              _mtalOAuthToken
               (Just _mtalMaxResults)
               _mtalFields
-              (Just _mtalAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy MachineTypesAggregatedListResource)

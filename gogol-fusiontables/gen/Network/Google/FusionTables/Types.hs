@@ -46,12 +46,12 @@ module Network.Google.FusionTables.Types
     , cbcTableIndex
     , cbcColumnId
 
-    -- * Sqlresponse
-    , Sqlresponse
-    , sqlresponse
-    , sKind
-    , sRows
-    , sColumns
+    -- * SQLresponse
+    , SQLresponse
+    , sQLresponse
+    , sqlKind
+    , sqlRows
+    , sqlColumns
 
     -- * StyleSettingList
     , StyleSettingList
@@ -184,14 +184,14 @@ module Network.Google.FusionTables.Types
     , table
     , tabIsExportable
     , tabKind
-    , tabColumnPropertiesJsonSchema
-    , tabTablePropertiesJsonSchema
+    , tabColumnPropertiesJSONSchema
+    , tabTablePropertiesJSONSchema
     , tabName
-    , tabTablePropertiesJson
+    , tabTablePropertiesJSON
     , tabColumns
     , tabBaseTableIds
     , tabTableId
-    , tabSql
+    , tabSQL
     , tabDescription
     , tabAttribution
     , tabAttributionLink
@@ -199,11 +199,11 @@ module Network.Google.FusionTables.Types
     -- * Column
     , Column
     , column
-    , cColumnJsonSchema
+    , cColumnJSONSchema
     , cGraphPredicate
     , cKind
     , cBaseColumn
-    , cColumnPropertiesJson
+    , cColumnPropertiesJSON
     , cName
     , cType
     , cFormatPattern
@@ -220,9 +220,6 @@ module Network.Google.FusionTables.Types
     , lsStrokeOpacity
     , lsStrokeWeightStyler
     , lsStrokeColor
-
-    -- * Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.FusionTables.Types.Product

@@ -31,12 +31,12 @@ module Network.Google.Resource.Directory.Groups.Insert
 
     -- * Request Lenses
     , giQuotaUser
+    , giGroup
     , giPrettyPrint
-    , giUserIp
+    , giUserIP
     , giKey
-    , giOauthToken
+    , giOAuthToken
     , giFields
-    , giAlt
     ) where
 
 import           Network.Google.AdminDirectory.Types
@@ -49,22 +49,23 @@ type GroupsInsertResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
-               QueryParam "oauth_token" Text :>
+             QueryParam "key" Key :>
+               QueryParam "oauth_token" OAuthToken :>
                  QueryParam "fields" Text :>
-                   QueryParam "alt" Alt :> Post '[JSON] Group
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Group :> Post '[JSON] Group
 
 -- | Create Group
 --
 -- /See:/ 'groupsInsert'' smart constructor.
 data GroupsInsert' = GroupsInsert'
     { _giQuotaUser   :: !(Maybe Text)
+    , _giGroup       :: !Group
     , _giPrettyPrint :: !Bool
-    , _giUserIp      :: !(Maybe Text)
-    , _giKey         :: !(Maybe Text)
-    , _giOauthToken  :: !(Maybe Text)
+    , _giUserIP      :: !(Maybe Text)
+    , _giKey         :: !(Maybe Key)
+    , _giOAuthToken  :: !(Maybe OAuthToken)
     , _giFields      :: !(Maybe Text)
-    , _giAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GroupsInsert'' with the minimum fields required to make a request.
@@ -73,28 +74,29 @@ data GroupsInsert' = GroupsInsert'
 --
 -- * 'giQuotaUser'
 --
+-- * 'giGroup'
+--
 -- * 'giPrettyPrint'
 --
--- * 'giUserIp'
+-- * 'giUserIP'
 --
 -- * 'giKey'
 --
--- * 'giOauthToken'
+-- * 'giOAuthToken'
 --
 -- * 'giFields'
---
--- * 'giAlt'
 groupsInsert'
-    :: GroupsInsert'
-groupsInsert' =
+    :: Group -- ^ 'Group'
+    -> GroupsInsert'
+groupsInsert' pGiGroup_ =
     GroupsInsert'
     { _giQuotaUser = Nothing
+    , _giGroup = pGiGroup_
     , _giPrettyPrint = True
-    , _giUserIp = Nothing
+    , _giUserIP = Nothing
     , _giKey = Nothing
-    , _giOauthToken = Nothing
+    , _giOAuthToken = Nothing
     , _giFields = Nothing
-    , _giAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -104,6 +106,10 @@ giQuotaUser :: Lens' GroupsInsert' (Maybe Text)
 giQuotaUser
   = lens _giQuotaUser (\ s a -> s{_giQuotaUser = a})
 
+-- | Multipart request metadata.
+giGroup :: Lens' GroupsInsert' Group
+giGroup = lens _giGroup (\ s a -> s{_giGroup = a})
+
 -- | Returns response with indentations and line breaks.
 giPrettyPrint :: Lens' GroupsInsert' Bool
 giPrettyPrint
@@ -112,37 +118,38 @@ giPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-giUserIp :: Lens' GroupsInsert' (Maybe Text)
-giUserIp = lens _giUserIp (\ s a -> s{_giUserIp = a})
+giUserIP :: Lens' GroupsInsert' (Maybe Text)
+giUserIP = lens _giUserIP (\ s a -> s{_giUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-giKey :: Lens' GroupsInsert' (Maybe Text)
+giKey :: Lens' GroupsInsert' (Maybe Key)
 giKey = lens _giKey (\ s a -> s{_giKey = a})
 
 -- | OAuth 2.0 token for the current user.
-giOauthToken :: Lens' GroupsInsert' (Maybe Text)
-giOauthToken
-  = lens _giOauthToken (\ s a -> s{_giOauthToken = a})
+giOAuthToken :: Lens' GroupsInsert' (Maybe OAuthToken)
+giOAuthToken
+  = lens _giOAuthToken (\ s a -> s{_giOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 giFields :: Lens' GroupsInsert' (Maybe Text)
 giFields = lens _giFields (\ s a -> s{_giFields = a})
 
--- | Data format for the response.
-giAlt :: Lens' GroupsInsert' Alt
-giAlt = lens _giAlt (\ s a -> s{_giAlt = a})
+instance GoogleAuth GroupsInsert' where
+        authKey = giKey . _Just
+        authToken = giOAuthToken . _Just
 
 instance GoogleRequest GroupsInsert' where
         type Rs GroupsInsert' = Group
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u GroupsInsert'{..}
-          = go _giQuotaUser (Just _giPrettyPrint) _giUserIp
+          = go _giQuotaUser (Just _giPrettyPrint) _giUserIP
               _giKey
-              _giOauthToken
+              _giOAuthToken
               _giFields
-              (Just _giAlt)
+              (Just AltJSON)
+              _giGroup
           where go
                   = clientWithRoute
                       (Proxy :: Proxy GroupsInsertResource)

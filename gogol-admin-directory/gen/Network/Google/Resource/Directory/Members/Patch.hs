@@ -34,12 +34,12 @@ module Network.Google.Resource.Directory.Members.Patch
     , mpQuotaUser
     , mpMemberKey
     , mpPrettyPrint
-    , mpUserIp
+    , mpUserIP
     , mpGroupKey
     , mpKey
-    , mpOauthToken
+    , mpMember
+    , mpOAuthToken
     , mpFields
-    , mpAlt
     ) where
 
 import           Network.Google.AdminDirectory.Types
@@ -55,10 +55,11 @@ type MembersPatchResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Patch '[JSON] Member
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Member :> Patch '[JSON] Member
 
 -- | Update membership of a user in the specified group. This method supports
 -- patch semantics.
@@ -68,12 +69,12 @@ data MembersPatch' = MembersPatch'
     { _mpQuotaUser   :: !(Maybe Text)
     , _mpMemberKey   :: !Text
     , _mpPrettyPrint :: !Bool
-    , _mpUserIp      :: !(Maybe Text)
+    , _mpUserIP      :: !(Maybe Text)
     , _mpGroupKey    :: !Text
-    , _mpKey         :: !(Maybe Text)
-    , _mpOauthToken  :: !(Maybe Text)
+    , _mpKey         :: !(Maybe Key)
+    , _mpMember      :: !Member
+    , _mpOAuthToken  :: !(Maybe OAuthToken)
     , _mpFields      :: !(Maybe Text)
-    , _mpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MembersPatch'' with the minimum fields required to make a request.
@@ -86,32 +87,33 @@ data MembersPatch' = MembersPatch'
 --
 -- * 'mpPrettyPrint'
 --
--- * 'mpUserIp'
+-- * 'mpUserIP'
 --
 -- * 'mpGroupKey'
 --
 -- * 'mpKey'
 --
--- * 'mpOauthToken'
+-- * 'mpMember'
+--
+-- * 'mpOAuthToken'
 --
 -- * 'mpFields'
---
--- * 'mpAlt'
 membersPatch'
     :: Text -- ^ 'memberKey'
     -> Text -- ^ 'groupKey'
+    -> Member -- ^ 'Member'
     -> MembersPatch'
-membersPatch' pMpMemberKey_ pMpGroupKey_ =
+membersPatch' pMpMemberKey_ pMpGroupKey_ pMpMember_ =
     MembersPatch'
     { _mpQuotaUser = Nothing
     , _mpMemberKey = pMpMemberKey_
     , _mpPrettyPrint = True
-    , _mpUserIp = Nothing
+    , _mpUserIP = Nothing
     , _mpGroupKey = pMpGroupKey_
     , _mpKey = Nothing
-    , _mpOauthToken = Nothing
+    , _mpMember = pMpMember_
+    , _mpOAuthToken = Nothing
     , _mpFields = Nothing
-    , _mpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,8 +137,8 @@ mpPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mpUserIp :: Lens' MembersPatch' (Maybe Text)
-mpUserIp = lens _mpUserIp (\ s a -> s{_mpUserIp = a})
+mpUserIP :: Lens' MembersPatch' (Maybe Text)
+mpUserIP = lens _mpUserIP (\ s a -> s{_mpUserIP = a})
 
 -- | Email or immutable Id of the group. If Id, it should match with id of
 -- group object
@@ -147,33 +149,38 @@ mpGroupKey
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mpKey :: Lens' MembersPatch' (Maybe Text)
+mpKey :: Lens' MembersPatch' (Maybe Key)
 mpKey = lens _mpKey (\ s a -> s{_mpKey = a})
 
+-- | Multipart request metadata.
+mpMember :: Lens' MembersPatch' Member
+mpMember = lens _mpMember (\ s a -> s{_mpMember = a})
+
 -- | OAuth 2.0 token for the current user.
-mpOauthToken :: Lens' MembersPatch' (Maybe Text)
-mpOauthToken
-  = lens _mpOauthToken (\ s a -> s{_mpOauthToken = a})
+mpOAuthToken :: Lens' MembersPatch' (Maybe OAuthToken)
+mpOAuthToken
+  = lens _mpOAuthToken (\ s a -> s{_mpOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 mpFields :: Lens' MembersPatch' (Maybe Text)
 mpFields = lens _mpFields (\ s a -> s{_mpFields = a})
 
--- | Data format for the response.
-mpAlt :: Lens' MembersPatch' Alt
-mpAlt = lens _mpAlt (\ s a -> s{_mpAlt = a})
+instance GoogleAuth MembersPatch' where
+        authKey = mpKey . _Just
+        authToken = mpOAuthToken . _Just
 
 instance GoogleRequest MembersPatch' where
         type Rs MembersPatch' = Member
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u MembersPatch'{..}
           = go _mpQuotaUser _mpMemberKey (Just _mpPrettyPrint)
-              _mpUserIp
+              _mpUserIP
               _mpGroupKey
               _mpKey
-              _mpOauthToken
+              _mpOAuthToken
               _mpFields
-              (Just _mpAlt)
+              (Just AltJSON)
+              _mpMember
           where go
                   = clientWithRoute
                       (Proxy :: Proxy MembersPatchResource)

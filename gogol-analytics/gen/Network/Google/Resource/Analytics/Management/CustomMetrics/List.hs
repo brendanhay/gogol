@@ -33,14 +33,13 @@ module Network.Google.Resource.Analytics.Management.CustomMetrics.List
     , mcmlQuotaUser
     , mcmlPrettyPrint
     , mcmlWebPropertyId
-    , mcmlUserIp
+    , mcmlUserIP
     , mcmlAccountId
     , mcmlKey
-    , mcmlOauthToken
+    , mcmlOAuthToken
     , mcmlStartIndex
     , mcmlMaxResults
     , mcmlFields
-    , mcmlAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -58,12 +57,12 @@ type ManagementCustomMetricsListResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "start-index" Int32 :>
                              QueryParam "max-results" Int32 :>
                                QueryParam "fields" Text :>
-                                 QueryParam "alt" Alt :>
+                                 QueryParam "alt" AltJSON :>
                                    Get '[JSON] CustomMetrics
 
 -- | Lists custom metrics to which the user has access.
@@ -73,14 +72,13 @@ data ManagementCustomMetricsList' = ManagementCustomMetricsList'
     { _mcmlQuotaUser     :: !(Maybe Text)
     , _mcmlPrettyPrint   :: !Bool
     , _mcmlWebPropertyId :: !Text
-    , _mcmlUserIp        :: !(Maybe Text)
+    , _mcmlUserIP        :: !(Maybe Text)
     , _mcmlAccountId     :: !Text
-    , _mcmlKey           :: !(Maybe Text)
-    , _mcmlOauthToken    :: !(Maybe Text)
+    , _mcmlKey           :: !(Maybe Key)
+    , _mcmlOAuthToken    :: !(Maybe OAuthToken)
     , _mcmlStartIndex    :: !(Maybe Int32)
     , _mcmlMaxResults    :: !(Maybe Int32)
     , _mcmlFields        :: !(Maybe Text)
-    , _mcmlAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementCustomMetricsList'' with the minimum fields required to make a request.
@@ -93,21 +91,19 @@ data ManagementCustomMetricsList' = ManagementCustomMetricsList'
 --
 -- * 'mcmlWebPropertyId'
 --
--- * 'mcmlUserIp'
+-- * 'mcmlUserIP'
 --
 -- * 'mcmlAccountId'
 --
 -- * 'mcmlKey'
 --
--- * 'mcmlOauthToken'
+-- * 'mcmlOAuthToken'
 --
 -- * 'mcmlStartIndex'
 --
 -- * 'mcmlMaxResults'
 --
 -- * 'mcmlFields'
---
--- * 'mcmlAlt'
 managementCustomMetricsList'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'accountId'
@@ -117,14 +113,13 @@ managementCustomMetricsList' pMcmlWebPropertyId_ pMcmlAccountId_ =
     { _mcmlQuotaUser = Nothing
     , _mcmlPrettyPrint = False
     , _mcmlWebPropertyId = pMcmlWebPropertyId_
-    , _mcmlUserIp = Nothing
+    , _mcmlUserIP = Nothing
     , _mcmlAccountId = pMcmlAccountId_
     , _mcmlKey = Nothing
-    , _mcmlOauthToken = Nothing
+    , _mcmlOAuthToken = Nothing
     , _mcmlStartIndex = Nothing
     , _mcmlMaxResults = Nothing
     , _mcmlFields = Nothing
-    , _mcmlAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -149,9 +144,9 @@ mcmlWebPropertyId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mcmlUserIp :: Lens' ManagementCustomMetricsList' (Maybe Text)
-mcmlUserIp
-  = lens _mcmlUserIp (\ s a -> s{_mcmlUserIp = a})
+mcmlUserIP :: Lens' ManagementCustomMetricsList' (Maybe Text)
+mcmlUserIP
+  = lens _mcmlUserIP (\ s a -> s{_mcmlUserIP = a})
 
 -- | Account ID for the custom metrics to retrieve.
 mcmlAccountId :: Lens' ManagementCustomMetricsList' Text
@@ -162,14 +157,14 @@ mcmlAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mcmlKey :: Lens' ManagementCustomMetricsList' (Maybe Text)
+mcmlKey :: Lens' ManagementCustomMetricsList' (Maybe Key)
 mcmlKey = lens _mcmlKey (\ s a -> s{_mcmlKey = a})
 
 -- | OAuth 2.0 token for the current user.
-mcmlOauthToken :: Lens' ManagementCustomMetricsList' (Maybe Text)
-mcmlOauthToken
-  = lens _mcmlOauthToken
-      (\ s a -> s{_mcmlOauthToken = a})
+mcmlOAuthToken :: Lens' ManagementCustomMetricsList' (Maybe OAuthToken)
+mcmlOAuthToken
+  = lens _mcmlOAuthToken
+      (\ s a -> s{_mcmlOAuthToken = a})
 
 -- | An index of the first entity to retrieve. Use this parameter as a
 -- pagination mechanism along with the max-results parameter.
@@ -189,9 +184,10 @@ mcmlFields :: Lens' ManagementCustomMetricsList' (Maybe Text)
 mcmlFields
   = lens _mcmlFields (\ s a -> s{_mcmlFields = a})
 
--- | Data format for the response.
-mcmlAlt :: Lens' ManagementCustomMetricsList' Alt
-mcmlAlt = lens _mcmlAlt (\ s a -> s{_mcmlAlt = a})
+instance GoogleAuth ManagementCustomMetricsList'
+         where
+        authKey = mcmlKey . _Just
+        authToken = mcmlOAuthToken . _Just
 
 instance GoogleRequest ManagementCustomMetricsList'
          where
@@ -200,14 +196,14 @@ instance GoogleRequest ManagementCustomMetricsList'
         requestWithRoute r u ManagementCustomMetricsList'{..}
           = go _mcmlQuotaUser (Just _mcmlPrettyPrint)
               _mcmlWebPropertyId
-              _mcmlUserIp
+              _mcmlUserIP
               _mcmlAccountId
               _mcmlKey
-              _mcmlOauthToken
+              _mcmlOAuthToken
               _mcmlStartIndex
               _mcmlMaxResults
               _mcmlFields
-              (Just _mcmlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ManagementCustomMetricsListResource)

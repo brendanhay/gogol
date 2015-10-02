@@ -130,7 +130,7 @@ instance ToJSON Browser where
 -- /See:/ 'campaignsListResponse' smart constructor.
 data CampaignsListResponse = CampaignsListResponse
     { _clrNextPageToken :: !(Maybe Text)
-    , _clrCampaigns     :: !(Maybe [Maybe Campaign])
+    , _clrCampaigns     :: !(Maybe [Campaign])
     , _clrKind          :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -159,7 +159,7 @@ clrNextPageToken
       (\ s a -> s{_clrNextPageToken = a})
 
 -- | Campaign collection.
-clrCampaigns :: Lens' CampaignsListResponse [Maybe Campaign]
+clrCampaigns :: Lens' CampaignsListResponse [Campaign]
 clrCampaigns
   = lens _clrCampaigns (\ s a -> s{_clrCampaigns = a})
       . _Default
@@ -195,7 +195,7 @@ instance ToJSON CampaignsListResponse where
 data OptimizationActivity = OptimizationActivity
     { _oaWeight                             :: !(Maybe Int32)
     , _oaFloodlightActivityId               :: !(Maybe Int64)
-    , _oaFloodlightActivityIdDimensionValue :: !(Maybe (Maybe DimensionValue))
+    , _oaFloodlightActivityIdDimensionValue :: !(Maybe DimensionValue)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OptimizationActivity' with the minimum fields required to make a request.
@@ -231,7 +231,7 @@ oaFloodlightActivityId
 
 -- | Dimension value for the ID of the floodlight activity. This is a
 -- read-only, auto-generated field.
-oaFloodlightActivityIdDimensionValue :: Lens' OptimizationActivity (Maybe (Maybe DimensionValue))
+oaFloodlightActivityIdDimensionValue :: Lens' OptimizationActivity (Maybe DimensionValue)
 oaFloodlightActivityIdDimensionValue
   = lens _oaFloodlightActivityIdDimensionValue
       (\ s a ->
@@ -262,7 +262,7 @@ data FileList = FileList
     { _flEtag          :: !(Maybe Text)
     , _flNextPageToken :: !(Maybe Text)
     , _flKind          :: !Text
-    , _flItems         :: !(Maybe [Maybe File])
+    , _flItems         :: !(Maybe [File])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FileList' with the minimum fields required to make a request.
@@ -304,7 +304,7 @@ flKind :: Lens' FileList Text
 flKind = lens _flKind (\ s a -> s{_flKind = a})
 
 -- | The files returned in this response.
-flItems :: Lens' FileList [Maybe File]
+flItems :: Lens' FileList [File]
 flItems
   = lens _flItems (\ s a -> s{_flItems = a}) . _Default
       . _Coerce
@@ -390,7 +390,7 @@ instance ToJSON ClickTag where
 --
 -- /See:/ 'listPopulationClause' smart constructor.
 newtype ListPopulationClause = ListPopulationClause
-    { _lpcTerms :: Maybe [Maybe ListPopulationTerm]
+    { _lpcTerms :: Maybe [ListPopulationTerm]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListPopulationClause' with the minimum fields required to make a request.
@@ -407,7 +407,7 @@ listPopulationClause =
 
 -- | Terms of this list population clause. Each clause is made up of list
 -- population terms representing constraints and are joined by ORs.
-lpcTerms :: Lens' ListPopulationClause [Maybe ListPopulationTerm]
+lpcTerms :: Lens' ListPopulationClause [ListPopulationTerm]
 lpcTerms
   = lens _lpcTerms (\ s a -> s{_lpcTerms = a}) .
       _Default
@@ -427,12 +427,12 @@ instance ToJSON ListPopulationClause where
 --
 -- /See:/ 'geoTargeting' smart constructor.
 data GeoTargeting = GeoTargeting
-    { _gtRegions          :: !(Maybe [Maybe Region])
-    , _gtCountries        :: !(Maybe [Maybe Country])
-    , _gtCities           :: !(Maybe [Maybe City])
-    , _gtMetros           :: !(Maybe [Maybe Metro])
+    { _gtRegions          :: !(Maybe [Region])
+    , _gtCountries        :: !(Maybe [Country])
+    , _gtCities           :: !(Maybe [City])
+    , _gtMetros           :: !(Maybe [Metro])
     , _gtExcludeCountries :: !(Maybe Bool)
-    , _gtPostalCodes      :: !(Maybe [Maybe PostalCode])
+    , _gtPostalCodes      :: !(Maybe [PostalCode])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GeoTargeting' with the minimum fields required to make a request.
@@ -466,7 +466,7 @@ geoTargeting =
 -- other fields are populated automatically when the ad is inserted or
 -- updated. If targeting a region, do not target or exclude the country of
 -- the region.
-gtRegions :: Lens' GeoTargeting [Maybe Region]
+gtRegions :: Lens' GeoTargeting [Region]
 gtRegions
   = lens _gtRegions (\ s a -> s{_gtRegions = a}) .
       _Default
@@ -477,7 +477,7 @@ gtRegions
 -- required. The other fields are populated automatically when the ad is
 -- inserted or updated. If targeting or excluding a country, do not target
 -- regions, cities, metros, or postal codes in the same country.
-gtCountries :: Lens' GeoTargeting [Maybe Country]
+gtCountries :: Lens' GeoTargeting [Country]
 gtCountries
   = lens _gtCountries (\ s a -> s{_gtCountries = a}) .
       _Default
@@ -487,7 +487,7 @@ gtCountries
 -- fields are populated automatically when the ad is inserted or updated.
 -- If targeting a city, do not target or exclude the country of the city,
 -- and do not target the metro or region of the city.
-gtCities :: Lens' GeoTargeting [Maybe City]
+gtCities :: Lens' GeoTargeting [City]
 gtCities
   = lens _gtCities (\ s a -> s{_gtCities = a}) .
       _Default
@@ -496,7 +496,7 @@ gtCities
 -- | Metros to be targeted. For each metro only dmaId is required. The other
 -- fields are populated automatically when the ad is inserted or updated.
 -- If targeting a metro, do not target or exclude the country of the metro.
-gtMetros :: Lens' GeoTargeting [Maybe Metro]
+gtMetros :: Lens' GeoTargeting [Metro]
 gtMetros
   = lens _gtMetros (\ s a -> s{_gtMetros = a}) .
       _Default
@@ -514,7 +514,7 @@ gtExcludeCountries
 -- The other fields are populated automatically when the ad is inserted or
 -- updated. If targeting a postal code, do not target or exclude the
 -- country of the postal code.
-gtPostalCodes :: Lens' GeoTargeting [Maybe PostalCode]
+gtPostalCodes :: Lens' GeoTargeting [PostalCode]
 gtPostalCodes
   = lens _gtPostalCodes
       (\ s a -> s{_gtPostalCodes = a})
@@ -550,9 +550,9 @@ instance ToJSON GeoTargeting where
 data CreativeCustomEvent = CreativeCustomEvent
     { _cceAdvertiserCustomEventType :: !(Maybe CreativeCustomEventAdvertiserCustomEventType)
     , _cceAdvertiserCustomEventName :: !(Maybe Text)
-    , _cceExitUrl                   :: !(Maybe Text)
+    , _cceExitURL                   :: !(Maybe Text)
     , _cceTargetType                :: !(Maybe CreativeCustomEventTargetType)
-    , _ccePopupWindowProperties     :: !(Maybe (Maybe PopupWindowProperties))
+    , _ccePopupWindowProperties     :: !(Maybe PopupWindowProperties)
     , _cceVideoReportingId          :: !(Maybe Text)
     , _cceId                        :: !(Maybe Int64)
     , _cceArtworkLabel              :: !(Maybe Text)
@@ -567,7 +567,7 @@ data CreativeCustomEvent = CreativeCustomEvent
 --
 -- * 'cceAdvertiserCustomEventName'
 --
--- * 'cceExitUrl'
+-- * 'cceExitURL'
 --
 -- * 'cceTargetType'
 --
@@ -586,7 +586,7 @@ creativeCustomEvent =
     CreativeCustomEvent
     { _cceAdvertiserCustomEventType = Nothing
     , _cceAdvertiserCustomEventName = Nothing
-    , _cceExitUrl = Nothing
+    , _cceExitURL = Nothing
     , _cceTargetType = Nothing
     , _ccePopupWindowProperties = Nothing
     , _cceVideoReportingId = Nothing
@@ -608,9 +608,9 @@ cceAdvertiserCustomEventName
       (\ s a -> s{_cceAdvertiserCustomEventName = a})
 
 -- | Exit URL of the event. This field is used only for exit events.
-cceExitUrl :: Lens' CreativeCustomEvent (Maybe Text)
-cceExitUrl
-  = lens _cceExitUrl (\ s a -> s{_cceExitUrl = a})
+cceExitURL :: Lens' CreativeCustomEvent (Maybe Text)
+cceExitURL
+  = lens _cceExitURL (\ s a -> s{_cceExitURL = a})
 
 -- | Target type used by the event.
 cceTargetType :: Lens' CreativeCustomEvent (Maybe CreativeCustomEventTargetType)
@@ -620,7 +620,7 @@ cceTargetType
 
 -- | Properties for rich media popup windows. This field is used only for
 -- exit events.
-ccePopupWindowProperties :: Lens' CreativeCustomEvent (Maybe (Maybe PopupWindowProperties))
+ccePopupWindowProperties :: Lens' CreativeCustomEvent (Maybe PopupWindowProperties)
 ccePopupWindowProperties
   = lens _ccePopupWindowProperties
       (\ s a -> s{_ccePopupWindowProperties = a})
@@ -674,7 +674,7 @@ instance ToJSON CreativeCustomEvent where
                     _cceAdvertiserCustomEventType,
                   ("advertiserCustomEventName" .=) <$>
                     _cceAdvertiserCustomEventName,
-                  ("exitUrl" .=) <$> _cceExitUrl,
+                  ("exitUrl" .=) <$> _cceExitURL,
                   ("targetType" .=) <$> _cceTargetType,
                   ("popupWindowProperties" .=) <$>
                     _ccePopupWindowProperties,
@@ -688,12 +688,12 @@ instance ToJSON CreativeCustomEvent where
 --
 -- /See:/ 'reachReportCompatibleFields' smart constructor.
 data ReachReportCompatibleFields = ReachReportCompatibleFields
-    { _rrcfMetrics                 :: !(Maybe [Maybe Metric])
-    , _rrcfReachByFrequencyMetrics :: !(Maybe [Maybe Metric])
+    { _rrcfMetrics                 :: !(Maybe [Metric])
+    , _rrcfReachByFrequencyMetrics :: !(Maybe [Metric])
     , _rrcfKind                    :: !Text
-    , _rrcfDimensionFilters        :: !(Maybe [Maybe Dimension])
-    , _rrcfPivotedActivityMetrics  :: !(Maybe [Maybe Metric])
-    , _rrcfDimensions              :: !(Maybe [Maybe Dimension])
+    , _rrcfDimensionFilters        :: !(Maybe [Dimension])
+    , _rrcfPivotedActivityMetrics  :: !(Maybe [Metric])
+    , _rrcfDimensions              :: !(Maybe [Dimension])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReachReportCompatibleFields' with the minimum fields required to make a request.
@@ -725,7 +725,7 @@ reachReportCompatibleFields =
 
 -- | Metrics which are compatible to be selected in the \"metricNames\"
 -- section of the report.
-rrcfMetrics :: Lens' ReachReportCompatibleFields [Maybe Metric]
+rrcfMetrics :: Lens' ReachReportCompatibleFields [Metric]
 rrcfMetrics
   = lens _rrcfMetrics (\ s a -> s{_rrcfMetrics = a}) .
       _Default
@@ -733,7 +733,7 @@ rrcfMetrics
 
 -- | Metrics which are compatible to be selected in the
 -- \"reachByFrequencyMetricNames\" section of the report.
-rrcfReachByFrequencyMetrics :: Lens' ReachReportCompatibleFields [Maybe Metric]
+rrcfReachByFrequencyMetrics :: Lens' ReachReportCompatibleFields [Metric]
 rrcfReachByFrequencyMetrics
   = lens _rrcfReachByFrequencyMetrics
       (\ s a -> s{_rrcfReachByFrequencyMetrics = a})
@@ -747,7 +747,7 @@ rrcfKind = lens _rrcfKind (\ s a -> s{_rrcfKind = a})
 
 -- | Dimensions which are compatible to be selected in the
 -- \"dimensionFilters\" section of the report.
-rrcfDimensionFilters :: Lens' ReachReportCompatibleFields [Maybe Dimension]
+rrcfDimensionFilters :: Lens' ReachReportCompatibleFields [Dimension]
 rrcfDimensionFilters
   = lens _rrcfDimensionFilters
       (\ s a -> s{_rrcfDimensionFilters = a})
@@ -756,7 +756,7 @@ rrcfDimensionFilters
 
 -- | Metrics which are compatible to be selected as activity metrics to pivot
 -- on in the \"activities\" section of the report.
-rrcfPivotedActivityMetrics :: Lens' ReachReportCompatibleFields [Maybe Metric]
+rrcfPivotedActivityMetrics :: Lens' ReachReportCompatibleFields [Metric]
 rrcfPivotedActivityMetrics
   = lens _rrcfPivotedActivityMetrics
       (\ s a -> s{_rrcfPivotedActivityMetrics = a})
@@ -765,7 +765,7 @@ rrcfPivotedActivityMetrics
 
 -- | Dimensions which are compatible to be selected in the \"dimensions\"
 -- section of the report.
-rrcfDimensions :: Lens' ReachReportCompatibleFields [Maybe Dimension]
+rrcfDimensions :: Lens' ReachReportCompatibleFields [Dimension]
 rrcfDimensions
   = lens _rrcfDimensions
       (\ s a -> s{_rrcfDimensions = a})
@@ -856,7 +856,7 @@ instance ToJSON CreativeGroupAssignment where
 data AdsListResponse = AdsListResponse
     { _alrNextPageToken :: !(Maybe Text)
     , _alrKind          :: !Text
-    , _alrAds           :: !(Maybe [Maybe Ad])
+    , _alrAds           :: !(Maybe [Ad])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdsListResponse' with the minimum fields required to make a request.
@@ -889,7 +889,7 @@ alrKind :: Lens' AdsListResponse Text
 alrKind = lens _alrKind (\ s a -> s{_alrKind = a})
 
 -- | Ad collection.
-alrAds :: Lens' AdsListResponse [Maybe Ad]
+alrAds :: Lens' AdsListResponse [Ad]
 alrAds
   = lens _alrAds (\ s a -> s{_alrAds = a}) . _Default .
       _Coerce
@@ -1044,78 +1044,78 @@ instance ToJSON ListPopulationTerm where
 
 -- | Subaccount List Response
 --
--- /See:/ 'subaccountsListResponse' smart constructor.
-data SubaccountsListResponse = SubaccountsListResponse
-    { _slrNextPageToken :: !(Maybe Text)
-    , _slrKind          :: !Text
-    , _slrSubaccounts   :: !(Maybe [Maybe Subaccount])
+-- /See:/ 'subAccountsListResponse' smart constructor.
+data SubAccountsListResponse = SubAccountsListResponse
+    { _salrNextPageToken :: !(Maybe Text)
+    , _salrKind          :: !Text
+    , _salrSubAccounts   :: !(Maybe [SubAccount])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'SubaccountsListResponse' with the minimum fields required to make a request.
+-- | Creates a value of 'SubAccountsListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'slrNextPageToken'
+-- * 'salrNextPageToken'
 --
--- * 'slrKind'
+-- * 'salrKind'
 --
--- * 'slrSubaccounts'
-subaccountsListResponse
-    :: SubaccountsListResponse
-subaccountsListResponse =
-    SubaccountsListResponse
-    { _slrNextPageToken = Nothing
-    , _slrKind = "dfareporting#subaccountsListResponse"
-    , _slrSubaccounts = Nothing
+-- * 'salrSubAccounts'
+subAccountsListResponse
+    :: SubAccountsListResponse
+subAccountsListResponse =
+    SubAccountsListResponse
+    { _salrNextPageToken = Nothing
+    , _salrKind = "dfareporting#subaccountsListResponse"
+    , _salrSubAccounts = Nothing
     }
 
 -- | Pagination token to be used for the next list operation.
-slrNextPageToken :: Lens' SubaccountsListResponse (Maybe Text)
-slrNextPageToken
-  = lens _slrNextPageToken
-      (\ s a -> s{_slrNextPageToken = a})
+salrNextPageToken :: Lens' SubAccountsListResponse (Maybe Text)
+salrNextPageToken
+  = lens _salrNextPageToken
+      (\ s a -> s{_salrNextPageToken = a})
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#subaccountsListResponse\".
-slrKind :: Lens' SubaccountsListResponse Text
-slrKind = lens _slrKind (\ s a -> s{_slrKind = a})
+salrKind :: Lens' SubAccountsListResponse Text
+salrKind = lens _salrKind (\ s a -> s{_salrKind = a})
 
 -- | Subaccount collection.
-slrSubaccounts :: Lens' SubaccountsListResponse [Maybe Subaccount]
-slrSubaccounts
-  = lens _slrSubaccounts
-      (\ s a -> s{_slrSubaccounts = a})
+salrSubAccounts :: Lens' SubAccountsListResponse [SubAccount]
+salrSubAccounts
+  = lens _salrSubAccounts
+      (\ s a -> s{_salrSubAccounts = a})
       . _Default
       . _Coerce
 
-instance FromJSON SubaccountsListResponse where
+instance FromJSON SubAccountsListResponse where
         parseJSON
-          = withObject "SubaccountsListResponse"
+          = withObject "SubAccountsListResponse"
               (\ o ->
-                 SubaccountsListResponse <$>
+                 SubAccountsListResponse <$>
                    (o .:? "nextPageToken") <*>
                      (o .:? "kind" .!=
                         "dfareporting#subaccountsListResponse")
                      <*> (o .:? "subaccounts" .!= mempty))
 
-instance ToJSON SubaccountsListResponse where
-        toJSON SubaccountsListResponse{..}
+instance ToJSON SubAccountsListResponse where
+        toJSON SubAccountsListResponse{..}
           = object
               (catMaybes
-                 [("nextPageToken" .=) <$> _slrNextPageToken,
-                  Just ("kind" .= _slrKind),
-                  ("subaccounts" .=) <$> _slrSubaccounts])
+                 [("nextPageToken" .=) <$> _salrNextPageToken,
+                  Just ("kind" .= _salrKind),
+                  ("subaccounts" .=) <$> _salrSubAccounts])
 
 -- | Technology Targeting.
 --
 -- /See:/ 'technologyTargeting' smart constructor.
 data TechnologyTargeting = TechnologyTargeting
-    { _ttMobileCarriers          :: !(Maybe [Maybe MobileCarrier])
-    , _ttOperatingSystemVersions :: !(Maybe [Maybe OperatingSystemVersion])
-    , _ttPlatformTypes           :: !(Maybe [Maybe PlatformType])
-    , _ttBrowsers                :: !(Maybe [Maybe Browser])
-    , _ttConnectionTypes         :: !(Maybe [Maybe ConnectionType])
-    , _ttOperatingSystems        :: !(Maybe [Maybe OperatingSystem])
+    { _ttMobileCarriers          :: !(Maybe [MobileCarrier])
+    , _ttOperatingSystemVersions :: !(Maybe [OperatingSystemVersion])
+    , _ttPlatformTypes           :: !(Maybe [PlatformType])
+    , _ttBrowsers                :: !(Maybe [Browser])
+    , _ttConnectionTypes         :: !(Maybe [ConnectionType])
+    , _ttOperatingSystems        :: !(Maybe [OperatingSystem])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TechnologyTargeting' with the minimum fields required to make a request.
@@ -1149,7 +1149,7 @@ technologyTargeting =
 -- required, and the other fields are populated automatically when the ad
 -- is inserted or updated. If targeting a mobile carrier, do not set
 -- targeting for any zip codes.
-ttMobileCarriers :: Lens' TechnologyTargeting [Maybe MobileCarrier]
+ttMobileCarriers :: Lens' TechnologyTargeting [MobileCarrier]
 ttMobileCarriers
   = lens _ttMobileCarriers
       (\ s a -> s{_ttMobileCarriers = a})
@@ -1162,7 +1162,7 @@ ttMobileCarriers
 -- inserted or updated. If targeting an operating system version, do not
 -- set targeting for the corresponding operating system in
 -- operatingSystems.
-ttOperatingSystemVersions :: Lens' TechnologyTargeting [Maybe OperatingSystemVersion]
+ttOperatingSystemVersions :: Lens' TechnologyTargeting [OperatingSystemVersion]
 ttOperatingSystemVersions
   = lens _ttOperatingSystemVersions
       (\ s a -> s{_ttOperatingSystemVersions = a})
@@ -1172,7 +1172,7 @@ ttOperatingSystemVersions
 -- | Platform types that this ad targets. For example, desktop, mobile, or
 -- tablet. For each platform type, only id is required, and the other
 -- fields are populated automatically when the ad is inserted or updated.
-ttPlatformTypes :: Lens' TechnologyTargeting [Maybe PlatformType]
+ttPlatformTypes :: Lens' TechnologyTargeting [PlatformType]
 ttPlatformTypes
   = lens _ttPlatformTypes
       (\ s a -> s{_ttPlatformTypes = a})
@@ -1183,7 +1183,7 @@ ttPlatformTypes
 -- browserVersionId or dartId along with the version numbers. If both are
 -- specified, only browserVersionId will be used.The other fields are
 -- populated automatically when the ad is inserted or updated.
-ttBrowsers :: Lens' TechnologyTargeting [Maybe Browser]
+ttBrowsers :: Lens' TechnologyTargeting [Browser]
 ttBrowsers
   = lens _ttBrowsers (\ s a -> s{_ttBrowsers = a}) .
       _Default
@@ -1192,7 +1192,7 @@ ttBrowsers
 -- | Connection types that this ad targets. For each connection type only id
 -- is required.The other fields are populated automatically when the ad is
 -- inserted or updated.
-ttConnectionTypes :: Lens' TechnologyTargeting [Maybe ConnectionType]
+ttConnectionTypes :: Lens' TechnologyTargeting [ConnectionType]
 ttConnectionTypes
   = lens _ttConnectionTypes
       (\ s a -> s{_ttConnectionTypes = a})
@@ -1204,7 +1204,7 @@ ttConnectionTypes
 -- required. The other fields are populated automatically when the ad is
 -- inserted or updated. If targeting an operating system, do not set
 -- targeting for operating system versions for the same operating system.
-ttOperatingSystems :: Lens' TechnologyTargeting [Maybe OperatingSystem]
+ttOperatingSystems :: Lens' TechnologyTargeting [OperatingSystem]
 ttOperatingSystems
   = lens _ttOperatingSystems
       (\ s a -> s{_ttOperatingSystems = a})
@@ -1241,7 +1241,7 @@ instance ToJSON TechnologyTargeting where
 data ProjectsListResponse = ProjectsListResponse
     { _plrNextPageToken :: !(Maybe Text)
     , _plrKind          :: !Text
-    , _plrProjects      :: !(Maybe [Maybe Project])
+    , _plrProjects      :: !(Maybe [Project])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsListResponse' with the minimum fields required to make a request.
@@ -1274,7 +1274,7 @@ plrKind :: Lens' ProjectsListResponse Text
 plrKind = lens _plrKind (\ s a -> s{_plrKind = a})
 
 -- | Project collection.
-plrProjects :: Lens' ProjectsListResponse [Maybe Project]
+plrProjects :: Lens' ProjectsListResponse [Project]
 plrProjects
   = lens _plrProjects (\ s a -> s{_plrProjects = a}) .
       _Default
@@ -1303,12 +1303,12 @@ instance ToJSON ProjectsListResponse where
 -- /See:/ 'directorySiteSettings' smart constructor.
 data DirectorySiteSettings = DirectorySiteSettings
     { _dssInterstitialPlacementAccepted  :: !(Maybe Bool)
-    , _dssDfpSettings                    :: !(Maybe (Maybe DfpSettings))
+    , _dssDfpSettings                    :: !(Maybe DfpSettings)
     , _dssVerificationTagOptOut          :: !(Maybe Bool)
     , _dssActiveViewOptOut               :: !(Maybe Bool)
     , _dssVideoActiveViewOptOut          :: !(Maybe Bool)
     , _dssInstreamVideoPlacementAccepted :: !(Maybe Bool)
-    , _dssNielsenOcrOptOut               :: !(Maybe Bool)
+    , _dssNielsenOCROptOut               :: !(Maybe Bool)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DirectorySiteSettings' with the minimum fields required to make a request.
@@ -1327,7 +1327,7 @@ data DirectorySiteSettings = DirectorySiteSettings
 --
 -- * 'dssInstreamVideoPlacementAccepted'
 --
--- * 'dssNielsenOcrOptOut'
+-- * 'dssNielsenOCROptOut'
 directorySiteSettings
     :: DirectorySiteSettings
 directorySiteSettings =
@@ -1338,7 +1338,7 @@ directorySiteSettings =
     , _dssActiveViewOptOut = Nothing
     , _dssVideoActiveViewOptOut = Nothing
     , _dssInstreamVideoPlacementAccepted = Nothing
-    , _dssNielsenOcrOptOut = Nothing
+    , _dssNielsenOCROptOut = Nothing
     }
 
 -- | Whether this site accepts interstitial ads.
@@ -1348,7 +1348,7 @@ dssInterstitialPlacementAccepted
       (\ s a -> s{_dssInterstitialPlacementAccepted = a})
 
 -- | Directory site DFP settings.
-dssDfpSettings :: Lens' DirectorySiteSettings (Maybe (Maybe DfpSettings))
+dssDfpSettings :: Lens' DirectorySiteSettings (Maybe DfpSettings)
 dssDfpSettings
   = lens _dssDfpSettings
       (\ s a -> s{_dssDfpSettings = a})
@@ -1380,10 +1380,10 @@ dssInstreamVideoPlacementAccepted
       (\ s a -> s{_dssInstreamVideoPlacementAccepted = a})
 
 -- | Whether this directory site has disabled Nielsen OCR reach ratings.
-dssNielsenOcrOptOut :: Lens' DirectorySiteSettings (Maybe Bool)
-dssNielsenOcrOptOut
-  = lens _dssNielsenOcrOptOut
-      (\ s a -> s{_dssNielsenOcrOptOut = a})
+dssNielsenOCROptOut :: Lens' DirectorySiteSettings (Maybe Bool)
+dssNielsenOCROptOut
+  = lens _dssNielsenOCROptOut
+      (\ s a -> s{_dssNielsenOCROptOut = a})
 
 instance FromJSON DirectorySiteSettings where
         parseJSON
@@ -1412,7 +1412,7 @@ instance ToJSON DirectorySiteSettings where
                     _dssVideoActiveViewOptOut,
                   ("instream_video_placement_accepted" .=) <$>
                     _dssInstreamVideoPlacementAccepted,
-                  ("nielsenOcrOptOut" .=) <$> _dssNielsenOcrOptOut])
+                  ("nielsenOcrOptOut" .=) <$> _dssNielsenOCROptOut])
 
 -- | Dynamic and Image Tag Settings.
 --
@@ -1470,7 +1470,7 @@ instance ToJSON TagSettings where
 data InventoryItem = InventoryItem
     { _iiPlacementStrategyId       :: !(Maybe Int64)
     , _iiEstimatedClickThroughRate :: !(Maybe Int64)
-    , _iiPricing                   :: !(Maybe (Maybe Pricing))
+    , _iiPricing                   :: !(Maybe Pricing)
     , _iiKind                      :: !Text
     , _iiAdvertiserId              :: !(Maybe Int64)
     , _iiRfpId                     :: !(Maybe Int64)
@@ -1478,13 +1478,13 @@ data InventoryItem = InventoryItem
     , _iiInPlan                    :: !(Maybe Bool)
     , _iiAccountId                 :: !(Maybe Int64)
     , _iiName                      :: !(Maybe Text)
-    , _iiAdSlots                   :: !(Maybe [Maybe AdSlot])
+    , _iiAdSlots                   :: !(Maybe [AdSlot])
     , _iiNegotiationChannelId      :: !(Maybe Int64)
-    , _iiLastModifiedInfo          :: !(Maybe (Maybe LastModifiedInfo))
+    , _iiLastModifiedInfo          :: !(Maybe LastModifiedInfo)
     , _iiId                        :: !(Maybe Int64)
     , _iiEstimatedConversionRate   :: !(Maybe Int64)
     , _iiProjectId                 :: !(Maybe Int64)
-    , _iiSubaccountId              :: !(Maybe Int64)
+    , _iiSubAccountId              :: !(Maybe Int64)
     , _iiOrderId                   :: !(Maybe Int64)
     , _iiSiteId                    :: !(Maybe Int64)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -1525,7 +1525,7 @@ data InventoryItem = InventoryItem
 --
 -- * 'iiProjectId'
 --
--- * 'iiSubaccountId'
+-- * 'iiSubAccountId'
 --
 -- * 'iiOrderId'
 --
@@ -1550,7 +1550,7 @@ inventoryItem =
     , _iiId = Nothing
     , _iiEstimatedConversionRate = Nothing
     , _iiProjectId = Nothing
-    , _iiSubaccountId = Nothing
+    , _iiSubAccountId = Nothing
     , _iiOrderId = Nothing
     , _iiSiteId = Nothing
     }
@@ -1568,7 +1568,7 @@ iiEstimatedClickThroughRate
       (\ s a -> s{_iiEstimatedClickThroughRate = a})
 
 -- | Pricing of this inventory item.
-iiPricing :: Lens' InventoryItem (Maybe (Maybe Pricing))
+iiPricing :: Lens' InventoryItem (Maybe Pricing)
 iiPricing
   = lens _iiPricing (\ s a -> s{_iiPricing = a})
 
@@ -1612,7 +1612,7 @@ iiName = lens _iiName (\ s a -> s{_iiName = a})
 -- standalone placement, there will be exactly one ad slot. If this
 -- inventory item represents a placement group, there will be more than one
 -- ad slot, each representing one child placement in that placement group.
-iiAdSlots :: Lens' InventoryItem [Maybe AdSlot]
+iiAdSlots :: Lens' InventoryItem [AdSlot]
 iiAdSlots
   = lens _iiAdSlots (\ s a -> s{_iiAdSlots = a}) .
       _Default
@@ -1625,7 +1625,7 @@ iiNegotiationChannelId
       (\ s a -> s{_iiNegotiationChannelId = a})
 
 -- | Information about the most recent modification of this inventory item.
-iiLastModifiedInfo :: Lens' InventoryItem (Maybe (Maybe LastModifiedInfo))
+iiLastModifiedInfo :: Lens' InventoryItem (Maybe LastModifiedInfo)
 iiLastModifiedInfo
   = lens _iiLastModifiedInfo
       (\ s a -> s{_iiLastModifiedInfo = a})
@@ -1646,10 +1646,10 @@ iiProjectId
   = lens _iiProjectId (\ s a -> s{_iiProjectId = a})
 
 -- | Subaccount ID of this inventory item.
-iiSubaccountId :: Lens' InventoryItem (Maybe Int64)
-iiSubaccountId
-  = lens _iiSubaccountId
-      (\ s a -> s{_iiSubaccountId = a})
+iiSubAccountId :: Lens' InventoryItem (Maybe Int64)
+iiSubAccountId
+  = lens _iiSubAccountId
+      (\ s a -> s{_iiSubAccountId = a})
 
 -- | Order ID of this inventory item.
 iiOrderId :: Lens' InventoryItem (Maybe Int64)
@@ -1709,7 +1709,7 @@ instance ToJSON InventoryItem where
                   ("estimatedConversionRate" .=) <$>
                     _iiEstimatedConversionRate,
                   ("projectId" .=) <$> _iiProjectId,
-                  ("subaccountId" .=) <$> _iiSubaccountId,
+                  ("subaccountId" .=) <$> _iiSubAccountId,
                   ("orderId" .=) <$> _iiOrderId,
                   ("siteId" .=) <$> _iiSiteId])
 
@@ -1719,7 +1719,7 @@ instance ToJSON InventoryItem where
 data ListPopulationRule = ListPopulationRule
     { _lprFloodlightActivityName :: !(Maybe Text)
     , _lprFloodlightActivityId   :: !(Maybe Int64)
-    , _lprListPopulationClauses  :: !(Maybe [Maybe ListPopulationClause])
+    , _lprListPopulationClauses  :: !(Maybe [ListPopulationClause])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListPopulationRule' with the minimum fields required to make a request.
@@ -1757,7 +1757,7 @@ lprFloodlightActivityId
 -- | Clauses that make up this list population rule. Clauses are joined by
 -- ANDs, and the clauses themselves are made up of list population terms
 -- which are joined by ORs.
-lprListPopulationClauses :: Lens' ListPopulationRule [Maybe ListPopulationClause]
+lprListPopulationClauses :: Lens' ListPopulationRule [ListPopulationClause]
 lprListPopulationClauses
   = lens _lprListPopulationClauses
       (\ s a -> s{_lprListPopulationClauses = a})
@@ -1789,7 +1789,7 @@ instance ToJSON ListPopulationRule where
 -- /See:/ 'creativeRotation' smart constructor.
 data CreativeRotation = CreativeRotation
     { _crWeightCalculationStrategy           :: !(Maybe CreativeRotationWeightCalculationStrategy)
-    , _crCreativeAssignments                 :: !(Maybe [Maybe CreativeAssignment])
+    , _crCreativeAssignments                 :: !(Maybe [CreativeAssignment])
     , _crCreativeOptimizationConfigurationId :: !(Maybe Int64)
     , _crType                                :: !(Maybe CreativeRotationType)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -1823,7 +1823,7 @@ crWeightCalculationStrategy
       (\ s a -> s{_crWeightCalculationStrategy = a})
 
 -- | Creative assignments in this creative rotation.
-crCreativeAssignments :: Lens' CreativeRotation [Maybe CreativeAssignment]
+crCreativeAssignments :: Lens' CreativeRotation [CreativeAssignment]
 crCreativeAssignments
   = lens _crCreativeAssignments
       (\ s a -> s{_crCreativeAssignments = a})
@@ -1871,35 +1871,36 @@ instance ToJSON CreativeRotation where
 --
 -- /See:/ 'sizesListResponse' smart constructor.
 data SizesListResponse = SizesListResponse
-    { _sKind  :: !Text
-    , _sSizes :: !(Maybe [Maybe Size])
+    { _slrKind  :: !Text
+    , _slrSizes :: !(Maybe [Size])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SizesListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sKind'
+-- * 'slrKind'
 --
--- * 'sSizes'
+-- * 'slrSizes'
 sizesListResponse
     :: SizesListResponse
 sizesListResponse =
     SizesListResponse
-    { _sKind = "dfareporting#sizesListResponse"
-    , _sSizes = Nothing
+    { _slrKind = "dfareporting#sizesListResponse"
+    , _slrSizes = Nothing
     }
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#sizesListResponse\".
-sKind :: Lens' SizesListResponse Text
-sKind = lens _sKind (\ s a -> s{_sKind = a})
+slrKind :: Lens' SizesListResponse Text
+slrKind = lens _slrKind (\ s a -> s{_slrKind = a})
 
 -- | Size collection.
-sSizes :: Lens' SizesListResponse [Maybe Size]
-sSizes
-  = lens _sSizes (\ s a -> s{_sSizes = a}) . _Default .
-      _Coerce
+slrSizes :: Lens' SizesListResponse [Size]
+slrSizes
+  = lens _slrSizes (\ s a -> s{_slrSizes = a}) .
+      _Default
+      . _Coerce
 
 instance FromJSON SizesListResponse where
         parseJSON
@@ -1913,7 +1914,8 @@ instance ToJSON SizesListResponse where
         toJSON SizesListResponse{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _sKind), ("sizes" .=) <$> _sSizes])
+                 [Just ("kind" .= _slrKind),
+                  ("sizes" .=) <$> _slrSizes])
 
 -- | DirectorySites contains properties of a website from the Site Directory.
 -- Sites need to be added to an account via the Sites resource before they
@@ -1922,17 +1924,17 @@ instance ToJSON SizesListResponse where
 -- /See:/ 'directorySite' smart constructor.
 data DirectorySite = DirectorySite
     { _dsCurrencyId             :: !(Maybe Int64)
-    , _dsSettings               :: !(Maybe (Maybe DirectorySiteSettings))
+    , _dsSettings               :: !(Maybe DirectorySiteSettings)
     , _dsInterstitialTagFormats :: !(Maybe [DirectorySiteInterstitialTagFormats])
     , _dsKind                   :: !Text
-    , _dsUrl                    :: !(Maybe Text)
-    , _dsIdDimensionValue       :: !(Maybe (Maybe DimensionValue))
+    , _dsURL                    :: !(Maybe Text)
+    , _dsIdDimensionValue       :: !(Maybe DimensionValue)
     , _dsInpageTagFormats       :: !(Maybe [DirectorySiteInpageTagFormats])
     , _dsActive                 :: !(Maybe Bool)
     , _dsName                   :: !(Maybe Text)
     , _dsId                     :: !(Maybe Int64)
     , _dsCountryId              :: !(Maybe Int64)
-    , _dsContactAssignments     :: !(Maybe [Maybe DirectorySiteContactAssignment])
+    , _dsContactAssignments     :: !(Maybe [DirectorySiteContactAssignment])
     , _dsDescription            :: !(Maybe Text)
     , _dsParentId               :: !(Maybe Int64)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -1949,7 +1951,7 @@ data DirectorySite = DirectorySite
 --
 -- * 'dsKind'
 --
--- * 'dsUrl'
+-- * 'dsURL'
 --
 -- * 'dsIdDimensionValue'
 --
@@ -1976,7 +1978,7 @@ directorySite =
     , _dsSettings = Nothing
     , _dsInterstitialTagFormats = Nothing
     , _dsKind = "dfareporting#directorySite"
-    , _dsUrl = Nothing
+    , _dsURL = Nothing
     , _dsIdDimensionValue = Nothing
     , _dsInpageTagFormats = Nothing
     , _dsActive = Nothing
@@ -2003,7 +2005,7 @@ dsCurrencyId
   = lens _dsCurrencyId (\ s a -> s{_dsCurrencyId = a})
 
 -- | Directory site settings.
-dsSettings :: Lens' DirectorySite (Maybe (Maybe DirectorySiteSettings))
+dsSettings :: Lens' DirectorySite (Maybe DirectorySiteSettings)
 dsSettings
   = lens _dsSettings (\ s a -> s{_dsSettings = a})
 
@@ -2023,12 +2025,12 @@ dsKind :: Lens' DirectorySite Text
 dsKind = lens _dsKind (\ s a -> s{_dsKind = a})
 
 -- | URL of this directory site.
-dsUrl :: Lens' DirectorySite (Maybe Text)
-dsUrl = lens _dsUrl (\ s a -> s{_dsUrl = a})
+dsURL :: Lens' DirectorySite (Maybe Text)
+dsURL = lens _dsURL (\ s a -> s{_dsURL = a})
 
 -- | Dimension value for the ID of this directory site. This is a read-only,
 -- auto-generated field.
-dsIdDimensionValue :: Lens' DirectorySite (Maybe (Maybe DimensionValue))
+dsIdDimensionValue :: Lens' DirectorySite (Maybe DimensionValue)
 dsIdDimensionValue
   = lens _dsIdDimensionValue
       (\ s a -> s{_dsIdDimensionValue = a})
@@ -2061,7 +2063,7 @@ dsCountryId
   = lens _dsCountryId (\ s a -> s{_dsCountryId = a})
 
 -- | Directory site contacts.
-dsContactAssignments :: Lens' DirectorySite [Maybe DirectorySiteContactAssignment]
+dsContactAssignments :: Lens' DirectorySite [DirectorySiteContactAssignment]
 dsContactAssignments
   = lens _dsContactAssignments
       (\ s a -> s{_dsContactAssignments = a})
@@ -2106,7 +2108,7 @@ instance ToJSON DirectorySite where
                   ("settings" .=) <$> _dsSettings,
                   ("interstitialTagFormats" .=) <$>
                     _dsInterstitialTagFormats,
-                  Just ("kind" .= _dsKind), ("url" .=) <$> _dsUrl,
+                  Just ("kind" .= _dsKind), ("url" .=) <$> _dsURL,
                   ("idDimensionValue" .=) <$> _dsIdDimensionValue,
                   ("inpageTagFormats" .=) <$> _dsInpageTagFormats,
                   ("active" .=) <$> _dsActive, ("name" .=) <$> _dsName,
@@ -2122,7 +2124,7 @@ instance ToJSON DirectorySite where
 data FloodlightActivitiesListResponse = FloodlightActivitiesListResponse
     { _falrNextPageToken        :: !(Maybe Text)
     , _falrKind                 :: !Text
-    , _falrFloodlightActivities :: !(Maybe [Maybe FloodlightActivity])
+    , _falrFloodlightActivities :: !(Maybe [FloodlightActivity])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivitiesListResponse' with the minimum fields required to make a request.
@@ -2155,7 +2157,7 @@ falrKind :: Lens' FloodlightActivitiesListResponse Text
 falrKind = lens _falrKind (\ s a -> s{_falrKind = a})
 
 -- | Floodlight activity collection.
-falrFloodlightActivities :: Lens' FloodlightActivitiesListResponse [Maybe FloodlightActivity]
+falrFloodlightActivities :: Lens' FloodlightActivitiesListResponse [FloodlightActivity]
 falrFloodlightActivities
   = lens _falrFloodlightActivities
       (\ s a -> s{_falrFloodlightActivities = a})
@@ -2188,11 +2190,11 @@ instance ToJSON FloodlightActivitiesListResponse
 --
 -- /See:/ 'crossDimensionReachReportCompatibleFields' smart constructor.
 data CrossDimensionReachReportCompatibleFields = CrossDimensionReachReportCompatibleFields
-    { _cdrrcfMetrics          :: !(Maybe [Maybe Metric])
-    , _cdrrcfBreakdown        :: !(Maybe [Maybe Dimension])
+    { _cdrrcfMetrics          :: !(Maybe [Metric])
+    , _cdrrcfBreakdown        :: !(Maybe [Dimension])
     , _cdrrcfKind             :: !Text
-    , _cdrrcfDimensionFilters :: !(Maybe [Maybe Dimension])
-    , _cdrrcfOverlapMetrics   :: !(Maybe [Maybe Metric])
+    , _cdrrcfDimensionFilters :: !(Maybe [Dimension])
+    , _cdrrcfOverlapMetrics   :: !(Maybe [Metric])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CrossDimensionReachReportCompatibleFields' with the minimum fields required to make a request.
@@ -2221,7 +2223,7 @@ crossDimensionReachReportCompatibleFields =
 
 -- | Metrics which are compatible to be selected in the \"metricNames\"
 -- section of the report.
-cdrrcfMetrics :: Lens' CrossDimensionReachReportCompatibleFields [Maybe Metric]
+cdrrcfMetrics :: Lens' CrossDimensionReachReportCompatibleFields [Metric]
 cdrrcfMetrics
   = lens _cdrrcfMetrics
       (\ s a -> s{_cdrrcfMetrics = a})
@@ -2230,7 +2232,7 @@ cdrrcfMetrics
 
 -- | Dimensions which are compatible to be selected in the \"breakdown\"
 -- section of the report.
-cdrrcfBreakdown :: Lens' CrossDimensionReachReportCompatibleFields [Maybe Dimension]
+cdrrcfBreakdown :: Lens' CrossDimensionReachReportCompatibleFields [Dimension]
 cdrrcfBreakdown
   = lens _cdrrcfBreakdown
       (\ s a -> s{_cdrrcfBreakdown = a})
@@ -2245,7 +2247,7 @@ cdrrcfKind
 
 -- | Dimensions which are compatible to be selected in the
 -- \"dimensionFilters\" section of the report.
-cdrrcfDimensionFilters :: Lens' CrossDimensionReachReportCompatibleFields [Maybe Dimension]
+cdrrcfDimensionFilters :: Lens' CrossDimensionReachReportCompatibleFields [Dimension]
 cdrrcfDimensionFilters
   = lens _cdrrcfDimensionFilters
       (\ s a -> s{_cdrrcfDimensionFilters = a})
@@ -2254,7 +2256,7 @@ cdrrcfDimensionFilters
 
 -- | Metrics which are compatible to be selected in the
 -- \"overlapMetricNames\" section of the report.
-cdrrcfOverlapMetrics :: Lens' CrossDimensionReachReportCompatibleFields [Maybe Metric]
+cdrrcfOverlapMetrics :: Lens' CrossDimensionReachReportCompatibleFields [Metric]
 cdrrcfOverlapMetrics
   = lens _cdrrcfOverlapMetrics
       (\ s a -> s{_cdrrcfOverlapMetrics = a})
@@ -2376,7 +2378,7 @@ instance ToJSON FsCommand where
 data CreativeOptimizationConfiguration = CreativeOptimizationConfiguration
     { _cocOptimizationModel     :: !(Maybe CreativeOptimizationConfigurationOptimizationModel)
     , _cocName                  :: !(Maybe Text)
-    , _cocOptimizationActivitys :: !(Maybe [Maybe OptimizationActivity])
+    , _cocOptimizationActivitys :: !(Maybe [OptimizationActivity])
     , _cocId                    :: !(Maybe Int64)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -2413,7 +2415,7 @@ cocName :: Lens' CreativeOptimizationConfiguration (Maybe Text)
 cocName = lens _cocName (\ s a -> s{_cocName = a})
 
 -- | List of optimization activities associated with this configuration.
-cocOptimizationActivitys :: Lens' CreativeOptimizationConfiguration [Maybe OptimizationActivity]
+cocOptimizationActivitys :: Lens' CreativeOptimizationConfiguration [OptimizationActivity]
 cocOptimizationActivitys
   = lens _cocOptimizationActivitys
       (\ s a -> s{_cocOptimizationActivitys = a})
@@ -2505,9 +2507,9 @@ instance ToJSON FloodlightActivityDynamicTag where
 -- /See:/ 'placementAssignment' smart constructor.
 data PlacementAssignment = PlacementAssignment
     { _paPlacementId               :: !(Maybe Int64)
-    , _paPlacementIdDimensionValue :: !(Maybe (Maybe DimensionValue))
+    , _paPlacementIdDimensionValue :: !(Maybe DimensionValue)
     , _paActive                    :: !(Maybe Bool)
-    , _paSslRequired               :: !(Maybe Bool)
+    , _paSSLRequired               :: !(Maybe Bool)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementAssignment' with the minimum fields required to make a request.
@@ -2520,7 +2522,7 @@ data PlacementAssignment = PlacementAssignment
 --
 -- * 'paActive'
 --
--- * 'paSslRequired'
+-- * 'paSSLRequired'
 placementAssignment
     :: PlacementAssignment
 placementAssignment =
@@ -2528,7 +2530,7 @@ placementAssignment =
     { _paPlacementId = Nothing
     , _paPlacementIdDimensionValue = Nothing
     , _paActive = Nothing
-    , _paSslRequired = Nothing
+    , _paSSLRequired = Nothing
     }
 
 -- | ID of the placement to be assigned. This is a required field.
@@ -2539,7 +2541,7 @@ paPlacementId
 
 -- | Dimension value for the ID of the placement. This is a read-only,
 -- auto-generated field.
-paPlacementIdDimensionValue :: Lens' PlacementAssignment (Maybe (Maybe DimensionValue))
+paPlacementIdDimensionValue :: Lens' PlacementAssignment (Maybe DimensionValue)
 paPlacementIdDimensionValue
   = lens _paPlacementIdDimensionValue
       (\ s a -> s{_paPlacementIdDimensionValue = a})
@@ -2551,10 +2553,10 @@ paActive = lens _paActive (\ s a -> s{_paActive = a})
 
 -- | Whether the placement to be assigned requires SSL. This is a read-only
 -- field that is auto-generated when the ad is inserted or updated.
-paSslRequired :: Lens' PlacementAssignment (Maybe Bool)
-paSslRequired
-  = lens _paSslRequired
-      (\ s a -> s{_paSslRequired = a})
+paSSLRequired :: Lens' PlacementAssignment (Maybe Bool)
+paSSLRequired
+  = lens _paSSLRequired
+      (\ s a -> s{_paSSLRequired = a})
 
 instance FromJSON PlacementAssignment where
         parseJSON
@@ -2574,7 +2576,7 @@ instance ToJSON PlacementAssignment where
                   ("placementIdDimensionValue" .=) <$>
                     _paPlacementIdDimensionValue,
                   ("active" .=) <$> _paActive,
-                  ("sslRequired" .=) <$> _paSslRequired])
+                  ("sslRequired" .=) <$> _paSSLRequired])
 
 -- | Contains properties of a creative field value.
 --
@@ -2793,7 +2795,7 @@ instance ToJSON DayPartTargeting where
 -- /See:/ 'regionsListResponse' smart constructor.
 data RegionsListResponse = RegionsListResponse
     { _rlrKind    :: !Text
-    , _rlrRegions :: !(Maybe [Maybe Region])
+    , _rlrRegions :: !(Maybe [Region])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RegionsListResponse' with the minimum fields required to make a request.
@@ -2817,7 +2819,7 @@ rlrKind :: Lens' RegionsListResponse Text
 rlrKind = lens _rlrKind (\ s a -> s{_rlrKind = a})
 
 -- | Region collection.
-rlrRegions :: Lens' RegionsListResponse [Maybe Region]
+rlrRegions :: Lens' RegionsListResponse [Region]
 rlrRegions
   = lens _rlrRegions (\ s a -> s{_rlrRegions = a}) .
       _Default
@@ -2977,14 +2979,14 @@ data FloodlightActivityGroup = FloodlightActivityGroup
     , _fagFloodlightConfigurationId               :: !(Maybe Int64)
     , _fagKind                                    :: !Text
     , _fagAdvertiserId                            :: !(Maybe Int64)
-    , _fagAdvertiserIdDimensionValue              :: !(Maybe (Maybe DimensionValue))
-    , _fagIdDimensionValue                        :: !(Maybe (Maybe DimensionValue))
+    , _fagAdvertiserIdDimensionValue              :: !(Maybe DimensionValue)
+    , _fagIdDimensionValue                        :: !(Maybe DimensionValue)
     , _fagAccountId                               :: !(Maybe Int64)
     , _fagName                                    :: !(Maybe Text)
     , _fagId                                      :: !(Maybe Int64)
-    , _fagSubaccountId                            :: !(Maybe Int64)
+    , _fagSubAccountId                            :: !(Maybe Int64)
     , _fagType                                    :: !(Maybe FloodlightActivityGroupType)
-    , _fagFloodlightConfigurationIdDimensionValue :: !(Maybe (Maybe DimensionValue))
+    , _fagFloodlightConfigurationIdDimensionValue :: !(Maybe DimensionValue)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivityGroup' with the minimum fields required to make a request.
@@ -3009,7 +3011,7 @@ data FloodlightActivityGroup = FloodlightActivityGroup
 --
 -- * 'fagId'
 --
--- * 'fagSubaccountId'
+-- * 'fagSubAccountId'
 --
 -- * 'fagType'
 --
@@ -3027,7 +3029,7 @@ floodlightActivityGroup =
     , _fagAccountId = Nothing
     , _fagName = Nothing
     , _fagId = Nothing
-    , _fagSubaccountId = Nothing
+    , _fagSubAccountId = Nothing
     , _fagType = Nothing
     , _fagFloodlightConfigurationIdDimensionValue = Nothing
     }
@@ -3066,14 +3068,14 @@ fagAdvertiserId
 
 -- | Dimension value for the ID of the advertiser. This is a read-only,
 -- auto-generated field.
-fagAdvertiserIdDimensionValue :: Lens' FloodlightActivityGroup (Maybe (Maybe DimensionValue))
+fagAdvertiserIdDimensionValue :: Lens' FloodlightActivityGroup (Maybe DimensionValue)
 fagAdvertiserIdDimensionValue
   = lens _fagAdvertiserIdDimensionValue
       (\ s a -> s{_fagAdvertiserIdDimensionValue = a})
 
 -- | Dimension value for the ID of this floodlight activity group. This is a
 -- read-only, auto-generated field.
-fagIdDimensionValue :: Lens' FloodlightActivityGroup (Maybe (Maybe DimensionValue))
+fagIdDimensionValue :: Lens' FloodlightActivityGroup (Maybe DimensionValue)
 fagIdDimensionValue
   = lens _fagIdDimensionValue
       (\ s a -> s{_fagIdDimensionValue = a})
@@ -3096,10 +3098,10 @@ fagId = lens _fagId (\ s a -> s{_fagId = a})
 
 -- | Subaccount ID of this floodlight activity group. This is a read-only
 -- field that can be left blank.
-fagSubaccountId :: Lens' FloodlightActivityGroup (Maybe Int64)
-fagSubaccountId
-  = lens _fagSubaccountId
-      (\ s a -> s{_fagSubaccountId = a})
+fagSubAccountId :: Lens' FloodlightActivityGroup (Maybe Int64)
+fagSubAccountId
+  = lens _fagSubAccountId
+      (\ s a -> s{_fagSubAccountId = a})
 
 -- | Type of the floodlight activity group. This is a required field that is
 -- read-only after insertion.
@@ -3108,7 +3110,7 @@ fagType = lens _fagType (\ s a -> s{_fagType = a})
 
 -- | Dimension value for the ID of the floodlight configuration. This is a
 -- read-only, auto-generated field.
-fagFloodlightConfigurationIdDimensionValue :: Lens' FloodlightActivityGroup (Maybe (Maybe DimensionValue))
+fagFloodlightConfigurationIdDimensionValue :: Lens' FloodlightActivityGroup (Maybe DimensionValue)
 fagFloodlightConfigurationIdDimensionValue
   = lens _fagFloodlightConfigurationIdDimensionValue
       (\ s a ->
@@ -3149,7 +3151,7 @@ instance ToJSON FloodlightActivityGroup where
                   ("idDimensionValue" .=) <$> _fagIdDimensionValue,
                   ("accountId" .=) <$> _fagAccountId,
                   ("name" .=) <$> _fagName, ("id" .=) <$> _fagId,
-                  ("subaccountId" .=) <$> _fagSubaccountId,
+                  ("subaccountId" .=) <$> _fagSubAccountId,
                   ("type" .=) <$> _fagType,
                   ("floodlightConfigurationIdDimensionValue" .=) <$>
                     _fagFloodlightConfigurationIdDimensionValue])
@@ -3357,7 +3359,7 @@ instance ToJSON CreativeFieldAssignment where
 -- /See:/ 'floodlightConfigurationsListResponse' smart constructor.
 data FloodlightConfigurationsListResponse = FloodlightConfigurationsListResponse
     { _fclrKind                     :: !Text
-    , _fclrFloodlightConfigurations :: !(Maybe [Maybe FloodlightConfiguration])
+    , _fclrFloodlightConfigurations :: !(Maybe [FloodlightConfiguration])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightConfigurationsListResponse' with the minimum fields required to make a request.
@@ -3381,7 +3383,7 @@ fclrKind :: Lens' FloodlightConfigurationsListResponse Text
 fclrKind = lens _fclrKind (\ s a -> s{_fclrKind = a})
 
 -- | Floodlight configuration collection.
-fclrFloodlightConfigurations :: Lens' FloodlightConfigurationsListResponse [Maybe FloodlightConfiguration]
+fclrFloodlightConfigurations :: Lens' FloodlightConfigurationsListResponse [FloodlightConfiguration]
 fclrFloodlightConfigurations
   = lens _fclrFloodlightConfigurations
       (\ s a -> s{_fclrFloodlightConfigurations = a})
@@ -3413,7 +3415,7 @@ instance ToJSON FloodlightConfigurationsListResponse
 data DimensionValueRequest = DimensionValueRequest
     { _dvrKind          :: !Text
     , _dvrEndDate       :: !(Maybe UTCTime)
-    , _dvrFilters       :: !(Maybe [Maybe DimensionFilter])
+    , _dvrFilters       :: !(Maybe [DimensionFilter])
     , _dvrStartDate     :: !(Maybe UTCTime)
     , _dvrDimensionName :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -3454,7 +3456,7 @@ dvrEndDate
   = lens _dvrEndDate (\ s a -> s{_dvrEndDate = a})
 
 -- | The list of filters by which to filter values. The filters are ANDed.
-dvrFilters :: Lens' DimensionValueRequest [Maybe DimensionFilter]
+dvrFilters :: Lens' DimensionValueRequest [DimensionFilter]
 dvrFilters
   = lens _dvrFilters (\ s a -> s{_dvrFilters = a}) .
       _Default
@@ -3498,43 +3500,43 @@ instance ToJSON DimensionValueRequest where
 --
 -- /See:/ 'ad' smart constructor.
 data Ad = Ad
-    { _adCreativeGroupAssignments              :: !(Maybe [Maybe CreativeGroupAssignment])
-    , _adGeoTargeting                          :: !(Maybe (Maybe GeoTargeting))
-    , _adCreativeRotation                      :: !(Maybe (Maybe CreativeRotation))
-    , _adTechnologyTargeting                   :: !(Maybe (Maybe TechnologyTargeting))
+    { _adCreativeGroupAssignments              :: !(Maybe [CreativeGroupAssignment])
+    , _adGeoTargeting                          :: !(Maybe GeoTargeting)
+    , _adCreativeRotation                      :: !(Maybe CreativeRotation)
+    , _adTechnologyTargeting                   :: !(Maybe TechnologyTargeting)
     , _adAudienceSegmentId                     :: !(Maybe Int64)
-    , _adDayPartTargeting                      :: !(Maybe (Maybe DayPartTargeting))
-    , _adSize                                  :: !(Maybe (Maybe Size))
+    , _adDayPartTargeting                      :: !(Maybe DayPartTargeting)
+    , _adSize                                  :: !(Maybe Size)
     , _adStartTime                             :: !(Maybe UTCTime)
     , _adKind                                  :: !Text
-    , _adClickThroughUrlSuffixProperties       :: !(Maybe (Maybe ClickThroughURLSuffixProperties))
-    , _adCampaignIdDimensionValue              :: !(Maybe (Maybe DimensionValue))
+    , _adClickThroughURLSuffixProperties       :: !(Maybe ClickThroughURLSuffixProperties)
+    , _adCampaignIdDimensionValue              :: !(Maybe DimensionValue)
     , _adAdvertiserId                          :: !(Maybe Int64)
-    , _adAdvertiserIdDimensionValue            :: !(Maybe (Maybe DimensionValue))
-    , _adSslCompliant                          :: !(Maybe Bool)
+    , _adAdvertiserIdDimensionValue            :: !(Maybe DimensionValue)
+    , _adSSLCompliant                          :: !(Maybe Bool)
     , _adCampaignId                            :: !(Maybe Int64)
-    , _adIdDimensionValue                      :: !(Maybe (Maybe DimensionValue))
-    , _adClickThroughUrl                       :: !(Maybe (Maybe ClickThroughURL))
-    , _adDeliverySchedule                      :: !(Maybe (Maybe DeliverySchedule))
-    , _adEventTagOverrides                     :: !(Maybe [Maybe EventTagOverride])
+    , _adIdDimensionValue                      :: !(Maybe DimensionValue)
+    , _adClickThroughURL                       :: !(Maybe ClickThroughURL)
+    , _adDeliverySchedule                      :: !(Maybe DeliverySchedule)
+    , _adEventTagOverrides                     :: !(Maybe [EventTagOverride])
     , _adActive                                :: !(Maybe Bool)
     , _adAccountId                             :: !(Maybe Int64)
     , _adName                                  :: !(Maybe Text)
-    , _adKeyValueTargetingExpression           :: !(Maybe (Maybe KeyValueTargetingExpression))
+    , _adKeyValueTargetingExpression           :: !(Maybe KeyValueTargetingExpression)
     , _adEndTime                               :: !(Maybe UTCTime)
-    , _adCreateInfo                            :: !(Maybe (Maybe LastModifiedInfo))
-    , _adLastModifiedInfo                      :: !(Maybe (Maybe LastModifiedInfo))
+    , _adCreateInfo                            :: !(Maybe LastModifiedInfo)
+    , _adLastModifiedInfo                      :: !(Maybe LastModifiedInfo)
     , _adId                                    :: !(Maybe Int64)
-    , _adSslRequired                           :: !(Maybe Bool)
+    , _adSSLRequired                           :: !(Maybe Bool)
     , _adComments                              :: !(Maybe Text)
-    , _adSubaccountId                          :: !(Maybe Int64)
+    , _adSubAccountId                          :: !(Maybe Int64)
     , _adType                                  :: !(Maybe AdType)
-    , _adRemarketingListExpression             :: !(Maybe (Maybe ListTargetingExpression))
+    , _adRemarketingListExpression             :: !(Maybe ListTargetingExpression)
     , _adDynamicClickTracker                   :: !(Maybe Bool)
     , _adCompatibility                         :: !(Maybe AdCompatibility)
     , _adArchived                              :: !(Maybe Bool)
-    , _adDefaultClickThroughEventTagProperties :: !(Maybe (Maybe DefaultClickThroughEventTagProperties))
-    , _adPlacementAssignments                  :: !(Maybe [Maybe PlacementAssignment])
+    , _adDefaultClickThroughEventTagProperties :: !(Maybe DefaultClickThroughEventTagProperties)
+    , _adPlacementAssignments                  :: !(Maybe [PlacementAssignment])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Ad' with the minimum fields required to make a request.
@@ -3559,7 +3561,7 @@ data Ad = Ad
 --
 -- * 'adKind'
 --
--- * 'adClickThroughUrlSuffixProperties'
+-- * 'adClickThroughURLSuffixProperties'
 --
 -- * 'adCampaignIdDimensionValue'
 --
@@ -3567,13 +3569,13 @@ data Ad = Ad
 --
 -- * 'adAdvertiserIdDimensionValue'
 --
--- * 'adSslCompliant'
+-- * 'adSSLCompliant'
 --
 -- * 'adCampaignId'
 --
 -- * 'adIdDimensionValue'
 --
--- * 'adClickThroughUrl'
+-- * 'adClickThroughURL'
 --
 -- * 'adDeliverySchedule'
 --
@@ -3595,11 +3597,11 @@ data Ad = Ad
 --
 -- * 'adId'
 --
--- * 'adSslRequired'
+-- * 'adSSLRequired'
 --
 -- * 'adComments'
 --
--- * 'adSubaccountId'
+-- * 'adSubAccountId'
 --
 -- * 'adType'
 --
@@ -3627,14 +3629,14 @@ ad =
     , _adSize = Nothing
     , _adStartTime = Nothing
     , _adKind = "dfareporting#ad"
-    , _adClickThroughUrlSuffixProperties = Nothing
+    , _adClickThroughURLSuffixProperties = Nothing
     , _adCampaignIdDimensionValue = Nothing
     , _adAdvertiserId = Nothing
     , _adAdvertiserIdDimensionValue = Nothing
-    , _adSslCompliant = Nothing
+    , _adSSLCompliant = Nothing
     , _adCampaignId = Nothing
     , _adIdDimensionValue = Nothing
-    , _adClickThroughUrl = Nothing
+    , _adClickThroughURL = Nothing
     , _adDeliverySchedule = Nothing
     , _adEventTagOverrides = Nothing
     , _adActive = Nothing
@@ -3645,9 +3647,9 @@ ad =
     , _adCreateInfo = Nothing
     , _adLastModifiedInfo = Nothing
     , _adId = Nothing
-    , _adSslRequired = Nothing
+    , _adSSLRequired = Nothing
     , _adComments = Nothing
-    , _adSubaccountId = Nothing
+    , _adSubAccountId = Nothing
     , _adType = Nothing
     , _adRemarketingListExpression = Nothing
     , _adDynamicClickTracker = Nothing
@@ -3660,7 +3662,7 @@ ad =
 -- | Creative group assignments for this ad. Applicable when type is
 -- AD_SERVING_CLICK_TRACKER. Only one assignment per creative group number
 -- is allowed for a maximum of two assignments.
-adCreativeGroupAssignments :: Lens' Ad [Maybe CreativeGroupAssignment]
+adCreativeGroupAssignments :: Lens' Ad [CreativeGroupAssignment]
 adCreativeGroupAssignments
   = lens _adCreativeGroupAssignments
       (\ s a -> s{_adCreativeGroupAssignments = a})
@@ -3669,7 +3671,7 @@ adCreativeGroupAssignments
 
 -- | Geographical targeting information for this ad.Applicable when type is
 -- AD_SERVING_STANDARD_AD.
-adGeoTargeting :: Lens' Ad (Maybe (Maybe GeoTargeting))
+adGeoTargeting :: Lens' Ad (Maybe GeoTargeting)
 adGeoTargeting
   = lens _adGeoTargeting
       (\ s a -> s{_adGeoTargeting = a})
@@ -3678,14 +3680,14 @@ adGeoTargeting
 -- AD_SERVING_DEFAULT_AD, AD_SERVING_STANDARD_AD, or AD_SERVING_TRACKING.
 -- When type is AD_SERVING_DEFAULT_AD, this field should have exactly one
 -- creativeAssignment.
-adCreativeRotation :: Lens' Ad (Maybe (Maybe CreativeRotation))
+adCreativeRotation :: Lens' Ad (Maybe CreativeRotation)
 adCreativeRotation
   = lens _adCreativeRotation
       (\ s a -> s{_adCreativeRotation = a})
 
 -- | Technology platform targeting information for this ad. Applicable when
 -- type is AD_SERVING_STANDARD_AD.
-adTechnologyTargeting :: Lens' Ad (Maybe (Maybe TechnologyTargeting))
+adTechnologyTargeting :: Lens' Ad (Maybe TechnologyTargeting)
 adTechnologyTargeting
   = lens _adTechnologyTargeting
       (\ s a -> s{_adTechnologyTargeting = a})
@@ -3699,13 +3701,13 @@ adAudienceSegmentId
 
 -- | Time and day targeting information for this ad. Applicable when type is
 -- AD_SERVING_STANDARD_AD.
-adDayPartTargeting :: Lens' Ad (Maybe (Maybe DayPartTargeting))
+adDayPartTargeting :: Lens' Ad (Maybe DayPartTargeting)
 adDayPartTargeting
   = lens _adDayPartTargeting
       (\ s a -> s{_adDayPartTargeting = a})
 
 -- | Size of this ad. Applicable when type is AD_SERVING_DEFAULT_AD.
-adSize :: Lens' Ad (Maybe (Maybe Size))
+adSize :: Lens' Ad (Maybe Size)
 adSize = lens _adSize (\ s a -> s{_adSize = a})
 
 -- | Date and time that this ad should start serving. If creating an ad, this
@@ -3722,14 +3724,14 @@ adKind = lens _adKind (\ s a -> s{_adKind = a})
 
 -- | Click-through URL suffix properties for this ad. Applies to the URL in
 -- the ad or (if overriding ad properties) the URL in the creative.
-adClickThroughUrlSuffixProperties :: Lens' Ad (Maybe (Maybe ClickThroughURLSuffixProperties))
-adClickThroughUrlSuffixProperties
-  = lens _adClickThroughUrlSuffixProperties
-      (\ s a -> s{_adClickThroughUrlSuffixProperties = a})
+adClickThroughURLSuffixProperties :: Lens' Ad (Maybe ClickThroughURLSuffixProperties)
+adClickThroughURLSuffixProperties
+  = lens _adClickThroughURLSuffixProperties
+      (\ s a -> s{_adClickThroughURLSuffixProperties = a})
 
 -- | Dimension value for the ID of the campaign. This is a read-only,
 -- auto-generated field.
-adCampaignIdDimensionValue :: Lens' Ad (Maybe (Maybe DimensionValue))
+adCampaignIdDimensionValue :: Lens' Ad (Maybe DimensionValue)
 adCampaignIdDimensionValue
   = lens _adCampaignIdDimensionValue
       (\ s a -> s{_adCampaignIdDimensionValue = a})
@@ -3742,17 +3744,17 @@ adAdvertiserId
 
 -- | Dimension value for the ID of the advertiser. This is a read-only,
 -- auto-generated field.
-adAdvertiserIdDimensionValue :: Lens' Ad (Maybe (Maybe DimensionValue))
+adAdvertiserIdDimensionValue :: Lens' Ad (Maybe DimensionValue)
 adAdvertiserIdDimensionValue
   = lens _adAdvertiserIdDimensionValue
       (\ s a -> s{_adAdvertiserIdDimensionValue = a})
 
 -- | Whether this ad is ssl compliant. This is a read-only field that is
 -- auto-generated when the ad is inserted or updated.
-adSslCompliant :: Lens' Ad (Maybe Bool)
-adSslCompliant
-  = lens _adSslCompliant
-      (\ s a -> s{_adSslCompliant = a})
+adSSLCompliant :: Lens' Ad (Maybe Bool)
+adSSLCompliant
+  = lens _adSSLCompliant
+      (\ s a -> s{_adSSLCompliant = a})
 
 -- | Campaign ID of this ad. This is a required field on insertion.
 adCampaignId :: Lens' Ad (Maybe Int64)
@@ -3761,29 +3763,29 @@ adCampaignId
 
 -- | Dimension value for the ID of this ad. This is a read-only,
 -- auto-generated field.
-adIdDimensionValue :: Lens' Ad (Maybe (Maybe DimensionValue))
+adIdDimensionValue :: Lens' Ad (Maybe DimensionValue)
 adIdDimensionValue
   = lens _adIdDimensionValue
       (\ s a -> s{_adIdDimensionValue = a})
 
 -- | Click-through URL for this ad. This is a required field on insertion.
 -- Applicable when type is AD_SERVING_CLICK_TRACKER.
-adClickThroughUrl :: Lens' Ad (Maybe (Maybe ClickThroughURL))
-adClickThroughUrl
-  = lens _adClickThroughUrl
-      (\ s a -> s{_adClickThroughUrl = a})
+adClickThroughURL :: Lens' Ad (Maybe ClickThroughURL)
+adClickThroughURL
+  = lens _adClickThroughURL
+      (\ s a -> s{_adClickThroughURL = a})
 
 -- | Delivery schedule information for this ad. Applicable when type is
 -- AD_SERVING_STANDARD_AD or AD_SERVING_TRACKING. This field along with
 -- subfields priority and impressionRatio are required on insertion when
 -- type is AD_SERVING_STANDARD_AD.
-adDeliverySchedule :: Lens' Ad (Maybe (Maybe DeliverySchedule))
+adDeliverySchedule :: Lens' Ad (Maybe DeliverySchedule)
 adDeliverySchedule
   = lens _adDeliverySchedule
       (\ s a -> s{_adDeliverySchedule = a})
 
 -- | Event tag overrides for this ad.
-adEventTagOverrides :: Lens' Ad [Maybe EventTagOverride]
+adEventTagOverrides :: Lens' Ad [EventTagOverride]
 adEventTagOverrides
   = lens _adEventTagOverrides
       (\ s a -> s{_adEventTagOverrides = a})
@@ -3806,7 +3808,7 @@ adName = lens _adName (\ s a -> s{_adName = a})
 
 -- | Key-value targeting information for this ad. Applicable when type is
 -- AD_SERVING_STANDARD_AD.
-adKeyValueTargetingExpression :: Lens' Ad (Maybe (Maybe KeyValueTargetingExpression))
+adKeyValueTargetingExpression :: Lens' Ad (Maybe KeyValueTargetingExpression)
 adKeyValueTargetingExpression
   = lens _adKeyValueTargetingExpression
       (\ s a -> s{_adKeyValueTargetingExpression = a})
@@ -3818,13 +3820,13 @@ adEndTime
   = lens _adEndTime (\ s a -> s{_adEndTime = a})
 
 -- | Information about the creation of this ad.This is a read-only field.
-adCreateInfo :: Lens' Ad (Maybe (Maybe LastModifiedInfo))
+adCreateInfo :: Lens' Ad (Maybe LastModifiedInfo)
 adCreateInfo
   = lens _adCreateInfo (\ s a -> s{_adCreateInfo = a})
 
 -- | Information about the most recent modification of this ad. This is a
 -- read-only field.
-adLastModifiedInfo :: Lens' Ad (Maybe (Maybe LastModifiedInfo))
+adLastModifiedInfo :: Lens' Ad (Maybe LastModifiedInfo)
 adLastModifiedInfo
   = lens _adLastModifiedInfo
       (\ s a -> s{_adLastModifiedInfo = a})
@@ -3835,10 +3837,10 @@ adId = lens _adId (\ s a -> s{_adId = a})
 
 -- | Whether this ad requires ssl. This is a read-only field that is
 -- auto-generated when the ad is inserted or updated.
-adSslRequired :: Lens' Ad (Maybe Bool)
-adSslRequired
-  = lens _adSslRequired
-      (\ s a -> s{_adSslRequired = a})
+adSSLRequired :: Lens' Ad (Maybe Bool)
+adSSLRequired
+  = lens _adSSLRequired
+      (\ s a -> s{_adSSLRequired = a})
 
 -- | Comments for this ad.
 adComments :: Lens' Ad (Maybe Text)
@@ -3847,10 +3849,10 @@ adComments
 
 -- | Subaccount ID of this ad. This is a read-only field that can be left
 -- blank.
-adSubaccountId :: Lens' Ad (Maybe Int64)
-adSubaccountId
-  = lens _adSubaccountId
-      (\ s a -> s{_adSubaccountId = a})
+adSubAccountId :: Lens' Ad (Maybe Int64)
+adSubAccountId
+  = lens _adSubAccountId
+      (\ s a -> s{_adSubAccountId = a})
 
 -- | Type of ad. This is a required field on insertion. Note that default ads
 -- (AD_SERVING_DEFAULT_AD) cannot be created directly (see Creative
@@ -3860,7 +3862,7 @@ adType = lens _adType (\ s a -> s{_adType = a})
 
 -- | Applicable when type is AD_SERVING_STANDARD_AD. Remarketing list
 -- targeting expression for this ad.
-adRemarketingListExpression :: Lens' Ad (Maybe (Maybe ListTargetingExpression))
+adRemarketingListExpression :: Lens' Ad (Maybe ListTargetingExpression)
 adRemarketingListExpression
   = lens _adRemarketingListExpression
       (\ s a -> s{_adRemarketingListExpression = a})
@@ -3890,14 +3892,14 @@ adArchived
   = lens _adArchived (\ s a -> s{_adArchived = a})
 
 -- | Default click-through event tag properties for this ad.
-adDefaultClickThroughEventTagProperties :: Lens' Ad (Maybe (Maybe DefaultClickThroughEventTagProperties))
+adDefaultClickThroughEventTagProperties :: Lens' Ad (Maybe DefaultClickThroughEventTagProperties)
 adDefaultClickThroughEventTagProperties
   = lens _adDefaultClickThroughEventTagProperties
       (\ s a ->
          s{_adDefaultClickThroughEventTagProperties = a})
 
 -- | Placement assignments for this ad.
-adPlacementAssignments :: Lens' Ad [Maybe PlacementAssignment]
+adPlacementAssignments :: Lens' Ad [PlacementAssignment]
 adPlacementAssignments
   = lens _adPlacementAssignments
       (\ s a -> s{_adPlacementAssignments = a})
@@ -3963,16 +3965,16 @@ instance ToJSON Ad where
                   ("startTime" .=) <$> _adStartTime,
                   Just ("kind" .= _adKind),
                   ("clickThroughUrlSuffixProperties" .=) <$>
-                    _adClickThroughUrlSuffixProperties,
+                    _adClickThroughURLSuffixProperties,
                   ("campaignIdDimensionValue" .=) <$>
                     _adCampaignIdDimensionValue,
                   ("advertiserId" .=) <$> _adAdvertiserId,
                   ("advertiserIdDimensionValue" .=) <$>
                     _adAdvertiserIdDimensionValue,
-                  ("sslCompliant" .=) <$> _adSslCompliant,
+                  ("sslCompliant" .=) <$> _adSSLCompliant,
                   ("campaignId" .=) <$> _adCampaignId,
                   ("idDimensionValue" .=) <$> _adIdDimensionValue,
-                  ("clickThroughUrl" .=) <$> _adClickThroughUrl,
+                  ("clickThroughUrl" .=) <$> _adClickThroughURL,
                   ("deliverySchedule" .=) <$> _adDeliverySchedule,
                   ("eventTagOverrides" .=) <$> _adEventTagOverrides,
                   ("active" .=) <$> _adActive,
@@ -3984,9 +3986,9 @@ instance ToJSON Ad where
                   ("createInfo" .=) <$> _adCreateInfo,
                   ("lastModifiedInfo" .=) <$> _adLastModifiedInfo,
                   ("id" .=) <$> _adId,
-                  ("sslRequired" .=) <$> _adSslRequired,
+                  ("sslRequired" .=) <$> _adSSLRequired,
                   ("comments" .=) <$> _adComments,
-                  ("subaccountId" .=) <$> _adSubaccountId,
+                  ("subaccountId" .=) <$> _adSubAccountId,
                   ("type" .=) <$> _adType,
                   ("remarketingListExpression" .=) <$>
                     _adRemarketingListExpression,
@@ -4068,7 +4070,7 @@ instance ToJSON ObjectFilter where
 data ReportsConfiguration = ReportsConfiguration
     { _rcExposureToConversionEnabled :: !(Maybe Bool)
     , _rcReportGenerationTimeZoneId  :: !(Maybe Int64)
-    , _rcLookbackConfiguration       :: !(Maybe (Maybe LookbackConfiguration))
+    , _rcLookbackConfiguration       :: !(Maybe LookbackConfiguration)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsConfiguration' with the minimum fields required to make a request.
@@ -4112,7 +4114,7 @@ rcReportGenerationTimeZoneId
       (\ s a -> s{_rcReportGenerationTimeZoneId = a})
 
 -- | Default lookback windows for new advertisers in this account.
-rcLookbackConfiguration :: Lens' ReportsConfiguration (Maybe (Maybe LookbackConfiguration))
+rcLookbackConfiguration :: Lens' ReportsConfiguration (Maybe LookbackConfiguration)
 rcLookbackConfiguration
   = lens _rcLookbackConfiguration
       (\ s a -> s{_rcLookbackConfiguration = a})
@@ -4142,58 +4144,57 @@ instance ToJSON ReportsConfiguration where
 --
 -- /See:/ 'size' smart constructor.
 data Size = Size
-    { _sizHeight :: !(Maybe Int32)
-    , _sizKind   :: !Text
-    , _sizWidth  :: !(Maybe Int32)
-    , _sizIab    :: !(Maybe Bool)
-    , _sizId     :: !(Maybe Int64)
+    { _sHeight :: !(Maybe Int32)
+    , _sKind   :: !Text
+    , _sWidth  :: !(Maybe Int32)
+    , _sIab    :: !(Maybe Bool)
+    , _sId     :: !(Maybe Int64)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Size' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sizHeight'
+-- * 'sHeight'
 --
--- * 'sizKind'
+-- * 'sKind'
 --
--- * 'sizWidth'
+-- * 'sWidth'
 --
--- * 'sizIab'
+-- * 'sIab'
 --
--- * 'sizId'
+-- * 'sId'
 size
     :: Size
 size =
     Size
-    { _sizHeight = Nothing
-    , _sizKind = "dfareporting#size"
-    , _sizWidth = Nothing
-    , _sizIab = Nothing
-    , _sizId = Nothing
+    { _sHeight = Nothing
+    , _sKind = "dfareporting#size"
+    , _sWidth = Nothing
+    , _sIab = Nothing
+    , _sId = Nothing
     }
 
 -- | Height of this size.
-sizHeight :: Lens' Size (Maybe Int32)
-sizHeight
-  = lens _sizHeight (\ s a -> s{_sizHeight = a})
+sHeight :: Lens' Size (Maybe Int32)
+sHeight = lens _sHeight (\ s a -> s{_sHeight = a})
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#size\".
-sizKind :: Lens' Size Text
-sizKind = lens _sizKind (\ s a -> s{_sizKind = a})
+sKind :: Lens' Size Text
+sKind = lens _sKind (\ s a -> s{_sKind = a})
 
 -- | Width of this size.
-sizWidth :: Lens' Size (Maybe Int32)
-sizWidth = lens _sizWidth (\ s a -> s{_sizWidth = a})
+sWidth :: Lens' Size (Maybe Int32)
+sWidth = lens _sWidth (\ s a -> s{_sWidth = a})
 
 -- | IAB standard size. This is a read-only, auto-generated field.
-sizIab :: Lens' Size (Maybe Bool)
-sizIab = lens _sizIab (\ s a -> s{_sizIab = a})
+sIab :: Lens' Size (Maybe Bool)
+sIab = lens _sIab (\ s a -> s{_sIab = a})
 
 -- | ID of this size. This is a read-only, auto-generated field.
-sizId :: Lens' Size (Maybe Int64)
-sizId = lens _sizId (\ s a -> s{_sizId = a})
+sId :: Lens' Size (Maybe Int64)
+sId = lens _sId (\ s a -> s{_sId = a})
 
 instance FromJSON Size where
         parseJSON
@@ -4210,16 +4211,15 @@ instance ToJSON Size where
         toJSON Size{..}
           = object
               (catMaybes
-                 [("height" .=) <$> _sizHeight,
-                  Just ("kind" .= _sizKind),
-                  ("width" .=) <$> _sizWidth, ("iab" .=) <$> _sizIab,
-                  ("id" .=) <$> _sizId])
+                 [("height" .=) <$> _sHeight, Just ("kind" .= _sKind),
+                  ("width" .=) <$> _sWidth, ("iab" .=) <$> _sIab,
+                  ("id" .=) <$> _sId])
 
 -- | Inventory item List Response
 --
 -- /See:/ 'inventoryItemsListResponse' smart constructor.
 data InventoryItemsListResponse = InventoryItemsListResponse
-    { _iilrInventoryItems :: !(Maybe [Maybe InventoryItem])
+    { _iilrInventoryItems :: !(Maybe [InventoryItem])
     , _iilrNextPageToken  :: !(Maybe Text)
     , _iilrKind           :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -4243,7 +4243,7 @@ inventoryItemsListResponse =
     }
 
 -- | Inventory item collection
-iilrInventoryItems :: Lens' InventoryItemsListResponse [Maybe InventoryItem]
+iilrInventoryItems :: Lens' InventoryItemsListResponse [InventoryItem]
 iilrInventoryItems
   = lens _iilrInventoryItems
       (\ s a -> s{_iilrInventoryItems = a})
@@ -4286,11 +4286,11 @@ instance ToJSON InventoryItemsListResponse where
 data ReportFloodlightCriteria = ReportFloodlightCriteria
     { _rfcReportProperties      :: !(Maybe ReportFloodlightCriteriaReportProperties)
     , _rfcMetricNames           :: !(Maybe [Text])
-    , _rfcCustomRichMediaEvents :: !(Maybe [Maybe DimensionValue])
-    , _rfcDimensionFilters      :: !(Maybe [Maybe DimensionValue])
-    , _rfcDateRange             :: !(Maybe (Maybe DateRange))
-    , _rfcFloodlightConfigId    :: !(Maybe (Maybe DimensionValue))
-    , _rfcDimensions            :: !(Maybe [Maybe SortedDimension])
+    , _rfcCustomRichMediaEvents :: !(Maybe [DimensionValue])
+    , _rfcDimensionFilters      :: !(Maybe [DimensionValue])
+    , _rfcDateRange             :: !(Maybe DateRange)
+    , _rfcFloodlightConfigId    :: !(Maybe DimensionValue)
+    , _rfcDimensions            :: !(Maybe [SortedDimension])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportFloodlightCriteria' with the minimum fields required to make a request.
@@ -4338,7 +4338,7 @@ rfcMetricNames
       . _Coerce
 
 -- | The list of custom rich media events to include.
-rfcCustomRichMediaEvents :: Lens' ReportFloodlightCriteria [Maybe DimensionValue]
+rfcCustomRichMediaEvents :: Lens' ReportFloodlightCriteria [DimensionValue]
 rfcCustomRichMediaEvents
   = lens _rfcCustomRichMediaEvents
       (\ s a -> s{_rfcCustomRichMediaEvents = a})
@@ -4348,7 +4348,7 @@ rfcCustomRichMediaEvents
 -- | The list of filters on which dimensions are filtered. Filters for
 -- different dimensions are ANDed, filters for the same dimension are
 -- grouped together and ORed.
-rfcDimensionFilters :: Lens' ReportFloodlightCriteria [Maybe DimensionValue]
+rfcDimensionFilters :: Lens' ReportFloodlightCriteria [DimensionValue]
 rfcDimensionFilters
   = lens _rfcDimensionFilters
       (\ s a -> s{_rfcDimensionFilters = a})
@@ -4356,20 +4356,20 @@ rfcDimensionFilters
       . _Coerce
 
 -- | The date range this report should be run for.
-rfcDateRange :: Lens' ReportFloodlightCriteria (Maybe (Maybe DateRange))
+rfcDateRange :: Lens' ReportFloodlightCriteria (Maybe DateRange)
 rfcDateRange
   = lens _rfcDateRange (\ s a -> s{_rfcDateRange = a})
 
 -- | The floodlight ID for which to show data in this report. All advertisers
 -- associated with that ID will automatically be added. The dimension of
 -- the value needs to be \'dfa:floodlightConfigId\'.
-rfcFloodlightConfigId :: Lens' ReportFloodlightCriteria (Maybe (Maybe DimensionValue))
+rfcFloodlightConfigId :: Lens' ReportFloodlightCriteria (Maybe DimensionValue)
 rfcFloodlightConfigId
   = lens _rfcFloodlightConfigId
       (\ s a -> s{_rfcFloodlightConfigId = a})
 
 -- | The list of dimensions the report should include.
-rfcDimensions :: Lens' ReportFloodlightCriteria [Maybe SortedDimension]
+rfcDimensions :: Lens' ReportFloodlightCriteria [SortedDimension]
 rfcDimensions
   = lens _rfcDimensions
       (\ s a -> s{_rfcDimensions = a})
@@ -4407,11 +4407,11 @@ instance ToJSON ReportFloodlightCriteria where
 -- /See:/ 'reportCriteria' smart constructor.
 data ReportCriteria = ReportCriteria
     { _rcMetricNames           :: !(Maybe [Text])
-    , _rcCustomRichMediaEvents :: !(Maybe (Maybe CustomRichMediaEvents))
-    , _rcDimensionFilters      :: !(Maybe [Maybe DimensionValue])
-    , _rcActivities            :: !(Maybe (Maybe Activities))
-    , _rcDateRange             :: !(Maybe (Maybe DateRange))
-    , _rcDimensions            :: !(Maybe [Maybe SortedDimension])
+    , _rcCustomRichMediaEvents :: !(Maybe CustomRichMediaEvents)
+    , _rcDimensionFilters      :: !(Maybe [DimensionValue])
+    , _rcActivities            :: !(Maybe Activities)
+    , _rcDateRange             :: !(Maybe DateRange)
+    , _rcDimensions            :: !(Maybe [SortedDimension])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportCriteria' with the minimum fields required to make a request.
@@ -4450,7 +4450,7 @@ rcMetricNames
       . _Coerce
 
 -- | Custom Rich Media Events group.
-rcCustomRichMediaEvents :: Lens' ReportCriteria (Maybe (Maybe CustomRichMediaEvents))
+rcCustomRichMediaEvents :: Lens' ReportCriteria (Maybe CustomRichMediaEvents)
 rcCustomRichMediaEvents
   = lens _rcCustomRichMediaEvents
       (\ s a -> s{_rcCustomRichMediaEvents = a})
@@ -4458,7 +4458,7 @@ rcCustomRichMediaEvents
 -- | The list of filters on which dimensions are filtered. Filters for
 -- different dimensions are ANDed, filters for the same dimension are
 -- grouped together and ORed.
-rcDimensionFilters :: Lens' ReportCriteria [Maybe DimensionValue]
+rcDimensionFilters :: Lens' ReportCriteria [DimensionValue]
 rcDimensionFilters
   = lens _rcDimensionFilters
       (\ s a -> s{_rcDimensionFilters = a})
@@ -4466,17 +4466,17 @@ rcDimensionFilters
       . _Coerce
 
 -- | Activity group.
-rcActivities :: Lens' ReportCriteria (Maybe (Maybe Activities))
+rcActivities :: Lens' ReportCriteria (Maybe Activities)
 rcActivities
   = lens _rcActivities (\ s a -> s{_rcActivities = a})
 
 -- | The date range for which this report should be run.
-rcDateRange :: Lens' ReportCriteria (Maybe (Maybe DateRange))
+rcDateRange :: Lens' ReportCriteria (Maybe DateRange)
 rcDateRange
   = lens _rcDateRange (\ s a -> s{_rcDateRange = a})
 
 -- | The list of standard dimensions the report should include.
-rcDimensions :: Lens' ReportCriteria [Maybe SortedDimension]
+rcDimensions :: Lens' ReportCriteria [SortedDimension]
 rcDimensions
   = lens _rcDimensions (\ s a -> s{_rcDimensions = a})
       . _Default
@@ -4524,10 +4524,10 @@ data Project = Project
     , _pTargetCpcNanos    :: !(Maybe Int64)
     , _pAccountId         :: !(Maybe Int64)
     , _pName              :: !(Maybe Text)
-    , _pLastModifiedInfo  :: !(Maybe (Maybe LastModifiedInfo))
+    , _pLastModifiedInfo  :: !(Maybe LastModifiedInfo)
     , _pId                :: !(Maybe Int64)
     , _pAudienceAgeGroup  :: !(Maybe ProjectAudienceAgeGroup)
-    , _pSubaccountId      :: !(Maybe Int64)
+    , _pSubAccountId      :: !(Maybe Int64)
     , _pAudienceGender    :: !(Maybe ProjectAudienceGender)
     , _pClientName        :: !(Maybe Text)
     , _pTargetCpaNanos    :: !(Maybe Int64)
@@ -4571,7 +4571,7 @@ data Project = Project
 --
 -- * 'pAudienceAgeGroup'
 --
--- * 'pSubaccountId'
+-- * 'pSubAccountId'
 --
 -- * 'pAudienceGender'
 --
@@ -4599,7 +4599,7 @@ project =
     , _pLastModifiedInfo = Nothing
     , _pId = Nothing
     , _pAudienceAgeGroup = Nothing
-    , _pSubaccountId = Nothing
+    , _pSubAccountId = Nothing
     , _pAudienceGender = Nothing
     , _pClientName = Nothing
     , _pTargetCpaNanos = Nothing
@@ -4683,7 +4683,7 @@ pName :: Lens' Project (Maybe Text)
 pName = lens _pName (\ s a -> s{_pName = a})
 
 -- | Information about the most recent modification of this project.
-pLastModifiedInfo :: Lens' Project (Maybe (Maybe LastModifiedInfo))
+pLastModifiedInfo :: Lens' Project (Maybe LastModifiedInfo)
 pLastModifiedInfo
   = lens _pLastModifiedInfo
       (\ s a -> s{_pLastModifiedInfo = a})
@@ -4699,10 +4699,10 @@ pAudienceAgeGroup
       (\ s a -> s{_pAudienceAgeGroup = a})
 
 -- | Subaccount ID of this project.
-pSubaccountId :: Lens' Project (Maybe Int64)
-pSubaccountId
-  = lens _pSubaccountId
-      (\ s a -> s{_pSubaccountId = a})
+pSubAccountId :: Lens' Project (Maybe Int64)
+pSubAccountId
+  = lens _pSubAccountId
+      (\ s a -> s{_pSubAccountId = a})
 
 -- | Audience gender of this project.
 pAudienceGender :: Lens' Project (Maybe ProjectAudienceGender)
@@ -4768,100 +4768,100 @@ instance ToJSON Project where
                   ("lastModifiedInfo" .=) <$> _pLastModifiedInfo,
                   ("id" .=) <$> _pId,
                   ("audienceAgeGroup" .=) <$> _pAudienceAgeGroup,
-                  ("subaccountId" .=) <$> _pSubaccountId,
+                  ("subaccountId" .=) <$> _pSubAccountId,
                   ("audienceGender" .=) <$> _pAudienceGender,
                   ("clientName" .=) <$> _pClientName,
                   ("targetCpaNanos" .=) <$> _pTargetCpaNanos])
 
 -- | Contains properties of a DCM subaccount.
 --
--- /See:/ 'subaccount' smart constructor.
-data Subaccount = Subaccount
-    { _subKind                   :: !Text
-    , _subAvailablePermissionIds :: !(Maybe [Int64])
-    , _subAccountId              :: !(Maybe Int64)
-    , _subName                   :: !(Maybe Text)
-    , _subId                     :: !(Maybe Int64)
+-- /See:/ 'subAccount' smart constructor.
+data SubAccount = SubAccount
+    { _saKind                   :: !Text
+    , _saAvailablePermissionIds :: !(Maybe [Int64])
+    , _saAccountId              :: !(Maybe Int64)
+    , _saName                   :: !(Maybe Text)
+    , _saId                     :: !(Maybe Int64)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'Subaccount' with the minimum fields required to make a request.
+-- | Creates a value of 'SubAccount' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'subKind'
+-- * 'saKind'
 --
--- * 'subAvailablePermissionIds'
+-- * 'saAvailablePermissionIds'
 --
--- * 'subAccountId'
+-- * 'saAccountId'
 --
--- * 'subName'
+-- * 'saName'
 --
--- * 'subId'
-subaccount
-    :: Subaccount
-subaccount =
-    Subaccount
-    { _subKind = "dfareporting#subaccount"
-    , _subAvailablePermissionIds = Nothing
-    , _subAccountId = Nothing
-    , _subName = Nothing
-    , _subId = Nothing
+-- * 'saId'
+subAccount
+    :: SubAccount
+subAccount =
+    SubAccount
+    { _saKind = "dfareporting#subaccount"
+    , _saAvailablePermissionIds = Nothing
+    , _saAccountId = Nothing
+    , _saName = Nothing
+    , _saId = Nothing
     }
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#subaccount\".
-subKind :: Lens' Subaccount Text
-subKind = lens _subKind (\ s a -> s{_subKind = a})
+saKind :: Lens' SubAccount Text
+saKind = lens _saKind (\ s a -> s{_saKind = a})
 
 -- | IDs of the available user role permissions for this subaccount.
-subAvailablePermissionIds :: Lens' Subaccount [Int64]
-subAvailablePermissionIds
-  = lens _subAvailablePermissionIds
-      (\ s a -> s{_subAvailablePermissionIds = a})
+saAvailablePermissionIds :: Lens' SubAccount [Int64]
+saAvailablePermissionIds
+  = lens _saAvailablePermissionIds
+      (\ s a -> s{_saAvailablePermissionIds = a})
       . _Default
       . _Coerce
 
 -- | ID of the account that contains this subaccount. This is a read-only
 -- field that can be left blank.
-subAccountId :: Lens' Subaccount (Maybe Int64)
-subAccountId
-  = lens _subAccountId (\ s a -> s{_subAccountId = a})
+saAccountId :: Lens' SubAccount (Maybe Int64)
+saAccountId
+  = lens _saAccountId (\ s a -> s{_saAccountId = a})
 
 -- | Name of this subaccount. This is a required field. Must be less than 128
 -- characters long and be unique among subaccounts of the same account.
-subName :: Lens' Subaccount (Maybe Text)
-subName = lens _subName (\ s a -> s{_subName = a})
+saName :: Lens' SubAccount (Maybe Text)
+saName = lens _saName (\ s a -> s{_saName = a})
 
 -- | ID of this subaccount. This is a read-only, auto-generated field.
-subId :: Lens' Subaccount (Maybe Int64)
-subId = lens _subId (\ s a -> s{_subId = a})
+saId :: Lens' SubAccount (Maybe Int64)
+saId = lens _saId (\ s a -> s{_saId = a})
 
-instance FromJSON Subaccount where
+instance FromJSON SubAccount where
         parseJSON
-          = withObject "Subaccount"
+          = withObject "SubAccount"
               (\ o ->
-                 Subaccount <$>
+                 SubAccount <$>
                    (o .:? "kind" .!= "dfareporting#subaccount") <*>
                      (o .:? "availablePermissionIds" .!= mempty)
                      <*> (o .:? "accountId")
                      <*> (o .:? "name")
                      <*> (o .:? "id"))
 
-instance ToJSON Subaccount where
-        toJSON Subaccount{..}
+instance ToJSON SubAccount where
+        toJSON SubAccount{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _subKind),
+                 [Just ("kind" .= _saKind),
                   ("availablePermissionIds" .=) <$>
-                    _subAvailablePermissionIds,
-                  ("accountId" .=) <$> _subAccountId,
-                  ("name" .=) <$> _subName, ("id" .=) <$> _subId])
+                    _saAvailablePermissionIds,
+                  ("accountId" .=) <$> _saAccountId,
+                  ("name" .=) <$> _saName, ("id" .=) <$> _saId])
 
 -- | Placement Strategy List Response
 --
 -- /See:/ 'placementStrategiesListResponse' smart constructor.
 data PlacementStrategiesListResponse = PlacementStrategiesListResponse
-    { _pslrPlacementStrategies :: !(Maybe [Maybe PlacementStrategy])
+    { _pslrPlacementStrategies :: !(Maybe [PlacementStrategy])
     , _pslrNextPageToken       :: !(Maybe Text)
     , _pslrKind                :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -4885,7 +4885,7 @@ placementStrategiesListResponse =
     }
 
 -- | Placement strategy collection.
-pslrPlacementStrategies :: Lens' PlacementStrategiesListResponse [Maybe PlacementStrategy]
+pslrPlacementStrategies :: Lens' PlacementStrategiesListResponse [PlacementStrategy]
 pslrPlacementStrategies
   = lens _pslrPlacementStrategies
       (\ s a -> s{_pslrPlacementStrategies = a})
@@ -4935,7 +4935,7 @@ data PricingSchedule = PricingSchedule
     , _psStartDate             :: !(Maybe UTCTime)
     , _psCapCostOption         :: !(Maybe PricingScheduleCapCostOption)
     , _psPricingType           :: !(Maybe PricingSchedulePricingType)
-    , _psPricingPeriods        :: !(Maybe [Maybe PricingSchedulePricingPeriod])
+    , _psPricingPeriods        :: !(Maybe [PricingSchedulePricingPeriod])
     , _psFlighted              :: !(Maybe Bool)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -5026,7 +5026,7 @@ psPricingType
       (\ s a -> s{_psPricingType = a})
 
 -- | Pricing periods for this placement.
-psPricingPeriods :: Lens' PricingSchedule [Maybe PricingSchedulePricingPeriod]
+psPricingPeriods :: Lens' PricingSchedule [PricingSchedulePricingPeriod]
 psPricingPeriods
   = lens _psPricingPeriods
       (\ s a -> s{_psPricingPeriods = a})
@@ -5233,7 +5233,7 @@ instance ToJSON OperatingSystem where
 -- /See:/ 'citiesListResponse' smart constructor.
 data CitiesListResponse = CitiesListResponse
     { _cKind   :: !Text
-    , _cCities :: !(Maybe [Maybe City])
+    , _cCities :: !(Maybe [City])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CitiesListResponse' with the minimum fields required to make a request.
@@ -5257,7 +5257,7 @@ cKind :: Lens' CitiesListResponse Text
 cKind = lens _cKind (\ s a -> s{_cKind = a})
 
 -- | City collection.
-cCities :: Lens' CitiesListResponse [Maybe City]
+cCities :: Lens' CitiesListResponse [City]
 cCities
   = lens _cCities (\ s a -> s{_cCities = a}) . _Default
       . _Coerce
@@ -5283,7 +5283,7 @@ instance ToJSON CitiesListResponse where
 data ChangeLogsListResponse = ChangeLogsListResponse
     { _cllrNextPageToken :: !(Maybe Text)
     , _cllrKind          :: !Text
-    , _cllrChangeLogs    :: !(Maybe [Maybe ChangeLog])
+    , _cllrChangeLogs    :: !(Maybe [ChangeLog])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ChangeLogsListResponse' with the minimum fields required to make a request.
@@ -5316,7 +5316,7 @@ cllrKind :: Lens' ChangeLogsListResponse Text
 cllrKind = lens _cllrKind (\ s a -> s{_cllrKind = a})
 
 -- | Change log collection.
-cllrChangeLogs :: Lens' ChangeLogsListResponse [Maybe ChangeLog]
+cllrChangeLogs :: Lens' ChangeLogsListResponse [ChangeLog]
 cllrChangeLogs
   = lens _cllrChangeLogs
       (\ s a -> s{_cllrChangeLogs = a})
@@ -5346,7 +5346,7 @@ instance ToJSON ChangeLogsListResponse where
 -- /See:/ 'accountPermissionsListResponse' smart constructor.
 data AccountPermissionsListResponse = AccountPermissionsListResponse
     { _aplrKind               :: !Text
-    , _aplrAccountPermissions :: !(Maybe [Maybe AccountPermission])
+    , _aplrAccountPermissions :: !(Maybe [AccountPermission])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountPermissionsListResponse' with the minimum fields required to make a request.
@@ -5370,7 +5370,7 @@ aplrKind :: Lens' AccountPermissionsListResponse Text
 aplrKind = lens _aplrKind (\ s a -> s{_aplrKind = a})
 
 -- | Account permission collection.
-aplrAccountPermissions :: Lens' AccountPermissionsListResponse [Maybe AccountPermission]
+aplrAccountPermissions :: Lens' AccountPermissionsListResponse [AccountPermission]
 aplrAccountPermissions
   = lens _aplrAccountPermissions
       (\ s a -> s{_aplrAccountPermissions = a})
@@ -5400,7 +5400,7 @@ instance ToJSON AccountPermissionsListResponse where
 -- /See:/ 'clickThroughURLSuffixProperties' smart constructor.
 data ClickThroughURLSuffixProperties = ClickThroughURLSuffixProperties
     { _ctuspOverrideInheritedSuffix :: !(Maybe Bool)
-    , _ctuspClickThroughUrlSuffix   :: !(Maybe Text)
+    , _ctuspClickThroughURLSuffix   :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ClickThroughURLSuffixProperties' with the minimum fields required to make a request.
@@ -5409,13 +5409,13 @@ data ClickThroughURLSuffixProperties = ClickThroughURLSuffixProperties
 --
 -- * 'ctuspOverrideInheritedSuffix'
 --
--- * 'ctuspClickThroughUrlSuffix'
+-- * 'ctuspClickThroughURLSuffix'
 clickThroughURLSuffixProperties
     :: ClickThroughURLSuffixProperties
 clickThroughURLSuffixProperties =
     ClickThroughURLSuffixProperties
     { _ctuspOverrideInheritedSuffix = Nothing
-    , _ctuspClickThroughUrlSuffix = Nothing
+    , _ctuspClickThroughURLSuffix = Nothing
     }
 
 -- | Whether this entity should override the inherited click-through URL
@@ -5427,10 +5427,10 @@ ctuspOverrideInheritedSuffix
 
 -- | Click-through URL suffix to apply to all ads in this entity\'s scope.
 -- Must be less than 128 characters long.
-ctuspClickThroughUrlSuffix :: Lens' ClickThroughURLSuffixProperties (Maybe Text)
-ctuspClickThroughUrlSuffix
-  = lens _ctuspClickThroughUrlSuffix
-      (\ s a -> s{_ctuspClickThroughUrlSuffix = a})
+ctuspClickThroughURLSuffix :: Lens' ClickThroughURLSuffixProperties (Maybe Text)
+ctuspClickThroughURLSuffix
+  = lens _ctuspClickThroughURLSuffix
+      (\ s a -> s{_ctuspClickThroughURLSuffix = a})
 
 instance FromJSON ClickThroughURLSuffixProperties
          where
@@ -5448,14 +5448,14 @@ instance ToJSON ClickThroughURLSuffixProperties where
                  [("overrideInheritedSuffix" .=) <$>
                     _ctuspOverrideInheritedSuffix,
                   ("clickThroughUrlSuffix" .=) <$>
-                    _ctuspClickThroughUrlSuffix])
+                    _ctuspClickThroughURLSuffix])
 
 -- | Operating System Version List Response
 --
 -- /See:/ 'operatingSystemVersionsListResponse' smart constructor.
 data OperatingSystemVersionsListResponse = OperatingSystemVersionsListResponse
     { _osvlrKind                    :: !Text
-    , _osvlrOperatingSystemVersions :: !(Maybe [Maybe OperatingSystemVersion])
+    , _osvlrOperatingSystemVersions :: !(Maybe [OperatingSystemVersion])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperatingSystemVersionsListResponse' with the minimum fields required to make a request.
@@ -5480,7 +5480,7 @@ osvlrKind
   = lens _osvlrKind (\ s a -> s{_osvlrKind = a})
 
 -- | Operating system version collection.
-osvlrOperatingSystemVersions :: Lens' OperatingSystemVersionsListResponse [Maybe OperatingSystemVersion]
+osvlrOperatingSystemVersions :: Lens' OperatingSystemVersionsListResponse [OperatingSystemVersion]
 osvlrOperatingSystemVersions
   = lens _osvlrOperatingSystemVersions
       (\ s a -> s{_osvlrOperatingSystemVersions = a})
@@ -5513,11 +5513,11 @@ data ReportReachCriteria = ReportReachCriteria
     { _rrcReachByFrequencyMetricNames    :: !(Maybe [Text])
     , _rrcEnableAllDimensionCombinations :: !(Maybe Bool)
     , _rrcMetricNames                    :: !(Maybe [Text])
-    , _rrcCustomRichMediaEvents          :: !(Maybe (Maybe CustomRichMediaEvents))
-    , _rrcDimensionFilters               :: !(Maybe [Maybe DimensionValue])
-    , _rrcActivities                     :: !(Maybe (Maybe Activities))
-    , _rrcDateRange                      :: !(Maybe (Maybe DateRange))
-    , _rrcDimensions                     :: !(Maybe [Maybe SortedDimension])
+    , _rrcCustomRichMediaEvents          :: !(Maybe CustomRichMediaEvents)
+    , _rrcDimensionFilters               :: !(Maybe [DimensionValue])
+    , _rrcActivities                     :: !(Maybe Activities)
+    , _rrcDateRange                      :: !(Maybe DateRange)
+    , _rrcDimensions                     :: !(Maybe [SortedDimension])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportReachCriteria' with the minimum fields required to make a request.
@@ -5579,7 +5579,7 @@ rrcMetricNames
       . _Coerce
 
 -- | Custom Rich Media Events group.
-rrcCustomRichMediaEvents :: Lens' ReportReachCriteria (Maybe (Maybe CustomRichMediaEvents))
+rrcCustomRichMediaEvents :: Lens' ReportReachCriteria (Maybe CustomRichMediaEvents)
 rrcCustomRichMediaEvents
   = lens _rrcCustomRichMediaEvents
       (\ s a -> s{_rrcCustomRichMediaEvents = a})
@@ -5587,7 +5587,7 @@ rrcCustomRichMediaEvents
 -- | The list of filters on which dimensions are filtered. Filters for
 -- different dimensions are ANDed, filters for the same dimension are
 -- grouped together and ORed.
-rrcDimensionFilters :: Lens' ReportReachCriteria [Maybe DimensionValue]
+rrcDimensionFilters :: Lens' ReportReachCriteria [DimensionValue]
 rrcDimensionFilters
   = lens _rrcDimensionFilters
       (\ s a -> s{_rrcDimensionFilters = a})
@@ -5595,18 +5595,18 @@ rrcDimensionFilters
       . _Coerce
 
 -- | Activity group.
-rrcActivities :: Lens' ReportReachCriteria (Maybe (Maybe Activities))
+rrcActivities :: Lens' ReportReachCriteria (Maybe Activities)
 rrcActivities
   = lens _rrcActivities
       (\ s a -> s{_rrcActivities = a})
 
 -- | The date range this report should be run for.
-rrcDateRange :: Lens' ReportReachCriteria (Maybe (Maybe DateRange))
+rrcDateRange :: Lens' ReportReachCriteria (Maybe DateRange)
 rrcDateRange
   = lens _rrcDateRange (\ s a -> s{_rrcDateRange = a})
 
 -- | The list of dimensions the report should include.
-rrcDimensions :: Lens' ReportReachCriteria [Maybe SortedDimension]
+rrcDimensions :: Lens' ReportReachCriteria [SortedDimension]
 rrcDimensions
   = lens _rrcDimensions
       (\ s a -> s{_rrcDimensions = a})
@@ -5649,7 +5649,7 @@ instance ToJSON ReportReachCriteria where
 data TargetableRemarketingListsListResponse = TargetableRemarketingListsListResponse
     { _trllrNextPageToken              :: !(Maybe Text)
     , _trllrKind                       :: !Text
-    , _trllrTargetableRemarketingLists :: !(Maybe [Maybe TargetableRemarketingList])
+    , _trllrTargetableRemarketingLists :: !(Maybe [TargetableRemarketingList])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetableRemarketingListsListResponse' with the minimum fields required to make a request.
@@ -5683,7 +5683,7 @@ trllrKind
   = lens _trllrKind (\ s a -> s{_trllrKind = a})
 
 -- | Targetable remarketing list collection.
-trllrTargetableRemarketingLists :: Lens' TargetableRemarketingListsListResponse [Maybe TargetableRemarketingList]
+trllrTargetableRemarketingLists :: Lens' TargetableRemarketingListsListResponse [TargetableRemarketingList]
 trllrTargetableRemarketingLists
   = lens _trllrTargetableRemarketingLists
       (\ s a -> s{_trllrTargetableRemarketingLists = a})
@@ -5719,7 +5719,7 @@ data Country = Country
     , _couName        :: !(Maybe Text)
     , _couCountryCode :: !(Maybe Text)
     , _couDartId      :: !(Maybe Int64)
-    , _couSslEnabled  :: !(Maybe Bool)
+    , _couSSLEnabled  :: !(Maybe Bool)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Country' with the minimum fields required to make a request.
@@ -5734,7 +5734,7 @@ data Country = Country
 --
 -- * 'couDartId'
 --
--- * 'couSslEnabled'
+-- * 'couSSLEnabled'
 country
     :: Country
 country =
@@ -5743,7 +5743,7 @@ country =
     , _couName = Nothing
     , _couCountryCode = Nothing
     , _couDartId = Nothing
-    , _couSslEnabled = Nothing
+    , _couSSLEnabled = Nothing
     }
 
 -- | Identifies what kind of resource this is. Value: the fixed string
@@ -5768,10 +5768,10 @@ couDartId
   = lens _couDartId (\ s a -> s{_couDartId = a})
 
 -- | Whether ad serving supports secure servers in this country.
-couSslEnabled :: Lens' Country (Maybe Bool)
-couSslEnabled
-  = lens _couSslEnabled
-      (\ s a -> s{_couSslEnabled = a})
+couSSLEnabled :: Lens' Country (Maybe Bool)
+couSSLEnabled
+  = lens _couSSLEnabled
+      (\ s a -> s{_couSSLEnabled = a})
 
 instance FromJSON Country where
         parseJSON
@@ -5791,7 +5791,7 @@ instance ToJSON Country where
                  [Just ("kind" .= _couKind), ("name" .=) <$> _couName,
                   ("countryCode" .=) <$> _couCountryCode,
                   ("dartId" .=) <$> _couDartId,
-                  ("sslEnabled" .=) <$> _couSslEnabled])
+                  ("sslEnabled" .=) <$> _couSSLEnabled])
 
 -- | Pricing Information
 --
@@ -5801,7 +5801,7 @@ data Pricing = Pricing
     , _priStartDate   :: !(Maybe UTCTime)
     , _priGroupType   :: !(Maybe PricingGroupType)
     , _priPricingType :: !(Maybe PricingPricingType)
-    , _priFlights     :: !(Maybe [Maybe Flight])
+    , _priFlights     :: !(Maybe [Flight])
     , _priCapCostType :: !(Maybe PricingCapCostType)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -5863,7 +5863,7 @@ priPricingType
 -- | Flights of this inventory item. A flight (a.k.a. pricing period)
 -- represents the inventory item pricing information for a specific period
 -- of time.
-priFlights :: Lens' Pricing [Maybe Flight]
+priFlights :: Lens' Pricing [Flight]
 priFlights
   = lens _priFlights (\ s a -> s{_priFlights = a}) .
       _Default
@@ -5902,7 +5902,7 @@ instance ToJSON Pricing where
 -- /See:/ 'customRichMediaEvents' smart constructor.
 data CustomRichMediaEvents = CustomRichMediaEvents
     { _crmeKind             :: !Text
-    , _crmeFilteredEventIds :: !(Maybe [Maybe DimensionValue])
+    , _crmeFilteredEventIds :: !(Maybe [DimensionValue])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CustomRichMediaEvents' with the minimum fields required to make a request.
@@ -5927,7 +5927,7 @@ crmeKind = lens _crmeKind (\ s a -> s{_crmeKind = a})
 
 -- | List of custom rich media event IDs. Dimension values must be all of
 -- type dfa:richMediaEventTypeIdAndName.
-crmeFilteredEventIds :: Lens' CustomRichMediaEvents [Maybe DimensionValue]
+crmeFilteredEventIds :: Lens' CustomRichMediaEvents [DimensionValue]
 crmeFilteredEventIds
   = lens _crmeFilteredEventIds
       (\ s a -> s{_crmeFilteredEventIds = a})
@@ -5954,7 +5954,7 @@ instance ToJSON CustomRichMediaEvents where
 --
 -- /See:/ 'audienceSegmentGroup' smart constructor.
 data AudienceSegmentGroup = AudienceSegmentGroup
-    { _asgAudienceSegments :: !(Maybe [Maybe AudienceSegment])
+    { _asgAudienceSegments :: !(Maybe [AudienceSegment])
     , _asgName             :: !(Maybe Text)
     , _asgId               :: !(Maybe Int64)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -5979,7 +5979,7 @@ audienceSegmentGroup =
 
 -- | Audience segments assigned to this group. The number of segments must be
 -- between 2 and 100.
-asgAudienceSegments :: Lens' AudienceSegmentGroup [Maybe AudienceSegment]
+asgAudienceSegments :: Lens' AudienceSegmentGroup [AudienceSegment]
 asgAudienceSegments
   = lens _asgAudienceSegments
       (\ s a -> s{_asgAudienceSegments = a})
@@ -6130,7 +6130,7 @@ instance ToJSON Flight where
 data Activities = Activities
     { _actKind        :: !Text
     , _actMetricNames :: !(Maybe [Text])
-    , _actFilters     :: !(Maybe [Maybe DimensionValue])
+    , _actFilters     :: !(Maybe [DimensionValue])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Activities' with the minimum fields required to make a request.
@@ -6165,7 +6165,7 @@ actMetricNames
 
 -- | List of activity filters. The dimension values need to be all either of
 -- type \"dfa:activity\" or \"dfa:activityGroup\".
-actFilters :: Lens' Activities [Maybe DimensionValue]
+actFilters :: Lens' Activities [DimensionValue]
 actFilters
   = lens _actFilters (\ s a -> s{_actFilters = a}) .
       _Default
@@ -6193,7 +6193,7 @@ instance ToJSON Activities where
 -- /See:/ 'accountsListResponse' smart constructor.
 data AccountsListResponse = AccountsListResponse
     { _accNextPageToken :: !(Maybe Text)
-    , _accAccounts      :: !(Maybe [Maybe Account])
+    , _accAccounts      :: !(Maybe [Account])
     , _accKind          :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -6222,7 +6222,7 @@ accNextPageToken
       (\ s a -> s{_accNextPageToken = a})
 
 -- | Account collection.
-accAccounts :: Lens' AccountsListResponse [Maybe Account]
+accAccounts :: Lens' AccountsListResponse [Account]
 accAccounts
   = lens _accAccounts (\ s a -> s{_accAccounts = a}) .
       _Default
@@ -6256,52 +6256,52 @@ instance ToJSON AccountsListResponse where
 --
 -- /See:/ 'creative' smart constructor.
 data Creative = Creative
-    { _creConvertFlashToHtml5                 :: !(Maybe Bool)
-    , _creBackupImageTargetWindow             :: !(Maybe (Maybe TargetWindow))
-    , _creRenderingIdDimensionValue           :: !(Maybe (Maybe DimensionValue))
+    { _creConvertFlashToHTML5                 :: !(Maybe Bool)
+    , _creBackupImageTargetWindow             :: !(Maybe TargetWindow)
+    , _creRenderingIdDimensionValue           :: !(Maybe DimensionValue)
     , _creCustomKeyValues                     :: !(Maybe [Text])
     , _creVideoDuration                       :: !(Maybe Float)
     , _creRenderingId                         :: !(Maybe Int64)
-    , _creThirdPartyBackupImageImpressionsUrl :: !(Maybe Text)
-    , _creFsCommand                           :: !(Maybe (Maybe FsCommand))
+    , _creThirdPartyBackupImageImpressionsURL :: !(Maybe Text)
+    , _creFsCommand                           :: !(Maybe FsCommand)
     , _creAllowScriptAccess                   :: !(Maybe Bool)
-    , _creHtmlCodeLocked                      :: !(Maybe Bool)
+    , _creHTMLCodeLocked                      :: !(Maybe Bool)
     , _creRequiredFlashPluginVersion          :: !(Maybe Text)
     , _creAuthoringTool                       :: !(Maybe CreativeAuthoringTool)
-    , _creSize                                :: !(Maybe (Maybe Size))
-    , _creThirdPartyUrls                      :: !(Maybe [Maybe ThirdPartyTrackingURL])
-    , _creCounterCustomEvents                 :: !(Maybe [Maybe CreativeCustomEvent])
+    , _creSize                                :: !(Maybe Size)
+    , _creThirdPartyURLs                      :: !(Maybe [ThirdPartyTrackingURL])
+    , _creCounterCustomEvents                 :: !(Maybe [CreativeCustomEvent])
     , _creKind                                :: !Text
-    , _creSslOverride                         :: !(Maybe Bool)
-    , _creHtmlCode                            :: !(Maybe Text)
+    , _creSSLOverride                         :: !(Maybe Bool)
+    , _creHTMLCode                            :: !(Maybe Text)
     , _creAdvertiserId                        :: !(Maybe Int64)
     , _creRequiredFlashVersion                :: !(Maybe Int32)
-    , _creBackgroundColor                     :: !(Maybe Text)
+    , _creBackgRoundColor                     :: !(Maybe Text)
     , _creAdTagKeys                           :: !(Maybe [Text])
     , _creSkippable                           :: !(Maybe Bool)
-    , _creSslCompliant                        :: !(Maybe Bool)
-    , _creIdDimensionValue                    :: !(Maybe (Maybe DimensionValue))
+    , _creSSLCompliant                        :: !(Maybe Bool)
+    , _creIdDimensionValue                    :: !(Maybe DimensionValue)
     , _creBackupImageReportingLabel           :: !(Maybe Text)
     , _creCommercialId                        :: !(Maybe Text)
     , _creActive                              :: !(Maybe Bool)
-    , _creExitCustomEvents                    :: !(Maybe [Maybe CreativeCustomEvent])
+    , _creExitCustomEvents                    :: !(Maybe [CreativeCustomEvent])
     , _creAccountId                           :: !(Maybe Int64)
-    , _creBackupImageClickThroughUrl          :: !(Maybe Text)
+    , _creBackupImageClickThroughURL          :: !(Maybe Text)
     , _creName                                :: !(Maybe Text)
     , _creOverrideCss                         :: !(Maybe Text)
     , _creVideoDescription                    :: !(Maybe Text)
-    , _creClickTags                           :: !(Maybe [Maybe ClickTag])
+    , _creClickTags                           :: !(Maybe [ClickTag])
     , _creAdParameters                        :: !(Maybe Text)
     , _creVersion                             :: !(Maybe Int32)
     , _creLatestTraffickedCreativeId          :: !(Maybe Int64)
-    , _creThirdPartyRichMediaImpressionsUrl   :: !(Maybe Text)
-    , _creLastModifiedInfo                    :: !(Maybe (Maybe LastModifiedInfo))
+    , _creThirdPartyRichMediaImpressionsURL   :: !(Maybe Text)
+    , _creLastModifiedInfo                    :: !(Maybe LastModifiedInfo)
     , _creId                                  :: !(Maybe Int64)
     , _creStudioAdvertiserId                  :: !(Maybe Int64)
-    , _creCreativeAssets                      :: !(Maybe [Maybe CreativeAsset])
-    , _creSubaccountId                        :: !(Maybe Int64)
+    , _creCreativeAssets                      :: !(Maybe [CreativeAsset])
+    , _creSubAccountId                        :: !(Maybe Int64)
     , _creType                                :: !(Maybe CreativeType)
-    , _creTimerCustomEvents                   :: !(Maybe [Maybe CreativeCustomEvent])
+    , _creTimerCustomEvents                   :: !(Maybe [CreativeCustomEvent])
     , _creStudioCreativeId                    :: !(Maybe Int64)
     , _creCompatibility                       :: !(Maybe [CreativeCompatibility])
     , _creBackupImageFeatures                 :: !(Maybe [CreativeBackupImageFeatures])
@@ -6310,16 +6310,16 @@ data Creative = Creative
     , _creCompanionCreatives                  :: !(Maybe [Int64])
     , _creTotalFileSize                       :: !(Maybe Int64)
     , _creStudioTraffickedCreativeId          :: !(Maybe Int64)
-    , _creRedirectUrl                         :: !(Maybe Text)
+    , _creRedirectURL                         :: !(Maybe Text)
     , _creAutoAdvanceImages                   :: !(Maybe Bool)
-    , _creCreativeFieldAssignments            :: !(Maybe [Maybe CreativeFieldAssignment])
+    , _creCreativeFieldAssignments            :: !(Maybe [CreativeFieldAssignment])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Creative' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'creConvertFlashToHtml5'
+-- * 'creConvertFlashToHTML5'
 --
 -- * 'creBackupImageTargetWindow'
 --
@@ -6331,13 +6331,13 @@ data Creative = Creative
 --
 -- * 'creRenderingId'
 --
--- * 'creThirdPartyBackupImageImpressionsUrl'
+-- * 'creThirdPartyBackupImageImpressionsURL'
 --
 -- * 'creFsCommand'
 --
 -- * 'creAllowScriptAccess'
 --
--- * 'creHtmlCodeLocked'
+-- * 'creHTMLCodeLocked'
 --
 -- * 'creRequiredFlashPluginVersion'
 --
@@ -6345,27 +6345,27 @@ data Creative = Creative
 --
 -- * 'creSize'
 --
--- * 'creThirdPartyUrls'
+-- * 'creThirdPartyURLs'
 --
 -- * 'creCounterCustomEvents'
 --
 -- * 'creKind'
 --
--- * 'creSslOverride'
+-- * 'creSSLOverride'
 --
--- * 'creHtmlCode'
+-- * 'creHTMLCode'
 --
 -- * 'creAdvertiserId'
 --
 -- * 'creRequiredFlashVersion'
 --
--- * 'creBackgroundColor'
+-- * 'creBackgRoundColor'
 --
 -- * 'creAdTagKeys'
 --
 -- * 'creSkippable'
 --
--- * 'creSslCompliant'
+-- * 'creSSLCompliant'
 --
 -- * 'creIdDimensionValue'
 --
@@ -6379,7 +6379,7 @@ data Creative = Creative
 --
 -- * 'creAccountId'
 --
--- * 'creBackupImageClickThroughUrl'
+-- * 'creBackupImageClickThroughURL'
 --
 -- * 'creName'
 --
@@ -6395,7 +6395,7 @@ data Creative = Creative
 --
 -- * 'creLatestTraffickedCreativeId'
 --
--- * 'creThirdPartyRichMediaImpressionsUrl'
+-- * 'creThirdPartyRichMediaImpressionsURL'
 --
 -- * 'creLastModifiedInfo'
 --
@@ -6405,7 +6405,7 @@ data Creative = Creative
 --
 -- * 'creCreativeAssets'
 --
--- * 'creSubaccountId'
+-- * 'creSubAccountId'
 --
 -- * 'creType'
 --
@@ -6427,7 +6427,7 @@ data Creative = Creative
 --
 -- * 'creStudioTraffickedCreativeId'
 --
--- * 'creRedirectUrl'
+-- * 'creRedirectURL'
 --
 -- * 'creAutoAdvanceImages'
 --
@@ -6436,37 +6436,37 @@ creative
     :: Creative
 creative =
     Creative
-    { _creConvertFlashToHtml5 = Nothing
+    { _creConvertFlashToHTML5 = Nothing
     , _creBackupImageTargetWindow = Nothing
     , _creRenderingIdDimensionValue = Nothing
     , _creCustomKeyValues = Nothing
     , _creVideoDuration = Nothing
     , _creRenderingId = Nothing
-    , _creThirdPartyBackupImageImpressionsUrl = Nothing
+    , _creThirdPartyBackupImageImpressionsURL = Nothing
     , _creFsCommand = Nothing
     , _creAllowScriptAccess = Nothing
-    , _creHtmlCodeLocked = Nothing
+    , _creHTMLCodeLocked = Nothing
     , _creRequiredFlashPluginVersion = Nothing
     , _creAuthoringTool = Nothing
     , _creSize = Nothing
-    , _creThirdPartyUrls = Nothing
+    , _creThirdPartyURLs = Nothing
     , _creCounterCustomEvents = Nothing
     , _creKind = "dfareporting#creative"
-    , _creSslOverride = Nothing
-    , _creHtmlCode = Nothing
+    , _creSSLOverride = Nothing
+    , _creHTMLCode = Nothing
     , _creAdvertiserId = Nothing
     , _creRequiredFlashVersion = Nothing
-    , _creBackgroundColor = Nothing
+    , _creBackgRoundColor = Nothing
     , _creAdTagKeys = Nothing
     , _creSkippable = Nothing
-    , _creSslCompliant = Nothing
+    , _creSSLCompliant = Nothing
     , _creIdDimensionValue = Nothing
     , _creBackupImageReportingLabel = Nothing
     , _creCommercialId = Nothing
     , _creActive = Nothing
     , _creExitCustomEvents = Nothing
     , _creAccountId = Nothing
-    , _creBackupImageClickThroughUrl = Nothing
+    , _creBackupImageClickThroughURL = Nothing
     , _creName = Nothing
     , _creOverrideCss = Nothing
     , _creVideoDescription = Nothing
@@ -6474,12 +6474,12 @@ creative =
     , _creAdParameters = Nothing
     , _creVersion = Nothing
     , _creLatestTraffickedCreativeId = Nothing
-    , _creThirdPartyRichMediaImpressionsUrl = Nothing
+    , _creThirdPartyRichMediaImpressionsURL = Nothing
     , _creLastModifiedInfo = Nothing
     , _creId = Nothing
     , _creStudioAdvertiserId = Nothing
     , _creCreativeAssets = Nothing
-    , _creSubaccountId = Nothing
+    , _creSubAccountId = Nothing
     , _creType = Nothing
     , _creTimerCustomEvents = Nothing
     , _creStudioCreativeId = Nothing
@@ -6490,7 +6490,7 @@ creative =
     , _creCompanionCreatives = Nothing
     , _creTotalFileSize = Nothing
     , _creStudioTraffickedCreativeId = Nothing
-    , _creRedirectUrl = Nothing
+    , _creRedirectURL = Nothing
     , _creAutoAdvanceImages = Nothing
     , _creCreativeFieldAssignments = Nothing
     }
@@ -6500,21 +6500,21 @@ creative =
 -- users can choose to disable it if they don\'t want the system to
 -- generate and use HTML5 asset for this creative. Applicable to the
 -- following creative types: ENHANCED_BANNER and FLASH_INPAGE.
-creConvertFlashToHtml5 :: Lens' Creative (Maybe Bool)
-creConvertFlashToHtml5
-  = lens _creConvertFlashToHtml5
-      (\ s a -> s{_creConvertFlashToHtml5 = a})
+creConvertFlashToHTML5 :: Lens' Creative (Maybe Bool)
+creConvertFlashToHTML5
+  = lens _creConvertFlashToHTML5
+      (\ s a -> s{_creConvertFlashToHTML5 = a})
 
 -- | Target window for backup image. Applicable to the following creative
 -- types: ENHANCED_BANNER, FLASH_INPAGE, and HTML5_BANNER.
-creBackupImageTargetWindow :: Lens' Creative (Maybe (Maybe TargetWindow))
+creBackupImageTargetWindow :: Lens' Creative (Maybe TargetWindow)
 creBackupImageTargetWindow
   = lens _creBackupImageTargetWindow
       (\ s a -> s{_creBackupImageTargetWindow = a})
 
 -- | Dimension value for the rendering ID of this creative. This is a
 -- read-only field. Applicable to all creative types.
-creRenderingIdDimensionValue :: Lens' Creative (Maybe (Maybe DimensionValue))
+creRenderingIdDimensionValue :: Lens' Creative (Maybe DimensionValue)
 creRenderingIdDimensionValue
   = lens _creRenderingIdDimensionValue
       (\ s a -> s{_creRenderingIdDimensionValue = a})
@@ -6548,18 +6548,18 @@ creRenderingId
 
 -- | Third-party URL used to record backup image impressions. Applicable to
 -- the following creative types: all RICH_MEDIA
-creThirdPartyBackupImageImpressionsUrl :: Lens' Creative (Maybe Text)
-creThirdPartyBackupImageImpressionsUrl
-  = lens _creThirdPartyBackupImageImpressionsUrl
+creThirdPartyBackupImageImpressionsURL :: Lens' Creative (Maybe Text)
+creThirdPartyBackupImageImpressionsURL
+  = lens _creThirdPartyBackupImageImpressionsURL
       (\ s a ->
-         s{_creThirdPartyBackupImageImpressionsUrl = a})
+         s{_creThirdPartyBackupImageImpressionsURL = a})
 
 -- | OpenWindow FSCommand of this creative. This lets the SWF file
 -- communicate with either Flash Player or the program hosting Flash
 -- Player, such as a web browser. This is only triggered if
 -- allowScriptAccess field is true. Applicable to the following creative
 -- types: FLASH_INPAGE.
-creFsCommand :: Lens' Creative (Maybe (Maybe FsCommand))
+creFsCommand :: Lens' Creative (Maybe FsCommand)
 creFsCommand
   = lens _creFsCommand (\ s a -> s{_creFsCommand = a})
 
@@ -6574,10 +6574,10 @@ creAllowScriptAccess
 -- | Whether HTML code is DCM-generated or manually entered. Set to true to
 -- ignore changes to htmlCode. Applicable to the following creative types:
 -- FLASH_INPAGE and HTML5_BANNER.
-creHtmlCodeLocked :: Lens' Creative (Maybe Bool)
-creHtmlCodeLocked
-  = lens _creHtmlCodeLocked
-      (\ s a -> s{_creHtmlCodeLocked = a})
+creHTMLCodeLocked :: Lens' Creative (Maybe Bool)
+creHTMLCodeLocked
+  = lens _creHTMLCodeLocked
+      (\ s a -> s{_creHTMLCodeLocked = a})
 
 -- | The minimum required Flash plugin version for this creative. For
 -- example, 11.2.202.235. This is a read-only field. Applicable to the
@@ -6601,22 +6601,22 @@ creAuthoringTool
 -- set using the actual size of the associated image assets. Applicable to
 -- the following creative types: ENHANCED_BANNER, ENHANCED_IMAGE,
 -- FLASH_INPAGE, HTML5_BANNER, IMAGE, and all RICH_MEDIA.
-creSize :: Lens' Creative (Maybe (Maybe Size))
+creSize :: Lens' Creative (Maybe Size)
 creSize = lens _creSize (\ s a -> s{_creSize = a})
 
 -- | Third-party URLs for tracking in-stream video creative events.
 -- Applicable to the following creative types: INSTREAM_VIDEO and all
 -- VPAID.
-creThirdPartyUrls :: Lens' Creative [Maybe ThirdPartyTrackingURL]
-creThirdPartyUrls
-  = lens _creThirdPartyUrls
-      (\ s a -> s{_creThirdPartyUrls = a})
+creThirdPartyURLs :: Lens' Creative [ThirdPartyTrackingURL]
+creThirdPartyURLs
+  = lens _creThirdPartyURLs
+      (\ s a -> s{_creThirdPartyURLs = a})
       . _Default
       . _Coerce
 
 -- | List of counter events configured for the creative. Applicable to the
 -- following creative types: all RICH_MEDIA, and all VPAID.
-creCounterCustomEvents :: Lens' Creative [Maybe CreativeCustomEvent]
+creCounterCustomEvents :: Lens' Creative [CreativeCustomEvent]
 creCounterCustomEvents
   = lens _creCounterCustomEvents
       (\ s a -> s{_creCounterCustomEvents = a})
@@ -6630,18 +6630,18 @@ creKind = lens _creKind (\ s a -> s{_creKind = a})
 
 -- | Whether creative should be treated as SSL compliant even if the system
 -- scan shows it\'s not.
-creSslOverride :: Lens' Creative (Maybe Bool)
-creSslOverride
-  = lens _creSslOverride
-      (\ s a -> s{_creSslOverride = a})
+creSSLOverride :: Lens' Creative (Maybe Bool)
+creSSLOverride
+  = lens _creSSLOverride
+      (\ s a -> s{_creSSLOverride = a})
 
 -- | HTML code for the creative. This is a required field when applicable.
 -- This field is ignored if htmlCodeLocked is false. Applicable to the
 -- following creative types: all CUSTOM, FLASH_INPAGE, and HTML5_BANNER,
 -- and all RICH_MEDIA.
-creHtmlCode :: Lens' Creative (Maybe Text)
-creHtmlCode
-  = lens _creHtmlCode (\ s a -> s{_creHtmlCode = a})
+creHTMLCode :: Lens' Creative (Maybe Text)
+creHTMLCode
+  = lens _creHTMLCode (\ s a -> s{_creHTMLCode = a})
 
 -- | Advertiser ID of this creative. This is a required field. Applicable to
 -- all creative types.
@@ -6662,10 +6662,10 @@ creRequiredFlashVersion
 -- | The 6-character HTML color code, beginning with #, for the background of
 -- the window area where the Flash file is displayed. Default is white.
 -- Applicable to the following creative types: FLASH_INPAGE.
-creBackgroundColor :: Lens' Creative (Maybe Text)
-creBackgroundColor
-  = lens _creBackgroundColor
-      (\ s a -> s{_creBackgroundColor = a})
+creBackgRoundColor :: Lens' Creative (Maybe Text)
+creBackgRoundColor
+  = lens _creBackgRoundColor
+      (\ s a -> s{_creBackgRoundColor = a})
 
 -- | Keywords for a Rich Media creative. Keywords let you customize the
 -- creative settings of a Rich Media ad running on your site without having
@@ -6686,14 +6686,14 @@ creSkippable
 
 -- | Whether the creative is SSL-compliant. This is a read-only field.
 -- Applicable to all creative types.
-creSslCompliant :: Lens' Creative (Maybe Bool)
-creSslCompliant
-  = lens _creSslCompliant
-      (\ s a -> s{_creSslCompliant = a})
+creSSLCompliant :: Lens' Creative (Maybe Bool)
+creSSLCompliant
+  = lens _creSSLCompliant
+      (\ s a -> s{_creSSLCompliant = a})
 
 -- | Dimension value for the ID of this creative. This is a read-only field.
 -- Applicable to all creative types.
-creIdDimensionValue :: Lens' Creative (Maybe (Maybe DimensionValue))
+creIdDimensionValue :: Lens' Creative (Maybe DimensionValue)
 creIdDimensionValue
   = lens _creIdDimensionValue
       (\ s a -> s{_creIdDimensionValue = a})
@@ -6720,7 +6720,7 @@ creActive
 
 -- | List of exit events configured for the creative. Applicable to the
 -- following creative types: all RICH_MEDIA, and all VPAID.
-creExitCustomEvents :: Lens' Creative [Maybe CreativeCustomEvent]
+creExitCustomEvents :: Lens' Creative [CreativeCustomEvent]
 creExitCustomEvents
   = lens _creExitCustomEvents
       (\ s a -> s{_creExitCustomEvents = a})
@@ -6736,10 +6736,10 @@ creAccountId
 
 -- | Click-through URL for backup image. Applicable to the following creative
 -- types: ENHANCED_BANNER, FLASH_INPAGE, and HTML5_BANNER.
-creBackupImageClickThroughUrl :: Lens' Creative (Maybe Text)
-creBackupImageClickThroughUrl
-  = lens _creBackupImageClickThroughUrl
-      (\ s a -> s{_creBackupImageClickThroughUrl = a})
+creBackupImageClickThroughURL :: Lens' Creative (Maybe Text)
+creBackupImageClickThroughURL
+  = lens _creBackupImageClickThroughURL
+      (\ s a -> s{_creBackupImageClickThroughURL = a})
 
 -- | Name of the creative. This is a required field and must be less than 256
 -- characters long. Applicable to all creative types.
@@ -6772,7 +6772,7 @@ creVideoDescription
 -- creativeAsset.assetIdentifier.name field. Applicable to the following
 -- creative types: ENHANCED_BANNER, ENHANCED_IMAGE, FLASH_INPAGE,
 -- HTML5_BANNER.
-creClickTags :: Lens' Creative [Maybe ClickTag]
+creClickTags :: Lens' Creative [ClickTag]
 creClickTags
   = lens _creClickTags (\ s a -> s{_creClickTags = a})
       . _Default
@@ -6807,15 +6807,15 @@ creLatestTraffickedCreativeId
 
 -- | Third-party URL used to record rich media impressions. Applicable to the
 -- following creative types: all RICH_MEDIA
-creThirdPartyRichMediaImpressionsUrl :: Lens' Creative (Maybe Text)
-creThirdPartyRichMediaImpressionsUrl
-  = lens _creThirdPartyRichMediaImpressionsUrl
+creThirdPartyRichMediaImpressionsURL :: Lens' Creative (Maybe Text)
+creThirdPartyRichMediaImpressionsURL
+  = lens _creThirdPartyRichMediaImpressionsURL
       (\ s a ->
-         s{_creThirdPartyRichMediaImpressionsUrl = a})
+         s{_creThirdPartyRichMediaImpressionsURL = a})
 
 -- | Creative last modification information. This is a read-only field.
 -- Applicable to all creative types.
-creLastModifiedInfo :: Lens' Creative (Maybe (Maybe LastModifiedInfo))
+creLastModifiedInfo :: Lens' Creative (Maybe LastModifiedInfo)
 creLastModifiedInfo
   = lens _creLastModifiedInfo
       (\ s a -> s{_creLastModifiedInfo = a})
@@ -6836,7 +6836,7 @@ creStudioAdvertiserId
 -- | Assets associated with a creative. Applicable to all but the following
 -- creative types: INTERNAL_REDIRECT, INTERSTITIAL_INTERNAL_REDIRECT, and
 -- REDIRECT
-creCreativeAssets :: Lens' Creative [Maybe CreativeAsset]
+creCreativeAssets :: Lens' Creative [CreativeAsset]
 creCreativeAssets
   = lens _creCreativeAssets
       (\ s a -> s{_creCreativeAssets = a})
@@ -6846,10 +6846,10 @@ creCreativeAssets
 -- | Subaccount ID of this creative. This field, if left unset, will be
 -- auto-generated for both insert and update operations. Applicable to all
 -- creative types.
-creSubaccountId :: Lens' Creative (Maybe Int64)
-creSubaccountId
-  = lens _creSubaccountId
-      (\ s a -> s{_creSubaccountId = a})
+creSubAccountId :: Lens' Creative (Maybe Int64)
+creSubAccountId
+  = lens _creSubAccountId
+      (\ s a -> s{_creSubAccountId = a})
 
 -- | Type of this creative.This is a required field. Applicable to all
 -- creative types.
@@ -6858,7 +6858,7 @@ creType = lens _creType (\ s a -> s{_creType = a})
 
 -- | List of timer events configured for the creative. Applicable to the
 -- following creative types: all RICH_MEDIA, and all VPAID.
-creTimerCustomEvents :: Lens' Creative [Maybe CreativeCustomEvent]
+creTimerCustomEvents :: Lens' Creative [CreativeCustomEvent]
 creTimerCustomEvents
   = lens _creTimerCustomEvents
       (\ s a -> s{_creTimerCustomEvents = a})
@@ -6947,10 +6947,10 @@ creStudioTraffickedCreativeId
 -- | URL of hosted image or another ad tag. This is a required field when
 -- applicable. Applicable to the following creative types:
 -- INTERNAL_REDIRECT, INTERSTITIAL_INTERNAL_REDIRECT, and REDIRECT
-creRedirectUrl :: Lens' Creative (Maybe Text)
-creRedirectUrl
-  = lens _creRedirectUrl
-      (\ s a -> s{_creRedirectUrl = a})
+creRedirectURL :: Lens' Creative (Maybe Text)
+creRedirectURL
+  = lens _creRedirectURL
+      (\ s a -> s{_creRedirectURL = a})
 
 -- | Whether images are automatically advanced for enhanced image creatives.
 -- Applicable to the following creative types: ENHANCED_IMAGE.
@@ -6961,7 +6961,7 @@ creAutoAdvanceImages
 
 -- | Creative field assignments for this creative. Applicable to all creative
 -- types.
-creCreativeFieldAssignments :: Lens' Creative [Maybe CreativeFieldAssignment]
+creCreativeFieldAssignments :: Lens' Creative [CreativeFieldAssignment]
 creCreativeFieldAssignments
   = lens _creCreativeFieldAssignments
       (\ s a -> s{_creCreativeFieldAssignments = a})
@@ -7036,7 +7036,7 @@ instance ToJSON Creative where
           = object
               (catMaybes
                  [("convertFlashToHtml5" .=) <$>
-                    _creConvertFlashToHtml5,
+                    _creConvertFlashToHTML5,
                   ("backupImageTargetWindow" .=) <$>
                     _creBackupImageTargetWindow,
                   ("renderingIdDimensionValue" .=) <$>
@@ -7045,27 +7045,27 @@ instance ToJSON Creative where
                   ("videoDuration" .=) <$> _creVideoDuration,
                   ("renderingId" .=) <$> _creRenderingId,
                   ("thirdPartyBackupImageImpressionsUrl" .=) <$>
-                    _creThirdPartyBackupImageImpressionsUrl,
+                    _creThirdPartyBackupImageImpressionsURL,
                   ("fsCommand" .=) <$> _creFsCommand,
                   ("allowScriptAccess" .=) <$> _creAllowScriptAccess,
-                  ("htmlCodeLocked" .=) <$> _creHtmlCodeLocked,
+                  ("htmlCodeLocked" .=) <$> _creHTMLCodeLocked,
                   ("requiredFlashPluginVersion" .=) <$>
                     _creRequiredFlashPluginVersion,
                   ("authoringTool" .=) <$> _creAuthoringTool,
                   ("size" .=) <$> _creSize,
-                  ("thirdPartyUrls" .=) <$> _creThirdPartyUrls,
+                  ("thirdPartyUrls" .=) <$> _creThirdPartyURLs,
                   ("counterCustomEvents" .=) <$>
                     _creCounterCustomEvents,
                   Just ("kind" .= _creKind),
-                  ("sslOverride" .=) <$> _creSslOverride,
-                  ("htmlCode" .=) <$> _creHtmlCode,
+                  ("sslOverride" .=) <$> _creSSLOverride,
+                  ("htmlCode" .=) <$> _creHTMLCode,
                   ("advertiserId" .=) <$> _creAdvertiserId,
                   ("requiredFlashVersion" .=) <$>
                     _creRequiredFlashVersion,
-                  ("backgroundColor" .=) <$> _creBackgroundColor,
+                  ("backgroundColor" .=) <$> _creBackgRoundColor,
                   ("adTagKeys" .=) <$> _creAdTagKeys,
                   ("skippable" .=) <$> _creSkippable,
-                  ("sslCompliant" .=) <$> _creSslCompliant,
+                  ("sslCompliant" .=) <$> _creSSLCompliant,
                   ("idDimensionValue" .=) <$> _creIdDimensionValue,
                   ("backupImageReportingLabel" .=) <$>
                     _creBackupImageReportingLabel,
@@ -7074,7 +7074,7 @@ instance ToJSON Creative where
                   ("exitCustomEvents" .=) <$> _creExitCustomEvents,
                   ("accountId" .=) <$> _creAccountId,
                   ("backupImageClickThroughUrl" .=) <$>
-                    _creBackupImageClickThroughUrl,
+                    _creBackupImageClickThroughURL,
                   ("name" .=) <$> _creName,
                   ("overrideCss" .=) <$> _creOverrideCss,
                   ("videoDescription" .=) <$> _creVideoDescription,
@@ -7084,12 +7084,12 @@ instance ToJSON Creative where
                   ("latestTraffickedCreativeId" .=) <$>
                     _creLatestTraffickedCreativeId,
                   ("thirdPartyRichMediaImpressionsUrl" .=) <$>
-                    _creThirdPartyRichMediaImpressionsUrl,
+                    _creThirdPartyRichMediaImpressionsURL,
                   ("lastModifiedInfo" .=) <$> _creLastModifiedInfo,
                   ("id" .=) <$> _creId,
                   ("studioAdvertiserId" .=) <$> _creStudioAdvertiserId,
                   ("creativeAssets" .=) <$> _creCreativeAssets,
-                  ("subaccountId" .=) <$> _creSubaccountId,
+                  ("subaccountId" .=) <$> _creSubAccountId,
                   ("type" .=) <$> _creType,
                   ("timerCustomEvents" .=) <$> _creTimerCustomEvents,
                   ("studioCreativeId" .=) <$> _creStudioCreativeId,
@@ -7102,7 +7102,7 @@ instance ToJSON Creative where
                   ("totalFileSize" .=) <$> _creTotalFileSize,
                   ("studioTraffickedCreativeId" .=) <$>
                     _creStudioTraffickedCreativeId,
-                  ("redirectUrl" .=) <$> _creRedirectUrl,
+                  ("redirectUrl" .=) <$> _creRedirectURL,
                   ("auto_advance_images" .=) <$> _creAutoAdvanceImages,
                   ("creativeFieldAssignments" .=) <$>
                     _creCreativeFieldAssignments])
@@ -7111,7 +7111,7 @@ instance ToJSON Creative where
 --
 -- /See:/ 'userRolePermissionGroupsListResponse' smart constructor.
 data UserRolePermissionGroupsListResponse = UserRolePermissionGroupsListResponse
-    { _urpglrUserRolePermissionGroups :: !(Maybe [Maybe UserRolePermissionGroup])
+    { _urpglrUserRolePermissionGroups :: !(Maybe [UserRolePermissionGroup])
     , _urpglrKind                     :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -7131,7 +7131,7 @@ userRolePermissionGroupsListResponse =
     }
 
 -- | User role permission group collection.
-urpglrUserRolePermissionGroups :: Lens' UserRolePermissionGroupsListResponse [Maybe UserRolePermissionGroup]
+urpglrUserRolePermissionGroups :: Lens' UserRolePermissionGroupsListResponse [UserRolePermissionGroup]
 urpglrUserRolePermissionGroups
   = lens _urpglrUserRolePermissionGroups
       (\ s a -> s{_urpglrUserRolePermissionGroups = a})
@@ -7443,12 +7443,12 @@ instance ToJSON DateRange where
 -- /See:/ 'accountUserProfile' smart constructor.
 data AccountUserProfile = AccountUserProfile
     { _aupEmail            :: !(Maybe Text)
-    , _aupUserRoleFilter   :: !(Maybe (Maybe ObjectFilter))
-    , _aupAdvertiserFilter :: !(Maybe (Maybe ObjectFilter))
+    , _aupUserRoleFilter   :: !(Maybe ObjectFilter)
+    , _aupAdvertiserFilter :: !(Maybe ObjectFilter)
     , _aupUserRoleId       :: !(Maybe Int64)
     , _aupKind             :: !Text
     , _aupLocale           :: !(Maybe Text)
-    , _aupSiteFilter       :: !(Maybe (Maybe ObjectFilter))
+    , _aupSiteFilter       :: !(Maybe ObjectFilter)
     , _aupTraffickerType   :: !(Maybe AccountUserProfileTraffickerType)
     , _aupActive           :: !(Maybe Bool)
     , _aupAccountId        :: !(Maybe Int64)
@@ -7456,8 +7456,8 @@ data AccountUserProfile = AccountUserProfile
     , _aupId               :: !(Maybe Int64)
     , _aupUserAccessType   :: !(Maybe AccountUserProfileUserAccessType)
     , _aupComments         :: !(Maybe Text)
-    , _aupSubaccountId     :: !(Maybe Int64)
-    , _aupCampaignFilter   :: !(Maybe (Maybe ObjectFilter))
+    , _aupSubAccountId     :: !(Maybe Int64)
+    , _aupCampaignFilter   :: !(Maybe ObjectFilter)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountUserProfile' with the minimum fields required to make a request.
@@ -7492,7 +7492,7 @@ data AccountUserProfile = AccountUserProfile
 --
 -- * 'aupComments'
 --
--- * 'aupSubaccountId'
+-- * 'aupSubAccountId'
 --
 -- * 'aupCampaignFilter'
 accountUserProfile
@@ -7513,7 +7513,7 @@ accountUserProfile =
     , _aupId = Nothing
     , _aupUserAccessType = Nothing
     , _aupComments = Nothing
-    , _aupSubaccountId = Nothing
+    , _aupSubAccountId = Nothing
     , _aupCampaignFilter = Nothing
     }
 
@@ -7524,13 +7524,13 @@ aupEmail :: Lens' AccountUserProfile (Maybe Text)
 aupEmail = lens _aupEmail (\ s a -> s{_aupEmail = a})
 
 -- | Filter that describes which user roles are visible to the user profile.
-aupUserRoleFilter :: Lens' AccountUserProfile (Maybe (Maybe ObjectFilter))
+aupUserRoleFilter :: Lens' AccountUserProfile (Maybe ObjectFilter)
 aupUserRoleFilter
   = lens _aupUserRoleFilter
       (\ s a -> s{_aupUserRoleFilter = a})
 
 -- | Filter that describes which advertisers are visible to the user profile.
-aupAdvertiserFilter :: Lens' AccountUserProfile (Maybe (Maybe ObjectFilter))
+aupAdvertiserFilter :: Lens' AccountUserProfile (Maybe ObjectFilter)
 aupAdvertiserFilter
   = lens _aupAdvertiserFilter
       (\ s a -> s{_aupAdvertiserFilter = a})
@@ -7558,7 +7558,7 @@ aupLocale
   = lens _aupLocale (\ s a -> s{_aupLocale = a})
 
 -- | Filter that describes which sites are visible to the user profile.
-aupSiteFilter :: Lens' AccountUserProfile (Maybe (Maybe ObjectFilter))
+aupSiteFilter :: Lens' AccountUserProfile (Maybe ObjectFilter)
 aupSiteFilter
   = lens _aupSiteFilter
       (\ s a -> s{_aupSiteFilter = a})
@@ -7605,13 +7605,13 @@ aupComments
 
 -- | Subaccount ID of the user profile. This is a read-only field that can be
 -- left blank.
-aupSubaccountId :: Lens' AccountUserProfile (Maybe Int64)
-aupSubaccountId
-  = lens _aupSubaccountId
-      (\ s a -> s{_aupSubaccountId = a})
+aupSubAccountId :: Lens' AccountUserProfile (Maybe Int64)
+aupSubAccountId
+  = lens _aupSubAccountId
+      (\ s a -> s{_aupSubAccountId = a})
 
 -- | Filter that describes which campaigns are visible to the user profile.
-aupCampaignFilter :: Lens' AccountUserProfile (Maybe (Maybe ObjectFilter))
+aupCampaignFilter :: Lens' AccountUserProfile (Maybe ObjectFilter)
 aupCampaignFilter
   = lens _aupCampaignFilter
       (\ s a -> s{_aupCampaignFilter = a})
@@ -7655,7 +7655,7 @@ instance ToJSON AccountUserProfile where
                   ("name" .=) <$> _aupName, ("id" .=) <$> _aupId,
                   ("userAccessType" .=) <$> _aupUserAccessType,
                   ("comments" .=) <$> _aupComments,
-                  ("subaccountId" .=) <$> _aupSubaccountId,
+                  ("subaccountId" .=) <$> _aupSubAccountId,
                   ("campaignFilter" .=) <$> _aupCampaignFilter])
 
 -- | Placement Tag
@@ -7663,7 +7663,7 @@ instance ToJSON AccountUserProfile where
 -- /See:/ 'placementTag' smart constructor.
 data PlacementTag = PlacementTag
     { _ptPlacementId :: !(Maybe Int64)
-    , _ptTagDatas    :: !(Maybe [Maybe TagData])
+    , _ptTagDatas    :: !(Maybe [TagData])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementTag' with the minimum fields required to make a request.
@@ -7688,7 +7688,7 @@ ptPlacementId
       (\ s a -> s{_ptPlacementId = a})
 
 -- | Tags generated for this placement.
-ptTagDatas :: Lens' PlacementTag [Maybe TagData]
+ptTagDatas :: Lens' PlacementTag [TagData]
 ptTagDatas
   = lens _ptTagDatas (\ s a -> s{_ptTagDatas = a}) .
       _Default
@@ -7714,7 +7714,7 @@ instance ToJSON PlacementTag where
 -- /See:/ 'remarketingListsListResponse' smart constructor.
 data RemarketingListsListResponse = RemarketingListsListResponse
     { _rllrNextPageToken    :: !(Maybe Text)
-    , _rllrRemarketingLists :: !(Maybe [Maybe RemarketingList])
+    , _rllrRemarketingLists :: !(Maybe [RemarketingList])
     , _rllrKind             :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -7743,7 +7743,7 @@ rllrNextPageToken
       (\ s a -> s{_rllrNextPageToken = a})
 
 -- | Remarketing list collection.
-rllrRemarketingLists :: Lens' RemarketingListsListResponse [Maybe RemarketingList]
+rllrRemarketingLists :: Lens' RemarketingListsListResponse [RemarketingList]
 rllrRemarketingLists
   = lens _rllrRemarketingLists
       (\ s a -> s{_rllrRemarketingLists = a})
@@ -7780,10 +7780,10 @@ instance ToJSON RemarketingListsListResponse where
 data SiteSettings = SiteSettings
     { _ssDisableNewCookie      :: !(Maybe Bool)
     , _ssDisableBrandSafeAds   :: !(Maybe Bool)
-    , _ssLookbackConfiguration :: !(Maybe (Maybe LookbackConfiguration))
-    , _ssTagSetting            :: !(Maybe (Maybe TagSetting))
+    , _ssLookbackConfiguration :: !(Maybe LookbackConfiguration)
+    , _ssTagSetting            :: !(Maybe TagSetting)
     , _ssActiveViewOptOut      :: !(Maybe Bool)
-    , _ssCreativeSettings      :: !(Maybe (Maybe CreativeSettings))
+    , _ssCreativeSettings      :: !(Maybe CreativeSettings)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SiteSettings' with the minimum fields required to make a request.
@@ -7826,13 +7826,13 @@ ssDisableBrandSafeAds
       (\ s a -> s{_ssDisableBrandSafeAds = a})
 
 -- | Lookback window settings for this site.
-ssLookbackConfiguration :: Lens' SiteSettings (Maybe (Maybe LookbackConfiguration))
+ssLookbackConfiguration :: Lens' SiteSettings (Maybe LookbackConfiguration)
 ssLookbackConfiguration
   = lens _ssLookbackConfiguration
       (\ s a -> s{_ssLookbackConfiguration = a})
 
 -- | Configuration settings for dynamic and image floodlight tags.
-ssTagSetting :: Lens' SiteSettings (Maybe (Maybe TagSetting))
+ssTagSetting :: Lens' SiteSettings (Maybe TagSetting)
 ssTagSetting
   = lens _ssTagSetting (\ s a -> s{_ssTagSetting = a})
 
@@ -7843,7 +7843,7 @@ ssActiveViewOptOut
       (\ s a -> s{_ssActiveViewOptOut = a})
 
 -- | Site-wide creative settings.
-ssCreativeSettings :: Lens' SiteSettings (Maybe (Maybe CreativeSettings))
+ssCreativeSettings :: Lens' SiteSettings (Maybe CreativeSettings)
 ssCreativeSettings
   = lens _ssCreativeSettings
       (\ s a -> s{_ssCreativeSettings = a})
@@ -7925,7 +7925,7 @@ instance ToJSON ThirdPartyAuthenticationToken where
 -- /See:/ 'browsersListResponse' smart constructor.
 data BrowsersListResponse = BrowsersListResponse
     { _blrKind     :: !Text
-    , _blrBrowsers :: !(Maybe [Maybe Browser])
+    , _blrBrowsers :: !(Maybe [Browser])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BrowsersListResponse' with the minimum fields required to make a request.
@@ -7949,7 +7949,7 @@ blrKind :: Lens' BrowsersListResponse Text
 blrKind = lens _blrKind (\ s a -> s{_blrKind = a})
 
 -- | Browser collection.
-blrBrowsers :: Lens' BrowsersListResponse [Maybe Browser]
+blrBrowsers :: Lens' BrowsersListResponse [Browser]
 blrBrowsers
   = lens _blrBrowsers (\ s a -> s{_blrBrowsers = a}) .
       _Default
@@ -7976,8 +7976,8 @@ instance ToJSON BrowsersListResponse where
 -- /See:/ 'clickThroughURL' smart constructor.
 data ClickThroughURL = ClickThroughURL
     { _ctuDefaultLandingPage      :: !(Maybe Bool)
-    , _ctuComputedClickThroughUrl :: !(Maybe Text)
-    , _ctuCustomClickThroughUrl   :: !(Maybe Text)
+    , _ctuComputedClickThroughURL :: !(Maybe Text)
+    , _ctuCustomClickThroughURL   :: !(Maybe Text)
     , _ctuLandingPageId           :: !(Maybe Int64)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -7987,9 +7987,9 @@ data ClickThroughURL = ClickThroughURL
 --
 -- * 'ctuDefaultLandingPage'
 --
--- * 'ctuComputedClickThroughUrl'
+-- * 'ctuComputedClickThroughURL'
 --
--- * 'ctuCustomClickThroughUrl'
+-- * 'ctuCustomClickThroughURL'
 --
 -- * 'ctuLandingPageId'
 clickThroughURL
@@ -7997,8 +7997,8 @@ clickThroughURL
 clickThroughURL =
     ClickThroughURL
     { _ctuDefaultLandingPage = Nothing
-    , _ctuComputedClickThroughUrl = Nothing
-    , _ctuCustomClickThroughUrl = Nothing
+    , _ctuComputedClickThroughURL = Nothing
+    , _ctuCustomClickThroughURL = Nothing
     , _ctuLandingPageId = Nothing
     }
 
@@ -8015,17 +8015,17 @@ ctuDefaultLandingPage
 -- and a landingPageId is specified then that landing page\'s URL is
 -- assigned to this field. - If neither of the above cases apply, then the
 -- customClickThroughUrl is assigned to this field.
-ctuComputedClickThroughUrl :: Lens' ClickThroughURL (Maybe Text)
-ctuComputedClickThroughUrl
-  = lens _ctuComputedClickThroughUrl
-      (\ s a -> s{_ctuComputedClickThroughUrl = a})
+ctuComputedClickThroughURL :: Lens' ClickThroughURL (Maybe Text)
+ctuComputedClickThroughURL
+  = lens _ctuComputedClickThroughURL
+      (\ s a -> s{_ctuComputedClickThroughURL = a})
 
 -- | Custom click-through URL. Applicable if the defaultLandingPage field is
 -- set to false and the landingPageId field is left unset.
-ctuCustomClickThroughUrl :: Lens' ClickThroughURL (Maybe Text)
-ctuCustomClickThroughUrl
-  = lens _ctuCustomClickThroughUrl
-      (\ s a -> s{_ctuCustomClickThroughUrl = a})
+ctuCustomClickThroughURL :: Lens' ClickThroughURL (Maybe Text)
+ctuCustomClickThroughURL
+  = lens _ctuCustomClickThroughURL
+      (\ s a -> s{_ctuCustomClickThroughURL = a})
 
 -- | ID of the landing page for the click-through URL. Applicable if the
 -- defaultLandingPage field is set to false.
@@ -8051,9 +8051,9 @@ instance ToJSON ClickThroughURL where
                  [("defaultLandingPage" .=) <$>
                     _ctuDefaultLandingPage,
                   ("computedClickThroughUrl" .=) <$>
-                    _ctuComputedClickThroughUrl,
+                    _ctuComputedClickThroughURL,
                   ("customClickThroughUrl" .=) <$>
-                    _ctuCustomClickThroughUrl,
+                    _ctuCustomClickThroughURL,
                   ("landingPageId" .=) <$> _ctuLandingPageId])
 
 -- | Content Category List Response
@@ -8062,7 +8062,7 @@ instance ToJSON ClickThroughURL where
 data ContentCategoriesListResponse = ContentCategoriesListResponse
     { _cclrNextPageToken     :: !(Maybe Text)
     , _cclrKind              :: !Text
-    , _cclrContentCategories :: !(Maybe [Maybe ContentCategory])
+    , _cclrContentCategories :: !(Maybe [ContentCategory])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContentCategoriesListResponse' with the minimum fields required to make a request.
@@ -8095,7 +8095,7 @@ cclrKind :: Lens' ContentCategoriesListResponse Text
 cclrKind = lens _cclrKind (\ s a -> s{_cclrKind = a})
 
 -- | Content category collection.
-cclrContentCategories :: Lens' ContentCategoriesListResponse [Maybe ContentCategory]
+cclrContentCategories :: Lens' ContentCategoriesListResponse [ContentCategory]
 cclrContentCategories
   = lens _cclrContentCategories
       (\ s a -> s{_cclrContentCategories = a})
@@ -8353,34 +8353,34 @@ instance ToJSON Report where
 --
 -- /See:/ 'campaign' smart constructor.
 data Campaign = Campaign
-    { _camCreativeOptimizationConfiguration            :: !(Maybe (Maybe CreativeOptimizationConfiguration))
+    { _camCreativeOptimizationConfiguration            :: !(Maybe CreativeOptimizationConfiguration)
     , _camCreativeGroupIds                             :: !(Maybe [Int64])
-    , _camNielsenOcrEnabled                            :: !(Maybe Bool)
+    , _camNielsenOCREnabled                            :: !(Maybe Bool)
     , _camKind                                         :: !Text
-    , _camClickThroughUrlSuffixProperties              :: !(Maybe (Maybe ClickThroughURLSuffixProperties))
+    , _camClickThroughURLSuffixProperties              :: !(Maybe ClickThroughURLSuffixProperties)
     , _camAdvertiserId                                 :: !(Maybe Int64)
     , _camEndDate                                      :: !(Maybe UTCTime)
-    , _camAdvertiserIdDimensionValue                   :: !(Maybe (Maybe DimensionValue))
-    , _camIdDimensionValue                             :: !(Maybe (Maybe DimensionValue))
-    , _camEventTagOverrides                            :: !(Maybe [Maybe EventTagOverride])
-    , _camLookbackConfiguration                        :: !(Maybe (Maybe LookbackConfiguration))
+    , _camAdvertiserIdDimensionValue                   :: !(Maybe DimensionValue)
+    , _camIdDimensionValue                             :: !(Maybe DimensionValue)
+    , _camEventTagOverrides                            :: !(Maybe [EventTagOverride])
+    , _camLookbackConfiguration                        :: !(Maybe LookbackConfiguration)
     , _camStartDate                                    :: !(Maybe UTCTime)
     , _camAccountId                                    :: !(Maybe Int64)
     , _camComscoreVceEnabled                           :: !(Maybe Bool)
     , _camName                                         :: !(Maybe Text)
     , _camAdvertiserGroupId                            :: !(Maybe Int64)
     , _camBillingInvoiceCode                           :: !(Maybe Text)
-    , _camCreateInfo                                   :: !(Maybe (Maybe LastModifiedInfo))
-    , _camLastModifiedInfo                             :: !(Maybe (Maybe LastModifiedInfo))
+    , _camCreateInfo                                   :: !(Maybe LastModifiedInfo)
+    , _camLastModifiedInfo                             :: !(Maybe LastModifiedInfo)
     , _camId                                           :: !(Maybe Int64)
-    , _camSubaccountId                                 :: !(Maybe Int64)
-    , _camAdditionalCreativeOptimizationConfigurations :: !(Maybe [Maybe CreativeOptimizationConfiguration])
+    , _camSubAccountId                                 :: !(Maybe Int64)
+    , _camAdditionalCreativeOptimizationConfigurations :: !(Maybe [CreativeOptimizationConfiguration])
     , _camExternalId                                   :: !(Maybe Text)
     , _camComment                                      :: !(Maybe Text)
-    , _camAudienceSegmentGroups                        :: !(Maybe [Maybe AudienceSegmentGroup])
+    , _camAudienceSegmentGroups                        :: !(Maybe [AudienceSegmentGroup])
     , _camArchived                                     :: !(Maybe Bool)
     , _camTraffickerEmails                             :: !(Maybe [Text])
-    , _camDefaultClickThroughEventTagProperties        :: !(Maybe (Maybe DefaultClickThroughEventTagProperties))
+    , _camDefaultClickThroughEventTagProperties        :: !(Maybe DefaultClickThroughEventTagProperties)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Campaign' with the minimum fields required to make a request.
@@ -8391,11 +8391,11 @@ data Campaign = Campaign
 --
 -- * 'camCreativeGroupIds'
 --
--- * 'camNielsenOcrEnabled'
+-- * 'camNielsenOCREnabled'
 --
 -- * 'camKind'
 --
--- * 'camClickThroughUrlSuffixProperties'
+-- * 'camClickThroughURLSuffixProperties'
 --
 -- * 'camAdvertiserId'
 --
@@ -8427,7 +8427,7 @@ data Campaign = Campaign
 --
 -- * 'camId'
 --
--- * 'camSubaccountId'
+-- * 'camSubAccountId'
 --
 -- * 'camAdditionalCreativeOptimizationConfigurations'
 --
@@ -8448,9 +8448,9 @@ campaign =
     Campaign
     { _camCreativeOptimizationConfiguration = Nothing
     , _camCreativeGroupIds = Nothing
-    , _camNielsenOcrEnabled = Nothing
+    , _camNielsenOCREnabled = Nothing
     , _camKind = "dfareporting#campaign"
-    , _camClickThroughUrlSuffixProperties = Nothing
+    , _camClickThroughURLSuffixProperties = Nothing
     , _camAdvertiserId = Nothing
     , _camEndDate = Nothing
     , _camAdvertiserIdDimensionValue = Nothing
@@ -8466,7 +8466,7 @@ campaign =
     , _camCreateInfo = Nothing
     , _camLastModifiedInfo = Nothing
     , _camId = Nothing
-    , _camSubaccountId = Nothing
+    , _camSubAccountId = Nothing
     , _camAdditionalCreativeOptimizationConfigurations = Nothing
     , _camExternalId = Nothing
     , _camComment = Nothing
@@ -8477,7 +8477,7 @@ campaign =
     }
 
 -- | Creative optimization configuration for the campaign.
-camCreativeOptimizationConfiguration :: Lens' Campaign (Maybe (Maybe CreativeOptimizationConfiguration))
+camCreativeOptimizationConfiguration :: Lens' Campaign (Maybe CreativeOptimizationConfiguration)
 camCreativeOptimizationConfiguration
   = lens _camCreativeOptimizationConfiguration
       (\ s a ->
@@ -8492,10 +8492,10 @@ camCreativeGroupIds
       . _Coerce
 
 -- | Whether Nielsen reports are enabled for this campaign.
-camNielsenOcrEnabled :: Lens' Campaign (Maybe Bool)
-camNielsenOcrEnabled
-  = lens _camNielsenOcrEnabled
-      (\ s a -> s{_camNielsenOcrEnabled = a})
+camNielsenOCREnabled :: Lens' Campaign (Maybe Bool)
+camNielsenOCREnabled
+  = lens _camNielsenOCREnabled
+      (\ s a -> s{_camNielsenOCREnabled = a})
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#campaign\".
@@ -8503,10 +8503,10 @@ camKind :: Lens' Campaign Text
 camKind = lens _camKind (\ s a -> s{_camKind = a})
 
 -- | Click-through URL suffix override properties for this campaign.
-camClickThroughUrlSuffixProperties :: Lens' Campaign (Maybe (Maybe ClickThroughURLSuffixProperties))
-camClickThroughUrlSuffixProperties
-  = lens _camClickThroughUrlSuffixProperties
-      (\ s a -> s{_camClickThroughUrlSuffixProperties = a})
+camClickThroughURLSuffixProperties :: Lens' Campaign (Maybe ClickThroughURLSuffixProperties)
+camClickThroughURLSuffixProperties
+  = lens _camClickThroughURLSuffixProperties
+      (\ s a -> s{_camClickThroughURLSuffixProperties = a})
 
 -- | Advertiser ID of this campaign. This is a required field.
 camAdvertiserId :: Lens' Campaign (Maybe Int64)
@@ -8527,21 +8527,21 @@ camEndDate
 
 -- | Dimension value for the advertiser ID of this campaign. This is a
 -- read-only, auto-generated field.
-camAdvertiserIdDimensionValue :: Lens' Campaign (Maybe (Maybe DimensionValue))
+camAdvertiserIdDimensionValue :: Lens' Campaign (Maybe DimensionValue)
 camAdvertiserIdDimensionValue
   = lens _camAdvertiserIdDimensionValue
       (\ s a -> s{_camAdvertiserIdDimensionValue = a})
 
 -- | Dimension value for the ID of this campaign. This is a read-only,
 -- auto-generated field.
-camIdDimensionValue :: Lens' Campaign (Maybe (Maybe DimensionValue))
+camIdDimensionValue :: Lens' Campaign (Maybe DimensionValue)
 camIdDimensionValue
   = lens _camIdDimensionValue
       (\ s a -> s{_camIdDimensionValue = a})
 
 -- | Overrides that can be used to activate or deactivate advertiser event
 -- tags.
-camEventTagOverrides :: Lens' Campaign [Maybe EventTagOverride]
+camEventTagOverrides :: Lens' Campaign [EventTagOverride]
 camEventTagOverrides
   = lens _camEventTagOverrides
       (\ s a -> s{_camEventTagOverrides = a})
@@ -8549,7 +8549,7 @@ camEventTagOverrides
       . _Coerce
 
 -- | Lookback window settings for the campaign.
-camLookbackConfiguration :: Lens' Campaign (Maybe (Maybe LookbackConfiguration))
+camLookbackConfiguration :: Lens' Campaign (Maybe LookbackConfiguration)
 camLookbackConfiguration
   = lens _camLookbackConfiguration
       (\ s a -> s{_camLookbackConfiguration = a})
@@ -8593,14 +8593,14 @@ camBillingInvoiceCode
 
 -- | Information about the creation of this campaign. This is a read-only
 -- field.
-camCreateInfo :: Lens' Campaign (Maybe (Maybe LastModifiedInfo))
+camCreateInfo :: Lens' Campaign (Maybe LastModifiedInfo)
 camCreateInfo
   = lens _camCreateInfo
       (\ s a -> s{_camCreateInfo = a})
 
 -- | Information about the most recent modification of this campaign. This is
 -- a read-only field.
-camLastModifiedInfo :: Lens' Campaign (Maybe (Maybe LastModifiedInfo))
+camLastModifiedInfo :: Lens' Campaign (Maybe LastModifiedInfo)
 camLastModifiedInfo
   = lens _camLastModifiedInfo
       (\ s a -> s{_camLastModifiedInfo = a})
@@ -8611,13 +8611,13 @@ camId = lens _camId (\ s a -> s{_camId = a})
 
 -- | Subaccount ID of this campaign. This is a read-only field that can be
 -- left blank.
-camSubaccountId :: Lens' Campaign (Maybe Int64)
-camSubaccountId
-  = lens _camSubaccountId
-      (\ s a -> s{_camSubaccountId = a})
+camSubAccountId :: Lens' Campaign (Maybe Int64)
+camSubAccountId
+  = lens _camSubAccountId
+      (\ s a -> s{_camSubAccountId = a})
 
 -- | Additional creative optimization configurations for the campaign.
-camAdditionalCreativeOptimizationConfigurations :: Lens' Campaign [Maybe CreativeOptimizationConfiguration]
+camAdditionalCreativeOptimizationConfigurations :: Lens' Campaign [CreativeOptimizationConfiguration]
 camAdditionalCreativeOptimizationConfigurations
   = lens
       _camAdditionalCreativeOptimizationConfigurations
@@ -8641,7 +8641,7 @@ camComment
 
 -- | Audience segment groups assigned to this campaign. Cannot have more than
 -- 300 segment groups.
-camAudienceSegmentGroups :: Lens' Campaign [Maybe AudienceSegmentGroup]
+camAudienceSegmentGroups :: Lens' Campaign [AudienceSegmentGroup]
 camAudienceSegmentGroups
   = lens _camAudienceSegmentGroups
       (\ s a -> s{_camAudienceSegmentGroups = a})
@@ -8662,7 +8662,7 @@ camTraffickerEmails
       . _Coerce
 
 -- | Click-through event tag ID override properties for this campaign.
-camDefaultClickThroughEventTagProperties :: Lens' Campaign (Maybe (Maybe DefaultClickThroughEventTagProperties))
+camDefaultClickThroughEventTagProperties :: Lens' Campaign (Maybe DefaultClickThroughEventTagProperties)
 camDefaultClickThroughEventTagProperties
   = lens _camDefaultClickThroughEventTagProperties
       (\ s a ->
@@ -8711,10 +8711,10 @@ instance ToJSON Campaign where
                  [("creativeOptimizationConfiguration" .=) <$>
                     _camCreativeOptimizationConfiguration,
                   ("creativeGroupIds" .=) <$> _camCreativeGroupIds,
-                  ("nielsenOcrEnabled" .=) <$> _camNielsenOcrEnabled,
+                  ("nielsenOcrEnabled" .=) <$> _camNielsenOCREnabled,
                   Just ("kind" .= _camKind),
                   ("clickThroughUrlSuffixProperties" .=) <$>
-                    _camClickThroughUrlSuffixProperties,
+                    _camClickThroughURLSuffixProperties,
                   ("advertiserId" .=) <$> _camAdvertiserId,
                   ("endDate" .=) <$> _camEndDate,
                   ("advertiserIdDimensionValue" .=) <$>
@@ -8732,7 +8732,7 @@ instance ToJSON Campaign where
                   ("createInfo" .=) <$> _camCreateInfo,
                   ("lastModifiedInfo" .=) <$> _camLastModifiedInfo,
                   ("id" .=) <$> _camId,
-                  ("subaccountId" .=) <$> _camSubaccountId,
+                  ("subaccountId" .=) <$> _camSubAccountId,
                   ("additionalCreativeOptimizationConfigurations" .=)
                     <$> _camAdditionalCreativeOptimizationConfigurations,
                   ("externalId" .=) <$> _camExternalId,
@@ -8749,11 +8749,11 @@ instance ToJSON Campaign where
 --
 -- /See:/ 'reportCompatibleFields' smart constructor.
 data ReportCompatibleFields = ReportCompatibleFields
-    { _rcfMetrics                :: !(Maybe [Maybe Metric])
+    { _rcfMetrics                :: !(Maybe [Metric])
     , _rcfKind                   :: !Text
-    , _rcfDimensionFilters       :: !(Maybe [Maybe Dimension])
-    , _rcfPivotedActivityMetrics :: !(Maybe [Maybe Metric])
-    , _rcfDimensions             :: !(Maybe [Maybe Dimension])
+    , _rcfDimensionFilters       :: !(Maybe [Dimension])
+    , _rcfPivotedActivityMetrics :: !(Maybe [Metric])
+    , _rcfDimensions             :: !(Maybe [Dimension])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportCompatibleFields' with the minimum fields required to make a request.
@@ -8782,7 +8782,7 @@ reportCompatibleFields =
 
 -- | Metrics which are compatible to be selected in the \"metricNames\"
 -- section of the report.
-rcfMetrics :: Lens' ReportCompatibleFields [Maybe Metric]
+rcfMetrics :: Lens' ReportCompatibleFields [Metric]
 rcfMetrics
   = lens _rcfMetrics (\ s a -> s{_rcfMetrics = a}) .
       _Default
@@ -8795,7 +8795,7 @@ rcfKind = lens _rcfKind (\ s a -> s{_rcfKind = a})
 
 -- | Dimensions which are compatible to be selected in the
 -- \"dimensionFilters\" section of the report.
-rcfDimensionFilters :: Lens' ReportCompatibleFields [Maybe Dimension]
+rcfDimensionFilters :: Lens' ReportCompatibleFields [Dimension]
 rcfDimensionFilters
   = lens _rcfDimensionFilters
       (\ s a -> s{_rcfDimensionFilters = a})
@@ -8804,7 +8804,7 @@ rcfDimensionFilters
 
 -- | Metrics which are compatible to be selected as activity metrics to pivot
 -- on in the \"activities\" section of the report.
-rcfPivotedActivityMetrics :: Lens' ReportCompatibleFields [Maybe Metric]
+rcfPivotedActivityMetrics :: Lens' ReportCompatibleFields [Metric]
 rcfPivotedActivityMetrics
   = lens _rcfPivotedActivityMetrics
       (\ s a -> s{_rcfPivotedActivityMetrics = a})
@@ -8813,7 +8813,7 @@ rcfPivotedActivityMetrics
 
 -- | Dimensions which are compatible to be selected in the \"dimensions\"
 -- section of the report.
-rcfDimensions :: Lens' ReportCompatibleFields [Maybe Dimension]
+rcfDimensions :: Lens' ReportCompatibleFields [Dimension]
 rcfDimensions
   = lens _rcfDimensions
       (\ s a -> s{_rcfDimensions = a})
@@ -8848,10 +8848,10 @@ instance ToJSON ReportCompatibleFields where
 --
 -- /See:/ 'floodlightReportCompatibleFields' smart constructor.
 data FloodlightReportCompatibleFields = FloodlightReportCompatibleFields
-    { _frcfMetrics          :: !(Maybe [Maybe Metric])
+    { _frcfMetrics          :: !(Maybe [Metric])
     , _frcfKind             :: !Text
-    , _frcfDimensionFilters :: !(Maybe [Maybe Dimension])
-    , _frcfDimensions       :: !(Maybe [Maybe Dimension])
+    , _frcfDimensionFilters :: !(Maybe [Dimension])
+    , _frcfDimensions       :: !(Maybe [Dimension])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightReportCompatibleFields' with the minimum fields required to make a request.
@@ -8877,7 +8877,7 @@ floodlightReportCompatibleFields =
 
 -- | Metrics which are compatible to be selected in the \"metricNames\"
 -- section of the report.
-frcfMetrics :: Lens' FloodlightReportCompatibleFields [Maybe Metric]
+frcfMetrics :: Lens' FloodlightReportCompatibleFields [Metric]
 frcfMetrics
   = lens _frcfMetrics (\ s a -> s{_frcfMetrics = a}) .
       _Default
@@ -8890,7 +8890,7 @@ frcfKind = lens _frcfKind (\ s a -> s{_frcfKind = a})
 
 -- | Dimensions which are compatible to be selected in the
 -- \"dimensionFilters\" section of the report.
-frcfDimensionFilters :: Lens' FloodlightReportCompatibleFields [Maybe Dimension]
+frcfDimensionFilters :: Lens' FloodlightReportCompatibleFields [Dimension]
 frcfDimensionFilters
   = lens _frcfDimensionFilters
       (\ s a -> s{_frcfDimensionFilters = a})
@@ -8899,7 +8899,7 @@ frcfDimensionFilters
 
 -- | Dimensions which are compatible to be selected in the \"dimensions\"
 -- section of the report.
-frcfDimensions :: Lens' FloodlightReportCompatibleFields [Maybe Dimension]
+frcfDimensions :: Lens' FloodlightReportCompatibleFields [Dimension]
 frcfDimensions
   = lens _frcfDimensions
       (\ s a -> s{_frcfDimensions = a})
@@ -9006,7 +9006,7 @@ data DimensionValueList = DimensionValueList
     { _dvlEtag          :: !(Maybe Text)
     , _dvlNextPageToken :: !(Maybe Text)
     , _dvlKind          :: !Text
-    , _dvlItems         :: !(Maybe [Maybe DimensionValue])
+    , _dvlItems         :: !(Maybe [DimensionValue])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DimensionValueList' with the minimum fields required to make a request.
@@ -9048,7 +9048,7 @@ dvlKind :: Lens' DimensionValueList Text
 dvlKind = lens _dvlKind (\ s a -> s{_dvlKind = a})
 
 -- | The dimension values returned in this response.
-dvlItems :: Lens' DimensionValueList [Maybe DimensionValue]
+dvlItems :: Lens' DimensionValueList [DimensionValue]
 dvlItems
   = lens _dvlItems (\ s a -> s{_dvlItems = a}) .
       _Default
@@ -9078,7 +9078,7 @@ instance ToJSON DimensionValueList where
 data CreativesListResponse = CreativesListResponse
     { _clrlNextPageToken :: !(Maybe Text)
     , _clrlKind          :: !Text
-    , _clrlCreatives     :: !(Maybe [Maybe Creative])
+    , _clrlCreatives     :: !(Maybe [Creative])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativesListResponse' with the minimum fields required to make a request.
@@ -9111,7 +9111,7 @@ clrlKind :: Lens' CreativesListResponse Text
 clrlKind = lens _clrlKind (\ s a -> s{_clrlKind = a})
 
 -- | Creative collection.
-clrlCreatives :: Lens' CreativesListResponse [Maybe Creative]
+clrlCreatives :: Lens' CreativesListResponse [Creative]
 clrlCreatives
   = lens _clrlCreatives
       (\ s a -> s{_clrlCreatives = a})
@@ -9200,8 +9200,8 @@ data Account = Account
     { _aaAccountPermissionIds   :: !(Maybe [Int64])
     , _aaMaximumImageSize       :: !(Maybe Int64)
     , _aaCurrencyId             :: !(Maybe Int64)
-    , _aaReportsConfiguration   :: !(Maybe (Maybe ReportsConfiguration))
-    , _aaNielsenOcrEnabled      :: !(Maybe Bool)
+    , _aaReportsConfiguration   :: !(Maybe ReportsConfiguration)
+    , _aaNielsenOCREnabled      :: !(Maybe Bool)
     , _aaKind                   :: !Text
     , _aaLocale                 :: !(Maybe Text)
     , _aaActive                 :: !(Maybe Bool)
@@ -9230,7 +9230,7 @@ data Account = Account
 --
 -- * 'aaReportsConfiguration'
 --
--- * 'aaNielsenOcrEnabled'
+-- * 'aaNielsenOCREnabled'
 --
 -- * 'aaKind'
 --
@@ -9267,7 +9267,7 @@ account =
     , _aaMaximumImageSize = Nothing
     , _aaCurrencyId = Nothing
     , _aaReportsConfiguration = Nothing
-    , _aaNielsenOcrEnabled = Nothing
+    , _aaNielsenOCREnabled = Nothing
     , _aaKind = "dfareporting#account"
     , _aaLocale = Nothing
     , _aaActive = Nothing
@@ -9313,17 +9313,17 @@ aaCurrencyId
   = lens _aaCurrencyId (\ s a -> s{_aaCurrencyId = a})
 
 -- | Reporting configuration of this account.
-aaReportsConfiguration :: Lens' Account (Maybe (Maybe ReportsConfiguration))
+aaReportsConfiguration :: Lens' Account (Maybe ReportsConfiguration)
 aaReportsConfiguration
   = lens _aaReportsConfiguration
       (\ s a -> s{_aaReportsConfiguration = a})
 
 -- | Whether campaigns created in this account will be enabled for Nielsen
 -- OCR reach ratings by default.
-aaNielsenOcrEnabled :: Lens' Account (Maybe Bool)
-aaNielsenOcrEnabled
-  = lens _aaNielsenOcrEnabled
-      (\ s a -> s{_aaNielsenOcrEnabled = a})
+aaNielsenOCREnabled :: Lens' Account (Maybe Bool)
+aaNielsenOCREnabled
+  = lens _aaNielsenOCREnabled
+      (\ s a -> s{_aaNielsenOCREnabled = a})
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#account\".
@@ -9446,7 +9446,7 @@ instance ToJSON Account where
                   ("currencyId" .=) <$> _aaCurrencyId,
                   ("reportsConfiguration" .=) <$>
                     _aaReportsConfiguration,
-                  ("nielsenOcrEnabled" .=) <$> _aaNielsenOcrEnabled,
+                  ("nielsenOcrEnabled" .=) <$> _aaNielsenOCREnabled,
                   Just ("kind" .= _aaKind),
                   ("locale" .=) <$> _aaLocale,
                   ("active" .=) <$> _aaActive,
@@ -9475,17 +9475,17 @@ instance ToJSON Account where
 -- /See:/ 'remarketingList' smart constructor.
 data RemarketingList = RemarketingList
     { _rlListSize                   :: !(Maybe Int64)
-    , _rlListPopulationRule         :: !(Maybe (Maybe ListPopulationRule))
+    , _rlListPopulationRule         :: !(Maybe ListPopulationRule)
     , _rlLifeSpan                   :: !(Maybe Int64)
     , _rlKind                       :: !Text
     , _rlAdvertiserId               :: !(Maybe Int64)
-    , _rlAdvertiserIdDimensionValue :: !(Maybe (Maybe DimensionValue))
+    , _rlAdvertiserIdDimensionValue :: !(Maybe DimensionValue)
     , _rlActive                     :: !(Maybe Bool)
     , _rlAccountId                  :: !(Maybe Int64)
     , _rlName                       :: !(Maybe Text)
     , _rlListSource                 :: !(Maybe RemarketingListListSource)
     , _rlId                         :: !(Maybe Int64)
-    , _rlSubaccountId               :: !(Maybe Int64)
+    , _rlSubAccountId               :: !(Maybe Int64)
     , _rlDescription                :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -9515,7 +9515,7 @@ data RemarketingList = RemarketingList
 --
 -- * 'rlId'
 --
--- * 'rlSubaccountId'
+-- * 'rlSubAccountId'
 --
 -- * 'rlDescription'
 remarketingList
@@ -9533,7 +9533,7 @@ remarketingList =
     , _rlName = Nothing
     , _rlListSource = Nothing
     , _rlId = Nothing
-    , _rlSubaccountId = Nothing
+    , _rlSubAccountId = Nothing
     , _rlDescription = Nothing
     }
 
@@ -9543,7 +9543,7 @@ rlListSize
   = lens _rlListSize (\ s a -> s{_rlListSize = a})
 
 -- | Rule used to populate the remarketing list with users.
-rlListPopulationRule :: Lens' RemarketingList (Maybe (Maybe ListPopulationRule))
+rlListPopulationRule :: Lens' RemarketingList (Maybe ListPopulationRule)
 rlListPopulationRule
   = lens _rlListPopulationRule
       (\ s a -> s{_rlListPopulationRule = a})
@@ -9568,7 +9568,7 @@ rlAdvertiserId
 
 -- | Dimension value for the ID of the advertiser. This is a read-only,
 -- auto-generated field.
-rlAdvertiserIdDimensionValue :: Lens' RemarketingList (Maybe (Maybe DimensionValue))
+rlAdvertiserIdDimensionValue :: Lens' RemarketingList (Maybe DimensionValue)
 rlAdvertiserIdDimensionValue
   = lens _rlAdvertiserIdDimensionValue
       (\ s a -> s{_rlAdvertiserIdDimensionValue = a})
@@ -9599,10 +9599,10 @@ rlId = lens _rlId (\ s a -> s{_rlId = a})
 
 -- | Subaccount ID of this remarketing list. This is a read-only,
 -- auto-generated field that is only returned in GET requests.
-rlSubaccountId :: Lens' RemarketingList (Maybe Int64)
-rlSubaccountId
-  = lens _rlSubaccountId
-      (\ s a -> s{_rlSubaccountId = a})
+rlSubAccountId :: Lens' RemarketingList (Maybe Int64)
+rlSubAccountId
+  = lens _rlSubAccountId
+      (\ s a -> s{_rlSubAccountId = a})
 
 -- | Remarketing list description.
 rlDescription :: Lens' RemarketingList (Maybe Text)
@@ -9644,7 +9644,7 @@ instance ToJSON RemarketingList where
                   ("name" .=) <$> _rlName,
                   ("listSource" .=) <$> _rlListSource,
                   ("id" .=) <$> _rlId,
-                  ("subaccountId" .=) <$> _rlSubaccountId,
+                  ("subaccountId" .=) <$> _rlSubAccountId,
                   ("description" .=) <$> _rlDescription])
 
 -- | Account User Profile List Response
@@ -9652,7 +9652,7 @@ instance ToJSON RemarketingList where
 -- /See:/ 'accountUserProfilesListResponse' smart constructor.
 data AccountUserProfilesListResponse = AccountUserProfilesListResponse
     { _auplrNextPageToken       :: !(Maybe Text)
-    , _auplrAccountUserProfiles :: !(Maybe [Maybe AccountUserProfile])
+    , _auplrAccountUserProfiles :: !(Maybe [AccountUserProfile])
     , _auplrKind                :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -9681,7 +9681,7 @@ auplrNextPageToken
       (\ s a -> s{_auplrNextPageToken = a})
 
 -- | Account user profile collection.
-auplrAccountUserProfiles :: Lens' AccountUserProfilesListResponse [Maybe AccountUserProfile]
+auplrAccountUserProfiles :: Lens' AccountUserProfilesListResponse [AccountUserProfile]
 auplrAccountUserProfiles
   = lens _auplrAccountUserProfiles
       (\ s a -> s{_auplrAccountUserProfiles = a})
@@ -9722,7 +9722,7 @@ data DeliverySchedule = DeliverySchedule
     { _dsHardCutoff      :: !(Maybe Bool)
     , _dsPriority        :: !(Maybe DeliverySchedulePriority)
     , _dsImpressionRatio :: !(Maybe Int64)
-    , _dsFrequencyCap    :: !(Maybe (Maybe FrequencyCap))
+    , _dsFrequencyCap    :: !(Maybe FrequencyCap)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DeliverySchedule' with the minimum fields required to make a request.
@@ -9770,7 +9770,7 @@ dsImpressionRatio
 
 -- | Limit on the number of times an individual user can be served the ad
 -- within a specified period of time.
-dsFrequencyCap :: Lens' DeliverySchedule (Maybe (Maybe FrequencyCap))
+dsFrequencyCap :: Lens' DeliverySchedule (Maybe FrequencyCap)
 dsFrequencyCap
   = lens _dsFrequencyCap
       (\ s a -> s{_dsFrequencyCap = a})
@@ -9799,7 +9799,7 @@ instance ToJSON DeliverySchedule where
 data PlacementGroupsListResponse = PlacementGroupsListResponse
     { _pglrNextPageToken   :: !(Maybe Text)
     , _pglrKind            :: !Text
-    , _pglrPlacementGroups :: !(Maybe [Maybe PlacementGroup])
+    , _pglrPlacementGroups :: !(Maybe [PlacementGroup])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementGroupsListResponse' with the minimum fields required to make a request.
@@ -9832,7 +9832,7 @@ pglrKind :: Lens' PlacementGroupsListResponse Text
 pglrKind = lens _pglrKind (\ s a -> s{_pglrKind = a})
 
 -- | Placement group collection.
-pglrPlacementGroups :: Lens' PlacementGroupsListResponse [Maybe PlacementGroup]
+pglrPlacementGroups :: Lens' PlacementGroupsListResponse [PlacementGroup]
 pglrPlacementGroups
   = lens _pglrPlacementGroups
       (\ s a -> s{_pglrPlacementGroups = a})
@@ -9863,7 +9863,7 @@ instance ToJSON PlacementGroupsListResponse where
 data OrdersListResponse = OrdersListResponse
     { _olrNextPageToken :: !(Maybe Text)
     , _olrKind          :: !Text
-    , _olrOrders        :: !(Maybe [Maybe Order])
+    , _olrOrders        :: !(Maybe [Order])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrdersListResponse' with the minimum fields required to make a request.
@@ -9896,7 +9896,7 @@ olrKind :: Lens' OrdersListResponse Text
 olrKind = lens _olrKind (\ s a -> s{_olrKind = a})
 
 -- | Order collection.
-olrOrders :: Lens' OrdersListResponse [Maybe Order]
+olrOrders :: Lens' OrdersListResponse [Order]
 olrOrders
   = lens _olrOrders (\ s a -> s{_olrOrders = a}) .
       _Default
@@ -9924,7 +9924,7 @@ instance ToJSON OrdersListResponse where
 -- /See:/ 'userRolePermissionsListResponse' smart constructor.
 data UserRolePermissionsListResponse = UserRolePermissionsListResponse
     { _urplrKind                :: !Text
-    , _urplrUserRolePermissions :: !(Maybe [Maybe UserRolePermission])
+    , _urplrUserRolePermissions :: !(Maybe [UserRolePermission])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserRolePermissionsListResponse' with the minimum fields required to make a request.
@@ -9949,7 +9949,7 @@ urplrKind
   = lens _urplrKind (\ s a -> s{_urplrKind = a})
 
 -- | User role permission collection.
-urplrUserRolePermissions :: Lens' UserRolePermissionsListResponse [Maybe UserRolePermission]
+urplrUserRolePermissions :: Lens' UserRolePermissionsListResponse [UserRolePermission]
 urplrUserRolePermissions
   = lens _urplrUserRolePermissions
       (\ s a -> s{_urplrUserRolePermissions = a})
@@ -10061,7 +10061,7 @@ instance ToJSON MobileCarrier where
 data LandingPage = LandingPage
     { _lpKind    :: !Text
     , _lpDefault :: !(Maybe Bool)
-    , _lpUrl     :: !(Maybe Text)
+    , _lpURL     :: !(Maybe Text)
     , _lpName    :: !(Maybe Text)
     , _lpId      :: !(Maybe Int64)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -10074,7 +10074,7 @@ data LandingPage = LandingPage
 --
 -- * 'lpDefault'
 --
--- * 'lpUrl'
+-- * 'lpURL'
 --
 -- * 'lpName'
 --
@@ -10085,7 +10085,7 @@ landingPage =
     LandingPage
     { _lpKind = "dfareporting#landingPage"
     , _lpDefault = Nothing
-    , _lpUrl = Nothing
+    , _lpURL = Nothing
     , _lpName = Nothing
     , _lpId = Nothing
     }
@@ -10103,8 +10103,8 @@ lpDefault
   = lens _lpDefault (\ s a -> s{_lpDefault = a})
 
 -- | URL of this landing page. This is a required field.
-lpUrl :: Lens' LandingPage (Maybe Text)
-lpUrl = lens _lpUrl (\ s a -> s{_lpUrl = a})
+lpURL :: Lens' LandingPage (Maybe Text)
+lpURL = lens _lpURL (\ s a -> s{_lpURL = a})
 
 -- | Name of this landing page. This is a required field. It must be less
 -- than 256 characters long, and must be unique among landing pages of the
@@ -10132,7 +10132,7 @@ instance ToJSON LandingPage where
           = object
               (catMaybes
                  [Just ("kind" .= _lpKind),
-                  ("default" .=) <$> _lpDefault, ("url" .=) <$> _lpUrl,
+                  ("default" .=) <$> _lpDefault, ("url" .=) <$> _lpURL,
                   ("name" .=) <$> _lpName, ("id" .=) <$> _lpId])
 
 -- | Tag Settings
@@ -10140,7 +10140,7 @@ instance ToJSON LandingPage where
 -- /See:/ 'tagSetting' smart constructor.
 data TagSetting = TagSetting
     { _tsKeywordOption           :: !(Maybe TagSettingKeywordOption)
-    , _tsIncludeClickThroughUrls :: !(Maybe Bool)
+    , _tsIncludeClickThroughURLs :: !(Maybe Bool)
     , _tsIncludeClickTracking    :: !(Maybe Bool)
     , _tsAdditionalKeyValues     :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -10151,7 +10151,7 @@ data TagSetting = TagSetting
 --
 -- * 'tsKeywordOption'
 --
--- * 'tsIncludeClickThroughUrls'
+-- * 'tsIncludeClickThroughURLs'
 --
 -- * 'tsIncludeClickTracking'
 --
@@ -10161,7 +10161,7 @@ tagSetting
 tagSetting =
     TagSetting
     { _tsKeywordOption = Nothing
-    , _tsIncludeClickThroughUrls = Nothing
+    , _tsIncludeClickThroughURLs = Nothing
     , _tsIncludeClickTracking = Nothing
     , _tsAdditionalKeyValues = Nothing
     }
@@ -10177,10 +10177,10 @@ tsKeywordOption
 
 -- | Whether static landing page URLs should be included in the tags. This
 -- setting applies only to placements.
-tsIncludeClickThroughUrls :: Lens' TagSetting (Maybe Bool)
-tsIncludeClickThroughUrls
-  = lens _tsIncludeClickThroughUrls
-      (\ s a -> s{_tsIncludeClickThroughUrls = a})
+tsIncludeClickThroughURLs :: Lens' TagSetting (Maybe Bool)
+tsIncludeClickThroughURLs
+  = lens _tsIncludeClickThroughURLs
+      (\ s a -> s{_tsIncludeClickThroughURLs = a})
 
 -- | Whether click-tracking string should be included in the tags.
 tsIncludeClickTracking :: Lens' TagSetting (Maybe Bool)
@@ -10213,7 +10213,7 @@ instance ToJSON TagSetting where
               (catMaybes
                  [("keywordOption" .=) <$> _tsKeywordOption,
                   ("includeClickThroughUrls" .=) <$>
-                    _tsIncludeClickThroughUrls,
+                    _tsIncludeClickThroughURLs,
                   ("includeClickTracking" .=) <$>
                     _tsIncludeClickTracking,
                   ("additionalKeyValues" .=) <$>
@@ -10393,12 +10393,12 @@ instance ToJSON
 data CreativeGroup = CreativeGroup
     { _cgKind                       :: !Text
     , _cgAdvertiserId               :: !(Maybe Int64)
-    , _cgAdvertiserIdDimensionValue :: !(Maybe (Maybe DimensionValue))
+    , _cgAdvertiserIdDimensionValue :: !(Maybe DimensionValue)
     , _cgGroupNumber                :: !(Maybe Int32)
     , _cgAccountId                  :: !(Maybe Int64)
     , _cgName                       :: !(Maybe Text)
     , _cgId                         :: !(Maybe Int64)
-    , _cgSubaccountId               :: !(Maybe Int64)
+    , _cgSubAccountId               :: !(Maybe Int64)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeGroup' with the minimum fields required to make a request.
@@ -10419,7 +10419,7 @@ data CreativeGroup = CreativeGroup
 --
 -- * 'cgId'
 --
--- * 'cgSubaccountId'
+-- * 'cgSubAccountId'
 creativeGroup
     :: CreativeGroup
 creativeGroup =
@@ -10431,7 +10431,7 @@ creativeGroup =
     , _cgAccountId = Nothing
     , _cgName = Nothing
     , _cgId = Nothing
-    , _cgSubaccountId = Nothing
+    , _cgSubAccountId = Nothing
     }
 
 -- | Identifies what kind of resource this is. Value: the fixed string
@@ -10448,7 +10448,7 @@ cgAdvertiserId
 
 -- | Dimension value for the ID of the advertiser. This is a read-only,
 -- auto-generated field.
-cgAdvertiserIdDimensionValue :: Lens' CreativeGroup (Maybe (Maybe DimensionValue))
+cgAdvertiserIdDimensionValue :: Lens' CreativeGroup (Maybe DimensionValue)
 cgAdvertiserIdDimensionValue
   = lens _cgAdvertiserIdDimensionValue
       (\ s a -> s{_cgAdvertiserIdDimensionValue = a})
@@ -10480,10 +10480,10 @@ cgId = lens _cgId (\ s a -> s{_cgId = a})
 
 -- | Subaccount ID of this creative group. This is a read-only field that can
 -- be left blank.
-cgSubaccountId :: Lens' CreativeGroup (Maybe Int64)
-cgSubaccountId
-  = lens _cgSubaccountId
-      (\ s a -> s{_cgSubaccountId = a})
+cgSubAccountId :: Lens' CreativeGroup (Maybe Int64)
+cgSubAccountId
+  = lens _cgSubAccountId
+      (\ s a -> s{_cgSubAccountId = a})
 
 instance FromJSON CreativeGroup where
         parseJSON
@@ -10510,14 +10510,14 @@ instance ToJSON CreativeGroup where
                   ("groupNumber" .=) <$> _cgGroupNumber,
                   ("accountId" .=) <$> _cgAccountId,
                   ("name" .=) <$> _cgName, ("id" .=) <$> _cgId,
-                  ("subaccountId" .=) <$> _cgSubaccountId])
+                  ("subaccountId" .=) <$> _cgSubAccountId])
 
 -- | Connection Type List Response
 --
 -- /See:/ 'connectionTypesListResponse' smart constructor.
 data ConnectionTypesListResponse = ConnectionTypesListResponse
     { _ctlrKind            :: !Text
-    , _ctlrConnectionTypes :: !(Maybe [Maybe ConnectionType])
+    , _ctlrConnectionTypes :: !(Maybe [ConnectionType])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ConnectionTypesListResponse' with the minimum fields required to make a request.
@@ -10541,7 +10541,7 @@ ctlrKind :: Lens' ConnectionTypesListResponse Text
 ctlrKind = lens _ctlrKind (\ s a -> s{_ctlrKind = a})
 
 -- | Collection of connection types such as broadband and mobile.
-ctlrConnectionTypes :: Lens' ConnectionTypesListResponse [Maybe ConnectionType]
+ctlrConnectionTypes :: Lens' ConnectionTypesListResponse [ConnectionType]
 ctlrConnectionTypes
   = lens _ctlrConnectionTypes
       (\ s a -> s{_ctlrConnectionTypes = a})
@@ -10755,7 +10755,7 @@ data ReportList = ReportList
     { _repEtag          :: !(Maybe Text)
     , _repNextPageToken :: !(Maybe Text)
     , _repKind          :: !Text
-    , _repItems         :: !(Maybe [Maybe Report])
+    , _repItems         :: !(Maybe [Report])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportList' with the minimum fields required to make a request.
@@ -10797,7 +10797,7 @@ repKind :: Lens' ReportList Text
 repKind = lens _repKind (\ s a -> s{_repKind = a})
 
 -- | The reports returned in this response.
-repItems :: Lens' ReportList [Maybe Report]
+repItems :: Lens' ReportList [Report]
 repItems
   = lens _repItems (\ s a -> s{_repItems = a}) .
       _Default
@@ -10826,7 +10826,7 @@ instance ToJSON ReportList where
 -- /See:/ 'eventTagsListResponse' smart constructor.
 data EventTagsListResponse = EventTagsListResponse
     { _etlrKind      :: !Text
-    , _etlrEventTags :: !(Maybe [Maybe EventTag])
+    , _etlrEventTags :: !(Maybe [EventTag])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventTagsListResponse' with the minimum fields required to make a request.
@@ -10850,7 +10850,7 @@ etlrKind :: Lens' EventTagsListResponse Text
 etlrKind = lens _etlrKind (\ s a -> s{_etlrKind = a})
 
 -- | Event tag collection.
-etlrEventTags :: Lens' EventTagsListResponse [Maybe EventTag]
+etlrEventTags :: Lens' EventTagsListResponse [EventTag]
 etlrEventTags
   = lens _etlrEventTags
       (\ s a -> s{_etlrEventTags = a})
@@ -11059,8 +11059,8 @@ instance ToJSON OffsetPosition where
 -- /See:/ 'floodlightActivityPublisherDynamicTag' smart constructor.
 data FloodlightActivityPublisherDynamicTag = FloodlightActivityPublisherDynamicTag
     { _fapdtClickThrough         :: !(Maybe Bool)
-    , _fapdtSiteIdDimensionValue :: !(Maybe (Maybe DimensionValue))
-    , _fapdtDynamicTag           :: !(Maybe (Maybe FloodlightActivityDynamicTag))
+    , _fapdtSiteIdDimensionValue :: !(Maybe DimensionValue)
+    , _fapdtDynamicTag           :: !(Maybe FloodlightActivityDynamicTag)
     , _fapdtDirectorySiteId      :: !(Maybe Int64)
     , _fapdtSiteId               :: !(Maybe Int64)
     , _fapdtViewThrough          :: !(Maybe Bool)
@@ -11101,13 +11101,13 @@ fapdtClickThrough
 
 -- | Dimension value for the ID of the site. This is a read-only,
 -- auto-generated field.
-fapdtSiteIdDimensionValue :: Lens' FloodlightActivityPublisherDynamicTag (Maybe (Maybe DimensionValue))
+fapdtSiteIdDimensionValue :: Lens' FloodlightActivityPublisherDynamicTag (Maybe DimensionValue)
 fapdtSiteIdDimensionValue
   = lens _fapdtSiteIdDimensionValue
       (\ s a -> s{_fapdtSiteIdDimensionValue = a})
 
 -- | Dynamic floodlight tag.
-fapdtDynamicTag :: Lens' FloodlightActivityPublisherDynamicTag (Maybe (Maybe FloodlightActivityDynamicTag))
+fapdtDynamicTag :: Lens' FloodlightActivityPublisherDynamicTag (Maybe FloodlightActivityDynamicTag)
 fapdtDynamicTag
   = lens _fapdtDynamicTag
       (\ s a -> s{_fapdtDynamicTag = a})
@@ -11163,7 +11163,7 @@ instance ToJSON FloodlightActivityPublisherDynamicTag
 data UserRolesListResponse = UserRolesListResponse
     { _urlrNextPageToken :: !(Maybe Text)
     , _urlrKind          :: !Text
-    , _urlrUserRoles     :: !(Maybe [Maybe UserRole])
+    , _urlrUserRoles     :: !(Maybe [UserRole])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserRolesListResponse' with the minimum fields required to make a request.
@@ -11196,7 +11196,7 @@ urlrKind :: Lens' UserRolesListResponse Text
 urlrKind = lens _urlrKind (\ s a -> s{_urlrKind = a})
 
 -- | User role collection.
-urlrUserRoles :: Lens' UserRolesListResponse [Maybe UserRole]
+urlrUserRoles :: Lens' UserRolesListResponse [UserRole]
 urlrUserRoles
   = lens _urlrUserRoles
       (\ s a -> s{_urlrUserRoles = a})
@@ -11412,8 +11412,8 @@ instance ToJSON City where
 --
 -- /See:/ 'popupWindowProperties' smart constructor.
 data PopupWindowProperties = PopupWindowProperties
-    { _pwpOffset         :: !(Maybe (Maybe OffsetPosition))
-    , _pwpDimension      :: !(Maybe (Maybe Size))
+    { _pwpOffset         :: !(Maybe OffsetPosition)
+    , _pwpDimension      :: !(Maybe Size)
     , _pwpShowStatusBar  :: !(Maybe Bool)
     , _pwpShowMenuBar    :: !(Maybe Bool)
     , _pwpPositionType   :: !(Maybe PopupWindowPropertiesPositionType)
@@ -11461,13 +11461,13 @@ popupWindowProperties =
 
 -- | Upper-left corner coordinates of the popup window. Applicable if
 -- positionType is COORDINATES.
-pwpOffset :: Lens' PopupWindowProperties (Maybe (Maybe OffsetPosition))
+pwpOffset :: Lens' PopupWindowProperties (Maybe OffsetPosition)
 pwpOffset
   = lens _pwpOffset (\ s a -> s{_pwpOffset = a})
 
 -- | Popup dimension for a creative. This is a read-only field. Applicable to
 -- the following creative types: all RICH_MEDIA and all VPAID
-pwpDimension :: Lens' PopupWindowProperties (Maybe (Maybe Size))
+pwpDimension :: Lens' PopupWindowProperties (Maybe Size)
 pwpDimension
   = lens _pwpDimension (\ s a -> s{_pwpDimension = a})
 
@@ -11671,7 +11671,7 @@ instance ToJSON DfpSettings where
 data AdvertisersListResponse = AdvertisersListResponse
     { _advNextPageToken :: !(Maybe Text)
     , _advKind          :: !Text
-    , _advAdvertisers   :: !(Maybe [Maybe Advertiser])
+    , _advAdvertisers   :: !(Maybe [Advertiser])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertisersListResponse' with the minimum fields required to make a request.
@@ -11704,7 +11704,7 @@ advKind :: Lens' AdvertisersListResponse Text
 advKind = lens _advKind (\ s a -> s{_advKind = a})
 
 -- | Advertiser collection.
-advAdvertisers :: Lens' AdvertisersListResponse [Maybe Advertiser]
+advAdvertisers :: Lens' AdvertisersListResponse [Advertiser]
 advAdvertisers
   = lens _advAdvertisers
       (\ s a -> s{_advAdvertisers = a})
@@ -11734,7 +11734,7 @@ instance ToJSON AdvertisersListResponse where
 -- /See:/ 'countriesListResponse' smart constructor.
 data CountriesListResponse = CountriesListResponse
     { _couoKind      :: !Text
-    , _couoCountries :: !(Maybe [Maybe Country])
+    , _couoCountries :: !(Maybe [Country])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CountriesListResponse' with the minimum fields required to make a request.
@@ -11758,7 +11758,7 @@ couoKind :: Lens' CountriesListResponse Text
 couoKind = lens _couoKind (\ s a -> s{_couoKind = a})
 
 -- | Country collection.
-couoCountries :: Lens' CountriesListResponse [Maybe Country]
+couoCountries :: Lens' CountriesListResponse [Country]
 couoCountries
   = lens _couoCountries
       (\ s a -> s{_couoCountries = a})
@@ -11785,12 +11785,12 @@ instance ToJSON CountriesListResponse where
 --
 -- /See:/ 'compatibleFields' smart constructor.
 data CompatibleFields = CompatibleFields
-    { _cfReachReportCompatibleFields               :: !(Maybe (Maybe ReachReportCompatibleFields))
-    , _cfCrossDimensionReachReportCompatibleFields :: !(Maybe (Maybe CrossDimensionReachReportCompatibleFields))
+    { _cfReachReportCompatibleFields               :: !(Maybe ReachReportCompatibleFields)
+    , _cfCrossDimensionReachReportCompatibleFields :: !(Maybe CrossDimensionReachReportCompatibleFields)
     , _cfKind                                      :: !Text
-    , _cfFloodlightReportCompatibleFields          :: !(Maybe (Maybe FloodlightReportCompatibleFields))
-    , _cfReportCompatibleFields                    :: !(Maybe (Maybe ReportCompatibleFields))
-    , _cfPathToConversionReportCompatibleFields    :: !(Maybe (Maybe PathToConversionReportCompatibleFields))
+    , _cfFloodlightReportCompatibleFields          :: !(Maybe FloodlightReportCompatibleFields)
+    , _cfReportCompatibleFields                    :: !(Maybe ReportCompatibleFields)
+    , _cfPathToConversionReportCompatibleFields    :: !(Maybe PathToConversionReportCompatibleFields)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CompatibleFields' with the minimum fields required to make a request.
@@ -11822,14 +11822,14 @@ compatibleFields =
 
 -- | Contains items that are compatible to be selected for a report of type
 -- \"REACH\".
-cfReachReportCompatibleFields :: Lens' CompatibleFields (Maybe (Maybe ReachReportCompatibleFields))
+cfReachReportCompatibleFields :: Lens' CompatibleFields (Maybe ReachReportCompatibleFields)
 cfReachReportCompatibleFields
   = lens _cfReachReportCompatibleFields
       (\ s a -> s{_cfReachReportCompatibleFields = a})
 
 -- | Contains items that are compatible to be selected for a report of type
 -- \"CROSS_DIMENSION_REACH\".
-cfCrossDimensionReachReportCompatibleFields :: Lens' CompatibleFields (Maybe (Maybe CrossDimensionReachReportCompatibleFields))
+cfCrossDimensionReachReportCompatibleFields :: Lens' CompatibleFields (Maybe CrossDimensionReachReportCompatibleFields)
 cfCrossDimensionReachReportCompatibleFields
   = lens _cfCrossDimensionReachReportCompatibleFields
       (\ s a ->
@@ -11842,21 +11842,21 @@ cfKind = lens _cfKind (\ s a -> s{_cfKind = a})
 
 -- | Contains items that are compatible to be selected for a report of type
 -- \"FLOODLIGHT\".
-cfFloodlightReportCompatibleFields :: Lens' CompatibleFields (Maybe (Maybe FloodlightReportCompatibleFields))
+cfFloodlightReportCompatibleFields :: Lens' CompatibleFields (Maybe FloodlightReportCompatibleFields)
 cfFloodlightReportCompatibleFields
   = lens _cfFloodlightReportCompatibleFields
       (\ s a -> s{_cfFloodlightReportCompatibleFields = a})
 
 -- | Contains items that are compatible to be selected for a report of type
 -- \"STANDARD\".
-cfReportCompatibleFields :: Lens' CompatibleFields (Maybe (Maybe ReportCompatibleFields))
+cfReportCompatibleFields :: Lens' CompatibleFields (Maybe ReportCompatibleFields)
 cfReportCompatibleFields
   = lens _cfReportCompatibleFields
       (\ s a -> s{_cfReportCompatibleFields = a})
 
 -- | Contains items that are compatible to be selected for a report of type
 -- \"PATH_TO_CONVERSION\".
-cfPathToConversionReportCompatibleFields :: Lens' CompatibleFields (Maybe (Maybe PathToConversionReportCompatibleFields))
+cfPathToConversionReportCompatibleFields :: Lens' CompatibleFields (Maybe PathToConversionReportCompatibleFields)
 cfPathToConversionReportCompatibleFields
   = lens _cfPathToConversionReportCompatibleFields
       (\ s a ->
@@ -11896,7 +11896,7 @@ instance ToJSON CompatibleFields where
 -- /See:/ 'accountPermissionGroupsListResponse' smart constructor.
 data AccountPermissionGroupsListResponse = AccountPermissionGroupsListResponse
     { _apglrKind                    :: !Text
-    , _apglrAccountPermissionGroups :: !(Maybe [Maybe AccountPermissionGroup])
+    , _apglrAccountPermissionGroups :: !(Maybe [AccountPermissionGroup])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountPermissionGroupsListResponse' with the minimum fields required to make a request.
@@ -11921,7 +11921,7 @@ apglrKind
   = lens _apglrKind (\ s a -> s{_apglrKind = a})
 
 -- | Account permission group collection.
-apglrAccountPermissionGroups :: Lens' AccountPermissionGroupsListResponse [Maybe AccountPermissionGroup]
+apglrAccountPermissionGroups :: Lens' AccountPermissionGroupsListResponse [AccountPermissionGroup]
 apglrAccountPermissionGroups
   = lens _apglrAccountPermissionGroups
       (\ s a -> s{_apglrAccountPermissionGroups = a})
@@ -11952,11 +11952,11 @@ instance ToJSON AccountPermissionGroupsListResponse
 --
 -- /See:/ 'pathToConversionReportCompatibleFields' smart constructor.
 data PathToConversionReportCompatibleFields = PathToConversionReportCompatibleFields
-    { _ptcrcfMetrics                   :: !(Maybe [Maybe Metric])
+    { _ptcrcfMetrics                   :: !(Maybe [Metric])
     , _ptcrcfKind                      :: !Text
-    , _ptcrcfConversionDimensions      :: !(Maybe [Maybe Dimension])
-    , _ptcrcfCustomFloodlightVariables :: !(Maybe [Maybe Dimension])
-    , _ptcrcfPerInteractionDimensions  :: !(Maybe [Maybe Dimension])
+    , _ptcrcfConversionDimensions      :: !(Maybe [Dimension])
+    , _ptcrcfCustomFloodlightVariables :: !(Maybe [Dimension])
+    , _ptcrcfPerInteractionDimensions  :: !(Maybe [Dimension])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PathToConversionReportCompatibleFields' with the minimum fields required to make a request.
@@ -11985,7 +11985,7 @@ pathToConversionReportCompatibleFields =
 
 -- | Metrics which are compatible to be selected in the \"metricNames\"
 -- section of the report.
-ptcrcfMetrics :: Lens' PathToConversionReportCompatibleFields [Maybe Metric]
+ptcrcfMetrics :: Lens' PathToConversionReportCompatibleFields [Metric]
 ptcrcfMetrics
   = lens _ptcrcfMetrics
       (\ s a -> s{_ptcrcfMetrics = a})
@@ -12000,7 +12000,7 @@ ptcrcfKind
 
 -- | Conversion dimensions which are compatible to be selected in the
 -- \"conversionDimensions\" section of the report.
-ptcrcfConversionDimensions :: Lens' PathToConversionReportCompatibleFields [Maybe Dimension]
+ptcrcfConversionDimensions :: Lens' PathToConversionReportCompatibleFields [Dimension]
 ptcrcfConversionDimensions
   = lens _ptcrcfConversionDimensions
       (\ s a -> s{_ptcrcfConversionDimensions = a})
@@ -12009,7 +12009,7 @@ ptcrcfConversionDimensions
 
 -- | Custom floodlight variables which are compatible to be selected in the
 -- \"customFloodlightVariables\" section of the report.
-ptcrcfCustomFloodlightVariables :: Lens' PathToConversionReportCompatibleFields [Maybe Dimension]
+ptcrcfCustomFloodlightVariables :: Lens' PathToConversionReportCompatibleFields [Dimension]
 ptcrcfCustomFloodlightVariables
   = lens _ptcrcfCustomFloodlightVariables
       (\ s a -> s{_ptcrcfCustomFloodlightVariables = a})
@@ -12018,7 +12018,7 @@ ptcrcfCustomFloodlightVariables
 
 -- | Per-interaction dimensions which are compatible to be selected in the
 -- \"perInteractionDimensions\" section of the report.
-ptcrcfPerInteractionDimensions :: Lens' PathToConversionReportCompatibleFields [Maybe Dimension]
+ptcrcfPerInteractionDimensions :: Lens' PathToConversionReportCompatibleFields [Dimension]
 ptcrcfPerInteractionDimensions
   = lens _ptcrcfPerInteractionDimensions
       (\ s a -> s{_ptcrcfPerInteractionDimensions = a})
@@ -12057,7 +12057,7 @@ instance ToJSON
 -- /See:/ 'companionClickThroughOverride' smart constructor.
 data CompanionClickThroughOverride = CompanionClickThroughOverride
     { _cctoCreativeId      :: !(Maybe Int64)
-    , _cctoClickThroughUrl :: !(Maybe (Maybe ClickThroughURL))
+    , _cctoClickThroughURL :: !(Maybe ClickThroughURL)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CompanionClickThroughOverride' with the minimum fields required to make a request.
@@ -12066,13 +12066,13 @@ data CompanionClickThroughOverride = CompanionClickThroughOverride
 --
 -- * 'cctoCreativeId'
 --
--- * 'cctoClickThroughUrl'
+-- * 'cctoClickThroughURL'
 companionClickThroughOverride
     :: CompanionClickThroughOverride
 companionClickThroughOverride =
     CompanionClickThroughOverride
     { _cctoCreativeId = Nothing
-    , _cctoClickThroughUrl = Nothing
+    , _cctoClickThroughURL = Nothing
     }
 
 -- | ID of the creative for this companion click-through override.
@@ -12082,10 +12082,10 @@ cctoCreativeId
       (\ s a -> s{_cctoCreativeId = a})
 
 -- | Click-through URL of this companion click-through override.
-cctoClickThroughUrl :: Lens' CompanionClickThroughOverride (Maybe (Maybe ClickThroughURL))
-cctoClickThroughUrl
-  = lens _cctoClickThroughUrl
-      (\ s a -> s{_cctoClickThroughUrl = a})
+cctoClickThroughURL :: Lens' CompanionClickThroughOverride (Maybe ClickThroughURL)
+cctoClickThroughURL
+  = lens _cctoClickThroughURL
+      (\ s a -> s{_cctoClickThroughURL = a})
 
 instance FromJSON CompanionClickThroughOverride where
         parseJSON
@@ -12099,7 +12099,7 @@ instance ToJSON CompanionClickThroughOverride where
           = object
               (catMaybes
                  [("creativeId" .=) <$> _cctoCreativeId,
-                  ("clickThroughUrl" .=) <$> _cctoClickThroughUrl])
+                  ("clickThroughUrl" .=) <$> _cctoClickThroughURL])
 
 -- | Contains information about a platform type that can be targeted by ads.
 --
@@ -12172,13 +12172,13 @@ data TargetableRemarketingList = TargetableRemarketingList
     , _trlLifeSpan                   :: !(Maybe Int64)
     , _trlKind                       :: !Text
     , _trlAdvertiserId               :: !(Maybe Int64)
-    , _trlAdvertiserIdDimensionValue :: !(Maybe (Maybe DimensionValue))
+    , _trlAdvertiserIdDimensionValue :: !(Maybe DimensionValue)
     , _trlActive                     :: !(Maybe Bool)
     , _trlAccountId                  :: !(Maybe Int64)
     , _trlName                       :: !(Maybe Text)
     , _trlListSource                 :: !(Maybe TargetableRemarketingListListSource)
     , _trlId                         :: !(Maybe Int64)
-    , _trlSubaccountId               :: !(Maybe Int64)
+    , _trlSubAccountId               :: !(Maybe Int64)
     , _trlDescription                :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -12206,7 +12206,7 @@ data TargetableRemarketingList = TargetableRemarketingList
 --
 -- * 'trlId'
 --
--- * 'trlSubaccountId'
+-- * 'trlSubAccountId'
 --
 -- * 'trlDescription'
 targetableRemarketingList
@@ -12223,7 +12223,7 @@ targetableRemarketingList =
     , _trlName = Nothing
     , _trlListSource = Nothing
     , _trlId = Nothing
-    , _trlSubaccountId = Nothing
+    , _trlSubAccountId = Nothing
     , _trlDescription = Nothing
     }
 
@@ -12251,7 +12251,7 @@ trlAdvertiserId
       (\ s a -> s{_trlAdvertiserId = a})
 
 -- | Dimension value for the ID of the advertiser.
-trlAdvertiserIdDimensionValue :: Lens' TargetableRemarketingList (Maybe (Maybe DimensionValue))
+trlAdvertiserIdDimensionValue :: Lens' TargetableRemarketingList (Maybe DimensionValue)
 trlAdvertiserIdDimensionValue
   = lens _trlAdvertiserIdDimensionValue
       (\ s a -> s{_trlAdvertiserIdDimensionValue = a})
@@ -12284,10 +12284,10 @@ trlId = lens _trlId (\ s a -> s{_trlId = a})
 
 -- | Subaccount ID of this remarketing list. This is a read-only,
 -- auto-generated field that is only returned in GET requests.
-trlSubaccountId :: Lens' TargetableRemarketingList (Maybe Int64)
-trlSubaccountId
-  = lens _trlSubaccountId
-      (\ s a -> s{_trlSubaccountId = a})
+trlSubAccountId :: Lens' TargetableRemarketingList (Maybe Int64)
+trlSubAccountId
+  = lens _trlSubAccountId
+      (\ s a -> s{_trlSubAccountId = a})
 
 -- | Targetable remarketing list description.
 trlDescription :: Lens' TargetableRemarketingList (Maybe Text)
@@ -12328,7 +12328,7 @@ instance ToJSON TargetableRemarketingList where
                   ("name" .=) <$> _trlName,
                   ("listSource" .=) <$> _trlListSource,
                   ("id" .=) <$> _trlId,
-                  ("subaccountId" .=) <$> _trlSubaccountId,
+                  ("subaccountId" .=) <$> _trlSubAccountId,
                   ("description" .=) <$> _trlDescription])
 
 -- | The report\'s email delivery settings.
@@ -12336,7 +12336,7 @@ instance ToJSON TargetableRemarketingList where
 -- /See:/ 'reportDelivery' smart constructor.
 data ReportDelivery = ReportDelivery
     { _rdEmailOwner             :: !(Maybe Bool)
-    , _rdRecipients             :: !(Maybe [Maybe Recipient])
+    , _rdRecipients             :: !(Maybe [Recipient])
     , _rdMessage                :: !(Maybe Text)
     , _rdEmailOwnerDeliveryType :: !(Maybe ReportDeliveryEmailOwnerDeliveryType)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -12368,7 +12368,7 @@ rdEmailOwner
   = lens _rdEmailOwner (\ s a -> s{_rdEmailOwner = a})
 
 -- | The list of recipients to which to email the report.
-rdRecipients :: Lens' ReportDelivery [Maybe Recipient]
+rdRecipients :: Lens' ReportDelivery [Recipient]
 rdRecipients
   = lens _rdRecipients (\ s a -> s{_rdRecipients = a})
       . _Default
@@ -12412,7 +12412,7 @@ instance ToJSON ReportDelivery where
 data OperatingSystemVersion = OperatingSystemVersion
     { _osvMinorVersion    :: !(Maybe Text)
     , _osvKind            :: !Text
-    , _osvOperatingSystem :: !(Maybe (Maybe OperatingSystem))
+    , _osvOperatingSystem :: !(Maybe OperatingSystem)
     , _osvMajorVersion    :: !(Maybe Text)
     , _osvName            :: !(Maybe Text)
     , _osvId              :: !(Maybe Int64)
@@ -12458,7 +12458,7 @@ osvKind :: Lens' OperatingSystemVersion Text
 osvKind = lens _osvKind (\ s a -> s{_osvKind = a})
 
 -- | Operating system of this operating system version.
-osvOperatingSystem :: Lens' OperatingSystemVersion (Maybe (Maybe OperatingSystem))
+osvOperatingSystem :: Lens' OperatingSystemVersion (Maybe OperatingSystem)
 osvOperatingSystem
   = lens _osvOperatingSystem
       (\ s a -> s{_osvOperatingSystem = a})
@@ -12715,7 +12715,7 @@ instance ToJSON UserProfile where
 -- /See:/ 'postalCodesListResponse' smart constructor.
 data PostalCodesListResponse = PostalCodesListResponse
     { _pclrKind        :: !Text
-    , _pclrPostalCodes :: !(Maybe [Maybe PostalCode])
+    , _pclrPostalCodes :: !(Maybe [PostalCode])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostalCodesListResponse' with the minimum fields required to make a request.
@@ -12739,7 +12739,7 @@ pclrKind :: Lens' PostalCodesListResponse Text
 pclrKind = lens _pclrKind (\ s a -> s{_pclrKind = a})
 
 -- | Postal code collection.
-pclrPostalCodes :: Lens' PostalCodesListResponse [Maybe PostalCode]
+pclrPostalCodes :: Lens' PostalCodesListResponse [PostalCode]
 pclrPostalCodes
   = lens _pclrPostalCodes
       (\ s a -> s{_pclrPostalCodes = a})
@@ -12778,7 +12778,7 @@ data ChangeLog = ChangeLog
     , _clNewValue        :: !(Maybe Text)
     , _clFieldName       :: !(Maybe Text)
     , _clId              :: !(Maybe Int64)
-    , _clSubaccountId    :: !(Maybe Int64)
+    , _clSubAccountId    :: !(Maybe Int64)
     , _clChangeTime      :: !(Maybe UTCTime)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -12810,7 +12810,7 @@ data ChangeLog = ChangeLog
 --
 -- * 'clId'
 --
--- * 'clSubaccountId'
+-- * 'clSubAccountId'
 --
 -- * 'clChangeTime'
 changeLog
@@ -12829,7 +12829,7 @@ changeLog =
     , _clNewValue = Nothing
     , _clFieldName = Nothing
     , _clId = Nothing
-    , _clSubaccountId = Nothing
+    , _clSubAccountId = Nothing
     , _clChangeTime = Nothing
     }
 
@@ -12898,10 +12898,10 @@ clId :: Lens' ChangeLog (Maybe Int64)
 clId = lens _clId (\ s a -> s{_clId = a})
 
 -- | Subaccount ID of the modified object.
-clSubaccountId :: Lens' ChangeLog (Maybe Int64)
-clSubaccountId
-  = lens _clSubaccountId
-      (\ s a -> s{_clSubaccountId = a})
+clSubAccountId :: Lens' ChangeLog (Maybe Int64)
+clSubAccountId
+  = lens _clSubAccountId
+      (\ s a -> s{_clSubAccountId = a})
 
 -- | Time when the object was modified.
 clChangeTime :: Lens' ChangeLog (Maybe UTCTime)
@@ -12943,7 +12943,7 @@ instance ToJSON ChangeLog where
                   ("newValue" .=) <$> _clNewValue,
                   ("fieldName" .=) <$> _clFieldName,
                   ("id" .=) <$> _clId,
-                  ("subaccountId" .=) <$> _clSubaccountId,
+                  ("subaccountId" .=) <$> _clSubAccountId,
                   ("changeTime" .=) <$> _clChangeTime])
 
 -- | Operating System List Response
@@ -12951,7 +12951,7 @@ instance ToJSON ChangeLog where
 -- /See:/ 'operatingSystemsListResponse' smart constructor.
 data OperatingSystemsListResponse = OperatingSystemsListResponse
     { _oslrKind             :: !Text
-    , _oslrOperatingSystems :: !(Maybe [Maybe OperatingSystem])
+    , _oslrOperatingSystems :: !(Maybe [OperatingSystem])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperatingSystemsListResponse' with the minimum fields required to make a request.
@@ -12975,7 +12975,7 @@ oslrKind :: Lens' OperatingSystemsListResponse Text
 oslrKind = lens _oslrKind (\ s a -> s{_oslrKind = a})
 
 -- | Operating system collection.
-oslrOperatingSystems :: Lens' OperatingSystemsListResponse [Maybe OperatingSystem]
+oslrOperatingSystems :: Lens' OperatingSystemsListResponse [OperatingSystem]
 oslrOperatingSystems
   = lens _oslrOperatingSystems
       (\ s a -> s{_oslrOperatingSystems = a})
@@ -13121,7 +13121,7 @@ instance ToJSON EventTagOverride where
 -- /See:/ 'platformTypesListResponse' smart constructor.
 data PlatformTypesListResponse = PlatformTypesListResponse
     { _ptlrKind          :: !Text
-    , _ptlrPlatformTypes :: !(Maybe [Maybe PlatformType])
+    , _ptlrPlatformTypes :: !(Maybe [PlatformType])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlatformTypesListResponse' with the minimum fields required to make a request.
@@ -13145,7 +13145,7 @@ ptlrKind :: Lens' PlatformTypesListResponse Text
 ptlrKind = lens _ptlrKind (\ s a -> s{_ptlrKind = a})
 
 -- | Platform type collection.
-ptlrPlatformTypes :: Lens' PlatformTypesListResponse [Maybe PlatformType]
+ptlrPlatformTypes :: Lens' PlatformTypesListResponse [PlatformType]
 ptlrPlatformTypes
   = lens _ptlrPlatformTypes
       (\ s a -> s{_ptlrPlatformTypes = a})
@@ -13175,31 +13175,31 @@ data FloodlightActivity = FloodlightActivity
     { _faCountingMethod                          :: !(Maybe FloodlightActivityCountingMethod)
     , _faTagString                               :: !(Maybe Text)
     , _faSecure                                  :: !(Maybe Bool)
-    , _faExpectedUrl                             :: !(Maybe Text)
+    , _faExpectedURL                             :: !(Maybe Text)
     , _faFloodlightActivityGroupTagString        :: !(Maybe Text)
     , _faFloodlightConfigurationId               :: !(Maybe Int64)
     , _faKind                                    :: !Text
     , _faImageTagEnabled                         :: !(Maybe Bool)
     , _faAdvertiserId                            :: !(Maybe Int64)
-    , _faAdvertiserIdDimensionValue              :: !(Maybe (Maybe DimensionValue))
-    , _faSslCompliant                            :: !(Maybe Bool)
-    , _faIdDimensionValue                        :: !(Maybe (Maybe DimensionValue))
+    , _faAdvertiserIdDimensionValue              :: !(Maybe DimensionValue)
+    , _faSSLCompliant                            :: !(Maybe Bool)
+    , _faIdDimensionValue                        :: !(Maybe DimensionValue)
     , _faTagFormat                               :: !(Maybe FloodlightActivityTagFormat)
     , _faCacheBustingType                        :: !(Maybe FloodlightActivityCacheBustingType)
     , _faAccountId                               :: !(Maybe Int64)
     , _faName                                    :: !(Maybe Text)
-    , _faPublisherTags                           :: !(Maybe [Maybe FloodlightActivityPublisherDynamicTag])
+    , _faPublisherTags                           :: !(Maybe [FloodlightActivityPublisherDynamicTag])
     , _faFloodlightActivityGroupId               :: !(Maybe Int64)
     , _faHidden                                  :: !(Maybe Bool)
     , _faFloodlightActivityGroupType             :: !(Maybe FloodlightActivityFloodlightActivityGroupType)
-    , _faDefaultTags                             :: !(Maybe [Maybe FloodlightActivityDynamicTag])
+    , _faDefaultTags                             :: !(Maybe [FloodlightActivityDynamicTag])
     , _faFloodlightActivityGroupName             :: !(Maybe Text)
     , _faId                                      :: !(Maybe Int64)
-    , _faSslRequired                             :: !(Maybe Bool)
+    , _faSSLRequired                             :: !(Maybe Bool)
     , _faUserDefinedVariableTypes                :: !(Maybe [FloodlightActivityUserDefinedVariableTypes])
-    , _faSubaccountId                            :: !(Maybe Int64)
+    , _faSubAccountId                            :: !(Maybe Int64)
     , _faNotes                                   :: !(Maybe Text)
-    , _faFloodlightConfigurationIdDimensionValue :: !(Maybe (Maybe DimensionValue))
+    , _faFloodlightConfigurationIdDimensionValue :: !(Maybe DimensionValue)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivity' with the minimum fields required to make a request.
@@ -13212,7 +13212,7 @@ data FloodlightActivity = FloodlightActivity
 --
 -- * 'faSecure'
 --
--- * 'faExpectedUrl'
+-- * 'faExpectedURL'
 --
 -- * 'faFloodlightActivityGroupTagString'
 --
@@ -13226,7 +13226,7 @@ data FloodlightActivity = FloodlightActivity
 --
 -- * 'faAdvertiserIdDimensionValue'
 --
--- * 'faSslCompliant'
+-- * 'faSSLCompliant'
 --
 -- * 'faIdDimensionValue'
 --
@@ -13252,11 +13252,11 @@ data FloodlightActivity = FloodlightActivity
 --
 -- * 'faId'
 --
--- * 'faSslRequired'
+-- * 'faSSLRequired'
 --
 -- * 'faUserDefinedVariableTypes'
 --
--- * 'faSubaccountId'
+-- * 'faSubAccountId'
 --
 -- * 'faNotes'
 --
@@ -13268,14 +13268,14 @@ floodlightActivity =
     { _faCountingMethod = Nothing
     , _faTagString = Nothing
     , _faSecure = Nothing
-    , _faExpectedUrl = Nothing
+    , _faExpectedURL = Nothing
     , _faFloodlightActivityGroupTagString = Nothing
     , _faFloodlightConfigurationId = Nothing
     , _faKind = "dfareporting#floodlightActivity"
     , _faImageTagEnabled = Nothing
     , _faAdvertiserId = Nothing
     , _faAdvertiserIdDimensionValue = Nothing
-    , _faSslCompliant = Nothing
+    , _faSSLCompliant = Nothing
     , _faIdDimensionValue = Nothing
     , _faTagFormat = Nothing
     , _faCacheBustingType = Nothing
@@ -13288,9 +13288,9 @@ floodlightActivity =
     , _faDefaultTags = Nothing
     , _faFloodlightActivityGroupName = Nothing
     , _faId = Nothing
-    , _faSslRequired = Nothing
+    , _faSSLRequired = Nothing
     , _faUserDefinedVariableTypes = Nothing
-    , _faSubaccountId = Nothing
+    , _faSubAccountId = Nothing
     , _faNotes = Nothing
     , _faFloodlightConfigurationIdDimensionValue = Nothing
     }
@@ -13318,10 +13318,10 @@ faSecure = lens _faSecure (\ s a -> s{_faSecure = a})
 
 -- | URL where this tag will be deployed. If specified, must be less than 256
 -- characters long.
-faExpectedUrl :: Lens' FloodlightActivity (Maybe Text)
-faExpectedUrl
-  = lens _faExpectedUrl
-      (\ s a -> s{_faExpectedUrl = a})
+faExpectedURL :: Lens' FloodlightActivity (Maybe Text)
+faExpectedURL
+  = lens _faExpectedURL
+      (\ s a -> s{_faExpectedURL = a})
 
 -- | Tag string of the associated floodlight activity group. This is a
 -- read-only field.
@@ -13360,21 +13360,21 @@ faAdvertiserId
 
 -- | Dimension value for the ID of the advertiser. This is a read-only,
 -- auto-generated field.
-faAdvertiserIdDimensionValue :: Lens' FloodlightActivity (Maybe (Maybe DimensionValue))
+faAdvertiserIdDimensionValue :: Lens' FloodlightActivity (Maybe DimensionValue)
 faAdvertiserIdDimensionValue
   = lens _faAdvertiserIdDimensionValue
       (\ s a -> s{_faAdvertiserIdDimensionValue = a})
 
 -- | Whether the floodlight activity is SSL-compliant. This is a read-only
 -- field, its value detected by the system from the floodlight tags.
-faSslCompliant :: Lens' FloodlightActivity (Maybe Bool)
-faSslCompliant
-  = lens _faSslCompliant
-      (\ s a -> s{_faSslCompliant = a})
+faSSLCompliant :: Lens' FloodlightActivity (Maybe Bool)
+faSSLCompliant
+  = lens _faSSLCompliant
+      (\ s a -> s{_faSSLCompliant = a})
 
 -- | Dimension value for the ID of this floodlight activity. This is a
 -- read-only, auto-generated field.
-faIdDimensionValue :: Lens' FloodlightActivity (Maybe (Maybe DimensionValue))
+faIdDimensionValue :: Lens' FloodlightActivity (Maybe DimensionValue)
 faIdDimensionValue
   = lens _faIdDimensionValue
       (\ s a -> s{_faIdDimensionValue = a})
@@ -13403,7 +13403,7 @@ faName :: Lens' FloodlightActivity (Maybe Text)
 faName = lens _faName (\ s a -> s{_faName = a})
 
 -- | Publisher dynamic floodlight tags.
-faPublisherTags :: Lens' FloodlightActivity [Maybe FloodlightActivityPublisherDynamicTag]
+faPublisherTags :: Lens' FloodlightActivity [FloodlightActivityPublisherDynamicTag]
 faPublisherTags
   = lens _faPublisherTags
       (\ s a -> s{_faPublisherTags = a})
@@ -13429,7 +13429,7 @@ faFloodlightActivityGroupType
       (\ s a -> s{_faFloodlightActivityGroupType = a})
 
 -- | Dynamic floodlight tags.
-faDefaultTags :: Lens' FloodlightActivity [Maybe FloodlightActivityDynamicTag]
+faDefaultTags :: Lens' FloodlightActivity [FloodlightActivityDynamicTag]
 faDefaultTags
   = lens _faDefaultTags
       (\ s a -> s{_faDefaultTags = a})
@@ -13449,10 +13449,10 @@ faId :: Lens' FloodlightActivity (Maybe Int64)
 faId = lens _faId (\ s a -> s{_faId = a})
 
 -- | Whether this floodlight activity must be SSL-compliant.
-faSslRequired :: Lens' FloodlightActivity (Maybe Bool)
-faSslRequired
-  = lens _faSslRequired
-      (\ s a -> s{_faSslRequired = a})
+faSSLRequired :: Lens' FloodlightActivity (Maybe Bool)
+faSSLRequired
+  = lens _faSSLRequired
+      (\ s a -> s{_faSSLRequired = a})
 
 -- | List of the user-defined variables used by this conversion tag. These
 -- map to the \"u[1-20]=\" in the tags. Each of these can have a user
@@ -13469,10 +13469,10 @@ faUserDefinedVariableTypes
 
 -- | Subaccount ID of this floodlight activity. This is a read-only field
 -- that can be left blank.
-faSubaccountId :: Lens' FloodlightActivity (Maybe Int64)
-faSubaccountId
-  = lens _faSubaccountId
-      (\ s a -> s{_faSubaccountId = a})
+faSubAccountId :: Lens' FloodlightActivity (Maybe Int64)
+faSubAccountId
+  = lens _faSubAccountId
+      (\ s a -> s{_faSubAccountId = a})
 
 -- | General notes or implementation instructions for the tag.
 faNotes :: Lens' FloodlightActivity (Maybe Text)
@@ -13480,7 +13480,7 @@ faNotes = lens _faNotes (\ s a -> s{_faNotes = a})
 
 -- | Dimension value for the ID of the floodlight configuration. This is a
 -- read-only, auto-generated field.
-faFloodlightConfigurationIdDimensionValue :: Lens' FloodlightActivity (Maybe (Maybe DimensionValue))
+faFloodlightConfigurationIdDimensionValue :: Lens' FloodlightActivity (Maybe DimensionValue)
 faFloodlightConfigurationIdDimensionValue
   = lens _faFloodlightConfigurationIdDimensionValue
       (\ s a ->
@@ -13528,7 +13528,7 @@ instance ToJSON FloodlightActivity where
                  [("countingMethod" .=) <$> _faCountingMethod,
                   ("tagString" .=) <$> _faTagString,
                   ("secure" .=) <$> _faSecure,
-                  ("expectedUrl" .=) <$> _faExpectedUrl,
+                  ("expectedUrl" .=) <$> _faExpectedURL,
                   ("floodlightActivityGroupTagString" .=) <$>
                     _faFloodlightActivityGroupTagString,
                   ("floodlightConfigurationId" .=) <$>
@@ -13538,7 +13538,7 @@ instance ToJSON FloodlightActivity where
                   ("advertiserId" .=) <$> _faAdvertiserId,
                   ("advertiserIdDimensionValue" .=) <$>
                     _faAdvertiserIdDimensionValue,
-                  ("sslCompliant" .=) <$> _faSslCompliant,
+                  ("sslCompliant" .=) <$> _faSSLCompliant,
                   ("idDimensionValue" .=) <$> _faIdDimensionValue,
                   ("tagFormat" .=) <$> _faTagFormat,
                   ("cacheBustingType" .=) <$> _faCacheBustingType,
@@ -13554,10 +13554,10 @@ instance ToJSON FloodlightActivity where
                   ("floodlightActivityGroupName" .=) <$>
                     _faFloodlightActivityGroupName,
                   ("id" .=) <$> _faId,
-                  ("sslRequired" .=) <$> _faSslRequired,
+                  ("sslRequired" .=) <$> _faSSLRequired,
                   ("userDefinedVariableTypes" .=) <$>
                     _faUserDefinedVariableTypes,
-                  ("subaccountId" .=) <$> _faSubaccountId,
+                  ("subaccountId" .=) <$> _faSubAccountId,
                   ("notes" .=) <$> _faNotes,
                   ("floodlightConfigurationIdDimensionValue" .=) <$>
                     _faFloodlightConfigurationIdDimensionValue])
@@ -13571,16 +13571,16 @@ data Advertiser = Advertiser
     , _advdFloodlightConfigurationId               :: !(Maybe Int64)
     , _advdKind                                    :: !Text
     , _advdSuspended                               :: !(Maybe Bool)
-    , _advdIdDimensionValue                        :: !(Maybe (Maybe DimensionValue))
+    , _advdIdDimensionValue                        :: !(Maybe DimensionValue)
     , _advdAccountId                               :: !(Maybe Int64)
     , _advdDefaultEmail                            :: !(Maybe Text)
     , _advdName                                    :: !(Maybe Text)
     , _advdAdvertiserGroupId                       :: !(Maybe Int64)
     , _advdDefaultClickThroughEventTagId           :: !(Maybe Int64)
     , _advdId                                      :: !(Maybe Int64)
-    , _advdSubaccountId                            :: !(Maybe Int64)
-    , _advdFloodlightConfigurationIdDimensionValue :: !(Maybe (Maybe DimensionValue))
-    , _advdClickThroughUrlSuffix                   :: !(Maybe Text)
+    , _advdSubAccountId                            :: !(Maybe Int64)
+    , _advdFloodlightConfigurationIdDimensionValue :: !(Maybe DimensionValue)
+    , _advdClickThroughURLSuffix                   :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Advertiser' with the minimum fields required to make a request.
@@ -13611,11 +13611,11 @@ data Advertiser = Advertiser
 --
 -- * 'advdId'
 --
--- * 'advdSubaccountId'
+-- * 'advdSubAccountId'
 --
 -- * 'advdFloodlightConfigurationIdDimensionValue'
 --
--- * 'advdClickThroughUrlSuffix'
+-- * 'advdClickThroughURLSuffix'
 advertiser
     :: Advertiser
 advertiser =
@@ -13632,9 +13632,9 @@ advertiser =
     , _advdAdvertiserGroupId = Nothing
     , _advdDefaultClickThroughEventTagId = Nothing
     , _advdId = Nothing
-    , _advdSubaccountId = Nothing
+    , _advdSubAccountId = Nothing
     , _advdFloodlightConfigurationIdDimensionValue = Nothing
-    , _advdClickThroughUrlSuffix = Nothing
+    , _advdClickThroughURLSuffix = Nothing
     }
 
 -- | Original floodlight configuration before any sharing occurred. Set the
@@ -13681,7 +13681,7 @@ advdSuspended
 
 -- | Dimension value for the ID of this advertiser. This is a read-only,
 -- auto-generated field.
-advdIdDimensionValue :: Lens' Advertiser (Maybe (Maybe DimensionValue))
+advdIdDimensionValue :: Lens' Advertiser (Maybe DimensionValue)
 advdIdDimensionValue
   = lens _advdIdDimensionValue
       (\ s a -> s{_advdIdDimensionValue = a})
@@ -13725,14 +13725,14 @@ advdId = lens _advdId (\ s a -> s{_advdId = a})
 
 -- | Subaccount ID of this advertiser.This is a read-only field that can be
 -- left blank.
-advdSubaccountId :: Lens' Advertiser (Maybe Int64)
-advdSubaccountId
-  = lens _advdSubaccountId
-      (\ s a -> s{_advdSubaccountId = a})
+advdSubAccountId :: Lens' Advertiser (Maybe Int64)
+advdSubAccountId
+  = lens _advdSubAccountId
+      (\ s a -> s{_advdSubAccountId = a})
 
 -- | Dimension value for the ID of the floodlight configuration. This is a
 -- read-only, auto-generated field.
-advdFloodlightConfigurationIdDimensionValue :: Lens' Advertiser (Maybe (Maybe DimensionValue))
+advdFloodlightConfigurationIdDimensionValue :: Lens' Advertiser (Maybe DimensionValue)
 advdFloodlightConfigurationIdDimensionValue
   = lens _advdFloodlightConfigurationIdDimensionValue
       (\ s a ->
@@ -13740,10 +13740,10 @@ advdFloodlightConfigurationIdDimensionValue
 
 -- | Suffix added to click-through URL of ad creative associations under this
 -- advertiser. Must be less than 129 characters long.
-advdClickThroughUrlSuffix :: Lens' Advertiser (Maybe Text)
-advdClickThroughUrlSuffix
-  = lens _advdClickThroughUrlSuffix
-      (\ s a -> s{_advdClickThroughUrlSuffix = a})
+advdClickThroughURLSuffix :: Lens' Advertiser (Maybe Text)
+advdClickThroughURLSuffix
+  = lens _advdClickThroughURLSuffix
+      (\ s a -> s{_advdClickThroughURLSuffix = a})
 
 instance FromJSON Advertiser where
         parseJSON
@@ -13785,11 +13785,11 @@ instance ToJSON Advertiser where
                   ("defaultClickThroughEventTagId" .=) <$>
                     _advdDefaultClickThroughEventTagId,
                   ("id" .=) <$> _advdId,
-                  ("subaccountId" .=) <$> _advdSubaccountId,
+                  ("subaccountId" .=) <$> _advdSubAccountId,
                   ("floodlightConfigurationIdDimensionValue" .=) <$>
                     _advdFloodlightConfigurationIdDimensionValue,
                   ("clickThroughUrlSuffix" .=) <$>
-                    _advdClickThroughUrlSuffix])
+                    _advdClickThroughURLSuffix])
 
 -- | AccountPermissionGroups contains a mapping of permission group IDs to
 -- names. A permission group is a grouping of account permissions.
@@ -13853,7 +13853,7 @@ instance ToJSON AccountPermissionGroup where
 --
 -- /See:/ 'targetWindow' smart constructor.
 data TargetWindow = TargetWindow
-    { _twCustomHtml         :: !(Maybe Text)
+    { _twCustomHTML         :: !(Maybe Text)
     , _twTargetWindowOption :: !(Maybe TargetWindowTargetWindowOption)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -13861,21 +13861,21 @@ data TargetWindow = TargetWindow
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'twCustomHtml'
+-- * 'twCustomHTML'
 --
 -- * 'twTargetWindowOption'
 targetWindow
     :: TargetWindow
 targetWindow =
     TargetWindow
-    { _twCustomHtml = Nothing
+    { _twCustomHTML = Nothing
     , _twTargetWindowOption = Nothing
     }
 
 -- | User-entered value.
-twCustomHtml :: Lens' TargetWindow (Maybe Text)
-twCustomHtml
-  = lens _twCustomHtml (\ s a -> s{_twCustomHtml = a})
+twCustomHTML :: Lens' TargetWindow (Maybe Text)
+twCustomHTML
+  = lens _twCustomHTML (\ s a -> s{_twCustomHTML = a})
 
 -- | Type of browser window for which the backup image of the flash creative
 -- can be displayed.
@@ -13896,7 +13896,7 @@ instance ToJSON TargetWindow where
         toJSON TargetWindow{..}
           = object
               (catMaybes
-                 [("customHtml" .=) <$> _twCustomHtml,
+                 [("customHtml" .=) <$> _twCustomHTML,
                   ("targetWindowOption" .=) <$> _twTargetWindowOption])
 
 -- | Modification timestamp.
@@ -13941,8 +13941,8 @@ data UserRole = UserRole
     , _urAccountId        :: !(Maybe Int64)
     , _urName             :: !(Maybe Text)
     , _urId               :: !(Maybe Int64)
-    , _urPermissions      :: !(Maybe [Maybe UserRolePermission])
-    , _urSubaccountId     :: !(Maybe Int64)
+    , _urPermissions      :: !(Maybe [UserRolePermission])
+    , _urSubAccountId     :: !(Maybe Int64)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserRole' with the minimum fields required to make a request.
@@ -13963,7 +13963,7 @@ data UserRole = UserRole
 --
 -- * 'urPermissions'
 --
--- * 'urSubaccountId'
+-- * 'urSubAccountId'
 userRole
     :: UserRole
 userRole =
@@ -13975,7 +13975,7 @@ userRole =
     , _urName = Nothing
     , _urId = Nothing
     , _urPermissions = Nothing
-    , _urSubaccountId = Nothing
+    , _urSubAccountId = Nothing
     }
 
 -- | ID of the user role that this user role is based on or copied from. This
@@ -14018,7 +14018,7 @@ urId :: Lens' UserRole (Maybe Int64)
 urId = lens _urId (\ s a -> s{_urId = a})
 
 -- | List of permissions associated with this user role.
-urPermissions :: Lens' UserRole [Maybe UserRolePermission]
+urPermissions :: Lens' UserRole [UserRolePermission]
 urPermissions
   = lens _urPermissions
       (\ s a -> s{_urPermissions = a})
@@ -14027,10 +14027,10 @@ urPermissions
 
 -- | Subaccount ID of this user role. This is a read-only field that can be
 -- left blank.
-urSubaccountId :: Lens' UserRole (Maybe Int64)
-urSubaccountId
-  = lens _urSubaccountId
-      (\ s a -> s{_urSubaccountId = a})
+urSubAccountId :: Lens' UserRole (Maybe Int64)
+urSubAccountId
+  = lens _urSubAccountId
+      (\ s a -> s{_urSubAccountId = a})
 
 instance FromJSON UserRole where
         parseJSON
@@ -14056,7 +14056,7 @@ instance ToJSON UserRole where
                   ("accountId" .=) <$> _urAccountId,
                   ("name" .=) <$> _urName, ("id" .=) <$> _urId,
                   ("permissions" .=) <$> _urPermissions,
-                  ("subaccountId" .=) <$> _urSubaccountId])
+                  ("subaccountId" .=) <$> _urSubAccountId])
 
 -- | Contains information about a region that can be targeted by ads.
 --
@@ -14157,7 +14157,7 @@ instance ToJSON Region where
 data DirectorySitesListResponse = DirectorySitesListResponse
     { _dslrNextPageToken  :: !(Maybe Text)
     , _dslrKind           :: !Text
-    , _dslrDirectorySites :: !(Maybe [Maybe DirectorySite])
+    , _dslrDirectorySites :: !(Maybe [DirectorySite])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DirectorySitesListResponse' with the minimum fields required to make a request.
@@ -14190,7 +14190,7 @@ dslrKind :: Lens' DirectorySitesListResponse Text
 dslrKind = lens _dslrKind (\ s a -> s{_dslrKind = a})
 
 -- | Directory site collection.
-dslrDirectorySites :: Lens' DirectorySitesListResponse [Maybe DirectorySite]
+dslrDirectorySites :: Lens' DirectorySitesListResponse [DirectorySite]
 dslrDirectorySites
   = lens _dslrDirectorySites
       (\ s a -> s{_dslrDirectorySites = a})
@@ -14221,7 +14221,7 @@ instance ToJSON DirectorySitesListResponse where
 data CreativeFieldValuesListResponse = CreativeFieldValuesListResponse
     { _cfvlrNextPageToken       :: !(Maybe Text)
     , _cfvlrKind                :: !Text
-    , _cfvlrCreativeFieldValues :: !(Maybe [Maybe CreativeFieldValue])
+    , _cfvlrCreativeFieldValues :: !(Maybe [CreativeFieldValue])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeFieldValuesListResponse' with the minimum fields required to make a request.
@@ -14255,7 +14255,7 @@ cfvlrKind
   = lens _cfvlrKind (\ s a -> s{_cfvlrKind = a})
 
 -- | Creative field value collection.
-cfvlrCreativeFieldValues :: Lens' CreativeFieldValuesListResponse [Maybe CreativeFieldValue]
+cfvlrCreativeFieldValues :: Lens' CreativeFieldValuesListResponse [CreativeFieldValue]
 cfvlrCreativeFieldValues
   = lens _cfvlrCreativeFieldValues
       (\ s a -> s{_cfvlrCreativeFieldValues = a})
@@ -14434,24 +14434,24 @@ instance ToJSON PricingSchedulePricingPeriod where
 --
 -- /See:/ 'floodlightConfiguration' smart constructor.
 data FloodlightConfiguration = FloodlightConfiguration
-    { _fcTagSettings                              :: !(Maybe (Maybe TagSettings))
+    { _fcTagSettings                              :: !(Maybe TagSettings)
     , _fcExposureToConversionEnabled              :: !(Maybe Bool)
     , _fcInAppAttributionTrackingEnabled          :: !(Maybe Bool)
-    , _fcThirdPartyAuthenticationTokens           :: !(Maybe [Maybe ThirdPartyAuthenticationToken])
+    , _fcThirdPartyAuthenticationTokens           :: !(Maybe [ThirdPartyAuthenticationToken])
     , _fcKind                                     :: !Text
     , _fcAdvertiserId                             :: !(Maybe Int64)
     , _fcAnalyticsDataSharingEnabled              :: !(Maybe Bool)
-    , _fcAdvertiserIdDimensionValue               :: !(Maybe (Maybe DimensionValue))
-    , _fcIdDimensionValue                         :: !(Maybe (Maybe DimensionValue))
-    , _fcLookbackConfiguration                    :: !(Maybe (Maybe LookbackConfiguration))
+    , _fcAdvertiserIdDimensionValue               :: !(Maybe DimensionValue)
+    , _fcIdDimensionValue                         :: !(Maybe DimensionValue)
+    , _fcLookbackConfiguration                    :: !(Maybe LookbackConfiguration)
     , _fcAccountId                                :: !(Maybe Int64)
     , _fcId                                       :: !(Maybe Int64)
-    , _fcSslRequired                              :: !(Maybe Bool)
-    , _fcNaturalSearchConversionAttributionOption :: !(Maybe FloodlightConfigurationNATuralSearchConversionAttributionOption)
-    , _fcUserDefinedVariableConfigurations        :: !(Maybe [Maybe UserDefinedVariableConfiguration])
-    , _fcSubaccountId                             :: !(Maybe Int64)
+    , _fcSSLRequired                              :: !(Maybe Bool)
+    , _fcNATuralSearchConversionAttributionOption :: !(Maybe FloodlightConfigurationNATuralSearchConversionAttributionOption)
+    , _fcUserDefinedVariableConfigurations        :: !(Maybe [UserDefinedVariableConfiguration])
+    , _fcSubAccountId                             :: !(Maybe Int64)
     , _fcFirstDayOfWeek                           :: !(Maybe FloodlightConfigurationFirstDayOfWeek)
-    , _fcOmnitureSettings                         :: !(Maybe (Maybe OmnitureSettings))
+    , _fcOmnitureSettings                         :: !(Maybe OmnitureSettings)
     , _fcStandardVariableTypes                    :: !(Maybe [FloodlightConfigurationStandardVariableTypes])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -14483,13 +14483,13 @@ data FloodlightConfiguration = FloodlightConfiguration
 --
 -- * 'fcId'
 --
--- * 'fcSslRequired'
+-- * 'fcSSLRequired'
 --
--- * 'fcNaturalSearchConversionAttributionOption'
+-- * 'fcNATuralSearchConversionAttributionOption'
 --
 -- * 'fcUserDefinedVariableConfigurations'
 --
--- * 'fcSubaccountId'
+-- * 'fcSubAccountId'
 --
 -- * 'fcFirstDayOfWeek'
 --
@@ -14512,17 +14512,17 @@ floodlightConfiguration =
     , _fcLookbackConfiguration = Nothing
     , _fcAccountId = Nothing
     , _fcId = Nothing
-    , _fcSslRequired = Nothing
-    , _fcNaturalSearchConversionAttributionOption = Nothing
+    , _fcSSLRequired = Nothing
+    , _fcNATuralSearchConversionAttributionOption = Nothing
     , _fcUserDefinedVariableConfigurations = Nothing
-    , _fcSubaccountId = Nothing
+    , _fcSubAccountId = Nothing
     , _fcFirstDayOfWeek = Nothing
     , _fcOmnitureSettings = Nothing
     , _fcStandardVariableTypes = Nothing
     }
 
 -- | Configuration settings for dynamic and image floodlight tags.
-fcTagSettings :: Lens' FloodlightConfiguration (Maybe (Maybe TagSettings))
+fcTagSettings :: Lens' FloodlightConfiguration (Maybe TagSettings)
 fcTagSettings
   = lens _fcTagSettings
       (\ s a -> s{_fcTagSettings = a})
@@ -14543,7 +14543,7 @@ fcInAppAttributionTrackingEnabled
 
 -- | List of third-party authentication tokens enabled for this
 -- configuration.
-fcThirdPartyAuthenticationTokens :: Lens' FloodlightConfiguration [Maybe ThirdPartyAuthenticationToken]
+fcThirdPartyAuthenticationTokens :: Lens' FloodlightConfiguration [ThirdPartyAuthenticationToken]
 fcThirdPartyAuthenticationTokens
   = lens _fcThirdPartyAuthenticationTokens
       (\ s a -> s{_fcThirdPartyAuthenticationTokens = a})
@@ -14569,20 +14569,20 @@ fcAnalyticsDataSharingEnabled
 
 -- | Dimension value for the ID of the advertiser. This is a read-only,
 -- auto-generated field.
-fcAdvertiserIdDimensionValue :: Lens' FloodlightConfiguration (Maybe (Maybe DimensionValue))
+fcAdvertiserIdDimensionValue :: Lens' FloodlightConfiguration (Maybe DimensionValue)
 fcAdvertiserIdDimensionValue
   = lens _fcAdvertiserIdDimensionValue
       (\ s a -> s{_fcAdvertiserIdDimensionValue = a})
 
 -- | Dimension value for the ID of this floodlight configuration. This is a
 -- read-only, auto-generated field.
-fcIdDimensionValue :: Lens' FloodlightConfiguration (Maybe (Maybe DimensionValue))
+fcIdDimensionValue :: Lens' FloodlightConfiguration (Maybe DimensionValue)
 fcIdDimensionValue
   = lens _fcIdDimensionValue
       (\ s a -> s{_fcIdDimensionValue = a})
 
 -- | Lookback window settings for this floodlight configuration.
-fcLookbackConfiguration :: Lens' FloodlightConfiguration (Maybe (Maybe LookbackConfiguration))
+fcLookbackConfiguration :: Lens' FloodlightConfiguration (Maybe LookbackConfiguration)
 fcLookbackConfiguration
   = lens _fcLookbackConfiguration
       (\ s a -> s{_fcLookbackConfiguration = a})
@@ -14600,20 +14600,20 @@ fcId = lens _fcId (\ s a -> s{_fcId = a})
 
 -- | Whether floodlight activities owned by this configuration are required
 -- to be SSL-compliant.
-fcSslRequired :: Lens' FloodlightConfiguration (Maybe Bool)
-fcSslRequired
-  = lens _fcSslRequired
-      (\ s a -> s{_fcSslRequired = a})
+fcSSLRequired :: Lens' FloodlightConfiguration (Maybe Bool)
+fcSSLRequired
+  = lens _fcSSLRequired
+      (\ s a -> s{_fcSSLRequired = a})
 
 -- | Types of attribution options for natural search conversions.
-fcNaturalSearchConversionAttributionOption :: Lens' FloodlightConfiguration (Maybe FloodlightConfigurationNATuralSearchConversionAttributionOption)
-fcNaturalSearchConversionAttributionOption
-  = lens _fcNaturalSearchConversionAttributionOption
+fcNATuralSearchConversionAttributionOption :: Lens' FloodlightConfiguration (Maybe FloodlightConfigurationNATuralSearchConversionAttributionOption)
+fcNATuralSearchConversionAttributionOption
+  = lens _fcNATuralSearchConversionAttributionOption
       (\ s a ->
-         s{_fcNaturalSearchConversionAttributionOption = a})
+         s{_fcNATuralSearchConversionAttributionOption = a})
 
 -- | List of user defined variables enabled for this configuration.
-fcUserDefinedVariableConfigurations :: Lens' FloodlightConfiguration [Maybe UserDefinedVariableConfiguration]
+fcUserDefinedVariableConfigurations :: Lens' FloodlightConfiguration [UserDefinedVariableConfiguration]
 fcUserDefinedVariableConfigurations
   = lens _fcUserDefinedVariableConfigurations
       (\ s a ->
@@ -14623,10 +14623,10 @@ fcUserDefinedVariableConfigurations
 
 -- | Subaccount ID of this floodlight configuration. This is a read-only
 -- field that can be left blank.
-fcSubaccountId :: Lens' FloodlightConfiguration (Maybe Int64)
-fcSubaccountId
-  = lens _fcSubaccountId
-      (\ s a -> s{_fcSubaccountId = a})
+fcSubAccountId :: Lens' FloodlightConfiguration (Maybe Int64)
+fcSubAccountId
+  = lens _fcSubAccountId
+      (\ s a -> s{_fcSubAccountId = a})
 
 -- | Day that will be counted as the first day of the week in reports. This
 -- is a required field.
@@ -14636,7 +14636,7 @@ fcFirstDayOfWeek
       (\ s a -> s{_fcFirstDayOfWeek = a})
 
 -- | Settings for DCM Omniture integration.
-fcOmnitureSettings :: Lens' FloodlightConfiguration (Maybe (Maybe OmnitureSettings))
+fcOmnitureSettings :: Lens' FloodlightConfiguration (Maybe OmnitureSettings)
 fcOmnitureSettings
   = lens _fcOmnitureSettings
       (\ s a -> s{_fcOmnitureSettings = a})
@@ -14703,12 +14703,12 @@ instance ToJSON FloodlightConfiguration where
                     _fcLookbackConfiguration,
                   ("accountId" .=) <$> _fcAccountId,
                   ("id" .=) <$> _fcId,
-                  ("sslRequired" .=) <$> _fcSslRequired,
+                  ("sslRequired" .=) <$> _fcSSLRequired,
                   ("naturalSearchConversionAttributionOption" .=) <$>
-                    _fcNaturalSearchConversionAttributionOption,
+                    _fcNATuralSearchConversionAttributionOption,
                   ("userDefinedVariableConfigurations" .=) <$>
                     _fcUserDefinedVariableConfigurations,
-                  ("subaccountId" .=) <$> _fcSubaccountId,
+                  ("subaccountId" .=) <$> _fcSubAccountId,
                   ("firstDayOfWeek" .=) <$> _fcFirstDayOfWeek,
                   ("omnitureSettings" .=) <$> _fcOmnitureSettings,
                   ("standardVariableTypes" .=) <$>
@@ -14720,7 +14720,7 @@ instance ToJSON FloodlightConfiguration where
 data AdvertiserGroupsListResponse = AdvertiserGroupsListResponse
     { _aglrNextPageToken    :: !(Maybe Text)
     , _aglrKind             :: !Text
-    , _aglrAdvertiserGroups :: !(Maybe [Maybe AdvertiserGroup])
+    , _aglrAdvertiserGroups :: !(Maybe [AdvertiserGroup])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AdvertiserGroupsListResponse' with the minimum fields required to make a request.
@@ -14753,7 +14753,7 @@ aglrKind :: Lens' AdvertiserGroupsListResponse Text
 aglrKind = lens _aglrKind (\ s a -> s{_aglrKind = a})
 
 -- | Advertiser group collection.
-aglrAdvertiserGroups :: Lens' AdvertiserGroupsListResponse [Maybe AdvertiserGroup]
+aglrAdvertiserGroups :: Lens' AdvertiserGroupsListResponse [AdvertiserGroup]
 aglrAdvertiserGroups
   = lens _aglrAdvertiserGroups
       (\ s a -> s{_aglrAdvertiserGroups = a})
@@ -14784,7 +14784,7 @@ instance ToJSON AdvertiserGroupsListResponse where
 data FloodlightActivityGroupsListResponse = FloodlightActivityGroupsListResponse
     { _faglrNextPageToken            :: !(Maybe Text)
     , _faglrKind                     :: !Text
-    , _faglrFloodlightActivityGroups :: !(Maybe [Maybe FloodlightActivityGroup])
+    , _faglrFloodlightActivityGroups :: !(Maybe [FloodlightActivityGroup])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivityGroupsListResponse' with the minimum fields required to make a request.
@@ -14818,7 +14818,7 @@ faglrKind
   = lens _faglrKind (\ s a -> s{_faglrKind = a})
 
 -- | Floodlight activity group collection.
-faglrFloodlightActivityGroups :: Lens' FloodlightActivityGroupsListResponse [Maybe FloodlightActivityGroup]
+faglrFloodlightActivityGroups :: Lens' FloodlightActivityGroupsListResponse [FloodlightActivityGroup]
 faglrFloodlightActivityGroups
   = lens _faglrFloodlightActivityGroups
       (\ s a -> s{_faglrFloodlightActivityGroups = a})
@@ -14850,34 +14850,34 @@ instance ToJSON FloodlightActivityGroupsListResponse
 --
 -- /See:/ 'richMediaExitOverride' smart constructor.
 data RichMediaExitOverride = RichMediaExitOverride
-    { _rmeoUseCustomExitUrl :: !(Maybe Bool)
+    { _rmeoUseCustomExitURL :: !(Maybe Bool)
     , _rmeoExitId           :: !(Maybe Int64)
-    , _rmeoCustomExitUrl    :: !(Maybe Text)
+    , _rmeoCustomExitURL    :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RichMediaExitOverride' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rmeoUseCustomExitUrl'
+-- * 'rmeoUseCustomExitURL'
 --
 -- * 'rmeoExitId'
 --
--- * 'rmeoCustomExitUrl'
+-- * 'rmeoCustomExitURL'
 richMediaExitOverride
     :: RichMediaExitOverride
 richMediaExitOverride =
     RichMediaExitOverride
-    { _rmeoUseCustomExitUrl = Nothing
+    { _rmeoUseCustomExitURL = Nothing
     , _rmeoExitId = Nothing
-    , _rmeoCustomExitUrl = Nothing
+    , _rmeoCustomExitURL = Nothing
     }
 
 -- | Whether to use the custom exit URL.
-rmeoUseCustomExitUrl :: Lens' RichMediaExitOverride (Maybe Bool)
-rmeoUseCustomExitUrl
-  = lens _rmeoUseCustomExitUrl
-      (\ s a -> s{_rmeoUseCustomExitUrl = a})
+rmeoUseCustomExitURL :: Lens' RichMediaExitOverride (Maybe Bool)
+rmeoUseCustomExitURL
+  = lens _rmeoUseCustomExitURL
+      (\ s a -> s{_rmeoUseCustomExitURL = a})
 
 -- | ID for the override to refer to a specific exit in the creative.
 rmeoExitId :: Lens' RichMediaExitOverride (Maybe Int64)
@@ -14886,10 +14886,10 @@ rmeoExitId
 
 -- | Click-through URL to override the default exit URL. Applicable if the
 -- useCustomExitUrl field is set to true.
-rmeoCustomExitUrl :: Lens' RichMediaExitOverride (Maybe Text)
-rmeoCustomExitUrl
-  = lens _rmeoCustomExitUrl
-      (\ s a -> s{_rmeoCustomExitUrl = a})
+rmeoCustomExitURL :: Lens' RichMediaExitOverride (Maybe Text)
+rmeoCustomExitURL
+  = lens _rmeoCustomExitURL
+      (\ s a -> s{_rmeoCustomExitURL = a})
 
 instance FromJSON RichMediaExitOverride where
         parseJSON
@@ -14903,27 +14903,27 @@ instance ToJSON RichMediaExitOverride where
         toJSON RichMediaExitOverride{..}
           = object
               (catMaybes
-                 [("useCustomExitUrl" .=) <$> _rmeoUseCustomExitUrl,
+                 [("useCustomExitUrl" .=) <$> _rmeoUseCustomExitURL,
                   ("exitId" .=) <$> _rmeoExitId,
-                  ("customExitUrl" .=) <$> _rmeoCustomExitUrl])
+                  ("customExitUrl" .=) <$> _rmeoCustomExitURL])
 
 -- | Creative Assignment.
 --
 -- /See:/ 'creativeAssignment' smart constructor.
 data CreativeAssignment = CreativeAssignment
-    { _caCreativeGroupAssignments   :: !(Maybe [Maybe CreativeGroupAssignment])
+    { _caCreativeGroupAssignments   :: !(Maybe [CreativeGroupAssignment])
     , _caStartTime                  :: !(Maybe UTCTime)
     , _caWeight                     :: !(Maybe Int32)
-    , _caRichMediaExitOverrides     :: !(Maybe [Maybe RichMediaExitOverride])
-    , _caSslCompliant               :: !(Maybe Bool)
+    , _caRichMediaExitOverrides     :: !(Maybe [RichMediaExitOverride])
+    , _caSSLCompliant               :: !(Maybe Bool)
     , _caCreativeId                 :: !(Maybe Int64)
-    , _caClickThroughUrl            :: !(Maybe (Maybe ClickThroughURL))
+    , _caClickThroughURL            :: !(Maybe ClickThroughURL)
     , _caApplyEventTags             :: !(Maybe Bool)
     , _caActive                     :: !(Maybe Bool)
     , _caSequence                   :: !(Maybe Int32)
     , _caEndTime                    :: !(Maybe UTCTime)
-    , _caCompanionCreativeOverrides :: !(Maybe [Maybe CompanionClickThroughOverride])
-    , _caCreativeIdDimensionValue   :: !(Maybe (Maybe DimensionValue))
+    , _caCompanionCreativeOverrides :: !(Maybe [CompanionClickThroughOverride])
+    , _caCreativeIdDimensionValue   :: !(Maybe DimensionValue)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeAssignment' with the minimum fields required to make a request.
@@ -14938,11 +14938,11 @@ data CreativeAssignment = CreativeAssignment
 --
 -- * 'caRichMediaExitOverrides'
 --
--- * 'caSslCompliant'
+-- * 'caSSLCompliant'
 --
 -- * 'caCreativeId'
 --
--- * 'caClickThroughUrl'
+-- * 'caClickThroughURL'
 --
 -- * 'caApplyEventTags'
 --
@@ -14963,9 +14963,9 @@ creativeAssignment =
     , _caStartTime = Nothing
     , _caWeight = Nothing
     , _caRichMediaExitOverrides = Nothing
-    , _caSslCompliant = Nothing
+    , _caSSLCompliant = Nothing
     , _caCreativeId = Nothing
-    , _caClickThroughUrl = Nothing
+    , _caClickThroughURL = Nothing
     , _caApplyEventTags = Nothing
     , _caActive = Nothing
     , _caSequence = Nothing
@@ -14977,7 +14977,7 @@ creativeAssignment =
 -- | Creative group assignments for this creative assignment. Only one
 -- assignment per creative group number is allowed for a maximum of two
 -- assignments.
-caCreativeGroupAssignments :: Lens' CreativeAssignment [Maybe CreativeGroupAssignment]
+caCreativeGroupAssignments :: Lens' CreativeAssignment [CreativeGroupAssignment]
 caCreativeGroupAssignments
   = lens _caCreativeGroupAssignments
       (\ s a -> s{_caCreativeGroupAssignments = a})
@@ -15000,7 +15000,7 @@ caWeight = lens _caWeight (\ s a -> s{_caWeight = a})
 -- - RICH_MEDIA_INTERSTITIAL_FLOAT - RICH_MEDIA_MOBILE_IN_APP -
 -- RICH_MEDIA_MULTI_FLOATING - RICH_MEDIA_PEEL_DOWN - ADVANCED_BANNER -
 -- VPAID_LINEAR - VPAID_NON_LINEAR
-caRichMediaExitOverrides :: Lens' CreativeAssignment [Maybe RichMediaExitOverride]
+caRichMediaExitOverrides :: Lens' CreativeAssignment [RichMediaExitOverride]
 caRichMediaExitOverrides
   = lens _caRichMediaExitOverrides
       (\ s a -> s{_caRichMediaExitOverrides = a})
@@ -15010,10 +15010,10 @@ caRichMediaExitOverrides
 -- | Whether the creative to be assigned is SSL-compliant. This is a
 -- read-only field that is auto-generated when the ad is inserted or
 -- updated.
-caSslCompliant :: Lens' CreativeAssignment (Maybe Bool)
-caSslCompliant
-  = lens _caSslCompliant
-      (\ s a -> s{_caSslCompliant = a})
+caSSLCompliant :: Lens' CreativeAssignment (Maybe Bool)
+caSSLCompliant
+  = lens _caSSLCompliant
+      (\ s a -> s{_caSSLCompliant = a})
 
 -- | ID of the creative to be assigned. This is a required field.
 caCreativeId :: Lens' CreativeAssignment (Maybe Int64)
@@ -15021,10 +15021,10 @@ caCreativeId
   = lens _caCreativeId (\ s a -> s{_caCreativeId = a})
 
 -- | Click-through URL of the creative assignment.
-caClickThroughUrl :: Lens' CreativeAssignment (Maybe (Maybe ClickThroughURL))
-caClickThroughUrl
-  = lens _caClickThroughUrl
-      (\ s a -> s{_caClickThroughUrl = a})
+caClickThroughURL :: Lens' CreativeAssignment (Maybe ClickThroughURL)
+caClickThroughURL
+  = lens _caClickThroughURL
+      (\ s a -> s{_caClickThroughURL = a})
 
 -- | Whether applicable event tags should fire when this creative assignment
 -- is rendered. If this value is unset when the ad is inserted or updated,
@@ -15054,7 +15054,7 @@ caEndTime
 
 -- | Companion creative overrides for this creative assignment. Applicable to
 -- video ads.
-caCompanionCreativeOverrides :: Lens' CreativeAssignment [Maybe CompanionClickThroughOverride]
+caCompanionCreativeOverrides :: Lens' CreativeAssignment [CompanionClickThroughOverride]
 caCompanionCreativeOverrides
   = lens _caCompanionCreativeOverrides
       (\ s a -> s{_caCompanionCreativeOverrides = a})
@@ -15063,7 +15063,7 @@ caCompanionCreativeOverrides
 
 -- | Dimension value for the ID of the creative. This is a read-only,
 -- auto-generated field.
-caCreativeIdDimensionValue :: Lens' CreativeAssignment (Maybe (Maybe DimensionValue))
+caCreativeIdDimensionValue :: Lens' CreativeAssignment (Maybe DimensionValue)
 caCreativeIdDimensionValue
   = lens _caCreativeIdDimensionValue
       (\ s a -> s{_caCreativeIdDimensionValue = a})
@@ -15097,9 +15097,9 @@ instance ToJSON CreativeAssignment where
                   ("weight" .=) <$> _caWeight,
                   ("richMediaExitOverrides" .=) <$>
                     _caRichMediaExitOverrides,
-                  ("sslCompliant" .=) <$> _caSslCompliant,
+                  ("sslCompliant" .=) <$> _caSSLCompliant,
                   ("creativeId" .=) <$> _caCreativeId,
-                  ("clickThroughUrl" .=) <$> _caClickThroughUrl,
+                  ("clickThroughUrl" .=) <$> _caClickThroughURL,
                   ("applyEventTags" .=) <$> _caApplyEventTags,
                   ("active" .=) <$> _caActive,
                   ("sequence" .=) <$> _caSequence,
@@ -15115,7 +15115,7 @@ instance ToJSON CreativeAssignment where
 data UserProfileList = UserProfileList
     { _uplEtag  :: !(Maybe Text)
     , _uplKind  :: !Text
-    , _uplItems :: !(Maybe [Maybe UserProfile])
+    , _uplItems :: !(Maybe [UserProfile])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UserProfileList' with the minimum fields required to make a request.
@@ -15145,7 +15145,7 @@ uplKind :: Lens' UserProfileList Text
 uplKind = lens _uplKind (\ s a -> s{_uplKind = a})
 
 -- | The user profiles returned in this response.
-uplItems :: Lens' UserProfileList [Maybe UserProfile]
+uplItems :: Lens' UserProfileList [UserProfile]
 uplItems
   = lens _uplItems (\ s a -> s{_uplItems = a}) .
       _Default
@@ -15173,7 +15173,7 @@ instance ToJSON UserProfileList where
 data DirectorySiteContactsListResponse = DirectorySiteContactsListResponse
     { _dsclrNextPageToken         :: !(Maybe Text)
     , _dsclrKind                  :: !Text
-    , _dsclrDirectorySiteContacts :: !(Maybe [Maybe DirectorySiteContact])
+    , _dsclrDirectorySiteContacts :: !(Maybe [DirectorySiteContact])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DirectorySiteContactsListResponse' with the minimum fields required to make a request.
@@ -15207,7 +15207,7 @@ dsclrKind
   = lens _dsclrKind (\ s a -> s{_dsclrKind = a})
 
 -- | Directory site contact collection
-dsclrDirectorySiteContacts :: Lens' DirectorySiteContactsListResponse [Maybe DirectorySiteContact]
+dsclrDirectorySiteContacts :: Lens' DirectorySiteContactsListResponse [DirectorySiteContact]
 dsclrDirectorySiteContacts
   = lens _dsclrDirectorySiteContacts
       (\ s a -> s{_dsclrDirectorySiteContacts = a})
@@ -15241,13 +15241,13 @@ instance ToJSON DirectorySiteContactsListResponse
 data ReportPathToConversionCriteria = ReportPathToConversionCriteria
     { _rptccReportProperties          :: !(Maybe ReportPathToConversionCriteriaReportProperties)
     , _rptccMetricNames               :: !(Maybe [Text])
-    , _rptccCustomRichMediaEvents     :: !(Maybe [Maybe DimensionValue])
-    , _rptccDateRange                 :: !(Maybe (Maybe DateRange))
-    , _rptccConversionDimensions      :: !(Maybe [Maybe SortedDimension])
-    , _rptccCustomFloodlightVariables :: !(Maybe [Maybe SortedDimension])
-    , _rptccFloodlightConfigId        :: !(Maybe (Maybe DimensionValue))
-    , _rptccActivityFilters           :: !(Maybe [Maybe DimensionValue])
-    , _rptccPerInteractionDimensions  :: !(Maybe [Maybe SortedDimension])
+    , _rptccCustomRichMediaEvents     :: !(Maybe [DimensionValue])
+    , _rptccDateRange                 :: !(Maybe DateRange)
+    , _rptccConversionDimensions      :: !(Maybe [SortedDimension])
+    , _rptccCustomFloodlightVariables :: !(Maybe [SortedDimension])
+    , _rptccFloodlightConfigId        :: !(Maybe DimensionValue)
+    , _rptccActivityFilters           :: !(Maybe [DimensionValue])
+    , _rptccPerInteractionDimensions  :: !(Maybe [SortedDimension])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportPathToConversionCriteria' with the minimum fields required to make a request.
@@ -15301,7 +15301,7 @@ rptccMetricNames
       . _Coerce
 
 -- | The list of custom rich media events to include.
-rptccCustomRichMediaEvents :: Lens' ReportPathToConversionCriteria [Maybe DimensionValue]
+rptccCustomRichMediaEvents :: Lens' ReportPathToConversionCriteria [DimensionValue]
 rptccCustomRichMediaEvents
   = lens _rptccCustomRichMediaEvents
       (\ s a -> s{_rptccCustomRichMediaEvents = a})
@@ -15309,13 +15309,13 @@ rptccCustomRichMediaEvents
       . _Coerce
 
 -- | The date range this report should be run for.
-rptccDateRange :: Lens' ReportPathToConversionCriteria (Maybe (Maybe DateRange))
+rptccDateRange :: Lens' ReportPathToConversionCriteria (Maybe DateRange)
 rptccDateRange
   = lens _rptccDateRange
       (\ s a -> s{_rptccDateRange = a})
 
 -- | The list of conversion dimensions the report should include.
-rptccConversionDimensions :: Lens' ReportPathToConversionCriteria [Maybe SortedDimension]
+rptccConversionDimensions :: Lens' ReportPathToConversionCriteria [SortedDimension]
 rptccConversionDimensions
   = lens _rptccConversionDimensions
       (\ s a -> s{_rptccConversionDimensions = a})
@@ -15323,7 +15323,7 @@ rptccConversionDimensions
       . _Coerce
 
 -- | The list of custom floodlight variables the report should include.
-rptccCustomFloodlightVariables :: Lens' ReportPathToConversionCriteria [Maybe SortedDimension]
+rptccCustomFloodlightVariables :: Lens' ReportPathToConversionCriteria [SortedDimension]
 rptccCustomFloodlightVariables
   = lens _rptccCustomFloodlightVariables
       (\ s a -> s{_rptccCustomFloodlightVariables = a})
@@ -15333,13 +15333,13 @@ rptccCustomFloodlightVariables
 -- | The floodlight ID for which to show data in this report. All advertisers
 -- associated with that ID will automatically be added. The dimension of
 -- the value needs to be \'dfa:floodlightConfigId\'.
-rptccFloodlightConfigId :: Lens' ReportPathToConversionCriteria (Maybe (Maybe DimensionValue))
+rptccFloodlightConfigId :: Lens' ReportPathToConversionCriteria (Maybe DimensionValue)
 rptccFloodlightConfigId
   = lens _rptccFloodlightConfigId
       (\ s a -> s{_rptccFloodlightConfigId = a})
 
 -- | The list of \'dfa:activity\' values to filter on.
-rptccActivityFilters :: Lens' ReportPathToConversionCriteria [Maybe DimensionValue]
+rptccActivityFilters :: Lens' ReportPathToConversionCriteria [DimensionValue]
 rptccActivityFilters
   = lens _rptccActivityFilters
       (\ s a -> s{_rptccActivityFilters = a})
@@ -15347,7 +15347,7 @@ rptccActivityFilters
       . _Coerce
 
 -- | The list of per interaction dimensions the report should include.
-rptccPerInteractionDimensions :: Lens' ReportPathToConversionCriteria [Maybe SortedDimension]
+rptccPerInteractionDimensions :: Lens' ReportPathToConversionCriteria [SortedDimension]
 rptccPerInteractionDimensions
   = lens _rptccPerInteractionDimensions
       (\ s a -> s{_rptccPerInteractionDimensions = a})
@@ -15394,7 +15394,7 @@ instance ToJSON ReportPathToConversionCriteria where
 -- /See:/ 'placementsGenerateTagsResponse' smart constructor.
 data PlacementsGenerateTagsResponse = PlacementsGenerateTagsResponse
     { _pgtrKind          :: !Text
-    , _pgtrPlacementTags :: !(Maybe [Maybe PlacementTag])
+    , _pgtrPlacementTags :: !(Maybe [PlacementTag])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementsGenerateTagsResponse' with the minimum fields required to make a request.
@@ -15418,7 +15418,7 @@ pgtrKind :: Lens' PlacementsGenerateTagsResponse Text
 pgtrKind = lens _pgtrKind (\ s a -> s{_pgtrKind = a})
 
 -- | Set of generated tags for the specified placements.
-pgtrPlacementTags :: Lens' PlacementsGenerateTagsResponse [Maybe PlacementTag]
+pgtrPlacementTags :: Lens' PlacementsGenerateTagsResponse [PlacementTag]
 pgtrPlacementTags
   = lens _pgtrPlacementTags
       (\ s a -> s{_pgtrPlacementTags = a})
@@ -15448,7 +15448,7 @@ instance ToJSON PlacementsGenerateTagsResponse where
 data CreativeFieldsListResponse = CreativeFieldsListResponse
     { _cflrNextPageToken  :: !(Maybe Text)
     , _cflrKind           :: !Text
-    , _cflrCreativeFields :: !(Maybe [Maybe CreativeField])
+    , _cflrCreativeFields :: !(Maybe [CreativeField])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeFieldsListResponse' with the minimum fields required to make a request.
@@ -15481,7 +15481,7 @@ cflrKind :: Lens' CreativeFieldsListResponse Text
 cflrKind = lens _cflrKind (\ s a -> s{_cflrKind = a})
 
 -- | Creative field collection.
-cflrCreativeFields :: Lens' CreativeFieldsListResponse [Maybe CreativeField]
+cflrCreativeFields :: Lens' CreativeFieldsListResponse [CreativeField]
 cflrCreativeFields
   = lens _cflrCreativeFields
       (\ s a -> s{_cflrCreativeFields = a})
@@ -15512,7 +15512,7 @@ instance ToJSON CreativeFieldsListResponse where
 data OrderDocumentsListResponse = OrderDocumentsListResponse
     { _odlrNextPageToken  :: !(Maybe Text)
     , _odlrKind           :: !Text
-    , _odlrOrderDocuments :: !(Maybe [Maybe OrderDocument])
+    , _odlrOrderDocuments :: !(Maybe [OrderDocument])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrderDocumentsListResponse' with the minimum fields required to make a request.
@@ -15545,7 +15545,7 @@ odlrKind :: Lens' OrderDocumentsListResponse Text
 odlrKind = lens _odlrKind (\ s a -> s{_odlrKind = a})
 
 -- | Order document collection
-odlrOrderDocuments :: Lens' OrderDocumentsListResponse [Maybe OrderDocument]
+odlrOrderDocuments :: Lens' OrderDocumentsListResponse [OrderDocument]
 odlrOrderDocuments
   = lens _odlrOrderDocuments
       (\ s a -> s{_odlrOrderDocuments = a})
@@ -15574,139 +15574,139 @@ instance ToJSON OrderDocumentsListResponse where
 --
 -- /See:/ 'site' smart constructor.
 data Site = Site
-    { _sitKind                          :: !Text
-    , _sitKeyName                       :: !(Maybe Text)
-    , _sitSiteContacts                  :: !(Maybe [Maybe SiteContact])
-    , _sitSiteSettings                  :: !(Maybe (Maybe SiteSettings))
-    , _sitIdDimensionValue              :: !(Maybe (Maybe DimensionValue))
-    , _sitDirectorySiteIdDimensionValue :: !(Maybe (Maybe DimensionValue))
-    , _sitAccountId                     :: !(Maybe Int64)
-    , _sitName                          :: !(Maybe Text)
-    , _sitDirectorySiteId               :: !(Maybe Int64)
-    , _sitId                            :: !(Maybe Int64)
-    , _sitSubaccountId                  :: !(Maybe Int64)
-    , _sitApproved                      :: !(Maybe Bool)
+    { _ssKind                          :: !Text
+    , _ssKeyName                       :: !(Maybe Text)
+    , _ssSiteContacts                  :: !(Maybe [SiteContact])
+    , _ssSiteSettings                  :: !(Maybe SiteSettings)
+    , _ssIdDimensionValue              :: !(Maybe DimensionValue)
+    , _ssDirectorySiteIdDimensionValue :: !(Maybe DimensionValue)
+    , _ssAccountId                     :: !(Maybe Int64)
+    , _ssName                          :: !(Maybe Text)
+    , _ssDirectorySiteId               :: !(Maybe Int64)
+    , _ssId                            :: !(Maybe Int64)
+    , _ssSubAccountId                  :: !(Maybe Int64)
+    , _ssApproved                      :: !(Maybe Bool)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Site' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'sitKind'
+-- * 'ssKind'
 --
--- * 'sitKeyName'
+-- * 'ssKeyName'
 --
--- * 'sitSiteContacts'
+-- * 'ssSiteContacts'
 --
--- * 'sitSiteSettings'
+-- * 'ssSiteSettings'
 --
--- * 'sitIdDimensionValue'
+-- * 'ssIdDimensionValue'
 --
--- * 'sitDirectorySiteIdDimensionValue'
+-- * 'ssDirectorySiteIdDimensionValue'
 --
--- * 'sitAccountId'
+-- * 'ssAccountId'
 --
--- * 'sitName'
+-- * 'ssName'
 --
--- * 'sitDirectorySiteId'
+-- * 'ssDirectorySiteId'
 --
--- * 'sitId'
+-- * 'ssId'
 --
--- * 'sitSubaccountId'
+-- * 'ssSubAccountId'
 --
--- * 'sitApproved'
+-- * 'ssApproved'
 site
     :: Site
 site =
     Site
-    { _sitKind = "dfareporting#site"
-    , _sitKeyName = Nothing
-    , _sitSiteContacts = Nothing
-    , _sitSiteSettings = Nothing
-    , _sitIdDimensionValue = Nothing
-    , _sitDirectorySiteIdDimensionValue = Nothing
-    , _sitAccountId = Nothing
-    , _sitName = Nothing
-    , _sitDirectorySiteId = Nothing
-    , _sitId = Nothing
-    , _sitSubaccountId = Nothing
-    , _sitApproved = Nothing
+    { _ssKind = "dfareporting#site"
+    , _ssKeyName = Nothing
+    , _ssSiteContacts = Nothing
+    , _ssSiteSettings = Nothing
+    , _ssIdDimensionValue = Nothing
+    , _ssDirectorySiteIdDimensionValue = Nothing
+    , _ssAccountId = Nothing
+    , _ssName = Nothing
+    , _ssDirectorySiteId = Nothing
+    , _ssId = Nothing
+    , _ssSubAccountId = Nothing
+    , _ssApproved = Nothing
     }
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#site\".
-sitKind :: Lens' Site Text
-sitKind = lens _sitKind (\ s a -> s{_sitKind = a})
+ssKind :: Lens' Site Text
+ssKind = lens _ssKind (\ s a -> s{_ssKind = a})
 
 -- | Key name of this site. This is a read-only, auto-generated field.
-sitKeyName :: Lens' Site (Maybe Text)
-sitKeyName
-  = lens _sitKeyName (\ s a -> s{_sitKeyName = a})
+ssKeyName :: Lens' Site (Maybe Text)
+ssKeyName
+  = lens _ssKeyName (\ s a -> s{_ssKeyName = a})
 
 -- | Site contacts.
-sitSiteContacts :: Lens' Site [Maybe SiteContact]
-sitSiteContacts
-  = lens _sitSiteContacts
-      (\ s a -> s{_sitSiteContacts = a})
+ssSiteContacts :: Lens' Site [SiteContact]
+ssSiteContacts
+  = lens _ssSiteContacts
+      (\ s a -> s{_ssSiteContacts = a})
       . _Default
       . _Coerce
 
 -- | Site-wide settings.
-sitSiteSettings :: Lens' Site (Maybe (Maybe SiteSettings))
-sitSiteSettings
-  = lens _sitSiteSettings
-      (\ s a -> s{_sitSiteSettings = a})
+ssSiteSettings :: Lens' Site (Maybe SiteSettings)
+ssSiteSettings
+  = lens _ssSiteSettings
+      (\ s a -> s{_ssSiteSettings = a})
 
 -- | Dimension value for the ID of this site. This is a read-only,
 -- auto-generated field.
-sitIdDimensionValue :: Lens' Site (Maybe (Maybe DimensionValue))
-sitIdDimensionValue
-  = lens _sitIdDimensionValue
-      (\ s a -> s{_sitIdDimensionValue = a})
+ssIdDimensionValue :: Lens' Site (Maybe DimensionValue)
+ssIdDimensionValue
+  = lens _ssIdDimensionValue
+      (\ s a -> s{_ssIdDimensionValue = a})
 
 -- | Dimension value for the ID of the directory site. This is a read-only,
 -- auto-generated field.
-sitDirectorySiteIdDimensionValue :: Lens' Site (Maybe (Maybe DimensionValue))
-sitDirectorySiteIdDimensionValue
-  = lens _sitDirectorySiteIdDimensionValue
-      (\ s a -> s{_sitDirectorySiteIdDimensionValue = a})
+ssDirectorySiteIdDimensionValue :: Lens' Site (Maybe DimensionValue)
+ssDirectorySiteIdDimensionValue
+  = lens _ssDirectorySiteIdDimensionValue
+      (\ s a -> s{_ssDirectorySiteIdDimensionValue = a})
 
 -- | Account ID of this site. This is a read-only field that can be left
 -- blank.
-sitAccountId :: Lens' Site (Maybe Int64)
-sitAccountId
-  = lens _sitAccountId (\ s a -> s{_sitAccountId = a})
+ssAccountId :: Lens' Site (Maybe Int64)
+ssAccountId
+  = lens _ssAccountId (\ s a -> s{_ssAccountId = a})
 
 -- | Name of this site.This is a required field. Must be less than 128
 -- characters long. If this site is under a subaccount, the name must be
 -- unique among sites of the same subaccount. Otherwise, this site is a
 -- top-level site, and the name must be unique among top-level sites of the
 -- same account.
-sitName :: Lens' Site (Maybe Text)
-sitName = lens _sitName (\ s a -> s{_sitName = a})
+ssName :: Lens' Site (Maybe Text)
+ssName = lens _ssName (\ s a -> s{_ssName = a})
 
 -- | Directory site associated with this site. This is a required field that
 -- is read-only after insertion.
-sitDirectorySiteId :: Lens' Site (Maybe Int64)
-sitDirectorySiteId
-  = lens _sitDirectorySiteId
-      (\ s a -> s{_sitDirectorySiteId = a})
+ssDirectorySiteId :: Lens' Site (Maybe Int64)
+ssDirectorySiteId
+  = lens _ssDirectorySiteId
+      (\ s a -> s{_ssDirectorySiteId = a})
 
 -- | ID of this site. This is a read-only, auto-generated field.
-sitId :: Lens' Site (Maybe Int64)
-sitId = lens _sitId (\ s a -> s{_sitId = a})
+ssId :: Lens' Site (Maybe Int64)
+ssId = lens _ssId (\ s a -> s{_ssId = a})
 
 -- | Subaccount ID of this site. This is a read-only field that can be left
 -- blank.
-sitSubaccountId :: Lens' Site (Maybe Int64)
-sitSubaccountId
-  = lens _sitSubaccountId
-      (\ s a -> s{_sitSubaccountId = a})
+ssSubAccountId :: Lens' Site (Maybe Int64)
+ssSubAccountId
+  = lens _ssSubAccountId
+      (\ s a -> s{_ssSubAccountId = a})
 
 -- | Whether this site is approved.
-sitApproved :: Lens' Site (Maybe Bool)
-sitApproved
-  = lens _sitApproved (\ s a -> s{_sitApproved = a})
+ssApproved :: Lens' Site (Maybe Bool)
+ssApproved
+  = lens _ssApproved (\ s a -> s{_ssApproved = a})
 
 instance FromJSON Site where
         parseJSON
@@ -15730,19 +15730,19 @@ instance ToJSON Site where
         toJSON Site{..}
           = object
               (catMaybes
-                 [Just ("kind" .= _sitKind),
-                  ("keyName" .=) <$> _sitKeyName,
-                  ("siteContacts" .=) <$> _sitSiteContacts,
-                  ("siteSettings" .=) <$> _sitSiteSettings,
-                  ("idDimensionValue" .=) <$> _sitIdDimensionValue,
+                 [Just ("kind" .= _ssKind),
+                  ("keyName" .=) <$> _ssKeyName,
+                  ("siteContacts" .=) <$> _ssSiteContacts,
+                  ("siteSettings" .=) <$> _ssSiteSettings,
+                  ("idDimensionValue" .=) <$> _ssIdDimensionValue,
                   ("directorySiteIdDimensionValue" .=) <$>
-                    _sitDirectorySiteIdDimensionValue,
-                  ("accountId" .=) <$> _sitAccountId,
-                  ("name" .=) <$> _sitName,
-                  ("directorySiteId" .=) <$> _sitDirectorySiteId,
-                  ("id" .=) <$> _sitId,
-                  ("subaccountId" .=) <$> _sitSubaccountId,
-                  ("approved" .=) <$> _sitApproved])
+                    _ssDirectorySiteIdDimensionValue,
+                  ("accountId" .=) <$> _ssAccountId,
+                  ("name" .=) <$> _ssName,
+                  ("directorySiteId" .=) <$> _ssDirectorySiteId,
+                  ("id" .=) <$> _ssId,
+                  ("subaccountId" .=) <$> _ssSubAccountId,
+                  ("approved" .=) <$> _ssApproved])
 
 -- | Represents a sorted dimension.
 --
@@ -15865,7 +15865,7 @@ instance ToJSON Recipient where
 data PlacementsListResponse = PlacementsListResponse
     { _plaNextPageToken :: !(Maybe Text)
     , _plaKind          :: !Text
-    , _plaPlacements    :: !(Maybe [Maybe Placement])
+    , _plaPlacements    :: !(Maybe [Placement])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementsListResponse' with the minimum fields required to make a request.
@@ -15898,7 +15898,7 @@ plaKind :: Lens' PlacementsListResponse Text
 plaKind = lens _plaKind (\ s a -> s{_plaKind = a})
 
 -- | Placement collection.
-plaPlacements :: Lens' PlacementsListResponse [Maybe Placement]
+plaPlacements :: Lens' PlacementsListResponse [Placement]
 plaPlacements
   = lens _plaPlacements
       (\ s a -> s{_plaPlacements = a})
@@ -15934,30 +15934,30 @@ data CreativeAsset = CreativeAsset
     , _cWindowMode            :: !(Maybe CreativeAssetWindowMode)
     , _cFlashVersion          :: !(Maybe Int32)
     , _cPushdownDuration      :: !(Maybe Float)
-    , _cSize                  :: !(Maybe (Maybe Size))
+    , _cSize                  :: !(Maybe Size)
     , _cVerticallyLocked      :: !(Maybe Bool)
-    , _cOffset                :: !(Maybe (Maybe OffsetPosition))
-    , _cStreamingServingUrl   :: !(Maybe Text)
+    , _cOffset                :: !(Maybe OffsetPosition)
+    , _cStreamingServingURL   :: !(Maybe Text)
     , _cZipFilesize           :: !(Maybe Text)
     , _cTransparency          :: !(Maybe Bool)
     , _cHideSelectionBoxes    :: !(Maybe Bool)
-    , _cSslCompliant          :: !(Maybe Bool)
+    , _cSSLCompliant          :: !(Maybe Bool)
     , _cFileSize              :: !(Maybe Int64)
-    , _cAssetIdentifier       :: !(Maybe (Maybe CreativeAssetId))
+    , _cAssetIdentifier       :: !(Maybe CreativeAssetId)
     , _cDurationType          :: !(Maybe CreativeAssetDurationType)
-    , _cProgressiveServingUrl :: !(Maybe Text)
+    , _cProgressiveServingURL :: !(Maybe Text)
     , _cActive                :: !(Maybe Bool)
     , _cRole                  :: !(Maybe CreativeAssetRole)
     , _cMimeType              :: !(Maybe Text)
     , _cPositionTopUnit       :: !(Maybe CreativeAssetPositionTopUnit)
     , _cPositionLeftUnit      :: !(Maybe CreativeAssetPositionLeftUnit)
     , _cAlignment             :: !(Maybe CreativeAssetAlignment)
-    , _cExpandedDimension     :: !(Maybe (Maybe Size))
+    , _cExpandedDimension     :: !(Maybe Size)
     , _cZipFilename           :: !(Maybe Text)
     , _cActionScript3         :: !(Maybe Bool)
     , _cDisplayType           :: !(Maybe CreativeAssetDisplayType)
     , _cChildAssetType        :: !(Maybe CreativeAssetChildAssetType)
-    , _cCollapsedSize         :: !(Maybe (Maybe Size))
+    , _cCollapsedSize         :: !(Maybe Size)
     , _cId                    :: !(Maybe Int64)
     , _cBitRate               :: !(Maybe Int32)
     , _cCustomStartTimeValue  :: !(Maybe Int32)
@@ -15966,8 +15966,8 @@ data CreativeAsset = CreativeAsset
     , _cArtworkType           :: !(Maybe CreativeAssetArtworkType)
     , _cHideFlashObjects      :: !(Maybe Bool)
     , _cDetectedFeatures      :: !(Maybe [CreativeAssetDetectedFeatures])
-    , _cBackupImageExit       :: !(Maybe (Maybe CreativeCustomEvent))
-    , _cPosition              :: !(Maybe (Maybe OffsetPosition))
+    , _cBackupImageExit       :: !(Maybe CreativeCustomEvent)
+    , _cPosition              :: !(Maybe OffsetPosition)
     , _cHorizontallyLocked    :: !(Maybe Bool)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -15995,7 +15995,7 @@ data CreativeAsset = CreativeAsset
 --
 -- * 'cOffset'
 --
--- * 'cStreamingServingUrl'
+-- * 'cStreamingServingURL'
 --
 -- * 'cZipFilesize'
 --
@@ -16003,7 +16003,7 @@ data CreativeAsset = CreativeAsset
 --
 -- * 'cHideSelectionBoxes'
 --
--- * 'cSslCompliant'
+-- * 'cSSLCompliant'
 --
 -- * 'cFileSize'
 --
@@ -16011,7 +16011,7 @@ data CreativeAsset = CreativeAsset
 --
 -- * 'cDurationType'
 --
--- * 'cProgressiveServingUrl'
+-- * 'cProgressiveServingURL'
 --
 -- * 'cActive'
 --
@@ -16072,15 +16072,15 @@ creativeAsset =
     , _cSize = Nothing
     , _cVerticallyLocked = Nothing
     , _cOffset = Nothing
-    , _cStreamingServingUrl = Nothing
+    , _cStreamingServingURL = Nothing
     , _cZipFilesize = Nothing
     , _cTransparency = Nothing
     , _cHideSelectionBoxes = Nothing
-    , _cSslCompliant = Nothing
+    , _cSSLCompliant = Nothing
     , _cFileSize = Nothing
     , _cAssetIdentifier = Nothing
     , _cDurationType = Nothing
-    , _cProgressiveServingUrl = Nothing
+    , _cProgressiveServingURL = Nothing
     , _cActive = Nothing
     , _cRole = Nothing
     , _cMimeType = Nothing
@@ -16167,7 +16167,7 @@ cPushdownDuration
 -- associated image asset. Applicable to the following creative types:
 -- ENHANCED_BANNER, ENHANCED_IMAGE, FLASH_INPAGE, HTML5_BANNER, IMAGE, and
 -- all RICH_MEDIA.
-cSize :: Lens' CreativeAsset (Maybe (Maybe Size))
+cSize :: Lens' CreativeAsset (Maybe Size)
 cSize = lens _cSize (\ s a -> s{_cSize = a})
 
 -- | Whether the asset is vertically locked. This is a read-only field.
@@ -16181,15 +16181,15 @@ cVerticallyLocked
 -- field. Applicable to the following creative types: all RICH_MEDIA and
 -- all VPAID. Additionally, only applicable to assets whose displayType is
 -- ASSET_DISPLAY_TYPE_EXPANDING or ASSET_DISPLAY_TYPE_PEEL_DOWN.
-cOffset :: Lens' CreativeAsset (Maybe (Maybe OffsetPosition))
+cOffset :: Lens' CreativeAsset (Maybe OffsetPosition)
 cOffset = lens _cOffset (\ s a -> s{_cOffset = a})
 
 -- | Streaming URL for video asset. This is a read-only field. Applicable to
 -- the following creative types: INSTREAM_VIDEO and all VPAID.
-cStreamingServingUrl :: Lens' CreativeAsset (Maybe Text)
-cStreamingServingUrl
-  = lens _cStreamingServingUrl
-      (\ s a -> s{_cStreamingServingUrl = a})
+cStreamingServingURL :: Lens' CreativeAsset (Maybe Text)
+cStreamingServingURL
+  = lens _cStreamingServingURL
+      (\ s a -> s{_cStreamingServingURL = a})
 
 -- | Size of zip file. This is a read-only field. Applicable to the following
 -- creative types: HTML5_BANNER.
@@ -16214,10 +16214,10 @@ cHideSelectionBoxes
 -- | Whether the asset is SSL-compliant. This is a read-only field.
 -- Applicable to all but the following creative types: all REDIRECT and
 -- TRACKING_TEXT.
-cSslCompliant :: Lens' CreativeAsset (Maybe Bool)
-cSslCompliant
-  = lens _cSslCompliant
-      (\ s a -> s{_cSslCompliant = a})
+cSSLCompliant :: Lens' CreativeAsset (Maybe Bool)
+cSSLCompliant
+  = lens _cSSLCompliant
+      (\ s a -> s{_cSSLCompliant = a})
 
 -- | File size associated with this creative asset. This is a read-only
 -- field. Applicable to all but the following creative types: all REDIRECT
@@ -16229,7 +16229,7 @@ cFileSize
 -- | Identifier of this asset. This is the same identifier returned during
 -- creative asset insert operation. This is a required field. Applicable to
 -- all but the following creative types: all REDIRECT and TRACKING_TEXT.
-cAssetIdentifier :: Lens' CreativeAsset (Maybe (Maybe CreativeAssetId))
+cAssetIdentifier :: Lens' CreativeAsset (Maybe CreativeAssetId)
 cAssetIdentifier
   = lens _cAssetIdentifier
       (\ s a -> s{_cAssetIdentifier = a})
@@ -16243,10 +16243,10 @@ cDurationType
 
 -- | Progressive URL for video asset. This is a read-only field. Applicable
 -- to the following creative types: INSTREAM_VIDEO and all VPAID.
-cProgressiveServingUrl :: Lens' CreativeAsset (Maybe Text)
-cProgressiveServingUrl
-  = lens _cProgressiveServingUrl
-      (\ s a -> s{_cProgressiveServingUrl = a})
+cProgressiveServingURL :: Lens' CreativeAsset (Maybe Text)
+cProgressiveServingURL
+  = lens _cProgressiveServingURL
+      (\ s a -> s{_cProgressiveServingURL = a})
 
 -- | Whether the video asset is active. This is a read-only field for
 -- VPAID_NON_LINEAR assets. Applicable to the following creative types:
@@ -16308,7 +16308,7 @@ cAlignment
 -- | Detected expanded dimension for video asset. This is a read-only field.
 -- Applicable to the following creative types: INSTREAM_VIDEO and all
 -- VPAID.
-cExpandedDimension :: Lens' CreativeAsset (Maybe (Maybe Size))
+cExpandedDimension :: Lens' CreativeAsset (Maybe Size)
 cExpandedDimension
   = lens _cExpandedDimension
       (\ s a -> s{_cExpandedDimension = a})
@@ -16344,7 +16344,7 @@ cChildAssetType
 -- to the following creative types: all RICH_MEDIA and all VPAID.
 -- Additionally, applicable to assets whose displayType is
 -- ASSET_DISPLAY_TYPE_EXPANDING or ASSET_DISPLAY_TYPE_PEEL_DOWN.
-cCollapsedSize :: Lens' CreativeAsset (Maybe (Maybe Size))
+cCollapsedSize :: Lens' CreativeAsset (Maybe Size)
 cCollapsedSize
   = lens _cCollapsedSize
       (\ s a -> s{_cCollapsedSize = a})
@@ -16407,14 +16407,14 @@ cDetectedFeatures
 
 -- | Exit event configured for the backup image. Applicable to the following
 -- creative types: all RICH_MEDIA.
-cBackupImageExit :: Lens' CreativeAsset (Maybe (Maybe CreativeCustomEvent))
+cBackupImageExit :: Lens' CreativeAsset (Maybe CreativeCustomEvent)
 cBackupImageExit
   = lens _cBackupImageExit
       (\ s a -> s{_cBackupImageExit = a})
 
 -- | Offset position for an asset. Applicable to the following creative
 -- types: all RICH_MEDIA.
-cPosition :: Lens' CreativeAsset (Maybe (Maybe OffsetPosition))
+cPosition :: Lens' CreativeAsset (Maybe OffsetPosition)
 cPosition
   = lens _cPosition (\ s a -> s{_cPosition = a})
 
@@ -16486,16 +16486,16 @@ instance ToJSON CreativeAsset where
                   ("size" .=) <$> _cSize,
                   ("verticallyLocked" .=) <$> _cVerticallyLocked,
                   ("offset" .=) <$> _cOffset,
-                  ("streamingServingUrl" .=) <$> _cStreamingServingUrl,
+                  ("streamingServingUrl" .=) <$> _cStreamingServingURL,
                   ("zipFilesize" .=) <$> _cZipFilesize,
                   ("transparency" .=) <$> _cTransparency,
                   ("hideSelectionBoxes" .=) <$> _cHideSelectionBoxes,
-                  ("sslCompliant" .=) <$> _cSslCompliant,
+                  ("sslCompliant" .=) <$> _cSSLCompliant,
                   ("fileSize" .=) <$> _cFileSize,
                   ("assetIdentifier" .=) <$> _cAssetIdentifier,
                   ("durationType" .=) <$> _cDurationType,
                   ("progressiveServingUrl" .=) <$>
-                    _cProgressiveServingUrl,
+                    _cProgressiveServingURL,
                   ("active" .=) <$> _cActive, ("role" .=) <$> _cRole,
                   ("mimeType" .=) <$> _cMimeType,
                   ("positionTopUnit" .=) <$> _cPositionTopUnit,
@@ -16641,7 +16641,7 @@ instance ToJSON ReportSchedule where
 -- /See:/ 'metrosListResponse' smart constructor.
 data MetrosListResponse = MetrosListResponse
     { _mlrKind   :: !Text
-    , _mlrMetros :: !(Maybe [Maybe Metro])
+    , _mlrMetros :: !(Maybe [Metro])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MetrosListResponse' with the minimum fields required to make a request.
@@ -16665,7 +16665,7 @@ mlrKind :: Lens' MetrosListResponse Text
 mlrKind = lens _mlrKind (\ s a -> s{_mlrKind = a})
 
 -- | Metro collection.
-mlrMetros :: Lens' MetrosListResponse [Maybe Metro]
+mlrMetros :: Lens' MetrosListResponse [Metro]
 mlrMetros
   = lens _mlrMetros (\ s a -> s{_mlrMetros = a}) .
       _Default
@@ -16691,29 +16691,29 @@ instance ToJSON MetrosListResponse where
 -- /See:/ 'placementGroup' smart constructor.
 data PlacementGroup = PlacementGroup
     { _plalPlacementStrategyId              :: !(Maybe Int64)
-    , _plalSiteIdDimensionValue             :: !(Maybe (Maybe DimensionValue))
-    , _plalPricingSchedule                  :: !(Maybe (Maybe PricingSchedule))
+    , _plalSiteIdDimensionValue             :: !(Maybe DimensionValue)
+    , _plalPricingSchedule                  :: !(Maybe PricingSchedule)
     , _plalKind                             :: !Text
-    , _plalCampaignIdDimensionValue         :: !(Maybe (Maybe DimensionValue))
+    , _plalCampaignIdDimensionValue         :: !(Maybe DimensionValue)
     , _plalAdvertiserId                     :: !(Maybe Int64)
-    , _plalAdvertiserIdDimensionValue       :: !(Maybe (Maybe DimensionValue))
+    , _plalAdvertiserIdDimensionValue       :: !(Maybe DimensionValue)
     , _plalCampaignId                       :: !(Maybe Int64)
-    , _plalIdDimensionValue                 :: !(Maybe (Maybe DimensionValue))
+    , _plalIdDimensionValue                 :: !(Maybe DimensionValue)
     , _plalPlacementGroupType               :: !(Maybe PlacementGroupPlacementGroupType)
     , _plalContentCategoryId                :: !(Maybe Int64)
-    , _plalDirectorySiteIdDimensionValue    :: !(Maybe (Maybe DimensionValue))
+    , _plalDirectorySiteIdDimensionValue    :: !(Maybe DimensionValue)
     , _plalAccountId                        :: !(Maybe Int64)
     , _plalName                             :: !(Maybe Text)
     , _plalDirectorySiteId                  :: !(Maybe Int64)
-    , _plalCreateInfo                       :: !(Maybe (Maybe LastModifiedInfo))
+    , _plalCreateInfo                       :: !(Maybe LastModifiedInfo)
     , _plalChildPlacementIds                :: !(Maybe [Int64])
-    , _plalLastModifiedInfo                 :: !(Maybe (Maybe LastModifiedInfo))
+    , _plalLastModifiedInfo                 :: !(Maybe LastModifiedInfo)
     , _plalId                               :: !(Maybe Int64)
     , _plalPrimaryPlacementId               :: !(Maybe Int64)
-    , _plalSubaccountId                     :: !(Maybe Int64)
+    , _plalSubAccountId                     :: !(Maybe Int64)
     , _plalExternalId                       :: !(Maybe Text)
     , _plalComment                          :: !(Maybe Text)
-    , _plalPrimaryPlacementIdDimensionValue :: !(Maybe (Maybe DimensionValue))
+    , _plalPrimaryPlacementIdDimensionValue :: !(Maybe DimensionValue)
     , _plalSiteId                           :: !(Maybe Int64)
     , _plalArchived                         :: !(Maybe Bool)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -16762,7 +16762,7 @@ data PlacementGroup = PlacementGroup
 --
 -- * 'plalPrimaryPlacementId'
 --
--- * 'plalSubaccountId'
+-- * 'plalSubAccountId'
 --
 -- * 'plalExternalId'
 --
@@ -16797,7 +16797,7 @@ placementGroup =
     , _plalLastModifiedInfo = Nothing
     , _plalId = Nothing
     , _plalPrimaryPlacementId = Nothing
-    , _plalSubaccountId = Nothing
+    , _plalSubAccountId = Nothing
     , _plalExternalId = Nothing
     , _plalComment = Nothing
     , _plalPrimaryPlacementIdDimensionValue = Nothing
@@ -16813,14 +16813,14 @@ plalPlacementStrategyId
 
 -- | Dimension value for the ID of the site. This is a read-only,
 -- auto-generated field.
-plalSiteIdDimensionValue :: Lens' PlacementGroup (Maybe (Maybe DimensionValue))
+plalSiteIdDimensionValue :: Lens' PlacementGroup (Maybe DimensionValue)
 plalSiteIdDimensionValue
   = lens _plalSiteIdDimensionValue
       (\ s a -> s{_plalSiteIdDimensionValue = a})
 
 -- | Pricing schedule of this placement group. This field is required on
 -- insertion.
-plalPricingSchedule :: Lens' PlacementGroup (Maybe (Maybe PricingSchedule))
+plalPricingSchedule :: Lens' PlacementGroup (Maybe PricingSchedule)
 plalPricingSchedule
   = lens _plalPricingSchedule
       (\ s a -> s{_plalPricingSchedule = a})
@@ -16832,7 +16832,7 @@ plalKind = lens _plalKind (\ s a -> s{_plalKind = a})
 
 -- | Dimension value for the ID of the campaign. This is a read-only,
 -- auto-generated field.
-plalCampaignIdDimensionValue :: Lens' PlacementGroup (Maybe (Maybe DimensionValue))
+plalCampaignIdDimensionValue :: Lens' PlacementGroup (Maybe DimensionValue)
 plalCampaignIdDimensionValue
   = lens _plalCampaignIdDimensionValue
       (\ s a -> s{_plalCampaignIdDimensionValue = a})
@@ -16846,7 +16846,7 @@ plalAdvertiserId
 
 -- | Dimension value for the ID of the advertiser. This is a read-only,
 -- auto-generated field.
-plalAdvertiserIdDimensionValue :: Lens' PlacementGroup (Maybe (Maybe DimensionValue))
+plalAdvertiserIdDimensionValue :: Lens' PlacementGroup (Maybe DimensionValue)
 plalAdvertiserIdDimensionValue
   = lens _plalAdvertiserIdDimensionValue
       (\ s a -> s{_plalAdvertiserIdDimensionValue = a})
@@ -16860,7 +16860,7 @@ plalCampaignId
 
 -- | Dimension value for the ID of this placement group. This is a read-only,
 -- auto-generated field.
-plalIdDimensionValue :: Lens' PlacementGroup (Maybe (Maybe DimensionValue))
+plalIdDimensionValue :: Lens' PlacementGroup (Maybe DimensionValue)
 plalIdDimensionValue
   = lens _plalIdDimensionValue
       (\ s a -> s{_plalIdDimensionValue = a})
@@ -16884,7 +16884,7 @@ plalContentCategoryId
 
 -- | Dimension value for the ID of the directory site. This is a read-only,
 -- auto-generated field.
-plalDirectorySiteIdDimensionValue :: Lens' PlacementGroup (Maybe (Maybe DimensionValue))
+plalDirectorySiteIdDimensionValue :: Lens' PlacementGroup (Maybe DimensionValue)
 plalDirectorySiteIdDimensionValue
   = lens _plalDirectorySiteIdDimensionValue
       (\ s a -> s{_plalDirectorySiteIdDimensionValue = a})
@@ -16912,7 +16912,7 @@ plalDirectorySiteId
 
 -- | Information about the creation of this placement group. This is a
 -- read-only field.
-plalCreateInfo :: Lens' PlacementGroup (Maybe (Maybe LastModifiedInfo))
+plalCreateInfo :: Lens' PlacementGroup (Maybe LastModifiedInfo)
 plalCreateInfo
   = lens _plalCreateInfo
       (\ s a -> s{_plalCreateInfo = a})
@@ -16928,7 +16928,7 @@ plalChildPlacementIds
 
 -- | Information about the most recent modification of this placement group.
 -- This is a read-only field.
-plalLastModifiedInfo :: Lens' PlacementGroup (Maybe (Maybe LastModifiedInfo))
+plalLastModifiedInfo :: Lens' PlacementGroup (Maybe LastModifiedInfo)
 plalLastModifiedInfo
   = lens _plalLastModifiedInfo
       (\ s a -> s{_plalLastModifiedInfo = a})
@@ -16947,10 +16947,10 @@ plalPrimaryPlacementId
 
 -- | Subaccount ID of this placement group. This is a read-only field that
 -- can be left blank.
-plalSubaccountId :: Lens' PlacementGroup (Maybe Int64)
-plalSubaccountId
-  = lens _plalSubaccountId
-      (\ s a -> s{_plalSubaccountId = a})
+plalSubAccountId :: Lens' PlacementGroup (Maybe Int64)
+plalSubAccountId
+  = lens _plalSubAccountId
+      (\ s a -> s{_plalSubAccountId = a})
 
 -- | External ID for this placement.
 plalExternalId :: Lens' PlacementGroup (Maybe Text)
@@ -16965,7 +16965,7 @@ plalComment
 
 -- | Dimension value for the ID of the primary placement. This is a
 -- read-only, auto-generated field.
-plalPrimaryPlacementIdDimensionValue :: Lens' PlacementGroup (Maybe (Maybe DimensionValue))
+plalPrimaryPlacementIdDimensionValue :: Lens' PlacementGroup (Maybe DimensionValue)
 plalPrimaryPlacementIdDimensionValue
   = lens _plalPrimaryPlacementIdDimensionValue
       (\ s a ->
@@ -17047,7 +17047,7 @@ instance ToJSON PlacementGroup where
                   ("id" .=) <$> _plalId,
                   ("primaryPlacementId" .=) <$>
                     _plalPrimaryPlacementId,
-                  ("subaccountId" .=) <$> _plalSubaccountId,
+                  ("subaccountId" .=) <$> _plalSubAccountId,
                   ("externalId" .=) <$> _plalExternalId,
                   ("comment" .=) <$> _plalComment,
                   ("primaryPlacementIdDimensionValue" .=) <$>
@@ -17059,7 +17059,7 @@ instance ToJSON PlacementGroup where
 --
 -- /See:/ 'creativeGroupsListResponse' smart constructor.
 data CreativeGroupsListResponse = CreativeGroupsListResponse
-    { _cglrCreativeGroups :: !(Maybe [Maybe CreativeGroup])
+    { _cglrCreativeGroups :: !(Maybe [CreativeGroup])
     , _cglrNextPageToken  :: !(Maybe Text)
     , _cglrKind           :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -17083,7 +17083,7 @@ creativeGroupsListResponse =
     }
 
 -- | Creative group collection.
-cglrCreativeGroups :: Lens' CreativeGroupsListResponse [Maybe CreativeGroup]
+cglrCreativeGroups :: Lens' CreativeGroupsListResponse [CreativeGroup]
 cglrCreativeGroups
   = lens _cglrCreativeGroups
       (\ s a -> s{_cglrCreativeGroups = a})
@@ -17128,18 +17128,18 @@ data EventTag = EventTag
     , _etExcludeFromAdxRequests     :: !(Maybe Bool)
     , _etEnabledByDefault           :: !(Maybe Bool)
     , _etKind                       :: !Text
-    , _etCampaignIdDimensionValue   :: !(Maybe (Maybe DimensionValue))
+    , _etCampaignIdDimensionValue   :: !(Maybe DimensionValue)
     , _etAdvertiserId               :: !(Maybe Int64)
-    , _etUrl                        :: !(Maybe Text)
-    , _etAdvertiserIdDimensionValue :: !(Maybe (Maybe DimensionValue))
-    , _etSslCompliant               :: !(Maybe Bool)
+    , _etURL                        :: !(Maybe Text)
+    , _etAdvertiserIdDimensionValue :: !(Maybe DimensionValue)
+    , _etSSLCompliant               :: !(Maybe Bool)
     , _etCampaignId                 :: !(Maybe Int64)
     , _etAccountId                  :: !(Maybe Int64)
     , _etName                       :: !(Maybe Text)
-    , _etUrlEscapeLevels            :: !(Maybe Int32)
+    , _etURLEscapeLevels            :: !(Maybe Int32)
     , _etSiteIds                    :: !(Maybe [Int64])
     , _etId                         :: !(Maybe Int64)
-    , _etSubaccountId               :: !(Maybe Int64)
+    , _etSubAccountId               :: !(Maybe Int64)
     , _etType                       :: !(Maybe EventTagType)
     , _etSiteFilterType             :: !(Maybe EventTagSiteFilterType)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -17160,11 +17160,11 @@ data EventTag = EventTag
 --
 -- * 'etAdvertiserId'
 --
--- * 'etUrl'
+-- * 'etURL'
 --
 -- * 'etAdvertiserIdDimensionValue'
 --
--- * 'etSslCompliant'
+-- * 'etSSLCompliant'
 --
 -- * 'etCampaignId'
 --
@@ -17172,13 +17172,13 @@ data EventTag = EventTag
 --
 -- * 'etName'
 --
--- * 'etUrlEscapeLevels'
+-- * 'etURLEscapeLevels'
 --
 -- * 'etSiteIds'
 --
 -- * 'etId'
 --
--- * 'etSubaccountId'
+-- * 'etSubAccountId'
 --
 -- * 'etType'
 --
@@ -17193,16 +17193,16 @@ eventTag =
     , _etKind = "dfareporting#eventTag"
     , _etCampaignIdDimensionValue = Nothing
     , _etAdvertiserId = Nothing
-    , _etUrl = Nothing
+    , _etURL = Nothing
     , _etAdvertiserIdDimensionValue = Nothing
-    , _etSslCompliant = Nothing
+    , _etSSLCompliant = Nothing
     , _etCampaignId = Nothing
     , _etAccountId = Nothing
     , _etName = Nothing
-    , _etUrlEscapeLevels = Nothing
+    , _etURLEscapeLevels = Nothing
     , _etSiteIds = Nothing
     , _etId = Nothing
-    , _etSubaccountId = Nothing
+    , _etSubAccountId = Nothing
     , _etType = Nothing
     , _etSiteFilterType = Nothing
     }
@@ -17235,7 +17235,7 @@ etKind = lens _etKind (\ s a -> s{_etKind = a})
 
 -- | Dimension value for the ID of the campaign. This is a read-only,
 -- auto-generated field.
-etCampaignIdDimensionValue :: Lens' EventTag (Maybe (Maybe DimensionValue))
+etCampaignIdDimensionValue :: Lens' EventTag (Maybe DimensionValue)
 etCampaignIdDimensionValue
   = lens _etCampaignIdDimensionValue
       (\ s a -> s{_etCampaignIdDimensionValue = a})
@@ -17250,21 +17250,21 @@ etAdvertiserId
 -- | Payload URL for this event tag. The URL on a click-through event tag
 -- should have a landing page URL appended to the end of it. This field is
 -- required on insertion.
-etUrl :: Lens' EventTag (Maybe Text)
-etUrl = lens _etUrl (\ s a -> s{_etUrl = a})
+etURL :: Lens' EventTag (Maybe Text)
+etURL = lens _etURL (\ s a -> s{_etURL = a})
 
 -- | Dimension value for the ID of the advertiser. This is a read-only,
 -- auto-generated field.
-etAdvertiserIdDimensionValue :: Lens' EventTag (Maybe (Maybe DimensionValue))
+etAdvertiserIdDimensionValue :: Lens' EventTag (Maybe DimensionValue)
 etAdvertiserIdDimensionValue
   = lens _etAdvertiserIdDimensionValue
       (\ s a -> s{_etAdvertiserIdDimensionValue = a})
 
 -- | Whether this tag is SSL-compliant or not. This is a read-only field.
-etSslCompliant :: Lens' EventTag (Maybe Bool)
-etSslCompliant
-  = lens _etSslCompliant
-      (\ s a -> s{_etSslCompliant = a})
+etSSLCompliant :: Lens' EventTag (Maybe Bool)
+etSSLCompliant
+  = lens _etSSLCompliant
+      (\ s a -> s{_etSSLCompliant = a})
 
 -- | Campaign ID of this event tag. This field or the advertiserId field is
 -- required on insertion.
@@ -17286,10 +17286,10 @@ etName = lens _etName (\ s a -> s{_etName = a})
 -- | Number of times the landing page URL should be URL-escaped before being
 -- appended to the click-through event tag URL. Only applies to
 -- click-through event tags as specified by the event tag type.
-etUrlEscapeLevels :: Lens' EventTag (Maybe Int32)
-etUrlEscapeLevels
-  = lens _etUrlEscapeLevels
-      (\ s a -> s{_etUrlEscapeLevels = a})
+etURLEscapeLevels :: Lens' EventTag (Maybe Int32)
+etURLEscapeLevels
+  = lens _etURLEscapeLevels
+      (\ s a -> s{_etURLEscapeLevels = a})
 
 -- | Filter list of site IDs associated with this event tag. The
 -- siteFilterType determines whether this is a whitelist or blacklist
@@ -17306,10 +17306,10 @@ etId = lens _etId (\ s a -> s{_etId = a})
 
 -- | Subaccount ID of this event tag. This is a read-only field that can be
 -- left blank.
-etSubaccountId :: Lens' EventTag (Maybe Int64)
-etSubaccountId
-  = lens _etSubaccountId
-      (\ s a -> s{_etSubaccountId = a})
+etSubAccountId :: Lens' EventTag (Maybe Int64)
+etSubAccountId
+  = lens _etSubAccountId
+      (\ s a -> s{_etSubAccountId = a})
 
 -- | Event tag type. Can be used to specify whether to use a third-party
 -- pixel, a third-party JavaScript URL, or a third-party click-through URL
@@ -17359,16 +17359,16 @@ instance ToJSON EventTag where
                   ("campaignIdDimensionValue" .=) <$>
                     _etCampaignIdDimensionValue,
                   ("advertiserId" .=) <$> _etAdvertiserId,
-                  ("url" .=) <$> _etUrl,
+                  ("url" .=) <$> _etURL,
                   ("advertiserIdDimensionValue" .=) <$>
                     _etAdvertiserIdDimensionValue,
-                  ("sslCompliant" .=) <$> _etSslCompliant,
+                  ("sslCompliant" .=) <$> _etSSLCompliant,
                   ("campaignId" .=) <$> _etCampaignId,
                   ("accountId" .=) <$> _etAccountId,
                   ("name" .=) <$> _etName,
-                  ("urlEscapeLevels" .=) <$> _etUrlEscapeLevels,
+                  ("urlEscapeLevels" .=) <$> _etURLEscapeLevels,
                   ("siteIds" .=) <$> _etSiteIds, ("id" .=) <$> _etId,
-                  ("subaccountId" .=) <$> _etSubaccountId,
+                  ("subaccountId" .=) <$> _etSubAccountId,
                   ("type" .=) <$> _etType,
                   ("siteFilterType" .=) <$> _etSiteFilterType])
 
@@ -17376,7 +17376,7 @@ instance ToJSON EventTag where
 --
 -- /See:/ 'campaignCreativeAssociationsListResponse' smart constructor.
 data CampaignCreativeAssociationsListResponse = CampaignCreativeAssociationsListResponse
-    { _ccalrCampaignCreativeAssociations :: !(Maybe [Maybe CampaignCreativeAssociation])
+    { _ccalrCampaignCreativeAssociations :: !(Maybe [CampaignCreativeAssociation])
     , _ccalrNextPageToken                :: !(Maybe Text)
     , _ccalrKind                         :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -17400,7 +17400,7 @@ campaignCreativeAssociationsListResponse =
     }
 
 -- | Campaign creative association collection
-ccalrCampaignCreativeAssociations :: Lens' CampaignCreativeAssociationsListResponse [Maybe CampaignCreativeAssociation]
+ccalrCampaignCreativeAssociations :: Lens' CampaignCreativeAssociationsListResponse [CampaignCreativeAssociation]
 ccalrCampaignCreativeAssociations
   = lens _ccalrCampaignCreativeAssociations
       (\ s a -> s{_ccalrCampaignCreativeAssociations = a})
@@ -17667,15 +17667,15 @@ data Order = Order
     , _oAccountId              :: !(Maybe Int64)
     , _oName                   :: !(Maybe Text)
     , _oSiteNames              :: !(Maybe [Text])
-    , _oLastModifiedInfo       :: !(Maybe (Maybe LastModifiedInfo))
+    , _oLastModifiedInfo       :: !(Maybe LastModifiedInfo)
     , _oBuyerOrganizationName  :: !(Maybe Text)
     , _oId                     :: !(Maybe Int64)
     , _oBuyerInvoiceId         :: !(Maybe Text)
     , _oComments               :: !(Maybe Text)
     , _oProjectId              :: !(Maybe Int64)
-    , _oSubaccountId           :: !(Maybe Int64)
+    , _oSubAccountId           :: !(Maybe Int64)
     , _oNotes                  :: !(Maybe Text)
-    , _oContacts               :: !(Maybe [Maybe OrderContact])
+    , _oContacts               :: !(Maybe [OrderContact])
     , _oSiteId                 :: !(Maybe [Int64])
     , _oTermsAndConditions     :: !(Maybe Text)
     , _oApproverUserProfileIds :: !(Maybe [Int64])
@@ -17713,7 +17713,7 @@ data Order = Order
 --
 -- * 'oProjectId'
 --
--- * 'oSubaccountId'
+-- * 'oSubAccountId'
 --
 -- * 'oNotes'
 --
@@ -17742,7 +17742,7 @@ order =
     , _oBuyerInvoiceId = Nothing
     , _oComments = Nothing
     , _oProjectId = Nothing
-    , _oSubaccountId = Nothing
+    , _oSubAccountId = Nothing
     , _oNotes = Nothing
     , _oContacts = Nothing
     , _oSiteId = Nothing
@@ -17796,7 +17796,7 @@ oSiteNames
       . _Coerce
 
 -- | Information about the most recent modification of this order.
-oLastModifiedInfo :: Lens' Order (Maybe (Maybe LastModifiedInfo))
+oLastModifiedInfo :: Lens' Order (Maybe LastModifiedInfo)
 oLastModifiedInfo
   = lens _oLastModifiedInfo
       (\ s a -> s{_oLastModifiedInfo = a})
@@ -17828,17 +17828,17 @@ oProjectId
   = lens _oProjectId (\ s a -> s{_oProjectId = a})
 
 -- | Subaccount ID of this order.
-oSubaccountId :: Lens' Order (Maybe Int64)
-oSubaccountId
-  = lens _oSubaccountId
-      (\ s a -> s{_oSubaccountId = a})
+oSubAccountId :: Lens' Order (Maybe Int64)
+oSubAccountId
+  = lens _oSubAccountId
+      (\ s a -> s{_oSubAccountId = a})
 
 -- | Notes of this order.
 oNotes :: Lens' Order (Maybe Text)
 oNotes = lens _oNotes (\ s a -> s{_oNotes = a})
 
 -- | Contacts for this order.
-oContacts :: Lens' Order [Maybe OrderContact]
+oContacts :: Lens' Order [OrderContact]
 oContacts
   = lens _oContacts (\ s a -> s{_oContacts = a}) .
       _Default
@@ -17910,7 +17910,7 @@ instance ToJSON Order where
                   ("buyerInvoiceId" .=) <$> _oBuyerInvoiceId,
                   ("comments" .=) <$> _oComments,
                   ("projectId" .=) <$> _oProjectId,
-                  ("subaccountId" .=) <$> _oSubaccountId,
+                  ("subaccountId" .=) <$> _oSubAccountId,
                   ("notes" .=) <$> _oNotes,
                   ("contacts" .=) <$> _oContacts,
                   ("siteId" .=) <$> _oSiteId,
@@ -18037,8 +18037,8 @@ instance ToJSON ConnectionType where
 -- /See:/ 'creativeAssetMetadata' smart constructor.
 data CreativeAssetMetadata = CreativeAssetMetadata
     { _camaKind                  :: !Text
-    , _camaAssetIdentifier       :: !(Maybe (Maybe CreativeAssetId))
-    , _camaClickTags             :: !(Maybe [Maybe ClickTag])
+    , _camaAssetIdentifier       :: !(Maybe CreativeAssetId)
+    , _camaClickTags             :: !(Maybe [ClickTag])
     , _camaWarnedValidationRules :: !(Maybe [CreativeAssetMetadataWarnedValidationRules])
     , _camaDetectedFeatures      :: !(Maybe [CreativeAssetMetadataDetectedFeatures])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -18073,14 +18073,14 @@ camaKind :: Lens' CreativeAssetMetadata Text
 camaKind = lens _camaKind (\ s a -> s{_camaKind = a})
 
 -- | ID of the creative asset. This is a required field.
-camaAssetIdentifier :: Lens' CreativeAssetMetadata (Maybe (Maybe CreativeAssetId))
+camaAssetIdentifier :: Lens' CreativeAssetMetadata (Maybe CreativeAssetId)
 camaAssetIdentifier
   = lens _camaAssetIdentifier
       (\ s a -> s{_camaAssetIdentifier = a})
 
 -- | List of detected click tags for assets. This is a read-only
 -- auto-generated field.
-camaClickTags :: Lens' CreativeAssetMetadata [Maybe ClickTag]
+camaClickTags :: Lens' CreativeAssetMetadata [ClickTag]
 camaClickTags
   = lens _camaClickTags
       (\ s a -> s{_camaClickTags = a})
@@ -18223,33 +18223,33 @@ instance ToJSON UserRolePermission where
 --
 -- /See:/ 'fileURLs' smart constructor.
 data FileURLs = FileURLs
-    { _fuBrowserUrl :: !(Maybe Text)
-    , _fuApiUrl     :: !(Maybe Text)
+    { _fuBrowserURL :: !(Maybe Text)
+    , _fuAPIURL     :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FileURLs' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'fuBrowserUrl'
+-- * 'fuBrowserURL'
 --
--- * 'fuApiUrl'
+-- * 'fuAPIURL'
 fileURLs
     :: FileURLs
 fileURLs =
     FileURLs
-    { _fuBrowserUrl = Nothing
-    , _fuApiUrl = Nothing
+    { _fuBrowserURL = Nothing
+    , _fuAPIURL = Nothing
     }
 
 -- | The URL for downloading the report data through a browser.
-fuBrowserUrl :: Lens' FileURLs (Maybe Text)
-fuBrowserUrl
-  = lens _fuBrowserUrl (\ s a -> s{_fuBrowserUrl = a})
+fuBrowserURL :: Lens' FileURLs (Maybe Text)
+fuBrowserURL
+  = lens _fuBrowserURL (\ s a -> s{_fuBrowserURL = a})
 
 -- | The URL for downloading the report data through the API.
-fuApiUrl :: Lens' FileURLs (Maybe Text)
-fuApiUrl = lens _fuApiUrl (\ s a -> s{_fuApiUrl = a})
+fuAPIURL :: Lens' FileURLs (Maybe Text)
+fuAPIURL = lens _fuAPIURL (\ s a -> s{_fuAPIURL = a})
 
 instance FromJSON FileURLs where
         parseJSON
@@ -18262,14 +18262,14 @@ instance ToJSON FileURLs where
         toJSON FileURLs{..}
           = object
               (catMaybes
-                 [("browserUrl" .=) <$> _fuBrowserUrl,
-                  ("apiUrl" .=) <$> _fuApiUrl])
+                 [("browserUrl" .=) <$> _fuBrowserURL,
+                  ("apiUrl" .=) <$> _fuAPIURL])
 
 -- | Mobile Carrier List Response
 --
 -- /See:/ 'mobileCarriersListResponse' smart constructor.
 data MobileCarriersListResponse = MobileCarriersListResponse
-    { _mclrMobileCarriers :: !(Maybe [Maybe MobileCarrier])
+    { _mclrMobileCarriers :: !(Maybe [MobileCarrier])
     , _mclrKind           :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -18289,7 +18289,7 @@ mobileCarriersListResponse =
     }
 
 -- | Mobile carrier collection.
-mclrMobileCarriers :: Lens' MobileCarriersListResponse [Maybe MobileCarrier]
+mclrMobileCarriers :: Lens' MobileCarriersListResponse [MobileCarrier]
 mclrMobileCarriers
   = lens _mclrMobileCarriers
       (\ s a -> s{_mclrMobileCarriers = a})
@@ -18321,7 +18321,7 @@ instance ToJSON MobileCarriersListResponse where
 --
 -- /See:/ 'landingPagesListResponse' smart constructor.
 data LandingPagesListResponse = LandingPagesListResponse
-    { _lplrLandingPages :: !(Maybe [Maybe LandingPage])
+    { _lplrLandingPages :: !(Maybe [LandingPage])
     , _lplrKind         :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -18341,7 +18341,7 @@ landingPagesListResponse =
     }
 
 -- | Landing page collection
-lplrLandingPages :: Lens' LandingPagesListResponse [Maybe LandingPage]
+lplrLandingPages :: Lens' LandingPagesListResponse [LandingPage]
 lplrLandingPages
   = lens _lplrLandingPages
       (\ s a -> s{_lplrLandingPages = a})
@@ -18379,9 +18379,9 @@ data File = File
     { _filStatus           :: !(Maybe FileStatus)
     , _filEtag             :: !(Maybe Text)
     , _filKind             :: !Text
-    , _filUrls             :: !(Maybe FileURLs)
+    , _filURLs             :: !(Maybe FileURLs)
     , _filReportId         :: !(Maybe Int64)
-    , _filDateRange        :: !(Maybe (Maybe DateRange))
+    , _filDateRange        :: !(Maybe DateRange)
     , _filFormat           :: !(Maybe FileFormat)
     , _filLastModifiedTime :: !(Maybe Int64)
     , _filId               :: !(Maybe Int64)
@@ -18398,7 +18398,7 @@ data File = File
 --
 -- * 'filKind'
 --
--- * 'filUrls'
+-- * 'filURLs'
 --
 -- * 'filReportId'
 --
@@ -18418,7 +18418,7 @@ file =
     { _filStatus = Nothing
     , _filEtag = Nothing
     , _filKind = "dfareporting#file"
-    , _filUrls = Nothing
+    , _filURLs = Nothing
     , _filReportId = Nothing
     , _filDateRange = Nothing
     , _filFormat = Nothing
@@ -18441,8 +18441,8 @@ filKind :: Lens' File Text
 filKind = lens _filKind (\ s a -> s{_filKind = a})
 
 -- | The URLs where the completed report file can be downloaded.
-filUrls :: Lens' File (Maybe FileURLs)
-filUrls = lens _filUrls (\ s a -> s{_filUrls = a})
+filURLs :: Lens' File (Maybe FileURLs)
+filURLs = lens _filURLs (\ s a -> s{_filURLs = a})
 
 -- | The ID of the report this file was generated from.
 filReportId :: Lens' File (Maybe Int64)
@@ -18451,7 +18451,7 @@ filReportId
 
 -- | The date range for which the file has report data. The date range will
 -- always be the absolute date range for which the report is run.
-filDateRange :: Lens' File (Maybe (Maybe DateRange))
+filDateRange :: Lens' File (Maybe DateRange)
 filDateRange
   = lens _filDateRange (\ s a -> s{_filDateRange = a})
 
@@ -18498,7 +18498,7 @@ instance ToJSON File where
               (catMaybes
                  [("status" .=) <$> _filStatus,
                   ("etag" .=) <$> _filEtag, Just ("kind" .= _filKind),
-                  ("urls" .=) <$> _filUrls,
+                  ("urls" .=) <$> _filURLs,
                   ("reportId" .=) <$> _filReportId,
                   ("dateRange" .=) <$> _filDateRange,
                   ("format" .=) <$> _filFormat,
@@ -18511,11 +18511,11 @@ instance ToJSON File where
 -- /See:/ 'reportCrossDimensionReachCriteria' smart constructor.
 data ReportCrossDimensionReachCriteria = ReportCrossDimensionReachCriteria
     { _rcdrcPivoted            :: !(Maybe Bool)
-    , _rcdrcBreakdown          :: !(Maybe [Maybe SortedDimension])
+    , _rcdrcBreakdown          :: !(Maybe [SortedDimension])
     , _rcdrcDimension          :: !(Maybe ReportCrossDimensionReachCriteriaDimension)
     , _rcdrcMetricNames        :: !(Maybe [Text])
-    , _rcdrcDimensionFilters   :: !(Maybe [Maybe DimensionValue])
-    , _rcdrcDateRange          :: !(Maybe (Maybe DateRange))
+    , _rcdrcDimensionFilters   :: !(Maybe [DimensionValue])
+    , _rcdrcDateRange          :: !(Maybe DateRange)
     , _rcdrcOverlapMetricNames :: !(Maybe [Text])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -18555,7 +18555,7 @@ rcdrcPivoted
   = lens _rcdrcPivoted (\ s a -> s{_rcdrcPivoted = a})
 
 -- | The list of dimensions the report should include.
-rcdrcBreakdown :: Lens' ReportCrossDimensionReachCriteria [Maybe SortedDimension]
+rcdrcBreakdown :: Lens' ReportCrossDimensionReachCriteria [SortedDimension]
 rcdrcBreakdown
   = lens _rcdrcBreakdown
       (\ s a -> s{_rcdrcBreakdown = a})
@@ -18577,7 +18577,7 @@ rcdrcMetricNames
       . _Coerce
 
 -- | The list of filters on which dimensions are filtered.
-rcdrcDimensionFilters :: Lens' ReportCrossDimensionReachCriteria [Maybe DimensionValue]
+rcdrcDimensionFilters :: Lens' ReportCrossDimensionReachCriteria [DimensionValue]
 rcdrcDimensionFilters
   = lens _rcdrcDimensionFilters
       (\ s a -> s{_rcdrcDimensionFilters = a})
@@ -18585,7 +18585,7 @@ rcdrcDimensionFilters
       . _Coerce
 
 -- | The date range this report should be run for.
-rcdrcDateRange :: Lens' ReportCrossDimensionReachCriteria (Maybe (Maybe DateRange))
+rcdrcDateRange :: Lens' ReportCrossDimensionReachCriteria (Maybe DateRange)
 rcdrcDateRange
   = lens _rcdrcDateRange
       (\ s a -> s{_rcdrcDateRange = a})
@@ -18719,44 +18719,44 @@ instance ToJSON OrderContact where
 --
 -- /See:/ 'sitesListResponse' smart constructor.
 data SitesListResponse = SitesListResponse
-    { _slrlNextPageToken :: !(Maybe Text)
-    , _slrlKind          :: !Text
-    , _slrlSites         :: !(Maybe [Maybe Site])
+    { _sitNextPageToken :: !(Maybe Text)
+    , _sitKind          :: !Text
+    , _sitSites         :: !(Maybe [Site])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SitesListResponse' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'slrlNextPageToken'
+-- * 'sitNextPageToken'
 --
--- * 'slrlKind'
+-- * 'sitKind'
 --
--- * 'slrlSites'
+-- * 'sitSites'
 sitesListResponse
     :: SitesListResponse
 sitesListResponse =
     SitesListResponse
-    { _slrlNextPageToken = Nothing
-    , _slrlKind = "dfareporting#sitesListResponse"
-    , _slrlSites = Nothing
+    { _sitNextPageToken = Nothing
+    , _sitKind = "dfareporting#sitesListResponse"
+    , _sitSites = Nothing
     }
 
 -- | Pagination token to be used for the next list operation.
-slrlNextPageToken :: Lens' SitesListResponse (Maybe Text)
-slrlNextPageToken
-  = lens _slrlNextPageToken
-      (\ s a -> s{_slrlNextPageToken = a})
+sitNextPageToken :: Lens' SitesListResponse (Maybe Text)
+sitNextPageToken
+  = lens _sitNextPageToken
+      (\ s a -> s{_sitNextPageToken = a})
 
 -- | Identifies what kind of resource this is. Value: the fixed string
 -- \"dfareporting#sitesListResponse\".
-slrlKind :: Lens' SitesListResponse Text
-slrlKind = lens _slrlKind (\ s a -> s{_slrlKind = a})
+sitKind :: Lens' SitesListResponse Text
+sitKind = lens _sitKind (\ s a -> s{_sitKind = a})
 
 -- | Site collection.
-slrlSites :: Lens' SitesListResponse [Maybe Site]
-slrlSites
-  = lens _slrlSites (\ s a -> s{_slrlSites = a}) .
+sitSites :: Lens' SitesListResponse [Site]
+sitSites
+  = lens _sitSites (\ s a -> s{_sitSites = a}) .
       _Default
       . _Coerce
 
@@ -18773,42 +18773,42 @@ instance ToJSON SitesListResponse where
         toJSON SitesListResponse{..}
           = object
               (catMaybes
-                 [("nextPageToken" .=) <$> _slrlNextPageToken,
-                  Just ("kind" .= _slrlKind),
-                  ("sites" .=) <$> _slrlSites])
+                 [("nextPageToken" .=) <$> _sitNextPageToken,
+                  Just ("kind" .= _sitKind),
+                  ("sites" .=) <$> _sitSites])
 
 -- | Third-party Tracking URL.
 --
 -- /See:/ 'thirdPartyTrackingURL' smart constructor.
 data ThirdPartyTrackingURL = ThirdPartyTrackingURL
-    { _tptuUrl               :: !(Maybe Text)
-    , _tptuThirdPartyUrlType :: !(Maybe ThirdPartyTrackingURLThirdPartyURLType)
+    { _tptuURL               :: !(Maybe Text)
+    , _tptuThirdPartyURLType :: !(Maybe ThirdPartyTrackingURLThirdPartyURLType)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ThirdPartyTrackingURL' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tptuUrl'
+-- * 'tptuURL'
 --
--- * 'tptuThirdPartyUrlType'
+-- * 'tptuThirdPartyURLType'
 thirdPartyTrackingURL
     :: ThirdPartyTrackingURL
 thirdPartyTrackingURL =
     ThirdPartyTrackingURL
-    { _tptuUrl = Nothing
-    , _tptuThirdPartyUrlType = Nothing
+    { _tptuURL = Nothing
+    , _tptuThirdPartyURLType = Nothing
     }
 
 -- | URL for the specified third-party URL type.
-tptuUrl :: Lens' ThirdPartyTrackingURL (Maybe Text)
-tptuUrl = lens _tptuUrl (\ s a -> s{_tptuUrl = a})
+tptuURL :: Lens' ThirdPartyTrackingURL (Maybe Text)
+tptuURL = lens _tptuURL (\ s a -> s{_tptuURL = a})
 
 -- | Third-party URL type for in-stream video creatives.
-tptuThirdPartyUrlType :: Lens' ThirdPartyTrackingURL (Maybe ThirdPartyTrackingURLThirdPartyURLType)
-tptuThirdPartyUrlType
-  = lens _tptuThirdPartyUrlType
-      (\ s a -> s{_tptuThirdPartyUrlType = a})
+tptuThirdPartyURLType :: Lens' ThirdPartyTrackingURL (Maybe ThirdPartyTrackingURLThirdPartyURLType)
+tptuThirdPartyURLType
+  = lens _tptuThirdPartyURLType
+      (\ s a -> s{_tptuThirdPartyURLType = a})
 
 instance FromJSON ThirdPartyTrackingURL where
         parseJSON
@@ -18821,8 +18821,8 @@ instance ToJSON ThirdPartyTrackingURL where
         toJSON ThirdPartyTrackingURL{..}
           = object
               (catMaybes
-                 [("url" .=) <$> _tptuUrl,
-                  ("thirdPartyUrlType" .=) <$> _tptuThirdPartyUrlType])
+                 [("url" .=) <$> _tptuURL,
+                  ("thirdPartyUrlType" .=) <$> _tptuThirdPartyURLType])
 
 -- | Contains properties of a placement.
 --
@@ -18831,31 +18831,31 @@ data Placement = Placement
     { _p1Status                         :: !(Maybe PlacementStatus)
     , _p1PlacementStrategyId            :: !(Maybe Int64)
     , _p1TagFormats                     :: !(Maybe [PlacementTagFormats])
-    , _p1SiteIdDimensionValue           :: !(Maybe (Maybe DimensionValue))
-    , _p1PricingSchedule                :: !(Maybe (Maybe PricingSchedule))
-    , _p1Size                           :: !(Maybe (Maybe Size))
+    , _p1SiteIdDimensionValue           :: !(Maybe DimensionValue)
+    , _p1PricingSchedule                :: !(Maybe PricingSchedule)
+    , _p1Size                           :: !(Maybe Size)
     , _p1Kind                           :: !Text
     , _p1KeyName                        :: !(Maybe Text)
-    , _p1CampaignIdDimensionValue       :: !(Maybe (Maybe DimensionValue))
+    , _p1CampaignIdDimensionValue       :: !(Maybe DimensionValue)
     , _p1AdvertiserId                   :: !(Maybe Int64)
-    , _p1AdvertiserIdDimensionValue     :: !(Maybe (Maybe DimensionValue))
+    , _p1AdvertiserIdDimensionValue     :: !(Maybe DimensionValue)
     , _p1CampaignId                     :: !(Maybe Int64)
-    , _p1IdDimensionValue               :: !(Maybe (Maybe DimensionValue))
+    , _p1IdDimensionValue               :: !(Maybe DimensionValue)
     , _p1Primary                        :: !(Maybe Bool)
-    , _p1LookbackConfiguration          :: !(Maybe (Maybe LookbackConfiguration))
-    , _p1TagSetting                     :: !(Maybe (Maybe TagSetting))
+    , _p1LookbackConfiguration          :: !(Maybe LookbackConfiguration)
+    , _p1TagSetting                     :: !(Maybe TagSetting)
     , _p1ContentCategoryId              :: !(Maybe Int64)
-    , _p1DirectorySiteIdDimensionValue  :: !(Maybe (Maybe DimensionValue))
+    , _p1DirectorySiteIdDimensionValue  :: !(Maybe DimensionValue)
     , _p1AccountId                      :: !(Maybe Int64)
     , _p1PaymentSource                  :: !(Maybe PlacementPaymentSource)
     , _p1Name                           :: !(Maybe Text)
     , _p1DirectorySiteId                :: !(Maybe Int64)
-    , _p1CreateInfo                     :: !(Maybe (Maybe LastModifiedInfo))
-    , _p1LastModifiedInfo               :: !(Maybe (Maybe LastModifiedInfo))
+    , _p1CreateInfo                     :: !(Maybe LastModifiedInfo)
+    , _p1LastModifiedInfo               :: !(Maybe LastModifiedInfo)
     , _p1Id                             :: !(Maybe Int64)
-    , _p1SslRequired                    :: !(Maybe Bool)
-    , _p1SubaccountId                   :: !(Maybe Int64)
-    , _p1PlacementGroupIdDimensionValue :: !(Maybe (Maybe DimensionValue))
+    , _p1SSLRequired                    :: !(Maybe Bool)
+    , _p1SubAccountId                   :: !(Maybe Int64)
+    , _p1PlacementGroupIdDimensionValue :: !(Maybe DimensionValue)
     , _p1ExternalId                     :: !(Maybe Text)
     , _p1PlacementGroupId               :: !(Maybe Int64)
     , _p1Comment                        :: !(Maybe Text)
@@ -18863,7 +18863,7 @@ data Placement = Placement
     , _p1Compatibility                  :: !(Maybe PlacementCompatibility)
     , _p1Archived                       :: !(Maybe Bool)
     , _p1PaymentApproved                :: !(Maybe Bool)
-    , _p1PublisherUpdateInfo            :: !(Maybe (Maybe LastModifiedInfo))
+    , _p1PublisherUpdateInfo            :: !(Maybe LastModifiedInfo)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Placement' with the minimum fields required to make a request.
@@ -18920,9 +18920,9 @@ data Placement = Placement
 --
 -- * 'p1Id'
 --
--- * 'p1SslRequired'
+-- * 'p1SSLRequired'
 --
--- * 'p1SubaccountId'
+-- * 'p1SubAccountId'
 --
 -- * 'p1PlacementGroupIdDimensionValue'
 --
@@ -18970,8 +18970,8 @@ placement =
     , _p1CreateInfo = Nothing
     , _p1LastModifiedInfo = Nothing
     , _p1Id = Nothing
-    , _p1SslRequired = Nothing
-    , _p1SubaccountId = Nothing
+    , _p1SSLRequired = Nothing
+    , _p1SubAccountId = Nothing
     , _p1PlacementGroupIdDimensionValue = Nothing
     , _p1ExternalId = Nothing
     , _p1PlacementGroupId = Nothing
@@ -19012,14 +19012,14 @@ p1TagFormats
 
 -- | Dimension value for the ID of the site. This is a read-only,
 -- auto-generated field.
-p1SiteIdDimensionValue :: Lens' Placement (Maybe (Maybe DimensionValue))
+p1SiteIdDimensionValue :: Lens' Placement (Maybe DimensionValue)
 p1SiteIdDimensionValue
   = lens _p1SiteIdDimensionValue
       (\ s a -> s{_p1SiteIdDimensionValue = a})
 
 -- | Pricing schedule of this placement. This field is required on insertion,
 -- specifically subfields startDate, endDate and pricingType.
-p1PricingSchedule :: Lens' Placement (Maybe (Maybe PricingSchedule))
+p1PricingSchedule :: Lens' Placement (Maybe PricingSchedule)
 p1PricingSchedule
   = lens _p1PricingSchedule
       (\ s a -> s{_p1PricingSchedule = a})
@@ -19027,7 +19027,7 @@ p1PricingSchedule
 -- | Size associated with this placement. When inserting or updating a
 -- placement, only the size ID field is used. This field is required on
 -- insertion.
-p1Size :: Lens' Placement (Maybe (Maybe Size))
+p1Size :: Lens' Placement (Maybe Size)
 p1Size = lens _p1Size (\ s a -> s{_p1Size = a})
 
 -- | Identifies what kind of resource this is. Value: the fixed string
@@ -19042,7 +19042,7 @@ p1KeyName
 
 -- | Dimension value for the ID of the campaign. This is a read-only,
 -- auto-generated field.
-p1CampaignIdDimensionValue :: Lens' Placement (Maybe (Maybe DimensionValue))
+p1CampaignIdDimensionValue :: Lens' Placement (Maybe DimensionValue)
 p1CampaignIdDimensionValue
   = lens _p1CampaignIdDimensionValue
       (\ s a -> s{_p1CampaignIdDimensionValue = a})
@@ -19055,7 +19055,7 @@ p1AdvertiserId
 
 -- | Dimension value for the ID of the advertiser. This is a read-only,
 -- auto-generated field.
-p1AdvertiserIdDimensionValue :: Lens' Placement (Maybe (Maybe DimensionValue))
+p1AdvertiserIdDimensionValue :: Lens' Placement (Maybe DimensionValue)
 p1AdvertiserIdDimensionValue
   = lens _p1AdvertiserIdDimensionValue
       (\ s a -> s{_p1AdvertiserIdDimensionValue = a})
@@ -19068,7 +19068,7 @@ p1CampaignId
 
 -- | Dimension value for the ID of this placement. This is a read-only,
 -- auto-generated field.
-p1IdDimensionValue :: Lens' Placement (Maybe (Maybe DimensionValue))
+p1IdDimensionValue :: Lens' Placement (Maybe DimensionValue)
 p1IdDimensionValue
   = lens _p1IdDimensionValue
       (\ s a -> s{_p1IdDimensionValue = a})
@@ -19084,13 +19084,13 @@ p1Primary
   = lens _p1Primary (\ s a -> s{_p1Primary = a})
 
 -- | Lookback window settings for this placement.
-p1LookbackConfiguration :: Lens' Placement (Maybe (Maybe LookbackConfiguration))
+p1LookbackConfiguration :: Lens' Placement (Maybe LookbackConfiguration)
 p1LookbackConfiguration
   = lens _p1LookbackConfiguration
       (\ s a -> s{_p1LookbackConfiguration = a})
 
 -- | Tag settings for this placement.
-p1TagSetting :: Lens' Placement (Maybe (Maybe TagSetting))
+p1TagSetting :: Lens' Placement (Maybe TagSetting)
 p1TagSetting
   = lens _p1TagSetting (\ s a -> s{_p1TagSetting = a})
 
@@ -19102,7 +19102,7 @@ p1ContentCategoryId
 
 -- | Dimension value for the ID of the directory site. This is a read-only,
 -- auto-generated field.
-p1DirectorySiteIdDimensionValue :: Lens' Placement (Maybe (Maybe DimensionValue))
+p1DirectorySiteIdDimensionValue :: Lens' Placement (Maybe DimensionValue)
 p1DirectorySiteIdDimensionValue
   = lens _p1DirectorySiteIdDimensionValue
       (\ s a -> s{_p1DirectorySiteIdDimensionValue = a})
@@ -19134,13 +19134,13 @@ p1DirectorySiteId
 
 -- | Information about the creation of this placement. This is a read-only
 -- field.
-p1CreateInfo :: Lens' Placement (Maybe (Maybe LastModifiedInfo))
+p1CreateInfo :: Lens' Placement (Maybe LastModifiedInfo)
 p1CreateInfo
   = lens _p1CreateInfo (\ s a -> s{_p1CreateInfo = a})
 
 -- | Information about the most recent modification of this placement. This
 -- is a read-only field.
-p1LastModifiedInfo :: Lens' Placement (Maybe (Maybe LastModifiedInfo))
+p1LastModifiedInfo :: Lens' Placement (Maybe LastModifiedInfo)
 p1LastModifiedInfo
   = lens _p1LastModifiedInfo
       (\ s a -> s{_p1LastModifiedInfo = a})
@@ -19150,20 +19150,20 @@ p1Id :: Lens' Placement (Maybe Int64)
 p1Id = lens _p1Id (\ s a -> s{_p1Id = a})
 
 -- | Whether creatives assigned to this placement must be SSL-compliant.
-p1SslRequired :: Lens' Placement (Maybe Bool)
-p1SslRequired
-  = lens _p1SslRequired
-      (\ s a -> s{_p1SslRequired = a})
+p1SSLRequired :: Lens' Placement (Maybe Bool)
+p1SSLRequired
+  = lens _p1SSLRequired
+      (\ s a -> s{_p1SSLRequired = a})
 
 -- | Subaccount ID of this placement. This field can be left blank.
-p1SubaccountId :: Lens' Placement (Maybe Int64)
-p1SubaccountId
-  = lens _p1SubaccountId
-      (\ s a -> s{_p1SubaccountId = a})
+p1SubAccountId :: Lens' Placement (Maybe Int64)
+p1SubAccountId
+  = lens _p1SubAccountId
+      (\ s a -> s{_p1SubAccountId = a})
 
 -- | Dimension value for the ID of the placement group. This is a read-only,
 -- auto-generated field.
-p1PlacementGroupIdDimensionValue :: Lens' Placement (Maybe (Maybe DimensionValue))
+p1PlacementGroupIdDimensionValue :: Lens' Placement (Maybe DimensionValue)
 p1PlacementGroupIdDimensionValue
   = lens _p1PlacementGroupIdDimensionValue
       (\ s a -> s{_p1PlacementGroupIdDimensionValue = a})
@@ -19214,7 +19214,7 @@ p1PaymentApproved
       (\ s a -> s{_p1PaymentApproved = a})
 
 -- | Information about the last publisher update. This is a read-only field.
-p1PublisherUpdateInfo :: Lens' Placement (Maybe (Maybe LastModifiedInfo))
+p1PublisherUpdateInfo :: Lens' Placement (Maybe LastModifiedInfo)
 p1PublisherUpdateInfo
   = lens _p1PublisherUpdateInfo
       (\ s a -> s{_p1PublisherUpdateInfo = a})
@@ -19294,8 +19294,8 @@ instance ToJSON Placement where
                   ("createInfo" .=) <$> _p1CreateInfo,
                   ("lastModifiedInfo" .=) <$> _p1LastModifiedInfo,
                   ("id" .=) <$> _p1Id,
-                  ("sslRequired" .=) <$> _p1SslRequired,
-                  ("subaccountId" .=) <$> _p1SubaccountId,
+                  ("sslRequired" .=) <$> _p1SSLRequired,
+                  ("subaccountId" .=) <$> _p1SubAccountId,
                   ("placementGroupIdDimensionValue" .=) <$>
                     _p1PlacementGroupIdDimensionValue,
                   ("externalId" .=) <$> _p1ExternalId,
@@ -19468,11 +19468,11 @@ data OrderDocument = OrderDocument
     , _odId                       :: !(Maybe Int64)
     , _odProjectId                :: !(Maybe Int64)
     , _odTitle                    :: !(Maybe Text)
-    , _odSubaccountId             :: !(Maybe Int64)
+    , _odSubAccountId             :: !(Maybe Int64)
     , _odType                     :: !(Maybe OrderDocumentType)
     , _odOrderId                  :: !(Maybe Int64)
     , _odCancelled                :: !(Maybe Bool)
-    , _odCreatedInfo              :: !(Maybe (Maybe LastModifiedInfo))
+    , _odCreatedInfo              :: !(Maybe LastModifiedInfo)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OrderDocument' with the minimum fields required to make a request.
@@ -19503,7 +19503,7 @@ data OrderDocument = OrderDocument
 --
 -- * 'odTitle'
 --
--- * 'odSubaccountId'
+-- * 'odSubAccountId'
 --
 -- * 'odType'
 --
@@ -19528,7 +19528,7 @@ orderDocument =
     , _odId = Nothing
     , _odProjectId = Nothing
     , _odTitle = Nothing
-    , _odSubaccountId = Nothing
+    , _odSubAccountId = Nothing
     , _odType = Nothing
     , _odOrderId = Nothing
     , _odCancelled = Nothing
@@ -19605,10 +19605,10 @@ odTitle :: Lens' OrderDocument (Maybe Text)
 odTitle = lens _odTitle (\ s a -> s{_odTitle = a})
 
 -- | Subaccount ID of this order document.
-odSubaccountId :: Lens' OrderDocument (Maybe Int64)
-odSubaccountId
-  = lens _odSubaccountId
-      (\ s a -> s{_odSubaccountId = a})
+odSubAccountId :: Lens' OrderDocument (Maybe Int64)
+odSubAccountId
+  = lens _odSubAccountId
+      (\ s a -> s{_odSubAccountId = a})
 
 -- | Type of this order document
 odType :: Lens' OrderDocument (Maybe OrderDocumentType)
@@ -19625,7 +19625,7 @@ odCancelled
   = lens _odCancelled (\ s a -> s{_odCancelled = a})
 
 -- | Information about the creation of this order document.
-odCreatedInfo :: Lens' OrderDocument (Maybe (Maybe LastModifiedInfo))
+odCreatedInfo :: Lens' OrderDocument (Maybe LastModifiedInfo)
 odCreatedInfo
   = lens _odCreatedInfo
       (\ s a -> s{_odCreatedInfo = a})
@@ -19671,7 +19671,7 @@ instance ToJSON OrderDocument where
                   ("id" .=) <$> _odId,
                   ("projectId" .=) <$> _odProjectId,
                   ("title" .=) <$> _odTitle,
-                  ("subaccountId" .=) <$> _odSubaccountId,
+                  ("subaccountId" .=) <$> _odSubAccountId,
                   ("type" .=) <$> _odType,
                   ("orderId" .=) <$> _odOrderId,
                   ("cancelled" .=) <$> _odCancelled,
@@ -19802,11 +19802,11 @@ instance ToJSON AdSlot where
 data CreativeField = CreativeField
     { _cffKind                       :: !Text
     , _cffAdvertiserId               :: !(Maybe Int64)
-    , _cffAdvertiserIdDimensionValue :: !(Maybe (Maybe DimensionValue))
+    , _cffAdvertiserIdDimensionValue :: !(Maybe DimensionValue)
     , _cffAccountId                  :: !(Maybe Int64)
     , _cffName                       :: !(Maybe Text)
     , _cffId                         :: !(Maybe Int64)
-    , _cffSubaccountId               :: !(Maybe Int64)
+    , _cffSubAccountId               :: !(Maybe Int64)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeField' with the minimum fields required to make a request.
@@ -19825,7 +19825,7 @@ data CreativeField = CreativeField
 --
 -- * 'cffId'
 --
--- * 'cffSubaccountId'
+-- * 'cffSubAccountId'
 creativeField
     :: CreativeField
 creativeField =
@@ -19836,7 +19836,7 @@ creativeField =
     , _cffAccountId = Nothing
     , _cffName = Nothing
     , _cffId = Nothing
-    , _cffSubaccountId = Nothing
+    , _cffSubAccountId = Nothing
     }
 
 -- | Identifies what kind of resource this is. Value: the fixed string
@@ -19853,7 +19853,7 @@ cffAdvertiserId
 
 -- | Dimension value for the ID of the advertiser. This is a read-only,
 -- auto-generated field.
-cffAdvertiserIdDimensionValue :: Lens' CreativeField (Maybe (Maybe DimensionValue))
+cffAdvertiserIdDimensionValue :: Lens' CreativeField (Maybe DimensionValue)
 cffAdvertiserIdDimensionValue
   = lens _cffAdvertiserIdDimensionValue
       (\ s a -> s{_cffAdvertiserIdDimensionValue = a})
@@ -19876,10 +19876,10 @@ cffId = lens _cffId (\ s a -> s{_cffId = a})
 
 -- | Subaccount ID of this creative field. This is a read-only field that can
 -- be left blank.
-cffSubaccountId :: Lens' CreativeField (Maybe Int64)
-cffSubaccountId
-  = lens _cffSubaccountId
-      (\ s a -> s{_cffSubaccountId = a})
+cffSubAccountId :: Lens' CreativeField (Maybe Int64)
+cffSubAccountId
+  = lens _cffSubAccountId
+      (\ s a -> s{_cffSubAccountId = a})
 
 instance FromJSON CreativeField where
         parseJSON
@@ -19904,7 +19904,7 @@ instance ToJSON CreativeField where
                     _cffAdvertiserIdDimensionValue,
                   ("accountId" .=) <$> _cffAccountId,
                   ("name" .=) <$> _cffName, ("id" .=) <$> _cffId,
-                  ("subaccountId" .=) <$> _cffSubaccountId])
+                  ("subaccountId" .=) <$> _cffSubAccountId])
 
 -- | Properties of inheriting and overriding the default click-through event
 -- tag. A campaign may override the event tag defined at the advertiser

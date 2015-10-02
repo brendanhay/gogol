@@ -93,21 +93,21 @@ library
         , Network.Google.Resource.Analytics.Management.Uploads.Get
         , Network.Google.Resource.Analytics.Management.Uploads.List
         , Network.Google.Resource.Analytics.Management.Uploads.UploadData
+        , Network.Google.Resource.Analytics.Management.WebProperties.Get
+        , Network.Google.Resource.Analytics.Management.WebProperties.Insert
+        , Network.Google.Resource.Analytics.Management.WebProperties.List
+        , Network.Google.Resource.Analytics.Management.WebProperties.Patch
+        , Network.Google.Resource.Analytics.Management.WebProperties.Update
         , Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Delete
         , Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Get
         , Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Insert
         , Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.List
         , Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Patch
         , Network.Google.Resource.Analytics.Management.WebPropertyAdWordsLinks.Update
-        , Network.Google.Resource.Analytics.Management.Webproperties.Get
-        , Network.Google.Resource.Analytics.Management.Webproperties.Insert
-        , Network.Google.Resource.Analytics.Management.Webproperties.List
-        , Network.Google.Resource.Analytics.Management.Webproperties.Patch
-        , Network.Google.Resource.Analytics.Management.Webproperties.Update
-        , Network.Google.Resource.Analytics.Management.WebpropertyUserLinks.Delete
-        , Network.Google.Resource.Analytics.Management.WebpropertyUserLinks.Insert
-        , Network.Google.Resource.Analytics.Management.WebpropertyUserLinks.List
-        , Network.Google.Resource.Analytics.Management.WebpropertyUserLinks.Update
+        , Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.Delete
+        , Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.Insert
+        , Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.List
+        , Network.Google.Resource.Analytics.Management.WebPropertyUserLinks.Update
         , Network.Google.Resource.Analytics.Metadata.Columns.List
         , Network.Google.Resource.Analytics.Provisioning.CreateAccountTicket
 

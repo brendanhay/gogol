@@ -33,17 +33,16 @@ module Network.Google.Resource.Storage.Objects.List
     , olQuotaUser
     , olPrettyPrint
     , olPrefix
-    , olUserIp
+    , olUserIP
     , olBucket
     , olVersions
     , olKey
     , olProjection
     , olPageToken
-    , olOauthToken
+    , olOAuthToken
     , olDelimiter
     , olMaxResults
     , olFields
-    , olAlt
     ) where
 
 import           Network.Google.Prelude
@@ -60,15 +59,16 @@ type ObjectsListResource =
                QueryParam "prefix" Text :>
                  QueryParam "userIp" Text :>
                    QueryParam "versions" Bool :>
-                     QueryParam "key" Text :>
+                     QueryParam "key" Key :>
                        QueryParam "projection" StorageObjectsListProjection
                          :>
                          QueryParam "pageToken" Text :>
-                           QueryParam "oauth_token" Text :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "delimiter" Text :>
                                QueryParam "maxResults" Word32 :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "alt" Alt :> Get '[JSON] Objects
+                                   QueryParam "alt" AltJSON :>
+                                     Get '[JSON] Objects
 
 -- | Retrieves a list of objects matching the criteria.
 --
@@ -77,17 +77,16 @@ data ObjectsList' = ObjectsList'
     { _olQuotaUser   :: !(Maybe Text)
     , _olPrettyPrint :: !Bool
     , _olPrefix      :: !(Maybe Text)
-    , _olUserIp      :: !(Maybe Text)
+    , _olUserIP      :: !(Maybe Text)
     , _olBucket      :: !Text
     , _olVersions    :: !(Maybe Bool)
-    , _olKey         :: !(Maybe Text)
+    , _olKey         :: !(Maybe Key)
     , _olProjection  :: !(Maybe StorageObjectsListProjection)
     , _olPageToken   :: !(Maybe Text)
-    , _olOauthToken  :: !(Maybe Text)
+    , _olOAuthToken  :: !(Maybe OAuthToken)
     , _olDelimiter   :: !(Maybe Text)
     , _olMaxResults  :: !(Maybe Word32)
     , _olFields      :: !(Maybe Text)
-    , _olAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectsList'' with the minimum fields required to make a request.
@@ -100,7 +99,7 @@ data ObjectsList' = ObjectsList'
 --
 -- * 'olPrefix'
 --
--- * 'olUserIp'
+-- * 'olUserIP'
 --
 -- * 'olBucket'
 --
@@ -112,15 +111,13 @@ data ObjectsList' = ObjectsList'
 --
 -- * 'olPageToken'
 --
--- * 'olOauthToken'
+-- * 'olOAuthToken'
 --
 -- * 'olDelimiter'
 --
 -- * 'olMaxResults'
 --
 -- * 'olFields'
---
--- * 'olAlt'
 objectsList'
     :: Text -- ^ 'bucket'
     -> ObjectsList'
@@ -129,17 +126,16 @@ objectsList' pOlBucket_ =
     { _olQuotaUser = Nothing
     , _olPrettyPrint = True
     , _olPrefix = Nothing
-    , _olUserIp = Nothing
+    , _olUserIP = Nothing
     , _olBucket = pOlBucket_
     , _olVersions = Nothing
     , _olKey = Nothing
     , _olProjection = Nothing
     , _olPageToken = Nothing
-    , _olOauthToken = Nothing
+    , _olOAuthToken = Nothing
     , _olDelimiter = Nothing
     , _olMaxResults = Nothing
     , _olFields = Nothing
-    , _olAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -161,8 +157,8 @@ olPrefix = lens _olPrefix (\ s a -> s{_olPrefix = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-olUserIp :: Lens' ObjectsList' (Maybe Text)
-olUserIp = lens _olUserIp (\ s a -> s{_olUserIp = a})
+olUserIP :: Lens' ObjectsList' (Maybe Text)
+olUserIP = lens _olUserIP (\ s a -> s{_olUserIP = a})
 
 -- | Name of the bucket in which to look for objects.
 olBucket :: Lens' ObjectsList' Text
@@ -176,7 +172,7 @@ olVersions
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-olKey :: Lens' ObjectsList' (Maybe Text)
+olKey :: Lens' ObjectsList' (Maybe Key)
 olKey = lens _olKey (\ s a -> s{_olKey = a})
 
 -- | Set of properties to return. Defaults to noAcl.
@@ -191,9 +187,9 @@ olPageToken
   = lens _olPageToken (\ s a -> s{_olPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-olOauthToken :: Lens' ObjectsList' (Maybe Text)
-olOauthToken
-  = lens _olOauthToken (\ s a -> s{_olOauthToken = a})
+olOAuthToken :: Lens' ObjectsList' (Maybe OAuthToken)
+olOAuthToken
+  = lens _olOAuthToken (\ s a -> s{_olOAuthToken = a})
 
 -- | Returns results in a directory-like mode. items will contain only
 -- objects whose names, aside from the prefix, do not contain delimiter.
@@ -214,26 +210,26 @@ olMaxResults
 olFields :: Lens' ObjectsList' (Maybe Text)
 olFields = lens _olFields (\ s a -> s{_olFields = a})
 
--- | Data format for the response.
-olAlt :: Lens' ObjectsList' Alt
-olAlt = lens _olAlt (\ s a -> s{_olAlt = a})
+instance GoogleAuth ObjectsList' where
+        authKey = olKey . _Just
+        authToken = olOAuthToken . _Just
 
 instance GoogleRequest ObjectsList' where
         type Rs ObjectsList' = Objects
         request = requestWithRoute defReq storageURL
         requestWithRoute r u ObjectsList'{..}
           = go _olQuotaUser (Just _olPrettyPrint) _olPrefix
-              _olUserIp
+              _olUserIP
               _olBucket
               _olVersions
               _olKey
               _olProjection
               _olPageToken
-              _olOauthToken
+              _olOAuthToken
               _olDelimiter
               _olMaxResults
               _olFields
-              (Just _olAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ObjectsListResource)

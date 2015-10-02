@@ -32,13 +32,12 @@ module Network.Google.Resource.DFAReporting.PlacementStrategies.Delete
     -- * Request Lenses
     , psdQuotaUser
     , psdPrettyPrint
-    , psdUserIp
+    , psdUserIP
     , psdProfileId
     , psdKey
     , psdId
-    , psdOauthToken
+    , psdOAuthToken
     , psdFields
-    , psdAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,10 +53,10 @@ type PlacementStrategiesDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Delete '[JSON] ()
+                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes an existing placement strategy.
 --
@@ -65,13 +64,12 @@ type PlacementStrategiesDeleteResource =
 data PlacementStrategiesDelete' = PlacementStrategiesDelete'
     { _psdQuotaUser   :: !(Maybe Text)
     , _psdPrettyPrint :: !Bool
-    , _psdUserIp      :: !(Maybe Text)
+    , _psdUserIP      :: !(Maybe Text)
     , _psdProfileId   :: !Int64
-    , _psdKey         :: !(Maybe Text)
+    , _psdKey         :: !(Maybe Key)
     , _psdId          :: !Int64
-    , _psdOauthToken  :: !(Maybe Text)
+    , _psdOAuthToken  :: !(Maybe OAuthToken)
     , _psdFields      :: !(Maybe Text)
-    , _psdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlacementStrategiesDelete'' with the minimum fields required to make a request.
@@ -82,7 +80,7 @@ data PlacementStrategiesDelete' = PlacementStrategiesDelete'
 --
 -- * 'psdPrettyPrint'
 --
--- * 'psdUserIp'
+-- * 'psdUserIP'
 --
 -- * 'psdProfileId'
 --
@@ -90,11 +88,9 @@ data PlacementStrategiesDelete' = PlacementStrategiesDelete'
 --
 -- * 'psdId'
 --
--- * 'psdOauthToken'
+-- * 'psdOAuthToken'
 --
 -- * 'psdFields'
---
--- * 'psdAlt'
 placementStrategiesDelete'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
@@ -103,13 +99,12 @@ placementStrategiesDelete' pPsdProfileId_ pPsdId_ =
     PlacementStrategiesDelete'
     { _psdQuotaUser = Nothing
     , _psdPrettyPrint = True
-    , _psdUserIp = Nothing
+    , _psdUserIP = Nothing
     , _psdProfileId = pPsdProfileId_
     , _psdKey = Nothing
     , _psdId = pPsdId_
-    , _psdOauthToken = Nothing
+    , _psdOAuthToken = Nothing
     , _psdFields = Nothing
-    , _psdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,9 +122,9 @@ psdPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-psdUserIp :: Lens' PlacementStrategiesDelete' (Maybe Text)
-psdUserIp
-  = lens _psdUserIp (\ s a -> s{_psdUserIp = a})
+psdUserIP :: Lens' PlacementStrategiesDelete' (Maybe Text)
+psdUserIP
+  = lens _psdUserIP (\ s a -> s{_psdUserIP = a})
 
 -- | User profile ID associated with this request.
 psdProfileId :: Lens' PlacementStrategiesDelete' Int64
@@ -139,7 +134,7 @@ psdProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-psdKey :: Lens' PlacementStrategiesDelete' (Maybe Text)
+psdKey :: Lens' PlacementStrategiesDelete' (Maybe Key)
 psdKey = lens _psdKey (\ s a -> s{_psdKey = a})
 
 -- | Placement strategy ID.
@@ -147,32 +142,32 @@ psdId :: Lens' PlacementStrategiesDelete' Int64
 psdId = lens _psdId (\ s a -> s{_psdId = a})
 
 -- | OAuth 2.0 token for the current user.
-psdOauthToken :: Lens' PlacementStrategiesDelete' (Maybe Text)
-psdOauthToken
-  = lens _psdOauthToken
-      (\ s a -> s{_psdOauthToken = a})
+psdOAuthToken :: Lens' PlacementStrategiesDelete' (Maybe OAuthToken)
+psdOAuthToken
+  = lens _psdOAuthToken
+      (\ s a -> s{_psdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 psdFields :: Lens' PlacementStrategiesDelete' (Maybe Text)
 psdFields
   = lens _psdFields (\ s a -> s{_psdFields = a})
 
--- | Data format for the response.
-psdAlt :: Lens' PlacementStrategiesDelete' Alt
-psdAlt = lens _psdAlt (\ s a -> s{_psdAlt = a})
+instance GoogleAuth PlacementStrategiesDelete' where
+        authKey = psdKey . _Just
+        authToken = psdOAuthToken . _Just
 
 instance GoogleRequest PlacementStrategiesDelete'
          where
         type Rs PlacementStrategiesDelete' = ()
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PlacementStrategiesDelete'{..}
-          = go _psdQuotaUser (Just _psdPrettyPrint) _psdUserIp
+          = go _psdQuotaUser (Just _psdPrettyPrint) _psdUserIP
               _psdProfileId
               _psdKey
               _psdId
-              _psdOauthToken
+              _psdOAuthToken
               _psdFields
-              (Just _psdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PlacementStrategiesDeleteResource)

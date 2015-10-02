@@ -32,12 +32,12 @@ module Network.Google.Resource.Mirror.Contacts.Update
     -- * Request Lenses
     , cuQuotaUser
     , cuPrettyPrint
-    , cuUserIp
+    , cuContact
+    , cuUserIP
     , cuKey
     , cuId
-    , cuOauthToken
+    , cuOAuthToken
     , cuFields
-    , cuAlt
     ) where
 
 import           Network.Google.Mirror.Types
@@ -51,10 +51,11 @@ type ContactsUpdateResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Put '[JSON] Contact
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] Contact :> Put '[JSON] Contact
 
 -- | Updates a contact in place.
 --
@@ -62,12 +63,12 @@ type ContactsUpdateResource =
 data ContactsUpdate' = ContactsUpdate'
     { _cuQuotaUser   :: !(Maybe Text)
     , _cuPrettyPrint :: !Bool
-    , _cuUserIp      :: !(Maybe Text)
-    , _cuKey         :: !(Maybe Text)
+    , _cuContact     :: !Contact
+    , _cuUserIP      :: !(Maybe Text)
+    , _cuKey         :: !(Maybe Key)
     , _cuId          :: !Text
-    , _cuOauthToken  :: !(Maybe Text)
+    , _cuOAuthToken  :: !(Maybe OAuthToken)
     , _cuFields      :: !(Maybe Text)
-    , _cuAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContactsUpdate'' with the minimum fields required to make a request.
@@ -78,30 +79,31 @@ data ContactsUpdate' = ContactsUpdate'
 --
 -- * 'cuPrettyPrint'
 --
--- * 'cuUserIp'
+-- * 'cuContact'
+--
+-- * 'cuUserIP'
 --
 -- * 'cuKey'
 --
 -- * 'cuId'
 --
--- * 'cuOauthToken'
+-- * 'cuOAuthToken'
 --
 -- * 'cuFields'
---
--- * 'cuAlt'
 contactsUpdate'
-    :: Text -- ^ 'id'
+    :: Contact -- ^ 'Contact'
+    -> Text -- ^ 'id'
     -> ContactsUpdate'
-contactsUpdate' pCuId_ =
+contactsUpdate' pCuContact_ pCuId_ =
     ContactsUpdate'
     { _cuQuotaUser = Nothing
     , _cuPrettyPrint = True
-    , _cuUserIp = Nothing
+    , _cuContact = pCuContact_
+    , _cuUserIP = Nothing
     , _cuKey = Nothing
     , _cuId = pCuId_
-    , _cuOauthToken = Nothing
+    , _cuOAuthToken = Nothing
     , _cuFields = Nothing
-    , _cuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -117,15 +119,20 @@ cuPrettyPrint
   = lens _cuPrettyPrint
       (\ s a -> s{_cuPrettyPrint = a})
 
+-- | Multipart request metadata.
+cuContact :: Lens' ContactsUpdate' Contact
+cuContact
+  = lens _cuContact (\ s a -> s{_cuContact = a})
+
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cuUserIp :: Lens' ContactsUpdate' (Maybe Text)
-cuUserIp = lens _cuUserIp (\ s a -> s{_cuUserIp = a})
+cuUserIP :: Lens' ContactsUpdate' (Maybe Text)
+cuUserIP = lens _cuUserIP (\ s a -> s{_cuUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cuKey :: Lens' ContactsUpdate' (Maybe Text)
+cuKey :: Lens' ContactsUpdate' (Maybe Key)
 cuKey = lens _cuKey (\ s a -> s{_cuKey = a})
 
 -- | The ID of the contact.
@@ -133,28 +140,29 @@ cuId :: Lens' ContactsUpdate' Text
 cuId = lens _cuId (\ s a -> s{_cuId = a})
 
 -- | OAuth 2.0 token for the current user.
-cuOauthToken :: Lens' ContactsUpdate' (Maybe Text)
-cuOauthToken
-  = lens _cuOauthToken (\ s a -> s{_cuOauthToken = a})
+cuOAuthToken :: Lens' ContactsUpdate' (Maybe OAuthToken)
+cuOAuthToken
+  = lens _cuOAuthToken (\ s a -> s{_cuOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cuFields :: Lens' ContactsUpdate' (Maybe Text)
 cuFields = lens _cuFields (\ s a -> s{_cuFields = a})
 
--- | Data format for the response.
-cuAlt :: Lens' ContactsUpdate' Alt
-cuAlt = lens _cuAlt (\ s a -> s{_cuAlt = a})
+instance GoogleAuth ContactsUpdate' where
+        authKey = cuKey . _Just
+        authToken = cuOAuthToken . _Just
 
 instance GoogleRequest ContactsUpdate' where
         type Rs ContactsUpdate' = Contact
         request = requestWithRoute defReq mirrorURL
         requestWithRoute r u ContactsUpdate'{..}
-          = go _cuQuotaUser (Just _cuPrettyPrint) _cuUserIp
+          = go _cuQuotaUser (Just _cuPrettyPrint) _cuUserIP
               _cuKey
               _cuId
-              _cuOauthToken
+              _cuOAuthToken
               _cuFields
-              (Just _cuAlt)
+              (Just AltJSON)
+              _cuContact
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ContactsUpdateResource)

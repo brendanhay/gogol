@@ -36,12 +36,11 @@ module Network.Google.Resource.Fitness.Users.DataSources.List
     , udslQuotaUser
     , udslPrettyPrint
     , udslDataTypeName
-    , udslUserIp
+    , udslUserIP
     , udslUserId
     , udslKey
-    , udslOauthToken
+    , udslOAuthToken
     , udslFields
-    , udslAlt
     ) where
 
 import           Network.Google.Fitness.Types
@@ -56,10 +55,10 @@ type UsersDataSourcesListResource =
            QueryParam "prettyPrint" Bool :>
              QueryParams "dataTypeName" Text :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :>
+                       QueryParam "alt" AltJSON :>
                          Get '[JSON] ListDataSourcesResponse
 
 -- | Lists all data sources that are visible to the developer, using the
@@ -72,12 +71,11 @@ data UsersDataSourcesList' = UsersDataSourcesList'
     { _udslQuotaUser    :: !(Maybe Text)
     , _udslPrettyPrint  :: !Bool
     , _udslDataTypeName :: !(Maybe Text)
-    , _udslUserIp       :: !(Maybe Text)
+    , _udslUserIP       :: !(Maybe Text)
     , _udslUserId       :: !Text
-    , _udslKey          :: !(Maybe Text)
-    , _udslOauthToken   :: !(Maybe Text)
+    , _udslKey          :: !(Maybe Key)
+    , _udslOAuthToken   :: !(Maybe OAuthToken)
     , _udslFields       :: !(Maybe Text)
-    , _udslAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDataSourcesList'' with the minimum fields required to make a request.
@@ -90,17 +88,15 @@ data UsersDataSourcesList' = UsersDataSourcesList'
 --
 -- * 'udslDataTypeName'
 --
--- * 'udslUserIp'
+-- * 'udslUserIP'
 --
 -- * 'udslUserId'
 --
 -- * 'udslKey'
 --
--- * 'udslOauthToken'
+-- * 'udslOAuthToken'
 --
 -- * 'udslFields'
---
--- * 'udslAlt'
 usersDataSourcesList'
     :: Text -- ^ 'userId'
     -> UsersDataSourcesList'
@@ -109,12 +105,11 @@ usersDataSourcesList' pUdslUserId_ =
     { _udslQuotaUser = Nothing
     , _udslPrettyPrint = True
     , _udslDataTypeName = Nothing
-    , _udslUserIp = Nothing
+    , _udslUserIP = Nothing
     , _udslUserId = pUdslUserId_
     , _udslKey = Nothing
-    , _udslOauthToken = Nothing
+    , _udslOAuthToken = Nothing
     , _udslFields = Nothing
-    , _udslAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -140,9 +135,9 @@ udslDataTypeName
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-udslUserIp :: Lens' UsersDataSourcesList' (Maybe Text)
-udslUserIp
-  = lens _udslUserIp (\ s a -> s{_udslUserIp = a})
+udslUserIP :: Lens' UsersDataSourcesList' (Maybe Text)
+udslUserIP
+  = lens _udslUserIP (\ s a -> s{_udslUserIP = a})
 
 -- | List data sources for the person identified. Use me to indicate the
 -- authenticated user. Only me is supported at this time.
@@ -153,23 +148,23 @@ udslUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-udslKey :: Lens' UsersDataSourcesList' (Maybe Text)
+udslKey :: Lens' UsersDataSourcesList' (Maybe Key)
 udslKey = lens _udslKey (\ s a -> s{_udslKey = a})
 
 -- | OAuth 2.0 token for the current user.
-udslOauthToken :: Lens' UsersDataSourcesList' (Maybe Text)
-udslOauthToken
-  = lens _udslOauthToken
-      (\ s a -> s{_udslOauthToken = a})
+udslOAuthToken :: Lens' UsersDataSourcesList' (Maybe OAuthToken)
+udslOAuthToken
+  = lens _udslOAuthToken
+      (\ s a -> s{_udslOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 udslFields :: Lens' UsersDataSourcesList' (Maybe Text)
 udslFields
   = lens _udslFields (\ s a -> s{_udslFields = a})
 
--- | Data format for the response.
-udslAlt :: Lens' UsersDataSourcesList' Alt
-udslAlt = lens _udslAlt (\ s a -> s{_udslAlt = a})
+instance GoogleAuth UsersDataSourcesList' where
+        authKey = udslKey . _Just
+        authToken = udslOAuthToken . _Just
 
 instance GoogleRequest UsersDataSourcesList' where
         type Rs UsersDataSourcesList' =
@@ -178,12 +173,12 @@ instance GoogleRequest UsersDataSourcesList' where
         requestWithRoute r u UsersDataSourcesList'{..}
           = go _udslQuotaUser (Just _udslPrettyPrint)
               _udslDataTypeName
-              _udslUserIp
+              _udslUserIP
               _udslUserId
               _udslKey
-              _udslOauthToken
+              _udslOAuthToken
               _udslFields
-              (Just _udslAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersDataSourcesListResource)

@@ -32,13 +32,12 @@ module Network.Google.Resource.DFAReporting.PostalCodes.Get
     -- * Request Lenses
     , pcgQuotaUser
     , pcgPrettyPrint
-    , pcgUserIp
+    , pcgUserIP
     , pcgProfileId
     , pcgKey
     , pcgCode
-    , pcgOauthToken
+    , pcgOAuthToken
     , pcgFields
-    , pcgAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,10 +53,10 @@ type PostalCodesGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] PostalCode
+                         QueryParam "alt" AltJSON :> Get '[JSON] PostalCode
 
 -- | Gets one postal code by ID.
 --
@@ -65,13 +64,12 @@ type PostalCodesGetResource =
 data PostalCodesGet' = PostalCodesGet'
     { _pcgQuotaUser   :: !(Maybe Text)
     , _pcgPrettyPrint :: !Bool
-    , _pcgUserIp      :: !(Maybe Text)
+    , _pcgUserIP      :: !(Maybe Text)
     , _pcgProfileId   :: !Int64
-    , _pcgKey         :: !(Maybe Text)
+    , _pcgKey         :: !(Maybe Key)
     , _pcgCode        :: !Text
-    , _pcgOauthToken  :: !(Maybe Text)
+    , _pcgOAuthToken  :: !(Maybe OAuthToken)
     , _pcgFields      :: !(Maybe Text)
-    , _pcgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostalCodesGet'' with the minimum fields required to make a request.
@@ -82,7 +80,7 @@ data PostalCodesGet' = PostalCodesGet'
 --
 -- * 'pcgPrettyPrint'
 --
--- * 'pcgUserIp'
+-- * 'pcgUserIP'
 --
 -- * 'pcgProfileId'
 --
@@ -90,11 +88,9 @@ data PostalCodesGet' = PostalCodesGet'
 --
 -- * 'pcgCode'
 --
--- * 'pcgOauthToken'
+-- * 'pcgOAuthToken'
 --
 -- * 'pcgFields'
---
--- * 'pcgAlt'
 postalCodesGet'
     :: Int64 -- ^ 'profileId'
     -> Text -- ^ 'code'
@@ -103,13 +99,12 @@ postalCodesGet' pPcgProfileId_ pPcgCode_ =
     PostalCodesGet'
     { _pcgQuotaUser = Nothing
     , _pcgPrettyPrint = True
-    , _pcgUserIp = Nothing
+    , _pcgUserIP = Nothing
     , _pcgProfileId = pPcgProfileId_
     , _pcgKey = Nothing
     , _pcgCode = pPcgCode_
-    , _pcgOauthToken = Nothing
+    , _pcgOAuthToken = Nothing
     , _pcgFields = Nothing
-    , _pcgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,9 +122,9 @@ pcgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-pcgUserIp :: Lens' PostalCodesGet' (Maybe Text)
-pcgUserIp
-  = lens _pcgUserIp (\ s a -> s{_pcgUserIp = a})
+pcgUserIP :: Lens' PostalCodesGet' (Maybe Text)
+pcgUserIP
+  = lens _pcgUserIP (\ s a -> s{_pcgUserIP = a})
 
 -- | User profile ID associated with this request.
 pcgProfileId :: Lens' PostalCodesGet' Int64
@@ -139,7 +134,7 @@ pcgProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pcgKey :: Lens' PostalCodesGet' (Maybe Text)
+pcgKey :: Lens' PostalCodesGet' (Maybe Key)
 pcgKey = lens _pcgKey (\ s a -> s{_pcgKey = a})
 
 -- | Postal code ID.
@@ -147,31 +142,31 @@ pcgCode :: Lens' PostalCodesGet' Text
 pcgCode = lens _pcgCode (\ s a -> s{_pcgCode = a})
 
 -- | OAuth 2.0 token for the current user.
-pcgOauthToken :: Lens' PostalCodesGet' (Maybe Text)
-pcgOauthToken
-  = lens _pcgOauthToken
-      (\ s a -> s{_pcgOauthToken = a})
+pcgOAuthToken :: Lens' PostalCodesGet' (Maybe OAuthToken)
+pcgOAuthToken
+  = lens _pcgOAuthToken
+      (\ s a -> s{_pcgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 pcgFields :: Lens' PostalCodesGet' (Maybe Text)
 pcgFields
   = lens _pcgFields (\ s a -> s{_pcgFields = a})
 
--- | Data format for the response.
-pcgAlt :: Lens' PostalCodesGet' Alt
-pcgAlt = lens _pcgAlt (\ s a -> s{_pcgAlt = a})
+instance GoogleAuth PostalCodesGet' where
+        authKey = pcgKey . _Just
+        authToken = pcgOAuthToken . _Just
 
 instance GoogleRequest PostalCodesGet' where
         type Rs PostalCodesGet' = PostalCode
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u PostalCodesGet'{..}
-          = go _pcgQuotaUser (Just _pcgPrettyPrint) _pcgUserIp
+          = go _pcgQuotaUser (Just _pcgPrettyPrint) _pcgUserIP
               _pcgProfileId
               _pcgKey
               _pcgCode
-              _pcgOauthToken
+              _pcgOAuthToken
               _pcgFields
-              (Just _pcgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PostalCodesGetResource)

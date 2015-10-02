@@ -35,13 +35,14 @@ module Network.Google.Resource.PlusDomains.Media.Insert
     -- * Request Lenses
     , miQuotaUser
     , miPrettyPrint
-    , miUserIp
+    , miUserIP
     , miCollection
     , miUserId
+    , miMedia
+    , miMedia
     , miKey
-    , miOauthToken
+    , miOAuthToken
     , miFields
-    , miAlt
     ) where
 
 import           Network.Google.PlusDomains.Types
@@ -58,10 +59,12 @@ type MediaInsertResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Post '[JSON] Media
+                         QueryParam "alt" AltJSON :>
+                           MultipartRelated '[JSON] Media Body :>
+                             Post '[JSON] Media
 
 -- | Add a new media item to an album. The current upload size limitations
 -- are 36MB for a photo and 1GB for a video. Uploads do not count against
@@ -72,13 +75,14 @@ type MediaInsertResource =
 data MediaInsert' = MediaInsert'
     { _miQuotaUser   :: !(Maybe Text)
     , _miPrettyPrint :: !Bool
-    , _miUserIp      :: !(Maybe Text)
+    , _miUserIP      :: !(Maybe Text)
     , _miCollection  :: !PlusDomainsMediaInsertCollection
     , _miUserId      :: !Text
-    , _miKey         :: !(Maybe Text)
-    , _miOauthToken  :: !(Maybe Text)
+    , _miMedia       :: !Body
+    , _miMedia       :: !Media
+    , _miKey         :: !(Maybe Key)
+    , _miOAuthToken  :: !(Maybe OAuthToken)
     , _miFields      :: !(Maybe Text)
-    , _miAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MediaInsert'' with the minimum fields required to make a request.
@@ -89,34 +93,39 @@ data MediaInsert' = MediaInsert'
 --
 -- * 'miPrettyPrint'
 --
--- * 'miUserIp'
+-- * 'miUserIP'
 --
 -- * 'miCollection'
 --
 -- * 'miUserId'
 --
+-- * 'miMedia'
+--
+-- * 'miMedia'
+--
 -- * 'miKey'
 --
--- * 'miOauthToken'
+-- * 'miOAuthToken'
 --
 -- * 'miFields'
---
--- * 'miAlt'
 mediaInsert'
     :: PlusDomainsMediaInsertCollection -- ^ 'collection'
     -> Text -- ^ 'userId'
+    -> Body -- ^ 'media'
+    -> Media -- ^ 'Media'
     -> MediaInsert'
-mediaInsert' pMiCollection_ pMiUserId_ =
+mediaInsert' pMiCollection_ pMiUserId_ pMiMedia_ pMiMedia_ =
     MediaInsert'
     { _miQuotaUser = Nothing
     , _miPrettyPrint = True
-    , _miUserIp = Nothing
+    , _miUserIP = Nothing
     , _miCollection = pMiCollection_
     , _miUserId = pMiUserId_
+    , _miMedia = pMiMedia_
+    , _miMedia = pMiMedia_
     , _miKey = Nothing
-    , _miOauthToken = Nothing
+    , _miOAuthToken = Nothing
     , _miFields = Nothing
-    , _miAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -134,8 +143,8 @@ miPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-miUserIp :: Lens' MediaInsert' (Maybe Text)
-miUserIp = lens _miUserIp (\ s a -> s{_miUserIp = a})
+miUserIP :: Lens' MediaInsert' (Maybe Text)
+miUserIP = lens _miUserIP (\ s a -> s{_miUserIP = a})
 
 miCollection :: Lens' MediaInsert' PlusDomainsMediaInsertCollection
 miCollection
@@ -145,36 +154,45 @@ miCollection
 miUserId :: Lens' MediaInsert' Text
 miUserId = lens _miUserId (\ s a -> s{_miUserId = a})
 
+miMedia :: Lens' MediaInsert' Body
+miMedia = lens _miMedia (\ s a -> s{_miMedia = a})
+
+-- | Multipart request metadata.
+miMedia :: Lens' MediaInsert' Media
+miMedia = lens _miMedia (\ s a -> s{_miMedia = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-miKey :: Lens' MediaInsert' (Maybe Text)
+miKey :: Lens' MediaInsert' (Maybe Key)
 miKey = lens _miKey (\ s a -> s{_miKey = a})
 
 -- | OAuth 2.0 token for the current user.
-miOauthToken :: Lens' MediaInsert' (Maybe Text)
-miOauthToken
-  = lens _miOauthToken (\ s a -> s{_miOauthToken = a})
+miOAuthToken :: Lens' MediaInsert' (Maybe OAuthToken)
+miOAuthToken
+  = lens _miOAuthToken (\ s a -> s{_miOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 miFields :: Lens' MediaInsert' (Maybe Text)
 miFields = lens _miFields (\ s a -> s{_miFields = a})
 
--- | Data format for the response.
-miAlt :: Lens' MediaInsert' Alt
-miAlt = lens _miAlt (\ s a -> s{_miAlt = a})
+instance GoogleAuth MediaInsert' where
+        authKey = miKey . _Just
+        authToken = miOAuthToken . _Just
 
 instance GoogleRequest MediaInsert' where
         type Rs MediaInsert' = Media
         request = requestWithRoute defReq plusDomainsURL
         requestWithRoute r u MediaInsert'{..}
-          = go _miQuotaUser (Just _miPrettyPrint) _miUserIp
+          = go _miQuotaUser (Just _miPrettyPrint) _miUserIP
               _miCollection
               _miUserId
+              _miMedia
               _miKey
-              _miOauthToken
+              _miOAuthToken
               _miFields
-              (Just _miAlt)
+              (Just AltJSON)
+              _miMedia
           where go
                   = clientWithRoute
                       (Proxy :: Proxy MediaInsertResource)

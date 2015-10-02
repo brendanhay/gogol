@@ -33,12 +33,12 @@ module Network.Google.Resource.Blogger.Pages.Insert
     , piQuotaUser
     , piPrettyPrint
     , piIsDraft
-    , piUserIp
+    , piUserIP
+    , piPage
     , piBlogId
     , piKey
-    , piOauthToken
+    , piOAuthToken
     , piFields
-    , piAlt
     ) where
 
 import           Network.Google.Blogger.Types
@@ -54,10 +54,11 @@ type PagesInsertResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "isDraft" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Post '[JSON] Page
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] Page :> Post '[JSON] Page
 
 -- | Add a page.
 --
@@ -66,12 +67,12 @@ data PagesInsert' = PagesInsert'
     { _piQuotaUser   :: !(Maybe Text)
     , _piPrettyPrint :: !Bool
     , _piIsDraft     :: !(Maybe Bool)
-    , _piUserIp      :: !(Maybe Text)
+    , _piUserIP      :: !(Maybe Text)
+    , _piPage        :: !Page
     , _piBlogId      :: !Text
-    , _piKey         :: !(Maybe Text)
-    , _piOauthToken  :: !(Maybe Text)
+    , _piKey         :: !(Maybe Key)
+    , _piOAuthToken  :: !(Maybe OAuthToken)
     , _piFields      :: !(Maybe Text)
-    , _piAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PagesInsert'' with the minimum fields required to make a request.
@@ -84,31 +85,32 @@ data PagesInsert' = PagesInsert'
 --
 -- * 'piIsDraft'
 --
--- * 'piUserIp'
+-- * 'piUserIP'
+--
+-- * 'piPage'
 --
 -- * 'piBlogId'
 --
 -- * 'piKey'
 --
--- * 'piOauthToken'
+-- * 'piOAuthToken'
 --
 -- * 'piFields'
---
--- * 'piAlt'
 pagesInsert'
-    :: Text -- ^ 'blogId'
+    :: Page -- ^ 'Page'
+    -> Text -- ^ 'blogId'
     -> PagesInsert'
-pagesInsert' pPiBlogId_ =
+pagesInsert' pPiPage_ pPiBlogId_ =
     PagesInsert'
     { _piQuotaUser = Nothing
     , _piPrettyPrint = True
     , _piIsDraft = Nothing
-    , _piUserIp = Nothing
+    , _piUserIP = Nothing
+    , _piPage = pPiPage_
     , _piBlogId = pPiBlogId_
     , _piKey = Nothing
-    , _piOauthToken = Nothing
+    , _piOAuthToken = Nothing
     , _piFields = Nothing
-    , _piAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -131,8 +133,12 @@ piIsDraft
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-piUserIp :: Lens' PagesInsert' (Maybe Text)
-piUserIp = lens _piUserIp (\ s a -> s{_piUserIp = a})
+piUserIP :: Lens' PagesInsert' (Maybe Text)
+piUserIP = lens _piUserIP (\ s a -> s{_piUserIP = a})
+
+-- | Multipart request metadata.
+piPage :: Lens' PagesInsert' Page
+piPage = lens _piPage (\ s a -> s{_piPage = a})
 
 -- | ID of the blog to add the page to.
 piBlogId :: Lens' PagesInsert' Text
@@ -141,33 +147,34 @@ piBlogId = lens _piBlogId (\ s a -> s{_piBlogId = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-piKey :: Lens' PagesInsert' (Maybe Text)
+piKey :: Lens' PagesInsert' (Maybe Key)
 piKey = lens _piKey (\ s a -> s{_piKey = a})
 
 -- | OAuth 2.0 token for the current user.
-piOauthToken :: Lens' PagesInsert' (Maybe Text)
-piOauthToken
-  = lens _piOauthToken (\ s a -> s{_piOauthToken = a})
+piOAuthToken :: Lens' PagesInsert' (Maybe OAuthToken)
+piOAuthToken
+  = lens _piOAuthToken (\ s a -> s{_piOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 piFields :: Lens' PagesInsert' (Maybe Text)
 piFields = lens _piFields (\ s a -> s{_piFields = a})
 
--- | Data format for the response.
-piAlt :: Lens' PagesInsert' Alt
-piAlt = lens _piAlt (\ s a -> s{_piAlt = a})
+instance GoogleAuth PagesInsert' where
+        authKey = piKey . _Just
+        authToken = piOAuthToken . _Just
 
 instance GoogleRequest PagesInsert' where
         type Rs PagesInsert' = Page
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u PagesInsert'{..}
           = go _piQuotaUser (Just _piPrettyPrint) _piIsDraft
-              _piUserIp
+              _piUserIP
               _piBlogId
               _piKey
-              _piOauthToken
+              _piOAuthToken
               _piFields
-              (Just _piAlt)
+              (Just AltJSON)
+              _piPage
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PagesInsertResource)

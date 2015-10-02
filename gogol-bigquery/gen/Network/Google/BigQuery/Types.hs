@@ -45,9 +45,9 @@ module Network.Google.BigQuery.Types
     , JobConfigurationTableCopy
     , jobConfigurationTableCopy
     , jctcDestinationTable
-    , jctcWriteDisposition
+    , jctcWriteDisPosition
     , jctcSourceTables
-    , jctcCreateDisposition
+    , jctcCreateDisPosition
     , jctcSourceTable
 
     -- * TableSchema
@@ -127,8 +127,8 @@ module Network.Google.BigQuery.Types
     , edcSourceFormat
     , edcSchema
     , edcMaxBadRecords
-    , edcSourceUris
-    , edcCsvOptions
+    , edcSourceURIs
+    , edcCSVOptions
 
     -- * GetQueryResultsResponse
     , GetQueryResultsResponse
@@ -156,7 +156,7 @@ module Network.Google.BigQuery.Types
     -- * TableDataInsertAllRequestRows
     , TableDataInsertAllRequestRows
     , tableDataInsertAllRequestRows
-    , tdiarrJson
+    , tdiarrJSON
     , tdiarrInsertId
 
     -- * QueryRequest
@@ -174,7 +174,7 @@ module Network.Google.BigQuery.Types
     -- * JobStatistics4
     , JobStatistics4
     , jobStatistics4
-    , jsDestinationUriFileCounts
+    , jsDestinationURIFileCounts
 
     -- * ProjectReference
     , ProjectReference
@@ -204,18 +204,18 @@ module Network.Google.BigQuery.Types
     , jclSkipLeadingRows
     , jclProjectionFields
     , jclDestinationTable
-    , jclWriteDisposition
+    , jclWriteDisPosition
     , jclAllowJaggedRows
     , jclSchemaInline
     , jclIgnoreUnknownValues
-    , jclCreateDisposition
+    , jclCreateDisPosition
     , jclSchemaInlineFormat
     , jclAllowQuotedNewlines
     , jclSourceFormat
     , jclSchema
     , jclQuote
     , jclMaxBadRecords
-    , jclSourceUris
+    , jclSourceURIs
     , jclEncoding
     , jclFieldDelimiter
 
@@ -267,9 +267,9 @@ module Network.Google.BigQuery.Types
     , JobConfigurationLink
     , jobConfigurationLink
     , jDestinationTable
-    , jWriteDisposition
-    , jCreateDisposition
-    , jSourceUri
+    , jWriteDisPosition
+    , jCreateDisPosition
+    , jSourceURI
 
     -- * JobConfiguration
     , JobConfiguration
@@ -294,8 +294,8 @@ module Network.Google.BigQuery.Types
     , jceSourceTable
     , jcePrintHeader
     , jceCompression
-    , jceDestinationUris
-    , jceDestinationUri
+    , jceDestinationURIs
+    , jceDestinationURI
     , jceFieldDelimiter
 
     -- * JSONObject
@@ -310,12 +310,12 @@ module Network.Google.BigQuery.Types
     , JobConfigurationQuery
     , jobConfigurationQuery
     , jcqDestinationTable
-    , jcqWriteDisposition
+    , jcqWriteDisPosition
     , jcqPriority
     , jcqUseQueryCache
     , jcqPreserveNulls
     , jcqTableDefinitions
-    , jcqCreateDisposition
+    , jcqCreateDisPosition
     , jcqUserDefinedFunctionResources
     , jcqAllowLargeResults
     , jcqQuery
@@ -338,7 +338,7 @@ module Network.Google.BigQuery.Types
     -- * UserDefinedFunctionResource
     , UserDefinedFunctionResource
     , userDefinedFunctionResource
-    , udfrResourceUri
+    , udfrResourceURI
     , udfrInlineCode
 
     -- * ViewDefinition
@@ -446,9 +446,6 @@ module Network.Google.BigQuery.Types
     , qErrors
     , qJobComplete
     , qCacheHit
-
-    -- * Alt
-    , Alt (..)
 
     -- * TableListTables
     , TableListTables

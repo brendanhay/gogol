@@ -43,11 +43,10 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.Delete
     , psdUploadType
     , psdBearerToken
     , psdKey
-    , psdOauthToken
+    , psdOAuthToken
     , psdSubscription
     , psdFields
     , psdCallback
-    , psdAlt
     ) where
 
 import           Network.Google.Prelude
@@ -66,11 +65,12 @@ type ProjectsSubscriptionsDeleteResource =
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
                        QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
                                QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :> Delete '[JSON] Empty
+                                 QueryParam "alt" AltJSON :>
+                                   Delete '[JSON] Empty
 
 -- | Deletes an existing subscription. All pending messages in the
 -- subscription are immediately dropped. Calls to Pull after deletion will
@@ -88,12 +88,11 @@ data ProjectsSubscriptionsDelete' = ProjectsSubscriptionsDelete'
     , _psdAccessToken    :: !(Maybe Text)
     , _psdUploadType     :: !(Maybe Text)
     , _psdBearerToken    :: !(Maybe Text)
-    , _psdKey            :: !(Maybe Text)
-    , _psdOauthToken     :: !(Maybe Text)
+    , _psdKey            :: !(Maybe Key)
+    , _psdOAuthToken     :: !(Maybe OAuthToken)
     , _psdSubscription   :: !Text
     , _psdFields         :: !(Maybe Text)
     , _psdCallback       :: !(Maybe Text)
-    , _psdAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsSubscriptionsDelete'' with the minimum fields required to make a request.
@@ -118,15 +117,13 @@ data ProjectsSubscriptionsDelete' = ProjectsSubscriptionsDelete'
 --
 -- * 'psdKey'
 --
--- * 'psdOauthToken'
+-- * 'psdOAuthToken'
 --
 -- * 'psdSubscription'
 --
 -- * 'psdFields'
 --
 -- * 'psdCallback'
---
--- * 'psdAlt'
 projectsSubscriptionsDelete'
     :: Text -- ^ 'subscription'
     -> ProjectsSubscriptionsDelete'
@@ -141,11 +138,10 @@ projectsSubscriptionsDelete' pPsdSubscription_ =
     , _psdUploadType = Nothing
     , _psdBearerToken = Nothing
     , _psdKey = Nothing
-    , _psdOauthToken = Nothing
+    , _psdOAuthToken = Nothing
     , _psdSubscription = pPsdSubscription_
     , _psdFields = Nothing
     , _psdCallback = Nothing
-    , _psdAlt = "json"
     }
 
 -- | V1 error format.
@@ -196,14 +192,14 @@ psdBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-psdKey :: Lens' ProjectsSubscriptionsDelete' (Maybe Text)
+psdKey :: Lens' ProjectsSubscriptionsDelete' (Maybe Key)
 psdKey = lens _psdKey (\ s a -> s{_psdKey = a})
 
 -- | OAuth 2.0 token for the current user.
-psdOauthToken :: Lens' ProjectsSubscriptionsDelete' (Maybe Text)
-psdOauthToken
-  = lens _psdOauthToken
-      (\ s a -> s{_psdOauthToken = a})
+psdOAuthToken :: Lens' ProjectsSubscriptionsDelete' (Maybe OAuthToken)
+psdOAuthToken
+  = lens _psdOAuthToken
+      (\ s a -> s{_psdOAuthToken = a})
 
 -- | The subscription to delete.
 psdSubscription :: Lens' ProjectsSubscriptionsDelete' Text
@@ -221,9 +217,10 @@ psdCallback :: Lens' ProjectsSubscriptionsDelete' (Maybe Text)
 psdCallback
   = lens _psdCallback (\ s a -> s{_psdCallback = a})
 
--- | Data format for response.
-psdAlt :: Lens' ProjectsSubscriptionsDelete' Text
-psdAlt = lens _psdAlt (\ s a -> s{_psdAlt = a})
+instance GoogleAuth ProjectsSubscriptionsDelete'
+         where
+        authKey = psdKey . _Just
+        authToken = psdOAuthToken . _Just
 
 instance GoogleRequest ProjectsSubscriptionsDelete'
          where
@@ -237,11 +234,11 @@ instance GoogleRequest ProjectsSubscriptionsDelete'
               _psdUploadType
               _psdBearerToken
               _psdKey
-              _psdOauthToken
+              _psdOAuthToken
               _psdSubscription
               _psdFields
               _psdCallback
-              (Just _psdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsSubscriptionsDeleteResource)

@@ -32,12 +32,12 @@ module Network.Google.Resource.DFAReporting.Sites.Insert
     -- * Request Lenses
     , siQuotaUser
     , siPrettyPrint
-    , siUserIp
+    , siUserIP
     , siProfileId
     , siKey
-    , siOauthToken
+    , siOAuthToken
+    , siSite
     , siFields
-    , siAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,10 +52,11 @@ type SitesInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] Site
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Site :> Post '[JSON] Site
 
 -- | Inserts a new site.
 --
@@ -63,12 +64,12 @@ type SitesInsertResource =
 data SitesInsert' = SitesInsert'
     { _siQuotaUser   :: !(Maybe Text)
     , _siPrettyPrint :: !Bool
-    , _siUserIp      :: !(Maybe Text)
+    , _siUserIP      :: !(Maybe Text)
     , _siProfileId   :: !Int64
-    , _siKey         :: !(Maybe Text)
-    , _siOauthToken  :: !(Maybe Text)
+    , _siKey         :: !(Maybe Key)
+    , _siOAuthToken  :: !(Maybe OAuthToken)
+    , _siSite        :: !Site
     , _siFields      :: !(Maybe Text)
-    , _siAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SitesInsert'' with the minimum fields required to make a request.
@@ -79,30 +80,31 @@ data SitesInsert' = SitesInsert'
 --
 -- * 'siPrettyPrint'
 --
--- * 'siUserIp'
+-- * 'siUserIP'
 --
 -- * 'siProfileId'
 --
 -- * 'siKey'
 --
--- * 'siOauthToken'
+-- * 'siOAuthToken'
+--
+-- * 'siSite'
 --
 -- * 'siFields'
---
--- * 'siAlt'
 sitesInsert'
     :: Int64 -- ^ 'profileId'
+    -> Site -- ^ 'Site'
     -> SitesInsert'
-sitesInsert' pSiProfileId_ =
+sitesInsert' pSiProfileId_ pSiSite_ =
     SitesInsert'
     { _siQuotaUser = Nothing
     , _siPrettyPrint = True
-    , _siUserIp = Nothing
+    , _siUserIP = Nothing
     , _siProfileId = pSiProfileId_
     , _siKey = Nothing
-    , _siOauthToken = Nothing
+    , _siOAuthToken = Nothing
+    , _siSite = pSiSite_
     , _siFields = Nothing
-    , _siAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,8 +122,8 @@ siPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-siUserIp :: Lens' SitesInsert' (Maybe Text)
-siUserIp = lens _siUserIp (\ s a -> s{_siUserIp = a})
+siUserIP :: Lens' SitesInsert' (Maybe Text)
+siUserIP = lens _siUserIP (\ s a -> s{_siUserIP = a})
 
 -- | User profile ID associated with this request.
 siProfileId :: Lens' SitesInsert' Int64
@@ -131,32 +133,37 @@ siProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-siKey :: Lens' SitesInsert' (Maybe Text)
+siKey :: Lens' SitesInsert' (Maybe Key)
 siKey = lens _siKey (\ s a -> s{_siKey = a})
 
 -- | OAuth 2.0 token for the current user.
-siOauthToken :: Lens' SitesInsert' (Maybe Text)
-siOauthToken
-  = lens _siOauthToken (\ s a -> s{_siOauthToken = a})
+siOAuthToken :: Lens' SitesInsert' (Maybe OAuthToken)
+siOAuthToken
+  = lens _siOAuthToken (\ s a -> s{_siOAuthToken = a})
+
+-- | Multipart request metadata.
+siSite :: Lens' SitesInsert' Site
+siSite = lens _siSite (\ s a -> s{_siSite = a})
 
 -- | Selector specifying which fields to include in a partial response.
 siFields :: Lens' SitesInsert' (Maybe Text)
 siFields = lens _siFields (\ s a -> s{_siFields = a})
 
--- | Data format for the response.
-siAlt :: Lens' SitesInsert' Alt
-siAlt = lens _siAlt (\ s a -> s{_siAlt = a})
+instance GoogleAuth SitesInsert' where
+        authKey = siKey . _Just
+        authToken = siOAuthToken . _Just
 
 instance GoogleRequest SitesInsert' where
         type Rs SitesInsert' = Site
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u SitesInsert'{..}
-          = go _siQuotaUser (Just _siPrettyPrint) _siUserIp
+          = go _siQuotaUser (Just _siPrettyPrint) _siUserIP
               _siProfileId
               _siKey
-              _siOauthToken
+              _siOAuthToken
               _siFields
-              (Just _siAlt)
+              (Just AltJSON)
+              _siSite
           where go
                   = clientWithRoute
                       (Proxy :: Proxy SitesInsertResource)

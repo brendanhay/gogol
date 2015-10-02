@@ -20,7 +20,7 @@
 -- | Updates a deployment and all of the resources described by the
 -- deployment manifest. This method supports patch semantics.
 --
--- /See:/ <https://developers.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentmanagerDeploymentsPatch@.
+-- /See:/ <https://developers.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerDeploymentsPatch@.
 module Network.Google.Resource.DeploymentManager.Deployments.Patch
     (
     -- * REST Resource
@@ -35,20 +35,20 @@ module Network.Google.Resource.DeploymentManager.Deployments.Patch
     , dpQuotaUser
     , dpPrettyPrint
     , dpProject
-    , dpUserIp
+    , dpUserIP
     , dpUpdatePolicy
     , dpDeletePolicy
     , dpKey
-    , dpOauthToken
+    , dpOAuthToken
+    , dpDeployment
     , dpFields
-    , dpAlt
     , dpDeployment
     ) where
 
 import           Network.Google.DeploymentManager.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DeploymentmanagerDeploymentsPatch@ which the
+-- | A resource alias for @DeploymentManagerDeploymentsPatch@ which the
 -- 'DeploymentsPatch'' request conforms to.
 type DeploymentsPatchResource =
      Capture "project" Text :>
@@ -56,38 +56,40 @@ type DeploymentsPatchResource =
          "deployments" :>
            Capture "deployment" Text :>
              QueryParam "createPolicy"
-               DeploymentmanagerDeploymentsPatchCreatePolicy
+               DeploymentManagerDeploymentsPatchCreatePolicy
                :>
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
                      QueryParam "updatePolicy"
-                       DeploymentmanagerDeploymentsPatchUpdatePolicy
+                       DeploymentManagerDeploymentsPatchUpdatePolicy
                        :>
                        QueryParam "deletePolicy"
-                         DeploymentmanagerDeploymentsPatchDeletePolicy
+                         DeploymentManagerDeploymentsPatchDeletePolicy
                          :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :> Patch '[JSON] Operation
+                               QueryParam "alt" AltJSON :>
+                                 ReqBody '[JSON] Deployment :>
+                                   Patch '[JSON] Operation
 
 -- | Updates a deployment and all of the resources described by the
 -- deployment manifest. This method supports patch semantics.
 --
 -- /See:/ 'deploymentsPatch'' smart constructor.
 data DeploymentsPatch' = DeploymentsPatch'
-    { _dpCreatePolicy :: !DeploymentmanagerDeploymentsPatchCreatePolicy
+    { _dpCreatePolicy :: !DeploymentManagerDeploymentsPatchCreatePolicy
     , _dpQuotaUser    :: !(Maybe Text)
     , _dpPrettyPrint  :: !Bool
     , _dpProject      :: !Text
-    , _dpUserIp       :: !(Maybe Text)
-    , _dpUpdatePolicy :: !DeploymentmanagerDeploymentsPatchUpdatePolicy
-    , _dpDeletePolicy :: !DeploymentmanagerDeploymentsPatchDeletePolicy
-    , _dpKey          :: !(Maybe Text)
-    , _dpOauthToken   :: !(Maybe Text)
+    , _dpUserIP       :: !(Maybe Text)
+    , _dpUpdatePolicy :: !DeploymentManagerDeploymentsPatchUpdatePolicy
+    , _dpDeletePolicy :: !DeploymentManagerDeploymentsPatchDeletePolicy
+    , _dpKey          :: !(Maybe Key)
+    , _dpOAuthToken   :: !(Maybe OAuthToken)
+    , _dpDeployment   :: !Deployment
     , _dpFields       :: !(Maybe Text)
-    , _dpAlt          :: !Alt
     , _dpDeployment   :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -103,7 +105,7 @@ data DeploymentsPatch' = DeploymentsPatch'
 --
 -- * 'dpProject'
 --
--- * 'dpUserIp'
+-- * 'dpUserIP'
 --
 -- * 'dpUpdatePolicy'
 --
@@ -111,35 +113,36 @@ data DeploymentsPatch' = DeploymentsPatch'
 --
 -- * 'dpKey'
 --
--- * 'dpOauthToken'
+-- * 'dpOAuthToken'
+--
+-- * 'dpDeployment'
 --
 -- * 'dpFields'
---
--- * 'dpAlt'
 --
 -- * 'dpDeployment'
 deploymentsPatch'
     :: Text -- ^ 'project'
+    -> Deployment -- ^ 'Deployment'
     -> Text -- ^ 'deployment'
     -> DeploymentsPatch'
-deploymentsPatch' pDpProject_ pDpDeployment_ =
+deploymentsPatch' pDpProject_ pDpDeployment_ pDpDeployment_ =
     DeploymentsPatch'
     { _dpCreatePolicy = CreateOrAcquire
     , _dpQuotaUser = Nothing
     , _dpPrettyPrint = True
     , _dpProject = pDpProject_
-    , _dpUserIp = Nothing
+    , _dpUserIP = Nothing
     , _dpUpdatePolicy = Patch
     , _dpDeletePolicy = Delete
     , _dpKey = Nothing
-    , _dpOauthToken = Nothing
+    , _dpOAuthToken = Nothing
+    , _dpDeployment = pDpDeployment_
     , _dpFields = Nothing
-    , _dpAlt = JSON
     , _dpDeployment = pDpDeployment_
     }
 
 -- | Sets the policy to use for creating new resources.
-dpCreatePolicy :: Lens' DeploymentsPatch' DeploymentmanagerDeploymentsPatchCreatePolicy
+dpCreatePolicy :: Lens' DeploymentsPatch' DeploymentManagerDeploymentsPatchCreatePolicy
 dpCreatePolicy
   = lens _dpCreatePolicy
       (\ s a -> s{_dpCreatePolicy = a})
@@ -164,17 +167,17 @@ dpProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-dpUserIp :: Lens' DeploymentsPatch' (Maybe Text)
-dpUserIp = lens _dpUserIp (\ s a -> s{_dpUserIp = a})
+dpUserIP :: Lens' DeploymentsPatch' (Maybe Text)
+dpUserIP = lens _dpUserIP (\ s a -> s{_dpUserIP = a})
 
 -- | Sets the policy to use for updating resources.
-dpUpdatePolicy :: Lens' DeploymentsPatch' DeploymentmanagerDeploymentsPatchUpdatePolicy
+dpUpdatePolicy :: Lens' DeploymentsPatch' DeploymentManagerDeploymentsPatchUpdatePolicy
 dpUpdatePolicy
   = lens _dpUpdatePolicy
       (\ s a -> s{_dpUpdatePolicy = a})
 
 -- | Sets the policy to use for deleting resources.
-dpDeletePolicy :: Lens' DeploymentsPatch' DeploymentmanagerDeploymentsPatchDeletePolicy
+dpDeletePolicy :: Lens' DeploymentsPatch' DeploymentManagerDeploymentsPatchDeletePolicy
 dpDeletePolicy
   = lens _dpDeletePolicy
       (\ s a -> s{_dpDeletePolicy = a})
@@ -182,26 +185,31 @@ dpDeletePolicy
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dpKey :: Lens' DeploymentsPatch' (Maybe Text)
+dpKey :: Lens' DeploymentsPatch' (Maybe Key)
 dpKey = lens _dpKey (\ s a -> s{_dpKey = a})
 
 -- | OAuth 2.0 token for the current user.
-dpOauthToken :: Lens' DeploymentsPatch' (Maybe Text)
-dpOauthToken
-  = lens _dpOauthToken (\ s a -> s{_dpOauthToken = a})
+dpOAuthToken :: Lens' DeploymentsPatch' (Maybe OAuthToken)
+dpOAuthToken
+  = lens _dpOAuthToken (\ s a -> s{_dpOAuthToken = a})
+
+-- | Multipart request metadata.
+dpDeployment :: Lens' DeploymentsPatch' Deployment
+dpDeployment
+  = lens _dpDeployment (\ s a -> s{_dpDeployment = a})
 
 -- | Selector specifying which fields to include in a partial response.
 dpFields :: Lens' DeploymentsPatch' (Maybe Text)
 dpFields = lens _dpFields (\ s a -> s{_dpFields = a})
 
--- | Data format for the response.
-dpAlt :: Lens' DeploymentsPatch' Alt
-dpAlt = lens _dpAlt (\ s a -> s{_dpAlt = a})
-
 -- | The name of the deployment for this request.
 dpDeployment :: Lens' DeploymentsPatch' Text
 dpDeployment
   = lens _dpDeployment (\ s a -> s{_dpDeployment = a})
+
+instance GoogleAuth DeploymentsPatch' where
+        authKey = dpKey . _Just
+        authToken = dpOAuthToken . _Just
 
 instance GoogleRequest DeploymentsPatch' where
         type Rs DeploymentsPatch' = Operation
@@ -211,13 +219,14 @@ instance GoogleRequest DeploymentsPatch' where
           = go (Just _dpCreatePolicy) _dpQuotaUser
               (Just _dpPrettyPrint)
               _dpProject
-              _dpUserIp
+              _dpUserIP
               (Just _dpUpdatePolicy)
               (Just _dpDeletePolicy)
               _dpKey
-              _dpOauthToken
+              _dpOAuthToken
               _dpFields
-              (Just _dpAlt)
+              _dpDeployment
+              (Just AltJSON)
               _dpDeployment
           where go
                   = clientWithRoute

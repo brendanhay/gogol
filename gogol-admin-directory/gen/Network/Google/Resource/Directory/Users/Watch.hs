@@ -36,8 +36,9 @@ module Network.Google.Resource.Directory.Users.Watch
     , uwOrderBy
     , uwViewType
     , uwCustomFieldMask
-    , uwUserIp
+    , uwUserIP
     , uwDomain
+    , uwChannel
     , uwShowDeleted
     , uwSortOrder
     , uwCustomer
@@ -45,10 +46,9 @@ module Network.Google.Resource.Directory.Users.Watch
     , uwQuery
     , uwProjection
     , uwPageToken
-    , uwOauthToken
+    , uwOAuthToken
     , uwMaxResults
     , uwFields
-    , uwAlt
     ) where
 
 import           Network.Google.AdminDirectory.Types
@@ -71,17 +71,18 @@ type UsersWatchResource =
                            QueryParam "sortOrder" DirectoryUsersWatchSortOrder
                              :>
                              QueryParam "customer" Text :>
-                               QueryParam "key" Text :>
+                               QueryParam "key" Key :>
                                  QueryParam "query" Text :>
                                    QueryParam "projection"
                                      DirectoryUsersWatchProjection
                                      :>
                                      QueryParam "pageToken" Text :>
-                                       QueryParam "oauth_token" Text :>
+                                       QueryParam "oauth_token" OAuthToken :>
                                          QueryParam "maxResults" Int32 :>
                                            QueryParam "fields" Text :>
-                                             QueryParam "alt" Alt :>
-                                               Post '[JSON] Channel
+                                             QueryParam "alt" AltJSON :>
+                                               ReqBody '[JSON] Channel :>
+                                                 Post '[JSON] Channel
 
 -- | Watch for changes in users list
 --
@@ -93,19 +94,19 @@ data UsersWatch' = UsersWatch'
     , _uwOrderBy         :: !(Maybe DirectoryUsersWatchOrderBy)
     , _uwViewType        :: !DirectoryUsersWatchViewType
     , _uwCustomFieldMask :: !(Maybe Text)
-    , _uwUserIp          :: !(Maybe Text)
+    , _uwUserIP          :: !(Maybe Text)
     , _uwDomain          :: !(Maybe Text)
+    , _uwChannel         :: !Channel
     , _uwShowDeleted     :: !(Maybe Text)
     , _uwSortOrder       :: !(Maybe DirectoryUsersWatchSortOrder)
     , _uwCustomer        :: !(Maybe Text)
-    , _uwKey             :: !(Maybe Text)
+    , _uwKey             :: !(Maybe Key)
     , _uwQuery           :: !(Maybe Text)
     , _uwProjection      :: !DirectoryUsersWatchProjection
     , _uwPageToken       :: !(Maybe Text)
-    , _uwOauthToken      :: !(Maybe Text)
+    , _uwOAuthToken      :: !(Maybe OAuthToken)
     , _uwMaxResults      :: !(Maybe Int32)
     , _uwFields          :: !(Maybe Text)
-    , _uwAlt             :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersWatch'' with the minimum fields required to make a request.
@@ -124,9 +125,11 @@ data UsersWatch' = UsersWatch'
 --
 -- * 'uwCustomFieldMask'
 --
--- * 'uwUserIp'
+-- * 'uwUserIP'
 --
 -- * 'uwDomain'
+--
+-- * 'uwChannel'
 --
 -- * 'uwShowDeleted'
 --
@@ -142,16 +145,15 @@ data UsersWatch' = UsersWatch'
 --
 -- * 'uwPageToken'
 --
--- * 'uwOauthToken'
+-- * 'uwOAuthToken'
 --
 -- * 'uwMaxResults'
 --
 -- * 'uwFields'
---
--- * 'uwAlt'
 usersWatch'
-    :: UsersWatch'
-usersWatch' =
+    :: Channel -- ^ 'Channel'
+    -> UsersWatch'
+usersWatch' pUwChannel_ =
     UsersWatch'
     { _uwEvent = Nothing
     , _uwQuotaUser = Nothing
@@ -159,8 +161,9 @@ usersWatch' =
     , _uwOrderBy = Nothing
     , _uwViewType = DUWVTAdminView
     , _uwCustomFieldMask = Nothing
-    , _uwUserIp = Nothing
+    , _uwUserIP = Nothing
     , _uwDomain = Nothing
+    , _uwChannel = pUwChannel_
     , _uwShowDeleted = Nothing
     , _uwSortOrder = Nothing
     , _uwCustomer = Nothing
@@ -168,10 +171,9 @@ usersWatch' =
     , _uwQuery = Nothing
     , _uwProjection = DUWPBasic
     , _uwPageToken = Nothing
-    , _uwOauthToken = Nothing
+    , _uwOAuthToken = Nothing
     , _uwMaxResults = Nothing
     , _uwFields = Nothing
-    , _uwAlt = JSON
     }
 
 -- | Event on which subscription is intended (if subscribing)
@@ -210,13 +212,18 @@ uwCustomFieldMask
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-uwUserIp :: Lens' UsersWatch' (Maybe Text)
-uwUserIp = lens _uwUserIp (\ s a -> s{_uwUserIp = a})
+uwUserIP :: Lens' UsersWatch' (Maybe Text)
+uwUserIP = lens _uwUserIP (\ s a -> s{_uwUserIP = a})
 
 -- | Name of the domain. Fill this field to get users from only this domain.
 -- To return all users in a multi-domain fill customer field instead.
 uwDomain :: Lens' UsersWatch' (Maybe Text)
 uwDomain = lens _uwDomain (\ s a -> s{_uwDomain = a})
+
+-- | Multipart request metadata.
+uwChannel :: Lens' UsersWatch' Channel
+uwChannel
+  = lens _uwChannel (\ s a -> s{_uwChannel = a})
 
 -- | If set to true retrieves the list of deleted users. Default is false
 uwShowDeleted :: Lens' UsersWatch' (Maybe Text)
@@ -238,7 +245,7 @@ uwCustomer
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-uwKey :: Lens' UsersWatch' (Maybe Text)
+uwKey :: Lens' UsersWatch' (Maybe Key)
 uwKey = lens _uwKey (\ s a -> s{_uwKey = a})
 
 -- | Query string search. Should be of the form \"\". Complete documentation
@@ -258,9 +265,9 @@ uwPageToken
   = lens _uwPageToken (\ s a -> s{_uwPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-uwOauthToken :: Lens' UsersWatch' (Maybe Text)
-uwOauthToken
-  = lens _uwOauthToken (\ s a -> s{_uwOauthToken = a})
+uwOAuthToken :: Lens' UsersWatch' (Maybe OAuthToken)
+uwOAuthToken
+  = lens _uwOAuthToken (\ s a -> s{_uwOAuthToken = a})
 
 -- | Maximum number of results to return. Default is 100. Max allowed is 500
 uwMaxResults :: Lens' UsersWatch' (Maybe Int32)
@@ -271,9 +278,9 @@ uwMaxResults
 uwFields :: Lens' UsersWatch' (Maybe Text)
 uwFields = lens _uwFields (\ s a -> s{_uwFields = a})
 
--- | Data format for the response.
-uwAlt :: Lens' UsersWatch' Alt
-uwAlt = lens _uwAlt (\ s a -> s{_uwAlt = a})
+instance GoogleAuth UsersWatch' where
+        authKey = uwKey . _Just
+        authToken = uwOAuthToken . _Just
 
 instance GoogleRequest UsersWatch' where
         type Rs UsersWatch' = Channel
@@ -283,7 +290,7 @@ instance GoogleRequest UsersWatch' where
               _uwOrderBy
               (Just _uwViewType)
               _uwCustomFieldMask
-              _uwUserIp
+              _uwUserIP
               _uwDomain
               _uwShowDeleted
               _uwSortOrder
@@ -292,10 +299,11 @@ instance GoogleRequest UsersWatch' where
               _uwQuery
               (Just _uwProjection)
               _uwPageToken
-              _uwOauthToken
+              _uwOAuthToken
               _uwMaxResults
               _uwFields
-              (Just _uwAlt)
+              (Just AltJSON)
+              _uwChannel
           where go
                   = clientWithRoute (Proxy :: Proxy UsersWatchResource)
                       r

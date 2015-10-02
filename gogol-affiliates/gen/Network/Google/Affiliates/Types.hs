@@ -74,8 +74,8 @@ module Network.Google.Affiliates.Types
     , Link
     , link
     , lAuthorship
-    , lDestinationUrl
-    , lClickTrackingUrl
+    , lDestinationURL
+    , lClickTrackingURL
     , lCreateDate
     , lKind
     , lAdvertiserId
@@ -85,7 +85,7 @@ module Network.Google.Affiliates.Types
     , lAvailability
     , lStartDate
     , lName
-    , lImpressionTrackingUrl
+    , lImpressionTrackingURL
     , lSpecialOffers
     , lEpcSevenDayAverage
     , lId
@@ -225,10 +225,10 @@ module Network.Google.Affiliates.Types
     , advContactPhone
     , advContactEmail
     , advStatus
-    , advLogoUrl
+    , advLogoURL
     , advKind
     , advCategory
-    , advSiteUrl
+    , advSiteURL
     , advPayoutRank
     , advJoinDate
     , advDefaultLinkId
@@ -247,7 +247,7 @@ module Network.Google.Affiliates.Types
     , CcOffer
     , ccOffer
     , cMinimumFinanceCharge
-    , cTrackingUrl
+    , cTrackingURL
     , cProhibitedCategories
     , cBalanceComputationMethod
     , cInitialSetupAndProcessingFee
@@ -278,9 +278,9 @@ module Network.Google.Affiliates.Types
     , cOffersImmediateCashReward
     , cRewards
     , cCardType
-    , cImageUrl
+    , cImageURL
     , cCreditLimitMax
-    , cLandingPageUrl
+    , cLandingPageURL
     , cAnnualFee
     , cRewardsExpire
     , cFirstYearAnnualFee
@@ -337,9 +337,6 @@ module Network.Google.Affiliates.Types
 
     -- * GanEventsListStatus
     , GanEventsListStatus (..)
-
-    -- * Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.Affiliates.Types.Product

@@ -32,19 +32,19 @@ module Network.Google.Resource.Drive.Files.Copy
     -- * Request Lenses
     , fcQuotaUser
     , fcPrettyPrint
-    , fcUserIp
+    , fcUserIP
     , fcPinned
     , fcVisibility
     , fcTimedTextLanguage
     , fcTimedTextTrackName
-    , fcOcrLanguage
+    , fcOCRLanguage
     , fcKey
     , fcConvert
     , fcFileId
-    , fcOauthToken
-    , fcOcr
+    , fcOAuthToken
+    , fcOCR
+    , fcFile
     , fcFields
-    , fcAlt
     ) where
 
 import           Network.Google.Drive.Types
@@ -64,12 +64,13 @@ type FilesCopyResource =
                      QueryParam "timedTextLanguage" Text :>
                        QueryParam "timedTextTrackName" Text :>
                          QueryParam "ocrLanguage" Text :>
-                           QueryParam "key" Text :>
+                           QueryParam "key" Key :>
                              QueryParam "convert" Bool :>
-                               QueryParam "oauth_token" Text :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "ocr" Bool :>
                                    QueryParam "fields" Text :>
-                                     QueryParam "alt" Alt :> Post '[JSON] File
+                                     QueryParam "alt" AltJSON :>
+                                       ReqBody '[JSON] File :> Post '[JSON] File
 
 -- | Creates a copy of the specified file.
 --
@@ -77,19 +78,19 @@ type FilesCopyResource =
 data FilesCopy' = FilesCopy'
     { _fcQuotaUser          :: !(Maybe Text)
     , _fcPrettyPrint        :: !Bool
-    , _fcUserIp             :: !(Maybe Text)
+    , _fcUserIP             :: !(Maybe Text)
     , _fcPinned             :: !Bool
     , _fcVisibility         :: !DriveFilesCopyVisibility
     , _fcTimedTextLanguage  :: !(Maybe Text)
     , _fcTimedTextTrackName :: !(Maybe Text)
-    , _fcOcrLanguage        :: !(Maybe Text)
-    , _fcKey                :: !(Maybe Text)
+    , _fcOCRLanguage        :: !(Maybe Text)
+    , _fcKey                :: !(Maybe Key)
     , _fcConvert            :: !Bool
     , _fcFileId             :: !Text
-    , _fcOauthToken         :: !(Maybe Text)
-    , _fcOcr                :: !Bool
+    , _fcOAuthToken         :: !(Maybe OAuthToken)
+    , _fcOCR                :: !Bool
+    , _fcFile               :: !File
     , _fcFields             :: !(Maybe Text)
-    , _fcAlt                :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FilesCopy'' with the minimum fields required to make a request.
@@ -100,7 +101,7 @@ data FilesCopy' = FilesCopy'
 --
 -- * 'fcPrettyPrint'
 --
--- * 'fcUserIp'
+-- * 'fcUserIP'
 --
 -- * 'fcPinned'
 --
@@ -110,7 +111,7 @@ data FilesCopy' = FilesCopy'
 --
 -- * 'fcTimedTextTrackName'
 --
--- * 'fcOcrLanguage'
+-- * 'fcOCRLanguage'
 --
 -- * 'fcKey'
 --
@@ -118,33 +119,34 @@ data FilesCopy' = FilesCopy'
 --
 -- * 'fcFileId'
 --
--- * 'fcOauthToken'
+-- * 'fcOAuthToken'
 --
--- * 'fcOcr'
+-- * 'fcOCR'
+--
+-- * 'fcFile'
 --
 -- * 'fcFields'
---
--- * 'fcAlt'
 filesCopy'
     :: Text -- ^ 'fileId'
+    -> File -- ^ 'File'
     -> FilesCopy'
-filesCopy' pFcFileId_ =
+filesCopy' pFcFileId_ pFcFile_ =
     FilesCopy'
     { _fcQuotaUser = Nothing
     , _fcPrettyPrint = True
-    , _fcUserIp = Nothing
+    , _fcUserIP = Nothing
     , _fcPinned = False
     , _fcVisibility = Default
     , _fcTimedTextLanguage = Nothing
     , _fcTimedTextTrackName = Nothing
-    , _fcOcrLanguage = Nothing
+    , _fcOCRLanguage = Nothing
     , _fcKey = Nothing
     , _fcConvert = False
     , _fcFileId = pFcFileId_
-    , _fcOauthToken = Nothing
-    , _fcOcr = False
+    , _fcOAuthToken = Nothing
+    , _fcOCR = False
+    , _fcFile = pFcFile_
     , _fcFields = Nothing
-    , _fcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -162,8 +164,8 @@ fcPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-fcUserIp :: Lens' FilesCopy' (Maybe Text)
-fcUserIp = lens _fcUserIp (\ s a -> s{_fcUserIp = a})
+fcUserIP :: Lens' FilesCopy' (Maybe Text)
+fcUserIP = lens _fcUserIP (\ s a -> s{_fcUserIP = a})
 
 -- | Whether to pin the head revision of the new copy. A file can have a
 -- maximum of 200 pinned revisions.
@@ -190,15 +192,15 @@ fcTimedTextTrackName
 
 -- | If ocr is true, hints at the language to use. Valid values are BCP 47
 -- codes.
-fcOcrLanguage :: Lens' FilesCopy' (Maybe Text)
-fcOcrLanguage
-  = lens _fcOcrLanguage
-      (\ s a -> s{_fcOcrLanguage = a})
+fcOCRLanguage :: Lens' FilesCopy' (Maybe Text)
+fcOCRLanguage
+  = lens _fcOCRLanguage
+      (\ s a -> s{_fcOCRLanguage = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fcKey :: Lens' FilesCopy' (Maybe Text)
+fcKey :: Lens' FilesCopy' (Maybe Key)
 fcKey = lens _fcKey (\ s a -> s{_fcKey = a})
 
 -- | Whether to convert this file to the corresponding Google Docs format.
@@ -211,39 +213,44 @@ fcFileId :: Lens' FilesCopy' Text
 fcFileId = lens _fcFileId (\ s a -> s{_fcFileId = a})
 
 -- | OAuth 2.0 token for the current user.
-fcOauthToken :: Lens' FilesCopy' (Maybe Text)
-fcOauthToken
-  = lens _fcOauthToken (\ s a -> s{_fcOauthToken = a})
+fcOAuthToken :: Lens' FilesCopy' (Maybe OAuthToken)
+fcOAuthToken
+  = lens _fcOAuthToken (\ s a -> s{_fcOAuthToken = a})
 
 -- | Whether to attempt OCR on .jpg, .png, .gif, or .pdf uploads.
-fcOcr :: Lens' FilesCopy' Bool
-fcOcr = lens _fcOcr (\ s a -> s{_fcOcr = a})
+fcOCR :: Lens' FilesCopy' Bool
+fcOCR = lens _fcOCR (\ s a -> s{_fcOCR = a})
+
+-- | Multipart request metadata.
+fcFile :: Lens' FilesCopy' File
+fcFile = lens _fcFile (\ s a -> s{_fcFile = a})
 
 -- | Selector specifying which fields to include in a partial response.
 fcFields :: Lens' FilesCopy' (Maybe Text)
 fcFields = lens _fcFields (\ s a -> s{_fcFields = a})
 
--- | Data format for the response.
-fcAlt :: Lens' FilesCopy' Alt
-fcAlt = lens _fcAlt (\ s a -> s{_fcAlt = a})
+instance GoogleAuth FilesCopy' where
+        authKey = fcKey . _Just
+        authToken = fcOAuthToken . _Just
 
 instance GoogleRequest FilesCopy' where
         type Rs FilesCopy' = File
         request = requestWithRoute defReq driveURL
         requestWithRoute r u FilesCopy'{..}
-          = go _fcQuotaUser (Just _fcPrettyPrint) _fcUserIp
+          = go _fcQuotaUser (Just _fcPrettyPrint) _fcUserIP
               (Just _fcPinned)
               (Just _fcVisibility)
               _fcTimedTextLanguage
               _fcTimedTextTrackName
-              _fcOcrLanguage
+              _fcOCRLanguage
               _fcKey
               (Just _fcConvert)
               _fcFileId
-              _fcOauthToken
-              (Just _fcOcr)
+              _fcOAuthToken
+              (Just _fcOCR)
               _fcFields
-              (Just _fcAlt)
+              (Just AltJSON)
+              _fcFile
           where go
                   = clientWithRoute (Proxy :: Proxy FilesCopyResource)
                       r

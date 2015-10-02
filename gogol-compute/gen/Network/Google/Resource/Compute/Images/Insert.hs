@@ -33,12 +33,12 @@ module Network.Google.Resource.Compute.Images.Insert
     -- * Request Lenses
     , imaQuotaUser
     , imaPrettyPrint
+    , imaImage
     , imaProject
-    , imaUserIp
+    , imaUserIP
     , imaKey
-    , imaOauthToken
+    , imaOAuthToken
     , imaFields
-    , imaAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -53,10 +53,11 @@ type ImagesInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] Operation
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Image :> Post '[JSON] Operation
 
 -- | Creates an image resource in the specified project using the data
 -- included in the request.
@@ -65,12 +66,12 @@ type ImagesInsertResource =
 data ImagesInsert' = ImagesInsert'
     { _imaQuotaUser   :: !(Maybe Text)
     , _imaPrettyPrint :: !Bool
+    , _imaImage       :: !Image
     , _imaProject     :: !Text
-    , _imaUserIp      :: !(Maybe Text)
-    , _imaKey         :: !(Maybe Text)
-    , _imaOauthToken  :: !(Maybe Text)
+    , _imaUserIP      :: !(Maybe Text)
+    , _imaKey         :: !(Maybe Key)
+    , _imaOAuthToken  :: !(Maybe OAuthToken)
     , _imaFields      :: !(Maybe Text)
-    , _imaAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ImagesInsert'' with the minimum fields required to make a request.
@@ -81,30 +82,31 @@ data ImagesInsert' = ImagesInsert'
 --
 -- * 'imaPrettyPrint'
 --
+-- * 'imaImage'
+--
 -- * 'imaProject'
 --
--- * 'imaUserIp'
+-- * 'imaUserIP'
 --
 -- * 'imaKey'
 --
--- * 'imaOauthToken'
+-- * 'imaOAuthToken'
 --
 -- * 'imaFields'
---
--- * 'imaAlt'
 imagesInsert'
-    :: Text -- ^ 'project'
+    :: Image -- ^ 'Image'
+    -> Text -- ^ 'project'
     -> ImagesInsert'
-imagesInsert' pImaProject_ =
+imagesInsert' pImaImage_ pImaProject_ =
     ImagesInsert'
     { _imaQuotaUser = Nothing
     , _imaPrettyPrint = True
+    , _imaImage = pImaImage_
     , _imaProject = pImaProject_
-    , _imaUserIp = Nothing
+    , _imaUserIP = Nothing
     , _imaKey = Nothing
-    , _imaOauthToken = Nothing
+    , _imaOAuthToken = Nothing
     , _imaFields = Nothing
-    , _imaAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,6 +122,10 @@ imaPrettyPrint
   = lens _imaPrettyPrint
       (\ s a -> s{_imaPrettyPrint = a})
 
+-- | Multipart request metadata.
+imaImage :: Lens' ImagesInsert' Image
+imaImage = lens _imaImage (\ s a -> s{_imaImage = a})
+
 -- | Project ID for this request.
 imaProject :: Lens' ImagesInsert' Text
 imaProject
@@ -127,41 +133,42 @@ imaProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-imaUserIp :: Lens' ImagesInsert' (Maybe Text)
-imaUserIp
-  = lens _imaUserIp (\ s a -> s{_imaUserIp = a})
+imaUserIP :: Lens' ImagesInsert' (Maybe Text)
+imaUserIP
+  = lens _imaUserIP (\ s a -> s{_imaUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-imaKey :: Lens' ImagesInsert' (Maybe Text)
+imaKey :: Lens' ImagesInsert' (Maybe Key)
 imaKey = lens _imaKey (\ s a -> s{_imaKey = a})
 
 -- | OAuth 2.0 token for the current user.
-imaOauthToken :: Lens' ImagesInsert' (Maybe Text)
-imaOauthToken
-  = lens _imaOauthToken
-      (\ s a -> s{_imaOauthToken = a})
+imaOAuthToken :: Lens' ImagesInsert' (Maybe OAuthToken)
+imaOAuthToken
+  = lens _imaOAuthToken
+      (\ s a -> s{_imaOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 imaFields :: Lens' ImagesInsert' (Maybe Text)
 imaFields
   = lens _imaFields (\ s a -> s{_imaFields = a})
 
--- | Data format for the response.
-imaAlt :: Lens' ImagesInsert' Alt
-imaAlt = lens _imaAlt (\ s a -> s{_imaAlt = a})
+instance GoogleAuth ImagesInsert' where
+        authKey = imaKey . _Just
+        authToken = imaOAuthToken . _Just
 
 instance GoogleRequest ImagesInsert' where
         type Rs ImagesInsert' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u ImagesInsert'{..}
           = go _imaQuotaUser (Just _imaPrettyPrint) _imaProject
-              _imaUserIp
+              _imaUserIP
               _imaKey
-              _imaOauthToken
+              _imaOAuthToken
               _imaFields
-              (Just _imaAlt)
+              (Just AltJSON)
+              _imaImage
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ImagesInsertResource)

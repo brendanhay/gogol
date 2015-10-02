@@ -33,12 +33,11 @@ module Network.Google.Resource.Games.Rooms.Dismiss
     -- * Request Lenses
     , rddQuotaUser
     , rddPrettyPrint
-    , rddUserIp
+    , rddUserIP
     , rddKey
     , rddRoomId
-    , rddOauthToken
+    , rddOAuthToken
     , rddFields
-    , rddAlt
     ) where
 
 import           Network.Google.Games.Types
@@ -53,10 +52,10 @@ type RoomsDismissResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] ()
+                       QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Dismiss an invitation to join a room. For internal use by the Games SDK
 -- only. Calling this method directly is unsupported.
@@ -65,12 +64,11 @@ type RoomsDismissResource =
 data RoomsDismiss' = RoomsDismiss'
     { _rddQuotaUser   :: !(Maybe Text)
     , _rddPrettyPrint :: !Bool
-    , _rddUserIp      :: !(Maybe Text)
-    , _rddKey         :: !(Maybe Text)
+    , _rddUserIP      :: !(Maybe Text)
+    , _rddKey         :: !(Maybe Key)
     , _rddRoomId      :: !Text
-    , _rddOauthToken  :: !(Maybe Text)
+    , _rddOAuthToken  :: !(Maybe OAuthToken)
     , _rddFields      :: !(Maybe Text)
-    , _rddAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomsDismiss'' with the minimum fields required to make a request.
@@ -81,17 +79,15 @@ data RoomsDismiss' = RoomsDismiss'
 --
 -- * 'rddPrettyPrint'
 --
--- * 'rddUserIp'
+-- * 'rddUserIP'
 --
 -- * 'rddKey'
 --
 -- * 'rddRoomId'
 --
--- * 'rddOauthToken'
+-- * 'rddOAuthToken'
 --
 -- * 'rddFields'
---
--- * 'rddAlt'
 roomsDismiss'
     :: Text -- ^ 'roomId'
     -> RoomsDismiss'
@@ -99,12 +95,11 @@ roomsDismiss' pRddRoomId_ =
     RoomsDismiss'
     { _rddQuotaUser = Nothing
     , _rddPrettyPrint = True
-    , _rddUserIp = Nothing
+    , _rddUserIP = Nothing
     , _rddKey = Nothing
     , _rddRoomId = pRddRoomId_
-    , _rddOauthToken = Nothing
+    , _rddOAuthToken = Nothing
     , _rddFields = Nothing
-    , _rddAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -122,14 +117,14 @@ rddPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rddUserIp :: Lens' RoomsDismiss' (Maybe Text)
-rddUserIp
-  = lens _rddUserIp (\ s a -> s{_rddUserIp = a})
+rddUserIP :: Lens' RoomsDismiss' (Maybe Text)
+rddUserIP
+  = lens _rddUserIP (\ s a -> s{_rddUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rddKey :: Lens' RoomsDismiss' (Maybe Text)
+rddKey :: Lens' RoomsDismiss' (Maybe Key)
 rddKey = lens _rddKey (\ s a -> s{_rddKey = a})
 
 -- | The ID of the room.
@@ -138,30 +133,30 @@ rddRoomId
   = lens _rddRoomId (\ s a -> s{_rddRoomId = a})
 
 -- | OAuth 2.0 token for the current user.
-rddOauthToken :: Lens' RoomsDismiss' (Maybe Text)
-rddOauthToken
-  = lens _rddOauthToken
-      (\ s a -> s{_rddOauthToken = a})
+rddOAuthToken :: Lens' RoomsDismiss' (Maybe OAuthToken)
+rddOAuthToken
+  = lens _rddOAuthToken
+      (\ s a -> s{_rddOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 rddFields :: Lens' RoomsDismiss' (Maybe Text)
 rddFields
   = lens _rddFields (\ s a -> s{_rddFields = a})
 
--- | Data format for the response.
-rddAlt :: Lens' RoomsDismiss' Alt
-rddAlt = lens _rddAlt (\ s a -> s{_rddAlt = a})
+instance GoogleAuth RoomsDismiss' where
+        authKey = rddKey . _Just
+        authToken = rddOAuthToken . _Just
 
 instance GoogleRequest RoomsDismiss' where
         type Rs RoomsDismiss' = ()
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u RoomsDismiss'{..}
-          = go _rddQuotaUser (Just _rddPrettyPrint) _rddUserIp
+          = go _rddQuotaUser (Just _rddPrettyPrint) _rddUserIP
               _rddKey
               _rddRoomId
-              _rddOauthToken
+              _rddOAuthToken
               _rddFields
-              (Just _rddAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy RoomsDismissResource)

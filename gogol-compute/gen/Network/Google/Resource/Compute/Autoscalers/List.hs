@@ -34,15 +34,14 @@ module Network.Google.Resource.Compute.Autoscalers.List
     , autQuotaUser
     , autPrettyPrint
     , autProject
-    , autUserIp
+    , autUserIP
     , autZone
     , autKey
     , autFilter
     , autPageToken
-    , autOauthToken
+    , autOAuthToken
     , autMaxResults
     , autFields
-    , autAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -58,13 +57,13 @@ type AutoscalersListResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "filter" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "maxResults" Word32 :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :>
+                               QueryParam "alt" AltJSON :>
                                  Get '[JSON] AutoscalerList
 
 -- | Retrieves the list of autoscaler resources contained within the
@@ -75,15 +74,14 @@ data AutoscalersList' = AutoscalersList'
     { _autQuotaUser   :: !(Maybe Text)
     , _autPrettyPrint :: !Bool
     , _autProject     :: !Text
-    , _autUserIp      :: !(Maybe Text)
+    , _autUserIP      :: !(Maybe Text)
     , _autZone        :: !Text
-    , _autKey         :: !(Maybe Text)
+    , _autKey         :: !(Maybe Key)
     , _autFilter      :: !(Maybe Text)
     , _autPageToken   :: !(Maybe Text)
-    , _autOauthToken  :: !(Maybe Text)
+    , _autOAuthToken  :: !(Maybe OAuthToken)
     , _autMaxResults  :: !Word32
     , _autFields      :: !(Maybe Text)
-    , _autAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AutoscalersList'' with the minimum fields required to make a request.
@@ -96,7 +94,7 @@ data AutoscalersList' = AutoscalersList'
 --
 -- * 'autProject'
 --
--- * 'autUserIp'
+-- * 'autUserIP'
 --
 -- * 'autZone'
 --
@@ -106,13 +104,11 @@ data AutoscalersList' = AutoscalersList'
 --
 -- * 'autPageToken'
 --
--- * 'autOauthToken'
+-- * 'autOAuthToken'
 --
 -- * 'autMaxResults'
 --
 -- * 'autFields'
---
--- * 'autAlt'
 autoscalersList'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
@@ -122,15 +118,14 @@ autoscalersList' pAutProject_ pAutZone_ =
     { _autQuotaUser = Nothing
     , _autPrettyPrint = True
     , _autProject = pAutProject_
-    , _autUserIp = Nothing
+    , _autUserIP = Nothing
     , _autZone = pAutZone_
     , _autKey = Nothing
     , _autFilter = Nothing
     , _autPageToken = Nothing
-    , _autOauthToken = Nothing
+    , _autOAuthToken = Nothing
     , _autMaxResults = 500
     , _autFields = Nothing
-    , _autAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,9 +148,9 @@ autProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-autUserIp :: Lens' AutoscalersList' (Maybe Text)
-autUserIp
-  = lens _autUserIp (\ s a -> s{_autUserIp = a})
+autUserIP :: Lens' AutoscalersList' (Maybe Text)
+autUserIP
+  = lens _autUserIP (\ s a -> s{_autUserIP = a})
 
 -- | Name of the zone scoping this request.
 autZone :: Lens' AutoscalersList' Text
@@ -164,7 +159,7 @@ autZone = lens _autZone (\ s a -> s{_autZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-autKey :: Lens' AutoscalersList' (Maybe Text)
+autKey :: Lens' AutoscalersList' (Maybe Key)
 autKey = lens _autKey (\ s a -> s{_autKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
@@ -190,10 +185,10 @@ autPageToken
   = lens _autPageToken (\ s a -> s{_autPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-autOauthToken :: Lens' AutoscalersList' (Maybe Text)
-autOauthToken
-  = lens _autOauthToken
-      (\ s a -> s{_autOauthToken = a})
+autOAuthToken :: Lens' AutoscalersList' (Maybe OAuthToken)
+autOAuthToken
+  = lens _autOAuthToken
+      (\ s a -> s{_autOAuthToken = a})
 
 -- | Maximum count of results to be returned.
 autMaxResults :: Lens' AutoscalersList' Word32
@@ -206,24 +201,24 @@ autFields :: Lens' AutoscalersList' (Maybe Text)
 autFields
   = lens _autFields (\ s a -> s{_autFields = a})
 
--- | Data format for the response.
-autAlt :: Lens' AutoscalersList' Alt
-autAlt = lens _autAlt (\ s a -> s{_autAlt = a})
+instance GoogleAuth AutoscalersList' where
+        authKey = autKey . _Just
+        authToken = autOAuthToken . _Just
 
 instance GoogleRequest AutoscalersList' where
         type Rs AutoscalersList' = AutoscalerList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u AutoscalersList'{..}
           = go _autQuotaUser (Just _autPrettyPrint) _autProject
-              _autUserIp
+              _autUserIP
               _autZone
               _autKey
               _autFilter
               _autPageToken
-              _autOauthToken
+              _autOAuthToken
               (Just _autMaxResults)
               _autFields
-              (Just _autAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AutoscalersListResource)

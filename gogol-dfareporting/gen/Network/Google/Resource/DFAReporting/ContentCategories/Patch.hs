@@ -33,13 +33,13 @@ module Network.Google.Resource.DFAReporting.ContentCategories.Patch
     -- * Request Lenses
     , ccpQuotaUser
     , ccpPrettyPrint
-    , ccpUserIp
+    , ccpUserIP
     , ccpProfileId
+    , ccpContentCategory
     , ccpKey
     , ccpId
-    , ccpOauthToken
+    , ccpOAuthToken
     , ccpFields
-    , ccpAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,26 +54,28 @@ type ContentCategoriesPatchResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "id" Int64 :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Patch '[JSON] ContentCategory
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] ContentCategory :>
+                             Patch '[JSON] ContentCategory
 
 -- | Updates an existing content category. This method supports patch
 -- semantics.
 --
 -- /See:/ 'contentCategoriesPatch'' smart constructor.
 data ContentCategoriesPatch' = ContentCategoriesPatch'
-    { _ccpQuotaUser   :: !(Maybe Text)
-    , _ccpPrettyPrint :: !Bool
-    , _ccpUserIp      :: !(Maybe Text)
-    , _ccpProfileId   :: !Int64
-    , _ccpKey         :: !(Maybe Text)
-    , _ccpId          :: !Int64
-    , _ccpOauthToken  :: !(Maybe Text)
-    , _ccpFields      :: !(Maybe Text)
-    , _ccpAlt         :: !Alt
+    { _ccpQuotaUser       :: !(Maybe Text)
+    , _ccpPrettyPrint     :: !Bool
+    , _ccpUserIP          :: !(Maybe Text)
+    , _ccpProfileId       :: !Int64
+    , _ccpContentCategory :: !ContentCategory
+    , _ccpKey             :: !(Maybe Key)
+    , _ccpId              :: !Int64
+    , _ccpOAuthToken      :: !(Maybe OAuthToken)
+    , _ccpFields          :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ContentCategoriesPatch'' with the minimum fields required to make a request.
@@ -84,34 +86,35 @@ data ContentCategoriesPatch' = ContentCategoriesPatch'
 --
 -- * 'ccpPrettyPrint'
 --
--- * 'ccpUserIp'
+-- * 'ccpUserIP'
 --
 -- * 'ccpProfileId'
+--
+-- * 'ccpContentCategory'
 --
 -- * 'ccpKey'
 --
 -- * 'ccpId'
 --
--- * 'ccpOauthToken'
+-- * 'ccpOAuthToken'
 --
 -- * 'ccpFields'
---
--- * 'ccpAlt'
 contentCategoriesPatch'
     :: Int64 -- ^ 'profileId'
+    -> ContentCategory -- ^ 'ContentCategory'
     -> Int64 -- ^ 'id'
     -> ContentCategoriesPatch'
-contentCategoriesPatch' pCcpProfileId_ pCcpId_ =
+contentCategoriesPatch' pCcpProfileId_ pCcpContentCategory_ pCcpId_ =
     ContentCategoriesPatch'
     { _ccpQuotaUser = Nothing
     , _ccpPrettyPrint = True
-    , _ccpUserIp = Nothing
+    , _ccpUserIP = Nothing
     , _ccpProfileId = pCcpProfileId_
+    , _ccpContentCategory = pCcpContentCategory_
     , _ccpKey = Nothing
     , _ccpId = pCcpId_
-    , _ccpOauthToken = Nothing
+    , _ccpOAuthToken = Nothing
     , _ccpFields = Nothing
-    , _ccpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -129,19 +132,25 @@ ccpPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ccpUserIp :: Lens' ContentCategoriesPatch' (Maybe Text)
-ccpUserIp
-  = lens _ccpUserIp (\ s a -> s{_ccpUserIp = a})
+ccpUserIP :: Lens' ContentCategoriesPatch' (Maybe Text)
+ccpUserIP
+  = lens _ccpUserIP (\ s a -> s{_ccpUserIP = a})
 
 -- | User profile ID associated with this request.
 ccpProfileId :: Lens' ContentCategoriesPatch' Int64
 ccpProfileId
   = lens _ccpProfileId (\ s a -> s{_ccpProfileId = a})
 
+-- | Multipart request metadata.
+ccpContentCategory :: Lens' ContentCategoriesPatch' ContentCategory
+ccpContentCategory
+  = lens _ccpContentCategory
+      (\ s a -> s{_ccpContentCategory = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ccpKey :: Lens' ContentCategoriesPatch' (Maybe Text)
+ccpKey :: Lens' ContentCategoriesPatch' (Maybe Key)
 ccpKey = lens _ccpKey (\ s a -> s{_ccpKey = a})
 
 -- | Content category ID.
@@ -149,31 +158,32 @@ ccpId :: Lens' ContentCategoriesPatch' Int64
 ccpId = lens _ccpId (\ s a -> s{_ccpId = a})
 
 -- | OAuth 2.0 token for the current user.
-ccpOauthToken :: Lens' ContentCategoriesPatch' (Maybe Text)
-ccpOauthToken
-  = lens _ccpOauthToken
-      (\ s a -> s{_ccpOauthToken = a})
+ccpOAuthToken :: Lens' ContentCategoriesPatch' (Maybe OAuthToken)
+ccpOAuthToken
+  = lens _ccpOAuthToken
+      (\ s a -> s{_ccpOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ccpFields :: Lens' ContentCategoriesPatch' (Maybe Text)
 ccpFields
   = lens _ccpFields (\ s a -> s{_ccpFields = a})
 
--- | Data format for the response.
-ccpAlt :: Lens' ContentCategoriesPatch' Alt
-ccpAlt = lens _ccpAlt (\ s a -> s{_ccpAlt = a})
+instance GoogleAuth ContentCategoriesPatch' where
+        authKey = ccpKey . _Just
+        authToken = ccpOAuthToken . _Just
 
 instance GoogleRequest ContentCategoriesPatch' where
         type Rs ContentCategoriesPatch' = ContentCategory
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u ContentCategoriesPatch'{..}
-          = go _ccpQuotaUser (Just _ccpPrettyPrint) _ccpUserIp
+          = go _ccpQuotaUser (Just _ccpPrettyPrint) _ccpUserIP
               _ccpProfileId
               _ccpKey
               (Just _ccpId)
-              _ccpOauthToken
+              _ccpOAuthToken
               _ccpFields
-              (Just _ccpAlt)
+              (Just AltJSON)
+              _ccpContentCategory
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ContentCategoriesPatchResource)

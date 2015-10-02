@@ -32,13 +32,12 @@ module Network.Google.Resource.Directory.Notifications.Get
     -- * Request Lenses
     , ngQuotaUser
     , ngPrettyPrint
-    , ngUserIp
+    , ngUserIP
     , ngCustomer
     , ngKey
     , ngNotificationId
-    , ngOauthToken
+    , ngOAuthToken
     , ngFields
-    , ngAlt
     ) where
 
 import           Network.Google.AdminDirectory.Types
@@ -54,10 +53,10 @@ type NotificationsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] Notification
+                         QueryParam "alt" AltJSON :> Get '[JSON] Notification
 
 -- | Retrieves a notification.
 --
@@ -65,13 +64,12 @@ type NotificationsGetResource =
 data NotificationsGet' = NotificationsGet'
     { _ngQuotaUser      :: !(Maybe Text)
     , _ngPrettyPrint    :: !Bool
-    , _ngUserIp         :: !(Maybe Text)
+    , _ngUserIP         :: !(Maybe Text)
     , _ngCustomer       :: !Text
-    , _ngKey            :: !(Maybe Text)
+    , _ngKey            :: !(Maybe Key)
     , _ngNotificationId :: !Text
-    , _ngOauthToken     :: !(Maybe Text)
+    , _ngOAuthToken     :: !(Maybe OAuthToken)
     , _ngFields         :: !(Maybe Text)
-    , _ngAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NotificationsGet'' with the minimum fields required to make a request.
@@ -82,7 +80,7 @@ data NotificationsGet' = NotificationsGet'
 --
 -- * 'ngPrettyPrint'
 --
--- * 'ngUserIp'
+-- * 'ngUserIP'
 --
 -- * 'ngCustomer'
 --
@@ -90,11 +88,9 @@ data NotificationsGet' = NotificationsGet'
 --
 -- * 'ngNotificationId'
 --
--- * 'ngOauthToken'
+-- * 'ngOAuthToken'
 --
 -- * 'ngFields'
---
--- * 'ngAlt'
 notificationsGet'
     :: Text -- ^ 'customer'
     -> Text -- ^ 'notificationId'
@@ -103,13 +99,12 @@ notificationsGet' pNgCustomer_ pNgNotificationId_ =
     NotificationsGet'
     { _ngQuotaUser = Nothing
     , _ngPrettyPrint = True
-    , _ngUserIp = Nothing
+    , _ngUserIP = Nothing
     , _ngCustomer = pNgCustomer_
     , _ngKey = Nothing
     , _ngNotificationId = pNgNotificationId_
-    , _ngOauthToken = Nothing
+    , _ngOAuthToken = Nothing
     , _ngFields = Nothing
-    , _ngAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,8 +122,8 @@ ngPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ngUserIp :: Lens' NotificationsGet' (Maybe Text)
-ngUserIp = lens _ngUserIp (\ s a -> s{_ngUserIp = a})
+ngUserIP :: Lens' NotificationsGet' (Maybe Text)
+ngUserIP = lens _ngUserIP (\ s a -> s{_ngUserIP = a})
 
 -- | The unique ID for the customer\'s Google account. The customerId is also
 -- returned as part of the Users resource.
@@ -139,7 +134,7 @@ ngCustomer
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ngKey :: Lens' NotificationsGet' (Maybe Text)
+ngKey :: Lens' NotificationsGet' (Maybe Key)
 ngKey = lens _ngKey (\ s a -> s{_ngKey = a})
 
 -- | The unique ID of the notification.
@@ -149,29 +144,29 @@ ngNotificationId
       (\ s a -> s{_ngNotificationId = a})
 
 -- | OAuth 2.0 token for the current user.
-ngOauthToken :: Lens' NotificationsGet' (Maybe Text)
-ngOauthToken
-  = lens _ngOauthToken (\ s a -> s{_ngOauthToken = a})
+ngOAuthToken :: Lens' NotificationsGet' (Maybe OAuthToken)
+ngOAuthToken
+  = lens _ngOAuthToken (\ s a -> s{_ngOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ngFields :: Lens' NotificationsGet' (Maybe Text)
 ngFields = lens _ngFields (\ s a -> s{_ngFields = a})
 
--- | Data format for the response.
-ngAlt :: Lens' NotificationsGet' Alt
-ngAlt = lens _ngAlt (\ s a -> s{_ngAlt = a})
+instance GoogleAuth NotificationsGet' where
+        authKey = ngKey . _Just
+        authToken = ngOAuthToken . _Just
 
 instance GoogleRequest NotificationsGet' where
         type Rs NotificationsGet' = Notification
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u NotificationsGet'{..}
-          = go _ngQuotaUser (Just _ngPrettyPrint) _ngUserIp
+          = go _ngQuotaUser (Just _ngPrettyPrint) _ngUserIP
               _ngCustomer
               _ngKey
               _ngNotificationId
-              _ngOauthToken
+              _ngOAuthToken
               _ngFields
-              (Just _ngAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy NotificationsGetResource)

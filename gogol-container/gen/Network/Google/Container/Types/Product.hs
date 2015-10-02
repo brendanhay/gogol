@@ -21,7 +21,7 @@ import           Network.Google.Prelude
 --
 -- /See:/ 'listOperationsResponse' smart constructor.
 newtype ListOperationsResponse = ListOperationsResponse
-    { _lorOperations :: Maybe [Maybe Operation]
+    { _lorOperations :: Maybe [Operation]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListOperationsResponse' with the minimum fields required to make a request.
@@ -37,7 +37,7 @@ listOperationsResponse =
     }
 
 -- | A list of operations in the project in the specified zone.
-lorOperations :: Lens' ListOperationsResponse [Maybe Operation]
+lorOperations :: Lens' ListOperationsResponse [Operation]
 lorOperations
   = lens _lorOperations
       (\ s a -> s{_lorOperations = a})
@@ -59,7 +59,7 @@ instance ToJSON ListOperationsResponse where
 --
 -- /See:/ 'createClusterRequest' smart constructor.
 newtype CreateClusterRequest = CreateClusterRequest
-    { _ccrCluster :: Maybe (Maybe Cluster)
+    { _ccrCluster :: Maybe Cluster
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreateClusterRequest' with the minimum fields required to make a request.
@@ -75,7 +75,7 @@ createClusterRequest =
     }
 
 -- | A cluster resource.
-ccrCluster :: Lens' CreateClusterRequest (Maybe (Maybe Cluster))
+ccrCluster :: Lens' CreateClusterRequest (Maybe Cluster)
 ccrCluster
   = lens _ccrCluster (\ s a -> s{_ccrCluster = a})
 
@@ -92,23 +92,23 @@ instance ToJSON CreateClusterRequest where
 -- /See:/ 'cluster' smart constructor.
 data Cluster = Cluster
     { _cStatus                :: !(Maybe ClusterStatus)
-    , _cNodeConfig            :: !(Maybe (Maybe NodeConfig))
+    , _cNodeConfig            :: !(Maybe NodeConfig)
     , _cNumNodes              :: !(Maybe Int32)
-    , _cClusterApiVersion     :: !(Maybe Text)
+    , _cClusterAPIVersion     :: !(Maybe Text)
     , _cNetwork               :: !(Maybe Text)
     , _cZone                  :: !(Maybe Text)
-    , _cServicesIpv4Cidr      :: !(Maybe Text)
-    , _cMasterAuth            :: !(Maybe (Maybe MasterAuth))
+    , _cServicesIPv4CIdR      :: !(Maybe Text)
+    , _cMasterAuth            :: !(Maybe MasterAuth)
     , _cSelfLink              :: !(Maybe Text)
     , _cEnableCloudMonitoring :: !(Maybe Bool)
     , _cName                  :: !(Maybe Text)
     , _cStatusMessage         :: !(Maybe Text)
     , _cCreationTimestamp     :: !(Maybe Text)
-    , _cContainerIpv4Cidr     :: !(Maybe Text)
+    , _cContainerIPv4CIdR     :: !(Maybe Text)
     , _cEndpoint              :: !(Maybe Text)
     , _cEnableCloudLogging    :: !(Maybe Bool)
     , _cDescription           :: !(Maybe Text)
-    , _cInstanceGroupUrls     :: !(Maybe [Text])
+    , _cInstanceGroupURLs     :: !(Maybe [Text])
     , _cNodeRoutingPrefixSize :: !(Maybe Int32)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -122,13 +122,13 @@ data Cluster = Cluster
 --
 -- * 'cNumNodes'
 --
--- * 'cClusterApiVersion'
+-- * 'cClusterAPIVersion'
 --
 -- * 'cNetwork'
 --
 -- * 'cZone'
 --
--- * 'cServicesIpv4Cidr'
+-- * 'cServicesIPv4CIdR'
 --
 -- * 'cMasterAuth'
 --
@@ -142,7 +142,7 @@ data Cluster = Cluster
 --
 -- * 'cCreationTimestamp'
 --
--- * 'cContainerIpv4Cidr'
+-- * 'cContainerIPv4CIdR'
 --
 -- * 'cEndpoint'
 --
@@ -150,7 +150,7 @@ data Cluster = Cluster
 --
 -- * 'cDescription'
 --
--- * 'cInstanceGroupUrls'
+-- * 'cInstanceGroupURLs'
 --
 -- * 'cNodeRoutingPrefixSize'
 cluster
@@ -160,21 +160,21 @@ cluster =
     { _cStatus = Nothing
     , _cNodeConfig = Nothing
     , _cNumNodes = Nothing
-    , _cClusterApiVersion = Nothing
+    , _cClusterAPIVersion = Nothing
     , _cNetwork = Nothing
     , _cZone = Nothing
-    , _cServicesIpv4Cidr = Nothing
+    , _cServicesIPv4CIdR = Nothing
     , _cMasterAuth = Nothing
     , _cSelfLink = Nothing
     , _cEnableCloudMonitoring = Nothing
     , _cName = Nothing
     , _cStatusMessage = Nothing
     , _cCreationTimestamp = Nothing
-    , _cContainerIpv4Cidr = Nothing
+    , _cContainerIPv4CIdR = Nothing
     , _cEndpoint = Nothing
     , _cEnableCloudLogging = Nothing
     , _cDescription = Nothing
-    , _cInstanceGroupUrls = Nothing
+    , _cInstanceGroupURLs = Nothing
     , _cNodeRoutingPrefixSize = Nothing
     }
 
@@ -184,7 +184,7 @@ cStatus = lens _cStatus (\ s a -> s{_cStatus = a})
 
 -- | The machine type and image to use for all nodes in this cluster. See the
 -- descriptions of the child properties of nodeConfig.
-cNodeConfig :: Lens' Cluster (Maybe (Maybe NodeConfig))
+cNodeConfig :: Lens' Cluster (Maybe NodeConfig)
 cNodeConfig
   = lens _cNodeConfig (\ s a -> s{_cNodeConfig = a})
 
@@ -202,10 +202,10 @@ cNumNodes
 -- lists the currently supported versions. If an incorrect version is
 -- specified, the server returns an error listing the currently supported
 -- versions.
-cClusterApiVersion :: Lens' Cluster (Maybe Text)
-cClusterApiVersion
-  = lens _cClusterApiVersion
-      (\ s a -> s{_cClusterApiVersion = a})
+cClusterAPIVersion :: Lens' Cluster (Maybe Text)
+cClusterAPIVersion
+  = lens _cClusterAPIVersion
+      (\ s a -> s{_cClusterAPIVersion = a})
 
 -- | The name of the Google Compute Engine network to which the cluster is
 -- connected.
@@ -220,13 +220,13 @@ cZone = lens _cZone (\ s a -> s{_cZone = a})
 -- | [Output only] The IP address range of the Kubernetes services in this
 -- cluster, in CIDR notation (e.g. 1.2.3.4\/29). Service addresses are
 -- typically put in the last \/16 from the container CIDR.
-cServicesIpv4Cidr :: Lens' Cluster (Maybe Text)
-cServicesIpv4Cidr
-  = lens _cServicesIpv4Cidr
-      (\ s a -> s{_cServicesIpv4Cidr = a})
+cServicesIPv4CIdR :: Lens' Cluster (Maybe Text)
+cServicesIPv4CIdR
+  = lens _cServicesIPv4CIdR
+      (\ s a -> s{_cServicesIPv4CIdR = a})
 
 -- | The authentication information for accessing the master.
-cMasterAuth :: Lens' Cluster (Maybe (Maybe MasterAuth))
+cMasterAuth :: Lens' Cluster (Maybe MasterAuth)
 cMasterAuth
   = lens _cMasterAuth (\ s a -> s{_cMasterAuth = a})
 
@@ -265,10 +265,10 @@ cCreationTimestamp
 -- | The IP address range of the container pods in this cluster, in CIDR
 -- notation (e.g. 10.96.0.0\/14). Leave blank to have one automatically
 -- chosen or specify a \/14 block in 10.0.0.0\/8.
-cContainerIpv4Cidr :: Lens' Cluster (Maybe Text)
-cContainerIpv4Cidr
-  = lens _cContainerIpv4Cidr
-      (\ s a -> s{_cContainerIpv4Cidr = a})
+cContainerIPv4CIdR :: Lens' Cluster (Maybe Text)
+cContainerIPv4CIdR
+  = lens _cContainerIPv4CIdR
+      (\ s a -> s{_cContainerIPv4CIdR = a})
 
 -- | [Output only] The IP address of this cluster\'s Kubernetes master. The
 -- endpoint can be accessed from the internet at
@@ -295,10 +295,10 @@ cDescription
 -- | [Output only] The resource URLs of [instance
 -- groups](\/compute\/docs\/instance-groups\/) associated with this
 -- cluster.
-cInstanceGroupUrls :: Lens' Cluster [Text]
-cInstanceGroupUrls
-  = lens _cInstanceGroupUrls
-      (\ s a -> s{_cInstanceGroupUrls = a})
+cInstanceGroupURLs :: Lens' Cluster [Text]
+cInstanceGroupURLs
+  = lens _cInstanceGroupURLs
+      (\ s a -> s{_cInstanceGroupURLs = a})
       . _Default
       . _Coerce
 
@@ -340,9 +340,9 @@ instance ToJSON Cluster where
                  [("status" .=) <$> _cStatus,
                   ("nodeConfig" .=) <$> _cNodeConfig,
                   ("numNodes" .=) <$> _cNumNodes,
-                  ("clusterApiVersion" .=) <$> _cClusterApiVersion,
+                  ("clusterApiVersion" .=) <$> _cClusterAPIVersion,
                   ("network" .=) <$> _cNetwork, ("zone" .=) <$> _cZone,
-                  ("servicesIpv4Cidr" .=) <$> _cServicesIpv4Cidr,
+                  ("servicesIpv4Cidr" .=) <$> _cServicesIPv4CIdR,
                   ("masterAuth" .=) <$> _cMasterAuth,
                   ("selfLink" .=) <$> _cSelfLink,
                   ("enableCloudMonitoring" .=) <$>
@@ -350,18 +350,18 @@ instance ToJSON Cluster where
                   ("name" .=) <$> _cName,
                   ("statusMessage" .=) <$> _cStatusMessage,
                   ("creationTimestamp" .=) <$> _cCreationTimestamp,
-                  ("containerIpv4Cidr" .=) <$> _cContainerIpv4Cidr,
+                  ("containerIpv4Cidr" .=) <$> _cContainerIPv4CIdR,
                   ("endpoint" .=) <$> _cEndpoint,
                   ("enableCloudLogging" .=) <$> _cEnableCloudLogging,
                   ("description" .=) <$> _cDescription,
-                  ("instanceGroupUrls" .=) <$> _cInstanceGroupUrls,
+                  ("instanceGroupUrls" .=) <$> _cInstanceGroupURLs,
                   ("nodeRoutingPrefixSize" .=) <$>
                     _cNodeRoutingPrefixSize])
 
 --
 -- /See:/ 'listAggregatedOperationsResponse' smart constructor.
 newtype ListAggregatedOperationsResponse = ListAggregatedOperationsResponse
-    { _laorOperations :: Maybe [Maybe Operation]
+    { _laorOperations :: Maybe [Operation]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListAggregatedOperationsResponse' with the minimum fields required to make a request.
@@ -377,7 +377,7 @@ listAggregatedOperationsResponse =
     }
 
 -- | A list of operations in the project, across all zones.
-laorOperations :: Lens' ListAggregatedOperationsResponse [Maybe Operation]
+laorOperations :: Lens' ListAggregatedOperationsResponse [Operation]
 laorOperations
   = lens _laorOperations
       (\ s a -> s{_laorOperations = a})
@@ -401,7 +401,7 @@ instance ToJSON ListAggregatedOperationsResponse
 --
 -- /See:/ 'nodeConfig' smart constructor.
 data NodeConfig = NodeConfig
-    { _ncServiceAccounts :: !(Maybe [Maybe ServiceAccount])
+    { _ncServiceAccounts :: !(Maybe [ServiceAccount])
     , _ncSourceImage     :: !(Maybe Text)
     , _ncMachineType     :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -430,7 +430,7 @@ nodeConfig =
 -- created with the following scopes to ensure the correct functioning of
 -- the cluster: - https:\/\/www.googleapis.com\/auth\/compute, -
 -- https:\/\/www.googleapis.com\/auth\/devstorage.read_only
-ncServiceAccounts :: Lens' NodeConfig [Maybe ServiceAccount]
+ncServiceAccounts :: Lens' NodeConfig [ServiceAccount]
 ncServiceAccounts
   = lens _ncServiceAccounts
       (\ s a -> s{_ncServiceAccounts = a})
@@ -739,7 +739,7 @@ instance ToJSON MasterAuth where
 --
 -- /See:/ 'listAggregatedClustersResponse' smart constructor.
 newtype ListAggregatedClustersResponse = ListAggregatedClustersResponse
-    { _lacrClusters :: Maybe [Maybe Cluster]
+    { _lacrClusters :: Maybe [Cluster]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListAggregatedClustersResponse' with the minimum fields required to make a request.
@@ -755,7 +755,7 @@ listAggregatedClustersResponse =
     }
 
 -- | A list of clusters in the project, across all zones.
-lacrClusters :: Lens' ListAggregatedClustersResponse [Maybe Cluster]
+lacrClusters :: Lens' ListAggregatedClustersResponse [Cluster]
 lacrClusters
   = lens _lacrClusters (\ s a -> s{_lacrClusters = a})
       . _Default
@@ -777,7 +777,7 @@ instance ToJSON ListAggregatedClustersResponse where
 --
 -- /See:/ 'listClustersResponse' smart constructor.
 newtype ListClustersResponse = ListClustersResponse
-    { _lcrClusters :: Maybe [Maybe Cluster]
+    { _lcrClusters :: Maybe [Cluster]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListClustersResponse' with the minimum fields required to make a request.
@@ -793,7 +793,7 @@ listClustersResponse =
     }
 
 -- | A list of clusters in the project in the specified zone.
-lcrClusters :: Lens' ListClustersResponse [Maybe Cluster]
+lcrClusters :: Lens' ListClustersResponse [Cluster]
 lcrClusters
   = lens _lcrClusters (\ s a -> s{_lcrClusters = a}) .
       _Default

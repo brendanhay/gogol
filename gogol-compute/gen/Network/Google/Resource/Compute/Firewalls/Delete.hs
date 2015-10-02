@@ -33,12 +33,11 @@ module Network.Google.Resource.Compute.Firewalls.Delete
     , fdQuotaUser
     , fdPrettyPrint
     , fdProject
-    , fdUserIp
+    , fdUserIP
     , fdKey
-    , fdOauthToken
+    , fdOAuthToken
     , fdFirewall
     , fdFields
-    , fdAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -54,10 +53,10 @@ type FirewallsDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Delete '[JSON] Operation
+                         QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified firewall resource.
 --
@@ -66,12 +65,11 @@ data FirewallsDelete' = FirewallsDelete'
     { _fdQuotaUser   :: !(Maybe Text)
     , _fdPrettyPrint :: !Bool
     , _fdProject     :: !Text
-    , _fdUserIp      :: !(Maybe Text)
-    , _fdKey         :: !(Maybe Text)
-    , _fdOauthToken  :: !(Maybe Text)
+    , _fdUserIP      :: !(Maybe Text)
+    , _fdKey         :: !(Maybe Key)
+    , _fdOAuthToken  :: !(Maybe OAuthToken)
     , _fdFirewall    :: !Text
     , _fdFields      :: !(Maybe Text)
-    , _fdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FirewallsDelete'' with the minimum fields required to make a request.
@@ -84,17 +82,15 @@ data FirewallsDelete' = FirewallsDelete'
 --
 -- * 'fdProject'
 --
--- * 'fdUserIp'
+-- * 'fdUserIP'
 --
 -- * 'fdKey'
 --
--- * 'fdOauthToken'
+-- * 'fdOAuthToken'
 --
 -- * 'fdFirewall'
 --
 -- * 'fdFields'
---
--- * 'fdAlt'
 firewallsDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'firewall'
@@ -104,12 +100,11 @@ firewallsDelete' pFdProject_ pFdFirewall_ =
     { _fdQuotaUser = Nothing
     , _fdPrettyPrint = True
     , _fdProject = pFdProject_
-    , _fdUserIp = Nothing
+    , _fdUserIP = Nothing
     , _fdKey = Nothing
-    , _fdOauthToken = Nothing
+    , _fdOAuthToken = Nothing
     , _fdFirewall = pFdFirewall_
     , _fdFields = Nothing
-    , _fdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -132,19 +127,19 @@ fdProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-fdUserIp :: Lens' FirewallsDelete' (Maybe Text)
-fdUserIp = lens _fdUserIp (\ s a -> s{_fdUserIp = a})
+fdUserIP :: Lens' FirewallsDelete' (Maybe Text)
+fdUserIP = lens _fdUserIP (\ s a -> s{_fdUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fdKey :: Lens' FirewallsDelete' (Maybe Text)
+fdKey :: Lens' FirewallsDelete' (Maybe Key)
 fdKey = lens _fdKey (\ s a -> s{_fdKey = a})
 
 -- | OAuth 2.0 token for the current user.
-fdOauthToken :: Lens' FirewallsDelete' (Maybe Text)
-fdOauthToken
-  = lens _fdOauthToken (\ s a -> s{_fdOauthToken = a})
+fdOAuthToken :: Lens' FirewallsDelete' (Maybe OAuthToken)
+fdOAuthToken
+  = lens _fdOAuthToken (\ s a -> s{_fdOAuthToken = a})
 
 -- | Name of the firewall resource to delete.
 fdFirewall :: Lens' FirewallsDelete' Text
@@ -155,21 +150,21 @@ fdFirewall
 fdFields :: Lens' FirewallsDelete' (Maybe Text)
 fdFields = lens _fdFields (\ s a -> s{_fdFields = a})
 
--- | Data format for the response.
-fdAlt :: Lens' FirewallsDelete' Alt
-fdAlt = lens _fdAlt (\ s a -> s{_fdAlt = a})
+instance GoogleAuth FirewallsDelete' where
+        authKey = fdKey . _Just
+        authToken = fdOAuthToken . _Just
 
 instance GoogleRequest FirewallsDelete' where
         type Rs FirewallsDelete' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u FirewallsDelete'{..}
           = go _fdQuotaUser (Just _fdPrettyPrint) _fdProject
-              _fdUserIp
+              _fdUserIP
               _fdKey
-              _fdOauthToken
+              _fdOAuthToken
               _fdFirewall
               _fdFields
-              (Just _fdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy FirewallsDeleteResource)

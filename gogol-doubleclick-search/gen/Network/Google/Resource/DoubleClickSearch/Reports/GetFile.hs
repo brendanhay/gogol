@@ -19,7 +19,7 @@
 --
 -- | Downloads a report file encoded in UTF-8.
 --
--- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @DoubleclicksearchReportsGetFile@.
+-- /See:/ <https://developers.google.com/doubleclick-search/ DoubleClick Search API Reference> for @DoubleClicksearchReportsGetFile@.
 module Network.Google.Resource.DoubleClickSearch.Reports.GetFile
     (
     -- * REST Resource
@@ -32,19 +32,18 @@ module Network.Google.Resource.DoubleClickSearch.Reports.GetFile
     -- * Request Lenses
     , rgfQuotaUser
     , rgfPrettyPrint
-    , rgfUserIp
+    , rgfUserIP
     , rgfReportId
     , rgfReportFragment
     , rgfKey
-    , rgfOauthToken
+    , rgfOAuthToken
     , rgfFields
-    , rgfAlt
     ) where
 
 import           Network.Google.DoubleClickSearch.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DoubleclicksearchReportsGetFile@ which the
+-- | A resource alias for @DoubleClicksearchReportsGetFile@ which the
 -- 'ReportsGetFile'' request conforms to.
 type ReportsGetFileResource =
      "reports" :>
@@ -54,10 +53,22 @@ type ReportsGetFileResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] ()
+                         QueryParam "alt" AltJSON :> Get '[JSON] ()
+       :<|>
+       "reports" :>
+         Capture "reportId" Text :>
+           "files" :>
+             Capture "reportFragment" Int32 :>
+               QueryParam "quotaUser" Text :>
+                 QueryParam "prettyPrint" Bool :>
+                   QueryParam "userIp" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
+                         QueryParam "fields" Text :>
+                           QueryParam "alt" Media :> Get '[OctetStream] Stream
 
 -- | Downloads a report file encoded in UTF-8.
 --
@@ -65,13 +76,12 @@ type ReportsGetFileResource =
 data ReportsGetFile' = ReportsGetFile'
     { _rgfQuotaUser      :: !(Maybe Text)
     , _rgfPrettyPrint    :: !Bool
-    , _rgfUserIp         :: !(Maybe Text)
+    , _rgfUserIP         :: !(Maybe Text)
     , _rgfReportId       :: !Text
     , _rgfReportFragment :: !Int32
-    , _rgfKey            :: !(Maybe Text)
-    , _rgfOauthToken     :: !(Maybe Text)
+    , _rgfKey            :: !(Maybe Key)
+    , _rgfOAuthToken     :: !(Maybe OAuthToken)
     , _rgfFields         :: !(Maybe Text)
-    , _rgfAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportsGetFile'' with the minimum fields required to make a request.
@@ -82,7 +92,7 @@ data ReportsGetFile' = ReportsGetFile'
 --
 -- * 'rgfPrettyPrint'
 --
--- * 'rgfUserIp'
+-- * 'rgfUserIP'
 --
 -- * 'rgfReportId'
 --
@@ -90,11 +100,9 @@ data ReportsGetFile' = ReportsGetFile'
 --
 -- * 'rgfKey'
 --
--- * 'rgfOauthToken'
+-- * 'rgfOAuthToken'
 --
 -- * 'rgfFields'
---
--- * 'rgfAlt'
 reportsGetFile'
     :: Text -- ^ 'reportId'
     -> Int32 -- ^ 'reportFragment'
@@ -103,13 +111,12 @@ reportsGetFile' pRgfReportId_ pRgfReportFragment_ =
     ReportsGetFile'
     { _rgfQuotaUser = Nothing
     , _rgfPrettyPrint = True
-    , _rgfUserIp = Nothing
+    , _rgfUserIP = Nothing
     , _rgfReportId = pRgfReportId_
     , _rgfReportFragment = pRgfReportFragment_
     , _rgfKey = Nothing
-    , _rgfOauthToken = Nothing
+    , _rgfOAuthToken = Nothing
     , _rgfFields = Nothing
-    , _rgfAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,9 +134,9 @@ rgfPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rgfUserIp :: Lens' ReportsGetFile' (Maybe Text)
-rgfUserIp
-  = lens _rgfUserIp (\ s a -> s{_rgfUserIp = a})
+rgfUserIP :: Lens' ReportsGetFile' (Maybe Text)
+rgfUserIP
+  = lens _rgfUserIP (\ s a -> s{_rgfUserIP = a})
 
 -- | ID of the report.
 rgfReportId :: Lens' ReportsGetFile' Text
@@ -145,37 +152,55 @@ rgfReportFragment
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rgfKey :: Lens' ReportsGetFile' (Maybe Text)
+rgfKey :: Lens' ReportsGetFile' (Maybe Key)
 rgfKey = lens _rgfKey (\ s a -> s{_rgfKey = a})
 
 -- | OAuth 2.0 token for the current user.
-rgfOauthToken :: Lens' ReportsGetFile' (Maybe Text)
-rgfOauthToken
-  = lens _rgfOauthToken
-      (\ s a -> s{_rgfOauthToken = a})
+rgfOAuthToken :: Lens' ReportsGetFile' (Maybe OAuthToken)
+rgfOAuthToken
+  = lens _rgfOAuthToken
+      (\ s a -> s{_rgfOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 rgfFields :: Lens' ReportsGetFile' (Maybe Text)
 rgfFields
   = lens _rgfFields (\ s a -> s{_rgfFields = a})
 
--- | Data format for the response.
-rgfAlt :: Lens' ReportsGetFile' Alt
-rgfAlt = lens _rgfAlt (\ s a -> s{_rgfAlt = a})
+instance GoogleAuth ReportsGetFile' where
+        authKey = rgfKey . _Just
+        authToken = rgfOAuthToken . _Just
 
 instance GoogleRequest ReportsGetFile' where
         type Rs ReportsGetFile' = ()
         request
           = requestWithRoute defReq doubleClickSearchURL
         requestWithRoute r u ReportsGetFile'{..}
-          = go _rgfQuotaUser (Just _rgfPrettyPrint) _rgfUserIp
+          = go _rgfQuotaUser (Just _rgfPrettyPrint) _rgfUserIP
               _rgfReportId
               _rgfReportFragment
               _rgfKey
-              _rgfOauthToken
+              _rgfOAuthToken
               _rgfFields
-              (Just _rgfAlt)
-          where go
+              (Just AltJSON)
+          where go :<|> _
+                  = clientWithRoute
+                      (Proxy :: Proxy ReportsGetFileResource)
+                      r
+                      u
+
+instance GoogleRequest ReportsGetFile' where
+        type Rs (Download ReportsGetFile') = Stream
+        request
+          = requestWithRoute defReq doubleClickSearchURL
+        requestWithRoute r u ReportsGetFile'{..}
+          = go _rgfQuotaUser (Just _rgfPrettyPrint) _rgfUserIP
+              _rgfReportId
+              _rgfReportFragment
+              _rgfKey
+              _rgfOAuthToken
+              _rgfFields
+              (Just Media)
+          where go :<|> _
                   = clientWithRoute
                       (Proxy :: Proxy ReportsGetFileResource)
                       r

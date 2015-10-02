@@ -32,12 +32,11 @@ module Network.Google.Resource.Drive.Properties.List
     -- * Request Lenses
     , plQuotaUser
     , plPrettyPrint
-    , plUserIp
+    , plUserIP
     , plKey
     , plFileId
-    , plOauthToken
+    , plOAuthToken
     , plFields
-    , plAlt
     ) where
 
 import           Network.Google.Drive.Types
@@ -52,10 +51,10 @@ type PropertiesListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Get '[JSON] PropertyList
+                       QueryParam "alt" AltJSON :> Get '[JSON] PropertyList
 
 -- | Lists a file\'s properties.
 --
@@ -63,12 +62,11 @@ type PropertiesListResource =
 data PropertiesList' = PropertiesList'
     { _plQuotaUser   :: !(Maybe Text)
     , _plPrettyPrint :: !Bool
-    , _plUserIp      :: !(Maybe Text)
-    , _plKey         :: !(Maybe Text)
+    , _plUserIP      :: !(Maybe Text)
+    , _plKey         :: !(Maybe Key)
     , _plFileId      :: !Text
-    , _plOauthToken  :: !(Maybe Text)
+    , _plOAuthToken  :: !(Maybe OAuthToken)
     , _plFields      :: !(Maybe Text)
-    , _plAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PropertiesList'' with the minimum fields required to make a request.
@@ -79,17 +77,15 @@ data PropertiesList' = PropertiesList'
 --
 -- * 'plPrettyPrint'
 --
--- * 'plUserIp'
+-- * 'plUserIP'
 --
 -- * 'plKey'
 --
 -- * 'plFileId'
 --
--- * 'plOauthToken'
+-- * 'plOAuthToken'
 --
 -- * 'plFields'
---
--- * 'plAlt'
 propertiesList'
     :: Text -- ^ 'fileId'
     -> PropertiesList'
@@ -97,12 +93,11 @@ propertiesList' pPlFileId_ =
     PropertiesList'
     { _plQuotaUser = Nothing
     , _plPrettyPrint = True
-    , _plUserIp = Nothing
+    , _plUserIP = Nothing
     , _plKey = Nothing
     , _plFileId = pPlFileId_
-    , _plOauthToken = Nothing
+    , _plOAuthToken = Nothing
     , _plFields = Nothing
-    , _plAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,13 +115,13 @@ plPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-plUserIp :: Lens' PropertiesList' (Maybe Text)
-plUserIp = lens _plUserIp (\ s a -> s{_plUserIp = a})
+plUserIP :: Lens' PropertiesList' (Maybe Text)
+plUserIP = lens _plUserIP (\ s a -> s{_plUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-plKey :: Lens' PropertiesList' (Maybe Text)
+plKey :: Lens' PropertiesList' (Maybe Key)
 plKey = lens _plKey (\ s a -> s{_plKey = a})
 
 -- | The ID of the file.
@@ -134,28 +129,28 @@ plFileId :: Lens' PropertiesList' Text
 plFileId = lens _plFileId (\ s a -> s{_plFileId = a})
 
 -- | OAuth 2.0 token for the current user.
-plOauthToken :: Lens' PropertiesList' (Maybe Text)
-plOauthToken
-  = lens _plOauthToken (\ s a -> s{_plOauthToken = a})
+plOAuthToken :: Lens' PropertiesList' (Maybe OAuthToken)
+plOAuthToken
+  = lens _plOAuthToken (\ s a -> s{_plOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 plFields :: Lens' PropertiesList' (Maybe Text)
 plFields = lens _plFields (\ s a -> s{_plFields = a})
 
--- | Data format for the response.
-plAlt :: Lens' PropertiesList' Alt
-plAlt = lens _plAlt (\ s a -> s{_plAlt = a})
+instance GoogleAuth PropertiesList' where
+        authKey = plKey . _Just
+        authToken = plOAuthToken . _Just
 
 instance GoogleRequest PropertiesList' where
         type Rs PropertiesList' = PropertyList
         request = requestWithRoute defReq driveURL
         requestWithRoute r u PropertiesList'{..}
-          = go _plQuotaUser (Just _plPrettyPrint) _plUserIp
+          = go _plQuotaUser (Just _plPrettyPrint) _plUserIP
               _plKey
               _plFileId
-              _plOauthToken
+              _plOAuthToken
               _plFields
-              (Just _plAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PropertiesListResource)

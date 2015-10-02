@@ -34,15 +34,14 @@ module Network.Google.Resource.Compute.ForwardingRules.List
     , frlQuotaUser
     , frlPrettyPrint
     , frlProject
-    , frlUserIp
+    , frlUserIP
     , frlKey
     , frlFilter
     , frlRegion
     , frlPageToken
-    , frlOauthToken
+    , frlOAuthToken
     , frlMaxResults
     , frlFields
-    , frlAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -58,13 +57,13 @@ type ForwardingRulesListResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "filter" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "maxResults" Word32 :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :>
+                               QueryParam "alt" AltJSON :>
                                  Get '[JSON] ForwardingRuleList
 
 -- | Retrieves the list of ForwardingRule resources available to the
@@ -75,15 +74,14 @@ data ForwardingRulesList' = ForwardingRulesList'
     { _frlQuotaUser   :: !(Maybe Text)
     , _frlPrettyPrint :: !Bool
     , _frlProject     :: !Text
-    , _frlUserIp      :: !(Maybe Text)
-    , _frlKey         :: !(Maybe Text)
+    , _frlUserIP      :: !(Maybe Text)
+    , _frlKey         :: !(Maybe Key)
     , _frlFilter      :: !(Maybe Text)
     , _frlRegion      :: !Text
     , _frlPageToken   :: !(Maybe Text)
-    , _frlOauthToken  :: !(Maybe Text)
+    , _frlOAuthToken  :: !(Maybe OAuthToken)
     , _frlMaxResults  :: !Word32
     , _frlFields      :: !(Maybe Text)
-    , _frlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ForwardingRulesList'' with the minimum fields required to make a request.
@@ -96,7 +94,7 @@ data ForwardingRulesList' = ForwardingRulesList'
 --
 -- * 'frlProject'
 --
--- * 'frlUserIp'
+-- * 'frlUserIP'
 --
 -- * 'frlKey'
 --
@@ -106,13 +104,11 @@ data ForwardingRulesList' = ForwardingRulesList'
 --
 -- * 'frlPageToken'
 --
--- * 'frlOauthToken'
+-- * 'frlOAuthToken'
 --
 -- * 'frlMaxResults'
 --
 -- * 'frlFields'
---
--- * 'frlAlt'
 forwardingRulesList'
     :: Text -- ^ 'project'
     -> Text -- ^ 'region'
@@ -122,15 +118,14 @@ forwardingRulesList' pFrlProject_ pFrlRegion_ =
     { _frlQuotaUser = Nothing
     , _frlPrettyPrint = True
     , _frlProject = pFrlProject_
-    , _frlUserIp = Nothing
+    , _frlUserIP = Nothing
     , _frlKey = Nothing
     , _frlFilter = Nothing
     , _frlRegion = pFrlRegion_
     , _frlPageToken = Nothing
-    , _frlOauthToken = Nothing
+    , _frlOAuthToken = Nothing
     , _frlMaxResults = 500
     , _frlFields = Nothing
-    , _frlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -153,14 +148,14 @@ frlProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-frlUserIp :: Lens' ForwardingRulesList' (Maybe Text)
-frlUserIp
-  = lens _frlUserIp (\ s a -> s{_frlUserIp = a})
+frlUserIP :: Lens' ForwardingRulesList' (Maybe Text)
+frlUserIP
+  = lens _frlUserIP (\ s a -> s{_frlUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-frlKey :: Lens' ForwardingRulesList' (Maybe Text)
+frlKey :: Lens' ForwardingRulesList' (Maybe Key)
 frlKey = lens _frlKey (\ s a -> s{_frlKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
@@ -191,10 +186,10 @@ frlPageToken
   = lens _frlPageToken (\ s a -> s{_frlPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-frlOauthToken :: Lens' ForwardingRulesList' (Maybe Text)
-frlOauthToken
-  = lens _frlOauthToken
-      (\ s a -> s{_frlOauthToken = a})
+frlOAuthToken :: Lens' ForwardingRulesList' (Maybe OAuthToken)
+frlOAuthToken
+  = lens _frlOAuthToken
+      (\ s a -> s{_frlOAuthToken = a})
 
 -- | Maximum count of results to be returned.
 frlMaxResults :: Lens' ForwardingRulesList' Word32
@@ -207,24 +202,24 @@ frlFields :: Lens' ForwardingRulesList' (Maybe Text)
 frlFields
   = lens _frlFields (\ s a -> s{_frlFields = a})
 
--- | Data format for the response.
-frlAlt :: Lens' ForwardingRulesList' Alt
-frlAlt = lens _frlAlt (\ s a -> s{_frlAlt = a})
+instance GoogleAuth ForwardingRulesList' where
+        authKey = frlKey . _Just
+        authToken = frlOAuthToken . _Just
 
 instance GoogleRequest ForwardingRulesList' where
         type Rs ForwardingRulesList' = ForwardingRuleList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u ForwardingRulesList'{..}
           = go _frlQuotaUser (Just _frlPrettyPrint) _frlProject
-              _frlUserIp
+              _frlUserIP
               _frlKey
               _frlFilter
               _frlRegion
               _frlPageToken
-              _frlOauthToken
+              _frlOAuthToken
               (Just _frlMaxResults)
               _frlFields
-              (Just _frlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ForwardingRulesListResource)

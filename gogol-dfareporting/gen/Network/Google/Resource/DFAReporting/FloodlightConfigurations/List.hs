@@ -32,13 +32,12 @@ module Network.Google.Resource.DFAReporting.FloodlightConfigurations.List
     -- * Request Lenses
     , fclQuotaUser
     , fclPrettyPrint
-    , fclUserIp
+    , fclUserIP
     , fclIds
     , fclProfileId
     , fclKey
-    , fclOauthToken
+    , fclOAuthToken
     , fclFields
-    , fclAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,10 +53,10 @@ type FloodlightConfigurationsListResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParams "ids" Int64 :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :>
+                         QueryParam "alt" AltJSON :>
                            Get '[JSON] FloodlightConfigurationsListResponse
 
 -- | Retrieves a list of floodlight configurations, possibly filtered.
@@ -66,13 +65,12 @@ type FloodlightConfigurationsListResource =
 data FloodlightConfigurationsList' = FloodlightConfigurationsList'
     { _fclQuotaUser   :: !(Maybe Text)
     , _fclPrettyPrint :: !Bool
-    , _fclUserIp      :: !(Maybe Text)
+    , _fclUserIP      :: !(Maybe Text)
     , _fclIds         :: !(Maybe Int64)
     , _fclProfileId   :: !Int64
-    , _fclKey         :: !(Maybe Text)
-    , _fclOauthToken  :: !(Maybe Text)
+    , _fclKey         :: !(Maybe Key)
+    , _fclOAuthToken  :: !(Maybe OAuthToken)
     , _fclFields      :: !(Maybe Text)
-    , _fclAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightConfigurationsList'' with the minimum fields required to make a request.
@@ -83,7 +81,7 @@ data FloodlightConfigurationsList' = FloodlightConfigurationsList'
 --
 -- * 'fclPrettyPrint'
 --
--- * 'fclUserIp'
+-- * 'fclUserIP'
 --
 -- * 'fclIds'
 --
@@ -91,11 +89,9 @@ data FloodlightConfigurationsList' = FloodlightConfigurationsList'
 --
 -- * 'fclKey'
 --
--- * 'fclOauthToken'
+-- * 'fclOAuthToken'
 --
 -- * 'fclFields'
---
--- * 'fclAlt'
 floodlightConfigurationsList'
     :: Int64 -- ^ 'profileId'
     -> FloodlightConfigurationsList'
@@ -103,13 +99,12 @@ floodlightConfigurationsList' pFclProfileId_ =
     FloodlightConfigurationsList'
     { _fclQuotaUser = Nothing
     , _fclPrettyPrint = True
-    , _fclUserIp = Nothing
+    , _fclUserIP = Nothing
     , _fclIds = Nothing
     , _fclProfileId = pFclProfileId_
     , _fclKey = Nothing
-    , _fclOauthToken = Nothing
+    , _fclOAuthToken = Nothing
     , _fclFields = Nothing
-    , _fclAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,9 +122,9 @@ fclPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-fclUserIp :: Lens' FloodlightConfigurationsList' (Maybe Text)
-fclUserIp
-  = lens _fclUserIp (\ s a -> s{_fclUserIp = a})
+fclUserIP :: Lens' FloodlightConfigurationsList' (Maybe Text)
+fclUserIP
+  = lens _fclUserIP (\ s a -> s{_fclUserIP = a})
 
 -- | Set of IDs of floodlight configurations to retrieve. Required field;
 -- otherwise an empty list will be returned.
@@ -144,23 +139,24 @@ fclProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fclKey :: Lens' FloodlightConfigurationsList' (Maybe Text)
+fclKey :: Lens' FloodlightConfigurationsList' (Maybe Key)
 fclKey = lens _fclKey (\ s a -> s{_fclKey = a})
 
 -- | OAuth 2.0 token for the current user.
-fclOauthToken :: Lens' FloodlightConfigurationsList' (Maybe Text)
-fclOauthToken
-  = lens _fclOauthToken
-      (\ s a -> s{_fclOauthToken = a})
+fclOAuthToken :: Lens' FloodlightConfigurationsList' (Maybe OAuthToken)
+fclOAuthToken
+  = lens _fclOAuthToken
+      (\ s a -> s{_fclOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 fclFields :: Lens' FloodlightConfigurationsList' (Maybe Text)
 fclFields
   = lens _fclFields (\ s a -> s{_fclFields = a})
 
--- | Data format for the response.
-fclAlt :: Lens' FloodlightConfigurationsList' Alt
-fclAlt = lens _fclAlt (\ s a -> s{_fclAlt = a})
+instance GoogleAuth FloodlightConfigurationsList'
+         where
+        authKey = fclKey . _Just
+        authToken = fclOAuthToken . _Just
 
 instance GoogleRequest FloodlightConfigurationsList'
          where
@@ -169,13 +165,13 @@ instance GoogleRequest FloodlightConfigurationsList'
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u
           FloodlightConfigurationsList'{..}
-          = go _fclQuotaUser (Just _fclPrettyPrint) _fclUserIp
+          = go _fclQuotaUser (Just _fclPrettyPrint) _fclUserIP
               _fclIds
               _fclProfileId
               _fclKey
-              _fclOauthToken
+              _fclOAuthToken
               _fclFields
-              (Just _fclAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy FloodlightConfigurationsListResource)

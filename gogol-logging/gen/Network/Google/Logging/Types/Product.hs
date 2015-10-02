@@ -120,7 +120,7 @@ instance ToJSON Status where
 data Log = Log
     { _logName        :: !(Maybe Text)
     , _logDisplayName :: !(Maybe Text)
-    , _logPayloadType :: !(Maybe Text)
+    , _logPayLoadType :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Log' with the minimum fields required to make a request.
@@ -131,14 +131,14 @@ data Log = Log
 --
 -- * 'logDisplayName'
 --
--- * 'logPayloadType'
+-- * 'logPayLoadType'
 log
     :: Log
 log =
     Log
     { _logName = Nothing
     , _logDisplayName = Nothing
-    , _logPayloadType = Nothing
+    , _logPayLoadType = Nothing
     }
 
 -- | The resource name of the log. Example:
@@ -160,10 +160,10 @@ logDisplayName
 
 -- | _Optional_. A URI representing the expected payload type for log
 -- entries.
-logPayloadType :: Lens' Log (Maybe Text)
-logPayloadType
-  = lens _logPayloadType
-      (\ s a -> s{_logPayloadType = a})
+logPayLoadType :: Lens' Log (Maybe Text)
+logPayLoadType
+  = lens _logPayLoadType
+      (\ s a -> s{_logPayLoadType = a})
 
 instance FromJSON Log where
         parseJSON
@@ -179,13 +179,13 @@ instance ToJSON Log where
               (catMaybes
                  [("name" .=) <$> _logName,
                   ("displayName" .=) <$> _logDisplayName,
-                  ("payloadType" .=) <$> _logPayloadType])
+                  ("payloadType" .=) <$> _logPayLoadType])
 
 -- | Describes a problem with a logging resource or operation.
 --
 -- /See:/ 'logError' smart constructor.
 data LogError = LogError
-    { _leStatus    :: !(Maybe (Maybe Status))
+    { _leStatus    :: !(Maybe Status)
     , _leResource  :: !(Maybe Text)
     , _leTimeNanos :: !(Maybe Int64)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -210,7 +210,7 @@ logError =
 
 -- | The error description, including a classification code, an error
 -- message, and other details.
-leStatus :: Lens' LogError (Maybe (Maybe Status))
+leStatus :: Lens' LogError (Maybe Status)
 leStatus = lens _leStatus (\ s a -> s{_leStatus = a})
 
 -- | A resource name associated with this error. For example, the name of a
@@ -245,7 +245,7 @@ instance ToJSON LogError where
 --
 -- /See:/ 'writeLogEntriesRequest' smart constructor.
 data WriteLogEntriesRequest = WriteLogEntriesRequest
-    { _wlerEntries      :: !(Maybe [Maybe LogEntry])
+    { _wlerEntries      :: !(Maybe [LogEntry])
     , _wlerCommonLabels :: !(Maybe WriteLogEntriesRequestCommonLabels)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -265,7 +265,7 @@ writeLogEntriesRequest =
     }
 
 -- | Log entries to insert.
-wlerEntries :: Lens' WriteLogEntriesRequest [Maybe LogEntry]
+wlerEntries :: Lens' WriteLogEntriesRequest [LogEntry]
 wlerEntries
   = lens _wlerEntries (\ s a -> s{_wlerEntries = a}) .
       _Default
@@ -334,17 +334,17 @@ data RequestLog = RequestLog
     , _rlInstanceIndex     :: !(Maybe Int32)
     , _rlModuleId          :: !(Maybe Text)
     , _rlVersionId         :: !(Maybe Text)
-    , _rlHttpVersion       :: !(Maybe Text)
+    , _rlHTTPVersion       :: !(Maybe Text)
     , _rlTaskName          :: !(Maybe Text)
     , _rlPendingTime       :: !(Maybe Text)
     , _rlWasLoadingRequest :: !(Maybe Bool)
     , _rlStartTime         :: !(Maybe Text)
     , _rlLatency           :: !(Maybe Text)
-    , _rlUrlMapEntry       :: !(Maybe Text)
+    , _rlURLMapEntry       :: !(Maybe Text)
     , _rlCost              :: !(Maybe Double)
     , _rlReferrer          :: !(Maybe Text)
-    , _rlLine              :: !(Maybe [Maybe LogLine])
-    , _rlIp                :: !(Maybe Text)
+    , _rlLine              :: !(Maybe [LogLine])
+    , _rlIP                :: !(Maybe Text)
     , _rlAppId             :: !(Maybe Text)
     , _rlMethod            :: !(Maybe Text)
     , _rlResource          :: !(Maybe Text)
@@ -356,7 +356,7 @@ data RequestLog = RequestLog
     , _rlHost              :: !(Maybe Text)
     , _rlTaskQueueName     :: !(Maybe Text)
     , _rlResponseSize      :: !(Maybe Int64)
-    , _rlSourceReference   :: !(Maybe [Maybe SourceReference])
+    , _rlSourceReference   :: !(Maybe [SourceReference])
     , _rlAppEngineRelease  :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -378,7 +378,7 @@ data RequestLog = RequestLog
 --
 -- * 'rlVersionId'
 --
--- * 'rlHttpVersion'
+-- * 'rlHTTPVersion'
 --
 -- * 'rlTaskName'
 --
@@ -390,7 +390,7 @@ data RequestLog = RequestLog
 --
 -- * 'rlLatency'
 --
--- * 'rlUrlMapEntry'
+-- * 'rlURLMapEntry'
 --
 -- * 'rlCost'
 --
@@ -398,7 +398,7 @@ data RequestLog = RequestLog
 --
 -- * 'rlLine'
 --
--- * 'rlIp'
+-- * 'rlIP'
 --
 -- * 'rlAppId'
 --
@@ -436,17 +436,17 @@ requestLog =
     , _rlInstanceIndex = Nothing
     , _rlModuleId = Nothing
     , _rlVersionId = Nothing
-    , _rlHttpVersion = Nothing
+    , _rlHTTPVersion = Nothing
     , _rlTaskName = Nothing
     , _rlPendingTime = Nothing
     , _rlWasLoadingRequest = Nothing
     , _rlStartTime = Nothing
     , _rlLatency = Nothing
-    , _rlUrlMapEntry = Nothing
+    , _rlURLMapEntry = Nothing
     , _rlCost = Nothing
     , _rlReferrer = Nothing
     , _rlLine = Nothing
-    , _rlIp = Nothing
+    , _rlIP = Nothing
     , _rlAppId = Nothing
     , _rlMethod = Nothing
     , _rlResource = Nothing
@@ -502,10 +502,10 @@ rlVersionId
   = lens _rlVersionId (\ s a -> s{_rlVersionId = a})
 
 -- | HTTP version of request.
-rlHttpVersion :: Lens' RequestLog (Maybe Text)
-rlHttpVersion
-  = lens _rlHttpVersion
-      (\ s a -> s{_rlHttpVersion = a})
+rlHTTPVersion :: Lens' RequestLog (Maybe Text)
+rlHTTPVersion
+  = lens _rlHTTPVersion
+      (\ s a -> s{_rlHTTPVersion = a})
 
 -- | Task name of the request (for an offline request).
 rlTaskName :: Lens' RequestLog (Maybe Text)
@@ -538,10 +538,10 @@ rlLatency
 -- | File or class within URL mapping used for request. Useful for tracking
 -- down the source code which was responsible for managing request.
 -- Especially for multiply mapped handlers.
-rlUrlMapEntry :: Lens' RequestLog (Maybe Text)
-rlUrlMapEntry
-  = lens _rlUrlMapEntry
-      (\ s a -> s{_rlUrlMapEntry = a})
+rlURLMapEntry :: Lens' RequestLog (Maybe Text)
+rlURLMapEntry
+  = lens _rlURLMapEntry
+      (\ s a -> s{_rlURLMapEntry = a})
 
 -- | An indication of the relative cost of serving this request.
 rlCost :: Lens' RequestLog (Maybe Double)
@@ -554,14 +554,14 @@ rlReferrer
 
 -- | List of log lines emitted by the application while serving this request,
 -- if requested.
-rlLine :: Lens' RequestLog [Maybe LogLine]
+rlLine :: Lens' RequestLog [LogLine]
 rlLine
   = lens _rlLine (\ s a -> s{_rlLine = a}) . _Default .
       _Coerce
 
 -- | Origin IP address.
-rlIp :: Lens' RequestLog (Maybe Text)
-rlIp = lens _rlIp (\ s a -> s{_rlIp = a})
+rlIP :: Lens' RequestLog (Maybe Text)
+rlIP = lens _rlIP (\ s a -> s{_rlIP = a})
 
 -- | Identifies the application that handled this request.
 rlAppId :: Lens' RequestLog (Maybe Text)
@@ -630,7 +630,7 @@ rlResponseSize
 -- | Source code for the application that handled this request. There can be
 -- more than one source reference per deployed application if source code
 -- is distributed among multiple repositories.
-rlSourceReference :: Lens' RequestLog [Maybe SourceReference]
+rlSourceReference :: Lens' RequestLog [SourceReference]
 rlSourceReference
   = lens _rlSourceReference
       (\ s a -> s{_rlSourceReference = a})
@@ -690,16 +690,16 @@ instance ToJSON RequestLog where
                   ("instanceIndex" .=) <$> _rlInstanceIndex,
                   ("moduleId" .=) <$> _rlModuleId,
                   ("versionId" .=) <$> _rlVersionId,
-                  ("httpVersion" .=) <$> _rlHttpVersion,
+                  ("httpVersion" .=) <$> _rlHTTPVersion,
                   ("taskName" .=) <$> _rlTaskName,
                   ("pendingTime" .=) <$> _rlPendingTime,
                   ("wasLoadingRequest" .=) <$> _rlWasLoadingRequest,
                   ("startTime" .=) <$> _rlStartTime,
                   ("latency" .=) <$> _rlLatency,
-                  ("urlMapEntry" .=) <$> _rlUrlMapEntry,
+                  ("urlMapEntry" .=) <$> _rlURLMapEntry,
                   ("cost" .=) <$> _rlCost,
                   ("referrer" .=) <$> _rlReferrer,
-                  ("line" .=) <$> _rlLine, ("ip" .=) <$> _rlIp,
+                  ("line" .=) <$> _rlLine, ("ip" .=) <$> _rlIP,
                   ("appId" .=) <$> _rlAppId,
                   ("method" .=) <$> _rlMethod,
                   ("resource" .=) <$> _rlResource,
@@ -873,7 +873,7 @@ instance ToJSON LogEntryMetadata where
 --
 -- /See:/ 'listSinksResponse' smart constructor.
 newtype ListSinksResponse = ListSinksResponse
-    { _lsrSinks :: Maybe [Maybe LogSink]
+    { _lsrSinks :: Maybe [LogSink]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListSinksResponse' with the minimum fields required to make a request.
@@ -891,7 +891,7 @@ listSinksResponse =
 -- | The requested sinks. If a returned \`LogSink\` object has an empty
 -- \`destination\` field, the client can retrieve the complete \`LogSink\`
 -- object by calling \`projects.sinks.get\`.
-lsrSinks :: Lens' ListSinksResponse [Maybe LogSink]
+lsrSinks :: Lens' ListSinksResponse [LogSink]
 lsrSinks
   = lens _lsrSinks (\ s a -> s{_lsrSinks = a}) .
       _Default
@@ -911,23 +911,23 @@ instance ToJSON ListSinksResponse where
 -- expressed as a JSON object. You can only pass \`protoPayload\` values
 -- that belong to a set of approved types.
 --
--- /See:/ 'logEntryProtoPayload' smart constructor.
-data LogEntryProtoPayload =
-    LogEntryProtoPayload
+-- /See:/ 'logEntryProtoPayLoad' smart constructor.
+data LogEntryProtoPayLoad =
+    LogEntryProtoPayLoad
     deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LogEntryProtoPayload' with the minimum fields required to make a request.
+-- | Creates a value of 'LogEntryProtoPayLoad' with the minimum fields required to make a request.
 --
-logEntryProtoPayload
-    :: LogEntryProtoPayload
-logEntryProtoPayload = LogEntryProtoPayload
+logEntryProtoPayLoad
+    :: LogEntryProtoPayLoad
+logEntryProtoPayLoad = LogEntryProtoPayLoad
 
-instance FromJSON LogEntryProtoPayload where
+instance FromJSON LogEntryProtoPayLoad where
         parseJSON
-          = withObject "LogEntryProtoPayload"
-              (\ o -> pure LogEntryProtoPayload)
+          = withObject "LogEntryProtoPayLoad"
+              (\ o -> pure LogEntryProtoPayLoad)
 
-instance ToJSON LogEntryProtoPayload where
+instance ToJSON LogEntryProtoPayLoad where
         toJSON = const (Object mempty)
 
 -- | Result returned from ListLogServiceIndexesRequest.
@@ -1018,7 +1018,7 @@ data LogSink = LogSink
     { _lsDestination :: !(Maybe Text)
     , _lsName        :: !(Maybe Text)
     , _lsFilter      :: !(Maybe Text)
-    , _lsErrors      :: !(Maybe [Maybe LogError])
+    , _lsErrors      :: !(Maybe [LogError])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LogSink' with the minimum fields required to make a request.
@@ -1064,7 +1064,7 @@ lsFilter = lens _lsFilter (\ s a -> s{_lsFilter = a})
 
 -- | _Output only._ If any errors occur when invoking a sink method, then
 -- this field contains descriptions of the errors.
-lsErrors :: Lens' LogSink [Maybe LogError]
+lsErrors :: Lens' LogSink [LogError]
 lsErrors
   = lens _lsErrors (\ s a -> s{_lsErrors = a}) .
       _Default
@@ -1092,7 +1092,7 @@ instance ToJSON LogSink where
 -- /See:/ 'listLogServicesResponse' smart constructor.
 data ListLogServicesResponse = ListLogServicesResponse
     { _llsrNextPageToken :: !(Maybe Text)
-    , _llsrLogServices   :: !(Maybe [Maybe LogService])
+    , _llsrLogServices   :: !(Maybe [LogService])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListLogServicesResponse' with the minimum fields required to make a request.
@@ -1121,7 +1121,7 @@ llsrNextPageToken
       (\ s a -> s{_llsrNextPageToken = a})
 
 -- | A list of log services.
-llsrLogServices :: Lens' ListLogServicesResponse [Maybe LogService]
+llsrLogServices :: Lens' ListLogServicesResponse [LogService]
 llsrLogServices
   = lens _llsrLogServices
       (\ s a -> s{_llsrLogServices = a})
@@ -1168,7 +1168,7 @@ instance ToJSON StatusDetails where
 -- /See:/ 'listLogsResponse' smart constructor.
 data ListLogsResponse = ListLogsResponse
     { _llrNextPageToken :: !(Maybe Text)
-    , _llrLogs          :: !(Maybe [Maybe Log])
+    , _llrLogs          :: !(Maybe [Log])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListLogsResponse' with the minimum fields required to make a request.
@@ -1196,7 +1196,7 @@ llrNextPageToken
       (\ s a -> s{_llrNextPageToken = a})
 
 -- | A list of log descriptions matching the criteria.
-llrLogs :: Lens' ListLogsResponse [Maybe Log]
+llrLogs :: Lens' ListLogsResponse [Log]
 llrLogs
   = lens _llrLogs (\ s a -> s{_llrLogs = a}) . _Default
       . _Coerce
@@ -1221,8 +1221,8 @@ instance ToJSON ListLogsResponse where
 -- /See:/ 'hTTPRequest' smart constructor.
 data HTTPRequest = HTTPRequest
     { _httprStatus        :: !(Maybe Int32)
-    , _httprRequestUrl    :: !(Maybe Text)
-    , _httprRemoteIp      :: !(Maybe Text)
+    , _httprRequestURL    :: !(Maybe Text)
+    , _httprRemoteIP      :: !(Maybe Text)
     , _httprRequestSize   :: !(Maybe Int64)
     , _httprUserAgent     :: !(Maybe Text)
     , _httprResponseSize  :: !(Maybe Int64)
@@ -1236,9 +1236,9 @@ data HTTPRequest = HTTPRequest
 --
 -- * 'httprStatus'
 --
--- * 'httprRequestUrl'
+-- * 'httprRequestURL'
 --
--- * 'httprRemoteIp'
+-- * 'httprRemoteIP'
 --
 -- * 'httprRequestSize'
 --
@@ -1254,8 +1254,8 @@ hTTPRequest
 hTTPRequest =
     HTTPRequest
     { _httprStatus = Nothing
-    , _httprRequestUrl = Nothing
-    , _httprRemoteIp = Nothing
+    , _httprRequestURL = Nothing
+    , _httprRemoteIP = Nothing
     , _httprRequestSize = Nothing
     , _httprUserAgent = Nothing
     , _httprResponseSize = Nothing
@@ -1270,17 +1270,17 @@ httprStatus
 
 -- | Contains the scheme (http|https), the host name, the path and the query
 -- portion of the URL that was requested.
-httprRequestUrl :: Lens' HTTPRequest (Maybe Text)
-httprRequestUrl
-  = lens _httprRequestUrl
-      (\ s a -> s{_httprRequestUrl = a})
+httprRequestURL :: Lens' HTTPRequest (Maybe Text)
+httprRequestURL
+  = lens _httprRequestURL
+      (\ s a -> s{_httprRequestURL = a})
 
 -- | IP address of the client who issues the HTTP request. Could be either
 -- IPv4 or IPv6.
-httprRemoteIp :: Lens' HTTPRequest (Maybe Text)
-httprRemoteIp
-  = lens _httprRemoteIp
-      (\ s a -> s{_httprRemoteIp = a})
+httprRemoteIP :: Lens' HTTPRequest (Maybe Text)
+httprRemoteIP
+  = lens _httprRemoteIP
+      (\ s a -> s{_httprRemoteIP = a})
 
 -- | Size of the HTTP request message in bytes, including request headers and
 -- the request body.
@@ -1333,8 +1333,8 @@ instance ToJSON HTTPRequest where
           = object
               (catMaybes
                  [("status" .=) <$> _httprStatus,
-                  ("requestUrl" .=) <$> _httprRequestUrl,
-                  ("remoteIp" .=) <$> _httprRemoteIp,
+                  ("requestUrl" .=) <$> _httprRequestURL,
+                  ("remoteIp" .=) <$> _httprRemoteIP,
                   ("requestSize" .=) <$> _httprRequestSize,
                   ("userAgent" .=) <$> _httprUserAgent,
                   ("responseSize" .=) <$> _httprResponseSize,
@@ -1345,7 +1345,7 @@ instance ToJSON HTTPRequest where
 --
 -- /See:/ 'listLogSinksResponse' smart constructor.
 newtype ListLogSinksResponse = ListLogSinksResponse
-    { _llsrSinks :: Maybe [Maybe LogSink]
+    { _llsrSinks :: Maybe [LogSink]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListLogSinksResponse' with the minimum fields required to make a request.
@@ -1363,7 +1363,7 @@ listLogSinksResponse =
 -- | The requested log sinks. If a returned \`LogSink\` object has an empty
 -- \`destination\` field, the client can retrieve the complete \`LogSink\`
 -- object by calling \`log.sinks.get\`.
-llsrSinks :: Lens' ListLogSinksResponse [Maybe LogSink]
+llsrSinks :: Lens' ListLogSinksResponse [LogSink]
 llsrSinks
   = lens _llsrSinks (\ s a -> s{_llsrSinks = a}) .
       _Default
@@ -1440,7 +1440,7 @@ instance ToJSON LogService where
 --
 -- /See:/ 'listLogServiceSinksResponse' smart constructor.
 newtype ListLogServiceSinksResponse = ListLogServiceSinksResponse
-    { _llssrSinks :: Maybe [Maybe LogSink]
+    { _llssrSinks :: Maybe [LogSink]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ListLogServiceSinksResponse' with the minimum fields required to make a request.
@@ -1458,7 +1458,7 @@ listLogServiceSinksResponse =
 -- | The requested log service sinks. If a returned \`LogSink\` object has an
 -- empty \`destination\` field, the client can retrieve the complete
 -- \`LogSink\` object by calling \`logServices.sinks.get\`.
-llssrSinks :: Lens' ListLogServiceSinksResponse [Maybe LogSink]
+llssrSinks :: Lens' ListLogServiceSinksResponse [LogSink]
 llssrSinks
   = lens _llssrSinks (\ s a -> s{_llssrSinks = a}) .
       _Default
@@ -1482,7 +1482,7 @@ data LogLine = LogLine
     { _llTime           :: !(Maybe Text)
     , _llSeverity       :: !(Maybe Text)
     , _llLogMessage     :: !(Maybe Text)
-    , _llSourceLocation :: !(Maybe (Maybe SourceLocation))
+    , _llSourceLocation :: !(Maybe SourceLocation)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LogLine' with the minimum fields required to make a request.
@@ -1521,7 +1521,7 @@ llLogMessage
   = lens _llLogMessage (\ s a -> s{_llLogMessage = a})
 
 -- | Line of code that generated this log message.
-llSourceLocation :: Lens' LogLine (Maybe (Maybe SourceLocation))
+llSourceLocation :: Lens' LogLine (Maybe SourceLocation)
 llSourceLocation
   = lens _llSourceLocation
       (\ s a -> s{_llSourceLocation = a})
@@ -1580,12 +1580,12 @@ instance ToJSON LogEntryMetadataLabels where
 -- /See:/ 'logEntry' smart constructor.
 data LogEntry = LogEntry
     { _leLog           :: !(Maybe Text)
-    , _leTextPayload   :: !(Maybe Text)
-    , _leHttpRequest   :: !(Maybe (Maybe HTTPRequest))
-    , _leStructPayload :: !(Maybe LogEntryStructPayload)
+    , _leTextPayLoad   :: !(Maybe Text)
+    , _leHTTPRequest   :: !(Maybe HTTPRequest)
+    , _leStructPayLoad :: !(Maybe LogEntryStructPayLoad)
     , _leInsertId      :: !(Maybe Text)
-    , _leMetadata      :: !(Maybe (Maybe LogEntryMetadata))
-    , _leProtoPayload  :: !(Maybe LogEntryProtoPayload)
+    , _leMetadata      :: !(Maybe LogEntryMetadata)
+    , _leProtoPayLoad  :: !(Maybe LogEntryProtoPayLoad)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LogEntry' with the minimum fields required to make a request.
@@ -1594,28 +1594,28 @@ data LogEntry = LogEntry
 --
 -- * 'leLog'
 --
--- * 'leTextPayload'
+-- * 'leTextPayLoad'
 --
--- * 'leHttpRequest'
+-- * 'leHTTPRequest'
 --
--- * 'leStructPayload'
+-- * 'leStructPayLoad'
 --
 -- * 'leInsertId'
 --
 -- * 'leMetadata'
 --
--- * 'leProtoPayload'
+-- * 'leProtoPayLoad'
 logEntry
     :: LogEntry
 logEntry =
     LogEntry
     { _leLog = Nothing
-    , _leTextPayload = Nothing
-    , _leHttpRequest = Nothing
-    , _leStructPayload = Nothing
+    , _leTextPayLoad = Nothing
+    , _leHTTPRequest = Nothing
+    , _leStructPayLoad = Nothing
     , _leInsertId = Nothing
     , _leMetadata = Nothing
-    , _leProtoPayload = Nothing
+    , _leProtoPayLoad = Nothing
     }
 
 -- | The log to which this entry belongs. When a log entry is ingested, the
@@ -1624,24 +1624,24 @@ leLog :: Lens' LogEntry (Maybe Text)
 leLog = lens _leLog (\ s a -> s{_leLog = a})
 
 -- | The log entry payload, represented as a text string.
-leTextPayload :: Lens' LogEntry (Maybe Text)
-leTextPayload
-  = lens _leTextPayload
-      (\ s a -> s{_leTextPayload = a})
+leTextPayLoad :: Lens' LogEntry (Maybe Text)
+leTextPayLoad
+  = lens _leTextPayLoad
+      (\ s a -> s{_leTextPayLoad = a})
 
 -- | Information about the HTTP request associated with this log entry, if
 -- applicable.
-leHttpRequest :: Lens' LogEntry (Maybe (Maybe HTTPRequest))
-leHttpRequest
-  = lens _leHttpRequest
-      (\ s a -> s{_leHttpRequest = a})
+leHTTPRequest :: Lens' LogEntry (Maybe HTTPRequest)
+leHTTPRequest
+  = lens _leHTTPRequest
+      (\ s a -> s{_leHTTPRequest = a})
 
 -- | The log entry payload, represented as a structure that is expressed as a
 -- JSON object.
-leStructPayload :: Lens' LogEntry (Maybe LogEntryStructPayload)
-leStructPayload
-  = lens _leStructPayload
-      (\ s a -> s{_leStructPayload = a})
+leStructPayLoad :: Lens' LogEntry (Maybe LogEntryStructPayLoad)
+leStructPayLoad
+  = lens _leStructPayLoad
+      (\ s a -> s{_leStructPayLoad = a})
 
 -- | A unique ID for the log entry. If you provide this field, the logging
 -- service considers other log entries in the same log with the same ID as
@@ -1651,17 +1651,17 @@ leInsertId
   = lens _leInsertId (\ s a -> s{_leInsertId = a})
 
 -- | Information about the log entry.
-leMetadata :: Lens' LogEntry (Maybe (Maybe LogEntryMetadata))
+leMetadata :: Lens' LogEntry (Maybe LogEntryMetadata)
 leMetadata
   = lens _leMetadata (\ s a -> s{_leMetadata = a})
 
 -- | The log entry payload, represented as a protocol buffer that is
 -- expressed as a JSON object. You can only pass \`protoPayload\` values
 -- that belong to a set of approved types.
-leProtoPayload :: Lens' LogEntry (Maybe LogEntryProtoPayload)
-leProtoPayload
-  = lens _leProtoPayload
-      (\ s a -> s{_leProtoPayload = a})
+leProtoPayLoad :: Lens' LogEntry (Maybe LogEntryProtoPayLoad)
+leProtoPayLoad
+  = lens _leProtoPayLoad
+      (\ s a -> s{_leProtoPayLoad = a})
 
 instance FromJSON LogEntry where
         parseJSON
@@ -1680,12 +1680,12 @@ instance ToJSON LogEntry where
           = object
               (catMaybes
                  [("log" .=) <$> _leLog,
-                  ("textPayload" .=) <$> _leTextPayload,
-                  ("httpRequest" .=) <$> _leHttpRequest,
-                  ("structPayload" .=) <$> _leStructPayload,
+                  ("textPayload" .=) <$> _leTextPayLoad,
+                  ("httpRequest" .=) <$> _leHTTPRequest,
+                  ("structPayload" .=) <$> _leStructPayLoad,
                   ("insertId" .=) <$> _leInsertId,
                   ("metadata" .=) <$> _leMetadata,
-                  ("protoPayload" .=) <$> _leProtoPayload])
+                  ("protoPayload" .=) <$> _leProtoPayLoad])
 
 -- | Specifies a location in a source file.
 --
@@ -1802,21 +1802,21 @@ instance ToJSON SourceReference where
 -- | The log entry payload, represented as a structure that is expressed as a
 -- JSON object.
 --
--- /See:/ 'logEntryStructPayload' smart constructor.
-data LogEntryStructPayload =
-    LogEntryStructPayload
+-- /See:/ 'logEntryStructPayLoad' smart constructor.
+data LogEntryStructPayLoad =
+    LogEntryStructPayLoad
     deriving (Eq,Read,Show,Data,Typeable,Generic)
 
--- | Creates a value of 'LogEntryStructPayload' with the minimum fields required to make a request.
+-- | Creates a value of 'LogEntryStructPayLoad' with the minimum fields required to make a request.
 --
-logEntryStructPayload
-    :: LogEntryStructPayload
-logEntryStructPayload = LogEntryStructPayload
+logEntryStructPayLoad
+    :: LogEntryStructPayLoad
+logEntryStructPayLoad = LogEntryStructPayLoad
 
-instance FromJSON LogEntryStructPayload where
+instance FromJSON LogEntryStructPayLoad where
         parseJSON
-          = withObject "LogEntryStructPayload"
-              (\ o -> pure LogEntryStructPayload)
+          = withObject "LogEntryStructPayLoad"
+              (\ o -> pure LogEntryStructPayLoad)
 
-instance ToJSON LogEntryStructPayload where
+instance ToJSON LogEntryStructPayLoad where
         toJSON = const (Object mempty)

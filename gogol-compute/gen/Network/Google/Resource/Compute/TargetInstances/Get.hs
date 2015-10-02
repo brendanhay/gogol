@@ -34,12 +34,11 @@ module Network.Google.Resource.Compute.TargetInstances.Get
     , tigPrettyPrint
     , tigProject
     , tigTargetInstance
-    , tigUserIp
+    , tigUserIP
     , tigZone
     , tigKey
-    , tigOauthToken
+    , tigOAuthToken
     , tigFields
-    , tigAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -56,10 +55,11 @@ type TargetInstancesGetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Get '[JSON] TargetInstance
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] TargetInstance
 
 -- | Returns the specified TargetInstance resource.
 --
@@ -69,12 +69,11 @@ data TargetInstancesGet' = TargetInstancesGet'
     , _tigPrettyPrint    :: !Bool
     , _tigProject        :: !Text
     , _tigTargetInstance :: !Text
-    , _tigUserIp         :: !(Maybe Text)
+    , _tigUserIP         :: !(Maybe Text)
     , _tigZone           :: !Text
-    , _tigKey            :: !(Maybe Text)
-    , _tigOauthToken     :: !(Maybe Text)
+    , _tigKey            :: !(Maybe Key)
+    , _tigOAuthToken     :: !(Maybe OAuthToken)
     , _tigFields         :: !(Maybe Text)
-    , _tigAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetInstancesGet'' with the minimum fields required to make a request.
@@ -89,17 +88,15 @@ data TargetInstancesGet' = TargetInstancesGet'
 --
 -- * 'tigTargetInstance'
 --
--- * 'tigUserIp'
+-- * 'tigUserIP'
 --
 -- * 'tigZone'
 --
 -- * 'tigKey'
 --
--- * 'tigOauthToken'
+-- * 'tigOAuthToken'
 --
 -- * 'tigFields'
---
--- * 'tigAlt'
 targetInstancesGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'targetInstance'
@@ -111,12 +108,11 @@ targetInstancesGet' pTigProject_ pTigTargetInstance_ pTigZone_ =
     , _tigPrettyPrint = True
     , _tigProject = pTigProject_
     , _tigTargetInstance = pTigTargetInstance_
-    , _tigUserIp = Nothing
+    , _tigUserIP = Nothing
     , _tigZone = pTigZone_
     , _tigKey = Nothing
-    , _tigOauthToken = Nothing
+    , _tigOAuthToken = Nothing
     , _tigFields = Nothing
-    , _tigAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -145,9 +141,9 @@ tigTargetInstance
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tigUserIp :: Lens' TargetInstancesGet' (Maybe Text)
-tigUserIp
-  = lens _tigUserIp (\ s a -> s{_tigUserIp = a})
+tigUserIP :: Lens' TargetInstancesGet' (Maybe Text)
+tigUserIP
+  = lens _tigUserIP (\ s a -> s{_tigUserIP = a})
 
 -- | Name of the zone scoping this request.
 tigZone :: Lens' TargetInstancesGet' Text
@@ -156,23 +152,23 @@ tigZone = lens _tigZone (\ s a -> s{_tigZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tigKey :: Lens' TargetInstancesGet' (Maybe Text)
+tigKey :: Lens' TargetInstancesGet' (Maybe Key)
 tigKey = lens _tigKey (\ s a -> s{_tigKey = a})
 
 -- | OAuth 2.0 token for the current user.
-tigOauthToken :: Lens' TargetInstancesGet' (Maybe Text)
-tigOauthToken
-  = lens _tigOauthToken
-      (\ s a -> s{_tigOauthToken = a})
+tigOAuthToken :: Lens' TargetInstancesGet' (Maybe OAuthToken)
+tigOAuthToken
+  = lens _tigOAuthToken
+      (\ s a -> s{_tigOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 tigFields :: Lens' TargetInstancesGet' (Maybe Text)
 tigFields
   = lens _tigFields (\ s a -> s{_tigFields = a})
 
--- | Data format for the response.
-tigAlt :: Lens' TargetInstancesGet' Alt
-tigAlt = lens _tigAlt (\ s a -> s{_tigAlt = a})
+instance GoogleAuth TargetInstancesGet' where
+        authKey = tigKey . _Just
+        authToken = tigOAuthToken . _Just
 
 instance GoogleRequest TargetInstancesGet' where
         type Rs TargetInstancesGet' = TargetInstance
@@ -180,12 +176,12 @@ instance GoogleRequest TargetInstancesGet' where
         requestWithRoute r u TargetInstancesGet'{..}
           = go _tigQuotaUser (Just _tigPrettyPrint) _tigProject
               _tigTargetInstance
-              _tigUserIp
+              _tigUserIP
               _tigZone
               _tigKey
-              _tigOauthToken
+              _tigOAuthToken
               _tigFields
-              (Just _tigAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TargetInstancesGetResource)

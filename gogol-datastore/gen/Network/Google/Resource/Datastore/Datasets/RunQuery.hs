@@ -32,12 +32,12 @@ module Network.Google.Resource.Datastore.Datasets.RunQuery
     -- * Request Lenses
     , drqQuotaUser
     , drqPrettyPrint
-    , drqUserIp
+    , drqRunQueryRequest
+    , drqUserIP
     , drqKey
     , drqDatasetId
-    , drqOauthToken
+    , drqOAuthToken
     , drqFields
-    , drqAlt
     ) where
 
 import           Network.Google.Datastore.Types
@@ -51,23 +51,25 @@ type DatasetsRunQueryResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Post '[JSON] RunQueryResponse
+                     QueryParam "alt" AltPROTO :>
+                       ReqBody '[JSON] RunQueryRequest :>
+                         Post '[JSON] RunQueryResponse
 
 -- | Query for entities.
 --
 -- /See:/ 'datasetsRunQuery'' smart constructor.
 data DatasetsRunQuery' = DatasetsRunQuery'
-    { _drqQuotaUser   :: !(Maybe Text)
-    , _drqPrettyPrint :: !Bool
-    , _drqUserIp      :: !(Maybe Text)
-    , _drqKey         :: !(Maybe Text)
-    , _drqDatasetId   :: !Text
-    , _drqOauthToken  :: !(Maybe Text)
-    , _drqFields      :: !(Maybe Text)
-    , _drqAlt         :: !Alt
+    { _drqQuotaUser       :: !(Maybe Text)
+    , _drqPrettyPrint     :: !Bool
+    , _drqRunQueryRequest :: !RunQueryRequest
+    , _drqUserIP          :: !(Maybe Text)
+    , _drqKey             :: !(Maybe Key)
+    , _drqDatasetId       :: !Text
+    , _drqOAuthToken      :: !(Maybe OAuthToken)
+    , _drqFields          :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetsRunQuery'' with the minimum fields required to make a request.
@@ -78,30 +80,31 @@ data DatasetsRunQuery' = DatasetsRunQuery'
 --
 -- * 'drqPrettyPrint'
 --
--- * 'drqUserIp'
+-- * 'drqRunQueryRequest'
+--
+-- * 'drqUserIP'
 --
 -- * 'drqKey'
 --
 -- * 'drqDatasetId'
 --
--- * 'drqOauthToken'
+-- * 'drqOAuthToken'
 --
 -- * 'drqFields'
---
--- * 'drqAlt'
 datasetsRunQuery'
-    :: Text -- ^ 'datasetId'
+    :: RunQueryRequest -- ^ 'RunQueryRequest'
+    -> Text -- ^ 'datasetId'
     -> DatasetsRunQuery'
-datasetsRunQuery' pDrqDatasetId_ =
+datasetsRunQuery' pDrqRunQueryRequest_ pDrqDatasetId_ =
     DatasetsRunQuery'
     { _drqQuotaUser = Nothing
     , _drqPrettyPrint = True
-    , _drqUserIp = Nothing
+    , _drqRunQueryRequest = pDrqRunQueryRequest_
+    , _drqUserIP = Nothing
     , _drqKey = Nothing
     , _drqDatasetId = pDrqDatasetId_
-    , _drqOauthToken = Nothing
+    , _drqOAuthToken = Nothing
     , _drqFields = Nothing
-    , _drqAlt = Proto
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -117,16 +120,22 @@ drqPrettyPrint
   = lens _drqPrettyPrint
       (\ s a -> s{_drqPrettyPrint = a})
 
+-- | Multipart request metadata.
+drqRunQueryRequest :: Lens' DatasetsRunQuery' RunQueryRequest
+drqRunQueryRequest
+  = lens _drqRunQueryRequest
+      (\ s a -> s{_drqRunQueryRequest = a})
+
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-drqUserIp :: Lens' DatasetsRunQuery' (Maybe Text)
-drqUserIp
-  = lens _drqUserIp (\ s a -> s{_drqUserIp = a})
+drqUserIP :: Lens' DatasetsRunQuery' (Maybe Text)
+drqUserIP
+  = lens _drqUserIP (\ s a -> s{_drqUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-drqKey :: Lens' DatasetsRunQuery' (Maybe Text)
+drqKey :: Lens' DatasetsRunQuery' (Maybe Key)
 drqKey = lens _drqKey (\ s a -> s{_drqKey = a})
 
 -- | Identifies the dataset.
@@ -135,30 +144,31 @@ drqDatasetId
   = lens _drqDatasetId (\ s a -> s{_drqDatasetId = a})
 
 -- | OAuth 2.0 token for the current user.
-drqOauthToken :: Lens' DatasetsRunQuery' (Maybe Text)
-drqOauthToken
-  = lens _drqOauthToken
-      (\ s a -> s{_drqOauthToken = a})
+drqOAuthToken :: Lens' DatasetsRunQuery' (Maybe OAuthToken)
+drqOAuthToken
+  = lens _drqOAuthToken
+      (\ s a -> s{_drqOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 drqFields :: Lens' DatasetsRunQuery' (Maybe Text)
 drqFields
   = lens _drqFields (\ s a -> s{_drqFields = a})
 
--- | Data format for the response.
-drqAlt :: Lens' DatasetsRunQuery' Alt
-drqAlt = lens _drqAlt (\ s a -> s{_drqAlt = a})
+instance GoogleAuth DatasetsRunQuery' where
+        authKey = drqKey . _Just
+        authToken = drqOAuthToken . _Just
 
 instance GoogleRequest DatasetsRunQuery' where
         type Rs DatasetsRunQuery' = RunQueryResponse
         request = requestWithRoute defReq datastoreURL
         requestWithRoute r u DatasetsRunQuery'{..}
-          = go _drqQuotaUser (Just _drqPrettyPrint) _drqUserIp
+          = go _drqQuotaUser (Just _drqPrettyPrint) _drqUserIP
               _drqKey
               _drqDatasetId
-              _drqOauthToken
+              _drqOAuthToken
               _drqFields
-              (Just _drqAlt)
+              (Just AltPROTO)
+              _drqRunQueryRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy DatasetsRunQueryResource)

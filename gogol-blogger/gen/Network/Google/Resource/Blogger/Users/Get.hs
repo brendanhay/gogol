@@ -32,12 +32,11 @@ module Network.Google.Resource.Blogger.Users.Get
     -- * Request Lenses
     , ugQuotaUser
     , ugPrettyPrint
-    , ugUserIp
+    , ugUserIP
     , ugUserId
     , ugKey
-    , ugOauthToken
+    , ugOAuthToken
     , ugFields
-    , ugAlt
     ) where
 
 import           Network.Google.Blogger.Types
@@ -51,10 +50,10 @@ type UsersGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Get '[JSON] User
+                     QueryParam "alt" AltJSON :> Get '[JSON] User
 
 -- | Gets one user by ID.
 --
@@ -62,12 +61,11 @@ type UsersGetResource =
 data UsersGet' = UsersGet'
     { _ugQuotaUser   :: !(Maybe Text)
     , _ugPrettyPrint :: !Bool
-    , _ugUserIp      :: !(Maybe Text)
+    , _ugUserIP      :: !(Maybe Text)
     , _ugUserId      :: !Text
-    , _ugKey         :: !(Maybe Text)
-    , _ugOauthToken  :: !(Maybe Text)
+    , _ugKey         :: !(Maybe Key)
+    , _ugOAuthToken  :: !(Maybe OAuthToken)
     , _ugFields      :: !(Maybe Text)
-    , _ugAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersGet'' with the minimum fields required to make a request.
@@ -78,17 +76,15 @@ data UsersGet' = UsersGet'
 --
 -- * 'ugPrettyPrint'
 --
--- * 'ugUserIp'
+-- * 'ugUserIP'
 --
 -- * 'ugUserId'
 --
 -- * 'ugKey'
 --
--- * 'ugOauthToken'
+-- * 'ugOAuthToken'
 --
 -- * 'ugFields'
---
--- * 'ugAlt'
 usersGet'
     :: Text -- ^ 'userId'
     -> UsersGet'
@@ -96,12 +92,11 @@ usersGet' pUgUserId_ =
     UsersGet'
     { _ugQuotaUser = Nothing
     , _ugPrettyPrint = True
-    , _ugUserIp = Nothing
+    , _ugUserIP = Nothing
     , _ugUserId = pUgUserId_
     , _ugKey = Nothing
-    , _ugOauthToken = Nothing
+    , _ugOAuthToken = Nothing
     , _ugFields = Nothing
-    , _ugAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -119,8 +114,8 @@ ugPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ugUserIp :: Lens' UsersGet' (Maybe Text)
-ugUserIp = lens _ugUserIp (\ s a -> s{_ugUserIp = a})
+ugUserIP :: Lens' UsersGet' (Maybe Text)
+ugUserIP = lens _ugUserIP (\ s a -> s{_ugUserIP = a})
 
 -- | The ID of the user to get.
 ugUserId :: Lens' UsersGet' Text
@@ -129,32 +124,32 @@ ugUserId = lens _ugUserId (\ s a -> s{_ugUserId = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ugKey :: Lens' UsersGet' (Maybe Text)
+ugKey :: Lens' UsersGet' (Maybe Key)
 ugKey = lens _ugKey (\ s a -> s{_ugKey = a})
 
 -- | OAuth 2.0 token for the current user.
-ugOauthToken :: Lens' UsersGet' (Maybe Text)
-ugOauthToken
-  = lens _ugOauthToken (\ s a -> s{_ugOauthToken = a})
+ugOAuthToken :: Lens' UsersGet' (Maybe OAuthToken)
+ugOAuthToken
+  = lens _ugOAuthToken (\ s a -> s{_ugOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ugFields :: Lens' UsersGet' (Maybe Text)
 ugFields = lens _ugFields (\ s a -> s{_ugFields = a})
 
--- | Data format for the response.
-ugAlt :: Lens' UsersGet' Alt
-ugAlt = lens _ugAlt (\ s a -> s{_ugAlt = a})
+instance GoogleAuth UsersGet' where
+        authKey = ugKey . _Just
+        authToken = ugOAuthToken . _Just
 
 instance GoogleRequest UsersGet' where
         type Rs UsersGet' = User
         request = requestWithRoute defReq bloggerURL
         requestWithRoute r u UsersGet'{..}
-          = go _ugQuotaUser (Just _ugPrettyPrint) _ugUserIp
+          = go _ugQuotaUser (Just _ugPrettyPrint) _ugUserIP
               _ugUserId
               _ugKey
-              _ugOauthToken
+              _ugOAuthToken
               _ugFields
-              (Just _ugAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy UsersGetResource) r
                       u

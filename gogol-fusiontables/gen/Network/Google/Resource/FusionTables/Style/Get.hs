@@ -32,13 +32,12 @@ module Network.Google.Resource.FusionTables.Style.Get
     -- * Request Lenses
     , sgQuotaUser
     , sgPrettyPrint
-    , sgUserIp
+    , sgUserIP
     , sgKey
     , sgStyleId
-    , sgOauthToken
+    , sgOAuthToken
     , sgTableId
     , sgFields
-    , sgAlt
     ) where
 
 import           Network.Google.FusionTables.Types
@@ -54,10 +53,10 @@ type StyleGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] StyleSetting
+                         QueryParam "alt" AltJSON :> Get '[JSON] StyleSetting
 
 -- | Gets a specific style.
 --
@@ -65,13 +64,12 @@ type StyleGetResource =
 data StyleGet' = StyleGet'
     { _sgQuotaUser   :: !(Maybe Text)
     , _sgPrettyPrint :: !Bool
-    , _sgUserIp      :: !(Maybe Text)
-    , _sgKey         :: !(Maybe Text)
+    , _sgUserIP      :: !(Maybe Text)
+    , _sgKey         :: !(Maybe Key)
     , _sgStyleId     :: !Int32
-    , _sgOauthToken  :: !(Maybe Text)
+    , _sgOAuthToken  :: !(Maybe OAuthToken)
     , _sgTableId     :: !Text
     , _sgFields      :: !(Maybe Text)
-    , _sgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'StyleGet'' with the minimum fields required to make a request.
@@ -82,19 +80,17 @@ data StyleGet' = StyleGet'
 --
 -- * 'sgPrettyPrint'
 --
--- * 'sgUserIp'
+-- * 'sgUserIP'
 --
 -- * 'sgKey'
 --
 -- * 'sgStyleId'
 --
--- * 'sgOauthToken'
+-- * 'sgOAuthToken'
 --
 -- * 'sgTableId'
 --
 -- * 'sgFields'
---
--- * 'sgAlt'
 styleGet'
     :: Int32 -- ^ 'styleId'
     -> Text -- ^ 'tableId'
@@ -103,13 +99,12 @@ styleGet' pSgStyleId_ pSgTableId_ =
     StyleGet'
     { _sgQuotaUser = Nothing
     , _sgPrettyPrint = True
-    , _sgUserIp = Nothing
+    , _sgUserIP = Nothing
     , _sgKey = Nothing
     , _sgStyleId = pSgStyleId_
-    , _sgOauthToken = Nothing
+    , _sgOAuthToken = Nothing
     , _sgTableId = pSgTableId_
     , _sgFields = Nothing
-    , _sgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,13 +122,13 @@ sgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-sgUserIp :: Lens' StyleGet' (Maybe Text)
-sgUserIp = lens _sgUserIp (\ s a -> s{_sgUserIp = a})
+sgUserIP :: Lens' StyleGet' (Maybe Text)
+sgUserIP = lens _sgUserIP (\ s a -> s{_sgUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-sgKey :: Lens' StyleGet' (Maybe Text)
+sgKey :: Lens' StyleGet' (Maybe Key)
 sgKey = lens _sgKey (\ s a -> s{_sgKey = a})
 
 -- | Identifier (integer) for a specific style in a table
@@ -142,9 +137,9 @@ sgStyleId
   = lens _sgStyleId (\ s a -> s{_sgStyleId = a})
 
 -- | OAuth 2.0 token for the current user.
-sgOauthToken :: Lens' StyleGet' (Maybe Text)
-sgOauthToken
-  = lens _sgOauthToken (\ s a -> s{_sgOauthToken = a})
+sgOAuthToken :: Lens' StyleGet' (Maybe OAuthToken)
+sgOAuthToken
+  = lens _sgOAuthToken (\ s a -> s{_sgOAuthToken = a})
 
 -- | Table to which the requested style belongs
 sgTableId :: Lens' StyleGet' Text
@@ -155,21 +150,21 @@ sgTableId
 sgFields :: Lens' StyleGet' (Maybe Text)
 sgFields = lens _sgFields (\ s a -> s{_sgFields = a})
 
--- | Data format for the response.
-sgAlt :: Lens' StyleGet' Alt
-sgAlt = lens _sgAlt (\ s a -> s{_sgAlt = a})
+instance GoogleAuth StyleGet' where
+        authKey = sgKey . _Just
+        authToken = sgOAuthToken . _Just
 
 instance GoogleRequest StyleGet' where
         type Rs StyleGet' = StyleSetting
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u StyleGet'{..}
-          = go _sgQuotaUser (Just _sgPrettyPrint) _sgUserIp
+          = go _sgQuotaUser (Just _sgPrettyPrint) _sgUserIP
               _sgKey
               _sgStyleId
-              _sgOauthToken
+              _sgOAuthToken
               _sgTableId
               _sgFields
-              (Just _sgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy StyleGetResource) r
                       u

@@ -32,12 +32,11 @@ module Network.Google.Resource.Books.Onboarding.ListCategories
     -- * Request Lenses
     , olcQuotaUser
     , olcPrettyPrint
-    , olcUserIp
+    , olcUserIP
     , olcLocale
     , olcKey
-    , olcOauthToken
+    , olcOAuthToken
     , olcFields
-    , olcAlt
     ) where
 
 import           Network.Google.Books.Types
@@ -52,10 +51,10 @@ type OnboardingListCategoriesResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParam "locale" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Get '[JSON] Category
+                       QueryParam "alt" AltJSON :> Get '[JSON] Category
 
 -- | List categories for onboarding experience.
 --
@@ -63,12 +62,11 @@ type OnboardingListCategoriesResource =
 data OnboardingListCategories' = OnboardingListCategories'
     { _olcQuotaUser   :: !(Maybe Text)
     , _olcPrettyPrint :: !Bool
-    , _olcUserIp      :: !(Maybe Text)
+    , _olcUserIP      :: !(Maybe Text)
     , _olcLocale      :: !(Maybe Text)
-    , _olcKey         :: !(Maybe Text)
-    , _olcOauthToken  :: !(Maybe Text)
+    , _olcKey         :: !(Maybe Key)
+    , _olcOAuthToken  :: !(Maybe OAuthToken)
     , _olcFields      :: !(Maybe Text)
-    , _olcAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OnboardingListCategories'' with the minimum fields required to make a request.
@@ -79,29 +77,26 @@ data OnboardingListCategories' = OnboardingListCategories'
 --
 -- * 'olcPrettyPrint'
 --
--- * 'olcUserIp'
+-- * 'olcUserIP'
 --
 -- * 'olcLocale'
 --
 -- * 'olcKey'
 --
--- * 'olcOauthToken'
+-- * 'olcOAuthToken'
 --
 -- * 'olcFields'
---
--- * 'olcAlt'
 onboardingListCategories'
     :: OnboardingListCategories'
 onboardingListCategories' =
     OnboardingListCategories'
     { _olcQuotaUser = Nothing
     , _olcPrettyPrint = True
-    , _olcUserIp = Nothing
+    , _olcUserIP = Nothing
     , _olcLocale = Nothing
     , _olcKey = Nothing
-    , _olcOauthToken = Nothing
+    , _olcOAuthToken = Nothing
     , _olcFields = Nothing
-    , _olcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -119,9 +114,9 @@ olcPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-olcUserIp :: Lens' OnboardingListCategories' (Maybe Text)
-olcUserIp
-  = lens _olcUserIp (\ s a -> s{_olcUserIp = a})
+olcUserIP :: Lens' OnboardingListCategories' (Maybe Text)
+olcUserIP
+  = lens _olcUserIP (\ s a -> s{_olcUserIP = a})
 
 -- | ISO-639-1 language and ISO-3166-1 country code. Default is en-US if
 -- unset.
@@ -132,35 +127,35 @@ olcLocale
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-olcKey :: Lens' OnboardingListCategories' (Maybe Text)
+olcKey :: Lens' OnboardingListCategories' (Maybe Key)
 olcKey = lens _olcKey (\ s a -> s{_olcKey = a})
 
 -- | OAuth 2.0 token for the current user.
-olcOauthToken :: Lens' OnboardingListCategories' (Maybe Text)
-olcOauthToken
-  = lens _olcOauthToken
-      (\ s a -> s{_olcOauthToken = a})
+olcOAuthToken :: Lens' OnboardingListCategories' (Maybe OAuthToken)
+olcOAuthToken
+  = lens _olcOAuthToken
+      (\ s a -> s{_olcOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 olcFields :: Lens' OnboardingListCategories' (Maybe Text)
 olcFields
   = lens _olcFields (\ s a -> s{_olcFields = a})
 
--- | Data format for the response.
-olcAlt :: Lens' OnboardingListCategories' Alt
-olcAlt = lens _olcAlt (\ s a -> s{_olcAlt = a})
+instance GoogleAuth OnboardingListCategories' where
+        authKey = olcKey . _Just
+        authToken = olcOAuthToken . _Just
 
 instance GoogleRequest OnboardingListCategories'
          where
         type Rs OnboardingListCategories' = Category
         request = requestWithRoute defReq booksURL
         requestWithRoute r u OnboardingListCategories'{..}
-          = go _olcQuotaUser (Just _olcPrettyPrint) _olcUserIp
+          = go _olcQuotaUser (Just _olcPrettyPrint) _olcUserIP
               _olcLocale
               _olcKey
-              _olcOauthToken
+              _olcOAuthToken
               _olcFields
-              (Just _olcAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy OnboardingListCategoriesResource)

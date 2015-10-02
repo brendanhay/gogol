@@ -21,7 +21,7 @@
 -- Authorization rules_ and _List methods rules_ for more information about
 -- this method.
 --
--- /See:/ <https://developers.google.com/playmoviespartner/ Google Play Movies Partner API Reference> for @PlaymoviespartnerAccountsOrdersList@.
+-- /See:/ <https://developers.google.com/playmoviespartner/ Google Play Movies Partner API Reference> for @PlaymoviesPartynerAccountsOrdersList@.
 module Network.Google.Resource.PlayMoviesPartner.Accounts.Orders.List
     (
     -- * REST Resource
@@ -48,17 +48,16 @@ module Network.Google.Resource.PlayMoviesPartner.Accounts.Orders.List
     , aolKey
     , aolName
     , aolPageToken
-    , aolOauthToken
+    , aolOAuthToken
     , aolPageSize
     , aolFields
     , aolCallback
-    , aolAlt
     ) where
 
 import           Network.Google.PlayMoviesPartner.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlaymoviespartnerAccountsOrdersList@ which the
+-- | A resource alias for @PlaymoviesPartynerAccountsOrdersList@ which the
 -- 'AccountsOrdersList'' request conforms to.
 type AccountsOrdersListResource =
      "v1" :>
@@ -77,14 +76,15 @@ type AccountsOrdersListResource =
                                QueryParam "uploadType" Text :>
                                  QueryParam "customId" Text :>
                                    QueryParam "bearer_token" Text :>
-                                     QueryParam "key" Text :>
+                                     QueryParam "key" Key :>
                                        QueryParam "name" Text :>
                                          QueryParam "pageToken" Text :>
-                                           QueryParam "oauth_token" Text :>
+                                           QueryParam "oauth_token" OAuthToken
+                                             :>
                                              QueryParam "pageSize" Int32 :>
                                                QueryParam "fields" Text :>
                                                  QueryParam "callback" Text :>
-                                                   QueryParam "alt" Text :>
+                                                   QueryParam "alt" AltJSON :>
                                                      Get '[JSON]
                                                        ListOrdersResponse
 
@@ -107,14 +107,13 @@ data AccountsOrdersList' = AccountsOrdersList'
     , _aolCustomId       :: !(Maybe Text)
     , _aolAccountId      :: !Text
     , _aolBearerToken    :: !(Maybe Text)
-    , _aolKey            :: !(Maybe Text)
+    , _aolKey            :: !(Maybe Key)
     , _aolName           :: !(Maybe Text)
     , _aolPageToken      :: !(Maybe Text)
-    , _aolOauthToken     :: !(Maybe Text)
+    , _aolOAuthToken     :: !(Maybe OAuthToken)
     , _aolPageSize       :: !(Maybe Int32)
     , _aolFields         :: !(Maybe Text)
     , _aolCallback       :: !(Maybe Text)
-    , _aolAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsOrdersList'' with the minimum fields required to make a request.
@@ -153,15 +152,13 @@ data AccountsOrdersList' = AccountsOrdersList'
 --
 -- * 'aolPageToken'
 --
--- * 'aolOauthToken'
+-- * 'aolOAuthToken'
 --
 -- * 'aolPageSize'
 --
 -- * 'aolFields'
 --
 -- * 'aolCallback'
---
--- * 'aolAlt'
 accountsOrdersList'
     :: Text -- ^ 'accountId'
     -> AccountsOrdersList'
@@ -183,11 +180,10 @@ accountsOrdersList' pAolAccountId_ =
     , _aolKey = Nothing
     , _aolName = Nothing
     , _aolPageToken = Nothing
-    , _aolOauthToken = Nothing
+    , _aolOAuthToken = Nothing
     , _aolPageSize = Nothing
     , _aolFields = Nothing
     , _aolCallback = Nothing
-    , _aolAlt = "json"
     }
 
 -- | Filter Orders that match one of the given status.
@@ -264,7 +260,7 @@ aolBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aolKey :: Lens' AccountsOrdersList' (Maybe Text)
+aolKey :: Lens' AccountsOrdersList' (Maybe Key)
 aolKey = lens _aolKey (\ s a -> s{_aolKey = a})
 
 -- | Filter Orders that match a title name (case-insensitive, sub-string
@@ -278,10 +274,10 @@ aolPageToken
   = lens _aolPageToken (\ s a -> s{_aolPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-aolOauthToken :: Lens' AccountsOrdersList' (Maybe Text)
-aolOauthToken
-  = lens _aolOauthToken
-      (\ s a -> s{_aolOauthToken = a})
+aolOAuthToken :: Lens' AccountsOrdersList' (Maybe OAuthToken)
+aolOAuthToken
+  = lens _aolOAuthToken
+      (\ s a -> s{_aolOAuthToken = a})
 
 -- | See _List methods rules_ for info about this field.
 aolPageSize :: Lens' AccountsOrdersList' (Maybe Int32)
@@ -298,9 +294,9 @@ aolCallback :: Lens' AccountsOrdersList' (Maybe Text)
 aolCallback
   = lens _aolCallback (\ s a -> s{_aolCallback = a})
 
--- | Data format for response.
-aolAlt :: Lens' AccountsOrdersList' Text
-aolAlt = lens _aolAlt (\ s a -> s{_aolAlt = a})
+instance GoogleAuth AccountsOrdersList' where
+        authKey = aolKey . _Just
+        authToken = aolOAuthToken . _Just
 
 instance GoogleRequest AccountsOrdersList' where
         type Rs AccountsOrdersList' = ListOrdersResponse
@@ -321,11 +317,11 @@ instance GoogleRequest AccountsOrdersList' where
               _aolKey
               _aolName
               _aolPageToken
-              _aolOauthToken
+              _aolOAuthToken
               _aolPageSize
               _aolFields
               _aolCallback
-              (Just _aolAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountsOrdersListResource)

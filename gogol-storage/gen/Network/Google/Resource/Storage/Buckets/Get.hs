@@ -33,14 +33,13 @@ module Network.Google.Resource.Storage.Buckets.Get
     , bgQuotaUser
     , bgIfMetagenerationMatch
     , bgPrettyPrint
-    , bgUserIp
+    , bgUserIP
     , bgBucket
     , bgKey
     , bgIfMetagenerationNotMatch
     , bgProjection
-    , bgOauthToken
+    , bgOAuthToken
     , bgFields
-    , bgAlt
     ) where
 
 import           Network.Google.Prelude
@@ -55,13 +54,13 @@ type BucketsGetResource =
            QueryParam "ifMetagenerationMatch" Word64 :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "ifMetagenerationNotMatch" Word64 :>
                      QueryParam "projection" StorageBucketsGetProjection
                        :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Get '[JSON] Bucket
+                           QueryParam "alt" AltJSON :> Get '[JSON] Bucket
 
 -- | Returns metadata for the specified bucket.
 --
@@ -70,14 +69,13 @@ data BucketsGet' = BucketsGet'
     { _bgQuotaUser                :: !(Maybe Text)
     , _bgIfMetagenerationMatch    :: !(Maybe Word64)
     , _bgPrettyPrint              :: !Bool
-    , _bgUserIp                   :: !(Maybe Text)
+    , _bgUserIP                   :: !(Maybe Text)
     , _bgBucket                   :: !Text
-    , _bgKey                      :: !(Maybe Text)
+    , _bgKey                      :: !(Maybe Key)
     , _bgIfMetagenerationNotMatch :: !(Maybe Word64)
     , _bgProjection               :: !(Maybe StorageBucketsGetProjection)
-    , _bgOauthToken               :: !(Maybe Text)
+    , _bgOAuthToken               :: !(Maybe OAuthToken)
     , _bgFields                   :: !(Maybe Text)
-    , _bgAlt                      :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketsGet'' with the minimum fields required to make a request.
@@ -90,7 +88,7 @@ data BucketsGet' = BucketsGet'
 --
 -- * 'bgPrettyPrint'
 --
--- * 'bgUserIp'
+-- * 'bgUserIP'
 --
 -- * 'bgBucket'
 --
@@ -100,11 +98,9 @@ data BucketsGet' = BucketsGet'
 --
 -- * 'bgProjection'
 --
--- * 'bgOauthToken'
+-- * 'bgOAuthToken'
 --
 -- * 'bgFields'
---
--- * 'bgAlt'
 bucketsGet'
     :: Text -- ^ 'bucket'
     -> BucketsGet'
@@ -113,14 +109,13 @@ bucketsGet' pBgBucket_ =
     { _bgQuotaUser = Nothing
     , _bgIfMetagenerationMatch = Nothing
     , _bgPrettyPrint = True
-    , _bgUserIp = Nothing
+    , _bgUserIP = Nothing
     , _bgBucket = pBgBucket_
     , _bgKey = Nothing
     , _bgIfMetagenerationNotMatch = Nothing
     , _bgProjection = Nothing
-    , _bgOauthToken = Nothing
+    , _bgOAuthToken = Nothing
     , _bgFields = Nothing
-    , _bgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -145,8 +140,8 @@ bgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-bgUserIp :: Lens' BucketsGet' (Maybe Text)
-bgUserIp = lens _bgUserIp (\ s a -> s{_bgUserIp = a})
+bgUserIP :: Lens' BucketsGet' (Maybe Text)
+bgUserIP = lens _bgUserIP (\ s a -> s{_bgUserIP = a})
 
 -- | Name of a bucket.
 bgBucket :: Lens' BucketsGet' Text
@@ -155,7 +150,7 @@ bgBucket = lens _bgBucket (\ s a -> s{_bgBucket = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-bgKey :: Lens' BucketsGet' (Maybe Text)
+bgKey :: Lens' BucketsGet' (Maybe Key)
 bgKey = lens _bgKey (\ s a -> s{_bgKey = a})
 
 -- | Makes the return of the bucket metadata conditional on whether the
@@ -171,17 +166,17 @@ bgProjection
   = lens _bgProjection (\ s a -> s{_bgProjection = a})
 
 -- | OAuth 2.0 token for the current user.
-bgOauthToken :: Lens' BucketsGet' (Maybe Text)
-bgOauthToken
-  = lens _bgOauthToken (\ s a -> s{_bgOauthToken = a})
+bgOAuthToken :: Lens' BucketsGet' (Maybe OAuthToken)
+bgOAuthToken
+  = lens _bgOAuthToken (\ s a -> s{_bgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 bgFields :: Lens' BucketsGet' (Maybe Text)
 bgFields = lens _bgFields (\ s a -> s{_bgFields = a})
 
--- | Data format for the response.
-bgAlt :: Lens' BucketsGet' Alt
-bgAlt = lens _bgAlt (\ s a -> s{_bgAlt = a})
+instance GoogleAuth BucketsGet' where
+        authKey = bgKey . _Just
+        authToken = bgOAuthToken . _Just
 
 instance GoogleRequest BucketsGet' where
         type Rs BucketsGet' = Bucket
@@ -189,14 +184,14 @@ instance GoogleRequest BucketsGet' where
         requestWithRoute r u BucketsGet'{..}
           = go _bgQuotaUser _bgIfMetagenerationMatch
               (Just _bgPrettyPrint)
-              _bgUserIp
+              _bgUserIP
               _bgBucket
               _bgKey
               _bgIfMetagenerationNotMatch
               _bgProjection
-              _bgOauthToken
+              _bgOAuthToken
               _bgFields
-              (Just _bgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy BucketsGetResource)
                       r

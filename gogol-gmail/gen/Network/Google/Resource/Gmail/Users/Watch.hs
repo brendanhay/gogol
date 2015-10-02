@@ -32,12 +32,12 @@ module Network.Google.Resource.Gmail.Users.Watch
     -- * Request Lenses
     , uwQuotaUser
     , uwPrettyPrint
-    , uwUserIp
+    , uwUserIP
     , uwUserId
     , uwKey
-    , uwOauthToken
+    , uwWatchRequest
+    , uwOAuthToken
     , uwFields
-    , uwAlt
     ) where
 
 import           Network.Google.Gmail.Types
@@ -51,23 +51,25 @@ type UsersWatchResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Post '[JSON] WatchResponse
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] WatchRequest :>
+                         Post '[JSON] WatchResponse
 
 -- | Set up or update a push notification watch on the given user mailbox.
 --
 -- /See:/ 'usersWatch'' smart constructor.
 data UsersWatch' = UsersWatch'
-    { _uwQuotaUser   :: !(Maybe Text)
-    , _uwPrettyPrint :: !Bool
-    , _uwUserIp      :: !(Maybe Text)
-    , _uwUserId      :: !Text
-    , _uwKey         :: !(Maybe Text)
-    , _uwOauthToken  :: !(Maybe Text)
-    , _uwFields      :: !(Maybe Text)
-    , _uwAlt         :: !Alt
+    { _uwQuotaUser    :: !(Maybe Text)
+    , _uwPrettyPrint  :: !Bool
+    , _uwUserIP       :: !(Maybe Text)
+    , _uwUserId       :: !Text
+    , _uwKey          :: !(Maybe Key)
+    , _uwWatchRequest :: !WatchRequest
+    , _uwOAuthToken   :: !(Maybe OAuthToken)
+    , _uwFields       :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersWatch'' with the minimum fields required to make a request.
@@ -78,30 +80,31 @@ data UsersWatch' = UsersWatch'
 --
 -- * 'uwPrettyPrint'
 --
--- * 'uwUserIp'
+-- * 'uwUserIP'
 --
 -- * 'uwUserId'
 --
 -- * 'uwKey'
 --
--- * 'uwOauthToken'
+-- * 'uwWatchRequest'
+--
+-- * 'uwOAuthToken'
 --
 -- * 'uwFields'
---
--- * 'uwAlt'
 usersWatch'
-    :: Text
+    :: Text -- ^ 'WatchRequest'
+    -> WatchRequest
     -> UsersWatch'
-usersWatch' pUwUserId_ =
+usersWatch' pUwUserId_ pUwWatchRequest_ =
     UsersWatch'
     { _uwQuotaUser = Nothing
     , _uwPrettyPrint = True
-    , _uwUserIp = Nothing
+    , _uwUserIP = Nothing
     , _uwUserId = pUwUserId_
     , _uwKey = Nothing
-    , _uwOauthToken = Nothing
+    , _uwWatchRequest = pUwWatchRequest_
+    , _uwOAuthToken = Nothing
     , _uwFields = Nothing
-    , _uwAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -119,8 +122,8 @@ uwPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-uwUserIp :: Lens' UsersWatch' (Maybe Text)
-uwUserIp = lens _uwUserIp (\ s a -> s{_uwUserIp = a})
+uwUserIP :: Lens' UsersWatch' (Maybe Text)
+uwUserIP = lens _uwUserIP (\ s a -> s{_uwUserIP = a})
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
@@ -130,32 +133,39 @@ uwUserId = lens _uwUserId (\ s a -> s{_uwUserId = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-uwKey :: Lens' UsersWatch' (Maybe Text)
+uwKey :: Lens' UsersWatch' (Maybe Key)
 uwKey = lens _uwKey (\ s a -> s{_uwKey = a})
 
+-- | Multipart request metadata.
+uwWatchRequest :: Lens' UsersWatch' WatchRequest
+uwWatchRequest
+  = lens _uwWatchRequest
+      (\ s a -> s{_uwWatchRequest = a})
+
 -- | OAuth 2.0 token for the current user.
-uwOauthToken :: Lens' UsersWatch' (Maybe Text)
-uwOauthToken
-  = lens _uwOauthToken (\ s a -> s{_uwOauthToken = a})
+uwOAuthToken :: Lens' UsersWatch' (Maybe OAuthToken)
+uwOAuthToken
+  = lens _uwOAuthToken (\ s a -> s{_uwOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 uwFields :: Lens' UsersWatch' (Maybe Text)
 uwFields = lens _uwFields (\ s a -> s{_uwFields = a})
 
--- | Data format for the response.
-uwAlt :: Lens' UsersWatch' Alt
-uwAlt = lens _uwAlt (\ s a -> s{_uwAlt = a})
+instance GoogleAuth UsersWatch' where
+        authKey = uwKey . _Just
+        authToken = uwOAuthToken . _Just
 
 instance GoogleRequest UsersWatch' where
         type Rs UsersWatch' = WatchResponse
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersWatch'{..}
-          = go _uwQuotaUser (Just _uwPrettyPrint) _uwUserIp
+          = go _uwQuotaUser (Just _uwPrettyPrint) _uwUserIP
               _uwUserId
               _uwKey
-              _uwOauthToken
+              _uwOAuthToken
               _uwFields
-              (Just _uwAlt)
+              (Just AltJSON)
+              _uwWatchRequest
           where go
                   = clientWithRoute (Proxy :: Proxy UsersWatchResource)
                       r

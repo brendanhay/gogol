@@ -30,17 +30,17 @@ module Network.Google.Resource.Calendar.Events.Insert
     , EventsInsert'
 
     -- * Request Lenses
+    , eveEvent
     , eveQuotaUser
     , eveCalendarId
     , evePrettyPrint
-    , eveUserIp
+    , eveUserIP
     , eveMaxAttendees
     , eveKey
     , eveSendNotifications
-    , eveOauthToken
+    , eveOAuthToken
     , eveSupportsAttachments
     , eveFields
-    , eveAlt
     ) where
 
 import           Network.Google.AppsCalendar.Types
@@ -56,33 +56,36 @@ type EventsInsertResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "maxAttendees" Int32 :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "sendNotifications" Bool :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "supportsAttachments" Bool :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Post '[JSON] Event
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] Event :> Post '[JSON] Event
 
 -- | Creates an event.
 --
 -- /See:/ 'eventsInsert'' smart constructor.
 data EventsInsert' = EventsInsert'
-    { _eveQuotaUser           :: !(Maybe Text)
+    { _eveEvent               :: !Event
+    , _eveQuotaUser           :: !(Maybe Text)
     , _eveCalendarId          :: !Text
     , _evePrettyPrint         :: !Bool
-    , _eveUserIp              :: !(Maybe Text)
+    , _eveUserIP              :: !(Maybe Text)
     , _eveMaxAttendees        :: !(Maybe Int32)
-    , _eveKey                 :: !(Maybe Text)
+    , _eveKey                 :: !(Maybe Key)
     , _eveSendNotifications   :: !(Maybe Bool)
-    , _eveOauthToken          :: !(Maybe Text)
+    , _eveOAuthToken          :: !(Maybe OAuthToken)
     , _eveSupportsAttachments :: !(Maybe Bool)
     , _eveFields              :: !(Maybe Text)
-    , _eveAlt                 :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsInsert'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
+--
+-- * 'eveEvent'
 --
 -- * 'eveQuotaUser'
 --
@@ -90,7 +93,7 @@ data EventsInsert' = EventsInsert'
 --
 -- * 'evePrettyPrint'
 --
--- * 'eveUserIp'
+-- * 'eveUserIP'
 --
 -- * 'eveMaxAttendees'
 --
@@ -98,30 +101,33 @@ data EventsInsert' = EventsInsert'
 --
 -- * 'eveSendNotifications'
 --
--- * 'eveOauthToken'
+-- * 'eveOAuthToken'
 --
 -- * 'eveSupportsAttachments'
 --
 -- * 'eveFields'
---
--- * 'eveAlt'
 eventsInsert'
-    :: Text -- ^ 'calendarId'
+    :: Event -- ^ 'Event'
+    -> Text -- ^ 'calendarId'
     -> EventsInsert'
-eventsInsert' pEveCalendarId_ =
+eventsInsert' pEveEvent_ pEveCalendarId_ =
     EventsInsert'
-    { _eveQuotaUser = Nothing
+    { _eveEvent = pEveEvent_
+    , _eveQuotaUser = Nothing
     , _eveCalendarId = pEveCalendarId_
     , _evePrettyPrint = True
-    , _eveUserIp = Nothing
+    , _eveUserIP = Nothing
     , _eveMaxAttendees = Nothing
     , _eveKey = Nothing
     , _eveSendNotifications = Nothing
-    , _eveOauthToken = Nothing
+    , _eveOAuthToken = Nothing
     , _eveSupportsAttachments = Nothing
     , _eveFields = Nothing
-    , _eveAlt = JSON
     }
+
+-- | Multipart request metadata.
+eveEvent :: Lens' EventsInsert' Event
+eveEvent = lens _eveEvent (\ s a -> s{_eveEvent = a})
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
@@ -146,9 +152,9 @@ evePrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-eveUserIp :: Lens' EventsInsert' (Maybe Text)
-eveUserIp
-  = lens _eveUserIp (\ s a -> s{_eveUserIp = a})
+eveUserIP :: Lens' EventsInsert' (Maybe Text)
+eveUserIP
+  = lens _eveUserIP (\ s a -> s{_eveUserIP = a})
 
 -- | The maximum number of attendees to include in the response. If there are
 -- more than the specified number of attendees, only the participant is
@@ -161,7 +167,7 @@ eveMaxAttendees
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-eveKey :: Lens' EventsInsert' (Maybe Text)
+eveKey :: Lens' EventsInsert' (Maybe Key)
 eveKey = lens _eveKey (\ s a -> s{_eveKey = a})
 
 -- | Whether to send notifications about the creation of the new event.
@@ -172,10 +178,10 @@ eveSendNotifications
       (\ s a -> s{_eveSendNotifications = a})
 
 -- | OAuth 2.0 token for the current user.
-eveOauthToken :: Lens' EventsInsert' (Maybe Text)
-eveOauthToken
-  = lens _eveOauthToken
-      (\ s a -> s{_eveOauthToken = a})
+eveOAuthToken :: Lens' EventsInsert' (Maybe OAuthToken)
+eveOAuthToken
+  = lens _eveOAuthToken
+      (\ s a -> s{_eveOAuthToken = a})
 
 -- | Whether API client performing operation supports event attachments.
 -- Optional. The default is False.
@@ -189,9 +195,9 @@ eveFields :: Lens' EventsInsert' (Maybe Text)
 eveFields
   = lens _eveFields (\ s a -> s{_eveFields = a})
 
--- | Data format for the response.
-eveAlt :: Lens' EventsInsert' Alt
-eveAlt = lens _eveAlt (\ s a -> s{_eveAlt = a})
+instance GoogleAuth EventsInsert' where
+        authKey = eveKey . _Just
+        authToken = eveOAuthToken . _Just
 
 instance GoogleRequest EventsInsert' where
         type Rs EventsInsert' = Event
@@ -199,14 +205,15 @@ instance GoogleRequest EventsInsert' where
         requestWithRoute r u EventsInsert'{..}
           = go _eveQuotaUser _eveCalendarId
               (Just _evePrettyPrint)
-              _eveUserIp
+              _eveUserIP
               _eveMaxAttendees
               _eveKey
               _eveSendNotifications
-              _eveOauthToken
+              _eveOAuthToken
               _eveSupportsAttachments
               _eveFields
-              (Just _eveAlt)
+              (Just AltJSON)
+              _eveEvent
           where go
                   = clientWithRoute
                       (Proxy :: Proxy EventsInsertResource)

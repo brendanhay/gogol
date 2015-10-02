@@ -206,11 +206,11 @@ library
         , Network.Google.Resource.DFAReporting.Sizes.Get
         , Network.Google.Resource.DFAReporting.Sizes.Insert
         , Network.Google.Resource.DFAReporting.Sizes.List
-        , Network.Google.Resource.DFAReporting.Subaccounts.Get
-        , Network.Google.Resource.DFAReporting.Subaccounts.Insert
-        , Network.Google.Resource.DFAReporting.Subaccounts.List
-        , Network.Google.Resource.DFAReporting.Subaccounts.Patch
-        , Network.Google.Resource.DFAReporting.Subaccounts.Update
+        , Network.Google.Resource.DFAReporting.SubAccounts.Get
+        , Network.Google.Resource.DFAReporting.SubAccounts.Insert
+        , Network.Google.Resource.DFAReporting.SubAccounts.List
+        , Network.Google.Resource.DFAReporting.SubAccounts.Patch
+        , Network.Google.Resource.DFAReporting.SubAccounts.Update
         , Network.Google.Resource.DFAReporting.TargetableRemarketingLists.Get
         , Network.Google.Resource.DFAReporting.TargetableRemarketingLists.List
         , Network.Google.Resource.DFAReporting.UserProfiles.Get

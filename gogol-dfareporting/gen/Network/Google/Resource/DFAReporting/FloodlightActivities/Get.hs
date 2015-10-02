@@ -32,13 +32,12 @@ module Network.Google.Resource.DFAReporting.FloodlightActivities.Get
     -- * Request Lenses
     , fQuotaUser
     , fPrettyPrint
-    , fUserIp
+    , fUserIP
     , fProfileId
     , fKey
     , fId
-    , fOauthToken
+    , fOAuthToken
     , fFields
-    , fAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,10 +53,10 @@ type FloodlightActivitiesGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :>
+                         QueryParam "alt" AltJSON :>
                            Get '[JSON] FloodlightActivity
 
 -- | Gets one floodlight activity by ID.
@@ -66,13 +65,12 @@ type FloodlightActivitiesGetResource =
 data FloodlightActivitiesGet' = FloodlightActivitiesGet'
     { _fQuotaUser   :: !(Maybe Text)
     , _fPrettyPrint :: !Bool
-    , _fUserIp      :: !(Maybe Text)
+    , _fUserIP      :: !(Maybe Text)
     , _fProfileId   :: !Int64
-    , _fKey         :: !(Maybe Text)
+    , _fKey         :: !(Maybe Key)
     , _fId          :: !Int64
-    , _fOauthToken  :: !(Maybe Text)
+    , _fOAuthToken  :: !(Maybe OAuthToken)
     , _fFields      :: !(Maybe Text)
-    , _fAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FloodlightActivitiesGet'' with the minimum fields required to make a request.
@@ -83,7 +81,7 @@ data FloodlightActivitiesGet' = FloodlightActivitiesGet'
 --
 -- * 'fPrettyPrint'
 --
--- * 'fUserIp'
+-- * 'fUserIP'
 --
 -- * 'fProfileId'
 --
@@ -91,11 +89,9 @@ data FloodlightActivitiesGet' = FloodlightActivitiesGet'
 --
 -- * 'fId'
 --
--- * 'fOauthToken'
+-- * 'fOAuthToken'
 --
 -- * 'fFields'
---
--- * 'fAlt'
 floodlightActivitiesGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
@@ -104,13 +100,12 @@ floodlightActivitiesGet' pFProfileId_ pFId_ =
     FloodlightActivitiesGet'
     { _fQuotaUser = Nothing
     , _fPrettyPrint = True
-    , _fUserIp = Nothing
+    , _fUserIP = Nothing
     , _fProfileId = pFProfileId_
     , _fKey = Nothing
     , _fId = pFId_
-    , _fOauthToken = Nothing
+    , _fOAuthToken = Nothing
     , _fFields = Nothing
-    , _fAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,8 +122,8 @@ fPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-fUserIp :: Lens' FloodlightActivitiesGet' (Maybe Text)
-fUserIp = lens _fUserIp (\ s a -> s{_fUserIp = a})
+fUserIP :: Lens' FloodlightActivitiesGet' (Maybe Text)
+fUserIP = lens _fUserIP (\ s a -> s{_fUserIP = a})
 
 -- | User profile ID associated with this request.
 fProfileId :: Lens' FloodlightActivitiesGet' Int64
@@ -138,7 +133,7 @@ fProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fKey :: Lens' FloodlightActivitiesGet' (Maybe Text)
+fKey :: Lens' FloodlightActivitiesGet' (Maybe Key)
 fKey = lens _fKey (\ s a -> s{_fKey = a})
 
 -- | Floodlight activity ID.
@@ -146,29 +141,29 @@ fId :: Lens' FloodlightActivitiesGet' Int64
 fId = lens _fId (\ s a -> s{_fId = a})
 
 -- | OAuth 2.0 token for the current user.
-fOauthToken :: Lens' FloodlightActivitiesGet' (Maybe Text)
-fOauthToken
-  = lens _fOauthToken (\ s a -> s{_fOauthToken = a})
+fOAuthToken :: Lens' FloodlightActivitiesGet' (Maybe OAuthToken)
+fOAuthToken
+  = lens _fOAuthToken (\ s a -> s{_fOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 fFields :: Lens' FloodlightActivitiesGet' (Maybe Text)
 fFields = lens _fFields (\ s a -> s{_fFields = a})
 
--- | Data format for the response.
-fAlt :: Lens' FloodlightActivitiesGet' Alt
-fAlt = lens _fAlt (\ s a -> s{_fAlt = a})
+instance GoogleAuth FloodlightActivitiesGet' where
+        authKey = fKey . _Just
+        authToken = fOAuthToken . _Just
 
 instance GoogleRequest FloodlightActivitiesGet' where
         type Rs FloodlightActivitiesGet' = FloodlightActivity
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u FloodlightActivitiesGet'{..}
-          = go _fQuotaUser (Just _fPrettyPrint) _fUserIp
+          = go _fQuotaUser (Just _fPrettyPrint) _fUserIP
               _fProfileId
               _fKey
               _fId
-              _fOauthToken
+              _fOAuthToken
               _fFields
-              (Just _fAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy FloodlightActivitiesGetResource)

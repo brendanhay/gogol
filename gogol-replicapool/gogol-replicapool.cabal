@@ -31,24 +31,24 @@ library
     ghc-options:       -Wall
 
     exposed-modules:
-          Network.Google.InstanceGroupsManager
-        , Network.Google.InstanceGroupsManager.Types
-        , Network.Google.Resource.Replicapool.InstanceGroupManagers.AbandonInstances
-        , Network.Google.Resource.Replicapool.InstanceGroupManagers.Delete
-        , Network.Google.Resource.Replicapool.InstanceGroupManagers.DeleteInstances
-        , Network.Google.Resource.Replicapool.InstanceGroupManagers.Get
-        , Network.Google.Resource.Replicapool.InstanceGroupManagers.Insert
-        , Network.Google.Resource.Replicapool.InstanceGroupManagers.List
-        , Network.Google.Resource.Replicapool.InstanceGroupManagers.RecreateInstances
-        , Network.Google.Resource.Replicapool.InstanceGroupManagers.Resize
-        , Network.Google.Resource.Replicapool.InstanceGroupManagers.SetInstanceTemplate
-        , Network.Google.Resource.Replicapool.InstanceGroupManagers.SetTargetPools
-        , Network.Google.Resource.Replicapool.ZoneOperations.Get
-        , Network.Google.Resource.Replicapool.ZoneOperations.List
+          Network.Google.ReplicaPool
+        , Network.Google.ReplicaPool.Types
+        , Network.Google.Resource.ReplicaPool.InstanceGroupManagers.AbandonInstances
+        , Network.Google.Resource.ReplicaPool.InstanceGroupManagers.Delete
+        , Network.Google.Resource.ReplicaPool.InstanceGroupManagers.DeleteInstances
+        , Network.Google.Resource.ReplicaPool.InstanceGroupManagers.Get
+        , Network.Google.Resource.ReplicaPool.InstanceGroupManagers.Insert
+        , Network.Google.Resource.ReplicaPool.InstanceGroupManagers.List
+        , Network.Google.Resource.ReplicaPool.InstanceGroupManagers.RecreateInstances
+        , Network.Google.Resource.ReplicaPool.InstanceGroupManagers.Resize
+        , Network.Google.Resource.ReplicaPool.InstanceGroupManagers.SetInstanceTemplate
+        , Network.Google.Resource.ReplicaPool.InstanceGroupManagers.SetTargetPools
+        , Network.Google.Resource.ReplicaPool.ZoneOperations.Get
+        , Network.Google.Resource.ReplicaPool.ZoneOperations.List
 
     other-modules:
-          Network.Google.InstanceGroupsManager.Types.Product
-        , Network.Google.InstanceGroupsManager.Types.Sum
+          Network.Google.ReplicaPool.Types.Product
+        , Network.Google.ReplicaPool.Types.Sum
 
     build-depends:
           gogol-core == 0.0.1.*

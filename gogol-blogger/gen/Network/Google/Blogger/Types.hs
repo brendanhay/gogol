@@ -20,7 +20,7 @@ module Network.Google.Blogger.Types
     -- * PostImages
     , PostImages
     , postImages
-    , piUrl
+    , piURL
 
     -- * BloggerPostUserInfosListStatus
     , BloggerPostUserInfosListStatus (..)
@@ -41,7 +41,7 @@ module Network.Google.Blogger.Types
     -- * PostAuthorImage
     , PostAuthorImage
     , postAuthorImage
-    , paiUrl
+    , paiURL
 
     -- * BloggerPageViewsGetRange
     , BloggerPageViewsGetRange (..)
@@ -120,7 +120,7 @@ module Network.Google.Blogger.Types
     , posLocation
     , posKind
     , posPublished
-    , posUrl
+    , posURL
     , posBlog
     , posCustomMetaData
     , posContent
@@ -140,7 +140,7 @@ module Network.Google.Blogger.Types
     , pagEtag
     , pagKind
     , pagPublished
-    , pagUrl
+    , pagURL
     , pagBlog
     , pagContent
     , pagSelfLink
@@ -168,7 +168,7 @@ module Network.Google.Blogger.Types
     , PageAuthor
     , pageAuthor
     , paImage
-    , paUrl
+    , paURL
     , paDisplayName
     , paId
 
@@ -180,7 +180,7 @@ module Network.Google.Blogger.Types
     , bPages
     , bLocale
     , bPublished
-    , bUrl
+    , bURL
     , bCustomMetaData
     , bSelfLink
     , bName
@@ -198,7 +198,7 @@ module Network.Google.Blogger.Types
     -- * CommentAuthorImage
     , CommentAuthorImage
     , commentAuthorImage
-    , caiUrl
+    , caiURL
 
     -- * BloggerCommentsListView
     , BloggerCommentsListView (..)
@@ -218,7 +218,7 @@ module Network.Google.Blogger.Types
     , uKind
     , uCreated
     , uLocale
-    , uUrl
+    , uURL
     , uSelfLink
     , uAbout
     , uDisplayName
@@ -260,7 +260,7 @@ module Network.Google.Blogger.Types
     , PostAuthor
     , postAuthor
     , pImage
-    , pUrl
+    , pURL
     , pDisplayName
     , pId
 
@@ -317,7 +317,7 @@ module Network.Google.Blogger.Types
     , CommentAuthor
     , commentAuthor
     , caImage
-    , caUrl
+    , caURL
     , caDisplayName
     , caId
 
@@ -356,10 +356,7 @@ module Network.Google.Blogger.Types
     -- * PageAuthorImage
     , PageAuthorImage
     , pageAuthorImage
-    , paiaUrl
-
-    -- * Alt
-    , Alt (..)
+    , paiaURL
 
     -- * BloggerPagesListView
     , BloggerPagesListView (..)

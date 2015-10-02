@@ -52,7 +52,7 @@ data ReportRequest = ReportRequest
     , _rrIncludeDeletedEntities :: !Bool
     , _rrDownloadFormat         :: !(Maybe Text)
     , _rrStartRow               :: !Int32
-    , _rrColumns                :: !(Maybe [Maybe ReportAPIColumnSpec])
+    , _rrColumns                :: !(Maybe [ReportAPIColumnSpec])
     , _rrReportType             :: !(Maybe Text)
     , _rrVerifySingleTimeZone   :: !Bool
     , _rrRowCount               :: !Int32
@@ -189,7 +189,7 @@ rrStartRow
 -- the columnName parameter is required. For saved columns only the
 -- savedColumnName parameter is required. Both columnName and
 -- savedColumnName cannot be set in the same stanza.
-rrColumns :: Lens' ReportRequest [Maybe ReportAPIColumnSpec]
+rrColumns :: Lens' ReportRequest [ReportAPIColumnSpec]
 rrColumns
   = lens _rrColumns (\ s a -> s{_rrColumns = a}) .
       _Default
@@ -263,7 +263,7 @@ instance ToJSON ReportRequest where
 --
 -- /See:/ 'reportFiles' smart constructor.
 data ReportFiles = ReportFiles
-    { _rfUrl       :: !(Maybe Text)
+    { _rfURL       :: !(Maybe Text)
     , _rfByteCount :: !(Maybe Int64)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -271,20 +271,20 @@ data ReportFiles = ReportFiles
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rfUrl'
+-- * 'rfURL'
 --
 -- * 'rfByteCount'
 reportFiles
     :: ReportFiles
 reportFiles =
     ReportFiles
-    { _rfUrl = Nothing
+    { _rfURL = Nothing
     , _rfByteCount = Nothing
     }
 
 -- | Use this url to download the report file.
-rfUrl :: Lens' ReportFiles (Maybe Text)
-rfUrl = lens _rfUrl (\ s a -> s{_rfUrl = a})
+rfURL :: Lens' ReportFiles (Maybe Text)
+rfURL = lens _rfURL (\ s a -> s{_rfURL = a})
 
 -- | The size of this report file in bytes.
 rfByteCount :: Lens' ReportFiles (Maybe Int64)
@@ -302,7 +302,7 @@ instance ToJSON ReportFiles where
         toJSON ReportFiles{..}
           = object
               (catMaybes
-                 [("url" .=) <$> _rfUrl,
+                 [("url" .=) <$> _rfURL,
                   ("byteCount" .=) <$> _rfByteCount])
 
 -- | A DoubleClick Search report. This object contains the report request,
@@ -312,14 +312,14 @@ instance ToJSON ReportFiles where
 -- /See:/ 'report' smart constructor.
 data Report = Report
     { _rKind                   :: !Text
-    , _rRows                   :: !(Maybe [Maybe ReportRow])
+    , _rRows                   :: !(Maybe [ReportRow])
     , _rStatisticsCurrencyCode :: !(Maybe Text)
     , _rIsReportReady          :: !(Maybe Bool)
     , _rFiles                  :: !(Maybe [ReportFiles])
     , _rId                     :: !(Maybe Text)
     , _rStatisticsTimeZone     :: !(Maybe Text)
     , _rRowCount               :: !(Maybe Int32)
-    , _rRequest                :: !(Maybe (Maybe ReportRequest))
+    , _rRequest                :: !(Maybe ReportRequest)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Report' with the minimum fields required to make a request.
@@ -364,7 +364,7 @@ rKind :: Lens' Report Text
 rKind = lens _rKind (\ s a -> s{_rKind = a})
 
 -- | Synchronous report only. Generated report rows.
-rRows :: Lens' Report [Maybe ReportRow]
+rRows :: Lens' Report [ReportRow]
 rRows
   = lens _rRows (\ s a -> s{_rRows = a}) . _Default .
       _Coerce
@@ -411,7 +411,7 @@ rRowCount
 
 -- | The request that created the report. Optional fields not specified in
 -- the original request are filled with default values.
-rRequest :: Lens' Report (Maybe (Maybe ReportRequest))
+rRequest :: Lens' Report (Maybe ReportRequest)
 rRequest = lens _rRequest (\ s a -> s{_rRequest = a})
 
 instance FromJSON Report where
@@ -446,7 +446,7 @@ instance ToJSON Report where
 --
 -- /See:/ 'updateAvailabilityRequest' smart constructor.
 newtype UpdateAvailabilityRequest = UpdateAvailabilityRequest
-    { _uarAvailabilities :: Maybe [Maybe Availability]
+    { _uarAvailabilities :: Maybe [Availability]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UpdateAvailabilityRequest' with the minimum fields required to make a request.
@@ -462,7 +462,7 @@ updateAvailabilityRequest =
     }
 
 -- | The availabilities being requested.
-uarAvailabilities :: Lens' UpdateAvailabilityRequest [Maybe Availability]
+uarAvailabilities :: Lens' UpdateAvailabilityRequest [Availability]
 uarAvailabilities
   = lens _uarAvailabilities
       (\ s a -> s{_uarAvailabilities = a})
@@ -588,7 +588,7 @@ instance ToJSON Availability where
 data ReportRequestFilters = ReportRequestFilters
     { _rrfOperator :: !(Maybe Text)
     , _rrfValues   :: !(Maybe [JSONValue])
-    , _rrfColumn   :: !(Maybe (Maybe ReportAPIColumnSpec))
+    , _rrfColumn   :: !(Maybe ReportAPIColumnSpec)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportRequestFilters' with the minimum fields required to make a request.
@@ -624,7 +624,7 @@ rrfValues
 
 -- | Column to perform the filter on. This can be a DoubleClick Search column
 -- or a saved column.
-rrfColumn :: Lens' ReportRequestFilters (Maybe (Maybe ReportAPIColumnSpec))
+rrfColumn :: Lens' ReportRequestFilters (Maybe ReportAPIColumnSpec)
 rrfColumn
   = lens _rrfColumn (\ s a -> s{_rrfColumn = a})
 
@@ -691,7 +691,7 @@ instance ToJSON CustomMetric where
 -- /See:/ 'reportRequestOrderBy' smart constructor.
 data ReportRequestOrderBy = ReportRequestOrderBy
     { _rrobSortOrder :: !(Maybe Text)
-    , _rrobColumn    :: !(Maybe (Maybe ReportAPIColumnSpec))
+    , _rrobColumn    :: !(Maybe ReportAPIColumnSpec)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReportRequestOrderBy' with the minimum fields required to make a request.
@@ -717,7 +717,7 @@ rrobSortOrder
 
 -- | Column to perform the sort on. This can be a DoubleClick Search-defined
 -- column or a saved column.
-rrobColumn :: Lens' ReportRequestOrderBy (Maybe (Maybe ReportAPIColumnSpec))
+rrobColumn :: Lens' ReportRequestOrderBy (Maybe ReportAPIColumnSpec)
 rrobColumn
   = lens _rrobColumn (\ s a -> s{_rrobColumn = a})
 
@@ -740,7 +740,7 @@ instance ToJSON ReportRequestOrderBy where
 -- /See:/ 'conversionList' smart constructor.
 data ConversionList = ConversionList
     { _clKind       :: !Text
-    , _clConversion :: !(Maybe [Maybe Conversion])
+    , _clConversion :: !(Maybe [Conversion])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ConversionList' with the minimum fields required to make a request.
@@ -764,7 +764,7 @@ clKind :: Lens' ConversionList Text
 clKind = lens _clKind (\ s a -> s{_clKind = a})
 
 -- | The conversions being requested.
-clConversion :: Lens' ConversionList [Maybe Conversion]
+clConversion :: Lens' ConversionList [Conversion]
 clConversion
   = lens _clConversion (\ s a -> s{_clConversion = a})
       . _Default
@@ -1040,13 +1040,13 @@ data Conversion = Conversion
     , _cAttributionModel            :: !(Maybe Text)
     , _cSegmentationName            :: !(Maybe Text)
     , _cProductLanguage             :: !(Maybe Text)
-    , _cCustomMetric                :: !(Maybe [Maybe CustomMetric])
+    , _cCustomMetric                :: !(Maybe [CustomMetric])
     , _cCountMillis                 :: !(Maybe Int64)
     , _cQuantityMillis              :: !(Maybe Int64)
     , _cAdId                        :: !(Maybe Int64)
     , _cDeviceType                  :: !(Maybe Text)
     , _cType                        :: !(Maybe Text)
-    , _cCustomDimension             :: !(Maybe [Maybe CustomDimension])
+    , _cCustomDimension             :: !(Maybe [CustomDimension])
     , _cFloodlightOrderId           :: !(Maybe Text)
     , _cRevenueMicros               :: !(Maybe Int64)
     , _cClickId                     :: !(Maybe Text)
@@ -1282,7 +1282,7 @@ cProductLanguage
       (\ s a -> s{_cProductLanguage = a})
 
 -- | Custom metrics for the conversion.
-cCustomMetric :: Lens' Conversion [Maybe CustomMetric]
+cCustomMetric :: Lens' Conversion [CustomMetric]
 cCustomMetric
   = lens _cCustomMetric
       (\ s a -> s{_cCustomMetric = a})
@@ -1319,7 +1319,7 @@ cType = lens _cType (\ s a -> s{_cType = a})
 
 -- | Custom dimensions for the conversion, which can be used to filter data
 -- in a report.
-cCustomDimension :: Lens' Conversion [Maybe CustomDimension]
+cCustomDimension :: Lens' Conversion [CustomDimension]
 cCustomDimension
   = lens _cCustomDimension
       (\ s a -> s{_cCustomDimension = a})
@@ -1506,7 +1506,7 @@ instance ToJSON SavedColumn where
 --
 -- /See:/ 'updateAvailabilityResponse' smart constructor.
 newtype UpdateAvailabilityResponse = UpdateAvailabilityResponse
-    { _uAvailabilities :: Maybe [Maybe Availability]
+    { _uAvailabilities :: Maybe [Availability]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UpdateAvailabilityResponse' with the minimum fields required to make a request.
@@ -1522,7 +1522,7 @@ updateAvailabilityResponse =
     }
 
 -- | The availabilities being returned.
-uAvailabilities :: Lens' UpdateAvailabilityResponse [Maybe Availability]
+uAvailabilities :: Lens' UpdateAvailabilityResponse [Availability]
 uAvailabilities
   = lens _uAvailabilities
       (\ s a -> s{_uAvailabilities = a})
@@ -1702,7 +1702,7 @@ instance ToJSON CustomDimension where
 -- /See:/ 'savedColumnList' smart constructor.
 data SavedColumnList = SavedColumnList
     { _sclKind  :: !Text
-    , _sclItems :: !(Maybe [Maybe SavedColumn])
+    , _sclItems :: !(Maybe [SavedColumn])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SavedColumnList' with the minimum fields required to make a request.
@@ -1726,7 +1726,7 @@ sclKind :: Lens' SavedColumnList Text
 sclKind = lens _sclKind (\ s a -> s{_sclKind = a})
 
 -- | The saved columns being requested.
-sclItems :: Lens' SavedColumnList [Maybe SavedColumn]
+sclItems :: Lens' SavedColumnList [SavedColumn]
 sclItems
   = lens _sclItems (\ s a -> s{_sclItems = a}) .
       _Default

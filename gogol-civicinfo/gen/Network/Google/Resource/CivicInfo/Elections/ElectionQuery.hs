@@ -19,7 +19,7 @@
 --
 -- | List of available elections to query.
 --
--- /See:/ <https://developers.google.com/civic-information Google Civic Information API Reference> for @CivicinfoElectionsElectionQuery@.
+-- /See:/ <https://developers.google.com/civic-information Google Civic Information API Reference> for @CivicInfoElectionsElectionQuery@.
 module Network.Google.Resource.CivicInfo.Elections.ElectionQuery
     (
     -- * REST Resource
@@ -32,27 +32,26 @@ module Network.Google.Resource.CivicInfo.Elections.ElectionQuery
     -- * Request Lenses
     , eeqQuotaUser
     , eeqPrettyPrint
-    , eeqUserIp
+    , eeqUserIP
     , eeqKey
-    , eeqOauthToken
+    , eeqOAuthToken
     , eeqFields
-    , eeqAlt
     ) where
 
 import           Network.Google.CivicInfo.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @CivicinfoElectionsElectionQuery@ which the
+-- | A resource alias for @CivicInfoElectionsElectionQuery@ which the
 -- 'ElectionsElectionQuery'' request conforms to.
 type ElectionsElectionQueryResource =
      "elections" :>
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
-               QueryParam "oauth_token" Text :>
+             QueryParam "key" Key :>
+               QueryParam "oauth_token" OAuthToken :>
                  QueryParam "fields" Text :>
-                   QueryParam "alt" Alt :>
+                   QueryParam "alt" AltJSON :>
                      Get '[JSON] ElectionsQueryResponse
 
 -- | List of available elections to query.
@@ -61,11 +60,10 @@ type ElectionsElectionQueryResource =
 data ElectionsElectionQuery' = ElectionsElectionQuery'
     { _eeqQuotaUser   :: !(Maybe Text)
     , _eeqPrettyPrint :: !Bool
-    , _eeqUserIp      :: !(Maybe Text)
-    , _eeqKey         :: !(Maybe Text)
-    , _eeqOauthToken  :: !(Maybe Text)
+    , _eeqUserIP      :: !(Maybe Text)
+    , _eeqKey         :: !(Maybe Key)
+    , _eeqOAuthToken  :: !(Maybe OAuthToken)
     , _eeqFields      :: !(Maybe Text)
-    , _eeqAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ElectionsElectionQuery'' with the minimum fields required to make a request.
@@ -76,26 +74,23 @@ data ElectionsElectionQuery' = ElectionsElectionQuery'
 --
 -- * 'eeqPrettyPrint'
 --
--- * 'eeqUserIp'
+-- * 'eeqUserIP'
 --
 -- * 'eeqKey'
 --
--- * 'eeqOauthToken'
+-- * 'eeqOAuthToken'
 --
 -- * 'eeqFields'
---
--- * 'eeqAlt'
 electionsElectionQuery'
     :: ElectionsElectionQuery'
 electionsElectionQuery' =
     ElectionsElectionQuery'
     { _eeqQuotaUser = Nothing
     , _eeqPrettyPrint = True
-    , _eeqUserIp = Nothing
+    , _eeqUserIP = Nothing
     , _eeqKey = Nothing
-    , _eeqOauthToken = Nothing
+    , _eeqOAuthToken = Nothing
     , _eeqFields = Nothing
-    , _eeqAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -113,41 +108,41 @@ eeqPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-eeqUserIp :: Lens' ElectionsElectionQuery' (Maybe Text)
-eeqUserIp
-  = lens _eeqUserIp (\ s a -> s{_eeqUserIp = a})
+eeqUserIP :: Lens' ElectionsElectionQuery' (Maybe Text)
+eeqUserIP
+  = lens _eeqUserIP (\ s a -> s{_eeqUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-eeqKey :: Lens' ElectionsElectionQuery' (Maybe Text)
+eeqKey :: Lens' ElectionsElectionQuery' (Maybe Key)
 eeqKey = lens _eeqKey (\ s a -> s{_eeqKey = a})
 
 -- | OAuth 2.0 token for the current user.
-eeqOauthToken :: Lens' ElectionsElectionQuery' (Maybe Text)
-eeqOauthToken
-  = lens _eeqOauthToken
-      (\ s a -> s{_eeqOauthToken = a})
+eeqOAuthToken :: Lens' ElectionsElectionQuery' (Maybe OAuthToken)
+eeqOAuthToken
+  = lens _eeqOAuthToken
+      (\ s a -> s{_eeqOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 eeqFields :: Lens' ElectionsElectionQuery' (Maybe Text)
 eeqFields
   = lens _eeqFields (\ s a -> s{_eeqFields = a})
 
--- | Data format for the response.
-eeqAlt :: Lens' ElectionsElectionQuery' Alt
-eeqAlt = lens _eeqAlt (\ s a -> s{_eeqAlt = a})
+instance GoogleAuth ElectionsElectionQuery' where
+        authKey = eeqKey . _Just
+        authToken = eeqOAuthToken . _Just
 
 instance GoogleRequest ElectionsElectionQuery' where
         type Rs ElectionsElectionQuery' =
              ElectionsQueryResponse
         request = requestWithRoute defReq civicInfoURL
         requestWithRoute r u ElectionsElectionQuery'{..}
-          = go _eeqQuotaUser (Just _eeqPrettyPrint) _eeqUserIp
+          = go _eeqQuotaUser (Just _eeqPrettyPrint) _eeqUserIP
               _eeqKey
-              _eeqOauthToken
+              _eeqOAuthToken
               _eeqFields
-              (Just _eeqAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ElectionsElectionQueryResource)

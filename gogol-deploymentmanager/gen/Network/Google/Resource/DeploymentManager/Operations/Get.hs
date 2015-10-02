@@ -19,7 +19,7 @@
 --
 -- | Gets information about a specific operation.
 --
--- /See:/ <https://developers.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentmanagerOperationsGet@.
+-- /See:/ <https://developers.google.com/deployment-manager/ Google Cloud Deployment Manager API Reference> for @DeploymentManagerOperationsGet@.
 module Network.Google.Resource.DeploymentManager.Operations.Get
     (
     -- * REST Resource
@@ -34,17 +34,16 @@ module Network.Google.Resource.DeploymentManager.Operations.Get
     , ogPrettyPrint
     , ogProject
     , ogOperation
-    , ogUserIp
+    , ogUserIP
     , ogKey
-    , ogOauthToken
+    , ogOAuthToken
     , ogFields
-    , ogAlt
     ) where
 
 import           Network.Google.DeploymentManager.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @DeploymentmanagerOperationsGet@ which the
+-- | A resource alias for @DeploymentManagerOperationsGet@ which the
 -- 'OperationsGet'' request conforms to.
 type OperationsGetResource =
      Capture "project" Text :>
@@ -54,10 +53,10 @@ type OperationsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] Operation
+                         QueryParam "alt" AltJSON :> Get '[JSON] Operation
 
 -- | Gets information about a specific operation.
 --
@@ -67,11 +66,10 @@ data OperationsGet' = OperationsGet'
     , _ogPrettyPrint :: !Bool
     , _ogProject     :: !Text
     , _ogOperation   :: !Text
-    , _ogUserIp      :: !(Maybe Text)
-    , _ogKey         :: !(Maybe Text)
-    , _ogOauthToken  :: !(Maybe Text)
+    , _ogUserIP      :: !(Maybe Text)
+    , _ogKey         :: !(Maybe Key)
+    , _ogOAuthToken  :: !(Maybe OAuthToken)
     , _ogFields      :: !(Maybe Text)
-    , _ogAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'OperationsGet'' with the minimum fields required to make a request.
@@ -86,15 +84,13 @@ data OperationsGet' = OperationsGet'
 --
 -- * 'ogOperation'
 --
--- * 'ogUserIp'
+-- * 'ogUserIP'
 --
 -- * 'ogKey'
 --
--- * 'ogOauthToken'
+-- * 'ogOAuthToken'
 --
 -- * 'ogFields'
---
--- * 'ogAlt'
 operationsGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'operation'
@@ -105,11 +101,10 @@ operationsGet' pOgProject_ pOgOperation_ =
     , _ogPrettyPrint = True
     , _ogProject = pOgProject_
     , _ogOperation = pOgOperation_
-    , _ogUserIp = Nothing
+    , _ogUserIP = Nothing
     , _ogKey = Nothing
-    , _ogOauthToken = Nothing
+    , _ogOAuthToken = Nothing
     , _ogFields = Nothing
-    , _ogAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -137,27 +132,27 @@ ogOperation
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ogUserIp :: Lens' OperationsGet' (Maybe Text)
-ogUserIp = lens _ogUserIp (\ s a -> s{_ogUserIp = a})
+ogUserIP :: Lens' OperationsGet' (Maybe Text)
+ogUserIP = lens _ogUserIP (\ s a -> s{_ogUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ogKey :: Lens' OperationsGet' (Maybe Text)
+ogKey :: Lens' OperationsGet' (Maybe Key)
 ogKey = lens _ogKey (\ s a -> s{_ogKey = a})
 
 -- | OAuth 2.0 token for the current user.
-ogOauthToken :: Lens' OperationsGet' (Maybe Text)
-ogOauthToken
-  = lens _ogOauthToken (\ s a -> s{_ogOauthToken = a})
+ogOAuthToken :: Lens' OperationsGet' (Maybe OAuthToken)
+ogOAuthToken
+  = lens _ogOAuthToken (\ s a -> s{_ogOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ogFields :: Lens' OperationsGet' (Maybe Text)
 ogFields = lens _ogFields (\ s a -> s{_ogFields = a})
 
--- | Data format for the response.
-ogAlt :: Lens' OperationsGet' Alt
-ogAlt = lens _ogAlt (\ s a -> s{_ogAlt = a})
+instance GoogleAuth OperationsGet' where
+        authKey = ogKey . _Just
+        authToken = ogOAuthToken . _Just
 
 instance GoogleRequest OperationsGet' where
         type Rs OperationsGet' = Operation
@@ -166,11 +161,11 @@ instance GoogleRequest OperationsGet' where
         requestWithRoute r u OperationsGet'{..}
           = go _ogQuotaUser (Just _ogPrettyPrint) _ogProject
               _ogOperation
-              _ogUserIp
+              _ogUserIP
               _ogKey
-              _ogOauthToken
+              _ogOAuthToken
               _ogFields
-              (Just _ogAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy OperationsGetResource)

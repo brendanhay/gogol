@@ -34,11 +34,10 @@ module Network.Google.Resource.Games.Achievements.Reveal
     , arQuotaUser
     , arPrettyPrint
     , arAchievementId
-    , arUserIp
+    , arUserIP
     , arKey
-    , arOauthToken
+    , arOAuthToken
     , arFields
-    , arAlt
     ) where
 
 import           Network.Google.Games.Types
@@ -53,10 +52,10 @@ type AchievementsRevealResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :>
+                       QueryParam "alt" AltJSON :>
                          Post '[JSON] AchievementRevealResponse
 
 -- | Sets the state of the achievement with the given ID to REVEALED for the
@@ -67,11 +66,10 @@ data AchievementsReveal' = AchievementsReveal'
     { _arQuotaUser     :: !(Maybe Text)
     , _arPrettyPrint   :: !Bool
     , _arAchievementId :: !Text
-    , _arUserIp        :: !(Maybe Text)
-    , _arKey           :: !(Maybe Text)
-    , _arOauthToken    :: !(Maybe Text)
+    , _arUserIP        :: !(Maybe Text)
+    , _arKey           :: !(Maybe Key)
+    , _arOAuthToken    :: !(Maybe OAuthToken)
     , _arFields        :: !(Maybe Text)
-    , _arAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementsReveal'' with the minimum fields required to make a request.
@@ -84,15 +82,13 @@ data AchievementsReveal' = AchievementsReveal'
 --
 -- * 'arAchievementId'
 --
--- * 'arUserIp'
+-- * 'arUserIP'
 --
 -- * 'arKey'
 --
--- * 'arOauthToken'
+-- * 'arOAuthToken'
 --
 -- * 'arFields'
---
--- * 'arAlt'
 achievementsReveal'
     :: Text -- ^ 'achievementId'
     -> AchievementsReveal'
@@ -101,11 +97,10 @@ achievementsReveal' pArAchievementId_ =
     { _arQuotaUser = Nothing
     , _arPrettyPrint = True
     , _arAchievementId = pArAchievementId_
-    , _arUserIp = Nothing
+    , _arUserIP = Nothing
     , _arKey = Nothing
-    , _arOauthToken = Nothing
+    , _arOAuthToken = Nothing
     , _arFields = Nothing
-    , _arAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -129,27 +124,27 @@ arAchievementId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-arUserIp :: Lens' AchievementsReveal' (Maybe Text)
-arUserIp = lens _arUserIp (\ s a -> s{_arUserIp = a})
+arUserIP :: Lens' AchievementsReveal' (Maybe Text)
+arUserIP = lens _arUserIP (\ s a -> s{_arUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-arKey :: Lens' AchievementsReveal' (Maybe Text)
+arKey :: Lens' AchievementsReveal' (Maybe Key)
 arKey = lens _arKey (\ s a -> s{_arKey = a})
 
 -- | OAuth 2.0 token for the current user.
-arOauthToken :: Lens' AchievementsReveal' (Maybe Text)
-arOauthToken
-  = lens _arOauthToken (\ s a -> s{_arOauthToken = a})
+arOAuthToken :: Lens' AchievementsReveal' (Maybe OAuthToken)
+arOAuthToken
+  = lens _arOAuthToken (\ s a -> s{_arOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 arFields :: Lens' AchievementsReveal' (Maybe Text)
 arFields = lens _arFields (\ s a -> s{_arFields = a})
 
--- | Data format for the response.
-arAlt :: Lens' AchievementsReveal' Alt
-arAlt = lens _arAlt (\ s a -> s{_arAlt = a})
+instance GoogleAuth AchievementsReveal' where
+        authKey = arKey . _Just
+        authToken = arOAuthToken . _Just
 
 instance GoogleRequest AchievementsReveal' where
         type Rs AchievementsReveal' =
@@ -158,11 +153,11 @@ instance GoogleRequest AchievementsReveal' where
         requestWithRoute r u AchievementsReveal'{..}
           = go _arQuotaUser (Just _arPrettyPrint)
               _arAchievementId
-              _arUserIp
+              _arUserIP
               _arKey
-              _arOauthToken
+              _arOAuthToken
               _arFields
-              (Just _arAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AchievementsRevealResource)

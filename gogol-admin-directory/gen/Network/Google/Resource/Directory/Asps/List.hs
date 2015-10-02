@@ -32,12 +32,11 @@ module Network.Google.Resource.Directory.Asps.List
     -- * Request Lenses
     , alQuotaUser
     , alPrettyPrint
-    , alUserIp
+    , alUserIP
     , alKey
-    , alOauthToken
+    , alOAuthToken
     , alUserKey
     , alFields
-    , alAlt
     ) where
 
 import           Network.Google.AdminDirectory.Types
@@ -52,10 +51,10 @@ type AspsListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Get '[JSON] Asps
+                       QueryParam "alt" AltJSON :> Get '[JSON] Asps
 
 -- | List the ASPs issued by a user.
 --
@@ -63,12 +62,11 @@ type AspsListResource =
 data AspsList' = AspsList'
     { _alQuotaUser   :: !(Maybe Text)
     , _alPrettyPrint :: !Bool
-    , _alUserIp      :: !(Maybe Text)
-    , _alKey         :: !(Maybe Text)
-    , _alOauthToken  :: !(Maybe Text)
+    , _alUserIP      :: !(Maybe Text)
+    , _alKey         :: !(Maybe Key)
+    , _alOAuthToken  :: !(Maybe OAuthToken)
     , _alUserKey     :: !Text
     , _alFields      :: !(Maybe Text)
-    , _alAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AspsList'' with the minimum fields required to make a request.
@@ -79,17 +77,15 @@ data AspsList' = AspsList'
 --
 -- * 'alPrettyPrint'
 --
--- * 'alUserIp'
+-- * 'alUserIP'
 --
 -- * 'alKey'
 --
--- * 'alOauthToken'
+-- * 'alOAuthToken'
 --
 -- * 'alUserKey'
 --
 -- * 'alFields'
---
--- * 'alAlt'
 aspsList'
     :: Text -- ^ 'userKey'
     -> AspsList'
@@ -97,12 +93,11 @@ aspsList' pAlUserKey_ =
     AspsList'
     { _alQuotaUser = Nothing
     , _alPrettyPrint = True
-    , _alUserIp = Nothing
+    , _alUserIP = Nothing
     , _alKey = Nothing
-    , _alOauthToken = Nothing
+    , _alOAuthToken = Nothing
     , _alUserKey = pAlUserKey_
     , _alFields = Nothing
-    , _alAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,19 +115,19 @@ alPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-alUserIp :: Lens' AspsList' (Maybe Text)
-alUserIp = lens _alUserIp (\ s a -> s{_alUserIp = a})
+alUserIP :: Lens' AspsList' (Maybe Text)
+alUserIP = lens _alUserIP (\ s a -> s{_alUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-alKey :: Lens' AspsList' (Maybe Text)
+alKey :: Lens' AspsList' (Maybe Key)
 alKey = lens _alKey (\ s a -> s{_alKey = a})
 
 -- | OAuth 2.0 token for the current user.
-alOauthToken :: Lens' AspsList' (Maybe Text)
-alOauthToken
-  = lens _alOauthToken (\ s a -> s{_alOauthToken = a})
+alOAuthToken :: Lens' AspsList' (Maybe OAuthToken)
+alOAuthToken
+  = lens _alOAuthToken (\ s a -> s{_alOAuthToken = a})
 
 -- | Identifies the user in the API request. The value can be the user\'s
 -- primary email address, alias email address, or unique user ID.
@@ -144,20 +139,20 @@ alUserKey
 alFields :: Lens' AspsList' (Maybe Text)
 alFields = lens _alFields (\ s a -> s{_alFields = a})
 
--- | Data format for the response.
-alAlt :: Lens' AspsList' Alt
-alAlt = lens _alAlt (\ s a -> s{_alAlt = a})
+instance GoogleAuth AspsList' where
+        authKey = alKey . _Just
+        authToken = alOAuthToken . _Just
 
 instance GoogleRequest AspsList' where
         type Rs AspsList' = Asps
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u AspsList'{..}
-          = go _alQuotaUser (Just _alPrettyPrint) _alUserIp
+          = go _alQuotaUser (Just _alPrettyPrint) _alUserIP
               _alKey
-              _alOauthToken
+              _alOAuthToken
               _alUserKey
               _alFields
-              (Just _alAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy AspsListResource) r
                       u

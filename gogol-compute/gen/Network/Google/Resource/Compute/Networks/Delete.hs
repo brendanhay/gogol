@@ -33,12 +33,11 @@ module Network.Google.Resource.Compute.Networks.Delete
     , ndQuotaUser
     , ndPrettyPrint
     , ndProject
-    , ndUserIp
+    , ndUserIP
     , ndNetwork
     , ndKey
-    , ndOauthToken
+    , ndOAuthToken
     , ndFields
-    , ndAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -54,10 +53,10 @@ type NetworksDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Delete '[JSON] Operation
+                         QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified network resource.
 --
@@ -66,12 +65,11 @@ data NetworksDelete' = NetworksDelete'
     { _ndQuotaUser   :: !(Maybe Text)
     , _ndPrettyPrint :: !Bool
     , _ndProject     :: !Text
-    , _ndUserIp      :: !(Maybe Text)
+    , _ndUserIP      :: !(Maybe Text)
     , _ndNetwork     :: !Text
-    , _ndKey         :: !(Maybe Text)
-    , _ndOauthToken  :: !(Maybe Text)
+    , _ndKey         :: !(Maybe Key)
+    , _ndOAuthToken  :: !(Maybe OAuthToken)
     , _ndFields      :: !(Maybe Text)
-    , _ndAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NetworksDelete'' with the minimum fields required to make a request.
@@ -84,17 +82,15 @@ data NetworksDelete' = NetworksDelete'
 --
 -- * 'ndProject'
 --
--- * 'ndUserIp'
+-- * 'ndUserIP'
 --
 -- * 'ndNetwork'
 --
 -- * 'ndKey'
 --
--- * 'ndOauthToken'
+-- * 'ndOAuthToken'
 --
 -- * 'ndFields'
---
--- * 'ndAlt'
 networksDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'network'
@@ -104,12 +100,11 @@ networksDelete' pNdProject_ pNdNetwork_ =
     { _ndQuotaUser = Nothing
     , _ndPrettyPrint = True
     , _ndProject = pNdProject_
-    , _ndUserIp = Nothing
+    , _ndUserIP = Nothing
     , _ndNetwork = pNdNetwork_
     , _ndKey = Nothing
-    , _ndOauthToken = Nothing
+    , _ndOAuthToken = Nothing
     , _ndFields = Nothing
-    , _ndAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -132,8 +127,8 @@ ndProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ndUserIp :: Lens' NetworksDelete' (Maybe Text)
-ndUserIp = lens _ndUserIp (\ s a -> s{_ndUserIp = a})
+ndUserIP :: Lens' NetworksDelete' (Maybe Text)
+ndUserIP = lens _ndUserIP (\ s a -> s{_ndUserIP = a})
 
 -- | Name of the network resource to delete.
 ndNetwork :: Lens' NetworksDelete' Text
@@ -143,33 +138,33 @@ ndNetwork
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ndKey :: Lens' NetworksDelete' (Maybe Text)
+ndKey :: Lens' NetworksDelete' (Maybe Key)
 ndKey = lens _ndKey (\ s a -> s{_ndKey = a})
 
 -- | OAuth 2.0 token for the current user.
-ndOauthToken :: Lens' NetworksDelete' (Maybe Text)
-ndOauthToken
-  = lens _ndOauthToken (\ s a -> s{_ndOauthToken = a})
+ndOAuthToken :: Lens' NetworksDelete' (Maybe OAuthToken)
+ndOAuthToken
+  = lens _ndOAuthToken (\ s a -> s{_ndOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ndFields :: Lens' NetworksDelete' (Maybe Text)
 ndFields = lens _ndFields (\ s a -> s{_ndFields = a})
 
--- | Data format for the response.
-ndAlt :: Lens' NetworksDelete' Alt
-ndAlt = lens _ndAlt (\ s a -> s{_ndAlt = a})
+instance GoogleAuth NetworksDelete' where
+        authKey = ndKey . _Just
+        authToken = ndOAuthToken . _Just
 
 instance GoogleRequest NetworksDelete' where
         type Rs NetworksDelete' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u NetworksDelete'{..}
           = go _ndQuotaUser (Just _ndPrettyPrint) _ndProject
-              _ndUserIp
+              _ndUserIP
               _ndNetwork
               _ndKey
-              _ndOauthToken
+              _ndOAuthToken
               _ndFields
-              (Just _ndAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy NetworksDeleteResource)

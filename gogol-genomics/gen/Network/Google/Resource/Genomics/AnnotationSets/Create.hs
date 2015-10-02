@@ -33,11 +33,11 @@ module Network.Google.Resource.Genomics.AnnotationSets.Create
     -- * Request Lenses
     , ascQuotaUser
     , ascPrettyPrint
-    , ascUserIp
+    , ascUserIP
     , ascKey
-    , ascOauthToken
+    , ascAnnotationSet
+    , ascOAuthToken
     , ascFields
-    , ascAlt
     ) where
 
 import           Network.Google.Genomics.Types
@@ -50,23 +50,25 @@ type AnnotationSetsCreateResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
-               QueryParam "oauth_token" Text :>
+             QueryParam "key" Key :>
+               QueryParam "oauth_token" OAuthToken :>
                  QueryParam "fields" Text :>
-                   QueryParam "alt" Alt :> Post '[JSON] AnnotationSet
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] AnnotationSet :>
+                       Post '[JSON] AnnotationSet
 
 -- | Creates a new annotation set. Caller must have WRITE permission for the
 -- associated dataset.
 --
 -- /See:/ 'annotationSetsCreate'' smart constructor.
 data AnnotationSetsCreate' = AnnotationSetsCreate'
-    { _ascQuotaUser   :: !(Maybe Text)
-    , _ascPrettyPrint :: !Bool
-    , _ascUserIp      :: !(Maybe Text)
-    , _ascKey         :: !(Maybe Text)
-    , _ascOauthToken  :: !(Maybe Text)
-    , _ascFields      :: !(Maybe Text)
-    , _ascAlt         :: !Alt
+    { _ascQuotaUser     :: !(Maybe Text)
+    , _ascPrettyPrint   :: !Bool
+    , _ascUserIP        :: !(Maybe Text)
+    , _ascKey           :: !(Maybe Key)
+    , _ascAnnotationSet :: !AnnotationSet
+    , _ascOAuthToken    :: !(Maybe OAuthToken)
+    , _ascFields        :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnnotationSetsCreate'' with the minimum fields required to make a request.
@@ -77,26 +79,27 @@ data AnnotationSetsCreate' = AnnotationSetsCreate'
 --
 -- * 'ascPrettyPrint'
 --
--- * 'ascUserIp'
+-- * 'ascUserIP'
 --
 -- * 'ascKey'
 --
--- * 'ascOauthToken'
+-- * 'ascAnnotationSet'
+--
+-- * 'ascOAuthToken'
 --
 -- * 'ascFields'
---
--- * 'ascAlt'
 annotationSetsCreate'
-    :: AnnotationSetsCreate'
-annotationSetsCreate' =
+    :: AnnotationSet -- ^ 'AnnotationSet'
+    -> AnnotationSetsCreate'
+annotationSetsCreate' pAscAnnotationSet_ =
     AnnotationSetsCreate'
     { _ascQuotaUser = Nothing
     , _ascPrettyPrint = True
-    , _ascUserIp = Nothing
+    , _ascUserIP = Nothing
     , _ascKey = Nothing
-    , _ascOauthToken = Nothing
+    , _ascAnnotationSet = pAscAnnotationSet_
+    , _ascOAuthToken = Nothing
     , _ascFields = Nothing
-    , _ascAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -114,40 +117,47 @@ ascPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ascUserIp :: Lens' AnnotationSetsCreate' (Maybe Text)
-ascUserIp
-  = lens _ascUserIp (\ s a -> s{_ascUserIp = a})
+ascUserIP :: Lens' AnnotationSetsCreate' (Maybe Text)
+ascUserIP
+  = lens _ascUserIP (\ s a -> s{_ascUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ascKey :: Lens' AnnotationSetsCreate' (Maybe Text)
+ascKey :: Lens' AnnotationSetsCreate' (Maybe Key)
 ascKey = lens _ascKey (\ s a -> s{_ascKey = a})
 
+-- | Multipart request metadata.
+ascAnnotationSet :: Lens' AnnotationSetsCreate' AnnotationSet
+ascAnnotationSet
+  = lens _ascAnnotationSet
+      (\ s a -> s{_ascAnnotationSet = a})
+
 -- | OAuth 2.0 token for the current user.
-ascOauthToken :: Lens' AnnotationSetsCreate' (Maybe Text)
-ascOauthToken
-  = lens _ascOauthToken
-      (\ s a -> s{_ascOauthToken = a})
+ascOAuthToken :: Lens' AnnotationSetsCreate' (Maybe OAuthToken)
+ascOAuthToken
+  = lens _ascOAuthToken
+      (\ s a -> s{_ascOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ascFields :: Lens' AnnotationSetsCreate' (Maybe Text)
 ascFields
   = lens _ascFields (\ s a -> s{_ascFields = a})
 
--- | Data format for the response.
-ascAlt :: Lens' AnnotationSetsCreate' Alt
-ascAlt = lens _ascAlt (\ s a -> s{_ascAlt = a})
+instance GoogleAuth AnnotationSetsCreate' where
+        authKey = ascKey . _Just
+        authToken = ascOAuthToken . _Just
 
 instance GoogleRequest AnnotationSetsCreate' where
         type Rs AnnotationSetsCreate' = AnnotationSet
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u AnnotationSetsCreate'{..}
-          = go _ascQuotaUser (Just _ascPrettyPrint) _ascUserIp
+          = go _ascQuotaUser (Just _ascPrettyPrint) _ascUserIP
               _ascKey
-              _ascOauthToken
+              _ascOAuthToken
               _ascFields
-              (Just _ascAlt)
+              (Just AltJSON)
+              _ascAnnotationSet
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AnnotationSetsCreateResource)

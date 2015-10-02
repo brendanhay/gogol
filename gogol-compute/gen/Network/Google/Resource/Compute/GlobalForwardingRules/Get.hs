@@ -34,11 +34,10 @@ module Network.Google.Resource.Compute.GlobalForwardingRules.Get
     , gfrgPrettyPrint
     , gfrgProject
     , gfrgForwardingRule
-    , gfrgUserIp
+    , gfrgUserIP
     , gfrgKey
-    , gfrgOauthToken
+    , gfrgOAuthToken
     , gfrgFields
-    , gfrgAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -54,10 +53,11 @@ type GlobalForwardingRulesGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] ForwardingRule
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] ForwardingRule
 
 -- | Returns the specified ForwardingRule resource.
 --
@@ -67,11 +67,10 @@ data GlobalForwardingRulesGet' = GlobalForwardingRulesGet'
     , _gfrgPrettyPrint    :: !Bool
     , _gfrgProject        :: !Text
     , _gfrgForwardingRule :: !Text
-    , _gfrgUserIp         :: !(Maybe Text)
-    , _gfrgKey            :: !(Maybe Text)
-    , _gfrgOauthToken     :: !(Maybe Text)
+    , _gfrgUserIP         :: !(Maybe Text)
+    , _gfrgKey            :: !(Maybe Key)
+    , _gfrgOAuthToken     :: !(Maybe OAuthToken)
     , _gfrgFields         :: !(Maybe Text)
-    , _gfrgAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GlobalForwardingRulesGet'' with the minimum fields required to make a request.
@@ -86,15 +85,13 @@ data GlobalForwardingRulesGet' = GlobalForwardingRulesGet'
 --
 -- * 'gfrgForwardingRule'
 --
--- * 'gfrgUserIp'
+-- * 'gfrgUserIP'
 --
 -- * 'gfrgKey'
 --
--- * 'gfrgOauthToken'
+-- * 'gfrgOAuthToken'
 --
 -- * 'gfrgFields'
---
--- * 'gfrgAlt'
 globalForwardingRulesGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'forwardingRule'
@@ -105,11 +102,10 @@ globalForwardingRulesGet' pGfrgProject_ pGfrgForwardingRule_ =
     , _gfrgPrettyPrint = True
     , _gfrgProject = pGfrgProject_
     , _gfrgForwardingRule = pGfrgForwardingRule_
-    , _gfrgUserIp = Nothing
+    , _gfrgUserIP = Nothing
     , _gfrgKey = Nothing
-    , _gfrgOauthToken = Nothing
+    , _gfrgOAuthToken = Nothing
     , _gfrgFields = Nothing
-    , _gfrgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,30 +135,30 @@ gfrgForwardingRule
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-gfrgUserIp :: Lens' GlobalForwardingRulesGet' (Maybe Text)
-gfrgUserIp
-  = lens _gfrgUserIp (\ s a -> s{_gfrgUserIp = a})
+gfrgUserIP :: Lens' GlobalForwardingRulesGet' (Maybe Text)
+gfrgUserIP
+  = lens _gfrgUserIP (\ s a -> s{_gfrgUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-gfrgKey :: Lens' GlobalForwardingRulesGet' (Maybe Text)
+gfrgKey :: Lens' GlobalForwardingRulesGet' (Maybe Key)
 gfrgKey = lens _gfrgKey (\ s a -> s{_gfrgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-gfrgOauthToken :: Lens' GlobalForwardingRulesGet' (Maybe Text)
-gfrgOauthToken
-  = lens _gfrgOauthToken
-      (\ s a -> s{_gfrgOauthToken = a})
+gfrgOAuthToken :: Lens' GlobalForwardingRulesGet' (Maybe OAuthToken)
+gfrgOAuthToken
+  = lens _gfrgOAuthToken
+      (\ s a -> s{_gfrgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 gfrgFields :: Lens' GlobalForwardingRulesGet' (Maybe Text)
 gfrgFields
   = lens _gfrgFields (\ s a -> s{_gfrgFields = a})
 
--- | Data format for the response.
-gfrgAlt :: Lens' GlobalForwardingRulesGet' Alt
-gfrgAlt = lens _gfrgAlt (\ s a -> s{_gfrgAlt = a})
+instance GoogleAuth GlobalForwardingRulesGet' where
+        authKey = gfrgKey . _Just
+        authToken = gfrgOAuthToken . _Just
 
 instance GoogleRequest GlobalForwardingRulesGet'
          where
@@ -172,11 +168,11 @@ instance GoogleRequest GlobalForwardingRulesGet'
           = go _gfrgQuotaUser (Just _gfrgPrettyPrint)
               _gfrgProject
               _gfrgForwardingRule
-              _gfrgUserIp
+              _gfrgUserIP
               _gfrgKey
-              _gfrgOauthToken
+              _gfrgOAuthToken
               _gfrgFields
-              (Just _gfrgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy GlobalForwardingRulesGetResource)

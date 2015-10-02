@@ -37,7 +37,7 @@ module Network.Google.Resource.AppsActivity.Activities.List
     -- * Request Lenses
     , alQuotaUser
     , alPrettyPrint
-    , alUserIp
+    , alUserIP
     , alDriveFileId
     , alDriveAncestorId
     , alGroupingStrategy
@@ -45,10 +45,9 @@ module Network.Google.Resource.AppsActivity.Activities.List
     , alKey
     , alSource
     , alPageToken
-    , alOauthToken
+    , alOAuthToken
     , alPageSize
     , alFields
-    , alAlt
     ) where
 
 import           Network.Google.AppsActivity.Types
@@ -67,13 +66,13 @@ type ActivitiesListResource =
                    AppsactivityActivitiesListGroupingStrategy
                    :>
                    QueryParam "userId" Text :>
-                     QueryParam "key" Text :>
+                     QueryParam "key" Key :>
                        QueryParam "source" Text :>
                          QueryParam "pageToken" Text :>
-                           QueryParam "oauth_token" Text :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "pageSize" Int32 :>
                                QueryParam "fields" Text :>
-                                 QueryParam "alt" Alt :>
+                                 QueryParam "alt" AltJSON :>
                                    Get '[JSON] ListActivitiesResponse
 
 -- | Returns a list of activities visible to the current logged in user.
@@ -87,18 +86,17 @@ type ActivitiesListResource =
 data ActivitiesList' = ActivitiesList'
     { _alQuotaUser        :: !(Maybe Text)
     , _alPrettyPrint      :: !Bool
-    , _alUserIp           :: !(Maybe Text)
+    , _alUserIP           :: !(Maybe Text)
     , _alDriveFileId      :: !(Maybe Text)
     , _alDriveAncestorId  :: !(Maybe Text)
     , _alGroupingStrategy :: !AppsactivityActivitiesListGroupingStrategy
     , _alUserId           :: !Text
-    , _alKey              :: !(Maybe Text)
+    , _alKey              :: !(Maybe Key)
     , _alSource           :: !(Maybe Text)
     , _alPageToken        :: !(Maybe Text)
-    , _alOauthToken       :: !(Maybe Text)
+    , _alOAuthToken       :: !(Maybe OAuthToken)
     , _alPageSize         :: !Int32
     , _alFields           :: !(Maybe Text)
-    , _alAlt              :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ActivitiesList'' with the minimum fields required to make a request.
@@ -109,7 +107,7 @@ data ActivitiesList' = ActivitiesList'
 --
 -- * 'alPrettyPrint'
 --
--- * 'alUserIp'
+-- * 'alUserIP'
 --
 -- * 'alDriveFileId'
 --
@@ -125,20 +123,18 @@ data ActivitiesList' = ActivitiesList'
 --
 -- * 'alPageToken'
 --
--- * 'alOauthToken'
+-- * 'alOAuthToken'
 --
 -- * 'alPageSize'
 --
 -- * 'alFields'
---
--- * 'alAlt'
 activitiesList'
     :: ActivitiesList'
 activitiesList' =
     ActivitiesList'
     { _alQuotaUser = Nothing
     , _alPrettyPrint = True
-    , _alUserIp = Nothing
+    , _alUserIP = Nothing
     , _alDriveFileId = Nothing
     , _alDriveAncestorId = Nothing
     , _alGroupingStrategy = DriveUi
@@ -146,10 +142,9 @@ activitiesList' =
     , _alKey = Nothing
     , _alSource = Nothing
     , _alPageToken = Nothing
-    , _alOauthToken = Nothing
+    , _alOAuthToken = Nothing
     , _alPageSize = 50
     , _alFields = Nothing
-    , _alAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -167,8 +162,8 @@ alPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-alUserIp :: Lens' ActivitiesList' (Maybe Text)
-alUserIp = lens _alUserIp (\ s a -> s{_alUserIp = a})
+alUserIP :: Lens' ActivitiesList' (Maybe Text)
+alUserIP = lens _alUserIP (\ s a -> s{_alUserIP = a})
 
 -- | Identifies the Drive item to return activities for.
 alDriveFileId :: Lens' ActivitiesList' (Maybe Text)
@@ -198,7 +193,7 @@ alUserId = lens _alUserId (\ s a -> s{_alUserId = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-alKey :: Lens' ActivitiesList' (Maybe Text)
+alKey :: Lens' ActivitiesList' (Maybe Key)
 alKey = lens _alKey (\ s a -> s{_alKey = a})
 
 -- | The Google service from which to return activities. Possible values of
@@ -212,9 +207,9 @@ alPageToken
   = lens _alPageToken (\ s a -> s{_alPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-alOauthToken :: Lens' ActivitiesList' (Maybe Text)
-alOauthToken
-  = lens _alOauthToken (\ s a -> s{_alOauthToken = a})
+alOAuthToken :: Lens' ActivitiesList' (Maybe OAuthToken)
+alOAuthToken
+  = lens _alOAuthToken (\ s a -> s{_alOAuthToken = a})
 
 -- | The maximum number of events to return on a page. The response includes
 -- a continuation token if there are more events.
@@ -226,15 +221,15 @@ alPageSize
 alFields :: Lens' ActivitiesList' (Maybe Text)
 alFields = lens _alFields (\ s a -> s{_alFields = a})
 
--- | Data format for the response.
-alAlt :: Lens' ActivitiesList' Alt
-alAlt = lens _alAlt (\ s a -> s{_alAlt = a})
+instance GoogleAuth ActivitiesList' where
+        authKey = alKey . _Just
+        authToken = alOAuthToken . _Just
 
 instance GoogleRequest ActivitiesList' where
         type Rs ActivitiesList' = ListActivitiesResponse
         request = requestWithRoute defReq appsActivityURL
         requestWithRoute r u ActivitiesList'{..}
-          = go _alQuotaUser (Just _alPrettyPrint) _alUserIp
+          = go _alQuotaUser (Just _alPrettyPrint) _alUserIP
               _alDriveFileId
               _alDriveAncestorId
               (Just _alGroupingStrategy)
@@ -242,10 +237,10 @@ instance GoogleRequest ActivitiesList' where
               _alKey
               _alSource
               _alPageToken
-              _alOauthToken
+              _alOAuthToken
               (Just _alPageSize)
               _alFields
-              (Just _alAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ActivitiesListResource)

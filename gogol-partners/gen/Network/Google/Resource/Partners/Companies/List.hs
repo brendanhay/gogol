@@ -51,12 +51,12 @@ module Network.Google.Resource.Partners.Companies.List
     , clRequestMetadataLocale
     , clView
     , clRequestMetadataExperimentIds
-    , clRequestMetadataUserOverridesIpAddress
+    , clRequestMetadataUserOverridesIPAddress
     , clMaxMonthlyBudgetCurrencyCode
-    , clWebsiteUrl
+    , clWebsiteURL
     , clPageToken
     , clRequestMetadataTrafficSourceTrafficSubId
-    , clOauthToken
+    , clOAuthToken
     , clGpsMotivations
     , clPageSize
     , clMinMonthlyBudgetCurrencyCode
@@ -66,7 +66,6 @@ module Network.Google.Resource.Partners.Companies.List
     , clRequestMetadataTrafficSourceTrafficSourceId
     , clFields
     , clCallback
-    , clAlt
     ) where
 
 import           Network.Google.Partners.Types
@@ -96,7 +95,7 @@ type CompaniesListResource =
                                        Text
                                        :>
                                        QueryParam "bearer_token" Text :>
-                                         QueryParam "key" Text :>
+                                         QueryParam "key" Key :>
                                            QueryParam "maxMonthlyBudget.nanos"
                                              Int32
                                              :>
@@ -128,7 +127,7 @@ type CompaniesListResource =
                                                              :>
                                                              QueryParam
                                                                "oauth_token"
-                                                               Text
+                                                               OAuthToken
                                                                :>
                                                                QueryParams
                                                                  "gpsMotivations"
@@ -168,7 +167,7 @@ type CompaniesListResource =
                                                                                  :>
                                                                                  QueryParam
                                                                                    "alt"
-                                                                                   Text
+                                                                                   AltJSON
                                                                                    :>
                                                                                    Get
                                                                                      '[JSON]
@@ -194,17 +193,17 @@ data CompaniesList' = CompaniesList'
     , _clIndustries                                  :: !(Maybe Text)
     , _clRequestMetadataPartnersSessionId            :: !(Maybe Text)
     , _clBearerToken                                 :: !(Maybe Text)
-    , _clKey                                         :: !(Maybe Text)
+    , _clKey                                         :: !(Maybe Key)
     , _clMaxMonthlyBudgetNanos                       :: !(Maybe Int32)
     , _clRequestMetadataLocale                       :: !(Maybe Text)
     , _clView                                        :: !(Maybe Text)
     , _clRequestMetadataExperimentIds                :: !(Maybe Text)
-    , _clRequestMetadataUserOverridesIpAddress       :: !(Maybe Text)
+    , _clRequestMetadataUserOverridesIPAddress       :: !(Maybe Text)
     , _clMaxMonthlyBudgetCurrencyCode                :: !(Maybe Text)
-    , _clWebsiteUrl                                  :: !(Maybe Text)
+    , _clWebsiteURL                                  :: !(Maybe Text)
     , _clPageToken                                   :: !(Maybe Text)
     , _clRequestMetadataTrafficSourceTrafficSubId    :: !(Maybe Text)
-    , _clOauthToken                                  :: !(Maybe Text)
+    , _clOAuthToken                                  :: !(Maybe OAuthToken)
     , _clGpsMotivations                              :: !(Maybe Text)
     , _clPageSize                                    :: !(Maybe Int32)
     , _clMinMonthlyBudgetCurrencyCode                :: !(Maybe Text)
@@ -214,7 +213,6 @@ data CompaniesList' = CompaniesList'
     , _clRequestMetadataTrafficSourceTrafficSourceId :: !(Maybe Text)
     , _clFields                                      :: !(Maybe Text)
     , _clCallback                                    :: !(Maybe Text)
-    , _clAlt                                         :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CompaniesList'' with the minimum fields required to make a request.
@@ -263,17 +261,17 @@ data CompaniesList' = CompaniesList'
 --
 -- * 'clRequestMetadataExperimentIds'
 --
--- * 'clRequestMetadataUserOverridesIpAddress'
+-- * 'clRequestMetadataUserOverridesIPAddress'
 --
 -- * 'clMaxMonthlyBudgetCurrencyCode'
 --
--- * 'clWebsiteUrl'
+-- * 'clWebsiteURL'
 --
 -- * 'clPageToken'
 --
 -- * 'clRequestMetadataTrafficSourceTrafficSubId'
 --
--- * 'clOauthToken'
+-- * 'clOAuthToken'
 --
 -- * 'clGpsMotivations'
 --
@@ -292,8 +290,6 @@ data CompaniesList' = CompaniesList'
 -- * 'clFields'
 --
 -- * 'clCallback'
---
--- * 'clAlt'
 companiesList'
     :: CompaniesList'
 companiesList' =
@@ -319,12 +315,12 @@ companiesList' =
     , _clRequestMetadataLocale = Nothing
     , _clView = Nothing
     , _clRequestMetadataExperimentIds = Nothing
-    , _clRequestMetadataUserOverridesIpAddress = Nothing
+    , _clRequestMetadataUserOverridesIPAddress = Nothing
     , _clMaxMonthlyBudgetCurrencyCode = Nothing
-    , _clWebsiteUrl = Nothing
+    , _clWebsiteURL = Nothing
     , _clPageToken = Nothing
     , _clRequestMetadataTrafficSourceTrafficSubId = Nothing
-    , _clOauthToken = Nothing
+    , _clOAuthToken = Nothing
     , _clGpsMotivations = Nothing
     , _clPageSize = Nothing
     , _clMinMonthlyBudgetCurrencyCode = Nothing
@@ -334,7 +330,6 @@ companiesList' =
     , _clRequestMetadataTrafficSourceTrafficSourceId = Nothing
     , _clFields = Nothing
     , _clCallback = Nothing
-    , _clAlt = "json"
     }
 
 -- | List of language codes that company can support. Only primary language
@@ -441,7 +436,7 @@ clBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-clKey :: Lens' CompaniesList' (Maybe Text)
+clKey :: Lens' CompaniesList' (Maybe Key)
 clKey = lens _clKey (\ s a -> s{_clKey = a})
 
 -- | Number of nano (10^-9) units of the amount. The value must be between
@@ -473,11 +468,11 @@ clRequestMetadataExperimentIds
       (\ s a -> s{_clRequestMetadataExperimentIds = a})
 
 -- | IP address to use instead of the user\'s geo-located IP address.
-clRequestMetadataUserOverridesIpAddress :: Lens' CompaniesList' (Maybe Text)
-clRequestMetadataUserOverridesIpAddress
-  = lens _clRequestMetadataUserOverridesIpAddress
+clRequestMetadataUserOverridesIPAddress :: Lens' CompaniesList' (Maybe Text)
+clRequestMetadataUserOverridesIPAddress
+  = lens _clRequestMetadataUserOverridesIPAddress
       (\ s a ->
-         s{_clRequestMetadataUserOverridesIpAddress = a})
+         s{_clRequestMetadataUserOverridesIPAddress = a})
 
 -- | The 3-letter currency code defined in ISO 4217.
 clMaxMonthlyBudgetCurrencyCode :: Lens' CompaniesList' (Maybe Text)
@@ -486,9 +481,9 @@ clMaxMonthlyBudgetCurrencyCode
       (\ s a -> s{_clMaxMonthlyBudgetCurrencyCode = a})
 
 -- | Website URL that will help to find a better matched company. .
-clWebsiteUrl :: Lens' CompaniesList' (Maybe Text)
-clWebsiteUrl
-  = lens _clWebsiteUrl (\ s a -> s{_clWebsiteUrl = a})
+clWebsiteURL :: Lens' CompaniesList' (Maybe Text)
+clWebsiteURL
+  = lens _clWebsiteURL (\ s a -> s{_clWebsiteURL = a})
 
 -- | A token identifying a page of results that the server returns.
 -- Typically, this is the value of
@@ -508,9 +503,9 @@ clRequestMetadataTrafficSourceTrafficSubId
          s{_clRequestMetadataTrafficSourceTrafficSubId = a})
 
 -- | OAuth 2.0 token for the current user.
-clOauthToken :: Lens' CompaniesList' (Maybe Text)
-clOauthToken
-  = lens _clOauthToken (\ s a -> s{_clOauthToken = a})
+clOAuthToken :: Lens' CompaniesList' (Maybe OAuthToken)
+clOAuthToken
+  = lens _clOAuthToken (\ s a -> s{_clOAuthToken = a})
 
 -- | List of reasons for using Google Partner Search to get companies.
 clGpsMotivations :: Lens' CompaniesList' (Maybe Text)
@@ -567,9 +562,9 @@ clCallback :: Lens' CompaniesList' (Maybe Text)
 clCallback
   = lens _clCallback (\ s a -> s{_clCallback = a})
 
--- | Data format for response.
-clAlt :: Lens' CompaniesList' Text
-clAlt = lens _clAlt (\ s a -> s{_clAlt = a})
+instance GoogleAuth CompaniesList' where
+        authKey = clKey . _Just
+        authToken = clOAuthToken . _Just
 
 instance GoogleRequest CompaniesList' where
         type Rs CompaniesList' = ListCompaniesResponse
@@ -595,12 +590,12 @@ instance GoogleRequest CompaniesList' where
               _clRequestMetadataLocale
               _clView
               _clRequestMetadataExperimentIds
-              _clRequestMetadataUserOverridesIpAddress
+              _clRequestMetadataUserOverridesIPAddress
               _clMaxMonthlyBudgetCurrencyCode
-              _clWebsiteUrl
+              _clWebsiteURL
               _clPageToken
               _clRequestMetadataTrafficSourceTrafficSubId
-              _clOauthToken
+              _clOAuthToken
               _clGpsMotivations
               _clPageSize
               _clMinMonthlyBudgetCurrencyCode
@@ -610,7 +605,7 @@ instance GoogleRequest CompaniesList' where
               _clRequestMetadataTrafficSourceTrafficSourceId
               _clFields
               _clCallback
-              (Just _clAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CompaniesListResource)

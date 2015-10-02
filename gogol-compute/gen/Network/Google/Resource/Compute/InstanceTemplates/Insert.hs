@@ -34,11 +34,11 @@ module Network.Google.Resource.Compute.InstanceTemplates.Insert
     , itiQuotaUser
     , itiPrettyPrint
     , itiProject
-    , itiUserIp
+    , itiUserIP
+    , itiInstanceTemplate
     , itiKey
-    , itiOauthToken
+    , itiOAuthToken
     , itiFields
-    , itiAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -53,24 +53,26 @@ type InstanceTemplatesInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] Operation
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] InstanceTemplate :>
+                           Post '[JSON] Operation
 
 -- | Creates an instance template in the specified project using the data
 -- that is included in the request.
 --
 -- /See:/ 'instanceTemplatesInsert'' smart constructor.
 data InstanceTemplatesInsert' = InstanceTemplatesInsert'
-    { _itiQuotaUser   :: !(Maybe Text)
-    , _itiPrettyPrint :: !Bool
-    , _itiProject     :: !Text
-    , _itiUserIp      :: !(Maybe Text)
-    , _itiKey         :: !(Maybe Text)
-    , _itiOauthToken  :: !(Maybe Text)
-    , _itiFields      :: !(Maybe Text)
-    , _itiAlt         :: !Alt
+    { _itiQuotaUser        :: !(Maybe Text)
+    , _itiPrettyPrint      :: !Bool
+    , _itiProject          :: !Text
+    , _itiUserIP           :: !(Maybe Text)
+    , _itiInstanceTemplate :: !InstanceTemplate
+    , _itiKey              :: !(Maybe Key)
+    , _itiOAuthToken       :: !(Maybe OAuthToken)
+    , _itiFields           :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceTemplatesInsert'' with the minimum fields required to make a request.
@@ -83,28 +85,29 @@ data InstanceTemplatesInsert' = InstanceTemplatesInsert'
 --
 -- * 'itiProject'
 --
--- * 'itiUserIp'
+-- * 'itiUserIP'
+--
+-- * 'itiInstanceTemplate'
 --
 -- * 'itiKey'
 --
--- * 'itiOauthToken'
+-- * 'itiOAuthToken'
 --
 -- * 'itiFields'
---
--- * 'itiAlt'
 instanceTemplatesInsert'
     :: Text -- ^ 'project'
+    -> InstanceTemplate -- ^ 'InstanceTemplate'
     -> InstanceTemplatesInsert'
-instanceTemplatesInsert' pItiProject_ =
+instanceTemplatesInsert' pItiProject_ pItiInstanceTemplate_ =
     InstanceTemplatesInsert'
     { _itiQuotaUser = Nothing
     , _itiPrettyPrint = True
     , _itiProject = pItiProject_
-    , _itiUserIp = Nothing
+    , _itiUserIP = Nothing
+    , _itiInstanceTemplate = pItiInstanceTemplate_
     , _itiKey = Nothing
-    , _itiOauthToken = Nothing
+    , _itiOAuthToken = Nothing
     , _itiFields = Nothing
-    , _itiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,41 +130,48 @@ itiProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-itiUserIp :: Lens' InstanceTemplatesInsert' (Maybe Text)
-itiUserIp
-  = lens _itiUserIp (\ s a -> s{_itiUserIp = a})
+itiUserIP :: Lens' InstanceTemplatesInsert' (Maybe Text)
+itiUserIP
+  = lens _itiUserIP (\ s a -> s{_itiUserIP = a})
+
+-- | Multipart request metadata.
+itiInstanceTemplate :: Lens' InstanceTemplatesInsert' InstanceTemplate
+itiInstanceTemplate
+  = lens _itiInstanceTemplate
+      (\ s a -> s{_itiInstanceTemplate = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-itiKey :: Lens' InstanceTemplatesInsert' (Maybe Text)
+itiKey :: Lens' InstanceTemplatesInsert' (Maybe Key)
 itiKey = lens _itiKey (\ s a -> s{_itiKey = a})
 
 -- | OAuth 2.0 token for the current user.
-itiOauthToken :: Lens' InstanceTemplatesInsert' (Maybe Text)
-itiOauthToken
-  = lens _itiOauthToken
-      (\ s a -> s{_itiOauthToken = a})
+itiOAuthToken :: Lens' InstanceTemplatesInsert' (Maybe OAuthToken)
+itiOAuthToken
+  = lens _itiOAuthToken
+      (\ s a -> s{_itiOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 itiFields :: Lens' InstanceTemplatesInsert' (Maybe Text)
 itiFields
   = lens _itiFields (\ s a -> s{_itiFields = a})
 
--- | Data format for the response.
-itiAlt :: Lens' InstanceTemplatesInsert' Alt
-itiAlt = lens _itiAlt (\ s a -> s{_itiAlt = a})
+instance GoogleAuth InstanceTemplatesInsert' where
+        authKey = itiKey . _Just
+        authToken = itiOAuthToken . _Just
 
 instance GoogleRequest InstanceTemplatesInsert' where
         type Rs InstanceTemplatesInsert' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstanceTemplatesInsert'{..}
           = go _itiQuotaUser (Just _itiPrettyPrint) _itiProject
-              _itiUserIp
+              _itiUserIP
               _itiKey
-              _itiOauthToken
+              _itiOAuthToken
               _itiFields
-              (Just _itiAlt)
+              (Just AltJSON)
+              _itiInstanceTemplate
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InstanceTemplatesInsertResource)

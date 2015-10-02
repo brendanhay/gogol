@@ -33,14 +33,13 @@ module Network.Google.Resource.Blogger.Posts.Search
     , psQuotaUser
     , psPrettyPrint
     , psOrderBy
-    , psUserIp
+    , psUserIP
     , psBlogId
     , psQ
     , psKey
     , psFetchBodies
-    , psOauthToken
+    , psOAuthToken
     , psFields
-    , psAlt
     ) where
 
 import           Network.Google.Blogger.Types
@@ -58,11 +57,11 @@ type PostsSearchResource =
                  QueryParam "orderBy" BloggerPostsSearchOrderBy :>
                    QueryParam "userIp" Text :>
                      QueryParam "q" Text :>
-                       QueryParam "key" Text :>
+                       QueryParam "key" Key :>
                          QueryParam "fetchBodies" Bool :>
-                           QueryParam "oauth_token" Text :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :> Get '[JSON] PostList
+                               QueryParam "alt" AltJSON :> Get '[JSON] PostList
 
 -- | Search for a post.
 --
@@ -71,14 +70,13 @@ data PostsSearch' = PostsSearch'
     { _psQuotaUser   :: !(Maybe Text)
     , _psPrettyPrint :: !Bool
     , _psOrderBy     :: !BloggerPostsSearchOrderBy
-    , _psUserIp      :: !(Maybe Text)
+    , _psUserIP      :: !(Maybe Text)
     , _psBlogId      :: !Text
     , _psQ           :: !Text
-    , _psKey         :: !(Maybe Text)
+    , _psKey         :: !(Maybe Key)
     , _psFetchBodies :: !Bool
-    , _psOauthToken  :: !(Maybe Text)
+    , _psOAuthToken  :: !(Maybe OAuthToken)
     , _psFields      :: !(Maybe Text)
-    , _psAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PostsSearch'' with the minimum fields required to make a request.
@@ -91,7 +89,7 @@ data PostsSearch' = PostsSearch'
 --
 -- * 'psOrderBy'
 --
--- * 'psUserIp'
+-- * 'psUserIP'
 --
 -- * 'psBlogId'
 --
@@ -101,11 +99,9 @@ data PostsSearch' = PostsSearch'
 --
 -- * 'psFetchBodies'
 --
--- * 'psOauthToken'
+-- * 'psOAuthToken'
 --
 -- * 'psFields'
---
--- * 'psAlt'
 postsSearch'
     :: Text -- ^ 'blogId'
     -> Text -- ^ 'q'
@@ -115,14 +111,13 @@ postsSearch' pPsBlogId_ pPsQ_ =
     { _psQuotaUser = Nothing
     , _psPrettyPrint = True
     , _psOrderBy = BPSOBPublished
-    , _psUserIp = Nothing
+    , _psUserIP = Nothing
     , _psBlogId = pPsBlogId_
     , _psQ = pPsQ_
     , _psKey = Nothing
     , _psFetchBodies = True
-    , _psOauthToken = Nothing
+    , _psOAuthToken = Nothing
     , _psFields = Nothing
-    , _psAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -145,8 +140,8 @@ psOrderBy
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-psUserIp :: Lens' PostsSearch' (Maybe Text)
-psUserIp = lens _psUserIp (\ s a -> s{_psUserIp = a})
+psUserIP :: Lens' PostsSearch' (Maybe Text)
+psUserIP = lens _psUserIP (\ s a -> s{_psUserIP = a})
 
 -- | ID of the blog to fetch the post from.
 psBlogId :: Lens' PostsSearch' Text
@@ -159,7 +154,7 @@ psQ = lens _psQ (\ s a -> s{_psQ = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-psKey :: Lens' PostsSearch' (Maybe Text)
+psKey :: Lens' PostsSearch' (Maybe Key)
 psKey = lens _psKey (\ s a -> s{_psKey = a})
 
 -- | Whether the body content of posts is included (default: true). This
@@ -171,17 +166,17 @@ psFetchBodies
       (\ s a -> s{_psFetchBodies = a})
 
 -- | OAuth 2.0 token for the current user.
-psOauthToken :: Lens' PostsSearch' (Maybe Text)
-psOauthToken
-  = lens _psOauthToken (\ s a -> s{_psOauthToken = a})
+psOAuthToken :: Lens' PostsSearch' (Maybe OAuthToken)
+psOAuthToken
+  = lens _psOAuthToken (\ s a -> s{_psOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 psFields :: Lens' PostsSearch' (Maybe Text)
 psFields = lens _psFields (\ s a -> s{_psFields = a})
 
--- | Data format for the response.
-psAlt :: Lens' PostsSearch' Alt
-psAlt = lens _psAlt (\ s a -> s{_psAlt = a})
+instance GoogleAuth PostsSearch' where
+        authKey = psKey . _Just
+        authToken = psOAuthToken . _Just
 
 instance GoogleRequest PostsSearch' where
         type Rs PostsSearch' = PostList
@@ -189,14 +184,14 @@ instance GoogleRequest PostsSearch' where
         requestWithRoute r u PostsSearch'{..}
           = go _psQuotaUser (Just _psPrettyPrint)
               (Just _psOrderBy)
-              _psUserIp
+              _psUserIP
               _psBlogId
               (Just _psQ)
               _psKey
               (Just _psFetchBodies)
-              _psOauthToken
+              _psOAuthToken
               _psFields
-              (Just _psAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy PostsSearchResource)

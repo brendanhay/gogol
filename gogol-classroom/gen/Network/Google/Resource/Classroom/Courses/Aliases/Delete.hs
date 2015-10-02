@@ -44,10 +44,9 @@ module Network.Google.Resource.Classroom.Courses.Aliases.Delete
     , cadAlias
     , cadBearerToken
     , cadKey
-    , cadOauthToken
+    , cadOAuthToken
     , cadFields
     , cadCallback
-    , cadAlt
     ) where
 
 import           Network.Google.Classroom.Types
@@ -69,11 +68,11 @@ type CoursesAliasesDeleteResource =
                          QueryParam "access_token" Text :>
                            QueryParam "uploadType" Text :>
                              QueryParam "bearer_token" Text :>
-                               QueryParam "key" Text :>
-                                 QueryParam "oauth_token" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "fields" Text :>
                                      QueryParam "callback" Text :>
-                                       QueryParam "alt" Text :>
+                                       QueryParam "alt" AltJSON :>
                                          Delete '[JSON] Empty
 
 -- | Deletes an alias of a course. This method returns the following error
@@ -93,11 +92,10 @@ data CoursesAliasesDelete' = CoursesAliasesDelete'
     , _cadUploadType     :: !(Maybe Text)
     , _cadAlias          :: !Text
     , _cadBearerToken    :: !(Maybe Text)
-    , _cadKey            :: !(Maybe Text)
-    , _cadOauthToken     :: !(Maybe Text)
+    , _cadKey            :: !(Maybe Key)
+    , _cadOAuthToken     :: !(Maybe OAuthToken)
     , _cadFields         :: !(Maybe Text)
     , _cadCallback       :: !(Maybe Text)
-    , _cadAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CoursesAliasesDelete'' with the minimum fields required to make a request.
@@ -126,13 +124,11 @@ data CoursesAliasesDelete' = CoursesAliasesDelete'
 --
 -- * 'cadKey'
 --
--- * 'cadOauthToken'
+-- * 'cadOAuthToken'
 --
 -- * 'cadFields'
 --
 -- * 'cadCallback'
---
--- * 'cadAlt'
 coursesAliasesDelete'
     :: Text -- ^ 'courseId'
     -> Text -- ^ 'alias'
@@ -150,10 +146,9 @@ coursesAliasesDelete' pCadCourseId_ pCadAlias_ =
     , _cadAlias = pCadAlias_
     , _cadBearerToken = Nothing
     , _cadKey = Nothing
-    , _cadOauthToken = Nothing
+    , _cadOAuthToken = Nothing
     , _cadFields = Nothing
     , _cadCallback = Nothing
-    , _cadAlt = "json"
     }
 
 -- | V1 error format.
@@ -215,14 +210,14 @@ cadBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cadKey :: Lens' CoursesAliasesDelete' (Maybe Text)
+cadKey :: Lens' CoursesAliasesDelete' (Maybe Key)
 cadKey = lens _cadKey (\ s a -> s{_cadKey = a})
 
 -- | OAuth 2.0 token for the current user.
-cadOauthToken :: Lens' CoursesAliasesDelete' (Maybe Text)
-cadOauthToken
-  = lens _cadOauthToken
-      (\ s a -> s{_cadOauthToken = a})
+cadOAuthToken :: Lens' CoursesAliasesDelete' (Maybe OAuthToken)
+cadOAuthToken
+  = lens _cadOAuthToken
+      (\ s a -> s{_cadOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cadFields :: Lens' CoursesAliasesDelete' (Maybe Text)
@@ -234,9 +229,9 @@ cadCallback :: Lens' CoursesAliasesDelete' (Maybe Text)
 cadCallback
   = lens _cadCallback (\ s a -> s{_cadCallback = a})
 
--- | Data format for response.
-cadAlt :: Lens' CoursesAliasesDelete' Text
-cadAlt = lens _cadAlt (\ s a -> s{_cadAlt = a})
+instance GoogleAuth CoursesAliasesDelete' where
+        authKey = cadKey . _Just
+        authToken = cadOAuthToken . _Just
 
 instance GoogleRequest CoursesAliasesDelete' where
         type Rs CoursesAliasesDelete' = Empty
@@ -251,10 +246,10 @@ instance GoogleRequest CoursesAliasesDelete' where
               _cadAlias
               _cadBearerToken
               _cadKey
-              _cadOauthToken
+              _cadOAuthToken
               _cadFields
               _cadCallback
-              (Just _cadAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CoursesAliasesDeleteResource)

@@ -33,14 +33,13 @@ module Network.Google.Resource.GamesManagement.Applications.ListHidden
     -- * Request Lenses
     , alhQuotaUser
     , alhPrettyPrint
-    , alhUserIp
+    , alhUserIP
     , alhApplicationId
     , alhKey
     , alhPageToken
-    , alhOauthToken
+    , alhOAuthToken
     , alhMaxResults
     , alhFields
-    , alhAlt
     ) where
 
 import           Network.Google.GamesManagement.Types
@@ -56,12 +55,12 @@ type ApplicationsListHiddenResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "pageToken" Text :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "maxResults" Int32 :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :>
+                             QueryParam "alt" AltJSON :>
                                Get '[JSON] HiddenPlayerList
 
 -- | Get the list of players hidden from the given application. This method
@@ -71,14 +70,13 @@ type ApplicationsListHiddenResource =
 data ApplicationsListHidden' = ApplicationsListHidden'
     { _alhQuotaUser     :: !(Maybe Text)
     , _alhPrettyPrint   :: !Bool
-    , _alhUserIp        :: !(Maybe Text)
+    , _alhUserIP        :: !(Maybe Text)
     , _alhApplicationId :: !Text
-    , _alhKey           :: !(Maybe Text)
+    , _alhKey           :: !(Maybe Key)
     , _alhPageToken     :: !(Maybe Text)
-    , _alhOauthToken    :: !(Maybe Text)
+    , _alhOAuthToken    :: !(Maybe OAuthToken)
     , _alhMaxResults    :: !(Maybe Int32)
     , _alhFields        :: !(Maybe Text)
-    , _alhAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ApplicationsListHidden'' with the minimum fields required to make a request.
@@ -89,7 +87,7 @@ data ApplicationsListHidden' = ApplicationsListHidden'
 --
 -- * 'alhPrettyPrint'
 --
--- * 'alhUserIp'
+-- * 'alhUserIP'
 --
 -- * 'alhApplicationId'
 --
@@ -97,13 +95,11 @@ data ApplicationsListHidden' = ApplicationsListHidden'
 --
 -- * 'alhPageToken'
 --
--- * 'alhOauthToken'
+-- * 'alhOAuthToken'
 --
 -- * 'alhMaxResults'
 --
 -- * 'alhFields'
---
--- * 'alhAlt'
 applicationsListHidden'
     :: Text -- ^ 'applicationId'
     -> ApplicationsListHidden'
@@ -111,14 +107,13 @@ applicationsListHidden' pAlhApplicationId_ =
     ApplicationsListHidden'
     { _alhQuotaUser = Nothing
     , _alhPrettyPrint = True
-    , _alhUserIp = Nothing
+    , _alhUserIP = Nothing
     , _alhApplicationId = pAlhApplicationId_
     , _alhKey = Nothing
     , _alhPageToken = Nothing
-    , _alhOauthToken = Nothing
+    , _alhOAuthToken = Nothing
     , _alhMaxResults = Nothing
     , _alhFields = Nothing
-    , _alhAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -136,9 +131,9 @@ alhPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-alhUserIp :: Lens' ApplicationsListHidden' (Maybe Text)
-alhUserIp
-  = lens _alhUserIp (\ s a -> s{_alhUserIp = a})
+alhUserIP :: Lens' ApplicationsListHidden' (Maybe Text)
+alhUserIP
+  = lens _alhUserIP (\ s a -> s{_alhUserIP = a})
 
 -- | The application ID from the Google Play developer console.
 alhApplicationId :: Lens' ApplicationsListHidden' Text
@@ -149,7 +144,7 @@ alhApplicationId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-alhKey :: Lens' ApplicationsListHidden' (Maybe Text)
+alhKey :: Lens' ApplicationsListHidden' (Maybe Key)
 alhKey = lens _alhKey (\ s a -> s{_alhKey = a})
 
 -- | The token returned by the previous request.
@@ -158,10 +153,10 @@ alhPageToken
   = lens _alhPageToken (\ s a -> s{_alhPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-alhOauthToken :: Lens' ApplicationsListHidden' (Maybe Text)
-alhOauthToken
-  = lens _alhOauthToken
-      (\ s a -> s{_alhOauthToken = a})
+alhOAuthToken :: Lens' ApplicationsListHidden' (Maybe OAuthToken)
+alhOAuthToken
+  = lens _alhOAuthToken
+      (\ s a -> s{_alhOAuthToken = a})
 
 -- | The maximum number of player resources to return in the response, used
 -- for paging. For any response, the actual number of player resources
@@ -176,22 +171,22 @@ alhFields :: Lens' ApplicationsListHidden' (Maybe Text)
 alhFields
   = lens _alhFields (\ s a -> s{_alhFields = a})
 
--- | Data format for the response.
-alhAlt :: Lens' ApplicationsListHidden' Alt
-alhAlt = lens _alhAlt (\ s a -> s{_alhAlt = a})
+instance GoogleAuth ApplicationsListHidden' where
+        authKey = alhKey . _Just
+        authToken = alhOAuthToken . _Just
 
 instance GoogleRequest ApplicationsListHidden' where
         type Rs ApplicationsListHidden' = HiddenPlayerList
         request = requestWithRoute defReq gamesManagementURL
         requestWithRoute r u ApplicationsListHidden'{..}
-          = go _alhQuotaUser (Just _alhPrettyPrint) _alhUserIp
+          = go _alhQuotaUser (Just _alhPrettyPrint) _alhUserIP
               _alhApplicationId
               _alhKey
               _alhPageToken
-              _alhOauthToken
+              _alhOAuthToken
               _alhMaxResults
               _alhFields
-              (Just _alhAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ApplicationsListHiddenResource)

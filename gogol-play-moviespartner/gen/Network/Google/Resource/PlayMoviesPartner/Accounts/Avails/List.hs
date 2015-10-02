@@ -21,7 +21,7 @@
 -- Authorization rules_ and _List methods rules_ for more information about
 -- this method.
 --
--- /See:/ <https://developers.google.com/playmoviespartner/ Google Play Movies Partner API Reference> for @PlaymoviespartnerAccountsAvailsList@.
+-- /See:/ <https://developers.google.com/playmoviespartner/ Google Play Movies Partner API Reference> for @PlaymoviesPartynerAccountsAvailsList@.
 module Network.Google.Resource.PlayMoviesPartner.Accounts.Avails.List
     (
     -- * REST Resource
@@ -49,17 +49,16 @@ module Network.Google.Resource.PlayMoviesPartner.Accounts.Avails.List
     , aalKey
     , aalPageToken
     , aalTitle
-    , aalOauthToken
+    , aalOAuthToken
     , aalPageSize
     , aalFields
     , aalCallback
-    , aalAlt
     ) where
 
 import           Network.Google.PlayMoviesPartner.Types
 import           Network.Google.Prelude
 
--- | A resource alias for @PlaymoviespartnerAccountsAvailsList@ which the
+-- | A resource alias for @PlaymoviesPartynerAccountsAvailsList@ which the
 -- 'AccountsAvailsList'' request conforms to.
 type AccountsAvailsListResource =
      "v1" :>
@@ -79,14 +78,15 @@ type AccountsAvailsListResource =
                                  QueryParam "uploadType" Text :>
                                    QueryParams "territories" Text :>
                                      QueryParam "bearer_token" Text :>
-                                       QueryParam "key" Text :>
+                                       QueryParam "key" Key :>
                                          QueryParam "pageToken" Text :>
                                            QueryParam "title" Text :>
-                                             QueryParam "oauth_token" Text :>
+                                             QueryParam "oauth_token" OAuthToken
+                                               :>
                                                QueryParam "pageSize" Int32 :>
                                                  QueryParam "fields" Text :>
                                                    QueryParam "callback" Text :>
-                                                     QueryParam "alt" Text :>
+                                                     QueryParam "alt" AltJSON :>
                                                        Get '[JSON]
                                                          ListAvailsResponse
 
@@ -110,14 +110,13 @@ data AccountsAvailsList' = AccountsAvailsList'
     , _aalTerritories    :: !(Maybe Text)
     , _aalAccountId      :: !Text
     , _aalBearerToken    :: !(Maybe Text)
-    , _aalKey            :: !(Maybe Text)
+    , _aalKey            :: !(Maybe Key)
     , _aalPageToken      :: !(Maybe Text)
     , _aalTitle          :: !(Maybe Text)
-    , _aalOauthToken     :: !(Maybe Text)
+    , _aalOAuthToken     :: !(Maybe OAuthToken)
     , _aalPageSize       :: !(Maybe Int32)
     , _aalFields         :: !(Maybe Text)
     , _aalCallback       :: !(Maybe Text)
-    , _aalAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsAvailsList'' with the minimum fields required to make a request.
@@ -158,15 +157,13 @@ data AccountsAvailsList' = AccountsAvailsList'
 --
 -- * 'aalTitle'
 --
--- * 'aalOauthToken'
+-- * 'aalOAuthToken'
 --
 -- * 'aalPageSize'
 --
 -- * 'aalFields'
 --
 -- * 'aalCallback'
---
--- * 'aalAlt'
 accountsAvailsList'
     :: Text -- ^ 'accountId'
     -> AccountsAvailsList'
@@ -189,11 +186,10 @@ accountsAvailsList' pAalAccountId_ =
     , _aalKey = Nothing
     , _aalPageToken = Nothing
     , _aalTitle = Nothing
-    , _aalOauthToken = Nothing
+    , _aalOAuthToken = Nothing
     , _aalPageSize = Nothing
     , _aalFields = Nothing
     , _aalCallback = Nothing
-    , _aalAlt = "json"
     }
 
 -- | Filter Avails that match a case-insensitive, partner-specific custom id.
@@ -277,7 +273,7 @@ aalBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aalKey :: Lens' AccountsAvailsList' (Maybe Text)
+aalKey :: Lens' AccountsAvailsList' (Maybe Key)
 aalKey = lens _aalKey (\ s a -> s{_aalKey = a})
 
 -- | See _List methods rules_ for info about this field.
@@ -291,10 +287,10 @@ aalTitle :: Lens' AccountsAvailsList' (Maybe Text)
 aalTitle = lens _aalTitle (\ s a -> s{_aalTitle = a})
 
 -- | OAuth 2.0 token for the current user.
-aalOauthToken :: Lens' AccountsAvailsList' (Maybe Text)
-aalOauthToken
-  = lens _aalOauthToken
-      (\ s a -> s{_aalOauthToken = a})
+aalOAuthToken :: Lens' AccountsAvailsList' (Maybe OAuthToken)
+aalOAuthToken
+  = lens _aalOAuthToken
+      (\ s a -> s{_aalOAuthToken = a})
 
 -- | See _List methods rules_ for info about this field.
 aalPageSize :: Lens' AccountsAvailsList' (Maybe Int32)
@@ -311,9 +307,9 @@ aalCallback :: Lens' AccountsAvailsList' (Maybe Text)
 aalCallback
   = lens _aalCallback (\ s a -> s{_aalCallback = a})
 
--- | Data format for response.
-aalAlt :: Lens' AccountsAvailsList' Text
-aalAlt = lens _aalAlt (\ s a -> s{_aalAlt = a})
+instance GoogleAuth AccountsAvailsList' where
+        authKey = aalKey . _Just
+        authToken = aalOAuthToken . _Just
 
 instance GoogleRequest AccountsAvailsList' where
         type Rs AccountsAvailsList' = ListAvailsResponse
@@ -334,11 +330,11 @@ instance GoogleRequest AccountsAvailsList' where
               _aalKey
               _aalPageToken
               _aalTitle
-              _aalOauthToken
+              _aalOAuthToken
               _aalPageSize
               _aalFields
               _aalCallback
-              (Just _aalAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountsAvailsListResource)

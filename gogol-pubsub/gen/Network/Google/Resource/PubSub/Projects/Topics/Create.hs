@@ -37,13 +37,13 @@ module Network.Google.Resource.PubSub.Projects.Topics.Create
     , ptcPp
     , ptcAccessToken
     , ptcUploadType
+    , ptcTopic
     , ptcBearerToken
     , ptcKey
     , ptcName
-    , ptcOauthToken
+    , ptcOAuthToken
     , ptcFields
     , ptcCallback
-    , ptcAlt
     ) where
 
 import           Network.Google.Prelude
@@ -62,11 +62,12 @@ type ProjectsTopicsCreateResource =
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
                        QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
                                QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :> Put '[JSON] Topic
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON] Topic :> Put '[JSON] Topic
 
 -- | Creates the given topic with the given name.
 --
@@ -79,13 +80,13 @@ data ProjectsTopicsCreate' = ProjectsTopicsCreate'
     , _ptcPp             :: !Bool
     , _ptcAccessToken    :: !(Maybe Text)
     , _ptcUploadType     :: !(Maybe Text)
+    , _ptcTopic          :: !Topic
     , _ptcBearerToken    :: !(Maybe Text)
-    , _ptcKey            :: !(Maybe Text)
+    , _ptcKey            :: !(Maybe Key)
     , _ptcName           :: !Text
-    , _ptcOauthToken     :: !(Maybe Text)
+    , _ptcOAuthToken     :: !(Maybe OAuthToken)
     , _ptcFields         :: !(Maybe Text)
     , _ptcCallback       :: !(Maybe Text)
-    , _ptcAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsTopicsCreate'' with the minimum fields required to make a request.
@@ -106,23 +107,24 @@ data ProjectsTopicsCreate' = ProjectsTopicsCreate'
 --
 -- * 'ptcUploadType'
 --
+-- * 'ptcTopic'
+--
 -- * 'ptcBearerToken'
 --
 -- * 'ptcKey'
 --
 -- * 'ptcName'
 --
--- * 'ptcOauthToken'
+-- * 'ptcOAuthToken'
 --
 -- * 'ptcFields'
 --
 -- * 'ptcCallback'
---
--- * 'ptcAlt'
 projectsTopicsCreate'
-    :: Text -- ^ 'name'
+    :: Topic -- ^ 'Topic'
+    -> Text -- ^ 'name'
     -> ProjectsTopicsCreate'
-projectsTopicsCreate' pPtcName_ =
+projectsTopicsCreate' pPtcTopic_ pPtcName_ =
     ProjectsTopicsCreate'
     { _ptcXgafv = Nothing
     , _ptcQuotaUser = Nothing
@@ -131,13 +133,13 @@ projectsTopicsCreate' pPtcName_ =
     , _ptcPp = True
     , _ptcAccessToken = Nothing
     , _ptcUploadType = Nothing
+    , _ptcTopic = pPtcTopic_
     , _ptcBearerToken = Nothing
     , _ptcKey = Nothing
     , _ptcName = pPtcName_
-    , _ptcOauthToken = Nothing
+    , _ptcOAuthToken = Nothing
     , _ptcFields = Nothing
     , _ptcCallback = Nothing
-    , _ptcAlt = "json"
     }
 
 -- | V1 error format.
@@ -179,6 +181,10 @@ ptcUploadType
   = lens _ptcUploadType
       (\ s a -> s{_ptcUploadType = a})
 
+-- | Multipart request metadata.
+ptcTopic :: Lens' ProjectsTopicsCreate' Topic
+ptcTopic = lens _ptcTopic (\ s a -> s{_ptcTopic = a})
+
 -- | OAuth bearer token.
 ptcBearerToken :: Lens' ProjectsTopicsCreate' (Maybe Text)
 ptcBearerToken
@@ -188,7 +194,7 @@ ptcBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ptcKey :: Lens' ProjectsTopicsCreate' (Maybe Text)
+ptcKey :: Lens' ProjectsTopicsCreate' (Maybe Key)
 ptcKey = lens _ptcKey (\ s a -> s{_ptcKey = a})
 
 -- | The name of the topic. It must have the format
@@ -202,10 +208,10 @@ ptcName :: Lens' ProjectsTopicsCreate' Text
 ptcName = lens _ptcName (\ s a -> s{_ptcName = a})
 
 -- | OAuth 2.0 token for the current user.
-ptcOauthToken :: Lens' ProjectsTopicsCreate' (Maybe Text)
-ptcOauthToken
-  = lens _ptcOauthToken
-      (\ s a -> s{_ptcOauthToken = a})
+ptcOAuthToken :: Lens' ProjectsTopicsCreate' (Maybe OAuthToken)
+ptcOAuthToken
+  = lens _ptcOAuthToken
+      (\ s a -> s{_ptcOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ptcFields :: Lens' ProjectsTopicsCreate' (Maybe Text)
@@ -217,9 +223,9 @@ ptcCallback :: Lens' ProjectsTopicsCreate' (Maybe Text)
 ptcCallback
   = lens _ptcCallback (\ s a -> s{_ptcCallback = a})
 
--- | Data format for response.
-ptcAlt :: Lens' ProjectsTopicsCreate' Text
-ptcAlt = lens _ptcAlt (\ s a -> s{_ptcAlt = a})
+instance GoogleAuth ProjectsTopicsCreate' where
+        authKey = ptcKey . _Just
+        authToken = ptcOAuthToken . _Just
 
 instance GoogleRequest ProjectsTopicsCreate' where
         type Rs ProjectsTopicsCreate' = Topic
@@ -233,10 +239,11 @@ instance GoogleRequest ProjectsTopicsCreate' where
               _ptcBearerToken
               _ptcKey
               _ptcName
-              _ptcOauthToken
+              _ptcOAuthToken
               _ptcFields
               _ptcCallback
-              (Just _ptcAlt)
+              (Just AltJSON)
+              _ptcTopic
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsTopicsCreateResource)

@@ -31,11 +31,11 @@ library
 
     exposed-modules:
           Network.Google.Method.OAuth2.GetCertForOpenIdConnect
-        , Network.Google.Method.OAuth2.Tokeninfo
+        , Network.Google.Method.OAuth2.TokenInfo
         , Network.Google.OAuth2
         , Network.Google.OAuth2.Types
-        , Network.Google.Resource.OAuth2.Userinfo.Get
-        , Network.Google.Resource.OAuth2.Userinfo.V2.Me.Get
+        , Network.Google.Resource.OAuth2.UserInfo.Get
+        , Network.Google.Resource.OAuth2.UserInfo.V2.Me.Get
 
     other-modules:
           Network.Google.OAuth2.Types.Product

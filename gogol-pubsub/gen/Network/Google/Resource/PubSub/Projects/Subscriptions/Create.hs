@@ -44,10 +44,10 @@ module Network.Google.Resource.PubSub.Projects.Subscriptions.Create
     , pscBearerToken
     , pscKey
     , pscName
-    , pscOauthToken
+    , pscOAuthToken
+    , pscSubscription
     , pscFields
     , pscCallback
-    , pscAlt
     ) where
 
 import           Network.Google.Prelude
@@ -66,12 +66,13 @@ type ProjectsSubscriptionsCreateResource =
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
                        QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
                                QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :>
-                                   Put '[JSON] Subscription
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON] Subscription :>
+                                     Put '[JSON] Subscription
 
 -- | Creates a subscription to a given topic for a given subscriber. If the
 -- subscription already exists, returns ALREADY_EXISTS. If the
@@ -89,12 +90,12 @@ data ProjectsSubscriptionsCreate' = ProjectsSubscriptionsCreate'
     , _pscAccessToken    :: !(Maybe Text)
     , _pscUploadType     :: !(Maybe Text)
     , _pscBearerToken    :: !(Maybe Text)
-    , _pscKey            :: !(Maybe Text)
+    , _pscKey            :: !(Maybe Key)
     , _pscName           :: !Text
-    , _pscOauthToken     :: !(Maybe Text)
+    , _pscOAuthToken     :: !(Maybe OAuthToken)
+    , _pscSubscription   :: !Subscription
     , _pscFields         :: !(Maybe Text)
     , _pscCallback       :: !(Maybe Text)
-    , _pscAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsSubscriptionsCreate'' with the minimum fields required to make a request.
@@ -121,17 +122,18 @@ data ProjectsSubscriptionsCreate' = ProjectsSubscriptionsCreate'
 --
 -- * 'pscName'
 --
--- * 'pscOauthToken'
+-- * 'pscOAuthToken'
+--
+-- * 'pscSubscription'
 --
 -- * 'pscFields'
 --
 -- * 'pscCallback'
---
--- * 'pscAlt'
 projectsSubscriptionsCreate'
     :: Text -- ^ 'name'
+    -> Subscription -- ^ 'Subscription'
     -> ProjectsSubscriptionsCreate'
-projectsSubscriptionsCreate' pPscName_ =
+projectsSubscriptionsCreate' pPscName_ pPscSubscription_ =
     ProjectsSubscriptionsCreate'
     { _pscXgafv = Nothing
     , _pscQuotaUser = Nothing
@@ -143,10 +145,10 @@ projectsSubscriptionsCreate' pPscName_ =
     , _pscBearerToken = Nothing
     , _pscKey = Nothing
     , _pscName = pPscName_
-    , _pscOauthToken = Nothing
+    , _pscOAuthToken = Nothing
+    , _pscSubscription = pPscSubscription_
     , _pscFields = Nothing
     , _pscCallback = Nothing
-    , _pscAlt = "json"
     }
 
 -- | V1 error format.
@@ -197,7 +199,7 @@ pscBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-pscKey :: Lens' ProjectsSubscriptionsCreate' (Maybe Text)
+pscKey :: Lens' ProjectsSubscriptionsCreate' (Maybe Key)
 pscKey = lens _pscKey (\ s a -> s{_pscKey = a})
 
 -- | The name of the subscription. It must have the format
@@ -211,10 +213,16 @@ pscName :: Lens' ProjectsSubscriptionsCreate' Text
 pscName = lens _pscName (\ s a -> s{_pscName = a})
 
 -- | OAuth 2.0 token for the current user.
-pscOauthToken :: Lens' ProjectsSubscriptionsCreate' (Maybe Text)
-pscOauthToken
-  = lens _pscOauthToken
-      (\ s a -> s{_pscOauthToken = a})
+pscOAuthToken :: Lens' ProjectsSubscriptionsCreate' (Maybe OAuthToken)
+pscOAuthToken
+  = lens _pscOAuthToken
+      (\ s a -> s{_pscOAuthToken = a})
+
+-- | Multipart request metadata.
+pscSubscription :: Lens' ProjectsSubscriptionsCreate' Subscription
+pscSubscription
+  = lens _pscSubscription
+      (\ s a -> s{_pscSubscription = a})
 
 -- | Selector specifying which fields to include in a partial response.
 pscFields :: Lens' ProjectsSubscriptionsCreate' (Maybe Text)
@@ -226,9 +234,10 @@ pscCallback :: Lens' ProjectsSubscriptionsCreate' (Maybe Text)
 pscCallback
   = lens _pscCallback (\ s a -> s{_pscCallback = a})
 
--- | Data format for response.
-pscAlt :: Lens' ProjectsSubscriptionsCreate' Text
-pscAlt = lens _pscAlt (\ s a -> s{_pscAlt = a})
+instance GoogleAuth ProjectsSubscriptionsCreate'
+         where
+        authKey = pscKey . _Just
+        authToken = pscOAuthToken . _Just
 
 instance GoogleRequest ProjectsSubscriptionsCreate'
          where
@@ -243,10 +252,11 @@ instance GoogleRequest ProjectsSubscriptionsCreate'
               _pscBearerToken
               _pscKey
               _pscName
-              _pscOauthToken
+              _pscOAuthToken
               _pscFields
               _pscCallback
-              (Just _pscAlt)
+              (Just AltJSON)
+              _pscSubscription
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsSubscriptionsCreateResource)

@@ -34,12 +34,12 @@ module Network.Google.Resource.Compute.InstanceGroups.Insert
     , igiQuotaUser
     , igiPrettyPrint
     , igiProject
-    , igiUserIp
+    , igiUserIP
     , igiZone
     , igiKey
-    , igiOauthToken
+    , igiOAuthToken
+    , igiInstanceGroup
     , igiFields
-    , igiAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -55,25 +55,27 @@ type InstanceGroupsInsertResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Post '[JSON] Operation
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] InstanceGroup :>
+                             Post '[JSON] Operation
 
 -- | Creates an instance group in the specified project using the parameters
 -- that are included in the request.
 --
 -- /See:/ 'instanceGroupsInsert'' smart constructor.
 data InstanceGroupsInsert' = InstanceGroupsInsert'
-    { _igiQuotaUser   :: !(Maybe Text)
-    , _igiPrettyPrint :: !Bool
-    , _igiProject     :: !Text
-    , _igiUserIp      :: !(Maybe Text)
-    , _igiZone        :: !Text
-    , _igiKey         :: !(Maybe Text)
-    , _igiOauthToken  :: !(Maybe Text)
-    , _igiFields      :: !(Maybe Text)
-    , _igiAlt         :: !Alt
+    { _igiQuotaUser     :: !(Maybe Text)
+    , _igiPrettyPrint   :: !Bool
+    , _igiProject       :: !Text
+    , _igiUserIP        :: !(Maybe Text)
+    , _igiZone          :: !Text
+    , _igiKey           :: !(Maybe Key)
+    , _igiOAuthToken    :: !(Maybe OAuthToken)
+    , _igiInstanceGroup :: !InstanceGroup
+    , _igiFields        :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupsInsert'' with the minimum fields required to make a request.
@@ -86,32 +88,33 @@ data InstanceGroupsInsert' = InstanceGroupsInsert'
 --
 -- * 'igiProject'
 --
--- * 'igiUserIp'
+-- * 'igiUserIP'
 --
 -- * 'igiZone'
 --
 -- * 'igiKey'
 --
--- * 'igiOauthToken'
+-- * 'igiOAuthToken'
+--
+-- * 'igiInstanceGroup'
 --
 -- * 'igiFields'
---
--- * 'igiAlt'
 instanceGroupsInsert'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
+    -> InstanceGroup -- ^ 'InstanceGroup'
     -> InstanceGroupsInsert'
-instanceGroupsInsert' pIgiProject_ pIgiZone_ =
+instanceGroupsInsert' pIgiProject_ pIgiZone_ pIgiInstanceGroup_ =
     InstanceGroupsInsert'
     { _igiQuotaUser = Nothing
     , _igiPrettyPrint = True
     , _igiProject = pIgiProject_
-    , _igiUserIp = Nothing
+    , _igiUserIP = Nothing
     , _igiZone = pIgiZone_
     , _igiKey = Nothing
-    , _igiOauthToken = Nothing
+    , _igiOAuthToken = Nothing
+    , _igiInstanceGroup = pIgiInstanceGroup_
     , _igiFields = Nothing
-    , _igiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -134,9 +137,9 @@ igiProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-igiUserIp :: Lens' InstanceGroupsInsert' (Maybe Text)
-igiUserIp
-  = lens _igiUserIp (\ s a -> s{_igiUserIp = a})
+igiUserIP :: Lens' InstanceGroupsInsert' (Maybe Text)
+igiUserIP
+  = lens _igiUserIP (\ s a -> s{_igiUserIP = a})
 
 -- | The URL of the zone where the instance group is located.
 igiZone :: Lens' InstanceGroupsInsert' Text
@@ -145,35 +148,42 @@ igiZone = lens _igiZone (\ s a -> s{_igiZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-igiKey :: Lens' InstanceGroupsInsert' (Maybe Text)
+igiKey :: Lens' InstanceGroupsInsert' (Maybe Key)
 igiKey = lens _igiKey (\ s a -> s{_igiKey = a})
 
 -- | OAuth 2.0 token for the current user.
-igiOauthToken :: Lens' InstanceGroupsInsert' (Maybe Text)
-igiOauthToken
-  = lens _igiOauthToken
-      (\ s a -> s{_igiOauthToken = a})
+igiOAuthToken :: Lens' InstanceGroupsInsert' (Maybe OAuthToken)
+igiOAuthToken
+  = lens _igiOAuthToken
+      (\ s a -> s{_igiOAuthToken = a})
+
+-- | Multipart request metadata.
+igiInstanceGroup :: Lens' InstanceGroupsInsert' InstanceGroup
+igiInstanceGroup
+  = lens _igiInstanceGroup
+      (\ s a -> s{_igiInstanceGroup = a})
 
 -- | Selector specifying which fields to include in a partial response.
 igiFields :: Lens' InstanceGroupsInsert' (Maybe Text)
 igiFields
   = lens _igiFields (\ s a -> s{_igiFields = a})
 
--- | Data format for the response.
-igiAlt :: Lens' InstanceGroupsInsert' Alt
-igiAlt = lens _igiAlt (\ s a -> s{_igiAlt = a})
+instance GoogleAuth InstanceGroupsInsert' where
+        authKey = igiKey . _Just
+        authToken = igiOAuthToken . _Just
 
 instance GoogleRequest InstanceGroupsInsert' where
         type Rs InstanceGroupsInsert' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstanceGroupsInsert'{..}
           = go _igiQuotaUser (Just _igiPrettyPrint) _igiProject
-              _igiUserIp
+              _igiUserIP
               _igiZone
               _igiKey
-              _igiOauthToken
+              _igiOAuthToken
               _igiFields
-              (Just _igiAlt)
+              (Just AltJSON)
+              _igiInstanceGroup
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InstanceGroupsInsertResource)

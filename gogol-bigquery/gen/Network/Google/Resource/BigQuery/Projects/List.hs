@@ -32,13 +32,12 @@ module Network.Google.Resource.BigQuery.Projects.List
     -- * Request Lenses
     , plQuotaUser
     , plPrettyPrint
-    , plUserIp
+    , plUserIP
     , plKey
     , plPageToken
-    , plOauthToken
+    , plOAuthToken
     , plMaxResults
     , plFields
-    , plAlt
     ) where
 
 import           Network.Google.BigQuery.Types
@@ -51,12 +50,12 @@ type ProjectsListResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
+             QueryParam "key" Key :>
                QueryParam "pageToken" Text :>
-                 QueryParam "oauth_token" Text :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "maxResults" Word32 :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Get '[JSON] ProjectList
+                       QueryParam "alt" AltJSON :> Get '[JSON] ProjectList
 
 -- | Lists all projects to which you have been granted any project role.
 --
@@ -64,13 +63,12 @@ type ProjectsListResource =
 data ProjectsList' = ProjectsList'
     { _plQuotaUser   :: !(Maybe Text)
     , _plPrettyPrint :: !Bool
-    , _plUserIp      :: !(Maybe Text)
-    , _plKey         :: !(Maybe Text)
+    , _plUserIP      :: !(Maybe Text)
+    , _plKey         :: !(Maybe Key)
     , _plPageToken   :: !(Maybe Text)
-    , _plOauthToken  :: !(Maybe Text)
+    , _plOAuthToken  :: !(Maybe OAuthToken)
     , _plMaxResults  :: !(Maybe Word32)
     , _plFields      :: !(Maybe Text)
-    , _plAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsList'' with the minimum fields required to make a request.
@@ -81,32 +79,29 @@ data ProjectsList' = ProjectsList'
 --
 -- * 'plPrettyPrint'
 --
--- * 'plUserIp'
+-- * 'plUserIP'
 --
 -- * 'plKey'
 --
 -- * 'plPageToken'
 --
--- * 'plOauthToken'
+-- * 'plOAuthToken'
 --
 -- * 'plMaxResults'
 --
 -- * 'plFields'
---
--- * 'plAlt'
 projectsList'
     :: ProjectsList'
 projectsList' =
     ProjectsList'
     { _plQuotaUser = Nothing
     , _plPrettyPrint = True
-    , _plUserIp = Nothing
+    , _plUserIP = Nothing
     , _plKey = Nothing
     , _plPageToken = Nothing
-    , _plOauthToken = Nothing
+    , _plOAuthToken = Nothing
     , _plMaxResults = Nothing
     , _plFields = Nothing
-    , _plAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -124,13 +119,13 @@ plPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-plUserIp :: Lens' ProjectsList' (Maybe Text)
-plUserIp = lens _plUserIp (\ s a -> s{_plUserIp = a})
+plUserIP :: Lens' ProjectsList' (Maybe Text)
+plUserIP = lens _plUserIP (\ s a -> s{_plUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-plKey :: Lens' ProjectsList' (Maybe Text)
+plKey :: Lens' ProjectsList' (Maybe Key)
 plKey = lens _plKey (\ s a -> s{_plKey = a})
 
 -- | Page token, returned by a previous call, to request the next page of
@@ -140,9 +135,9 @@ plPageToken
   = lens _plPageToken (\ s a -> s{_plPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-plOauthToken :: Lens' ProjectsList' (Maybe Text)
-plOauthToken
-  = lens _plOauthToken (\ s a -> s{_plOauthToken = a})
+plOAuthToken :: Lens' ProjectsList' (Maybe OAuthToken)
+plOAuthToken
+  = lens _plOAuthToken (\ s a -> s{_plOAuthToken = a})
 
 -- | Maximum number of results to return
 plMaxResults :: Lens' ProjectsList' (Maybe Word32)
@@ -153,21 +148,21 @@ plMaxResults
 plFields :: Lens' ProjectsList' (Maybe Text)
 plFields = lens _plFields (\ s a -> s{_plFields = a})
 
--- | Data format for the response.
-plAlt :: Lens' ProjectsList' Alt
-plAlt = lens _plAlt (\ s a -> s{_plAlt = a})
+instance GoogleAuth ProjectsList' where
+        authKey = plKey . _Just
+        authToken = plOAuthToken . _Just
 
 instance GoogleRequest ProjectsList' where
         type Rs ProjectsList' = ProjectList
         request = requestWithRoute defReq bigQueryURL
         requestWithRoute r u ProjectsList'{..}
-          = go _plQuotaUser (Just _plPrettyPrint) _plUserIp
+          = go _plQuotaUser (Just _plPrettyPrint) _plUserIP
               _plKey
               _plPageToken
-              _plOauthToken
+              _plOAuthToken
               _plMaxResults
               _plFields
-              (Just _plAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsListResource)

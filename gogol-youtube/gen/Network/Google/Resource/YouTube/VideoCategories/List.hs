@@ -34,13 +34,12 @@ module Network.Google.Resource.YouTube.VideoCategories.List
     , vclPart
     , vclPrettyPrint
     , vclRegionCode
-    , vclUserIp
+    , vclUserIP
     , vclHl
     , vclKey
     , vclId
-    , vclOauthToken
+    , vclOAuthToken
     , vclFields
-    , vclAlt
     ) where
 
 import           Network.Google.Prelude
@@ -56,11 +55,11 @@ type VideoCategoriesListResource =
              QueryParam "regionCode" Text :>
                QueryParam "userIp" Text :>
                  QueryParam "hl" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "id" Text :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :>
+                           QueryParam "alt" AltJSON :>
                              Get '[JSON] VideoCategoryListResponse
 
 -- | Returns a list of categories that can be associated with YouTube videos.
@@ -71,13 +70,12 @@ data VideoCategoriesList' = VideoCategoriesList'
     , _vclPart        :: !Text
     , _vclPrettyPrint :: !Bool
     , _vclRegionCode  :: !(Maybe Text)
-    , _vclUserIp      :: !(Maybe Text)
+    , _vclUserIP      :: !(Maybe Text)
     , _vclHl          :: !Text
-    , _vclKey         :: !(Maybe Text)
+    , _vclKey         :: !(Maybe Key)
     , _vclId          :: !(Maybe Text)
-    , _vclOauthToken  :: !(Maybe Text)
+    , _vclOAuthToken  :: !(Maybe OAuthToken)
     , _vclFields      :: !(Maybe Text)
-    , _vclAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'VideoCategoriesList'' with the minimum fields required to make a request.
@@ -92,7 +90,7 @@ data VideoCategoriesList' = VideoCategoriesList'
 --
 -- * 'vclRegionCode'
 --
--- * 'vclUserIp'
+-- * 'vclUserIP'
 --
 -- * 'vclHl'
 --
@@ -100,11 +98,9 @@ data VideoCategoriesList' = VideoCategoriesList'
 --
 -- * 'vclId'
 --
--- * 'vclOauthToken'
+-- * 'vclOAuthToken'
 --
 -- * 'vclFields'
---
--- * 'vclAlt'
 videoCategoriesList'
     :: Text -- ^ 'part'
     -> VideoCategoriesList'
@@ -114,13 +110,12 @@ videoCategoriesList' pVclPart_ =
     , _vclPart = pVclPart_
     , _vclPrettyPrint = True
     , _vclRegionCode = Nothing
-    , _vclUserIp = Nothing
+    , _vclUserIP = Nothing
     , _vclHl = "en_US"
     , _vclKey = Nothing
     , _vclId = Nothing
-    , _vclOauthToken = Nothing
+    , _vclOAuthToken = Nothing
     , _vclFields = Nothing
-    , _vclAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -151,9 +146,9 @@ vclRegionCode
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-vclUserIp :: Lens' VideoCategoriesList' (Maybe Text)
-vclUserIp
-  = lens _vclUserIp (\ s a -> s{_vclUserIp = a})
+vclUserIP :: Lens' VideoCategoriesList' (Maybe Text)
+vclUserIP
+  = lens _vclUserIP (\ s a -> s{_vclUserIP = a})
 
 -- | The hl parameter specifies the language that should be used for text
 -- values in the API response.
@@ -163,7 +158,7 @@ vclHl = lens _vclHl (\ s a -> s{_vclHl = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-vclKey :: Lens' VideoCategoriesList' (Maybe Text)
+vclKey :: Lens' VideoCategoriesList' (Maybe Key)
 vclKey = lens _vclKey (\ s a -> s{_vclKey = a})
 
 -- | The id parameter specifies a comma-separated list of video category IDs
@@ -172,19 +167,19 @@ vclId :: Lens' VideoCategoriesList' (Maybe Text)
 vclId = lens _vclId (\ s a -> s{_vclId = a})
 
 -- | OAuth 2.0 token for the current user.
-vclOauthToken :: Lens' VideoCategoriesList' (Maybe Text)
-vclOauthToken
-  = lens _vclOauthToken
-      (\ s a -> s{_vclOauthToken = a})
+vclOAuthToken :: Lens' VideoCategoriesList' (Maybe OAuthToken)
+vclOAuthToken
+  = lens _vclOAuthToken
+      (\ s a -> s{_vclOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 vclFields :: Lens' VideoCategoriesList' (Maybe Text)
 vclFields
   = lens _vclFields (\ s a -> s{_vclFields = a})
 
--- | Data format for the response.
-vclAlt :: Lens' VideoCategoriesList' Alt
-vclAlt = lens _vclAlt (\ s a -> s{_vclAlt = a})
+instance GoogleAuth VideoCategoriesList' where
+        authKey = vclKey . _Just
+        authToken = vclOAuthToken . _Just
 
 instance GoogleRequest VideoCategoriesList' where
         type Rs VideoCategoriesList' =
@@ -194,13 +189,13 @@ instance GoogleRequest VideoCategoriesList' where
           = go _vclQuotaUser (Just _vclPart)
               (Just _vclPrettyPrint)
               _vclRegionCode
-              _vclUserIp
+              _vclUserIP
               (Just _vclHl)
               _vclKey
               _vclId
-              _vclOauthToken
+              _vclOAuthToken
               _vclFields
-              (Just _vclAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy VideoCategoriesListResource)

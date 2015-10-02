@@ -32,13 +32,12 @@ module Network.Google.Resource.DFAReporting.RemarketingListShares.Get
     -- * Request Lenses
     , rlsgQuotaUser
     , rlsgPrettyPrint
-    , rlsgUserIp
+    , rlsgUserIP
     , rlsgProfileId
     , rlsgRemarketingListId
     , rlsgKey
-    , rlsgOauthToken
+    , rlsgOAuthToken
     , rlsgFields
-    , rlsgAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,10 +53,10 @@ type RemarketingListSharesGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :>
+                         QueryParam "alt" AltJSON :>
                            Get '[JSON] RemarketingListShare
 
 -- | Gets one remarketing list share by remarketing list ID.
@@ -66,13 +65,12 @@ type RemarketingListSharesGetResource =
 data RemarketingListSharesGet' = RemarketingListSharesGet'
     { _rlsgQuotaUser         :: !(Maybe Text)
     , _rlsgPrettyPrint       :: !Bool
-    , _rlsgUserIp            :: !(Maybe Text)
+    , _rlsgUserIP            :: !(Maybe Text)
     , _rlsgProfileId         :: !Int64
     , _rlsgRemarketingListId :: !Int64
-    , _rlsgKey               :: !(Maybe Text)
-    , _rlsgOauthToken        :: !(Maybe Text)
+    , _rlsgKey               :: !(Maybe Key)
+    , _rlsgOAuthToken        :: !(Maybe OAuthToken)
     , _rlsgFields            :: !(Maybe Text)
-    , _rlsgAlt               :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RemarketingListSharesGet'' with the minimum fields required to make a request.
@@ -83,7 +81,7 @@ data RemarketingListSharesGet' = RemarketingListSharesGet'
 --
 -- * 'rlsgPrettyPrint'
 --
--- * 'rlsgUserIp'
+-- * 'rlsgUserIP'
 --
 -- * 'rlsgProfileId'
 --
@@ -91,11 +89,9 @@ data RemarketingListSharesGet' = RemarketingListSharesGet'
 --
 -- * 'rlsgKey'
 --
--- * 'rlsgOauthToken'
+-- * 'rlsgOAuthToken'
 --
 -- * 'rlsgFields'
---
--- * 'rlsgAlt'
 remarketingListSharesGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'remarketingListId'
@@ -104,13 +100,12 @@ remarketingListSharesGet' pRlsgProfileId_ pRlsgRemarketingListId_ =
     RemarketingListSharesGet'
     { _rlsgQuotaUser = Nothing
     , _rlsgPrettyPrint = True
-    , _rlsgUserIp = Nothing
+    , _rlsgUserIP = Nothing
     , _rlsgProfileId = pRlsgProfileId_
     , _rlsgRemarketingListId = pRlsgRemarketingListId_
     , _rlsgKey = Nothing
-    , _rlsgOauthToken = Nothing
+    , _rlsgOAuthToken = Nothing
     , _rlsgFields = Nothing
-    , _rlsgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -129,9 +124,9 @@ rlsgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rlsgUserIp :: Lens' RemarketingListSharesGet' (Maybe Text)
-rlsgUserIp
-  = lens _rlsgUserIp (\ s a -> s{_rlsgUserIp = a})
+rlsgUserIP :: Lens' RemarketingListSharesGet' (Maybe Text)
+rlsgUserIP
+  = lens _rlsgUserIP (\ s a -> s{_rlsgUserIP = a})
 
 -- | User profile ID associated with this request.
 rlsgProfileId :: Lens' RemarketingListSharesGet' Int64
@@ -148,23 +143,23 @@ rlsgRemarketingListId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rlsgKey :: Lens' RemarketingListSharesGet' (Maybe Text)
+rlsgKey :: Lens' RemarketingListSharesGet' (Maybe Key)
 rlsgKey = lens _rlsgKey (\ s a -> s{_rlsgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-rlsgOauthToken :: Lens' RemarketingListSharesGet' (Maybe Text)
-rlsgOauthToken
-  = lens _rlsgOauthToken
-      (\ s a -> s{_rlsgOauthToken = a})
+rlsgOAuthToken :: Lens' RemarketingListSharesGet' (Maybe OAuthToken)
+rlsgOAuthToken
+  = lens _rlsgOAuthToken
+      (\ s a -> s{_rlsgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 rlsgFields :: Lens' RemarketingListSharesGet' (Maybe Text)
 rlsgFields
   = lens _rlsgFields (\ s a -> s{_rlsgFields = a})
 
--- | Data format for the response.
-rlsgAlt :: Lens' RemarketingListSharesGet' Alt
-rlsgAlt = lens _rlsgAlt (\ s a -> s{_rlsgAlt = a})
+instance GoogleAuth RemarketingListSharesGet' where
+        authKey = rlsgKey . _Just
+        authToken = rlsgOAuthToken . _Just
 
 instance GoogleRequest RemarketingListSharesGet'
          where
@@ -173,13 +168,13 @@ instance GoogleRequest RemarketingListSharesGet'
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u RemarketingListSharesGet'{..}
           = go _rlsgQuotaUser (Just _rlsgPrettyPrint)
-              _rlsgUserIp
+              _rlsgUserIP
               _rlsgProfileId
               _rlsgRemarketingListId
               _rlsgKey
-              _rlsgOauthToken
+              _rlsgOAuthToken
               _rlsgFields
-              (Just _rlsgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy RemarketingListSharesGetResource)

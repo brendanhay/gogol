@@ -32,12 +32,12 @@ module Network.Google.Resource.DFAReporting.DirectorySites.Insert
     -- * Request Lenses
     , dsiQuotaUser
     , dsiPrettyPrint
-    , dsiUserIp
+    , dsiDirectorySite
+    , dsiUserIP
     , dsiProfileId
     , dsiKey
-    , dsiOauthToken
+    , dsiOAuthToken
     , dsiFields
-    , dsiAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,23 +52,25 @@ type DirectorySitesInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] DirectorySite
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] DirectorySite :>
+                           Post '[JSON] DirectorySite
 
 -- | Inserts a new directory site.
 --
 -- /See:/ 'directorySitesInsert'' smart constructor.
 data DirectorySitesInsert' = DirectorySitesInsert'
-    { _dsiQuotaUser   :: !(Maybe Text)
-    , _dsiPrettyPrint :: !Bool
-    , _dsiUserIp      :: !(Maybe Text)
-    , _dsiProfileId   :: !Int64
-    , _dsiKey         :: !(Maybe Text)
-    , _dsiOauthToken  :: !(Maybe Text)
-    , _dsiFields      :: !(Maybe Text)
-    , _dsiAlt         :: !Alt
+    { _dsiQuotaUser     :: !(Maybe Text)
+    , _dsiPrettyPrint   :: !Bool
+    , _dsiDirectorySite :: !DirectorySite
+    , _dsiUserIP        :: !(Maybe Text)
+    , _dsiProfileId     :: !Int64
+    , _dsiKey           :: !(Maybe Key)
+    , _dsiOAuthToken    :: !(Maybe OAuthToken)
+    , _dsiFields        :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DirectorySitesInsert'' with the minimum fields required to make a request.
@@ -79,30 +81,31 @@ data DirectorySitesInsert' = DirectorySitesInsert'
 --
 -- * 'dsiPrettyPrint'
 --
--- * 'dsiUserIp'
+-- * 'dsiDirectorySite'
+--
+-- * 'dsiUserIP'
 --
 -- * 'dsiProfileId'
 --
 -- * 'dsiKey'
 --
--- * 'dsiOauthToken'
+-- * 'dsiOAuthToken'
 --
 -- * 'dsiFields'
---
--- * 'dsiAlt'
 directorySitesInsert'
-    :: Int64 -- ^ 'profileId'
+    :: DirectorySite -- ^ 'DirectorySite'
+    -> Int64 -- ^ 'profileId'
     -> DirectorySitesInsert'
-directorySitesInsert' pDsiProfileId_ =
+directorySitesInsert' pDsiDirectorySite_ pDsiProfileId_ =
     DirectorySitesInsert'
     { _dsiQuotaUser = Nothing
     , _dsiPrettyPrint = True
-    , _dsiUserIp = Nothing
+    , _dsiDirectorySite = pDsiDirectorySite_
+    , _dsiUserIP = Nothing
     , _dsiProfileId = pDsiProfileId_
     , _dsiKey = Nothing
-    , _dsiOauthToken = Nothing
+    , _dsiOAuthToken = Nothing
     , _dsiFields = Nothing
-    , _dsiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -118,11 +121,17 @@ dsiPrettyPrint
   = lens _dsiPrettyPrint
       (\ s a -> s{_dsiPrettyPrint = a})
 
+-- | Multipart request metadata.
+dsiDirectorySite :: Lens' DirectorySitesInsert' DirectorySite
+dsiDirectorySite
+  = lens _dsiDirectorySite
+      (\ s a -> s{_dsiDirectorySite = a})
+
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-dsiUserIp :: Lens' DirectorySitesInsert' (Maybe Text)
-dsiUserIp
-  = lens _dsiUserIp (\ s a -> s{_dsiUserIp = a})
+dsiUserIP :: Lens' DirectorySitesInsert' (Maybe Text)
+dsiUserIP
+  = lens _dsiUserIP (\ s a -> s{_dsiUserIP = a})
 
 -- | User profile ID associated with this request.
 dsiProfileId :: Lens' DirectorySitesInsert' Int64
@@ -132,34 +141,35 @@ dsiProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dsiKey :: Lens' DirectorySitesInsert' (Maybe Text)
+dsiKey :: Lens' DirectorySitesInsert' (Maybe Key)
 dsiKey = lens _dsiKey (\ s a -> s{_dsiKey = a})
 
 -- | OAuth 2.0 token for the current user.
-dsiOauthToken :: Lens' DirectorySitesInsert' (Maybe Text)
-dsiOauthToken
-  = lens _dsiOauthToken
-      (\ s a -> s{_dsiOauthToken = a})
+dsiOAuthToken :: Lens' DirectorySitesInsert' (Maybe OAuthToken)
+dsiOAuthToken
+  = lens _dsiOAuthToken
+      (\ s a -> s{_dsiOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 dsiFields :: Lens' DirectorySitesInsert' (Maybe Text)
 dsiFields
   = lens _dsiFields (\ s a -> s{_dsiFields = a})
 
--- | Data format for the response.
-dsiAlt :: Lens' DirectorySitesInsert' Alt
-dsiAlt = lens _dsiAlt (\ s a -> s{_dsiAlt = a})
+instance GoogleAuth DirectorySitesInsert' where
+        authKey = dsiKey . _Just
+        authToken = dsiOAuthToken . _Just
 
 instance GoogleRequest DirectorySitesInsert' where
         type Rs DirectorySitesInsert' = DirectorySite
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u DirectorySitesInsert'{..}
-          = go _dsiQuotaUser (Just _dsiPrettyPrint) _dsiUserIp
+          = go _dsiQuotaUser (Just _dsiPrettyPrint) _dsiUserIP
               _dsiProfileId
               _dsiKey
-              _dsiOauthToken
+              _dsiOAuthToken
               _dsiFields
-              (Just _dsiAlt)
+              (Just AltJSON)
+              _dsiDirectorySite
           where go
                   = clientWithRoute
                       (Proxy :: Proxy DirectorySitesInsertResource)

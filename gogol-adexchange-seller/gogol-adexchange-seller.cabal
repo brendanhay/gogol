@@ -33,20 +33,20 @@ library
     exposed-modules:
           Network.Google.AdExchangeSeller
         , Network.Google.AdExchangeSeller.Types
-        , Network.Google.Resource.AdExchangeSeller.Accounts.Adclients.List
+        , Network.Google.Resource.AdExchangeSeller.Accounts.AdClients.List
         , Network.Google.Resource.AdExchangeSeller.Accounts.Alerts.List
-        , Network.Google.Resource.AdExchangeSeller.Accounts.Customchannels.Get
-        , Network.Google.Resource.AdExchangeSeller.Accounts.Customchannels.List
+        , Network.Google.Resource.AdExchangeSeller.Accounts.CustomChannels.Get
+        , Network.Google.Resource.AdExchangeSeller.Accounts.CustomChannels.List
         , Network.Google.Resource.AdExchangeSeller.Accounts.Get
         , Network.Google.Resource.AdExchangeSeller.Accounts.List
         , Network.Google.Resource.AdExchangeSeller.Accounts.Metadata.Dimensions.List
         , Network.Google.Resource.AdExchangeSeller.Accounts.Metadata.Metrics.List
-        , Network.Google.Resource.AdExchangeSeller.Accounts.Preferreddeals.Get
-        , Network.Google.Resource.AdExchangeSeller.Accounts.Preferreddeals.List
+        , Network.Google.Resource.AdExchangeSeller.Accounts.PreferredDeals.Get
+        , Network.Google.Resource.AdExchangeSeller.Accounts.PreferredDeals.List
         , Network.Google.Resource.AdExchangeSeller.Accounts.Reports.Generate
         , Network.Google.Resource.AdExchangeSeller.Accounts.Reports.Saved.Generate
         , Network.Google.Resource.AdExchangeSeller.Accounts.Reports.Saved.List
-        , Network.Google.Resource.AdExchangeSeller.Accounts.URLchannels.List
+        , Network.Google.Resource.AdExchangeSeller.Accounts.URLChannels.List
 
     other-modules:
           Network.Google.AdExchangeSeller.Types.Product

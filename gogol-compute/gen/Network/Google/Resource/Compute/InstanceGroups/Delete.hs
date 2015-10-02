@@ -33,13 +33,12 @@ module Network.Google.Resource.Compute.InstanceGroups.Delete
     , igdQuotaUser
     , igdPrettyPrint
     , igdProject
-    , igdUserIp
+    , igdUserIP
     , igdZone
     , igdKey
-    , igdOauthToken
+    , igdOAuthToken
     , igdInstanceGroup
     , igdFields
-    , igdAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -56,10 +55,10 @@ type InstanceGroupsDeleteResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Delete '[JSON] Operation
+                           QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified instance group.
 --
@@ -68,13 +67,12 @@ data InstanceGroupsDelete' = InstanceGroupsDelete'
     { _igdQuotaUser     :: !(Maybe Text)
     , _igdPrettyPrint   :: !Bool
     , _igdProject       :: !Text
-    , _igdUserIp        :: !(Maybe Text)
+    , _igdUserIP        :: !(Maybe Text)
     , _igdZone          :: !Text
-    , _igdKey           :: !(Maybe Text)
-    , _igdOauthToken    :: !(Maybe Text)
+    , _igdKey           :: !(Maybe Key)
+    , _igdOAuthToken    :: !(Maybe OAuthToken)
     , _igdInstanceGroup :: !Text
     , _igdFields        :: !(Maybe Text)
-    , _igdAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupsDelete'' with the minimum fields required to make a request.
@@ -87,19 +85,17 @@ data InstanceGroupsDelete' = InstanceGroupsDelete'
 --
 -- * 'igdProject'
 --
--- * 'igdUserIp'
+-- * 'igdUserIP'
 --
 -- * 'igdZone'
 --
 -- * 'igdKey'
 --
--- * 'igdOauthToken'
+-- * 'igdOAuthToken'
 --
 -- * 'igdInstanceGroup'
 --
 -- * 'igdFields'
---
--- * 'igdAlt'
 instanceGroupsDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
@@ -110,13 +106,12 @@ instanceGroupsDelete' pIgdProject_ pIgdZone_ pIgdInstanceGroup_ =
     { _igdQuotaUser = Nothing
     , _igdPrettyPrint = True
     , _igdProject = pIgdProject_
-    , _igdUserIp = Nothing
+    , _igdUserIP = Nothing
     , _igdZone = pIgdZone_
     , _igdKey = Nothing
-    , _igdOauthToken = Nothing
+    , _igdOAuthToken = Nothing
     , _igdInstanceGroup = pIgdInstanceGroup_
     , _igdFields = Nothing
-    , _igdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,9 +134,9 @@ igdProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-igdUserIp :: Lens' InstanceGroupsDelete' (Maybe Text)
-igdUserIp
-  = lens _igdUserIp (\ s a -> s{_igdUserIp = a})
+igdUserIP :: Lens' InstanceGroupsDelete' (Maybe Text)
+igdUserIP
+  = lens _igdUserIP (\ s a -> s{_igdUserIP = a})
 
 -- | The URL of the zone where the instance group is located.
 igdZone :: Lens' InstanceGroupsDelete' Text
@@ -150,14 +145,14 @@ igdZone = lens _igdZone (\ s a -> s{_igdZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-igdKey :: Lens' InstanceGroupsDelete' (Maybe Text)
+igdKey :: Lens' InstanceGroupsDelete' (Maybe Key)
 igdKey = lens _igdKey (\ s a -> s{_igdKey = a})
 
 -- | OAuth 2.0 token for the current user.
-igdOauthToken :: Lens' InstanceGroupsDelete' (Maybe Text)
-igdOauthToken
-  = lens _igdOauthToken
-      (\ s a -> s{_igdOauthToken = a})
+igdOAuthToken :: Lens' InstanceGroupsDelete' (Maybe OAuthToken)
+igdOAuthToken
+  = lens _igdOAuthToken
+      (\ s a -> s{_igdOAuthToken = a})
 
 -- | The name of the instance group to delete.
 igdInstanceGroup :: Lens' InstanceGroupsDelete' Text
@@ -170,22 +165,22 @@ igdFields :: Lens' InstanceGroupsDelete' (Maybe Text)
 igdFields
   = lens _igdFields (\ s a -> s{_igdFields = a})
 
--- | Data format for the response.
-igdAlt :: Lens' InstanceGroupsDelete' Alt
-igdAlt = lens _igdAlt (\ s a -> s{_igdAlt = a})
+instance GoogleAuth InstanceGroupsDelete' where
+        authKey = igdKey . _Just
+        authToken = igdOAuthToken . _Just
 
 instance GoogleRequest InstanceGroupsDelete' where
         type Rs InstanceGroupsDelete' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstanceGroupsDelete'{..}
           = go _igdQuotaUser (Just _igdPrettyPrint) _igdProject
-              _igdUserIp
+              _igdUserIP
               _igdZone
               _igdKey
-              _igdOauthToken
+              _igdOAuthToken
               _igdInstanceGroup
               _igdFields
-              (Just _igdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InstanceGroupsDeleteResource)

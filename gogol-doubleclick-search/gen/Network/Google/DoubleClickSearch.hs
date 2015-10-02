@@ -27,34 +27,34 @@ module Network.Google.DoubleClickSearch
 
     -- * REST Resources
 
-    -- ** DoubleclicksearchConversionGet
+    -- ** DoubleClicksearchConversionGet
     , module Network.Google.Resource.DoubleClickSearch.Conversion.Get
 
-    -- ** DoubleclicksearchConversionInsert
+    -- ** DoubleClicksearchConversionInsert
     , module Network.Google.Resource.DoubleClickSearch.Conversion.Insert
 
-    -- ** DoubleclicksearchConversionPatch
+    -- ** DoubleClicksearchConversionPatch
     , module Network.Google.Resource.DoubleClickSearch.Conversion.Patch
 
-    -- ** DoubleclicksearchConversionUpdate
+    -- ** DoubleClicksearchConversionUpdate
     , module Network.Google.Resource.DoubleClickSearch.Conversion.Update
 
-    -- ** DoubleclicksearchConversionUpdateAvailability
+    -- ** DoubleClicksearchConversionUpdateAvailability
     , module Network.Google.Resource.DoubleClickSearch.Conversion.UpdateAvailability
 
-    -- ** DoubleclicksearchReportsGenerate
+    -- ** DoubleClicksearchReportsGenerate
     , module Network.Google.Resource.DoubleClickSearch.Reports.Generate
 
-    -- ** DoubleclicksearchReportsGet
+    -- ** DoubleClicksearchReportsGet
     , module Network.Google.Resource.DoubleClickSearch.Reports.Get
 
-    -- ** DoubleclicksearchReportsGetFile
+    -- ** DoubleClicksearchReportsGetFile
     , module Network.Google.Resource.DoubleClickSearch.Reports.GetFile
 
-    -- ** DoubleclicksearchReportsRequest
+    -- ** DoubleClicksearchReportsRequest
     , module Network.Google.Resource.DoubleClickSearch.Reports.Request
 
-    -- ** DoubleclicksearchSavedColumnsList
+    -- ** DoubleClicksearchSavedColumnsList
     , module Network.Google.Resource.DoubleClickSearch.SavedColumns.List
 
     -- * Types
@@ -84,7 +84,7 @@ module Network.Google.DoubleClickSearch
     -- ** ReportFiles
     , ReportFiles
     , reportFiles
-    , rfUrl
+    , rfURL
     , rfByteCount
 
     -- ** Report
@@ -232,9 +232,6 @@ module Network.Google.DoubleClickSearch
     , savedColumnList
     , sclKind
     , sclItems
-
-    -- ** Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.DoubleClickSearch.Types

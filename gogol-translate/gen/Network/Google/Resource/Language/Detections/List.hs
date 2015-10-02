@@ -32,12 +32,11 @@ module Network.Google.Resource.Language.Detections.List
     -- * Request Lenses
     , dlQuotaUser
     , dlPrettyPrint
-    , dlUserIp
+    , dlUserIP
     , dlQ
     , dlKey
-    , dlOauthToken
+    , dlOAuthToken
     , dlFields
-    , dlAlt
     ) where
 
 import           Network.Google.Prelude
@@ -52,10 +51,10 @@ type DetectionsListResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
                QueryParams "q" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :>
+                       QueryParam "alt" AltJSON :>
                          Get '[JSON] DetectionsListResponse
 
 -- | Detect the language of text.
@@ -64,12 +63,11 @@ type DetectionsListResource =
 data DetectionsList' = DetectionsList'
     { _dlQuotaUser   :: !(Maybe Text)
     , _dlPrettyPrint :: !Bool
-    , _dlUserIp      :: !(Maybe Text)
+    , _dlUserIP      :: !(Maybe Text)
     , _dlQ           :: !Text
-    , _dlKey         :: !(Maybe Text)
-    , _dlOauthToken  :: !(Maybe Text)
+    , _dlKey         :: !(Maybe Key)
+    , _dlOAuthToken  :: !(Maybe OAuthToken)
     , _dlFields      :: !(Maybe Text)
-    , _dlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DetectionsList'' with the minimum fields required to make a request.
@@ -80,17 +78,15 @@ data DetectionsList' = DetectionsList'
 --
 -- * 'dlPrettyPrint'
 --
--- * 'dlUserIp'
+-- * 'dlUserIP'
 --
 -- * 'dlQ'
 --
 -- * 'dlKey'
 --
--- * 'dlOauthToken'
+-- * 'dlOAuthToken'
 --
 -- * 'dlFields'
---
--- * 'dlAlt'
 detectionsList'
     :: Text -- ^ 'q'
     -> DetectionsList'
@@ -98,12 +94,11 @@ detectionsList' pDlQ_ =
     DetectionsList'
     { _dlQuotaUser = Nothing
     , _dlPrettyPrint = True
-    , _dlUserIp = Nothing
+    , _dlUserIP = Nothing
     , _dlQ = pDlQ_
     , _dlKey = Nothing
-    , _dlOauthToken = Nothing
+    , _dlOAuthToken = Nothing
     , _dlFields = Nothing
-    , _dlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -121,8 +116,8 @@ dlPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-dlUserIp :: Lens' DetectionsList' (Maybe Text)
-dlUserIp = lens _dlUserIp (\ s a -> s{_dlUserIp = a})
+dlUserIP :: Lens' DetectionsList' (Maybe Text)
+dlUserIP = lens _dlUserIP (\ s a -> s{_dlUserIP = a})
 
 -- | The text to detect
 dlQ :: Lens' DetectionsList' Text
@@ -131,32 +126,32 @@ dlQ = lens _dlQ (\ s a -> s{_dlQ = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dlKey :: Lens' DetectionsList' (Maybe Text)
+dlKey :: Lens' DetectionsList' (Maybe Key)
 dlKey = lens _dlKey (\ s a -> s{_dlKey = a})
 
 -- | OAuth 2.0 token for the current user.
-dlOauthToken :: Lens' DetectionsList' (Maybe Text)
-dlOauthToken
-  = lens _dlOauthToken (\ s a -> s{_dlOauthToken = a})
+dlOAuthToken :: Lens' DetectionsList' (Maybe OAuthToken)
+dlOAuthToken
+  = lens _dlOAuthToken (\ s a -> s{_dlOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 dlFields :: Lens' DetectionsList' (Maybe Text)
 dlFields = lens _dlFields (\ s a -> s{_dlFields = a})
 
--- | Data format for the response.
-dlAlt :: Lens' DetectionsList' Alt
-dlAlt = lens _dlAlt (\ s a -> s{_dlAlt = a})
+instance GoogleAuth DetectionsList' where
+        authKey = dlKey . _Just
+        authToken = dlOAuthToken . _Just
 
 instance GoogleRequest DetectionsList' where
         type Rs DetectionsList' = DetectionsListResponse
         request = requestWithRoute defReq translateURL
         requestWithRoute r u DetectionsList'{..}
-          = go _dlQuotaUser (Just _dlPrettyPrint) _dlUserIp
+          = go _dlQuotaUser (Just _dlPrettyPrint) _dlUserIP
               (Just _dlQ)
               _dlKey
-              _dlOauthToken
+              _dlOAuthToken
               _dlFields
-              (Just _dlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy DetectionsListResource)

@@ -32,12 +32,12 @@ library
     exposed-modules:
           Network.Google.AppsTasks
         , Network.Google.AppsTasks.Types
-        , Network.Google.Resource.Tasks.Tasklists.Delete
-        , Network.Google.Resource.Tasks.Tasklists.Get
-        , Network.Google.Resource.Tasks.Tasklists.Insert
-        , Network.Google.Resource.Tasks.Tasklists.List
-        , Network.Google.Resource.Tasks.Tasklists.Patch
-        , Network.Google.Resource.Tasks.Tasklists.Update
+        , Network.Google.Resource.Tasks.TaskLists.Delete
+        , Network.Google.Resource.Tasks.TaskLists.Get
+        , Network.Google.Resource.Tasks.TaskLists.Insert
+        , Network.Google.Resource.Tasks.TaskLists.List
+        , Network.Google.Resource.Tasks.TaskLists.Patch
+        , Network.Google.Resource.Tasks.TaskLists.Update
         , Network.Google.Resource.Tasks.Tasks.Clear
         , Network.Google.Resource.Tasks.Tasks.Delete
         , Network.Google.Resource.Tasks.Tasks.Get

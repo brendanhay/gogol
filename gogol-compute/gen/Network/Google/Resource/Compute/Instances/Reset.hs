@@ -33,12 +33,11 @@ module Network.Google.Resource.Compute.Instances.Reset
     , irrQuotaUser
     , irrPrettyPrint
     , irrProject
-    , irrUserIp
+    , irrUserIP
     , irrZone
     , irrKey
-    , irrOauthToken
+    , irrOAuthToken
     , irrFields
-    , irrAlt
     , irrInstance
     ) where
 
@@ -57,10 +56,10 @@ type InstancesResetResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Post '[JSON] Operation
+                             QueryParam "alt" AltJSON :> Post '[JSON] Operation
 
 -- | Performs a hard reset on the instance.
 --
@@ -69,12 +68,11 @@ data InstancesReset' = InstancesReset'
     { _irrQuotaUser   :: !(Maybe Text)
     , _irrPrettyPrint :: !Bool
     , _irrProject     :: !Text
-    , _irrUserIp      :: !(Maybe Text)
+    , _irrUserIP      :: !(Maybe Text)
     , _irrZone        :: !Text
-    , _irrKey         :: !(Maybe Text)
-    , _irrOauthToken  :: !(Maybe Text)
+    , _irrKey         :: !(Maybe Key)
+    , _irrOAuthToken  :: !(Maybe OAuthToken)
     , _irrFields      :: !(Maybe Text)
-    , _irrAlt         :: !Alt
     , _irrInstance    :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -88,17 +86,15 @@ data InstancesReset' = InstancesReset'
 --
 -- * 'irrProject'
 --
--- * 'irrUserIp'
+-- * 'irrUserIP'
 --
 -- * 'irrZone'
 --
 -- * 'irrKey'
 --
--- * 'irrOauthToken'
+-- * 'irrOAuthToken'
 --
 -- * 'irrFields'
---
--- * 'irrAlt'
 --
 -- * 'irrInstance'
 instancesReset'
@@ -111,12 +107,11 @@ instancesReset' pIrrProject_ pIrrZone_ pIrrInstance_ =
     { _irrQuotaUser = Nothing
     , _irrPrettyPrint = True
     , _irrProject = pIrrProject_
-    , _irrUserIp = Nothing
+    , _irrUserIP = Nothing
     , _irrZone = pIrrZone_
     , _irrKey = Nothing
-    , _irrOauthToken = Nothing
+    , _irrOAuthToken = Nothing
     , _irrFields = Nothing
-    , _irrAlt = JSON
     , _irrInstance = pIrrInstance_
     }
 
@@ -140,9 +135,9 @@ irrProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-irrUserIp :: Lens' InstancesReset' (Maybe Text)
-irrUserIp
-  = lens _irrUserIp (\ s a -> s{_irrUserIp = a})
+irrUserIP :: Lens' InstancesReset' (Maybe Text)
+irrUserIP
+  = lens _irrUserIP (\ s a -> s{_irrUserIP = a})
 
 -- | The name of the zone for this request.
 irrZone :: Lens' InstancesReset' Text
@@ -151,41 +146,41 @@ irrZone = lens _irrZone (\ s a -> s{_irrZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-irrKey :: Lens' InstancesReset' (Maybe Text)
+irrKey :: Lens' InstancesReset' (Maybe Key)
 irrKey = lens _irrKey (\ s a -> s{_irrKey = a})
 
 -- | OAuth 2.0 token for the current user.
-irrOauthToken :: Lens' InstancesReset' (Maybe Text)
-irrOauthToken
-  = lens _irrOauthToken
-      (\ s a -> s{_irrOauthToken = a})
+irrOAuthToken :: Lens' InstancesReset' (Maybe OAuthToken)
+irrOAuthToken
+  = lens _irrOAuthToken
+      (\ s a -> s{_irrOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 irrFields :: Lens' InstancesReset' (Maybe Text)
 irrFields
   = lens _irrFields (\ s a -> s{_irrFields = a})
 
--- | Data format for the response.
-irrAlt :: Lens' InstancesReset' Alt
-irrAlt = lens _irrAlt (\ s a -> s{_irrAlt = a})
-
 -- | Name of the instance scoping this request.
 irrInstance :: Lens' InstancesReset' Text
 irrInstance
   = lens _irrInstance (\ s a -> s{_irrInstance = a})
+
+instance GoogleAuth InstancesReset' where
+        authKey = irrKey . _Just
+        authToken = irrOAuthToken . _Just
 
 instance GoogleRequest InstancesReset' where
         type Rs InstancesReset' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstancesReset'{..}
           = go _irrQuotaUser (Just _irrPrettyPrint) _irrProject
-              _irrUserIp
+              _irrUserIP
               _irrZone
               _irrKey
-              _irrOauthToken
+              _irrOAuthToken
               _irrFields
-              (Just _irrAlt)
               _irrInstance
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InstancesResetResource)

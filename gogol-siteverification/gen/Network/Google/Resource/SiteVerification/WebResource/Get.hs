@@ -32,12 +32,11 @@ module Network.Google.Resource.SiteVerification.WebResource.Get
     -- * Request Lenses
     , wrgQuotaUser
     , wrgPrettyPrint
-    , wrgUserIp
+    , wrgUserIP
     , wrgKey
     , wrgId
-    , wrgOauthToken
+    , wrgOAuthToken
     , wrgFields
-    , wrgAlt
     ) where
 
 import           Network.Google.Prelude
@@ -51,10 +50,10 @@ type WebResourceGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :>
+                     QueryParam "alt" AltJSON :>
                        Get '[JSON] SiteVerificationWebResourceResource
 
 -- | Get the most current data for a website or domain.
@@ -63,12 +62,11 @@ type WebResourceGetResource =
 data WebResourceGet' = WebResourceGet'
     { _wrgQuotaUser   :: !(Maybe Text)
     , _wrgPrettyPrint :: !Bool
-    , _wrgUserIp      :: !(Maybe Text)
-    , _wrgKey         :: !(Maybe Text)
+    , _wrgUserIP      :: !(Maybe Text)
+    , _wrgKey         :: !(Maybe Key)
     , _wrgId          :: !Text
-    , _wrgOauthToken  :: !(Maybe Text)
+    , _wrgOAuthToken  :: !(Maybe OAuthToken)
     , _wrgFields      :: !(Maybe Text)
-    , _wrgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'WebResourceGet'' with the minimum fields required to make a request.
@@ -79,17 +77,15 @@ data WebResourceGet' = WebResourceGet'
 --
 -- * 'wrgPrettyPrint'
 --
--- * 'wrgUserIp'
+-- * 'wrgUserIP'
 --
 -- * 'wrgKey'
 --
 -- * 'wrgId'
 --
--- * 'wrgOauthToken'
+-- * 'wrgOAuthToken'
 --
 -- * 'wrgFields'
---
--- * 'wrgAlt'
 webResourceGet'
     :: Text -- ^ 'id'
     -> WebResourceGet'
@@ -97,12 +93,11 @@ webResourceGet' pWrgId_ =
     WebResourceGet'
     { _wrgQuotaUser = Nothing
     , _wrgPrettyPrint = False
-    , _wrgUserIp = Nothing
+    , _wrgUserIP = Nothing
     , _wrgKey = Nothing
     , _wrgId = pWrgId_
-    , _wrgOauthToken = Nothing
+    , _wrgOAuthToken = Nothing
     , _wrgFields = Nothing
-    , _wrgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,14 +115,14 @@ wrgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-wrgUserIp :: Lens' WebResourceGet' (Maybe Text)
-wrgUserIp
-  = lens _wrgUserIp (\ s a -> s{_wrgUserIp = a})
+wrgUserIP :: Lens' WebResourceGet' (Maybe Text)
+wrgUserIP
+  = lens _wrgUserIP (\ s a -> s{_wrgUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-wrgKey :: Lens' WebResourceGet' (Maybe Text)
+wrgKey :: Lens' WebResourceGet' (Maybe Key)
 wrgKey = lens _wrgKey (\ s a -> s{_wrgKey = a})
 
 -- | The id of a verified site or domain.
@@ -135,31 +130,31 @@ wrgId :: Lens' WebResourceGet' Text
 wrgId = lens _wrgId (\ s a -> s{_wrgId = a})
 
 -- | OAuth 2.0 token for the current user.
-wrgOauthToken :: Lens' WebResourceGet' (Maybe Text)
-wrgOauthToken
-  = lens _wrgOauthToken
-      (\ s a -> s{_wrgOauthToken = a})
+wrgOAuthToken :: Lens' WebResourceGet' (Maybe OAuthToken)
+wrgOAuthToken
+  = lens _wrgOAuthToken
+      (\ s a -> s{_wrgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 wrgFields :: Lens' WebResourceGet' (Maybe Text)
 wrgFields
   = lens _wrgFields (\ s a -> s{_wrgFields = a})
 
--- | Data format for the response.
-wrgAlt :: Lens' WebResourceGet' Alt
-wrgAlt = lens _wrgAlt (\ s a -> s{_wrgAlt = a})
+instance GoogleAuth WebResourceGet' where
+        authKey = wrgKey . _Just
+        authToken = wrgOAuthToken . _Just
 
 instance GoogleRequest WebResourceGet' where
         type Rs WebResourceGet' =
              SiteVerificationWebResourceResource
         request = requestWithRoute defReq siteVerificationURL
         requestWithRoute r u WebResourceGet'{..}
-          = go _wrgQuotaUser (Just _wrgPrettyPrint) _wrgUserIp
+          = go _wrgQuotaUser (Just _wrgPrettyPrint) _wrgUserIP
               _wrgKey
               _wrgId
-              _wrgOauthToken
+              _wrgOAuthToken
               _wrgFields
-              (Just _wrgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy WebResourceGetResource)

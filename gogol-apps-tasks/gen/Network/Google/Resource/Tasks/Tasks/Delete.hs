@@ -30,15 +30,14 @@ module Network.Google.Resource.Tasks.Tasks.Delete
     , TasksDelete'
 
     -- * Request Lenses
-    , tddQuotaUser
-    , tddPrettyPrint
-    , tddUserIp
-    , tddKey
-    , tddTasklist
-    , tddTask
-    , tddOauthToken
-    , tddFields
-    , tddAlt
+    , tdQuotaUser
+    , tdPrettyPrint
+    , tdUserIP
+    , tdKey
+    , tdTaskList
+    , tdTask
+    , tdOAuthToken
+    , tdFields
     ) where
 
 import           Network.Google.AppsTasks.Types
@@ -54,124 +53,117 @@ type TasksDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Delete '[JSON] ()
+                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes the specified task from the task list.
 --
 -- /See:/ 'tasksDelete'' smart constructor.
 data TasksDelete' = TasksDelete'
-    { _tddQuotaUser   :: !(Maybe Text)
-    , _tddPrettyPrint :: !Bool
-    , _tddUserIp      :: !(Maybe Text)
-    , _tddKey         :: !(Maybe Text)
-    , _tddTasklist    :: !Text
-    , _tddTask        :: !Text
-    , _tddOauthToken  :: !(Maybe Text)
-    , _tddFields      :: !(Maybe Text)
-    , _tddAlt         :: !Alt
+    { _tdQuotaUser   :: !(Maybe Text)
+    , _tdPrettyPrint :: !Bool
+    , _tdUserIP      :: !(Maybe Text)
+    , _tdKey         :: !(Maybe Key)
+    , _tdTaskList    :: !Text
+    , _tdTask        :: !Text
+    , _tdOAuthToken  :: !(Maybe OAuthToken)
+    , _tdFields      :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TasksDelete'' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'tddQuotaUser'
+-- * 'tdQuotaUser'
 --
--- * 'tddPrettyPrint'
+-- * 'tdPrettyPrint'
 --
--- * 'tddUserIp'
+-- * 'tdUserIP'
 --
--- * 'tddKey'
+-- * 'tdKey'
 --
--- * 'tddTasklist'
+-- * 'tdTaskList'
 --
--- * 'tddTask'
+-- * 'tdTask'
 --
--- * 'tddOauthToken'
+-- * 'tdOAuthToken'
 --
--- * 'tddFields'
---
--- * 'tddAlt'
+-- * 'tdFields'
 tasksDelete'
     :: Text -- ^ 'tasklist'
     -> Text -- ^ 'task'
     -> TasksDelete'
-tasksDelete' pTddTasklist_ pTddTask_ =
+tasksDelete' pTdTaskList_ pTdTask_ =
     TasksDelete'
-    { _tddQuotaUser = Nothing
-    , _tddPrettyPrint = True
-    , _tddUserIp = Nothing
-    , _tddKey = Nothing
-    , _tddTasklist = pTddTasklist_
-    , _tddTask = pTddTask_
-    , _tddOauthToken = Nothing
-    , _tddFields = Nothing
-    , _tddAlt = JSON
+    { _tdQuotaUser = Nothing
+    , _tdPrettyPrint = True
+    , _tdUserIP = Nothing
+    , _tdKey = Nothing
+    , _tdTaskList = pTdTaskList_
+    , _tdTask = pTdTask_
+    , _tdOAuthToken = Nothing
+    , _tdFields = Nothing
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
 -- any arbitrary string assigned to a user, but should not exceed 40
 -- characters. Overrides userIp if both are provided.
-tddQuotaUser :: Lens' TasksDelete' (Maybe Text)
-tddQuotaUser
-  = lens _tddQuotaUser (\ s a -> s{_tddQuotaUser = a})
+tdQuotaUser :: Lens' TasksDelete' (Maybe Text)
+tdQuotaUser
+  = lens _tdQuotaUser (\ s a -> s{_tdQuotaUser = a})
 
 -- | Returns response with indentations and line breaks.
-tddPrettyPrint :: Lens' TasksDelete' Bool
-tddPrettyPrint
-  = lens _tddPrettyPrint
-      (\ s a -> s{_tddPrettyPrint = a})
+tdPrettyPrint :: Lens' TasksDelete' Bool
+tdPrettyPrint
+  = lens _tdPrettyPrint
+      (\ s a -> s{_tdPrettyPrint = a})
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tddUserIp :: Lens' TasksDelete' (Maybe Text)
-tddUserIp
-  = lens _tddUserIp (\ s a -> s{_tddUserIp = a})
+tdUserIP :: Lens' TasksDelete' (Maybe Text)
+tdUserIP = lens _tdUserIP (\ s a -> s{_tdUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tddKey :: Lens' TasksDelete' (Maybe Text)
-tddKey = lens _tddKey (\ s a -> s{_tddKey = a})
+tdKey :: Lens' TasksDelete' (Maybe Key)
+tdKey = lens _tdKey (\ s a -> s{_tdKey = a})
 
 -- | Task list identifier.
-tddTasklist :: Lens' TasksDelete' Text
-tddTasklist
-  = lens _tddTasklist (\ s a -> s{_tddTasklist = a})
+tdTaskList :: Lens' TasksDelete' Text
+tdTaskList
+  = lens _tdTaskList (\ s a -> s{_tdTaskList = a})
 
 -- | Task identifier.
-tddTask :: Lens' TasksDelete' Text
-tddTask = lens _tddTask (\ s a -> s{_tddTask = a})
+tdTask :: Lens' TasksDelete' Text
+tdTask = lens _tdTask (\ s a -> s{_tdTask = a})
 
 -- | OAuth 2.0 token for the current user.
-tddOauthToken :: Lens' TasksDelete' (Maybe Text)
-tddOauthToken
-  = lens _tddOauthToken
-      (\ s a -> s{_tddOauthToken = a})
+tdOAuthToken :: Lens' TasksDelete' (Maybe OAuthToken)
+tdOAuthToken
+  = lens _tdOAuthToken (\ s a -> s{_tdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
-tddFields :: Lens' TasksDelete' (Maybe Text)
-tddFields
-  = lens _tddFields (\ s a -> s{_tddFields = a})
+tdFields :: Lens' TasksDelete' (Maybe Text)
+tdFields = lens _tdFields (\ s a -> s{_tdFields = a})
 
--- | Data format for the response.
-tddAlt :: Lens' TasksDelete' Alt
-tddAlt = lens _tddAlt (\ s a -> s{_tddAlt = a})
+instance GoogleAuth TasksDelete' where
+        authKey = tdKey . _Just
+        authToken = tdOAuthToken . _Just
 
 instance GoogleRequest TasksDelete' where
         type Rs TasksDelete' = ()
         request = requestWithRoute defReq appsTasksURL
         requestWithRoute r u TasksDelete'{..}
-          = go _tddQuotaUser (Just _tddPrettyPrint) _tddUserIp
-              _tddKey
-              _tddTasklist
-              _tddTask
-              _tddOauthToken
-              _tddFields
-              (Just _tddAlt)
+          = go _tdQuotaUser (Just _tdPrettyPrint) _tdUserIP
+              _tdKey
+              _tdTaskList
+              _tdTask
+              _tdOAuthToken
+              _tdFields
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TasksDeleteResource)

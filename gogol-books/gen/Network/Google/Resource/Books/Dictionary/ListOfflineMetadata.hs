@@ -33,11 +33,10 @@ module Network.Google.Resource.Books.Dictionary.ListOfflineMetadata
     , dlomQuotaUser
     , dlomPrettyPrint
     , dlomCpksver
-    , dlomUserIp
+    , dlomUserIP
     , dlomKey
-    , dlomOauthToken
+    , dlomOAuthToken
     , dlomFields
-    , dlomAlt
     ) where
 
 import           Network.Google.Books.Types
@@ -52,10 +51,10 @@ type DictionaryListOfflineMetadataResource =
            QueryParam "prettyPrint" Bool :>
              QueryParam "cpksver" Text :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Get '[JSON] Metadata
+                       QueryParam "alt" AltJSON :> Get '[JSON] Metadata
 
 -- | Returns a list of offline dictionary meatadata available
 --
@@ -64,11 +63,10 @@ data DictionaryListOfflineMetadata' = DictionaryListOfflineMetadata'
     { _dlomQuotaUser   :: !(Maybe Text)
     , _dlomPrettyPrint :: !Bool
     , _dlomCpksver     :: !Text
-    , _dlomUserIp      :: !(Maybe Text)
-    , _dlomKey         :: !(Maybe Text)
-    , _dlomOauthToken  :: !(Maybe Text)
+    , _dlomUserIP      :: !(Maybe Text)
+    , _dlomKey         :: !(Maybe Key)
+    , _dlomOAuthToken  :: !(Maybe OAuthToken)
     , _dlomFields      :: !(Maybe Text)
-    , _dlomAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DictionaryListOfflineMetadata'' with the minimum fields required to make a request.
@@ -81,15 +79,13 @@ data DictionaryListOfflineMetadata' = DictionaryListOfflineMetadata'
 --
 -- * 'dlomCpksver'
 --
--- * 'dlomUserIp'
+-- * 'dlomUserIP'
 --
 -- * 'dlomKey'
 --
--- * 'dlomOauthToken'
+-- * 'dlomOAuthToken'
 --
 -- * 'dlomFields'
---
--- * 'dlomAlt'
 dictionaryListOfflineMetadata'
     :: Text -- ^ 'cpksver'
     -> DictionaryListOfflineMetadata'
@@ -98,11 +94,10 @@ dictionaryListOfflineMetadata' pDlomCpksver_ =
     { _dlomQuotaUser = Nothing
     , _dlomPrettyPrint = True
     , _dlomCpksver = pDlomCpksver_
-    , _dlomUserIp = Nothing
+    , _dlomUserIP = Nothing
     , _dlomKey = Nothing
-    , _dlomOauthToken = Nothing
+    , _dlomOAuthToken = Nothing
     , _dlomFields = Nothing
-    , _dlomAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -126,30 +121,31 @@ dlomCpksver
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-dlomUserIp :: Lens' DictionaryListOfflineMetadata' (Maybe Text)
-dlomUserIp
-  = lens _dlomUserIp (\ s a -> s{_dlomUserIp = a})
+dlomUserIP :: Lens' DictionaryListOfflineMetadata' (Maybe Text)
+dlomUserIP
+  = lens _dlomUserIP (\ s a -> s{_dlomUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-dlomKey :: Lens' DictionaryListOfflineMetadata' (Maybe Text)
+dlomKey :: Lens' DictionaryListOfflineMetadata' (Maybe Key)
 dlomKey = lens _dlomKey (\ s a -> s{_dlomKey = a})
 
 -- | OAuth 2.0 token for the current user.
-dlomOauthToken :: Lens' DictionaryListOfflineMetadata' (Maybe Text)
-dlomOauthToken
-  = lens _dlomOauthToken
-      (\ s a -> s{_dlomOauthToken = a})
+dlomOAuthToken :: Lens' DictionaryListOfflineMetadata' (Maybe OAuthToken)
+dlomOAuthToken
+  = lens _dlomOAuthToken
+      (\ s a -> s{_dlomOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 dlomFields :: Lens' DictionaryListOfflineMetadata' (Maybe Text)
 dlomFields
   = lens _dlomFields (\ s a -> s{_dlomFields = a})
 
--- | Data format for the response.
-dlomAlt :: Lens' DictionaryListOfflineMetadata' Alt
-dlomAlt = lens _dlomAlt (\ s a -> s{_dlomAlt = a})
+instance GoogleAuth DictionaryListOfflineMetadata'
+         where
+        authKey = dlomKey . _Just
+        authToken = dlomOAuthToken . _Just
 
 instance GoogleRequest DictionaryListOfflineMetadata'
          where
@@ -159,11 +155,11 @@ instance GoogleRequest DictionaryListOfflineMetadata'
           DictionaryListOfflineMetadata'{..}
           = go _dlomQuotaUser (Just _dlomPrettyPrint)
               (Just _dlomCpksver)
-              _dlomUserIp
+              _dlomUserIP
               _dlomKey
-              _dlomOauthToken
+              _dlomOAuthToken
               _dlomFields
-              (Just _dlomAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

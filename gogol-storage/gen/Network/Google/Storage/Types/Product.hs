@@ -213,7 +213,7 @@ instance ToJSON BucketLogging where
 data Buckets = Buckets
     { _bNextPageToken :: !(Maybe Text)
     , _bKind          :: !Text
-    , _bItems         :: !(Maybe [Maybe Bucket])
+    , _bItems         :: !(Maybe [Bucket])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Buckets' with the minimum fields required to make a request.
@@ -247,7 +247,7 @@ bKind :: Lens' Buckets Text
 bKind = lens _bKind (\ s a -> s{_bKind = a})
 
 -- | The list of items.
-bItems :: Lens' Buckets [Maybe Bucket]
+bItems :: Lens' Buckets [Bucket]
 bItems
   = lens _bItems (\ s a -> s{_bItems = a}) . _Default .
       _Coerce
@@ -521,13 +521,13 @@ instance ToJSON BucketCORS where
 --
 -- /See:/ 'channel' smart constructor.
 data Channel = Channel
-    { _cResourceUri :: !(Maybe Text)
+    { _cResourceURI :: !(Maybe Text)
     , _cResourceId  :: !(Maybe Text)
     , _cKind        :: !Text
     , _cExpiration  :: !(Maybe Int64)
     , _cToken       :: !(Maybe Text)
     , _cAddress     :: !(Maybe Text)
-    , _cPayload     :: !(Maybe Bool)
+    , _cPayLoad     :: !(Maybe Bool)
     , _cParams      :: !(Maybe ChannelParams)
     , _cId          :: !(Maybe Text)
     , _cType        :: !(Maybe Text)
@@ -537,7 +537,7 @@ data Channel = Channel
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'cResourceUri'
+-- * 'cResourceURI'
 --
 -- * 'cResourceId'
 --
@@ -549,7 +549,7 @@ data Channel = Channel
 --
 -- * 'cAddress'
 --
--- * 'cPayload'
+-- * 'cPayLoad'
 --
 -- * 'cParams'
 --
@@ -560,22 +560,22 @@ channel
     :: Channel
 channel =
     Channel
-    { _cResourceUri = Nothing
+    { _cResourceURI = Nothing
     , _cResourceId = Nothing
     , _cKind = "api#channel"
     , _cExpiration = Nothing
     , _cToken = Nothing
     , _cAddress = Nothing
-    , _cPayload = Nothing
+    , _cPayLoad = Nothing
     , _cParams = Nothing
     , _cId = Nothing
     , _cType = Nothing
     }
 
 -- | A version-specific identifier for the watched resource.
-cResourceUri :: Lens' Channel (Maybe Text)
-cResourceUri
-  = lens _cResourceUri (\ s a -> s{_cResourceUri = a})
+cResourceURI :: Lens' Channel (Maybe Text)
+cResourceURI
+  = lens _cResourceURI (\ s a -> s{_cResourceURI = a})
 
 -- | An opaque ID that identifies the resource being watched on this channel.
 -- Stable across different API versions.
@@ -604,8 +604,8 @@ cAddress :: Lens' Channel (Maybe Text)
 cAddress = lens _cAddress (\ s a -> s{_cAddress = a})
 
 -- | A Boolean value to indicate whether payload is wanted. Optional.
-cPayload :: Lens' Channel (Maybe Bool)
-cPayload = lens _cPayload (\ s a -> s{_cPayload = a})
+cPayLoad :: Lens' Channel (Maybe Bool)
+cPayLoad = lens _cPayLoad (\ s a -> s{_cPayLoad = a})
 
 -- | Additional parameters controlling delivery channel behavior. Optional.
 cParams :: Lens' Channel (Maybe ChannelParams)
@@ -638,13 +638,13 @@ instance ToJSON Channel where
         toJSON Channel{..}
           = object
               (catMaybes
-                 [("resourceUri" .=) <$> _cResourceUri,
+                 [("resourceUri" .=) <$> _cResourceURI,
                   ("resourceId" .=) <$> _cResourceId,
                   Just ("kind" .= _cKind),
                   ("expiration" .=) <$> _cExpiration,
                   ("token" .=) <$> _cToken,
                   ("address" .=) <$> _cAddress,
-                  ("payload" .=) <$> _cPayload,
+                  ("payload" .=) <$> _cPayLoad,
                   ("params" .=) <$> _cParams, ("id" .=) <$> _cId,
                   ("type" .=) <$> _cType])
 
@@ -662,13 +662,13 @@ data Bucket = Bucket
     , _bucName             :: !(Maybe Text)
     , _bucStorageClass     :: !(Maybe Text)
     , _bucVersioning       :: !(Maybe BucketVersioning)
-    , _bucCors             :: !(Maybe [BucketCORS])
+    , _bucCORS             :: !(Maybe [BucketCORS])
     , _bucTimeCreated      :: !(Maybe UTCTime)
     , _bucId               :: !(Maybe Text)
-    , _bucDefaultObjectAcl :: !(Maybe [Maybe ObjectAccessControl])
+    , _bucDefaultObjectACL :: !(Maybe [ObjectAccessControl])
     , _bucMetageneration   :: !(Maybe Int64)
     , _bucLogging          :: !(Maybe BucketLogging)
-    , _bucAcl              :: !(Maybe [Maybe BucketAccessControl])
+    , _bucACL              :: !(Maybe [BucketAccessControl])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'Bucket' with the minimum fields required to make a request.
@@ -695,19 +695,19 @@ data Bucket = Bucket
 --
 -- * 'bucVersioning'
 --
--- * 'bucCors'
+-- * 'bucCORS'
 --
 -- * 'bucTimeCreated'
 --
 -- * 'bucId'
 --
--- * 'bucDefaultObjectAcl'
+-- * 'bucDefaultObjectACL'
 --
 -- * 'bucMetageneration'
 --
 -- * 'bucLogging'
 --
--- * 'bucAcl'
+-- * 'bucACL'
 bucket
     :: Bucket
 bucket =
@@ -722,13 +722,13 @@ bucket =
     , _bucName = Nothing
     , _bucStorageClass = Nothing
     , _bucVersioning = Nothing
-    , _bucCors = Nothing
+    , _bucCORS = Nothing
     , _bucTimeCreated = Nothing
     , _bucId = Nothing
-    , _bucDefaultObjectAcl = Nothing
+    , _bucDefaultObjectACL = Nothing
     , _bucMetageneration = Nothing
     , _bucLogging = Nothing
-    , _bucAcl = Nothing
+    , _bucACL = Nothing
     }
 
 -- | HTTP 1.1 Entity tag for the bucket.
@@ -787,9 +787,9 @@ bucVersioning
       (\ s a -> s{_bucVersioning = a})
 
 -- | The bucket\'s Cross-Origin Resource Sharing (CORS) configuration.
-bucCors :: Lens' Bucket [BucketCORS]
-bucCors
-  = lens _bucCors (\ s a -> s{_bucCors = a}) . _Default
+bucCORS :: Lens' Bucket [BucketCORS]
+bucCORS
+  = lens _bucCORS (\ s a -> s{_bucCORS = a}) . _Default
       . _Coerce
 
 -- | Creation time of the bucket in RFC 3339 format.
@@ -803,10 +803,10 @@ bucId :: Lens' Bucket (Maybe Text)
 bucId = lens _bucId (\ s a -> s{_bucId = a})
 
 -- | Default access controls to apply to new objects when no ACL is provided.
-bucDefaultObjectAcl :: Lens' Bucket [Maybe ObjectAccessControl]
-bucDefaultObjectAcl
-  = lens _bucDefaultObjectAcl
-      (\ s a -> s{_bucDefaultObjectAcl = a})
+bucDefaultObjectACL :: Lens' Bucket [ObjectAccessControl]
+bucDefaultObjectACL
+  = lens _bucDefaultObjectACL
+      (\ s a -> s{_bucDefaultObjectACL = a})
       . _Default
       . _Coerce
 
@@ -823,9 +823,9 @@ bucLogging
   = lens _bucLogging (\ s a -> s{_bucLogging = a})
 
 -- | Access controls on the bucket.
-bucAcl :: Lens' Bucket [Maybe BucketAccessControl]
-bucAcl
-  = lens _bucAcl (\ s a -> s{_bucAcl = a}) . _Default .
+bucACL :: Lens' Bucket [BucketAccessControl]
+bucACL
+  = lens _bucACL (\ s a -> s{_bucACL = a}) . _Default .
       _Coerce
 
 instance FromJSON Bucket where
@@ -864,20 +864,20 @@ instance ToJSON Bucket where
                   ("name" .=) <$> _bucName,
                   ("storageClass" .=) <$> _bucStorageClass,
                   ("versioning" .=) <$> _bucVersioning,
-                  ("cors" .=) <$> _bucCors,
+                  ("cors" .=) <$> _bucCORS,
                   ("timeCreated" .=) <$> _bucTimeCreated,
                   ("id" .=) <$> _bucId,
-                  ("defaultObjectAcl" .=) <$> _bucDefaultObjectAcl,
+                  ("defaultObjectAcl" .=) <$> _bucDefaultObjectACL,
                   ("metageneration" .=) <$> _bucMetageneration,
                   ("logging" .=) <$> _bucLogging,
-                  ("acl" .=) <$> _bucAcl])
+                  ("acl" .=) <$> _bucACL])
 
 -- | An access-control list.
 --
 -- /See:/ 'bucketAccessControls' smart constructor.
 data BucketAccessControls = BucketAccessControls
     { _bacKind  :: !Text
-    , _bacItems :: !(Maybe [Maybe BucketAccessControl])
+    , _bacItems :: !(Maybe [BucketAccessControl])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BucketAccessControls' with the minimum fields required to make a request.
@@ -901,7 +901,7 @@ bacKind :: Lens' BucketAccessControls Text
 bacKind = lens _bacKind (\ s a -> s{_bacKind = a})
 
 -- | The list of items.
-bacItems :: Lens' BucketAccessControls [Maybe BucketAccessControl]
+bacItems :: Lens' BucketAccessControls [BucketAccessControl]
 bacItems
   = lens _bacItems (\ s a -> s{_bacItems = a}) .
       _Default
@@ -974,7 +974,7 @@ instance ToJSON BucketLifecycleRule where
 data Objects = Objects
     { _oNextPageToken :: !(Maybe Text)
     , _oKind          :: !Text
-    , _oItems         :: !(Maybe [Maybe Object])
+    , _oItems         :: !(Maybe [Object])
     , _oPrefixes      :: !(Maybe [Text])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1012,7 +1012,7 @@ oKind :: Lens' Objects Text
 oKind = lens _oKind (\ s a -> s{_oKind = a})
 
 -- | The list of items.
-oItems :: Lens' Objects [Maybe Object]
+oItems :: Lens' Objects [Object]
 oItems
   = lens _oItems (\ s a -> s{_oItems = a}) . _Default .
       _Coerce
@@ -1047,7 +1047,7 @@ instance ToJSON Objects where
 --
 -- /See:/ 'composeRequest' smart constructor.
 data ComposeRequest = ComposeRequest
-    { _crDestination   :: !(Maybe (Maybe Object))
+    { _crDestination   :: !(Maybe Object)
     , _crKind          :: !Text
     , _crSourceObjects :: !(Maybe [ComposeRequestSourceObjects])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -1071,7 +1071,7 @@ composeRequest =
     }
 
 -- | Properties of the resulting object
-crDestination :: Lens' ComposeRequest (Maybe (Maybe Object))
+crDestination :: Lens' ComposeRequest (Maybe Object)
 crDestination
   = lens _crDestination
       (\ s a -> s{_crDestination = a})
@@ -1434,9 +1434,9 @@ data Object = Object
     , _objCacheControl       :: !(Maybe Text)
     , _objMetageneration     :: !(Maybe Int64)
     , _objGeneration         :: !(Maybe Int64)
-    , _objAcl                :: !(Maybe [Maybe ObjectAccessControl])
-    , _objContentDisposition :: !(Maybe Text)
-    , _objMd5Hash            :: !(Maybe Text)
+    , _objACL                :: !(Maybe [ObjectAccessControl])
+    , _objContentDisPosition :: !(Maybe Text)
+    , _objMD5Hash            :: !(Maybe Text)
     , _objContentType        :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1484,11 +1484,11 @@ data Object = Object
 --
 -- * 'objGeneration'
 --
--- * 'objAcl'
+-- * 'objACL'
 --
--- * 'objContentDisposition'
+-- * 'objContentDisPosition'
 --
--- * 'objMd5Hash'
+-- * 'objMD5Hash'
 --
 -- * 'objContentType'
 object'
@@ -1515,9 +1515,9 @@ object' =
     , _objCacheControl = Nothing
     , _objMetageneration = Nothing
     , _objGeneration = Nothing
-    , _objAcl = Nothing
-    , _objContentDisposition = Nothing
-    , _objMd5Hash = Nothing
+    , _objACL = Nothing
+    , _objContentDisPosition = Nothing
+    , _objMD5Hash = Nothing
     , _objContentType = Nothing
     }
 
@@ -1629,21 +1629,21 @@ objGeneration
       (\ s a -> s{_objGeneration = a})
 
 -- | Access controls on the object.
-objAcl :: Lens' Object [Maybe ObjectAccessControl]
-objAcl
-  = lens _objAcl (\ s a -> s{_objAcl = a}) . _Default .
+objACL :: Lens' Object [ObjectAccessControl]
+objACL
+  = lens _objACL (\ s a -> s{_objACL = a}) . _Default .
       _Coerce
 
 -- | Content-Disposition of the object data.
-objContentDisposition :: Lens' Object (Maybe Text)
-objContentDisposition
-  = lens _objContentDisposition
-      (\ s a -> s{_objContentDisposition = a})
+objContentDisPosition :: Lens' Object (Maybe Text)
+objContentDisPosition
+  = lens _objContentDisPosition
+      (\ s a -> s{_objContentDisPosition = a})
 
 -- | MD5 hash of the data; encoded using base64.
-objMd5Hash :: Lens' Object (Maybe Text)
-objMd5Hash
-  = lens _objMd5Hash (\ s a -> s{_objMd5Hash = a})
+objMD5Hash :: Lens' Object (Maybe Text)
+objMD5Hash
+  = lens _objMD5Hash (\ s a -> s{_objMD5Hash = a})
 
 -- | Content-Type of the object data.
 objContentType :: Lens' Object (Maybe Text)
@@ -1702,9 +1702,9 @@ instance ToJSON Object where
                   ("cacheControl" .=) <$> _objCacheControl,
                   ("metageneration" .=) <$> _objMetageneration,
                   ("generation" .=) <$> _objGeneration,
-                  ("acl" .=) <$> _objAcl,
-                  ("contentDisposition" .=) <$> _objContentDisposition,
-                  ("md5Hash" .=) <$> _objMd5Hash,
+                  ("acl" .=) <$> _objACL,
+                  ("contentDisposition" .=) <$> _objContentDisPosition,
+                  ("md5Hash" .=) <$> _objMD5Hash,
                   ("contentType" .=) <$> _objContentType])
 
 -- | Conditions that must be met for this operation to execute.

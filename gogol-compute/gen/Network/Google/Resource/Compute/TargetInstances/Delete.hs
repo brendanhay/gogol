@@ -34,12 +34,11 @@ module Network.Google.Resource.Compute.TargetInstances.Delete
     , tidPrettyPrint
     , tidProject
     , tidTargetInstance
-    , tidUserIp
+    , tidUserIP
     , tidZone
     , tidKey
-    , tidOauthToken
+    , tidOAuthToken
     , tidFields
-    , tidAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -56,10 +55,10 @@ type TargetInstancesDeleteResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Delete '[JSON] Operation
+                           QueryParam "alt" AltJSON :> Delete '[JSON] Operation
 
 -- | Deletes the specified TargetInstance resource.
 --
@@ -69,12 +68,11 @@ data TargetInstancesDelete' = TargetInstancesDelete'
     , _tidPrettyPrint    :: !Bool
     , _tidProject        :: !Text
     , _tidTargetInstance :: !Text
-    , _tidUserIp         :: !(Maybe Text)
+    , _tidUserIP         :: !(Maybe Text)
     , _tidZone           :: !Text
-    , _tidKey            :: !(Maybe Text)
-    , _tidOauthToken     :: !(Maybe Text)
+    , _tidKey            :: !(Maybe Key)
+    , _tidOAuthToken     :: !(Maybe OAuthToken)
     , _tidFields         :: !(Maybe Text)
-    , _tidAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TargetInstancesDelete'' with the minimum fields required to make a request.
@@ -89,17 +87,15 @@ data TargetInstancesDelete' = TargetInstancesDelete'
 --
 -- * 'tidTargetInstance'
 --
--- * 'tidUserIp'
+-- * 'tidUserIP'
 --
 -- * 'tidZone'
 --
 -- * 'tidKey'
 --
--- * 'tidOauthToken'
+-- * 'tidOAuthToken'
 --
 -- * 'tidFields'
---
--- * 'tidAlt'
 targetInstancesDelete'
     :: Text -- ^ 'project'
     -> Text -- ^ 'targetInstance'
@@ -111,12 +107,11 @@ targetInstancesDelete' pTidProject_ pTidTargetInstance_ pTidZone_ =
     , _tidPrettyPrint = True
     , _tidProject = pTidProject_
     , _tidTargetInstance = pTidTargetInstance_
-    , _tidUserIp = Nothing
+    , _tidUserIP = Nothing
     , _tidZone = pTidZone_
     , _tidKey = Nothing
-    , _tidOauthToken = Nothing
+    , _tidOAuthToken = Nothing
     , _tidFields = Nothing
-    , _tidAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -145,9 +140,9 @@ tidTargetInstance
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tidUserIp :: Lens' TargetInstancesDelete' (Maybe Text)
-tidUserIp
-  = lens _tidUserIp (\ s a -> s{_tidUserIp = a})
+tidUserIP :: Lens' TargetInstancesDelete' (Maybe Text)
+tidUserIP
+  = lens _tidUserIP (\ s a -> s{_tidUserIP = a})
 
 -- | Name of the zone scoping this request.
 tidZone :: Lens' TargetInstancesDelete' Text
@@ -156,23 +151,23 @@ tidZone = lens _tidZone (\ s a -> s{_tidZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tidKey :: Lens' TargetInstancesDelete' (Maybe Text)
+tidKey :: Lens' TargetInstancesDelete' (Maybe Key)
 tidKey = lens _tidKey (\ s a -> s{_tidKey = a})
 
 -- | OAuth 2.0 token for the current user.
-tidOauthToken :: Lens' TargetInstancesDelete' (Maybe Text)
-tidOauthToken
-  = lens _tidOauthToken
-      (\ s a -> s{_tidOauthToken = a})
+tidOAuthToken :: Lens' TargetInstancesDelete' (Maybe OAuthToken)
+tidOAuthToken
+  = lens _tidOAuthToken
+      (\ s a -> s{_tidOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 tidFields :: Lens' TargetInstancesDelete' (Maybe Text)
 tidFields
   = lens _tidFields (\ s a -> s{_tidFields = a})
 
--- | Data format for the response.
-tidAlt :: Lens' TargetInstancesDelete' Alt
-tidAlt = lens _tidAlt (\ s a -> s{_tidAlt = a})
+instance GoogleAuth TargetInstancesDelete' where
+        authKey = tidKey . _Just
+        authToken = tidOAuthToken . _Just
 
 instance GoogleRequest TargetInstancesDelete' where
         type Rs TargetInstancesDelete' = Operation
@@ -180,12 +175,12 @@ instance GoogleRequest TargetInstancesDelete' where
         requestWithRoute r u TargetInstancesDelete'{..}
           = go _tidQuotaUser (Just _tidPrettyPrint) _tidProject
               _tidTargetInstance
-              _tidUserIp
+              _tidUserIP
               _tidZone
               _tidKey
-              _tidOauthToken
+              _tidOAuthToken
               _tidFields
-              (Just _tidAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TargetInstancesDeleteResource)

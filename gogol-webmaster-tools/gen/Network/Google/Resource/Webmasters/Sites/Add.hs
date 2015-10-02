@@ -32,12 +32,11 @@ module Network.Google.Resource.Webmasters.Sites.Add
     -- * Request Lenses
     , saQuotaUser
     , saPrettyPrint
-    , saUserIp
-    , saSiteUrl
+    , saUserIP
+    , saSiteURL
     , saKey
-    , saOauthToken
+    , saOAuthToken
     , saFields
-    , saAlt
     ) where
 
 import           Network.Google.Prelude
@@ -51,10 +50,10 @@ type SitesAddResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Put '[JSON] ()
+                     QueryParam "alt" AltJSON :> Put '[JSON] ()
 
 -- | Adds a site to the set of the user\'s sites in Webmaster Tools.
 --
@@ -62,12 +61,11 @@ type SitesAddResource =
 data SitesAdd' = SitesAdd'
     { _saQuotaUser   :: !(Maybe Text)
     , _saPrettyPrint :: !Bool
-    , _saUserIp      :: !(Maybe Text)
-    , _saSiteUrl     :: !Text
-    , _saKey         :: !(Maybe Text)
-    , _saOauthToken  :: !(Maybe Text)
+    , _saUserIP      :: !(Maybe Text)
+    , _saSiteURL     :: !Text
+    , _saKey         :: !(Maybe Key)
+    , _saOAuthToken  :: !(Maybe OAuthToken)
     , _saFields      :: !(Maybe Text)
-    , _saAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SitesAdd'' with the minimum fields required to make a request.
@@ -78,30 +76,27 @@ data SitesAdd' = SitesAdd'
 --
 -- * 'saPrettyPrint'
 --
--- * 'saUserIp'
+-- * 'saUserIP'
 --
--- * 'saSiteUrl'
+-- * 'saSiteURL'
 --
 -- * 'saKey'
 --
--- * 'saOauthToken'
+-- * 'saOAuthToken'
 --
 -- * 'saFields'
---
--- * 'saAlt'
 sitesAdd'
     :: Text -- ^ 'siteUrl'
     -> SitesAdd'
-sitesAdd' pSaSiteUrl_ =
+sitesAdd' pSaSiteURL_ =
     SitesAdd'
     { _saQuotaUser = Nothing
     , _saPrettyPrint = True
-    , _saUserIp = Nothing
-    , _saSiteUrl = pSaSiteUrl_
+    , _saUserIP = Nothing
+    , _saSiteURL = pSaSiteURL_
     , _saKey = Nothing
-    , _saOauthToken = Nothing
+    , _saOAuthToken = Nothing
     , _saFields = Nothing
-    , _saAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -119,43 +114,43 @@ saPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-saUserIp :: Lens' SitesAdd' (Maybe Text)
-saUserIp = lens _saUserIp (\ s a -> s{_saUserIp = a})
+saUserIP :: Lens' SitesAdd' (Maybe Text)
+saUserIP = lens _saUserIP (\ s a -> s{_saUserIP = a})
 
 -- | The URL of the site to add.
-saSiteUrl :: Lens' SitesAdd' Text
-saSiteUrl
-  = lens _saSiteUrl (\ s a -> s{_saSiteUrl = a})
+saSiteURL :: Lens' SitesAdd' Text
+saSiteURL
+  = lens _saSiteURL (\ s a -> s{_saSiteURL = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-saKey :: Lens' SitesAdd' (Maybe Text)
+saKey :: Lens' SitesAdd' (Maybe Key)
 saKey = lens _saKey (\ s a -> s{_saKey = a})
 
 -- | OAuth 2.0 token for the current user.
-saOauthToken :: Lens' SitesAdd' (Maybe Text)
-saOauthToken
-  = lens _saOauthToken (\ s a -> s{_saOauthToken = a})
+saOAuthToken :: Lens' SitesAdd' (Maybe OAuthToken)
+saOAuthToken
+  = lens _saOAuthToken (\ s a -> s{_saOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 saFields :: Lens' SitesAdd' (Maybe Text)
 saFields = lens _saFields (\ s a -> s{_saFields = a})
 
--- | Data format for the response.
-saAlt :: Lens' SitesAdd' Alt
-saAlt = lens _saAlt (\ s a -> s{_saAlt = a})
+instance GoogleAuth SitesAdd' where
+        authKey = saKey . _Just
+        authToken = saOAuthToken . _Just
 
 instance GoogleRequest SitesAdd' where
         type Rs SitesAdd' = ()
         request = requestWithRoute defReq webmasterToolsURL
         requestWithRoute r u SitesAdd'{..}
-          = go _saQuotaUser (Just _saPrettyPrint) _saUserIp
-              _saSiteUrl
+          = go _saQuotaUser (Just _saPrettyPrint) _saUserIP
+              _saSiteURL
               _saKey
-              _saOauthToken
+              _saOAuthToken
               _saFields
-              (Just _saAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy SitesAddResource) r
                       u

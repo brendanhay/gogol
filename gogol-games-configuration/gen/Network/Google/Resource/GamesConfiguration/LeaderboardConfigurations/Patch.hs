@@ -33,12 +33,12 @@ module Network.Google.Resource.GamesConfiguration.LeaderboardConfigurations.Patc
     -- * Request Lenses
     , lcpQuotaUser
     , lcpPrettyPrint
-    , lcpUserIp
+    , lcpUserIP
+    , lcpLeaderboardConfiguration
     , lcpLeaderboardId
     , lcpKey
-    , lcpOauthToken
+    , lcpOAuthToken
     , lcpFields
-    , lcpAlt
     ) where
 
 import           Network.Google.GamesConfiguration.Types
@@ -52,25 +52,26 @@ type LeaderboardConfigurationsPatchResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :>
-                       Patch '[JSON] LeaderboardConfiguration
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] LeaderboardConfiguration :>
+                         Patch '[JSON] LeaderboardConfiguration
 
 -- | Update the metadata of the leaderboard configuration with the given ID.
 -- This method supports patch semantics.
 --
 -- /See:/ 'leaderboardConfigurationsPatch'' smart constructor.
 data LeaderboardConfigurationsPatch' = LeaderboardConfigurationsPatch'
-    { _lcpQuotaUser     :: !(Maybe Text)
-    , _lcpPrettyPrint   :: !Bool
-    , _lcpUserIp        :: !(Maybe Text)
-    , _lcpLeaderboardId :: !Text
-    , _lcpKey           :: !(Maybe Text)
-    , _lcpOauthToken    :: !(Maybe Text)
-    , _lcpFields        :: !(Maybe Text)
-    , _lcpAlt           :: !Alt
+    { _lcpQuotaUser                :: !(Maybe Text)
+    , _lcpPrettyPrint              :: !Bool
+    , _lcpUserIP                   :: !(Maybe Text)
+    , _lcpLeaderboardConfiguration :: !LeaderboardConfiguration
+    , _lcpLeaderboardId            :: !Text
+    , _lcpKey                      :: !(Maybe Key)
+    , _lcpOAuthToken               :: !(Maybe OAuthToken)
+    , _lcpFields                   :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LeaderboardConfigurationsPatch'' with the minimum fields required to make a request.
@@ -81,30 +82,31 @@ data LeaderboardConfigurationsPatch' = LeaderboardConfigurationsPatch'
 --
 -- * 'lcpPrettyPrint'
 --
--- * 'lcpUserIp'
+-- * 'lcpUserIP'
+--
+-- * 'lcpLeaderboardConfiguration'
 --
 -- * 'lcpLeaderboardId'
 --
 -- * 'lcpKey'
 --
--- * 'lcpOauthToken'
+-- * 'lcpOAuthToken'
 --
 -- * 'lcpFields'
---
--- * 'lcpAlt'
 leaderboardConfigurationsPatch'
-    :: Text -- ^ 'leaderboardId'
+    :: LeaderboardConfiguration -- ^ 'LeaderboardConfiguration'
+    -> Text -- ^ 'leaderboardId'
     -> LeaderboardConfigurationsPatch'
-leaderboardConfigurationsPatch' pLcpLeaderboardId_ =
+leaderboardConfigurationsPatch' pLcpLeaderboardConfiguration_ pLcpLeaderboardId_ =
     LeaderboardConfigurationsPatch'
     { _lcpQuotaUser = Nothing
     , _lcpPrettyPrint = True
-    , _lcpUserIp = Nothing
+    , _lcpUserIP = Nothing
+    , _lcpLeaderboardConfiguration = pLcpLeaderboardConfiguration_
     , _lcpLeaderboardId = pLcpLeaderboardId_
     , _lcpKey = Nothing
-    , _lcpOauthToken = Nothing
+    , _lcpOAuthToken = Nothing
     , _lcpFields = Nothing
-    , _lcpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -122,9 +124,15 @@ lcpPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-lcpUserIp :: Lens' LeaderboardConfigurationsPatch' (Maybe Text)
-lcpUserIp
-  = lens _lcpUserIp (\ s a -> s{_lcpUserIp = a})
+lcpUserIP :: Lens' LeaderboardConfigurationsPatch' (Maybe Text)
+lcpUserIP
+  = lens _lcpUserIP (\ s a -> s{_lcpUserIP = a})
+
+-- | Multipart request metadata.
+lcpLeaderboardConfiguration :: Lens' LeaderboardConfigurationsPatch' LeaderboardConfiguration
+lcpLeaderboardConfiguration
+  = lens _lcpLeaderboardConfiguration
+      (\ s a -> s{_lcpLeaderboardConfiguration = a})
 
 -- | The ID of the leaderboard.
 lcpLeaderboardId :: Lens' LeaderboardConfigurationsPatch' Text
@@ -135,23 +143,24 @@ lcpLeaderboardId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lcpKey :: Lens' LeaderboardConfigurationsPatch' (Maybe Text)
+lcpKey :: Lens' LeaderboardConfigurationsPatch' (Maybe Key)
 lcpKey = lens _lcpKey (\ s a -> s{_lcpKey = a})
 
 -- | OAuth 2.0 token for the current user.
-lcpOauthToken :: Lens' LeaderboardConfigurationsPatch' (Maybe Text)
-lcpOauthToken
-  = lens _lcpOauthToken
-      (\ s a -> s{_lcpOauthToken = a})
+lcpOAuthToken :: Lens' LeaderboardConfigurationsPatch' (Maybe OAuthToken)
+lcpOAuthToken
+  = lens _lcpOAuthToken
+      (\ s a -> s{_lcpOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 lcpFields :: Lens' LeaderboardConfigurationsPatch' (Maybe Text)
 lcpFields
   = lens _lcpFields (\ s a -> s{_lcpFields = a})
 
--- | Data format for the response.
-lcpAlt :: Lens' LeaderboardConfigurationsPatch' Alt
-lcpAlt = lens _lcpAlt (\ s a -> s{_lcpAlt = a})
+instance GoogleAuth LeaderboardConfigurationsPatch'
+         where
+        authKey = lcpKey . _Just
+        authToken = lcpOAuthToken . _Just
 
 instance GoogleRequest
          LeaderboardConfigurationsPatch' where
@@ -161,12 +170,13 @@ instance GoogleRequest
           = requestWithRoute defReq gamesConfigurationURL
         requestWithRoute r u
           LeaderboardConfigurationsPatch'{..}
-          = go _lcpQuotaUser (Just _lcpPrettyPrint) _lcpUserIp
+          = go _lcpQuotaUser (Just _lcpPrettyPrint) _lcpUserIP
               _lcpLeaderboardId
               _lcpKey
-              _lcpOauthToken
+              _lcpOAuthToken
               _lcpFields
-              (Just _lcpAlt)
+              (Just AltJSON)
+              _lcpLeaderboardConfiguration
           where go
                   = clientWithRoute
                       (Proxy ::

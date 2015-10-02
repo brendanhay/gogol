@@ -32,13 +32,12 @@ module Network.Google.Resource.Games.Rooms.Get
     -- * Request Lenses
     , rgQuotaUser
     , rgPrettyPrint
-    , rgUserIp
+    , rgUserIP
     , rgKey
     , rgRoomId
     , rgLanguage
-    , rgOauthToken
+    , rgOAuthToken
     , rgFields
-    , rgAlt
     ) where
 
 import           Network.Google.Games.Types
@@ -52,11 +51,11 @@ type RoomsGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
+               QueryParam "key" Key :>
                  QueryParam "language" Text :>
-                   QueryParam "oauth_token" Text :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Get '[JSON] Room
+                       QueryParam "alt" AltJSON :> Get '[JSON] Room
 
 -- | Get the data for a room.
 --
@@ -64,13 +63,12 @@ type RoomsGetResource =
 data RoomsGet' = RoomsGet'
     { _rgQuotaUser   :: !(Maybe Text)
     , _rgPrettyPrint :: !Bool
-    , _rgUserIp      :: !(Maybe Text)
-    , _rgKey         :: !(Maybe Text)
+    , _rgUserIP      :: !(Maybe Text)
+    , _rgKey         :: !(Maybe Key)
     , _rgRoomId      :: !Text
     , _rgLanguage    :: !(Maybe Text)
-    , _rgOauthToken  :: !(Maybe Text)
+    , _rgOAuthToken  :: !(Maybe OAuthToken)
     , _rgFields      :: !(Maybe Text)
-    , _rgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomsGet'' with the minimum fields required to make a request.
@@ -81,7 +79,7 @@ data RoomsGet' = RoomsGet'
 --
 -- * 'rgPrettyPrint'
 --
--- * 'rgUserIp'
+-- * 'rgUserIP'
 --
 -- * 'rgKey'
 --
@@ -89,11 +87,9 @@ data RoomsGet' = RoomsGet'
 --
 -- * 'rgLanguage'
 --
--- * 'rgOauthToken'
+-- * 'rgOAuthToken'
 --
 -- * 'rgFields'
---
--- * 'rgAlt'
 roomsGet'
     :: Text -- ^ 'roomId'
     -> RoomsGet'
@@ -101,13 +97,12 @@ roomsGet' pRgRoomId_ =
     RoomsGet'
     { _rgQuotaUser = Nothing
     , _rgPrettyPrint = True
-    , _rgUserIp = Nothing
+    , _rgUserIP = Nothing
     , _rgKey = Nothing
     , _rgRoomId = pRgRoomId_
     , _rgLanguage = Nothing
-    , _rgOauthToken = Nothing
+    , _rgOAuthToken = Nothing
     , _rgFields = Nothing
-    , _rgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -125,13 +120,13 @@ rgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rgUserIp :: Lens' RoomsGet' (Maybe Text)
-rgUserIp = lens _rgUserIp (\ s a -> s{_rgUserIp = a})
+rgUserIP :: Lens' RoomsGet' (Maybe Text)
+rgUserIP = lens _rgUserIP (\ s a -> s{_rgUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rgKey :: Lens' RoomsGet' (Maybe Text)
+rgKey :: Lens' RoomsGet' (Maybe Key)
 rgKey = lens _rgKey (\ s a -> s{_rgKey = a})
 
 -- | The ID of the room.
@@ -144,29 +139,29 @@ rgLanguage
   = lens _rgLanguage (\ s a -> s{_rgLanguage = a})
 
 -- | OAuth 2.0 token for the current user.
-rgOauthToken :: Lens' RoomsGet' (Maybe Text)
-rgOauthToken
-  = lens _rgOauthToken (\ s a -> s{_rgOauthToken = a})
+rgOAuthToken :: Lens' RoomsGet' (Maybe OAuthToken)
+rgOAuthToken
+  = lens _rgOAuthToken (\ s a -> s{_rgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 rgFields :: Lens' RoomsGet' (Maybe Text)
 rgFields = lens _rgFields (\ s a -> s{_rgFields = a})
 
--- | Data format for the response.
-rgAlt :: Lens' RoomsGet' Alt
-rgAlt = lens _rgAlt (\ s a -> s{_rgAlt = a})
+instance GoogleAuth RoomsGet' where
+        authKey = rgKey . _Just
+        authToken = rgOAuthToken . _Just
 
 instance GoogleRequest RoomsGet' where
         type Rs RoomsGet' = Room
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u RoomsGet'{..}
-          = go _rgQuotaUser (Just _rgPrettyPrint) _rgUserIp
+          = go _rgQuotaUser (Just _rgPrettyPrint) _rgUserIP
               _rgKey
               _rgRoomId
               _rgLanguage
-              _rgOauthToken
+              _rgOAuthToken
               _rgFields
-              (Just _rgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy RoomsGetResource) r
                       u

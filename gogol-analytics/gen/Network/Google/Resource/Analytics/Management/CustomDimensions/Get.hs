@@ -33,13 +33,12 @@ module Network.Google.Resource.Analytics.Management.CustomDimensions.Get
     , mcdgQuotaUser
     , mcdgPrettyPrint
     , mcdgWebPropertyId
-    , mcdgUserIp
+    , mcdgUserIP
     , mcdgAccountId
     , mcdgKey
-    , mcdgOauthToken
+    , mcdgOAuthToken
     , mcdgCustomDimensionId
     , mcdgFields
-    , mcdgAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -58,10 +57,10 @@ type ManagementCustomDimensionsGetResource =
                    QueryParam "quotaUser" Text :>
                      QueryParam "prettyPrint" Bool :>
                        QueryParam "userIp" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :>
+                               QueryParam "alt" AltJSON :>
                                  Get '[JSON] CustomDimension
 
 -- | Get a custom dimension to which the user has access.
@@ -71,13 +70,12 @@ data ManagementCustomDimensionsGet' = ManagementCustomDimensionsGet'
     { _mcdgQuotaUser         :: !(Maybe Text)
     , _mcdgPrettyPrint       :: !Bool
     , _mcdgWebPropertyId     :: !Text
-    , _mcdgUserIp            :: !(Maybe Text)
+    , _mcdgUserIP            :: !(Maybe Text)
     , _mcdgAccountId         :: !Text
-    , _mcdgKey               :: !(Maybe Text)
-    , _mcdgOauthToken        :: !(Maybe Text)
+    , _mcdgKey               :: !(Maybe Key)
+    , _mcdgOAuthToken        :: !(Maybe OAuthToken)
     , _mcdgCustomDimensionId :: !Text
     , _mcdgFields            :: !(Maybe Text)
-    , _mcdgAlt               :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementCustomDimensionsGet'' with the minimum fields required to make a request.
@@ -90,19 +88,17 @@ data ManagementCustomDimensionsGet' = ManagementCustomDimensionsGet'
 --
 -- * 'mcdgWebPropertyId'
 --
--- * 'mcdgUserIp'
+-- * 'mcdgUserIP'
 --
 -- * 'mcdgAccountId'
 --
 -- * 'mcdgKey'
 --
--- * 'mcdgOauthToken'
+-- * 'mcdgOAuthToken'
 --
 -- * 'mcdgCustomDimensionId'
 --
 -- * 'mcdgFields'
---
--- * 'mcdgAlt'
 managementCustomDimensionsGet'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'accountId'
@@ -113,13 +109,12 @@ managementCustomDimensionsGet' pMcdgWebPropertyId_ pMcdgAccountId_ pMcdgCustomDi
     { _mcdgQuotaUser = Nothing
     , _mcdgPrettyPrint = False
     , _mcdgWebPropertyId = pMcdgWebPropertyId_
-    , _mcdgUserIp = Nothing
+    , _mcdgUserIP = Nothing
     , _mcdgAccountId = pMcdgAccountId_
     , _mcdgKey = Nothing
-    , _mcdgOauthToken = Nothing
+    , _mcdgOAuthToken = Nothing
     , _mcdgCustomDimensionId = pMcdgCustomDimensionId_
     , _mcdgFields = Nothing
-    , _mcdgAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -144,9 +139,9 @@ mcdgWebPropertyId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mcdgUserIp :: Lens' ManagementCustomDimensionsGet' (Maybe Text)
-mcdgUserIp
-  = lens _mcdgUserIp (\ s a -> s{_mcdgUserIp = a})
+mcdgUserIP :: Lens' ManagementCustomDimensionsGet' (Maybe Text)
+mcdgUserIP
+  = lens _mcdgUserIP (\ s a -> s{_mcdgUserIP = a})
 
 -- | Account ID for the custom dimension to retrieve.
 mcdgAccountId :: Lens' ManagementCustomDimensionsGet' Text
@@ -157,14 +152,14 @@ mcdgAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mcdgKey :: Lens' ManagementCustomDimensionsGet' (Maybe Text)
+mcdgKey :: Lens' ManagementCustomDimensionsGet' (Maybe Key)
 mcdgKey = lens _mcdgKey (\ s a -> s{_mcdgKey = a})
 
 -- | OAuth 2.0 token for the current user.
-mcdgOauthToken :: Lens' ManagementCustomDimensionsGet' (Maybe Text)
-mcdgOauthToken
-  = lens _mcdgOauthToken
-      (\ s a -> s{_mcdgOauthToken = a})
+mcdgOAuthToken :: Lens' ManagementCustomDimensionsGet' (Maybe OAuthToken)
+mcdgOAuthToken
+  = lens _mcdgOAuthToken
+      (\ s a -> s{_mcdgOAuthToken = a})
 
 -- | The ID of the custom dimension to retrieve.
 mcdgCustomDimensionId :: Lens' ManagementCustomDimensionsGet' Text
@@ -177,9 +172,10 @@ mcdgFields :: Lens' ManagementCustomDimensionsGet' (Maybe Text)
 mcdgFields
   = lens _mcdgFields (\ s a -> s{_mcdgFields = a})
 
--- | Data format for the response.
-mcdgAlt :: Lens' ManagementCustomDimensionsGet' Alt
-mcdgAlt = lens _mcdgAlt (\ s a -> s{_mcdgAlt = a})
+instance GoogleAuth ManagementCustomDimensionsGet'
+         where
+        authKey = mcdgKey . _Just
+        authToken = mcdgOAuthToken . _Just
 
 instance GoogleRequest ManagementCustomDimensionsGet'
          where
@@ -190,13 +186,13 @@ instance GoogleRequest ManagementCustomDimensionsGet'
           ManagementCustomDimensionsGet'{..}
           = go _mcdgQuotaUser (Just _mcdgPrettyPrint)
               _mcdgWebPropertyId
-              _mcdgUserIp
+              _mcdgUserIP
               _mcdgAccountId
               _mcdgKey
-              _mcdgOauthToken
+              _mcdgOAuthToken
               _mcdgCustomDimensionId
               _mcdgFields
-              (Just _mcdgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

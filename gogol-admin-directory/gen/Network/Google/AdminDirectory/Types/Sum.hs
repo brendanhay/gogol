@@ -47,7 +47,7 @@ instance ToJSON DirectoryUsersListViewType where
     toJSON = toJSONText
 
 -- | Restrict information returned to a set of selected fields.
-data DirectoryChromeosdevicesListProjection
+data DirectoryChromeosDevicesListProjection
     = Basic
       -- ^ @BASIC@
       -- Includes only the basic metadata fields (e.g., deviceId, serialNumber,
@@ -57,23 +57,23 @@ data DirectoryChromeosdevicesListProjection
       -- Includes all metadata fields
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable DirectoryChromeosdevicesListProjection
+instance Hashable DirectoryChromeosDevicesListProjection
 
-instance FromText DirectoryChromeosdevicesListProjection where
+instance FromText DirectoryChromeosDevicesListProjection where
     fromText = \case
         "BASIC" -> Just Basic
         "FULL" -> Just Full
         _ -> Nothing
 
-instance ToText DirectoryChromeosdevicesListProjection where
+instance ToText DirectoryChromeosDevicesListProjection where
     toText = \case
         Basic -> "BASIC"
         Full -> "FULL"
 
-instance FromJSON DirectoryChromeosdevicesListProjection where
-    parseJSON = parseJSONText "DirectoryChromeosdevicesListProjection"
+instance FromJSON DirectoryChromeosDevicesListProjection where
+    parseJSON = parseJSONText "DirectoryChromeosDevicesListProjection"
 
-instance ToJSON DirectoryChromeosdevicesListProjection where
+instance ToJSON DirectoryChromeosDevicesListProjection where
     toJSON = toJSONText
 
 -- | Column to use for sorting results
@@ -140,62 +140,62 @@ instance ToJSON DirectoryUsersWatchViewType where
     toJSON = toJSONText
 
 -- | Column to use for sorting results
-data DirectoryMobiledevicesListOrderBy
-    = DMLOBDeviceId
+data DirectoryMobileDevicesListOrderBy
+    = DMDLOBDeviceId
       -- ^ @deviceId@
       -- Mobile Device serial number.
-    | DMLOBEmail
+    | DMDLOBEmail
       -- ^ @email@
       -- Owner user email.
-    | DMLOBLastSync
+    | DMDLOBLastSync
       -- ^ @lastSync@
       -- Last policy settings sync date time of the device.
-    | DMLOBModel
+    | DMDLOBModel
       -- ^ @model@
       -- Mobile Device model.
-    | DMLOBName
+    | DMDLOBName
       -- ^ @name@
       -- Owner user name.
-    | DMLOBOS
+    | DMDLOBOS
       -- ^ @os@
       -- Mobile operating system.
-    | DMLOBStatus
+    | DMDLOBStatus
       -- ^ @status@
       -- Status of the device.
-    | DMLOBType
+    | DMDLOBType
       -- ^ @type@
       -- Type of the device.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable DirectoryMobiledevicesListOrderBy
+instance Hashable DirectoryMobileDevicesListOrderBy
 
-instance FromText DirectoryMobiledevicesListOrderBy where
+instance FromText DirectoryMobileDevicesListOrderBy where
     fromText = \case
-        "deviceId" -> Just DMLOBDeviceId
-        "email" -> Just DMLOBEmail
-        "lastSync" -> Just DMLOBLastSync
-        "model" -> Just DMLOBModel
-        "name" -> Just DMLOBName
-        "os" -> Just DMLOBOS
-        "status" -> Just DMLOBStatus
-        "type" -> Just DMLOBType
+        "deviceId" -> Just DMDLOBDeviceId
+        "email" -> Just DMDLOBEmail
+        "lastSync" -> Just DMDLOBLastSync
+        "model" -> Just DMDLOBModel
+        "name" -> Just DMDLOBName
+        "os" -> Just DMDLOBOS
+        "status" -> Just DMDLOBStatus
+        "type" -> Just DMDLOBType
         _ -> Nothing
 
-instance ToText DirectoryMobiledevicesListOrderBy where
+instance ToText DirectoryMobileDevicesListOrderBy where
     toText = \case
-        DMLOBDeviceId -> "deviceId"
-        DMLOBEmail -> "email"
-        DMLOBLastSync -> "lastSync"
-        DMLOBModel -> "model"
-        DMLOBName -> "name"
-        DMLOBOS -> "os"
-        DMLOBStatus -> "status"
-        DMLOBType -> "type"
+        DMDLOBDeviceId -> "deviceId"
+        DMDLOBEmail -> "email"
+        DMDLOBLastSync -> "lastSync"
+        DMDLOBModel -> "model"
+        DMDLOBName -> "name"
+        DMDLOBOS -> "os"
+        DMDLOBStatus -> "status"
+        DMDLOBType -> "type"
 
-instance FromJSON DirectoryMobiledevicesListOrderBy where
-    parseJSON = parseJSONText "DirectoryMobiledevicesListOrderBy"
+instance FromJSON DirectoryMobileDevicesListOrderBy where
+    parseJSON = parseJSONText "DirectoryMobileDevicesListOrderBy"
 
-instance ToJSON DirectoryMobiledevicesListOrderBy where
+instance ToJSON DirectoryMobileDevicesListOrderBy where
     toJSON = toJSONText
 
 -- | Whether to return results in ascending or descending order.
@@ -344,63 +344,63 @@ instance ToJSON DirectoryUsersWatchSortOrder where
     toJSON = toJSONText
 
 -- | Restrict information returned to a set of selected fields.
-data DirectoryMobiledevicesGetProjection
-    = DMGPBasic
+data DirectoryMobileDevicesGetProjection
+    = DMDGPBasic
       -- ^ @BASIC@
       -- Includes only the basic metadata fields (e.g., deviceId, model, status,
       -- type, and status)
-    | DMGPFull
+    | DMDGPFull
       -- ^ @FULL@
       -- Includes all metadata fields
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable DirectoryMobiledevicesGetProjection
+instance Hashable DirectoryMobileDevicesGetProjection
 
-instance FromText DirectoryMobiledevicesGetProjection where
+instance FromText DirectoryMobileDevicesGetProjection where
     fromText = \case
-        "BASIC" -> Just DMGPBasic
-        "FULL" -> Just DMGPFull
+        "BASIC" -> Just DMDGPBasic
+        "FULL" -> Just DMDGPFull
         _ -> Nothing
 
-instance ToText DirectoryMobiledevicesGetProjection where
+instance ToText DirectoryMobileDevicesGetProjection where
     toText = \case
-        DMGPBasic -> "BASIC"
-        DMGPFull -> "FULL"
+        DMDGPBasic -> "BASIC"
+        DMDGPFull -> "FULL"
 
-instance FromJSON DirectoryMobiledevicesGetProjection where
-    parseJSON = parseJSONText "DirectoryMobiledevicesGetProjection"
+instance FromJSON DirectoryMobileDevicesGetProjection where
+    parseJSON = parseJSONText "DirectoryMobileDevicesGetProjection"
 
-instance ToJSON DirectoryMobiledevicesGetProjection where
+instance ToJSON DirectoryMobileDevicesGetProjection where
     toJSON = toJSONText
 
 -- | Whether to return results in ascending or descending order. Only of use
 -- when orderBy is also used
-data DirectoryMobiledevicesListSortOrder
-    = DMLSOAscending
+data DirectoryMobileDevicesListSortOrder
+    = DMDLSOAscending
       -- ^ @ASCENDING@
       -- Ascending order.
-    | DMLSODescending
+    | DMDLSODescending
       -- ^ @DESCENDING@
       -- Descending order.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable DirectoryMobiledevicesListSortOrder
+instance Hashable DirectoryMobileDevicesListSortOrder
 
-instance FromText DirectoryMobiledevicesListSortOrder where
+instance FromText DirectoryMobileDevicesListSortOrder where
     fromText = \case
-        "ASCENDING" -> Just DMLSOAscending
-        "DESCENDING" -> Just DMLSODescending
+        "ASCENDING" -> Just DMDLSOAscending
+        "DESCENDING" -> Just DMDLSODescending
         _ -> Nothing
 
-instance ToText DirectoryMobiledevicesListSortOrder where
+instance ToText DirectoryMobileDevicesListSortOrder where
     toText = \case
-        DMLSOAscending -> "ASCENDING"
-        DMLSODescending -> "DESCENDING"
+        DMDLSOAscending -> "ASCENDING"
+        DMDLSODescending -> "DESCENDING"
 
-instance FromJSON DirectoryMobiledevicesListSortOrder where
-    parseJSON = parseJSONText "DirectoryMobiledevicesListSortOrder"
+instance FromJSON DirectoryMobileDevicesListSortOrder where
+    parseJSON = parseJSONText "DirectoryMobileDevicesListSortOrder"
 
-instance ToJSON DirectoryMobiledevicesListSortOrder where
+instance ToJSON DirectoryMobileDevicesListSortOrder where
     toJSON = toJSONText
 
 -- | Column to use for sorting results
@@ -438,7 +438,7 @@ instance ToJSON DirectoryUsersListOrderBy where
     toJSON = toJSONText
 
 -- | Whether to return all sub-organizations or just immediate children
-data DirectoryOrgunitsListType
+data DirectoryOrgUnitsListType
     = All
       -- ^ @all@
       -- All sub-organization units.
@@ -447,23 +447,23 @@ data DirectoryOrgunitsListType
       -- Immediate children only (default).
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable DirectoryOrgunitsListType
+instance Hashable DirectoryOrgUnitsListType
 
-instance FromText DirectoryOrgunitsListType where
+instance FromText DirectoryOrgUnitsListType where
     fromText = \case
         "all" -> Just All
         "children" -> Just Children
         _ -> Nothing
 
-instance ToText DirectoryOrgunitsListType where
+instance ToText DirectoryOrgUnitsListType where
     toText = \case
         All -> "all"
         Children -> "children"
 
-instance FromJSON DirectoryOrgunitsListType where
-    parseJSON = parseJSONText "DirectoryOrgunitsListType"
+instance FromJSON DirectoryOrgUnitsListType where
+    parseJSON = parseJSONText "DirectoryOrgUnitsListType"
 
-instance ToJSON DirectoryOrgunitsListType where
+instance ToJSON DirectoryOrgUnitsListType where
     toJSON = toJSONText
 
 -- | What subset of fields to fetch for this user.
@@ -501,33 +501,33 @@ instance ToJSON DirectoryUsersListProjection where
     toJSON = toJSONText
 
 -- | Restrict information returned to a set of selected fields.
-data DirectoryChromeosdevicesUpdateProjection
-    = DCUPBasic
+data DirectoryChromeosDevicesUpdateProjection
+    = DCDUPBasic
       -- ^ @BASIC@
       -- Includes only the basic metadata fields (e.g., deviceId, serialNumber,
       -- status, and user)
-    | DCUPFull
+    | DCDUPFull
       -- ^ @FULL@
       -- Includes all metadata fields
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable DirectoryChromeosdevicesUpdateProjection
+instance Hashable DirectoryChromeosDevicesUpdateProjection
 
-instance FromText DirectoryChromeosdevicesUpdateProjection where
+instance FromText DirectoryChromeosDevicesUpdateProjection where
     fromText = \case
-        "BASIC" -> Just DCUPBasic
-        "FULL" -> Just DCUPFull
+        "BASIC" -> Just DCDUPBasic
+        "FULL" -> Just DCDUPFull
         _ -> Nothing
 
-instance ToText DirectoryChromeosdevicesUpdateProjection where
+instance ToText DirectoryChromeosDevicesUpdateProjection where
     toText = \case
-        DCUPBasic -> "BASIC"
-        DCUPFull -> "FULL"
+        DCDUPBasic -> "BASIC"
+        DCDUPFull -> "FULL"
 
-instance FromJSON DirectoryChromeosdevicesUpdateProjection where
-    parseJSON = parseJSONText "DirectoryChromeosdevicesUpdateProjection"
+instance FromJSON DirectoryChromeosDevicesUpdateProjection where
+    parseJSON = parseJSONText "DirectoryChromeosDevicesUpdateProjection"
 
-instance ToJSON DirectoryChromeosdevicesUpdateProjection where
+instance ToJSON DirectoryChromeosDevicesUpdateProjection where
     toJSON = toJSONText
 
 -- | What subset of fields to fetch for this user.
@@ -565,7 +565,7 @@ instance ToJSON DirectoryUsersWatchProjection where
     toJSON = toJSONText
 
 -- | Column to use for sorting results
-data DirectoryChromeosdevicesListOrderBy
+data DirectoryChromeosDevicesListOrderBy
     = AnnotatedLocation
       -- ^ @annotatedLocation@
       -- Chromebook location as annotated by the administrator.
@@ -589,9 +589,9 @@ data DirectoryChromeosdevicesListOrderBy
       -- Chromebook support end date.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable DirectoryChromeosdevicesListOrderBy
+instance Hashable DirectoryChromeosDevicesListOrderBy
 
-instance FromText DirectoryChromeosdevicesListOrderBy where
+instance FromText DirectoryChromeosDevicesListOrderBy where
     fromText = \case
         "annotatedLocation" -> Just AnnotatedLocation
         "annotatedUser" -> Just AnnotatedUser
@@ -602,7 +602,7 @@ instance FromText DirectoryChromeosdevicesListOrderBy where
         "supportEndDate" -> Just SupportEndDate
         _ -> Nothing
 
-instance ToText DirectoryChromeosdevicesListOrderBy where
+instance ToText DirectoryChromeosDevicesListOrderBy where
     toText = \case
         AnnotatedLocation -> "annotatedLocation"
         AnnotatedUser -> "annotatedUser"
@@ -612,10 +612,10 @@ instance ToText DirectoryChromeosdevicesListOrderBy where
         Status -> "status"
         SupportEndDate -> "supportEndDate"
 
-instance FromJSON DirectoryChromeosdevicesListOrderBy where
-    parseJSON = parseJSONText "DirectoryChromeosdevicesListOrderBy"
+instance FromJSON DirectoryChromeosDevicesListOrderBy where
+    parseJSON = parseJSONText "DirectoryChromeosDevicesListOrderBy"
 
-instance ToJSON DirectoryChromeosdevicesListOrderBy where
+instance ToJSON DirectoryChromeosDevicesListOrderBy where
     toJSON = toJSONText
 
 -- | Event on which subscription is intended (if subscribing)
@@ -663,33 +663,33 @@ instance ToJSON DirectoryUsersListEvent where
     toJSON = toJSONText
 
 -- | Restrict information returned to a set of selected fields.
-data DirectoryMobiledevicesListProjection
-    = DMLPBasic
+data DirectoryMobileDevicesListProjection
+    = DMDLPBasic
       -- ^ @BASIC@
       -- Includes only the basic metadata fields (e.g., deviceId, model, status,
       -- type, and status)
-    | DMLPFull
+    | DMDLPFull
       -- ^ @FULL@
       -- Includes all metadata fields
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable DirectoryMobiledevicesListProjection
+instance Hashable DirectoryMobileDevicesListProjection
 
-instance FromText DirectoryMobiledevicesListProjection where
+instance FromText DirectoryMobileDevicesListProjection where
     fromText = \case
-        "BASIC" -> Just DMLPBasic
-        "FULL" -> Just DMLPFull
+        "BASIC" -> Just DMDLPBasic
+        "FULL" -> Just DMDLPFull
         _ -> Nothing
 
-instance ToText DirectoryMobiledevicesListProjection where
+instance ToText DirectoryMobileDevicesListProjection where
     toText = \case
-        DMLPBasic -> "BASIC"
-        DMLPFull -> "FULL"
+        DMDLPBasic -> "BASIC"
+        DMDLPFull -> "FULL"
 
-instance FromJSON DirectoryMobiledevicesListProjection where
-    parseJSON = parseJSONText "DirectoryMobiledevicesListProjection"
+instance FromJSON DirectoryMobileDevicesListProjection where
+    parseJSON = parseJSONText "DirectoryMobileDevicesListProjection"
 
-instance ToJSON DirectoryMobiledevicesListProjection where
+instance ToJSON DirectoryMobileDevicesListProjection where
     toJSON = toJSONText
 
 -- | What subset of fields to fetch for this user.
@@ -727,63 +727,63 @@ instance ToJSON DirectoryUsersGetProjection where
     toJSON = toJSONText
 
 -- | Restrict information returned to a set of selected fields.
-data DirectoryChromeosdevicesGetProjection
-    = DCGPBasic
+data DirectoryChromeosDevicesGetProjection
+    = DCDGPBasic
       -- ^ @BASIC@
       -- Includes only the basic metadata fields (e.g., deviceId, serialNumber,
       -- status, and user)
-    | DCGPFull
+    | DCDGPFull
       -- ^ @FULL@
       -- Includes all metadata fields
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable DirectoryChromeosdevicesGetProjection
+instance Hashable DirectoryChromeosDevicesGetProjection
 
-instance FromText DirectoryChromeosdevicesGetProjection where
+instance FromText DirectoryChromeosDevicesGetProjection where
     fromText = \case
-        "BASIC" -> Just DCGPBasic
-        "FULL" -> Just DCGPFull
+        "BASIC" -> Just DCDGPBasic
+        "FULL" -> Just DCDGPFull
         _ -> Nothing
 
-instance ToText DirectoryChromeosdevicesGetProjection where
+instance ToText DirectoryChromeosDevicesGetProjection where
     toText = \case
-        DCGPBasic -> "BASIC"
-        DCGPFull -> "FULL"
+        DCDGPBasic -> "BASIC"
+        DCDGPFull -> "FULL"
 
-instance FromJSON DirectoryChromeosdevicesGetProjection where
-    parseJSON = parseJSONText "DirectoryChromeosdevicesGetProjection"
+instance FromJSON DirectoryChromeosDevicesGetProjection where
+    parseJSON = parseJSONText "DirectoryChromeosDevicesGetProjection"
 
-instance ToJSON DirectoryChromeosdevicesGetProjection where
+instance ToJSON DirectoryChromeosDevicesGetProjection where
     toJSON = toJSONText
 
 -- | Restrict information returned to a set of selected fields.
-data DirectoryChromeosdevicesPatchProjection
-    = DCPPBasic
+data DirectoryChromeosDevicesPatchProjection
+    = DCDPPBasic
       -- ^ @BASIC@
       -- Includes only the basic metadata fields (e.g., deviceId, serialNumber,
       -- status, and user)
-    | DCPPFull
+    | DCDPPFull
       -- ^ @FULL@
       -- Includes all metadata fields
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable DirectoryChromeosdevicesPatchProjection
+instance Hashable DirectoryChromeosDevicesPatchProjection
 
-instance FromText DirectoryChromeosdevicesPatchProjection where
+instance FromText DirectoryChromeosDevicesPatchProjection where
     fromText = \case
-        "BASIC" -> Just DCPPBasic
-        "FULL" -> Just DCPPFull
+        "BASIC" -> Just DCDPPBasic
+        "FULL" -> Just DCDPPFull
         _ -> Nothing
 
-instance ToText DirectoryChromeosdevicesPatchProjection where
+instance ToText DirectoryChromeosDevicesPatchProjection where
     toText = \case
-        DCPPBasic -> "BASIC"
-        DCPPFull -> "FULL"
+        DCDPPBasic -> "BASIC"
+        DCDPPFull -> "FULL"
 
-instance FromJSON DirectoryChromeosdevicesPatchProjection where
-    parseJSON = parseJSONText "DirectoryChromeosdevicesPatchProjection"
+instance FromJSON DirectoryChromeosDevicesPatchProjection where
+    parseJSON = parseJSONText "DirectoryChromeosDevicesPatchProjection"
 
-instance ToJSON DirectoryChromeosdevicesPatchProjection where
+instance ToJSON DirectoryChromeosDevicesPatchProjection where
     toJSON = toJSONText
 
 -- | Event on which subscription is intended (if subscribing)
@@ -832,54 +832,30 @@ instance ToJSON DirectoryUsersWatchEvent where
 
 -- | Whether to return results in ascending or descending order. Only of use
 -- when orderBy is also used
-data DirectoryChromeosdevicesListSortOrder
-    = DCLSOAscending
+data DirectoryChromeosDevicesListSortOrder
+    = DCDLSOAscending
       -- ^ @ASCENDING@
       -- Ascending order.
-    | DCLSODescending
+    | DCDLSODescending
       -- ^ @DESCENDING@
       -- Descending order.
       deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
 
-instance Hashable DirectoryChromeosdevicesListSortOrder
+instance Hashable DirectoryChromeosDevicesListSortOrder
 
-instance FromText DirectoryChromeosdevicesListSortOrder where
+instance FromText DirectoryChromeosDevicesListSortOrder where
     fromText = \case
-        "ASCENDING" -> Just DCLSOAscending
-        "DESCENDING" -> Just DCLSODescending
+        "ASCENDING" -> Just DCDLSOAscending
+        "DESCENDING" -> Just DCDLSODescending
         _ -> Nothing
 
-instance ToText DirectoryChromeosdevicesListSortOrder where
+instance ToText DirectoryChromeosDevicesListSortOrder where
     toText = \case
-        DCLSOAscending -> "ASCENDING"
-        DCLSODescending -> "DESCENDING"
+        DCDLSOAscending -> "ASCENDING"
+        DCDLSODescending -> "DESCENDING"
 
-instance FromJSON DirectoryChromeosdevicesListSortOrder where
-    parseJSON = parseJSONText "DirectoryChromeosdevicesListSortOrder"
+instance FromJSON DirectoryChromeosDevicesListSortOrder where
+    parseJSON = parseJSONText "DirectoryChromeosDevicesListSortOrder"
 
-instance ToJSON DirectoryChromeosdevicesListSortOrder where
-    toJSON = toJSONText
-
--- | Data format for the response.
-data Alt
-    = JSON
-      -- ^ @json@
-      -- Responses with Content-Type of application\/json
-      deriving (Eq,Ord,Enum,Read,Show,Data,Typeable,Generic)
-
-instance Hashable Alt
-
-instance FromText Alt where
-    fromText = \case
-        "json" -> Just JSON
-        _ -> Nothing
-
-instance ToText Alt where
-    toText = \case
-        JSON -> "json"
-
-instance FromJSON Alt where
-    parseJSON = parseJSONText "Alt"
-
-instance ToJSON Alt where
+instance ToJSON DirectoryChromeosDevicesListSortOrder where
     toJSON = toJSONText

@@ -33,13 +33,13 @@ module Network.Google.Resource.AdExchangeBuyer.Budget.Update
     -- * Request Lenses
     , buQuotaUser
     , buPrettyPrint
-    , buUserIp
+    , buBudget
+    , buUserIP
     , buAccountId
     , buKey
-    , buOauthToken
+    , buOAuthToken
     , buBillingId
     , buFields
-    , buAlt
     ) where
 
 import           Network.Google.AdExchangeBuyer.Types
@@ -54,10 +54,11 @@ type BudgetUpdateResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Put '[JSON] Budget
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Budget :> Put '[JSON] Budget
 
 -- | Updates the budget amount for the budget of the adgroup specified by the
 -- accountId and billingId, with the budget amount in the request.
@@ -66,13 +67,13 @@ type BudgetUpdateResource =
 data BudgetUpdate' = BudgetUpdate'
     { _buQuotaUser   :: !(Maybe Text)
     , _buPrettyPrint :: !Bool
-    , _buUserIp      :: !(Maybe Text)
+    , _buBudget      :: !Budget
+    , _buUserIP      :: !(Maybe Text)
     , _buAccountId   :: !Int64
-    , _buKey         :: !(Maybe Text)
-    , _buOauthToken  :: !(Maybe Text)
+    , _buKey         :: !(Maybe Key)
+    , _buOAuthToken  :: !(Maybe OAuthToken)
     , _buBillingId   :: !Int64
     , _buFields      :: !(Maybe Text)
-    , _buAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'BudgetUpdate'' with the minimum fields required to make a request.
@@ -83,34 +84,35 @@ data BudgetUpdate' = BudgetUpdate'
 --
 -- * 'buPrettyPrint'
 --
--- * 'buUserIp'
+-- * 'buBudget'
+--
+-- * 'buUserIP'
 --
 -- * 'buAccountId'
 --
 -- * 'buKey'
 --
--- * 'buOauthToken'
+-- * 'buOAuthToken'
 --
 -- * 'buBillingId'
 --
 -- * 'buFields'
---
--- * 'buAlt'
 budgetUpdate'
-    :: Int64 -- ^ 'accountId'
+    :: Budget -- ^ 'Budget'
+    -> Int64 -- ^ 'accountId'
     -> Int64 -- ^ 'billingId'
     -> BudgetUpdate'
-budgetUpdate' pBuAccountId_ pBuBillingId_ =
+budgetUpdate' pBuBudget_ pBuAccountId_ pBuBillingId_ =
     BudgetUpdate'
     { _buQuotaUser = Nothing
     , _buPrettyPrint = True
-    , _buUserIp = Nothing
+    , _buBudget = pBuBudget_
+    , _buUserIP = Nothing
     , _buAccountId = pBuAccountId_
     , _buKey = Nothing
-    , _buOauthToken = Nothing
+    , _buOAuthToken = Nothing
     , _buBillingId = pBuBillingId_
     , _buFields = Nothing
-    , _buAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -126,10 +128,14 @@ buPrettyPrint
   = lens _buPrettyPrint
       (\ s a -> s{_buPrettyPrint = a})
 
+-- | Multipart request metadata.
+buBudget :: Lens' BudgetUpdate' Budget
+buBudget = lens _buBudget (\ s a -> s{_buBudget = a})
+
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-buUserIp :: Lens' BudgetUpdate' (Maybe Text)
-buUserIp = lens _buUserIp (\ s a -> s{_buUserIp = a})
+buUserIP :: Lens' BudgetUpdate' (Maybe Text)
+buUserIP = lens _buUserIP (\ s a -> s{_buUserIP = a})
 
 -- | The account id associated with the budget being updated.
 buAccountId :: Lens' BudgetUpdate' Int64
@@ -139,13 +145,13 @@ buAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-buKey :: Lens' BudgetUpdate' (Maybe Text)
+buKey :: Lens' BudgetUpdate' (Maybe Key)
 buKey = lens _buKey (\ s a -> s{_buKey = a})
 
 -- | OAuth 2.0 token for the current user.
-buOauthToken :: Lens' BudgetUpdate' (Maybe Text)
-buOauthToken
-  = lens _buOauthToken (\ s a -> s{_buOauthToken = a})
+buOAuthToken :: Lens' BudgetUpdate' (Maybe OAuthToken)
+buOAuthToken
+  = lens _buOAuthToken (\ s a -> s{_buOAuthToken = a})
 
 -- | The billing id associated with the budget being updated.
 buBillingId :: Lens' BudgetUpdate' Int64
@@ -156,21 +162,22 @@ buBillingId
 buFields :: Lens' BudgetUpdate' (Maybe Text)
 buFields = lens _buFields (\ s a -> s{_buFields = a})
 
--- | Data format for the response.
-buAlt :: Lens' BudgetUpdate' Alt
-buAlt = lens _buAlt (\ s a -> s{_buAlt = a})
+instance GoogleAuth BudgetUpdate' where
+        authKey = buKey . _Just
+        authToken = buOAuthToken . _Just
 
 instance GoogleRequest BudgetUpdate' where
         type Rs BudgetUpdate' = Budget
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u BudgetUpdate'{..}
-          = go _buQuotaUser (Just _buPrettyPrint) _buUserIp
+          = go _buQuotaUser (Just _buPrettyPrint) _buUserIP
               _buAccountId
               _buKey
-              _buOauthToken
+              _buOAuthToken
               _buBillingId
               _buFields
-              (Just _buAlt)
+              (Just AltJSON)
+              _buBudget
           where go
                   = clientWithRoute
                       (Proxy :: Proxy BudgetUpdateResource)

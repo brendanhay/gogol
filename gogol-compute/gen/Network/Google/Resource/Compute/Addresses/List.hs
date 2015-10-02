@@ -34,15 +34,14 @@ module Network.Google.Resource.Compute.Addresses.List
     , alQuotaUser
     , alPrettyPrint
     , alProject
-    , alUserIp
+    , alUserIP
     , alKey
     , alFilter
     , alRegion
     , alPageToken
-    , alOauthToken
+    , alOAuthToken
     , alMaxResults
     , alFields
-    , alAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -58,13 +57,14 @@ type AddressesListResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "filter" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "maxResults" Word32 :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :> Get '[JSON] AddressList
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] AddressList
 
 -- | Retrieves the list of address resources contained within the specified
 -- region.
@@ -74,15 +74,14 @@ data AddressesList' = AddressesList'
     { _alQuotaUser   :: !(Maybe Text)
     , _alPrettyPrint :: !Bool
     , _alProject     :: !Text
-    , _alUserIp      :: !(Maybe Text)
-    , _alKey         :: !(Maybe Text)
+    , _alUserIP      :: !(Maybe Text)
+    , _alKey         :: !(Maybe Key)
     , _alFilter      :: !(Maybe Text)
     , _alRegion      :: !Text
     , _alPageToken   :: !(Maybe Text)
-    , _alOauthToken  :: !(Maybe Text)
+    , _alOAuthToken  :: !(Maybe OAuthToken)
     , _alMaxResults  :: !Word32
     , _alFields      :: !(Maybe Text)
-    , _alAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AddressesList'' with the minimum fields required to make a request.
@@ -95,7 +94,7 @@ data AddressesList' = AddressesList'
 --
 -- * 'alProject'
 --
--- * 'alUserIp'
+-- * 'alUserIP'
 --
 -- * 'alKey'
 --
@@ -105,13 +104,11 @@ data AddressesList' = AddressesList'
 --
 -- * 'alPageToken'
 --
--- * 'alOauthToken'
+-- * 'alOAuthToken'
 --
 -- * 'alMaxResults'
 --
 -- * 'alFields'
---
--- * 'alAlt'
 addressesList'
     :: Text -- ^ 'project'
     -> Text -- ^ 'region'
@@ -121,15 +118,14 @@ addressesList' pAlProject_ pAlRegion_ =
     { _alQuotaUser = Nothing
     , _alPrettyPrint = True
     , _alProject = pAlProject_
-    , _alUserIp = Nothing
+    , _alUserIP = Nothing
     , _alKey = Nothing
     , _alFilter = Nothing
     , _alRegion = pAlRegion_
     , _alPageToken = Nothing
-    , _alOauthToken = Nothing
+    , _alOAuthToken = Nothing
     , _alMaxResults = 500
     , _alFields = Nothing
-    , _alAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,13 +148,13 @@ alProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-alUserIp :: Lens' AddressesList' (Maybe Text)
-alUserIp = lens _alUserIp (\ s a -> s{_alUserIp = a})
+alUserIP :: Lens' AddressesList' (Maybe Text)
+alUserIP = lens _alUserIP (\ s a -> s{_alUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-alKey :: Lens' AddressesList' (Maybe Text)
+alKey :: Lens' AddressesList' (Maybe Key)
 alKey = lens _alKey (\ s a -> s{_alKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
@@ -187,9 +183,9 @@ alPageToken
   = lens _alPageToken (\ s a -> s{_alPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-alOauthToken :: Lens' AddressesList' (Maybe Text)
-alOauthToken
-  = lens _alOauthToken (\ s a -> s{_alOauthToken = a})
+alOAuthToken :: Lens' AddressesList' (Maybe OAuthToken)
+alOAuthToken
+  = lens _alOAuthToken (\ s a -> s{_alOAuthToken = a})
 
 -- | Maximum count of results to be returned.
 alMaxResults :: Lens' AddressesList' Word32
@@ -200,24 +196,24 @@ alMaxResults
 alFields :: Lens' AddressesList' (Maybe Text)
 alFields = lens _alFields (\ s a -> s{_alFields = a})
 
--- | Data format for the response.
-alAlt :: Lens' AddressesList' Alt
-alAlt = lens _alAlt (\ s a -> s{_alAlt = a})
+instance GoogleAuth AddressesList' where
+        authKey = alKey . _Just
+        authToken = alOAuthToken . _Just
 
 instance GoogleRequest AddressesList' where
         type Rs AddressesList' = AddressList
         request = requestWithRoute defReq computeURL
         requestWithRoute r u AddressesList'{..}
           = go _alQuotaUser (Just _alPrettyPrint) _alProject
-              _alUserIp
+              _alUserIP
               _alKey
               _alFilter
               _alRegion
               _alPageToken
-              _alOauthToken
+              _alOAuthToken
               (Just _alMaxResults)
               _alFields
-              (Just _alAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AddressesListResource)

@@ -33,12 +33,11 @@ module Network.Google.Resource.FusionTables.Template.Delete
     , tddQuotaUser
     , tddPrettyPrint
     , tddTemplateId
-    , tddUserIp
+    , tddUserIP
     , tddKey
-    , tddOauthToken
+    , tddOAuthToken
     , tddTableId
     , tddFields
-    , tddAlt
     ) where
 
 import           Network.Google.FusionTables.Types
@@ -54,10 +53,10 @@ type TemplateDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Delete '[JSON] ()
+                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a template
 --
@@ -66,12 +65,11 @@ data TemplateDelete' = TemplateDelete'
     { _tddQuotaUser   :: !(Maybe Text)
     , _tddPrettyPrint :: !Bool
     , _tddTemplateId  :: !Int32
-    , _tddUserIp      :: !(Maybe Text)
-    , _tddKey         :: !(Maybe Text)
-    , _tddOauthToken  :: !(Maybe Text)
+    , _tddUserIP      :: !(Maybe Text)
+    , _tddKey         :: !(Maybe Key)
+    , _tddOAuthToken  :: !(Maybe OAuthToken)
     , _tddTableId     :: !Text
     , _tddFields      :: !(Maybe Text)
-    , _tddAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TemplateDelete'' with the minimum fields required to make a request.
@@ -84,17 +82,15 @@ data TemplateDelete' = TemplateDelete'
 --
 -- * 'tddTemplateId'
 --
--- * 'tddUserIp'
+-- * 'tddUserIP'
 --
 -- * 'tddKey'
 --
--- * 'tddOauthToken'
+-- * 'tddOAuthToken'
 --
 -- * 'tddTableId'
 --
 -- * 'tddFields'
---
--- * 'tddAlt'
 templateDelete'
     :: Int32 -- ^ 'templateId'
     -> Text -- ^ 'tableId'
@@ -104,12 +100,11 @@ templateDelete' pTddTemplateId_ pTddTableId_ =
     { _tddQuotaUser = Nothing
     , _tddPrettyPrint = True
     , _tddTemplateId = pTddTemplateId_
-    , _tddUserIp = Nothing
+    , _tddUserIP = Nothing
     , _tddKey = Nothing
-    , _tddOauthToken = Nothing
+    , _tddOAuthToken = Nothing
     , _tddTableId = pTddTableId_
     , _tddFields = Nothing
-    , _tddAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -133,21 +128,21 @@ tddTemplateId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tddUserIp :: Lens' TemplateDelete' (Maybe Text)
-tddUserIp
-  = lens _tddUserIp (\ s a -> s{_tddUserIp = a})
+tddUserIP :: Lens' TemplateDelete' (Maybe Text)
+tddUserIP
+  = lens _tddUserIP (\ s a -> s{_tddUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tddKey :: Lens' TemplateDelete' (Maybe Text)
+tddKey :: Lens' TemplateDelete' (Maybe Key)
 tddKey = lens _tddKey (\ s a -> s{_tddKey = a})
 
 -- | OAuth 2.0 token for the current user.
-tddOauthToken :: Lens' TemplateDelete' (Maybe Text)
-tddOauthToken
-  = lens _tddOauthToken
-      (\ s a -> s{_tddOauthToken = a})
+tddOAuthToken :: Lens' TemplateDelete' (Maybe OAuthToken)
+tddOAuthToken
+  = lens _tddOAuthToken
+      (\ s a -> s{_tddOAuthToken = a})
 
 -- | Table from which the template is being deleted
 tddTableId :: Lens' TemplateDelete' Text
@@ -159,9 +154,9 @@ tddFields :: Lens' TemplateDelete' (Maybe Text)
 tddFields
   = lens _tddFields (\ s a -> s{_tddFields = a})
 
--- | Data format for the response.
-tddAlt :: Lens' TemplateDelete' Alt
-tddAlt = lens _tddAlt (\ s a -> s{_tddAlt = a})
+instance GoogleAuth TemplateDelete' where
+        authKey = tddKey . _Just
+        authToken = tddOAuthToken . _Just
 
 instance GoogleRequest TemplateDelete' where
         type Rs TemplateDelete' = ()
@@ -169,12 +164,12 @@ instance GoogleRequest TemplateDelete' where
         requestWithRoute r u TemplateDelete'{..}
           = go _tddQuotaUser (Just _tddPrettyPrint)
               _tddTemplateId
-              _tddUserIp
+              _tddUserIP
               _tddKey
-              _tddOauthToken
+              _tddOAuthToken
               _tddTableId
               _tddFields
-              (Just _tddAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy TemplateDeleteResource)

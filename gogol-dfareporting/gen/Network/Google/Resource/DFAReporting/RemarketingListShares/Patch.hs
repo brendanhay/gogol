@@ -33,13 +33,13 @@ module Network.Google.Resource.DFAReporting.RemarketingListShares.Patch
     -- * Request Lenses
     , rlspQuotaUser
     , rlspPrettyPrint
-    , rlspUserIp
+    , rlspUserIP
     , rlspProfileId
+    , rlspRemarketingListShare
     , rlspRemarketingListId
     , rlspKey
-    , rlspOauthToken
+    , rlspOAuthToken
     , rlspFields
-    , rlspAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -55,26 +55,27 @@ type RemarketingListSharesPatchResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "remarketingListId" Int64 :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :>
-                           Patch '[JSON] RemarketingListShare
+                         QueryParam "alt" AltJSON :>
+                           ReqBody '[JSON] RemarketingListShare :>
+                             Patch '[JSON] RemarketingListShare
 
 -- | Updates an existing remarketing list share. This method supports patch
 -- semantics.
 --
 -- /See:/ 'remarketingListSharesPatch'' smart constructor.
 data RemarketingListSharesPatch' = RemarketingListSharesPatch'
-    { _rlspQuotaUser         :: !(Maybe Text)
-    , _rlspPrettyPrint       :: !Bool
-    , _rlspUserIp            :: !(Maybe Text)
-    , _rlspProfileId         :: !Int64
-    , _rlspRemarketingListId :: !Int64
-    , _rlspKey               :: !(Maybe Text)
-    , _rlspOauthToken        :: !(Maybe Text)
-    , _rlspFields            :: !(Maybe Text)
-    , _rlspAlt               :: !Alt
+    { _rlspQuotaUser            :: !(Maybe Text)
+    , _rlspPrettyPrint          :: !Bool
+    , _rlspUserIP               :: !(Maybe Text)
+    , _rlspProfileId            :: !Int64
+    , _rlspRemarketingListShare :: !RemarketingListShare
+    , _rlspRemarketingListId    :: !Int64
+    , _rlspKey                  :: !(Maybe Key)
+    , _rlspOAuthToken           :: !(Maybe OAuthToken)
+    , _rlspFields               :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RemarketingListSharesPatch'' with the minimum fields required to make a request.
@@ -85,34 +86,35 @@ data RemarketingListSharesPatch' = RemarketingListSharesPatch'
 --
 -- * 'rlspPrettyPrint'
 --
--- * 'rlspUserIp'
+-- * 'rlspUserIP'
 --
 -- * 'rlspProfileId'
+--
+-- * 'rlspRemarketingListShare'
 --
 -- * 'rlspRemarketingListId'
 --
 -- * 'rlspKey'
 --
--- * 'rlspOauthToken'
+-- * 'rlspOAuthToken'
 --
 -- * 'rlspFields'
---
--- * 'rlspAlt'
 remarketingListSharesPatch'
     :: Int64 -- ^ 'profileId'
+    -> RemarketingListShare -- ^ 'RemarketingListShare'
     -> Int64 -- ^ 'remarketingListId'
     -> RemarketingListSharesPatch'
-remarketingListSharesPatch' pRlspProfileId_ pRlspRemarketingListId_ =
+remarketingListSharesPatch' pRlspProfileId_ pRlspRemarketingListShare_ pRlspRemarketingListId_ =
     RemarketingListSharesPatch'
     { _rlspQuotaUser = Nothing
     , _rlspPrettyPrint = True
-    , _rlspUserIp = Nothing
+    , _rlspUserIP = Nothing
     , _rlspProfileId = pRlspProfileId_
+    , _rlspRemarketingListShare = pRlspRemarketingListShare_
     , _rlspRemarketingListId = pRlspRemarketingListId_
     , _rlspKey = Nothing
-    , _rlspOauthToken = Nothing
+    , _rlspOAuthToken = Nothing
     , _rlspFields = Nothing
-    , _rlspAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -131,15 +133,21 @@ rlspPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rlspUserIp :: Lens' RemarketingListSharesPatch' (Maybe Text)
-rlspUserIp
-  = lens _rlspUserIp (\ s a -> s{_rlspUserIp = a})
+rlspUserIP :: Lens' RemarketingListSharesPatch' (Maybe Text)
+rlspUserIP
+  = lens _rlspUserIP (\ s a -> s{_rlspUserIP = a})
 
 -- | User profile ID associated with this request.
 rlspProfileId :: Lens' RemarketingListSharesPatch' Int64
 rlspProfileId
   = lens _rlspProfileId
       (\ s a -> s{_rlspProfileId = a})
+
+-- | Multipart request metadata.
+rlspRemarketingListShare :: Lens' RemarketingListSharesPatch' RemarketingListShare
+rlspRemarketingListShare
+  = lens _rlspRemarketingListShare
+      (\ s a -> s{_rlspRemarketingListShare = a})
 
 -- | Remarketing list ID.
 rlspRemarketingListId :: Lens' RemarketingListSharesPatch' Int64
@@ -150,23 +158,23 @@ rlspRemarketingListId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rlspKey :: Lens' RemarketingListSharesPatch' (Maybe Text)
+rlspKey :: Lens' RemarketingListSharesPatch' (Maybe Key)
 rlspKey = lens _rlspKey (\ s a -> s{_rlspKey = a})
 
 -- | OAuth 2.0 token for the current user.
-rlspOauthToken :: Lens' RemarketingListSharesPatch' (Maybe Text)
-rlspOauthToken
-  = lens _rlspOauthToken
-      (\ s a -> s{_rlspOauthToken = a})
+rlspOAuthToken :: Lens' RemarketingListSharesPatch' (Maybe OAuthToken)
+rlspOAuthToken
+  = lens _rlspOAuthToken
+      (\ s a -> s{_rlspOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 rlspFields :: Lens' RemarketingListSharesPatch' (Maybe Text)
 rlspFields
   = lens _rlspFields (\ s a -> s{_rlspFields = a})
 
--- | Data format for the response.
-rlspAlt :: Lens' RemarketingListSharesPatch' Alt
-rlspAlt = lens _rlspAlt (\ s a -> s{_rlspAlt = a})
+instance GoogleAuth RemarketingListSharesPatch' where
+        authKey = rlspKey . _Just
+        authToken = rlspOAuthToken . _Just
 
 instance GoogleRequest RemarketingListSharesPatch'
          where
@@ -175,13 +183,14 @@ instance GoogleRequest RemarketingListSharesPatch'
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u RemarketingListSharesPatch'{..}
           = go _rlspQuotaUser (Just _rlspPrettyPrint)
-              _rlspUserIp
+              _rlspUserIP
               _rlspProfileId
               (Just _rlspRemarketingListId)
               _rlspKey
-              _rlspOauthToken
+              _rlspOAuthToken
               _rlspFields
-              (Just _rlspAlt)
+              (Just AltJSON)
+              _rlspRemarketingListShare
           where go
                   = clientWithRoute
                       (Proxy :: Proxy RemarketingListSharesPatchResource)

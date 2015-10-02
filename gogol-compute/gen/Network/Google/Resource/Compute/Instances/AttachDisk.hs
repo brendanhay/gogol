@@ -33,12 +33,12 @@ module Network.Google.Resource.Compute.Instances.AttachDisk
     , iadQuotaUser
     , iadPrettyPrint
     , iadProject
-    , iadUserIp
+    , iadUserIP
     , iadZone
     , iadKey
-    , iadOauthToken
+    , iadAttachedDisk
+    , iadOAuthToken
     , iadFields
-    , iadAlt
     , iadInstance
     ) where
 
@@ -57,25 +57,27 @@ type InstancesAttachDiskResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Post '[JSON] Operation
+                             QueryParam "alt" AltJSON :>
+                               ReqBody '[JSON] AttachedDisk :>
+                                 Post '[JSON] Operation
 
 -- | Attaches a Disk resource to an instance.
 --
 -- /See:/ 'instancesAttachDisk'' smart constructor.
 data InstancesAttachDisk' = InstancesAttachDisk'
-    { _iadQuotaUser   :: !(Maybe Text)
-    , _iadPrettyPrint :: !Bool
-    , _iadProject     :: !Text
-    , _iadUserIp      :: !(Maybe Text)
-    , _iadZone        :: !Text
-    , _iadKey         :: !(Maybe Text)
-    , _iadOauthToken  :: !(Maybe Text)
-    , _iadFields      :: !(Maybe Text)
-    , _iadAlt         :: !Alt
-    , _iadInstance    :: !Text
+    { _iadQuotaUser    :: !(Maybe Text)
+    , _iadPrettyPrint  :: !Bool
+    , _iadProject      :: !Text
+    , _iadUserIP       :: !(Maybe Text)
+    , _iadZone         :: !Text
+    , _iadKey          :: !(Maybe Key)
+    , _iadAttachedDisk :: !AttachedDisk
+    , _iadOAuthToken   :: !(Maybe OAuthToken)
+    , _iadFields       :: !(Maybe Text)
+    , _iadInstance     :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstancesAttachDisk'' with the minimum fields required to make a request.
@@ -88,35 +90,36 @@ data InstancesAttachDisk' = InstancesAttachDisk'
 --
 -- * 'iadProject'
 --
--- * 'iadUserIp'
+-- * 'iadUserIP'
 --
 -- * 'iadZone'
 --
 -- * 'iadKey'
 --
--- * 'iadOauthToken'
+-- * 'iadAttachedDisk'
+--
+-- * 'iadOAuthToken'
 --
 -- * 'iadFields'
---
--- * 'iadAlt'
 --
 -- * 'iadInstance'
 instancesAttachDisk'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
+    -> AttachedDisk -- ^ 'AttachedDisk'
     -> Text -- ^ 'instance'
     -> InstancesAttachDisk'
-instancesAttachDisk' pIadProject_ pIadZone_ pIadInstance_ =
+instancesAttachDisk' pIadProject_ pIadZone_ pIadAttachedDisk_ pIadInstance_ =
     InstancesAttachDisk'
     { _iadQuotaUser = Nothing
     , _iadPrettyPrint = True
     , _iadProject = pIadProject_
-    , _iadUserIp = Nothing
+    , _iadUserIP = Nothing
     , _iadZone = pIadZone_
     , _iadKey = Nothing
-    , _iadOauthToken = Nothing
+    , _iadAttachedDisk = pIadAttachedDisk_
+    , _iadOAuthToken = Nothing
     , _iadFields = Nothing
-    , _iadAlt = JSON
     , _iadInstance = pIadInstance_
     }
 
@@ -140,9 +143,9 @@ iadProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-iadUserIp :: Lens' InstancesAttachDisk' (Maybe Text)
-iadUserIp
-  = lens _iadUserIp (\ s a -> s{_iadUserIp = a})
+iadUserIP :: Lens' InstancesAttachDisk' (Maybe Text)
+iadUserIP
+  = lens _iadUserIP (\ s a -> s{_iadUserIP = a})
 
 -- | The name of the zone for this request.
 iadZone :: Lens' InstancesAttachDisk' Text
@@ -151,41 +154,48 @@ iadZone = lens _iadZone (\ s a -> s{_iadZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-iadKey :: Lens' InstancesAttachDisk' (Maybe Text)
+iadKey :: Lens' InstancesAttachDisk' (Maybe Key)
 iadKey = lens _iadKey (\ s a -> s{_iadKey = a})
 
+-- | Multipart request metadata.
+iadAttachedDisk :: Lens' InstancesAttachDisk' AttachedDisk
+iadAttachedDisk
+  = lens _iadAttachedDisk
+      (\ s a -> s{_iadAttachedDisk = a})
+
 -- | OAuth 2.0 token for the current user.
-iadOauthToken :: Lens' InstancesAttachDisk' (Maybe Text)
-iadOauthToken
-  = lens _iadOauthToken
-      (\ s a -> s{_iadOauthToken = a})
+iadOAuthToken :: Lens' InstancesAttachDisk' (Maybe OAuthToken)
+iadOAuthToken
+  = lens _iadOAuthToken
+      (\ s a -> s{_iadOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 iadFields :: Lens' InstancesAttachDisk' (Maybe Text)
 iadFields
   = lens _iadFields (\ s a -> s{_iadFields = a})
 
--- | Data format for the response.
-iadAlt :: Lens' InstancesAttachDisk' Alt
-iadAlt = lens _iadAlt (\ s a -> s{_iadAlt = a})
-
 -- | Instance name.
 iadInstance :: Lens' InstancesAttachDisk' Text
 iadInstance
   = lens _iadInstance (\ s a -> s{_iadInstance = a})
+
+instance GoogleAuth InstancesAttachDisk' where
+        authKey = iadKey . _Just
+        authToken = iadOAuthToken . _Just
 
 instance GoogleRequest InstancesAttachDisk' where
         type Rs InstancesAttachDisk' = Operation
         request = requestWithRoute defReq computeURL
         requestWithRoute r u InstancesAttachDisk'{..}
           = go _iadQuotaUser (Just _iadPrettyPrint) _iadProject
-              _iadUserIp
+              _iadUserIP
               _iadZone
               _iadKey
-              _iadOauthToken
+              _iadOAuthToken
               _iadFields
-              (Just _iadAlt)
               _iadInstance
+              (Just AltJSON)
+              _iadAttachedDisk
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InstancesAttachDiskResource)

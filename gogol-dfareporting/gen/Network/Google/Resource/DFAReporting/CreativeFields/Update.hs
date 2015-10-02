@@ -32,12 +32,12 @@ module Network.Google.Resource.DFAReporting.CreativeFields.Update
     -- * Request Lenses
     , cfuQuotaUser
     , cfuPrettyPrint
-    , cfuUserIp
+    , cfuUserIP
     , cfuProfileId
     , cfuKey
-    , cfuOauthToken
+    , cfuOAuthToken
+    , cfuCreativeField
     , cfuFields
-    , cfuAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,23 +52,25 @@ type CreativeFieldsUpdateResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Put '[JSON] CreativeField
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] CreativeField :>
+                           Put '[JSON] CreativeField
 
 -- | Updates an existing creative field.
 --
 -- /See:/ 'creativeFieldsUpdate'' smart constructor.
 data CreativeFieldsUpdate' = CreativeFieldsUpdate'
-    { _cfuQuotaUser   :: !(Maybe Text)
-    , _cfuPrettyPrint :: !Bool
-    , _cfuUserIp      :: !(Maybe Text)
-    , _cfuProfileId   :: !Int64
-    , _cfuKey         :: !(Maybe Text)
-    , _cfuOauthToken  :: !(Maybe Text)
-    , _cfuFields      :: !(Maybe Text)
-    , _cfuAlt         :: !Alt
+    { _cfuQuotaUser     :: !(Maybe Text)
+    , _cfuPrettyPrint   :: !Bool
+    , _cfuUserIP        :: !(Maybe Text)
+    , _cfuProfileId     :: !Int64
+    , _cfuKey           :: !(Maybe Key)
+    , _cfuOAuthToken    :: !(Maybe OAuthToken)
+    , _cfuCreativeField :: !CreativeField
+    , _cfuFields        :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativeFieldsUpdate'' with the minimum fields required to make a request.
@@ -79,30 +81,31 @@ data CreativeFieldsUpdate' = CreativeFieldsUpdate'
 --
 -- * 'cfuPrettyPrint'
 --
--- * 'cfuUserIp'
+-- * 'cfuUserIP'
 --
 -- * 'cfuProfileId'
 --
 -- * 'cfuKey'
 --
--- * 'cfuOauthToken'
+-- * 'cfuOAuthToken'
+--
+-- * 'cfuCreativeField'
 --
 -- * 'cfuFields'
---
--- * 'cfuAlt'
 creativeFieldsUpdate'
     :: Int64 -- ^ 'profileId'
+    -> CreativeField -- ^ 'CreativeField'
     -> CreativeFieldsUpdate'
-creativeFieldsUpdate' pCfuProfileId_ =
+creativeFieldsUpdate' pCfuProfileId_ pCfuCreativeField_ =
     CreativeFieldsUpdate'
     { _cfuQuotaUser = Nothing
     , _cfuPrettyPrint = True
-    , _cfuUserIp = Nothing
+    , _cfuUserIP = Nothing
     , _cfuProfileId = pCfuProfileId_
     , _cfuKey = Nothing
-    , _cfuOauthToken = Nothing
+    , _cfuOAuthToken = Nothing
+    , _cfuCreativeField = pCfuCreativeField_
     , _cfuFields = Nothing
-    , _cfuAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,9 +123,9 @@ cfuPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-cfuUserIp :: Lens' CreativeFieldsUpdate' (Maybe Text)
-cfuUserIp
-  = lens _cfuUserIp (\ s a -> s{_cfuUserIp = a})
+cfuUserIP :: Lens' CreativeFieldsUpdate' (Maybe Text)
+cfuUserIP
+  = lens _cfuUserIP (\ s a -> s{_cfuUserIP = a})
 
 -- | User profile ID associated with this request.
 cfuProfileId :: Lens' CreativeFieldsUpdate' Int64
@@ -132,34 +135,41 @@ cfuProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-cfuKey :: Lens' CreativeFieldsUpdate' (Maybe Text)
+cfuKey :: Lens' CreativeFieldsUpdate' (Maybe Key)
 cfuKey = lens _cfuKey (\ s a -> s{_cfuKey = a})
 
 -- | OAuth 2.0 token for the current user.
-cfuOauthToken :: Lens' CreativeFieldsUpdate' (Maybe Text)
-cfuOauthToken
-  = lens _cfuOauthToken
-      (\ s a -> s{_cfuOauthToken = a})
+cfuOAuthToken :: Lens' CreativeFieldsUpdate' (Maybe OAuthToken)
+cfuOAuthToken
+  = lens _cfuOAuthToken
+      (\ s a -> s{_cfuOAuthToken = a})
+
+-- | Multipart request metadata.
+cfuCreativeField :: Lens' CreativeFieldsUpdate' CreativeField
+cfuCreativeField
+  = lens _cfuCreativeField
+      (\ s a -> s{_cfuCreativeField = a})
 
 -- | Selector specifying which fields to include in a partial response.
 cfuFields :: Lens' CreativeFieldsUpdate' (Maybe Text)
 cfuFields
   = lens _cfuFields (\ s a -> s{_cfuFields = a})
 
--- | Data format for the response.
-cfuAlt :: Lens' CreativeFieldsUpdate' Alt
-cfuAlt = lens _cfuAlt (\ s a -> s{_cfuAlt = a})
+instance GoogleAuth CreativeFieldsUpdate' where
+        authKey = cfuKey . _Just
+        authToken = cfuOAuthToken . _Just
 
 instance GoogleRequest CreativeFieldsUpdate' where
         type Rs CreativeFieldsUpdate' = CreativeField
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u CreativeFieldsUpdate'{..}
-          = go _cfuQuotaUser (Just _cfuPrettyPrint) _cfuUserIp
+          = go _cfuQuotaUser (Just _cfuPrettyPrint) _cfuUserIP
               _cfuProfileId
               _cfuKey
-              _cfuOauthToken
+              _cfuOAuthToken
               _cfuFields
-              (Just _cfuAlt)
+              (Just AltJSON)
+              _cfuCreativeField
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CreativeFieldsUpdateResource)

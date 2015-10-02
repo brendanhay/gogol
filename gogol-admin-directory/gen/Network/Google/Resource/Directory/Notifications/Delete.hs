@@ -32,13 +32,12 @@ module Network.Google.Resource.Directory.Notifications.Delete
     -- * Request Lenses
     , ndQuotaUser
     , ndPrettyPrint
-    , ndUserIp
+    , ndUserIP
     , ndCustomer
     , ndKey
     , ndNotificationId
-    , ndOauthToken
+    , ndOAuthToken
     , ndFields
-    , ndAlt
     ) where
 
 import           Network.Google.AdminDirectory.Types
@@ -54,10 +53,10 @@ type NotificationsDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Delete '[JSON] ()
+                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a notification
 --
@@ -65,13 +64,12 @@ type NotificationsDeleteResource =
 data NotificationsDelete' = NotificationsDelete'
     { _ndQuotaUser      :: !(Maybe Text)
     , _ndPrettyPrint    :: !Bool
-    , _ndUserIp         :: !(Maybe Text)
+    , _ndUserIP         :: !(Maybe Text)
     , _ndCustomer       :: !Text
-    , _ndKey            :: !(Maybe Text)
+    , _ndKey            :: !(Maybe Key)
     , _ndNotificationId :: !Text
-    , _ndOauthToken     :: !(Maybe Text)
+    , _ndOAuthToken     :: !(Maybe OAuthToken)
     , _ndFields         :: !(Maybe Text)
-    , _ndAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NotificationsDelete'' with the minimum fields required to make a request.
@@ -82,7 +80,7 @@ data NotificationsDelete' = NotificationsDelete'
 --
 -- * 'ndPrettyPrint'
 --
--- * 'ndUserIp'
+-- * 'ndUserIP'
 --
 -- * 'ndCustomer'
 --
@@ -90,11 +88,9 @@ data NotificationsDelete' = NotificationsDelete'
 --
 -- * 'ndNotificationId'
 --
--- * 'ndOauthToken'
+-- * 'ndOAuthToken'
 --
 -- * 'ndFields'
---
--- * 'ndAlt'
 notificationsDelete'
     :: Text -- ^ 'customer'
     -> Text -- ^ 'notificationId'
@@ -103,13 +99,12 @@ notificationsDelete' pNdCustomer_ pNdNotificationId_ =
     NotificationsDelete'
     { _ndQuotaUser = Nothing
     , _ndPrettyPrint = True
-    , _ndUserIp = Nothing
+    , _ndUserIP = Nothing
     , _ndCustomer = pNdCustomer_
     , _ndKey = Nothing
     , _ndNotificationId = pNdNotificationId_
-    , _ndOauthToken = Nothing
+    , _ndOAuthToken = Nothing
     , _ndFields = Nothing
-    , _ndAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,8 +122,8 @@ ndPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ndUserIp :: Lens' NotificationsDelete' (Maybe Text)
-ndUserIp = lens _ndUserIp (\ s a -> s{_ndUserIp = a})
+ndUserIP :: Lens' NotificationsDelete' (Maybe Text)
+ndUserIP = lens _ndUserIP (\ s a -> s{_ndUserIP = a})
 
 -- | The unique ID for the customer\'s Google account. The customerId is also
 -- returned as part of the Users resource.
@@ -139,7 +134,7 @@ ndCustomer
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ndKey :: Lens' NotificationsDelete' (Maybe Text)
+ndKey :: Lens' NotificationsDelete' (Maybe Key)
 ndKey = lens _ndKey (\ s a -> s{_ndKey = a})
 
 -- | The unique ID of the notification.
@@ -149,29 +144,29 @@ ndNotificationId
       (\ s a -> s{_ndNotificationId = a})
 
 -- | OAuth 2.0 token for the current user.
-ndOauthToken :: Lens' NotificationsDelete' (Maybe Text)
-ndOauthToken
-  = lens _ndOauthToken (\ s a -> s{_ndOauthToken = a})
+ndOAuthToken :: Lens' NotificationsDelete' (Maybe OAuthToken)
+ndOAuthToken
+  = lens _ndOAuthToken (\ s a -> s{_ndOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ndFields :: Lens' NotificationsDelete' (Maybe Text)
 ndFields = lens _ndFields (\ s a -> s{_ndFields = a})
 
--- | Data format for the response.
-ndAlt :: Lens' NotificationsDelete' Alt
-ndAlt = lens _ndAlt (\ s a -> s{_ndAlt = a})
+instance GoogleAuth NotificationsDelete' where
+        authKey = ndKey . _Just
+        authToken = ndOAuthToken . _Just
 
 instance GoogleRequest NotificationsDelete' where
         type Rs NotificationsDelete' = ()
         request = requestWithRoute defReq adminDirectoryURL
         requestWithRoute r u NotificationsDelete'{..}
-          = go _ndQuotaUser (Just _ndPrettyPrint) _ndUserIp
+          = go _ndQuotaUser (Just _ndPrettyPrint) _ndUserIP
               _ndCustomer
               _ndKey
               _ndNotificationId
-              _ndOauthToken
+              _ndOAuthToken
               _ndFields
-              (Just _ndAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy NotificationsDeleteResource)

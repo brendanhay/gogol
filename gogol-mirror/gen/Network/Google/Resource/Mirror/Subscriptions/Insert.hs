@@ -32,11 +32,11 @@ module Network.Google.Resource.Mirror.Subscriptions.Insert
     -- * Request Lenses
     , siQuotaUser
     , siPrettyPrint
-    , siUserIp
+    , siUserIP
     , siKey
-    , siOauthToken
+    , siOAuthToken
+    , siSubscription
     , siFields
-    , siAlt
     ) where
 
 import           Network.Google.Mirror.Types
@@ -49,22 +49,24 @@ type SubscriptionsInsertResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
-               QueryParam "oauth_token" Text :>
+             QueryParam "key" Key :>
+               QueryParam "oauth_token" OAuthToken :>
                  QueryParam "fields" Text :>
-                   QueryParam "alt" Alt :> Post '[JSON] Subscription
+                   QueryParam "alt" AltJSON :>
+                     ReqBody '[JSON] Subscription :>
+                       Post '[JSON] Subscription
 
 -- | Creates a new subscription.
 --
 -- /See:/ 'subscriptionsInsert'' smart constructor.
 data SubscriptionsInsert' = SubscriptionsInsert'
-    { _siQuotaUser   :: !(Maybe Text)
-    , _siPrettyPrint :: !Bool
-    , _siUserIp      :: !(Maybe Text)
-    , _siKey         :: !(Maybe Text)
-    , _siOauthToken  :: !(Maybe Text)
-    , _siFields      :: !(Maybe Text)
-    , _siAlt         :: !Alt
+    { _siQuotaUser    :: !(Maybe Text)
+    , _siPrettyPrint  :: !Bool
+    , _siUserIP       :: !(Maybe Text)
+    , _siKey          :: !(Maybe Key)
+    , _siOAuthToken   :: !(Maybe OAuthToken)
+    , _siSubscription :: !Subscription
+    , _siFields       :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SubscriptionsInsert'' with the minimum fields required to make a request.
@@ -75,26 +77,27 @@ data SubscriptionsInsert' = SubscriptionsInsert'
 --
 -- * 'siPrettyPrint'
 --
--- * 'siUserIp'
+-- * 'siUserIP'
 --
 -- * 'siKey'
 --
--- * 'siOauthToken'
+-- * 'siOAuthToken'
+--
+-- * 'siSubscription'
 --
 -- * 'siFields'
---
--- * 'siAlt'
 subscriptionsInsert'
-    :: SubscriptionsInsert'
-subscriptionsInsert' =
+    :: Subscription -- ^ 'Subscription'
+    -> SubscriptionsInsert'
+subscriptionsInsert' pSiSubscription_ =
     SubscriptionsInsert'
     { _siQuotaUser = Nothing
     , _siPrettyPrint = True
-    , _siUserIp = Nothing
+    , _siUserIP = Nothing
     , _siKey = Nothing
-    , _siOauthToken = Nothing
+    , _siOAuthToken = Nothing
+    , _siSubscription = pSiSubscription_
     , _siFields = Nothing
-    , _siAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -112,37 +115,44 @@ siPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-siUserIp :: Lens' SubscriptionsInsert' (Maybe Text)
-siUserIp = lens _siUserIp (\ s a -> s{_siUserIp = a})
+siUserIP :: Lens' SubscriptionsInsert' (Maybe Text)
+siUserIP = lens _siUserIP (\ s a -> s{_siUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-siKey :: Lens' SubscriptionsInsert' (Maybe Text)
+siKey :: Lens' SubscriptionsInsert' (Maybe Key)
 siKey = lens _siKey (\ s a -> s{_siKey = a})
 
 -- | OAuth 2.0 token for the current user.
-siOauthToken :: Lens' SubscriptionsInsert' (Maybe Text)
-siOauthToken
-  = lens _siOauthToken (\ s a -> s{_siOauthToken = a})
+siOAuthToken :: Lens' SubscriptionsInsert' (Maybe OAuthToken)
+siOAuthToken
+  = lens _siOAuthToken (\ s a -> s{_siOAuthToken = a})
+
+-- | Multipart request metadata.
+siSubscription :: Lens' SubscriptionsInsert' Subscription
+siSubscription
+  = lens _siSubscription
+      (\ s a -> s{_siSubscription = a})
 
 -- | Selector specifying which fields to include in a partial response.
 siFields :: Lens' SubscriptionsInsert' (Maybe Text)
 siFields = lens _siFields (\ s a -> s{_siFields = a})
 
--- | Data format for the response.
-siAlt :: Lens' SubscriptionsInsert' Alt
-siAlt = lens _siAlt (\ s a -> s{_siAlt = a})
+instance GoogleAuth SubscriptionsInsert' where
+        authKey = siKey . _Just
+        authToken = siOAuthToken . _Just
 
 instance GoogleRequest SubscriptionsInsert' where
         type Rs SubscriptionsInsert' = Subscription
         request = requestWithRoute defReq mirrorURL
         requestWithRoute r u SubscriptionsInsert'{..}
-          = go _siQuotaUser (Just _siPrettyPrint) _siUserIp
+          = go _siQuotaUser (Just _siPrettyPrint) _siUserIP
               _siKey
-              _siOauthToken
+              _siOAuthToken
               _siFields
-              (Just _siAlt)
+              (Just AltJSON)
+              _siSubscription
           where go
                   = clientWithRoute
                       (Proxy :: Proxy SubscriptionsInsertResource)

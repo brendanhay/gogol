@@ -34,14 +34,13 @@ module Network.Google.Resource.BigQuery.Tables.Get
     -- * Request Lenses
     , tgQuotaUser
     , tgPrettyPrint
-    , tgUserIp
+    , tgUserIP
     , tgKey
     , tgDatasetId
     , tgProjectId
-    , tgOauthToken
+    , tgOAuthToken
     , tgTableId
     , tgFields
-    , tgAlt
     ) where
 
 import           Network.Google.BigQuery.Types
@@ -59,10 +58,10 @@ type TablesGetResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :> Get '[JSON] Table
+                             QueryParam "alt" AltJSON :> Get '[JSON] Table
 
 -- | Gets the specified table resource by table ID. This method does not
 -- return the data in the table, it only returns the table resource, which
@@ -72,14 +71,13 @@ type TablesGetResource =
 data TablesGet' = TablesGet'
     { _tgQuotaUser   :: !(Maybe Text)
     , _tgPrettyPrint :: !Bool
-    , _tgUserIp      :: !(Maybe Text)
-    , _tgKey         :: !(Maybe Text)
+    , _tgUserIP      :: !(Maybe Text)
+    , _tgKey         :: !(Maybe Key)
     , _tgDatasetId   :: !Text
     , _tgProjectId   :: !Text
-    , _tgOauthToken  :: !(Maybe Text)
+    , _tgOAuthToken  :: !(Maybe OAuthToken)
     , _tgTableId     :: !Text
     , _tgFields      :: !(Maybe Text)
-    , _tgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TablesGet'' with the minimum fields required to make a request.
@@ -90,7 +88,7 @@ data TablesGet' = TablesGet'
 --
 -- * 'tgPrettyPrint'
 --
--- * 'tgUserIp'
+-- * 'tgUserIP'
 --
 -- * 'tgKey'
 --
@@ -98,13 +96,11 @@ data TablesGet' = TablesGet'
 --
 -- * 'tgProjectId'
 --
--- * 'tgOauthToken'
+-- * 'tgOAuthToken'
 --
 -- * 'tgTableId'
 --
 -- * 'tgFields'
---
--- * 'tgAlt'
 tablesGet'
     :: Text -- ^ 'datasetId'
     -> Text -- ^ 'projectId'
@@ -114,14 +110,13 @@ tablesGet' pTgDatasetId_ pTgProjectId_ pTgTableId_ =
     TablesGet'
     { _tgQuotaUser = Nothing
     , _tgPrettyPrint = True
-    , _tgUserIp = Nothing
+    , _tgUserIP = Nothing
     , _tgKey = Nothing
     , _tgDatasetId = pTgDatasetId_
     , _tgProjectId = pTgProjectId_
-    , _tgOauthToken = Nothing
+    , _tgOAuthToken = Nothing
     , _tgTableId = pTgTableId_
     , _tgFields = Nothing
-    , _tgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -139,13 +134,13 @@ tgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-tgUserIp :: Lens' TablesGet' (Maybe Text)
-tgUserIp = lens _tgUserIp (\ s a -> s{_tgUserIp = a})
+tgUserIP :: Lens' TablesGet' (Maybe Text)
+tgUserIP = lens _tgUserIP (\ s a -> s{_tgUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-tgKey :: Lens' TablesGet' (Maybe Text)
+tgKey :: Lens' TablesGet' (Maybe Key)
 tgKey = lens _tgKey (\ s a -> s{_tgKey = a})
 
 -- | Dataset ID of the requested table
@@ -159,9 +154,9 @@ tgProjectId
   = lens _tgProjectId (\ s a -> s{_tgProjectId = a})
 
 -- | OAuth 2.0 token for the current user.
-tgOauthToken :: Lens' TablesGet' (Maybe Text)
-tgOauthToken
-  = lens _tgOauthToken (\ s a -> s{_tgOauthToken = a})
+tgOAuthToken :: Lens' TablesGet' (Maybe OAuthToken)
+tgOAuthToken
+  = lens _tgOAuthToken (\ s a -> s{_tgOAuthToken = a})
 
 -- | Table ID of the requested table
 tgTableId :: Lens' TablesGet' Text
@@ -172,22 +167,22 @@ tgTableId
 tgFields :: Lens' TablesGet' (Maybe Text)
 tgFields = lens _tgFields (\ s a -> s{_tgFields = a})
 
--- | Data format for the response.
-tgAlt :: Lens' TablesGet' Alt
-tgAlt = lens _tgAlt (\ s a -> s{_tgAlt = a})
+instance GoogleAuth TablesGet' where
+        authKey = tgKey . _Just
+        authToken = tgOAuthToken . _Just
 
 instance GoogleRequest TablesGet' where
         type Rs TablesGet' = Table
         request = requestWithRoute defReq bigQueryURL
         requestWithRoute r u TablesGet'{..}
-          = go _tgQuotaUser (Just _tgPrettyPrint) _tgUserIp
+          = go _tgQuotaUser (Just _tgPrettyPrint) _tgUserIP
               _tgKey
               _tgDatasetId
               _tgProjectId
-              _tgOauthToken
+              _tgOAuthToken
               _tgTableId
               _tgFields
-              (Just _tgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy TablesGetResource)
                       r

@@ -33,12 +33,11 @@ module Network.Google.Resource.Drive.Files.GenerateIds
     , fgiSpace
     , fgiQuotaUser
     , fgiPrettyPrint
-    , fgiUserIp
+    , fgiUserIP
     , fgiKey
-    , fgiOauthToken
+    , fgiOAuthToken
     , fgiMaxResults
     , fgiFields
-    , fgiAlt
     ) where
 
 import           Network.Google.Drive.Types
@@ -53,11 +52,11 @@ type FilesGenerateIdsResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "maxResults" Int32 :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] GeneratedIds
+                         QueryParam "alt" AltJSON :> Get '[JSON] GeneratedIds
 
 -- | Generates a set of file IDs which can be provided in insert requests.
 --
@@ -66,12 +65,11 @@ data FilesGenerateIds' = FilesGenerateIds'
     { _fgiSpace       :: !Text
     , _fgiQuotaUser   :: !(Maybe Text)
     , _fgiPrettyPrint :: !Bool
-    , _fgiUserIp      :: !(Maybe Text)
-    , _fgiKey         :: !(Maybe Text)
-    , _fgiOauthToken  :: !(Maybe Text)
+    , _fgiUserIP      :: !(Maybe Text)
+    , _fgiKey         :: !(Maybe Key)
+    , _fgiOAuthToken  :: !(Maybe OAuthToken)
     , _fgiMaxResults  :: !Int32
     , _fgiFields      :: !(Maybe Text)
-    , _fgiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'FilesGenerateIds'' with the minimum fields required to make a request.
@@ -84,17 +82,15 @@ data FilesGenerateIds' = FilesGenerateIds'
 --
 -- * 'fgiPrettyPrint'
 --
--- * 'fgiUserIp'
+-- * 'fgiUserIP'
 --
 -- * 'fgiKey'
 --
--- * 'fgiOauthToken'
+-- * 'fgiOAuthToken'
 --
 -- * 'fgiMaxResults'
 --
 -- * 'fgiFields'
---
--- * 'fgiAlt'
 filesGenerateIds'
     :: FilesGenerateIds'
 filesGenerateIds' =
@@ -102,12 +98,11 @@ filesGenerateIds' =
     { _fgiSpace = "drive"
     , _fgiQuotaUser = Nothing
     , _fgiPrettyPrint = True
-    , _fgiUserIp = Nothing
+    , _fgiUserIP = Nothing
     , _fgiKey = Nothing
-    , _fgiOauthToken = Nothing
+    , _fgiOAuthToken = Nothing
     , _fgiMaxResults = 10
     , _fgiFields = Nothing
-    , _fgiAlt = JSON
     }
 
 -- | The space in which the IDs can be used to create new files. Supported
@@ -130,21 +125,21 @@ fgiPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-fgiUserIp :: Lens' FilesGenerateIds' (Maybe Text)
-fgiUserIp
-  = lens _fgiUserIp (\ s a -> s{_fgiUserIp = a})
+fgiUserIP :: Lens' FilesGenerateIds' (Maybe Text)
+fgiUserIP
+  = lens _fgiUserIP (\ s a -> s{_fgiUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-fgiKey :: Lens' FilesGenerateIds' (Maybe Text)
+fgiKey :: Lens' FilesGenerateIds' (Maybe Key)
 fgiKey = lens _fgiKey (\ s a -> s{_fgiKey = a})
 
 -- | OAuth 2.0 token for the current user.
-fgiOauthToken :: Lens' FilesGenerateIds' (Maybe Text)
-fgiOauthToken
-  = lens _fgiOauthToken
-      (\ s a -> s{_fgiOauthToken = a})
+fgiOAuthToken :: Lens' FilesGenerateIds' (Maybe OAuthToken)
+fgiOAuthToken
+  = lens _fgiOAuthToken
+      (\ s a -> s{_fgiOAuthToken = a})
 
 -- | Maximum number of IDs to return.
 fgiMaxResults :: Lens' FilesGenerateIds' Int32
@@ -157,9 +152,9 @@ fgiFields :: Lens' FilesGenerateIds' (Maybe Text)
 fgiFields
   = lens _fgiFields (\ s a -> s{_fgiFields = a})
 
--- | Data format for the response.
-fgiAlt :: Lens' FilesGenerateIds' Alt
-fgiAlt = lens _fgiAlt (\ s a -> s{_fgiAlt = a})
+instance GoogleAuth FilesGenerateIds' where
+        authKey = fgiKey . _Just
+        authToken = fgiOAuthToken . _Just
 
 instance GoogleRequest FilesGenerateIds' where
         type Rs FilesGenerateIds' = GeneratedIds
@@ -167,12 +162,12 @@ instance GoogleRequest FilesGenerateIds' where
         requestWithRoute r u FilesGenerateIds'{..}
           = go (Just _fgiSpace) _fgiQuotaUser
               (Just _fgiPrettyPrint)
-              _fgiUserIp
+              _fgiUserIP
               _fgiKey
-              _fgiOauthToken
+              _fgiOAuthToken
               (Just _fgiMaxResults)
               _fgiFields
-              (Just _fgiAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy FilesGenerateIdsResource)

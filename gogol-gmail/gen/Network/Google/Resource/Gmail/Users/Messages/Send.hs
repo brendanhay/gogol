@@ -33,12 +33,13 @@ module Network.Google.Resource.Gmail.Users.Messages.Send
     -- * Request Lenses
     , umsQuotaUser
     , umsPrettyPrint
-    , umsUserIp
+    , umsUserIP
     , umsUserId
+    , umsMedia
     , umsKey
-    , umsOauthToken
+    , umsOAuthToken
+    , umsMessage
     , umsFields
-    , umsAlt
     ) where
 
 import           Network.Google.Gmail.Types
@@ -53,10 +54,12 @@ type UsersMessagesSendResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] Message
+                       QueryParam "alt" AltJSON :>
+                         MultipartRelated '[JSON] Message Body :>
+                           Post '[JSON] Message
 
 -- | Sends the specified message to the recipients in the To, Cc, and Bcc
 -- headers.
@@ -65,12 +68,13 @@ type UsersMessagesSendResource =
 data UsersMessagesSend' = UsersMessagesSend'
     { _umsQuotaUser   :: !(Maybe Text)
     , _umsPrettyPrint :: !Bool
-    , _umsUserIp      :: !(Maybe Text)
+    , _umsUserIP      :: !(Maybe Text)
     , _umsUserId      :: !Text
-    , _umsKey         :: !(Maybe Text)
-    , _umsOauthToken  :: !(Maybe Text)
+    , _umsMedia       :: !Body
+    , _umsKey         :: !(Maybe Key)
+    , _umsOAuthToken  :: !(Maybe OAuthToken)
+    , _umsMessage     :: !Message
     , _umsFields      :: !(Maybe Text)
-    , _umsAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersMessagesSend'' with the minimum fields required to make a request.
@@ -81,30 +85,35 @@ data UsersMessagesSend' = UsersMessagesSend'
 --
 -- * 'umsPrettyPrint'
 --
--- * 'umsUserIp'
+-- * 'umsUserIP'
 --
 -- * 'umsUserId'
 --
+-- * 'umsMedia'
+--
 -- * 'umsKey'
 --
--- * 'umsOauthToken'
+-- * 'umsOAuthToken'
+--
+-- * 'umsMessage'
 --
 -- * 'umsFields'
---
--- * 'umsAlt'
 usersMessagesSend'
-    :: Text
+    :: Text -- ^ 'media'
+    -> Body -- ^ 'Message'
+    -> Message
     -> UsersMessagesSend'
-usersMessagesSend' pUmsUserId_ =
+usersMessagesSend' pUmsUserId_ pUmsMedia_ pUmsMessage_ =
     UsersMessagesSend'
     { _umsQuotaUser = Nothing
     , _umsPrettyPrint = True
-    , _umsUserIp = Nothing
+    , _umsUserIP = Nothing
     , _umsUserId = pUmsUserId_
+    , _umsMedia = pUmsMedia_
     , _umsKey = Nothing
-    , _umsOauthToken = Nothing
+    , _umsOAuthToken = Nothing
+    , _umsMessage = pUmsMessage_
     , _umsFields = Nothing
-    , _umsAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -122,9 +131,9 @@ umsPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-umsUserIp :: Lens' UsersMessagesSend' (Maybe Text)
-umsUserIp
-  = lens _umsUserIp (\ s a -> s{_umsUserIp = a})
+umsUserIP :: Lens' UsersMessagesSend' (Maybe Text)
+umsUserIP
+  = lens _umsUserIP (\ s a -> s{_umsUserIP = a})
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
@@ -132,37 +141,47 @@ umsUserId :: Lens' UsersMessagesSend' Text
 umsUserId
   = lens _umsUserId (\ s a -> s{_umsUserId = a})
 
+umsMedia :: Lens' UsersMessagesSend' Body
+umsMedia = lens _umsMedia (\ s a -> s{_umsMedia = a})
+
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-umsKey :: Lens' UsersMessagesSend' (Maybe Text)
+umsKey :: Lens' UsersMessagesSend' (Maybe Key)
 umsKey = lens _umsKey (\ s a -> s{_umsKey = a})
 
 -- | OAuth 2.0 token for the current user.
-umsOauthToken :: Lens' UsersMessagesSend' (Maybe Text)
-umsOauthToken
-  = lens _umsOauthToken
-      (\ s a -> s{_umsOauthToken = a})
+umsOAuthToken :: Lens' UsersMessagesSend' (Maybe OAuthToken)
+umsOAuthToken
+  = lens _umsOAuthToken
+      (\ s a -> s{_umsOAuthToken = a})
+
+-- | Multipart request metadata.
+umsMessage :: Lens' UsersMessagesSend' Message
+umsMessage
+  = lens _umsMessage (\ s a -> s{_umsMessage = a})
 
 -- | Selector specifying which fields to include in a partial response.
 umsFields :: Lens' UsersMessagesSend' (Maybe Text)
 umsFields
   = lens _umsFields (\ s a -> s{_umsFields = a})
 
--- | Data format for the response.
-umsAlt :: Lens' UsersMessagesSend' Alt
-umsAlt = lens _umsAlt (\ s a -> s{_umsAlt = a})
+instance GoogleAuth UsersMessagesSend' where
+        authKey = umsKey . _Just
+        authToken = umsOAuthToken . _Just
 
 instance GoogleRequest UsersMessagesSend' where
         type Rs UsersMessagesSend' = Message
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersMessagesSend'{..}
-          = go _umsQuotaUser (Just _umsPrettyPrint) _umsUserIp
+          = go _umsQuotaUser (Just _umsPrettyPrint) _umsUserIP
               _umsUserId
+              _umsMedia
               _umsKey
-              _umsOauthToken
+              _umsOAuthToken
               _umsFields
-              (Just _umsAlt)
+              (Just AltJSON)
+              _umsMessage
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersMessagesSendResource)

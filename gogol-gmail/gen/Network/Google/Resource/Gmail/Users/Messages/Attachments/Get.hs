@@ -32,14 +32,13 @@ module Network.Google.Resource.Gmail.Users.Messages.Attachments.Get
     -- * Request Lenses
     , umagQuotaUser
     , umagPrettyPrint
-    , umagUserIp
+    , umagUserIP
     , umagUserId
     , umagKey
     , umagId
-    , umagOauthToken
+    , umagOAuthToken
     , umagMessageId
     , umagFields
-    , umagAlt
     ) where
 
 import           Network.Google.Gmail.Types
@@ -56,10 +55,11 @@ type UsersMessagesAttachmentsGetResource =
                QueryParam "quotaUser" Text :>
                  QueryParam "prettyPrint" Bool :>
                    QueryParam "userIp" Text :>
-                     QueryParam "key" Text :>
-                       QueryParam "oauth_token" Text :>
+                     QueryParam "key" Key :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Get '[JSON] MessagePartBody
+                           QueryParam "alt" AltJSON :>
+                             Get '[JSON] MessagePartBody
 
 -- | Gets the specified message attachment.
 --
@@ -67,14 +67,13 @@ type UsersMessagesAttachmentsGetResource =
 data UsersMessagesAttachmentsGet' = UsersMessagesAttachmentsGet'
     { _umagQuotaUser   :: !(Maybe Text)
     , _umagPrettyPrint :: !Bool
-    , _umagUserIp      :: !(Maybe Text)
+    , _umagUserIP      :: !(Maybe Text)
     , _umagUserId      :: !Text
-    , _umagKey         :: !(Maybe Text)
+    , _umagKey         :: !(Maybe Key)
     , _umagId          :: !Text
-    , _umagOauthToken  :: !(Maybe Text)
+    , _umagOAuthToken  :: !(Maybe OAuthToken)
     , _umagMessageId   :: !Text
     , _umagFields      :: !(Maybe Text)
-    , _umagAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersMessagesAttachmentsGet'' with the minimum fields required to make a request.
@@ -85,7 +84,7 @@ data UsersMessagesAttachmentsGet' = UsersMessagesAttachmentsGet'
 --
 -- * 'umagPrettyPrint'
 --
--- * 'umagUserIp'
+-- * 'umagUserIP'
 --
 -- * 'umagUserId'
 --
@@ -93,13 +92,11 @@ data UsersMessagesAttachmentsGet' = UsersMessagesAttachmentsGet'
 --
 -- * 'umagId'
 --
--- * 'umagOauthToken'
+-- * 'umagOAuthToken'
 --
 -- * 'umagMessageId'
 --
 -- * 'umagFields'
---
--- * 'umagAlt'
 usersMessagesAttachmentsGet'
     :: Text -- ^ 'id'
     -> Text -- ^ 'messageId'
@@ -109,14 +106,13 @@ usersMessagesAttachmentsGet' pUmagUserId_ pUmagId_ pUmagMessageId_ =
     UsersMessagesAttachmentsGet'
     { _umagQuotaUser = Nothing
     , _umagPrettyPrint = True
-    , _umagUserIp = Nothing
+    , _umagUserIP = Nothing
     , _umagUserId = pUmagUserId_
     , _umagKey = Nothing
     , _umagId = pUmagId_
-    , _umagOauthToken = Nothing
+    , _umagOAuthToken = Nothing
     , _umagMessageId = pUmagMessageId_
     , _umagFields = Nothing
-    , _umagAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -135,9 +131,9 @@ umagPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-umagUserIp :: Lens' UsersMessagesAttachmentsGet' (Maybe Text)
-umagUserIp
-  = lens _umagUserIp (\ s a -> s{_umagUserIp = a})
+umagUserIP :: Lens' UsersMessagesAttachmentsGet' (Maybe Text)
+umagUserIP
+  = lens _umagUserIP (\ s a -> s{_umagUserIP = a})
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
@@ -148,7 +144,7 @@ umagUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-umagKey :: Lens' UsersMessagesAttachmentsGet' (Maybe Text)
+umagKey :: Lens' UsersMessagesAttachmentsGet' (Maybe Key)
 umagKey = lens _umagKey (\ s a -> s{_umagKey = a})
 
 -- | The ID of the attachment.
@@ -156,10 +152,10 @@ umagId :: Lens' UsersMessagesAttachmentsGet' Text
 umagId = lens _umagId (\ s a -> s{_umagId = a})
 
 -- | OAuth 2.0 token for the current user.
-umagOauthToken :: Lens' UsersMessagesAttachmentsGet' (Maybe Text)
-umagOauthToken
-  = lens _umagOauthToken
-      (\ s a -> s{_umagOauthToken = a})
+umagOAuthToken :: Lens' UsersMessagesAttachmentsGet' (Maybe OAuthToken)
+umagOAuthToken
+  = lens _umagOAuthToken
+      (\ s a -> s{_umagOAuthToken = a})
 
 -- | The ID of the message containing the attachment.
 umagMessageId :: Lens' UsersMessagesAttachmentsGet' Text
@@ -172,9 +168,10 @@ umagFields :: Lens' UsersMessagesAttachmentsGet' (Maybe Text)
 umagFields
   = lens _umagFields (\ s a -> s{_umagFields = a})
 
--- | Data format for the response.
-umagAlt :: Lens' UsersMessagesAttachmentsGet' Alt
-umagAlt = lens _umagAlt (\ s a -> s{_umagAlt = a})
+instance GoogleAuth UsersMessagesAttachmentsGet'
+         where
+        authKey = umagKey . _Just
+        authToken = umagOAuthToken . _Just
 
 instance GoogleRequest UsersMessagesAttachmentsGet'
          where
@@ -183,14 +180,14 @@ instance GoogleRequest UsersMessagesAttachmentsGet'
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersMessagesAttachmentsGet'{..}
           = go _umagQuotaUser (Just _umagPrettyPrint)
-              _umagUserIp
+              _umagUserIP
               _umagUserId
               _umagKey
               _umagId
-              _umagOauthToken
+              _umagOAuthToken
               _umagMessageId
               _umagFields
-              (Just _umagAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersMessagesAttachmentsGetResource)

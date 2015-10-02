@@ -32,12 +32,12 @@ module Network.Google.Resource.FusionTables.Column.Insert
     -- * Request Lenses
     , ciQuotaUser
     , ciPrettyPrint
-    , ciUserIp
+    , ciUserIP
     , ciKey
-    , ciOauthToken
+    , ciOAuthToken
     , ciTableId
+    , ciColumn
     , ciFields
-    , ciAlt
     ) where
 
 import           Network.Google.FusionTables.Types
@@ -52,10 +52,11 @@ type ColumnInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] Column
+                       QueryParam "alt" AltJSON :>
+                         ReqBody '[JSON] Column :> Post '[JSON] Column
 
 -- | Adds a new column to the table.
 --
@@ -63,12 +64,12 @@ type ColumnInsertResource =
 data ColumnInsert' = ColumnInsert'
     { _ciQuotaUser   :: !(Maybe Text)
     , _ciPrettyPrint :: !Bool
-    , _ciUserIp      :: !(Maybe Text)
-    , _ciKey         :: !(Maybe Text)
-    , _ciOauthToken  :: !(Maybe Text)
+    , _ciUserIP      :: !(Maybe Text)
+    , _ciKey         :: !(Maybe Key)
+    , _ciOAuthToken  :: !(Maybe OAuthToken)
     , _ciTableId     :: !Text
+    , _ciColumn      :: !Column
     , _ciFields      :: !(Maybe Text)
-    , _ciAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ColumnInsert'' with the minimum fields required to make a request.
@@ -79,30 +80,31 @@ data ColumnInsert' = ColumnInsert'
 --
 -- * 'ciPrettyPrint'
 --
--- * 'ciUserIp'
+-- * 'ciUserIP'
 --
 -- * 'ciKey'
 --
--- * 'ciOauthToken'
+-- * 'ciOAuthToken'
 --
 -- * 'ciTableId'
 --
--- * 'ciFields'
+-- * 'ciColumn'
 --
--- * 'ciAlt'
+-- * 'ciFields'
 columnInsert'
     :: Text -- ^ 'tableId'
+    -> Column -- ^ 'Column'
     -> ColumnInsert'
-columnInsert' pCiTableId_ =
+columnInsert' pCiTableId_ pCiColumn_ =
     ColumnInsert'
     { _ciQuotaUser = Nothing
     , _ciPrettyPrint = True
-    , _ciUserIp = Nothing
+    , _ciUserIP = Nothing
     , _ciKey = Nothing
-    , _ciOauthToken = Nothing
+    , _ciOAuthToken = Nothing
     , _ciTableId = pCiTableId_
+    , _ciColumn = pCiColumn_
     , _ciFields = Nothing
-    , _ciAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,43 +122,48 @@ ciPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ciUserIp :: Lens' ColumnInsert' (Maybe Text)
-ciUserIp = lens _ciUserIp (\ s a -> s{_ciUserIp = a})
+ciUserIP :: Lens' ColumnInsert' (Maybe Text)
+ciUserIP = lens _ciUserIP (\ s a -> s{_ciUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ciKey :: Lens' ColumnInsert' (Maybe Text)
+ciKey :: Lens' ColumnInsert' (Maybe Key)
 ciKey = lens _ciKey (\ s a -> s{_ciKey = a})
 
 -- | OAuth 2.0 token for the current user.
-ciOauthToken :: Lens' ColumnInsert' (Maybe Text)
-ciOauthToken
-  = lens _ciOauthToken (\ s a -> s{_ciOauthToken = a})
+ciOAuthToken :: Lens' ColumnInsert' (Maybe OAuthToken)
+ciOAuthToken
+  = lens _ciOAuthToken (\ s a -> s{_ciOAuthToken = a})
 
 -- | Table for which a new column is being added.
 ciTableId :: Lens' ColumnInsert' Text
 ciTableId
   = lens _ciTableId (\ s a -> s{_ciTableId = a})
 
+-- | Multipart request metadata.
+ciColumn :: Lens' ColumnInsert' Column
+ciColumn = lens _ciColumn (\ s a -> s{_ciColumn = a})
+
 -- | Selector specifying which fields to include in a partial response.
 ciFields :: Lens' ColumnInsert' (Maybe Text)
 ciFields = lens _ciFields (\ s a -> s{_ciFields = a})
 
--- | Data format for the response.
-ciAlt :: Lens' ColumnInsert' Alt
-ciAlt = lens _ciAlt (\ s a -> s{_ciAlt = a})
+instance GoogleAuth ColumnInsert' where
+        authKey = ciKey . _Just
+        authToken = ciOAuthToken . _Just
 
 instance GoogleRequest ColumnInsert' where
         type Rs ColumnInsert' = Column
         request = requestWithRoute defReq fusionTablesURL
         requestWithRoute r u ColumnInsert'{..}
-          = go _ciQuotaUser (Just _ciPrettyPrint) _ciUserIp
+          = go _ciQuotaUser (Just _ciPrettyPrint) _ciUserIP
               _ciKey
-              _ciOauthToken
+              _ciOAuthToken
               _ciTableId
               _ciFields
-              (Just _ciAlt)
+              (Just AltJSON)
+              _ciColumn
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ColumnInsertResource)

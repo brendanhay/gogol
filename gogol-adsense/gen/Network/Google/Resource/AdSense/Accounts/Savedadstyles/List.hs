@@ -32,14 +32,13 @@ module Network.Google.Resource.AdSense.Accounts.Savedadstyles.List
     -- * Request Lenses
     , aslQuotaUser
     , aslPrettyPrint
-    , aslUserIp
+    , aslUserIP
     , aslAccountId
     , aslKey
     , aslPageToken
-    , aslOauthToken
+    , aslOAuthToken
     , aslMaxResults
     , aslFields
-    , aslAlt
     ) where
 
 import           Network.Google.AdSense.Types
@@ -54,12 +53,12 @@ type AccountsSavedadstylesListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
+                 QueryParam "key" Key :>
                    QueryParam "pageToken" Text :>
-                     QueryParam "oauth_token" Text :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "maxResults" Int32 :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Get '[JSON] SavedAdStyles
+                           QueryParam "alt" AltJSON :> Get '[JSON] SavedAdStyles
 
 -- | List all saved ad styles in the specified account.
 --
@@ -67,14 +66,13 @@ type AccountsSavedadstylesListResource =
 data AccountsSavedadstylesList' = AccountsSavedadstylesList'
     { _aslQuotaUser   :: !(Maybe Text)
     , _aslPrettyPrint :: !Bool
-    , _aslUserIp      :: !(Maybe Text)
+    , _aslUserIP      :: !(Maybe Text)
     , _aslAccountId   :: !Text
-    , _aslKey         :: !(Maybe Text)
+    , _aslKey         :: !(Maybe Key)
     , _aslPageToken   :: !(Maybe Text)
-    , _aslOauthToken  :: !(Maybe Text)
+    , _aslOAuthToken  :: !(Maybe OAuthToken)
     , _aslMaxResults  :: !(Maybe Int32)
     , _aslFields      :: !(Maybe Text)
-    , _aslAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsSavedadstylesList'' with the minimum fields required to make a request.
@@ -85,7 +83,7 @@ data AccountsSavedadstylesList' = AccountsSavedadstylesList'
 --
 -- * 'aslPrettyPrint'
 --
--- * 'aslUserIp'
+-- * 'aslUserIP'
 --
 -- * 'aslAccountId'
 --
@@ -93,13 +91,11 @@ data AccountsSavedadstylesList' = AccountsSavedadstylesList'
 --
 -- * 'aslPageToken'
 --
--- * 'aslOauthToken'
+-- * 'aslOAuthToken'
 --
 -- * 'aslMaxResults'
 --
 -- * 'aslFields'
---
--- * 'aslAlt'
 accountsSavedadstylesList'
     :: Text -- ^ 'accountId'
     -> AccountsSavedadstylesList'
@@ -107,14 +103,13 @@ accountsSavedadstylesList' pAslAccountId_ =
     AccountsSavedadstylesList'
     { _aslQuotaUser = Nothing
     , _aslPrettyPrint = True
-    , _aslUserIp = Nothing
+    , _aslUserIP = Nothing
     , _aslAccountId = pAslAccountId_
     , _aslKey = Nothing
     , _aslPageToken = Nothing
-    , _aslOauthToken = Nothing
+    , _aslOAuthToken = Nothing
     , _aslMaxResults = Nothing
     , _aslFields = Nothing
-    , _aslAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -132,9 +127,9 @@ aslPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-aslUserIp :: Lens' AccountsSavedadstylesList' (Maybe Text)
-aslUserIp
-  = lens _aslUserIp (\ s a -> s{_aslUserIp = a})
+aslUserIP :: Lens' AccountsSavedadstylesList' (Maybe Text)
+aslUserIP
+  = lens _aslUserIP (\ s a -> s{_aslUserIP = a})
 
 -- | Account for which to list saved ad styles.
 aslAccountId :: Lens' AccountsSavedadstylesList' Text
@@ -144,7 +139,7 @@ aslAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aslKey :: Lens' AccountsSavedadstylesList' (Maybe Text)
+aslKey :: Lens' AccountsSavedadstylesList' (Maybe Key)
 aslKey = lens _aslKey (\ s a -> s{_aslKey = a})
 
 -- | A continuation token, used to page through saved ad styles. To retrieve
@@ -155,10 +150,10 @@ aslPageToken
   = lens _aslPageToken (\ s a -> s{_aslPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-aslOauthToken :: Lens' AccountsSavedadstylesList' (Maybe Text)
-aslOauthToken
-  = lens _aslOauthToken
-      (\ s a -> s{_aslOauthToken = a})
+aslOAuthToken :: Lens' AccountsSavedadstylesList' (Maybe OAuthToken)
+aslOAuthToken
+  = lens _aslOAuthToken
+      (\ s a -> s{_aslOAuthToken = a})
 
 -- | The maximum number of saved ad styles to include in the response, used
 -- for paging.
@@ -172,23 +167,23 @@ aslFields :: Lens' AccountsSavedadstylesList' (Maybe Text)
 aslFields
   = lens _aslFields (\ s a -> s{_aslFields = a})
 
--- | Data format for the response.
-aslAlt :: Lens' AccountsSavedadstylesList' Alt
-aslAlt = lens _aslAlt (\ s a -> s{_aslAlt = a})
+instance GoogleAuth AccountsSavedadstylesList' where
+        authKey = aslKey . _Just
+        authToken = aslOAuthToken . _Just
 
 instance GoogleRequest AccountsSavedadstylesList'
          where
         type Rs AccountsSavedadstylesList' = SavedAdStyles
         request = requestWithRoute defReq adSenseURL
         requestWithRoute r u AccountsSavedadstylesList'{..}
-          = go _aslQuotaUser (Just _aslPrettyPrint) _aslUserIp
+          = go _aslQuotaUser (Just _aslPrettyPrint) _aslUserIP
               _aslAccountId
               _aslKey
               _aslPageToken
-              _aslOauthToken
+              _aslOAuthToken
               _aslMaxResults
               _aslFields
-              (Just _aslAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountsSavedadstylesListResource)

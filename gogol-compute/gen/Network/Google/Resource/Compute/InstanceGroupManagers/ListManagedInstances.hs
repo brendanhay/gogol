@@ -34,12 +34,11 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.ListManagedInstance
     , igmlmiPrettyPrint
     , igmlmiProject
     , igmlmiInstanceGroupManager
-    , igmlmiUserIp
+    , igmlmiUserIP
     , igmlmiZone
     , igmlmiKey
-    , igmlmiOauthToken
+    , igmlmiOAuthToken
     , igmlmiFields
-    , igmlmiAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -58,10 +57,10 @@ type InstanceGroupManagersListManagedInstancesResource
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :>
+                             QueryParam "alt" AltJSON :>
                                Post '[JSON]
                                  InstanceGroupManagersListManagedInstancesResponse
 
@@ -73,12 +72,11 @@ data InstanceGroupManagersListManagedInstances' = InstanceGroupManagersListManag
     , _igmlmiPrettyPrint          :: !Bool
     , _igmlmiProject              :: !Text
     , _igmlmiInstanceGroupManager :: !Text
-    , _igmlmiUserIp               :: !(Maybe Text)
+    , _igmlmiUserIP               :: !(Maybe Text)
     , _igmlmiZone                 :: !Text
-    , _igmlmiKey                  :: !(Maybe Text)
-    , _igmlmiOauthToken           :: !(Maybe Text)
+    , _igmlmiKey                  :: !(Maybe Key)
+    , _igmlmiOAuthToken           :: !(Maybe OAuthToken)
     , _igmlmiFields               :: !(Maybe Text)
-    , _igmlmiAlt                  :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagersListManagedInstances'' with the minimum fields required to make a request.
@@ -93,17 +91,15 @@ data InstanceGroupManagersListManagedInstances' = InstanceGroupManagersListManag
 --
 -- * 'igmlmiInstanceGroupManager'
 --
--- * 'igmlmiUserIp'
+-- * 'igmlmiUserIP'
 --
 -- * 'igmlmiZone'
 --
 -- * 'igmlmiKey'
 --
--- * 'igmlmiOauthToken'
+-- * 'igmlmiOAuthToken'
 --
 -- * 'igmlmiFields'
---
--- * 'igmlmiAlt'
 instanceGroupManagersListManagedInstances'
     :: Text -- ^ 'project'
     -> Text -- ^ 'instanceGroupManager'
@@ -115,12 +111,11 @@ instanceGroupManagersListManagedInstances' pIgmlmiProject_ pIgmlmiInstanceGroupM
     , _igmlmiPrettyPrint = True
     , _igmlmiProject = pIgmlmiProject_
     , _igmlmiInstanceGroupManager = pIgmlmiInstanceGroupManager_
-    , _igmlmiUserIp = Nothing
+    , _igmlmiUserIP = Nothing
     , _igmlmiZone = pIgmlmiZone_
     , _igmlmiKey = Nothing
-    , _igmlmiOauthToken = Nothing
+    , _igmlmiOAuthToken = Nothing
     , _igmlmiFields = Nothing
-    , _igmlmiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -151,9 +146,9 @@ igmlmiInstanceGroupManager
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-igmlmiUserIp :: Lens' InstanceGroupManagersListManagedInstances' (Maybe Text)
-igmlmiUserIp
-  = lens _igmlmiUserIp (\ s a -> s{_igmlmiUserIp = a})
+igmlmiUserIP :: Lens' InstanceGroupManagersListManagedInstances' (Maybe Text)
+igmlmiUserIP
+  = lens _igmlmiUserIP (\ s a -> s{_igmlmiUserIP = a})
 
 -- | The URL of the zone where the managed instance group is located.
 igmlmiZone :: Lens' InstanceGroupManagersListManagedInstances' Text
@@ -163,25 +158,25 @@ igmlmiZone
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-igmlmiKey :: Lens' InstanceGroupManagersListManagedInstances' (Maybe Text)
+igmlmiKey :: Lens' InstanceGroupManagersListManagedInstances' (Maybe Key)
 igmlmiKey
   = lens _igmlmiKey (\ s a -> s{_igmlmiKey = a})
 
 -- | OAuth 2.0 token for the current user.
-igmlmiOauthToken :: Lens' InstanceGroupManagersListManagedInstances' (Maybe Text)
-igmlmiOauthToken
-  = lens _igmlmiOauthToken
-      (\ s a -> s{_igmlmiOauthToken = a})
+igmlmiOAuthToken :: Lens' InstanceGroupManagersListManagedInstances' (Maybe OAuthToken)
+igmlmiOAuthToken
+  = lens _igmlmiOAuthToken
+      (\ s a -> s{_igmlmiOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 igmlmiFields :: Lens' InstanceGroupManagersListManagedInstances' (Maybe Text)
 igmlmiFields
   = lens _igmlmiFields (\ s a -> s{_igmlmiFields = a})
 
--- | Data format for the response.
-igmlmiAlt :: Lens' InstanceGroupManagersListManagedInstances' Alt
-igmlmiAlt
-  = lens _igmlmiAlt (\ s a -> s{_igmlmiAlt = a})
+instance GoogleAuth
+         InstanceGroupManagersListManagedInstances' where
+        authKey = igmlmiKey . _Just
+        authToken = igmlmiOAuthToken . _Just
 
 instance GoogleRequest
          InstanceGroupManagersListManagedInstances' where
@@ -193,12 +188,12 @@ instance GoogleRequest
           = go _igmlmiQuotaUser (Just _igmlmiPrettyPrint)
               _igmlmiProject
               _igmlmiInstanceGroupManager
-              _igmlmiUserIp
+              _igmlmiUserIP
               _igmlmiZone
               _igmlmiKey
-              _igmlmiOauthToken
+              _igmlmiOAuthToken
               _igmlmiFields
-              (Just _igmlmiAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

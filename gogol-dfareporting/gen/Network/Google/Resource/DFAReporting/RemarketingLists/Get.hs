@@ -32,13 +32,12 @@ module Network.Google.Resource.DFAReporting.RemarketingLists.Get
     -- * Request Lenses
     , rlgQuotaUser
     , rlgPrettyPrint
-    , rlgUserIp
+    , rlgUserIP
     , rlgProfileId
     , rlgKey
     , rlgId
-    , rlgOauthToken
+    , rlgOAuthToken
     , rlgFields
-    , rlgAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -54,10 +53,11 @@ type RemarketingListsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] RemarketingList
+                         QueryParam "alt" AltJSON :>
+                           Get '[JSON] RemarketingList
 
 -- | Gets one remarketing list by ID.
 --
@@ -65,13 +65,12 @@ type RemarketingListsGetResource =
 data RemarketingListsGet' = RemarketingListsGet'
     { _rlgQuotaUser   :: !(Maybe Text)
     , _rlgPrettyPrint :: !Bool
-    , _rlgUserIp      :: !(Maybe Text)
+    , _rlgUserIP      :: !(Maybe Text)
     , _rlgProfileId   :: !Int64
-    , _rlgKey         :: !(Maybe Text)
+    , _rlgKey         :: !(Maybe Key)
     , _rlgId          :: !Int64
-    , _rlgOauthToken  :: !(Maybe Text)
+    , _rlgOAuthToken  :: !(Maybe OAuthToken)
     , _rlgFields      :: !(Maybe Text)
-    , _rlgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RemarketingListsGet'' with the minimum fields required to make a request.
@@ -82,7 +81,7 @@ data RemarketingListsGet' = RemarketingListsGet'
 --
 -- * 'rlgPrettyPrint'
 --
--- * 'rlgUserIp'
+-- * 'rlgUserIP'
 --
 -- * 'rlgProfileId'
 --
@@ -90,11 +89,9 @@ data RemarketingListsGet' = RemarketingListsGet'
 --
 -- * 'rlgId'
 --
--- * 'rlgOauthToken'
+-- * 'rlgOAuthToken'
 --
 -- * 'rlgFields'
---
--- * 'rlgAlt'
 remarketingListsGet'
     :: Int64 -- ^ 'profileId'
     -> Int64 -- ^ 'id'
@@ -103,13 +100,12 @@ remarketingListsGet' pRlgProfileId_ pRlgId_ =
     RemarketingListsGet'
     { _rlgQuotaUser = Nothing
     , _rlgPrettyPrint = True
-    , _rlgUserIp = Nothing
+    , _rlgUserIP = Nothing
     , _rlgProfileId = pRlgProfileId_
     , _rlgKey = Nothing
     , _rlgId = pRlgId_
-    , _rlgOauthToken = Nothing
+    , _rlgOAuthToken = Nothing
     , _rlgFields = Nothing
-    , _rlgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,9 +123,9 @@ rlgPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rlgUserIp :: Lens' RemarketingListsGet' (Maybe Text)
-rlgUserIp
-  = lens _rlgUserIp (\ s a -> s{_rlgUserIp = a})
+rlgUserIP :: Lens' RemarketingListsGet' (Maybe Text)
+rlgUserIP
+  = lens _rlgUserIP (\ s a -> s{_rlgUserIP = a})
 
 -- | User profile ID associated with this request.
 rlgProfileId :: Lens' RemarketingListsGet' Int64
@@ -139,7 +135,7 @@ rlgProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rlgKey :: Lens' RemarketingListsGet' (Maybe Text)
+rlgKey :: Lens' RemarketingListsGet' (Maybe Key)
 rlgKey = lens _rlgKey (\ s a -> s{_rlgKey = a})
 
 -- | Remarketing list ID.
@@ -147,31 +143,31 @@ rlgId :: Lens' RemarketingListsGet' Int64
 rlgId = lens _rlgId (\ s a -> s{_rlgId = a})
 
 -- | OAuth 2.0 token for the current user.
-rlgOauthToken :: Lens' RemarketingListsGet' (Maybe Text)
-rlgOauthToken
-  = lens _rlgOauthToken
-      (\ s a -> s{_rlgOauthToken = a})
+rlgOAuthToken :: Lens' RemarketingListsGet' (Maybe OAuthToken)
+rlgOAuthToken
+  = lens _rlgOAuthToken
+      (\ s a -> s{_rlgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 rlgFields :: Lens' RemarketingListsGet' (Maybe Text)
 rlgFields
   = lens _rlgFields (\ s a -> s{_rlgFields = a})
 
--- | Data format for the response.
-rlgAlt :: Lens' RemarketingListsGet' Alt
-rlgAlt = lens _rlgAlt (\ s a -> s{_rlgAlt = a})
+instance GoogleAuth RemarketingListsGet' where
+        authKey = rlgKey . _Just
+        authToken = rlgOAuthToken . _Just
 
 instance GoogleRequest RemarketingListsGet' where
         type Rs RemarketingListsGet' = RemarketingList
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u RemarketingListsGet'{..}
-          = go _rlgQuotaUser (Just _rlgPrettyPrint) _rlgUserIp
+          = go _rlgQuotaUser (Just _rlgPrettyPrint) _rlgUserIP
               _rlgProfileId
               _rlgKey
               _rlgId
-              _rlgOauthToken
+              _rlgOAuthToken
               _rlgFields
-              (Just _rlgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy RemarketingListsGetResource)

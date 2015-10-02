@@ -298,7 +298,7 @@ instance ToJSON AnalyzeErrors where
 data List = List
     { _lNextPageToken :: !(Maybe Text)
     , _lKind          :: !Text
-    , _lItems         :: !(Maybe [Maybe Insert2])
+    , _lItems         :: !(Maybe [Insert2])
     , _lSelfLink      :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -334,7 +334,7 @@ lKind :: Lens' List Text
 lKind = lens _lKind (\ s a -> s{_lKind = a})
 
 -- | List of models.
-lItems :: Lens' List [Maybe Insert2]
+lItems :: Lens' List [Insert2]
 lItems
   = lens _lItems (\ s a -> s{_lItems = a}) . _Default .
       _Coerce
@@ -624,26 +624,26 @@ instance ToJSON AnalyzeDataDescriptionFeaturesText
 --
 -- /See:/ 'inputInput' smart constructor.
 newtype InputInput = InputInput
-    { _iiCsvInstance :: Maybe [JSONValue]
+    { _iiCSVInstance :: Maybe [JSONValue]
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InputInput' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'iiCsvInstance'
+-- * 'iiCSVInstance'
 inputInput
     :: InputInput
 inputInput =
     InputInput
-    { _iiCsvInstance = Nothing
+    { _iiCSVInstance = Nothing
     }
 
 -- | A list of input features, these can be strings or doubles.
-iiCsvInstance :: Lens' InputInput [JSONValue]
-iiCsvInstance
-  = lens _iiCsvInstance
-      (\ s a -> s{_iiCsvInstance = a})
+iiCSVInstance :: Lens' InputInput [JSONValue]
+iiCSVInstance
+  = lens _iiCSVInstance
+      (\ s a -> s{_iiCSVInstance = a})
       . _Default
       . _Coerce
 
@@ -656,7 +656,7 @@ instance FromJSON InputInput where
 instance ToJSON InputInput where
         toJSON InputInput{..}
           = object
-              (catMaybes [("csvInstance" .=) <$> _iiCsvInstance])
+              (catMaybes [("csvInstance" .=) <$> _iiCSVInstance])
 
 --
 -- /See:/ 'input' smart constructor.
@@ -1132,7 +1132,7 @@ instance ToJSON
 data AnalyzeModelDescription = AnalyzeModelDescription
     { _amdConfusionMatrixRowTotals :: !(Maybe AnalyzeModelDescriptionConfusionMatrixRowTotals)
     , _amdConfusionMatrix          :: !(Maybe AnalyzeModelDescriptionConfusionMatrix)
-    , _amdModelinfo                :: !(Maybe (Maybe Insert2))
+    , _amdModelInfo                :: !(Maybe Insert2)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AnalyzeModelDescription' with the minimum fields required to make a request.
@@ -1143,14 +1143,14 @@ data AnalyzeModelDescription = AnalyzeModelDescription
 --
 -- * 'amdConfusionMatrix'
 --
--- * 'amdModelinfo'
+-- * 'amdModelInfo'
 analyzeModelDescription
     :: AnalyzeModelDescription
 analyzeModelDescription =
     AnalyzeModelDescription
     { _amdConfusionMatrixRowTotals = Nothing
     , _amdConfusionMatrix = Nothing
-    , _amdModelinfo = Nothing
+    , _amdModelInfo = Nothing
     }
 
 -- | A list of the confusion matrix row totals.
@@ -1171,9 +1171,9 @@ amdConfusionMatrix
       (\ s a -> s{_amdConfusionMatrix = a})
 
 -- | Basic information about the model.
-amdModelinfo :: Lens' AnalyzeModelDescription (Maybe (Maybe Insert2))
-amdModelinfo
-  = lens _amdModelinfo (\ s a -> s{_amdModelinfo = a})
+amdModelInfo :: Lens' AnalyzeModelDescription (Maybe Insert2)
+amdModelInfo
+  = lens _amdModelInfo (\ s a -> s{_amdModelInfo = a})
 
 instance FromJSON AnalyzeModelDescription where
         parseJSON
@@ -1191,12 +1191,12 @@ instance ToJSON AnalyzeModelDescription where
                  [("confusionMatrixRowTotals" .=) <$>
                     _amdConfusionMatrixRowTotals,
                   ("confusionMatrix" .=) <$> _amdConfusionMatrix,
-                  ("modelinfo" .=) <$> _amdModelinfo])
+                  ("modelinfo" .=) <$> _amdModelInfo])
 
 --
 -- /See:/ 'insertTrainingInstances' smart constructor.
 data InsertTrainingInstances = InsertTrainingInstances
-    { _itiCsvInstance :: !(Maybe [JSONValue])
+    { _itiCSVInstance :: !(Maybe [JSONValue])
     , _itiOutput      :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1204,22 +1204,22 @@ data InsertTrainingInstances = InsertTrainingInstances
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'itiCsvInstance'
+-- * 'itiCSVInstance'
 --
 -- * 'itiOutput'
 insertTrainingInstances
     :: InsertTrainingInstances
 insertTrainingInstances =
     InsertTrainingInstances
-    { _itiCsvInstance = Nothing
+    { _itiCSVInstance = Nothing
     , _itiOutput = Nothing
     }
 
 -- | The input features for this instance.
-itiCsvInstance :: Lens' InsertTrainingInstances [JSONValue]
-itiCsvInstance
-  = lens _itiCsvInstance
-      (\ s a -> s{_itiCsvInstance = a})
+itiCSVInstance :: Lens' InsertTrainingInstances [JSONValue]
+itiCSVInstance
+  = lens _itiCSVInstance
+      (\ s a -> s{_itiCSVInstance = a})
       . _Default
       . _Coerce
 
@@ -1240,7 +1240,7 @@ instance ToJSON InsertTrainingInstances where
         toJSON InsertTrainingInstances{..}
           = object
               (catMaybes
-                 [("csvInstance" .=) <$> _itiCsvInstance,
+                 [("csvInstance" .=) <$> _itiCSVInstance,
                   ("output" .=) <$> _itiOutput])
 
 --
@@ -1409,7 +1409,7 @@ instance ToJSON AnalyzeDataDescriptionFeaturesNumeric
 --
 -- /See:/ 'update' smart constructor.
 data Update = Update
-    { _uCsvInstance :: !(Maybe [JSONValue])
+    { _uCSVInstance :: !(Maybe [JSONValue])
     , _uOutput      :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1417,21 +1417,21 @@ data Update = Update
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'uCsvInstance'
+-- * 'uCSVInstance'
 --
 -- * 'uOutput'
 update
     :: Update
 update =
     Update
-    { _uCsvInstance = Nothing
+    { _uCSVInstance = Nothing
     , _uOutput = Nothing
     }
 
 -- | The input features for this instance.
-uCsvInstance :: Lens' Update [JSONValue]
-uCsvInstance
-  = lens _uCsvInstance (\ s a -> s{_uCsvInstance = a})
+uCSVInstance :: Lens' Update [JSONValue]
+uCSVInstance
+  = lens _uCSVInstance (\ s a -> s{_uCSVInstance = a})
       . _Default
       . _Coerce
 
@@ -1451,7 +1451,7 @@ instance ToJSON Update where
         toJSON Update{..}
           = object
               (catMaybes
-                 [("csvInstance" .=) <$> _uCsvInstance,
+                 [("csvInstance" .=) <$> _uCSVInstance,
                   ("output" .=) <$> _uOutput])
 
 -- | Description of the output value or label.

@@ -42,10 +42,10 @@ module Network.Google.Resource.PubSub.Projects.Topics.Publish
     , ptpTopic
     , ptpBearerToken
     , ptpKey
-    , ptpOauthToken
+    , ptpPublishRequest
+    , ptpOAuthToken
     , ptpFields
     , ptpCallback
-    , ptpAlt
     ) where
 
 import           Network.Google.Prelude
@@ -64,12 +64,13 @@ type ProjectsTopicsPublishResource =
                    QueryParam "access_token" Text :>
                      QueryParam "uploadType" Text :>
                        QueryParam "bearer_token" Text :>
-                         QueryParam "key" Text :>
-                           QueryParam "oauth_token" Text :>
+                         QueryParam "key" Key :>
+                           QueryParam "oauth_token" OAuthToken :>
                              QueryParam "fields" Text :>
                                QueryParam "callback" Text :>
-                                 QueryParam "alt" Text :>
-                                   Post '[JSON] PublishResponse
+                                 QueryParam "alt" AltJSON :>
+                                   ReqBody '[JSON] PublishRequest :>
+                                     Post '[JSON] PublishResponse
 
 -- | Adds one or more messages to the topic. Returns NOT_FOUND if the topic
 -- does not exist. The message payload must not be empty; it must contain
@@ -86,11 +87,11 @@ data ProjectsTopicsPublish' = ProjectsTopicsPublish'
     , _ptpUploadType     :: !(Maybe Text)
     , _ptpTopic          :: !Text
     , _ptpBearerToken    :: !(Maybe Text)
-    , _ptpKey            :: !(Maybe Text)
-    , _ptpOauthToken     :: !(Maybe Text)
+    , _ptpKey            :: !(Maybe Key)
+    , _ptpPublishRequest :: !PublishRequest
+    , _ptpOAuthToken     :: !(Maybe OAuthToken)
     , _ptpFields         :: !(Maybe Text)
     , _ptpCallback       :: !(Maybe Text)
-    , _ptpAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ProjectsTopicsPublish'' with the minimum fields required to make a request.
@@ -117,17 +118,18 @@ data ProjectsTopicsPublish' = ProjectsTopicsPublish'
 --
 -- * 'ptpKey'
 --
--- * 'ptpOauthToken'
+-- * 'ptpPublishRequest'
+--
+-- * 'ptpOAuthToken'
 --
 -- * 'ptpFields'
 --
 -- * 'ptpCallback'
---
--- * 'ptpAlt'
 projectsTopicsPublish'
     :: Text -- ^ 'topic'
+    -> PublishRequest -- ^ 'PublishRequest'
     -> ProjectsTopicsPublish'
-projectsTopicsPublish' pPtpTopic_ =
+projectsTopicsPublish' pPtpTopic_ pPtpPublishRequest_ =
     ProjectsTopicsPublish'
     { _ptpXgafv = Nothing
     , _ptpQuotaUser = Nothing
@@ -139,10 +141,10 @@ projectsTopicsPublish' pPtpTopic_ =
     , _ptpTopic = pPtpTopic_
     , _ptpBearerToken = Nothing
     , _ptpKey = Nothing
-    , _ptpOauthToken = Nothing
+    , _ptpPublishRequest = pPtpPublishRequest_
+    , _ptpOAuthToken = Nothing
     , _ptpFields = Nothing
     , _ptpCallback = Nothing
-    , _ptpAlt = "json"
     }
 
 -- | V1 error format.
@@ -197,14 +199,20 @@ ptpBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ptpKey :: Lens' ProjectsTopicsPublish' (Maybe Text)
+ptpKey :: Lens' ProjectsTopicsPublish' (Maybe Key)
 ptpKey = lens _ptpKey (\ s a -> s{_ptpKey = a})
 
+-- | Multipart request metadata.
+ptpPublishRequest :: Lens' ProjectsTopicsPublish' PublishRequest
+ptpPublishRequest
+  = lens _ptpPublishRequest
+      (\ s a -> s{_ptpPublishRequest = a})
+
 -- | OAuth 2.0 token for the current user.
-ptpOauthToken :: Lens' ProjectsTopicsPublish' (Maybe Text)
-ptpOauthToken
-  = lens _ptpOauthToken
-      (\ s a -> s{_ptpOauthToken = a})
+ptpOAuthToken :: Lens' ProjectsTopicsPublish' (Maybe OAuthToken)
+ptpOAuthToken
+  = lens _ptpOAuthToken
+      (\ s a -> s{_ptpOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ptpFields :: Lens' ProjectsTopicsPublish' (Maybe Text)
@@ -216,9 +224,9 @@ ptpCallback :: Lens' ProjectsTopicsPublish' (Maybe Text)
 ptpCallback
   = lens _ptpCallback (\ s a -> s{_ptpCallback = a})
 
--- | Data format for response.
-ptpAlt :: Lens' ProjectsTopicsPublish' Text
-ptpAlt = lens _ptpAlt (\ s a -> s{_ptpAlt = a})
+instance GoogleAuth ProjectsTopicsPublish' where
+        authKey = ptpKey . _Just
+        authToken = ptpOAuthToken . _Just
 
 instance GoogleRequest ProjectsTopicsPublish' where
         type Rs ProjectsTopicsPublish' = PublishResponse
@@ -232,10 +240,11 @@ instance GoogleRequest ProjectsTopicsPublish' where
               _ptpTopic
               _ptpBearerToken
               _ptpKey
-              _ptpOauthToken
+              _ptpOAuthToken
               _ptpFields
               _ptpCallback
-              (Just _ptpAlt)
+              (Just AltJSON)
+              _ptpPublishRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ProjectsTopicsPublishResource)

@@ -34,14 +34,13 @@ module Network.Google.Resource.Calendar.ACL.List
     , alQuotaUser
     , alCalendarId
     , alPrettyPrint
-    , alUserIp
+    , alUserIP
     , alShowDeleted
     , alKey
     , alPageToken
-    , alOauthToken
+    , alOAuthToken
     , alMaxResults
     , alFields
-    , alAlt
     ) where
 
 import           Network.Google.AppsCalendar.Types
@@ -58,12 +57,12 @@ type AclListResource =
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
                    QueryParam "showDeleted" Bool :>
-                     QueryParam "key" Text :>
+                     QueryParam "key" Key :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "maxResults" Int32 :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :> Get '[JSON] ACL
+                               QueryParam "alt" AltJSON :> Get '[JSON] ACL
 
 -- | Returns the rules in the access control list for the calendar.
 --
@@ -73,14 +72,13 @@ data ACLList' = ACLList'
     , _alQuotaUser   :: !(Maybe Text)
     , _alCalendarId  :: !Text
     , _alPrettyPrint :: !Bool
-    , _alUserIp      :: !(Maybe Text)
+    , _alUserIP      :: !(Maybe Text)
     , _alShowDeleted :: !(Maybe Bool)
-    , _alKey         :: !(Maybe Text)
+    , _alKey         :: !(Maybe Key)
     , _alPageToken   :: !(Maybe Text)
-    , _alOauthToken  :: !(Maybe Text)
+    , _alOAuthToken  :: !(Maybe OAuthToken)
     , _alMaxResults  :: !(Maybe Int32)
     , _alFields      :: !(Maybe Text)
-    , _alAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ACLList'' with the minimum fields required to make a request.
@@ -95,7 +93,7 @@ data ACLList' = ACLList'
 --
 -- * 'alPrettyPrint'
 --
--- * 'alUserIp'
+-- * 'alUserIP'
 --
 -- * 'alShowDeleted'
 --
@@ -103,13 +101,11 @@ data ACLList' = ACLList'
 --
 -- * 'alPageToken'
 --
--- * 'alOauthToken'
+-- * 'alOAuthToken'
 --
 -- * 'alMaxResults'
 --
 -- * 'alFields'
---
--- * 'alAlt'
 aCLList'
     :: Text -- ^ 'calendarId'
     -> ACLList'
@@ -119,14 +115,13 @@ aCLList' pAlCalendarId_ =
     , _alQuotaUser = Nothing
     , _alCalendarId = pAlCalendarId_
     , _alPrettyPrint = True
-    , _alUserIp = Nothing
+    , _alUserIP = Nothing
     , _alShowDeleted = Nothing
     , _alKey = Nothing
     , _alPageToken = Nothing
-    , _alOauthToken = Nothing
+    , _alOAuthToken = Nothing
     , _alMaxResults = Nothing
     , _alFields = Nothing
-    , _alAlt = JSON
     }
 
 -- | Token obtained from the nextSyncToken field returned on the last page of
@@ -164,8 +159,8 @@ alPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-alUserIp :: Lens' ACLList' (Maybe Text)
-alUserIp = lens _alUserIp (\ s a -> s{_alUserIp = a})
+alUserIP :: Lens' ACLList' (Maybe Text)
+alUserIP = lens _alUserIP (\ s a -> s{_alUserIP = a})
 
 -- | Whether to include deleted ACLs in the result. Deleted ACLs are
 -- represented by role equal to \"none\". Deleted ACLs will always be
@@ -178,7 +173,7 @@ alShowDeleted
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-alKey :: Lens' ACLList' (Maybe Text)
+alKey :: Lens' ACLList' (Maybe Key)
 alKey = lens _alKey (\ s a -> s{_alKey = a})
 
 -- | Token specifying which result page to return. Optional.
@@ -187,9 +182,9 @@ alPageToken
   = lens _alPageToken (\ s a -> s{_alPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-alOauthToken :: Lens' ACLList' (Maybe Text)
-alOauthToken
-  = lens _alOauthToken (\ s a -> s{_alOauthToken = a})
+alOAuthToken :: Lens' ACLList' (Maybe OAuthToken)
+alOAuthToken
+  = lens _alOAuthToken (\ s a -> s{_alOAuthToken = a})
 
 -- | Maximum number of entries returned on one result page. By default the
 -- value is 100 entries. The page size can never be larger than 250
@@ -202,9 +197,9 @@ alMaxResults
 alFields :: Lens' ACLList' (Maybe Text)
 alFields = lens _alFields (\ s a -> s{_alFields = a})
 
--- | Data format for the response.
-alAlt :: Lens' ACLList' Alt
-alAlt = lens _alAlt (\ s a -> s{_alAlt = a})
+instance GoogleAuth ACLList' where
+        authKey = alKey . _Just
+        authToken = alOAuthToken . _Just
 
 instance GoogleRequest ACLList' where
         type Rs ACLList' = ACL
@@ -212,14 +207,14 @@ instance GoogleRequest ACLList' where
         requestWithRoute r u ACLList'{..}
           = go _alSyncToken _alQuotaUser _alCalendarId
               (Just _alPrettyPrint)
-              _alUserIp
+              _alUserIP
               _alShowDeleted
               _alKey
               _alPageToken
-              _alOauthToken
+              _alOAuthToken
               _alMaxResults
               _alFields
-              (Just _alAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy AclListResource) r
                       u

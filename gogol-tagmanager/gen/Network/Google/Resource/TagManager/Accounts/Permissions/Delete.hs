@@ -20,7 +20,7 @@
 -- | Removes a user from the account, revoking access to it and all of its
 -- containers.
 --
--- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagmanagerAccountsPermissionsDelete@.
+-- /See:/ <https://developers.google.com/tag-manager/api/v1/ Tag Manager API Reference> for @TagManagerAccountsPermissionsDelete@.
 module Network.Google.Resource.TagManager.Accounts.Permissions.Delete
     (
     -- * REST Resource
@@ -33,19 +33,18 @@ module Network.Google.Resource.TagManager.Accounts.Permissions.Delete
     -- * Request Lenses
     , apdQuotaUser
     , apdPrettyPrint
-    , apdUserIp
+    , apdUserIP
     , apdAccountId
     , apdKey
-    , apdOauthToken
+    , apdOAuthToken
     , apdPermissionId
     , apdFields
-    , apdAlt
     ) where
 
 import           Network.Google.Prelude
 import           Network.Google.TagManager.Types
 
--- | A resource alias for @TagmanagerAccountsPermissionsDelete@ which the
+-- | A resource alias for @TagManagerAccountsPermissionsDelete@ which the
 -- 'AccountsPermissionsDelete'' request conforms to.
 type AccountsPermissionsDeleteResource =
      "accounts" :>
@@ -55,10 +54,10 @@ type AccountsPermissionsDeleteResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Delete '[JSON] ()
+                         QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Removes a user from the account, revoking access to it and all of its
 -- containers.
@@ -67,13 +66,12 @@ type AccountsPermissionsDeleteResource =
 data AccountsPermissionsDelete' = AccountsPermissionsDelete'
     { _apdQuotaUser    :: !(Maybe Text)
     , _apdPrettyPrint  :: !Bool
-    , _apdUserIp       :: !(Maybe Text)
+    , _apdUserIP       :: !(Maybe Text)
     , _apdAccountId    :: !Text
-    , _apdKey          :: !(Maybe Text)
-    , _apdOauthToken   :: !(Maybe Text)
+    , _apdKey          :: !(Maybe Key)
+    , _apdOAuthToken   :: !(Maybe OAuthToken)
     , _apdPermissionId :: !Text
     , _apdFields       :: !(Maybe Text)
-    , _apdAlt          :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountsPermissionsDelete'' with the minimum fields required to make a request.
@@ -84,19 +82,17 @@ data AccountsPermissionsDelete' = AccountsPermissionsDelete'
 --
 -- * 'apdPrettyPrint'
 --
--- * 'apdUserIp'
+-- * 'apdUserIP'
 --
 -- * 'apdAccountId'
 --
 -- * 'apdKey'
 --
--- * 'apdOauthToken'
+-- * 'apdOAuthToken'
 --
 -- * 'apdPermissionId'
 --
 -- * 'apdFields'
---
--- * 'apdAlt'
 accountsPermissionsDelete'
     :: Text -- ^ 'accountId'
     -> Text -- ^ 'permissionId'
@@ -105,13 +101,12 @@ accountsPermissionsDelete' pApdAccountId_ pApdPermissionId_ =
     AccountsPermissionsDelete'
     { _apdQuotaUser = Nothing
     , _apdPrettyPrint = True
-    , _apdUserIp = Nothing
+    , _apdUserIP = Nothing
     , _apdAccountId = pApdAccountId_
     , _apdKey = Nothing
-    , _apdOauthToken = Nothing
+    , _apdOAuthToken = Nothing
     , _apdPermissionId = pApdPermissionId_
     , _apdFields = Nothing
-    , _apdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -129,9 +124,9 @@ apdPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-apdUserIp :: Lens' AccountsPermissionsDelete' (Maybe Text)
-apdUserIp
-  = lens _apdUserIp (\ s a -> s{_apdUserIp = a})
+apdUserIP :: Lens' AccountsPermissionsDelete' (Maybe Text)
+apdUserIP
+  = lens _apdUserIP (\ s a -> s{_apdUserIP = a})
 
 -- | The GTM Account ID.
 apdAccountId :: Lens' AccountsPermissionsDelete' Text
@@ -141,14 +136,14 @@ apdAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-apdKey :: Lens' AccountsPermissionsDelete' (Maybe Text)
+apdKey :: Lens' AccountsPermissionsDelete' (Maybe Key)
 apdKey = lens _apdKey (\ s a -> s{_apdKey = a})
 
 -- | OAuth 2.0 token for the current user.
-apdOauthToken :: Lens' AccountsPermissionsDelete' (Maybe Text)
-apdOauthToken
-  = lens _apdOauthToken
-      (\ s a -> s{_apdOauthToken = a})
+apdOAuthToken :: Lens' AccountsPermissionsDelete' (Maybe OAuthToken)
+apdOAuthToken
+  = lens _apdOAuthToken
+      (\ s a -> s{_apdOAuthToken = a})
 
 -- | The GTM User ID.
 apdPermissionId :: Lens' AccountsPermissionsDelete' Text
@@ -161,22 +156,22 @@ apdFields :: Lens' AccountsPermissionsDelete' (Maybe Text)
 apdFields
   = lens _apdFields (\ s a -> s{_apdFields = a})
 
--- | Data format for the response.
-apdAlt :: Lens' AccountsPermissionsDelete' Alt
-apdAlt = lens _apdAlt (\ s a -> s{_apdAlt = a})
+instance GoogleAuth AccountsPermissionsDelete' where
+        authKey = apdKey . _Just
+        authToken = apdOAuthToken . _Just
 
 instance GoogleRequest AccountsPermissionsDelete'
          where
         type Rs AccountsPermissionsDelete' = ()
         request = requestWithRoute defReq tagManagerURL
         requestWithRoute r u AccountsPermissionsDelete'{..}
-          = go _apdQuotaUser (Just _apdPrettyPrint) _apdUserIp
+          = go _apdQuotaUser (Just _apdPrettyPrint) _apdUserIP
               _apdAccountId
               _apdKey
-              _apdOauthToken
+              _apdOAuthToken
               _apdPermissionId
               _apdFields
-              (Just _apdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountsPermissionsDeleteResource)

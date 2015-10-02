@@ -32,16 +32,15 @@ module Network.Google.Resource.Books.Layers.List
     -- * Request Lenses
     , llQuotaUser
     , llPrettyPrint
-    , llUserIp
+    , llUserIP
     , llContentVersion
     , llKey
     , llVolumeId
     , llSource
     , llPageToken
-    , llOauthToken
+    , llOAuthToken
     , llMaxResults
     , llFields
-    , llAlt
     ) where
 
 import           Network.Google.Books.Types
@@ -57,13 +56,13 @@ type LayersListResource =
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
                  QueryParam "contentVersion" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "source" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "maxResults" Word32 :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :>
+                               QueryParam "alt" AltJSON :>
                                  Get '[JSON] Layersummaries
 
 -- | List the layer summaries for a volume.
@@ -72,16 +71,15 @@ type LayersListResource =
 data LayersList' = LayersList'
     { _llQuotaUser      :: !(Maybe Text)
     , _llPrettyPrint    :: !Bool
-    , _llUserIp         :: !(Maybe Text)
+    , _llUserIP         :: !(Maybe Text)
     , _llContentVersion :: !(Maybe Text)
-    , _llKey            :: !(Maybe Text)
+    , _llKey            :: !(Maybe Key)
     , _llVolumeId       :: !Text
     , _llSource         :: !(Maybe Text)
     , _llPageToken      :: !(Maybe Text)
-    , _llOauthToken     :: !(Maybe Text)
+    , _llOAuthToken     :: !(Maybe OAuthToken)
     , _llMaxResults     :: !(Maybe Word32)
     , _llFields         :: !(Maybe Text)
-    , _llAlt            :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LayersList'' with the minimum fields required to make a request.
@@ -92,7 +90,7 @@ data LayersList' = LayersList'
 --
 -- * 'llPrettyPrint'
 --
--- * 'llUserIp'
+-- * 'llUserIP'
 --
 -- * 'llContentVersion'
 --
@@ -104,13 +102,11 @@ data LayersList' = LayersList'
 --
 -- * 'llPageToken'
 --
--- * 'llOauthToken'
+-- * 'llOAuthToken'
 --
 -- * 'llMaxResults'
 --
 -- * 'llFields'
---
--- * 'llAlt'
 layersList'
     :: Text -- ^ 'volumeId'
     -> LayersList'
@@ -118,16 +114,15 @@ layersList' pLlVolumeId_ =
     LayersList'
     { _llQuotaUser = Nothing
     , _llPrettyPrint = True
-    , _llUserIp = Nothing
+    , _llUserIP = Nothing
     , _llContentVersion = Nothing
     , _llKey = Nothing
     , _llVolumeId = pLlVolumeId_
     , _llSource = Nothing
     , _llPageToken = Nothing
-    , _llOauthToken = Nothing
+    , _llOAuthToken = Nothing
     , _llMaxResults = Nothing
     , _llFields = Nothing
-    , _llAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -145,8 +140,8 @@ llPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-llUserIp :: Lens' LayersList' (Maybe Text)
-llUserIp = lens _llUserIp (\ s a -> s{_llUserIp = a})
+llUserIP :: Lens' LayersList' (Maybe Text)
+llUserIP = lens _llUserIP (\ s a -> s{_llUserIP = a})
 
 -- | The content version for the requested volume.
 llContentVersion :: Lens' LayersList' (Maybe Text)
@@ -157,7 +152,7 @@ llContentVersion
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-llKey :: Lens' LayersList' (Maybe Text)
+llKey :: Lens' LayersList' (Maybe Key)
 llKey = lens _llKey (\ s a -> s{_llKey = a})
 
 -- | The volume to retrieve layers for.
@@ -175,9 +170,9 @@ llPageToken
   = lens _llPageToken (\ s a -> s{_llPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-llOauthToken :: Lens' LayersList' (Maybe Text)
-llOauthToken
-  = lens _llOauthToken (\ s a -> s{_llOauthToken = a})
+llOAuthToken :: Lens' LayersList' (Maybe OAuthToken)
+llOAuthToken
+  = lens _llOAuthToken (\ s a -> s{_llOAuthToken = a})
 
 -- | Maximum number of results to return
 llMaxResults :: Lens' LayersList' (Maybe Word32)
@@ -188,24 +183,24 @@ llMaxResults
 llFields :: Lens' LayersList' (Maybe Text)
 llFields = lens _llFields (\ s a -> s{_llFields = a})
 
--- | Data format for the response.
-llAlt :: Lens' LayersList' Alt
-llAlt = lens _llAlt (\ s a -> s{_llAlt = a})
+instance GoogleAuth LayersList' where
+        authKey = llKey . _Just
+        authToken = llOAuthToken . _Just
 
 instance GoogleRequest LayersList' where
         type Rs LayersList' = Layersummaries
         request = requestWithRoute defReq booksURL
         requestWithRoute r u LayersList'{..}
-          = go _llQuotaUser (Just _llPrettyPrint) _llUserIp
+          = go _llQuotaUser (Just _llPrettyPrint) _llUserIP
               _llContentVersion
               _llKey
               _llVolumeId
               _llSource
               _llPageToken
-              _llOauthToken
+              _llOAuthToken
               _llMaxResults
               _llFields
-              (Just _llAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute (Proxy :: Proxy LayersListResource)
                       r

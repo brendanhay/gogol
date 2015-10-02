@@ -33,14 +33,14 @@ module Network.Google.Resource.Analytics.Management.Experiments.Patch
     , mepQuotaUser
     , mepPrettyPrint
     , mepWebPropertyId
-    , mepUserIp
+    , mepUserIP
     , mepProfileId
+    , mepExperiment
     , mepAccountId
     , mepExperimentId
     , mepKey
-    , mepOauthToken
+    , mepOAuthToken
     , mepFields
-    , mepAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -61,11 +61,12 @@ type ManagementExperimentsPatchResource =
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "alt" Alt :>
-                                     Patch '[JSON] Experiment
+                                   QueryParam "alt" AltJSON :>
+                                     ReqBody '[JSON] Experiment :>
+                                       Patch '[JSON] Experiment
 
 -- | Update an existing experiment. This method supports patch semantics.
 --
@@ -74,14 +75,14 @@ data ManagementExperimentsPatch' = ManagementExperimentsPatch'
     { _mepQuotaUser     :: !(Maybe Text)
     , _mepPrettyPrint   :: !Bool
     , _mepWebPropertyId :: !Text
-    , _mepUserIp        :: !(Maybe Text)
+    , _mepUserIP        :: !(Maybe Text)
     , _mepProfileId     :: !Text
+    , _mepExperiment    :: !Experiment
     , _mepAccountId     :: !Text
     , _mepExperimentId  :: !Text
-    , _mepKey           :: !(Maybe Text)
-    , _mepOauthToken    :: !(Maybe Text)
+    , _mepKey           :: !(Maybe Key)
+    , _mepOAuthToken    :: !(Maybe OAuthToken)
     , _mepFields        :: !(Maybe Text)
-    , _mepAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementExperimentsPatch'' with the minimum fields required to make a request.
@@ -94,9 +95,11 @@ data ManagementExperimentsPatch' = ManagementExperimentsPatch'
 --
 -- * 'mepWebPropertyId'
 --
--- * 'mepUserIp'
+-- * 'mepUserIP'
 --
 -- * 'mepProfileId'
+--
+-- * 'mepExperiment'
 --
 -- * 'mepAccountId'
 --
@@ -104,30 +107,29 @@ data ManagementExperimentsPatch' = ManagementExperimentsPatch'
 --
 -- * 'mepKey'
 --
--- * 'mepOauthToken'
+-- * 'mepOAuthToken'
 --
 -- * 'mepFields'
---
--- * 'mepAlt'
 managementExperimentsPatch'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
+    -> Experiment -- ^ 'Experiment'
     -> Text -- ^ 'accountId'
     -> Text -- ^ 'experimentId'
     -> ManagementExperimentsPatch'
-managementExperimentsPatch' pMepWebPropertyId_ pMepProfileId_ pMepAccountId_ pMepExperimentId_ =
+managementExperimentsPatch' pMepWebPropertyId_ pMepProfileId_ pMepExperiment_ pMepAccountId_ pMepExperimentId_ =
     ManagementExperimentsPatch'
     { _mepQuotaUser = Nothing
     , _mepPrettyPrint = False
     , _mepWebPropertyId = pMepWebPropertyId_
-    , _mepUserIp = Nothing
+    , _mepUserIP = Nothing
     , _mepProfileId = pMepProfileId_
+    , _mepExperiment = pMepExperiment_
     , _mepAccountId = pMepAccountId_
     , _mepExperimentId = pMepExperimentId_
     , _mepKey = Nothing
-    , _mepOauthToken = Nothing
+    , _mepOAuthToken = Nothing
     , _mepFields = Nothing
-    , _mepAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -151,14 +153,20 @@ mepWebPropertyId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mepUserIp :: Lens' ManagementExperimentsPatch' (Maybe Text)
-mepUserIp
-  = lens _mepUserIp (\ s a -> s{_mepUserIp = a})
+mepUserIP :: Lens' ManagementExperimentsPatch' (Maybe Text)
+mepUserIP
+  = lens _mepUserIP (\ s a -> s{_mepUserIP = a})
 
 -- | View (Profile) ID of the experiment to update.
 mepProfileId :: Lens' ManagementExperimentsPatch' Text
 mepProfileId
   = lens _mepProfileId (\ s a -> s{_mepProfileId = a})
+
+-- | Multipart request metadata.
+mepExperiment :: Lens' ManagementExperimentsPatch' Experiment
+mepExperiment
+  = lens _mepExperiment
+      (\ s a -> s{_mepExperiment = a})
 
 -- | Account ID of the experiment to update.
 mepAccountId :: Lens' ManagementExperimentsPatch' Text
@@ -174,23 +182,23 @@ mepExperimentId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mepKey :: Lens' ManagementExperimentsPatch' (Maybe Text)
+mepKey :: Lens' ManagementExperimentsPatch' (Maybe Key)
 mepKey = lens _mepKey (\ s a -> s{_mepKey = a})
 
 -- | OAuth 2.0 token for the current user.
-mepOauthToken :: Lens' ManagementExperimentsPatch' (Maybe Text)
-mepOauthToken
-  = lens _mepOauthToken
-      (\ s a -> s{_mepOauthToken = a})
+mepOAuthToken :: Lens' ManagementExperimentsPatch' (Maybe OAuthToken)
+mepOAuthToken
+  = lens _mepOAuthToken
+      (\ s a -> s{_mepOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 mepFields :: Lens' ManagementExperimentsPatch' (Maybe Text)
 mepFields
   = lens _mepFields (\ s a -> s{_mepFields = a})
 
--- | Data format for the response.
-mepAlt :: Lens' ManagementExperimentsPatch' Alt
-mepAlt = lens _mepAlt (\ s a -> s{_mepAlt = a})
+instance GoogleAuth ManagementExperimentsPatch' where
+        authKey = mepKey . _Just
+        authToken = mepOAuthToken . _Just
 
 instance GoogleRequest ManagementExperimentsPatch'
          where
@@ -199,14 +207,15 @@ instance GoogleRequest ManagementExperimentsPatch'
         requestWithRoute r u ManagementExperimentsPatch'{..}
           = go _mepQuotaUser (Just _mepPrettyPrint)
               _mepWebPropertyId
-              _mepUserIp
+              _mepUserIP
               _mepProfileId
               _mepAccountId
               _mepExperimentId
               _mepKey
-              _mepOauthToken
+              _mepOAuthToken
               _mepFields
-              (Just _mepAlt)
+              (Just AltJSON)
+              _mepExperiment
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ManagementExperimentsPatchResource)

@@ -33,14 +33,13 @@ module Network.Google.Resource.Games.Events.ListByPlayer
     -- * Request Lenses
     , elbpQuotaUser
     , elbpPrettyPrint
-    , elbpUserIp
+    , elbpUserIP
     , elbpKey
     , elbpLanguage
     , elbpPageToken
-    , elbpOauthToken
+    , elbpOAuthToken
     , elbpMaxResults
     , elbpFields
-    , elbpAlt
     ) where
 
 import           Network.Google.Games.Types
@@ -53,13 +52,13 @@ type EventsListByPlayerResource =
        QueryParam "quotaUser" Text :>
          QueryParam "prettyPrint" Bool :>
            QueryParam "userIp" Text :>
-             QueryParam "key" Text :>
+             QueryParam "key" Key :>
                QueryParam "language" Text :>
                  QueryParam "pageToken" Text :>
-                   QueryParam "oauth_token" Text :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "maxResults" Int32 :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :>
+                         QueryParam "alt" AltJSON :>
                            Get '[JSON] PlayerEventListResponse
 
 -- | Returns a list showing the current progress on events in this
@@ -69,14 +68,13 @@ type EventsListByPlayerResource =
 data EventsListByPlayer' = EventsListByPlayer'
     { _elbpQuotaUser   :: !(Maybe Text)
     , _elbpPrettyPrint :: !Bool
-    , _elbpUserIp      :: !(Maybe Text)
-    , _elbpKey         :: !(Maybe Text)
+    , _elbpUserIP      :: !(Maybe Text)
+    , _elbpKey         :: !(Maybe Key)
     , _elbpLanguage    :: !(Maybe Text)
     , _elbpPageToken   :: !(Maybe Text)
-    , _elbpOauthToken  :: !(Maybe Text)
+    , _elbpOAuthToken  :: !(Maybe OAuthToken)
     , _elbpMaxResults  :: !(Maybe Int32)
     , _elbpFields      :: !(Maybe Text)
-    , _elbpAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventsListByPlayer'' with the minimum fields required to make a request.
@@ -87,7 +85,7 @@ data EventsListByPlayer' = EventsListByPlayer'
 --
 -- * 'elbpPrettyPrint'
 --
--- * 'elbpUserIp'
+-- * 'elbpUserIP'
 --
 -- * 'elbpKey'
 --
@@ -95,27 +93,24 @@ data EventsListByPlayer' = EventsListByPlayer'
 --
 -- * 'elbpPageToken'
 --
--- * 'elbpOauthToken'
+-- * 'elbpOAuthToken'
 --
 -- * 'elbpMaxResults'
 --
 -- * 'elbpFields'
---
--- * 'elbpAlt'
 eventsListByPlayer'
     :: EventsListByPlayer'
 eventsListByPlayer' =
     EventsListByPlayer'
     { _elbpQuotaUser = Nothing
     , _elbpPrettyPrint = True
-    , _elbpUserIp = Nothing
+    , _elbpUserIP = Nothing
     , _elbpKey = Nothing
     , _elbpLanguage = Nothing
     , _elbpPageToken = Nothing
-    , _elbpOauthToken = Nothing
+    , _elbpOAuthToken = Nothing
     , _elbpMaxResults = Nothing
     , _elbpFields = Nothing
-    , _elbpAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -134,14 +129,14 @@ elbpPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-elbpUserIp :: Lens' EventsListByPlayer' (Maybe Text)
-elbpUserIp
-  = lens _elbpUserIp (\ s a -> s{_elbpUserIp = a})
+elbpUserIP :: Lens' EventsListByPlayer' (Maybe Text)
+elbpUserIP
+  = lens _elbpUserIP (\ s a -> s{_elbpUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-elbpKey :: Lens' EventsListByPlayer' (Maybe Text)
+elbpKey :: Lens' EventsListByPlayer' (Maybe Key)
 elbpKey = lens _elbpKey (\ s a -> s{_elbpKey = a})
 
 -- | The preferred language to use for strings returned by this method.
@@ -156,10 +151,10 @@ elbpPageToken
       (\ s a -> s{_elbpPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-elbpOauthToken :: Lens' EventsListByPlayer' (Maybe Text)
-elbpOauthToken
-  = lens _elbpOauthToken
-      (\ s a -> s{_elbpOauthToken = a})
+elbpOAuthToken :: Lens' EventsListByPlayer' (Maybe OAuthToken)
+elbpOAuthToken
+  = lens _elbpOAuthToken
+      (\ s a -> s{_elbpOAuthToken = a})
 
 -- | The maximum number of events to return in the response, used for paging.
 -- For any response, the actual number of events to return may be less than
@@ -174,23 +169,23 @@ elbpFields :: Lens' EventsListByPlayer' (Maybe Text)
 elbpFields
   = lens _elbpFields (\ s a -> s{_elbpFields = a})
 
--- | Data format for the response.
-elbpAlt :: Lens' EventsListByPlayer' Alt
-elbpAlt = lens _elbpAlt (\ s a -> s{_elbpAlt = a})
+instance GoogleAuth EventsListByPlayer' where
+        authKey = elbpKey . _Just
+        authToken = elbpOAuthToken . _Just
 
 instance GoogleRequest EventsListByPlayer' where
         type Rs EventsListByPlayer' = PlayerEventListResponse
         request = requestWithRoute defReq gamesURL
         requestWithRoute r u EventsListByPlayer'{..}
           = go _elbpQuotaUser (Just _elbpPrettyPrint)
-              _elbpUserIp
+              _elbpUserIP
               _elbpKey
               _elbpLanguage
               _elbpPageToken
-              _elbpOauthToken
+              _elbpOAuthToken
               _elbpMaxResults
               _elbpFields
-              (Just _elbpAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy EventsListByPlayerResource)

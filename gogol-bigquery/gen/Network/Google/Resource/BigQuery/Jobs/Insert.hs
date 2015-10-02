@@ -32,12 +32,13 @@ module Network.Google.Resource.BigQuery.Jobs.Insert
     -- * Request Lenses
     , jiQuotaUser
     , jiPrettyPrint
-    , jiUserIp
+    , jiUserIP
+    , jiMedia
     , jiKey
+    , jiJob
     , jiProjectId
-    , jiOauthToken
+    , jiOAuthToken
     , jiFields
-    , jiAlt
     ) where
 
 import           Network.Google.BigQuery.Types
@@ -52,10 +53,11 @@ type JobsInsertResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Post '[JSON] Job
+                       QueryParam "alt" AltJSON :>
+                         MultipartRelated '[JSON] Job Body :> Post '[JSON] Job
 
 -- | Starts a new asynchronous job. Requires the Can View project role.
 --
@@ -63,12 +65,13 @@ type JobsInsertResource =
 data JobsInsert' = JobsInsert'
     { _jiQuotaUser   :: !(Maybe Text)
     , _jiPrettyPrint :: !Bool
-    , _jiUserIp      :: !(Maybe Text)
-    , _jiKey         :: !(Maybe Text)
+    , _jiUserIP      :: !(Maybe Text)
+    , _jiMedia       :: !Body
+    , _jiKey         :: !(Maybe Key)
+    , _jiJob         :: !Job
     , _jiProjectId   :: !Text
-    , _jiOauthToken  :: !(Maybe Text)
+    , _jiOAuthToken  :: !(Maybe OAuthToken)
     , _jiFields      :: !(Maybe Text)
-    , _jiAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'JobsInsert'' with the minimum fields required to make a request.
@@ -79,30 +82,35 @@ data JobsInsert' = JobsInsert'
 --
 -- * 'jiPrettyPrint'
 --
--- * 'jiUserIp'
+-- * 'jiUserIP'
+--
+-- * 'jiMedia'
 --
 -- * 'jiKey'
 --
+-- * 'jiJob'
+--
 -- * 'jiProjectId'
 --
--- * 'jiOauthToken'
+-- * 'jiOAuthToken'
 --
 -- * 'jiFields'
---
--- * 'jiAlt'
 jobsInsert'
-    :: Text -- ^ 'projectId'
+    :: Body -- ^ 'media'
+    -> Job -- ^ 'Job'
+    -> Text -- ^ 'projectId'
     -> JobsInsert'
-jobsInsert' pJiProjectId_ =
+jobsInsert' pJiMedia_ pJiJob_ pJiProjectId_ =
     JobsInsert'
     { _jiQuotaUser = Nothing
     , _jiPrettyPrint = True
-    , _jiUserIp = Nothing
+    , _jiUserIP = Nothing
+    , _jiMedia = pJiMedia_
     , _jiKey = Nothing
+    , _jiJob = pJiJob_
     , _jiProjectId = pJiProjectId_
-    , _jiOauthToken = Nothing
+    , _jiOAuthToken = Nothing
     , _jiFields = Nothing
-    , _jiAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -120,14 +128,21 @@ jiPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-jiUserIp :: Lens' JobsInsert' (Maybe Text)
-jiUserIp = lens _jiUserIp (\ s a -> s{_jiUserIp = a})
+jiUserIP :: Lens' JobsInsert' (Maybe Text)
+jiUserIP = lens _jiUserIP (\ s a -> s{_jiUserIP = a})
+
+jiMedia :: Lens' JobsInsert' Body
+jiMedia = lens _jiMedia (\ s a -> s{_jiMedia = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-jiKey :: Lens' JobsInsert' (Maybe Text)
+jiKey :: Lens' JobsInsert' (Maybe Key)
 jiKey = lens _jiKey (\ s a -> s{_jiKey = a})
+
+-- | Multipart request metadata.
+jiJob :: Lens' JobsInsert' Job
+jiJob = lens _jiJob (\ s a -> s{_jiJob = a})
 
 -- | Project ID of the project that will be billed for the job
 jiProjectId :: Lens' JobsInsert' Text
@@ -135,28 +150,30 @@ jiProjectId
   = lens _jiProjectId (\ s a -> s{_jiProjectId = a})
 
 -- | OAuth 2.0 token for the current user.
-jiOauthToken :: Lens' JobsInsert' (Maybe Text)
-jiOauthToken
-  = lens _jiOauthToken (\ s a -> s{_jiOauthToken = a})
+jiOAuthToken :: Lens' JobsInsert' (Maybe OAuthToken)
+jiOAuthToken
+  = lens _jiOAuthToken (\ s a -> s{_jiOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 jiFields :: Lens' JobsInsert' (Maybe Text)
 jiFields = lens _jiFields (\ s a -> s{_jiFields = a})
 
--- | Data format for the response.
-jiAlt :: Lens' JobsInsert' Alt
-jiAlt = lens _jiAlt (\ s a -> s{_jiAlt = a})
+instance GoogleAuth JobsInsert' where
+        authKey = jiKey . _Just
+        authToken = jiOAuthToken . _Just
 
 instance GoogleRequest JobsInsert' where
         type Rs JobsInsert' = Job
         request = requestWithRoute defReq bigQueryURL
         requestWithRoute r u JobsInsert'{..}
-          = go _jiQuotaUser (Just _jiPrettyPrint) _jiUserIp
+          = go _jiQuotaUser (Just _jiPrettyPrint) _jiUserIP
+              _jiMedia
               _jiKey
               _jiProjectId
-              _jiOauthToken
+              _jiOAuthToken
               _jiFields
-              (Just _jiAlt)
+              (Just AltJSON)
+              _jiJob
           where go
                   = clientWithRoute (Proxy :: Proxy JobsInsertResource)
                       r

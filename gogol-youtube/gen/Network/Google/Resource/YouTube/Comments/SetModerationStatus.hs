@@ -36,12 +36,11 @@ module Network.Google.Resource.YouTube.Comments.SetModerationStatus
     , csmsPrettyPrint
     , csmsBanAuthor
     , csmsModerationStatus
-    , csmsUserIp
+    , csmsUserIP
     , csmsKey
     , csmsId
-    , csmsOauthToken
+    , csmsOAuthToken
     , csmsFields
-    , csmsAlt
     ) where
 
 import           Network.Google.Prelude
@@ -59,11 +58,11 @@ type CommentsSetModerationStatusResource =
                  YouTubeCommentsSetModerationStatusModerationStatus
                  :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "id" Text :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParam "fields" Text :>
-                           QueryParam "alt" Alt :> Post '[JSON] ()
+                           QueryParam "alt" AltJSON :> Post '[JSON] ()
 
 -- | Sets the moderation status of one or more comments. The API request must
 -- be authorized by the owner of the channel or video associated with the
@@ -75,12 +74,11 @@ data CommentsSetModerationStatus' = CommentsSetModerationStatus'
     , _csmsPrettyPrint      :: !Bool
     , _csmsBanAuthor        :: !Bool
     , _csmsModerationStatus :: !YouTubeCommentsSetModerationStatusModerationStatus
-    , _csmsUserIp           :: !(Maybe Text)
-    , _csmsKey              :: !(Maybe Text)
+    , _csmsUserIP           :: !(Maybe Text)
+    , _csmsKey              :: !(Maybe Key)
     , _csmsId               :: !Text
-    , _csmsOauthToken       :: !(Maybe Text)
+    , _csmsOAuthToken       :: !(Maybe OAuthToken)
     , _csmsFields           :: !(Maybe Text)
-    , _csmsAlt              :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CommentsSetModerationStatus'' with the minimum fields required to make a request.
@@ -95,17 +93,15 @@ data CommentsSetModerationStatus' = CommentsSetModerationStatus'
 --
 -- * 'csmsModerationStatus'
 --
--- * 'csmsUserIp'
+-- * 'csmsUserIP'
 --
 -- * 'csmsKey'
 --
 -- * 'csmsId'
 --
--- * 'csmsOauthToken'
+-- * 'csmsOAuthToken'
 --
 -- * 'csmsFields'
---
--- * 'csmsAlt'
 commentsSetModerationStatus'
     :: YouTubeCommentsSetModerationStatusModerationStatus -- ^ 'moderationStatus'
     -> Text -- ^ 'id'
@@ -116,12 +112,11 @@ commentsSetModerationStatus' pCsmsModerationStatus_ pCsmsId_ =
     , _csmsPrettyPrint = True
     , _csmsBanAuthor = False
     , _csmsModerationStatus = pCsmsModerationStatus_
-    , _csmsUserIp = Nothing
+    , _csmsUserIP = Nothing
     , _csmsKey = Nothing
     , _csmsId = pCsmsId_
-    , _csmsOauthToken = Nothing
+    , _csmsOAuthToken = Nothing
     , _csmsFields = Nothing
-    , _csmsAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -155,14 +150,14 @@ csmsModerationStatus
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-csmsUserIp :: Lens' CommentsSetModerationStatus' (Maybe Text)
-csmsUserIp
-  = lens _csmsUserIp (\ s a -> s{_csmsUserIp = a})
+csmsUserIP :: Lens' CommentsSetModerationStatus' (Maybe Text)
+csmsUserIP
+  = lens _csmsUserIP (\ s a -> s{_csmsUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-csmsKey :: Lens' CommentsSetModerationStatus' (Maybe Text)
+csmsKey :: Lens' CommentsSetModerationStatus' (Maybe Key)
 csmsKey = lens _csmsKey (\ s a -> s{_csmsKey = a})
 
 -- | The id parameter specifies a comma-separated list of IDs that identify
@@ -171,19 +166,20 @@ csmsId :: Lens' CommentsSetModerationStatus' Text
 csmsId = lens _csmsId (\ s a -> s{_csmsId = a})
 
 -- | OAuth 2.0 token for the current user.
-csmsOauthToken :: Lens' CommentsSetModerationStatus' (Maybe Text)
-csmsOauthToken
-  = lens _csmsOauthToken
-      (\ s a -> s{_csmsOauthToken = a})
+csmsOAuthToken :: Lens' CommentsSetModerationStatus' (Maybe OAuthToken)
+csmsOAuthToken
+  = lens _csmsOAuthToken
+      (\ s a -> s{_csmsOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 csmsFields :: Lens' CommentsSetModerationStatus' (Maybe Text)
 csmsFields
   = lens _csmsFields (\ s a -> s{_csmsFields = a})
 
--- | Data format for the response.
-csmsAlt :: Lens' CommentsSetModerationStatus' Alt
-csmsAlt = lens _csmsAlt (\ s a -> s{_csmsAlt = a})
+instance GoogleAuth CommentsSetModerationStatus'
+         where
+        authKey = csmsKey . _Just
+        authToken = csmsOAuthToken . _Just
 
 instance GoogleRequest CommentsSetModerationStatus'
          where
@@ -193,12 +189,12 @@ instance GoogleRequest CommentsSetModerationStatus'
           = go _csmsQuotaUser (Just _csmsPrettyPrint)
               (Just _csmsBanAuthor)
               (Just _csmsModerationStatus)
-              _csmsUserIp
+              _csmsUserIP
               _csmsKey
               (Just _csmsId)
-              _csmsOauthToken
+              _csmsOAuthToken
               _csmsFields
-              (Just _csmsAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CommentsSetModerationStatusResource)

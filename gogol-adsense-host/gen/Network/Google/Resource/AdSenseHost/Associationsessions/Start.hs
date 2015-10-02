@@ -33,15 +33,14 @@ module Network.Google.Resource.AdSenseHost.Associationsessions.Start
     -- * Request Lenses
     , aQuotaUser
     , aPrettyPrint
-    , aUserIp
+    , aUserIP
     , aWebsiteLocale
     , aUserLocale
     , aKey
-    , aWebsiteUrl
-    , aOauthToken
+    , aWebsiteURL
+    , aOAuthToken
     , aProductCode
     , aFields
-    , aAlt
     ) where
 
 import           Network.Google.AdSenseHost.Types
@@ -57,14 +56,14 @@ type AssociationsessionsStartResource =
              QueryParam "userIp" Text :>
                QueryParam "websiteLocale" Text :>
                  QueryParam "userLocale" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "websiteUrl" Text :>
-                       QueryParam "oauth_token" Text :>
+                       QueryParam "oauth_token" OAuthToken :>
                          QueryParams "productCode"
                            AdsensehostAssociationsessionsStartProductCode
                            :>
                            QueryParam "fields" Text :>
-                             QueryParam "alt" Alt :>
+                             QueryParam "alt" AltJSON :>
                                Get '[JSON] AssociationSession
 
 -- | Create an association session for initiating an association with an
@@ -74,15 +73,14 @@ type AssociationsessionsStartResource =
 data AssociationsessionsStart' = AssociationsessionsStart'
     { _aQuotaUser     :: !(Maybe Text)
     , _aPrettyPrint   :: !Bool
-    , _aUserIp        :: !(Maybe Text)
+    , _aUserIP        :: !(Maybe Text)
     , _aWebsiteLocale :: !(Maybe Text)
     , _aUserLocale    :: !(Maybe Text)
-    , _aKey           :: !(Maybe Text)
-    , _aWebsiteUrl    :: !Text
-    , _aOauthToken    :: !(Maybe Text)
+    , _aKey           :: !(Maybe Key)
+    , _aWebsiteURL    :: !Text
+    , _aOAuthToken    :: !(Maybe OAuthToken)
     , _aProductCode   :: !AdsensehostAssociationsessionsStartProductCode
     , _aFields        :: !(Maybe Text)
-    , _aAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AssociationsessionsStart'' with the minimum fields required to make a request.
@@ -93,7 +91,7 @@ data AssociationsessionsStart' = AssociationsessionsStart'
 --
 -- * 'aPrettyPrint'
 --
--- * 'aUserIp'
+-- * 'aUserIP'
 --
 -- * 'aWebsiteLocale'
 --
@@ -101,32 +99,29 @@ data AssociationsessionsStart' = AssociationsessionsStart'
 --
 -- * 'aKey'
 --
--- * 'aWebsiteUrl'
+-- * 'aWebsiteURL'
 --
--- * 'aOauthToken'
+-- * 'aOAuthToken'
 --
 -- * 'aProductCode'
 --
 -- * 'aFields'
---
--- * 'aAlt'
 associationsessionsStart'
     :: Text -- ^ 'websiteUrl'
     -> AdsensehostAssociationsessionsStartProductCode -- ^ 'productCode'
     -> AssociationsessionsStart'
-associationsessionsStart' pAWebsiteUrl_ pAProductCode_ =
+associationsessionsStart' pAWebsiteURL_ pAProductCode_ =
     AssociationsessionsStart'
     { _aQuotaUser = Nothing
     , _aPrettyPrint = True
-    , _aUserIp = Nothing
+    , _aUserIP = Nothing
     , _aWebsiteLocale = Nothing
     , _aUserLocale = Nothing
     , _aKey = Nothing
-    , _aWebsiteUrl = pAWebsiteUrl_
-    , _aOauthToken = Nothing
+    , _aWebsiteURL = pAWebsiteURL_
+    , _aOAuthToken = Nothing
     , _aProductCode = pAProductCode_
     , _aFields = Nothing
-    , _aAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -143,8 +138,8 @@ aPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-aUserIp :: Lens' AssociationsessionsStart' (Maybe Text)
-aUserIp = lens _aUserIp (\ s a -> s{_aUserIp = a})
+aUserIP :: Lens' AssociationsessionsStart' (Maybe Text)
+aUserIP = lens _aUserIP (\ s a -> s{_aUserIP = a})
 
 -- | The locale of the user\'s hosted website.
 aWebsiteLocale :: Lens' AssociationsessionsStart' (Maybe Text)
@@ -160,18 +155,18 @@ aUserLocale
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aKey :: Lens' AssociationsessionsStart' (Maybe Text)
+aKey :: Lens' AssociationsessionsStart' (Maybe Key)
 aKey = lens _aKey (\ s a -> s{_aKey = a})
 
 -- | The URL of the user\'s hosted website.
-aWebsiteUrl :: Lens' AssociationsessionsStart' Text
-aWebsiteUrl
-  = lens _aWebsiteUrl (\ s a -> s{_aWebsiteUrl = a})
+aWebsiteURL :: Lens' AssociationsessionsStart' Text
+aWebsiteURL
+  = lens _aWebsiteURL (\ s a -> s{_aWebsiteURL = a})
 
 -- | OAuth 2.0 token for the current user.
-aOauthToken :: Lens' AssociationsessionsStart' (Maybe Text)
-aOauthToken
-  = lens _aOauthToken (\ s a -> s{_aOauthToken = a})
+aOAuthToken :: Lens' AssociationsessionsStart' (Maybe OAuthToken)
+aOAuthToken
+  = lens _aOAuthToken (\ s a -> s{_aOAuthToken = a})
 
 -- | Products to associate with the user.
 aProductCode :: Lens' AssociationsessionsStart' AdsensehostAssociationsessionsStartProductCode
@@ -182,9 +177,9 @@ aProductCode
 aFields :: Lens' AssociationsessionsStart' (Maybe Text)
 aFields = lens _aFields (\ s a -> s{_aFields = a})
 
--- | Data format for the response.
-aAlt :: Lens' AssociationsessionsStart' Alt
-aAlt = lens _aAlt (\ s a -> s{_aAlt = a})
+instance GoogleAuth AssociationsessionsStart' where
+        authKey = aKey . _Just
+        authToken = aOAuthToken . _Just
 
 instance GoogleRequest AssociationsessionsStart'
          where
@@ -192,15 +187,15 @@ instance GoogleRequest AssociationsessionsStart'
              AssociationSession
         request = requestWithRoute defReq adSenseHostURL
         requestWithRoute r u AssociationsessionsStart'{..}
-          = go _aQuotaUser (Just _aPrettyPrint) _aUserIp
+          = go _aQuotaUser (Just _aPrettyPrint) _aUserIP
               _aWebsiteLocale
               _aUserLocale
               _aKey
-              (Just _aWebsiteUrl)
-              _aOauthToken
+              (Just _aWebsiteURL)
+              _aOAuthToken
               (Just _aProductCode)
               _aFields
-              (Just _aAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AssociationsessionsStartResource)

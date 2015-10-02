@@ -34,15 +34,14 @@ module Network.Google.Resource.Compute.InstanceGroupManagers.List
     , igmlQuotaUser
     , igmlPrettyPrint
     , igmlProject
-    , igmlUserIp
+    , igmlUserIP
     , igmlZone
     , igmlKey
     , igmlFilter
     , igmlPageToken
-    , igmlOauthToken
+    , igmlOAuthToken
     , igmlMaxResults
     , igmlFields
-    , igmlAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -58,13 +57,13 @@ type InstanceGroupManagersListResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "filter" Text :>
                        QueryParam "pageToken" Text :>
-                         QueryParam "oauth_token" Text :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "maxResults" Word32 :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :>
+                               QueryParam "alt" AltJSON :>
                                  Get '[JSON] InstanceGroupManagerList
 
 -- | Retrieves a list of managed instance groups that are contained within
@@ -75,15 +74,14 @@ data InstanceGroupManagersList' = InstanceGroupManagersList'
     { _igmlQuotaUser   :: !(Maybe Text)
     , _igmlPrettyPrint :: !Bool
     , _igmlProject     :: !Text
-    , _igmlUserIp      :: !(Maybe Text)
+    , _igmlUserIP      :: !(Maybe Text)
     , _igmlZone        :: !Text
-    , _igmlKey         :: !(Maybe Text)
+    , _igmlKey         :: !(Maybe Key)
     , _igmlFilter      :: !(Maybe Text)
     , _igmlPageToken   :: !(Maybe Text)
-    , _igmlOauthToken  :: !(Maybe Text)
+    , _igmlOAuthToken  :: !(Maybe OAuthToken)
     , _igmlMaxResults  :: !Word32
     , _igmlFields      :: !(Maybe Text)
-    , _igmlAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceGroupManagersList'' with the minimum fields required to make a request.
@@ -96,7 +94,7 @@ data InstanceGroupManagersList' = InstanceGroupManagersList'
 --
 -- * 'igmlProject'
 --
--- * 'igmlUserIp'
+-- * 'igmlUserIP'
 --
 -- * 'igmlZone'
 --
@@ -106,13 +104,11 @@ data InstanceGroupManagersList' = InstanceGroupManagersList'
 --
 -- * 'igmlPageToken'
 --
--- * 'igmlOauthToken'
+-- * 'igmlOAuthToken'
 --
 -- * 'igmlMaxResults'
 --
 -- * 'igmlFields'
---
--- * 'igmlAlt'
 instanceGroupManagersList'
     :: Text -- ^ 'project'
     -> Text -- ^ 'zone'
@@ -122,15 +118,14 @@ instanceGroupManagersList' pIgmlProject_ pIgmlZone_ =
     { _igmlQuotaUser = Nothing
     , _igmlPrettyPrint = True
     , _igmlProject = pIgmlProject_
-    , _igmlUserIp = Nothing
+    , _igmlUserIP = Nothing
     , _igmlZone = pIgmlZone_
     , _igmlKey = Nothing
     , _igmlFilter = Nothing
     , _igmlPageToken = Nothing
-    , _igmlOauthToken = Nothing
+    , _igmlOAuthToken = Nothing
     , _igmlMaxResults = 500
     , _igmlFields = Nothing
-    , _igmlAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -154,9 +149,9 @@ igmlProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-igmlUserIp :: Lens' InstanceGroupManagersList' (Maybe Text)
-igmlUserIp
-  = lens _igmlUserIp (\ s a -> s{_igmlUserIp = a})
+igmlUserIP :: Lens' InstanceGroupManagersList' (Maybe Text)
+igmlUserIP
+  = lens _igmlUserIP (\ s a -> s{_igmlUserIP = a})
 
 -- | The URL of the zone where the managed instance group is located.
 igmlZone :: Lens' InstanceGroupManagersList' Text
@@ -165,7 +160,7 @@ igmlZone = lens _igmlZone (\ s a -> s{_igmlZone = a})
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-igmlKey :: Lens' InstanceGroupManagersList' (Maybe Text)
+igmlKey :: Lens' InstanceGroupManagersList' (Maybe Key)
 igmlKey = lens _igmlKey (\ s a -> s{_igmlKey = a})
 
 -- | Sets a filter expression for filtering listed resources, in the form
@@ -192,10 +187,10 @@ igmlPageToken
       (\ s a -> s{_igmlPageToken = a})
 
 -- | OAuth 2.0 token for the current user.
-igmlOauthToken :: Lens' InstanceGroupManagersList' (Maybe Text)
-igmlOauthToken
-  = lens _igmlOauthToken
-      (\ s a -> s{_igmlOauthToken = a})
+igmlOAuthToken :: Lens' InstanceGroupManagersList' (Maybe OAuthToken)
+igmlOAuthToken
+  = lens _igmlOAuthToken
+      (\ s a -> s{_igmlOAuthToken = a})
 
 -- | Maximum count of results to be returned.
 igmlMaxResults :: Lens' InstanceGroupManagersList' Word32
@@ -208,9 +203,9 @@ igmlFields :: Lens' InstanceGroupManagersList' (Maybe Text)
 igmlFields
   = lens _igmlFields (\ s a -> s{_igmlFields = a})
 
--- | Data format for the response.
-igmlAlt :: Lens' InstanceGroupManagersList' Alt
-igmlAlt = lens _igmlAlt (\ s a -> s{_igmlAlt = a})
+instance GoogleAuth InstanceGroupManagersList' where
+        authKey = igmlKey . _Just
+        authToken = igmlOAuthToken . _Just
 
 instance GoogleRequest InstanceGroupManagersList'
          where
@@ -220,15 +215,15 @@ instance GoogleRequest InstanceGroupManagersList'
         requestWithRoute r u InstanceGroupManagersList'{..}
           = go _igmlQuotaUser (Just _igmlPrettyPrint)
               _igmlProject
-              _igmlUserIp
+              _igmlUserIP
               _igmlZone
               _igmlKey
               _igmlFilter
               _igmlPageToken
-              _igmlOauthToken
+              _igmlOAuthToken
               (Just _igmlMaxResults)
               _igmlFields
-              (Just _igmlAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InstanceGroupManagersListResource)

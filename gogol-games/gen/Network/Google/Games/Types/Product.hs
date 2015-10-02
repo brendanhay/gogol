@@ -22,9 +22,9 @@ import           Network.Google.Prelude
 --
 -- /See:/ 'roomJoinRequest' smart constructor.
 data RoomJoinRequest = RoomJoinRequest
-    { _rjrNetworkDiagnostics :: !(Maybe (Maybe NetworkDiagnostics))
+    { _rjrNetworkDiagnostics :: !(Maybe NetworkDiagnostics)
     , _rjrKind               :: !Text
-    , _rjrClientAddress      :: !(Maybe (Maybe RoomClientAddress))
+    , _rjrClientAddress      :: !(Maybe RoomClientAddress)
     , _rjrCapabilities       :: !(Maybe [Text])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -50,7 +50,7 @@ roomJoinRequest =
     }
 
 -- | Network diagnostics for the client joining the room.
-rjrNetworkDiagnostics :: Lens' RoomJoinRequest (Maybe (Maybe NetworkDiagnostics))
+rjrNetworkDiagnostics :: Lens' RoomJoinRequest (Maybe NetworkDiagnostics)
 rjrNetworkDiagnostics
   = lens _rjrNetworkDiagnostics
       (\ s a -> s{_rjrNetworkDiagnostics = a})
@@ -61,7 +61,7 @@ rjrKind :: Lens' RoomJoinRequest Text
 rjrKind = lens _rjrKind (\ s a -> s{_rjrKind = a})
 
 -- | Client address for the player joining the room.
-rjrClientAddress :: Lens' RoomJoinRequest (Maybe (Maybe RoomClientAddress))
+rjrClientAddress :: Lens' RoomJoinRequest (Maybe RoomClientAddress)
 rjrClientAddress
   = lens _rjrClientAddress
       (\ s a -> s{_rjrClientAddress = a})
@@ -152,7 +152,7 @@ data Snapshot = Snapshot
     , _sKind               :: !Text
     , _sProgressValue      :: !(Maybe Int64)
     , _sUniqueName         :: !(Maybe Text)
-    , _sCoverImage         :: !(Maybe (Maybe SnapshotImage))
+    , _sCoverImage         :: !(Maybe SnapshotImage)
     , _sId                 :: !(Maybe Text)
     , _sDurationMillis     :: !(Maybe Int64)
     , _sTitle              :: !(Maybe Text)
@@ -228,7 +228,7 @@ sUniqueName
   = lens _sUniqueName (\ s a -> s{_sUniqueName = a})
 
 -- | The cover image of this snapshot. May be absent if there is no image.
-sCoverImage :: Lens' Snapshot (Maybe (Maybe SnapshotImage))
+sCoverImage :: Lens' Snapshot (Maybe SnapshotImage)
 sCoverImage
   = lens _sCoverImage (\ s a -> s{_sCoverImage = a})
 
@@ -361,18 +361,18 @@ instance ToJSON TurnBasedMatchData where
 data TurnBasedMatch = TurnBasedMatch
     { _tbmStatus               :: !(Maybe Text)
     , _tbmVariant              :: !(Maybe Int32)
-    , _tbmResults              :: !(Maybe [Maybe ParticipantResult])
+    , _tbmResults              :: !(Maybe [ParticipantResult])
     , _tbmMatchNumber          :: !(Maybe Int32)
     , _tbmKind                 :: !Text
-    , _tbmData                 :: !(Maybe (Maybe TurnBasedMatchData))
+    , _tbmData                 :: !(Maybe TurnBasedMatchData)
     , _tbmWithParticipantId    :: !(Maybe Text)
-    , _tbmCreationDetails      :: !(Maybe (Maybe TurnBasedMatchModification))
+    , _tbmCreationDetails      :: !(Maybe TurnBasedMatchModification)
     , _tbmInviterId            :: !(Maybe Text)
-    , _tbmLastUpdateDetails    :: !(Maybe (Maybe TurnBasedMatchModification))
-    , _tbmParticipants         :: !(Maybe [Maybe TurnBasedMatchParticipant])
+    , _tbmLastUpdateDetails    :: !(Maybe TurnBasedMatchModification)
+    , _tbmParticipants         :: !(Maybe [TurnBasedMatchParticipant])
     , _tbmApplicationId        :: !(Maybe Text)
-    , _tbmAutoMatchingCriteria :: !(Maybe (Maybe TurnBasedAutoMatchingCriteria))
-    , _tbmPreviousMatchData    :: !(Maybe (Maybe TurnBasedMatchData))
+    , _tbmAutoMatchingCriteria :: !(Maybe TurnBasedAutoMatchingCriteria)
+    , _tbmPreviousMatchData    :: !(Maybe TurnBasedMatchData)
     , _tbmPendingParticipantId :: !(Maybe Text)
     , _tbmUserMatchStatus      :: !(Maybe Text)
     , _tbmMatchId              :: !(Maybe Text)
@@ -469,7 +469,7 @@ tbmVariant
   = lens _tbmVariant (\ s a -> s{_tbmVariant = a})
 
 -- | The results reported for this match.
-tbmResults :: Lens' TurnBasedMatch [Maybe ParticipantResult]
+tbmResults :: Lens' TurnBasedMatch [ParticipantResult]
 tbmResults
   = lens _tbmResults (\ s a -> s{_tbmResults = a}) .
       _Default
@@ -488,7 +488,7 @@ tbmKind :: Lens' TurnBasedMatch Text
 tbmKind = lens _tbmKind (\ s a -> s{_tbmKind = a})
 
 -- | The data \/ game state for this match.
-tbmData :: Lens' TurnBasedMatch (Maybe (Maybe TurnBasedMatchData))
+tbmData :: Lens' TurnBasedMatch (Maybe TurnBasedMatchData)
 tbmData = lens _tbmData (\ s a -> s{_tbmData = a})
 
 -- | The ID of another participant in the match that can be used when
@@ -499,7 +499,7 @@ tbmWithParticipantId
       (\ s a -> s{_tbmWithParticipantId = a})
 
 -- | Details about the match creation.
-tbmCreationDetails :: Lens' TurnBasedMatch (Maybe (Maybe TurnBasedMatchModification))
+tbmCreationDetails :: Lens' TurnBasedMatch (Maybe TurnBasedMatchModification)
 tbmCreationDetails
   = lens _tbmCreationDetails
       (\ s a -> s{_tbmCreationDetails = a})
@@ -511,14 +511,14 @@ tbmInviterId
   = lens _tbmInviterId (\ s a -> s{_tbmInviterId = a})
 
 -- | Details about the last update to the match.
-tbmLastUpdateDetails :: Lens' TurnBasedMatch (Maybe (Maybe TurnBasedMatchModification))
+tbmLastUpdateDetails :: Lens' TurnBasedMatch (Maybe TurnBasedMatchModification)
 tbmLastUpdateDetails
   = lens _tbmLastUpdateDetails
       (\ s a -> s{_tbmLastUpdateDetails = a})
 
 -- | The participants involved in the match, along with their statuses.
 -- Includes participants who have left or declined invitations.
-tbmParticipants :: Lens' TurnBasedMatch [Maybe TurnBasedMatchParticipant]
+tbmParticipants :: Lens' TurnBasedMatch [TurnBasedMatchParticipant]
 tbmParticipants
   = lens _tbmParticipants
       (\ s a -> s{_tbmParticipants = a})
@@ -532,14 +532,14 @@ tbmApplicationId
       (\ s a -> s{_tbmApplicationId = a})
 
 -- | Criteria for auto-matching players into this match.
-tbmAutoMatchingCriteria :: Lens' TurnBasedMatch (Maybe (Maybe TurnBasedAutoMatchingCriteria))
+tbmAutoMatchingCriteria :: Lens' TurnBasedMatch (Maybe TurnBasedAutoMatchingCriteria)
 tbmAutoMatchingCriteria
   = lens _tbmAutoMatchingCriteria
       (\ s a -> s{_tbmAutoMatchingCriteria = a})
 
 -- | The data \/ game state for the previous match; set for the first turn of
 -- rematches only.
-tbmPreviousMatchData :: Lens' TurnBasedMatch (Maybe (Maybe TurnBasedMatchData))
+tbmPreviousMatchData :: Lens' TurnBasedMatch (Maybe TurnBasedMatchData)
 tbmPreviousMatchData
   = lens _tbmPreviousMatchData
       (\ s a -> s{_tbmPreviousMatchData = a})
@@ -732,14 +732,14 @@ data Room = Room
     { _rStatus               :: !(Maybe Text)
     , _rVariant              :: !(Maybe Int32)
     , _rKind                 :: !Text
-    , _rAutoMatchingStatus   :: !(Maybe (Maybe RoomAutoMatchStatus))
-    , _rCreationDetails      :: !(Maybe (Maybe RoomModification))
+    , _rAutoMatchingStatus   :: !(Maybe RoomAutoMatchStatus)
+    , _rCreationDetails      :: !(Maybe RoomModification)
     , _rInviterId            :: !(Maybe Text)
-    , _rLastUpdateDetails    :: !(Maybe (Maybe RoomModification))
+    , _rLastUpdateDetails    :: !(Maybe RoomModification)
     , _rRoomStatusVersion    :: !(Maybe Int32)
-    , _rParticipants         :: !(Maybe [Maybe RoomParticipant])
+    , _rParticipants         :: !(Maybe [RoomParticipant])
     , _rApplicationId        :: !(Maybe Text)
-    , _rAutoMatchingCriteria :: !(Maybe (Maybe RoomAutoMatchingCriteria))
+    , _rAutoMatchingCriteria :: !(Maybe RoomAutoMatchingCriteria)
     , _rRoomId               :: !(Maybe Text)
     , _rDescription          :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -816,13 +816,13 @@ rKind = lens _rKind (\ s a -> s{_rKind = a})
 
 -- | Auto-matching status for this room. Not set if the room is not currently
 -- in the auto-matching queue.
-rAutoMatchingStatus :: Lens' Room (Maybe (Maybe RoomAutoMatchStatus))
+rAutoMatchingStatus :: Lens' Room (Maybe RoomAutoMatchStatus)
 rAutoMatchingStatus
   = lens _rAutoMatchingStatus
       (\ s a -> s{_rAutoMatchingStatus = a})
 
 -- | Details about the room creation.
-rCreationDetails :: Lens' Room (Maybe (Maybe RoomModification))
+rCreationDetails :: Lens' Room (Maybe RoomModification)
 rCreationDetails
   = lens _rCreationDetails
       (\ s a -> s{_rCreationDetails = a})
@@ -834,7 +834,7 @@ rInviterId
   = lens _rInviterId (\ s a -> s{_rInviterId = a})
 
 -- | Details about the last update to the room.
-rLastUpdateDetails :: Lens' Room (Maybe (Maybe RoomModification))
+rLastUpdateDetails :: Lens' Room (Maybe RoomModification)
 rLastUpdateDetails
   = lens _rLastUpdateDetails
       (\ s a -> s{_rLastUpdateDetails = a})
@@ -848,7 +848,7 @@ rRoomStatusVersion
 
 -- | The participants involved in the room, along with their statuses.
 -- Includes participants who have left or declined invitations.
-rParticipants :: Lens' Room [Maybe RoomParticipant]
+rParticipants :: Lens' Room [RoomParticipant]
 rParticipants
   = lens _rParticipants
       (\ s a -> s{_rParticipants = a})
@@ -862,7 +862,7 @@ rApplicationId
       (\ s a -> s{_rApplicationId = a})
 
 -- | Criteria for auto-matching players into this room.
-rAutoMatchingCriteria :: Lens' Room (Maybe (Maybe RoomAutoMatchingCriteria))
+rAutoMatchingCriteria :: Lens' Room (Maybe RoomAutoMatchingCriteria)
 rAutoMatchingCriteria
   = lens _rAutoMatchingCriteria
       (\ s a -> s{_rAutoMatchingCriteria = a})
@@ -921,7 +921,7 @@ instance ToJSON Room where
 data QuestListResponse = QuestListResponse
     { _qlrNextPageToken :: !(Maybe Text)
     , _qlrKind          :: !Text
-    , _qlrItems         :: !(Maybe [Maybe Quest])
+    , _qlrItems         :: !(Maybe [Quest])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QuestListResponse' with the minimum fields required to make a request.
@@ -954,7 +954,7 @@ qlrKind :: Lens' QuestListResponse Text
 qlrKind = lens _qlrKind (\ s a -> s{_qlrKind = a})
 
 -- | The quests.
-qlrItems :: Lens' QuestListResponse [Maybe Quest]
+qlrItems :: Lens' QuestListResponse [Quest]
 qlrItems
   = lens _qlrItems (\ s a -> s{_qlrItems = a}) .
       _Default
@@ -984,14 +984,14 @@ data Application = Application
     { _aThemeColor           :: !(Maybe Text)
     , _aLeaderboardCount     :: !(Maybe Int32)
     , _aKind                 :: !Text
-    , _aCategory             :: !(Maybe (Maybe ApplicationCategory))
+    , _aCategory             :: !(Maybe ApplicationCategory)
     , _aName                 :: !(Maybe Text)
     , _aEnabledFeatures      :: !(Maybe [Text])
-    , _aInstances            :: !(Maybe [Maybe Instance])
+    , _aInstances            :: !(Maybe [Instance])
     , _aAuthor               :: !(Maybe Text)
     , _aId                   :: !(Maybe Text)
     , _aAchievementCount     :: !(Maybe Int32)
-    , _aAssets               :: !(Maybe [Maybe ImageAsset])
+    , _aAssets               :: !(Maybe [ImageAsset])
     , _aDescription          :: !(Maybe Text)
     , _aLastUpdatedTimestamp :: !(Maybe Int64)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -1063,7 +1063,7 @@ aKind :: Lens' Application Text
 aKind = lens _aKind (\ s a -> s{_aKind = a})
 
 -- | The category of the application.
-aCategory :: Lens' Application (Maybe (Maybe ApplicationCategory))
+aCategory :: Lens' Application (Maybe ApplicationCategory)
 aCategory
   = lens _aCategory (\ s a -> s{_aCategory = a})
 
@@ -1081,7 +1081,7 @@ aEnabledFeatures
       . _Coerce
 
 -- | The instances of the application.
-aInstances :: Lens' Application [Maybe Instance]
+aInstances :: Lens' Application [Instance]
 aInstances
   = lens _aInstances (\ s a -> s{_aInstances = a}) .
       _Default
@@ -1103,7 +1103,7 @@ aAchievementCount
       (\ s a -> s{_aAchievementCount = a})
 
 -- | The assets of the application.
-aAssets :: Lens' Application [Maybe ImageAsset]
+aAssets :: Lens' Application [ImageAsset]
 aAssets
   = lens _aAssets (\ s a -> s{_aAssets = a}) . _Default
       . _Coerce
@@ -1159,9 +1159,9 @@ instance ToJSON Application where
 --
 -- /See:/ 'turnBasedMatchTurn' smart constructor.
 data TurnBasedMatchTurn = TurnBasedMatchTurn
-    { _tbmtResults              :: !(Maybe [Maybe ParticipantResult])
+    { _tbmtResults              :: !(Maybe [ParticipantResult])
     , _tbmtKind                 :: !Text
-    , _tbmtData                 :: !(Maybe (Maybe TurnBasedMatchDataRequest))
+    , _tbmtData                 :: !(Maybe TurnBasedMatchDataRequest)
     , _tbmtPendingParticipantId :: !(Maybe Text)
     , _tbmtMatchVersion         :: !(Maybe Int32)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -1191,7 +1191,7 @@ turnBasedMatchTurn =
     }
 
 -- | The match results for the participants in the match.
-tbmtResults :: Lens' TurnBasedMatchTurn [Maybe ParticipantResult]
+tbmtResults :: Lens' TurnBasedMatchTurn [ParticipantResult]
 tbmtResults
   = lens _tbmtResults (\ s a -> s{_tbmtResults = a}) .
       _Default
@@ -1203,7 +1203,7 @@ tbmtKind :: Lens' TurnBasedMatchTurn Text
 tbmtKind = lens _tbmtKind (\ s a -> s{_tbmtKind = a})
 
 -- | The shared game state data after the turn is over.
-tbmtData :: Lens' TurnBasedMatchTurn (Maybe (Maybe TurnBasedMatchDataRequest))
+tbmtData :: Lens' TurnBasedMatchTurn (Maybe TurnBasedMatchDataRequest)
 tbmtData = lens _tbmtData (\ s a -> s{_tbmtData = a})
 
 -- | The ID of the participant who should take their turn next. May be set to
@@ -1308,7 +1308,7 @@ instance ToJSON ApplicationCategory where
 --
 -- /See:/ 'playerScoreListResponse' smart constructor.
 data PlayerScoreListResponse = PlayerScoreListResponse
-    { _pslrSubmittedScores :: !(Maybe [Maybe PlayerScoreResponse])
+    { _pslrSubmittedScores :: !(Maybe [PlayerScoreResponse])
     , _pslrKind            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1328,7 +1328,7 @@ playerScoreListResponse =
     }
 
 -- | The score submissions statuses.
-pslrSubmittedScores :: Lens' PlayerScoreListResponse [Maybe PlayerScoreResponse]
+pslrSubmittedScores :: Lens' PlayerScoreListResponse [PlayerScoreResponse]
 pslrSubmittedScores
   = lens _pslrSubmittedScores
       (\ s a -> s{_pslrSubmittedScores = a})
@@ -1484,8 +1484,8 @@ data PlayerLeaderboardScore = PlayerLeaderboardScore
     , _plsKind           :: !Text
     , _plsScoreValue     :: !(Maybe Int64)
     , _plsTimeSpan       :: !(Maybe Text)
-    , _plsPublicRank     :: !(Maybe (Maybe LeaderboardScoreRank))
-    , _plsSocialRank     :: !(Maybe (Maybe LeaderboardScoreRank))
+    , _plsPublicRank     :: !(Maybe LeaderboardScoreRank)
+    , _plsSocialRank     :: !(Maybe LeaderboardScoreRank)
     , _plsLeaderboardId  :: !(Maybe Text)
     , _plsWriteTimestamp :: !(Maybe Int64)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -1558,13 +1558,13 @@ plsTimeSpan
 
 -- | The public rank of the score in this leaderboard. This object will not
 -- be present if the user is not sharing their scores publicly.
-plsPublicRank :: Lens' PlayerLeaderboardScore (Maybe (Maybe LeaderboardScoreRank))
+plsPublicRank :: Lens' PlayerLeaderboardScore (Maybe LeaderboardScoreRank)
 plsPublicRank
   = lens _plsPublicRank
       (\ s a -> s{_plsPublicRank = a})
 
 -- | The social rank of the score in this leaderboard.
-plsSocialRank :: Lens' PlayerLeaderboardScore (Maybe (Maybe LeaderboardScoreRank))
+plsSocialRank :: Lens' PlayerLeaderboardScore (Maybe LeaderboardScoreRank)
 plsSocialRank
   = lens _plsSocialRank
       (\ s a -> s{_plsSocialRank = a})
@@ -1614,10 +1614,10 @@ instance ToJSON PlayerLeaderboardScore where
 --
 -- /See:/ 'questCriterion' smart constructor.
 data QuestCriterion = QuestCriterion
-    { _qcCurrentContribution    :: !(Maybe (Maybe QuestContribution))
-    , _qcCompletionContribution :: !(Maybe (Maybe QuestContribution))
+    { _qcCurrentContribution    :: !(Maybe QuestContribution)
+    , _qcCompletionContribution :: !(Maybe QuestContribution)
     , _qcKind                   :: !Text
-    , _qcInitialPlayerProgress  :: !(Maybe (Maybe QuestContribution))
+    , _qcInitialPlayerProgress  :: !(Maybe QuestContribution)
     , _qcEventId                :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -1649,14 +1649,14 @@ questCriterion =
 -- event increments required to complete the quest. This value will not
 -- exceed the completion contribution. There will be no currentContribution
 -- until the player has accepted the quest.
-qcCurrentContribution :: Lens' QuestCriterion (Maybe (Maybe QuestContribution))
+qcCurrentContribution :: Lens' QuestCriterion (Maybe QuestContribution)
 qcCurrentContribution
   = lens _qcCurrentContribution
       (\ s a -> s{_qcCurrentContribution = a})
 
 -- | The total number of times the associated event must be incremented for
 -- the player to complete this quest.
-qcCompletionContribution :: Lens' QuestCriterion (Maybe (Maybe QuestContribution))
+qcCompletionContribution :: Lens' QuestCriterion (Maybe QuestContribution)
 qcCompletionContribution
   = lens _qcCompletionContribution
       (\ s a -> s{_qcCompletionContribution = a})
@@ -1671,7 +1671,7 @@ qcKind = lens _qcKind (\ s a -> s{_qcKind = a})
 -- place before the start of quest are uploaded after the quest starts.
 -- There will be no initialPlayerProgress until the player has accepted the
 -- quest.
-qcInitialPlayerProgress :: Lens' QuestCriterion (Maybe (Maybe QuestContribution))
+qcInitialPlayerProgress :: Lens' QuestCriterion (Maybe QuestContribution)
 qcInitialPlayerProgress
   = lens _qcInitialPlayerProgress
       (\ s a -> s{_qcInitialPlayerProgress = a})
@@ -1811,7 +1811,7 @@ instance ToJSON AchievementUpdateResponse where
 data SnapshotListResponse = SnapshotListResponse
     { _slrNextPageToken :: !(Maybe Text)
     , _slrKind          :: !Text
-    , _slrItems         :: !(Maybe [Maybe Snapshot])
+    , _slrItems         :: !(Maybe [Snapshot])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'SnapshotListResponse' with the minimum fields required to make a request.
@@ -1845,7 +1845,7 @@ slrKind :: Lens' SnapshotListResponse Text
 slrKind = lens _slrKind (\ s a -> s{_slrKind = a})
 
 -- | The snapshots.
-slrItems :: Lens' SnapshotListResponse [Maybe Snapshot]
+slrItems :: Lens' SnapshotListResponse [Snapshot]
 slrItems
   = lens _slrItems (\ s a -> s{_slrItems = a}) .
       _Default
@@ -1875,7 +1875,7 @@ data PushToken = PushToken
     { _ptClientRevision :: !(Maybe Text)
     , _ptKind           :: !Text
     , _ptLanguage       :: !(Maybe Text)
-    , _ptId             :: !(Maybe (Maybe PushTokenId))
+    , _ptId             :: !(Maybe PushTokenId)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PushToken' with the minimum fields required to make a request.
@@ -1919,7 +1919,7 @@ ptLanguage
   = lens _ptLanguage (\ s a -> s{_ptLanguage = a})
 
 -- | Unique identifier for this push token.
-ptId :: Lens' PushToken (Maybe (Maybe PushTokenId))
+ptId :: Lens' PushToken (Maybe PushTokenId)
 ptId = lens _ptId (\ s a -> s{_ptId = a})
 
 instance FromJSON PushToken where
@@ -1947,7 +1947,7 @@ instance ToJSON PushToken where
 data TurnBasedMatchList = TurnBasedMatchList
     { _tbmlNextPageToken :: !(Maybe Text)
     , _tbmlKind          :: !Text
-    , _tbmlItems         :: !(Maybe [Maybe TurnBasedMatch])
+    , _tbmlItems         :: !(Maybe [TurnBasedMatch])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchList' with the minimum fields required to make a request.
@@ -1980,7 +1980,7 @@ tbmlKind :: Lens' TurnBasedMatchList Text
 tbmlKind = lens _tbmlKind (\ s a -> s{_tbmlKind = a})
 
 -- | The matches.
-tbmlItems :: Lens' TurnBasedMatchList [Maybe TurnBasedMatch]
+tbmlItems :: Lens' TurnBasedMatchList [TurnBasedMatch]
 tbmlItems
   = lens _tbmlItems (\ s a -> s{_tbmlItems = a}) .
       _Default
@@ -2082,7 +2082,7 @@ instance ToJSON PlayerLevel where
 data RoomList = RoomList
     { _rlNextPageToken :: !(Maybe Text)
     , _rlKind          :: !Text
-    , _rlItems         :: !(Maybe [Maybe Room])
+    , _rlItems         :: !(Maybe [Room])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomList' with the minimum fields required to make a request.
@@ -2115,7 +2115,7 @@ rlKind :: Lens' RoomList Text
 rlKind = lens _rlKind (\ s a -> s{_rlKind = a})
 
 -- | The rooms.
-rlItems :: Lens' RoomList [Maybe Room]
+rlItems :: Lens' RoomList [Room]
 rlItems
   = lens _rlItems (\ s a -> s{_rlItems = a}) . _Default
       . _Coerce
@@ -2141,10 +2141,10 @@ instance ToJSON RoomList where
 -- /See:/ 'peerChannelDiagnostics' smart constructor.
 data PeerChannelDiagnostics = PeerChannelDiagnostics
     { _pcdNumMessagesLost        :: !(Maybe Int32)
-    , _pcdBytesSent              :: !(Maybe (Maybe AggregateStats))
+    , _pcdBytesSent              :: !(Maybe AggregateStats)
     , _pcdKind                   :: !Text
-    , _pcdRoundtripLatencyMillis :: !(Maybe (Maybe AggregateStats))
-    , _pcdBytesReceived          :: !(Maybe (Maybe AggregateStats))
+    , _pcdRoundtripLatencyMillis :: !(Maybe AggregateStats)
+    , _pcdBytesReceived          :: !(Maybe AggregateStats)
     , _pcdNumMessagesReceived    :: !(Maybe Int32)
     , _pcdNumSendFailures        :: !(Maybe Int32)
     , _pcdNumMessagesSent        :: !(Maybe Int32)
@@ -2190,7 +2190,7 @@ pcdNumMessagesLost
       (\ s a -> s{_pcdNumMessagesLost = a})
 
 -- | Number of bytes sent.
-pcdBytesSent :: Lens' PeerChannelDiagnostics (Maybe (Maybe AggregateStats))
+pcdBytesSent :: Lens' PeerChannelDiagnostics (Maybe AggregateStats)
 pcdBytesSent
   = lens _pcdBytesSent (\ s a -> s{_pcdBytesSent = a})
 
@@ -2200,13 +2200,13 @@ pcdKind :: Lens' PeerChannelDiagnostics Text
 pcdKind = lens _pcdKind (\ s a -> s{_pcdKind = a})
 
 -- | Roundtrip latency stats in milliseconds.
-pcdRoundtripLatencyMillis :: Lens' PeerChannelDiagnostics (Maybe (Maybe AggregateStats))
+pcdRoundtripLatencyMillis :: Lens' PeerChannelDiagnostics (Maybe AggregateStats)
 pcdRoundtripLatencyMillis
   = lens _pcdRoundtripLatencyMillis
       (\ s a -> s{_pcdRoundtripLatencyMillis = a})
 
 -- | Number of bytes received.
-pcdBytesReceived :: Lens' PeerChannelDiagnostics (Maybe (Maybe AggregateStats))
+pcdBytesReceived :: Lens' PeerChannelDiagnostics (Maybe AggregateStats)
 pcdBytesReceived
   = lens _pcdBytesReceived
       (\ s a -> s{_pcdBytesReceived = a})
@@ -2268,7 +2268,7 @@ data LeaderboardEntry = LeaderboardEntry
     , _leFormattedScore       :: !(Maybe Text)
     , _leTimeSpan             :: !(Maybe Text)
     , _leFormattedScoreRank   :: !(Maybe Text)
-    , _lePlayer               :: !(Maybe (Maybe Player))
+    , _lePlayer               :: !(Maybe Player)
     , _leScoreRank            :: !(Maybe Int64)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -2351,7 +2351,7 @@ leFormattedScoreRank
       (\ s a -> s{_leFormattedScoreRank = a})
 
 -- | The player who holds this score.
-lePlayer :: Lens' LeaderboardEntry (Maybe (Maybe Player))
+lePlayer :: Lens' LeaderboardEntry (Maybe Player)
 lePlayer = lens _lePlayer (\ s a -> s{_lePlayer = a})
 
 -- | The rank of this score for this leaderboard.
@@ -2393,7 +2393,7 @@ instance ToJSON LeaderboardEntry where
 -- /See:/ 'achievementUpdateMultipleResponse' smart constructor.
 data AchievementUpdateMultipleResponse = AchievementUpdateMultipleResponse
     { _aumrKind                :: !Text
-    , _aumrUpdatedAchievements :: !(Maybe [Maybe AchievementUpdateResponse])
+    , _aumrUpdatedAchievements :: !(Maybe [AchievementUpdateResponse])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementUpdateMultipleResponse' with the minimum fields required to make a request.
@@ -2417,7 +2417,7 @@ aumrKind :: Lens' AchievementUpdateMultipleResponse Text
 aumrKind = lens _aumrKind (\ s a -> s{_aumrKind = a})
 
 -- | The updated state of the achievements.
-aumrUpdatedAchievements :: Lens' AchievementUpdateMultipleResponse [Maybe AchievementUpdateResponse]
+aumrUpdatedAchievements :: Lens' AchievementUpdateMultipleResponse [AchievementUpdateResponse]
 aumrUpdatedAchievements
   = lens _aumrUpdatedAchievements
       (\ s a -> s{_aumrUpdatedAchievements = a})
@@ -2452,7 +2452,7 @@ data PlayerScoreResponse = PlayerScoreResponse
     , _psrFormattedScore       :: !(Maybe Text)
     , _psrLeaderboardId        :: !(Maybe Text)
     , _psrBeatenScoreTimeSpans :: !(Maybe [Text])
-    , _psrUnbeatenScores       :: !(Maybe [Maybe PlayerScore])
+    , _psrUnbeatenScores       :: !(Maybe [PlayerScore])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayerScoreResponse' with the minimum fields required to make a request.
@@ -2519,7 +2519,7 @@ psrBeatenScoreTimeSpans
 -- | The scores in time spans that have not been beaten. As an example, the
 -- submitted score may be better than the player\'s DAILY score, but not
 -- better than the player\'s scores for the WEEKLY or ALL_TIME time spans.
-psrUnbeatenScores :: Lens' PlayerScoreResponse [Maybe PlayerScore]
+psrUnbeatenScores :: Lens' PlayerScoreResponse [PlayerScore]
 psrUnbeatenScores
   = lens _psrUnbeatenScores
       (\ s a -> s{_psrUnbeatenScores = a})
@@ -2558,8 +2558,8 @@ data TurnBasedMatchParticipant = TurnBasedMatchParticipant
     , _tbmpKind              :: !Text
     , _tbmpId                :: !(Maybe Text)
     , _tbmpAutoMatched       :: !(Maybe Bool)
-    , _tbmpPlayer            :: !(Maybe (Maybe Player))
-    , _tbmpAutoMatchedPlayer :: !(Maybe (Maybe AnonymousPlayer))
+    , _tbmpPlayer            :: !(Maybe Player)
+    , _tbmpAutoMatchedPlayer :: !(Maybe AnonymousPlayer)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchParticipant' with the minimum fields required to make a request.
@@ -2624,14 +2624,14 @@ tbmpAutoMatched
 -- | Information about the player. Not populated if this player was
 -- anonymously auto-matched against the requesting player. (Either player
 -- or autoMatchedPlayer will be set.)
-tbmpPlayer :: Lens' TurnBasedMatchParticipant (Maybe (Maybe Player))
+tbmpPlayer :: Lens' TurnBasedMatchParticipant (Maybe Player)
 tbmpPlayer
   = lens _tbmpPlayer (\ s a -> s{_tbmpPlayer = a})
 
 -- | Information about a player that has been anonymously auto-matched
 -- against the requesting player. (Either player or autoMatchedPlayer will
 -- be set.)
-tbmpAutoMatchedPlayer :: Lens' TurnBasedMatchParticipant (Maybe (Maybe AnonymousPlayer))
+tbmpAutoMatchedPlayer :: Lens' TurnBasedMatchParticipant (Maybe AnonymousPlayer)
 tbmpAutoMatchedPlayer
   = lens _tbmpAutoMatchedPlayer
       (\ s a -> s{_tbmpAutoMatchedPlayer = a})
@@ -2784,7 +2784,7 @@ instance ToJSON InstanceAndroidDetails where
 data LeaderboardListResponse = LeaderboardListResponse
     { _llrNextPageToken :: !(Maybe Text)
     , _llrKind          :: !Text
-    , _llrItems         :: !(Maybe [Maybe Leaderboard])
+    , _llrItems         :: !(Maybe [Leaderboard])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LeaderboardListResponse' with the minimum fields required to make a request.
@@ -2817,7 +2817,7 @@ llrKind :: Lens' LeaderboardListResponse Text
 llrKind = lens _llrKind (\ s a -> s{_llrKind = a})
 
 -- | The leaderboards.
-llrItems :: Lens' LeaderboardListResponse [Maybe Leaderboard]
+llrItems :: Lens' LeaderboardListResponse [Leaderboard]
 llrItems
   = lens _llrItems (\ s a -> s{_llrItems = a}) .
       _Default
@@ -2906,7 +2906,7 @@ instance ToJSON Category where
 data EventDefinitionListResponse = EventDefinitionListResponse
     { _edlrNextPageToken :: !(Maybe Text)
     , _edlrKind          :: !Text
-    , _edlrItems         :: !(Maybe [Maybe EventDefinition])
+    , _edlrItems         :: !(Maybe [EventDefinition])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventDefinitionListResponse' with the minimum fields required to make a request.
@@ -2939,7 +2939,7 @@ edlrKind :: Lens' EventDefinitionListResponse Text
 edlrKind = lens _edlrKind (\ s a -> s{_edlrKind = a})
 
 -- | The event definitions.
-edlrItems :: Lens' EventDefinitionListResponse [Maybe EventDefinition]
+edlrItems :: Lens' EventDefinitionListResponse [EventDefinition]
 edlrItems
   = lens _edlrItems (\ s a -> s{_edlrItems = a}) .
       _Default
@@ -2971,12 +2971,12 @@ data RoomParticipant = RoomParticipant
     , _rpConnected         :: !(Maybe Bool)
     , _rpLeaveReason       :: !(Maybe Text)
     , _rpKind              :: !Text
-    , _rpClientAddress     :: !(Maybe (Maybe RoomClientAddress))
+    , _rpClientAddress     :: !(Maybe RoomClientAddress)
     , _rpId                :: !(Maybe Text)
     , _rpAutoMatched       :: !(Maybe Bool)
-    , _rpPlayer            :: !(Maybe (Maybe Player))
+    , _rpPlayer            :: !(Maybe Player)
     , _rpCapabilities      :: !(Maybe [Text])
-    , _rpAutoMatchedPlayer :: !(Maybe (Maybe AnonymousPlayer))
+    , _rpAutoMatchedPlayer :: !(Maybe AnonymousPlayer)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomParticipant' with the minimum fields required to make a request.
@@ -3056,7 +3056,7 @@ rpKind :: Lens' RoomParticipant Text
 rpKind = lens _rpKind (\ s a -> s{_rpKind = a})
 
 -- | Client address for the participant.
-rpClientAddress :: Lens' RoomParticipant (Maybe (Maybe RoomClientAddress))
+rpClientAddress :: Lens' RoomParticipant (Maybe RoomClientAddress)
 rpClientAddress
   = lens _rpClientAddress
       (\ s a -> s{_rpClientAddress = a})
@@ -3075,7 +3075,7 @@ rpAutoMatched
 -- | Information about the player. Not populated if this player was
 -- anonymously auto-matched against the requesting player. (Either player
 -- or autoMatchedPlayer will be set.)
-rpPlayer :: Lens' RoomParticipant (Maybe (Maybe Player))
+rpPlayer :: Lens' RoomParticipant (Maybe Player)
 rpPlayer = lens _rpPlayer (\ s a -> s{_rpPlayer = a})
 
 -- | The capabilities which can be used when communicating with this
@@ -3090,7 +3090,7 @@ rpCapabilities
 -- | Information about a player that has been anonymously auto-matched
 -- against the requesting player. (Either player or autoMatchedPlayer will
 -- be set.)
-rpAutoMatchedPlayer :: Lens' RoomParticipant (Maybe (Maybe AnonymousPlayer))
+rpAutoMatchedPlayer :: Lens' RoomParticipant (Maybe AnonymousPlayer)
 rpAutoMatchedPlayer
   = lens _rpAutoMatchedPlayer
       (\ s a -> s{_rpAutoMatchedPlayer = a})
@@ -3129,7 +3129,7 @@ instance ToJSON RoomParticipant where
 --
 -- /See:/ 'anonymousPlayer' smart constructor.
 data AnonymousPlayer = AnonymousPlayer
-    { _apAvatarImageUrl :: !(Maybe Text)
+    { _apAvatarImageURL :: !(Maybe Text)
     , _apKind           :: !Text
     , _apDisplayName    :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -3138,7 +3138,7 @@ data AnonymousPlayer = AnonymousPlayer
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'apAvatarImageUrl'
+-- * 'apAvatarImageURL'
 --
 -- * 'apKind'
 --
@@ -3147,16 +3147,16 @@ anonymousPlayer
     :: AnonymousPlayer
 anonymousPlayer =
     AnonymousPlayer
-    { _apAvatarImageUrl = Nothing
+    { _apAvatarImageURL = Nothing
     , _apKind = "games#anonymousPlayer"
     , _apDisplayName = Nothing
     }
 
 -- | The base URL for the image to display for the anonymous player.
-apAvatarImageUrl :: Lens' AnonymousPlayer (Maybe Text)
-apAvatarImageUrl
-  = lens _apAvatarImageUrl
-      (\ s a -> s{_apAvatarImageUrl = a})
+apAvatarImageURL :: Lens' AnonymousPlayer (Maybe Text)
+apAvatarImageURL
+  = lens _apAvatarImageURL
+      (\ s a -> s{_apAvatarImageURL = a})
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#anonymousPlayer.
@@ -3182,7 +3182,7 @@ instance ToJSON AnonymousPlayer where
         toJSON AnonymousPlayer{..}
           = object
               (catMaybes
-                 [("avatarImageUrl" .=) <$> _apAvatarImageUrl,
+                 [("avatarImageUrl" .=) <$> _apAvatarImageURL,
                   Just ("kind" .= _apKind),
                   ("displayName" .=) <$> _apDisplayName])
 
@@ -3192,7 +3192,7 @@ instance ToJSON AnonymousPlayer where
 data AchievementDefinitionsListResponse = AchievementDefinitionsListResponse
     { _adlrNextPageToken :: !(Maybe Text)
     , _adlrKind          :: !Text
-    , _adlrItems         :: !(Maybe [Maybe AchievementDefinition])
+    , _adlrItems         :: !(Maybe [AchievementDefinition])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementDefinitionsListResponse' with the minimum fields required to make a request.
@@ -3225,7 +3225,7 @@ adlrKind :: Lens' AchievementDefinitionsListResponse Text
 adlrKind = lens _adlrKind (\ s a -> s{_adlrKind = a})
 
 -- | The achievement definitions.
-adlrItems :: Lens' AchievementDefinitionsListResponse [Maybe AchievementDefinition]
+adlrItems :: Lens' AchievementDefinitionsListResponse [AchievementDefinition]
 adlrItems
   = lens _adlrItems (\ s a -> s{_adlrItems = a}) .
       _Default
@@ -3317,8 +3317,8 @@ instance ToJSON QuestContribution where
 data PlayerLeaderboardScoreListResponse = PlayerLeaderboardScoreListResponse
     { _plslrNextPageToken :: !(Maybe Text)
     , _plslrKind          :: !Text
-    , _plslrItems         :: !(Maybe [Maybe PlayerLeaderboardScore])
-    , _plslrPlayer        :: !(Maybe (Maybe Player))
+    , _plslrItems         :: !(Maybe [PlayerLeaderboardScore])
+    , _plslrPlayer        :: !(Maybe Player)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayerLeaderboardScoreListResponse' with the minimum fields required to make a request.
@@ -3355,14 +3355,14 @@ plslrKind
   = lens _plslrKind (\ s a -> s{_plslrKind = a})
 
 -- | The leaderboard scores.
-plslrItems :: Lens' PlayerLeaderboardScoreListResponse [Maybe PlayerLeaderboardScore]
+plslrItems :: Lens' PlayerLeaderboardScoreListResponse [PlayerLeaderboardScore]
 plslrItems
   = lens _plslrItems (\ s a -> s{_plslrItems = a}) .
       _Default
       . _Coerce
 
 -- | The Player resources for the owner of this score.
-plslrPlayer :: Lens' PlayerLeaderboardScoreListResponse (Maybe (Maybe Player))
+plslrPlayer :: Lens' PlayerLeaderboardScoreListResponse (Maybe Player)
 plslrPlayer
   = lens _plslrPlayer (\ s a -> s{_plslrPlayer = a})
 
@@ -3394,7 +3394,7 @@ instance ToJSON PlayerLeaderboardScoreListResponse
 data SnapshotImage = SnapshotImage
     { _siHeight   :: !(Maybe Int32)
     , _siKind     :: !Text
-    , _siUrl      :: !(Maybe Text)
+    , _siURL      :: !(Maybe Text)
     , _siMimeType :: !(Maybe Text)
     , _siWidth    :: !(Maybe Int32)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -3407,7 +3407,7 @@ data SnapshotImage = SnapshotImage
 --
 -- * 'siKind'
 --
--- * 'siUrl'
+-- * 'siURL'
 --
 -- * 'siMimeType'
 --
@@ -3418,7 +3418,7 @@ snapshotImage =
     SnapshotImage
     { _siHeight = Nothing
     , _siKind = "games#snapshotImage"
-    , _siUrl = Nothing
+    , _siURL = Nothing
     , _siMimeType = Nothing
     , _siWidth = Nothing
     }
@@ -3434,8 +3434,8 @@ siKind = lens _siKind (\ s a -> s{_siKind = a})
 
 -- | The URL of the image. This URL may be invalidated at any time and should
 -- not be cached.
-siUrl :: Lens' SnapshotImage (Maybe Text)
-siUrl = lens _siUrl (\ s a -> s{_siUrl = a})
+siURL :: Lens' SnapshotImage (Maybe Text)
+siURL = lens _siURL (\ s a -> s{_siURL = a})
 
 -- | The MIME type of the image.
 siMimeType :: Lens' SnapshotImage (Maybe Text)
@@ -3462,7 +3462,7 @@ instance ToJSON SnapshotImage where
           = object
               (catMaybes
                  [("height" .=) <$> _siHeight,
-                  Just ("kind" .= _siKind), ("url" .=) <$> _siUrl,
+                  Just ("kind" .= _siKind), ("url" .=) <$> _siURL,
                   ("mime_type" .=) <$> _siMimeType,
                   ("width" .=) <$> _siWidth])
 
@@ -3473,9 +3473,9 @@ instance ToJSON SnapshotImage where
 data RoomStatus = RoomStatus
     { _rsStatus             :: !(Maybe Text)
     , _rsKind               :: !Text
-    , _rsAutoMatchingStatus :: !(Maybe (Maybe RoomAutoMatchStatus))
+    , _rsAutoMatchingStatus :: !(Maybe RoomAutoMatchStatus)
     , _rsStatusVersion      :: !(Maybe Int32)
-    , _rsParticipants       :: !(Maybe [Maybe RoomParticipant])
+    , _rsParticipants       :: !(Maybe [RoomParticipant])
     , _rsRoomId             :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -3523,7 +3523,7 @@ rsKind = lens _rsKind (\ s a -> s{_rsKind = a})
 
 -- | Auto-matching status for this room. Not set if the room is not currently
 -- in the automatching queue.
-rsAutoMatchingStatus :: Lens' RoomStatus (Maybe (Maybe RoomAutoMatchStatus))
+rsAutoMatchingStatus :: Lens' RoomStatus (Maybe RoomAutoMatchStatus)
 rsAutoMatchingStatus
   = lens _rsAutoMatchingStatus
       (\ s a -> s{_rsAutoMatchingStatus = a})
@@ -3537,7 +3537,7 @@ rsStatusVersion
 
 -- | The participants involved in the room, along with their statuses.
 -- Includes participants who have left or declined invitations.
-rsParticipants :: Lens' RoomStatus [Maybe RoomParticipant]
+rsParticipants :: Lens' RoomStatus [RoomParticipant]
 rsParticipants
   = lens _rsParticipants
       (\ s a -> s{_rsParticipants = a})
@@ -3739,11 +3739,11 @@ instance ToJSON PlayerScore where
 -- /See:/ 'instanceIosDetails' smart constructor.
 data InstanceIosDetails = InstanceIosDetails
     { _iidItunesAppId        :: !(Maybe Text)
-    , _iidPreferredForIpad   :: !(Maybe Bool)
-    , _iidSupportIphone      :: !(Maybe Bool)
+    , _iidPreferredForIPad   :: !(Maybe Bool)
+    , _iidSupportIPhone      :: !(Maybe Bool)
     , _iidKind               :: !Text
-    , _iidSupportIpad        :: !(Maybe Bool)
-    , _iidPreferredForIphone :: !(Maybe Bool)
+    , _iidSupportIPad        :: !(Maybe Bool)
+    , _iidPreferredForIPhone :: !(Maybe Bool)
     , _iidBundleIdentifier   :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -3753,15 +3753,15 @@ data InstanceIosDetails = InstanceIosDetails
 --
 -- * 'iidItunesAppId'
 --
--- * 'iidPreferredForIpad'
+-- * 'iidPreferredForIPad'
 --
--- * 'iidSupportIphone'
+-- * 'iidSupportIPhone'
 --
 -- * 'iidKind'
 --
--- * 'iidSupportIpad'
+-- * 'iidSupportIPad'
 --
--- * 'iidPreferredForIphone'
+-- * 'iidPreferredForIPhone'
 --
 -- * 'iidBundleIdentifier'
 instanceIosDetails
@@ -3769,11 +3769,11 @@ instanceIosDetails
 instanceIosDetails =
     InstanceIosDetails
     { _iidItunesAppId = Nothing
-    , _iidPreferredForIpad = Nothing
-    , _iidSupportIphone = Nothing
+    , _iidPreferredForIPad = Nothing
+    , _iidSupportIPhone = Nothing
     , _iidKind = "games#instanceIosDetails"
-    , _iidSupportIpad = Nothing
-    , _iidPreferredForIphone = Nothing
+    , _iidSupportIPad = Nothing
+    , _iidPreferredForIPhone = Nothing
     , _iidBundleIdentifier = Nothing
     }
 
@@ -3785,16 +3785,16 @@ iidItunesAppId
 
 -- | Indicates that this instance is the default for new installations on
 -- iPad devices.
-iidPreferredForIpad :: Lens' InstanceIosDetails (Maybe Bool)
-iidPreferredForIpad
-  = lens _iidPreferredForIpad
-      (\ s a -> s{_iidPreferredForIpad = a})
+iidPreferredForIPad :: Lens' InstanceIosDetails (Maybe Bool)
+iidPreferredForIPad
+  = lens _iidPreferredForIPad
+      (\ s a -> s{_iidPreferredForIPad = a})
 
 -- | Flag to indicate if this instance supports iPhone.
-iidSupportIphone :: Lens' InstanceIosDetails (Maybe Bool)
-iidSupportIphone
-  = lens _iidSupportIphone
-      (\ s a -> s{_iidSupportIphone = a})
+iidSupportIPhone :: Lens' InstanceIosDetails (Maybe Bool)
+iidSupportIPhone
+  = lens _iidSupportIPhone
+      (\ s a -> s{_iidSupportIPhone = a})
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#instanceIosDetails.
@@ -3802,17 +3802,17 @@ iidKind :: Lens' InstanceIosDetails Text
 iidKind = lens _iidKind (\ s a -> s{_iidKind = a})
 
 -- | Flag to indicate if this instance supports iPad.
-iidSupportIpad :: Lens' InstanceIosDetails (Maybe Bool)
-iidSupportIpad
-  = lens _iidSupportIpad
-      (\ s a -> s{_iidSupportIpad = a})
+iidSupportIPad :: Lens' InstanceIosDetails (Maybe Bool)
+iidSupportIPad
+  = lens _iidSupportIPad
+      (\ s a -> s{_iidSupportIPad = a})
 
 -- | Indicates that this instance is the default for new installations on
 -- iPhone devices.
-iidPreferredForIphone :: Lens' InstanceIosDetails (Maybe Bool)
-iidPreferredForIphone
-  = lens _iidPreferredForIphone
-      (\ s a -> s{_iidPreferredForIphone = a})
+iidPreferredForIPhone :: Lens' InstanceIosDetails (Maybe Bool)
+iidPreferredForIPhone
+  = lens _iidPreferredForIPhone
+      (\ s a -> s{_iidPreferredForIPhone = a})
 
 -- | Bundle identifier.
 iidBundleIdentifier :: Lens' InstanceIosDetails (Maybe Text)
@@ -3837,20 +3837,20 @@ instance ToJSON InstanceIosDetails where
           = object
               (catMaybes
                  [("itunesAppId" .=) <$> _iidItunesAppId,
-                  ("preferredForIpad" .=) <$> _iidPreferredForIpad,
-                  ("supportIphone" .=) <$> _iidSupportIphone,
+                  ("preferredForIpad" .=) <$> _iidPreferredForIPad,
+                  ("supportIphone" .=) <$> _iidSupportIPhone,
                   Just ("kind" .= _iidKind),
-                  ("supportIpad" .=) <$> _iidSupportIpad,
-                  ("preferredForIphone" .=) <$> _iidPreferredForIphone,
+                  ("supportIpad" .=) <$> _iidSupportIPad,
+                  ("preferredForIphone" .=) <$> _iidPreferredForIPhone,
                   ("bundleIdentifier" .=) <$> _iidBundleIdentifier])
 
 -- | This is a JSON template for an event period update resource.
 --
 -- /See:/ 'eventUpdateResponse' smart constructor.
 data EventUpdateResponse = EventUpdateResponse
-    { _eurPlayerEvents  :: !(Maybe [Maybe PlayerEvent])
-    , _eurBatchFailures :: !(Maybe [Maybe EventBatchRecordFailure])
-    , _eurEventFailures :: !(Maybe [Maybe EventRecordFailure])
+    { _eurPlayerEvents  :: !(Maybe [PlayerEvent])
+    , _eurBatchFailures :: !(Maybe [EventBatchRecordFailure])
+    , _eurEventFailures :: !(Maybe [EventRecordFailure])
     , _eurKind          :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -3876,7 +3876,7 @@ eventUpdateResponse =
     }
 
 -- | The current status of any updated events
-eurPlayerEvents :: Lens' EventUpdateResponse [Maybe PlayerEvent]
+eurPlayerEvents :: Lens' EventUpdateResponse [PlayerEvent]
 eurPlayerEvents
   = lens _eurPlayerEvents
       (\ s a -> s{_eurPlayerEvents = a})
@@ -3884,7 +3884,7 @@ eurPlayerEvents
       . _Coerce
 
 -- | Any batch-wide failures which occurred applying updates.
-eurBatchFailures :: Lens' EventUpdateResponse [Maybe EventBatchRecordFailure]
+eurBatchFailures :: Lens' EventUpdateResponse [EventBatchRecordFailure]
 eurBatchFailures
   = lens _eurBatchFailures
       (\ s a -> s{_eurBatchFailures = a})
@@ -3892,7 +3892,7 @@ eurBatchFailures
       . _Coerce
 
 -- | Any failures updating a particular event.
-eurEventFailures :: Lens' EventUpdateResponse [Maybe EventRecordFailure]
+eurEventFailures :: Lens' EventUpdateResponse [EventRecordFailure]
 eurEventFailures
   = lens _eurEventFailures
       (\ s a -> s{_eurEventFailures = a})
@@ -3927,7 +3927,7 @@ instance ToJSON EventUpdateResponse where
 --
 -- /See:/ 'revisionCheckResponse' smart constructor.
 data RevisionCheckResponse = RevisionCheckResponse
-    { _rcrApiVersion     :: !(Maybe Text)
+    { _rcrAPIVersion     :: !(Maybe Text)
     , _rcrKind           :: !Text
     , _rcrRevisionStatus :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -3936,7 +3936,7 @@ data RevisionCheckResponse = RevisionCheckResponse
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'rcrApiVersion'
+-- * 'rcrAPIVersion'
 --
 -- * 'rcrKind'
 --
@@ -3945,17 +3945,17 @@ revisionCheckResponse
     :: RevisionCheckResponse
 revisionCheckResponse =
     RevisionCheckResponse
-    { _rcrApiVersion = Nothing
+    { _rcrAPIVersion = Nothing
     , _rcrKind = "games#revisionCheckResponse"
     , _rcrRevisionStatus = Nothing
     }
 
 -- | The version of the API this client revision should use when calling API
 -- methods.
-rcrApiVersion :: Lens' RevisionCheckResponse (Maybe Text)
-rcrApiVersion
-  = lens _rcrApiVersion
-      (\ s a -> s{_rcrApiVersion = a})
+rcrAPIVersion :: Lens' RevisionCheckResponse (Maybe Text)
+rcrAPIVersion
+  = lens _rcrAPIVersion
+      (\ s a -> s{_rcrAPIVersion = a})
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#revisionCheckResponse.
@@ -3985,7 +3985,7 @@ instance ToJSON RevisionCheckResponse where
         toJSON RevisionCheckResponse{..}
           = object
               (catMaybes
-                 [("apiVersion" .=) <$> _rcrApiVersion,
+                 [("apiVersion" .=) <$> _rcrAPIVersion,
                   Just ("kind" .= _rcrKind),
                   ("revisionStatus" .=) <$> _rcrRevisionStatus])
 
@@ -4075,7 +4075,7 @@ instance ToJSON ParticipantResult where
 data CategoryListResponse = CategoryListResponse
     { _clrNextPageToken :: !(Maybe Text)
     , _clrKind          :: !Text
-    , _clrItems         :: !(Maybe [Maybe Category])
+    , _clrItems         :: !(Maybe [Category])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CategoryListResponse' with the minimum fields required to make a request.
@@ -4108,7 +4108,7 @@ clrKind :: Lens' CategoryListResponse Text
 clrKind = lens _clrKind (\ s a -> s{_clrKind = a})
 
 -- | The list of categories with usage data.
-clrItems :: Lens' CategoryListResponse [Maybe Category]
+clrItems :: Lens' CategoryListResponse [Category]
 clrItems
   = lens _clrItems (\ s a -> s{_clrItems = a}) .
       _Default
@@ -4319,7 +4319,7 @@ instance ToJSON RoomP2PStatus where
 data MetagameConfig = MetagameConfig
     { _mcKind           :: !Text
     , _mcCurrentVersion :: !(Maybe Int32)
-    , _mcPlayerLevels   :: !(Maybe [Maybe PlayerLevel])
+    , _mcPlayerLevels   :: !(Maybe [PlayerLevel])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'MetagameConfig' with the minimum fields required to make a request.
@@ -4353,7 +4353,7 @@ mcCurrentVersion
       (\ s a -> s{_mcCurrentVersion = a})
 
 -- | The list of player levels.
-mcPlayerLevels :: Lens' MetagameConfig [Maybe PlayerLevel]
+mcPlayerLevels :: Lens' MetagameConfig [PlayerLevel]
 mcPlayerLevels
   = lens _mcPlayerLevels
       (\ s a -> s{_mcPlayerLevels = a})
@@ -4382,10 +4382,10 @@ instance ToJSON MetagameConfig where
 -- /See:/ 'leaderboard' smart constructor.
 data Leaderboard = Leaderboard
     { _lKind             :: !Text
-    , _lIsIconUrlDefault :: !(Maybe Bool)
+    , _lIsIconURLDefault :: !(Maybe Bool)
     , _lName             :: !(Maybe Text)
     , _lId               :: !(Maybe Text)
-    , _lIconUrl          :: !(Maybe Text)
+    , _lIconURL          :: !(Maybe Text)
     , _lOrder            :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -4395,13 +4395,13 @@ data Leaderboard = Leaderboard
 --
 -- * 'lKind'
 --
--- * 'lIsIconUrlDefault'
+-- * 'lIsIconURLDefault'
 --
 -- * 'lName'
 --
 -- * 'lId'
 --
--- * 'lIconUrl'
+-- * 'lIconURL'
 --
 -- * 'lOrder'
 leaderboard
@@ -4409,10 +4409,10 @@ leaderboard
 leaderboard =
     Leaderboard
     { _lKind = "games#leaderboard"
-    , _lIsIconUrlDefault = Nothing
+    , _lIsIconURLDefault = Nothing
     , _lName = Nothing
     , _lId = Nothing
-    , _lIconUrl = Nothing
+    , _lIconURL = Nothing
     , _lOrder = Nothing
     }
 
@@ -4423,10 +4423,10 @@ lKind = lens _lKind (\ s a -> s{_lKind = a})
 
 -- | Indicates whether the icon image being returned is a default image, or
 -- is game-provided.
-lIsIconUrlDefault :: Lens' Leaderboard (Maybe Bool)
-lIsIconUrlDefault
-  = lens _lIsIconUrlDefault
-      (\ s a -> s{_lIsIconUrlDefault = a})
+lIsIconURLDefault :: Lens' Leaderboard (Maybe Bool)
+lIsIconURLDefault
+  = lens _lIsIconURLDefault
+      (\ s a -> s{_lIsIconURLDefault = a})
 
 -- | The name of the leaderboard.
 lName :: Lens' Leaderboard (Maybe Text)
@@ -4437,8 +4437,8 @@ lId :: Lens' Leaderboard (Maybe Text)
 lId = lens _lId (\ s a -> s{_lId = a})
 
 -- | The icon for the leaderboard.
-lIconUrl :: Lens' Leaderboard (Maybe Text)
-lIconUrl = lens _lIconUrl (\ s a -> s{_lIconUrl = a})
+lIconURL :: Lens' Leaderboard (Maybe Text)
+lIconURL = lens _lIconURL (\ s a -> s{_lIconURL = a})
 
 -- | How scores are ordered. Possible values are: - \"LARGER_IS_BETTER\" -
 -- Larger values are better; scores are sorted in descending order. -
@@ -4464,22 +4464,22 @@ instance ToJSON Leaderboard where
           = object
               (catMaybes
                  [Just ("kind" .= _lKind),
-                  ("isIconUrlDefault" .=) <$> _lIsIconUrlDefault,
+                  ("isIconUrlDefault" .=) <$> _lIsIconURLDefault,
                   ("name" .=) <$> _lName, ("id" .=) <$> _lId,
-                  ("iconUrl" .=) <$> _lIconUrl,
+                  ("iconUrl" .=) <$> _lIconURL,
                   ("order" .=) <$> _lOrder])
 
 -- | This is a JSON template for an event definition resource.
 --
 -- /See:/ 'eventDefinition' smart constructor.
 data EventDefinition = EventDefinition
-    { _edIsDefaultImageUrl :: !(Maybe Bool)
+    { _edIsDefaultImageURL :: !(Maybe Bool)
     , _edKind              :: !Text
     , _edVisibility        :: !(Maybe Text)
-    , _edImageUrl          :: !(Maybe Text)
+    , _edImageURL          :: !(Maybe Text)
     , _edDisplayName       :: !(Maybe Text)
     , _edId                :: !(Maybe Text)
-    , _edChildEvents       :: !(Maybe [Maybe EventChild])
+    , _edChildEvents       :: !(Maybe [EventChild])
     , _edDescription       :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -4487,13 +4487,13 @@ data EventDefinition = EventDefinition
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'edIsDefaultImageUrl'
+-- * 'edIsDefaultImageURL'
 --
 -- * 'edKind'
 --
 -- * 'edVisibility'
 --
--- * 'edImageUrl'
+-- * 'edImageURL'
 --
 -- * 'edDisplayName'
 --
@@ -4506,10 +4506,10 @@ eventDefinition
     :: EventDefinition
 eventDefinition =
     EventDefinition
-    { _edIsDefaultImageUrl = Nothing
+    { _edIsDefaultImageURL = Nothing
     , _edKind = "games#eventDefinition"
     , _edVisibility = Nothing
-    , _edImageUrl = Nothing
+    , _edImageURL = Nothing
     , _edDisplayName = Nothing
     , _edId = Nothing
     , _edChildEvents = Nothing
@@ -4518,10 +4518,10 @@ eventDefinition =
 
 -- | Indicates whether the icon image being returned is a default image, or
 -- is game-provided.
-edIsDefaultImageUrl :: Lens' EventDefinition (Maybe Bool)
-edIsDefaultImageUrl
-  = lens _edIsDefaultImageUrl
-      (\ s a -> s{_edIsDefaultImageUrl = a})
+edIsDefaultImageURL :: Lens' EventDefinition (Maybe Bool)
+edIsDefaultImageURL
+  = lens _edIsDefaultImageURL
+      (\ s a -> s{_edIsDefaultImageURL = a})
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#eventDefinition.
@@ -4537,9 +4537,9 @@ edVisibility
   = lens _edVisibility (\ s a -> s{_edVisibility = a})
 
 -- | The base URL for the image that represents the event.
-edImageUrl :: Lens' EventDefinition (Maybe Text)
-edImageUrl
-  = lens _edImageUrl (\ s a -> s{_edImageUrl = a})
+edImageURL :: Lens' EventDefinition (Maybe Text)
+edImageURL
+  = lens _edImageURL (\ s a -> s{_edImageURL = a})
 
 -- | The name to display for the event.
 edDisplayName :: Lens' EventDefinition (Maybe Text)
@@ -4552,7 +4552,7 @@ edId :: Lens' EventDefinition (Maybe Text)
 edId = lens _edId (\ s a -> s{_edId = a})
 
 -- | A list of events that are a child of this event.
-edChildEvents :: Lens' EventDefinition [Maybe EventChild]
+edChildEvents :: Lens' EventDefinition [EventChild]
 edChildEvents
   = lens _edChildEvents
       (\ s a -> s{_edChildEvents = a})
@@ -4583,10 +4583,10 @@ instance ToJSON EventDefinition where
         toJSON EventDefinition{..}
           = object
               (catMaybes
-                 [("isDefaultImageUrl" .=) <$> _edIsDefaultImageUrl,
+                 [("isDefaultImageUrl" .=) <$> _edIsDefaultImageURL,
                   Just ("kind" .= _edKind),
                   ("visibility" .=) <$> _edVisibility,
-                  ("imageUrl" .=) <$> _edImageUrl,
+                  ("imageUrl" .=) <$> _edImageURL,
                   ("displayName" .=) <$> _edDisplayName,
                   ("id" .=) <$> _edId,
                   ("childEvents" .=) <$> _edChildEvents,
@@ -4883,7 +4883,7 @@ instance ToJSON PlayerAchievement where
 -- /See:/ 'roomP2PStatuses' smart constructor.
 data RoomP2PStatuses = RoomP2PStatuses
     { _rppssKind    :: !Text
-    , _rppssUpdates :: !(Maybe [Maybe RoomP2PStatus])
+    , _rppssUpdates :: !(Maybe [RoomP2PStatus])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomP2PStatuses' with the minimum fields required to make a request.
@@ -4908,7 +4908,7 @@ rppssKind
   = lens _rppssKind (\ s a -> s{_rppssKind = a})
 
 -- | The updates for the peers.
-rppssUpdates :: Lens' RoomP2PStatuses [Maybe RoomP2PStatus]
+rppssUpdates :: Lens' RoomP2PStatuses [RoomP2PStatus]
 rppssUpdates
   = lens _rppssUpdates (\ s a -> s{_rppssUpdates = a})
       . _Default
@@ -4936,8 +4936,8 @@ data AchievementUpdateRequest = AchievementUpdateRequest
     { _auruAchievementId          :: !(Maybe Text)
     , _auruKind                   :: !Text
     , _auruUpdateType             :: !(Maybe Text)
-    , _auruSetStepsAtLeastPayload :: !(Maybe (Maybe GamesAchievementSetStepsAtLeast))
-    , _auruIncrementPayload       :: !(Maybe (Maybe GamesAchievementIncrement))
+    , _auruSetStepsAtLeastPayLoad :: !(Maybe GamesAchievementSetStepsAtLeast)
+    , _auruIncrementPayLoad       :: !(Maybe GamesAchievementIncrement)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementUpdateRequest' with the minimum fields required to make a request.
@@ -4950,9 +4950,9 @@ data AchievementUpdateRequest = AchievementUpdateRequest
 --
 -- * 'auruUpdateType'
 --
--- * 'auruSetStepsAtLeastPayload'
+-- * 'auruSetStepsAtLeastPayLoad'
 --
--- * 'auruIncrementPayload'
+-- * 'auruIncrementPayLoad'
 achievementUpdateRequest
     :: AchievementUpdateRequest
 achievementUpdateRequest =
@@ -4960,8 +4960,8 @@ achievementUpdateRequest =
     { _auruAchievementId = Nothing
     , _auruKind = "games#achievementUpdateRequest"
     , _auruUpdateType = Nothing
-    , _auruSetStepsAtLeastPayload = Nothing
-    , _auruIncrementPayload = Nothing
+    , _auruSetStepsAtLeastPayLoad = Nothing
+    , _auruIncrementPayLoad = Nothing
     }
 
 -- | The achievement this update is being applied to.
@@ -4986,17 +4986,17 @@ auruUpdateType
 
 -- | The payload if an update of type SET_STEPS_AT_LEAST was requested for
 -- the achievement.
-auruSetStepsAtLeastPayload :: Lens' AchievementUpdateRequest (Maybe (Maybe GamesAchievementSetStepsAtLeast))
-auruSetStepsAtLeastPayload
-  = lens _auruSetStepsAtLeastPayload
-      (\ s a -> s{_auruSetStepsAtLeastPayload = a})
+auruSetStepsAtLeastPayLoad :: Lens' AchievementUpdateRequest (Maybe GamesAchievementSetStepsAtLeast)
+auruSetStepsAtLeastPayLoad
+  = lens _auruSetStepsAtLeastPayLoad
+      (\ s a -> s{_auruSetStepsAtLeastPayLoad = a})
 
 -- | The payload if an update of type INCREMENT was requested for the
 -- achievement.
-auruIncrementPayload :: Lens' AchievementUpdateRequest (Maybe (Maybe GamesAchievementIncrement))
-auruIncrementPayload
-  = lens _auruIncrementPayload
-      (\ s a -> s{_auruIncrementPayload = a})
+auruIncrementPayLoad :: Lens' AchievementUpdateRequest (Maybe GamesAchievementIncrement)
+auruIncrementPayLoad
+  = lens _auruIncrementPayLoad
+      (\ s a -> s{_auruIncrementPayLoad = a})
 
 instance FromJSON AchievementUpdateRequest where
         parseJSON
@@ -5017,8 +5017,8 @@ instance ToJSON AchievementUpdateRequest where
                   Just ("kind" .= _auruKind),
                   ("updateType" .=) <$> _auruUpdateType,
                   ("setStepsAtLeastPayload" .=) <$>
-                    _auruSetStepsAtLeastPayload,
-                  ("incrementPayload" .=) <$> _auruIncrementPayload])
+                    _auruSetStepsAtLeastPayLoad,
+                  ("incrementPayload" .=) <$> _auruIncrementPayLoad])
 
 -- | This is a JSON template for an image asset object.
 --
@@ -5026,7 +5026,7 @@ instance ToJSON AchievementUpdateRequest where
 data ImageAsset = ImageAsset
     { _iaHeight :: !(Maybe Int32)
     , _iaKind   :: !Text
-    , _iaUrl    :: !(Maybe Text)
+    , _iaURL    :: !(Maybe Text)
     , _iaWidth  :: !(Maybe Int32)
     , _iaName   :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
@@ -5039,7 +5039,7 @@ data ImageAsset = ImageAsset
 --
 -- * 'iaKind'
 --
--- * 'iaUrl'
+-- * 'iaURL'
 --
 -- * 'iaWidth'
 --
@@ -5050,7 +5050,7 @@ imageAsset =
     ImageAsset
     { _iaHeight = Nothing
     , _iaKind = "games#imageAsset"
-    , _iaUrl = Nothing
+    , _iaURL = Nothing
     , _iaWidth = Nothing
     , _iaName = Nothing
     }
@@ -5065,8 +5065,8 @@ iaKind :: Lens' ImageAsset Text
 iaKind = lens _iaKind (\ s a -> s{_iaKind = a})
 
 -- | The URL of the asset.
-iaUrl :: Lens' ImageAsset (Maybe Text)
-iaUrl = lens _iaUrl (\ s a -> s{_iaUrl = a})
+iaURL :: Lens' ImageAsset (Maybe Text)
+iaURL = lens _iaURL (\ s a -> s{_iaURL = a})
 
 -- | The width of the asset.
 iaWidth :: Lens' ImageAsset (Maybe Int32)
@@ -5092,7 +5092,7 @@ instance ToJSON ImageAsset where
           = object
               (catMaybes
                  [("height" .=) <$> _iaHeight,
-                  Just ("kind" .= _iaKind), ("url" .=) <$> _iaUrl,
+                  Just ("kind" .= _iaKind), ("url" .=) <$> _iaURL,
                   ("width" .=) <$> _iaWidth, ("name" .=) <$> _iaName])
 
 -- | This is a JSON template for a score rank in a leaderboard.
@@ -5182,7 +5182,7 @@ instance ToJSON LeaderboardScoreRank where
 -- /See:/ 'achievementUpdateMultipleRequest' smart constructor.
 data AchievementUpdateMultipleRequest = AchievementUpdateMultipleRequest
     { _aumruKind    :: !Text
-    , _aumruUpdates :: !(Maybe [Maybe AchievementUpdateRequest])
+    , _aumruUpdates :: !(Maybe [AchievementUpdateRequest])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementUpdateMultipleRequest' with the minimum fields required to make a request.
@@ -5207,7 +5207,7 @@ aumruKind
   = lens _aumruKind (\ s a -> s{_aumruKind = a})
 
 -- | The individual achievement update requests.
-aumruUpdates :: Lens' AchievementUpdateMultipleRequest [Maybe AchievementUpdateRequest]
+aumruUpdates :: Lens' AchievementUpdateMultipleRequest [AchievementUpdateRequest]
 aumruUpdates
   = lens _aumruUpdates (\ s a -> s{_aumruUpdates = a})
       . _Default
@@ -5289,11 +5289,11 @@ instance ToJSON RoomAutoMatchStatus where
 data RoomCreateRequest = RoomCreateRequest
     { _rooRequestId            :: !(Maybe Int64)
     , _rooVariant              :: !(Maybe Int32)
-    , _rooNetworkDiagnostics   :: !(Maybe (Maybe NetworkDiagnostics))
+    , _rooNetworkDiagnostics   :: !(Maybe NetworkDiagnostics)
     , _rooKind                 :: !Text
     , _rooInvitedPlayerIds     :: !(Maybe [Text])
-    , _rooClientAddress        :: !(Maybe (Maybe RoomClientAddress))
-    , _rooAutoMatchingCriteria :: !(Maybe (Maybe RoomAutoMatchingCriteria))
+    , _rooClientAddress        :: !(Maybe RoomClientAddress)
+    , _rooAutoMatchingCriteria :: !(Maybe RoomAutoMatchingCriteria)
     , _rooCapabilities         :: !(Maybe [Text])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -5344,7 +5344,7 @@ rooVariant
   = lens _rooVariant (\ s a -> s{_rooVariant = a})
 
 -- | Network diagnostics for the client creating the room.
-rooNetworkDiagnostics :: Lens' RoomCreateRequest (Maybe (Maybe NetworkDiagnostics))
+rooNetworkDiagnostics :: Lens' RoomCreateRequest (Maybe NetworkDiagnostics)
 rooNetworkDiagnostics
   = lens _rooNetworkDiagnostics
       (\ s a -> s{_rooNetworkDiagnostics = a})
@@ -5363,13 +5363,13 @@ rooInvitedPlayerIds
       . _Coerce
 
 -- | Client address for the player creating the room.
-rooClientAddress :: Lens' RoomCreateRequest (Maybe (Maybe RoomClientAddress))
+rooClientAddress :: Lens' RoomCreateRequest (Maybe RoomClientAddress)
 rooClientAddress
   = lens _rooClientAddress
       (\ s a -> s{_rooClientAddress = a})
 
 -- | Criteria for auto-matching players into this room.
-rooAutoMatchingCriteria :: Lens' RoomCreateRequest (Maybe (Maybe RoomAutoMatchingCriteria))
+rooAutoMatchingCriteria :: Lens' RoomCreateRequest (Maybe RoomAutoMatchingCriteria)
 rooAutoMatchingCriteria
   = lens _rooAutoMatchingCriteria
       (\ s a -> s{_rooAutoMatchingCriteria = a})
@@ -5416,8 +5416,8 @@ data LeaderboardScores = LeaderboardScores
     { _lsNextPageToken :: !(Maybe Text)
     , _lsNumScores     :: !(Maybe Int64)
     , _lsKind          :: !Text
-    , _lsPlayerScore   :: !(Maybe (Maybe LeaderboardEntry))
-    , _lsItems         :: !(Maybe [Maybe LeaderboardEntry])
+    , _lsPlayerScore   :: !(Maybe LeaderboardEntry)
+    , _lsItems         :: !(Maybe [LeaderboardEntry])
     , _lsPrevPageToken :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -5469,13 +5469,13 @@ lsKind = lens _lsKind (\ s a -> s{_lsKind = a})
 -- viewing a public leaderboard and the player is not sharing their
 -- gameplay information publicly, the scoreRank and formattedScoreRank
 -- values will not be present.
-lsPlayerScore :: Lens' LeaderboardScores (Maybe (Maybe LeaderboardEntry))
+lsPlayerScore :: Lens' LeaderboardScores (Maybe LeaderboardEntry)
 lsPlayerScore
   = lens _lsPlayerScore
       (\ s a -> s{_lsPlayerScore = a})
 
 -- | The scores in the leaderboard.
-lsItems :: Lens' LeaderboardScores [Maybe LeaderboardEntry]
+lsItems :: Lens' LeaderboardScores [LeaderboardEntry]
 lsItems
   = lens _lsItems (\ s a -> s{_lsItems = a}) . _Default
       . _Coerce
@@ -5514,7 +5514,7 @@ instance ToJSON LeaderboardScores where
 data PlayerListResponse = PlayerListResponse
     { _plrNextPageToken :: !(Maybe Text)
     , _plrKind          :: !Text
-    , _plrItems         :: !(Maybe [Maybe Player])
+    , _plrItems         :: !(Maybe [Player])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayerListResponse' with the minimum fields required to make a request.
@@ -5547,7 +5547,7 @@ plrKind :: Lens' PlayerListResponse Text
 plrKind = lens _plrKind (\ s a -> s{_plrKind = a})
 
 -- | The players.
-plrItems :: Lens' PlayerListResponse [Maybe Player]
+plrItems :: Lens' PlayerListResponse [Player]
 plrItems
   = lens _plrItems (\ s a -> s{_plrItems = a}) .
       _Default
@@ -5578,7 +5578,7 @@ data TurnBasedMatchCreateRequest = TurnBasedMatchCreateRequest
     , _tbmcrVariant              :: !(Maybe Int32)
     , _tbmcrKind                 :: !Text
     , _tbmcrInvitedPlayerIds     :: !(Maybe [Text])
-    , _tbmcrAutoMatchingCriteria :: !(Maybe (Maybe TurnBasedAutoMatchingCriteria))
+    , _tbmcrAutoMatchingCriteria :: !(Maybe TurnBasedAutoMatchingCriteria)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchCreateRequest' with the minimum fields required to make a request.
@@ -5634,7 +5634,7 @@ tbmcrInvitedPlayerIds
       . _Coerce
 
 -- | Criteria for auto-matching players into this match.
-tbmcrAutoMatchingCriteria :: Lens' TurnBasedMatchCreateRequest (Maybe (Maybe TurnBasedAutoMatchingCriteria))
+tbmcrAutoMatchingCriteria :: Lens' TurnBasedMatchCreateRequest (Maybe TurnBasedAutoMatchingCriteria)
 tbmcrAutoMatchingCriteria
   = lens _tbmcrAutoMatchingCriteria
       (\ s a -> s{_tbmcrAutoMatchingCriteria = a})
@@ -5667,17 +5667,17 @@ instance ToJSON TurnBasedMatchCreateRequest where
 data AchievementDefinition = AchievementDefinition
     { _adAchievementType          :: !(Maybe Text)
     , _adFormattedTotalSteps      :: !(Maybe Text)
-    , _adRevealedIconUrl          :: !(Maybe Text)
+    , _adRevealedIconURL          :: !(Maybe Text)
     , _adKind                     :: !Text
     , _adExperiencePoints         :: !(Maybe Int64)
     , _adInitialState             :: !(Maybe Text)
     , _adName                     :: !(Maybe Text)
     , _adId                       :: !(Maybe Text)
-    , _adIsUnlockedIconUrlDefault :: !(Maybe Bool)
+    , _adIsUnlockedIconURLDefault :: !(Maybe Bool)
     , _adTotalSteps               :: !(Maybe Int32)
     , _adDescription              :: !(Maybe Text)
-    , _adIsRevealedIconUrlDefault :: !(Maybe Bool)
-    , _adUnlockedIconUrl          :: !(Maybe Text)
+    , _adIsRevealedIconURLDefault :: !(Maybe Bool)
+    , _adUnlockedIconURL          :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementDefinition' with the minimum fields required to make a request.
@@ -5688,7 +5688,7 @@ data AchievementDefinition = AchievementDefinition
 --
 -- * 'adFormattedTotalSteps'
 --
--- * 'adRevealedIconUrl'
+-- * 'adRevealedIconURL'
 --
 -- * 'adKind'
 --
@@ -5700,32 +5700,32 @@ data AchievementDefinition = AchievementDefinition
 --
 -- * 'adId'
 --
--- * 'adIsUnlockedIconUrlDefault'
+-- * 'adIsUnlockedIconURLDefault'
 --
 -- * 'adTotalSteps'
 --
 -- * 'adDescription'
 --
--- * 'adIsRevealedIconUrlDefault'
+-- * 'adIsRevealedIconURLDefault'
 --
--- * 'adUnlockedIconUrl'
+-- * 'adUnlockedIconURL'
 achievementDefinition
     :: AchievementDefinition
 achievementDefinition =
     AchievementDefinition
     { _adAchievementType = Nothing
     , _adFormattedTotalSteps = Nothing
-    , _adRevealedIconUrl = Nothing
+    , _adRevealedIconURL = Nothing
     , _adKind = "games#achievementDefinition"
     , _adExperiencePoints = Nothing
     , _adInitialState = Nothing
     , _adName = Nothing
     , _adId = Nothing
-    , _adIsUnlockedIconUrlDefault = Nothing
+    , _adIsUnlockedIconURLDefault = Nothing
     , _adTotalSteps = Nothing
     , _adDescription = Nothing
-    , _adIsRevealedIconUrlDefault = Nothing
-    , _adUnlockedIconUrl = Nothing
+    , _adIsRevealedIconURLDefault = Nothing
+    , _adUnlockedIconURL = Nothing
     }
 
 -- | The type of the achievement. Possible values are: - \"STANDARD\" -
@@ -5743,10 +5743,10 @@ adFormattedTotalSteps
       (\ s a -> s{_adFormattedTotalSteps = a})
 
 -- | The image URL for the revealed achievement icon.
-adRevealedIconUrl :: Lens' AchievementDefinition (Maybe Text)
-adRevealedIconUrl
-  = lens _adRevealedIconUrl
-      (\ s a -> s{_adRevealedIconUrl = a})
+adRevealedIconURL :: Lens' AchievementDefinition (Maybe Text)
+adRevealedIconURL
+  = lens _adRevealedIconURL
+      (\ s a -> s{_adRevealedIconURL = a})
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#achievementDefinition.
@@ -5777,10 +5777,10 @@ adId = lens _adId (\ s a -> s{_adId = a})
 
 -- | Indicates whether the unlocked icon image being returned is a default
 -- image, or is game-provided.
-adIsUnlockedIconUrlDefault :: Lens' AchievementDefinition (Maybe Bool)
-adIsUnlockedIconUrlDefault
-  = lens _adIsUnlockedIconUrlDefault
-      (\ s a -> s{_adIsUnlockedIconUrlDefault = a})
+adIsUnlockedIconURLDefault :: Lens' AchievementDefinition (Maybe Bool)
+adIsUnlockedIconURLDefault
+  = lens _adIsUnlockedIconURLDefault
+      (\ s a -> s{_adIsUnlockedIconURLDefault = a})
 
 -- | The total steps for an incremental achievement.
 adTotalSteps :: Lens' AchievementDefinition (Maybe Int32)
@@ -5795,16 +5795,16 @@ adDescription
 
 -- | Indicates whether the revealed icon image being returned is a default
 -- image, or is provided by the game.
-adIsRevealedIconUrlDefault :: Lens' AchievementDefinition (Maybe Bool)
-adIsRevealedIconUrlDefault
-  = lens _adIsRevealedIconUrlDefault
-      (\ s a -> s{_adIsRevealedIconUrlDefault = a})
+adIsRevealedIconURLDefault :: Lens' AchievementDefinition (Maybe Bool)
+adIsRevealedIconURLDefault
+  = lens _adIsRevealedIconURLDefault
+      (\ s a -> s{_adIsRevealedIconURLDefault = a})
 
 -- | The image URL for the unlocked achievement icon.
-adUnlockedIconUrl :: Lens' AchievementDefinition (Maybe Text)
-adUnlockedIconUrl
-  = lens _adUnlockedIconUrl
-      (\ s a -> s{_adUnlockedIconUrl = a})
+adUnlockedIconURL :: Lens' AchievementDefinition (Maybe Text)
+adUnlockedIconURL
+  = lens _adUnlockedIconURL
+      (\ s a -> s{_adUnlockedIconURL = a})
 
 instance FromJSON AchievementDefinition where
         parseJSON
@@ -5832,55 +5832,55 @@ instance ToJSON AchievementDefinition where
                  [("achievementType" .=) <$> _adAchievementType,
                   ("formattedTotalSteps" .=) <$>
                     _adFormattedTotalSteps,
-                  ("revealedIconUrl" .=) <$> _adRevealedIconUrl,
+                  ("revealedIconUrl" .=) <$> _adRevealedIconURL,
                   Just ("kind" .= _adKind),
                   ("experiencePoints" .=) <$> _adExperiencePoints,
                   ("initialState" .=) <$> _adInitialState,
                   ("name" .=) <$> _adName, ("id" .=) <$> _adId,
                   ("isUnlockedIconUrlDefault" .=) <$>
-                    _adIsUnlockedIconUrlDefault,
+                    _adIsUnlockedIconURLDefault,
                   ("totalSteps" .=) <$> _adTotalSteps,
                   ("description" .=) <$> _adDescription,
                   ("isRevealedIconUrlDefault" .=) <$>
-                    _adIsRevealedIconUrlDefault,
-                  ("unlockedIconUrl" .=) <$> _adUnlockedIconUrl])
+                    _adIsRevealedIconURLDefault,
+                  ("unlockedIconUrl" .=) <$> _adUnlockedIconURL])
 
 -- | A push token ID for iOS devices.
 --
 -- /See:/ 'pushTokenIdIos' smart constructor.
 data PushTokenIdIos = PushTokenIdIos
-    { _ptiiApnsDeviceToken :: !(Maybe Word8)
-    , _ptiiApnsEnvironment :: !(Maybe Text)
+    { _ptiiAPNSDeviceToken :: !(Maybe Word8)
+    , _ptiiAPNSEnvironment :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PushTokenIdIos' with the minimum fields required to make a request.
 --
 -- Use one of the following lenses to modify other fields as desired:
 --
--- * 'ptiiApnsDeviceToken'
+-- * 'ptiiAPNSDeviceToken'
 --
--- * 'ptiiApnsEnvironment'
+-- * 'ptiiAPNSEnvironment'
 pushTokenIdIos
     :: PushTokenIdIos
 pushTokenIdIos =
     PushTokenIdIos
-    { _ptiiApnsDeviceToken = Nothing
-    , _ptiiApnsEnvironment = Nothing
+    { _ptiiAPNSDeviceToken = Nothing
+    , _ptiiAPNSEnvironment = Nothing
     }
 
 -- | Device token supplied by an iOS system call to register for remote
 -- notifications. Encode this field as web-safe base64.
-ptiiApnsDeviceToken :: Lens' PushTokenIdIos (Maybe Word8)
-ptiiApnsDeviceToken
-  = lens _ptiiApnsDeviceToken
-      (\ s a -> s{_ptiiApnsDeviceToken = a})
+ptiiAPNSDeviceToken :: Lens' PushTokenIdIos (Maybe Word8)
+ptiiAPNSDeviceToken
+  = lens _ptiiAPNSDeviceToken
+      (\ s a -> s{_ptiiAPNSDeviceToken = a})
 
 -- | Indicates whether this token should be used for the production or
 -- sandbox APNS server.
-ptiiApnsEnvironment :: Lens' PushTokenIdIos (Maybe Text)
-ptiiApnsEnvironment
-  = lens _ptiiApnsEnvironment
-      (\ s a -> s{_ptiiApnsEnvironment = a})
+ptiiAPNSEnvironment :: Lens' PushTokenIdIos (Maybe Text)
+ptiiAPNSEnvironment
+  = lens _ptiiAPNSEnvironment
+      (\ s a -> s{_ptiiAPNSEnvironment = a})
 
 instance FromJSON PushTokenIdIos where
         parseJSON
@@ -5894,8 +5894,8 @@ instance ToJSON PushTokenIdIos where
         toJSON PushTokenIdIos{..}
           = object
               (catMaybes
-                 [("apns_device_token" .=) <$> _ptiiApnsDeviceToken,
-                  ("apns_environment" .=) <$> _ptiiApnsEnvironment])
+                 [("apns_device_token" .=) <$> _ptiiAPNSDeviceToken,
+                  ("apns_environment" .=) <$> _ptiiAPNSEnvironment])
 
 -- | This is a JSON template for a list of achievement objects.
 --
@@ -5903,7 +5903,7 @@ instance ToJSON PushTokenIdIos where
 data PlayerAchievementListResponse = PlayerAchievementListResponse
     { _palrNextPageToken :: !(Maybe Text)
     , _palrKind          :: !Text
-    , _palrItems         :: !(Maybe [Maybe PlayerAchievement])
+    , _palrItems         :: !(Maybe [PlayerAchievement])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayerAchievementListResponse' with the minimum fields required to make a request.
@@ -5936,7 +5936,7 @@ palrKind :: Lens' PlayerAchievementListResponse Text
 palrKind = lens _palrKind (\ s a -> s{_palrKind = a})
 
 -- | The achievements.
-palrItems :: Lens' PlayerAchievementListResponse [Maybe PlayerAchievement]
+palrItems :: Lens' PlayerAchievementListResponse [PlayerAchievement]
 palrItems
   = lens _palrItems (\ s a -> s{_palrItems = a}) .
       _Default
@@ -6031,7 +6031,7 @@ instance ToJSON AchievementSetStepsAtLeastResponse
 -- /See:/ 'eventBatchRecordFailure' smart constructor.
 data EventBatchRecordFailure = EventBatchRecordFailure
     { _ebrfKind         :: !Text
-    , _ebrfRange        :: !(Maybe (Maybe EventPeriodRange))
+    , _ebrfRange        :: !(Maybe EventPeriodRange)
     , _ebrfFailureCause :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -6059,7 +6059,7 @@ ebrfKind :: Lens' EventBatchRecordFailure Text
 ebrfKind = lens _ebrfKind (\ s a -> s{_ebrfKind = a})
 
 -- | The time range which was rejected; empty for a request-wide failure.
-ebrfRange :: Lens' EventBatchRecordFailure (Maybe (Maybe EventPeriodRange))
+ebrfRange :: Lens' EventBatchRecordFailure (Maybe EventPeriodRange)
 ebrfRange
   = lens _ebrfRange (\ s a -> s{_ebrfRange = a})
 
@@ -6098,9 +6098,9 @@ instance ToJSON EventBatchRecordFailure where
 --
 -- /See:/ 'turnBasedMatchResults' smart constructor.
 data TurnBasedMatchResults = TurnBasedMatchResults
-    { _tbmrResults      :: !(Maybe [Maybe ParticipantResult])
+    { _tbmrResults      :: !(Maybe [ParticipantResult])
     , _tbmrKind         :: !Text
-    , _tbmrData         :: !(Maybe (Maybe TurnBasedMatchDataRequest))
+    , _tbmrData         :: !(Maybe TurnBasedMatchDataRequest)
     , _tbmrMatchVersion :: !(Maybe Int32)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -6126,7 +6126,7 @@ turnBasedMatchResults =
     }
 
 -- | The match results for the participants in the match.
-tbmrResults :: Lens' TurnBasedMatchResults [Maybe ParticipantResult]
+tbmrResults :: Lens' TurnBasedMatchResults [ParticipantResult]
 tbmrResults
   = lens _tbmrResults (\ s a -> s{_tbmrResults = a}) .
       _Default
@@ -6138,7 +6138,7 @@ tbmrKind :: Lens' TurnBasedMatchResults Text
 tbmrKind = lens _tbmrKind (\ s a -> s{_tbmrKind = a})
 
 -- | The final match data.
-tbmrData :: Lens' TurnBasedMatchResults (Maybe (Maybe TurnBasedMatchDataRequest))
+tbmrData :: Lens' TurnBasedMatchResults (Maybe TurnBasedMatchDataRequest)
 tbmrData = lens _tbmrData (\ s a -> s{_tbmrData = a})
 
 -- | The version of the match being updated.
@@ -6172,7 +6172,7 @@ instance ToJSON TurnBasedMatchResults where
 data RoomLeaveRequest = RoomLeaveRequest
     { _rlrKind             :: !Text
     , _rlrReason           :: !(Maybe Text)
-    , _rlrLeaveDiagnostics :: !(Maybe (Maybe RoomLeaveDiagnostics))
+    , _rlrLeaveDiagnostics :: !(Maybe RoomLeaveDiagnostics)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'RoomLeaveRequest' with the minimum fields required to make a request.
@@ -6220,7 +6220,7 @@ rlrReason
   = lens _rlrReason (\ s a -> s{_rlrReason = a})
 
 -- | Diagnostics for a player leaving the room.
-rlrLeaveDiagnostics :: Lens' RoomLeaveRequest (Maybe (Maybe RoomLeaveDiagnostics))
+rlrLeaveDiagnostics :: Lens' RoomLeaveRequest (Maybe RoomLeaveDiagnostics)
 rlrLeaveDiagnostics
   = lens _rlrLeaveDiagnostics
       (\ s a -> s{_rlrLeaveDiagnostics = a})
@@ -6577,7 +6577,7 @@ instance ToJSON AggregateStats where
 --
 -- /See:/ 'roomLeaveDiagnostics' smart constructor.
 data RoomLeaveDiagnostics = RoomLeaveDiagnostics
-    { _rldPeerSession           :: !(Maybe [Maybe PeerSessionDiagnostics])
+    { _rldPeerSession           :: !(Maybe [PeerSessionDiagnostics])
     , _rldAndroidNetworkType    :: !(Maybe Int32)
     , _rldKind                  :: !Text
     , _rldNetworkOperatorCode   :: !(Maybe Text)
@@ -6621,7 +6621,7 @@ roomLeaveDiagnostics =
     }
 
 -- | Diagnostics about all peer sessions.
-rldPeerSession :: Lens' RoomLeaveDiagnostics [Maybe PeerSessionDiagnostics]
+rldPeerSession :: Lens' RoomLeaveDiagnostics [PeerSessionDiagnostics]
 rldPeerSession
   = lens _rldPeerSession
       (\ s a -> s{_rldPeerSession = a})
@@ -6715,7 +6715,7 @@ data TurnBasedMatchSync = TurnBasedMatchSync
     { _tbmsMoreAvailable :: !(Maybe Bool)
     , _tbmsNextPageToken :: !(Maybe Text)
     , _tbmsKind          :: !Text
-    , _tbmsItems         :: !(Maybe [Maybe TurnBasedMatch])
+    , _tbmsItems         :: !(Maybe [TurnBasedMatch])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchSync' with the minimum fields required to make a request.
@@ -6759,7 +6759,7 @@ tbmsKind :: Lens' TurnBasedMatchSync Text
 tbmsKind = lens _tbmsKind (\ s a -> s{_tbmsKind = a})
 
 -- | The matches.
-tbmsItems :: Lens' TurnBasedMatchSync [Maybe TurnBasedMatch]
+tbmsItems :: Lens' TurnBasedMatchSync [TurnBasedMatch]
 tbmsItems
   = lens _tbmsItems (\ s a -> s{_tbmsItems = a}) .
       _Default
@@ -6791,7 +6791,7 @@ data QuestMilestone = QuestMilestone
     , _qmKind                 :: !Text
     , _qmId                   :: !(Maybe Text)
     , _qmCompletionRewardData :: !(Maybe Word8)
-    , _qmCriteria             :: !(Maybe [Maybe QuestCriterion])
+    , _qmCriteria             :: !(Maybe [QuestCriterion])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'QuestMilestone' with the minimum fields required to make a request.
@@ -6845,7 +6845,7 @@ qmCompletionRewardData
       (\ s a -> s{_qmCompletionRewardData = a})
 
 -- | The criteria of the milestone.
-qmCriteria :: Lens' QuestMilestone [Maybe QuestCriterion]
+qmCriteria :: Lens' QuestMilestone [QuestCriterion]
 qmCriteria
   = lens _qmCriteria (\ s a -> s{_qmCriteria = a}) .
       _Default
@@ -6925,7 +6925,7 @@ data EventRecordRequest = EventRecordRequest
     { _errRequestId         :: !(Maybe Int64)
     , _errKind              :: !Text
     , _errCurrentTimeMillis :: !(Maybe Int64)
-    , _errTimePeriods       :: !(Maybe [Maybe EventPeriodUpdate])
+    , _errTimePeriods       :: !(Maybe [EventPeriodUpdate])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventRecordRequest' with the minimum fields required to make a request.
@@ -6967,7 +6967,7 @@ errCurrentTimeMillis
       (\ s a -> s{_errCurrentTimeMillis = a})
 
 -- | A list of the time period updates being made in this request.
-errTimePeriods :: Lens' EventRecordRequest [Maybe EventPeriodUpdate]
+errTimePeriods :: Lens' EventRecordRequest [EventPeriodUpdate]
 errTimePeriods
   = lens _errTimePeriods
       (\ s a -> s{_errTimePeriods = a})
@@ -7081,8 +7081,8 @@ data PeerSessionDiagnostics = PeerSessionDiagnostics
     { _psdConnectedTimestampMillis :: !(Maybe Int64)
     , _psdParticipantId            :: !(Maybe Text)
     , _psdKind                     :: !Text
-    , _psdUnreliableChannel        :: !(Maybe (Maybe PeerChannelDiagnostics))
-    , _psdReliableChannel          :: !(Maybe (Maybe PeerChannelDiagnostics))
+    , _psdUnreliableChannel        :: !(Maybe PeerChannelDiagnostics)
+    , _psdReliableChannel          :: !(Maybe PeerChannelDiagnostics)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PeerSessionDiagnostics' with the minimum fields required to make a request.
@@ -7127,13 +7127,13 @@ psdKind :: Lens' PeerSessionDiagnostics Text
 psdKind = lens _psdKind (\ s a -> s{_psdKind = a})
 
 -- | Unreliable channel diagnostics.
-psdUnreliableChannel :: Lens' PeerSessionDiagnostics (Maybe (Maybe PeerChannelDiagnostics))
+psdUnreliableChannel :: Lens' PeerSessionDiagnostics (Maybe PeerChannelDiagnostics)
 psdUnreliableChannel
   = lens _psdUnreliableChannel
       (\ s a -> s{_psdUnreliableChannel = a})
 
 -- | Reliable channel diagnostics.
-psdReliableChannel :: Lens' PeerSessionDiagnostics (Maybe (Maybe PeerChannelDiagnostics))
+psdReliableChannel :: Lens' PeerSessionDiagnostics (Maybe PeerChannelDiagnostics)
 psdReliableChannel
   = lens _psdReliableChannel
       (\ s a -> s{_psdReliableChannel = a})
@@ -7165,8 +7165,8 @@ instance ToJSON PeerSessionDiagnostics where
 -- /See:/ 'eventPeriodUpdate' smart constructor.
 data EventPeriodUpdate = EventPeriodUpdate
     { _epuKind       :: !Text
-    , _epuTimePeriod :: !(Maybe (Maybe EventPeriodRange))
-    , _epuUpdates    :: !(Maybe [Maybe EventUpdateRequest])
+    , _epuTimePeriod :: !(Maybe EventPeriodRange)
+    , _epuUpdates    :: !(Maybe [EventUpdateRequest])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'EventPeriodUpdate' with the minimum fields required to make a request.
@@ -7193,13 +7193,13 @@ epuKind :: Lens' EventPeriodUpdate Text
 epuKind = lens _epuKind (\ s a -> s{_epuKind = a})
 
 -- | The time period being covered by this update.
-epuTimePeriod :: Lens' EventPeriodUpdate (Maybe (Maybe EventPeriodRange))
+epuTimePeriod :: Lens' EventPeriodUpdate (Maybe EventPeriodRange)
 epuTimePeriod
   = lens _epuTimePeriod
       (\ s a -> s{_epuTimePeriod = a})
 
 -- | The updates being made for this time period.
-epuUpdates :: Lens' EventPeriodUpdate [Maybe EventUpdateRequest]
+epuUpdates :: Lens' EventPeriodUpdate [EventUpdateRequest]
 epuUpdates
   = lens _epuUpdates (\ s a -> s{_epuUpdates = a}) .
       _Default
@@ -7340,8 +7340,8 @@ instance ToJSON GamesAchievementSetStepsAtLeast where
 data PlayerExperienceInfo = PlayerExperienceInfo
     { _peiKind                       :: !Text
     , _peiCurrentExperiencePoints    :: !(Maybe Int64)
-    , _peiCurrentLevel               :: !(Maybe (Maybe PlayerLevel))
-    , _peiNextLevel                  :: !(Maybe (Maybe PlayerLevel))
+    , _peiCurrentLevel               :: !(Maybe PlayerLevel)
+    , _peiNextLevel                  :: !(Maybe PlayerLevel)
     , _peiLastLevelUpTimestampMillis :: !(Maybe Int64)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -7381,14 +7381,14 @@ peiCurrentExperiencePoints
       (\ s a -> s{_peiCurrentExperiencePoints = a})
 
 -- | The current level of the player.
-peiCurrentLevel :: Lens' PlayerExperienceInfo (Maybe (Maybe PlayerLevel))
+peiCurrentLevel :: Lens' PlayerExperienceInfo (Maybe PlayerLevel)
 peiCurrentLevel
   = lens _peiCurrentLevel
       (\ s a -> s{_peiCurrentLevel = a})
 
 -- | The next level of the player. If the current level is the maximum level,
 -- this should be same as the current level.
-peiNextLevel :: Lens' PlayerExperienceInfo (Maybe (Maybe PlayerLevel))
+peiNextLevel :: Lens' PlayerExperienceInfo (Maybe PlayerLevel)
 peiNextLevel
   = lens _peiNextLevel (\ s a -> s{_peiNextLevel = a})
 
@@ -7426,10 +7426,10 @@ instance ToJSON PlayerExperienceInfo where
 --
 -- /See:/ 'player' smart constructor.
 data Player = Player
-    { _plaLastPlayedWith :: !(Maybe (Maybe Played))
-    , _plaAvatarImageUrl :: !(Maybe Text)
+    { _plaLastPlayedWith :: !(Maybe Played)
+    , _plaAvatarImageURL :: !(Maybe Text)
     , _plaKind           :: !Text
-    , _plaExperienceInfo :: !(Maybe (Maybe PlayerExperienceInfo))
+    , _plaExperienceInfo :: !(Maybe PlayerExperienceInfo)
     , _plaName           :: !(Maybe PlayerName)
     , _plaDisplayName    :: !(Maybe Text)
     , _plaTitle          :: !(Maybe Text)
@@ -7442,7 +7442,7 @@ data Player = Player
 --
 -- * 'plaLastPlayedWith'
 --
--- * 'plaAvatarImageUrl'
+-- * 'plaAvatarImageURL'
 --
 -- * 'plaKind'
 --
@@ -7460,7 +7460,7 @@ player
 player =
     Player
     { _plaLastPlayedWith = Nothing
-    , _plaAvatarImageUrl = Nothing
+    , _plaAvatarImageURL = Nothing
     , _plaKind = "games#player"
     , _plaExperienceInfo = Nothing
     , _plaName = Nothing
@@ -7472,16 +7472,16 @@ player =
 -- | Details about the last time this player played a multiplayer game with
 -- the currently authenticated player. Populated for PLAYED_WITH player
 -- collection members.
-plaLastPlayedWith :: Lens' Player (Maybe (Maybe Played))
+plaLastPlayedWith :: Lens' Player (Maybe Played)
 plaLastPlayedWith
   = lens _plaLastPlayedWith
       (\ s a -> s{_plaLastPlayedWith = a})
 
 -- | The base URL for the image that represents the player.
-plaAvatarImageUrl :: Lens' Player (Maybe Text)
-plaAvatarImageUrl
-  = lens _plaAvatarImageUrl
-      (\ s a -> s{_plaAvatarImageUrl = a})
+plaAvatarImageURL :: Lens' Player (Maybe Text)
+plaAvatarImageURL
+  = lens _plaAvatarImageURL
+      (\ s a -> s{_plaAvatarImageURL = a})
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
 -- string games#player.
@@ -7489,7 +7489,7 @@ plaKind :: Lens' Player Text
 plaKind = lens _plaKind (\ s a -> s{_plaKind = a})
 
 -- | An object to represent Play Game experience information for the player.
-plaExperienceInfo :: Lens' Player (Maybe (Maybe PlayerExperienceInfo))
+plaExperienceInfo :: Lens' Player (Maybe PlayerExperienceInfo)
 plaExperienceInfo
   = lens _plaExperienceInfo
       (\ s a -> s{_plaExperienceInfo = a})
@@ -7532,7 +7532,7 @@ instance ToJSON Player where
           = object
               (catMaybes
                  [("lastPlayedWith" .=) <$> _plaLastPlayedWith,
-                  ("avatarImageUrl" .=) <$> _plaAvatarImageUrl,
+                  ("avatarImageUrl" .=) <$> _plaAvatarImageURL,
                   Just ("kind" .= _plaKind),
                   ("experienceInfo" .=) <$> _plaExperienceInfo,
                   ("name" .=) <$> _plaName,
@@ -7544,9 +7544,9 @@ instance ToJSON Player where
 --
 -- /See:/ 'turnBasedMatchRematch' smart constructor.
 data TurnBasedMatchRematch = TurnBasedMatchRematch
-    { _tRematch       :: !(Maybe (Maybe TurnBasedMatch))
+    { _tRematch       :: !(Maybe TurnBasedMatch)
     , _tKind          :: !Text
-    , _tPreviousMatch :: !(Maybe (Maybe TurnBasedMatch))
+    , _tPreviousMatch :: !(Maybe TurnBasedMatch)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'TurnBasedMatchRematch' with the minimum fields required to make a request.
@@ -7569,7 +7569,7 @@ turnBasedMatchRematch =
 
 -- | The newly created match; a rematch of the old match with the same
 -- participants.
-tRematch :: Lens' TurnBasedMatchRematch (Maybe (Maybe TurnBasedMatch))
+tRematch :: Lens' TurnBasedMatchRematch (Maybe TurnBasedMatch)
 tRematch = lens _tRematch (\ s a -> s{_tRematch = a})
 
 -- | Uniquely identifies the type of this resource. Value is always the fixed
@@ -7579,7 +7579,7 @@ tKind = lens _tKind (\ s a -> s{_tKind = a})
 
 -- | The old match that the rematch was created from; will be updated such
 -- that the rematchId field will point at the new match.
-tPreviousMatch :: Lens' TurnBasedMatchRematch (Maybe (Maybe TurnBasedMatch))
+tPreviousMatch :: Lens' TurnBasedMatchRematch (Maybe TurnBasedMatch)
 tPreviousMatch
   = lens _tPreviousMatch
       (\ s a -> s{_tPreviousMatch = a})
@@ -7607,7 +7607,7 @@ instance ToJSON TurnBasedMatchRematch where
 data InstanceWebDetails = InstanceWebDetails
     { _iwdPreferred :: !(Maybe Bool)
     , _iwdKind      :: !Text
-    , _iwdLaunchUrl :: !(Maybe Text)
+    , _iwdLaunchURL :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InstanceWebDetails' with the minimum fields required to make a request.
@@ -7618,14 +7618,14 @@ data InstanceWebDetails = InstanceWebDetails
 --
 -- * 'iwdKind'
 --
--- * 'iwdLaunchUrl'
+-- * 'iwdLaunchURL'
 instanceWebDetails
     :: InstanceWebDetails
 instanceWebDetails =
     InstanceWebDetails
     { _iwdPreferred = Nothing
     , _iwdKind = "games#instanceWebDetails"
-    , _iwdLaunchUrl = Nothing
+    , _iwdLaunchURL = Nothing
     }
 
 -- | Indicates that this instance is the default for new installations.
@@ -7639,9 +7639,9 @@ iwdKind :: Lens' InstanceWebDetails Text
 iwdKind = lens _iwdKind (\ s a -> s{_iwdKind = a})
 
 -- | Launch URL for the game.
-iwdLaunchUrl :: Lens' InstanceWebDetails (Maybe Text)
-iwdLaunchUrl
-  = lens _iwdLaunchUrl (\ s a -> s{_iwdLaunchUrl = a})
+iwdLaunchURL :: Lens' InstanceWebDetails (Maybe Text)
+iwdLaunchURL
+  = lens _iwdLaunchURL (\ s a -> s{_iwdLaunchURL = a})
 
 instance FromJSON InstanceWebDetails where
         parseJSON
@@ -7658,7 +7658,7 @@ instance ToJSON InstanceWebDetails where
               (catMaybes
                  [("preferred" .=) <$> _iwdPreferred,
                   Just ("kind" .= _iwdKind),
-                  ("launchUrl" .=) <$> _iwdLaunchUrl])
+                  ("launchUrl" .=) <$> _iwdLaunchURL])
 
 -- | This is a JSON template for an event child relationship resource.
 --
@@ -7764,7 +7764,7 @@ instance ToJSON TurnBasedMatchDataRequest where
 data PlayerEventListResponse = PlayerEventListResponse
     { _pelrNextPageToken :: !(Maybe Text)
     , _pelrKind          :: !Text
-    , _pelrItems         :: !(Maybe [Maybe PlayerEvent])
+    , _pelrItems         :: !(Maybe [PlayerEvent])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayerEventListResponse' with the minimum fields required to make a request.
@@ -7797,7 +7797,7 @@ pelrKind :: Lens' PlayerEventListResponse Text
 pelrKind = lens _pelrKind (\ s a -> s{_pelrKind = a})
 
 -- | The player events.
-pelrItems :: Lens' PlayerEventListResponse [Maybe PlayerEvent]
+pelrItems :: Lens' PlayerEventListResponse [PlayerEvent]
 pelrItems
   = lens _pelrItems (\ s a -> s{_pelrItems = a}) .
       _Default
@@ -7888,20 +7888,20 @@ instance ToJSON EventPeriodRange where
 -- /See:/ 'quest' smart constructor.
 data Quest = Quest
     { _queLastUpdatedTimestampMillis :: !(Maybe Int64)
-    , _queBannerUrl                  :: !(Maybe Text)
+    , _queBannerURL                  :: !(Maybe Text)
     , _queState                      :: !(Maybe Text)
-    , _queMilestones                 :: !(Maybe [Maybe QuestMilestone])
+    , _queMilestones                 :: !(Maybe [QuestMilestone])
     , _queKind                       :: !Text
     , _queApplicationId              :: !(Maybe Text)
     , _queEndTimestampMillis         :: !(Maybe Int64)
     , _queName                       :: !(Maybe Text)
     , _queId                         :: !(Maybe Text)
-    , _queIconUrl                    :: !(Maybe Text)
+    , _queIconURL                    :: !(Maybe Text)
     , _queStartTimestampMillis       :: !(Maybe Int64)
     , _queNotifyTimestampMillis      :: !(Maybe Int64)
     , _queDescription                :: !(Maybe Text)
-    , _queIsDefaultBannerUrl         :: !(Maybe Bool)
-    , _queIsDefaultIconUrl           :: !(Maybe Bool)
+    , _queIsDefaultBannerURL         :: !(Maybe Bool)
+    , _queIsDefaultIconURL           :: !(Maybe Bool)
     , _queAcceptedTimestampMillis    :: !(Maybe Int64)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
@@ -7911,7 +7911,7 @@ data Quest = Quest
 --
 -- * 'queLastUpdatedTimestampMillis'
 --
--- * 'queBannerUrl'
+-- * 'queBannerURL'
 --
 -- * 'queState'
 --
@@ -7927,7 +7927,7 @@ data Quest = Quest
 --
 -- * 'queId'
 --
--- * 'queIconUrl'
+-- * 'queIconURL'
 --
 -- * 'queStartTimestampMillis'
 --
@@ -7935,9 +7935,9 @@ data Quest = Quest
 --
 -- * 'queDescription'
 --
--- * 'queIsDefaultBannerUrl'
+-- * 'queIsDefaultBannerURL'
 --
--- * 'queIsDefaultIconUrl'
+-- * 'queIsDefaultIconURL'
 --
 -- * 'queAcceptedTimestampMillis'
 quest
@@ -7945,7 +7945,7 @@ quest
 quest =
     Quest
     { _queLastUpdatedTimestampMillis = Nothing
-    , _queBannerUrl = Nothing
+    , _queBannerURL = Nothing
     , _queState = Nothing
     , _queMilestones = Nothing
     , _queKind = "games#quest"
@@ -7953,12 +7953,12 @@ quest =
     , _queEndTimestampMillis = Nothing
     , _queName = Nothing
     , _queId = Nothing
-    , _queIconUrl = Nothing
+    , _queIconURL = Nothing
     , _queStartTimestampMillis = Nothing
     , _queNotifyTimestampMillis = Nothing
     , _queDescription = Nothing
-    , _queIsDefaultBannerUrl = Nothing
-    , _queIsDefaultIconUrl = Nothing
+    , _queIsDefaultBannerURL = Nothing
+    , _queIsDefaultIconURL = Nothing
     , _queAcceptedTimestampMillis = Nothing
     }
 
@@ -7971,9 +7971,9 @@ queLastUpdatedTimestampMillis
       (\ s a -> s{_queLastUpdatedTimestampMillis = a})
 
 -- | The banner image URL for the quest.
-queBannerUrl :: Lens' Quest (Maybe Text)
-queBannerUrl
-  = lens _queBannerUrl (\ s a -> s{_queBannerUrl = a})
+queBannerURL :: Lens' Quest (Maybe Text)
+queBannerURL
+  = lens _queBannerURL (\ s a -> s{_queBannerURL = a})
 
 -- | The state of the quest. Possible values are: - \"UPCOMING\": The quest
 -- is upcoming. The user can see the quest, but cannot accept it until it
@@ -7987,7 +7987,7 @@ queState :: Lens' Quest (Maybe Text)
 queState = lens _queState (\ s a -> s{_queState = a})
 
 -- | The quest milestones.
-queMilestones :: Lens' Quest [Maybe QuestMilestone]
+queMilestones :: Lens' Quest [QuestMilestone]
 queMilestones
   = lens _queMilestones
       (\ s a -> s{_queMilestones = a})
@@ -8021,9 +8021,9 @@ queId :: Lens' Quest (Maybe Text)
 queId = lens _queId (\ s a -> s{_queId = a})
 
 -- | The icon image URL for the quest.
-queIconUrl :: Lens' Quest (Maybe Text)
-queIconUrl
-  = lens _queIconUrl (\ s a -> s{_queIconUrl = a})
+queIconURL :: Lens' Quest (Maybe Text)
+queIconURL
+  = lens _queIconURL (\ s a -> s{_queIconURL = a})
 
 -- | The timestamp at which the quest becomes active in milliseconds since
 -- the epoch in UTC.
@@ -8047,17 +8047,17 @@ queDescription
 
 -- | Indicates whether the banner image being returned is a default image, or
 -- is game-provided.
-queIsDefaultBannerUrl :: Lens' Quest (Maybe Bool)
-queIsDefaultBannerUrl
-  = lens _queIsDefaultBannerUrl
-      (\ s a -> s{_queIsDefaultBannerUrl = a})
+queIsDefaultBannerURL :: Lens' Quest (Maybe Bool)
+queIsDefaultBannerURL
+  = lens _queIsDefaultBannerURL
+      (\ s a -> s{_queIsDefaultBannerURL = a})
 
 -- | Indicates whether the icon image being returned is a default image, or
 -- is game-provided.
-queIsDefaultIconUrl :: Lens' Quest (Maybe Bool)
-queIsDefaultIconUrl
-  = lens _queIsDefaultIconUrl
-      (\ s a -> s{_queIsDefaultIconUrl = a})
+queIsDefaultIconURL :: Lens' Quest (Maybe Bool)
+queIsDefaultIconURL
+  = lens _queIsDefaultIconURL
+      (\ s a -> s{_queIsDefaultIconURL = a})
 
 -- | The timestamp at which the user accepted the quest in milliseconds since
 -- the epoch in UTC. Only present if the player has accepted the quest.
@@ -8094,21 +8094,21 @@ instance ToJSON Quest where
               (catMaybes
                  [("lastUpdatedTimestampMillis" .=) <$>
                     _queLastUpdatedTimestampMillis,
-                  ("bannerUrl" .=) <$> _queBannerUrl,
+                  ("bannerUrl" .=) <$> _queBannerURL,
                   ("state" .=) <$> _queState,
                   ("milestones" .=) <$> _queMilestones,
                   Just ("kind" .= _queKind),
                   ("applicationId" .=) <$> _queApplicationId,
                   ("endTimestampMillis" .=) <$> _queEndTimestampMillis,
                   ("name" .=) <$> _queName, ("id" .=) <$> _queId,
-                  ("iconUrl" .=) <$> _queIconUrl,
+                  ("iconUrl" .=) <$> _queIconURL,
                   ("startTimestampMillis" .=) <$>
                     _queStartTimestampMillis,
                   ("notifyTimestampMillis" .=) <$>
                     _queNotifyTimestampMillis,
                   ("description" .=) <$> _queDescription,
-                  ("isDefaultBannerUrl" .=) <$> _queIsDefaultBannerUrl,
-                  ("isDefaultIconUrl" .=) <$> _queIsDefaultIconUrl,
+                  ("isDefaultBannerUrl" .=) <$> _queIsDefaultBannerURL,
+                  ("isDefaultIconUrl" .=) <$> _queIsDefaultIconURL,
                   ("acceptedTimestampMillis" .=) <$>
                     _queAcceptedTimestampMillis])
 
@@ -8179,12 +8179,12 @@ instance ToJSON EventRecordFailure where
 --
 -- /See:/ 'instance'' smart constructor.
 data Instance = Instance
-    { _iAndroidInstance :: !(Maybe (Maybe InstanceAndroidDetails))
+    { _iAndroidInstance :: !(Maybe InstanceAndroidDetails)
     , _iKind            :: !Text
-    , _iWebInstance     :: !(Maybe (Maybe InstanceWebDetails))
-    , _iIosInstance     :: !(Maybe (Maybe InstanceIosDetails))
+    , _iWebInstance     :: !(Maybe InstanceWebDetails)
+    , _iIosInstance     :: !(Maybe InstanceIosDetails)
     , _iName            :: !(Maybe Text)
-    , _iAcquisitionUri  :: !(Maybe Text)
+    , _iAcquisitionURI  :: !(Maybe Text)
     , _iPlatformType    :: !(Maybe Text)
     , _iTurnBasedPlay   :: !(Maybe Bool)
     , _iRealtimePlay    :: !(Maybe Bool)
@@ -8204,7 +8204,7 @@ data Instance = Instance
 --
 -- * 'iName'
 --
--- * 'iAcquisitionUri'
+-- * 'iAcquisitionURI'
 --
 -- * 'iPlatformType'
 --
@@ -8220,14 +8220,14 @@ instance' =
     , _iWebInstance = Nothing
     , _iIosInstance = Nothing
     , _iName = Nothing
-    , _iAcquisitionUri = Nothing
+    , _iAcquisitionURI = Nothing
     , _iPlatformType = Nothing
     , _iTurnBasedPlay = Nothing
     , _iRealtimePlay = Nothing
     }
 
 -- | Platform dependent details for Android.
-iAndroidInstance :: Lens' Instance (Maybe (Maybe InstanceAndroidDetails))
+iAndroidInstance :: Lens' Instance (Maybe InstanceAndroidDetails)
 iAndroidInstance
   = lens _iAndroidInstance
       (\ s a -> s{_iAndroidInstance = a})
@@ -8238,12 +8238,12 @@ iKind :: Lens' Instance Text
 iKind = lens _iKind (\ s a -> s{_iKind = a})
 
 -- | Platform dependent details for Web.
-iWebInstance :: Lens' Instance (Maybe (Maybe InstanceWebDetails))
+iWebInstance :: Lens' Instance (Maybe InstanceWebDetails)
 iWebInstance
   = lens _iWebInstance (\ s a -> s{_iWebInstance = a})
 
 -- | Platform dependent details for iOS.
-iIosInstance :: Lens' Instance (Maybe (Maybe InstanceIosDetails))
+iIosInstance :: Lens' Instance (Maybe InstanceIosDetails)
 iIosInstance
   = lens _iIosInstance (\ s a -> s{_iIosInstance = a})
 
@@ -8252,10 +8252,10 @@ iName :: Lens' Instance (Maybe Text)
 iName = lens _iName (\ s a -> s{_iName = a})
 
 -- | URI which shows where a user can acquire this instance.
-iAcquisitionUri :: Lens' Instance (Maybe Text)
-iAcquisitionUri
-  = lens _iAcquisitionUri
-      (\ s a -> s{_iAcquisitionUri = a})
+iAcquisitionURI :: Lens' Instance (Maybe Text)
+iAcquisitionURI
+  = lens _iAcquisitionURI
+      (\ s a -> s{_iAcquisitionURI = a})
 
 -- | The platform type. Possible values are: - \"ANDROID\" - Instance is for
 -- Android. - \"IOS\" - Instance is for iOS - \"WEB_APP\" - Instance is for
@@ -8301,7 +8301,7 @@ instance ToJSON Instance where
                   ("webInstance" .=) <$> _iWebInstance,
                   ("iosInstance" .=) <$> _iIosInstance,
                   ("name" .=) <$> _iName,
-                  ("acquisitionUri" .=) <$> _iAcquisitionUri,
+                  ("acquisitionUri" .=) <$> _iAcquisitionURI,
                   ("platformType" .=) <$> _iPlatformType,
                   ("turnBasedPlay" .=) <$> _iTurnBasedPlay,
                   ("realtimePlay" .=) <$> _iRealtimePlay])
@@ -8311,7 +8311,7 @@ instance ToJSON Instance where
 -- /See:/ 'playerScoreSubmissionList' smart constructor.
 data PlayerScoreSubmissionList = PlayerScoreSubmissionList
     { _psslKind   :: !Text
-    , _psslScores :: !(Maybe [Maybe ScoreSubmission])
+    , _psslScores :: !(Maybe [ScoreSubmission])
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'PlayerScoreSubmissionList' with the minimum fields required to make a request.
@@ -8335,7 +8335,7 @@ psslKind :: Lens' PlayerScoreSubmissionList Text
 psslKind = lens _psslKind (\ s a -> s{_psslKind = a})
 
 -- | The score submissions.
-psslScores :: Lens' PlayerScoreSubmissionList [Maybe ScoreSubmission]
+psslScores :: Lens' PlayerScoreSubmissionList [ScoreSubmission]
 psslScores
   = lens _psslScores (\ s a -> s{_psslScores = a}) .
       _Default

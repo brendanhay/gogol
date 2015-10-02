@@ -33,11 +33,10 @@ module Network.Google.Resource.Games.Achievements.Unlock
     , auQuotaUser
     , auPrettyPrint
     , auAchievementId
-    , auUserIp
+    , auUserIP
     , auKey
-    , auOauthToken
+    , auOAuthToken
     , auFields
-    , auAlt
     ) where
 
 import           Network.Google.Games.Types
@@ -52,10 +51,10 @@ type AchievementsUnlockResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :>
+                       QueryParam "alt" AltJSON :>
                          Post '[JSON] AchievementUnlockResponse
 
 -- | Unlocks this achievement for the currently authenticated player.
@@ -65,11 +64,10 @@ data AchievementsUnlock' = AchievementsUnlock'
     { _auQuotaUser     :: !(Maybe Text)
     , _auPrettyPrint   :: !Bool
     , _auAchievementId :: !Text
-    , _auUserIp        :: !(Maybe Text)
-    , _auKey           :: !(Maybe Text)
-    , _auOauthToken    :: !(Maybe Text)
+    , _auUserIP        :: !(Maybe Text)
+    , _auKey           :: !(Maybe Key)
+    , _auOAuthToken    :: !(Maybe OAuthToken)
     , _auFields        :: !(Maybe Text)
-    , _auAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AchievementsUnlock'' with the minimum fields required to make a request.
@@ -82,15 +80,13 @@ data AchievementsUnlock' = AchievementsUnlock'
 --
 -- * 'auAchievementId'
 --
--- * 'auUserIp'
+-- * 'auUserIP'
 --
 -- * 'auKey'
 --
--- * 'auOauthToken'
+-- * 'auOAuthToken'
 --
 -- * 'auFields'
---
--- * 'auAlt'
 achievementsUnlock'
     :: Text -- ^ 'achievementId'
     -> AchievementsUnlock'
@@ -99,11 +95,10 @@ achievementsUnlock' pAuAchievementId_ =
     { _auQuotaUser = Nothing
     , _auPrettyPrint = True
     , _auAchievementId = pAuAchievementId_
-    , _auUserIp = Nothing
+    , _auUserIP = Nothing
     , _auKey = Nothing
-    , _auOauthToken = Nothing
+    , _auOAuthToken = Nothing
     , _auFields = Nothing
-    , _auAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -127,27 +122,27 @@ auAchievementId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-auUserIp :: Lens' AchievementsUnlock' (Maybe Text)
-auUserIp = lens _auUserIp (\ s a -> s{_auUserIp = a})
+auUserIP :: Lens' AchievementsUnlock' (Maybe Text)
+auUserIP = lens _auUserIP (\ s a -> s{_auUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-auKey :: Lens' AchievementsUnlock' (Maybe Text)
+auKey :: Lens' AchievementsUnlock' (Maybe Key)
 auKey = lens _auKey (\ s a -> s{_auKey = a})
 
 -- | OAuth 2.0 token for the current user.
-auOauthToken :: Lens' AchievementsUnlock' (Maybe Text)
-auOauthToken
-  = lens _auOauthToken (\ s a -> s{_auOauthToken = a})
+auOAuthToken :: Lens' AchievementsUnlock' (Maybe OAuthToken)
+auOAuthToken
+  = lens _auOAuthToken (\ s a -> s{_auOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 auFields :: Lens' AchievementsUnlock' (Maybe Text)
 auFields = lens _auFields (\ s a -> s{_auFields = a})
 
--- | Data format for the response.
-auAlt :: Lens' AchievementsUnlock' Alt
-auAlt = lens _auAlt (\ s a -> s{_auAlt = a})
+instance GoogleAuth AchievementsUnlock' where
+        authKey = auKey . _Just
+        authToken = auOAuthToken . _Just
 
 instance GoogleRequest AchievementsUnlock' where
         type Rs AchievementsUnlock' =
@@ -156,11 +151,11 @@ instance GoogleRequest AchievementsUnlock' where
         requestWithRoute r u AchievementsUnlock'{..}
           = go _auQuotaUser (Just _auPrettyPrint)
               _auAchievementId
-              _auUserIp
+              _auUserIP
               _auKey
-              _auOauthToken
+              _auOAuthToken
               _auFields
-              (Just _auAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AchievementsUnlockResource)

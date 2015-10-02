@@ -34,11 +34,11 @@ module Network.Google.Resource.Genomics.Readgroupsets.Call
     -- * Request Lenses
     , rcQuotaUser
     , rcPrettyPrint
-    , rcUserIp
+    , rcCallReadGroupSetsRequest
+    , rcUserIP
     , rcKey
-    , rcOauthToken
+    , rcOAuthToken
     , rcFields
-    , rcAlt
     ) where
 
 import           Network.Google.Genomics.Types
@@ -52,11 +52,12 @@ type ReadgroupsetsCallResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :>
-                       Post '[JSON] CallReadGroupSetsResponse
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] CallReadGroupSetsRequest :>
+                         Post '[JSON] CallReadGroupSetsResponse
 
 -- | Calls variants on read data from existing read group sets or files from
 -- Google Cloud Storage. See the alignment and variant calling
@@ -64,13 +65,13 @@ type ReadgroupsetsCallResource =
 --
 -- /See:/ 'readgroupsetsCall'' smart constructor.
 data ReadgroupsetsCall' = ReadgroupsetsCall'
-    { _rcQuotaUser   :: !(Maybe Text)
-    , _rcPrettyPrint :: !Bool
-    , _rcUserIp      :: !(Maybe Text)
-    , _rcKey         :: !(Maybe Text)
-    , _rcOauthToken  :: !(Maybe Text)
-    , _rcFields      :: !(Maybe Text)
-    , _rcAlt         :: !Alt
+    { _rcQuotaUser                :: !(Maybe Text)
+    , _rcPrettyPrint              :: !Bool
+    , _rcCallReadGroupSetsRequest :: !CallReadGroupSetsRequest
+    , _rcUserIP                   :: !(Maybe Text)
+    , _rcKey                      :: !(Maybe Key)
+    , _rcOAuthToken               :: !(Maybe OAuthToken)
+    , _rcFields                   :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ReadgroupsetsCall'' with the minimum fields required to make a request.
@@ -81,26 +82,27 @@ data ReadgroupsetsCall' = ReadgroupsetsCall'
 --
 -- * 'rcPrettyPrint'
 --
--- * 'rcUserIp'
+-- * 'rcCallReadGroupSetsRequest'
+--
+-- * 'rcUserIP'
 --
 -- * 'rcKey'
 --
--- * 'rcOauthToken'
+-- * 'rcOAuthToken'
 --
 -- * 'rcFields'
---
--- * 'rcAlt'
 readgroupsetsCall'
-    :: ReadgroupsetsCall'
-readgroupsetsCall' =
+    :: CallReadGroupSetsRequest -- ^ 'CallReadGroupSetsRequest'
+    -> ReadgroupsetsCall'
+readgroupsetsCall' pRcCallReadGroupSetsRequest_ =
     ReadgroupsetsCall'
     { _rcQuotaUser = Nothing
     , _rcPrettyPrint = True
-    , _rcUserIp = Nothing
+    , _rcCallReadGroupSetsRequest = pRcCallReadGroupSetsRequest_
+    , _rcUserIP = Nothing
     , _rcKey = Nothing
-    , _rcOauthToken = Nothing
+    , _rcOAuthToken = Nothing
     , _rcFields = Nothing
-    , _rcAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -116,40 +118,47 @@ rcPrettyPrint
   = lens _rcPrettyPrint
       (\ s a -> s{_rcPrettyPrint = a})
 
+-- | Multipart request metadata.
+rcCallReadGroupSetsRequest :: Lens' ReadgroupsetsCall' CallReadGroupSetsRequest
+rcCallReadGroupSetsRequest
+  = lens _rcCallReadGroupSetsRequest
+      (\ s a -> s{_rcCallReadGroupSetsRequest = a})
+
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-rcUserIp :: Lens' ReadgroupsetsCall' (Maybe Text)
-rcUserIp = lens _rcUserIp (\ s a -> s{_rcUserIp = a})
+rcUserIP :: Lens' ReadgroupsetsCall' (Maybe Text)
+rcUserIP = lens _rcUserIP (\ s a -> s{_rcUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-rcKey :: Lens' ReadgroupsetsCall' (Maybe Text)
+rcKey :: Lens' ReadgroupsetsCall' (Maybe Key)
 rcKey = lens _rcKey (\ s a -> s{_rcKey = a})
 
 -- | OAuth 2.0 token for the current user.
-rcOauthToken :: Lens' ReadgroupsetsCall' (Maybe Text)
-rcOauthToken
-  = lens _rcOauthToken (\ s a -> s{_rcOauthToken = a})
+rcOAuthToken :: Lens' ReadgroupsetsCall' (Maybe OAuthToken)
+rcOAuthToken
+  = lens _rcOAuthToken (\ s a -> s{_rcOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 rcFields :: Lens' ReadgroupsetsCall' (Maybe Text)
 rcFields = lens _rcFields (\ s a -> s{_rcFields = a})
 
--- | Data format for the response.
-rcAlt :: Lens' ReadgroupsetsCall' Alt
-rcAlt = lens _rcAlt (\ s a -> s{_rcAlt = a})
+instance GoogleAuth ReadgroupsetsCall' where
+        authKey = rcKey . _Just
+        authToken = rcOAuthToken . _Just
 
 instance GoogleRequest ReadgroupsetsCall' where
         type Rs ReadgroupsetsCall' =
              CallReadGroupSetsResponse
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u ReadgroupsetsCall'{..}
-          = go _rcQuotaUser (Just _rcPrettyPrint) _rcUserIp
+          = go _rcQuotaUser (Just _rcPrettyPrint) _rcUserIP
               _rcKey
-              _rcOauthToken
+              _rcOAuthToken
               _rcFields
-              (Just _rcAlt)
+              (Just AltJSON)
+              _rcCallReadGroupSetsRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ReadgroupsetsCallResource)

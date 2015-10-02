@@ -34,16 +34,15 @@ module Network.Google.Resource.AdExchangeBuyer.Creatives.List
     , clQuotaUser
     , clPrettyPrint
     , clBuyerCreativeId
-    , clUserIp
+    , clUserIP
     , clOpenAuctionStatusFilter
     , clAccountId
     , clKey
     , clPageToken
     , clDealsStatusFilter
-    , clOauthToken
+    , clOAuthToken
     , clMaxResults
     , clFields
-    , clAlt
     ) where
 
 import           Network.Google.AdExchangeBuyer.Types
@@ -61,15 +60,16 @@ type CreativesListResource =
                  AdexchangebuyerCreativesListOpenAuctionStatusFilter
                  :>
                  QueryParams "accountId" Int32 :>
-                   QueryParam "key" Text :>
+                   QueryParam "key" Key :>
                      QueryParam "pageToken" Text :>
                        QueryParam "dealsStatusFilter"
                          AdexchangebuyerCreativesListDealsStatusFilter
                          :>
-                         QueryParam "oauth_token" Text :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "maxResults" Word32 :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :> Get '[JSON] CreativesList
+                               QueryParam "alt" AltJSON :>
+                                 Get '[JSON] CreativesList
 
 -- | Retrieves a list of the authenticated user\'s active creatives. A
 -- creative will be available 30-40 minutes after submission.
@@ -79,16 +79,15 @@ data CreativesList' = CreativesList'
     { _clQuotaUser               :: !(Maybe Text)
     , _clPrettyPrint             :: !Bool
     , _clBuyerCreativeId         :: !(Maybe Text)
-    , _clUserIp                  :: !(Maybe Text)
+    , _clUserIP                  :: !(Maybe Text)
     , _clOpenAuctionStatusFilter :: !(Maybe AdexchangebuyerCreativesListOpenAuctionStatusFilter)
     , _clAccountId               :: !(Maybe Int32)
-    , _clKey                     :: !(Maybe Text)
+    , _clKey                     :: !(Maybe Key)
     , _clPageToken               :: !(Maybe Text)
     , _clDealsStatusFilter       :: !(Maybe AdexchangebuyerCreativesListDealsStatusFilter)
-    , _clOauthToken              :: !(Maybe Text)
+    , _clOAuthToken              :: !(Maybe OAuthToken)
     , _clMaxResults              :: !(Maybe Word32)
     , _clFields                  :: !(Maybe Text)
-    , _clAlt                     :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CreativesList'' with the minimum fields required to make a request.
@@ -101,7 +100,7 @@ data CreativesList' = CreativesList'
 --
 -- * 'clBuyerCreativeId'
 --
--- * 'clUserIp'
+-- * 'clUserIP'
 --
 -- * 'clOpenAuctionStatusFilter'
 --
@@ -113,13 +112,11 @@ data CreativesList' = CreativesList'
 --
 -- * 'clDealsStatusFilter'
 --
--- * 'clOauthToken'
+-- * 'clOAuthToken'
 --
 -- * 'clMaxResults'
 --
 -- * 'clFields'
---
--- * 'clAlt'
 creativesList'
     :: CreativesList'
 creativesList' =
@@ -127,16 +124,15 @@ creativesList' =
     { _clQuotaUser = Nothing
     , _clPrettyPrint = True
     , _clBuyerCreativeId = Nothing
-    , _clUserIp = Nothing
+    , _clUserIP = Nothing
     , _clOpenAuctionStatusFilter = Nothing
     , _clAccountId = Nothing
     , _clKey = Nothing
     , _clPageToken = Nothing
     , _clDealsStatusFilter = Nothing
-    , _clOauthToken = Nothing
+    , _clOAuthToken = Nothing
     , _clMaxResults = Nothing
     , _clFields = Nothing
-    , _clAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -161,8 +157,8 @@ clBuyerCreativeId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-clUserIp :: Lens' CreativesList' (Maybe Text)
-clUserIp = lens _clUserIp (\ s a -> s{_clUserIp = a})
+clUserIP :: Lens' CreativesList' (Maybe Text)
+clUserIP = lens _clUserIP (\ s a -> s{_clUserIP = a})
 
 -- | When specified, only creatives having the given open auction status are
 -- returned.
@@ -179,7 +175,7 @@ clAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-clKey :: Lens' CreativesList' (Maybe Text)
+clKey :: Lens' CreativesList' (Maybe Key)
 clKey = lens _clKey (\ s a -> s{_clKey = a})
 
 -- | A continuation token, used to page through ad clients. To retrieve the
@@ -197,9 +193,9 @@ clDealsStatusFilter
       (\ s a -> s{_clDealsStatusFilter = a})
 
 -- | OAuth 2.0 token for the current user.
-clOauthToken :: Lens' CreativesList' (Maybe Text)
-clOauthToken
-  = lens _clOauthToken (\ s a -> s{_clOauthToken = a})
+clOAuthToken :: Lens' CreativesList' (Maybe OAuthToken)
+clOAuthToken
+  = lens _clOAuthToken (\ s a -> s{_clOAuthToken = a})
 
 -- | Maximum number of entries returned on one result page. If not set, the
 -- default is 100. Optional.
@@ -211,9 +207,9 @@ clMaxResults
 clFields :: Lens' CreativesList' (Maybe Text)
 clFields = lens _clFields (\ s a -> s{_clFields = a})
 
--- | Data format for the response.
-clAlt :: Lens' CreativesList' Alt
-clAlt = lens _clAlt (\ s a -> s{_clAlt = a})
+instance GoogleAuth CreativesList' where
+        authKey = clKey . _Just
+        authToken = clOAuthToken . _Just
 
 instance GoogleRequest CreativesList' where
         type Rs CreativesList' = CreativesList
@@ -221,16 +217,16 @@ instance GoogleRequest CreativesList' where
         requestWithRoute r u CreativesList'{..}
           = go _clQuotaUser (Just _clPrettyPrint)
               _clBuyerCreativeId
-              _clUserIp
+              _clUserIP
               _clOpenAuctionStatusFilter
               _clAccountId
               _clKey
               _clPageToken
               _clDealsStatusFilter
-              _clOauthToken
+              _clOAuthToken
               _clMaxResults
               _clFields
-              (Just _clAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CreativesListResource)

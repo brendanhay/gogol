@@ -33,14 +33,13 @@ module Network.Google.Resource.Analytics.Management.ProfileFilterLinks.Get
     , mpflgQuotaUser
     , mpflgPrettyPrint
     , mpflgWebPropertyId
-    , mpflgUserIp
+    , mpflgUserIP
     , mpflgProfileId
     , mpflgAccountId
     , mpflgKey
     , mpflgLinkId
-    , mpflgOauthToken
+    , mpflgOAuthToken
     , mpflgFields
-    , mpflgAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -61,10 +60,10 @@ type ManagementProfileFilterLinksGetResource =
                        QueryParam "quotaUser" Text :>
                          QueryParam "prettyPrint" Bool :>
                            QueryParam "userIp" Text :>
-                             QueryParam "key" Text :>
-                               QueryParam "oauth_token" Text :>
+                             QueryParam "key" Key :>
+                               QueryParam "oauth_token" OAuthToken :>
                                  QueryParam "fields" Text :>
-                                   QueryParam "alt" Alt :>
+                                   QueryParam "alt" AltJSON :>
                                      Get '[JSON] ProfileFilterLink
 
 -- | Returns a single profile filter link.
@@ -74,14 +73,13 @@ data ManagementProfileFilterLinksGet' = ManagementProfileFilterLinksGet'
     { _mpflgQuotaUser     :: !(Maybe Text)
     , _mpflgPrettyPrint   :: !Bool
     , _mpflgWebPropertyId :: !Text
-    , _mpflgUserIp        :: !(Maybe Text)
+    , _mpflgUserIP        :: !(Maybe Text)
     , _mpflgProfileId     :: !Text
     , _mpflgAccountId     :: !Text
-    , _mpflgKey           :: !(Maybe Text)
+    , _mpflgKey           :: !(Maybe Key)
     , _mpflgLinkId        :: !Text
-    , _mpflgOauthToken    :: !(Maybe Text)
+    , _mpflgOAuthToken    :: !(Maybe OAuthToken)
     , _mpflgFields        :: !(Maybe Text)
-    , _mpflgAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementProfileFilterLinksGet'' with the minimum fields required to make a request.
@@ -94,7 +92,7 @@ data ManagementProfileFilterLinksGet' = ManagementProfileFilterLinksGet'
 --
 -- * 'mpflgWebPropertyId'
 --
--- * 'mpflgUserIp'
+-- * 'mpflgUserIP'
 --
 -- * 'mpflgProfileId'
 --
@@ -104,11 +102,9 @@ data ManagementProfileFilterLinksGet' = ManagementProfileFilterLinksGet'
 --
 -- * 'mpflgLinkId'
 --
--- * 'mpflgOauthToken'
+-- * 'mpflgOAuthToken'
 --
 -- * 'mpflgFields'
---
--- * 'mpflgAlt'
 managementProfileFilterLinksGet'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
@@ -120,14 +116,13 @@ managementProfileFilterLinksGet' pMpflgWebPropertyId_ pMpflgProfileId_ pMpflgAcc
     { _mpflgQuotaUser = Nothing
     , _mpflgPrettyPrint = False
     , _mpflgWebPropertyId = pMpflgWebPropertyId_
-    , _mpflgUserIp = Nothing
+    , _mpflgUserIP = Nothing
     , _mpflgProfileId = pMpflgProfileId_
     , _mpflgAccountId = pMpflgAccountId_
     , _mpflgKey = Nothing
     , _mpflgLinkId = pMpflgLinkId_
-    , _mpflgOauthToken = Nothing
+    , _mpflgOAuthToken = Nothing
     , _mpflgFields = Nothing
-    , _mpflgAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -152,9 +147,9 @@ mpflgWebPropertyId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-mpflgUserIp :: Lens' ManagementProfileFilterLinksGet' (Maybe Text)
-mpflgUserIp
-  = lens _mpflgUserIp (\ s a -> s{_mpflgUserIp = a})
+mpflgUserIP :: Lens' ManagementProfileFilterLinksGet' (Maybe Text)
+mpflgUserIP
+  = lens _mpflgUserIP (\ s a -> s{_mpflgUserIP = a})
 
 -- | Profile ID to retrieve filter link for.
 mpflgProfileId :: Lens' ManagementProfileFilterLinksGet' Text
@@ -171,7 +166,7 @@ mpflgAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-mpflgKey :: Lens' ManagementProfileFilterLinksGet' (Maybe Text)
+mpflgKey :: Lens' ManagementProfileFilterLinksGet' (Maybe Key)
 mpflgKey = lens _mpflgKey (\ s a -> s{_mpflgKey = a})
 
 -- | ID of the profile filter link.
@@ -180,19 +175,20 @@ mpflgLinkId
   = lens _mpflgLinkId (\ s a -> s{_mpflgLinkId = a})
 
 -- | OAuth 2.0 token for the current user.
-mpflgOauthToken :: Lens' ManagementProfileFilterLinksGet' (Maybe Text)
-mpflgOauthToken
-  = lens _mpflgOauthToken
-      (\ s a -> s{_mpflgOauthToken = a})
+mpflgOAuthToken :: Lens' ManagementProfileFilterLinksGet' (Maybe OAuthToken)
+mpflgOAuthToken
+  = lens _mpflgOAuthToken
+      (\ s a -> s{_mpflgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 mpflgFields :: Lens' ManagementProfileFilterLinksGet' (Maybe Text)
 mpflgFields
   = lens _mpflgFields (\ s a -> s{_mpflgFields = a})
 
--- | Data format for the response.
-mpflgAlt :: Lens' ManagementProfileFilterLinksGet' Alt
-mpflgAlt = lens _mpflgAlt (\ s a -> s{_mpflgAlt = a})
+instance GoogleAuth ManagementProfileFilterLinksGet'
+         where
+        authKey = mpflgKey . _Just
+        authToken = mpflgOAuthToken . _Just
 
 instance GoogleRequest
          ManagementProfileFilterLinksGet' where
@@ -203,14 +199,14 @@ instance GoogleRequest
           ManagementProfileFilterLinksGet'{..}
           = go _mpflgQuotaUser (Just _mpflgPrettyPrint)
               _mpflgWebPropertyId
-              _mpflgUserIp
+              _mpflgUserIP
               _mpflgProfileId
               _mpflgAccountId
               _mpflgKey
               _mpflgLinkId
-              _mpflgOauthToken
+              _mpflgOAuthToken
               _mpflgFields
-              (Just _mpflgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy ::

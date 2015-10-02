@@ -32,12 +32,12 @@ module Network.Google.Resource.AdExchangeBuyer.Negotiations.Get
     -- * Request Lenses
     , ngQuotaUser
     , ngPrettyPrint
-    , ngUserIp
+    , ngUserIP
     , ngKey
-    , ngOauthToken
+    , ngGetNegotiationByIdRequest
+    , ngOAuthToken
     , ngNegotiationId
     , ngFields
-    , ngAlt
     ) where
 
 import           Network.Google.AdExchangeBuyer.Types
@@ -51,23 +51,25 @@ type NegotiationsGetResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Get '[JSON] NegotiationDto
+                     QueryParam "alt" AltJSON :>
+                       ReqBody '[JSON] GetNegotiationByIdRequest :>
+                         Get '[JSON] NegotiationDto
 
 -- | Gets the requested negotiation.
 --
 -- /See:/ 'negotiationsGet'' smart constructor.
 data NegotiationsGet' = NegotiationsGet'
-    { _ngQuotaUser     :: !(Maybe Text)
-    , _ngPrettyPrint   :: !Bool
-    , _ngUserIp        :: !(Maybe Text)
-    , _ngKey           :: !(Maybe Text)
-    , _ngOauthToken    :: !(Maybe Text)
-    , _ngNegotiationId :: !Int64
-    , _ngFields        :: !(Maybe Text)
-    , _ngAlt           :: !Alt
+    { _ngQuotaUser                 :: !(Maybe Text)
+    , _ngPrettyPrint               :: !Bool
+    , _ngUserIP                    :: !(Maybe Text)
+    , _ngKey                       :: !(Maybe Key)
+    , _ngGetNegotiationByIdRequest :: !GetNegotiationByIdRequest
+    , _ngOAuthToken                :: !(Maybe OAuthToken)
+    , _ngNegotiationId             :: !Int64
+    , _ngFields                    :: !(Maybe Text)
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'NegotiationsGet'' with the minimum fields required to make a request.
@@ -78,30 +80,31 @@ data NegotiationsGet' = NegotiationsGet'
 --
 -- * 'ngPrettyPrint'
 --
--- * 'ngUserIp'
+-- * 'ngUserIP'
 --
 -- * 'ngKey'
 --
--- * 'ngOauthToken'
+-- * 'ngGetNegotiationByIdRequest'
+--
+-- * 'ngOAuthToken'
 --
 -- * 'ngNegotiationId'
 --
 -- * 'ngFields'
---
--- * 'ngAlt'
 negotiationsGet'
-    :: Int64 -- ^ 'negotiationId'
+    :: GetNegotiationByIdRequest -- ^ 'GetNegotiationByIdRequest'
+    -> Int64 -- ^ 'negotiationId'
     -> NegotiationsGet'
-negotiationsGet' pNgNegotiationId_ =
+negotiationsGet' pNgGetNegotiationByIdRequest_ pNgNegotiationId_ =
     NegotiationsGet'
     { _ngQuotaUser = Nothing
     , _ngPrettyPrint = True
-    , _ngUserIp = Nothing
+    , _ngUserIP = Nothing
     , _ngKey = Nothing
-    , _ngOauthToken = Nothing
+    , _ngGetNegotiationByIdRequest = pNgGetNegotiationByIdRequest_
+    , _ngOAuthToken = Nothing
     , _ngNegotiationId = pNgNegotiationId_
     , _ngFields = Nothing
-    , _ngAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -119,19 +122,25 @@ ngPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ngUserIp :: Lens' NegotiationsGet' (Maybe Text)
-ngUserIp = lens _ngUserIp (\ s a -> s{_ngUserIp = a})
+ngUserIP :: Lens' NegotiationsGet' (Maybe Text)
+ngUserIP = lens _ngUserIP (\ s a -> s{_ngUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ngKey :: Lens' NegotiationsGet' (Maybe Text)
+ngKey :: Lens' NegotiationsGet' (Maybe Key)
 ngKey = lens _ngKey (\ s a -> s{_ngKey = a})
 
+-- | Multipart request metadata.
+ngGetNegotiationByIdRequest :: Lens' NegotiationsGet' GetNegotiationByIdRequest
+ngGetNegotiationByIdRequest
+  = lens _ngGetNegotiationByIdRequest
+      (\ s a -> s{_ngGetNegotiationByIdRequest = a})
+
 -- | OAuth 2.0 token for the current user.
-ngOauthToken :: Lens' NegotiationsGet' (Maybe Text)
-ngOauthToken
-  = lens _ngOauthToken (\ s a -> s{_ngOauthToken = a})
+ngOAuthToken :: Lens' NegotiationsGet' (Maybe OAuthToken)
+ngOAuthToken
+  = lens _ngOAuthToken (\ s a -> s{_ngOAuthToken = a})
 
 ngNegotiationId :: Lens' NegotiationsGet' Int64
 ngNegotiationId
@@ -142,20 +151,21 @@ ngNegotiationId
 ngFields :: Lens' NegotiationsGet' (Maybe Text)
 ngFields = lens _ngFields (\ s a -> s{_ngFields = a})
 
--- | Data format for the response.
-ngAlt :: Lens' NegotiationsGet' Alt
-ngAlt = lens _ngAlt (\ s a -> s{_ngAlt = a})
+instance GoogleAuth NegotiationsGet' where
+        authKey = ngKey . _Just
+        authToken = ngOAuthToken . _Just
 
 instance GoogleRequest NegotiationsGet' where
         type Rs NegotiationsGet' = NegotiationDto
         request = requestWithRoute defReq adExchangeBuyerURL
         requestWithRoute r u NegotiationsGet'{..}
-          = go _ngQuotaUser (Just _ngPrettyPrint) _ngUserIp
+          = go _ngQuotaUser (Just _ngPrettyPrint) _ngUserIP
               _ngKey
-              _ngOauthToken
+              _ngOAuthToken
               _ngNegotiationId
               _ngFields
-              (Just _ngAlt)
+              (Just AltJSON)
+              _ngGetNegotiationByIdRequest
           where go
                   = clientWithRoute
                       (Proxy :: Proxy NegotiationsGetResource)

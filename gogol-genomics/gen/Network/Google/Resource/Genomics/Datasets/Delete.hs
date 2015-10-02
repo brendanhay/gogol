@@ -32,12 +32,11 @@ module Network.Google.Resource.Genomics.Datasets.Delete
     -- * Request Lenses
     , ddQuotaUser
     , ddPrettyPrint
-    , ddUserIp
+    , ddUserIP
     , ddKey
     , ddDatasetId
-    , ddOauthToken
+    , ddOAuthToken
     , ddFields
-    , ddAlt
     ) where
 
 import           Network.Google.Genomics.Types
@@ -51,10 +50,10 @@ type DatasetsDeleteResource =
          QueryParam "quotaUser" Text :>
            QueryParam "prettyPrint" Bool :>
              QueryParam "userIp" Text :>
-               QueryParam "key" Text :>
-                 QueryParam "oauth_token" Text :>
+               QueryParam "key" Key :>
+                 QueryParam "oauth_token" OAuthToken :>
                    QueryParam "fields" Text :>
-                     QueryParam "alt" Alt :> Delete '[JSON] ()
+                     QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Deletes a dataset.
 --
@@ -62,12 +61,11 @@ type DatasetsDeleteResource =
 data DatasetsDelete' = DatasetsDelete'
     { _ddQuotaUser   :: !(Maybe Text)
     , _ddPrettyPrint :: !Bool
-    , _ddUserIp      :: !(Maybe Text)
-    , _ddKey         :: !(Maybe Text)
+    , _ddUserIP      :: !(Maybe Text)
+    , _ddKey         :: !(Maybe Key)
     , _ddDatasetId   :: !Text
-    , _ddOauthToken  :: !(Maybe Text)
+    , _ddOAuthToken  :: !(Maybe OAuthToken)
     , _ddFields      :: !(Maybe Text)
-    , _ddAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'DatasetsDelete'' with the minimum fields required to make a request.
@@ -78,17 +76,15 @@ data DatasetsDelete' = DatasetsDelete'
 --
 -- * 'ddPrettyPrint'
 --
--- * 'ddUserIp'
+-- * 'ddUserIP'
 --
 -- * 'ddKey'
 --
 -- * 'ddDatasetId'
 --
--- * 'ddOauthToken'
+-- * 'ddOAuthToken'
 --
 -- * 'ddFields'
---
--- * 'ddAlt'
 datasetsDelete'
     :: Text -- ^ 'datasetId'
     -> DatasetsDelete'
@@ -96,12 +92,11 @@ datasetsDelete' pDdDatasetId_ =
     DatasetsDelete'
     { _ddQuotaUser = Nothing
     , _ddPrettyPrint = True
-    , _ddUserIp = Nothing
+    , _ddUserIP = Nothing
     , _ddKey = Nothing
     , _ddDatasetId = pDdDatasetId_
-    , _ddOauthToken = Nothing
+    , _ddOAuthToken = Nothing
     , _ddFields = Nothing
-    , _ddAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -119,13 +114,13 @@ ddPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-ddUserIp :: Lens' DatasetsDelete' (Maybe Text)
-ddUserIp = lens _ddUserIp (\ s a -> s{_ddUserIp = a})
+ddUserIP :: Lens' DatasetsDelete' (Maybe Text)
+ddUserIP = lens _ddUserIP (\ s a -> s{_ddUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ddKey :: Lens' DatasetsDelete' (Maybe Text)
+ddKey :: Lens' DatasetsDelete' (Maybe Key)
 ddKey = lens _ddKey (\ s a -> s{_ddKey = a})
 
 -- | The ID of the dataset to be deleted.
@@ -134,28 +129,28 @@ ddDatasetId
   = lens _ddDatasetId (\ s a -> s{_ddDatasetId = a})
 
 -- | OAuth 2.0 token for the current user.
-ddOauthToken :: Lens' DatasetsDelete' (Maybe Text)
-ddOauthToken
-  = lens _ddOauthToken (\ s a -> s{_ddOauthToken = a})
+ddOAuthToken :: Lens' DatasetsDelete' (Maybe OAuthToken)
+ddOAuthToken
+  = lens _ddOAuthToken (\ s a -> s{_ddOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ddFields :: Lens' DatasetsDelete' (Maybe Text)
 ddFields = lens _ddFields (\ s a -> s{_ddFields = a})
 
--- | Data format for the response.
-ddAlt :: Lens' DatasetsDelete' Alt
-ddAlt = lens _ddAlt (\ s a -> s{_ddAlt = a})
+instance GoogleAuth DatasetsDelete' where
+        authKey = ddKey . _Just
+        authToken = ddOAuthToken . _Just
 
 instance GoogleRequest DatasetsDelete' where
         type Rs DatasetsDelete' = ()
         request = requestWithRoute defReq genomicsURL
         requestWithRoute r u DatasetsDelete'{..}
-          = go _ddQuotaUser (Just _ddPrettyPrint) _ddUserIp
+          = go _ddQuotaUser (Just _ddPrettyPrint) _ddUserIP
               _ddKey
               _ddDatasetId
-              _ddOauthToken
+              _ddOAuthToken
               _ddFields
-              (Just _ddAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy DatasetsDeleteResource)

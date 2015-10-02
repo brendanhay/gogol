@@ -76,7 +76,7 @@ module Network.Google.Drive.Types
     -- * UserPicture
     , UserPicture
     , userPicture
-    , upUrl
+    , upURL
 
     -- * PropertyList
     , PropertyList
@@ -130,13 +130,13 @@ module Network.Google.Drive.Types
     -- * Channel
     , Channel
     , channel
-    , cResourceUri
+    , cResourceURI
     , cResourceId
     , cKind
     , cExpiration
     , cToken
     , cAddress
-    , cPayload
+    , cPayLoad
     , cParams
     , cId
     , cType
@@ -186,18 +186,18 @@ module Network.Google.Drive.Types
     , App
     , app
     , appLongDescription
-    , appOpenUrlTemplate
+    , appOpenURLTemplate
     , appAuthorized
     , appObjectType
     , appSecondaryMimeTypes
     , appCreateInFolderTemplate
     , appKind
     , appIcons
-    , appProductUrl
+    , appProductURL
     , appUseByDefault
     , appShortDescription
     , appName
-    , appCreateUrl
+    , appCreateURL
     , appId
     , appPrimaryFileExtensions
     , appInstalled
@@ -229,7 +229,7 @@ module Network.Google.Drive.Types
     -- * CommentReply
     , CommentReply
     , commentReply
-    , comHtmlContent
+    , comHTMLContent
     , comKind
     , comContent
     , comCreatedDate
@@ -356,11 +356,11 @@ module Network.Google.Drive.Types
     , rLastModifyingUser
     , rFileSize
     , rPublishAuto
-    , rMd5Checksum
+    , rMD5Checksum
     , rMimeType
     , rSelfLink
     , rLastModifyingUserName
-    , rDownloadUrl
+    , rDownloadURL
     , rExportLinks
     , rPublishedOutsideDomain
     , rId
@@ -388,7 +388,7 @@ module Network.Google.Drive.Types
     , Comment
     , comment
     , ccStatus
-    , ccHtmlContent
+    , ccHTMLContent
     , ccContext
     , ccKind
     , ccFileTitle
@@ -440,14 +440,14 @@ module Network.Google.Drive.Types
     , fModifiedByMeDate
     , fLastViewedByMeDate
     , fShared
-    , fMd5Checksum
+    , fMD5Checksum
     , fFolderColorRgb
     , fMimeType
     , fCreatedDate
     , fSelfLink
     , fLastModifyingUserName
     , fShareable
-    , fDownloadUrl
+    , fDownloadURL
     , fExportLinks
     , fCopyable
     , fParents
@@ -518,7 +518,7 @@ module Network.Google.Drive.Types
     , appIcons
     , aiSize
     , aiCategory
-    , aiIconUrl
+    , aiIconURL
 
     -- * CommentList
     , CommentList
@@ -528,9 +528,6 @@ module Network.Google.Drive.Types
     , comoKind
     , comoItems
     , comoSelfLink
-
-    -- * Alt
-    , Alt (..)
     ) where
 
 import           Network.Google.Drive.Types.Product

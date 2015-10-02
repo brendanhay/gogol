@@ -33,12 +33,11 @@ module Network.Google.Resource.Compute.Licenses.Get
     , lgQuotaUser
     , lgPrettyPrint
     , lgProject
-    , lgUserIp
+    , lgUserIP
     , lgKey
     , lgLicense
-    , lgOauthToken
+    , lgOAuthToken
     , lgFields
-    , lgAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -54,10 +53,10 @@ type LicensesGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] License
+                         QueryParam "alt" AltJSON :> Get '[JSON] License
 
 -- | Returns the specified license resource.
 --
@@ -66,12 +65,11 @@ data LicensesGet' = LicensesGet'
     { _lgQuotaUser   :: !(Maybe Text)
     , _lgPrettyPrint :: !Bool
     , _lgProject     :: !Text
-    , _lgUserIp      :: !(Maybe Text)
-    , _lgKey         :: !(Maybe Text)
+    , _lgUserIP      :: !(Maybe Text)
+    , _lgKey         :: !(Maybe Key)
     , _lgLicense     :: !Text
-    , _lgOauthToken  :: !(Maybe Text)
+    , _lgOAuthToken  :: !(Maybe OAuthToken)
     , _lgFields      :: !(Maybe Text)
-    , _lgAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'LicensesGet'' with the minimum fields required to make a request.
@@ -84,17 +82,15 @@ data LicensesGet' = LicensesGet'
 --
 -- * 'lgProject'
 --
--- * 'lgUserIp'
+-- * 'lgUserIP'
 --
 -- * 'lgKey'
 --
 -- * 'lgLicense'
 --
--- * 'lgOauthToken'
+-- * 'lgOAuthToken'
 --
 -- * 'lgFields'
---
--- * 'lgAlt'
 licensesGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'license'
@@ -104,12 +100,11 @@ licensesGet' pLgProject_ pLgLicense_ =
     { _lgQuotaUser = Nothing
     , _lgPrettyPrint = True
     , _lgProject = pLgProject_
-    , _lgUserIp = Nothing
+    , _lgUserIP = Nothing
     , _lgKey = Nothing
     , _lgLicense = pLgLicense_
-    , _lgOauthToken = Nothing
+    , _lgOAuthToken = Nothing
     , _lgFields = Nothing
-    , _lgAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -132,13 +127,13 @@ lgProject
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-lgUserIp :: Lens' LicensesGet' (Maybe Text)
-lgUserIp = lens _lgUserIp (\ s a -> s{_lgUserIp = a})
+lgUserIP :: Lens' LicensesGet' (Maybe Text)
+lgUserIP = lens _lgUserIP (\ s a -> s{_lgUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-lgKey :: Lens' LicensesGet' (Maybe Text)
+lgKey :: Lens' LicensesGet' (Maybe Key)
 lgKey = lens _lgKey (\ s a -> s{_lgKey = a})
 
 -- | Name of the license resource to return.
@@ -147,29 +142,29 @@ lgLicense
   = lens _lgLicense (\ s a -> s{_lgLicense = a})
 
 -- | OAuth 2.0 token for the current user.
-lgOauthToken :: Lens' LicensesGet' (Maybe Text)
-lgOauthToken
-  = lens _lgOauthToken (\ s a -> s{_lgOauthToken = a})
+lgOAuthToken :: Lens' LicensesGet' (Maybe OAuthToken)
+lgOAuthToken
+  = lens _lgOAuthToken (\ s a -> s{_lgOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 lgFields :: Lens' LicensesGet' (Maybe Text)
 lgFields = lens _lgFields (\ s a -> s{_lgFields = a})
 
--- | Data format for the response.
-lgAlt :: Lens' LicensesGet' Alt
-lgAlt = lens _lgAlt (\ s a -> s{_lgAlt = a})
+instance GoogleAuth LicensesGet' where
+        authKey = lgKey . _Just
+        authToken = lgOAuthToken . _Just
 
 instance GoogleRequest LicensesGet' where
         type Rs LicensesGet' = License
         request = requestWithRoute defReq computeURL
         requestWithRoute r u LicensesGet'{..}
           = go _lgQuotaUser (Just _lgPrettyPrint) _lgProject
-              _lgUserIp
+              _lgUserIP
               _lgKey
               _lgLicense
-              _lgOauthToken
+              _lgOAuthToken
               _lgFields
-              (Just _lgAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy LicensesGetResource)

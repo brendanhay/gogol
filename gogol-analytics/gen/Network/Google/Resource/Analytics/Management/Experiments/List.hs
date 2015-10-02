@@ -33,15 +33,14 @@ module Network.Google.Resource.Analytics.Management.Experiments.List
     , melQuotaUser
     , melPrettyPrint
     , melWebPropertyId
-    , melUserIp
+    , melUserIP
     , melProfileId
     , melAccountId
     , melKey
-    , melOauthToken
+    , melOAuthToken
     , melStartIndex
     , melMaxResults
     , melFields
-    , melAlt
     ) where
 
 import           Network.Google.Analytics.Types
@@ -61,12 +60,12 @@ type ManagementExperimentsListResource =
                      QueryParam "quotaUser" Text :>
                        QueryParam "prettyPrint" Bool :>
                          QueryParam "userIp" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "start-index" Int32 :>
                                  QueryParam "max-results" Int32 :>
                                    QueryParam "fields" Text :>
-                                     QueryParam "alt" Alt :>
+                                     QueryParam "alt" AltJSON :>
                                        Get '[JSON] Experiments
 
 -- | Lists experiments to which the user has access.
@@ -76,15 +75,14 @@ data ManagementExperimentsList' = ManagementExperimentsList'
     { _melQuotaUser     :: !(Maybe Text)
     , _melPrettyPrint   :: !Bool
     , _melWebPropertyId :: !Text
-    , _melUserIp        :: !(Maybe Text)
+    , _melUserIP        :: !(Maybe Text)
     , _melProfileId     :: !Text
     , _melAccountId     :: !Text
-    , _melKey           :: !(Maybe Text)
-    , _melOauthToken    :: !(Maybe Text)
+    , _melKey           :: !(Maybe Key)
+    , _melOAuthToken    :: !(Maybe OAuthToken)
     , _melStartIndex    :: !(Maybe Int32)
     , _melMaxResults    :: !(Maybe Int32)
     , _melFields        :: !(Maybe Text)
-    , _melAlt           :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ManagementExperimentsList'' with the minimum fields required to make a request.
@@ -97,7 +95,7 @@ data ManagementExperimentsList' = ManagementExperimentsList'
 --
 -- * 'melWebPropertyId'
 --
--- * 'melUserIp'
+-- * 'melUserIP'
 --
 -- * 'melProfileId'
 --
@@ -105,15 +103,13 @@ data ManagementExperimentsList' = ManagementExperimentsList'
 --
 -- * 'melKey'
 --
--- * 'melOauthToken'
+-- * 'melOAuthToken'
 --
 -- * 'melStartIndex'
 --
 -- * 'melMaxResults'
 --
 -- * 'melFields'
---
--- * 'melAlt'
 managementExperimentsList'
     :: Text -- ^ 'webPropertyId'
     -> Text -- ^ 'profileId'
@@ -124,15 +120,14 @@ managementExperimentsList' pMelWebPropertyId_ pMelProfileId_ pMelAccountId_ =
     { _melQuotaUser = Nothing
     , _melPrettyPrint = False
     , _melWebPropertyId = pMelWebPropertyId_
-    , _melUserIp = Nothing
+    , _melUserIP = Nothing
     , _melProfileId = pMelProfileId_
     , _melAccountId = pMelAccountId_
     , _melKey = Nothing
-    , _melOauthToken = Nothing
+    , _melOAuthToken = Nothing
     , _melStartIndex = Nothing
     , _melMaxResults = Nothing
     , _melFields = Nothing
-    , _melAlt = ALTJSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -156,9 +151,9 @@ melWebPropertyId
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-melUserIp :: Lens' ManagementExperimentsList' (Maybe Text)
-melUserIp
-  = lens _melUserIp (\ s a -> s{_melUserIp = a})
+melUserIP :: Lens' ManagementExperimentsList' (Maybe Text)
+melUserIP
+  = lens _melUserIP (\ s a -> s{_melUserIP = a})
 
 -- | View (Profile) ID to retrieve experiments for.
 melProfileId :: Lens' ManagementExperimentsList' Text
@@ -173,14 +168,14 @@ melAccountId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-melKey :: Lens' ManagementExperimentsList' (Maybe Text)
+melKey :: Lens' ManagementExperimentsList' (Maybe Key)
 melKey = lens _melKey (\ s a -> s{_melKey = a})
 
 -- | OAuth 2.0 token for the current user.
-melOauthToken :: Lens' ManagementExperimentsList' (Maybe Text)
-melOauthToken
-  = lens _melOauthToken
-      (\ s a -> s{_melOauthToken = a})
+melOAuthToken :: Lens' ManagementExperimentsList' (Maybe OAuthToken)
+melOAuthToken
+  = lens _melOAuthToken
+      (\ s a -> s{_melOAuthToken = a})
 
 -- | An index of the first experiment to retrieve. Use this parameter as a
 -- pagination mechanism along with the max-results parameter.
@@ -200,9 +195,9 @@ melFields :: Lens' ManagementExperimentsList' (Maybe Text)
 melFields
   = lens _melFields (\ s a -> s{_melFields = a})
 
--- | Data format for the response.
-melAlt :: Lens' ManagementExperimentsList' Alt
-melAlt = lens _melAlt (\ s a -> s{_melAlt = a})
+instance GoogleAuth ManagementExperimentsList' where
+        authKey = melKey . _Just
+        authToken = melOAuthToken . _Just
 
 instance GoogleRequest ManagementExperimentsList'
          where
@@ -211,15 +206,15 @@ instance GoogleRequest ManagementExperimentsList'
         requestWithRoute r u ManagementExperimentsList'{..}
           = go _melQuotaUser (Just _melPrettyPrint)
               _melWebPropertyId
-              _melUserIp
+              _melUserIP
               _melProfileId
               _melAccountId
               _melKey
-              _melOauthToken
+              _melOAuthToken
               _melStartIndex
               _melMaxResults
               _melFields
-              (Just _melAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ManagementExperimentsListResource)

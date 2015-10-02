@@ -44,10 +44,9 @@ module Network.Google.Resource.Classroom.Invitations.Delete
     , idBearerToken
     , idKey
     , idId
-    , idOauthToken
+    , idOAuthToken
     , idFields
     , idCallback
-    , idAlt
     ) where
 
 import           Network.Google.Classroom.Types
@@ -67,11 +66,12 @@ type InvitationsDeleteResource =
                      QueryParam "access_token" Text :>
                        QueryParam "uploadType" Text :>
                          QueryParam "bearer_token" Text :>
-                           QueryParam "key" Text :>
-                             QueryParam "oauth_token" Text :>
+                           QueryParam "key" Key :>
+                             QueryParam "oauth_token" OAuthToken :>
                                QueryParam "fields" Text :>
                                  QueryParam "callback" Text :>
-                                   QueryParam "alt" Text :> Delete '[JSON] Empty
+                                   QueryParam "alt" AltJSON :>
+                                     Delete '[JSON] Empty
 
 -- | Deletes an invitation. This method returns the following error codes: *
 -- \`PERMISSION_DENIED\` if the requesting user is not permitted to delete
@@ -89,12 +89,11 @@ data InvitationsDelete' = InvitationsDelete'
     , _idAccessToken    :: !(Maybe Text)
     , _idUploadType     :: !(Maybe Text)
     , _idBearerToken    :: !(Maybe Text)
-    , _idKey            :: !(Maybe Text)
+    , _idKey            :: !(Maybe Key)
     , _idId             :: !Text
-    , _idOauthToken     :: !(Maybe Text)
+    , _idOAuthToken     :: !(Maybe OAuthToken)
     , _idFields         :: !(Maybe Text)
     , _idCallback       :: !(Maybe Text)
-    , _idAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'InvitationsDelete'' with the minimum fields required to make a request.
@@ -121,13 +120,11 @@ data InvitationsDelete' = InvitationsDelete'
 --
 -- * 'idId'
 --
--- * 'idOauthToken'
+-- * 'idOAuthToken'
 --
 -- * 'idFields'
 --
 -- * 'idCallback'
---
--- * 'idAlt'
 invitationsDelete'
     :: Text -- ^ 'id'
     -> InvitationsDelete'
@@ -143,10 +140,9 @@ invitationsDelete' pIdId_ =
     , _idBearerToken = Nothing
     , _idKey = Nothing
     , _idId = pIdId_
-    , _idOauthToken = Nothing
+    , _idOAuthToken = Nothing
     , _idFields = Nothing
     , _idCallback = Nothing
-    , _idAlt = "json"
     }
 
 -- | V1 error format.
@@ -196,7 +192,7 @@ idBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-idKey :: Lens' InvitationsDelete' (Maybe Text)
+idKey :: Lens' InvitationsDelete' (Maybe Key)
 idKey = lens _idKey (\ s a -> s{_idKey = a})
 
 -- | Identifier of the invitation to delete.
@@ -204,9 +200,9 @@ idId :: Lens' InvitationsDelete' Text
 idId = lens _idId (\ s a -> s{_idId = a})
 
 -- | OAuth 2.0 token for the current user.
-idOauthToken :: Lens' InvitationsDelete' (Maybe Text)
-idOauthToken
-  = lens _idOauthToken (\ s a -> s{_idOauthToken = a})
+idOAuthToken :: Lens' InvitationsDelete' (Maybe OAuthToken)
+idOAuthToken
+  = lens _idOAuthToken (\ s a -> s{_idOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 idFields :: Lens' InvitationsDelete' (Maybe Text)
@@ -217,9 +213,9 @@ idCallback :: Lens' InvitationsDelete' (Maybe Text)
 idCallback
   = lens _idCallback (\ s a -> s{_idCallback = a})
 
--- | Data format for response.
-idAlt :: Lens' InvitationsDelete' Text
-idAlt = lens _idAlt (\ s a -> s{_idAlt = a})
+instance GoogleAuth InvitationsDelete' where
+        authKey = idKey . _Just
+        authToken = idOAuthToken . _Just
 
 instance GoogleRequest InvitationsDelete' where
         type Rs InvitationsDelete' = Empty
@@ -233,10 +229,10 @@ instance GoogleRequest InvitationsDelete' where
               _idBearerToken
               _idKey
               _idId
-              _idOauthToken
+              _idOAuthToken
               _idFields
               _idCallback
-              (Just _idAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy InvitationsDeleteResource)

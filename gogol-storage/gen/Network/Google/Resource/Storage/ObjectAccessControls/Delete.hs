@@ -33,15 +33,14 @@ module Network.Google.Resource.Storage.ObjectAccessControls.Delete
     -- * Request Lenses
     , oacdQuotaUser
     , oacdPrettyPrint
-    , oacdUserIp
+    , oacdUserIP
     , oacdBucket
     , oacdKey
     , oacdObject
-    , oacdOauthToken
+    , oacdOAuthToken
     , oacdEntity
     , oacdGeneration
     , oacdFields
-    , oacdAlt
     ) where
 
 import           Network.Google.Prelude
@@ -59,11 +58,11 @@ type ObjectAccessControlsDeleteResource =
                  QueryParam "quotaUser" Text :>
                    QueryParam "prettyPrint" Bool :>
                      QueryParam "userIp" Text :>
-                       QueryParam "key" Text :>
-                         QueryParam "oauth_token" Text :>
+                       QueryParam "key" Key :>
+                         QueryParam "oauth_token" OAuthToken :>
                            QueryParam "generation" Word64 :>
                              QueryParam "fields" Text :>
-                               QueryParam "alt" Alt :> Delete '[JSON] ()
+                               QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Permanently deletes the ACL entry for the specified entity on the
 -- specified object.
@@ -72,15 +71,14 @@ type ObjectAccessControlsDeleteResource =
 data ObjectAccessControlsDelete' = ObjectAccessControlsDelete'
     { _oacdQuotaUser   :: !(Maybe Text)
     , _oacdPrettyPrint :: !Bool
-    , _oacdUserIp      :: !(Maybe Text)
+    , _oacdUserIP      :: !(Maybe Text)
     , _oacdBucket      :: !Text
-    , _oacdKey         :: !(Maybe Text)
+    , _oacdKey         :: !(Maybe Key)
     , _oacdObject      :: !Text
-    , _oacdOauthToken  :: !(Maybe Text)
+    , _oacdOAuthToken  :: !(Maybe OAuthToken)
     , _oacdEntity      :: !Text
     , _oacdGeneration  :: !(Maybe Word64)
     , _oacdFields      :: !(Maybe Text)
-    , _oacdAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'ObjectAccessControlsDelete'' with the minimum fields required to make a request.
@@ -91,7 +89,7 @@ data ObjectAccessControlsDelete' = ObjectAccessControlsDelete'
 --
 -- * 'oacdPrettyPrint'
 --
--- * 'oacdUserIp'
+-- * 'oacdUserIP'
 --
 -- * 'oacdBucket'
 --
@@ -99,15 +97,13 @@ data ObjectAccessControlsDelete' = ObjectAccessControlsDelete'
 --
 -- * 'oacdObject'
 --
--- * 'oacdOauthToken'
+-- * 'oacdOAuthToken'
 --
 -- * 'oacdEntity'
 --
 -- * 'oacdGeneration'
 --
 -- * 'oacdFields'
---
--- * 'oacdAlt'
 objectAccessControlsDelete'
     :: Text -- ^ 'bucket'
     -> Text -- ^ 'object'
@@ -117,15 +113,14 @@ objectAccessControlsDelete' pOacdBucket_ pOacdObject_ pOacdEntity_ =
     ObjectAccessControlsDelete'
     { _oacdQuotaUser = Nothing
     , _oacdPrettyPrint = True
-    , _oacdUserIp = Nothing
+    , _oacdUserIP = Nothing
     , _oacdBucket = pOacdBucket_
     , _oacdKey = Nothing
     , _oacdObject = pOacdObject_
-    , _oacdOauthToken = Nothing
+    , _oacdOAuthToken = Nothing
     , _oacdEntity = pOacdEntity_
     , _oacdGeneration = Nothing
     , _oacdFields = Nothing
-    , _oacdAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -144,9 +139,9 @@ oacdPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-oacdUserIp :: Lens' ObjectAccessControlsDelete' (Maybe Text)
-oacdUserIp
-  = lens _oacdUserIp (\ s a -> s{_oacdUserIp = a})
+oacdUserIP :: Lens' ObjectAccessControlsDelete' (Maybe Text)
+oacdUserIP
+  = lens _oacdUserIP (\ s a -> s{_oacdUserIP = a})
 
 -- | Name of a bucket.
 oacdBucket :: Lens' ObjectAccessControlsDelete' Text
@@ -156,7 +151,7 @@ oacdBucket
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-oacdKey :: Lens' ObjectAccessControlsDelete' (Maybe Text)
+oacdKey :: Lens' ObjectAccessControlsDelete' (Maybe Key)
 oacdKey = lens _oacdKey (\ s a -> s{_oacdKey = a})
 
 -- | Name of the object.
@@ -165,10 +160,10 @@ oacdObject
   = lens _oacdObject (\ s a -> s{_oacdObject = a})
 
 -- | OAuth 2.0 token for the current user.
-oacdOauthToken :: Lens' ObjectAccessControlsDelete' (Maybe Text)
-oacdOauthToken
-  = lens _oacdOauthToken
-      (\ s a -> s{_oacdOauthToken = a})
+oacdOAuthToken :: Lens' ObjectAccessControlsDelete' (Maybe OAuthToken)
+oacdOAuthToken
+  = lens _oacdOAuthToken
+      (\ s a -> s{_oacdOAuthToken = a})
 
 -- | The entity holding the permission. Can be user-userId,
 -- user-emailAddress, group-groupId, group-emailAddress, allUsers, or
@@ -189,9 +184,9 @@ oacdFields :: Lens' ObjectAccessControlsDelete' (Maybe Text)
 oacdFields
   = lens _oacdFields (\ s a -> s{_oacdFields = a})
 
--- | Data format for the response.
-oacdAlt :: Lens' ObjectAccessControlsDelete' Alt
-oacdAlt = lens _oacdAlt (\ s a -> s{_oacdAlt = a})
+instance GoogleAuth ObjectAccessControlsDelete' where
+        authKey = oacdKey . _Just
+        authToken = oacdOAuthToken . _Just
 
 instance GoogleRequest ObjectAccessControlsDelete'
          where
@@ -199,15 +194,15 @@ instance GoogleRequest ObjectAccessControlsDelete'
         request = requestWithRoute defReq storageURL
         requestWithRoute r u ObjectAccessControlsDelete'{..}
           = go _oacdQuotaUser (Just _oacdPrettyPrint)
-              _oacdUserIp
+              _oacdUserIP
               _oacdBucket
               _oacdKey
               _oacdObject
-              _oacdOauthToken
+              _oacdOAuthToken
               _oacdEntity
               _oacdGeneration
               _oacdFields
-              (Just _oacdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy ObjectAccessControlsDeleteResource)

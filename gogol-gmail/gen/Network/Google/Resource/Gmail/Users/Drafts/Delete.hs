@@ -33,13 +33,12 @@ module Network.Google.Resource.Gmail.Users.Drafts.Delete
     -- * Request Lenses
     , uddQuotaUser
     , uddPrettyPrint
-    , uddUserIp
+    , uddUserIP
     , uddUserId
     , uddKey
     , uddId
-    , uddOauthToken
+    , uddOAuthToken
     , uddFields
-    , uddAlt
     ) where
 
 import           Network.Google.Gmail.Types
@@ -54,10 +53,10 @@ type UsersDraftsDeleteResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :> Delete '[JSON] ()
+                       QueryParam "alt" AltJSON :> Delete '[JSON] ()
 
 -- | Immediately and permanently deletes the specified draft. Does not simply
 -- trash it.
@@ -66,13 +65,12 @@ type UsersDraftsDeleteResource =
 data UsersDraftsDelete' = UsersDraftsDelete'
     { _uddQuotaUser   :: !(Maybe Text)
     , _uddPrettyPrint :: !Bool
-    , _uddUserIp      :: !(Maybe Text)
+    , _uddUserIP      :: !(Maybe Text)
     , _uddUserId      :: !Text
-    , _uddKey         :: !(Maybe Text)
+    , _uddKey         :: !(Maybe Key)
     , _uddId          :: !Text
-    , _uddOauthToken  :: !(Maybe Text)
+    , _uddOAuthToken  :: !(Maybe OAuthToken)
     , _uddFields      :: !(Maybe Text)
-    , _uddAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'UsersDraftsDelete'' with the minimum fields required to make a request.
@@ -83,7 +81,7 @@ data UsersDraftsDelete' = UsersDraftsDelete'
 --
 -- * 'uddPrettyPrint'
 --
--- * 'uddUserIp'
+-- * 'uddUserIP'
 --
 -- * 'uddUserId'
 --
@@ -91,11 +89,9 @@ data UsersDraftsDelete' = UsersDraftsDelete'
 --
 -- * 'uddId'
 --
--- * 'uddOauthToken'
+-- * 'uddOAuthToken'
 --
 -- * 'uddFields'
---
--- * 'uddAlt'
 usersDraftsDelete'
     :: Text -- ^ 'id'
     -> Text
@@ -104,13 +100,12 @@ usersDraftsDelete' pUddUserId_ pUddId_ =
     UsersDraftsDelete'
     { _uddQuotaUser = Nothing
     , _uddPrettyPrint = True
-    , _uddUserIp = Nothing
+    , _uddUserIP = Nothing
     , _uddUserId = pUddUserId_
     , _uddKey = Nothing
     , _uddId = pUddId_
-    , _uddOauthToken = Nothing
+    , _uddOAuthToken = Nothing
     , _uddFields = Nothing
-    , _uddAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -128,9 +123,9 @@ uddPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-uddUserIp :: Lens' UsersDraftsDelete' (Maybe Text)
-uddUserIp
-  = lens _uddUserIp (\ s a -> s{_uddUserIp = a})
+uddUserIP :: Lens' UsersDraftsDelete' (Maybe Text)
+uddUserIP
+  = lens _uddUserIP (\ s a -> s{_uddUserIP = a})
 
 -- | The user\'s email address. The special value me can be used to indicate
 -- the authenticated user.
@@ -141,7 +136,7 @@ uddUserId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-uddKey :: Lens' UsersDraftsDelete' (Maybe Text)
+uddKey :: Lens' UsersDraftsDelete' (Maybe Key)
 uddKey = lens _uddKey (\ s a -> s{_uddKey = a})
 
 -- | The ID of the draft to delete.
@@ -149,31 +144,31 @@ uddId :: Lens' UsersDraftsDelete' Text
 uddId = lens _uddId (\ s a -> s{_uddId = a})
 
 -- | OAuth 2.0 token for the current user.
-uddOauthToken :: Lens' UsersDraftsDelete' (Maybe Text)
-uddOauthToken
-  = lens _uddOauthToken
-      (\ s a -> s{_uddOauthToken = a})
+uddOAuthToken :: Lens' UsersDraftsDelete' (Maybe OAuthToken)
+uddOAuthToken
+  = lens _uddOAuthToken
+      (\ s a -> s{_uddOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 uddFields :: Lens' UsersDraftsDelete' (Maybe Text)
 uddFields
   = lens _uddFields (\ s a -> s{_uddFields = a})
 
--- | Data format for the response.
-uddAlt :: Lens' UsersDraftsDelete' Alt
-uddAlt = lens _uddAlt (\ s a -> s{_uddAlt = a})
+instance GoogleAuth UsersDraftsDelete' where
+        authKey = uddKey . _Just
+        authToken = uddOAuthToken . _Just
 
 instance GoogleRequest UsersDraftsDelete' where
         type Rs UsersDraftsDelete' = ()
         request = requestWithRoute defReq gmailURL
         requestWithRoute r u UsersDraftsDelete'{..}
-          = go _uddQuotaUser (Just _uddPrettyPrint) _uddUserIp
+          = go _uddQuotaUser (Just _uddPrettyPrint) _uddUserIP
               _uddUserId
               _uddKey
               _uddId
-              _uddOauthToken
+              _uddOAuthToken
               _uddFields
-              (Just _uddAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy UsersDraftsDeleteResource)

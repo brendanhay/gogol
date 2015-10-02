@@ -34,11 +34,10 @@ module Network.Google.Resource.Compute.GlobalOperations.Get
     , gogPrettyPrint
     , gogProject
     , gogOperation
-    , gogUserIp
+    , gogUserIP
     , gogKey
-    , gogOauthToken
+    , gogOAuthToken
     , gogFields
-    , gogAlt
     ) where
 
 import           Network.Google.Compute.Types
@@ -54,10 +53,10 @@ type GlobalOperationsGetResource =
              QueryParam "quotaUser" Text :>
                QueryParam "prettyPrint" Bool :>
                  QueryParam "userIp" Text :>
-                   QueryParam "key" Text :>
-                     QueryParam "oauth_token" Text :>
+                   QueryParam "key" Key :>
+                     QueryParam "oauth_token" OAuthToken :>
                        QueryParam "fields" Text :>
-                         QueryParam "alt" Alt :> Get '[JSON] Operation
+                         QueryParam "alt" AltJSON :> Get '[JSON] Operation
 
 -- | Retrieves the specified Operations resource.
 --
@@ -67,11 +66,10 @@ data GlobalOperationsGet' = GlobalOperationsGet'
     , _gogPrettyPrint :: !Bool
     , _gogProject     :: !Text
     , _gogOperation   :: !Text
-    , _gogUserIp      :: !(Maybe Text)
-    , _gogKey         :: !(Maybe Text)
-    , _gogOauthToken  :: !(Maybe Text)
+    , _gogUserIP      :: !(Maybe Text)
+    , _gogKey         :: !(Maybe Key)
+    , _gogOAuthToken  :: !(Maybe OAuthToken)
     , _gogFields      :: !(Maybe Text)
-    , _gogAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'GlobalOperationsGet'' with the minimum fields required to make a request.
@@ -86,15 +84,13 @@ data GlobalOperationsGet' = GlobalOperationsGet'
 --
 -- * 'gogOperation'
 --
--- * 'gogUserIp'
+-- * 'gogUserIP'
 --
 -- * 'gogKey'
 --
--- * 'gogOauthToken'
+-- * 'gogOAuthToken'
 --
 -- * 'gogFields'
---
--- * 'gogAlt'
 globalOperationsGet'
     :: Text -- ^ 'project'
     -> Text -- ^ 'operation'
@@ -105,11 +101,10 @@ globalOperationsGet' pGogProject_ pGogOperation_ =
     , _gogPrettyPrint = True
     , _gogProject = pGogProject_
     , _gogOperation = pGogOperation_
-    , _gogUserIp = Nothing
+    , _gogUserIP = Nothing
     , _gogKey = Nothing
-    , _gogOauthToken = Nothing
+    , _gogOAuthToken = Nothing
     , _gogFields = Nothing
-    , _gogAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -137,30 +132,30 @@ gogOperation
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-gogUserIp :: Lens' GlobalOperationsGet' (Maybe Text)
-gogUserIp
-  = lens _gogUserIp (\ s a -> s{_gogUserIp = a})
+gogUserIP :: Lens' GlobalOperationsGet' (Maybe Text)
+gogUserIP
+  = lens _gogUserIP (\ s a -> s{_gogUserIP = a})
 
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-gogKey :: Lens' GlobalOperationsGet' (Maybe Text)
+gogKey :: Lens' GlobalOperationsGet' (Maybe Key)
 gogKey = lens _gogKey (\ s a -> s{_gogKey = a})
 
 -- | OAuth 2.0 token for the current user.
-gogOauthToken :: Lens' GlobalOperationsGet' (Maybe Text)
-gogOauthToken
-  = lens _gogOauthToken
-      (\ s a -> s{_gogOauthToken = a})
+gogOAuthToken :: Lens' GlobalOperationsGet' (Maybe OAuthToken)
+gogOAuthToken
+  = lens _gogOAuthToken
+      (\ s a -> s{_gogOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 gogFields :: Lens' GlobalOperationsGet' (Maybe Text)
 gogFields
   = lens _gogFields (\ s a -> s{_gogFields = a})
 
--- | Data format for the response.
-gogAlt :: Lens' GlobalOperationsGet' Alt
-gogAlt = lens _gogAlt (\ s a -> s{_gogAlt = a})
+instance GoogleAuth GlobalOperationsGet' where
+        authKey = gogKey . _Just
+        authToken = gogOAuthToken . _Just
 
 instance GoogleRequest GlobalOperationsGet' where
         type Rs GlobalOperationsGet' = Operation
@@ -168,11 +163,11 @@ instance GoogleRequest GlobalOperationsGet' where
         requestWithRoute r u GlobalOperationsGet'{..}
           = go _gogQuotaUser (Just _gogPrettyPrint) _gogProject
               _gogOperation
-              _gogUserIp
+              _gogUserIP
               _gogKey
-              _gogOauthToken
+              _gogOAuthToken
               _gogFields
-              (Just _gogAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy GlobalOperationsGetResource)

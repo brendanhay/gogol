@@ -47,10 +47,9 @@ module Network.Google.Resource.Classroom.Courses.Teachers.Delete
     , ctdUserId
     , ctdBearerToken
     , ctdKey
-    , ctdOauthToken
+    , ctdOAuthToken
     , ctdFields
     , ctdCallback
-    , ctdAlt
     ) where
 
 import           Network.Google.Classroom.Types
@@ -72,11 +71,11 @@ type CoursesTeachersDeleteResource =
                          QueryParam "access_token" Text :>
                            QueryParam "uploadType" Text :>
                              QueryParam "bearer_token" Text :>
-                               QueryParam "key" Text :>
-                                 QueryParam "oauth_token" Text :>
+                               QueryParam "key" Key :>
+                                 QueryParam "oauth_token" OAuthToken :>
                                    QueryParam "fields" Text :>
                                      QueryParam "callback" Text :>
-                                       QueryParam "alt" Text :>
+                                       QueryParam "alt" AltJSON :>
                                          Delete '[JSON] Empty
 
 -- | Deletes a teacher of a course. This method returns the following error
@@ -99,11 +98,10 @@ data CoursesTeachersDelete' = CoursesTeachersDelete'
     , _ctdUploadType     :: !(Maybe Text)
     , _ctdUserId         :: !Text
     , _ctdBearerToken    :: !(Maybe Text)
-    , _ctdKey            :: !(Maybe Text)
-    , _ctdOauthToken     :: !(Maybe Text)
+    , _ctdKey            :: !(Maybe Key)
+    , _ctdOAuthToken     :: !(Maybe OAuthToken)
     , _ctdFields         :: !(Maybe Text)
     , _ctdCallback       :: !(Maybe Text)
-    , _ctdAlt            :: !Text
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'CoursesTeachersDelete'' with the minimum fields required to make a request.
@@ -132,13 +130,11 @@ data CoursesTeachersDelete' = CoursesTeachersDelete'
 --
 -- * 'ctdKey'
 --
--- * 'ctdOauthToken'
+-- * 'ctdOAuthToken'
 --
 -- * 'ctdFields'
 --
 -- * 'ctdCallback'
---
--- * 'ctdAlt'
 coursesTeachersDelete'
     :: Text -- ^ 'courseId'
     -> Text -- ^ 'userId'
@@ -156,10 +152,9 @@ coursesTeachersDelete' pCtdCourseId_ pCtdUserId_ =
     , _ctdUserId = pCtdUserId_
     , _ctdBearerToken = Nothing
     , _ctdKey = Nothing
-    , _ctdOauthToken = Nothing
+    , _ctdOAuthToken = Nothing
     , _ctdFields = Nothing
     , _ctdCallback = Nothing
-    , _ctdAlt = "json"
     }
 
 -- | V1 error format.
@@ -224,14 +219,14 @@ ctdBearerToken
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-ctdKey :: Lens' CoursesTeachersDelete' (Maybe Text)
+ctdKey :: Lens' CoursesTeachersDelete' (Maybe Key)
 ctdKey = lens _ctdKey (\ s a -> s{_ctdKey = a})
 
 -- | OAuth 2.0 token for the current user.
-ctdOauthToken :: Lens' CoursesTeachersDelete' (Maybe Text)
-ctdOauthToken
-  = lens _ctdOauthToken
-      (\ s a -> s{_ctdOauthToken = a})
+ctdOAuthToken :: Lens' CoursesTeachersDelete' (Maybe OAuthToken)
+ctdOAuthToken
+  = lens _ctdOAuthToken
+      (\ s a -> s{_ctdOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 ctdFields :: Lens' CoursesTeachersDelete' (Maybe Text)
@@ -243,9 +238,9 @@ ctdCallback :: Lens' CoursesTeachersDelete' (Maybe Text)
 ctdCallback
   = lens _ctdCallback (\ s a -> s{_ctdCallback = a})
 
--- | Data format for response.
-ctdAlt :: Lens' CoursesTeachersDelete' Text
-ctdAlt = lens _ctdAlt (\ s a -> s{_ctdAlt = a})
+instance GoogleAuth CoursesTeachersDelete' where
+        authKey = ctdKey . _Just
+        authToken = ctdOAuthToken . _Just
 
 instance GoogleRequest CoursesTeachersDelete' where
         type Rs CoursesTeachersDelete' = Empty
@@ -260,10 +255,10 @@ instance GoogleRequest CoursesTeachersDelete' where
               _ctdUserId
               _ctdBearerToken
               _ctdKey
-              _ctdOauthToken
+              _ctdOAuthToken
               _ctdFields
               _ctdCallback
-              (Just _ctdAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy CoursesTeachersDeleteResource)

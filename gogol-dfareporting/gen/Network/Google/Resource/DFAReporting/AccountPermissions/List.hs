@@ -32,12 +32,11 @@ module Network.Google.Resource.DFAReporting.AccountPermissions.List
     -- * Request Lenses
     , aplQuotaUser
     , aplPrettyPrint
-    , aplUserIp
+    , aplUserIP
     , aplProfileId
     , aplKey
-    , aplOauthToken
+    , aplOAuthToken
     , aplFields
-    , aplAlt
     ) where
 
 import           Network.Google.DFAReporting.Types
@@ -52,10 +51,10 @@ type AccountPermissionsListResource =
            QueryParam "quotaUser" Text :>
              QueryParam "prettyPrint" Bool :>
                QueryParam "userIp" Text :>
-                 QueryParam "key" Text :>
-                   QueryParam "oauth_token" Text :>
+                 QueryParam "key" Key :>
+                   QueryParam "oauth_token" OAuthToken :>
                      QueryParam "fields" Text :>
-                       QueryParam "alt" Alt :>
+                       QueryParam "alt" AltJSON :>
                          Get '[JSON] AccountPermissionsListResponse
 
 -- | Retrieves the list of account permissions.
@@ -64,12 +63,11 @@ type AccountPermissionsListResource =
 data AccountPermissionsList' = AccountPermissionsList'
     { _aplQuotaUser   :: !(Maybe Text)
     , _aplPrettyPrint :: !Bool
-    , _aplUserIp      :: !(Maybe Text)
+    , _aplUserIP      :: !(Maybe Text)
     , _aplProfileId   :: !Int64
-    , _aplKey         :: !(Maybe Text)
-    , _aplOauthToken  :: !(Maybe Text)
+    , _aplKey         :: !(Maybe Key)
+    , _aplOAuthToken  :: !(Maybe OAuthToken)
     , _aplFields      :: !(Maybe Text)
-    , _aplAlt         :: !Alt
     } deriving (Eq,Read,Show,Data,Typeable,Generic)
 
 -- | Creates a value of 'AccountPermissionsList'' with the minimum fields required to make a request.
@@ -80,17 +78,15 @@ data AccountPermissionsList' = AccountPermissionsList'
 --
 -- * 'aplPrettyPrint'
 --
--- * 'aplUserIp'
+-- * 'aplUserIP'
 --
 -- * 'aplProfileId'
 --
 -- * 'aplKey'
 --
--- * 'aplOauthToken'
+-- * 'aplOAuthToken'
 --
 -- * 'aplFields'
---
--- * 'aplAlt'
 accountPermissionsList'
     :: Int64 -- ^ 'profileId'
     -> AccountPermissionsList'
@@ -98,12 +94,11 @@ accountPermissionsList' pAplProfileId_ =
     AccountPermissionsList'
     { _aplQuotaUser = Nothing
     , _aplPrettyPrint = True
-    , _aplUserIp = Nothing
+    , _aplUserIP = Nothing
     , _aplProfileId = pAplProfileId_
     , _aplKey = Nothing
-    , _aplOauthToken = Nothing
+    , _aplOAuthToken = Nothing
     , _aplFields = Nothing
-    , _aplAlt = JSON
     }
 
 -- | Available to use for quota purposes for server-side applications. Can be
@@ -121,9 +116,9 @@ aplPrettyPrint
 
 -- | IP address of the site where the request originates. Use this if you
 -- want to enforce per-user limits.
-aplUserIp :: Lens' AccountPermissionsList' (Maybe Text)
-aplUserIp
-  = lens _aplUserIp (\ s a -> s{_aplUserIp = a})
+aplUserIP :: Lens' AccountPermissionsList' (Maybe Text)
+aplUserIP
+  = lens _aplUserIP (\ s a -> s{_aplUserIP = a})
 
 -- | User profile ID associated with this request.
 aplProfileId :: Lens' AccountPermissionsList' Int64
@@ -133,35 +128,35 @@ aplProfileId
 -- | API key. Your API key identifies your project and provides you with API
 -- access, quota, and reports. Required unless you provide an OAuth 2.0
 -- token.
-aplKey :: Lens' AccountPermissionsList' (Maybe Text)
+aplKey :: Lens' AccountPermissionsList' (Maybe Key)
 aplKey = lens _aplKey (\ s a -> s{_aplKey = a})
 
 -- | OAuth 2.0 token for the current user.
-aplOauthToken :: Lens' AccountPermissionsList' (Maybe Text)
-aplOauthToken
-  = lens _aplOauthToken
-      (\ s a -> s{_aplOauthToken = a})
+aplOAuthToken :: Lens' AccountPermissionsList' (Maybe OAuthToken)
+aplOAuthToken
+  = lens _aplOAuthToken
+      (\ s a -> s{_aplOAuthToken = a})
 
 -- | Selector specifying which fields to include in a partial response.
 aplFields :: Lens' AccountPermissionsList' (Maybe Text)
 aplFields
   = lens _aplFields (\ s a -> s{_aplFields = a})
 
--- | Data format for the response.
-aplAlt :: Lens' AccountPermissionsList' Alt
-aplAlt = lens _aplAlt (\ s a -> s{_aplAlt = a})
+instance GoogleAuth AccountPermissionsList' where
+        authKey = aplKey . _Just
+        authToken = aplOAuthToken . _Just
 
 instance GoogleRequest AccountPermissionsList' where
         type Rs AccountPermissionsList' =
              AccountPermissionsListResponse
         request = requestWithRoute defReq dFAReportingURL
         requestWithRoute r u AccountPermissionsList'{..}
-          = go _aplQuotaUser (Just _aplPrettyPrint) _aplUserIp
+          = go _aplQuotaUser (Just _aplPrettyPrint) _aplUserIP
               _aplProfileId
               _aplKey
-              _aplOauthToken
+              _aplOAuthToken
               _aplFields
-              (Just _aplAlt)
+              (Just AltJSON)
           where go
                   = clientWithRoute
                       (Proxy :: Proxy AccountPermissionsListResource)
