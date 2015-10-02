@@ -3,6 +3,7 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase                 #-}
 {-# LANGUAGE OverloadedStrings          #-}
+{-# LANGUAGE ScopedTypeVariables        #-}
 
 -- Module      : Gen.Types.Id
 -- Copyright   : (c) 2015 Brendan Hay
@@ -30,6 +31,8 @@ module Gen.Types.Id
 
     , reference
 
+    , orderParams
+
     -- * Naming
     , aname
     , mname
@@ -44,8 +47,12 @@ module Gen.Types.Id
     ) where
 
 import           Data.Aeson                   hiding (Bool, String)
+import           Data.CaseInsensitive         (CI)
 import qualified Data.CaseInsensitive         as CI
+import           Data.Coerce
+import           Data.Foldable                (foldl')
 import           Data.Hashable
+import           Data.List                    (elemIndex, sortOn)
 import           Data.Semigroup               hiding (Sum)
 import           Data.String
 import           Data.Text                    (Text)
@@ -146,3 +153,27 @@ reference (Global g) (Local l) = Global (g <> Text.split (== '.') l)
 
 localise :: Global -> Local
 localise = Local . global
+
+orderParams :: (a -> Local) -> [a] -> [Local] -> [a]
+orderParams f xs ys = orderBy f zs (del zs [] ++ global)
+  where
+    zs = orderBy f (sortOn f xs) ys
+
+    del _      [] = []
+    del []     rs = reverse rs
+    del (r:qs) rs
+        | f r `elem` global = del qs rs
+        | otherwise         = del qs (f r:rs)
+
+    global =
+        [ "quotaUser"
+        , "prettyPrint"
+        , "userIp"
+        , "fields"
+        , "key"
+        , "oauth_token"
+        , "alt"
+        ]
+
+orderBy :: Eq b => (a -> b) -> [a] -> [b] -> [a]
+orderBy g xs ys = sortOn (flip elemIndex ys . g) xs

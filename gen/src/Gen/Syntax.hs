@@ -77,9 +77,7 @@ verbAlias n m
                                 (terminalType (_type (_pParam k)))
             | otherwise = sing x
 
-    -- FIXME: order by _mParameterOrder
---    qry :: [Type]
-    qry = mapMaybe f . Map.toList
+    qry xs = mapMaybe f $ orderParams fst (Map.toList xs) (_mParameterOrder m)
       where
         f (k, x) =
            let t = terminalType (_type (_pParam x))
@@ -154,7 +152,7 @@ googleRequestDecl :: Global
                   -> [Local]
                   -> Method Solved
                   -> Decl
-googleRequestDecl g n assoc alt p api url fs m =
+googleRequestDecl g n assoc alt p api url fields m =
     InstDecl noLoc Nothing [] [] (unqual "GoogleRequest") [n]
         [ assoc
         , request
@@ -195,6 +193,8 @@ googleRequestDecl g n assoc alt p api url fs m =
 
             (fs', rq) | Just r <- _mRequest m = let x = localise (ref r) in (delete x fs, Just x)
                       | otherwise             = (fs, Nothing)
+
+    fs = orderParams id fields (_mParameterOrder m)
 
     pats = [pvar "r", pvar "u", prec]
     prec = PRec (UnQual (dname g)) [PFieldWildcard]
