@@ -1,5 +1,5 @@
 {
-    "library": "compute-autoscaler",
-    "canonicalName": "Compute.Autoscaler"
+    "library": "autoscaler",
+    "canonicalName": "Autoscaler"
 }
 

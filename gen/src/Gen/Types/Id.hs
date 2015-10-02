@@ -66,7 +66,7 @@ aname = name . Text.unpack . (<> "API") . upperHead . Text.replace "." ""
 mname :: Text -> Suffix -> Global -> (Name, Global, Text)
 mname abrv (Suffix suf) (Global g) =
     ( name . Text.unpack $ mconcat n <> suf -- Action service type alias.
-    , Global n -- (n <> ["'"])                   -- Action data type.
+    , Global (n <> ["'"])                   -- Action data type.
     , Text.intercalate "." ns               -- Action namespace.
     )
   where

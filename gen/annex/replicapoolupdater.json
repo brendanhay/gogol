@@ -1,5 +1,5 @@
 {
     "library": "replicapool-updater",
-    "canonicalName": "InstanceGroups.Updater"
+    "canonicalName": "ReplicaPoolUpdater"
 }
 

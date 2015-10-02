@@ -1,4 +1,4 @@
 {
     "library": "replicapool",
-    "canonicalName": "InstanceGroups.Manager"
+    "canonicalName": "ReplicaPool"
 }

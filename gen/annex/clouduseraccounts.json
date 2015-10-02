@@ -1,5 +1,5 @@
 {
-    "library": "compute-useraccounts",
-    "canonicalName": "Compute.UserAccounts"
+    "library": "useraccounts",
+    "canonicalName": "UserAccounts"
 }
 
